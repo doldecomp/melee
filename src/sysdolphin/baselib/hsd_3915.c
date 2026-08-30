@@ -387,16 +387,15 @@ static inline void hsd_80391F28_calc_tick4_y(f32 perp_y, f32* tick4_y)
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
-    f32 dx;
-    f32 dy;
+    f32 step_y;
+    f32 tick6_y;
     f32 perp_x;
     f32 perp_y;
-    f32 tick6_y;
+    f32 dy;
     f32 tick4_x;
+    f32 dx;
     f32 tick4_y;
-    f32 step_y;
     f32 step_x;
-    f32 len;
     s32 i;
     u8 r, g, b, a;
 
@@ -409,12 +408,12 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 
     GXWGFifo.f32 = x1;
     i = 0;
-    a = color->a;
     GXWGFifo.f32 = y1;
-
-    b = color->b;
-    g = color->g;
     r = color->r;
+    GXWGFifo.u8 = r;
+    g = color->g;
+    b = color->b;
+    a = color->a;
 
     tick6_y = 6.0F * perp_y;
     {
@@ -424,7 +423,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     tick4_x = 4.0F * perp_x;
     hsd_80391F28_calc_tick4_y(perp_y, &tick4_y);
 
-    GXWGFifo.u8 = r;
     GXWGFifo.u8 = g;
     GXWGFifo.u8 = b;
     GXWGFifo.u8 = a;
@@ -690,7 +688,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 
 typedef struct {
     s32 count;
-    u32 color;
+    GXColor color;
 } DispBar;
 
 typedef struct _DispItem {
@@ -705,7 +703,47 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
-// @TODO: Currently 89.78% match - needs minor control flow and register fixes
+static inline s32 count_bar_units(DispItem* item)
+{
+    s32 total = 0;
+    s32 count;
+
+    while ((count = item->content.bars[0].count) > 0) {
+        total += count;
+        item = (DispItem*) ((DispBar*) item + 1);
+    }
+    return total;
+}
+
+static inline s32 count_text_chars(char* text)
+{
+    s32 count;
+    s32 i;
+    s32 len;
+
+    if (text == NULL) {
+        return 0;
+    }
+    count = 0;
+    len = strlen(text);
+    i = count;
+    while (i < len) {
+        if ((s8) text[i] != '\\') {
+            count++;
+        } else {
+            i++;
+            switch ((s8) text[i]) {
+            case 'c':
+            case 'C':
+                i += 6;
+                break;
+            }
+        }
+        i++;
+    }
+    return count;
+}
+
 void hsd_8039254C(void)
 {
     static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
@@ -714,12 +752,7 @@ void hsd_8039254C(void)
     f32 bar_x;
     f32 t2;
     GXColor default_col;
-    GXColor bg_col0;
-    GXColor bg_col1;
-    GXColor txt_col;
-    GXColor bg_col2;
-    GXColor bg_col3;
-    GXColor bar_col;
+    DispItem* bar_draw_ptr;
     s32 char_count;
     s32 count;
     GXColor* p_bg_col0;
@@ -732,12 +765,8 @@ void hsd_8039254C(void)
     s32 first;
     HSD_SList* event_node;
 
-    p_bar_col = &bar_col;
-    p_bg_col3 = &bg_col3;
-    p_bg_col2 = &bg_col2;
-    p_bg_col1 = &bg_col1;
-    p_txt_col = &txt_col;
-    p_bg_col0 = &bg_col0;
+    PAD_STACK(4);
+
     col_pos = 60;
     first = 1;
     line = 1.0F;
@@ -752,6 +781,8 @@ void hsd_8039254C(void)
 
         while (item != NULL) {
             if (first != 0) {
+                GXColor bg_col0;
+                p_bg_col0 = &bg_col0;
                 if (lbl_804D6080.a != 0) {
                     hsd_80391A04(10.0F, 10.0F, 6);
                     bg_col0 = lbl_804D6080;
@@ -760,37 +791,12 @@ void hsd_8039254C(void)
                 first = 0;
             }
             switch (item->type) {
-            case 0:
-#ifdef MUST_MATCH
-                if ((&item->content) == NULL) {
-                    char_count = 0;
-                } else
-#endif
-                {
-                    char_count = 0;
-                    {
-                        s32 j = 0;
-                        s32 len = strlen(item->content.text);
-                        char_count = j;
-                        while (j < len) {
-                            if ((s8) item->content.text[j] != '\\') {
-                                char_count++;
-                            } else {
-                                j++;
-                                {
-                                    char* tmp = item->content.text;
-                                    switch ((s8) tmp[j]) {
-                                    case 'c':
-                                    case 'C':
-                                        j += 6;
-                                        break;
-                                    }
-                                }
-                            }
-                            j++;
-                        }
-                    }
-                }
+            case 0: {
+                GXColor bg_col1;
+                GXColor txt_col;
+                p_bg_col1 = &bg_col1;
+                p_txt_col = &txt_col;
+                char_count = count_text_chars(item->content.text);
                 if (col_pos + char_count > 60) {
                     line -= 1.0F;
                     col_pos = 0;
@@ -806,7 +812,10 @@ void hsd_8039254C(void)
                              (f32) (col_pos * 10), 10.0F * line);
                 col_pos = col_pos + (2 + char_count);
                 break;
-            case 2:
+            }
+            case 2: {
+                GXColor bg_col2;
+                p_bg_col2 = &bg_col2;
                 if (col_pos != 0) {
                     line = (f32) ((f64) line - 0.5);
                     if (lbl_804D6080.a != 0) {
@@ -820,18 +829,13 @@ void hsd_8039254C(void)
                 hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
                 col_pos = 60;
                 break;
+            }
             case 1: {
-                DispItem* bar_ptr;
-                DispItem* bar_draw_ptr;
-
-                bar_ptr = item;
-                char_count = 0;
-                {
-                    while ((count = bar_ptr->content.bars[0].count) > 0) {
-                        char_count += count;
-                        bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
-                    }
-                }
+                GXColor bg_col3;
+                GXColor bar_col;
+                p_bar_col = &bar_col;
+                p_bg_col3 = &bg_col3;
+                char_count = count_bar_units(item);
                 if (char_count > 0) {
                     if (col_pos != 0) {
                         line = (f32) ((f64) line - 0.5);
@@ -851,10 +855,8 @@ void hsd_8039254C(void)
                         {
                             f32 prev_x;
                             prev_x = bar_x;
-                            bar_col =
-                                *(GXColor*) &bar_draw_ptr->content.bars[0]
-                                     .color;
                             bar_x += (600.0F / (f32) char_count) * (f32) count;
+                            bar_col = bar_draw_ptr->content.bars[0].color;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                 (f32) bar_draw_ptr->content.bars[0].count);

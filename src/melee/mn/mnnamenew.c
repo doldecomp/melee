@@ -349,6 +349,14 @@ u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 GXColor const mnNameNew_804DBF44 = { 0xA6, 0x81, 0x3D, 0xFF };
 GXColor const mnNameNew_804DBF48 = { 0x00, 0x00, 0x00, 0xFF };
 
+static inline void mnNameNew_SetKeyColor(HSD_Text* text, s32 index,
+                                         GXColor* color_ptr, GXColor* color)
+{
+    *color = *color_ptr;
+    color_ptr = color;
+    HSD_SisLib_803A74F0(text, index, color_ptr);
+}
+
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
     Vec3 sp50;
@@ -357,7 +365,6 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     GXColor sp44;
     MnNameNewDataLayout* layout;
     HSD_JObj* key_jobj;
-    HSD_Text* text;
     HSD_JObj* ref1;
     HSD_JObj* ref2;
     char** str_table;
@@ -398,95 +405,97 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     if (arg0->key_text != NULL) {
         HSD_SisLib_803A5CC4(arg0->key_text);
     }
-    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
-    arg0->key_text = text;
+    {
+        HSD_Text* text;
 
-    key_jobj = arg0->jobjs[16];
-    if (key_jobj == NULL) {
-        key_jobj = NULL;
-    } else {
-        key_jobj = key_jobj->child;
-    }
-    for (i = 0; i < 50; i++) {
-        if (i == 0x2D) {
-            break;
-        }
+        text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
+        arg0->key_text = text;
+
+        key_jobj = arg0->jobjs[16];
         if (key_jobj == NULL) {
             key_jobj = NULL;
         } else {
-            key_jobj = key_jobj->next;
+            key_jobj = key_jobj->child;
         }
-    }
-
-    lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
-    pos_x = sp50.x;
-    pos_y = -sp50.y;
-    pos_z = sp50.z;
-    text->pos_x = pos_x;
-    text->pos_y = pos_y;
-    text->pos_z = pos_z;
-    text->font_size.x = 0.03f;
-    text->font_size.y = 0.04f;
-    text->text_color = mnNameNew_804D4F6C;
-
-    ref1 = arg0->jobjs[16];
-    if (ref1 == NULL) {
-        ref1 = NULL;
-    } else {
-        ref1 = ref1->child;
-    }
-    for (i = 0; i < 50; i++) {
-        if (i == 0x28) {
-            break;
+        for (i = 0; i < 50; i++) {
+            if (i == 0x2D) {
+                break;
+            }
+            if (key_jobj == NULL) {
+                key_jobj = NULL;
+            } else {
+                key_jobj = key_jobj->next;
+            }
         }
+
+        lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
+        pos_x = sp50.x;
+        pos_y = -sp50.y;
+        pos_z = sp50.z;
+        text->pos_x = pos_x;
+        text->pos_y = pos_y;
+        text->pos_z = pos_z;
+        text->font_size.x = 0.03f;
+        text->font_size.y = 0.04f;
+        text->text_color = mnNameNew_804D4F6C;
+
+        ref1 = arg0->jobjs[16];
         if (ref1 == NULL) {
             ref1 = NULL;
         } else {
-            ref1 = ref1->next;
+            ref1 = ref1->child;
         }
-    }
-
-    base_x = HSD_JObjGetTranslationX(key_jobj);
-    x_range = HSD_JObjGetTranslationX(ref1) - base_x;
-
-    ref2 = arg0->jobjs[16];
-    if (ref2 == NULL) {
-        ref2 = NULL;
-    } else {
-        ref2 = ref2->child;
-    }
-    for (i = 0; i < 50; i++) {
-        if (i == 0x2E) {
-            break;
+        for (i = 0; i < 50; i++) {
+            if (i == 0x28) {
+                break;
+            }
+            if (ref1 == NULL) {
+                ref1 = NULL;
+            } else {
+                ref1 = ref1->next;
+            }
         }
+
+        base_x = HSD_JObjGetTranslationX(key_jobj);
+        x_range = HSD_JObjGetTranslationX(ref1) - base_x;
+
+        ref2 = arg0->jobjs[16];
         if (ref2 == NULL) {
             ref2 = NULL;
         } else {
-            ref2 = ref2->next;
+            ref2 = ref2->child;
         }
-    }
-
-    base_y = HSD_JObjGetTranslationY(key_jobj);
-    y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
-
-    j = 0;
-    for (; j < 0x32; j++) {
-        font_x = text->font_size.x;
-        col_x = (f32) (9 - (j / 5)) * x_range;
-        HSD_SisLib_803A6B98(text, col_x / font_x,
-                            ((f32) (j % 5) * y_range) / text->font_size.y,
-                            str_table[j], font_x, col_x);
-        if (j == (s32) mn_804A04F0.hovered_selection) {
-            color_ptr = &sp48;
-        } else {
-            color_ptr = &sp4C;
+        for (i = 0; i < 50; i++) {
+            if (i == 0x2E) {
+                break;
+            }
+            if (ref2 == NULL) {
+                ref2 = NULL;
+            } else {
+                ref2 = ref2->next;
+            }
         }
-        sp44 = *color_ptr;
-        color_ptr = &sp44;
-        HSD_SisLib_803A74F0(text, j, color_ptr);
-    }
 
-    return (s32) text;
+        base_y = HSD_JObjGetTranslationY(key_jobj);
+        y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
+
+        j = 0;
+        for (; j < 0x32; j++) {
+            font_x = text->font_size.x;
+            col_x = (f32) (9 - (j / 5)) * x_range;
+            HSD_SisLib_803A6B98(text, col_x / font_x,
+                                ((f32) (j % 5) * y_range) / text->font_size.y,
+                                str_table[j], font_x, col_x);
+            if (j == (s32) mn_804A04F0.hovered_selection) {
+                color_ptr = &sp48;
+            } else {
+                color_ptr = &sp4C;
+            }
+            mnNameNew_SetKeyColor(text, j, color_ptr, &sp44);
+        }
+
+        return (s32) text;
+    }
 }
 
 s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
@@ -563,26 +572,30 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
-s32 PickAutoName(HSD_GObj* arg0)
+inline u8 GetAutoNameCharacter(u8** names, s32 char_idx)
 {
+    return (*names)[char_idx];
+}
+
+static inline s32 PickAutoNameInline(HSD_GObj* arg0)
+{
+    char* cur_text;
     NameNewEntry* data;
-    u8* cur_text;
     u8** names;
     s32 count;
     s32 pick;
     s32 dup;
-    s32 char_idx;
-    u8* text;
     u8** name_ptr;
+    char* text;
+    s32 char_idx;
     u8 ch;
-    s32 name_idx;
-    u8 tmp;
     s8 null_ch;
-
-    PAD_STACK(48);
+    u8 tmp;
+    s32 name_idx;
+    s32 i;
 
     data = arg0->user_data;
-    cur_text = (u8*) mnNameNew_CurrentNameText;
+    cur_text = mnNameNew_CurrentNameText;
 
     do {
         dup = 0;
@@ -620,10 +633,10 @@ s32 PickAutoName(HSD_GObj* arg0)
 
     name_ptr = &AutoNamesList[pick];
     while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx]))
+           (s8) (ch = GetAutoNameCharacter(name_ptr, char_idx)))
     {
         text[0] = ch;
-        text[1] = (*name_ptr)[char_idx + 1];
+        text[1] = GetAutoNameCharacter(name_ptr, char_idx + 1);
         text[2] = *mnNameNew_NullCharacter;
         char_idx += 2;
         name_idx++;
@@ -634,15 +647,19 @@ s32 PickAutoName(HSD_GObj* arg0)
 
     tmp = data->auto_history[0];
     data->auto_history[0] = (u8) pick;
-    ch = data->auto_history[1];
-    data->auto_history[1] = tmp;
-    tmp = data->auto_history[2];
-    data->auto_history[2] = ch;
-    ch = data->auto_history[3];
-    data->auto_history[3] = tmp;
-    data->auto_history[4] = ch;
+    for (i = 1; i < 5; i++) {
+        u8 next = data->auto_history[i];
+        data->auto_history[i] = tmp;
+        tmp = next;
+    }
 
     return (s32) null_ch;
+}
+
+s32 PickAutoName(HSD_GObj* arg0)
+{
+    PAD_STACK(16);
+    return PickAutoNameInline(arg0);
 }
 
 #line 779 "mnnamenew.c"
@@ -669,51 +686,29 @@ bool NameContainsOnlySpaces(void)
 static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     s32 idx;
-    u8* text;
     u8 ch;
+    u8* text;
     s8 null_ch;
+    s32 i;
 
     text = (u8*) mnNameNew_CurrentNameText;
-    null_ch = (s8) *mnNameNew_NullCharacter;
     idx = 0;
-    if (null_ch != (s8) *text) {
+    for (i = 0; i < 4; i++) {
         u8* ptr;
+
+        null_ch = (s8) *mnNameNew_NullCharacter;
+        if (null_ch == (s8) *text) {
+            break;
+        }
         ptr = text;
-        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
+        while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+               (s8) (ch = *ptr))
+        {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
         }
-        if (null_ch != (s8) * (text += 3)) {
-            ptr = text;
-            while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                   (s8) (ch = *ptr))
-            {
-                nametag->namedata[idx] = (s8) ch;
-                idx += 1;
-                ptr += 1;
-            }
-            if (null_ch != (s8) * (text += 3)) {
-                ptr = text;
-                while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                       (s8) (ch = *ptr))
-                {
-                    nametag->namedata[idx] = (s8) ch;
-                    idx += 1;
-                    ptr += 1;
-                }
-                if (null_ch != (s8) * (text += 3)) {
-                    ptr = text;
-                    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                           (s8) (ch = *ptr))
-                    {
-                        nametag->namedata[idx] = (s8) ch;
-                        idx += 1;
-                        ptr += 1;
-                    }
-                }
-            }
-        }
+        text += 3;
     }
     nametag->namedata[idx] = (s8) *mnNameNew_NullCharacter;
 }
@@ -1677,7 +1672,11 @@ void fn_8023DAEC(HSD_GObj* arg0)
 #endif
 void fn_8023DBE8(HSD_GObj* arg0)
 {
+    MenuFlow* flow;
+    HSD_GObj* gobj;
     NameNewEntry* data;
+    u16* hovered;
+    u16 hovered_value;
     HSD_JObj* jobj;
     HSD_JObj* parent;
     HSD_GObjProc* proc;
@@ -1691,14 +1690,16 @@ void fn_8023DBE8(HSD_GObj* arg0)
 
     PAD_STACK(28);
 
-    data = arg0->user_data;
+    flow = &mn_804A04F0;
+    gobj = arg0;
+    data = gobj->user_data;
 
-    if (mn_804A04F0.x10 != 1) {
+    if (flow->x10 != 1) {
         HSD_JObjSetFlagsAll(data->jobjs[16], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->jobjs[12], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->jobjs[13], JOBJ_HIDDEN);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObj_SetupProc(arg0, fn_8023DAEC, 0U);
+        proc = HSD_GObj_SetupProc(gobj, fn_8023DAEC, 0U);
         proc->flags_3 = HSD_GObj_804D783C;
         return;
     }
@@ -1706,7 +1707,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
     mnNameNew_8023DA08(data);
     cursor = data->x1;
 
-    if ((s32) cursor != (s32) mn_804A04F0.hovered_selection) {
+    if ((s32) cursor != (s32) *(hovered = &flow->hovered_selection)) {
         if (cursor >= 0x32U && cursor < 0x3AU) {
             jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[cursor - 0x32]];
         } else {
@@ -1736,7 +1737,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
                                 &normal_key_color);
         }
 
-        sel = (u8) mn_804A04F0.hovered_selection;
+        sel = (u8) *hovered;
         if (sel >= 0x32U && sel < 0x3AU) {
             jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[sel - 0x32]];
         } else {
@@ -1760,22 +1761,22 @@ void fn_8023DBE8(HSD_GObj* arg0)
         frame = 1.0f;
         HSD_JObjReqAnimAll(jobj, frame);
         HSD_JObjAnimAll(jobj);
-        if (mn_804A04F0.hovered_selection < 0x32U) {
+        hovered_value = *hovered;
+        if (hovered_value < 0x32U) {
             highlighted_key_color = mnNameNew_804D4F68;
-            HSD_SisLib_803A74F0(data->key_text,
-                                (s32) mn_804A04F0.hovered_selection,
+            HSD_SisLib_803A74F0(data->key_text, (s32) hovered_value,
                                 &highlighted_key_color);
         }
-        mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
-        data->x1 = (u8) mn_804A04F0.hovered_selection;
-        mnNameNew_8023B0F8(arg0, data->x1);
+        mnNameNew_8023B314(data, (s32) *hovered);
+        data->x1 = (u8) *hovered;
+        mnNameNew_8023B0F8(gobj, data->x1);
     }
 
     if ((mnNameNew_804D4C10 + (f32) data->cursor_pos) !=
         mn_8022F298(data->jobjs[13]))
     {
         cursor = data->cursor_pos;
-        jobj = ((NameNewEntry*) arg0->user_data)->jobjs[13];
+        jobj = ((NameNewEntry*) gobj->user_data)->jobjs[13];
         HSD_JObjReqAnimAll(jobj, mnNameNew_804D4C10 + (f32) cursor);
         HSD_JObjAnimAll(jobj);
     }

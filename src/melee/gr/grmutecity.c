@@ -1455,11 +1455,34 @@ UNK_T grMc_803E3C6C[] = {
     grMuteCity_801F19C4, grMuteCity_801F19DC, grMuteCity_801F19F4,
 };
 
+static inline HSD_JObj* grMc_GetRightSplineJoint(Ground* gp)
+{
+    return gp->u.mutecity.xE0;
+}
+
+static inline f32 grMc_GetTrackMidpoint(Ground* gp)
+{
+    return 0.5f * (gp->u.mutecity.xD4 + gp->u.mutecity.xD8);
+}
+
+static inline f32 grMc_Sqrtf(f32 x, volatile f32* result)
+{
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *result = (f32) (x * guess);
+        return *(volatile f32*) result;
+    }
+    return x;
+}
+
 void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 {
     Vec3 car_pos;
     Vec3 spE8;
-    UNUSED u8 padE4[4];
+    f32 track_mid;
     Vec3 spD8;
     Vec3 spCC;
     Vec3 spC0;
@@ -1468,6 +1491,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     Vec3 sp9C;
     Vec3 sp90;
     Vec3 spawn_pos;
+    f32 distance;
     Vec3 sp74;
     Vec3 sp68;
     Vec3 sp5C;
@@ -1476,23 +1500,24 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     Vec3 sp38;
     Vec3 sp2C;
     Vec3 sp20;
-    f32 sp1C;
-    s32 var_r26 = 0;
-    Ground* car_gp = arg0->user_data;
-    Ground* gp = arg1->user_data;
-    HSD_JObj* car_jobj = arg0->hsd_obj;
+    f32 sqrt_tmp[4];
+    Ground* car_gp;
+    Ground* gp;
+    HSD_JObj* car_jobj;
     HSD_JObj* jobj;
-    HSD_JObj* var_r20;
+    HSD_JObj* child_jobj;
     s32 car_idx;
-    grMc_CarEntry* car;
-    f32 track_mid;
-    f32 var_f31;
-    f32 var_f21;
+    s32 sound_count;
+    f32 spline_t;
+    f32 wrapped_t;
     HSD_Spline* spline;
 
+    sound_count = 0;
+    car_gp = arg0->user_data;
+    gp = arg1->user_data;
+    car_jobj = arg0->hsd_obj;
     Ground_801C0498();
-    PAD_STACK(12);
-    track_mid = 0.5f * (gp->u.mutecity.xD4 + gp->u.mutecity.xD8);
+    track_mid = grMc_GetTrackMidpoint(gp);
     Camera_GetTransformPosition(&spE8);
 
     jobj = car_jobj == NULL ? NULL : car_jobj->child;
@@ -1505,34 +1530,33 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     }
 
     car_idx = 0;
-    car = grMc_8049F4B8;
 
     do {
-        car->x4 += car->x8;
-        car->x0 += car->x8;
+        grMc_8049F4B8[car_idx].x4 += grMc_8049F4B8[car_idx].x8;
+        grMc_8049F4B8[car_idx].x0 += grMc_8049F4B8[car_idx].x8;
         {
-            f32 p = car->x4;
+            f32 p = grMc_8049F4B8[car_idx].x4;
             if (p > 1.0f) {
-                car->x4 = p - 1.0f;
+                grMc_8049F4B8[car_idx].x4 = p - 1.0f;
             }
         }
 
-        var_f31 = car->x4;
+        spline_t = grMc_8049F4B8[car_idx].x4;
 
         spline = gp->u.mutecity.xE0->u.spline;
-        if (var_f31 > 0.93f) {
-            var_f21 = var_f31 - 0.93f;
-        } else if (var_f31 < 0.01f) {
-            var_f21 = 0.06999999f + var_f31;
+        if (spline_t > 0.93f) {
+            wrapped_t = spline_t - 0.93f;
+        } else if (spline_t < 0.01f) {
+            wrapped_t = 0.06999999f + spline_t;
         } else {
-            splGetSplinePoint(&spD8, spline, var_f31);
+            splGetSplinePoint(&spD8, spline, spline_t);
             goto block_13_done;
         }
         splGetSplinePoint(&sp68, spline, 0.93f);
         splGetSplinePoint(&sp74, spline, 0.01f);
         lbVector_Sub(&sp74, &sp68);
         {
-            f32 ratio = var_f21 / 0.07999999f;
+            f32 ratio = wrapped_t / 0.07999999f;
             sp74.x *= ratio;
             sp74.y *= ratio;
             sp74.z *= ratio;
@@ -1543,19 +1567,19 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         lb_8000B1CC(gp->u.mutecity.xE0, &spD8, &spCC);
 
         spline = gp->u.mutecity.xDC->u.spline;
-        if (var_f31 > 0.93f) {
-            var_f21 = var_f31 - 0.93f;
-        } else if (var_f31 < 0.01f) {
-            var_f21 = 0.06999999f + var_f31;
+        if (spline_t > 0.93f) {
+            wrapped_t = spline_t - 0.93f;
+        } else if (spline_t < 0.01f) {
+            wrapped_t = 0.06999999f + spline_t;
         } else {
-            splGetSplinePoint(&spD8, spline, var_f31);
+            splGetSplinePoint(&spD8, spline, spline_t);
             goto block_19_done;
         }
         splGetSplinePoint(&sp50, spline, 0.93f);
         splGetSplinePoint(&sp5C, spline, 0.01f);
         lbVector_Sub(&sp5C, &sp50);
         {
-            f32 ratio = var_f21 / 0.07999999f;
+            f32 ratio = wrapped_t / 0.07999999f;
             sp5C.x *= ratio;
             sp5C.y *= ratio;
             sp5C.z *= ratio;
@@ -1568,24 +1592,24 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         lbVector_Diff(&spC0, &spCC, &spB4);
         lbVector_Normalize(&spB4);
 
-        if (var_f31 > 0.827f && var_f31 < 0.914f) {
-            var_f31 = 0.0f;
+        if (spline_t > 0.827f && spline_t < 0.914f) {
+            spline_t = 0.0f;
         }
 
         spline = gp->u.mutecity.xE0->u.spline;
-        if (var_f31 > 0.93f) {
-            var_f21 = var_f31 - 0.93f;
-        } else if (var_f31 < 0.01f) {
-            var_f21 = 0.06999999f + var_f31;
+        if (spline_t > 0.93f) {
+            wrapped_t = spline_t - 0.93f;
+        } else if (spline_t < 0.01f) {
+            wrapped_t = 0.06999999f + spline_t;
         } else {
-            lbShadow_8000E9F0(&spA8, spline, var_f31);
+            lbShadow_8000E9F0(&spA8, spline, spline_t);
             goto block_28_done;
         }
         lbShadow_8000E9F0(&sp38, spline, 0.93f);
         lbShadow_8000E9F0(&sp44, spline, 0.01f);
         lbVector_Sub(&sp44, &sp38);
         {
-            f32 ratio = var_f21 / 0.07999999f;
+            f32 ratio = wrapped_t / 0.07999999f;
             sp44.x *= ratio;
             sp44.y *= ratio;
             sp44.z *= ratio;
@@ -1594,24 +1618,24 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         spA8 = sp44;
     block_28_done:
         lb_8000B1CC(gp->u.mutecity.xE0, &spA8, &spA8);
-        lb_8000B1CC(gp->u.mutecity.xE0, NULL, &spD8);
+        lb_8000B1CC(grMc_GetRightSplineJoint(gp), NULL, &spD8);
         lbVector_Sub(&spA8, &spD8);
         lbVector_Normalize(&spA8);
 
         spline = gp->u.mutecity.xDC->u.spline;
-        if (var_f31 > 0.93f) {
-            var_f21 = var_f31 - 0.93f;
-        } else if (var_f31 < 0.01f) {
-            var_f21 = 0.06999999f + var_f31;
+        if (spline_t > 0.93f) {
+            wrapped_t = spline_t - 0.93f;
+        } else if (spline_t < 0.01f) {
+            wrapped_t = 0.06999999f + spline_t;
         } else {
-            lbShadow_8000E9F0(&sp9C, spline, var_f31);
+            lbShadow_8000E9F0(&sp9C, spline, spline_t);
             goto block_34_done;
         }
         lbShadow_8000E9F0(&sp20, spline, 0.93f);
         lbShadow_8000E9F0(&sp2C, spline, 0.01f);
         lbVector_Sub(&sp2C, &sp20);
         {
-            f32 ratio = var_f21 / 0.07999999f;
+            f32 ratio = wrapped_t / 0.07999999f;
             sp2C.x *= ratio;
             sp2C.y *= ratio;
             sp2C.z *= ratio;
@@ -1631,10 +1655,13 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         PSVECCrossProduct(&spB4, &sp90, &spA8);
         lbVector_Normalize(&spA8);
 
-        car_pos.x = (3.0 * sp90.x) + (((spC0.x - spCC.x) * car->xC) + spCC.x);
-        car_pos.y = (3.0 * sp90.y) + (((spC0.y - spCC.y) * car->xC) + spCC.y);
-        car_pos.z = (3.0 * sp90.z) + (((spC0.z - spCC.z) * car->xC) + spCC.z);
-        *(Vec3*) &car->x14 = car_pos;
+        car_pos.x = (3.0 * sp90.x) +
+                    (((spC0.x - spCC.x) * grMc_8049F4B8[car_idx].xC) + spCC.x);
+        car_pos.y = (3.0 * sp90.y) +
+                    (((spC0.y - spCC.y) * grMc_8049F4B8[car_idx].xC) + spCC.y);
+        car_pos.z = (3.0 * sp90.z) +
+                    (((spC0.z - spCC.z) * grMc_8049F4B8[car_idx].xC) + spCC.z);
+        *(Vec3*) &grMc_8049F4B8[car_idx].x14 = car_pos;
 
         HSD_JObjSetTranslate(jobj, &car_pos);
 
@@ -1644,18 +1671,18 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         HSD_JObjSetRotationZ(jobj, spD8.z);
 
         {
-            u16 flags20 = car->x20;
+            u16 flags20 = grMc_8049F4B8[car_idx].x20;
             if ((flags20 & 8) && (flags20 & 2) && car_gp->u.mutecity.xC4 == 0)
             {
                 grLib_801C96F8(0x11A, 0, &car_pos);
-                if (var_r26 < 1) {
+                if (sound_count < 1) {
                     if (car_pos.z < 0.0f) {
-                        var_f31 = (car_pos.z * car_pos.z) +
-                                  ((car_pos.x * car_pos.x) +
-                                   (car_pos.y * car_pos.y));
-                        sp1C = sqrtf(var_f31);
-                        var_f31 = sp1C;
-                        if (var_f31 < 300.0f) {
+                        spline_t = (car_pos.z * car_pos.z) +
+                                   ((car_pos.x * car_pos.x) +
+                                    (car_pos.y * car_pos.y));
+                        distance = grMc_Sqrtf(spline_t, &sqrt_tmp[3]);
+                        spline_t = distance;
+                        if (spline_t < 300.0f) {
                             switch (HSD_Randi(3)) {
                             case 0:
                                 Ground_801C5440(car_gp, 0, 0x5CC69);
@@ -1668,8 +1695,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                                 break;
                             }
                             Ground_801C5630(car_gp, 0,
-                                            1.0f - (var_f31 / 300.0f));
-                            var_r26 += 1;
+                                            1.0f - (spline_t / 300.0f));
+                            sound_count += 1;
                         }
                     }
                     car_gp->u.mutecity.xC4 = 7;
@@ -1678,17 +1705,16 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         }
 
         {
-            f32 age = car->x10;
+            f32 age = grMc_8049F4B8[car_idx].x10;
             if (age > yakumono_param->x30) {
-                if (!car->x22_flags.b0) {
+                if (!grMc_8049F4B8[car_idx].x22_flags.b0) {
                     grLib_801C98A0(jobj);
-                    var_r20 = NULL;
-                    car->x28 = 0;
+                    grMc_8049F4B8[car_idx].x28 = (s32) (child_jobj = NULL);
                     grLib_801C96F8(0xE3, 0, &car_pos);
                     if (jobj != NULL) {
-                        var_r20 = jobj->child;
+                        child_jobj = jobj->child;
                     }
-                    HSD_JObjUnref(var_r20);
+                    HSD_JObjUnref(child_jobj);
                     {
                         HSD_JObj* new_jobj = Ground_801C13D0(5, 0);
                         if (new_jobj != NULL) {
@@ -1700,20 +1726,23 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                             HSD_JObjSetTranslate(new_jobj, &spawn_pos);
                         }
                     }
-                    if ((u32) car->x24 != 0) {
-                        grMaterial_801C8CDC((HSD_GObj*) car->x24);
-                        car->x24 = 0;
+                    if ((u32) grMc_8049F4B8[car_idx].x24 != 0) {
+                        grMaterial_801C8CDC(
+                            (HSD_GObj*) grMc_8049F4B8[car_idx].x24);
+                        grMc_8049F4B8[car_idx].x24 = 0;
                     }
-                    car->x22_flags.b0 = 1;
+                    grMc_8049F4B8[car_idx].x22_flags.b0 = 1;
                 }
-            } else if (age > yakumono_param->x2C && (u32) car->x28 == 0) {
-                grMuteCity_801F2AB0(0x116, jobj);
-                car->x28 = (s32) jobj;
+            } else if (age > yakumono_param->x2C &&
+                       (u32) grMc_8049F4B8[car_idx].x28 == 0)
+            {
+                grMc_8049F4B8[car_idx].x28 =
+                    grMuteCity_801F2AB0(0x116, jobj);
             }
         }
 
-        if (!car->x22_flags.b0) {
-            f32 rel_t = car->x4;
+        if (!grMc_8049F4B8[car_idx].x22_flags.b0) {
+            f32 rel_t = grMc_8049F4B8[car_idx].x4;
             f32 dist_t;
             if (track_mid < rel_t) {
                 dist_t = (1.0f + track_mid) - rel_t;
@@ -1727,7 +1756,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     -1350.0f < car_pos.z && car_pos.z < 50.0f)
                 {
                     Camera_80030E44(1, NULL);
-                    if (!car->x22_flags.b1) {
+                    if (!grMc_8049F4B8[car_idx].x22_flags.b1) {
                         if (gp->u.mutecity.xD0_flags.b1) {
                             switch (HSD_Randi(3)) {
                             case 0:
@@ -1753,11 +1782,11 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                                 break;
                             }
                         }
-                        car->x22_flags.b1 = 1;
+                        grMc_8049F4B8[car_idx].x22_flags.b1 = 1;
                     }
                 } else {
-                    if (car->x22_flags.b1) {
-                        car->x22_flags.b1 = 0;
+                    if (grMc_8049F4B8[car_idx].x22_flags.b1) {
+                        grMc_8049F4B8[car_idx].x22_flags.b1 = 0;
                     }
                 }
             }
@@ -1766,7 +1795,9 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 -200.0f < car_pos.y && car_pos.y < 200.0f &&
                 -100.0f < car_pos.z && car_pos.z < 50.0f)
             {
-                if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
+                if (!grMc_8049F4B8[car_idx].x22_flags.b0 &&
+                    (u32) grMc_8049F4B8[car_idx].x24 == 0)
+                {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
                         ((grMc_SpeedFn*) grMc_803E3C6C)[car_idx], NULL);
@@ -1774,30 +1805,30 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);
                         grMaterial_801C8E08(item_gobj);
-                        car->x24 = (s32) item_gobj;
+                        grMc_8049F4B8[car_idx].x24 = (s32) item_gobj;
                     }
                 }
             } else {
-                if ((u32) car->x24 != 0) {
-                    grMaterial_801C8CDC((HSD_GObj*) car->x24);
-                    car->x24 = 0;
+                if ((u32) grMc_8049F4B8[car_idx].x24 != 0) {
+                    grMaterial_801C8CDC(
+                        (HSD_GObj*) grMc_8049F4B8[car_idx].x24);
+                    grMc_8049F4B8[car_idx].x24 = 0;
                 }
             }
         } else {
             if (car_pos.z > spE8.z || car_pos.z > 5000.0f ||
                 car_pos.z < -1500.0f)
             {
-                if ((u32) car->x28 != 0) {
+                if ((u32) grMc_8049F4B8[car_idx].x28 != 0) {
                     grLib_801C98A0(jobj);
-                    car->x28 = 0;
+                    grMc_8049F4B8[car_idx].x28 = 0;
                 }
-            } else if ((u32) car->x28 == 0) {
-                grMuteCity_801F2AB0(0x119, jobj);
-                car->x28 = (s32) jobj;
+            } else if ((u32) grMc_8049F4B8[car_idx].x28 == 0) {
+                grMc_8049F4B8[car_idx].x28 =
+                    grMuteCity_801F2AB0(0x119, jobj);
             }
         }
 
-        car++;
         car_idx += 1;
         jobj = jobj == NULL ? NULL : jobj->next;
     } while (car_idx < 0x1E);
@@ -1892,7 +1923,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
     grMc_StackPad(*(grMc_StackPadArg*) gp->u.mutecity2.saved_colors);
 }
 
-void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
+s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
 {
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;

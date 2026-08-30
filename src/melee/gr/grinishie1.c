@@ -634,6 +634,21 @@ typedef struct grInishie1_801FB3F0_Vars {
 } grInishie1_801FB3F0_Vars;
 
 static inline void
+set_all_hatena(HSD_GObj* gobj, grInishie1_801FB3F0_Vars* vars)
+{
+    u32 i = 0;
+
+    vars->xC8 = 0;
+    vars->xC6 = 0;
+
+    for (; i < 0x13; ++i) {
+        vars->blocks[i].x0 = 3;
+        grInishie1_801FBAA0(gobj, i);
+        vars->blocks[i].x20 = 0;
+    }
+}
+
+static inline void
 grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
                                   grInishie1_801FB3F0_Vars* vars, Vec3* pos)
 {
@@ -730,7 +745,6 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
 void grInishie1_801FB3F0(HSD_GObj* gobj)
 {
     grInishie1_801FB3F0_Vars* vars = gobj->user_data;
-    u32 i;
     Vec3 pos;
     PAD_STACK(48);
 
@@ -743,16 +757,9 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
                            (vars->xC8 == 1 && vars->xC6 > 0 &&
                             vars->xC6 < yakumono_param->unk14)))
     {
-        vars->xC8 = 0;
-        vars->xC6 = 0;
-
         // this is likely the rare case mentioned on smashwiki
         // where every block will become a hatena block
-        for (i = 0; i < 0x13; ++i) {
-            vars->blocks[i].x0 = 3;
-            grInishie1_801FBAA0(gobj, i);
-            vars->blocks[i].x20 = 0;
-        }
+        set_all_hatena(gobj, vars);
     } else {
         HATENA_APPEAR_CHECKLOOP(vars->xC6, vars->xCA, 1, 0x2D0U);
         HATENA_APPEAR_CHECKLOOP(vars->xC8, vars->xCC, 2, 0x2EBU);

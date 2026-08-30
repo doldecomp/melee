@@ -579,62 +579,42 @@ void grAnime_801C706C(HSD_TObj* tobj, s32 flags, void* func, u32 type,
     }
 }
 
-static inline void grAnime_801C706C_inner(HSD_TObj* tobj, s32 flags,
-                                          void* func, u32 type, void* param)
+static inline void grAnime_MObjForeachAnim(
+    HSD_MObj* mobj, int flags, void* func, u32 type, void* param)
 {
-    grAnime_801C706C(tobj, flags, func, type, param);
+    if (mobj == NULL) {
+        return;
+    }
+    if ((flags & CALL_ON_MOBJ) && mobj->aobj != NULL) {
+        grAnime_801C6F50(mobj->aobj, mobj, ARG_TYPE_MOBJ, func, type, param);
+    }
+    grAnime_801C706C(mobj->tobj, flags, func, type, param);
 }
 
-static inline void grAnime_801C706C_noinline(HSD_TObj* tobj, s32 flags,
-                                             void* func, u32 type, void* param)
+static inline void grAnime_PObjForeachAnim(
+    HSD_PObj* pobj, int flags, void* func, u32 type, void* param)
 {
-    grAnime_801C706C_inner(tobj, flags, func, type, param);
-}
-
-void grAnime_801C70E0(HSD_DObj* dobj, int flags, void* function, u32 arg3,
-                      void* arg4)
-{
-    HSD_MObj* mobj;
-    HSD_PObj* pobj;
-
-    while (dobj != NULL) {
-        if (flags & CALL_ON_DOBJ && dobj->aobj != NULL) {
-            grAnime_801C6F50(dobj->aobj, dobj, ARG_TYPE_DOBJ, function, arg3,
-                             arg4);
-        }
-        if (dobj->mobj != NULL) {
-            mobj = dobj->mobj;
-            if (flags & CALL_ON_MOBJ && mobj->aobj != NULL) {
-                HSD_MObj* mobj_tmp = dobj->mobj;
-                grAnime_801C6F50(mobj_tmp->aobj, mobj_tmp, ARG_TYPE_MOBJ,
-                                 function, arg3, arg4);
-            }
-            grAnime_801C706C(mobj->tobj, flags, function, arg3, arg4);
-        }
-        pobj = dobj->pobj;
-        if (flags & CALL_ON_POBJ && pobj != NULL &&
-            pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.unk != NULL &&
-            pobj->u.unk->aobj != NULL)
-        {
-            grAnime_801C6F50(pobj->u.unk->aobj, pobj, ARG_TYPE_POBJ, function,
-                             arg3, arg4);
-        }
-        dobj = dobj->next;
+    if ((flags & CALL_ON_POBJ) && pobj != NULL &&
+        pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.unk != NULL &&
+        pobj->u.unk->aobj != NULL)
+    {
+        grAnime_801C6F50(pobj->u.unk->aobj, pobj, ARG_TYPE_POBJ, func, type,
+                         param);
     }
 }
 
-/*
-void grAnime_801C706C(HSD_TObj* tobj, int flags, void (*function)(), void*
-arg3, void* arg4)
+void grAnime_801C70E0(HSD_DObj* dobj, int flags, void* func, u32 type,
+                      void* param)
 {
-    while (tobj != NULL) {
-        if (flags & CALL_ON_TOBJ && tobj->aobj != NULL) {
-            grAnime_801C6F50(tobj->aobj, tobj, ARG_TYPE_TOBJ, function, arg3,
-arg4);
+    for (; dobj != NULL; dobj = dobj->next) {
+        if ((flags & CALL_ON_DOBJ) && dobj->aobj != NULL) {
+            grAnime_801C6F50(dobj->aobj, dobj, ARG_TYPE_DOBJ, func, type,
+                             param);
         }
-        tobj = tobj->next;
+        grAnime_MObjForeachAnim(dobj->mobj, flags, func, type, param);
+        grAnime_PObjForeachAnim(dobj->pobj, flags, func, type, param);
     }
-}*/
+}
 
 static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags,
                                             void* func, u32 type, void* param)
@@ -648,43 +628,12 @@ static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags,
     return ((obj->flags & 0x4020) ? false : true);
 }
 
-static inline void grAnime_801C7228_for_each_child(HSD_JObj* obj, void* param,
-                                                   u32 type, void* func,
-                                                   int flags, int arg5)
+static inline void grAnime_RObjForeachAnim(
+    HSD_RObj* robj, int flags, void* func, u32 type, void* param)
 {
-    HSD_RObj* robj;
-    HSD_JObj* child;
-    HSD_RObj* child_robj;
-    HSD_JObj* grandchild;
-
-    for (robj = obj->robj; robj != NULL; robj = robj->next) {
+    for (; robj != NULL; robj = robj->next) {
         if ((flags & 0x200) && robj->aobj != NULL) {
             grAnime_801C6F50(robj->aobj, robj, 0xA, func, type, param);
-        }
-    }
-    if (arg5 && !(obj->flags & 0x1000)) {
-        for (child = obj->child; child != NULL; child = child->next) {
-            if (grAnime_801C6F50_wrapped(child, flags, func, type, param)) {
-                grAnime_801C70E0(child->u.dobj, flags, func, type, param);
-            }
-            for (child_robj = child->robj; child_robj != NULL;
-                 child_robj = child_robj->next)
-            {
-                if (flags & 0x200) {
-                    if (child_robj->aobj != NULL) {
-                        grAnime_801C6F50(child_robj->aobj, child_robj, 0xA,
-                                         func, type, param);
-                    }
-                }
-            }
-            if (arg5 && !(child->flags & 0x1000)) {
-                for (grandchild = child->child; grandchild != NULL;
-                     grandchild = grandchild->next)
-                {
-                    grAnime_801C7228(grandchild, flags, func, type, param,
-                                     arg5);
-                }
-            }
         }
     }
 }
@@ -692,36 +641,39 @@ static inline void grAnime_801C7228_for_each_child(HSD_JObj* obj, void* param,
 void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
                       void* param, int arg5)
 {
-    HSD_DObj* dobj;
-    HSD_MObj* mobj;
-    HSD_PObj* pobj;
-
     if (grAnime_801C6F50_wrapped(obj, flags, func, type, param)) {
-        for (dobj = obj->u.dobj; dobj != NULL; dobj = dobj->next) {
-            if ((flags & 4) && dobj->aobj != NULL) {
-                grAnime_801C6F50(dobj->aobj, dobj, 3, func, type, param);
-            }
-            if ((mobj = dobj->mobj) != NULL) {
-                if ((flags & 0x80) && mobj->aobj != NULL) {
-                    grAnime_801C6F50(mobj->aobj, mobj, 8, func, type, param);
-                }
-                grAnime_801C706C_noinline(mobj->tobj, flags, func, type,
-                                          param);
-            }
-            pobj = dobj->pobj;
-            if (((flags & 0x100) != 0) && (pobj != NULL) &&
-                ((pobj->flags & 0x3000) == 0x1000))
-            {
-                if (pobj->u.unk != NULL) {
-                    if (pobj->u.unk->aobj != NULL) {
-                        grAnime_801C6F50(pobj->u.unk->aobj, pobj, 9, func,
-                                         type, param);
-                    }
-                }
-            }
+        grAnime_801C70E0(obj->u.dobj, flags, func, type, param);
+    }
+    grAnime_RObjForeachAnim(obj->robj, flags, func, type, param);
+    if (arg5 && !(obj->flags & 0x1000)) {
+        for (obj = obj->child; obj != NULL; obj = obj->next) {
+            grAnime_801C7228(obj, flags, func, type, param, arg5);
         }
     }
-    grAnime_801C7228_for_each_child(obj, param, type, func, flags, arg5);
+}
+
+static inline void grAnime_801C70E0_inner(
+    HSD_DObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4)
+{
+    grAnime_801C70E0(arg0, arg1, arg2, arg3, arg4);
+}
+
+static inline void grAnime_801C70E0_noinline(
+    HSD_DObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4)
+{
+    grAnime_801C70E0_inner(arg0, arg1, arg2, arg3, arg4);
+}
+
+static inline void grAnime_801C7228_inner(
+    HSD_JObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4, int arg5)
+{
+    grAnime_801C7228(arg0, arg1, arg2, arg3, arg4, arg5);
+}
+
+static inline void grAnime_801C7228_noinline(
+    HSD_JObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4, int arg5)
+{
+    grAnime_801C7228_inner(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
 void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func, u32 type,
@@ -764,7 +716,7 @@ void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func, u32 type,
         break;
     }
     if (grAnime_801C6F50_wrapped(obj_tmp, flags, func, type, &arg)) {
-        grAnime_801C70E0(obj->u.dobj, flags, func, type, &arg);
+        grAnime_801C70E0_noinline(obj->u.dobj, flags, func, type, &arg);
     }
     flags2 = flags & 0x200;
     for (robj = obj->robj; robj != 0L; robj = robj->next) {
@@ -774,7 +726,7 @@ void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func, u32 type,
     }
     if (arg1 != 0 && !(obj->flags & 0x1000)) {
         for (child = obj->child; child != NULL; child = child->next) {
-            grAnime_801C7228(child, flags, func, type, &arg, arg1);
+            grAnime_801C7228_noinline(child, flags, func, type, &arg, arg1);
         }
     }
     va_end(ap);
@@ -956,12 +908,12 @@ void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2, f32 arg8)
 void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                       int arg5, f32 farg0, f32 farg1)
 {
-    u32 var_r30 = 0;
+    s32 anim_flags = 0;
     UnkArchiveStruct* archive;
     HSD_AnimJoint** ajp;
     HSD_MatAnimJoint** mjp;
     HSD_ShapeAnimJoint** sjp;
-    s32 anim_flags = 0;
+    u32 req_flags = 0;
     HSD_AnimJoint* aj;
     HSD_AnimJoint* caj;
     HSD_ShapeAnimJoint* csj;
@@ -969,8 +921,6 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     HSD_MatAnimJoint* mj;
     HSD_MatAnimJoint* cmj;
     HSD_ShapeAnimJoint* sj;
-    HSD_MatAnim* manim;
-    HSD_ShapeAnimDObj* sdobj;
     u8* eflags;
     s32 flag;
 
@@ -983,8 +933,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((aj = ajp[arg4]) != NULL))
     {
         aj = &aj[arg2];
-        var_r30 |= 0x81;
         anim_flags |= 0x220;
+        req_flags |= 0x81;
     } else {
         aj = NULL;
     }
@@ -992,8 +942,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((mj = mjp[arg4]) != NULL))
     {
         mj = &mj[arg2];
-        var_r30 |= 0x416;
         anim_flags |= 0x7484;
+        req_flags |= 0x416;
     } else {
         mj = NULL;
     }
@@ -1001,8 +951,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((sj = sjp[arg4]) != NULL))
     {
         sj = &sj[arg2];
-        var_r30 |= 8;
         anim_flags |= 0x100;
+        req_flags |= 8;
     } else {
         sj = NULL;
     }
@@ -1071,13 +1021,13 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                 }
             }
         }
-        HSD_JObjReqAnimAllByFlags(jobj, var_r30, farg0);
+        HSD_JObjReqAnimAllByFlags(jobj, req_flags, farg0);
     } else {
         if (jobj != NULL) {
             if (aj != NULL) {
                 if (aj->aobjdesc != NULL) {
                     if (jobj->aobj != NULL) {
-                        HSD_AObjRemove(jobj->aobj);
+                        HSD_AObjRemove(grAnime_GetAObj(jobj));
                     }
                     {
                         HSD_AObjDesc* aobjdesc = aj->aobjdesc;
@@ -1091,25 +1041,17 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                 }
             }
             if ((jobj->flags & 0x4020) ? false : true) {
-                if (sj != NULL) {
-                    sdobj = sj->shapeanimdobj;
-                } else {
-                    sdobj = NULL;
-                }
-                if (mj != NULL) {
-                    manim = mj->matanim;
-                } else {
-                    manim = NULL;
-                }
-                grAnime_801C683C_noinline(jobj->u.dobj, manim, sdobj);
+                grAnime_801C683C_noinline(
+                    jobj->u.dobj, mj != NULL ? mj->matanim : NULL,
+                    sj != NULL ? sj->shapeanimdobj : NULL);
             }
         }
-        HSD_JObjReqAnimByFlags(jobj, var_r30, farg0);
+        HSD_JObjReqAnimByFlags(jobj, req_flags, farg0);
     }
     grAnime_801C752C(jobj, arg5, anim_flags, HSD_AObjSetRate, 1, farg1);
     archive = grDatFiles_801C6330(map_id);
     HSD_ASSERT(0x148, archive);
-    eflags = (u8*) archive->unk4->unk8[map_id].x28;
+    eflags = archive->unk4->unk8[map_id].x28;
     if (eflags != NULL) {
         flag = eflags[arg4];
     } else {

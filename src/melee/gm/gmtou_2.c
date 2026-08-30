@@ -1,9 +1,7 @@
 #include "gmtou_2.h"
 
-#include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
-#include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmtoulib.h"
 #include "types.h"
@@ -560,12 +558,16 @@ void fn_8019D1BC(void)
 
     for (i = 0; i < (s32) tmd->x30; i++) {
         {
-            HSD_GObj* first_gobj =
+            HSD_GObj* first_gobj;
+            HSD_JObj* first_c;
+            HSD_JObj* first_jobj;
+
+            first_gobj =
                 fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
                             fn_8019C048, (f32) i);
-            HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
-            (void) first_jobj;
-            HSD_JObjSetTranslateY(GET_JOBJ(first_gobj), -2.5f);
+            first_jobj = GET_JOBJ(first_gobj);
+            first_c = first_gobj->hsd_obj;
+            HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
 
             c = HSD_JObjGetChild(first_jobj);
@@ -706,7 +708,7 @@ void fn_8019D1BC(void)
         tmd->x534[i]->default_alignment = 1;
         HSD_SisLib_803A6B98(tmd->x534[i],
                             10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-                            name_buf[i], tmd->x534[i]->default_alignment);
+                            name_buf[i]);
         HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
     }
 }
@@ -879,7 +881,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0x19);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -906,7 +908,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -942,7 +944,7 @@ void gm_8019DF8C_OnFrame(void)
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
-                                (s32) (gm_80169238(fn_8018F6FC(
+                                (s32) ((u8) gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {
@@ -998,44 +1000,34 @@ void gm_8019ECAC_OnEnter_inline(void)
 
 void gm_8019E634(void)
 {
-    s32 indices[4];
+    struct Indices {
+        s32 values[4];
+    } indices;
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
     s32 i, j;
-    MatchEnd* match_end;
-    s32* results_base;
 
     tmd = gm_GetTournamentData();
     hmn_cpu = tmd->hmn_cpu_count;
 
-    indices[0] = lbl_803B7D3C[0];
-    indices[1] = lbl_803B7D3C[1];
-    indices[2] = lbl_803B7D3C[2];
-    indices[3] = lbl_803B7D3C[3];
+    indices = *(struct Indices*) lbl_803B7D3C;
 
     /* Get match results per player */
-    match_end = &gm_80477738;
-    results_base = results;
-    {
-        s32* result_ptr;
-        for (result_ptr = results_base, i = 0; i < (s32) tmd->x30;
-             result_ptr++, i++)
-        {
-            *result_ptr = fn_80166CBC(match_end, i);
-        }
+    for (i = 0; i < (s32) tmd->x30; i++) {
+        results[i] = fn_80166CBC(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
     for (i = 0; i < (s32) (tmd->x30 - 1); i++) {
         for (j = 0; j < (s32) ((tmd->x30 - 1) - i); j++) {
-            if (results_base[j] > results_base[j + 1]) {
-                s32 tr = results_base[j];
-                s32 ti = indices[j];
-                results_base[j] = results_base[j + 1];
-                indices[j] = indices[j + 1];
-                results_base[j + 1] = tr;
-                indices[j + 1] = ti;
+            if (results[j] > results[j + 1]) {
+                s32 tr = results[j];
+                s32 ti = indices.values[j];
+                results[j] = results[j + 1];
+                indices.values[j] = indices.values[j + 1];
+                results[j + 1] = tr;
+                indices.values[j + 1] = ti;
             }
         }
     }
@@ -1052,8 +1044,7 @@ void gm_8019E634(void)
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
-                j = get_match_player_index_xF(id);
+                j = get_match_player_index_xF(results[i]);
                 hbuf.bytes[i] = tmd->x37[j].x2;
             }
         }
@@ -1063,7 +1054,7 @@ void gm_8019E634(void)
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
+                s32 id = results[i];
                 j = get_match_player_index_xF(id);
                 tmd->x37[j].x2 = hbuf.bytes[i];
             }
@@ -1074,7 +1065,7 @@ void gm_8019E634(void)
     if ((s32) gm_804771C4.match_type == 1) {
         /* Team mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[i];
+            s32 id = indices.values[i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
@@ -1083,18 +1074,18 @@ void gm_8019E634(void)
                 id = next_id;
             }
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[i];
+            tmd->x37[j].xE = indices.values[i];
         }
     } else {
         /* FFA mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[(tmd->x30 - 1) - i];
+            s32 id = indices.values[(tmd->x30 - 1) - i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
             id = tmd->x30 + i;
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[(tmd->x30 - 1) - i];
+            tmd->x37[j].xE = indices.values[(tmd->x30 - 1) - i];
         }
     }
 

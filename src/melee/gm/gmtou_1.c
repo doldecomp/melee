@@ -1589,24 +1589,31 @@ void fn_80199AF0(void)
     }
 }
 
+static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
+{
+    return &lbl_80473AB8[bracket_idx];
+}
+
 /// @todo All instructions match; only the callee-saved register assignment
 /// is permuted against the target.
 void fn_8019A158(void)
 {
     TmData* td1;
     TmData* td2;
+    BracketEntry* bracket;
     s32 mode;
-    s32 slot;
     s32 sel;
     s32 bracket_idx;
     s32 result;
     s32 counter;
     s32 i;
     int k;
-    UNUSED u8 unused[8];
-    s32 local1, local2;
     MatchEnd* me;
+    struct {
+        s32 slot;
+    } state;
     u8* cursor;
+    s32 local1, local2;
     PAD_STACK(4);
 
     td1 = gm_GetTournamentData();
@@ -1623,22 +1630,23 @@ void fn_8019A158(void)
     }
 
     me = lbl_804799D8.x48;
+    (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
-        slot = local2;
+        state.slot = local2;
     } else {
         for (i = 0; i < 4; i++) {
             if (me->player_standings[i].slot_type != 3 &&
                 me->player_standings[i].is_small_loser == 0)
             {
-                slot = i;
+                state.slot = i;
                 goto found;
             }
         }
-        slot = -1;
+        state.slot = -1;
     found:;
     }
-    sel = slot;
+    sel = state.slot;
 
     bracket_idx = fn_8018F74C();
 
@@ -1647,18 +1655,18 @@ void fn_8019A158(void)
     }
 
     if (mode == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (i == slot) {
-                bracket->slots[slot].x4C = 0;
+            if (i == state.slot) {
+                bracket->slots[state.slot].x4C = 0;
             } else {
                 cursor[0x4C] = 3;
             }
             cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (cursor[0x4E] == 3) {
@@ -1679,7 +1687,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
