@@ -799,8 +799,8 @@ static inline s32 mnRulePlus_CountVisible(u8 limit)
 
 HSD_GObj* mn_80233218(MenuState state)
 {
-    HSD_JObj* jobj_parts[17];
-    u16 jobj_map[17];
+    u16* volatile sub_count_ptr;
+    GameRules* rules;
     HSD_GObj* gobj;
     MenuRulesPlusData* user_data;
     u8 num_options;
@@ -817,8 +817,8 @@ HSD_GObj* mn_80233218(MenuState state)
     StaticModelDesc* desc;
     HSD_JObj* root_jobj;
     f32* frame_ptr;
-    u16* volatile sub_count_ptr;
-    GameRules* rules;
+    HSD_JObj* jobj_parts[17];
+    u16 jobj_map[17];
     PAD_STACK(4);
 
     selected = (u8) mn_804A04F0.hovered_selection;
@@ -942,10 +942,11 @@ HSD_GObj* mn_80233218(MenuState state)
             }
 
             if (i == 5) {
-                als = &mn_803ED1D0.x7C[i == selected];
-                (void) als;
+                als = &mn_803ED1D0.x4C + (i == selected);
+                als += 4;
             } else {
-                als = &mn_803ED1D0.x64[i == selected];
+                als = &mn_803ED1D0.x4C + (i == selected);
+                als += 2;
             }
             HSD_JObjReqAnimAll(jobj_parts[2], als->start_frame);
             HSD_JObjAnimAll(jobj_parts[2]);
