@@ -1050,20 +1050,16 @@ void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
 // parent joint.
 void efLib_Cb_PtclAppSRTHook(HSD_Generator* gen)
 {
-    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x96])->cmdList)
-    {
+    if (gen->cmdList == ptclref_804D0E5C[0][0x96]->cmdList) {
         hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x97])->cmdList)
-    {
+    if (gen->cmdList == ptclref_804D0E5C[0][0x97]->cmdList) {
         hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x98])->cmdList)
-    {
+    if (gen->cmdList == ptclref_804D0E5C[0][0x98]->cmdList) {
         hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x21B])->cmdList)
-    {
+    if (gen->cmdList == ptclref_804D0E5C[0][0x21B]->cmdList) {
         hsd_8039D1E4(gen, lbl_803BF810);
     }
 }
