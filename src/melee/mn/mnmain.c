@@ -1953,7 +1953,7 @@ void mn_8022C4F4(HSD_GObj* gp)
         case SEL_SPECIAL_VS_FIXED_CAMERA:
             sfxForward();
             data = gm_GetCurrentSceneExitData();
-            data->pending_mode = GM_FIXED_CAMERA_VS;
+            data->pending_mode = GM_CAMERA_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SINGLE_BUTTON:
@@ -2723,7 +2723,7 @@ void mn_8022DB10(HSD_GObj* gp)
     }
 }
 
-void mn_8022DD38_OnFrame(void)
+void mnMain_Scene_OnFrame(void)
 {
     MenuExitData* data;
     if (mn_8022F218() && mn_804A04F0.cur_menu != MENU_KIND_MAIN) {
@@ -2758,7 +2758,7 @@ static inline void mn_8022DDA8_inline(const u16* sp2B4)
     mn_8022C068(lobj, temp_r29, mn_804A04F0.light_lerp_frames);
 }
 
-void mn_8022DDA8_OnEnter(void* user_data)
+void mnMain_Scene_OnEnter(void* user_data)
 {
     u16* hovered_selection;
     HSD_GObj* temp_r3_8;

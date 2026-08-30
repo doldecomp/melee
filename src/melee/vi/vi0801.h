@@ -6,7 +6,7 @@
 /* 31EE60 */ void vi0801_8031EE60(HSD_GObj*);
 /* 31EE84 */ void vi0801_8031EE84(void);
 /* 31EFE4 */ void vi0801_8031EFE4(HSD_GObj*);
-/* 31F07C */ void vi0801_OnEnter(void* unused);
-/* 31F274 */ void vi0801_OnFrame(void);
+/* 31F07C */ void vi0801_Scene_OnEnter(void* unused);
+/* 31F274 */ void vi0801_Scene_OnFrame(void);
 
 #endif

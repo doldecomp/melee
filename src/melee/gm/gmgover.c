@@ -9,14 +9,14 @@
 #include "melee/gm/types.h"
 #include "melee/lb/lbmthp.h"
 
-/* 1BEE9C */ static void gm_801BEE9C(GameScene*);
-/* 1BEF84 */ static void gm_801BEF84(GameScene*);
+/* 1BEE9C */ static void gm_801BEE9C(GameModeState*);
+/* 1BEF84 */ static void gm_801BEF84(GameModeState*);
 /* 1BEFF0 */ static int gm_801BEFF0(void);
 /* 1BF030 */ static int gm_801BF030(void);
 /* 49C178 */ static u8 gm_8049C178[16];
 /* 4D6920 */ static UNK_T gm_804D6920[2];
 
-GameScene gm_803DFB08[] = {
+GameModeState gm_Mode_GOver_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -68,7 +68,7 @@ GameScene gm_803DFB08[] = {
     { -1 },
 };
 
-GameScene gm_803DFB80_Scenes[] = {
+GameModeState gm_Mode_DebugGOver_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -96,12 +96,12 @@ GameScene gm_803DFB80_Scenes[] = {
     { -1 },
 };
 
-void gm_801BEE9C(GameScene* arg0)
+void gm_801BEE9C(GameModeState* arg0)
 {
     s8* game_mode;
     u8 ckind;
 
-    game_mode = arg0->info.leave_data;
+    game_mode = arg0->info.exit_data;
     ckind = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
@@ -121,7 +121,7 @@ void gm_801BEE9C(GameScene* arg0)
     gm_SetNewGameModePending();
 }
 
-void gm_801BEF84(GameScene* arg)
+void gm_801BEF84(GameModeState* arg)
 {
     lbMthp_8001F800();
 }

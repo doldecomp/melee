@@ -2181,7 +2181,7 @@ bool un_80301D40(enum soundtest_callback_arg0 update_scene)
 {
     if (update_scene == true) {
         sfxForward();
-        gm_ChangeGameModeAfterCurrentScene(GM_FIXED_CAMERA_VS);
+        gm_ChangeGameModeAfterCurrentScene(GM_CAMERA_VS);
         gm_801A4B60();
     }
 

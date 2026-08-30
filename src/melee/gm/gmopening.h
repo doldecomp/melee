@@ -8,8 +8,8 @@
 /* 1A9DD0 */ void gm_801A9DD0(HSD_GObj*, u16, u16, int, int);
 /* 1A9FCC */ void* fn_801A9FCC(void);
 /* 1AA0E8 */ void fn_801AA0E8(void);
-/* 1AA110 */ void gm_801AA110_OnEnter(void*);
-/* 1AA28C */ void gm_801AA28C_OnFrame(void);
+/* 1AA110 */ void gm_Scene_Opening_OnEnter(void*);
+/* 1AA28C */ void gm_Scene_Opening_OnFrame(void);
 /* 4D67F0 */ extern HSD_SObjDesc* gm_804D67F0;
 /* 4D67EC */ extern u32 gm_804D67EC;
 

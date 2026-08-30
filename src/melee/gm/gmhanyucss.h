@@ -3,6 +3,6 @@
 
 #include "gm/types.h"
 
-/* 3DFB08 */ extern GameScene gm_803DFB08[];
+/* 3DFB08 */ extern GameModeState gm_Mode_GOver_States[];
 
 #endif

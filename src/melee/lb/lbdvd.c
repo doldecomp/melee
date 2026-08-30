@@ -183,8 +183,8 @@ void lbDvd_80017960(void)
     int i;
     u8 _[4];
 
-    if (preloadCache.new_scene.game_cache.mode_id != GM_COUNT) {
-        switch (preloadCache.new_scene.game_cache.mode_id) {
+    if (preloadCache.new_scene.game_cache.mode_kind != GM_COUNT) {
+        switch (preloadCache.new_scene.game_cache.mode_kind) {
         case GM_CAMERA_MODE:
             gm_801B23F0();
             break;
@@ -474,7 +474,7 @@ HSD_Archive* lbDvd_8001819C(const char* basename)
     return archive;
 }
 
-PreloadCacheScene* lbDvd_GetPreloadCacheScene(void)
+PreloadedGameModeState* lbDvd_GetPreloadCacheScene(void)
 {
     return &preloadCache.scene;
 }
@@ -537,7 +537,7 @@ void lbDvd_80018254(void)
     bool enabled;
 
     if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
-               sizeof(PreloadCacheScene)) == 0)
+               sizeof(PreloadedGameModeState)) == 0)
     {
         return;
     }

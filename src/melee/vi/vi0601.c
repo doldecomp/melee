@@ -31,17 +31,12 @@
 static SceneDesc* un_804D6FB0;
 static GXColor erase_colors_vi0601;
 
-void vi_8031E6CC_OnFrame(void)
-{
-    vi_8031CAAC();
-}
-
 void vi_8031E6EC(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0601_CameraCallback(HSD_GObj* gobj, int unused)
+static void vi0601_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
 {
     HSD_CObj* cobj;
     cobj = GET_COBJ(gobj);
@@ -90,7 +85,7 @@ void un_8031E9B8(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     s32 i;
-    char pad[8];
+    PAD_STACK(2 * 4);
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*un_804D6FB0->models)->joint);
@@ -141,7 +136,7 @@ void vi0601_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void un_8031EBBC_OnEnter(void* unused)
+void vi0601_Scene_OnEnter(UNUSED void* enter_data)
 {
     HSD_CObj* cobj;
     HSD_GObj* gobj;
@@ -160,7 +155,7 @@ void un_8031EBBC_OnEnter(void* unused)
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6FB0->cameras->desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(gobj, vi0601_CameraCallback, 2);
+    GObj_SetupGXLinkMax(gobj, vi0601_GObj_OnRender, 2);
     HSD_CObjAddAnim(cobj, un_804D6FB0->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
@@ -188,7 +183,7 @@ void un_8031EBBC_OnEnter(void* unused)
     lbAudioAx_80024E50(0);
 }
 
-void vi_8031ED50_OnFrame(void)
+void vi0601_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

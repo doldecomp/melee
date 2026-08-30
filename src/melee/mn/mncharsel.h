@@ -25,8 +25,8 @@
 /* 264070 */ void mnCharSel_80264070(void);
 /* 26407C */ void fn_8026407C(HSD_GObj*);
 /* 2640A0 */ s32 mnCharSel_802640A0(void);
-/* 26688C */ void mnCharSel_8026688C_OnEnter(void*);
-/* 2669F4 */ void mnCharSel_802669F4_OnFrame(void);
-/* 266D70 */ void mnCharSel_80266D70_OnLeave(void*);
+/* 26688C */ void mnCharSel_Scene_OnEnter(void*);
+/* 2669F4 */ void mnCharSel_Scene_OnFrame(void);
+/* 266D70 */ void mnCharSel_Scene_OnExit(void*);
 
 #endif

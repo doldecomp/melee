@@ -36,8 +36,8 @@ struct gm_random_history {
     u8 stage_usage[0x1D];
 };
 
-/* 1BF060 */ static void onExitTitle(GameScene*);
-/* 1BF4DC */ static void onEnterVs(GameScene*);
+/* 1BF060 */ static void onExitTitle(GameModeState*);
+/* 1BF4DC */ static void onEnterVs(GameModeState*);
 /* 1BF634 */ static void gm_801BF634(s32, s32);
 /* 1BF648 */ static int gm_801BF648(s32);
 /* 1BF65C */ static void gm_801BF65C(s32, s8);
@@ -48,12 +48,12 @@ struct gm_random_history {
 /* 1BF6B8 */ static u8 gm_801BF6B8(void);
 /* 1BF6C8 */ static void gm_801BF6C8(int);
 /* 1BF6E8 */ static void gm_801BF6E8(int);
-/* 1BF728 */ static void onEnterCutsceneLuigi(GameScene*);
-/* 1BF834 */ static void onExitRegendCongrats(GameScene*);
-/* 1BF85C */ static void onEnterMovie(GameScene*);
-/* 1BF898 */ static void onExitMovie(GameScene*);
-/* 1BF8B8 */ static void onExitHowto(GameScene*);
-/* 1BF8D8 */ static void onExitOmake15(GameScene*);
+/* 1BF728 */ static void onEnterCutsceneLuigi(GameModeState*);
+/* 1BF834 */ static void onExitRegendCongrats(GameModeState*);
+/* 1BF85C */ static void onEnterMovie(GameModeState*);
+/* 1BF898 */ static void onExitMovie(GameModeState*);
+/* 1BF8B8 */ static void onExitHowto(GameModeState*);
+/* 1BF8D8 */ static void onExitOmake15(GameModeState*);
 /* 49C188 */ static StartMeleeData vs_enter_data;
 /* 49C2C0 */ static MatchExitInfo vs_exit_data;
 /* 4D6928 */ static UNK_T regend_congrats_enter_data;
@@ -61,7 +61,7 @@ struct gm_random_history {
 /* 4D6930 */ static UNK_T title_exit_data[2];
 /* 49E548 */ static struct gm_8049E548_t gm_8049E548;
 
-GameScene gm_803DFBC8_Scenes[] = {
+GameModeState gm_Mode_Opening_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -137,7 +137,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DFC70_Scenes[] = {
+GameModeState gm_Mode_DebugCutscene_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -285,7 +285,7 @@ GameScene gm_803DFC70_Scenes[] = {
     { -1 },
 };
 
-void onExitTitle(GameScene* arg0)
+void onExitTitle(GameModeState* arg0)
 {
     int* temp_r3 = gm_GetGameSceneLeaveData(arg0);
     if (DbLevel >= DbLKind_DebugRom) {
@@ -466,7 +466,7 @@ void gm_PreloadTitleDemo(void)
 
 extern const f32 gm_804DAC88;
 
-void onEnterVs(GameScene* arg0)
+void onEnterVs(GameModeState* arg0)
 {
     StartMeleeData* md;
     VsModeData* temp_r30;
@@ -619,7 +619,7 @@ static inline void gm_801BEFC0_noinline(int arg0)
     gm_801BEFC0_inner(arg0);
 }
 
-void onEnterCutsceneLuigi(GameScene* arg)
+void onEnterCutsceneLuigi(GameModeState* arg)
 {
     s32 temp_r31;
     s32 temp_r31_2;
@@ -643,32 +643,32 @@ void onEnterCutsceneLuigi(GameScene* arg)
     gm_801BEFC0_noinline(HSD_Randi(4));
 }
 
-void onExitRegendCongrats(GameScene* arg)
+void onExitRegendCongrats(GameModeState* arg)
 {
     gm_SetPendingGameMode(GM_TITLE);
     gm_SetNewGameModePending();
 }
 
-void onEnterMovie(GameScene* arg)
+void onEnterMovie(GameModeState* arg)
 {
-    PreloadCacheScene* temp_r31 = lbDvd_GetPreloadCacheScene();
+    PreloadedGameModeState* temp_r31 = lbDvd_GetPreloadCacheScene();
     PAD_STACK(4);
     lbDvd_800174BC();
     temp_r31->is_heap_persistent[1] = false;
     lbDvd_80018254();
 }
 
-void onExitMovie(GameScene* arg)
+void onExitMovie(GameModeState* arg)
 {
     lbMthp_8001F800();
 }
 
-void onExitHowto(GameScene* arg)
+void onExitHowto(GameModeState* arg)
 {
     lbMthp_8001F800();
 }
 
-void onExitOmake15(GameScene* arg)
+void onExitOmake15(GameModeState* arg)
 {
     lbMthp_8001F800();
 }

@@ -3,6 +3,6 @@
 
 #include "gm/types.h"
 
-/* 3DFA78 */ extern GameScene gm_803DFA78_Scenes[];
+/* 3DFA78 */ extern GameModeState gm_Mode_ToyCollection_States[];
 
 #endif

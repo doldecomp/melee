@@ -28,7 +28,7 @@ UNK_T gm_801ACC94(void)
 
 static HSD_GObj* gm_804D6850;
 
-void gm_801ACCA0_OnEnter(void* unused)
+void gm_Scene_HowTo_OnEnter(void* unused)
 {
     HSD_GObj* gobj;
     PAD_STACK(8);
@@ -49,7 +49,7 @@ void gm_801ACCA0_OnEnter(void* unused)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801ACD8C_OnFrame(void)
+void gm_Scene_HowTo_OnFrame(void)
 {
     bool var_r31 = false;
     PAD_STACK(4);

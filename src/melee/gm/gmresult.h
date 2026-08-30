@@ -48,7 +48,7 @@ struct StatsList;
 /* 176D3C */ UNK_RET fn_80176D3C(Vec3*);
 /* 176F60 */ UNK_RET fn_80176F60(UNK_PARAMS);
 /* 1771C0 */ UNK_RET fn_801771C0(ResultsData*);
-/* 177368 */ void gm_80177368_OnEnter(void*);
-/* 177704 */ void gm_80177704_OnLeave(void*);
+/* 177368 */ void gm_Scene_Results_OnEnter(void*);
+/* 177704 */ void gm_Scene_Results_OnExit(void*);
 
 #endif

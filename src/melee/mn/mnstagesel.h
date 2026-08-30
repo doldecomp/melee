@@ -14,9 +14,9 @@
 /* 25A560 */ void fn_8025A560(HSD_GObj*);
 /* 25A91C */ void fn_8025A91C(HSD_GObj*);
 /* 25A974 */ void fn_8025A974(HSD_GObj*, int);
-/* 25A998 */ void mnStageSel_8025A998_OnEnter(UNK_T);
-/* 25B850 */ void mnStageSel_8025B850_OnFrame(void);
-/* 25BB5C */ void mnStageSel_8025BB5C_OnLeave(UNK_T);
+/* 25A998 */ void mnStageSel_Scene_OnEnter(UNK_T);
+/* 25B850 */ void mnStageSel_Scene_OnFrame(void);
+/* 25BB5C */ void mnStageSel_Scene_OnExit(UNK_T);
 /* 25BBD4 */ int mnStageSel_8025BBD4(void);
 /* 25BC08 */ int mnStageSel_8025BC08(int);
 

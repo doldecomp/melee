@@ -18,7 +18,7 @@ extern UNK_T gm_804D6860[];
 extern StartMeleeData gm_80480530;
 extern MatchExitInfo gm_80479D98;
 
-GameScene gm_803DFE48_Scenes[] = {
+GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
         0,
         2,
@@ -58,7 +58,7 @@ GameScene gm_803DFE48_Scenes[] = {
     { -1 },
 };
 
-void gm_801BFA6C(GameScene* arg0)
+void gm_801BFA6C(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
@@ -72,7 +72,7 @@ void gm_801BFA6C(GameScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFABC(GameScene* arg0)
+void gm_801BFABC(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
@@ -97,7 +97,7 @@ void gm_801BFABC(GameScene* arg0)
     gm_8016F088(temp_r30);
 }
 
-void gm_801BFBA8(GameScene* arg0)
+void gm_801BFBA8(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     u8 temp_r0;
@@ -153,7 +153,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(GameScene* arg0)
+void gm_801BFCFC(GameModeState* arg0)
 {
     u8* var_r28;
     u32* temp_r29_2;
@@ -248,7 +248,7 @@ void gm_801BFCFC(GameScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFF7C(GameScene* arg0)
+void gm_801BFF7C(GameModeState* arg0)
 {
     gm_SetPendingGameMode((s8) gm_GetChallengerData()->x5);
     gm_SetNewGameModePending();

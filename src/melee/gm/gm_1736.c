@@ -59,7 +59,7 @@ u8 gm_801737D8(void)
     return challenger_data.x6;
 }
 
-void gm_801737E8_OnLoad(void)
+void gm_Mode_ChallengerApproach_OnLoad(void)
 {
     challenger_data.x6 = gm_GetPreviousGameMode();
     if (challenger_data.x0 == CHKIND_NONE) {

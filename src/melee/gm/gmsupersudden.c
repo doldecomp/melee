@@ -10,7 +10,7 @@
 #include "if/if_2FD9.h"
 #include "mn/types.h"
 
-GameScene gm_803DEEB0_Scenes[] = {
+GameModeState gm_Mode_SuperSuddenDeath_States[] = {
     {
         0,
         3,
@@ -110,22 +110,22 @@ GameScene gm_803DEEB0_Scenes[] = {
     { -1 },
 };
 
-void gm_801B8BB4(GameScene* scene)
+void gm_801B8BB4(GameModeState* scene)
 {
     gm_801A5618(scene, &gmMainLib_804D3EE0->unk_6D0, 3);
 }
 
-void gm_801B8BE0(GameScene* scene)
+void gm_801B8BE0(GameModeState* scene)
 {
     gm_801A5680(scene, &gmMainLib_804D3EE0->unk_6D0);
 }
 
-void gm_801B8C08(GameScene* scene)
+void gm_801B8C08(GameModeState* scene)
 {
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_6D0);
 }
 
-void gm_801B8C30(GameScene* scene)
+void gm_801B8C30(GameModeState* scene)
 {
     gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_6D0, 0);
 }
@@ -135,43 +135,43 @@ void fn_801B8C5C(PlayerInitData* arg0, PlayerInitData* unused)
     arg0->x12 = 0x12C;
 }
 
-void gm_801B8C68(GameScene* scene)
+void gm_801B8C68(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_6D0;
     gm_801A583C(scene, data, NULL, fn_801B8C5C);
 }
 
-void gm_801B8C9C(GameScene* scene)
+void gm_801B8C9C(GameModeState* scene)
 {
     gm_801A5AF0(scene, 4, 3);
 }
 
-void gm_801B8CC4(GameScene* scene)
+void gm_801B8CC4(GameModeState* scene)
 {
     gm_801A5C3C(scene, &gmMainLib_804D3EE0->unk_6D0, NULL, NULL);
 }
 
-void gm_801B8CF4(GameScene* scene)
+void gm_801B8CF4(GameModeState* scene)
 {
     gm_801A5EC8(scene);
 }
 
-void gm_801B8D14(GameScene* scene)
+void gm_801B8D14(GameModeState* scene)
 {
     gm_801A5F00(scene);
 }
 
-void gm_801B8D34(GameScene* scene)
+void gm_801B8D34(GameModeState* scene)
 {
     gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_6D0, 0);
 }
 
-void gm_801B8D60_OnInit(void)
+void gm_Mode_SuperSuddenDeath_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_6D0);
 }
 
-void gm_801B8D88_OnLoad(void)
+void gm_Mode_SuperSuddenDeath_OnLoad(void)
 {
     gm_801A55C4();
 }

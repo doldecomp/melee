@@ -242,7 +242,7 @@ void gm_801AF250(void)
     }
 }
 
-void gm_801AF568_OnFrame(void)
+void gm_Scene_MemCard_OnFrame(void)
 {
     int temp_r29;
     u8 _[0x14];
@@ -447,7 +447,7 @@ static inline bool checkUnk0(void)
     return true;
 }
 
-void gm_801B0264_OnEnter(void* user_data)
+void gm_Scene_MemCard_OnEnter(void* user_data)
 {
     struct enterData* data = user_data;
 
@@ -464,7 +464,7 @@ void gm_801B0264_OnEnter(void* user_data)
     gm_804D6872 = 6;
 }
 
-void gm_801B0304_OnLeave(void* user_data)
+void gm_Scene_MemCard_OnExit(void* user_data)
 {
     struct leaveData* data = user_data;
     if (data != NULL) {

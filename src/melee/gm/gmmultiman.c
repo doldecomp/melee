@@ -34,7 +34,7 @@ static u32 pad;
 static u8 gm_804D68F0;
 static s8 gm_804D68F1;
 
-GameScene gm_803DECB8_Scenes[] = {
+GameModeState gm_Mode_TargetTest_States[] = {
     {
         0,
         3,
@@ -62,7 +62,7 @@ GameScene gm_803DECB8_Scenes[] = {
     { 0xFF },
 };
 
-GameScene gm_803DED00_Scenes[] = {
+GameModeState gm_Mode_10ManVs_States[] = {
     {
         0,
         3,
@@ -90,7 +90,7 @@ GameScene gm_803DED00_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DED48_Scenes[] = {
+GameModeState gm_Mode_100ManVs_States[] = {
     {
         0,
         3,
@@ -118,7 +118,7 @@ GameScene gm_803DED48_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DED90_Scenes[] = {
+GameModeState gm_Mode_3Min_States[] = {
     {
         0,
         3,
@@ -146,7 +146,7 @@ GameScene gm_803DED90_Scenes[] = {
     { 0xFF },
 };
 
-GameScene gm_803DEDD8_Scenes[] = {
+GameModeState gm_Mode_15Min_States[] = {
     {
         0,
         3,
@@ -174,7 +174,7 @@ GameScene gm_803DEDD8_Scenes[] = {
     { 0xFF },
 };
 
-GameScene gm_803DEE20_Scenes[] = {
+GameModeState gm_Mode_EndlessVs_States[] = {
     {
         0,
         3,
@@ -202,7 +202,7 @@ GameScene gm_803DEE20_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DEE68_Scenes[] = {
+GameModeState gm_Mode_CruelVs_States[] = {
     {
         0,
         3,
@@ -235,7 +235,7 @@ UNK_T gm_801B6320(void)
     return &gmMainLib_804D3EE0->unk_530.unk_584;
 }
 
-void gm_801B632C(GameScene* arg0)
+void gm_801B632C(GameModeState* arg0)
 {
     struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
     CSSData* temp_r30 = gm_GetGameSceneLoadData(arg0);
@@ -252,7 +252,7 @@ void gm_801B632C(GameScene* arg0)
     gm_804D68E9 = lbTime_8000AF74(gm_804D68E9, 1);
 }
 
-void gm_801B63C4(GameScene* arg0)
+void gm_801B63C4(GameModeState* arg0)
 {
     struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
     CSSData* temp_r3 = gm_GetGameSceneLeaveData(arg0);
@@ -267,7 +267,7 @@ void gm_801B63C4(GameScene* arg0)
     gm_80168F88();
 }
 
-void gm_801B6428(GameScene* arg0)
+void gm_801B6428(GameModeState* arg0)
 {
     struct gmm_x0_584_t* temp_r31;
     StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(arg0);
@@ -310,14 +310,14 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.stkind = gm_801647F8(temp_r3->players[0].c_kind);
     {
-        PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
+        PreloadedGameModeState* scene = lbDvd_GetPreloadCacheScene();
         scene->game_cache.stkind = temp_r3->rules.stkind;
     }
     lbDvd_80018254();
     gm_8016F088(temp_r3);
 }
 
-void gm_801B65D4(GameScene* arg0)
+void gm_801B65D4(GameModeState* arg0)
 {
     s32 temp_r25;
     u8 temp_r25_2;
@@ -406,7 +406,7 @@ block_22:
     }
 }
 
-void gm_801B67E8_OnInit(void)
+void gm_Mode_TargetTest_OnInit(void)
 {
     struct gmm_x0_584_t* temp_r4 = &gmMainLib_804D3EE0->unk_530.unk_584;
     gmMainLib_804D3EE0->unk_530.unk_584.unk_584 = 0x21;
@@ -414,18 +414,18 @@ void gm_801B67E8_OnInit(void)
     temp_r4->unk_586 = 0x78;
 }
 
-void gm_801B6808_OnLoad(void)
+void gm_Mode_TargetTest_OnLoad(void)
 {
     gm_804D68E8 = gm_801677F0();
     gm_804D68E9 = 0;
 }
 
-void gm_801B6834(void)
+void gm_Mode_10ManVs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_1490);
 }
 
-void gm_801B685C(void)
+void gm_Mode_10ManVs_OnLoad(void)
 {
     gm_804D68F0 = gm_801677F0();
     gm_804D68F1 = 0;
@@ -474,7 +474,7 @@ bool gm_801B688C(bool arg0)
     return false;
 }
 
-static void gm_801B6AD8_inline(GameScene* scene, int x)
+static void gm_801B6AD8_inline(GameModeState* scene, int x)
 {
     CSSData* temp_r3;
     VsModeData* temp_r31;
@@ -524,7 +524,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x0_3 = 6;
 }
 
-void gm_801B6AD8(GameScene* scene)
+void gm_801B6AD8(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x11);
 }
@@ -578,7 +578,7 @@ static inline void gmMultiman_InitScoreRules(StartMeleeData* match)
     match->rules.x5_1 = false;
 }
 
-void gm_801B6B70(GameScene* scene)
+void gm_801B6B70(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -594,7 +594,7 @@ void gm_801B6B70(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
-void gm_801B6BE8(GameScene* scene)
+void gm_801B6BE8(GameModeState* scene)
 {
     VsModeData* temp_r31;
     UnkMultimanData* temp_r30;
@@ -661,7 +661,7 @@ static inline void gmMultiman_SaveCompletionRecord(VsModeData* multiman,
     }
 }
 
-void gm_801B6F44(GameScene* scene)
+void gm_801B6F44(GameModeState* scene)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r29;
@@ -684,12 +684,12 @@ void gm_801B6F44(GameScene* scene)
                                     GM_10MAN_VS);
 }
 
-void gm_801B7044(GameScene* scene)
+void gm_801B7044(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x12);
 }
 
-void gm_801B70DC(GameScene* scene)
+void gm_801B70DC(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -705,7 +705,7 @@ void gm_801B70DC(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
-void gm_801B7154(GameScene* scene)
+void gm_801B7154(GameModeState* scene)
 {
     VsModeData* temp_r31;
     UnkMultimanData* temp_r30;
@@ -737,7 +737,7 @@ void gm_801B7154(GameScene* scene)
     gm_80181B64(temp_r31->data.players[0].c_kind, 0x22, 0x0FFFFFFF);
 }
 
-void gm_801B74F0(GameScene* scene)
+void gm_801B74F0(GameModeState* scene)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r29;
@@ -759,12 +759,12 @@ void gm_801B74F0(GameScene* scene)
                                     GM_100MAN_VS);
 }
 
-void gm_801B75F0(GameScene* scene)
+void gm_801B75F0(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x13);
 }
 
-void gm_801B7688(GameScene* scene)
+void gm_801B7688(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -840,7 +840,7 @@ static inline void gmMultiman_SaveScoreRecord(UnkMultimanData* data,
     }
 }
 
-void gm_801B7700(GameScene* scene)
+void gm_801B7700(GameModeState* scene)
 {
     StartMeleeData* temp_r3;
     VsModeData* temp_r30;
@@ -860,7 +860,7 @@ void gm_801B7700(GameScene* scene)
     gmMultiman_InitRecord(temp_r30, temp_r27, 0x23);
 }
 
-void gm_801B7AA0(GameScene* scene)
+void gm_801B7AA0(GameModeState* scene)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r30;
@@ -881,12 +881,12 @@ void gm_801B7AA0(GameScene* scene)
     gmMultiman_SaveTimedRecord(temp_r30, temp_r3_2, temp_r31, false);
 }
 
-void gm_801B7B74(GameScene* scene)
+void gm_801B7B74(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x14);
 }
 
-void gm_801B7C0C(GameScene* scene)
+void gm_801B7C0C(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -902,7 +902,7 @@ void gm_801B7C0C(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
-void gm_801B7C84(GameScene* scene)
+void gm_801B7C84(GameModeState* scene)
 {
     VsModeData* temp_r30;
     StartMeleeData* temp_r3;
@@ -923,7 +923,7 @@ void gm_801B7C84(GameScene* scene)
     gmMultiman_InitRecord(temp_r30, temp_r27, 0x24);
 }
 
-void gm_801B8024(GameScene* scene)
+void gm_801B8024(GameModeState* scene)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r29;
@@ -944,12 +944,12 @@ void gm_801B8024(GameScene* scene)
     gmMultiman_SaveTimedRecord(temp_r29, temp_r3_2, temp_r30, true);
 }
 
-void gm_801B8110(GameScene* scene)
+void gm_801B8110(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x15);
 }
 
-void gm_801B81A8(GameScene* scene)
+void gm_801B81A8(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -965,7 +965,7 @@ void gm_801B81A8(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
-void gm_801B8220(GameScene* scene)
+void gm_801B8220(GameModeState* scene)
 {
     VsModeData* temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(scene);
@@ -983,7 +983,7 @@ void gm_801B8220(GameScene* scene)
     gmMultiman_InitScoreRecord(temp_r30, temp_r29, 0x25);
 }
 
-void gm_801B8580(GameScene* scene)
+void gm_801B8580(GameModeState* scene)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r30;
@@ -1004,12 +1004,12 @@ void gm_801B8580(GameScene* scene)
     gmMultiman_SaveScoreRecord(temp_r3_2, temp_r31);
 }
 
-void gm_801B863C(GameScene* scene)
+void gm_801B863C(GameModeState* scene)
 {
     gm_801B6AD8_inline(scene, 0x16);
 }
 
-void gm_801B86D4(GameScene* scene)
+void gm_801B86D4(GameModeState* scene)
 {
     VsModeData* data;
     CSSData* css_data;
@@ -1025,7 +1025,7 @@ void gm_801B86D4(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
-void gm_801B874C(GameScene* scene)
+void gm_801B874C(GameModeState* scene)
 {
     VsModeData* temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(scene);
@@ -1060,7 +1060,7 @@ void gm_801B874C(GameScene* scene)
     gmMultiman_InitScoreRecord(temp_r29, temp_r28, 0x26);
 }
 
-void gm_801B8AF8(GameScene* arg0)
+void gm_801B8AF8(GameModeState* arg0)
 {
     UnkMultimanData* temp_r3_2;
     VsModeData* temp_r30;

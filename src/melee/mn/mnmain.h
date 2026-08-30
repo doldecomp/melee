@@ -85,8 +85,8 @@ typedef struct _MenuInputState {
 /* 22D594 */ void mn_8022D594(HSD_GObj*);
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
-/* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
+/* 22DD38 */ void mnMain_Scene_OnFrame(void);
+/* 22DDA8 */ void mnMain_Scene_OnEnter(void*);
 /* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit

@@ -3,6 +3,6 @@
 
 #include "melee/gm/types.h"
 
-/* 3DD6D0 */ extern GameScene gm_803DD6D0_Scenes[];
+/* 3DD6D0 */ extern GameModeState gm_Mode_Debug_States[];
 
 #endif

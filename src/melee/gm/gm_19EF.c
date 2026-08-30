@@ -617,7 +617,7 @@ void fn_8019F9C4(u32 arg0)
     }
 }
 
-void gm_801A0A10_OnEnter(void* arg0_)
+void gm_Scene_GOver_OnEnter(void* arg0_)
 {
     DebugGameOverData* arg0 = arg0_;
 
@@ -645,7 +645,7 @@ void gm_801A0A10_OnEnter(void* arg0_)
     fn_8019F9C4(arg0->ckind);
 }
 
-void gm_801A0B18_OnLeave(void* arg0_)
+void gm_Scene_GOver_OnExit(void* arg0_)
 {
     DebugGameOverData* arg0 = arg0_;
     arg0->x4 = lbl_80479A98.x8;
@@ -677,7 +677,7 @@ static void fn_801A0B60(HSD_GObj* gobj)
     }
 }
 
-void gm_801A0C6C_OnEnter(void* unused)
+void gm_Scene_ComingSoon_OnEnter(void* unused)
 {
     SceneDesc* sp10;
     HSD_GObj* temp_r30;
@@ -713,7 +713,7 @@ void gm_801A0C6C_OnEnter(void* unused)
     lb_80011E24(temp_r3, &lbl_804D66F4, 1, -1);
 }
 
-void gm_801A0E0C_OnLeave(void* unused)
+void gm_Scene_ComingSoon_OnExit(void* unused)
 {
     lbArchive_80016EFC(lbl_804D66F0);
     lbAudioAx_800236DC();

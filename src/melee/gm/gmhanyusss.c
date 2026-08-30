@@ -6,10 +6,10 @@
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
 
-/* 1BEE58 */ static void gm_801BEE58(GameScene*);
+/* 1BEE58 */ static void gm_801BEE58(GameModeState*);
 /* 49C030 */ static CSSData gm_8049C030;
 
-GameScene gm_803DFAD8_Scenes[] = {
+GameModeState gm_Mode_HanyuSss_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -25,7 +25,7 @@ GameScene gm_803DFAD8_Scenes[] = {
     { -1 },
 };
 
-void gm_801BEE58(GameScene* arg0)
+void gm_801BEE58(GameModeState* arg0)
 {
     SSSData* var_r3 = gm_GetGameSceneLoadData(arg0);
     var_r3->data = gmMainLib_804D3EE0->unk_590;

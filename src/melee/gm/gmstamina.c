@@ -15,7 +15,7 @@
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
 
-GameScene gm_803DF138_Scenes[] = {
+GameModeState gm_Mode_StaminaVs_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -61,7 +61,7 @@ static struct {
     u16 slomo_counter[4]; ///< Ticks up to 100 when player is eliminated
 } gm_804975F8;
 
-void gm_801B91C8(GameScene* arg0)
+void gm_801B91C8(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
     CSSData* css = gm_GetGameSceneLoadData(arg0);
@@ -71,17 +71,17 @@ void gm_801B91C8(GameScene* arg0)
     lbDvd_800174BC();
 }
 
-void gm_801B922C(GameScene* scene)
+void gm_801B922C(GameModeState* scene)
 {
     gm_801A5680(scene, &gmMainLib_804D3EE0->unk_10D0);
 }
 
-void gm_801B9254(GameScene* scene)
+void gm_801B9254(GameModeState* scene)
 {
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_10D0);
 }
 
-void gm_801B927C(GameScene* arg0)
+void gm_801B927C(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
     SSSData* sss = gm_GetGameSceneLeaveData(arg0);
@@ -96,7 +96,7 @@ void gm_801B927C(GameScene* arg0)
     gm_SetPendingSceneIndex(0);
 }
 
-void gm_801B931C(GameScene* arg0)
+void gm_801B931C(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
     StartMeleeData* start = gm_GetGameSceneLoadData(arg0);
@@ -125,19 +125,19 @@ void gm_801B931C(GameScene* arg0)
     gm_80168FC4();
 }
 
-void gm_801B9560(GameScene* scene)
+void gm_801B9560(GameModeState* scene)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
     gm_80168710(&gm_80479D98.match_end, vs);
     gm_801A5AF0(scene, 0, 0);
 }
 
-void gm_801B95B0_OnInit(void)
+void gm_Mode_StaminaVs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_10D0);
 }
 
-void gm_801B95D8_OnLoad(void)
+void gm_Mode_StaminaVs_OnLoad(void)
 {
     gm_SetGameSpeed(1.0F);
     gm_801A55C4();

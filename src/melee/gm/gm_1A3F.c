@@ -1,39 +1,59 @@
 #include "gm_1A3F.h"
 
+#include "gm_1A36.h"
 #include "gm_1A45.h"
 #include "gmmain_lib.h"
+#include "gmscdata.h"
+#include "types.h"
 
 #include "db/db.h"
-#include "gm/gm_1A36.h"
-#include "gm/gmscdata.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbcardgame.h"
+#include "lb/lbcardnew.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
 #include "lb/lbmthp.h"
 #include "lb/lbsnap.h"
 #include "lb/types.h"
 #include "ty/toy.h"
+#include "ty/tydisplay.h"
 
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/ty/tydisplay.h>
 
-/* 1A3F48 */ static void gm_801A3F48(GameScene*);
-/* 479D30 */ static GameState gm_80479D30;
+struct routingInfo {
+    u8 curr_mode;     ///< ::GameModeKind
+    u8 pending_mode;  ///< ::GameModeKind
+    u8 prev_mode;     ///< ::GameModeKind
+    u8 curr_state_id; ///< from ::GameModeState::id
+    u8 prev_state_id;
+    u8 next_state_id;
+};
+ASSERT_SIZE(struct routingInfo, 0x6);
 
-void gm_801A3F48(GameScene* scene)
+struct stateMachine {
+    struct routingInfo routing;
+    struct routingInfo backup_routing;
+    u8 pending_mode_change; ///< ::bool
+    u8 (*get_override)(void);
+};
+ASSERT_SIZE(struct stateMachine, 0x14);
+
+/* 1A3F48 */ static void preloadState(GameModeState*);
+/* 1A4014 */ static void gm_801A4014(GameMode*);
+/* 1A43A0 */ static u8 runGameMode(u8 mode);
+/* 479D30 */ static struct stateMachine state_machine;
+
+void preloadState(GameModeState* state)
 {
-    PreloadCacheScene* temp_r31;
+    PreloadedGameModeState* preloaded_state;
 
-    lbDvd_80018CF4(scene->preload);
-    switch (scene->info.scene_id) {
+    lbDvd_80018CF4(state->preload);
+    switch (state->info.scene_kind) {
     case GS_STAFFROLL:
     case GS_RESULTS:
         HSD_SisLib_803A6048(0xC000);
@@ -45,12 +65,12 @@ void gm_801A3F48(GameScene* scene)
         HSD_SisLib_803A6048(0x4800);
         break;
     }
-    temp_r31 = lbDvd_GetPreloadCacheScene();
+    preloaded_state = lbDvd_GetPreloadCacheScene();
     if (lbHeap_80015BB8(2) == 0) {
-        temp_r31->is_heap_persistent[0] = true;
+        preloaded_state->is_heap_persistent[0] = true;
     }
     if (lbHeap_80015BB8(3) == 0) {
-        temp_r31->is_heap_persistent[1] = true;
+        preloaded_state->is_heap_persistent[1] = true;
     }
     lbDvd_80018254();
     lb_8001C5A4();
@@ -60,45 +80,45 @@ void gm_801A3F48(GameScene* scene)
     tyDisplay_8031C8B8();
 }
 
-static inline u8 firstScene(GameScene* scene, u8 sentinel)
+static inline u8 firstState(GameModeState* state, u8 next_id)
 {
-    for (; scene->idx != 0xFF; scene++) {
+    for (; state->id != (u8) -1; state++) {
         do {
-            if (scene->idx == sentinel) {
+            if (state->id == next_id) {
                 break;
             }
         } while (0);
-        return scene->idx;
+        return state->id;
     }
     return 0;
 }
 
-static inline u8 nextScene(GameScene* scenes)
+static inline u8 nextState(GameModeState* states)
 {
-    GameScene* it = scenes;
-    u8 current = gm_80479D30.routing.curr_scene_idx;
+    GameModeState* next = states;
+    u8 curr_id = state_machine.routing.curr_state_id;
     int i;
-    u8 next_scene;
-    GameScene* cur = scenes;
+    u8 next_id;
+    GameModeState* cur = states;
 
-    for (i = 0; (next_scene = it->idx) != 0xFF; i++) {
-        if (cur->idx > current) {
-            return scenes[i].idx;
+    for (i = 0; (next_id = next->id) != (u8) -1; i++) {
+        if (cur->id > curr_id) {
+            return states[i].id;
         }
         cur++;
-        it++;
+        next++;
     }
 
-    return firstScene(scenes, next_scene);
+    return firstState(states, next_id);
 }
 
-static inline GameScene* findScene(GameScene* scene)
+static inline GameModeState* findState(GameModeState* state)
 {
     int i, j;
-    for (i = gm_80479D30.routing.curr_scene_idx; i < 0xFF; i++) {
-        for (j = 0; scene[j].idx != 0xFF; j++) {
-            if (i == scene[j].idx) {
-                return &scene[j];
+    for (i = state_machine.routing.curr_state_id; i < U8_MAX; i++) {
+        for (j = 0; state[j].id != (u8) -1; j++) {
+            if (i == state[j].id) {
+                return &state[j];
             }
         }
     }
@@ -107,67 +127,63 @@ static inline GameScene* findScene(GameScene* scene)
 
 void gm_801A4014(GameMode* mode)
 {
-    GameSceneHandler* handler;
     GameScene* scene;
-    GameState* gm;
+    GameModeState* state;
+    struct stateMachine* sm;
     struct GameSceneInfo* info;
-    u32 dead;
-    u32 unused[2];
+    u32 dead; ///< @todo regswap hack
+    PAD_STACK(2 * 4);
 
-    gm = &gm_80479D30;
+    sm = &state_machine;
+    state = findState(mode->states);
+    sm->routing.curr_state_id = state->id;
 
-    scene = findScene(mode->scenes);
-
-    gm->routing.curr_scene_idx = scene->idx;
-
-    gm_801A3F48(scene);
-    if (scene->on_enter != NULL) {
-        scene->on_enter(scene);
+    preloadState(state);
+    if (state->on_enter != NULL) {
+        state->on_enter(state);
     }
-    info = &scene->info;
-    handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
-                                       info->scene_id) |
-                                   (dead = 0));
+    info = &state->info;
+    scene =
+        (GameScene*) ((uintptr_t) gm_FindGameSceneHandler(info->scene_kind) |
+                      (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
-    if (handler->on_load != NULL) {
-        handler->on_load(info->load_data);
+    if (scene->on_enter != NULL) {
+        scene->on_enter(info->enter_data);
     }
-    gm_801A4D34(handler->on_frame, info);
-    if (!gmMainLib_8046B0F0.resetting && handler->on_leave != NULL) {
-        handler->on_leave(info->leave_data);
+    gm_801A4D34(scene->on_frame, info);
+    if (!gmMainLib_8046B0F0.resetting && scene->on_exit != NULL) {
+        scene->on_exit(info->exit_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
-        if (scene->on_exit != NULL) {
-            scene->on_exit(scene);
+        if (state->on_exit != NULL) {
+            state->on_exit(state);
         }
 
-        gm_80479D30.routing.prev_scene_idx = gm->routing.curr_scene_idx;
+        state_machine.routing.prev_state_id = sm->routing.curr_state_id;
 
-        if (gm->routing.pending_scene_idx) {
-            gm->routing.curr_scene_idx = gm->routing.pending_scene_idx - 1;
-            gm->routing.pending_scene_idx = 0;
+        if (sm->routing.next_state_id) {
+            sm->routing.curr_state_id = sm->routing.next_state_id - 1;
+            sm->routing.next_state_id = 0;
         } else {
-            gm->routing.curr_scene_idx = nextScene(mode->scenes);
+            sm->routing.curr_state_id = nextState(mode->states);
         }
     }
     lb_8001CDB4();
-    lb_8001B760(0xB);
+    lb_8001B760(11);
     lbMthp_8001F800();
     if (gmMainLib_8046B0F0.resetting) {
         lbAudioAx_80027DBC();
         HSD_PadReset();
-        while (lb_8001B6F8() == 0xB)
-            ;
+        while (lb_8001B6F8() == 11);
         if (DVDCheckDisk() == 0) {
             OSResetSystem(1, 0, 0);
         }
         lbMthp_8001F800();
-        while (HSD_DevComIsBusy(1))
-            ;
+        while (HSD_DevComIsBusy(1));
         gmMainLib_8015FBA4();
         gm_GetAllGameModes();
-        memzero(&gm_80479D30, sizeof(gm_80479D30));
+        memzero(&state_machine, sizeof(state_machine));
         gm_801A3EF4();
         gmMainLib_8046B0F0.skip_intro = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
@@ -175,67 +191,67 @@ void gm_801A4014(GameMode* mode)
     }
 }
 
-void* gm_GetGameSceneLoadData(GameScene* scene)
+void* gm_GetGameSceneLoadData(GameModeState* scene)
 {
-    return scene->info.load_data;
+    return scene->info.enter_data;
 }
 
-void* gm_GetGameSceneLeaveData(GameScene* scene)
+void* gm_GetGameSceneLeaveData(GameModeState* state)
 {
-    return scene->info.leave_data;
+    return state->info.exit_data;
 }
 
 void gm_SetSceneIndex(u8 arg0)
 {
-    gm_80479D30.routing.curr_scene_idx = arg0;
-    gm_80479D30.routing.prev_scene_idx = arg0;
+    state_machine.routing.curr_state_id = arg0;
+    state_machine.routing.prev_state_id = arg0;
 }
 
 /// @note Actually sets the pending scene to the scene following the input
-void gm_SetPendingSceneIndex(u8 pending_scene)
+void gm_SetPendingSceneIndex(u8 next_scene)
 {
-    gm_80479D30.routing.pending_scene_idx = pending_scene + 1;
+    state_machine.routing.next_state_id = next_scene + 1;
 }
 
 u8 gm_GetPreviousSceneIndex(void)
 {
-    return gm_80479D30.routing.prev_scene_idx;
+    return state_machine.routing.prev_state_id;
 }
 
 u8 gm_GetCurrentSceneIndex(void)
 {
-    return gm_80479D30.routing.curr_scene_idx;
+    return state_machine.routing.curr_state_id;
 }
 
 void gm_SetNewGameModePending(void)
 {
-    gm_80479D30.pending = 1;
+    state_machine.pending_mode_change = true;
 }
 
-void gm_SetPendingGameMode(s8 pending_mode)
+void gm_SetPendingGameMode(u8 pending_mode)
 {
-    gm_80479D30.routing.pending_mode = pending_mode;
+    state_machine.routing.pending_mode = pending_mode;
 }
 
 void gm_ChangeGameModeAfterCurrentScene(int pending_mode)
 {
-    gm_80479D30.routing.pending_mode = pending_mode;
-    gm_80479D30.pending = 1;
+    state_machine.routing.pending_mode = pending_mode;
+    state_machine.pending_mode_change = true;
 }
 
 u8 gm_GetCurrentGameMode(void)
 {
-    return gm_80479D30.routing.curr_mode;
+    return state_machine.routing.curr_mode;
 }
 
 u8 gm_GetPreviousGameMode(void)
 {
-    return gm_80479D30.routing.prev_mode;
+    return state_machine.routing.prev_mode;
 }
 
 void gm_SetGameModeOverride(u8 (*mode)(void))
 {
-    gm_80479D30.game_mode_override = mode;
+    state_machine.get_override = mode;
 }
 
 bool gm_Is1PMode(u8 mode)
@@ -259,50 +275,47 @@ bool gm_Is1PMode(u8 mode)
     return false;
 }
 
-static inline GameMode* findMode(u8 idx)
+static inline GameMode* findMode(u8 kind)
 {
     GameMode* cur;
-    for (cur = gm_GetAllGameModes(); cur->idx != GM_COUNT; cur++) {
-        if (cur->idx == idx) {
+    for (cur = gm_GetAllGameModes(); cur->kind != GM_COUNT; cur++) {
+        if (cur->kind == kind) {
             return cur;
         }
     }
     return NULL;
 }
 
-u8 gm_RunGameMode(u8 mode_kind)
+u8 runGameMode(u8 mode_kind)
 {
-    u8 temp_r3;
+    u8 override;
     GameMode* mode;
-    GameMode* var_r3_2;
-    GameState* gamestate = &gm_80479D30;
-    u64 unused;
+    struct stateMachine* sm = &state_machine;
+    PAD_STACK(2 * 4);
 
     mode = findMode(mode_kind);
 
-    gm_80479D30.pending = 0;
-    gm_80479D30.routing.curr_scene_idx = 0;
-    gm_80479D30.routing.prev_scene_idx = 0;
-    gm_80479D30.routing.pending_scene_idx = 0;
-    lbDvd_80018F58(mode->preload);
+    state_machine.pending_mode_change = false;
+    state_machine.routing.curr_state_id = 0;
+    state_machine.routing.prev_state_id = 0;
+    state_machine.routing.next_state_id = 0;
+    lbDvd_80018F58(mode->preloaded);
     if (mode->on_load != NULL) {
         mode->on_load();
     }
-    while (!gamestate->pending) {
-        if (gm_80479D30.game_mode_override != NULL &&
-            (temp_r3 = gm_80479D30.game_mode_override(), temp_r3 != GM_COUNT))
+    while (!sm->pending_mode_change) {
+        if (state_machine.get_override != NULL &&
+            (override = state_machine.get_override(), override != GM_COUNT))
         {
-            gm_80479D30.backup = gm_80479D30.routing;
-            gamestate->pending = 0;
-            gamestate->routing.curr_scene_idx = 0;
-            gamestate->routing.prev_scene_idx = 0;
-            gamestate->routing.pending_scene_idx = 0;
+            state_machine.backup_routing = state_machine.routing;
+            sm->pending_mode_change = false;
+            sm->routing.curr_state_id = 0;
+            sm->routing.prev_state_id = 0;
+            sm->routing.next_state_id = 0;
 
-            var_r3_2 = findMode(temp_r3);
-
-            gm_801A4014(var_r3_2);
+            gm_801A4014(findMode(override));
             if (!gmMainLib_8046B0F0.resetting) {
-                gm_80479D30.routing = gm_80479D30.backup;
+                state_machine.routing = state_machine.backup_routing;
             }
         } else {
             gm_801A4014(mode);
@@ -311,21 +324,21 @@ u8 gm_RunGameMode(u8 mode_kind)
     if (!gmMainLib_8046B0F0.resetting && mode->on_unload != NULL) {
         mode->on_unload();
     }
-    return gm_80479D30.routing.pending_mode;
+    return state_machine.routing.pending_mode;
 }
 
 /// UnclePunch: Scene_Main
 void gm_801A4510(void)
 {
-    u32 unused;
     GameMode* modes;
-    GameState* gamestate = &gm_80479D30;
+    struct stateMachine* gamestate = &state_machine;
     int i;
+    PAD_STACK(2 * 4);
 
     gm_GetAllGameModes();
-    memzero(&gm_80479D30, sizeof(GameState));
+    memzero(&state_machine, sizeof(struct stateMachine));
     modes = gm_GetAllGameModes();
-    for (i = 0; modes[i].idx != GM_COUNT; i++) {
+    for (i = 0; modes[i].kind != GM_COUNT; i++) {
         if (modes[i].on_init != NULL) {
             modes[i].on_init();
         }
@@ -333,14 +346,14 @@ void gm_801A4510(void)
     if (VIGetDTVStatus() != 0 &&
         (db_gameLaunchButtonState & HSD_PAD_B || OSGetProgressiveMode() == 1))
     {
-        gm_80479D30.routing.curr_mode = GM_PROGRESSIVE_SCAN;
+        state_machine.routing.curr_mode = GM_PROGRESSIVE_SCAN;
     } else {
-        gm_80479D30.routing.curr_mode = GM_BOOT;
+        state_machine.routing.curr_mode = GM_BOOT;
     }
-    gm_80479D30.routing.prev_mode = GM_COUNT;
+    state_machine.routing.prev_mode = GM_COUNT;
 
     while (true) {
-        u8 next_mode = gm_RunGameMode(gm_80479D30.routing.curr_mode);
+        u8 next_mode = runGameMode(state_machine.routing.curr_mode);
         if (gmMainLib_8046B0F0.resetting) {
             gmMainLib_8046B0F0.resetting = false;
         }

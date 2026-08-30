@@ -124,14 +124,14 @@ void vi0502_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0502_8031E328(HSD_GObj* gobj, int unused)
+static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
     vi_RunCamera(gobj, (u8*) &erase_colors_vi0502, 0x281);
 }
 
-void vi0502_RunFrame(HSD_GObj* gobj)
+void vi0502_GObj_OnProc(HSD_GObj* gobj)
 {
     HSD_CObj* cobj;
 
@@ -148,7 +148,7 @@ void vi0502_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void un_8031E444_OnEnter(void* arg)
+void vi0502_Scene_OnEnter(void* arg)
 {
     u8 char_index;
     Vi0502Data* data;
@@ -196,11 +196,11 @@ void un_8031E444_OnEnter(void* arg)
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F90->cameras->desc);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(camera_gobj,
-                        (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
+                        (void (*)(HSD_GObj*, int)) vi0502_GObj_OnRender, 5);
     HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(camera_gobj, vi0502_RunFrame, 0);
+    HSD_GObj_SetupProc(camera_gobj, vi0502_GObj_OnProc, 0);
 
     for (i = 0; un_804D6F90->models[i] != NULL; i++) {
         model_gobj = GObj_Create(0xE, 0xF, 0);
@@ -219,6 +219,11 @@ void un_8031E444_OnEnter(void* arg)
     costume1 = desc->p1_costume_index;
     costume2 = desc->p2_costume_index;
     vi0502_8031E124(char_index, costume1, costume2);
+}
+
+void vi0502_Scene_OnFrame(void)
+{
+    vi_8031CAAC();
 }
 
 Vi0502Data un_804000D0 = {
