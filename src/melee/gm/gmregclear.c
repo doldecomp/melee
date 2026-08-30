@@ -709,12 +709,25 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    u8* out_color = colors;
     s32 color_idx;
+    u8* out_color = colors;
     s8* kind_iter = arg2;
+    u8 num_colors;
+    u8 result;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
-        *out_color = gm_8017CD94(arg1, (u8) *kind_iter, count, color_idx);
+        num_colors = gm_80169238((u8) *kind_iter);
+        if (arg1->x54 != NULL) {
+            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
+            if (num_colors != 0) {
+                result %= num_colors;
+            } else {
+                result = 0;
+            }
+        } else {
+            result = 0;
+        }
+        *out_color = result;
         out_color++;
         kind_iter++;
     }
