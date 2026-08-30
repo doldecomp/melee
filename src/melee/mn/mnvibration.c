@@ -214,6 +214,11 @@ static inline u8 mnVibration_GetCursorRow(MnVibrationData* data)
     return data->x0[1];
 }
 
+static inline s32 mnVibration_GetPreviousCursorRow(s32 cursor_row)
+{
+    return cursor_row - 1;
+}
+
 static inline s32 mnVibration_GetNextCursorRow(s32 cursor_row)
 {
     return cursor_row + 1;
@@ -373,7 +378,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 } else {
                     HSD_JObj* panel_jobj2;
 
-                    PAD_STACK(104);
+                    PAD_STACK(100);
                     gmMainLib_8015ED4C(i, 1);
                     rumble_setting = mnVibration_GetPortRumble(i);
                     temp_jobj =
@@ -402,8 +407,11 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     }
 
     // Handle name list navigation if names exist
-    if (GetNameCount() == 0) {
-        return;
+    {
+        s32 names_empty = GetNameCount() == 0;
+        if (names_empty) {
+            return;
+        }
     }
 
     // Check for up/down navigation
@@ -457,7 +465,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     if (inputs_repeat & (0x10LL << 32)) {
         cursor_row = mnVibration_GetCursorRow(data);
         if (cursor_row != 0) {
-            s32 name_row = cursor_row - 1;
+            s32 name_row = mnVibration_GetPreviousCursorRow(cursor_row);
             name_idx = mnVibration_GetNameSlot(data, name_row);
             if (name_idx != 0xFF) {
                 MnVibrationData* data2;
