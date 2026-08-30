@@ -696,12 +696,12 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj_pair[2];
     HSD_JObj* temp_jobj;
-    GXColor tally_color_copy;
+    HSD_GObj* leaf;
     Vec3 xform_result;
     f32 proj[8];
     s32 tally_color;
     GXColor tally_color2;
-    HSD_GObj* leaf;
+    GXColor tally_color_copy;
     f32 fov_scale;
     f32 offset1, offset2;
     HSD_JObj* ptcl_jobj3;
