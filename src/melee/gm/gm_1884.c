@@ -144,35 +144,39 @@ int fn_801884F8(void)
     return result;
 }
 
+/* `player` walks the whole TrainingModeState by PlayerInitData strides, so
+ * each use re-bases it onto the players array. */
+#define PLAYER_AT(p)                                                          \
+    ((PlayerInitData*) ((p) + offsetof(TrainingModeState, players)))
+
 void fn_80188550(int arg0)
 {
-    TrainingModeState* state = &lbl_80473700;
-    int current = state->count;
+    int current = lbl_80473700.count;
     int j;
     int to_remove;
 
     if (arg0 != current) {
-        if (arg0 > state->count) {
-            PlayerInitData* player;
+        if (arg0 > lbl_80473700.count) {
+            u8* player;
             int i;
             int skip;
             int remaining;
 
-            skip = state->count;
-            player = state->players;
+            skip = lbl_80473700.count;
+            player = (u8*) &lbl_80473700;
             remaining = arg0 - current;
             i = 0;
             j = 0;
 
-            for (i = 0; i < 4; i++, player++) {
+            for (i = 0; i < 4; i++, player += sizeof(PlayerInitData)) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
-                            player->slot_type = 1;
+                            PLAYER_AT(player)->slot_type = 1;
                         } else {
-                            player->slot_type = j;
+                            PLAYER_AT(player)->slot_type = j;
                         }
-                        gm_8016EDDC(i, player);
+                        gm_8016EDDC(i, PLAYER_AT(player));
                         if (--remaining == 0) {
                             break;
                         }
@@ -197,9 +201,11 @@ void fn_80188550(int arg0)
                 }
             }
         }
-        state->count = arg0;
+        lbl_80473700.count = arg0;
     }
 }
+
+#undef PLAYER_AT
 
 void fn_80188644(void)
 {

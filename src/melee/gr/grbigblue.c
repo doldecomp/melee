@@ -3086,7 +3086,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
                 {
                     u8* p = (u8*) gp;
                     i = 0;
-                    if (k > 0) {
+                    {
                         s32 ctr = k;
                         while (ctr > 0) {
                             if (((grBb_LaneBits*) (p + 0xD4))->lane ==

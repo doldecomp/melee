@@ -497,16 +497,54 @@ int fn_801701B8(void)
     return lbl_804D65A0;
 }
 
+/// One bubble pass over @p base, used by the two @c u32 sorts in
+/// #fn_801701C0.
+///
+/// The two sorts there are the only ones whose loop guard the original emits
+/// as
+/// @c cmplwi + @c ble rather than @c cmpwi + @c ble, which is why @p n is
+/// unsigned; and the pointer has to live inside an inline expansion, because a
+/// caller-level local is coloured after the compare temp and takes r4 instead
+/// of r3. The other five sorts in this function are written inline with plain
+/// @c vals[i] indexing, which puts their pointer in the same @c \@ band by way
+/// of strength reduction.
+static inline void gm_16F1_SortDescPass(u32* base, u32 n)
+{
+    int i;
+    u32* p = base;
+    for (i = 0; i < n; i++) {
+        if (p[0] > p[1]) {
+            u32 tmp = p[1];
+            p[1] = p[0];
+            p[0] = tmp;
+        }
+        p++;
+    }
+}
+
+static inline void gm_16F1_SortAscPass(u32* base, u32 n)
+{
+    int i;
+    u32* p = base;
+    for (i = 0; i < n; i++) {
+        if (p[0] < p[1]) {
+            u32 tmp = p[1];
+            p[1] = p[0];
+            p[0] = tmp;
+        }
+        p++;
+    }
+}
+
 int fn_801701C0(void* arg0, int arg1, int arg2)
 {
     struct lbl_8046B6A0_24C_t* rules = arg0;
     struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
+    s32 player_net;
     s32 scores[6];
     u8 rankings[7] = { 0 };
-    s32 player_net;
-    int i;
 
     if (lbl_804D65A0 != 0) {
         return 0;
@@ -518,30 +556,39 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     if (rules->x5 == 3) {
         fn_80171B64((struct lbl_804D65A8_t*) rankings);
     } else {
-        for (i = 0; i < 6; i++) {
-            if (x58[i].x0 != 3) {
-                u16 xA = x58[i].xA;
-                scores[i] =
-                    x58[i].x20 - (x58[i].x24 - xA) + *(s8*) &rules->xC * xA;
+        int k;
+
+        for (k = 0; k < 6; k++) {
+            if (x58[k].x0 != 3) {
+                u16 xA = x58[k].xA;
+                scores[k] =
+                    (x58[k].x20 - (x58[k].x24 - xA)) + ((s8) rules->xC * xA);
             }
         }
 
-        for (i = 0; i < 6; i++) {
-            if (x58[i].x0 != 3) {
-                int j;
-                for (j = 0; j < 6; j++) {
-                    if (x58[j].x0 != 3 && i != j && scores[i] < scores[j]) {
-                        rankings[i]++;
+        {
+            int idx;
+            for (idx = 0; idx < 6; idx++) {
+                if (x58[idx].x0 != 3) {
+                    int j;
+
+                    for (j = 0; j < 6; j++) {
+                        if (x58[j].x0 != 3 && idx != j &&
+                            scores[idx] < scores[j])
+                        {
+                            rankings[idx]++;
+                        }
                     }
-                }
-                if (rankings[6] < rankings[i]) {
-                    rankings[6] = rankings[i];
+
+                    if (rankings[6] < rankings[idx]) {
+                        rankings[6] = rankings[idx];
+                    }
                 }
             }
         }
     }
 
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     switch (arg2) {
     case 0xD7:
@@ -549,10 +596,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             return 0;
         }
         {
-            u8* rank = rankings;
             int i;
-            for (i = 0; i < 4; i++, rank++) {
-                if (x58[i].x0 != 3 && i != arg1 && *rank == 0) {
+            for (i = 0; i < 4; i++) {
+                if (x58[i].x0 != 3 && i != arg1 && rankings[i] == 0) {
                     return 0;
                 }
             }
@@ -567,17 +613,16 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             return 0;
         }
         {
-            u8* rank = rankings;
-            u8 max_rank = rankings[6];
             int i;
-            for (i = 0; i < 4; i++, rank++) {
-                if (x58[i].x0 != 3 && i != arg1 && *rank == max_rank) {
+            for (i = 0; i < 4; i++) {
+                if (x58[i].x0 != 3 && i != arg1 && rankings[i] == rankings[6])
+                {
                     return 0;
                 }
             }
-            if (rankings[arg1] == max_rank) {
-                return 1;
-            }
+        }
+        if (rankings[arg1] == rankings[6]) {
+            return 1;
         }
         return 0;
 
@@ -611,34 +656,29 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDB: {
         s32 vals[4];
-        s32* base;
-        s32* p;
         int i, j;
         if (x58[arg1].x20 >= 3) {
-            base = vals;
             {
                 typedef struct {
                     s32 a, b, c, d;
                 } copy_t;
-                *(copy_t*) base = *(copy_t*) zeroes->x0;
+                *(copy_t*) vals = *(copy_t*) zeroes->x0;
             }
             for (i = 0; i < 4; i++) {
                 if (x58[i].x0 != 3) {
-                    base[i] = x58[i].x20;
+                    vals[i] = x58[i].x20;
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
+                for (i = 0; i < j; i++) {
+                    if (vals[i] < vals[i + 1]) {
+                        s32 tmp = vals[i + 1];
+                        vals[i + 1] = vals[i];
+                        vals[i] = tmp;
                     }
-                    p++;
                 }
             }
-            if (base[0] == x58[arg1].x20 && base[0] >= base[1] * 2) {
+            if (vals[0] == x58[arg1].x20 && vals[0] >= vals[1] * 2) {
                 return 1;
             }
         }
@@ -666,34 +706,29 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDD: {
         s32 vals[4];
-        s32* base;
-        s32* p;
         int i, j;
         if (x58[arg1].x40 >= 3) {
-            base = vals;
             {
                 typedef struct {
                     s32 a, b, c, d;
                 } copy_t;
-                *(copy_t*) base = *(copy_t*) zeroes->x10;
+                *(copy_t*) vals = *(copy_t*) zeroes->x10;
             }
             for (i = 0; i < 4; i++) {
                 if (x58[i].x0 != 3) {
-                    base[i] = x58[i].x40;
+                    vals[i] = x58[i].x40;
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
+                for (i = 0; i < j; i++) {
+                    if (vals[i] < vals[i + 1]) {
+                        s32 tmp = vals[i + 1];
+                        vals[i + 1] = vals[i];
+                        vals[i] = tmp;
                     }
-                    p++;
                 }
             }
-            if (base[0] == x58[arg1].x40 && base[0] >= base[1] * 2) {
+            if (vals[0] == x58[arg1].x40 && vals[0] >= vals[1] * 2) {
                 return 1;
             }
         }
@@ -721,36 +756,31 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDF: {
         s32 vals[4];
-        s32* base;
-        s32* p;
         int i, j;
         player_net = x58[arg1].x24 - x58[arg1].xA;
         if ((u32) player_net >= 3) {
-            base = vals;
             {
                 typedef struct {
                     s32 a, b, c, d;
                 } copy_t;
-                *(copy_t*) base = *(copy_t*) zeroes->x20;
+                *(copy_t*) vals = *(copy_t*) zeroes->x20;
             }
             for (i = 0; i < 4; i++) {
                 if (x58[i].x0 != 3) {
-                    base[i] = x58[i].x24 - x58[i].xA;
+                    vals[i] = x58[i].x24 - x58[i].xA;
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
+                for (i = 0; i < j; i++) {
+                    if (vals[i] < vals[i + 1]) {
+                        s32 tmp = vals[i + 1];
+                        vals[i + 1] = vals[i];
+                        vals[i] = tmp;
                     }
-                    p++;
                 }
             }
-            if ((u32) base[0] == (u32) (x58[arg1].x24 - x58[arg1].xA) &&
-                base[0] >= base[1] * 2)
+            if ((u32) vals[0] == (u32) (x58[arg1].x24 - x58[arg1].xA) &&
+                vals[0] >= vals[1] * 2)
             {
                 return 1;
             }
@@ -780,34 +810,29 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xE1: {
         s32 vals[4];
-        s32* base;
-        s32* p;
         int i, j;
         if (x58[arg1].xA >= 3) {
-            base = vals;
             {
                 typedef struct {
                     s32 a, b, c, d;
                 } copy_t;
-                *(copy_t*) base = *(copy_t*) zeroes->x30;
+                *(copy_t*) vals = *(copy_t*) zeroes->x30;
             }
             for (i = 0; i < 4; i++) {
                 if (x58[i].x0 != 3) {
-                    base[i] = x58[i].xA;
+                    vals[i] = x58[i].xA;
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
+                for (i = 0; i < j; i++) {
+                    if (vals[i] < vals[i + 1]) {
+                        s32 tmp = vals[i + 1];
+                        vals[i + 1] = vals[i];
+                        vals[i] = tmp;
                     }
-                    p++;
                 }
             }
-            if (base[0] == x58[arg1].xA && base[0] >= base[1] * 2) {
+            if (vals[0] == x58[arg1].xA && vals[0] >= vals[1] * 2) {
                 return 1;
             }
         }
@@ -972,32 +997,28 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xF9: {
         f32 vals[4];
-        f32* base = vals;
-        f32* p;
         int i, j;
         {
             typedef struct {
                 s32 a, b, c, d;
             } copy_t;
-            *(copy_t*) base = *(copy_t*) zeroes->x40;
+            *(copy_t*) vals = *(copy_t*) zeroes->x40;
         }
         for (i = 0; i < 4; i++) {
             if (x58[i].x0 != 3) {
-                base[i] = pl_800407C8(i);
+                vals[i] = pl_800407C8(i);
             }
         }
         for (j = 3; j >= 1; j--) {
-            p = base;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    f32 tmp = p[1];
-                    p[1] = p[0];
-                    p[0] = tmp;
+            for (i = 0; i < j; i++) {
+                if (vals[i] < vals[i + 1]) {
+                    f32 tmp = vals[i + 1];
+                    vals[i + 1] = vals[i];
+                    vals[i] = tmp;
                 }
-                p++;
             }
         }
-        if (base[0] == pl_800407C8(arg1) && base[0] > 2.0f * base[1]) {
+        if (vals[0] == pl_800407C8(arg1) && vals[0] > 2.0f * vals[1]) {
             return 1;
         }
         return 0;
@@ -1043,8 +1064,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
             }
-            if (!(rules->x58[arg1].x3 & 1) && rankings[arg1] == 0 &&
-                x58[arg1].x20 == 0)
+            if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                rankings[arg1] == 0 && x58[arg1].x20 == 0)
             {
                 return 1;
             }
@@ -1064,13 +1085,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         }
                     }
                 }
-                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
-                    x58[arg1].x20 == 0)
+                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                    x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x20 == 0) {
+                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                    x58[arg1].x20 == 0)
+                {
                     return 1;
                 }
             }
@@ -1088,7 +1111,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xFE: {
         u32 vals[4];
-        u32* p;
         int i, j;
         unsigned int threshold;
         if (pl_800408B8(arg1) == 0) {
@@ -1115,15 +1137,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    p = vals;
-                    for (i = j; (u32) i > 0; i--) {
-                        if (p[0] > p[1]) {
-                            u32 tmp = p[1];
-                            p[1] = p[0];
-                            p[0] = tmp;
-                        }
-                        p++;
-                    }
+                    gm_16F1_SortDescPass(vals, j);
                 }
                 if (vals[0] == pl_800408B8(arg1) && vals[0] <= vals[1] / 2) {
                     return 1;
@@ -1137,7 +1151,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xFF: {
         u32 vals[4];
-        u32* p;
         int i, j;
         unsigned int threshold;
         threshold = pl_80038914()->x140;
@@ -1161,15 +1174,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    p = vals;
-                    for (i = j; (u32) i > 0; i--) {
-                        if (p[0] < p[1]) {
-                            u32 tmp = p[1];
-                            p[1] = p[0];
-                            p[0] = tmp;
-                        }
-                        p++;
-                    }
+                    gm_16F1_SortAscPass(vals, j);
                 }
                 if (vals[0] == pl_80040894(arg1) && vals[0] >= vals[1] * 2) {
                     return 1;
