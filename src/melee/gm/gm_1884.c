@@ -430,6 +430,11 @@ void fn_80188EE8(HSD_GObj* gobj)
             sub->anim_frames[22]++;
             sub->anim_frames[1] = sub->anim_frames[22];
         }
+#ifdef MUST_MATCH
+        /// @remark Matching tactic: keep counter live through the update block
+        /// so MWCC allocates the range-check value to r4.
+        (void) sub->anim_frames[counter];
+#endif
     }
 
     HSD_JObjReqAnimAll(sub->jobjs[22], (f32) (u32) sub->anim_frames[22]);
