@@ -4062,6 +4062,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 file_size;
     s32 total_blocks;
     s32 current_seq;
+    s32 seq;
     s32 secondary_count;
     s32 free_count;
     s32 i;
@@ -4132,7 +4133,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     block_map[1][secondary_count] = i;
                     secondary_count++;
                 } else if (logical >= 0 && logical < file_blocks) {
-                    s32 seq = state->x270[i];
+                    seq = state->x270[i];
                     if (fn_803ACB74(current_seq, seq) < 0) {
                         current_seq = seq;
                     }
@@ -4337,9 +4338,10 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             data += chunk;
         } else {
             if (arg3 != 0) {
+                s32 block = block_map[0][i];
                 s32 cmd_result = fn_803B0120_queue_write(
-                    state, block_map[0][i], logical, current_seq, data,
-                    remaining, arg1);
+                    state, block, logical, current_seq, data, remaining,
+                    arg1);
                 if (cmd_result < 0) {
                     fn_803B0120_rewind(entries);
                     return cmd_result;
