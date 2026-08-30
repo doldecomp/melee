@@ -1042,9 +1042,9 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float closest_dist_sq;
     float local_delta_y;
     float start_delta_x;
-    float start_delta_y;
+    float hurt_param_from_hit_start;
     Mtx inv_hurt_mtx;
-    float hurt_delta_x;
+    float hurt_delta_z;
     float hit_start_max_x;
     float hit_end_min_x;
     float hit_start_min_x;
@@ -1076,7 +1076,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_param;
     float local_dist;
     float hurt_param;
-    float hurt_param_from_hit_start;
+    float start_delta_y;
     float hurt_param_from_hit_end;
     float closest_dist;
     float hurt_end_z;
@@ -1090,9 +1090,9 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     s32 is_hit_segment_degenerate;
     s32 is_parallel;
     s32 is_zero_distance;
-    float hurt_delta_z;
+    float hurt_delta_x;
     float hurt_delta_y;
-    PAD_STACK(52);
+    PAD_STACK(40);
 
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
@@ -1197,57 +1197,54 @@ block_39:
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
-    segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
     hurt_delta_z = hurt_end_z - hurt_start_copy.z;
-    /* Cache 1.0 constant in a callee-save to avoid reloading it across the
-     * several `hit_param = 1.0` / `hurt_param = 1.0` branches below. The
-     * variable name is a borrow from the unused-after-broadphase-rejection
-     * slot. */
-    hit_start_min_z = lbColl_804D7A08;
+    segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
+    hit_start_min_z = 1.0F;
     hurt_len_sq = (hurt_delta_x * hurt_delta_x) + hurt_len_sq;
     segment_dot = (hit_delta.z * hurt_delta_z) + segment_dot;
     hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
-    hit_start_mid_z = hit_delta.z * hit_delta.z;
+    {
+        float hit_delta_z_sq = hit_delta.z * hit_delta.z;
+        hit_start_mid_z = hit_delta_z_sq;
+    }
     start_delta_z = hit_start_copy.z - hurt_start_copy.z;
-    hit_len_sq = hit_start_mid_z + (hit_start_mid_x + hit_start_mid_y);
+    hit_len_sq = hit_start_mid_z + (hit_start_mid_y + hit_start_mid_x);
     hit_start_dot = hit_delta.y * start_delta_y;
     {
         float hit_start_dot_x = hit_delta.x * start_delta_x;
         hit_start_dot = hit_start_dot_x + hit_start_dot;
     }
     hurt_start_dot =
-        (hurt_delta_y * start_delta_y) + (hurt_delta_x * start_delta_x);
-    hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
+        (hurt_delta_x * start_delta_x) + (hurt_delta_y * start_delta_y);
     hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
-    closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
-    if ((hurt_len_sq < lbColl_804D79F0) && (hurt_len_sq > lbColl_804D79F4)) {
+    hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
+    closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
+    if ((hurt_len_sq < 1e-5F) && (hurt_len_sq > -1e-5F)) {
         is_hurt_segment_degenerate = 1;
     } else {
         is_hurt_segment_degenerate = 0;
     }
     if (is_hurt_segment_degenerate != 0) {
-        if ((hit_len_sq < lbColl_804D79F0) && (hit_len_sq > lbColl_804D79F4)) {
+        if ((hit_len_sq < 1e-5F) && (hit_len_sq > -1e-5F)) {
             is_hit_segment_degenerate = 1;
         } else {
             is_hit_segment_degenerate = 0;
         }
         if (is_hit_segment_degenerate != 0) {
-            hit_param = lbColl_804D79F8;
+            hit_param = 0.0F;
             hurt_param = hit_param;
         } else {
-            hurt_param = lbColl_804D79F8;
+            hurt_param = 0.0F;
             projected_hit_param = -hit_start_dot / hit_len_sq;
             hit_param = projected_hit_param;
-            if (projected_hit_param > lbColl_804D7A00) {
+            if (projected_hit_param > 1.0) {
                 hit_param = hit_start_min_z;
-            } else if (hit_param < lbColl_804D7A10) {
+            } else if (hit_param < 0.0) {
                 hit_param = hurt_param;
             }
         }
     } else {
-        if ((closest_denom < lbColl_804D79F0) &&
-            (closest_denom > lbColl_804D79F4))
-        {
+        if ((closest_denom < 1e-5F) && (closest_denom > -1e-5F)) {
             is_parallel = 1;
         } else {
             is_parallel = 0;
@@ -1255,13 +1252,13 @@ block_39:
         if (is_parallel != 0) {
             // For parallel axes, project the hit endpoint nearer the hurt
             // midpoint.
-            hurt_mid_y = (float) ((lbColl_804D7A18 * (f64) hurt_delta_y) +
-                                  (f64) hurt_start_copy.y);
-            hurt_mid_x = (float) ((lbColl_804D7A18 * (f64) hurt_delta_x) +
-                                  (f64) hurt_start_copy.x);
+            hurt_mid_y =
+                (float) ((0.5 * (f64) hurt_delta_y) + (f64) hurt_start_copy.y);
+            hurt_mid_x =
+                (float) ((0.5 * (f64) hurt_delta_x) + (f64) hurt_start_copy.x);
             hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
-            hurt_mid_z = (float) ((lbColl_804D7A18 * (f64) hurt_delta_z) +
-                                  (f64) hurt_start_copy.z);
+            hurt_mid_z =
+                (float) ((0.5 * (f64) hurt_delta_z) + (f64) hurt_start_copy.z);
             hit_end_mid_y = hit_end->y - hurt_mid_y;
             hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
             hit_end_mid_x = hit_end->x - hurt_mid_x;
@@ -1277,9 +1274,8 @@ block_39:
                 Vec3 a2;
                 Vec3 d1;
                 Vec3 c3;
-                u8 gap_pad[4];
                 c3 = *hurt_start;
-                hit_param = lbColl_804D79F8;
+                hit_param = 0.0F;
                 d1.x = hurt_end_x - hurt_start->x;
                 d1.y = hurt_end_y - hurt_start->y;
                 d1.z = hurt_end_z - hurt_start->z;
@@ -1289,14 +1285,13 @@ block_39:
                     a2 = *hit_start;
                     dot = (d1.z * (c3.z - a2.z)) +
                           ((d1.x * (c3.x - a2.x)) + (d1.y * (c3.y - a2.y)));
-                    hit_end_mid_x = d1.x * d1.x;
                     hurt_param_from_hit_start =
                         -dot /
-                        ((d1.z * d1.z) + (hit_end_mid_x + (d1.y * d1.y)));
+                        ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
-                if (hurt_param_from_hit_start > lbColl_804D7A00) {
+                if (hurt_param_from_hit_start > 1.0) {
                     hurt_param_from_hit_start = hit_start_min_z;
-                } else if (hurt_param_from_hit_start < lbColl_804D7A10) {
+                } else if (hurt_param_from_hit_start < 0.0) {
                     hurt_param_from_hit_start = hit_param;
                 }
                 hurt_param = hurt_param_from_hit_start;
@@ -1318,10 +1313,10 @@ block_39:
                         -dot /
                         ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
-                if (hurt_param_from_hit_end > lbColl_804D7A00) {
+                if (hurt_param_from_hit_end > 1.0) {
                     hurt_param_from_hit_end = hit_param;
-                } else if (hurt_param_from_hit_end < lbColl_804D7A10) {
-                    hurt_param_from_hit_end = lbColl_804D79F8;
+                } else if (hurt_param_from_hit_end < 0.0) {
+                    hurt_param_from_hit_end = 0.0F;
                 }
                 hurt_param = hurt_param_from_hit_end;
             }
@@ -1330,13 +1325,11 @@ block_39:
                 (hit_param_candidate = ((segment_dot * hurt_start_dot) -
                                         (hurt_len_sq * hit_start_dot)) /
                                        closest_denom);
-            hurt_param = ((hit_len_sq * hurt_start_dot) -
+            hurt_param = ((hurt_start_dot * hit_len_sq) -
                           (segment_dot * hit_start_dot)) /
                          closest_denom;
-            if ((hit_param_candidate > lbColl_804D7A00) ||
-                (hit_param < lbColl_804D7A10) ||
-                (hurt_param > lbColl_804D7A00) ||
-                (hurt_param < lbColl_804D7A10))
+            if ((hit_param_candidate > 1.0) || (hit_param < 0.0) ||
+                (hurt_param > 1.0) || (hurt_param < 0.0))
             {
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
@@ -1345,8 +1338,8 @@ block_39:
 
                 // If the unconstrained solution leaves either segment, compare
                 // the nearest endpoint projection from each axis.
-                if (hit_param < lbColl_804D7A10) {
-                    hit_endpoint_param = lbColl_804D79F8;
+                if (hit_param < 0.0) {
+                    hit_endpoint_param = 0.0F;
                     hit_endpoint_dist_sq =
                         lbColl_80005EBC(hurt_start, hurt_end, hit_start,
                                         &candidate_hurt_param);
@@ -1355,8 +1348,8 @@ block_39:
                     hit_endpoint_dist_sq = lbColl_80005EBC(
                         hurt_start, hurt_end, hit_end, &candidate_hurt_param);
                 }
-                if (hurt_param < lbColl_804D7A10) {
-                    hurt_endpoint_param = lbColl_804D79F8;
+                if (hurt_param < 0.0) {
+                    hurt_endpoint_param = 0.0F;
                     hurt_endpoint_dist_sq = lbColl_80005EBC(
                         hit_start, hit_end, hurt_start, &candidate_hit_param);
                 } else {
@@ -1386,29 +1379,29 @@ block_39:
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
                       ((closest_delta_y * closest_delta_y) +
                        (closest_delta_x * closest_delta_x));
-    if (closest_dist_sq > lbColl_804D79F8) {
+    if (closest_dist_sq > 0.0F) {
         volatile float sp38;
 
         closest_rsqrt_estimate = __frsqrte(closest_dist_sq);
         closest_rsqrt_step1 =
-            lbColl_804D7A18 * closest_rsqrt_estimate *
+            0.5 * closest_rsqrt_estimate *
             -(((f64) closest_dist_sq *
                (closest_rsqrt_estimate * closest_rsqrt_estimate)) -
-              lbColl_804D7A20);
-        closest_rsqrt_step2 = lbColl_804D7A18 * closest_rsqrt_step1 *
+              3.0);
+        closest_rsqrt_step2 = 0.5 * closest_rsqrt_step1 *
                               -(((f64) closest_dist_sq *
                                  (closest_rsqrt_step1 * closest_rsqrt_step1)) -
-                                lbColl_804D7A20);
+                                3.0);
         sp38 = (float) ((f64) closest_dist_sq *
-                        (lbColl_804D7A18 * closest_rsqrt_step2 *
+                        (0.5 * closest_rsqrt_step2 *
                          -(((f64) closest_dist_sq *
                             (closest_rsqrt_step2 * closest_rsqrt_step2)) -
-                           lbColl_804D7A20)));
+                           3.0)));
         closest_dist = sp38;
     } else {
         closest_dist = closest_dist_sq;
     }
-    if ((closest_dist < lbColl_804D79F0) && (closest_dist > lbColl_804D79F4)) {
+    if ((closest_dist < 1e-5F) && (closest_dist > -1e-5F)) {
         is_zero_distance = 1;
     } else {
         is_zero_distance = 0;
@@ -1429,23 +1422,27 @@ block_39:
     local_dist_sq =
         (local_delta_z * local_delta_z) +
         ((local_delta_x * local_delta_x) + (local_delta_y * local_delta_y));
-    if (local_dist_sq > lbColl_804D79F8) {
+    if (local_dist_sq > 0.0F) {
         volatile float sp34;
 
         local_rsqrt_estimate = __frsqrte(local_dist_sq);
-        local_rsqrt_step1 = lbColl_804D7A18 * local_rsqrt_estimate *
-                            -(((f64) local_dist_sq *
-                               (local_rsqrt_estimate * local_rsqrt_estimate)) -
-                              lbColl_804D7A20);
+        {
+            f64 local_rsqrt_first_step =
+                0.5 * local_rsqrt_estimate *
+                -(((f64) local_dist_sq *
+                   (local_rsqrt_estimate * local_rsqrt_estimate)) -
+                  3.0);
+            local_rsqrt_step1 = local_rsqrt_first_step;
+        }
         local_rsqrt_step2 =
-            lbColl_804D7A18 * local_rsqrt_step1 *
+            0.5 * local_rsqrt_step1 *
             -(((f64) local_dist_sq * (local_rsqrt_step1 * local_rsqrt_step1)) -
-              lbColl_804D7A20);
+              3.0);
         sp34 = (float) ((f64) local_dist_sq *
-                        (lbColl_804D7A18 * local_rsqrt_step2 *
+                        (0.5 * local_rsqrt_step2 *
                          -(((f64) local_dist_sq *
                             (local_rsqrt_step2 * local_rsqrt_step2)) -
-                           lbColl_804D7A20)));
+                           3.0)));
         local_dist = sp34;
     } else {
         local_dist = local_dist_sq;
