@@ -557,11 +557,6 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     }
 }
 
-static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
-{
-    return dx * dx + dz * dz;
-}
-
 static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
                                                   TyDspConfig* cfg)
 {
@@ -591,8 +586,8 @@ void _tyDisplay_80318CB4(s32 arg0)
     s32 ring_count;
     s32 ring_max;
     s32 prev_ring_size;
-    f32 angle;
     f32 radius;
+    f32 angle;
     f32 base_step;
     f32 dist_limit;
     s32 count;
@@ -658,8 +653,9 @@ void _tyDisplay_80318CB4(s32 arg0)
                     }
                     for (k = i - 1; k >= start; k--) {
                         f32 dx = grid->pos[i].x - grid->pos[k].x;
-                        f32 dist = sqrtf(_tyDisplay_80318CB4_calc_dist_sq(
-                            grid->pos[i].z - grid->pos[k].z, dx));
+                        f32 dist = sqrtf(
+                            dx * dx + (grid->pos[i].z - grid->pos[k].z) *
+                                          (grid->pos[i].z - grid->pos[k].z));
                         if (dist > 2.1474836e9f || dist < -2.1474836e9f) {
                             OSReport("*** tyDisplay Atari Irregul!\n");
                             HSD_ASSERT(0xC6, 0);
@@ -832,6 +828,11 @@ void _tyDisplay_80319994(s32 arg0)
     f32 xoff = 0.0f;
     s32 pivot;
     s32 count;
+    TyDspGrid* cur;
+    s32 ring;
+    s32 i;
+    s32 col;
+    s32 row;
     PAD_STACK(0x20);
     {
         pivot = arg0;
@@ -842,11 +843,7 @@ void _tyDisplay_80319994(s32 arg0)
         grid->x0C_max_x = 3.5f;
 
         {
-            TyDspGrid* cur = grid;
-            s32 ring;
-            s32 i;
-            s32 col;
-            s32 row;
+            cur = grid;
 
             row = 0;
             col = 0;
@@ -907,16 +904,17 @@ void _tyDisplay_80319994(s32 arg0)
     }
 
     {
-        for (count = 0; count < cfg->x08; count++) {
+        for (cur = (TyDspGrid*) ((size_t) grid + (i = 0) * sizeof(TySortElem));
+             i < cfg->x08;
+             cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), i++)
+        {
             HSD_GObj* gobj;
-            cfg->x78 = _tyDisplay_8031BC54(grid->sort[count].key);
+            cfg->x78 = _tyDisplay_8031BC54(cur->sort[0].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
-                _tyDisplay_804D6F10[count] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[count],
-                                      grid->pos[count].x);
-                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[count],
-                                      grid->pos[count].z);
+                _tyDisplay_804D6F10[i] = (HSD_JObj*) gobj->hsd_obj;
+                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[i], cur->pos[0].x);
+                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[i], cur->pos[0].z);
             }
         }
     }

@@ -955,7 +955,9 @@ void ifStock_802FAEC4(void)
     HSD_GObj* gobj;
     struct ifStock_804A1378* stock = &ifStock_804A1378;
     DynamicModelDesc** sp18;
-    int i;
+    int i[1];
+    int j[1];
+    int k[1];
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
@@ -969,8 +971,8 @@ void ifStock_802FAEC4(void)
     gobj = GObj_Create(14, 15, 0);
     HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
     ifStock_804A1ACC.x108 = (int) gobj;
-    for (i = 0; i < 130; i++) {
-        ifStock_804A1ACC.x10C[i] = NULL;
+    for (i[0] = 0; i[0] < 130; i[0]++) {
+        ifStock_804A1ACC.x10C[i[0]] = NULL;
     }
     if (gm_80169394() == 0) {
         ifStock_804A1774.x10C[0] = NULL;
@@ -978,17 +980,17 @@ void ifStock_802FAEC4(void)
         gobj = GObj_Create(14, 15, 0);
         HSD_GObj_SetupProc(gobj, fn_802FA6C4, 17);
         ifStock_804A1774.x10C[0] = gobj;
-        for (i = 0; i < 130; i++) {
-            ifStock_804A1774.x10C[i + 1] = NULL;
+        for (j[0] = 0; j[0] < 130; j[0]++) {
+            ifStock_804A1774.x10C[j[0] + 1] = NULL;
         }
     } else if (gm_8016A1F8()) {
         ifStock_804A1774.x108 = -1;
         ifStock_802FA5BC(1); // not inlined
     }
-    for (i = 0; i < 16; i++) {
-        ifStock_804A1A8C[i] = NULL;
+    for (k[0] = 0; k[0] < 16; k[0]++) {
+        ifStock_804A1A8C[k[0]] = NULL;
         if (gm_8016B1A8()) {
-            ifStock_804A1A8C[i] = ifStock_802FA118(i);
+            ifStock_804A1A8C[k[0]] = ifStock_802FA118(k[0]);
         }
     }
     if (gm_IsMultimanSmashMode()) {
