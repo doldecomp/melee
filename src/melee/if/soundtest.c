@@ -997,7 +997,7 @@ void un_802FFF2C(StartMeleeData* arg0)
     r->is_teams = s->x130.xC;
     switch (s->x130.xC8) {
     case 0:
-        r->match_mode = 0;
+        r->match_kind = 0;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
             r->time_limit = timer;
@@ -1007,11 +1007,11 @@ void un_802FFF2C(StartMeleeData* arg0)
         }
         break;
     case 1:
-        r->match_mode = 1;
+        r->match_kind = 1;
         r->x0_6 = 0;
         break;
     case 2:
-        r->match_mode = 2;
+        r->match_kind = 2;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
             r->time_limit = timer;
@@ -1021,7 +1021,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         }
         break;
     default:
-        r->match_mode = 0;
+        r->match_kind = 0;
         r->x0_6 = 0;
         break;
     }
@@ -1482,9 +1482,9 @@ bool un_80300C80(enum soundtest_callback_arg0 arg0)
 
 bool fn_80300CC8(enum soundtest_callback_arg0 arg0)
 {
-    int* r29;
-    int* r30;
-    int* r31;
+    u32* r29;
+    u32* r30;
+    u32* r31;
 
     switch (arg0) {
     case 0:
@@ -1497,7 +1497,7 @@ bool fn_80300CC8(enum soundtest_callback_arg0 arg0)
         r30 = gmMainLib_GetStockMatchTotal();
         r31 = gmMainLib_GetCoinMatchTotal();
         {
-            int* ptr = gmMainLib_GetBonusMatchTotal();
+            u32* ptr = gmMainLib_GetBonusMatchTotal();
             *r29 = un_804D6DE0;
             *r30 = un_804D6DE4;
             *r31 = un_804D6DE8;

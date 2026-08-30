@@ -111,22 +111,22 @@ GameModeState gm_Mode_InvisibleVs_States[] = {
 void gm_801BA30C(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_810;
-    gm_801A5618(scene, data, 6);
+    gmVsMelee_EnterCss(scene, data, 6);
 }
 
 void gm_801BA338(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_810);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_810);
 }
 
 void gm_801BA360(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_810);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_810);
 }
 
 void gm_801BA388(GameModeState* scene)
 {
-    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_810, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_810, 0);
 }
 
 void fn_801BA3B4(PlayerInitData* arg0, PlayerInitData* unused)

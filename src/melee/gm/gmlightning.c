@@ -110,22 +110,22 @@ GameModeState gm_Mode_LightningVs_States[] = {
 
 void gm_801BA704(GameModeState* scene)
 {
-    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1350, 9);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_1350, 9);
 }
 
 void gm_801BA730(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
 void gm_801BA758(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
 void gm_801BA780(GameModeState* scene)
 {
-    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_1350, 0);
 }
 
 /// Sets game speed to 1.25F for lightning melee

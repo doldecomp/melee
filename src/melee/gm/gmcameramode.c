@@ -200,7 +200,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
     gm_80167BC8(vs);
 
     start->rules = vs->start.rules;
-    start->rules.match_mode = 0;
+    start->rules.match_kind = 0;
 
     start->rules.x0_6 = vs->start.rules.x4_4 = false;
 
@@ -227,7 +227,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
         start->players[i].xD_b3 = true;
     }
 
-    gm_801B0348(start);
+    gm_DetermineSubColors(start);
     gm_8016F088(start);
     gm_80168FC4();
     lb_8001C550();

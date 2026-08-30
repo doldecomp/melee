@@ -441,8 +441,8 @@ void onEnterResults1(GameModeState* arg0)
         if (match_end->player_standings[i].slot_type != 3 &&
             match_end->player_standings[i].is_big_loser == 0)
         {
-            sfx_result |= lbAudioAx_80026E84(
-                match_end->player_standings[i].character_kind);
+            sfx_result |=
+                lbAudioAx_80026E84(match_end->player_standings[i].ckind);
         }
     }
 

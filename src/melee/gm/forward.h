@@ -3,9 +3,13 @@
 
 #include <platform.h>
 
-/// @todo Might be defined elsewhere
+/// @todo Put in proper places
+/// @{
 #define GM_MAX_PLAYERS 6
 #define GM_MAX_TEAMS 5
+#define GM_NAMETAG_NONE 120
+#define GM_FPS 60
+/// @}
 
 typedef enum GameModeKind {
     /* 00 */ GM_TITLE,
@@ -184,5 +188,12 @@ typedef enum Gm_Player {
     /* 0x06 */ Gm_Player_NumMax = 6,
     /* 0x06 */ Gm_Player_Other = Gm_Player_NumMax,
 } Gm_Player;
+
+typedef enum MatchKind {
+    MatchKind_Time,
+    MatchKind_Stock,
+    MatchKind_Coin,
+    MatchKind_Bonus,
+} MatchKind;
 
 #endif

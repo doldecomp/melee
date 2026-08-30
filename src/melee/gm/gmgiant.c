@@ -110,22 +110,22 @@ GameModeState gm_Mode_GiantVs_States[] = {
 
 void gm_801B8FB8(GameModeState* scene)
 {
-    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_F90, 4);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_F90, 4);
 }
 
 void gm_801B8FE4(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_F90);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_F90);
 }
 
 void gm_801B900C(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_F90);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_F90);
 }
 
 void gm_801B9034(GameModeState* scene)
 {
-    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_F90, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_F90, 0);
 }
 
 void fn_801B9060(PlayerInitData* arg0, PlayerInitData* unused)

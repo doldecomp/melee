@@ -256,7 +256,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
 
 void gm_Scene_Title_OnFrame(void)
 {
-    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+    int input = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS);
     int* tmp;
     if (countdown_timer != 0) {
         countdown_timer--;

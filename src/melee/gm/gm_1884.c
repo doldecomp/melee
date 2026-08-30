@@ -144,39 +144,32 @@ int fn_801884F8(void)
     return result;
 }
 
-/* `player` walks the whole TrainingModeState by PlayerInitData strides, so
- * each use re-bases it onto the players array. */
-#define PLAYER_AT(p)                                                          \
-    ((PlayerInitData*) ((p) + offsetof(TrainingModeState, players)))
-
 void fn_80188550(int arg0)
 {
     int current = lbl_80473700.count;
-    int j;
     int to_remove;
+    int j;
 
     if (arg0 != current) {
         if (arg0 > lbl_80473700.count) {
-            u8* player;
             int i;
             int skip;
             int remaining;
 
             skip = lbl_80473700.count;
-            player = (u8*) &lbl_80473700;
             remaining = arg0 - current;
             i = 0;
             j = 0;
 
-            for (i = 0; i < 4; i++, player += sizeof(PlayerInitData)) {
+            for (i = 0; i < 4; i++) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
-                            PLAYER_AT(player)->slot_type = 1;
+                            lbl_80473700.players[i].slot_type = 1;
                         } else {
-                            PLAYER_AT(player)->slot_type = j;
+                            lbl_80473700.players[i].slot_type = j;
                         }
-                        gm_8016EDDC(i, PLAYER_AT(player));
+                        gm_8016EDDC(i, &lbl_80473700.players[i]);
                         if (--remaining == 0) {
                             break;
                         }
@@ -888,7 +881,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     TrainingModeState* state = &lbl_80473700;
     s32 i;
 
-    arg0->rules.match_mode = 0;
+    arg0->rules.match_kind = 0;
     arg0->rules.is_teams = 1;
     arg0->rules.xB = -1;
     arg0->rules.x20 = 0xFFFFFFFFFFFFFFFFULL;

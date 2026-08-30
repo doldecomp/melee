@@ -15,6 +15,7 @@
 #include <melee/sc/forward.h>
 
 #include <dolphin/gx.h>
+#include <dolphin/pad.h>
 #include <melee/mn/types.h>
 
 /// @deprecated Replace with inline bitfields
@@ -100,7 +101,7 @@ struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;
     /* +1 */ u8 pad_x1[0x8 - 0x1];
     /* +8 */ u64 item_mask;
-    /* +10 */ u8 rumble[4];
+    /* +10 */ u8 rumble_enabled[PAD_MAX_CONTROLLERS];
     /* +14 */ u8 sound_balance;
     /* +15 */ u8 deflicker;
     /* +16 */ u8 saved_language; /* 0x1CC6 */
@@ -190,7 +191,7 @@ struct NameTagData {
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
-    /* 0x1A1 */ u8 rumble_toggle;
+    /* 0x1A1 */ u8 rumble_enabled;
     /* 0x1A2 */ s8 x1A2;
     /* 0x1A3 */ u8 padding_x1A2;
 };
@@ -273,12 +274,12 @@ struct gmm_x1868 {
         /* 0x01AD +5 */ u8 x5;
         /* 0x01AE +6 */ u8 x6;
     } unk_1A8;
-    /* 0x01B0 */ s32 x1A18;
-    /* 0x01B4 */ s32 x1A1C;
-    /* 0x01B8 */ s32 x1A20;
-    /* 0x01BC */ s32 x1A24;
-    /* 0x01C0 */ s32 x1A28;
-    /* 0x01C4 */ s32 x1A2C;
+    /* 0x01B0 */ u32 time_matches;
+    /* 0x01B4 */ u32 stock_matches;
+    /* 0x01B8 */ u32 coin_matches;
+    /* 0x01BC */ u32 bonus_matches;
+    /* 0x01C0 */ u32 stamina_matches;
+    /* 0x01C4 */ u32 match_resets;
     /* 0x01C8 */ s32 x1A30;
     /* 0x01CC */ s32 x1A34;
     /* 0x01D0 */ s32 x1A38;
@@ -604,8 +605,8 @@ ASSERT_SIZE(struct MatchTeamData, 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
-    s8 character_kind;
-    s8 character_id;
+    s8 ckind;  ///< ::CharacterKind
+    s8 ftkind; ///< ::FighterKind
     u8 x3 : 6;
     u8 x3_6 : 1;
     u8 x3_7 : 1;
@@ -662,8 +663,8 @@ ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 struct MatchEnd {
     /* 0x00 */ u32 x0; ///< timer
     /* 0x04 */ u8 result;
-    /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 is_teams; ///< @todo enum between teams/not-teams
+    /* 0x05 */ u8 match_kind; ///< ::MatchKind
+    /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
     /* 0x08 */ u32 frame_count;
     /* 0x0C */ u8 xC;

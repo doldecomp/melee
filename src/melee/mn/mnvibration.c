@@ -194,7 +194,7 @@ static inline u8 mnVibration_GetNameSlot(MnVibrationData* data, s32 j)
 
 static inline u8 mnVibration_GetNameRumble(s32 name_idx)
 {
-    return GetPersistentNameData(name_idx)->rumble_toggle;
+    return GetPersistentNameData(name_idx)->rumble_enabled;
 }
 
 #ifdef MUST_MATCH
@@ -263,7 +263,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     Menu_GetAllInputs();
 
     // Handle B button - exit menu
-    inputs = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+    inputs = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS);
     if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
         sfxBack();
@@ -302,7 +302,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 sfxForward();
                 if (GetRumbleSettingOfPort(i) != 0) {
                     HSD_JObj* panel_jobj2;
-                    gmMainLib_8015ED4C(i, 0);
+                    gmMainLib_SetRumbleEnabled(i, 0);
                     rumble_setting = GetRumbleSettingOfPort(i);
                     temp_jobj =
                         ((MnVibrationData*) mnVibration_804D6C28->user_data)
@@ -327,7 +327,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                     return;
                 } else {
                     HSD_JObj* panel_jobj2;
-                    gmMainLib_8015ED4C(i, 1);
+                    gmMainLib_SetRumbleEnabled(i, 1);
                     rumble_setting = GetRumbleSettingOfPort(i);
                     temp_jobj =
                         ((MnVibrationData*) mnVibration_804D6C28->user_data)
@@ -406,9 +406,9 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         name_idx = mnVibration_GetNameSlot(data, cursor_row);
         rumble_setting = mnVibration_GetNameRumble(name_idx);
         if (rumble_setting == 1) {
-            GetPersistentNameData(name_idx)->rumble_toggle = 0;
+            GetPersistentNameData(name_idx)->rumble_enabled = false;
         } else {
-            GetPersistentNameData(name_idx)->rumble_toggle = 1;
+            GetPersistentNameData(name_idx)->rumble_enabled = true;
         }
         rumble_setting = mnVibration_GetNameRumble(name_idx);
         mnVibration_AnimateNameRow(data->x0[1], rumble_setting);

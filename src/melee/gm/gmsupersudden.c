@@ -111,22 +111,22 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
 
 void gm_801B8BB4(GameModeState* scene)
 {
-    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_6D0, 3);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_6D0, 3);
 }
 
 void gm_801B8BE0(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_6D0);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_6D0);
 }
 
 void gm_801B8C08(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_6D0);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_6D0);
 }
 
 void gm_801B8C30(GameModeState* scene)
 {
-    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_6D0, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_6D0, 0);
 }
 
 void fn_801B8C5C(PlayerInitData* arg0, PlayerInitData* unused)

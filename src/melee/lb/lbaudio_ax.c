@@ -1682,12 +1682,12 @@ static bool fn_80026E58(int arg0)
     return false;
 }
 
-u64 lbAudioAx_80026E84(CharacterKind c_kind)
+u64 lbAudioAx_80026E84(CharacterKind ckind)
 {
-    if (c_kind < 0 || c_kind >= CHKIND_MAX) {
+    if (ckind < 0 || ckind >= CHKIND_MAX) {
         return 0;
     }
-    return lbl_803BB3C0[c_kind].x8;
+    return lbl_803BB3C0[ckind].x8;
 }
 
 u64 lbAudioAx_80026EBC(StKind stkind)

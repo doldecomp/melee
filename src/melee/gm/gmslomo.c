@@ -110,22 +110,22 @@ GameModeState gm_Mode_SlowMo_States[] = {
 
 void gm_801BA50C(GameModeState* scene)
 {
-    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1210, 0xA);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_1210, 0xA);
 }
 
 void gm_801BA538(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1210);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_1210);
 }
 
 void gm_801BA560(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1210);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_1210);
 }
 
 void gm_801BA588(GameModeState* scene)
 {
-    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1210, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_1210, 0);
 }
 
 /// Sets game speed to 1/2 for slowmo melee
