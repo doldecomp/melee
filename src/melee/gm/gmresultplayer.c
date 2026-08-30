@@ -1138,6 +1138,33 @@ static inline u8* get_player_flags(ResultsDisplayLayout* disp)
     return disp->state.player_flags;
 }
 
+static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
+{
+    GXColor color;
+
+    color = gm_80160968(
+        gm_80160854((u8) slot, match_end->player_standings[slot].team,
+                    (u8) (match_end->is_teams == 1),
+                    match_end->player_standings[slot].slot_type));
+    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+}
+
+static inline HSD_ImageDesc*
+fn_80179990_copy_player_image(ResultsDisplayLayout* disp, int slot, int lookup)
+{
+    HSD_ImageDesc* image_desc = disp->player_img2;
+    HSD_ImageDesc* desc = &image_desc[slot];
+
+    HSD_ImageDescCopyFromEFB(
+        desc,
+        disp->state.scissor_x[lookup] +
+            (0x140 - ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2),
+        disp->state.scissor_y[lookup] +
+            (0xF4 - ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) * 2),
+        0, 0);
+    return desc;
+}
+
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
@@ -1167,29 +1194,12 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
     if (HSD_CObjSetCurrent(cobj)) {
         if (lookup != 0) {
-            GXColor color;
-
-            color = gm_80160968(
-                gm_80160854((u8) arg2, match_end->player_standings[arg2].team,
-                            (u8) (match_end->is_teams == 1),
-                            match_end->player_standings[arg2].slot_type));
-            HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+            fn_80179990_set_erase_color(match_end, arg2);
             HSD_CObjEraseScreen(cobj, 1, 0, 0);
             Camera_800313E0(arg0, 0);
 
             {
-                HSD_ImageDesc* image_desc = disp->player_img2;
-                desc = &image_desc[arg2];
-
-                HSD_ImageDescCopyFromEFB(
-                    desc,
-                    disp->state.scissor_x[lookup] +
-                        (0x140 -
-                         ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2),
-                    disp->state.scissor_y[lookup] +
-                        (0xF4 -
-                         ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) * 2),
-                    0, 0);
+                desc = fn_80179990_copy_player_image(disp, arg2, lookup);
 
                 if (!disp->state.x0_4) {
                     HSD_ImageDesc* image_desc1 = disp->player_img1;
@@ -1224,33 +1234,13 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             if (ftLib_800876B4(entity) == 0) {
                 u8* player_flags = &get_player_flags(disp)[arg2];
                 if (*player_flags == 0 && disp->state.x0_6) {
-                    GXColor color;
-
-                    color = gm_80160968(gm_80160854(
-                        (u8) arg2, match_end->player_standings[arg2].team,
-                        (u8) (match_end->is_teams == 1),
-                        match_end->player_standings[arg2].slot_type));
-                    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+                    fn_80179990_set_erase_color(match_end, arg2);
                     HSD_CObjEraseScreen(cobj, 1, 0, 0);
                     Camera_800313E0(arg0, 0);
 
                     {
-                        HSD_ImageDesc* image_desc = disp->player_img2;
-                        desc = &image_desc[arg2];
-
-                        HSD_ImageDescCopyFromEFB(
-                            desc,
-                            disp->state.scissor_x[lookup] +
-                                (0x140 -
-                                 ((s32) ((u16*) disp->state.dim_w1)[lookup] /
-                                  4) *
-                                     2),
-                            disp->state.scissor_y[lookup] +
-                                (0xF4 -
-                                 ((s32) ((u16*) disp->state.dim_h1)[lookup] /
-                                  2) *
-                                     2),
-                            0, 0);
+                        desc =
+                            fn_80179990_copy_player_image(disp, arg2, lookup);
 
                         HSD_CObjEraseScreen(cobj, 1, 1, 1);
                         HSD_ImageDescCopyFromEFB(&disp->shared_img, 0x10E,
