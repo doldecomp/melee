@@ -125,13 +125,16 @@ bool IsNameListFull(void)
     return true;
 }
 
-static inline bool checkStringRest(const char* ptr)
+static inline s8 readNameTerminator(const volatile char* terminator)
 {
-    char* term = mnName_StringTerminator;
-    char* cmp = "　"; // SJIS full-width space
-    char c = cmp[0];
-    while (*term != *ptr) {
-        if (c != *ptr || cmp[1] != ptr[1]) {
+    return *terminator;
+}
+
+static inline bool checkStringRest(const char* ptr, s8 terminator)
+{
+    char c = "　"[0]; // SJIS full-width space
+    while (terminator != *ptr) {
+        if (c != *ptr || "　"[1] != ptr[1]) {
             return false;
         }
         ptr += 2;
@@ -141,24 +144,27 @@ static inline bool checkStringRest(const char* ptr)
 
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    char* p1;
-    char* p2;
-    s32 i;
-    for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
-        char* ch1 = &str1[i];
+    s8 terminator = (s8) *mnName_StringTerminator;
+    char* p1 = str1;
+    char* p2 = str2;
+    s32 i = 0;
+    while (true) {
+        s8 ch1 = (s8) str1[i];
 
-        if (*mnName_StringTerminator == *ch1) {
-            if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
+        if (terminator == ch1) {
+            if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF],
+                                readNameTerminator(mnName_StringTerminator)))
+            {
                 return 0;
             }
             return 2;
         }
 
         {
-            char ch2 = str2[i];
+            s8 ch2 = (s8) str2[i];
 
             if (*mnName_StringTerminator == ch2) {
-                if (checkStringRest(&str1[i])) {
+                if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }
                 return 1;
@@ -171,6 +177,9 @@ s32 CompareNameStrings(char* str1, char* str2)
                 return 2;
             }
         }
+        i++;
+        p2++;
+        p1++;
     }
 }
 
@@ -1126,22 +1135,29 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
     }
 }
 
+static inline f32 mnName_80239A24_GetTextColumnWidth(HSD_GObj* gobj,
+                                                     HSD_JObj* text_jobj0)
+{
+    HSD_JObj* text_jobj6 = mnName_802388D4_noinline(gobj, 6U);
+    f32 width = HSD_JObjGetTranslationX(text_jobj0);
+    return HSD_JObjGetTranslationX(text_jobj6) - width;
+}
+
 void mnName_80239A24(HSD_GObj* gobj)
 {
-    GXColor text_color;
+    f32 text_row_height;
     Vec3 text_position;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
     s32 row;
     HSD_JObj* text_jobj0;
-    HSD_JObj* text_jobj6;
     HSD_JObj* text_jobj1;
     HSD_Text* text;
     f32 col_width;
     f32 row_height;
     f32 text_col_width;
-    f32 text_row_height;
+    GXColor text_color;
     s32 j;
     s32 i;
     MnNameArchive* archive = &mnName_804A06C0;
@@ -1152,7 +1168,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 extra;
     s32 total_rows;
     u8 name_idx;
-    PAD_STACK(24);
+    PAD_STACK(8);
 
     i = 0;
     do {
@@ -1183,16 +1199,19 @@ void mnName_80239A24(HSD_GObj* gobj)
     data->text = text;
     text_jobj0 = mnName_802388D4_noinline(gobj, 0U);
     lb_8000B1CC(text_jobj0, mnName_803ED618, &text_position);
-    text->pos_x = text_position.x;
-    text->pos_z = text_position.z;
-    text->pos_y = -text_position.y;
+    {
+        f32 pos_y = -text_position.y;
+        f32 pos_z = text_position.z;
+        f32 pos_x = text_position.x;
+        text->pos_x = pos_x;
+        text->pos_y = pos_y;
+        text->pos_z = pos_z;
+    }
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = *(&mnName_804D4BE4);
 
-    text_jobj6 = mnName_802388D4_noinline(gobj, 6U);
-    text_col_width = HSD_JObjGetTranslationX(text_jobj0);
-    text_col_width = HSD_JObjGetTranslationX(text_jobj6) - text_col_width;
+    text_col_width = mnName_80239A24_GetTextColumnWidth(gobj, text_jobj0);
     text_jobj1 = mnName_802388D4_noinline(gobj, 1U);
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);

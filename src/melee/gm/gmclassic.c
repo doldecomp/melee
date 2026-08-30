@@ -480,7 +480,7 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     s32 count;
     s32 i;
 
-    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    for (count = 0; matchups->x00 != 0x148; matchups++, count++) {
     }
 
     for (i = 0; i < count; i++) {
@@ -488,38 +488,44 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     }
 
     for (i = 0; i < count; i++) {
-        s32 swap_idx = HSD_Randi(count);
-        u8 tmp = order[i];
-        order[i] = order[swap_idx];
-        order[swap_idx] = tmp;
+        u8* swap = &order[HSD_Randi(count)];
+        u8* cur = &order[i];
+        u8 tmp = *cur;
+        *cur = *swap;
+        *swap = tmp;
     }
 }
 
-static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
+static inline s32 gmClassic_GetMatchupCount(const gmClassicMatchup* matchups)
+{
+    s32 count;
+
+    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    }
+    return count;
+}
+
+static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0,
+                                            const u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
-    gmClassicMatchup* result;
-    gmClassicMatchup* entry;
-    gm_803DDEC8Struct* temp;
-    u8* order;
     s32 outer;
-    s8 target_char;
-    int cur_char;
     s32 j;
+    gmClassicMatchup* entry;
+    gmClassicMatchup* result;
+    s32 target_char;
     s32 k;
-    s32 count;
-    s32 stage1;
+    s32 temp_idx;
 
     result = NULL;
     target_char = gmMainLib_8015CDC8()->c_kind;
-    order = arg1;
     outer = 0;
 
     goto check;
 loop:
-    entry = &arg0[*order];
+    entry = &arg0[arg1[outer]];
     for (j = 0; j < 3; j++) {
-        cur_char = entry->x02[j];
+        int cur_char = entry->x02[j];
 
         if (cur_char == CHKIND_NONE) {
             continue;
@@ -534,18 +540,21 @@ loop:
             goto next;
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
             for (k = 0; k < 3; k++) {
-                if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
+                if (arg2[temp_idx].xC != NULL &&
+                    cur_char == arg2[temp_idx].xC->x02[k])
+                {
                     goto next;
                 }
             }
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
-            if (temp->xC != NULL) {
-                stage1 = Stage_8022519C(entry->x00);
-                if (Stage_8022519C(temp->xC->x00) == stage1) {
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
+            if (arg2[temp_idx].xC != NULL) {
+                if (Stage_8022519C(arg2[temp_idx].xC->x00) ==
+                    Stage_8022519C(entry->x00))
+                {
                     result = entry;
                     goto next;
                 }
@@ -557,13 +566,8 @@ loop:
     }
 next:
     outer++;
-    order++;
 check:
-    count = 0;
-    while (arg0[count].x00 != 0x148) {
-        count++;
-    }
-    if (outer < count) {
+    if (outer < gmClassic_GetMatchupCount(arg0)) {
         goto loop;
     }
 
@@ -675,8 +679,7 @@ void gm_Mode_Classic_OnLoad(void)
         (gmClassicSceneData*) gm_Mode_Classic_States;
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
-    s32 i;
-    PAD_STACK(32);
+    PAD_STACK(56);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
@@ -695,10 +698,11 @@ void gm_Mode_Classic_OnLoad(void)
     gmMainLib_8015CDC8();
     gm_8017C984(data);
 
-    for (i = 0; i < 2; i++) {
-        s32 j;
-        for (j = 0; j < 6; j++) {
-            o->x20[i * 6 + j] = 0;
+    {
+        u8* p = o->x20;
+        int i;
+        for (i = 12; i > 0; i--) {
+            *p++ = 0;
         }
     }
 

@@ -157,6 +157,8 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 u8 mn_StockCountTextId = 0x2B;
 
 extern u16 const mn_804DBDF8;
+extern u32 const mn_804DBE10;
+extern u16 const mn_804DBE14;
 
 f32 mn_804D6BD8;
 HSD_GObj* mn_804D6BD0;
@@ -514,24 +516,46 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj2);
 }
 
+static inline void mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
+{
+    HSD_JObjReqAnimAll(jobj, (f32) digit);
+    HSD_JObjAnimAll(jobj);
+}
+
+static inline void
+mn_8022FEC8_AnimDamageDigits(u8 value, struct mn_8022FB88_arg1_t* data)
+{
+    mn_8022FEC8_AnimDigit(data->xA8 == NULL ? NULL : data->xA8->x10,
+                          (u8) (value / 10));
+    mn_8022FEC8_AnimDigit(data->xAC == NULL ? NULL : data->xAC->x10,
+                          (u8) (value % 10));
+}
+
+static inline AnimLoopSettings* mn_8022FEC8_GetSettings(u8 rule_kind,
+                                                        u8 rule_value)
+{
+    u8 default_value;
+
+    if (rule_kind != 0 && rule_kind != 2 && rule_kind != 4) {
+        return NULL;
+    }
+    default_value = mn_803EC7DC[rule_kind][1];
+    return &mn_803EC770[default_value - rule_value];
+}
+
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
+    AnimLoopSettings* settings;
     struct mn_8022FB88_arg1_t* data;
     HSD_JObj** digit_jobjs;
-    struct mn_8022FEC8_jobj_ref_t* tens_ref;
-    struct mn_8022FEC8_jobj_ref_t* ones_ref;
-    u8* base;
     HSD_JObj* digit_jobj;
     HSD_JObj* digit_jobj2;
-    HSD_JObj* tens_jobj;
-    HSD_JObj* ones_jobj;
     int value;
-    f32* frame;
+    u8 default_value;
 
     PAD_STACK(0x18);
 
     data = HSD_GObjGetUserData(arg0);
-    base = mn_803EC600;
     switch ((s32) arg2) {
     case 1:
         if (((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 != 1) {
@@ -541,63 +565,39 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
         digit_jobjs = data->x58;
         value = arg3;
         digit_jobj = digit_jobjs[7];
-        HSD_JObjReqAnimAll(digit_jobj, (f32) (u8) (value / 10));
-        HSD_JObjAnimAll(digit_jobj);
+        mn_8022FEC8_AnimDigit(digit_jobj, (u8) (value / 10));
         digit_jobj2 = digit_jobjs[8];
-        HSD_JObjReqAnimAll(digit_jobj2, (f32) (u8) (value % 10));
-        HSD_JObjAnimAll(digit_jobj2);
+        mn_8022FEC8_AnimDigit(digit_jobj2, (u8) (value % 10));
         return;
     case 3:
-        tens_ref = data->xA8;
-        if (tens_ref == NULL) {
-            tens_jobj = NULL;
-        } else {
-            tens_jobj = tens_ref->x10;
-        }
-        HSD_JObjReqAnimAll(tens_jobj, (f32) (u8) (arg3 / 10));
-        HSD_JObjAnimAll(tens_jobj);
-        ones_ref = data->xAC;
-        if (ones_ref == NULL) {
-            ones_jobj = NULL;
-        } else {
-            ones_jobj = ones_ref->x10;
-        }
-        HSD_JObjReqAnimAll(ones_jobj, (f32) (u8) (arg3 % 10));
-        HSD_JObjAnimAll(ones_jobj);
+        mn_8022FEC8_AnimDamageDigits(arg3, data);
         return;
     case 0:
     case 2:
     case 4:
-        break;
+        if ((mn_804A04F0.buttons & 4) != 0) {
+            settings = mn_8022FEC8_GetSettings(arg2, arg3);
+            HSD_JObjReqAnimAll(arg1, settings->start_frame);
+        } else {
+            if (arg2 != 0 && arg2 != 2 && arg2 != 4) {
+                settings = NULL;
+            } else {
+                default_value = mn_803EC7DC[arg2][1];
+                if (arg3 == 0) {
+                    settings = &mn_803EC734[default_value];
+                } else {
+                    settings = &mn_803EC734[arg3 - 1];
+                }
+            }
+            HSD_JObjReqAnimAll(arg1, settings->start_frame);
+        }
+        HSD_JObjAnimAll(arg1);
+        return;
     case 5:
     case 6:
     default:
         return;
     }
-
-    if ((mn_804A04F0.buttons & 4) != 0) {
-        if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-            u8* frame_base = base + 0x170;
-            frame = (f32*) (frame_base +
-                            (0xC * (base[0x1DD + (arg2 << 1)] - arg3)));
-        }
-        HSD_JObjReqAnimAll(arg1, *frame);
-    } else {
-        if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-            u8 idx = base[0x1DD + (arg2 << 1)];
-            if (arg3 == 0) {
-                frame = (f32*) (base + 0x134 + (0xC * idx));
-                (void) frame;
-            } else {
-                frame = (f32*) (base + 0x134 + (0xC * (arg3 - 1)));
-            }
-        }
-        {
-            f32 frame_value = *frame;
-            HSD_JObjReqAnimAll(arg1, frame_value);
-        }
-    }
-    HSD_JObjAnimAll(arg1);
 }
 
 void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
@@ -641,6 +641,7 @@ extern MenuKindData mn_803EB6B0[];
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
     HSD_JObj* option_roots[8];
+    HSD_JObj** option_root;
     HSD_JObj* roots[17];
     u8 pad_[4];
     u16 indices[17];
@@ -648,12 +649,12 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     AnimLoopSettings* settings;
     HSD_JObj* jobj;
     s32 i;
+    struct mn_802307F8_t* user_data;
     s32 j;
-    void* user_data;
-    s32 visible;
+    u8 j8;
+    u8 focus;
     u8 count;
     u8 selected;
-    u8 hovered;
     u8* base;
     s32 tail_i;
     struct mn_802307F8_t* data;
@@ -668,7 +669,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         indices[i] = i;
     }
 
-    for (i = 0; i < count; i++) {
+    option_root = option_roots;
+    for (i = 0; i < count; option_root++, i++) {
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 4) {
             valid = 0;
@@ -676,12 +678,15 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             valid = 1;
         }
         if (valid) {
+            s32 visible;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            for (j = (visible = 0); j < (u8) i; j++) {
-                u8 j8 = j;
+            visible = valid - 1;
+            j = visible;
+            for (; j < (s32) (u8) i; j++) {
                 s32 valid2;
+                j8 = j;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
                     valid2 = 0;
                 } else {
@@ -698,11 +703,13 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             } else {
                 v = p->x10;
             }
-            option_roots[i] = v;
+            *option_root = v;
         }
     }
 
     if (arg1 != 0) {
+        u8 hovered;
+
         selected = data->x1;
         lb_8001204C(option_roots[selected], roots, indices, 0x11);
         HSD_JObjSetFlagsAll(roots[16], JOBJ_HIDDEN);
@@ -725,7 +732,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         HSD_JObjAnim(roots[7]);
         HSD_JObjSetFlagsAll(roots[8], JOBJ_HIDDEN);
 
-        hovered = mn_804A04F0.hovered_selection;
+        hovered = mn_8022F538_GetHoveredSelection();
         lb_8001204C(option_roots[hovered], roots, indices, 0x11);
         jobj = roots[16];
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
@@ -745,7 +752,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         if (hovered == 1 &&
             ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
         {
-            HSD_JObjReqAnim(roots[7], lbl_804D4B8C);
+            HSD_JObjReqAnim(roots[7], (&mn_804D4B88)[1]);
         } else {
             f32* q = (f32*) (base + hovered * 8);
             HSD_JObjReqAnim(roots[7], *(f32*) ((u8*) q + 0x14));
@@ -767,7 +774,6 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     }
 
     for (i = 0; i < count; i++) {
-        u8 focus;
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 4) {
             valid = 0;
@@ -784,11 +790,11 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
                 mn_8022ED6C(roots[13], (AnimLoopSettings*) (base + 0x54));
             }
             if ((u32) (i - 5) <= 1) {
-                u8* q = base + (i == focus) * 0xC;
-                settings = (AnimLoopSettings*) (q + 0x78);
+                settings = (AnimLoopSettings*) base + (i == focus);
+                settings += 10;
             } else {
-                u8* q = base + ((tail_i = i) == focus) * 0xC;
-                settings = (AnimLoopSettings*) (q + 0x60);
+                settings = (AnimLoopSettings*) base + (i == focus);
+                settings += 8;
             }
             mn_8022ED6C(roots[2], settings);
             mn_8022ED6C(roots[8], (AnimLoopSettings*) (base + 0x90));
@@ -1028,16 +1034,40 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
     return ret;
 }
 
+static inline s32 mn_80230E38_CountVisible(u8 limit)
+{
+    u8 option_index;
+    s32 visible;
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < (s32) limit; i++) {
+        option_index = i;
+        if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4) {
+            visible = 0;
+        } else {
+            visible = 1;
+        }
+        if (visible != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 HSD_GObj* mn_80230E38(int arg0)
 {
-    UNUSED u8 pad94[12];
+    u8 operand_pad[12];
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
+    union {
+        u16 packed;
+        u8 idx[2];
+    } damage_indices;
     HSD_GObj* gobj;
     struct mn_802307F8_t* user_data;
     u8 num_options;
     u8 selected;
-    u8 option_index;
     s32 i, j;
     s32 vis_before;
     s32 vis_total;
@@ -1050,7 +1080,7 @@ HSD_GObj* mn_80230E38(int arg0)
     HSD_JObj* root_jobj;
     StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
-    PAD_STACK(52);
+    PAD_STACK(12);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1080,9 +1110,7 @@ HSD_GObj* mn_80230E38(int arg0)
     {
         mn_804A04F0.confirmed_selection = user_data->x9;
     } else {
-        mn_804A04F0.confirmed_selection =
-            ((union mn_802307F8_value_view*) user_data)
-                ->indexed.values[user_data->x1];
+        mn_804A04F0.confirmed_selection = *(&user_data->x2 + user_data->x1);
     }
 
     if ((u8) arg0 != 0) {
@@ -1104,34 +1132,10 @@ HSD_GObj* mn_80230E38(int arg0)
     desc_ptr = (StaticModelDesc**) (mn_803EC600 + 0x1EC);
     sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
     for (i = 0; i < (s32) num_options; desc_ptr++, i++) {
-        vis_before = 0;
-        for (j = vis_before; j < (s32) (u8) i; j++) {
-            option_index = j;
-            if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4)
-            {
-                visible = 0;
-            } else {
-                visible = 1;
-            }
-            if (visible != 0) {
-                vis_before++;
-            }
-        }
+        vis_before = mn_80230E38_CountVisible((u8) i);
 
-        vis_total = 0;
         option_jobj = user_data->xC[((u16*) mn_803EC600)[(u8) vis_before]];
-        for (j = vis_total; j < 7; j++) {
-            option_index = j;
-            if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4)
-            {
-                visible = 0;
-            } else {
-                visible = 1;
-            }
-            if (visible != 0) {
-                vis_total++;
-            }
-        }
+        vis_total = mn_80230E38_CountVisible(7);
 
         HSD_JObjReqAnim(option_jobj, (f32) vis_total);
         HSD_JObjAnim(option_jobj);
@@ -1194,15 +1198,28 @@ HSD_GObj* mn_80230E38(int arg0)
 
                 switch (i) {
                 case 1: {
-                    u8 time_indices[6] = { 2, 3, 5, 6, 7, 8 };
-                    for (j = 0; j < 6; j++) {
+                    union {
+                        struct {
+                            u32 bytes4;
+                            u16 bytes2;
+                        } packed;
+                        u8 idx[6];
+                    } time_indices;
+                    u8* index_ptr;
+
+                    PAD_STACK(0x18);
+
+                    time_indices.packed.bytes4 = mn_804DBE10;
+                    time_indices.packed.bytes2 = mn_804DBE14;
+                    index_ptr = time_indices.idx;
+                    for (j = 0; j < 6; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + time_indices[j]), text);
+                        HSD_JObjAddChild(*(&user_data->x34[1].x0 + *index_ptr),
+                                         text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)
@@ -1210,23 +1227,20 @@ HSD_GObj* mn_80230E38(int arg0)
                     break;
                 }
                 case 3: {
-                    union {
-                        u16 packed;
-                        u8 idx[2];
-                    } damage_indices;
+                    u8* index_ptr;
                     u8 value = user_data->x5;
                     HSD_JObj* digit_jobj;
 
                     damage_indices.packed = mn_804DBDF8;
-                    for (j = 0; j < 2; j++) {
+                    index_ptr = damage_indices.idx;
+                    for (j = 0; j < 2; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            *(&user_data->x34[3].x0 + damage_indices.idx[j]),
-                            text);
+                        HSD_JObjAddChild(*(&user_data->x34[3].x0 + *index_ptr),
+                                         text);
                     }
                     digit_jobj = (HSD_JObj*) mn_80231634(
                         (struct mn_80231634_t*) *(&user_data->x34[3].x0 + 2));
@@ -1241,8 +1255,7 @@ HSD_GObj* mn_80230E38(int arg0)
                 case 0:
                 case 2:
                 case 4: {
-                    u8 value = ((union mn_802307F8_value_view*) user_data)
-                                   ->indexed.values[i];
+                    u8 value = *(&user_data->x2 + i);
                     u8 default_value;
                     AnimLoopSettings* value_als;
 
@@ -1508,4 +1521,6 @@ bool mn_80231F80(u8 arg0)
     return true;
 }
 
+u32 const mn_804DBE10 = 0x02030506;
+u16 const mn_804DBE14 = 0x0708;
 u16 const mn_804DBDF8 = 0x203;

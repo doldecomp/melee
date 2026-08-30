@@ -4,9 +4,10 @@
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/inlines.h"
-#include "it/inlines.h"
 #include "it/items/itsamusgrapple.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
@@ -104,7 +105,6 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    s32 frame;
     s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
@@ -114,7 +114,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Vec3 vel;
     f32 grav;
     f32 r;
-    PAD_STACK(4);
+    PAD_STACK(12);
 
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
@@ -133,12 +133,12 @@ bool fn_800D9930(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->xAC) {
             if (grav <= (f32) attrs->xB8) {
                 Item* it;
-                it = GET_ITEM(fp->u.ss.x223C);
+                it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
-                    for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
-                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                    for (i = 0; i < 4; i++) {
+                        if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);

@@ -736,6 +736,22 @@ void gmMainLib_8015DB80(void)
     }
 }
 
+static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
+                                            VsModeData* store_vmd, u8 tag)
+{
+    u8* ptr;
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        ptr = &store_vmd->data.players[i].xA;
+        if (load_vmd->data.players[i].xA == tag) {
+            *ptr = 0x78;
+        } else if (*ptr > tag && *ptr != 0x78) {
+            *ptr -= 1;
+        }
+    }
+}
+
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -763,7 +779,6 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         VsModeData unk_1490;
     }* base;
     GameRules* gr;
-    s32 j;
     u8 val;
     u8* ptr;
 
@@ -777,40 +792,11 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-#define ADJ_NAMETAG_PAIR(field, store_field)                                  \
-    do {                                                                      \
-        ptr = &(store_field);                                                 \
-        if ((field) == (u8) arg0) {                                           \
-            *ptr = 0x78;                                                      \
-        } else if (*ptr > (u8) arg0 && *ptr != 0x78) {                        \
-            *ptr -= 1;                                                        \
-        }                                                                     \
-    } while (0)
-
-#define ADJ_VMD(load_vmd_expr, store_vmd_expr)                                \
-    do {                                                                      \
-        VsModeData* store_vmd = (store_vmd_expr);                             \
-        for (j = 0; j < 6; j++) {                                             \
-            ADJ_NAMETAG_PAIR((load_vmd_expr)->data.players[j].xA,             \
-                             store_vmd->data.players[j].xA);                  \
-        }                                                                     \
-    } while (0)
-
-#define ADJ_VMD_SINGLE(vmd_expr)                                              \
-    do {                                                                      \
-        VsModeData* vmd = (vmd_expr);                                         \
-        for (j = 0; j < 6; j++) {                                             \
-            ADJ_NAMETAG_PAIR(vmd->data.players[j].xA,                         \
-                             vmd->data.players[j].xA);                        \
-        }                                                                     \
-    } while (0)
-
-    config = &gmMainLib_804D3EE0->unk_51C;
+    config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     ptr = &config->x4;
     val = *ptr;
-    base = (struct gmMainLib_8015DBF4_base*) &gmMainLib_804D3EE0->unk_530
-               .unk_588[0];
+    base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
     if (val == (u8) arg0) {
         *ptr = 0x78;
     } else if (val > (u8) arg0 && val != 0x78) {
@@ -821,22 +807,36 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_NAMETAG_78(config_all->unk_530.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
-    ADJ_VMD_SINGLE(&gm_80497618);
+    gmMainLib_AdjustNameTags(&gm_80497618, &gm_80497618, (u8) arg0);
 
-    ADJ_VMD(&base->unk_1490, (VsModeData*) ((s8*) base + 0xF08));
-    ADJ_VMD(&base->unk_D10, (VsModeData*) ((s8*) base + 0x788));
-    ADJ_VMD(&base->unk_590, (VsModeData*) ((s8*) base + 8));
-    ADJ_VMD(&base->unk_6D0, (VsModeData*) ((s8*) base + 0x148));
-    ADJ_VMD(&base->unk_810, (VsModeData*) ((s8*) base + 0x288));
-    ADJ_VMD(&base->unk_950, (VsModeData*) ((s8*) base + 0x3C8));
-    ADJ_VMD(&base->unk_A90, (VsModeData*) ((s8*) base + 0x508));
-    ADJ_VMD(&base->unk_BD0, (VsModeData*) ((s8*) base + 0x648));
-    ADJ_VMD(&base->unk_E50, (VsModeData*) ((s8*) base + 0x8C8));
-    ADJ_VMD(&base->unk_F90, (VsModeData*) ((s8*) base + 0xA08));
-    ADJ_VMD(&base->unk_10D0, (VsModeData*) ((s8*) base + 0xB48));
-    ADJ_VMD(&base->unk_1210, (VsModeData*) ((s8*) base + 0xC88));
-    ADJ_VMD(&base->unk_1350, (VsModeData*) ((s8*) base + 0xDC8));
-    ADJ_VMD(&base->unk_1490, (VsModeData*) ((s8*) base + 0xF08));
+    gmMainLib_AdjustNameTags(&base->unk_1490,
+                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_D10,
+                             (VsModeData*) ((s8*) base + 0x788), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_590, (VsModeData*) ((s8*) base + 8),
+                             (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_6D0,
+                             (VsModeData*) ((s8*) base + 0x148), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_810,
+                             (VsModeData*) ((s8*) base + 0x288), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_950,
+                             (VsModeData*) ((s8*) base + 0x3C8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_A90,
+                             (VsModeData*) ((s8*) base + 0x508), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_BD0,
+                             (VsModeData*) ((s8*) base + 0x648), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_E50,
+                             (VsModeData*) ((s8*) base + 0x8C8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_F90,
+                             (VsModeData*) ((s8*) base + 0xA08), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_10D0,
+                             (VsModeData*) ((s8*) base + 0xB48), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1210,
+                             (VsModeData*) ((s8*) base + 0xC88), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1350,
+                             (VsModeData*) ((s8*) base + 0xDC8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1490,
+                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
 
     {
         gr = &gmMainLib_804D3EE0->x1850;
@@ -864,31 +864,34 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }
     }
 
-#undef ADJ_VMD
-#undef ADJ_VMD_SINGLE
-#undef ADJ_NAMETAG_PAIR
 #undef ADJ_NAMETAG_78
 
     return arg0;
 }
 
-void gmMainLib_8015EA80(void)
+static inline void gmMainLib_SetHandicaps(s8* base)
 {
     s32 i;
     s32 j;
-    s8* base = gmMainLib_804D3EE0->unk_530.unk_588;
 
-    gmMainLib_8015CDEC();
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 6; j++) {
             base[0x78 + i * 0x140 + j * 0x24] = 9;
         }
     }
-    for (i = 7; i < 13; i++) {
-        for (j = 0; j < 6; j++) {
-            base[0x78 + i * 0x140 + j * 0x24] = 9;
-        }
-    }
+}
+
+void gmMainLib_8015EA80(void)
+{
+    s8* volatile base_temp = gmMainLib_804D3EE0->unk_530.unk_588;
+    s8* base = base_temp;
+    s8* base2 = base + 7 * 0x140;
+
+    PAD_STACK(0x90);
+
+    gmMainLib_8015CDEC();
+    gmMainLib_SetHandicaps(base);
+    gmMainLib_SetHandicaps(base2);
 }
 
 int gmMainLib_8015ECB0(void)
