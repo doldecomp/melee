@@ -1649,7 +1649,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     vel_mag = sqrtf(vel_mag_sq);
                     dist_sq = dy * dy + dx * dx;
                     dist_sq += dz * dz;
-                    if (dist_sq == 0.0) {
+                    if (dist_sq == 0.0F) {
                         break;
                     }
                     dist = sqrtf(dist_sq);
@@ -2046,7 +2046,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
                           pp->vel.z * pp->vel.z;
                     mag = sqrtf(mag);
-                    if (mag > 0.0F) {
+                    if (mag > 1e-10F) {
                         target_speed /= mag;
                         pp->vel.x *= target_speed;
                         pp->vel.y *= target_speed;
