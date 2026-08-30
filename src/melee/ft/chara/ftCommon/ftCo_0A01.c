@@ -2148,6 +2148,11 @@ static inline float ftCo_800A4038_inline2(Fighter* fp)
     return -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y);
 }
 
+static inline s32 ftCo_800A4038_inline3(f32 y, f32 x)
+{
+    return ftCo_800A4038_inline1(x, y);
+}
+
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
@@ -2181,7 +2186,6 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         frames = ftCo_800A4038_inline2(fp) / grav;
     }
     info = &stage_info;
-    PAD_STACK(0x4);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -2227,7 +2231,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
                     px = 5.0 + ex;
-                    valid = ftCo_800A4038_inline1(px, ey);
+                    valid = ftCo_800A4038_inline3(ey, px);
                     if (valid != 0 &&
                         !ftCo_800A4038_inline0(fp, data2, px, ey))
                     {
