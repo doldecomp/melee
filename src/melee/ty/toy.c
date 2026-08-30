@@ -4647,17 +4647,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 total = *gmMainLib_GetTrophyCount();
                             }
                             if (total > 3) {
-                                s32 count;
-
-                                if ((gm_IsCurrently1PMode() != 0) ||
-                                    (gm_GetCurrentGameMode() ==
-                                     GM_TOY_LOTTERY))
-                                {
-                                    count = base->trophy_count;
-                                } else {
-                                    count = *gmMainLib_GetTrophyCount();
-                                }
-                                if ((s32) (display->selectedIdx + 1) >= count)
+                                if ((s32) (display->selectedIdx + 1) >=
+                                    _Toy_GetTrophyTotal(base))
                                 {
                                     s32 count2;
                                     ToyListEntry* list_entry;
