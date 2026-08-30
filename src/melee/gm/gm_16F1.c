@@ -499,6 +499,20 @@ int fn_801701B8(void)
     return lbl_804D65A0;
 }
 
+static inline void fn_801701C0_Sort(s32* vals, int i)
+{
+    s32* p = vals;
+
+    for (; i > 0; i--) {
+        if (p[0] < p[1]) {
+            s32 tmp = p[1];
+            p[1] = p[0];
+            p[0] = tmp;
+        }
+        p++;
+    }
+}
+
 int fn_801701C0(void* arg0, int arg1, int arg2)
 {
     struct lbl_8046B6A0_24C_t* rules = arg0;
@@ -614,7 +628,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xDB: {
         s32 vals[4];
         s32* base;
-        s32* p;
         int i, j;
         if (x58[arg1].x20 >= 3) {
             base = vals;
@@ -630,15 +643,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
-                    }
-                    p++;
-                }
+                fn_801701C0_Sort(base, j);
             }
             if (base[0] == x58[arg1].x20 && base[0] >= base[1] * 2) {
                 return 1;
@@ -669,7 +674,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xDD: {
         s32 vals[4];
         s32* base;
-        s32* p;
         int i, j;
         if (x58[arg1].x40 >= 3) {
             base = vals;
@@ -685,15 +689,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                p = base;
-                for (i = j; i > 0; i--) {
-                    if (p[0] < p[1]) {
-                        s32 tmp = p[1];
-                        p[1] = p[0];
-                        p[0] = tmp;
-                    }
-                    p++;
-                }
+                fn_801701C0_Sort(base, j);
             }
             if (base[0] == x58[arg1].x40 && base[0] >= base[1] * 2) {
                 return 1;
