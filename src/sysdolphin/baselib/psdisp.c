@@ -1934,9 +1934,9 @@ void psDispParticles(u32 target_link, u32 sw)
                             f32 x_scale;
                             f32 x_offset;
                             f32 w1;
-                            f32 w2;
-                            f32 y_scale;
                             f32 y_offset;
+                            f32 y_scale;
+                            f32 w2;
                             f32 w3;
                             f32 y0;
                             f32 y1;
