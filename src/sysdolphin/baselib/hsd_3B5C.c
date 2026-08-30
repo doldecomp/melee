@@ -558,10 +558,9 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
         work_r9_2 =
             (u16*) arg0 + (((arg1 / 4) * 0x10) +
                            ((scratch_r6 << 6) * ((arg2 / 4) + work_r6)));
-        work_r24 = 0;
-        for (work_r7 = 0; work_r7 < 2; work_r7++) {
-            work_r12 = work_r21 * 8;
-            for (work_r4 = 0; work_r4 < 4; work_r4++) {
+        for (work_r7 = 0, work_r24 = 0; work_r7 < 2; work_r7++) {
+            for (work_r4 = 0, work_r12 = work_r21 * 8; work_r4 < 4;
+                 work_r4++) {
                 work_r31 = (work_r24 + work_r12) * 4;
                 for (work_r5 = 0; work_r5 < 4; work_r5++) {
                     s32 work_r8_2;
