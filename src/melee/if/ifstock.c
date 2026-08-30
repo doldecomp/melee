@@ -133,14 +133,13 @@ ifStock_802F8298_get_data(struct ifStock_804A1378* stock)
     return stock->x204;
 }
 
-static inline void ifStock_802F8298_init(HSD_GObj* gobj,
-                                         struct IfStockUserData** user_data,
-                                         HSD_JObj** jobj,
-                                         struct ifStock_804A1378** stock)
+static inline struct IfStockUserData*
+ifStock_802F8298_init(HSD_GObj* gobj, HSD_JObj** jobj,
+                      struct ifStock_804A1378** stock)
 {
-    *user_data = GET_IFSTOCK(gobj);
     *jobj = gobj->hsd_obj;
     *stock = &ifStock_804A1378;
+    return GET_IFSTOCK(gobj);
 }
 
 static inline int ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
@@ -169,25 +168,32 @@ ifStock_802F8298_get_x40(struct IfStockUserData* user_data,
     return stock->player[user_data->player].x40;
 }
 
+static inline void ifStock_802F8298_init_stocks(
+    HSD_GObj* gobj, struct ifStock_804A1378** stock, HSD_JObj** jobj,
+    struct IfStockUserData** user_data, HSD_JObj** jobj_anim)
+{
+    *user_data = ifStock_802F8298_init(gobj, jobj, stock);
+    *jobj_anim = *jobj;
+    (*stock)->player[(*user_data)->player].stocks =
+        Player_GetStocks((*user_data)->player);
+    if ((*stock)->player[(*user_data)->player].stocks > 99) {
+        (*stock)->player[(*user_data)->player].stocks = 99;
+    }
+    if ((*stock)->player[(*user_data)->player].stocks < 0) {
+        (*stock)->player[(*user_data)->player].stocks = 1;
+    }
+}
+
 void ifStock_802F8298(HSD_GObj* gobj)
 {
     struct IfStockUserData* user_data;
     HSD_JObj* jobj;
-    int i;
-    HSD_JObj* jobj_anim;
-    Vec3 vecA, vecB, vecC, vecD;
-    HSD_JObj* jobj2;
     struct ifStock_804A1378* stock;
-    ifStock_802F8298_init(gobj, &user_data, &jobj, &stock);
-    jobj_anim = jobj;
-    stock->player[user_data->player].stocks =
-        Player_GetStocks(user_data->player);
-    if (stock->player[user_data->player].stocks > 99) {
-        stock->player[user_data->player].stocks = 99;
-    }
-    if (stock->player[user_data->player].stocks < 0) {
-        stock->player[user_data->player].stocks = 1;
-    }
+    HSD_JObj* jobj_anim;
+    int i;
+    HSD_JObj* jobj2;
+    Vec3 vecA, vecB, vecC, vecD;
+    ifStock_802F8298_init_stocks(gobj, &stock, &jobj, &user_data, &jobj_anim);
     if (stock->player[user_data->player].stocks <= 5) {
         HSD_JObjSetFlagsAll(stock->player[user_data->player].x3C, JOBJ_HIDDEN);
         for (i = 0; i < 5; i++) {
