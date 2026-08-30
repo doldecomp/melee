@@ -572,6 +572,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
         f32 left_x;
         f32 dx;
         f32 top;
+        f32* init_heights;
         grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
 
         mpJointListAdd(0);
@@ -579,13 +580,14 @@ void grZebes_801D881C(HSD_GObj* gobj)
 
         colWidth = (state->positions[1].x - state->positions[0].x) / 5.0f;
         heights = col_heights;
+        init_heights = heights;
 
-        col_heights[0] = -9999.0f;
-        col_heights[1] = -9999.0f;
-        col_heights[2] = -9999.0f;
-        col_heights[3] = -9999.0f;
-        col_heights[4] = -9999.0f;
-        col_heights[5] = -9999.0f;
+        *init_heights++ = -9999.0f;
+        *init_heights++ = -9999.0f;
+        *init_heights++ = -9999.0f;
+        *init_heights++ = -9999.0f;
+        *init_heights++ = -9999.0f;
+        *init_heights++ = -9999.0f;
 
         (void) 0.9;
 
