@@ -217,11 +217,9 @@ static inline void hsd_803B3408_set_stride(s32* tile_stride, s32 width)
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
     s32 luma_block_offset;
-    s32 chroma_block_offset;
-    s32 second_pixel_offset;
-    s32 chroma_pixel_count;
-    s32 luma_offset;
+    s32 tile_row_offset;
     s32 chroma_row_base;
+    s32 luma_offset;
     s32 second_pixel_index;
     s32 luma_row_base;
     s32 pixel_index;
@@ -234,7 +232,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     s32 tile_x;
     u16 pixel;
     JpegLumaPair* luma_pair;
-    s32 tile_row_offset;
+    s32 second_pixel_offset;
     u16* pixel_ptr;
 
     tile_row_offset = 0;
@@ -242,10 +240,14 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     chroma_row_base = 0;
     luma_row_base = 0;
     for (tile_y = 0; tile_y < 2; tile_y++) {
+        s32 chroma_block_offset;
         u16* src;
+
         chroma_block_offset = chroma_row_base;
-        src = (u16*) image +
-              (hsd_803B3408_offset(tile_stride, y, x) + tile_row_offset);
+        {
+            s32 image_offset = hsd_803B3408_offset(tile_stride, y, x);
+            src = (u16*) image + (image_offset + tile_row_offset);
+        }
         luma_block_offset = 0;
         for (tile_x = 0; tile_x < 2; tile_x++) {
             s32 chroma_y;
@@ -253,10 +255,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
                 s32 chroma_x;
 
-                chroma_x = 0;
-                for (chroma_pixel_count = 4; chroma_pixel_count != 0;
-                     chroma_pixel_count--)
-                {
+                for (chroma_x = 0; chroma_x < 4; chroma_x++) {
                     f32 green;
                     s32 chroma_x_offset;
                     s32 red_chroma;
@@ -286,7 +285,6 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                         (((chroma_y & 1) * 4) +
                                          ((chroma_y & 2) * 0x10)))) *
                                       4));
-                    chroma_x += 1;
                     chroma_work->data.x518[0] =
                         (s32) ((0.5f * (f32) blue_chroma) +
                                ((-0.1687f * (f32) red_chroma) -
