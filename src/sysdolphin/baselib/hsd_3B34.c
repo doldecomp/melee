@@ -966,7 +966,7 @@ loop_13:
 }
 
 static const s32 lbl_804DEB88[1] = { 0x4A464946 };
-static const u8 lbl_804DEB8C[4] = { 0 };
+static const u8 jpeg_jfif_terminator[1] = { 0 };
 
 void hsd_803B46D4(void)
 {
@@ -993,7 +993,7 @@ void hsd_803B46D4(void)
 
     scratch_r4 = hsd_804D79A0;
     sp8.word = lbl_804DEB88[0];
-    sp8.byte[0] = lbl_804DEB8C[0];
+    sp8.byte[0] = jpeg_jfif_terminator[0];
     state.jmp_buf = &hsd_804D2648;
     if (scratch_r4 < &hsd_804D79A4[hsd_804D79A8]) {
         hsd_804D79A0 = scratch_r4 + 1;
