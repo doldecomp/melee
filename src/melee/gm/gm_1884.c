@@ -146,18 +146,17 @@ int fn_801884F8(void)
 
 void fn_80188550(int arg0)
 {
-    TrainingModeState* state = &lbl_80473700;
-    int current = state->count;
+    int current = lbl_80473700.count;
     int to_remove;
     int j;
 
     if (arg0 != current) {
-        if (arg0 > state->count) {
+        if (arg0 > lbl_80473700.count) {
             int i;
             int skip;
             int remaining;
 
-            skip = state->count;
+            skip = lbl_80473700.count;
             remaining = arg0 - current;
             i = 0;
             j = 0;
@@ -195,9 +194,11 @@ void fn_80188550(int arg0)
                 }
             }
         }
-        state->count = arg0;
+        lbl_80473700.count = arg0;
     }
 }
+
+#undef PLAYER_AT
 
 void fn_80188644(void)
 {

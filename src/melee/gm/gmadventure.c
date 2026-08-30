@@ -1390,7 +1390,7 @@ void gm_801B461C(GameModeState* scene)
     if (gm_GetPreviousSceneIndex() == ADVENTURE_LUIGI_CUTSCENE) {
         StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
         UnkAdventureData* adventure = gm_GetAdventureData();
-        data->players[1].c_kind = CKIND_LUIGI;
+        data->players[1].ckind = CKIND_LUIGI;
         data->players[1].color = gm_804D68D8.x3;
         adventure->x74 = 1;
     }
@@ -1578,7 +1578,7 @@ void gm_801B4DAC(GameModeState* scene)
         colors[0] = data->players[1].color;
         gmRegSetupEnemyColorTable(temp_r30->x0.ckind, temp_r30->x0.color,
                                   ckinds, colors);
-        data->players[1].c_kind = CKIND_FALCO;
+        data->players[1].ckind = CKIND_FALCO;
         data->players[1].color = colors[0];
     }
 }
@@ -1602,7 +1602,7 @@ void gm_801B4EB8(GameModeState* scene)
     /// If Luigi isn't unlocked, don't spawn him for this match.
     if (!gm_IsCKindUnlocked(CKIND_LUIGI)) {
         for (i = 0; i < 3; i++) {
-            if (data->players[i + 1].c_kind == CKIND_LUIGI) {
+            if (data->players[i + 1].ckind == CKIND_LUIGI) {
                 data->players[i + 1].slot_type = Gm_PKind_NA;
             }
         }

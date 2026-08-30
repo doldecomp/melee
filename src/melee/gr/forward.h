@@ -171,8 +171,9 @@ typedef enum StKind {
     /* 0x1E */ St_Kind_OldKongo,
     /* 0x1F */ St_Kind_Battle,
     /* 0x20 */ St_Kind_Last,
-    /* 0x49 */ St_Kind_BigBlueRoute = 0x49,
-    /* 0x55 */ St_Kind_Heal = 0x55,
+    /* 0x49 */ St_Kind_BigBlueRoute = 73,
+    /* 0x55 */ St_Kind_Unk84 = 84,
+    /* 0x55 */ St_Kind_Heal,
 } StKind;
 
 typedef enum StadiumGrType {

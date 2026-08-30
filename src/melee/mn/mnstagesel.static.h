@@ -46,7 +46,7 @@ struct stagelistinfo {
 };
 static s8 mnStageSel_804D50A0 = -1;
 
-static SSSData* mnStageSel_804D6C90;
+static SSSData* sss_data;
 static HSD_Archive* mnStageSel_804D6C94;
 static struct mnStageSel_804D6C98_t {
     StaticModelDesc x0;

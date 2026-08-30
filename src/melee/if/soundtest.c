@@ -1033,7 +1033,7 @@ void un_802FFF2C(StartMeleeData* arg0)
     gm_80167A14(arg0->players);
     sp = &s->x130;
     for (i = 0; i < 4; i++) {
-        arg0->players[i].c_kind = sp->x10[i];
+        arg0->players[i].ckind = sp->x10[i];
         arg0->players[i].slot_type = sp->x24[i];
         arg0->players[i].color = sp->x38[i];
         arg0->players[i].sub_color = sp->x48[i];

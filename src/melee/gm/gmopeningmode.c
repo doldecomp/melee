@@ -494,7 +494,7 @@ void onEnterVs(GameModeState* arg0)
 
     for (i = 0; i < 4; i++) {
         CharacterKind kind = gm_801BF648(i);
-        md->players[i].c_kind = kind;
+        md->players[i].ckind = kind;
         md->players[i].color = gm_801BF670(i);
         md->players[i].slot_type = Gm_PKind_Cpu;
         md->players[i].cpu_level = 9;

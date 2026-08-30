@@ -3142,9 +3142,21 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             do {
                 line_idx = HSD_Randi(30);
-                for (j = 0; j < k; j++) {
-                    if (gp->typed.cars[j].status.lane.lane == line_idx) {
-                        break;
+                {
+                    u8* p = (u8*) gp;
+                    i = 0;
+                    {
+                        s32 ctr = k;
+                        while (ctr > 0) {
+                            if (((grBb_LaneBits*) (p + 0xD4))->lane ==
+                                line_idx)
+                            {
+                                break;
+                            }
+                            p += 0x40;
+                            i++;
+                            ctr--;
+                        }
                     }
                 }
             } while (j != k);

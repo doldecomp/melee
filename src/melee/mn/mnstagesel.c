@@ -452,9 +452,9 @@ void mnStageSel_Scene_OnEnter(void* arg0)
 
     PAD_STACK(0xDC - 0x50);
 
-    mnStageSel_804D6C90 = (SSSData*) arg0;
+    sss_data = (SSSData*) arg0;
 
-    if (mnStageSel_804D6C90->force_stage_id < 0) {
+    if (sss_data->force_stage_id < 0) {
         if (lbLang_IsSavedLanguageUS() != 0) {
             mnStageSel_804D6C94 = lbArchive_LoadArchive("MnSlMap.usd");
         } else {
@@ -469,7 +469,7 @@ void mnStageSel_Scene_OnEnter(void* arg0)
         mnStageSel_804D6CAC = 0;
         mnStageSel_804D6CAD = 0;
         mnStageSel_804D6CAE = 0x1E;
-        mnStageSel_804D50A0 = mnStageSel_804D6C90->unk_stage - 1;
+        mnStageSel_804D50A0 = sss_data->unk_stage - 1;
         mnStageSel_804D6CA4 = 0x14;
 
         {
@@ -766,14 +766,13 @@ static inline HSD_PadStatus* get_pad(u8 i)
 /// OnFrame
 void mnStageSel_Scene_OnFrame(void)
 {
-    if (mnStageSel_804D6C90->force_stage_id >= 0) {
+    if (sss_data->force_stage_id >= 0) {
         mnStageSel_804D6CAF = 2;
-        mnStageSel_804D6C90->data.data.rules.stkind =
-            mnStageSel_804D6C90->force_stage_id;
+        sss_data->vs.start.rules.stkind = sss_data->force_stage_id;
         gm_801A4B60();
         return;
     }
-    if (mnStageSel_804D6C90->no_lras == 0 && mn_8022F218()) {
+    if (sss_data->no_lras == 0 && mn_8022F218()) {
         sfxBack();
         lb_800145F4();
         HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
@@ -823,33 +822,33 @@ void mnStageSel_Scene_OnFrame(void)
         mnStageSel_804D6CA4 -= 1;
         return;
     }
-    if (mnStageSel_804D6C90->x1 == 0 && (mnStageSel_804D6CA0 & 0x200) &&
+    if (sss_data->x1 == 0 && (mnStageSel_804D6CA0 & 0x200) &&
         mnStageSel_804D6CAF == 0)
     {
         sfxBack();
         gm_801A4B60();
     }
     if (mnStageSel_804D6CAF == 2) {
-        mnStageSel_804D6C90->data.data.rules.stkind =
+        sss_data->vs.start.rules.stkind =
             mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
         gm_801A4B60();
     }
 }
 
-void mnStageSel_Scene_OnExit(UNK_T unused)
+void mnStageSel_Scene_OnExit(UNUSED void* exit_data)
 {
-    SSSData* tmp;
-
     if (mnStageSel_804D6C94 != NULL) {
         lbArchive_80016EFC(mnStageSel_804D6C94);
         mnStageSel_804D6C94 = NULL;
     }
-    tmp = mnStageSel_804D6C90;
-    tmp->start_game = mnStageSel_804D6CAF == 2 ? true : false;
-    if (tmp->start_game) {
-        PreloadedGameModeState* cache = lbDvd_GetPreloadCacheScene();
-        cache->game_cache.stkind = tmp->data.data.rules.stkind;
-        lbDvd_80018254();
+    {
+        SSSData* sss = sss_data;
+        sss->start_game = mnStageSel_804D6CAF == 2 ? true : false;
+        if (sss->start_game) {
+            PreloadedGameModeState* cache = lbDvd_GetPreloadCacheScene();
+            cache->game_cache.stkind = sss->vs.start.rules.stkind;
+            lbDvd_80018254();
+        }
     }
 }
 

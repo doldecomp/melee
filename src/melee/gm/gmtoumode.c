@@ -143,7 +143,7 @@ void gm_801B1788(GameModeState* arg0)
     sss = gm_GetGameModeStateExitData(arg0);
     if (sss->start_game != 0) {
         gm_SetNextGameModeStateId(4);
-        stage = sss->data.data.rules.stkind;
+        stage = sss->vs.start.rules.stkind;
         gm_GetTournamentData()->x28 = stage;
         return;
     }

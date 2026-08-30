@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "gm/forward.h"
+
 #include "gm/gmvsmelee.h"
 
 #include <melee/pl/forward.h>
@@ -60,8 +62,8 @@ void gm_801B98E8(GameModeState* scene)
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_801B06B0(css, 0x10, vs->data.players[0].c_kind, 1,
-                vs->data.players[0].color, vs->data.players[0].xA, 0,
+    gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
+                vs->start.players[0].color, vs->start.players[0].xA, 0,
                 gm_804D68F8);
     game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
@@ -82,60 +84,60 @@ void gm_801B999C(GameModeState* scene)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->data.players);
-    gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL,
-                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
-    vs->data.players[1].c_kind = CHKIND_SANDBAG;
-    vs->data.players[1].xE = 0xF;
-    vs->data.players[1].x1C = 1.0f;
-    vs->data.players[1].slot_type = Gm_PKind_Cpu;
-    vs->data.players[1].stocks = 1;
-    vs->data.players[1].team = 1;
+    gm_80167A14(vs->start.players);
+    gm_801B0730(temp_r3, &vs->start.players[0].ckind, NULL,
+                &vs->start.players[0].color, &vs->start.players[0].xA, NULL);
+    vs->start.players[1].ckind = CHKIND_SANDBAG;
+    vs->start.players[1].xE = 0xF;
+    vs->start.players[1].x1C = 1.0f;
+    vs->start.players[1].slot_type = Gm_PKind_Cpu;
+    vs->start.players[1].stocks = 1;
+    vs->start.players[1].team = 1;
 }
 
 void gm_801B9A3C(GameModeState* arg0)
 {
-    StartMeleeData* data;
+    StartMeleeData* start;
     VsModeData* vs = &gm_80497618;
     int i;
 
-    data = gm_GetGameModeStateEnterData(arg0);
-    gm_80167A64(&data->rules);
+    start = gm_GetGameModeStateEnterData(arg0);
+    gm_80167A64(&start->rules);
 
-    data->rules = vs->data.rules;
+    start->rules = vs->start.rules;
 
-    data->rules.stkind = 0x54;
-    data->rules.match_mode = 1;
-    data->rules.x0_6 = true;
-    data->rules.x1_0 = true;
-    data->rules.x4_2 = false;
-    data->rules.x4_4 = false;
+    start->rules.stkind = St_Kind_Unk84;
+    start->rules.match_mode = 1;
+    start->rules.x0_6 = true;
+    start->rules.x1_0 = true;
+    start->rules.x4_2 = false;
+    start->rules.x4_4 = false;
 
-    data->rules.is_teams = false;
-    data->rules.xB = -1;
-    data->rules.time_limit = 0xA;
-    data->rules.x34 = 1.0f;
-    data->rules.x30 = 1.0f;
+    start->rules.is_teams = false;
+    start->rules.xB = -1;
+    start->rules.time_limit = 10;
+    start->rules.x34 = 1.0f;
+    start->rules.x30 = 1.0f;
 
-    data->rules.x5_0 = true;
-    data->rules.x1_3 = true;
-    data->rules.x44 = gm_80181998;
+    start->rules.x5_0 = true;
+    start->rules.x1_3 = true;
+    start->rules.x44 = gm_80181998;
 
-    data->rules.x3_3 = true;
-    data->rules.x3_2 = true;
-    data->rules.x7 = 9;
+    start->rules.x3_3 = true;
+    start->rules.x3_2 = true;
+    start->rules.x7 = 9;
 
-    for (i = 0; i < 6; i++) {
-        data->players[i] = vs->data.players[i];
-        data->players[i].xC_b1 = false;
-        data->players[i].xD_b3 = true;
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        start->players[i] = vs->start.players[i];
+        start->players[i].xC_b1 = false;
+        start->players[i].xD_b3 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->data.players[0].c_kind,
-                vs->data.players[0].color, 1, gm_804D68F8);
-    data->players[0].xD_b2 = true;
-    gm_8016F088(data);
-    gm_80181A00(data->players[0].c_kind, data->players[0].xA);
+    gm_801B0620(&start->players[0], vs->start.players[0].ckind,
+                vs->start.players[0].color, 1, gm_804D68F8);
+    start->players[0].xD_b2 = true;
+    gm_8016F088(start);
+    gm_80181A00(start->players[0].ckind, start->players[0].xA);
     gm_80180B18();
 }
 

@@ -279,7 +279,7 @@ void fn_8017C0C8(void)
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
-    sp8.c_kind = CKIND_CREZYH;
+    sp8.ckind = CKIND_CREZYH;
     sp8.team = 4;
     sp8.xC_b7 = true;
     sp8.hp = lbl_804706C0.xC;
@@ -963,7 +963,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
             gm_8016795C(&arg0->players[player_idx]);
             arg0->players[player_idx].slot_type = 1;
-            arg0->players[player_idx].c_kind = (s8) (u8) enemy_kind[0];
+            arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
             arg0->players[player_idx].xE = enemy_cpu_type;
@@ -981,10 +981,10 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xC_b2 = 1;
                 arg0->players[player_idx].xE = 0x1B;
             }
-            if ((s32) arg0->players[player_idx].c_kind == CKIND_GKOOPS) {
+            if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
             }
-            enemy_ckind = (u8) arg0->players[player_idx].c_kind;
+            enemy_ckind = (u8) arg0->players[player_idx].ckind;
             if (((s8) enemy_ckind == CKIND_MASTERH) ||
                 ((s8) enemy_ckind == CKIND_CREZYH))
             {
@@ -994,7 +994,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xD_b0 = 1;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].spawn_dir = -1;
-                if ((s32) arg0->players[player_idx].c_kind == CKIND_CREZYH) {
+                if ((s32) arg0->players[player_idx].ckind == CKIND_CREZYH) {
                     arg0->players[player_idx].slot_type = 3;
                 }
                 boss_count += 1;

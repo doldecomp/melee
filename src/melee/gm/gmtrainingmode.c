@@ -90,11 +90,11 @@ void gm_801B1B74(GameModeState* arg0)
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_801B06B0(css, 0x17U, vs_data->data.players[0].c_kind, 1,
-                vs_data->data.players[0].color, vs_data->data.players[0].xA,
+    gm_801B06B0(css, 0x17U, vs_data->start.players[0].ckind, 1,
+                vs_data->start.players[0].color, vs_data->start.players[0].xA,
                 9U, gm_804D68C0);
-    gm_801B07B4(css, vs_data->data.players[1].c_kind, 1,
-                vs_data->data.players[1].color, vs_data->data.players[1].xA,
+    gm_801B07B4(css, vs_data->start.players[1].ckind, 1,
+                vs_data->start.players[1].color, vs_data->start.players[1].xA,
                 0U, gm_804D68C0);
     lbDvd_800174BC();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
@@ -122,50 +122,50 @@ void gm_801B1C24(GameModeState* arg0)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->data.players);
-    gm_801B0730(css, &vs->data.players[0].c_kind, NULL,
-                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
-    gm_801B07E8_layer(css, &vs->data.players[1].c_kind, NULL,
-                      (s8*) &vs->data.players[1].color,
-                      (s8*) &vs->data.players[1].xA, NULL);
+    gm_80167A14(vs->start.players);
+    gm_801B0730(css, &vs->start.players[0].ckind, NULL,
+                &vs->start.players[0].color, &vs->start.players[0].xA, NULL);
+    gm_801B07E8_layer(css, &vs->start.players[1].ckind, NULL,
+                      (s8*) &vs->start.players[1].color,
+                      (s8*) &vs->start.players[1].xA, NULL);
     j = (i = 2);
-    vs->data.players[1].xE = 0;
+    vs->start.players[1].xE = 0;
     for (; i < 4; i++, j++) {
-        vs->data.players[i] = vs->data.players[1];
-        vs->data.players[i].color = (vs->data.players[i - 1].color + 1) %
-                                    gm_80169238(vs->data.players[j].c_kind);
-        if (vs->data.players[i].color == vs->data.players[0].color) {
-            vs->data.players[i].color =
-                (vs->data.players[i].color + 1) %
-                gm_80169238(vs->data.players[j].c_kind);
+        vs->start.players[i] = vs->start.players[1];
+        vs->start.players[i].color = (vs->start.players[i - 1].color + 1) %
+                                     gm_80169238(vs->start.players[j].ckind);
+        if (vs->start.players[i].color == vs->start.players[0].color) {
+            vs->start.players[i].color =
+                (vs->start.players[i].color + 1) %
+                gm_80169238(vs->start.players[j].ckind);
         }
-        vs->data.players[i].slot_type = 3;
+        vs->start.players[i].slot_type = 3;
     }
     if (gm_804D68C0 == 0) {
-        vs->data.players[1].slot = 0;
-        vs->data.players[2].slot = 0;
-        vs->data.players[3].slot = 0;
+        vs->start.players[1].slot = 0;
+        vs->start.players[2].slot = 0;
+        vs->start.players[3].slot = 0;
     } else {
         s32 k = 1;
         for (i = 0; i < 4; i++) {
             if (gm_804D68C0 != i) {
-                vs->data.players[k].slot = i + 1;
+                vs->start.players[k].slot = i + 1;
                 k++;
             }
         }
     }
     cache = &lbDvd_GetPreloadCacheScene()->game_cache;
-    cache->entries[2].char_id = vs->data.players[2].c_kind;
-    cache->entries[2].color = vs->data.players[2].color;
-    cache->entries[3].char_id = vs->data.players[3].c_kind;
-    cache->entries[3].color = vs->data.players[3].color;
+    cache->entries[2].char_id = vs->start.players[2].ckind;
+    cache->entries[2].color = vs->start.players[2].color;
+    cache->entries[3].char_id = vs->start.players[3].ckind;
+    cache->entries[3].color = vs->start.players[3].color;
     lbDvd_80018254();
     {
         u64 mask;
         s32 k;
         mask = 0;
         for (k = 0; k < 4; k++) {
-            mask |= lbAudioAx_80026E84(vs->data.players[k].c_kind);
+            mask |= lbAudioAx_80026E84(vs->start.players[k].ckind);
         }
         lbAudioAx_80026F2C(20);
         lbAudioAx_8002702C(4, mask);
@@ -195,11 +195,11 @@ void gm_801B1EEC(GameModeState* arg0)
         gm_SetNextGameModeStateId(0);
         return;
     }
-    stkind = sss->data.data.rules.stkind;
+    stkind = sss->vs.start.rules.stkind;
     gm_80473814.x6 = stkind;
-    vs_data->data.rules.stkind = stkind;
+    vs_data->start.rules.stkind = stkind;
     lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.stkind));
+    lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->start.rules.stkind));
     lbAudioAx_80027168();
 }
 
@@ -219,7 +219,7 @@ void gm_801B1F70(GameModeState* arg0)
     data = gm_GetGameModeStateEnterData(arg0);
     gm_80167A64(&data->rules);
 
-    data->rules = vs->data.rules;
+    data->rules = vs->start.rules;
     data->rules.on_pause_override = fn_801B1F6C;
 
     data->rules.x3_6 = true;
@@ -228,19 +228,19 @@ void gm_801B1F70(GameModeState* arg0)
     gm_80167A14(data->players);
 
     for (i = 0; i < 4; i++) {
-        data->players[i] = vs->data.players[i];
+        data->players[i] = vs->start.players[i];
         data->players[i].xC_b1 = false;
         data->players[i].xD_b2 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->data.players[0].c_kind,
-                vs->data.players[0].color, 1, gm_804D68C0);
+    gm_801B0620(&data->players[0], vs->start.players[0].ckind,
+                vs->start.players[0].color, 1, gm_804D68C0);
 
     for (i = 1; i < 4; i++) {
         PlayerInitData* var_r30 = &data->players[i];
-        gm_801B0664(&data->players[i], vs->data.players[i].c_kind,
-                    vs->data.players[i].color, 1,
-                    vs->data.players[i].slot - 1);
+        gm_801B0664(&data->players[i], vs->start.players[i].ckind,
+                    vs->start.players[i].color, 1,
+                    vs->start.players[i].slot - 1);
         if (i - 1 != 0) {
             data->players[i].slot_type = Gm_PKind_NA;
         }
@@ -279,12 +279,12 @@ void gm_Mode_Training_OnInit(void)
     gm_80167B50(temp_r31);
 
     for (i = 0; i < 4; i++) {
-        temp_r31->data.players[i].color = i;
-        temp_r31->data.players[i].xE = 0;
+        temp_r31->start.players[i].color = i;
+        temp_r31->start.players[i].xE = 0;
         if (i != 0) {
-            temp_r31->data.players[1].c_kind = CHKIND_NONE;
+            temp_r31->start.players[1].ckind = CHKIND_NONE;
         }
-        gm_80473814.players[i] = temp_r31->data.players[i];
+        gm_80473814.players[i] = temp_r31->start.players[i];
     }
 }
 

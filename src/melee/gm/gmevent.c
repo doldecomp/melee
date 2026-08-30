@@ -279,7 +279,7 @@ void onExitCss(GameModeState* arg0)
 void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
 {
     gm_8016795C(arg0);
-    arg0->c_kind = src->c_kind;
+    arg0->ckind = src->c_kind;
     arg0->slot_type = src->slot_type;
     arg0->stocks = src->stocks;
     arg0->color = src->color;
@@ -332,7 +332,7 @@ s32 gm_801BAC9C(GameModeState* arg0, s32 arg1)
         }
         found = 0;
         for (k = 0; k < arg1; k++) {
-            if (data->players[k].c_kind == (s8) *ptr) {
+            if (data->players[k].ckind == (s8) *ptr) {
                 found++;
             }
         }
@@ -460,12 +460,12 @@ void onEnterVs(GameModeState* arg0)
             u8 c;
             gm_801B05F4(md->players, ev->x6);
             ev->x7 = md->players[0].team;
-            if (md->players[0].c_kind == CHKIND_NONE) {
-                md->players[0].c_kind = ev->x2;
+            if (md->players[0].ckind == CHKIND_NONE) {
+                md->players[0].ckind = ev->x2;
                 md->players[0].color = ev->x3;
                 md->players[0].xA = ev->x4;
             }
-            c = md->players[0].c_kind;
+            c = md->players[0].ckind;
             ev->x0 = c;
             ev->x4C[0] = c;
             c = md->players[0].color;
@@ -484,21 +484,21 @@ void onEnterVs(GameModeState* arg0)
                 s8 v = *t;
                 if (v == -1) {
                     u8 nv = gm_801BAC9C(arg0, player_idx);
-                    md->players[player_idx].c_kind = nv;
-                    *t = md->players[player_idx].c_kind;
+                    md->players[player_idx].ckind = nv;
+                    *t = md->players[player_idx].ckind;
                 } else {
-                    md->players[player_idx].c_kind = v;
+                    md->players[player_idx].ckind = v;
                 }
             }
-            c_kind = md->players[player_idx].c_kind;
-            if (c_kind == md->players[0].c_kind) {
+            c_kind = md->players[player_idx].ckind;
+            if (c_kind == md->players[0].ckind) {
                 u8 c = md->players[player_idx].color;
                 if (c == md->players[0].color) {
                     md->players[player_idx].color = gm_GetNextColor(c);
                 }
             }
-            if (md->players[0].c_kind == CKIND_SEAK &&
-                md->players[player_idx].c_kind == CKIND_ZELDA)
+            if (md->players[0].ckind == CKIND_SEAK &&
+                md->players[player_idx].ckind == CKIND_ZELDA)
             {
                 u8 c = md->players[player_idx].color;
                 if (c == md->players[0].color) {
@@ -506,7 +506,7 @@ void onEnterVs(GameModeState* arg0)
                 }
             }
             if (player_idx < 4) {
-                ev->x4C[player_idx] = md->players[player_idx].c_kind;
+                ev->x4C[player_idx] = md->players[player_idx].ckind;
                 ev->x50[player_idx] = md->players[player_idx].color;
             }
         }
@@ -520,27 +520,27 @@ void onEnterVs(GameModeState* arg0)
             md->players[0].xC_b1 = 0;
             c = ev->x38;
             if (c != 0x21) {
-                md->players[0].c_kind = c;
+                md->players[0].ckind = c;
                 ev->x0 = c;
                 ev->x4C[0] = c;
             }
         }
         gm_801BAB40(&md->players[1], levels[level]->x10->entries[ev->x20]);
-        if (md->players[1].c_kind == md->players[0].c_kind) {
+        if (md->players[1].ckind == md->players[0].ckind) {
             u8 c = md->players[1].color;
             if (c == md->players[0].color) {
                 md->players[1].color = gm_GetNextColor(c);
             }
         }
-        if (md->players[0].c_kind == CKIND_SEAK &&
-            md->players[1].c_kind == CKIND_ZELDA)
+        if (md->players[0].ckind == CKIND_SEAK &&
+            md->players[1].ckind == CKIND_ZELDA)
         {
             u8 c = md->players[1].color;
             if (c == md->players[0].color) {
                 md->players[1].color = gm_GetNextColor(c);
             }
         }
-        ev->x4C[1] = md->players[1].c_kind;
+        ev->x4C[1] = md->players[1].ckind;
         ev->x50[1] = md->players[1].color;
     }
     if (level == 0x2B) {

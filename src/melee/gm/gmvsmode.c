@@ -169,10 +169,10 @@ void onEnterDebugVs(GameModeState* arg0)
         data->players[i].xE = 4;
     }
 
-    data->players[0].c_kind = CKIND_LINK;
-    data->players[1].c_kind = CKIND_MARIO;
-    data->players[2].c_kind = CKIND_LINK;
-    data->players[3].c_kind = CKIND_LINK;
+    data->players[0].ckind = CKIND_LINK;
+    data->players[1].ckind = CKIND_MARIO;
+    data->players[2].ckind = CKIND_LINK;
+    data->players[3].ckind = CKIND_LINK;
 
     data->players[0].slot_type = Gm_PKind_Human;
     data->players[1].slot_type = Gm_PKind_Human;

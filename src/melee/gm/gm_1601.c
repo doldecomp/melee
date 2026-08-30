@@ -3496,7 +3496,7 @@ void gm_801678F8(int port, int arg1, int arg2)
 void gm_8016795C(struct PlayerInitData* arg0)
 {
     memzero(arg0, sizeof(*arg0));
-    arg0->c_kind = CHKIND_NONE;
+    arg0->ckind = CHKIND_NONE;
     arg0->slot_type = Gm_PKind_NA;
     arg0->stocks = 0;
     arg0->color = 0;
@@ -3560,8 +3560,8 @@ void gm_80167A64(struct StartMeleeRules* arg0)
 
 void gm_80167B50(VsModeData* arg0)
 {
-    gm_80167A64(&arg0->data.rules);
-    gm_80167A14(arg0->data.players);
+    gm_80167A64(&arg0->start.rules);
+    gm_80167A14(arg0->start.players);
     arg0->loser = -1;
     arg0->ordered_stage_index = -1;
     arg0->winner = -1;
@@ -3577,84 +3577,84 @@ void gm_80167BC8(VsModeData* vs_data)
 
     rules = gmMainLib_GetGameRules();
     prefs = gmMainLib_8015CC58();
-    vs_data->data.rules.x0_6 = 0;
+    vs_data->start.rules.x0_6 = 0;
 
     switch (rules->mode) {
     case 0:
-        vs_data->data.rules.match_mode = 0;
+        vs_data->start.rules.match_mode = 0;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 1:
-        vs_data->data.rules.match_mode = 1;
+        vs_data->start.rules.match_mode = 1;
         if (rules->stock_time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->stock_time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->stock_time_limit * 60;
             break;
         }
         break;
     case 2:
-        vs_data->data.rules.match_mode = 2;
+        vs_data->start.rules.match_mode = 2;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 3:
-        vs_data->data.rules.match_mode = 3;
+        vs_data->start.rules.match_mode = 3;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     }
 
     i = 0;
     for (i = 0; i < 6; i++) {
-        vs_data->data.players[i].stocks = (s8) rules->stock_count;
+        vs_data->start.players[i].stocks = (s8) rules->stock_count;
         switch (rules->handicap) {
         case 0:
-            vs_data->data.players[i].x18 = 1.0f;
-            vs_data->data.players[i].x1C = 1.0f;
+            vs_data->start.players[i].x18 = 1.0f;
+            vs_data->start.players[i].x1C = 1.0f;
             break;
         case 1:
             handicap =
-                gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
+                gmMainLib_8015CE44(i, (s32) vs_data->start.players[i].xA);
             if (handicap != NULL) {
-                vs_data->data.players[i].handicap = *handicap;
-                vs_data->data.players[i].x18 =
+                vs_data->start.players[i].handicap = *handicap;
+                vs_data->start.players[i].x18 =
                     lbl_803B7930[(u8) *handicap - 1].x;
-                vs_data->data.players[i].x1C =
+                vs_data->start.players[i].x1C =
                     lbl_803B7930[(u8) *handicap - 1].y;
             } else {
-                vs_data->data.players[i].handicap = 5;
-                vs_data->data.players[i].x18 = lbl_803B7930[4].x;
-                vs_data->data.players[i].x1C = lbl_803B7930[4].y;
+                vs_data->start.players[i].handicap = 5;
+                vs_data->start.players[i].x18 = lbl_803B7930[4].x;
+                vs_data->start.players[i].x1C = lbl_803B7930[4].y;
             }
             break;
         case 2:
-            vs_data->data.players[i].x18 =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].x;
-            vs_data->data.players[i].x1C =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].y;
+            vs_data->start.players[i].x18 =
+                lbl_803B7930[(u8) vs_data->start.players[i].handicap - 1].x;
+            vs_data->start.players[i].x1C =
+                lbl_803B7930[(u8) vs_data->start.players[i].handicap - 1].y;
             break;
         }
     }
 
-    vs_data->data.rules.friendly_fire = (rules->friendly_fire & 1);
-    vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
-    vs_data->data.rules.xB = (s8) prefs->item_freq;
+    vs_data->start.rules.friendly_fire = (rules->friendly_fire & 1);
+    vs_data->start.rules.x30 = 0.1f * rules->damage_ratio;
+    vs_data->start.rules.xB = (s8) prefs->item_freq;
     prefs = gmMainLib_8015CC58();
     i = 0;
     do {
         u8 item = lbl_803B7844[(u8) i];
         if ((s32) item != 0x23) {
             if (prefs->item_mask & (1LL << i)) {
-                vs_data->data.rules.x20 |= 1LL << item;
+                vs_data->start.rules.x20 |= 1LL << item;
             } else {
-                vs_data->data.rules.x20 &= ~(1LL << item);
+                vs_data->start.rules.x20 &= ~(1LL << item);
             }
         }
         i++;
@@ -3662,26 +3662,26 @@ void gm_80167BC8(VsModeData* vs_data)
 
     switch (gmMainLib_8015ED30()) {
     case 1:
-        vs_data->data.rules.xC = 0;
+        vs_data->start.rules.xC = 0;
         break;
     case 0:
-        vs_data->data.rules.xC = -1;
+        vs_data->start.rules.xC = -1;
         break;
     case 2:
-        vs_data->data.rules.xC = -2;
+        vs_data->start.rules.xC = -2;
         break;
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.disable_pausing = 0;
+        vs_data->start.rules.disable_pausing = 0;
     } else {
-        vs_data->data.rules.disable_pausing = 1;
+        vs_data->start.rules.disable_pausing = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
-        vs_data->data.rules.x3_0 = 1;
+        vs_data->start.rules.x3_0 = 1;
         return;
     }
-    vs_data->data.rules.x3_0 = 0;
+    vs_data->start.rules.x3_0 = 0;
 }
 
 static inline int pad_inline(SSSData* arg0, int base)
@@ -3690,7 +3690,7 @@ static inline int pad_inline(SSSData* arg0, int base)
     for (i = 0; i < 5; i++) {
         int j = (base + i) % 4;
         if (HSD_PadMasterStatus[(u8) j].err == 0 &&
-            arg0->data.data.players[j].slot_type == Gm_PKind_Human)
+            arg0->vs.start.players[j].slot_type == Gm_PKind_Human)
         {
             return j;
         }
@@ -3734,32 +3734,32 @@ void gm_80167FC4(SSSData* arg0)
         return;
     case 2:
         for (i = 0; i < 0x1D; i++) {
-            temp_r28 = arg0->data.ordered_stage_index + i;
+            temp_r28 = arg0->vs.ordered_stage_index + i;
             temp_r28 = (temp_r28 + 1) % 29;
             temp_r30 = mnStageSel_8025BC08(temp_r28);
             temp_r25 = gmMainLib_8015EDA4();
 
             if (is_character_unlocked(get_flag_unk(temp_r30), temp_r25)) {
                 arg0->force_stage_id = temp_r30;
-                arg0->data.ordered_stage_index = temp_r28;
+                arg0->vs.ordered_stage_index = temp_r28;
                 return;
             }
         }
         break;
     case 3:
-        arg0->data.loser = pad_inline(arg0, arg0->data.loser + 1);
-        if (arg0->data.loser < 0) {
-            arg0->data.loser = 0;
+        arg0->vs.loser = pad_inline(arg0, arg0->vs.loser + 1);
+        if (arg0->vs.loser < 0) {
+            arg0->vs.loser = 0;
             arg0->unk_stage = 0;
         } else {
-            arg0->unk_stage = arg0->data.loser + 1;
+            arg0->unk_stage = arg0->vs.loser + 1;
         }
         break;
     case 4:
-        if (arg0->data.winner == -1) {
+        if (arg0->vs.winner == -1) {
             arg0->unk_stage = pad_inline(arg0, HSD_Randi(4)) + 1;
         } else {
-            arg0->unk_stage = pad_inline(arg0, arg0->data.winner) + 1;
+            arg0->unk_stage = pad_inline(arg0, arg0->vs.winner) + 1;
         }
         break;
     }
@@ -3840,7 +3840,7 @@ s32 gm_801688AC(MatchEnd* arg0)
     u32 i;
     u32 sum = 0;
     struct MatchPlayerData* p = arg0->player_standings;
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (arg0->player_standings[i].slot_type == 0) {
             sum += arg0->player_standings[i].xE;
         }

@@ -544,7 +544,7 @@ void gm_801B5624(GameModeState* arg0)
         opp_count = gm_8018A228(0xC, *cpu_level, 0);
 
         gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0, 0,
-                    (u8) data->players[0].c_kind, data->players[0].color,
+                    (u8) data->players[0].ckind, data->players[0].color,
                     (s32) opp_count, 0x19, 5, 1, 0, 1, f31, f30);
 
         data->rules.x4_5 = 1;
