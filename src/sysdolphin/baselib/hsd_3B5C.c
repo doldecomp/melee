@@ -792,15 +792,13 @@ loop_11:
             hsd_804D79B8 = scratch_r5_15 + 1;
             scratch_r0_3 = work_r4_2[6];
             qptr = state.quant_table->luma + scratch_r0_3;
-            qbyte = *scratch_r5_15;
-            qptr[0x40] = qbyte;
+            qptr[0x40] = qbyte = *scratch_r5_15;
             scratch_r5_16 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_16 + 1;
             scratch_r0_3 = work_r4_2[7];
-            work_r4_2 += 8;
             qptr = state.quant_table->luma + scratch_r0_3;
-            qbyte = *scratch_r5_16;
-            qptr[0x40] = qbyte;
+            work_r4_2 += 8;
+            qptr[0x40] = qbyte = *scratch_r5_16;
         }
     } else {
         if (++hsd_804D79B8 >= scratch_r5) {
