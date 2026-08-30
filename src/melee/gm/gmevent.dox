@@ -8,6 +8,6 @@
  * #StartMeleeRules::check_for_pauser_override callback
  * (#gm_CameraModeVSGetPauser).
  */
-/* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
+/* 3DDBE0 */ extern GameModeState gm_Mode_Camera_States[5];
 
 #endif

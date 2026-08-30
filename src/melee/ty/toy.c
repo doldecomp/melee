@@ -5925,7 +5925,7 @@ void Toy_80311960(void)
     ((u16*) base)[0x1F6] = 0;
 }
 
-void Toy_OnEnter_80311AB0(void* arg0)
+void Toy_Scene_OnEnter(void* arg0)
 {
     u8* base;
     s16* selp;
@@ -6059,7 +6059,7 @@ void _Toy_80311F5C(void)
     }
 }
 
-void Toy_OnFrame_80312018(void)
+void Toy_Scene_OnFrame(void)
 {
     TyModeState* state = (TyModeState*) Toy_804A284C;
 
@@ -6139,7 +6139,7 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
     }
 }
 
-void Toy_OnInit_803122D0(void)
+void Toy_Mode_OnInit(void)
 {
     Toy* userData = (Toy*) &_Toy_804A26B8;
     void* targetPtr;

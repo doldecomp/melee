@@ -5303,7 +5303,7 @@ s32 mnCharSel_802640A0(void)
 #undef MODELS
 #undef ANIM
 
-void mnCharSel_8026688C_OnEnter(void* arg0)
+void mnCharSel_Scene_OnEnter(void* arg0)
 {
     PAD_STACK(8);
 
@@ -5352,7 +5352,7 @@ void mnCharSel_8026688C_OnEnter(void* arg0)
     mnCharSel_802640A0();
 }
 
-void mnCharSel_802669F4_OnFrame(void)
+void mnCharSel_Scene_OnFrame(void)
 {
     int num_slots;
     u8 slot_type;
@@ -5470,7 +5470,7 @@ void mnCharSel_802669F4_OnFrame(void)
     }
 }
 
-void mnCharSel_80266D70_OnLeave(void* unused)
+void mnCharSel_Scene_OnExit(void* unused)
 {
     int num_slots;
     u64 tmp;

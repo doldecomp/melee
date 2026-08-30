@@ -1424,7 +1424,7 @@ static inline int fn_8016CBE8_inline(void)
     return -1;
 }
 
-void gm_8016D32C_OnFrame(void)
+void gm_Scene_Training_OnFrame(void)
 {
     int i;
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
@@ -1524,7 +1524,7 @@ void fn_8016D634(void)
     }
 }
 
-void gm_8016D800(void)
+void gm_Scene_Vs_OnFrame(void)
 {
     PAD_STACK(8);
     if (lbl_8046B6A0.x24C8.x48 != NULL) {
@@ -2031,7 +2031,7 @@ void fn_8016E730(StartMeleeData* arg0)
     }
 }
 
-void gm_8016E934_OnEnter(void* arg0)
+void gm_Scene_Vs_OnEnter(void* arg0)
 {
     StartMeleeData* tmp = arg0;
     fn_8016E730(tmp);
@@ -2061,7 +2061,7 @@ static inline bool gm_8016E9C8_inline(void)
     case GM_TINY_VS:
     case GM_GIANT_VS:
     case GM_STAMINA_VS:
-    case GM_FIXED_CAMERA_VS:
+    case GM_CAMERA_VS:
     case GM_SINGLE_BUTTON_VS:
         return true;
     default:
@@ -2069,7 +2069,7 @@ static inline bool gm_8016E9C8_inline(void)
     }
 }
 
-void gm_8016E9C8(void* user_data)
+void gm_Scene_Vs_OnExit(void* user_data)
 {
     struct EndMeleeData* data = user_data;
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
@@ -2114,7 +2114,7 @@ void gm_8016E9C8(void* user_data)
     }
 }
 
-void gm_8016EBC0_OnEnter(void* user_data)
+void gm_Scene_SuddenDeath_OnEnter(void* user_data)
 {
     StartMeleeData* data = user_data;
     data->rules.x6 = true;
@@ -2124,7 +2124,7 @@ void gm_8016EBC0_OnEnter(void* user_data)
     ifStatus_802F665C(data->rules.x0_3);
 }
 
-void gm_8016EC28_OnEnter(void* user_data)
+void gm_Scene_Training_OnEnter(void* user_data)
 {
     StartMeleeData* data = user_data;
     struct lbl_8046B6A0_t* tmp2;

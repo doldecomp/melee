@@ -98,7 +98,7 @@ struct lbl_804D65A8_t;
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
-/* 1737E8 */ void gm_801737E8_OnLoad(void);
+/* 1737E8 */ void gm_Mode_ChallengerApproach_OnLoad(void);
 /* 173834 */ UNK_RET fn_80173834(u8 ckind, u8 major, bool);
 /* 17390C */ UNK_RET gm_8017390C(int, int);
 /* 173AA4 */ UNK_RET gm_80173AA4(UNK_PARAMS);

@@ -1169,7 +1169,7 @@ void fn_80186634(void* arg0)
     lbAudioAx_80023F28(0x2D);
 }
 
-void gm_80186DFC_OnFrame(void)
+void gm_Scene_IntroEasy_OnFrame(void)
 {
     if (lbl_804735A8.x0 != 0) {
         lbAudioAx_800236DC();
@@ -1207,7 +1207,7 @@ typedef struct ClassicModeEnterData {
     /* 0x1C */ int x1C;
 } ClassicModeEnterData;
 
-void gm_80186E30_OnEnter(void* arg0_)
+void gm_Scene_IntroEasy_OnEnter(void* arg0_)
 {
     ClassicModeEnterData* arg0 = arg0_;
 
@@ -1404,7 +1404,7 @@ void fn_80187714(void)
 #pragma pop
 #endif
 
-void gm_8018776C_OnFrame(void)
+void gm_Scene_IntroAllstar_OnFrame(void)
 {
     if (lbl_804736B0.x0 != 0) {
         lbArchive_80016EFC(lbl_804D6610);
@@ -1417,7 +1417,7 @@ void gm_8018776C_OnFrame(void)
 #pragma push
 #pragma dont_inline on
 #endif
-void gm_801877A8_OnEnter(void* arg0_)
+void gm_Scene_IntroAllstar_OnEnter(void* arg0_)
 {
     struct enterdata* arg0 = arg0_;
     HSD_GObj* temp_r30;
@@ -1839,19 +1839,19 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     lbAudioAx_80023F28(0x2E);
 }
 
-void gm_80187F48_OnEnter(void* arg0)
+void gm_Scene_IntroNormal_OnEnter(void* arg0)
 {
     PAD_STACK(24);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
-void gm_80188364_OnLeave(void* arg0)
+void gm_Scene_IntroNormal_OnLeave(void* arg0)
 {
     HSD_Archive** var = &lbl_804D6620;
     lbArchive_80016EFC(*var);
 }
 
-void gm_8018838C_OnFrame(void)
+void gm_Scene_IntroNormal_OnFrame(void)
 {
     if (lbl_804736C0.x36.done) {
         gm_801A4B60();

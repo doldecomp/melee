@@ -3,6 +3,6 @@
 
 #include "gm/types.h"
 
-/* 3DFAD8 */ extern GameScene gm_803DFAD8_Scenes[];
+/* 3DFAD8 */ extern GameModeState gm_Mode_HanyuSss_States[];
 
 #endif

@@ -46,7 +46,7 @@ typedef enum GameModeKind {
     /* 27 */ GM_PROGRESSIVE_SCAN,
     /* 28 */ GM_BOOT,
     /* 29 */ GM_MEMCARD,
-    /* 2A */ GM_FIXED_CAMERA_VS,
+    /* 2A */ GM_CAMERA_VS,
     /* 2B */ GM_EVENT,
     /* 2C */ GM_SINGLE_BUTTON_VS,
     /* 2D */ GM_COUNT,
@@ -57,13 +57,13 @@ typedef enum GameSceneKind {
     /* +01 */ GS_MENU,
     /* +02 */ GS_VS,
     /* +03 */ GS_SUDDEN_DEATH,
-    /* +04 */ GS_TRAINING_MODE,
+    /* +04 */ GS_TRAINING,
     /* +05 */ GS_RESULTS,
     /* +06 */ GS_0x6, ///< Unused? It is skipped in the table entirely
     /* +07 */ GS_DEBUG_MENU,
     /* +08 */ GS_CSS,
     /* +09 */ GS_SSS,
-    /* +0A */ GS_0xA, ///< Unused? Empty in the table
+    /* +0A */ GS_UNK10, ///< Unused? Empty in the table
     /* +0B */ GS_TOY_GALLERY,
     /* +0C */ GS_TOY_LOTTERY,
     /* +0D */ GS_TOY_COLLECTION,
@@ -136,8 +136,8 @@ typedef struct datetime datetime;
 typedef struct DebugGameOverData DebugGameOverData;
 typedef struct GameMode GameMode;
 typedef struct GameRules GameRules;
+typedef struct GameModeState GameModeState;
 typedef struct GameScene GameScene;
-typedef struct GameSceneHandler GameSceneHandler;
 typedef struct GameSceneInfo GameSceneInfo;
 typedef struct gm_8016A92C_arg0_t gm_8016A92C_arg0_t;
 typedef struct gm_8017DB6C_arg0_t gm_8017DB6C_arg0_t;

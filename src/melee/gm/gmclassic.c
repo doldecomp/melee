@@ -87,7 +87,7 @@ typedef struct gmClassic_803DDEC8Data {
 ASSERT_SIZE(gmClassic_803DDEC8Data, 0x2F0);
 
 typedef struct gmClassicSceneData {
-    /* 0x000 */ GameScene scenes[26];
+    /* 0x000 */ GameModeState scenes[26];
     /* 0x270 */ gmClassic_803DDEC8Data matchups;
 } gmClassicSceneData;
 ASSERT_SIZE(gmClassicSceneData, 0x560);
@@ -95,7 +95,7 @@ ASSERT_SIZE(gmClassicSceneData, 0x560);
 static gmClassic_80490880Data gmClassic_80490880;
 u8 gm_804908A0[112];
 
-GameScene gm_803DDC58_Scenes[] = {
+GameModeState gm_Mode_Classic_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -601,7 +601,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
     gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassic_80490880;
     gm_803DDEC8Struct* ptr;
-    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassicSceneData* scene_data =
+        (gmClassicSceneData*) gm_Mode_Classic_States;
 
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
@@ -684,10 +685,11 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     return ptr;
 }
 
-void gmClassic_OnLoad(void)
+void gm_Mode_Classic_OnLoad(void)
 {
     UnkAllstarData* data;
-    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassicSceneData* scene_data =
+        (gmClassicSceneData*) gm_Mode_Classic_States;
     gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
     PAD_STACK(40);
@@ -732,7 +734,7 @@ void gmClassic_OnLoad(void)
     Ground_801C5A28();
 }
 
-void gmClassic_OnInit(void)
+void gm_Mode_Classic_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
     temp_r3->c_kind = CHKIND_NONE;
@@ -752,7 +754,7 @@ static inline StKind gmClassic_GetStKind(gm_803DDEC8Struct* entry,
     return entry->xC->x00;
 }
 
-void gmClassic_801B3500(GameScene* arg0)
+void gmClassic_801B3500(GameModeState* arg0)
 {
     gmClassicIntroData* sd;
     gm_803DDEC8Struct* entry;
@@ -767,11 +769,11 @@ void gmClassic_801B3500(GameScene* arg0)
     gm_803DDEC8Struct* new_var;
 
     sd = gm_GetGameSceneLoadData(arg0);
-    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     new_var = entry;
     ad = gm_GetAllStarData();
     enemy_count = 0;
-    ad->x0.x7 = arg0->idx;
+    ad->x0.x7 = arg0->id;
     sd->x0A = entry->x0 + 1;
     sd->x08 = ad->x0.slot;
 
@@ -830,7 +832,7 @@ void gmClassic_801B3500(GameScene* arg0)
     sd->x13[0] = ad->x0.color;
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
-                (u8) gm_8017BE84(arg0->idx), entry->xC->x02_u8, sd->x0D[0],
+                (u8) gm_8017BE84(arg0->id), entry->xC->x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x5C,
                 (u8 (*)(s32, s32, u8))(Event) ad->x60,
@@ -916,7 +918,7 @@ void gmClassic_801B3500(GameScene* arg0)
     lbAudioAx_80027168();
 }
 
-void gmClassic_801B3A34(GameScene* arg0)
+void gmClassic_801B3A34(GameModeState* arg0)
 {
     StartMeleeData* temp_r30;
     gm_803DDEC8Struct* temp_r31;
@@ -932,7 +934,7 @@ void gmClassic_801B3A34(GameScene* arg0)
     PAD_STACK(8);
 
     temp_r30 = gm_GetGameSceneLoadData(arg0);
-    temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
     var_r27 = temp_r31->xC->x00;
@@ -946,16 +948,16 @@ void gmClassic_801B3A34(GameScene* arg0)
     temp_r29->x0.x8 = flags;
     temp_r29->x0.x9 = temp_r31->x2;
     temp_r29->x0.xB = temp_r31->x8;
-    idx_val = (u16) gm_8017BE84(arg0->idx) - 1;
+    idx_val = (u16) gm_8017BE84(arg0->id) - 1;
     temp_r28 = gm_804908A0[idx_val];
-    sp8 = (u16) gm_8017BE84(arg0->idx);
+    sp8 = (u16) gm_8017BE84(arg0->id);
     spC = temp_r28;
     gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
                 temp_r31->x6, 1, 0, temp_r31->x4, var_r27, sp8, spC);
     gm_8016F088(new_var);
 }
 
-void gmClassic_801B3B40(GameScene* arg0)
+void gmClassic_801B3B40(GameModeState* arg0)
 {
     MatchExitInfo* mei;
     UnkAllstarData* asd;
@@ -974,9 +976,9 @@ void gmClassic_801B3B40(GameScene* arg0)
 
     mei = (MatchExitInfo*) gm_GetGameSceneLeaveData(arg0);
     asd = gm_GetAllStarData();
-    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     exit_result = mei->x8;
-    id = arg0->idx;
+    id = arg0->id;
     idx = ((u16) gm_8017BE84(id)) - 1;
     if (exit_result != 0) {
         gm_804908A0[idx] = 2;
@@ -1030,19 +1032,19 @@ void gmClassic_801B3B40(GameScene* arg0)
     }
 }
 
-void gmClassic_801B3D44(GameScene* scene)
+void gmClassic_801B3D44(GameModeState* scene)
 {
     struct DebugGameOverData* temp_r31 = gm_GetGameSceneLoadData(scene);
     gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
-void gmClassic_801B3D84(GameScene* scene)
+void gmClassic_801B3D84(GameModeState* scene)
 {
     DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveData(scene);
     gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
-void gmClassic_801B3DD8(GameScene* scene)
+void gmClassic_801B3DD8(GameModeState* scene)
 {
     CSSData* css = gm_GetGameSceneLoadData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
@@ -1052,7 +1054,7 @@ void gmClassic_801B3DD8(GameScene* scene)
     lbDvd_800174BC();
 }
 
-void gmClassic_801B3E44(GameScene* scene)
+void gmClassic_801B3E44(GameModeState* scene)
 {
     CSSData* temp_r30 = gm_GetGameSceneLeaveData(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
@@ -1076,7 +1078,7 @@ void gmClassic_801B3E44(GameScene* scene)
     gm_80168F88();
 }
 
-void gmClassic_801B3F18(GameScene* scene)
+void gmClassic_801B3F18(GameModeState* scene)
 {
     gm_SetPendingGameMode(GM_MENU);
     gm_SetNewGameModePending();

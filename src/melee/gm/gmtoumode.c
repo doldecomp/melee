@@ -15,22 +15,22 @@
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
 
-/* 1B1724 */ static void gm_801B1724(GameScene*);
-/* 1B174C */ static void gm_801B174C(GameScene*);
-/* 1B1788 */ static void gm_801B1788(GameScene*);
-/* 1B1810 */ static void gm_801B1810(GameScene*);
-/* 1B1834 */ static void gm_801B1834(GameScene*);
-/* 1B18D4 */ static void gm_801B18D4(GameScene*);
-/* 1B1A2C */ static void gm_801B1A2C(GameScene*);
-/* 1B1A84 */ static void gm_801B1A84(GameScene*);
-/* 1B1AD4 */ static void gm_801B1AD4(GameScene*);
+/* 1B1724 */ static void gm_801B1724(GameModeState*);
+/* 1B174C */ static void gm_801B174C(GameModeState*);
+/* 1B1788 */ static void gm_801B1788(GameModeState*);
+/* 1B1810 */ static void gm_801B1810(GameModeState*);
+/* 1B1834 */ static void gm_801B1834(GameModeState*);
+/* 1B18D4 */ static void gm_801B18D4(GameModeState*);
+/* 1B1A2C */ static void gm_801B1A2C(GameModeState*);
+/* 1B1A84 */ static void gm_801B1A84(GameModeState*);
+/* 1B1AD4 */ static void gm_801B1AD4(GameModeState*);
 /* 4876D8 */ static StartMeleeData gm_804876D8;
 /* 487810 */ static MatchExitInfo gm_80487810;
 /* 489A98 */ static UNK_T gm_80489A98[0x2288 / 4];
 /* 48BD20 */ static UNK_T gm_8048BD20[0x148 / 4];
 /* 48BE68 */ static UNK_T gm_8048BE68[0x23C8 / 4];
 
-GameScene gm_803DDAC0_Scenes[] = {
+GameModeState gm_Mode_Tournament_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -118,13 +118,13 @@ GameScene gm_803DDAC0_Scenes[] = {
     { -1 },
 };
 
-void gm_801B1724(GameScene* arg0)
+void gm_801B1724(GameModeState* arg0)
 {
     lb_8001C550();
     lb_8001D164(0);
 }
 
-void gm_801B174C(GameScene* arg0)
+void gm_801B174C(GameModeState* arg0)
 {
     SSSData* sss;
 
@@ -135,7 +135,7 @@ void gm_801B174C(GameScene* arg0)
     sss->unk_stage = 0;
 }
 
-void gm_801B1788(GameScene* arg0)
+void gm_801B1788(GameModeState* arg0)
 {
     u16 stage;
     SSSData* sss;
@@ -156,13 +156,13 @@ void gm_801B1788(GameScene* arg0)
     gm_SetPendingSceneIndex(2);
 }
 
-void gm_801B1810(GameScene* arg0)
+void gm_801B1810(GameModeState* arg0)
 {
     StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
     gm_801905F0(data);
 }
 
-void gm_801B1834(GameScene* arg0)
+void gm_801B1834(GameModeState* arg0)
 {
     MatchExitInfo* mei;
 
@@ -185,7 +185,7 @@ void gm_801B1834(GameScene* arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-void gm_801B18D4(GameScene* arg0)
+void gm_801B18D4(GameModeState* arg0)
 {
     StartMeleeData* smd;
     StartMeleeData* src = &gm_804876D8;
@@ -204,7 +204,7 @@ void gm_801B18D4(GameScene* arg0)
 #pragma pop
 #endif
 
-void gm_801B1A2C(GameScene* arg0)
+void gm_801B1A2C(GameModeState* arg0)
 {
     MatchExitInfo* mei;
 
@@ -213,7 +213,7 @@ void gm_801B1A2C(GameScene* arg0)
     gm_80166CCC(&gm_80487810.match_end, &mei->match_end);
 }
 
-void gm_801B1A84(GameScene* arg0)
+void gm_801B1A84(GameModeState* arg0)
 {
     ResultsMatchInfo* rmi;
 
@@ -221,7 +221,7 @@ void gm_801B1A84(GameScene* arg0)
     rmi->match_end = gm_80487810.match_end;
 }
 
-void gm_801B1AD4(GameScene* arg0)
+void gm_801B1AD4(GameModeState* arg0)
 {
     ResultsMatchInfo* rmi;
 

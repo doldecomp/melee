@@ -169,7 +169,7 @@ void fn_8031F600(HSD_GObj* gobj)
     }
 }
 
-void un_8031F714_OnEnter(void* arg)
+void vi1101_Scene_OnEnter(void* arg)
 {
     HSD_Joint* new_var2;
     SceneDesc* var_r28;
@@ -234,7 +234,7 @@ void un_8031F714_OnEnter(void* arg)
     lbAudioAx_80024E50(0);
 }
 
-void un_8031F960_OnFrame(void)
+void vi1101_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }
