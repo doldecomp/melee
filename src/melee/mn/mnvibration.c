@@ -731,8 +731,7 @@ static inline HSD_JObj* mnVibration_GetPortChildAt(HSD_GObj* gobj, s32 n)
     HSD_JObj* child;
     s32 i;
 
-    child = HSD_JObjGetChild(
-        ((MnVibrationData*) gobj->user_data)->jobjs[23]);
+    child = HSD_JObjGetChild(((MnVibrationData*) gobj->user_data)->jobjs[23]);
     for (i = 0; i < n; i++) {
         child = HSD_JObjGetNext(child);
     }
@@ -841,8 +840,7 @@ static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
                 }
                 HSD_JObjReqAnimAll(toggle_jobj, anim_state);
                 HSD_JObjAnimAll(toggle_jobj);
-                active_child =
-                    mnVibration_GetPortChildAt(gobj, port_idx);
+                active_child = mnVibration_GetPortChildAt(gobj, port_idx);
                 mnVibration_UpdatePortPanel(active_child, port_idx, 1);
                 data->x6[port_idx] = 1;
             }

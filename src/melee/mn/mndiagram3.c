@@ -636,7 +636,7 @@ static inline void mnDiagram3_ClearRowLabels(Diagram3* data)
 }
 
 static inline void mnDiagram3_RebuildRowLabels(Diagram3* data, char* base,
-                                                Vec3* pos, int count)
+                                               Vec3* pos, int count)
 {
     f32 spacing;
     int i;
@@ -654,9 +654,9 @@ static inline void mnDiagram3_RebuildRowLabels(Diagram3* data, char* base,
     base_idx_u8 = base_idx;
     i = 0;
     do {
-        text = HSD_SisLib_803A5ACC(
-            0, 1, pos->x - 6.5f, -spacing * (f32) i + -pos->y, pos->z,
-            6.5f, 240.0f);
+        text = HSD_SisLib_803A5ACC(0, 1, pos->x - 6.5f,
+                                   -spacing * (f32) i + -pos->y, pos->z, 6.5f,
+                                   240.0f);
         data->row_labels[i] = text;
         i_u8 = i;
         limit = (data->is_name_mode != 0) ? 0x18 : 0x15;

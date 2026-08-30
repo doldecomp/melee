@@ -647,8 +647,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     }
 }
 
-static inline s32 hsd_803B6BE4_inline(
-    char* arg0, s32 arg1, void* arg2)
+static inline s32 hsd_803B6BE4_inline(char* arg0, s32 arg1, void* arg2)
 {
     s32 scratch_r6_4;
     s32 scratch_r7;
@@ -889,8 +888,7 @@ loop_24:
                     work_r5_2[6] = (s32) (work_r4_4[6] * scratch_r6_2[6]);
                     scratch_r7_3 = work_r4_4[7];
                     work_r4_4 += 8;
-                    work_r5_2[7] =
-                        (s32) (scratch_r7_3 * scratch_r6_2[7]);
+                    work_r5_2[7] = (s32) (scratch_r7_3 * scratch_r6_2[7]);
                     work_r5_2 += 8;
                 }
                 fn_803B61B4(state.work->work.cb);
@@ -907,22 +905,15 @@ loop_24:
                     scratch_r5_17 = quant_chroma + work_r3_5;
                     scratch_r6_3 = scratch_r5_17[0];
                     work_r4_5[0] = (s32) (work_r24_2[0] * scratch_r6_3);
-                    work_r4_5[1] =
-                        (s32) (work_r24_2[1] * scratch_r5_17[1]);
-                    work_r4_5[2] =
-                        (s32) (work_r24_2[2] * scratch_r5_17[2]);
-                    work_r4_5[3] =
-                        (s32) (work_r24_2[3] * scratch_r5_17[3]);
-                    work_r4_5[4] =
-                        (s32) (work_r24_2[4] * scratch_r5_17[4]);
-                    work_r4_5[5] =
-                        (s32) (work_r24_2[5] * scratch_r5_17[5]);
-                    work_r4_5[6] =
-                        (s32) (work_r24_2[6] * scratch_r5_17[6]);
+                    work_r4_5[1] = (s32) (work_r24_2[1] * scratch_r5_17[1]);
+                    work_r4_5[2] = (s32) (work_r24_2[2] * scratch_r5_17[2]);
+                    work_r4_5[3] = (s32) (work_r24_2[3] * scratch_r5_17[3]);
+                    work_r4_5[4] = (s32) (work_r24_2[4] * scratch_r5_17[4]);
+                    work_r4_5[5] = (s32) (work_r24_2[5] * scratch_r5_17[5]);
+                    work_r4_5[6] = (s32) (work_r24_2[6] * scratch_r5_17[6]);
                     scratch_r6_4 = work_r24_2[7];
                     work_r24_2 += 8;
-                    work_r4_5[7] =
-                        (s32) (scratch_r6_4 * scratch_r5_17[7]);
+                    work_r4_5[7] = (s32) (scratch_r6_4 * scratch_r5_17[7]);
                     work_r4_5 += 8;
                 }
                 fn_803B61B4(state.work->work.cr);

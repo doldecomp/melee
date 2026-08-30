@@ -1123,8 +1123,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-static inline s32 fn_8017D9C0_inline(
-    const u8* arg0, const u8* arg1)
+static inline s32 fn_8017D9C0_inline(const u8* arg0, const u8* arg1)
 {
     s32 len;
     u8* p;

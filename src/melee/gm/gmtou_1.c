@@ -1700,8 +1700,7 @@ void fn_8019A158(void)
                 v = standing->is_small_loser;
                 standing->is_big_loser = v;
                 cursor[0x4C] = v;
-                if ((*x48_ptr)->player_standings[i].is_small_loser == 0)
-                {
+                if ((*x48_ptr)->player_standings[i].is_small_loser == 0) {
                     sel = i;
                 }
             }

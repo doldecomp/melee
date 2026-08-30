@@ -907,8 +907,8 @@ void grKongo_801D6AFC(void)
         for (i = 0; i < 15; i++) {
             if (grKg_803E188C[i].unk2 == 0) {
                 if (i != 0 && grKg_803E188C[i - 1].unk2 == 0) {
-                    f32 input = grKg_803E188C[i - 1].unkC -
-                                grKg_803E188C[i].unkC;
+                    f32 input =
+                        grKg_803E188C[i - 1].unkC - grKg_803E188C[i].unkC;
                     f32 limit = MTXDegToRad(yakumono_param->unk9C);
 
                     if (input > limit) {
@@ -918,8 +918,8 @@ void grKongo_801D6AFC(void)
                     }
                 }
                 if ((u32) i != 14 && grKg_803E188C[i + 1].unk2 == 0) {
-                    f32 input = grKg_803E188C[i + 1].unkC -
-                                grKg_803E188C[i].unkC;
+                    f32 input =
+                        grKg_803E188C[i + 1].unkC - grKg_803E188C[i].unkC;
                     f32 limit = MTXDegToRad(yakumono_param->unk9C);
 
                     if (input > limit) {
@@ -990,15 +990,13 @@ static ? grKg_803B7FB0;                             /* unable to generate initia
 
 static inline f32 grKongo_calc_angle(s32 index)
 {
-    f32 angle =
-        (f32) (0.7853981633974483 *
-               (0.5 *
-                (f64) (((grKg_803E188C[index].unk14 -
-                         grKg_803E188C[index - 1].unk14) /
-                        6.0f) +
-                       ((grKg_803E188C[index + 1].unk14 -
-                         grKg_803E188C[index].unk14) /
-                        6.0f))));
+    f32 angle = (f32) (0.7853981633974483 *
+                       (0.5 * (f64) (((grKg_803E188C[index].unk14 -
+                                       grKg_803E188C[index - 1].unk14) /
+                                      6.0f) +
+                                     ((grKg_803E188C[index + 1].unk14 -
+                                       grKg_803E188C[index].unk14) /
+                                      6.0f))));
 
     if (angle > MTXDegToRad(yakumono_param->unkAC)) {
         angle = MTXDegToRad(yakumono_param->unkAC);
@@ -1026,8 +1024,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     grKongo_801D6AFC();
 
     for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 =
-            (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
     }
 
     displacement =

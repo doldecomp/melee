@@ -537,8 +537,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             angle1 = atan2f(rot_mtx[1][2], rot_mtx[2][2]);
         }
         {
-            f32 comb = rot_mtx[2][2] * cosf(angle1) +
-                       rot_mtx[1][2] * sinf(angle1);
+            f32 comb =
+                rot_mtx[2][2] * cosf(angle1) + rot_mtx[1][2] * sinf(angle1);
             tmp = comb;
             *(s32*) &tmp &= 0x7FFFFFFF;
             if (tmp < 1.1754944e-38F) {

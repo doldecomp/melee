@@ -1959,23 +1959,23 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp,
     return false;
 }
 
-static inline s32 ftCo_800A3908_inline2(
-    Vec3* out_normal, u32* out_flags, int* out_line, Vec3* out_pos, float y,
-    float x)
+static inline s32 ftCo_800A3908_inline2(Vec3* out_normal, u32* out_flags,
+                                        int* out_line, Vec3* out_pos, float y,
+                                        float x)
 {
     return mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
                         out_flags, out_normal, -1, -1, -1, NULL, NULL);
 }
 
-inline s32 ftCo_800A3908_inline1(
-    float x, float y, Vec3* out_pos, Vec3* out_normal, int* out_line,
-    u32* out_flags)
+inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
+                                 Vec3* out_normal, int* out_line,
+                                 u32* out_flags)
 {
     s32 result;
 
     *out_line = -1;
-    result = ftCo_800A3908_inline2(out_normal, out_flags, out_line, out_pos, y,
-                                   x);
+    result =
+        ftCo_800A3908_inline2(out_normal, out_flags, out_line, out_pos, y, x);
     if (result != 0 && ftCo_800A1B38_noinline(*out_line) != 0) {
         return 0;
     }
@@ -2074,8 +2074,9 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
                     px = ex - 5.0;
-                    valid = ftCo_800A3908_inline1(
-                        px, ey, &floor_pos0, &floor_normal0, &line_id0, &flags0);
+                    valid = ftCo_800A3908_inline1(px, ey, &floor_pos0,
+                                                  &floor_normal0, &line_id0,
+                                                  &flags0);
                     if (valid != 0 &&
                         !ftCo_800A3908_inline0(fp, data2, px, ey))
                     {
@@ -3718,9 +3719,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     }
 }
 
-static inline s32 ftCo_800A7AAC_inline0(
-    f32 x, f32 above, f32 below, Vec3* floor_pos, int* line_id, u32* flags,
-    Vec3* floor_normal)
+static inline s32 ftCo_800A7AAC_inline0(f32 x, f32 above, f32 below,
+                                        Vec3* floor_pos, int* line_id,
+                                        u32* flags, Vec3* floor_normal)
 {
     int line;
     s32 blocked;
@@ -3728,9 +3729,9 @@ static inline s32 ftCo_800A7AAC_inline0(
 
     blocked = 0;
     *line_id = -1;
-    result = mpCheckFloor(x, above, x, below, 0.0f, floor_pos, line_id, flags,
-                          floor_normal, -1, -1, -1, NULL,
-                          (Fighter_GObj*) blocked);
+    result =
+        mpCheckFloor(x, above, x, below, 0.0f, floor_pos, line_id, flags,
+                     floor_normal, -1, -1, -1, NULL, (Fighter_GObj*) blocked);
     if (result != 0) {
         line = *line_id;
         if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
@@ -3771,7 +3772,7 @@ void ftCo_800A7AAC(Fighter* fp)
         f32 below = partner_pos.y - 1000.0f;
         f32 above = 10.0f + partner_pos.y;
         result = ftCo_800A7AAC_inline0(partner_pos.x, above, below, &floor_pos,
-                                      &line_id, &flags, &floor_normal);
+                                       &line_id, &flags, &floor_normal);
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {

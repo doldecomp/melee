@@ -392,9 +392,10 @@ void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
     }
 }
 
-static inline void mn_802327A4_InitOptionRoots(
-    HSD_JObj** option_roots, mn_803ED1D0_t* rule_data,
-    MenuRulesPlusData* data, u8 num_options, s32* i)
+static inline void mn_802327A4_InitOptionRoots(HSD_JObj** option_roots,
+                                               mn_803ED1D0_t* rule_data,
+                                               MenuRulesPlusData* data,
+                                               u8 num_options, s32* i)
 {
     HSD_JObj** option_root;
     u8 j8;
@@ -445,9 +446,9 @@ static inline void mn_802327A4_InitOptionRoots(
     }
 }
 
-static inline void mn_802327A4_UpdateOption(
-    MenuRulesPlusData* data, HSD_GObj* gobj, u32 arg2, u32 arg1,
-    u16* selected)
+static inline void mn_802327A4_UpdateOption(MenuRulesPlusData* data,
+                                            HSD_GObj* gobj, u32 arg2, u32 arg1,
+                                            u16* selected)
 {
     if ((s32) arg2 != 0) {
         u16 hovered;

@@ -857,8 +857,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         u32 cnt2 = base->u.arwing.xC4;
                         if ((s32) cnt2 >= params->xDC &&
                             (s32) gp->u.bigblue.data[i].x2 == 1 &&
-                            ((s32) cnt2 >= params->xE0 ||
-                             HSD_Randi(2) != 0))
+                            ((s32) cnt2 >= params->xE0 || HSD_Randi(2) != 0))
                         {
                             grBigBlue_801E8978(0, NULL, NULL);
                             grBigBlue_801E8978(1, (HSD_JObj*) 1, jobj);

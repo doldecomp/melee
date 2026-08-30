@@ -869,13 +869,13 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     return arg0;
 }
 
-static inline void SetPlayerHandicaps(
-    struct PlayerInitData* p0, struct PlayerInitData* p1,
-    struct PlayerInitData* p2, struct PlayerInitData* p3,
-    struct PlayerInitData* p4, struct PlayerInitData* p5)
+static inline void
+SetPlayerHandicaps(struct PlayerInitData* p0, struct PlayerInitData* p1,
+                   struct PlayerInitData* p2, struct PlayerInitData* p3,
+                   struct PlayerInitData* p4, struct PlayerInitData* p5)
 {
-    p5->handicap = p4->handicap = p3->handicap = p2->handicap =
-        p1->handicap = p0->handicap = 9;
+    p5->handicap = p4->handicap = p3->handicap = p2->handicap = p1->handicap =
+        p0->handicap = 9;
 }
 
 void gmMainLib_8015EA80(void)
@@ -883,8 +883,8 @@ void gmMainLib_8015EA80(void)
     struct gmMainLib_8015EA80_modes {
         u8 pad[8];
         VsModeData modes[13];
-    }* data = (struct gmMainLib_8015EA80_modes*)
-        gmMainLib_804D3EE0->unk_530.unk_588;
+    }* data =
+        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->unk_530.unk_588;
     struct PlayerInitData* players;
     s32 i;
 

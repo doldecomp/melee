@@ -1232,7 +1232,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         selection = (u16*) &mn_804A04F0;
         cursor_pos = data->fighter_cursor_pos;
-        col = (u8) *++selection;
+        col = (u8) * ++selection;
         i = (u8) cursor_pos;
         ptr = sorted + i;
         goto fc_test;

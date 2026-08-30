@@ -652,9 +652,10 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 
 extern MenuKindData mn_803EB6B0[];
 
-static inline void mn_80230274_InitOptionRoots(
-    HSD_JObj** option_roots, u8* base, struct mn_802307F8_t* data, u8 count,
-    s32* i)
+static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
+                                               const u8* base,
+                                               struct mn_802307F8_t* data,
+                                               u8 count, s32* i)
 {
     HSD_JObj** option_root;
     u8 j8;

@@ -636,10 +636,10 @@ static inline void psUpdateParticle(HSD_Particle* pp)
         pz = pp->vel.z;
 
         pp->pos.x = px * cosb + pz * sinb + gp->pos.x;
-        pp->pos.y = -px * sina * sinb + py * cosa + pz * sina * cosb +
-                    gp->pos.y;
-        pp->pos.z = -px * cosa * sinb - py * sina + pz * cosa * cosb +
-                    gp->pos.z;
+        pp->pos.y =
+            -px * sina * sinb + py * cosa + pz * sina * cosb + gp->pos.y;
+        pp->pos.z =
+            -px * cosa * sinb - py * sina + pz * cosa * cosb + gp->pos.z;
     } else {
         if (pp->kind & 1) {
             pp->vel.y -= pp->grav;

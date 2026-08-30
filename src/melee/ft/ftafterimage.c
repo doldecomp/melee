@@ -226,8 +226,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                (vp + 1)->x =
-                    curEntry->xC.x * outerScale + curEntry->x0.x;
+                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
                 (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
                 (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;

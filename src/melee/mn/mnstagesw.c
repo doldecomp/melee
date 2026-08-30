@@ -512,9 +512,8 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
     mn_8022ED6C(hover_anim_jobj, mnStageSw_803ED488);
 }
 
-static inline void
-mnStageSw_FinishEnter(HSD_GObj* menu_gobj, MnStageSwData* data,
-                      HSD_JObj** child)
+static inline void mnStageSw_FinishEnter(HSD_GObj* menu_gobj,
+                                         MnStageSwData* data, HSD_JObj** child)
 {
     HSD_JObj* jobj;
     s32 i;
@@ -536,8 +535,7 @@ mnStageSw_FinishEnter(HSD_GObj* menu_gobj, MnStageSwData* data,
     mnStageSw_804D6BF4 = 0;
 }
 
-static inline void
-mnStageSw_FreeTexts(MnStageSwData* data)
+static inline void mnStageSw_FreeTexts(MnStageSwData* data)
 {
     s32 i;
 

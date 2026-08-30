@@ -1322,11 +1322,12 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
     hsd_803B4D64_inline(arg0, arg1, &hsd_804D2648);
 }
 
-static inline s32 hsd_803B51C8_inline(
-    s32 image, s32 image_height, s32 image_width, char* output,
-    s32 output_capacity, const JpegMetadata* metadata, JpegComment* comment,
-    JpegHuffDc* huff_dc_luma, JpegHuffDc* huff_dc_chroma,
-    JpegHuffAc* huff_ac_luma, JpegHuffAc* huff_ac_chroma)
+static inline s32
+hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
+                    const char* output, s32 output_capacity,
+                    const JpegMetadata* metadata, JpegComment* comment,
+                    JpegHuffDc* huff_dc_luma, JpegHuffDc* huff_dc_chroma,
+                    JpegHuffAc* huff_ac_luma, JpegHuffAc* huff_ac_chroma)
 {
     s32 work_r24;
     s32 work_r25;
@@ -1644,9 +1645,9 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
 
     PAD_STACK(0x18);
 
-    return hsd_803B51C8_inline(
-        arg0, arg2, arg1, arg3, arg4, &lbl_803B9670, &comment, &huff_dc_luma,
-        &huff_dc_chroma, &huff_ac_luma, &huff_ac_chroma);
+    return hsd_803B51C8_inline(arg0, arg2, arg1, arg3, arg4, &lbl_803B9670,
+                               &comment, &huff_dc_luma, &huff_dc_chroma,
+                               &huff_ac_luma, &huff_ac_chroma);
 }
 
 void hsd_803B5C2C(s32 arg0)

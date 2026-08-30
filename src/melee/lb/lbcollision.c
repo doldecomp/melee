@@ -1260,10 +1260,9 @@ block_39:
                                   (f64) hurt_start_copy.x);
             hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
             {
-                f64 hurt_mid_z_product =
-                    lbColl_804D7A18 * (f64) hurt_delta_z;
-                hurt_mid_z = (float) (hurt_mid_z_product +
-                                      (f64) hurt_start_copy.z);
+                f64 hurt_mid_z_product = lbColl_804D7A18 * (f64) hurt_delta_z;
+                hurt_mid_z =
+                    (float) (hurt_mid_z_product + (f64) hurt_start_copy.z);
             }
             hit_end_mid_y = hit_end->y - hurt_mid_y;
             hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
