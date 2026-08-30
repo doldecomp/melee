@@ -643,12 +643,17 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
 
     cur_text[name_idx * 3] = null_ch;
 
-    tmp = data->auto_history[0];
-    data->auto_history[0] = (u8) pick;
-    for (i = 1; i < 5; i++) {
-        u8 next = data->auto_history[i];
-        data->auto_history[i] = tmp;
-        tmp = next;
+    {
+        u8* history = data->auto_history;
+
+        tmp = history[0];
+        history[0] = (u8) pick;
+        for (i = 1; i < 5; i++) {
+            u8* entry = &history[i];
+            u8 next = *entry;
+            *entry = tmp;
+            tmp = next;
+        }
     }
 
     return (s32) null_ch;
