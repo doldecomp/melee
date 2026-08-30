@@ -752,6 +752,17 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
     }
 }
 
+inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
+{
+    u8 value = *tag_ptr;
+
+    if (value == tag) {
+        *tag_ptr = 0x78;
+    } else if (value > tag && value != 0x78) {
+        *tag_ptr = value - 1;
+    }
+}
+
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -780,7 +791,6 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     }* base;
     GameRules* gr;
     u8 val;
-    u8* ptr;
 
 #define ADJ_NAMETAG_78(field)                                                 \
     do {                                                                      \
@@ -795,13 +805,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    ptr = &config->x4;
-    val = *ptr;
-    if (val == (u8) arg0) {
-        *ptr = 0x78;
-    } else if (val > (u8) arg0 && val != 0x78) {
-        *ptr = val - 1;
-    }
+    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.x4);
