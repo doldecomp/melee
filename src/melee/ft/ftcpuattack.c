@@ -409,7 +409,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 relPredY;
     f32 halfRange;
 
-    PAD_STACK(0x10);
+    PAD_STACK(4);
 
     cpu->x74.y = 0.0f;
     cpu->x74.x = 0.0f;
@@ -525,10 +525,12 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         dirx *= halfRange;
         diry *= halfRange;
         scale = fp->x34_scale.y;
-        upper = scale * list->x14 + reach;
-        lower = scale * list->x10;
-        upper *= halfRange;
-        lower *= halfRange;
+        {
+            f32 u = list->x14 * scale + reach;
+            f32 l = list->x10 * scale;
+            upper = u * halfRange;
+            lower = l * halfRange;
+        }
         if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
