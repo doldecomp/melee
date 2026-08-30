@@ -483,7 +483,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
         col_x = (f32) (9 - (j / 5)) * x_range;
         HSD_SisLib_803A6B98(text, col_x / font_x,
                             ((f32) (j % 5) * y_range) / text->font_size.y,
-                            str_table[j], font_x, col_x);
+                            str_table[j]);
         if (j == (s32) mn_804A04F0.hovered_selection) {
             color_ptr = &sp48;
         } else {
