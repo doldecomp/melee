@@ -1727,8 +1727,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             } else if (age > yakumono_param->x2C &&
                        (u32) grMc_8049F4B8[car_idx].x28 == 0)
             {
-                grMuteCity_801F2AB0(0x116, jobj);
-                grMc_8049F4B8[car_idx].x28 = (s32) jobj;
+                grMc_8049F4B8[car_idx].x28 =
+                    grMuteCity_801F2AB0(0x116, jobj);
             }
         }
 
@@ -1815,8 +1815,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     grMc_8049F4B8[car_idx].x28 = 0;
                 }
             } else if ((u32) grMc_8049F4B8[car_idx].x28 == 0) {
-                grMuteCity_801F2AB0(0x119, jobj);
-                grMc_8049F4B8[car_idx].x28 = (s32) jobj;
+                grMc_8049F4B8[car_idx].x28 =
+                    grMuteCity_801F2AB0(0x119, jobj);
             }
         }
 
