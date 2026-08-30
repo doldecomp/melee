@@ -31,11 +31,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     Fighter* fp;
     itSword_UnkBytes* params;
     f32 cumDist[3];
-    AfterimageVtx vtx_buf[151];
+    AfterimageVtx vtx_buf[152];
     f32 d2;
     s32 numSubdiv;
-
-    PAD_STACK(0x10);
 
     if (arg1 != 2) {
         return;
