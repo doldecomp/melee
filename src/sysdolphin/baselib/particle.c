@@ -693,7 +693,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Particle* pp = pp_arg;
     HSD_Particle* prev = prev_arg;
     u8* pc;
-    int operand;
+    u16 operand;
     u8 opcode;
     u8 cls;
     HSD_Particle* child;
@@ -844,33 +844,30 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x80:
                 /* Set position */
                 if (opcode & 1) {
-                    u8* _p = pc + 1;
-                    ((u8*) &fval)[0] = pc[0];
-                    _p += 3;
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc = _p;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.x = fval;
                 }
                 if (opcode & 2) {
-                    u8* _p = pc + 1;
-                    ((u8*) &fval)[0] = pc[0];
-                    _p += 3;
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc = _p;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.y = fval;
                 }
                 if (opcode & 4) {
-                    u8* _p = pc + 1;
-                    ((u8*) &fval)[0] = pc[0];
-                    _p += 3;
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc = _p;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.z = fval;
                 }
                 break;
@@ -878,27 +875,30 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x88:
                 /* Add to position */
                 if (opcode & 1) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.x += fval;
                 }
                 if (opcode & 2) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.y += fval;
                 }
                 if (opcode & 4) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->pos.z += fval;
                 }
                 break;
@@ -906,27 +906,30 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x90:
                 /* Set velocity */
                 if (opcode & 1) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.x = fval;
                 }
                 if (opcode & 2) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.y = fval;
                 }
                 if (opcode & 4) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.z = fval;
                 }
                 break;
@@ -934,27 +937,30 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x98:
                 /* Add to velocity */
                 if (opcode & 1) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.x += fval;
                 }
                 if (opcode & 2) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.y += fval;
                 }
                 if (opcode & 4) {
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->vel.z += fval;
                 }
                 break;
@@ -962,19 +968,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xA0:
                 /* Set size interpolation target */
                 {
-                    pp->sizeCount = *pc++;
+                    u8* p = pc;
+                    pp->sizeCount = *p++;
                     {
                         u16 cnt = pp->sizeCount;
                         if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *pc++;
+                            cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->sizeCount = cnt;
                         }
                     }
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->sizeTarget = fval;
                     if (pp->sizeCount == 0) {
                         pp->size = pp->sizeTarget;
@@ -989,11 +996,14 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA2:
                 /* Set gravity */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
-                pc += 4;
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 pp->grav = fval;
                 if (pp->grav == 0.0F) {
                     pp->kind &= ~1;
@@ -1004,11 +1014,14 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA3:
                 /* Set friction */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
-                pc += 4;
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 pp->fric = fval;
                 if (pp->fric == 1.0F) {
                     pp->kind &= ~2;
@@ -1059,7 +1072,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (pp->gen != NULL) {
                             pp->gen->numChild++;
                         }
-                        psAttachParticleAppSRT(child, pp->appsrt);
+                        {
+                            HSD_psAppSRT* srt = pp->appsrt;
+                            psAttachParticleAppSRT(child, srt);
+                        }
                         child->pos.x = pp->pos.x;
                         child->pos.y = pp->pos.y;
                         child->pos.z = pp->pos.z;
@@ -1117,7 +1133,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (pp->gen != NULL) {
                             pp->gen->numChild++;
                         }
-                        psAttachParticleAppSRT(child, pp->appsrt);
+                        {
+                            HSD_psAppSRT* srt = pp->appsrt;
+                            psAttachParticleAppSRT(child, srt);
+                        }
                         child->pos.x = pp->pos.x;
                         child->pos.y = pp->pos.y;
                         child->pos.z = pp->pos.z;
@@ -1373,11 +1392,14 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA9:
                 /* Call force function with float parameter */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
-                pc += 4;
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 hsd_80398F8C(pp, fval);
                 break;
 
@@ -1449,14 +1471,21 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xAB:
                 /* Velocity scale */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
-                pc += 4;
-                pp->vel.x *= fval;
-                pp->vel.y *= fval;
-                pp->vel.z *= fval;
+                {
+                    f32 scale;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
+                    scale = fval;
+                    pp->vel.x *= scale;
+                    pp->vel.y *= scale;
+                    pp->vel.z *= scale;
+                }
                 break;
 
             case 0xAC:
@@ -1471,17 +1500,24 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             pp->sizeCount = cnt;
                         }
                     }
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
                     pp->sizeTarget = fval;
-                    ((u8*) &fval)[0] = pc[4];
-                    ((u8*) &fval)[1] = pc[5];
-                    ((u8*) &fval)[2] = pc[6];
-                    ((u8*) &fval)[3] = pc[7];
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
                     range = fval;
-                    pc += 8;
                     pp->sizeTarget += range * HSD_Randf();
                     if (pp->sizeCount == 0) {
                         pp->size = pp->sizeTarget;
@@ -1613,11 +1649,14 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             pp->rotateCount = cnt;
                         }
                     }
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
                     pp->rotateTarget += fval;
                     if (pp->rotateCount == 0) {
                         pp->rotate = pp->rotateTarget;
@@ -1668,15 +1707,23 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int idx = *pc++;
                     f32 force, range;
 
-                    ((u8*) &fval)[0] = *pc++;
-                    ((u8*) &fval)[1] = *pc++;
-                    ((u8*) &fval)[2] = *pc++;
-                    ((u8*) &fval)[3] = *pc++;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
                     force = fval;
-                    ((u8*) &fval)[0] = *pc++;
-                    ((u8*) &fval)[1] = *pc++;
-                    ((u8*) &fval)[2] = *pc++;
-                    ((u8*) &fval)[3] = *pc++;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
                     range = fval;
                     {
                         HSD_JObj* jobj = hsd_804D08E8[idx + pp->pJObjOfs];
@@ -2031,15 +2078,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 base_speed, random_range, target_speed;
                     f32 mag;
 
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
+                    fbytes[0] = pc[0];
+                    fbytes[1] = pc[1];
+                    fbytes[2] = pc[2];
+                    fbytes[3] = pc[3];
                     base_speed = fval;
-                    ((u8*) &fval)[0] = pc[4];
-                    ((u8*) &fval)[1] = pc[5];
-                    ((u8*) &fval)[2] = pc[6];
-                    ((u8*) &fval)[3] = pc[7];
+                    fbytes[0] = pc[4];
+                    fbytes[1] = pc[5];
+                    fbytes[2] = pc[6];
+                    fbytes[3] = pc[7];
                     random_range = fval;
                     pc += 8;
                     target_speed = base_speed + random_range * HSD_Randf();
@@ -2057,21 +2104,32 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xBE:
                 /* Velocity component multiply */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 pp->vel.x *= fval;
-                ((u8*) &fval)[0] = pc[4];
-                ((u8*) &fval)[1] = pc[5];
-                ((u8*) &fval)[2] = pc[6];
-                ((u8*) &fval)[3] = pc[7];
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 pp->vel.y *= fval;
-                ((u8*) &fval)[0] = pc[8];
-                ((u8*) &fval)[1] = pc[9];
-                ((u8*) &fval)[2] = pc[10];
-                ((u8*) &fval)[3] = pc[11];
-                pc += 12;
+                {
+                    u8* p = pc;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
+                }
                 pp->vel.z *= fval;
                 break;
 
@@ -2560,17 +2618,22 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* UserData set */
                 {
                     int idx = *pc++;
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
-                    pc += 4;
+                    f32 value;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
+                    value = fval;
                     if (pp->gen->userfunc != NULL &&
                         pp->gen->userfunc->setUserData != NULL)
                     {
-                        pp->gen->userfunc->setUserData(pp, idx, fval);
+                        pp->gen->userfunc->setUserData(pp, idx, value);
                     } else if (pp->userdata != NULL) {
-                        pp->userdata[idx] = fval;
+                        pp->userdata[idx] = value;
                     }
                 }
                 break;
@@ -2647,16 +2710,23 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xE8:
                 /* Trail control */
-                ((u8*) &fval)[0] = pc[0];
-                ((u8*) &fval)[1] = pc[1];
-                ((u8*) &fval)[2] = pc[2];
-                ((u8*) &fval)[3] = pc[3];
-                pc += 4;
-                if (fval < 0.0F) {
-                    pp->kind &= ~Trail;
-                } else {
-                    pp->kind |= Trail;
-                    pp->trail = fval;
+                {
+                    f32 trail;
+                    {
+                        u8* p = pc;
+                        fbytes[0] = *p++;
+                        fbytes[1] = *p++;
+                        fbytes[2] = *p++;
+                        fbytes[3] = *p++;
+                        pc = p;
+                    }
+                    trail = fval;
+                    if (trail < 0.0F) {
+                        pp->kind &= ~Trail;
+                    } else {
+                        pp->kind |= Trail;
+                        pp->trail = trail;
+                    }
                 }
                 break;
 
@@ -2752,15 +2822,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int timing;
                     f32 result;
 
-                    ((u8*) &fval)[0] = pc[0];
-                    ((u8*) &fval)[1] = pc[1];
-                    ((u8*) &fval)[2] = pc[2];
-                    ((u8*) &fval)[3] = pc[3];
+                    fbytes[0] = pc[0];
+                    fbytes[1] = pc[1];
+                    fbytes[2] = pc[2];
+                    fbytes[3] = pc[3];
                     base_val = fval;
-                    ((u8*) &fval)[0] = pc[4];
-                    ((u8*) &fval)[1] = pc[5];
-                    ((u8*) &fval)[2] = pc[6];
-                    ((u8*) &fval)[3] = pc[7];
+                    fbytes[0] = pc[4];
+                    fbytes[1] = pc[5];
+                    fbytes[2] = pc[6];
+                    fbytes[3] = pc[7];
                     range_val = fval;
                     timing = pc[8];
                     pc += 9;
