@@ -2053,7 +2053,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                         f32 dist_sq;
                         dx *= dx;
                         dy *= dy;
-                        dist_sq = dx + dy;
+                        dist_sq = dy + dx;
                         if (max_dist_sq < dist_sq) {
                             f32 ej_size = ej->x18_size;
                             max_dist_sq = dist_sq;
