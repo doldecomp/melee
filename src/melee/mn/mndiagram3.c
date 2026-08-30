@@ -493,7 +493,6 @@ static inline void mnDiagram3_CreateRowLabels(int count)
     lb_8000B1CC(data->jobjs[8], &mnDiagram3_803EEC28.x0, &pos);
 
     row_spacing = 6.5f;
-    stat_idx = (u8) scroll;
     i = 0;
 
     do {
@@ -515,15 +514,15 @@ static inline void mnDiagram3_CreateRowLabels(int count)
             }
             limit = (u8) limit;
 
-            val = stat_idx + type_idx;
+            val = (stat_idx = (u8) scroll) + (type_idx = type_idx);
             if (val >= limit) {
-                val = val - limit;
+                limit = val - limit;
             } else {
-                val = (u8) val;
+                limit = (u8) val;
             }
 
             {
-                u16* entry = &mnDiagram3_803EEC4C.label_ids[(u8) val];
+                u16* entry = &mnDiagram3_803EEC4C.label_ids[(u8) limit];
                 HSD_SisLib_803A6368(text, *entry);
             }
         }
