@@ -4579,9 +4579,9 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     char* model_data;
                                     s16 trophy_id;
 
-                                    list_entry = display->first_entry->prev;
                                     trophy_id = Toy_sbss_804D6EDC
                                         [display->selectedIdx - 1];
+                                    list_entry = display->first_entry->prev;
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
@@ -4700,9 +4700,9 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     char* model_data;
                                     s16 trophy_id;
 
-                                    list_entry = display->last_entry->next;
                                     trophy_id = Toy_sbss_804D6EDC
                                         [display->selectedIdx + 1];
+                                    list_entry = display->last_entry->next;
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
