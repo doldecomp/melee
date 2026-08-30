@@ -56,16 +56,6 @@ typedef struct gmClassicIntroData {
 } gmClassicIntroData;
 ASSERT_SIZE(gmClassicIntroData, 0x20);
 
-typedef struct gmClassic_80490880Data {
-    /* 0x00 */ gmClassicIntroData x00;
-    /* 0x20 */ u8 x20[0x0C];
-    /* 0x2C */ u8 x2C[0x28];
-    /* 0x54 */ u8 x54[0x20];
-    /* 0x74 */ u8 x74[0x0C];
-    /* 0x80 */ u8 x80[0x10];
-} gmClassic_80490880Data;
-ASSERT_SIZE(gmClassic_80490880Data, 0x90);
-
 typedef union gmClassic_804908A0Data {
     /* 0x00 */ u8 bytes[0x70];
     struct {
@@ -103,7 +93,7 @@ typedef struct gmClassicSceneData {
 } gmClassicSceneData;
 ASSERT_SIZE(gmClassicSceneData, 0x560);
 
-static gmClassic_80490880Data gmClassic_80490880;
+gmClassicIntroData gmClassicIntroDataBuffer;
 
 GameModeState gm_Mode_Classic_States[] = {
     {
@@ -114,7 +104,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -138,7 +128,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -162,7 +152,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -186,7 +176,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -210,7 +200,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -234,7 +224,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -258,7 +248,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -282,7 +272,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -306,7 +296,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -330,7 +320,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -354,7 +344,7 @@ GameModeState gm_Mode_Classic_States[] = {
         NULL,
         {
             GS_INTRO_EASY,
-            &gmClassic_80490880,
+            &gmClassicIntroDataBuffer,
             &gmClassic_804D68D0,
         },
     },
@@ -612,7 +602,7 @@ static gmClassicMatchupData gm_804D4328 = { { 0x053, { 0x21, 0x21, 0x21 }, 0 },
 
 static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
-    gmClassic_80490880Data* o = &gmClassic_80490880;
+    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
     gm_803DDEC8Struct* ptr;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
@@ -620,7 +610,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x2B0, o->x80, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x2B0,
+                                     o->state.order.x60, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -634,7 +625,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x26C, o->x74, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x26C,
+                                     o->state.order.x54, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -648,7 +640,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x1B8, o->x54, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x1B8,
+                                     o->state.order.x34, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -662,7 +655,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x0CC, o->x2C, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x0CC,
+                                     o->state.order.x0C, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -703,7 +697,7 @@ void gm_Mode_Classic_OnLoad(void)
     UnkAllstarData* data;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
-    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassic_80490880;
+    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
     gm_803DDEC8Struct* entry;
     PAD_STACK(40);
 
