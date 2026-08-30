@@ -566,11 +566,11 @@ s32 mnInfo_80252758(void)
     mn_804A04F0.hovered_selection = 0;
 
     archive = mn_804D6BB8;
-    lbArchive_LoadSections(
-        archive, (void**) &model->joint, top_joint, animjoint,
-        layout->top_animjoint, &model->matanim_joint,
-        layout->top_matanim_joint, &model->shapeanim_joint,
-        layout->top_shapeanim_joint, 0);
+    lbArchive_LoadSections(archive, (void**) &model->joint, top_joint,
+                           animjoint, layout->top_animjoint,
+                           &model->matanim_joint, layout->top_matanim_joint,
+                           &model->shapeanim_joint,
+                           layout->top_shapeanim_joint, 0);
 
     mnInfo_80251AFC();
 
