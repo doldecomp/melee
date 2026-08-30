@@ -2145,10 +2145,10 @@ static inline bool ftCo_800A4038_inline0(Fighter* fp,
 
 static inline s32 ftCo_800A4038_inline1(float x, float y)
 {
-    Vec3 floor_normal;
-    Vec3 floor_pos;
     int line_id;
     u32 flags;
+    Vec3 floor_normal;
+    Vec3 floor_pos;
     s32 result;
 
     line_id = -1;
