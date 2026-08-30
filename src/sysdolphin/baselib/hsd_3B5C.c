@@ -550,9 +550,9 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     sc16 = scratch_r6 << 4;
     work_r21 = work_r22 = 0;
     for (work_r6 = 0; work_r6 < 2; work_r6++) {
-        s32 work_r24;
-        s32 work_r25;
         u16* work_r9_2;
+        s32 work_r25;
+        s32 work_r24;
 
         work_r25 = work_r22;
         work_r9_2 =
