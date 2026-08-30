@@ -94,7 +94,7 @@ static void sdata2_order(void)
 #endif
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3B7D3C */ extern s32 lbl_803B7D3C[4];
+/* 3B7D3C */ extern const s32 lbl_803B7D3C[5];
 /* 479A58 */ struct TmAnimTimers lbl_80479A58;
 /* 4D6690 */ extern SceneDesc* lbl_804D6690;
 /* 4D668C */ extern HSD_Archive* lbl_804D668C;
@@ -106,6 +106,15 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
         0x07, 0x09, 0x08, 0x06, 0x09, 0x04, 0x09, 0x0A, 0x0B,
         0x0C, 0x02, 0x0C, 0x06, 0x07, 0x09, 0x0C,
     },
+};
+
+const TmAnimFrameTable lbl_803B7D18 = {
+    { { 0, 30, 0 },
+      { 50, 59, 0 },
+      { 60, 70, 1 },
+      { 90, 100, 0 },
+      { 110, 130, 0 },
+      { 150, 160, 0 } },
 };
 
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
@@ -555,7 +564,8 @@ void fn_8019D1BC(void)
                 fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
                             fn_8019C048, (f32) i);
             HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
-            HSD_JObjSetTranslateY(first_jobj, -2.5f);
+            (void) first_jobj;
+            HSD_JObjSetTranslateY(GET_JOBJ(first_gobj), -2.5f);
             fn_8018FBD8(first_gobj, i);
 
             c = HSD_JObjGetChild(first_jobj);
@@ -734,7 +744,7 @@ void fn_8019DD60(void)
     gobj = GObj_Create(0xE, 0x1A, 0);
     {
         HSD_Fog* tmp = HSD_FogLoadDesc(lbl_804D6690->fogs->desc);
-        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, tmp);
+        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_FogKind, tmp);
     }
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 
@@ -1231,3 +1241,5 @@ static void order_data_1(void)
     (void) "ckind:%d\n";
 }
 #endif
+
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };

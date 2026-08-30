@@ -166,8 +166,8 @@ void gm_801A3EF4(void)
 {
     GameMode* scene;
     for (scene = gm_GetAllGameModes(); scene->idx != GM_COUNT; scene++) {
-        if (scene->Init != NULL) {
-            scene->Init();
+        if (scene->on_init != NULL) {
+            scene->on_init();
         }
     }
 }

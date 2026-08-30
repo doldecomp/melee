@@ -86,10 +86,14 @@ struct gm_804D6804_t {
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
 
+/// Unlock predicate for a staff-roll entry; the table stores functions with
+/// several different signatures behind it.
+typedef bool (*StaffEntryCheck)(s16);
+
 typedef struct {
     /* 0x00 */ u8 x0;
     /* 0x01 */ u8 pad_01[3];
-    /* 0x04 */ int (*check)(s16);
+    /* 0x04 */ StaffEntryCheck check;
     /* 0x08 */ s16 check_arg;
     /* 0x0A */ u8 pad_0A[2];
     /* 0x0C */ int alt_page;
@@ -103,8 +107,7 @@ typedef struct {
     /* 0x10 */ struct {
         s32 frame;
         s32 sfx;
-    } sfx_cues[44];
-    /* 0x170 */ u8 pad_170[8];
+    } sfx_cues[45]; ///< terminated by a 0x7FFFFFFF frame
 } StaffRollExtraData;
 ASSERT_SIZE(StaffRollExtraData, 0x178);
 
@@ -118,8 +121,227 @@ typedef struct StaffRollPtclNode {
     /* 0x0C */ struct StaffRollPtclNode* xC;
 } StaffRollPtclNode;
 
-/* 3DBFD8 */ static StaffEntryData gm_803DBFD8[198] = { 0 };
-static StaffRollExtraData gm_803DBFD8_extra = { 0 };
+/* 3DBFD8 */ static StaffEntryData gm_803DBFD8[198] = {
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 116 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 112, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 2, { 0 }, gm_801AA644, 0, { 0 }, 2972, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 142, 104 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 224, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 160, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, gm_801AA664, 15, { 0 }, 2976, 1, { 96, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 128, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, gm_801AA664, 9, { 0 }, 2980, 1, { 80, 123 } },
+    { 1, { 0 }, gm_801AA664, 10, { 0 }, 2984, 1, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, gm_801AA664, 23, { 0 }, 2988, 1, { 80, 88 } },
+    { 1, { 0 }, gm_801AA664, 24, { 0 }, 2992, 1, { 128, 102 } },
+    { 1, { 0 }, gm_801AA664, 21, { 0 }, 2996, 1, { 96, 109 } },
+    { 1, { 0 }, gm_801AA664, 25, { 0 }, 3000, 1, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 204, 148 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 144, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 128, 83 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 112, 81 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 144, 88 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 128, 81 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 112, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 128, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, gm_801AA664, 25, { 0 }, 3004, 1, { 80, 116 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3008, 1, { 80, 102 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3012, 1, { 80, 116 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3016, 1, { 80, 123 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3020, 1, { 80, 95 } },
+    { 1, { 0 }, gm_801AA688, 0, { 0 }, 3024, 1, { 96, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 156, 146 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 236, 111 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 109 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 88 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 130 } },
+    { 1, { 0 }, gm_801AA6D8, 269, { 0 }, 3028, 1, { 80, 88 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 108 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 115 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 115 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 116 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 160 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 102 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 146 } },
+    { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 210, 210 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
+    { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
+    { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 38, 88 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 102, 102 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 123, 123 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 102, 102 } },
+    { 1, { 0 }, gm_801AA688, 0, { 0 }, 3032, 1, { 169, 169 } },
+    { 1, { 0 }, gm_801AA6FC, 0, { 0 }, 3036, 1, { 110, 110 } },
+    { 1, { 0 }, gm_801AA6D8, 272, { 0 }, 3040, 1, { 146, 146 } },
+    { 1, { 0 }, gm_801AA774, 0, { 0 }, 3044, 1, { 80, 80 } },
+    { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
+    { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 122, 140 } },
+    { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 35, 35 } },
+    { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 98, 148 } },
+    { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 28, 28 } },
+    { 0, { 0 }, gm_801AA688, 0, { 0 }, 3048, 1, { 120, 120 } },
+};
+
+static StaffRollExtraData gm_803DBFD8_extra = {
+    { -1.0f, -1.79f, -2.5799999f, -3.5799999f },
+    {
+        { 1, 500015 },    { 2, 500005 },    { 160, 500001 },
+        { 220, 500005 },  { 240, 500003 },  { 580, 500002 },
+        { 602, 500004 },  { 660, 500001 },  { 830, 500002 },
+        { 880, 500003 },  { 1030, 500001 }, { 1050, 500003 },
+        { 1200, 500004 }, { 1250, 500002 }, { 1380, 500003 },
+        { 1480, 500004 }, { 1670, 500001 }, { 1900, 500005 },
+        { 1902, 500001 }, { 1960, 500004 }, { 2000, 500003 },
+        { 2200, 500004 }, { 2350, 500001 }, { 2000, 500004 },
+        { 2400, 500002 }, { 2650, 500003 }, { 2730, 500000 },
+        { 2900, 500000 }, { 3100, 500000 }, { 3300, 500000 },
+        { 3465, 500002 }, { 3490, 500001 }, { 3500, 500002 },
+        { 3545, 500002 }, { 3650, 500001 }, { 3680, 500005 },
+        { 3745, 500001 }, { 3900, 500005 }, { 3950, 500003 },
+        { 4180, 500008 }, { 4309, 500009 }, { 4517, 500008 },
+        { 4735, 500009 }, { 4741, 500012 }, { 0x7FFFFFFF, 0 },
+    },
+};
 
 /* 3DD0C8 */ static HSD_WObjDesc gm_803DD0C8 = {
     NULL,
@@ -147,42 +369,41 @@ static StaffRollExtraData gm_803DBFD8_extra = { 0 };
     1.2166671F,
 };
 
-extern GXColor gm_804D42B8;
-extern GXColor gm_804D42BC;
-extern GXColor gm_804D42C0;
-extern GXColor gm_804D42C4;
-extern GXColor gm_804D42C8;
-extern GXColor gm_804D42CC;
-extern s32 gm_804DAAEC;
+/* 4D42B8 */ static GXColor gm_804D42B8 = { 0, 0, 0, 0 };
+/* 4D42BC */ static GXColor gm_804D42BC = { 0, 0, 0, 0x3C };
+/* 4D42C0 */ static GXColor gm_804D42C0 = { 0, 0, 0, 0xFF };
+/* 4D42C4 */ static GXColor gm_804D42C4 = { 0xFF, 0xFF, 0xFF, 0xFF };
+/* 4D42C8 */ static GXColor gm_804D42C8 = { 0xFF, 0x64, 0x8C, 0xFF };
+/* 4D42CC */ static GXColor gm_804D42CC = { 0xB4, 0xFF, 0xFF, 0xFF };
 
-bool gm_801AA644(void)
+bool gm_801AA644(s16 arg0)
 {
     return gmMainLib_8015EDD4();
 }
 
-bool gm_801AA664(CharacterKind ckind)
+bool gm_801AA664(s16 ckind)
 {
     return gm_IsCKindUnlocked(ckind);
 }
 
-bool gm_801AA688(void)
+bool gm_801AA688(s16 arg0)
 {
     PAD_STACK(4);
     return gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM);
 }
 
-void gm_801AA6D8(s16 arg0)
+bool gm_801AA6D8(s16 arg0)
 {
-    Toy_803048C0(arg0);
+    return Toy_803048C0(arg0);
 }
 
-bool gm_801AA6FC(void)
+bool gm_801AA6FC(s16 arg0)
 {
     PAD_STACK(4);
     return Toy_803048C0(0x10B) || Toy_803048C0(0x10A) || Toy_803048C0(0x109);
 }
 
-bool gm_801AA774(void)
+bool gm_801AA774(s16 arg0)
 {
     PAD_STACK(4);
     return Toy_803048C0(0x107) || Toy_803048C0(0x108);
@@ -470,6 +691,8 @@ typedef struct StaffRollPoints {
     0x25, 0x64, 0x20, 0x82, 0x67, 0x82, 0x68, 0x82, 0x73, 0,
 };
 
+/* 4DAAEC */ volatile const s32 gm_804DAAEC = 0xFFB40000;
+
 void fn_801AB200(HSD_GObj* gobj)
 {
     HSD_JObj* hover_jobj;
@@ -507,7 +730,6 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 line_num;
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;
-    HSD_GObj* leaf;
     HSD_JObj* child_jobj;
     f32 fov_scale;
     f32 half_size;
@@ -977,17 +1199,21 @@ void fn_801AB200(HSD_GObj* gobj)
     if (gm_804D6818 == 0 && button == HSD_PAD_B) {
         if (gm_804D6814 < 0x1285) {
             gm_804D6818 = 1;
-            leaf = HSD_GObjObject_80390A3C(8U, 0xBU);
-            HSD_ASSERT(0X12A, leaf);
-            HSD_GObj_80390C5C(leaf);
+            {
+                HSD_GObj* gobj = HSD_GObjObject_80390A3C(8U, 0xBU);
+                HSD_ASSERT(0X12A, gobj);
+                HSD_GObj_80390C5C(gobj);
+            }
         }
     } else if (gm_804D6818 == 1 && button != 0 &&
                (button != HSD_PAD_B || selected == -1))
     {
         gm_804D6818 = 0;
-        leaf = HSD_GObjObject_80390A3C(8U, 0xBU);
-        HSD_ASSERT(0x136, leaf);
-        HSD_GObj_80390C84(leaf);
+        {
+            HSD_GObj* gobj = HSD_GObjObject_80390A3C(8U, 0xBU);
+            HSD_ASSERT(0x136, gobj);
+            HSD_GObj_80390C84(gobj);
+        }
         gm_804D6820 = 0x3C;
     }
 
@@ -1036,7 +1262,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         gobj = GObj_Create(17, 19, 0);
         cobj = HSD_CObjLoadDesc(gm_804D6840->cameras[0].desc);
         gm_804D6830 = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(gobj, fn_801AA854, 5);
         gobj->gxlink_prios = 0x189;
         HSD_CObjAddAnim(cobj, gm_804D6840->cameras[0].anims[0]);
@@ -1047,7 +1273,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj* gobj = GObj_Create(19, 20, 0);
         HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gm_803DD0F0);
         gm_804D6834 = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(gobj, fn_801AAA28, 8);
         gobj->gxlink_prios = 1LL << gx_link;
     }
@@ -1055,7 +1281,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_LObj* lobj;
         HSD_GObj* gobj = GObj_Create(gx_link, 3, 0);
         lobj = lb_80011AC4(gm_804D6840->lights);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
         GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
         HSD_LObjReqAnimAll(lobj, 0.0F);
         HSD_GObj_SetupProc(gobj, fn_801AAABC, 0);
@@ -1065,7 +1291,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj* gobj = GObj_Create(0xA, 3, 0);
         fog = HSD_FogLoadDesc(gm_804D6840->fogs[0].desc);
         gm_804D6838 = fog;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
         GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 3, 0);
         HSD_Fog_8037DE7C(fog, gm_804D6840->fogs[0].anims[0]->aobjdesc);
         HSD_FogReqAnim(fog, 0.0F);
@@ -1075,7 +1301,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj* gobj = GObj_Create(3, 5, 0);
         HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6840->models[1]->joint);
         gm_804D682C = jobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0);
         gm_8016895C(jobj, gm_804D6840->models[1], 0);
         HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -1093,7 +1319,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
         HSD_JObj* jobj;
         jobj = HSD_JObjLoadJoint(gm_804D6844[0]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, NULL, 9, 0);
         gm_8016895C(jobj, gm_804D6844[0], 0);
         HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -1113,7 +1339,7 @@ void gm_801AC6D8_OnEnter(void* unused)
     {
         final_gobj = GObj_Create(14, 15, 0);
         jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
-        HSD_GObjObject_80390A70(final_gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(final_gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(final_gobj, HSD_GObj_JObjCallback, gx_link, 0);
         gm_8016895C(jobj, gm_804D6840->models[0], 0);
         lb_80011E24(jobj, jobj_arr, ARRAY_SIZE(jobj_arr), 20, -1);

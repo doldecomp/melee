@@ -10,19 +10,18 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
-/* 4D78DA */ extern u16 hsd_804D78DA;
-/* 4D78E0 */ extern u16 hsd_804D78E0;
-/* 4D78E2 */ extern u16 hsd_804D78E2[2];
-/* 4D78E8 */ extern u32 hsd_804D78E8;
-/* 4D78E8 */ extern u32 hsd_804D78EC;
-/* 4D78F0 */ extern HSD_CObj* psCamera;
-/* 4D78F4 */ extern u32 hsd_804D78F4;
-/* 4D0D58 */ extern int psNumCmdList[65];
-/* 4D0E5C */ extern u32* ptclref_804D0E5C[65];
+/* 4D78F0 */ HSD_CObj* psCamera;
+/* 4D0E5C */
 
+/* 4D78DA */ static u16 hsd_804D78DA;
+/* 4D78E0 */ static u16 hsd_804D78E0;
+/* 4D78E8 */ static u32 hsd_804D78E8;
+/* 4D78EC */ static u32 hsd_804D78EC;
+/* 4D78F0 */ static u32 hsd_804D78F0;
+/* 4D78F4 */ static u32 hsd_804D78F4;
 /* 4D78F8 */ static u32 hsd_804D78F8;
-/* 4D78FC */ static HSD_Generator* hsd_804D78FC;
-/* 4D7900 */ static void (*hsd_804D7900)(HSD_Generator*);
+/* 4D78FC */ HSD_Generator* hsd_804D78FC;
+/* 4D7900 */ void (*hsd_804D7900)(HSD_Generator*);
 
 /* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
 

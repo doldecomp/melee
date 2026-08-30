@@ -49,6 +49,7 @@ struct DebugGameOverData {
     /* 16 */ u16 x16;
     /* 18 */ u16 x18;
 };
+ASSERT_SIZE(struct DebugGameOverData, 0x1C);
 
 typedef struct un_804A1F48_t {
     u16 x0;
@@ -64,11 +65,11 @@ struct GameScene {
     /* 01 */ u8 preload;
     /* 02 */ u16 flags;
 
-    /* 04 */ void (*Prep)(GameScene*);
-    /* 08 */ void (*Decide)(GameScene*);
+    /* 04 */ void (*on_enter)(GameScene*);
+    /* 08 */ void (*on_exit)(GameScene*);
 
     struct GameSceneInfo {
-        /* 0C */ u8 class_id;
+        /* 0C */ u8 scene_id;
         /* 10 */ void* load_data;  ///< data passed to OnLoad callback
         /* 14 */ void* leave_data; ///< data passed to OnLeave callback
     } info;
@@ -79,9 +80,9 @@ struct GameMode {
     u8 preload;
     u8 idx; ///< GameModeKind
 
-    void (*Load)(void);
-    void (*Unload)(void);
-    void (*Init)(void);
+    void (*on_load)(void);
+    void (*on_unload)(void);
+    void (*on_init)(void);
 
     GameScene* scenes;
 }; // 803DACA4
@@ -89,9 +90,9 @@ struct GameMode {
 struct GameSceneHandler {
     u8 class_id;
 
-    void (*OnFrame)(void);
-    void (*OnLoad)(void*);
-    void (*OnLeave)(void*);
+    void (*on_frame)(void);
+    void (*on_load)(void*);
+    void (*on_leave)(void*);
     void (*unk_func)(void);
 }; // 803DA920
 
@@ -114,11 +115,6 @@ typedef struct {
     u8 (*game_mode_override)(void);
 } GameState;
 ASSERT_SIZE(GameState, 0x14);
-
-struct sceneData {
-    u32 a;
-    u8 scene_id;
-};
 
 struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;
@@ -605,7 +601,7 @@ struct gm_8017DB6C_arg0_t {
 ASSERT_SIZE(struct gm_8017DB6C_arg0_t, 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    /* 00 */ bool x0;
+    /* 00 */ bool skip_intro;  ///< Skips the opening movie when booting
     /* 04 */ bool resetting;   ///< reset switch pressed
     /* 08 */ bool progressive; ///< true = progressive, false = interlaced
     /* 0C */ bool xC;          // movie playback done, maybe?
@@ -1270,8 +1266,8 @@ ASSERT_SIZE(struct TmAnimFrames, 0x6);
 
 /// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
 typedef union TmAnimFrameTable {
-    s32 words[9];
     TmAnimFrames states[6];
+    s32 words[9];
 } TmAnimFrameTable;
 ASSERT_SIZE(union TmAnimFrameTable, 0x24);
 

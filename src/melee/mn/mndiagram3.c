@@ -1,6 +1,6 @@
 #include "mndiagram3.h"
 
-#include "mndiagram3.static.h"
+#include "mn/mndiagram2.static.h"
 
 #include "baselib/debug.h"
 
@@ -22,6 +22,45 @@
 #include <melee/mn/mndiagram2.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
+
+typedef struct mnDiagram3_PosTable {
+    /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)
+    /* 0x0C */ Vec3 xC;  ///< rank_name_pos (-2,0.57,0)
+    /* 0x18 */ Vec3 x18; ///< value_pos (8,0.57,0)
+} mnDiagram3_PosTable;
+
+typedef struct mnDiagram3_StatTable {
+    /* 0x00 */ u16 label_ids[24];      ///< SIS string ids, 0x62..0x79
+    /* 0x30 */ u16 unit_glyph_ids[24]; ///< mnDiagram2 unit/icon column entries
+} mnDiagram3_StatTable;
+
+/* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;
+/* 3EEC1C */ extern AnimLoopSettings mnDiagram3_803EEC1C;
+/* 3EEC28 */ extern mnDiagram3_PosTable mnDiagram3_803EEC28;
+/* 3EEC4C */ extern mnDiagram3_StatTable mnDiagram3_803EEC4C;
+/* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
+/* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
+/* 4D6C20 */ extern HSD_GObj* mnDiagram3_804D6C20;
+/* 4D6C24 */ extern HSD_GObj* mnDiagram3_804D6C24;
+/* 4D4B64 */ extern GXColor mn_804D4B64;
+/* 4DC008 */ extern const f32 mnDiagram3_804DC008;
+/* 4DC00C */ extern const f32 mnDiagram3_804DC00C;
+/* 4DC010 */ extern const f32 mnDiagram3_804DC010;
+/* 4DC014 */ extern const f32 mnDiagram3_804DC014;
+/* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
+
+#ifdef MUST_MATCH
+static void sdata2_order(void)
+{
+    (void) U32_TO_F32;
+    (void) 6.5f;
+    (void) 240.0f;
+    (void) S32_TO_F32;
+}
+#endif
+
+HSD_GObj* mnDiagram3_804D6C20;
 
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
@@ -156,13 +195,13 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type)) {
-                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                        (u8) i);
+                    u8 rank = (u8) i;
+
+                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type, rank);
                     if (sp48[0] == 0x19) {
                         goto next;
                     }
-                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
-                                                        (u8) i);
+                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type, rank);
                     icon = mnDiagram_CreateFighterIcon(sp38[0], 0);
                     HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
@@ -400,7 +439,7 @@ void mnDiagram3_Create(int arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram3_804D6C20 = gobj;
     jobj = HSD_JObjLoadJoint(archive->x0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
     HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
@@ -417,33 +456,6 @@ void mnDiagram3_Create(int arg0)
     }
 
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
-}
-
-static inline void HSD_JObjSetTranslateX_Fake(HSD_JObj* jobj, f32 x)
-{
-    HSD_ASSERT(932, jobj);
-    jobj->translate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void HSD_JObjSetTranslateY_Fake(HSD_JObj* jobj, f32 y)
-{
-    HSD_ASSERT(947, jobj);
-    jobj->translate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void HSD_JObjSetTranslateZ_Fake(HSD_JObj* jobj, f32 z)
-{
-    HSD_ASSERT(962, jobj);
-    jobj->translate.z = z;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
 }
 
 void mnDiagram3_Init(void* arg0)
@@ -482,7 +494,7 @@ void mnDiagram3_Init(void* arg0)
         popup = GObj_Create(6, 7, 0x80);
         data->popup_gobj = popup;
         popup_jobj = HSD_JObjLoadJoint(archive->x0);
-        HSD_GObjObject_80390A70(popup, HSD_GObj_804D7849, popup_jobj);
+        HSD_GObjObject_80390A70(popup, HSD_GObj_JObjKind, popup_jobj);
         GObj_SetupGXLink(popup, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(popup_jobj, archive->x4, archive->x8, archive->xC);
         HSD_JObjReqAnimAll(popup_jobj, mnDiagram3_804DC00C);
@@ -495,15 +507,17 @@ void mnDiagram3_Init(void* arg0)
                       HSD_JObjGetTranslationY(row0);
 
         row0 = data->jobjs[8];
-        HSD_JObjSetTranslateX_Fake(popup_jobj, HSD_JObjGetTranslationX(row0));
+        HSD_JObjSetTranslateXWithMtxDirty(popup_jobj,
+                                          HSD_JObjGetTranslationX(row0));
 
         row0 = data->jobjs[8];
         row_spacing =
             row_spacing * mnDiagram3_804DC00C + HSD_JObjGetTranslationY(row0);
-        HSD_JObjSetTranslateY_Fake(popup_jobj, row_spacing);
+        HSD_JObjSetTranslateYWithMtxDirty(popup_jobj, row_spacing);
 
         row0 = data->jobjs[8];
-        HSD_JObjSetTranslateZ_Fake(popup_jobj, HSD_JObjGetTranslationZ(row0));
+        HSD_JObjSetTranslateZWithMtxDirty(popup_jobj,
+                                          HSD_JObjGetTranslationZ(row0));
     }
 
     {
@@ -524,15 +538,15 @@ void mnDiagram3_Init(void* arg0)
         lb_8000B1CC(d->jobjs[8], &mnDiagram3_803EEC28.x0, &sp48);
 
         neg_spacing = -neg_spacing;
-        row_spacing = mnDiagram3_804DBFF8;
+        row_spacing = 6.5f;
         stat_idx = (u8) scroll;
         i = 0;
 
         do {
             f32 fi = (f32) i;
-            HSD_Text* text = HSD_SisLib_803A5ACC(
-                0, 1, sp48.x - row_spacing, neg_spacing * fi + -sp48.y, sp48.z,
-                row_spacing, mnDiagram3_804DBFFC);
+            HSD_Text* text = HSD_SisLib_803A5ACC(0, 1, sp48.x - row_spacing,
+                                                 neg_spacing * fi + -sp48.y,
+                                                 sp48.z, row_spacing, 240.0f);
 
             d->row_labels[i] = text;
             {
@@ -866,3 +880,8 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         }
     }
 }
+
+const f32 mnDiagram3_804DC008 = 0.035f;
+const f32 mnDiagram3_804DC00C = 0.0f;
+const f32 mnDiagram3_804DC010 = 1.5f;
+const f32 mnDiagram3_804DC014 = 1.0f;

@@ -30,7 +30,7 @@ struct ResultsMatchInfo;
 /* 179E34 */ void fn_80179E34(HSD_GObj*, int);
 /* 179E9C */ void fn_80179E9C(HSD_GObj*, int);
 /* 179F04 */ void fn_80179F04(HSD_GObj*, int);
-/* 179F6C */ UNK_RET fn_80179F6C(int idx, int value);
+/* 179F6C */ void fn_80179F6C(int idx, HSD_GObj* value);
 /* 179F84 */ void fn_80179F84(HSD_JObj*);
 /* 17A004 */ UNK_RET fn_8017A004(UNK_PARAMS);
 /* 17A078 */ void fn_8017A078(s32);

@@ -17,6 +17,7 @@
 
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 #define HSD_GOBJ_CLASS_SISLIB_UNK 0x9
+#define HSD_GOBJ_CLASS_FOG 0xA
 #define HSD_GOBJ_CLASS_LIGHT 0xB
 #define HSD_GOBJ_CLASS_GROUND 0xD
 #define HSD_GOBJ_CLASS_UI 0xE
@@ -116,10 +117,10 @@ extern HSD_GObjProc* HSD_GObj_804D7838;
 extern s32 HSD_GObj_804D783C;
 extern HSD_GObjProc** HSD_GObj_804D7840;
 extern HSD_GObjProc** HSD_GObj_804D7844;
-extern s8 HSD_GObj_804D7848;
-extern u8 HSD_GObj_804D7849;
-extern s8 HSD_GObj_804D784A;
-extern u8 HSD_GObj_804D784B;
+extern s8 HSD_GObj_FogKind;
+extern u8 HSD_GObj_JObjKind;
+extern s8 HSD_GObj_LightKind;
+extern u8 HSD_GObj_CameraKind;
 
 extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 

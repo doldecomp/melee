@@ -1,34 +1,8 @@
 #ifndef MELEE_GM_1AED_H
 #define MELEE_GM_1AED_H
 
-#include <platform.h>
-
-struct gm_80480DA8_0_t {
-    int unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 _[2];
-};
-
-struct gm_80480DA8_8_t {
-    int unk0;
-    u8 unk4;
-};
-
-struct gm_80480DA8_t {
-    struct gm_80480DA8_0_t unk0;
-    struct gm_80480DA8_8_t unk8;
-    int unk10;
-    int unk14;
-    int unk18;
-    u8 unk1C;
-};
-
-/* 1AEE6C */ void gm_801AEE6C(int, int, int);
-/* 1AF0D4 */ bool gm_801AF0D4(void);
-/* 1AF250 */ void gm_801AF250(void);
 /* 1AF568 */ void gm_801AF568_OnFrame(void);
-/* 1B0264 */ void gm_801B0264_OnEnter(struct gm_80480DA8_t*);
-/* 1B0304 */ void gm_801B0304_OnLeave(struct gm_80480DA8_8_t*);
+/* 1B0264 */ void gm_801B0264_OnEnter(void*);
+/* 1B0304 */ void gm_801B0304_OnLeave(void*);
 
 #endif

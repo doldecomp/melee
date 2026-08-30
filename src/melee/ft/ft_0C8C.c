@@ -19,7 +19,7 @@
 #include "ftCrazyHand/ftCh_TagGrab.h"
 #include "ftMasterHand/ftMh_Damage_0.h"
 #include "gm/gm_unsplit.h"
-#include "lb/lbbgflash.h"
+#include "lb/lb_0219.h"
 #include "pl/player.h"
 
 HSD_MObj* ft_804D6588;

@@ -1,7 +1,7 @@
 #include "lb/lbcommand.h"
 
 #include "lb/inlines.h"
-#include "lb/lbbgflash.h"
+#include "lb/lb_0219.h"
 #include "lb/types.h"
 
 void (*lbCommand_803B9840[16])(CommandInfo*) = {

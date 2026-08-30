@@ -8,7 +8,7 @@
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
-#include "gm/gm_1832.h"
+#include "gm/gm_1884.h"
 
 #include "gr/forward.h"
 

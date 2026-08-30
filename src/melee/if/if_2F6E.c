@@ -59,7 +59,7 @@ void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
         gobj = GObj_Create(0xE, 0xE, 0);
         jobj = HSD_JObjLoadJoint(e->x14->joint);
         lb_80011C18(jobj, 0x08000000);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
         if (e->x8 != NULL) {
             HSD_GObj_SetupProc(gobj, e->x8, 0);

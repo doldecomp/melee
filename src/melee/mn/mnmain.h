@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
-#include "gm/forward.h"
 #include "mn/forward.h"
 
 #include "mn/types.h"
+#include "sc/types.h"
 
 #include <dolphin/gx.h>
 #include <baselib/object.h>
@@ -86,7 +86,7 @@ typedef struct _MenuInputState {
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
+/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
 /* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
@@ -113,9 +113,17 @@ typedef struct _MenuInputState {
 /* 22F410 */ int mn_8022F410(float* x, const float* target, float dx);
 /* 22F470 */ int mn_8022F470(int* x, const int* target, int dx);
 /* 22F4CC */ void mn_8022F4CC(void);
-
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;
+/* 4A0508 */ extern StaticModelDesc MenMainBack_Top;
+/* 4A0518 */ extern StaticModelDesc MenMainPanel_Top;
+/* 4D6BB4 */ extern u8 mn_804D6BB4;
+/* 4D6BB5 */ extern u8 mn_804D6BB5;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
+/* 4D6BBC */ extern LightList** MenMain_lights;
+/* 4D6BC0 */ extern HSD_FogDesc* MenMain_fog;
+/* 4D6BC4 */ extern HSD_CObjDesc* MenMain_cam;
 /* 4D6BC8 */ extern MenuInputState mn_804D6BC8;
+/* 4D6C00 */ extern char** NotAllowedNamesList;
+/* 4D6C04 */ extern u8** AutoNamesList;
 
 #endif

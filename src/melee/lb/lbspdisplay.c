@@ -863,7 +863,7 @@ HSD_GObj* lb_800138EC(HSD_ImageDesc* img, GObj_RenderFunc render_func,
     HSD_CObjSetNear(cobj, zero);
     HSD_CObjSetFar(cobj, far);
     HSD_CObjSetOrtho(cobj, ortho_top, ortho_bot, ortho_left, ortho_right);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     data = HSD_MemAlloc(sizeof(struct CameraBlurData));
     data->pos_x = pos_x;

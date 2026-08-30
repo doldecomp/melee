@@ -15,9 +15,9 @@
 /* 26B294 */ void it_8026B294(Item_GObj* gobj, Vec3* pos);
 /* 26B2B4 */ bool itIsHeavy(Item_GObj* gobj);
 /* 26B2D8 */ bool it_8026B2D8(Item_GObj* gobj);
-/* 26B300 */ s32 itGetKind(Item_GObj* gobj);
+/* 26B300 */ ItemKind itGetKind(Item_GObj* gobj);
 /* 26B30C */ enum_t it_8026B30C(Item_GObj* gobj);
-/* 26B320 */ enum_t itGetHoldKind(Item_GObj* gobj);
+/* 26B320 */ Item_HoldKinds itGetHoldKind(Item_GObj* gobj);
 /* 26B334 */ float itGetDamageMultiplier(Item_GObj* gobj);
 /* 26B344 */ void it_8026B344(Item_GObj* gobj, Vec3* pos);
 /* 26B378 */ float itGetGrabRangeX(Item_GObj* gobj);
@@ -27,7 +27,7 @@
 /* 26B3C0 */ int it_8026B3C0(ItemKind kind);
 /* 26B3F8 */ void it_8026B3F8(Article* article, s32 kind);
 /* 26B40C */ void it_8026B40C(Article* article, s32 kind);
-/* 26B424 */ float it_8026B424(s32 damage);
+/* 26B424 */ float it_8026B424(int damage);
 /* 26B47C */ s32 it_8026B47C(Item_GObj* gobj);
 /* 26B4F0 */ bool it_8026B4F0(Item_GObj* gobj);
 /* 26B54C */ float it_8026B54C(Item_GObj* gobj);

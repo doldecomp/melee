@@ -270,7 +270,7 @@ void NameTag_Create(int slot)
     un_804A1EE0[slot] = gobj;
     {
         HSD_JObj* jobj = HSD_JObjLoadJoint(un_804A1ED0.joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, NameTag_RenderCallback, 9, 0);
         HSD_JObjSetScaleX(jobj, 10.0f);
         HSD_JObjSetScaleY(jobj, 10.0f);
@@ -375,7 +375,7 @@ void un_802FD4C8(void)
     memzero(un_804D6D70, i = sizeof(un_804D6D70));
     un_804D6D68 = (gobj = un_802FD4C8_inline(15));
     new_var = lb_80013B14((HSD_CameraDescPerspective*) (&nametag_CObjDesc));
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, new_var);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, new_var);
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
     un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);

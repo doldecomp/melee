@@ -2,7 +2,7 @@
 
 #include "gm_unsplit.h"
 
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmregtyfall.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
@@ -54,7 +54,7 @@ static inline void setupLight(void)
 
     gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D67A8->lights);
-    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 }
 
@@ -66,7 +66,7 @@ static inline void setupCamera(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A8->cameras[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
     gobj->gxlink_prios = 0x801;
     HSD_CObjAddAnim(cobj, gm_804D67A8->cameras[0].anims[0]);
@@ -83,7 +83,7 @@ static inline void setupMain(void)
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67B0 = gobj;
     jobj = HSD_JObjLoadJoint(gm_804D6798);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, gm_804D67A8->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -104,7 +104,7 @@ static inline void setupCharacter(void)
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67B4 = gobj;
     jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
     char_idx = gm_801A659C(gm_801BEFB0());

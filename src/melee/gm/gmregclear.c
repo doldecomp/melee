@@ -27,6 +27,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1884.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
@@ -53,6 +54,9 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 
+/// @todo Split-derived data; types are inferred.
+u8 lbl_804D65B8[0x8];
+
 typedef struct lbl_804706D8_t {
     s16 x0;
     u8 x2;
@@ -60,6 +64,12 @@ typedef struct lbl_804706D8_t {
 } lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
+
+/// @todo Sizes are inferred from the split; contents are runtime-filled.
+CSSData gmClassic_80470708;
+DebugGameOverData gmClassic_80470850;
+MatchExitInfo gmClassic_8047086C;
+StartMeleeData gmClassic_80472AF8;
 
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x20];
@@ -168,6 +178,7 @@ static struct lbl_804706C0_t {
 
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
+
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
 
 /// @todo .data order hack
@@ -189,7 +200,8 @@ static void order_data(void)
 #endif
 
 static UnkAdventureData lbl_80472C30;
-static UnkAllstarData lbl_80472CB0;
+/// @todo The split gives this object 0x78 bytes, but UnkAllstarData is 0xA0.
+static u8 lbl_80472CB0[0x78];
 static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
@@ -490,7 +502,7 @@ void gm_8017C838(void)
     sp10[0] = FTKIND_NONE;
     sp10[1] = FTKIND_NONE;
     sp10[2] = FTKIND_NONE;
-    switch (temp_r3->x24C8.xE) {
+    switch (temp_r3->x24C8.stkind) {
     case 0x3B:
         sp10[0] = FTKIND_YOSHI;
         break;
@@ -539,7 +551,11 @@ void gm_8017C984(UNK_T arg0)
     memzero(arg0, 0x74);
 }
 
-extern u8 lbl_803B7C08[][5];
+static const u8 lbl_803B7C08[3][5] = {
+    { 1, 2, 3, 5, 10 },
+    { 1, 2, 3, 5, 10 },
+    { 10, 10, 10, 10, 10 },
+};
 
 void gm_8017C9A8(DebugGameOverData* arg0, Unk1PData* arg1, u8 arg2)
 {
@@ -786,14 +802,14 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     arg0->rules.x0_3 = arg1->x0.xB;
 
     if (arg6 != 0) {
-        arg0->rules.x10 = (u32) arg6;
+        arg0->rules.time_limit = (u32) arg6;
         arg0->rules.x0_6 = 1;
     } else {
         arg0->rules.x0_6 = 0;
     }
 
     arg0->rules.x18 = (u32) arg1->x0.xC.x18;
-    arg0->rules.xE = (u16) arg7;
+    arg0->rules.stkind = (u16) arg7;
     arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
@@ -1490,7 +1506,7 @@ u8 gm_8017E48C(GameScene* scene)
     u8 count = 0;
     int i;
     for (i = 0; scene->idx != gm_803DE1B8_Scenes[i].idx; i++) {
-        if (gm_803DE1B8_Scenes[i].info.class_id == GS_VS) {
+        if (gm_803DE1B8_Scenes[i].info.scene_id == GS_VS) {
             count++;
         }
     }
@@ -1707,7 +1723,7 @@ void fn_8017E8A4(int arg0_int)
 
 UnkAllstarData* gm_GetAllStarData(void)
 {
-    return &lbl_80472CB0;
+    return (UnkAllstarData*) lbl_80472CB0;
 }
 
 u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
@@ -1793,7 +1809,7 @@ void fn_8017EE40(int arg0_int)
     int i;
 
     rules = gm_GetRules();
-    allstar = &lbl_80472CB0;
+    allstar = (UnkAllstarData*) lbl_80472CB0;
 
     if (fn_8017E318() > 0) {
         ((u8_bits*) &arg0->_x448[2])->b3 = 1;
@@ -1879,7 +1895,7 @@ s32 fn_8017F09C(void)
         lbl_8046B6A0_t* p2 = gm_16AE_GetUnkData_0();
         int flag;
         if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
-            p2->x24C8.x0_7)
+            p2->x24C8.timer_counts_up)
         {
             flag = 0;
         } else {
@@ -2102,7 +2118,7 @@ typedef struct fn_8017FA1C_arg {
     /* 0x11B */ u8 x11B;
 } fn_8017FA1C_arg;
 
-extern Vec3 lbl_803B7C18;
+static const Vec3 lbl_803B7C18 = { -41.0f, -0.25f, 0.0f };
 
 void fn_8017F608(void* arg0)
 {
@@ -2142,7 +2158,7 @@ void fn_8017F608(void* arg0)
             p->x74->default_alignment = 2;
             gm = gm_16AE_GetUnkData_0();
             if (state->x118 != 0 || (state->x11A != 0 && state->x11B == 0) ||
-                (gm->x24C8.x0_7))
+                (gm->x24C8.timer_counts_up))
             {
                 show = 0;
             } else {
@@ -2228,7 +2244,7 @@ void fn_8017F608(void* arg0)
     PAD_STACK(0x24);
 }
 
-extern s32 lbl_804D65C0;
+s32 lbl_804D65C0;
 
 s32 fn_8017FA1C(void* arg0)
 {
@@ -2560,7 +2576,7 @@ s32 fn_801803FC(void* arg0)
         OSReport("Error : jobj don\'t get (gmRegClearAddModel)\n");
         OSPanic(__FILE__, 0x432, "");
     }
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8017FF1C, 0x11U);
     fn_801689E4(jobj, mdl, 0);
@@ -2619,7 +2635,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     HSD_GObj* light_gobj;
 
     light_gobj = GObj_Create(0xBU, 3U, 0U);
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_LightKind,
                             fn_80180630_LoadLightList(state));
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xAU, 0U);
 
@@ -2743,7 +2759,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     fn_80168A6C(sp38, &state->x4C, 0);
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind,
                             HSD_CObjLoadDesc(state->x60));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
     cam_gobj->gxlink_prios = 0x4C00;
@@ -2992,7 +3008,7 @@ void fn_80180C60(HSD_GObj* gobj)
     }
 }
 
-extern s32 lbl_804D65D8;
+s32 lbl_804D65D8;
 
 void fn_80181598(void)
 {
@@ -3053,7 +3069,7 @@ void fn_80181598(void)
 
 static DynamicModelDesc** lbl_804D65CC;
 static DynamicModelDesc** lbl_804D65D0;
-extern HSD_Archive* lbl_804D65C8;
+HSD_Archive* lbl_804D65C8;
 
 void fn_80181708(void)
 {
@@ -3084,7 +3100,7 @@ void fn_80181708(void)
 
     gobj = GObj_Create(0xEU, 0xFU, 0U);
     jobj = HSD_JObjLoadJoint((*lbl_804D65CC)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, fn_80180C14, 0x15U);
     gm_8016895C(jobj, *lbl_804D65CC, 0);
@@ -3094,7 +3110,7 @@ void fn_80181708(void)
 
     gobj = (new_var = GObj_Create(0xEU, 0xFU, 0U));
     jobj = HSD_JObjLoadJoint((*lbl_804D65D0)->joint);
-    HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(new_var, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(new_var, fn_80180C60, 0x15U);
     gm_8016895C(jobj, *lbl_804D65D0, 0);
@@ -4046,7 +4062,7 @@ UnkMultimanData* gm_80182DF0(int c_kind, int arg1)
     return result;
 }
 
-extern u8 lbl_804D65E8;
+u8 lbl_804D65E8;
 
 void fn_80182F40(HSD_GObj* unused)
 {
@@ -4129,3 +4145,199 @@ void gm_80183218(void)
     lbl_804D65E8 = 0;
     HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), fn_80182F40, 0x15);
 }
+
+AdventureStageEntry lbl_803D7AC0[110] = {
+    { 4, 0, 0x28, 0x1c2, { 1 } },
+    { 3, 0, 0x32, 0x190, { 2 } },
+    { 3, 0, 0x3c, 0x140, { 4 } },
+    { 2, 0, 0x46, 0xf0, { 5 } },
+    { 1, 0, 0x50, 0xaa, { 6 } },
+    { 4, 0, 0x50, 0x8c, { 0, 0, 0x10, 0, 0, 4 } },
+    { 3, 0, 0x5e, 0x70, { 3, 0, 0x10, 3, 0, 4 } },
+    { 3, 0, 0x64, 0x6b, { 5, 0, 0x10, 4, 0, 4 } },
+    { 3, 0, 0x6e, 0x69, { 7, 0, 0x10, 7, 0, 4 } },
+    { 2, 0, 0x78, 0x5f, { 8, 0, 0x10, 8, 0, 4 } },
+    { 4, 0, 0x50, 0x8c, { 1, 0, 4, 1, 1, 8 } },
+    { 4, 0, 0x64, 0x5a, { 2, 0, 4, 2, 1, 8 } },
+    { 3, 0, 0x6e, 0x46, { 4, 0, 4, 3, 1, 8 } },
+    { 2, 0, 0x78, 0x32, { 7, 0, 4, 6, 1, 8 } },
+    { 1, 0, 0x82, 0x28, { 9, 0, 4, 9, 1, 8 } },
+    { 4, 0, 0x3c, 0x17c, { 1, 0,    4, 0,    0, 0, 0, 0, 0, 0,
+                           0, 0x64, 0, 0x64, 0, 0, 4, 0, 0, 4 } },
+    { 4, 0, 0x50, 0xfa, { 3, 0,    4, 0,    0, 0, 0, 0, 0, 0,
+                          0, 0x64, 0, 0x64, 0, 0, 4, 0, 0, 4 } },
+    { 3, 0, 0x5a, 0xc8, { 5, 0,    4, 0,    0, 0, 0, 0, 0, 0,
+                          0, 0x64, 0, 0x64, 0, 0, 4, 0, 0, 4 } },
+    { 2, 0, 0x5f, 0xa0, { 7, 0,    4, 0,    0, 0, 0, 0, 0, 0,
+                          0, 0x64, 0, 0x64, 0, 0, 4, 0, 0, 4 } },
+    { 1, 0, 0x6e, 0x78, { 8, 0,    4, 0,    0, 0, 0, 0, 0, 0,
+                          0, 0x64, 0, 0x64, 0, 0, 4, 0, 0, 4 } },
+    { 3, 0, 0x46, 0xa0, { 1 } },
+    { 2, 0, 0x50, 0x8c, { 3 } },
+    { 2, 0, 0x5a, 0x78, { 5 } },
+    { 1, 0, 0x64, 0x69, { 7 } },
+    { 1, 0, 0x6c, 0x5f, { 9 } },
+    { 4, 0, 0x50, 0x7d, { 2, 0, 4 } },
+    { 4, 0, 0x5a, 0x6e, { 6, 0, 4 } },
+    { 3, 0, 0x64, 0x64, { 8, 0, 4 } },
+    { 3, 0, 0x76, 0x5f, { 9, 0, 4 } },
+    { 2, 0, 0x82, 0x5a, { 9, 0, 4 } },
+    { 3, 0, 0x50, 0x82, { 2, 0, 4 } },
+    { 3, 0, 0x5a, 0x6e, { 5, 0, 4 } },
+    { 2, 0, 0x64, 0x64, { 7, 0, 4 } },
+    { 2, 0, 0x73, 0x58, { 8, 0, 4 } },
+    { 1, 0, 0x82, 0x4a, { 9, 0, 4 } },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 3, 0, 0x50, 0xaa, { 2, 0, 4 } },
+    { 2, 0, 0x64, 0x82, { 4, 0, 4 } },
+    { 2, 0, 0x78, 0x6e, { 6, 0, 4 } },
+    { 1, 0, 0x82, 0x64, { 8, 0, 4 } },
+    { 0xff, 0, 0x8c, 0x5a, { 9, 0, 4 } },
+    { 3, 0, 0x3c, 0x1f4, { 1 } },
+    { 2, 0, 0x46, 0x190, { 3 } },
+    { 2, 0, 0x50, 0x12c, { 4 } },
+    { 1, 0, 0x5a, 0xc8, { 6 } },
+    { 0xff, 0, 0x64, 0xaf, { 7 } },
+    { 3, 0, 0x46, 0xf0, { 2, 0, 0x1b } },
+    { 2, 0, 0x4b, 0xb4, { 4, 0, 0x1b } },
+    { 2, 0, 0x50, 0x82, { 6, 0, 0x1b } },
+    { 1, 0, 0x64, 0x64, { 7, 0, 4 } },
+    { 1, 0, 0x78, 0x5a, { 9, 0, 4 } },
+    { 2, 0, 0x50, 0xb4, { 2, 0, 0x1b } },
+    { 2, 0, 0x5a, 0x96, { 4, 0, 4 } },
+    { 2, 0, 0x64, 0x82, { 5, 0, 0x12 } },
+    { 2, 0, 0x76, 0x6e, { 6, 0, 0x12 } },
+    { 2, 0, 0x82, 0x64, { 7, 0, 0x12 } },
+    { 2, 0, 0x3c, 0xd2, { 2, 1, 8 } },
+    { 2, 0, 0x46, 0xb4, { 4, 1, 8 } },
+    { 2, 0, 0x5a, 0x8c, { 6, 1, 8 } },
+    { 2, 0, 0x69, 0x78, { 8, 1, 8 } },
+    { 2, 0, 0x75, 0x64, { 9, 1, 8 } },
+    { 4, 0, 0x3c, 0x1a4, { 1 } },
+    { 4, 0, 0x4e, 0x140, { 4 } },
+    { 4, 0, 0x58, 0xc8, { 5 } },
+    { 3, 0, 0x62, 0xaa, { 7 } },
+    { 2, 0, 0x6d, 0x96, { 8 } },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 2, 0, 0x50, 0x96, { 3, 0, 4 } },
+    { 2, 0, 0x64, 0x6e, { 6, 0, 4 } },
+    { 2, 0, 0x6e, 0x64, { 8, 0, 4 } },
+    { 2, 0, 0x78, 0x5a, { 9, 0, 4 } },
+    { 2, 0, 0x82, 0x46, { 9, 2, 4 } },
+    { 4,
+      0,
+      0x46,
+      0xbe,
+      { 1, 0, 0x1d, 1, 2, 0x1d, 1, 1, 0x1b, 0, 0, 0x64, 0, 0x64 } },
+    { 4,
+      0,
+      0x50,
+      0x96,
+      { 3, 0, 0x1d, 3, 2, 0x1d, 2, 1, 0x1d, 0, 0, 0x64, 0, 0x64 } },
+    { 4,
+      0,
+      0x5a,
+      0x82,
+      { 5, 0, 0x1d, 4, 2, 0x1d, 4, 1, 0x1d, 0, 0, 0x64, 0, 0x64 } },
+    { 4,
+      0,
+      0x64,
+      0x6e,
+      { 7, 0, 0x1d, 6, 2, 0x1d, 5, 1, 0x1d, 0, 0, 0x64, 0, 0x64 } },
+    { 4,
+      0,
+      0x82,
+      0x64,
+      { 8, 0, 0x1d, 8, 2, 0x1d, 8, 1, 0x1d, 0, 0, 0x64, 0, 0x64 } },
+    { 2, 0, 0x50, 0xbe, { 1 } },
+    { 2, 0, 0x55, 0x8c, { 3 } },
+    { 2, 0, 0x5a, 0x82, { 4 } },
+    { 2, 0, 0x5f, 0x78, { 6 } },
+    { 2, 0, 0x64, 0x64, { 9 } },
+    { 2, 0, 0x32, 0x1a4, { 1 } },
+    { 2, 0, 0x3c, 0x172, { 3 } },
+    { 2, 0, 0x46, 0x118, { 5 } },
+    { 2, 0, 0x50, 0xc8, { 6 } },
+    { 2, 0, 0x5a, 0x96, { 8 } },
+    { 2, 0, 0x46, 0xbe, { 1, 0, 0x1b, 1, 0, 0x1b } },
+    { 2, 0, 0x5a, 0x96, { 3, 0, 0x1b, 2, 0, 0x1b } },
+    { 2, 0, 0x64, 0x82, { 5, 0, 0x1b, 3, 0, 0x1b } },
+    { 2, 0, 0x6e, 0x6e, { 6, 0, 0x1b, 5, 0, 0x1b } },
+    { 2, 0, 0x78, 0x5a, { 8, 0, 0x1b, 7, 0, 0x1b } },
+    { 3, 0, 0x46, 0x82, { 2, 0, 4 } },
+    { 2, 0, 0x5d, 0x73, { 4, 0, 4 } },
+    { 2, 0, 0x64, 0x69, { 6, 3, 4 } },
+    { 1, 0, 0x6e, 0x58, { 8, 3, 4 } },
+    { 0xff, 0, 0x78, 0x4b, { 9, 3, 4 } },
+    { 2, 0, 1, 1, { 0, 0, 4 } },
+    { 2, 0, 1, 1, { 0, 0, 4 } },
+    { 1, 0, 0x87, 0x3a, { 7, 0, 4 } },
+    { 1, 0, 0x94, 0x32, { 8, 0, 4 } },
+    { 0xff, 0, 0xa0, 0x26, { 9, 0, 4 } },
+};
+
+AllstarStageEntry lbl_803D85F0[55] = {
+    { 4, 0, 0x3c, 0xaf, { 0, 0, 9 } },
+    { 3, 0, 0x55, 0x78, { 2, 0, 4 } },
+    { 3, 0, 0x64, 0x64, { 4, 0, 4 } },
+    { 2, 0, 0x64, 0x64, { 7, 0, 4 } },
+    { 1, 0, 0x78, 0x5a, { 9, 3, 8 } },
+    { 4, 0, 0x46, 0xa0, { 1, 0, 4, 2, 0, 9 }, 0x50, 0x5a, { 8, 1, 4 } },
+    { 4, 0, 0x55, 0x78, { 3, 0, 4, 3, 0, 4 }, 0x50, 0x64, { 7, 1, 4 } },
+    { 3, 0, 0x64, 0x64, { 5, 0, 4, 4, 0, 4 }, 0x50, 0x73, { 6, 1, 4 } },
+    { 3, 0, 0x64, 0x5a, { 6, 0, 4, 6, 0, 8 }, 0x50, 0x82, { 4, 1, 4 } },
+    { 1, 0, 0x73, 0x50, { 8, 3, 4, 8, 0, 8 }, 0x50, 0x96, { 3, 1, 4 } },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 4, 0, 0x4b, 0x8c, { 2, 0, 4 } },
+    { 4, 0, 0x5a, 0x6e, { 5, 0, 4 } },
+    { 4, 0, 0x64, 0x64, { 8, 0, 4 } },
+    { 4, 0, 0x73, 0x55, { 9, 0, 4 } },
+    { 4, 0, 0x86, 0x46, { 9, 0, 4 } },
+    { 3, 0, 0x46, 0x168, { 2, 0, 0x1b }, 0x64, 0x64, { 6, 2, 4, 6, 1, 4 } },
+    { 3, 0, 0x50, 0xf0, { 3, 0, 0x1b }, 0x64, 0x5a, { 5, 2, 4, 5, 1, 4 } },
+    { 2, 0, 0x5a, 0xb4, { 5, 0, 0x1b }, 0x64, 0x50, { 2, 2, 4, 2, 1, 9 } },
+    { 2, 0, 0x64, 0x8c, { 7, 0, 4 }, 0x64, 0x50, { 1, 2, 4, 1, 1, 9 } },
+    { 1, 0, 0x78, 0x64, { 8, 0, 4 }, 0x64, 0x50, { 0, 2, 4, 0, 1, 9 } },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 0xff },
+    { 2, 0, 0x55, 0x82, { 3, 0, 4 } },
+    { 2, 0, 0x64, 0x6e, { 6, 0, 4 } },
+    { 2, 0, 0x5a, 0x82, { 5, 0, 4 } },
+    { 2, 0, 0x64, 0x6e, { 6, 0, 0x12 } },
+    { 1, 0, 0x6e, 0x5a, { 8, 0, 0x12 } },
+    { 3, 0, 0x3c, 0x190, { 1, 0, 0x19 } },
+    { 3, 0, 0x46, 0x104, { 3, 0, 0x17 } },
+    { 2, 0, 0x50, 0xc8, { 4, 0, 0x17 } },
+    { 2, 0, 0x5a, 0x9b, { 5, 0, 0x17 } },
+    { 1, 0, 0x6e, 0x78, { 7, 0, 0x17 } },
+    { 2, 0, 0x64, 0x64, { 1, 0, 4, 0, 0, 4, 0, 0, 4 }, 0x64, 0x64 },
+    { 2, 0, 0x64, 0x64, { 1, 0, 4, 0, 0, 4, 0, 0, 4 }, 0x64, 0x64 },
+    { 2, 0, 0x64, 0x64, { 1, 0, 4, 0, 0, 4, 0, 0, 4 }, 0x64, 0x64 },
+    { 2, 0, 0x64, 0x64, { 1, 0, 4, 0, 0, 4, 0, 0, 4 }, 0x64, 0x64 },
+    { 2, 0, 0x64, 0x64, { 1, 0, 4, 0, 0, 4, 0, 0, 4 }, 0x64, 0x64 },
+    { 2, 0, 0x50, 0xb4, { 1, 0, 0x1b } },
+    { 2, 0, 0x5a, 0x82, { 3, 0, 0x1b } },
+    { 2, 0, 0x64, 0x64, { 5, 0, 0x1b } },
+    { 1, 0, 0x6e, 0x55, { 8, 0, 0x1b } },
+    { 0xff, 0, 0x7d, 0x44, { 9, 0, 0x1b } },
+    { 2, 0, 0x32, 0x64, { 5, 0, 4 } },
+    { 2, 0, 0x4b, 0x64, { 6, 0, 4 } },
+    { 2, 0, 0x64, 0x64, { 7, 0, 4 } },
+    { 2, 0, 0x96, 0x64, { 8, 0, 4 } },
+    { 0xff, 0, 0xc8, 0x64, { 9, 0, 4 } },
+};

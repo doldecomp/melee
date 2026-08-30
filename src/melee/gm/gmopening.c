@@ -85,7 +85,7 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far_val);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
-    HSD_GObjObject_80390A70(arg0, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(arg0, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }
 
@@ -177,7 +177,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     temp_r3_3 = GObj_Create(0xE, 0xF, 0);
     gm_804D67E8 = temp_r3_3;
     GObj_SetupGXLink(temp_r3_3, lbMthp_8001F67C, 0xB, 0);
-    lbMthp_8001F624(temp_r3_3, 0x280, 0x1E0);
+    lbMthp_8001F624(temp_r3_3, 640, 480);
 
     lbAudioAx_80027648();
     lbAudioAx_80023F28(0x3E);
@@ -196,27 +196,27 @@ void gm_801AA28C_OnFrame(void)
 
     lbMthp_8001F578();
     temp_r3 = lbMthp_8001F5C4();
-    if (gm_804D67EC > 0x1518) {
+    if (gm_804D67EC > 5400) {
         gm_804D67EC += 1;
     } else {
         gm_804D67EC = (u32) temp_r3;
     }
     if (lbLang_IsSettingUS() != 0) {
-        if (gm_804D67E0 == 0 && gm_804D67EC >= 0x13AA) {
+        if (gm_804D67E0 == 0 && gm_804D67EC >= 5034) {
             lbAudioAx_800237A8(0x4E21, 0x7F, 0x40);
             gm_804D67E0 = 1;
         }
     } else {
-        if (gm_804D67E0 == 0 && gm_804D67EC >= 0x1374) {
+        if (gm_804D67E0 == 0 && gm_804D67EC >= 4980) {
             lbAudioAx_800237A8(0x4E22, 0x7F, 0x40);
             gm_804D67E0 = 1;
         }
-        if (gm_804D67E1 == 0 && gm_804D67EC >= 0x13EC) {
+        if (gm_804D67E1 == 0 && gm_804D67EC >= 5100) {
             lbAudioAx_800237A8(0x4E23, 0x7F, 0x40);
             gm_804D67E1 = 1;
         }
     }
-    if ((gm_804D67E2 == 0) && (gm_804D67EC >= 0x1374U)) {
+    if ((gm_804D67E2 == 0) && (gm_804D67EC >= 4980)) {
         gmMainLib_8015F500();
         gm_804D67E2 = 1;
     }
@@ -249,7 +249,7 @@ void gm_801AA28C_OnFrame(void)
         gm_804D67E4 = (600.0f + (400.0f + gm_804D67EC));
     }
     if (lbMthp_8001F604() != 0 && !gm_804D67DC && gm_804D67D0) {
-        gm_801BF3F8();
+        gm_PreloadTitleDemo();
         gm_804D67DC = true;
     }
     if (gm_804D67D0 && (gm_804D67EC == gm_804D67E4)) {

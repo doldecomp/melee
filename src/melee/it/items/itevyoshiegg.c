@@ -6,7 +6,7 @@
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "ef/efsync.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 
 #include "it/forward.h"
 

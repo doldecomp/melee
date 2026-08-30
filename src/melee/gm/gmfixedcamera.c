@@ -1,20 +1,14 @@
 #include "gmfixedcamera.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmvsdata.h"
 #include "gmvsmelee.h"
 #include "types.h"
 
+#include "gm/gmmovieend.h"
 #include "if/if_2FD9.h"
 #include "mn/types.h"
-
-/* extern functions referenced in Scenes */
-
-extern void gm_801A6254(GameScene*);
-extern void gm_801A6308(GameScene*);
 
 GameScene gm_803DF1E0_Scenes[] = {
     {

@@ -25,14 +25,15 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/ty/tydisplay.h>
 
-static GameState gm_80479D30;
+/* 1A3F48 */ static void gm_801A3F48(GameScene*);
+/* 479D30 */ static GameState gm_80479D30;
 
 void gm_801A3F48(GameScene* scene)
 {
     PreloadCacheScene* temp_r31;
 
     lbDvd_80018CF4(scene->preload);
-    switch (scene->info.class_id) {
+    switch (scene->info.scene_id) {
     case GS_STAFFROLL:
     case GS_RESULTS:
         HSD_SisLib_803A6048(0xC000);
@@ -120,25 +121,25 @@ void gm_801A4014(GameMode* mode)
     gm->routing.curr_scene_idx = scene->idx;
 
     gm_801A3F48(scene);
-    if (scene->Prep != NULL) {
-        scene->Prep(scene);
+    if (scene->on_enter != NULL) {
+        scene->on_enter(scene);
     }
     info = &scene->info;
     handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
-                                       info->class_id) |
+                                       info->scene_id) |
                                    (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
-    if (handler->OnLoad != NULL) {
-        handler->OnLoad(info->load_data);
+    if (handler->on_load != NULL) {
+        handler->on_load(info->load_data);
     }
-    gm_801A4D34(handler->OnFrame, info);
-    if (!gmMainLib_8046B0F0.resetting && handler->OnLeave != NULL) {
-        handler->OnLeave(info->leave_data);
+    gm_801A4D34(handler->on_frame, info);
+    if (!gmMainLib_8046B0F0.resetting && handler->on_leave != NULL) {
+        handler->on_leave(info->leave_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
-        if (scene->Decide != NULL) {
-            scene->Decide(scene);
+        if (scene->on_exit != NULL) {
+            scene->on_exit(scene);
         }
 
         gm_80479D30.routing.prev_scene_idx = gm->routing.curr_scene_idx;
@@ -168,18 +169,18 @@ void gm_801A4014(GameMode* mode)
         gm_GetAllGameModes();
         memzero(&gm_80479D30, sizeof(gm_80479D30));
         gm_801A3EF4();
-        gmMainLib_8046B0F0.x0 = true;
+        gmMainLib_8046B0F0.skip_intro = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         HSD_VISetBlack(0);
     }
 }
 
-void* gm_GetGameSceneLoadDataCallback(GameScene* scene)
+void* gm_GetGameSceneLoadData(GameScene* scene)
 {
     return scene->info.load_data;
 }
 
-void* gm_GetGameSceneLeaveDataCallback(GameScene* scene)
+void* gm_GetGameSceneLeaveData(GameScene* scene)
 {
     return scene->info.leave_data;
 }
@@ -190,9 +191,8 @@ void gm_SetSceneIndex(u8 arg0)
     gm_80479D30.routing.prev_scene_idx = arg0;
 }
 
-void gm_SetPendingSceneIndex(
-    u8 pending_scene) ///< Actually sets the pending scene
-                      ///< to the scene following the input
+/// @note Actually sets the pending scene to the scene following the input
+void gm_SetPendingSceneIndex(u8 pending_scene)
 {
     gm_80479D30.routing.pending_scene_idx = pending_scene + 1;
 }
@@ -233,7 +233,7 @@ u8 gm_GetPreviousGameMode(void)
     return gm_80479D30.routing.prev_mode;
 }
 
-void gm_801A4330(u8 (*mode)(void))
+void gm_SetGameModeOverride(u8 (*mode)(void))
 {
     gm_80479D30.game_mode_override = mode;
 }
@@ -285,8 +285,8 @@ u8 gm_RunGameMode(u8 mode_kind)
     gm_80479D30.routing.prev_scene_idx = 0;
     gm_80479D30.routing.pending_scene_idx = 0;
     lbDvd_80018F58(mode->preload);
-    if (mode->Load != NULL) {
-        mode->Load();
+    if (mode->on_load != NULL) {
+        mode->on_load();
     }
     while (!gamestate->pending) {
         if (gm_80479D30.game_mode_override != NULL &&
@@ -308,8 +308,8 @@ u8 gm_RunGameMode(u8 mode_kind)
             gm_801A4014(mode);
         }
     }
-    if (!gmMainLib_8046B0F0.resetting && mode->Unload != NULL) {
-        mode->Unload();
+    if (!gmMainLib_8046B0F0.resetting && mode->on_unload != NULL) {
+        mode->on_unload();
     }
     return gm_80479D30.routing.pending_mode;
 }
@@ -326,12 +326,12 @@ void gm_801A4510(void)
     memzero(&gm_80479D30, sizeof(GameState));
     modes = gm_GetAllGameModes();
     for (i = 0; modes[i].idx != GM_COUNT; i++) {
-        if (modes[i].Init != NULL) {
-            modes[i].Init();
+        if (modes[i].on_init != NULL) {
+            modes[i].on_init();
         }
     }
     if (VIGetDTVStatus() != 0 &&
-        (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
+        (db_gameLaunchButtonState & HSD_PAD_B || OSGetProgressiveMode() == 1))
     {
         gm_80479D30.routing.curr_mode = GM_PROGRESSIVE_SCAN;
     } else {

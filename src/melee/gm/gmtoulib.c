@@ -28,9 +28,12 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <baselib/forward.h>
+
 #include <m2c_macros.h>
 #include <stdio.h>
 #include <string.h>
+#include <baselib/cobj.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -41,27 +44,46 @@
 #include <baselib/mobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+#include <baselib/wobj.h>
+
+u8 lbl_804D6638[0x4];
+int lbl_804D663C;
 
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;
 extern u8 lbl_804D6680[8];
-extern char* lbl_804DA6B4;
-extern char* lbl_804DA6B8;
-extern char* lbl_804DA6BC;
-extern char* lbl_804DA6C0;
-extern char* lbl_804DA6C8;
-extern char* lbl_804DA6CC;
-extern char* lbl_804DA6D0;
+extern char* const lbl_804DA6B4;
+extern char* const lbl_804DA6B8;
+extern char* const lbl_804DA6BC;
+extern char* const lbl_804DA6C0;
+extern char* const lbl_804DA6C8;
+extern char* const lbl_804DA6CC;
+extern char* const lbl_804DA6D0;
 static s32 lbl_804D6630;
 static s32 lbl_804D6634;
-extern struct lbl_803B7C80_t {
+
+const struct lbl_803B7C80_t {
     s32 v[10];
-} lbl_803B7C80;
-typedef struct CamDesc {
-    s32 d[14];
-} CamDesc;
-extern CamDesc lbl_803B7CA8;
+} lbl_803B7C80 = {
+    30, -20, 15, -12, 10, -8, 6, -4, 2, 1,
+};
+
+/* 3B7CA8 */ static const HSD_CameraDescPerspective lbl_803B7CA8 = {
+    NULL,
+    0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &lbl_803D9DF4,
+    &lbl_803D9E08,
+    0.0f,
+    NULL,
+    0.1f,
+    30000.0f,
+    60.0f,
+    1.3333333f,
+};
 
 typedef struct BracketData {
     /* 0x0000 */ BracketEntry entries[64];
@@ -1594,7 +1616,7 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
 #endif
 void fn_8018E618(int arg0, f32 farg0, int arg1)
 {
-    CamDesc cam;
+    HSD_CameraDescPerspective cam;
     HSD_GObj* gobj;
     HSD_GObj* tmp;
     s32 i;
@@ -1630,7 +1652,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
         cobj_data->cobj_data.cobj = cobj;
         {
             HSD_CObj** cobj_ptr = &cobj_data->cobj_data.cobj;
-            u8* kind_ptr = &HSD_GObj_804D784B;
+            u8* kind_ptr = &HSD_GObj_CameraKind;
             HSD_GObjObject_80390A70(gobj, *kind_ptr, *cobj_ptr);
         }
     }
@@ -1696,7 +1718,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
             *(HSD_GObj**) (sub + 0x2C) = gobj;
             gobj = *(HSD_GObj**) (sub + 0x2C);
             jobj = HSD_JObjLoadJoint(model->joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 2);
             gm_8016895C(jobj, model, 0);
 
@@ -2405,7 +2427,7 @@ HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x12, 0);
     HSD_CObj* cobj = HSD_CObjLoadDesc(cobjdesc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 7;
     return gobj;
@@ -2422,7 +2444,7 @@ HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x15, 2);
     HSD_CObj* cobj = HSD_CObjLoadDesc(cobjdesc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 2);
     gobj->gxlink_prios = 0xA;
     return gobj;
@@ -2439,7 +2461,7 @@ void fn_8019027C(UNK_T lights)
 {
     HSD_GObj* gobj = GObj_Create(0xB, 0x1A, 0);
     HSD_LObj* lobj = lb_80011AC4(lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 1, 0);
 }
 #ifdef MUST_MATCH
@@ -2477,7 +2499,7 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
 {
     HSD_GObj* gobj = GObj_Create(0xE, arg3, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, arg4, 0);
     if (arg6 != NULL) {
         HSD_GObj_SetupProc(gobj, arg6, 0);
@@ -2527,8 +2549,8 @@ void fn_80190480(float arg8)
 void fn_801904D0(void)
 {
     struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
-    HSD_CObjSetInterest(tmp->cobj, &lbl_803D9DD0.interest);
-    HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
+    HSD_CObjSetInterest(tmp->cobj, &lbl_803D9E08.pos);
+    HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DF4.pos);
 }
 
 #ifdef MUST_MATCH
@@ -2542,8 +2564,8 @@ void fn_80190520(f32 x, f32 y, f32 z)
 
     if (((s32) x == 0) && ((s32) y == 0) && ((s32) z == 0)) {
         struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
-        HSD_CObjSetInterest(tmp->cobj, &lbl_803D9DD0.interest);
-        HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
+        HSD_CObjSetInterest(tmp->cobj, &lbl_803D9E08.pos);
+        HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DF4.pos);
         return;
     } else {
         struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
@@ -2583,9 +2605,9 @@ void gm_801905F0(StartMeleeData* arg0)
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
     arg0->rules.is_teams = false;
-    arg0->rules.xE = tm->x28;
+    arg0->rules.stkind = tm->x28;
     fn_801640B0(&arg0->rules.x20);
-    arg0->rules.x0_0 = rules->mode;
+    arg0->rules.match_mode = rules->mode;
     if (rules->mode != 1) {
         arg0->rules.x0_6 = true;
     } else if (rules->stock_time_limit != 0) {
@@ -2596,22 +2618,22 @@ void gm_801905F0(StartMeleeData* arg0)
     if (arg0->rules.x0_6) {
         if (rules->mode != 1) {
             if (rules->time_limit == 0) {
-                arg0->rules.x10 = 99 * 60;
+                arg0->rules.time_limit = 99 * 60;
             } else {
-                arg0->rules.x10 = rules->time_limit * 60;
+                arg0->rules.time_limit = rules->time_limit * 60;
             }
         } else {
             if (rules->stock_time_limit == 0) {
-                arg0->rules.x10 = 99 * 60;
+                arg0->rules.time_limit = 99 * 60;
             } else {
-                arg0->rules.x10 = rules->stock_time_limit * 60;
+                arg0->rules.time_limit = rules->stock_time_limit * 60;
             }
         }
     }
-    if (arg0->rules.x0_0 == 1) {
+    if (arg0->rules.match_mode == 1) {
         arg0->rules.x2_0 = true;
     }
-    arg0->rules.x0_7 = false;
+    arg0->rules.timer_counts_up = false;
     arg0->rules.x4_2 = false;
     arg0->rules.x4_4 = false;
     arg0->rules.xB = gmMainLib_8015CC58()->item_freq;
@@ -2639,7 +2661,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.disable_pausing = true;
     }
-    if (rules->score_display != 0 && !arg0->rules.x0_0) {
+    if (rules->score_display != 0 && !arg0->rules.match_mode) {
         arg0->rules.x3_0 = true;
     } else {
         arg0->rules.x3_0 = false;
@@ -2680,7 +2702,7 @@ void gm_801905F0(StartMeleeData* arg0)
         }
     }
 
-    sp18.stkind = arg0->rules.xE;
+    sp18.stkind = arg0->rules.stkind;
     for (i = 0; i < 4; i++) {
         sp18.slot_type[i] = arg0->players[i].slot_type;
         sp18.char_id[i] = arg0->players[i].c_kind;
@@ -2689,3 +2711,11 @@ void gm_801905F0(StartMeleeData* arg0)
 
     fn_8019EF08(&sp18);
 }
+
+char* const lbl_804DA6B4 = NULL;
+char* const lbl_804DA6B8 = NULL;
+char* const lbl_804DA6BC = NULL;
+char* const lbl_804DA6C0 = NULL;
+char* const lbl_804DA6C8 = NULL;
+char* const lbl_804DA6CC = NULL;
+char* const lbl_804DA6D0 = NULL;

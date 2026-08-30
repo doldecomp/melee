@@ -14,8 +14,8 @@ extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;
 extern UNK_T gmClassic_8047086C;
 extern UNK_T gmClassic_80472AF8;
-extern u8 gm_804908A0[];
-extern UNK_T gmClassic_804D68D0;
+u8 gm_804908A0[112];
+UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
@@ -81,12 +81,11 @@ typedef struct gmClassicSceneData {
 ASSERT_SIZE(gmClassicSceneData, 0x560);
 
 static gmClassic_80490880Data gmClassic_80490880;
-extern gmClassic_803DDEC8Data gmClassic_803DDEC8;
 
 GameScene gm_803DDC58_Scenes[] = {
     {
-        0x00,
-        3,
+        0,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -97,8 +96,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x01,
-        3,
+        1,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -109,8 +108,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x08,
-        3,
+        8,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -121,8 +120,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x09,
-        3,
+        9,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -133,8 +132,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x10,
-        3,
+        16,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -145,8 +144,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x11,
-        3,
+        17,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -157,8 +156,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x18,
-        3,
+        24,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -169,8 +168,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x19,
-        3,
+        25,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -181,8 +180,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x20,
-        3,
+        32,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -193,8 +192,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x21,
-        3,
+        33,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -205,8 +204,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x28,
-        3,
+        40,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -217,8 +216,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x29,
-        3,
+        41,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -229,8 +228,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x30,
-        3,
+        48,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -241,8 +240,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x31,
-        3,
+        49,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -253,8 +252,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x38,
-        3,
+        56,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -265,8 +264,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x39,
-        3,
+        57,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -277,8 +276,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x40,
-        3,
+        64,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -289,8 +288,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x41,
-        3,
+        65,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -301,8 +300,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x48,
-        3,
+        72,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -313,8 +312,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x49,
-        3,
+        73,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -325,8 +324,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x50,
-        3,
+        80,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -337,8 +336,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x51,
-        3,
+        81,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -349,16 +348,20 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x68,
-        3,
+        104,
+        lbDvdPreload_3,
         0,
         NULL,
         gmClassic_801B3F18,
-        { GS_COMING_SOON, NULL, NULL },
+        {
+            GS_COMING_SOON,
+            NULL,
+            NULL,
+        },
     },
     {
-        0x69,
-        3,
+        105,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3D44,
         gmClassic_801B3D84,
@@ -369,8 +372,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x70,
-        3,
+        112,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3DD8,
         gmClassic_801B3E44,
@@ -381,6 +384,94 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     { -1 },
+};
+
+static gmClassic_803DDEC8Data gmClassic_803DDEC8 = {
+    {
+        { 0x00, 0x00, 0, 0, 300, 0, 2 },
+        { 0x01, 0x10, 0, 0, 300, 0, 4 },
+        { 0x02, 0x80, 1, 0, 120, 0, 4 },
+        { 0x03, 0x00, 0, 0, 300, 0, 2 },
+        { 0x04, 0x02, 0, 0, 300, 0, 4 },
+        { 0x05, 0x80, 3, 0, 120, 0, 4 },
+        { 0x06, 0x00, 0, 0, 300, 0, 2 },
+        { 0x07, 0x08, 0, 0, 300, 10, 4 },
+        { 0x08, 0x80, 2, 0, 180, 0, 4 },
+        { 0x09, 0x04, 0, 0, 300, 0, 2 },
+        { 0x0a, 0x20, 0, 0, 300, 0, 2 },
+        { 0x0d, 0x00, 0, 0, 0, 0, 0 },
+    },
+    {
+        { 176, { 30, 26, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    {
+        { 86, { 8, 33, 33 }, 0 },   { 87, { 8, 33, 33 }, 0 },
+        { 88, { 1, 33, 33 }, 0 },   { 89, { 1, 33, 33 }, 0 },
+        { 90, { 6, 33, 33 }, 0 },   { 91, { 6, 33, 33 }, 0 },
+        { 92, { 16, 33, 33 }, 0 },  { 93, { 16, 33, 33 }, 0 },
+        { 94, { 17, 33, 33 }, 0 },  { 95, { 17, 33, 33 }, 0 },
+        { 96, { 4, 33, 33 }, 0 },   { 97, { 4, 33, 33 }, 0 },
+        { 98, { 2, 33, 33 }, 0 },   { 99, { 2, 33, 33 }, 0 },
+        { 100, { 13, 33, 33 }, 0 }, { 101, { 7, 33, 33 }, 0 },
+        { 102, { 7, 33, 33 }, 0 },  { 103, { 0, 33, 33 }, 0 },
+        { 104, { 0, 33, 33 }, 0 },  { 105, { 11, 33, 33 }, 0 },
+        { 106, { 11, 33, 33 }, 0 }, { 107, { 15, 33, 33 }, 0 },
+        { 108, { 5, 33, 33 }, 0 },  { 109, { 5, 33, 33 }, 0 },
+        { 110, { 12, 33, 33 }, 0 }, { 111, { 12, 33, 33 }, 0 },
+        { 112, { 18, 33, 33 }, 0 }, { 113, { 9, 33, 33 }, 0 },
+        { 114, { 10, 33, 33 }, 0 }, { 115, { 10, 33, 33 }, 0 },
+        { 116, { 14, 33, 33 }, 0 }, { 117, { 14, 33, 33 }, 0 },
+        { 118, { 22, 33, 33 }, 0 }, { 119, { 21, 33, 33 }, 0 },
+        { 120, { 21, 33, 33 }, 0 }, { 121, { 20, 33, 33 }, 0 },
+        { 122, { 20, 33, 33 }, 0 }, { 124, { 24, 33, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
+    {
+        { 125, { 8, 5, 33 }, 0 },   { 126, { 8, 12, 33 }, 0 },
+        { 127, { 1, 2, 33 }, 0 },   { 128, { 6, 18, 33 }, 0 },
+        { 129, { 6, 21, 33 }, 0 },  { 130, { 6, 7, 33 }, 0 },
+        { 131, { 9, 6, 33 }, 0 },   { 132, { 16, 0, 33 }, 0 },
+        { 133, { 16, 2, 33 }, 0 },  { 134, { 17, 7, 33 }, 0 },
+        { 135, { 17, 11, 33 }, 0 }, { 136, { 4, 13, 33 }, 0 },
+        { 137, { 4, 24, 33 }, 0 },  { 138, { 4, 15, 33 }, 0 },
+        { 139, { 4, 14, 33 }, 0 },  { 140, { 2, 20, 33 }, 0 },
+        { 141, { 2, 0, 33 }, 0 },   { 142, { 13, 24, 33 }, 0 },
+        { 143, { 13, 15, 33 }, 0 }, { 144, { 7, 22, 33 }, 0 },
+        { 145, { 11, 12, 33 }, 0 }, { 146, { 11, 10, 33 }, 0 },
+        { 147, { 0, 20, 33 }, 0 },  { 148, { 5, 10, 33 }, 0 },
+        { 149, { 5, 12, 33 }, 0 },  { 150, { 5, 18, 33 }, 0 },
+        { 151, { 12, 18, 33 }, 0 }, { 152, { 18, 21, 33 }, 0 },
+        { 153, { 18, 9, 33 }, 0 },  { 328, { 0, 0, 0 }, 0 },
+    },
+    {
+        { 155, { 8, 33, 33 }, 0 },
+        { 156, { 1, 33, 33 }, 0 },
+        { 157, { 6, 33, 33 }, 0 },
+        { 158, { 17, 33, 33 }, 0 },
+        { 159, { 7, 33, 33 }, 0 },
+        { 160, { 0, 33, 33 }, 0 },
+        { 161, { 15, 33, 33 }, 0 },
+        { 162, { 5, 33, 33 }, 0 },
+        { 163, { 22, 33, 33 }, 0 },
+        { 164, { 21, 33, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
+    {
+        { 165, { 8, 8, 8 }, 0 },
+        { 166, { 1, 1, 1 }, 0 },
+        { 167, { 4, 4, 4 }, 0 },
+        { 168, { 7, 7, 7 }, 0 },
+        { 169, { 11, 11, 11 }, 0 },
+        { 170, { 15, 15, 15 }, 0 },
+        { 174, { 0, 0, 0 }, 0 },
+        { 172, { 24, 24, 24 }, 0 },
+        { 173, { 3, 3, 3 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
 };
 
 static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
@@ -662,7 +753,7 @@ void gmClassic_801B3500(GameScene* arg0)
     s8 ckind;
     gm_803DDEC8Struct* new_var;
 
-    sd = gm_GetGameSceneLoadDataCallback(arg0);
+    sd = gm_GetGameSceneLoadData(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
     new_var = entry;
     ad = gm_GetAllStarData();
@@ -827,7 +918,7 @@ void gmClassic_801B3A34(GameScene* arg0)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r30 = gm_GetGameSceneLoadData(arg0);
     temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
     temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
@@ -868,7 +959,7 @@ void gmClassic_801B3B40(GameScene* arg0)
     s32 mask;
     PAD_STACK(4);
 
-    mei = (MatchExitInfo*) gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = (MatchExitInfo*) gm_GetGameSceneLeaveData(arg0);
     asd = gm_GetAllStarData();
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
     exit_result = mei->x8;
@@ -928,20 +1019,19 @@ void gmClassic_801B3B40(GameScene* arg0)
 
 void gmClassic_801B3D44(GameScene* scene)
 {
-    struct DebugGameOverData* temp_r31 =
-        gm_GetGameSceneLoadDataCallback(scene);
+    struct DebugGameOverData* temp_r31 = gm_GetGameSceneLoadData(scene);
     gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
 void gmClassic_801B3D84(GameScene* scene)
 {
-    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveData(scene);
     gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
 void gmClassic_801B3DD8(GameScene* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
+    CSSData* css = gm_GetGameSceneLoadData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -951,7 +1041,7 @@ void gmClassic_801B3DD8(GameScene* scene)
 
 void gmClassic_801B3E44(GameScene* scene)
 {
-    CSSData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    CSSData* temp_r30 = gm_GetGameSceneLeaveData(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;

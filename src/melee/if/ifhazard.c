@@ -67,7 +67,7 @@ void un_802FD708(DynamicModelDesc* desc, int arg1)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(desc->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, fn_802FD6CC, 11, 0);
     gm_8016895C(jobj, desc, 0);
     HSD_GObj_SetupProc(gobj, fn_802FD680, 17);

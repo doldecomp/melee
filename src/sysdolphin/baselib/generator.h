@@ -34,5 +34,7 @@ struct hsd_804D0F60_t {
 
 /* 4D0F60 */ extern struct hsd_804D0F60_t hsd_804D0F60;
 /* 4D0F90 */ extern struct hsd_804D0F60_t hsd_804D0F90;
+/* 4D78FC */ extern HSD_Generator* hsd_804D78FC;
+/* 4D7900 */ extern void (*hsd_804D7900)(HSD_Generator*);
 
 #endif
