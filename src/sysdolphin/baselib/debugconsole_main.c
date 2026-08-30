@@ -620,7 +620,7 @@ void hsd_80394434(void* text)
     s32 y = sp->x8;
     s32 mode = sp->x0_b7;
     s32 interlace = sp->x0_b6;
-    u8* font = (u8*) sp->x4C;
+    u8* font = sp->x4C;
     s8* ptr = text;
 
     while (*ptr != 0) {
@@ -672,13 +672,13 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
                 break;
             }
             if (mode != 0) {
-                hsd_803922FC(
-                    &((DebugFontGlyph*) font_data)[ch & 0x7F], x + c * 11, y,
-                    interlace, xfb_buf, xfb_w, xfb_h, xfb_stride, color_data);
+                hsd_803922FC(&((DebugFontGlyph*) font_data)[ch & 0x7F],
+                             x + c * 11, y, interlace, xfb_buf, xfb_w, xfb_h,
+                             xfb_stride, color_data);
             } else {
-                hsd_803921B8(
-                    &((DebugFontGlyph*) font_data)[ch & 0x7F], x + c * 11, y,
-                    xfb_buf, xfb_w, xfb_h, xfb_stride, color_data);
+                hsd_803921B8(&((DebugFontGlyph*) font_data)[ch & 0x7F],
+                             x + c * 11, y, xfb_buf, xfb_w, xfb_h, xfb_stride,
+                             color_data);
             }
         }
         r++;
@@ -1073,8 +1073,7 @@ hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
     return base_color + 1;
 }
 
-static inline void
-hsd_80394F48_set_col_start(s32* pxC8, s32* col_start)
+static inline void hsd_80394F48_set_col_start(const s32* pxC8, s32* col_start)
 {
     *col_start = *pxC8;
 }
@@ -1084,8 +1083,7 @@ static inline s32 hsd_80394F48_get_x_base(s32 col_start)
     return col_start * 11 + 0x14;
 }
 
-static inline void**
-hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
+static inline void** hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
 {
     return &sp->x50;
 }
@@ -1100,9 +1098,8 @@ static inline s32* hsd_80394F48_get_xCC_ptr(struct ParticleScreenState* sp)
     return &sp->xCC;
 }
 
-static inline void
-hsd_80394F48_init(void* data, s32* num_entries, void*** px50, s32** pxC8,
-                  s32** pxCC)
+static inline void hsd_80394F48_init(void* data, s32* num_entries,
+                                     void*** px50, s32** pxC8, s32** pxCC)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     EventData* dp = data;
@@ -1436,12 +1433,12 @@ void hsd_803957C0(void* input)
         b6 = draw_sp->x0_b6;
 
         if (draw_sp->x0_b7) {
-            hsd_803922FC((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+            hsd_803922FC((void*) (draw_sp->x4C + (ch & 0x7F) * 0x38),
                          hsd_804CF810.x4, hsd_804CF810.x8, b6,
                          (&hsd_804CF810.x24)[draw_sp->x34], draw_sp->x3C,
                          hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
         } else {
-            hsd_803921B8((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+            hsd_803921B8((void*) (draw_sp->x4C + (ch & 0x7F) * 0x38),
                          hsd_804CF810.x4, hsd_804CF810.x8,
                          (&hsd_804CF810.x24)[draw_sp->x34], draw_sp->x3C,
                          hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
@@ -2073,10 +2070,10 @@ static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 
 static inline void hsd_80396884_draw_char(s8 ch, s32 b6)
 {
-    hsd_803922FC(hsd_804CF810.x4C + (ch & 0x7F) * 0x38,
-                 hsd_804CF810.x4, hsd_804CF810.x8, b6,
-                 (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
-                 hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
+    hsd_803922FC(hsd_804CF810.x4C + (ch & 0x7F) * 0x38, hsd_804CF810.x4,
+                 hsd_804CF810.x8, b6, (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                 hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                 hsd_804CF810.x50);
 }
 
 static inline void* hsd_80396884_get_x50(void)

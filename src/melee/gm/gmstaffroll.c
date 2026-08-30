@@ -550,8 +550,8 @@ void fn_801AAB74(HSD_GObj* gobj)
         if (!(HSD_JObjGetFlags(leaf) & 0x10) &&
             staffInfo[staff_idx].win[0] == NULL &&
             (gm_803DBFD8[staff_idx].has_check == 0 ||
-             gm_803DBFD8[staff_idx].check(
-                 gm_803DBFD8[staff_idx].check_arg) != 0 ||
+             gm_803DBFD8[staff_idx].check(gm_803DBFD8[staff_idx].check_arg) !=
+                 0 ||
              entry_idx == 0xC5) &&
             (entry_idx != 0x5E || lbLang_IsSavedLanguageJP() != 0))
         {
@@ -629,8 +629,8 @@ void fn_801AAB74(HSD_GObj* gobj)
 
         if (!(HSD_JObjGetFlags(leaf) & 0x10) &&
             (gm_803DBFD8[staff_idx].has_check == 0 ||
-             gm_803DBFD8[staff_idx].check(
-                 gm_803DBFD8[staff_idx].check_arg) != 0 ||
+             gm_803DBFD8[staff_idx].check(gm_803DBFD8[staff_idx].check_arg) !=
+                 0 ||
              entry_idx == 0xC5) &&
             (entry_idx != 0x5E || lbLang_IsSavedLanguageJP() != 0))
         {

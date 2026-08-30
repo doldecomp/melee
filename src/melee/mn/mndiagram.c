@@ -1224,8 +1224,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             (void) row;
             cursor_pos = data->name_cursor_pos;
             row_result = mnDiagram_GetVisibleNameFrom(
-                sorted, cursor_pos >> 8,
-                mn_804A04F0.hovered_selection >> 8);
+                sorted, cursor_pos >> 8, mn_804A04F0.hovered_selection >> 8);
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }
@@ -2471,8 +2470,9 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     if (entry_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
-                            mnDiagram_SumNameFalls(mnDiagram_GetVisibleNameFrom(
-                                sorted, col_start, bottom_col)));
+                            mnDiagram_SumNameFalls(
+                                mnDiagram_GetVisibleNameFrom(sorted, col_start,
+                                                             bottom_col)));
                     }
                 } else {
                     bottom_unlocked_count =

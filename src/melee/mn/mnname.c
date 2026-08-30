@@ -125,7 +125,7 @@ bool IsNameListFull(void)
     return true;
 }
 
-static inline s8 readNameTerminator(volatile char* terminator)
+static inline s8 readNameTerminator(const volatile char* terminator)
 {
     return *terminator;
 }
@@ -152,9 +152,9 @@ s32 CompareNameStrings(char* str1, char* str2)
         s8 ch1 = (s8) str1[i];
 
         if (terminator == ch1) {
-            if (checkStringRest(
-                    &str2[i & 0xFFFFFFFFFFFFFFFF],
-                    readNameTerminator(mnName_StringTerminator))) {
+            if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF],
+                                readNameTerminator(mnName_StringTerminator)))
+            {
                 return 0;
             }
             return 2;

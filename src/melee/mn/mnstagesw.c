@@ -156,9 +156,7 @@ static inline s32 mnStageSw_IsRangeEmpty(u8 range_start, u8 range_end)
     s32 curr;
 
     for (curr = range_start; curr <= range_end; curr++) {
-        if (gm_80164430(gm_801641CC(
-                mnStageSw_803ED4C4[(u8) curr])) != 0)
-        {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
             return 0;
         }
     }
@@ -685,9 +683,7 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     disabled = i;
     stage_ids = mnStageSw_803ED4C4;
     for (; (u8) i < NUM_STAGES; stage_ids++, i++) {
-        if (gm_80164430(
-                gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0)
-        {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
             user_data->x2[(u8) i] = gm_80164250(*stage_ids);
         } else {
             user_data->x2[(u8) i] = disabled;
@@ -695,11 +691,10 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     }
 }
 
-static inline void mnStageSw_SetCursorAnim(s32 index,
-                                            MnStageSwData* user_data,
-                                            HSD_JObj* cursor_jobj,
-                                            u8* cursor_index,
-                                            HSD_JObj** cursor_anim_jobj)
+static inline void mnStageSw_SetCursorAnim(s32 index, MnStageSwData* user_data,
+                                           HSD_JObj* cursor_jobj,
+                                           u8* cursor_index,
+                                           HSD_JObj** cursor_anim_jobj)
 {
     u8 enabled;
 
@@ -709,9 +704,9 @@ static inline void mnStageSw_SetCursorAnim(s32 index,
     HSD_JObjReqAnimAll(*cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
 }
 
-static inline HSD_JObj*
-mnStageSw_CreateCursor(MnStageSwData* user_data, s32 index,
-                       AnimLoopSettings* anims)
+static inline HSD_JObj* mnStageSw_CreateCursor(MnStageSwData* user_data,
+                                               s32 index,
+                                               AnimLoopSettings* anims)
 {
     HSD_JObj* cursor_jobj;
     HSD_JObj* cursor_anim_jobj;

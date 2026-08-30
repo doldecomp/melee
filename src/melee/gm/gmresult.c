@@ -19,6 +19,7 @@ static void order_sdata(void)
 struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
 
+#ifdef MUST_MATCH
 static void gmresult_sdata2_order(void)
 {
     (void) "%d";
@@ -47,6 +48,7 @@ static void gmresult_sdata2_order(void)
     (void) 5.5f;
     (void) 1.0f;
 }
+#endif
 
 u32 lbl_804D3FA0 = 0x817C0000;
 u32 lbl_804D3FA4 = 0x817B0000;
@@ -183,7 +185,7 @@ return_true:
     return true;
 }
 
-static inline s32 gmResultFindNth(u8* values, s32 n)
+static inline s32 gmResultFindNth(const u8* values, s32 n)
 {
     s32 i;
 
@@ -195,8 +197,8 @@ static inline s32 gmResultFindNth(u8* values, s32 n)
     return i;
 }
 
-static inline s32 gmResultFormatLabel(s32 slot, StatsEntry* entry,
-                                      f32 zero, f32 neg30, HSD_Text* text)
+static inline s32 gmResultFormatLabel(s32 slot, StatsEntry* entry, f32 zero,
+                                      f32 neg30, HSD_Text* text)
 {
     return HSD_SisLib_803A6B98(text, zero, neg30, "%s", entry->get(slot));
 }
@@ -261,8 +263,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             s32 pair_idx = (entry_idx / 2) - 1;
             if (0 <= pair_idx) {
                 struct lbl_8046B6A0_24C_44C_t* tmp =
-                    (struct lbl_8046B6A0_24C_44C_t*)
-                        lbl_8046DBE8.x94->x44C;
+                    (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
                 s32 i = gmResultFindNth(tmp[(u8) slot].x0, pair_idx + 1);
                 stat_value = tmp[(u8) slot].x104[i];
                 if (stat_value < 0) {
@@ -286,9 +287,8 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         }
     } else if (list->mode != 2) {
         if (entry->get != NULL) {
-            label_id = HSD_SisLib_803A6B98(
-                text2, const_zero, const_neg30, "%s",
-                entry->get(slot));
+            label_id = HSD_SisLib_803A6B98(text2, const_zero, const_neg30,
+                                           "%s", entry->get(slot));
         }
     }
 
@@ -728,8 +728,7 @@ void fn_80175240(s32 slot)
         second_row_offset =
             1.12f * (lbl_8046DBE8.x4C[5].y - lbl_8046DBE8.x4C[4].y);
         color = fn_8017507C(slot);
-        lbl_8046DBE8.player_data[slot].ko_count =
-            HSD_SisLib_803A6754(0, 0);
+        lbl_8046DBE8.player_data[slot].ko_count = HSD_SisLib_803A6754(0, 0);
         pos_z = lbl_8046DBE8.x4C[slot].z;
         ko_count = lbl_8046DBE8.player_data[slot].ko_count;
         pos_y = -lbl_8046DBE8.x4C[slot].y - 30.0f;
@@ -744,12 +743,11 @@ void fn_80175240(s32 slot)
             if (first_value > 0x3E7) {
                 first_value = 0x3E7;
             }
-            line_id = HSD_SisLib_803A6B98(
-                lbl_8046DBE8.player_data[slot].ko_count, 0.0f, 0.0f, "%d",
-                first_value);
-            HSD_SisLib_803A7548(
-                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
-                0.08f);
+            line_id =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_count,
+                                    0.0f, 0.0f, "%d", first_value);
+            HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, 0.11f, 0.08f);
             first_color = color;
             color_ptr = &first_color;
             HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
@@ -759,12 +757,11 @@ void fn_80175240(s32 slot)
                 value = 0x3E7;
             }
 
-            line_id = HSD_SisLib_803A6B98(
-                lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
-                -first_row_offset, "%d", value);
-            HSD_SisLib_803A7548(
-                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
-                0.08f);
+            line_id =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_count,
+                                    0.0f, -first_row_offset, "%d", value);
+            HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, 0.11f, 0.08f);
             second_color = color;
             color_ptr = &second_color;
             HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
@@ -776,9 +773,8 @@ void fn_80175240(s32 slot)
             line_id = HSD_SisLib_803A6B98(
                 lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
                 -first_row_offset - second_row_offset, "%d", value);
-            HSD_SisLib_803A7548(
-                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
-                0.08f);
+            HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, 0.11f, 0.08f);
             third_color = color;
             color_ptr = &third_color;
             HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
@@ -788,20 +784,19 @@ void fn_80175240(s32 slot)
         color.r = 0xA0;
         color.g = 0xA0;
         color.b = 0xA0;
-        line_id = HSD_SisLib_803A6B98(
-            lbl_8046DBE8.player_data[slot].ko_count, 0.0f, 0.0f, "%s",
-            &lbl_804D3FA0);
-        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
-                            line_id, 0.11f, 0.08f);
+        line_id = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_count,
+                                      0.0f, 0.0f, "%s", &lbl_804D3FA0);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            0.11f, 0.08f);
         empty_first_color = color;
         color_ptr = &empty_first_color;
         HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,
                             color_ptr);
-        line_id = HSD_SisLib_803A6B98(
-            lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
-            -first_row_offset, "%s", &lbl_804D3FA0);
-        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
-                            line_id, 0.11f, 0.08f);
+        line_id =
+            HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
+                                -first_row_offset, "%s", &lbl_804D3FA0);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            0.11f, 0.08f);
         empty_second_color = color;
         color_ptr = &empty_second_color;
         HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,
@@ -809,8 +804,8 @@ void fn_80175240(s32 slot)
         line_id = HSD_SisLib_803A6B98(
             lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
             -first_row_offset - second_row_offset, "%s", &lbl_804D3FA0);
-        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
-                            line_id, 0.11f, 0.08f);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            0.11f, 0.08f);
         empty_third_color = color;
         color_ptr = &empty_third_color;
         HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,

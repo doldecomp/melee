@@ -1,5 +1,6 @@
 #include "gmtou_2.h"
 
+#include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gmmain_lib.h"
@@ -562,9 +563,8 @@ void fn_8019D1BC(void)
             HSD_JObj* first_c;
             HSD_JObj* first_jobj;
 
-            first_gobj =
-                fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
-                            fn_8019C048, (f32) i);
+            first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
+                                     1, fn_8019C048, (f32) i);
             first_jobj = GET_JOBJ(first_gobj);
             first_c = first_gobj->hsd_obj;
             HSD_JObjSetTranslateY(first_c, -2.5f);
@@ -944,7 +944,7 @@ void gm_8019DF8C_OnFrame(void)
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
-                                (s32) ((u8) gm_80169238((u8) fn_8018F6FC(
+                                (s32) (gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {

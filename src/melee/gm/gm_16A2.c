@@ -338,9 +338,7 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             p = arg1;
             arg1 = arg2;
             while (*arg1 != -2) {
-                while ((result = (q = &lbl_8046B488.x0 + idx)[0x1C0]) ==
-                       -1)
-                {
+                while ((result = (q = &lbl_8046B488.x0 + idx)[0x1C0]) == -1) {
                     idx = (idx + 1) % 27;
                 }
                 result = Player_800325C8(result, 0);
@@ -443,8 +441,8 @@ void fn_80169C54(s8 arg0, s8 arg1)
     }
 }
 
-static inline void fn_80169F50_inline(s8 costume,
-                                      struct lbl_8046B488_t* gp, int character)
+static inline void fn_80169F50_inline(s8 costume, struct lbl_8046B488_t* gp,
+                                      int character)
 {
     s32 i;
     s32 costume_id;

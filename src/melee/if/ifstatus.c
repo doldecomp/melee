@@ -320,8 +320,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
         post_digit_jobj = state->jobjs[Tens];
@@ -329,8 +328,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
         if ((state->damage_percent % 1000) / 100 == 0 &&
@@ -346,8 +344,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
     }
 
@@ -370,18 +367,15 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            stamina_color.r =
-                (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                      ifStatus_804D57A8[0]) +
-                      (f32) ifStatus_804D57A8[0]);
-            stamina_color.g =
-                (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                      ifStatus_804D57A8[1]) +
-                      (f32) ifStatus_804D57A8[1]);
-            stamina_color.b =
-                (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                      ifStatus_804D57A8[2]) +
-                      (f32) ifStatus_804D57A8[2]);
+            stamina_color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
+                                                    ifStatus_804D57A8[0]) +
+                                    (f32) ifStatus_804D57A8[0]);
+            stamina_color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
+                                                    ifStatus_804D57A8[1]) +
+                                    (f32) ifStatus_804D57A8[1]);
+            stamina_color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
+                                                    ifStatus_804D57A8[2]) +
+                                    (f32) ifStatus_804D57A8[2]);
             stamina_color.a = 255;
             color = stamina_color;
         } else {
@@ -395,18 +389,15 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            normal_color.r =
-                (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                      ifStatus_804D57A8[0]) +
-                      (f32) ifStatus_804D57A8[0]);
-            normal_color.g =
-                (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                      ifStatus_804D57A8[1]) +
-                      (f32) ifStatus_804D57A8[1]);
-            normal_color.b =
-                (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                      ifStatus_804D57A8[2]) +
-                      (f32) ifStatus_804D57A8[2]);
+            normal_color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
+                                                   ifStatus_804D57A8[0]) +
+                                   (f32) ifStatus_804D57A8[0]);
+            normal_color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
+                                                   ifStatus_804D57A8[1]) +
+                                   (f32) ifStatus_804D57A8[1]);
+            normal_color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
+                                                   ifStatus_804D57A8[2]) +
+                                   (f32) ifStatus_804D57A8[2]);
             normal_color.a = 255;
             color = normal_color;
         }
@@ -724,8 +715,7 @@ inline void ifStatus_CreateMarkGObj(HSD_GObj** gobj)
     *gobj = GObj_Create(0xE, 0xF, 0);
 }
 
-static inline void ifStatus_GetPlayerCharacter(s32 arg0,
-                                                CharacterKind* chara)
+static inline void ifStatus_GetPlayerCharacter(s32 arg0, CharacterKind* chara)
 {
     u8 idx = arg0;
     *chara = Player_GetPlayerCharacter(idx);

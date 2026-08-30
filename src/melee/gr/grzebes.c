@@ -484,10 +484,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
                         (grZe_BubbleSpawnPos*) grZe_8049F140;
                     {
                         f32 scale_range = yakumono_param->x5C - scale_min;
-                        grZebes_801DAE70(
-                            spawn_phase, 4, pos[spawn_phase].x14_x,
-                            pos[spawn_phase].x18_y,
-                            scale_range * rand + scale_min);
+                        grZebes_801DAE70(spawn_phase, 4,
+                                         pos[spawn_phase].x14_x,
+                                         pos[spawn_phase].x18_y,
+                                         scale_range * rand + scale_min);
                     }
                 }
                 if (spawn_phase <= mirror) {
@@ -531,8 +531,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
         mpJointListAdd(0);
         mpLib_80057424(0);
 
-        colWidth =
-            (state->positions[1].x - state->positions[0].x) / 5.0f;
+        colWidth = (state->positions[1].x - state->positions[0].x) / 5.0f;
         heights = col_heights;
 
         col_heights[0] = -9999.0f;
@@ -1701,16 +1700,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-static inline f32 grZebes_801DB3CC_dist2(f32 dy, f32 dx)
-{
-    return dx * dx + dy * dy;
-}
-
-static inline f32 grZebes_801DB3CC_normalize(f32 dist, f32 value)
-{
-    return value / dist;
-}
-
 static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
 {
     return value * scale;
@@ -1726,8 +1715,7 @@ static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
     return yp->x74 * 0.5f;
 }
 
-static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base,
-                                             f32 old_y)
+static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base, f32 old_y)
 {
     return old_y + (*base)->x14;
 }
@@ -1801,7 +1789,6 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
         }
     }
 }
-
 
 s32 grZebes_801DB3CC(HSD_GObj* gobj)
 {

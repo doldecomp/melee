@@ -2226,8 +2226,7 @@ void psDispParticles(u32 target_link, u32 sw)
                                 HSD_ASSERT(0x8AA, 0);
                                 break;
                             }
-                            prev_tex_interp_near =
-                                pp->kind & TexInterpNear;
+                            prev_tex_interp_near = pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
                                 &sp764,
                                 (prev_tex_interp_near != 0) ? GX_NEAR
@@ -2245,7 +2244,7 @@ void psDispParticles(u32 target_link, u32 sw)
                             GXInitTexObjLOD(
                                 &sp764,
                                 (prev_tex_interp_near != 0) ? GX_NEAR
-                                                             : GX_LINEAR,
+                                                            : GX_LINEAR,
                                 (s32) (pp->kind & TexInterpNear) != 0
                                     ? GX_NEAR
                                     : GX_LINEAR,

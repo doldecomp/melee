@@ -1658,12 +1658,6 @@ fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
     return disp->state.match_end.team_standings;
 }
 
-static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
-                                                       lbl_8046E3AC_t* state)
-{
-    return &state->score_tbl[i];
-}
-
 static inline int inline2(int unused)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
@@ -1684,7 +1678,6 @@ static inline int inline4(ResultsDisplayLayout* disp)
 {
     return disp->state.match_end.result;
 }
-
 
 void fn_8017AA78(const u8* arg0)
 {

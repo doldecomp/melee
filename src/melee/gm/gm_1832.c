@@ -1728,8 +1728,8 @@ static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
 }
 
 static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
-                                            gm_1832_804736C0_t* data,
-                                            HSD_CObj* cobj)
+                                           gm_1832_804736C0_t* data,
+                                           HSD_CObj* cobj)
 {
     HSD_GObj_SetupProc(gobj, fn_80187910, 0);
     HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);

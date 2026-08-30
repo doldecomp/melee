@@ -561,8 +561,8 @@ void gm_801A7070_OnEnter(void* unused)
 
     HSD_GObj_SetupProc(gobj, fn_801A6844, 0x17);
     jobj = gm_804D6768->hsd_obj;
-    jobj = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(
-        HSD_JObjGetChild(HSD_JObjGetChild(jobj))))));
+    jobj = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(
+        HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(jobj))))));
     lb_8000C1C0(gobj->hsd_obj, jobj);
     lb_8000C290(gobj->hsd_obj, jobj);
     lbAudioAx_800237A8(0x7EF40, 0x7FU, 0x40U);

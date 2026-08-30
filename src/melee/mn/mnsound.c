@@ -363,8 +363,8 @@ void mnSound_80249C08(int unused)
             mn_8022ED6C(sound_selection_jobj, anim + 1);
         }
         lb_80011E24(jobj, &channel_selection_jobj, 0xB, -1);
-        HSD_JObjReqAnimAll(
-            channel_selection_jobj, anims[user_data->unk1 + 3].end_frame);
+        HSD_JObjReqAnimAll(channel_selection_jobj,
+                           anims[user_data->unk1 + 3].end_frame);
         HSD_JObjAnimAll(channel_selection_jobj);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }

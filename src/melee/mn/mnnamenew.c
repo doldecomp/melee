@@ -701,9 +701,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             break;
         }
         ptr = text;
-        while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-               (s8) (ch = *ptr))
-        {
+        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
@@ -1707,7 +1705,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
     mnNameNew_8023DA08(data);
     cursor = data->x1;
 
-    if ((s32) cursor != (s32) *(hovered = &flow->hovered_selection)) {
+    if ((s32) cursor != (s32) * (hovered = &flow->hovered_selection)) {
         if (cursor >= 0x32U && cursor < 0x3AU) {
             jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[cursor - 0x32]];
         } else {

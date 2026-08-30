@@ -688,7 +688,7 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
     return 0;
 }
 
-static inline s32 gm_8017CE34_CountEnemies(s8* arg0)
+static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 {
     s32 count = 0;
     s32 i;
@@ -3337,7 +3337,7 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-static inline s32 fn_80181E18_ComputeRemaining100(s32* x4, s32 count)
+static inline s32 fn_80181E18_ComputeRemaining100(const s32* x4, s32 count)
 {
     return 0x64 - (count + *x4);
 }
@@ -3710,7 +3710,7 @@ static inline u32 gm_80182578_GetRecordScore(RecordBlock* blocks, int idx,
     }
 }
 
-static inline int gm_80182578_GetIndexFromPointer(int* idx_ptr)
+static inline int gm_80182578_GetIndexFromPointer(const int* idx_ptr)
 {
     return *idx_ptr;
 }

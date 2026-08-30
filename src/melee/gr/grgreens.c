@@ -1091,7 +1091,8 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
     float f;
     PAD_STACK(0x10);
     if ((gobj = gp->u.greens.x8_blocks[j][i].x10) &&
-        !gp->u.greens.x8_blocks[j][i].x1_7) {
+        !gp->u.greens.x8_blocks[j][i].x1_7)
+    {
         gp->u.greens.x8_blocks[j][i].x1_7 = 1;
         grMaterial_801C8E28(gobj);
         gp->u.greens.x8_blocks[j][i].x1C = value;
@@ -1276,8 +1277,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
                 scale = (gp->u.greens.x4 + next_row * 6)[col].y -
                         (gp->u.greens.x4 + next_row * 6 - 6)[col].y;
-                pos.y = scale +
-                        gp->u.greens.x8_blocks[next_row - 1][col].x8;
+                pos.y = scale + gp->u.greens.x8_blocks[next_row - 1][col].x8;
                 pos.z = 0.0f;
                 gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
                 HSD_JObjSetTranslate(

@@ -143,19 +143,28 @@ void mnInfo_80251AFC(void)
     }
 }
 
-static MnInfoDataLayout mnInfo_layout = {
+static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 0.0f, 199.0f, 0.0f },
-    { 0x505, 0x506, 0x507, 0x508 },
-    "%s.%s.%s",
-    "%s:%s:%s",
-    "Can't get user_data.\n",
-    "mninfo.c",
-    "user_data",
-    "MenMainConCo_Top_joint",
-    "MenMainConCo_Top_animjoint",
-    "MenMainConCo_Top_matanim_joint",
-    "MenMainConCo_Top_shapeanim_joint",
+    { 1.8e-42f, 1.802e-42f, 1.803e-42f },
+    { 1.805e-42f, 2.1092525e-16f, 1.379729e31f },
+    { 0.0f, 2.109659e-16f, 1.4748028e31f },
+    { 0.0f, 225.43028f, 5.083402e31f },
+    { 5.085142e31f, 7.153577e22f, 2.817505e20f },
+    { 6.162976e-33f, 4.6115556e27f, 2.8237532e23f },
+    { 0.0f, 3.0854143e32f, 1.6456562e19f },
+    { 1.4757395e20f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.6892836e19f },
+    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.6244036e19f },
+    { 4.5346362e27f, 1.8878586e28f, 2.405757e8f },
+    { 2.6912729e20f, 7.3738955e28f, 1.5307577e19f },
+    { 1.710508e19f, 2.7487011e20f, 1.6892836e19f },
+    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.7539375e19f },
+    { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
 };
+
+#define mnInfo_layout (*(MnInfoDataLayout*) mnInfo_803EFC08)
 
 #ifdef MUST_MATCH
 #pragma push
@@ -559,7 +568,7 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, &model->joint, top_joint, animjoint,
+        archive, (void**) &model->joint, top_joint, animjoint,
         mnInfo_layout.top_animjoint, &model->matanim_joint,
         mnInfo_layout.top_matanim_joint, &model->shapeanim_joint,
         mnInfo_layout.top_shapeanim_joint, 0);
