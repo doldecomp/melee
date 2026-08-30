@@ -2636,6 +2636,27 @@ static inline void* fn_80180630_LoadLightList(struct lbl_80472D28_t* state)
     return lb_80011AC4(state->x5C);
 }
 
+static inline void* fn_80180630_LoadCameraDesc(struct lbl_80472D28_t* state)
+{
+    return HSD_CObjLoadDesc(state->x60);
+}
+
+static inline DynamicModelDesc*
+fn_80180630_GetModelDesc(struct lbl_80472D28_t* state)
+{
+    return &state->x4C;
+}
+
+static inline void fn_80180630_SetupSisLib(HSD_GObj* cam_gobj)
+{
+    HSD_SisLib_803A611C(0, cam_gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        HSD_SisLib_803A62A0(0, "SdClr.usd", "SIS_ClearData");
+    } else {
+        HSD_SisLib_803A62A0(0, "SdClr.dat", "SIS_ClearData");
+    }
+}
+
 static inline void
 fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
                                  HSD_GObj** cam_gobj)
@@ -2650,7 +2671,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     *cam_gobj = fn_80180630_CreateCameraGObj();
 }
 
-static inline int fn_80180630_GetX118(struct lbl_80472D28_t* state)
+inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
 {
     return state->x118;
 }
@@ -2658,10 +2679,10 @@ static inline int fn_80180630_GetX118(struct lbl_80472D28_t* state)
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
-    s32 coin_count;
     s32 sp64;
     s32 sp60;
     s32 special_score_value;
+    s32 coin_count;
     u16 coins;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
@@ -2692,8 +2713,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x114 = (u8) arg3;
 
     switch (arg2) {
-    case 1:
-        Ground_801C1DE4(&sp60, &sp64);
+    case 1: {
+        s32* first = &sp60;
+        Ground_801C1DE4(first, &sp64);
         state->x11A = 1;
         state->x11C = (u8) (sp64 - sp60);
         state->x108 = 0xC8;
@@ -2701,6 +2723,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
             state->x11B = 1;
         }
         break;
+    }
     case 3:
         temp = gm_16AE_GetUnkData_0();
         state->x118 = 1;
@@ -2750,9 +2773,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->xFC = arg0 + arg1;
     state->xCC = arg1;
 
-    total = state->xF0;
-    total += state->xCC;
-    total = arg0 + total;
+    total = arg0 + state->xCC + state->xF0;
     var_r4 = total;
     if (total > 999999999) {
         var_r4 = 999999999;
@@ -2762,7 +2783,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x104 = var_r4;
     lbl_804D65C0 = (var_r4 - (arg0 + arg1)) / 10;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x1C);
     {
         void* scene_data;
 
@@ -2773,21 +2794,16 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
             OSReport("Error : Cannot open archive file (File Name : %s).",
                      "GmRegClr");
         }
-        fn_80168A6C(scene_data, &state->x4C, 0);
+        fn_80168A6C(scene_data, fn_80180630_GetModelDesc(state), 0);
     }
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind,
-                            HSD_CObjLoadDesc(state->x60));
+                            fn_80180630_LoadCameraDesc(state));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
     cam_gobj->gxlink_prios = 0x4C00;
 
-    HSD_SisLib_803A611C(0, cam_gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
-    if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, "SdClr.usd", "SIS_ClearData");
-    } else {
-        HSD_SisLib_803A62A0(0, "SdClr.dat", "SIS_ClearData");
-    }
+    fn_80180630_SetupSisLib(cam_gobj);
 
     fn_801803FC(state);
     fn_80168F7C();
@@ -2801,12 +2817,13 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     Camera_8002F7AC(0);
     lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
-    lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
+    state->x2C =
+        lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
     if (gm_GetRules()->x1_1 && coins != 0) {
-        if (fn_80180630_GetX118(state) == 0) {
+        if (fn_80180630_GetX118(state) == 0U) {
             un_802FF128(0x5A, 0x1AE, (s32) coins, 5);
         } else {
             un_802FF128(0x86, 0xC8, (s32) coins, 5);
