@@ -157,7 +157,7 @@
 /* 166A98 */ s32 gm_80166A98(MatchEnd*, u8, s8, u8, s8, u8, s8, u8, u8, u8);
 /* 166CBC */ u8 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);
-/* 167140 */ bool gm_80167140(MatchEnd*);
+/* 167140 */ bool gm_MatchHasMultipleWinners(MatchEnd*);
 /* 167194 */ int fn_80167194(MatchEnd*);
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
@@ -168,7 +168,7 @@
 /* 1677C0 */ void gm_801677C0(struct gm_801677C0_s* arg0);
 /* 1677E8 */ void gm_801677E8(s8 arg0);
 /* 1677F0 */ u8 gm_801677F0(void);
-/* 1677F8 */ bool gm_801677F8(int port, int);
+/* 1677F8 */ bool gm_RumbleEnabledForPlayer(int port, int nametag);
 /* 167858 */ void gm_80167858(int port, int, int, int);
 /* 1678F8 */ void gm_801678F8(int port, int, int);
 /* 16795C */ void gm_8016795C(struct PlayerInitData*);
@@ -193,7 +193,7 @@
 /* 168F7C */ UNK_RET fn_80168F7C(UNK_PARAMS);
 /* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
-/* 169000 */ s32 fn_80169000(MatchEnd* arg0, u8* arg1);
+/* 169000 */ void fn_80169000(MatchEnd* arg0, u8* arg1);
 /* 169238 */ u8 gm_80169238(u8);
 /* 169264 */ u8 gm_80169264(u8);
 /* 169290 */ u8 gm_80169290(u8);

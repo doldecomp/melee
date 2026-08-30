@@ -2645,6 +2645,8 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
         case 4:
             ftAnim_80070FB4(gobj, 1, 2);
             break;
+        default:
+            break;
         }
         if (arg1) {
             ftAnim_80070C48(gobj, 1);
@@ -2807,8 +2809,6 @@ void ftKb_SpecialN_800EEEC4(HSD_GObj* gobj, FighterKind kind)
         cb(gobj);
     }
 }
-
-/// #ftKb_SpecialN_800EEEC4
 
 void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int arg1, Mtx mtx)
 {
@@ -3769,7 +3769,6 @@ void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
     Fighter_UpdateModelScale(gobj);
 }
 
-/// #ftKb_SpecialN_Enter
 void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3781,7 +3780,6 @@ void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirN_Enter
 void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

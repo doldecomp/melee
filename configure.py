@@ -163,6 +163,17 @@ parser.add_argument(
     help="warning level (default 'off')",
 )
 parser.add_argument(
+    "--lint-all",
+    action="store_true",
+    help="do not disable any clang warnings",
+)
+parser.add_argument(
+    "--no-lint-error",
+    dest="lint_error",
+    action="store_false",
+    help="do not treat clang warnings as errors",
+)
+parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
@@ -248,7 +259,7 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    "-warn off",
+    f"-warn {args.warn}",
 ]
 if args.debug:
     config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
@@ -373,7 +384,6 @@ clang_system_includes = [
 clang_warnings = [
     "all",
     "extra",
-    "error",
     "c2x-extensions",
     "implicit-function-declaration",
     "implicit-int",
@@ -382,6 +392,9 @@ clang_warnings = [
     "strict-prototypes",
     "typedef-redefinition",
 ]
+
+if args.lint_error:
+    clang_warnings.append("error")
 
 clang_disabled_warnings = [
     "bitfield-constant-conversion",
@@ -409,9 +422,10 @@ clang_flags_base = [
     *[f"-I{s}" for s in clang_includes],
     *[f"-isystem{s}" for s in clang_system_includes],
     *[f"-W{s}" for s in clang_warnings],
-    *[f"-Wno-{s}" for s in clang_disabled_warnings],
 ]
 
+if not args.lint_all:
+    clang_flags_base.extend(f"-Wno-{s}" for s in clang_disabled_warnings),
 
 config.extra_clang_flags.extend(clang_flags_base)
 
@@ -587,7 +601,9 @@ config.libs = [
             Object(Matching, "melee/lb/lbanim.c"),
             Object(Matching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
-            Object(Linkable, "melee/lb/lbbgflash.c"),
+            Object(Matching, "melee/lb/lbbgflash.c"),
+            Object(Matching, "melee/lb/lb_020A.c"),
+            Object(Matching, "melee/lb/lb_0219.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
             Object(Matching, "melee/lb/lbtrigf.c"),
             Object(Matching, "melee/lb/lbaudio_ax.c"),
@@ -1138,6 +1154,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmregcommon.c"),
             Object(Linkable, "melee/gm/gmregclear.c"),
             Object(Linkable, "melee/gm/gm_1832.c"),
+            Object(Linkable, "melee/gm/gm_1884.c"),
             Object(Linkable, "melee/gm/gmtoulib.c"),
             Object(Matching, "melee/gm/gmtou_0.c"),
             Object(Linkable, "melee/gm/gmtou_1.c"),
@@ -1153,7 +1170,6 @@ config.libs = [
             Object(Matching, "melee/gm/gmscdata.c"),
             Object(Matching, "melee/gm/gmmenu.c"),
             Object(Matching, "melee/gm/gmvsmelee.c"),
-            Object(Matching, "melee/gm/gmvsdata.c"),
             Object(Matching, "melee/gm/gmmovieend.c"),
             Object(Linkable, "melee/gm/gmregtyfall.c"),
             Object(Matching, "melee/gm/gm_1A7A.c"),
@@ -1190,7 +1206,15 @@ config.libs = [
             Object(Matching, "melee/gm/gminvisible.c"),
             Object(Matching, "melee/gm/gmslomo.c"),
             Object(Matching, "melee/gm/gmlightning.c"),
-            Object(Matching, "melee/gm/gm_1BA8.c"),
+            Object(Matching, "melee/gm/gmevent.c"),
+            Object(Matching, "melee/gm/gmtoygallery.c"),
+            Object(Matching, "melee/gm/gmtoylottery.c"),
+            Object(Matching, "melee/gm/gmtoycollection.c"),
+            Object(Matching, "melee/gm/gmhanyucss.c"),
+            Object(Matching, "melee/gm/gmhanyusss.c"),
+            Object(Matching, "melee/gm/gmgover.c"),
+            Object(Matching, "melee/gm/gmopeningmode.c"),
+            Object(Matching, "melee/gm/gmprogressivemode.c"),
             Object(Matching, "melee/gm/gmboot.c"),
             Object(Matching, "melee/gm/gm_1BFA.c"),
         ],

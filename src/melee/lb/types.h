@@ -267,13 +267,13 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
-struct PreloadCacheScene {
+struct PreloadedGameModeState {
     bool is_heap_persistent[2];
     struct GameCache {
-        u8 mode_id;
-        u8 field2_0x9;
-        u8 field3_0xa;
-        u8 field4_0xb;
+        u8 mode_kind; ///< ::GameModeKind
+        u8 x1;
+        u8 x2;
+        u8 x3;
         StKind stkind;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
@@ -282,26 +282,26 @@ struct PreloadCacheScene {
 
 struct PreloadCache {
     s32 persistent_heaps;
-    PreloadCacheScene scene;
-    PreloadCacheScene new_scene;
+    PreloadedGameModeState scene;
+    PreloadedGameModeState new_scene;
     PreloadEntry entries[80];
     s32 persistent_heap;
-    int preloaded;
+    bool preloaded;
     UNK_T x974;
 };
 
-struct lb_800138D8_t {
-    /*  +0 */ f32 x0;
-    /*  +4 */ f32 x4;
-    /*  +8 */ f32 x8;
-    /*  +C */ f32 xC;
-    /* +10 */ s8 x10;
-    /* +11 */ s8 x11;
-    /* +12 */ s8 x12;
-    /* +13 */ char pad_13[0x18 - 0x13];
-    /* +18 */ HSD_GObjEvent x18;
-    /* +1C */ s32 x1C;
-    /* +20 */ char pad_20[0x24 - 0x20];
+struct CameraBlurData {
+    /* 0x00 */ f32 pos_x;
+    /* 0x04 */ f32 pos_y;
+    /* 0x08 */ f32 scale_x;
+    /* 0x0C */ f32 scale_y;
+    /* 0x10 */ u8 base_alpha;
+    /* 0x11 */ u8 blur_size;
+    /* 0x12 */ u8 mode;
+    /* 0x13 */ char pad_13[0x18 - 0x13];
+    /* 0x18 */ HSD_GObjEvent callback;
+    /* 0x1C */ HSD_ImageDesc* efb_copy;
+    /* 0x20 */ f32 tint_factor;
 };
 
 struct lb_80432A68_38_t {

@@ -612,6 +612,101 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     return 0;
 }
 
+static inline void psUpdateParticle(HSD_Particle* pp)
+{
+    if (pp->kind & Tornado) {
+        HSD_Generator* gp = pp->gen;
+        f32 sinA, sinB, cosA, cosB;
+        f32 R;
+        f32 d, e, nd, vz;
+        f32 t0, t1, t2, t3, t4;
+
+        sinA = sinf(pp->grav);
+        sinB = sinf(pp->fric);
+        cosA = cosf(pp->grav);
+        cosB = cosf(pp->fric);
+
+        pp->vel.z += gp->aux.tornado.vel;
+
+        R = gp->radius;
+        if (R < 0.0F) {
+            R = -R;
+        }
+        {
+            f32 ang = gp->angle;
+            if (ang < 0.0F) {
+                ang = -ang;
+            }
+            R = pp->vel.z * tanf(ang) + R;
+        }
+        pp->vel.x += gp->grav;
+        R *= pp->vel.y;
+
+        d = R * cosf(pp->vel.x);
+        e = R * sinf(pp->vel.x);
+        nd = -d;
+        vz = pp->vel.z;
+
+        t0 = vz * sinB;
+        t1 = e * cosA;
+        t2 = nd * sinA;
+        t3 = d * cosB + t0;
+        t0 = vz * sinA;
+        t1 = sinB * t2 + t1;
+        pp->pos.x = gp->pos.x + t3;
+        t2 = nd * cosA;
+        t4 = e * sinA;
+        t1 = cosB * t0 + t1;
+        t0 = vz * cosA;
+        t4 = sinB * t2 - t4;
+        pp->pos.y = gp->pos.y + t1;
+        t4 = cosB * t0 + t4;
+        pp->pos.z = gp->pos.z + t4;
+    } else {
+        if (pp->kind & 1) {
+            pp->vel.y -= pp->grav;
+        }
+        if (pp->kind & 2) {
+            pp->vel.x *= pp->fric;
+            pp->vel.y *= pp->fric;
+            pp->vel.z *= pp->fric;
+        }
+        pp->pos.x += pp->vel.x;
+        pp->pos.y += pp->vel.y;
+        pp->pos.z += pp->vel.z;
+    }
+
+    if (pp->kind & 0x8000) {
+        s32 jobj_idx = (pp->kind >> 12) & 7;
+        HSD_JObj* jobj;
+        HSD_JObj** jobj_slot;
+
+        if (hsd_804D08E8[jobj_idx] == NULL) {
+            HSD_JObj* new_jobj = HSD_JObjAlloc();
+            if (new_jobj != NULL) {
+                hsd_8039CF4C(jobj_idx + 1, new_jobj);
+                HSD_JObjUnref(new_jobj);
+            }
+        }
+
+        jobj_slot = &hsd_804D08E8[jobj_idx];
+        jobj = *jobj_slot;
+
+        if (jobj != NULL) {
+            HSD_JObjSetupMatrix(jobj);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
+        }
+    }
+}
+
 // @TODO: Currently 93.95% match - register allocation differences (stmw
 // r20 vs r21), r27/r28 swap, and PC advance codegen patterns
 void* hsd_8039930C(void* pp_arg, void* prev_arg)
@@ -1063,8 +1158,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         gchild->idnum = pp->idnum;
                         if (pp->gen != NULL) {
                             HSD_JObj* jobj = pp->gen->jobj;
-                            gchild->jobj = jobj;
-                            ref_INC(jobj);
+                            if (gchild != NULL) {
+                                gchild->jobj = jobj;
+                                if (jobj != NULL) {
+                                    ref_INC(jobj);
+                                }
+                            }
                         }
                         gchild->type |= 0x100;
                         if (pp->gen != NULL) {
@@ -1122,8 +1221,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     gchild->idnum = pp->idnum;
                     if (pp->gen != NULL) {
                         HSD_JObj* jobj = pp->gen->jobj;
-                        gchild->jobj = jobj;
-                        ref_INC(jobj);
+                        if (gchild != NULL) {
+                            gchild->jobj = jobj;
+                            if (jobj != NULL) {
+                                ref_INC(jobj);
+                            }
+                        }
                     }
                     gchild->type |= 0x100;
                     if (pp->gen != NULL) {
@@ -1187,8 +1290,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     gchild->idnum = pp->idnum;
                     if (pp->gen != NULL) {
                         HSD_JObj* jobj = pp->gen->jobj;
-                        gchild->jobj = jobj;
-                        ref_INC(jobj);
+                        if (gchild != NULL) {
+                            gchild->jobj = jobj;
+                            if (jobj != NULL) {
+                                ref_INC(jobj);
+                            }
+                        }
                     }
                     gchild->type |= 0x100;
                     if (pp->gen != NULL) {
@@ -1440,16 +1547,16 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) rot,
                                    &srt->translate, NULL);
                     }
-                    pp->pos.x = pp->appsrt->mmtx[0][1] * pp->pos.y +
-                                pp->appsrt->mmtx[0][0] * pp->pos.x +
+                    pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
+                                pp->appsrt->mmtx[0][1] * pp->pos.y +
                                 pp->appsrt->mmtx[0][2] * pp->pos.z +
                                 pp->appsrt->mmtx[0][3];
-                    pp->pos.y = pp->appsrt->mmtx[1][1] * pp->pos.y +
-                                pp->appsrt->mmtx[1][0] * pp->pos.x +
+                    pp->pos.y = pp->appsrt->mmtx[1][0] * pp->pos.x +
+                                pp->appsrt->mmtx[1][1] * pp->pos.y +
                                 pp->appsrt->mmtx[1][2] * pp->pos.z +
                                 pp->appsrt->mmtx[1][3];
-                    pp->pos.z = pp->appsrt->mmtx[2][1] * pp->pos.y +
-                                pp->appsrt->mmtx[2][0] * pp->pos.x +
+                    pp->pos.z = pp->appsrt->mmtx[2][0] * pp->pos.x +
+                                pp->appsrt->mmtx[2][1] * pp->pos.y +
                                 pp->appsrt->mmtx[2][2] * pp->pos.z +
                                 pp->appsrt->mmtx[2][3];
                     psRemoveParticleAppSRT(pp);
@@ -2765,103 +2872,7 @@ do_life:
         }
     }
 
-    /* --- Physics update --- */
-    if (pp->kind & Tornado) {
-        /* Tornado rotational physics */
-        HSD_Generator* gp = pp->gen;
-        f32 sinA, sinB, cosA, cosB;
-        f32 R;
-        f32 d, e, nd, vz;
-        f32 t0, t1, t2, t3, t4;
-
-        sinA = sinf(pp->grav);
-        sinB = sinf(pp->fric);
-        cosA = cosf(pp->grav);
-        cosB = cosf(pp->fric);
-
-        pp->vel.z += gp->aux.tornado.vel;
-
-        R = gp->radius;
-        if (R < 0.0F) {
-            R = -R;
-        }
-        {
-            f32 ang = gp->angle;
-            if (ang < 0.0F) {
-                ang = -ang;
-            }
-            R = pp->vel.z * tanf(ang) + R;
-        }
-        pp->vel.x += gp->grav;
-        R *= pp->vel.y;
-
-        d = R * cosf(pp->vel.x);
-        e = R * sinf(pp->vel.x);
-        nd = -d;
-        vz = pp->vel.z;
-
-        /* Rotation matrix application */
-        t0 = vz * sinB;
-        t1 = e * cosA;
-        t2 = nd * sinA;
-        t3 = d * cosB + t0;
-        t0 = vz * sinA;
-        t1 = sinB * t2 + t1;
-        pp->pos.x = gp->pos.x + t3;
-        t2 = nd * cosA;
-        t4 = e * sinA;
-        t1 = cosB * t0 + t1;
-        t0 = vz * cosA;
-        t4 = sinB * t2 - t4;
-        pp->pos.y = gp->pos.y + t1;
-        t4 = cosB * t0 + t4;
-        pp->pos.z = gp->pos.z + t4;
-    } else {
-        /* Simple physics */
-        if (pp->kind & 1) {
-            pp->vel.y -= pp->grav;
-        }
-        if (pp->kind & 2) {
-            pp->vel.x *= pp->fric;
-            pp->vel.y *= pp->fric;
-            pp->vel.z *= pp->fric;
-        }
-        pp->pos.x += pp->vel.x;
-        pp->pos.y += pp->vel.y;
-        pp->pos.z += pp->vel.z;
-    }
-
-    /* JObj attachment - update JObj position to match particle */
-    if (pp->kind & 0x8000) {
-        s32 jobj_idx = (pp->kind >> 12) & 7;
-        HSD_JObj* jobj;
-        HSD_JObj** jobj_slot;
-
-        /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx] == NULL) {
-            HSD_JObj* new_jobj = HSD_JObjAlloc();
-            if (new_jobj != NULL) {
-                hsd_8039CF4C(jobj_idx + 1, new_jobj);
-                HSD_JObjUnref(new_jobj);
-            }
-        }
-
-        jobj_slot = &hsd_804D08E8[jobj_idx];
-        jobj = *jobj_slot;
-
-        if (jobj != NULL) {
-            HSD_JObjSetupMatrix(jobj);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
-        }
-    }
+    psUpdateParticle(pp);
 
     /* Callback */
     if (pp->callback != NULL) {

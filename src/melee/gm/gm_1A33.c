@@ -61,7 +61,7 @@ void gmCamera_801A33BC(void)
     }
 }
 
-void gmCamera_801A34FC_OnFrame(void)
+void gm_Scene_CameraVs_OnFrame(void)
 {
     CameraVsData* data;
     s32 i;
@@ -81,13 +81,13 @@ void gmCamera_801A34FC_OnFrame(void)
         mn_8022F268();
         *gmCamera_VsCameraTextLayout.x0 = 2;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & (HSD_PAD_START | HSD_PAD_A))
     {
         sfxForward();
         *gmCamera_VsCameraTextLayout.x0 = 0;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & PAD_BUTTON_B)
     {
         sfxBack();
@@ -96,7 +96,7 @@ void gmCamera_801A34FC_OnFrame(void)
     }
 }
 
-void gmCamera_801A3634_OnEnter(void* arg0)
+void gm_Scene_CameraVs_OnEnter(void* arg0)
 {
     u32* state = arg0;
 
@@ -112,4 +112,4 @@ void gmCamera_801A3634_OnEnter(void* arg0)
     gmCamera_801A33BC();
 }
 
-void gmCamera_801A367C_OnLeave(UNK_T unused) {}
+void gm_Scene_CameraVs_OnExit(UNK_T unused) {}

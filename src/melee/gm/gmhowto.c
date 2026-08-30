@@ -28,7 +28,7 @@ UNK_T gm_801ACC94(void)
 
 static HSD_GObj* gm_804D6850;
 
-void gm_801ACCA0_OnEnter(void* unused)
+void gm_Scene_HowTo_OnEnter(void* unused)
 {
     HSD_GObj* gobj;
     PAD_STACK(8);
@@ -49,7 +49,7 @@ void gm_801ACCA0_OnEnter(void* unused)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801ACD8C_OnFrame(void)
+void gm_Scene_HowTo_OnFrame(void)
 {
     bool var_r31 = false;
     PAD_STACK(4);
@@ -60,7 +60,7 @@ void gm_801ACD8C_OnFrame(void)
         var_r31 = true;
     }
     if (lbMthp_8001F604() != 0 ||
-        (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
          (HSD_PAD_START | HSD_PAD_A)) ||
         var_r31)
     {
@@ -71,7 +71,7 @@ void gm_801ACD8C_OnFrame(void)
         } else {
             gm_801A4B60();
         }
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
             sfxForward();
@@ -79,7 +79,7 @@ void gm_801ACD8C_OnFrame(void)
             gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetPendingSceneIndex(0);
+            gm_SetNextGameModeStateId(0);
         }
     }
 }

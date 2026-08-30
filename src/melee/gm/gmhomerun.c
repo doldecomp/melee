@@ -1,7 +1,10 @@
 #include "gmhomerun.h"
 
 #include "gm_unsplit.h"
-#include "gmvsdata.h"
+
+#include "gm/forward.h"
+
+#include "gm/gmvsmelee.h"
 
 #include <melee/pl/forward.h>
 
@@ -15,7 +18,7 @@
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>
 
-GameScene gm_803DF198_Scenes[] = {
+GameModeState gm_Mode_Homerun_States[] = {
     {
         0,
         3,
@@ -24,8 +27,8 @@ GameScene gm_803DF198_Scenes[] = {
         gm_801B999C,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -36,7 +39,7 @@ GameScene gm_803DF198_Scenes[] = {
         gm_801B9DD8,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -47,20 +50,20 @@ VsModeData gm_80497618;
 static u8 gm_804D68F8;
 static u8 gm_804D68F9;
 
-void gm_801B98E8(GameScene* scene)
+void gm_801B98E8(GameModeState* scene)
 {
     CSSData* css;
     struct GameCache* game_cache;
     VsModeData* vs = &gm_80497618;
 
-    css = gm_GetGameSceneLoadData(scene);
+    css = gm_GetGameModeStateEnterData(scene);
     if (gm_804D68F9 != 0) {
         lb_8001C550();
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_801B06B0(css, 0x10, vs->data.players[0].c_kind, 1,
-                vs->data.players[0].color, vs->data.players[0].xA, 0,
+    gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
+                vs->start.players[0].color, vs->start.players[0].nametag, 0,
                 gm_804D68F8);
     game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
@@ -71,74 +74,75 @@ void gm_801B98E8(GameScene* scene)
     gm_804D68F9 = lbTime_8000AF74(gm_804D68F9, 1);
 }
 
-void gm_801B999C(GameScene* scene)
+void gm_801B999C(GameModeState* scene)
 {
     VsModeData* vs = &gm_80497618;
     CSSData* temp_r3;
 
-    temp_r3 = gm_GetGameSceneLeaveData(scene);
+    temp_r3 = gm_GetGameModeStateExitData(scene);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->data.players);
-    gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL,
-                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
-    vs->data.players[1].c_kind = CHKIND_SANDBAG;
-    vs->data.players[1].xE = 0xF;
-    vs->data.players[1].x1C = 1.0f;
-    vs->data.players[1].slot_type = Gm_PKind_Cpu;
-    vs->data.players[1].stocks = 1;
-    vs->data.players[1].team = 1;
+    gm_80167A14(vs->start.players);
+    gm_801B0730(temp_r3, &vs->start.players[0].ckind, NULL,
+                &vs->start.players[0].color, &vs->start.players[0].nametag,
+                NULL);
+    vs->start.players[1].ckind = CHKIND_SANDBAG;
+    vs->start.players[1].xE = 0xF;
+    vs->start.players[1].x1C = 1.0f;
+    vs->start.players[1].slot_type = Gm_PKind_Cpu;
+    vs->start.players[1].stocks = 1;
+    vs->start.players[1].team = 1;
 }
 
-void gm_801B9A3C(GameScene* arg0)
+void gm_801B9A3C(GameModeState* arg0)
 {
-    StartMeleeData* data;
+    StartMeleeData* start;
     VsModeData* vs = &gm_80497618;
     int i;
 
-    data = gm_GetGameSceneLoadData(arg0);
-    gm_80167A64(&data->rules);
+    start = gm_GetGameModeStateEnterData(arg0);
+    gm_80167A64(&start->rules);
 
-    data->rules = vs->data.rules;
+    start->rules = vs->start.rules;
 
-    data->rules.stkind = 0x54;
-    data->rules.match_mode = 1;
-    data->rules.x0_6 = true;
-    data->rules.x1_0 = true;
-    data->rules.x4_2 = false;
-    data->rules.x4_4 = false;
+    start->rules.stkind = St_Kind_Unk84;
+    start->rules.match_kind = 1;
+    start->rules.x0_6 = true;
+    start->rules.x1_0 = true;
+    start->rules.x4_2 = false;
+    start->rules.x4_4 = false;
 
-    data->rules.is_teams = false;
-    data->rules.xB = -1;
-    data->rules.time_limit = 0xA;
-    data->rules.x34 = 1.0f;
-    data->rules.x30 = 1.0f;
+    start->rules.is_teams = false;
+    start->rules.xB = -1;
+    start->rules.time_limit = 10;
+    start->rules.x34 = 1.0f;
+    start->rules.x30 = 1.0f;
 
-    data->rules.x5_0 = true;
-    data->rules.x1_3 = true;
-    data->rules.x44 = gm_80181998;
+    start->rules.x5_0 = true;
+    start->rules.x1_3 = true;
+    start->rules.x44 = gm_80181998;
 
-    data->rules.x3_3 = true;
-    data->rules.x3_2 = true;
-    data->rules.x7 = 9;
+    start->rules.x3_3 = true;
+    start->rules.x3_2 = true;
+    start->rules.x7 = 9;
 
-    for (i = 0; i < 6; i++) {
-        data->players[i] = vs->data.players[i];
-        data->players[i].xC_b1 = false;
-        data->players[i].xD_b3 = true;
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        start->players[i] = vs->start.players[i];
+        start->players[i].xC_b1 = false;
+        start->players[i].xD_b3 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->data.players[0].c_kind,
-                vs->data.players[0].color, 1, gm_804D68F8);
-    data->players[0].xD_b2 = true;
-    gm_8016F088(data);
-    gm_80181A00(data->players[0].c_kind, data->players[0].xA);
+    gm_801B0620(&start->players[0], vs->start.players[0].ckind,
+                vs->start.players[0].color, 1, gm_804D68F8);
+    start->players[0].xD_b2 = true;
+    gm_8016F088(start);
+    gm_80181A00(start->players[0].ckind, start->players[0].nametag);
     gm_80180B18();
 }
 
-void gm_801B9DD8(GameScene* arg0)
+void gm_801B9DD8(GameModeState* arg0)
 {
     u32 temp_r31;
     s32* temp_r3_2;
@@ -146,16 +150,15 @@ void gm_801B9DD8(GameScene* arg0)
     MatchExitInfo* temp_r3;
     u16 tmp;
 
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    temp_r3 = gm_GetGameModeStateExitData(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
-        gm_SetPendingSceneIndex(1);
+        gm_SetNextGameModeStateId(1);
         return;
     }
-    selkind = gm_CKindToSelKind(
-        temp_r3->match_end.player_standings[0].character_kind);
+    selkind = gm_CKindToSelKind(temp_r3->match_end.player_standings[0].ckind);
     temp_r31 = gm_80180AE4();
     if ((tmp = gm_801734D0(temp_r31)) != 0x148) {
         gm_80164504(tmp);
@@ -168,17 +171,17 @@ void gm_801B9DD8(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(8);
     if (gm_80173754(0x20, gm_804D68F8) == 0) {
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
     }
 }
 
-void gm_801B9EB8_OnInit(void)
+void gm_Mode_Homerun_OnInit(void)
 {
     VsModeData* data = &gm_80497618;
     gm_80167B50(data);
 }
 
-void gm_801B9EE4_OnLoad(void)
+void gm_Mode_Homerun_OnLoad(void)
 {
     gm_804D68F8 = gm_801677F0();
     gm_804D68F9 = 0;

@@ -510,8 +510,7 @@ static void round_decimal(decimal* dec, int new_length)
     if (c == 5) {
         char* q = &((char*) dec->sig.text)[dec->sig.length];
 
-        while (--q > p && *q == '0')
-            ;
+        while (--q > p && *q == '0');
         carry = (q == p) ? p[-1] & 1 : 1;
     } else {
         carry = (c > 5);

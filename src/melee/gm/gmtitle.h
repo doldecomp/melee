@@ -10,7 +10,7 @@
 /* 1A19AC */ void gmTitle_801A19AC(void);
 /* 1A1A3C */ HSD_GObj* gmTitle_801A1A3C(void);
 /* 1A1AC0 */ HSD_Archive* gmTitle_801A1AC0(void);
-/* 1A1C18 */ void gmTitle_OnFrame(void);
-/* 1A1E20 */ void gmTitle_OnEnter(void*);
+/* 1A1C18 */ void gm_Scene_Title_OnFrame(void);
+/* 1A1E20 */ void gm_Scene_Title_OnEnter(void*);
 
 #endif

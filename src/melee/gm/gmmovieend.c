@@ -21,14 +21,14 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
 
-void gm_801A6254(GameScene* arg0)
+void gm_801A6254(GameModeState* arg0)
 {
     u8 temp_ret;
     u8 temp_r0;
     MatchExitInfo* temp_r30;
     lbl_8046DBD8_t* temp_r31;
 
-    temp_r30 = gm_GetGameSceneLeaveData(arg0);
+    temp_r30 = gm_GetGameModeStateExitData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
@@ -44,16 +44,16 @@ void gm_801A6254(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x100);
     if (gm_801721EC() == 0) {
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
     }
 }
 
-void gm_801A6308(GameScene* arg0)
+void gm_801A6308(GameModeState* arg0)
 {
-    gm_SetPendingSceneIndex(0);
+    gm_SetNextGameModeStateId(0);
 }
 
-void gm_801A632C_OnEnter(void* arg0_)
+void gm_Scene_DebugMenu_OnEnter(void* arg0_)
 {
     struct {
         UNK_T unk0;
@@ -105,7 +105,7 @@ static int gm_803DB25C[0x1A] = {
     // clang-format on
 };
 
-void gm_801A637C_OnEnter(void* arg0)
+void gm_Scene_MovieEnd_OnEnter(void* arg0)
 {
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_2;
@@ -132,7 +132,7 @@ void gm_801A637C_OnEnter(void* arg0)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801A64A8_OnFrame(void)
+void gm_Scene_MovieEnd_OnFrame(void)
 {
     int temp_r31;
     bool var_r30;

@@ -63,7 +63,7 @@ void vi_8031D80C(HSD_GObj* gobj)
     }
 }
 
-void un_8031D858_OnEnter(void* arg0)
+void vi0402_Scene_OnEnter(void* arg0)
 {
     HSD_GObj* light_gobj;
     HSD_LObj* lobj;
@@ -98,7 +98,7 @@ void un_8031D858_OnEnter(void* arg0)
     Player_InitAllPlayers();
     lbAudioAx_80024E50(0);
 }
-void vi_8031D9C4_OnFrame(void)
+void vi0402_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

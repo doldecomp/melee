@@ -948,7 +948,6 @@ void grOnett_801E5538(Ground_GObj* gobj)
     }
 }
 
-/// #grOnett_801E56FC
 DynamicModelDesc* grOnett_801E56FC(void)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(0x1);

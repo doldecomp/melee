@@ -90,8 +90,6 @@ u32 lb_8001C87C(void)
                        &lb_803BAB60, &_p(x4));
 }
 
-/// #lb_8001C87C
-
 int lb_8001C8BC(void)
 {
     HSD_ASSERT(0x140, _p(enable));

@@ -6,7 +6,7 @@
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "ef/efsync.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 
 #include "it/forward.h"
 
@@ -152,7 +152,6 @@ bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #itEvyoshiegg_UnkMotion5_Anim
 bool itEvyoshiegg_UnkMotion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

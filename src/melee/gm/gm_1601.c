@@ -8,6 +8,8 @@
 #include "placeholder.h"
 #include "stddef.h"
 
+#include <platform.h>
+
 #include "baselib/gobjplink.h"
 #include "baselib/jobj.h"
 #include "cm/camera.h"
@@ -26,12 +28,16 @@
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
 #include "mn/types.h"
+
+#include "pl/forward.h"
+
 #include "pl/player.h"
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 
+#include <dolphin/pad.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
@@ -1179,7 +1185,7 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
         (s->unk30 + p->x58 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk30 + p->x58;
     s->unk34 =
         (s->unk34 + p->x5C > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk34 + p->x5C;
-    if (arg0->x5 == 2) {
+    if (arg0->match_kind == 2) {
         s->unk38 = (s->unk38 + p->x60 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
                                                      : s->unk38 + p->x60;
         s->unk3C = (s->unk3C + p->x64 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
@@ -1191,36 +1197,34 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
 
 void fn_80162068(MatchEnd* match_end)
 {
-    s32 i;
-    s32 j;
+    ssize_t i;
+    ssize_t j;
     struct MatchPlayerData* pdata_i;
     struct MatchPlayerData* pdata_j;
     struct FighterData* fd;
     s32 sum;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         pdata_i = &match_end->player_standings[i];
         if (pdata_i->slot_type == 3) {
             continue;
         }
-        fd = GetPersistentFighterData(
-            gm_CKindToSelKind(pdata_i->character_kind));
-        for (j = 0; j < 4; j++) {
+        fd = GetPersistentFighterData(gm_CKindToSelKind(pdata_i->ckind));
+        for (j = 0; j < PAD_MAX_CONTROLLERS; j++) {
             pdata_j = &match_end->player_standings[j];
-            if (i == j || pdata_j->slot_type == 3) {
+            if (i == j || pdata_j->slot_type == Gm_PKind_NA) {
                 continue;
             }
-            if (pdata_i->kills[j] + fd->fighter_kos[gm_CKindToSelKind(
-                                        pdata_j->character_kind)] >
-                0xFFFF)
+            if (pdata_i->kills[j] +
+                    fd->fighter_kos[gm_CKindToSelKind(pdata_j->ckind)] >
+                U16_MAX)
             {
-                sum = 0xFFFF;
+                sum = U16_MAX;
             } else {
-                sum = pdata_i->kills[j] + fd->fighter_kos[gm_CKindToSelKind(
-                                              pdata_j->character_kind)];
+                sum = pdata_i->kills[j] +
+                      fd->fighter_kos[gm_CKindToSelKind(pdata_j->ckind)];
             }
-            fd->fighter_kos[gm_CKindToSelKind(pdata_j->character_kind)] =
-                (u16) sum;
+            fd->fighter_kos[gm_CKindToSelKind(pdata_j->ckind)] = (u16) sum;
         }
         fn_80161C90(match_end, i, &fd->sd_count);
     }
@@ -1260,16 +1264,16 @@ void fn_80162170(MatchEnd* arg0)
                 }
             }
             {
-                u32 sum = nt->play_time_by_fighter[gm_CKindToSelKind(
-                              p->character_kind)] +
-                          arg0->frame_count / 60;
+                u32 sum =
+                    nt->play_time_by_fighter[gm_CKindToSelKind(p->ckind)] +
+                    arg0->frame_count / 60;
                 play_time = (sum > (u32) -1)
                                 ? -1
                                 : nt->play_time_by_fighter[gm_CKindToSelKind(
-                                      p->character_kind)] +
+                                      p->ckind)] +
                                       arg0->frame_count / 60;
-                nt->play_time_by_fighter[gm_CKindToSelKind(
-                    p->character_kind)] = play_time;
+                nt->play_time_by_fighter[gm_CKindToSelKind(p->ckind)] =
+                    play_time;
             }
             fn_80161C90(arg0, i, &nt->sd_count);
         }
@@ -1391,56 +1395,53 @@ void gm_8016260C(u8 arg0, u8 arg1)
 
     if ((u8) (arg1 - 7) <= 1) {
         u32* p = gmMainLib_GetMatchResetCounter();
-        *p = (*p + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : *p + 1;
+        *p = (*p + 1 > U32_MAX) ? U32_MAX : *p + 1;
         return;
     }
     if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         counter = gmMainLib_GetStaminaMatchTotal();
     } else {
-        switch ((s32) arg0) {
-        case 0:
+        switch ((MatchKind) arg0) {
+        case MatchKind_Time:
             counter = gmMainLib_GetTimeMatchTotal();
             break;
-        case 1:
+        case MatchKind_Stock:
             counter = gmMainLib_GetStockMatchTotal();
             break;
-        case 2:
+        case MatchKind_Coin:
             counter = gmMainLib_GetCoinMatchTotal();
             {
                 struct gmm_retval_EDBC* q = gmMainLib_8015EDBC();
-                q->x4 = (q->x4 + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : q->x4 + 1;
+                q->x4 = (q->x4 + 1 > U32_MAX) ? U32_MAX : q->x4 + 1;
             }
             break;
-        case 3:
+        case MatchKind_Bonus:
             counter = gmMainLib_GetBonusMatchTotal();
             break;
         }
     }
-    *counter = (*counter + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : *counter + 1;
+    *counter = (*counter + 1 > U32_MAX) ? U32_MAX : *counter + 1;
     {
         struct gmm_retval_ED98* a = gmMainLib_8015ED98();
-        a->x0 = (a->x0 + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : a->x0 + 1;
+        a->x0 = (a->x0 + 1 > U32_MAX) ? U32_MAX : a->x0 + 1;
     }
     {
         struct gmm_retval_EDB0* b = gmMainLib_8015EDB0();
-        b->x0 =
-            ((u32) b->x0 + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : (u32) b->x0 + 1;
+        b->x0 = ((u32) b->x0 + 1 > U32_MAX) ? U32_MAX : (u32) b->x0 + 1;
     }
     {
         struct gmm_retval_EDBC* c = gmMainLib_8015EDBC();
-        c->x0 =
-            ((u32) c->x0 + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : (u32) c->x0 + 1;
+        c->x0 = ((u32) c->x0 + 1 > U32_MAX) ? U32_MAX : (u32) c->x0 + 1;
     }
 }
 
 u32 gm_GetVsPlayMatchTotal(void)
 {
-    u32 tmp = *(u32*) gmMainLib_GetTimeMatchTotal() +
-              *(u32*) gmMainLib_GetStockMatchTotal() +
-              *(u32*) gmMainLib_GetCoinMatchTotal() +
-              *(u32*) gmMainLib_GetBonusMatchTotal() +
-              *(u32*) gmMainLib_GetStaminaMatchTotal();
-    return tmp;
+    u32 total =
+        *gmMainLib_GetTimeMatchTotal() + *gmMainLib_GetStockMatchTotal() +
+        *gmMainLib_GetCoinMatchTotal() + *gmMainLib_GetBonusMatchTotal() +
+        *gmMainLib_GetStaminaMatchTotal();
+    return total;
 }
 
 u32 gm_80162800(MatchEnd* arg0)
@@ -2852,7 +2853,9 @@ void fn_80165E7C(MatchEnd* arg0)
         if (arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
-            if (gm_GetCurrentGameMode() == GM_STAMINA_VS || arg0->x5 == 1) {
+            if (gm_GetCurrentGameMode() == GM_STAMINA_VS ||
+                arg0->match_kind == 1)
+            {
                 int player_score = new_var = arg0->player_standings[i].score;
 
                 if (player_score < 0) {
@@ -2966,9 +2969,8 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     for (i = 0; i < 6; i++) {
         arg0->player_standings[i].slot_type = Player_GetPlayerSlotType(i);
         if (arg0->player_standings[i].slot_type != 3) {
-            arg0->player_standings[i].character_kind =
-                Player_GetPlayerCharacter(i);
-            arg0->player_standings[i].character_id = Player_80036394(i);
+            arg0->player_standings[i].ckind = Player_GetPlayerCharacter(i);
+            arg0->player_standings[i].ftkind = Player_80036394(i);
             arg0->player_standings[i].stocks = Player_GetStocks(i);
             arg0->player_standings[i].x3 = Player_GetCostumeId(i);
             arg0->player_standings[i].x4 = Player_GetNametagSlotID(i);
@@ -3104,17 +3106,17 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     memzero(arg0, sizeof(*arg0));
 
     arg0->result = OUTCOME_TIMEOUT;
-    arg0->x5 = 0;
+    arg0->match_kind = 0;
     arg0->is_teams = 0;
 
     score0 = 0xA - arg3;
-    arg0->player_standings[0].character_kind = arg2;
+    arg0->player_standings[0].ckind = arg2;
     score1 = 0xA - arg5;
-    arg0->player_standings[1].character_kind = arg4;
+    arg0->player_standings[1].ckind = arg4;
     score2 = 0xA - arg7;
-    arg0->player_standings[2].character_kind = arg6;
+    arg0->player_standings[2].ckind = arg6;
     score3 = 0xA - arg_spC;
-    arg0->player_standings[3].character_kind = arg_sp8;
+    arg0->player_standings[3].ckind = arg_sp8;
 
     // Apply player color to all 4 players?
     for (i = 0; i < 4; i++) {
@@ -3132,7 +3134,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     for (i = 0; i < 4; i++) {
         arg0->player_standings[i].x30 += 6 - i;
-        if (arg0->player_standings[i].character_kind == CHKIND_NONE) {
+        if (arg0->player_standings[i].ckind == CHKIND_NONE) {
             arg0->player_standings[i].slot_type = 3;
         } else if (HSD_PadMasterStatus[(u8) i].err == 0) {
             arg0->player_standings[i].slot_type = 0;
@@ -3140,9 +3142,9 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
             arg0->player_standings[i].slot_type = 1;
         }
 
-        if (arg0->player_standings[i].character_kind == CKIND_SEAK) {
-            arg0->player_standings[i].character_kind = CKIND_ZELDA;
-            arg0->player_standings[i].character_id = FTKIND_SEAK;
+        if (arg0->player_standings[i].ckind == CKIND_SEAK) {
+            arg0->player_standings[i].ckind = CKIND_ZELDA;
+            arg0->player_standings[i].ftkind = FTKIND_SEAK;
         }
     }
 
@@ -3199,8 +3201,8 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     if (arg0->n_winners > 1) {
         for (i = 0; i < 6; i++) {
             if (arg0->player_standings[i].slot_type != 3) {
-                arg0->player_standings[i].character_id =
-                    arg1->player_standings[i].character_id;
+                arg0->player_standings[i].ftkind =
+                    arg1->player_standings[i].ftkind;
                 arg0->player_standings[i].xE += arg1->player_standings[i].xE;
                 if (arg0->player_standings[i].is_big_loser == 0) {
                     if (arg1->player_standings[i].slot_type == 3) {
@@ -3242,15 +3244,15 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     }
 }
 
-bool gm_80167140(MatchEnd* me)
+bool gm_MatchHasMultipleWinners(MatchEnd* end)
 {
     s32 winners;
 
-    if (me->result != OUTCOME_NO_CONTEST) {
-        if (me->is_teams == 1) {
-            winners = me->n_team_winners;
+    if (end->result != OUTCOME_NO_CONTEST) {
+        if (end->is_teams == 1) {
+            winners = end->n_team_winners;
         } else {
-            winners = fn_80167194(me);
+            winners = fn_80167194(end);
         }
         if (winners > 1) {
             return true;
@@ -3468,35 +3470,35 @@ u8 gm_801677F0(void)
     return lbl_804D6598;
 }
 
-bool gm_801677F8(int port, int arg1)
+bool gm_RumbleEnabledForPlayer(int port, int nametag)
 {
     bool result = false;
-    if (arg1 == 0x78) {
-        if (GetRumbleSettingOfPort(port) != 0) {
+    if (nametag == GM_NAMETAG_NONE) {
+        if (GetRumbleSettingOfPort(port)) {
             result = true;
         }
-    } else if (GetPersistentNameData(arg1)->rumble_toggle != 0) {
+    } else if (GetPersistentNameData(nametag)->rumble_enabled) {
         result = true;
     }
     return result;
 }
 
-void gm_80167858(int port, int arg1, int arg2, int arg3)
+void gm_80167858(int port, int nametag, int arg2, int arg3)
 {
-    if (gm_801677F8(port, arg1)) {
+    if (gm_RumbleEnabledForPlayer(port, nametag)) {
         lb_80014574(port, 3, arg2, arg3);
     }
 }
 
 void gm_801678F8(int port, int arg1, int arg2)
 {
-    gm_80167858(port, 0x78, arg1, arg2);
+    gm_80167858(port, 120, arg1, arg2);
 }
 
 void gm_8016795C(struct PlayerInitData* arg0)
 {
     memzero(arg0, sizeof(*arg0));
-    arg0->c_kind = CHKIND_NONE;
+    arg0->ckind = CHKIND_NONE;
     arg0->slot_type = Gm_PKind_NA;
     arg0->stocks = 0;
     arg0->color = 0;
@@ -3508,7 +3510,7 @@ void gm_8016795C(struct PlayerInitData* arg0)
     arg0->handicap = 9;
     arg0->team = 0;
     arg0->xC_b0 = false;
-    arg0->xA = 0x78;
+    arg0->nametag = 0x78;
     arg0->xC_b1 = true;
     arg0->xE = 4;
     arg0->cpu_level = 0;
@@ -3560,8 +3562,8 @@ void gm_80167A64(struct StartMeleeRules* arg0)
 
 void gm_80167B50(VsModeData* arg0)
 {
-    gm_80167A64(&arg0->data.rules);
-    gm_80167A14(arg0->data.players);
+    gm_80167A64(&arg0->start.rules);
+    gm_80167A14(arg0->start.players);
     arg0->loser = -1;
     arg0->ordered_stage_index = -1;
     arg0->winner = -1;
@@ -3577,84 +3579,84 @@ void gm_80167BC8(VsModeData* vs_data)
 
     rules = gmMainLib_GetGameRules();
     prefs = gmMainLib_8015CC58();
-    vs_data->data.rules.x0_6 = 0;
+    vs_data->start.rules.x0_6 = 0;
 
     switch (rules->mode) {
     case 0:
-        vs_data->data.rules.match_mode = 0;
+        vs_data->start.rules.match_kind = 0;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 1:
-        vs_data->data.rules.match_mode = 1;
+        vs_data->start.rules.match_kind = 1;
         if (rules->stock_time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->stock_time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->stock_time_limit * 60;
             break;
         }
         break;
     case 2:
-        vs_data->data.rules.match_mode = 2;
+        vs_data->start.rules.match_kind = 2;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 3:
-        vs_data->data.rules.match_mode = 3;
+        vs_data->start.rules.match_kind = 3;
         if (rules->time_limit != 0) {
-            vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.time_limit = rules->time_limit * 60;
+            vs_data->start.rules.x0_6 = 1;
+            vs_data->start.rules.time_limit = rules->time_limit * 60;
         }
         break;
     }
 
     i = 0;
     for (i = 0; i < 6; i++) {
-        vs_data->data.players[i].stocks = (s8) rules->stock_count;
+        vs_data->start.players[i].stocks = (s8) rules->stock_count;
         switch (rules->handicap) {
         case 0:
-            vs_data->data.players[i].x18 = 1.0f;
-            vs_data->data.players[i].x1C = 1.0f;
+            vs_data->start.players[i].x18 = 1.0f;
+            vs_data->start.players[i].x1C = 1.0f;
             break;
         case 1:
             handicap =
-                gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
+                gmMainLib_8015CE44(i, (s32) vs_data->start.players[i].nametag);
             if (handicap != NULL) {
-                vs_data->data.players[i].handicap = *handicap;
-                vs_data->data.players[i].x18 =
+                vs_data->start.players[i].handicap = *handicap;
+                vs_data->start.players[i].x18 =
                     lbl_803B7930[(u8) *handicap - 1].x;
-                vs_data->data.players[i].x1C =
+                vs_data->start.players[i].x1C =
                     lbl_803B7930[(u8) *handicap - 1].y;
             } else {
-                vs_data->data.players[i].handicap = 5;
-                vs_data->data.players[i].x18 = lbl_803B7930[4].x;
-                vs_data->data.players[i].x1C = lbl_803B7930[4].y;
+                vs_data->start.players[i].handicap = 5;
+                vs_data->start.players[i].x18 = lbl_803B7930[4].x;
+                vs_data->start.players[i].x1C = lbl_803B7930[4].y;
             }
             break;
         case 2:
-            vs_data->data.players[i].x18 =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].x;
-            vs_data->data.players[i].x1C =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].y;
+            vs_data->start.players[i].x18 =
+                lbl_803B7930[(u8) vs_data->start.players[i].handicap - 1].x;
+            vs_data->start.players[i].x1C =
+                lbl_803B7930[(u8) vs_data->start.players[i].handicap - 1].y;
             break;
         }
     }
 
-    vs_data->data.rules.friendly_fire = (rules->friendly_fire & 1);
-    vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
-    vs_data->data.rules.xB = (s8) prefs->item_freq;
+    vs_data->start.rules.friendly_fire = (rules->friendly_fire & 1);
+    vs_data->start.rules.x30 = 0.1f * rules->damage_ratio;
+    vs_data->start.rules.xB = (s8) prefs->item_freq;
     prefs = gmMainLib_8015CC58();
     i = 0;
     do {
         u8 item = lbl_803B7844[(u8) i];
         if ((s32) item != 0x23) {
             if (prefs->item_mask & (1LL << i)) {
-                vs_data->data.rules.x20 |= 1LL << item;
+                vs_data->start.rules.x20 |= 1LL << item;
             } else {
-                vs_data->data.rules.x20 &= ~(1LL << item);
+                vs_data->start.rules.x20 &= ~(1LL << item);
             }
         }
         i++;
@@ -3662,26 +3664,26 @@ void gm_80167BC8(VsModeData* vs_data)
 
     switch (gmMainLib_8015ED30()) {
     case 1:
-        vs_data->data.rules.xC = 0;
+        vs_data->start.rules.xC = 0;
         break;
     case 0:
-        vs_data->data.rules.xC = -1;
+        vs_data->start.rules.xC = -1;
         break;
     case 2:
-        vs_data->data.rules.xC = -2;
+        vs_data->start.rules.xC = -2;
         break;
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.disable_pausing = 0;
+        vs_data->start.rules.disable_pausing = 0;
     } else {
-        vs_data->data.rules.disable_pausing = 1;
+        vs_data->start.rules.disable_pausing = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
-        vs_data->data.rules.x3_0 = 1;
+        vs_data->start.rules.x3_0 = 1;
         return;
     }
-    vs_data->data.rules.x3_0 = 0;
+    vs_data->start.rules.x3_0 = 0;
 }
 
 static inline int pad_inline(SSSData* arg0, int base)
@@ -3690,7 +3692,7 @@ static inline int pad_inline(SSSData* arg0, int base)
     for (i = 0; i < 5; i++) {
         int j = (base + i) % 4;
         if (HSD_PadMasterStatus[(u8) j].err == 0 &&
-            arg0->data.data.players[j].slot_type == Gm_PKind_Human)
+            arg0->vs.start.players[j].slot_type == Gm_PKind_Human)
         {
             return j;
         }
@@ -3734,32 +3736,32 @@ void gm_80167FC4(SSSData* arg0)
         return;
     case 2:
         for (i = 0; i < 0x1D; i++) {
-            temp_r28 = arg0->data.ordered_stage_index + i;
+            temp_r28 = arg0->vs.ordered_stage_index + i;
             temp_r28 = (temp_r28 + 1) % 29;
             temp_r30 = mnStageSel_8025BC08(temp_r28);
             temp_r25 = gmMainLib_8015EDA4();
 
             if (is_character_unlocked(get_flag_unk(temp_r30), temp_r25)) {
                 arg0->force_stage_id = temp_r30;
-                arg0->data.ordered_stage_index = temp_r28;
+                arg0->vs.ordered_stage_index = temp_r28;
                 return;
             }
         }
         break;
     case 3:
-        arg0->data.loser = pad_inline(arg0, arg0->data.loser + 1);
-        if (arg0->data.loser < 0) {
-            arg0->data.loser = 0;
+        arg0->vs.loser = pad_inline(arg0, arg0->vs.loser + 1);
+        if (arg0->vs.loser < 0) {
+            arg0->vs.loser = 0;
             arg0->unk_stage = 0;
         } else {
-            arg0->unk_stage = arg0->data.loser + 1;
+            arg0->unk_stage = arg0->vs.loser + 1;
         }
         break;
     case 4:
-        if (arg0->data.winner == -1) {
+        if (arg0->vs.winner == -1) {
             arg0->unk_stage = pad_inline(arg0, HSD_Randi(4)) + 1;
         } else {
-            arg0->unk_stage = pad_inline(arg0, arg0->data.winner) + 1;
+            arg0->unk_stage = pad_inline(arg0, arg0->vs.winner) + 1;
         }
         break;
     }
@@ -3840,7 +3842,7 @@ s32 gm_801688AC(MatchEnd* arg0)
     u32 i;
     u32 sum = 0;
     struct MatchPlayerData* p = arg0->player_standings;
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (arg0->player_standings[i].slot_type == 0) {
             sum += arg0->player_standings[i].xE;
         }
@@ -4087,18 +4089,16 @@ void gm_80168FC4(void)
     lbAudioAx_80027648();
 }
 
-s32 fn_80169000(MatchEnd* arg0, u8* arg1)
+void fn_80169000(MatchEnd* arg0, u8* arg1)
 {
     u8 operand_pad[4];
     u8 handicaps[4];
     u8 positions[4];
-    u8* hp = handicaps;
     MatchEnd* p = arg0;
-    u8* sp = arg1;
     u8* hb = arg1;
     s32 count;
     s32 i;
-    UNUSED u8 pad[12];
+    UNUSED u8 pad[8];
 
     count = 0;
     for (i = 0; i < 4; i++) {
@@ -4106,9 +4106,19 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
             count += 1;
             positions[p->player_standings[i].is_small_loser] = i;
         }
-        *hp++ = *sp++;
+        /// @todo Matching tactic: indexing both arrays (rather than
+        /// walking `*hp++ = *sp++` through named locals) makes both copy
+        /// pointers compiler-created webs, which outrank the standings
+        /// induction variable and let the source pointer take r3.
+        handicaps[i] = arg1[i];
     }
 
+    /// @todo Matching tactic: this dead read manufactures one extra
+    /// interference edge on the long-lived `&handicaps[positions[0]]` web.
+    /// That pushes its degree at simplify-stack visit time from 28 to 29
+    /// (== K), so it is deferred a pass, coloured earlier, and takes r3
+    /// instead of r6 -- which is the whole tail register assignment.
+    (void) handicaps[positions[0]];
     if (handicaps[positions[0]] >= 2 && handicaps[positions[count - 1]] <= 8) {
         handicaps[positions[0]] -= 1;
         handicaps[positions[count - 1]] += 1;

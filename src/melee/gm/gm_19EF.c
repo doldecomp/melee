@@ -378,7 +378,7 @@ void fn_8019F9C4(u32 arg0)
     s32 i;
     f32 f;
     f32 scale;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
     arg0 = (char_idx == -1) ? 8 : arg0;
@@ -505,11 +505,18 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObjReqAnimAll(lbl_80479A98.x5C, (f32) lbl_80479A98.x6C);
     HSD_JObjReqAnimAll(lbl_80479A98.x58, (f32) lbl_80479A98.x68);
     HSD_JObjReqAnimAll(lbl_80479A98.x54, (f32) lbl_80479A98.x64);
-    for (i = 10; i > 0; i--) {
-        if (i > lbl_80479A98.x70) {
-            HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
-        } else {
-            HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
+    {
+        s32 j;
+
+        ptr = &((HSD_JObj**) &lbl_80479A98)[j = 10];
+        ptr += 10;
+
+        for (; j > 0; j--, ptr--) {
+            if (j > lbl_80479A98.x70) {
+                HSD_JObjSetFlags(*ptr, JOBJ_HIDDEN);
+            } else {
+                HSD_JObjClearFlags(*ptr, JOBJ_HIDDEN);
+            }
         }
     }
     HSD_JObjAnimAll(jobj);
@@ -610,7 +617,7 @@ void fn_8019F9C4(u32 arg0)
     }
 }
 
-void gm_801A0A10_OnEnter(void* arg0_)
+void gm_Scene_GOver_OnEnter(void* arg0_)
 {
     DebugGameOverData* arg0 = arg0_;
 
@@ -638,7 +645,7 @@ void gm_801A0A10_OnEnter(void* arg0_)
     fn_8019F9C4(arg0->ckind);
 }
 
-void gm_801A0B18_OnLeave(void* arg0_)
+void gm_Scene_GOver_OnExit(void* arg0_)
 {
     DebugGameOverData* arg0 = arg0_;
     arg0->x4 = lbl_80479A98.x8;
@@ -654,9 +661,9 @@ static void fn_801A0B60(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(jobj, lbl_804D66F8);
     HSD_JObjAnimAll(jobj);
     if (lbl_804D66F8 == 0xBD) {
-        if (((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if (((u32) gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
              PAD_BUTTON_START) ||
-            ((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_BUTTON_A))
+            ((u32) gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & PAD_BUTTON_A))
         {
             lbl_804D66F8 += 1;
         }
@@ -670,7 +677,7 @@ static void fn_801A0B60(HSD_GObj* gobj)
     }
 }
 
-void gm_801A0C6C_OnEnter(void* unused)
+void gm_Scene_ComingSoon_OnEnter(void* unused)
 {
     SceneDesc* sp10;
     HSD_GObj* temp_r30;
@@ -706,7 +713,7 @@ void gm_801A0C6C_OnEnter(void* unused)
     lb_80011E24(temp_r3, &lbl_804D66F4, 1, -1);
 }
 
-void gm_801A0E0C_OnLeave(void* unused)
+void gm_Scene_ComingSoon_OnExit(void* unused)
 {
     lbArchive_80016EFC(lbl_804D66F0);
     lbAudioAx_800236DC();

@@ -1,7 +1,7 @@
 #include "gm_1601.h"
 #include "gm_16F1.h"
 #include "gm_1A3F.h"
-#include "gm_1BA8.h"
+#include "gmevent.h"
 #include "gmmain_lib.h"
 #include "gmregclear.h"
 #include "types.h"
@@ -59,13 +59,13 @@ u8 gm_801737D8(void)
     return challenger_data.x6;
 }
 
-void gm_801737E8_OnLoad(void)
+void gm_Mode_ChallengerApproach_OnLoad(void)
 {
     challenger_data.x6 = gm_GetPreviousGameMode();
     if (challenger_data.x0 == CHKIND_NONE) {
-        gm_SetSceneIndex(2);
+        gm_SetGameModeStateId(2);
     } else {
-        gm_SetSceneIndex(0);
+        gm_SetGameModeStateId(0);
     }
 }
 

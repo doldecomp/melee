@@ -131,7 +131,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetPendingSceneIndex(3);
+        gm_SetNextGameModeStateId(3);
         gm_801A4B60();
         return;
     }
@@ -139,7 +139,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetPendingSceneIndex(4);
+    gm_SetNextGameModeStateId(4);
     gm_801A4B60();
 }
 
@@ -1589,24 +1589,31 @@ void fn_80199AF0(void)
     }
 }
 
+static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
+{
+    return &lbl_80473AB8[bracket_idx];
+}
+
 /// @todo All instructions match; only the callee-saved register assignment
 /// is permuted against the target.
 void fn_8019A158(void)
 {
     TmData* td1;
     TmData* td2;
+    BracketEntry* bracket;
     s32 mode;
-    s32 slot;
     s32 sel;
     s32 bracket_idx;
     s32 result;
     s32 counter;
     s32 i;
     int k;
-    UNUSED u8 unused[8];
-    s32 local1, local2;
     MatchEnd* me;
+    struct {
+        s32 slot;
+    } state;
     u8* cursor;
+    s32 local1, local2;
     PAD_STACK(4);
 
     td1 = gm_GetTournamentData();
@@ -1623,22 +1630,23 @@ void fn_8019A158(void)
     }
 
     me = lbl_804799D8.x48;
+    (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
-        slot = local2;
+        state.slot = local2;
     } else {
         for (i = 0; i < 4; i++) {
             if (me->player_standings[i].slot_type != 3 &&
                 me->player_standings[i].is_small_loser == 0)
             {
-                slot = i;
+                state.slot = i;
                 goto found;
             }
         }
-        slot = -1;
+        state.slot = -1;
     found:;
     }
-    sel = slot;
+    sel = state.slot;
 
     bracket_idx = fn_8018F74C();
 
@@ -1647,18 +1655,18 @@ void fn_8019A158(void)
     }
 
     if (mode == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (i == slot) {
-                bracket->slots[slot].x4C = 0;
+            if (i == state.slot) {
+                bracket->slots[state.slot].x4C = 0;
             } else {
                 cursor[0x4C] = 3;
             }
             cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (cursor[0x4E] == 3) {
@@ -1679,7 +1687,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
@@ -1758,8 +1766,6 @@ void fn_8019A158(void)
         }
     }
 }
-
-/// #fn_8019A158_end
 
 void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
@@ -1858,7 +1864,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetPendingSceneIndex(3U);
+                gm_SetNextGameModeStateId(3U);
                 gm_801A4B60();
                 return;
             }
@@ -1871,7 +1877,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetPendingSceneIndex(4U);
+            gm_SetNextGameModeStateId(4U);
             gm_801A4B60();
         }
     } else {
@@ -1971,7 +1977,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetPendingSceneIndex(3U);
+                            gm_SetNextGameModeStateId(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -1984,7 +1990,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetPendingSceneIndex(4U);
+                        gm_SetNextGameModeStateId(4U);
                         gm_801A4B60();
                     }
                 }
@@ -2145,7 +2151,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     if (lbl_804799D8.x4D != 1) {
         buttons = (u32) gm_GetButtonsTriggered(lbl_804799D8.x4C);
     } else {
-        buttons = (u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+        buttons = (u32) gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS);
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {
@@ -2198,7 +2204,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 
 /// @todo Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
-void gm_8019B2DC_OnFrame(void)
+void gm_Scene_TouBracket_OnFrame(void)
 {
     s32 sp[13];
     u32 arg1;
@@ -2382,7 +2388,7 @@ void fn_8019B458(s32* arg0)
             }
 
             {
-                PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
+                PreloadedGameModeState* scene = lbDvd_GetPreloadCacheScene();
                 struct GameCache* gc = &scene->game_cache;
                 lbDvd_800174BC();
 
@@ -2447,7 +2453,7 @@ void fn_8019B860(TmData* tm)
     tm->cur_option = 0x20;
 }
 
-void gm_8019B8C4_OnEnter(void* arg0)
+void gm_Scene_TouBracket_OnEnter(void* arg0)
 {
     lbl_804D6668 = NULL;
     lbl_804D6664 = NULL;
@@ -2472,7 +2478,7 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbAudioAx_80023F28(0x5E);
 }
 
-void gm_8019B9C8_OnLeave(void* arg0)
+void gm_Scene_TouBracket_OnExit(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6660);
     lbArchive_80016EFC(lbl_804D6638);

@@ -409,7 +409,7 @@ bool gm_801AA774(s16 arg0)
     return Toy_803048C0(0x107) || Toy_803048C0(0x108);
 }
 
-void gm_801AA7C4_OnFrame(void)
+void gm_Scene_StaffRoll_OnFrame(void)
 {
     if (gm_804D6814 >= 0x134D) {
         lbAudioAx_80028B90();
@@ -516,7 +516,6 @@ void fn_801AAB18(HSD_GObj* gobj)
 void fn_801AAB74(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    StaffEntryData* entry_data;
     int name_page_jp;
     int name_page_en;
     int title_page;
@@ -538,7 +537,6 @@ void fn_801AAB74(HSD_GObj* gobj)
     entry_idx = staff_idx = 0;
     child = jobj->child;
     gm_804D6800 = 0;
-    entry_data = gm_803DBFD8;
     {
         int temp = entry_idx * 15;
         name_page_jp = temp + 3;
@@ -551,8 +549,9 @@ void fn_801AAB74(HSD_GObj* gobj)
 
         if (!(HSD_JObjGetFlags(leaf) & 0x10) &&
             staffInfo[staff_idx].win[0] == NULL &&
-            (entry_data->has_check == 0 ||
-             entry_data->check(entry_data->check_arg) != 0 ||
+            (gm_803DBFD8[staff_idx].has_check == 0 ||
+             gm_803DBFD8[staff_idx].check(gm_803DBFD8[staff_idx].check_arg) !=
+                 0 ||
              entry_idx == 0xC5) &&
             (entry_idx != 0x5E || lbLang_IsSavedLanguageJP() != 0))
         {
@@ -574,15 +573,16 @@ void fn_801AAB74(HSD_GObj* gobj)
                 text->font_size.y = 0.209f;
             }
 
-            if (entry_data->has_check != 0 &&
-                entry_data->check(entry_data->check_arg) == 0)
+            if (gm_803DBFD8[staff_idx].has_check != 0 &&
+                gm_803DBFD8[staff_idx].check(
+                    gm_803DBFD8[staff_idx].check_arg) == 0)
             {
                 if (lbLang_IsSavedLanguageJP() != 0) {
                     HSD_SisLib_803A6368(staffInfo[staff_idx].win[0],
-                                        entry_data->alt_page);
+                                        gm_803DBFD8[staff_idx].alt_page);
                 } else {
                     HSD_SisLib_803A6368(staffInfo[staff_idx].win[0],
-                                        entry_data->alt_page + 1);
+                                        gm_803DBFD8[staff_idx].alt_page + 1);
                 }
             } else if ((entry_idx != 0xB7 && entry_idx != 0xC1 &&
                         entry_idx != 0xC3 &&
@@ -607,8 +607,9 @@ void fn_801AAB74(HSD_GObj* gobj)
                 text->font_size.y = 0.1f;
             }
 
-            if (entry_data->has_check == 0 ||
-                entry_data->check(entry_data->check_arg) != 0)
+            if (gm_803DBFD8[staff_idx].has_check == 0 ||
+                gm_803DBFD8[staff_idx].check(
+                    gm_803DBFD8[staff_idx].check_arg) != 0)
             {
                 HSD_SisLib_803A6368(staffInfo[staff_idx].win[1], title_page);
             }
@@ -627,8 +628,9 @@ void fn_801AAB74(HSD_GObj* gobj)
         }
 
         if (!(HSD_JObjGetFlags(leaf) & 0x10) &&
-            (entry_data->has_check == 0 ||
-             entry_data->check(entry_data->check_arg) != 0 ||
+            (gm_803DBFD8[staff_idx].has_check == 0 ||
+             gm_803DBFD8[staff_idx].check(gm_803DBFD8[staff_idx].check_arg) !=
+                 0 ||
              entry_idx == 0xC5) &&
             (entry_idx != 0x5E || lbLang_IsSavedLanguageJP() != 0))
         {
@@ -640,7 +642,6 @@ void fn_801AAB74(HSD_GObj* gobj)
 
         child = child->next;
         staff_idx++;
-        entry_data++;
         name_page_jp += 15;
         name_page_en += 15;
         title_page += 15;
@@ -1235,7 +1236,7 @@ void fn_801AC67C(HSD_GObj* gobj)
     }
 }
 
-void gm_801AC6D8_OnEnter(void* unused)
+void gm_Scene_StaffRoll_OnEnter(void* unused)
 {
     HSD_JObj* jobj_arr[2];
     HSD_CObj* cobj;
@@ -1372,4 +1373,4 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
 }
 
-void gm_801ACC90_OnLeave(void* unused) {}
+void gm_Scene_StaffRoll_OnExit(void* unused) {}

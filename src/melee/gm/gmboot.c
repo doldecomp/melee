@@ -9,9 +9,9 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/ty/toy.h>
 
-/* 1BF948 */ static void bootOnLoad(GameScene*);
-/* 1BF9A8 */ static void bootOnLeave(GameScene*);
-/* 1BFA3C */ static void memcardOnLoad(GameScene*);
+/* 1BF948 */ static void bootOnLoad(GameModeState*);
+/* 1BF9A8 */ static void bootOnLeave(GameModeState*);
+/* 1BFA3C */ static void memcardOnLoad(GameModeState*);
 
 /// @todo Move to toy header
 enum {
@@ -32,7 +32,7 @@ struct leaveData {
 static struct loadData load_data;
 static struct leaveData leave_data;
 
-GameScene gmBoot_BootScenes[] = {
+GameModeState gm_Mode_Boot_States[] = {
     {
         0,
         1,
@@ -48,9 +48,9 @@ GameScene gmBoot_BootScenes[] = {
     },
 };
 
-void bootOnLoad(GameScene* scene)
+void bootOnLoad(GameModeState* scene)
 {
-    struct loadData* scene_data = gm_GetGameSceneLoadData(scene);
+    struct loadData* scene_data = gm_GetGameModeStateEnterData(scene);
     scene_data->x4 = 0;
     scene_data->x0 = 0;
     if (gmMainLib_8046B0F0.skip_intro == true) {
@@ -61,9 +61,9 @@ void bootOnLoad(GameScene* scene)
     }
 }
 
-void bootOnLeave(GameScene* data)
+void bootOnLeave(GameModeState* data)
 {
-    struct leaveData* scene_data = gm_GetGameSceneLeaveData(data);
+    struct leaveData* scene_data = gm_GetGameModeStateExitData(data);
 
     if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",
@@ -83,7 +83,7 @@ void bootOnLeave(GameScene* data)
     gm_ChangeGameModeAfterCurrentScene(scene_data->mode_id);
 }
 
-GameScene gmBoot_MemCardScenes[] = {
+GameModeState gm_Mode_MemCard_States[] = {
     {
         0,
         3,
@@ -99,9 +99,9 @@ GameScene gmBoot_MemCardScenes[] = {
     { -1 },
 };
 
-void memcardOnLoad(GameScene* scene)
+void memcardOnLoad(GameModeState* scene)
 {
-    struct loadData* temp_r3 = gm_GetGameSceneLoadData(scene);
+    struct loadData* temp_r3 = gm_GetGameModeStateEnterData(scene);
     temp_r3->x4 = 0;
     temp_r3->x0 = 1;
 }

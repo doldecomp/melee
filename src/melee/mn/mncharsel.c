@@ -815,7 +815,7 @@ void mnCharSel_8025D1C4(int port, int mode)
             u8* buf = &data2.ko_stars[port].joint2;
             sis_buf = buf;
         }
-        star_count = css->ko_star_counts[port];
+        star_count = css->ko_counts[port];
         star_x = data2.ko_stars[port].x4;
         text = stars->text;
 
@@ -1192,9 +1192,9 @@ static inline s32 getHandicapValue(int port)
     s32 hval;
     if (gmMainLib_GetGameRules()->handicap == 1) {
         hval = (u8) gm_801685D4(
-            port, mnCharSel_804D6CB0->data.data.players[port].xA);
+            port, mnCharSel_804D6CB0->vs.start.players[port].nametag);
     } else {
-        hval = (u8) mnCharSel_804D6CB0->data.data.players[port].handicap;
+        hval = (u8) mnCharSel_804D6CB0->vs.start.players[port].handicap;
     }
     return hval != 0 ? hval : 1;
 }
@@ -1333,7 +1333,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     }
 
                     anim_frame =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
+                        (f32) mnCharSel_804D6CB0->vs.start.players[arg0]
                             .cpu_level;
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
                     animateJointPadded(mnCharSel_804D6CC0, joint, TOBJ_MASK,
@@ -1359,12 +1359,12 @@ void mnCharSel_8025DB34(u8 arg0)
                         if (gmMainLib_GetGameRules()->handicap == 1) {
                             hval = (u8) gm_801685D4(
                                 port,
-                                mnCharSel_804D6CB0->data.data.players[port]
-                                    .xA);
+                                mnCharSel_804D6CB0->vs.start.players[port]
+                                    .nametag);
                         } else {
-                            hval = (u8) mnCharSel_804D6CB0->data.data
-                                       .players[port]
-                                       .handicap;
+                            hval =
+                                (u8) mnCharSel_804D6CB0->vs.start.players[port]
+                                    .handicap;
                         }
                         anim_frame = (f32) (hval != 0 ? hval : 1);
                     }
@@ -1376,7 +1376,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_JObjSetTranslateX(sp90, anim_frame);
 
                     anim_frame =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
+                        (f32) mnCharSel_804D6CB0->vs.start.players[arg0]
                             .cpu_level;
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint;
                     animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
@@ -1389,7 +1389,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     }
 
                     anim_frame =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
+                        (f32) mnCharSel_804D6CB0->vs.start.players[arg0]
                             .cpu_level;
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
                     animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
@@ -1420,12 +1420,12 @@ void mnCharSel_8025DB34(u8 arg0)
                         if (gmMainLib_GetGameRules()->handicap == 1) {
                             hval = (u8) gm_801685D4(
                                 port,
-                                mnCharSel_804D6CB0->data.data.players[port]
-                                    .xA);
+                                mnCharSel_804D6CB0->vs.start.players[port]
+                                    .nametag);
                         } else {
-                            hval = (u8) mnCharSel_804D6CB0->data.data
-                                       .players[port]
-                                       .handicap;
+                            hval =
+                                (u8) mnCharSel_804D6CB0->vs.start.players[port]
+                                    .handicap;
                         }
                         anim_frame = (f32) (hval != 0 ? hval : 1);
                     }
@@ -1437,7 +1437,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_JObjSetTranslateX(sp90, anim_frame);
 
                     anim_frame =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
+                        (f32) mnCharSel_804D6CB0->vs.start.players[arg0]
                             .cpu_level;
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint;
                     animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
@@ -1455,7 +1455,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     }
 
                     anim_frame =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
+                        (f32) mnCharSel_804D6CB0->vs.start.players[arg0]
                             .cpu_level;
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
                     animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
@@ -1481,7 +1481,7 @@ void mnCharSel_8025DB34(u8 arg0)
         /* Team / color */
         lb_80011E24(mnCharSel_804D6CC0, &sp90,
                     mnCharSel_803F0DFC.doors[arg0].team_joint, -1);
-        if (mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+        if (mnCharSel_804D6CB0->vs.start.rules.is_teams == 0) {
             /* FFA mode */
             s32 port_color_idx;
             HSD_JObjSetFlags(sp90, JOBJ_HIDDEN);
@@ -1518,7 +1518,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 animateJointLeadingPad(mnCharSel_804D6CC0, joint, MOBJ_MASK,
                                        anim_frame);
             }
-            mnCharSel_804D6CB0->data.data.players[arg0].team =
+            mnCharSel_804D6CB0->vs.start.players[arg0].team =
                 mnCharSel_803F0DFC.doors[arg0].team;
         }
 
@@ -1538,7 +1538,7 @@ void mnCharSel_8025DB34(u8 arg0)
         u8 final_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
         if (final_icon < 0x19U) {
             if (mnCharSel_804D6CF5 == 1 ||
-                mnCharSel_804D6CB0->data.data.rules.is_teams == 0)
+                mnCharSel_804D6CB0->vs.start.rules.is_teams == 0)
             {
                 color = mnCharSel_803F0DFC.doors[arg0].costume;
             } else {
@@ -1566,7 +1566,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 } else {
                     port = arg0;
                 }
-                mnCharSel_804D6CB0->data.data.players[port].color = color;
+                mnCharSel_804D6CB0->vs.start.players[port].color = color;
             }
             hud_idx += color * 0x1E;
             mnCharSel_8025D5AC((int) arg0, hud_idx, 0);
@@ -1602,7 +1602,7 @@ void mnCharSel_8025EE8C(u8 idx)
             mnCharSel_8025DB34(1);
         }
     } else {
-        if (mnCharSel_804D6CB0->data.data.rules.is_teams) {
+        if (mnCharSel_804D6CB0->vs.start.rules.is_teams) {
             mode_frame = mnCharSel_803F0A48.mode_info[idx].mode_teams_frame;
             cc0 = mnCharSel_804D6CC0;
             lb_80011E24(cc0, &sp10, 0x24, -1);
@@ -1791,10 +1791,10 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         rules = gmMainLib_GetGameRules();
                         if (rules->handicap == 1) {
                             val = (u8) gm_801685D4(
-                                (u8) i,
-                                mnCharSel_804D6CB0->data.data.players[i].xA);
+                                (u8) i, mnCharSel_804D6CB0->vs.start.players[i]
+                                            .nametag);
                         } else {
-                            val = (u8) mnCharSel_804D6CB0->data.data.players[i]
+                            val = (u8) mnCharSel_804D6CB0->vs.start.players[i]
                                       .handicap;
                         }
                         /* switch forces MWCC beq/b double-branch (not bne) */
@@ -1821,7 +1821,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         {
                             u8 cpuslider2_joint = doors->cpuslider2_joint;
                             fval =
-                                (f32) mnCharSel_804D6CB0->data.data.players[i]
+                                (f32) mnCharSel_804D6CB0->vs.start.players[i]
                                     .cpu_level;
                             lb_80011E24(mnCharSel_804D6CC0, &sp38,
                                         cpuslider2_joint, -1);
@@ -1862,7 +1862,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         {
                             u8 cpuslider_joint = doors->cpuslider_joint;
                             fval =
-                                (f32) mnCharSel_804D6CB0->data.data.players[i]
+                                (f32) mnCharSel_804D6CB0->vs.start.players[i]
                                     .cpu_level;
                             lb_80011E24(mnCharSel_804D6CC0, &sp2C,
                                         cpuslider_joint, -1);
@@ -2044,7 +2044,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         icon_offset = getIconOffset(icon_idx);
     } while (icons[icon_idx].state == 0);
 
-    mnCharSel_804D6CB0->data.data.players[getPlayerForDoor(door)].c_kind =
+    mnCharSel_804D6CB0->vs.start.players[getPlayerForDoor(door)].ckind =
         (&icons[0].char_kind)[icon_offset];
 
     mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
@@ -2113,7 +2113,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     }
 
     css = mnCharSel_804D6CB0;
-    c_kind = css->data.data.players[player].c_kind;
+    c_kind = css->vs.start.players[player].ckind;
 
     if (c_kind < CKIND_PLAYABLE_COUNT) {
         if (c_kind !=
@@ -2125,7 +2125,7 @@ s32 mnCharSel_8025FDEC(u8 door)
         {
             CSSIcon* icon = all_data->icons;
             for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
-                if (css->data.data.players[player].c_kind ==
+                if (css->vs.start.players[player].ckind ==
                     icon[icon_idx].char_kind)
                 {
                     break;
@@ -2254,7 +2254,7 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
         s32 color_idx;
         if (mnCharSel_804D6CF5 == 1) {
             color_idx = mnCharSel_804D6CF0;
-        } else if (mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+        } else if (mnCharSel_804D6CB0->vs.start.rules.is_teams == 0) {
             color_idx = cursor->x4;
         } else {
             color_idx =
@@ -2336,14 +2336,14 @@ static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
     }
 
     if (is_handicap) {
-        mnCharSel_804D6CB0->data.data.players[door_idx].handicap =
+        mnCharSel_804D6CB0->vs.start.players[door_idx].handicap =
             (s32) ((0.8f * pos->x) + 0.5f) + 1;
         anim_frame =
-            (u8) mnCharSel_804D6CB0->data.data.players[door_idx].handicap;
+            (u8) mnCharSel_804D6CB0->vs.start.players[door_idx].handicap;
     } else {
-        mnCharSel_804D6CB0->data.data.players[door_idx].cpu_level =
+        mnCharSel_804D6CB0->vs.start.players[door_idx].cpu_level =
             (s32) ((0.8f * pos->x) + 0.5f) + 1;
-        anim_frame = mnCharSel_804D6CB0->data.data.players[door_idx].cpu_level;
+        anim_frame = mnCharSel_804D6CB0->vs.start.players[door_idx].cpu_level;
     }
 
     {
@@ -2378,7 +2378,7 @@ static inline void cycleTeam(struct CSSCursorData* cursor, CSSDoor* dp, s32 di)
         if (cy5 < -0.9999999046325683 && cy5 > -5.800000095367432) {
             cursor->x10 = -3.4f;
             dp->team = (u8) ((dp->team + 1) % 3);
-            mnCharSel_804D6CB0->data.data.players[di].team = dp->team;
+            mnCharSel_804D6CB0->vs.start.players[di].team = dp->team;
             mnCharSel_8025DB34((u8) di);
             sfxMove();
         }
@@ -2475,10 +2475,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     }
                     if (all_data->doors_data.doors[cursor->x4].p_kind == 0) {
                         all_data->doors_data.doors[cursor->x4].p_kind = 1;
-                        mnCharSel_804D6CB0->data.data.players[cursor->x4]
+                        mnCharSel_804D6CB0->vs.start.players[cursor->x4]
                             .slot_type = 1;
-                        mnCharSel_804D6CB0->data.data.players[cursor->x4].xA =
-                            0x78;
+                        mnCharSel_804D6CB0->vs.start.players[cursor->x4]
+                            .nametag = 0x78;
                         all_data->tags[cursor->x4].data->use_tag = 0;
                     }
                     mnCharSel_8025DB34(cursor->x4);
@@ -2596,9 +2596,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     } else {
                                         player_idx = door;
                                     }
-                                    mnCharSel_804D6CB0->data.data
+                                    mnCharSel_804D6CB0->vs.start
                                         .players[player_idx]
-                                        .c_kind = CHKIND_NONE;
+                                        .ckind = CHKIND_NONE;
                                 }
                             }
                             mnCharSel_8025DB34(door);
@@ -2669,9 +2669,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             } else {
                                                 player_idx = door;
                                             }
-                                            mnCharSel_804D6CB0->data.data
+                                            mnCharSel_804D6CB0->vs.start
                                                 .players[player_idx]
-                                                .c_kind =
+                                                .ckind =
                                                 (s8) icons[all_data->doors_data
                                                                .doors[door]
                                                                .sel_icon]
@@ -2790,7 +2790,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     data2.stocks = (u8) (data2.stocks - 1);
                                     updateStockIcons(&data2, &sp54, 1);
-                                    mnCharSel_804D6CB0->data.data
+                                    mnCharSel_804D6CB0->vs.start
                                         .players[mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
@@ -2803,7 +2803,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     data2.stocks = (u8) (data2.stocks + 1);
                                     updateStockIcons(&data2, &sp50, 1);
-                                    mnCharSel_804D6CB0->data.data
+                                    mnCharSel_804D6CB0->vs.start
                                         .players[mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
@@ -2838,7 +2838,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         {
                                             *level = (u8) (current_level - 1);
                                             all_data->misc.scroll_flag = 1;
-                                            mnCharSel_804D6CB0->data.data
+                                            mnCharSel_804D6CB0->vs.start
                                                 .players
                                                     [(s8) (u8)
                                                          mnCharSel_804D6CF0]
@@ -2864,7 +2864,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         {
                                             *level = (u8) (current_level + 1);
                                             all_data->misc.scroll_flag = 1;
-                                            mnCharSel_804D6CB0->data.data
+                                            mnCharSel_804D6CB0->vs.start
                                                 .players
                                                     [(s8) (u8)
                                                          mnCharSel_804D6CF0]
@@ -2928,11 +2928,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         if (trigger & HSD_PAD_A) {
                             sfxMove();
                             {
-                                u8* is_teams = &mnCharSel_804D6CB0->data.data
+                                u8* is_teams = &mnCharSel_804D6CB0->vs.start
                                                     .rules.is_teams;
                                 *is_teams = (*is_teams + 1) & 1;
                             }
-                            if (mnCharSel_804D6CB0->data.data.rules.is_teams ==
+                            if (mnCharSel_804D6CB0->vs.start.rules.is_teams ==
                                 0)
                             {
                                 int k;
@@ -2973,7 +2973,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                 try_costume_change: {
                     u8 cport2 = cursor->x4;
                     if (mnCharSel_804A0BD0[cport2]->x5 == 0 &&
-                        mnCharSel_804D6CB0->data.data.rules.is_teams == 0 &&
+                        mnCharSel_804D6CB0->vs.start.rules.is_teams == 0 &&
                         all_data->doors_data.doors[cport2].p_kind != 3)
                     {
                         mnCharSel_CostumeChange((s32) cport2, trigger);
@@ -3050,7 +3050,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     break;
                                                 }
                                             }
-                                            mnCharSel_804D6CB0->data.data
+                                            mnCharSel_804D6CB0->vs.start
                                                 .players[door]
                                                 .slot_type =
                                                 mnCharSel_803F0DFC.doors[door]
@@ -3058,9 +3058,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             if (mnCharSel_803F0DFC.doors[door]
                                                     .p_kind == 1)
                                             {
-                                                mnCharSel_804D6CB0->data.data
+                                                mnCharSel_804D6CB0->vs.start
                                                     .players[door]
-                                                    .xA = 0x78;
+                                                    .nametag = 0x78;
                                                 mnCharSel_803F0E8C[door]
                                                     .data->use_tag = 0;
                                                 if (mnCharSel_803F0DFC
@@ -3080,7 +3080,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     }
                                 }
 
-                                if (mnCharSel_804D6CB0->data.data.rules
+                                if (mnCharSel_804D6CB0->vs.start.rules
                                             .is_teams == 1 &&
                                     mnCharSel_803F0DFC.doors[door].p_kind != 3)
                                 {
@@ -3325,7 +3325,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     all_data->doors_data.doors[cport6].p_kind =
                                         0;
-                                    mnCharSel_804D6CB0->data.data
+                                    mnCharSel_804D6CB0->vs.start
                                         .players[cursor->x4]
                                         .slot_type = 0;
                                     mnCharSel_8025DB34(cursor->x4);
@@ -3435,7 +3435,7 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if (carrier.css->data.data.rules.is_teams == 0) {
+        } else if (carrier.css->vs.start.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {
@@ -3675,7 +3675,7 @@ void fn_80262F44(HSD_GObj* gobj)
         }
 
         if (valid_count >= 2) {
-            if (mnCharSel_804D6CB0->data.data.rules.is_teams == 1) {
+            if (mnCharSel_804D6CB0->vs.start.rules.is_teams == 1) {
                 for (i = 0; i < (s32) (mnCharSel_804D6CF5 - 1); i++) {
                     s32 j;
                     if (mnCharSel_803F0DFC.doors[i].p_kind == 3) {
@@ -3741,19 +3741,20 @@ void fn_80262F44(HSD_GObj* gobj)
                 mnCharSel_804D6CF6 = 1;
                 mnCharSel_804D6CF2 = 0xFF;
                 if (mnCharSel_804D6CF5 == 1) {
-                    if (gm_801677F8(mnCharSel_804D6CF0,
-                                    mnCharSel_804D6CB0->data.data
-                                        .players[mnCharSel_804D6CF0]
-                                        .xA))
+                    if (gm_RumbleEnabledForPlayer(
+                            mnCharSel_804D6CF0,
+                            mnCharSel_804D6CB0->vs.start
+                                .players[mnCharSel_804D6CF0]
+                                .nametag))
                     {
                         lb_80014574(mnCharSel_804D6CF0, 0, 0xB, 0x1E);
                     }
                 } else {
                     for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                         if (mnCharSel_803F0DFC.doors[i].p_kind == 0 &&
-                            gm_801677F8(
-                                i,
-                                mnCharSel_804D6CB0->data.data.players[i].xA))
+                            gm_RumbleEnabledForPlayer(
+                                i, mnCharSel_804D6CB0->vs.start.players[i]
+                                       .nametag))
                         {
                             lb_80014574(i, 0, 0xB, 0x1E);
                         }
@@ -3973,8 +3974,8 @@ void fn_802633B0(HSD_GObj* gobj)
                         s32 p2;
                         for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
                             if (p2 != (s32) tag->port &&
-                                (s32) mnCharSel_804D6CB0->data.data.players[p2]
-                                        .xA == row_idx)
+                                (s32) mnCharSel_804D6CB0->vs.start.players[p2]
+                                        .nametag == row_idx)
                             {
                                 used_row_color = gray;
                                 HSD_SisLib_803A74F0(tag->name_ls, j + 2,
@@ -4024,7 +4025,8 @@ void fn_802633B0(HSD_GObj* gobj)
                     tag->text->hidden = 1;
                 }
                 {
-                    if (mnCharSel_804D6CB0->data.data.players[port].xA != 0x78)
+                    if (mnCharSel_804D6CB0->vs.start.players[port].nametag !=
+                        0x78)
                     {
                         match_type = mnCharSel_804D6CB0->match_type;
                         if ((s32) match_type < 3) {
@@ -4041,11 +4043,11 @@ void fn_802633B0(HSD_GObj* gobj)
                             val = 0;
                         }
                         if (val != 0) {
-                            mnCharSel_804D6CB0->ko_star_counts[tag->port] = 0;
+                            mnCharSel_804D6CB0->ko_counts[tag->port] = 0;
                         }
                     }
                 }
-                mnCharSel_804D6CB0->data.data.players[port].xA = 0x78;
+                mnCharSel_804D6CB0->vs.start.players[port].nametag = 0x78;
                 tag->use_tag = 0;
                 tag->state = 4;
                 sfxMove();
@@ -4081,8 +4083,8 @@ void fn_802633B0(HSD_GObj* gobj)
                     s32 p;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
                         if (p != (s32) port &&
-                            (s32) mnCharSel_804D6CB0->data.data.players[p]
-                                    .xA == (s32) (row - 1))
+                            (s32) mnCharSel_804D6CB0->vs.start.players[p]
+                                    .nametag == (s32) (row - 1))
                         {
                             goto check_cancel;
                         }
@@ -4093,9 +4095,9 @@ void fn_802633B0(HSD_GObj* gobj)
                         tag->text->default_kerning = 0;
                         tag->text->hidden = 0;
                         {
-                            if ((s32) mnCharSel_804D6CB0->data.data
+                            if ((s32) mnCharSel_804D6CB0->vs.start
                                     .players[port]
-                                    .xA != (s32) (row - 1))
+                                    .nametag != (s32) (row - 1))
                             {
                                 match_type = mnCharSel_804D6CB0->match_type;
                                 if ((s32) match_type < 3) {
@@ -4112,12 +4114,12 @@ void fn_802633B0(HSD_GObj* gobj)
                                     val = 0;
                                 }
                                 if (val != 0) {
-                                    mnCharSel_804D6CB0
-                                        ->ko_star_counts[tag->port] = 0;
+                                    mnCharSel_804D6CB0->ko_counts[tag->port] =
+                                        0;
                                 }
                             }
                         }
-                        mnCharSel_804D6CB0->data.data.players[port].xA =
+                        mnCharSel_804D6CB0->vs.start.players[port].nametag =
                             row - 1;
                         tag->use_tag = 1;
                         tag->state = 4;
@@ -4288,7 +4290,7 @@ s32 mnCharSel_802640A0(void)
     if ((u8) mnCharSel_804D6CF4 != 0) {
         mnCharSel_804D6CF4 = 0;
         for (i = 0; i < num_players; i++) {
-            mnCharSel_804D6CB0->data.data.players[i].handicap = 9;
+            mnCharSel_804D6CB0->vs.start.players[i].handicap = 9;
         }
     }
 
@@ -4445,7 +4447,7 @@ s32 mnCharSel_802640A0(void)
         HSD_JObjReqAnimAll(mnCharSel_804D6CC4, 0.0f);
         HSD_ForeachAnim(mnCharSel_804D6CC4, JOBJ_TYPE, ALL_TYPE_MASK,
                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
-        ck = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].c_kind;
+        ck = mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].ckind;
         if ((s8) ck >= CKIND_PLAYABLE_COUNT || gm_IsCKindUnlocked(ck) == 0) {
             u8* char_kinds;
             s32 icon_off;
@@ -4454,9 +4456,9 @@ s32 mnCharSel_802640A0(void)
             } while (icons[i].state == 0);
             char_kinds = &icons[0].char_kind;
             icon_off = getIconOffset(i);
-            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].c_kind =
+            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].ckind =
                 char_kinds[icon_off];
-            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color =
+            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].color =
                 HSD_Randi((s32) gm_80169238(char_kinds[icon_off]));
         }
     }
@@ -4535,20 +4537,20 @@ s32 mnCharSel_802640A0(void)
                     player = i;
                 }
                 for (found = 0; found < 0x19; found++) {
-                    if (mnCharSel_804D6CB0->data.data.players[player].c_kind ==
+                    if (mnCharSel_804D6CB0->vs.start.players[player].ckind ==
                             icons[found].char_kind &&
                         gm_IsCKindUnlocked(
-                            mnCharSel_804D6CB0->data.data.players[player]
-                                .c_kind) != 0)
+                            mnCharSel_804D6CB0->vs.start.players[player]
+                                .ckind) != 0)
                     {
                         break;
                     }
                 }
                 if (found >= 0x19) {
                     u8* slot_type;
-                    mnCharSel_804D6CB0->data.data.players[player].c_kind =
+                    mnCharSel_804D6CB0->vs.start.players[player].ckind =
                         CKIND_PLAYABLE_COUNT;
-                    slot_type = &mnCharSel_804D6CB0->data.data.players[player]
+                    slot_type = &mnCharSel_804D6CB0->vs.start.players[player]
                                      .slot_type;
                     if (*slot_type == 1) {
                         *slot_type = 3;
@@ -4741,9 +4743,9 @@ s32 mnCharSel_802640A0(void)
                 clear = 0;
             }
             if (clear != 0) {
-                mnCharSel_804D6CB0->ko_star_counts[player] = 0;
+                mnCharSel_804D6CB0->ko_counts[player] = 0;
             }
-            mnCharSel_804D6CB0->data.data.players[player].xA =
+            mnCharSel_804D6CB0->vs.start.players[player].nametag =
                 mnCharSel_804D6CF8 - 1;
             mnCharSel_804D6CF8 = td->next_tag;
         }
@@ -4754,7 +4756,8 @@ s32 mnCharSel_802640A0(void)
             td->use_tag = 1;
             HSD_SisLib_803A70A0(
                 td->text, 0,
-                GetNameText(mnCharSel_804D6CB0->data.data.players[player].xA));
+                GetNameText(
+                    mnCharSel_804D6CB0->vs.start.players[player].nametag));
             td->text->default_kerning = 0;
         }
     }
@@ -4771,7 +4774,7 @@ s32 mnCharSel_802640A0(void)
             spD4 = mnCharSel_804DC594;
             {
                 u8 cpu_level =
-                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                    mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
                         .cpu_level;
                 mnCharSel_803F0EBC.cpu_level_shown = cpu_level;
                 mnCharSel_803F0EBC.cpu_level = cpu_level;
@@ -4837,10 +4840,10 @@ s32 mnCharSel_802640A0(void)
                     UNUSED u8 unk74[0x20];
                     HSD_JObj* sp70;
                     data2.stocks =
-                        css->data.data.players[mnCharSel_804D6CF0].stocks;
+                        css->vs.start.players[mnCharSel_804D6CF0].stocks;
                     updateStockIcons(&data2, &sp70, 1);
                     num_players = data2.stocks;
-                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                    mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
                         .stocks = data2.stocks;
                 }
             }
@@ -5215,27 +5218,26 @@ s32 mnCharSel_802640A0(void)
 
     mnCharSel_804D6CF7 = 0;
     if (mnCharSel_804D6CF5 == 1) {
-        mnCharSel_804D6CB0->data.data.players[3].slot_type = 3;
-        mnCharSel_804D6CB0->data.data.players[2].slot_type = 3;
-        mnCharSel_804D6CB0->data.data.players[1].slot_type = 3;
-        mnCharSel_804D6CB0->data.data.players[0].slot_type = 3;
-        mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type =
-            0;
+        mnCharSel_804D6CB0->vs.start.players[3].slot_type = 3;
+        mnCharSel_804D6CB0->vs.start.players[2].slot_type = 3;
+        mnCharSel_804D6CB0->vs.start.players[1].slot_type = 3;
+        mnCharSel_804D6CB0->vs.start.players[0].slot_type = 3;
+        mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0].slot_type = 0;
         mnCharSel_803F0DFC.doors[0].p_kind = 0;
         {
             CSSData* css = mnCharSel_804D6CB0;
             mnCharSel_803F0DFC.doors[0].costume =
-                css->data.data.players[mnCharSel_804D6CF0].color;
+                css->vs.start.players[mnCharSel_804D6CF0].color;
             mnCharSel_803F0DFC.doors[0].sel_icon_prev =
                 mnCharSel_803F0DFC.doors[0].sel_icon;
             if (css->match_type != 0x17) {
                 goto doors_done;
             }
-            css->data.data.players[mnCharSel_804D6CF1].slot_type = 1;
+            css->vs.start.players[mnCharSel_804D6CF1].slot_type = 1;
         }
         mnCharSel_803F0DFC.doors[1].p_kind = 1;
         mnCharSel_803F0DFC.doors[1].costume =
-            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color;
+            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].color;
         mnCharSel_803F0DFC.doors[1].sel_icon_prev =
             mnCharSel_803F0DFC.doors[1].sel_icon;
     doors_done:;
@@ -5243,9 +5245,9 @@ s32 mnCharSel_802640A0(void)
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
             GameRules* rules;
             mnCharSel_803F0DFC.doors[i].p_kind =
-                mnCharSel_804D6CB0->data.data.players[i].slot_type;
+                mnCharSel_804D6CB0->vs.start.players[i].slot_type;
             mnCharSel_803F0DFC.doors[i].costume =
-                mnCharSel_804D6CB0->data.data.players[i].color;
+                mnCharSel_804D6CB0->vs.start.players[i].color;
             mnCharSel_803F0DFC.doors[i].p_kind_prev = 3;
             mnCharSel_803F0DFC.doors[i].slideranim_timer = 0;
             mnCharSel_803F0DFC.doors[i].dooranim_timer = 0;
@@ -5260,10 +5262,11 @@ s32 mnCharSel_802640A0(void)
                             mnCharSel_803F0DFC.doors[i].cpuslider_joint, -1);
                 if (gmMainLib_GetGameRules()->handicap == 1) {
                     hval = (u8) gm_801685D4(
-                        (u8) i, mnCharSel_804D6CB0->data.data.players[i].xA);
+                        (u8) i,
+                        mnCharSel_804D6CB0->vs.start.players[i].nametag);
                 } else {
                     hval =
-                        (u8) mnCharSel_804D6CB0->data.data.players[i].handicap;
+                        (u8) mnCharSel_804D6CB0->vs.start.players[i].handicap;
                 }
                 /* switch forces MWCC beq/b double-branch (not bne) */
                 switch (hval) {
@@ -5282,7 +5285,7 @@ s32 mnCharSel_802640A0(void)
             }
             {
                 u8* cpu_level =
-                    &mnCharSel_804D6CB0->data.data.players[i].cpu_level;
+                    &mnCharSel_804D6CB0->vs.start.players[i].cpu_level;
                 if (*cpu_level == 0) {
                     *cpu_level = 1;
                 }
@@ -5290,7 +5293,7 @@ s32 mnCharSel_802640A0(void)
             HSD_JObjSetTranslateX(
                 sp108,
                 1.25f *
-                    (f32) (mnCharSel_804D6CB0->data.data.players[i].cpu_level -
+                    (f32) (mnCharSel_804D6CB0->vs.start.players[i].cpu_level -
                            1));
         }
     }
@@ -5303,7 +5306,7 @@ s32 mnCharSel_802640A0(void)
 #undef MODELS
 #undef ANIM
 
-void mnCharSel_8026688C_OnEnter(void* arg0)
+void mnCharSel_Scene_OnEnter(void* arg0)
 {
     PAD_STACK(8);
 
@@ -5352,7 +5355,7 @@ void mnCharSel_8026688C_OnEnter(void* arg0)
     mnCharSel_802640A0();
 }
 
-void mnCharSel_802669F4_OnFrame(void)
+void mnCharSel_Scene_OnFrame(void)
 {
     int num_slots;
     u8 slot_type;
@@ -5366,30 +5369,30 @@ void mnCharSel_802669F4_OnFrame(void)
         cache = &lbDvd_GetPreloadCacheScene()->game_cache;
         if (mnCharSel_804D6CF5 == 1) {
             slot_type =
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
                     .slot_type;
             if (!(slot_type != 0 && slot_type != 1) &&
                 mnCharSel_804A0BD0[0]->x5 == 0)
             {
                 cache->entries[0].char_id =
-                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                        .c_kind;
+                    mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
+                        .ckind;
                 cache->entries[0].color =
-                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                    mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
                         .color;
             } else {
                 cache->entries[0].char_id = CHKIND_NONE;
             }
             slot_type =
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
+                mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1]
                     .slot_type;
             if (!(slot_type != 0 && slot_type != 1)) {
                 if (mnCharSel_804A0BD0[1]->x5 == 0) {
                     cache->entries[1].char_id =
-                        mnCharSel_804D6CB0->data.data
+                        mnCharSel_804D6CB0->vs.start
                             .players[mnCharSel_804D6CF1]
-                            .c_kind;
-                    cache->entries[1].color = mnCharSel_804D6CB0->data.data
+                            .ckind;
+                    cache->entries[1].color = mnCharSel_804D6CB0->vs.start
                                                   .players[mnCharSel_804D6CF1]
                                                   .color;
                 } else {
@@ -5404,14 +5407,14 @@ void mnCharSel_802669F4_OnFrame(void)
             }
 
             for (i = 0; i < num_slots; i++) {
-                slot_type = mnCharSel_804D6CB0->data.data.players[i].slot_type;
+                slot_type = mnCharSel_804D6CB0->vs.start.players[i].slot_type;
                 if (!(slot_type != 0 && slot_type != 1) &&
                     mnCharSel_804A0BD0[i]->x5 == 0)
                 {
                     cache->entries[i].char_id =
-                        mnCharSel_804D6CB0->data.data.players[i].c_kind;
+                        mnCharSel_804D6CB0->vs.start.players[i].ckind;
                     cache->entries[i].color =
-                        mnCharSel_804D6CB0->data.data.players[i].color;
+                        mnCharSel_804D6CB0->vs.start.players[i].color;
                 } else {
                     cache->entries[i].char_id = CHKIND_NONE;
                 }
@@ -5470,7 +5473,7 @@ void mnCharSel_802669F4_OnFrame(void)
     }
 }
 
-void mnCharSel_80266D70_OnLeave(void* unused)
+void mnCharSel_Scene_OnExit(void* unused)
 {
     int num_slots;
     u64 tmp;
@@ -5493,33 +5496,33 @@ void mnCharSel_80266D70_OnLeave(void* unused)
 
     tmp = 0;
     if (mnCharSel_804D6CF5 == 1) {
-        type = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                   .slot_type;
+        type =
+            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0].slot_type;
         if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
             mnCharSel_804A0BD0[0]->x5 == 0)
         {
             tmp |= lbAudioAx_80026E84(
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                    .c_kind);
+                mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
+                    .ckind);
         }
-        type = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
-                   .slot_type;
+        type =
+            mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].slot_type;
         if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
             mnCharSel_804A0BD0[1]->x5 == 0)
         {
             tmp |= lbAudioAx_80026E84(
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
-                    .c_kind);
+                mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1]
+                    .ckind);
         }
     } else {
         num_slots = mnCharSel_804D6CB0->match_type == VS_CAMERA ? 3 : 4;
         for (i = 0; i < num_slots; i++) {
-            type = mnCharSel_804D6CB0->data.data.players[i].slot_type;
+            type = mnCharSel_804D6CB0->vs.start.players[i].slot_type;
             if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
                 mnCharSel_804A0BD0[i]->x5 == 0)
             {
                 tmp |= lbAudioAx_80026E84(
-                    mnCharSel_804D6CB0->data.data.players[i].c_kind);
+                    mnCharSel_804D6CB0->vs.start.players[i].ckind);
             }
         }
     }

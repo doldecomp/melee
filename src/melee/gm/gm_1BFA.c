@@ -15,10 +15,10 @@
 #include "ty/toy.h"
 
 extern UNK_T gm_804D6860[];
-extern StartMeleeData gm_80480530;
+extern StartMeleeData gmVsMelee_StartData;
 extern MatchExitInfo gm_80479D98;
 
-GameScene gm_803DFE48_Scenes[] = {
+GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
         0,
         2,
@@ -39,7 +39,7 @@ GameScene gm_803DFE48_Scenes[] = {
         gm_801BFBA8,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -58,12 +58,12 @@ GameScene gm_803DFE48_Scenes[] = {
     { -1 },
 };
 
-void gm_801BFA6C(GameScene* arg0)
+void gm_801BFA6C(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
 
-    temp_r31 = gm_GetGameSceneLoadData(arg0);
+    temp_r31 = gm_GetGameModeStateEnterData(arg0);
     temp_r3 = gm_GetChallengerData();
     temp_r31->x0 = temp_r3->x4;
     temp_r31->x1 = temp_r3->x2;
@@ -72,38 +72,38 @@ void gm_801BFA6C(GameScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFABC(GameScene* arg0)
+void gm_801BFABC(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
     u8 tmp;
 
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
-    temp_r30->rules.match_mode = 1;
+    temp_r30->rules.match_kind = 1;
     temp_r30->rules.x0_3 = 2;
     temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
     tmp = temp_r31->x3;
-    temp_r30->players[0].xA = tmp;
-    temp_r30->players[1].xA = 0x78;
+    temp_r30->players[0].nametag = tmp;
+    temp_r30->players[1].nametag = 0x78;
     temp_r30->players[1].xE = 4;
     temp_r30->players[1].cpu_level = gm_80172CC0(temp_r31->x4, tmp);
     gm_8016F088(temp_r30);
 }
 
-void gm_801BFBA8(GameScene* arg0)
+void gm_801BFBA8(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     u8 temp_r0;
     MatchExitInfo* mei;
 
-    mei = gm_GetGameSceneLeaveData(arg0);
+    mei = gm_GetGameModeStateExitData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80162968(mei->match_end.frame_count / 60);
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
@@ -153,7 +153,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(GameScene* arg0)
+void gm_801BFCFC(GameModeState* arg0)
 {
     u8* var_r28;
     u32* temp_r29_2;
@@ -166,7 +166,7 @@ void gm_801BFCFC(GameScene* arg0)
     int var_r25_2;
     void** temp_r3;
     s32 var_r30;
-    gm_GetGameSceneLoadData(arg0);
+    gm_GetGameModeStateEnterData(arg0);
     var_r31 = 0;
     gm_GetChallengerData();
     var_r30 = 0;
@@ -248,7 +248,7 @@ void gm_801BFCFC(GameScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFF7C(GameScene* arg0)
+void gm_801BFF7C(GameModeState* arg0)
 {
     gm_SetPendingGameMode((s8) gm_GetChallengerData()->x5);
     gm_SetNewGameModePending();

@@ -162,7 +162,6 @@ bool grFourside_801F2DC8(void)
     return false;
 }
 
-/// #grFourside_801F2DD0
 HSD_GObj* grFourside_801F2DD0(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -210,7 +209,6 @@ void grFourside_801F2F2C(Ground_GObj* arg) {}
 
 void grFourside_801F2F30(Ground_GObj* arg) {}
 
-/// #grFourside_801F2F34
 void grFourside_801F2F34(Ground_GObj* gobj)
 {
     HSD_GObj* pHVar1;
@@ -286,7 +284,6 @@ void grFourside_801F314C(Ground_GObj* arg) {}
 
 void grFourside_801F3150(Ground_GObj* arg) {}
 
-/// #grFourside_801F3154
 void grFourside_801F3154(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -476,7 +473,6 @@ static inline HSD_JObj* grFourside_GetCraneIron(HSD_GObj* gobj)
     return Ground_801C3FA4(gobj, 4);
 }
 
-/// #grFourside_801F3274
 void grFourside_801F3274(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);

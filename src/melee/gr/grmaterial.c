@@ -288,55 +288,23 @@ void grMaterial_801C8E74(void)
     grMaterial_803E0A20.make_texp = hsdMObj.make_texp;
 }
 
-static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
+static inline void grMaterial_SetupOverlayTev(Ground* gp, HSD_MObj* mobj)
 {
-    HSD_TObj* tobj;
-    u8 pad1[0xC];
-    GXColor sp114;
-    HSD_TevDesc sp_tevdesc;
-    u8 pad2[0x54];
+    u8 pad3[0x1C];
     HSD_TECnst sp_cnst;
-    u8 pad3[0x10];
-    Ground* gp;
-    HSD_TObj** cur_tobj;
+    u8 pad2[0x54];
+    HSD_TevDesc sp_tevdesc;
+    GXColor sp114;
     s32 reg1_lt4_for_kcsel;
-    s32 temp;
-    s32 alpha_reg;
+    s32 temp2;
     s32 reg2;
     s32 reg1_lt4;
+    s32 alpha_reg;
+    s32 temp;
     s32 reg1;
-    u32 mobj_rendermode;
 
-    HSD_StateInitTev();
-    mobj_rendermode = mobj->rendermode;
-    HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
-                         mobj->mat->specular, mobj->mat->alpha);
-    if (mobj_rendermode & RENDER_SPECULAR) {
-        HSD_SetMaterialShininess(mobj->mat->shininess);
-    }
-    cur_tobj = NULL;
-    tobj = mobj->tobj;
-    if ((mobj_rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
-        cur_tobj = &tobj;
-        while (*cur_tobj != NULL) {
-            cur_tobj = &(*cur_tobj)->next;
-        }
-        *cur_tobj = tobj_shadows;
-    }
-    if ((mobj_rendermode & RENDER_TOON) && tobj_toon != NULL &&
-        tobj_toon->imagedesc != NULL)
-    {
-        tobj_toon->next = tobj;
-        tobj = tobj_toon;
-    }
-    HSD_TObjSetup(tobj);
-    HSD_TObjSetupTextureCoordGen(tobj);
-    HSD_ASSERT(0xF3, mobj->tevdesc);
-    HSD_TExpSetupTev(mobj->tevdesc, mobj->texp);
-    HSD_TObjSetupVolatileTev(tobj, mobj_rendermode);
-
-    gp = HSD_GObj_804D7814->user_data;
-    (void) gp;
+    (void) pad2;
+    (void) pad3;
     if (grMaterial_GetOverlay(gp)->x7C_color_enable || gp->x10_flags.b6) {
         sp_cnst = grMaterial_803E0A20.texp_tmpl;
         sp_tevdesc = grMaterial_803E0A20.tevdesc_tmpl;
@@ -368,7 +336,7 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
                 HSD_ASSERT(0x88, 0);
             }
             sp_cnst.comp = reg1_lt4_for_kcsel = 1;
-            sp_cnst.ctype = temp = 0;
+            sp_cnst.ctype = temp2 = 0;
             sp_cnst.reg = (u8) reg2;
             sp114.r = gp->x6C.a;
             sp114.g = gp->x6C.a;
@@ -412,6 +380,46 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
         }
         HSD_SetupTevStage(&sp_tevdesc);
     }
+}
+
+static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
+{
+    HSD_TObj* tobj;
+    Ground* gp;
+    HSD_TObj** cur_tobj;
+    u32 mobj_rendermode;
+
+    HSD_StateInitTev();
+    mobj_rendermode = mobj->rendermode;
+    HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
+                         mobj->mat->specular, mobj->mat->alpha);
+    if (mobj_rendermode & RENDER_SPECULAR) {
+        HSD_SetMaterialShininess(mobj->mat->shininess);
+    }
+    cur_tobj = NULL;
+    tobj = mobj->tobj;
+    if ((mobj_rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
+        cur_tobj = &tobj;
+        while (*cur_tobj != NULL) {
+            cur_tobj = &(*cur_tobj)->next;
+        }
+        *cur_tobj = tobj_shadows;
+    }
+    if ((mobj_rendermode & RENDER_TOON) && tobj_toon != NULL &&
+        tobj_toon->imagedesc != NULL)
+    {
+        tobj_toon->next = tobj;
+        tobj = tobj_toon;
+    }
+    HSD_TObjSetup(tobj);
+    HSD_TObjSetupTextureCoordGen(tobj);
+    HSD_ASSERT(0xF3, mobj->tevdesc);
+    HSD_TExpSetupTev(mobj->tevdesc, mobj->texp);
+    HSD_TObjSetupVolatileTev(tobj, mobj_rendermode);
+
+    gp = HSD_GObj_804D7814->user_data;
+    (void) gp;
+    grMaterial_SetupOverlayTev(gp, mobj);
     HSD_SetupRenderModeWithCustomPE(mobj_rendermode, mobj->pe);
     if (cur_tobj != NULL) {
         *cur_tobj = NULL;

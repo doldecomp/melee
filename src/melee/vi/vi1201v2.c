@@ -308,7 +308,7 @@ static void order_data(void)
 }
 #endif
 
-void un_80320A40_OnEnter(void* arg)
+void vi1201v2_Scene_OnEnter(void* arg)
 {
     u8* input = arg;
     HSD_Fog* fog;
@@ -351,7 +351,7 @@ void un_80320A40_OnEnter(void* arg)
     lbAudioAx_80024E50(0);
 }
 
-void un_803210EC_OnFrame(void)
+void vi1201v2_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

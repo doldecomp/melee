@@ -95,10 +95,24 @@ static inline bool mnInfo_80251AFC_inline(s32 i)
     return unlock_state == 0;
 }
 
+static inline u32 mnInfo_80251AFC_inline_2(s32 j)
+{
+    return *gmMainLib_8015D804(mnInfo_804A0968[j]);
+}
+
+static inline s32 mnInfo_80251AFC_inline_3(u8* ids, s32 i)
+{
+    return ids[i];
+}
+
 void mnInfo_80251AFC(void)
 {
     s32 i;
     s32 j;
+    PAD_STACK(8);
+
+    /// @todo Keep #mnInfo_804A0958 before #mnInfo_804A0968 in `.bss`.
+    (void) &mnInfo_804A0958;
 
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
@@ -117,8 +131,8 @@ void mnInfo_80251AFC(void)
         for (j = i + 1; j < 0x42; j++) {
             if (mnInfo_80251A08(mnInfo_804A0968[j]) != 0 &&
                 (mnInfo_80251A08(mnInfo_804A0968[i]) == 0 ||
-                 *gmMainLib_8015D804(mnInfo_804A0968[i]) >
-                     *gmMainLib_8015D804(mnInfo_804A0968[j])))
+                 *gmMainLib_8015D804(mnInfo_80251AFC_inline_3(
+                     mnInfo_804A0968, i)) > mnInfo_80251AFC_inline_2(j)))
             {
                 u8 tmp = mnInfo_804A0968[i];
 
@@ -150,6 +164,8 @@ static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
 };
 
+#define mnInfo_layout (*(MnInfoDataLayout*) mnInfo_803EFC08)
+
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -169,7 +185,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    layout = &mnInfo_layout;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -247,18 +263,54 @@ static inline s32 mnInfo_CountUnlocked(void)
     return count;
 }
 
-void fn_80251FE4(void)
+inline void mnInfo_CreateEntries(u32 id)
 {
-    mnInfo_GObj* gobj;
-    MnInfoData* data;
-    u64 buttons;
     u8* trophy;
-    s32 count;
     s32 i;
+    mnInfo_GObj* gobj;
+
+    gobj = mnInfo_804D6C78;
+    trophy = &mnInfo_804A0968[id];
+    (void) trophy;
+    for (i = 0; i < 4; i++) {
+        if (mnInfo_80251A08(*trophy) != 0) {
+            id = *trophy;
+
+            mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
+            mnInfo_80251F04(gobj, i, id);
+        }
+        trophy++;
+    }
+}
+
+static inline void mnInfo_FreeEntries(void)
+{
     s32 j;
     MnInfoData* data2;
     MnInfoData* data3;
-    PAD_STACK(0x20);
+
+    j = 0;
+    data2 = mnInfo_804D6C78->user_data;
+    data3 = data2;
+    do {
+        if (data2->left_column[j] != NULL) {
+            HSD_SisLib_803A5CC4(data3->left_column[j]);
+            data2->left_column[j] = NULL;
+        }
+        if (data2->right_column[j] != NULL) {
+            HSD_SisLib_803A5CC4(data3->right_column[j]);
+            data2->right_column[j] = NULL;
+        }
+        j++;
+    } while (j < 4);
+}
+
+void fn_80251FE4(void)
+{
+    MnInfoData* data;
+    u64 buttons;
+    s32 count;
+    PAD_STACK(0x18);
 
     data = mnInfo_804D6C78->user_data;
     if (mn_804D6BC8.cooldown != 0) {
@@ -278,67 +330,32 @@ void fn_80251FE4(void)
         if (data->scroll_idx != 0) {
             data->scroll_idx -= 1;
             sfxMove();
-            j = 0;
-            data2 = mnInfo_804D6C78->user_data;
-            data3 = data2;
-            do {
-                if (data2->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->left_column[j]);
-                    data2->left_column[j] = NULL;
-                }
-                if (data2->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->right_column[j]);
-                    data2->right_column[j] = NULL;
-                }
-                j++;
-            } while (j < 4);
-            gobj = mnInfo_804D6C78;
-            trophy = &mnInfo_804A0968[data->scroll_idx];
-            for (i = 0; i < 4; i++) {
-                if (mnInfo_80251A08(*trophy) != 0) {
-                    u8 id = *trophy;
+            mnInfo_FreeEntries();
+            {
+                u8* trophy;
+                s32 i;
+                mnInfo_GObj* gobj;
 
-                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-                    mnInfo_80251F04(gobj, i, id);
+                gobj = mnInfo_804D6C78;
+                trophy = &mnInfo_804A0968[data->scroll_idx];
+                for (i = 0; i < 4; i++) {
+                    if (mnInfo_80251A08(*trophy) != 0) {
+                        u8 id = *trophy;
+
+                        mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
+                        mnInfo_80251F04(gobj, i, id);
+                    }
+                    trophy++;
                 }
-                trophy++;
             }
         }
     } else if (buttons & MenuInput_Down) {
-        count = 0;
-        for (j = 0; j < 0x42; j++) {
-            if (mnInfo_80251A08(j) != 0) {
-                count++;
-            }
-        }
+        count = mnInfo_CountUnlocked();
         if ((data->scroll_idx + 4) < count) {
             sfxMove();
             data->scroll_idx += 1;
-            j = 0;
-            data2 = mnInfo_804D6C78->user_data;
-            data3 = data2;
-            do {
-                if (data2->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->left_column[j]);
-                    data2->left_column[j] = NULL;
-                }
-                if (data2->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->right_column[j]);
-                    data2->right_column[j] = NULL;
-                }
-                j++;
-            } while (j < 4);
-            gobj = mnInfo_804D6C78;
-            trophy = &mnInfo_804A0968[data->scroll_idx];
-            for (i = 0; i < 4; i++) {
-                if (mnInfo_80251A08(*trophy) != 0) {
-                    u8 id = *trophy;
-
-                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-                    mnInfo_80251F04(gobj, i, id);
-                }
-                trophy++;
-            }
+            mnInfo_FreeEntries();
+            mnInfo_CreateEntries(data->scroll_idx);
         }
     }
 }
@@ -371,7 +388,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
+    mn_8022ED6C(jobj, &mnInfo_layout.anim);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -429,7 +446,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
+        mn_8022ED6C(jobj, &mnInfo_layout.anim);
     }
 }
 
@@ -531,50 +548,61 @@ void mnInfo_80252720(MnInfoData* data)
 
 s32 mnInfo_80252758(void)
 {
-    MnInfoData* data;
-    MnInfoDataLayout* layout;
     MnInfoData* user_data;
-    HSD_GObj* menu_gobj;
     HSD_GObjProc* proc;
-    HSD_GObjProc* menu_proc;
-    HSD_Text* description;
+    HSD_GObj* gobj;
+    HSD_Archive* archive;
+    StaticModelDesc* model = &mnInfo_804A0958;
+    char* top_joint = mnInfo_layout.top_joint;
+    HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);
 
-    layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    (void) "Can't get user_data.\n";
+    (void) __FILE__;
+    (void) "user_data";
+
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1D;
     mn_804A04F0.hovered_selection = 0;
 
+    archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &mnInfo_804A0958.joint, layout->top_joint,
-        &mnInfo_804A0958.animjoint, layout->top_animjoint,
-        &mnInfo_804A0958.matanim_joint, layout->top_matanim_joint,
-        &mnInfo_804A0958.shapeanim_joint, layout->top_shapeanim_joint, 0);
+        archive, (void**) &model->joint, top_joint, animjoint,
+        mnInfo_layout.top_animjoint, &model->matanim_joint,
+        mnInfo_layout.top_matanim_joint, &model->shapeanim_joint,
+        mnInfo_layout.top_shapeanim_joint, 0);
 
     mnInfo_80251AFC();
 
-    menu_gobj = GObj_Create(6, 7, 0x80);
-    mnInfo_804D6C78 = menu_gobj;
+    gobj = GObj_Create(6, 7, 0x80);
+    mnInfo_804D6C78 = gobj;
 
-    user_data = HSD_MemAlloc(sizeof(MnInfoData));
-    HSD_ASSERTREPORT(0x267, user_data, "Can't get user_data.\n");
-    mnInfo_80252720(user_data);
-    GObj_InitUserData(menu_gobj, 0, HSD_Free, user_data);
-
-    menu_proc = HSD_GObj_SetupProc(menu_gobj, (HSD_GObjEvent) fn_80252548, 0);
-    menu_proc->flags_3 = HSD_GObj_804D783C;
-
-    data = menu_gobj->user_data;
-    if (data->description != NULL) {
-        HSD_SisLib_803A5CC4(data->description);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
+    if (user_data == NULL) {
+        OSReport(mnInfo_layout.assert_report);
+        __assert(mnInfo_layout.assert_file, 0x267, mnInfo_layout.assert_expr);
     }
-    description =
-        HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
-    data->description = description;
-    description->font_size.x = 0.0521f;
-    description->font_size.y = 0.0521f;
-    HSD_SisLib_803A6368(description, 0xA3);
+    mnInfo_80252720(user_data);
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+
+    proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80252548, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+
+    {
+        MnInfoData* data;
+        HSD_Text* text;
+
+        if ((data = gobj->user_data)->description != NULL) {
+            HSD_SisLib_803A5CC4(data->description);
+        }
+        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                   38.38772f);
+        data->description = text;
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(text, 0xA3);
+    }
 
     proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80),
                               (HSD_GObjEvent) fn_80251FE4, 0);

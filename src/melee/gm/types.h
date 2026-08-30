@@ -15,6 +15,7 @@
 #include <melee/sc/forward.h>
 
 #include <dolphin/gx.h>
+#include <dolphin/pad.h>
 #include <melee/mn/types.h>
 
 /// @deprecated Replace with inline bitfields
@@ -59,68 +60,48 @@ typedef struct un_804A1F48_t {
 } un_804A1F48_t;
 ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
-/// @note Colloquially known as "Minor Scene"
-struct GameScene {
-    /* 00 */ u8 idx;
-    /* 01 */ u8 preload;
-    /* 02 */ u16 flags;
+struct GameModeState {
+    /* +0 */ u8 id;      ///< locally defined by game mode
+    /* +1 */ u8 preload; ///< ::lbDvdPreloadKind
+    /* +2 */ u16 flags;
 
-    /* 04 */ void (*on_enter)(GameScene*);
-    /* 08 */ void (*on_exit)(GameScene*);
+    /* +4 */ void (*on_enter)(GameModeState*);
+    /* +8 */ void (*on_exit)(GameModeState*);
 
     struct GameSceneInfo {
-        /* 0C */ u8 scene_id;
-        /* 10 */ void* load_data;  ///< data passed to OnLoad callback
-        /* 14 */ void* leave_data; ///< data passed to OnLeave callback
+        /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
+        /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
+        /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
     } info;
 };
 
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
-    u8 preload;
-    u8 idx; ///< GameModeKind
+    u8 preloaded; ///< ::bool
+    u8 kind;      ///< ::GameModeKind
 
     void (*on_load)(void);
     void (*on_unload)(void);
     void (*on_init)(void);
 
-    GameScene* scenes;
-}; // 803DACA4
+    GameModeState* states;
+};
 
-struct GameSceneHandler {
-    u8 class_id;
-
+/// @note Colloquially known as "Minor Scene"
+struct GameScene {
+    u8 kind; ///< ::GameSceneKind
     void (*on_frame)(void);
-    void (*on_load)(void*);
-    void (*on_leave)(void*);
-    void (*unk_func)(void);
-}; // 803DA920
-
-typedef struct {
-    u8 curr_mode;         ///< GameModeKind
-    u8 pending_mode;      ///< GameModeKind
-    u8 prev_mode;         ///< GameModeKind
-    u8 curr_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 prev_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 pending_scene_idx; ///< scene graph scene index for associated GameMode
-} GameRouting;
-
-typedef struct {
-    GameRouting routing;
-    GameRouting backup;
-    u8 pending;
-    u8 x0D;
-    u8 x0E;
-    u8 x0F;
-    u8 (*game_mode_override)(void);
-} GameState;
-ASSERT_SIZE(GameState, 0x14);
+    void (*on_enter)(void*);
+    void (*on_exit)(void*);
+    UNUSED UNK_T unused;
+};
+ASSERT_SIZE(struct GameScene, 0x14);
 
 struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;
     /* +1 */ u8 pad_x1[0x8 - 0x1];
     /* +8 */ u64 item_mask;
-    /* +10 */ u8 rumble[4];
+    /* +10 */ u8 rumble_enabled[PAD_MAX_CONTROLLERS];
     /* +14 */ u8 sound_balance;
     /* +15 */ u8 deflicker;
     /* +16 */ u8 saved_language; /* 0x1CC6 */
@@ -210,7 +191,7 @@ struct NameTagData {
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
-    /* 0x1A1 */ u8 rumble_toggle;
+    /* 0x1A1 */ u8 rumble_enabled;
     /* 0x1A2 */ s8 x1A2;
     /* 0x1A3 */ u8 padding_x1A2;
 };
@@ -293,12 +274,12 @@ struct gmm_x1868 {
         /* 0x01AD +5 */ u8 x5;
         /* 0x01AE +6 */ u8 x6;
     } unk_1A8;
-    /* 0x01B0 */ s32 x1A18;
-    /* 0x01B4 */ s32 x1A1C;
-    /* 0x01B8 */ s32 x1A20;
-    /* 0x01BC */ s32 x1A24;
-    /* 0x01C0 */ s32 x1A28;
-    /* 0x01C4 */ s32 x1A2C;
+    /* 0x01B0 */ u32 time_matches;
+    /* 0x01B4 */ u32 stock_matches;
+    /* 0x01B8 */ u32 coin_matches;
+    /* 0x01BC */ u32 bonus_matches;
+    /* 0x01C0 */ u32 stamina_matches;
+    /* 0x01C4 */ u32 match_resets;
     /* 0x01C8 */ s32 x1A30;
     /* 0x01CC */ s32 x1A34;
     /* 0x01D0 */ s32 x1A38;
@@ -401,19 +382,19 @@ struct gmm_x0 {
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
-    /* 0x0590 */ VsModeData unk_590; ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
-    /* 0x0810 */ VsModeData unk_810; ///< invisible melee
-    /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90;  ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;  ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;  ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;  ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;  ///< giant melee
-    /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
-    /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
+    /* 0x0590 */ VsModeData vs_melee; ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;  ///< super sudden death
+    /* 0x0810 */ VsModeData unk_810;  ///< invisible melee
+    /* 0x0950 */ VsModeData vs_camera;
+    /* 0x0A90 */ VsModeData unk_A90;    ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;    ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;    ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;    ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;    ///< giant melee
+    /* 0x10D0 */ VsModeData vs_stamina; ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210;   ///< slowmo melee
+    /* 0x1350 */ VsModeData unk_1350;   ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490;   ///< multiman, 3/15 min, endless, cruel
     /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
@@ -624,8 +605,8 @@ ASSERT_SIZE(struct MatchTeamData, 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
-    s8 character_kind;
-    s8 character_id;
+    s8 ckind;  ///< ::CharacterKind
+    s8 ftkind; ///< ::FighterKind
     u8 x3 : 6;
     u8 x3_6 : 1;
     u8 x3_7 : 1;
@@ -682,18 +663,18 @@ ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 struct MatchEnd {
     /* 0x00 */ u32 x0; ///< timer
     /* 0x04 */ u8 result;
-    /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 is_teams;
+    /* 0x05 */ u8 match_kind; ///< ::MatchKind
+    /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
     /* 0x08 */ u32 frame_count;
     /* 0x0C */ u8 xC;
     /* 0x0D */ u8 n_winners;
     /* 0x0E */ u8 n_team_winners;
     /* 0x0F */ u8 loser;
-    /* 0x10 */ u8 winners[6];
-    /* 0x16 */ u8 team_winners[5];
-    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
-    /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
+    /* 0x10 */ u8 winners[GM_MAX_PLAYERS];
+    /* 0x16 */ u8 team_winners[GM_MAX_TEAMS];
+    /* 0x1B */ struct MatchTeamData team_standings[GM_MAX_TEAMS];
+    /* 0x58 */ struct MatchPlayerData player_standings[GM_MAX_PLAYERS];
     /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
     /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];

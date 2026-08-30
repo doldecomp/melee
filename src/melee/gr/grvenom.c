@@ -1721,8 +1721,6 @@ void grVenom_80206874(Ground_GObj* gobj)
     gp->u.venom.xFC = 0;
 }
 
-/// #grVenom_80206874
-
 bool grVenom_80206B68(Ground_GObj* arg)
 {
     return false;

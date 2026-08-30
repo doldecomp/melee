@@ -120,7 +120,7 @@ static void vi0102_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void vi0102_Initialize_OnEnter(void* arg)
+void vi0102_Scene_OnEnter(void* arg)
 {
     int i;
     HSD_CObj* cobj;
@@ -185,7 +185,7 @@ void vi0102_Initialize_OnEnter(void* arg)
     lbAudioAx_80024E50(0);
 }
 
-void vi0102_8031D000_OnFrame(void)
+void vi0102_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

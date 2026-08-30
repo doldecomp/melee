@@ -1047,7 +1047,7 @@ void ftCo_800A1F3C_noinline2(Fighter* fp, float arg1, float arg2, float arg3)
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (fp->x1A88.x60 == 0) {
+    if (data->x60 == 0) {
         data->x54.x = arg1;
         data->x54.y = arg2;
         data->x38 = arg3;
@@ -1945,39 +1945,62 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
     return ftCo_IsAlly(fp0, fp1);
 }
 
-static inline float ftCo_800A3908_inline0(Fighter* fp, s32 t)
+static inline bool ftCo_800A3908_inline0(Fighter* fp,
+                                         struct Fighter_x1A88_t* data, float x,
+                                         float y)
 {
-    return fp->co_attrs.gravity * sqrtf((f32) t);
+    if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+        y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
+}
+
+static inline s32 ftCo_800A3908_inline1(float x, float y)
+{
+    s32 result;
+    Vec3 floor_normal;
+    int line_id;
+    Vec3 floor_pos;
+    u32 flags;
+
+    line_id = -1;
+    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, &floor_pos, &line_id,
+                          &flags, &floor_normal, -1, -1, -1, NULL, NULL);
+    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+        return 0;
+    }
+    return result;
+}
+
+static inline float ftCo_GetTerminalVelocity(Fighter* fp)
+{
+    return fp->co_attrs.terminal_velocity;
 }
 
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
-    struct Fighter_x1A88_t* data2;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    s32 t;
-    u32 flags;
-    int line_id;
-    Vec3 island_pos;
-    Vec3 floor_normal;
-    Vec3 alt_floor_pos;
-    Vec3 alt_floor_normal;
-    f32 dist;
-    Vec3 floor_pos;
-    f32 ey;
     f32 ez;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    f32 dist;
+    Vec3 island_pos;
+    f32 ex;
+    f32 ey;
+    s32 valid;
     f32 grav;
     f32 dx;
     f32 px;
+    mp_UnkStruct0* island;
     f32 ddx;
     f32 ddy;
-    mp_UnkStruct0* island;
+    s32 t;
     s32 frames;
-    s32 result;
-    s32 valid;
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
+    StageInfo* info;
     s32 ok;
-    s32 oob;
-
-    PAD_STACK(0x20);
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -1990,17 +2013,18 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    data2 = &fp->x1A88;
+    info = &stage_info;
+    PAD_STACK(0x18);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        f32 ex;
         island_pos = island->x14;
         ex = island_pos.x;
-        ey = island_pos.y;
-        (void) ey;
+        {
+            f32 y = island_pos.y;
+            ey = y;
+        }
         ez = island_pos.z;
-        (void) ez;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data2->half_width ||
             ey < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
@@ -2023,66 +2047,35 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             if (frames <= 0) {
                 land_y = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y + (fp->pos_delta.y * t -
-                                          0.5 * ftCo_800A3908_inline0(fp, t));
+                land_y = fp->cur_pos.y +
+                         (fp->pos_delta.y * t -
+                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
             } else {
                 land_y =
                     fp->cur_pos.y +
                     ((fp->pos_delta.y * frames -
                       0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * fp->co_attrs.terminal_velocity);
+                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
-                    valid = 0;
                     px = ex - 5.0;
+                    valid = ftCo_800A3908_inline1(px, ey);
+                    if (valid != 0 &&
+                        !ftCo_800A3908_inline0(fp, data2, px, ey))
                     {
-                        s32 floor_result;
-
-                        line_id = -1;
-                        floor_result = mpCheckFloor(
-                            px, 5.0f + ey, px, ey - 5.0f, 0.0f, &floor_pos,
-                            &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
-                            NULL);
-                        result = floor_result;
-                        if (result != 0 &&
-                            ftCo_800A1B38_noinline(line_id) != 0)
-                        {
-                        } else {
-                            valid = result;
-                        }
-                    }
-                    if (valid != 0) {
-                        if (px < fp->x1A88.half_width +
-                                     Stage_GetBlastZoneLeftOffset() ||
-                            px > Stage_GetBlastZoneRightOffset() -
-                                     data2->half_width ||
-                            ey < data2->half_height +
-                                     Stage_GetBlastZoneBottomOffset() ||
-                            ey > Stage_GetBlastZoneTopOffset() -
-                                     data2->half_height)
-                        {
-                            oob = 1;
-                        } else {
-                            oob = 0;
-                        }
-                        if (oob == 0) {
-                            ok = 1;
-                        } else {
-                            ok = 0;
-                        }
+                        ok = 1;
                     } else {
                         ok = 0;
                     }
                     if (ok != 0) {
+                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
                         if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            {
-                                s32 kind = stage_info.grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
+                            data3->x54.x = px;
+                            data3->x54.y = ey;
+                            data3->x38 = 5.0f;
+                            ftCo_800A1CC4(fp,
+                                          ftCo_803C6594[stage_info.grkind]);
                         }
                         ftCo_800A49B4(fp);
                         return 1;
@@ -2091,38 +2084,10 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             } else {
                 ddy = ey - fp->cur_pos.y;
                 px = ex - 5.0;
-                valid = 0;
                 ddx = px - fp->cur_pos.x;
-                {
-                    line_id = -1;
-                    result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                          &alt_floor_pos, &line_id, &flags,
-                                          &alt_floor_normal, -1, -1, -1, NULL,
-                                          NULL);
-                    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
-                    } else {
-                        valid = result;
-                    }
-                }
-                if (valid != 0) {
-                    if (px < fp->x1A88.half_width +
-                                 Stage_GetBlastZoneLeftOffset() ||
-                        px > Stage_GetBlastZoneRightOffset() -
-                                 data2->half_width ||
-                        ey < data2->half_height +
-                                 Stage_GetBlastZoneBottomOffset() ||
-                        ey >
-                            Stage_GetBlastZoneTopOffset() - data2->half_height)
-                    {
-                        oob = 1;
-                    } else {
-                        oob = 0;
-                    }
-                    if (oob == 0) {
-                        ok = 1;
-                    } else {
-                        ok = 0;
-                    }
+                valid = ftCo_800A3908_inline1(px, ey);
+                if (valid != 0 && !ftCo_800A3908_inline0(fp, data2, px, ey)) {
+                    ok = 1;
                 } else {
                     ok = 0;
                 }
@@ -2134,7 +2099,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                s32 kind = stage_info.grkind;
+                                GrKind kind = info->grkind;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
                             }
                         }
@@ -2147,14 +2112,35 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     return 0;
 }
 
-static inline float ftCo_GetTerminalVelocity(Fighter* fp)
+static inline bool ftCo_800A4038_inline0(Fighter* fp,
+                                         struct Fighter_x1A88_t* data, float x,
+                                         float y)
 {
-    return fp->co_attrs.terminal_velocity;
+    if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+        y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
 }
 
-static inline bool ftCo_800A4038_inline1(int line_id)
+static inline s32 ftCo_800A4038_inline1(float x, float y)
 {
-    return ftCo_800A1B38_noinline(line_id) != 0;
+    Vec3 floor_normal;
+    Vec3 floor_pos;
+    int line_id;
+    u32 flags;
+    s32 result;
+
+    line_id = -1;
+    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, &floor_pos, &line_id,
+                          &flags, &floor_normal, -1, -1, -1, NULL, NULL);
+    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+        return 0;
+    }
+    return result;
 }
 
 static inline float ftCo_800A4038_inline2(Fighter* fp)
@@ -2165,26 +2151,23 @@ static inline float ftCo_800A4038_inline2(Fighter* fp)
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data2;
-    s32 t;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* island;
     Vec3 island_pos;
     f32 ex;
     f32 ey;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    s32 valid;
     f32 grav;
     f32 dx;
     f32 px;
     f32 dist;
     f32 ddx;
     f32 ddy;
-    mp_UnkStruct0* island;
+    s32 t;
     s32 frames;
-    s32 result;
-    s32 valid;
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
+    StageInfo* info;
     s32 ok;
-    s32 oob;
-
-    PAD_STACK(0x8);
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -2197,7 +2180,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     } else {
         frames = ftCo_800A4038_inline2(fp) / grav;
     }
-    data2 = &fp->x1A88;
+    info = &stage_info;
+    PAD_STACK(0x4);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -2242,47 +2226,12 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
-                    valid = 0;
                     px = 5.0 + ex;
+                    valid = ftCo_800A4038_inline1(px, ey);
+                    if (valid != 0 &&
+                        !ftCo_800A4038_inline0(fp, data2, px, ey))
                     {
-                        Vec3 floor_pos;
-                        Vec3 floor_normal;
-                        int line_id;
-                        u32 flags;
-                        s32 floor_result;
-
-                        line_id = -1;
-                        floor_result = mpCheckFloor(
-                            px, 5.0f + ey, px, ey - 5.0f, 0.0f, &floor_pos,
-                            &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
-                            NULL);
-                        result = floor_result;
-                        if (result != 0 &&
-                            ftCo_800A1B38_noinline(line_id) != 0)
-                        {
-                        } else {
-                            valid = result;
-                        }
-                    }
-                    if (valid != 0) {
-                        if (px < fp->x1A88.half_width +
-                                     Stage_GetBlastZoneLeftOffset() ||
-                            px > Stage_GetBlastZoneRightOffset() -
-                                     data2->half_width ||
-                            ey < data2->half_height +
-                                     Stage_GetBlastZoneBottomOffset() ||
-                            ey > Stage_GetBlastZoneTopOffset() -
-                                     data2->half_height)
-                        {
-                            oob = 1;
-                        } else {
-                            oob = 0;
-                        }
-                        if (oob == 0) {
-                            ok = 1;
-                        } else {
-                            ok = 0;
-                        }
+                        ok = 1;
                     } else {
                         ok = 0;
                     }
@@ -2302,43 +2251,10 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
             } else {
                 ddy = ey - fp->cur_pos.y;
                 px = 5.0 + ex;
-                valid = 0;
                 ddx = px - fp->cur_pos.x;
-                {
-                    Vec3 alt_floor_pos;
-                    Vec3 alt_floor_normal;
-                    int line_id;
-                    u32 flags;
-
-                    line_id = -1;
-                    result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                          &alt_floor_pos, &line_id, &flags,
-                                          &alt_floor_normal, -1, -1, -1, NULL,
-                                          NULL);
-                    if (result != 0 && ftCo_800A4038_inline1(line_id)) {
-                    } else {
-                        valid = result;
-                    }
-                }
-                if (valid != 0) {
-                    if (px < fp->x1A88.half_width +
-                                 Stage_GetBlastZoneLeftOffset() ||
-                        px > Stage_GetBlastZoneRightOffset() -
-                                 data2->half_width ||
-                        ey < data2->half_height +
-                                 Stage_GetBlastZoneBottomOffset() ||
-                        ey >
-                            Stage_GetBlastZoneTopOffset() - data2->half_height)
-                    {
-                        oob = 1;
-                    } else {
-                        oob = 0;
-                    }
-                    if (oob == 0) {
-                        ok = 1;
-                    } else {
-                        ok = 0;
-                    }
+                valid = ftCo_800A4038_inline1(px, ey);
+                if (valid != 0 && !ftCo_800A4038_inline0(fp, data2, px, ey)) {
+                    ok = 1;
                 } else {
                     ok = 0;
                 }
@@ -2350,7 +2266,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                GrKind kind = stage_info.grkind;
+                                GrKind kind = info->grkind;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
                             }
                         }
@@ -3253,12 +3169,13 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
 {
     mp_UnkStruct0* island;
     f32 best;
+    f32 px;
+    f32 ay;
     f32 ax;
     Vec3 b;
     Vec3 a;
     Vec3 floor_pos;
     Vec3 floor_normal;
-    f32 px;
     f32 dy;
     f32 dist;
     s32 result;
@@ -3270,18 +3187,14 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
         if (ftCo_800A2718(island) == 0) {
             int line_id;
             u32 flags;
-            f32 ay;
+            f32 by;
             a = island->x8;
             ax = a.x;
             ay = a.y;
             px = ax + 5.0;
-            line_id = -1;
-            result = mpCheckFloor(px, ay + 5.0, px, ay - 5.0, 0.0f, &floor_pos,
-                                  &line_id, &flags, &floor_normal, -1, -1, -1,
-                                  NULL, NULL);
-            if (result != 0 && ftCo_IsIgnoredFloor(line_id)) {
-                result = 0;
-            }
+            result = ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal,
+                                   -1, -1, -1, ax + 5.0, ay + 5.0, ax + 5.0,
+                                   ay - 5.0, 0.0f);
             if (result != 0) {
                 if (!ftCo_800A6700_inline0(fp, px, ay)) {
                     px = px - arg1->x;
@@ -3297,24 +3210,20 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
             }
             b = island->x14;
             ax = b.x;
-            ay = b.y;
+            by = b.y;
             px = ax - 5.0;
-            line_id = -1;
-            result = mpCheckFloor(px, ay + 5.0, px, ay - 5.0, 0.0f, &floor_pos,
-                                  &line_id, &flags, &floor_normal, -1, -1, -1,
-                                  NULL, NULL);
-            if (result != 0 && ftCo_800A1B38(line_id)) {
-                result = 0;
-            }
+            result =
+                ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1,
+                              -1, -1, px, by + 5.0, px, by - 5.0, 0.0f);
             if (result != 0) {
-                if (!ftCo_800A6700_inline0(fp, px, ay)) {
+                if (!ftCo_800A6700_inline0(fp, px, by)) {
                     px = px - arg1->x;
-                    dy = ay - arg1->y;
+                    dy = by - arg1->y;
                     dist = px * px + dy * dy;
                     if (dist > best) {
                         best = dist;
                         arg2->x = ax - 5.0;
-                        arg2->y = ay;
+                        arg2->y = by;
                         arg2->z = b.z;
                     }
                 }
@@ -3685,14 +3594,13 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     f32 fx;
     f32 fy;
     f32 d;
-    f32 cx;
 
     if (fp1 == NULL) {
         return;
     }
     if (fp1->ground_or_air == GA_Air) {
-        s32 result;
         s32 blocked;
+        s32 result;
         mp_UnkStruct0* island;
         fx = fp1->cur_pos.x;
         {
@@ -3722,86 +3630,39 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
-                int* x60 = &fp0->x1A88.x60;
-                struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                f32 x38 = data->x56C + fp1->x1A88.x564;
-                f32 x = floor_pos.x;
-                f32 y = floor_pos.y;
-                if (*x60 == 0) {
-                    data2->x54.x = x;
-                    data2->x54.y = y;
-                    data2->x38 = x38;
-                    ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                }
+                ftCo_800A1F3C(fp0, floor_pos.x, floor_pos.y,
+                              data->x56C + fp1->x1A88.x564);
                 if (island != NULL) {
                     d = island->x14.x - data->x54.x;
                     if (d < 0.0f) {
                         d = -d;
                     }
                     if (d < 5.0) {
-                        struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                        f32 x38_edge = data->x56C + fp1->x1A88.x564;
-                        f32 x = island->x14.x - 5.0;
-                        f32 y = island->x14.y;
-                        if (*x60 == 0) {
-                            data2->x54.x = x;
-                            data2->x54.y = y;
-                            data2->x38 = x38_edge;
-                            ftCo_800A1CC4(fp0,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
+                                      data->x56C + fp1->x1A88.x564);
                     } else {
-                        d = island->x8.x - data->x54.x;
-                        if (d < 0.0f) {
-                            d = -d;
-                        }
+                        d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
-                            struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                            f32 x38_edge = data->x56C + fp1->x1A88.x564;
-                            f32 x = 5.0 + island->x8.x;
-                            f32 y = island->x8.y;
-                            if (*x60 == 0) {
-                                data2->x54.x = x;
-                                data2->x54.y = y;
-                                data2->x38 = x38_edge;
-                                ftCo_800A1CC4(
-                                    fp0, ftCo_803C6594[stage_info.grkind]);
-                            }
+                            ftCo_800A1F3C(fp0, 5.0 + island->x8.x,
+                                          island->x8.y,
+                                          data->x56C + fp1->x1A88.x564);
                         }
                     }
                 }
             }
         } else {
             ftCo_800A4768(fp1, &sp18);
-            {
-                struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                f32 x38 = data->x56C + fp1->x1A88.x564;
-                f32 x = sp18.x;
-                f32 y = sp18.y;
-                if (fp0->x1A88.x60 == 0) {
-                    data2->x54.x = x;
-                    data2->x54.y = y;
-                    data2->x38 = x38;
-                    ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                }
-            }
+            ftCo_800A1F3C(fp0, sp18.x, sp18.y, data->x56C + fp1->x1A88.x564);
         }
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)
     {
-        int* x60 = &fp0->x1A88.x60;
         mp_UnkStruct0* island;
         mp_UnkStruct0* fp0_island;
         s32 same_island;
-        f32 x38 = data->x56C + fp1->x1A88.x564;
-        f32 x = fp1->cur_pos.x;
-        f32 y = fp1->cur_pos.y;
-        if (*x60 == 0) {
-            data->x54.x = x;
-            data->x54.y = y;
-            data->x38 = x38;
-            ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-        }
+
+        ftCo_800A1F3C(fp0, fp1->cur_pos.x, fp1->cur_pos.y,
+                      data->x56C + fp1->x1A88.x564);
         if (fp0->ground_or_air == GA_Air) {
             same_island = 0;
         } else if (fp1->ground_or_air == GA_Air) {
@@ -3822,32 +3683,15 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             (island = mpIsland_8005AB54(fp1->coll_data.floor.index)) != NULL &&
             data->x54.y - fp0->cur_pos.y > 0.0)
         {
-            cx = fp0->cur_pos.x;
-            if (0.0f < data->x54.x - cx) {
-                if (cx < island->x8.x) {
-                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                    f32 x = 5.0 + island->x8.x;
-                    f32 y = island->x8.y;
-                    f32 x38 = data->x56C + fp1->x1A88.x564;
-                    if (*x60 == 0) {
-                        data2->x54.x = x;
-                        data2->x54.y = y;
-                        data2->x38 = x38;
-                        ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                    }
+            if (data->x54.x - fp0->cur_pos.x > 0.0) {
+                if (fp0->cur_pos.x < island->x8.x) {
+                    ftCo_800A1F3C(fp0, 5.0 + island->x8.x, island->x8.y,
+                                  data->x56C + fp1->x1A88.x564);
                 }
             } else {
-                if (cx > island->x14.x) {
-                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                    f32 x = island->x14.x - 5.0;
-                    f32 y = island->x14.y;
-                    f32 x38 = data->x56C + fp1->x1A88.x564;
-                    if (*x60 == 0) {
-                        data2->x54.x = x;
-                        data2->x54.y = y;
-                        data2->x38 = x38;
-                        ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                    }
+                if (fp0->cur_pos.x > island->x14.x) {
+                    ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
+                                  data->x56C + fp1->x1A88.x564);
                 }
             }
         }
@@ -3856,7 +3700,6 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
 
 void ftCo_800A7AAC(Fighter* fp)
 {
-    s32 result;
     Fighter* partner;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Vec3 floor_pos;
@@ -3866,9 +3709,9 @@ void ftCo_800A7AAC(Fighter* fp)
     u8 _[0x18];
     Vec3 partner_pos;
     f32 d;
-    f32 cx;
 
     PAD_STACK(0xA);
+    PAD_STACK(8);
 
     partner = ftCo_800A589C(fp);
     if (partner == NULL) {
@@ -3877,6 +3720,7 @@ void ftCo_800A7AAC(Fighter* fp)
     partner_pos = partner->cur_pos;
     if (partner->ground_or_air == GA_Air) {
         s32 blocked;
+        s32 result;
         mp_UnkStruct0* island;
         f32 below = partner_pos.y - 1000.0f;
         f32 above = 10.0f + partner_pos.y;
@@ -3899,51 +3743,21 @@ void ftCo_800A7AAC(Fighter* fp)
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
-                int* x60 = &fp->x1A88.x60;
-                struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                f32 x38 = data->x56C + partner->x1A88.x564;
-                f32 x = floor_pos.x;
-                f32 y = floor_pos.y;
-                if (*x60 == 0) {
-                    data2->x54.x = x;
-                    data2->x54.y = y;
-                    data2->x38 = x38;
-                    ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
-                }
+                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y,
+                              data->x56C + partner->x1A88.x564);
                 if (island != NULL) {
                     d = island->x14.x - data->x54.x;
                     if (d < 0.0f) {
                         d = -d;
                     }
                     if (d < 5.0) {
-                        struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                        f32 x38_edge = data->x56C + partner->x1A88.x564;
-                        f32 x = island->x14.x - 5.0;
-                        f32 y = island->x14.y;
-                        if (*x60 == 0) {
-                            data2->x54.x = x;
-                            data2->x54.y = y;
-                            data2->x38 = x38_edge;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A1F3C(fp, island->x14.x - 5.0, island->x14.y,
+                                      data->x56C + partner->x1A88.x564);
                     } else {
-                        d = island->x8.x - data->x54.x;
-                        if (d < 0.0f) {
-                            d = -d;
-                        }
+                        d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
-                            struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                            f32 x38_edge = data->x56C + partner->x1A88.x564;
-                            f32 x = 5.0 + island->x8.x;
-                            f32 y = island->x8.y;
-                            if (*x60 == 0) {
-                                data2->x54.x = x;
-                                data2->x54.y = y;
-                                data2->x38 = x38_edge;
-                                ftCo_800A1CC4(
-                                    fp, ftCo_803C6594[stage_info.grkind]);
-                            }
+                            ftCo_800A1F3C(fp, 5.0 + island->x8.x, island->x8.y,
+                                          data->x56C + partner->x1A88.x564);
                         }
                     }
                 }
@@ -3953,6 +3767,8 @@ void ftCo_800A7AAC(Fighter* fp)
                    mpIsland_8005AB54(partner->coll_data.floor.index)) == 0)
     {
         s32 blocked;
+        int line;
+        s32 result;
         mp_UnkStruct0* fp_island;
         mp_UnkStruct0* island;
         s32 same_island;
@@ -3965,7 +3781,7 @@ void ftCo_800A7AAC(Fighter* fp)
                               &floor_pos, &line_id, &flags, &floor_normal, -1,
                               -1, -1, NULL, (Fighter_GObj*) blocked);
         if (result != 0) {
-            int line = line_id;
+            line = line_id;
             if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
                 grCorneria_801E2D90(line) || grVenom_80206D10(line))
             {
@@ -3976,27 +3792,11 @@ void ftCo_800A7AAC(Fighter* fp)
             }
         }
         if (result == 0) {
-            struct Fighter_x1A88_t* data2 = &fp->x1A88;
-            f32 x38 = data->x56C + partner->x1A88.x564;
-            f32 x = partner->cur_pos.x;
-            f32 y = partner->cur_pos.y;
-            if (fp->x1A88.x60 == 0) {
-                data2->x54.x = x;
-                data2->x54.y = y;
-                data2->x38 = x38;
-                ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
-            }
+            ftCo_800A1F3C(fp, partner->cur_pos.x, partner->cur_pos.y,
+                          data->x56C + partner->x1A88.x564);
         } else {
-            struct Fighter_x1A88_t* data2 = &fp->x1A88;
-            f32 x38 = data->x56C + partner->x1A88.x564;
-            f32 x = partner_pos.x;
-            f32 y = partner_pos.y;
-            if (fp->x1A88.x60 == 0) {
-                data2->x54.x = x;
-                data2->x54.y = y;
-                data2->x38 = x38;
-                ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
-            }
+            ftCo_800A1F3C(fp, partner_pos.x, partner_pos.y,
+                          data->x56C + partner->x1A88.x564);
         }
         if (fp->ground_or_air == GA_Air) {
             same_island = 0;
@@ -4026,39 +3826,18 @@ void ftCo_800A7AAC(Fighter* fp)
                 sub = 0;
                 break;
             }
-            if (sub == 0) {
+            switch (sub) {
+            case 0:
                 island = mpIsland_8005AB54(partner->coll_data.floor.index);
                 if (island != NULL && data->x54.y - fp->cur_pos.y > 0.0) {
-                    cx = fp->cur_pos.x;
-                    if (data->x54.x - cx > 0.0) {
-                        if (cx < island->x8.x) {
-                            struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                            f32 x = 5.0 + island->x8.x;
-                            f32 y = island->x8.y;
-                            f32 x38 = data->x56C + partner->x1A88.x564;
-                            if (fp->x1A88.x60 == 0) {
-                                data2->x54.x = x;
-                                data2->x54.y = y;
-                                data2->x38 = x38;
-                                ftCo_800A1CC4(
-                                    fp, ftCo_803C6594[stage_info.grkind]);
-                            }
+                    if (data->x54.x - fp->cur_pos.x > 0.0) {
+                        if (fp->cur_pos.x < island->x8.x) {
+                            ftCo_800A1F3C(fp, 5.0 + island->x8.x, island->x8.y,
+                                          data->x56C + partner->x1A88.x564);
                         }
-                    } else {
-                        if (cx > island->x14.x) {
-                            struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                            f32 x = island->x14.x - 5.0;
-                            f32 y = island->x14.y;
-                            f32 x38 = data->x56C + partner->x1A88.x564;
-                            int update = fp->x1A88.x60 == 0;
-                            if (update) {
-                                data2->x54.x = x;
-                                data2->x54.y = y;
-                                data2->x38 = x38;
-                                ftCo_800A1CC4(
-                                    fp, ftCo_803C6594[stage_info.grkind]);
-                            }
-                        }
+                    } else if (fp->cur_pos.x > island->x14.x) {
+                        ftCo_800A1F3C(fp, island->x14.x - 5.0, island->x14.y,
+                                      data->x56C + partner->x1A88.x564);
                     }
                 }
             }
@@ -6242,13 +6021,13 @@ static bool ftCo_800ADE48(Fighter* fp)
 {
     s32 switch_cmd;
     struct Fighter_x1A88_t* data;
-    struct Fighter_x1A88_t* data2;
+    Item* ip;
     u32 flags;
     int line_id;
     Vec3 floor_normal;
     Vec3 floor_pos;
     Item_GObj* item_gobj;
-    Item* ip;
+    struct Fighter_x1A88_t* data2;
     ItemKind kind;
     s32 found;
     s32 result;
@@ -6256,37 +6035,40 @@ static bool ftCo_800ADE48(Fighter* fp)
     s32 motion_id;
     s32 cur_cmd;
     f64 five;
-    f32 px;
-    f32 py;
+    f32 x;
+    f32 x2;
+    f32 y;
+    f32 below;
+    f32 above;
     f32 dy;
-    PAD_STACK(0x14);
+    PAD_STACK(8);
 
     data = &fp->x1A88;
     found = 0;
-    px = data->x54.x;
-    py = data->x54.y;
+    x = data->x54.x;
+    x2 = x;
+    y = data->x54.y;
     five = 5.0;
+    below = y - five;
+    above = five + y;
     line_id = -1;
-    result = mpCheckFloor(px, py + five, px, py - five, 0.0f, &floor_pos,
-                          &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
-                          (Fighter_GObj*) found);
-    if (result != 0) {
-        if (ftCo_800A1B38_noinline(line_id) != 0) {
+    do {
+        result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id,
+                              &flags, &floor_normal, -1, -1, -1, NULL,
+                              (Fighter_GObj*) found);
+        if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+            (void) result;
         } else {
             found = result;
         }
-    } else {
-        found = result;
-    }
-    do {
         if (found != 0) {
             struct Fighter_x1A88_t* data2 = &fp->x1A88;
-            py = data->x54.y;
-            px = data->x54.x;
-            if (px < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
-                px > Stage_GetBlastZoneRightOffset() - data2->half_width ||
-                py < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
-                py > Stage_GetBlastZoneTopOffset() - data2->half_height)
+            y = data->x54.y;
+            x = data->x54.x;
+            if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+                x > Stage_GetBlastZoneRightOffset() - data2->half_width ||
+                y < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
+                y > Stage_GetBlastZoneTopOffset() - data2->half_height)
             {
                 in_bounds = 1;
             } else {
@@ -6298,18 +6080,16 @@ static bool ftCo_800ADE48(Fighter* fp)
         }
         data->xFA_b2 = false;
         if (fp->ground_or_air == GA_Air) {
-            px = fp->cur_pos.x;
-            py = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x2 = x;
+            y = fp->cur_pos.y;
             line_id = -1;
             found = 0;
-            result = mpCheckFloor(px, py, px, ftCo_800ADE48_inline0(py), 0.0f,
+            result = mpCheckFloor(x2, y, x, ftCo_800ADE48_inline0(y), 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, (Fighter_GObj*) found);
-            if (result != 0) {
-                if (ftCo_800A1B38_noinline(line_id) != 0) {
-                } else {
-                    found = result;
-                }
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+                (void) result;
             } else {
                 found = result;
             }
@@ -6361,7 +6141,7 @@ static bool ftCo_800ADE48(Fighter* fp)
         data->x94 = 0;
     }
     if (data->x18 != 0x12) {
-        data2 = &fp->x1A88;
+        data2 = ftCo_800ADE48_inline1(fp);
         if (fp->kind == FTKIND_GKOOPS) {
             switch_cmd = 0;
         } else if (data2->xC == 0xF || data2->xC == 0) {
@@ -6387,13 +6167,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     cur_cmd = data->x18;
     if (cur_cmd != 0x11) {
         motion_id = fp->motion_id;
-        if (motion_id == ftCo_MS_BarrelWait) {
-            switch_cmd = 1;
-        } else if (motion_id == ftCo_MS_Barrel) {
-            switch_cmd = 2;
-        } else {
-            switch_cmd = 0;
-        }
+        switch_cmd = inlineH0(fp);
         if (switch_cmd != 0) {
             ftCo_800B4A78(fp);
             data->x18 = 0x11;
@@ -6572,22 +6346,25 @@ static bool ftCo_800ADE48(Fighter* fp)
                 found = 1;
             } else {
                 kind = ip->kind;
-                if (kind == It_Kind_M_Ball) {
+                switch (kind) {
+                case It_Kind_Capsule:
+                case It_Kind_Box:
+                case It_Kind_Taru:
+                case It_Kind_Egg:
+                case It_Kind_Kusudama:
+                case It_Kind_TaruCann:
+                case It_Kind_BombHei:
+                case It_Kind_M_Ball:
+                case It_Kind_EvYoshiEgg:
                     found = 1;
-                } else if (kind < It_Kind_M_Ball) {
-                    if (kind < It_Kind_Dosei) {
-                        if (kind < 0) {
-                            found = ftCo_ItemCheck(ip);
-                        } else {
-                            found = 1;
-                        }
+                    break;
+                default:
+                    if (ftCo_ItemCheck(ip)) {
+                        found = 1;
                     } else {
-                        found = ftCo_ItemCheck(ip);
+                        found = 0;
                     }
-                } else if (kind != It_Kind_EvYoshiEgg) {
-                    found = ftCo_ItemCheck(ip);
-                } else {
-                    found = 1;
+                    break;
                 }
             }
         }
@@ -6603,9 +6380,10 @@ static bool ftCo_800ADE48(Fighter* fp)
             data->x18 = data->x20;
             return true;
         }
-        return false;
+    } else {
+        return true;
     }
-    return true;
+    return false;
 }
 
 static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)

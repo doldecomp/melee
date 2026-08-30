@@ -2865,7 +2865,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
-                gm_SetPendingSceneIndex(1);
+                gm_SetNextGameModeStateId(1);
             } else {
                 td = gm_GetTournamentData();
                 i = 0;
@@ -2887,7 +2887,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
                     dst_ptr += 0xA;
                     i++;
                 }
-                gm_SetPendingSceneIndex(2);
+                gm_SetNextGameModeStateId(2);
             }
             gm_801A4B60();
         } else {
@@ -2901,7 +2901,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
 }
 
 /// Tournament Mode per-frame update handler.
-void gm_8019628C_OnFrame(void)
+void gm_Scene_TouSetup_OnFrame(void)
 {
     TmData* tm;
     u32 r30;
@@ -2940,7 +2940,7 @@ void gm_8019628C_OnFrame(void)
     lbl_803D9FD8[cur_option]((s32*) tm, r30, r29);
 }
 
-void gm_801963B4_OnEnter(void* arg0)
+void gm_Scene_TouSetup_OnEnter(void* arg0)
 {
     const char* filename;
     lbAudioAx_80026F2C(0x12);
@@ -2964,7 +2964,7 @@ void gm_801963B4_OnEnter(void* arg0)
 }
 
 /// Scene OnLeave callback for gm_18A5. Frees archive resources.
-void gm_801964A4_OnLeave(UNK_T arg)
+void gm_Scene_TouSetup_OnExit(UNK_T arg)
 {
     (void) arg;
     lbArchive_80016EFC(lbl_804D6640);

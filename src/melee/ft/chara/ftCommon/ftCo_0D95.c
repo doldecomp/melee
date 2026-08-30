@@ -4,15 +4,17 @@
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/inlines.h"
-#include "it/inlines.h"
 #include "it/items/itsamusgrapple.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
 bool fn_800D9558(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    s32 i;
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
     Item* it;
@@ -25,9 +27,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
     f32 grav;
     f32 my;
     f32 r;
-    s32 i;
-    s32 frame;
-    PAD_STACK(0x14);
+    PAD_STACK(0x18);
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
@@ -44,19 +44,20 @@ bool fn_800D9558(Fighter_GObj* gobj)
             fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
+                it = (Item*) fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
-                it = GET_ITEM(item);
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
-                    for (i = 0, frame = 0x14; i < 6; i++, frame += 3) {
-                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                    for (i = 0; i < 6; i++) {
+                        if (fp->mv.ca.specials.grav == (f32) (0x14 + i * 3)) {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);
                             effPos.x = jobj->mtx[0][3];
                             effPos.y = jobj->mtx[1][3];
                             effPos.z = jobj->mtx[2][3];
-                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            r = HSD_Randf();
+                            effPos.x = 4.0 * (r - 0.5f) + effPos.x;
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;
@@ -66,8 +67,9 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 }
                 grav = fp->mv.ca.specials.grav;
                 if (grav == (f32) attrs->xA0) {
-                    jobj = fp->parts[51].joint;
-                    HSD_JObjSetupMatrix(jobj);
+                    HSD_JObj* j = fp->parts[51].joint;
+                    HSD_JObjSetupMatrix(j);
+                    jobj = j;
                     my = jobj->mtx[1][3];
                     if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
                                         fp->coll_data.cur_pos.x, my,
@@ -103,7 +105,6 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    s32 frame;
     s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
@@ -113,7 +114,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Vec3 vel;
     f32 grav;
     f32 r;
-    PAD_STACK(4);
+    PAD_STACK(12);
 
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
@@ -132,19 +133,20 @@ bool fn_800D9930(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->xAC) {
             if (grav <= (f32) attrs->xB8) {
                 Item* it;
-                it = GET_ITEM(fp->u.ss.x223C);
+                it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
-                    for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
-                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                    for (i = 0; i < 4; i++) {
+                        if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);
                             effPos.x = jobj->mtx[0][3];
                             effPos.y = jobj->mtx[1][3];
                             effPos.z = jobj->mtx[2][3];
-                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            r = HSD_Randf();
+                            effPos.x = 4.0 * (r - 0.5f) + effPos.x;
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;

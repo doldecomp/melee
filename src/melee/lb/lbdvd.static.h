@@ -8,7 +8,7 @@
 
 #include <melee/lb/types.h>
 
-/* 3BA638 */ static PreloadCacheScene preload_cache_scene = {
+/* 3BA638 */ static PreloadedGameModeState preload_cache_scene = {
     {
         0,
     },

@@ -23,17 +23,17 @@
 /* 1A4BD4 */ void gm_801A4BD4(void);
 
 /**
- * @brief Finds the #GameSceneHandler for a given scene kind.
+ * @brief Finds the #GameScene for a given scene kind.
  *
- * Walks the global #GameSceneHandler table (from #gm_GetAllGameSceneHandlers)
- * comparing each entry's #GameSceneHandler::class_id against @p kind until a
+ * Walks the global #GameScene table (from #gm_GetAllGameScenes)
+ * comparing each entry's #GameScene::class_id against @p kind until a
  * match is found or the @c GS_COUNT value is reached.
  *
  * @param kind The #GameSceneKind (passed as a @c u8) to look up.
- * @returns The #GameSceneHandler whose #GameSceneHandler::class_id equals
+ * @returns The #GameScene whose #GameScene::class_id equals
  */
 @p kind, or @c NULL if no entry matches.
-             /* 1A4CE0 */ GameSceneHandler *
+             /* 1A4CE0 */ GameScene *
              gm_FindGameSceneHandler(u8 kind);
 
 /**

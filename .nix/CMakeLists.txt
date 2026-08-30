@@ -524,7 +524,7 @@ set(SOURCES
     src/melee/gm/gm_1B03.c
     src/melee/gm/gmmenumode.c
     src/melee/gm/gmvsmode.c
-    src/melee/gm/gm_1BA8.c
+    src/melee/gm/gmevent.c
     src/melee/gm/gmboot.c
     src/melee/gm/gm_1BFA.c
     src/melee/gm/gmadventure.c
@@ -564,7 +564,6 @@ set(SOURCES
     src/melee/gm/gmtou_1.c
     src/melee/gm/gmtou_2.c
     src/melee/gm/gmtoulib.c
-    src/melee/gm/gmvsdata.c
     src/melee/gm/gmvsmelee.c
     src/melee/gr/grbattle.c
     src/melee/gr/grcorneria.c

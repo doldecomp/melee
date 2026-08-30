@@ -2,7 +2,7 @@
 
 #include "gm_unsplit.h"
 
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmmain_lib.h"
 #include "gm/gmopening.h"
 #include "mn/inlines.h"
@@ -254,9 +254,9 @@ HSD_Archive* gmTitle_801A1AC0(void)
         &gm_804D67F0, "TitleMark_sobjdesc", 0);
 }
 
-void gmTitle_OnFrame(void)
+void gm_Scene_Title_OnFrame(void)
 {
-    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+    int input = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS);
     int* tmp;
     if (countdown_timer != 0) {
         countdown_timer--;
@@ -327,7 +327,7 @@ static char* gmTitle_801A1D38(const char* src, char* dst)
     return dst;
 }
 
-void gmTitle_OnEnter(void* unused)
+void gm_Scene_Title_OnEnter(void* unused)
 {
     HSD_Text* text;
     int scale;

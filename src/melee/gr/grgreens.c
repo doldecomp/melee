@@ -1083,27 +1083,24 @@ void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
     return;
 }
 
-static inline Item_GObj* getBlockItemGObj(Ground* gp, int i, int j)
-{
-    return gp->u.greens.x8_blocks[j][i].x10;
-}
-
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {
-    HSD_GObj* gobj = getBlockItemGObj(gp, i, j);
     UNUSED u8 pad[8];
     Vec vec;
+    Item_GObj* gobj;
     float f;
     PAD_STACK(0x10);
-
-    if (gobj != NULL && !gp->u.greens.x8_blocks[j][i].x1_7) {
+    if ((gobj = gp->u.greens.x8_blocks[j][i].x10) &&
+        !gp->u.greens.x8_blocks[j][i].x1_7)
+    {
         gp->u.greens.x8_blocks[j][i].x1_7 = 1;
         grMaterial_801C8E28(gobj);
         gp->u.greens.x8_blocks[j][i].x1C = value;
 
         if (gp->u.greens.x8_blocks[j][i].x1_1) {
-            HSD_JObjSetFlagsAll(gp->u.greens.x8_blocks[j][i].xC->hsd_obj,
-                                JOBJ_HIDDEN);
+            HSD_JObj* jobj = gp->u.greens.x8_blocks[j][i].xC->hsd_obj;
+
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             grMaterial_801C8D98(gobj, 1);
             it_80275414(gobj);
             gp->u.greens.x8_blocks[j][i].x1_2 = 1;
@@ -1232,10 +1229,11 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             {
                 float spacing;
 
+                spacing = (gp->u.greens.x4 + row * 6)[col].y -
+                          (gp->u.greens.x4 + row * 6 - 6)[col].y;
                 if (gp->u.greens.x8_blocks[row][col].x8 -
                         gp->u.greens.x8_blocks[row - 1][col].x8 <
-                    (spacing = (gp->u.greens.x4 + col)[row * 6].y -
-                               (gp->u.greens.x4 + col)[(row - 1) * 6].y))
+                    spacing)
                 {
                     gp->u.greens.x8_blocks[row][col].status = 2;
                     gp->u.greens.x8_blocks[row][col].x8 =
@@ -1245,10 +1243,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         }
 
         if (gp->u.greens.x8_blocks[row][col].x8 <
-            (gp->u.greens.x4 + col)[row * 6].y)
+            (gp->u.greens.x4 + row * 6)[col].y)
         {
             gp->u.greens.x8_blocks[row][col].x8 =
-                (gp->u.greens.x4 + col)[row * 6].y;
+                (gp->u.greens.x4 + row * 6)[col].y;
             gp->u.greens.x8_blocks[row][col].status = 3;
             gp->u.greens.x8_blocks[row][col].x1_5 = 1;
             for (next_row = row + 1; next_row < 5; next_row++) {
@@ -1256,10 +1254,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                     break;
                 }
                 gp->u.greens.x8_blocks[next_row][col].x8 =
-                    (gp->u.greens.x4 + col)[next_row * 6].y;
+                    (gp->u.greens.x4 + next_row * 6)[col].y;
                 gp->u.greens.x8_blocks[next_row][col].status = 3;
                 gp->u.greens.x8_blocks[next_row][col].x1_5 = 1;
-                pos.x = (gp->u.greens.x4 + col)[next_row * 6].x;
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
                 pos.y = gp->u.greens.x8_blocks[next_row][col].x8;
                 pos.z = 0.0f;
                 HSD_JObjSetTranslate(
@@ -1276,10 +1274,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
                     break;
                 }
-                pos.x = (gp->u.greens.x4 + col)[next_row * 6].x;
-                pos.y = (gp->u.greens.x4 + col)[next_row * 6].y -
-                        (gp->u.greens.x4 + col)[(next_row - 1) * 6].y +
-                        gp->u.greens.x8_blocks[next_row - 1][col].x8;
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
+                scale = (gp->u.greens.x4 + next_row * 6)[col].y -
+                        (gp->u.greens.x4 + next_row * 6 - 6)[col].y;
+                pos.y = scale + gp->u.greens.x8_blocks[next_row - 1][col].x8;
                 pos.z = 0.0f;
                 gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
                 HSD_JObjSetTranslate(
@@ -1299,7 +1297,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         return;
     }
 
-    pos.x = (gp->u.greens.x4 + col)[row * 6].x;
+    pos.x = (gp->u.greens.x4 + row * 6)[col].x;
     pos.y = gp->u.greens.x8_blocks[row][col].x8;
     pos.z = 0.0f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].xC->hsd_obj, &pos);

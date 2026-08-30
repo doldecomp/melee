@@ -13,10 +13,10 @@ struct exitData {
     UNK_T x4;
 };
 
-/* 1B089C */ static void onExit(GameScene*);
+/* 1B089C */ static void onExit(GameModeState*);
 /* 4D6878 */ static struct exitData exit_data;
 
-/* 3DD6A0 */ GameScene gm_803DD6A0_Scenes[] = {
+/* 3DD6A0 */ GameModeState gm_Mode_Title_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -32,14 +32,14 @@ struct exitData {
     { -1 },
 };
 
-void gmTitleMode_OnEnter(GameScene* arg0)
+void gmTitleMode_OnEnter(UNUSED GameModeState* state)
 {
     lbDvd_800174BC();
 }
 
-void onExit(GameScene* scene)
+void onExit(GameModeState* scene)
 {
-    int* buttons = gm_GetGameSceneLeaveData(scene);
+    int* buttons = gm_GetGameModeStateExitData(scene);
     if (DbLevel >= DbLKind_DebugRom) {
         if (*buttons & HSD_PAD_A) {
             gm_SetPendingGameMode(GM_DEBUG_VS);

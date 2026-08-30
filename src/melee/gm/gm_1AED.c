@@ -142,7 +142,7 @@ static inline u8 set_gm_804D6870_inline(void)
 
 static inline bool gm_801AEDC8_flag_check(void)
 {
-    if (gm_801AEDC8() & 0x1100) {
+    if (gm_801AEDC8() & (HSD_PAD_START | HSD_PAD_A)) {
         sfxForward();
         return true;
     }
@@ -242,7 +242,7 @@ void gm_801AF250(void)
     }
 }
 
-void gm_801AF568_OnFrame(void)
+void gm_Scene_MemCard_OnFrame(void)
 {
     int temp_r29;
     u8 _[0x14];
@@ -447,7 +447,7 @@ static inline bool checkUnk0(void)
     return true;
 }
 
-void gm_801B0264_OnEnter(void* user_data)
+void gm_Scene_MemCard_OnEnter(void* user_data)
 {
     struct enterData* data = user_data;
 
@@ -464,7 +464,7 @@ void gm_801B0264_OnEnter(void* user_data)
     gm_804D6872 = 6;
 }
 
-void gm_801B0304_OnLeave(void* user_data)
+void gm_Scene_MemCard_OnExit(void* user_data)
 {
     struct leaveData* data = user_data;
     if (data != NULL) {
