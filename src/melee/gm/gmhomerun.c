@@ -63,7 +63,7 @@ void gm_801B98E8(GameModeState* scene)
         lb_8001CE00();
     }
     gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
-                vs->start.players[0].color, vs->start.players[0].xA, 0,
+                vs->start.players[0].color, vs->start.players[0].nametag, 0,
                 gm_804D68F8);
     game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
@@ -86,7 +86,8 @@ void gm_801B999C(GameModeState* scene)
     }
     gm_80167A14(vs->start.players);
     gm_801B0730(temp_r3, &vs->start.players[0].ckind, NULL,
-                &vs->start.players[0].color, &vs->start.players[0].xA, NULL);
+                &vs->start.players[0].color, &vs->start.players[0].nametag,
+                NULL);
     vs->start.players[1].ckind = CHKIND_SANDBAG;
     vs->start.players[1].xE = 0xF;
     vs->start.players[1].x1C = 1.0f;
@@ -107,7 +108,7 @@ void gm_801B9A3C(GameModeState* arg0)
     start->rules = vs->start.rules;
 
     start->rules.stkind = St_Kind_Unk84;
-    start->rules.match_mode = 1;
+    start->rules.match_kind = 1;
     start->rules.x0_6 = true;
     start->rules.x1_0 = true;
     start->rules.x4_2 = false;
@@ -137,7 +138,7 @@ void gm_801B9A3C(GameModeState* arg0)
                 vs->start.players[0].color, 1, gm_804D68F8);
     start->players[0].xD_b2 = true;
     gm_8016F088(start);
-    gm_80181A00(start->players[0].ckind, start->players[0].xA);
+    gm_80181A00(start->players[0].ckind, start->players[0].nametag);
     gm_80180B18();
 }
 
@@ -157,8 +158,7 @@ void gm_801B9DD8(GameModeState* arg0)
         gm_SetNextGameModeStateId(1);
         return;
     }
-    selkind = gm_CKindToSelKind(
-        temp_r3->match_end.player_standings[0].character_kind);
+    selkind = gm_CKindToSelKind(temp_r3->match_end.player_standings[0].ckind);
     temp_r31 = gm_80180AE4();
     if ((tmp = gm_801734D0(temp_r31)) != 0x148) {
         gm_80164504(tmp);

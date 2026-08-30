@@ -81,13 +81,13 @@ void gm_Scene_CameraVs_OnFrame(void)
         mn_8022F268();
         *gmCamera_VsCameraTextLayout.x0 = 2;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & (HSD_PAD_START | HSD_PAD_A))
     {
         sfxForward();
         *gmCamera_VsCameraTextLayout.x0 = 0;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & PAD_BUTTON_B)
     {
         sfxBack();

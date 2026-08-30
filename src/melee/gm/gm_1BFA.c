@@ -83,15 +83,15 @@ void gm_801BFABC(GameModeState* arg0)
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
-    temp_r30->rules.match_mode = 1;
+    temp_r30->rules.match_kind = 1;
     temp_r30->rules.x0_3 = 2;
     temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
     tmp = temp_r31->x3;
-    temp_r30->players[0].xA = tmp;
-    temp_r30->players[1].xA = 0x78;
+    temp_r30->players[0].nametag = tmp;
+    temp_r30->players[1].nametag = 0x78;
     temp_r30->players[1].xE = 4;
     temp_r30->players[1].cpu_level = gm_80172CC0(temp_r31->x4, tmp);
     gm_8016F088(temp_r30);

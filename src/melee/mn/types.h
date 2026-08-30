@@ -3,6 +3,7 @@
 
 #include "platform.h"
 
+#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
@@ -102,7 +103,7 @@ struct PlayerInitData {
     /*0x07*/ u8 sub_color; // subcolor
     /*0x08*/ s8 handicap;  // handicap
     /*0x09*/ u8 team;      // team
-    /*0x0A*/ u8 xA;        // nametag
+    /*0x0A*/ u8 nametag;   // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
     u8 xC_b1 : 1;
@@ -150,10 +151,10 @@ typedef struct lbl_8046B378_t {
 ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
-    u32 match_mode : 3; // match mode? 1 = stock mode, 2 = coin mode?
+    u32 match_kind : 3; ///< ::MatchKind
     u32 x0_3 : 3;
     u32 x0_6 : 1;
-    u32 timer_counts_up : 1; ///< timer counts up
+    u32 timer_counts_up : 1; ///< ::bool
 
     u32 x1_0 : 1;
     u32 x1_1 : 1;
@@ -254,7 +255,7 @@ struct StartMeleeRules {
 
 struct StartMeleeData {
     StartMeleeRules rules;
-    PlayerInitData players[6];
+    PlayerInitData players[GM_MAX_PLAYERS];
 };
 
 struct VsModeData {
@@ -515,7 +516,7 @@ struct SSSData {
     /* +01 */ u8 x1;
     /* +02 */ u8 no_lras;
     /* +03 */ s8 force_stage_id;
-    /* +04 */ u8 start_game;
+    /* +04 */ u8 start_game; ///< ::bool
     /* +08 */ VsModeData vs;
 };
 

@@ -479,7 +479,7 @@ void onEnterVs(GameModeState* arg0)
     gm_80168FC4();
     gm_80167A64(&md->rules);
 
-    md->rules.match_mode = gm_801BF6B8();
+    md->rules.match_kind = gm_801BF6B8();
     md->rules.x0_6 = false;
     md->rules.time_limit = 0;
     md->rules.x1_0 = false;
@@ -500,7 +500,7 @@ void onEnterVs(GameModeState* arg0)
         md->players[i].cpu_level = 9;
         md->players[i].xE = 4;
         md->players[i].xC_b1 = false;
-        if (md->rules.match_mode == 1) {
+        if (md->rules.match_kind == 1) {
             md->players[i].stocks = 99;
         }
     }

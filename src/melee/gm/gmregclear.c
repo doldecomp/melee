@@ -837,7 +837,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
                 arg1->x0.slot);
-    arg0->players[0].xA = arg1->x0.x4;
+    arg0->players[0].nametag = arg1->x0.x4;
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
 
     {
@@ -1050,7 +1050,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
         arg1->xC.x20 =
             lbTime_8000AEC8(arg1->xC.x20, arg0->match_end.frame_count);
     }
-    if (arg0->match_end.player_standings[0].character_id == 7) {
+    if (arg0->match_end.player_standings[0].ftkind == 7) {
         arg1->xC.x12 = 1;
     } else {
         arg1->xC.x12 = 0;
@@ -1473,7 +1473,7 @@ u8 gm_8017E430(void)
 u8 gm_8017E440(void)
 {
     UnkAdventureData* r31 = gm_GetAdventureData();
-    if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
+    if (gm_RumbleEnabledForPlayer(r31->x0.slot, r31->x0.x4) == false) {
         return 4;
     }
     return r31->x0.slot;
@@ -4070,7 +4070,7 @@ void fn_80182F40(HSD_GObj* unused)
     int temp_r31;
     int temp_r31_2;
 
-    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+    if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
         (HSD_PAD_START | HSD_PAD_A))
     {
         lbAudioAx_80024C84();

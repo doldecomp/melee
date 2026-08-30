@@ -2628,7 +2628,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.is_teams = false;
     arg0->rules.stkind = tm->x28;
     fn_801640B0(&arg0->rules.x20);
-    arg0->rules.match_mode = rules->mode;
+    arg0->rules.match_kind = rules->mode;
     if (rules->mode != 1) {
         arg0->rules.x0_6 = true;
     } else if (rules->stock_time_limit != 0) {
@@ -2651,7 +2651,7 @@ void gm_801905F0(StartMeleeData* arg0)
             }
         }
     }
-    if (arg0->rules.match_mode == 1) {
+    if (arg0->rules.match_kind == 1) {
         arg0->rules.x2_0 = true;
     }
     arg0->rules.timer_counts_up = false;
@@ -2682,7 +2682,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.disable_pausing = true;
     }
-    if (rules->score_display != 0 && !arg0->rules.match_mode) {
+    if (rules->score_display != 0 && !arg0->rules.match_kind) {
         arg0->rules.x3_0 = true;
     } else {
         arg0->rules.x3_0 = false;
@@ -2692,7 +2692,7 @@ void gm_801905F0(StartMeleeData* arg0)
     for (i = 0; i < 4; i++) {
         if (i < tm->x30) {
             arg0->players[i].x20 = 1.0f;
-            arg0->players[i].xA = (u8) MIN(tm->x4B8[i].x6, 0x78);
+            arg0->players[i].nametag = (u8) MIN(tm->x4B8[i].x6, 0x78);
             if (tm->x4B8[i].x2 != 0) {
                 arg0->players[i].ckind = gm_801905F0_inline0(fn_8018F410());
                 arg0->players[i].color =
@@ -2705,7 +2705,8 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].stocks = rules->stock_count;
             arg0->players[i].sub_color = 0;
             arg0->players[i].team = 0xFF;
-            arg0->players[i].xC_b0 = gm_801677F8(i, arg0->players[i].xA);
+            arg0->players[i].xC_b0 =
+                gm_RumbleEnabledForPlayer(i, arg0->players[i].nametag);
             if (tm->x4B8[i].x0 == 1) {
                 arg0->players[i].xC_b0 = false;
             }
