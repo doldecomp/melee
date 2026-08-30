@@ -4,19 +4,19 @@
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/inlines.h"
-#include "it/inlines.h"
 #include "it/items/itsamusgrapple.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
 bool fn_800D9558(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 i;
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    Item* it;
+    s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
     HSD_JObj* jobj;
@@ -43,12 +43,13 @@ bool fn_800D9558(Fighter_GObj* gobj)
             fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
-                it = (Item*) fp->u.ss.x223C->user_data;
+                Item* it;
+                it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
                     for (i = 0; i < 6; i++) {
-                        if (fp->mv.ca.specials.grav == (f32) (0x14 + i * 3)) {
+                        if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);
@@ -66,15 +67,15 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 }
                 grav = fp->mv.ca.specials.grav;
                 if (grav == (f32) attrs->xA0) {
-                    HSD_JObj* j = fp->parts[51].joint;
-                    HSD_JObjSetupMatrix(j);
-                    jobj = j;
-                    my = jobj->mtx[1][3];
+                    HSD_JObj* joint = fp->parts[51].joint;
+
+                    HSD_JObjSetupMatrix(joint);
+                    my = joint->mtx[1][3];
                     if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
                                         fp->coll_data.cur_pos.x, my,
                                         2.0 * fp->facing_dir *
                                                 fp->x34_scale.y +
-                                            jobj->mtx[0][3],
+                                            joint->mtx[0][3],
                                         my))
                     {
                         it_802B7B84(fp->u.ss.x223C);
