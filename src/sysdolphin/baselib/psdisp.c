@@ -776,8 +776,7 @@ static inline void psSetCurrentMtx(GXPosNrmMtx idx)
 }
 
 static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
-                                        f32 y, f32 z, f32 ppvx, f32 ppvy,
-                                        f32 ppvz, f32 x0, f32 y0, f32 z0,
+                                        f32 y, f32 z, f32 x0, f32 y0, f32 z0,
                                         f32 x1, f32 y1, f32 z1)
 {
     f32 prev_x;
@@ -1158,8 +1157,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up_y = mtx[1][2] * uz + t2;
         up_z = mtx[2][2] * uz + t4;
     }
-    psDispSubMakePolygon(pp, texform, x, y, z, pp->vel.x, pp->vel.y, pp->vel.z,
-                         right_x, right_y, right_z, up_x, up_y, up_z);
+    psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z, up_x,
+                         up_y, up_z);
 }
 
 static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
