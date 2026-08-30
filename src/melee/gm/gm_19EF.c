@@ -409,22 +409,17 @@ static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
     }
 }
 
-static inline void fn_8019F9C4_inline2(HSD_JObj* next, HSD_JObj* model,
-                                       HSD_GObj** result)
+static inline void fn_8019F9C4_inline2(HSD_JObj* next_jobj,
+                                       HSD_JObj* model)
 {
     HSD_JObj* node;
 
-    if (next == NULL) {
+    if (next_jobj == NULL) {
         node = NULL;
     } else {
-        node = next->child;
+        node = next_jobj->child;
     }
     lb_8000C290(model, node);
-
-    {
-        HSD_GObj* character_gobj = GObj_Create(0xE, 0xF, 0);
-        *result = character_gobj;
-    }
 }
 
 static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
@@ -483,6 +478,13 @@ void fn_8019F9C4(u32 arg0)
     Toy_803124BC();
     Toy_803102D0();
     fn_8019F9C4_LoadSymbols(arg0);
+#ifdef MUST_MATCH
+    // Preserve the retail literal order across the later inlined JObj helpers.
+    (void) 0.1f;
+    (void) "SdIntro.dat";
+    (void) "SIS_IntroData";
+    (void) " ";
+#endif
     cobj = HSD_CObjLoadDesc(lbl_804D669C->cameras->desc);
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind, cobj);
@@ -630,7 +632,16 @@ void fn_8019F9C4(u32 arg0)
     } else {
         next = child->child;
     }
-    fn_8019F9C4_inline2(next, jobj, &gobj);
+    fn_8019F9C4_inline2(next, jobj);
+    {
+        HSD_GObj* character_gobj =
+#ifdef MUST_MATCH
+            // Preserve the retail return-value copy.
+            character_gobj =
+#endif
+            GObj_Create(0xE, 0xF, 0);
+        gobj = character_gobj;
+    }
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
     fn_8019F9C4_inline3(jobj, gobj, arg0);
 
