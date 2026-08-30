@@ -2451,14 +2451,12 @@ void fn_801891F4(void)
                 }
             }
             if (buttons & PAD_BUTTON_A) {
-                HSD_JObj* jobj;
-                HSD_GObj* player_entity;
-                Vec3 pos;
                 s16 item;
+                HSD_JObj* jobj;
+                Vec3 pos;
                 lbAudioAx_80024030(8);
-                item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
-                player_entity = Player_GetEntity(0);
-                jobj = player_entity->hsd_obj;
+                item = lbl_803D9828[lbl_80473700.css.menu_values[1]].item_id;
+                jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
                 it_8026D258(&pos, (ItemKind) item);
