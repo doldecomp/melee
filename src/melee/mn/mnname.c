@@ -1179,8 +1179,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     u8 name_idx;
     PAD_STACK(8);
 
-    i = 0;
-    do {
+    for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(archive->joint);
         HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                            archive->shapeanim_joint);
@@ -1201,8 +1200,7 @@ void mnName_80239A24(HSD_GObj* gobj)
             HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func,
                              child);
         }
-        i++;
-    } while (i < 0x18);
+    }
 
     text = HSD_SisLib_803A6754(0, 0);
     data->text = text;
@@ -1225,8 +1223,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
 
-    j = 0;
-    do {
+    for (j = 0; j < 0x18; j++) {
         MnName_GObj* global_data = (MnName_GObj*) mnName_804D6BF8->user_data;
         row = global_data->gobj.gx_link + ((u8) j / 6);
         count = GetNameCount_noinline();
@@ -1290,8 +1287,7 @@ void mnName_80239A24(HSD_GObj* gobj)
                 HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnName_StringTerminator);
             }
         }
-        j++;
-    } while (j < 0x18);
+    }
 }
 
 void mnName_80239EBC(HSD_JObj* jobj, f32 y)
