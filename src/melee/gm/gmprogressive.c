@@ -115,7 +115,7 @@ static void gm_801AD254(int arg0)
     HSD_JObjAnimAll(jobj);
 }
 
-void gm_801AD620_OnFrame(void)
+void gm_Scene_ProgScan_OnFrame(void)
 {
     PAD_STACK(0x8);
 
@@ -174,7 +174,7 @@ void gm_801AD620_OnFrame(void)
     }
 }
 
-void gm_801AD874_OnEnter(UNK_T arg0)
+void gm_Scene_ProgScan_OnEnter(UNK_T arg0)
 {
     int* dst = arg0;
     int var_r0;
@@ -193,7 +193,7 @@ void gm_801AD874_OnEnter(UNK_T arg0)
     gm_80480D70.x20 = 0;
 }
 
-void gm_801AD8EC_OnLeave(UNK_T arg0)
+void gm_Scene_ProgScan_OnExit(UNK_T arg0)
 {
     int* dst = arg0;
     *dst = gm_80480D70.x14;

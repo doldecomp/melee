@@ -23,7 +23,7 @@ typedef struct HurtCapsule HurtCapsule;
 typedef struct lbCardNew_SnapshotEntry lbCardNew_SnapshotEntry;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct PreloadCache PreloadCache;
-typedef struct PreloadCacheScene PreloadCacheScene;
+typedef struct PreloadedGameModeState PreloadedGameModeState;
 typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
 typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;

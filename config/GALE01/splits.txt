@@ -4705,14 +4705,14 @@ melee/vi/vi0501.c:
 	.sdata2     start:0x804DE060 end:0x804DE090
 
 melee/vi/vi0502.c:
-	.text       start:0x8031E110 end:0x8031E6CC
+	.text       start:0x8031E110 end:0x8031E6EC
 	.data       start:0x804000D0 end:0x80400108
 	.sdata      start:0x804D5AE8 end:0x804D5AF8
 	.sbss       start:0x804D6F90 end:0x804D6FB0
 	.sdata2     start:0x804DE090 end:0x804DE0A8
 
 melee/vi/vi0601.c:
-	.text       start:0x8031E6CC end:0x8031ED70
+	.text       start:0x8031E6EC end:0x8031ED70
 	.data       start:0x80400108 end:0x80400128
 	.sdata      start:0x804D5AF8 end:0x804D5B08
 	.sbss       start:0x804D6FB0 end:0x804D6FB8

@@ -20,8 +20,8 @@
 /* 1A6D78 */ void fn_801A6D78(HSD_GObj*, int);
 /* 1A6DC0 */ UNK_RET gm_801A6DC0(UNK_PARAMS);
 /* 1A6EE4 */ UNK_RET gm_801A6EE4(UNK_PARAMS);
-/* 1A7070 */ void gm_801A7070_OnEnter(void* unused);
-/* 1A79D4 */ void gm_801A79D4_OnFrame(void);
+/* 1A7070 */ void gm_Scene_ToyFall_OnEnter(void* unused);
+/* 1A79D4 */ void gm_Scene_ToyFall_OnFrame(void);
 
 /* 4D6798 */ extern HSD_Joint* gm_804D6798;
 /* 4D679C */ extern HSD_Archive* gm_804D679C;

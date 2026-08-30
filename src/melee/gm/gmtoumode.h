@@ -3,6 +3,6 @@
 
 #include "gm/types.h"
 
-/* 3DDAC0 */ extern GameScene gm_803DDAC0_Scenes[];
+/* 3DDAC0 */ extern GameModeState gm_Mode_Tournament_States[];
 
 #endif

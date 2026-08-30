@@ -9,7 +9,7 @@
 
 #include "if/if_2FD9.h"
 
-GameScene gm_803DEF88_Scenes[] = {
+GameModeState gm_Mode_TinyVs_States[] = {
     {
         0,
         3,
@@ -109,22 +109,22 @@ GameScene gm_803DEF88_Scenes[] = {
     { -1 },
 };
 
-void gm_801B8DA8(GameScene* scene)
+void gm_801B8DA8(GameModeState* scene)
 {
     gm_801A5618(scene, &gmMainLib_804D3EE0->unk_E50, 5);
 }
 
-void gm_801B8DD4(GameScene* scene)
+void gm_801B8DD4(GameModeState* scene)
 {
     gm_801A5680(scene, &gmMainLib_804D3EE0->unk_E50);
 }
 
-void gm_801B8DFC(GameScene* scene)
+void gm_801B8DFC(GameModeState* scene)
 {
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_E50);
 }
 
-void gm_801B8E24(GameScene* scene)
+void gm_801B8E24(GameModeState* scene)
 {
     gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_E50, 0);
 }
@@ -137,44 +137,44 @@ void fn_801B8E50(PlayerInitData* arg0, PlayerInitData* unused)
     arg0->xB = 1;
 }
 
-void gm_801B8E74(GameScene* scene)
+void gm_801B8E74(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_E50;
     gm_801A583C(scene, data, NULL, fn_801B8E50);
 }
 
-void gm_801B8EA8(GameScene* scene)
+void gm_801B8EA8(GameModeState* scene)
 {
     gm_801A5AF0(scene, 4U, 3U);
 }
 
-void gm_801B8ED0(GameScene* scene)
+void gm_801B8ED0(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_E50;
     gm_801A5C3C(scene, data, NULL, fn_801B8E50);
 }
 
-void gm_801B8F04(GameScene* scene)
+void gm_801B8F04(GameModeState* scene)
 {
     gm_801A5EC8(scene);
 }
 
-void gm_801B8F24(GameScene* scene)
+void gm_801B8F24(GameModeState* scene)
 {
     gm_801A5F00(scene);
 }
 
-void gm_801B8F44(GameScene* scene)
+void gm_801B8F44(GameModeState* scene)
 {
     gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_E50, 0);
 }
 
-void gm_801B8F70_OnInit(void)
+void gm_Mode_TinyVs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_E50);
 }
 
-void gm_801B8F98_OnLoad(void)
+void gm_Mode_TinyVs_OnLoad(void)
 {
     gm_801A55C4();
 }

@@ -6,9 +6,9 @@
 #include "gm/types.h"
 
 /* 1BA8FC */ void gm_801BA8FC(void);
-/* 1BBA60 */ void gm_801BBA60_OnInit(void);
-/* 1BBEA8 */ void gm_801BBEA8_OnLoad(void);
-/* 1BBFE4 */ void gm_801BBFE4_OnUnload(void);
+/* 1BBA60 */ void gm_Mode_Event_OnInit(void);
+/* 1BBEA8 */ void gm_Mode_Event_OnLoad(void);
+/* 1BBFE4 */ void gm_Mode_Event_OnUnload(void);
 /* 1BEB68 */ void gm_801BEB68(int);
 /* 1BEB74 */ void gm_801BEB74(u8);
 /* 1BEB80 */ u8 gm_801BEB80(void);

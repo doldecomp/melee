@@ -169,8 +169,7 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.yaku.x2 != 2) {
         OSReport("%s:%d: oioi...\n", __FILE__, 215);
-        while (true)
-            ;
+        while (true);
     }
 }
 

@@ -6,8 +6,8 @@
 #include "baselib/forward.h"
 #include "ty/forward.h"
 
-/* 31B460 */ void tyDisplay_OnEnter_8031B460(void*);
-/* 31B9A4 */ void tyDisplay_OnFrame_8031B9A4(void);
+/* 31B460 */ void tyDisplay_Scene_OnEnter(void*);
+/* 31B9A4 */ void tyDisplay_Scene_OnFrame(void);
 /* 31B9DC */ TyDspEntry* tyDisplay_8031B9DC(s32 id);
 /* 31BB34 */ s32 tyDisplay_8031BB34(s8);
 /* 31BB94 */ char* tyDisplay_8031BB94(s8);

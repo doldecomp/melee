@@ -15,7 +15,7 @@
 
 static HSD_GObj* gm_804D6858;
 
-void gm_801ACE94_OnEnter(void* unused)
+void gm_Scene_Omake15_OnEnter(void* unused)
 {
     HSD_GObj* gobj;
     HSD_SObj* temp_r3_2;
@@ -38,7 +38,7 @@ void gm_801ACE94_OnEnter(void* unused)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801ACF8C_OnFrame(void)
+void gm_Scene_Omake15_OnFrame(void)
 {
     bool var_r31 = false;
     PAD_STACK(4);
