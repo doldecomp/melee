@@ -1024,17 +1024,18 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int idx;
                     int palflag;
 
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     pc += 2;
 
                     if (linkNo >= 8) {
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1075,11 +1076,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int bank;
 
                     bank = pp->bank;
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     pc += 2;
 
-                    if (ptclref_804D0E5C[bank] != NULL) {
-                        idx = ptclref_804D0E5C[bank][idx];
+                    if (hsd_804D0948[bank] != NULL) {
+                        idx = ((u32**) hsd_804D0948)[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1088,10 +1090,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1128,7 +1130,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 {
                     int idx;
 
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     pc += 2;
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
                     if (gchild != NULL) {
@@ -1189,7 +1192,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u8 flags;
                     HSD_psAppSRT* srt;
 
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     flags = pc[2];
                     pc += 3;
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -1253,12 +1257,13 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u8 flags;
                     HSD_psAppSRT* srt;
 
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     flags = pc[2];
                     pc += 3;
 
-                    if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = ptclref_804D0E5C[pp->bank][idx];
+                    if (hsd_804D0948[pp->bank] != NULL) {
+                        idx = ((u32**) hsd_804D0948)[pp->bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -1320,8 +1325,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 {
                     int baseLife;
                     int randomRange;
-                    baseLife = (pc[0] << 8) + pc[1];
-                    randomRange = (pc[2] << 8) + pc[3];
+                    baseLife = pc[0] << 8;
+                    baseLife += pc[1];
+                    randomRange = pc[2] << 8;
+                    randomRange += pc[3];
                     pc += 4;
                     pp->life =
                         baseLife + (s32) ((f32) randomRange * HSD_Randf());
@@ -1389,8 +1396,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
-                    if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = ptclref_804D0E5C[pp->bank][idx];
+                    if (hsd_804D0948[pp->bank] != NULL) {
+                        idx = ((u32**) hsd_804D0948)[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1399,10 +1406,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1690,17 +1697,18 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int idx;
                     int palflag;
 
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     pc += 2;
 
                     if (linkNo >= 8) {
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1747,11 +1755,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int bank;
 
                     bank = pp->bank;
-                    idx = (pc[0] << 8) + pc[1];
+                    idx = pc[0] << 8;
+                    idx += pc[1];
                     pc += 2;
 
-                    if (ptclref_804D0E5C[bank] != NULL) {
-                        idx = ptclref_804D0E5C[bank][idx];
+                    if (hsd_804D0948[bank] != NULL) {
+                        idx = ((u32**) hsd_804D0948)[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1759,10 +1768,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
