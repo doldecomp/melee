@@ -368,6 +368,7 @@ void fn_803B61B4(s32* arg0)
     s32 scratch_r5_3;
     s32 scratch_r5_4;
     f32 scratch_f13_2;
+    f32 temp;
     f32 scratch_f22;
     f32 scratch_f31;
     s32 scratch_r5_6;
@@ -410,10 +411,8 @@ void fn_803B61B4(s32* arg0)
         scratch_f9 = (f32) (0.707107 * (f64) (-scratch_f12 + scratch_f13));
         scratch_f23_2 = scratch_f10 + scratch_f12_2;
         scratch_f13_3 = -scratch_f22 + scratch_f31;
-        {
-            f32 temp = (f32) (0.707107 * (f64) (scratch_f12 + scratch_f13));
-            scratch_f22 = temp;
-        }
+        temp = (f32) (0.707107 * (f64) (scratch_f12 + scratch_f13));
+        scratch_f22 = temp;
         scratch_f24_2 = scratch_f11 + scratch_f25;
         scratch_f25_2 = scratch_f11 - scratch_f25;
         work_r4[0] = (s32) (scratch_f23_2 + scratch_f13_2);
