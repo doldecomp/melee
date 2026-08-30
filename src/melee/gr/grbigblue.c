@@ -1580,6 +1580,26 @@ bool grBigBlue_801E93D0(Ground_GObj* arg)
     return false;
 }
 
+static inline s32
+grBigBlue_CountCars(void)
+{
+    s32 i;
+    HSD_JObj* cars_avail = NULL;
+    Ground* manager = GET_GROUND(Ground_GetMapGObj(32));
+    s32 count = 0;
+
+    for (i = 0; i < 3; i++) {
+        if ((s8) manager->u.bigblue.data[i].x1 != 0) {
+            count++;
+            if (cars_avail != NULL) {
+                cars_avail = manager->u.bigblue.xD4
+                    [(s8) manager->u.bigblue.data[i].index];
+            }
+        }
+    }
+    return count;
+}
+
 void grBigBlue_801E93D8(Ground_GObj* gobj)
 {
     Vec3 pos;
@@ -1592,7 +1612,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     u8* bp = (u8*) gp;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(52);
+    PAD_STACK(56);
 
     HSD_JObjGetTranslation2(jobj, &pos);
 
@@ -1626,21 +1646,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
             if (((grBb_GroundStateFlag*) Ground_GetMapGObj(32)->user_data)
                     ->xCC != 0)
             {
-                s32 i;
-                HSD_JObj* cars_avail = NULL;
-                Ground* manager = GET_GROUND(Ground_GetMapGObj(32));
-                s32 count = 0;
-
-                for (i = 0; i < 3; i++) {
-                    if ((s8) manager->u.bigblue.data[i].x1 != 0) {
-                        count++;
-                        if (cars_avail != NULL) {
-                            cars_avail =
-                                manager->u.bigblue.xD4
-                                    [(s8) manager->u.bigblue.data[i].index];
-                        }
-                    }
-                }
+                s32 count = grBigBlue_CountCars();
 
                 if (count <= 1) {
                     f32 height;
@@ -1784,22 +1790,28 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 target_z = euler.z;
                 *(f32*) (bp + 0xCC) = target_z;
                 if (HSD_JObjGetRotationZ(jobj) < *(f32*) (bp + 0xCC)) {
+                    f32 target;
                     f32 delta =
                         0.017453292f *
                         (yakumono_param->xD4 *
                          (*(f32*) (bp + 0xCC) - HSD_JObjGetRotationZ(jobj)));
                     HSD_JObjAddRotationZ(jobj, delta);
-                    if (HSD_JObjGetRotationZ(jobj) >= *(f32*) (bp + 0xCC)) {
-                        HSD_JObjSetRotationZ(jobj, *(f32*) (bp + 0xCC));
+                    if (HSD_JObjGetRotationZ(jobj) >=
+                        (target = *(f32*) (bp + 0xCC)))
+                    {
+                        HSD_JObjSetRotationZ(jobj, target);
                     }
                 } else {
+                    f32 target;
                     f32 delta =
                         0.017453292f *
                         (yakumono_param->xD4 *
                          (*(f32*) (bp + 0xCC) - HSD_JObjGetRotationZ(jobj)));
                     HSD_JObjAddRotationZ(jobj, delta);
-                    if (HSD_JObjGetRotationZ(jobj) <= *(f32*) (bp + 0xCC)) {
-                        HSD_JObjSetRotationZ(jobj, *(f32*) (bp + 0xCC));
+                    if (HSD_JObjGetRotationZ(jobj) <=
+                        (target = *(f32*) (bp + 0xCC)))
+                    {
+                        HSD_JObjSetRotationZ(jobj, target);
                     }
                 }
 
