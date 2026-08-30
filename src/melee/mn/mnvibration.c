@@ -747,7 +747,6 @@ static inline HSD_JObj* mnVibration_GetPortChildAt(HSD_GObj* gobj, s32 n)
 }
 
 static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
-                                           MnVibrationData* data,
                                            HSD_JObj** port_anim_jobj)
 {
     HSD_JObj* panel_jobj;
@@ -759,6 +758,7 @@ static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
     u8 anim_state;
     HSD_JObj* active_child;
     HSD_JObj* disconnected_child;
+    MnVibrationData* data = gobj->user_data;
 
     if ((u8) mn_804A04F0.cur_menu != 0x13) {
         HSD_GObjProc* proc;
@@ -861,7 +861,7 @@ void mnVibration_Think(HSD_GObj* gobj)
 {
     {
         HSD_JObj* port_anim_jobj;
-        mnVibration_ThinkInline(gobj, gobj->user_data, &port_anim_jobj);
+        mnVibration_ThinkInline(gobj, &port_anim_jobj);
     }
     PAD_STACK(24);
 }
