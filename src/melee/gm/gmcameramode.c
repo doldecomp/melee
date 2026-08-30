@@ -1,7 +1,6 @@
 #include "gmcameramode.h"
 
 #include "gm_1B03.h"
-#include "gmvsdata.h"
 
 #include "gm/gm_1A3F.h"
 

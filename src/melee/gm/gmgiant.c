@@ -3,7 +3,6 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
-#include "gmvsdata.h"
 #include "gmvsmelee.h"
 #include "types.h"
 

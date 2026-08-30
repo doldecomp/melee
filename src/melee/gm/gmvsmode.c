@@ -1,7 +1,5 @@
 #include "gmvsmode.h"
 
-#include "gmvsdata.h"
-
 #include "gm/gm_1A3F.h"
 #include "gm/gmmovieend.h"
 #include "if/if_2FD9.h"

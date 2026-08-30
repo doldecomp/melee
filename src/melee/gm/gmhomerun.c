@@ -1,7 +1,8 @@
 #include "gmhomerun.h"
 
 #include "gm_unsplit.h"
-#include "gmvsdata.h"
+
+#include "gm/gmvsmelee.h"
 
 #include <melee/pl/forward.h>
 

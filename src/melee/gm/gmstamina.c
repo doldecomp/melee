@@ -1,7 +1,6 @@
 #include "gmstamina.h"
 
 #include "gm_unsplit.h"
-#include "gmvsdata.h"
 
 #include <placeholder.h>
 
