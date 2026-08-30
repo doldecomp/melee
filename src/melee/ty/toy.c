@@ -5070,7 +5070,7 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
         start = 0;
         offset = start;
         entry = data->entries;
-        for (; start < data->visible_count; start += 1, offset += 2, entry++) {
+        for (; start < data->visible_count; offset += 2, entry++, start += 1) {
             if (start == data->selectedIdx) {
                 trophyIdx = Toy_sbss_804D6EDC[offset / 2];
                 result = Toy_8030813C(trophyIdx);
