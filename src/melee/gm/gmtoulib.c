@@ -770,8 +770,8 @@ void fn_8018B090(HSD_GObj* arg0)
                 }
             }
             if (var_r24 == 4) {
-                s32 slot_idx = lbl_804D6634;
-                entries[idx].slots[slot_idx].x3C =
+                s32 slot_idx;
+                entries[idx].slots[slot_idx = lbl_804D6634].x3C =
                     lbl_803D9E1C[tm->entrants][0];
                 entries[idx].slots[slot_idx].x40 =
                     lbl_803D9E1C[tm->entrants][1];
