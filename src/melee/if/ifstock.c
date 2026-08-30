@@ -627,6 +627,7 @@ static inline HSD_JObj* ifStock_802F98E8_get_x3C(unsigned char player)
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
+    unsigned char* data;
     HSD_JObj* jobj;
     unsigned char* user_data;
     int i;
@@ -645,11 +646,12 @@ void ifStock_802F98E8(unsigned char player, int b)
         if (gobj != NULL) {
             jobj = HSD_JObjLoadJoint((*stock->x0)->joint);
             if (jobj != NULL) {
-                unsigned char* data;
+                DynamicModelDesc* model_desc;
 
                 HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
                 GObj_SetupGXLink(gobj, fn_802F94E0, 11, 0);
-                gm_8016895C(jobj, *stock->x0, 0);
+                model_desc = *stock->x0;
+                gm_8016895C(jobj, model_desc, 0);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_GObj_SetupProc(gobj, fn_802F9410, 17);
                 HSD_JObjSetTranslate(jobj, ifAll_GetPlayerHUDPosition(player));
