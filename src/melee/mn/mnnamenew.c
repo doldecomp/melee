@@ -1477,6 +1477,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
         AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
     table_lower =
         AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
+    arg1 = (u8) arg1;
     for (i = 0; i < (s32) arg1; i++) {
         char* str;
         if ((u8) (arg3 - 0x30) <= 1U) {
