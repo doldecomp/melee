@@ -504,14 +504,15 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     scale.x = scale.y = scale.z = 1.0F;
     HSD_JObjSetScale(jobj, &scale);
 
-    gp->u.bigblue.xC8 = HSD_MemAlloc(120);
+    gp->u.bigblue.car.collision_jobjs = HSD_MemAlloc(120);
     HSD_ASSERT(774, gp->u.carnull.coll_jobj);
 
-    gp->u.bigblue.xCC = HSD_MemAlloc(30);
+    gp->u.bigblue.car.ranks = HSD_MemAlloc(30);
     HSD_ASSERT(776, gp->u.carnull.rank);
 
     for (i = 0; i < 30; i++) {
-        gp->u.carnull.coll_jobj[i] = Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
+        gp->u.bigblue.car.collision_jobjs[i] =
+            Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
     }
 
     car_gobj = grBigBlue_801E59F8(4);
@@ -530,12 +531,12 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
         child = HSD_JObjGetChild(cur);
         next = HSD_JObjGetNext(cur);
 
-        HSD_JObjReparent(cur, gp->u.carnull.coll_jobj[i]);
+        HSD_JObjReparent(cur, gp->u.bigblue.car.collision_jobjs[i]);
         HSD_JObjSetRotationY(cur, M_PI_2_F);
 
         scale.x = scale.y = scale.z = Ground_801C0498() * yakumono_param->xC;
 
-        HSD_JObjSetScale(gp->u.carnull.coll_jobj[i], &scale);
+        HSD_JObjSetScale(gp->u.bigblue.car.collision_jobjs[i], &scale);
 
         HSD_JObjGetScale(child, &scale);
         {
@@ -570,7 +571,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
             max_val += (range != 0 ? HSD_Randi(range) : 0);
         }
 
-        *(s16*) ((u8*) gp + 0xD0) = (s16) max_val;
+        gp->u.bigblue.car.spawn_timer = (s16) max_val;
     }
 }
 
@@ -589,10 +590,10 @@ void grBigBlue_801E68B8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    HSD_Free(gp->u.bigblue.xC8);
-    gp->u.bigblue.xC8 = NULL;
-    HSD_Free(gp->u.bigblue.xCC);
-    gp->u.bigblue.xCC = NULL;
+    HSD_Free(gp->u.bigblue.car.collision_jobjs);
+    gp->u.bigblue.car.collision_jobjs = NULL;
+    HSD_Free(gp->u.bigblue.car.ranks);
+    gp->u.bigblue.car.ranks = NULL;
 }
 
 void grBigBlue_801E6904(Ground_GObj* gobj)
@@ -3041,9 +3042,9 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
     for (i = 0; i < 30; i++) {
         u8 val;
         mpJointSetCb1(lbl_803E2DFC[i], gp, fn_801EF60C);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[i], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(gp->u.bigblue.car.collision_jobjs[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
-        ((u8*) gp->u.bigblue.xCC)[i] = val;
+        gp->u.bigblue.car.ranks[i] = val;
     }
 
     {
@@ -3142,14 +3143,14 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             *(f32*) (car + 0xEC) = 1.0F;
 
-            HSD_JObjClearFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[line_idx],
-                                  JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(
+                gp->u.bigblue.car.collision_jobjs[line_idx], JOBJ_HIDDEN);
 
-            jobj = ((HSD_JObj**) gp->u.bigblue.xC8)[line_idx];
+            jobj = gp->u.bigblue.car.collision_jobjs[line_idx];
 
             HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
 
-            ((u8*) gp->u.bigblue.xCC)[line_idx] = 1;
+            gp->u.bigblue.car.ranks[line_idx] = 1;
         } else {
             ((grBb_StateBits*) (car + 0xD4))->state = 1;
         }
@@ -3214,7 +3215,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
     /* Count free (0) and reserved (2) lanes */
     for (i = 0; i < 30; i++) {
-        u8 val = ((u8*) gp->u.bigblue.xCC)[i];
+        u8 val = gp->u.bigblue.car.ranks[i];
         if (val == 0) {
             free_count++;
         } else if (val == 2) {
@@ -3234,7 +3235,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             u8* p;
             s32 j;
             for (j = 0; j < 30; j++) {
-                p = (u8*) gp->u.bigblue.xCC + j;
+                p = &gp->u.bigblue.car.ranks[j];
                 if (*p == 2 && --pick < 0) {
                     *p = 0;
                     free_count++;
@@ -3253,7 +3254,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             u8* p;
             s32 j;
             for (j = 0; j < 30; j++) {
-                p = (u8*) gp->u.bigblue.xCC + j;
+                p = &gp->u.bigblue.car.ranks[j];
                 if (*p == 0 && --pick < 0) {
                     *p = 2;
                     reserved_count++;
@@ -3289,7 +3290,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     }
 
     if (active_count == 1) {
-        *(s16*) ((u8*) gp + 0xD0) -= 1;
+        gp->u.bigblue.car.spawn_timer -= 1;
     }
 
     /* Find closest car */
@@ -3379,8 +3380,8 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     /* Timer-based car spawn */
     {
         u8* bp = (u8*) gp;
-        s16 timer = *(s16*) (bp + 0xD0);
-        *(s16*) (bp + 0xD0) = timer - 1;
+        s16 timer = gp->u.bigblue.car.spawn_timer;
+        gp->u.bigblue.car.spawn_timer = timer - 1;
         if (timer < 0) {
             active_count = -1;
             if ((u32) ((bp[0xD4] >> 2) & 0x3F) == 1) {
@@ -3447,8 +3448,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         pick = 0;
                     }
                     for (pos = 0; pos < 30; pos++) {
-                        if ((*((u8*) gp->u.bigblue.xCC + pos)) == 0 &&
-                            --pick < 0)
+                        if (gp->u.bigblue.car.ranks[pos] == 0 && --pick < 0)
                         {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    5) != 0)
@@ -3468,7 +3468,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                                         tmin += HSD_Randi(diff);
                                     }
                                 }
-                                *(s16*) (bp + 0xD0) = (s16) tmin;
+                                gp->u.bigblue.car.spawn_timer = (s16) tmin;
                                 return;
                             }
                             return;
@@ -3483,8 +3483,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         pick = 0;
                     }
                     for (pos = 0; pos < 30; pos++) {
-                        if ((*((u8*) gp->u.bigblue.xCC + pos)) == 2 &&
-                            --pick < 0)
+                        if (gp->u.bigblue.car.ranks[pos] == 2 && --pick < 0)
                         {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    6) != 0)
@@ -3504,7 +3503,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                                         tmin += HSD_Randi(diff);
                                     }
                                 }
-                                *(s16*) (bp + 0xD0) = (s16) tmin;
+                                gp->u.bigblue.car.spawn_timer = (s16) tmin;
                                 return;
                             }
                             return;

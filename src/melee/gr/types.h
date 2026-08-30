@@ -1387,6 +1387,17 @@ struct grBigBlue_CarLane {
 };
 ASSERT_SIZE(struct grBigBlue_CarLane, 0x40);
 
+/// Car manager state (gobj ID 33).
+struct grBigBlue_CarVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ HSD_JObj** collision_jobjs;
+    /* gp+CC */ u8* ranks;
+    /* gp+D0 */ s16 spawn_timer;
+    /* gp+D2 */ u8 pad_D2[2];
+    /* gp+D4 */ struct grBigBlue_CarLane lanes[4];
+};
+ASSERT_SIZE(struct grBigBlue_CarVars, 0x110);
+
 struct grBigBlue_GroundVars {
     union {
         struct {
@@ -1423,10 +1434,7 @@ struct grBigBlue_GroundVars {
         struct grBigBlue_ManagerVars manager;
         struct grBigBlue_PlatformVars platform;
         struct grBigBlue_RoadVars road;
-        struct {
-            /* +00 gp+C4 */ u8 pad_C4[0x10];
-            /* +10 gp+D4 */ struct grBigBlue_CarLane lanes[4];
-        } car;
+        struct grBigBlue_CarVars car;
     };
 };
 
@@ -1920,10 +1928,11 @@ struct Ground {
         struct grPushOn_GroundVars pushon;
         struct ScrollVars scroll;
         struct grBigBlueRoute_GroundVars car;
+        /// Legacy spellings retained for stringified assertion text.
         struct {
-            /*  +0 gp+C4 */ UNK_T xC4;
+            /*  +0 gp+C4 */ u32 xC4;
             /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
-            /*  +8 gp+CC */ UNK_T rank;
+            /*  +8 gp+CC */ u8* rank;
         } carnull;
     } u;
 };
