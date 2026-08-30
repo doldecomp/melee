@@ -585,7 +585,8 @@ void fn_8024D864(HSD_GObj* gobj)
                 y_a = HSD_JObjGetTranslationY(up_jobj_0A);
                 y_b = HSD_JObjGetTranslationY(up_jobj_0C);
                 lb_80011E24(tree, &up_jobj_0B, 0xB, -1);
-                mnEvent_SetPageY(up_jobj_0B, page, y_a, y_b);
+                tree = up_jobj_0B;
+                mnEvent_SetPageY(tree, page, y_a, y_b);
                 mnEvent_ShowSelected(data, &jobj_09);
                 return;
             }
