@@ -1959,18 +1959,24 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp,
     return false;
 }
 
-static inline s32 ftCo_800A3908_inline1(float x, float y)
+static inline s32 ftCo_800A3908_inline2(
+    Vec3* out_normal, u32* out_flags, int* out_line, Vec3* out_pos, float y,
+    float x)
+{
+    return mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
+                        out_flags, out_normal, -1, -1, -1, NULL, NULL);
+}
+
+inline s32 ftCo_800A3908_inline1(
+    float x, float y, Vec3* out_pos, Vec3* out_normal, int* out_line,
+    u32* out_flags)
 {
     s32 result;
-    Vec3 floor_normal;
-    int line_id;
-    Vec3 floor_pos;
-    u32 flags;
 
-    line_id = -1;
-    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, &floor_pos, &line_id,
-                          &flags, &floor_normal, -1, -1, -1, NULL, NULL);
-    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+    *out_line = -1;
+    result = ftCo_800A3908_inline2(out_normal, out_flags, out_line, out_pos, y,
+                                   x);
+    if (result != 0 && ftCo_800A1B38_noinline(*out_line) != 0) {
         return 0;
     }
     return result;
@@ -1987,6 +1993,14 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 dist;
     Vec3 island_pos;
+    Vec3 floor_pos0;
+    Vec3 floor_normal0;
+    int line_id0;
+    u32 flags0;
+    Vec3 floor_pos1;
+    Vec3 floor_normal1;
+    int line_id1;
+    u32 flags1;
     f32 ex;
     f32 ey;
     s32 valid;
@@ -2060,7 +2074,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
                     px = ex - 5.0;
-                    valid = ftCo_800A3908_inline1(px, ey);
+                    valid = ftCo_800A3908_inline1(
+                        px, ey, &floor_pos0, &floor_normal0, &line_id0, &flags0);
                     if (valid != 0 &&
                         !ftCo_800A3908_inline0(fp, data2, px, ey))
                     {
@@ -2085,7 +2100,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 ddy = ey - fp->cur_pos.y;
                 px = ex - 5.0;
                 ddx = px - fp->cur_pos.x;
-                valid = ftCo_800A3908_inline1(px, ey);
+                valid = ftCo_800A3908_inline1(
+                    px, ey, &floor_pos1, &floor_normal1, &line_id1, &flags1);
                 if (valid != 0 && !ftCo_800A3908_inline0(fp, data2, px, ey)) {
                     ok = 1;
                 } else {
