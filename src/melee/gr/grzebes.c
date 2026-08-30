@@ -1909,9 +1909,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_BubbleEntry* ea = base;
         int a;
-        for (a = 0; a < 19; a++, ea++) {
+        for (a = 0; a < 19; a++) {
+            grZe_BubbleEntry* ea = &base[a];
             if (ea->x00_active != 0) {
                 int b = a + 1;
                 grZe_BubbleEntry* eb = &grZe_8049F170[b];
