@@ -312,10 +312,12 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         Vec3 arg5_offset;
         float arg1_y;
         float unk_sum = arg6 + arg7;
+        Vec3 vec4 = *arg0;
 
-        PAD_STACK(72);
+        (void) vec4;
+        arg4_offset = vec4;
+        PAD_STACK(60);
         {
-            Vec3 vec4 = *arg0;
             float candidate0_arg5_scl;
             float candidate1_arg4_scl;
             Vec3 a2;
@@ -323,11 +325,10 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             Vec3 c3;
             Vec3 mid;
             Vec3 b0;
+            Vec3 d2;
             Vec3 c2;
             Vec3 arg2_copy;
 
-            (void) vec4;
-            arg4_offset = vec4;
             arg2_copy = *arg2;
             (void) arg2_copy;
             arg5_offset = arg2_copy;
@@ -560,20 +561,20 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                     } else {
                                         c2 = arg5_offset;
                                         arg4_scl = 1.0f;
-                                        d1.x = arg3->x - arg2->x;
-                                        d1.y = arg3->y - arg2->y;
-                                        d1.z = arg3_z - arg2->z;
+                                        d2.x = arg3->x - arg2->x;
+                                        d2.y = arg3->y - arg2->y;
+                                        d2.z = arg3_z - arg2->z;
                                         {
                                             float dot;
                                             float scale;
 
                                             b0 = *arg1;
-                                            dot = (d1.z * (c2.z - b0.z)) +
-                                                  ((d1.x * (c2.x - b0.x)) +
-                                                   (d1.y * (c2.y - b0.y)));
-                                            scale = -dot / ((d1.z * d1.z) +
-                                                            ((d1.x * d1.x) +
-                                                             (d1.y * d1.y)));
+                                            dot = (d2.z * (c2.z - b0.z)) +
+                                                  ((d2.x * (c2.x - b0.x)) +
+                                                   (d2.y * (c2.y - b0.y)));
+                                            scale = -dot / ((d2.z * d2.z) +
+                                                            ((d2.x * d2.x) +
+                                                             (d2.y * d2.y)));
 
                                             if (scale > 1.0) {
                                                 scale = 1.0F;
