@@ -473,16 +473,10 @@ void mnDiagram3_Create(int arg0)
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
 }
 
-static inline HSD_JObj* mnDiagram3_GetSecondRow(Diagram3* data)
-{
-    return data->jobjs[9];
-}
-
 static inline void mnDiagram3_CreateRowLabels(int count)
 {
-    HSD_JObj* row0;
+    f32 spacing;
     f32 row_spacing;
-    f32 neg_spacing;
     int i;
     Vec3 pos;
     Diagram3* data;
@@ -490,16 +484,13 @@ static inline void mnDiagram3_CreateRowLabels(int count)
     u8 stat_idx;
 
     data = mnDiagram3_804D6C20->user_data;
-    row0 = data->jobjs[8];
     scroll = data->scroll_offset;
 
-    row_spacing = HSD_JObjGetTranslationY(mnDiagram3_GetSecondRow(data)) -
-                  HSD_JObjGetTranslationY(row0);
-    neg_spacing = row_spacing;
+    spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+              HSD_JObjGetTranslationY(data->jobjs[8]);
 
     lb_8000B1CC(data->jobjs[8], &mnDiagram3_803EEC28.x0, &pos);
 
-    neg_spacing = -neg_spacing;
     row_spacing = 6.5f;
     stat_idx = (u8) scroll;
     i = 0;
@@ -507,7 +498,7 @@ static inline void mnDiagram3_CreateRowLabels(int count)
     do {
         f32 fi = (f32) i;
         HSD_Text* text = HSD_SisLib_803A5ACC(0, 1, pos.x - row_spacing,
-                                             neg_spacing * fi + -pos.y, pos.z,
+                                             -spacing * fi + -pos.y, pos.z,
                                              row_spacing, 240.0f);
 
         data->row_labels[i] = text;
