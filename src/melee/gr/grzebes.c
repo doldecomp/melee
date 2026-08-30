@@ -2050,6 +2050,11 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_x;
                 f32 ei_size;
                 f32 ei_y;
+                f32 ej_y;
+                f32 ej_x;
+                f32 dx;
+                f32 dy;
+                f32 dist_sq;
                 grZe_BubbleEntry* ej = &grZe_8049F170[j];
 
                 ei_y = ei->x0C_y;
@@ -2057,22 +2062,20 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 ei_size = ei->x18_size;
                 for (; j < 20; ej++, j++) {
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
-                        f32 ej_x = ej->x08_x;
-                        f32 ej_y = ej->x0C_y;
-                        f32 dx = grZebes_Subtract(ei_x, ej_x);
-                        f32 dy = ei_y - ej_y;
-                        f32 dist_sq;
+                        ej_y = ej->x0C_y;
+                        ej_x = ej->x08_x;
+                        dx = grZebes_Subtract(ei_x, ej_x);
+                        dy = ei_y - ej_y;
                         dx *= dx;
                         dy *= dy;
                         dist_sq = dy + dx;
                         if (max_dist_sq < dist_sq) {
-                            f32 ej_size = ej->x18_size;
                             max_dist_sq = dist_sq;
                             x1 = ei_x;
                             y1 = ei_y;
                             x2 = ej_x;
                             y2 = ej_y;
-                            if (ei_size > ej_size) {
+                            if (ei_size > ej->x18_size) {
                                 last_idx = i;
                             } else {
                                 last_idx = j;
@@ -2113,17 +2116,17 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     if (t < 0.0f) {
                         bx = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
-                        f32 ex = bx - x2;
-                        f32 ey = grZebes_Subtract(by, y2);
-                        f32 ex_sq = ex * ex;
-                        f32 ey_sq = ey * ey;
-                        bx = ex_sq + ey_sq;
+                        dpx = bx - x2;
+                        dpy = grZebes_Subtract(by, y2);
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     } else {
-                        f32 cx = (dx * t + x1) - bx;
-                        f32 cy = (dy * t + y1) - by;
-                        f32 cx_sq = cx * cx;
-                        f32 cy_sq = cy * cy;
-                        bx = cx_sq + cy_sq;
+                        dpx = (dx * t + x1) - bx;
+                        dpy = (dy * t + y1) - by;
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     }
 
                     bx = sqrtf(bx);
