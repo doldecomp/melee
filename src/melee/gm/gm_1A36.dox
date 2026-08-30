@@ -1,6 +1,6 @@
 /// Index into #controller_map containing a union of all inputs from all
 /// controllers.
-#define PAD_ALL_CONTROLLERS 4
+#define PAD_MAX_CONTROLLERS 4
 
 /* 1A3680 */ u64 gm_GetButtonsPressed(u8);
 /* 1A36A0 */ u64 gm_GetButtonsTriggered(u8);
@@ -13,7 +13,7 @@
  * controller.
  *
  * Reads button, trigger, repeat, and release state from
- * #HSD_PadCopyStatus into #controller_map. Index 4 (#PAD_ALL_CONTROLLERS)
+ * #HSD_PadCopyStatus into #controller_map. Index 4 (#PAD_MAX_CONTROLLERS)
  * is set to contain a union of all inputs from all controllers.
  */
 /* 1A3A74 */ UNK_RET gm_EvaluateAllControllerInputs(UNK_PARAMS);

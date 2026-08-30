@@ -174,7 +174,7 @@ void fn_80177748(void)
 
     for (i = 0; i < 4; i++) {
         if (temp_r3->player_standings[i].slot_type != Gm_PKind_NA) {
-            ckind = temp_r3->player_standings[i].character_kind;
+            ckind = temp_r3->player_standings[i].ckind;
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[0], JOBJ_HIDDEN);
             inline0(data->player_data[i].jobjs[0], gm_80168B34(ckind, 0, 0));
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[4], JOBJ_HIDDEN);
@@ -650,7 +650,7 @@ void fn_801785B0(HSD_GObj* gobj)
     HSD_JObj* child;
     HSD_JObj* node;
     MatchEnd* match_end = fn_80174274();
-    u8 mode = match_end->x5;
+    u8 mode = match_end->match_kind;
     int frame_val;
     f32 fv;
 
@@ -782,8 +782,8 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                 int cid;
                 int ckind;
                 u8 is_big_loser;
-                ckind = match_end->player_standings[(*i)].character_kind;
-                cid = match_end->player_standings[(*i)].character_id;
+                ckind = match_end->player_standings[(*i)].ckind;
+                cid = match_end->player_standings[(*i)].ftkind;
                 is_big_loser = match_end->player_standings[(*i)].is_big_loser;
 
                 if (gm_801743A4(match_end->result) == 0 &&
@@ -825,13 +825,13 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                     HSD_AObjSetRate(rank_aobj, 0.0f);
                 }
 
-                if (match_end->x5 != 3) {
+                if (match_end->match_kind != 3) {
                     f32 taunt_frame = gm_80168B34(
                         (CharacterKind) (s8) (u8) match_end
                             ->player_standings[(*i)]
-                            .character_kind,
+                            .ckind,
                         (int) (s8) (u8) match_end->player_standings[(*i)]
-                            .character_id,
+                            .ftkind,
                         match_end->player_standings[(*i)].x3);
                     HSD_JObj* taunt_jobj = data->player_data[(*i)].jobjs[7];
                     HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
@@ -975,8 +975,8 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
         if (gm_801743A4(match_end->result) != 0) {
             lbAudioAx_800237A8(0xC350, 0x7F, 0x40);
         } else {
-            fn_80168E54(match_end->player_standings[data->x6].character_kind,
-                        match_end->player_standings[data->x6].character_id,
+            fn_80168E54(match_end->player_standings[data->x6].ckind,
+                        match_end->player_standings[data->x6].ftkind,
                         match_end->player_standings[data->x6].team,
                         (match_end->is_teams == 1));
         }
@@ -1533,7 +1533,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
         pos = *(Vec3*) &config->x74;
 
         if ((u32) (kind - 0x12) <= 1U) {
-            if ((int) match_end->player_standings[arg2].character_id == 7) {
+            if ((int) match_end->player_standings[arg2].ftkind == 7) {
                 kind = CKIND_SEAK;
             } else {
                 kind = CKIND_ZELDA;

@@ -809,7 +809,7 @@ void ifStatus_802F6508(s32 arg0)
         if (rules->x3_0 && gm_8016B238() == 0) {
             un_802FF364(arg0);
         }
-        mode = rules->match_mode;
+        mode = rules->match_kind;
         if (mode == 1 || rules->x4_2) {
             ifStock_802F98E8((u8) arg0, 0);
             return;
@@ -968,7 +968,7 @@ static inline void ifStatus_TriggerStockLoss(s32 player_idx,
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    if (big_thing->x24C8.match_mode != 1 && big_thing->x24C8.x2_5 != 0 &&
+    if (big_thing->x24C8.match_kind != 1 && big_thing->x24C8.x2_5 != 0 &&
         callback != NULL)
     {
         callback(player_idx);
@@ -980,7 +980,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     lbl_8046B6A0_t* big_thing;
 
     big_thing = gm_16AE_GetUnkData_0();
-    if (big_thing->x24C8.match_mode != 1 && big_thing->x24C8.x2_5 != 0) {
+    if (big_thing->x24C8.match_kind != 1 && big_thing->x24C8.x2_5 != 0) {
         if_802F7C30(arg1);
     }
 

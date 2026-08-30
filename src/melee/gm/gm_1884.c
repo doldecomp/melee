@@ -881,7 +881,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     TrainingModeState* state = &lbl_80473700;
     s32 i;
 
-    arg0->rules.match_mode = 0;
+    arg0->rules.match_kind = 0;
     arg0->rules.is_teams = 1;
     arg0->rules.xB = -1;
     arg0->rules.x20 = 0xFFFFFFFFFFFFFFFFULL;

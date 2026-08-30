@@ -74,12 +74,12 @@ void gm_801B91C8(GameModeState* state)
 
 void gm_801B922C(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->vs_stamina);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->vs_stamina);
 }
 
 void gm_801B9254(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->vs_stamina);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->vs_stamina);
 }
 
 void gm_801B927C(GameModeState* state)
@@ -109,7 +109,7 @@ void gm_801B931C(GameModeState* state)
 
     start->rules.x2_5 = false;
     start->rules.x0_6 = false;
-    start->rules.match_mode = 1;
+    start->rules.match_kind = 1;
     start->rules.x44 = fn_801B9850;
     start->rules.x3_0 = false;
     gm_80167A14(start->players);
@@ -121,7 +121,7 @@ void gm_801B931C(GameModeState* state)
         start->players[i].hp = 150;
     }
 
-    gm_801B0348(start);
+    gm_DetermineSubColors(start);
     gm_8016F088(start);
     gm_80168FC4();
 }

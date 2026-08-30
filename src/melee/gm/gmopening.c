@@ -263,7 +263,7 @@ void gm_Scene_Opening_OnFrame(void)
         gm_SetPendingGameMode(GM_TITLE);
         gm_SetNewGameModePending();
     } else if (gm_804D67EC > 0x157C) {
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             sfxForward();
@@ -276,7 +276,7 @@ void gm_Scene_Opening_OnFrame(void)
             gm_SetNewGameModePending();
         }
     } else {
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
             gmMainLib_8015F500();

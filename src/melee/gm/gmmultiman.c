@@ -278,7 +278,7 @@ void gm_801B6428(GameModeState* arg0)
 
     temp_r3->rules = gm_80490960.vs.start.rules;
 
-    temp_r3->rules.match_mode = 1;
+    temp_r3->rules.match_kind = 1;
     temp_r3->rules.is_teams = false;
     temp_r3->rules.x0_6 = true;
     temp_r3->rules.time_limit = 0;
@@ -306,7 +306,7 @@ void gm_801B6428(GameModeState* arg0)
         var_r4_2 = temp_r31->unk_584;
     }
     gm_801B0620(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
-    temp_r3->players[0].xA = temp_r31->unk_586;
+    temp_r3->players[0].nametag = temp_r31->unk_586;
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.stkind = gm_801647F8(temp_r3->players[0].ckind);
     {
@@ -462,7 +462,7 @@ bool gm_801B688C(bool arg0)
         if (temp_r3 != 0x21) {
             gm_801736E8(temp_r29->start.players[0].ckind,
                         temp_r29->start.players[0].color, gm_804D68F0,
-                        temp_r29->start.players[0].xA, temp_r3,
+                        temp_r29->start.players[0].nametag, temp_r3,
                         gm_GetCurrentGameMode());
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
             return true;
@@ -487,7 +487,7 @@ static void gm_801B6AD8_inline(GameModeState* scene, int x)
     temp_r31->start.players[0].x1C = 1.0F;
     gm_801B06B0(temp_r3, x, temp_r31->start.players[0].ckind, 1,
                 temp_r31->start.players[0].color,
-                temp_r31->start.players[0].xA, 0, gm_804D68F0);
+                temp_r31->start.players[0].nametag, 0, gm_804D68F0);
     temp_r31_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     temp_r31_2->entries[1].char_id = CKIND_BOY;
@@ -501,7 +501,7 @@ static void gm_801B6AD8_inline(GameModeState* scene, int x)
 void gm_801B69C0(StartMeleeData* arg0)
 {
     gmMainLib_GetGameRules();
-    arg0->rules.match_mode = 0;
+    arg0->rules.match_kind = 0;
     arg0->rules.x0_6 = true;
     arg0->rules.timer_counts_up = true;
     arg0->rules.time_limit = 0;
@@ -534,7 +534,7 @@ static void gmMultiman_LeaveFinish(VsModeData* start_data, CSSData* css_data)
     gm_80167A14(start_data->start.players);
     gm_801B0730(css_data, &start_data->start.players[0].ckind, NULL,
                 &start_data->start.players[0].color,
-                &start_data->start.players[0].xA, NULL);
+                &start_data->start.players[0].nametag, NULL);
 }
 
 static inline void gmMultiman_InitPlayers(StartMeleeData* match,

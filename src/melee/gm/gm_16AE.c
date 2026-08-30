@@ -158,12 +158,12 @@ bool gm_8016B014(void)
 
 bool gm_8016B094(void)
 {
-    return gm_GetRules()->match_mode == 1;
+    return gm_GetRules()->match_kind == 1;
 }
 
 bool gm_8016B0B4(void)
 {
-    return gm_GetRules()->match_mode == 2;
+    return gm_GetRules()->match_kind == 2;
 }
 
 bool gm_8016B0D4(void)
@@ -365,17 +365,19 @@ bool gm_IsCurrently1PMode(void)
 
 bool fn_8016B4BC(void)
 {
-    u8 _[4];
-    s32 spC;
-    s32 sp8;
+    PAD_STACK(4);
+    {
+        s32 spC;
+        s32 sp8;
 
-    if (gm_8016B1A8()) {
-        Ground_801C1DE4(&sp8, &spC);
-        if (sp8 == 0) {
-            return true;
+        if (gm_8016B1A8()) {
+            Ground_801C1DE4(&sp8, &spC);
+            if (sp8 == 0) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
 }
 
 bool fn_8016B510(void)
@@ -749,7 +751,7 @@ MatchOutcome gm_GetFFAOutcome(void)
         notSingleplayer = 0;
     }
     if (notSingleplayer != 0 && !lbl_8046B6A0.x24C8.x5_1 &&
-        (lbl_8046B6A0.x24C8.match_mode == 1 || tmp->x24C8.x4_2))
+        (lbl_8046B6A0.x24C8.match_kind == 1 || tmp->x24C8.x4_2))
     {
         int i;
         int eliminatedPlayers = 0;
@@ -833,7 +835,7 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
     } else {
         notSinglePlayer_2 = false;
     }
-    if (notSinglePlayer_2 && lbl_8046B6A0.x24C8.match_mode == 1) {
+    if (notSinglePlayer_2 && lbl_8046B6A0.x24C8.match_kind == 1) {
         teamCount = 0;
         eliminatedTeamCount = 0;
         memset(teamStocks, -1, sizeof(teamStocks));
@@ -1588,7 +1590,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
     Player_SetFlagsBit0(arg0, arg1->xC_b0);
-    Player_SetNametagSlotID(arg0, arg1->xA);
+    Player_SetNametagSlotID(arg0, arg1->nametag);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);
@@ -1669,7 +1671,7 @@ void fn_8016DCC0(StartMeleeData* arg0)
 
     lbl_8046B6A0.x24C8 = arg0->rules;
 
-    lbl_8046B6A0.x24C.x5 = arg0->rules.match_mode;
+    lbl_8046B6A0.x24C.x5 = arg0->rules.match_kind;
     lbl_8046B6A0.x24C.is_teams = arg0->rules.is_teams;
     if (arg0->rules.x7 != 0) {
         lbl_8046B6A0.unk_B = arg0->rules.x7;
@@ -2237,23 +2239,28 @@ void fn_8016F030(StartMeleeData* arg0)
     }
 }
 
-void gm_8016F088(StartMeleeData* arg0)
+int getPort(PlayerInitData* player, int i)
 {
-    int var_r3;
-    int temp_r3;
-    int i;
+    int slot = player->slot;
+    if (slot == 0) {
+        return i;
+    } else {
+        return slot - 1;
+    }
+}
 
-    for (i = 0; i < 6; i++) {
-        if (arg0->players[i].slot_type == Gm_PKind_Human && i < 4) {
-            temp_r3 = arg0->players[i].slot;
-            if (temp_r3 == 0) {
-                var_r3 = i;
-            } else {
-                var_r3 = temp_r3 - 1;
-            }
-            arg0->players[i].xC_b0 = gm_801677F8(var_r3, arg0->players[i].xA);
+void gm_8016F088(StartMeleeData* start)
+{
+    ssize_t i;
+
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        if (start->players[i].slot_type == Gm_PKind_Human &&
+            i < PAD_MAX_CONTROLLERS)
+        {
+            start->players[i].xC_b0 = gm_RumbleEnabledForPlayer(
+                getPort(&start->players[i], i), start->players[i].nametag);
         } else {
-            arg0->players[i].xC_b0 = false;
+            start->players[i].xC_b0 = false;
         }
     }
 }

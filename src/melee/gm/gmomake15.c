@@ -49,7 +49,7 @@ void gm_Scene_Omake15_OnFrame(void)
         var_r31 = true;
     }
     if (lbMthp_8001F604() != 0 ||
-        (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
          (HSD_PAD_START | HSD_PAD_A)) ||
         var_r31)
     {
@@ -60,7 +60,7 @@ void gm_Scene_Omake15_OnFrame(void)
             gm_801A4B60();
         }
         gmMainLib_8015DB0C(0);
-        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if ((gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
              (HSD_PAD_START | HSD_PAD_A)) ||
             var_r31)
         {
