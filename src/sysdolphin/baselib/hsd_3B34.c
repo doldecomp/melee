@@ -56,6 +56,22 @@ typedef union JpegMetadata {
     } data;
 } JpegMetadata;
 
+typedef struct {
+    u8 b[0x15];
+} JpegComment20;
+
+typedef struct {
+    u8 b[0x1C];
+} JpegHuffDc;
+
+typedef struct {
+    u8 b[0xB2];
+} JpegHuffAcL;
+
+typedef struct {
+    u8 b[0xB2];
+} JpegHuffAcC;
+
 static const JpegMetadata lbl_803B9670 = { {
     0x48, 0x41, 0x4C, 0x20, 0x4C, 0x61, 0x62, 0x6F, 0x72, 0x61, 0x74, 0x6F,
     0x72, 0x79, 0x2C, 0x20, 0x49, 0x6E, 0x63, 0x2E, 0x00, 0x00, 0x00, 0x00,
@@ -497,9 +513,28 @@ static void fn_803B376C(u8* arg0)
                               (0.980785 * (f64) scratch_f30_4));
         work_r4_2 += 1;
     }
-    for (work_ctr = 0; 0x40 > work_ctr; work_ctr++) {
-        ((s32*) arg0)[work_ctr] >>= 2;
-    }
+    work_r3 = (s32*) arg0;
+    work_ctr_3 = 4;
+    do {
+        work_r3[0] = work_r3[0] >> 2;
+        work_r3[1] = work_r3[1] >> 2;
+        work_r3[2] = work_r3[2] >> 2;
+        work_r3[3] = work_r3[3] >> 2;
+        work_r3[4] = work_r3[4] >> 2;
+        work_r3[5] = work_r3[5] >> 2;
+        work_r3[6] = work_r3[6] >> 2;
+        work_r3[7] = work_r3[7] >> 2;
+        work_r3[8] = work_r3[8] >> 2;
+        work_r3[9] = work_r3[9] >> 2;
+        work_r3[10] = work_r3[10] >> 2;
+        work_r3[11] = work_r3[11] >> 2;
+        work_r3[12] = work_r3[12] >> 2;
+        work_r3[13] = work_r3[13] >> 2;
+        work_r3[14] = work_r3[14] >> 2;
+        work_r3[15] = work_r3[15] >> 2;
+        work_ctr_3 -= 1;
+        work_r3 += 16;
+    } while (work_ctr_3 != 0);
 }
 
 static inline s32 hsd_803B3CD8_bit_length(s32 value)
@@ -571,9 +606,9 @@ void hsd_803B3CD8(s32 arg0)
     u8* scratch_r4_9;
     u8* work_r7;
     u16* work_r27;
+    u8 byte_out;
 
-    PAD_STACK(0x10);
-
+    PAD_STACK(24);
     work_r6 = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
     work = (JpegWork*) &hsd_804D2648;
     work_r7 = (arg0 == 0) ? lbl_80431690 : lbl_804316B4;
@@ -589,22 +624,17 @@ void hsd_803B3CD8(s32 arg0)
     scratch_r28 = work_r6[work_r31];
     work_r29 = work_r7[work_r31] - 1;
     for (; work_r29 >= 0; work_r29--) {
-        one = 1;
-        bit_count = hsd_804D79AC;
-        mask = one << work_r29;
-        bit_buffer = hsd_804D79B0;
-
-        hsd_804D79AC = bit_count + 1;
-        bit_buffer <<= one;
-        hsd_804D79B0 = bit_buffer;
-        if (scratch_r28 & mask) {
+        hsd_804D79B0 <<= 1;
+        hsd_804D79AC += 1;
+        if (scratch_r28 & (1 << work_r29)) {
             hsd_804D79B0 |= 1;
         }
         if (hsd_804D79AC == 8) {
-            u8 output_byte = hsd_804D79B0;
-
-            if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                *hsd_804D79A0++ = output_byte;
+            scratch_r4_8 = hsd_804D79A0;
+            byte_out = hsd_804D79B0;
+            if (scratch_r4_8 < &hsd_804D79A4[hsd_804D79A8]) {
+                hsd_804D79A0 = scratch_r4_8 + 1;
+                *scratch_r4_8 = byte_out;
             } else {
                 longjmp(&work->jmp_buf, 1);
             }
@@ -628,22 +658,17 @@ void hsd_803B3CD8(s32 arg0)
         }
         work_r28 = work_r31 - 1;
         for (; work_r28 >= 0; work_r28--) {
-            one = 1;
-            bit_count = hsd_804D79AC;
-            mask = one << work_r28;
-            bit_buffer = hsd_804D79B0;
-
-            hsd_804D79AC = bit_count + 1;
-            bit_buffer <<= one;
-            hsd_804D79B0 = bit_buffer;
-            if (work_r25 & mask) {
+            hsd_804D79B0 <<= 1;
+            hsd_804D79AC += 1;
+            if (work_r25 & (1 << work_r28)) {
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
-                u8 output_byte = hsd_804D79B0;
-
-                if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                    *hsd_804D79A0++ = output_byte;
+                scratch_r4_10 = hsd_804D79A0;
+                byte_out = hsd_804D79B0;
+                if (scratch_r4_10 < &hsd_804D79A4[hsd_804D79A8]) {
+                    hsd_804D79A0 = scratch_r4_10 + 1;
+                    *scratch_r4_10 = byte_out;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
@@ -664,8 +689,8 @@ void hsd_803B3CD8(s32 arg0)
     work_r25_2 = &lbl_80431638[1];
     work_r23 = 1;
     do {
-        scratch_r0_2 = work->data.coef[*work_r25_2];
-        work_r22 = scratch_r0_2;
+        work_r22 = work->data.coef[*work_r25_2];
+        scratch_r0_2 = work_r22;
         if (scratch_r0_2 != 0) {
             scratch_r4_12 = work_r24 + 1;
             work_r5 = 0x1F;
@@ -716,22 +741,17 @@ void hsd_803B3CD8(s32 arg0)
             scratch_r31 = work_r27[work_r28_2];
             work_r29_2 = *(work_r26 + work_r28_2) - 1;
             for (; work_r29_2 >= 0; work_r29_2--) {
-                one = 1;
-                bit_count = hsd_804D79AC;
-                mask = one << work_r29_2;
-                bit_buffer = hsd_804D79B0;
-
-                hsd_804D79AC = bit_count + 1;
-                bit_buffer <<= one;
-                hsd_804D79B0 = bit_buffer;
-                if (scratch_r31 & mask) {
+                hsd_804D79B0 <<= 1;
+                hsd_804D79AC += 1;
+                if (scratch_r31 & (1 << work_r29_2)) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    u8 output_byte = hsd_804D79B0;
-
-                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = output_byte;
+                    scratch_r4_13 = hsd_804D79A0;
+                    byte_out = hsd_804D79B0;
+                    if (scratch_r4_13 < &hsd_804D79A4[hsd_804D79A8]) {
+                        hsd_804D79A0 = scratch_r4_13 + 1;
+                        *scratch_r4_13 = byte_out;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -750,22 +770,17 @@ void hsd_803B3CD8(s32 arg0)
             }
             work_r28_3 = work_r28_2 - 1;
             for (; work_r28_3 >= 0; work_r28_3--) {
-                one = 1;
-                bit_count = hsd_804D79AC;
-                mask = one << work_r28_3;
-                bit_buffer = hsd_804D79B0;
-
-                hsd_804D79AC = bit_count + 1;
-                bit_buffer <<= one;
-                hsd_804D79B0 = bit_buffer;
-                if ((work_r24 + 1) & mask) {
+                hsd_804D79B0 <<= 1;
+                hsd_804D79AC += 1;
+                if ((work_r24 + 1) & (1 << work_r28_3)) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    u8 output_byte = hsd_804D79B0;
-
-                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = output_byte;
+                    scratch_r4_15 = hsd_804D79A0;
+                    byte_out = hsd_804D79B0;
+                    if (scratch_r4_15 < &hsd_804D79A4[hsd_804D79A8]) {
+                        hsd_804D79A0 = scratch_r4_15 + 1;
+                        *scratch_r4_15 = byte_out;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -788,22 +803,17 @@ void hsd_803B3CD8(s32 arg0)
             scratch_r31_2 = work_r27[work_r28_4];
             work_r29_3 = *(work_r26 + work_r28_4) - 1;
             for (; work_r29_3 >= 0; work_r29_3--) {
-                one = 1;
-                bit_count = hsd_804D79AC;
-                mask = one << work_r29_3;
-                bit_buffer = hsd_804D79B0;
-
-                hsd_804D79AC = bit_count + 1;
-                bit_buffer <<= one;
-                hsd_804D79B0 = bit_buffer;
-                if (scratch_r31_2 & mask) {
+                hsd_804D79B0 <<= 1;
+                hsd_804D79AC += 1;
+                if (scratch_r31_2 & (1 << work_r29_3)) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    u8 output_byte = hsd_804D79B0;
-
-                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = output_byte;
+                    scratch_r4_24 = hsd_804D79A0;
+                    byte_out = hsd_804D79B0;
+                    if (scratch_r4_24 < &hsd_804D79A4[hsd_804D79A8]) {
+                        hsd_804D79A0 = scratch_r4_24 + 1;
+                        *scratch_r4_24 = byte_out;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -825,22 +835,17 @@ void hsd_803B3CD8(s32 arg0)
             }
             work_r28_5 = work_r28_4 - 1;
             for (; work_r28_5 >= 0; work_r28_5--) {
-                one = 1;
-                bit_count = hsd_804D79AC;
-                mask = one << work_r28_5;
-                bit_buffer = hsd_804D79B0;
-
-                hsd_804D79AC = bit_count + 1;
-                bit_buffer <<= one;
-                hsd_804D79B0 = bit_buffer;
-                if (work_r22 & mask) {
+                hsd_804D79B0 <<= 1;
+                hsd_804D79AC += 1;
+                if (work_r22 & (1 << work_r28_5)) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    u8 output_byte = hsd_804D79B0;
-
-                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = output_byte;
+                    scratch_r4_26 = hsd_804D79A0;
+                    byte_out = hsd_804D79B0;
+                    if (scratch_r4_26 < &hsd_804D79A4[hsd_804D79A8]) {
+                        hsd_804D79A0 = scratch_r4_26 + 1;
+                        *scratch_r4_26 = byte_out;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -868,22 +873,17 @@ void hsd_803B3CD8(s32 arg0)
         scratch_r29 = *work_r27;
         work_r28_6 = *work_r26 - 1;
         for (; work_r28_6 >= 0; work_r28_6--) {
-            one = 1;
-            bit_count = hsd_804D79AC;
-            mask = one << work_r28_6;
-            bit_buffer = hsd_804D79B0;
-
-            hsd_804D79AC = bit_count + 1;
-            bit_buffer <<= one;
-            hsd_804D79B0 = bit_buffer;
-            if (scratch_r29 & mask) {
+            hsd_804D79B0 <<= 1;
+            hsd_804D79AC += 1;
+            if (scratch_r29 & (1 << work_r28_6)) {
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
-                u8 output_byte = hsd_804D79B0;
-
-                if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                    *hsd_804D79A0++ = output_byte;
+                scratch_r4_28 = hsd_804D79A0;
+                byte_out = hsd_804D79B0;
+                if (scratch_r4_28 < &hsd_804D79A4[hsd_804D79A8]) {
+                    hsd_804D79A0 = scratch_r4_28 + 1;
+                    *scratch_r4_28 = byte_out;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
@@ -1322,12 +1322,10 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
     hsd_803B4D64_inline(arg0, arg1, &hsd_804D2648);
 }
 
-static inline s32
-hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
-                    const char* output, s32 output_capacity,
-                    const JpegMetadata* metadata, JpegComment* comment,
-                    JpegHuffDc* huff_dc_luma, JpegHuffDc* huff_dc_chroma,
-                    JpegHuffAc* huff_ac_luma, JpegHuffAc* huff_ac_chroma)
+#ifdef MUST_MATCH
+#pragma dont_inline on
+#endif
+s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
 {
     s32 work_r24;
     s32 work_r25;
@@ -1350,20 +1348,21 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
     s32 width;
     s32 height;
     u8* src;
+    s32 quant_div;
 
-    state.base = HSD_804D2648_BUF;
-    state.work = (JpegWork*) state.base;
-    src = ((JpegByteBuffer*) image)->data;
-    width = image_width;
-    height = image_height;
-    hsd_804D79A8 = output_capacity;
+    PAD_STACK(44);
+    base = HSD_804D2648_BUF;
+    work = (JpegWork*) base;
+    src = (u8*) arg0;
+    width = arg1;
+    height = arg2;
+    hsd_804D79A8 = arg4;
     hsd_804D79AC = 0;
-    hsd_804D79A0 = ((JpegByteBuffer*) output)->data;
-    hsd_804D79A4 = ((JpegByteBuffer*) output)->data;
-    state.quant_table = lbl_80430C40;
-    state.work->data.prev_dc[0] = state.work->data.prev_dc[1] =
-        state.work->data.prev_dc[2] = 0;
-    if (__setjmp((__jmp_buf*) state.base) != 0) {
+    hsd_804D79A0 = (u8*) arg3;
+    hsd_804D79A4 = (u8*) arg3;
+    quant_table = lbl_80430C40;
+    work->data.prev_dc[0] = work->data.prev_dc[1] = work->data.prev_dc[2] = 0;
+    if (__setjmp((__jmp_buf*) base) != 0) {
         return 0;
     }
     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
@@ -1377,8 +1376,9 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
         longjmp((__jmp_buf*) state.base, 1);
     }
     hsd_803B46D4();
-    *comment = metadata->data.comment;
-    scratch_r23 = strlen(comment->data) + 1;
+    *(JpegComment20*) comment =
+        *(const JpegComment20*) lbl_803B9670.data.comment;
+    scratch_r23 = strlen(comment) + 1;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xFEU);
     comment_size = scratch_r23 + 2;
@@ -1387,28 +1387,32 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
     hsd_803B3344((u8) scratch_r0);
     hsd_803B3398(comment->data, scratch_r23);
     hsd_803B4A2C();
-    *huff_dc_luma = metadata->data.huff_dc_luma;
+    *(JpegHuffDc*) huff_dc_luma =
+        *(const JpegHuffDc*) lbl_803B9670.data.huff_dc_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(0U);
-    hsd_803B3398(huff_dc_luma->data, 0x1CU);
-    *huff_dc_chroma = metadata->data.huff_dc_chroma;
+    hsd_803B3398(huff_dc_luma, 0x1CU);
+    *(JpegHuffDc*) huff_dc_chroma =
+        *(const JpegHuffDc*) lbl_803B9670.data.huff_dc_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(1U);
-    hsd_803B3398(huff_dc_chroma->data, 0x1CU);
-    *huff_ac_luma = metadata->data.huff_ac_luma;
+    hsd_803B3398(huff_dc_chroma, 0x1CU);
+    *(JpegHuffAcL*) huff_ac_luma =
+        *(const JpegHuffAcL*) lbl_803B9670.data.huff_ac_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x10U);
-    hsd_803B3398(huff_ac_luma->data, 0xB2U);
-    *huff_ac_chroma = metadata->data.huff_ac_chroma;
+    hsd_803B3398(huff_ac_luma, 0xB2U);
+    *(JpegHuffAcC*) huff_ac_chroma =
+        *(const JpegHuffAcC*) lbl_803B9670.data.huff_ac_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
@@ -1494,112 +1498,121 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
             s32 work_r26;
             u8* work_r23;
             hsd_803B3408(src, work_r25, work_r24, width, height);
-            work_r23 = state.base + ((work_r26 = 0) << 8);
-            work_r23 += 0x118;
-            while (work_r26 < 4) {
-                u8* scratch_r6;
-                s32* work_r5_3;
-                s32* work_r4_3;
-                s32 work_r3;
+            for (work_r26 = 0; work_r26 < 4; work_r26++) {
+                u8* work_r4_3;
+                work_r23 = base + (work_r26 * 0x100 + 0x118);
                 fn_803B376C(work_r23);
-                quant_scale = lbl_804D6398;
-                work_r4_3 = (s32*) work_r23;
-                work_r5_3 = (s32*) (state.base + 0x718);
+                quant_div = lbl_804D6398;
+                work_r4_3 = work_r23;
+                work_r5_3 = base + 0x718;
                 for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
                     u8 scratch_r7;
-                    scratch_r6 = state.quant_table + work_r3;
-                    scratch_r7 = scratch_r6[0];
-                    work_r5_3[0] =
-                        (work_r4_3[0] / ((s32) scratch_r7 / quant_scale));
-                    work_r5_3[1] =
-                        (work_r4_3[1] / ((s32) scratch_r6[1] / quant_scale));
-                    work_r5_3[2] =
-                        (work_r4_3[2] / ((s32) scratch_r6[2] / quant_scale));
-                    work_r5_3[3] =
-                        (work_r4_3[3] / ((s32) scratch_r6[3] / quant_scale));
-                    work_r5_3[4] =
-                        (work_r4_3[4] / ((s32) scratch_r6[4] / quant_scale));
-                    work_r5_3[5] =
-                        (work_r4_3[5] / ((s32) scratch_r6[5] / quant_scale));
-                    work_r5_3[6] =
-                        (work_r4_3[6] / ((s32) scratch_r6[6] / quant_scale));
-                    scratch_r7_2 = work_r4_3[7];
-                    work_r4_3 += 8;
-                    work_r5_3[7] =
-                        (scratch_r7_2 / ((s32) scratch_r6[7] / quant_scale));
-                    work_r5_3 += 8;
+                    scratch_r6 = quant_table + work_r3;
+                    scratch_r7 = M2C_FIELD(scratch_r6, u8*, 0);
+                    M2C_FIELD(work_r5_3, s32*, 0) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 0) /
+                         ((s32) scratch_r7 / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 4) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 4) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 1) / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 8) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 8) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 2) / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 0xC) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 0xC) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 3) / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 0x10) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x10) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 4) / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 0x14) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x14) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 5) / quant_div));
+                    M2C_FIELD(work_r5_3, s32*, 0x18) =
+                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x18) /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 6) / quant_div));
+                    scratch_r7_2 = M2C_FIELD(work_r4_3, s32*, 0x1C);
+                    work_r4_3 += 0x20;
+                    M2C_FIELD(work_r5_3, s32*, 0x1C) =
+                        (scratch_r7_2 /
+                         ((s32) M2C_FIELD(scratch_r6, u8*, 7) / quant_div));
+                    work_r5_3 += 0x20;
                 }
                 hsd_803B3CD8(0);
-                work_r23 += 0x100;
-                work_r26++;
             }
-            {
+            chroma_quant_table = quant_table + 0x40;
+            fn_803B376C(base + 0x518);
+            quant_div = lbl_804D6398;
+            work_r26_2 = base + 0x718;
+            work_r5_4 = work_r26_2;
+            work_r4_4 = base + 0x518;
+            for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
                 u8* scratch_r6_2;
-                s32* work_r5_4;
-                s32* work_r4_4;
-                s32 work_r3_2;
-                u8* chroma_quant_table = state.quant_table + 0x40;
-                fn_803B376C(state.base + 0x518);
-                work_r5_4 = work_r26_2 = (s32*) (state.base + 0x718);
-                quant_scale = lbl_804D6398;
-                work_r4_4 = (s32*) (state.base + 0x518);
-                for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
-                    scratch_r6_2 = chroma_quant_table + work_r3_2;
-                    scratch_r7_3 = scratch_r6_2[0];
-                    work_r5_4[0] =
-                        (work_r4_4[0] / ((s32) scratch_r7_3 / quant_scale));
-                    work_r5_4[1] =
-                        (work_r4_4[1] / ((s32) scratch_r6_2[1] / quant_scale));
-                    work_r5_4[2] =
-                        (work_r4_4[2] / ((s32) scratch_r6_2[2] / quant_scale));
-                    work_r5_4[3] =
-                        (work_r4_4[3] / ((s32) scratch_r6_2[3] / quant_scale));
-                    work_r5_4[4] =
-                        (work_r4_4[4] / ((s32) scratch_r6_2[4] / quant_scale));
-                    work_r5_4[5] =
-                        (work_r4_4[5] / ((s32) scratch_r6_2[5] / quant_scale));
-                    work_r5_4[6] =
-                        (work_r4_4[6] / ((s32) scratch_r6_2[6] / quant_scale));
-                    scratch_r7_4 = work_r4_4[7];
-                    work_r4_4 += 8;
-                    work_r5_4[7] =
-                        (scratch_r7_4 / ((s32) scratch_r6_2[7] / quant_scale));
-                    work_r5_4 += 8;
-                }
-                hsd_803B3CD8(1);
+                scratch_r6_2 = chroma_quant_table + work_r3_2;
+                scratch_r7_3 = M2C_FIELD(scratch_r6_2, u8*, 0);
+                M2C_FIELD(work_r5_4, s32*, 0) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 0) /
+                     ((s32) scratch_r7_3 / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 4) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 4) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 1) / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 8) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 8) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 2) / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 0xC) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 0xC) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 3) / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 0x10) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x10) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 4) / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 0x14) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x14) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 5) / quant_div));
+                M2C_FIELD(work_r5_4, s32*, 0x18) =
+                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x18) /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 6) / quant_div));
+                scratch_r7_4 = M2C_FIELD(work_r4_4, s32*, 0x1C);
+                work_r4_4 += 0x20;
+                M2C_FIELD(work_r5_4, s32*, 0x1C) =
+                    (scratch_r7_4 /
+                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 7) / quant_div));
+                work_r5_4 += 0x20;
             }
-            {
-                u8* chroma_quant_table = state.quant_table + 0x40;
+            hsd_803B3CD8(1);
+            chroma_quant_table = quant_table + 0x40;
+            fn_803B376C(base + 0x618);
+            quant_div = lbl_804D6398;
+            work_r4_5 = base + 0x618;
+            for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
                 u8* scratch_r5;
-                s32* work_r4_5;
-                s32 work_r3_3;
-                fn_803B376C(state.base + 0x618);
-                quant_scale = lbl_804D6398;
-                work_r4_5 = (s32*) (state.base + 0x618);
-                for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    scratch_r5 = chroma_quant_table + work_r3_3;
-                    scratch_r6_3 = scratch_r5[0];
-                    work_r26_2[0] =
-                        (work_r4_5[0] / ((s32) scratch_r6_3 / quant_scale));
-                    work_r26_2[1] =
-                        (work_r4_5[1] / ((s32) scratch_r5[1] / quant_scale));
-                    work_r26_2[2] =
-                        (work_r4_5[2] / ((s32) scratch_r5[2] / quant_scale));
-                    work_r26_2[3] =
-                        (work_r4_5[3] / ((s32) scratch_r5[3] / quant_scale));
-                    work_r26_2[4] =
-                        (work_r4_5[4] / ((s32) scratch_r5[4] / quant_scale));
-                    work_r26_2[5] =
-                        (work_r4_5[5] / ((s32) scratch_r5[5] / quant_scale));
-                    work_r26_2[6] =
-                        (work_r4_5[6] / ((s32) scratch_r5[6] / quant_scale));
-                    scratch_r6_4 = work_r4_5[7];
-                    work_r4_5 += 8;
-                    work_r26_2[7] =
-                        (scratch_r6_4 / ((s32) scratch_r5[7] / quant_scale));
-                    work_r26_2 += 8;
-                }
-                hsd_803B3CD8(2);
+                scratch_r5 = chroma_quant_table + work_r3_3;
+                scratch_r6_3 = M2C_FIELD(scratch_r5, u8*, 0);
+                M2C_FIELD(work_r26_2, s32*, 0) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 0) /
+                     ((s32) scratch_r6_3 / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 4) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 4) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 1) / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 8) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 8) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 2) / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 0xC) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 0xC) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 3) / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 0x10) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x10) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 4) / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 0x14) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x14) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 5) / quant_div));
+                M2C_FIELD(work_r26_2, s32*, 0x18) =
+                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x18) /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 6) / quant_div));
+                scratch_r6_4 = M2C_FIELD(work_r4_5, s32*, 0x1C);
+                work_r4_5 += 0x20;
+                M2C_FIELD(work_r26_2, s32*, 0x1C) =
+                    (scratch_r6_4 /
+                     ((s32) M2C_FIELD(scratch_r5, u8*, 7) / quant_div));
+                work_r26_2 += 0x20;
             }
         }
     }
@@ -1635,21 +1648,9 @@ hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
     return hsd_804D79A0 - hsd_804D79A4;
 }
 
-s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
-{
-    JpegComment comment;
-    JpegHuffDc huff_dc_luma;
-    JpegHuffDc huff_dc_chroma;
-    JpegHuffAc huff_ac_luma;
-    JpegHuffAc huff_ac_chroma;
-
-    PAD_STACK(0x18);
-
-    return hsd_803B51C8_inline(arg0, arg2, arg1, arg3, arg4, &lbl_803B9670,
-                               &comment, &huff_dc_luma, &huff_dc_chroma,
-                               &huff_ac_luma, &huff_ac_chroma);
-}
-
+#ifdef MUST_MATCH
+#pragma dont_inline off
+#endif
 void hsd_803B5C2C(s32 arg0)
 {
     lbl_804D6398 = arg0;

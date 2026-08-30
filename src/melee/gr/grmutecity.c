@@ -1477,7 +1477,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 {
     Vec3 car_pos;
     Vec3 spE8;
-    f32 track_mid;
+    UNUSED u8 padE4[4];
     Vec3 spD8;
     Vec3 spCC;
     Vec3 spC0;

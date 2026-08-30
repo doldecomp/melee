@@ -37,20 +37,6 @@ struct lb_Collider {
     /* 0x24 */ char pad_24[0x04];
 };
 
-struct CameraBlurData {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 x12;
-    /* 0x13 */ char pad_13[0x18 - 0x13];
-    /* 0x18 */ HSD_GObjEvent x18;
-    /* 0x1C */ HSD_ImageDesc* x1C;
-    /* 0x20 */ f32 x20;
-};
-
 const struct {
     Vec3 v0;
     Vec3 v1;

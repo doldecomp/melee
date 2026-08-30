@@ -115,6 +115,8 @@ void mnInfo_80251AFC(void)
     /// @todo Keep #mnInfo_804A0958 before #mnInfo_804A0968 in `.bss`.
     (void) &mnInfo_804A0958;
 
+    PAD_STACK(8);
+
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
     }

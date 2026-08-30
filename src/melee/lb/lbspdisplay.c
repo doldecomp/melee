@@ -35,20 +35,6 @@
 #include <baselib/tev.h>
 #include <melee/sc/types.h>
 
-struct CameraBlurData {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 x12;
-    /* 0x13 */ char pad_13[0x18 - 0x13];
-    /* 0x18 */ HSD_GObjEvent x18;
-    /* 0x1C */ HSD_ImageDesc* x1C;
-    /* 0x20 */ f32 x20;
-};
-
 HSD_LObj* lb_80011AC4(LightList** list)
 {
     HSD_LObj* prev;
@@ -724,29 +710,29 @@ void fn_80013614(HSD_GObj* gobj)
     Mtx view_mtx2;
     GXTexObj tex_obj;
 
-    if (data->x18 != NULL) {
-        data->x18(gobj);
+    if (data->callback != NULL) {
+        data->callback(gobj);
     }
 
-    if (data->x12 == 1) {
+    if (data->mode == 1) {
         HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
-        HSD_ImageDesc* image;
-        f32 x0;
-        f32 x4;
-        f32 x8;
-        f32 xC;
-        u8 x10;
-        u8 x11;
-        f32 alpha;
+        HSD_ImageDesc* efb_copy;
+        float pos_x;
+        float pos_y;
+        float scale_x;
+        float scale_y;
+        u8 base_alpha;
+        u8 blur_size;
+        float tint_factor;
 
-        alpha = data->x20;
-        x11 = data->x11;
-        x10 = data->x10;
-        xC = data->xC;
-        x8 = data->x8;
-        x4 = data->x4;
-        x0 = data->x0;
-        image = data->x1C;
+        tint_factor = data->tint_factor;
+        blur_size = data->blur_size;
+        base_alpha = data->base_alpha;
+        scale_y = data->scale_y;
+        scale_x = data->scale_x;
+        pos_y = data->pos_y;
+        pos_x = data->pos_x;
+        efb_copy = data->efb_copy;
 
         HSD_CObjSetCurrent(cobj);
         HSD_StateSetZMode(0, 7, 0);
@@ -759,28 +745,29 @@ void fn_80013614(HSD_GObj* gobj)
         HSD_SetupChannel(&chan1);
         HSD_StateSetNumChans(1);
 
-        if (alpha != 0.0f) {
-            GXSetScissor(0, 0x6E, 0x280, 0x122);
+        if (tint_factor != 0.0f) {
+            GXSetScissor(0, 110, 640, 290);
         }
 
-        lb_80012994(image, x10, x11, x0, x4, x8, xC, alpha);
+        lb_80012994(efb_copy, base_alpha, blur_size, pos_x, pos_y, scale_x,
+                    scale_y, tint_factor);
     } else {
         HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
-        HSD_ImageDesc* image;
-        f32 x0;
-        f32 x4;
-        f32 x8;
-        f32 xC;
-        u8 x10;
+        HSD_ImageDesc* efb_copy;
+        float pos_x;
+        float pos_y;
+        float scale_x;
+        float scale_y;
+        u8 base_alpha;
         u16 width;
         u16 height;
 
-        x10 = data->x10;
-        xC = data->xC;
-        x8 = data->x8;
-        x4 = data->x4;
-        x0 = data->x0;
-        image = data->x1C;
+        base_alpha = data->base_alpha;
+        scale_y = data->scale_y;
+        scale_x = data->scale_x;
+        pos_y = data->pos_y;
+        pos_x = data->pos_x;
+        efb_copy = data->efb_copy;
 
         HSD_CObjSetCurrent(cobj);
         HSD_StateSetZMode(0, 7, 0);
@@ -793,12 +780,12 @@ void fn_80013614(HSD_GObj* gobj)
         HSD_SetupChannel(&chan1);
         HSD_StateSetNumChans(1);
 
-        width = image->width;
-        height = image->height;
-        lb_8001285C(image, &tex_obj);
+        width = efb_copy->width;
+        height = efb_copy->height;
+        lb_8001285C(efb_copy, &tex_obj);
 
         {
-            ((GXColor*) &tex_obj)[-2].a = x10;
+            ((GXColor*) &tex_obj)[-2].a = base_alpha;
             GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex_obj)[-2]);
             consume_blur_colors(
                 ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2],
@@ -807,7 +794,8 @@ void fn_80013614(HSD_GObj* gobj)
                             GX_CA_ZERO);
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
                             GX_CS_SCALE_1, 1, GX_TEVPREV);
-            lb_8001271C(&tex_obj, x0, x4, (f32) width, (f32) height, x8, xC);
+            lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
+                        scale_x, scale_y);
         }
         HSD_StateInvalidate(2);
     }
@@ -818,28 +806,29 @@ void fn_800138AC(void* ptr)
     HSD_Free(ptr);
 }
 
-void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1)
+void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent blur_callback)
 {
-    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
-    data->x18 = arg1;
+    struct CameraBlurData* data = HSD_GObjGetUserData(gobj);
+    data->callback = blur_callback;
 }
 
-void lb_800138D8(HSD_GObj* gobj, s8 arg1)
+void lb_800138D8(HSD_GObj* gobj, s8 size)
 {
-    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
-    data->x12 = 1;
-    data->x11 = arg1;
+    struct CameraBlurData* data = HSD_GObjGetUserData(gobj);
+    data->mode = 1;
+    data->blur_size = size;
 }
 
 static const Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
 static const Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
 
-void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
-                 f32 x, f32 y, f32 w, f32 h)
+HSD_GObj* lb_800138EC(HSD_ImageDesc* img, GObj_RenderFunc render_func,
+                      int prio, s8 alpha, float pos_x, float pos_y,
+                      float scale_x, float scale_y)
 {
     HSD_GObj* gobj;
     HSD_CObj* cobj;
-    struct lb_800138D8_t* data;
+    struct CameraBlurData* data;
     HSD_RectS16 viewport;
     Scissor scissor;
     Vec3 eye;
@@ -879,21 +868,21 @@ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
     HSD_CObjSetOrtho(cobj, ortho_top, ortho_bot, ortho_left, ortho_right);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
-    data = HSD_MemAlloc(sizeof(struct lb_800138D8_t));
-    data->x0 = x;
-    data->x4 = y;
-    data->x8 = w;
-    data->xC = h;
-    data->x10 = arg3;
-    data->x12 = 0;
-    data->x1C = arg0;
-    data->x18 = 0;
+    data = HSD_MemAlloc(sizeof(struct CameraBlurData));
+    data->pos_x = pos_x;
+    data->pos_y = pos_y;
+    data->scale_x = scale_x;
+    data->scale_y = scale_y;
+    data->base_alpha = alpha;
+    data->mode = 0;
+    data->efb_copy = img;
+    data->callback = 0;
     GObj_InitUserData(gobj, 0, fn_800138AC, data);
 
     if (render_func == NULL) {
-        GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) fn_80013614, arg2);
+        GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) fn_80013614, prio);
     } else {
-        GObj_SetupGXLinkMax(gobj, render_func, arg2);
+        GObj_SetupGXLinkMax(gobj, render_func, prio);
     }
 }
 
@@ -908,11 +897,11 @@ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective* desc)
         HSD_CObjSetAspect(cobj, 1.2173333F);
     }
     HSD_CObjGetScissor(cobj, &scissor);
-    if (scissor.right > 0x280) {
-        scissor.right = 0x280;
+    if (scissor.right > 640) {
+        scissor.right = 640;
     }
-    if (scissor.bottom > 0x1E0) {
-        scissor.bottom = 0x1E0;
+    if (scissor.bottom > 480) {
+        scissor.bottom = 480;
     }
     HSD_CObjSetScissor(cobj, &scissor);
     return cobj;

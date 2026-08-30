@@ -612,6 +612,30 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     default:
         return;
     }
+
+    if ((mn_804A04F0.buttons & 4) != 0) {
+        if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
+            u8* frame_base = base + 0x170;
+            frame = (f32*) (frame_base +
+                            (0xC * (base[0x1DD + (arg2 << 1)] - arg3)));
+        }
+        HSD_JObjReqAnimAll(arg1, *frame);
+    } else {
+        if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
+            u8 idx = base[0x1DD + (arg2 << 1)];
+            if (arg3 == 0) {
+                frame = (f32*) (base + 0x134 + (0xC * idx));
+                (void) frame;
+            } else {
+                frame = (f32*) (base + 0x134 + (0xC * (arg3 - 1)));
+            }
+        }
+        {
+            f32 frame_value = *frame;
+            HSD_JObjReqAnimAll(arg1, frame_value);
+        }
+    }
+    HSD_JObjAnimAll(arg1);
 }
 
 void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
@@ -1080,7 +1104,7 @@ static inline s32 mn_80230E38_CountVisible(u8 limit)
 
 HSD_GObj* mn_80230E38(int arg0)
 {
-    u8 operand_pad[12];
+    UNUSED u8 pad94[12];
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
     union {
@@ -1103,6 +1127,7 @@ HSD_GObj* mn_80230E38(int arg0)
     HSD_JObj* root_jobj;
     StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
+    PAD_STACK(52);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;

@@ -379,7 +379,9 @@ void fn_803B61B4(s32* arg0)
     s32* work_r4;
     s32* work_r4_2;
 
-    work_r4 = arg0;
+    PAD_STACK(8);
+
+    work_r4 = (s32*) arg0;
     for (work_ctr = 8; work_ctr != 0; work_ctr--) {
         s32 scratch_r6;
 
@@ -687,8 +689,8 @@ static inline s32 hsd_803B6BE4_inline(char* arg0, s32 arg1, void* arg2)
         s32 height;
     } state;
 
-    state.base = hsd_804D2E70;
-    state.work = (JpegState*) state.base;
+    PAD_STACK(0x40);
+    base = (JpegState*) hsd_804D2E70;
     hsd_804D79C0 = arg1;
     state.quant_table = (JpegQuantTables*) lbl_80431090;
     hsd_804D79B8 = (u8*) arg0;

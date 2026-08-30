@@ -10,7 +10,6 @@
 
 #include "dolphin/gx/GXStruct.h"
 
-#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 /* 01FC08 */ void fn_8001FC08(void);
@@ -24,16 +23,5 @@
 /* 0208B0 */ void fn_800208B0(u8 arg0);
 /* 0208EC */ void lbBgFlash_800208EC(int);
 /* 0209F4 */ void lbBgFlash_800209F4(void);
-/* 020AEC */ void fn_80020AEC(HSD_JObj*, Mtx);
-/* 020E38 */ void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);
-/* 02113C */ void fn_8002113C(HSD_JObj*, Vec3*, f32);
-/* 021410 */ void lbBgFlash_80021410(void*);
-/* 0219E4 */ void fn_800219E4(void*);
-/* 021A10 */ void lbBgFlash_80021A10(f32);
-/* 021A18 */ void lbBgFlash_80021A18(int);
-/* 021B04 */ void fn_80021B04(HSD_GObj*);
-/* 021C1C */ void fn_80021C1C(void);
-/* 021C48 */ void lbBgFlash_80021C48(u32, u32);
-/* 021C80 */ void fn_80021C80(HSD_GObj* gobj);
 
 #endif

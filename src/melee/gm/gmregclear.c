@@ -27,6 +27,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1884.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
@@ -696,31 +697,45 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
 static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 {
     s32 count = 0;
-    s32 i;
+    s32 result;
 
-    for (i = 0; i < 3; i++) {
-        if ((s32) arg0[i] != 0x21) {
-            count++;
+    if ((s32) (u8) arg0[0] != CHKIND_NONE) {
+        count = 1;
+    }
+    {
+        s8* p = &arg0[1];
+        if ((s32) *p != CHKIND_NONE) {
+            count += 1;
+        }
+        if ((s32) p[1] != CHKIND_NONE) {
+            result = count + 1;
+        } else {
+            result = count;
         }
     }
-    return count;
+    return result;
 }
 
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    s32 color_idx;
-    u8* out_color = colors;
-    s8* kind_iter = arg2;
-    u8 num_colors;
-    u8 result;
-
-    for (color_idx = 0; color_idx < 3; color_idx++) {
-        num_colors = gm_80169238((u8) *kind_iter);
-        if (arg1->x54 != NULL) {
-            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
-            if (num_colors != 0) {
-                result %= num_colors;
+    {
+        u8* out_color = colors;
+        s8* kind_iter = arg2;
+        s32 color_idx;
+        for (color_idx = 0; color_idx < 3; color_idx++) {
+            u8 kind = (u8) *kind_iter;
+            u8 num_colors = gm_80169238(kind);
+            u8 color_id;
+            if (arg1->x54 != NULL) {
+                u8 requested_color;
+                requested_color =
+                    arg1->x54((u8) count, arg1->x0.cpu_level, (u8) color_idx);
+                if (num_colors != 0) {
+                    color_id = requested_color % num_colors;
+                } else {
+                    color_id = 0;
+                }
             } else {
                 result = 0;
             }
@@ -733,14 +748,22 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     }
 }
 
-static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
+static inline u8 gm_8017CE34_ResolvePlayerCKind(UnkAdventureData* arg1,
+                                                u8 player_ckind)
 {
-    return arg1->x0.cpu_level;
+    if (((s32) player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+        player_ckind = CKIND_SEAK;
+    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
+               ((s8) player_ckind == CKIND_POPONANA))
+    {
+        player_ckind = CHKIND_POPO;
+    }
+    return player_ckind;
 }
 
-s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
-                u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
-                s32 arg9)
+void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
+                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
+                 s32 arg9)
 {
     u8 colors[16];
     u8 enemy_level;
@@ -756,9 +779,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_ckind;
     s32 enemy_count;
     s32 enemy_idx;
+    u8 sp8;
     u8* color_iter;
-
-    PAD_STACK(4);
 
     boss_count = 0;
     enemy_level = 0;
@@ -839,15 +861,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         player_stocks = arg1->x0.stocks;
     }
 
-    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
-        player_ckind = CKIND_SEAK;
-    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               (arg1->x0.ckind == CKIND_POPONANA))
-    {
-        player_ckind = CHKIND_POPO;
-    } else {
-        player_ckind = (u8) arg1->x0.ckind;
-    }
+    player_ckind = (u8) arg1->x0.ckind;
+    player_ckind = gm_8017CE34_ResolvePlayerCKind(arg1, player_ckind);
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
                 arg1->x0.slot);
@@ -879,7 +894,6 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
         if ((temp_r3_4 != 0) && (arg1->x0.xC.x11 == 0)) {
-            s32 base_enemy_count;
             s32 event_enemy_count;
             s32 special_stage;
             s32 special_enemy_mode;
@@ -887,9 +901,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             u8 first_enemy;
             u32 stage_flags;
 
-            base_enemy_count = gm_8017CE34_CountEnemies(arg2);
+            event_enemy_count = gm_8017CE34_CountEnemies(arg2);
             arg1->x0.xC.xC = 3;
-            event_enemy_count = base_enemy_count;
             special_stage = 0;
             special_enemy_mode = 0;
             sp8 = 0;
@@ -1050,7 +1063,6 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     if (arg7 == 0x49) {
         arg1->x0.xC.xC = 8;
     }
-    return flags;
 }
 
 bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
@@ -1123,67 +1135,79 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-static inline s32 fn_8017D9C0_inline(const u8* arg0, const u8* arg1)
+#ifdef MUST_MATCH
+#pragma opt_propagation off
+#endif
+static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
+                                    const u8* preset_ckinds)
 {
-    s32 len;
-    u8* p;
-    s32 i;
+    struct {
+        s32 count;
+        u8* cursor;
+    } scan;
+    u8 temp;
     s32 j;
-    u8* dst;
-    u8 ch;
-    s32 excluded_idx;
-    s32 rejected_idx;
+    s32 i;
+    s32 swap_idx;
+    u8 ckind;
+    s32 used_idx;
+    s32 preset_idx;
     u8* base;
+    u8* w;
+    u8* w2;
 
-    p = base = lbl_803D79F0;
-    len = 0;
-    while ((s32) *p != 0x21) {
-        p++;
-        len++;
+    base = arr;
+    scan.cursor = base;
+    scan.count = 0;
+    while ((s32) *scan.cursor != CHKIND_NONE) {
+        scan.cursor++;
+        scan.count++;
     }
 
-    p = base;
-    for (j = 0; j < len; j++) {
-        u8 temp = *p;
-        dst = &base[HSD_Randi(len)];
-        *p = *dst;
-        p++;
-        *dst = temp;
+    w = base;
+    for (j = 0; j < scan.count; j++) {
+        temp = *w;
+        swap_idx = HSD_Randi(scan.count);
+        *w++ = base[swap_idx];
+        base[swap_idx] = temp;
     }
 
-    p = base;
-    for (i = 0; i < len; i++) {
-        if (gm_IsCKindUnlocked(*p) != 0) {
-            ch = *p;
-            for (excluded_idx = 0; excluded_idx < 4; excluded_idx++) {
-                if ((s8) ch == (s8) arg0[excluded_idx]) {
-                    excluded_idx = -1;
+    w2 = base;
+    for (i = 0; i < scan.count; i++) {
+        if (gm_IsCKindUnlocked(*w2) != 0) {
+            ckind = *w2;
+            for (used_idx = 0; used_idx < 4; used_idx++) {
+                if ((s8) ckind == (s8) used_ckinds[used_idx]) {
+                    used_idx = -1;
                     break;
                 }
             }
-            if (excluded_idx != -1) {
-                for (rejected_idx = 0; rejected_idx < 3; rejected_idx++) {
-                    if ((s8) ch == (s8) arg1[rejected_idx]) {
-                        rejected_idx = -1;
+            if (used_idx != -1) {
+                for (preset_idx = 0; preset_idx < 3; preset_idx++) {
+                    if ((s8) ckind == (s8) preset_ckinds[preset_idx]) {
+                        preset_idx = -1;
                         break;
                     }
                 }
-                if (rejected_idx != -1) {
-                    return (s32) base[i];
+                if (preset_idx != -1) {
+                    return base[i];
                 }
             }
         }
-        p++;
+        w2++;
     }
 
-    return 0x21;
+    return CHKIND_NONE;
 }
 
-s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
+s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
 {
-    PAD_STACK(8);
-    return fn_8017D9C0_inline(arg0, arg1);
+    return pick_random_ckind(lbl_803D79F0, used_ckinds, preset_ckinds);
 }
+#ifdef MUST_MATCH
+#pragma opt_propagation reset
+#pragma dont_inline on
+#endif
 
 void gm_8017DB58(struct Unk1PData_x24* arg0)
 {
@@ -1268,6 +1292,9 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
         return count;
     }
 }
+#ifdef MUST_MATCH
+#pragma dont_inline off
+#endif
 
 s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
 {
@@ -2658,6 +2685,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     struct lbl_80472D28_t* state;
     u8 mask;
     u8 var_r0;
+    PAD_STACK(0x38);
 
     special_score = 0;
     coins = arg4->x58[0].xE;
@@ -2785,8 +2813,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbAudioAx_80023F28(var_r3);
 
     Camera_8002F7AC(0);
-    lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
-    lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
+    lb_800121FC(&state->x30, 640, 480, GX_TF_RGB5A3, 0);
+    state->x2C =
+        lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
@@ -2800,7 +2829,6 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     arg4->x58[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
-    PAD_STACK(0x18);
 }
 
 int fn_80180AC0(void)

@@ -2,6 +2,7 @@
 
 #include "gm_16AE.static.h"
 
+#include "gm_1884.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
@@ -36,8 +37,8 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_0195.h>
+#include <melee/lb/lb_0219.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/types.h>

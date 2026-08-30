@@ -179,8 +179,9 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 static inline u16 RGB565_TO_RGB5A3(u16 pixel)
 {
     u16 result = (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
-    result |= pixel & RGB5A3_MASK_B;
-    return result | RGB5A3_MASK_A;
+    result = result | (pixel & RGB5A3_MASK_B);
+    result = result | RGB5A3_MASK_A;
+    return result;
 }
 
 static inline int lbSnap_GetTiledRemainder(int value)
@@ -190,9 +191,8 @@ static inline int lbSnap_GetTiledRemainder(int value)
 
 static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
-    int tile_x = x / 4;
-    int tile_base = tile_x * tile_stride;
-    return (((y / 4) + tile_base) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
+    int tile_base = (x / 4) * tile_stride;
+    return ((tile_base + (y / 4)) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
            (lbSnap_GetTiledRemainder(y) * 2);
 }
 
@@ -218,14 +218,13 @@ void lbSnap_8001DA5C(const u8* arg0)
     int ctr;
 
     for (dst_x = 0; dst_x < 32; dst_x++) {
-        int src_x_base = dst_x * 204 / 32;
         u8* dst_col = dst + ((dst_x % 4) * 8);
         int tile_column = lbSnap_GetTiledColumn(dst_x);
         int dst_y = 0;
         int src_y_accum = 0;
         u16 pixel;
         for (ctr = 0; ctr < 32; ctr++) {
-            int src_x = src_x_base + 138;
+            int src_x = (dst_x * 204 / 32) + 138;
             pixel = *(u16*) &arg0[lbSnap_GetTiledRGBOffset(
                 src_x, src_y_accum / 64 + 96, 160)];
             *(u16*) &dst_col[lbSnap_GetTiledYOff(tile_column, dst_y + 16)] =

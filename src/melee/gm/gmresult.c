@@ -1436,16 +1436,16 @@ void fn_80176A6C(void)
     HSD_GObj* gobj;
     HSD_CObj* cobj;
 
-    gobj = GObj_Create(0x13U, 0x14U, 0U);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
     if (gobj == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x662, 0);
+        HSD_ASSERT(1634, 0);
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
         OSReport("Error : cobj dont't get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x668, 0);
+        HSD_ASSERT(1640, 0);
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
@@ -1473,7 +1473,7 @@ void fn_80176BCC(HSD_GObj* gobj)
 static inline int fn_80176BF0_inline(u8 arg1)
 {
     int i;
-    for (i = 0; i < 0x21; i++) {
+    for (i = 0; i < 33; i++) { ///< @todo `ARRAY_SIZE(lbl_803B7B18)`
         if (arg1 == lbl_803B7B18.lookup[i][0]) {
             return lbl_803B7B18.lookup[i][1];
         }
