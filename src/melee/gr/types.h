@@ -1338,11 +1338,24 @@ struct grBigBlue_PlatformVars {
     /* gp+EC */ f32 xEC;
 };
 
+/// Moving road gobj state (gobj ID 34).
+struct grBigBlue_RoadVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ Vec3 position;
+    /* gp+D4 */ Vec3 previous_position;
+    /* gp+E0 */ Vec3 drift;
+    /* gp+EC */ f32 lateral_drift;
+    /* gp+F0 */ s16 direction;
+    /* gp+F2 */ u8 pad_F2[6];
+    /* gp+F8 */ f32 rotation;
+};
+ASSERT_SIZE(struct grBigBlue_RoadVars, 0x38);
+
 /// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
 /// Different gobjs interpret the same offsets differently.
 ///
 /// Track gobj (ID 32): uses xC8 as HSD_JObj*[30], xCC as u8[30] flags.
-/// Road gobj (ID 34): uses xCC as f32 velocity, xD0/xD8 for position.
+/// Road gobj (ID 34): see #grBigBlue_RoadVars.
 /// Car gobj (ID 33): per-lane data at 0x40-byte stride from gp+D4,
 ///   with fields: state(+0), target(+4), delta(+8), pos Vec3(+C),
 ///   lateral(+20), direction(+2C), gravity(+30), height(+34),
@@ -1398,6 +1411,7 @@ struct grBigBlue_GroundVars {
             /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
         };
         struct grBigBlue_PlatformVars platform;
+        struct grBigBlue_RoadVars road;
         struct {
             /* +00 gp+C4 */ u8 pad_C4[0x10];
             /* +10 gp+D4 */ struct grBigBlue_CarLane lanes[4];
