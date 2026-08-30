@@ -32,6 +32,11 @@ typedef struct gmClassicMatchupData {
 } gmClassicMatchupData;
 ASSERT_SIZE(gmClassicMatchupData, 8);
 
+typedef struct gmClassicOrderIndex {
+    u8 idx;
+} gmClassicOrderIndex;
+ASSERT_SIZE(gmClassicOrderIndex, 1);
+
 typedef struct gmClassicIntroData {
     /* 0x00 */ s32 x00;
     /* 0x04 */ s32 x04;
@@ -488,7 +493,9 @@ static gmClassic_803DDEC8Data gmClassic_803DDEC8 = {
 };
 
 static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
-                                              u8* order)
+                                              gmClassicOrderIndex* order,
+                                              gmClassicOrderIndex* runtime,
+                                              s32 order_offset)
 {
     s32 count;
     s32 i;
@@ -497,15 +504,16 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     }
 
     for (i = 0; i < count; i++) {
-        order[i] = i;
+        order[i].idx = i;
     }
 
     for (i = 0; i < count; i++) {
         s32 swap_idx = HSD_Randi(count);
-        u8* cur = &order[i];
-        u8 tmp = *cur;
-        *cur = order[swap_idx];
-        order[swap_idx] = tmp;
+        gmClassicOrderIndex* swap = &runtime[swap_idx];
+        gmClassicOrderIndex* cur = &order[i];
+        u8 tmp = cur->idx;
+        cur->idx = swap[order_offset].idx;
+        swap[order_offset].idx = tmp;
     }
 }
 
@@ -696,10 +704,22 @@ void gmClassic_OnLoad(void)
         entry->xC = NULL;
     }
 
-    gmClassic_InitMatchupOrder(scene_data->matchups.x2B0, &gm_804908A0[0x60]);
-    gmClassic_InitMatchupOrder(scene_data->matchups.x26C, &gm_804908A0[0x54]);
-    gmClassic_InitMatchupOrder(scene_data->matchups.x1B8, &gm_804908A0[0x34]);
-    gmClassic_InitMatchupOrder(scene_data->matchups.x0CC, &gm_804908A0[0x0C]);
+    gmClassic_InitMatchupOrder(
+        scene_data->matchups.x2B0,
+        (gmClassicOrderIndex*) &gm_804908A0[0x60],
+        (gmClassicOrderIndex*) o, 0x80);
+    gmClassic_InitMatchupOrder(
+        scene_data->matchups.x26C,
+        (gmClassicOrderIndex*) &gm_804908A0[0x54],
+        (gmClassicOrderIndex*) o, 0x74);
+    gmClassic_InitMatchupOrder(
+        scene_data->matchups.x1B8,
+        (gmClassicOrderIndex*) &gm_804908A0[0x34],
+        (gmClassicOrderIndex*) o, 0x54);
+    gmClassic_InitMatchupOrder(
+        scene_data->matchups.x0CC,
+        (gmClassicOrderIndex*) &gm_804908A0[0x0C],
+        (gmClassicOrderIndex*) o, 0x2C);
 
     data = gm_GetAllStarData();
     gmMainLib_8015CDC8();
