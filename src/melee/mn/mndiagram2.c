@@ -635,6 +635,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     f32 py;
     f32 pz;
     HSD_Text* text2;
+    HSD_JObj* jobj;
     int unit_glyph_id;
     Diagram2* data;
     MnDiagram2RowLayout* base;
@@ -643,6 +644,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     u8 str[8];
     f32 f30;
     Vec3 position;
+    u8 entity = entity_idx;
 
     mode = is_name_mode;
     data = gobj->user_data;
@@ -685,7 +687,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         if (mnDiagram2_IsDistanceStat(stat_type) &&
                             mnDiagram_IsDistanceOverflow(
                                 mnDiagram2_GetStatValue(
-                                    is_name_mode, stat_type, entity_idx)))
+                                    is_name_mode, stat_type, entity)))
                         {
                             HSD_SisLib_803A6368(text2, 0x7F);
                         } else {
@@ -697,11 +699,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 {
                     if (mnDiagram2_IsIconOnlyStat(stat_type) &&
                         (u32) mnDiagram2_GetStatValue(
-                            mode, stat_type, entity_idx) < SELKIND_COUNT)
+                            mode, stat_type, entity) < SELKIND_COUNT)
                     {
-                        HSD_JObj* jobj = mnDiagram_CreateFighterIcon(
-                            mnDiagram2_GetStatValue(mode, stat_type,
-                                                    entity_idx),
+                        jobj = mnDiagram_CreateFighterIcon(
+                            mnDiagram2_GetStatValue(mode, stat_type, entity),
                             0);
                         HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
@@ -733,7 +734,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
 
                     if (mnDiagram2_IsTimeStat(stat_type)) {
                         int val = mnDiagram2_GetStatValue(mode, stat_type,
-                                                          entity_idx);
+                                                          entity);
                         {
                             u32 unsigned_val = (u32) val;
                             if (unsigned_val > 0x927BF) {
@@ -744,7 +745,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     } else {
                         if (mnDiagram2_IsDistanceStat(stat_type)) {
                             u32 val = mnDiagram2_GetStatValue(mode, stat_type,
-                                                              entity_idx);
+                                                              entity);
                             val = mnDiagram_ConvertDistanceForDisplay(val);
                             if (val > 0x98967F) {
                                 val = 0x98967F;
@@ -753,7 +754,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         } else {
                             if (mnDiagram2_IsPercentageStat(stat_type)) {
                                 int val = mnDiagram2_GetStatValue(
-                                    mode, stat_type, entity_idx);
+                                    mode, stat_type, entity);
                                 if ((u32) val > 0xF423F) {
                                     val = 0xF423F;
                                 }
@@ -766,7 +767,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                                     str[2] = mnDiagram2_804D4FD0[2];
                                 } else {
                                     int val = mnDiagram2_GetStatValue(
-                                        mode, stat_type, entity_idx);
+                                        mode, stat_type, entity);
                                     if ((u32) val > 0x98967F) {
                                         val = 0x98967F;
                                     }
