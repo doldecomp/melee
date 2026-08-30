@@ -63,28 +63,33 @@ static u32 lbl_804D66F8;
 static struct {
     u8 x0;
     u8 pad_01[0x3];
-    s32 x4;
-    int x8;
-    s32 xC;
-    u32 x10;
-    u8 x14;
-    u8 x15;
-    u8 x16;
-    u8 pad_17;
-    int x18;
-    u16 x1C;
-    u16 x1E;
-    u8 x20;
-    u8 pad_21;
-    u16 x22;
-    HSD_Text* x24;
     union {
         struct {
-            HSD_GObj* gobj;
-            HSD_JObj* jobjs[10];
-        } typed;
-        HSD_JObj* jobj_slots[11];
-    } x28;
+            s32 x4;
+            int x8;
+            s32 xC;
+            u32 x10;
+            u8 x14;
+            u8 x15;
+            u8 x16;
+            u8 pad_17;
+            int x18;
+            u16 x1C;
+            u16 x1E;
+            u8 x20;
+            u8 pad_21;
+            u16 x22;
+            HSD_Text* x24;
+            union {
+                struct {
+                    HSD_GObj* gobj;
+                    HSD_JObj* jobjs[10];
+                } typed;
+                HSD_JObj* jobj_slots[11];
+            } x28;
+        };
+        HSD_JObj* jobj_slots[20];
+    };
     HSD_JObj* x54;
     HSD_JObj* x58;
     HSD_JObj* x5C;
@@ -510,8 +515,8 @@ void fn_8019F9C4(u32 arg0)
     }
     node = child == NULL ? NULL : child->child;
 
-    for (i = 1; i <= 10; i++) {
-        lbl_80479A98.x28.jobj_slots[i] = node;
+    for (i = 10; i < 20; i++) {
+        lbl_80479A98.jobj_slots[i] = node;
         if (node->next != NULL) {
             node = node->next;
         }
