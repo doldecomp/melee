@@ -248,8 +248,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
             s32 image_offset = hsd_803B3408_offset(tile_stride, y, x);
             src = (u16*) image + (image_offset + tile_row_offset);
         }
-        luma_block_offset = 0;
-        for (tile_x = 0; tile_x < 2; tile_x++) {
+        for (tile_x = 0, luma_block_offset = 0; tile_x < 2; tile_x++) {
             s32 chroma_y;
 
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
