@@ -41,7 +41,7 @@ static HSD_JObj* hsd_804D08E8[8];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ int psNumCmdList[65];
 /* 4D0D58 */ HSD_PSCmdList** psCmdListArray[65];
-/* 4D0E5C */ u32* ptclref_804D0E5C[65];
+/* 4D0E5C */ HSD_PSCmdList** ptclref_804D0E5C[65];
 /* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
 
 typedef struct PSNode {
@@ -1101,7 +1101,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     pc += 2;
 
                     if (ptclref_804D0E5C[bank] != NULL) {
-                        idx = ptclref_804D0E5C[bank][idx];
+                        idx = (u32) ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1280,7 +1280,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     pc += 3;
 
                     if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = ptclref_804D0E5C[pp->bank][idx];
+                        idx = (u32) ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -1412,7 +1412,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
                     if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = ptclref_804D0E5C[pp->bank][idx];
+                        idx = (u32) ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1773,7 +1773,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     pc += 2;
 
                     if (ptclref_804D0E5C[bank] != NULL) {
-                        idx = ptclref_804D0E5C[bank][idx];
+                        idx = (u32) ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
