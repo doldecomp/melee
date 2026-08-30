@@ -27,6 +27,6 @@ GameModeState gm_Mode_HanyuSss_States[] = {
 
 void gm_801BEE58(GameModeState* arg0)
 {
-    SSSData* var_r3 = gm_GetGameSceneLoadData(arg0);
-    var_r3->data = gmMainLib_804D3EE0->unk_590;
+    SSSData* var_r3 = gm_GetGameModeStateEnterData(arg0);
+    var_r3->vs = gmMainLib_804D3EE0->vs_melee;
 }

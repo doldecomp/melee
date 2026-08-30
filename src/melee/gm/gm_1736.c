@@ -63,9 +63,9 @@ void gm_Mode_ChallengerApproach_OnLoad(void)
 {
     challenger_data.x6 = gm_GetPreviousGameMode();
     if (challenger_data.x0 == CHKIND_NONE) {
-        gm_SetSceneIndex(2);
+        gm_SetGameModeStateId(2);
     } else {
-        gm_SetSceneIndex(0);
+        gm_SetGameModeStateId(0);
     }
 }
 

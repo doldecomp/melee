@@ -1557,9 +1557,9 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     PAD_STACK(4);
 
     Player_SetSlottype(arg0, arg1->slot_type);
-    Player_SetPlayerCharacter(arg0, arg1->c_kind);
+    Player_SetPlayerCharacter(arg0, arg1->ckind);
 
-    tmp->FighterMatchInfo[arg0].x0 = arg1->c_kind;
+    tmp->FighterMatchInfo[arg0].x0 = arg1->ckind;
 
     Player_SetStocks(arg0, arg1->stocks);
     Player_SetCostumeId(arg0, arg1->color);

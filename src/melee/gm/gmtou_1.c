@@ -131,7 +131,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetPendingSceneIndex(3);
+        gm_SetNextGameModeStateId(3);
         gm_801A4B60();
         return;
     }
@@ -139,7 +139,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetPendingSceneIndex(4);
+    gm_SetNextGameModeStateId(4);
     gm_801A4B60();
 }
 
@@ -1864,7 +1864,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetPendingSceneIndex(3U);
+                gm_SetNextGameModeStateId(3U);
                 gm_801A4B60();
                 return;
             }
@@ -1877,7 +1877,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetPendingSceneIndex(4U);
+            gm_SetNextGameModeStateId(4U);
             gm_801A4B60();
         }
     } else {
@@ -1977,7 +1977,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetPendingSceneIndex(3U);
+                            gm_SetNextGameModeStateId(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -1990,7 +1990,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetPendingSceneIndex(4U);
+                        gm_SetNextGameModeStateId(4U);
                         gm_801A4B60();
                     }
                 }

@@ -287,7 +287,7 @@ GameModeState gm_Mode_DebugCutscene_States[] = {
 
 void onExitTitle(GameModeState* arg0)
 {
-    int* temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    int* temp_r3 = gm_GetGameModeStateExitData(arg0);
     if (DbLevel >= DbLKind_DebugRom) {
         if (*temp_r3 & 0x100) {
             gm_SetPendingGameMode(GM_DEBUG_VS);
@@ -473,7 +473,7 @@ void onEnterVs(GameModeState* arg0)
     int i;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1710;
-    md = gm_GetGameSceneLoadData(arg0);
+    md = gm_GetGameModeStateEnterData(arg0);
     gm_80167BC8(temp_r30);
     gm_8016F088(md);
     gm_80168FC4();
@@ -494,7 +494,7 @@ void onEnterVs(GameModeState* arg0)
 
     for (i = 0; i < 4; i++) {
         CharacterKind kind = gm_801BF648(i);
-        md->players[i].c_kind = kind;
+        md->players[i].ckind = kind;
         md->players[i].color = gm_801BF670(i);
         md->players[i].slot_type = Gm_PKind_Cpu;
         md->players[i].cpu_level = 9;

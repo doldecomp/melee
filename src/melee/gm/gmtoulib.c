@@ -2694,11 +2694,11 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].x20 = 1.0f;
             arg0->players[i].xA = (u8) MIN(tm->x4B8[i].x6, 0x78);
             if (tm->x4B8[i].x2 != 0) {
-                arg0->players[i].c_kind = gm_801905F0_inline0(fn_8018F410());
+                arg0->players[i].ckind = gm_801905F0_inline0(fn_8018F410());
                 arg0->players[i].color =
-                    HSD_Randi(gm_80169238(arg0->players[i].c_kind));
+                    HSD_Randi(gm_80169238(arg0->players[i].ckind));
             } else {
-                arg0->players[i].c_kind = gm_801905F0_inline0(tm->x4B8[i].x1);
+                arg0->players[i].ckind = gm_801905F0_inline0(tm->x4B8[i].x1);
                 arg0->players[i].color = tm->x4B8[i].x3;
             }
             arg0->players[i].slot_type = tm->x4B8[i].x0;
@@ -2726,7 +2726,7 @@ void gm_801905F0(StartMeleeData* arg0)
     sp18.stkind = arg0->rules.stkind;
     for (i = 0; i < 4; i++) {
         sp18.slot_type[i] = arg0->players[i].slot_type;
-        sp18.char_id[i] = arg0->players[i].c_kind;
+        sp18.char_id[i] = arg0->players[i].ckind;
         sp18.color[i] = arg0->players[i].color;
     }
 

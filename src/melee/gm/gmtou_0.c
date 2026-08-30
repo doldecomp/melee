@@ -2865,7 +2865,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
-                gm_SetPendingSceneIndex(1);
+                gm_SetNextGameModeStateId(1);
             } else {
                 td = gm_GetTournamentData();
                 i = 0;
@@ -2887,7 +2887,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
                     dst_ptr += 0xA;
                     i++;
                 }
-                gm_SetPendingSceneIndex(2);
+                gm_SetNextGameModeStateId(2);
             }
             gm_801A4B60();
         } else {

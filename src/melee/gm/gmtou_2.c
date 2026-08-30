@@ -846,7 +846,7 @@ void gm_Scene_TouAlt_OnFrame(void)
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if (lbl_80479A58.x18[i] > 0x5AU) {
                         sfxForward();
-                        gm_SetPendingSceneIndex(0U);
+                        gm_SetNextGameModeStateId(0U);
                         gm_801A4B60();
                         return;
                     }

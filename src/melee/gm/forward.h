@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+/// @todo Might be defined elsewhere
+#define GM_MAX_PLAYERS 6
+#define GM_MAX_TEAMS 5
+
 typedef enum GameModeKind {
     /* 00 */ GM_TITLE,
     /* 01 */ GM_MENU,

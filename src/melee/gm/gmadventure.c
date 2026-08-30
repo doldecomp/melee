@@ -1209,7 +1209,7 @@ void gm_801B3F40(GameModeState* arg0)
     int i;
 
     temp_ret = 0;
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_8017E4C4(arg0->id);
     temp_r3 = gm_GetAdventureData();
     temp_r3->x0.x7 = arg0->id;
@@ -1248,7 +1248,7 @@ void gm_801B4064(GameModeState* arg0)
 
     PAD_STACK(8);
 
-    temp_r28 = gm_GetGameSceneLoadData(arg0);
+    temp_r28 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_8017E4C4(arg0->id);
     temp_r27 = gm_GetAdventureData();
     if (temp_r31->x4 != 0) {
@@ -1274,7 +1274,7 @@ void gm_801B4064(GameModeState* arg0)
 
 void gm_801B4170(GameModeState* arg0)
 {
-    MatchExitInfo* temp_r28 = gm_GetGameSceneLeaveData(arg0);
+    MatchExitInfo* temp_r28 = gm_GetGameModeStateExitData(arg0);
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
     setValUnk(arg0->id, temp_r28->x8);
     if (gm_8017D7AC(temp_r28, &temp_r31->x0, 0x69) &&
@@ -1286,19 +1286,19 @@ void gm_801B4170(GameModeState* arg0)
 
 void gm_801B4254(GameModeState* scene)
 {
-    DebugGameOverData* data = gm_GetGameSceneLoadData(scene);
+    DebugGameOverData* data = gm_GetGameModeStateEnterData(scene);
     gm_8017C9A8(data, &gm_GetAdventureData()->x0, 0);
 }
 
 void gm_801B4294(GameModeState* scene)
 {
-    DebugGameOverData* data = gm_GetGameSceneLeaveData(scene);
+    DebugGameOverData* data = gm_GetGameModeStateExitData(scene);
     gm_8017CA38(data, &gm_GetAdventureData()->x0, gmMainLib_8015CDD4(), 0);
 }
 
 void gm_801B42E8(GameModeState* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadData(scene);
+    CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -1307,7 +1307,7 @@ void gm_801B42E8(GameModeState* scene)
 
 void gm_801B4350(GameModeState* scene)
 {
-    CSSData* css = gm_GetGameSceneLeaveData(scene);
+    CSSData* css = gm_GetGameModeStateExitData(scene);
     struct gmm_x0_528_t* temp_r29 = gmMainLib_8015CDD4();
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
@@ -1322,7 +1322,7 @@ void gm_801B4350(GameModeState* scene)
     temp_r31->x0.cpu_level = temp_r29->cpu_level;
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
-    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
+    gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
@@ -1334,7 +1334,7 @@ void gm_801B4408(GameModeState* scene)
 
 void gm_801B4430(GameModeState* scene)
 {
-    CutsceneData* temp_r30 = gm_GetGameSceneLoadData(scene);
+    CutsceneData* temp_r30 = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
     u8 var_r0;
@@ -1350,7 +1350,7 @@ void gm_801B4430(GameModeState* scene)
 
 void gm_801B44A0(GameModeState* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->id, temp_r30->x8);
@@ -1362,16 +1362,16 @@ void gm_801B44A0(GameModeState* scene)
          */
         u32 seconds = temp_r30->x4 % 60;
         if (seconds % 10 == 2) {
-            gm_SetPendingSceneIndex(ADVENTURE_LUIGI_CUTSCENE);
+            gm_SetNextGameModeStateId(ADVENTURE_LUIGI_CUTSCENE);
         } else {
-            gm_SetPendingSceneIndex(ADVENTURE_MARIO_PEACH_FIGHT);
+            gm_SetNextGameModeStateId(ADVENTURE_MARIO_PEACH_FIGHT);
         }
     }
 }
 
 void gm_801B45A4(GameModeState* scene)
 {
-    CutsceneData* temp_r31 = gm_GetGameSceneLoadData(scene);
+    CutsceneData* temp_r31 = gm_GetGameModeStateEnterData(scene);
     UnkAdventureData* temp_r7 = gm_GetAdventureData();
     u8 colors[3] = { 0 };
     s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
@@ -1388,9 +1388,9 @@ void gm_801B461C(GameModeState* scene)
 
     /// If we got here from the Luigi cutscene, change Mario to Luigi.
     if (gm_GetPreviousSceneIndex() == ADVENTURE_LUIGI_CUTSCENE) {
-        StartMeleeData* data = gm_GetGameSceneLoadData(scene);
+        StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
         UnkAdventureData* adventure = gm_GetAdventureData();
-        data->players[1].c_kind = CKIND_LUIGI;
+        data->players[1].ckind = CKIND_LUIGI;
         data->players[1].color = gm_804D68D8.x3;
         adventure->x74 = 1;
     }
@@ -1398,7 +1398,7 @@ void gm_801B461C(GameModeState* scene)
 
 void gm_801B4684(GameModeState* scene)
 {
-    MatchExitInfo* temp_r29 = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* temp_r29 = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
     setValUnk(scene->id, temp_r29->x8);
@@ -1415,7 +1415,7 @@ void gm_801B4684(GameModeState* scene)
 
 void gm_801B4768(GameModeState* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1430,7 +1430,7 @@ void gm_801B47FC(GameModeState* scene)
     UnkAdventureData* temp_r31;
     StartMeleeData* temp_r30;
 
-    temp_r30 = gm_GetGameSceneLoadData(scene);
+    temp_r30 = gm_GetGameModeStateEnterData(scene);
     temp_r31 = gm_GetAdventureData();
     gm_801B4064(scene);
     temp_r30->rules.x50 = gm_8017E7A0;
@@ -1439,7 +1439,7 @@ void gm_801B47FC(GameModeState* scene)
 
 static inline void gm_801B4860_inline0(GameModeState* scene)
 {
-    MatchExitInfo* exit_info = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* exit_info = gm_GetGameModeStateExitData(scene);
     if (exit_info->match_end.result != OUTCOME_TIMEOUT) {
         UnkAdventureData* tmp = gm_GetAdventureData();
         tmp->x76 = 1;
@@ -1450,7 +1450,7 @@ static inline void gm_801B4860_inline0(GameModeState* scene)
 
 static inline void gm_801B4860_inline1(GameModeState* scene)
 {
-    MatchExitInfo* exit_info = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* exit_info = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* adv_data = gm_GetAdventureData();
 
     setValUnk(scene->id, exit_info->x8);
@@ -1496,9 +1496,9 @@ void gm_801B4974(GameModeState* arg0)
     CutsceneData* temp_r28;
     u8* temp_r31;
 
-    temp_r28 = gm_GetGameSceneLoadData(arg0);
+    temp_r28 = gm_GetGameModeStateEnterData(arg0);
     temp_r29 = gm_GetAdventureData();
-    temp_r25 = gm_GetGameSceneLoadData(arg0);
+    temp_r25 = gm_GetGameModeStateEnterData(arg0);
     temp_r24 = gmMainLib_8015CDD4();
     temp_r3 = gm_GetAdventureData();
     var_r4 = temp_r3->x0.ckind;
@@ -1537,7 +1537,7 @@ void gm_801B4B28(GameModeState* scene)
 
 void gm_801B4C5C(GameModeState* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->id, temp_r30->x8);
@@ -1546,7 +1546,7 @@ void gm_801B4C5C(GameModeState* scene)
     if (gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69) &&
         temp_r30->match_end.frame_count / 60 > 30)
     {
-        gm_SetPendingSceneIndex(
+        gm_SetNextGameModeStateId(
             NEXT_SCENEBLOCK_AFTER(ADVENTURE_GIANTKIRBY_FIGHT));
     }
 }
@@ -1570,7 +1570,7 @@ void gm_801B4D34(GameModeState* scene)
 void gm_801B4DAC(GameModeState* scene)
 {
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
-    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
     gm_801B4064(scene);
     if (temp_r30->x7C == CKIND_FALCO) {
         s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
@@ -1578,7 +1578,7 @@ void gm_801B4DAC(GameModeState* scene)
         colors[0] = data->players[1].color;
         gmRegSetupEnemyColorTable(temp_r30->x0.ckind, temp_r30->x0.color,
                                   ckinds, colors);
-        data->players[1].c_kind = CKIND_FALCO;
+        data->players[1].ckind = CKIND_FALCO;
         data->players[1].color = colors[0];
     }
 }
@@ -1587,7 +1587,7 @@ void gm_801B4E58(GameModeState* scene)
 {
     StartMeleeData* data;
     gm_GetAdventureData();
-    data = gm_GetGameSceneLoadData(scene);
+    data = gm_GetGameModeStateEnterData(scene);
     gm_801B4064(scene);
     data->rules.x20 = 1 << 7; ///< enabling an item, which one?
     data->rules.xB = 4;
@@ -1595,14 +1595,14 @@ void gm_801B4E58(GameModeState* scene)
 
 void gm_801B4EB8(GameModeState* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
     int i;
     gm_801B4064(scene);
 
     /// If Luigi isn't unlocked, don't spawn him for this match.
     if (!gm_IsCKindUnlocked(CKIND_LUIGI)) {
         for (i = 0; i < 3; i++) {
-            if (data->players[i + 1].c_kind == CKIND_LUIGI) {
+            if (data->players[i + 1].ckind == CKIND_LUIGI) {
                 data->players[i + 1].slot_type = Gm_PKind_NA;
             }
         }
@@ -1611,7 +1611,7 @@ void gm_801B4EB8(GameModeState* scene)
 
 void gm_801B4F44(GameModeState* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1624,7 +1624,7 @@ void gm_801B4F44(GameModeState* scene)
 
 void gm_801B4FCC(GameModeState* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
     setValUnk(scene->id, temp_r30->x8);
     gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69);
@@ -1640,7 +1640,7 @@ void gm_801B5078(GameModeState* scene)
 
 void gm_801B50C4(GameModeState* scene)
 {
-    MatchExitInfo* temp_r31 = gm_GetGameSceneLeaveData(scene);
+    MatchExitInfo* temp_r31 = gm_GetGameModeStateExitData(scene);
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
 
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
@@ -1701,7 +1701,7 @@ void gm_Mode_Adventure_OnLoad(void)
     data->x60 = gm_8017E738;
     data->x6C = gm_8017E664;
     data->x70 = gm_8017E6B4;
-    gm_SetSceneIndex(ADVENTURE_BACK_TO_CSS);
+    gm_SetGameModeStateId(ADVENTURE_BACK_TO_CSS);
     gm_80172174();
     Ground_801C5A28();
 }
