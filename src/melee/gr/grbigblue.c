@@ -1043,8 +1043,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         gp->u.bigblue.data[i].x4 = yakumono_param->xB4;
                         gp->u.bigblue.data[i].x34 = 2;
                     } else {
-                        f32 prev_y = gp->u.bigblue.data[i].x28;
                         f32 prev_x = gp->u.bigblue.data[i].x24;
+                        f32 prev_y = gp->u.bigblue.data[i].x28;
 
                         if (prev_y > prev_x) {
                             gp->u.bigblue.data[i].x18.z =
