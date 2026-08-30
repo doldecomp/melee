@@ -1175,12 +1175,13 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
 
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    u8* ptr2;
     u8* ptr;
     HSD_GObjProc* proc;
     u8 row_result;
     s32 i;
-    u8* ptr2;
     u8* ptr3;
+    u16* selection;
     s16 new_var;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
     Diagram* data = mnDiagram_GetCurrentDiagramData();
@@ -1229,8 +1230,10 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }
-        i = (u8) data->fighter_cursor_pos;
-        col = mn_804A04F0.hovered_selection;
+        selection = (u16*) &mn_804A04F0;
+        cursor_pos = data->fighter_cursor_pos;
+        col = (u8) *++selection;
+        i = (u8) cursor_pos;
         ptr = sorted + i;
         goto fc_test;
     fc_outer:
@@ -1257,7 +1260,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
         }
 
-        row2 = mn_804A04F0.hovered_selection >> 8;
+        row2 = *selection >> 8;
         i = data->fighter_cursor_pos >> 8;
         ptr = sorted + i;
         goto fr_test;
