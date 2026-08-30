@@ -103,6 +103,9 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     Vec3 position;
     u32 max_percentage;
 
+    // Keep the stack frame aligned with the original local workspace.
+    PAD_STACK(8);
+
     data = gobj->user_data;
     table = (mnDiagram3_DataTable*) &mnDiagram3_803EEC10;
 
