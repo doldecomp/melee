@@ -492,7 +492,7 @@ GlyphEntry lbl_80408898[4] = {
     { 0xB3808000, hsd_80392194 },
 };
 
-DebugFontGlyph HSD_DebugFontAtlas[] ATTRIBUTE_ALIGN(32) = {
+DebugFontGlyph HSD_DebugFontAtlas[] = {
 #include <sysdolphin/baselib/debug_font.inc>
 };
 
