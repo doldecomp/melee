@@ -11,7 +11,6 @@
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"
-#include "ft/types.h"
 
 #include <baselib/wobj.h>
 
