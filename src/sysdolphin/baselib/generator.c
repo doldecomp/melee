@@ -362,7 +362,7 @@ HSD_Generator* hsd_8039D9C8(void)
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Vec3 vel_copy;
-    f32 tmp;
+    f32 vel_mag_sq;
     Vec3 emit_pos;
     Vec3 tmpvec;
     Vec3 vel_out;
@@ -374,7 +374,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 vel_norm;
     Mtx trig_mtx;
     f64 eps;
-    f32 vel_mag_sq;
+    f32 abs_projected;
+    f32 tmp;
     f32 angle1;
     f32 sin_az;
     f32 cos_az;
@@ -386,7 +387,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 radius;
     f32 angle3;
 
-    angle1 = angle3 = 0.0F;
+    angle3 = angle1 = 0.0F;
     if (gen->count < 1.0F) {
         return gen->count;
     }
@@ -437,9 +438,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         rot_mtx[1][2] = vel_out.y;
         rot_mtx[2][2] = vel_out.z;
 
-        rot_mtx[0][3] = 0.0F;
-        rot_mtx[1][3] = 0.0F;
         rot_mtx[2][3] = 0.0F;
+        rot_mtx[1][3] = 0.0F;
+        rot_mtx[0][3] = 0.0F;
     }
 
     /* Billboard orientation: kind & 0x10000 */
@@ -466,7 +467,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Velocity-based rotation */
-    if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
+    if ((gen->type & 0xF) != 1 && vel_mag_sq > 1.1920929e-7F) {
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -487,11 +488,11 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         sin_az = cosf(sin_az);
 
         {
-            f32 projected_z = vel_norm.z * sin_az;
-            projected_z += vel_norm.y * cos_az;
-            tmp = projected_z;
-            *(s32*) &tmp &= 0x7FFFFFFF;
-            if (tmp < 1.1754944e-38F) {
+            f32 projected_z =
+                vel_norm.y * cos_az + vel_norm.z * sin_az;
+            abs_projected = projected_z;
+            *(s32*) &abs_projected &= 0x7FFFFFFF;
+            if (abs_projected < 1.1754944e-38F) {
                 if (vel_norm.x >= 0.0F) {
                     elevation = 1.5707964F;
                 } else {
@@ -538,7 +539,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
         {
             f32 first = rot_mtx[2][2] * cosf(angle1);
-            f32 comb = first + rot_mtx[1][2] * sinf(angle1);
+            f32 comb_value = first + rot_mtx[1][2] * sinf(angle1);
+            f32 comb = comb_value;
             tmp = comb;
             *(s32*) &tmp &= 0x7FFFFFFF;
             if (tmp < 1.1754944e-38F) {
