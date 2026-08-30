@@ -1006,9 +1006,9 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float broadphase_scale)
 {
     float hit_end_min_z;
-    float closest_delta_x;
+    float start_delta_y;
+    float start_delta_x;
     float hit_start_mid_x;
-    float local_delta_x;
     float hurt_mid_z;
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
@@ -1027,16 +1027,16 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float allowed_distance;
     float hurt_closest_x;
     float hurt_closest_y;
-    float hurt_end_x;
+    float hit_end_y;
     float hit_start_mid_y;
     float hit_param_candidate;
     float closest_delta_y;
     float closest_dist_sq;
     float local_delta_y;
-    float start_delta_x;
+    float closest_delta_x;
     float hurt_param_from_hit_start;
     Mtx inv_hurt_mtx;
-    float hurt_delta_z;
+    float candidate_hit_param;
     float hit_start_max_x;
     float hit_end_min_x;
     float hit_start_min_x;
@@ -1054,21 +1054,21 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_len_sq;
     float hit_end_max_z;
     float candidate_hurt_param;
-    float candidate_hit_param;
+    float hurt_delta_z;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
-    float hit_end_y;
+    float segment_dot;
     float hit_start_max_z;
     float hit_start_min_z;
     float hurt_closest_z;
     float hit_end_z;
-    float segment_dot;
+    float hurt_end_x;
     float hurt_end_y;
     float hit_param;
     float local_dist;
     float hurt_param;
-    float start_delta_y;
+    float local_delta_x;
     float hurt_param_from_hit_end;
     float closest_dist;
     float hurt_end_z;
