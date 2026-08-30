@@ -4268,9 +4268,8 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
                 *car_ec = 0.0f;
 
                 {
-                    Ground_801C5440(
-                        &gp->ground, slot,
-                        ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
+                    Ground_801C5440(&gp->ground, slot,
+                                    lbl_803E3010[HSD_Randi(4)]);
                 }
 
                 Ground_801C5630(&gp->ground, arg1, *car_ec);
@@ -4407,9 +4406,8 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
                 *car_ec = 0.0f;
 
                 {
-                    Ground_801C5440(
-                        &gp->ground, slot,
-                        ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
+                    Ground_801C5440(&gp->ground, slot,
+                                    lbl_803E3010[HSD_Randi(4)]);
                 }
 
                 Ground_801C5630(&gp->ground, arg1, *car_ec);
