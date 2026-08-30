@@ -116,6 +116,7 @@ void fn_8018A514(int count, float val)
     BracketEntry* entries;
     BracketSrcEntry* src;
     BracketSrcPtr* srcs;
+    u8* counts;
     int i;
     s32 n;
 
@@ -138,7 +139,8 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    n = lbl_803D9D20.x20[count];
+    counts = lbl_803D9D20.x20;
+    n = counts[count];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -178,6 +180,7 @@ void fn_8018A514(int count, float val)
         src++;
     }
 
+    (void) counts;
     if (region == 0) {
         gmTournament_SetBracketByes(entries, count);
     }
