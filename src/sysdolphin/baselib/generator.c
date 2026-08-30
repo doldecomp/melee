@@ -361,16 +361,17 @@ HSD_Generator* hsd_8039D9C8(void)
 // switch case logic, Newton-Raphson sqrt inlining, trig matrix layout
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
-    f32 radius;
-    Vec3 vel_out;
     Vec3 vel_copy;
+    f32 tmp;
     Vec3 emit_pos;
-    Vec3 cross1;
     Vec3 tmpvec;
+    Vec3 vel_out;
     Mtx rot_mtx;
     Mtx jobj_mtx;
     Vec3 look_dir;
     Vec3 cam_up;
+    Vec3 cross1;
+    Vec3 vel_norm;
     Mtx trig_mtx;
     f64 eps;
     f32 vel_mag_sq;
@@ -382,7 +383,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 cur_angle;
     f32 cone_angle;
     f32 elevation;
-    f32 tmp;
+    f32 radius;
     f32 angle3;
 
     angle1 = angle3 = 0.0F;
@@ -412,29 +413,29 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         PSMTXCopy(gen->jobj->mtx, jobj_mtx);
 
         /* Extract and normalize each column of the 3x3 rotation */
-        tmpvec.x = jobj_mtx[0][0];
-        tmpvec.y = jobj_mtx[1][0];
-        tmpvec.z = jobj_mtx[2][0];
-        PSVECNormalize(&tmpvec, &tmpvec);
-        rot_mtx[0][0] = tmpvec.x;
-        rot_mtx[1][0] = tmpvec.y;
-        rot_mtx[2][0] = tmpvec.z;
+        vel_out.x = jobj_mtx[0][0];
+        vel_out.y = jobj_mtx[1][0];
+        vel_out.z = jobj_mtx[2][0];
+        PSVECNormalize(&vel_out, &vel_out);
+        rot_mtx[0][0] = vel_out.x;
+        rot_mtx[1][0] = vel_out.y;
+        rot_mtx[2][0] = vel_out.z;
 
-        tmpvec.x = jobj_mtx[0][1];
-        tmpvec.y = jobj_mtx[1][1];
-        tmpvec.z = jobj_mtx[2][1];
-        PSVECNormalize(&tmpvec, &tmpvec);
-        rot_mtx[0][1] = tmpvec.x;
-        rot_mtx[1][1] = tmpvec.y;
-        rot_mtx[2][1] = tmpvec.z;
+        vel_out.x = jobj_mtx[0][1];
+        vel_out.y = jobj_mtx[1][1];
+        vel_out.z = jobj_mtx[2][1];
+        PSVECNormalize(&vel_out, &vel_out);
+        rot_mtx[0][1] = vel_out.x;
+        rot_mtx[1][1] = vel_out.y;
+        rot_mtx[2][1] = vel_out.z;
 
-        tmpvec.x = jobj_mtx[0][2];
-        tmpvec.y = jobj_mtx[1][2];
-        tmpvec.z = jobj_mtx[2][2];
-        PSVECNormalize(&tmpvec, &tmpvec);
-        rot_mtx[0][2] = tmpvec.x;
-        rot_mtx[1][2] = tmpvec.y;
-        rot_mtx[2][2] = tmpvec.z;
+        vel_out.x = jobj_mtx[0][2];
+        vel_out.y = jobj_mtx[1][2];
+        vel_out.z = jobj_mtx[2][2];
+        PSVECNormalize(&vel_out, &vel_out);
+        rot_mtx[0][2] = vel_out.x;
+        rot_mtx[1][2] = vel_out.y;
+        rot_mtx[2][2] = vel_out.z;
 
         rot_mtx[0][3] = 0.0F;
         rot_mtx[1][3] = 0.0F;
@@ -466,7 +467,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
     /* Velocity-based rotation */
     if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
-        Vec3 vel_norm;
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -537,8 +537,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             angle1 = atan2f(rot_mtx[1][2], rot_mtx[2][2]);
         }
         {
-            f32 comb =
-                rot_mtx[2][2] * cosf(angle1) + rot_mtx[1][2] * sinf(angle1);
+            f32 first = rot_mtx[2][2] * cosf(angle1);
+            f32 comb = first + rot_mtx[1][2] * sinf(angle1);
             tmp = comb;
             *(s32*) &tmp &= 0x7FFFFFFF;
             if (tmp < 1.1754944e-38F) {
@@ -656,7 +656,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     cone_angle = (f32) (M_PI_2 - gen->angle);
                     cur_angle += angle_step;
                 } else {
-                    cur_angle = gen->aux.disc.minAngle;
+                    {
+                        f32 min_angle = gen->aux.disc.minAngle;
+                        cur_angle = min_angle;
+                    }
                     {
                         f32 rnd = HSD_Randf();
                         f32 range = gen->aux.disc.maxAngle - cur_angle;
@@ -776,7 +779,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
         case 5: /* rect */
         {
-            Vec3 vel_temp;
             emit_pos.x = HSD_Randf();
             emit_pos.y = HSD_Randf();
             emit_pos.z = HSD_Randf();
@@ -862,17 +864,17 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             emit_pos.z -= 0.5F;
 
             /* Multiply by rect's 3x3 matrix */
-            vel_temp.x = gen->aux.rect.yx * emit_pos.y +
-                         gen->aux.rect.xx * emit_pos.x +
-                         gen->aux.rect.zx * emit_pos.z;
-            vel_temp.y = gen->aux.rect.yy * emit_pos.y +
-                         gen->aux.rect.xy * emit_pos.x +
-                         gen->aux.rect.zy * emit_pos.z;
-            vel_temp.z = gen->aux.rect.yz * emit_pos.y +
-                         gen->aux.rect.xz * emit_pos.x +
-                         gen->aux.rect.zz * emit_pos.z;
+            tmpvec.x = gen->aux.rect.yx * emit_pos.y +
+                       gen->aux.rect.xx * emit_pos.x +
+                       gen->aux.rect.zx * emit_pos.z;
+            tmpvec.y = gen->aux.rect.yy * emit_pos.y +
+                       gen->aux.rect.xy * emit_pos.x +
+                       gen->aux.rect.zy * emit_pos.z;
+            tmpvec.z = gen->aux.rect.yz * emit_pos.y +
+                       gen->aux.rect.xz * emit_pos.x +
+                       gen->aux.rect.zz * emit_pos.z;
 
-            PSMTXMultVec(rot_mtx, &vel_temp, &emit_pos);
+            PSMTXMultVec(rot_mtx, &tmpvec, &emit_pos);
             emit_pos.x += gen->pos.x;
             emit_pos.y += gen->pos.y;
             emit_pos.z += gen->pos.z;
