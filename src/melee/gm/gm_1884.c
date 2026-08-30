@@ -40,6 +40,28 @@
 #include <baselib/wobj.h>
 #include <Runtime/runtime.h>
 
+/// @todo .sdata2 order hack
+static inline void
+gm_1884_sdata2_order(void)
+{
+    (void) U32_TO_F32;
+    (void) 10.0f;
+    (void) 1.0f;
+    (void) S32_TO_F32;
+    (void) 50.0f;
+    (void) 12.0f;
+    (void) 9.79882812f;
+    (void) 150.0f;
+    (void) 0.100000001f;
+    (void) 167.0f;
+    (void) 16.0f;
+    (void) 0.699999988f;
+    (void) 0.600000024f;
+    (void) 0.0f;
+    (void) 100.0f;
+    (void) U32_TO_F32;
+}
+
 typedef struct {
     HSD_GObjEvent v[6];
 } ClassicProcArray;
@@ -102,6 +124,7 @@ ASSERT_SIZE(ClassicStageEntry, 0x10);
 
 int gm_80188454(int idx)
 {
+    gm_1884_sdata2_order();
     return lbl_80473700.char_data[idx];
 }
 
