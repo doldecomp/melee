@@ -11,6 +11,10 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
 
+#ifdef MUST_MATCH
+extern int psCmdListArray[65];
+#endif
+
 /* 4D78F0 */ HSD_CObj* psCamera;
 /* 4D0E5C */
 
@@ -1067,7 +1071,11 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     if (linkNo >= 8) {
         return NULL;
     }
+#ifdef MUST_MATCH
+    if (idx >= psCmdListArray[bank]) {
+#else
     if (idx >= psNumCmdList[bank]) {
+#endif
         return NULL;
     }
 
