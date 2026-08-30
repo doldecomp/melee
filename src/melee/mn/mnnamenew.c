@@ -588,6 +588,7 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
     s8 ch;
     u8** name_ptr;
     char* text;
+    char* text_start;
     s32 char_idx;
     s8 null_ch;
     s8 list_null_ch;
@@ -624,7 +625,7 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
     name_idx = 0;
     char_idx = name_idx;
     cur_text[0] = *mnNameNew_NullCharacter;
-    text = cur_text;
+    text = text_start = cur_text;
     cur_text[3] = *mnNameNew_NullCharacter;
     cur_text[6] = *mnNameNew_NullCharacter;
     cur_text[9] = *mnNameNew_NullCharacter;
@@ -641,7 +642,7 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
         text += 3;
     }
 
-    cur_text[name_idx * 3] = null_ch;
+    text_start[name_idx * 3] = null_ch;
 
     {
         u8* history = data->auto_history;
