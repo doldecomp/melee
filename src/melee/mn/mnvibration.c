@@ -214,6 +214,11 @@ static inline u8 mnVibration_GetCursorRow(MnVibrationData* data)
     return data->x0[1];
 }
 
+static inline s32 mnVibration_GetNextCursorRow(s32 cursor_row)
+{
+    return cursor_row + 1;
+}
+
 static inline u8 mnVibration_GetPortRumble(s32 port)
 {
     return GetRumbleSettingOfPort(port);
@@ -492,7 +497,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     {
         cursor_row = mnVibration_GetCursorRow(data);
         if (cursor_row < 7) {
-            s32 name_row = cursor_row + 1;
+            s32 name_row = mnVibration_GetNextCursorRow(cursor_row);
             name_idx = mnVibration_GetNameSlot(data, name_row);
             if (name_idx != 0xFF) {
                 MnVibrationData* data2;
