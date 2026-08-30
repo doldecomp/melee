@@ -1845,7 +1845,6 @@ static inline void psUpdateProjectionCache(f32 perspective)
         f32 y0;
         f32 y1;
         f32 y2;
-        f32 y3;
 
         w0 = vmtx[2][0];
         pvmtx[0][0] = x_scale * vmtx[0][0] + x_offset * w0;
@@ -1860,11 +1859,10 @@ static inline void psUpdateProjectionCache(f32 perspective)
         y0 = y_offset * w0;
         y1 = y_offset * w1;
         y2 = y_offset * w2;
-        y3 = y_offset * w3;
         pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
         pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
         pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
-        pvmtx[1][3] = y_scale * vmtx[1][3] + y3;
+        pvmtx[1][3] = y_scale * vmtx[1][3] + (y_offset * w3);
     } else {
         pvmtx[0][0] = prj[1] * vmtx[0][0] + prj[2];
         pvmtx[0][1] = prj[1] * vmtx[0][1] + prj[2];
@@ -1894,9 +1892,10 @@ void psDispParticles(u32 target_link, u32 sw)
     s32 needs_setup;
     void* sp79C;
     psdisp_Tlut tlut_obj;
-    HSD_Particle* non_edge_particles;
+    UNUSED s32 stack_pad;
     GXTexObj sp764;
     HSD_Particle* sorted_particles;
+    HSD_Particle* non_edge_particles;
     psdisp_Mtx billboard_mtx;
     GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
