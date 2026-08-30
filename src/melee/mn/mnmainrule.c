@@ -1087,7 +1087,6 @@ HSD_GObj* mn_80230E38(int arg0)
     HSD_JObj* value_jobj;
     StaticModelDesc* desc;
     HSD_JObj* root_jobj;
-    StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
 
     selected = (u8) mn_804A04F0.hovered_selection;
@@ -1137,9 +1136,8 @@ HSD_GObj* mn_80230E38(int arg0)
         HSD_JObjAnim(anim_jobj);
     }
 
-    desc_ptr = (StaticModelDesc**) (mn_803EC600 + 0x1EC);
     sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
-    for (i = 0; i < (s32) num_options; desc_ptr++, i++) {
+    for (i = 0; i < (s32) num_options; i++) {
         vis_before = mn_80230E38_CountVisible((u8) i);
 
         option_jobj = user_data->xC[((u16*) mn_803EC600)[(u8) vis_before]];
@@ -1193,7 +1191,7 @@ HSD_GObj* mn_80230E38(int arg0)
             HSD_JObjAddChild(option_jobj, cursor_jobj);
 
             if (i != 5 && i != 6) {
-                desc = *desc_ptr;
+                desc = ((StaticModelDesc**) (mn_803EC600 + 0x1EC))[i];
                 value_jobj = HSD_JObjLoadJoint(desc->joint);
                 HSD_JObjAddAnimAll(value_jobj, desc->animjoint,
                                    desc->matanim_joint, desc->shapeanim_joint);
