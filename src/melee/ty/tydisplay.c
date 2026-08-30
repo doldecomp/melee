@@ -634,20 +634,20 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
             s32 n;
 
             if (mid != 0) {
-                temps.tmp0 = grid->pos[0];
-                grid->pos[0] = grid->pos[mid];
-                grid->pos[mid] = temps.tmp0;
+                temps.tmp0 = base->pos[0];
+                base->pos[0] = base->pos[mid];
+                base->pos[mid] = temps.tmp0;
             }
 
             pivot = 0;
-            cur = (TyDspGrid*) ((size_t) grid + sizeof(TyDspPos));
+            cur = (TyDspGrid*) ((size_t) base + sizeof(TyDspPos));
             for (n = 1; n2 >= n;
                  cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
             {
-                if (cur->pos[0].z < grid->pos[0].z) {
+                if (cur->pos[0].z < base->pos[0].z) {
                     pivot += 1;
                     if (pivot != n) {
-                        p = (TyDspPos*) ((size_t) grid +
+                        p = (TyDspPos*) ((size_t) base +
                                          pivot * sizeof(TyDspPos) + 0x97C);
                         temps.tmp1 = *p;
                         *p = cur->pos[0];
@@ -657,13 +657,13 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
             }
 
             if (pivot != 0) {
-                temps.tmp2 = grid->pos[0];
-                grid->pos[0] = grid->pos[pivot];
-                grid->pos[pivot] = temps.tmp2;
+                temps.tmp2 = base->pos[0];
+                base->pos[0] = base->pos[pivot];
+                base->pos[pivot] = temps.tmp2;
             }
 
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
+            _tyDisplay_8031830C((TySortElem*) base->pos, 0, pivot - 1);
+            _tyDisplay_8031830C((TySortElem*) base->pos, pivot + 1, n2);
         }
     }
 }
@@ -673,6 +673,7 @@ inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 count)
     if (count > 1) {
         s32 pivot;
         s32 n2 = count - 1;
+        TyDspGrid* base = grid;
         if (n2 > 0) {
             struct {
                 TyDspPos tmp2;
