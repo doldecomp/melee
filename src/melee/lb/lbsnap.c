@@ -179,9 +179,8 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 static inline u16 RGB565_TO_RGB5A3(u16 pixel)
 {
     u16 result = (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
-    result = result | (pixel & RGB5A3_MASK_B);
-    result = result | RGB5A3_MASK_A;
-    return result;
+    result |= pixel & RGB5A3_MASK_B;
+    return result | RGB5A3_MASK_A;
 }
 
 static inline int lbSnap_GetTiledRemainder(int value)
@@ -191,8 +190,9 @@ static inline int lbSnap_GetTiledRemainder(int value)
 
 static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
-    int tile_base = (x / 4) * tile_stride;
-    return ((tile_base + (y / 4)) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
+    int tile_x = x / 4;
+    int tile_base = tile_x * tile_stride;
+    return (((y / 4) + tile_base) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
            (lbSnap_GetTiledRemainder(y) * 2);
 }
 
