@@ -219,11 +219,11 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     s32 luma_block_offset;
     s32 tile_row_offset;
     s32 chroma_row_base;
+    JpegLumaPair* luma_pair;
     s32 luma_offset;
     s32 second_pixel_index;
     s32 luma_row_base;
     s32 pixel_index;
-    s32 luma_row;
     s32 tile_stride;
     s32 luma_y;
     s32 pair_count;
@@ -231,7 +231,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     s32 tile_y;
     s32 tile_x;
     u16 pixel;
-    JpegLumaPair* luma_pair;
+    s32 luma_row;
     s32 second_pixel_offset;
     u16* pixel_ptr;
 
@@ -296,9 +296,11 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                (0.0813f * (f32) ((pixel_again * 8) & 0xF8)));
                 }
             }
+            luma_y = 0;
             luma_row = luma_row_base;
-            for (luma_y = 0; luma_y < 4; luma_y++) {
-                luma_offset = luma_row * 8;
+            for (; luma_y < 4; luma_y++) {
+                luma_offset = luma_row;
+                luma_offset <<= 3;
                 for (luma_x = 0; luma_x < 4; luma_x++) {
                     pixel_index = 0;
                     luma_pair =
