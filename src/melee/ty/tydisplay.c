@@ -762,7 +762,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
-    PAD_STACK(0x2C);
+    PAD_STACK(0x24);
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
