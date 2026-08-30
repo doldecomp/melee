@@ -582,14 +582,15 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
     s32 count;
     s32 pick;
     s32 dup;
+    s32 i;
+    u8 tmp;
+    s32 name_idx;
+    s8 ch;
     u8** name_ptr;
     char* text;
     s32 char_idx;
-    u8 ch;
     s8 null_ch;
-    u8 tmp;
-    s32 name_idx;
-    s32 i;
+    s8 list_null_ch;
 
     data = arg0->user_data;
     cur_text = mnNameNew_CurrentNameText;
@@ -597,10 +598,10 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
     do {
         dup = 0;
         do {
-            null_ch = (s8) *mnNameNew_NullCharacter;
+            list_null_ch = (s8) *mnNameNew_NullCharacter;
             count = 0;
             names = AutoNamesList;
-            while (null_ch != (s8) * *names) {
+            while (list_null_ch != (s8) * *names) {
                 names++;
                 count++;
             }
