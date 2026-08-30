@@ -687,6 +687,7 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
                     0.01f);
+        (void) &tmd->x534[i];
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
