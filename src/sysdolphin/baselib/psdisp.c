@@ -878,9 +878,11 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 u32 primitive_count = *(u32*) it;
 
                 it += sizeof(u32);
-                up.x *= ratio;
-                up.y *= ratio;
-                up_z *= ratio;
+                if (primitive_count != 0) {
+                    up.x *= ratio;
+                    up.y *= ratio;
+                    up_z *= ratio;
+                }
                 for (; primitive_count != 0; primitive_count--) {
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
@@ -1050,11 +1052,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w1inv;
             f32 cur_y_term;
             f32 prev_y_terms;
-            f32 cur_y;
             f32 prev_xy;
             f32 prev_x_sum;
             f32 cur_yx;
             f32 prev_yx;
+            f32 cur_x_sum;
+            f32 pv13;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -1078,16 +1081,16 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             w1inv = -1.0f / w1;
             prev_y_terms = pvmtx[1][1] * prev_y;
             prev_xy = pvmtx[0][1] * prev_y;
-            cur_y = pvmtx[0][1] * pp->pos.y;
             cur_y_term = pvmtx[1][1] * pp->pos.y;
             prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
             prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
-            x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z +
-                                        (pvmtx[0][0] * pp->pos.x + cur_y))) -
+            cur_x_sum = pvmtx[0][0] * pp->pos.x + pvmtx[0][1] * pp->pos.y;
+            pv13 = pvmtx[1][3];
+            x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z + cur_x_sum)) -
                 w1inv * (pvmtx[0][3] + (pvmtx[0][2] * prev_z + prev_x_sum));
-            y = w0inv * (pvmtx[1][3] + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
-                w1inv * (pvmtx[1][3] + (pvmtx[1][2] * prev_z + prev_yx));
+            y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
+                w1inv * (pv13 + (pvmtx[1][2] * prev_z + prev_yx));
         } else if (pp->kind & Tornado) {
             f32 prev_x;
             f32 prev_y;
@@ -1883,7 +1886,6 @@ static inline void psUpdateProjectionCache(f32 perspective)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
-    UNUSED u8 stack_pad[4];
     u32 sp7A8;
     s32 sp7B4;
     void* sp7B0;
