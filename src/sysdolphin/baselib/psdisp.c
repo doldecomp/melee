@@ -1290,7 +1290,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                                (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
         prev_y =
             pp->appsrt->x80 + (pp->appsrt->x7C * dz +
-                               (pp->appsrt->x78 * dy + pp->appsrt->x74 * dx));
+                               (pp->appsrt->x74 * dx + pp->appsrt->x78 * dy));
         prev_z =
             pp->appsrt->x90 + (pp->appsrt->x8C * dz +
                                (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
