@@ -869,29 +869,38 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     return arg0;
 }
 
-static inline void gmMainLib_SetHandicaps(s8* base)
+static inline void SetPlayerHandicaps(
+    struct PlayerInitData* p0, struct PlayerInitData* p1,
+    struct PlayerInitData* p2, struct PlayerInitData* p3,
+    struct PlayerInitData* p4, struct PlayerInitData* p5)
 {
-    s32 i;
-    s32 j;
-
-    for (i = 0; i < 6; i++) {
-        for (j = 0; j < 6; j++) {
-            base[0x78 + i * 0x140 + j * 0x24] = 9;
-        }
-    }
+    p5->handicap = p4->handicap = p3->handicap = p2->handicap =
+        p1->handicap = p0->handicap = 9;
 }
 
 void gmMainLib_8015EA80(void)
 {
-    s8* volatile base_temp = gmMainLib_804D3EE0->unk_530.unk_588;
-    s8* base = base_temp;
-    s8* base2 = base + 7 * 0x140;
+    struct gmMainLib_8015EA80_modes {
+        u8 pad[8];
+        VsModeData modes[13];
+    }* data = (struct gmMainLib_8015EA80_modes*)
+        gmMainLib_804D3EE0->unk_530.unk_588;
+    struct PlayerInitData* players;
+    s32 i;
 
     PAD_STACK(0x90);
 
     gmMainLib_8015CDEC();
-    gmMainLib_SetHandicaps(base);
-    gmMainLib_SetHandicaps(base2);
+    for (i = 0; i < 6; i++) {
+        players = data->modes[i].data.players;
+        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
+                           &players[4], &players[5]);
+    }
+    for (i = 7; i < 13; i++) {
+        players = data->modes[i].data.players;
+        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
+                           &players[4], &players[5]);
+    }
 }
 
 int gmMainLib_8015ECB0(void)
