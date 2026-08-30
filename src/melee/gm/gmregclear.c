@@ -675,30 +675,32 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
 static inline s32 gm_8017CE34_CountEnemies(s8* arg0)
 {
     s32 count = 0;
+    s32 result;
 
-    if ((s32) (u8) arg0[0] != 0x21) {
+    if ((s32) (u8) arg0[0] != CHKIND_NONE) {
         count = 1;
     }
     {
         s8* p = &arg0[1];
-        if ((s32) *p != 0x21) {
+        if ((s32) *p != CHKIND_NONE) {
             count += 1;
         }
-        if ((s32) p[1] != 0x21) {
-            count += 1;
+        if ((s32) p[1] != CHKIND_NONE) {
+            result = count + 1;
+        } else {
+            result = count;
         }
     }
-    return count;
+    return result;
 }
 
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    s32 color_idx;
-
     {
         u8* out_color = colors;
         s8* kind_iter = arg2;
+        s32 color_idx;
         for (color_idx = 0; color_idx < 3; color_idx++) {
             u8 kind = (u8) *kind_iter;
             u8 num_colors = gm_80169238(kind);
@@ -722,9 +724,22 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     }
 }
 
-s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
-                u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
-                s32 arg9)
+static inline u8 gm_8017CE34_ResolvePlayerCKind(UnkAdventureData* arg1,
+                                                u8 player_ckind)
+{
+    if (((s32) player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+        player_ckind = CKIND_SEAK;
+    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
+               ((s8) player_ckind == CKIND_POPONANA))
+    {
+        player_ckind = CHKIND_POPO;
+    }
+    return player_ckind;
+}
+
+void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
+                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
+                 s32 arg9)
 {
     u8 colors[16];
     u8 enemy_level;
@@ -740,10 +755,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_ckind;
     s32 enemy_count;
     s32 enemy_idx;
-    s32 sp8;
+    u8 sp8;
     u8* color_iter;
-
-    PAD_STACK(4);
 
     boss_count = 0;
     enemy_level = 0;
@@ -825,13 +838,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     }
 
     player_ckind = (u8) arg1->x0.ckind;
-    if ((player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
-        player_ckind = CKIND_SEAK;
-    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               ((s8) player_ckind == CKIND_POPONANA))
-    {
-        player_ckind = CHKIND_POPO;
-    }
+    player_ckind = gm_8017CE34_ResolvePlayerCKind(arg1, player_ckind);
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
                 arg1->x0.slot);
@@ -862,16 +869,14 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
         if ((temp_r3_4 != 0) && (arg1->x0.xC.x11 == 0)) {
-            s32 base_enemy_count;
             s32 event_enemy_count;
             s32 special_stage;
             s32 special_enemy_mode;
             u8 first_enemy;
             u32 stage_flags;
 
-            base_enemy_count = gm_8017CE34_CountEnemies(arg2);
+            event_enemy_count = gm_8017CE34_CountEnemies(arg2);
             arg1->x0.xC.xC = 3;
-            event_enemy_count = base_enemy_count;
             special_stage = 0;
             special_enemy_mode = 0;
             sp8 = 0;
@@ -899,15 +904,12 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 stage_flags = Ground_801C5AD0(grkind);
             }
 
-            {
-                u8 player_ckind = (u8) arg1->x0.ckind;
-                gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
-                            colors[1], (s32) colors[2], special_stage,
-                            special_enemy_mode, sp8, player_ckind,
-                            arg1->x0.color, (s32) enemy_level, (s32) arg3,
-                            event_enemy_count, (s32) stage_flags, (s32) arg5,
-                            (s32) arg4, attack_ratio, defense_ratio);
-            }
+            gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
+                        colors[1], (s32) colors[2], special_stage,
+                        special_enemy_mode, sp8, (u8) arg1->x0.ckind,
+                        arg1->x0.color, (s32) enemy_level, (s32) arg3,
+                        event_enemy_count, (s32) stage_flags, (s32) arg5,
+                        (s32) arg4, attack_ratio, defense_ratio);
             gm_8016A21C(&arg0->rules);
             arg1->x0.xC.x11 = 0;
             if (arg1->x0.x8 & 4) {
@@ -1038,7 +1040,6 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     if (arg7 == 0x49) {
         arg1->x0.xC.xC = 8;
     }
-    return (s32) flags;
 }
 
 bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
@@ -2644,6 +2645,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     u16 coins;
     u8 mask;
     u8 var_r0;
+    PAD_STACK(0x38);
 
     special_score = 0;
     coins = arg4->x58[0].xE;
@@ -2780,7 +2782,6 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     arg4->x58[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
-    PAD_STACK(0x38);
 }
 
 int fn_80180AC0(void)
