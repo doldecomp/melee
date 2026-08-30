@@ -992,16 +992,35 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             base_y = mnVibration_JObjGetTranslationY(jobj17);
             jobj18 = data3->jobjs[18];
             spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
-            jobj17 = data3->jobjs[17];
-            temp_x = mnVibration_JObjGetTranslationX(jobj17);
-            mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
-            jobj17 = data3->jobjs[17];
-            mnVibration_JObjSetTranslateY(
-                cursor_jobj, (spacing * (f32) cursor_row) +
-                                 mnVibration_JObjGetTranslationY(jobj17));
-            jobj17 = data3->jobjs[17];
-            temp_z = mnVibration_JObjGetTranslationZ(jobj17);
-            mnVibration_JObjSetTranslateZ(cursor_jobj, temp_z);
+            {
+                HSD_JObj* position_jobj =
+#ifdef MUST_MATCH
+                    position_jobj =
+#endif
+                        data3->jobjs[17];
+                temp_x = mnVibration_JObjGetTranslationX(position_jobj);
+                mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
+            }
+            {
+                HSD_JObj* position_jobj =
+#ifdef MUST_MATCH
+                    position_jobj =
+#endif
+                        data3->jobjs[17];
+                mnVibration_JObjSetTranslateY(
+                    cursor_jobj, (spacing * (f32) cursor_row) +
+                                     mnVibration_JObjGetTranslationY(
+                                         position_jobj));
+            }
+            {
+                HSD_JObj* position_jobj =
+#ifdef MUST_MATCH
+                    position_jobj =
+#endif
+                        data3->jobjs[17];
+                temp_z = mnVibration_JObjGetTranslationZ(position_jobj);
+                mnVibration_JObjSetTranslateZ(cursor_jobj, temp_z);
+            }
         }
     }
 
