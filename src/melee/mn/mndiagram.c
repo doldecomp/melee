@@ -2657,13 +2657,12 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
 {
     int selkind;
     s32 count;
-    u8* pr;
     void** joint_data;
     int remr;
     HSD_JObj* jobj;
     Diagram* data = GET_DIAGRAM(arg0);
     int fighter_id;
-    u8* p2;
+    u8* sorted;
     u8 stack_obj[8];
     HSD_JObj* sp_jobj;
     u8 stack_obj2[4];
@@ -2673,14 +2672,15 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     u8 stack_obj3[12];
     int idx;
     int remaining;
+    u8* p2;
     u8* p;
-    u8* sorted;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     u8* pr2;
     f32 x_spacing;
     f32 y_spacing;
     int fighter_kind;
     int i;
+    HSD_JObj* ref_jobj;
 
     (void) &stack_obj;
     (void) &stack_obj2;
@@ -2725,7 +2725,8 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             HSD_JObjAnimAll(sp_jobj);
             jobj2 = jobj;
             x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                        HSD_JObjGetTranslationX(jobj = data->jobjs[7]);
+                        HSD_JObjGetTranslationX(
+                            jobj = ref_jobj = data->jobjs[7]);
             HSD_JObjSetTranslateX(jobj2, x_spacing * i);
             HSD_JObjAddChild(data->jobjs[7], jobj2);
         }
@@ -2737,6 +2738,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
         sorted = mnDiagram_804A0750.sorted_fighters;
         count = mnDiagram_CountUnlockedFightersForHeaders();
         if (count > i) {
+            u8* pr;
             remr = i;
             idx = arg1;
             pr = sorted + idx;
