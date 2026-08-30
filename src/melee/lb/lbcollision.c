@@ -51,23 +51,6 @@ static GXColor lbColl_804D36E8 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static GXColor lbColl_804D36EC = { 0x80, 0x80, 0x80, 0x80 };
 static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0x00, 0x80 };
 
-/// .sdata2
-float const lbColl_804D79F0 = 1e-5;
-float const lbColl_804D79F4 = -1e-5;
-float const lbColl_804D79F8 = 0;
-f64 const lbColl_804D7A00 = 1;
-float const lbColl_804D7A08 = 1;
-f64 const lbColl_804D7A10 = 0;
-f64 const lbColl_804D7A18 = 0.5;
-f64 const lbColl_804D7A20 = 3.0;
-float const lbColl_804D7A28 = 2;
-float const lbColl_804D7A2C = 4;
-float const lbColl_804D7A30 = M_PI;
-float const lbColl_804D7A34 = 20;
-float const lbColl_804D7A38 = 3;
-float const lbColl_804D7A3C = 0.5;
-float const lbColl_804D7A40 = 5;
-
 /// .data
 int lbColl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
@@ -256,10 +239,10 @@ float lbColl_80005EBC(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d1_dot_d2 = d1.x * d2.x + d1.y * d2.y + d1.z * d2.z;
 
     scale = -d1_dot_d2 / d1_dot_d1;
-    if (scale > lbColl_804D7A00) {
-        scale = lbColl_804D7A08;
-    } else if (scale < lbColl_804D7A10) {
-        scale = lbColl_804D79F8;
+    if (scale > 1.0) {
+        scale = 1.0F;
+    } else if (scale < 0.0) {
+        scale = 0.0F;
     }
 
     x = d1.x * scale + sp50.x - arg2->x;
@@ -295,10 +278,10 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
     d1_dot_d2 = d1.x * d2.x + d1.y * d2.y;
 
     scale = -d1_dot_d2 / d1_dot_d1;
-    if (scale > lbColl_804D7A00) {
-        scale = lbColl_804D7A08;
-    } else if (scale < lbColl_804D7A10) {
-        scale = lbColl_804D79F8;
+    if (scale > 1.0) {
+        scale = 1.0F;
+    } else if (scale < 0.0) {
+        scale = 0.0F;
     }
 
     x = d1.x * scale + sp50.x - arg2->x;
@@ -329,340 +312,351 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         Vec3 arg5_offset;
         float arg1_y;
         float unk_sum = arg6 + arg7;
-        Vec3 vec4 = *arg0;
-        (void) vec4;
-        arg4_offset = vec4;
+
+        PAD_STACK(72);
         {
+            Vec3 vec4 = *arg0;
+            float candidate0_arg5_scl;
+            float candidate1_arg4_scl;
+            Vec3 a2;
+            Vec3 d1;
+            Vec3 c3;
+            Vec3 mid;
+            Vec3 b0;
+            Vec3 c2;
             Vec3 arg2_copy;
+
+            (void) vec4;
+            arg4_offset = vec4;
             arg2_copy = *arg2;
             (void) arg2_copy;
             arg5_offset = arg2_copy;
-        }
-
-        {
-            float arg1_x = arg1->x;
-            if (arg4_offset.x > arg1_x) {
-                {
-                    float x = arg4_offset.x + unk_sum;
-                    if (x < arg5_offset.x && x < arg3->x) {
-                        return false;
-                    }
-                }
-
-                {
-                    float x = arg1_x - unk_sum;
-                    if (x > arg5_offset.x && x > arg3->x) {
-                        return false;
-                    }
-                }
-
-            } else {
-                {
-                    float x = arg4_offset.x - unk_sum;
-                    if (x > arg5_offset.x && x > arg3->x) {
-                        return false;
-                    }
-                }
-
-                {
-                    float x = arg1_x + unk_sum;
-                    if (x < arg5_offset.x && x < arg3->x) {
-                        return false;
-                    }
-                }
-            }
 
             {
-                if (arg4_offset.y > (arg1_y = arg1->y)) {
+                float arg1_x = arg1->x;
+                if (arg4_offset.x > arg1_x) {
                     {
-                        float upper_bound = arg4_offset.y + unk_sum;
-
-                        if (upper_bound < arg5_offset.y &&
-                            upper_bound < arg3->y)
-                        {
+                        float x = arg4_offset.x + unk_sum;
+                        if (x < arg5_offset.x && x < arg3->x) {
                             return false;
                         }
                     }
 
                     {
-                        float lower_bound = arg1_y - unk_sum;
-
-                        if (lower_bound > arg5_offset.y &&
-                            lower_bound > arg3->y)
-                        {
+                        float x = arg1_x - unk_sum;
+                        if (x > arg5_offset.x && x > arg3->x) {
                             return false;
                         }
                     }
 
                 } else {
                     {
-                        float y = arg4_offset.y - unk_sum;
-                        if (y > arg5_offset.y && y > arg3->y) {
+                        float x = arg4_offset.x - unk_sum;
+                        if (x > arg5_offset.x && x > arg3->x) {
                             return false;
                         }
                     }
 
                     {
-                        float y = arg1_y + unk_sum;
-                        if (y < arg5_offset.y && y < arg3->y) {
+                        float x = arg1_x + unk_sum;
+                        if (x < arg5_offset.x && x < arg3->x) {
                             return false;
                         }
                     }
                 }
-            }
-            {
-                float arg1_z;
-                if (arg4_offset.z > (arg1_z = arg1->z)) {
-                    {
-                        float upper_bound = arg4_offset.z + unk_sum;
-                        if ((upper_bound < arg5_offset.z) &&
-                            (upper_bound < arg3->z))
+
+                {
+                    if (arg4_offset.y > (arg1_y = arg1->y)) {
                         {
-                            return false;
+                            float upper_bound = arg4_offset.y + unk_sum;
+
+                            if (upper_bound < arg5_offset.y &&
+                                upper_bound < arg3->y)
+                            {
+                                return false;
+                            }
                         }
-                    }
-                    {
-                        float lower_bound = arg1_z - unk_sum;
-                        if ((lower_bound > arg5_offset.z) &&
-                            (lower_bound > arg3->z))
+
                         {
-                            return false;
+                            float lower_bound = arg1_y - unk_sum;
+
+                            if (lower_bound > arg5_offset.y &&
+                                lower_bound > arg3->y)
+                            {
+                                return false;
+                            }
                         }
-                    }
-                } else {
-                    {
-                        float lower_bound = arg4_offset.z - unk_sum;
-                        if ((lower_bound > arg5_offset.z) &&
-                            (lower_bound > arg3->z))
+
+                    } else {
                         {
-                            return false;
+                            float y = arg4_offset.y - unk_sum;
+                            if (y > arg5_offset.y && y > arg3->y) {
+                                return false;
+                            }
                         }
-                    }
-                    {
-                        float upper_bound = arg1_z + unk_sum;
-                        if ((upper_bound < arg5_offset.z) &&
-                            (upper_bound < arg3->z))
+
                         {
-                            return false;
+                            float y = arg1_y + unk_sum;
+                            if (y < arg5_offset.y && y < arg3->y) {
+                                return false;
+                            }
                         }
                     }
                 }
                 {
-                    float arg4_scl;
-                    float d1_x;
-                    float d1_y;
-                    float d1_z;
-                    float d2_x;
-                    float d2_y;
-                    float d2_z;
-                    float arg3_z;
-                    float offset_delta_y;
-                    float offset_delta_z;
-                    float offset_delta_x;
-                    float d1_len_sq;
-                    float d2_len_sq;
-                    float d1_dot_d2;
-                    float d2_dot_offset_delta;
-                    float d1_dot_offset_delta;
-                    float denom;
-
-                    d1_y = arg1->y - arg4_offset.y;
-                    d1_z = arg1->z - arg4_offset.z;
-                    d2_y = arg3->y - arg5_offset.y;
-                    offset_delta_y = arg4_offset.y - arg5_offset.y;
-                    d1_x = arg1_x - arg4_offset.x;
-                    d2_x = arg3->x - arg5_offset.x;
-                    {
-                        f32 z = arg3->z;
-                        arg3_z = z;
+                    float arg1_z;
+                    if (arg4_offset.z > (arg1_z = arg1->z)) {
+                        {
+                            float upper_bound = arg4_offset.z + unk_sum;
+                            if ((upper_bound < arg5_offset.z) &&
+                                (upper_bound < arg3->z))
+                            {
+                                return false;
+                            }
+                        }
+                        {
+                            float lower_bound = arg1_z - unk_sum;
+                            if ((lower_bound > arg5_offset.z) &&
+                                (lower_bound > arg3->z))
+                            {
+                                return false;
+                            }
+                        }
+                    } else {
+                        {
+                            float lower_bound = arg4_offset.z - unk_sum;
+                            if ((lower_bound > arg5_offset.z) &&
+                                (lower_bound > arg3->z))
+                            {
+                                return false;
+                            }
+                        }
+                        {
+                            float upper_bound = arg1_z + unk_sum;
+                            if ((upper_bound < arg5_offset.z) &&
+                                (upper_bound < arg3->z))
+                            {
+                                return false;
+                            }
+                        }
                     }
-                    d2_z = arg3_z - arg5_offset.z;
-                    offset_delta_x = arg4_offset.x - arg5_offset.x;
-                    d1_len_sq =
-                        (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
-                    d2_len_sq =
-                        (d2_z * d2_z) + ((d2_x * d2_x) + (d2_y * d2_y));
-                    d1_dot_d2 =
-                        (d1_z * d2_z) + ((d1_x * d2_x) + (d1_y * d2_y));
-                    offset_delta_z = arg4_offset.z - arg5_offset.z;
-                    d2_dot_offset_delta =
-                        (d2_z * offset_delta_z) +
-                        ((d2_x * offset_delta_x) + (d2_y * offset_delta_y));
-                    d1_dot_offset_delta =
-                        (d1_z * offset_delta_z) +
-                        ((d1_x * offset_delta_x) + (d1_y * offset_delta_y));
-                    denom = (d1_len_sq * d2_len_sq) - (d1_dot_d2 * d1_dot_d2);
-
                     {
-                        float arg5_scl;
-                        if (approximatelyZero(d2_len_sq)) {
-                            if (approximatelyZero(d1_len_sq)) {
-                                arg4_scl = 0.0f;
-                                arg5_scl = 0.0f;
-                            } else {
-                                arg5_scl = 0.0f;
-                                {
-                                    arg4_scl =
-                                        -d1_dot_offset_delta / d1_len_sq;
+                        float arg4_scl;
+                        float d1_x;
+                        float d1_y;
+                        float d1_z;
+                        float d2_x;
+                        float d2_y;
+                        float d2_z;
+                        float arg3_z;
+                        float offset_delta_y;
+                        float offset_delta_z;
+                        float offset_delta_x;
+                        float d1_len_sq;
+                        float d2_len_sq;
+                        float d1_dot_d2;
+                        float d2_dot_offset_delta;
+                        float d1_dot_offset_delta;
+                        float denom;
 
-                                    if (arg4_scl > lbColl_804D7A00) {
-                                        arg4_scl = lbColl_804D7A08;
-                                    } else if (arg4_scl < lbColl_804D7A10) {
-                                        arg4_scl = lbColl_804D79F8;
+                        d1_y = arg1->y - arg4_offset.y;
+                        d1_z = arg1->z - arg4_offset.z;
+                        d2_y = arg3->y - arg5_offset.y;
+                        offset_delta_y = arg4_offset.y - arg5_offset.y;
+                        d1_x = arg1_x - arg4_offset.x;
+                        d2_x = arg3->x - arg5_offset.x;
+                        {
+                            f32 z = arg3->z;
+                            arg3_z = z;
+                        }
+                        d2_z = arg3_z - arg5_offset.z;
+                        offset_delta_x = arg4_offset.x - arg5_offset.x;
+                        d1_len_sq =
+                            (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
+                        d2_len_sq =
+                            (d2_z * d2_z) + ((d2_x * d2_x) + (d2_y * d2_y));
+                        d1_dot_d2 =
+                            (d1_z * d2_z) + ((d1_x * d2_x) + (d1_y * d2_y));
+                        offset_delta_z = arg4_offset.z - arg5_offset.z;
+                        d2_dot_offset_delta =
+                            (d2_z * offset_delta_z) +
+                            ((d2_x * offset_delta_x) + (d2_y * offset_delta_y));
+                        d1_dot_offset_delta =
+                            (d1_z * offset_delta_z) +
+                            ((d1_x * offset_delta_x) + (d1_y * offset_delta_y));
+                        denom = (d1_len_sq * d2_len_sq) - (d1_dot_d2 * d1_dot_d2);
+
+                        {
+                            float arg5_scl;
+                            if (approximatelyZero(d2_len_sq)) {
+                                if (approximatelyZero(d1_len_sq)) {
+                                    arg4_scl = 0.0f;
+                                    arg5_scl = 0.0f;
+                                } else {
+                                    arg5_scl = 0.0f;
+                                    {
+                                        arg4_scl =
+                                            -d1_dot_offset_delta / d1_len_sq;
+
+                                        if (arg4_scl > 1.0) {
+                                            arg4_scl = 1.0F;
+                                        } else if (arg4_scl < 0.0) {
+                                            arg4_scl = 0.0F;
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            if (approximatelyZero(denom)) {
-                                float mid_y =
-                                    (lbColl_804D7A18 * d2_y + arg5_offset.y);
-                                float mid_x =
-                                    (lbColl_804D7A18 * d2_x + arg5_offset.x);
-                                float arg4_mid_y = arg4_offset.y - mid_y;
-                                float arg1_mid_y = arg1->y - mid_y;
-                                float mid_z =
-                                    lbColl_804D7A18 * d2_z + arg5_offset.z;
-                                float arg4_mid_x = arg4_offset.x - mid_x;
-                                float arg1_mid_x = arg1_x - mid_x;
-                                float arg4_offset_z = arg4_offset.z - mid_z;
-                                float arg1_mid_z = arg1->z - mid_z;
+                            } else {
+                                if (approximatelyZero(denom)) {
+                                    float arg4_mid_y;
+                                    float arg1_mid_y;
+                                    float arg4_mid_x;
+                                    float arg1_mid_x;
+                                    float arg4_offset_z;
+                                    float arg1_mid_z;
 
-                                // lhs and rhs each the same inline
-                                if ((arg4_offset_z * arg4_offset_z +
-                                     ((arg4_mid_x * arg4_mid_x) +
-                                      (arg4_mid_y * arg4_mid_y))) <
-                                    ((arg1_mid_z * arg1_mid_z) +
-                                     ((arg1_mid_x * arg1_mid_x) +
-                                      (arg1_mid_y * arg1_mid_y))))
-                                {
-                                    float scale;
-                                    Vec3 a2;
-                                    Vec3 d1;
-                                    Vec3 c3;
+                                    mid.y = 0.5 * d2_y + arg5_offset.y;
+                                    mid.x = 0.5 * d2_x + arg5_offset.x;
+                                    arg4_mid_y = arg4_offset.y - mid.y;
+                                    arg1_mid_y = arg1->y - mid.y;
+                                    mid.z = 0.5 * d2_z + arg5_offset.z;
+                                    arg4_mid_x = arg4_offset.x - mid.x;
+                                    arg1_mid_x = arg1_x - mid.x;
+                                    arg4_offset_z = arg4_offset.z - mid.z;
+                                    arg1_mid_z = arg1->z - mid.z;
 
-                                    c3 = arg5_offset;
-                                    arg4_scl = 0.0f;
-                                    d1.x = arg3->x - arg2->x;
-                                    d1.y = arg3->y - arg2->y;
-                                    d1.z = arg3_z - arg2->z;
+                                    // lhs and rhs each the same inline
+                                    if ((arg4_offset_z * arg4_offset_z +
+                                         ((arg4_mid_x * arg4_mid_x) +
+                                          (arg4_mid_y * arg4_mid_y))) <
+                                        ((arg1_mid_z * arg1_mid_z) +
+                                         ((arg1_mid_x * arg1_mid_x) +
+                                          (arg1_mid_y * arg1_mid_y))))
                                     {
-                                        float dot;
-
-                                        a2 = vec4;
-                                        dot = (d1.z * (c3.z - a2.z)) +
-                                              ((d1.x * (c3.x - a2.x)) +
-                                               (d1.y * (c3.y - a2.y)));
-                                        scale =
-                                            -dot /
-                                            ((d1.z * d1.z) +
-                                             ((d1.x * d1.x) + (d1.y * d1.y)));
-                                    }
-                                    if (scale > lbColl_804D7A00) {
-                                        scale = lbColl_804D7A08;
-                                    } else if (scale < lbColl_804D7A10) {
-                                        scale = lbColl_804D79F8;
-                                    }
-                                    arg5_scl = scale;
-                                } else {
-                                    Vec3 b0;
-                                    Vec3 d1;
-                                    Vec3 c2;
-
-                                    c2 = arg5_offset;
-                                    arg4_scl = 1.0f;
-                                    d1.x = arg3->x - arg2->x;
-                                    d1.y = arg3->y - arg2->y;
-                                    d1.z = arg3_z - arg2->z;
-                                    {
-                                        float dot;
                                         float scale;
 
-                                        b0 = *arg1;
-                                        dot = (d1.z * (c2.z - b0.z)) +
-                                              ((d1.x * (c2.x - b0.x)) +
-                                               (d1.y * (c2.y - b0.y)));
-                                        scale =
-                                            -dot /
-                                            ((d1.z * d1.z) +
-                                             ((d1.x * d1.x) + (d1.y * d1.y)));
-
-                                        if (scale > lbColl_804D7A00) {
-                                            scale = lbColl_804D7A08;
-                                        } else if (scale < lbColl_804D7A10) {
-                                            scale = lbColl_804D79F8;
-                                        }
-
-                                        arg5_scl = scale;
-                                    }
-                                }
-                            } else {
-                                arg4_scl =
-                                    ((d1_dot_d2 * d2_dot_offset_delta) -
-                                     (d2_len_sq * d1_dot_offset_delta)) /
-                                    denom;
-                                arg5_scl =
-                                    ((d1_len_sq * d2_dot_offset_delta) -
-                                     (d1_dot_d2 * d1_dot_offset_delta)) /
-                                    denom;
-                                if (arg4_scl > lbColl_804D7A00 ||
-                                    arg4_scl < lbColl_804D7A10 ||
-                                    arg5_scl > lbColl_804D7A00 ||
-                                    arg5_scl < lbColl_804D7A10)
-                                {
-                                    float candidate0_dist_sq;
-                                    float candidate0_scale;
-                                    float candidate1_dist_sq;
-                                    float spA4;
-
-                                    if (arg4_scl < lbColl_804D7A10) {
-                                        candidate0_scale = lbColl_804D79F8;
-                                        candidate0_dist_sq = lbColl_80005EBC(
-                                            arg2, arg3, arg0, &spA4);
-                                    } else {
-                                        candidate0_scale = lbColl_804D7A08;
-                                        candidate0_dist_sq = lbColl_80005EBC(
-                                            arg2, arg3, arg1, &spA4);
-                                    }
-
-                                    {
-                                        float spA0;
-                                        if (arg5_scl < lbColl_804D7A10) {
-                                            arg5_scl = lbColl_804D79F8;
-                                            candidate1_dist_sq =
-                                                lbColl_80005EBC(arg0, arg1,
-                                                                arg2, &spA0);
-                                        } else {
-                                            float result;
-                                            arg5_scl = lbColl_804D7A08;
-                                            result = lbColl_80005EBC(
-                                                arg0, arg1, arg3, &spA0);
-                                            candidate1_dist_sq = result;
-                                        }
-
-                                        if (candidate0_dist_sq <
-                                            candidate1_dist_sq)
+                                        c3 = arg5_offset;
+                                        arg4_scl = 0.0f;
+                                        d1.x = arg3->x - arg2->x;
+                                        d1.y = arg3->y - arg2->y;
+                                        d1.z = arg3_z - arg2->z;
                                         {
-                                            arg4_scl = candidate0_scale;
-                                            arg5_scl = spA4;
+                                            float dot;
+
+                                            a2 = vec4;
+                                            dot = (d1.z * (c3.z - a2.z)) +
+                                                  ((d1.x * (c3.x - a2.x)) +
+                                                   (d1.y * (c3.y - a2.y)));
+                                            scale =
+                                                -dot /
+                                                ((d1.z * d1.z) +
+                                                 ((d1.x * d1.x) +
+                                                  (d1.y * d1.y)));
+                                        }
+                                        if (scale > 1.0) {
+                                            scale = 1.0F;
+                                        } else if (scale < 0.0) {
+                                            scale = 0.0F;
+                                        }
+                                        arg5_scl = scale;
+                                    } else {
+                                        c2 = arg5_offset;
+                                        arg4_scl = 1.0f;
+                                        d1.x = arg3->x - arg2->x;
+                                        d1.y = arg3->y - arg2->y;
+                                        d1.z = arg3_z - arg2->z;
+                                        {
+                                            float dot;
+                                            float scale;
+
+                                            b0 = *arg1;
+                                            dot = (d1.z * (c2.z - b0.z)) +
+                                                  ((d1.x * (c2.x - b0.x)) +
+                                                   (d1.y * (c2.y - b0.y)));
+                                            scale =
+                                                -dot /
+                                                ((d1.z * d1.z) +
+                                                 ((d1.x * d1.x) +
+                                                  (d1.y * d1.y)));
+
+                                            if (scale > 1.0) {
+                                                scale = 1.0F;
+                                            } else if (scale < 0.0) {
+                                                scale = 0.0F;
+                                            }
+
+                                            arg5_scl = scale;
+                                        }
+                                    }
+                                } else {
+                                    arg4_scl =
+                                        ((d1_dot_d2 * d2_dot_offset_delta) -
+                                         (d2_len_sq * d1_dot_offset_delta)) /
+                                        denom;
+                                    arg5_scl =
+                                        ((d1_len_sq * d2_dot_offset_delta) -
+                                         (d1_dot_d2 * d1_dot_offset_delta)) /
+                                        denom;
+                                    if (arg4_scl > 1.0 ||
+                                        arg4_scl < 0.0 ||
+                                        arg5_scl > 1.0 ||
+                                        arg5_scl < 0.0)
+                                    {
+                                        float candidate0_dist_sq;
+                                        float candidate0_scale;
+                                        float candidate1_dist_sq;
+
+                                        if (arg4_scl < 0.0) {
+                                            candidate0_scale = 0.0F;
+                                            candidate0_dist_sq = lbColl_80005EBC(
+                                                arg2, arg3, arg0,
+                                                &candidate0_arg5_scl);
                                         } else {
-                                            arg4_scl = spA0;
+                                            candidate0_scale = 1.0F;
+                                            candidate0_dist_sq = lbColl_80005EBC(
+                                                arg2, arg3, arg1,
+                                                &candidate0_arg5_scl);
+                                        }
+
+                                        {
+                                            if (arg5_scl < 0.0) {
+                                                arg5_scl = 0.0F;
+                                                candidate1_dist_sq =
+                                                    lbColl_80005EBC(
+                                                        arg0, arg1, arg2,
+                                                        &candidate1_arg4_scl);
+                                            } else {
+                                                float result;
+                                                arg5_scl = 1.0F;
+                                                result = lbColl_80005EBC(
+                                                    arg0, arg1, arg3,
+                                                    &candidate1_arg4_scl);
+                                                candidate1_dist_sq = result;
+                                            }
+
+                                            if (candidate0_dist_sq <
+                                                candidate1_dist_sq)
+                                            {
+                                                arg4_scl = candidate0_scale;
+                                                arg5_scl = candidate0_arg5_scl;
+                                            } else {
+                                                arg4_scl = candidate1_arg4_scl;
+                                            }
                                         }
                                     }
                                 }
                             }
+
+                            arg4->x = d1_x * arg4_scl + arg4_offset.x;
+                            arg4->y = d1_y * arg4_scl + arg4_offset.y;
+                            arg4->z = d1_z * arg4_scl + arg4_offset.z;
+
+                            arg5->x = d2_x * arg5_scl + arg5_offset.x;
+                            arg5->y = d2_y * arg5_scl + arg5_offset.y;
+                            arg5->z = d2_z * arg5_scl + arg5_offset.z;
                         }
-
-                        arg4->x = d1_x * arg4_scl + arg4_offset.x;
-                        arg4->y = d1_y * arg4_scl + arg4_offset.y;
-                        arg4->z = d1_z * arg4_scl + arg4_offset.z;
-
-                        arg5->x = d2_x * arg5_scl + arg5_offset.x;
-                        arg5->y = d2_y * arg5_scl + arg5_offset.y;
-                        arg5->z = d2_z * arg5_scl + arg5_offset.z;
                     }
+                    return end(arg4, arg5, unk_sum);
                 }
-                PAD_STACK(72);
-                return end(arg4, arg5, unk_sum);
             }
         }
     }
@@ -827,21 +821,22 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     scl_e = 0.0f;
                                     scl_f = 0.0f;
                                 } else {
-                                    float temp_f1_2;
+                                    float unclamped_scl_e;
                                     scl_f = 0.0f;
-                                    temp_f1_2 = -dot2_diff_ba_ac / sqdist2_ba;
-                                    scl_e = temp_f1_2;
-                                    if (temp_f1_2 > lbColl_804D7A00) {
-                                        scl_e = lbColl_804D7A08;
-                                    } else if (scl_e < lbColl_804D7A10) {
-                                        scl_e = lbColl_804D79F8;
+                                    unclamped_scl_e =
+                                        -dot2_diff_ba_ac / sqdist2_ba;
+                                    scl_e = unclamped_scl_e;
+                                    if (unclamped_scl_e > 1.0) {
+                                        scl_e = 1.0F;
+                                    } else if (scl_e < 0.0) {
+                                        scl_e = 0.0F;
                                     }
                                 }
                             } else if (approximatelyZero(determinant)) {
                                 float mid_y =
-                                    lbColl_804D7A18 * diff_dc_y + c1_y;
+                                    0.5 * diff_dc_y + c1_y;
                                 float mid_x =
-                                    lbColl_804D7A18 * diff_dc_x + c1.x;
+                                    0.5 * diff_dc_x + c1.x;
                                 float a_mid_y = a1_y - mid_y;
                                 float b_mid_y = b_y - mid_y;
                                 {
@@ -874,10 +869,10 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                         ((delta.x * delta.x) +
                                                          (delta.y * delta.y)));
                                         }
-                                        if (scale > lbColl_804D7A00) {
-                                            scale = lbColl_804D7A08;
-                                        } else if (scale < lbColl_804D7A10) {
-                                            scale = lbColl_804D79F8;
+                                        if (scale > 1.0) {
+                                            scale = 1.0F;
+                                        } else if (scale < 0.0) {
+                                            scale = 0.0F;
                                         }
                                         scl_f = scale;
                                     } else {
@@ -902,52 +897,52 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 -dot / ((delta.z * delta.z) +
                                                         ((delta.x * delta.x) +
                                                          (delta.y * delta.y)));
-                                            if (scale > lbColl_804D7A00) {
-                                                scale = lbColl_804D7A08;
-                                            } else if (scale < lbColl_804D7A10)
+                                            if (scale > 1.0) {
+                                                scale = 1.0F;
+                                            } else if (scale < 0.0)
                                             {
-                                                scale = lbColl_804D79F8;
+                                                scale = 0.0F;
                                             }
                                             scl_f = scale;
                                         }
                                     }
                                 }
                             } else {
-                                float temp_f1_3 =
+                                float unclamped_scl_e =
                                     ((dot2_diff_ba_dc * dot2_diff_dc_ac) -
                                      (sqdist2_dc * dot2_diff_ba_ac)) /
                                     determinant;
                                 scl_f = ((sqdist2_ba * dot2_diff_dc_ac) -
                                          (dot2_diff_ba_dc * dot2_diff_ba_ac)) /
                                         determinant;
-                                scl_e = temp_f1_3;
-                                if ((temp_f1_3 > lbColl_804D7A00) ||
-                                    (scl_e < lbColl_804D7A10) ||
-                                    (scl_f > lbColl_804D7A00) ||
-                                    (scl_f < lbColl_804D7A10))
+                                scl_e = unclamped_scl_e;
+                                if ((unclamped_scl_e > 1.0) ||
+                                    (scl_e < 0.0) ||
+                                    (scl_f > 1.0) ||
+                                    (scl_f < 0.0))
                                 {
                                     float out0;
                                     float result0;
                                     float temp_scl_e;
                                     {
-                                        if (scl_e < lbColl_804D7A10) {
-                                            temp_scl_e = lbColl_804D79F8;
+                                        if (scl_e < 0.0) {
+                                            temp_scl_e = 0.0F;
                                             result0 = lbColl_80005FC0(c, d, a,
                                                                       &out0);
                                         } else {
-                                            temp_scl_e = lbColl_804D7A08;
+                                            temp_scl_e = 1.0F;
                                             result0 = lbColl_80005FC0(c, d, b,
                                                                       &out0);
                                         }
                                     }
                                     {
                                         float result1;
-                                        if (scl_f < lbColl_804D7A10) {
-                                            scl_f = lbColl_804D79F8;
+                                        if (scl_f < 0.0) {
+                                            scl_f = 0.0F;
                                             result1 = lbColl_80005FC0(a, b, c,
                                                                       &out1);
                                         } else {
-                                            scl_f = lbColl_804D7A08;
+                                            scl_f = 1.0F;
                                             result1 = lbColl_80005FC0(a, b, d,
                                                                       &out1);
                                         }
@@ -1061,6 +1056,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_len_sq;
     float hit_end_max_z;
     float candidate_hurt_param;
+    float candidate_hit_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
@@ -1090,7 +1086,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     s32 is_zero_distance;
     float hurt_delta_x;
     float hurt_delta_y;
-    PAD_STACK(44);
+    PAD_STACK(40);
 
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
@@ -1195,13 +1191,13 @@ block_39:
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
-    segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
     hurt_delta_z = hurt_end_z - hurt_start_copy.z;
+    segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
     /* Cache 1.0 constant in a callee-save to avoid reloading it across the
      * several `hit_param = 1.0` / `hurt_param = 1.0` branches below. The
      * variable name is a borrow from the unused-after-broadphase-rejection
      * slot. */
-    hit_start_min_z = lbColl_804D7A08;
+    hit_start_min_z = 1.0F;
     hurt_len_sq = (hurt_delta_x * hurt_delta_x) + hurt_len_sq;
     segment_dot = (hit_delta.z * hurt_delta_z) + segment_dot;
     hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
@@ -1217,37 +1213,37 @@ block_39:
         hit_start_dot = hit_start_dot_x + hit_start_dot;
     }
     hurt_start_dot =
-        (hurt_delta_y * start_delta_y) + (hurt_delta_x * start_delta_x);
+        (hurt_delta_x * start_delta_x) + (hurt_delta_y * start_delta_y);
     hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
     hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
     closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
-    if ((hurt_len_sq < lbColl_804D79F0) && (hurt_len_sq > lbColl_804D79F4)) {
+    if ((hurt_len_sq < 1e-5F) && (hurt_len_sq > -1e-5F)) {
         is_hurt_segment_degenerate = 1;
     } else {
         is_hurt_segment_degenerate = 0;
     }
     if (is_hurt_segment_degenerate != 0) {
-        if ((hit_len_sq < lbColl_804D79F0) && (hit_len_sq > lbColl_804D79F4)) {
+        if ((hit_len_sq < 1e-5F) && (hit_len_sq > -1e-5F)) {
             is_hit_segment_degenerate = 1;
         } else {
             is_hit_segment_degenerate = 0;
         }
         if (is_hit_segment_degenerate != 0) {
-            hit_param = lbColl_804D79F8;
+            hit_param = 0.0F;
             hurt_param = hit_param;
         } else {
-            hurt_param = lbColl_804D79F8;
+            hurt_param = 0.0F;
             projected_hit_param = -hit_start_dot / hit_len_sq;
             hit_param = projected_hit_param;
-            if (projected_hit_param > lbColl_804D7A00) {
+            if (projected_hit_param > 1.0) {
                 hit_param = hit_start_min_z;
-            } else if (hit_param < lbColl_804D7A10) {
+            } else if (hit_param < 0.0) {
                 hit_param = hurt_param;
             }
         }
     } else {
-        if ((closest_denom < lbColl_804D79F0) &&
-            (closest_denom > lbColl_804D79F4))
+        if ((closest_denom < 1e-5F) &&
+            (closest_denom > -1e-5F))
         {
             is_parallel = 1;
         } else {
@@ -1256,16 +1252,14 @@ block_39:
         if (is_parallel != 0) {
             // For parallel axes, project the hit endpoint nearer the hurt
             // midpoint.
-            hurt_mid_y = (float) ((lbColl_804D7A18 * (f64) hurt_delta_y) +
+            hurt_mid_y = (float) ((0.5 * (f64) hurt_delta_y) +
                                   (f64) hurt_start_copy.y);
-            hurt_mid_x = (float) ((lbColl_804D7A18 * (f64) hurt_delta_x) +
+            hurt_mid_x = (float) ((0.5 * (f64) hurt_delta_x) +
                                   (f64) hurt_start_copy.x);
             hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
-            {
-                f64 hurt_mid_z_product = lbColl_804D7A18 * (f64) hurt_delta_z;
-                hurt_mid_z =
-                    (float) (hurt_mid_z_product + (f64) hurt_start_copy.z);
-            }
+            hurt_mid_z =
+                (float) ((0.5 * (f64) hurt_delta_z) +
+                         (f64) hurt_start_copy.z);
             hit_end_mid_y = hit_end->y - hurt_mid_y;
             hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
             hit_end_mid_x = hit_end->x - hurt_mid_x;
@@ -1282,7 +1276,7 @@ block_39:
                 Vec3 d1;
                 Vec3 c3;
                 c3 = *hurt_start;
-                hit_param = lbColl_804D79F8;
+                hit_param = 0.0F;
                 d1.x = hurt_end_x - hurt_start->x;
                 d1.y = hurt_end_y - hurt_start->y;
                 d1.z = hurt_end_z - hurt_start->z;
@@ -1296,13 +1290,14 @@ block_39:
                         -dot /
                         ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
-                if (hurt_param_from_hit_start > lbColl_804D7A00) {
+                if (hurt_param_from_hit_start > 1.0) {
                     hurt_param_from_hit_start = hit_start_min_z;
-                } else if (hurt_param_from_hit_start < lbColl_804D7A10) {
+                } else if (hurt_param_from_hit_start < 0.0) {
                     hurt_param_from_hit_start = hit_param;
                 }
                 hurt_param = hurt_param_from_hit_start;
             } else {
+                float dot;
                 Vec3 b0;
                 Vec3 d1;
                 Vec3 c2;
@@ -1312,8 +1307,6 @@ block_39:
                 d1.y = hurt_end_y - hurt_start->y;
                 d1.z = hurt_end_z - hurt_start->z;
                 {
-                    float dot;
-
                     b0 = *hit_end;
                     dot = (d1.z * (c2.z - b0.z)) +
                           ((d1.x * (c2.x - b0.x)) + (d1.y * (c2.y - b0.y)));
@@ -1321,10 +1314,10 @@ block_39:
                         -dot /
                         ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
-                if (hurt_param_from_hit_end > lbColl_804D7A00) {
+                if (hurt_param_from_hit_end > 1.0) {
                     hurt_param_from_hit_end = hit_param;
-                } else if (hurt_param_from_hit_end < lbColl_804D7A10) {
-                    hurt_param_from_hit_end = lbColl_804D79F8;
+                } else if (hurt_param_from_hit_end < 0.0) {
+                    hurt_param_from_hit_end = 0.0F;
                 }
                 hurt_param = hurt_param_from_hit_end;
             }
@@ -1336,12 +1329,11 @@ block_39:
             hurt_param = ((hurt_start_dot * hit_len_sq) -
                           (segment_dot * hit_start_dot)) /
                          closest_denom;
-            if ((hit_param_candidate > lbColl_804D7A00) ||
-                (hit_param < lbColl_804D7A10) ||
-                (hurt_param > lbColl_804D7A00) ||
-                (hurt_param < lbColl_804D7A10))
+            if ((hit_param_candidate > 1.0) ||
+                (hit_param < 0.0) ||
+                (hurt_param > 1.0) ||
+                (hurt_param < 0.0))
             {
-                float candidate_hit_param;
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
                 float hurt_endpoint_param;
@@ -1349,8 +1341,8 @@ block_39:
 
                 // If the unconstrained solution leaves either segment, compare
                 // the nearest endpoint projection from each axis.
-                if (hit_param < lbColl_804D7A10) {
-                    hit_endpoint_param = lbColl_804D79F8;
+                if (hit_param < 0.0) {
+                    hit_endpoint_param = 0.0F;
                     hit_endpoint_dist_sq =
                         lbColl_80005EBC(hurt_start, hurt_end, hit_start,
                                         &candidate_hurt_param);
@@ -1359,8 +1351,8 @@ block_39:
                     hit_endpoint_dist_sq = lbColl_80005EBC(
                         hurt_start, hurt_end, hit_end, &candidate_hurt_param);
                 }
-                if (hurt_param < lbColl_804D7A10) {
-                    hurt_endpoint_param = lbColl_804D79F8;
+                if (hurt_param < 0.0) {
+                    hurt_endpoint_param = 0.0F;
                     hurt_endpoint_dist_sq = lbColl_80005EBC(
                         hit_start, hit_end, hurt_start, &candidate_hit_param);
                 } else {
@@ -1390,29 +1382,29 @@ block_39:
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
                       ((closest_delta_y * closest_delta_y) +
                        (closest_delta_x * closest_delta_x));
-    if (closest_dist_sq > lbColl_804D79F8) {
+    if (closest_dist_sq > 0.0F) {
         volatile float sp38;
 
         closest_rsqrt_estimate = __frsqrte(closest_dist_sq);
         closest_rsqrt_step1 =
-            lbColl_804D7A18 * closest_rsqrt_estimate *
+            0.5 * closest_rsqrt_estimate *
             -(((f64) closest_dist_sq *
                (closest_rsqrt_estimate * closest_rsqrt_estimate)) -
-              lbColl_804D7A20);
-        closest_rsqrt_step2 = lbColl_804D7A18 * closest_rsqrt_step1 *
+              3.0);
+        closest_rsqrt_step2 = 0.5 * closest_rsqrt_step1 *
                               -(((f64) closest_dist_sq *
                                  (closest_rsqrt_step1 * closest_rsqrt_step1)) -
-                                lbColl_804D7A20);
+                                3.0);
         sp38 = (float) ((f64) closest_dist_sq *
-                        (lbColl_804D7A18 * closest_rsqrt_step2 *
+                        (0.5 * closest_rsqrt_step2 *
                          -(((f64) closest_dist_sq *
                             (closest_rsqrt_step2 * closest_rsqrt_step2)) -
-                           lbColl_804D7A20)));
+                           3.0)));
         closest_dist = sp38;
     } else {
         closest_dist = closest_dist_sq;
     }
-    if ((closest_dist < lbColl_804D79F0) && (closest_dist > lbColl_804D79F4)) {
+    if ((closest_dist < 1e-5F) && (closest_dist > -1e-5F)) {
         is_zero_distance = 1;
     } else {
         is_zero_distance = 0;
@@ -1433,23 +1425,27 @@ block_39:
     local_dist_sq =
         (local_delta_z * local_delta_z) +
         ((local_delta_x * local_delta_x) + (local_delta_y * local_delta_y));
-    if (local_dist_sq > lbColl_804D79F8) {
+    if (local_dist_sq > 0.0F) {
         volatile float sp34;
 
         local_rsqrt_estimate = __frsqrte(local_dist_sq);
-        local_rsqrt_step1 = lbColl_804D7A18 * local_rsqrt_estimate *
-                            -(((f64) local_dist_sq *
-                               (local_rsqrt_estimate * local_rsqrt_estimate)) -
-                              lbColl_804D7A20);
+        {
+            f64 local_rsqrt_first_step =
+                0.5 * local_rsqrt_estimate *
+                -(((f64) local_dist_sq *
+                   (local_rsqrt_estimate * local_rsqrt_estimate)) -
+                  3.0);
+            local_rsqrt_step1 = local_rsqrt_first_step;
+        }
         local_rsqrt_step2 =
-            lbColl_804D7A18 * local_rsqrt_step1 *
+            0.5 * local_rsqrt_step1 *
             -(((f64) local_dist_sq * (local_rsqrt_step1 * local_rsqrt_step1)) -
-              lbColl_804D7A20);
+              3.0);
         sp34 = (float) ((f64) local_dist_sq *
-                        (lbColl_804D7A18 * local_rsqrt_step2 *
+                        (0.5 * local_rsqrt_step2 *
                          -(((f64) local_dist_sq *
                             (local_rsqrt_step2 * local_rsqrt_step2)) -
-                           lbColl_804D7A20)));
+                           3.0)));
         local_dist = sp34;
     } else {
         local_dist = local_dist_sq;
@@ -1623,7 +1619,7 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
     }
     if (arg3 != 0) {
         arg0->hurt_coll_pos = shield_hit->pos;
-        arg0->coll_distance = lbColl_804D79F8;
+        arg0->coll_distance = 0.0F;
         return 1;
     }
     if (arg2 != NULL) {
@@ -1651,7 +1647,7 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                            &arg0->coll_distance,  // out_overlap
                            var_f1,                // hit_radius
                            shield_hit->size,      // hurt_radius
-                           lbColl_804D7A34 * arg5 // broadphase_scale
+                           20.0F * arg5 // broadphase_scale
     );
 }
 
@@ -1713,7 +1709,7 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
         return lbColl_80006E58(
             &arg0->x58, &arg0->x4C, &arg1->a_pos, &arg1->b_pos, &sp70, &sp64,
             var_r9, &arg0->hurt_coll_pos, &arg0->coll_distance, var_f1,
-            arg1->scale, lbColl_804D7A38 * hurt_scl_y);
+            arg1->scale, 3.0F * hurt_scl_y);
     }
     return 0;
 }
@@ -1725,7 +1721,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
     Vec3 sp68;
     Mtx sp38;
     MtxPtr var_r9;
-    float var_f1;
+    float hit_radius;
 
     if (arg1->state != HurtCapsule_Intangible) {
         if (!arg1->skip_update_pos) {
@@ -1753,15 +1749,15 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
             var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
         }
         if (arg0->x43_b1) {
-            var_f1 = arg0->scale;
+            hit_radius = arg0->scale;
         } else {
-            var_f1 = arg0->scale * arg4;
+            hit_radius = arg0->scale * arg4;
         }
 
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp74, &sp68, var_r9,
                                &arg0->hurt_coll_pos, &arg0->coll_distance,
-                               var_f1, arg1->scale, lbColl_804D7A38 * arg5);
+                               hit_radius, arg1->scale, 3.0F * arg5);
     }
     return 0;
 }
@@ -1960,8 +1956,6 @@ bool lbColl_80008820(HitCapsule* capsule, int type, void* victim)
     return true;
 }
 
-GXColor const lbColl_804D7A50 = { 0 };
-
 void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
 {
     size_t i;
@@ -2014,6 +2008,8 @@ void lbColl_80008D30(HitCapsule* arg0, lbColl_80008D30_arg1* arg1)
     arg0->sfx_kind = arg1->sfx_kind;
     arg0->unk_count = arg1->damage;
 }
+
+GXColor const lbColl_804D7A50 = { 0 };
 
 void lbColl_80008DA4(GXColor* arg0, GXColor* arg1)
 {
