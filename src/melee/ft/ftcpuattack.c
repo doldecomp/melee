@@ -718,7 +718,9 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             relPredY = (x50Vy * t + x50Y) - fpPredY;
         }
         if (fp->facing_dir > 0.0f) {
-            dirx = list->x08 * (directionScale = get_scale(fp));
+            dirx = list->x08;
+            directionScale = get_scale(fp);
+            dirx *= directionScale;
             diry = list->x0C * directionScale;
         } else {
             dirx = -list->x0C * (directionScale = get_scale(fp));
