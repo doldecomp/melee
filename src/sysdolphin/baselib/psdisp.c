@@ -1830,53 +1830,6 @@ static inline void psUpdateBillboardAxes(const Mtx inv_view)
     HSD_PSDisp_804D7928 = right_z - up_z;
 }
 
-static inline void psUpdateProjectionCache(f32 perspective)
-{
-    GXGetProjectionv(prj);
-    if (perspective == prj[0]) {
-        f32 w0;
-        f32 x_scale = prj[1];
-        f32 x_offset = prj[2];
-        f32 w1;
-        f32 w2;
-        f32 y_scale;
-        f32 w3;
-        f32 y_offset;
-        f32 y0;
-        f32 y1;
-        f32 y2;
-
-        w0 = vmtx[2][0];
-        pvmtx[0][0] = x_scale * vmtx[0][0] + x_offset * w0;
-        w1 = vmtx[2][1];
-        pvmtx[0][1] = x_scale * vmtx[0][1] + x_offset * w1;
-        w2 = vmtx[2][2];
-        pvmtx[0][2] = x_scale * vmtx[0][2] + x_offset * w2;
-        w3 = vmtx[2][3];
-        pvmtx[0][3] = x_scale * vmtx[0][3] + x_offset * w3;
-        y_scale = prj[3];
-        y_offset = prj[4];
-        y0 = y_offset * w0;
-        y1 = y_offset * w1;
-        y2 = y_offset * w2;
-        pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
-        pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
-        pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
-        pvmtx[1][3] = y_scale * vmtx[1][3] + (y_offset * w3);
-    } else {
-        pvmtx[0][0] = prj[1] * vmtx[0][0] + prj[2];
-        pvmtx[0][1] = prj[1] * vmtx[0][1] + prj[2];
-        pvmtx[0][2] = prj[1] * vmtx[0][2] + prj[2];
-        pvmtx[0][3] = prj[1] * vmtx[0][3] + prj[2];
-        pvmtx[1][0] = prj[3] * vmtx[1][0] + prj[4];
-        pvmtx[1][1] = prj[3] * vmtx[1][1] + prj[4];
-        pvmtx[1][2] = prj[3] * vmtx[1][2] + prj[4];
-        pvmtx[1][3] = prj[3] * vmtx[1][3] + prj[4];
-    }
-    /// @todo Passing @c rvmtx directly swaps the first two axis loads.
-    psUpdateBillboardAxes(*(const Mtx*) rvmtx);
-}
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(3)
@@ -1977,7 +1930,59 @@ void psDispParticles(u32 target_link, u32 sw)
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), vmtx);
                         PSMTXInverse(vmtx, rvmtx);
-                        psUpdateProjectionCache(0.0f);
+                        {
+                            f32 w0;
+                            f32 x_scale;
+                            f32 x_offset;
+                            f32 w1;
+                            f32 w2;
+                            f32 y_scale;
+                            f32 w3;
+                            f32 y_offset;
+                            f32 y0;
+                            f32 y1;
+                            f32 y2;
+
+                            GXGetProjectionv(prj);
+                            if (0.0f == prj[0]) {
+                                x_scale = prj[1];
+                                x_offset = prj[2];
+                                w0 = vmtx[2][0];
+                                pvmtx[0][0] =
+                                    x_scale * vmtx[0][0] + x_offset * w0;
+                                w1 = vmtx[2][1];
+                                pvmtx[0][1] =
+                                    x_scale * vmtx[0][1] + x_offset * w1;
+                                w2 = vmtx[2][2];
+                                pvmtx[0][2] =
+                                    x_scale * vmtx[0][2] + x_offset * w2;
+                                w3 = vmtx[2][3];
+                                pvmtx[0][3] =
+                                    x_scale * vmtx[0][3] + x_offset * w3;
+                                y_scale = prj[3];
+                                y_offset = prj[4];
+                                y0 = y_offset * w0;
+                                y1 = y_offset * w1;
+                                y2 = y_offset * w2;
+                                pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
+                                pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
+                                pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
+                                pvmtx[1][3] =
+                                    y_scale * vmtx[1][3] + (y_offset * w3);
+                            } else {
+                                pvmtx[0][0] = prj[1] * vmtx[0][0] + prj[2];
+                                pvmtx[0][1] = prj[1] * vmtx[0][1] + prj[2];
+                                pvmtx[0][2] = prj[1] * vmtx[0][2] + prj[2];
+                                pvmtx[0][3] = prj[1] * vmtx[0][3] + prj[2];
+                                pvmtx[1][0] = prj[3] * vmtx[1][0] + prj[4];
+                                pvmtx[1][1] = prj[3] * vmtx[1][1] + prj[4];
+                                pvmtx[1][2] = prj[3] * vmtx[1][2] + prj[4];
+                                pvmtx[1][3] = prj[3] * vmtx[1][3] + prj[4];
+                            }
+                            /// @todo Passing @c rvmtx directly swaps the first
+                            /// two axis loads.
+                            psUpdateBillboardAxes(*(const Mtx*) rvmtx);
+                        }
                         GXLoadPosMtxImm(vmtx, GX_PNMTX0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, GX_PNMTX1);
