@@ -3283,9 +3283,9 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 char* md;
                                 s16 tid;
 
-                                entry = display->first_entry->prev;
                                 tid = Toy_sbss_804D6EDC[display->selectedIdx -
                                                         1];
+                                entry = display->first_entry->prev;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
@@ -3364,9 +3364,9 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 } else {
                                     cnt2 = *gmMainLib_GetTrophyCount();
                                 }
-                                entry = display->last_entry->next;
                                 lk = display->selectedIdx - cnt2;
                                 tid = Toy_sbss_804D6EDC[lk + 1];
+                                entry = display->last_entry->next;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
@@ -3385,9 +3385,9 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 char* md;
                                 s16 tid;
 
-                                entry = display->last_entry->next;
                                 tid = Toy_sbss_804D6EDC[display->selectedIdx +
                                                         1];
+                                entry = display->last_entry->next;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
