@@ -113,11 +113,6 @@ typedef struct grBb_ItemKindList {
     ItemKind kinds[5];
 } grBb_ItemKindList;
 
-const grBb_LineIds grBb_803B8134 = { {
-    33, 35, 38, 39, 40, 36, 37, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-    50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
-} };
-
 static grBb_YakumonoParam* yakumono_param;
 
 typedef struct grBb_Data803E2D78 {
@@ -212,6 +207,11 @@ static const Vec3 grBb_803B8114 = { 56.0F, 40.0F, 24.0F };
     It_Kind_RabbitC,
     It_Kind_F_Flower,
     It_Kind_Kusudama,
+} };
+
+const grBb_LineIds grBb_803B8134 = { {
+    33, 35, 38, 39, 40, 36, 37, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+    50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
 } };
 
 void grBigBlue_801E57BC(bool arg) {}
