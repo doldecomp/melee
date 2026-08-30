@@ -598,7 +598,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                         scratch_r18 = M2C_FIELD(scratch_r16, s32*, 0x518);
                         store_off = ((work_r8_2 & 1) << 5) +
                                     (sc16 * ((work_r8_2 & 2) << 2));
-                        scratch_f0 = (f32) ((1.402f * (f64) scratch_r20) +
+                        scratch_f0 = (f32) ((1.402 * (f64) scratch_r20) +
                                             (f64) scratch_r19);
                         if (scratch_f0 < 0.0f) {
                             temp_v = 0;
@@ -622,7 +622,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                         scratch_f0_3 =
                             (f32) ((f64) ((1.7718f * (f32) scratch_r18) +
                                           (f32) scratch_r19) -
-                                   (0.0012f * (f64) scratch_r20));
+                                   (0.0012 * (f64) scratch_r20));
                         if (scratch_f0_3 < 0.0f) {
                             temp_v = 0;
                         } else if (255.0f < scratch_f0_3) {
