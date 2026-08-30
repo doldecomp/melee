@@ -597,7 +597,8 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                 min_val + ((range != 0) ? grBigBlueRoute_Randi(range) : 0);
         } else if (max_val < min_val) {
             s32 range = min_val - max_val;
-            new_timer = max_val + ((range != 0) ? HSD_Randi(range) : 0);
+            new_timer =
+                max_val + ((range != 0) ? grBigBlueRoute_Randi(range) : 0);
         } else {
             new_timer = max_val;
         }
