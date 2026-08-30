@@ -512,6 +512,24 @@ static inline s32* gm_801891F4_GetMenuValues(CssSubStruct* sub)
     return sub->menu_values;
 }
 
+static inline void gm_801891F4_SetCpuType(int cpu_type)
+{
+    int i;
+    int count;
+
+    count = lbl_80473700.count;
+    lbl_80473700.css.x03 = (u8) cpu_type;
+    for (i = 0; i < 4; i++) {
+        if (i != 0 && count != 0) {
+            Player_SetPlayerAndEntityCpuType(i, cpu_type);
+            count--;
+            if (count == 0) {
+                break;
+            }
+        }
+    }
+}
+
 void fn_801891F4(void)
 {
     CssSubStruct* sub;
@@ -521,22 +539,9 @@ void fn_801891F4(void)
     sub = &lbl_80473700.css;
 
     if (gm_801A45E8(2) != 0) {
-        int count;
-        int i;
-
         if (sub->x01 == 0) {
             fn_801651FC(0, 0);
-            count = lbl_80473700.count;
-            lbl_80473700.css.x03 = 0;
-            for (i = 0; i < 4; i++) {
-                if (i != 0 && count != 0) {
-                    Player_SetPlayerAndEntityCpuType(i, 0);
-                    count--;
-                    if (count == 0) {
-                        break;
-                    }
-                }
-            }
+            gm_801891F4_SetCpuType(0);
             sub->anim_frames[22] = 0;
         }
         sub->x01 = 1;
@@ -757,9 +762,6 @@ void fn_801891F4(void)
         }
     } else {
         if (sub->x01 == 1) {
-            int count;
-            int i;
-            int cpu_type;
             f32 speeds[] = {
                 2, 1.5, 1, 0.666, 0.5, 0.25,
             };
@@ -777,19 +779,7 @@ void fn_801891F4(void)
 
             fn_80188550(sub->menu_values[2] + 1);
 
-            cpu_type = sub->menu_values[3];
-            (void) cpu_type;
-            count = lbl_80473700.count;
-            lbl_80473700.css.x03 = (u8) cpu_type;
-            for (i = 0; i < 4; i++) {
-                if (i != 0 && count != 0) {
-                    Player_SetPlayerAndEntityCpuType(i, cpu_type);
-                    count--;
-                    if (count == 0) {
-                        break;
-                    }
-                }
-            }
+            gm_801891F4_SetCpuType(sub->menu_values[3]);
 
             {
                 int count;
