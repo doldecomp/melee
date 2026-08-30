@@ -237,9 +237,9 @@ struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 
 void gmMainLib_8015CDEC(void)
 {
-    ssize_t i;
-    for (i = 0; i < GM_MAX_PLAYERS; ++i) {
-        s8* ptr = gmMainLib_8015CE44(i, 120);
+    s32 i;
+    for (i = 0; i < 6; ++i) {
+        s8* ptr = gmMainLib_8015CE44(i, 0x78);
         if (ptr != 0) {
             *ptr = 5;
         }
@@ -248,7 +248,7 @@ void gmMainLib_8015CDEC(void)
 
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
-    if (arg1 == 120) {
+    if (arg1 == 0x78) {
         if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
             return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
         }
@@ -896,12 +896,12 @@ void gmMainLib_8015EA80(void)
 
     gmMainLib_8015CDEC();
     for (i = 0; i < 6; i++) {
-        players = data->modes[i].data.players;
+        players = data->modes[i].start.players;
         SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
                            &players[4], &players[5]);
     }
     for (i = 7; i < 13; i++) {
-        players = data->modes[i].data.players;
+        players = data->modes[i].start.players;
         SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
                            &players[4], &players[5]);
     }

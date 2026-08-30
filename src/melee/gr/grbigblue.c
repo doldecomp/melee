@@ -3108,18 +3108,25 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
         u16 lane : 5;
         u16 pad1 : 4;
     } grBb_LaneBits;
-    grBb_CarGround* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     s32 i;
-    s32 j;
+    s32 line_idx;
+    s32 idx;
     s32 k;
     u8* car;
+    grBb_YakumonoParam* params;
+    f32 scale;
+    f32 lerp;
+    s32 lo;
+    s32 hi;
     HSD_JObj* jobj;
 
     for (i = 0; i < 30; i++) {
-        mpJointSetCb1(lbl_803E2DFC[i], &gp->ground, fn_801EF60C);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->ground.u.bigblue.xC8)[i],
-                            JOBJ_HIDDEN);
-        gp->typed.ranks[i] = HSD_Randi(2) ? 0 : 2;
+        u8 val;
+        mpJointSetCb1(lbl_803E2DFC[i], gp, fn_801EF60C);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[i], JOBJ_HIDDEN);
+        val = HSD_Randi(2) ? 0 : 2;
+        ((u8*) gp->u.bigblue.xCC)[i] = val;
     }
 
     {
@@ -3128,16 +3135,9 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
         }
     }
 
-    car = gp->bytes;
+    car = (u8*) gp;
     for (k = 0; k < 4; k++, car += 0x40) {
         if (k < yakumono_param->x18) {
-            s32 line_idx;
-            grBb_YakumonoParam* params;
-            f32 scale;
-            f32 lerp;
-            s32 hi;
-            s32 lo;
-
             ((grBb_StateBits*) (car + 0xD4))->state = 4;
 
             do {
@@ -3159,12 +3159,12 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
                         }
                     }
                 }
-            } while (j != k);
+            } while (i != k);
 
             ((grBb_LaneBits*) (car + 0xD4))->lane = line_idx;
 
-            i = 0;
-            ((grBb_ByteBits*) (car + 0xD4))->b6 = i;
+            idx = 0;
+            ((grBb_ByteBits*) (car + 0xD4))->b6 = idx;
 
             *(f32*) (car + 0xE0) = grBigBlue_801EC6C0_inline2(k);
 
@@ -3200,35 +3200,39 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             lo = (s32) params->x5C;
             if (lo > hi) {
                 s32 diff = lo - hi;
-                lo = hi + (diff != 0 ? HSD_Randi(diff) : i);
+                s32 random;
+                if (diff != 0) {
+                    random = HSD_Randi(diff);
+                } else {
+                    random = idx;
+                }
+                lo = hi + random;
             } else if (lo < hi) {
                 s32 diff = hi - lo;
-                lo += (diff != 0 ? HSD_Randi(diff) : i);
+                s32 random;
+                if (diff != 0) {
+                    random = HSD_Randi(diff);
+                } else {
+                    random = idx;
+                }
+                lo = lo + random;
             }
             *(s32*) (car + 0xF0) = lo;
 
             {
-                Ground_801C5440(&gp->ground, k, lbl_803E3010[HSD_Randi(4)]);
+                Ground_801C5440(gp, k, lbl_803E3010[HSD_Randi(4)]);
             }
 
             *(f32*) (car + 0xEC) = 1.0F;
 
-            HSD_JObjClearFlagsAll(
-                ((HSD_JObj**) gp->ground.u.bigblue.xC8)[line_idx],
-                JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[line_idx],
+                                  JOBJ_HIDDEN);
 
-            {
-                HSD_JObj* selected_jobj =
-                    ((HSD_JObj**) gp->ground.u.bigblue.xC8)[line_idx];
-                jobj = selected_jobj;
-            }
+            jobj = ((HSD_JObj**) gp->u.bigblue.xC8)[line_idx];
 
             HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
 
-            {
-                u8* lane_state = gp->ground.u.bigblue.xCC;
-                lane_state[line_idx] = 1;
-            }
+            ((u8*) gp->u.bigblue.xCC)[line_idx] = 1;
         } else {
             ((grBb_StateBits*) (car + 0xD4))->state = 1;
         }
