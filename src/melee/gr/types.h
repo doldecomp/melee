@@ -1326,6 +1326,16 @@ struct grBigBlue_GroundData {
 };
 ASSERT_SIZE(struct grBigBlue_GroundData, 0x54);
 
+/// Platform manager state (gobj ID 32).
+struct grBigBlue_ManagerVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ void* event_data[3];
+    /* gp+D4 */ HSD_JObj* platform_jobjs[3];
+    /* gp+E0 */ void* event_extra;
+    /* gp+E4 */ struct grBigBlue_GroundData data[3];
+};
+ASSERT_SIZE(struct grBigBlue_ManagerVars, 0x11C);
+
 struct grBigBlue_PlatformVars {
     /* gp+C4 */ u32 xC4;
     /* gp+C8 */ s32 xC8_timer;
@@ -1410,6 +1420,7 @@ struct grBigBlue_GroundVars {
             /* pad */ char pad_3[4];
             /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
         };
+        struct grBigBlue_ManagerVars manager;
         struct grBigBlue_PlatformVars platform;
         struct grBigBlue_RoadVars road;
         struct {

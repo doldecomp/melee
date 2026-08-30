@@ -1344,19 +1344,17 @@ bool grBigBlue_801E8794(void* exclude, Vec3* pos, bool checkSecondary,
 
 void grBigBlue_801E8978(int index, void* data, void* extra)
 {
-    u8* gp = (u8*) GET_GROUND(Ground_GetMapGObj(32));
+    Ground* gp = GET_GROUND(Ground_GetMapGObj(32));
     if (extra != NULL) {
-        *(void**) (gp + 0xE0) = extra;
+        gp->u.bigblue.manager.event_extra = extra;
     }
-    gp += index * 4;
-    *(void**) (gp + 0xC8) = data;
+    gp->u.bigblue.manager.event_data[index] = data;
 }
 
 void* grBigBlue_801E89DC(int arg)
 {
-    u8* gp = (u8*) GET_GROUND(Ground_GetMapGObj(32));
-    gp += arg * 4;
-    return *(void**) (gp + 0xC8);
+    Ground* gp = GET_GROUND(Ground_GetMapGObj(32));
+    return gp->u.bigblue.manager.event_data[arg];
 }
 
 void grBigBlue_801E8A1C(int idx)
