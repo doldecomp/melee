@@ -191,26 +191,26 @@ void gm_801A4014(GameMode* mode)
     }
 }
 
-void* gm_GetGameSceneLoadData(GameModeState* scene)
+void* gm_GetGameModeStateEnterData(GameModeState* scene)
 {
     return scene->info.enter_data;
 }
 
-void* gm_GetGameSceneLeaveData(GameModeState* state)
+void* gm_GetGameModeStateExitData(GameModeState* state)
 {
     return state->info.exit_data;
 }
 
-void gm_SetSceneIndex(u8 arg0)
+void gm_SetGameModeStateId(u8 id)
 {
-    state_machine.routing.curr_state_id = arg0;
-    state_machine.routing.prev_state_id = arg0;
+    state_machine.routing.curr_state_id = id;
+    state_machine.routing.prev_state_id = id;
 }
 
-/// @note Actually sets the pending scene to the scene following the input
-void gm_SetPendingSceneIndex(u8 next_scene)
+/// @note Actually sets the next scene to the scene following the input
+void gm_SetNextGameModeStateId(u8 curr_id)
 {
-    state_machine.routing.next_state_id = next_scene + 1;
+    state_machine.routing.next_state_id = curr_id + 1;
 }
 
 u8 gm_GetPreviousSceneIndex(void)

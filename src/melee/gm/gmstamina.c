@@ -4,6 +4,8 @@
 
 #include <placeholder.h>
 
+#include "gm/gm_1A3F.h"
+
 #include <sysdolphin/baselib/gobjproc.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
@@ -23,8 +25,8 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B922C,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -35,8 +37,8 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B927C,
         {
             GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
+            &gmVsMelee_SssData,
+            &gmVsMelee_SssData,
         },
     },
     {
@@ -47,7 +49,7 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B9560,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -60,50 +62,50 @@ static struct {
     u16 slomo_counter[4]; ///< Ticks up to 100 when player is eliminated
 } gm_804975F8;
 
-void gm_801B91C8(GameModeState* arg0)
+void gm_801B91C8(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    CSSData* css = gm_GetGameSceneLoadData(arg0);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    CSSData* css = gm_GetGameModeStateEnterData(state);
     css->match_type = 2;
-    css->ko_star_counts = 0;
-    css->data = *vs;
+    css->ko_counts = 0;
+    css->vs = *vs;
     lbDvd_800174BC();
 }
 
 void gm_801B922C(GameModeState* scene)
 {
-    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_10D0);
+    gm_801A5680(scene, &gmMainLib_804D3EE0->vs_stamina);
 }
 
 void gm_801B9254(GameModeState* scene)
 {
-    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_10D0);
+    gm_801A5754(scene, &gmMainLib_804D3EE0->vs_stamina);
 }
 
-void gm_801B927C(GameModeState* arg0)
+void gm_801B927C(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    SSSData* sss = gm_GetGameSceneLeaveData(arg0);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    SSSData* sss = gm_GetGameModeStateExitData(state);
     if (sss->start_game != 0) {
-        *vs = sss->data;
+        *vs = sss->vs;
 
         lbAudioAx_80026F2C(0x18);
         lbAudioAx_8002702C(8, lbAudioAx_80026EBC(sss->force_stage_id));
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingSceneIndex(0);
+    gm_SetNextGameModeStateId(0);
 }
 
-void gm_801B931C(GameModeState* arg0)
+void gm_801B931C(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    StartMeleeData* start = gm_GetGameSceneLoadData(arg0);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    StartMeleeData* start = gm_GetGameModeStateEnterData(state);
     int i;
 
     gm_80167BC8(vs);
 
-    start->rules = vs->data.rules;
+    start->rules = vs->start.rules;
 
     start->rules.x2_5 = false;
     start->rules.x0_6 = false;
@@ -112,8 +114,8 @@ void gm_801B931C(GameModeState* arg0)
     start->rules.x3_0 = false;
     gm_80167A14(start->players);
 
-    for (i = 0; i < 4; i++) {
-        start->players[i] = vs->data.players[i];
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
+        start->players[i] = vs->start.players[i];
         start->players[i].xC_b7 = true;
         start->players[i].stocks = 1;
         start->players[i].hp = 150;
@@ -126,20 +128,20 @@ void gm_801B931C(GameModeState* arg0)
 
 void gm_801B9560(GameModeState* scene)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
     gm_80168710(&gm_80479D98.match_end, vs);
     gm_801A5AF0(scene, 0, 0);
 }
 
 void gm_Mode_StaminaVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_10D0);
+    gm_80167B50(&gmMainLib_804D3EE0->vs_stamina);
 }
 
 void gm_Mode_StaminaVs_OnLoad(void)
 {
     gm_SetGameSpeed(1.0F);
-    gm_801A55C4();
+    gmVsMelee_ResetKOCounts();
 }
 
 /// Number of players / teams remaining
@@ -157,7 +159,7 @@ int gm_801B9600(void)
             gm_804975F8.eliminated[i] = true;
         }
         if (!gm_804975F8.eliminated[i]) {
-            if (gmMainLib_804D3EE0->unk_10D0.data.rules.is_teams) {
+            if (gmMainLib_804D3EE0->vs_stamina.start.rules.is_teams) {
                 for (j = 0; j < i; j++) {
                     if (!gm_804975F8.eliminated[j] &&
                         Player_GetTeam(i) == Player_GetTeam(j))

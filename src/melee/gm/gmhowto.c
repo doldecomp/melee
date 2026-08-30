@@ -79,7 +79,7 @@ void gm_Scene_HowTo_OnFrame(void)
             gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetPendingSceneIndex(0);
+            gm_SetNextGameModeStateId(0);
         }
     }
 }

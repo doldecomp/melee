@@ -64,7 +64,7 @@ void onEnterDebug(GameModeState* arg0)
 {
     struct DebugSoundTestData* data;
 
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     data->x0 = (struct SoundTestData*) &un_803F9FA4;
     data->x4 = 0;
     un_802FF7DC();

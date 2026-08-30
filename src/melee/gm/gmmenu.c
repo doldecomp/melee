@@ -64,5 +64,5 @@ void gm_Mode_AllstarGOver_OnLoad(void)
 
 void gm_Mode_Opening_OnLoad(void)
 {
-    gm_SetSceneIndex(gm_801BF718());
+    gm_SetGameModeStateId(gm_801BF718());
 }

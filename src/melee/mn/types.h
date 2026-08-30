@@ -92,8 +92,8 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ s8 c_kind;    ///< uses CharacterKind (CKIND_*) values
-    /*0x01*/ u8 slot_type; ///< uses Gm_PKind values
+    /*0x00*/ s8 ckind;     ///< ::CharacterKind
+    /*0x01*/ u8 slot_type; ///< ::Gm_PKind
     /*0x02*/ s8 stocks;    // stocks
     /*0x03*/ u8 color;     // color
     /*0x04*/ u8 slot;      // port
@@ -214,7 +214,7 @@ struct StartMeleeRules {
     u8 xD;
     u16 stkind;
 
-    u32 time_limit; // time limit
+    u32 time_limit; ///< time limit in seconds
     u8 x14;
     u32 x18;
     u32 x1C_pad[(0x20 - 0x1C) / 4];
@@ -266,7 +266,7 @@ struct VsModeData {
     /* +5 */ u8 unk_0x5;
     /* +6 */ u8 unk_0x6;
     /* +7 */ u8 unk_0x7;
-    /* +8 */ StartMeleeData data;
+    /* +8 */ StartMeleeData start;
 };
 
 typedef enum CSSMatchType {
@@ -300,8 +300,8 @@ struct CSSData {
     u16 unk_0x0; ///< 1p port?
     u8 match_type;
     u8 pending_scene_change;
-    u8* ko_star_counts;
-    VsModeData data;
+    u8* ko_counts;
+    VsModeData vs;
 };
 
 struct CSSModeInfo {
@@ -516,7 +516,7 @@ struct SSSData {
     /* +02 */ u8 no_lras;
     /* +03 */ s8 force_stage_id;
     /* +04 */ u8 start_game;
-    /* +08 */ VsModeData data;
+    /* +08 */ VsModeData vs;
 };
 
 struct AnimLoopSettings {

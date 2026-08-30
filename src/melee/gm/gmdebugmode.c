@@ -263,12 +263,12 @@ ASSERT_SIZE(struct exitIntroData, 0x4);
 
 void onExitIntro(GameModeState* unused)
 {
-    gm_SetPendingSceneIndex(0); // onEnterMenu0
+    gm_SetNextGameModeStateId(0); // onEnterMenu0
 }
 
 void onEnterMenu0(GameModeState* arg0)
 {
-    struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
+    struct enterMenu0_Data* temp_r3 = gm_GetGameModeStateEnterData(arg0);
     temp_r3->x0 = un_803FA4E0;
     temp_r3->x4 = fn_801B09F8;
 }
@@ -285,7 +285,7 @@ int fn_801B09F8(int arg0)
 
 void onEnterMenu1(GameModeState* arg0)
 {
-    struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
+    struct enterMenu0_Data* temp_r3 = gm_GetGameModeStateEnterData(arg0);
     temp_r3->x0 = un_803FA790;
     temp_r3->x4 = fn_801B0A8C;
     lbAudioAx_80026F2C(0x12);
@@ -298,7 +298,7 @@ int fn_801B0A8C(int arg0)
 {
     if (arg0 == 0) {
         sfxBack();
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
         gm_801A4B60();
     }
     return 0;
@@ -306,24 +306,24 @@ int fn_801B0A8C(int arg0)
 
 void onEnterMenu2(GameModeState* arg0)
 {
-    struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
+    struct enterMenu0_Data* temp_r3 = gm_GetGameModeStateEnterData(arg0);
     temp_r3->x0 = un_803FC4CC;
     temp_r3->x4 = fn_801B0A8C;
 }
 
 void onEnterPrize(GameModeState* arg0)
 {
-    un_802FFEE0(gm_GetGameSceneLoadData(arg0));
+    un_802FFEE0(gm_GetGameModeStateEnterData(arg0));
 }
 
 void onExitPrize(GameModeState* arg0)
 {
-    gm_SetPendingSceneIndex(2);
+    gm_SetNextGameModeStateId(2);
 }
 
 void onEnterVs(GameModeState* arg0)
 {
-    un_802FFF2C(gm_GetGameSceneLoadData(arg0));
+    un_802FFF2C(gm_GetGameModeStateEnterData(arg0));
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 0x20);
     lbAudioAx_80027168();
@@ -332,27 +332,27 @@ void onEnterVs(GameModeState* arg0)
 
 void onEnterResults0(GameModeState* arg0)
 {
-    struct ResultsMatchInfo* temp_r3 = gm_GetGameSceneLoadData(arg0);
+    struct ResultsMatchInfo* temp_r3 = gm_GetGameModeStateEnterData(arg0);
     gm_80177724(temp_r3);
     temp_r3->match_end = vs_exit_data.match_end;
 }
 
 void onExitResults0(GameModeState* arg0)
 {
-    gm_GetGameSceneLeaveData(arg0);
-    gm_SetPendingSceneIndex(0);
+    gm_GetGameModeStateExitData(arg0);
+    gm_SetNextGameModeStateId(0);
 }
 
 void onEnterIntroEasy(GameModeState* arg0)
 {
-    struct UnkSoundTestData1* temp_r31 = gm_GetGameSceneLoadData(arg0);
+    struct UnkSoundTestData1* temp_r31 = gm_GetGameModeStateEnterData(arg0);
     gm_80168F88();
     un_80301BA8(temp_r31);
 }
 
 void onEnterIntroAllstar(GameModeState* arg0)
 {
-    un_80301C64(gm_GetGameSceneLoadData(arg0));
+    un_80301C64(gm_GetGameModeStateEnterData(arg0));
 }
 
 extern int un_803FA258[];
@@ -361,7 +361,7 @@ void onEnterGameOver(GameModeState* arg0)
 {
     struct DebugGameOverData* data;
 
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     data->x0 = 0x1869F;
     data->x8 = 1;
     data->ckind = un_803FA258[0x4D];
@@ -373,7 +373,7 @@ void onEnterGameOver(GameModeState* arg0)
 
 void onEnterApproach(GameModeState* arg0)
 {
-    u8* temp_r3 = gm_GetGameSceneLoadData(arg0);
+    u8* temp_r3 = gm_GetGameModeStateEnterData(arg0);
     temp_r3[1] = 0;
 
     switch (un_803FA258[0x50]) {
@@ -421,7 +421,7 @@ void onEnterResults1(GameModeState* arg0)
 {
     u64 sfx_result = 0;
     int i;
-    struct DebugResultsData* data = gm_GetGameSceneLoadData(arg0);
+    struct DebugResultsData* data = gm_GetGameModeStateEnterData(arg0);
     MatchEnd* match_end = &data->match_end;
 
     data->x0_0 = un_803FA258[0x5E];
@@ -457,21 +457,21 @@ void onExitResults1(GameModeState* arg0)
 {
     lbAudioAx_800236DC();
     if (HSD_PadCopyStatus->button & HSD_PAD_L) {
-        gm_SetPendingSceneIndex(11); // onEnterResults1
+        gm_SetNextGameModeStateId(11); // onEnterResults1
     } else {
-        gm_SetPendingSceneIndex(0); // onEnterMenu0
+        gm_SetNextGameModeStateId(0); // onEnterMenu0
     }
 }
 
 void onEnterMemCard(GameModeState* arg0)
 {
-    struct DebugMemcardData* data = gm_GetGameSceneLoadData(arg0);
+    struct DebugMemcardData* data = gm_GetGameModeStateEnterData(arg0);
     data->x0 = 1;
     data->x4 = 0;
 }
 
 void onExitMemCard(GameModeState* arg0)
 {
-    UNUSED struct DebugMemcardData* data = gm_GetGameSceneLeaveData(arg0);
-    gm_SetPendingSceneIndex(0);
+    UNUSED struct DebugMemcardData* data = gm_GetGameModeStateExitData(arg0);
+    gm_SetNextGameModeStateId(0);
 }

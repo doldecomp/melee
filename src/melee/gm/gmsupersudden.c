@@ -18,8 +18,8 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
         gm_801B8BE0,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -30,8 +30,8 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
         gm_801B8C30,
         {
             GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
+            &gmVsMelee_SssData,
+            &gmVsMelee_SssData,
         },
     },
     {
@@ -42,7 +42,7 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
         gm_801B8C9C,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -54,7 +54,7 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
         gm_801B8CF4,
         {
             GS_SUDDEN_DEATH,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_8047E2A4,
         },
     },
@@ -90,7 +90,7 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
         gm_801A6254,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -172,5 +172,5 @@ void gm_Mode_SuperSuddenDeath_OnInit(void)
 
 void gm_Mode_SuperSuddenDeath_OnLoad(void)
 {
-    gm_801A55C4();
+    gmVsMelee_ResetKOCounts();
 }

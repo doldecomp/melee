@@ -381,19 +381,19 @@ struct gmm_x0 {
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
-    /* 0x0590 */ VsModeData unk_590; ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
-    /* 0x0810 */ VsModeData unk_810; ///< invisible melee
-    /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90;  ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;  ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;  ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;  ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;  ///< giant melee
-    /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
-    /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
+    /* 0x0590 */ VsModeData vs_melee; ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;  ///< super sudden death
+    /* 0x0810 */ VsModeData unk_810;  ///< invisible melee
+    /* 0x0950 */ VsModeData vs_camera;
+    /* 0x0A90 */ VsModeData unk_A90;    ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;    ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;    ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;    ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;    ///< giant melee
+    /* 0x10D0 */ VsModeData vs_stamina; ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210;   ///< slowmo melee
+    /* 0x1350 */ VsModeData unk_1350;   ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490;   ///< multiman, 3/15 min, endless, cruel
     /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
@@ -663,17 +663,17 @@ struct MatchEnd {
     /* 0x00 */ u32 x0; ///< timer
     /* 0x04 */ u8 result;
     /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 is_teams;
+    /* 0x06 */ u8 is_teams; ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
     /* 0x08 */ u32 frame_count;
     /* 0x0C */ u8 xC;
     /* 0x0D */ u8 n_winners;
     /* 0x0E */ u8 n_team_winners;
     /* 0x0F */ u8 loser;
-    /* 0x10 */ u8 winners[6];
-    /* 0x16 */ u8 team_winners[5];
-    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
-    /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
+    /* 0x10 */ u8 winners[GM_MAX_PLAYERS];
+    /* 0x16 */ u8 team_winners[GM_MAX_TEAMS];
+    /* 0x1B */ struct MatchTeamData team_standings[GM_MAX_TEAMS];
+    /* 0x58 */ struct MatchPlayerData player_standings[GM_MAX_PLAYERS];
     /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
     /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];
