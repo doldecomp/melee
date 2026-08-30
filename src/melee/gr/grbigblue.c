@@ -3515,34 +3515,13 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     }
 }
 
-typedef struct grBigBlue_CarPhysicsLane {
-    u8 state;
-    u8 x1;
-    s8 x2;
-    u8 x3;
-    f32 target;
-    f32 delta;
-    Vec3 pos;
-    f32 xEC;
-    f32 xF0;
-    f32 gravity;
-    f32 height;
-    f32 velocity;
-    f32 accel;
-    f32 rotation;
-    f32 amplitude;
-    f32 angular_velocity;
-    f32 x110;
-} grBigBlue_CarPhysicsLane;
-ASSERT_SIZE(grBigBlue_CarPhysicsLane, 0x40);
-
 typedef union grBigBlue_CarPhysics {
     u8 raw[0x1D4];
     struct {
         u8 pad_0[0xC8];
         HSD_JObj** jobjs;
         u8 pad_CC[8];
-        grBigBlue_CarPhysicsLane lanes[4];
+        struct grBigBlue_CarLane lanes[4];
     } data;
 } grBigBlue_CarPhysics;
 
@@ -3581,7 +3560,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
     /* Setup per-lane data */
     offset = lane << 6;
-    lane_flags = &gp->data.lanes[lane].state;
+    lane_flags = (u8*) &gp->data.lanes[lane].status;
 
     {
         u16 hw = *(u16*) lane_flags;
@@ -3825,27 +3804,25 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     result = 0;
     gp = gobj->user_data;
 
-    switch ((*(volatile u8*) (gp->raw + offset + 0xD4) >> 2) & 0x3F) {
+    switch (gp->data.lanes[index].state) {
     case 1:
         break;
     case 9:
-        self = gp->raw;
-        self += offset;
-        if (0.0F == *(f32*) (self + 0xEC)) {
+        if (0.0F == gp->data.lanes[index].alpha) {
             result = 1;
         }
         break;
     case 7: {
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
-        grBigBlue_CarPhysicsLane* lane;
+        struct grBigBlue_CarLane* lane;
 
         self = gp->raw;
         self += offset;
         blast += yakumono_param->x68 * scale;
         lane = &gp->data.lanes[index];
         if (lane->pos.x > blast) {
-            if (0.0F != lane->xEC) {
+            if (0.0F != lane->alpha) {
                 result = 9;
             } else {
                 result = 1;
@@ -3856,14 +3833,14 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 8: {
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
-        grBigBlue_CarPhysicsLane* lane;
+        struct grBigBlue_CarLane* lane;
 
         self = gp->raw;
         self += offset;
         blast -= yakumono_param->x68 * scale;
         lane = &gp->data.lanes[index];
         if (lane->pos.x < blast) {
-            if (0.0F != lane->xEC) {
+            if (0.0F != lane->alpha) {
                 result = 9;
             } else {
                 result = 1;
@@ -3990,9 +3967,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Final threshold check */
-        self = gp->raw;
-        self += offset;
-        if (*(f32*) (self + 0xE4) < -2000.0F) {
+        if (gp->data.lanes[index].pos.y < -2000.0F) {
             result = 1;
         }
         break;
@@ -4002,37 +3977,6 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     return result;
 }
 
-typedef union grBb_CarStatus {
-    struct {
-        u8 state : 6;
-        u8 pad_0 : 2;
-        u8 pad_1;
-    } state;
-    struct {
-        u16 pad_0 : 7;
-        u16 lane : 5;
-        u16 pad_1 : 4;
-    } lane;
-} grBb_CarStatus;
-
-typedef struct grBb_Car {
-    grBb_CarStatus status;
-    u8 pad_2[2];
-    f32 target;
-    f32 xDC;
-    Vec3 pos;
-    f32 alpha;
-    s32 threshold;
-    f32 xF4;
-    f32 xF8;
-    f32 velocity;
-    f32 accel;
-    f32 x104;
-    f32 x108;
-    f32 x10C;
-    f32 x110;
-} grBb_Car;
-
 typedef union grBb_CarGround {
     Ground ground;
     struct {
@@ -4040,7 +3984,7 @@ typedef union grBb_CarGround {
         HSD_JObj** jobjs;
         u8* ranks;
         u8 pad_D0[4];
-        grBb_Car cars[4];
+        struct grBigBlue_CarLane cars[4];
     } typed;
     u8 bytes[0x1D4];
 } grBb_CarGround;
@@ -4059,37 +4003,24 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
 
     switch (arg2) {
     case 1: {
-        grBb_Car* car = &gp->typed.cars[arg1];
+        struct grBigBlue_CarLane* car = &gp->typed.cars[arg1];
 
-        HSD_JObjSetFlagsAll(gp->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
-                            JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(gp->typed.jobjs[car->collision_slot], JOBJ_HIDDEN);
 
         if (gp->typed.cars[arg1].pos.x > 0.0f) {
-            gp->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
+            gp->typed.ranks[car->collision_slot] = 0;
         } else {
-            gp->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 2;
+            gp->typed.ranks[car->collision_slot] = 2;
         }
-        {
-            typedef struct grBb_StateBits {
-                u8 state : 6;
-                u8 pad0 : 2;
-            } grBb_StateBits;
-            *result = 1;
-            ((grBb_StateBits*) car)->state = arg2;
-        }
+        *result = 1;
+        car->state = arg2;
         break;
     }
 
     case 10: {
         gp->typed.cars[arg1].threshold = 0x14;
-        {
-            typedef struct grBb_StateBits {
-                u8 state : 6;
-                u8 pad0 : 2;
-            } grBb_StateBits;
-            *result = 1;
-            ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
-        }
+        *result = 1;
+        gp->typed.cars[arg1].state = arg2;
         break;
     }
 
@@ -4118,17 +4049,9 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
             }
             lo += rand_val;
         }
-        {
-            gp->typed.cars[arg1].threshold = lo;
-            {
-                typedef struct grBb_StateBits {
-                    u8 state : 6;
-                    u8 pad0 : 2;
-                } grBb_StateBits;
-                *result = 1;
-                ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
-            }
-        }
+        gp->typed.cars[arg1].threshold = lo;
+        *result = 1;
+        gp->typed.cars[arg1].state = arg2;
         break;
     }
 
@@ -4410,23 +4333,13 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
     case 7:
     case 8: {
         gp->typed.cars[arg1].threshold = 0x3E8;
-        {
-            typedef struct grBb_StateBits {
-                u8 state : 6;
-                u8 pad0 : 2;
-            } grBb_StateBits;
-            *result = 1;
-            ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
-        }
+        *result = 1;
+        gp->typed.cars[arg1].state = arg2;
         break;
     }
 
     case 9: {
-        typedef struct grBb_StateBits {
-            u8 state : 6;
-            u8 pad0 : 2;
-        } grBb_StateBits;
-        ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
+        gp->typed.cars[arg1].state = arg2;
         break;
     }
     }
