@@ -1,6 +1,7 @@
 #ifndef MELEE_GM_VSMELEE_H
 #define MELEE_GM_VSMELEE_H
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "mn/forward.h"
@@ -36,5 +37,12 @@ gm_801A5C3C(GameModeState*, struct VsModeData*,
 /* 1A5F00 */ void gm_801A5F00(GameModeState*);   /// Results_Enter ??
 /* 1A5F64 */ void gm_801A5F64(GameModeState*, struct VsModeData*,
                               u8); /// Results_Exit ??
+/* 479D98 */ extern MatchExitInfo gm_80479D98;
+/* 47C020 */ extern ResultsMatchInfo gm_8047C020;
+/* 47E2A4 */ extern MatchExitInfo gm_8047E2A4;
+/* 480530 */ extern StartMeleeData gm_80480530;
+/* 480668 */ extern SSSData gm_80480668;
+/* 4807B0 */ extern CSSData gm_804807B0;
+/* 4D6860 */ extern UNK_T gm_804D6860[];
 
 #endif

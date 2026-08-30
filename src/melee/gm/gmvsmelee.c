@@ -17,6 +17,11 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 
+/* 4807B0 */ CSSData gm_804807B0;
+/* 480668 */ SSSData gm_80480668;
+/* 480530 */ StartMeleeData gm_80480530;
+/* 47E2A4 */ MatchExitInfo gm_8047E2A4;
+/* 47C020 */ ResultsMatchInfo gm_8047C020;
 /* 4D6730 */ static u8 gm_804D6730[6];
 
 VsModeData* gm_801A5244(void)
