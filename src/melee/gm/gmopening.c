@@ -140,7 +140,7 @@ void fn_801AA0E8(void)
     1250, 2, 394, 1, 65536, 2,
 };
 
-void gm_801AA110_OnEnter(UNK_T arg0)
+void gm_Scene_Opening_OnEnter(UNK_T arg0)
 {
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_2;
@@ -187,7 +187,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801AA28C_OnFrame(void)
+void gm_Scene_Opening_OnFrame(void)
 {
     HSD_GObj* temp_r3_2;
     int temp_r3;

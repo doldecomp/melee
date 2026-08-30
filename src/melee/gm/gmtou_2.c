@@ -792,7 +792,7 @@ static inline s32 get_match_player_index_xF(s32 player)
     return 0;
 }
 
-void gm_8019DF8C_OnFrame(void)
+void gm_Scene_TouAlt_OnFrame(void)
 {
     TmVsData vsdata;
     TmData* tmd;
@@ -1140,7 +1140,7 @@ void gm_8019E634(void)
     }
 }
 
-void gm_8019ECAC_OnEnter(void* arg0)
+void gm_Scene_TouAlt_OnEnter(void* arg0)
 {
     struct {
         StKind stkind;
@@ -1193,7 +1193,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-void gm_8019EE54_OnLeave(void* arg0)
+void gm_Scene_TouAlt_OnExit(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6688);
     lbArchive_80016EFC(lbl_804D668C);

@@ -3,6 +3,6 @@
 
 #include "gm/types.h"
 
-/* 3DFDA8 */ extern GameScene gm_803DFDA8_Scenes[];
+/* 3DFDA8 */ extern GameModeState gm_Mode_ProgScan_States[];
 
 #endif

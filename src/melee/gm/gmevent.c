@@ -132,12 +132,12 @@ struct gm_804D6900_t {
 };
 
 /* 1BA938 */ static void gm_801BA938(struct EventData*, int lo, int hi, bool);
-/* 1BAA60 */ static void onEnterCss(GameScene*);
-/* 1BAAD0 */ static void onExitCss(GameScene*);
+/* 1BAA60 */ static void onEnterCss(GameModeState*);
+/* 1BAAD0 */ static void onExitCss(GameModeState*);
 /* 1BAB40 */ static void gm_801BAB40(PlayerInitData*, struct gm_801BAB40_src*);
-/* 1BAC9C */ static s32 gm_801BAC9C(GameScene*, s32);
-/* 1BAD70 */ static void onEnterVs(GameScene*);
-/* 1BB758 */ static void onExitVs(GameScene*);
+/* 1BAC9C */ static s32 gm_801BAC9C(GameModeState*, s32);
+/* 1BAD70 */ static void onEnterVs(GameModeState*);
+/* 1BB758 */ static void onExitVs(GameModeState*);
 /* 1BBB64 */ static void gm_801BBB64(void);
 /* 1BBFE8 */ static void fn_801BBFE8(void);
 /* 1BC00C */ static void gm_801BC00C(void);
@@ -177,7 +177,7 @@ struct gm_804D6900_t {
 /* 4979D8 */ static MatchExitInfo vs_exit_data[2];
 /* 4D6900 */ static struct gm_804D6900_t** gm_804D6900[2];
 
-GameScene gm_803DF618_Scenes[] = {
+GameModeState gm_Mode_Event_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -245,7 +245,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     lbAudioAx_80027168();
 }
 
-void onEnterCss(GameScene* arg0)
+void onEnterCss(GameModeState* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
     CSSData* css = gm_GetGameSceneLoadData(arg0);
@@ -258,7 +258,7 @@ void onEnterCss(GameScene* arg0)
     }
 }
 
-void onExitCss(GameScene* arg0)
+void onExitCss(GameModeState* arg0)
 {
     CSSData* temp_r3;
     struct EventData* temp_r31;
@@ -310,7 +310,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->x20 = src->x20;
 }
 
-s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
+s32 gm_801BAC9C(GameModeState* arg0, s32 arg1)
 {
     UNUSED u8 _[8];
     u8 chars[CHKIND_MAX];
@@ -360,7 +360,7 @@ static inline u8 gm_GetNextColor(u8 color)
     return color;
 }
 
-void onEnterVs(GameScene* arg0)
+void onEnterVs(GameModeState* arg0)
 {
     struct EventData* ev = gm_GetEventData();
     StartMeleeData* md = gm_GetGameSceneLoadData(arg0);
@@ -633,7 +633,7 @@ void onEnterVs(GameScene* arg0)
     gm_80168F88();
 }
 
-void onExitVs(GameScene* arg0)
+void onExitVs(GameModeState* arg0)
 {
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
@@ -742,7 +742,7 @@ void onExitVs(GameScene* arg0)
     }
 }
 
-void gm_801BBA60_OnInit(void)
+void gm_Mode_Event_OnInit(void)
 {
     struct EventData* temp_r6;
     int i;
@@ -900,7 +900,7 @@ void gm_801BBB64(void)
     }
 }
 
-void gm_801BBEA8_OnLoad(void)
+void gm_Mode_Event_OnLoad(void)
 {
     struct EventData* temp_r30;
     struct gm_804D6900_t** temp_r29;
@@ -944,7 +944,7 @@ void gm_801BBEA8_OnLoad(void)
     }
 }
 
-void gm_801BBFE4_OnUnload(void) {}
+void gm_Mode_Event_OnUnload(void) {}
 
 void fn_801BBFE8(void)
 {

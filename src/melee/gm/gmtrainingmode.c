@@ -19,13 +19,13 @@
 #include "melee/mn/types.h"
 #include "mn/inlines.h"
 
-/* 1B1B74 */ static void gm_801B1B74(GameScene*);
-/* 1B1C24 */ static void gm_801B1C24(GameScene*);
-/* 1B1EB8 */ static void gm_801B1EB8(GameScene*);
-/* 1B1EEC */ static void gm_801B1EEC(GameScene*);
+/* 1B1B74 */ static void gm_801B1B74(GameModeState*);
+/* 1B1C24 */ static void gm_801B1C24(GameModeState*);
+/* 1B1EB8 */ static void gm_801B1EB8(GameModeState*);
+/* 1B1EEC */ static void gm_801B1EEC(GameModeState*);
 /* 1B1F6C */ static void fn_801B1F6C(int);
-/* 1B1F70 */ static void gm_801B1F70(GameScene*);
-/* 1B2204 */ static void gm_801B2204(GameScene*);
+/* 1B1F70 */ static void gm_801B1F70(GameModeState*);
+/* 1B2204 */ static void gm_801B2204(GameModeState*);
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
 /* 48E230 */ static CSSData css_data;
@@ -33,7 +33,7 @@
 /* 48E4C0 */ static StartMeleeData training_enter_data;
 /* 48E5F8 */ static UNK_T training_exit_data[0x2288 / 4];
 
-GameScene gm_803DDB80_Scenes[] = {
+GameModeState gm_Mode_Training_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -65,7 +65,7 @@ GameScene gm_803DDB80_Scenes[] = {
         gm_801B1F70,
         gm_801B2204,
         {
-            GS_TRAINING_MODE,
+            GS_TRAINING,
             &training_enter_data,
             &training_exit_data,
         },
@@ -77,7 +77,7 @@ GameScene gm_803DDB80_Scenes[] = {
 #pragma push
 #pragma dont_inline on
 #endif
-void gm_801B1B74(GameScene* arg0)
+void gm_801B1B74(GameModeState* arg0)
 {
     VsModeData* vs_data;
     CSSData* css;
@@ -109,7 +109,7 @@ static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
     gm_801B07E8(css_data, c_kind, stocks, color, arg4, level);
 }
 
-void gm_801B1C24(GameScene* arg0)
+void gm_801B1C24(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
     CSSData* css = gm_GetGameSceneLeaveData(arg0);
@@ -173,7 +173,7 @@ void gm_801B1C24(GameScene* arg0)
     }
 }
 
-void gm_801B1EB8(GameScene* arg0)
+void gm_801B1EB8(GameModeState* arg0)
 {
     SSSData* sss;
 
@@ -183,7 +183,7 @@ void gm_801B1EB8(GameScene* arg0)
     sss->unk_stage = 0;
 }
 
-void gm_801B1EEC(GameScene* arg0)
+void gm_801B1EEC(GameModeState* arg0)
 {
     VsModeData* vs_data;
     SSSData* sss;
@@ -209,7 +209,7 @@ void fn_801B1F6C(int unused) {}
 #pragma push
 #pragma dont_inline on
 #endif
-void gm_801B1F70(GameScene* arg0)
+void gm_801B1F70(GameModeState* arg0)
 {
     VsModeData* vs;
     StartMeleeData* data;
@@ -253,7 +253,7 @@ void gm_801B1F70(GameScene* arg0)
 #pragma pop
 #endif
 
-void gm_801B2204(GameScene* arg0)
+void gm_801B2204(GameModeState* arg0)
 {
     MatchExitInfo* temp_r3;
 
@@ -271,7 +271,7 @@ void gm_801B2204(GameScene* arg0)
     sfxForward();
 }
 
-void gm_801B2298_OnInit(void)
+void gm_Mode_Training_OnInit(void)
 {
     VsModeData* temp_r31 = &gmMainLib_804D3EE0->unk_D10;
     int i;
@@ -288,7 +288,7 @@ void gm_801B2298_OnInit(void)
     }
 }
 
-void gm_801B23C4_OnLoad(void)
+void gm_Mode_Training_OnLoad(void)
 {
     gm_804D68C0 = gm_801677F0();
     gm_804D68C1 = 0;

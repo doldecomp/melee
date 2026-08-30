@@ -409,7 +409,7 @@ void gm_801A6EE4(void)
     }
 }
 
-void gm_801A7070_OnEnter(void* unused)
+void gm_Scene_ToyFall_OnEnter(void* unused)
 {
     s32 trophy;
     int i;
@@ -549,7 +549,7 @@ void gm_801A7070_OnEnter(void* unused)
     lbAudioAx_800237A8(0x7EF40, 0x7FU, 0x40U);
 }
 
-void gm_801A79D4_OnFrame(void)
+void gm_Scene_ToyFall_OnFrame(void)
 {
     if (gm_804D6740 != 0) {
         gm_804D6740--;

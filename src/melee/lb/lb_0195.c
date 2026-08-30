@@ -32,8 +32,7 @@ void lb_8001955C(void)
 {
     if (HSD_PadGetResetSwitch()) {
         lbAudioAx_80027DBC();
-        do {
-        } while (lb_8001B6F8() == 0xB);
+        while (lb_8001B6F8() == 11);
         VISetPostRetraceCallback(0);
         VISetPreRetraceCallback(0);
         VISetBlack(1);

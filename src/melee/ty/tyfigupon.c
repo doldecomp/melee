@@ -1526,7 +1526,7 @@ static inline TyFiguponED4* tyFigupon_InitScene(struct un_804D6EF4_t** ef4_2)
     return ed4;
 }
 
-void tyFigupon_OnEnter_80317D80(void* arg0)
+void tyFigupon_Scene_OnEnter(void* arg0)
 {
     TyFiguponData* data;
     struct un_804D6EF4_t* ef4;
@@ -1661,7 +1661,7 @@ s32 _tyFigupon_803181BC(void)
     return lbAudioAx_800236DC();
 }
 
-void tyFigupon_OnFrame_803182D4(void)
+void tyFigupon_Scene_OnFrame(void)
 {
     TyModeState* state = (TyModeState*) Toy_804A284C;
 

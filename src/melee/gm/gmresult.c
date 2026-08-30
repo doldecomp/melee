@@ -1667,7 +1667,7 @@ static inline void gmResultReportModelGObj(void)
     HSD_ASSERT(0x6A2, 0);
 }
 
-void gm_80177368_OnEnter(void* arg0_)
+void gm_Scene_Results_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
     HSD_GObj* light_gobj;
@@ -1764,7 +1764,7 @@ void gm_80177368_OnEnter(void* arg0_)
     }
 }
 
-void gm_80177704_OnLeave(void* unused)
+void gm_Scene_Results_OnExit(void* unused)
 {
     fn_801701AC();
 }

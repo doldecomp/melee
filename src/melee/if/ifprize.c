@@ -111,7 +111,7 @@ static inline void un_802FE3F8_inner(int a, int b, s16* c, s16* d)
     un_802FE3F8(a, b, c, d);
 }
 
-/// un_802FEBE0_OnEnter will inline un_802FE3F8 otherwise
+/// ifPrize_Scene_OnEnter will inline un_802FE3F8 otherwise
 static inline void un_802FE3F8_noinline(int a, int b, s16* c, s16* d)
 {
     un_802FE3F8_inner(a, b, c, d);
@@ -310,7 +310,7 @@ found:
     HSD_SisLib_803A6B98(*text, 320.0f, 316.0f, sp1C);
 }
 
-void un_802FEBE0_OnEnter(void* arg0_)
+void ifPrize_Scene_OnEnter(void* arg0_)
 {
     struct un_802FEBE0_OnEnter_arg0* arg0 = arg0_;
     struct un_803F9B30* x;
@@ -344,4 +344,4 @@ found:
     un_802FE6A8();
 }
 
-void un_802FED10_OnLeave(void* unused) {}
+void ifPrize_Scene_OnExit(void* unused) {}

@@ -409,7 +409,7 @@ bool gm_801AA774(s16 arg0)
     return Toy_803048C0(0x107) || Toy_803048C0(0x108);
 }
 
-void gm_801AA7C4_OnFrame(void)
+void gm_Scene_StaffRoll_OnFrame(void)
 {
     if (gm_804D6814 >= 0x134D) {
         lbAudioAx_80028B90();
@@ -1235,7 +1235,7 @@ void fn_801AC67C(HSD_GObj* gobj)
     }
 }
 
-void gm_801AC6D8_OnEnter(void* unused)
+void gm_Scene_StaffRoll_OnEnter(void* unused)
 {
     HSD_JObj* jobj_arr[2];
     HSD_CObj* cobj;
@@ -1372,4 +1372,4 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
 }
 
-void gm_801ACC90_OnLeave(void* unused) {}
+void gm_Scene_StaffRoll_OnExit(void* unused) {}

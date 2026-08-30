@@ -3,7 +3,7 @@
 
 #include "melee/gm/types.h"
 
-/* 1B087C */ void gmTitleMode_OnEnter(GameScene*);
-/* 3DD6A0 */ extern GameScene gm_803DD6A0_Scenes[];
+/* 1B087C */ void gmTitleMode_OnEnter(GameModeState*);
+/* 3DD6A0 */ extern GameModeState gm_Mode_Title_States[];
 
 #endif

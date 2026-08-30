@@ -1600,7 +1600,7 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
-void tyDisplay_OnEnter_8031B460(void* arg0)
+void tyDisplay_Scene_OnEnter(void* arg0)
 {
     s32 sp18;
     TyDspConfig* cfg;
@@ -1792,7 +1792,7 @@ void _tyDisplay_8031B850(void)
     }
 }
 
-void tyDisplay_OnFrame_8031B9A4(void)
+void tyDisplay_Scene_OnFrame(void)
 {
     TyModeState* state = (TyModeState*) Toy_804A284C;
 

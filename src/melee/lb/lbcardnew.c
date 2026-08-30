@@ -728,9 +728,9 @@ int lb_8001B6F8(void)
 
 int lb_8001B760(int result)
 {
-    if (result == 0xB) {
+    if (result == 11) {
         do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        } while ((result = lb_8001B6F8()) == 11);
     }
     return result;
 }
