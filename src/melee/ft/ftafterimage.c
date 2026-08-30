@@ -26,43 +26,9 @@ typedef struct AfterimageVtx {
 
 #define AFTERIMAGE_ANGLE_STEP 0.0872664600610733f
 
-void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+static inline itSword_UnkBytes* ftCo_800C2600_get_params(Fighter* fp)
 {
-    Fighter* fp;
     itSword_UnkBytes* params;
-    f32 cumDist[3];
-    AfterimageVtx vtx_buf[152];
-    f32 d2;
-    s32 numSubdiv;
-
-    if (arg1 != 2) {
-        return;
-    }
-
-    {
-        void* fighter = gobj->user_data;
-        fp = fighter;
-    }
-
-    if ((s8) (u8) fp->x2100 <= 1) {
-        return;
-    }
-
-    GXSetColorUpdate(1);
-    GXSetAlphaUpdate(0);
-    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
-    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
-    GXSetZMode(1, GX_LEQUAL, 0);
-    GXSetZCompLoc(0);
-    GXSetNumTexGens(0);
-    GXSetTevClampMode(0, 0);
-    GXSetNumTevStages(1);
-    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
-    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
-                  GX_AF_NONE);
-    GXSetCullMode(GX_CULL_NONE);
 
     if (fp->x2101_bits_8) {
         switch (itGetKind(fp->item_gobj)) {
@@ -109,6 +75,48 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             break;
         }
     }
+    return params;
+}
+
+void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+{
+    Fighter* fp;
+    itSword_UnkBytes* params;
+    f32 cumDist[3];
+    AfterimageVtx vtx_buf[152];
+    f32 d2;
+    s32 numSubdiv;
+
+    if (arg1 != 2) {
+        return;
+    }
+
+    {
+        void* fighter = gobj->user_data;
+        fp = fighter;
+    }
+
+    if ((s8) (u8) fp->x2100 <= 1) {
+        return;
+    }
+
+    GXSetColorUpdate(1);
+    GXSetAlphaUpdate(0);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
+    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
+    GXSetZMode(1, GX_LEQUAL, 0);
+    GXSetZCompLoc(0);
+    GXSetNumTexGens(0);
+    GXSetTevClampMode(0, 0);
+    GXSetNumTevStages(1);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
+                  GX_AF_NONE);
+    GXSetCullMode(GX_CULL_NONE);
+
+    params = ftCo_800C2600_get_params(fp);
 
     {
         s32 nextIdx;
