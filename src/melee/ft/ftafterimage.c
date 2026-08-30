@@ -226,10 +226,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                {
-                    f32 x = curEntry->xC.x * outerScale;
-                    (vp + 1)->x = x + curEntry->x0.x;
-                }
+                (vp + 1)->x =
+                    curEntry->xC.x * outerScale + curEntry->x0.x;
                 (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
                 (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;
@@ -263,9 +261,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                             f32 frac;
                             s32 j;
                             f32 cumAngle = 0.0f;
-                            f32 interpInner2, interpOuter2;
                             f32 basePosX, basePosY, basePosZ;
                             f32 stepPosX, stepPosY, stepPosZ;
+                            f32 interpInner2, interpOuter2;
                             s32 alphaStep;
 
                             tempDir = curEntry->xC;
