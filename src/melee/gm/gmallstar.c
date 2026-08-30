@@ -585,16 +585,12 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline void gm_801B5ACC_inline0(StartMeleeData* data,
-                                       GameModeState* arg0, u16* round)
+static inline u16 gm_801B5ACC_inline0(StartMeleeData* match_data,
+                                      GameModeState* arg0)
 {
-    data->players[0].xD_b2 = 1;
-    data->rules.x7 = 9;
-
-    {
-        u16 current_round = gm_8017BE84(arg0->id);
-        *round = current_round;
-    }
+    match_data->players[0].xD_b2 = 1;
+    match_data->rules.x7 = 9;
+    return gm_8017BE84(arg0->id);
 }
 
 static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
@@ -612,11 +608,11 @@ static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
 void gm_801B5ACC(GameModeState* arg0)
 {
     s8 chars[3];
-    StartMeleeData* data;
+    u8 color;
     u8* base;
     UnkAllstarData* allstar;
     u16 round;
-    u8 color;
+    StartMeleeData* data;
     s32 i;
     s32 next_count;
 
@@ -646,17 +642,16 @@ void gm_801B5ACC(GameModeState* arg0)
     data->rules.x14 = (s32) allstar->x9C % 60;
     data->rules.xD = 0x78;
     data->players[0].x10 = allstar->x74;
-    gm_801B5ACC_inline0(data, arg0, &round);
+    round = gm_801B5ACC_inline0(data, arg0);
 
     {
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
-        u8* slot_base = allstar->x76;
         for (i = 0; i < (s32) ri->count; i++) {
             u8* slot_ptr;
             s32 slot;
             do {
                 slot = HSD_Randi(0x1A);
-                slot_ptr = &slot_base[slot];
+                slot_ptr = &allstar->x76[slot];
             } while ((s32) *slot_ptr != 0x21);
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
@@ -673,8 +668,8 @@ void gm_801B5ACC(GameModeState* arg0)
         }
     }
 
-    allstar->_94[1] = (u8) next_count;
-    allstar->_94[0] = (u8) (round + 1);
+    gm_80473A18._94[1] = (u8) next_count;
+    gm_80473A18._94[0] = (u8) (round + 1);
     data->players[0].xC_b1 = 0;
     data->rules.x1_2 = 1;
     data->rules.x1_3 = 1;
