@@ -837,9 +837,10 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     }
                     base->u.arwing.xC4 += 1;
                     if ((int) grBigBlue_801E89DC(2) == 0) {
+                        grBb_YakumonoParam* params = yakumono_param;
                         u32 cnt = base->u.arwing.xC4;
-                        if ((s32) cnt >= yakumono_param->x11C) {
-                            s32 max = yakumono_param->x120;
+                        if ((s32) cnt >= params->x11C) {
+                            s32 max = params->x120;
                             if ((s32) cnt <= max &&
                                 ((s32) cnt == max || HSD_Randi(2) != 0))
                             {
@@ -848,10 +849,11 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         }
                     }
                     if ((int) grBigBlue_801E89DC(1) == 0) {
+                        grBb_YakumonoParam* params = yakumono_param;
                         u32 cnt2 = base->u.arwing.xC4;
-                        if ((s32) cnt2 >= yakumono_param->xDC &&
+                        if ((s32) cnt2 >= params->xDC &&
                             (s32) gp->u.bigblue.data[i].x2 == 1 &&
-                            ((s32) cnt2 >= yakumono_param->xE0 ||
+                            ((s32) cnt2 >= params->xE0 ||
                              HSD_Randi(2) != 0))
                         {
                             grBigBlue_801E8978(0, NULL, NULL);
@@ -863,8 +865,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
             } else {
                 Ground* bone_ptr = base;
                 Ground* other = base;
-                s32 active_count = 0;
                 s32 j;
+                s32 active_count = 0;
 
                 for (j = 0; j < 3; j++) {
                     if (jobj != bone_ptr->u.bigblue.xD4[j]) {
