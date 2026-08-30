@@ -428,12 +428,37 @@ static inline void fn_8019F9C4_inline2(HSD_JObj* next, HSD_JObj* model,
 }
 
 static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
-                                       CharacterKind arg0, s32* char_idx)
+                                       CharacterKind arg0)
 {
+    HSD_JObj* child;
+    s32 char_idx;
+    f32 f;
+    f32 scale;
+
     lbl_804D66B8 = model;
     HSD_GObjObject_80390A70(object, HSD_GObj_JObjKind, model);
     GObj_SetupGXLink(object, HSD_GObj_JObjCallback, 0xB, 0);
-    *char_idx = fn_8019F9C4_GetCharIdx(arg0);
+    char_idx = fn_8019F9C4_GetCharIdx(arg0);
+
+    if (model == NULL) {
+        child = NULL;
+    } else {
+        child = model->child;
+    }
+
+    HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
+    HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
+    HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
+    HSD_JObjSetRotationY(child,
+                         0.017453292f * Toy_803060BC(char_idx, 5));
+    f = Toy_803060BC(char_idx, 4);
+    scale = Toy_803060BC(char_idx, 3) / f;
+    HSD_JObjSetScaleX(child, scale);
+    HSD_JObjSetScaleY(child, scale);
+    HSD_JObjSetScaleZ(child, scale);
+    HSD_JObjSetScaleX(model, 2.0f);
+    HSD_JObjSetScaleY(model, 2.0f);
+    HSD_JObjSetScaleZ(model, 2.0f);
 }
 
 void fn_8019F9C4(u32 arg0)
@@ -448,9 +473,6 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObj** ptr;
     s32 char_idx;
     s32 i;
-    f32 f;
-    f32 scale;
-    PAD_STACK(16);
 
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
     arg0 = (char_idx == -1) ? 8 : arg0;
@@ -611,26 +633,7 @@ void fn_8019F9C4(u32 arg0)
     }
     fn_8019F9C4_inline2(next, jobj, &gobj);
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
-    fn_8019F9C4_inline3(jobj, gobj, arg0, &char_idx);
-
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-
-    HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
-    HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
-    HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
-    HSD_JObjSetRotationY(child, 0.017453292f * Toy_803060BC(char_idx, 5));
-    f = Toy_803060BC(char_idx, 4);
-    scale = Toy_803060BC(char_idx, 3) / f;
-    HSD_JObjSetScaleX(child, scale);
-    HSD_JObjSetScaleY(child, scale);
-    HSD_JObjSetScaleZ(child, scale);
-    HSD_JObjSetScaleX(jobj, 2.0f);
-    HSD_JObjSetScaleY(jobj, 2.0f);
-    HSD_JObjSetScaleZ(jobj, 2.0f);
+    fn_8019F9C4_inline3(jobj, gobj, arg0);
 
     lb_8000C1C0(jobj, lbl_804D66E8);
     lb_8000C290(jobj, lbl_804D66E8);
