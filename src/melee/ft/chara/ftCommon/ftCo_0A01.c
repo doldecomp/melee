@@ -3702,6 +3702,33 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     }
 }
 
+static inline s32 ftCo_800A7AAC_inline0(
+    f32 x, f32 above, f32 below, Vec3* floor_pos, int* line_id, u32* flags,
+    Vec3* floor_normal)
+{
+    int line;
+    s32 blocked;
+    s32 result;
+
+    blocked = 0;
+    *line_id = -1;
+    result = mpCheckFloor(x, above, x, below, 0.0f, floor_pos, line_id, flags,
+                          floor_normal, -1, -1, -1, NULL,
+                          (Fighter_GObj*) blocked);
+    if (result != 0) {
+        line = *line_id;
+        if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
+            grCorneria_801E2D90(line) || grVenom_80206D10(line))
+        {
+            blocked = 1;
+        }
+        if (blocked != 0) {
+            result = 0;
+        }
+    }
+    return result;
+}
+
 void ftCo_800A7AAC(Fighter* fp)
 {
     Fighter* partner;
@@ -3715,7 +3742,7 @@ void ftCo_800A7AAC(Fighter* fp)
     f32 d;
 
     PAD_STACK(0xA);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     partner = ftCo_800A589C(fp);
     if (partner == NULL) {
@@ -3723,27 +3750,12 @@ void ftCo_800A7AAC(Fighter* fp)
     }
     partner_pos = partner->cur_pos;
     if (partner->ground_or_air == GA_Air) {
-        s32 blocked;
         s32 result;
         mp_UnkStruct0* island;
         f32 below = partner_pos.y - 1000.0f;
         f32 above = 10.0f + partner_pos.y;
-        blocked = 0;
-        line_id = -1;
-        result = mpCheckFloor(partner_pos.x, above, partner_pos.x, below, 0.0f,
-                              &floor_pos, &line_id, &flags, &floor_normal, -1,
-                              -1, -1, NULL, (Fighter_GObj*) blocked);
-        if (result != 0) {
-            int line = line_id;
-            if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
-                grCorneria_801E2D90(line) || grVenom_80206D10(line))
-            {
-                blocked = 1;
-            }
-            if (blocked != 0) {
-                result = 0;
-            }
-        }
+        result = ftCo_800A7AAC_inline0(partner_pos.x, above, below, &floor_pos,
+                                      &line_id, &flags, &floor_normal);
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
