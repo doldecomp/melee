@@ -636,10 +636,12 @@ static inline void psUpdateParticle(HSD_Particle* pp)
         pz = pp->vel.z;
 
         pp->pos.x = px * cosb + pz * sinb + gp->pos.x;
-        pp->pos.y =
-            -px * sina * sinb + py * cosa + pz * sina * cosb + gp->pos.y;
+        {
+            f32 y = -px * sina * sinb + py * cosa + cosb * pz * sina;
+            pp->pos.y = y + gp->pos.y;
+        }
         pp->pos.z =
-            -px * cosa * sinb - py * sina + pz * cosa * cosb + gp->pos.z;
+            -px * cosa * sinb - py * sina + cosb * pz * cosa + gp->pos.z;
     } else {
         if (pp->kind & 1) {
             pp->vel.y -= pp->grav;
@@ -1155,7 +1157,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             if (gchild->appsrt == NULL) {
                                 break;
                             }
-                            if (pp->appsrt == gchild->appsrt) {
+                            if (gchild->appsrt == pp->appsrt) {
                                 gchild->pos.x = pp->pos.x;
                                 gchild->pos.y = pp->pos.y;
                                 gchild->pos.z = pp->pos.z;
@@ -1220,7 +1222,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (gchild->appsrt == NULL) {
                             break;
                         }
-                        if (pp->appsrt == gchild->appsrt) {
+                        if (gchild->appsrt == pp->appsrt) {
                             gchild->pos.x = pp->pos.x;
                             gchild->pos.y = pp->pos.y;
                             gchild->pos.z = pp->pos.z;
@@ -1289,7 +1291,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (gchild->appsrt == NULL) {
                             break;
                         }
-                        if (pp->appsrt == gchild->appsrt) {
+                        if (gchild->appsrt == pp->appsrt) {
                             gchild->pos.x = pp->pos.x;
                             gchild->pos.y = pp->pos.y;
                             gchild->pos.z = pp->pos.z;
@@ -1985,8 +1987,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     pp->poseNum = *pc++;
                     randRange = *pc++;
-                    pp->poseNum = (u8) (s32) ((f32) randRange * HSD_Randf() +
-                                              (f32) pp->poseNum);
+                    {
+                        f32 base_pose = (f32) pp->poseNum;
+                        pp->poseNum =
+                            (u8) (s32) ((f32) randRange * HSD_Randf() +
+                                        base_pose);
+                    }
                     {
                         u8 bank = pp->bank;
                         u8 tgIdx = pp->texGroup;
