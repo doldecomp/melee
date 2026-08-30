@@ -10,6 +10,10 @@
 
 #include <platform.h>
 
+#ifdef MUST_MATCH
+#include <MetroTRK/intrinsics.h>
+#endif
+
 #include "baselib/debug.h"
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
@@ -3429,7 +3433,12 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         u8 state : 6;
                         u8 pad0 : 2;
                     } grBb_StateBits;
-                    ((grBb_StateBits*) (p + 0xD4))->state = st_val;
+                    ((grBb_StateBits*) (p + 0xD4))->state =
+#ifdef MUST_MATCH
+                        __rlwinm(st_val, 0, 26, 31);
+#else
+                        st_val;
+#endif
                 }
             }
         }
