@@ -846,7 +846,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScope.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Catch.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D8E.c"),
-            Object(Linkable, "melee/ft/chara/ftCommon/ftCo_0D95.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D95.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchPull.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchAttack.c"),
@@ -1573,7 +1573,7 @@ config.libs = [
         [
             Object(Linkable, "melee/ty/toy.c"),
             Object(Matching, "melee/ty/tylist.c"),
-            Object(Linkable, "melee/ty/tyfigupon.c"),
+            Object(Matching, "melee/ty/tyfigupon.c"),
             Object(Linkable, "melee/ty/tydisplay.c"),
         ],
     ),
