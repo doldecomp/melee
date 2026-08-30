@@ -894,10 +894,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     char* key_char;
     s8 null_char;
     s32 n;
+    char* src;
     char* dest;
     s32 len;
     u8 cursor;
-    char* src;
 
     name_text = mnNameNew_CurrentNameText;
     {
@@ -1051,14 +1051,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     char* p = name_text;
                     if (null_char != (s8) *p) {
                         n = 1;
-                        p += 3;
-                        if (null_char != (s8) *p) {
+                        if (null_char != (s8) *(p += 3)) {
                             n = 2;
-                            p += 3;
-                            if (null_char != (s8) *p) {
+                            if (null_char != (s8) *(p += 3)) {
                                 n = 3;
-                                p += 3;
-                                if (null_char != (s8) *p) {
+                                if (null_char != (s8) *(p += 3)) {
                                     n = 4;
                                 }
                             }
@@ -1082,8 +1079,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     char* src_iter;
                     char* dest_iter;
 
-                    src = name_text;
-                    src_iter = src;
+                    src_iter = (src = name_text);
                     dest_iter = dest;
                     for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                            (s8) *src_iter;
@@ -1092,8 +1088,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         *dest_iter = *src_iter;
                     }
 
-                    src += 3;
-                    src_iter = src;
+                    src_iter = (src += 3);
                     dest_iter = dest;
                     for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                            (s8) *src_iter;
@@ -1102,8 +1097,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         *dest_iter = *src_iter;
                     }
 
-                    src += 3;
-                    src_iter = src;
+                    src_iter = (src += 3);
                     dest_iter = dest;
                     for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                            (s8) *src_iter;
@@ -1112,18 +1106,20 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         *dest_iter = *src_iter;
                     }
 
-                    src += 3;
-                    src_iter = src;
+                    src_iter = (src += 3);
                     dest_iter = dest;
-                    for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                           (s8) *src_iter;
-                         dest_iter++, dest++, len++, src_iter++)
+                    while ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
+                           (s8) *src_iter)
                     {
                         *dest_iter = *src_iter;
+                        dest_iter++;
+                        dest++;
+                        len++;
+                        src_iter++;
                     }
                 }
 
-                name_buffer[len] = *((GlyphChar*) mnNameNew_NullCharacter);
+                name_buffer[len] = *mnNameNew_NullCharacter;
 
                 if ((s8) name_text[0] ==
                     (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
@@ -1166,8 +1162,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 char* src_iter;
                 char* dest_iter;
 
-                src = name_text;
-                src_iter = src;
+                src_iter = (src = name_text);
                 dest_iter = dest;
                 for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                        (s8) *src_iter;
@@ -1176,8 +1171,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     *dest_iter = *src_iter;
                 }
 
-                src += 3;
-                src_iter = src;
+                src_iter = (src += 3);
                 dest_iter = dest;
                 for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                        (s8) *src_iter;
@@ -1186,8 +1180,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     *dest_iter = *src_iter;
                 }
 
-                src += 3;
-                src_iter = src;
+                src_iter = (src += 3);
                 dest_iter = dest;
                 for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
                        (s8) *src_iter;
@@ -1196,18 +1189,20 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     *dest_iter = *src_iter;
                 }
 
-                src += 3;
-                src_iter = src;
+                src_iter = (src += 3);
                 dest_iter = dest;
-                for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                       (s8) *src_iter;
-                     dest_iter++, dest++, len++, src_iter++)
+                while ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
+                       (s8) *src_iter)
                 {
                     *dest_iter = *src_iter;
+                    dest_iter++;
+                    dest++;
+                    len++;
+                    src_iter++;
                 }
             }
 
-            name_buffer[len] = *((GlyphChar*) mnNameNew_NullCharacter);
+            name_buffer[len] = *mnNameNew_NullCharacter;
 
             if ((s8) name_text[0] ==
                 (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
