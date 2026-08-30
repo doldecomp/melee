@@ -328,8 +328,6 @@ void fn_CheckCameraInfo(int player, int buttons_down, int buttons_pressed,
     }
 }
 
-/// #fn_802277E8
-
 static inline float cstick_threshold(float cstick, float val)
 {
     if (ABS(cstick) < val) {

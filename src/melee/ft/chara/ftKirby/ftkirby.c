@@ -2810,8 +2810,6 @@ void ftKb_SpecialN_800EEEC4(HSD_GObj* gobj, FighterKind kind)
     }
 }
 
-/// #ftKb_SpecialN_800EEEC4
-
 void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int arg1, Mtx mtx)
 {
     Fighter* fp = gobj->user_data;
@@ -3771,7 +3769,6 @@ void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
     Fighter_UpdateModelScale(gobj);
 }
 
-/// #ftKb_SpecialN_Enter
 void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3783,7 +3780,6 @@ void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirN_Enter
 void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

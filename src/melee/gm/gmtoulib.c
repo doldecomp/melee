@@ -2027,8 +2027,6 @@ int fn_8018F410(void)
     return char_id;
 }
 
-/// #fn_8018F410
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
@@ -2580,8 +2578,6 @@ void fn_80190520(f32 x, f32 y, f32 z)
 #ifdef MUST_MATCH
 #pragma pop
 #endif
-
-/// #fn_80190520
 
 static inline int gm_801905F0_inline0(int c_kind)
 {

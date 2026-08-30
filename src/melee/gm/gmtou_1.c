@@ -1759,8 +1759,6 @@ void fn_8019A158(void)
     }
 }
 
-/// #fn_8019A158_end
-
 void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
     u32* counter = &lbl_804799D8.x0;

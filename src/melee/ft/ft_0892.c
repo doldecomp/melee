@@ -37,8 +37,6 @@ typedef struct {
     u8 x11_b0 : 1;
 } UnkStruct89768;
 
-/// #ft_800892D4
-
 void ft_800892D4(Fighter* arg0)
 {
     union Struct2070 spC;
@@ -83,8 +81,6 @@ void ft_800892D4(Fighter* arg0)
     arg0->dmg.x18ec_instancehitby = 0;
     arg0->x2074.x2088 = 0;
 }
-
-/// #ft_80089460
 
 void ft_80089460(Fighter* fp)
 {
