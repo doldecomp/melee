@@ -595,15 +595,15 @@ void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
     HSD_JObj* jobj;
-    struct ifStock_804A1378_x204* user_data;
+    unsigned char* user_data;
     int i;
     HSD_GObj* gobj;
     lbl_8046B6A0_t* ae44;
     if (stock->x0 != NULL) {
-        stock->x204[player].x0[0] = player;
-        user_data = &stock->x204[player];
-        user_data->x0[1] = b;
-        user_data->x0[2] = 1;
+        user_data = ((struct IfStockData*) stock)[player].x0;
+        *(user_data += sizeof(struct IfStockDataOffset)) = player;
+        stock->x204[player].x0[1] = b;
+        stock->x204[player].x0[2] = 1;
         if (stock->player[player].x0 != NULL) {
             HSD_GObjPLink_80390228(stock->player[player].x0);
         }
@@ -631,7 +631,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 if (ifStock_804A1378.player[player].stocks < 0) {
                     ifStock_804A1378.player[player].stocks = 1;
                 }
-                data = gobj->user_data;
+                data = user_data;
                 switch ((unsigned char) b) {
                 case 0:
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x24,
