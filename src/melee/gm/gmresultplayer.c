@@ -543,10 +543,32 @@ static HSD_GObj* lbl_8046E38C[4];
 static HSD_JObj* lbl_8046E39C[4];
 static lbl_8046E3AC_t lbl_8046E3AC;
 
+/// @todo .sdata2 order hack
 void gm_80177724(struct ResultsMatchInfo* arg0)
 {
+#ifdef MUST_MATCH
+    (void) 0.0;
+    (void) S32_TO_F32;
+    (void) 10.0f;
+    (void) 40.0f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 0.2f;
+    (void) 0.3f;
+    (void) 0.05f;
+    (void) 50.0f;
+    (void) 1.0;
+    (void) 29.0f;
+    (void) 30.0f;
+    (void) 120.0f;
+    (void) U32_TO_F32;
+#endif
     memzero(arg0, sizeof(*arg0));
 }
+
+#ifdef MUST_MATCH
+static const f32 sdata2_order_zero_one[2] = { 0.0f, 1.0f };
+#endif
 
 static inline void inline0(HSD_JObj* jobj, float f)
 {
@@ -566,6 +588,9 @@ void fn_80177748(void)
 
     ResultsData* data = &lbl_8046DBE8;
 
+#ifdef MUST_MATCH
+    (void) 100.0f;
+#endif
     temp_r3 = fn_80174274();
 
     for (i = 0; i < 4; i++) {
@@ -597,6 +622,11 @@ void fn_80177748(void)
     }
 }
 
+#ifdef MUST_MATCH
+static const f32 sdata2_order_ten[1] = { 10.0f };
+static const f64 sdata2_order_s32[1] = { S32_TO_F32 };
+#endif
+
 void fn_80177920(HSD_GObj* gobj)
 {
     MatchEnd* end;
@@ -607,6 +637,9 @@ void fn_80177920(HSD_GObj* gobj)
 
     PAD_STACK(8);
 
+#ifdef MUST_MATCH
+    (void) -300.0f;
+#endif
     end = fn_80174274();
     human_controller_count = 0;
 
