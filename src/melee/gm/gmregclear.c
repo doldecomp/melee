@@ -1123,18 +1123,18 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
+static inline s32 fn_8017D9C0_inline(
+    const u8* arg0, const u8* arg1)
 {
-    u8* base;
+    s32 len;
     u8* p;
     s32 i;
     s32 j;
-    u8 temp;
     u8* dst;
     u8 ch;
     s32 excluded_idx;
     s32 rejected_idx;
-    s32 len;
+    u8* base;
 
     p = base = lbl_803D79F0;
     len = 0;
@@ -1145,7 +1145,7 @@ s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
 
     p = base;
     for (j = 0; j < len; j++) {
-        temp = *p;
+        u8 temp = *p;
         dst = &base[HSD_Randi(len)];
         *p = *dst;
         p++;
@@ -1178,7 +1178,12 @@ s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
     }
 
     return 0x21;
+}
+
+s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
+{
     PAD_STACK(8);
+    return fn_8017D9C0_inline(arg0, arg1);
 }
 
 void gm_8017DB58(struct Unk1PData_x24* arg0)
