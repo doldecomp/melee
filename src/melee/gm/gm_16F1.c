@@ -496,7 +496,7 @@ static inline void gm_16F1_SortAscPass(u32* base, u32 n)
 int fn_801701C0(void* arg0, int arg1, int arg2)
 {
     struct lbl_8046B6A0_24C_t* rules = arg0;
-    struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
+    const struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     s32 player_net;
