@@ -946,69 +946,78 @@ void fn_802FAC34(HSD_GObj* arg)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void ifStock_802FA5BC_noinline(int arg)
+{
+    ifStock_802FA5BC(arg);
+}
+
+static inline void ifStock_ClearGObjSlots(HSD_GObj** slots, int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++) {
+        slots[i] = NULL;
+    }
+}
+
+static inline void ifStock_CreateStockGObjs(HSD_GObj** slots)
+{
+    struct ifStock_804A1378* stock = &ifStock_804A1378;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
+
+    for (i = 0; i < 16; i++, slots++) {
+        *slots = NULL;
+        if (gm_8016B1A8()) {
+            *slots = ifStock_802FA118(i);
+        }
+    }
+    if (gm_IsMultimanSmashMode()) {
+        gobj = GObj_Create(14, 15, 0);
+        jobj = HSD_JObjLoadJoint(stock->x4->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+        GObj_SetupGXLink(gobj, fn_802F9598, 11, 0);
+        gm_8016895C(jobj, stock->x4, 0);
+        HSD_JObjReqAnimAll(jobj, 10.0f);
+        HSD_JObjAnimAll(jobj);
+        stock->gobj = gobj;
+        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
+    }
+}
+
 void ifStock_802FAEC4(void)
 {
-    HSD_GObj* gobj;
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    DynamicModelDesc** sp18;
-    int i[1];
-    int j[1];
-    int k[1];
+    DynamicModelDesc** scene_models;
+    HSD_GObj* gobj;
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &sp18, "Stc_scemdls",
-                           0);
-    stock->x0 = sp18;
-    stock->x4 = sp18[1];
-    ifStock_804A1ACC.x108 = 0;
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &scene_models,
+                           "Stc_scemdls", 0);
+    stock->x0 = scene_models;
+    stock->x4 = scene_models[1];
+    ifStock_804A1ACC.x108 = NULL;
     ifStock_804A1ACC.x0 = 0;
     gobj = GObj_Create(14, 15, 0);
     HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
-    ifStock_804A1ACC.x108 = (int) gobj;
-    for (i[0] = 0; i[0] < 130; i[0]++) {
-        ifStock_804A1ACC.x10C[i[0]] = NULL;
-    }
+    ifStock_804A1ACC.x108 = gobj;
+    ifStock_ClearGObjSlots(&ifStock_804A1ACC.x10C[0], 130);
     if (gm_80169394() == 0) {
         ifStock_804A1774.x10C[0] = NULL;
         ifStock_804A1774.x0 = 0;
         gobj = GObj_Create(14, 15, 0);
         HSD_GObj_SetupProc(gobj, fn_802FA6C4, 17);
         ifStock_804A1774.x10C[0] = gobj;
-        for (j[0] = 0; j[0] < 130; j[0]++) {
-            ifStock_804A1774.x10C[j[0] + 1] = NULL;
-        }
+        ifStock_ClearGObjSlots(&ifStock_804A1774.x10C[1], 130);
     } else if (gm_8016A1F8()) {
         ifStock_804A1774.x108 = -1;
-        ifStock_802FA5BC(1); // not inlined
+        ifStock_802FA5BC_noinline(1);
     }
-    for (k[0] = 0; k[0] < 16; k[0]++) {
-        ifStock_804A1A8C[k[0]] = NULL;
-        if (gm_8016B1A8()) {
-            ifStock_804A1A8C[k[0]] = ifStock_802FA118(k[0]);
-        }
-    }
-    if (gm_IsMultimanSmashMode()) {
-        // ifStock_802FA5BC(0); // inlined
-        HSD_GObj* gobj2 = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(stock->x4->joint);
-        HSD_GObjObject_80390A70(gobj2, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj2, fn_802F9598, 11, 0);
-        gm_8016895C(jobj, stock->x4, 0);
-        HSD_JObjReqAnimAll(jobj, 10.0f);
-        HSD_JObjAnimAll(jobj);
-        stock->gobj = gobj2;
-        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
-    }
+    ifStock_CreateStockGObjs(ifStock_804A1A8C);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ifStock_802FB390(void)
 {
