@@ -437,7 +437,7 @@ typedef struct {
 } ResultsRenderFuncs;
 
 typedef struct {
-    /* 0x00 */ u8 pad_00[0x24];
+    /* 0x00 */ f32 x00[9];
     /* 0x24 */ Vec3 x24;
     /* 0x30 */ Vec3 x30;
     /* 0x3C */ ResultsRenderFuncs x3C;
@@ -454,10 +454,29 @@ typedef struct {
     /* 0x90 */ f32 x90;
     /* 0x94 */ f32 x94;
     /* 0x98 */ f32 x98;
-    /* 0x98 */ f32 x9C;
+    /* 0x9C */ f32 x9C;
 } ResultsPlayerConfig;
 
-ResultsPlayerConfig const lbl_803B7B68 = { 0 };
+ResultsPlayerConfig const lbl_803B7B68 = {
+    { 0.0F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, -100.0F },
+    { 0.0F, 100.0F, 62.0F },
+    { 0.0F, 100.0F, 0.0F },
+    { { fn_80179DCC, fn_80179E34, fn_80179E9C, fn_80179F04 } },
+    { 0.0F, 100.0F, 62.0F },
+    { 0.0F, 100.0F, 0.0F },
+    { { fn_80179D3C, fn_80179D60, fn_80179D84, fn_80179DA8 } },
+    0.0F,
+    0.0F,
+    -100.0F,
+    0.0F,
+    0.0F,
+    -100.0F,
+    0.75F,
+    0.48F,
+    0.4F,
+    0.307F,
+    0.0F,
+};
 
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
