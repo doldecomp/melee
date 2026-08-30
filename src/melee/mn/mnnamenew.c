@@ -1013,9 +1013,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 (void) cursor;
                 {
                     char* slot = &name_text[cursor * 3];
-                    if ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
+                    if ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) ==
                         (s8) slot[0])
                     {
+                        n = 0;
+                    } else {
                         n = 1;
                     }
                     if (n != 0) {
