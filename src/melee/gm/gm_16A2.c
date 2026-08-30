@@ -357,7 +357,7 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             src += 1;
             dst += 1;
         }
-        break;
+        return (s32) src;
     }
 }
 
