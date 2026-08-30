@@ -41,16 +41,396 @@
 #include <baselib/mobj.h>
 #include <baselib/random.h>
 #include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
 extern ResultsData lbl_8046DBE8;
 
 typedef struct {
-    /* 0x00 */ u8 pad_00[0x20];
+    /* 0x00 */ f32 x0[8];
     /* 0x20 */ f32 x20[4];
 } CharScaleEntry;
 
-CharScaleEntry lbl_803D6A18[] = { 0 };
-f32 lbl_803D7058[0x890 / sizeof(f32)] = { 0 };
+/* 3D6A08 */ u32 gmResultPlayerColors[4] = {
+    0x013C59FF, 0x064E01FF, 0x54010BFF, 0x408080FF,
+};
+
+/* 3D6A18 */ CharScaleEntry gmResultCharacterScaleData[] = {
+    {
+        { 0.2F, 0.0F, 2.8F, 0.0F, 10.0F, 13.5F, 24.0F, 7.0F },
+        { 3.6F, 4.0F, 3.8F, 1.5F },
+    },
+    {
+        { -3.0F, 0.0F, -0.8F, 0.0F, 12.0F, 11.0F, 12.0F, 1.0F },
+        { 2.3F, 2.0F, 2.5F, 1.0F },
+    },
+    {
+        { 3.5F, -3.0F, 1.0F, 0.0F, 17.0F, 16.0F, 18.0F, 5.0F },
+        { 3.5F, 3.3F, 3.5F, 1.5F },
+    },
+    {
+        { 2.5F, -7.0F, -2.0F, -0.5F, 3.5F, -4.5F, -7.0F, 3.0F },
+        { 1.8F, 0.9F, 0.9F, 1.3F },
+    },
+    {
+        { 0.0F, -1.0F, 0.0F, 0.0F, 0.0F, 7.0F, -4.0F, 1.5F },
+        { 2.0F, 3.2F, 1.5F, 1.2F },
+    },
+    {
+        { 0.0F, -8.0F, 5.0F, 0.0F, 20.0F, 10.0F, 13.0F, 1.0F },
+        { 3.2F, 3.6F, 2.8F, 1.1F },
+    },
+    {
+        { -1.0F, -4.5F, 3.0F, 1.0F, 22.0F, 22.0F, 23.0F, 6.0F },
+        { 3.6F, 3.7F, 3.7F, 1.5F },
+    },
+    {
+        { 11.0F, 2.0F, 0.0F, 0.0F, -3.0F, 11.0F, 13.5F, 5.0F },
+        { 3.0F, 2.5F, 3.0F, 1.5F },
+    },
+    {
+        { 0.0F, -3.0F, 0.0F, 0.1F, 12.5F, 10.0F, 15.0F, 4.0F },
+        { 3.0F, 3.0F, 4.0F, 1.4F },
+    },
+    {
+        { -2.0F, 0.0F, 3.0F, 0.0F, 20.0F, 23.0F, 23.0F, 7.0F },
+        { 3.5F, 4.0F, 3.8F, 1.6F },
+    },
+    {
+        { -1.0F, 4.0F, -1.0F, -0.6F, 12.0F, 13.5F, 23.0F, 3.5F },
+        { 2.8F, 3.0F, 3.0F, 1.3F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 7.0F, 4.0F, 6.0F, 4.0F },
+        { 3.0F, 2.0F, 2.5F, 1.4F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 18.0F, 18.0F, 20.0F, 7.0F },
+        { 3.5F, 3.5F, 4.0F, 1.6F },
+    },
+    {
+        { 0.0F, 2.0F, -8.0F, 0.0F, 0.0F, 9.0F, -4.0F, 1.5F },
+        { 1.5F, 3.2F, 2.2F, 1.2F },
+    },
+    {
+        { -8.0F, -9.0F, -5.0F, -2.0F, 10.0F, 6.5F, 0.8F, 2.0F },
+        { 2.35F, 3.0F, 2.0F, 1.3F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, -2.0F, 0.0F, -7.0F, 0.0F },
+        { 1.6F, 2.8F, 1.0F, 1.1F },
+    },
+    {
+        { 0.0F, 1.0F, -2.0F, 0.0F, 18.0F, 12.5F, 25.0F, 6.5F },
+        { 3.2F, 3.8F, 4.2F, 1.5F },
+    },
+    {
+        { 3.0F, -1.0F, 2.5F, 0.1F, 13.0F, 9.5F, 13.0F, 2.8F },
+        { 2.6F, 2.2F, 2.3F, 1.2F },
+    },
+    {
+        { -1.0F, 1.0F, 0.0F, 0.2F, 23.5F, 22.0F, 23.0F, 8.0F },
+        { 4.0F, 4.0F, 4.0F, 1.6F },
+    },
+    {
+        { 1.0F, 0.0F, 1.0F, 0.0F, 20.0F, 25.0F, 16.0F, 7.0F },
+        { 3.5F, 4.0F, 4.0F, 1.5F },
+    },
+    {
+        { -11.0F, -9.0F, -3.0F, 0.5F, 9.0F, 7.0F, 24.0F, 5.0F },
+        { 3.0F, 3.5F, 3.8F, 1.5F },
+    },
+    {
+        { 1.0F, -5.5F, -0.5F, 1.0F, 18.0F, 19.0F, 20.0F, 6.5F },
+        { 3.3F, 4.0F, 3.8F, 1.5F },
+    },
+    {
+        { 0.0F, 0.5F, 0.0F, 0.2F, 10.0F, 13.0F, 14.0F, 5.0F },
+        { 3.0F, 3.0F, 3.6F, 1.5F },
+    },
+    {
+        { -15.0F, 3.5F, -0.3F, 0.0F, 15.0F, 23.0F, 22.0F, 5.5F },
+        { 4.0F, 3.5F, 4.0F, 1.5F },
+    },
+    {
+        { 0.0F, 2.0F, 0.0F, 0.0F, -3.0F, 1.0F, 1.0F, 0.5F },
+        { 1.3F, 2.5F, 2.0F, 1.3F },
+    },
+    {
+        { 0.5F, 0.0F, 0.0F, 0.0F, 19.0F, 27.0F, 25.0F, 7.5F },
+        { 4.1F, 4.0F, 4.0F, 1.5F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+};
+
+/* 3D7018 */ u32 gmResultX22F4Init[0x20 / sizeof(u32)] = {
+    0x00180000, 0x00000000, 0x00150015, 0x00000000,
+    0x00120012, 0x00120000, 0x000E000E, 0x000E000E,
+};
+
+/* 3D7038 */ u32 gmResultScoreTableInit[0x20 / sizeof(u32)] = {
+    0x00000000, 0x00000000, 0xFFF2000E, 0x00000000,
+    0xFFEE0000, 0x00120000, 0xFFEAFFF9, 0x00070016,
+};
+
+typedef struct {
+    /* 0x000 */ f32 scale[32];
+    /* 0x080 */ f32 slot_off[32][3][4];
+    /* 0x680 */ u8 x680[27][0x10];
+    /* 0x830 */ u8 pad_830[0x60];
+} ResultsCharacterData;
+
+/* 3D7058 */ ResultsCharacterData gmResultCharacterData = {
+    {
+        0.85F, 0.8F, 1.0F, 1.0F, 1.0F, 0.7F, 0.9F, 1.0F,
+        1.0F, 0.88F, 0.8F, 1.0F, 0.9F, 1.0F, 0.9F, 1.0F,
+        0.9F, 0.9F, 0.9F, 0.9F, 1.0F, 1.0F, 1.0F, 1.0F,
+        1.0F, 0.79F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+    },
+    {
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.5F, -4.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -3.0F, -2.3F, -1.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.4F, -1.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.4F, -1.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, -0.3F, -0.6F },
+            { 0.0F, -2.7F, -3.1F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, -0.2F, -0.4F },
+            { 0.0F, -2.7F, -3.1F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.3F, -2.9F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.4F, 0.9F },
+            { 0.0F, -3.3F, -2.9F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.0F, -1.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.3F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.1F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.5F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.5F, -2.6F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, -0.1F, -0.3F, -0.6F },
+            { 0.0F, -2.7F, -2.9F, -3.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.1F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, -0.2F, -0.4F, -0.5F },
+            { 0.0F, -2.7F, -3.0F, -3.3F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.0F, -0.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+    },
+    {
+        { 0x17 },
+        { 0x29 },
+        { 0x27 },
+        { 0x2C },
+        { 0x05 },
+        { 0x17 },
+        { 0x28 },
+        { 0x24 },
+        { 0x18 },
+        { 0x57 },
+        { 0x13 },
+        { 0x13 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+        { 0x17 },
+    },
+    { 0 },
+};
+
+/* 3D78E8 */ HSD_WObjDesc gmResultCameraEyeDesc = {
+    NULL, { 0.0F, 0.0F, 62.0F }, NULL
+};
+/* 3D78FC */ HSD_WObjDesc gmResultCameraInterestDesc = {
+    NULL, { 0.0F, 0.0F, 0.0F }, NULL
+};
+
+/* 3D7910 */ HSD_CameraDescPerspective gmResultCameraDesc = {
+    NULL,
+    0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &gmResultCameraEyeDesc,
+    &gmResultCameraInterestDesc,
+    0.0F,
+    NULL,
+    1.0F,
+    5000.0F,
+    19.999998F,
+    1.216667F,
+};
+
+/* 3D7948 */ char gmResultMissingGObjMessage[] =
+    "Error : model gobj dont't find at gmResultSetViewPos\n";
+/* 3D7980 */ char gmResultSourceFileName[] = "gmresultplayer.c";
+/* 3D7994 */ char gmResultMissingJObjMessage[] =
+    "Error : model jobj dont't find at gmResultSetViewPos\n";
 
 typedef struct {
     GObj_RenderFunc funcs[4];
@@ -78,7 +458,6 @@ typedef struct {
 } ResultsPlayerConfig;
 
 ResultsPlayerConfig const lbl_803B7B68 = { 0 };
-HSD_CObjDesc lbl_803D7910 = { 0 };
 
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
@@ -93,8 +472,6 @@ typedef struct {
     /* 0xEE0 */ u8 pad_EE0[0xF08 - 0xEE0];
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
-
-CameraKindData lbl_803D6A08 = { 0 };
 
 typedef union {
     s16 h[4];
@@ -1373,7 +1750,7 @@ void fn_8017A078(s32 arg0)
     callbacks = config->x3C;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(&lbl_803D7910);
+    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gmResultCameraDesc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     eye.y = (eye.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
@@ -1409,7 +1786,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
 {
     static Scissor const scissor_init = { 270, 370, 124, 276 };
     u32* config = (u32*) &lbl_803B7B68;
-    CameraKindData* data = &lbl_803D6A08;
+    CameraKindData* data = (CameraKindData*) gmResultPlayerColors;
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     s32 _pad[2];
@@ -1578,7 +1955,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 pos2 = *(Vec3*) &config->x80;
                 pos2.y = 100.0f * (f32) (arg2 + 1);
                 Player_80032A04(arg2, &pos2);
-                Player_SetScale(arg2, 1.8f * lbl_803D7058[kind]);
+                Player_SetScale(arg2, 1.8f * gmResultCharacterData.scale[kind]);
                 Player_80036F34(arg2, variant);
             } else {
                 int var_idx;
@@ -1589,7 +1966,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 } else {
                     var_idx = 3;
                 }
-                scale = lbl_803D6A18[kind].x20[var_idx];
+                scale = gmResultCharacterScaleData[kind].x20[var_idx];
                 Player_80036F34(arg2, variant);
                 Player_SetScale(
                     arg2,
@@ -1633,8 +2010,6 @@ void fn_8017A9B4(int slot)
             (u16*) disp->state.dim_h2 + lookup);
 }
 
-u32 lbl_803D7018[0x20 / sizeof(u32)] = { 0 };
-u32 lbl_803D7038[0x20 / sizeof(u32)] = { 0 };
 
 static s32 lbl_804D3FD0 = 0x00500050;
 static s32 lbl_804D3FD4 = 0x00460034;
@@ -1701,9 +2076,9 @@ void fn_8017AA78(const u8* arg0)
     disp->state.x0_0 = 1;
     disp->state.x0_4 = 0;
     disp->state.x0_6 = 0;
-    p5 = (PackedS16x4*) lbl_803D7038;
+    p5 = (PackedS16x4*) gmResultScoreTableInit;
     state = &disp->state;
-    p7 = (PackedS16x4*) lbl_803D7018;
+    p7 = (PackedS16x4*) gmResultX22F4Init;
     player_state = state->player_flags;
 
     {
