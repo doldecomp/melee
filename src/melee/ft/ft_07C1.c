@@ -28,6 +28,8 @@ void ft_8007C114(HSD_GObj* gobj)
         case It_Kind_Hammer:
             ftCo_800C555C(gobj);
             break;
+        default:
+            break;
         }
     }
     fp->x2219_b4 = 0;

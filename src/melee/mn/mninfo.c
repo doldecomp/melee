@@ -100,6 +100,8 @@ void mnInfo_80251AFC(void)
     s32 i;
     s32 j;
 
+    PAD_STACK(8);
+
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
     }
@@ -485,7 +487,7 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
             }
         }
         jobj = HSD_JObjLoadJoint(mnInfo_804A0958.joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(jobj, mnInfo_804A0958.animjoint,
                            mnInfo_804A0958.matanim_joint,

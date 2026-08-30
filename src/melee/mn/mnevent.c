@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 
 #include "gm/gm_1601.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
@@ -93,7 +93,7 @@ static Vec3 mnEvent_803EF770 = { 1.0f, -0.6f, 0 };
 static char mnEvent_803EF77C[0xC] = {
     0x82, 0x6B, 0x82, 0x96, 0x81, 0x44, 0x20, 0x25, 0x64, 0, 0, 0,
 };
-static char mnEvent_803EF788[0xC] = "translate";
+static char mnEvent_803EF788[] = "translate";
 static char mnEvent_803EF794[9] = "%s:%s %s";
 static char mnEvent_803EF7A0[0xD0] = {
     0x81, 0x7C, 0x81, 0x7C, 0x3A, 0x81, 0x7C, 0x81, 0x7C, 0x20, 0x81, 0x7C,
@@ -118,7 +118,10 @@ static char mnEvent_803EF7A0[0xD0] = {
 static s32 mnEvent_804D5028 = 0xCABC9FFF;
 static s32 mnEvent_804D502C = 0xFF;
 void* mnEvent_804A08F8[4];
-void* mnEvent_804A0908;
+void* mnEvent_804A0908[4];
+HSD_GObj* mnEvent_804D6C60;
+u8 mnEvent_804D6C64;
+u8 mnEvent_804D6C65;
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
@@ -170,8 +173,8 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
 
         icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
         icon_gobj = GObj_Create(6, 7, 0x80);
-        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908);
-        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
+        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908[0]);
+        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_JObjKind, icon_jobj);
         GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         mnEvent_8024D4E0(icon_jobj, &icon_pos);
         data->gobjs[idx] = icon_gobj;
@@ -411,7 +414,7 @@ void mnEvent_8024E524(s32 event_idx)
     gobj = GObj_Create(6, 7, 0x80);
     mnEvent_804D6C60 = gobj;
     tree = HSD_JObjLoadJoint(assets[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, tree);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, tree);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(tree, assets[1], assets[2], assets[3]);
     HSD_JObjReqAnimAll(tree, 0.0f);

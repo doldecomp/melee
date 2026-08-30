@@ -34,9 +34,8 @@
 #include <stdarg.h>
 #include <baselib/generator.h>
 // externs
-extern u32* ptclref_804D0E5C[65];
+
 extern EF_DAT_Entry efAsync_DatEntries[51];
-extern u32 hsd_804D7900;
 
 // forward declarations to avoid sdata2 pollution
 void HSD_MtxGetScale(Mtx, Vec3*);
@@ -167,7 +166,7 @@ void efLib_Init(void)
 
     hsd_8039D354(0);
     hsd_80398A08(0);
-    hsd_804D7900 = (u32) efLib_Cb_PtclAppSRTHook;
+    hsd_804D7900 = efLib_Cb_PtclAppSRTHook;
 
     gobj = GObj_Create(8U, 0xBU, 1U);
     GObj_SetupGXLink(gobj, efLib_render_callback, 7U, 2U);
@@ -228,7 +227,7 @@ void efLib_Destroy(HSD_GObj* gobj)
             }
         }
         obj_kind = gobj->obj_kind;
-        if (obj_kind == HSD_GObj_804D7849) {
+        if (obj_kind == HSD_GObj_JObjKind) {
             jobj = gobj->hsd_obj;
             HSD_JObjWalkTree(jobj, hsd_8039D688, NULL);
         }
@@ -257,7 +256,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         if (((effect_1 = GET_EFFECT(gobj_1)) != NULL) &&
             (effect_1->parent_gobj == gobj))
         {
-            if (effect_1->gobj->obj_kind == HSD_GObj_804D7849) {
+            if (effect_1->gobj->obj_kind == HSD_GObj_JObjKind) {
                 HSD_JObjWalkTree(effect_1->gobj->hsd_obj, hsd_8039D688, NULL);
             }
             HSD_GObjPLink_80390228(effect_1->gobj);
@@ -273,13 +272,13 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         gobj_2 = gobj_2->next;
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
             gobj_3 = effect_2->gobj;
-            if (gobj_3->obj_kind == HSD_GObj_804D7849) {
+            if (gobj_3->obj_kind == HSD_GObj_JObjKind) {
                 HSD_JObjWalkTree(gobj_3->hsd_obj, hsd_8039D688, NULL);
             }
             HSD_GObjPLink_80390228(effect_2->gobj);
         }
     }
-    if (gobj->obj_kind == HSD_GObj_804D7849) {
+    if (gobj->obj_kind == HSD_GObj_JObjKind) {
         HSD_JObjWalkTree(gobj->hsd_obj, hsd_8039D688, NULL);
     }
 }
@@ -503,7 +502,7 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
             return NULL;
         }
         {
-            u8 kind = HSD_GObj_804D7849;
+            u8 kind = HSD_GObj_JObjKind;
             HSD_GObjObject_80390A70(effect->gobj, kind, jobj);
         }
         if ((u32) (10.0F * desc->lifetime) % 10 != 0) {
@@ -1049,27 +1048,23 @@ void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
 // AppSRT transform so the particle inherits transforms from its
 // parent joint.
-void efLib_Cb_PtclAppSRTHook(HSD_Particle* particle)
+void efLib_Cb_PtclAppSRTHook(HSD_Generator* gen)
 {
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x96])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x96])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x97])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x97])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x98])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x98])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x21B])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x21B])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
 }
 

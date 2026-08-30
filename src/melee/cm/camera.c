@@ -4109,7 +4109,7 @@ void Camera_80030688(void)
     cm_804D6464 = lb_80013B14(&cm_803BCB64);
     {
         HSD_CObj* c = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, c);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, c);
     }
 
     GObj_SetupGXLinkMax(gobj, fn_800301D0, 2);

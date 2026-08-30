@@ -374,6 +374,8 @@ static void fn_803B61B4(u8* arg0)
     s32* work_r4;
     s32* work_r4_2;
 
+    PAD_STACK(8);
+
     work_r4 = (s32*) arg0;
     for (work_ctr = 8; work_ctr != 0; work_ctr--) {
         scratch_r5 = work_r4[1];
@@ -698,7 +700,7 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* quant_table;
     JpegState* base;
 
-    PAD_STACK(0x48);
+    PAD_STACK(0x40);
     base = (JpegState*) hsd_804D2E70;
     hsd_804D79C0 = arg1;
     quant_table = lbl_80431090;

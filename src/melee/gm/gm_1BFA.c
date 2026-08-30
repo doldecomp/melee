@@ -63,7 +63,7 @@ void gm_801BFA6C(GameScene* arg0)
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
 
-    temp_r31 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r31 = gm_GetGameSceneLoadData(arg0);
     temp_r3 = gm_GetChallengerData();
     temp_r31->x0 = temp_r3->x4;
     temp_r31->x1 = temp_r3->x2;
@@ -78,14 +78,14 @@ void gm_801BFABC(GameScene* arg0)
     StartMeleeData* temp_r30;
     u8 tmp;
 
-    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r30 = gm_GetGameSceneLoadData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
-    temp_r30->rules.x0_0 = 1;
+    temp_r30->rules.match_mode = 1;
     temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.xE = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
+    temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
@@ -103,7 +103,7 @@ void gm_801BFBA8(GameScene* arg0)
     u8 temp_r0;
     MatchExitInfo* mei;
 
-    mei = gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = gm_GetGameSceneLeaveData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80162968(mei->match_end.frame_count / 60);
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
@@ -166,7 +166,7 @@ void gm_801BFCFC(GameScene* arg0)
     int var_r25_2;
     void** temp_r3;
     s32 var_r30;
-    gm_GetGameSceneLoadDataCallback(arg0);
+    gm_GetGameSceneLoadData(arg0);
     var_r31 = 0;
     gm_GetChallengerData();
     var_r30 = 0;
@@ -198,7 +198,7 @@ void gm_801BFCFC(GameScene* arg0)
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
             if (gmMainLib_8015DA90(var_r25_2) == 0) {
                 u32* KP = gmMainLib_8015D970(var_r25_2);
-                *KP = lbTime_8000AFBC();
+                *KP = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r25_2);
                 Toy_SetUnlockState((s16) var_r25_2, 1);
             }
@@ -227,7 +227,7 @@ void gm_801BFCFC(GameScene* arg0)
         {
             if (gmMainLib_8015DA90(var_r27_2_s11) == 0) {
                 temp_r29_2 = gmMainLib_8015D970(var_r27_2_s11);
-                *temp_r29_2 = lbTime_8000AFBC();
+                *temp_r29_2 = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r27_2_s11);
                 Toy_SetUnlockState((s32) ((s16) var_r27_2_s11), 1);
             }

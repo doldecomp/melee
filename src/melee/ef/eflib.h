@@ -78,7 +78,7 @@ efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_list vlist);
 /* 05DB70 */ void efLib_Cb_DPtcl(int linkNo, int bank, int gfx_id,
                                  HSD_JObj* jobj);
 /* 05DBC0 */ void efLib_Cb_ParticleRender(HSD_Particle* particle);
-/* 05DCD0 */ void efLib_Cb_PtclAppSRTHook(HSD_Particle* particle);
+/* 05DCD0 */ void efLib_Cb_PtclAppSRTHook(HSD_Generator* particle);
 
 // Effect callbacks
 

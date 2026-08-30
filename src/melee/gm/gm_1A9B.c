@@ -18,7 +18,7 @@
 
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmregclear.h"
 #include "gm/gmregtyfall.h"
 #include "lb/lbaudio_ax.h"

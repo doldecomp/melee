@@ -625,7 +625,7 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     if (state->HUD_parent_entity == NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(hud->unk258);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
                          0xB, 0);
         HSD_GObj_SetupProc(gobj, ifStatus_802F5B48, 0x11);
@@ -740,7 +740,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
             HSD_ASSERTREPORT(0x30E, 0,
                              "Error : jobj dont't get (ifAddMark)\n");
         }
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5E50,
                          0xB, 0);
         state->next = gobj;
@@ -796,7 +796,7 @@ void ifStatus_802F6508(s32 arg0)
         if (rules->x3_0 && gm_8016B238() == 0) {
             un_802FF364(arg0);
         }
-        mode = rules->x0_0;
+        mode = rules->match_mode;
         if (mode == 1 || rules->x4_2) {
             ifStock_802F98E8((u8) arg0, 0);
             return;
@@ -955,7 +955,7 @@ static inline void ifStatus_TriggerStockLoss(s32 player_idx,
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
+    if (big_thing->x24C8.match_mode != 1 && big_thing->x24C8.x2_5 != 0 &&
         callback != NULL)
     {
         callback(player_idx);
@@ -967,7 +967,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     lbl_8046B6A0_t* big_thing;
 
     big_thing = gm_16AE_GetUnkData_0();
-    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0) {
+    if (big_thing->x24C8.match_mode != 1 && big_thing->x24C8.x2_5 != 0) {
         if_802F7C30(arg1);
     }
 

@@ -150,10 +150,10 @@ typedef struct lbl_8046B378_t {
 ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
-    u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
+    u32 match_mode : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
     u32 x0_6 : 1;
-    u32 x0_7 : 1; ///< timer counts up
+    u32 timer_counts_up : 1; ///< timer counts up
 
     u32 x1_0 : 1;
     u32 x1_1 : 1;
@@ -163,12 +163,12 @@ struct StartMeleeRules {
     u32 x1_5 : 1;
     u32 timer_shows_hours : 1; // false=65:00.00, true=1:05:00.00
 
-    u32 x1_7 : 1; ///< friendly fire on
+    u32 friendly_fire : 1; ///< friendly fire on
 
     u32 x2_0 : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
-    u32 x2_3 : 1;            ///< single-button mode enabled
+    u32 single_button : 1;   ///< single-button mode enabled
     u32 disable_pausing : 1; ///< When set, pausing is disabled for both active
                              ///< gameplay and pause menus. Sourced from the
                              ///< rules pause option and from several game-mode
@@ -212,9 +212,9 @@ struct StartMeleeRules {
     s8 xB; // item frequency
     s8 xC; // SD penalty
     u8 xD;
-    u16 xE; // StKind
+    u16 stkind;
 
-    u32 x10; // time limit
+    u32 time_limit; // time limit
     u8 x14;
     u32 x18;
     u32 x1C_pad[(0x20 - 0x1C) / 4];

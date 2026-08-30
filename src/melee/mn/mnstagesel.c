@@ -137,7 +137,7 @@ skip_randomize:
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->xB0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x87);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->xB4,
@@ -208,7 +208,7 @@ void mnStageSel_80259ED8(int id)
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x30.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x84);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 1);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x30.animjoint,
@@ -371,7 +371,6 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
 /// OnLoad
 /// #mnStageSel_8025A998_OnEnter
 
-extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
 static inline void make_stage_icon(HSD_JObj** out)
@@ -380,7 +379,7 @@ static inline void make_stage_icon(HSD_JObj** out)
     HSD_JObj* jobj;
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x40.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x40.animjoint,
@@ -393,7 +392,7 @@ static inline void attach_menu_model(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->xA0.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->xA0.animjoint,
@@ -407,7 +406,7 @@ static inline void make_bg_model(HSD_JObj** out)
     HSD_JObj* jobj;
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x50.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x82);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x50.animjoint,
@@ -422,7 +421,7 @@ static inline void make_icon_root(HSD_JObj** icons)
     HSD_JObj* jobj;
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x90.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x82);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 4);
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x90.animjoint,
@@ -479,7 +478,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
         {
             HSD_GObj* gobj = mnStageSel_804D6C9C = GObj_Create(2, 3, 0x80);
             HSD_CObj* cobj = HSD_CObjLoadDesc(MenMain_cam);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
             GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
             gobj->gxlink_prios = 0x11;
             HSD_GObj_SetupProc(gobj, mn_8022BA1C, 5);
@@ -493,14 +492,14 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             lobj1 = HSD_LObjLoadDesc(temp_r3->unk4);
             lobj2 = HSD_LObjLoadDesc(temp_r3->unk8);
             HSD_LObjSetNext(lobj1, lobj2);
-            HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj1);
+            HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_LightKind, lobj1);
             GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
         }
 
         {
             HSD_GObj* gobj = GObj_Create(0xE, 0xF, 0);
             HSD_Fog* fog = HSD_FogLoadDesc(temp_r3->unkC);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
             GObj_SetupGXLink(gobj, fn_8025A974, 0, 0x80);
         }
 
@@ -586,7 +585,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             s32 temp_r22_7;
             HSD_JObj* temp_r23_3;
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x20.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
             HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x20.animjoint,
@@ -614,7 +613,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
             HSD_JObj* temp_r22_8;
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x10.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
             HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x10.animjoint,
@@ -633,7 +632,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             s32 temp_r22_9;
             HSD_JObj* temp_r23_6;
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x0.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
             animjoint = mnStageSel_804D6C98->x0.animjoint;
@@ -663,7 +662,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_GObj* gobj;
             gobj = GObj_Create(4, 5, 0x80);
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x80.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x86);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 2);
             HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x80.animjoint,
@@ -688,7 +687,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_GObj* gobj;
             gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 5, 0x80);
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x30.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x84);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 1);
             HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x30.animjoint,
@@ -710,7 +709,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_JObj* jobj;
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x60.joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x81);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 1);
             HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x60.animjoint,
@@ -744,7 +743,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_JObj* temp_r3_15 =
                 HSD_JObjLoadJoint(mnStageSel_804D6C98->x70.joint);
             s32* temp_r3_16;
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, temp_r3_15);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, temp_r3_15);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x85);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 1);
             HSD_JObjAddAnimAll(temp_r3_15, mnStageSel_804D6C98->x70.animjoint,
@@ -772,7 +771,7 @@ void mnStageSel_8025B850_OnFrame(void)
 {
     if (mnStageSel_804D6C90->force_stage_id >= 0) {
         mnStageSel_804D6CAF = 2;
-        mnStageSel_804D6C90->data.data.rules.xE =
+        mnStageSel_804D6C90->data.data.rules.stkind =
             mnStageSel_804D6C90->force_stage_id;
         gm_801A4B60();
         return;
@@ -834,7 +833,7 @@ void mnStageSel_8025B850_OnFrame(void)
         gm_801A4B60();
     }
     if (mnStageSel_804D6CAF == 2) {
-        mnStageSel_804D6C90->data.data.rules.xE =
+        mnStageSel_804D6C90->data.data.rules.stkind =
             mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
         gm_801A4B60();
     }
@@ -852,7 +851,7 @@ void mnStageSel_8025BB5C_OnLeave(UNK_T unused)
     tmp->start_game = mnStageSel_804D6CAF == 2 ? true : false;
     if (tmp->start_game) {
         PreloadCacheScene* cache = lbDvd_GetPreloadCacheScene();
-        cache->game_cache.stkind = tmp->data.data.rules.xE;
+        cache->game_cache.stkind = tmp->data.data.rules.stkind;
         lbDvd_80018254();
     }
 }

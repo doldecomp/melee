@@ -807,7 +807,7 @@ void mnSoundTest_8024BCA0(int arg0)
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnSoundTest_804D6C40 = gobj;
     jobj = HSD_JObjLoadJoint(model_desc->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_JObjAddAnimAll(jobj, model_desc->animjoint, model_desc->matanim_joint,
                        model_desc->shapeanim_joint);

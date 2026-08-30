@@ -24,10 +24,11 @@
 #include <melee/mn/mnmainrule.h>
 #include <melee/sc/types.h>
 
+HSD_GObj* mnItemSw_804D6BE8;
+u8 mnItemSw_804D6BEC;
+
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
-
-extern u8 mn_804D6BB5;
 
 struct MnItemSwTable {
     /* 0x00 */ f32 x00[4][3];
@@ -425,11 +426,12 @@ static inline void mnItemSw_ReqFreqAnim(HSD_JObj* jobj,
 void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
 {
     HSD_JObj* sp44;
+    u8 arg1_ = arg1;
+    HSD_JObj* sp3C;
     u8 cursor;
     HSD_JObj* cjobj;
     MnItemSwData* data = gobj->user_data;
     struct MnItemSwTable* tbl = mnItemSw_GetTable();
-    u8 arg1_ = arg1;
     f32 x;
     u8 arg2_ = arg2;
 
@@ -509,7 +511,6 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             mnItemSw_ReqFreqAnim(data->jobjs[3], tbl,
                                  mn_804A04F0.confirmed_selection);
         } else {
-            HSD_JObj* sp3C;
             u8 confirmed = mn_804A04F0.confirmed_selection;
             HSD_JObj* jobj =
                 mnItemSw_8023405C(data, (u8) mn_804A04F0.hovered_selection);
@@ -818,7 +819,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     mnItemSw_804D6BE8 = gobj;
 
     jobj = HSD_JObjLoadJoint(mdl->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80234C24, 0);
 
@@ -893,3 +894,10 @@ void mnItemSw_802358C0(void)
     proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_80233E10, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }
+
+/// @todo Split-derived; the 48 bytes after this are pooled literals.
+u8 mnItemSw_803ED438[32] = {
+    0x05, 0x12, 0x0A, 0x1E, 0x0D, 0x18, 0x03, 0x0E, 0x17, 0x1B, 0x01,
+    0x09, 0x08, 0x07, 0x15, 0x04, 0x06, 0x02, 0x0F, 0x00, 0x11, 0x0B,
+    0x1F, 0x1A, 0x14, 0x19, 0x10, 0x16, 0x13, 0x1D, 0x0C, 0x00,
+};

@@ -28,6 +28,31 @@
 #include <melee/mn/mndiagram3.h>
 #include <melee/mn/mnmain.h>
 
+GXColor mnDiagram2_804D4FB8 = { 0, 0, 0, 0xFF };
+GXColor mnDiagram2_804D4FBC = { 0xFF, 0xC8, 0, 0xFF };
+
+MnDiagram2RowLayout mnDiagram2_803EEAD0 = {
+    { -2.5f, 0.3f, 0.0f },
+    { -2.2f, 0.5f, 0.0f },
+    { -1.0f, 0.5f, 0.0f },
+    { -2.0f, 0.0f, 0.0f },
+    {
+        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
+        86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
+    },
+    {
+        122, 122, 122, 124, 124, 124, 124, 124, 122, 122,    122,    0xFFFF,
+        124, 123, 126, 126, 126, 126, 125, 125, 125, 0xFFFF, 0xFFFF, 0xFFFF,
+    },
+};
+
+AnimLoopSettings mnDiagram2_803EEB60[2] = {
+    { 10.0f, 19.0f, -0.1f },
+    { 0.0f, 199.0f, 0.0f },
+};
+
+HSD_GObj* mnDiagram2_804D6C18;
+
 /* GetPersistentNameData and GetPersistentFighterData are in gm/gmmain_lib.h */
 
 /* From mnname.c; this TU sees a narrower GetNameText parameter (codegen
@@ -177,7 +202,7 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
     void* tmp;
     HSD_JObj* jobj;
     u8 nametag_slot_or_selkind;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     data = gobj->user_data;
     if (is_name_mode != 0) {
@@ -215,7 +240,7 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
     }
 
     {
-        f32 font = mnDiagram2_804DBFC8;
+        f32 font = 0.045f;
         text->font_size.x = font;
         text->font_size.y = font;
     }
@@ -293,7 +318,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode ^ 0);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
@@ -306,8 +331,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        x48 = data2->is_name_mode;
-        gmMainLib_GetGameRules()->xD = x48;
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode ^ 0);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         HSD_GObjPLink_80390228(gobj);
         if (result & 0x40) {
@@ -318,13 +342,13 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         return;
     }
 
+    var_r28 = 0;
     if (result & 0xC00) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
         }
         sfxForward();
-        var_r28 = 0;
         if (data->is_name_mode == 0) {
             var_r28 = 1;
         }
@@ -618,13 +642,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     data = user_data;
     base = &mnDiagram2_803EEAD0;
 
-    jobj = data->row0_ref;
-    HSD_ASSERT(0x3EE, jobj);
-    f31 = jobj->translate.y;
-
-    jobj = data->row1_ref;
-    HSD_ASSERT(0x3EE, jobj);
-    f30 = jobj->translate.y - f31;
+    f31 = HSD_JObjGetTranslationY(data->row0_ref);
+    f30 = HSD_JObjGetTranslationY(data->row1_ref) - f31;
 
     lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
 
@@ -632,8 +651,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         u32 r22 = row_idx;
         f32 ny = -sp20.y;
         f32 temp_f31 = -f30 * (f32) r22;
-        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z,
-                                   mnDiagram2_804DBFD0, mnDiagram2_804DBFD4);
+        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z, 320.0f,
+                                   240.0f);
 
         {
             data->row_labels[row_idx] = text;
@@ -650,9 +669,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         {
                             f32 py2 = -sp20.y + temp_f31;
                             text2 = HSD_SisLib_803A5ACC(
-                                0, 1, mnDiagram2_804DBFD8 + sp20.x, py2,
-                                sp20.z, mnDiagram2_804DBFDC,
-                                mnDiagram2_804DBFDC);
+                                0, 1, 12.0f + sp20.x, py2, sp20.z, 1.0f, 1.0f);
                         }
 
                         data->row_icons[row_idx] = text2;
@@ -697,8 +714,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 {
                     HSD_Text* text3 = HSD_SisLib_803A6754(0, 1);
                     data->row_values[row_idx] = text3;
-                    text3->font_size.x = mnDiagram2_804DBFE0;
-                    text3->font_size.y = mnDiagram2_804DBFE4;
+                    text3->font_size.x = 0.03f;
+                    text3->font_size.y = 0.035f;
                     lb_8000B1CC(data->icon_parent, &base->value_pos, &sp20);
                     {
                         f32 py = -sp20.y + temp_f31;
@@ -760,13 +777,15 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         }
                     }
 
-                    HSD_SisLib_803A6B98(text3, mnDiagram2_804DBFCC,
-                                        mnDiagram2_804DBFCC, (char*) str);
+                    HSD_SisLib_803A6B98(text3, 0.0f, 0.0f, (char*) str);
                 }
             }
         }
     }
 }
+
+/// SJIS "－", written into the stat string when a value is unavailable.
+u8 mnDiagram2_804D4FD0[3] = { 0x81, 0x7C, 0 };
 
 /// @brief Populates all 10 visible stat rows in the diagram.
 /// @param gobj The diagram GObj
@@ -999,10 +1018,10 @@ void mnDiagram2_Create(int arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
     jobj = HSD_JObjLoadJoint(archive->x0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
-    HSD_JObjReqAnimAll(jobj, mnDiagram2_804DBFCC);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
 
     user_data = (Diagram2*) HSD_MemAlloc(sizeof(Diagram2));
     HSD_ASSERTREPORT(0x3E6, user_data, "Can't get user_data.\n");

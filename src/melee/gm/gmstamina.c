@@ -1,7 +1,5 @@
 #include "gmstamina.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
 
@@ -20,7 +18,7 @@
 GameScene gm_803DF138_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801B91C8,
         gm_801B922C,
@@ -32,7 +30,7 @@ GameScene gm_803DF138_Scenes[] = {
     },
     {
         1,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801B9254,
         gm_801B927C,
@@ -44,7 +42,7 @@ GameScene gm_803DF138_Scenes[] = {
     },
     {
         2,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801B931C,
         gm_801B9560,
@@ -66,7 +64,7 @@ static struct {
 void gm_801B91C8(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* css = gm_GetGameSceneLoadData(arg0);
     css->match_type = 2;
     css->ko_star_counts = 0;
     css->data = *vs;
@@ -86,7 +84,7 @@ void gm_801B9254(GameScene* scene)
 void gm_801B927C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    SSSData* sss = gm_GetGameSceneLeaveDataCallback(arg0);
+    SSSData* sss = gm_GetGameSceneLeaveData(arg0);
     if (sss->start_game != 0) {
         *vs = sss->data;
 
@@ -101,7 +99,7 @@ void gm_801B927C(GameScene* arg0)
 void gm_801B931C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    StartMeleeData* start = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* start = gm_GetGameSceneLoadData(arg0);
     int i;
 
     gm_80167BC8(vs);
@@ -110,7 +108,7 @@ void gm_801B931C(GameScene* arg0)
 
     start->rules.x2_5 = false;
     start->rules.x0_6 = false;
-    start->rules.x0_0 = 1;
+    start->rules.match_mode = 1;
     start->rules.x44 = fn_801B9850;
     start->rules.x3_0 = false;
     gm_80167A14(start->players);

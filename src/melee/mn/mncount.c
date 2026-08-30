@@ -735,7 +735,7 @@ static inline void fn_80251640_InitModel(HSD_GObj* gobj, MnCountData* userdata,
     }
     md = &model_desc;
     jobj = HSD_JObjLoadJoint(md->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
                        md->shapeanim_joint);

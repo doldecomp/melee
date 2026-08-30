@@ -706,9 +706,9 @@ void fn_8016A488(int arg0)
     }
 }
 
-static inline int fn_8016A4C8_spawn_offset(void)
+static inline int getSpawnPointIndex(int spawn_slot)
 {
-    return lbl_8046B488.xA - 1;
+    return spawn_slot + lbl_8046B488.xA - 1;
 }
 
 static inline f32 fn_8016A4C8_attack_ratio(void)
@@ -736,17 +736,30 @@ static inline int roll_cpu_type(void)
     return cpu_type;
 }
 
+static inline s8 findMatchingController(int spawn_slot, int costume_id)
+{
+    s8 chr = Player_GetPlayerCharacter(spawn_slot);
+    s32 matching_slot;
+
+    for (matching_slot = 0; matching_slot < 6; matching_slot++) {
+        if (Player_GetPlayerSlotType(matching_slot) != Gm_PKind_NA &&
+            Player_GetFlagsBit1(matching_slot) == 0 &&
+            chr == Player_GetPlayerCharacter(matching_slot) &&
+            costume_id == (s32) Player_GetCostumeId(matching_slot))
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8016A4C8(void)
 {
     struct lbl_8046B488_t* gp;
     s32 has_active_spawn;
-    s8 chr;
     s32 spawn_enabled;
-    s8 controller_index;
     f32 facing_dir;
     Vec3 spawn_pos;
-    s8 cos;
-    s32 matching_slot;
     s32 spawn_slot;
 
     PAD_STACK(0xC4);
@@ -775,33 +788,19 @@ void fn_8016A4C8(void)
                 lbl_8046B488.x1A6[spawn_slot] = gm_80169384();
                 Player_SetFlagsBit1(spawn_slot);
                 Player_SetTeam(spawn_slot, 4);
-                Ground_801C2D24(spawn_slot + fn_8016A4C8_spawn_offset(),
-                                &spawn_pos);
+                Ground_801C2D24(getSpawnPointIndex(spawn_slot), &spawn_pos);
                 spawn_pos.y = Stage_GetCamBoundsTopOffset();
                 Player_80032768(spawn_slot, &spawn_pos);
                 Player_SetSlottype(spawn_slot, Gm_PKind_Cpu);
                 Player_SetPlayerCharacter(spawn_slot, gp->xA2[gm_80169384()]);
                 Player_SetStocks(spawn_slot, 1);
-                cos = gp->x20[gm_80169384()];
-                Player_SetCostumeId(spawn_slot, cos);
-                chr = Player_GetPlayerCharacter(spawn_slot);
-                matching_slot = 0;
-            find_matching_controller:
-                if (Player_GetPlayerSlotType(matching_slot) != Gm_PKind_NA &&
-                    Player_GetFlagsBit1(matching_slot) == 0 &&
-                    chr == Player_GetPlayerCharacter(matching_slot) &&
-                    cos == (s32) Player_GetCostumeId(matching_slot))
                 {
-                    controller_index = 1;
-                } else {
-                    matching_slot += 1;
-                    if (matching_slot >= 6) {
-                        controller_index = 0;
-                    } else {
-                        goto find_matching_controller;
-                    }
+                    int costume_id = gp->x20[gm_80169384()];
+                    Player_SetCostumeId(spawn_slot, costume_id);
+                    Player_SetControllerIndex(
+                        spawn_slot,
+                        findMatchingController(spawn_slot, costume_id));
                 }
-                Player_SetControllerIndex(spawn_slot, controller_index);
                 {
                     u8 more_flags = gp->xF;
                     Player_SetMoreFlagsBit6(spawn_slot, more_flags);

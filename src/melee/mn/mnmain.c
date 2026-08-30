@@ -2,6 +2,10 @@
 
 #include "dolphin/pad.h"
 
+#include "gm/forward.h"
+
+#include "gm/gmevent.h"
+
 #include "mn/forward.h"
 
 #include "mn/types.h"
@@ -791,7 +795,7 @@ HSD_GObj* mn_80229B2C(void)
 
     temp_r30 = GObj_Create(4, 5, 0x80);
     temp_r3 = HSD_JObjLoadJoint(MenMainBack_Top.joint);
-    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3);
+    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_JObjKind, temp_r3);
     GObj_SetupGXLink(temp_r30, HSD_GObj_JObjCallback, 2, 0x80);
     HSD_GObj_SetupProc(temp_r30, mn_8022EAE0, 0);
     HSD_JObjAddAnimAll(temp_r3, MenMainBack_Top.animjoint,
@@ -882,7 +886,7 @@ HSD_GObj* mn_80229DC0(void)
 
     temp_r31 = GObj_Create(5, 6, 0x80);
     temp_r3 = HSD_JObjLoadJoint(MenMainPanel_Top.joint);
-    HSD_GObjObject_80390A70(temp_r31, HSD_GObj_804D7849, temp_r3);
+    HSD_GObjObject_80390A70(temp_r31, HSD_GObj_JObjKind, temp_r3);
     GObj_SetupGXLink(temp_r31, HSD_GObj_JObjCallback, 3, 0x80);
     HSD_GObj_SetupProc(temp_r31, fn_80229BF4, 0);
     HSD_JObjAddAnimAll(temp_r3, MenMainPanel_Top.animjoint,
@@ -1420,7 +1424,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     unlocked_count = CountUnlockedSelections(cur_menu);
     gobj = GObj_Create(6, 7, 0x80);
     root_jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_8022AFEC, 0);
     HSD_JObjAddAnimAll(root_jobj, model->animjoint, model->matanim_joint,
@@ -1610,7 +1614,7 @@ HSD_GObj* mn_8022BCF8(void)
     gobj = GObj_Create(1, 2, 0x80);
     mn_804D6BA8 = gobj;
     fog = HSD_FogLoadDesc(MenMain_fog);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(gobj, fn_8022BCD4, 1, 0x80);
     return gobj;
 }
@@ -1648,7 +1652,7 @@ HSD_GObj* mn_8022BE34(void)
     mn_804D6BAC = gobj;
     cobj = HSD_CObjLoadDesc(MenMain_cam);
     HSD_CObjGetEyePosition(cobj, &pos);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_8022BDB4, 0);
     gobj->gxlink_prios = 0x7F;
     HSD_GObj_SetupProc(gobj, mn_8022BA1C, 0);
@@ -1664,7 +1668,7 @@ static inline HSD_GObj* mn_8022BE34_OnEnter(void)
     mn_804D6BAC = gobj;
     cobj = HSD_CObjLoadDesc(MenMain_cam);
     HSD_CObjGetEyePosition(cobj, (Vec3*) ((u8*) &pos + 0x14));
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_8022BDB4, 0);
     gobj->gxlink_prios = 0x7F;
     HSD_GObj_SetupProc(gobj, mn_8022BA1C, 0);
@@ -1680,7 +1684,7 @@ void mn_8022BEDC(HSD_GObj* gobj)
     temp_r3 = GObj_Create(2, 3, 0x80);
     mn_804D6BB0 = temp_r3;
     cobj = HSD_CObjLoadDesc(MenMain_cam);
-    HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(temp_r3, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(temp_r3, HSD_GObj_803910D8, 0);
     temp_r3->gxlink_prios = 0x80;
     HSD_GObj_SetupProc(temp_r3, mn_8022BA1C, 0);
@@ -1839,7 +1843,7 @@ void mn_8022C304(void)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
     HSD_GObj_SetupProc(gobj, fn_8022C128, 0);
     lobj = lb_80011AC4(MenMain_lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     mn_804A04F0.light_lerp_frames = 0;
     mn_804A04F0.light_color = mn_8022BFBC(
         mn_8022C010(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
@@ -2747,19 +2751,20 @@ static inline void mn_8022DDA8_inline(const u16* sp2B4)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
     HSD_GObj_SetupProc(gobj, fn_8022C128, 0);
     lobj = lb_80011AC4(MenMain_lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     mn_804A04F0.light_lerp_frames = 0;
     temp_r29 = mn_8022C010(mn_804A04F0.cur_menu, *sp2B4);
     mn_804A04F0.light_color = mn_8022BFBC(temp_r29);
     mn_8022C068(lobj, temp_r29, mn_804A04F0.light_lerp_frames);
 }
 
-void mn_8022DDA8_OnEnter(MenuEnterData* data)
+void mn_8022DDA8_OnEnter(void* user_data)
 {
     u16* hovered_selection;
     HSD_GObj* temp_r3_8;
     u8 menu_kind;
     void (*var_r4)(HSD_GObj*);
+    MenuEnterData* data = user_data;
 
     u8 _[0x14];
 

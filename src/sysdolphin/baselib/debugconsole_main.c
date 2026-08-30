@@ -10,6 +10,7 @@
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
+#include <sysdolphin/baselib/wobj.h>
 
 #ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>
@@ -63,9 +64,8 @@ struct ParticleScreenState {
     /* 0xD4 */ OSContext* xD4;
 };
 
-extern u8 lbl_804088B8[];
-/* 4D78C8 */ extern int hsd_804D78C8;
-/* 4D78CC */ extern u32 hsd_804D78CC;
+/* 4D78C8 */ int hsd_804D78C8;
+/* 4D78CC */ u32 hsd_804D78CC;
 
 /* 4CF810 */ static struct ParticleScreenState hsd_804CF810;
 
@@ -605,7 +605,7 @@ void hsd_80394314(void)
     sp->x20 = (u32) (sp->x3C - 0x28) / 11;
     sp->x1C = (u32) (sp->x40 - 0x50) / 14;
 #endif
-    sp->x4C = lbl_804088B8;
+    sp->x4C = HSD_DebugFontAtlas;
     sp->x50 = 0;
     sp->xC4 = 0;
 }
@@ -2517,7 +2517,6 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 99.78% match - register allocation differences remain
 void hsd_803975D4(void)
 {
     struct ParticleInputState {
@@ -2532,7 +2531,6 @@ void hsd_803975D4(void)
     u32 reset_mask;
     s32 port;
     u16 buttons;
-    u16 changed;
     u32 new_press;
 
     reset_mask = 0;
@@ -2569,11 +2567,16 @@ void hsd_803975D4(void)
     }
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
+    /* keeps pads a real local instead of a CSE temp; see reg alloc */
+    (void) pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed =
-        pads[((struct ParticleInputState*) sp)->port + 4].button ^ buttons;
+    new_press =
+        (u16) (buttons &
+               ((&((PADStatus*)
+                       sp->_pad4)[4])[((struct ParticleInputState*) sp)->port]
+                    .button ^
+                buttons));
     sp->xC0 = buttons;
-    new_press = (u16) (buttons & changed);
     if (new_press != 0) {
         ((struct ParticleInputState*) sp)->repeat = 0;
     } else if (pads[((struct ParticleInputState*) sp)->port].button != 0) {
@@ -2792,8 +2795,8 @@ void* fn_80397814(void* arg)
         hsd_80394544(hsd_804CF810.x18, hsd_804CF810.x14, hsd_804CF810.x20,
                      hsd_804CF810.x1C, 20, hsd_804CF810.x40 - 40,
                      (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
-                     hsd_804CF810.x40, hsd_804CF810.x44, (s32) lbl_804088B8,
-                     NULL);
+                     hsd_804CF810.x40, hsd_804CF810.x44,
+                     (s32) HSD_DebugFontAtlas, NULL);
 
         hsd_804CF810.xC8 = 0;
         hsd_804CF810.xCC = hsd_804CF810.x1C - 1;
@@ -2825,7 +2828,7 @@ void* fn_80397814(void* arg)
             next_retrace2 = VIGetRetraceCount();
         } while (next_retrace2 == retrace2);
         retrace2 = next_retrace2;
-        lbl_ptr = lbl_804088B8;
+        lbl_ptr = HSD_DebugFontAtlas;
 
         /* Main rendering loop */
         while (*keybuf != 0) {
@@ -3155,7 +3158,27 @@ void fn_803982E4(HSD_GObj* gobj, int unused)
     hsd_8039254C();
 }
 
-static HSD_CObjDesc lbl_8040BF70 = { 0 };
+HSD_WObjDesc lbl_8040BF48 = { NULL, { 0.0f, 0.0f, 1.0f }, NULL };
+HSD_WObjDesc lbl_8040BF5C = { NULL, { 0.0f, 0.0f, 0.0f }, NULL };
+
+/// @todo Ortho camera; typed as the frustum arm of the HSD_CObjDesc union.
+static HSD_CameraDescFrustum lbl_8040BF70 = {
+    NULL,
+    0,
+    3,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &lbl_8040BF48,
+    &lbl_8040BF5C,
+    0.0f,
+    NULL,
+    0.0f,
+    32768.0f,
+    -445.0f,
+    35.0f,
+    -20.0f,
+    620.0f,
+};
 
 HSD_GObj* hsd_80398310(u16 class_id, u8 p_link, u8 obj_kind, u32 gx_link)
 {
@@ -3166,8 +3189,8 @@ HSD_GObj* hsd_80398310(u16 class_id, u8 p_link, u8 obj_kind, u32 gx_link)
     if (gobj == NULL) {
         return NULL;
     }
-    cobj = HSD_CObjLoadDesc(&lbl_8040BF70);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_8040BF70);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_803982E4, gx_link);
     hsd_80392528((Event) fn_80392A3C);
     fn_80392A08(4, 1, 0);

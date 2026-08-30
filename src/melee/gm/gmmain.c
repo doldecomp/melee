@@ -202,7 +202,7 @@ int main(void)
     OSReport("# %s\n", db_build_timestamp);
     {
         struct datetime dt;
-        gm_801692E8(lbTime_8000AFBC(), &dt);
+        gm_801692E8(lbTime_GetTimeInSeconds(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
                  dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,
