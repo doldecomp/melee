@@ -25,6 +25,10 @@ typedef struct JpegState {
     JpegWorkData work;
 } JpegState;
 
+typedef struct JpegLumaRow {
+    s32 values[16];
+} JpegLumaRow;
+
 typedef struct JpegQuantTables {
     u8 luma[0x40];
     u8 chroma[0x40];
@@ -494,12 +498,12 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     s32 work_ctr_2;
     s32 work_r10;
     s32 work_r12;
+    s32 work_r5;
+    s32 work_r6;
     s32 work_r21;
     s32 work_r22;
     u32 work_r31;
     s32 work_r4;
-    s32 work_r5;
-    s32 work_r6;
     s32 work_r7;
     u8* work_r8;
     u8* work_r9;
@@ -509,38 +513,38 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     for (work_r10 = 0; work_r10 < 4; work_r10++) {
         work_r8 = work_r9;
         for (work_ctr = 4; work_ctr != 0; work_ctr--) {
-            M2C_FIELD(work_r8, s32*, 0) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0) + 0x80);
-            M2C_FIELD(work_r8, s32*, 4) =
-                (s32) (M2C_FIELD(work_r8, s32*, 4) + 0x80);
-            M2C_FIELD(work_r8, s32*, 8) =
-                (s32) (M2C_FIELD(work_r8, s32*, 8) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0xC) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0xC) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x10) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x10) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x14) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x14) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x18) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x18) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x1C) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x1C) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x20) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x20) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x24) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x24) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x28) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x28) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x2C) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x2C) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x30) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x30) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x34) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x34) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x38) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x38) + 0x80);
-            M2C_FIELD(work_r8, s32*, 0x3C) =
-                (s32) (M2C_FIELD(work_r8, s32*, 0x3C) + 0x80);
+            temp_v = ((JpegLumaRow*) work_r8)->values[0];
+            ((JpegLumaRow*) work_r8)->values[0] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[1];
+            ((JpegLumaRow*) work_r8)->values[1] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[2];
+            ((JpegLumaRow*) work_r8)->values[2] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[3];
+            ((JpegLumaRow*) work_r8)->values[3] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[4];
+            ((JpegLumaRow*) work_r8)->values[4] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[5];
+            ((JpegLumaRow*) work_r8)->values[5] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[6];
+            ((JpegLumaRow*) work_r8)->values[6] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[7];
+            ((JpegLumaRow*) work_r8)->values[7] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[8];
+            ((JpegLumaRow*) work_r8)->values[8] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[9];
+            ((JpegLumaRow*) work_r8)->values[9] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[10];
+            ((JpegLumaRow*) work_r8)->values[10] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[11];
+            ((JpegLumaRow*) work_r8)->values[11] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[12];
+            ((JpegLumaRow*) work_r8)->values[12] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[13];
+            ((JpegLumaRow*) work_r8)->values[13] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[14];
+            ((JpegLumaRow*) work_r8)->values[14] = temp_v + 0x80;
+            temp_v = ((JpegLumaRow*) work_r8)->values[15];
+            ((JpegLumaRow*) work_r8)->values[15] = temp_v + 0x80;
             work_r8 += 0x40;
         }
         work_r9 += 0x100;
