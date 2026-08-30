@@ -454,7 +454,8 @@ static void Item_802676F4(HSD_GObj* gobj)
 
 static /// @remarks #Item_8026862C loads two integers into this,
        ///          but the second one goes _?
-    bool Item_8026784C(enum_t dropItem, int _)
+    bool
+    Item_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -804,7 +805,8 @@ static void Item_8026814C(HSD_GObj* gobj)
 }
 
 static /// @todo Needs some serious cleaning.
-    bool Item_802682F0(HSD_GObj* gobj)
+    bool
+    Item_802682F0(HSD_GObj* gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -940,10 +942,10 @@ static void foobar3(HSD_GObj* gobj)
         }
         cam_box = it->x520_cameraBox;
         if (cam_box != NULL) {
-            cam_box->x40.x = it_804D6D28->x14C;
-            cam_box->x40.y = it_804D6D28->x150;
-            cam_box->x48.x = it_804D6D28->x154;
-            cam_box->x48.y = it_804D6D28->x158;
+            cam_box->target_ext.h.x = it_804D6D28->x14C;
+            cam_box->target_ext.h.y = it_804D6D28->x150;
+            cam_box->target_ext.v.x = it_804D6D28->x154;
+            cam_box->target_ext.v.y = it_804D6D28->x158;
         }
     }
 }
@@ -1466,8 +1468,8 @@ static void Item_80269A9C(HSD_GObj* gobj)
     if (item_data->xDCD_flag.b01 != 0) {
         CmSubject* CmSubject = item_data->x520_cameraBox;
         if (CmSubject != NULL) {
-            CmSubject->x10 = item_data->pos;
-            CmSubject->x1C = item_data->pos;
+            CmSubject->pos = item_data->pos;
+            CmSubject->bone_pos = item_data->pos;
         }
     }
     it_80271A58(gobj);
@@ -1492,7 +1494,8 @@ static void Item_80269B60(HSD_GObj* gobj)
 static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
        /// Beam,
     ///          rather items such as the Barrel Cannon.
-    void Item_80269BE4(HSD_GObj* gobj)
+    void
+    Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.b5) {

@@ -8,9 +8,11 @@
 #include "types.h"
 
 #include <platform.h>
-#include "cm/forward.h"
 
 #include "cm/camera.h"
+
+#include "cm/forward.h"
+
 #include "cm/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -800,20 +802,20 @@ void grPura_80212CD4(HSD_GObj* arg0)
             if ((gp->u.pura3.x128[i] = Camera_80029020()) != NULL) {
                 gp->u.pura3.xC4[i] = node;
                 lb_8000B1CC(gp2->u.pura3.xC4[i], NULL, &subject_pos);
-                gp->u.pura3.x128[i]->x10 = subject_pos;
+                gp->u.pura3.x128[i]->pos = subject_pos;
                 if (HSD_JObjGetFlags(node) & 0x10) {
                     gp->u.pura3.x128[i]->state = CmSubjectState_Inactive;
                 } else {
                     gp->u.pura3.x128[i]->state = CmSubjectState_Active;
                 }
-                gp->u.pura3.x128[i]->x48.x = 30.0f;
-                gp->u.pura3.x128[i]->x48.y = -30.0f;
-                gp->u.pura3.x128[i]->x40.x = -30.0f;
-                gp->u.pura3.x128[i]->x40.y = 30.0f;
+                gp->u.pura3.x128[i]->target_ext.v.x = 30.0f;
+                gp->u.pura3.x128[i]->target_ext.v.y = -30.0f;
+                gp->u.pura3.x128[i]->target_ext.h.x = -30.0f;
+                gp->u.pura3.x128[i]->target_ext.h.y = 30.0f;
                 {
                     CmSubject* subject = gp->u.pura3.x128[i];
-                    subject->x2C = subject->x40;
-                    subject->x34 = subject->x48;
+                    subject->ext.h = subject->target_ext.h;
+                    subject->ext.v = subject->target_ext.v;
                 }
             }
         }
@@ -830,7 +832,7 @@ void grPura_80212EF4(HSD_GObj* arg0)
     for (i = 0; i < 25; i++) {
         if (gp->u.pura3.xC4[i] != NULL && gp->u.pura3.x128[i] != NULL) {
             lb_8000B1CC(gp2->u.pura3.xC4[i], NULL, &spC);
-            gp->u.pura3.x128[i]->x10 = spC;
+            gp->u.pura3.x128[i]->pos = spC;
             if (HSD_JObjGetFlags(gp2->u.pura3.xC4[i]) & 0x10) {
                 gp->u.pura3.x128[i]->state = CmSubjectState_Inactive;
             } else {

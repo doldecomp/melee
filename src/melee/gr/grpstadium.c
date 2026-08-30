@@ -237,13 +237,13 @@ void fn_801D11E4(Ground_GObj* gobj)
     if (cam != NULL) {
         float scale = Ground_801C0498();
         gp->u.display.xF4->state = CmSubjectState_Inactive;
-        gp->u.display.xF4->x10.x = 0;
-        gp->u.display.xF4->x10.y = 30 * scale;
-        gp->u.display.xF4->x10.z = 0;
-        gp->u.display.xF4->x40.x = -25 * scale;
-        gp->u.display.xF4->x40.y = +25 * scale;
-        gp->u.display.xF4->x48.x = +10 * scale;
-        gp->u.display.xF4->x48.y = -10 * scale;
+        gp->u.display.xF4->pos.x = 0;
+        gp->u.display.xF4->pos.y = 30 * scale;
+        gp->u.display.xF4->pos.z = 0;
+        gp->u.display.xF4->target_ext.h.x = -25 * scale;
+        gp->u.display.xF4->target_ext.h.y = +25 * scale;
+        gp->u.display.xF4->target_ext.v.x = +10 * scale;
+        gp->u.display.xF4->target_ext.v.y = -10 * scale;
     }
 }
 

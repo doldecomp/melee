@@ -201,15 +201,15 @@ void grOnett_801E3930(Ground_GObj* gobj)
     mpJointSetCb1(1, gp, grOnett_801E54B4);
     gp->u.onett.subject = Camera_80029020();
     HSD_ASSERTMSG(331, gp->u.onett.subject, "gp->u.map.subject");
-    gp->u.onett.subject->x40.x = -40.0f;
-    gp->u.onett.subject->x40.y = 40.0f;
-    gp->u.onett.subject->x48.x = 20.0f;
-    gp->u.onett.subject->x48.y = -20.0f;
-    gp->u.onett.subject->x48.z = 1.0f;
-    gp->u.onett.subject->x10.x = 0.0f;
-    gp->u.onett.subject->x10.y = 0.0f;
-    gp->u.onett.subject->x10.z = 0.0f;
-    gp->u.onett.subject->x1C = gp->u.onett.subject->x10;
+    gp->u.onett.subject->target_ext.h.x = -40.0f;
+    gp->u.onett.subject->target_ext.h.y = 40.0f;
+    gp->u.onett.subject->target_ext.v.x = 20.0f;
+    gp->u.onett.subject->target_ext.v.y = -20.0f;
+    gp->u.onett.subject->target_ext.v.z = 1.0f;
+    gp->u.onett.subject->pos.x = 0.0f;
+    gp->u.onett.subject->pos.y = 0.0f;
+    gp->u.onett.subject->pos.z = 0.0f;
+    gp->u.onett.subject->bone_pos = gp->u.onett.subject->pos;
     gp->u.onett.subject->state = CmSubjectState_Inactive;
 }
 

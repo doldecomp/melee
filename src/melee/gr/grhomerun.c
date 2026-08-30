@@ -330,14 +330,14 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         subject = ftLib_80086B74(fighter);
         if (subject != NULL) {
             subject->state = CmSubjectState_Inactive;
-            subject->xC_b1 = 1;
+            subject->force_inactive = 1;
         }
         fighter = Ground_GetP1Fighter2();
         if (fighter != NULL) {
             subject = ftLib_80086B74(fighter);
             if (subject != NULL) {
                 subject->state = CmSubjectState_Inactive;
-                subject->xC_b1 = 1;
+                subject->force_inactive = 1;
             }
         }
     } else {
