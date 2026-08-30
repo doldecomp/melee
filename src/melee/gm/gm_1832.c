@@ -11,20 +11,14 @@
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
-#include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
-#include "if/ifall.h"
-#include "if/ifstatus.h"
 
-#include "it/forward.h"
 
 #include "it/item.h"
-#include "it/itspawn.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "lb/lb_0195.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
@@ -32,9 +26,7 @@
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnname.h"
-#include "mn/types.h"
 #include "mp/mpcoll.h"
-#include "pl/pl_040D.h"
 #include "pl/player.h"
 #include "sc/types.h"
 
@@ -54,7 +46,6 @@
 #include <baselib/tobj.h>
 #include <baselib/util.h>
 #include <baselib/wobj.h>
-#include <Runtime/runtime.h>
 
 static struct {
     int x0;
