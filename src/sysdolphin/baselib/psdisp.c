@@ -1860,8 +1860,8 @@ static inline void psUpdateBillboardAxes(const Mtx inv_view)
     f32 right;
     f32 up;
 
-    right = inv_view[0][0];
     up = inv_view[0][1];
+    right = inv_view[0][0];
     HSD_PSDisp_804D7914 = right + up;
     HSD_PSDisp_804D7918 = right - up;
     right = inv_view[1][0];
@@ -1908,10 +1908,10 @@ static inline void psUpdateProjectionCache(f32 perspective)
         y_offset = prj[4];
         y0 = y_offset * w0;
         y1 = y_offset * w1;
-        y2 = y_offset * w2;
+        y2 = w2 * y_offset;
         y3 = y_offset * w3;
-        pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
-        pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
+        pvmtx[1][0] = vmtx[1][0] * y_scale + y0;
+        pvmtx[1][1] = vmtx[1][1] * y_scale + y1;
         pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
         pvmtx[1][3] = y_scale * vmtx[1][3] + y3;
     } else {
