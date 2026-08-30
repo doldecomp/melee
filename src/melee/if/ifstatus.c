@@ -740,10 +740,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     Vec3* vec;
     HSD_MObj* mobj;
     HudIndex* hud = ifStatus_GetHUDInfo();
-    u8 slot;
     GXColor color;
-    u8 hud_color;
-    u8 team;
     u8 idx = player_idx;
 
     PAD_STACK(16);
@@ -782,11 +779,9 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     vec = ifAll_GetPlayerHUDPosition(idx);
     HSD_JObjSetTranslate(jobj, vec);
     HSD_JObjAddTranslationX(jobj, 0.25f);
-    slot = Player_GetPlayerSlotType(idx);
-    hud_color = gm_8016B168();
-    team = Player_GetTeam(idx);
     color = gm_80160968(
-        gm_80160854(Player_GetPlayerId(idx), team, hud_color, slot));
+        gm_80160854(Player_GetPlayerId(idx), Player_GetTeam(idx),
+                    gm_8016B168(), Player_GetPlayerSlotType(idx)));
     mobj = HSD_JObjGetChild(jobj)->u.dobj->mobj;
     mobj->mat->diffuse.r = color.r;
     mobj->mat->diffuse.g = color.g;
