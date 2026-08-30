@@ -1931,8 +1931,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         PSMTXInverse(vmtx, rvmtx);
                         {
                             f32 w0;
-                            f32 x_scale;
                             f32 x_offset;
+                            f32 x_scale;
                             f32 w1;
                             f32 y_offset;
                             f32 y_scale;
