@@ -720,7 +720,7 @@ void gm_Mode_Classic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetSceneIndex(0x70U);
+    gm_SetGameModeStateId(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
@@ -759,7 +759,7 @@ void gmClassic_801B3500(GameModeState* arg0)
     s8 ckind;
     gm_803DDEC8Struct* new_var;
 
-    sd = gm_GetGameSceneLoadData(arg0);
+    sd = gm_GetGameModeStateEnterData(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     new_var = entry;
     ad = gm_GetAllStarData();
@@ -924,7 +924,7 @@ void gmClassic_801B3A34(GameModeState* arg0)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
@@ -965,7 +965,7 @@ void gmClassic_801B3B40(GameModeState* arg0)
     s32 mask;
     PAD_STACK(4);
 
-    mei = (MatchExitInfo*) gm_GetGameSceneLeaveData(arg0);
+    mei = (MatchExitInfo*) gm_GetGameModeStateExitData(arg0);
     asd = gm_GetAllStarData();
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     exit_result = mei->x8;
@@ -1025,19 +1025,19 @@ void gmClassic_801B3B40(GameModeState* arg0)
 
 void gmClassic_801B3D44(GameModeState* scene)
 {
-    struct DebugGameOverData* temp_r31 = gm_GetGameSceneLoadData(scene);
+    struct DebugGameOverData* temp_r31 = gm_GetGameModeStateEnterData(scene);
     gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
 void gmClassic_801B3D84(GameModeState* scene)
 {
-    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    DebugGameOverData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
 void gmClassic_801B3DD8(GameModeState* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadData(scene);
+    CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -1047,7 +1047,7 @@ void gmClassic_801B3DD8(GameModeState* scene)
 
 void gmClassic_801B3E44(GameModeState* scene)
 {
-    CSSData* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    CSSData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;
@@ -1065,7 +1065,7 @@ void gmClassic_801B3E44(GameModeState* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
+    gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
 

@@ -28,8 +28,8 @@ GameModeState gm_Mode_HanyuCss_States[] = {
 
 void gm_801BED3C(GameModeState* arg0)
 {
-    CSSData* temp_r31 = gm_GetGameSceneLoadData(arg0);
-    temp_r31->data = *gm_801A5244();
+    CSSData* temp_r31 = gm_GetGameModeStateEnterData(arg0);
+    temp_r31->vs = *gm_801A5244();
 
     gm_80164F18();
     if (temp_r31->match_type & 1) {
@@ -39,7 +39,7 @@ void gm_801BED3C(GameModeState* arg0)
 
 void gm_801BEDA8(GameModeState* arg0)
 {
-    CSSData* css = gm_GetGameSceneLoadData(arg0);
+    CSSData* css = gm_GetGameModeStateEnterData(arg0);
     VsModeData* vs = gm_801A5244();
 
     if (css->pending_scene_change == 2) {
@@ -52,5 +52,5 @@ void gm_801BEDA8(GameModeState* arg0)
         css->match_type = (css->match_type + 1) % 24;
     }
 
-    *vs = css->data;
+    *vs = css->vs;
 }

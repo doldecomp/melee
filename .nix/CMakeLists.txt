@@ -564,7 +564,6 @@ set(SOURCES
     src/melee/gm/gmtou_1.c
     src/melee/gm/gmtou_2.c
     src/melee/gm/gmtoulib.c
-    src/melee/gm/gmvsdata.c
     src/melee/gm/gmvsmelee.c
     src/melee/gr/grbattle.c
     src/melee/gr/grcorneria.c

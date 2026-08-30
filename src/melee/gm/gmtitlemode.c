@@ -39,7 +39,7 @@ void gmTitleMode_OnEnter(UNUSED GameModeState* state)
 
 void onExit(GameModeState* scene)
 {
-    int* buttons = gm_GetGameSceneLeaveData(scene);
+    int* buttons = gm_GetGameModeStateExitData(scene);
     if (DbLevel >= DbLKind_DebugRom) {
         if (*buttons & HSD_PAD_A) {
             gm_SetPendingGameMode(GM_DEBUG_VS);

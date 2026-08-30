@@ -273,7 +273,7 @@ void fn_8017C0C8(void)
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
-    sp8.c_kind = CKIND_CREZYH;
+    sp8.ckind = CKIND_CREZYH;
     sp8.team = 4;
     sp8.xC_b7 = true;
     sp8.hp = lbl_804706C0.xC;
@@ -606,7 +606,7 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
         arg1->stocks = arg2->stocks;
         arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
-        gm_SetPendingSceneIndex(arg1->x7);
+        gm_SetNextGameModeStateId(arg1->x7);
     }
 }
 
@@ -948,7 +948,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
             gm_8016795C(&arg0->players[player_idx]);
             arg0->players[player_idx].slot_type = 1;
-            arg0->players[player_idx].c_kind = (s8) (u8) enemy_kind[0];
+            arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
             arg0->players[player_idx].xE = enemy_cpu_type;
@@ -966,10 +966,10 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xC_b2 = 1;
                 arg0->players[player_idx].xE = 0x1B;
             }
-            if ((s32) arg0->players[player_idx].c_kind == CKIND_GKOOPS) {
+            if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
             }
-            enemy_ckind = (u8) arg0->players[player_idx].c_kind;
+            enemy_ckind = (u8) arg0->players[player_idx].ckind;
             if (((s8) enemy_ckind == CKIND_MASTERH) ||
                 ((s8) enemy_ckind == CKIND_CREZYH))
             {
@@ -979,7 +979,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xD_b0 = 1;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].spawn_dir = -1;
-                if ((s32) arg0->players[player_idx].c_kind == CKIND_CREZYH) {
+                if ((s32) arg0->players[player_idx].ckind == CKIND_CREZYH) {
                     arg0->players[player_idx].slot_type = 3;
                 }
                 boss_count += 1;
@@ -1086,18 +1086,18 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
             if (arg0->match_end.result == OUTCOME_TIMEOUT) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
-                    gm_SetPendingSceneIndex(arg2);
+                    gm_SetNextGameModeStateId(arg2);
                     return 0;
                 }
                 if (!(arg1->x8 & 0x40)) {
                     arg1->xC.x10++;
-                    gm_SetPendingSceneIndex(gm_GetCurrentSceneIndex());
+                    gm_SetNextGameModeStateId(gm_GetCurrentSceneIndex());
                     return 0;
                 }
             }
         } else {
             arg1->xC.x10 = 0;
-            gm_SetPendingSceneIndex(arg2);
+            gm_SetNextGameModeStateId(arg2);
             return 0;
         }
     }
@@ -1274,7 +1274,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
     for (i = 0; i < 3; i++) {
         if (arg1[i].ckind != CHKIND_NONE) {
             gm_8016795C(&arg0[index]);
-            arg0[index].c_kind = arg1[i].ckind;
+            arg0[index].ckind = arg1[i].ckind;
             arg0[index].slot_type = 1;
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
@@ -1284,7 +1284,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].x18 = arg1[i].x4;
             arg0[index].x1C = arg1[i].x8;
             arg0[index].xD_b1 = 1;
-            if (arg0[index].c_kind == CKIND_GKOOPS) {
+            if (arg0[index].ckind == CKIND_GKOOPS) {
                 arg0[index].xC_b1 = 0;
             }
             index++;
@@ -1591,10 +1591,10 @@ void gm_8017E7FC(u8 matchResult)
         struct StartMeleeRules* rules = gm_GetRules();
         rules->x4_5 = 1;
         r31->x77 = 0;
-        gm_SetPendingSceneIndex(0x5A);
+        gm_SetNextGameModeStateId(0x5A);
     } else {
         r31->x77 = 1;
-        gm_SetPendingSceneIndex(0x5A);
+        gm_SetNextGameModeStateId(0x5A);
     }
 }
 
@@ -3325,7 +3325,7 @@ void fn_80181C80(s32 arg0)
         }
         data->x54[arg0].x0 = -2;
         sp10.team = !Player_GetTeam(0);
-        sp10.c_kind = data->x54[arg0].x5;
+        sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
         sp10.xE = data->x54[arg0].x7;
         sp10.x18 = data->x54[arg0].x8;
@@ -3501,7 +3501,7 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = CKIND_BOY;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
@@ -4086,7 +4086,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         if (gm_GetCurrentSceneIndex() == 3 && gmMainLib_8015DB00() % 2 == 0) {
             gmMainLib_8015DB18();
-            gm_SetPendingSceneIndex(0);
+            gm_SetNextGameModeStateId(0);
         }
         gm_801A4B60();
         return;

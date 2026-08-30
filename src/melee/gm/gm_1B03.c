@@ -31,7 +31,7 @@ void gm_801B0348(StartMeleeData* arg0)
                 continue;
             }
             if (arg0->players[i].team == arg0->players[j].team &&
-                arg0->players[i].c_kind == arg0->players[j].c_kind &&
+                arg0->players[i].ckind == arg0->players[j].ckind &&
                 arg0->players[i].sub_color == arg0->players[j].sub_color)
             {
                 arg0->players[j].sub_color++;
@@ -53,7 +53,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
                 var_r6 = 0x12;
             }
         }
-        arg0->players[i].c_kind = var_r6;
+        arg0->players[i].ckind = var_r6;
         arg0->players[i].stocks = 1;
         arg0->players[i].x12 = 0x12C;
     } else {
@@ -119,7 +119,7 @@ void gm_801B05F4(PlayerInitData* arg0, int arg1)
 void gm_801B0620(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 {
     arg0->slot_type = Gm_PKind_Human;
-    arg0->c_kind = c_kind;
+    arg0->ckind = c_kind;
     arg0->color = arg2;
     arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);
@@ -128,7 +128,7 @@ void gm_801B0620(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 void gm_801B0664(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 {
     arg0->slot_type = Gm_PKind_Cpu;
-    arg0->c_kind = c_kind;
+    arg0->ckind = c_kind;
     arg0->color = arg2;
     arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);
@@ -138,16 +138,16 @@ void gm_801B0664(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
                  u8 arg5, u8 level, u8 slot)
 {
-    gm_80167B50(&css_data->data);
+    gm_80167B50(&css_data->vs);
     css_data->match_type = type;
     css_data->unk_0x0 = slot + 1;
-    css_data->data.data.players[slot].c_kind = c_kind;
-    css_data->data.data.players[slot].stocks = stocks;
-    css_data->data.data.players[slot].color = color;
-    css_data->data.data.players[slot].cpu_level = level;
-    css_data->data.data.players[slot].xA = arg5;
-    css_data->data.data.players[0].cpu_level = level;
-    css_data->data.data.players[0].stocks = stocks;
+    css_data->vs.start.players[slot].ckind = c_kind;
+    css_data->vs.start.players[slot].stocks = stocks;
+    css_data->vs.start.players[slot].color = color;
+    css_data->vs.start.players[slot].cpu_level = level;
+    css_data->vs.start.players[slot].xA = arg5;
+    css_data->vs.start.players[0].cpu_level = level;
+    css_data->vs.start.players[0].stocks = stocks;
 }
 
 #ifdef MUST_MATCH
@@ -161,19 +161,19 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
 
     slot = css_data->unk_0x0 - 1;
     if (c_kind != NULL) {
-        *c_kind = css_data->data.data.players[slot].c_kind;
+        *c_kind = css_data->vs.start.players[slot].ckind;
     }
     if (stocks != NULL) {
-        *stocks = css_data->data.data.players[slot].stocks;
+        *stocks = css_data->vs.start.players[slot].stocks;
     }
     if (color != NULL) {
-        *color = css_data->data.data.players[slot].color;
+        *color = css_data->vs.start.players[slot].color;
     }
     if (level != NULL) {
-        *level = css_data->data.data.players[slot].cpu_level;
+        *level = css_data->vs.start.players[slot].cpu_level;
     }
     if (nametag != NULL) {
-        *nametag = css_data->data.data.players[slot].xA;
+        *nametag = css_data->vs.start.players[slot].xA;
     }
 }
 #ifdef MUST_MATCH
@@ -190,11 +190,11 @@ void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4,
     } else {
         var_r0 = 0;
     }
-    css_data->data.data.players[var_r0].c_kind = c_kind;
-    css_data->data.data.players[var_r0].stocks = stocks;
-    css_data->data.data.players[var_r0].color = color;
-    css_data->data.data.players[var_r0].cpu_level = level;
-    css_data->data.data.players[var_r0].xA = arg4;
+    css_data->vs.start.players[var_r0].ckind = c_kind;
+    css_data->vs.start.players[var_r0].stocks = stocks;
+    css_data->vs.start.players[var_r0].color = color;
+    css_data->vs.start.players[var_r0].cpu_level = level;
+    css_data->vs.start.players[var_r0].xA = arg4;
 }
 
 void gm_801B07E8(CSSData* css_data, s8* c_kind, s8* stocks, s8* color,
@@ -208,18 +208,18 @@ void gm_801B07E8(CSSData* css_data, s8* c_kind, s8* stocks, s8* color,
         slot = 0;
     }
     if (c_kind != NULL) {
-        *c_kind = css_data->data.data.players[slot].c_kind;
+        *c_kind = css_data->vs.start.players[slot].ckind;
     }
     if (stocks != NULL) {
-        *stocks = css_data->data.data.players[slot].stocks;
+        *stocks = css_data->vs.start.players[slot].stocks;
     }
     if (color != NULL) {
-        *color = css_data->data.data.players[slot].color;
+        *color = css_data->vs.start.players[slot].color;
     }
     if (level != NULL) {
-        *level = css_data->data.data.players[slot].cpu_level;
+        *level = css_data->vs.start.players[slot].cpu_level;
     }
     if (arg4 != NULL) {
-        *arg4 = css_data->data.data.players[slot].xA;
+        *arg4 = css_data->vs.start.players[slot].xA;
     }
 }

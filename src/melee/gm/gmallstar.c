@@ -490,7 +490,7 @@ void gm_801B5624(GameModeState* arg0)
     PAD_STACK(8);
 
     base = (u8*) gm_Mode_AllStar_States;
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     allstar = &gm_80473A18;
     round = gm_8017BE84(arg0->id);
 
@@ -540,7 +540,7 @@ void gm_801B5624(GameModeState* arg0)
         opp_count = gm_8018A228(0xC, *cpu_level, 0);
 
         gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0, 0,
-                    (u8) data->players[0].c_kind, data->players[0].color,
+                    (u8) data->players[0].ckind, data->players[0].color,
                     (s32) opp_count, 0x19, 5, 1, 0, 1, f31, f30);
 
         data->rules.x4_5 = 1;
@@ -556,7 +556,7 @@ void gm_801B5624(GameModeState* arg0)
 void gm_801B59AC(GameModeState* arg0)
 {
     u8* base = (u8*) gm_Mode_AllStar_States;
-    MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
+    MatchExitInfo* exit = gm_GetGameModeStateExitData(arg0);
     u8 idx = arg0->id;
     s32 result = exit->x8;
     UnkAllstarData* data = &gm_80473A18;
@@ -622,7 +622,7 @@ void gm_801B5ACC(GameModeState* arg0)
     chars[1] = 0x21;
     chars[2] = 0x21;
     base = (u8*) gm_Mode_AllStar_States;
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     allstar = &gm_80473A18;
     allstar->x0.x8 |= 0x80;
 
@@ -687,20 +687,20 @@ void gm_801B5ACC(GameModeState* arg0)
 
 void gm_801B5E7C(GameModeState* arg0)
 {
-    MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
+    MatchExitInfo* exit = gm_GetGameModeStateExitData(arg0);
     gm_80473A18.x74 = exit->match_end.player_standings[0].percent;
     gm_8017D7AC(exit, &gm_80473A18.x0, 0x69);
 }
 
 void gm_801B5EB4(GameModeState* arg0)
 {
-    DebugGameOverData* data = gm_GetGameSceneLoadData(arg0);
+    DebugGameOverData* data = gm_GetGameModeStateEnterData(arg0);
     gm_8017C9A8(data, &gm_80473A18.x0, 2);
 }
 
 void gm_801B5EE4(GameModeState* arg0)
 {
-    DebugGameOverData* data = gm_GetGameSceneLeaveData(arg0);
+    DebugGameOverData* data = gm_GetGameModeStateExitData(arg0);
     UnkAllstarData* r30 = &gm_80473A18;
     gm_8017CA38(data, &r30->x0, gmMainLib_8015CDE0(), 2);
     if (data->xC != 0) {
@@ -713,7 +713,7 @@ void gm_801B5F50(GameModeState* arg0)
     CSSData* temp_r31;
     struct gmm_x0_528_t* temp_r3;
 
-    temp_r31 = gm_GetGameSceneLoadData(arg0);
+    temp_r31 = gm_GetGameModeStateEnterData(arg0);
     temp_r3 = gmMainLib_8015CDE0();
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
                 temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
@@ -723,7 +723,7 @@ void gm_801B5F50(GameModeState* arg0)
 
 void gm_801B5FB4(GameModeState* arg0)
 {
-    CSSData* temp_r31 = gm_GetGameSceneLeaveData(arg0);
+    CSSData* temp_r31 = gm_GetGameModeStateExitData(arg0);
     struct gmm_x0_528_t* temp_r30 = gmMainLib_8015CDE0();
     UnkAllstarData* r29 = &gm_80473A18;
 
@@ -738,7 +738,7 @@ void gm_801B5FB4(GameModeState* arg0)
     r29->x0.cpu_level = temp_r30->cpu_level;
     r29->x0.stocks = temp_r30->stocks;
     r29->x0.x4 = temp_r30->x4;
-    gm_SetPendingSceneIndex((temp_r30->x5 * 8) & 0xF8);
+    gm_SetNextGameModeStateId((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
 }
@@ -812,7 +812,7 @@ void gm_Mode_AllStar_OnLoad(void)
         p[3] = 1;
     }
 
-    gm_SetSceneIndex(0x70U);
+    gm_SetGameModeStateId(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
