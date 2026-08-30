@@ -712,12 +712,11 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
 {
     s32 color_idx;
     u8* out_color = colors;
-    s8* kind_iter = arg2;
     u8 num_colors;
     u8 result;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
-        num_colors = gm_80169238((u8) *kind_iter);
+        num_colors = gm_80169238((u8) arg2[color_idx]);
         if (arg1->x54 != NULL) {
             result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
             if (num_colors != 0) {
@@ -730,7 +729,6 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
         }
         *out_color = result;
         out_color++;
-        kind_iter++;
     }
 }
 
