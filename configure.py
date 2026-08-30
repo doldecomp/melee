@@ -1551,7 +1551,7 @@ config.libs = [
         [
             Object(Matching, "melee/if/ifall.c"),
             Object(Matching, "melee/if/iftime.c"),
-            Object(Linkable, "melee/if/ifstatus.c"),
+            Object(Matching, "melee/if/ifstatus.c"),
             Object(Matching, "melee/if/if_2F6E.c"),
             Object(Matching, "melee/if/if_2F72.c"),
             Object(Linkable, "melee/if/ifstock.c"),

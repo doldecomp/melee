@@ -64,6 +64,33 @@ char mrk_models_name[] = "DmgMrk_scene_models";
 
 HudIndex ifStatus_HudInfo;
 
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void sdata2_order(void)
+{
+    (void) 1.0F;
+    (void) 0.0F;
+    (void) 2.0F;
+    (void) U32_TO_F32;
+    (void) S32_TO_F32;
+    (void) 300.0F;
+    (void) 100.0F;
+    (void) 0.5069F;
+    (void) 0.6083F;
+    (void) 0.3041F;
+    (void) 1.2165F;
+    (void) 0.811F;
+    (void) 0.1014F;
+    (void) 1.5207F;
+    (void) -100.0F;
+    (void) 0.2028F;
+    (void) 0.5F;
+    (void) 0.65F;
+    (void) 0.1F;
+    (void) 0.25F;
+}
+#endif
+
 HudIndex* ifStatus_GetHUDInfo(void)
 {
     return &ifStatus_HudInfo;
