@@ -1125,6 +1125,7 @@ void hsd_80394F48(void* data)
     struct lbl_8040AB00_t* hi_color;
     s32 x_base;
     s32* pxC8;
+    s32 entry_idx;
     s32 i;
     s32 b6;
 
@@ -1179,7 +1180,7 @@ void hsd_80394F48(void* data)
     hi_color = hsd_80394F48_get_highlight_color(base_color);
     cur_row -= 1;
 
-    for (i = 0; dp->entries[i] != 0; i++) {
+    for (entry_idx = 0; dp->entries[entry_idx] != 0; entry_idx++) {
         *px4 = x_base;
         *px8 = (*px40 - 0x28) - (cur_row-- + 1) * 14;
 
@@ -1192,16 +1193,16 @@ void hsd_80394F48(void* data)
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
 
-        if (i == dp->index) {
+        if (entry_idx == dp->index) {
             *px50 = hi_color;
         } else {
             hsd_80394F48_set_base_color(px50);
         }
 
         *px4 += 11;
-        hsd_80394434(dp->entries[i]);
+        hsd_80394434(dp->entries[entry_idx]);
 
-        *px4 += hsd_80394F48_entry_length(i, dp) * 11;
+        *px4 += hsd_80394F48_entry_length(entry_idx, dp) * 11;
         hsd_80394F48_set_base_color(px50);
 
         b6 = sp->x0_b6;
