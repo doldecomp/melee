@@ -385,21 +385,16 @@ Vec3 grZe_803E1C80[8] = {
 
 void grZebes_801D881C(HSD_GObj* gobj)
 {
-    f32 intercept;
     Vec3 spot_pos;
     Vec3 spot_interest;
-    Vec3 lower_point_pos;
-    f32 slope;
-    f32 col_heights[6];
-    f32 col_x[6];
-    Vec3 upper_point_pos;
     f32* heights;
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* secondary_gobj;
+    HSD_JObj* sima_jobj;
     s32 result;
     secondary_gobj = (HSD_GObj*) gp->u.zebes5.xF0;
     result = grZebes_801DA528(gobj, &gp->u.zebes5.xC8, 1, 2);
-    PAD_STACK(0xC);
+    PAD_STACK(8);
 
     if ((s32) gp->u.zebes5.xEC != result) {
         gp->u.zebes5.xEC = result;
@@ -500,11 +495,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 }
             }
             if (grAnime_801C83D0(gobj, 0xE, 1) != 0) {
-                int i;
                 gp->u.zebes5.xC4 = 0;
-                for (i = 0; i < 20; i++) {
-                    if (grZe_8049F170[i].x00_active == 4) {
-                        grZe_8049F170[i].x00_active = 1;
+                for (result = 0; result < 20; result++) {
+                    if (grZe_8049F170[result].x00_active == 4) {
+                        grZe_8049F170[result].x00_active = 1;
                     }
                 }
             }
@@ -524,7 +518,12 @@ void grZebes_801D881C(HSD_GObj* gobj)
     }
 
     if (gp->u.zebes5.xC4 == 0) {
+        f32 col_heights[6];
+        f32 col_x[6];
+        Vec3 upper_point_pos;
+        Vec3 lower_point_pos;
         int i;
+        int k;
         f32 colWidth;
         grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
 
@@ -554,28 +553,27 @@ void grZebes_801D881C(HSD_GObj* gobj)
                     f32 top = (f32) (1.8 * (f64) entry->x18_size +
                                      (f64) entry->x0C_y);
                     {
-                        s32 col_left = (s32) (0.5 + (f64) left_frac);
-                        if (5 < col_left) {
-                            col_left = 5;
-                        } else if (col_left < 0) {
-                            col_left = 0;
+                        k = (s32) (0.5 + (f64) left_frac);
+                        if (5 < k) {
+                            k = 5;
+                        } else if (k < 0) {
+                            k = 0;
                         }
-                        col_x[col_left] = (f32) col_left * colWidth + left_x;
-                        if (top > col_heights[col_left]) {
-                            col_heights[col_left] = top;
+                        col_x[k] = (f32) k * colWidth + left_x;
+                        if (top > col_heights[k]) {
+                            col_heights[k] = top;
                         }
                     }
                     {
-                        s32 col_right =
-                            (s32) (0.5 + (f64) (right_frac / colWidth));
-                        if (5 < col_right) {
-                            col_right = 5;
-                        } else if (col_right < 0) {
-                            col_right = 0;
+                        k = (s32) (0.5 + (f64) (right_frac / colWidth));
+                        if (5 < k) {
+                            k = 5;
+                        } else if (k < 0) {
+                            k = 0;
                         }
-                        col_x[col_right] = (f32) col_right * colWidth + left_x;
-                        if (top > col_heights[col_right]) {
-                            col_heights[col_right] = top;
+                        col_x[k] = (f32) k * colWidth + left_x;
+                        if (top > col_heights[k]) {
+                            col_heights[k] = top;
                         }
                     }
                 }
@@ -594,12 +592,9 @@ void grZebes_801D881C(HSD_GObj* gobj)
         col_x[0] = upper_point_pos.x;
         col_heights[0] = upper_point_pos.y;
 
-        {
-            HSD_JObj* sima_jobj;
-            sima_jobj = Ground_801C3FA4(secondary_gobj, 1);
-            HSD_ASSERT(0x299, sima_jobj);
-            lb_8000B1CC(sima_jobj, &lower_point_pos, &lower_point_pos);
-        }
+        sima_jobj = Ground_801C3FA4(secondary_gobj, 1);
+        HSD_ASSERT(0x299, sima_jobj);
+        lb_8000B1CC(sima_jobj, &lower_point_pos, &lower_point_pos);
         col_x[5] = lower_point_pos.x;
         col_heights[5] = lower_point_pos.y;
 
@@ -617,7 +612,6 @@ void grZebes_801D881C(HSD_GObj* gobj)
         }
 
         {
-            int k;
             for (i = 0, k = 0; i <= 5; i++, k++) {
                 mpVtxSetPos(k, col_x[i], col_heights[i]);
             }
@@ -627,9 +621,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
         mpLib_80057BC0(0);
     }
 
-    Ground_801C4368(&slope, &intercept);
-    grZakoGenerator_801CA43C((grZakoGenerator_Config*) gp->u.zebes5.xFC,
-                             Ground_801C3FA4(gobj, 0xE), slope);
+    {
+        f32 slope;
+        f32 intercept;
+        Ground_801C4368(&slope, &intercept);
+        grZakoGenerator_801CA43C((grZakoGenerator_Config*) gp->u.zebes5.xFC,
+                                 Ground_801C3FA4(gobj, 0xE), slope);
+    }
     Ground_801C2FE0((Ground_GObj*) gobj);
     lb_800115F4();
 }
