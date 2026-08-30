@@ -1008,6 +1008,7 @@ static inline f32 grKongo_calc_angle(s32 index)
 
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
+    u32 i;
     s32 line_id;
     Ground* gp;
     _struct_grKg_803E188C_0x18* table;
@@ -1017,14 +1018,14 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 old_angle;
     f32 temp;
     f32 displacement;
-    u32 i;
     PAD_STACK(0x10);
 
     gp = gobj->user_data;
     grKongo_801D6AFC();
 
-    for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+    for (arg1 = 0; (u32) arg1 < 15U; arg1++) {
+        grKg_803E188C[arg1].unk14 =
+            (f32) (37.8 * tanf(-grKg_803E188C[arg1].unkC));
     }
 
     displacement =
