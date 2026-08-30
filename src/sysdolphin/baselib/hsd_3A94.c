@@ -1730,32 +1730,32 @@ static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
     return (s32) total;
 }
 
-static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc,
+static inline s32 fn_803AC7DC_block_count(struct CardState* file_state,
                                           s32 file_idx)
 {
-    if (file_desc->x4C[file_idx] <= 0) {
-        return 0;
-    }
+    s32 blocks;
 
-    if (file_idx == 0) {
+    if (file_state->x4C[file_idx] <= 0) {
+        blocks = 0;
+    } else if (file_idx == 0) {
         u32 usable;
-        u32 sector_size = file_desc->x8;
+        u32 sector_size = file_state->x8;
         s32 remaining;
 
-        remaining = file_desc->x4C[0];
+        remaining = file_state->x4C[0];
         remaining = remaining - (s32) ((usable = sector_size - 0x20) -
-                                       (file_desc->x24 + 48) % sector_size);
+                                       (file_state->x24 + 48) % sector_size);
         if (remaining <= 0) {
-            return 1;
+            blocks = 1;
+        } else {
+            blocks = (u32) (remaining + sector_size - 0x21) / usable + 1;
         }
-        return (u32) (remaining + sector_size - 0x21) / usable + 1;
+    } else {
+        u32 sector_size = file_state->x8;
+        blocks = (u32) (file_state->x4C[file_idx] + sector_size - 0x21) /
+                 (sector_size - 0x20);
     }
-
-    {
-        u32 sector_size = file_desc->x8;
-        return (u32) (file_desc->x4C[file_idx] + sector_size - 0x21) /
-               (sector_size - 0x20);
-    }
+    return blocks;
 }
 
 s32 fn_803AC7DC(CardState* state)
@@ -4859,7 +4859,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         for (file_id = 1; file_id < 9; file_id++) {
             s32 j;
             s32 offset;
-            file_blocks = fn_803AC634(state, file_id);
+            file_blocks = fn_803AC7DC_block_count(state, file_id);
             offset = 0;
             if (file_blocks > 0) {
                 for (j = 0; j < file_blocks; j++) {
@@ -4968,10 +4968,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                     state, logical, phys, NULL, 0, file_id,
                                     cmd14, cmd15);
                             } else {
-                                s32 chunk;
-                                u8* wdata;
-                                wdata = fn_803B1338_data_at(fdata, offset);
-                                chunk = fn_803B1338_data_size(state);
+                                s32 chunk = fn_803B1338_data_size(state);
+                                u8* wdata = fn_803B1338_data_at(fdata, offset);
                                 result = fn_803B1338_queue_write(
                                     state, logical, phys, wdata, chunk,
                                     file_id, cmd16, cmd17);
