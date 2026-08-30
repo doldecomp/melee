@@ -1429,8 +1429,6 @@ void fn_8023D0F8(void* arg0)
 
 s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
 {
-    GXColor* glyph_color_ptr;
-    char* str;
     f32 pos_z;
     f32 y_range;
     s32 i;
@@ -1473,8 +1471,8 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
         AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
     table_lower =
         AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
-    (void) table_lower;
-    for (i = 0; i < (s32) (u8) arg1; i++) {
+    for (i = 0; i < (s32) arg1; i++) {
+        char* str;
         if ((u8) (arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {
                 str = table_upper[i / 2];
@@ -1497,9 +1495,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
         } else {
             color_ptr = &mnNameNew_804D4F74;
         }
-        glyph_color = *color_ptr;
-        glyph_color_ptr = &glyph_color;
-        HSD_SisLib_803A74F0(text, i, glyph_color_ptr);
+        mnNameNew_SetKeyColor(text, i, color_ptr, &glyph_color);
     }
     arg0->text = text;
     return (s32) text;
