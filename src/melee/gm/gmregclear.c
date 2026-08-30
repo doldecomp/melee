@@ -2679,14 +2679,18 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 {
     s32 sp64;
     s32 sp60;
-    s32 special_score_value;
-    s32 coin_count;
+    int special_score_value;
+    int coin_count;
     u16 coins;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
     lbl_8046B6A0_t* temp;
     s32 total;
     s32 var_r4;
+    union {
+        struct lbl_80472D28_t* state;
+        fn_8017FA1C_arg* model;
+    } data;
     s32 special_score;
     s32 var_r3;
     struct lbl_80472D28_t* state;
@@ -2695,8 +2699,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     special_score = 0;
     coins = arg4->x58[0].xE;
-    memzero(&lbl_80472D28, sizeof(lbl_80472D28));
-    state = &lbl_80472D28;
+    state = (data.state = &lbl_80472D28);
+    memzero(state, sizeof(*state));
     state->xD4 = -1;
     state->xD8 = 0;
     state->xE0 = -1;
@@ -2726,8 +2730,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         temp = gm_16AE_GetUnkData_0();
         state->x118 = 1;
         if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
-            grPushOn_80219204(Ground_801C1DD4(), (int*) &special_score_value,
-                              (int*) &coin_count);
+            grPushOn_80219204(Ground_801C1DD4(), &special_score_value,
+                              &coin_count);
             special_score = special_score_value;
             coins = (u16) coin_count;
             state->x108 = 0x1F4;
@@ -2781,7 +2785,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x104 = var_r4;
     lbl_804D65C0 = (var_r4 - (arg0 + arg1)) / 10;
 
-    PAD_STACK(0x1C);
+    PAD_STACK(0x18);
     {
         void* scene_data;
 
@@ -2803,7 +2807,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     fn_80180630_SetupSisLib(cam_gobj);
 
-    fn_801803FC(state);
+    fn_801803FC(data.model);
     fn_80168F7C();
 
     if (HSD_Randi(2) != 0) {
