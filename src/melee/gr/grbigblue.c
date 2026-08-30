@@ -3918,23 +3918,17 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 1:
         break;
     case 9:
-        self = gp->raw;
-        self += offset;
-        if (0.0F == *(f32*) (self + 0xEC)) {
+        if (0.0F == *(f32*) &gp->raw[offset + 0xEC]) {
             result = 1;
         }
         break;
     case 7: {
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
-        grBigBlue_CarPhysicsLane* lane;
 
-        self = gp->raw;
-        self += offset;
         blast += yakumono_param->x68 * scale;
-        lane = &gp->data.lanes[index];
-        if (lane->pos.x > blast) {
-            if (0.0F != lane->xEC) {
+        if (*(f32*) &gp->raw[offset + 0xE0] > blast) {
+            if (0.0F != *(f32*) &gp->raw[offset + 0xEC]) {
                 result = 9;
             } else {
                 result = 1;
@@ -3945,14 +3939,10 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 8: {
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
-        grBigBlue_CarPhysicsLane* lane;
 
-        self = gp->raw;
-        self += offset;
         blast -= yakumono_param->x68 * scale;
-        lane = &gp->data.lanes[index];
-        if (lane->pos.x < blast) {
-            if (0.0F != lane->xEC) {
+        if (*(f32*) &gp->raw[offset + 0xE0] < blast) {
+            if (0.0F != *(f32*) &gp->raw[offset + 0xEC]) {
                 result = 9;
             } else {
                 result = 1;
@@ -4079,9 +4069,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Final threshold check */
-        self = gp->raw;
-        self += offset;
-        if (*(f32*) (self + 0xE4) < -2000.0F) {
+        if (*(f32*) &gp->raw[offset + 0xE4] < -2000.0F) {
             result = 1;
         }
         break;
