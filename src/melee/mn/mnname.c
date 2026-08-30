@@ -180,7 +180,8 @@ s32 CompareNameStrings(char* str1, char* str2)
             s8 ch2 = (s8) str2[i];
 
             if (signedCharactersEqual(*mnName_StringTerminator,
-                                      unsignedCharacter(ch2))) {
+                                      unsignedCharacter(ch2)))
+            {
                 if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }

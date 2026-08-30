@@ -383,9 +383,11 @@ Vec3 grZe_803E1C80[8] = {
     { 56.0f,  15.0f,  6.0f }, { 56.0f,   4.5f,  6.0f },
 }; // clang-format on
 
-static inline void grZebes_UpdateCollisionColumns(
-    grZe_BubbleState* state, f32 colWidth, f32* col_x, f32* col_heights,
-    int* ip, int* kp, f32* left_x, f32* dx, f32* top)
+static inline void grZebes_UpdateCollisionColumns(grZe_BubbleState* state,
+                                                  f32 colWidth, f32* col_x,
+                                                  f32* col_heights, int* ip,
+                                                  int* kp, f32* left_x,
+                                                  f32* dx, f32* top)
 {
     grZe_BubbleEntry* entry = state->bubbles;
     *left_x = state->positions[0].x;
@@ -396,8 +398,7 @@ static inline void grZebes_UpdateCollisionColumns(
             *dx = entry->x08_x - *left_x;
             left_frac = (f32) ((f64) *dx - 0.9) / colWidth;
             right_frac = (f32) (0.9 + (f64) *dx);
-            *top = (f32) (1.8 * (f64) entry->x18_size +
-                           (f64) entry->x0C_y);
+            *top = (f32) (1.8 * (f64) entry->x18_size + (f64) entry->x0C_y);
             {
                 *kp = (s32) (0.5 + (f64) left_frac);
                 if (5 < *kp) {
@@ -588,8 +589,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
 
         (void) 0.9;
 
-        grZebes_UpdateCollisionColumns(state, colWidth, col_x, col_heights,
-                                         &i, &k, &left_x, &dx, &top);
+        grZebes_UpdateCollisionColumns(state, colWidth, col_x, col_heights, &i,
+                                       &k, &left_x, &dx, &top);
 
         upper_point_pos = grZe_803B7FF0.upper_point_pos;
         lower_point_pos = grZe_803B7FF0.lower_point_pos;

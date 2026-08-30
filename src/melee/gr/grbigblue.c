@@ -1580,8 +1580,7 @@ bool grBigBlue_801E93D0(Ground_GObj* arg)
     return false;
 }
 
-static inline s32
-grBigBlue_CountCars(void)
+static inline s32 grBigBlue_CountCars(void)
 {
     s32 i;
     HSD_JObj* cars_avail = NULL;
@@ -1592,8 +1591,8 @@ grBigBlue_CountCars(void)
         if ((s8) manager->u.bigblue.data[i].x1 != 0) {
             count++;
             if (cars_avail != NULL) {
-                cars_avail = manager->u.bigblue.xD4
-                    [(s8) manager->u.bigblue.data[i].index];
+                cars_avail = manager->u.bigblue
+                                 .xD4[(s8) manager->u.bigblue.data[i].index];
             }
         }
     }

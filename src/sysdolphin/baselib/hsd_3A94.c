@@ -4340,8 +4340,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             if (arg3 != 0) {
                 s32 block = block_map[0][i];
                 s32 cmd_result = fn_803B0120_queue_write(
-                    state, block, logical, current_seq, data, remaining,
-                    arg1);
+                    state, block, logical, current_seq, data, remaining, arg1);
                 if (cmd_result < 0) {
                     fn_803B0120_rewind(entries);
                     return cmd_result;

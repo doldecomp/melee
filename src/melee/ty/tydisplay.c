@@ -1072,7 +1072,7 @@ void _tyDisplay_80319994(s32 arg0)
 
     {
         for (cur = (TyDspGrid*) ((size_t) grid +
-                                  (count = 0) * sizeof(TySortElem));
+                                 (count = 0) * sizeof(TySortElem));
              count < cfg->x08;
              cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), count++)
         {

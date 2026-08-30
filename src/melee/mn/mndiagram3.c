@@ -207,8 +207,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type) &&
                     (aggregate_rank = (u8) i,
-                     mnDiagram2_GetAggregatedFighterRank(
-                         sp48, stat_type, aggregate_rank),
+                     mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
+                                                         aggregate_rank),
                      sp48[0] != 0x19))
                 {
                     {

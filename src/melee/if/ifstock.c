@@ -143,8 +143,8 @@ static inline void ifStock_802F8298_init(HSD_GObj* gobj,
     *stock = &ifStock_804A1378;
 }
 
-static inline int ifStock_802F8298_get_flag(
-    struct IfStockUserData* user_data, struct ifStock_804A1378* stock)
+static inline int ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
+                                            struct ifStock_804A1378* stock)
 {
     return stock->x204[user_data->player].x0[2];
 }
@@ -155,14 +155,16 @@ ifStock_802F8298_get_player(struct IfStockUserData* user_data)
     return user_data->player;
 }
 
-static inline HSD_JObj* ifStock_802F8298_get_x3C(
-    struct IfStockUserData* user_data, struct ifStock_804A1378* stock)
+static inline HSD_JObj*
+ifStock_802F8298_get_x3C(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
 {
     return stock->player[user_data->player].x3C;
 }
 
-static inline HSD_JObj* ifStock_802F8298_get_x40(
-    struct IfStockUserData* user_data, struct ifStock_804A1378* stock)
+static inline HSD_JObj*
+ifStock_802F8298_get_x40(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
 {
     return stock->player[user_data->player].x40;
 }

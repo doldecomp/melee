@@ -449,8 +449,7 @@ static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
     HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
     HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
     HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
-    HSD_JObjSetRotationY(child,
-                         0.017453292f * Toy_803060BC(char_idx, 5));
+    HSD_JObjSetRotationY(child, 0.017453292f * Toy_803060BC(char_idx, 5));
     f = Toy_803060BC(char_idx, 4);
     scale = Toy_803060BC(char_idx, 3) / f;
     HSD_JObjSetScaleX(child, scale);

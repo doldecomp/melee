@@ -769,9 +769,9 @@ void fn_801891F4(void)
             sub->anim_frames[22] = 0x14;
             {
                 f32 selected_speed = speeds[sub->menu_values[0]];
-                lb_80019880(__cvt_dbl_usll(
-                    (f64) (0.016666668f / selected_speed *
-                           (f32) gm_801891F4_GetTickRate())));
+                lb_80019880(
+                    __cvt_dbl_usll((f64) (0.016666668f / selected_speed *
+                                          (f32) gm_801891F4_GetTickRate())));
             }
 
             fn_80188550(sub->menu_values[2] + 1);

@@ -704,22 +704,18 @@ void gmClassic_OnLoad(void)
         entry->xC = NULL;
     }
 
-    gmClassic_InitMatchupOrder(
-        scene_data->matchups.x2B0,
-        (gmClassicOrderIndex*) &gm_804908A0[0x60],
-        (gmClassicOrderIndex*) o, 0x80);
-    gmClassic_InitMatchupOrder(
-        scene_data->matchups.x26C,
-        (gmClassicOrderIndex*) &gm_804908A0[0x54],
-        (gmClassicOrderIndex*) o, 0x74);
-    gmClassic_InitMatchupOrder(
-        scene_data->matchups.x1B8,
-        (gmClassicOrderIndex*) &gm_804908A0[0x34],
-        (gmClassicOrderIndex*) o, 0x54);
-    gmClassic_InitMatchupOrder(
-        scene_data->matchups.x0CC,
-        (gmClassicOrderIndex*) &gm_804908A0[0x0C],
-        (gmClassicOrderIndex*) o, 0x2C);
+    gmClassic_InitMatchupOrder(scene_data->matchups.x2B0,
+                               (gmClassicOrderIndex*) &gm_804908A0[0x60],
+                               (gmClassicOrderIndex*) o, 0x80);
+    gmClassic_InitMatchupOrder(scene_data->matchups.x26C,
+                               (gmClassicOrderIndex*) &gm_804908A0[0x54],
+                               (gmClassicOrderIndex*) o, 0x74);
+    gmClassic_InitMatchupOrder(scene_data->matchups.x1B8,
+                               (gmClassicOrderIndex*) &gm_804908A0[0x34],
+                               (gmClassicOrderIndex*) o, 0x54);
+    gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
+                               (gmClassicOrderIndex*) &gm_804908A0[0x0C],
+                               (gmClassicOrderIndex*) o, 0x2C);
 
     data = gm_GetAllStarData();
     gmMainLib_8015CDC8();

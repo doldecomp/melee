@@ -4994,8 +4994,7 @@ static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
     *ptr = &_Toy_sbss_804D6E64->key[sort_mode];
 }
 
-inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry,
-                                       s16 trophy_idx)
+inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry, s16 trophy_idx)
 {
     char* result = Toy_8030813C(trophy_idx);
 
@@ -5008,8 +5007,7 @@ inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry,
     entry->trophy_id = trophy_idx;
 }
 
-inline void _Toy_8030FE48_link_entries(ToyDisplayList* data,
-                                        s32 entry_count)
+inline void _Toy_8030FE48_link_entries(ToyDisplayList* data, s32 entry_count)
 {
     s32 i;
     ToyListEntry* last_entry;
@@ -5088,13 +5086,13 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
         entry = data->entries;
         for (; start < data->visible_count; offset += 2, entry++, start += 1) {
             if (start == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(
-                    entry, Toy_sbss_804D6EDC[offset / 2]);
+                _Toy_8030FE48_setup_entry(entry,
+                                          Toy_sbss_804D6EDC[offset / 2]);
                 entry->archive = lbArchive_LoadSymbols(
                     entry->archive_name, &sym, entry->symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(
-                    entry, Toy_sbss_804D6EDC[offset / 2]);
+                _Toy_8030FE48_setup_entry(entry,
+                                          Toy_sbss_804D6EDC[offset / 2]);
             }
         }
 
@@ -5148,13 +5146,11 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
             }
 
             if (startIdx == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(cur,
-                                          Toy_sbss_804D6EDC[startIdx]);
+                _Toy_8030FE48_setup_entry(cur, Toy_sbss_804D6EDC[startIdx]);
                 cur->archive = lbArchive_LoadSymbols(cur->archive_name, &sym2,
                                                      cur->symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(cur,
-                                          Toy_sbss_804D6EDC[startIdx]);
+                _Toy_8030FE48_setup_entry(cur, Toy_sbss_804D6EDC[startIdx]);
             }
 
             cur = cur->next;

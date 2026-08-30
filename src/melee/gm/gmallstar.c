@@ -380,8 +380,8 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
-static inline void gm_801B5324_inline(s8* char_ids,
-                                      gm_803DEBE8_t* opp_data, s32 round)
+static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
+                                      s32 round)
 {
     s32 i;
 
