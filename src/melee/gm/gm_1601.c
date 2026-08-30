@@ -4099,10 +4099,15 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
     u8* hb = arg1;
     s32 count;
     s32 i;
-    UNUSED u8 pad[8];
+
+    PAD_STACK(8);
 
     count = 0;
-    for (i = 0; i < 4; i++) {
+    i = 0;
+    /// @todo Matching tactic: forming the initial destination address before
+    /// the loop makes MWCC advance that induction web before the first store.
+    (void) &handicaps[i];
+    for (; i < 4; i++) {
         if (p->player_standings[i].slot_type != 3) {
             count += 1;
             positions[p->player_standings[i].is_small_loser] = i;
