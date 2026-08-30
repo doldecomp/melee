@@ -1888,7 +1888,6 @@ void psDispParticles(u32 target_link, u32 sw)
                 u32 blend_mode;
                 u8 alpha0;
                 u8 alpha1;
-                Mtx temp_mtx;
                 GXTexWrapMode wrap_s;
                 GXTexWrapMode wrap_t;
                 f32 scale_s;
@@ -2080,6 +2079,8 @@ void psDispParticles(u32 target_link, u32 sw)
                             wrap_t = GX_CLAMP;
                         }
                         if ((pp->kind & (MirrorS | MirrorT)) != sp7A8) {
+                            Mtx temp_mtx;
+
                             sp7A8 = pp->kind & (MirrorS | MirrorT);
                             sp7B0 = NULL;
                             PSMTXScale(temp_mtx, scale_s, scale_t, 1.0f);
