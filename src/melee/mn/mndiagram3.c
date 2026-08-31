@@ -477,7 +477,7 @@ void mnDiagram3_Create(int arg0)
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
 }
 
-static inline void mnDiagram3_CreateRowLabels(int count)
+static inline void mnDiagram3_SetupRows(HSD_JObj* jobj, Diagram3* popup_data, int count)
 {
     f32 spacing;
     f32 row_spacing;
@@ -486,6 +486,9 @@ static inline void mnDiagram3_CreateRowLabels(int count)
     Diagram3* data;
     int scroll;
     u8 stat_idx;
+
+    HSD_JObjSetTranslateZWithMtxDirty(
+        jobj, HSD_JObjGetTranslationZ(popup_data->jobjs[8]));
 
     data = mnDiagram3_804D6C20->user_data;
     scroll = data->scroll_offset;
@@ -607,11 +610,8 @@ void mnDiagram3_Init(void* arg0)
         row_spacing = mnDiagram3_GetPopupY(data->jobjs[8], row_spacing);
         HSD_JObjSetTranslateYWithMtxDirty(popup_jobj, row_spacing);
 
-        HSD_JObjSetTranslateZWithMtxDirty(
-            popup_jobj, HSD_JObjGetTranslationZ(data->jobjs[8]));
+        mnDiagram3_SetupRows(popup_jobj, data, 10);
     }
-
-    mnDiagram3_CreateRowLabels(10);
 
     mnDiagram3_PopulateRankings(mnDiagram3_804D6C20);
 
