@@ -1085,9 +1085,9 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 w1inv * (pv13 + (pvmtx[1][2] * prev_z +
                                  (pvmtx[1][0] * prev_x + prev_y_terms)));
         } else if (pp->kind & Tornado) {
+            f32 prev_z;
             f32 prev_x;
             f32 prev_y;
-            f32 prev_z;
             f32 dx;
             f32 dy;
             f32 dz;
