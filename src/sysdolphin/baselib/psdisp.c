@@ -1852,6 +1852,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
     psdisp_Mtx billboard_mtx;
+    f32 y2;
     GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
     s32 prev_tex_interp_near;
@@ -1942,7 +1943,6 @@ void psDispParticles(u32 target_link, u32 sw)
                             f32 w3;
                             f32 y0;
                             f32 y1;
-                            f32 y2;
 
                             GXGetProjectionv(prj);
                             if (0.0f == prj[0]) {
