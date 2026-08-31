@@ -619,6 +619,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     s32 i;
     s32 w;
 
+    (void) c;
     psSetCurrentMtx(GX_PNMTX0);
     w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
     if (prevLineWidth != (s32) (u8) w) {
