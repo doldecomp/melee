@@ -5308,6 +5308,7 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+#ifdef MUST_MATCH
 /* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
 static inline float sqrtf_store(float x, volatile float* y)
 {
@@ -5317,10 +5318,13 @@ static inline float sqrtf_store(float x, volatile float* y)
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         *y = (float) (x * guess);
-        return *y;
+        return *(volatile float*) y;
     }
     return x;
 }
+#else
+#define sqrtf_store(x, y) sqrtf(x)
+#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
