@@ -30,10 +30,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
+#ifdef MUST_MATCH
+    UNUSED f32 inner_pad[1];
+#endif
     f32 cumDist[3];
     AfterimageVtx vtx_buf[152];
+    f32* distPtr;
     f32 d2;
-    s32 numSubdiv;
 
     if (arg1 != 2) {
         return;
@@ -95,14 +98,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             break;
         case FTKIND_LINK:
         case FTKIND_CLINK: {
-            ftLk_DatAttrs* da = fp->dat_attrs;
-            params = (itSword_UnkBytes*) &da->x64;
+            params =
+                (itSword_UnkBytes*) &((ftLk_DatAttrs*) fp->dat_attrs)->x64;
             break;
         }
         case FTKIND_MARS:
         case FTKIND_EMBLEM: {
-            MarsAttributes* da = fp->dat_attrs;
-            params = (itSword_UnkBytes*) &da->x78;
+            params =
+                (itSword_UnkBytes*) &((MarsAttributes*) fp->dat_attrs)->x78;
             break;
         }
         default:
@@ -111,7 +114,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     }
 
     {
-        s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
         s32 ringIdx;
@@ -119,7 +121,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         f32* dp;
         Vec3 prevPos, delta, crossProd, tempDir;
 
-        PAD_STACK(0x14);
+        PAD_STACK(0x1C);
 
         {
             s32 idx = fp->x2101_bits_0to6;
@@ -141,6 +143,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             prevPos.x = prevPos.y = prevPos.z = 0.0f;
 
             for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
+                s32 nextIdx;
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
 
                 delta.x = entry->xC.x * x20FC + entry->x0.x - prevPos.x;
@@ -171,7 +174,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
         {
             s32 remaining;
-            f32* distPtr;
+            struct Fighter_x20B0_t* curEntry;
+            s32 nextIdx;
             s32 numVerts;
             f32 scaleDiff;
             s32 curIdx2;
@@ -207,7 +211,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 s32 alpha;
                 struct Fighter_x20B0_t* nextEntry;
 
-                struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
+                curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
@@ -236,6 +240,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 if (remaining != 0) {
                     s32 nextRingIdx;
+                    s32 numSubdiv;
 
                     if (curIdx2 != 0) {
                         nextRingIdx = curIdx2 - 1;
