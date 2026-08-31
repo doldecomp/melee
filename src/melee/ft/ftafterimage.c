@@ -30,9 +30,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-#ifdef MUST_MATCH
     UNUSED f32 inner_pad[1];
-#endif
     f32 cumDist[3];
     AfterimageVtx vtx_buf[152];
     f32* distPtr;

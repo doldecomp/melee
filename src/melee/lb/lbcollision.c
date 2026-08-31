@@ -1021,10 +1021,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
-#ifdef MUST_MATCH
     u8 operand_pad[4];
     u8 frame_pad[32];
-#endif
     float start_delta_z;
     float hit_start_dot;
     float scaled_hurt_radius;
@@ -1272,9 +1270,7 @@ block_39:
                 Vec3 a2;
                 Vec3 d1;
                 Vec3 c3;
-#ifdef MUST_MATCH
                 PAD_STACK(4);
-#endif
                 c3 = *hurt_start;
                 hit_param = 0.0F;
                 d1.x = hurt_end_x - hurt_start->x;
