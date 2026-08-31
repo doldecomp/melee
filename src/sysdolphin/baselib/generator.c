@@ -606,10 +606,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                             cone_angle = (f32) (M_PI - gen->angle);
                         }
                     } else {
-                        f64 cone_angle_d =
-                            M_PI_2 - atan2f(gen->aux.cone.height, sin_az) -
-                            gen->angle;
-                        cone_angle = (f32) cone_angle_d;
+                        cone_angle =
+                            (f32) (M_PI_2 -
+                                   atan2f(gen->aux.cone.height, sin_az) -
+                                   gen->angle);
                     }
                 } else {
                     {
@@ -631,10 +631,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                             cone_angle = (f32) (M_PI + gen->angle);
                         }
                     } else {
-                        f64 cone_angle_d =
-                            gen->angle +
-                            (M_PI_2 - atan2f(gen->aux.cone.height, sin_az));
-                        cone_angle = (f32) cone_angle_d;
+                        cone_angle =
+                            (f32) (gen->angle +
+                                   (M_PI_2 -
+                                    atan2f(gen->aux.cone.height, sin_az)));
                     }
                 }
                 break;
@@ -673,8 +673,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
 
             /* Compute emission position and velocity from angle */
-            emit_pos.x = sin_az * cosf(cur_angle);
-            emit_pos.y = sin_az * sinf(cur_angle);
+            cos_az = cur_angle;
+            emit_pos.x = sin_az * cosf(cos_az);
+            emit_pos.y = sin_az * sinf(cos_az);
 
             /* Shape 6,7: z from random, scale by height */
             if ((gen->type & 0xF) == 6 || (gen->type & 0xF) == 7) {
@@ -691,8 +692,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             /* Compute velocity direction from cone angle */
             {
                 f32 sin_ca = elevation * sinf(cone_angle);
-                vec.x = sin_ca * cosf(cur_angle);
-                vec.y = sin_ca * sinf(cur_angle);
+                vec.x = sin_ca * cosf(cos_az);
+                vec.y = sin_ca * sinf(cos_az);
                 vec.z = elevation * cosf(cone_angle);
             }
 
@@ -713,6 +714,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             PSMTXMultVec(rot_mtx, &vec, &vec);
 
             /* Spawn particle */
+            cur_angle = cos_az;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen,
                          emit_pos.x, emit_pos.y, emit_pos.z, vec.x, vec.y,
