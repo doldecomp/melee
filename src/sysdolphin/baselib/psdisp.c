@@ -1065,24 +1065,24 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w0inv = -1.0f / w0;
-            w1 = vmtx[2][3] + (vmtx[2][2] * prev_z +
-                               (vmtx[2][1] * prev_y + vmtx[2][0] * prev_x));
+            w1 = vmtx[2][3] + (prev_z * vmtx[2][2] +
+                               (vmtx[2][1] * prev_y + prev_x * vmtx[2][0]));
             if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
             prev_y_terms = pvmtx[1][1] * prev_y;
-            prev_x_sum = pvmtx[0][0] * prev_x + pvmtx[0][1] * prev_y;
+            prev_x_sum = prev_x * pvmtx[0][0] + pvmtx[0][1] * prev_y;
             pv03 = pvmtx[0][3];
             pv13 = pvmtx[1][3];
             x = w0inv * (pv03 + (pvmtx[0][2] * pp->pos.z +
                                  (pvmtx[0][0] * pp->pos.x +
                                   pvmtx[0][1] * pp->pos.y))) -
                 w1inv * (pv03 + (pvmtx[0][2] * prev_z + prev_x_sum));
-            y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z +
+            y = w0inv * (pv13 + (pp->pos.z * pvmtx[1][2] +
                                  (pvmtx[1][0] * pp->pos.x +
-                                  pvmtx[1][1] * pp->pos.y))) -
-                w1inv * (pv13 + (pvmtx[1][2] * prev_z +
+                                  pp->pos.y * pvmtx[1][1]))) -
+                w1inv * (pv13 + (prev_z * pvmtx[1][2] +
                                  (pvmtx[1][0] * prev_x + prev_y_terms)));
         } else if (pp->kind & Tornado) {
             f32 prev_z;
