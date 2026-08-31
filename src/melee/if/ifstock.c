@@ -200,10 +200,14 @@ void ifStock_802F8298(HSD_GObj* gobj)
             jobj2 = stock->player[user_data->player].x4[i + 1];
             if (i < stock->player[user_data->player].stocks) {
                 HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
-                if (ifStock_802F8298_get_flag(user_data, stock) != 0) {
-                    stock->x204[user_data->player].x0[i + 5] = 0;
-                } else {
-                    stock->x204[user_data->player].x0[i + 5] = 10;
+                {
+                    unsigned char* data =
+                        stock->x204[user_data->player].x0;
+                    if (ifStock_802F8298_get_flag(user_data, stock) != 0) {
+                        data[i + 5] = 0;
+                    } else {
+                        data[i + 5] = 10;
+                    }
                 }
             } else {
                 if (stock->x204[user_data->player].x0[2] == 0) {
