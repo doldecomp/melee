@@ -2815,12 +2815,13 @@ void _Toy_80309404(HSD_GObj* gobj)
     struct {
         void* next;
         void* next_wrap;
+        u8 pad[4];
         void* prev;
         void* prev_wrap;
         u8 trailing_pad[0x78];
     } archive_symbols;
 
-    PAD_STACK(164);
+    PAD_STACK(160);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) &_Toy_804A26B8;
@@ -3347,16 +3348,9 @@ void _Toy_80309404(HSD_GObj* gobj)
                             total = *gmMainLib_GetTrophyCount();
                         }
                         if (total > 3) {
-                            s32 cnt;
-
-                            if ((gm_IsCurrently1PMode() != 0) ||
-                                (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
+                            if ((s32) (display->selectedIdx + 1) >=
+                                _Toy_GetTrophyTotal(base))
                             {
-                                cnt = base->trophy_count;
-                            } else {
-                                cnt = *gmMainLib_GetTrophyCount();
-                            }
-                            if ((s32) (display->selectedIdx + 1) >= cnt) {
                                 s32 cnt2;
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
