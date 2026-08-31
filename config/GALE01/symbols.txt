@@ -23018,7 +23018,6 @@ grGr_callbacks = .data:0x803E7638; // type:object size:0x8C scope:local
 grGr_StageData = .data:0x803E76D0; // type:object size:0x34 scope:global
 @260 = .data:0x803E7704; // type:object size:0x21 scope:local data:string
 @291 = .data:0x803E7728; // type:object size:0xB scope:local data:string
-grGr_803E7733 = .data:0x803E7733; // type:object size:0x1 scope:local
 grGr_803E7734 = .data:0x803E7734; // type:object size:0x28 scope:local
 grGr_803E775C = .data:0x803E775C; // type:object size:0x20 scope:local
 grGr_803E777C = .data:0x803E777C; // type:object size:0x38 scope:local
