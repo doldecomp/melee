@@ -608,7 +608,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     if (stock->x0 != NULL) {
         user_data = ((struct IfStockData*) stock)[player].x0;
         *(user_data += sizeof(struct IfStockDataOffset) -
-                        sizeof(struct IfStockData)) = player;
+                       sizeof(struct IfStockData)) = player;
         stock->x204[player].x0[1] = b;
         stock->x204[player].x0[2] = 1;
         if (stock->player[player].x0 != NULL) {
@@ -641,33 +641,31 @@ void ifStock_802F98E8(unsigned char player, int b)
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x24,
                                         JOBJ_HIDDEN);
                     if (*stocks <= 5) {
-                            HSD_JObjSetFlagsAll(
-                                ifStock_804A1378.player[player].x3C,
-                                JOBJ_HIDDEN);
-                            for (i = 0; i < 7; i++, user_data++) {
-                                icon_jobj =
-                                    ifStock_804A1378.player[player].x4[i + 1];
-                                if (i < ifStock_804A1378.player[player].stocks ||
-                                    i >= 5)
-                                {
-                                    user_data[5] = 0;
-                                    if (i >= 5) {
-                                        HSD_JObjSetFlagsAll(icon_jobj,
-                                                            JOBJ_HIDDEN);
-                                    }
-                                } else {
-                                    user_data[5] = 10;
-                                    HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
+                        HSD_JObjSetFlagsAll(
+                            ifStock_804A1378.player[player].x3C, JOBJ_HIDDEN);
+                        for (i = 0; i < 7; i++, user_data++) {
+                            icon_jobj =
+                                ifStock_804A1378.player[player].x4[i + 1];
+                            if (i < ifStock_804A1378.player[player].stocks ||
+                                i >= 5)
+                            {
+                                user_data[5] = 0;
+                                if (i >= 5) {
+                                    HSD_JObjSetFlagsAll(icon_jobj,
+                                                        JOBJ_HIDDEN);
                                 }
-                                HSD_JObjReqAnimAll(
-                                    icon_jobj,
-                                    *ifStock_802F98E8_get_anim(user_data));
-                                HSD_TObjReqAnimAll(
-                                    icon_jobj->u.dobj->mobj->tobj,
-                                    gm_80168BF8(player));
-                                HSD_AObjSetRate(
-                                    icon_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
+                            } else {
+                                user_data[5] = 10;
+                                HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                             }
+                            HSD_JObjReqAnimAll(
+                                icon_jobj,
+                                *ifStock_802F98E8_get_anim(user_data));
+                            HSD_TObjReqAnimAll(icon_jobj->u.dobj->mobj->tobj,
+                                               gm_80168BF8(player));
+                            HSD_AObjSetRate(
+                                icon_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
+                        }
                     }
                     break;
                 case 1:
@@ -676,8 +674,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                     HSD_JObjSetFlagsAll(ifStock_802F98E8_get_x3C(player),
                                         JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++, user_data++) {
-                        icon_jobj =
-                            ifStock_804A1378.player[player].x4[i + 1];
+                        icon_jobj = ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
                             user_data[5] = 0;
                         } else {
@@ -711,8 +708,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x3C,
                                         JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++, user_data++) {
-                        icon_jobj =
-                            ifStock_804A1378.player[player].x4[i + 1];
+                        icon_jobj = ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
                             user_data[5] = 0;
                         } else {
@@ -740,15 +736,15 @@ void ifStock_802F98E8(unsigned char player, int b)
                 {
                     struct IfStockMatchInfo* match_info =
                         ifStock_802F98E8_get_match_info(ae44, player);
-                if (match_info->x4_b1) {
-                    GXColor c = { 0x08, 0x08, 0x08, 0x80 };
-                    GXColor* color = &c;
-                    ifStock_802FB4EC(player, color);
-                } else if (match_info->x4_b0) {
-                    GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
-                    GXColor* color = &c;
-                    ifStock_802FB4EC(player, color);
-                }
+                    if (match_info->x4_b1) {
+                        GXColor c = { 0x08, 0x08, 0x08, 0x80 };
+                        GXColor* color = &c;
+                        ifStock_802FB4EC(player, color);
+                    } else if (match_info->x4_b0) {
+                        GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
+                        GXColor* color = &c;
+                        ifStock_802FB4EC(player, color);
+                    }
                 }
                 fn_802F9410(gobj); // inlined
             } else {
