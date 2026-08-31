@@ -21,7 +21,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
 
-void gm_ModeState_ExitApproachVs(GameModeState* arg0)
+void gm_ModeState_ApproachVs_OnExit(GameModeState* arg0)
 {
     u8 temp_ret;
     u8 temp_r0;
@@ -48,7 +48,7 @@ void gm_ModeState_ExitApproachVs(GameModeState* arg0)
     }
 }
 
-void gm_801A6308(GameModeState* arg0)
+void gm_ModeState_Prize_OnExit(GameModeState* arg0)
 {
     gm_SetNextGameModeStateId(0);
 }

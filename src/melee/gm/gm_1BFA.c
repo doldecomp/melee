@@ -23,7 +23,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         0,
         2,
         0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
@@ -35,7 +35,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         1,
         2,
         0,
-        gm_ModeState_EnterApproachVs,
+        gm_ModeState_ApproachVs_OnEnter,
         gm_801BFBA8,
         {
             GS_VS,
@@ -47,7 +47,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         2,
         2,
         0,
-        gm_801BFCFC,
+        gm_ModeState_Prize_OnEnter,
         gm_801BFF7C,
         {
             GS_PRIZE_INTERFACE,
@@ -58,7 +58,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
     { -1 },
 };
 
-void gm_801BFA6C(GameModeState* arg0)
+void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
@@ -72,7 +72,7 @@ void gm_801BFA6C(GameModeState* arg0)
     lb_8001CE00();
 }
 
-void gm_ModeState_EnterApproachVs(GameModeState* arg0)
+void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
@@ -153,7 +153,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(GameModeState* arg0)
+void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
 {
     u8* var_r28;
     u32* temp_r29_2;

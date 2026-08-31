@@ -294,7 +294,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->xC_b1 = (src->flags & 0x80) >> 7;
     arg0->xC_b2 = (src->flags & 0x40) >> 6;
     arg0->xC_b3 = (src->flags & 0x20) >> 5;
-    arg0->xC_b4 = (src->flags & 0x10) >> 4;
+    arg0->vs_invisible = (src->flags & 0x10) >> 4;
     arg0->xC_b6 = (src->flags & 0x08) >> 3;
     arg0->xC_b7 = (src->flags & 0x04) >> 2;
     arg0->xD_b1 = 0;

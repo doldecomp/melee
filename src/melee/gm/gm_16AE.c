@@ -1628,8 +1628,8 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->xC_b4;
-    if (arg1->xC_b4) {
+    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->vs_invisible;
+    if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
     } else {

@@ -109,7 +109,7 @@ struct PlayerInitData {
     u8 xC_b1 : 1;
     u8 xC_b2 : 1; ///< metal
     u8 xC_b3 : 1;
-    u8 xC_b4 : 1; ///< invisible
+    u8 vs_invisible : 1;
     u8 xC_b5 : 1;
     u8 xC_b6 : 1;
     u8 xC_b7 : 1;

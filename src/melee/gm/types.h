@@ -382,9 +382,9 @@ struct gmm_x0 {
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
-    /* 0x0590 */ VsModeData vs_melee; ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0;  ///< super sudden death
-    /* 0x0810 */ VsModeData unk_810;  ///< invisible melee
+    /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
+    /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
     /* 0x0950 */ VsModeData vs_camera;
     /* 0x0A90 */ VsModeData unk_A90;    ///< fixed camera mode
     /* 0x0BD0 */ VsModeData unk_BD0;    ///< single button melee
