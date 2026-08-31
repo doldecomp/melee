@@ -460,14 +460,12 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         Vec3 arg5_offset;
         float arg1_y;
         float unk_sum = arg6 + arg7;
-        Vec3 vec4 = *arg0;
 
-        (void) vec4;
-        arg4_offset = vec4;
         PAD_STACK(60);
         {
             float candidate0_arg5_scl;
             float candidate1_arg4_scl;
+            Vec3 vec4 = *arg0;
             Vec3 a2;
             Vec3 d1;
             Vec3 c3;
@@ -477,6 +475,8 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             Vec3 c2;
             Vec3 arg2_copy;
 
+            (void) vec4;
+            arg4_offset = vec4;
             arg2_copy = *arg2;
             (void) arg2_copy;
             arg5_offset = arg2_copy;
@@ -658,11 +658,11 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                             } else {
                                 if (approximatelyZero(denom)) {
                                     float arg4_mid_y;
-                                    float arg1_mid_y;
                                     float arg4_mid_x;
-                                    float arg1_mid_x;
                                     float arg4_offset_z;
                                     float arg1_mid_z;
+                                    float arg1_mid_x;
+                                    float arg1_mid_y;
 
                                     mid.y = 0.5 * d2_y + arg5_offset.y;
                                     mid.x = 0.5 * d2_x + arg5_offset.x;
