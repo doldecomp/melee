@@ -354,7 +354,6 @@ HSD_Generator* hsd_8039D9C8(void)
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Vec3 vel_copy;
-    f32 tmp;
     Vec3 emit_pos;
     Vec3 tmpvec;
     Vec3 vec;
@@ -365,6 +364,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 cross1;
     Vec3 vel_norm;
     Mtx trig_mtx;
+    f64 eps;
+    f32 vel_mag_sq;
     f32 angle1;
     f32 sin_az;
     f32 cos_az;
@@ -387,8 +388,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     vel_copy.z = gen->vel.z;
 
     /* Compute velocity magnitude */
-    radius = sqrtf(vel_copy.z * vel_copy.z +
-                   (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
+    vel_mag_sq = sqrtf(vel_copy.z * vel_copy.z +
+                       (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
 
     /* Initialize rotation matrix */
     PSMTXIdentity(rot_mtx);
@@ -454,15 +455,13 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Velocity-based rotation */
-    if ((gen->type & 0xF) != 1 && radius > 1.1920929e-7F) {
+    if ((gen->type & 0xF) != 1 && vel_mag_sq > 1.1920929e-7F) {
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
         PSVECNormalize(&vel_norm, &vel_norm);
 
-        tmp = vel_norm.z;
-        *(s32*) &tmp &= 0x7FFFFFFF;
-        if (tmp < 1.1754944e-38F) {
+        if (fabsf_bitwise(vel_norm.z) < 1.1754944e-38F) {
             if (vel_norm.y >= 0.0F) {
                 sin_az = 1.5707964F;
             } else {
@@ -477,9 +476,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         {
             f32 projected_z = vel_norm.z * sin_az;
             projected_z += vel_norm.y * cos_az;
-            tmp = projected_z;
-            *(s32*) &tmp &= 0x7FFFFFFF;
-            if (tmp < 1.1754944e-38F) {
+            if (fabsf_bitwise(projected_z) < 1.1754944e-38F) {
                 if (vel_norm.x >= 0.0F) {
                     elevation = 1.5707964F;
                 } else {
@@ -509,13 +506,11 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
         PSMTXConcat(rot_mtx, trig_mtx, rot_mtx);
     }
-    elevation = radius;
+    elevation = vel_mag_sq;
 
     /* Type 2: extract Euler angles from rotation matrix */
     if ((gen->type & 0xF) == 2) {
-        tmp = rot_mtx[2][2];
-        *(s32*) &tmp &= 0x7FFFFFFF;
-        if (tmp < 1.1754944e-38F) {
+        if (fabsf_bitwise(rot_mtx[2][2]) < 1.1754944e-38F) {
             if (rot_mtx[1][2] >= 0.0F) {
                 angle1 = 1.5707964F;
             } else {
@@ -527,9 +522,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         {
             f32 first = rot_mtx[2][2] * cosf(angle1);
             f32 comb = first + rot_mtx[1][2] * sinf(angle1);
-            tmp = comb;
-            *(s32*) &tmp &= 0x7FFFFFFF;
-            if (tmp < 1.1754944e-38F) {
+            if (fabsf_bitwise(comb) < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {
                     angle3 = 1.5707964F;
                 } else {
@@ -573,6 +566,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Main particle emission loop */
+    eps = 0.001F;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */
@@ -597,9 +591,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             case 6:
                 if (gen->angle < 0.0F) {
                     cur_angle += angle_step;
-                    tmp = sin_az;
-                    *(s32*) &tmp &= 0x7FFFFFFF;
-                    if (tmp < 1.1754944e-38F) {
+                    if (fabsf_bitwise(sin_az) < 1.1754944e-38F) {
                         if (gen->aux.cone.height >= 0.0F) {
                             cone_angle = -gen->angle;
                         } else {
@@ -622,9 +614,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         cur_angle = cone_angle * rnd + cur_angle;
                         cone_angle = radius * gen->angle;
                     }
-                    tmp = sin_az;
-                    *(s32*) &tmp &= 0x7FFFFFFF;
-                    if (tmp < 1.1754944e-38F) {
+                    if (fabsf_bitwise(sin_az) < 1.1754944e-38F) {
                         if (gen->aux.cone.height >= 0.0F) {
                             cone_angle = gen->angle;
                         } else {
@@ -884,7 +874,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 8: /* sphere emission */
         {
             f32 r0 = gen->aux.cone.height;
-            if (r0 == 0.0F || __fabs(r0 - M_PI) < (f64) 0.001F) {
+            if (r0 == 0.0F || __fabs(r0 - M_PI) < eps) {
                 radius = HSD_Randf();
                 radius = sqrtf(radius);
                 radius = (f32) (M_PI_2 * radius);
