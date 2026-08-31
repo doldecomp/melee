@@ -814,11 +814,10 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                            prev_z - right_z);
             {
                 u8 a = color.a;
-                f32 alpha = (f32) a * pp->trail;
                 u8 b = color.b;
                 u8 g = color.g;
                 u8 r = color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
+                GXColor4u8(r, g, b, (u8) ((f32) a * pp->trail));
             }
             if (pp->kind & DispTexture) {
                 u8 tex_base = (pp->kind >> 16) & 0xC;
@@ -1047,12 +1046,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w0inv;
             f32 w1;
             f32 w1inv;
-            f32 cur_y_term;
             f32 prev_y_terms;
-            f32 prev_xy;
             f32 prev_x_sum;
-            f32 cur_yx;
-            f32 prev_yx;
             f32 pv13;
             f32 pv03;
 
@@ -1076,20 +1071,19 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_xy = pvmtx[0][1] * prev_y;
             prev_y_terms = pvmtx[1][1] * prev_y;
-            cur_y_term = pvmtx[1][1] * pp->pos.y;
-            prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
-            prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
-            cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
+            prev_x_sum = pvmtx[0][0] * prev_x + pvmtx[0][1] * prev_y;
             pv03 = pvmtx[0][3];
             pv13 = pvmtx[1][3];
             x = w0inv * (pv03 + (pvmtx[0][2] * pp->pos.z +
                                  (pvmtx[0][0] * pp->pos.x +
                                   pvmtx[0][1] * pp->pos.y))) -
                 w1inv * (pv03 + (pvmtx[0][2] * prev_z + prev_x_sum));
-            y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
-                w1inv * (pv13 + (pvmtx[1][2] * prev_z + prev_yx));
+            y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z +
+                                 (pvmtx[1][0] * pp->pos.x +
+                                  pvmtx[1][1] * pp->pos.y))) -
+                w1inv * (pv13 + (pvmtx[1][2] * prev_z +
+                                 (pvmtx[1][0] * prev_x + prev_y_terms)));
         } else if (pp->kind & Tornado) {
             f32 prev_x;
             f32 prev_y;
@@ -1571,9 +1565,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
             }
-            GXWGFifo.f32 = -ax + prev_pos.x;
-            GXWGFifo.f32 = -ay + prev_pos.y;
-            GXWGFifo.f32 = prev_pos.z;
+            GXPosition3f32(-ax + prev_pos.x, -ay + prev_pos.y, prev_pos.z);
             {
                 f32 alpha = (f32) draw_color.a * pp->trail;
                 u8 b = draw_color.b;
@@ -1610,9 +1602,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
-            GXWGFifo.f32 = bx + prev_pos.x;
-            GXWGFifo.f32 = by + prev_pos.y;
-            GXWGFifo.f32 = prev_pos.z;
+            GXPosition3f32(bx + prev_pos.x, by + prev_pos.y, prev_pos.z);
             {
                 u8 a = draw_color.a;
                 f32 alpha = (f32) a * pp->trail;
