@@ -1781,10 +1781,10 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                            &shield_hit->pos,     // hurt_end
                            &sp74,                // hit_closest
                            &sp68,                // hurt_closest
-                           hurt_mtx,              // hurt_mtx
+                           hurt_mtx,             // hurt_mtx
                            &arg0->hurt_coll_pos, // out_contact_pos
                            &arg0->coll_distance, // out_overlap
-                           hit_radius,             // hit_radius
+                           hit_radius,           // hit_radius
                            shield_hit->size,     // hurt_radius
                            20.0F * arg5          // broadphase_scale
     );
