@@ -549,8 +549,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 4: {
             f32 min_a = gen->aux.disc.minAngle;
             f32 rnd = HSD_Randf();
-            angle_step = (gen->aux.disc.maxAngle - min_a) /
-                         (f32) (s32) gen->count;
+            angle_step =
+                (gen->aux.disc.maxAngle - min_a) / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
             break;
         }
@@ -558,8 +558,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 7: {
             f32 min_a = gen->aux.cone.minAngle;
             f32 rnd = HSD_Randf();
-            angle_step = (gen->aux.cone.maxAngle - min_a) /
-                         (f32) (s32) gen->count;
+            angle_step =
+                (gen->aux.cone.maxAngle - min_a) / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
             break;
         }
@@ -899,8 +899,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
             {
                 cone_angle = HSD_Randf();
-                cone_angle =
-                    (f32) (2.0 * (M_PI * (f64) cone_angle));
+                cone_angle = (f32) (2.0 * (M_PI * (f64) cone_angle));
                 {
                     f32 r2 = gen->radius;
                     if (r2 < 0.0F) {
