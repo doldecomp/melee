@@ -365,7 +365,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 cross1;
     Vec3 vel_norm;
     Mtx trig_mtx;
-    f64 eps;
+    union {
+        f64 eps;
+        f64 angle;
+    } scalar;
     f32 vel_mag_sq;
     f32 angle1;
     f32 sin_az;
@@ -558,7 +561,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
         default: {
             f32 rnd = HSD_Randf();
-            cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
+            cur_angle =
+                (f32) ((scalar.angle = M_PI * (f64) rnd) * 2.0);
             angle_step = (f32) ((2.0 * M_PI) / (f64) (s32) gen->count);
             break;
         }
@@ -566,7 +570,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Main particle emission loop */
-    eps = 0.001F;
+    scalar.eps = 0.001F;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */
@@ -876,7 +880,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 8: /* sphere emission */
         {
             f32 r0 = gen->aux.cone.height;
-            if (r0 == 0.0F || __fabs(r0 - M_PI) < eps) {
+            if (r0 == 0.0F || __fabs(r0 - M_PI) < scalar.eps) {
                 radius = HSD_Randf();
                 radius = sqrtf(radius);
                 radius = (f32) (M_PI_2 * radius);
