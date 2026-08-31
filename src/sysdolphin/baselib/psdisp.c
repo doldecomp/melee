@@ -1247,6 +1247,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         HSD_psAppSRT* appsrt = pp->appsrt;
         f32 y_component;
 
+        (void) y_component;
         cur_x = appsrt->ssy * (y_component = pp->pos.y);
         cur_y = appsrt->x78 * y_component;
         cur_z = appsrt->x88 * y_component;
