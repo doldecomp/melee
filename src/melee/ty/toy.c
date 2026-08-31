@@ -3538,7 +3538,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         u32 button;
         f32 angle;
 
-        PAD_STACK(64);
+        PAD_STACK(68);
 
         {
             ToyUnkJObjData* data = anim->gobj->hsd_obj;
@@ -3929,7 +3929,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 u8 trailing_pad[40];
             } archive_symbols;
 
-            PAD_STACK(192);
+            PAD_STACK(188);
 
             moved_x = 0.3f * adj_sx;
             moved_y = 0.3f * adj_sy;
