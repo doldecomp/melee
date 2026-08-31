@@ -58,7 +58,6 @@ static inline void gm_1884_sdata2_order(void)
     (void) 0.600000024f;
     (void) 0.0f;
     (void) 100.0f;
-    (void) U32_TO_F32;
 }
 
 typedef struct {
@@ -1033,6 +1032,10 @@ ClassicStageEntry gmTraining_ClassicStages[65] = {
     { 2, 0, 48, 240, { 5, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 1, 0, 55, 200, { 7, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 };
+
+#ifdef MUST_MATCH
+static const f64 gm_1884_sdata2_order_u32[1] = { U32_TO_F32 };
+#endif
 
 u8 gm_8018A160(u8 difficulty, u8 stage_slot)
 {
