@@ -5,7 +5,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
@@ -160,7 +164,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,
                                   NULL);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = (float) fp->co_attrs.jab_2_input_window;
+        fp->hitlag_mul = fp->co_attrs.jab_2_input_window;
         fp->unk_msid = 44;
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;

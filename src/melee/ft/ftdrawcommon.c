@@ -5,7 +5,6 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0C88.h"
-#include "ft/ft_0C8C.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -14,9 +13,10 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_0146.h"
 #include "lb/lbcollision.h"
 #include "lb/lbgx.h"
-#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -116,7 +116,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
             }
         } else {
             fighter_2 = fighter->x1988;
-            if (fighter_2 == NULL && fighter->x198C == 0) {
+            if (fighter_2 == 0 && fighter->x198C == 0) {
                 for (i = 0; i < (unsigned) fighter->hurt_capsules_len; i++) {
                     if (lbColl_8000A244(&fighter->hurt_capsules[i].capsule,
                                         arg1, ftCommon_8007F804(fighter),

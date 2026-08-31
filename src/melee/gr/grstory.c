@@ -11,7 +11,7 @@
 #include "it/it_26B1.h"
 #include "it/items/itheiho.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
@@ -26,23 +26,38 @@ struct grStory_YakumonoParam {
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
-static StageCallbacks grSt_803E26F0[] = {
-    { NULL, NULL, NULL, NULL, 0 },
-    { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
-      0 },
-    // Randall
-    { grStory_801E3370, grStory_801E33D8, grStory_801E33E0, grStory_801E3414,
-      0 },
-    // Shy Guys
-    { grStory_801E3234, grStory_801E332C, grStory_801E3334, grStory_801E336C,
-      (1 << 30) | (1 << 31) },
+static StageCallbacks grSt_StageCallbacks[] = {
+    { 0 },
+    {
+        // Randall
+        grStory_801E31C0,
+        grStory_801E3224,
+        grStory_801E322C,
+        grStory_801E3230,
+        0,
+    },
+    {
+        // Shy Guys
+        grStory_801E3370,
+        grStory_801E33D8,
+        grStory_801E33E0,
+        grStory_801E3414,
+        0,
+    },
+    {
+        grStory_801E3234,
+        grStory_801E332C,
+        grStory_801E3334,
+        grStory_801E336C,
+        (1 << 30) | (1 << 31),
+    },
 };
 
 static struct grStory_YakumonoParam* yakumono_param;
 
-StageData grSt_803E274C = {
-    STORY,
-    grSt_803E26F0,
+StageData grSt_StageData = {
+    Gr_Kind_Story,
+    grSt_StageCallbacks,
     "/GrSt.dat",
     grStory_801E3030,
     grStory_801E302C,
@@ -86,7 +101,7 @@ bool grStory_801E30D0(void)
 Ground_GObj* grStory_801E30D8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
+    StageCallbacks* callbacks = &grSt_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -118,7 +133,7 @@ void grStory_801E322C(Ground_GObj* gobj) {}
 
 void grStory_801E3230(Ground_GObj* gobj) {}
 
-inline int randi(int max)
+static inline int randi(int max)
 {
     return max ? HSD_Randi(max) : 0;
 }
@@ -209,7 +224,7 @@ void grStory_801E3414(Ground_GObj* gobj) {}
 
 /// floating point random number centered at 0
 /// with an amplitude of 1
-inline f32 frand_amp1(void)
+static inline f32 frand_amp1(void)
 {
     return 2.0F * (HSD_Randf() - 0.5F);
 }
@@ -309,7 +324,7 @@ bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* jobj)
     }
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 static u32 _[] = {
     0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
     0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,

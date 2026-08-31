@@ -1,6 +1,5 @@
 #include "itgshell.h"
 
-#include "common_structs.h"
 #include "inlines.h"
 
 #include <placeholder.h>
@@ -12,18 +11,17 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/items/itgshell.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
 #include <sysdolphin/baselib/random.h>
-#include <MSL/math.h>
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -41,7 +39,7 @@ typedef struct itGShell_Attrs {
     float x30;
     Vec x34;
 } itGShell_Attrs;
-STATIC_ASSERT(sizeof(itGShell_Attrs) == 64);
+ASSERT_SIZE(itGShell_Attrs, 64);
 
 ItemStateTable it_803F5BA8[] = {
     { -1, itGshell_UnkMotion0_Anim, itGshell_UnkMotion0_Phys,
@@ -361,14 +359,18 @@ void itGShell_Logic14_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itGshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     it_8028B988(gobj);
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itGshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -503,8 +505,10 @@ void it_8028C898(Item_GObj* gobj)
     ip->jumped_on = it_8028CF68;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itGshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data; // GET_ITEM(gobj);
@@ -526,7 +530,9 @@ bool itGshell_UnkMotion8_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itGshell_UnkMotion8_Phys(Item_GObj* gobj)
 {

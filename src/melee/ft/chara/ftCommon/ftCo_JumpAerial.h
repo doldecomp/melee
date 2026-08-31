@@ -1,10 +1,7 @@
 #ifndef GALE01_0CB6EC
 #define GALE01_0CB6EC
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 /* 0CB6EC */ void ft_800CB6EC(Fighter* fp, s32 arg1);
 /* 0CB804 */ bool ft_did_jump(Fighter* fp, bool);

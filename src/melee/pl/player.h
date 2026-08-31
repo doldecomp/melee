@@ -276,13 +276,7 @@ void Player_SetMoreFlagsBit1(s32 slot, u8 bit1);
 s32 Player_GetUnk4D(s32 slot);
 void Player_SetUnk4D(s32 slot, s8 unk4D);
 u8 Player_GetFlagsAEBit1(s32 slot);
-
-#ifdef BUGFIX
-void Player_SetFlagsAEBit1(int slot, u8 bit1);
-#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
-#endif
-
 int Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);
 bool Player_80036058(s32 slot);
@@ -302,7 +296,7 @@ void Player_800366DC(s32 slot, s32 arg1);
 void Player_80036790(s32 slot, f32 arg1);
 void Player_80036844(s32 slot, s32 arg1);
 bool Player_800368F8(int slot);
-void Player_80036978(s32 slot, s32 arg1);
+void Player_80036978(s32 slot, Vec3* pos);
 void Player_InitOrResetPlayer(s32 slot);
 void Player_80036CF0(s32 slot);
 void Player_80036D24(s32 slot);

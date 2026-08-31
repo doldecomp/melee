@@ -12,7 +12,6 @@
 #include "lb/lb_00B0.h"
 
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 
@@ -97,11 +96,13 @@ ItemStateTable it_803F9000[] = {
     },
 };
 
-static void data_ordering(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_JObjSetRotationY(NULL, 0.0f);
-    HSD_JObjSetRotationY(NULL, 10.0f);
+    (void) 0.0f;
+    (void) 10.0f;
 }
+#endif
 
 void it_802EB5C8(Item_GObj* gobj)
 {
@@ -624,8 +625,6 @@ void it_802EC4D0(Item_GObj* gobj)
 
     Item_80268E5C(gobj, 10, 2);
 }
-
-/// #itTincle_UnkMotion10_Anim
 
 bool itTincle_UnkMotion10_Anim(Item_GObj* gobj)
 {

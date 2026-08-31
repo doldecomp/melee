@@ -3,7 +3,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -14,7 +18,6 @@
 #include "it/items/itpeachexplode.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 11C2F4 */ static void reset(HSD_GObj* gobj);
@@ -46,17 +49,6 @@ static void reset(HSD_GObj* gobj)
     } else {
         fp->mv.pe.specials.x0 = false;
     }
-}
-
-static inline void enter(HSD_GObj* gobj, FtMotionId msid)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->x21EC = reset;
-    fp->self_vel.y = 0;
-    fp->gr_vel = da->x34 * fp->facing_dir;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ftAnim_8006EBA4(gobj);
 }
 
 void ftPe_SpecialS_Enter(HSD_GObj* gobj)

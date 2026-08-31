@@ -1,14 +1,10 @@
 #ifndef GALE01_1F2D0C
 #define GALE01_1F2D0C
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "dolphin/mtx.h"
 
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include <baselib/forward.h>
 
 /* 1F2D0C */ void grFourside_801F2D0C(bool);
@@ -50,5 +46,6 @@
 /* 1F3F74 */ void fn_801F3F74(HSD_GObj*, int);
 /* 1F41E0 */ DynamicsDesc* grFourside_801F41E0(enum_t);
 /* 1F41E8 */ bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint);
+/* 3E3D94 */ extern StageData grFs_StageData;
 
 #endif

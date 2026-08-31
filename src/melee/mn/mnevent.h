@@ -1,12 +1,9 @@
 #ifndef MELEE_MN_EVENT_H
 #define MELEE_MN_EVENT_H
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/sislib.h>
 
 typedef struct MnEventData {
     /* 0x00 */ u8 page;
@@ -35,7 +32,7 @@ typedef struct MnEventData {
 /* 24E838 */ void mnEvent_8024E838(int, int);
 
 extern void* mnEvent_804A08F8[];
-extern void* mnEvent_804A0908;
+extern void* mnEvent_804A0908[4];
 extern HSD_GObj* mnEvent_804D6C60;
 extern u8 mnEvent_804D6C64;
 extern u8 mnEvent_804D6C65;

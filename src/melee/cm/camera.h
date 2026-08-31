@@ -1,7 +1,6 @@
 #ifndef GALE01_028B9C
 #define GALE01_028B9C
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "cm/forward.h"
@@ -14,15 +13,14 @@
 #include <baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
-/* 028F5C */ void Camera_80028F5C(CmSubject*, s32);
+/* 028F5C */ void Camera_80028F5C(CmSubject*, CmSubjectState);
 /* 029020 */ CmSubject* Camera_80029020(void);
 /* 029044 */ CmSubject* Camera_80029044(int);
 /* 0290D4 */ void Camera_800290D4(CmSubject*);
-/* 029124 */ s32 Camera_80029124(Vec3*, s32);
+/* 029124 */ u32 Camera_80029124(Vec3*, s32);
 /* 02928C */ bool Camera_8002928C(CmSubject*);
 /* 0293E0 */ void Camera_800293E0(void);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
-/* 029AAC */ void Camera_80028F5C(CmSubject*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
 /* 029C88 */ void Camera_80029C88(CameraBounds*, CameraTransformState*, f32);
 /* 029CF8 */ void Camera_80029CF8(CameraBounds*, CameraTransformState*);
@@ -138,6 +136,5 @@
 
 extern CmSubject* cm_804D6468;
 extern CameraDebugMode cm_80453004;
-extern CameraUnkGlobals cm_803BCCA0;
 
 #endif

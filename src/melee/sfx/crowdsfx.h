@@ -1,8 +1,6 @@
 #ifndef MELEE_CROWD_CROWDSFX_H
 #define MELEE_CROWD_CROWDSFX_H
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 
 typedef struct CrowdSFX_UnkStruct {

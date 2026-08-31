@@ -8,6 +8,9 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"

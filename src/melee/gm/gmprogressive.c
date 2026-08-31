@@ -15,8 +15,8 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/mn/inlines.h>
 #include <melee/sc/types.h>
 
 static struct {
@@ -45,7 +45,7 @@ static void gm_801AD088(void)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(spC->cameras[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 0x4801;
     gm_80480D70.xC = HSD_SisLib_803A611C(0, 0, 0xE, 0xF, 0, 0xE, 8, 0);
@@ -62,7 +62,7 @@ static void gm_801AD088(void)
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(spC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, spC->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -115,7 +115,7 @@ static void gm_801AD254(int arg0)
     HSD_JObjAnimAll(jobj);
 }
 
-void gm_801AD620_OnFrame(void)
+void gm_Scene_ProgScan_OnFrame(void)
 {
     PAD_STACK(0x8);
 
@@ -135,30 +135,30 @@ void gm_801AD620_OnFrame(void)
             gm_80480D70.x10 = 4;
         }
     } else {
-        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_LEFT) &&
+        if ((gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & PAD_ANY_LEFT) &&
             gm_80480D70.x10 == 2 && gm_80480D70.x14 == 0)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             gm_80480D70.x10 = 1;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_RIGHT) &&
+        if ((gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & PAD_ANY_RIGHT) &&
             gm_80480D70.x10 == 1 && gm_80480D70.x14 == 0)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             gm_80480D70.x10 = 2;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_CONFIRM) &&
+        if ((gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & PAD_CONFIRM) &&
             gm_80480D70.x14 == 0)
         {
             if (gm_80480D70.x10 == 1) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 gm_80480D70.x10 = 3;
                 gm_80480D70.x8->hidden = 1;
                 HSD_JObjSetFlagsAll(gm_80480D70.x4, JOBJ_HIDDEN);
             } else if (gm_80480D70.x10 == 2) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 gm_80480D70.x14 = 2;
                 gm_801AD254(5);
                 OSSetProgressiveMode(0);
@@ -174,7 +174,7 @@ void gm_801AD620_OnFrame(void)
     }
 }
 
-void gm_801AD874_OnEnter(UNK_T arg0)
+void gm_Scene_ProgScan_OnEnter(UNK_T arg0)
 {
     int* dst = arg0;
     int var_r0;
@@ -193,7 +193,7 @@ void gm_801AD874_OnEnter(UNK_T arg0)
     gm_80480D70.x20 = 0;
 }
 
-void gm_801AD8EC_OnLeave(UNK_T arg0)
+void gm_Scene_ProgScan_OnExit(UNK_T arg0)
 {
     int* dst = arg0;
     *dst = gm_80480D70.x14;

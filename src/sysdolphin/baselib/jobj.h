@@ -6,15 +6,14 @@
 #include "baselib/class.h"
 #include "baselib/debug.h"
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include "baselib/forward.h"
 
 #include "baselib/list.h"
 #include "baselib/object.h"
 #include "baselib/pobj.h"
+#include "baselib/spline.h"
 
 #include <dolphin/mtx.h>
-
-struct HSD_JObj;
 
 #define JOBJ_PTCL_ACTIVE 0x7FFFFFFF
 #define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF
@@ -104,7 +103,7 @@ struct HSD_JObj;
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
-struct HSD_JObj {
+typedef struct HSD_JObj {
     /*  +0 */ HSD_Obj object;
     /*  +8 */ HSD_JObj* next;
     /*  +C */ HSD_JObj* parent;
@@ -124,10 +123,10 @@ struct HSD_JObj {
     /* +7C */ HSD_AObj* aobj;
     /* +80 */ HSD_RObj* robj;
     /* +84 */ u32 id;
-};
-STATIC_ASSERT(sizeof(struct HSD_JObj) == 0x88);
+} HSD_JObj;
+ASSERT_SIZE(struct HSD_JObj, 0x88);
 
-struct HSD_Joint {
+typedef struct HSD_Joint {
     /* +0 */ char* class_name;
     /* +4 */ u32 flags;
     /* +8 */ HSD_Joint* child;
@@ -142,9 +141,9 @@ struct HSD_Joint {
     /* +2C */ Vec3 position;
     /* +38 */ MtxPtr mtx;
     /* +3C */ HSD_RObjDesc* robjdesc;
-};
+} HSD_Joint;
 
-typedef struct _HSD_JObjInfo {
+typedef struct HSD_JObjInfo {
     HSD_ObjInfo parent;
     s32 (*load)(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* jobj_2);
     void (*make_mtx)(HSD_JObj* jobj);
@@ -246,7 +245,11 @@ static inline void HSD_JObjSetMtxDirtyOutOfLine(HSD_JObj* jobj)
     HSD_JObjSetMtxDirtyOutOfLineLeaf(jobj);
 }
 
-inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+/// @todo Non-static inline
+#if !defined(__MWERKS__)
+static
+#endif
+    inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
     if (!jobj || !HSD_JObjMtxIsDirty(jobj)) {
         return;

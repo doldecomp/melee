@@ -17,9 +17,8 @@
 #include "it/items/itpikachutjoltground.h"
 #include "lb/lb_00B0.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -80,6 +79,8 @@ void it_802B3F88(Item_GObj* gobj, Vec3* pos, CollData* coll, Vec3* vel)
         case It_Kind_Pichu_TJolt_Air:
             Item_8026AF0C(ip, 0x382B6, 127, 64);
             break;
+        default:
+            break;
         }
     }
 }
@@ -129,18 +130,6 @@ void it_802B43D0(Item_GObj* gobj, HSD_GObj* owner)
     Item_80268E5C(gobj, 0, 2);
     Item_802694CC(gobj);
     db_80225DD8(gobj, owner);
-}
-
-static inline void itPikachuTJoltAir_Destroy(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* linked = ip->xDD4_itemVar.pikachujoltair.xDD8;
-
-    it_802725D4(gobj);
-    if (linked != NULL) {
-        it_802B3544(linked);
-        ip->xDD4_itemVar.pikachujoltair.xDD8 = NULL;
-    }
 }
 
 static inline void itPikachuTJoltAir_Anim_Destroy(Item_GObj* gobj)

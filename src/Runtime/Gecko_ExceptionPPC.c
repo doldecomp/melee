@@ -8,7 +8,9 @@ typedef struct ProcessInfo {
 
 static ProcessInfo fragment_info[1];
 
+#ifdef MUST_MATCH
 #pragma peephole off
+#endif
 
 void __unregister_fragment(int fragmentID)
 {

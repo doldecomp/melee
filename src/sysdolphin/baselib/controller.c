@@ -1,13 +1,9 @@
 #include "controller.h"
 
-#include "placeholder.h"
-
 #include "baselib/rumble.h"
-#include "baselib/util.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
-#include <dolphin/os/OSInterrupt.h>
+#include <math.h>
+#include <dolphin/os.h>
 #include <dolphin/pad.h>
 
 HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -155,6 +151,8 @@ void HSD_PadFlushQueue(HSD_FlushType ftype)
             p->qread = p->qwrite != 0 ? p->qwrite - 1 : p->qnum - 1;
             p->qcount = 1;
         }
+        break;
+    default:
         break;
     }
     OSRestoreInterrupts(intr);
@@ -315,34 +313,35 @@ static void HSD_PadCrossDir(HSD_PadStatus* mp)
         break;
 
     case 1:
-        if ((mp->button & 0xC) == 0) {
+        if ((mp->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) == 0) {
             return;
         }
-        mp->button = mp->button & 0xFFFFFFFC;
+        mp->button = mp->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
         return;
 
     case 2:
-        if ((mp->button & 0x3) == 0) {
+        if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) == 0) {
             return;
         }
-        mp->button = mp->button & 0xFFFFFFF3;
+        mp->button = mp->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
         return;
 
     case 3:
-        if ((mp->button & 0xC) != 0) {
-            if ((mp->button & 3) != 0) {
+        if ((mp->button & (PAD_BUTTON_DOWN | PAD_BUTTON_UP)) != 0) {
+            if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
                 if (mp->cross_dir == 1) {
-                    mp->button = mp->button & 0xFFFFFFFC;
+                    mp->button =
+                        mp->button & ~(PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT);
                     return;
                 }
-                mp->button = mp->button & 0xFFFFFFF3;
+                mp->button = mp->button & ~(PAD_BUTTON_DOWN | PAD_BUTTON_UP);
                 return;
             } else {
                 mp->cross_dir = 1;
                 return;
             }
         }
-        if ((mp->button & 3) != 0) {
+        if ((mp->button & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT)) != 0) {
             mp->cross_dir = 2;
             return;
         }

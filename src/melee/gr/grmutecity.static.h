@@ -3,10 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
-#include <dolphin/mtx.h>
-
 typedef struct grMc_CarEntry {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
@@ -26,7 +22,7 @@ typedef struct grMc_CarEntry {
     /* 0x28 */ s32 x28;
 } grMc_CarEntry;
 
-STATIC_ASSERT(sizeof(grMc_CarEntry) == 0x2C);
+ASSERT_SIZE(grMc_CarEntry, 0x2C);
 
 static grMc_CarEntry grMc_8049F4B8[30];
 

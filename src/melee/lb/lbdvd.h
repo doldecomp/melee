@@ -1,8 +1,6 @@
 #ifndef GALE01_0174BC
 #define GALE01_0174BC
 
-#include <placeholder.h>
-
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -12,20 +10,20 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 01634C */ u32 lbDvd_8001634C(s16);
 /* 0174BC */ void lbDvd_800174BC(void);
 /* 0174E8 */ void lbDvd_800174E8(int index);
-/* 017598 */ bool lbDvd_80017598(bool preloaded);
+/* 017598 */ bool lbDvd_80017598(int heap);
 /* 017700 */ void lbDvd_80017700(int);
 /* 017740 */ void* lbDvd_80017740(int type, int entry_num, int transient_heap,
                                   int heap, u32 size, int load_state,
                                   int load_score, u8, int effect_index);
-/* 0178E8 */ void lbDvd_800178E8(int, char*, int, int, int, int, int, u8, int);
+/* 0178E8 */ void lbDvd_800178E8(int, const char* name, int, int, int, int,
+                                 int, u8, int);
 /* 017960 */ void lbDvd_80017960(void);
-/* 017A80 */ void lbDvd_80017A80(void);
 /* 017AB0 */ void lbDvd_CachePreloadedFile(s32 index);
 /* 017CC4 */ void lbDvd_80017CC4(void);
 /* 017E64 */ void lbDvd_80017E64(int, int, void*, bool);
 /* 017EBC */ void* lbDvd_GetPreloadedArchive(ssize_t entry_num);
 /* 01819C */ HSD_Archive* lbDvd_8001819C(const char* basename);
-/* 01822C */ PreloadCacheScene* lbDvd_GetPreloadCacheScene(void);
+/* 01822C */ PreloadedGameModeState* lbDvd_GetPreloadCacheScene(void);
 /* 01823C */ void lbDvd_8001823C(void);
 /* 018254 */ void lbDvd_80018254(void);
 /* 0187F4 */ int lbDvd_800187F4(int);

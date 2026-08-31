@@ -6,7 +6,6 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include "math.h"
 #include "placeholder.h"
 #include "stage.h"
 #include "types.h"
@@ -17,12 +16,11 @@
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -66,22 +64,24 @@ struct grRCruise_YakumonoParam {
                                             mpLib_GroundEnum ground_kind,
                                             float delta_y);
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
-    (void) 0.4f;         // 3e cc cc cd
-    (void) 0.0f;         // 00 00 00 00
-    (void) 1.0471976f;   // 3f 86 0a 92
-    (void) -10000.0f;    // c6 1c 40 00
-    (void) 10000.0f;     // 46 1c 40 00
-    (void) 0.017453292f; // 3c 8e fa 35
-    (void) 10.0f;        // 41 20 00 00
-    (void) -1.0f;        // bf 80 00 00
-    (void) -350.0f;      // c3 af 00 00
-    (void) 1.0f;         // 3f 80 00 00
-    (void) 1000.0f;      // 44 7a 00 00
+    (void) 0.4f;
+    (void) 0.0f;
+    (void) 1.0471976f;
+    (void) -10000.0f;
+    (void) 10000.0f;
+    (void) 0.017453292f;
+    (void) 10.0f;
+    (void) -1.0f;
+    (void) -350.0f;
+    (void) 1.0f;
+    (void) 1000.0f;
 }
+#endif
 
-S16Vec3 grRc_803E4DA8[] = {
+GrJoint grRc_803E4DA8[] = {
     { 0, 1, 1 },   { 1, 1, 1 },   { 2, 1, 1 },   { 3, 1, 1 },   { 4, 1, 1 },
     { 11, 1, 7 },  { 10, 1, 17 }, { 6, 1, 7 },   { 7, 1, 7 },   { 8, 1, 7 },
     { 9, 1, 7 },   { 12, 1, 19 }, { 13, 1, 18 }, { 14, 1, 18 }, { 15, 1, 18 },
@@ -89,7 +89,7 @@ S16Vec3 grRc_803E4DA8[] = {
     { 21, 1, 18 }, { 22, 1, 18 }, { 23, 1, 18 },
 };
 
-StageCallbacks grRc_803E4E34[7] = {
+StageCallbacks grRc_StageCallbacks[7] = {
     { grRCruise_801FF3B4, grRCruise_801FF3E0, grRCruise_801FF3E8,
       grRCruise_801FF3EC, 0 },
     { grRCruise_801FF5B4, grRCruise_801FF6CC, grRCruise_801FF6D4,
@@ -106,9 +106,9 @@ StageCallbacks grRc_803E4E34[7] = {
       grRCruise_801FF920, 0 },
 };
 
-struct StageData grRc_803E4ECC = {
-    RCRUISE,
-    grRc_803E4E34,
+struct StageData grRc_StageData = {
+    Gr_Kind_RCruise,
+    grRc_StageCallbacks,
     "/GrRc.dat",
     grRCruise_801FF168,
     grRCruise_801FF164,
@@ -117,7 +117,7 @@ struct StageData grRc_803E4ECC = {
     grRCruise_801FF2C0,
     grRCruise_80201C50,
     grRCruise_80201C58,
-    4,
+    (1 << 2),
     grRc_803E4DA8,
     ARRAY_SIZE(grRc_803E4DA8),
 };
@@ -181,7 +181,7 @@ bool grRCruise_801FF2C0(void)
 Ground_GObj* grRCruise_801FF2C8(int gobj_id)
 {
     Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grRc_803E4E34[gobj_id];
+    StageCallbacks* callbacks = &grRc_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -268,9 +268,9 @@ void grRCruise_801FF5B4(Ground_GObj* gobj)
     {
         Vec3 pos = { 1.0f, 0.0f, 0.0f };
         gp->u.rcruise.x4 =
-            lb_80011A50(&pos, -1, 0.4f, 0.0f, 60 * deg_to_rad, -10000.0f,
+            lb_80011A50(&pos, -1, 0.4f, 0.0f, MTXDegToRad(60), -10000.0f,
                         +10000.0f, +10000.0f, -10000.0f);
-        gp->u.rcruise.x8 = deg_to_rad;
+        gp->u.rcruise.x8 = MTXDegToRad(1);
         gp->u.rcruise.xC = 1;
     }
 }
@@ -283,7 +283,7 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
 void grRCruise_801FF6D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->u.unk.xD4 == 0) {
+    if (gp->u.rcruise.x10 == 0) {
         grRCruise_80201588(gobj);
         grRCruise_8020071C(gobj);
         grRCruise_80200C04(gobj);
@@ -448,35 +448,35 @@ void grRCruise_801FFADC(Ground_GObj* arg0)
             HSD_JObjSetTranslate(temp_r29_2, &sp64);
             HSD_JObjAddTranslationZ(temp_r29_2, -350.0f * Ground_801C0498());
         }
-        gobj = Ground_801C2BA4(2);
+        gobj = Ground_GetMapGObj(2);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(1);
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(5);
+        gobj = Ground_GetMapGObj(5);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(6);
+        gobj = Ground_GetMapGObj(6);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(4);
+        gobj = Ground_GetMapGObj(4);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
@@ -682,7 +682,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
-    HSD_JObj* jobj5 = Ground_801C3FA4(Ground_801C2BA4(5), 8);
+    HSD_JObj* jobj5 = Ground_801C3FA4(Ground_GetMapGObj(5), 8);
     f32 abs_rot = ABS(gp->u.rcruise.x18);
     f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
 
@@ -1013,9 +1013,9 @@ void grRCruise_80201288(HSD_JObj* jobj, void (*callback)(HSD_DObj*, u32),
 static inline void set_hidden_a(int i)
 {
     int joint = lbl_803E5014[i].x0;
-    HSD_GObj* gobj5 = Ground_801C2BA4(5);
+    HSD_GObj* gobj5 = Ground_GetMapGObj(5);
     if (gobj5 != NULL) {
-        HSD_GObj* gobj1 = Ground_801C2BA4(1);
+        HSD_GObj* gobj1 = Ground_GetMapGObj(1);
         if (gobj1 != NULL) {
             HSD_JObj* jobj = Ground_801C3FA4(gobj5, joint);
             if (jobj != NULL) {
@@ -1032,9 +1032,9 @@ static inline void set_hidden_a(int i)
 static inline void set_hidden_b(int i)
 {
     int joint = lbl_803E5014[i].x0;
-    HSD_GObj* gobj5 = Ground_801C2BA4(5);
+    HSD_GObj* gobj5 = Ground_GetMapGObj(5);
     if (gobj5 != NULL) {
-        HSD_GObj* gobj1 = Ground_801C2BA4(1);
+        HSD_GObj* gobj1 = Ground_GetMapGObj(1);
         if (gobj1 != NULL) {
             HSD_JObj* jobj = Ground_801C3FA4(gobj5, joint);
             if (jobj != NULL) {
@@ -1131,7 +1131,7 @@ void grRCruise_80201588(Ground_GObj* gobj)
 
 void grRCruise_80201918(Vec3* vec)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(3);
+    HSD_GObj* gobj = Ground_GetMapGObj(3);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {
@@ -1144,7 +1144,7 @@ void grRCruise_80201918(Vec3* vec)
 
 bool grRCruise_80201988(s32 line_id)
 {
-    if (stage_info.internal_stage_id == RCRUISE && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_RCruise && line_id != -1) {
         int joint = mpJointFromLine(line_id);
         bool result;
 

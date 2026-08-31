@@ -12,6 +12,7 @@
 #define MELEE_GM_UNSPLIT_H
 
 #include <melee/gm/gm_1601.h>    // IWYU pragma: export
+#include <melee/gm/gm_16A2.h>    // IWYU pragma: export
 #include <melee/gm/gm_16AE.h>    // IWYU pragma: export
 #include <melee/gm/gm_16F1.h>    // IWYU pragma: export
 #include <melee/gm/gm_17AD.h>    // IWYU pragma: export
@@ -25,8 +26,8 @@
 #include <melee/gm/gm_1ADD.h>    // IWYU pragma: export
 #include <melee/gm/gm_1AED.h>    // IWYU pragma: export
 #include <melee/gm/gm_1B03.h>    // IWYU pragma: export
-#include <melee/gm/gm_1BA8.h>    // IWYU pragma: export
 #include <melee/gm/gm_1BFA.h>    // IWYU pragma: export
+#include <melee/gm/gmevent.h>    // IWYU pragma: export
 #include <melee/gm/gmregclear.h> // IWYU pragma: export
 #include <melee/gm/gmtoulib.h>   // IWYU pragma: export
 

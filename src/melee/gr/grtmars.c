@@ -1,20 +1,14 @@
-#include <platform.h>
+#include "grtmars.h"
 
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "lb/forward.h"
-
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
@@ -22,49 +16,48 @@
 /* 221F68 */ static void grTmars_UnkStage0_OnLoad(void);
 /* 221F6C */ static void grTmars_UnkStage0_OnStart(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
-/* 221F98 */ static HSD_GObj* grTMars_80221F98(int);
-/* 222080 */ static void grTMars_80222080(Ground_GObj*);
-/* 2220AC */ static bool grTMars_802220AC(Ground_GObj*);
-/* 2220B4 */ static void grTMars_802220B4(Ground_GObj*);
-/* 2220B8 */ static void grTMars_802220B8(Ground_GObj*);
-/* 2220BC */ static void grTMars_802220BC(Ground_GObj*);
-/* 22210C */ static bool grTMars_8022210C(Ground_GObj*);
-/* 222114 */ static void grTMars_80222114(Ground_GObj*);
-/* 222148 */ static void grTMars_80222148(Ground_GObj*);
-/* 22214C */ static void grTMars_8022214C(Ground_GObj*);
-/* 22219C */ static bool grTMars_8022219C(Ground_GObj*);
-/* 2221A4 */ static void grTMars_802221A4(Ground_GObj*);
-/* 2221C4 */ static void grTMars_802221C4(Ground_GObj*);
+/* 221F98 */ static Ground_GObj* setupStageCallbacks(int gobj_id);
+/* 222080 */ static void stageGObj0_OnInit(Ground_GObj*);
+/* 2220AC */ static bool stageGObj0_Callback1(Ground_GObj*);
+/* 2220B4 */ static void stageGObj0_GObjProc(Ground_GObj*);
+/* 2220B8 */ static void stageGObj0_Callback3(Ground_GObj*);
+/* 2220BC */ static void stageGObj2_OnInit(Ground_GObj*);
+/* 22210C */ static bool stageGObj2_Callback1(Ground_GObj*);
+/* 222114 */ static void stageGObj2_GObjProc(Ground_GObj*);
+/* 222148 */ static void stageGObj2_Callback3(Ground_GObj*);
+/* 22214C */ static void stageGObj1_OnInit(Ground_GObj*);
+/* 22219C */ static bool stageGObj1_Callback1(Ground_GObj*);
+/* 2221A4 */ static void stageGObj1_GObjProc(Ground_GObj*);
+/* 2221C4 */ static void stageGObj1_Callback3(Ground_GObj*);
 /* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
-extern StageInfo stage_info;
-
-static StageCallbacks grTMs_803E8EB0[4] = {
+static StageCallbacks stage_callbacks[] = {
     {
-        grTMars_80222080,
-        grTMars_802220AC,
-        grTMars_802220B4,
-        grTMars_802220B8,
+        stageGObj0_OnInit,
+        stageGObj0_Callback1,
+        stageGObj0_GObjProc,
+        stageGObj0_Callback3,
     },
     {
-        grTMars_8022214C,
-        grTMars_8022219C,
-        grTMars_802221A4,
-        grTMars_802221C4,
+        stageGObj1_OnInit,
+        stageGObj1_Callback1,
+        stageGObj1_GObjProc,
+        stageGObj1_Callback3,
     },
     {
-        grTMars_802220BC,
-        grTMars_8022210C,
-        grTMars_80222114,
-        grTMars_80222148,
-        0xC0000000,
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        (1 << 30) | (1 << 31),
     },
+    { 0 },
 };
 
-StageData grTMs_803E8F0C = {
-    TMARS,
-    grTMs_803E8EB0,
+StageData grTMs_StageData = {
+    Gr_Kind_TMars,
+    stage_callbacks,
     "/GrTMs.dat",
     grTMars_80221EF8,
     grTMars_80221EF4,
@@ -73,20 +66,19 @@ StageData grTMs_803E8F0C = {
     grTMars_80221F90,
     grTMars_802221C8,
     grTMars_802221D0,
-    0x00000001,
+    (1 << 0),
+    NULL,
+    0,
 };
 
 static void grTMars_80221EF4(bool arg0) {}
 
 static void grTMars_80221EF8(void)
 {
-    Ground_InitTargetStage(grTMars_80221F98);
+    Ground_InitTargetStage(setupStageCallbacks);
 }
 
-static void grTmars_UnkStage0_OnLoad(void)
-{
-    return;
-}
+static void grTmars_UnkStage0_OnLoad(void) {}
 
 static void grTmars_UnkStage0_OnStart(void)
 {
@@ -98,77 +90,70 @@ static bool grTMars_80221F90(void)
     return false;
 }
 
-static HSD_GObj* grTMars_80221F98(int id)
+static Ground_GObj* setupStageCallbacks(int gobj_id)
 {
-    HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMs_803E8EB0[id];
-
-    gobj = Ground_GetStageGObj(id);
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3, gobj_id);
     }
 
     return gobj;
 }
 
-static void grTMars_80222080(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_802220AC(Ground_GObj* arg0)
+static bool stageGObj0_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802220B4(Ground_GObj* arg0)
-{
-    return;
-}
+static void stageGObj0_GObjProc(Ground_GObj* arg0) {}
 
-static void grTMars_802220B8(Ground_GObj* arg0)
-{
-    return;
-}
+static void stageGObj0_Callback3(Ground_GObj* arg0) {}
 
-static void grTMars_802220BC(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-static bool grTMars_8022210C(Ground_GObj* arg0)
+static bool stageGObj2_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_80222114(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_80222148(Ground_GObj* arg0) {}
+static void stageGObj2_Callback3(Ground_GObj* arg0) {}
 
-static void grTMars_8022214C(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-static bool grTMars_8022219C(Ground_GObj* arg0)
+static bool stageGObj1_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802221A4(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_802221C4(Ground_GObj* arg0) {}
+static void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTMars_802221C8(enum_t arg0)
 {

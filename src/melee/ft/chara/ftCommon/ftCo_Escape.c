@@ -1,7 +1,6 @@
 #include "ftCo_Escape.h"
 
 #include "ftCo_ItemThrow.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -10,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
@@ -22,10 +22,9 @@
 #include "ftCommon/types.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"
 #include "ftSamus/types.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,
@@ -42,16 +41,6 @@
 /* 099894 */ static void ftCo_80099894(Fighter_GObj* gobj);
 /* 0998EC */ static void ftCo_800998EC(Fighter_GObj* gobj);
 /* 099954 */ static void ftCo_80099954(Fighter_GObj* gobj);
-
-static inline bool inlineA0(Fighter* fp)
-{
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x320)
-    {
-        return true;
-    }
-    return false;
-}
 
 static inline bool inlineA1(Fighter* fp)
 {
@@ -119,7 +108,7 @@ void ftCo_80099314(Fighter_GObj* gobj, FtMotionId msid, bool arg2)
     fp->mv.co.escape.x0 = arg2;
 }
 
-void ftCo_80099390(Fighter_GObj* gobj, int msid, int arg2)
+void ftCo_80099390(Fighter_GObj* gobj, FtMotionId msid, bool arg2)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
@@ -130,7 +119,7 @@ void ftCo_80099390(Fighter_GObj* gobj, int msid, int arg2)
     fp->coll_cb = ftCo_80099754;
 }
 
-void ftCo_80099438(Fighter_GObj* gobj, int msid, int arg2)
+void ftCo_80099438(Fighter_GObj* gobj, FtMotionId msid, bool arg2)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
@@ -231,7 +220,7 @@ bool ftCo_80099794(Fighter_GObj* gobj)
     return false;
 }
 
-int ftCo_8009980C(Fighter_GObj* gobj)
+bool ftCo_8009980C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (inlineB0(fp) || ftCo_800DF8E8(fp)) {

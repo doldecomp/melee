@@ -6,11 +6,12 @@
 #include <platform.h>
 
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
-#include <trigf.h>
+#include <math.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
@@ -18,12 +19,10 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKoopa/ftKp_SpecialN.h>
 #include <melee/it/inlines.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math.h>
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2

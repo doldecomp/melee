@@ -17,7 +17,7 @@ itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj*, Vec3*, float);
 /* 2C4BB8 */ void it_802C4BB8(Item_GObj* item_gobj);
 /* 2C4C08 */ bool itMewtwodisable_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C4C3C */ void itMewtwodisable_UnkMotion0_Phys(Item_GObj* gobj);
-/* 2C4C40 */ bool itMewtwodisable_UnkMotion0_Coll(Item_GObj* gobj);
+/* 2C4C40 */ int itMewtwodisable_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2C4C90 */ bool itMewtwoDisable_Logic67_DmgDealt(Item_GObj*);
 /* 2C4C98 */ bool itMewtwoDisable_Logic67_Reflected(Item_GObj*);
 /* 2C4CB8 */ bool itMewtwoDisable_Logic67_Clanked(Item_GObj*);

@@ -23,7 +23,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 #include "ty/toy.h"
@@ -66,16 +66,26 @@ static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 /* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
                                                          HSD_JObj*);
 
-static StageCallbacks grFigureGet_803E7D00[2] = {
-    { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
-      grFigureGet_802196EC, 0 },
-    { grFigureGet_802196F0, grFigureGet_80219890, grFigureGet_80219898,
-      grFigureGet_80219B0C, (1 << 30) | (1 << 31) },
+static StageCallbacks grFigureGet_StageCallbacks[] = {
+    {
+        grFigureGet_802196B4,
+        grFigureGet_802196E0,
+        grFigureGet_802196E8,
+        grFigureGet_802196EC,
+        0,
+    },
+    {
+        grFigureGet_802196F0,
+        grFigureGet_80219890,
+        grFigureGet_80219898,
+        grFigureGet_80219B0C,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-StageData grFigureGet_803E7D34 = {
-    FIGUREGET,
-    grFigureGet_803E7D00,
+StageData grFigureGet_StageData = {
+    Gr_Kind_FigureGet,
+    grFigureGet_StageCallbacks,
     "/GrNFg.dat",
     grFigureGet_OnInit,
     grFigureGet_OnDemoInit,
@@ -84,14 +94,12 @@ StageData grFigureGet_803E7D34 = {
     grFigureGet_802195C4,
     grFigureGet_OnTouchLine,
     grFigureGet_OnCheckShadowRender,
-    1,
+    (1 << 0),
     NULL,
     0,
 };
 
 static grFigureGet_Params* yakumono_param;
-
-extern StageInfo stage_info;
 
 void grFigureGet_OnDemoInit(int unused) {}
 
@@ -121,7 +129,7 @@ bool grFigureGet_802195C4(void)
 HSD_GObj* grFigureGet_802195CC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grFigureGet_803E7D00[gobj_id];
+    StageCallbacks* callbacks = &grFigureGet_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -198,9 +206,9 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     gp->u.figureget.x4 = 0;
     gp->u.figureget.x8 = 0;
     gp->u.figureget.xC = 0;
-    memzero(gp->u.figureget.x1C, 0xC);
-    memzero(gp->u.figureget.x28, 0xC);
-    memzero(gp->u.figureget.x34, 0xC);
+    memzero(gp->u.figureget.x1C, sizeof(gp->u.figureget.x1C));
+    memzero(gp->u.figureget.x28, sizeof(gp->u.figureget.x28));
+    memzero(gp->u.figureget.x34, sizeof(gp->u.figureget.x34));
     mpJointSetCb1(0, gp, grFigureGet_80219B10);
 }
 

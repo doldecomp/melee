@@ -1,16 +1,14 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "gm/forward.h"
 #include "mn/forward.h"
 
 #include "mn/types.h"
+#include "sc/types.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {
@@ -75,7 +73,6 @@ typedef struct _MenuInputState {
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
 /* 22BFBC */ GXColor* mn_8022BFBC(int);
 /* 22C010 */ int mn_8022C010(int, int);
-/* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
 /* 22C128 */ void fn_8022C128(HSD_GObj*);
 /* 22C304 */ void mn_8022C304(void);
 /* 22C4F4 */ void mn_8022C4F4(HSD_GObj*);
@@ -88,8 +85,8 @@ typedef struct _MenuInputState {
 /* 22D594 */ void mn_8022D594(HSD_GObj*);
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
-/* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
+/* 22DD38 */ void mnMain_Scene_OnFrame(void);
+/* 22DDA8 */ void mnMain_Scene_OnEnter(void*);
 /* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
@@ -113,12 +110,20 @@ typedef struct _MenuInputState {
 /* 22F298 */ f32 mn_8022F298(HSD_JObj*);
 /* 22F360 */ void mn_8022F360(HSD_AObj* aobj, void* obj, u32 arg2);
 /* 22F3D8 */ void mn_8022F3D8(HSD_JObj*, u8, HSD_TypeMask);
-/* 22F410 */ int mn_8022F410(float* x, float* target, float dx);
-/* 22F470 */ int mn_8022F470(int* x, int* target, int dx);
+/* 22F410 */ int mn_8022F410(float* x, const float* target, float dx);
+/* 22F470 */ int mn_8022F470(int* x, const int* target, int dx);
 /* 22F4CC */ void mn_8022F4CC(void);
-
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;
+/* 4A0508 */ extern StaticModelDesc MenMainBack_Top;
+/* 4A0518 */ extern StaticModelDesc MenMainPanel_Top;
+/* 4D6BB4 */ extern u8 mn_804D6BB4;
+/* 4D6BB5 */ extern u8 mn_804D6BB5;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
+/* 4D6BBC */ extern LightList** MenMain_lights;
+/* 4D6BC0 */ extern HSD_FogDesc* MenMain_fog;
+/* 4D6BC4 */ extern HSD_CObjDesc* MenMain_cam;
 /* 4D6BC8 */ extern MenuInputState mn_804D6BC8;
+/* 4D6C00 */ extern char** NotAllowedNamesList;
+/* 4D6C04 */ extern u8** AutoNamesList;
 
 #endif

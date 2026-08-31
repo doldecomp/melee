@@ -102,18 +102,18 @@ static void gm_801ADB04(void)
         lbArchive_80016DBC("NtAppro", &spC, "ScNtcApproach_scene_data", 0);
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(spC->cameras[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 0x4801;
 
     gobj = GObj_Create(0xB, 0xF, 0);
     lobj = lb_80011AC4(spC->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(spC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, spC->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -121,27 +121,28 @@ static void gm_801ADB04(void)
     HSD_GObj_SetupProc(gobj, fn_801AD920, 1);
 }
 
-void gm_801ADC88_OnFrame(void)
+void gm_Scene_Approach_OnFrame(void)
 {
     if (gm_80480D98.xC++ >= 0xB4 &&
-        (HSD_PadCopyStatus[gm_80480D98.xE].trigger & 0x1100))
+        (HSD_PadCopyStatus[gm_80480D98.xE].trigger &
+         (HSD_PAD_A | HSD_PAD_START)))
     {
         gm_801A4B60();
     }
 }
 
-void gm_801ADCE4_OnEnter(void* arg0_)
+void gm_Scene_Approach_OnEnter(void* arg0_)
 {
     s8* arg0 = arg0_;
     int var_r0;
 
     gm_801ADB04();
     var_r0 = arg0[0];
-    if (var_r0 != 3 && var_r0 != 7 && var_r0 != 9 && var_r0 != 0xA &&
-        var_r0 != 0xF && var_r0 != 0x14 && var_r0 != 0x15 && var_r0 != 0x16 &&
-        var_r0 != 0x17 && var_r0 != 0x18 && var_r0 != 0x19)
+    if (var_r0 != 3 && var_r0 != 7 && var_r0 != 9 && var_r0 != 10 &&
+        var_r0 != 15 && var_r0 != 20 && var_r0 != 21 && var_r0 != 22 &&
+        var_r0 != 23 && var_r0 != 24 && var_r0 != 25)
     {
-        var_r0 = 0x19;
+        var_r0 = 25;
     }
 
     gm_80480D98.x4 = var_r0;
@@ -152,7 +153,7 @@ void gm_801ADCE4_OnEnter(void* arg0_)
     lbAudioAx_80023F28(0x48);
 }
 
-void gm_801ADDA8_OnLeave(void* unused)
+void gm_Scene_Approach_OnExit(UNUSED void* exit_data)
 {
     lbArchive_80016EFC(gm_80480D98.x0);
     lbAudioAx_800236DC();

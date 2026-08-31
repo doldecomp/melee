@@ -920,6 +920,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x1E, -1));
             break;
+        default:
+            break;
         }
         break;
 
@@ -951,6 +953,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));
             break;
+        default:
+            break;
         }
 
         switch (fp->kind) {
@@ -960,6 +964,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));
+            break;
+        default:
             break;
         }
         break;
@@ -1179,9 +1185,9 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
         return;
     }
 
-    ++(cmd)->u;
-    ++(cmd)->u;
-    ++(cmd)->u;
+    ++cmd->u;
+    ++cmd->u;
+    ++cmd->u;
 }
 
 void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -1234,9 +1240,9 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
     }
     if ((sp60 == 0) || (cmd_flag != 0)) {
-        ++(cmd)->u;
-        ++(cmd)->u;
-        ++(cmd)->u;
+        ++cmd->u;
+        ++cmd->u;
+        ++cmd->u;
     }
     ftCommon_8007EBAC(fp, 0x16U, 0U);
 }
@@ -1336,11 +1342,9 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
             }
             eventCode =
                 gmScriptEventCast(ftCommand->u, gmScriptEventDefault)->opcode;
-            if (Command_Execute((CommandInfo*) ftCommand, eventCode) == false)
-            {
+            if (Command_Execute(ftCommand, eventCode) == false) {
                 eventCode -= 0xA;
-                ftAction_803C06E8[eventCode](fighter_gobj,
-                                             (CommandInfo*) ftCommand);
+                ftAction_803C06E8[eventCode](fighter_gobj, ftCommand);
             }
         } while (F32_MAX != ftCommand->timer);
     }
@@ -1349,7 +1353,7 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
 void ftAction_80073354(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
+    CommandInfo* cmd = (&fp->x3E4_fighterCmdScript);
     u32 eventCode;
 
     fp->x3E4_fighterCmdScript.frame_count = fp->cur_anim_frame + fp->x898_unk;
@@ -1376,7 +1380,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
                     gmScriptEventCast(cmd->u, gmScriptEventDefault)->opcode;
                 if (Command_Execute(cmd, eventCode) == false) {
                     eventCode -= 0xA;
-                    ftAction_803C07AC[eventCode](gobj, (CommandInfo*) cmd);
+                    ftAction_803C07AC[eventCode](gobj, cmd);
                 }
                 if (cmd->timer != timer && cmd->timer <= 0.0f) {
                     fp->throw_flags = 0;
@@ -1389,7 +1393,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
+    CommandInfo* cmd = (&fp->x3E4_fighterCmdScript);
     PAD_STACK(8);
     fp->x3E4_fighterCmdScript.frame_count = fp->cur_anim_frame + fp->x898_unk;
     if (fp->x3E4_fighterCmdScript.u == NULL) {

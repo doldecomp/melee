@@ -2,9 +2,7 @@
 
 #include "debug.h"
 
-#include <placeholder.h>
-
-#include <__mem.h>
+#include <string.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texpdag.h>
@@ -15,10 +13,10 @@ HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
     if (texp == NULL) {
         return HSD_TE_ZERO;
     }
-    if ((uintptr_t) texp == -1U) {
+    if (texp == HSD_TEXP_TEX) {
         return HSD_TE_TEX;
     }
-    if ((uintptr_t) texp == -2U) {
+    if (texp == HSD_TEXP_RAS) {
         return HSD_TE_RAS;
     }
     return texp->type;
@@ -47,6 +45,8 @@ void HSD_TExpFree(HSD_TExp* texp)
     case HSD_TE_CNST:
         hsdFreeMemPiece(texp, sizeof(HSD_TECnst));
         break;
+    default:
+        break;
     }
 }
 
@@ -65,6 +65,8 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
         break;
     case HSD_TE_CNST:
         texp->cnst.ref += 1;
+        break;
+    default:
         break;
     }
 }
@@ -138,6 +140,8 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
                         HSD_TExpUnref(ptr, 1);
                         HSD_TExpUnref(ptr, 5);
                     }
+                    break;
+                default:
                     break;
                 }
             }
@@ -362,6 +366,8 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             case HSD_TE_CNST:
                 tev->c_in[idx].exp->cnst.ref += 1;
                 break;
+            default:
+                break;
             }
         } break;
         case HSD_TE_CNST: {
@@ -378,6 +384,8 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
                 break;
             case HSD_TE_CNST:
                 tev->c_in[idx].exp->cnst.ref += 1;
+                break;
+            default:
                 break;
             }
         } break;
@@ -811,10 +819,8 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
 {
-    HSD_TETev* tev;
+    HSD_TETev* tev = (HSD_TETev*) texp;
     int i, val;
-
-    tev = &texp->tev;
 
     if (tev->c_ref > 0) {
         if (tev->kcsel != HSD_TE_UNDEF) {
@@ -827,7 +833,9 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
                     }
                 }
             }
-        } else if (IsThroughColor(texp) && tev->c_in[3].type == HSD_TE_CNST) {
+        } else if (IsThroughColor((HSD_TExp*) tev) &&
+                   tev->c_in[3].type == HSD_TE_CNST)
+        {
             if (AssignColorKonst(tev, 3, res) < 0) {
                 val = AssignColorReg(tev, 3, res);
                 if (val < 0) {
@@ -871,7 +879,9 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
                 }
             }
         } else {
-            if (IsThroughAlpha(texp) && tev->a_in[3].type == HSD_TE_CNST) {
+            if (IsThroughAlpha((HSD_TExp*) tev) &&
+                tev->a_in[3].type == HSD_TE_CNST)
+            {
                 if (AssignAlphaReg(tev, 3, res) < 0) {
                     val = AssignAlphaKonst(tev, 3, res);
                     if (val < 0) {
@@ -1023,17 +1033,6 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
 static GXTevKColorID id1[4] = { GX_KCOLOR0, GX_KCOLOR1, GX_KCOLOR2,
                                 GX_KCOLOR3 };
 static GXTevRegID id2[3] = { GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
-
-static inline int clamp_color(int c)
-{
-    if (c > 0xFF) {
-        return 0xFF;
-    }
-    if (c < 0) {
-        return 0;
-    }
-    return c;
-}
 
 void HSD_TExpSetReg(HSD_TExp* texp)
 {

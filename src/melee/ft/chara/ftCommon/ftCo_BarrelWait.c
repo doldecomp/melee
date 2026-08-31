@@ -1,6 +1,5 @@
 #include "ftCo_BarrelWait.h"
 
-#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
@@ -15,7 +14,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/inlines.h"
 #include "gr/ground.h"
 
@@ -24,14 +22,12 @@
 #include "lb/lbcollision.h"
 #include "mp/mpcoll.h"
 
-#include <common_structs.h>
-
 /* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
 
 static inline void setCamData(ftCommonData* cd, CmSubject* cam)
 {
-    cam->x40 = cd->x4DC;
-    cam->x48 = cd->x4E4;
+    cam->target_ext.h = cd->x4DC;
+    cam->target_ext.v = cd->x4E4;
 }
 
 void ftCo_8009EB18(Fighter_GObj* gobj)

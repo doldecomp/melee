@@ -1,0 +1,39 @@
+---
+Checks: >
+  -*,
+  custom-ban-primitive-c-types,
+  misc-include-cleaner,
+  portability-restrict-system-includes,
+  readability-duplicate-include,
+  readability-non-const-parameter,
+  readability-redundant-casting,
+  readability-redundant-declaration,
+  readability-redundant-parentheses,
+WarningsAsErrors: '*'
+CheckOptions:
+  - key: portability-restrict-system-includes.Includes
+    value: '*,-MSL/*'
+  - key: readability-redundant-parentheses.AllowedDecls
+    value: '::HSD_JObjSetMtxDirty'
+  - key: misc-include-cleaner.MissingIncludes
+    # TODO: Try enabling
+    value: false
+CustomChecks:
+  - Name: ban-primitive-c-types
+    Query: |
+      match varDecl(
+        isExpansionInFileMatching(".*/src/(melee|sysdolphin)/.*"),
+        hasType(anyOf(
+          asString("long"),
+          asString("short"),
+          asString("long long"),
+          asString("unsigned long"),
+          asString("unsigned short"),
+          asString("unsigned long long")
+        ))
+      ).bind("forbidden_primitive")
+    Diagnostic:
+      - BindName: forbidden_primitive
+        Message: "Do not use primitive short/long types. Use fixed-length types from <dolphin/types.h>."
+        Level: Warning
+---

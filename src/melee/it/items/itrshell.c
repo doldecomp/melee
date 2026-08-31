@@ -1,7 +1,6 @@
 #include "itrshell.h"
 
 #include "inlines.h"
-#include "m2c_macros.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -9,15 +8,14 @@
 #include "baselib/jobj.h"
 #include "ef/efasync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "MSL/math.h"
 #include "sysdolphin/baselib/random.h"
 
 typedef struct itRShell_Attrs {
@@ -498,7 +496,9 @@ static inline void itRshell_StopInit(Item_GObj* gobj)
     it_80272980(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 void it_8028DAE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -642,8 +642,10 @@ void it_8028E170(Item_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -662,7 +664,9 @@ bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itRshell_UnkMotion6_Phys(Item_GObj* gobj)
 {

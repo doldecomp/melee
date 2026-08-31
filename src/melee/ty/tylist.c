@@ -7,15 +7,13 @@
 #include <platform.h>
 
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
+#include "lb/lb_0146.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "mn/mnsoundtest.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/archive.h>
@@ -59,6 +57,7 @@
 /* 4D6EEC */ static s32 _tyList_804D6EEC;
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     /*  +0 */ (void) "Pos : %f, %f,%f\n";
@@ -68,6 +67,7 @@ static void order_data_0(void)
     /* +50 */ (void) "ToyFigureListMarkN_Top_joint";
     /* +70 */ (void) "tylist.c";
 }
+#endif
 
 /// Formats a number into a string buffer using digit glyphs from the font.
 char* _tyList_80312834(char* buf, u32 num)
@@ -359,14 +359,14 @@ s32 _tyList_8031305C(void* a, TyListState* state, s8 movedFlag)
             if (state->x29E == 0) {
                 HSD_JObjClearFlagsAll(state->x288, JOBJ_HIDDEN);
                 _tyList_80312904(state->x278, state->x278->x24);
-                if (HSD_PadCopyStatus->button & 0xC00) {
+                if (HSD_PadCopyStatus->button & HSD_PAD_XY) {
                     state->x2A0 = 5;
                 } else {
                     state->x2A0 = 0;
                 }
             }
             if (movedFlag != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
         }
     }
@@ -418,9 +418,9 @@ void _tyList_80313464(TyListArg* arg)
     }
 
     if (Toy_80304924(val) != 0) {
-        arg->jobjs[1] = _tyList_80313508(((TyListState*) state)->gobj,
-                                         "ToyFigureListMarkN_Top_joint", -8.4f,
-                                         arg->x30, 0.0f);
+        arg->jobjs[1] =
+            _tyList_80313508(state->gobj, "ToyFigureListMarkN_Top_joint",
+                             -8.4f, arg->x30, 0.0f);
     }
 }
 
@@ -460,7 +460,7 @@ void* _tyList_80313508(HSD_GObj* parent, char* symbol_name, float x, float y,
         } else {
             HSD_GObj* gobj;
             gobj = GObj_Create(6, 7, 0);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x39, 0);
             return gobj;
         }
@@ -612,7 +612,7 @@ static inline void tyList_80313BD8_inline(TyListState* state,
         if (p->x24 == g->x0C) {
             state->selectedIdx = p->idx;
             state->x278 = p;
-            lbAudioAx_80024030(2);
+            sfxMove();
             HSD_JObjSetTranslateY(state->x288, p->x30);
         }
         _tyList_80312904(p, _tyList_804A2D6C.x0C);
@@ -693,7 +693,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(0);
@@ -703,7 +703,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (Toy_80305B88() & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(0);
@@ -716,7 +716,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (Toy_80305B88() & 0x1100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(1);
@@ -737,7 +737,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
             state->x29B = 2;
         }
         _tyList_80312BAC(state, g->x0C);
-        lbAudioAx_80024030(1);
+        sfxForward();
         return;
     }
 
@@ -748,7 +748,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
             state->x29B = 0;
         }
         _tyList_80312BAC(state, g->x0C);
-        lbAudioAx_80024030(1);
+        sfxForward();
         return;
     }
 
@@ -863,7 +863,7 @@ void _tyList_8031438C(HSD_GObj* gobj)
                 HSD_AObjSetRate(archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
                                 0.0f);
             }
-            HSD_JObjAnimAll((HSD_JObj*) archive->x0[10]);
+            HSD_JObjAnimAll(archive->x0[10]);
         } else {
             TyListWaitData* wait_data = (TyListWaitData*) entry->x4;
             if (wait_data != NULL) {
@@ -923,7 +923,7 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        kind = HSD_GObj_804D784B;
+        kind = HSD_GObj_CameraKind;
         HSD_GObjObject_80390A70(entry->x0, kind, cobj);
         GObj_SetupGXLinkMax(entry->x0, Toy_80306954, 0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
@@ -936,7 +936,7 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x4 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        kind = HSD_GObj_804D784B;
+        kind = HSD_GObj_CameraKind;
         HSD_GObjObject_80390A70(entry->x4, kind, cobj);
         GObj_SetupGXLinkMax(entry->x4, _tyList_80314504, 0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
@@ -996,7 +996,7 @@ void tyList_803147C4(void)
         HSD_ArchiveGetPublicAddress(archive->data, "ScMenFigure_scene_lights");
     if (jobj != NULL) {
         *gobj = GObj_Create(2, 3, 0);
-        HSD_GObjObject_80390A70(*gobj, new_var = HSD_GObj_804D784A,
+        HSD_GObjObject_80390A70(*gobj, new_var = HSD_GObj_LightKind,
                                 Toy_LoadLObjList(jobj, 0));
         GObj_SetupGXLink(*gobj, HSD_GObj_LObjCallback, 52, 0);
     }

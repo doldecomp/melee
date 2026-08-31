@@ -1,10 +1,8 @@
 #ifndef GALE01_15CC34
 #define GALE01_15CC34
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include <melee/gm/forward.h>
 
 #include <melee/gm/types.h>
@@ -25,12 +23,12 @@
 /* 15CD08 */ void* gmMainLib_GetVsPlayContestants(void);
 /* 15CD14 */ void* gmMainLib_GetVsPlayTime(void);
 /* 15CD20 */ void* gmMainLib_GetCombinedVSPlayTime(void);
-/* 15CD2C */ void* gmMainLib_GetTimeMatchTotal(void);
-/* 15CD38 */ void* gmMainLib_GetStockMatchTotal(void);
-/* 15CD44 */ void* gmMainLib_GetCoinMatchTotal(void);
-/* 15CD50 */ void* gmMainLib_GetBonusMatchTotal(void);
-/* 15CD5C */ void* gmMainLib_GetStaminaMatchTotal(void);
-/* 15CD68 */ void* gmMainLib_GetMatchResetCounter(void);
+/* 15CD2C */ u32* gmMainLib_GetTimeMatchTotal(void);
+/* 15CD38 */ u32* gmMainLib_GetStockMatchTotal(void);
+/* 15CD44 */ u32* gmMainLib_GetCoinMatchTotal(void);
+/* 15CD50 */ u32* gmMainLib_GetBonusMatchTotal(void);
+/* 15CD5C */ u32* gmMainLib_GetStaminaMatchTotal(void);
+/* 15CD68 */ u32* gmMainLib_GetMatchResetCounter(void);
 /* 15CD74 */ void* gmMainLib_GetSingleplayerTime(void);
 /* 15CD80 */ void* gmMainLib_8015CD80(void);
 /* 15CD8C */ void* gmMainLib_GetPowerCount(void);
@@ -124,10 +122,10 @@
 /* 15ECB0 */ int gmMainLib_8015ECB0(void);
 /* 15ECBC */ void gmMainLib_8015ECBC(void);
 /* 15ED30 */ int gmMainLib_8015ED30(void);
-/* 15ED3C */ int GetRumbleSettingOfPort(s32 arg0);
-/* 15ED4C */ void gmMainLib_8015ED4C(s32 arg0, s8 arg1);
+/* 15ED3C */ int GetRumbleSettingOfPort(ssize_t port);
+/* 15ED4C */ void gmMainLib_SetRumbleEnabled(ssize_t port, bool enabled);
 /* 15ED5C */ s32 gmMainLib_8015ED5C(void);
-/* 15ED68 */ void gmMainLib_8015ED68(s32 arg0);
+/* 15ED68 */ void gmMainLib_8015ED68(ssize_t port);
 /* 15ED74 */ u8 gmMainLib_8015ED74(void);
 /* 15ED80 */ void gmMainLib_8015ED80(u8);
 /* 15ED8C */ u16* gmMainLib_GetUnlockedCharactersBitmaskPtr(void);

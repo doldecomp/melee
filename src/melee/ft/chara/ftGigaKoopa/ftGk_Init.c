@@ -13,13 +13,12 @@
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftKoopa/types.h"
 
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
-
-#include <common_structs.h>
 
 MotionState ftGk_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {

@@ -1,15 +1,12 @@
 #include "gr/grtluigi.h"
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
@@ -36,8 +33,8 @@
     },
 };
 
-StageData grTLg_803E8E4C = {
-    TLUIGI,
+StageData grTLg_StageData = {
+    Gr_Kind_TLuigi,
     grTLg_803E8DF0,
     "/GrTLg.dat",
     grTLuigi_80221C14,

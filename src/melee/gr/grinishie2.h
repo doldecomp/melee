@@ -1,9 +1,6 @@
 #ifndef GALE01_1FCBC0
 #define GALE01_1FCBC0
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
@@ -50,5 +47,6 @@
 /* 1FDFE4 */ void grInishie2_801FDFE4(Ground_GObj*);
 /* 1FDFE8 */ DynamicsDesc* grInishie2_801FDFE8(enum_t);
 /* 1FDFF0 */ bool grInishie2_801FDFF0(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E4C00 */ extern StageData grI2_StageData;
 
 #endif

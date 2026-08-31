@@ -9,8 +9,6 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-#include <dolphin/os.h>
-#include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -52,26 +50,52 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
     }
 }
 
+static inline void mnSound_InitChannelAnim(HSD_JObj* jobj, s32 channel,
+                                           HSD_JObj** jobj_anim_0,
+                                           HSD_JObj** jobj_anim_1,
+                                           HSD_JObj** jobj_anim_2)
+{
+    f32 right_frame, left_frame;
+    lb_80011E24(jobj, jobj_anim_0, 8, -1);
+    lb_80011E24(jobj, jobj_anim_1, 10, -1);
+    lb_80011E24(jobj, jobj_anim_2, 9, -1);
+    left_frame = mn_8022F298(*jobj_anim_1);
+    right_frame = mn_8022F298(*jobj_anim_2);
+
+    HSD_JObjReqAnimAll(*jobj_anim_0, channel);
+    HSD_JObjAnimAll(*jobj_anim_0);
+
+    HSD_JObjReqAnimAll(*jobj_anim_1, left_frame);
+    mn_8022F3D8(*jobj_anim_1, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(*jobj_anim_1);
+
+    HSD_JObjReqAnimAll(*jobj_anim_2, right_frame);
+    mn_8022F3D8(*jobj_anim_2, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(*jobj_anim_2);
+}
+
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
-    HSD_JObj* jobj_anim[3];
+    HSD_JObj* jobj_anim_2;
+    HSD_JObj* jobj_anim_1;
+    HSD_JObj* jobj_anim_0;
     f32 right_frame, left_frame;
-    lb_80011E24(jobj, &jobj_anim[0], 8, -1);
-    lb_80011E24(jobj, &jobj_anim[1], 10, -1);
-    lb_80011E24(jobj, &jobj_anim[2], 9, -1);
-    left_frame = mn_8022F298(jobj_anim[1]);
-    right_frame = mn_8022F298(jobj_anim[2]);
+    lb_80011E24(jobj, &jobj_anim_0, 8, -1);
+    lb_80011E24(jobj, &jobj_anim_1, 10, -1);
+    lb_80011E24(jobj, &jobj_anim_2, 9, -1);
+    left_frame = mn_8022F298(jobj_anim_1);
+    right_frame = mn_8022F298(jobj_anim_2);
 
-    HSD_JObjReqAnimAll(jobj_anim[0], channel);
-    HSD_JObjAnimAll(jobj_anim[0]);
+    HSD_JObjReqAnimAll(jobj_anim_0, channel);
+    HSD_JObjAnimAll(jobj_anim_0);
 
-    HSD_JObjReqAnimAll(jobj_anim[1], left_frame);
-    mn_8022F3D8(jobj_anim[1], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[1]);
+    HSD_JObjReqAnimAll(jobj_anim_1, left_frame);
+    mn_8022F3D8(jobj_anim_1, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_1);
 
-    HSD_JObjReqAnimAll(jobj_anim[2], right_frame);
-    mn_8022F3D8(jobj_anim[2], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[2]);
+    HSD_JObjReqAnimAll(jobj_anim_2, right_frame);
+    mn_8022F3D8(jobj_anim_2, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_2);
 }
 
 static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
@@ -91,16 +115,6 @@ static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
                               pos_0->x);
 }
 
-static inline void mnSound_InitCenterText(Menu* menu, s32 val)
-{
-    HSD_Text* text =
-        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
-    menu->text = text;
-    text->font_size.x = 0.0521F;
-    text->font_size.y = 0.0521F;
-    HSD_SisLib_803A6368(text, val);
-}
-
 static inline void mnSound_UpdateCenterText(void)
 {
     Menu* menu = GET_MENU(mnSound_804D6C30);
@@ -113,7 +127,7 @@ static inline void mnSound_UpdateCenterText(void)
     } else {
         text_id = 0xBC;
     }
-    mnSound_InitCenterText(menu, text_id);
+    Menu_InitCenterText(menu, text_id);
 }
 
 void mnSound_802492CC(HSD_GObj* gobj)
@@ -137,7 +151,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
     if (events & (MenuInput_Up | MenuInput_Down)) {
         // switch between the two
         sfxMove();
-        if ((u8) menu->unk2 == 0) {
+        if (menu->unk2 == 0) {
             menu->unk2 = 1;
         } else {
             menu->unk2 = 0;
@@ -156,7 +170,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             }
         } else if ((s8) menu->unk3 > -100) {
             // move towards sounds
-            lbAudioAx_80024030(2);
+            sfxMove();
             menu->unk3 -= 5;
             mix = menu->unk3;
             mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 5);
@@ -174,7 +188,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             }
         } else if ((s8) menu->unk3 < 100) {
             // move towards music
-            lbAudioAx_80024030(2);
+            sfxMove();
             menu->unk3 += 5;
             mix = menu->unk3;
             mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 18);
@@ -190,8 +204,8 @@ static inline void mnSound_80249A1C_OnSoundSelected(HSD_GObj* gobj,
     AnimLoopSettings* anim = mnSound_803EEED8;
     Menu* menu = GET_MENU(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if ((u8) menu->unk2 == 0) {
-        if ((u8) menu->unk1 == 0) {
+    if (menu->unk2 == 0) {
+        if (menu->unk1 == 0) {
             lb_80011E24(jobj, jobj_out, 0xA, -1);
         } else {
             lb_80011E24(jobj, jobj_out, 9, -1);
@@ -237,7 +251,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     temp_r4 = menu->cursor;
     if (temp_r4 != 0) {
         menu->cursor = (u8) (temp_r4 - 1);
-        if ((u8) menu->cursor != 0) {
+        if (menu->cursor != 0) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
@@ -260,6 +274,16 @@ void fn_80249A1C(HSD_GObj* arg0)
     }
 }
 
+static inline void mnSound_InitUserData(Menu* user_data, HSD_GObj* gobj)
+{
+    HSD_GObjProc* proc;
+    user_data->unk3 = gmMainLib_8015ED74();
+    user_data->text = NULL;
+    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
+    proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
+}
+
 void mnSound_80249C08(int unused)
 {
     StaticModelDesc* model = &mnSound_804A08A8;
@@ -267,17 +291,20 @@ void mnSound_80249C08(int unused)
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     HSD_JObj* jobj;
     Menu* user_data;
-    HSD_GObjProc* proc;
-    PAD_STACK(24);
+    UNUSED HSD_GObjProc* proc;
+    HSD_JObj* sound_selection_jobj;
+    HSD_JObj* channel_selection_jobj;
+    HSD_JObj* volume_cursor_jobj;
+    PAD_STACK(4);
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70((HSD_GObj*) gobj, (u8) HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink((HSD_GObj*) gobj, HSD_GObj_JObjCallback, 4U, 0x80);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80);
     HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     {
-        Menu* alloc = HSD_MemAlloc(8);
+        Menu* alloc = HSD_MemAlloc(sizeof(Menu));
         user_data = alloc;
     }
     HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");
@@ -285,11 +312,7 @@ void mnSound_80249C08(int unused)
     user_data->cursor = 0x14;
     user_data->unk1 = lbAudioAx_80024BD0();
     user_data->unk2 = 0U;
-    user_data->unk3 = gmMainLib_8015ED74();
-    user_data->text = NULL;
-    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
-    proc->flags_3 = HSD_GObj_804D783C;
+    mnSound_InitUserData(user_data, gobj);
 
     {
         Menu* menu = GET_MENU(mnSound_804D6C30);
@@ -302,16 +325,23 @@ void mnSound_80249C08(int unused)
         } else {
             text_id = 0xBC;
         }
-        mnSound_InitCenterText(menu, text_id);
+        Menu_InitCenterText(menu, text_id);
     }
 
-    mnSound_ChannelAnim(GET_JOBJ(gobj), user_data->unk1);
+    {
+        HSD_JObj* channel_anim_2;
+        HSD_JObj* channel_anim_1;
+        HSD_JObj* channel_anim_0;
+        PAD_STACK(4);
+        mnSound_InitChannelAnim(GET_JOBJ(gobj), user_data->unk1,
+                                &channel_anim_0, &channel_anim_1,
+                                &channel_anim_2);
+    }
 
     {
-        HSD_JObj* sp5C;
-        lb_80011E24(jobj, &sp5C, 6, -1);
-        HSD_JObjReqAnimAll(sp5C, anims[5].end_frame);
-        HSD_JObjAnimAll(sp5C);
+        lb_80011E24(jobj, &volume_cursor_jobj, 6, -1);
+        HSD_JObjReqAnimAll(volume_cursor_jobj, anims[5].end_frame);
+        HSD_JObjAnimAll(volume_cursor_jobj);
     }
 
     {
@@ -320,22 +350,22 @@ void mnSound_80249C08(int unused)
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
+        PAD_STACK(8);
         mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0, &pos_1,
                                &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
     }
 
     {
-        HSD_JObj* sp64;
-        HSD_JObj* sp60;
         gm_801602C0(user_data->unk3);
-        lb_80011E24(jobj, &sp64, 0xE, -1);
+        lb_80011E24(jobj, &sound_selection_jobj, 0xE, -1);
         {
             AnimLoopSettings* anim = &anims[user_data->unk2];
-            mn_8022ED6C(sp64, anim + 1);
+            mn_8022ED6C(sound_selection_jobj, anim + 1);
         }
-        lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, anims[user_data->unk1 + 3].end_frame);
-        HSD_JObjAnimAll(sp60);
+        lb_80011E24(jobj, &channel_selection_jobj, 0xB, -1);
+        HSD_JObjReqAnimAll(channel_selection_jobj,
+                           anims[user_data->unk1 + 3].end_frame);
+        HSD_JObjAnimAll(channel_selection_jobj);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }

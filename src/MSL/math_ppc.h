@@ -1,12 +1,12 @@
 #ifndef _MATH_PPC_H_
 #define _MATH_PPC_H_ // IWYU pragma: always_keep
 
+#include <MetroTRK/intrinsics.h>
+
 #ifdef __MWERKS__
 #pragma push
 #pragma cplusplus on
 #endif
-
-extern double __frsqrte(double);
 
 extern inline float sqrtf(float x)
 {
@@ -29,7 +29,7 @@ extern inline float sqrtf(float x)
 #pragma pop
 #endif
 
-inline float sqrtf_accurate(float x)
+static inline float sqrtf_accurate(float x)
 {
     volatile float y;
     if (x > 0.0f) {

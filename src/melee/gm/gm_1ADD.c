@@ -96,7 +96,7 @@ bool gm_801ADE1C(int arg0, int arg1, f32 arg2, f32 arg3)
     return true;
 }
 
-int gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
+bool gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
 {
     HSD_GObj* temp_r3_3;
     HSD_Text* temp_r3_4;
@@ -199,7 +199,7 @@ void gm_801AE544(int arg0, float val)
     }
 }
 
-void gm_801AE640(int arg0, int arg1)
+void gm_801AE640(int arg0, bool arg1)
 {
     struct unkd4d0* var_r31;
     struct unkd4d0_8* var_r30;
@@ -229,7 +229,7 @@ void gm_801AE640(int arg0, int arg1)
     }
 }
 
-void gm_801AE74C(int arg0, int arg1)
+void gm_801AE74C(int arg0, bool arg1)
 {
     struct unkd4d0* var_r31;
     struct unkd4d0_8* var_r30;
@@ -344,7 +344,7 @@ void gm_801AEBB0(void)
     gobj = GObj_Create(20, 21, 0);
     {
         HSD_CObj* desc = HSD_CObjLoadDesc(gm_804D6868->cameras[0].desc);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, desc);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, desc);
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 0x4000;
@@ -357,7 +357,7 @@ HSD_GObj* gm_801AECC4(int model_idx)
 {
     HSD_GObj* gobj = GObj_Create(9, 13, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6868->models[model_idx]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 14, 0);
     gm_8016895C(jobj, gm_804D6868->models[model_idx], 0);
     HSD_JObjReqAnimAll(jobj, 0.0F);

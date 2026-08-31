@@ -20,8 +20,6 @@
 
 #include <baselib/gobj.h>
 
-void ft_8007C224(HSD_GObj* gobj);
-
 void ft_8007C114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -29,6 +27,8 @@ void ft_8007C114(HSD_GObj* gobj)
         switch (itGetKind(fp->item_gobj)) {
         case It_Kind_Hammer:
             ftCo_800C555C(gobj);
+            break;
+        default:
             break;
         }
     }
@@ -71,31 +71,8 @@ void ft_8007C224(Fighter_GObj* gobj)
         hitbox->x58 = hitbox->x4C;
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         break;
-    }
-}
-
-static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1)
-{
-    lbColl_80008688(hit1, 3, fp0);
-    if (fp1->ground_or_air == GA_Air) {
-        float temp_f1 = fp0->co_attrs.weight / fp1->co_attrs.weight;
-        float temp_f5;
-        if (temp_f1 > 1) {
-            temp_f1 = 1;
-        }
-        temp_f5 = temp_f1 * p_ftCommonData->hit_weight_mul;
-        if (fp0->pos_delta.x * fp1->pos_delta.x >= 0) {
-            fp1->x98_atk_shield_kb.x +=
-                (fp0->pos_delta.x - fp1->pos_delta.x) * temp_f5;
-        } else {
-            fp1->x98_atk_shield_kb.x += fp0->pos_delta.x * temp_f5;
-        }
-        if (fp0->pos_delta.y * fp1->pos_delta.y >= 0) {
-            fp1->x98_atk_shield_kb.y +=
-                (fp0->pos_delta.y - fp1->pos_delta.y) * temp_f5;
-        } else {
-            fp1->x98_atk_shield_kb.y += fp0->pos_delta.y * temp_f5;
-        }
+    default:
+        break;
     }
 }
 
@@ -176,7 +153,7 @@ void ft_8007C4BC(Fighter_GObj* gobj)
         HSD_GObj* grab_attacker;
         PAD_STACK(4 * 2);
         if (fp->victim_gobj != NULL) {
-            grab_attacker = (Fighter_GObj*) fp->victim_gobj;
+            grab_attacker = fp->victim_gobj;
         } else if (fp->x221C_b6) {
             grab_attacker = (Fighter_GObj*) fp->dmg.x1868_source;
         } else {

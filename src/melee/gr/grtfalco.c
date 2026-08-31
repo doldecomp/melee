@@ -1,50 +1,70 @@
-#include "gr/grtfalco.h"
+#include "grtfalco.h"
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <placeholder.h>
 
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* static */ StageCallbacks grTFc_803E8918[4] = {
+/* 2207F0 */ static void grTFalco_802207F0(bool);
+/* 2207F4 */ static void grTFalco_802207F4(void);
+/* 22086C */ static void grTfalco_UnkStage0_OnLoad(void);
+/* 220870 */ static void grTfalco_UnkStage0_OnStart(void);
+/* 220894 */ static bool grTFalco_80220894(void);
+/* 22089C */ static HSD_GObj* setupStageCallbacks(int);
+/* 220984 */ static void stageGObj0_OnInit(Ground_GObj*);
+/* 2209B0 */ static bool stageGObj0_Callback1(Ground_GObj*);
+/* 2209B8 */ static void stageGObj0_GObjProc(Ground_GObj*);
+/* 2209BC */ static void stageGObj0_Callback3(Ground_GObj*);
+/* 2209C0 */ static void stageGObj2_OnInit(Ground_GObj*);
+/* 220A10 */ static bool stageGObj2_Callback1(Ground_GObj*);
+/* 220A18 */ static void stageGObj2_GObjProc(Ground_GObj*);
+/* 220A4C */ static void stageGObj2_Callback3(Ground_GObj*);
+/* 220A50 */ static void stageGObj1_OnInit(Ground_GObj*);
+/* 220AA0 */ static bool stageGObj1_Callback1(Ground_GObj*);
+/* 220AA8 */ static void stageGObj1_GObjProc(Ground_GObj*);
+/* 220AC8 */ static void stageGObj1_Callback3(Ground_GObj*);
+/* 220ACC */ static DynamicsDesc* grTFalco_80220ACC(enum_t);
+/* 220B78 */ static bool grTFalco_80220B78(Vec3*, int, HSD_JObj*);
+
+StageCallbacks grTFc_803E8918[] = {
     {
-        grTFalco_80220984,
-        grTFalco_802209B0,
-        grTFalco_802209B8,
-        grTFalco_802209BC,
+        stageGObj0_OnInit,
+        stageGObj0_Callback1,
+        stageGObj0_GObjProc,
+        stageGObj0_Callback3,
         0,
     },
     {
-        grTFalco_80220A50,
-        grTFalco_80220AA0,
-        grTFalco_80220AA8,
-        grTFalco_80220AC8,
+        stageGObj1_OnInit,
+        stageGObj1_Callback1,
+        stageGObj1_GObjProc,
+        stageGObj1_Callback3,
         0,
     },
     {
-        grTFalco_802209C0,
-        grTFalco_80220A10,
-        grTFalco_80220A18,
-        grTFalco_80220A4C,
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
         (1 << 30) | (1 << 31),
     },
+    { 0 },
 };
 
-StageData grTFc_803E8974 = {
-    TFALCO,
+StageData grTFc_StageData = {
+    Gr_Kind_TFalco,
     grTFc_803E8918,
     "/GrTFc.dat",
     grTFalco_802207F4,
@@ -54,7 +74,9 @@ StageData grTFc_803E8974 = {
     grTFalco_80220894,
     grTFalco_80220ACC,
     grTFalco_80220B78,
-    1,
+    (1 << 0),
+    NULL,
+    0,
 };
 
 struct grTFalco_YakumonoParam {
@@ -73,9 +95,9 @@ void grTFalco_802207F4(void)
     yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
-    grTFalco_8022089C(0);
-    grTFalco_8022089C(1);
-    grTFalco_8022089C(2);
+    setupStageCallbacks(0);
+    setupStageCallbacks(1);
+    setupStageCallbacks(2);
     Ground_801C39C0();
     Ground_801C3BB4();
     Ground_801C4210();
@@ -94,71 +116,71 @@ bool grTFalco_80220894(void)
     return false;
 }
 
-HSD_GObj* grTFalco_8022089C(int id)
+Ground_GObj* setupStageCallbacks(int gobj_id)
 {
-    HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTFc_803E8918[id];
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &grTFc_803E8918[gobj_id];
 
-    gobj = Ground_GetStageGObj(id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201, gobj_id);
     }
 
     return gobj;
 }
 
-void grTFalco_80220984(Ground_GObj* gobj)
+void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTFalco_802209B0(Ground_GObj* arg0)
+bool stageGObj0_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_802209B8(Ground_GObj* arg0) {}
+void stageGObj0_GObjProc(Ground_GObj* arg0) {}
 
-void grTFalco_802209BC(Ground_GObj* arg0) {}
+void stageGObj0_Callback3(Ground_GObj* arg0) {}
 
-void grTFalco_802209C0(Ground_GObj* gobj)
+void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFalco_80220A10(Ground_GObj* arg0)
+bool stageGObj2_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_80220A18(Ground_GObj* arg0)
+void stageGObj2_GObjProc(Ground_GObj* arg0)
 {
     lb_800115F4();
     Ground_801C2FE0(arg0);
 }
 
-void grTFalco_80220A4C(Ground_GObj* arg0) {}
+void stageGObj2_Callback3(Ground_GObj* arg0) {}
 
-void grTFalco_80220A50(Ground_GObj* gobj)
+void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFalco_80220AA0(Ground_GObj* arg0)
+bool stageGObj1_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_80220AA8(Ground_GObj* gobj)
+void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTFalco_80220AC8(Ground_GObj* arg0) {}
+void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
 DynamicsDesc* grTFalco_80220ACC(enum_t arg0)
 {

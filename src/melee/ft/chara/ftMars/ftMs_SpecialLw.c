@@ -1,12 +1,14 @@
 #include "ftMs_SpecialLw.h"
 
-#include "math.h"
-
 #include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -21,9 +23,9 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static MotionFlags const ftMs_MF_SpecialLw_Coll =
@@ -344,17 +346,19 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
         switch (ftLib_GetKind(gobj)) {
-        case 18:
+        case FTKIND_MARS:
             efSync_Spawn(
                 1265, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
             break;
-        case 26:
+        case FTKIND_EMBLEM:
             efSync_Spawn(
                 1296, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
+            break;
+        default:
             break;
         }
         fp->x2219_b0 = true;

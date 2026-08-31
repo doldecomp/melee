@@ -7,7 +7,6 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D4D.h"
 #include "ft/ftanim.h"
@@ -27,13 +26,11 @@
 
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_013B.h"
 #include "mn/types.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
-#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -220,7 +217,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
     return result;
 }
 
-inline s32 sgn(float x)
+static inline s32 sgn(float x)
 {
     if (x < 0.0f) {
         return -1;
@@ -448,7 +445,7 @@ CollData* ftLib_80086984(HSD_GObj* gobj)
     return Fighter_GetCollData(fp);
 }
 
-inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
+static inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
 {
     dst->x = src->x + x;
     dst->y = src->y + y;
@@ -553,19 +550,19 @@ CmSubject* ftLib_80086B74(HSD_GObj* gobj)
 
 float ftLib_80086B80(HSD_GObj* gobj)
 {
-    return ftLib_80086B74(gobj)->x48.z;
+    return ftLib_80086B74(gobj)->target_ext.v.z;
 }
 
 void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
 {
     CmSubject* cam = ftLib_80086B74(gobj);
-    *v = cam->x1C;
+    *v = cam->bone_pos;
 }
 
 bool ftLib_80086BB4(HSD_GObj* gobj)
 {
     CmSubject* cam = ftLib_80086B74(gobj);
-    return Camera_80031154(&cam->x10);
+    return Camera_80031154(&cam->pos);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)
@@ -586,7 +583,7 @@ enum_t ftLib_GetMotionId(HSD_GObj* gobj)
     return fp->motion_id;
 }
 
-inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
+static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
     Fighter* fp = gobj->user_data;
 

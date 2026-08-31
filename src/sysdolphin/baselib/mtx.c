@@ -1,10 +1,8 @@
 #include "mtx.h"
 
 #include "debug.h"
-#include "math.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 
 #define EPSILON 0.0000000001f
 #define FLOAT_MIN 1.1754943E-38f
@@ -13,7 +11,7 @@ HSD_ObjAllocData HSD_Mtx_804C2310;
 HSD_ObjAllocData HSD_Mtx_804C233C;
 
 /// Calculates the determinant of the top 3x3 section of a 3x4 matrix
-inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
+static inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
 {
     return m[0][0] * m[1][1] * m[2][2] + m[0][1] * m[1][2] * m[2][0] +
            m[0][2] * m[1][0] * m[2][1] - m[2][0] * m[1][1] * m[0][2] -
@@ -204,7 +202,7 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
     }
 }
 
-inline f32 calcVal(f32 x, f32 y)
+static inline f32 calcVal(f32 x, f32 y)
 {
     if (fabsf_bitwise(x) <= FLOAT_MIN) {
         if (y >= 0) {
@@ -438,24 +436,24 @@ void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
 /// might be a fakematch?
 void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 {
-    f32* arr0 = (f32*) &arg0[0][0];
-    f32* arr1 = (f32*) &arg1[0][0];
-    f32* arr2 = (f32*) &arg2[0][0];
+    f32* arr0 = (&arg0[0][0]);
+    f32* arr1 = (&arg1[0][0]);
+    f32* arr2 = (&arg2[0][0]);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 }
 
 void* HSD_VecAlloc(void)
@@ -497,7 +495,7 @@ HSD_ObjAllocData* HSD_VecGetAllocData(void)
 
 void HSD_VecInitAllocData(void)
 {
-    HSD_ObjAllocInit(HSD_VecGetAllocData(), 0xC, 4);
+    HSD_ObjAllocInit(HSD_VecGetAllocData(), sizeof(Vec), 4);
 }
 
 HSD_ObjAllocData* HSD_MtxGetAllocData(void)
@@ -507,5 +505,5 @@ HSD_ObjAllocData* HSD_MtxGetAllocData(void)
 
 void HSD_MtxInitAllocData(void)
 {
-    HSD_ObjAllocInit(HSD_MtxGetAllocData(), 0x30, 4);
+    HSD_ObjAllocInit(HSD_MtxGetAllocData(), sizeof(Mtx), 4);
 }

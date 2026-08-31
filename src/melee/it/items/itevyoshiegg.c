@@ -6,23 +6,20 @@
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "ef/efsync.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
-
-#include <string.h>
 
 ItemStateTable it_803F6728[] = {
     { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,
@@ -155,7 +152,6 @@ bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #itEvyoshiegg_UnkMotion5_Anim
 bool itEvyoshiegg_UnkMotion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

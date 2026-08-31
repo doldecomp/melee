@@ -3,9 +3,7 @@
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
-#include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmtou_2.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -20,6 +18,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/types.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 
 #include "pl/forward.h"
@@ -29,16 +28,15 @@
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
-#include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
 #include <baselib/sislib.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) -19.5f;
@@ -92,10 +90,10 @@ static void sdata2_order(void)
     (void) 0.0799999982f;
     (void) 0.0f;
 }
+#endif
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3DA3D0 */ extern char lbl_803DA3D0[];
-/* 3B7D3C */ extern s32 lbl_803B7D3C[4];
+/* 3B7D3C */ extern const s32 lbl_803B7D3C[5];
 /* 479A58 */ struct TmAnimTimers lbl_80479A58;
 /* 4D6690 */ extern SceneDesc* lbl_804D6690;
 /* 4D668C */ extern HSD_Archive* lbl_804D668C;
@@ -107,6 +105,15 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
         0x07, 0x09, 0x08, 0x06, 0x09, 0x04, 0x09, 0x0A, 0x0B,
         0x0C, 0x02, 0x0C, 0x06, 0x07, 0x09, 0x0C,
     },
+};
+
+const TmAnimFrameTable lbl_803B7D18 = {
+    { { 0, 30, 0 },
+      { 50, 59, 0 },
+      { 60, 70, 1 },
+      { 90, 100, 0 },
+      { 110, 130, 0 },
+      { 150, 160, 0 } },
 };
 
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
@@ -226,16 +233,16 @@ void fn_8019C048(HSD_GObj* gobj)
 
     if ((s8) (u8) HSD_PadMasterStatus[(u8) idx].err != 0) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 0.0f, 0.0f);
         return;
     }
 
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if (lbl_80479A58.x1D[idx].x0 == 4) {
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 0.0f, 0.0f);
     } else {
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 1.0f, 1.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 1.0f, 1.0f);
     }
 
     players = tmd->x30;
@@ -272,7 +279,7 @@ void fn_8019C048(HSD_GObj* gobj)
 
     state = lbl_80479A58.x1D[idx].x0;
     if (state == 0 && lbl_80479A58.x38[idx] == 6) {
-        if (lbl_80479A58.x1D[idx].x1 != 0 && (u8) tmd->x4B8[idx].x0 != 0) {
+        if (lbl_80479A58.x1D[idx].x1 != 0 && tmd->x4B8[idx].x0 != 0) {
             lbl_80479A58.x1D[idx].x0 = 1;
             lbl_80479A58.x1D[idx].x1 = 0;
         }
@@ -383,9 +390,7 @@ void fn_8019C744(HSD_GObj* gobj)
         lbl_80479A58.x10[idx] = 0;
     }
 
-    if (((s8) HSD_PadMasterStatus[(u8) idx].err != 0) &&
-        (tmd->x4B8[idx].x0 != 1))
-    {
+    if ((HSD_PadMasterStatus[(u8) idx].err != 0) && (tmd->x4B8[idx].x0 != 1)) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         var_f1 = gmTournament_GetPlayerX(tmd->x30, idx);
         fn_8018FDC4(jobj, 0.3f + var_f1, 10.1f, 666.0f);
@@ -554,11 +559,15 @@ void fn_8019D1BC(void)
 
     for (i = 0; i < (s32) tmd->x30; i++) {
         {
-            HSD_GObj* first_gobj =
-                fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
-                            fn_8019C048, (f32) i);
-            HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
-            HSD_JObjSetTranslateY(first_jobj, -2.5f);
+            HSD_GObj* first_gobj;
+            HSD_JObj* first_c;
+            HSD_JObj* first_jobj;
+
+            first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
+                                     1, fn_8019C048, (f32) i);
+            first_jobj = GET_JOBJ(first_gobj);
+            first_c = first_gobj->hsd_obj;
+            HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
 
             c = HSD_JObjGetChild(first_jobj);
@@ -699,7 +708,7 @@ void fn_8019D1BC(void)
         tmd->x534[i]->default_alignment = 1;
         HSD_SisLib_803A6B98(tmd->x534[i],
                             10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-                            name_buf[i], tmd->x534[i]->default_alignment);
+                            name_buf[i]);
         HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
     }
 }
@@ -737,7 +746,7 @@ void fn_8019DD60(void)
     gobj = GObj_Create(0xE, 0x1A, 0);
     {
         HSD_Fog* tmp = HSD_FogLoadDesc(lbl_804D6690->fogs->desc);
-        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, tmp);
+        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_FogKind, tmp);
     }
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 
@@ -785,7 +794,7 @@ static inline s32 get_match_player_index_xF(s32 player)
     return 0;
 }
 
-void gm_8019DF8C_OnFrame(void)
+void gm_Scene_TouAlt_OnFrame(void)
 {
     TmVsData vsdata;
     TmData* tmd;
@@ -801,7 +810,7 @@ void gm_8019DF8C_OnFrame(void)
     fn_8018F640(4);
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         gm_801A4B60();
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -818,7 +827,7 @@ void gm_8019DF8C_OnFrame(void)
 
     if (confirmed == (s32) tmd->x30) {
         lbl_80479A58.x0 += 1;
-        if ((u32) lbl_80479A58.x0 >= 0x1EU) {
+        if (lbl_80479A58.x0 >= 0x1EU) {
             for (j = 0; j < (s32) tmd->x2E; j++) {
                 tmd->x37[j].xF = tmd->x37[j].xE;
             }
@@ -833,11 +842,11 @@ void gm_8019DF8C_OnFrame(void)
                 pressed = fn_8018F674(i);
 
                 /* Abort combo check */
-                if (fn_8018F6A8(i) & 0x200) {
+                if (fn_8018F6A8(i) & PAD_BUTTON_B) {
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
-                    if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
-                        lbAudioAx_80024030(1);
-                        gm_SetPendingSceneIndex(0U);
+                    if (lbl_80479A58.x18[i] > 0x5AU) {
+                        sfxForward();
+                        gm_SetNextGameModeStateId(0U);
                         gm_801A4B60();
                         return;
                     }
@@ -848,15 +857,17 @@ void gm_8019DF8C_OnFrame(void)
             check_confirm: {
                 u8 status = lbl_80479A58.x1D[i].x0;
                 if (status != 2 && status != 1) {
-                    if ((fn_8018F6A8(i) & 0x40) && (fn_8018F6A8(i) & 0x20)) {
+                    if ((fn_8018F6A8(i) & PAD_TRIGGER_L) &&
+                        (fn_8018F6A8(i) & PAD_TRIGGER_R))
+                    {
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 1;
                         tmd->x4B8[i].x2 = 1;
                     }
 
-                    if (pressed & 0x40001) {
+                    if (pressed & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -870,7 +881,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0x19);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -880,9 +891,10 @@ void gm_8019DF8C_OnFrame(void)
                         tmd->x4B8[i].x3 = 0;
                         tmd->x37[j].x7 = 0;
 
-                    } else if (pressed & 0x80002) {
+                    } else if (pressed & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT))
+                    {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -896,7 +908,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -909,10 +921,10 @@ void gm_8019DF8C_OnFrame(void)
                 }
             }
 
-                if (buttons & 0x1100) {
-                    if ((u8) lbl_80479A58.x1D[i].x0 != 2) {
+                if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
+                    if (lbl_80479A58.x1D[i].x0 != 2) {
                         u16 char_id;
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         lbl_80479A58.x1D[i].x0 = 1;
                         char_id = tmd->x4B8[i].x6;
                         if (char_id <= 0x78U) {
@@ -921,18 +933,18 @@ void gm_8019DF8C_OnFrame(void)
                             gm_80167858(i, 0x78, 0xB, 0x14);
                         }
                     }
-                } else if (buttons & 0x200) {
-                    if ((u8) lbl_80479A58.x1D[i].x0 == 2) {
-                        lbAudioAx_80024030(0);
+                } else if (buttons & PAD_BUTTON_B) {
+                    if (lbl_80479A58.x1D[i].x0 == 2) {
+                        sfxBack();
                         lbl_80479A58.x1D[i].x0 = 3;
                     }
                 } else {
                     u8 color_status = lbl_80479A58.x1D[i].x0;
                     if (color_status != 2 && color_status != 1) {
-                        if (buttons & 0x400) {
+                        if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
-                                (s32) (gm_80169238(fn_8018F6FC(
+                                (s32) (gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {
@@ -942,7 +954,7 @@ void gm_8019DF8C_OnFrame(void)
                             j = get_match_player_index(i);
                             tmd->x37[j].x7 = tmd->x4B8[i].x3;
 
-                        } else if (buttons & 0x800) {
+                        } else if (buttons & PAD_BUTTON_Y) {
                             /* Up: decrement color */
                             u8 color = tmd->x4B8[i].x3;
                             if (color != 0) {
@@ -964,7 +976,7 @@ void gm_8019DF8C_OnFrame(void)
             } else {
                 stage = (s32) tmd->x28;
             }
-            vsdata.stage_id = (u32) stage;
+            vsdata.stkind = (u32) stage;
         }
         for (i = 0; i < 4; i++) {
             vsdata.slot_type[i] = (Gm_PKind) tmd->x4B8[i].x0;
@@ -977,52 +989,51 @@ void gm_8019DF8C_OnFrame(void)
 
 /* 4DA948 */ u32 const lbl_804DA948 = { 0 };
 
+void gm_8019ECAC_OnEnter_inline(void)
+{
+    lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
+                                      "ScGamTour_scene_data", 0);
+    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
+}
+
 void gm_8019E634(void)
 {
-    s32 indices[4];
+    struct Indices {
+        s32 values[4];
+    } indices;
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
     s32 i, j;
-    MatchEnd* match_end;
-    s32* results_base;
 
     tmd = gm_GetTournamentData();
     hmn_cpu = tmd->hmn_cpu_count;
 
-    indices[0] = lbl_803B7D3C[0];
-    indices[1] = lbl_803B7D3C[1];
-    indices[2] = lbl_803B7D3C[2];
-    indices[3] = lbl_803B7D3C[3];
+    indices = *(struct Indices*) lbl_803B7D3C;
 
     /* Get match results per player */
-    match_end = &gm_80477738;
-    results_base = results;
-    {
-        s32* result_ptr;
-        for (result_ptr = results_base, i = 0; i < (s32) tmd->x30;
-             result_ptr++, i++)
-        {
-            *result_ptr = fn_80166CBC(match_end, i);
-        }
+    for (i = 0; i < (s32) tmd->x30; i++) {
+        results[i] = fn_80166CBC(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
     for (i = 0; i < (s32) (tmd->x30 - 1); i++) {
         for (j = 0; j < (s32) ((tmd->x30 - 1) - i); j++) {
-            if (results_base[j] > results_base[j + 1]) {
-                s32 tr = results_base[j];
-                s32 ti = indices[j];
-                results_base[j] = results_base[j + 1];
-                indices[j] = indices[j + 1];
-                results_base[j + 1] = tr;
-                indices[j + 1] = ti;
+            if (results[j] > results[j + 1]) {
+                s32 tr = results[j];
+                s32 ti = indices.values[j];
+                results[j] = results[j + 1];
+                indices.values[j] = indices.values[j + 1];
+                results[j + 1] = tr;
+                indices.values[j + 1] = ti;
             }
         }
     }
 
     /* Handicap adjustment */
-    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         union {
             u32 word;
             u8 bytes[4];
@@ -1033,9 +1044,8 @@ void gm_8019E634(void)
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
-                j = get_match_player_index_xF(id);
-                hbuf.bytes[i] = (u8) tmd->x37[j].x2;
+                j = get_match_player_index_xF(results[i]);
+                hbuf.bytes[i] = tmd->x37[j].x2;
             }
         }
 
@@ -1044,7 +1054,7 @@ void gm_8019E634(void)
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
+                s32 id = results[i];
                 j = get_match_player_index_xF(id);
                 tmd->x37[j].x2 = hbuf.bytes[i];
             }
@@ -1055,7 +1065,7 @@ void gm_8019E634(void)
     if ((s32) gm_804771C4.match_type == 1) {
         /* Team mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[i];
+            s32 id = indices.values[i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
@@ -1064,18 +1074,18 @@ void gm_8019E634(void)
                 id = next_id;
             }
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[i];
+            tmd->x37[j].xE = indices.values[i];
         }
     } else {
         /* FFA mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[(tmd->x30 - 1) - i];
+            s32 id = indices.values[(tmd->x30 - 1) - i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
             id = tmd->x30 + i;
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[(tmd->x30 - 1) - i];
+            tmd->x37[j].xE = indices.values[(tmd->x30 - 1) - i];
         }
     }
 
@@ -1113,7 +1123,7 @@ void gm_8019E634(void)
         audio_mask = 8;
         for (k = 0; k < (s32) tmd->x30; k++) {
             audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
-            OSReport(lbl_803DA3D0, (s32) tmd->x4B8[k].x1);
+            OSReport("ckind:%d\n", (s32) tmd->x4B8[k].x1);
         }
         lbAudioAx_80026F2C(0x16);
         lbAudioAx_8002702C(6, audio_mask);
@@ -1121,10 +1131,10 @@ void gm_8019E634(void)
     }
 }
 
-void gm_8019ECAC_OnEnter(void* arg0)
+void gm_Scene_TouAlt_OnEnter(void* arg0)
 {
     struct {
-        u32 stage_id;
+        StKind stkind;
         CharacterKind char_id[4];
         u32 color[4];
     } local;
@@ -1140,11 +1150,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbAudioAx_80027168();
     lbAudioAx_80027648();
     gm_GetTournamentData();
-    lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
-                                      "ScGamTour_scene_data", 0);
-    lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
-                                      "ScGamTour_scene_data", 0);
-    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
+    gm_8019ECAC_OnEnter_inline();
     fn_8019DD60();
     lbAudioAx_80027648();
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
@@ -1158,9 +1164,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
 
     fn_80196510();
     if (fn_80196564(tmd)) {
-        local.stage_id = fn_8019655C();
+        local.stkind = fn_8019655C();
     } else {
-        local.stage_id = tmd->x28;
+        local.stkind = tmd->x28;
     }
     fn_80196594(tmd);
     lbDvd_800174BC();
@@ -1171,14 +1177,14 @@ void gm_8019ECAC_OnEnter(void* arg0)
             audio_mask |= lbAudioAx_80026E84(local.char_id[j]);
         }
     }
-    audio_mask |= lbAudioAx_80026EBC(local.stage_id);
+    audio_mask |= lbAudioAx_80026EBC(local.stkind);
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio_mask);
     lbAudioAx_80027168();
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-void gm_8019EE54_OnLeave(void* arg0)
+void gm_Scene_TouAlt_OnExit(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6688);
     lbArchive_80016EFC(lbl_804D668C);
@@ -1196,7 +1202,7 @@ void fn_8019EE80(TmVsData* arg0)
     }
 
     if (!fn_80196594(gm_GetTournamentData())) {
-        game_cache->stage_id = arg0->stage_id;
+        game_cache->stkind = arg0->stkind;
     }
 
     lbDvd_80018254();
@@ -1219,8 +1225,12 @@ void fn_8019EF08(TmVsData* arg0)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_1(void)
 {
     (void) "ScGamTour_scene_data";
     (void) "ckind:%d\n";
 }
+#endif
+
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };

@@ -11,10 +11,9 @@
 #include "baselib/tev.h"
 #include "baselib/util.h"
 
-#include <math_ppc.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <Runtime/__mem.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 
@@ -90,12 +89,6 @@ Vec3 zOne = { 0, 0, 1 };
 Vec3 yOne = { 0, 1, 0 };
 Vec3 zOne2 = { 0, 0, 1 };
 
-inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
-{
-    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
-                 (mtx[2][col] * mtx[2][col]));
-}
-
 static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {
     Vec3 pos, ax, ay, az;
@@ -104,8 +97,8 @@ static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     HSD_MtxColVec(src, 3, &pos);
     HSD_MtxColVec(src, 1, &ay);
 
-    sx = HSD_MtxColMagFloat(src, 0);
-    sz = HSD_MtxColMagFloat(src, 2);
+    sx = HSD_MtxColMag(src, 0);
+    sz = HSD_MtxColMag(src, 2);
 
     if (jobj->flags & JOBJ_PBILLBOARD) {
         VECCrossProduct(&pos, &ay, &ax);
@@ -138,8 +131,8 @@ static void mkHBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     HSD_MtxColVec(src, 3, &pos);
     HSD_MtxColVec(src, 0, &ax);
 
-    sy = HSD_MtxColMagFloat(src, 1);
-    sz = HSD_MtxColMagFloat(src, 2);
+    sy = HSD_MtxColMag(src, 1);
+    sz = HSD_MtxColMag(src, 2);
 
     if (jobj->flags & JOBJ_PBILLBOARD) {
         uy.y = sqrtf(pos.x * pos.x + pos.z * pos.z);
@@ -171,8 +164,8 @@ static void mkBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
     Vec3 ax, ay, *az, pos;
     float sx, sy, sz;
 
-    sx = HSD_MtxColMagFloat(src, 0);
-    sz = HSD_MtxColMagFloat(src, 2);
+    sx = HSD_MtxColMag(src, 0);
+    sz = HSD_MtxColMag(src, 2);
 
     HSD_MtxColVec(src, 1, &ay);
     sy = VECMag(&ay);

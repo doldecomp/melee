@@ -3,9 +3,12 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Fall.h"
-#include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
@@ -15,9 +18,6 @@
 #include "ftPopo/ftPp_SpecialHi.h"
 #include "it/items/itclimbersblizzard.h"
 #include "lb/lb_00B0.h"
-#include "pl/player.h"
-
-#include <trigf.h>
 
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {

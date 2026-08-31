@@ -14,48 +14,16 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
 
 bool ftCo_800D2FA4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->dmg.x1860_element == 0xE) {
+    if (fp->dmg.x1860_element == HitElement_Scball) {
         int x = fp->x2070.x2071_b0_3;
         switch (x) {
         case 11:
@@ -85,7 +53,7 @@ void ftCo_800D3004(Fighter_GObj* gobj)
                                   0.0F, NULL);
     }
     fp->self_vel.x = 0.0F;
-    fp->self_vel.y = fp->co_attrs.x140;
+    fp->self_vel.y = fp->co_attrs.screw_attack_launch_velocity;
     fp->self_vel.z = 0.0F;
 }
 

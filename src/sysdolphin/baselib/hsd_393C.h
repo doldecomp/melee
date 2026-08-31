@@ -1,7 +1,6 @@
 #ifndef HSD_393C_H
 #define HSD_393C_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 /* 393C14 */ void fn_80393C14(const u8* buf, size_t);

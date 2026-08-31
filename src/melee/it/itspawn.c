@@ -18,17 +18,21 @@
 #include <baselib/memory.h>
 #include <baselib/random.h>
 
-ItemPickTable monster;
+ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;
 RandomItemSpawner it_804A0E30;
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) S32_TO_F32;
     (void) 0.0F;
     (void) 0.99F;
+    (void) it_804A0E30;
+    (void) it_804A0E50;
 }
+#endif
 
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
@@ -103,14 +107,14 @@ bool it_8026C704(void)
 
 /// Decides item kind for spawned items - not sure in which context (i.e from
 /// pokeballs, from capsules, thin air, etc.)
-/// @todo Two callee-saved registers are swapped.
 ItemKind it_8026C75C(ItemPickTable* table)
 {
     bool chk1;
-    bool chk2;
     int saved;
+    bool chk2;
     ItemKind ret;
     ItemKind kind;
+    ItemPickTable* tbl = table;
     PAD_STACK(16);
 
     chk1 = false;
@@ -119,27 +123,27 @@ ItemKind it_8026C75C(ItemPickTable* table)
         chk1 = true;
     }
     chk2 = false;
-    if (table->x8 == 0) {
+    if (tbl->x8 == 0) {
         return -1;
     }
     if (chk1) {
-        if (table->x4[table->size - 1] == It_Kind_M_Ball) {
-            int i_last = table->size - 1;
+        if (tbl->x4[tbl->size - 1] == It_Kind_M_Ball) {
+            int i_last = tbl->size - 1;
             if (i_last < 1) {
                 return -1;
             }
-            saved = table->x8;
+            saved = tbl->x8;
             chk2 = true;
-            table->x8 = table->xC[i_last];
-            table->size--;
+            tbl->x8 = tbl->xC[i_last];
+            tbl->size--;
         }
     }
-    kind = it_8026C65C(table);
+    kind = it_8026C65C(tbl);
 
     ret = kind;
     if (chk1 && chk2) {
-        table->x8 = saved;
-        table->size++;
+        tbl->x8 = saved;
+        tbl->size++;
         if (kind == It_Kind_M_Ball) {
             ret = -1;
         }
@@ -155,7 +159,7 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
     SpawnItem spawn;
     if (db_AreItemSpawnsEnabled() != 0U) {
         alloc->x0--;
-        if ((s32) alloc->x0 == 0) {
+        if (alloc->x0 == 0) {
             spawn.kind = it_8026C75C(&alloc->x4);
             if ((s32) spawn.kind != -1) {
                 pos = &spawn.prev_pos;
@@ -197,8 +201,10 @@ void fn_8026C88C(HSD_GObj* gobj)
     it_8026C88C_inline(alloc);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
 {
     u64 mask = arg2;
@@ -216,7 +222,9 @@ void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
     }
     alloc->x8 = sum;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool it_8026CB3C(Vec3* vec)
 {
@@ -283,7 +291,9 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* counts, u64 mask, f32 weight)
 {
-    ItemPickTable* table = &it_804A0E50;
+    /// @todo #it_804A0E50 immediately follows #it_804A0E30; the original
+    ///       addressed it relative to the spawner.
+    RandomItemSpawner* spawner = &it_804A0E30;
     s32* p;
     s32 cnt;
     ItemKind it_kind;
@@ -308,9 +318,10 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         it_kind++;
         mask >>= 1;
     }
-    table->size = cnt;
-    *(item_kinds = &table->x4) = HSD_MemAlloc(cnt * 4);
-    *(weights = &table->xC) = HSD_MemAlloc(cnt * 4);
+    ((ItemPickTable*) (spawner + 1))->size = cnt;
+    *(item_kinds = &((ItemPickTable*) (spawner + 1))->x4) =
+        HSD_MemAlloc(cnt * 4);
+    *(weights = &((ItemPickTable*) (spawner + 1))->xC) = HSD_MemAlloc(cnt * 4);
 
     idx = (cnt2 = 0);
     mask = backup;
@@ -340,6 +351,7 @@ void it_8026CF04(void)
     u32 cumulative;
     u32 idx;
     s32* counts;
+    s32* p;
 
     counts = it_804D6D28->x128;
     sum = counts[0];
@@ -347,25 +359,34 @@ void it_8026CF04(void)
     sum += counts[2];
     sum += counts[3];
     if (sum != 0) {
-        monster.x8 = sum;
-        monster.size = 4;
-        monster.x4 = HSD_MemAlloc(monster.size * 4);
-        monster.xC = HSD_MemAlloc(monster.size * 4);
+        it_804A0E60.x8 = sum;
+        it_804A0E60.size = 4;
+        it_804A0E60.x4 = HSD_MemAlloc(it_804A0E60.size * 4);
+        it_804A0E60.xC = HSD_MemAlloc(it_804A0E60.size * 4);
         idx = i = 0;
-        counts = &it_804D6D28->x128[0];
-        (void) counts;
+        item_common = it_804D6D28;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
-            monster.x4[i] = It_Kind_Kuriboh + i;
-            monster.xC[idx] = cumulative;
-            cumulative += counts[i];
+            it_804A0E60.x4[i] = It_Kind_Kuriboh + i;
+            it_804A0E60.xC[idx] = cumulative;
+            (void) it_804A0E60.xC[(u32) (p = &item_common->x128[idx])];
+            cumulative += *p;
         }
     }
 }
 
-static inline bool it_8026D018_inline(f32 weight, int chk, s32* stage_info,
-                                      u64 stage_mask)
+static inline bool it_8026D018_inline(void)
 {
+    s32* stage_info;
+    u64 stage_mask;
+    int chk;
+    f32 weight;
+
+    stage_mask = it_804A0E30.x18;
+    stage_info = Ground_801C2AD8();
+    chk = gm_8016AE80();
+    weight = gm_8016AE94();
+
     if (stage_mask == 0 || stage_info == NULL || chk == -1) {
         return false;
     }
@@ -377,32 +398,44 @@ static inline bool it_8026D018_inline(f32 weight, int chk, s32* stage_info,
     return true;
 }
 
+static inline void it_8026D018_inline2(void)
+{
+    s32* stage_info;
+    u64 stage_mask;
+    f32 weight;
+
+    stage_mask = it_804A0E30.x18;
+    stage_info = Ground_801C2AD8();
+    weight = gm_8016AE94();
+
+    if ((stage_mask != 0) && (stage_info != NULL)) {
+        stage_mask >>= 6;
+        it_8026CA4C(&it_804A0E50, stage_info, stage_mask, 6, weight);
+        if (it_804A0E50.x8 != 0) {
+            it_8026CD50(stage_info, stage_mask, weight);
+        }
+    }
+}
+
+static inline void it_8026D018_inline3(f32 randf, const s32* range)
+{
+    s32 diff = range[1] - range[0];
+
+    (void) diff;
+    it_804A0E30.x0 = diff * randf + range[0];
+    it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
+}
+
 void it_8026D018(void)
 {
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
         it_804A0E30.x18 = gm_8016AEA4();
-        if (it_8026D018_inline(gm_8016AE94(), gm_8016AE80(), Ground_801C2AD8(),
-                               it_804A0E30.x18))
-        {
-            u64 stage_mask = it_804A0E30.x18;
-            s32* stage_info = Ground_801C2AD8();
-            f32 weight = gm_8016AE94();
-            if ((stage_mask != 0) && (stage_info != NULL)) {
-                u64 monster_mask = stage_mask >> 6;
-                it_8026CA4C(&it_804A0E50, stage_info, monster_mask, 6, weight);
-                if (it_804A0E50.x8 != 0) {
-                    it_8026CD50(stage_info, monster_mask, weight);
-                }
-            }
+        if (it_8026D018_inline()) {
+            it_8026D018_inline2();
             it_8026CF04();
             HSD_GObj_SetupProc(GObj_Create(5, 7, 0), fn_8026C88C, 0);
-            {
-                s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
-                f32 randf = HSD_Randf();
-                f32 diff = range[1] - range[0];
-                it_804A0E30.x0 = diff * randf + range[0];
-                it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
-            }
+            it_8026D018_inline3(HSD_Randf(),
+                                &it_804D6D28->xFC[gm_8016AE80() * 2]);
         }
     }
 }

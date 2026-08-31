@@ -18,10 +18,9 @@
 #include "gr/stage.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
@@ -59,28 +58,67 @@ static struct grFourside_YakumonoParam* yakumono_param;
                                              mpLib_GroundEnum ground_kind,
                                              float delta_y);
 
-S16Vec3 grFs_803E3CE8[] = { { 3, 1, 7 }, { 4, 5, 1 }, { 0, 6, 10 } };
-
-StageCallbacks grFs_803E3CFC[] = {
-    { grFourside_801F2EBC, grFourside_801F2EE8, grFourside_801F2EF0,
-      grFourside_801F2EF4, 0 },
-    { grFourside_801F3154, grFourside_801F326C, grFourside_801F3274,
-      grFourside_801F37F8, 0 },
-    { grFourside_801F2EF8, grFourside_801F2F24, grFourside_801F2F2C,
-      grFourside_801F2F30, 0 },
-    { grFourside_801F3C40, grFourside_801F3CC0, grFourside_801F3CC8,
-      grFourside_801F3F0C, 0 },
-    { grFourside_801F30F0, grFourside_801F3144, grFourside_801F314C,
-      grFourside_801F3150, 0 },
-    { grFourside_801F37FC, grFourside_801F388C, grFourside_801F3894,
-      grFourside_801F3B6C, 0 },
-    { grFourside_801F2F34, grFourside_801F3070, grFourside_801F3078,
-      grFourside_801F309C, 0xc0000000 }
+GrJoint grFs_803E3CE8[] = {
+    { 3, 1, 7 },
+    { 4, 5, 1 },
+    { 0, 6, 10 },
 };
 
-StageData grFs_803E3D94 = {
-    FOURSIDE,
-    grFs_803E3CFC,
+StageCallbacks grFs_StageCallbacks[] = {
+    {
+        grFourside_801F2EBC,
+        grFourside_801F2EE8,
+        grFourside_801F2EF0,
+        grFourside_801F2EF4,
+        0,
+    },
+    {
+        grFourside_801F3154,
+        grFourside_801F326C,
+        grFourside_801F3274,
+        grFourside_801F37F8,
+        0,
+    },
+    {
+        grFourside_801F2EF8,
+        grFourside_801F2F24,
+        grFourside_801F2F2C,
+        grFourside_801F2F30,
+        0,
+    },
+    {
+        grFourside_801F3C40,
+        grFourside_801F3CC0,
+        grFourside_801F3CC8,
+        grFourside_801F3F0C,
+        0,
+    },
+    {
+        grFourside_801F30F0,
+        grFourside_801F3144,
+        grFourside_801F314C,
+        grFourside_801F3150,
+        0,
+    },
+    {
+        grFourside_801F37FC,
+        grFourside_801F388C,
+        grFourside_801F3894,
+        grFourside_801F3B6C,
+        0,
+    },
+    {
+        grFourside_801F2F34,
+        grFourside_801F3070,
+        grFourside_801F3078,
+        grFourside_801F309C,
+        (1 << 30) | (1 << 31),
+    },
+};
+
+StageData grFs_StageData = {
+    Gr_Kind_Fourside,
+    grFs_StageCallbacks,
     "/GrFs.dat",
     grFourside_801F2D10,
     grFourside_801F2D0C,
@@ -89,9 +127,9 @@ StageData grFs_803E3D94 = {
     grFourside_801F2DC8,
     grFourside_801F41E0,
     grFourside_801F41E8,
-    1,
+    (1 << 0),
     grFs_803E3CE8,
-    3,
+    ARRAY_SIZE(grFs_803E3CE8),
 };
 
 void grFourside_801F2D0C(bool arg) {}
@@ -124,11 +162,10 @@ bool grFourside_801F2DC8(void)
     return false;
 }
 
-/// #grFourside_801F2DD0
 HSD_GObj* grFourside_801F2DD0(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grFs_803E3CFC[gobj_id];
+    StageCallbacks* callbacks = &grFs_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -172,7 +209,6 @@ void grFourside_801F2F2C(Ground_GObj* arg) {}
 
 void grFourside_801F2F30(Ground_GObj* arg) {}
 
-/// #grFourside_801F2F34
 void grFourside_801F2F34(Ground_GObj* gobj)
 {
     HSD_GObj* pHVar1;
@@ -186,7 +222,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
     gobj->render_cb = fn_801F3F74;
     gp->u.fourside.x0 = Ground_801C3FA4(gobj, 2);
     gp->u.fourside.x4 = Ground_801C3FA4(gobj, 3);
-    pHVar1 = Ground_801C2BA4(4);
+    pHVar1 = Ground_GetMapGObj(4);
     if (pHVar1) {
         gp->u.fourside.x8 = pHVar1->hsd_obj;
     } else {
@@ -220,7 +256,7 @@ void grFourside_801F30A0(void* user_data, int joint_id, CollData* coll,
     s32 val;
     PAD_STACK(3 * 4);
 
-    gobj = Ground_801C2BA4(5);
+    gobj = Ground_GetMapGObj(5);
     val = M2C_FIELD(coll, u8*, 0x34);
     gp1 = GET_GROUND(gobj);
     val = ((val >> 3) & 0xF);
@@ -248,7 +284,6 @@ void grFourside_801F314C(Ground_GObj* arg) {}
 
 void grFourside_801F3150(Ground_GObj* arg) {}
 
-/// #grFourside_801F3154
 void grFourside_801F3154(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -438,7 +473,6 @@ static inline HSD_JObj* grFourside_GetCraneIron(HSD_GObj* gobj)
     return Ground_801C3FA4(gobj, 4);
 }
 
-/// #grFourside_801F3274
 void grFourside_801F3274(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -608,12 +642,12 @@ void grFourside_801F3B70(Ground_GObj* gobj)
                 gp->u.foursideUfo.x3 = 1;
             }
             cam = gp->u.foursideUfo.xC;
-            cam->x10 = local18;
-            cam->x1C = local18;
-            cam->x40.x = -50.0f;
-            cam->x40.y = 50.0f;
-            cam->x48.x = 15.0f;
-            cam->x48.y = -15.0f;
+            cam->pos = local18;
+            cam->bone_pos = local18;
+            cam->target_ext.h.x = -50.0f;
+            cam->target_ext.h.y = 50.0f;
+            cam->target_ext.v.x = 15.0f;
+            cam->target_ext.v.y = -15.0f;
         }
     }
 }
@@ -652,7 +686,7 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
     switch (gp->u.fourside2.x0) {
     case 0:
         if (gp->u.fourside2.x4 <= 0) {
-            other = Ground_801C2BA4(5);
+            other = Ground_GetMapGObj(5);
             other_gp = other->user_data;
             if (other_gp->u.fourside2.x1 == 2 || other_gp->u.fourside2.x0 == 0)
             {
@@ -684,7 +718,7 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
         break;
     case 2:
         if (gp->u.fourside2.x4 <= 0) {
-            other = Ground_801C2BA4(5);
+            other = Ground_GetMapGObj(5);
             other_gp = other->user_data;
             if (other_gp->u.fourside2.x1 == 2 || other_gp->u.fourside2.x0 == 0)
             {
@@ -721,7 +755,7 @@ void grFourside_801F3F0C(Ground_GObj* arg) {}
 
 int grFourside_801F3F10(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(3);
+    HSD_GObj* gobj = Ground_GetMapGObj(3);
     Ground* gp = GET_GROUND(gobj);
     if ((gp->u.fourside2.x0 == 1 && gp->u.fourside2.x1 == 0) ||
         (gp->u.fourside2.x0 == 3 && gp->u.fourside2.x4 <= 700))

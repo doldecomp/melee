@@ -4,6 +4,8 @@
 #include "if/textlib.h"
 #include "lb/lbaudio_ax.h"
 
+#include <dolphin/gx/GXStruct.h>
+
 static char db_SoundInfoText_buf[0x70];
 
 int db_804D4AF8 = 1;
@@ -46,7 +48,7 @@ void fn_SetupSoundInfo(void)
 void fn_UpdateSoundInfo(void)
 {
     int x;
-    lbAudioAx_80025098(3 < db_ShowSoundInfo ? 1 : 0);
+    lbAudioAx_80025098(3 < db_ShowSoundInfo ? true : false);
     if (db_SoundInfoText) {
         switch (db_ShowSoundInfo) {
         case 0:

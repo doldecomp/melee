@@ -8,7 +8,6 @@
 #include <melee/lb/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/card.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
@@ -83,7 +82,7 @@ struct HitCapsule {
         u8 hit_grabbed_victim_only : 1;
     };
 };
-STATIC_ASSERT(sizeof(HitCapsule) == 0x138);
+ASSERT_SIZE(HitCapsule, 0x138);
 
 struct HurtCapsule {
     HurtCapsuleState state;
@@ -110,7 +109,7 @@ struct FighterHurtCapsule {
     bool is_grabbable; // 0x48
 };
 
-STATIC_ASSERT(sizeof(FighterHurtCapsule) == 0x4C);
+ASSERT_SIZE(FighterHurtCapsule, 0x4C);
 
 struct ReflectDesc {
     u32 x0_bone_id;
@@ -141,7 +140,7 @@ struct ShieldDesc {
 };
 
 struct lbRefract_CallbackData {
-    s32 buffer;      /// @brief Base address of texture buffer.
+    void* buffer;    /// @brief Base address of texture buffer.
     s32 format;      /// @brief Texture format (3=IA4, 4=IA8, 6=RGBA8).
     s32 width;       /// @brief Texture width in pixels.
     s32 height;      /// @brief Texture height in pixels.
@@ -262,20 +261,20 @@ struct PreloadEntry {
     s16 load_score;
     u8 field8_0xa;
     u8 field9_0xb;
-    u32 size;
+    size_t size;
     HSD_AllocEntry* raw_data;
     HSD_AllocEntry* archive;
     s32 effect_index;
 };
 
-struct PreloadCacheScene {
+struct PreloadedGameModeState {
     bool is_heap_persistent[2];
     struct GameCache {
-        u8 mode_id;
-        u8 field2_0x9;
-        u8 field3_0xa;
-        u8 field4_0xb;
-        InternalStageId stage_id;
+        u8 mode_kind; ///< ::GameModeKind
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        StKind stkind;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
     s32 mode_scene_changes;
@@ -283,84 +282,40 @@ struct PreloadCacheScene {
 
 struct PreloadCache {
     s32 persistent_heaps;
-    PreloadCacheScene scene;
-    PreloadCacheScene new_scene;
+    PreloadedGameModeState scene;
+    PreloadedGameModeState new_scene;
     PreloadEntry entries[80];
     s32 persistent_heap;
-    int preloaded;
+    bool preloaded;
     UNK_T x974;
 };
 
-struct lb_800138D8_t {
-    /*  +0 */ f32 x0;
-    /*  +4 */ f32 x4;
-    /*  +8 */ f32 x8;
-    /*  +C */ f32 xC;
-    /* +10 */ s8 x10;
-    /* +11 */ s8 x11;
-    /* +12 */ s8 x12;
-    /* +13 */ char pad_13[0x18 - 0x13];
-    /* +18 */ HSD_GObjEvent x18;
-    /* +1C */ s32 x1C;
-    /* +20 */ char pad_20[0x24 - 0x20];
+struct CameraBlurData {
+    /* 0x00 */ f32 pos_x;
+    /* 0x04 */ f32 pos_y;
+    /* 0x08 */ f32 scale_x;
+    /* 0x0C */ f32 scale_y;
+    /* 0x10 */ u8 base_alpha;
+    /* 0x11 */ u8 blur_size;
+    /* 0x12 */ u8 mode;
+    /* 0x13 */ char pad_13[0x18 - 0x13];
+    /* 0x18 */ HSD_GObjEvent callback;
+    /* 0x1C */ HSD_ImageDesc* efb_copy;
+    /* 0x20 */ f32 tint_factor;
 };
 
 struct lb_80432A68_38_t {
     /* 0x0 */ s32 unk_0;
     /* 0x4 */ s32 unk_4;
 };
-STATIC_ASSERT(sizeof(struct lb_80432A68_38_t) == 0x8);
+ASSERT_SIZE(struct lb_80432A68_38_t, 0x8);
 
 struct lbCardNew_SnapshotEntry {
     /* 0x0 */ u32 time;
     /* 0x4 */ s16 file_no;
     /* 0x6 */ u16 blocks;
 };
-STATIC_ASSERT(sizeof(lbCardNew_SnapshotEntry) == 0x8);
-
-struct lb_80432A68_t {
-    /* 0x000 */ UNK_T work_area;
-    /* 0x004 */ UNK_T lib_area;
-    /* 0x008 */ int chan;
-    /* 0x00C */ UNK_T unk_C;
-    /* 0x010 */ const char* unk_10;
-    /* 0x014 */ const char* unk_14;
-    /* 0x018 */ s32 unk_18;
-    /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ lbCardNew_SnapshotEntry* snapshot_entries;
-    /* 0x024 */ int* free_blocks;
-    /* 0x028 */ int* free_files;
-    /* 0x02C */ char x2C[2];
-    /* 0x02C */ char x2E;
-    /* 0x02C */ char x2F[4];
-    /* 0x034 */ s32 unk_34;
-    /* 0x038 */ struct lb_80432A68_38_t unk_38[9];
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s32 memsize;
-    /* 0x088 */ s32 sectorsize;
-    /* 0x08C */ s32 unused_bytes;
-    /* 0x090 */ s32 unused_files;
-    /* 0x094 */ CARDFileInfo file_info;
-    /* 0x0A8 */ s32 unk_A8;
-    /* 0x098 */ u8 pad_AC[0xD0 - 0xAC]; /* maybe part of unk_80[0x123]? */
-    /* 0x0A8 */ int xD0[9];
-    /* 0x0A8 */ volatile int xF4[9];
-    /* 0x098 */ u8
-        pad_500[0x50C - 0xF4 - 9 * 4]; /* maybe part of unk_80[0x123]? */
-    /* 0x50C */ void (*x50C)(int);
-    /* 0x510 */ struct CardTask {
-        int x0;
-        int x4;
-        UNK_T x8;
-        char* xC;
-        char x10[0x20];
-        u8 x18;
-        char x19[7];
-        u8 unk20[0x1C];
-    } task_array[11];
-    /* 0x8AC */ int x8AC;
-}; /* size = 0x8B0 */
-STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
+ASSERT_SIZE(lbCardNew_SnapshotEntry, 0x8);
 
 struct ColorOverlay_UnkInner {
     /*  +0 */ int x0;
@@ -392,7 +347,7 @@ union ColorOverlay_x8_t {
         u32 timer : 26;
     } unk;
 };
-STATIC_ASSERT(sizeof(union ColorOverlay_x8_t) == 0x4);
+ASSERT_SIZE(union ColorOverlay_x8_t, 0x4);
 
 struct ColorOverlay {
     s32 x0_timer; // 0x0
@@ -438,7 +393,7 @@ struct ColorOverlay {
     u8 x7C_flag7 : 1;         // 0x7c, 0x02
     u8 x7C_flag8 : 1;         // 0x7c, 0x01
 };
-STATIC_ASSERT(sizeof(struct ColorOverlay) == 0x80);
+ASSERT_SIZE(struct ColorOverlay, 0x80);
 
 struct lb_80011A50_t {
     /*  +0 */ u8 x0;
@@ -462,21 +417,21 @@ struct lb_80014638_arg0_t {
     /*  +0 */ Vec3 x0;
     /*  +C */ Vec3 xC;
 };
-STATIC_ASSERT(sizeof(struct lb_80014638_arg0_t) == 0x18);
+ASSERT_SIZE(struct lb_80014638_arg0_t, 0x18);
 
 struct lb_80014638_arg1_t {
     /*  +0 */ float unk_x;
     /*  +4 */ float unk_y;
     /*  +8 */ Vec3 x8;
 };
-STATIC_ASSERT(sizeof(struct lb_80014638_arg1_t) == 0x14);
+ASSERT_SIZE(struct lb_80014638_arg1_t, 0x14);
 
 struct Fighter_804D653C_t {
     void* unk;
     u8 unk4;
     u8 unk5;
 };
-STATIC_ASSERT(sizeof(struct Fighter_804D653C_t) == 8);
+ASSERT_SIZE(struct Fighter_804D653C_t, 8);
 
 struct lb_00F9_UnkDesc1Inner {
     /* 0x00 */ f32 unk_0;
@@ -488,7 +443,7 @@ struct lb_00F9_UnkDesc1Inner {
     /* 0x34 */ f32 unk_34;  /* inferred */
     /* 0x38 */ f32 unk_38;  /* inferred */
 };
-STATIC_ASSERT(sizeof(struct lb_00F9_UnkDesc1Inner) == 0x3C);
+ASSERT_SIZE(struct lb_00F9_UnkDesc1Inner, 0x3C);
 
 struct lb_00F9_UnkDesc1 {
     struct lb_00F9_UnkDesc1Inner array[2];
@@ -522,14 +477,14 @@ union PolymorphicDesc {
     struct AbsorbDesc absorb;
     struct HurtCapsule hurt;
 };
-STATIC_ASSERT(sizeof(union PolymorphicDesc) == 0x90);
+ASSERT_SIZE(union PolymorphicDesc, 0x90);
 
 struct DynamicsData {
     union PolymorphicDesc desc;
     /* 0x90 */ struct DynamicsData* next;
     /* 0x94 */ s32 unk_94;
 }; /* size = 0x98 */
-STATIC_ASSERT(sizeof(struct DynamicsData) == 0x98);
+ASSERT_SIZE(struct DynamicsData, 0x98);
 
 struct DynamicsDesc {
     /* +0 */ struct DynamicsData* data;
@@ -549,12 +504,12 @@ struct lb_8000FD18_t {
 struct lb_804D63A0_t {
     /* +0 */ struct DynamicsData entries[0x140];
 };
-STATIC_ASSERT(sizeof(struct lb_804D63A0_t) == 0xBE00);
+ASSERT_SIZE(struct lb_804D63A0_t, 0xBE00);
 
 struct lb_804D63A8_t {
     /* +0 */ struct lb_80011A50_t entries[8];
 };
-STATIC_ASSERT(sizeof(struct lb_804D63A8_t) == 0x1C0);
+ASSERT_SIZE(struct lb_804D63A8_t, 0x1C0);
 
 struct lbColl_8000A10C_arg0_t {
     float x0;

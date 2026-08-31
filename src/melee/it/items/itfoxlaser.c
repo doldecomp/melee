@@ -5,21 +5,18 @@
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/db/db.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/it/items/inlines.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/lb/lbvector.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F67D0[] = {
     { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,
@@ -27,11 +24,6 @@ ItemStateTable it_803F67D0[] = {
     { 1, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,
       itFoxlaser_UnkMotion1_Coll },
 };
-
-inline void* getFoxLaser(Item* item)
-{
-    return &item->xDD4_itemVar;
-}
 
 bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
 {
@@ -87,15 +79,6 @@ void it_8029C6A4(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec, int kind)
 void it_8029C6CC(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec, int kind)
 {
     it_8029C504(parent, vec, 1, kind, angle, vel);
-}
-
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return +x;
-    }
 }
 
 bool itFoxlaser_UnkMotion1_Anim(Item_GObj* item_gobj)

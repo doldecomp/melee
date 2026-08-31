@@ -19,9 +19,7 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static void updateRot(HSD_GObj* gobj)
@@ -109,7 +107,7 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
     } else {
         sub_val = sa->speciallw.tap_y_vel_max;
     }
-    fp->self_vel.y = (float) (sa->speciallw.vel_y - sub_val);
+    fp->self_vel.y = (sa->speciallw.vel_y - sub_val);
     ftCommon_ClampSelfVelX(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->pre_hitlag_cb = &efLib_PauseAll;
@@ -139,7 +137,7 @@ void ftMr_SpecialAirLw_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->dat_attrs;
 
-    if ((u32) fp->cmd_vars[1] != 0U) {
+    if (fp->cmd_vars[1] != 0U) {
         fp->cmd_vars[1] = 0U;
         fp->u.mr.x2234_tornadoCharge = 1;
     }
@@ -157,7 +155,7 @@ void ftMr_SpecialLw_IASA(HSD_GObj* gobj) {}
 
 void ftMr_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
-static usize_t const transition_flags =
+static size_t const transition_flags =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd |
     Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
@@ -218,7 +216,7 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     sa = fp->dat_attrs;
 
     if (((s32) fp->u.mr.x2234_tornadoCharge == false) &&
-        ((u32) fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
+        (fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
     {
         ftCommon_Ascend(fp, sa->speciallw.tap_y_vel_max,
                         sa->speciallw.tap_grav);
@@ -226,10 +224,9 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCommon_FallBasic(fp);
     flt_var = sa->speciallw.air_momentum_x;
     sa_2 = fp->dat_attrs;
-    if ((u32) fp->cmd_vars[0] != 0U) {
+    if (fp->cmd_vars[0] != 0U) {
         fp->mv.mr.SpecialLw.groundVelX =
-            (float) (fp->mv.mr.SpecialLw.groundVelX -
-                     sa_2->speciallw.friction_end);
+            (fp->mv.mr.SpecialLw.groundVelX - sa_2->speciallw.friction_end);
         flt_var += fp->mv.mr.SpecialLw.groundVelX;
         if (flt_var < 0) {
             flt_var = 0;

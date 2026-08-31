@@ -1,18 +1,19 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, mimalloc
-, cmake
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  mimalloc,
+  cmake,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "wibo";
   version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "decompals";
     repo = "wibo";
-    rev = version;
+    rev = finalAttrs.version;
     hash = "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=";
   };
 
@@ -44,4 +45,4 @@ stdenv.mkDerivation rec {
 
   # HACK: sjiswrap triggers buffer overflow detection, is this spurious?
   hardeningDisable = [ "fortify" ];
-}
+})

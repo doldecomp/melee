@@ -1,5 +1,4 @@
 #include "ft_0892.h"
-#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
@@ -15,17 +14,14 @@
 #include "it/it_26B1.h"
 #include "it/items/itpeachparasol.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.lstick.x * fp->facing_dir < 0.0F) ||
-        (ABS(fp->input.lstick.x) < p_ftCommonData->x24))
+        (ABS(fp->input.lstick.x) < p_ftCommonData->walk_stick_threshold))
     {
         return true;
     }
@@ -39,7 +35,7 @@ static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
 
     var_f2 = temp_r4->input.lstick.x;
     if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
-        (ABS(var_f2) < p_ftCommonData->x24))
+        (ABS(var_f2) < p_ftCommonData->walk_stick_threshold))
     {
         return true;
     }

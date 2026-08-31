@@ -1,7 +1,6 @@
 #include "ftMr_SpecialS.h"
 
 #include "ftMr_Init.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -11,6 +10,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -21,7 +21,7 @@
 #include "ftCommon/inlines.h"
 #include "it/items/itmariocape.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
 
@@ -273,7 +273,7 @@ static void collUpdateVars(HSD_GObj* gobj)
     fp->accessory4_cb = ftMr_SpecialS_CreateCape;
 }
 
-static usize_t const transition_flags =
+static size_t const transition_flags =
     Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit | Ft_MF_SkipMatAnim |
     Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;

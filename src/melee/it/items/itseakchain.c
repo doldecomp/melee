@@ -31,7 +31,6 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
-#include "MSL/math.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -46,12 +45,14 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
 
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.0f;
     (void) 0.1f;
     (void) 1.0f;
 }
+#endif
 
 void it_802BAEEC(Item_GObj* gobj)
 {
@@ -112,7 +113,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->pos = zero;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         } else if (i == attrs->x0 - 1) {
@@ -128,7 +129,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             it_802A24D0(link, 1.0f);
             {
                 HSD_JObj* joint = it_802BAF2C_Load_x68(ip);
-                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, joint);
             }
             GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
             result = link_gobj->hsd_obj;
@@ -141,7 +142,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->pos = zero;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }
@@ -380,13 +381,17 @@ int it_802BB938(ItemLink* link, int arg1, float arg2)
     return coll->env_flags & 0x18FFF;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 {
     return it_802BB938(link, arg1, arg2);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_802BBB0C(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
                  float scale)
@@ -750,7 +755,7 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     ip->xDD4_itemVar.seakchain.x10 = env_flags;
 }
 
-int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
+bool it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
     u8 _padA[8];
     ItemLink *var_r30, *var_r29;

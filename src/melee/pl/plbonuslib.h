@@ -1,10 +1,10 @@
 #ifndef GALE01_03D514
 #define GALE01_03D514
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "it/forward.h"
+#include "pl/forward.h"
 
 /* 03D60C */ bool pl_8003D60C(int);
 /* 03D644 */ void pl_8003D644(int, int, int, int);
@@ -15,8 +15,8 @@
 /* 03E114 */ void pl_8003E114(int, int, float);
 /* 03E150 */ void pl_8003E150(int slot, int);
 /* 03E17C */ void pl_8003E17C(int, int, Item_GObj*);
-/* 03E2CC */ u32 pl_8003E2CC(int, int pl_itemlog_kind);
-/* 03E334 */ u32 pl_8003E334(int, int pl_itemlog_kind);
+/* 03E2CC */ u32 pl_8003E2CC(int, Pl_ItemLog pl_itemlog_kind);
+/* 03E334 */ u32 pl_8003E334(int, Pl_ItemLog pl_itemlog_kind);
 /* 03E39C */ int pl_8003E39C(int);
 /* 03E420 */ u32 pl_8003E420(int);
 /* 03E4A4 */ void pl_8003E4A4(int slot, bool, void*, int);

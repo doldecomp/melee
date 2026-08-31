@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "ft/fighter.h"
@@ -11,6 +9,8 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
+#include "ft/ft_0852.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -21,7 +21,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_YoshiEgg.h"
 #include "ftCommon/inlines.h"
-#include "ftYoshi/ftYs_Init.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/types.h"
 #include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshitongue.h"
@@ -102,7 +102,7 @@ float ftYs_SpecialN_GetExtAttr34(void)
     return ext_attr->x34;
 }
 
-int ftYs_SpecialN_GetExtAttr38(void)
+bool ftYs_SpecialN_GetExtAttr38(void)
 {
     ftYoshiAttributes* ext_attr = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ext_attr->x38;
@@ -387,7 +387,7 @@ static inline void inlineB0(Fighter_GObj* gobj, HSD_GObjEvent on_anim_end)
                     item_attrs.lifetime = ftYs_SpecialN_GetDatAttr24(gobj);
                     item_attrs.x24 = ftYs_SpecialN_GetDatAttr18(gobj);
                     item_attrs.float3 = ftYs_SpecialN_8012CDB4();
-                    item_attrs.kind = 87;
+                    item_attrs.kind = It_Kind_Yoshi_EggLay;
                     it_802F2F34(gobj, &item_attrs);
                     fp->mv.ys.specialn.x0_b0 = false;
                     fp->cmd_vars[0] = 0;

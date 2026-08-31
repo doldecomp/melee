@@ -4,7 +4,6 @@
 #include "state.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/vi.h>
 
 HSD_VIInfo HSD_VIData;
@@ -150,13 +149,17 @@ static void HSD_VIGXDrawDoneCB(void)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static int HSD_VIGetDrawDoneWaitingFlag(void)
 {
     return _p->drawdone.waiting;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int HSD_VIGetXFBDrawEnable(void)
 {

@@ -1,3 +1,5 @@
+#include "ftCo_Guard.h"
+
 #include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
@@ -7,9 +9,6 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
-
-#include "ftCo_Guard.static.h"
-
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
@@ -19,6 +18,7 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -36,11 +36,26 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/* 091BC4 */ static void ftCo_80091BC4(Fighter* fp);
+/* 091E78 */ static void ftCo_80091E78(Fighter_GObj* gobj, float);
+/* 092158 */ static void ftCo_80092158(Fighter_GObj* gobj, int arg1,
+                                       HSD_JObj* arg2);
+/* 0921DC */ static void ftCo_800921DC(Fighter_GObj* gobj);
+/* 0923B4 */ static void ftCo_800923B4(Fighter_GObj* gobj);
+/* 0924C0 */ static void ftCo_800924C0(HSD_GObj* gobj);
+/* 092908 */ static void ftCo_80092908(Fighter_GObj* gobj);
+/* 092C54 */ static void ftCo_80092C54(Fighter_GObj* gobj);
+/* 092E50 */ static void ftCo_80092E50(Fighter_GObj* gobj);
+/* 092F2C */ static void ftCo_80092F2C(Fighter_GObj* gobj, bool);
+/* 093790 */ static void ftCo_80093790(Fighter_GObj* gobj);
+/* 093850 */ static void ftCo_80093850(Fighter_GObj* gobj);
+/* 09388C */ static void ftCo_8009388C(Fighter_GObj* gobj);
+/* 0939B4 */ static void ftCo_800939B4(Fighter_GObj* gobj);
+/* 093A50 */ static void ftCo_80093A50(Fighter_GObj* gobj);
 
 bool ftCo_80091A2C(Fighter_GObj* gobj)
 {
@@ -53,11 +68,11 @@ static inline bool inlineA0(Fighter* fp)
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-int ftCo_80091A4C(Fighter_GObj* gobj)
+bool ftCo_80091A4C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         return true;
@@ -76,7 +91,7 @@ bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         ret0 = true;
@@ -123,7 +138,7 @@ void ftCo_80091BC4(Fighter* fp)
         stick_rad += 2 * (float) M_PI;
     }
 
-    stick_deg = rad_to_deg * stick_rad;
+    stick_deg = MTXRadToDeg(stick_rad);
     if (stick_deg < 0) {
         stick_deg = 0;
     }
@@ -212,8 +227,7 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
                 ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.co.guard.x4,
-                                fp->mv.co.guard.x4,
-                                ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+                                fp->mv.co.guard.x4, fp->ft_data->x20->x0[2]);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1 - arg1);
@@ -222,10 +236,9 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             }
         } else if (arg1 < 1) {
             ftAnim_80070010(fp, FtPart_TransN, arg1, 1 - arg1,
-                            ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+                            fp->ft_data->x20->x0[2]);
         } else {
-            ftAnim_8006FA58(fp, FtPart_TransN,
-                            ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x0[2]);
         }
         {
             scl.x = scl.y = scl.z = inlineB0(fp);
@@ -255,8 +268,10 @@ static inline void ftCo_80092450_inline(Fighter_GObj* gobj)
     fp->x221A_b7 = true;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 
 static void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
@@ -303,7 +318,8 @@ void ftCo_800921DC(HSD_GObj* gobj)
     fp->mv.co.guard.x2C = 0;
     {
         float lightshield_amount =
-            (fp->input.x650 - p_ftCommonData->x10) / (1 - p_ftCommonData->x10);
+            (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+            (1 - p_ftCommonData->analog_shoulder_deadzone);
         if (lightshield_amount < 0) {
             lightshield_amount = fp->mv.co.guard.x2C;
         }
@@ -388,12 +404,13 @@ bool ftCo_800925A4(HSD_GObj* gobj)
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
-                (fp->input.x650 - p_ftCommonData->x10) /
-                            (1 - p_ftCommonData->x10) <
+                (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+                            (1 - p_ftCommonData->analog_shoulder_deadzone) <
                         0
                     ? fp->mv.co.guard.x2C
-                    : (fp->input.x650 - p_ftCommonData->x10) /
-                          (1 - p_ftCommonData->x10);
+                    : (fp->input.x650 -
+                       p_ftCommonData->analog_shoulder_deadzone) /
+                          (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
         fp->shield_health -= p_ftCommonData->x278 *
                              ((fp->lightshield_amount *
@@ -732,13 +749,6 @@ void ftCo_800932DC(Fighter_GObj* gobj)
     }
 }
 
-static inline void ftCo_80091D58_inline(Fighter* fp)
-{
-    Vec3 scl;
-    scl.x = scl.y = scl.z = inlineB0(fp);
-    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
-}
-
 static inline void ftCo_80091D58_inline_arg(Fighter* fp, Vec3* scl)
 {
     scl->x = scl->y = scl->z = inlineB0(fp);
@@ -763,37 +773,6 @@ static inline void ftCo_80092BE8_inline(Fighter_GObj* gobj)
         return;
     default:
         ftCo_80092C54_inline(gobj);
-        return;
-    }
-}
-
-static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    switch (fp->kind) {
-    case FTKIND_YOSHI:
-        ftYs_Shield_8012C1D4(gobj);
-        return;
-    default:
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
-                                  NULL);
-        {
-            HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
-            ftCo_80092158_inline(gobj, 1048, jobj);
-            fp->x2219_b0 = true;
-            {
-                AbsorbDesc absorb;
-                u8 _[8];
-                Fighter* fp2 = GET_FIGHTER(gobj);
-                absorb.x0_bone_id = fp2->ft_data->x8->x11;
-                absorb.x10_size = 1;
-                absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z =
-                    0;
-                ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
-                fp2->x221A_b7 = true;
-            }
-            ftCo_80091E78(gobj, 1);
-        }
         return;
     }
 }
@@ -868,9 +847,9 @@ void ftCo_GuardSetOff_Coll(Fighter_GObj* gobj)
 bool ftCo_80093694(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
+    if (fp->mv.co.guard.x0 < p_ftCommonData->powershield_input_window &&
         fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_80093850(gobj);
         return true;
@@ -921,7 +900,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx,
                               fp->cur_anim_frame, 1, 0, NULL);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
@@ -959,7 +938,7 @@ void ftCo_80093A50(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;

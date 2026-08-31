@@ -6,6 +6,9 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+
+#include "gm/types.h"
+
 #include "it/forward.h"
 #include "lb/forward.h"
 
@@ -330,7 +333,7 @@ typedef struct ItemLink {
     /* +1D0 */ HSD_GObj* gobj;
     /* +1D4 */ HSD_JObj* jobj;
 } ItemLink;
-STATIC_ASSERT(sizeof(struct ItemLink) == 0x1D8);
+ASSERT_SIZE(struct ItemLink, 0x1D8);
 
 typedef struct {
     ItemLink* x0;
@@ -639,8 +642,8 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +C  +DE0 */ f32 xDE0;
     /* +10 +DE4 */ f32 xDE4;
     /* +14 +DE8 */ s32 xDE8;
-    /* +18 +DEC */ s32 xDEC;
-    /* +1C +DF0 */ s32 xDF0;
+    /* +18 +DEC */ int xDEC;
+    /* +1C +DF0 */ int xDF0;
     /* +20 +DF4 */ s32 xDF4;
     /* +24 +DF8 */ s32 xDF8;
     /* +28 +DFC */ s32 xDFC;
@@ -803,7 +806,7 @@ typedef struct itSeakChain_Attrs {
     /* +64 */ HSD_Joint* x64_joint;
     /* +68 */ HSD_Joint* x68_joint;
 } itSeakChain_Attrs;
-STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x6C);
+ASSERT_SIZE(struct itSeakChain_Attrs, 0x6C);
 
 typedef struct itClimbersString_ItemVars {
     /* +0  ip+DD4 */ f32 x0;

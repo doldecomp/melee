@@ -5,7 +5,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
@@ -16,7 +16,6 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 

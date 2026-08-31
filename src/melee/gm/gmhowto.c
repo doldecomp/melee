@@ -1,16 +1,17 @@
 #include "gmhowto.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include "dolphin/pad.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
+#include <baselib/controller.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/sobjlib.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,
@@ -27,7 +28,7 @@ UNK_T gm_801ACC94(void)
 
 static HSD_GObj* gm_804D6850;
 
-void gm_801ACCA0_OnEnter(void* unused)
+void gm_Scene_HowTo_OnEnter(void* unused)
 {
     HSD_GObj* gobj;
     PAD_STACK(8);
@@ -48,7 +49,7 @@ void gm_801ACCA0_OnEnter(void* unused)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801ACD8C_OnFrame(void)
+void gm_Scene_HowTo_OnFrame(void)
 {
     bool var_r31 = false;
     PAD_STACK(4);
@@ -59,7 +60,7 @@ void gm_801ACD8C_OnFrame(void)
         var_r31 = true;
     }
     if (lbMthp_8001F604() != 0 ||
-        (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
          (HSD_PAD_START | HSD_PAD_A)) ||
         var_r31)
     {
@@ -70,15 +71,15 @@ void gm_801ACD8C_OnFrame(void)
         } else {
             gm_801A4B60();
         }
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetPendingSceneIndex(0);
+            gm_SetNextGameModeStateId(0);
         }
     }
 }

@@ -17,12 +17,11 @@
 #include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -58,31 +57,49 @@ static const grNKr_Depths grNKr_803B82F4 = {
     },
 };
 
-StageCallbacks grNKr_803E57F0[4] = {
-    { grKinokoRoute_80207634, grKinokoRoute_802078E8, grKinokoRoute_802078F0,
-      grKinokoRoute_80207A94, 0 },
-    { grKinokoRoute_80207ADC, grKinokoRoute_80207B20, grKinokoRoute_80207B28,
-      grKinokoRoute_80207B2C, 0 },
-    { grKinokoRoute_80207A98, grKinokoRoute_80207ACC, grKinokoRoute_80207AD4,
-      grKinokoRoute_80207AD8, 0 },
-    { grKinokoRoute_80207B5C, grKinokoRoute_80207C80, grKinokoRoute_80207C88,
-      grKinokoRoute_80208368, 0xC0000000 },
+StageCallbacks grNKr_StageCallbacks[4] = {
+    {
+        grKinokoRoute_80207634,
+        grKinokoRoute_802078E8,
+        grKinokoRoute_802078F0,
+        grKinokoRoute_80207A94,
+        0,
+    },
+    {
+        grKinokoRoute_80207ADC,
+        grKinokoRoute_80207B20,
+        grKinokoRoute_80207B28,
+        grKinokoRoute_80207B2C,
+        0,
+    },
+    {
+        grKinokoRoute_80207A98,
+        grKinokoRoute_80207ACC,
+        grKinokoRoute_80207AD4,
+        grKinokoRoute_80207AD8,
+        0,
+    },
+    {
+        grKinokoRoute_80207B5C,
+        grKinokoRoute_80207C80,
+        grKinokoRoute_80207C88,
+        grKinokoRoute_80208368,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-static char grNKr_803E5840[] = "/GrNKr.dat";
-
-StageData grNKr_803E584C = {
-    KINOKOROUTE,
-    grNKr_803E57F0,
-    grNKr_803E5840,
+StageData grNKr_StageData = {
+    Gr_Kind_KinokoRoute,
+    grNKr_StageCallbacks,
+    "/GrNKr.dat",
     grKinokoRoute_80207420,
-    (void (*)(int)) grKinokoRoute_8020741C,
+    grKinokoRoute_8020741C,
     grKinokoRoute_80207490,
     grKinokoRoute_802074D8,
     grKinokoRoute_80207544,
     grKinokoRoute_80208754,
     grKinokoRoute_8020875C,
-    1,
+    (1 << 0),
     NULL,
     0,
 };
@@ -103,7 +120,7 @@ void grKinokoRoute_80207420(void)
 void grKinokoRoute_80207490(void)
 {
     Vec3 pos;
-    HSD_GObj* gobj = Ground_801C57A4();
+    HSD_GObj* gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &pos);
         Ground_801C38BC(pos.x, 20.0f + pos.y);
@@ -135,7 +152,7 @@ bool grKinokoRoute_80207544(void)
 Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
 {
     Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
+    StageCallbacks* callbacks = &grNKr_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -147,11 +164,11 @@ Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 249, gobj_id);
@@ -237,7 +254,7 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
 
     cursor.gp = gobj->user_data;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &pos);
     } else {
@@ -346,7 +363,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
 
     fighter_pos = grNKr_803B82E8;
     scale = Ground_801C0498();
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
     } else {
@@ -399,11 +416,11 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                                 grKinokoRoute_80208480);
                 }
                 gp->u.kinokoroute2.zone_idx = 2;
-                ground_gobj = Ground_801C2BA4(0);
+                ground_gobj = Ground_GetMapGObj(0);
                 if (ground_gobj != NULL) {
                     Ground_801C4A08(ground_gobj);
                 }
-                ground_gobj = Ground_801C2BA4(2);
+                ground_gobj = Ground_GetMapGObj(2);
                 if (ground_gobj != NULL) {
                     Ground_801C4A08(ground_gobj);
                 }
@@ -448,11 +465,11 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
             reb0_jobj = Ground_801C2CF4(4);
             HSD_ASSERT(654, reb0_jobj);
             HSD_JObjSetTranslate(reb0_jobj, &gp->u.kinokoroute2.reb0_pos);
-            ground_gobj = Ground_801C2BA4(0);
+            ground_gobj = Ground_GetMapGObj(0);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);
             }
-            ground_gobj = Ground_801C2BA4(2);
+            ground_gobj = Ground_GetMapGObj(2);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);
             }
@@ -510,7 +527,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpJointListAdd(0x33);
 
         for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-            if (itGetKind(cur) == 0xA0) {
+            if (itGetKind(cur) == It_PKind_Random) {
                 grMaterial_801C8E08(cur);
             }
         }
@@ -525,7 +542,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpLib_80057BC0(0x33);
 
         for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-            if (itGetKind(cur) == 0xA0) {
+            if (itGetKind(cur) == It_PKind_Random) {
                 grMaterial_801C8E28(cur);
             }
         }
@@ -557,7 +574,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
 
     HSD_JObjSetFlagsAll(gp->jobj, JOBJ_HIDDEN);
 
-    gobj2 = Ground_801C2BA4(3);
+    gobj2 = Ground_GetMapGObj(3);
     if (gobj2 != NULL) {
         void* gp2 = gobj2->user_data;
         if (gp2 != NULL) {

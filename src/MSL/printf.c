@@ -60,7 +60,7 @@ static const char* parse_format(const char* format_string, va_list* arg,
     if ((c = *++s) == '%') {
         f.conversion_char = c;
         *format = f;
-        return ((const char*) s + 1);
+        return (s + 1);
     }
 
     for (;;) {
@@ -115,7 +115,7 @@ static const char* parse_format(const char* format_string, va_list* arg,
     if (f.field_width > 509) {
         f.conversion_char = 0xFF;
         *format = f;
-        return ((const char*) s + 1);
+        return (s + 1);
     }
 
     if (c == '.') {
@@ -268,7 +268,7 @@ static const char* parse_format(const char* format_string, va_list* arg,
     }
 
     *format = f;
-    return ((const char*) s + 1);
+    return (s + 1);
 }
 
 static char* long2str(signed long num, char* buff, print_format* format)
@@ -356,7 +356,7 @@ static char* long2str(signed long num, char* buff, print_format* format)
     }
 
     if (buff - p + format->precision > 509) {
-        return (0);
+        return 0;
     }
 
     while (digits < format->precision) {
@@ -510,8 +510,7 @@ static void round_decimal(decimal* dec, int new_length)
     if (c == 5) {
         char* q = &((char*) dec->sig.text)[dec->sig.length];
 
-        while (--q > p && *q == '0')
-            ;
+        while (--q > p && *q == '0');
         carry = (q == p) ? p[-1] & 1 : 1;
     } else {
         carry = (c > 5);
@@ -1065,8 +1064,6 @@ int vprintf(const char* format, va_list arg)
     return __pformatter(&__FileWrite, stdout, format, arg);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-compare"
 int vsnprintf(char* s, size_t n, const char* format, va_list arg)
 {
     int end;
@@ -1079,7 +1076,6 @@ int vsnprintf(char* s, size_t n, const char* format, va_list arg)
     s[(end < n) ? end : n - 1] = '\0';
     return end;
 }
-#pragma clang diagnostic pop
 
 int vsprintf(char* s, const char* format, va_list arg)
 {

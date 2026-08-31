@@ -14,6 +14,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -28,7 +30,6 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -61,8 +62,6 @@ void un_8031D9E4(int arg0, int arg1, int arg2)
     un_804D6F84[3] = arg2;
 }
 
-/// @todo 99.32%: regswap in the spawn loop -- the counts[i-1] address temp
-///       lands in r27; target uses r25 (shifting the two loop walkers).
 void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
                  int spawn_count)
 {
@@ -79,17 +78,19 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     f32 scale;
     Vec3* pos;
 
+    PAD_STACK(8);
+
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(PURA, NULL);
+    Stage_802251E8(St_Kind_Greens, NULL);
     Item_80266FA8();
     Item_80266FCC();
     un_804D6F80 = Ground_801C0498();
-    Ground_801C04BC(0.7f);
+    Ground_SetParamY(0.7f);
     Stage_8022524C();
-    Stage_8022532C(PURA, 0);
+    Stage_8022532C(St_Kind_Greens, 0);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(char_kind, un_804D6F78, 3);
@@ -120,7 +121,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(GET_JOBJ(un_804A2E98[i - 1]), &v);
+        HSD_JObjGetTranslation2((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;
@@ -175,7 +176,7 @@ void fn_8031DD14(HSD_GObj* gobj)
     }
 }
 
-void un_8031DE58_OnEnter(void* arg)
+void vi0501_Scene_OnEnter(void* arg)
 {
     u8 char_index;
     HSD_Fog* fog;
@@ -201,17 +202,17 @@ void un_8031DE58_OnEnter(void* arg)
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
     fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F70->fogs->desc);
-    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
     erase_colors_vi0501 = fog->color;
     light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F70->lights);
-    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F70->cameras->desc);
-    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(camera_gobj, vi_8031DC80, 5);
     HSD_CObjAddAnim(cobj, un_804D6F70->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
@@ -221,7 +222,7 @@ void un_8031DE58_OnEnter(void* arg)
         model_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F70->models[i]->joint);
         new_var = jobj;
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, new_var);
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, new_var);
         GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(jobj, un_804D6F70->models[i],
                     (un_804D6F70->models[i] != NULL) * 0);
@@ -236,7 +237,7 @@ void un_8031DE58_OnEnter(void* arg)
     lbAudioAx_800237A8(0x20C, 0x7F, 0x40);
 }
 
-void vi_8031E0F0_OnFrame(void)
+void vi0501_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

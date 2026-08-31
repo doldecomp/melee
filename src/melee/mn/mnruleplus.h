@@ -1,8 +1,6 @@
 #ifndef MELEE_MN_RULEPLUS_H
 #define MELEE_MN_RULEPLUS_H
 
-#include <placeholder.h>
-
 #include "mn/forward.h"
 
 #include "mn/types.h"
@@ -49,7 +47,7 @@ typedef struct mn_803ED1D0_t {
     AnimLoopSettings x7C[2]; ///< [0] = unselected, [1] = selected (stage)
     AnimLoopSettings x94;
 } mn_803ED1D0_t;
-STATIC_ASSERT(sizeof(mn_803ED1D0_t) == 0xA0);
+ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 
 /* 23201C */ void fn_8023201C(HSD_GObj*);
 /* 232458 */ AnimLoopSettings* mn_80232458(u8, u8, u8);

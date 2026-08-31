@@ -50,7 +50,7 @@
 /* 28CD3C */ bool itGShell_Logic14_Clanked(Item_GObj* gobj);
 /* 28CE1C */ bool itGShell_Logic14_HitShield(Item_GObj* gobj);
 /* 28CF2C */ bool itGShell_Logic14_ShieldBounced(Item_GObj* gobj);
-/* 28CF68 */ int it_8028CF68(Item_GObj* gobj);
+/* 28CF68 */ bool it_8028CF68(Item_GObj* gobj);
 /* 28CFC0 */ void itGShell_Logic14_EvtUnk(Item_GObj* gobj1, Item_GObj* gobj2);
 /* 3F5BA8 */ extern ItemStateTable it_803F5BA8[];
 

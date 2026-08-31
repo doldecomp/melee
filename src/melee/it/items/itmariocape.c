@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include "db/db.h"
 #include "ef/efasync.h"
 #include "ft/chara/ftMario/ftMr_SpecialS.h"
 #include "ft/ftlib.h"
@@ -96,7 +95,7 @@ static void inlineA0(Item_GObj* gobj)
     }
 }
 
-inline void reset(Item_GObj* gobj)
+static inline void reset(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {

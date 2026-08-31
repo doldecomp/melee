@@ -3,7 +3,8 @@
 
 #include <placeholder.h>
 
-/* 317D80 */ void tyFigupon_OnEnter_80317D80(UNK_T);
-/* 3182D4 */ void tyFigupon_OnFrame_803182D4(void);
+/* 31638C */ s32 _tyFigupon_8031638C(s16 arg0);
+/* 317D80 */ void tyFigupon_Scene_OnEnter(UNK_T);
+/* 3182D4 */ void tyFigupon_Scene_OnFrame(void);
 
 #endif

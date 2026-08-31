@@ -1,25 +1,84 @@
 #include "lbmthp.h"
 
-#include "lbmthp.static.h"
+#include "lbfile.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/memory.h"
-#include "baselib/tobj.h"
-#include "baselib/video.h"
-#include "dolphin/os.h"
-#include "lb/lbfile.h"
+#include <placeholder.h>
 
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
-#include <dolphin/os/OSCache.h>
+#include <dolphin/os.h>
+#include <dolphin/thp/thp.h>
+#include <baselib/memory.h>
+#include <baselib/tobj.h>
+#include <baselib/video.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/lb/lbanim.h>
-#include <melee/lb/types.h>
-#include <MSL/string.h>
-#include <Runtime/runtime.h>
+
+/* Struct used by fn_8001EBF0 for THP decode component init */
+typedef struct THPDecComp {
+    /* 0x00 */ u8 pad0[0x08];
+    /* 0x08 */ u32 version;
+    /* 0x0C */ u32 buf_size;
+    /* 0x10 */ u32 x_size;
+    /* 0x14 */ u32 y_size;
+    /* 0x18 */ u32 frame_rate;
+    /* 0x1C */ u32 num_frames;
+    /* 0x20 */ u32 first_frame;
+    /* 0x24 */ u32 frame_offsets;
+    /* 0x28 */ u32 first_frame_size;
+    /* 0x2C */ u8 pad2C[0x40 - 0x2C];
+    /* 0x40 */ u32 unk_40;
+    /* 0x44 */ u32 width;
+    /* 0x48 */ u32 height;
+    /* 0x4C */ u32* frame_buffers;
+    /* 0x50 */ void* unk_50;
+    /* 0x54 */ void* unk_54;
+    /* 0x58 */ void* unk_58;
+    /* 0x5C */ u8 pad5C[0x64 - 0x5C];
+    /* 0x64 */ u32 unk_64;
+    /* 0x68 */ s32 unk_68;
+    /* 0x6C */ s32 unk_6C;
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ u32 unk_74;
+    /* 0x78 */ u32 unk_78;
+    /* 0x7C */ u32 unk_7C;
+    /* 0x80 */ u32 unk_80;
+    /* 0x84 */ u32 unk_84;
+    /* 0x88 */ u32 unk_88;
+    /* 0x8C */ u32 unk_8C;
+    /* 0x90 */ u32 unk_90;
+    /* 0x94 */ s32 unk_94;
+    /* 0x98 */ s32 unk_98;
+    /* 0x9C */ THPDec_8032FD40_Data unk_9C;
+    /* 0xA8 */ u16 unk_A8;
+    /* 0xAA */ u16 unk_AA;
+    /* 0xAC */ u8 unk_AC;
+    /* 0xAD */ u8 padAD[0x100 - 0xAD];
+    /* 0x100 */ u32 unk_100;
+    /* 0x104 */ u32 unk_104;
+    /* 0x108 */ s32 unk_108;
+    /* 0x10C */ s32 unk_10C;
+    /* 0x110 */ s32 unk_110;
+    /* 0x114 */ u8 pad114[0x11C - 0x114];
+    /* 0x11C */ s32 unk_11C;
+    /* 0x120 */ u32 curr_file_offset;
+    /* 0x124 */ u32 currPackedSize;
+    /* 0x128 */ s32 file_entrynum;
+    /* 0x12C */ u32* rate_table;
+    /* 0x130 */ s32 unk_130;
+    /* 0x134 */ s32 unk_134;
+    /* 0x138 */ u32 unk_138;
+    /* 0x13C */ u32 unk_13C;
+    /* 0x140 */ void* unk_140;
+    /* 0x144 */ s32 unk_144;
+    /* 0x148 */ s32 unk_148;
+    /* 0x14C */ s32 power;
+    /* 0x150 */ OSAlarm alarm;
+    /* 0x178 */ GXTexObj unk_178;
+    /* 0x198 */ GXTexObj unk_198;
+    /* 0x1B8 */ GXTexObj unk_1B8;
+} THPDecComp;
 
 struct lbl_803BAFE8_t {
     /* 0x00 */ s32 x0;
@@ -31,11 +90,12 @@ struct lbl_803BAFE8_t {
     /* 0x14 */ s32 x14;
 }; /* size = 0x18 */
 
-/* 4333E0 */ static struct lbl_804333E0_t MoviePlayer;
+/* 01F294 */ static s32 fn_8001F294(void);
+/* 4333E0 */ static THPDecComp MoviePlayer;
 
-void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
+static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
 {
-    struct lbl_804333E0_t* streamPlayer = &MoviePlayer;
+    THPDecComp* streamPlayer = &MoviePlayer;
     s32 tick_diff;
     s32 var_r0;
     s32 did_request;
@@ -48,26 +108,25 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     streamPlayer->unk_134 = tick_diff;
     streamPlayer->unk_130 = tick_diff >> 0x1F;
     streamPlayer->unk_108 += 1;
-    if ((u32) streamPlayer->unk_74 != 0U) {
+    if (streamPlayer->unk_74 != 0U) {
         streamPlayer->curr_file_offset += streamPlayer->currPackedSize;
     } else {
-        streamPlayer->curr_file_offset = streamPlayer->unk_20;
+        streamPlayer->curr_file_offset = streamPlayer->first_frame;
     }
-    if ((u32) streamPlayer->unk_8C == 0) {
+    if (streamPlayer->unk_8C == 0) {
         var_r0 = streamPlayer->unk_104 - 1;
     } else {
         var_r0 = streamPlayer->unk_8C - 1;
     }
     streamPlayer->currPackedSize = *(u32*) streamPlayer->frame_buffers[var_r0];
-    if (((u32) streamPlayer->unk_90 != (u32) streamPlayer->unk_8C) &&
-        ((s32) streamPlayer->unk_70 != 0))
+    if (streamPlayer->unk_90 != streamPlayer->unk_8C &&
+        streamPlayer->unk_70 != 0)
     {
         intr = OSDisableInterrupts();
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = (did_request = 0);
-        if (((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) ||
-            (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
-             did_request))
+        if ((streamPlayer->unk_74 != streamPlayer->unk_40) ||
+            ((streamPlayer->unk_74 == streamPlayer->unk_40) && did_request))
         {
             HSD_ASSERTREPORT(289, (u32)streamPlayer->currPackedSize != 0,
                              "filnum = %d, ofs = %d, by sugano.",
@@ -80,14 +139,14 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
                 (streamPlayer->currPackedSize + 0x1F) & 0xFFFFFFE0, 0x21, 1,
                 fn_8001E910, NULL);
             streamPlayer->unk_74 += 1;
-            if (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
-                ((s32) streamPlayer->unk_68 != 0))
+            if ((streamPlayer->unk_74 == streamPlayer->unk_40) &&
+                (streamPlayer->unk_68 != 0))
             {
                 streamPlayer->unk_74 = 0U;
             }
             {
                 var_r3 = streamPlayer->unk_8C + 1;
-                if (var_r3 >= (u32) streamPlayer->unk_104) {
+                if (var_r3 >= streamPlayer->unk_104) {
                     var_r3 = 0;
                 }
                 streamPlayer->unk_8C = var_r3;
@@ -103,7 +162,7 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     streamPlayer->unk_110 = 0;
 }
 
-s32 fn_8001EB14(THPDecComp* data, const char* path)
+static s32 fn_8001EB14(THPDecComp* data, const char* path)
 {
     THPInit();
     data->file_entrynum = DVDConvertPathToEntrynum(path);
@@ -144,23 +203,19 @@ size_t fn_8001EBF0(THPDecComp* data)
     u32 height;
     u32 wh;
     u32 wh_div4;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     data->unk_104 = 0x20;
 
-    width = data->width;
-    aligned_100 = ALIGN_32(data->unk_100);
-    height = data->height;
     unk_104_val = data->unk_104;
-
-    data->unk_9C.val1 = (u16) width;
-
-    wh = width * height;
-
-    height = data->height;
-    data->unk_9C._pad = (u16) height;
-
+    aligned_100 = ALIGN_32(data->unk_100);
     size = aligned_100 * unk_104_val;
+    width = data->width;
+    height = data->height;
+    wh = width * height;
+    data->unk_9C.val1 = width;
+    height = data->height;
+    data->unk_9C._pad = height;
 
     data->unk_9C.val2 = 4;
 
@@ -172,7 +227,7 @@ size_t fn_8001EBF0(THPDecComp* data)
     size += wh_div4;
     size += wh_div4;
 
-    size += THPDec_8032FD40(&data->unk_9C, (u16) data->height);
+    size += THPDec_8032FD40(&data->unk_9C, data->height);
 
     data->unk_7C = 0;
     data->unk_78 = 0;
@@ -183,8 +238,8 @@ size_t fn_8001EBF0(THPDecComp* data)
     data->unk_94 = -1;
     data->unk_68 = 0;
 
-    data->unk_A8 = (u16) data->width;
-    data->unk_AA = (u16) data->height;
+    data->unk_A8 = data->width;
+    data->unk_AA = data->height;
     data->unk_AC = 0;
 
     size += ALIGN_32(data->unk_104 * 4);
@@ -193,7 +248,7 @@ size_t fn_8001EBF0(THPDecComp* data)
     return size;
 }
 
-void fn_8001ECF4(THPDecComp* data, void* buf)
+static void fn_8001ECF4(THPDecComp* data, void* buf)
 {
     u32 height;
     u32 width;
@@ -212,12 +267,12 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     data->unk_64 = 0;
     uv_size = (width * height) >> 2U;
     var_r29 = (u8*) buf + (((count * 4) + 0x1F) & 0xFFFFFFE0);
-    if (((s32) data->unk_6C != 0) && ((s32) data->unk_11C != 0)) {
+    if ((data->unk_6C != 0) && (data->unk_11C != 0)) {
         var_r24 = data->first_frame_size;
         csizep = (u8*) &data->first_frame_size;
         var_r25 = 0;
         data->curr_file_offset = data->first_frame;
-        for (; var_r25 < (u32) data->unk_104; var_r25++) {
+        for (; var_r25 < data->unk_104; var_r25++) {
             data->frame_buffers[var_r25] = (u32) var_r29;
             if (var_r24 == 0) {
                 OSReport("by sugano & yoshiki.\n");
@@ -248,7 +303,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
         }
         data->unk_74 = var_r25;
         data->currPackedSize = var_r24;
-        if ((u32) data->unk_74 >= (u32) data->unk_40) {
+        if (data->unk_74 >= data->unk_40) {
             data->unk_74 = 0;
         }
         data->unk_8C = 0;
@@ -270,7 +325,9 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     data->unk_98 = (s32) var_r29;
 }
 
-s32 fn_8001EF5C(THPDecComp* data)
+static s32 fn_8001F13C(THPDecComp* streamPlayer);
+
+static s32 fn_8001EF5C(THPDecComp* data)
 {
     s32 spC;
     BOOL intr;
@@ -302,7 +359,7 @@ s32 fn_8001EF5C(THPDecComp* data)
     return data->unk_94;
 }
 
-s32 fn_8001F06C(THPDecComp* data)
+static s32 fn_8001F06C(THPDecComp* data)
 {
     BOOL intr;
 
@@ -376,7 +433,19 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
     return OSRestoreInterrupts(intr);
 }
 
-s32 fn_8001F294(void);
+/// @todo Non-inlined function forces loop in ::lbMthp_8001F800 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef __MWERKS__
+#pragma push
+#pragma dont_inline on
+#endif
+s32 fn_8001F294(void)
+{
+    return MoviePlayer.unk_110;
+}
+#ifdef __MWERKS__
+#pragma pop
+#endif
 
 static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
 {
@@ -405,22 +474,21 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
     return frame;
 }
 
-static inline void lbMthp_GetPlayer(struct lbl_804333E0_t** streamPlayer,
+static inline void lbMthp_GetPlayer(THPDecComp** streamPlayer,
                                     u32*** rate_table)
 {
     *streamPlayer = &MoviePlayer;
     *rate_table = &(*streamPlayer)->rate_table;
 }
 
-static inline THPDecComp*
-lbMthp_GetDecoder(struct lbl_804333E0_t* streamPlayer)
+static inline THPDecComp* lbMthp_GetDecoder(THPDecComp* streamPlayer)
 {
-    return (THPDecComp*) streamPlayer;
+    return streamPlayer;
 }
 
 void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 {
-    struct lbl_804333E0_t* streamPlayer;
+    THPDecComp* streamPlayer;
     u32** rate_table;
     u32 frame;
 
@@ -428,12 +496,12 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-    if ((u32) streamPlayer->unk_78 == frame) {
+    if (streamPlayer->unk_78 == frame) {
         streamPlayer->unk_80 += 1;
 
         frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-        if ((u32) streamPlayer->unk_40 == frame) {
+        if (streamPlayer->unk_40 == frame) {
             if (streamPlayer->unk_68 != 0) {
                 streamPlayer->unk_80 = 0;
             } else {
@@ -445,7 +513,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-    if ((u32) streamPlayer->unk_78 != frame) {
+    if (streamPlayer->unk_78 != frame) {
         fn_8001F06C(lbMthp_GetDecoder(streamPlayer));
     }
 }
@@ -453,13 +521,15 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
                      size_t heap_size, int loop)
 {
+    THPDecComp* streamPlayer;
     size_t memoryRequired;
+    streamPlayer = &MoviePlayer;
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
-    fn_8001EB14((THPDecComp*) &MoviePlayer, filename);
+    fn_8001EB14(&MoviePlayer, filename);
     MoviePlayer.rate_table = rate_table;
-    memoryRequired = fn_8001EBF0((THPDecComp*) &MoviePlayer);
+    memoryRequired = fn_8001EBF0(&MoviePlayer);
     if (buf != NULL) {
         HSD_ASSERT(848, heap_size >= memoryRequired);
         MoviePlayer.unk_140 = NULL;
@@ -468,15 +538,12 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
         MoviePlayer.unk_140 = buf;
     }
     MoviePlayer.unk_68 = loop;
-    fn_8001ECF4((THPDecComp*) &MoviePlayer, buf);
+    fn_8001ECF4(&MoviePlayer, buf);
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);
-    OSSetPeriodicAlarm((OSAlarm*) ((uintptr_t) &MoviePlayer +
-                                   offsetof(struct lbl_804333E0_t, alarm)),
-                       __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
-                       __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
-                       fn_8001F2A4);
+    OSSetPeriodicAlarm(&streamPlayer->alarm, OSSecondsToTicks(1.0f / 60),
+                       OSSecondsToTicks(1.0f / 60), fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)
@@ -490,32 +557,32 @@ void lbMthp_8001F578(void)
     OSRestoreInterrupts(intr);
 }
 
-s32 lbMthp_8001F5C4(void)
+int lbMthp_8001F5C4(void)
 {
     return MoviePlayer.unk_84;
 }
 
-s32 lbMthp_8001F5D4(void)
+u32 lbMthp_8001F5D4(void)
 {
     return MoviePlayer.unk_134;
 }
 
-s32 lbMthp_8001F5E4(void)
+int lbMthp_8001F5E4(void)
 {
     return MoviePlayer.unk_108;
 }
 
-s32 lbMthp_8001F5F4(void)
+int lbMthp_8001F5F4(void)
 {
     return MoviePlayer.unk_10C;
 }
 
-s32 lbMthp_8001F604(void)
+int lbMthp_8001F604(void)
 {
     return MoviePlayer.unk_144;
 }
 
-void lbMthp_8001F614(s32 arg0)
+void lbMthp_8001F614(int arg0)
 {
     MoviePlayer.unk_148 = arg0;
 }
@@ -538,30 +605,28 @@ HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
 
 void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
 {
-    struct lbl_804333E0_t* streamPlayer = &MoviePlayer;
+    THPDecComp* streamPlayer = &MoviePlayer;
     PAD_STACK(8);
 
-    fn_8001EF5C((THPDecComp*) streamPlayer);
-    if ((s32) streamPlayer->unk_148 != 0) {
+    fn_8001EF5C(streamPlayer);
+    if (streamPlayer->unk_148 != 0) {
         GXInitTexObj(&streamPlayer->unk_178, streamPlayer->unk_50,
-                     (u16) streamPlayer->unk_44, (u16) streamPlayer->unk_48,
-                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
+                     streamPlayer->width, streamPlayer->height, GX_TF_I8,
+                     GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_178, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_178, GX_TEXMAP0);
 
         GXInitTexObj(&streamPlayer->unk_198, streamPlayer->unk_54,
-                     (u16) ((u32) streamPlayer->unk_44 >> 1U),
-                     (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
-                     GX_CLAMP, GX_CLAMP, 0U);
+                     streamPlayer->width / 2, streamPlayer->height / 2,
+                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_198, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_198, GX_TEXMAP1);
 
         GXInitTexObj(&streamPlayer->unk_1B8, streamPlayer->unk_58,
-                     (u16) ((u32) streamPlayer->unk_44 >> 1U),
-                     (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
-                     GX_CLAMP, GX_CLAMP, 0U);
+                     streamPlayer->width / 2, streamPlayer->height / 2,
+                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_1B8, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_1B8, GX_TEXMAP2);
@@ -587,11 +652,6 @@ void lbMthp_8001F800(void)
 
         MoviePlayer.power = 0;
     }
-}
-
-s32 fn_8001F294(void)
-{
-    return MoviePlayer.unk_110;
 }
 
 void lbMthp_8001F87C(void)

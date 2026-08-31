@@ -11,7 +11,6 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
@@ -50,7 +49,7 @@ void ftColl_8007B0C0(Fighter_GObj*, HurtCapsuleState);
 void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb);
 void ftColl_8007B320(Fighter_GObj*);
 void ftColl_8007B4E0(Fighter_GObj*);
-void ftColl_8007B62C(Fighter_GObj*, bool);
+void ftColl_8007B62C(Fighter_GObj*, enum_t);
 void ftColl_8007B6EC(Fighter_GObj*);
 void ftColl_8007B760(Fighter_GObj*, int);
 void ftColl_8007B8CC(Fighter*, Fighter_GObj*);

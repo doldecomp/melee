@@ -1,10 +1,7 @@
 #include "lb/lb_00B0.h"
 
-#include <placeholder.h>
-
 #include "sc/types.h" // IWYU pragma: keep
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h> // IWYU pragma: keep
@@ -98,7 +95,7 @@ bool lb_8000B134(HSD_JObj* jobj)
     return false;
 }
 
-inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
+static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -395,7 +392,7 @@ void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
     lb_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
-void memzero(void* mem, int size)
+void memzero(void* mem, ssize_t size)
 {
     u8* bytes = mem;
     while (size--) {
@@ -433,7 +430,7 @@ void lb_8000C2F8(HSD_JObj* jobj, HSD_JObj* constraint)
     lb_8000C290(jobj, constraint);
 }
 
-inline HSD_RObj* robj_next(HSD_RObj* robj)
+static inline HSD_RObj* robj_next(HSD_RObj* robj)
 {
     if (robj != NULL) {
         return robj->next;
@@ -634,7 +631,7 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
         spB4.x = arg1->rotate.x;
         spB4.y = arg1->rotate.y;
         spB4.z = arg1->rotate.z;
-        EulerToQuat(&spB4, (Quaternion*) &sp94);
+        EulerToQuat(&spB4, (&sp94));
     }
 
     sum.x = SQ(spA4.x + sp94.x);
@@ -744,7 +741,7 @@ s32 lb_8000CDA8(s32 i)
     return lb_803BA020[i];
 }
 
-inline HSD_LObj* lobj_next(HSD_LObj* lobj)
+static inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 {
     if (lobj == NULL) {
         return NULL;
@@ -762,9 +759,6 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-#ifdef BUGFIX
-    return NULL;
-#endif
 }
 
 void lb_8000CE30(HSD_DObj* dobj, HSD_DObj* next)

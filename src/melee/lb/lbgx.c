@@ -32,7 +32,7 @@ bool lbGx_8001E2F8(Vec4* arg0, Vec3* arg1, U8Vec4* arg2, u32 arg3, float argf1)
             HSD_CObj* cobj = HSD_CObjGetCurrent();
             GXLoadPosMtxImm(HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
             GXSetCurrentMtx(0);
-            GXBegin(152, 0, 5);
+            GXBegin(GX_DRAW_TRIANGLE_STRIP, GX_VTXFMT0, 5);
             {
                 float temp_f1;
                 float temp_f1_2;

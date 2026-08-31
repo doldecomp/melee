@@ -1,7 +1,6 @@
 #ifndef MELEE_PL_TYPES_H
 #define MELEE_PL_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <melee/pl/forward.h>
@@ -118,9 +117,9 @@ struct StaleMoveTable {
             u16 x12_b0 : 1;
         } x10[6];
     } x5EC;
-    /* +674 */ u32 x674[39];
-    /* +710 */ int x710[39];
-    /* +7AC */ int x7AC[39];
+    /* +674 */ u32 x674[Pl_ItemLog_Terminate];
+    /* +710 */ int x710[Pl_ItemLog_Terminate];
+    /* +7AC */ int x7AC[Pl_ItemLog_Terminate];
     /* +848 */ int x848[30];
     /* +8C0 */ struct pl_x8C0_t {
         int x0;
@@ -168,7 +167,7 @@ struct StaleMoveTable {
     /* +CEC */ int xCEC;
     /* +CF0 */ int xCF0;
 };
-STATIC_ASSERT(sizeof(struct StaleMoveTable) == 0xCF4);
+ASSERT_SIZE(struct StaleMoveTable, 0xCF4);
 
 struct pl_StaleMoveTableExt_t {
     /*   +0 */ StaleMoveTable x0_staleMoveTable;
@@ -199,7 +198,7 @@ struct pl_StaleMoveTableExt_t {
     /* +D54 */ unsigned int xD54;
     /* +D58 */ unsigned int xD58;
     /* +D5C */ unsigned int xD5C;
-    /* +D60 */ unsigned long xD60;
+    /* +D60 */ u32 xD60;
     /* +D64 */ int xD64;
     /* +D68 */ int xD68;
     /* +D6C */ int xD6C;

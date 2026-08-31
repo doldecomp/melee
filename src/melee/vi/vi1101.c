@@ -13,6 +13,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -66,11 +68,11 @@ void un_8031F294(s32 arg0, s32 arg1)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(KINOKOROUTE, 0);
+    Stage_802251E8(St_Kind_Battle, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(KINOKOROUTE, 0);
+    Stage_8022532C(St_Kind_Battle, 0);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(arg0, un_804D6FC8, 3);
@@ -167,7 +169,7 @@ void fn_8031F600(HSD_GObj* gobj)
     }
 }
 
-void un_8031F714_OnEnter(void* arg)
+void vi1101_Scene_OnEnter(void* arg)
 {
     HSD_Joint* new_var2;
     SceneDesc* var_r28;
@@ -195,7 +197,7 @@ void un_8031F714_OnEnter(void* arg)
     un_804D6FC8 = lbArchive_LoadSymbols(viGetCharAnimByIndex(temp_r29), NULL);
 
     temp_r28 = GObj_Create(0xB, 3, 0);
-    HSD_GObjObject_80390A70(temp_r28, HSD_GObj_804D784A & 0xFFFF,
+    HSD_GObjObject_80390A70(temp_r28, HSD_GObj_LightKind & 0xFFFF,
                             lb_80011AC4(un_804D6FC0->lights));
     GObj_SetupGXLink(temp_r28, HSD_GObj_LObjCallback, 0, 0);
 
@@ -207,7 +209,7 @@ void un_8031F714_OnEnter(void* arg)
 
     temp_r31 = GObj_Create(0x13, 0x14, 0);
     temp_r3 = lb_80013B14((HSD_CameraDescPerspective*) var_r28->cameras->desc);
-    HSD_GObjObject_80390A70(temp_r31, HSD_GObj_804D784B, temp_r3);
+    HSD_GObjObject_80390A70(temp_r31, HSD_GObj_CameraKind, temp_r3);
     GObj_SetupGXLinkMax(temp_r31, fn_8031F56C, 5);
     HSD_CObjAddAnim(temp_r3, var_r28->cameras->anims[0]);
     HSD_CObjReqAnim(temp_r3, un_804DE0DC);
@@ -218,7 +220,7 @@ void un_8031F714_OnEnter(void* arg)
         temp_r26 = GObj_Create(0xE, 0xF, 0);
         temp_r3_2 =
             HSD_JObjLoadJoint(new_var2 = un_804D6FC0->models[var_r31]->joint);
-        HSD_GObjObject_80390A70(temp_r26, new_var3 = HSD_GObj_804D7849,
+        HSD_GObjObject_80390A70(temp_r26, new_var3 = HSD_GObj_JObjKind,
                                 temp_r3_2);
         GObj_SetupGXLink(temp_r26, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(temp_r3_2, un_804D6FC0->models[var_r31], 0);
@@ -232,7 +234,7 @@ void un_8031F714_OnEnter(void* arg)
     lbAudioAx_80024E50(0);
 }
 
-void un_8031F960_OnFrame(void)
+void vi1101_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

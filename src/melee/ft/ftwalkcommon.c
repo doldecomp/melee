@@ -3,7 +3,6 @@
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftcommon.h"
-#include "math.h"
 
 #include "ft/forward.h"
 
@@ -17,7 +16,6 @@
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
@@ -26,11 +24,14 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
     float gr_vel = fp->gr_vel;
     float walk_vel = ABS(gr_vel);
     if (walk_vel >= (fp->mv.co.walk.accel_mul *
-                     (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
+                     (p_ftCommonData->walk_fast_stick_threshold *
+                      fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Fast;
-    } else if (walk_vel >= (fp->mv.co.walk.accel_mul *
-                            (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
+    } else if (walk_vel >=
+               (fp->mv.co.walk.accel_mul *
+                (p_ftCommonData->walk_middle_animation_stick_threshold *
+                 fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Middle;
     } else {
@@ -44,11 +45,14 @@ static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
     float walking_velocity = ABS(fp->gr_vel);
     float tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
-        (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
+        (tempf * (p_ftCommonData->walk_fast_stick_threshold *
+                  fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Fast;
     } else if (walking_velocity >=
-               (tempf * (p_ftCommonData->x28 * fp->co_attrs.walk_max_vel)))
+               (tempf *
+                (p_ftCommonData->walk_middle_animation_stick_threshold *
+                 fp->co_attrs.walk_max_vel)))
     {
         return FtWalkType_Middle;
     } else {
@@ -60,7 +64,9 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x24) {
+    if (fp->input.lstick.x * fp->facing_dir >=
+        p_ftCommonData->walk_stick_threshold)
+    {
         return true;
     }
 
@@ -170,8 +176,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, float))
 
 static float getWalkAccel(Fighter* fp, float mul)
 {
-    return fp->input.lstick.x > 0 ? mul * +fp->co_attrs.walk_accel
-                                  : mul * -fp->co_attrs.walk_accel;
+    return fp->input.lstick.x > 0 ? mul * +fp->co_attrs.walk_accel_base
+                                  : mul * -fp->co_attrs.walk_accel_base;
 }
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
@@ -187,7 +193,7 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 
     {
         float accel =
-            fp->input.lstick.x * fp->co_attrs.walk_init_vel * accel_mul;
+            fp->input.lstick.x * fp->co_attrs.walk_accel_mul * accel_mul;
         accel += getWalkAccel(fp, accel_mul);
 
         {
@@ -198,12 +204,14 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
                 float mult = fp->gr_vel / target_vel;
 
                 if (mult > 0 && mult < 1) {
-                    accel *= (1 - mult) * p_ftCommonData->x30;
+                    accel *=
+                        (1 - mult) * p_ftCommonData->walk_accel_taper_gain;
                 }
             }
 
             fp->mv.co.walk.x0 = target_vel * p_ftCommonData->x440;
-            ftCommon_8007C98C(fp, accel, target_vel, fp->co_attrs.gr_friction);
+            ftCommon_8007C98C(fp, accel, target_vel,
+                              fp->co_attrs.ground_friction);
         }
 
         ftCommon_ApplyGroundMovement(gobj);

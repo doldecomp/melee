@@ -4,9 +4,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/forward.h"
 #include <melee/gm/forward.h>
 #include <melee/gr/forward.h>
-#include <melee/it/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -22,10 +22,10 @@
                                  struct gmm_x0_528_t*, u8);
 /* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
 /* 17CD94 */ u8 gm_8017CD94(UnkAdventureData*, int, int, int);
-/* 17CE34 */ s32 gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8, u8,
-                             u8, s32, InternalStageId, s32 count, s32);
+/* 17CE34 */ void gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8, u8,
+                              u8, s32, StKind, s32 count, s32);
 /* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
-/* 17D9C0 */ s32 fn_8017D9C0(u8* arg0, u8* arg1);
+/* 17D9C0 */ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds);
 /* 17DB58 */ void gm_8017DB58(struct Unk1PData_x24* arg0);
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
@@ -41,7 +41,7 @@
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
 /* 17DF90 */ u8 fn_8017DF90(void);
 /* 17DFF4 */ int gm_8017DFF4(int);
-/* 17E068 */ bool gm_8017E068(void);
+/* 17E068 */ int gm_8017E068(void);
 /* 17E0E4 */ int fn_8017E0E4(void);
 /* 17E160 */ bool fn_8017E160(void);
 /* 17E21C */ void fn_8017E21C(void);
@@ -51,7 +51,7 @@
 /* 17E424 */ UnkAdventureData* gm_GetAdventureData(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ u8 gm_8017E48C(GameScene*);
+/* 17E48C */ u8 gm_8017E48C(GameModeState*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
 /* 17E500 */ u8 gm_8017E500(u8, u8);
 /* 17E528 */ f32 gm_8017E528(u8, u8);
@@ -118,7 +118,7 @@
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_IsMultimanSmashMode(void);
 /* 182554 */ void gm_80182554(int, int);
-/* 182578 */ s32 gm_80182578(void);
+/* 182578 */ void gm_80182578(void);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);

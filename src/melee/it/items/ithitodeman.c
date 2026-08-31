@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
@@ -10,7 +9,6 @@
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 
@@ -38,10 +36,12 @@ ItemStateTable it_803F8128[] = {
     },
 };
 
-static void ordering_func(void)
+#ifdef MUST_MATCH
+static void order_data(void)
 {
-    HSD_JObjSetRotationY(NULL, 10);
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
+#endif
 
 ItemStateTable it_803F8180[] = { {
     0x00000000,
@@ -49,20 +49,6 @@ ItemStateTable it_803F8180[] = { {
     it_802D5044,
     it_802D5048,
 } };
-
-extern inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
 
 void it_2725_Logic24_Spawned(Item_GObj* gobj)
 {
@@ -193,7 +179,7 @@ bool it_802D4564(Item_GObj* gobj)
     return false;
 }
 
-inline Article* it_802D472C_inline(Item* ip)
+static inline Article* it_802D472C_inline(Item* ip)
 {
     return ip->xC4_article_data;
 }
@@ -379,7 +365,7 @@ void it_802D4C74(Item_GObj* gobj)
     spawn.vel.x = spawn.facing_dir * attrs->x50;
     spawn.vel.y = 0.0f;
     spawn.vel.z = 0.0f;
-    spawn.kind = 0xCC;
+    spawn.kind = It_Kind_Hitodeman_Star;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
     spawn.x44_flag.b0 = false;

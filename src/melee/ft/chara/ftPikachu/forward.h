@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_FORWARD_H
 #define MELEE_FT_CHARA_FTPIKACHU_FORWARD_H
 
-#include <platform.h>
-
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
@@ -113,5 +111,12 @@ typedef enum ftPk_Submotion {
     ftPk_SM_Count,
     ftPk_SM_SelfCount = ftPk_SM_Count - ftCo_SM_Count,
 } ftPk_Submotion;
+
+enum ftPk_SpecialN_CmdVars {
+    ftPk_SpecialN_Cmd0,
+    ftPk_SpecialN_Cmd1,
+    ftPk_SpecialN_Cmd2,
+    ftPk_SpecialN_Cmd3,
+};
 
 #endif

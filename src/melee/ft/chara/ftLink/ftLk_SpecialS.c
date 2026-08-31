@@ -5,10 +5,13 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
@@ -30,9 +33,7 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
@@ -49,8 +50,9 @@ typedef enum cmd_var_idx {
 void on21EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
-        fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    if (ABS(fp->input.lstick.x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         fp->x2070.count_thrown_items = true;
         fp->u.lk.x4 = true;
@@ -199,23 +201,6 @@ void onAccessory4(HSD_GObj* gobj)
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->cmd_vars[cmd_specials2_anim_bool] = false;
     }
-}
-
-static void doEnter(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
-    fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->x21EC = on21EC;
-    if (fp->u.lk.used_boomerang) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
-                                  1, 0, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
-                                  NULL);
-    }
-    ftAnim_8006EBA4(gobj);
-    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)

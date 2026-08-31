@@ -17,10 +17,9 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F6F50[] = {
     { 0, itSeakneedlethrown_UnkMotion0_Anim,
@@ -51,12 +50,15 @@ static f32 it_803F7060[8] = {
     0.87266463f, 0.9599311f,  1.0471976f, 1.134464f
 };
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
     (void) 1.0f;
     (void) -1.0f;
 }
+#endif
+
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {
@@ -552,7 +554,7 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
+static inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
 {
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;

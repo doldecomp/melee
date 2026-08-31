@@ -20,7 +20,6 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "it/items/itwstar.h"
-#include "lb/lbrefract.h"
 #include "mp/mpcoll.h"
 
 #include <math.h>
@@ -28,7 +27,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 /* 0C4858 */ static void ftCo_800C4858(Fighter_GObj* gobj);
 /* 0C48AC */ static void ftCo_800C48AC(Fighter_GObj* gobj);
@@ -49,7 +50,8 @@ void ftCo_800C4724(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80294430(fp->item_gobj, fpGet2C4(fp)->y, fpGetAttrs(fp)->x164);
+    it_80294430(fp->item_gobj, fpGet2C4(fp)->y,
+                fpGetAttrs(fp)->warp_star_hitbox_scale);
     fp->mv.co.warpstar.facing_dir = fp->facing_dir;
     fp->facing_dir = 0;
     fp->mv.co.warpstar.x1C = 120;

@@ -2,7 +2,6 @@
 #define GALE01_111FBC
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
 
 /* 111FBC */ void ftSk_SpecialN_80111FBC(Fighter_GObj* gobj);
 /* 1120E8 */ void ftSk_SpecialN_Enter(Fighter_GObj* gobj);

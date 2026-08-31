@@ -134,8 +134,10 @@ static void un_80321C70_inline(void)
     data->x1C = 1;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void un_80321C70(void)
 {
     CrowdSFX_UnkStruct* data;
@@ -156,7 +158,9 @@ void un_80321CA4(s32 arg)
     un_80321CE8();
     data->x28 = lbAudioAx_8002411C(arg);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void un_80321CE8(void)
 {

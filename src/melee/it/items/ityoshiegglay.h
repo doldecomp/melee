@@ -10,8 +10,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 /* 2F2F34 */ void it_802F2F34(HSD_GObj*, itYoshiEggLay_DatAttrs*);
 /* 2F3020 */ void it_802F3020(HSD_GObj*);
 /* 2F3078 */ bool it_27CF_UnkMotion1_Anim(HSD_GObj*);

@@ -3,15 +3,13 @@
 #include "itlgunray.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 
 #include <stdbool.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 #include <melee/it/item.h>
 
 /* 28E7D8 */ static void it_8028E7D8(Item_GObj*);
@@ -171,7 +169,7 @@ bool itLGun_Logic16_DmgDealt(Item_GObj* gobj)
 
 bool itLGun_Logic16_Clanked(Item_GObj* gobj)
 {
-    itColl_BounceOffVictim((Item_GObj*) gobj);
+    itColl_BounceOffVictim(gobj);
     return false;
 }
 

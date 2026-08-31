@@ -98,7 +98,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     HSD_JObj* item_jobj;
     Item_GObj* item_gobj;
 
-    spawn.kind = Pokemon_Random; // 44
+    spawn.kind = It_PKind_Random; // 44
     if (arg3) {
         lb_8000B1CC(arg3, NULL, &spawn.prev_pos);
     } else {
@@ -169,8 +169,7 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.yaku.x2 != 2) {
         OSReport("%s:%d: oioi...\n", __FILE__, 215);
-        while (true)
-            ;
+        while (true);
     }
 }
 

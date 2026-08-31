@@ -22,8 +22,6 @@ enum scan_states {
 #define fetch() (count++, (*ReadProc)(ReadProcArg, 0, __GetAChar))
 #define unfetch(c) (*ReadProc)(ReadProcArg, c, __UngetAChar)
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-compare"
 unsigned long __strtoul(int base, int max_width,
                         int (*ReadProc)(void*, int, int), void* ReadProcArg,
                         int* chars_scanned, int* negative, int* overflow)
@@ -153,7 +151,6 @@ unsigned long __strtoul(int base, int max_width,
     unfetch(c);
     return value;
 }
-#pragma clang diagnostic pop
 
 unsigned long strtoul(const char* str, char** end, int base)
 {
@@ -181,8 +178,6 @@ unsigned long strtoul(const char* str, char** end, int base)
     return value;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-compare"
 long strtol(const char* str, char** end, int base)
 {
     unsigned long uvalue;
@@ -211,7 +206,6 @@ long strtol(const char* str, char** end, int base)
 
     return svalue;
 }
-#pragma clang diagnostic pop
 
 int atoi(const char* str)
 {

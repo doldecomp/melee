@@ -7,22 +7,23 @@
 #include "gm_unsplit.h"
 
 #include "db/db.h"
+#include "gm/gmmain_lib.h"
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
+#include "lb/lb_013B.h"
 #include "lb/lb_0195.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbheap.h"
-#include "lb/lbspdisplay.h"
 
 #include <dolphin/os/OSThread.h>
+#include <baselib/class.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
 #include <baselib/hsd_3915.h>
 #include <baselib/hsd_392C.h>
 #include <baselib/initialize.h>
 #include <baselib/leak.h>
-#include <baselib/particle.h>
 #include <baselib/perf.h>
 #include <baselib/sobjlib.h>
 
@@ -62,7 +63,9 @@ bool fn_801A46F4(void)
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_DPADUP) &&
+            (pad->button & HSD_PAD_X))
+        {
             return true;
         }
     }
@@ -74,7 +77,7 @@ bool fn_801A47E4(void)
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x10)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_Z)) {
             return true;
         }
     }
@@ -96,7 +99,7 @@ u64 gm_801A48A4(u8 arg0)
     return result;
 }
 
-void gm_801A4970(int (**arg0)(void))
+void gm_801A4970(bool (**arg0)(void))
 {
     HSD_PadStatus* temp_r3;
     s8 var_r26;
@@ -108,7 +111,9 @@ void gm_801A4970(int (**arg0)(void))
     var_r26 = 0;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         temp_r3 = &HSD_PadMasterStatus[(u8) i];
-        if ((temp_r3->trigger & 2) && (temp_r3->button & 0x400)) {
+        if ((temp_r3->trigger & HSD_PAD_DPADRIGHT) &&
+            (temp_r3->button & HSD_PAD_X))
+        {
             lbHeap_80015DF8();
             OSReport("[hsdDumpClassStat] -- Report --\n");
             hsdDumpClassStat(NULL, 0, 1);
@@ -131,7 +136,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
 
-    if (arg0[0] != NULL && arg0[0]() != 0) {
+    if (arg0[0] != NULL && arg0[0]()) {
         if (gm_801A45E8(0)) {
             gm_80479D58.unk_10.x0 &= ~1;
         } else {
@@ -139,7 +144,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
     if (gm_801A45E8(0)) {
-        if (arg0[1] != NULL && arg0[1]() != 0) {
+        if (arg0[1] != NULL && arg0[1]()) {
             gm_80479D58.unk_10.x2 |= 1;
         }
     }
@@ -184,13 +189,13 @@ void gm_801A4B88(struct GameSceneInfo* info)
 /// @brief returns a pointer to the current scenes enter data
 void* gm_GetCurrentSceneEnterData(void)
 {
-    return gm_804D6720->load_data;
+    return gm_804D6720->enter_data;
 }
 
 /// @brief returns a pointer to the current scenes exit data
 void* gm_GetCurrentSceneExitData(void)
 {
-    return gm_804D6720->leave_data;
+    return gm_804D6720->exit_data;
 }
 
 u32 gm_801A4BA8(void)
@@ -218,7 +223,7 @@ void gm_801A4BD4(void)
     gm_801A4B40(0);
     gm_801A4B50(0);
 
-    lb_80019880(1.0F / 60 * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1.0F / 60));
     HSD_GObj_803912E0(&gm_80479D48.initdata);
     gm_80479D48.initdata.gproc_pri_max = 0x18;
     HSD_SObjLib_804D7960 =
@@ -239,19 +244,18 @@ void gm_801A4BD4(void)
     lb_80014534();
 }
 
-GameSceneHandler* gm_FindGameSceneHandler(u8 kind)
+GameScene* gm_FindGameSceneHandler(u8 kind)
 {
-    GameSceneHandler* cur;
-    for (cur = gm_GetAllGameSceneHandlers(); cur->class_id != GS_COUNT; cur++)
-    {
-        if (cur->class_id == kind) {
+    GameScene* cur;
+    for (cur = gm_GetAllGameScenes(); cur->kind != GS_COUNT; cur++) {
+        if (cur->kind == kind) {
             return cur;
         }
     }
     return NULL;
 }
 
-inline u64 maybe_gm_801A48A4(u8 i)
+static inline u64 maybe_gm_801A48A4(u8 i)
 {
     u64 temp_ret = gm_801A48A4(i);
     if (gm_80479D58.unk_10.unk_38_0) {
@@ -261,7 +265,7 @@ inline u64 maybe_gm_801A48A4(u8 i)
     }
 }
 
-void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
+void gm_801A4D34(void (*on_frame)(void), UNUSED GameSceneInfo* info)
 {
     int pad_queue_count;
     int i;
@@ -295,7 +299,7 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
         for (i = 0; i < pad_queue_count; i++) {
             HSD_PerfSetStartTime();
             lb_800198E0();
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 gm_801A4970(temp_r25->unk_10.x4);
             }
             if (gm_801A46B8(0) || !gm_801A45E8(0)) {
@@ -308,7 +312,7 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
                 if (lb_80019A30(0)) {
                     gm_EvaluateAllControllerInputs();
                 }
-                if (lb_80019A30(0) && (on_frame != NULL)) {
+                if (lb_80019A30(0) && on_frame != NULL) {
                     on_frame();
                 }
             }
@@ -322,15 +326,15 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
                 temp_r25->unk_10.x2 = 0;
             }
             temp_r25->unk_10.unk_28 = temp_r25->unk_10.unk_20;
-            if (lb_80019A30(0) == 0) {
+            if (!lb_80019A30(0)) {
                 temp_r25->unk_10.unk_28 |=
                     gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
-            if (lb_80019A30(1) == 0) {
+            if (!lb_80019A30(1)) {
                 temp_r25->unk_10.unk_28 |=
                     ~gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 db_CheckScreenshot();
             }
             lbAudioAx_80027DF8();
@@ -341,13 +345,13 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
             if (temp_r25->unk_0 != -2) {
                 temp_r25->unk_0++;
             }
-            if (gm_80479D58.unk_10.unk_38_0 && (lb_80019A30(0) != 0)) {
+            if (gm_80479D58.unk_10.unk_38_0 && lb_80019A30(0)) {
                 if (temp_r25->unk_8 != -2) {
                     temp_r25->unk_8++;
                 }
             }
             HSD_PerfSetCPUTime();
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 OSCheckActiveThreads();
             }
             gmMainLib_8046B0F0.xC = false;

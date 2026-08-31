@@ -9,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -18,7 +19,7 @@
 
 #include "ftYoshi/forward.h"
 
-#include "ftYoshi/ftYs_Init.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/types.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshitongue.h"
@@ -94,16 +95,8 @@ void fn_8012E110(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYs_DatAttrs* da = fp->dat_attrs;
-    bool var_r0;
 
-    if (fp->throw_flags_b0) {
-        fp->throw_flags_b0 = 0;
-        var_r0 = true;
-    } else {
-        var_r0 = false;
-    }
-
-    if (var_r0) {
+    if (ftCheckThrowB0(fp)) {
         Vec3 sp30;
         lb_8000B1CC(fp->parts[31].joint, NULL, &sp30);
         fp->x1984_heldItemSpec = fp->u.ys.x2238 =

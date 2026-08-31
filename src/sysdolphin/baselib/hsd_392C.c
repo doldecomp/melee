@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <dolphin/mcc.h>
+#include <dolphin/os.h>
 #include <sysdolphin/baselib/hsd_3933.h>
 
 struct ParticleConsoleState {
@@ -21,7 +22,7 @@ struct ParticleConsoleState {
     /* 20 */ int x20;
     /* 20 */ UNK_T x24;
 };
-STATIC_ASSERT(sizeof(struct ParticleConsoleState) == 0x28);
+ASSERT_SIZE(struct ParticleConsoleState, 0x28);
 
 /* 4D7890 */ static s32 hsd_804D7890;
 /* 4D7894 */ static int hsd_804D7894;
@@ -202,8 +203,7 @@ int hsd_80392E80(void)
                         status == 3)
                     {
                         waiting = 0;
-                    } else if ((u32) ((u32) (OSGetTick() - startTick) /
-                                      OS_TIMER_CLOCK) < 3U)
+                    } else if (OSTicksToSeconds(OSGetTick() - startTick) < 3U)
                     {
                         continue;
                     }

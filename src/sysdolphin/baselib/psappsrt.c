@@ -1,14 +1,13 @@
 #include "psappsrt.h"
 
 #include "objalloc.h"
+#include "particle.h"
 #include "psstructs.h"
 
 #include <string.h>
 
 /* 004D4538 */ static u16 HSD_PSAppSrt_804D7958[4];
 /* 004CDC90 */ HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
-extern u16 hsd_804D78D8;
-extern u16 hsd_804D78DE;
 
 bool psInitAppSRT(int num, int size)
 {
@@ -46,7 +45,7 @@ HSD_psAppSRT* psAddGeneratorAppSRT(s32 status, u16 idnum)
         srt->gp = NULL;
         srt->idnum = idnum;
         hsd_804D78DE += 1;
-        if ((u16) hsd_804D78DE > (u16) hsd_804D78D8) {
+        if (hsd_804D78DE > hsd_804D78D8) {
             hsd_804D78D8 = hsd_804D78DE;
         }
     }
@@ -69,7 +68,7 @@ int psAttachParticleAppSRT(HSD_Particle* pp, HSD_psAppSRT* srt)
         return -1;
     }
     pp->appsrt = srt;
-    return (u16) ++srt->usedCount;
+    return (++srt->usedCount);
 }
 
 int psAttachGeneratorAppSRT(HSD_Generator* gp, HSD_psAppSRT* srt)
@@ -78,7 +77,7 @@ int psAttachGeneratorAppSRT(HSD_Generator* gp, HSD_psAppSRT* srt)
         return -1;
     }
     gp->appsrt = srt;
-    return (u16) ++srt->usedCount;
+    return (++srt->usedCount);
 }
 
 int psRemoveParticleAppSRT(HSD_Particle* pp)

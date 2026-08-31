@@ -6,13 +6,9 @@
 
 #include "it/forward.h"
 
-#include "it/itzako.h"
-
-#include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-#include <melee/it/itzako.h>
 #include <melee/it/types.h>
 
 ItemStateTable it_803F7938[] = {
@@ -75,7 +71,7 @@ void itGameWatchBreath_Logic76_PickedUp(Item_GObj* item_gobj)
 
     temp_r3 = item_gobj->user_data;
     temp_r3->xDAC_itcmd_var0 = 0;
-    if ((HSD_GObj*) temp_r3->owner != NULL) {
+    if (temp_r3->owner != NULL) {
         Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
         Item_802694CC(item_gobj);
     }

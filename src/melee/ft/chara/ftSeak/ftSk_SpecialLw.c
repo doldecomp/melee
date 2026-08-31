@@ -1,9 +1,12 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -12,10 +15,9 @@
 #include "ftCommon/inlines.h"
 #include "ftZelda/ftZd_SpecialLw.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
@@ -28,8 +30,7 @@ static void fn_80114034(Fighter_GObj* gobj)
         efSync_Spawn(0x4FC, gobj, fp->parts[FtPart_R2ndNb].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
 }
 
@@ -40,8 +41,7 @@ static void fn_801140B0(Fighter_GObj* gobj)
         efSync_Spawn(0x4FD, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
 }
 

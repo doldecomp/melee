@@ -1,7 +1,5 @@
 #include "ft/ft_0C88.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"

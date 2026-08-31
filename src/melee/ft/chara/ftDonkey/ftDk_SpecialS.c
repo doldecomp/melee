@@ -4,12 +4,14 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
-
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -77,7 +79,7 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->cmd_vars[0]) {
         ftCommon_Fall(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(
         fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
@@ -114,8 +116,7 @@ void doAirTransition(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirS, coll_mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
@@ -124,7 +125,6 @@ static void doGroundTransition(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialS, coll_mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }

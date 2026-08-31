@@ -2,12 +2,17 @@
 
 #include "ftNs_Init.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -26,10 +31,7 @@
 #include "mp/forward.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 /// SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                            \
@@ -43,104 +45,35 @@
         Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |                   \
         Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
-/// Setup float order
-static float return_float1(void) // -25264
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return 5.0f;
+    (void) 5.0f;
+    (void) 0.0f;
+    (void) 8.333333015441895f;
+    (void) 12.333333015441895f;
+    (void) M_PI_2_F;
+    (void) M_TAU;
+    (void) M_PI;
+    (void) M_PI_2;
+    (void) 1.0f;
+    (void) 0.0;
+    (void) MTXDegToRad(1);
+    (void) 90.0f;
+    (void) -1.0f;
+    (void) 0.5f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 1e-4f;
+    (void) -1e-4f;
+    (void) -M_PI_2;
 }
+#endif
 
-static float return_float2(void) // -25260
-{
-    return 0.0f;
-}
-
-static float return_float3(void) // -25256
-{
-    return 8.333333015441895f;
-}
-
-static float return_float4(void) // -25252
-{
-    return 12.333333015441895f;
-}
-
-static float return_float5(void) // -25248
-{
-    return M_PI / 2;
-}
-
-static f64 return_float6(void) // -25236
-{
-    return M_TAU;
-}
-
-static f64 return_float7(void) // -25228
-{
-    return M_PI;
-}
-
-static f64 return_float8(void) // -25220
-{
-    return M_PI / 2;
-}
-
-static float return_float9(void) // -25216
-{
-    return 1.0f;
-}
-
-static f64 return_float10(void) // -25208
-{
-    return 0.0;
-}
-
-static float return_float12(void) // -25200
-{
-    return M_PI / 180;
-}
-
-static float return_float13(void)
-{
-    return 90.0f;
-}
-
-static float return_float14(void)
-{
-    return -1.0f;
-}
-
-static float return_float15(void)
-{
-    return 0.5f;
-}
-
-static f64 return_float16(void)
-{
-    return 0.5;
-}
-
-static f64 return_float17(void)
-{
-    return 3.0;
-}
-
-static float return_float18(void)
-{
-    return 1e-4F;
-}
-
-static float return_float19(void)
-{
-    return -1e-4F;
-}
-
-static f64 return_float20(void)
-{
-    return -M_PI / 2;
-}
-
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 /// 0x80117B70
 /// https://decomp.me/scratch/242L6
 void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
@@ -166,9 +99,11 @@ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
         return;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
-inline bool check_distance(Vec3* pos, Vec3* pair)
+static inline bool check_distance(Vec3* pos, Vec3* pair)
 {
     if ((ABS(pos->x - pair->x) < 8.333333015441895f) &&
         (ABS(pos->y - pair->y) < 12.333333015441895f))
@@ -454,8 +389,8 @@ void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
             phi_f0 = M_PI;
         }
         fp->mv.ns.specialhi.aerialVel = (float) phi_f0;
-        fp->mv.ns.specialhi.facingDir = (float) 1.0f;
-        fp->mv.ns.specialhi.unkVar = (float) 0.0f;
+        fp->mv.ns.specialhi.facingDir = 1.0f;
+        fp->mv.ns.specialhi.unkVar = 0.0f;
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -519,8 +454,8 @@ void ftNs_SpecialAirHiStart_Enter(
         phi_f0 = M_PI;
     }
     fp->mv.ns.specialhi.aerialVel = (float) phi_f0;
-    fp->mv.ns.specialhi.facingDir = (float) 1.0f;
-    fp->mv.ns.specialhi.unkVar = (float) 0.0f;
+    fp->mv.ns.specialhi.facingDir = 1.0f;
+    fp->mv.ns.specialhi.unkVar = 0.0f;
     fp->self_vel.y = 0.0f;
     ftAnim_8006EBA4(gobj);
 }
@@ -556,9 +491,9 @@ void ftNs_SpecialHi_Enter(
 
             if (!(temp_f1_2 < (float) M_PI_2)) {
                 if (!(temp_f1_2 >
-                      deg_to_rad *
-                          (90.0f +
-                           ness_attr->x60_PK_THUNDER_2_KNOCKDOWN_ANGLE)))
+                      MTXDegToRad(
+                          90.0f +
+                          ness_attr->x60_PK_THUNDER_2_KNOCKDOWN_ANGLE)))
                 {
                     {
                         float facing_dir;
@@ -586,13 +521,12 @@ void ftNs_SpecialHi_Enter(
 
                         Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi, 0,
                                                   0.0f, 1.0f, 0.0f, NULL);
-                        fp->gr_vel =
-                            (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                                     fp->facing_dir);
+                        fp->gr_vel = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                                      fp->facing_dir);
                         fp = getFighter(gobj);
                         ness_attr2 = getFtSpecialAttrs(fp);
                         fp->mv.ns.specialhi.unkVar =
-                            (float) ness_attr2->x58_PK_THUNDER_2_UNK1;
+                            ness_attr2->x58_PK_THUNDER_2_UNK1;
                         fighter_data2 = GET_FIGHTER(gobj);
                         ftPartSetRotX(fighter_data2, 0,
                                       (fighter_data2->facing_dir *
@@ -617,7 +551,11 @@ void ftNs_SpecialHi_Enter(
     return;
 
 block_stuff: {
-    fighter_data3 = fighter_data3 = GET_FIGHTER(gobj);
+    fighter_data3 =
+#ifdef MUST_MATCH
+        fighter_data3 =
+#endif
+            GET_FIGHTER(gobj);
     {
         enum_t msid = fighter_data3->motion_id;
         switch (msid) {
@@ -641,7 +579,7 @@ block_stuff: {
 }
 }
 
-inline void
+static inline void
 NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
 {
     Fighter* fp;
@@ -668,10 +606,10 @@ NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
     }
     fp->mv.ns.specialhi.facingDir = phi_f0;
     fp->mv.ns.specialhi.aerialVel = atan2f(temp_f1, temp_f2);
-    fp->self_vel.x = (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                              cosf(fp->mv.ns.specialhi.aerialVel));
-    fp->self_vel.y = (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                              sinf(fp->mv.ns.specialhi.aerialVel));
+    fp->self_vel.x = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                      cosf(fp->mv.ns.specialhi.aerialVel));
+    fp->self_vel.y = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                      sinf(fp->mv.ns.specialhi.aerialVel));
 }
 
 /// Ness's PK Thunder 2 Motion State handler if Ness is launching into
@@ -772,8 +710,8 @@ void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj) // Ness's grounded PK Thunder
         }
     }
     if (fp->u.ns.pkthunder_gobj == NULL) {
-        if (((s32) fp->mv.ns.specialhi.thunderTimerLoop1 <= 0) &&
-            ((s32) fp->mv.ns.specialhi.thunderTimerLoop2 <= 0))
+        if ((fp->mv.ns.specialhi.thunderTimerLoop1 <= 0) &&
+            (fp->mv.ns.specialhi.thunderTimerLoop2 <= 0))
         {
             Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHiEnd, 0, 0.0f,
                                       1.0f, 0.0f, NULL);
@@ -1063,7 +1001,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
             phi_f1 = -temp_f1;
         }
 
-        fp1->self_vel.y = (float) -phi_f1;
+        fp1->self_vel.y = (-phi_f1);
         ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
@@ -1158,7 +1096,7 @@ void ftNs_SpecialAirHiRebound_IASA(HSD_GObj* gobj)
     return;
 }
 
-inline void ThunderPhysTimer(HSD_GObj* gobj)
+static inline void ThunderPhysTimer(HSD_GObj* gobj)
 {
     Fighter* temp_fp;
     s32 thunderPhysTimer;
@@ -1251,7 +1189,7 @@ void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_velocity);
     }
 
     {
@@ -1276,7 +1214,7 @@ void ftNs_SpecialAirHiHold_Phys(
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_velocity);
     }
 
     {
@@ -1298,7 +1236,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_velocity);
     }
 
     {
@@ -1307,11 +1245,10 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
-inline void ftNess_atan2(HSD_GObj* gobj)
+static inline void ftNess_atan2(HSD_GObj* gobj)
 {
     Fighter* fighter_data2 = GET_FIGHTER(gobj);
-
-    u8 _[4] = { 0 };
+    FORCE_PAD_STACK_4;
 
     ftPartSetRotX(
         fighter_data2, 0,
@@ -1320,57 +1257,27 @@ inline void ftNess_atan2(HSD_GObj* gobj)
             (float) M_PI_2);
 }
 
-inline void* getFtSpecialAttrs2(Fighter* fp)
+static inline void* getFtSpecialAttrs2(Fighter* fp)
 {
-    u8 _[4] = { 0 };
-
+    FORCE_PAD_STACK_4;
     return fp->dat_attrs;
 }
 
 /// Ness's aerial PK Thunder 2 Physics callback
 void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    float temp_sqrt;
     ftNessAttributes* ness_attr;
     Fighter* fp;
-    float temp_f0;
-    float temp_f0_2;
-    float temp_f1;
-    float temp_f1_5;
-    float temp_f1_6;
     float temp_f2;
-
-    u8 _[4];
 
     float phi_f1;
     float phi_f31;
-    float temp_fmuls;
-    float temp_fmuls2;
     float temp_add;
 
     fp = getFighter(gobj);
-    temp_f2 = fp->self_vel.x;
-    temp_f1 = fp->self_vel.y;
     ness_attr = getFtSpecialAttrs2(fp);
-    temp_fmuls = temp_f2 * temp_f2;
-    temp_fmuls2 = temp_f1 * temp_f1;
 
-    temp_sqrt = sqrtf(temp_fmuls + temp_fmuls2);
-    if (temp_sqrt < 0.0f) {
-        temp_f1_5 = fp->self_vel.x;
-        temp_f0 = fp->self_vel.y;
-        temp_fmuls = temp_f1_5 * temp_f1_5;
-        temp_fmuls2 = temp_f0 * temp_f0;
-        temp_add = temp_fmuls + temp_fmuls2;
-        phi_f1 = -sqrtf__Ff(temp_add);
-    } else {
-        temp_f1_6 = fp->self_vel.x;
-        temp_f0_2 = fp->self_vel.y;
-        temp_fmuls = temp_f1_6 * temp_f1_6;
-        temp_fmuls2 = temp_f0_2 * temp_f0_2;
-        temp_add = temp_fmuls + temp_fmuls2;
-        phi_f1 = sqrtf__Ff(temp_add);
-    }
+    phi_f1 = ABS(lbVector_Len_xy(&fp->self_vel));
     temp_f2 = phi_f1 - ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE;
     phi_f31 = temp_f2;
 
@@ -1382,16 +1289,16 @@ void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj)
     fp->self_vel.y = phi_f31 * sinf(fp->mv.ns.specialhi.aerialVel);
     ftNess_atan2(gobj);
     fp->mv.ns.specialhi.unkVector1 = fp->self_vel;
-    if ((u32) fp->cmd_vars[0] == 1U) {
-        fp->mv.ns.specialhi.fallAccel = (float) fp->mv.ns.specialhi.fallAccel -
+    if (fp->cmd_vars[0] == 1U) {
+        fp->mv.ns.specialhi.fallAccel = fp->mv.ns.specialhi.fallAccel -
                                         ness_attr->x50_PK_THUNDER_FALL_ACCEL;
-        if ((float) fp->mv.ns.specialhi.fallAccel <
+        if (fp->mv.ns.specialhi.fallAccel <
             -ness_attr->x54_PK_THUNDER_2_MOMENTUM)
         {
             fp->mv.ns.specialhi.fallAccel =
                 -ness_attr->x54_PK_THUNDER_2_MOMENTUM;
         }
-        fp->cur_pos.y += (float) fp->mv.ns.specialhi.fallAccel;
+        fp->cur_pos.y += fp->mv.ns.specialhi.fallAccel;
     }
 }
 
@@ -1405,7 +1312,7 @@ void ftNs_SpecialAirHiRebound_Phys(
 
     fighter_attr = &fp->co_attrs;
     fighter_attr == NULL;
-    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, fighter_attr->aerial_friction);
 }
 

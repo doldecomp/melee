@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <melee/gm/types.h>
-
 static struct {
     u8 x0;
     u8 x1;
@@ -59,7 +57,7 @@ static int lbl_803D5648[] = {
 };
 
 struct lbl_803D5A4C_t {
-    /* +0 */ short kind;
+    /* +0 */ s16 kind;
     /* +2 */ u16 x2;
     /* +4 */ u8 x4;
     /* +5 */ u8 x5; ///< Gm_DecType

@@ -3,19 +3,16 @@
 #include "inlines.h"
 
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F7D60[] = {
     { 0, itUnknown_UnkMotion0_Anim, itUnknown_UnkMotion0_Phys,
@@ -243,7 +240,7 @@ void it_802CED54(Item_GObj* gobj)
     spawn.x3C_damage = 0;
     spawn.vel = ip->xDD4_itemVar.unknown.x78.vec;
     spawn.x40 = 0;
-    spawn.kind = 0xC7;
+    spawn.kind = It_Kind_Unknown_Swarm;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
     spawn.x44_flag.b0 = false;

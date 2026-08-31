@@ -11,7 +11,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -22,7 +22,7 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
-StageCallbacks grOy_803E6488[] = {
+StageCallbacks grOy_StageCallbacks[] = {
     { grOldYoshi_8020E93C, grOldYoshi_8020E968, grOldYoshi_8020E970,
       grOldYoshi_8020E974, 0 },
     { grOldYoshi_8020E978, grOldYoshi_8020E9E0, grOldYoshi_8020E9E8,
@@ -37,9 +37,9 @@ StageCallbacks grOy_803E6488[] = {
       grOldYoshi_8020EAF8, 0 },
 };
 
-StageData grOy_803E650C = {
-    29,
-    grOy_803E6488,
+StageData grOy_StageData = {
+    Gr_Kind_OldYoshi,
+    grOy_StageCallbacks,
     "/GrOy.dat",
     grOldYoshi_8020E79C,
     grOldYoshi_8020E798,
@@ -48,8 +48,8 @@ StageData grOy_803E650C = {
     grOldYoshi_8020E84C,
     grOldYoshi_8020F404,
     grOldYoshi_8020F40C,
-    1,
-    0,
+    (1 << 0),
+    NULL,
     0,
 };
 
@@ -98,7 +98,7 @@ bool grOldYoshi_8020E84C(void)
 HSD_GObj* grOldYoshi_8020E854(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grOy_803E6488[gobj_id];
+    StageCallbacks* callbacks = &grOy_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -150,10 +150,8 @@ void grOldYoshi_8020E9EC(Ground_GObj* arg) {}
 void grOldYoshi_8020E9F0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
 }
@@ -174,10 +172,8 @@ void grOldYoshi_8020EA88(Ground_GObj* arg) {}
 void grOldYoshi_8020EA8C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x11_flags.b012 = 1;
 }
 
@@ -312,27 +308,8 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
 
 void grOldYoshi_8020EFC8(Ground_GObj* arg) {}
 
-static inline s32 randi_between(s32 min, s32 max)
-{
-    if (max > min) {
-        if (min - max != 0) {
-            return max + HSD_Randi(max - min);
-        } else {
-            return max;
-        }
-    } else if (max < min) {
-        if (min - max != 0) {
-            return min + HSD_Randi(max - min);
-        } else {
-            return min;
-        }
-    } // else {
-    //    return min;
-    //}
-}
-
 /// @todo For some reason, the normal GET_GROUND didn't work here
-inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
+static inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {
     return arg0->user_data;
 }

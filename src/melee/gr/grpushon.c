@@ -13,16 +13,15 @@
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <sysdolphin/baselib/lobj.h>
-#include <MSL/math.h>
 
 struct grPushOn_Entry {
     s32 x0;
@@ -63,10 +62,12 @@ static struct grPushon_YakumonoParam* yakumono_param;
                                      float delta_y);
 
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata(void)
 {
     (void) "0";
 }
+#endif
 
 Vec3 const grPushOn_803B8440 = { 0 };
 Vec3 const grPushOn_803B844C = { 0 };
@@ -74,18 +75,33 @@ Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
 Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
 float grPushOn_804D4934 = 16.0f;
 
-StageCallbacks grPushOn_803E7AC8[3] = {
-    { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
-      grPushOn_8021859C, 0 },
-    { grPushOn_802185A0, grPushOn_80218670, grPushOn_802186C8,
-      grPushOn_802187A4, 0xC0000000 },
-    { grPushOn_802187A8, grPushOn_80218880, grPushOn_80218888,
-      grPushOn_80218ED0, 0 },
+StageCallbacks grPushOn_StageCallbacks[] = {
+    {
+        grPushOn_802184CC,
+        grPushOn_80218590,
+        grPushOn_80218598,
+        grPushOn_8021859C,
+        0,
+    },
+    {
+        grPushOn_802185A0,
+        grPushOn_80218670,
+        grPushOn_802186C8,
+        grPushOn_802187A4,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grPushOn_802187A8,
+        grPushOn_80218880,
+        grPushOn_80218888,
+        grPushOn_80218ED0,
+        0,
+    },
 };
 
-StageData grPushOn_803E7B10 = {
-    PUSHON,
-    grPushOn_803E7AC8,
+StageData grPushOn_StageData = {
+    Gr_Kind_Pushon,
+    grPushOn_StageCallbacks,
     "/GrNPo.dat",
     grPushOn_802182C8,
     grPushOn_802182C4,
@@ -117,7 +133,7 @@ void grPushOn_80218330(void)
     Vec3 vec;
 
     grPushOn_802183E4(2);
-    gobj = Ground_801C57A4();
+    gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &vec);
         Ground_801C38BC(vec.x, vec.y);
@@ -148,7 +164,7 @@ bool grPushOn_802183DC(void)
 HSD_GObj* grPushOn_802183E4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grPushOn_803E7AC8[gobj_id];
+    StageCallbacks* callbacks = &grPushOn_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -227,7 +243,7 @@ bool grPushOn_80218670(Ground_GObj* arg)
 
 bool fn_80218678(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(1);
+    HSD_GObj* gobj = Ground_GetMapGObj(1);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
@@ -248,7 +264,7 @@ void grPushOn_802186C8(Ground_GObj* gobj)
     vec = grPushOn_803B8440;
     Ground_801C3D44(fn_80218678, 25.0f, 20.0f);
     {
-        HSD_GObj* gobj2 = Ground_801C57A4();
+        HSD_GObj* gobj2 = Ground_GetP1Fighter();
         if (gobj2 != NULL) {
             ftLib_80086644(gobj2, &vec);
             Ground_801C0498();
@@ -323,7 +339,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
     GET_GROUND(0);
 
     gp = GET_GROUND(gobj);
-    player = Ground_801C57A4();
+    player = Ground_GetP1Fighter();
     if (player != NULL) {
         ftLib_80086644(player, &player_pos);
     } else {
@@ -334,7 +350,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
 
     if (gp->u.pushon.gobj != 0) {
         i = 0;
-        while (i < (s32) gp->u.pushon.count) {
+        while (i < gp->u.pushon.count) {
             HSD_LObj* lobj = gp->u.pushon.lobjs[i];
             s32 type = lobj->flags & 3;
 
@@ -700,16 +716,16 @@ DynamicsDesc* grPushOn_80219458(enum_t arg0)
             }
             if (joint == 2) {
                 kind = mpLineGetKind(arg0);
-                if (kind == 1) {
+                if (kind == CollLine_Floor) {
                     return yakumono_param->x8;
                 }
-                if (kind == 2) {
+                if (kind == CollLine_Ceiling) {
                     return yakumono_param->xC;
                 }
-                if (kind == 4) {
+                if (kind == CollLine_RightWall) {
                     return yakumono_param->x10;
                 }
-                if (kind == 8) {
+                if (kind == CollLine_LeftWall) {
                     return yakumono_param->x14;
                 }
                 return NULL;

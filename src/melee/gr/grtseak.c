@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -9,13 +8,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 223864 */ static void grTSeak_OnDemoInit(bool);
@@ -39,7 +36,7 @@
 /* 223B38 */ static DynamicsDesc* grTSeak_OnTouchLine(enum_t);
 /* 223B40 */ static bool grTSeak_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSk_803E94B8[] = {
+static StageCallbacks grTSk_StageCallbacks[] = {
     {
         grTSeak_802239F0,
         grTSeak_80223A1C,
@@ -64,9 +61,9 @@ static StageCallbacks grTSk_803E94B8[] = {
     { 0 },
 };
 
-StageData grTSk_803E9514 = {
-    TSEAK,
-    grTSk_803E94B8,
+StageData grTSk_StageData = {
+    Gr_Kind_TSeak,
+    grTSk_StageCallbacks,
     "/GrTSk.dat",
     grTSeak_OnInit,
     grTSeak_OnDemoInit,
@@ -100,7 +97,7 @@ bool grTSeak_80223900(void)
 HSD_GObj* grTSeak_80223908(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTSk_803E94B8[arg0];
+    StageCallbacks* callbacks = &grTSk_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

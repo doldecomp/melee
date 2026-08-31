@@ -19,7 +19,6 @@
 #include "ft/ft_0DF0.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
@@ -37,7 +36,7 @@
 #include "it/items/itfflowerflame.h"
 #include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_013B.h"
 
 #include "mp/forward.h"
 
@@ -46,10 +45,7 @@
 #include "pl/plbonuslib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <trigf.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -479,7 +475,7 @@ void ftCommon_Fall(Fighter* fp, float gravity, float terminal_vel)
 
 void ftCommon_FallBasic(Fighter* fp)
 {
-    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
 }
 
 void ftCommon_FallFast(Fighter* fp)
@@ -641,7 +637,7 @@ void ftCommon_UpdateFacing(Fighter* fp)
 
 void ftCommon_8007DA24(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) > p_ftCommonData->x0) {
+    if (ABS(fp->input.lstick.x) > p_ftCommonData->horizontal_stick_deadzone) {
         ftCommon_UpdateFacing(fp);
     }
 }
@@ -676,11 +672,6 @@ void ftCommon_8007DB58(HSD_GObj* gobj)
     }
 }
 
-extern struct {
-    Vec2* x0;
-    s32 x4;
-}* Fighter_804D652C;
-
 void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
 {
     fp->grab_timer = timer;
@@ -689,7 +680,7 @@ void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
     fp->x2224_b6 = arg1;
     if (fp->x2224_b6) {
         fp->x1A52 = 0;
-        fp->x1A53 = Fighter_804D652C->x4;
+        fp->x1A53 = Fighter_GrabMashShake->x4;
     }
 }
 
@@ -922,7 +913,7 @@ void ftCommon_8007E2F4(Fighter* fp, s16 val)
     fp->x1A6A = val;
 }
 
-inline void _func_8007E2FC_inline(HSD_GObj* gobj)
+static inline void _func_8007E2FC_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->xE4_ground_accel_1 = 0;
@@ -1055,8 +1046,7 @@ void it_8028B850(HSD_GObj*, float);
 void it_8028B648(HSD_GObj*, float);
 void it_8028B6B0(HSD_GObj*, float);
 void it_8028B618(HSD_GObj*, float);
-void it_802BDD40(HSD_GObj*, float);
-void it_802BDDB4(HSD_GObj*, float);
+
 static void (*parasol_table_1[7])(HSD_GObj*, float) = {
     it_8028B718, it_8028B780, it_8028B7E8, it_8028B850,
     it_8028B648, it_8028B6B0, it_8028B618,
@@ -1285,7 +1275,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->input = src->input;
     dst->x670_timer_lstick_tilt_x = src->x670_timer_lstick_tilt_x;
     dst->x671_timer_lstick_tilt_y = src->x671_timer_lstick_tilt_y;
-    dst->x672_input_timer_counter = src->x672_input_timer_counter;
+    dst->trigger_analog_timer = src->trigger_analog_timer;
     dst->x673 = src->x673;
     dst->x674 = src->x674;
     dst->x675 = src->x675;
@@ -1356,7 +1346,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x221E_b4 = src->x221E_b4;
     if (src->x197C != NULL) {
         it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->x12);
-        it_802950D4(src->x197C, 0);
+        it_802950D4(src->x197C, false);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
     } else {
@@ -1493,7 +1483,7 @@ void ftCommon_8007F8E8(HSD_GObj* gobj)
 
 extern void (*ftData_UnkMotionStates1[])(HSD_GObj*);
 
-inline void _func_8007F948_inline(HSD_GObj* gobj)
+static inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
@@ -1592,7 +1582,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
     ft_PlaySFX(fp, 0x11F, 0x7F, 0x40);
 }
 
-inline float fminf(float a, float b)
+static inline float my_fminf(float a, float b)
 {
     float result = a;
     if (a > b) {
@@ -1613,8 +1603,8 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     temp_r30 = &fp->co_attrs.x130;
-    phi_f31 = fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708,
-                    p_ftCommonData->x70C);
+    phi_f31 = my_fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708,
+                       p_ftCommonData->x70C);
     temp_f1 = 1.0f / phi_f31;
     sp20 = *temp_r30;
     sp20.x *= temp_f1;
@@ -1728,7 +1718,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
         fp->dmg.x18BC += shift.y;
     }
     if (fp->x2224_b5) {
-        Vec2* temp_r3 = &Fighter_804D652C->x0[fp->x1A52];
+        Vec2* temp_r3 = &Fighter_GrabMashShake->x0[fp->x1A52];
         shift.x = temp_r3->x;
         shift.y = temp_r3->y;
         result = &shift;

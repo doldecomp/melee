@@ -1,6 +1,5 @@
 #include "ftmetal.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/id.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -146,14 +145,6 @@ void ftCo_800C8540(Fighter_GObj* gobj)
         ft_800C8170(fp);
         ftCommon_80080474(fp);
     }
-}
-
-static inline HSD_DObj* dobj_next(HSD_DObj* dobj)
-{
-    if (dobj != NULL) {
-        return dobj->next;
-    }
-    return NULL;
 }
 
 void ft_800C85B8(Fighter_GObj* gobj)

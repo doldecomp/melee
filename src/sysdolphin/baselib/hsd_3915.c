@@ -2,29 +2,15 @@
 
 #include "hsd_3915.static.h"
 
-#include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h> // IWYU pragma: keep
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
-#include <dolphin/mcc.h>
-#include <dolphin/os.h>
-#include <dolphin/pad.h>
-#include <dolphin/vi.h>
 #include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/list.h>
 #include <baselib/memory.h>
-#include <baselib/mtx.h>
 #include <baselib/perf.h>
-#include <baselib/psappsrt.h>
-#include <baselib/psstructs.h>
-#include <baselib/random.h>
 #include <baselib/state.h>
-#include <baselib/video.h>
-#include <MetroTRK/ppc_reg.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 
@@ -212,7 +198,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
 
     glyph = &lbl_80408630[index * 13];
     i = 0;
-    while (i < 0x29 && (u8) glyph[i] != 0xFF) {
+    while (i < 0x29 && glyph[i] != 0xFF) {
         p0 = glyph[i++];
         p1 = glyph[i++];
         GXBegin(0xA8, 0, 2);
@@ -313,7 +299,7 @@ s32 hsd_80391AC8(char* str, GXColor* color, f32 x, f32 y)
     return (s32) x;
 }
 
-void hsd_80391E18(u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
+void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
 {
     f32 dx;
     f32 dy;
@@ -401,16 +387,15 @@ static inline void hsd_80391F28_calc_tick4_y(f32 perp_y, f32* tick4_y)
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
-    f32 dx;
-    f32 dy;
+    f32 step_y;
+    f32 tick6_y;
     f32 perp_x;
     f32 perp_y;
-    f32 tick6_y;
+    f32 dy;
     f32 tick4_x;
+    f32 dx;
     f32 tick4_y;
-    f32 step_y;
     f32 step_x;
-    f32 len;
     s32 i;
     u8 r, g, b, a;
 
@@ -423,12 +408,12 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 
     GXWGFifo.f32 = x1;
     i = 0;
-    a = color->a;
     GXWGFifo.f32 = y1;
-
-    b = color->b;
-    g = color->g;
     r = color->r;
+    GXWGFifo.u8 = r;
+    g = color->g;
+    b = color->b;
+    a = color->a;
 
     tick6_y = 6.0F * perp_y;
     {
@@ -438,7 +423,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     tick4_x = 4.0F * perp_x;
     hsd_80391F28_calc_tick4_y(perp_y, &tick4_y);
 
-    GXWGFifo.u8 = r;
     GXWGFifo.u8 = g;
     GXWGFifo.u8 = b;
     GXWGFifo.u8 = a;
@@ -483,7 +467,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     }
 }
 
-void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
+void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
 {
     u8 b;
     dst[0] = src[0];
@@ -495,18 +479,28 @@ void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
     dst[1] = b;
 }
 
+typedef void (*GlyphFn)(u8* dst, s32 flags, s32 unused1, s32 unused2,
+                        const u8* src);
+
 typedef struct {
     /* 0x00 */ s32 x0;
-    /* 0x04 */ void (*callback)(void* dst, s32 x, s32 y, s32 val, void* self);
+    /* 0x04 */ GlyphFn callback;
 } GlyphEntry;
 
-extern GlyphEntry lbl_80408898[4];
+GlyphEntry lbl_80408898[4] = {
+    { 0x10808000, hsd_80392194 },
+    { 0x46808000, hsd_80392194 },
+    { 0x7C808000, hsd_80392194 },
+    { 0xB3808000, hsd_80392194 },
+};
 
-// @TODO: Currently 72.88% match - needs register allocation fixes
+DebugFontGlyph HSD_DebugFontAtlas[] ATTRIBUTE_ALIGN(32) = {
+#include <sysdolphin/baselib/debug_font.inc>
+};
+
 void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
                   s32 stride, void* tbl)
 {
-    volatile s32 v_stride;
     s32 bit_x;
     s32 cur_dst;
     u32 max_x;
@@ -522,7 +516,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     u8* bmp;
     GlyphEntry* entry;
 
-    v_stride = stride;
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -544,7 +537,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
         s32 col;
         col = x;
         bit_x = off_x;
-        cur_dst = dst + (y * v_stride) + x2;
+        cur_dst = dst + (s32) ((u32) y * (u32) stride) + x2;
         while ((u32) col < max_x) {
             word =
                 *(u32*) (bmp + data_off + (((u32) bit_x >> 2) & 0x3FFFFFFC));
@@ -553,7 +546,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
             while (bit_off < 16 && (u32) col < max_x) {
                 val = (word >> ((15 - bit_off) * 2)) & 3;
                 entry = &table[val];
-                entry->callback((void*) shift, col, y, val, entry);
+                entry->callback((u8*) shift, col, y, val, (const u8*) entry);
                 bit_off++;
                 bit_x++;
                 shift += 2;
@@ -567,11 +560,9 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     }
 }
 
-// @TODO: Currently 85% match - needs register allocation fixes
 void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
                   s32 h, s32 stride, void* tbl)
 {
-    volatile s32 v_stride;
     s32 bit_x;
     s32 cur_dst;
     u32 max_x;
@@ -593,7 +584,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     if (tbl == NULL) {
         tbl = lbl_80408898;
     }
-    v_stride = stride;
     if (y < 0) {
         off_y = -y;
         y = 0;
@@ -614,7 +604,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
         s32 col;
         col = x;
         bit_x = off_x;
-        cur_dst = dst + (row_idx * v_stride) + x2;
+        cur_dst = dst + (s32) ((u32) row_idx * (u32) stride) + x2;
         while ((u32) col < max_x) {
             word =
                 *(u32*) (bmp + data_off + (((u32) bit_x >> 2) & 0x3FFFFFFC));
@@ -623,7 +613,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
             while (bit_off < 16 && (u32) col < max_x) {
                 val = (word >> ((15 - bit_off) * 2)) & 3;
                 entry = &((GlyphEntry*) tbl)[val];
-                entry->callback((void*) shift, col, y, val, entry);
+                entry->callback((u8*) shift, col, y, val, (const u8*) entry);
                 bit_off++;
                 bit_x++;
                 shift += 2;
@@ -666,7 +656,8 @@ block_1: {
             goto block_1;
         }
         {
-            struct EventPriority* data = HSD_MemAlloc(8);
+            struct EventPriority* data =
+                HSD_MemAlloc(sizeof(struct EventPriority));
             data->event = event;
             data->priority = priority;
             if (prev != NULL) {
@@ -680,20 +671,24 @@ block_1: {
 }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void hsd_80392528(Event event)
 {
     fn_80392480(event, 0x80);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static u32 lbl_804D6084;
 static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 
 typedef struct {
     s32 count;
-    u32 color;
+    GXColor color;
 } DispBar;
 
 typedef struct _DispItem {
@@ -708,7 +703,47 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
-// @TODO: Currently 89.78% match - needs minor control flow and register fixes
+static inline s32 count_bar_units(DispItem* item)
+{
+    s32 total = 0;
+    s32 count;
+
+    while ((count = item->content.bars[0].count) > 0) {
+        total += count;
+        item = (DispItem*) ((DispBar*) item + 1);
+    }
+    return total;
+}
+
+static inline s32 count_text_chars(char* text)
+{
+    s32 count;
+    s32 i;
+    s32 len;
+
+    if (text == NULL) {
+        return 0;
+    }
+    count = 0;
+    len = strlen(text);
+    i = count;
+    while (i < len) {
+        if ((s8) text[i] != '\\') {
+            count++;
+        } else {
+            i++;
+            switch ((s8) text[i]) {
+            case 'c':
+            case 'C':
+                i += 6;
+                break;
+            }
+        }
+        i++;
+    }
+    return count;
+}
+
 void hsd_8039254C(void)
 {
     static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
@@ -717,12 +752,7 @@ void hsd_8039254C(void)
     f32 bar_x;
     f32 t2;
     GXColor default_col;
-    GXColor bg_col0;
-    GXColor bg_col1;
-    GXColor txt_col;
-    GXColor bg_col2;
-    GXColor bg_col3;
-    GXColor bar_col;
+    DispItem* bar_draw_ptr;
     s32 char_count;
     s32 count;
     GXColor* p_bg_col0;
@@ -735,16 +765,12 @@ void hsd_8039254C(void)
     s32 first;
     HSD_SList* event_node;
 
-    p_bar_col = &bar_col;
-    p_bg_col3 = &bg_col3;
-    p_bg_col2 = &bg_col2;
-    p_bg_col1 = &bg_col1;
-    p_txt_col = &txt_col;
-    p_bg_col0 = &bg_col0;
+    PAD_STACK(4);
+
     col_pos = 60;
     first = 1;
     line = 1.0F;
-    event_node = (HSD_SList*) hsd_804D7850;
+    event_node = hsd_804D7850;
     default_col = *(GXColor*) &lbl_804DE8E0;
 
     while (event_node != NULL) {
@@ -755,6 +781,8 @@ void hsd_8039254C(void)
 
         while (item != NULL) {
             if (first != 0) {
+                GXColor bg_col0;
+                p_bg_col0 = &bg_col0;
                 if (lbl_804D6080.a != 0) {
                     hsd_80391A04(10.0F, 10.0F, 6);
                     bg_col0 = lbl_804D6080;
@@ -763,34 +791,12 @@ void hsd_8039254C(void)
                 first = 0;
             }
             switch (item->type) {
-            case 0:
-                if ((&item->content) == NULL) {
-                    char_count = 0;
-                } else {
-                    char_count = 0;
-                    {
-                        s32 j = 0;
-                        s32 len = strlen(item->content.text);
-                        char_count = j;
-                        while (j < len) {
-                            if ((s8) item->content.text[j] != '\\') {
-                                char_count++;
-                            } else {
-                                j++;
-                                {
-                                    char* tmp = item->content.text;
-                                    switch ((s8) tmp[j]) {
-                                    case 'c':
-                                    case 'C':
-                                        j += 6;
-                                        break;
-                                    }
-                                }
-                            }
-                            j++;
-                        }
-                    }
-                }
+            case 0: {
+                GXColor bg_col1;
+                GXColor txt_col;
+                p_bg_col1 = &bg_col1;
+                p_txt_col = &txt_col;
+                char_count = count_text_chars(item->content.text);
                 if (col_pos + char_count > 60) {
                     line -= 1.0F;
                     col_pos = 0;
@@ -806,7 +812,10 @@ void hsd_8039254C(void)
                              (f32) (col_pos * 10), 10.0F * line);
                 col_pos = col_pos + (2 + char_count);
                 break;
-            case 2:
+            }
+            case 2: {
+                GXColor bg_col2;
+                p_bg_col2 = &bg_col2;
                 if (col_pos != 0) {
                     line = (f32) ((f64) line - 0.5);
                     if (lbl_804D6080.a != 0) {
@@ -820,18 +829,13 @@ void hsd_8039254C(void)
                 hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
                 col_pos = 60;
                 break;
+            }
             case 1: {
-                DispItem* bar_ptr;
-                DispItem* bar_draw_ptr;
-
-                bar_ptr = item;
-                char_count = 0;
-                {
-                    while ((count = bar_ptr->content.bars[0].count) > 0) {
-                        char_count += count;
-                        bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
-                    }
-                }
+                GXColor bg_col3;
+                GXColor bar_col;
+                p_bar_col = &bar_col;
+                p_bg_col3 = &bg_col3;
+                char_count = count_bar_units(item);
                 if (char_count > 0) {
                     if (col_pos != 0) {
                         line = (f32) ((f64) line - 0.5);
@@ -851,10 +855,8 @@ void hsd_8039254C(void)
                         {
                             f32 prev_x;
                             prev_x = bar_x;
-                            bar_col =
-                                *(GXColor*) &bar_draw_ptr->content.bars[0]
-                                     .color;
                             bar_x += (600.0F / (f32) char_count) * (f32) count;
+                            bar_col = bar_draw_ptr->content.bars[0].color;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                 (f32) bar_draw_ptr->content.bars[0].count);
@@ -912,8 +914,10 @@ void fn_80392934(void)
 static s32 lbl_804D6088 = 4;
 static s32 lbl_804D608C = 1;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_80392A08(int mode, int scale, int enable)
 {
     lbl_804D6088 = mode;
@@ -925,7 +929,9 @@ void fn_80392A08(int mode, int scale, int enable)
     }
     hsd_804D7888 = enable;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static s32 lbl_804D6090 = -1;
 static s32 lbl_804D6094 = (s32) 0xFF0000FF;
@@ -934,8 +940,6 @@ static s32 lbl_804D609C = 0x00FFFFFF;
 static s32 lbl_804D60A0 = 0x8080FF;
 static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 
-// @TODO: Currently 89.63% match - needs register allocation and expression
-// fixes
 static inline PerfDispItem* get_perf_disp_item(s32 count)
 {
     return &hsd_804CE3F8[count];
@@ -954,8 +958,11 @@ void* fn_80392A3C(void)
     numFrames = lbl_804D6088;
     if (0 != numFrames) {
         u8* counts = &hsd_804CE3F8[0].content.bytes[0];
-        u8* colors_base = &hsd_804CE3F8[0].content.bytes[4];
-        u8* colors = colors_base;
+        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
+        // Self-assign forces colors into r5 and green's stack slot to 0x8.
+#ifdef MUST_MATCH
+        colors = colors;
+#endif
         hsd_804CE3F8[0].type = 1;
         *(s32*) counts = 1;
         bar_count = count;

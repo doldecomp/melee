@@ -2,13 +2,16 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -30,6 +33,7 @@ void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
@@ -42,9 +46,10 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
-inline void startActionHelper(HSD_GObj* gobj)
+static inline void startActionHelper(HSD_GObj* gobj)
 {
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2; // r5
@@ -171,7 +176,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
         if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
         } else {
-            ftCommon_Fall(fp, sa->xC, da->terminal_vel);
+            ftCommon_Fall(fp, sa->xC, da->terminal_velocity);
         }
     }
 

@@ -8,14 +8,30 @@
 
 #include "dolphin/types.h"
 
-#include <melee/ft/forward.h>
+#include "ty/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
 
-#include <common_structs.h>
+#include <dolphin/gx.h>
+#include <dolphin/pad.h>
 #include <melee/mn/types.h>
+
+/// @deprecated Replace with inline bitfields
+typedef union UnkFlagStruct {
+    u8 u8;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+} UnkFlagStruct;
 
 struct UnkMultimanData {
     u16 x0_0 : 1;
@@ -34,74 +50,58 @@ struct DebugGameOverData {
     /* 16 */ u16 x16;
     /* 18 */ u16 x18;
 };
+ASSERT_SIZE(struct DebugGameOverData, 0x1C);
 
-/// @note Colloquially known as "Minor Scene"
-struct GameScene {
-    /* 00 */ u8 idx;
-    /* 01 */ u8 preload;
-    /* 02 */ u16 flags;
+typedef struct un_804A1F48_t {
+    u16 x0;
+    u16 x2;
+    s32 x4;
+    UNK_T x8;
+} un_804A1F48_t;
+ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
-    /* 04 */ void (*Prep)(GameScene*);
-    /* 08 */ void (*Decide)(GameScene*);
+struct GameModeState {
+    /* +0 */ u8 id;      ///< locally defined by game mode
+    /* +1 */ u8 preload; ///< ::lbDvdPreloadKind
+    /* +2 */ u16 flags;
+
+    /* +4 */ void (*on_enter)(GameModeState*);
+    /* +8 */ void (*on_exit)(GameModeState*);
 
     struct GameSceneInfo {
-        /* 0C */ u8 class_id;
-        /* 10 */ void* load_data;  ///< data passed to OnLoad callback
-        /* 14 */ void* leave_data; ///< data passed to OnLeave callback
+        /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
+        /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
+        /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
     } info;
 };
 
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
-    u8 preload;
-    u8 idx; ///< GameModeKind
+    u8 preloaded; ///< ::bool
+    u8 kind;      ///< ::GameModeKind
 
-    void (*Load)(void);
-    void (*Unload)(void);
-    void (*Init)(void);
+    void (*on_load)(void);
+    void (*on_unload)(void);
+    void (*on_init)(void);
 
-    GameScene* scenes;
-}; // 803DACA4
-
-struct GameSceneHandler {
-    u8 class_id;
-
-    void (*OnFrame)(void);
-    void (*OnLoad)(void*);
-    void (*OnLeave)(void*);
-    void (*unk_func)(void);
-}; // 803DA920
-
-typedef struct {
-    u8 curr_mode;         ///< GameModeKind
-    u8 pending_mode;      ///< GameModeKind
-    u8 prev_mode;         ///< GameModeKind
-    u8 curr_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 prev_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 pending_scene_idx; ///< scene graph scene index for associated GameMode
-} GameRouting;
-
-typedef struct {
-    GameRouting routing;
-    GameRouting backup;
-    u8 pending;
-    u8 x0D;
-    u8 x0E;
-    u8 x0F;
-    u8 (*game_mode_override)(void);
-} GameState;
-STATIC_ASSERT(sizeof(GameState) == 0x14);
-
-struct sceneData {
-    u32 a;
-    u8 scene_id;
+    GameModeState* states;
 };
+
+/// @note Colloquially known as "Minor Scene"
+struct GameScene {
+    u8 kind; ///< ::GameSceneKind
+    void (*on_frame)(void);
+    void (*on_enter)(void*);
+    void (*on_exit)(void*);
+    UNUSED UNK_T unused;
+};
+ASSERT_SIZE(struct GameScene, 0x14);
 
 struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;
     /* +1 */ u8 pad_x1[0x8 - 0x1];
     /* +8 */ u64 item_mask;
-    /* +10 */ u8 rumble[4];
+    /* +10 */ u8 rumble_enabled[PAD_MAX_CONTROLLERS];
     /* +14 */ u8 sound_balance;
     /* +15 */ u8 deflicker;
     /* +16 */ u8 saved_language; /* 0x1CC6 */
@@ -191,7 +191,7 @@ struct NameTagData {
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
-    /* 0x1A1 */ u8 rumble_toggle;
+    /* 0x1A1 */ u8 rumble_enabled;
     /* 0x1A2 */ s8 x1A2;
     /* 0x1A3 */ u8 padding_x1A2;
 };
@@ -223,7 +223,7 @@ struct GameRules {
     /* 0x13 */ u8 x13;
     /* 0x14 */ s32 unk_14; /* inferred */
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
+ASSERT_SIZE(struct GameRules, 0x18);
 
 struct gmm_retval_ED98 {
     u32 x0;
@@ -274,12 +274,12 @@ struct gmm_x1868 {
         /* 0x01AD +5 */ u8 x5;
         /* 0x01AE +6 */ u8 x6;
     } unk_1A8;
-    /* 0x01B0 */ s32 x1A18;
-    /* 0x01B4 */ s32 x1A1C;
-    /* 0x01B8 */ s32 x1A20;
-    /* 0x01BC */ s32 x1A24;
-    /* 0x01C0 */ s32 x1A28;
-    /* 0x01C4 */ s32 x1A2C;
+    /* 0x01B0 */ u32 time_matches;
+    /* 0x01B4 */ u32 stock_matches;
+    /* 0x01B8 */ u32 coin_matches;
+    /* 0x01BC */ u32 bonus_matches;
+    /* 0x01C0 */ u32 stamina_matches;
+    /* 0x01C4 */ u32 match_resets;
     /* 0x01C8 */ s32 x1A30;
     /* 0x01CC */ s32 x1A34;
     /* 0x01D0 */ s32 x1A38;
@@ -310,7 +310,7 @@ struct gmm_x1868 {
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
     /* 0x0468 */ s16 trophy_count;
     /* 0x046A */ u16 trophy_category_flags;
-    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x046C */ u16 trophy_flags[TY_TROPHY_COUNT];
     /* 0x06B6 */ u8 padding_trophy_flags[0xE];
     /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
@@ -370,7 +370,7 @@ struct gmm_x0 {
         /* 0x0570 */ int x40;
         /* 0x0574 */ s8 x44;
         /* 0x0575 */ u8 x45;
-        /* 0x0578 */ InternalStageId x48;
+        /* 0x0578 */ StKind x48;
         /* 0x057C */ s8 x4C[4]; ///< CharacterKind
         /* 0x0580 */ u8 x50[4]; ///< character color
         struct gmm_x0_584_t {
@@ -382,26 +382,26 @@ struct gmm_x0 {
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
-    /* 0x0590 */ VsModeData unk_590; ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
-    /* 0x0810 */ VsModeData unk_810; ///< invisible melee
-    /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90;  ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;  ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;  ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;  ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;  ///< giant melee
-    /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
-    /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
+    /* 0x0590 */ VsModeData vs_melee; ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;  ///< super sudden death
+    /* 0x0810 */ VsModeData unk_810;  ///< invisible melee
+    /* 0x0950 */ VsModeData vs_camera;
+    /* 0x0A90 */ VsModeData unk_A90;    ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;    ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;    ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;    ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;    ///< giant melee
+    /* 0x10D0 */ VsModeData vs_stamina; ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210;   ///< slowmo melee
+    /* 0x1350 */ VsModeData unk_1350;   ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490;   ///< multiman, 3/15 min, endless, cruel
     /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
     /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
-STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
+ASSERT_SIZE(struct gmm_x0, 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
@@ -544,7 +544,7 @@ struct lbl_8046B6A0_t {
     /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
     /* 0x24C8 */ struct StartMeleeRules x24C8;
 }; /* size = 0x2528 */
-STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
+ASSERT_SIZE(struct lbl_8046B6A0_t, 0x2528);
 
 struct datetime {
     u16 year;
@@ -579,17 +579,15 @@ struct gm_8017DB6C_arg0_t {
     /* +1 */ u8 x1;
     /* +2 */ u8 _1[0xC - 0x2];
 };
-STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
+ASSERT_SIZE(struct gm_8017DB6C_arg0_t, 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    /* 00 */ bool x0;
+    /* 00 */ bool skip_intro;  ///< Skips the opening movie when booting
     /* 04 */ bool resetting;   ///< reset switch pressed
     /* 08 */ bool progressive; ///< true = progressive, false = interlaced
     /* 0C */ bool xC;          // movie playback done, maybe?
     /* 10 */ int x10, x14;
 };
-
-extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 
 typedef struct gm_803DF94C_t {
     void (*x0)(HSD_GObj*);
@@ -603,12 +601,12 @@ struct MatchTeamData {
     /* 0x09 */ u8 is_small_loser;
     /* 0x0A */ u8 active;
 }; // padded to 0x0C
-STATIC_ASSERT(sizeof(struct MatchTeamData) == 0xC);
+ASSERT_SIZE(struct MatchTeamData, 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
-    s8 character_kind;
-    s8 character_id;
+    s8 ckind;  ///< ::CharacterKind
+    s8 ftkind; ///< ::FighterKind
     u8 x3 : 6;
     u8 x3_6 : 1;
     u8 x3_7 : 1;
@@ -660,23 +658,23 @@ struct MatchPlayerData {
     int xA0;
     u32 xA4;
 };
-STATIC_ASSERT(sizeof(struct MatchPlayerData) == 0xA8);
+ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 
 struct MatchEnd {
     /* 0x00 */ u32 x0; ///< timer
     /* 0x04 */ u8 result;
-    /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 is_teams;
+    /* 0x05 */ u8 match_kind; ///< ::MatchKind
+    /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
     /* 0x08 */ u32 frame_count;
     /* 0x0C */ u8 xC;
     /* 0x0D */ u8 n_winners;
     /* 0x0E */ u8 n_team_winners;
     /* 0x0F */ u8 loser;
-    /* 0x10 */ u8 winners[6];
-    /* 0x16 */ u8 team_winners[5];
-    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
-    /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
+    /* 0x10 */ u8 winners[GM_MAX_PLAYERS];
+    /* 0x16 */ u8 team_winners[GM_MAX_TEAMS];
+    /* 0x1B */ struct MatchTeamData team_standings[GM_MAX_TEAMS];
+    /* 0x58 */ struct MatchPlayerData player_standings[GM_MAX_PLAYERS];
     /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
     /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];
@@ -684,7 +682,7 @@ struct MatchEnd {
     } x44C[4]; // 0x508 * 4 = 0x1420
     /* 0x186C */ u8 pad_x186C[0x227C - 0x186C];
 };
-STATIC_ASSERT(sizeof(struct MatchEnd) == 0x227C);
+ASSERT_SIZE(struct MatchEnd, 0x227C);
 
 struct MatchExitInfo {
     int x0;
@@ -692,7 +690,7 @@ struct MatchExitInfo {
     int x8;
     MatchEnd match_end;
 };
-STATIC_ASSERT(sizeof(struct MatchExitInfo) == 0x2288);
+ASSERT_SIZE(struct MatchExitInfo, 0x2288);
 
 struct ResultsMatchInfo {
     u8 x0_0 : 1;
@@ -804,7 +802,9 @@ struct TmData {
     u8 x32;
     u8 x33;
     u8 pad_x34[0x37 - 0x34];
+#if defined(MUST_MATCH) || defined(LINT)
 #pragma pack(push, 1)
+#endif
     struct TmUnkMenuData {
         u8 x0;
         u8 x1;
@@ -823,7 +823,9 @@ struct TmData {
         u8 xF;
         u8 pad_X10[0x12 - 0x10];
     } x37[64];
+#if defined(MUST_MATCH) || defined(LINT)
 #pragma pack(pop)
+#endif
     u8 pad_x4B7[0x4B8 - 0x4B7];
     struct UnkSelections {
         u8 x0; ///< slot type
@@ -844,7 +846,7 @@ struct TmData {
     HSD_Text* x534[3];
     u8 pad_x540[0x574 - 0x540];
 };
-STATIC_ASSERT(sizeof(struct TmData) == 0x574);
+ASSERT_SIZE(struct TmData, 0x574);
 
 struct NameData {
     // a lot of this is shared with a struct for character stats as well
@@ -885,7 +887,7 @@ struct CameraVsData {
 };
 
 struct TmVsData {
-    u32 stage_id;
+    StKind stkind;
     Gm_PKind slot_type[4];
     u32 char_id[4];
     u32 color[4];
@@ -905,7 +907,6 @@ struct gm_801677C0_s {
     /* +38 */ u8 unk_38_0 : 1;
     /* +38 */ u8 unk_38_1 : 1;
 };
-STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
 
 struct gm_80479D58_t {
     /*  +0 */ u32 unk_0;
@@ -914,7 +915,6 @@ struct gm_80479D58_t {
     /*  +C */ int unk_C;
     /* +10 */ struct gm_801677C0_s unk_10;
 };
-STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
 struct ResultsPlayerData {
     /* +00 */ u8 x0_0 : 1; ///< confirmed flag
@@ -970,7 +970,7 @@ struct ResultsData {
     /* +94 */ MatchEnd* x94;
     /* +98 */ struct ResultsPlayerData player_data[6];
 };
-STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
+ASSERT_SIZE(struct ResultsData, 0x5A8);
 
 struct gm_803DE650_t {
     u8 x0;
@@ -1010,14 +1010,14 @@ struct MenuEnterData {
         load_assets; ///< checks if the assets need to be loaded or not
     /* +03 */ s8 x3;
 };
-STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);
+ASSERT_SIZE(struct MenuEnterData, 0x4);
 
 /// @brief data passed to OnLeave callback for GM_MENU
 struct MenuExitData {
     /* +00 */ s8 pending_mode; ///< will set the next game mode
     /* +01 */ u8 _1[0x3];
 };
-STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
+ASSERT_SIZE(struct MenuExitData, 0x4);
 
 struct gmClassicMatchup;
 
@@ -1078,24 +1078,24 @@ struct TrainingMenuData {
 }; /// 80473814
 ///
 struct gm_8049E548_t {
-    /* 0x00 */ char c_kind[4];
+    /* 0x00 */ u8 c_kind[4];
     /* 0x04 */ u8 x4[4];
     /* 0x08 */ u8 unk_8;
     /* 0x09 */ u8 unk_9;
-    /* 0x0A */ s8 unk_A;
+    /* 0x0A */ u8 unk_A;
     /* 0x0B */ char pad_B[1];
-    /* 0x0C */ u16 unk_C; ///< InternalStageId
+    /* 0x0C */ u16 unk_C; ///< GrKind
     /* 0x0E */ s8 unk_E;  /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */
-STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
+ASSERT_SIZE(struct gm_8049E548_t, 0x10);
 
 struct TmBoxArrays {
     void* box2;
     void* box3;
     void* box4;
 };
-STATIC_ASSERT(sizeof(struct TmBoxArrays) == 0xC);
+ASSERT_SIZE(struct TmBoxArrays, 0xC);
 
 struct Lbl804799B8_t {
     u8 x0;
@@ -1226,7 +1226,7 @@ struct lbl_8046B488_t {
     /* 0x1C0 */ s8 x1C0[0x1B];
     /* 0x1DB */ char pad_1DB[0x1E0 - 0x1DB];
 }; /* size = 0x1E0 */
-STATIC_ASSERT(sizeof(struct lbl_8046B488_t) == 0x1E0);
+ASSERT_SIZE(struct lbl_8046B488_t, 0x1E0);
 
 typedef struct TmSettingTable {
     u8 pad_0[0x40];
@@ -1235,7 +1235,7 @@ typedef struct TmSettingTable {
 } TmSettingTable;
 STATIC_ASSERT(offsetof(struct TmSettingTable, min) == 0x40);
 STATIC_ASSERT(offsetof(struct TmSettingTable, max) == 0x4C);
-STATIC_ASSERT(sizeof(struct TmSettingTable) == 0x58);
+ASSERT_SIZE(struct TmSettingTable, 0x58);
 
 /// Start/end/loop anim frame triplet for one tournament model anim state.
 typedef struct TmAnimFrames {
@@ -1243,14 +1243,14 @@ typedef struct TmAnimFrames {
     /* 0x2 */ u16 end;
     /* 0x4 */ u16 loop;
 } TmAnimFrames;
-STATIC_ASSERT(sizeof(struct TmAnimFrames) == 0x6);
+ASSERT_SIZE(struct TmAnimFrames, 0x6);
 
 /// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
 typedef union TmAnimFrameTable {
-    s32 words[9];
     TmAnimFrames states[6];
+    s32 words[9];
 } TmAnimFrameTable;
-STATIC_ASSERT(sizeof(union TmAnimFrameTable) == 0x24);
+ASSERT_SIZE(union TmAnimFrameTable, 0x24);
 
 /// Repeating per-slot unit of BracketEntry, one per tournament bracket
 /// slot starting at 0x2C. Field names keep their slot-0 offsets from the
@@ -1279,7 +1279,7 @@ typedef struct BracketEntrySlot {
     /* +0x28 */ u16 x54;
     /* +0x2A */ u8 pad56[0x2C - 0x2A];
 } BracketEntrySlot;
-STATIC_ASSERT(sizeof(struct BracketEntrySlot) == 0x2C);
+ASSERT_SIZE(struct BracketEntrySlot, 0x2C);
 
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;
@@ -1304,10 +1304,11 @@ typedef struct BracketEntry {
     /* 0x29 */ u8 pad29[0x2C - 0x29];
     /* 0x2C */ BracketEntrySlot slots[4];
 } BracketEntry;
-STATIC_ASSERT(sizeof(struct BracketEntry) == 0xDC);
+ASSERT_SIZE(struct BracketEntry, 0xDC);
 
 struct lbl_803D9D20_t {
-    /*  +0 */ u8 x0[0x59];
+    /*  +0 */ u8 x0[0x20];
+    /* +20 */ u8 x20[0x59 - 0x20];
     /* +59 */ u8 x59[0x72 - 0x59];
     /* +72 */ u8 x72[0x8C - 0x72];
 };
@@ -1319,7 +1320,7 @@ struct lbl_803DA0D0_t {
     /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
     /* 0xE0 */ f32 bounce_y[41];
 }; /* size = 0x184 */
-STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
+ASSERT_SIZE(struct lbl_803DA0D0_t, 0x184);
 
 typedef struct gm_8019ECAC_OnEnter_t {
     u32 x0;

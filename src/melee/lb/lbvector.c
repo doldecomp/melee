@@ -1,22 +1,15 @@
-#include "lb/lbvector.h"
+#include "lbvector.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
-#include "lb/lbrefract.h"
-
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 
-static float lbVector_Len(Vec3* vec)
-{
-    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-}
-
-static float lbVector_Len_xy(Vec3* vec)
+static inline float lbVector_Len_xy_accurate(Vec3* vec)
 {
     return sqrtf_accurate(vec->x * vec->x + vec->y * vec->y);
 }
@@ -110,7 +103,8 @@ float lbVector_Angle(Vec3* a, Vec3* b)
 /// 8000D790 - returns the angle between a and b
 float lbVector_AngleXY(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbVector_Len_xy(a) * lbVector_Len_xy(b);
+    float lena_lenb =
+        lbVector_Len_xy_accurate(a) * lbVector_Len_xy_accurate(b);
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
@@ -130,7 +124,7 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 /// Procedure, which is described in the following paper:
 /// https://math.berkeley.edu/~arash/54/notes/6_4.pdf
 
-static float sin(float angle)
+static float lbvector_sin(float angle)
 {
     if (angle > M_PI) {
         angle -= M_TAU;
@@ -142,7 +136,7 @@ static float sin(float angle)
            0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
-static float cos(float angle)
+static float lbvector_cos(float angle)
 {
     angle += M_PI / 2;
     if (angle > M_PI) {
@@ -167,8 +161,8 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
     // z-axis by angle, and finally the first two rotations are reversed.
 
     float len_axis_yz = sqrtf(axis->y * axis->y + axis->z * axis->z);
-    float s = sin(angle);
-    float c = cos(angle);
+    float s = lbvector_sin(angle);
+    float c = lbvector_cos(angle);
     float unit_axis_yz_y;
     float unit_axis_yz_z;
     float x, y, z;
@@ -222,8 +216,8 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 
 void lbVector_Rotate(Vec3* v, int axis, float angle)
 {
-    float s = sin(angle);
-    float c = cos(angle);
+    float s = lbvector_sin(angle);
+    float c = lbvector_cos(angle);
     float x;
     float y;
     float z;
@@ -250,10 +244,12 @@ void lbVector_Rotate(Vec3* v, int axis, float angle)
     v->z = z;
 }
 
-float dummy(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return 2.0f;
-} // needed here to force order of floats in .sdata2 section
+    (void) 2.0f;
+}
+#endif
 
 /// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a
 /// at the plane that is perpendicular to b and contains the origin.
@@ -456,12 +452,12 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
 /// there is no translational component.
 void lbVector_CreateEulerMatrix(Mtx m, Quaternion* angles)
 {
-    float sx = sin(angles->x);
-    float cx = cos(angles->x);
-    float sy = sin(angles->y);
-    float cy = cos(angles->y);
-    float sz = sin(angles->z);
-    float cz = cos(angles->z);
+    float sx = lbvector_sin(angles->x);
+    float cx = lbvector_cos(angles->x);
+    float sy = lbvector_sin(angles->y);
+    float cy = lbvector_cos(angles->y);
+    float sz = lbvector_sin(angles->z);
+    float cz = lbvector_cos(angles->z);
 
     float sxsy = sx * sy;
     float cxsy = cx * sy;

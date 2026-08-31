@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -21,9 +20,7 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// SpecialLw (Luigi Cyclone)
@@ -46,8 +43,8 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = fp->dat_attrs;
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
-    fp->mv.lg.SpecialLw.groundVelX = (float) 0.0f;
-    fp->mv.lg.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
+    fp->mv.lg.SpecialLw.groundVelX = 0.0f;
+    fp->mv.lg.SpecialLw.unk = luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
     fp->mv.lg.SpecialLw.isUnkColl = false;
 }
 
@@ -64,8 +61,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
     HSD_JObj* hsd_obj = gobj->hsd_obj;
     efSync_Spawn(0x509, gobj, hsd_obj);
     fp->x2219_b0 = 1;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x801445F0
@@ -77,7 +73,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* temp_fp;
     Fighter* fp2;
 
-    u8 _[20];
+    u8 _[12];
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -86,14 +82,13 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp2->self_vel.y = (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
-                               luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
+    fp2->self_vel.y = (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
+                       luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
     ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->pre_hitlag_cb = efLib_PauseAll;
-    fp2->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp2);
 }
 
 /// 0x80144708
@@ -122,13 +117,12 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
     }
     fp2->self_vel.y =
-        (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
+        (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
     ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->pre_hitlag_cb = efLib_PauseAll;
-    fp2->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp2);
 }
 
 static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
@@ -191,8 +185,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
                               1.0f, 0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x80144958
@@ -200,8 +193,6 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 /// callback
 void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    u8 _[8];
-
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs = getFtSpecialAttrs(fp);
 
@@ -277,7 +268,7 @@ static ftCollisionBox ftLg_SpecialLw_CollisionBox = {
 static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (((u32) fp->cmd_vars[3] != 0U) &&
+    if ((fp->cmd_vars[3] != 0U) &&
         ((s32) fp->mv.lg.SpecialLw.isUnkColl != false))
     {
         ftPartSetRotX(fp, 0,
@@ -293,7 +284,7 @@ void ftLg_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[20];
+    u8 _[12];
 
     if (fp->ground_or_air == GA_Ground) {
         if (!ft_80082888(gobj, &ftLg_SpecialLw_CollisionBox)) {
@@ -323,8 +314,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialLw, FTLUIGI_SPECIALLW_FLAG,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftCommon_ClampGrVel(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x80144CEC
@@ -334,7 +324,7 @@ void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[24];
+    u8 _[16];
 
     if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);

@@ -6,12 +6,9 @@
 #include "lbcardnew.h"
 #include "lbsnap.h"
 
-#include <dolphin/dvd.h>
+#include <dolphin/os.h>
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
-#include <baselib/initialize.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
 
 struct lb_804329F0_t {
     union {
@@ -35,8 +32,7 @@ void lb_8001955C(void)
 {
     if (HSD_PadGetResetSwitch()) {
         lbAudioAx_80027DBC();
-        do {
-        } while (lb_8001B6F8() == 0xB);
+        while (lb_8001B6F8() == 11);
         VISetPostRetraceCallback(0);
         VISetPreRetraceCallback(0);
         VISetBlack(1);
@@ -79,7 +75,7 @@ void lb_80019628(void)
         lb_804329F0.x0_words[2] = 0;
     }
 
-    period = (OSTime) (f32) (u32) OS_TIMER_CLOCK;
+    period = (f32) OSSecondsToTicks(1);
 
     for (i = 0; i < 2; i++) {
         if (lb_804329F0.x0[i].x0 < period) {
@@ -87,8 +83,8 @@ void lb_80019628(void)
         }
     }
 
-    if (period >= (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK)) {
-        period = (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK);
+    if (period >= (OSTime) OSSecondsToTicks(1.0F / 60)) {
+        period = OSSecondsToTicks(1.0F / 60);
     }
 
     if (lb_804329F0.x40 == period) {
@@ -98,7 +94,7 @@ void lb_80019628(void)
     lb_804329F0.x40 = period;
 
     {
-        u32 rate = (u32) (lb_804329F0.x40 / (OS_TIMER_CLOCK / 1000));
+        u32 rate = OSTicksToMilliseconds(lb_804329F0.x40);
         if (rate > 11) {
             rate = 11;
         }
@@ -182,7 +178,7 @@ void lb_80019AAC(Event arg0)
 
     for (i = 0; i < 2; i++) {
         struct UnkArrElem* cur = &lb_804329F0.x0[i];
-        cur->x0 = 1.0F / 60 * OS_TIMER_CLOCK;
+        cur->x0 = OSSecondsToTicks(1.0F / 60);
         cur->x8 = 0;
         cur->x10 = 0;
     }
@@ -191,7 +187,7 @@ void lb_80019AAC(Event arg0)
     lb_804329F0.x48 = 0;
     lb_804329F0.x0[0].x0 = 0; // huh? overwritten?
     lb_804329F0.x40 = 0;
-    lb_804329F0.x38 = 1.0F / 60 * OS_TIMER_CLOCK;
+    lb_804329F0.x38 = OSSecondsToTicks(1.0F / 60);
 
     lb_80019628();
 }

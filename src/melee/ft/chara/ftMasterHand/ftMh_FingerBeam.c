@@ -1,11 +1,9 @@
 #include "ftMh_FingerBeam.h"
 
-#include <platform.h>
-
 #include "baselib/forward.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
@@ -105,16 +103,20 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
         Vec3 vec;
         lb_8000B1CC(fp->parts[FtPart_RLegJA].joint, 0, &vec);
         fp->mv.mh.fingerbeam.x34 =
-            it_802F0340(gobj, &vec, &vec, FtPart_RLegJA, 125, fp->facing_dir);
+            it_802F0340(gobj, &vec, &vec, FtPart_RLegJA,
+                        It_Kind_MasterHand_Laser, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_BustN].joint, 0, &vec);
         fp->mv.mh.fingerbeam.x38 =
-            it_802F0340(gobj, &vec, &vec, FtPart_BustN, 125, fp->facing_dir);
+            it_802F0340(gobj, &vec, &vec, FtPart_BustN,
+                        It_Kind_MasterHand_Laser, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_LHandN].joint, 0, &vec);
         fp->mv.mh.fingerbeam.x3C =
-            it_802F0340(gobj, &vec, &vec, FtPart_LHandN, 125, fp->facing_dir);
+            it_802F0340(gobj, &vec, &vec, FtPart_LHandN,
+                        It_Kind_MasterHand_Laser, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, 0, &vec);
         fp->mv.mh.fingerbeam.x40 =
-            it_802F0340(gobj, &vec, &vec, FtPart_L3rdNa, 125, fp->facing_dir);
+            it_802F0340(gobj, &vec, &vec, FtPart_L3rdNa,
+                        It_Kind_MasterHand_Laser, fp->facing_dir);
         fp->mv.mh.unk0.x28 = lbAudioAx_800237A8(320004, 127, 64);
         fp->mv.mh.unk0.x2C = lbAudioAx_800237A8(320005, 127, 64);
         fp->mv.mh.unk0.x30 = lbAudioAx_800237A8(320006, 127, 64);

@@ -50,5 +50,6 @@
 /* 1CD278 */ DynamicsDesc* grIzumi_801CD278(enum_t);
 /* 1CD280 */ bool grIzumi_801CD280(Vec3*, int, HSD_JObj*);
 /* 1CD2D4 */ void grIzumi_801CD2D4(void);
+/* 3E0E5C */ extern StageData grIz_StageData;
 
 #endif

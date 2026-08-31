@@ -4,7 +4,6 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -13,12 +12,10 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
@@ -45,7 +42,7 @@
 /* 21FC50 */ static DynamicsDesc* grTMario_8021FC50(enum_t);
 /* 21FC58 */ static bool grTMario_8021FC58(Vec3*, int, HSD_JObj*);
 
-StageCallbacks grTMr_803E8548[] = {
+StageCallbacks grTMr_StageCallbacks[] = {
     {
         grTMario_8021F9CC,
         grTMario_8021F9F8,
@@ -67,12 +64,12 @@ StageCallbacks grTMr_803E8548[] = {
         grTMario_8021FAD0,
         (1 << 30) | (1 << 31),
     },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
 };
 
-StageData grTMr_803E85A4 = {
-    TMARIO,
-    grTMr_803E8548,
+StageData grTMr_StageData = {
+    Gr_Kind_TMario,
+    grTMr_StageCallbacks,
     "/GrTMr.dat",
     grTMario_8021F844,
     grTMario_8021F840,
@@ -108,7 +105,7 @@ bool grTMario_8021F8DC(void)
 HSD_GObj* grTMario_8021F8E4(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMr_803E8548[arg0];
+    StageCallbacks* callbacks = &grTMr_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

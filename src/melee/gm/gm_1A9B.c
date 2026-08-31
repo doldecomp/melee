@@ -2,7 +2,7 @@
 /// Game-over "Regend" ending THP playback scene (OnEnter/OnFrame pair).
 ///
 /// This TU is split from gmregenddisp.c: the retail object anchors the THP
-/// table loads in gm_801A9B30_OnEnter at the first table literal
+/// table loads in gm_Scene_Congrats_OnEnter at the first table literal
 /// (gm_803DB640, displacements 0x278/0x5B4/0x8D0), i.e. at this TU's own
 /// .data+0. MWCC 1.2.5n always places its merged-data anchor (..data.N) at
 /// the object's .data start, so these tables cannot share a TU with the
@@ -18,12 +18,13 @@
 
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmregclear.h"
 #include "gm/gmregtyfall.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -81,18 +82,9 @@ static char* gmRegend_AllstarThpFiles[] = {
     "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
 };
 
-void gm_801A9B30_OnEnter(UNK_T unused)
+void gm_Scene_Congrats_OnEnter(UNK_T unused)
 {
-    struct {
-        int x0;
-        int x4;
-        int x8;
-        int xC;
-        float x10;
-        float x14;
-        u8 pad[0x40 - 0x18];
-        u32 x40;
-    }* thp_disp;
+    HSD_SObj* thp_disp;
     s32 ckind;
     HSD_GObj* gobj;
     HSD_GObj* sobj_gobj;
@@ -152,7 +144,7 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     }
 }
 
-void gm_801A9D0C_OnFrame(void)
+void gm_Scene_Congrats_OnFrame(void)
 {
     if (gmRegend_InputDelayTimer != 0) {
         gmRegend_InputDelayTimer--;
@@ -172,7 +164,7 @@ void gm_801A9D0C_OnFrame(void)
             lbBgFlash_8002063C(0x3C);
             gmRegend_ExitTimer = 0x3C;
             lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
+            sfxForward();
         }
     }
 }

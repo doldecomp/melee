@@ -1,9 +1,10 @@
 #include "db.h"
 
 #include "ef/efdata.h"
+#include "gm/types.h"
 
-#include <sysdolphin/baselib/particle.h>
-#include <sysdolphin/baselib/psappsrt.h>
+#include <baselib/generator.h>
+#include <baselib/psappsrt.h>
 
 static UnkFlagStruct db_804D6BA0;
 
@@ -17,7 +18,7 @@ void fn_UpdateObjAllocLimiter(int player)
 {
     int peak;
 
-    if (DbLevel == 4) {
+    if (DbLevel == DbLKind_Develop) {
         if ((db_ButtonsDown(player) & HSD_PAD_B) &&
             (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {

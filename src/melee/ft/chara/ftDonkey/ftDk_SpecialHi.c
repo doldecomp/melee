@@ -30,11 +30,10 @@ static u32 const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
 
 static void setCallbacks(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     fp->take_dmg_cb = ftDk_Init_8010D774;
     fp->death2_cb = ftDk_Init_8010D774;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -116,7 +115,8 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     } else {
         grav_mul = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
     }
-    ftCommon_Fall(fp, grav_mul * fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, grav_mul * fp->co_attrs.gravity,
+                  fp->co_attrs.terminal_velocity);
     ftCommon_8007D344(fp, 0, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }
@@ -140,7 +140,7 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    u8 _[8];
+    u8 _[4];
     if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
             ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,

@@ -7,12 +7,10 @@
 
 #include "baselib/debug.h"
 
-#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/state.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/chara/ftLink/types.h>
 #include <melee/ft/chara/ftMars/types.h>
 #include <melee/ft/inlines.h>
@@ -32,15 +30,12 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-    f32* distPtr;
-    u32 n4;
     f32 cumDist[3];
     AfterimageVtx vtx_buf[151];
     f32 d2;
-    s32 numVerts;
-    s32 remaining;
     s32 numSubdiv;
-    s32 nextIdx;
+
+    PAD_STACK(0x10);
 
     if (arg1 != 2) {
         return;
@@ -118,11 +113,15 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     }
 
     {
+        s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
         s32 ringIdx;
         f32 totalDist;
         f32* dp;
+        Vec3 prevPos, delta, crossProd, tempDir;
+
+        PAD_STACK(0x14);
 
         {
             s32 idx = fp->x2101_bits_0to6;
@@ -138,7 +137,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         dp = &cumDist[1];
 
         {
-            Vec3 delta, prevPos;
             s32 i;
             s32 curIdx = ringIdx;
 
@@ -163,11 +161,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 prevPos = delta;
 
                 if (i != 0) {
-                    if (curIdx != 0) {
-                        nextIdx = curIdx - 1;
-                    } else {
-                        nextIdx = 2;
-                    }
+                    nextIdx = curIdx != 0 ? curIdx - 1 : 2;
                 }
                 curIdx = nextIdx;
             }
@@ -178,34 +172,42 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            Vec3 tempDir, crossProd;
-            f32 scaleDiff = x20FC - x20F8;
+            s32 remaining;
+            f32* distPtr;
+            s32 numVerts;
+            f32 scaleDiff;
             s32 curIdx2;
-            f32 blendedInner = params->x0 * scaleDiff + x20F8;
-            f32 blendedOuter = params->x4 * scaleDiff + x20F8;
-            f32 interpFactor = 1.0f;
-            f32 innerDiff = x20F8 - blendedInner;
-            f32 outerDiff = x20FC - blendedOuter;
+            s32 idx2;
+            f32 blendedOuter;
+            f32 blendedInner;
+            f32 interpFactor;
+            f32 innerDiff;
+            f32 outerDiff;
             AfterimageVtx* vp;
 
+            scaleDiff = x20FC - x20F8;
+            idx2 = fp->x2101_bits_0to6;
+            blendedInner = params->x0 * scaleDiff + x20F8;
+            vp = vtx_buf;
+            blendedOuter = params->x4 * scaleDiff + x20F8;
             numVerts = 0;
 
-            {
-                s32 idx2 = fp->x2101_bits_0to6;
-                if (idx2 != 0) {
-                    curIdx2 = idx2 - 1;
-                } else {
-                    curIdx2 = 2;
-                }
+            if (idx2 != 0) {
+                curIdx2 = idx2 - 1;
+            } else {
+                curIdx2 = 2;
             }
 
+            innerDiff = x20F8 - blendedInner;
+            interpFactor = 1.0f;
             remaining = (s8) (u8) fp->x2100 - 1;
+            outerDiff = x20FC - blendedOuter;
             distPtr = &cumDist[0];
-            vp = &vtx_buf[0];
 
             while (remaining >= 0) {
                 f32 outerScale, innerScale;
                 s32 alpha;
+                struct Fighter_x20B0_t* nextEntry;
 
                 struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
@@ -224,7 +226,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
+                {
+                    f32 x = curEntry->xC.x * outerScale;
+                    (vp + 1)->x = x + curEntry->x0.x;
+                }
                 (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
                 (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;
@@ -236,7 +241,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 if (remaining != 0) {
                     s32 nextRingIdx;
-                    struct Fighter_x20B0_t* nextEntry;
 
                     if (curIdx2 != 0) {
                         nextRingIdx = curIdx2 - 1;
@@ -294,7 +298,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                         (f32) alpha));
 
                             for (j = 0; j < numSubdiv; j++) {
-                                cumAngle += angle * frac;
+                                cumAngle += frac * angle;
                                 basePosX += stepPosX;
                                 basePosY += stepPosY;
                                 basePosZ += stepPosZ;
@@ -348,38 +352,26 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             GXPosition3f32(vtx_buf[0].x, vtx_buf[0].y, vtx_buf[0].z);
             GXColor4u8(vtx_buf[0].r, vtx_buf[0].g, vtx_buf[0].b, vtx_buf[0].a);
-            GXPosition3f32(vtx_buf[2].x, vtx_buf[2].y, vtx_buf[2].z);
-            GXColor4u8(vtx_buf[2].r, vtx_buf[2].g, vtx_buf[2].b, vtx_buf[2].a);
+            {
+                AfterimageVtx* vtx = &vtx_buf[2];
 
-            if (numVerts > 1) {
-                AfterimageVtx* p = &vtx_buf[1];
-                u32 count = (u32) (numVerts - 1);
-                n4 = count >> 2;
-                if (n4 != 0) {
-                    do {
-                        GXPosition3f32(p[0].x, p[0].y, p[0].z);
-                        GXColor4u8(p[0].r, p[0].g, p[0].b, p[0].a);
-                        GXPosition3f32(p[1].x, p[1].y, p[1].z);
-                        GXColor4u8(p[1].r, p[1].g, p[1].b, p[1].a);
-                        GXPosition3f32(p[2].x, p[2].y, p[2].z);
-                        GXColor4u8(p[2].r, p[2].g, p[2].b, p[2].a);
-                        GXPosition3f32(p[3].x, p[3].y, p[3].z);
-                        GXColor4u8(p[3].r, p[3].g, p[3].b, p[3].a);
-                        p += 4;
-                        n4--;
-                    } while (n4 != 0);
-                    count &= 3;
-                    if (count != 0) {
-                        goto remainder;
+                GXPosition3f32(vtx->x, vtx->y, vtx->z);
+                {
+                    u8 r = vtx->r;
+                    GXColor4u8(r, vtx->g, vtx->b, vtx->a);
+                }
+            }
+
+            {
+                s32 i;
+                AfterimageVtx* vtx = &vtx_buf[1];
+
+                for (i = 1; i < numVerts; i++, vtx++) {
+                    GXPosition3f32(vtx->x, vtx->y, vtx->z);
+                    {
+                        u8 r = vtx->r;
+                        GXColor4u8(r, vtx->g, vtx->b, vtx->a);
                     }
-                } else {
-                remainder:
-                    do {
-                        GXPosition3f32(p->x, p->y, p->z);
-                        GXColor4u8(p->r, p->g, p->b, p->a);
-                        p++;
-                        count--;
-                    } while (count != 0);
                 }
             }
         }
@@ -410,14 +402,13 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             return;
         }
         switch (itGetKind(fp->item_gobj)) {
-        case It_Kind_Sword: {
+        case It_Kind_Sword:
             it_802852B8(fp->item_gobj, &fp->x20F8, &fp->x20FC);
             var_r29 = 1;
             break;
-        }
-        default: {
-            HSD_ASSERTREPORT(0x16D, 0, "no afterimage item!\n");
-        }
+        default:
+            HSD_ASSERTREPORT(365, 0, "no afterimage item!\n");
+            break;
         }
         jobj = it_80285314(fp->item_gobj);
     } else {

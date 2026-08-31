@@ -2,15 +2,19 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
@@ -25,11 +29,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
@@ -54,8 +55,7 @@ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         }
     }
 
-    fp0->pre_hitlag_cb = efLib_PauseAll;
-    fp0->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp0);
 }
 
 /// Setup Teleport End GFX
@@ -74,6 +74,7 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp0);
+    fp0->accessory4_cb = NULL;
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler
@@ -300,8 +301,6 @@ static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
     return true;
 }
 
-static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
-
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 {
@@ -402,7 +401,11 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     stick_y *= stick_y;
 
     /// @todo Probably a missing @c inline function.
-    mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+    mewtwoAttrs =
+#ifdef MUST_MATCH
+        mewtwoAttrs =
+#endif
+            getFtSpecialAttrsD(fp);
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
@@ -469,7 +472,11 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     stick_x *= stick_x;
     stick_y *= stick_y;
 
-    mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+    mewtwoAttrs =
+#ifdef MUST_MATCH
+        mewtwoAttrs =
+#endif
+            getFtSpecialAttrsD(fp);
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 

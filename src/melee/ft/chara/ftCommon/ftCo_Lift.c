@@ -7,6 +7,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
@@ -147,8 +148,8 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;
     fp->mv.co.lift.x4 -= 1;
     if (!fp->x2222_b6) {
-        float angle = (180 / p_ftCommonData->x230 * deg_to_rad) +
-                      ftPartGetRotZ(fp, part);
+        float angle =
+            MTXDegToRad(180 / p_ftCommonData->x230) + ftPartGetRotZ(fp, part);
         ftPartSetRotY(fp, part, angle);
         HSD_JObjSetRotationY(jobj, angle);
     }

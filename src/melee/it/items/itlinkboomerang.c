@@ -17,9 +17,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
-
 #define HYPOT(x, y) sqrtf((x) * (x) + (y) * (y))
 #define VEC_XY_LENGTH(v) HYPOT((v)->x, (v)->y)
 
@@ -172,7 +169,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
         ip->xDAC_itcmd_var0 = 0;
         ip->xDB0_itcmd_var1 = 0;
         ip->xDB4_itcmd_var2 = 0;
-        ip->xDD4_itemVar.linkboomerang.xF7C = -sinf(deg_to_rad * attrs->x1C);
+        ip->xDD4_itemVar.linkboomerang.xF7C = -sinf(MTXDegToRad(attrs->x1C));
         ip->xDD4_itemVar.linkboomerang.xDE8 = 0;
         ip->xDD4_itemVar.linkboomerang.xF98 = owner_gobj;
         ip->xDD4_itemVar.linkboomerang.xF8C = 0.0f;
@@ -686,9 +683,9 @@ void it_802A1948(Item_GObj* gobj, s32 arg1)
     attrs = ip->xC4_article_data->x4_specialAttributes;
     clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
     if (arg1 != 0) {
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x24);
     } else {
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x20;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x20);
     }
     ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
     it_802A19E0_no_inline(gobj);
@@ -806,7 +803,7 @@ bool it_802A1F08(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x24);
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -825,7 +822,7 @@ bool it_802A1FA8(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x24);
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -844,7 +841,7 @@ bool itLinkBoomerang_Logic18_Absorbed(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x24);
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -900,7 +897,7 @@ bool it_802A2288(Item_GObj* gobj)
     if ((ip->xDD4_itemVar.linkboomerang.xDE8 != 1) && (ip->msid != 3)) {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = MTXDegToRad(attrs->x24);
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }

@@ -17,20 +17,21 @@
 #include "gr/types.h"
 #include "it/items/itkyasarin.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobjproc.h"
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/jobj.h>
-S16Vec3 grI2_803E4A60[] = {
+
+GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },
     { 9, 11, 0 }, { 10, 12, 0 }, { 11, 13, 0 }, { 2, 14, 0 },
 };
-StageCallbacks grI2_803E4AB4[] = {
+StageCallbacks grI2_StageCallbacks[] = {
     {
         grInishie2_801FCDC8,
         grInishie2_801FCDF4,
@@ -145,9 +146,9 @@ StageCallbacks grI2_803E4AB4[] = {
     },
 };
 
-StageData grI2_803E4C00 = {
-    0x19,
-    grI2_803E4AB4,
+StageData grI2_StageData = {
+    Gr_Kind_Inishie2,
+    grI2_StageCallbacks,
     "/GrI2.dat",
     grInishie2_801FCBC4,
     grInishie2_801FCBC0,
@@ -156,9 +157,9 @@ StageData grI2_803E4C00 = {
     grInishie2_801FCCD4,
     grInishie2_801FDFE8,
     grInishie2_801FDFF0,
-    1,
+    (1 << 0),
     grI2_803E4A60,
-    14,
+    ARRAY_SIZE(grI2_803E4A60),
 };
 
 struct grInishie2_YakumonoParam {
@@ -228,7 +229,7 @@ bool grInishie2_801FCCD4(void)
 HSD_GObj* grInishie2_801FCCDC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grI2_803E4AB4[gobj_id];
+    StageCallbacks* callbacks = &grI2_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -242,12 +243,12 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
             gp->x1C_callback = (HSD_GObjEvent) callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
@@ -389,10 +390,8 @@ void grInishie2_801FD0B4(HSD_GObj* gobj)
 void grInishie2_801FD198(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 
     gp->u.inishie2.xC4_flags.b0 = 0;
 
@@ -666,7 +665,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
         } else {
             if (!gp->u.inishie23.xC8_flags.b2) {
-                if ((s16) gp->u.inishie23.xCA < 2) {
+                if (gp->u.inishie23.xCA < 2) {
                     gp->u.inishie23.xC8_flags.b3 ^= 1;
                 } else {
                     f32 temp_f = GET_GROUND(gobj)->u.inishie23.xD8.x +
@@ -690,7 +689,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
                         var_r3_2 = test_random(temp_r0);
 
-                        if (var_r3_2 >= (s16) yakumono_param->unk48) {
+                        if (var_r3_2 >= yakumono_param->unk48) {
                             gp->u.inishie23.xC8_flags.b3 ^= 1;
                         }
                     }

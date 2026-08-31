@@ -32,10 +32,8 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
-#include <MSL/math.h>
 
 void ft_80081B38(Fighter_GObj* gobj)
 {
@@ -1233,7 +1231,7 @@ void ft_800849EC(Fighter* fp1, Fighter* fp2)
     mpCopyCollData(&fp1->coll_data, &fp2->coll_data, 2);
 }
 
-int ft_80084A18(Fighter_GObj* gobj)
+bool ft_80084A18(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return mpLib_80054ED8(fp->coll_data.floor.index);
@@ -1376,7 +1374,7 @@ void ft_80084DB0(Fighter_GObj* gobj)
     if (fp->fall_fast) {
         ftCommon_FallFast(fp);
     } else {
-        ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
+        ftCommon_Fall(fp, co_attrs->gravity, co_attrs->terminal_velocity);
     }
     ftCommon_8007D268(fp);
 }

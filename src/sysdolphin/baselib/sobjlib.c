@@ -32,7 +32,7 @@ HSD_ObjAllocData HSD_SObjLib_804D10E0;
 
 void HSD_SObjLib_803A44A4(void)
 {
-    HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
+    HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, sizeof(HSD_SObj), 4);
 }
 
 void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
@@ -73,11 +73,11 @@ void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
     } else {
         cur = gobj->hsd_obj;
         next = cur;
-        while (next->next != NULL && next->x44 <= (u8) priority) {
+        while (next->next != NULL && next->x44 <= priority) {
             next = next->next;
         }
 
-        if (next->next == NULL && next->x44 <= (u8) priority) {
+        if (next->next == NULL && next->x44 <= priority) {
             next->next = sobj;
             sobj->prev = next;
         } else if (next == cur) {
@@ -142,10 +142,12 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) __FILE__;
 }
+#endif
 
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
@@ -246,14 +248,17 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     }
 }
 
+static inline GXColor discard_color(GXColor color)
+{
+    return color;
+}
+
 void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 {
     f32 x_cos;
     f32 origin_x;
     f32 origin_y;
     f32 angle;
-    f32 center_width;
-    f32 center_height;
     f32 sin_half;
     f32 cos_val;
     f32 cos_half;
@@ -274,8 +279,6 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     u16 obj_height;
     u8 tex_fmt;
 
-    PAD_STACK(0x20);
-
     if (sobj->x40 & 1) {
         return;
     }
@@ -288,10 +291,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         origin_x = sobj->x10;
         origin_y = sobj->x14;
     } else {
-        center_width = (f32) obj_width * sobj->x1C;
-        center_height = (f32) obj_height * sobj->x20;
-        origin_x = (center_width / 2.0F) + sobj->x10;
-        origin_y = (center_height / 2.0F) + sobj->x14;
+        origin_x = (((f32) obj_width * sobj->x1C) / 2.0F) + sobj->x10;
+        origin_y = (((f32) obj_height * sobj->x20) / 2.0F) + sobj->x14;
     }
 
     GXClearVtxDesc();
@@ -318,12 +319,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    {
-        bool is_ci_texture = (u8) (tex_fmt - GX_TF_C4) <= 1U;
-
-        if (is_ci_texture) {
-            GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
-        }
+    if ((u8) (tex_fmt - GX_TF_C4) <= 1U) {
+        GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
     }
     if (!(sobj->x40 & 0x10)) {
         GXLoadTexObj(&sobj->x50_texobj, GX_TEXMAP0);
@@ -338,11 +335,11 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 
     if (sobj->x40 & 0x10) {
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD1, GX_TEXMAP1, GX_COLOR_NULL);
-        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_QUARTER,
+        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_KONST,
                         GX_CC_C0);
         GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_FALSE, GX_TEVPREV);
-        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_ONE,
+        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_KONST,
                         GX_CA_A0);
         GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_FALSE, GX_TEVPREV);
@@ -351,11 +348,11 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
 
         GXSetTevOrder(GX_TEVSTAGE1, GX_TEXCOORD1, GX_TEXMAP2, GX_COLOR_NULL);
-        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_TEXC, GX_CC_QUARTER,
+        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_TEXC, GX_CC_KONST,
                         GX_CC_CPREV);
         GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_2,
                         GX_FALSE, GX_TEVPREV);
-        GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_TEXA, GX_CA_ONE,
+        GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_TEXA, GX_CA_KONST,
                         GX_CA_APREV);
         GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_FALSE, GX_TEVPREV);
@@ -376,7 +373,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 
         GXSetTevOrder(GX_TEVSTAGE3, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
                       GX_COLOR_NULL);
-        GXSetTevColorIn(GX_TEVSTAGE3, GX_CC_APREV, GX_CC_CPREV, GX_CC_QUARTER,
+        GXSetTevColorIn(GX_TEVSTAGE3, GX_CC_APREV, GX_CC_CPREV, GX_CC_KONST,
                         GX_CC_ZERO);
         GXSetTevColorOp(GX_TEVSTAGE3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_TRUE, GX_TEVPREV);
@@ -406,9 +403,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
         if (sobj->x40 & 4) {
-            GXColor z_color = sobj->x3C_color;
-
-            GXSetTevColor(GX_TEVREG0, z_color);
+            GXSetTevColor(GX_TEVREG0, sobj->x3C_color);
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
                             GX_CC_ZERO);
             GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -487,6 +482,9 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
                            GX_LO_CLEAR);
         }
     }
+
+    (void) discard_color(sobj->x38_color);
+    (void) discard_color(sobj->x3C_color);
 
     sin_half = 0.5F * sinf(sobj->x18);
     angle = sobj->x18;
@@ -603,6 +601,6 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, u16 width, u16 height, int priority)
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far_val);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_SObjLib_803A54EC, priority);
 }

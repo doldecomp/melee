@@ -10,15 +10,16 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itegg.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+#include "it/itspawn.h"
 #include "lb/lb_00B0.h"
 #include "sysdolphin/baselib/random.h"
 
@@ -325,7 +326,7 @@ static inline Item_GObj* it_802D5710_inline(Item_GObj* gobj, Vec3* pos,
 {
     Item* ip = gobj->user_data;
     SpawnItem spawn;
-    spawn.kind = Pokemon_Lucky_Egg;
+    spawn.kind = It_Kind_Lucky_Egg;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;

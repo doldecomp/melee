@@ -9,10 +9,6 @@
 
 #include "lb/types.h"
 
-#include <baselib/forward.h>
-
-#include <common_structs.h>
-
 struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
     /* fp+2230 */ float x4;

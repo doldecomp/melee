@@ -3,7 +3,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -13,9 +17,7 @@
 #include "ftCommon/inlines.h"
 #include "ftMars/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -245,10 +247,6 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
     case 351:
         msid = 360;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -270,10 +268,6 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     case 360:
         msid = 351;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -393,10 +387,6 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
     case 353:
         msid = 362;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -531,10 +521,6 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     case 356:
         msid = 365;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -561,10 +547,6 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     case 365:
         msid = 356;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,

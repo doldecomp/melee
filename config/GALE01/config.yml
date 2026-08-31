@@ -4,6 +4,7 @@ symbols: config/GALE01/symbols.txt
 splits: config/GALE01/splits.txt
 mw_comment_version: 8
 quick_analysis: true
+globalize_symbols: false
 
 block_relocations:
 # GXColors in dbitem
@@ -11,13 +12,25 @@ block_relocations:
 - source: 0x804DBCF0
 # GXColor in dbbonus
 - source: 0x803EAE10
+# GXColor in lbcollision that spells a vi0401 string-pool address
+- source: 0x804D36E4
 # Bitmasks in psdisptev
 - source: .text:0x803A3A60
 - source: .text:0x803A3A68
 - source: .text:0x803A3AE8
 - source: .text:0x803A3AF8
-# Raw texture array that creates spurious relocs
+# HSD_SisLib_FontAtlas texture data
 - source: .data:0x8040CD40
   end:    .data:0x80430B40
 # Another bitmask, not a pointer (would point to the middle of a function)
 - target: 0x80020000
+
+extract:
+- symbol: HSD_SisLib_FontAtlas
+  header: sysdolphin/baselib/sislib_font.inc
+  binary: sysdolphin/baselib/sislib_font.bin
+  header_type: raw
+- symbol: HSD_DebugFontAtlas
+  header: sysdolphin/baselib/debug_font.inc
+  binary: sysdolphin/baselib/debug_font.bin
+  header_type: raw

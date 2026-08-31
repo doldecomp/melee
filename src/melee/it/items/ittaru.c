@@ -1,24 +1,25 @@
 #include "ittaru.h"
 
+#include <placeholder.h>
+
 #include "baselib/jobj.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/itanimlist.h"
 #include "it/itcoll.h"
+#include "it/itdrop.h"
 #include "it/iteffect.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 
-#include <string.h>
 #include <baselib/random.h>
 
 ItemStateTable it_803F58E0[] = {
@@ -70,11 +71,12 @@ static inline f32 inline_fabsf(f32 x)
     }
 }
 
-// ensure U32_TO_F32 is in the right place
-static f32 sdata_ordering(u32 u)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return u;
+    (void) U32_TO_F32;
 }
+#endif
 
 void it_802874F0(Item_GObj* gobj)
 {

@@ -1,7 +1,5 @@
 #include "ftCo_Fall.h"
 
-#include "math.h"
-
 #include <placeholder.h>
 
 #include "ft/fighter.h"
@@ -28,10 +26,11 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_SpecialAir.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_TagCancel.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
+
+#include <baselib/jobj.h>
 
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
 {

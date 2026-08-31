@@ -3,22 +3,18 @@
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftKirby/inlines.h"
 #include "it/items/itlinkarrow.h"
 #include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
-
-#include <lb/lbrefract.h>
-
-static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
-}
 
 ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 {
@@ -48,6 +44,8 @@ ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
                 case ftKb_MS_ClSpecialAirNEnd:
                     idx = fp->motion_id - ftKb_MS_ClSpecialNStart;
                 }
+                break;
+            default:
                 break;
             }
         }
@@ -82,49 +80,6 @@ static MotionFlags const ftKb_SpecialNLk_coll_mf =
     Ft_MF_SkipModel | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
     Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
     Ft_MF_SkipModelFlags | Ft_MF_Unk27;
-
-static inline void ftKb_SpecialNLk_setCallbacks(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = ftKb_SpecialNLk800FB880;
-    fp->death2_cb = ftKb_SpecialNLk800FBA00;
-}
-
-static inline float ftKb_SpecialNLk_GetMaxCharge(Fighter* fp)
-{
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_LINK:
-        return da->specialn_lk_max_charge;
-    case FTKIND_CLINK:
-        return da->specialn_cl_max_charge;
-    }
-    return 0;
-}
-
-static inline float ftKb_SpecialNLk_GetFreefallToggle(Fighter* fp)
-{
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_LINK:
-        return da->specialn_lk_freefall_toggle;
-    case FTKIND_CLINK:
-        return da->specialn_cl_freefall_toggle;
-    }
-    return 0;
-}
-
-static inline FtMotionId
-ftKb_SpecialNLk_GetMsid(Fighter* fp, FtMotionId lk_msid, FtMotionId cl_msid)
-{
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_CLINK:
-        return cl_msid;
-    case FTKIND_LINK:
-    default:
-        return lk_msid;
-    }
-}
 
 static inline void ftKb_SpecialNLk_UnsetArrow(Fighter_GObj* gobj)
 {
@@ -178,6 +133,8 @@ bool ftKb_SpecialNLk800FB470(Fighter_GObj* gobj)
                     }
                 }
                 break;
+            default:
+                break;
             }
         }
     }
@@ -200,6 +157,8 @@ bool ftKb_SpecialNLk800FB500(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             loader_id = da->specialn_cl_bow_item_loader_id;
+            break;
+        default:
             break;
         }
         if ((fp->u.kb.x74 = it_802A83E0(fp->facing_dir, gobj, &pos,
@@ -228,6 +187,8 @@ bool ftKb_SpecialNLk800FB5F4(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             item_id = da->specialn_cl_bow_item_id;
+            break;
+        default:
             break;
         }
         if ((fp->u.kb.x78 = it_802AF1A4(fp->facing_dir, gobj, &pos,
@@ -267,6 +228,8 @@ void ftKb_SpecialNLk800FB6DC(Fighter_GObj* gobj)
         case FTKIND_CLINK:
             max = da->specialn_cl_max_charge;
             break;
+        default:
+            break;
         }
         itLinkArrow_802A850C(fp->u.kb.x74, &pos1, &pos2, 0.08726646f,
                              fp->mv.lk.specialn.x0.y, max);
@@ -281,7 +244,7 @@ void ftKb_SpecialNLk800FB800(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->u.kb.x74 != 0) {
-        it_802A8A7C((Item_GObj*) fp->u.kb.x74);
+        it_802A8A7C(fp->u.kb.x74);
         fp->u.kb.x74 = 0;
     }
 }
@@ -291,7 +254,7 @@ void ftKb_SpecialNLk800FB840(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->u.kb.x78 != 0) {
-        it_802AF304((Item_GObj*) fp->u.kb.x78);
+        it_802AF304(fp->u.kb.x78);
         fp->u.kb.x78 = 0;
     }
 }
@@ -319,6 +282,8 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
     case FTKIND_CLINK:
         msid = ftKb_MS_ClSpecialNStart;
         break;
+    default:
+        break;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
@@ -328,6 +293,8 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
         break;
     case FTKIND_CLINK:
         anim_rate = da->specialn_cl_arrow_charge_speed;
+        break;
+    default:
         break;
     }
     ftAnim_SetAnimRate(gobj, anim_rate);
@@ -359,6 +326,8 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
     case FTKIND_CLINK:
         msid = ftKb_MS_ClSpecialAirNStart;
         break;
+    default:
+        break;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftKb_SpecialN_set_cbs(gobj);
@@ -368,6 +337,8 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
         break;
     case FTKIND_CLINK:
         anim_rate = da->specialn_cl_arrow_charge_speed;
+        break;
+    default:
         break;
     }
     ftAnim_SetAnimRate(gobj, anim_rate);
@@ -381,6 +352,8 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             anim_rate = da->specialn_cl_freefall_toggle;
+            break;
+        default:
             break;
         }
         if (anim_rate == 0.0F) {
@@ -412,6 +385,8 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
     case FTKIND_CLINK:
         anim_rate = da->specialn_cl_arrow_charge_speed;
         break;
+    default:
+        break;
     }
     ftAnim_SetAnimRate(gobj, anim_rate);
     if (ftKb_SpecialNLk800FB500(gobj) == false) {
@@ -424,7 +399,7 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
         fp2->mv.lk.specialn.x14 = 0.0F;
         fp2->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
         if (fp2->u.kb.x74 != 0) {
-            it_802A8398((Item_GObj*) fp2->u.kb.x74, &b, &a);
+            it_802A8398(fp2->u.kb.x74, &b, &a);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             ftKirby_MotionState msid = ftKb_MS_LkSpecialNLoop;
@@ -433,6 +408,8 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialNLoop;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0F, 1.0F, 0.0F,
@@ -447,8 +424,6 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-extern ftLk_SpecialN_Vec3Group const ftKb_Init_803B7548;
-
 void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -461,7 +436,7 @@ void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x14 = 0.0F;
     fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
     if (fp->u.kb.x74 != 0) {
-        it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+        it_802A8398(fp->u.kb.x74, &b, &a);
     }
 }
 
@@ -497,7 +472,7 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
         fp->mv.lk.specialn.x14 = 0.0F;
         fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
         if (fp->u.kb.x74 != 0) {
-            it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+            it_802A8398(fp->u.kb.x74, &b, &a);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             ftKirby_MotionState msid = ftKb_MS_LkSpecialAirNLoop;
@@ -506,6 +481,8 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialAirNLoop;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0F, 1.0F, 0.0F,
@@ -522,6 +499,8 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             anim_rate = da->specialn_cl_freefall_toggle;
+            break;
+        default:
             break;
         }
         if (anim_rate == 0.0F) {
@@ -544,7 +523,7 @@ void ftKb_LkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x14 = 0.0F;
     fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
     if (fp->u.kb.x74 != 0) {
-        it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+        it_802A8398(fp->u.kb.x74, &b, &a);
     }
 }
 
@@ -563,6 +542,8 @@ void ftKb_LkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             freefall = da->specialn_cl_freefall_toggle;
+            break;
+        default:
             break;
         }
         if (freefall == 0.0f) {
@@ -588,6 +569,8 @@ void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
         case FTKIND_CLINK:
             max = da->specialn_cl_max_charge;
             break;
+        default:
+            break;
         }
         if (fp->mv.lk.specialn.x0.y > max) {
             fp->mv.lk.specialn.x0.y = max;
@@ -599,6 +582,8 @@ void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialNEnd;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f,
@@ -620,6 +605,8 @@ void ftKb_LkSpecialNLoop_IASA(Fighter_GObj* gobj)
     case FTKIND_CLINK:
         fp->mv.lk.specialn.x0.y = da->specialn_cl_max_charge;
         break;
+    default:
+        break;
     }
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         s32 msid = ftKb_MS_LkSpecialNEnd;
@@ -628,6 +615,8 @@ void ftKb_LkSpecialNLoop_IASA(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             msid = ftKb_MS_ClSpecialNEnd;
+            break;
+        default:
             break;
         }
         Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f, NULL);
@@ -652,6 +641,8 @@ void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
         case FTKIND_CLINK:
             max = da->specialn_cl_max_charge;
             break;
+        default:
+            break;
         }
         if (fp->mv.lk.specialn.x0.y > max) {
             fp->mv.lk.specialn.x0.y = max;
@@ -663,6 +654,8 @@ void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialAirNEnd;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f,
@@ -684,6 +677,8 @@ void ftKb_LkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     case FTKIND_CLINK:
         fp->mv.lk.specialn.x0.y = da->specialn_cl_max_charge;
         break;
+    default:
+        break;
     }
     if (!(fp->input.held_inputs & HSD_PAD_B)) {
         s32 msid = ftKb_MS_LkSpecialAirNEnd;
@@ -692,6 +687,8 @@ void ftKb_LkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
             break;
         case FTKIND_CLINK:
             msid = ftKb_MS_ClSpecialAirNEnd;
+            break;
+        default:
             break;
         }
         Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f, NULL);
@@ -746,6 +743,8 @@ void ftKb_LkSpecialNStart_Coll(Fighter_GObj* gobj)
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialAirNStart;
                 break;
+            default:
+                break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
@@ -769,6 +768,8 @@ void ftKb_LkSpecialNLoop_Coll(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialAirNLoop;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
@@ -795,6 +796,8 @@ void ftKb_LkSpecialNEnd_Coll(Fighter_GObj* gobj)
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialAirNEnd;
                 break;
+            default:
+                break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
@@ -818,6 +821,8 @@ void ftKb_LkSpecialAirNStart_Coll(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialNStart;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
@@ -843,6 +848,8 @@ void ftKb_LkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialNLoop;
                 break;
+            default:
+                break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
@@ -867,6 +874,8 @@ void ftKb_LkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
                 break;
             case FTKIND_CLINK:
                 msid = ftKb_MS_ClSpecialNEnd;
+                break;
+            default:
                 break;
             }
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,

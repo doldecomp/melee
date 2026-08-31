@@ -6,7 +6,6 @@
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/items/itlgun.h>
 
@@ -27,8 +26,8 @@ void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
     }
     ftAnim_8006EBA4(fighter_gobj);
     fighter->accessory4_cb = ftCo_800CE1D4;
-    if ((Item_GObj*) fighter->item_gobj != NULL) {
-        it_8028E938((Item_GObj*) fighter->item_gobj);
+    if (fighter->item_gobj != NULL) {
+        it_8028E938(fighter->item_gobj);
     }
 }
 
@@ -49,8 +48,8 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
     ftAnim_8006EBA4(fighter_gobj);
     ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
-    if ((Item_GObj*) fighter->item_gobj != NULL) {
-        it_8028E938((Item_GObj*) fighter->item_gobj);
+    if (fighter->item_gobj != NULL) {
+        it_8028E938(fighter->item_gobj);
     }
 }
 
@@ -100,8 +99,11 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
 }
 
 /// LGun accessory4 callback function (ran after fire input already processed)
+/// @todo Cannot use #ftCheckThrowB0 under the surrounding `dont_inline`.
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
 {
     f32 f0;
@@ -140,7 +142,9 @@ void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_LGunShoot_Anim(Fighter_GObj* fighter_gobj)
 {

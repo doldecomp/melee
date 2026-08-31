@@ -4,7 +4,6 @@
 
 #include "if/types.h"
 
-#include <printf.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -13,16 +12,10 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/hsd_3915.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {
@@ -61,18 +54,20 @@
     struct DevText entries[32];
     char pad[0x6B0 - 0x680];
 } devtext_pool;
-STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
+ASSERT_SIZE(struct DevText_Pool, 0x6B0);
 
 /// .sbss
-/* 4D6E18 */ static DevText* devtext_drawlist;
-/* 4D6E1C */ static HSD_GObj* devtext_gobj;
-/* 4D6E20 */ static HSD_CObj* devtext_cobj;
-/* 4D6E24 */ static int devtext_setup_classifier;
-/* 4D6E28 */ static int devtext_setup_p_link;
-/* 4D6E2C */ static int devtext_setup_priority;
-/* 4D6E30 */ static int devtext_setup_gx_link;
-/* 4D6E34 */ static int devtext_setup_render_priority;
-/* 4D6E38 */ static DevText* devtext_poolhead;
+/* 4D6E38 */ DevText* devtext_poolhead[2];
+/* 4D6E34 */ int devtext_setup_render_priority;
+/* 4D6E30 */ int devtext_setup_gx_link;
+/* 4D6E2C */ int devtext_setup_priority;
+/* 4D6E28 */ int devtext_setup_p_link;
+/* 4D6E24 */ int devtext_setup_classifier;
+/* 4D6E20 */ HSD_CObj* devtext_cobj;
+/* 4D6E1C */ HSD_GObj* devtext_gobj;
+/* 4D6E18 */ DevText* devtext_drawlist;
+
+#define devtext_poolhead devtext_poolhead[0]
 
 int DevText_StrLen(char* str)
 {
@@ -123,8 +118,10 @@ HSD_GObj* DevText_GetGObj(void)
     return devtext_gobj;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_InitPool(void)
 {
     DevText* text = devtext_pool.entries;
@@ -138,7 +135,9 @@ void DevText_InitPool(void)
     devtext_poolhead = devtext_pool.entries;
     devtext_drawlist = NULL;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void DevText_Remove(DevText** ptext)
 {
@@ -205,7 +204,7 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
-    GXColor color;
+    int index;
     PAD_STACK(4);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
@@ -225,16 +224,21 @@ void DevText_Draw(DevText* text)
         }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        GXColor* color_ptr = &color;
-        int y = text->y;
+        GXColor* color_ptr;
+        int col;
         int row;
+        int x;
+        int y = text->y;
         for (row = 0; row < text->h; row++) {
-            int x = text->x;
-            int col;
+            x = text->x;
             for (col = 0; col < text->w; col++) {
-                int index = (col + text->w * row) * 2;
-                s8 chr = text->buf[index];
-                u8 color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
+                GXColor color;
+                s8 chr;
+                u8 color_idx;
+                color_ptr = &color;
+                index = (col + text->w * row) * 2;
+                chr = text->buf[index];
+                color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
                 if (chr) {
                     color = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);
@@ -272,8 +276,10 @@ void DevText_DrawAll(HSD_GObj* gobj, int pass)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
                         int gx_link, u8 gx_priority)
 {
@@ -281,7 +287,7 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
     if (gobj) {
         HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &devtext_CObjDesc);
         if (cobj) {
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
             GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, gx_priority);
             gobj->gxlink_prios = 1LL << gx_link;
         } else {
@@ -289,7 +295,9 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
                         int render_priority, u8 camera_priority)

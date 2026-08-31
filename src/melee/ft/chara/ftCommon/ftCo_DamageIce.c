@@ -14,20 +14,22 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCaptain/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
@@ -41,10 +43,7 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
@@ -57,7 +56,6 @@
 
 static Vec3 const ftCo_DamageIce_HurtboxOffset = { 0 };
 static Vec3 const ftCo_803B74BC = { 0 };
-float atan2f(float, float);
 
 void ftCo_80090984(Fighter_GObj* gobj)
 {
@@ -117,85 +115,26 @@ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj)
     fp->x2227_b6 = false;
 }
 
-static inline void ftCo_DamageIce_StartJump(Fighter* fp)
-{
-    float* ice_size = &fp->co_attrs.damageice_ice_size;
-
-    {
-        ftCo_8009E140(fp, 0);
-        ftCommon_8007F824(fp->gobj);
-        fp->x2222_b3 = true;
-
-        if (fp->ground_or_air == GA_Air) {
-            fp->self_vel = fp->x8c_kb_vel;
-            fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
-        } else {
-            fp->gr_vel = fp->xF0_ground_kb_vel;
-            fp->xF0_ground_kb_vel = 0;
-        }
-
-        ftCommon_8007E2F4(fp, 0x1FF);
-        fp->mv.co.damageice.wall_hit_dir = 0;
-    }
-
-    {
-        float rand, rand_range, rot_min, rot_max;
-
-        rand = HSD_Randf();
-        rot_min = p_ftCommonData->damageice_rot_speed_min;
-        rot_max = p_ftCommonData->damageice_rot_speed_max;
-        rand_range = rot_max - rot_min;
-        fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
-    }
-
-    ftCo_800909D0(fp);
-    ftCo_80090AC0(fp);
-    ftColl_8007B0C0(fp->gobj, Intangible);
-
-    {
-        Vec3 offset = ftCo_DamageIce_HurtboxOffset;
-        ftHurtboxInit hurt;
-
-        hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
-        hurt.height = HurtHeight_Mid;
-        hurt.is_grabbable = false;
-        hurt.a_offset = hurt.b_offset = offset;
-        hurt.scale = *ice_size;
-
-        ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
-    }
-
-    ftCommon_8007EBAC(fp, 1, 0);
-
-    fp->take_dmg_2_cb = ftCo_DamageIce_OnHit2;
-    fp->take_dmg_cb = ftCo_DamageIce_OnHit;
-}
-
-static inline void JObjRotMtx(Mtx mtx, HSD_JObj* jobj)
-{
-    Quaternion rot;
-    Mtx rot_mtx;
-
-    HSD_JObjGetRotation(jobj, &rot);
-    if ((jobj->flags & JOBJ_USE_QUATERNION) == 0) {
-        HSD_MkRotationMtx(rot_mtx, (Vec3*) &rot);
-    } else {
-        HSD_MtxQuat(rot_mtx, &rot);
-    }
-    PSMTXTranspose(rot_mtx, mtx);
-}
-
 void ftCo_DamageIce_Init(Fighter_GObj* gobj)
 {
     HSD_JObj *xrotn, *yrotn;
-    Fighter* fp;
     Vec3 pos;
     Mtx sp17C, sp14C, sp11C, spEC;
     Quaternion rot_y;
     Mtx rot_mtx_y;
+    u8 _p4[4];
     Quaternion rot_x;
     Mtx rot_mtx_x;
-    PAD_STACK(16);
+    u8 _[8];
+    float param;
+    ftHurtboxInit hurt;
+    Vec3 offset;
+    u8 _q[8];
+    HSD_JObj* effect_joint;
+    float* ice_size;
+    float rot_min, rot_max;
+    float rand, rand_range;
+    Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
 
@@ -242,7 +181,51 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     HSD_JObjAddTranslationY(yrotn, pos.y);
     HSD_JObjAddTranslationZ(yrotn, pos.z);
 
-    ftCo_DamageIce_StartJump(fp);
+    ftCo_8009E140(fp, 0);
+    ftCommon_8007F824(fp->gobj);
+    fp->x2222_b3 = true;
+
+    if (fp->ground_or_air == GA_Air) {
+        fp->self_vel = fp->x8c_kb_vel;
+        fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
+    } else {
+        fp->gr_vel = fp->xF0_ground_kb_vel;
+        fp->xF0_ground_kb_vel = 0;
+    }
+
+    ftCommon_8007E2F4(fp, 0x1FF);
+    fp->mv.co.damageice.wall_hit_dir = 0;
+    rand = HSD_Randf();
+    rot_min = p_ftCommonData->damageice_rot_speed_min;
+    rot_max = p_ftCommonData->damageice_rot_speed_max;
+    rand_range = rot_max - rot_min;
+    fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
+    ftCo_800909D0(fp);
+
+    effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
+    ice_size = &fp->co_attrs.damageice_ice_size;
+    param = fp->x34_scale.y * *ice_size / p_ftCommonData->damageice_ice_size;
+
+    {
+        float* effect_param = &param;
+        efAsync_Spawn(fp->gobj, &GET_FIGHTER(fp->gobj)->x60C, 3, 0x415,
+                      effect_joint, effect_param);
+    }
+    fp->x2219_b0 = true;
+    ftColl_8007B0C0(fp->gobj, HurtCapsule_Intangible);
+
+    offset = ftCo_DamageIce_HurtboxOffset;
+    hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
+    hurt.height = HurtHeight_Mid;
+    hurt.is_grabbable = false;
+    hurt.a_offset = hurt.b_offset = offset;
+    hurt.scale = *ice_size;
+
+    ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
+    ftCommon_8007EBAC(fp, 1, 0);
+
+    fp->take_dmg_2_cb = ftCo_DamageIce_OnHit2;
+    fp->take_dmg_cb = ftCo_DamageIce_OnHit;
 
     ftCo_800886D8(fp, 0x122, 0x7F, 0x40);
 }
@@ -300,7 +283,7 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
                       effect_joint, effect_param);
     }
     fp->x2219_b0 = true;
-    ftColl_8007B0C0(fp->gobj, Intangible);
+    ftColl_8007B0C0(fp->gobj, HurtCapsule_Intangible);
 
     offset = ftCo_DamageIce_HurtboxOffset;
     hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
@@ -353,8 +336,8 @@ void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007CEF4(fp);
-        ftCommon_Fall(fp, co->grav * p_ftCommonData->damageice_gravity_mult,
-                      co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity * p_ftCommonData->damageice_gravity_mult,
+                      co->terminal_velocity);
     } else {
         ft_80084F3C(gobj);
     }

@@ -1,7 +1,7 @@
 #ifndef GALE01_0C576C
 #define GALE01_0C576C
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0C576C */ bool ftCo_800C576C(Fighter_GObj* gobj);
 /* 0C5848 */ void ftCo_HammerTurn_Anim(Fighter_GObj* gobj);

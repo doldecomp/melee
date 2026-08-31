@@ -15,6 +15,12 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 
+/* 2C248C */ static Item_GObj* it_802C248C(Item* ip, HSD_JObj* jobj);
+/* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);
+/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
+/* 2C2AF4 */ static void fn_802C2AF4(Item_GObj* gobj);
+/* 2C33B8 */ static void it_802C33B8(Item* ip);
+
 ItemStateTable it_803F76B8[] = {
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
@@ -26,7 +32,7 @@ static inline void it_802C248C_setupGObj(HSD_GObj* link_gobj,
                                          HSD_JObj* loaded_jobj,
                                          GObj_RenderFunc callback)
 {
-    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, loaded_jobj);
+    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, loaded_jobj);
     GObj_SetupGXLink(link_gobj, callback, 6, 0);
 }
 
@@ -97,7 +103,7 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = true;
 
             joint = HSD_JObjLoadJoint(it_802C248C_joint28(ip));
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, joint);
             GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
             ip->xDD4_itemVar.climbersstring.x14 = joint;
             result = link_gobj->hsd_obj;
@@ -151,7 +157,7 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
     Item_GObj* item_gobj;
     PAD_STACK(20);
 
-    spawn.kind = 0x71;
+    spawn.kind = It_Kind_IceClimber_GumStrings;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = dir;
@@ -552,7 +558,7 @@ void it_802C3520(Item* ip, Vec3* target)
 
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
-    short pad;
+    s16 pad;
     void (*new_var)(Item_GObj* gobj);
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

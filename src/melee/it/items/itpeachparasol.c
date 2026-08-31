@@ -4,8 +4,6 @@
 
 #include "it/inlines.h"
 
-#include <common_structs.h>
-#include <melee/db/db.h>
 #include <melee/ft/chara/ftPeach/ftPe_SpecialHi.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
@@ -42,7 +40,7 @@ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     SpawnItem spawn;
     Item_GObj* item_gobj;
 
-    spawn.kind = 0x67;
+    spawn.kind = It_Kind_Peach_Parasol;
     Item_InitSpawn(&spawn, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {

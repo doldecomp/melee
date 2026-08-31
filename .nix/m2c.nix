@@ -2,15 +2,12 @@
   stdenv,
   buildPythonPackage,
   fetchFromGitHub,
-
-  graphviz,
   poetry-core,
   pycparser,
 }:
 
 buildPythonPackage {
-  pname = "m2c";
-  version = "unstable";
+  name = "m2c";
 
   src = fetchFromGitHub {
     owner = "matt-kempster";
@@ -26,9 +23,11 @@ buildPythonPackage {
 
   pyproject = true;
 
-  propagatedBuildInputs = [
-    graphviz
+  build-system = [
     poetry-core
+  ];
+
+  dependencies = [
     pycparser
   ];
 }

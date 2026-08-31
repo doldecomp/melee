@@ -1,14 +1,17 @@
 #include "gm_1A33.h"
 
+#include "gm_1A36.h"
+#include "gm_1A45.h"
+#include "gmcamera.h"
+#include "types.h"
+
+#include "lb/lbsnap.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
+
 #include <dolphin/pad.h>
+#include <baselib/controller.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gmcamera.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/mn/mnmain.h>
 
 static f32 gmCamera_803DA758[12] = {
     0.7f,   0.7f,   168.0f, 160.0f, 0.7f, 0.7f,
@@ -58,7 +61,7 @@ void gmCamera_801A33BC(void)
     }
 }
 
-void gmCamera_801A34FC_OnFrame(void)
+void gm_Scene_CameraVs_OnFrame(void)
 {
     CameraVsData* data;
     s32 i;
@@ -74,26 +77,26 @@ void gmCamera_801A34FC_OnFrame(void)
         }
         gmCamera_801A33BC();
     } else if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         *gmCamera_VsCameraTextLayout.x0 = 2;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & (HSD_PAD_START | HSD_PAD_A))
     {
-        lbAudioAx_80024030(1);
+        sfxForward();
         *gmCamera_VsCameraTextLayout.x0 = 0;
         gm_801A4B60();
-    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+    } else if (button = gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS),
                button & PAD_BUTTON_B)
     {
-        lbAudioAx_80024030(0);
+        sfxBack();
         *gmCamera_VsCameraTextLayout.x0 = 1;
         gm_801A4B60();
     }
 }
 
-void gmCamera_801A3634_OnEnter(void* arg0)
+void gm_Scene_CameraVs_OnEnter(void* arg0)
 {
     u32* state = arg0;
 
@@ -109,4 +112,4 @@ void gmCamera_801A3634_OnEnter(void* arg0)
     gmCamera_801A33BC();
 }
 
-void gmCamera_801A367C_OnLeave(UNK_T unused) {}
+void gm_Scene_CameraVs_OnExit(UNK_T unused) {}

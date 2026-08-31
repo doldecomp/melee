@@ -10,7 +10,7 @@
 #include "gr/types.h"
 #include "it/items/ittools.h"
 #include "it/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobjgxlink.h>
@@ -30,37 +30,82 @@ struct grFlatzone_YakumonoParam {
     s32 unk20;
     f32 unk24;
     f32 unk28;
-    s32 unk2C;
+    int unk2C;
     s32 unk30;
     s32 unk34;
     f32 unk38;
     s32 unk3C;
 };
 
-static StageCallbacks grFz_803E7940[9] = {
-    { grFlatzone_80217030, grFlatzone_8021705C, grFlatzone_80217064,
-      grFlatzone_80217068, 0 },
-    { grFlatzone_802173D4, grFlatzone_80217430, grFlatzone_80217438,
-      grFlatzone_8021743C, 0 },
-    { grFlatzone_8021707C, grFlatzone_802171CC, grFlatzone_802171D4,
-      grFlatzone_802173D0, 0xC0000000 },
-    { grFlatzone_80217648, grFlatzone_802176B4, grFlatzone_802176BC,
-      grFlatzone_80217CD0, 0 },
-    { grFlatzone_80217CD4, grFlatzone_80217D28, grFlatzone_80217D30,
-      grFlatzone_80217DA4, 0 },
-    { grFlatzone_80217450, grFlatzone_802174E4, grFlatzone_802174EC,
-      grFlatzone_80217644, 0 },
-    { grFlatzone_80217DA8, grFlatzone_80217DFC, grFlatzone_80217E04,
-      grFlatzone_80217E78, 0 },
-    { grFlatzone_80217E7C, grFlatzone_80217E80, grFlatzone_80217E88,
-      grFlatzone_80217E8C, 0 },
-    { grFlatzone_80217E90, grFlatzone_80217EE8, grFlatzone_80217EF0,
-      grFlatzone_8021805C, 0 }
+static StageCallbacks grFz_StageCallbacks[] = {
+    {
+        grFlatzone_80217030,
+        grFlatzone_8021705C,
+        grFlatzone_80217064,
+        grFlatzone_80217068,
+        0,
+    },
+    {
+        grFlatzone_802173D4,
+        grFlatzone_80217430,
+        grFlatzone_80217438,
+        grFlatzone_8021743C,
+        0,
+    },
+    {
+        grFlatzone_8021707C,
+        grFlatzone_802171CC,
+        grFlatzone_802171D4,
+        grFlatzone_802173D0,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grFlatzone_80217648,
+        grFlatzone_802176B4,
+        grFlatzone_802176BC,
+        grFlatzone_80217CD0,
+        0,
+    },
+    {
+        grFlatzone_80217CD4,
+        grFlatzone_80217D28,
+        grFlatzone_80217D30,
+        grFlatzone_80217DA4,
+        0,
+    },
+    {
+        grFlatzone_80217450,
+        grFlatzone_802174E4,
+        grFlatzone_802174EC,
+        grFlatzone_80217644,
+        0,
+    },
+    {
+        grFlatzone_80217DA8,
+        grFlatzone_80217DFC,
+        grFlatzone_80217E04,
+        grFlatzone_80217E78,
+        0,
+    },
+    {
+        grFlatzone_80217E7C,
+        grFlatzone_80217E80,
+        grFlatzone_80217E88,
+        grFlatzone_80217E8C,
+        0,
+    },
+    {
+        grFlatzone_80217E90,
+        grFlatzone_80217EE8,
+        grFlatzone_80217EF0,
+        grFlatzone_8021805C,
+        0,
+    },
 };
 
-StageData grFz_803E7A00 = {
-    FLATZONE,
-    grFz_803E7940,
+StageData grFz_StageData = {
+    Gr_Kind_Flatzone,
+    grFz_StageCallbacks,
     "/GrFz.dat",
     grFlatzone_80216E78,
     grFlatzone_80216E74,
@@ -118,7 +163,7 @@ static Ground_GObj* grFlatzone_80216F48_inline(s32 arg0)
 
 HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 {
-    StageCallbacks* callbacks = &grFz_803E7940[gobj_id];
+    StageCallbacks* callbacks = &grFz_StageCallbacks[gobj_id];
     HSD_GObj* gobj = grFlatzone_80216F48_inline(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -128,11 +173,11 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grflatzone.c", 0xE8,
@@ -221,19 +266,19 @@ void grFlatzone_802171D4(Ground_GObj* gobj)
                 } while (gp->u.flatzone.xC6 == gp->u.flatzone.xC5);
                 switch (gp->u.flatzone.xC5) {
                 case 1:
-                    grFlatzone_802171D4_inline(Ground_801C2BA4(4));
+                    grFlatzone_802171D4_inline(Ground_GetMapGObj(4));
                     grFlatzone_80218260();
                     break;
                 case 2:
-                    grFlatzone_802171D4_inline(Ground_801C2BA4(6));
+                    grFlatzone_802171D4_inline(Ground_GetMapGObj(6));
                     grFlatzone_80218260();
                     break;
                 case 3:
-                    grFlatzone_802171D4_inline(Ground_801C2BA4(8));
+                    grFlatzone_802171D4_inline(Ground_GetMapGObj(8));
                     grFlatzone_802181B4();
                     break;
                 case 4:
-                    grFlatzone_802171D4_inline(Ground_801C2BA4(3));
+                    grFlatzone_802171D4_inline(Ground_GetMapGObj(3));
                     grFlatzone_802181B4();
                     break;
                 }
@@ -317,7 +362,7 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
             while (true) {
                 s32 next_anim = HSD_Randi(4);
                 next_anim++;
-                if ((u8) gp->u.flatzone3.xCA ==
+                if (gp->u.flatzone3.xCA ==
                     (u8) (gp->u.flatzone3.xC9 = next_anim))
                 {
                     continue;
@@ -353,7 +398,7 @@ void grFlatzone_80217648(Ground_GObj* gobj)
     gp->u.flatzone2.xC8 = 1.0f;
     gp->u.flatzone2.xCC = NULL;
     gp->u.flatzone2.xD0 = -1;
-    gp->u.flatzone2.xD4 = 0;
+    gp->u.flatzone2.timer = 0;
 }
 
 bool grFlatzone_802176B4(Ground_GObj* gobj)
@@ -393,7 +438,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         } else {
             pos.x = yakumono_param->unk28;
             {
-                HSD_GObj* gobj = Ground_801C2BA4(2);
+                HSD_GObj* gobj = Ground_GetMapGObj(2);
                 if (gobj != NULL) {
                     Ground* gp = GET_GROUND(gobj);
                     if (gp != NULL) {
@@ -406,23 +451,21 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     }
     switch (gp->u.flatzone2.xD0) {
     case 0:
-        if ((s32) gp->u.flatzone2.xD4 ==
-            (s32) ((s32) yakumono_param->unk20 / 2))
-        {
+        if ((s32) gp->u.flatzone2.timer == (s32) (yakumono_param->unk20 / 2)) {
             if (gp->u.flatzone2.xC8 == 1.0f) {
-                grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+                grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
-                grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 2);
+                grAnime_801C8138(gobj, gp->map_id, 2);
             }
             HSD_JObjRemoveAnimAll(jobj);
         }
-        gp->u.unk.xD4 -= 1;
-        if (gp->u.unk.xD4 <= 0) {
-            gp->u.unk.xD0 = 1;
-            gp->u.unk.xD4 = yakumono_param->unk2C *
-                            (yakumono_param->unk30 +
-                             rand_int_inner(yakumono_param->unk34 -
-                                            yakumono_param->unk30));
+        gp->u.flatzone2.timer -= 1;
+        if (gp->u.flatzone2.timer <= 0) {
+            gp->u.flatzone2.xD0 = 1;
+            gp->u.flatzone2.timer = yakumono_param->unk2C *
+                                    (yakumono_param->unk30 +
+                                     rand_int_inner(yakumono_param->unk34 -
+                                                    yakumono_param->unk30));
             if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
@@ -431,15 +474,15 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 1:
-        if ((gp->u.unk.xD4 % yakumono_param->unk2C) == 1) {
+        if ((gp->u.flatzone2.timer % yakumono_param->unk2C) == 1) {
             HSD_JObjGetTranslation(jobj, &pos);
             pos.x += yakumono_param->unk38 * gp->u.flatzone2.xC8;
             HSD_JObjSetTranslate(jobj, &pos);
         }
-        gp->u.flatzone2.xD4 -= 1;
-        if (gp->u.flatzone2.xD4 <= 0) {
+        gp->u.flatzone2.timer -= 1;
+        if (gp->u.flatzone2.timer <= 0) {
             gp->u.flatzone2.xD0 = 2;
-            gp->u.flatzone2.xD4 = 0;
+            gp->u.flatzone2.timer = 0;
             if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 1);
             } else {
@@ -455,7 +498,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             f32 other_z;
             s32 line_id;
             gp->u.unk.xD0 = 3;
-            gp->u.unk.xD4 = yakumono_param->unk3C;
+            gp->u.flatzone2.timer = yakumono_param->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
             pos.x = (36.0f * gp->u.flatzone2.xC8) + pos.x;
             pos.y -= 27.0f;
@@ -481,10 +524,10 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 3:
-        gp->u.flatzone2.xD4 -= 1;
-        if ((s32) gp->u.flatzone2.xD4 <= 1) {
+        gp->u.flatzone2.timer -= 1;
+        if ((s32) gp->u.flatzone2.timer <= 1) {
             gp->u.flatzone2.xD0 = 4;
-            gp->u.flatzone2.xD4 = 0;
+            gp->u.flatzone2.timer = 0;
         }
         break;
     case 4:
@@ -496,7 +539,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     }
     if (trigger_machine != 0) {
         {
-            HSD_GObj* gobj = Ground_801C2BA4(2);
+            HSD_GObj* gobj = Ground_GetMapGObj(2);
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
@@ -505,7 +548,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             }
         }
         if (gp->u.flatzone2.xC8 != 1.0f) {
-            HSD_GObj* gobj = Ground_801C2BA4(2);
+            HSD_GObj* gobj = Ground_GetMapGObj(2);
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
@@ -538,7 +581,7 @@ void grFlatzone_80217D30(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     if (gp->u.flatzone.xC4 != 0) {
         {
-            HSD_GObj* gobj = Ground_801C2BA4(2);
+            HSD_GObj* gobj = Ground_GetMapGObj(2);
             if (gobj != NULL) {
                 Ground* gp = gobj->user_data;
                 if (gp != NULL) {
@@ -611,7 +654,7 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
      * of the locals area with the pool slot above it. Direct access is the
      * established idiom elsewhere in gr (e.g. grcorneria.c). */
     Ground* gp = gobj->user_data;
-    if ((u8) gp->u.flatzone3.xC4 != 0) {
+    if (gp->u.flatzone3.xC4 != 0) {
         gp->u.unk.xC8 = yakumono_param->unk10;
         gp->u.flatzone3.xC4 = 0;
     }
@@ -638,7 +681,7 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
         }
         gp->u.unk.xC8 -= 1;
         if ((s32) gp->u.unk.xC8 <= 0) {
-            HSD_GObj* gobj = Ground_801C2BA4(2);
+            HSD_GObj* gobj = Ground_GetMapGObj(2);
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
@@ -656,7 +699,7 @@ void grFlatzone_80218060(s32 arg0)
     HSD_GObj* gobj;
     Ground* gp;
     PAD_STACK(8);
-    if ((gobj = Ground_801C2BA4(5)) != NULL) {
+    if ((gobj = Ground_GetMapGObj(5)) != NULL) {
         {
             Ground* tmp = GET_GROUND(gobj);
             gp = tmp;
@@ -681,7 +724,7 @@ void grFlatzone_80218060(s32 arg0)
                         v = randi + 1;
                     }
                 } while (((s16(*)[5]) grFz_803E7A68)[gp->u.flatzone.xC7][(
-                             u8) (gp->u.flatzone3.xC9 = v)] == -1);
+                             gp->u.flatzone3.xC9 = v)] == -1);
             }
             gp->u.flatzone3.xCA = 0;
             gp->u.flatzone.xCC =
@@ -698,7 +741,7 @@ static inline void grFlatzone_802181B4_inline(void)
 {
     HSD_GObj* gobj;
     Ground* gp;
-    if ((gobj = Ground_801C2BA4(5)) != NULL) {
+    if ((gobj = Ground_GetMapGObj(5)) != NULL) {
         gp = GET_GROUND(gobj);
         if (gp != NULL) {
             do {
@@ -723,7 +766,7 @@ void grFlatzone_802181B4(void)
 
 void grFlatzone_80218260(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(5);
+    HSD_GObj* gobj = Ground_GetMapGObj(5);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {

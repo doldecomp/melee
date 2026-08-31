@@ -9,8 +9,8 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -24,11 +24,9 @@
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 static MotionFlags const ftKb_MF_GwSpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
@@ -89,8 +87,9 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                     fp->u.kb.xD8 = fp->u.kb.xD4;
                                     var_r6 = temp_r5;
                                     fp->u.kb.xD4 = temp_r5;
-                                    it_802C837C(gobj, &vec0, 0x9B, var_r6,
-                                                fp2->facing_dir);
+                                    it_802C837C(gobj, &vec0,
+                                                It_Kind_Kirby_GameWatchChef,
+                                                var_r6, fp2->facing_dir);
                                 }
                             }
                         }
@@ -163,7 +162,7 @@ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 }
 
 /// #ftGameWatch_SpecialN_SetVars with callback arg
-inline void setGwVars(HSD_GObj* fighter_gobj)
+static inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cmd_vars[0] = 0;

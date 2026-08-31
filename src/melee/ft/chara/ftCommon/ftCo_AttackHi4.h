@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 08C830 */ bool ftCo_AttackHi4_CheckInput(Fighter_GObj* gobj);
 /* 08C948 */ bool ftCo_AttackHi4_CheckInputNoD0(Fighter_GObj* gobj);

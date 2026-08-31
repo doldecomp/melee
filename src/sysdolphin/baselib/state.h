@@ -23,7 +23,7 @@ typedef struct HSD_Chan {
     u32 flags;
     GXColor amb_color;
     GXColor mat_color;
-    u8 enable;
+    GXBool enable;
     GXColorSrc amb_src;
     GXColorSrc mat_src;
     GXLightID light_mask;

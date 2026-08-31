@@ -1,20 +1,17 @@
 
 #include "grtgamewatch.h"
 
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTGw_803E96F8[] = {
+StageCallbacks grTGw_StageCallbacks[] = {
     { grTGameWatch_8022429C, grTGameWatch_802242C8, grTGameWatch_802242D0,
       grTGameWatch_802242D4, 0 },
     { grTGameWatch_80224368, grTGameWatch_802243B8, grTGameWatch_802243C0,
@@ -24,9 +21,9 @@ StageCallbacks grTGw_803E96F8[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTGw_803E9754 = {
-    TGAMEWATCH,
-    grTGw_803E96F8,
+StageData grTGw_StageData = {
+    Gr_Kind_TGamewatch,
+    grTGw_StageCallbacks,
     "/GrTGw.dat",
     grTGameWatch_80224114,
     grTGameWatch_80224110,
@@ -66,7 +63,7 @@ bool grTGameWatch_802241AC(void)
 HSD_GObj* grTGameWatch_802241B4(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTGw_803E96F8[id];
+    StageCallbacks* callbacks = &grTGw_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

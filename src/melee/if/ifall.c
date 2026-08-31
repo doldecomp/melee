@@ -2,7 +2,7 @@
 
 #include "if/if_2F6E.h"
 #include "if/if_2F72.h"
-#include "if/if_2FC93.h"
+#include "if/if_2FD9.h"
 #include "if/ifcoget.h"
 #include "if/ifhazard.h"
 #include "if/ifmagnify.h"
@@ -213,7 +213,7 @@ void ifAll_802F390C(void)
         HSD_CObjDesc* desc = sp14->cameras[0].desc;
         HSD_GObj* gobj = GObj_Create(0x13, 0x14, 0);
         HSD_CObj* cobj = lb_80013B14((HSD_CameraDescPerspective*) desc);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(gobj, fn_802F36B8, 8);
         gobj->gxlink_prios = 0xD00;
         ifAll_804A0FD8.gobj = gobj;
@@ -223,7 +223,7 @@ void ifAll_802F390C(void)
     {
         HSD_GObj* gobj = GObj_Create(0xE, 3, 0);
         HSD_LObj* lobj = HSD_LObjLoadDesc(lightdesc);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
         GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0xA, 0);
         ifAll_804A0FD8.gobj_2 = gobj;
     }

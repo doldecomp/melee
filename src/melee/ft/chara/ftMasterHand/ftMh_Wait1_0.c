@@ -23,7 +23,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
@@ -32,7 +32,6 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/controller.h>
 #include <baselib/random.h>
@@ -171,7 +170,7 @@ struct MasterHandDataStuff ftMh_Init_803D40D0 = {
       0, 1, 2, 4, 0, 0, 1, 2, 3, 0, 0, 0, 0, 0, 0 }
 };
 
-inline void doAnim0(HSD_GObj* gobj)
+static inline void doAnim0(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -189,7 +188,7 @@ inline void doAnim0(HSD_GObj* gobj)
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
 
-inline void doAnim1(HSD_GObj* gobj)
+static inline void doAnim1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -222,7 +221,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 
             ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C,
                                fp->u.mh.x2238, da->x18, da->x20, da->x1C);
-            if (ftBossLib_8015C44C(28) == ftMh_MS_TagRockPaper) {
+            if (ftBossLib_8015C44C(FTKIND_CREZYH) == ftMh_MS_TagRockPaper) {
                 // Crazy Hand Combo Attack
                 switch (ftBossLib_8015C4C4()) {
                 case ftMh_MS_Squeezing1:

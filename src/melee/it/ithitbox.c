@@ -1,14 +1,9 @@
 #include "ithitbox.h"
 
 #include "it_2725.h"
-#include "it_3F14.h"
-#include "itmaplib.h"
 
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/itcoll.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
 void it_802753DC(Item_GObj* item_gobj)
 {
@@ -179,8 +174,10 @@ void it_8027572C(Item_GObj* item_gobj, s32 idx)
     item->x5D4_hitboxes[idx].hit.x40_b0 = 1;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027574C(Item_GObj* item_gobj)
 {
@@ -189,17 +186,19 @@ void it_8027574C(Item_GObj* item_gobj)
     it_80274D6C(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80275788(Item_GObj* item_gobj)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 state;
+    HitCapsuleState state;
     u32 var_ctr;
 
     item = item_gobj->user_data;
-    state = 4;
+    state = HitCapsule_Unk4;
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
         hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {

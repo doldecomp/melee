@@ -21,7 +21,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
@@ -74,14 +73,14 @@ struct DynamicBoneTable {
     /// @at{0} @sz{190}
     HSD_JObj* bones[100];
 };
-STATIC_ASSERT(sizeof(struct DynamicBoneTable) == 0x190);
+ASSERT_SIZE(struct DynamicBoneTable, 0x190);
 
 struct Item_DynamicBones {
     int flags;
     HSD_JObj* skeleton;
     DynamicsDesc dyn_desc;
 };
-STATIC_ASSERT(sizeof(struct Item_DynamicBones) == 0x1C);
+ASSERT_SIZE(struct Item_DynamicBones, 0x1C);
 
 struct ItemAttr {
     u8 x0_is_heavy : 1; // 0x0, bit 0x80, is heavy item (crate)
@@ -672,7 +671,7 @@ struct Item {
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
-STATIC_ASSERT(sizeof(struct Item) == 0xFCC);
+ASSERT_SIZE(struct Item, 0xFCC);
 
 struct sdata_ItemGXLink {
     GObj_RenderFunc x0_renderFunc;
@@ -793,16 +792,16 @@ struct Item_r13_Data {
 // Per-fighter ECB/position record. Populated by ftCo_80098634 (one entry per
 // fighter); read by it_80271B60 to detect item/fighter ECB overlap.
 struct Item_FtTrack {
-    itECB x0_ecb_arr[11];
+    itECB ecb_offset_arr[11];
     s32 xB0;
     s32 xB4;
     s32 xB8;
     s32 xBC;
-    Vec3 xC0_pos_arr[11];
+    Vec3 ft_pos_arr[11];
     u32 x144;
     u32 x148;
     u32 x14C;
-    u32 x150_count;
+    size_t count;
     UnkFlagStruct x154;
 };
 

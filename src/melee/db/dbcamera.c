@@ -10,7 +10,23 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
+
+/* 2270C4 */ static void fn_802270C4(int arg0);
+/* 22713C */ static void fn_8022713C(int arg0);
+/* 227188 */ static void fn_80227188(void);
+/* 2277E8 */ static void fn_802277E8(HSD_GObj*, int);
+/* 227904 */ static void fn_80227904(HSD_GObj* camera, int port);
+/* 2279E8 */ static void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
+                                     Vec3* camera_interest, float cstick_x,
+                                     float cstick_y);
+/* 227B64 */ static void fn_80227B64(HSD_GObj* camera, float x, float y);
+/* 227BA8 */ static void fn_80227BA8(HSD_GObj* camera, Vec3*, float, float);
+/* 227CAC */ static void fn_80227CAC(HSD_GObj* camera, float cstick_y);
+/* 227D38 */ static void fn_80227D38(HSD_GObj* camera, Vec3*, float);
+/* 227EB0 */ static void fn_80227EB0(HSD_GObj* camera, Vec3*, Vec3*, float,
+                                     float);
+/* 227FE0 */ static void fn_80227FE0(HSD_GObj* camera, float x, float y);
+/* 228124 */ static void fn_80228124(HSD_GObj* camera, Vec3*, float, float);
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
 /// @todo does the padding mean this should be in another file before this one?
@@ -25,8 +41,6 @@ static u8 db_ShowCameraInfo;
 
 const GXColor g_bg = { 0x00, 0x00, 0x00, 0x80 };
 const GXColor g_fg = { 0xFF, 0xFF, 0xFF, 0xFF };
-
-extern CameraDebugMode cm_80453004;
 
 void fn_SetupMiscStageVisuals(void)
 {
@@ -147,15 +161,12 @@ static void fn_802270C4(int arg0)
 static void fn_8022713C(int arg0)
 {
     HSD_GObj* gobj;
-    struct {
-        u8 pad[0x10];
-        UnkFlagStruct x10;
-    }* thing;
+    Ground* ground;
 
     for (gobj = HSD_GObj_Entities->x14; gobj != NULL; gobj = gobj->next) {
-        thing = gobj->user_data;
-        if (thing != NULL) {
-            thing->x10.b7 = arg0;
+        ground = gobj->user_data;
+        if (ground != NULL) {
+            ground->x10_flags.b7 = arg0;
         }
     }
 }
@@ -206,8 +217,8 @@ static void fn_80227188(void)
                 HSD_CObjGetEyePosition(cobj, &camera);
                 HSD_CObjGetInterest(cobj, &interest);
                 fov = HSD_CObjGetFov(cobj);
-                ang = rad_to_deg *
-                      atan2f(interest.y - camera.y, -(interest.z - camera.z));
+                ang = MTXRadToDeg(
+                    atan2f(interest.y - camera.y, -(interest.z - camera.z)));
                 DevText_Erase(db_CameraInfoDisplay);
                 DevText_SetCursorXY(db_CameraInfoDisplay, 0, 0);
                 if (ABS(camera.z) > 99999.0F) {
@@ -315,13 +326,6 @@ void fn_CheckCameraInfo(int player, int buttons_down, int buttons_pressed,
             break;
         }
     }
-}
-
-/// #fn_802277E8
-
-static inline HSD_PadStatus* get_pad(u8 i)
-{
-    return &HSD_PadMasterStatus[i];
 }
 
 static inline float cstick_threshold(float cstick, float val)
@@ -514,7 +518,7 @@ static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8,
     cobj = GET_COBJ(arg0);
     dist = HSD_CObjGetEyeDistance(cobj);
     dist =
-        0.03F * (2.0F * (dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
+        0.03F * (2.0F * (dist * tanf(MTXDegToRad(HSD_CObjGetFov(cobj)) / 2)));
     if (arg8 != 0.0F) {
         HSD_CObjGetLeftVector(cobj, &sp2C);
         PSVECScale(&sp2C, &sp2C, dist * arg8);
@@ -549,7 +553,7 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
         eye_dist = HSD_CObjGetEyeDistance(cobj);
         scale_factor =
             0.03F *
-            (2.0F * (eye_dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
+            (2.0F * (eye_dist * tanf(MTXDegToRad(HSD_CObjGetFov(cobj)) / 2)));
         if (cstick_x != 0.0F) {
             HSD_CObjGetLeftVector(cobj, &left_vec);
             VECScale(&left_vec, &left_vec, scale_factor * cstick_x);

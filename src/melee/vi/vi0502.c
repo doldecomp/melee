@@ -12,6 +12,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -25,7 +27,6 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -75,12 +76,12 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(17, 0);
+    Stage_802251E8(St_Kind_Greens, 0);
     Item_80266FA8();
     Item_80266FCC();
-    Ground_801C04BC(0.7f);
+    Ground_SetParamY(0.7f);
     Stage_8022524C();
-    Stage_8022532C(17, 0);
+    Stage_8022532C(St_Kind_Greens, 0);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
@@ -123,14 +124,14 @@ void vi0502_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0502_8031E328(HSD_GObj* gobj, int unused)
+static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
     vi_RunCamera(gobj, (u8*) &erase_colors_vi0502, 0x281);
 }
 
-void vi0502_RunFrame(HSD_GObj* gobj)
+void vi0502_GObj_OnProc(HSD_GObj* gobj)
 {
     HSD_CObj* cobj;
 
@@ -147,7 +148,7 @@ void vi0502_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void un_8031E444_OnEnter(void* arg)
+void vi0502_Scene_OnEnter(void* arg)
 {
     u8 char_index;
     Vi0502Data* data;
@@ -181,31 +182,31 @@ void un_8031E444_OnEnter(void* arg)
 
     fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
-    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
     erase_colors_vi0502 = fog->color;
 
     light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F90->lights);
-    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F90->cameras->desc);
-    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(camera_gobj,
-                        (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
+                        (void (*)(HSD_GObj*, int)) vi0502_GObj_OnRender, 5);
     HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(camera_gobj, vi0502_RunFrame, 0);
+    HSD_GObj_SetupProc(camera_gobj, vi0502_GObj_OnProc, 0);
 
     for (i = 0; un_804D6F90->models[i] != NULL; i++) {
         model_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F90->models[i]->joint);
         new_var = jobj;
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, new_var);
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, new_var);
         GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(jobj, un_804D6F90->models[i],
                     (un_804D6F90->models[i] != NULL) * 0);
@@ -218,6 +219,11 @@ void un_8031E444_OnEnter(void* arg)
     costume1 = desc->p1_costume_index;
     costume2 = desc->p2_costume_index;
     vi0502_8031E124(char_index, costume1, costume2);
+}
+
+void vi0502_Scene_OnFrame(void)
+{
+    vi_8031CAAC();
 }
 
 Vi0502Data un_804000D0 = {

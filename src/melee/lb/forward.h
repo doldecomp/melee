@@ -23,7 +23,7 @@ typedef struct HurtCapsule HurtCapsule;
 typedef struct lbCardNew_SnapshotEntry lbCardNew_SnapshotEntry;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct PreloadCache PreloadCache;
-typedef struct PreloadCacheScene PreloadCacheScene;
+typedef struct PreloadedGameModeState PreloadedGameModeState;
 typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
 typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;
@@ -34,7 +34,7 @@ typedef struct LbShadow LbShadow;
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,
     HurtCapsule_Disabled,
-    Intangible
+    HurtCapsule_Intangible
 } HurtCapsuleState;
 
 typedef enum HitElement {
@@ -108,5 +108,17 @@ typedef enum ECBSourceKind {
     ECBSource_JObj,
     ECBSource_Fixed,
 } ECBSourceKind;
+
+/// Size of the memory card task array.
+typedef enum LbCardNewTaskArray {
+    /* 0x0B */ LbCardNewTaskArray_Max = 11,
+} LbCardNewTaskArray;
+
+typedef enum lbDvdPreloadKind {
+    lbDvdPreload_0,
+    lbDvdPreload_1,
+    lbDvdPreload_2,
+    lbDvdPreload_3,
+} lbDvdPreloadKind;
 
 #endif

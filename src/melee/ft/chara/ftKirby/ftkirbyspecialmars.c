@@ -4,13 +4,13 @@
 
 #include <placeholder.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
@@ -25,7 +25,6 @@
 
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 
@@ -51,6 +50,7 @@ void fn_8010B1F4(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void fn_8010B2E8(Fighter_GObj* gobj)
@@ -60,7 +60,7 @@ void fn_8010B2E8(Fighter_GObj* gobj)
     fp->mv.kb.specialn_ms.cur_frame = 0;
 }
 
-inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
+static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj;
@@ -249,7 +249,7 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
+static inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind == FTKIND_MARS) {
@@ -268,7 +268,7 @@ void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 }
 
-inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
+static inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind == FTKIND_MARS) {
@@ -396,7 +396,7 @@ void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
+    if (fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialNLoop;
     } else {
         i = ftKb_MS_FeSpecialNLoop;
@@ -410,7 +410,7 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
+    if (fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialAirNLoop;
     } else {
         i = ftKb_MS_FeSpecialAirNLoop;
@@ -437,7 +437,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
@@ -472,7 +472,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
@@ -535,8 +535,7 @@ void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
@@ -558,8 +557,7 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 

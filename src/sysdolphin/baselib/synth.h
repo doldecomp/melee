@@ -3,17 +3,17 @@
 
 #include <placeholder.h>
 
-#include <dolphin/ax.h>
+#include <dolphin/os/OSAlloc.h>
 
 struct HSD_SynthSFXNode;
 
+/* 4D6018 */ extern OSHeapHandle HSD_Synth_804D6018; ///< audio heap
+
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
-/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(int, int, void*,
-                                                 int cancelflag);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
-/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int (*)(int, int),
-                                  int);
+/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int,
+                                  void (*)(int, int), int);
 /* 388B0C */ void HSD_SynthSFXWaitForLoadCompletion(void (*)(void));
 /* 388B50 */ int HSD_SynthSFXGetPendingLoadCount(void);
 /* 388B60 */ int HSD_SynthSFXCancelLoad(int);
@@ -21,7 +21,6 @@ struct HSD_SynthSFXNode;
 /* 388D30 */ void HSD_SynthSFXUnloadBank(int);
 /* 388DC8 */ void HSD_Synth_80388DC8(int);
 /* 388E08 */ void HSD_Synth_80388E08(int);
-/* 388EFC */ void HSD_SynthSFXGroupDataReaddress(AXVPB*, void* callback);
 /* 388FF0 */ void HSD_SynthSFXBankDeflag(int);
 /* 389084 */ void HSD_SynthSFXBankDeflagSync(void);
 /* 389094 */ u32 HSD_SynthGetSoundMode(void);
@@ -30,8 +29,8 @@ struct HSD_SynthSFXNode;
 /* 3891D0 */ void dropcallback(void*);
 /* 389334 */ // s32 HSD_Synth_80389334(u16, u8, u8, u8, u8, u8, f32, f32, f32,
              //                       f32, f32);
-/* 3896F0 */ bool HSD_SynthSFXPlayWithGroup(int, u8, u8, u8, int, u8, int, f32,
-                                            f32, f32, f32, f32);
+/* 3896F0 */ bool HSD_SynthSFXPlayWithGroup(int, u8, u8, u8, int, int, int,
+                                            f32, f32, f32, f32, f32);
 void HSD_SynthSFXKeyOff(int);
 /* 3899B0 */ void HSD_SynthSFXStopRange(int);
 /* 389A50 */ void HSD_SynthSFXPause(int);

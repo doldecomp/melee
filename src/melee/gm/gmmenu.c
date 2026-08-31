@@ -1,10 +1,13 @@
 #include "gmmenu.h"
 
+#include "gm/gmevent.h"
+
 #include <dolphin/types.h>
+#include <melee/gm/gm_1884.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
 
-void gm_801A50B8_OnLoad(void)
+void gm_Mode_ClassicGOver_OnLoad(void)
 {
     u8 var_r0;
     UnkAllstarData* temp_r3;
@@ -23,7 +26,7 @@ void gm_801A50B8_OnLoad(void)
     gm_801BF020(1);
 }
 
-void gm_801A5130_OnLoad(void)
+void gm_Mode_AdventureGOver_OnLoad(void)
 {
     u8 var_r0;
     UnkAdventureData* temp_r3;
@@ -42,7 +45,7 @@ void gm_801A5130_OnLoad(void)
     gm_801BF020(0);
 }
 
-void gm_801A51A8_OnLoad(void)
+void gm_Mode_AllstarGOver_OnLoad(void)
 {
     UnkAllstarData* tmp = &gm_80473A18;
     u8 var_r0;
@@ -59,7 +62,7 @@ void gm_801A51A8_OnLoad(void)
     gm_801BF020(2);
 }
 
-void gm_801A5220_OnLoad(void)
+void gm_Mode_Opening_OnLoad(void)
 {
-    gm_SetSceneIndex(gm_801BF718());
+    gm_SetGameModeStateId(gm_801BF718());
 }

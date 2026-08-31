@@ -38,7 +38,8 @@ typedef struct _THPFileInfo {
     u32 currByte;
     u32 cnt;
     u8* x0C;
-    u8 pad[0x78 - 16];
+    THPCoeff* mcuBuffer[6];
+    u8 pad[0x78 - 0x28];
     u8 validHuffmanTabs;
     u8 x78;
     u8 pad3[0xb];
@@ -64,7 +65,6 @@ typedef struct {
 } THPDec_8032FD40_Data;
 
 
-static u8 __THPSetupBuffers(THPFileInfo*);
 static u8 __THPReadFrameHeader(THPFileInfo*);
 static u8 __THPReadScaneHeader(THPFileInfo*);
 static u8 __THPReadQuantizationTable(THPFileInfo*);
@@ -75,9 +75,6 @@ static u8 __THPHuffGenerateCodeTable(THPFileInfo*, u8 tab_index);
 static int __THPHuffGenerateDecoderTables(THPFileInfo*, u8 tab_index);
 static u8 __THPRestartDefinition(THPFileInfo*);
 static void __THPPrepBitStream(THPFileInfo*);
-static void __THPDecompressYUV(void*, void*, void*);
-static void __THPGQRRestore(void);
-static void __THPDecompressiMCURow512x448(void);
 static void __THPDecompressiMCURow640x480(THPFileInfo*);
 static void __THPDecompressiMCURowNxN(THPFileInfo*, u32);
 static void __THPInverseDCTNoYPos(THPCoeff*, u32);
@@ -88,12 +85,12 @@ static void __THPHuffDecodeDCTCompV(THPFileInfo*, THPCoeff*);
 s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work);
 s32 THPDec_803302EC(u8** data);
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 arg1);
-s32 THPDec_8032F8D4(u32 file, void* out);
+s32 THPDec_8032F8D4(u8* data, THPDec_8032FD40_Data* out);
 u8 THPDec_80330158(THPFileInfo* info);
 void THPDec_80331340(s32, void*, void*, void*);
 void THPDec_803313D0(s32, void*, void*, void*, u32);
 void THPDec_803300E0(u32* data);
-BOOL THPInit(void);
+void THPInit(void);
 
 #ifdef __cplusplus
 }

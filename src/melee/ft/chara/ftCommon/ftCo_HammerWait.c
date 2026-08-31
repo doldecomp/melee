@@ -7,7 +7,11 @@
 #include "ftCo_HammerWalk.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -25,7 +29,6 @@
 #include "it/items/ithammer.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0C5408 */ static void ftCo_800C5408(Fighter* fp);

@@ -9,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -18,33 +19,21 @@
 #include "ftCommon/inlines.h"
 #include "ftPurin/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
 
 static MotionFlags const ftPr_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
-/// @todo Float order hack.
-static float forceFloatOrder0(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return 0;
+    (void) 0.0f;
+    (void) MTXDegToRad(1);
+    (void) 1.0f;
 }
-
-/// @todo Float order hack.
-static float forceFloatOrder1(void)
-{
-    return deg_to_rad;
-}
-
-/// @todo Float order hack.
-static float forceFloatOrder2(void)
-{
-    return 1;
-}
+#endif
 
 void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
 {
@@ -105,10 +94,7 @@ static inline float calcAngleRadians(HSD_GObj* gobj, float lstick_y)
         left_stick_y = -left_stick_y;
     }
 
-    {
-        float degrees = (left_stick_y * da->xE4) / (da->xE0 - da->xDC);
-        return deg_to_rad * degrees;
-    }
+    return MTXDegToRad(left_stick_y * da->xE4 / (da->xE0 - da->xDC));
 }
 
 /// This is called once each frame during Puff's aerial side special

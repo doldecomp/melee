@@ -3,7 +3,6 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -40,8 +39,8 @@ struct lbl_804D65A8_t;
 /* 171B64 */ void fn_80171B64(struct lbl_804D65A8_t*);
 /* 171BA4 */ int fn_80171BA4(void*);
 /* 171DC4 */ void fn_80171DC4(void);
-/* 1720B4 */ int gm_801720B4(void);
-/* 1720F8 */ int gm_801720F8(void);
+/* 1720B4 */ bool gm_801720B4(void);
+/* 1720F8 */ bool gm_801720F8(void);
 /* 172140 */ int gm_80172140(UNK_PARAMS);
 /* 172174 */ UNK_RET gm_80172174(UNK_PARAMS);
 /* 17219C */ bool gm_8017219C(u32);
@@ -99,7 +98,7 @@ struct lbl_804D65A8_t;
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
-/* 1737E8 */ void gm_801737E8_OnLoad(void);
+/* 1737E8 */ void gm_Mode_ChallengerApproach_OnLoad(void);
 /* 173834 */ UNK_RET fn_80173834(u8 ckind, u8 major, bool);
 /* 17390C */ UNK_RET gm_8017390C(int, int);
 /* 173AA4 */ UNK_RET gm_80173AA4(UNK_PARAMS);

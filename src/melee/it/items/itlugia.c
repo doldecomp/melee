@@ -6,12 +6,11 @@
 #include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
@@ -52,7 +51,7 @@ static inline float my_sqrtf(float x)
     return x;
 }
 
-inline float my_sqrtf_accurate(float x)
+static inline float my_sqrtf_accurate(float x)
 {
     volatile float y;
     if (x > 0.0f) {
@@ -335,7 +334,7 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.y >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.y =
                 (ip->xDD4_itemVar.lugia.xE50.y - 1.0);
-            it_802D1E8C(gobj, 0xC8, attrs->x1C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast, attrs->x1C);
             switch (HSD_Randi(3)) {
             case 0:
                 Item_8026AE84(ip, 0x274D, 0x7F, 0x40);
@@ -352,12 +351,12 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.z >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.z =
                 (ip->xDD4_itemVar.lugia.xE50.z - 1.0);
-            it_802D1E8C(gobj, 0xC9, attrs->x24);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast2, attrs->x24);
         }
 
         if (ip->xDD4_itemVar.lugia.x88 >= 1.0) {
             ip->xDD4_itemVar.lugia.x88 = (ip->xDD4_itemVar.lugia.x88 - 1.0);
-            it_802D1E8C(gobj, 0xCA, attrs->x2C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast3, attrs->x2C);
         }
     }
 }
@@ -461,14 +460,19 @@ void it_802D208C(Item_GObj* gobj)
         }
 
         target = ip->xDD4_itemVar.lugia.x8C;
-        angle = deg_to_rad * new_angle;
+        angle = MTXDegToRad(new_angle);
         target.x += attrs->x3C * cosf(angle);
         target.y += attrs->x3C * sinf(angle);
 
         // permuterslop
         dx = dz = ip->xDD4_itemVar.lugia.x64.x - target.x;
         dy = ip->xDD4_itemVar.lugia.x64.y - target.y;
-        dz = (dz = ip->xDD4_itemVar.lugia.x64.z) - target.z;
+        dz = (
+#ifdef MUST_MATCH
+                 dz =
+#endif
+                     ip->xDD4_itemVar.lugia.x64.z) -
+             target.z;
         {
             f32 dx2 = dx * dx;
             f32 dy2 = dy * dy;
@@ -530,13 +534,13 @@ void it_802D24A0(Item_GObj* gobj)
     f32 multiplier = 0.0f;
 
     switch (ip->kind) {
-    case 0xC8:
+    case It_Kind_Lugia_Aeroblast:
         multiplier = attrs[1];
         break;
-    case 0xC9:
+    case It_Kind_Lugia_Aeroblast2:
         multiplier = attrs[2];
         break;
-    case 0xCA:
+    case It_Kind_Lugia_Aeroblast3:
         multiplier = attrs[3];
         break;
     default:

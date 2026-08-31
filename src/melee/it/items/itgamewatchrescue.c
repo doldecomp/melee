@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -91,7 +90,6 @@ void it_802C8208(HSD_GObj* hsd_gobj, enum_t msid)
     Item_802694CC(hsd_gobj);
 }
 
-/// #itGamewatchrescue_UnkMotion1_Anim
 bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* item1;

@@ -4,7 +4,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include "ftLink/forward.h" // IWYU pragma: export
 
 #include "ftMars/types.h"
@@ -13,7 +12,6 @@
 
 #include "lb/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 struct ftLk_DatAttrs {

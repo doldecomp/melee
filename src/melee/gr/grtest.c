@@ -6,27 +6,23 @@
 #include "gr/forward.h"
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
-#include "gr/stage.h"
 #include "gr/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-S16Vec3 grTe_803E56B8[] = {
+GrJoint grTe_803E56B8[] = {
     { 0, 2, 1 },   { 1, 2, 2 },   { 2, 2, 3 },   { 3, 2, 4 }, { 4, 2, 5 },
     { 5, 2, 6 },   { 6, 2, 7 },   { 7, 2, 8 },   { 8, 2, 9 }, { 9, 2, 10 },
     { 10, 2, 11 }, { 12, 2, 16 }, { 13, 2, 17 },
 };
 
-StageCallbacks grTe_803E5708[] = {
+StageCallbacks grTe_StageCallbacks[] = {
     { grTest_80207130, grTest_8020715C, grTest_80207164, grTest_80207168, 0 },
     { grTest_802073D0, grTest_802073FC, grTest_80207404, grTest_80207408, 0 },
     { grTest_8020716C, grTest_802071BC, grTest_802071C4, grTest_802073AC,
@@ -34,9 +30,9 @@ StageCallbacks grTe_803E5708[] = {
     { 0, 0, 0, 0, 0 }
 };
 
-StageData grTe_803E5764 = {
-    TEST,
-    grTe_803E5708,
+StageData grTe_StageData = {
+    Gr_Kind_Test,
+    grTe_StageCallbacks,
     "/GrTe.dat",
     grTest_80206E30,
     grTest_80206E2C,
@@ -89,7 +85,7 @@ bool grTest_8020703C(void)
 HSD_GObj* grTest_80207044(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTe_803E5708[gobj_id];
+    StageCallbacks* callbacks = &grTe_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -134,7 +130,7 @@ void grTest_802071C4(Ground_GObj* gobj)
     HSD_PadStatus* pad;
     PAD_STACK(16);
 
-    if ((HSD_PadMasterStatus[1].trigger & 0x100) != 0) {
+    if ((HSD_PadMasterStatus[1].trigger & HSD_PAD_A) != 0) {
         iVar2 = Ground_801C3FA4(gobj, 0x10);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {
@@ -146,7 +142,7 @@ void grTest_802071C4(Ground_GObj* gobj)
         }
     }
     pad = &HSD_PadMasterStatus[2];
-    if ((HSD_PadMasterStatus[2].trigger & 0x100) != 0) {
+    if ((HSD_PadMasterStatus[2].trigger & HSD_PAD_A) != 0) {
         iVar2 = Ground_801C3FA4(gobj, 0x11);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {

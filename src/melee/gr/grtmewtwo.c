@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,16 +10,14 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
@@ -55,10 +52,9 @@ typedef struct grTMewtwo_UnkStruct {
 /* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(enum_t arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
-/* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
 /* 4D6B08 */ static grTMewtwo_UnkStruct* yakumono_param;
 
-static StageCallbacks grTMewtwo_803E8F70[4] = {
+static StageCallbacks grTMewtwo_StageCallbacks[4] = {
     {
         grTMewtwo_8022236C,
         grTMewtwo_80222398,
@@ -89,9 +85,9 @@ static StageCallbacks grTMewtwo_803E8F70[4] = {
     },
 };
 
-StageData grTMewtwo_803E8FCC = {
-    TMEWTWO,
-    grTMewtwo_803E8F70,
+StageData grTMewtwo_StageData = {
+    Gr_Kind_TMewtwo,
+    grTMewtwo_StageCallbacks,
     "/GrTMt.dat",
     grTMewtwo_802221DC,
     grTMewtwo_802221D8,
@@ -135,7 +131,7 @@ bool grTMewtwo_8022227C(void)
 Ground_GObj* grTMewtwo_80222284(int index)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];
+    StageCallbacks* callbacks = &grTMewtwo_StageCallbacks[index];
 
     gobj = Ground_GetStageGObj(index);
 

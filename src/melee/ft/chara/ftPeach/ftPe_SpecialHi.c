@@ -5,7 +5,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -13,7 +17,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_Landing.h"
@@ -27,7 +30,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <melee/it/items/itpeachparasol.h>
@@ -87,11 +89,6 @@ bool ftPe_8011D518(HSD_GObj* gobj)
         }
     }
     return false;
-}
-
-static void setupParasol(HSD_GObj* gobj)
-{
-    ftPe_8011D518(gobj);
 }
 
 /// @todo Can maybe use #ensureUnkItem?
@@ -238,7 +235,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     if (!fp->cmd_vars[0] && abs_lstick_x > da->x7C) {
         float deg = da->x80 * ((abs_lstick_x - da->x7C) / (1.0 - da->x7C));
         float rad =
-            fp->input.lstick.x > 0 ? -(deg * deg_to_rad) : +(deg * deg_to_rad);
+            fp->input.lstick.x > 0 ? -MTXDegToRad(deg) : +MTXDegToRad(deg);
         float abs_lstick_angle = ABS(fp->lstick_angle);
         if (ABS(rad) > abs_lstick_angle) {
             fp->lstick_angle = rad;
@@ -277,7 +274,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->self_vel.y = fp->self_vel.y * da->x8C;
         fp->self_vel.z = fp->self_vel.z * da->x8C;
     } else {
-        ftCommon_Fall(fp, da->x88, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x88, ca->terminal_velocity);
         ftCommon_8007CF58(fp);
     }
 }
@@ -340,7 +337,7 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
         float vel_y = fp->self_vel.y;
         ft_80085154(gobj);
         fp->self_vel.y = vel_y;
-        ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+        ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
     } else {
         ft_80084FA8(gobj);
     }
@@ -358,7 +355,7 @@ void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     fp->self_vel.y *= da->x8C;
     fp->self_vel.z *= da->x8C;
     fp->self_vel.y = vel_y;
-    ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
 }
 
 void ftPe_SpecialHi_8011E064(HSD_GObj* gobj)

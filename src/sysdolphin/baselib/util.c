@@ -22,7 +22,7 @@ u32 HSD_GetNbBits(u32 c)
     int i;
 
     for (i = 0; i < 32; i++) {
-        if ((c) & (1 << i)) {
+        if (c & (1 << i)) {
             ret++;
         }
     }

@@ -5,16 +5,14 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "mp/mplib.h"
 
 ItemStateTable it_803F7F58[] = {
@@ -349,7 +347,7 @@ void it_802D2D2C(Item_GObj* gobj)
         spawn.x3C_damage = 0;
         spawn.vel.y = spawn.vel.x = 0.0f;
         spawn.vel.z = 0.0f;
-        spawn.kind = Pokemon_Houou_SacredFire;
+        spawn.kind = It_Kind_Houou_SacredFire;
         spawn.x0_parent_gobj = ip->owner;
         spawn.x4_parent_gobj2 = gobj;
         spawn.x44_flag.b0 = true;

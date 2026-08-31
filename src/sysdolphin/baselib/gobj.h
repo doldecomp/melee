@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include "baselib/forward.h"
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
@@ -16,12 +16,16 @@
 #define HSD_GOBJ_CLASS_ITEMLINK 0x7
 
 #define HSD_GOBJ_CLASS_EFFECT 0x8
+#define HSD_GOBJ_CLASS_SISLIB_UNK 0x9
+#define HSD_GOBJ_CLASS_FOG 0xA
 #define HSD_GOBJ_CLASS_LIGHT 0xB
 #define HSD_GOBJ_CLASS_GROUND 0xD
 #define HSD_GOBJ_CLASS_UI 0xE
+#define HSD_GOBJ_CLASS_TEXT 0x11
 #define HSD_GOBJ_CLASS_CAMERA 0x13
+#define HSD_GOBJ_CLASS_SOUND 0x17
 
-struct HSD_GObj {
+typedef struct HSD_GObj {
     /*  +0 */ u16 classifier;
     /*  +2 */ u8 p_link;
     /*  +3 */ u8 gx_link;
@@ -40,7 +44,7 @@ struct HSD_GObj {
     /* +2C */ void* user_data;
     /* +30 */ void (*user_data_remove_func)(void* data);
     /* +34 */ void* x34_unk;
-};
+} HSD_GObj;
 
 typedef void (*GObjFunc)(HSD_Obj*);
 
@@ -59,7 +63,7 @@ typedef struct _HSD_GObjLibInitDataType {
 } HSD_GObjLibInitDataType;
 
 /// @todo Belongs in `melee/` somewhere
-typedef struct _HSD_GObjList {
+typedef struct HSD_GObjList {
     /*  +0 */ HSD_GObj* x0;
     /*  +4 */ HSD_GObj* x4;
     /*  +8 */ HSD_GObj* x8;
@@ -113,10 +117,10 @@ extern HSD_GObjProc* HSD_GObj_804D7838;
 extern s32 HSD_GObj_804D783C;
 extern HSD_GObjProc** HSD_GObj_804D7840;
 extern HSD_GObjProc** HSD_GObj_804D7844;
-extern s8 HSD_GObj_804D7848;
-extern u8 HSD_GObj_804D7849;
-extern s8 HSD_GObj_804D784A;
-extern u8 HSD_GObj_804D784B;
+extern s8 HSD_GObj_FogKind;
+extern u8 HSD_GObj_JObjKind;
+extern s8 HSD_GObj_LightKind;
+extern u8 HSD_GObj_CameraKind;
 
 extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 
@@ -130,7 +134,6 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1);
 void HSD_GObj_80390CD4(HSD_GObj* gobj);
 void HSD_GObj_80390CFC(void);
-void render_gobj(HSD_GObj* cur, int i);
 void HSD_GObj_80390FC0(void);
 void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused);
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused);

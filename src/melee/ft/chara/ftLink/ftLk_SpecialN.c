@@ -1,13 +1,16 @@
 #include "ftLk_SpecialN.h"
 
 #include "ftLk_Init.h"
-#include "math.h"
 #include "placeholder.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -28,8 +31,7 @@
 #include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
@@ -259,7 +261,7 @@ void ftLk_SpecialN_Enter(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x0.x = fp->mv.lk.specialn.x0.y = 0.0f;
 
     /// @todo Float order hack
-    (void) (5 * deg_to_rad);
+    (void) MTXDegToRad(5);
 
     fp->mv.lk.specialn.unk_timer = 0;
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
@@ -524,7 +526,7 @@ static inline void doEndColl(Fighter_GObj* gobj)
                     NULL, &lpos);
         rpos.z = lpos.z = 0;
         item_gobj = fp->item_gobj;
-        itLinkArrow_802A850C(fp->u.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
+        itLinkArrow_802A850C(fp->u.lk.arrow_gobj, &rpos, &lpos, MTXDegToRad(5),
                              fp->mv.lk.specialn.x0.y, da->x0);
         ftLk_SpecialN_UnsetArrow(gobj);
         fp->item_gobj = item_gobj;

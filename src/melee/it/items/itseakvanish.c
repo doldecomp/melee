@@ -5,9 +5,7 @@
 #include "it/inlines.h"
 #include "it/it_2725.h"
 
-#include <common_structs.h>
 #include <melee/db/db.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 

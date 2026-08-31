@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,13 +10,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grTRoy_802243F4(bool);
@@ -41,7 +38,7 @@ static void grTRoy_802246C4(Ground_GObj*);
 static DynamicsDesc* grTRoy_802246C8(enum_t);
 static bool grTRoy_802246D0(Vec3*, int, HSD_JObj*);
 
-StageCallbacks grTFe_803E97C0[4] = {
+StageCallbacks grTFe_StageCallbacks[4] = {
     {
         grTRoy_80224580,
         grTRoy_802245AC,
@@ -65,9 +62,9 @@ StageCallbacks grTFe_803E97C0[4] = {
     },
 };
 
-StageData grTFe_803E981C = {
-    TEMBLEM,
-    grTFe_803E97C0,
+StageData grTFe_StageData = {
+    Gr_Kind_TEmblem,
+    grTFe_StageCallbacks,
     "/GrTFe.dat",
     grTRoy_802243F8,
     grTRoy_802243F4,
@@ -101,7 +98,7 @@ static bool grTRoy_80224490(void)
 static HSD_GObj* grTRoy_80224498(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTFe_803E97C0[gobj_id];
+    StageCallbacks* callbacks = &grTFe_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

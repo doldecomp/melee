@@ -81,7 +81,6 @@ typedef struct HSD_ShapeSet HSD_ShapeSet;
 typedef struct HSD_ShapeSetDesc HSD_ShapeSetDesc;
 typedef struct HSD_SM HSD_SM;
 typedef struct HSD_SObj HSD_SObj;
-typedef struct HSD_Spline HSD_Spline;
 typedef struct HSD_TExpDag HSD_TExpDag;
 typedef struct HSD_TExpRes HSD_TExpRes;
 typedef struct HSD_Text HSD_Text;
@@ -165,6 +164,7 @@ typedef enum HSD_TrspMask {
 #define LOBJ_INFINITE (1 << 0)
 #define LOBJ_POINT (2 << 0)
 #define LOBJ_SPOT (3 << 0)
+#define LOBJ_FLAGS_B1 (1 << 1)
 #define LOBJ_DIFFUSE (1 << 2)
 #define LOBJ_SPECULAR (1 << 3)
 #define LOBJ_ALPHA (1 << 4)
@@ -173,7 +173,7 @@ typedef enum HSD_TrspMask {
 #define LOBJ_DIFF_DIRTY (1 << 7)
 #define LOBJ_SPEC_DIRTY (1 << 8)
 
-#define LOBJ_TYPE_MASK 3
+#define LOBJ_TYPE_MASK (LOBJ_INFINITE | LOBJ_FLAGS_B1)
 
 #define LOBJ_LIGHT_ATTN_NONE 0
 #define LOBJ_LIGHT_ATTN 1

@@ -2,12 +2,15 @@
 
 #include "ftCo_CliffAttack.h"
 #include "ftCo_StopCeil.h"
-#include "math.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -17,7 +20,6 @@
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
@@ -49,7 +51,7 @@ bool ftCo_8009AA0C(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
+bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1, float stick_x, float angle)
 {
     Fighter* fp = gobj->user_data;
     if (angle > p_ftCommonData->x20_radians ||
@@ -74,7 +76,7 @@ bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
 void ftCo_8009AB9C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
+    FtMotionId msid = fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffClimbQuick
                           : ftCo_MS_CliffClimbSlow;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);

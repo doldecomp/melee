@@ -280,12 +280,12 @@ static char nr_joint[] = "PlyCaptain5K_Share_joint";
 static char gy_dat[] = "PlCaGy.dat";
 static char gy_joint[] = "PlyCaptain5KGy_Share_joint";
 
-#ifdef BUGFIX
-/// @todo What.
-char re_dat[] = "PlCaRe.dat";
-#else
+/**
+ * @note The trailing dot is intentional: ::lbFileGetFullName appends "usd" or
+ * "dat" to a bare-dot basename based on the language setting, selecting
+ * between "PlCaRe.usd" and "PlCaRe.dat" on disc.
+ */
 char re_dat[] = "PlCaRe.";
-#endif
 
 static char re_joint[] = "PlyCaptain5KRe_Share_joint";
 static char wh_dat[] = "PlCaWh.dat";

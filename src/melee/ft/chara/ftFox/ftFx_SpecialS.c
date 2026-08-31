@@ -1,9 +1,12 @@
 #include "ftFx_SpecialS.h"
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -11,14 +14,12 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/inlines.h"
 #include "ftFox/types.h"
 
-#include <common_structs.h>
 #include <melee/it/items/itfoxillusion.h>
 
 static MotionFlags const ftFx_MF_SpecialS_Coll =
@@ -39,6 +40,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// 0x800E9E78
@@ -188,7 +190,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     } else {
-        ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(fp, da->x2C_FOX_ILLUSION_UNK1);
 }
@@ -417,7 +419,7 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
 }
 
-inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 {
     float var;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -530,7 +532,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         fp->mv.fx.SpecialS.gravityDelay--;
     } else {
         ftCommon_Fall(fp, da->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);
@@ -568,7 +570,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     }
 };
 
-inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);

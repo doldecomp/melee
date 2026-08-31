@@ -1,23 +1,20 @@
 #include "grtganon.h"
 
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTGn_803E9880[] = {
+StageCallbacks grTGn_StageCallbacks[] = {
     { grTGanon_8022486C, grTGanon_80224898, grTGanon_802248A0,
       grTGanon_802248A4, 0 },
     { grTGanon_80224938, grTGanon_80224988, grTGanon_80224990,
@@ -27,9 +24,9 @@ StageCallbacks grTGn_803E9880[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTGn_803E98DC = {
-    TGANON,
-    grTGn_803E9880,
+StageData grTGn_StageData = {
+    Gr_Kind_TGanon,
+    grTGn_StageCallbacks,
     "/GrTGn.dat",
     grTGanon_802246DC,
     grTGanon_802246D8,
@@ -87,7 +84,7 @@ bool grTGanon_8022477C(void)
 HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTGn_803E9880[id];
+    StageCallbacks* callbacks = &grTGn_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

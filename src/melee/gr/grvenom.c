@@ -13,8 +13,8 @@
 #include "if/ifstatus.h"
 #include "it/items/itarwinglaser.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
@@ -28,7 +28,7 @@
 #include <baselib/sislib.h>
 
 typedef struct grVe_Data {
-    /* +0 */ S16Vec3 joints[5];
+    /* +0 */ GrJoint joints[5];
     /* +1E */ u16 pad;
     /* +20 */ struct {
         /* +20 */ HSD_GObj* arwing_gobj[3];
@@ -61,7 +61,7 @@ static grVe_Data grVe_803E5348 = {
 
 static int grVe_803E5380[3] = { 0 };
 
-StageCallbacks grVe_803E538C[16] = {
+StageCallbacks grVe_StageCallbacks[16] = {
     {
         grVenom_80203F98,
         grVenom_80203FC4,
@@ -176,9 +176,9 @@ StageCallbacks grVe_803E538C[16] = {
     },
 };
 
-StageData grVe_803E54CC = {
-    VENOM,
-    grVe_803E538C,
+StageData grVe_StageData = {
+    Gr_Kind_Venom,
+    grVe_StageCallbacks,
     "/GrVe",
     grVenom_80203B18,
     grVenom_80203B14,
@@ -250,7 +250,7 @@ void grVenom_8020362C(void)
             grVe_804D6A38 = grVe_804D6A38 - 1;
             if (grVe_804D6A38 <= 0) {
                 s32 combined;
-                Ground* gp = Ground_801C2BA4(7)->user_data;
+                Ground* gp = Ground_GetMapGObj(7)->user_data;
                 group_a =
                     gp->u.venom2.xE0_state.b3 | gp->u.venom2.xE0_state.b4;
                 group_b =
@@ -372,7 +372,7 @@ void grVenom_8020362C(void)
                     data->arwing.arwing_gobj[grVe_804D6A34] =
                         grVenom_80203EAC(2);
                 } else {
-                    Ground* gp = Ground_801C2BA4(7)->user_data;
+                    Ground* gp = Ground_GetMapGObj(7)->user_data;
                     group_a =
                         gp->u.venom2.xE0_state.b3 | gp->u.venom2.xE0_state.b4;
                     group_b =
@@ -572,11 +572,11 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grvenom.c", 0x23B,
@@ -642,8 +642,6 @@ bool grVenom_802040A4(Ground_GObj* arg)
 void grVenom_802040AC(Ground_GObj* arg) {}
 
 void grVenom_802040B0(Ground_GObj* arg) {}
-
-enum_t Stage_80225194(void);
 
 void fn_802040B4(Ground_GObj* gobj)
 {
@@ -733,7 +731,7 @@ void grVenom_80204284(Ground_GObj* gobj)
             } else {
                 ifStatus_802F6898();
                 un_802FF570();
-                if (Ground_801C2BA4(1) == NULL) {
+                if (Ground_GetMapGObj(1) == NULL) {
                     ifStatus_802F68F0();
                     un_802FF620();
                     gp->u.venom_platform.smash_taunt_timer = -1;
@@ -1112,7 +1110,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 
     if (gobj != NULL) {
         gp = gobj->user_data;
-        Ground_801C2BA4(5);
+        Ground_GetMapGObj(5);
         jobj = Ground_801C3FA4(gobj, 5);
         lb_8000B1CC(jobj, NULL, &jobj_pos);
         new_var = spawn_table;
@@ -1364,11 +1362,6 @@ s32 grVenom_80205DF8(Vec3* pos)
 
 /// grVenom_80205E84
 
-float Stage_GetBlastZoneBottomOffset(void);
-float Stage_GetBlastZoneLeftOffset(void);
-float Stage_GetBlastZoneRightOffset(void);
-float Stage_GetBlastZoneTopOffset(void);
-
 s32 grVenom_80205E84(Vec3* pos)
 {
     return Stage_IsOutsideBlastZoneWithMargin(pos, 20.0F);
@@ -1510,7 +1503,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
 
             if ((other = (HSD_GObj*) base[gp->u.venom.xC8 + 8]) != NULL) {
                 other_gp = other->user_data;
-                Ground_801C2BA4(5);
+                Ground_GetMapGObj(5);
                 lb_8000B1CC(Ground_801C3FA4(other, 5), NULL, &sp64);
                 {
                     VenomSpawnData* spawn_data =
@@ -1594,7 +1587,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     NULL)
                 {
                     far_other_gp = far_other->user_data;
-                    Ground_801C2BA4(5);
+                    Ground_GetMapGObj(5);
                     lb_8000B1CC(Ground_801C3FA4(far_other, 5), NULL, &sp50);
                     {
                         VenomSpawnData* spawn_data =
@@ -1728,8 +1721,6 @@ void grVenom_80206874(Ground_GObj* gobj)
     gp->u.venom.xFC = 0;
 }
 
-/// #grVenom_80206874
-
 bool grVenom_80206B68(Ground_GObj* arg)
 {
     return false;
@@ -1768,7 +1759,7 @@ bool grVenom_80206BF0(int arg0)
     Ground* gp;
     PAD_STACK(32);
 
-    if (Ground_801C2BA4(8) != NULL) {
+    if (Ground_GetMapGObj(8) != NULL) {
         return 0;
     }
     if (arg0 == 2) {
@@ -1791,12 +1782,12 @@ void grVenom_80206CB0(s32 arg0)
 {
     HSD_GObj* gobj;
 
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         if (arg0 != 0) {
             Ground_801C4A08(gobj);
         }
-        gobj = Ground_801C2BA4(1);
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             Ground_801C4A08(gobj);
         }
@@ -1810,7 +1801,7 @@ s32 grVenom_80206D10(s32 arg0)
     s32 result;
     u32 diff;
 
-    if (stage_info.internal_stage_id == VENOM && arg0 != -1) {
+    if (stage_info.grkind == Gr_Kind_Venom && arg0 != -1) {
         result = mpJointFromLine(arg0);
         diff = result - 3;
         in_range = 1;
@@ -1837,7 +1828,7 @@ bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
     Ground* gp;
 
     lb_8000B1CC(arg2, NULL, &sp20);
-    gobj = Ground_801C2BA4(5);
+    gobj = Ground_GetMapGObj(5);
     if (gobj != NULL) {
         gp = gobj->user_data;
         if (gp != NULL && gp->u.venom_platform.lower_jobj == arg2) {

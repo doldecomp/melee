@@ -1,8 +1,6 @@
 #ifndef GALE01_2AF1A4
 #define GALE01_2AF1A4
 
-#include "ft/chara/ftLink/ftLk_SpecialN.h"
-
 #include "ft/forward.h"
 #include "it/forward.h"
 

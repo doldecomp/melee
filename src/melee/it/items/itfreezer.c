@@ -2,18 +2,15 @@
 
 #include "inlines.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 
 ItemStateTable it_803F7C70[] = {
     { 0, itFreezer_UnkMotion0_Anim, itFreezer_UnkMotion0_Phys,
@@ -116,7 +113,7 @@ void itFreezer_UnkMotion2_Phys(Item_GObj* gobj)
         item->xDAC_itcmd_var0 = 0;
         item->xDB0_itcmd_var1 = 1;
     }
-    if ((u32) item->xDB0_itcmd_var1 != false) {
+    if (item->xDB0_itcmd_var1 != false) {
         itFreezerAttributes* attrs =
             item->xC4_article_data->x4_specialAttributes;
         item->x40_vel.y += attrs->x8;

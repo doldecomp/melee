@@ -9,12 +9,11 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
@@ -71,25 +70,6 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
         return arg1 / 8;
     }
     return 9;
-}
-
-static inline s32 it_80291D38_attr(s32 charge_level, itSScopeAttributes* attrs)
-{
-    switch (charge_level) {
-    case 0:
-        return attrs->xC[0];
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-        return attrs->xC[charge_level];
-    case 9:
-        return attrs->xC[9];
-    }
 }
 
 s32 it_80291D38(Item_GObj* gobj, s32 charge_level)
@@ -163,11 +143,6 @@ void it_80291F14(Item_GObj* gobj, int charge_level)
     if (ip->xD4C < 0) {
         ip->xD4C = 0;
     }
-}
-
-static s32 it_80291D38_outline(Item_GObj* gobj, int charge_level)
-{
-    return it_80291D38(gobj, charge_level);
 }
 
 void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)

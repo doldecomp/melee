@@ -1,8 +1,6 @@
 #ifndef GALE01_05A6F8
 #define GALE01_05A6F8
 
-#include <placeholder.h>
-
 #include "mp/forward.h"
 
 #include "mp/types.h"
@@ -21,9 +19,7 @@
                                     int arg2, int arg3, int arg4, int arg5,
                                     bool arg6);
 /* 05B334 */ void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3);
-
-extern mpIsland_Palette mpIsland_TerrainPalette;
-struct mpIsland_80458E88_t;
-extern struct mpIsland_80458E88_t mpIsland_80458E88;
+/* 3B73E8 */ extern mpIsland_Palette const mpIsland_TerrainPalette;
+/* 458E88 */ extern struct mpIsland_80458E88_t mpIsland_80458E88;
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "debug.h"
 
-#include <__mem.h>
+#include <string.h>
 
 HSD_ObjAllocData hsd_iddata;
 
@@ -23,20 +23,17 @@ void HSD_IDSetup(void)
     memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 
-inline u32 hash(u32 id)
+static inline u32 hash(u32 id)
 {
     return id % 0x65;
 }
 
-inline IDEntry* IDEntryAlloc(void)
+static inline IDEntry* IDEntryAlloc(void)
 {
     IDEntry* entry;
 
     entry = HSD_ObjAlloc(HSD_IDGetAllocData());
-    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
-    if (entry == NULL) {
-        __assert("id.c", 67, "entry");
-    }
+    HSD_ASSERT(67, entry);
     memset(entry, 0, sizeof(IDEntry));
 
     return entry;
@@ -70,7 +67,7 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
     }
 }
 
-inline void IDEntryFree(IDEntry* entry)
+static inline void IDEntryFree(IDEntry* entry)
 {
     HSD_ObjFree(HSD_IDGetAllocData(), entry);
 }

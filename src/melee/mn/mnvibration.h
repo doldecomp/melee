@@ -1,22 +1,21 @@
 #ifndef MELEE_MN_VIBRATION_H
 #define MELEE_MN_VIBRATION_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
-extern f32 mnVibration_804DC020;
-extern f32 mnVibration_804DC030;
-extern f32 mnVibration_804DC050; ///< intro-reveal frame, port panel 1
-extern f32 mnVibration_804DC054; ///< intro-reveal frame, port panel 2
-extern f32 mnVibration_804DC058; ///< intro-reveal frame, port panel 3
-extern f32 mnVibration_804DC05C; ///< intro-reveal frame, port panel 4
-extern f32 mnVibration_804DC060; ///< intro-reveal frame, name list
 extern SDATA char mnVibration_804D4FF4[];
 extern SDATA char mnVibration_804D4FFC[];
+
+/// @name Intro-reveal frames
+/// @{
+extern const f32 mnVibration_804DC050; ///< port panel 1
+extern const f32 mnVibration_804DC054; ///< port panel 2
+extern const f32 mnVibration_804DC058; ///< port panel 3
+extern const f32 mnVibration_804DC05C; ///< port panel 4
+extern const f32 mnVibration_804DC060; ///< name list
+                                       /// @}
 
 /* 2474C4 */ HSD_JObj* mnVibration_GetNameRowJObj(s32 count);
 /* 247510 */ void mnVibration_HandleInput(HSD_GObj*);

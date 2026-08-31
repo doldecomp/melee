@@ -9,6 +9,9 @@
 #include <platform.h>
 
 #include "ef/efsync.h"
+
+#include "ef/forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0881.h"
 #include "ft/ftchangeparam.h"
@@ -28,25 +31,22 @@
 #include "lb/lbcollision.h"
 #include "lb/lbvector.h"
 
-#include <math.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
-#include <baselib/memory.h>
 #include <baselib/random.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);
 /* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
 /* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
-// return true if (pos_x, pos_y), expanded by the sum of two ECBs, encloses
-// target.
-static inline bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
-                                        itECB* ecb_b, Vec3* target)
+/** @returns `true` if (@p pos_x, @p pos_y), expanded by the sum of two ECBs,
+ * encloses target.
+ */
+static bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
+                                 itECB* ecb_b, Vec3* target)
 {
     f32 top;
     f32 left;
@@ -101,41 +101,25 @@ void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
 }
 
 // EF IDs spawned on hit, indexed by HitElement (-1 = no effect)
-static s32 it_803F1384[17] = {
-    /* [HitElement_Normal]   */ 1000,
-    /* [HitElement_Fire]     */ 1002,
-    /* [HitElement_Electric] */ 1001,
-    /* [HitElement_Slash]    */ 1004,
-    /* [HitElement_Coin]     */ 1145,
-    /* [HitElement_Ice]      */ 1005,
+static s32 hit_effect_ids[17] = {
+    /* [HitElement_Normal]   */ Ef_Id_Unk1000,
+    /* [HitElement_Fire]     */ Ef_Id_Unk1002,
+    /* [HitElement_Electric] */ Ef_Id_Unk1001,
+    /* [HitElement_Slash]    */ Ef_Id_Unk1004,
+    /* [HitElement_Coin]     */ Ef_Id_Unk1145,
+    /* [HitElement_Ice]      */ Ef_Id_Unk1005,
     /* [HitElement_Nap]      */ -1,
     /* [HitElement_Sleep]    */ -1,
     /* [HitElement_Catch]    */ -1,
-    /* [HitElement_Ground]   */ 1000,
-    /* [HitElement_Cape]     */ 1000,
+    /* [HitElement_Ground]   */ Ef_Id_Unk1000,
+    /* [HitElement_Cape]     */ Ef_Id_Unk1000,
     /* [HitElement_Inert]    */ -1,
     /* [HitElement_Disable]  */ -1,
-    /* [HitElement_Dark]     */ 1046,
+    /* [HitElement_Dark]     */ Ef_Id_Unk1046,
     /* [HitElement_Scball]   */ -1,
     /* [HitElement_Lipstick] */ -1,
     /* [HitElement_Leadead]  */ 0,
 };
-
-static inline void it_8026FA2C_inline(Item* arg_item0, HitCapsule* arg_hit,
-                                      s32 arg2, Item* arg_item3, bool arg_chk)
-{
-    HitCapsule* hit;
-    int i;
-
-    for (i = 0; i < ARRAY_SIZE(arg_item0->x5D4_hitboxes); i++) {
-        hit = &arg_item0->x5D4_hitboxes[i].hit;
-        if (hit->state != HitCapsule_Disabled && hit->x4 == arg_hit->x4 &&
-            lbColl_80008688(hit, arg2, arg_item3) && arg_chk)
-        {
-            it_804D6D1C[i] = 0;
-        }
-    }
-}
 
 void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
                  Item* arg_item3, bool arg_chk)
@@ -150,26 +134,6 @@ void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
         {
             it_804D6D1C[i] = 0;
         }
-    }
-}
-
-static inline void it_8026FAC4_inline(Item* arg_item0, HitCapsule* arg_hit,
-                                      s32 arg2, Item* arg3, bool chk)
-{
-    HSD_GObj* item_gobj;
-    Item* item;
-
-    if (arg_item0->xAC4_ignoreItemID != 0) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item0->xAC4_ignoreItemID) {
-                it_8026FA2C_inline(item, arg_hit, arg2, arg3, chk);
-            }
-            item_gobj = item_gobj->next;
-        }
-    } else {
-        it_8026FA2C_inline(arg_item0, arg_hit, arg2, arg3, chk);
     }
 }
 
@@ -194,8 +158,8 @@ void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
     }
 }
 
-static inline void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit,
-                                      int arg2, Fighter* arg3)
+static void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit, int arg2,
+                               Fighter* arg3)
 {
     int i;
     for (i = 0; i < ARRAY_SIZE(arg_item->x5D4_hitboxes); i++) {
@@ -265,11 +229,13 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     lbColl_80008440(arg_hit);
 }
 
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     (void) 0.0f;
     (void) S32_TO_F32;
 }
+#endif
 
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
                  HitCapsule* hit3)
@@ -296,7 +262,7 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
         } else {
             var_r26 = 3;
         }
-        it_8026FAC4_inline(arg_item2, hit3, var_r26, arg_item0, true);
+        it_8026FAC4(arg_item2, hit3, var_r26, arg_item0, true);
         if (dmg_int > arg_item2->xC48) {
             arg_item2->xC48 = dmg_int;
             arg_item2->xCF4_fighterGObjUnk = NULL;
@@ -333,7 +299,7 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
         } else {
             var_r26 = 3;
         }
-        it_8026FAC4_inline(arg_item0, hit1, var_r26, arg_item2, false);
+        it_8026FAC4(arg_item0, hit1, var_r26, arg_item2, false);
         if (dmg_int > arg_item0->xC48) {
             arg_item0->xC48 = dmg_int;
             arg_item0->xCF4_fighterGObjUnk = NULL;
@@ -364,8 +330,8 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
     }
 }
 
-static inline void it_8026FAC4_outline(Item* ip, HitCapsule* hit, s32 arg2,
-                                       void* arg3, bool chk)
+static void it_8026FAC4_noinline(Item* ip, HitCapsule* hit, s32 arg2,
+                                 void* arg3, bool chk)
 {
     it_8026FAC4(ip, hit, arg2, arg3, chk);
 }
@@ -407,7 +373,7 @@ void it_802701BC(Item_GObj* gobj)
                                 fp->x34_scale.y, fp->cur_pos.z))
                         {
                             f32 pos_x;
-                            it_8026FAC4_outline(ip, new_var, 0, fp, 0);
+                            it_8026FAC4_noinline(ip, new_var, 0, fp, 0);
                             pos_x = ABS(fp->cur_pos.x - ip->pos.x);
                             if (pos_x < ip->xD10) {
                                 ip->grab_victim = ip->atk_victim = fp->gobj;
@@ -426,9 +392,8 @@ void it_802701BC(Item_GObj* gobj)
     }
 }
 
-static inline void it_8026F9AC_outline(s32 arg0, void* fighter,
-                                       HitCapsule* hit, Item* arg_item,
-                                       HurtCapsule* hurt)
+static void it_8026F9AC_noinline(s32 arg0, void* fighter, HitCapsule* hit,
+                                 Item* arg_item, HurtCapsule* hurt)
 {
     it_8026F9AC(arg0, fighter, hit, arg_item, hurt);
 }
@@ -500,17 +465,17 @@ void it_802703E8(Item_GObj* arg_item_gobj)
                     if (dmg > arg_item->xCA4) {
                         arg_item->xCA4 = dmg;
                     }
-                    it_8026F9AC_outline(
+                    it_8026F9AC_noinline(
                         1, fighter, hit, arg_item,
                         &arg_item->xACC_itemHurtbox[hurt_index]);
                     it_8027B378(fighter->gobj, arg_item->entity, dmg);
                     kind = arg_item->kind;
-                    if ((kind == Pokemon_Random) &&
+                    if ((kind == It_PKind_Random) &&
                         (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
                         ((hit->sfx_kind == 1U) || (hit->sfx_kind == 2U)))
                     {
                         lbAudioAx_800237A8(0x61A87, 0x7FU, 0x40U);
-                    } else if ((kind != Pokemon_Random) ||
+                    } else if ((kind != It_PKind_Random) ||
                                (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
                                ((hit->sfx_kind != 1U) &&
                                 (hit->sfx_kind != 2U)))
@@ -526,70 +491,13 @@ void it_802703E8(Item_GObj* arg_item_gobj)
     }
 }
 
-static inline bool it_802706D0_sub(Item_GObj* arg_item_gobj, Item* item,
-                                   Item* arg_item, HitCapsule* hit)
-{
-    bool chk2 = false;
-    u32 i;
-    for (i = 0; i < 4U; i++) {
-        if (it_804D6D1C[i] != 0) {
-            HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[i].hit;
-            if ((hit->element == HitElement_Inert) ||
-                (arg_hit->element == HitElement_Inert))
-            {
-                if ((hit->element != arg_hit->element) &&
-                    lbColl_80007AFC(hit, arg_hit, item->scl, arg_item->scl))
-                {
-                    if (hit->element == HitElement_Inert) {
-                        item->xDCE_flag.b6 = 1;
-                        item->toucher = arg_item_gobj;
-                    } else {
-                        arg_item->xDCE_flag.b6 = 1;
-                        arg_item->toucher = item->entity;
-                    }
-                    chk2 = true;
-                    break;
-                }
-            } else if ((hit->x40_b0 == 1) && (arg_hit->x40_b0 == 1) &&
-                       lbColl_80007AFC(hit, arg_hit, item->scl, arg_item->scl))
-            {
-                it_8026FE68(item, hit, arg_item, arg_hit);
-                chk2 = true;
-                break;
-            }
-        }
-    }
-    return chk2;
-}
-
-static inline s32 it_802706D0_sub2(Item* item, Item* arg_item)
-{
-    s32 n = 0;
-    u32 i;
-    for (i = 0; i < 4; i++) {
-        HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[i].hit;
-        if ((arg_hit->state != HitCapsule_Disabled) &&
-            (arg_hit->element != HitElement_Catch) &&
-            ((arg_hit->x40_b2 && (item->ground_or_air == GA_Air)) ||
-             (arg_hit->x40_b3 && (item->ground_or_air == GA_Ground))) &&
-            !lbColl_8000ACFC(item, arg_hit))
-        {
-            it_804D6D1C[i] = 1;
-            n++;
-        } else {
-            it_804D6D1C[i] = 0;
-        }
-    }
-    return n;
-}
-
 static inline void it_802706D0_sub3(Item* item, Item* arg_item,
                                     HitCapsule* hit, HurtCapsule* arg_hurt)
 {
     f32 dir;
     s32 dmg;
     ItemKind kind;
-    it_8026FAC4_outline(item, hit, (hit->x41_b4) ? 8 : 0, arg_item, 0);
+    it_8026FAC4_noinline(item, hit, (hit->x41_b4) ? 8 : 0, arg_item, 0);
     if (ABS(item->x40_vel.x) < it_804D6D28->xD4) {
         if (item->pos.x > arg_item->pos.x) {
             dir = -1.0f;
@@ -611,14 +519,15 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
     if (dmg > arg_item->xCA4) {
         arg_item->xCA4 = dmg;
     }
-    it_8026F9AC_outline(2, item, hit, arg_item, arg_hurt);
+    it_8026F9AC_noinline(2, item, hit, arg_item, arg_hurt);
     it_8027B408(item->entity, arg_item->entity, dmg);
     kind = arg_item->kind;
-    if ((kind == Pokemon_Random) && (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
+    if ((kind == It_PKind_Random) &&
+        (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
         ((hit->sfx_kind == 1U) || (hit->sfx_kind == 2U)))
     {
         lbAudioAx_800237A8(0x61A87, 0x7FU, 0x40U);
-    } else if ((kind != Pokemon_Random) ||
+    } else if ((kind != It_PKind_Random) ||
                (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
                ((hit->sfx_kind != 1U) && (hit->sfx_kind != 2U)))
     {
@@ -791,26 +700,31 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
 
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
+    Item* arg_item;
     u32 index;
-    f32 sp18;
-    Vec3 hurt_pos;
-    DamageLogEntry* damage_log;
+    UNUSED f32 unused_float1;
+    struct {
+        Vec3 v;
+    } hurt_pos;
+    struct {
+        DamageLogEntry* v;
+    } damage_log;
     HSD_GObj* item_owner_gobj;
     f32 knockback_cap;
-    UNUSED f32 unused_float0;
     f32 dir;
-    UNUSED f32 unused_float1;
     f32 knockback;
     f32 max_knockback;
     UNUSED f32 unused_float2;
     UNUSED f32 unused_float3;
     UNUSED f32 unused_float4;
+    f32 sp18;
     UNUSED s32 unused_int0;
-    UNUSED s32 unused_int1;
     s32 element;
     Item* item;
-    Item* arg_item;
     DamageLogEntry* temp_r29;
+    struct {
+        Vec3* v;
+    } hurt_pos_p;
     u32 index2;
     HitCapsule* hit2;
     ItemAttr* attr;
@@ -822,75 +736,84 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     if (it_804D6D18 != 0U) {
         arg_item = arg_item_gobj->user_data;
         max_knockback = -1.0f;
-        damage_log = it_804A0E70;
-        index = 0;
-        while (index < it_804D6D18) {
-            hit = damage_log->x8;
-            attr = arg_item->xCC_item_attr;
-            (void) attr;
-            if (hit->x28 != 0) {
-                knockback = (0.01f * hit->x24 *
-                             ((it_804D6D28->x80_float[11] *
-                               (attr->x1C_damage_mul *
-                                ((it_804D6D28->x80_float[10] *
-                                  it_804D6D28->x80_float[8]) +
-                                 (it_804D6D28->x80_float[9] *
-                                  (it_804D6D28->x80_float[10] * hit->x28))))) +
-                              it_804D6D28->x80_float[12])) +
-                            hit->x2C;
-            } else {
-                knockback = ((0.01f * hit->x24) *
-                             ((it_804D6D28->x80_float[11] *
-                               (attr->x1C_damage_mul *
-                                ((it_804D6D28->x80_float[8] *
-                                  (arg_item->xC9C + (f32) arg_item->xCA0)) +
-                                 (it_804D6D28->x80_float[9] *
-                                  (hit->damage * (arg_item->xC9C +
-                                                  (f32) arg_item->xCA0)))))) +
-                              it_804D6D28->x80_float[12])) +
-                            hit->x2C;
-            }
-            knockback_cap = it_804D6D28->x80_float[7];
-            if (knockback >= knockback_cap) {
-                knockback = knockback_cap;
-            }
-            if (!arg_item->xDCF_flag.b1) {
-                if ((arg_item->hold_kind == 4) || (arg_item->hold_kind == 6)) {
-                    sp18 = hit->damage;
-                    hit2 = damage_log->x8;
-                    arg_item2 = arg_item_gobj->user_data;
-                    hurt_coll_pos = &hit2->hurt_coll_pos;
-                    element = it_803F1384[hit2->element];
-                    switch (element) {
-                    case 0x3E8:
-                        efSync_Spawn(0x3E8, arg_item_gobj, hurt_coll_pos,
-                                     &sp18);
-                        break;
-                    case 0x3E9:
-                    case 0x3EA:
-                    case 0x3EC:
-                    case 0x416:
-                    case 0x479:
-                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, arg_item2);
-                        break;
-                    case 0x3ED:
-                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, &arg_item2->facing_dir);
-                        break;
-                    }
+        {
+            hurt_pos_p.v = &hurt_pos.v;
+            damage_log.v = it_804A0E70;
+            index = 0;
+            while (index < it_804D6D18) {
+                hit = damage_log.v->x8;
+                attr = arg_item->xCC_item_attr;
+                (void) attr;
+                if (hit->x28 != 0) {
+                    knockback =
+                        (0.01f * hit->x24 *
+                         ((it_804D6D28->x80_float[11] *
+                           (attr->x1C_damage_mul *
+                            ((it_804D6D28->x80_float[10] *
+                              it_804D6D28->x80_float[8]) +
+                             (it_804D6D28->x80_float[9] *
+                              (it_804D6D28->x80_float[10] * hit->x28))))) +
+                          it_804D6D28->x80_float[12])) +
+                        hit->x2C;
                 } else {
-                    hurt_pos = hit->hurt_coll_pos;
-                    efSync_Spawn(0x3E8, arg_item_gobj, &hurt_pos,
-                                 &damage_log->x8->damage);
+                    knockback =
+                        ((0.01f * hit->x24) *
+                         ((it_804D6D28->x80_float[11] *
+                           (attr->x1C_damage_mul *
+                            ((it_804D6D28->x80_float[8] *
+                              (arg_item->xC9C + (f32) arg_item->xCA0)) +
+                             (it_804D6D28->x80_float[9] *
+                              (hit->damage *
+                               (arg_item->xC9C + (f32) arg_item->xCA0)))))) +
+                          it_804D6D28->x80_float[12])) +
+                        hit->x2C;
                 }
+                knockback_cap = it_804D6D28->x80_float[7];
+                if (knockback >= knockback_cap) {
+                    knockback = knockback_cap;
+                }
+                if (!arg_item->xDCF_flag.b1) {
+                    if ((arg_item->hold_kind == 4) ||
+                        (arg_item->hold_kind == 6))
+                    {
+                        sp18 = hit->damage;
+                        hit2 = damage_log.v->x8;
+                        arg_item2 = arg_item_gobj->user_data;
+                        hurt_coll_pos = &hit2->hurt_coll_pos;
+                        element = hit_effect_ids[hit2->element];
+                        switch (element) {
+                        case Ef_Id_Unk1000:
+                            efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
+                                         hurt_coll_pos, &sp18);
+                            break;
+                        case Ef_Id_Unk1001:
+                        case Ef_Id_Unk1002:
+                        case Ef_Id_Unk1004:
+                        case Ef_Id_Unk1046:
+                        case Ef_Id_Unk1145:
+                            efSync_Spawn(hit_effect_ids[hit2->element],
+                                         arg_item_gobj, hurt_coll_pos,
+                                         arg_item2);
+                            break;
+                        case Ef_Id_Unk1005:
+                            efSync_Spawn(hit_effect_ids[hit2->element],
+                                         arg_item_gobj, hurt_coll_pos,
+                                         &arg_item2->facing_dir);
+                            break;
+                        }
+                    } else {
+                        hurt_pos.v = hit->hurt_coll_pos;
+                        efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
+                                     hurt_pos_p.v, &damage_log.v->x8->damage);
+                    }
+                }
+                if (knockback > max_knockback) {
+                    max_knockback = knockback;
+                    index2 = index;
+                }
+                damage_log.v++;
+                index++;
             }
-            if (knockback > max_knockback) {
-                max_knockback = knockback;
-                index2 = index;
-            }
-            damage_log++;
-            index++;
         }
         temp_r29 = &it_804A0E70[index2];
         switch (temp_r29->x0) {
@@ -946,13 +869,14 @@ void it_80270E30(Item_GObj* arg_item_gobj)
 
 void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
 {
-    s32 state;
+    HitCapsuleState state;
     HitCapsule* hit;
     Item* item;
 
-    item = arg_item_gobj->user_data;
+    item = GET_ITEM(arg_item_gobj);
     hit = &item->x5D4_hitboxes[index].hit;
     state = hit->state;
+
     switch (state) {
     case HitCapsule_Enabled:
         lb_8000B1CC(hit->jobj, &hit->b_offset, &hit->x4C);
@@ -967,7 +891,7 @@ void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
         hit->x58 = hit->x4C;
         lb_8000B1CC(hit->jobj, &hit->b_offset, &hit->x4C);
         /* fallthrough */
-    case 4: // HitCapsule_Max:
+    case HitCapsule_Unk4:
     case HitCapsule_Disabled:
         return;
     }
@@ -984,7 +908,7 @@ void it_8027137C(Item_GObj* arg_item_gobj)
         arg_item = arg_item_gobj->user_data;
         hit = &arg_item->x5D4_hitboxes[index].hit;
         switch (hit->state) {
-        case 4: // HitCapsule_Max:
+        case HitCapsule_Unk4:
         case HitCapsule_Disabled:
             break;
         case HitCapsule_Enabled:
@@ -1126,7 +1050,7 @@ void it_8027163C(Item_GObj* item_gobj)
         item->xAC8_hurtboxNum = 0;
     }
     if (it_dynams != NULL) {
-        if ((s32) it_dynams->count > 2) {
+        if (it_dynams->count > 2) {
             HSD_ASSERTREPORT(0x415, 0, "item dynamics hit num over!\n");
         }
         cnt = 0U;
@@ -1240,10 +1164,10 @@ void it_80271B60(Item_GObj* item_gobj)
         HSD_JObjGetTranslation(item_jobj, &sp24);
         cnt = 0U;
 
-        while (cnt < Item_804A0CCC.x150_count) {
-            ecb = &Item_804A0CCC.x0_ecb_arr[cnt];
-            y_pos = Item_804A0CCC.xC0_pos_arr[cnt].y;
-            x_pos = Item_804A0CCC.xC0_pos_arr[cnt].x;
+        while (cnt < Item_804A0CCC.count) {
+            ecb = &Item_804A0CCC.ecb_offset_arr[cnt];
+            y_pos = Item_804A0CCC.ft_pos_arr[cnt].y;
+            x_pos = Item_804A0CCC.ft_pos_arr[cnt].x;
             if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &sp24)) {
                 if (ABS(sp24.x - x_pos) < 0.001f) {
                     if (HSD_Randi(2) != 0) {

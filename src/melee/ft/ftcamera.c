@@ -26,26 +26,26 @@ void ftCamera_80076064(Fighter* fp)
     UnkFloat6_Camera spC;
     camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
-    camera_box->x8 = 0;
+    camera_box->state = CmSubjectState_Active;
     if (fp->facing_dir == 1.0f) {
-        camera_box->x40.x = spC.x0.z;
-        camera_box->x40.y = spC.x0.y * Stage_GetCamFixedZoom();
-        camera_box->x28 = 1.0f;
+        camera_box->target_ext.h.x = spC.x0.z;
+        camera_box->target_ext.h.y = spC.x0.y * Stage_GetCamFixedZoom();
+        camera_box->facing_dir = 1.0f;
     } else {
-        camera_box->x40.x = -spC.x0.y * Stage_GetCamFixedZoom();
-        camera_box->x40.y = -spC.x0.z;
-        camera_box->x28 = -1.0f;
+        camera_box->target_ext.h.x = -spC.x0.y * Stage_GetCamFixedZoom();
+        camera_box->target_ext.h.y = -spC.x0.z;
+        camera_box->facing_dir = -1.0f;
     }
     spC.xC; // this line changes everything lol
-    camera_box->x48.x = spC.xC.x;
-    camera_box->x48.y = spC.xC.y;
-    camera_box->x48.z = spC.xC.z;
-    camera_box->x2C = camera_box->x40;
-    camera_box->x34 = camera_box->x48;
-    camera_box->x10.x = fp->cur_pos.x;
-    camera_box->x10.y = fp->cur_pos.y + spC.x0.x;
-    camera_box->x10.z = fp->cur_pos.z;
-    camera_box->x1C = camera_box->x10;
+    camera_box->target_ext.v.x = spC.xC.x;
+    camera_box->target_ext.v.y = spC.xC.y;
+    camera_box->target_ext.v.z = spC.xC.z;
+    camera_box->ext.h = camera_box->target_ext.h;
+    camera_box->ext.v = camera_box->target_ext.v;
+    camera_box->pos.x = fp->cur_pos.x;
+    camera_box->pos.y = fp->cur_pos.y + spC.x0.x;
+    camera_box->pos.z = fp->cur_pos.z;
+    camera_box->bone_pos = camera_box->pos;
 }
 
 /// Fighter_UpdateCameraBox
@@ -63,33 +63,35 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
 
         ftCamera_80076018(fp->ft_data->x3C, &cam_floats, fp->x34_scale.y);
         if (fp->facing_dir == 1.0f) {
-            camera_box->x40.x = cam_floats.x0.z;
-            camera_box->x40.y = cam_floats.x0.y * Stage_GetCamFixedZoom();
-            camera_box->x28 = 1.0f;
+            camera_box->target_ext.h.x = cam_floats.x0.z;
+            camera_box->target_ext.h.y =
+                cam_floats.x0.y * Stage_GetCamFixedZoom();
+            camera_box->facing_dir = 1.0f;
         } else {
-            camera_box->x40.x = -cam_floats.x0.y * Stage_GetCamFixedZoom();
-            camera_box->x40.y = -cam_floats.x0.z;
-            camera_box->x28 = -1.0f;
+            camera_box->target_ext.h.x =
+                -cam_floats.x0.y * Stage_GetCamFixedZoom();
+            camera_box->target_ext.h.y = -cam_floats.x0.z;
+            camera_box->facing_dir = -1.0f;
         }
 
         /// @todo this line changes everything lol
         cam_floats.xC;
 
-        camera_box->x10.x = fp->cur_pos.x;
-        camera_box->x10.y = fp->cur_pos.y + cam_floats.x0.x;
-        camera_box->x10.z = fp->cur_pos.z;
+        camera_box->pos.x = fp->cur_pos.x;
+        camera_box->pos.y = fp->cur_pos.y + cam_floats.x0.x;
+        camera_box->pos.z = fp->cur_pos.z;
     }
 
-    camera_box->xC_b0 = false;
+    camera_box->on_ledge = false;
 
     // Fighter_GetCameraBonePos
-    ftLib_800866DC(gobj, &camera_box->x1C);
+    ftLib_800866DC(gobj, &camera_box->bone_pos);
 }
 
 void ftCamera_800762F4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftLib_800866DC(gobj, &fp->x890_cameraBox->x1C);
+    ftLib_800866DC(gobj, &fp->x890_cameraBox->bone_pos);
 }
 
 void ftCamera_80076320(HSD_GObj* gobj)
@@ -109,6 +111,6 @@ void ftCamera_80076320(HSD_GObj* gobj)
 
     temp_f31 = Stage_GetBlastZoneTopOffset() - center_pos.y;
     temp_f1 = Stage_GetCamBoundsTopOffset() - center_pos.y;
-    camera_box->x10.x = (camera_box->x10.x * temp_f1) / temp_f31;
-    camera_box->x10.y = Stage_GetBlastZoneTopOffset();
+    camera_box->pos.x = (camera_box->pos.x * temp_f1) / temp_f31;
+    camera_box->pos.y = Stage_GetBlastZoneTopOffset();
 }

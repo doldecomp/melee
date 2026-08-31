@@ -4,6 +4,7 @@
 #include "ef/forward.h"
 #include <baselib/forward.h>
 
+#include <stdarg.h>
 #include <dolphin/mtx.h>
 
 typedef struct EF_ParamEntry {
@@ -11,7 +12,7 @@ typedef struct EF_ParamEntry {
     /* 0x4 */ u16 gfx_id;
     /* 0x6 */ u16 alpha;
 } EF_ParamEntry; /* size = 0x8 */
-STATIC_ASSERT(sizeof(EF_ParamEntry) == 0x8);
+ASSERT_SIZE(EF_ParamEntry, 0x8);
 
 /* 05B4B8 */ void efLib_Init(void);
 /* 05B704 */ void efLib_SetFlags(HSD_GObj* gobj, s32 expires);
@@ -77,7 +78,7 @@ efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_list vlist);
 /* 05DB70 */ void efLib_Cb_DPtcl(int linkNo, int bank, int gfx_id,
                                  HSD_JObj* jobj);
 /* 05DBC0 */ void efLib_Cb_ParticleRender(HSD_Particle* particle);
-/* 05DCD0 */ void efLib_Cb_PtclAppSRTHook(HSD_Particle* particle);
+/* 05DCD0 */ void efLib_Cb_PtclAppSRTHook(HSD_Generator* particle);
 
 // Effect callbacks
 

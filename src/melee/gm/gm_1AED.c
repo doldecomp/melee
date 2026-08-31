@@ -4,12 +4,36 @@
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/mn/inlines.h>
+
+struct leaveData {
+    int unk0;
+    u8 unk4;
+};
+
+struct enterData_x0_t {
+    int unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 _[2];
+};
+
+struct enterData {
+    struct enterData_x0_t unk0;
+    struct leaveData unk8;
+    int unk10;
+    int unk14;
+    int unk18;
+    u8 unk1C;
+};
+
+/* 1AEE6C */ static void gm_801AEE6C(int, int, int);
+/* 1AF0D4 */ static bool gm_801AF0D4(void);
+/* 1AF250 */ static void gm_801AF250(void);
 
 static u8 gm_804D6870;
 static u16 gm_804D6872;
@@ -21,7 +45,7 @@ static int gm_803DD550_us[] = {
     1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 5, 2, 5, 2, 3, 2, 2, 4, 2, 3, 2, 1, 2,
 };
 
-static struct gm_80480DA8_t gm_80480DA8;
+static struct enterData gm_80480DA8;
 
 void gm_801AEE6C(int arg0, int arg1, int arg2)
 {
@@ -75,25 +99,25 @@ static inline bool gm_801AF0D4_inline(void)
     return false;
 }
 
-int gm_801AF0D4(void)
+bool gm_801AF0D4(void)
 {
     int saved_unk1C = gm_80480DA8.unk1C;
 
     if (gm_801AF0D4_inline()) {
-        return 1;
+        return true;
     }
 
     if (gm_801AEDC8() & 0x40001 ? 1 : 0) {
         if (gm_80480DA8.unk1C != 0) {
             if (gm_80480DA8.unk10 != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
             gm_80480DA8.unk1C = 0;
         }
     } else if ((gm_801AEDC8() & 0x80002 ? 1 : 0)) {
         if (gm_80480DA8.unk1C < 1) {
             if (gm_80480DA8.unk10 != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
             gm_80480DA8.unk1C = 1;
         }
@@ -102,14 +126,14 @@ int gm_801AF0D4(void)
         gm_801AE640(0, gm_80480DA8.unk1C);
         gm_801AE74C(0, !gm_80480DA8.unk1C);
     }
-    return 0;
+    return false;
 }
 
 static inline u8 set_gm_804D6870_inline(void)
 {
-    if ((HSD_PadCopyStatus->button & 0x40) &&
-        (HSD_PadCopyStatus->button & 0x20) &&
-        (HSD_PadCopyStatus->button & 0x100))
+    if ((HSD_PadCopyStatus->button & HSD_PAD_L) &&
+        (HSD_PadCopyStatus->button & HSD_PAD_R) &&
+        (HSD_PadCopyStatus->button & HSD_PAD_A))
     {
         gm_804D6870 = 1;
     }
@@ -118,8 +142,8 @@ static inline u8 set_gm_804D6870_inline(void)
 
 static inline bool gm_801AEDC8_flag_check(void)
 {
-    if (gm_801AEDC8() & 0x1100) {
-        lbAudioAx_80024030(1);
+    if (gm_801AEDC8() & (HSD_PAD_START | HSD_PAD_A)) {
+        sfxForward();
         return true;
     }
     return false;
@@ -218,26 +242,26 @@ void gm_801AF250(void)
     }
 }
 
-void gm_801AF568_OnFrame(void)
+void gm_Scene_MemCard_OnFrame(void)
 {
     int temp_r29;
     u8 _[0x14];
 
-    if (DbLevel >= 3 && set_gm_804D6870_inline() != 0) {
-        if (HSD_PadCopyStatus->trigger & 0x40) {
+    if (DbLevel >= DbLKind_DebugRom && set_gm_804D6870_inline() != 0) {
+        if (HSD_PadCopyStatus->trigger & HSD_PAD_L) {
             if (gm_804D6872 > 6) {
                 gm_804D6872 -= 1;
                 gm_801AEE6C(0, gm_804D6872, get_lang_val(gm_804D6872));
             }
-        } else if ((HSD_PadCopyStatus->trigger & 0x20)) {
+        } else if ((HSD_PadCopyStatus->trigger & HSD_PAD_R)) {
             if (gm_804D6872 < 0x18) {
                 gm_804D6872 += 1;
                 gm_801AEE6C(0, gm_804D6872, get_lang_val(gm_804D6872));
             }
         }
-        if ((HSD_PadCopyStatus->button & 0x40) &&
-            (HSD_PadCopyStatus->button & 0x20) &&
-            (HSD_PadCopyStatus->button & 0x200))
+        if ((HSD_PadCopyStatus->button & HSD_PAD_L) &&
+            (HSD_PadCopyStatus->button & HSD_PAD_R) &&
+            (HSD_PadCopyStatus->button & HSD_PAD_B))
         {
             gm_801A4B60();
         }
@@ -415,20 +439,23 @@ void gm_801AF568_OnFrame(void)
     }
 }
 
-void gm_801B0264_OnEnter(struct gm_80480DA8_t* arg0)
+static inline bool checkUnk0(void)
 {
-    s32 var_r0;
+    if (gm_80480DA8.unk0.unk0 == 0) {
+        return false;
+    }
+    return true;
+}
+
+void gm_Scene_MemCard_OnEnter(void* user_data)
+{
+    struct enterData* data = user_data;
 
     memzero(&gm_80480DA8, sizeof(gm_80480DA8));
-    if (arg0 != 0U) {
-        gm_80480DA8.unk0 = arg0->unk0;
+    if (data != NULL) {
+        gm_80480DA8.unk0 = data->unk0;
     }
-    if (gm_80480DA8.unk0.unk0 == 0) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 1;
-    }
-    gm_80480DA8.unk14 = var_r0;
+    gm_80480DA8.unk14 = checkUnk0();
     gm_80480DA8.unk8.unk4 = gm_80480DA8.unk0.unk5;
     lb_8001C550();
     lb_8001D164(0);
@@ -437,10 +464,11 @@ void gm_801B0264_OnEnter(struct gm_80480DA8_t* arg0)
     gm_804D6872 = 6;
 }
 
-void gm_801B0304_OnLeave(struct gm_80480DA8_8_t* arg0)
+void gm_Scene_MemCard_OnExit(void* user_data)
 {
-    if (arg0 != NULL) {
-        *arg0 = gm_80480DA8.unk8;
+    struct leaveData* data = user_data;
+    if (data != NULL) {
+        *data = gm_80480DA8.unk8;
     }
     gm_801AE848(0);
 }

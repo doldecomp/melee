@@ -8,7 +8,6 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Landing.h"
@@ -33,18 +32,14 @@
 
 #include "mp/mplib.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);
 /* 105978 */ static void fn_80105978(Fighter_GObj* gobj);
-/* 105A34 */ static void fn_80105A34(Fighter_GObj* gobj);
 /* 3CB710 */ static float ftKb_Init_803CB710[] = { 0.65F, 0.7F, 0.8F, 1.0F };
 /* 3CB720 */ static float ftKb_Init_803CB720[] = { 1.1F, 1.35F, 1.3F, 1.2F };
 
@@ -370,7 +365,7 @@ void ftKb_PrSpecialNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.pr.specialn.x14 +=
         fp->mv.pr.specialn.x34.x *
         (fp->mv.pr.specialn.x2C *
-         (deg_to_rad * da->specialn_pr_charge_spin_animation));
+         MTXDegToRad(da->specialn_pr_charge_spin_animation));
     ftKb_PrNormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -389,7 +384,7 @@ void ftKb_PrSpecialNFull_Anim(Fighter_GObj* gobj)
     fp->mv.pr.specialn.x14 +=
         fp->mv.pr.specialn.x34.x *
         (fp->mv.pr.specialn.x2C *
-         (deg_to_rad * da->specialn_pr_charge_spin_animation));
+         MTXDegToRad(da->specialn_pr_charge_spin_animation));
     ftKb_PrNormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -422,7 +417,7 @@ void ftKb_PrSpecialN1_Anim(Fighter_GObj* gobj)
     {
         f32 old_angle = fp->mv.pr.specialn.x14;
         f32 delta =
-            deg_to_rad * fp->mv.pr.specialn.x2C *
+            MTXDegToRad(fp->mv.pr.specialn.x2C) *
             (f32) (0.2 * da->specialn_pr_unk5 * fp->mv.pr.specialn.x34.x);
         fp->mv.pr.specialn.x14 = old_angle + delta;
         ftKb_PrNormalizeAndSetRollAngle(gobj);
@@ -536,7 +531,7 @@ void ftKb_PrSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.pr.specialn.x14 +=
         fp->mv.pr.specialn.x34.x *
         (fp->mv.pr.specialn.x2C *
-         (deg_to_rad * da->specialn_pr_charge_spin_animation));
+         MTXDegToRad(da->specialn_pr_charge_spin_animation));
     ftKb_PrNormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -555,13 +550,13 @@ void ftKb_PrSpecialAirNFull_Anim(Fighter_GObj* gobj)
     fp->mv.pr.specialn.x14 +=
         fp->mv.pr.specialn.x34.x *
         (fp->mv.pr.specialn.x2C *
-         (deg_to_rad * da->specialn_pr_charge_spin_animation));
+         MTXDegToRad(da->specialn_pr_charge_spin_animation));
     ftKb_PrNormalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
 
 static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
-                                         f32* scale_base)
+                                         const f32* scale_base)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -574,18 +569,6 @@ static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
         fp->mv.pr.specialn.x8 += 1;
     } else {
         HSD_JObjSetScale(jobj, &fp->u.kb.x8C);
-    }
-}
-
-static inline void ftKb_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
-    ((!(jobj->flags & JOBJ_USE_QUATERNION))
-         ? ((void) 0)
-         : __assert("jobj.h", 661, (char*) &base[8]));
-    jobj->rotate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
     }
 }
 
@@ -964,7 +947,7 @@ void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
 void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.gr_friction);
+    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.ground_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
 

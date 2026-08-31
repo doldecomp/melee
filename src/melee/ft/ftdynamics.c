@@ -11,13 +11,18 @@
 #include "ft/types.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <stddef.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 
-#pragma force_active on
+/* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
+                                       FigaTree*);
+/* 09DD94 */ static void ftCo_8009DD94(Fighter_GObj*, bool);
+/* 09E1D4 */ static HSD_JObj* ftCo_8009E1D4(HSD_JObj*, HSD_JObj*, HSD_JObj*);
+/* 09E4A8 */ static void ftCo_8009E4A8(Fighter* fp);
+/* 09E614 */ static void ftCo_8009E614(Fighter* fp);
 
 static inline void ftCo_8009CB40_inline(struct DynamicsData* data)
 {
@@ -275,18 +280,28 @@ void ftCo_8009DA38(Fighter* fp)
     }
 }
 
-/// #ftCo_8009DB50
-
-static inline bool inlineA0(Fighter* fp)
+void ftCo_8009DB50(Fighter* fp)
 {
-    u32 temp_r0 = fp->x619_costume_id;
-    if (temp_r0 == 2) {
-        return 0;
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
+    PAD_STACK(2 * 4);
+    fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
+    HSD_ASSERTREPORT(455, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    {
+        ssize_t i;
+        for (i = 0; i < fp->dynamics_num; i++) {
+            s32 bone_id =
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
+            fp->parts[bone_id].flags_b0 = true;
+            lb_8000FD48(
+                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
+            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
+            lb_80011710(
+                &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
+                &fp->dynamic_bone_sets[i].dyn_desc);
+        }
     }
-    if (temp_r0 == 3) {
-        return 1;
-    }
-    return 3;
 }
 
 void ftCo_8009DC54(Fighter* fp)
@@ -343,30 +358,6 @@ void ftCo_8009DC54(Fighter* fp)
     }
 }
 
-void ftCo_8009DB50(Fighter* fp)
-{
-    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
-    PAD_STACK(2 * 4);
-    fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
-    HSD_ASSERTREPORT(455, fp->dynamics_num < Ft_Dynamics_NumMax,
-                     "fighter dynamics num over!\n");
-    {
-        ssize_t i;
-        for (i = 0; i < fp->dynamics_num; i++) {
-            s32 bone_id =
-                hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
-            fp->parts[bone_id].flags_b0 = true;
-            lb_8000FD48(
-                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
-                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
-        }
-    }
-}
-
 void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -378,7 +369,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
     f32 scale_x;
     PAD_STACK(8);
 
-    if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
+    if (dynamics_num != 0 && stage_info.grkind == Gr_Kind_Flatzone) {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         scale_x = jobj->scale.x;
         jobj->scale.x = fp->x34_scale.y;
@@ -423,7 +414,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
             }
         }
     }
-    if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
+    if (dynamics_num != 0 && stage_info.grkind == Gr_Kind_Flatzone) {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         jobj->scale.x = scale_x;
         HSD_JObjSetMtxDirty(jobj);
@@ -615,7 +606,9 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
 {
     s32 i;
     if (fp->anim_id != -1) {
-        if (fp->x2227_b6) {
+        s32 var_r3;
+        u32 cached_b6;
+        if ((cached_b6 = fp->x2227_b6)) {
             if (fp->kind != FTKIND_KIRBY) {
                 if (fp->kind == FTKIND_PURIN) {
                     ftCo_8009CB40(fp, 0, 0, NULL);
@@ -626,13 +619,14 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                 }
             }
         } else {
-            s32 var_r3;
             if (fp->kind != FTKIND_MARS && fp->kind != FTKIND_EMBLEM) {
                 var_r3 = 0;
-            } else if (fp->x2227_b6 || lb_80011ABC() > 0) {
-                var_r3 = 1;
-            } else {
-                var_r3 = 0;
+            } else if (!cached_b6) {
+                if (lb_80011ABC() > 0) {
+                    var_r3 = 1;
+                } else {
+                    var_r3 = 0;
+                }
             }
             if (var_r3) {
                 if (fp->kind != FTKIND_KIRBY) {
@@ -665,8 +659,12 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     }
                     {
                         s32 j;
-                        for (j = 0; j < fp->dynamics_num; j++) {
-                            ftCo_8009CB40(fp, j, 1, tree[j]);
+                        FigaTree** cursor;
+                        j = (var_r3 = 0);
+                        cursor = &tree[j];
+                        for (; j < fp->dynamics_num; j++) {
+                            ftCo_8009CB40(fp, j, 1, *cursor);
+                            cursor++;
                         }
                     }
                     return;

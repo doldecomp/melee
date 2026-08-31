@@ -1,15 +1,13 @@
 #ifndef GALE01_1EFC68
 #define GALE01_1EFC68
 
-#include <placeholder.h>
-
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <baselib/spline.h>
 
 /* 1EFC68 */ void grMuteCity_801EFC68(bool);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);
@@ -74,8 +72,9 @@
 /* 1F1A34 */ void grMuteCity_801F1A34(HSD_GObj*, Ground_GObj*);
 /* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ void grMuteCity_801F290C(Ground_GObj*);
-/* 1F2AB0 */ void grMuteCity_801F2AB0(s32, HSD_JObj*);
+/* 1F2AB0 */ s32 grMuteCity_801F2AB0(s32, HSD_JObj*);
 /* 1F2BBC */ DynamicsDesc* grMuteCity_801F2BBC(enum_t);
 /* 1F2C10 */ bool grMuteCity_801F2C10(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E33DC */ extern StageData grMc_StageData;
 
 #endif

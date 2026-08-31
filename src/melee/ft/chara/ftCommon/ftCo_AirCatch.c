@@ -28,7 +28,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <baselib/jobj.h>
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)
@@ -270,9 +269,9 @@ void ftCo_AirCatch_Phys(Fighter_GObj* gobj)
     if (fp->fall_fast) {
         ftCommon_FallFast(fp);
     } else if (fp->mv.co.aircatch.x0 < 20 && fp->pos_delta.y < 0.0) {
-        ftCommon_Fall(fp, co->grav * 0.2, co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity * 0.2, co->terminal_velocity);
     } else {
-        ftCommon_Fall(fp, co->grav, co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity, co->terminal_velocity);
     }
     ftCommon_8007D268(fp);
 }
@@ -281,7 +280,7 @@ void ftCo_AirCatchHit_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel = fp->pos_delta;
-    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
 }
 
 void ftCo_AirCatch_Coll(Fighter_GObj* gobj)

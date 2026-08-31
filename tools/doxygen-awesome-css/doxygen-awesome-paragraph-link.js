@@ -38,17 +38,17 @@ class DoxygenAwesomeParagraphLink {
             $(document).ready(function () {
                 document
                     .querySelectorAll(
-                        ".contents a.anchor[id], .contents .groupheader > a[id]"
+                        ".contents a.anchor[id], .contents .groupheader > a[id]",
                     )
                     .forEach((node) => {
                         let anchorlink = document.createElement("a");
                         anchorlink.setAttribute(
                             "href",
-                            `#${node.getAttribute("id")}`
+                            `#${node.getAttribute("id")}`,
                         );
                         anchorlink.setAttribute(
                             "title",
-                            DoxygenAwesomeParagraphLink.title
+                            DoxygenAwesomeParagraphLink.title,
                         );
                         anchorlink.classList.add("anchorlink");
                         node.classList.add("anchor");

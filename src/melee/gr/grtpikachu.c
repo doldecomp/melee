@@ -1,19 +1,16 @@
 #include "grtpikachu.h"
 
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTPk_803E9270[] = {
+StageCallbacks grTPk_StageCallbacks[] = {
     { grTPikachu_80223008, grTPikachu_80223034, grTPikachu_8022303C,
       grTPikachu_80223040, 0 },
     { grTPikachu_802230D4, grTPikachu_80223124, grTPikachu_8022312C,
@@ -23,9 +20,9 @@ StageCallbacks grTPk_803E9270[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTPk_803E92CC = {
-    TPIKACHU,
-    grTPk_803E9270,
+StageData grTPk_StageData = {
+    Gr_Kind_TPikachu,
+    grTPk_StageCallbacks,
     "/GrTPk.dat",
     grTPikachu_80222E80,
     grTPikachu_80222E7C,
@@ -65,7 +62,7 @@ bool grTPikachu_80222F18(void)
 HSD_GObj* grTPikachu_80222F20(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPk_803E9270[id];
+    StageCallbacks* callbacks = &grTPk_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

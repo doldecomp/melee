@@ -2,18 +2,15 @@
 
 #include "axdriver.static.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <string.h>
+#include <dolphin/ax.h>
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/axdriver.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/synth.h>
-
-typedef struct {
-    s32 v[8];
-} RevHiDims;
 
 void* AXDriverAlloc(size_t size)
 {
@@ -53,7 +50,7 @@ void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
     }
 }
 
-static void unk_inline(HSD_SM* v, HSD_SM** head)
+static inline void unk_inline(HSD_SM* v, HSD_SM** head)
 {
     if (v == NULL) {
         return;
@@ -69,7 +66,7 @@ static void unk_inline(HSD_SM* v, HSD_SM** head)
     *head = v;
 }
 
-static bool tmp(HSD_SM* v)
+static inline bool tmp(HSD_SM* v)
 {
     int idx;
     u32 state;
@@ -156,46 +153,7 @@ void HSD_AudioSFXKeyOffTrack(int track)
     OSRestoreInterrupts(enabled);
 }
 
-/// unused function to force data ordering for this assert string
-static void unused(HSD_SM* v)
-{
-    HSD_ASSERT(__LINE__, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-}
-
-u32 AXDriver_8038C678(u32 param_type, u32 param_value)
-{
-    switch (param_type) {
-    case 0:
-        return param_value & 0xFFFFFF;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 14:
-    case 15:
-    case 20:
-    case 21:
-        return false;
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-        return param_value >> 8 & 0xFFFF;
-    case 12:
-    case 13:
-        return param_value >> 16 & 0xFF;
-    default:
-        return false;
-    }
-}
-
+#ifdef MUST_MATCH
 /// MSL sqrtf expansion (src/MSL/math_ppc.h) writing its result through a
 /// caller-provided slot, as in sqrtf_store in lbcollision.c and mplib.c.
 /// Evidence: retail AXDriver_8038BF6C keeps its eight sqrt results in
@@ -215,6 +173,9 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#else
+#define sqrtf_store(x, y) sqrtf(x)
+#endif
 
 void AXDriver_8038BF6C(HSD_SM* v)
 {
@@ -311,6 +272,40 @@ void AXDriver_8038BF6C(HSD_SM* v)
     }
 }
 
+u32 AXDriver_8038C678(u32 param_type, u32 param_value)
+{
+    switch (param_type) {
+    case 0:
+        return param_value & 0xFFFFFF;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 14:
+    case 15:
+    case 20:
+    case 21:
+        return false;
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+        return param_value >> 8 & 0xFFFF;
+    case 12:
+    case 13:
+        return param_value >> 16 & 0xFF;
+    default:
+        return false;
+    }
+}
+
 #define MIN2(x, y) ((x) < (y) ? (x) : (y))
 #define MAX2(x, y) ((x) < (y) ? (y) : (x))
 #define CLAMP(min, val, max) MAX2(MIN2(val, max), min)
@@ -324,7 +319,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
     PAD_STACK(8);
 
     while (v->x30 == (s32) AXDriver_804D778C) {
-        cmd_word = *(u32*) v->cmd_stream;
+        cmd_word = *v->cmd_stream;
         cmd_type = cmd_word >> 0x18U;
 
         cmd_size = AXDriver_8038C678(cmd_type, cmd_word);
@@ -334,7 +329,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
         v->x30 += cmd_size;
         switch (cmd_type) {
         case 2:
-            v->x2A = *(u32*) v->cmd_stream;
+            v->x2A = *v->cmd_stream;
             if (v->x2A == 0) {
                 v->flags |= 0x100000;
             }
@@ -360,7 +355,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 6:
             v->flags |= 4;
-            v->x1A = *(u32*) v->cmd_stream;
+            v->x1A = *v->cmd_stream;
             break;
         case 7:
             v->flags |= 4;
@@ -369,7 +364,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 8:
             v->flags |= 8;
-            v->x1C = *(u32*) v->cmd_stream;
+            v->x1C = *v->cmd_stream;
             break;
         case 9:
             v->flags |= 8;
@@ -378,7 +373,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 10:
             v->flags |= 0x10;
-            v->x1E = *(u32*) v->cmd_stream;
+            v->x1E = *v->cmd_stream;
             break;
         case 11:
             v->flags |= 0x10;
@@ -418,7 +413,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             }
             break;
         case 18:
-            if (!(((u32) AXDriver_804D603C >> 1U) & 1)) {
+            if (!((AXDriver_804D603C >> 1U) & 1)) {
                 v->flags |= 0x80;
                 v->x24[1] = *v->cmd_stream;
             }
@@ -615,7 +610,7 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
 
     enabled = OSDisableInterrupts();
     v->flags = (v->flags & ~SMSTATE_MASK) | SMSTATE_ACTIVE;
-    unk_inline(v, &AXDriver_804D7790);
+    unk_inline(v, &AXDriver_804D7794);
     AXDriver_804D77D0++;
     OSRestoreInterrupts(enabled);
 
@@ -1028,16 +1023,7 @@ int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
 
 s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 {
-    static const RevHiDims AXDriver_803B95F8 = {
-        { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
-    };
-    static const s32 AXDriver_803B9618[] = {
-        0x6FD,
-        0x7CF,
-        0x1B1,
-        0x95,
-    };
-    s32 result;
+    s32 result = 0;
     int i;
     int k;
 
@@ -1045,24 +1031,19 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         return 0;
     }
 
-    result = 0;
     switch (type) {
     case AXDRIVER_AUX_OFF:
         break;
 
     case AXDRIVER_AUX_REVERB_HI: {
-        RevHiDims tmp;
-
-        tmp = AXDriver_803B95F8;
+        s32 dims[8] = { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 };
 
         for (k = 0; k < 3; k++) {
             for (i = 0; i < 3; i++) {
-                result += (tmp.v[i] + 2) * 4;
+                result += (dims[i] + 2) * 4;
+                result += (dims[i + 3] + 2) * 4;
             }
-            for (i = 0; i < 3; i++) {
-                result += (tmp.v[i + 3] + 2) * 4;
-            }
-            result += (tmp.v[k + 5] + 2) * 4;
+            result += (dims[k + 5] + 2) * 4;
             result += ((s32) (32000.0F *
                               ((struct AXFX_REVERBHI*) param)->preDelay)) *
                       4;
@@ -1070,19 +1051,20 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         break;
     }
 
-    case AXDRIVER_AUX_REVERB_STD:
+    case AXDRIVER_AUX_REVERB_STD: {
+        s32 dims[4] = { 0x6FD, 0x7CF, 0x1B1, 0x95 };
+
         for (k = 0; k < 3; k++) {
             for (i = 0; i < 2; i++) {
-                result += (AXDriver_803B9618[i] + 2) * 4;
-            }
-            for (i = 0; i < 2; i++) {
-                result += (AXDriver_803B9618[i + 2] + 2) * 4;
+                result += (dims[i] + 2) * 4;
+                result += (dims[i + 2] + 2) * 4;
             }
             result += ((s32) (32000.0F *
                               ((struct AXFX_REVERBSTD*) param)->preDelay)) *
                       4;
         }
         break;
+    }
 
     case AXDRIVER_AUX_CHORUS:
         result = 0x1680;
@@ -1090,13 +1072,10 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 
     case AXDRIVER_AUX_DELAY: {
         struct AXFX_DELAY* delay = (struct AXFX_DELAY*) param;
-        s32 ch0, ch1, ch2;
 
-        ch2 = ((delay->delay[2] - 5) * 32 + 159) / 160 * 640;
-        ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
-        ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
-        ch0 += ch1;
-        result = ch0 + ch2;
+        for (i = 0; i < 3; i++) {
+            result += ((delay->delay[i] - 5) * 32 + 159) / 160 * 640;
+        }
         break;
     }
     }
@@ -1104,19 +1083,8 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     return result;
 }
 
-const RevHiDims AXDriver_803B95F8 = {
-    { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
-};
-
-const s32 AXDriver_803B9618[] = {
-    0x6FD,
-    0x7CF,
-    0x1B1,
-    0x95,
-};
-
 bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
-                       u32 heap_size)
+                       size_t heap_size)
 {
     if (channel < 0 || channel > 1) {
         return false;

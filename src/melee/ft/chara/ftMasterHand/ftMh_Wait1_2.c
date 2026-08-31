@@ -5,7 +5,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
@@ -13,8 +13,10 @@
 
 #include <baselib/forward.h>
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
@@ -43,7 +45,9 @@ void ftMh_MS_389_80150D28(HSD_GObj* gobj)
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_1;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {

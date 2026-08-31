@@ -1,13 +1,14 @@
 #include "ftFx_SpecialHi.h"
 
-#include "math.h"
-
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -19,10 +20,9 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "ftCommon/inlines.h"
 #include "ftFox/types.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
@@ -48,6 +48,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
@@ -62,6 +63,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
@@ -159,7 +161,8 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
     } else {
-        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
+                      ca->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
@@ -736,7 +739,7 @@ void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
     }
 }
 
-inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 {
     vf32 f; // I have a feeling this is a Vec3 struct however
     Fighter* fp = fp = gobj->user_data;
@@ -749,8 +752,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     }
     efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x800E82E4
@@ -758,7 +760,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 /// Motion State handler
 void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     ftFox_DatAttrs* da = fp->dat_attrs;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiBound, 0, 0.0f, 1.0f,

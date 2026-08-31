@@ -5,7 +5,11 @@
 #include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -13,19 +17,13 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/inlines.h"
+#include "ftKirby/inlines.h"
 #include "it/items/itsamuschargeshot.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
-static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
-}
-
-long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
+int ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, int* out1, int* out2)
 {
     Fighter* fp;
     ftKb_DatAttrs* da;
@@ -285,7 +283,8 @@ void ftKb_SsSpecialNStart_Anim(Fighter_GObj* gobj)
         offset.x = 0.0F;
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, &offset, &pos);
         pos.z = 0.0F;
-        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa, 0x97,
+        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa,
+                                        It_Kind_Kirby_SamusCharge,
                                         fp->facing_dir)) != NULL)
         {
             ftKb_SpecialN_set_cbs(gobj);
@@ -377,7 +376,8 @@ void ftKb_SsSpecialAirNStart_Anim(Fighter_GObj* gobj)
         offset.x = 0.0F;
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, &offset, &pos);
         pos.z = 0.0F;
-        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa, 0x97,
+        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa,
+                                        It_Kind_Kirby_SamusCharge,
                                         fp->facing_dir)) != NULL)
         {
             ftKb_SpecialN_set_cbs(gobj);

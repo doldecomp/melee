@@ -4,10 +4,13 @@
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -24,7 +27,7 @@
 static MotionFlags const ftMr_MF_SpecialN_Coll =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
 
-static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
+static int pickMegavitamin(Fighter* fp, const int* arr, int outpos)
 {
     int result = arr[HSD_Randi(outpos)];
     fp->u.mr.x2230_vitaminPrev = fp->u.mr.x222C_vitaminCurr;

@@ -1,6 +1,5 @@
 #include "itarwinglaser.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ef/efsync.h"
@@ -9,17 +8,16 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;
@@ -163,7 +161,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     }
     }
     spawn.prev_pos = spawn.pos = sp24;
-    spawn.kind = 0xEA;
+    spawn.kind = It_Kind_Arwing_Laser;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;
@@ -237,10 +235,11 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     return new_gobj;
 }
 
-void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
-                 s32 arg4, f32 scale)
+Item_GObj* it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target,
+                       s32 type, s32 arg4, f32 scale)
 {
     SpawnItem spawn;
+    SpawnItem* sp;
     Vec3 sp28;
     Item_GObj* new_gobj;
     Item* ip;
@@ -249,9 +248,8 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
 
     lb_8000B1CC(bone, NULL, &sp28);
     spawn.kind = It_Kind_Arwing_Laser;
-    *(u32*) &spawn.prev_pos.x = *(u32*) &sp28.x;
-    *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
-    *(u32*) &spawn.prev_pos.z = *(u32*) &sp28.z;
+    spawn.prev_pos = sp28;
+    spawn.prev_pos = spawn.prev_pos;
     *(volatile u32*) &spawn.prev_pos.y = *(u32*) &spawn.prev_pos.y;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
@@ -261,7 +259,8 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
     spawn.x0_parent_gobj = NULL;
     spawn.x44_flag.b0 = false;
     spawn.x40 = 0;
-    new_gobj = Item_80268B18(&spawn);
+    sp = &spawn;
+    new_gobj = Item_80268B18(sp);
     if (new_gobj != NULL) {
         ip = GET_ITEM(new_gobj);
         jobj = GET_JOBJ(new_gobj);
@@ -294,6 +293,7 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
         it_802750F8(new_gobj);
         ip->xDCC_flag.b3 = 0;
     }
+    // NOTE: no return
 }
 
 void it_802E79C8(Item_GObj* gobj)
@@ -376,7 +376,7 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
     case 0:
     case 2:
-        if ((s16) ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
+        if (ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
             ip->x40_vel.x = attrs->x0->x4_throw_speed_mul * ip->facing_dir;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;
@@ -435,13 +435,15 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale_vec);
 
     switch (Stage_8022519C(Stage_80225194())) {
-    case 14:
+    case Gr_Kind_Corneria:
         grCorneria_801DDCF0(&corneria_offset);
         ip->pos.x += corneria_offset.x;
         ip->pos.y += corneria_offset.y;
-        /* fallthrough */
-    case 15:
-        return;
+        // fallthrough
+    case Gr_Kind_Venom:
+        break;
+    default:
+        break;
     }
 }
 

@@ -1,6 +1,9 @@
+#include "lbtrigf.h"
+
+#include <placeholder.h>
+#include <platform.h>
+
 #include <math.h>
-#include <trigf.h>
-#include <MetroTRK/intrinsics.h>
 
 /* 022DF8 */ static float lb_sqrtf(float x);
 /* 400770 */ extern float MSL_TrigF_80400770[];
@@ -11,7 +14,9 @@
 #define SIGNED_BITWISE(f) ((s32) BITWISE(f))
 #define GET_SIGN_BIT(f) (SIGNED_BITWISE(f) & SIGN_BIT)
 #define BITWISE_PI_2 0x3FC90FDB
+#ifndef NAN
 #define NAN MSL_TrigF_80400770[0]
+#endif
 #define INF MSL_TrigF_80400774[0]
 
 float atan2f(float y, float x)
@@ -139,6 +144,7 @@ static const float atanf_lookup[] = {
     0.0,
 };
 
+#ifdef __MWERKS__
 float atanf(float x)
 {
     float const silver_ratio = 2.4142136573791504f;
@@ -234,3 +240,4 @@ float atanf(float x)
     BITWISE(result) |= sign_bit_x;
     return result;
 }
+#endif

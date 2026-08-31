@@ -14,6 +14,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
+#include "ftCaptain/ftCa_SpecialHi.h"
 #include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
@@ -45,6 +46,7 @@
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "ftLink/ftLk_SpecialLw.h"
@@ -110,8 +112,8 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "ftSeak/ftSk_SpecialN.h"
 #include "ftSeak/ftSk_SpecialS.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 #include "ftYoshi/ftYs_SpecialHi.h"
 #include "ftYoshi/ftYs_SpecialN.h"
 #include "ftYoshi/ftYs_SpecialS.h"
@@ -130,10 +132,9 @@
 
 #include <baselib/forward.h>
 
+#include <string.h>
 #include <baselib/debug.h>
 #include <baselib/objalloc.h>
-
-extern int ft_8045996C[FTKIND_MAX];
 
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
     { &lbl_804599F0, 5 },       // Mario
@@ -1474,7 +1475,7 @@ void ftData_800855C8(FighterKind kind, u8 color)
                            1, 3, 1, 0);
         }
     }
-    if (ftData_UnkBytePerCharacter[kind] != -1) {
+    if (ftData_UnkBytePerCharacter[kind] != (char) -1) {
         efAsync_LoadAsync(ftData_UnkBytePerCharacter[kind]);
     }
     if (ftData_803C23E4[kind] != NULL) {
@@ -1572,13 +1573,13 @@ void ftData_800859A8(Fighter* fp)
 
 void ftData_80085A14(FighterKind kind)
 {
-    u32 sp18;
-    u32 a_head;
+    void* sp18;
+    void* a_head;
     ftData* temp_r27 = gFtDataList[kind];
     u32 temp_r0;
     int i;
     u8 _[4];
-    u32 sp10;
+    size_t sp10;
 
     PAD_STACK(4);
 
@@ -1593,10 +1594,11 @@ void ftData_80085A14(FighterKind kind)
                     HSD_ASSERTREPORT(0x9AF, 0, "fighter figatree over! %x\n",
                                      temp_r0);
                 }
-                temp_r27->xC[i].x14 = (a_head + temp_r27->xC[i].x4);
+                temp_r27->xC[i].x14 =
+                    (uintptr_t) ((u8*) a_head + temp_r27->xC[i].x4);
             }
         }
-        ftData_Table_Unk0[kind].data = (void*) a_head;
+        ftData_Table_Unk0[kind].data = a_head;
     }
 }
 
@@ -1662,7 +1664,7 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
             if (temp_r3_2 != 0) {
                 temp_r3_3 = ftData_80086060(fp);
                 if ((temp_r3_3 != NULL) &&
-                    ((u32) temp_r3->x14 == (u32) temp_r3_3->x5A4))
+                    (temp_r3->x14 == (u32) temp_r3_3->x5A4))
                 {
                     memcpy(fp->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = fp->x59C;
@@ -1715,7 +1717,7 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
             if (temp_r3_2 != 0) {
                 temp_r3_3 = ftData_80086060(arg0);
                 if ((temp_r3_3 != NULL) &&
-                    ((u32) temp_r3->x14 == (u32) temp_r3_3->x5A4))
+                    (temp_r3->x14 == (u32) temp_r3_3->x5A4))
                 {
                     memcpy(arg0->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = arg0->x59C;

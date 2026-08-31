@@ -3,9 +3,9 @@
 
 #include "platform.h"
 
+#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
-
-#include <baselib/sislib.h>
+#include <baselib/forward.h>
 
 #ifdef M2C
 struct mnInfo_GObj {
@@ -58,7 +58,7 @@ struct Menu {
     u8 unk3;
     HSD_Text* text;
 };
-STATIC_ASSERT(sizeof(struct Menu) == 0x8);
+ASSERT_SIZE(struct Menu, 0x8);
 
 struct CountEntry {
     u8 selkind;
@@ -93,8 +93,8 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ s8 c_kind;    ///< uses CharacterKind (CKIND_*) values
-    /*0x01*/ u8 slot_type; ///< uses Gm_PKind values
+    /*0x00*/ s8 ckind;     ///< ::CharacterKind
+    /*0x01*/ u8 slot_type; ///< ::Gm_PKind
     /*0x02*/ s8 stocks;    // stocks
     /*0x03*/ u8 color;     // color
     /*0x04*/ u8 slot;      // port
@@ -103,7 +103,7 @@ struct PlayerInitData {
     /*0x07*/ u8 sub_color; // subcolor
     /*0x08*/ s8 handicap;  // handicap
     /*0x09*/ u8 team;      // team
-    /*0x0A*/ u8 xA;        // nametag
+    /*0x0A*/ u8 nametag;   // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
     u8 xC_b1 : 1;
@@ -135,26 +135,26 @@ struct lbl_8046B668_t {
     /* 0x00 */ s8 arr1[0x1C];
     /* 0x1C */ s8 arr2[0x1C];
 };
-STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+ASSERT_SIZE(struct lbl_8046B668_t, 0x38);
 
 typedef struct PerfLabelLine {
     /* 0x00 */ struct PerfLabelLine* next;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ char text[0x80];
 } PerfLabelLine; /* size = 0x88 */
-STATIC_ASSERT(sizeof(PerfLabelLine) == 0x88);
+ASSERT_SIZE(PerfLabelLine, 0x88);
 
 typedef struct lbl_8046B378_t {
     /* 0x000 */ PerfLabelLine line0;
     /* 0x088 */ PerfLabelLine line1;
 } lbl_8046B378_t; /* size = 0x110 */
-STATIC_ASSERT(sizeof(lbl_8046B378_t) == 0x110);
+ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
-    u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
+    u32 match_kind : 3; ///< ::MatchKind
     u32 x0_3 : 3;
     u32 x0_6 : 1;
-    u32 x0_7 : 1; ///< timer counts up
+    u32 timer_counts_up : 1; ///< ::bool
 
     u32 x1_0 : 1;
     u32 x1_1 : 1;
@@ -164,12 +164,12 @@ struct StartMeleeRules {
     u32 x1_5 : 1;
     u32 timer_shows_hours : 1; // false=65:00.00, true=1:05:00.00
 
-    u32 x1_7 : 1; ///< friendly fire on
+    u32 friendly_fire : 1; ///< friendly fire on
 
     u32 x2_0 : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
-    u32 x2_3 : 1;            ///< single-button mode enabled
+    u32 single_button : 1;   ///< single-button mode enabled
     u32 disable_pausing : 1; ///< When set, pausing is disabled for both active
                              ///< gameplay and pause menus. Sourced from the
                              ///< rules pause option and from several game-mode
@@ -213,9 +213,9 @@ struct StartMeleeRules {
     s8 xB; // item frequency
     s8 xC; // SD penalty
     u8 xD;
-    u16 xE; // InternalStageId
+    u16 stkind;
 
-    u32 x10; // time limit
+    u32 time_limit; ///< time limit in seconds
     u8 x14;
     u32 x18;
     u32 x1C_pad[(0x20 - 0x1C) / 4];
@@ -223,8 +223,8 @@ struct StartMeleeRules {
     u64 x20; // item mask
     int x28;
     float x2C;
-    float x30; // damage ratio
-    float x34; // game speed
+    float x30; ///< damage ratio
+    float x34; ///< game speed
     void (*on_unpause_override)(
         int); ///< on unpause callback. When set, this method is called with
               ///< the pauser playerId when a player unpauses the match. If not
@@ -255,7 +255,7 @@ struct StartMeleeRules {
 
 struct StartMeleeData {
     StartMeleeRules rules;
-    PlayerInitData players[6];
+    PlayerInitData players[GM_MAX_PLAYERS];
 };
 
 struct VsModeData {
@@ -267,7 +267,7 @@ struct VsModeData {
     /* +5 */ u8 unk_0x5;
     /* +6 */ u8 unk_0x6;
     /* +7 */ u8 unk_0x7;
-    /* +8 */ StartMeleeData data;
+    /* +8 */ StartMeleeData start;
 };
 
 typedef enum CSSMatchType {
@@ -301,8 +301,8 @@ struct CSSData {
     u16 unk_0x0; ///< 1p port?
     u8 match_type;
     u8 pending_scene_change;
-    u8* ko_star_counts;
-    VsModeData data;
+    u8* ko_counts;
+    VsModeData vs;
 };
 
 struct CSSModeInfo {
@@ -425,16 +425,16 @@ struct CSSDoor {
 };
 
 struct CSSTagData {
-    TextGlyphTexture* text;    // 0x00
-    TextGlyphTexture* name_ls; // 0x04
-    float x8;                  // 0x08
-    float scroll_amt;          // 0x0C
-    float scroll_force;        // 0x10
-    int timer;                 // 0x14
-    u8 next_tag;               // 0x18
-    u8 port;                   // 0x19
-    u8 state;                  // 0x1A
-    u8 use_tag;                // 0x1B
+    HSD_Text* text;     // 0x00
+    HSD_Text* name_ls;  // 0x04
+    float x8;           // 0x08
+    float scroll_amt;   // 0x0C
+    float scroll_force; // 0x10
+    int timer;          // 0x14
+    u8 next_tag;        // 0x18
+    u8 port;            // 0x19
+    u8 state;           // 0x1A
+    u8 use_tag;         // 0x1B
 };
 
 struct CSSTag {
@@ -463,7 +463,9 @@ struct CSSKOStar {
 
 struct CSSDoorsData {
     CSSDoor doors[4]; // 0x00
-    CSSTag tags[4];   // 0x90
+};
+
+struct CSSDoorsMisc {
     u8 xc0;
     u8 xc1;
     u8 xc2;
@@ -477,17 +479,17 @@ struct CSSDoorsData {
     u8 xca;
     u8 xcb;
     u8 xcc;
-    u8 xcd;
-    u8 xce;
+    u8 cpu_level;
+    u8 cpu_level_shown;
     u8 scroll_flag;
-    float xcf;
+    float cpu_slider_x;
     HSD_Text* xd3;
-    float xd7;
-    float xdb;
-    float xdf;
-    float xe3;
-    float xe7;
-    float xeb;
+    float cpudown_left;
+    float cpudown_right;
+    float cpuup_left;
+    float cpuup_right;
+    float cpubtn_top;
+    float cpubtn_btm;
 };
 
 struct CSSDoorsData2 {
@@ -507,15 +509,15 @@ struct CSSDoorsData2 {
 struct mnSnap_804A0B90_t {
     char pad_0[0x96000];
 };
-STATIC_ASSERT(sizeof(struct mnSnap_804A0B90_t) == 0x96000);
+ASSERT_SIZE(struct mnSnap_804A0B90_t, 0x96000);
 
 struct SSSData {
     /* +00 */ u8 unk_stage;
     /* +01 */ u8 x1;
     /* +02 */ u8 no_lras;
     /* +03 */ s8 force_stage_id;
-    /* +04 */ u8 start_game;
-    /* +08 */ VsModeData data;
+    /* +04 */ u8 start_game; ///< ::bool
+    /* +08 */ VsModeData vs;
 };
 
 struct AnimLoopSettings {

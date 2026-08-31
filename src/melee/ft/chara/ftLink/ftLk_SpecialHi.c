@@ -2,10 +2,13 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -13,14 +16,11 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftLink/types.h"
 
 #include <baselib/forward.h>
-
-#include <common_structs.h>
 
 /* 0EBA4C */ static void onAccessory4(HSD_GObj* gobj);
 /* 0EBE64 */ static void doColl(HSD_GObj* gobj);
@@ -44,6 +44,7 @@ static void onAccessory4(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftLk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -97,7 +98,8 @@ void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftLk_DatAttrs* da = fp->dat_attrs;
-    ftCommon_Fall(fp, ca->grav * da->specialhi_grav_mul, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->gravity * da->specialhi_grav_mul,
+                  ca->terminal_velocity);
     ftCommon_8007D344(
         fp, 0, ca->air_drift_stick_mul * da->specialairhi_drift_stick_mul,
         ca->air_drift_max * da->specialairhi_drift_max_mul);

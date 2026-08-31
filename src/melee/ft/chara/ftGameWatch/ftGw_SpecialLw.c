@@ -4,7 +4,11 @@
 #include "types.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
@@ -20,7 +24,6 @@
 
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// Create Oil Panic Item
@@ -138,7 +141,7 @@ void ftGw_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
     }
 }
 
-inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
+static inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
@@ -268,7 +271,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
                 stick_range = -stick_range;
             }
 
-            if (stick_range > p_ftCommonData->x0) {
+            if (stick_range > p_ftCommonData->horizontal_stick_deadzone) {
                 float facing_dir = fp->facing_dir;
 
                 ftCommon_UpdateFacing(fp);
@@ -305,7 +308,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
                 stick_range = -stick_range;
             }
 
-            if (stick_range > p_ftCommonData->x0) {
+            if (stick_range > p_ftCommonData->horizontal_stick_deadzone) {
                 float facingDir = fp->facing_dir;
                 ftCommon_UpdateFacing(fp);
 

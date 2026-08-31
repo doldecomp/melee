@@ -18,14 +18,12 @@
 /* 0EB018 */ void ftLk_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 0EB060 */ void ftLk_Init_OnItemVisible(HSD_GObj* gobj);
 /* 0EB0A8 */ void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
-/* 0EB11C */ void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1);
+/* 0EB11C */ void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1);
 /* 0EB1FC */ void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 /* 0EB250 */ void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 0EB2AC */ void ftLk_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 0EB2F0 */ void ftLk_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 0EB334 */ void ftLk_800EB334(HSD_GObj* gobj);
-/* 0EC354 */ void ftLk_SpecialS_Enter(HSD_GObj* gobj);
-/* 0EC404 */ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj);
 /* 3C7E18 */ extern MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount];
 /* 3C80B8 */ extern char ftLk_Init_DatFilename[];
 /* 3C80C4 */ extern char ftLk_Init_DataName[];

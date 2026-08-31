@@ -2,9 +2,9 @@ set colorcolumn=80
 highlight colorcolumn ctermbg=darkgray
 
 augroup Melee
-  au! BufRead,BufNewFile *.h,*.c setfiletype c
-  au! BufRead,BufNewFile *.dox setfiletype doxygen
-  au! FileType c set syntax=c.doxygen
+    au! BufRead,BufNewFile *.h,*.c setfiletype c
+    au! BufRead,BufNewFile *.dox setfiletype doxygen
+    au! FileType c set syntax=c.doxygen
 augroup END
 
 command! -nargs=1 FpGrep vimgrep /\<fp+\<0*<args>\>\>/ src/melee/ft/**/*.h

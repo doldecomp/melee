@@ -1,29 +1,29 @@
 #ifndef MELEE_CM_TYPES_H
 #define MELEE_CM_TYPES_H
 
-#include <placeholder.h>
-
 #include "cm/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
-/// @note name found @ 80029070
+typedef struct CmSubjectExtents {
+    Vec2 h;
+    Vec3 v;
+} CmSubjectExtents;
+
 struct CmSubject {
     /* +00 */ CmSubject* next;
     /* +04 */ CmSubject* prev;
-    /* +08 */ bool x8;
-    /* +0C:0 */ u8 xC_b0 : 1;
-    /* +0C:1 */ u8 xC_b1 : 1;
-    /* +0C:2 */ u8 xC_b2 : 1;
-    /* +0E */ s16 xE;
-    /* +10 */ Vec3 x10;  // might be Vec2?
-    /* +1C */ Vec3 x1C;  // position?
-    /* +28 */ float x28; // direction?
-    /* +2C */ Vec2 x2C;
-    /* +34 */ Vec3 x34; // size?
-    /* +40 */ Vec2 x40;
-    /* +48 */ Vec3 x48;
+    /* +08 */ CmSubjectState state;
+    /* +0C:0 */ u8 on_ledge : 1;
+    /* +0C:1 */ u8 force_inactive : 1;
+    /* +0C:2 */ u8 was_framed : 1;
+    /* +0E */ s16 state_timer;
+    /* +10 */ Vec3 pos;
+    /* +1C */ Vec3 bone_pos;
+    /* +28 */ float facing_dir;
+    /* +2C */ CmSubjectExtents ext;
+    /* +40 */ CmSubjectExtents target_ext;
     /* +54 */ Vec3 x54;
     /* +60 */ Vec3 x60;
 };
@@ -78,7 +78,7 @@ struct CameraDebugMode {
     Vec3 free_int_pos;
     Vec3 free_eye_pos;
     float free_fov;
-    u8 _4C[8]; // padding? not sure if this is correct
+    u8 _58[4];
 };
 
 struct Camera {
@@ -184,7 +184,7 @@ struct Camera {
     /* 0x39A:7 */ u8 x39A_b7 : 1;
     /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
 };
-STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
+ASSERT_SIZE(struct Camera, 0x39C);
 
 struct CameraUnkGlobals {
     /*  +0 */ float x0;

@@ -1,8 +1,6 @@
 #ifndef _IFHAZARD_H_
 #define _IFHAZARD_H_
 
-#include <platform.h>
-
 #include "sc/forward.h"
 #include <baselib/forward.h>
 

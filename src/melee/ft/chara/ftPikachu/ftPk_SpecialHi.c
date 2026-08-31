@@ -2,13 +2,16 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -28,8 +31,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
@@ -128,10 +129,10 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
         ftPikachuAttributes* sa = fp->dat_attrs;
         ftCo_DatAttrs* da = &fp->co_attrs;
 
-        if ((signed) fp->mv.pk.specialhi.x0 != 0) {
+        if (fp->mv.pk.specialhi.x0 != 0) {
             fp->mv.pk.specialhi.x0--;
         } else {
-            ftCommon_Fall(fp, sa->x64, da->terminal_vel);
+            ftCommon_Fall(fp, sa->x64, da->terminal_velocity);
         }
     }
 
@@ -191,8 +192,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
                 &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -207,8 +207,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += 6 * tempf - 3;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     }
 }
@@ -232,8 +231,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
                 &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -248,8 +246,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += (10 * tempf) - 5;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     }
 }
@@ -294,13 +291,17 @@ void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
     ftCommon_ApplyGroundMovement(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftPk_SpecialAirHiStart1_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 {
@@ -403,8 +404,10 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -417,7 +420,9 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
@@ -658,7 +663,7 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
         tempf = lbVector_AngleXY(&vec2, &vec1);
 
         // if the angular difference > the minimum difference, return 1
-        if (tempf > (deg_to_rad * (pika_attr->xA8))) {
+        if (tempf > MTXDegToRad(pika_attr->xA8)) {
             return true;
         }
 
@@ -671,7 +676,7 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
 void ftPk_SpecialHiEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((u32) fp->cmd_vars[0] == 1U) {
+    if (fp->cmd_vars[0] == 1U) {
         if (ftPk_SpecialHi_80127064(gobj)) {
             fp->cmd_vars[0] = 0;
             fp->mv.pk.specialhi.x8 = 1;

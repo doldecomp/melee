@@ -24,6 +24,7 @@
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C8C.h"
 #include "ft/ft_0DF1.h"
@@ -36,7 +37,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageScrew.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Jump.h"
@@ -48,27 +48,33 @@
 #include "ftDonkey/ftDk_HeavyLanding.h"
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
-#include "lb/lbbgflash.h"
+#include "lb/lb_0219.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
-int ftCo_803C5520[2][12] = {
-    { 81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87 },
-    { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },
+int ftCo_803C5520[2][4][3] = {
+    {
+        { 81, 78, 75 },
+        { 82, 79, 76 },
+        { 83, 80, 77 },
+        { 89, 88, 87 },
+    },
+    {
+        { 84, 84, 84 },
+        { 85, 85, 85 },
+        { 86, 86, 86 },
+        { 89, 88, 87 },
+    },
 };
 
-/* 08DA4C */ static bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t, enum_t);
+/* 08DA4C */ static bool ftCo_8008DA4C(Fighter_GObj* gobj, HitElement, enum_t);
 /* 08F938 */ static bool doIasa(Fighter_GObj* gobj);
 
 float ftCo_Damage_CalcAngle(Fighter* fp, float f)
@@ -78,7 +84,7 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
             fp->mv.co.damage.x1A = 1;
             fp->mv.co.damage.x1B = p_ftCommonData->x7F0;
         }
-        return deg_to_rad * fp->dmg.x1848_kb_angle;
+        return MTXDegToRad(fp->dmg.x1848_kb_angle);
     }
     if (fp->ground_or_air == GA_Air) {
         return p_ftCommonData->x144_radians;
@@ -86,12 +92,12 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
         return 0;
     } else {
         float result =
-            deg_to_rad * (p_ftCommonData->x148 *
-                              ((f - p_ftCommonData->x14C) /
-                               (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
-                          1);
-        if (result > deg_to_rad * p_ftCommonData->x148) {
-            result = deg_to_rad * p_ftCommonData->x148;
+            MTXDegToRad(p_ftCommonData->x148 *
+                            ((f - p_ftCommonData->x14C) /
+                             (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
+                        1);
+        if (result > MTXDegToRad(p_ftCommonData->x148)) {
+            result = MTXDegToRad(p_ftCommonData->x148);
         }
         return result;
     }
@@ -148,22 +154,22 @@ not_squatwait:
     }
 }
 
-bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t arg1, enum_t arg2)
+bool ftCo_8008DA4C(Fighter_GObj* gobj, HitElement arg1, enum_t arg2)
 {
     Fighter* fp = gobj->user_data;
     bool result;
     if (fp->dmg.x1838_percentTemp) {
         switch (arg1) {
-        case 1:
+        case HitElement_Fire:
             result = ftCo_800BFFD0(fp, arg2 + 11, 0);
             break;
-        case 2:
+        case HitElement_Electric:
             result = ftCo_800BFFD0(fp, arg2 + 15, 0);
             break;
-        case 5:
+        case HitElement_Ice:
             result = ftCo_800BFFD0(fp, arg2 + 31, 0);
             break;
-        case 13:
+        case HitElement_Dark:
             result = ftCo_800BFFD0(fp, arg2 + 35, 0);
             break;
         default:
@@ -174,28 +180,28 @@ bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t arg1, enum_t arg2)
     return result;
 }
 
-void ftCo_8008DB10(Fighter_GObj* gobj, enum_t arg1, float arg2)
+void ftCo_8008DB10(Fighter_GObj* gobj, HitElement arg1, float arg2)
 {
     if (!GET_FIGHTER(gobj)->dmg.x1838_percentTemp) {
         return;
     }
     switch (arg1) {
-    case 1:
+    case HitElement_Fire:
         if (arg2 > p_ftCommonData->x17C) {
             lbBgFlash_80021C48(3, 0);
         }
         return;
-    case 2:
+    case HitElement_Electric:
         if (arg2 > p_ftCommonData->x180) {
             lbBgFlash_80021C48(4, 0);
         }
         return;
-    case 5:
+    case HitElement_Ice:
         if (arg2 > p_ftCommonData->x184) {
             lbBgFlash_80021C48(5, 0);
         }
         return;
-    case 13:
+    case HitElement_Dark:
         if (arg2 > p_ftCommonData->x188) {
             lbBgFlash_80021C48(6, 0);
         }
@@ -231,8 +237,13 @@ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
 
 static float calcAngle(float angle)
 {
-    float x = cosf(angle) + cosf(M_PI_2_F);
-    float y = sinf(angle) + sinf(M_PI_2_F);
+    /// @todo Materialization order matches the inlined schedule in
+    /// #ftCo_8008DCE0.
+    float cm = cosf(M_PI_2_F);
+    float ca = cosf(angle);
+    float sm = M_PI_2_F;
+    float x = ca + cm;
+    float y = sinf(angle) + sinf(sm);
     if (x * x + y * y <= 0.0001f) {
         return 0;
     }
@@ -253,20 +264,18 @@ static void inlineA1(Fighter_GObj* gobj)
                                           fp->self_vel.y + fp->x8c_kb_vel.y));
 }
 
-static inline int* getDamageMotionIds(enum_t kb_level)
-{
-    return ((int (*)[4][3]) ftCo_803C5520)[0][kb_level];
-}
-
 void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
 {
     float scaled_kb_154;
-    float sp40;
+    /// @todo One-field aggregate to order this web against the @c x154 temp.
+    struct {
+        float v;
+    } scaled_kb;
     Vec3 pos;
+    float sp40;
     float floor_angle;
     float temp_f1_3;
     float temp_f2;
-    float scaled_kb;
     float kb_angle;
     s32 should_collide;
     s32 kb_level_base;
@@ -277,6 +286,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     float y;
     int var_r27 = 1;
     float kb_applied = fp->dmg.kb_applied;
+    PAD_STACK(0x28);
     Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp);
     fp->dmg.x18d8.kb_applied1 = kb_applied;
     pl_80040270(fp->player_id, fp->x221F_b4, kb_applied);
@@ -312,32 +322,31 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         }
         kb_level = 3;
     block_11:
-        scaled_kb = kb_applied * p_ftCommonData->x100;
+        scaled_kb.v = kb_applied * p_ftCommonData->x100;
         fp->mv.co.damage.x1A = 0;
         fp->mv.co.damage.x14 = 0;
         kb_angle = ftCo_Damage_CalcAngle(fp, kb_applied);
         if (kb_level_base < 2) {
             goto block_17;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if (fp->dmg.x1860_element != HitElement_Ice) {
             goto block_17;
         }
         kb_angle = calcAngle(kb_angle);
     block_17:
-        x = scaled_kb * cosf(kb_angle);
-        y = scaled_kb * sinf(kb_angle);
+        x = scaled_kb.v * cosf(kb_angle);
+        y = scaled_kb.v * sinf(kb_angle);
         fp->facing_dir = fp->dmg.facing_dir_1;
         if (fp->ground_or_air != GA_Air) {
             goto block_21;
         }
-        msid =
-            getDamageMotionIds(kb_level)[fp->dmg.x184c_damaged_hurtbox + 12];
+        msid = ftCo_803C5520[1][kb_level][fp->dmg.x184c_damaged_hurtbox];
         if (!ftCo_Damage_CheckAirMotion(fp)) {
             goto block_20;
         }
-        scaled_kb = scaled_kb * p_ftCommonData->x190;
-        x = scaled_kb * cosf(kb_angle);
-        y = scaled_kb * sinf(kb_angle);
+        scaled_kb.v = scaled_kb.v * p_ftCommonData->x190;
+        x = scaled_kb.v * cosf(kb_angle);
+        y = scaled_kb.v * sinf(kb_angle);
     block_20:
         ftCo_Damage_CalcVel(fp, -x * fp->facing_dir, y);
         fp->xF0_ground_kb_vel = 0;
@@ -351,8 +360,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (!(floor_angle < M_PI_2_F)) {
             goto block_23;
         }
-        msid = ((int (*)[4][3])
-                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
+        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         ftCommon_8007D5D4(fp);
         ftCo_Damage_CalcVel(fp, pos.x, pos.y);
         fp->xF0_ground_kb_vel = 0;
@@ -362,8 +370,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
             goto block_27;
         }
         ftCommon_8007D5D4(fp);
-        msid = ((int (*)[4][3])
-                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
+        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         if (!(floor_angle > (M_PI_2 + (double) p_ftCommonData->x1E8_radians)))
         {
             goto block_26;
@@ -380,8 +387,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_27:
-        msid = ((int (*)[4][3])
-                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
+        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         fp->xF0_ground_kb_vel = pos.x;
         temp_f2 = fp->xF0_ground_kb_vel;
         ftCo_Damage_CalcVel(fp, normal->y * temp_f2, -normal->x * temp_f2);
@@ -422,7 +428,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_42;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if (fp->dmg.x1860_element != HitElement_Ice) {
             goto block_42;
         }
         msid = 0x5A;
@@ -460,7 +466,7 @@ block_63:
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->post_hitlag_cb = ftCo_Damage_OnExitHitlag;
-    fp->dmg.x18A8 = (float) fp->dmg.kb_applied;
+    fp->dmg.x18A8 = fp->dmg.kb_applied;
     fp->x221C_b6 = true;
     fp->dmg.x18ac_time_since_hit = (s32) 0;
     if (msid == 0x5B) {
@@ -476,7 +482,7 @@ block_67:
     if (kb_level != 3) {
         goto block_70;
     }
-    if (!(scaled_kb >= p_ftCommonData->x5E8)) {
+    if (!(scaled_kb.v >= p_ftCommonData->x5E8)) {
         goto block_70;
     }
     ftCommon_8007EFC0(fp, (u32) p_ftCommonData->x5EC);
@@ -528,7 +534,7 @@ block_83:
     if (kb_level_base < 2) {
         return;
     }
-    if ((u32) fp->dmg.x1860_element == 5U) {
+    if (fp->dmg.x1860_element == HitElement_Ice) {
         ftCo_DamageIce_Init(gobj);
     }
 }
@@ -607,7 +613,7 @@ void ftCo_8008E5A4(Fighter* fp)
                 float angle = atan2f(kb_y, kb_x);
                 float scale;
                 kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
-                scale = deg_to_rad * p_ftCommonData->x1A8;
+                scale = MTXDegToRad(p_ftCommonData->x1A8);
                 angle += scale * f30;
                 fp->x8c_kb_vel.x = kb_mag * cosf(angle);
                 fp->x8c_kb_vel.y = kb_mag * sinf(angle);
@@ -725,8 +731,10 @@ static bool inlineB0(Fighter* fp)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(0)
+#endif
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
     Fighter* tmp_p21265 = gobj->user_data;
@@ -769,7 +777,9 @@ void ftCo_8008EB58(Fighter_GObj* gobj)
         ftCommon_800804FC(fp);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static bool inlineB1(Fighter* fp)
 {
@@ -834,7 +844,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
-    } else if (fp->dmg.x1860_element == 10U) {
+    } else if (fp->dmg.x1860_element == HitElement_Cape) {
         if (ftCo_800C3538(gobj)) {
             goto ret_A8C;
         }
@@ -967,7 +977,7 @@ void ftCo_8008F744(Fighter_GObj* gobj)
             fp->x2098 = p_ftCommonData->x4CC;
             ftCommon_8007F86C(gobj);
             if (ftCo_800C5240(gobj)) {
-                ftCo_800C554C((Fighter*) fp);
+                ftCo_800C554C(fp);
             }
         }
     }
@@ -1103,12 +1113,14 @@ void ftCo_8008FC94(Fighter_GObj* gobj)
     ftCommon_8007D5D4(gobj->user_data);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
-                       ? sqrtf__Ff(VEC3_SQ_LEN(fp->x8c_kb_vel))
+                       ? sqrtf(VEC3_SQ_LEN(fp->x8c_kb_vel))
                        : ABS(fp->xF0_ground_kb_vel);
     fp->mv.co.damage.x8 =
         kb_vel < p_ftCommonData->x568   ? 0
@@ -1118,7 +1130,9 @@ void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
         : kb_vel < p_ftCommonData->x578 ? p_ftCommonData->x584
                                         : p_ftCommonData->x588;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void inlineD0(Fighter_GObj* gobj)
 {

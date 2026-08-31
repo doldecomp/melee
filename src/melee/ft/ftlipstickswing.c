@@ -8,7 +8,6 @@
 #include "it/forward.h"
 
 #include "it/items/itlipstick.h"
-#include "it/items/itstarrod.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
@@ -46,7 +45,6 @@ void ftCo_LipstickSwing_Coll(HSD_GObj* gobj)
 void ft_800CDB9C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int y;
     int x = fp->ft_data->x8->x10;
     Vec v2;
     Vec v;
@@ -62,13 +60,7 @@ void ft_800CDB9C(Fighter_GObj* gobj)
             }
             fp->cmd_vars[0] = 540000;
         }
-        if (fp->throw_flags_b0) {
-            fp->throw_flags_b0 = 0;
-            y = 1;
-        } else {
-            y = 0;
-        }
-        if (y) {
+        if (ftCheckThrowB0(fp)) {
             it_80295748(fp->item_gobj, &v);
             lb_8000B1CC(fp->parts[x].joint, &v, &v2);
             if (it_8026B594(fp->item_gobj) == false) {

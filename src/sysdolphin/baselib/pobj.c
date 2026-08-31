@@ -16,13 +16,10 @@
 #include "forward.h"
 
 #include <math.h> // IWYU pragma: keep
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-
-/// @todo Several differently-signed comparisons appear in asserts, likely
-///       indicating the sign of one of the variables is declared incorrectly
-#pragma clang diagnostic ignored "-Wsign-compare"
 
 static void PObjInfoInit(void);
 
@@ -371,7 +368,7 @@ HSD_PObj* HSD_PObjAlloc(void)
 void HSD_PObjFree(HSD_PObj* pobj)
 {
     if (pobj) {
-        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) (pobj));
+        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) pobj);
     }
 }
 
@@ -739,7 +736,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                     case GX_VA_TEX5MTXIDX:
                     case GX_VA_TEX6MTXIDX:
                     case GX_VA_TEX7MTXIDX:
-                        GXMatrixIndex1u8(idx);
+                        GXTexCoord1u8(idx);
                         break;
 
                     case GX_VA_POS:
@@ -1081,7 +1078,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
 
     flags |= GetSetupFlags(jobj, rendermode);
 
-    if (flags | SETUP_JOINT0) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT0)
+#endif
+    {
         GXSetCurrentMtx(GX_PNMTX0);
         GXLoadPosMtxImm(pmtx, GX_PNMTX0);
         HSD_PerfCountMtxLoad();
@@ -1098,7 +1098,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
             }
         }
     }
-    if (flags | SETUP_JOINT1) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT1)
+#endif
+    {
         ///@todo Unused stack
         u8 _[4];
         HSD_JObjSetupMatrix(pobj->u.jobj);

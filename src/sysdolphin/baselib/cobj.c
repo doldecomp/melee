@@ -13,13 +13,10 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <dolphin/vi.h>
-#include <MetroTRK/intrinsics.h>
+#include <dolphin/vi.h> // IWYU pragma: keep
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
@@ -200,7 +197,7 @@ void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
     HSD_WObjReqAnim(cobj->interest, startframe);
 }
 
-GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx44 mtx)
 {
     GXProjectionType projection_type;
     switch (cobj->projection_type) {
@@ -245,10 +242,8 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 
 static bool setupNormalCamera(HSD_CObj* cobj)
 {
-    int unused[4];
-
     GXProjectionType projection_type;
-    Mtx p;
+    Mtx44 p;
 
     f32 x_scale;
     f32 y_scale;
@@ -299,6 +294,9 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
 {
     int unused[3];
     GXProjectionType projection_type;
+    /// @todo Should be an `Mtx44` like the other three: `makeProjectionMtx`
+    /// writes 4 rows. Changing it here does not match, so the extra row
+    /// currently lands in `unused` above.
     Mtx p;
 
     f32 h_scale;
@@ -322,7 +320,11 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
     left = cobj->viewport.xmin;
     right = cobj->viewport.xmax;
     top = cobj->viewport.ymin;
-    bottom = bottom = cobj->viewport.ymax;
+    bottom =
+#ifdef MUST_MATCH
+        bottom =
+#endif
+            cobj->viewport.ymax;
     bottom = bottom < rmode->efbHeight ? bottom : rmode->efbHeight;
     width = right - left;
     height = bottom - top;
@@ -379,9 +381,8 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
 
 static bool setupBottomHalfCamera(HSD_CObj* cobj)
 {
-    int unused[4];
     GXProjectionType projection_type;
-    Mtx p;
+    Mtx44 p;
 
     f32 top, bottom;
     f32 left, right;
@@ -480,11 +481,6 @@ void HSD_CObjSetupViewingMtx(HSD_CObj* cobj)
         HSD_CObjClearFlags(cobj, 0x40000000);
         HSD_CObjSetFlags(cobj, 0x80000000);
     }
-}
-
-static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
-{
-    GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
 }
 
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)
@@ -629,7 +625,7 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
         dot = 0.0f;
     } else {
-        dot = __fabsf(VECDotProduct(up, &eye));
+        dot = fabsf(VECDotProduct(up, &eye));
         dot = 1.0f - dot;
         if (dot < FLT_MIN) {
             dot = 0.0f;
@@ -651,10 +647,12 @@ static inline f32 vec_get_x(Vec3* v)
     return v->x;
 }
 
+#ifdef MUST_MATCH
 static inline f64 cobj_fabsf_p(f32* v)
 {
-    return __fabsf(*v);
+    return fabsf(*v);
 }
+#endif
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
@@ -668,7 +666,11 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     if (res != 0) {
         return res;
     }
+#ifdef MUST_MATCH
     if (1.0 - cobj_fabsf_p(&eye.y) < 0.0001) {
+#else
+    if (1.0 - fabsf(eye.y) < 0.0001) {
+#endif
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-vec_get_x(&eye) / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
@@ -1262,7 +1264,7 @@ HSD_CObj* HSD_CObjAlloc(void)
     return cobj;
 }
 
-inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
+static inline void CObjResetFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
         return;

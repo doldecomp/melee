@@ -1,8 +1,6 @@
 #ifndef _METROTRK_DISPATCH_H
 #define _METROTRK_DISPATCH_H
 
-#include <platform.h>
-
 #include "MetroTRK/dserror.h"
 #include "MetroTRK/msgbuf.h"
 

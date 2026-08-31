@@ -2,15 +2,14 @@
 
 #include "db/db.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F93A8[] = {
     { 0, itCrazyhandbomb_UnkMotion0_Anim, itCrazyhandbomb_UnkMotion0_Phys,
@@ -99,13 +98,13 @@ void itCrazyhandbomb_UnkMotion0_Phys(Item_GObj* gobj)
 
     switch (HSD_Randi(3)) {
     case 0:
-        rot.x += deg_to_rad * (10.0f * ip->x40_vel.y);
+        rot.x += MTXDegToRad(10.0f * ip->x40_vel.y);
         break;
     case 1:
-        rot.y += deg_to_rad * (10.0f * ip->x40_vel.y);
+        rot.y += MTXDegToRad(10.0f * ip->x40_vel.y);
         break;
     case 2:
-        rot.z += deg_to_rad * (10.0f * ip->x40_vel.y);
+        rot.z += MTXDegToRad(10.0f * ip->x40_vel.y);
         break;
     }
 

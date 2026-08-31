@@ -1,8 +1,6 @@
 #ifndef GALE01_23EA2C
 #define GALE01_23EA2C
 
-#include <placeholder.h>
-
 #include "mn/types.h"
 
 #include <baselib/forward.h>

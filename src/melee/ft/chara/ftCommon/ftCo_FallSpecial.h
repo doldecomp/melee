@@ -1,11 +1,12 @@
 #ifndef GALE01_0968C8
 #define GALE01_0968C8
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0968C8 */ void ftCo_800968C8(Fighter_GObj* gobj);
 /* 096900 */ void ftCo_80096900(Fighter_GObj* gobj, int, int,
-                                bool allow_interrupt, float, float);
+                                bool allow_interrupt, float mobility,
+                                float landing_lag);
 /* 0969D8 */ void ftCo_800969D8(Fighter_GObj* gobj, int, int, int, float,
                                 float, float);
 /* 096AA0 */ void ftCo_FallSpecial_Anim(Fighter_GObj* gobj);

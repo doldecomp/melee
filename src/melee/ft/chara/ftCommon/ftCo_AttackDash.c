@@ -6,7 +6,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftswing.h"
@@ -20,8 +24,6 @@
 #include "it/it_26B1.h"
 
 #include <baselib/forward.h>
-
-#include <common_structs.h>
 
 /* 08B498 */ static void decideFighter(Fighter_GObj* gobj);
 /* 08B4D4 */ static void doEnter(Fighter_GObj* gobj);
@@ -95,7 +97,7 @@ void ftCo_AttackDash_IASA(Fighter_GObj* gobj)
 void ftCo_AttackDash_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.gr_friction,
+    ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.ground_friction,
                 fp->facing_dir);
 }
 

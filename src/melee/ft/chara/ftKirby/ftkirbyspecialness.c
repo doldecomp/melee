@@ -11,6 +11,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -24,12 +25,8 @@
 #include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 {
@@ -39,8 +36,8 @@ static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
         flash_pos->z = 0;
         flash_pos->y += fp->x34_scale.y * 3.0f;
         {
-            HSD_GObj* flash_gobj =
-                it_802AA8C0(gobj, flash_pos, 145, fp->facing_dir);
+            HSD_GObj* flash_gobj = it_802AA8C0(
+                gobj, flash_pos, It_Kind_Kirby_NessPKFlush, fp->facing_dir);
             fp->u.kb.ns_flash_gobj = flash_gobj;
             if (flash_gobj != NULL) {
                 fp->death2_cb = ftKb_Init_800EE74C;
@@ -359,7 +356,8 @@ void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
     if (fp->mv.kb.specialn_ns.falling_acceleration_delay != 0) {
         fp->mv.kb.specialn_ns.falling_acceleration_delay--;
     } else {
-        ftCommon_Fall(fp, da->specialn_ns_gravity, fp->co_attrs.terminal_vel);
+        ftCommon_Fall(fp, da->specialn_ns_gravity,
+                      fp->co_attrs.terminal_velocity);
     }
     airFriction = fp->co_attrs.aerial_friction;
     ftCommon_ApplyFrictionAir(fp, airFriction);

@@ -23,7 +23,7 @@
 #include "it/itspawn.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
@@ -42,10 +42,10 @@
                                              mpLib_GroundEnum ground_kind,
                                              float delta_y);
 
-S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
+GrJoint grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
-StageCallbacks grGb_803E3E84[11] = {
+StageCallbacks grGb_StageCallbacks[11] = {
     {
         grGreatBay_801F4404,
         grGreatBay_801F4430,
@@ -135,9 +135,9 @@ StageCallbacks grGb_803E3E84[11] = {
     },
 };
 
-StageData grGb_803E3F6C = {
-    GREATBAY,
-    grGb_803E3E84,
+StageData grGb_StageData = {
+    Gr_Kind_GreatBay,
+    grGb_StageCallbacks,
     "/GrGb.dat",
     grGreatBay_801F4240,
     grGreatBay_801F423C,
@@ -232,7 +232,7 @@ bool grGreatBay_801F42F8(void)
 HSD_GObj* grGreatBay_801F4300(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grGb_803E3E84[gobj_id];
+    StageCallbacks* callbacks = &grGb_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -244,14 +244,14 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
+        if (callbacks->gobj_proc != NULL) {
             if (gobj_id == 10) {
-                HSD_GObj_SetupProc(gobj, callbacks->callback2, 5);
+                HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 5);
             } else {
-                HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+                HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
             }
         }
     } else {
@@ -336,10 +336,8 @@ void fn_801F4520(HSD_GObj* gobj)
 void grGreatBay_801F454C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x8_callback = NULL;
     gp->x11_flags.b012 = 1;
     gp->xC_callback = NULL;
@@ -726,7 +724,15 @@ void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
     PAD_STACK(12);
 
     temp_r0 = coll->x34_flags.b1234;
-    if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
+    if (temp_r0 == 1 ||
+    /// @todo Redundant cast necessary to match
+#ifdef MUST_MATCH
+        (s32) temp_r0 == 2 ||
+#else
+        temp_r0 == 2 ||
+#endif
+        temp_r0 == 3)
+    {
         gp->u.greatbay.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
         gp->u.greatbay.xD8 += 1;
         gp->u.greatbay.xE0 += coll_x50 / 100.0f;
@@ -1135,8 +1141,8 @@ bool grGreatBay_801F66A4(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    if (stage_info.internal_stage_id == GREATBAY) {
-        gobj = Ground_801C2BA4(1);
+    if (stage_info.grkind == Gr_Kind_GreatBay) {
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             gp = GET_GROUND(gobj);
             if (gp != NULL) {

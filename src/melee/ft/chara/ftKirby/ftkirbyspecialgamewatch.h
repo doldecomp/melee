@@ -1,8 +1,6 @@
 #ifndef GALE01_10D074
 #define GALE01_10D074
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 /* 10D074 */ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj);

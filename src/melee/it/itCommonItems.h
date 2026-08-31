@@ -7,6 +7,7 @@
 #include <platform.h>
 
 #include "dolphin/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h"
 
@@ -15,7 +16,6 @@
 #include <baselib/forward.h>
 #include <melee/gr/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef struct {
@@ -649,7 +649,7 @@ typedef struct {
     /* ip+E20 */ Vec3 vel;
     /* ip+E2C */ itGShell_HurtInit x58_hurtInit;
 } itGShell_ItemVars;
-STATIC_ASSERT(sizeof(itGShell_ItemVars) == 120);
+ASSERT_SIZE(itGShell_ItemVars, 120);
 
 typedef struct {
     /* ip+DD4 */ f32 xDD4;
@@ -671,7 +671,7 @@ typedef struct {
     /* ip+DF5 */ char pad_DF5[0xE20 - 0xDF5];
     /* ip+E20 */ Vec3 vel;
 } itRShell_ItemVars;
-STATIC_ASSERT(sizeof(itRShell_ItemVars) == 88);
+ASSERT_SIZE(itRShell_ItemVars, 88);
 
 typedef struct {
     u8 _pad[0x14];
@@ -688,7 +688,7 @@ typedef struct {
     unsigned char xDD4_b6 : 1;
     unsigned char xDD4_b7 : 1;
 } itMsBomb_ItemVars;
-STATIC_ASSERT(sizeof(itMsBomb_ItemVars) == 1);
+ASSERT_SIZE(itMsBomb_ItemVars, 1);
 
 typedef struct {
     int padDD4;
@@ -701,7 +701,7 @@ typedef struct {
     float xDF0;
     unsigned int xDF4;
 } itZeldaDinFire_ItemVars;
-STATIC_ASSERT(sizeof(itZeldaDinFire_ItemVars) == 36);
+ASSERT_SIZE(itZeldaDinFire_ItemVars, 36);
 
 typedef struct itPokemonAttributes {
     f32 x0;
@@ -1188,10 +1188,10 @@ typedef struct itPokemonSpawn_DatAttrs {
     f32 x1C[6];
     f32 x34;
     s32 x38;
-    s32 pokemon_spawn_weights[Pokemon_Chicorita_Leaf - Pokemon_Tosakinto];
+    s32 pokemon_spawn_weights[It_PKind_Terminate - It_PKind_Start];
     u8 _pad[520];
 } itPokemonSpawn_DatAttrs;
-STATIC_ASSERT(sizeof(itPokemonSpawn_DatAttrs) == 0x2BC);
+ASSERT_SIZE(itPokemonSpawn_DatAttrs, 0x2BC);
 
 typedef struct itZako_ItemVars {
     /* ip+DD4 */ HSD_JObj* jobj;

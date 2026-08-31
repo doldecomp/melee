@@ -1,18 +1,16 @@
 #ifndef MELEE_FT_CHARA_FTCOMMON_TYPES_H
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
-#include "common_structs.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h" // IWYU pragma: export
-#include "ftKirby/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
 
 #include <dolphin/mtx.h>
+#include <baselib/controller.h>
 
 struct ftCollisionBox {
     /*  +0 */ float top;
@@ -222,7 +220,7 @@ union ftCommon_MotionVars {
     } escapeair;
     struct {
         /* fp+2340 */ float x0;
-        /* fp+2344 */ float anim_start;
+        /* fp+2344 */ float anim_speed;
     } rebound;
     struct {
         /* fp+2340 */ u8 pad_x0[4];

@@ -1,7 +1,6 @@
 #ifndef _AXDRIVER_H_
 #define _AXDRIVER_H_
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -68,7 +67,7 @@ struct HSD_SM {
                                   void* param);
 /* 38E034 */ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param);
 /* 38E30C */ bool AXDriver_8038E30C(s32 channel, s32 type, void* param,
-                                    u8* heap, u32 heap_size);
+                                    u8* heap, size_t heap_size);
 /* 38E37C */ bool AXDriver_8038E37C(AXDriverAuxType type, void* param);
 /* 38E498 */ void AXDriver_8038E498(int voices, int priority, int sample_rate,
                                     int aram_size);

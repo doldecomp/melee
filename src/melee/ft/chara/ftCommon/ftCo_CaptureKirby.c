@@ -13,7 +13,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
-#include <math.h>
+#include <baselib/jobj.h>
 
 float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
 {
@@ -79,7 +79,7 @@ static inline void inlineB0(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    float dist = sqrtf__Ff(SQ(pos->x) + SQ(pos->y) + SQ(pos->z));
+    float dist = lbVector_Len(pos);
     float mv_x8_x = fp->mv.co.capturekirby.x8.x;
     if (dist < mv_x8_x) {
         struct {

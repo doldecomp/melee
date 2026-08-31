@@ -3,7 +3,11 @@
 #include <placeholder.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -24,10 +28,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct
@@ -43,7 +44,7 @@ void ftSk_SpecialS_80110490(Fighter* fp)
         v2 += (float) M_TAU;
     }
 
-    v3 = v2 * rad_to_deg;
+    v3 = MTXRadToDeg(v2);
 
     if (v3 < 0) {
         v3 = 0;
@@ -291,7 +292,7 @@ void ftSk_SpecialS_80110AEC(HSD_GObj* gobj)
     }
 }
 
-inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
+static inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -304,7 +305,7 @@ inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
     ftSk_SpecialS_ZeroHitboxPositions(gobj);
 }
 
-inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
+static inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -317,7 +318,7 @@ inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
     fp->x2219_b3 = true;
 }
 
-inline float sumOfSquares(float a, float b)
+static inline float sumOfSquares(float a, float b)
 {
     float c;
 
@@ -620,7 +621,8 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* fighter_attr = &fp->co_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_Fall(fp, fighter_attr->grav, fighter_attr->terminal_vel);
+        ftCommon_Fall(fp, fighter_attr->gravity,
+                      fighter_attr->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, fighter_attr->aerial_friction);

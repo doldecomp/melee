@@ -4,13 +4,16 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -21,7 +24,6 @@
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 
@@ -34,8 +36,7 @@ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// Luigi's Green Missile Setup (RNG + calculations)
@@ -153,7 +154,7 @@ void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         ftCommon_Fall(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
@@ -456,15 +457,14 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = NULL;
 }
 
 /// Luigi's grounded Green Missile Launch Motion State handler
 void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
 {
-    u8 _[12];
+    u8 _[4];
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -766,7 +766,7 @@ void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     ftCommon_Fall(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
-                  fp->co_attrs.terminal_vel);
+                  fp->co_attrs.terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
 }
 

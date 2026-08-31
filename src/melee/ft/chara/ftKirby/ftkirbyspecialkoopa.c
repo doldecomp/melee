@@ -3,7 +3,11 @@
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -61,7 +65,8 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     }
 
     itKoopaFlame_Spawn(gobj, &pos, fp->facing_dir, fp->mv.kb.specialn_kp.x0[1],
-                       new_facing, fp->u.kb.x84, fp->u.kb.x88, 0x9A);
+                       new_facing, fp->u.kb.x84, fp->u.kb.x88,
+                       It_Kind_Kirby_KoopaFlame);
 
     if (fp->mv.kb.specialn_kp.x14 == 0) {
         fp->mv.kb.specialn_kp.x0[1] = Item_8026AE60();
@@ -192,11 +197,6 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                                   NULL);
     }
-}
-
-inline ftKb_DatAttrs* ftKb_KpSpecialN_Anim_inline(Fighter* arg0)
-{
-    return arg0->dat_attrs;
 }
 
 void ftKb_KpSpecialN_Anim(Fighter_GObj* gobj)

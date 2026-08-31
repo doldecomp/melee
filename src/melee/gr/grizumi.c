@@ -12,6 +12,7 @@
 #include "cm/camera.h"
 #include "ft/ftdrawcommon.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbdvd.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
@@ -77,8 +78,8 @@ typedef struct IzumiUnkCC {
 
 static struct grIzumi_YakumonoParam* yakumono_param;
 
-S16Vec3 grIz_803E0D60[] = { { 0, 3, 1 }, { 1, 3, 2 }, { 2, 3, 3 } };
-StageCallbacks grIz_803E0D74[] = {
+GrJoint grIz_803E0D60[] = { { 0, 3, 1 }, { 1, 3, 2 }, { 2, 3, 3 } };
+StageCallbacks grIz_StageCallbacks[] = {
     {
         grIzumi_801CBDD4,
         grIzumi_801CBE00,
@@ -159,9 +160,10 @@ StageCallbacks grIz_803E0D74[] = {
         0,
     },
 };
-StageData grIz_803E0E5C = {
-    IZUMI,
-    grIz_803E0D74,
+
+StageData grIz_StageData = {
+    Gr_Kind_Izumi,
+    grIz_StageCallbacks,
     "/GrIz.dat",
     grIzumi_801CBB88,
     grIzumi_801CBB84,
@@ -228,7 +230,7 @@ bool grIzumi_801CBCE0(void)
 HSD_GObj* grIzumi_801CBCE8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grIz_803E0D74[gobj_id];
+    StageCallbacks* callbacks = &grIz_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -242,12 +244,12 @@ HSD_GObj* grIzumi_801CBCE8(int gobj_id)
             gp->x1C_callback = callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
@@ -720,7 +722,7 @@ HSD_GObj* grIzumi_801CCD98(void)
     HSD_CObj* cobj = lb_80013B14(&ReflectCObjDesc);
     IzumiReflection* refl;
     UnkArchiveStruct* dat;
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMaxSorted(gobj, grIzumi_801CCEA0, 2);
     refl = HSD_MemAlloc(sizeof(IzumiReflection));
     GObj_InitUserData(gobj, 3, HSD_Free, refl);
@@ -798,7 +800,7 @@ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
 
 static inline bool check_flag_4020(HSD_JObj* jobj)
 {
-    if ((jobj->flags & (0x4020)) != 0) {
+    if ((jobj->flags & 0x4020) != 0) {
         return false;
     } else {
         return true;

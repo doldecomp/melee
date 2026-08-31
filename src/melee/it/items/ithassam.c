@@ -1,7 +1,6 @@
 #include "ithassam.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
@@ -12,16 +11,16 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -236,7 +235,7 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
         jobj = (HSD_JObj*) gobj->hsd_obj;
 
         ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(gobj->hsd_obj);
-        ip->xDD4_itemVar.hassam.x68 += deg_to_rad * (180 / attr->x20);
+        ip->xDD4_itemVar.hassam.x68 += MTXDegToRad(180 / attr->x20);
         HSD_JObjSetRotationY(jobj, ip->xDD4_itemVar.hassam.x68);
 
         if (++ip->xDB0_itcmd_var1 > (u32) attr->x20) {
@@ -292,8 +291,8 @@ bool itHassam_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
-                                  Item_StateChangeFlags flags)
+static inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
+                                         Item_StateChangeFlags flags)
 {
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, msid, flags);

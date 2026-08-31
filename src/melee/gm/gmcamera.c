@@ -18,7 +18,6 @@
 #include "dolphin/pad.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
-#include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
 #include "gm/gmpause.h"
 #include "gm/types.h"
@@ -28,7 +27,7 @@
 #include "lb/lbcardnew.h"
 #include "lb/lbsnap.h"
 #include "lb/lbspdisplay.h"
-#include "mn/mnmain.h"
+#include "mn/inlines.h"
 #include "sc/types.h"
 
 typedef struct _SisLibUnkStruct2 {
@@ -283,12 +282,12 @@ void gmCamera_801A26C0(void)
 void gmCamera_801A2798(void)
 {
     unsigned int new_var;
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
         new_var = gmCamera_VsCamUiState.x14 + 1;
         gmCamera_VsCamUiState.x14 = new_var % 2;
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x10) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_TRIGGER_Z) {
         lbAudioAx_80024030(6);
         gmCamera_801A3048(1);
     }
@@ -374,8 +373,8 @@ void gmCamera_801A2AAC(void)
 
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         gmCamera_801A3048(2);
-    } else if (HSD_PadCopyStatus[3].trigger & 0x100) {
-        lbAudioAx_80024030(1);
+    } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_A) {
+        sfxForward();
         switch (gmCamera_VsCamUiState.x44) {
         case 0:
         case 1:
@@ -396,21 +395,21 @@ void gmCamera_801A2AAC(void)
             gmCamera_801A3048(5);
             break;
         }
-    } else if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
+        sfxBack();
         gmCamera_801A3048(0);
     }
 }
 
 void gmCamera_801A2BB0(void)
 {
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
+        sfxBack();
         gmCamera_801A3048(0);
     }
 }
 
-f32 gmCamera_801A2BF0_get_translate_x(s32* px18)
+f32 gmCamera_801A2BF0_get_translate_x(const s32* px18)
 {
     if (*px18 != 0) {
         return 5.0f;
@@ -458,9 +457,9 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     s32* px18;
     f32 translate_x;
 
-    if (HSD_PadCopyStatus[3].trigger & 0x40001) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*(px18 = &gcus->x18) != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *px18 = 0;
             lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
             if (*px18 != 0) {
@@ -472,9 +471,9 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
             return;
         }
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x80002) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         if (*(px18 = &gcus->x18) != 1) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *px18 = 1;
             lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
             if (*px18 != 0) {
@@ -498,18 +497,18 @@ void gmCamera_801A2D44(void)
         gmCamera_801A3048(2);
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x1100) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) {
         if (gcus->x18 == 0) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             gmCamera_801A3048(7);
             return;
         }
-        lbAudioAx_80024030(0);
+        sfxBack();
         gmCamera_801A3048(0);
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
+        sfxBack();
         gmCamera_801A3048(0);
         return;
     }
@@ -590,7 +589,7 @@ static inline void gmCamera_801A31FC_inline(DynamicModelDesc* mdl)
     HSD_GObj* gobj;
     gobj = GObj_Create(0xE, 0x10, 0);
     jobj = gmCamera_VsCamUiState.x8 = HSD_JObjLoadJoint(mdl->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, mdl, 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -616,7 +615,7 @@ void gmCamera_801A31FC(void)
         HSD_GObj* gobj_a = GObj_Create(0xE, 0x10, 0);
         HSD_JObj* jobj_a = gmCamera_VsCamUiState.x4 =
             HSD_JObjLoadJoint(*joint_a);
-        HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, jobj_a);
+        HSD_GObjObject_80390A70(gobj_a, HSD_GObj_JObjKind, jobj_a);
         GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
     }
     gmCamera_801A31FC_inline(HSD_ArchiveGetPublicAddress(

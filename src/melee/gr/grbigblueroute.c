@@ -17,11 +17,10 @@
 #include "gr/types.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbshadow.h"
-#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -43,7 +42,21 @@ struct grBigBlueRoute_YakumonoParam {
     f32 x4C;
 };
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+struct grBigBlueRoute_8020DA9C_t {
+    /* +0 */ char pad_0[0x8];
+    /* +8 */ int x8;
+};
+
+/* car_info stores 31 RouteEntry records in its 0x554-byte allocation. */
+union grBigBlueRoute_RouteStorage {
+    RouteEntry entries[31];
+    u8 bytes[0x554];
+};
+
+/* 20DA9C */ static int
+grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
+
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 30.0f;
@@ -68,76 +81,58 @@ static void sdata2_order(void)
     (void) 250.0f;
     (void) -3.0f;
 }
+#endif
 
-void grBigBlue_801E8D04(Ground_GObj*);
-
-StageCallbacks grBb_Route_803E5E78[38] = {
+StageCallbacks grBb_Route_StageCallbacks[38] = {
     { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00,
       grBigBlueRoute_8020BB08, grBigBlueRoute_8020BB0C, 0 },
     { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24,
       grBigBlueRoute_8020BC2C, grBigBlueRoute_8020BC30, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
     { grBigBlueRoute_8020C140, grBigBlueRoute_8020C1D4,
       grBigBlueRoute_8020C1DC, grBigBlueRoute_8020C210, 0x80000000 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
     { grBigBlueRoute_8020BC68, grBigBlueRoute_8020BF30,
       grBigBlueRoute_8020BF38, grBigBlueRoute_8020C13C, 0x40000000 },
     { grBigBlueRoute_8020BB10, grBigBlueRoute_8020BB58,
       grBigBlueRoute_8020BB60, grBigBlueRoute_8020BB64, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
 };
 
-char grBb_Route_803E6170[] = "/GrNBr.dat";
-
-static struct {
-    u32 internal_stage_id;
-    StageCallbacks* callbacks;
-    char* data1;
-    void (*OnInit)(void);
-    void (*OnDemoInit)(int);
-    void (*OnLoad)(void);
-    void (*OnStart)(void);
-    bool (*callback4)(void);
-    DynamicsDesc* (*callback5)(enum_t);
-    bool (*callback6)(Vec3*, int, HSD_JObj*);
-    u32 flags2;
-    S16Vec3* x2C;
-    size_t x30;
-    char fmt[0x24];
-} grBb_Route_803E617C = {
-    BIGBLUEROUTE,
-    grBb_Route_803E5E78,
-    grBb_Route_803E6170,
+StageData grBb_Route_StageData = {
+    Gr_Kind_BigBlueRoute,
+    grBb_Route_StageCallbacks,
+    "/GrNBr.dat",
     grBigBlueRoute_8020B89C,
     grBigBlueRoute_8020B864,
     grBigBlueRoute_8020B920,
@@ -145,18 +140,24 @@ static struct {
     grBigBlueRoute_8020B9CC,
     grBigBlueRoute_8020DF78,
     grBigBlueRoute_8020DF80,
-    1,
+    (1 << 0),
     NULL,
     0,
-    "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
 static struct grBigBlueRoute_YakumonoParam* yakumono_param;
 
+#ifdef MUST_MATCH
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+}
+#endif
+
 void grBigBlueRoute_8020B864(bool arg)
 {
     HSD_GObj* gobj;
-    gobj = Ground_801C2BA4(0x1F);
+    gobj = Ground_GetMapGObj(0x1F);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
@@ -183,7 +184,7 @@ void grBigBlueRoute_8020B920(void)
     Vec3 fighter_pos;
     HSD_GObj* fighter;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
         grBigBlueRoute_8020DED4(&fighter_pos);
@@ -218,7 +219,7 @@ bool grBigBlueRoute_8020B9CC(void)
 HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grBb_Route_803E5E78[gobj_id];
+    StageCallbacks* callbacks = &grBb_Route_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -232,16 +233,17 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
             gp->x1C_callback = callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
-        OSReport(grBb_Route_803E617C.fmt, __FILE__, 0x117, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x117,
+                 gobj_id);
     }
 
     return gobj;
@@ -387,7 +389,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     int i;
     HSD_JObj* jobj;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     Ground_801C3D44(0, 30.0f, 4000.0f);
 
     if (fighter != NULL) {
@@ -441,9 +443,9 @@ void grBigBlueRoute_8020C140(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     grFZeroCar_801CAFBC(gobj, grBb_Route_carJObjIds, 30, 0);
-    gp->u.car.xCC = (HSD_Spline*) Ground_801C247C(33, 1);
-    gp->u.car.xD0 = (HSD_Spline*) Ground_801C247C(33, 0);
-    gp->u.car.xD4 = (HSD_Spline*) Ground_801C247C(33, 2);
+    gp->u.car.xCC = Ground_801C247C(33, 1);
+    gp->u.car.xD0 = Ground_801C247C(33, 0);
+    gp->u.car.xD4 = Ground_801C247C(33, 2);
     grBigBlueRoute_8020C238(gobj);
     ((UnkFlagStruct*) &gp->u.car.xC4)->b0 = 0;
 }
@@ -462,7 +464,7 @@ void grBigBlueRoute_8020C1DC(Ground_GObj* gobj)
 void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_Free((void*) gp->u.car.car_info);
+    HSD_Free(gp->u.car.car_info);
 }
 
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
@@ -562,20 +564,21 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     HSD_ASSERT(0X2E5, 0);
 }
 
-/// @todo Register allocation and addressing-mode choices for RouteEntry
-/// stores.
+/// @todo The initial Ground load is coalesced directly into r31 instead of
+/// passing through r6.
+#define GRBB_ROUTE_ENTRY_AT(car_info, offset)                                 \
+    ((RouteEntry*) &((union grBigBlueRoute_RouteStorage*) (car_info))         \
+         ->bytes[offset])
 static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                                              Ground_GObj* gobj)
 {
-    PAD_STACK(8);
-
     if (route_idx == 0) {
         route_idx = 30;
         ((RouteEntry*) gp->u.car.car_info)[30].flags.b1 = 1;
         gp->u.car.x10A = yakumono_param->x4C;
     } else {
-        s32 max_val;
         s32 min_val;
+        s32 max_val;
         s32 new_timer;
 
         route_idx = grBigBlueRoute_8020C530(gobj);
@@ -598,46 +601,47 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
     }
 
     if (route_idx != -1) {
-        // probably an inline of some sort
-        RouteEntry* re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        s32 route = route_idx;
+        s32 offset = route * sizeof(RouteEntry);
+        RouteEntry* re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
 
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b0 = 1;
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b6 = 0;
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b2_5 = 1;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b0 = 1;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b6 = 0;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b2_5 = 1;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x4 = 1.0F;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x8 = yakumono_param->x20;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->xC = 0.5F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+            re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
             re->x10 = rand;
         }
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x14 = 0.0F;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x18 = yakumono_param->x3C;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         (void) re;
         re->x1C = 0.0F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+            re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
             (void) re;
             re->x20 = 5.2359877f * rand - 2.6179938f;
         }
 
-        if (!((RouteEntry*) gp->u.car.car_info)[route_idx].flags.b1) {
+        if (!GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b1) {
             HSD_JObj* root = gobj->hsd_obj;
             if (root != NULL) {
                 HSD_JObj* jobj;
@@ -649,12 +653,12 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 
                 if (jobj != NULL) {
                     s32 i = 0;
-                    while (i < route_idx && jobj != NULL) {
+                    while (i < route && jobj != NULL) {
                         i++;
-                        if (jobj != NULL) {
-                            jobj = jobj->next;
-                        } else {
+                        if (jobj == NULL) {
                             jobj = NULL;
+                        } else {
+                            jobj = jobj->next;
                         }
                     }
 
@@ -670,24 +674,28 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                             0, 1, gp, jobj,
                             (void (*)(Item_GObj*, Ground*)) fn_8020DEAC, NULL,
                             NULL);
-                        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+                        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
                         re->x28 = (void*) item;
                         if (item != NULL) {
+                            RouteEntry* route_entries = gp->u.car.car_info;
+                            re = GRBB_ROUTE_ENTRY_AT(route_entries, offset);
                             grMaterial_801C8E28((HSD_GObj*) re->x28);
                         }
                     }
                 }
             }
+            (void) re;
         }
     }
 
     gp->u.car.x108++;
 }
+#undef GRBB_ROUTE_ENTRY_AT
 
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    PAD_STACK(8);
+    Ground* spawn_gp = gobj->user_data;
 
     if (!((f32) gp->u.car.x108 < 1.0f + yakumono_param->x40)) {
         return;
@@ -697,7 +705,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         return;
     }
 
-    grBigBlueRoute_SpawnRoute(gp->u.car.x108, gp, gobj);
+    grBigBlueRoute_SpawnRoute(gp->u.car.x108, spawn_gp, gobj);
 }
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
@@ -747,7 +755,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     f32 frac;
     UNUSED u8 pad3[20];
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
     } else {

@@ -1,4 +1,8 @@
-#ifndef GALE01_221EF4
-#define GALE01_221EF4
+#ifndef GALE01_22050C
+#define GALE01_22050C
+
+#include "gr/forward.h"
+
+/* 3E88AC */ extern StageData grTDr_StageData;
 
 #endif

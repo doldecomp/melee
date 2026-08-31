@@ -7,6 +7,8 @@
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftKirby/ftkirby.h"
 
+#include <baselib/jobj.h>
+
 void ftCo_800BD620(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -39,13 +41,15 @@ void ftCo_800BD6EC_noinline(Fighter_GObj* gobj)
     ftCo_800BD6EC(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 void ftCo_800BD6EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
-        fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74)
+        fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window)
     {
         inlineA0(fp, +1);
         return;
@@ -58,7 +62,9 @@ void ftCo_800BD6EC(Fighter_GObj* gobj)
         ftKb_SpecialN_800F5954(fp->victim_gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {
@@ -68,9 +74,9 @@ static inline void inlineB0(Fighter_GObj* gobj)
     if (lstick_x < 0) {
         lstick_x = -lstick_x;
     }
-    if (lstick_x >= p_ftCommonData->x3C &&
+    if (lstick_x >= p_ftCommonData->dash_smash_stick_threshold &&
         fp->x670_timer_lstick_tilt_x <
-            p_ftCommonData->x40 + p_ftCommonData->x44)
+            p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         fp->x670_timer_lstick_tilt_x = 254;
         if (fp->input.lstick.x < 0.0f) {

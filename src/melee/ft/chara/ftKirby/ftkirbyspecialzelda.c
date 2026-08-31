@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/fighter.h"
@@ -10,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -24,21 +24,14 @@
 
 #include "ftZelda/forward.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
 extern float ftKb_Init_803CB770[];
 
 /// Forward declarations for functions called before definition
 /* 105AB0 */ static void fn_80105AB0(Fighter_GObj*);
 /* 105A34 */ static void fn_80105A34(Fighter_GObj*);
-/* 1095DC */ static void fn_801095DC(HSD_GObj*);
-/* 109680 */ static void fn_80109680(HSD_GObj*);
-/* 109714 */ static void fn_80109714(HSD_GObj*);
-/* 1097B8 */ static void fn_801097B8(HSD_GObj*);
 
 static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
 {
@@ -62,6 +55,7 @@ void fn_80105A34(Fighter_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void fn_80105AB0(Fighter_GObj* gobj)
@@ -72,6 +66,7 @@ void fn_80105AB0(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
@@ -146,7 +141,7 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
                                 fn_80105FEC);
     }
-    if (fp->cmd_vars[0] == ((0, 0))) {
+    if (fp->cmd_vars[0] == (0, 0)) {
         fp->reflecting = new_var;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -179,7 +174,7 @@ void ftKb_ZdSpecialAirN_Phys(Fighter_GObj* gobj)
             fp->mv.zd.specialn.x0 = new_var;
         } else {
             ftCommon_Fall(fp, da->specialn_zd_fall_acceleration,
-                          co_attrs->terminal_vel);
+                          co_attrs->terminal_velocity);
         }
     }
 
@@ -212,8 +207,7 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
@@ -232,8 +226,7 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,

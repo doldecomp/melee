@@ -1,8 +1,5 @@
 #include "itsamusbomb.h"
 
-#include "math.h"
-
-#include <placeholder.h>
 #include <platform.h>
 
 #include "db/db.h"
@@ -11,14 +8,14 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {
@@ -74,7 +71,7 @@ void it_802B4C10(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, 0x11);
 }
 
-inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj)
+static inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -88,7 +85,7 @@ inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj)
     }
 }
 
-inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj)
+static inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);

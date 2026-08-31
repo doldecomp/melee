@@ -8,7 +8,6 @@
 
 #include <placeholder.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -28,7 +27,6 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -439,7 +437,6 @@ char ftPr_Init_assert_msg_0[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 ftCollisionBox ftPr_Init_803D0610 = {
     +8, +0, -4, +4, +4, +4,
 };
-/* static */ extern char* ftPr_Init_803D05B4[5];
 
 void ftPr_Init_8013C2F8(void)
 {
@@ -570,6 +567,8 @@ void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
         case 4:
             ftAnim_80070FB4(gobj, 0, 1);
             break;
+        default:
+            break;
         }
         if (flag) {
             ftAnim_80070C48(gobj, 0);
@@ -627,4 +626,5 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }

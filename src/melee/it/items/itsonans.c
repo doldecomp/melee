@@ -1,27 +1,36 @@
 #include "itsonans.h"
 
 #include "inlines.h"
-#include "math.h"
 
-#include "ef/eflib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
-#include "it/itmaplib.h"
 
 ItemStateTable it_803F7CA0[] = {
-    { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
-      itSonans_UnkMotion0_Coll },
-    { 1, itSonans_UnkMotion1_Anim, itSonans_UnkMotion1_Phys,
-      itSonans_UnkMotion1_Coll },
-    { -1, itSonans_UnkMotion2_Anim, itSonans_UnkMotion2_Phys,
-      itSonans_UnkMotion2_Coll }
+    {
+        0,
+        itSonans_UnkMotion0_Anim,
+        itSonans_UnkMotion0_Phys,
+        itSonans_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itSonans_UnkMotion1_Anim,
+        itSonans_UnkMotion1_Phys,
+        itSonans_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itSonans_UnkMotion2_Anim,
+        itSonans_UnkMotion2_Phys,
+        itSonans_UnkMotion2_Coll,
+    },
 };
 
 void it_802CD44C(Item_GObj* gobj)

@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include "MetroTRK/trk.h"
-
 typedef struct memRange {
     /* 0x00 */ u8* start;
     /* 0x04 */ u8* end;

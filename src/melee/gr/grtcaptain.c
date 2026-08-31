@@ -4,7 +4,6 @@
 
 #include "baselib/gobj.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -12,13 +11,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grTCaptain_OnDemoInit(int);
@@ -42,19 +39,34 @@ static void grTCaptain_8021FF30(Ground_GObj*);
 static DynamicsDesc* grTCaptain_OnTouchLine(enum_t);
 static bool grTCaptain_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTCa_803E8608[] = {
-    { grTCaptain_8021FDEC, grTCaptain_8021FE18, grTCaptain_8021FE20,
-      grTCaptain_8021FE24, 0 },
-    { grTCaptain_8021FEB8, grTCaptain_8021FF08, grTCaptain_8021FF10,
-      grTCaptain_8021FF30, 0 },
-    { grTCaptain_8021FE28, grTCaptain_8021FE78, grTCaptain_8021FE80,
-      grTCaptain_8021FEB4, (1 << 30) | (1U << 31) },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTCa_StageCallbacks[] = {
+    {
+        grTCaptain_8021FDEC,
+        grTCaptain_8021FE18,
+        grTCaptain_8021FE20,
+        grTCaptain_8021FE24,
+        0,
+    },
+    {
+        grTCaptain_8021FEB8,
+        grTCaptain_8021FF08,
+        grTCaptain_8021FF10,
+        grTCaptain_8021FF30,
+        0,
+    },
+    {
+        grTCaptain_8021FE28,
+        grTCaptain_8021FE78,
+        grTCaptain_8021FE80,
+        grTCaptain_8021FEB4,
+        (1 << 30) | (1 << 31),
+    },
+    { 0 },
 };
 
-StageData grTCa_803E8664 = {
-    TCAPTAIN,
-    grTCa_803E8608,
+StageData grTCa_StageData = {
+    Gr_Kind_TCaptain,
+    grTCa_StageCallbacks,
     "/GrTCa.dat",
     grTCaptain_OnInit,
     grTCaptain_OnDemoInit,
@@ -89,7 +101,7 @@ static bool grTCaptain_8021FCFC(void)
 static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTCa_803E8608[gobj_id];
+    StageCallbacks* callbacks = &grTCa_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

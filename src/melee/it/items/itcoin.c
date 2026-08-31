@@ -1,7 +1,6 @@
 #include "itcoin.h"
 
 #include "cm/camera.h"
-#include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "gr/grfigureget.h"
 #include "gr/ground.h"
@@ -9,12 +8,13 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
+#include "it/itdraw.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -428,7 +428,7 @@ Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
             var_r29 = tyDisplay_8031C5E4(arg2);
         }
         HSD_GObjObject_80390B0C(gobj);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, var_r29);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, var_r29);
         it_8027163C(gobj);
         ip->scl = Ground_801C0498();
         ip->scl *= attr->x44;

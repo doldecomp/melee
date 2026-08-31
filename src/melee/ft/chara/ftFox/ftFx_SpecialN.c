@@ -1,13 +1,17 @@
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
-#include "math.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
@@ -24,10 +28,8 @@
 #include "it/it_26B1.h"
 #include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
-#include <dolphin/os/OSError.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>
 
@@ -137,7 +139,7 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
     return true;
 }
 
-inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = NULL;
@@ -204,6 +206,8 @@ static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
         ft_PlaySFX(fp, falcoSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
                    SFX_PAN_MID);
         return;
+    default:
+        break;
     }
 }
 
@@ -220,7 +224,10 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     PAD_STACK(4);
 
     /// @todo Seems fake, probably one or more missing @c inline functions.
-    fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+    fp =
+#endif
+        fp = GET_FIGHTER(gobj);
 
     da = getFtSpecialAttrs(fp);
 
@@ -231,7 +238,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     }
 }
 
-inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = ftFx_Init_800E5588;
@@ -389,7 +396,10 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         f64 launchAngle;
 
         /// @todo Fake assignment.
-        fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+        fp =
+#endif
+            fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
 
@@ -480,7 +490,10 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         Fighter* fp;
 
         /// @todo Fake assignment.
-        fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+        fp =
+#endif
+            fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
 
@@ -666,8 +679,6 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 }
                 return;
             } else {
-                bool flag;
-
                 it_802ADDD0(fp->u.fx.x222C_blasterGObj, fp->cmd_vars[1]);
                 switch (fp->cmd_vars[3]) {
                 case 1:
@@ -679,13 +690,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     it_802AE608(fp->u.fx.x222C_blasterGObj);
                     break;
                 }
-                if (fp->throw_flags_b0 != 0) {
-                    fp->throw_flags_b0 = 0;
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-                if (flag) {
+                if (ftCheckThrowB0(fp)) {
                     Vec3 sp50;
                     Vec3 sp44;
 
@@ -723,6 +728,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                             ft_PlaySFX(fp, 100105, SFX_VOLUME_MAX,
                                        SFX_PAN_MID);
                             return;
+                        default:
+                            break;
                         }
                     default:
                         break;
@@ -738,6 +745,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                             ft_PlaySFX(fp, falcoSFX[1 == fp->facing_dir],
                                        SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
+                        default:
+                            break;
                         }
                         break;
                     }
@@ -756,6 +765,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 case FTKIND_FALCO:
                     ft_PlaySFX(fp, 100096, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
+                default:
+                    break;
                 }
             }
             break;

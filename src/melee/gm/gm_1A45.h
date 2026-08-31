@@ -14,7 +14,7 @@
 /* 1A46F4 */ bool fn_801A46F4(void);
 /* 1A47E4 */ bool fn_801A47E4(void);
 /* 1A48A4 */ u64 gm_801A48A4(u8);
-/* 1A4970 */ void gm_801A4970(int (**arg0)(void));
+/* 1A4970 */ void gm_801A4970(bool (**arg0)(void));
 /* 1A4B08 */ void gm_801A4B08(bool (*arg0)(void), bool (*arg1)(void));
 /* 1A4B1C */ UNK_RET gm_801A4B1C(UNK_PARAMS);
 /* 1A4B40 */ void gm_801A4B40(UNK_T);
@@ -29,8 +29,8 @@
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
-/* 1A4CE0 */ GameSceneHandler* gm_FindGameSceneHandler(u8 id);
-/* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), struct GameSceneInfo*);
+/* 1A4CE0 */ GameScene* gm_FindGameSceneHandler(u8 id);
+/* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo*);
 
 /* 4D6724 */ extern void (*gm_804D6724)(void);
 

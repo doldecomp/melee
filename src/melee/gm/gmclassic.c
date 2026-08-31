@@ -14,8 +14,8 @@ extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;
 extern UNK_T gmClassic_8047086C;
 extern UNK_T gmClassic_80472AF8;
-extern u8 gm_804908A0[];
-extern UNK_T gmClassic_804D68D0;
+u8 gm_804908A0[112];
+UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
@@ -25,13 +25,13 @@ typedef struct gmClassicMatchup {
     };
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
-STATIC_ASSERT(sizeof(gmClassicMatchup) == 6);
+ASSERT_SIZE(gmClassicMatchup, 6);
 
 typedef struct gmClassicMatchupData {
     /* 0x00 */ gmClassicMatchup x00;
     /* 0x06 */ u8 pad_06[2];
 } gmClassicMatchupData;
-STATIC_ASSERT(sizeof(gmClassicMatchupData) == 8);
+ASSERT_SIZE(gmClassicMatchupData, 8);
 
 typedef struct gmClassicIntroData {
     /* 0x00 */ s32 x00;
@@ -49,7 +49,7 @@ typedef struct gmClassicIntroData {
     /* 0x1C */ u8 x1C[3];
     /* 0x1F */ u8 x1F;
 } gmClassicIntroData;
-STATIC_ASSERT(sizeof(gmClassicIntroData) == 0x20);
+ASSERT_SIZE(gmClassicIntroData, 0x20);
 
 typedef struct gmClassic_80490880Data {
     /* 0x00 */ gmClassicIntroData x00;
@@ -59,7 +59,7 @@ typedef struct gmClassic_80490880Data {
     /* 0x74 */ u8 x74[0x0C];
     /* 0x80 */ u8 x80[0x10];
 } gmClassic_80490880Data;
-STATIC_ASSERT(sizeof(gmClassic_80490880Data) == 0x90);
+ASSERT_SIZE(gmClassic_80490880Data, 0x90);
 
 typedef struct gmClassic_803DDEC8Data {
     /* 0x000 */ gm_803DDEC8Struct x00[12];
@@ -72,21 +72,20 @@ typedef struct gmClassic_803DDEC8Data {
     /* 0x2B0 */ gmClassicMatchup x2B0[10];
     /* 0x2EC */ u8 pad_2EC[4];
 } gmClassic_803DDEC8Data;
-STATIC_ASSERT(sizeof(gmClassic_803DDEC8Data) == 0x2F0);
+ASSERT_SIZE(gmClassic_803DDEC8Data, 0x2F0);
 
 typedef struct gmClassicSceneData {
-    /* 0x000 */ GameScene scenes[26];
+    /* 0x000 */ GameModeState scenes[26];
     /* 0x270 */ gmClassic_803DDEC8Data matchups;
 } gmClassicSceneData;
-STATIC_ASSERT(sizeof(gmClassicSceneData) == 0x560);
+ASSERT_SIZE(gmClassicSceneData, 0x560);
 
 static gmClassic_80490880Data gmClassic_80490880;
-extern gmClassic_803DDEC8Data gmClassic_803DDEC8;
 
-GameScene gm_803DDC58_Scenes[] = {
+GameModeState gm_Mode_Classic_States[] = {
     {
-        0x00,
-        3,
+        0,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -97,8 +96,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x01,
-        3,
+        1,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -109,8 +108,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x08,
-        3,
+        8,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -121,8 +120,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x09,
-        3,
+        9,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -133,8 +132,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x10,
-        3,
+        16,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -145,8 +144,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x11,
-        3,
+        17,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -157,8 +156,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x18,
-        3,
+        24,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -169,8 +168,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x19,
-        3,
+        25,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -181,8 +180,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x20,
-        3,
+        32,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -193,8 +192,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x21,
-        3,
+        33,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -205,8 +204,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x28,
-        3,
+        40,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -217,8 +216,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x29,
-        3,
+        41,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -229,8 +228,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x30,
-        3,
+        48,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -241,8 +240,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x31,
-        3,
+        49,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -253,8 +252,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x38,
-        3,
+        56,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -265,8 +264,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x39,
-        3,
+        57,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -277,8 +276,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x40,
-        3,
+        64,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -289,8 +288,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x41,
-        3,
+        65,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -301,8 +300,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x48,
-        3,
+        72,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -313,8 +312,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x49,
-        3,
+        73,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -325,8 +324,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x50,
-        3,
+        80,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3500,
         NULL,
@@ -337,8 +336,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x51,
-        3,
+        81,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3A34,
         gmClassic_801B3B40,
@@ -349,16 +348,20 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x68,
-        3,
+        104,
+        lbDvdPreload_3,
         0,
         NULL,
         gmClassic_801B3F18,
-        { GS_COMING_SOON, NULL, NULL },
+        {
+            GS_COMING_SOON,
+            NULL,
+            NULL,
+        },
     },
     {
-        0x69,
-        3,
+        105,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3D44,
         gmClassic_801B3D84,
@@ -369,8 +372,8 @@ GameScene gm_803DDC58_Scenes[] = {
         },
     },
     {
-        0x70,
-        3,
+        112,
+        lbDvdPreload_3,
         0,
         gmClassic_801B3DD8,
         gmClassic_801B3E44,
@@ -383,13 +386,101 @@ GameScene gm_803DDC58_Scenes[] = {
     { -1 },
 };
 
+static gmClassic_803DDEC8Data gmClassic_803DDEC8 = {
+    {
+        { 0x00, 0x00, 0, 0, 300, 0, 2 },
+        { 0x01, 0x10, 0, 0, 300, 0, 4 },
+        { 0x02, 0x80, 1, 0, 120, 0, 4 },
+        { 0x03, 0x00, 0, 0, 300, 0, 2 },
+        { 0x04, 0x02, 0, 0, 300, 0, 4 },
+        { 0x05, 0x80, 3, 0, 120, 0, 4 },
+        { 0x06, 0x00, 0, 0, 300, 0, 2 },
+        { 0x07, 0x08, 0, 0, 300, 10, 4 },
+        { 0x08, 0x80, 2, 0, 180, 0, 4 },
+        { 0x09, 0x04, 0, 0, 300, 0, 2 },
+        { 0x0a, 0x20, 0, 0, 300, 0, 2 },
+        { 0x0d, 0x00, 0, 0, 0, 0, 0 },
+    },
+    {
+        { 176, { 30, 26, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    {
+        { 86, { 8, 33, 33 }, 0 },   { 87, { 8, 33, 33 }, 0 },
+        { 88, { 1, 33, 33 }, 0 },   { 89, { 1, 33, 33 }, 0 },
+        { 90, { 6, 33, 33 }, 0 },   { 91, { 6, 33, 33 }, 0 },
+        { 92, { 16, 33, 33 }, 0 },  { 93, { 16, 33, 33 }, 0 },
+        { 94, { 17, 33, 33 }, 0 },  { 95, { 17, 33, 33 }, 0 },
+        { 96, { 4, 33, 33 }, 0 },   { 97, { 4, 33, 33 }, 0 },
+        { 98, { 2, 33, 33 }, 0 },   { 99, { 2, 33, 33 }, 0 },
+        { 100, { 13, 33, 33 }, 0 }, { 101, { 7, 33, 33 }, 0 },
+        { 102, { 7, 33, 33 }, 0 },  { 103, { 0, 33, 33 }, 0 },
+        { 104, { 0, 33, 33 }, 0 },  { 105, { 11, 33, 33 }, 0 },
+        { 106, { 11, 33, 33 }, 0 }, { 107, { 15, 33, 33 }, 0 },
+        { 108, { 5, 33, 33 }, 0 },  { 109, { 5, 33, 33 }, 0 },
+        { 110, { 12, 33, 33 }, 0 }, { 111, { 12, 33, 33 }, 0 },
+        { 112, { 18, 33, 33 }, 0 }, { 113, { 9, 33, 33 }, 0 },
+        { 114, { 10, 33, 33 }, 0 }, { 115, { 10, 33, 33 }, 0 },
+        { 116, { 14, 33, 33 }, 0 }, { 117, { 14, 33, 33 }, 0 },
+        { 118, { 22, 33, 33 }, 0 }, { 119, { 21, 33, 33 }, 0 },
+        { 120, { 21, 33, 33 }, 0 }, { 121, { 20, 33, 33 }, 0 },
+        { 122, { 20, 33, 33 }, 0 }, { 124, { 24, 33, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
+    {
+        { 125, { 8, 5, 33 }, 0 },   { 126, { 8, 12, 33 }, 0 },
+        { 127, { 1, 2, 33 }, 0 },   { 128, { 6, 18, 33 }, 0 },
+        { 129, { 6, 21, 33 }, 0 },  { 130, { 6, 7, 33 }, 0 },
+        { 131, { 9, 6, 33 }, 0 },   { 132, { 16, 0, 33 }, 0 },
+        { 133, { 16, 2, 33 }, 0 },  { 134, { 17, 7, 33 }, 0 },
+        { 135, { 17, 11, 33 }, 0 }, { 136, { 4, 13, 33 }, 0 },
+        { 137, { 4, 24, 33 }, 0 },  { 138, { 4, 15, 33 }, 0 },
+        { 139, { 4, 14, 33 }, 0 },  { 140, { 2, 20, 33 }, 0 },
+        { 141, { 2, 0, 33 }, 0 },   { 142, { 13, 24, 33 }, 0 },
+        { 143, { 13, 15, 33 }, 0 }, { 144, { 7, 22, 33 }, 0 },
+        { 145, { 11, 12, 33 }, 0 }, { 146, { 11, 10, 33 }, 0 },
+        { 147, { 0, 20, 33 }, 0 },  { 148, { 5, 10, 33 }, 0 },
+        { 149, { 5, 12, 33 }, 0 },  { 150, { 5, 18, 33 }, 0 },
+        { 151, { 12, 18, 33 }, 0 }, { 152, { 18, 21, 33 }, 0 },
+        { 153, { 18, 9, 33 }, 0 },  { 328, { 0, 0, 0 }, 0 },
+    },
+    {
+        { 155, { 8, 33, 33 }, 0 },
+        { 156, { 1, 33, 33 }, 0 },
+        { 157, { 6, 33, 33 }, 0 },
+        { 158, { 17, 33, 33 }, 0 },
+        { 159, { 7, 33, 33 }, 0 },
+        { 160, { 0, 33, 33 }, 0 },
+        { 161, { 15, 33, 33 }, 0 },
+        { 162, { 5, 33, 33 }, 0 },
+        { 163, { 22, 33, 33 }, 0 },
+        { 164, { 21, 33, 33 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
+    {
+        { 165, { 8, 8, 8 }, 0 },
+        { 166, { 1, 1, 1 }, 0 },
+        { 167, { 4, 4, 4 }, 0 },
+        { 168, { 7, 7, 7 }, 0 },
+        { 169, { 11, 11, 11 }, 0 },
+        { 170, { 15, 15, 15 }, 0 },
+        { 174, { 0, 0, 0 }, 0 },
+        { 172, { 24, 24, 24 }, 0 },
+        { 173, { 3, 3, 3 }, 0 },
+        { 328, { 0, 0, 0 }, 0 },
+    },
+    { 0 },
+};
+
 static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
                                               u8* order)
 {
     s32 count;
     s32 i;
 
-    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    for (count = 0; matchups->x00 != 0x148; matchups++, count++) {
     }
 
     for (i = 0; i < count; i++) {
@@ -397,38 +488,44 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     }
 
     for (i = 0; i < count; i++) {
-        s32 swap_idx = HSD_Randi(count);
-        u8 tmp = order[i];
-        order[i] = order[swap_idx];
-        order[swap_idx] = tmp;
+        u8* swap = &order[HSD_Randi(count)];
+        u8* cur = &order[i];
+        u8 tmp = *cur;
+        *cur = *swap;
+        *swap = tmp;
     }
 }
 
-static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
+static inline s32 gmClassic_GetMatchupCount(const gmClassicMatchup* matchups)
+{
+    s32 count;
+
+    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    }
+    return count;
+}
+
+static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0,
+                                            const u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
-    gmClassicMatchup* result;
-    gmClassicMatchup* entry;
-    gm_803DDEC8Struct* temp;
-    u8* order;
     s32 outer;
-    s8 target_char;
-    int cur_char;
     s32 j;
+    gmClassicMatchup* entry;
+    gmClassicMatchup* result;
+    s32 target_char;
     s32 k;
-    s32 count;
-    s32 stage1;
+    s32 temp_idx;
 
     result = NULL;
-    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
-    order = arg1;
+    target_char = gmMainLib_8015CDC8()->c_kind;
     outer = 0;
 
     goto check;
 loop:
-    entry = &arg0[*order];
+    entry = &arg0[arg1[outer]];
     for (j = 0; j < 3; j++) {
-        cur_char = entry->x02[j];
+        int cur_char = entry->x02[j];
 
         if (cur_char == CHKIND_NONE) {
             continue;
@@ -443,18 +540,20 @@ loop:
             goto next;
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
             for (k = 0; k < 3; k++) {
-                if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
+                if (arg2[temp_idx].xC != NULL &&
+                    cur_char == arg2[temp_idx].xC->x02[k])
+                {
                     goto next;
                 }
             }
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
-            if (temp->xC != NULL) {
-                stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
+            if (arg2[temp_idx].xC != NULL) {
+                if (Stage_8022519C(arg2[temp_idx].xC->x00) ==
+                    Stage_8022519C(entry->x00))
                 {
                     result = entry;
                     goto next;
@@ -467,13 +566,8 @@ loop:
     }
 next:
     outer++;
-    order++;
 check:
-    count = 0;
-    while (arg0[count].x00 != 0x148) {
-        count++;
-    }
-    if (outer < count) {
+    if (outer < gmClassic_GetMatchupCount(arg0)) {
         goto loop;
     }
 
@@ -494,9 +588,10 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* ptr;
-    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassicSceneData* scene_data =
+        (gmClassicSceneData*) gm_Mode_Classic_States;
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
             gmClassicMatchup* result =
                 gmClassic_801B2BA4(scene_data->matchups.x2B0, o->x80, arg0);
@@ -509,7 +604,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
             gmClassicMatchup* result =
@@ -523,7 +618,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
             gmClassicMatchup* result =
@@ -537,7 +632,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
             gmClassicMatchup* result =
@@ -551,8 +646,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
-        if ((u8) ptr->x1 == 0x80) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
+        if (ptr->x1 == 0x80) {
             u8 x2val = ptr->x2;
             switch ((s32) x2val) {
             case 1:
@@ -568,7 +663,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 0x20) {
             ptr->xC = scene_data->matchups.x0C0;
             return ptr;
@@ -577,14 +672,14 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     return ptr;
 }
 
-void gmClassic_OnLoad(void)
+void gm_Mode_Classic_OnLoad(void)
 {
     UnkAllstarData* data;
-    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassicSceneData* scene_data =
+        (gmClassicSceneData*) gm_Mode_Classic_States;
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
-    s32 i;
-    PAD_STACK(32);
+    PAD_STACK(56);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
@@ -603,10 +698,11 @@ void gmClassic_OnLoad(void)
     gmMainLib_8015CDC8();
     gm_8017C984(data);
 
-    for (i = 0; i < 2; i++) {
-        s32 j;
-        for (j = 0; j < 6; j++) {
-            o->x20[i * 6 + j] = 0;
+    {
+        u8* p = o->x20;
+        int i;
+        for (i = 12; i > 0; i--) {
+            *p++ = 0;
         }
     }
 
@@ -624,15 +720,15 @@ void gmClassic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetSceneIndex(0x70U);
+    gm_SetGameModeStateId(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
 
-void gmClassic_OnInit(void)
+void gm_Mode_Classic_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3->c_kind = 0x21;
+    temp_r3->c_kind = CHKIND_NONE;
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
@@ -640,24 +736,35 @@ void gmClassic_OnInit(void)
     temp_r3->x5 = 0;
 }
 
-void gmClassic_801B3500(GameScene* arg0)
+static inline StKind gmClassic_GetStKind(gm_803DDEC8Struct* entry,
+                                         UnkAllstarData* ad)
+{
+    if (entry->x1 == 0x80 && entry->x2 == 1) {
+        return (u16) gm_801647F8(ad->x0.ckind);
+    }
+    return entry->xC->x00;
+}
+
+void gmClassic_801B3500(GameModeState* arg0)
 {
     gmClassicIntroData* sd;
     gm_803DDEC8Struct* entry;
-    UnkAllstarData* ad;
-    int enemy_count;
-    int ally_count;
     int i;
+    UnkAllstarData* ad;
+    int ally_count;
+    int enemy_count;
     struct GameCache* gc;
     int count;
     u64 audio;
     s8 ckind;
+    gm_803DDEC8Struct* new_var;
 
-    sd = gm_GetGameSceneLoadDataCallback(arg0);
-    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    sd = gm_GetGameModeStateEnterData(arg0);
+    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
+    new_var = entry;
     ad = gm_GetAllStarData();
     enemy_count = 0;
-    ad->x0.x7 = arg0->idx;
+    ad->x0.x7 = arg0->id;
     sd->x0A = entry->x0 + 1;
     sd->x08 = ad->x0.slot;
 
@@ -684,9 +791,6 @@ void gmClassic_801B3500(GameScene* arg0)
         case 3:
             sd->x04 = 3;
             break;
-        default:
-            sd->x04 = 0;
-            break;
         }
     } else {
         sd->x04 = 0;
@@ -711,15 +815,15 @@ void gmClassic_801B3500(GameScene* arg0)
 
     ally_count = 1;
     ckind = ad->x0.ckind;
-    if (ckind == 0x12 && ad->x0.xC.x12 != 0) {
-        sd->x0D[0] = 0x13;
+    if (ckind == CKIND_ZELDA && ad->x0.xC.x12 != 0) {
+        sd->x0D[0] = CKIND_SEAK;
     } else {
         sd->x0D[0] = ckind;
     }
     sd->x13[0] = ad->x0.color;
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
-                (u8) gm_8017BE84(arg0->idx), entry->xC->x02_u8, sd->x0D[0],
+                (u8) gm_8017BE84(arg0->id), entry->xC->x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x5C,
                 (u8 (*)(s32, s32, u8))(Event) ad->x60,
@@ -771,11 +875,11 @@ void gmClassic_801B3500(GameScene* arg0)
     lbDvd_80018254();
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        gc->stage_id = (u16) gm_801647F8(ad->x0.ckind);
+        gc->stkind = (u16) gm_801647F8(ad->x0.ckind);
     } else if (entry->x1 == 4) {
-        gc->stage_id = 0xAF;
+        gc->stkind = 0xAF;
     } else {
-        gc->stage_id = entry->xC->x00;
+        gc->stkind = entry->xC->x00;
     }
 
     lbDvd_80018254();
@@ -790,31 +894,22 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     for (i = 0; i < 3; i++) {
-        s8 echar = entry->xC->x02[i];
-        if (echar != 0x21) {
-            audio |= lbAudioAx_80026E84(echar);
+        if (entry->xC->x02[i] != 0x21) {
+            audio |= lbAudioAx_80026E84(new_var->xC->x02[i]);
             if (entry->xC->x02[i] == 4) {
                 audio |= ((u64) 2 << 32) | 0x4000;
             }
         }
     }
 
-    {
-        InternalStageId stage_id;
-        if (entry->x1 == 0x80 && entry->x2 == 1) {
-            stage_id = (u16) gm_801647F8(ad->x0.ckind);
-        } else {
-            stage_id = entry->xC->x00;
-        }
-        audio |= lbAudioAx_80026EBC(stage_id);
-    }
+    audio |= lbAudioAx_80026EBC(gmClassic_GetStKind(entry, ad));
 
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio);
     lbAudioAx_80027168();
 }
 
-void gmClassic_801B3A34(GameScene* arg0)
+void gmClassic_801B3A34(GameModeState* arg0)
 {
     StartMeleeData* temp_r30;
     gm_803DDEC8Struct* temp_r31;
@@ -829,8 +924,8 @@ void gmClassic_801B3A34(GameScene* arg0)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
-    temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
+    temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
     var_r27 = temp_r31->xC->x00;
@@ -844,16 +939,16 @@ void gmClassic_801B3A34(GameScene* arg0)
     temp_r29->x0.x8 = flags;
     temp_r29->x0.x9 = temp_r31->x2;
     temp_r29->x0.xB = temp_r31->x8;
-    idx_val = (u16) gm_8017BE84(arg0->idx) - 1;
+    idx_val = (u16) gm_8017BE84(arg0->id) - 1;
     temp_r28 = gm_804908A0[idx_val];
-    sp8 = (u16) gm_8017BE84(arg0->idx);
+    sp8 = (u16) gm_8017BE84(arg0->id);
     spC = temp_r28;
     gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
-                temp_r31->x6, 1, 0, temp_r31->x4, (int) var_r27, sp8, spC);
+                temp_r31->x6, 1, 0, temp_r31->x4, var_r27, sp8, spC);
     gm_8016F088(new_var);
 }
 
-void gmClassic_801B3B40(GameScene* arg0)
+void gmClassic_801B3B40(GameModeState* arg0)
 {
     MatchExitInfo* mei;
     UnkAllstarData* asd;
@@ -870,11 +965,11 @@ void gmClassic_801B3B40(GameScene* arg0)
     s32 mask;
     PAD_STACK(4);
 
-    mei = (MatchExitInfo*) gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = (MatchExitInfo*) gm_GetGameModeStateExitData(arg0);
     asd = gm_GetAllStarData();
-    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     exit_result = mei->x8;
-    id = arg0->idx;
+    id = arg0->id;
     idx = ((u16) gm_8017BE84(id)) - 1;
     if (exit_result != 0) {
         gm_804908A0[idx] = 2;
@@ -916,34 +1011,33 @@ void gmClassic_801B3B40(GameScene* arg0)
             }
             {
                 u32 diff = sp14 - sp18;
-                if ((u32) *time_ptr < diff) {
+                if ((*time_ptr) < diff) {
                     *time_ptr = sp14 - sp18;
                 }
             }
         } else if (sp18 == 0) {
-            if ((u32) *time_ptr > mei->match_end.frame_count) {
+            if ((*time_ptr) > mei->match_end.frame_count) {
                 *time_ptr = mei->match_end.frame_count;
             }
         }
     }
 }
 
-void gmClassic_801B3D44(GameScene* scene)
+void gmClassic_801B3D44(GameModeState* scene)
 {
-    struct DebugGameOverData* temp_r31 =
-        gm_GetGameSceneLoadDataCallback(scene);
+    struct DebugGameOverData* temp_r31 = gm_GetGameModeStateEnterData(scene);
     gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
-void gmClassic_801B3D84(GameScene* scene)
+void gmClassic_801B3D84(GameModeState* scene)
 {
-    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    DebugGameOverData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
-void gmClassic_801B3DD8(GameScene* scene)
+void gmClassic_801B3DD8(GameModeState* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
+    CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -951,9 +1045,9 @@ void gmClassic_801B3DD8(GameScene* scene)
     lbDvd_800174BC();
 }
 
-void gmClassic_801B3E44(GameScene* scene)
+void gmClassic_801B3E44(GameModeState* scene)
 {
-    CSSData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    CSSData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;
@@ -971,11 +1065,11 @@ void gmClassic_801B3E44(GameScene* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
+    gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
-void gmClassic_801B3F18(GameScene* scene)
+void gmClassic_801B3F18(GameModeState* scene)
 {
     gm_SetPendingGameMode(GM_MENU);
     gm_SetNewGameModePending();

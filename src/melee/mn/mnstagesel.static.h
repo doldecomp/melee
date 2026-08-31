@@ -3,8 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
 #include <melee/mn/forward.h>
 
 #include <melee/sc/types.h>
@@ -48,7 +46,7 @@ struct stagelistinfo {
 };
 static s8 mnStageSel_804D50A0 = -1;
 
-static SSSData* mnStageSel_804D6C90;
+static SSSData* sss_data;
 static HSD_Archive* mnStageSel_804D6C94;
 static struct mnStageSel_804D6C98_t {
     StaticModelDesc x0;
@@ -77,7 +75,7 @@ static u8 mnStageSel_804D6CAE;
 static u8 mnStageSel_804D6CAF;
 
 #ifndef M2CTX
-STATIC_ASSERT(sizeof(mnStageSel_803F06D0[0]) == 0x1C);
+ASSERT_SIZE(mnStageSel_803F06D0[0], 0x1C);
 #endif
 
 struct StageSelUserData {

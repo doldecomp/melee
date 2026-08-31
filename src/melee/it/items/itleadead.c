@@ -7,12 +7,12 @@
 #include "ft/ftCo_800C7590.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -21,9 +21,8 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F8EB0[] = {
     {
@@ -1045,7 +1044,7 @@ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir)
     return gobj;
 }
 
-inline f32 it_802EAAEC_inline(Item* ip2)
+static inline f32 it_802EAAEC_inline(Item* ip2)
 {
     return ip2->xDD4_itemVar.leadead.x3C;
 }

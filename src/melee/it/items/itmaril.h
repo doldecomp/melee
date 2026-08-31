@@ -7,8 +7,6 @@
 
 #include "it/items/types.h"
 
-/* 2D61C8 */ void it_802D61C8(Item_GObj* gobj, s32 coll);
-/* 2D6310 */ void it_802D6310(Item_GObj* gobj, s32 coll);
 /* 2D66F8 */ bool it_802D66F8(Item_GObj* gobj);
 /* 2D6740 */ void it_802D6740(Item_GObj* gobj);
 /* 2D6798 */ bool it_802D6798(Item_GObj* gobj);

@@ -1,7 +1,6 @@
 #ifndef HSD_3933_H
 #define HSD_3933_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 /* 3932D0 */ void fn_803932D0(s32, u32, s32);

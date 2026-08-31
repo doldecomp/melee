@@ -8,7 +8,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/controller.h>
 #include <baselib/random.h>
@@ -24,10 +24,10 @@ struct grKraid_YakumonoParam {
     float kraid_pos_x[6];
 };
 
-S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
+GrJoint grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
 
-StageCallbacks grKr_803E4C9C[5] = {
+StageCallbacks grKr_StageCallbacks[5] = {
     { grKraid_801FE1B0, grKraid_801FE1DC, grKraid_801FE1E4, grKraid_801FE1E8,
       0 },
     { grKraid_801FE1EC, grKraid_801FE2C8, grKraid_801FE2D0, grKraid_801FE35C,
@@ -40,9 +40,9 @@ StageCallbacks grKr_803E4C9C[5] = {
       0 }
 };
 
-StageData grKr_803E4D0C = {
-    KRAID,
-    grKr_803E4C9C,
+StageData grKr_StageData = {
+    Gr_Kind_Kraid,
+    grKr_StageCallbacks,
     "/GrKr.dat",
     grKraid_OnInit,
     grKraid_OnDemoInit,
@@ -97,7 +97,7 @@ bool grKraid_801FE0BC(void)
 HSD_GObj* grKraid_801FE0C4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grKr_803E4C9C[gobj_id];
+    StageCallbacks* callbacks = &grKr_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -268,7 +268,7 @@ void grKraid_801FE6D4(Ground_GObj* gobj)
 
 void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 {
-    Ground* map = Ground_801C2BA4(3)->user_data;
+    Ground* map = Ground_GetMapGObj(3)->user_data;
     Vec handpos;
     f32 rot;
     f32 min;
@@ -397,11 +397,11 @@ void grKraid_801FEA00(Ground_GObj* gobj)
     switch (gp->u.kraid2.x0) {
     case 0:
         if (gp->u.kraid2.xC <= 0) {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0) {
                 grKraid_801FEE54(gobj);
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(Ground_801C2BA4(1)->hsd_obj,
+                HSD_JObjClearFlagsAll(Ground_GetMapGObj(1)->hsd_obj,
                                       JOBJ_HIDDEN);
                 grKraid_801FF068(gobj, 3);
                 Ground_801C53EC(420001);
@@ -444,7 +444,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
         break;
     case 3:
         if (gp->u.kraid2.x1 == 5) {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0 && gp->u.kraid2.xC >= 147 &&
                 gp->u.kraid2.xC <= 169)
             {
@@ -459,7 +459,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             }
             gp->u.kraid2.xC++;
         } else {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0 && gp->u.kraid2.xC >= 123 &&
                 gp->u.kraid2.xC <= 138)
             {
@@ -486,7 +486,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             gp->u.kraid2.xC = yakumono_param->kraid_wait_time +
                               yakumono_param->kraid_wait_time_add;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(Ground_GetMapGObj(1)->hsd_obj, JOBJ_HIDDEN);
             gp->u.kraid2.xC =
                 yakumono_param->kraid_wait_time +
                 ((s32) yakumono_param->kraid_wait_time_add != 0
@@ -514,7 +514,7 @@ void grKraid_801FEE54(HSD_GObj* gobj)
     gp->u.kraid2.x5 = 0;
     gp->u.kraid2.x2 = iVar3;
     HSD_JObjSetTranslateX(jobj, yakumono_param->kraid_pos_x[iVar3]);
-    HSD_JObjSetTranslateX(Ground_801C2BA4(1)->hsd_obj,
+    HSD_JObjSetTranslateX(Ground_GetMapGObj(1)->hsd_obj,
                           yakumono_param->kraid_pos_x[iVar3]);
     if (yakumono_param->kraid_pos_x[iVar3] == 0.0f) {
         if (HSD_Randi(2) != 0) {
@@ -539,7 +539,7 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
     gp->u.kraid.x1 = val;
     grAnime_801C8138(gobj, gp->map_id, gp->u.kraid.x1);
     temp = gp->u.kraid.x1;
-    gobj = Ground_801C2BA4(1);
+    gobj = Ground_GetMapGObj(1);
     gp = GET_GROUND(gobj);
     gp->u.kraid.x1 = temp;
     grAnime_801C8138(gobj, gp->map_id, gp->u.kraid.x1);

@@ -1,11 +1,9 @@
 #ifndef GALE01_1D5238
 #define GALE01_1D5238
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "it/inlines.h"
-
+#include "gr/forward.h"
 #include <baselib/forward.h>
 
 /* 1D5238 */ void grKongo_801D5238(bool);
@@ -13,7 +11,7 @@
 /* 1D52F8 */ void grKongo_801D52F8(void);
 /* 1D52FC */ void grKongo_801D52FC(void);
 /* 1D5338 */ bool grKongo_801D5338(void);
-/* 1D5340 */ HSD_GObj* grKongo_801D5340(s32);
+/* 1D5340 */ Ground_GObj* grKongo_801D5340(int gobj_id);
 /* 1D542C */ void fn_801D542C(HSD_GObj*);
 /* 1D5490 */ void grKongo_801D5490(Ground_GObj*);
 /* 1D5574 */ bool grKongo_801D5574(Ground_GObj*);
@@ -60,5 +58,6 @@
 /* 1D828C */ void grKongo_801D828C(HSD_GObj*);
 /* 1D8314 */ f32 grKongo_801D8314(void);
 /* 1D844C */ bool grKongo_801D844C(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E1800 */ extern StageData grKg_StageData;
 
 #endif

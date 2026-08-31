@@ -5,21 +5,8 @@
 
 #include "gr/types.h"
 
-#include "mp/forward.h"
-
-/* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
-                                     mpLib_GroundEnum ground_kind,
-                                     float delta_y);
-/* 1D7E60 */ static void fn_801D7E60(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
-                                     mpLib_GroundEnum ground_kind,
-                                     float delta_y);
-/* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
-/* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
-
-extern S16Vec3 grKg_803E16E0[6];
-extern StageCallbacks grKg_803E1704[12];
+extern GrJoint grKg_803E16E0[6];
+extern StageCallbacks grKg_StageCallbacks[12];
 
 /// A dat file index and the index of a spline within that file's
 /// spline table, as taken by #Ground_801C247C.

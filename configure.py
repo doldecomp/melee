@@ -14,12 +14,14 @@
 
 import argparse
 import json
+import os
 import sys
 from collections.abc import Iterator
 from pathlib import Path
 from typing import cast
 
 from tools.project import (
+    BuildConfig,
     BuildConfigUnit,
     Library,
     Object,
@@ -82,19 +84,14 @@ parser.add_argument(
     help="build with debug info (implies --non-matching)",
 )
 parser.add_argument(
-    "--bugfix",
-    action="store_true",
-    help="build with bug fixes (implies --non-matching)",
-)
-parser.add_argument(
     "--asm",
     action="store_true",
     help="override src files with asm equivalents (implies --non-matching)",
 )
 parser.add_argument(
-    "--testing",
+    "--linkable",
     action="store_true",
-    help="enable units being tested for linking",
+    help="enable non-matching but linkable units",
 )
 parser.add_argument(
     "--sym",
@@ -166,10 +163,27 @@ parser.add_argument(
     help="warning level (default 'off')",
 )
 parser.add_argument(
+    "--lint-all",
+    action="store_true",
+    help="do not disable any clang warnings",
+)
+parser.add_argument(
+    "--no-lint-error",
+    dest="lint_error",
+    action="store_false",
+    help="do not treat clang warnings as errors",
+)
+parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
     help="require function prototypes",
+)
+parser.add_argument(
+    "--allow-auto-splits",
+    dest="allow_auto_splits",
+    action="store_true",
+    help="allow dtk auto-splits",
 )
 parser.add_argument(
     "--non-matching",
@@ -189,9 +203,15 @@ parser.add_argument(
     action="store_false",
     help="do not generate compile_commands.json",
 )
+parser.add_argument(
+    "--no-always-apply",
+    dest="always_apply",
+    action="store_false",
+    help="do not always run dtk dol apply after linking",
+)
 args = parser.parse_args()
 
-if any({args.debug, args.bugfix, args.asm, args.testing}) or args.sym == "on":
+if any({args.debug, args.asm, args.linkable}) or args.sym == "on":
     args.non_matching = True
 
 
@@ -215,8 +235,7 @@ if not is_windows():
 if not args.asm:
     config.asm_dir = None
 
-# Handled internally
-config.generate_compile_commands = False
+config.generate_compile_commands = False  # Handled internally
 
 # Tool versions
 config.binutils_tag = "2.42-2"
@@ -240,7 +259,7 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    "-warn off",
+    f"-warn {args.warn}",
 ]
 if args.debug:
     config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
@@ -262,8 +281,7 @@ config.progress_data_fancy_item = "Event Matches"
 # Can be overridden in libraries or objects
 config.scratch_preset_id = 63
 
-# Base flags, common to most GC/Wii games.
-# Generally leave untouched, with overrides added below.
+# GC/Wii compiler flags
 cflags_base = [
     "-nowraplines",
     "-cwd source",
@@ -289,8 +307,8 @@ cflags_base = [
 
 if args.sym in {"on", "off"}:
     cflags_base.append(f"-sym {args.sym}")
-if args.bugfix:
-    cflags_base.append("-DBUGFIX")
+if not args.non_matching:
+    cflags_base.append("-DMUST_MATCH")
 
 cflags_base.append(f"-maxerrors {args.max_errors}")
 if args.max_errors == 0:
@@ -336,13 +354,81 @@ includes_base = [
     "src/MSL",
     "src/Runtime",
     "extern/dolphin/include",
+    f"build/{config.version}/include",
 ]
 
 cflags_melee = [
     *cflags_base,
 ]
 
+
 config.linker_version = "GC/1.3.2"
+
+# Native compiler flags
+
+clang_includes = [
+    "src/melee",
+    "src/melee/ft/chara",
+]
+
+clang_system_includes = [
+    "src",
+    "src/MSL",
+    "src/Runtime",
+    "src/sysdolphin",
+    "extern/dolphin/include",
+    "extern/dolphin/src",
+    f"build/{config.version}/include",
+]
+
+clang_warnings = [
+    "all",
+    "extra",
+    "c2x-extensions",
+    "implicit-function-declaration",
+    "implicit-int",
+    "incompatible-pointer-types",
+    "pointer-type-mismatch",
+    "strict-prototypes",
+    "typedef-redefinition",
+]
+
+if args.lint_error:
+    clang_warnings.append("error")
+
+clang_disabled_warnings = [
+    "bitfield-constant-conversion",
+    "integer-overflow",
+    "missing-braces",
+    "missing-field-initializers",
+    "return-type",
+    "sign-compare",
+    "sometimes-uninitialized",
+    "unused-but-set-variable",
+    "unused-parameter",
+    "unused-value",
+    "unused-variable",
+]
+
+
+clang_flags_base = [
+    "-xc",
+    "-std=c99",
+    "-nostdinc",
+    "-fno-builtin",
+    "--target=ppc32-none-eabi",
+    "-DLINT",
+    "-fno-short-enums",
+    *[f"-I{s}" for s in clang_includes],
+    *[f"-isystem{s}" for s in clang_system_includes],
+    *[f"-W{s}" for s in clang_warnings],
+]
+
+if not args.lint_all:
+    clang_flags_base.extend(f"-Wno-{s}" for s in clang_disabled_warnings),
+
+config.extra_clang_flags.extend(clang_flags_base)
+
 
 Objects = list[Object]
 
@@ -417,6 +503,7 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
+            f"build/{config.version}/sysdolphin",
         ],
         category="hsd",
     )
@@ -472,7 +559,7 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
-Testing = bool(args.testing)  # Object is being tested for linking
+Linkable = bool(args.linkable)  # Object is linkable but non-matching
 
 
 # Object is only matching for specific versions
@@ -488,39 +575,44 @@ config.libs = [
         "lb (Library)",
         [
             Object(Matching, "melee/lb/lbcommand.c"),
-            Object(NonMatching, "melee/lb/lbcollision.c"),
+            Object(Linkable, "melee/lb/lbcollision.c"),
             Object(Matching, "melee/lb/lblanguage.c"),
             Object(Matching, "melee/lb/lbtime.c"),
             Object(Matching, "melee/lb/lb_00B0.c"),
             Object(Matching, "melee/lb/lb_00CE.c"),
             Object(Matching, "melee/lb/lbvector.c"),
-            Object(NonMatching, "melee/lb/lbshadow.c"),
-            Object(NonMatching, "melee/lb/lbspdisplay.c"),
+            Object(Matching, "melee/lb/lbshadow.c"),
+            Object(Matching, "melee/lb/lb_00F9.c"),
+            Object(Matching, "melee/lb/lbspdisplay.c"),
+            Object(Matching, "melee/lb/lb_013B.c"),
+            Object(Matching, "melee/lb/lb_0146.c"),
             Object(Matching, "melee/lb/lbarq.c"),
-            Object(NonMatching, "melee/lb/lbmemory.c"),
+            Object(Matching, "melee/lb/lbmemory.c"),
             Object(Matching, "melee/lb/lbheap.c"),
             Object(Matching, "melee/lb/lbfile.c"),
             Object(Matching, "melee/lb/lbarchive.c"),
-            Object(Equivalent, "melee/lb/lbdvd.c"),
+            Object(Matching, "melee/lb/lbdvd.c"),
             Object(Matching, "melee/lb/lb_0192.c"),
             Object(Matching, "melee/lb/lb_0195.c"),
             Object(Matching, "melee/lb/lbcardnew.c"),
             Object(Matching, "melee/lb/lbcardgame.c"),
-            Object(NonMatching, "melee/lb/lbsnap.c"),
+            Object(Linkable, "melee/lb/lbsnap.c"),
             Object(Matching, "melee/lb/lbgx.c"),
             Object(Matching, "melee/lb/lbanim.c"),
-            Object(NonMatching, "melee/lb/lbmthp.c"),
+            Object(Matching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
-            Object(NonMatching, "melee/lb/lbbgflash.c"),
-            Object(Testing, "melee/lb/lbrefract.c"),
+            Object(Matching, "melee/lb/lbbgflash.c"),
+            Object(Matching, "melee/lb/lb_020A.c"),
+            Object(Matching, "melee/lb/lb_0219.c"),
+            Object(Matching, "melee/lb/lbrefract.c"),
             Object(Matching, "melee/lb/lbtrigf.c"),
-            Object(NonMatching, "melee/lb/lbaudio_ax.c"),
+            Object(Matching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
     MeleeLib(
         "cm (Camera)",
         [
-            Object(NonMatching, "melee/cm/camera.c"),
+            Object(Matching, "melee/cm/camera.c"),
             Object(Matching, "melee/cm/cmsnap.c"),
         ],
     ),
@@ -530,7 +622,7 @@ config.libs = [
             Object(Matching, "melee/pl/player.c"),
             Object(Matching, "melee/pl/plstale.c"),
             Object(Matching, "melee/pl/plattack.c"),
-            Object(NonMatching, "melee/pl/pltrick.c"),
+            Object(Matching, "melee/pl/pltrick.c"),
             Object(Matching, "melee/pl/plbonus.c"),
             Object(Matching, "melee/pl/plbonuslib.c"),
             Object(Matching, "melee/pl/pl_040D.c"),
@@ -539,9 +631,9 @@ config.libs = [
     MeleeLib(
         "mp (Map)",
         [
-            Object(NonMatching, "melee/mp/mpcoll.c"),
-            Object(NonMatching, "melee/mp/mplib.c"),
-            Object(NonMatching, "melee/mp/mpisland.c"),
+            Object(Matching, "melee/mp/mpcoll.c"),
+            Object(Matching, "melee/mp/mplib.c"),
+            Object(Matching, "melee/mp/mpisland.c"),
         ],
     ),
     MeleeLib(
@@ -549,9 +641,9 @@ config.libs = [
         [
             Object(Matching, "melee/ef/efdata.c"),
             Object(Matching, "melee/ef/eflib.c"),
-            Object(NonMatching, "melee/ef/efsync.c"),
+            Object(Matching, "melee/ef/efsync.c"),
             Object(Matching, "melee/ef/efalt.c"),
-            Object(NonMatching, "melee/ef/efasync.c"),
+            Object(Matching, "melee/ef/efasync.c"),
         ],
     ),
     MeleeLib(
@@ -563,7 +655,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftaction.c"),
             Object(Matching, "melee/ft/ftparts.c"),
             Object(Matching, "melee/ft/ftcamera.c"),
-            Object(NonMatching, "melee/ft/ftcoll.c"),
+            Object(Matching, "melee/ft/ftcoll.c"),
             Object(Matching, "melee/ft/ft_07C1.c"),
             Object(Matching, "melee/ft/ft_07C6.c"),
             Object(Matching, "melee/ft/ftcommon.c"),
@@ -573,7 +665,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0819.c"),
             Object(Matching, "melee/ft/ft_081B.c"),
             Object(Matching, "melee/ft/ft_084E.c"),
-            Object(NonMatching, "melee/ft/ft_0852.c"),
+            Object(Matching, "melee/ft/ft_0852.c"),
             Object(Matching, "melee/ft/ftdata.c"),
             Object(Matching, "melee/ft/ftmotionstates.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Init.c"),
@@ -596,17 +688,17 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackLw4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackAir.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_LandingAir.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftpickupitem.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
+            Object(Linkable, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialAir.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Lift.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownStand.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Down.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownAttack.c"),
@@ -638,7 +730,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09C4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c"),
-            Object(NonMatching, "melee/ft/ftdynamics.c"),
+            Object(Matching, "melee/ft/ftdynamics.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
@@ -647,9 +739,9 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F7.c"),
             Object(Matching, "melee/ft/chara/ftMario/ftMr_Strings.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
+            Object(Linkable, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
             Object(Matching, "melee/ft/ftcmdscript.c"),
-            Object(NonMatching, "melee/ft/ftcpuattack.c"),
+            Object(Linkable, "melee/ft/ftcpuattack.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c"),
@@ -670,11 +762,11 @@ config.libs = [
             Object(Matching, "melee/ft/ftcolanim.c"),
             Object(Matching, "melee/ft/ftdevice.c"),
             Object(Matching, "melee/ft/ft_459A.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FlyReflect.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveCeil.c"),
-            Object(NonMatching, "melee/ft/ftafterimage.c"),
+            Object(Linkable, "melee/ft/ftafterimage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
@@ -744,7 +836,25 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatRv.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D67.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D72.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_JumpAerialF1.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeStart.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeRapid.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeFire.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScope.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Catch.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D8E.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D95.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchPull.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchWait.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchAttack.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchCut.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CapturePulled.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWait.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureJump.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0DC2.c"),
             # Common throw-related
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCut.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Throw.c"),
@@ -789,10 +899,16 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirby.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirby.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbydata.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyattackdash.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialhi.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialn.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspeciallw.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecials.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialn.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialmario.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialluigi.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialcaptain.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspeciallink.c"),
@@ -867,7 +983,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c"),
             # Yoshi
-            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftyoshi.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
@@ -1024,42 +1140,43 @@ config.libs = [
     MeleeLib(
         "gm (Main game loop)",
         [
-            Object(NonMatching, "melee/gm/gmmain_lib.c"),
+            Object(Linkable, "melee/gm/gmmain_lib.c"),
             Object(Matching, "melee/gm/gmmain.c"),
-            Object(NonMatching, "melee/gm/gm_1601.c"),
-            Object(NonMatching, "melee/gm/gm_16AE.c"),
-            Object(NonMatching, "melee/gm/gm_16F1.c"),
+            Object(Linkable, "melee/gm/gm_1601.c"),
+            Object(Linkable, "melee/gm/gm_16A2.c"),
+            Object(Matching, "melee/gm/gm_16AE.c"),
+            Object(Linkable, "melee/gm/gm_16F1.c"),
             Object(Matching, "melee/gm/gm_1736.c"),
-            Object(NonMatching, "melee/gm/gmresult.c"),
-            Object(NonMatching, "melee/gm/gmresultplayer.c"),
+            Object(Linkable, "melee/gm/gmresult.c"),
+            Object(Linkable, "melee/gm/gmresultplayer.c"),
             Object(Matching, "melee/gm/gm_17AD.c"),
             Object(Matching, "melee/gm/gm_17BA.c"),
             Object(Matching, "melee/gm/gmregcommon.c"),
-            Object(NonMatching, "melee/gm/gmregclear.c"),
-            Object(NonMatching, "melee/gm/gm_1832.c"),
-            Object(NonMatching, "melee/gm/gmtoulib.c"),
-            Object(NonMatching, "melee/gm/gmtou_0.c"),
-            Object(NonMatching, "melee/gm/gmtou_1.c"),
-            Object(NonMatching, "melee/gm/gmtou_2.c"),
-            Object(NonMatching, "melee/gm/gm_19EF.c"),
+            Object(Linkable, "melee/gm/gmregclear.c"),
+            Object(Linkable, "melee/gm/gm_1832.c"),
+            Object(Linkable, "melee/gm/gm_1884.c"),
+            Object(Linkable, "melee/gm/gmtoulib.c"),
+            Object(Matching, "melee/gm/gmtou_0.c"),
+            Object(Linkable, "melee/gm/gmtou_1.c"),
+            Object(Linkable, "melee/gm/gmtou_2.c"),
+            Object(Linkable, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Matching, "melee/gm/gmtitle.c"),
             Object(Matching, "melee/gm/gmcamera.c"),
             Object(Matching, "melee/gm/gm_1A33.c"),
             Object(Matching, "melee/gm/gm_1A36.c"),
-            Object(NonMatching, "melee/gm/gm_1A3F.c"),
+            Object(Matching, "melee/gm/gm_1A3F.c"),
             Object(Matching, "melee/gm/gm_1A45.c"),
             Object(Matching, "melee/gm/gmscdata.c"),
             Object(Matching, "melee/gm/gmmenu.c"),
             Object(Matching, "melee/gm/gmvsmelee.c"),
-            Object(Matching, "melee/gm/gmvsdata.c"),
             Object(Matching, "melee/gm/gmmovieend.c"),
-            Object(NonMatching, "melee/gm/gmregtyfall.c"),
-            Object(NonMatching, "melee/gm/gm_1A7A.c"),
+            Object(Linkable, "melee/gm/gmregtyfall.c"),
+            Object(Matching, "melee/gm/gm_1A7A.c"),
             Object(Matching, "melee/gm/gmregenddisp.c"),
             Object(Matching, "melee/gm/gm_1A9B.c"),
             Object(Matching, "melee/gm/gmopening.c"),
-            Object(NonMatching, "melee/gm/gmstaffroll.c"),
+            Object(Linkable, "melee/gm/gmstaffroll.c"),
             Object(Matching, "melee/gm/gmhowto.c"),
             Object(Matching, "melee/gm/gmomake15.c"),
             Object(Matching, "melee/gm/gmprogressive.c"),
@@ -1067,12 +1184,17 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1ADD.c"),
             Object(Matching, "melee/gm/gm_1AED.c"),
             Object(Matching, "melee/gm/gm_1B03.c"),
-            Object(Matching, "melee/gm/gm_1B0FB.c"),
-            Object(Matching, "melee/gm/gm_1B0FF.c"),
-            Object(Matching, "melee/gm/gm_1B14.c"),
-            Object(NonMatching, "melee/gm/gmclassic.c"),
+            # Game modes
+            Object(Matching, "melee/gm/gmtitlemode.c"),
+            Object(Matching, "melee/gm/gmdebugmode.c"),
+            Object(Matching, "melee/gm/gmmenumode.c"),
+            Object(Matching, "melee/gm/gmvsmode.c"),
+            Object(Matching, "melee/gm/gmtoumode.c"),
+            Object(Matching, "melee/gm/gmcameramode.c"),
+            Object(Matching, "melee/gm/gmtrainingmode.c"),
+            Object(Linkable, "melee/gm/gmclassic.c"),
             Object(Matching, "melee/gm/gmadventure.c"),
-            Object(NonMatching, "melee/gm/gmallstar.c"),
+            Object(Linkable, "melee/gm/gmallstar.c"),
             Object(Matching, "melee/gm/gmmultiman.c"),
             Object(Matching, "melee/gm/gmsupersudden.c"),
             Object(Matching, "melee/gm/gmtiny.c"),
@@ -1084,39 +1206,47 @@ config.libs = [
             Object(Matching, "melee/gm/gminvisible.c"),
             Object(Matching, "melee/gm/gmslomo.c"),
             Object(Matching, "melee/gm/gmlightning.c"),
-            Object(NonMatching, "melee/gm/gm_1BA8.c"),
-            Object(Matching, "melee/gm/gm_1BF9.c"),
-            Object(NonMatching, "melee/gm/gm_1BFA.c"),
+            Object(Matching, "melee/gm/gmevent.c"),
+            Object(Matching, "melee/gm/gmtoygallery.c"),
+            Object(Matching, "melee/gm/gmtoylottery.c"),
+            Object(Matching, "melee/gm/gmtoycollection.c"),
+            Object(Matching, "melee/gm/gmhanyucss.c"),
+            Object(Matching, "melee/gm/gmhanyusss.c"),
+            Object(Matching, "melee/gm/gmgover.c"),
+            Object(Matching, "melee/gm/gmopeningmode.c"),
+            Object(Matching, "melee/gm/gmprogressivemode.c"),
+            Object(Matching, "melee/gm/gmboot.c"),
+            Object(Matching, "melee/gm/gm_1BFA.c"),
         ],
     ),
     MeleeLib(
         "gr (Ground, stages)",
         [
             # Main
-            Object(NonMatching, "melee/gr/ground.c"),
+            Object(Matching, "melee/gr/ground.c"),
             Object(Matching, "melee/gr/grdisplay.c"),
             Object(Matching, "melee/gr/grdatfiles.c"),
-            Object(NonMatching, "melee/gr/granime.c"),
-            Object(NonMatching, "melee/gr/grmaterial.c"),
+            Object(Linkable, "melee/gr/granime.c"),
+            Object(Linkable, "melee/gr/grmaterial.c"),
             Object(Matching, "melee/gr/grlib.c"),
             Object(Matching, "melee/gr/grdynamicattr.c"),
-            Object(NonMatching, "melee/gr/grzakogenerator.c"),
+            Object(Matching, "melee/gr/grzakogenerator.c"),
             # Individual stages
             Object(Matching, "melee/gr/grfzerocar.c"),
             Object(Matching, "melee/gr/grizumi.c"),
-            Object(NonMatching, "melee/gr/grcastle.c"),
-            Object(NonMatching, "melee/gr/grpstadium.c"),
-            Object(NonMatching, "melee/gr/grkongo.c"),
-            Object(NonMatching, "melee/gr/grzebes.c"),
-            Object(NonMatching, "melee/gr/grcorneria.c"),
+            Object(Matching, "melee/gr/grcastle.c"),
+            Object(Matching, "melee/gr/grpstadium.c"),
+            Object(Linkable, "melee/gr/grkongo.c"),
+            Object(Linkable, "melee/gr/grzebes.c"),
+            Object(Matching, "melee/gr/grcorneria.c"),
             Object(Matching, "melee/gr/grstory.c"),
-            Object(NonMatching, "melee/gr/gronett.c"),
-            Object(NonMatching, "melee/gr/grbigblue.c"),
-            Object(NonMatching, "melee/gr/grmutecity.c"),
+            Object(Matching, "melee/gr/gronett.c"),
+            Object(Linkable, "melee/gr/grbigblue.c"),
+            Object(Linkable, "melee/gr/grmutecity.c"),
             Object(Matching, "melee/gr/grfourside.c"),
             Object(Matching, "melee/gr/grgreatbay.c"),
-            Object(NonMatching, "melee/gr/gricemt.c"),
-            Object(NonMatching, "melee/gr/grinishie1.c"),
+            Object(Matching, "melee/gr/gricemt.c"),
+            Object(Linkable, "melee/gr/grinishie1.c"),
             Object(Matching, "melee/gr/grinishie2.c"),
             Object(Matching, "melee/gr/grkraid.c"),
             Object(Matching, "melee/gr/grrcruise.c"),
@@ -1126,23 +1256,23 @@ config.libs = [
             Object(Matching, "melee/gr/grvenom.c"),
             Object(Matching, "melee/gr/grtest.c"),
             Object(Matching, "melee/gr/grkinokoroute.c"),
-            Object(NonMatching, "melee/gr/grshrineroute.c"),
+            Object(Matching, "melee/gr/grshrineroute.c"),
             Object(Matching, "melee/gr/grzebesroute.c"),
-            Object(NonMatching, "melee/gr/grbigblueroute.c"),
+            Object(Linkable, "melee/gr/grbigblueroute.c"),
             Object(Matching, "melee/gr/grfigure1.c"),
             Object(Matching, "melee/gr/grfigure2.c"),
             Object(Matching, "melee/gr/grfigure3.c"),
             Object(Matching, "melee/gr/groldyoshi.c"),
             Object(Matching, "melee/gr/groldkongo.c"),
-            Object(NonMatching, "melee/gr/groldpupupu.c"),
-            Object(NonMatching, "melee/gr/grpura.c"),
-            Object(NonMatching, "melee/gr/grgreens.c"),
+            Object(Matching, "melee/gr/groldpupupu.c"),
+            Object(Matching, "melee/gr/grpura.c"),
+            Object(Matching, "melee/gr/grgreens.c"),
             Object(Matching, "melee/gr/grflatzone.c"),
             Object(Matching, "melee/gr/grpushon.c"),
             Object(Matching, "melee/gr/grfigureget.c"),
             Object(Matching, "melee/gr/grbattle.c"),
             Object(Matching, "melee/gr/grlast.c"),
-            Object(NonMatching, "melee/gr/grhomerun.c"),
+            Object(Matching, "melee/gr/grhomerun.c"),
             Object(Matching, "melee/gr/grheal.c"),
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
@@ -1194,31 +1324,32 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn/mnmain.c"),
-            Object(NonMatching, "melee/mn/mnmainrule.c"),
-            Object(NonMatching, "melee/mn/mnruleplus.c"),
-            Object(NonMatching, "melee/mn/mnitemsw.c"),
-            Object(NonMatching, "melee/mn/mnstagesw.c"),
-            Object(NonMatching, "melee/mn/mnname.c"),
-            Object(NonMatching, "melee/mn/mnnamenew.c"),
-            Object(NonMatching, "melee/mn/mndiagram.c"),
-            Object(NonMatching, "melee/mn/mndiagram2.c"),
-            Object(NonMatching, "melee/mn/mndiagram3.c"),
-            Object(NonMatching, "melee/mn/mnvibration.c"),
-            Object(NonMatching, "melee/mn/mnsound.c"),
+            Object(Matching, "melee/mn/mnmain.c"),
+            Object(Matching, "melee/mn/mn_22EC.c"),
+            Object(Linkable, "melee/mn/mnmainrule.c"),
+            Object(Linkable, "melee/mn/mnruleplus.c"),
+            Object(Linkable, "melee/mn/mnitemsw.c"),
+            Object(Linkable, "melee/mn/mnstagesw.c"),
+            Object(Linkable, "melee/mn/mnname.c"),
+            Object(Linkable, "melee/mn/mnnamenew.c"),
+            Object(Linkable, "melee/mn/mndiagram.c"),
+            Object(Linkable, "melee/mn/mndiagram2.c"),
+            Object(Linkable, "melee/mn/mndiagram3.c"),
+            Object(Linkable, "melee/mn/mnvibration.c"),
+            Object(Linkable, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
-            Object(NonMatching, "melee/mn/mnsoundtest.c"),
+            Object(Matching, "melee/mn/mnsoundtest.c"),
             Object(Matching, "melee/mn/mnlanguage.c"),
             Object(Matching, "melee/mn/mnhyaku.c"),
-            Object(NonMatching, "melee/mn/mnevent.c"),
-            Object(NonMatching, "melee/mn/mndatadel.c"),
-            Object(NonMatching, "melee/mn/mncount.c"),
-            Object(NonMatching, "melee/mn/mninfo.c"),
+            Object(Linkable, "melee/mn/mnevent.c"),
+            Object(Matching, "melee/mn/mndatadel.c"),
+            Object(Matching, "melee/mn/mncount.c"),
+            Object(Linkable, "melee/mn/mninfo.c"),
             Object(Matching, "melee/mn/mninfobonus.c"),
-            Object(NonMatching, "melee/mn/mnsnap.c"),
+            Object(Linkable, "melee/mn/mnsnap.c"),
             Object(Matching, "melee/mn/mngallery.c"),
-            Object(NonMatching, "melee/mn/mnstagesel.c"),
-            Object(NonMatching, "melee/mn/mncharsel.c"),
+            Object(Matching, "melee/mn/mnstagesel.c"),
+            Object(Matching, "melee/mn/mncharsel.c"),
         ],
     ),
     MeleeLib(
@@ -1227,11 +1358,11 @@ config.libs = [
             # Main
             Object(Matching, "melee/it/item.c"),
             Object(Matching, "melee/it/it_26B1.c"),
-            Object(NonMatching, "melee/it/itspawn.c"),
+            Object(Matching, "melee/it/itspawn.c"),
             Object(Matching, "melee/it/itgroundcoll.c"),
             Object(Matching, "melee/it/itdraw.c"),
             Object(Matching, "melee/it/itdrop.c"),
-            Object(NonMatching, "melee/it/itcoll.c"),
+            Object(Matching, "melee/it/itcoll.c"),
             Object(Matching, "melee/it/it_3F14.c"),
             Object(Matching, "melee/it/it_2725.c"),
             Object(Matching, "melee/it/ithitbox.c"),
@@ -1240,6 +1371,7 @@ config.libs = [
             Object(Matching, "melee/it/iteffect.c"),
             Object(Matching, "melee/it/itanimlist.c"),
             Object(Matching, "melee/it/it_279C.c"),
+            Object(Matching, "melee/it/it_3F2F.c"),
             Object(Matching, "melee/it/itzako.c"),
             # Individual items
             Object(Matching, "melee/it/items/itcapsule.c"),
@@ -1253,7 +1385,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itbox.c"),
             Object(Matching, "melee/it/items/ittaru.c"),
             Object(Matching, "melee/it/items/itegg.c"),
-            Object(NonMatching, "melee/it/items/itkusudama.c"),
+            Object(Matching, "melee/it/items/itkusudama.c"),
             Object(Matching, "melee/it/items/itparasol.c"),
             Object(Matching, "melee/it/items/itgshell.c"),
             Object(Matching, "melee/it/items/itrshell.c"),
@@ -1292,7 +1424,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itfoxillusion.c"),
             Object(Matching, "melee/it/items/itlinkbomb.c"),
             Object(Matching, "melee/it/items/itlinkboomerang.c"),
-            Object(NonMatching, "melee/it/items/itlinkhookshot.c"),
+            Object(Matching, "melee/it/items/itlinkhookshot.c"),
             Object(Matching, "melee/it/items/itlinkarrow.c"),
             Object(Matching, "melee/it/items/itnesspkfire.c"),
             Object(Matching, "melee/it/items/itnesspkfirepillar.c"),
@@ -1318,7 +1450,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itsamusbomb.c"),
             Object(Matching, "melee/it/items/itsamuschargeshot.c"),
             Object(Matching, "melee/it/items/itsamusmissile.c"),
-            Object(NonMatching, "melee/it/items/itsamusgrapple.c"),
+            Object(Matching, "melee/it/items/itsamusgrapple.c"),
             Object(Matching, "melee/it/items/itseakchain.c"),
             Object(Matching, "melee/it/items/itpeachexplode.c"),
             Object(Matching, "melee/it/items/itpeachturnip.c"),
@@ -1394,7 +1526,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itoctarock.c"),
             Object(Matching, "melee/it/items/it_2E5A.c"),
             Object(Matching, "melee/it/items/ityaku.c"),
-            Object(NonMatching, "melee/it/items/itarwinglaser.c"),
+            Object(Matching, "melee/it/items/itarwinglaser.c"),
             Object(Matching, "melee/it/items/itoctarockstone.c"),
             Object(Matching, "melee/it/items/itleadead.c"),
             Object(Matching, "melee/it/items/itgreatfoxlaser.c"),
@@ -1419,28 +1551,30 @@ config.libs = [
         [
             Object(Matching, "melee/if/ifall.c"),
             Object(Matching, "melee/if/iftime.c"),
-            Object(NonMatching, "melee/if/ifstatus.c"),
+            Object(Linkable, "melee/if/ifstatus.c"),
             Object(Matching, "melee/if/if_2F6E.c"),
-            Object(NonMatching, "melee/if/if_2F72.c"),
-            Object(NonMatching, "melee/if/ifstock.c"),
-            Object(NonMatching, "melee/if/ifmagnify.c"),
+            Object(Matching, "melee/if/if_2F72.c"),
+            Object(Linkable, "melee/if/ifstock.c"),
+            Object(Matching, "melee/if/ifmagnify.c"),
             Object(Matching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
-            Object(Matching, "melee/if/if_2FC93.c"),
+            Object(Matching, "melee/if/if_2FD9.c"),
             Object(Matching, "melee/if/ifprize.c"),
-            Object(NonMatching, "melee/if/ifcoget.c"),
-            Object(NonMatching, "melee/if/soundtest.c"),
-            Object(NonMatching, "melee/if/textdraw.c"),
-            Object(NonMatching, "melee/if/textlib.c"),
+            Object(Matching, "melee/if/ifcoget.c"),
+            Object(Matching, "melee/if/if_2FF2.c"),
+            Object(Matching, "melee/if/soundtest.c"),
+            Object(Matching, "melee/if/textdraw.c"),
+            Object(Matching, "melee/if/textlib.c"),
+            Object(Matching, "melee/if/textlib_1.c"),
         ],
     ),
     MeleeLib(
         "ty (Toy, trophies)",
         [
-            Object(Testing, "melee/ty/toy.c"),
+            Object(Linkable, "melee/ty/toy.c"),
             Object(Matching, "melee/ty/tylist.c"),
-            Object(Testing, "melee/ty/tyfigupon.c"),
-            Object(Testing, "melee/ty/tydisplay.c"),
+            Object(Matching, "melee/ty/tyfigupon.c"),
+            Object(Linkable, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(
@@ -1448,15 +1582,15 @@ config.libs = [
         [
             Object(Matching, "melee/vi/vi.c"),
             Object(Matching, "melee/vi/vi0102.c"),
-            Object(NonMatching, "melee/vi/vi0401.c"),
+            Object(Matching, "melee/vi/vi0401.c"),
             Object(Matching, "melee/vi/vi0402.c"),
-            Object(NonMatching, "melee/vi/vi0501.c"),
+            Object(Matching, "melee/vi/vi0501.c"),
             Object(Matching, "melee/vi/vi0502.c"),
             Object(Matching, "melee/vi/vi0601.c"),
             Object(Matching, "melee/vi/vi0801.c"),
             Object(Matching, "melee/vi/vi1101.c"),
-            Object(NonMatching, "melee/vi/vi1201v1.c"),
-            Object(NonMatching, "melee/vi/vi1201v2.c"),
+            Object(Matching, "melee/vi/vi1201v1.c"),
+            Object(Matching, "melee/vi/vi1201v2.c"),
             Object(Matching, "melee/vi/vi1202.c"),
         ],
     ),
@@ -1562,7 +1696,7 @@ config.libs = [
     DolphinLib(
         "thp",
         [
-            Object(NonMatching, "dolphin/thp/THPDec.c"),
+            Object(Matching, "dolphin/thp/THPDec.c"),
         ],
     ),
     DolphinLib(
@@ -1766,12 +1900,12 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/bytecode.c"),
             Object(Matching, "sysdolphin/baselib/class.c"),
             Object(Matching, "sysdolphin/baselib/hash.c"),
-            Object(NonMatching, "sysdolphin/baselib/texp.c"),
-            Object(NonMatching, "sysdolphin/baselib/texpdag.c"),
-            Object(NonMatching, "sysdolphin/baselib/leak.c"),
+            Object(Matching, "sysdolphin/baselib/texp.c"),
+            Object(Matching, "sysdolphin/baselib/texpdag.c"),
+            Object(Matching, "sysdolphin/baselib/leak.c"),
             Object(Matching, "sysdolphin/baselib/debug.c"),
-            Object(NonMatching, "sysdolphin/baselib/synth.c"),
-            Object(NonMatching, "sysdolphin/baselib/axdriver.c"),
+            Object(Matching, "sysdolphin/baselib/synth.c"),
+            Object(Matching, "sysdolphin/baselib/axdriver.c"),
             Object(Matching, "sysdolphin/baselib/devcom.c"),
             Object(Matching, "sysdolphin/baselib/gobjproc.c"),
             Object(Matching, "sysdolphin/baselib/gobjplink.c"),
@@ -1780,23 +1914,23 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(Matching, "sysdolphin/baselib/gobj.c"),
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3915.c"),
+            Object(Linkable, "sysdolphin/baselib/hsd_3915.c"),
             Object(Matching, "sysdolphin/baselib/hsd_392C.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3933.c"),
             Object(Matching, "sysdolphin/baselib/hsd_393C.c"),
-            Object(NonMatching, "sysdolphin/baselib/debugconsole_main.c"),
+            Object(Linkable, "sysdolphin/baselib/debugconsole_main.c"),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/particle.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/generator.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/psdisp.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
@@ -1810,11 +1944,13 @@ config.libs = [
                 "sysdolphin/baselib/psappsrt.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
-            Object(NonMatching, "sysdolphin/baselib/sislib.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_40FF.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3AA7.c"),
+            Object(Matching, "sysdolphin/baselib/sobjlib.c"),
+            Object(Matching, "sysdolphin/baselib/sislib.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3A64.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3A76.c"),
+            Object(Matching, "sysdolphin/baselib/sislib_font.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
+            Object(Linkable, "sysdolphin/baselib/hsd_3A94.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2E.c"),
@@ -1824,12 +1960,12 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/hsd_3B34.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/hsd_3B5C.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
@@ -1873,15 +2009,7 @@ config.progress_report_args = [
 ]
 
 
-def generate_compile_commands():
-    config.validate()
-    objects = config.objects()
-    build_config = load_build_config(config, config.out_path() / "config.json")
-
-    compile_flags = [
-        *Path("compile_flags.txt").read_text().splitlines(),
-        *config.extra_clang_flags,
-    ]
+def generate_compile_commands(objects: dict[str, Object], build_config: BuildConfig):
 
     clangd_config = []
 
@@ -1904,7 +2032,7 @@ def generate_compile_commands():
             "output": obj.src_obj_path,
             "arguments": [
                 "clang",
-                *[*compile_flags, *obj.options["extra_clang_flags"]],
+                *[*config.extra_clang_flags, *obj.options["extra_clang_flags"]],
                 "-c",
                 obj.src_path,
                 "-o",
@@ -1935,10 +2063,39 @@ def generate_compile_commands():
 
 
 if args.mode == "configure":
+    if args.always_apply:
+        config.custom_build_steps = {
+            "post-ok": [
+                {
+                    "outputs": "always_apply",
+                    "rule": "phony",
+                    "implicit": ["apply"],
+                }
+            ]
+        }
+
     # Write build.ninja and objdiff.json
     generate_build(config)
+
+    config.validate()
+    objects = config.objects()
+    build_config = load_build_config(config, config.out_path() / "config.json")
+
+    if not build_config:
+        exit(0)
+
+    if not args.allow_auto_splits:
+        for unit in build_config["units"]:
+            if unit["autogenerated"]:
+                print(
+                    f"\033[31mERROR\033[0m Found an auto-generated split ({unit['name']}).",
+                    "\033[31mERROR\033[0m Make sure the DOL is fully covered in splits.txt.",
+                    sep=os.linesep,
+                )
+                exit(1)
+
     if args.compile_commands:
-        generate_compile_commands()
+        generate_compile_commands(objects, build_config)
 elif args.mode == "progress":
     # Print progress information
     calculate_progress(config)

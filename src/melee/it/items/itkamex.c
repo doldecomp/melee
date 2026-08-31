@@ -2,14 +2,12 @@
 
 #include "inlines.h"
 
-#include "ef/eflib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbaudio_ax.h"
 
 #include <baselib/jobj.h>
@@ -240,7 +238,7 @@ void it_802CAB10(Item_GObj* gobj)
     spawn.vel.x = attrs->x14 * ip->facing_dir;
     spawn.vel.y = 0.0f;
     spawn.vel.z = 0.0f;
-    spawn.kind = Pokemon_Kamex_HydroPump;
+    spawn.kind = It_Kind_Kamex_HydroPump;
     ip->xDD4_itemVar.pokemon.x64 ^= 1;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) gobj;

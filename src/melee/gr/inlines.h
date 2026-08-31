@@ -9,10 +9,10 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
-#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -21,7 +21,7 @@
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 
-static inline void Ground_JObjInline1(HSD_GObj* gobj)
+static inline void Ground_JObjInline1(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -29,7 +29,8 @@ static inline void Ground_JObjInline1(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
+/// @todo Call sites have a lot of duplicate code
+static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
                                               StageCallbacks* callbacks)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -39,11 +40,11 @@ static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
     if (callbacks->callback3 != NULL) {
         gp->x1C_callback = callbacks->callback3;
     }
-    if (callbacks->callback0 != NULL) {
-        callbacks->callback0(gobj);
+    if (callbacks->on_init != NULL) {
+        callbacks->on_init(gobj);
     }
-    if (callbacks->callback2 != NULL) {
-        HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+    if (callbacks->gobj_proc != NULL) {
+        HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
     }
 }
 
@@ -148,11 +149,11 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
     ifStatus_802F6898();
     un_802FF570();
 
-    if (Ground_801C2BA4(sequence_gobj_id) == NULL) {
+    if (Ground_GetMapGObj(sequence_gobj_id) == NULL) {
         if (grCorneria_801E2598(gp->u.starfox.xC4.word,
                                 gp->u.starfox.arwing_slot))
         {
-            if ((s32) gp->u.starfox.xCC-- < 0) {
+            if ((gp->u.starfox.xCC--) < 0) {
                 Ground_GObj* sequence_gobj = create_gobj(sequence_gobj_id);
                 grCorneria_801E2738(
                     sequence_gobj, &GET_GROUND(sequence_gobj)->u,
@@ -160,7 +161,7 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
                 gp->u.starfox.arwing_slot++;
                 gp->u.starfox.xCC = 0;
             }
-        } else if ((s32) gp->u.starfox.xCC-- < 0) {
+        } else if ((gp->u.starfox.xCC--) < 0) {
             Ground_801C4A08(gobj);
         }
     }

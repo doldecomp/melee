@@ -16,9 +16,8 @@
 #include "tobj.h"
 #include "util.h"
 
-#include <__mem.h>
 #include <math.h>
-#include <trigf.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
@@ -430,8 +429,6 @@ void HSD_ShadowSetViewingRect(HSD_Shadow* shadow, float top, float bottom,
     }
 }
 
-#define FLT_MAX 3.4028235E38F
-
 void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
                          Vec3* upvector, int perspective)
 {
@@ -446,8 +443,8 @@ void HSD_ViewingRectInit(HSD_ViewingRect* rect, Vec3* position, Vec3* interest,
     VECCrossProduct(&rect->right_v, &rect->eye_vn, &rect->up_v);
     rect->distance = VECMag(&rect->eye_v);
 
-    rect->top = rect->right = -FLT_MAX;
-    rect->bottom = rect->left = FLT_MAX;
+    rect->top = rect->right = -F32_MAX;
+    rect->bottom = rect->left = F32_MAX;
     rect->perspective = perspective;
 }
 

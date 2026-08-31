@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include "gr/forward.h"
-
 #include "gr/grinishie2.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -18,8 +16,8 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
-#include "MSL/math.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 

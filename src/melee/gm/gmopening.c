@@ -3,10 +3,8 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
-#include "dolphin/pad.h"
-
 #include <stdio.h>
-#include <sysdolphin/baselib/debugconsole_main.h>
+#include <baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -16,6 +14,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
 
 /* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
@@ -34,11 +33,13 @@
 /* 4D67F0 */ HSD_SObjDesc* gm_804D67F0;
 /* 4D67EC */ u32 gm_804D67EC;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 82.0f;
     (void) 290.0f;
 }
+#endif
 
 void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
 {
@@ -56,7 +57,7 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     Vec3 interest = gm_803B7D74;
 
     far_val = 2.0f;
-    bottom = (f32) (-(s32) (u16) arg2);
+    bottom = (f32) (-(s32) arg2);
     right = (f32) arg1;
     top = 0.0f;
     left = 0.0f;
@@ -84,16 +85,20 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far_val);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
-    HSD_GObjObject_80390A70(arg0, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(arg0, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static float unused_floats[] = {
     0.0f, 1600.0, 400.0f, 0.0f, 1330.0f, 130.0f, 0.0f, -3.0f, 0.0f,
 };
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void* fn_801A9FCC(void)
 {
@@ -116,8 +121,7 @@ void* fn_801A9FCC(void)
     lines[1].next = &lines[2];
     lines[2].unk_04 = 0;
 
-    ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
-                (f32) (*(u32*) 0x800000F8 / 4 / 1000));
+    ms = lbMthp_8001F5D4() / (f32) OSMillisecondsToTicks(1);
     idx = 2;
     sprintf(lines[idx].text, "\\cffff00%3d", ms);
 
@@ -136,7 +140,7 @@ void fn_801AA0E8(void)
     1250, 2, 394, 1, 65536, 2,
 };
 
-void gm_801AA110_OnEnter(UNK_T arg0)
+void gm_Scene_Opening_OnEnter(UNK_T arg0)
 {
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_2;
@@ -173,7 +177,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     temp_r3_3 = GObj_Create(0xE, 0xF, 0);
     gm_804D67E8 = temp_r3_3;
     GObj_SetupGXLink(temp_r3_3, lbMthp_8001F67C, 0xB, 0);
-    lbMthp_8001F624(temp_r3_3, 0x280, 0x1E0);
+    lbMthp_8001F624(temp_r3_3, 640, 480);
 
     lbAudioAx_80027648();
     lbAudioAx_80023F28(0x3E);
@@ -183,7 +187,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     gm_804D6724 = fn_801AA0E8;
 }
 
-void gm_801AA28C_OnFrame(void)
+void gm_Scene_Opening_OnFrame(void)
 {
     HSD_GObj* temp_r3_2;
     int temp_r3;
@@ -192,27 +196,27 @@ void gm_801AA28C_OnFrame(void)
 
     lbMthp_8001F578();
     temp_r3 = lbMthp_8001F5C4();
-    if ((u32) gm_804D67EC > 0x1518) {
+    if (gm_804D67EC > 5400) {
         gm_804D67EC += 1;
     } else {
         gm_804D67EC = (u32) temp_r3;
     }
     if (lbLang_IsSettingUS() != 0) {
-        if (gm_804D67E0 == 0 && gm_804D67EC >= 0x13AA) {
+        if (gm_804D67E0 == 0 && gm_804D67EC >= 5034) {
             lbAudioAx_800237A8(0x4E21, 0x7F, 0x40);
             gm_804D67E0 = 1;
         }
     } else {
-        if (gm_804D67E0 == 0 && gm_804D67EC >= 0x1374) {
+        if (gm_804D67E0 == 0 && gm_804D67EC >= 4980) {
             lbAudioAx_800237A8(0x4E22, 0x7F, 0x40);
             gm_804D67E0 = 1;
         }
-        if (gm_804D67E1 == 0 && gm_804D67EC >= 0x13EC) {
+        if (gm_804D67E1 == 0 && gm_804D67EC >= 5100) {
             lbAudioAx_800237A8(0x4E23, 0x7F, 0x40);
             gm_804D67E1 = 1;
         }
     }
-    if (((u8) gm_804D67E2 == 0) && ((u32) gm_804D67EC >= 0x1374U)) {
+    if ((gm_804D67E2 == 0) && (gm_804D67EC >= 4980)) {
         gmMainLib_8015F500();
         gm_804D67E2 = 1;
     }
@@ -226,11 +230,11 @@ void gm_801AA28C_OnFrame(void)
         temp_r3_3->x14 = 290.0f;
         gm_804D67D4 = temp_r3_2;
     }
-    if ((gm_804D67D4 != NULL) && ((u32) gm_804D67EC >= 0x202)) {
+    if ((gm_804D67D4 != NULL) && (gm_804D67EC >= 0x202)) {
         HSD_GObjPLink_80390228(gm_804D67D4);
         gm_804D67D4 = NULL;
     }
-    if ((gm_804D67D8 == NULL) && ((u32) gm_804D67EC >= 0x3B6) &&
+    if ((gm_804D67D8 == NULL) && (gm_804D67EC >= 0x3B6) &&
         (gm_804D67EC < 0x3CE))
     {
         gm_804D67D8 = gmTitle_801A12C4();
@@ -245,7 +249,7 @@ void gm_801AA28C_OnFrame(void)
         gm_804D67E4 = (600.0f + (400.0f + gm_804D67EC));
     }
     if (lbMthp_8001F604() != 0 && !gm_804D67DC && gm_804D67D0) {
-        gm_801BF3F8();
+        gm_PreloadTitleDemo();
         gm_804D67DC = true;
     }
     if (gm_804D67D0 && (gm_804D67EC == gm_804D67E4)) {
@@ -259,10 +263,10 @@ void gm_801AA28C_OnFrame(void)
         gm_SetPendingGameMode(GM_TITLE);
         gm_SetNewGameModePending();
     } else if (gm_804D67EC > 0x157C) {
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
             gm_80173EEC();
             gm_80172898(0x100);
@@ -272,13 +276,13 @@ void gm_801AA28C_OnFrame(void)
             gm_SetNewGameModePending();
         }
     } else {
-        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        if (gm_GetButtonsTriggered(PAD_MAX_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();

@@ -8,6 +8,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
@@ -29,17 +31,12 @@
 static SceneDesc* un_804D6FB0;
 static GXColor erase_colors_vi0601;
 
-void vi_8031E6CC_OnFrame(void)
-{
-    vi_8031CAAC();
-}
-
 void vi_8031E6EC(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0601_CameraCallback(HSD_GObj* gobj, int unused)
+static void vi0601_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
 {
     HSD_CObj* cobj;
     cobj = GET_COBJ(gobj);
@@ -88,11 +85,11 @@ void un_8031E9B8(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     s32 i;
-    char pad[8];
+    PAD_STACK(2 * 4);
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*un_804D6FB0->models)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, *un_804D6FB0->models, 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -139,7 +136,7 @@ void vi0601_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void un_8031EBBC_OnEnter(void* unused)
+void vi0601_Scene_OnEnter(UNUSED void* enter_data)
 {
     HSD_CObj* cobj;
     HSD_GObj* gobj;
@@ -157,8 +154,8 @@ void un_8031EBBC_OnEnter(void* unused)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6FB0->cameras->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, vi0601_CameraCallback, 2);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(gobj, vi0601_GObj_OnRender, 2);
     HSD_CObjAddAnim(cobj, un_804D6FB0->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
@@ -168,25 +165,25 @@ void un_8031EBBC_OnEnter(void* unused)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(7, 0);
+    Stage_802251E8(St_Kind_Corneria, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(7, 0);
+    Stage_8022532C(St_Kind_Corneria, 0);
 
     erase_colors_vi0601 = Camera_80030758();
     un_8031E9B8();
 
     gobj2 = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6FB0->lights);
-    HSD_GObjObject_80390A70(gobj2, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj2, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj2, HSD_GObj_LObjCallback, 0, 0);
 
     Player_InitAllPlayers();
     lbAudioAx_80024E50(0);
 }
 
-void vi_8031ED50_OnFrame(void)
+void vi0601_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

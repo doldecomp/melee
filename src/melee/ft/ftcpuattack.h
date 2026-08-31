@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CPUATTACK_H
 #define MELEE_FT_CPUATTACK_H
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
@@ -43,7 +41,8 @@ struct ftCo_AttackEntry;
 /* 0BA9A0 */ void ftCo_800BA9A0(Fighter*);
 /* 0BB104 */ bool ftCo_800BB104(Fighter*, Fighter*, Vec3*, float);
 /* 0BB220 */ int ftCo_800BB220(Fighter*, Item* ip, Vec3*, float);
-/* 0BB768 */ int ftCo_800BB768(Fighter*, Fighter*);
+/* 0BB768 */ bool ftCo_800BB768(Fighter*, Fighter*);
 /* 0BB9B4 */ int ftCo_800BB9B4(Fighter*);
+/* 3C6594 */ extern ftCo_803C6594_t* ftCo_803C6594[Gr_Kind_Count];
 
 #endif

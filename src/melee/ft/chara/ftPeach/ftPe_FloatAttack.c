@@ -21,8 +21,6 @@
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
-
 static void ftPe_8011BF34(HSD_GObj* gobj);
 
 bool ftPe_8011BE80(HSD_GObj* gobj)

@@ -1,48 +1,69 @@
 #ifndef __GALE01_305058
 #define __GALE01_305058
 
-#include "math.h"
+// IWYU pragma: begin_exports
+
+#include "m2c_macros.h"
+#include "placeholder.h"
+#include "platform.h"
+#include "stddef.h"
+#include "toy.h" // IWYU pragma: associated
+#include "tylist.h"
 #include "types.h"
 
-#include <platform.h>
-
 #include "baselib/fog.h"
+#include "db/db.h"
+#include "gm/gm_1601.h"
+#include "gm/gm_16AE.h"
+#include "gm/gm_16F1.h"
+#include "gm/gm_1A3F.h"
+#include "gm/gm_1A45.h"
+#include "gm/gmmain_lib.h"
 
 #include "if/forward.h"
 
-#include <stddef.h>
+#include "if/textdraw.h"
+#include "if/textlib.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00CE.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
+#include "lb/lbvector.h"
+#include "melee/if/textlib.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
+#include "sc/types.h"
+#include "ty/types.h"
+
+#include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <dolphin/os.h>
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/controller.h>
+#include <baselib/debug.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
+#include <baselib/sislib.h>
+#include <baselib/sobjlib.h>
+#include <baselib/state.h>
+#include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
-/* 3053C4 */ static void _Toy_803053C4(s32, s32, s32);
-/* 3062EC */ static void _Toy_803062EC(s32 arg0, u32 arg1, f32 farg0);
-/* 3064B8 */ static s16 _Toy_803064B8(s16 arg0, s8 arg1);
-/* 30663C */ static void _Toy_8030663C(void);
-/* 306A0C */ static void _Toy_80306A0C(HSD_GObj* arg0, int);
-/* 306C5C */ static void _Toy_80306C5C(HSD_GObj* arg0);
-/* 307018 */ static void _Toy_80307018(void);
-/* 30715C */ static void _Toy_8030715C(f32, f32);
-/* 3075E8 */ static void _Toy_803075E8(s32 arg0);
-/* 307828 */ static void _Toy_80307828(int);
-/* 3078E4 */ static void _Toy_803078E4(void);
-/* 307BA0 */ static HSD_JObj* _Toy_80307BA0(HSD_JObj*, s16);
-/* 307F64 */ static void _Toy_80307F64(s32, s32);
-/* 3084A0 */ static void _Toy_803084A0(s32 arg0);
-/* 308DC8 */ static void _Toy_80308DC8(HSD_CObj*);
-/* 308F04 */ static void _Toy_80308F04(HSD_CObj*);
-/* 309338 */ static f32 _Toy_80309338(Vec3* arg0, Vec3* arg1);
-/* 309404 */ static void _Toy_80309404(HSD_GObj*);
-/* 30B530 */ static void _Toy_8030B530(HSD_GObj*);
-/* 30E110 */ static void _Toy_8030E110(HSD_GObj*);
-/* 30FA50 */ static void _Toy_8030FA50(void);
-/* 30FE48 */ static void _Toy_8030FE48(void*, s32);
-/* 3102C4 */ static void _Toy_803102C4(s8 arg0);
-/* 3109A0 */ static void _Toy_803109A0(s32, s32, s32);
-/* 310B48 */ static void _Toy_80310B48(HSD_GObj*);
-/* 3114E8 */ static void _Toy_803114E8(void);
-/* 311788 */ static void _Toy_80311788(void);
-/* 311F5C */ static void _Toy_80311F5C(void);
-/* 312050 */ static void _Toy_80312050(HSD_GObj* gobj, int code);
 /* 3B8844 */ static HSD_FogDesc const _Toy_803B8844 = {
     GX_FOG_LIN, NULL, 0.0f, 1.0f, { 0xFF, 0xFF, 0xFF, 0xFF },
 };
@@ -77,10 +98,18 @@
 /* 4A26B8 */ static struct _Toy_804A26B8_t _Toy_804A26B8;
 /* 4A26C4 */ static char _Toy_devtext_buf_804A26C4[0x8C];
 /* 4A2750 */ static char _Toy_devtext_buf_804A2750[0xFC];
-/* 4A284C */ unsigned short Toy_804A284C[302];
+/* 4A284C */ u16 Toy_804A284C[302];
 /* 4A2AA8 */ ToyAnimState Toy_804A2AA8;
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
+
+/// Number of sort keys held per trophy.
+#define TY_SORT_KEY_COUNT 3
+
+/// One row of the trophy sort table: one key per sort mode.
+typedef struct TySortRow {
+    /* 0x0 */ s16 key[TY_SORT_KEY_COUNT];
+} TySortRow;
 
 /// @warning do not sort. Private members cannot be declared @c static.
 /* 4D6EE0 */ TyDisplayData* Toy_sbss_804D6EE0;
@@ -94,7 +123,7 @@
 /* 4D6EC0 */ struct TrophyData* _Toy_sbss_804D6EC0;
 /* 4D6EBC */ void* _Toy_sbss_804D6EBC;
 /* 4D6EB8 */ void* _Toy_sbss_804D6EB8;
-/* 4D6EB4 */ short* _Toy_sbss_804D6EB4;
+/* 4D6EB4 */ s16* _Toy_sbss_804D6EB4;
 /* 4D6EB0 */ TyDspEntry* Toy_sbss_804D6EB0;
 /* 4D6EAC */ TyDspEntry* Toy_sbss_804D6EAC;
 /* 4D6EA8 */ void* _Toy_sbss_804D6EA8;
@@ -116,18 +145,19 @@
 /* 4D6E70 */ s32 _Toy_sbss_804D6E70;
 /* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C;
 /* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
-/* 4D6E64 */ s16* _Toy_sbss_804D6E64;
+/* 4D6E64 */ TySortRow* _Toy_sbss_804D6E64;
 /* 4D6E60 */ s32 _Toy_sbss_804D6E60;
 /* 4D6E5C */ void** _Toy_sbss_804D6E5C;
 /* 4D6E58 */ s32 _Toy_sbss_804D6E58;
 /* 4D6E54 */ s32 _Toy_sbss_804D6E54;
 /* 4D6E50 */ s8 _Toy_sbss_804D6E50;
 
-STATIC_ASSERT(sizeof(_Toy_803B8910) == 0x48);
-STATIC_ASSERT(sizeof(_Toy_devtext_buf_804A26C4) == 0x8C);
-STATIC_ASSERT(sizeof(_Toy_devtext_buf_804A2750) == 0xFC);
+ASSERT_SIZE(_Toy_803B8910, 0x48);
+ASSERT_SIZE(_Toy_devtext_buf_804A26C4, 0x8C);
+ASSERT_SIZE(_Toy_devtext_buf_804A2750, 0xFC);
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     /*   +0 */ (void) 100.0f;
@@ -137,7 +167,7 @@ static void order_sdata2_0(void)
     /*  +18 */ (void) 1.0f;
     /*  +1C */ (void) -3000.0f;
     /*  +20 */ (void) 3000.0f;
-    /*  +24 */ (void) deg_to_rad;
+    /*  +24 */ (void) MTXDegToRad(1);
     /*  +28 */ (void) 2.0f;
     /*  +2C */ (void) 38.0f;
     /*  +30 */ (void) 0.25f;
@@ -148,6 +178,7 @@ static void order_sdata2_0(void)
                                                           0xFF };
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_38(void)
 {
     /*  +38 */ (void) 0.9f;
@@ -214,39 +245,43 @@ static void order_sdata2_38(void)
     /* +13C */ (void) -0.6f;
     /* +140 */ (void) 0.6f;
 }
+#endif
 
 /* 4DDE0C */ static GXColor const _Toy_color_4080D060_0 = { 0x40, 0x80, 0xD0,
                                                             0x60 };
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_148(void)
 {
     /* +148 */ (void) 12.0f;
     /* +14C */ (void) 18.0f;
 }
+#endif
 
 /* 4DDE18 */ static GXColor const _Toy_color_40B0D060_1 = { 0x40, 0x80, 0xD0,
                                                             0x60 };
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_154(void)
 {
     /* +154 */ (void) -3.25f;
     /* +158 */ (void) 3.25f;
 }
+#endif
 
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
-// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) == 0x6DE);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT == 0x6DE);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E68) == 0x64);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E6C) == 0x8);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED8) == 0x5C);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6EDC) == 0x24A);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6EE0) == 0x158);
 
-/// @todo begin .sdata hack
-
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata_8(void)
 {
     /*  +8 */ (void) "toy.c";
@@ -256,8 +291,7 @@ static void order_sdata_8(void)
     /* +24 */ (void) "jobj.h";
     /* +2C */ (void) "jobj";
 }
-
-/// @todo end .sdata hack
+#endif
 
 /// @todo Should be a literal, probably a getter function
 ///       or part of #_Toy_803FDDE4.
@@ -283,11 +317,13 @@ static void order_sdata_8(void)
 };
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_144(void)
 {
     /* +144 */ (void) "TyStand.dat";
     /* +150 */ (void) "ToyStandModel_TopN_joint";
 }
+#endif
 
 /// @todo Should be @c static but changing it affects .data order.
 ///       #_Toy_803FDEA0 points to #_Toy_803FDEA4, which contains the string.
@@ -362,3 +398,5 @@ struct ModelNamesDesc {
         "ToyStandModel_TopN_ACTION_action2_shapeanim_joint",
     },
 };
+
+#endif

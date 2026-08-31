@@ -3,7 +3,6 @@
 #include "placeholder.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
@@ -13,47 +12,49 @@
 #include "it/items/forward.h"
 
 #include "it/items/itwhitebea.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
-ItemStateTable it_803F5D28[] = { {
-                                     0,
-                                     itFreeze_UnkMotion0_Anim,
-                                     itFreeze_UnkMotion0_Phys,
-                                     itFreeze_UnkMotion0_Coll,
-                                 },
-                                 {
-                                     0,
-                                     itFreeze_UnkMotion3_Anim,
-                                     itFreeze_UnkMotion1_Phys,
-                                     itFreeze_UnkMotion1_Coll,
-                                 },
-                                 {
-                                     -1,
-                                     itFreeze_UnkMotion2_Anim,
-                                     NULL,
-                                     NULL,
-                                 },
-                                 {
-                                     1,
-                                     itFreeze_UnkMotion3_Anim,
-                                     itFreeze_UnkMotion3_Phys,
-                                     itFreeze_UnkMotion3_Coll,
-                                 },
-                                 {
-                                     0,
-                                     itFreeze_UnkMotion4_Anim,
-                                     itFreeze_UnkMotion4_Phys,
-                                     itFreeze_UnkMotion4_Coll,
-                                 },
-                                 {
-                                     0,
-                                     itFreeze_UnkMotion5_Anim,
-                                     itFreeze_UnkMotion5_Phys,
-                                     itFreeze_UnkMotion5_Coll,
-                                 } };
+ItemStateTable it_803F5D28[] = {
+    {
+        0,
+        itFreeze_UnkMotion0_Anim,
+        itFreeze_UnkMotion0_Phys,
+        itFreeze_UnkMotion0_Coll,
+    },
+    {
+        0,
+        itFreeze_UnkMotion3_Anim,
+        itFreeze_UnkMotion1_Phys,
+        itFreeze_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itFreeze_UnkMotion2_Anim,
+        NULL,
+        NULL,
+    },
+    {
+        1,
+        itFreeze_UnkMotion3_Anim,
+        itFreeze_UnkMotion3_Phys,
+        itFreeze_UnkMotion3_Coll,
+    },
+    {
+        0,
+        itFreeze_UnkMotion4_Anim,
+        itFreeze_UnkMotion4_Phys,
+        itFreeze_UnkMotion4_Coll,
+    },
+    {
+        0,
+        itFreeze_UnkMotion5_Anim,
+        itFreeze_UnkMotion5_Phys,
+        itFreeze_UnkMotion5_Coll,
+    },
+};
 
 Item_GObj* it_8028EB88(Item_GObj* ref_gobj, Vec3* pos, f32 facing_dir,
                        f32 decel)

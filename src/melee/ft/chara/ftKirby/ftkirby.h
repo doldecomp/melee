@@ -14,6 +14,11 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct ftKirby_CopyName {
+    char* filename;
+    char* name;
+} ftKirby_CopyName;
+
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(Fighter_GObj* gobj);
 /* 0EE680 */ void ftKb_Init_OnLoad(Fighter_GObj* gobj);
@@ -96,7 +101,7 @@
 /* 0F12C8 */ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj);
 /* 0F130C */ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj);
 /* 0F13F0 */ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj);
-/* 0F1420 */ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1);
+/* 0F1420 */ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* arg1);
 /* 0F14B4 */ void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj);
 /* 0F15D8 */ void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj);
 /* 0F1630 */ void ftKb_SpecialN_Enter(Fighter_GObj* gobj);
@@ -411,8 +416,8 @@
 /* 0FC9F0 */ void ftKb_LkSpecialAirNStart_Coll(Fighter_GObj* gobj);
 /* 0FCAA4 */ void ftKb_LkSpecialAirNLoop_Coll(Fighter_GObj* gobj);
 /* 0FCB58 */ void ftKb_LkSpecialAirNEnd_Coll(Fighter_GObj* gobj);
-/* 0FCC14 */ s32 ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, s32* out_charge,
-                                          s32* out_time);
+/* 0FCC14 */ int ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, int* out_charge,
+                                          int* out_time);
 /* 0FCC6C */ bool ftKb_SpecialNSs_800FCC6C(Fighter_GObj* gobj);
 /* 0FCCBC */ bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj);
 /* 0FCD04 */ void ftKb_SpecialNSs_800FCD04(Fighter_GObj* gobj);
@@ -509,21 +514,20 @@
 /* 0FF7A8 */ void ftKb_NsSpecialAirNStart_Coll(Fighter_GObj* gobj);
 /* 0FF814 */ void ftKb_NsSpecialAirNHold_Coll(Fighter_GObj* gobj);
 /* 0FF880 */ void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj);
-typedef struct ftKirby_CopyName {
-    char* filename;
-    char* name;
-} ftKirby_CopyName;
-
-/* 3CA9D0 */ extern ftKirby_CopyName ftKb_Init_803CA9D0[];
-/* 3CB3E8 */ extern Fighter_CostumeStrings* ftKb_Init_803CB3E8[];
-/* 3CB46C */ extern u8 ftKb_Init_803CB46C[];
-/* 3CB540 */ extern enum_t ftKb_Init_803CB540[];
 /* 3C8368 */ extern MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount];
 /* 3CA04C */ extern MotionState ftKb_Init_UnkMotionStates0[];
 /* 3CA308 */ extern char ftKb_Init_DatFilename[];
 /* 3CA314 */ extern char ftKb_Init_DataName[];
 /* 3CA4E0 */ extern char ftKb_Init_AnimDatFilename[];
 /* 3CA55C */ extern Fighter_DemoStrings ftKb_Init_DemoMotionFilenames;
+/* 3CA5A4 */ extern char* ftKb_Init_803CA5A4[];
 /* 3CA5B4 */ extern Fighter_CostumeStrings ftKb_Init_CostumeStrings[];
+/* 3CA9D0 */ extern ftKirby_CopyName ftKb_Init_803CA9D0[];
+/* 3CB3E8 */ extern Fighter_CostumeStrings* ftKb_Init_803CB3E8[];
+/* 3CB46C */ extern u8 ftKb_Init_803CB46C[];
+/* 3CB510 */ extern char ftKb_Init_803CB510[];
+/* 3CB52C */ extern char ftKb_Init_803CB52C[];
+/* 3CB540 */ extern enum_t ftKb_Init_803CB540[];
+/* 4D3DB0 */ extern char ftKb_Init_804D3DB0[2];
 
 #endif

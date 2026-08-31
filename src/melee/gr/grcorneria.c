@@ -1,9 +1,6 @@
 #include "grcorneria.h"
 
 #include "granime.h"
-
-#include "grcorneria.static.h"
-
 #include "grdatfiles.h"
 #include "grdisplay.h"
 #include "grlib.h"
@@ -28,8 +25,8 @@
 #include "it/items/itarwinglaser.h"
 #include "it/items/itgreatfoxlaser.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
@@ -76,13 +73,31 @@ struct grCorneria_YakumonoParam {
     /* 0x88 */ f32 x88;
 };
 
+/* 1DD654 */ static void grCorneria_801DD654(Ground_GObj*);
+/* 1DD658 */ static void grCorneria_801DD658(Ground_GObj*);
+/* 1DDAC0 */ static void grCorneria_801DDAC0(Ground_GObj*);
+/* 1DE4BC */ static void grCorneria_801DE4BC(Ground_GObj*);
+/* 1DE8E0 */ static void grCorneria_801DE8E0(Ground_GObj*);
+/* 1DF8CC */ static void grCorneria_801DF8CC(Ground_GObj*);
+/* 1DFBEC */ static void grCorneria_801DFBEC(Ground_GObj*);
+/* 1DFC24 */ static void grCorneria_801DFC24(Ground_GObj*);
+/* 1DFC28 */ static void grCorneria_801DFC28(Ground_GObj*);
+/* 1DFEB4 */ static void grCorneria_801DFEB4(Ground_GObj*);
+/* 1E013C */ static void grCorneria_801E013C(Ground_GObj*);
+/* 1E03C4 */ static void grCorneria_801E03C4(Ground_GObj*);
+/* 1E0DE0 */ static void grCorneria_801E0DE0(Ground_GObj*);
+/* 1E0E3C */ static void grCorneria_801E0E3C(Ground_GObj*);
+/* 1E0F30 */ static void grCorneria_801E0F30(Ground_GObj*);
+/* 1E1054 */ static void grCorneria_801E1054(Ground_GObj*);
+/* 1E12CC */ static void grCorneria_801E12CC(Ground_GObj*);
+
 static struct grCorneria_YakumonoParam* yakumono_param;
 static u32 grCn_804D69A4;
 static int grCn_804D69A8;
 static bool grCn_804D69AC;
 static int grCn_804D69B0;
 
-static S16Vec3 grCn_803E1D38[] = {
+static GrJoint grCn_803E1D38[] = {
     { 3, 3, 0 },  { 4, 3, 0 },  { 0, 13, 0 }, { 1, 14, 0 },
     { 2, 15, 0 }, { 5, 16, 0 }, { 6, 17, 0 }, { 7, 18, 0 },
 };
@@ -91,7 +106,7 @@ static HSD_GObj* arwing_gobjs[3] = { 0 };
 static int arwing_types[3] = { 0 };
 static int arwing_groups[3] = { 0 };
 
-StageCallbacks grCn_803E1D8C[] = {
+StageCallbacks grCn_StageCallbacks[] = {
     {
         grCorneria_801DD620,
         grCorneria_801DD64C,
@@ -227,9 +242,9 @@ StageCallbacks grCn_803E1D8C[] = {
     },
 };
 
-StageData grCn_803E1F08 = {
-    CORNERIA,
-    grCn_803E1D8C,
+StageData grCn_StageData = {
+    Gr_Kind_Corneria,
+    grCn_StageCallbacks,
     "/GrCn",
     grCorneria_801DD350,
     grCorneria_801DD2C0,
@@ -238,7 +253,7 @@ StageData grCn_803E1F08 = {
     grCorneria_801DD52C,
     grCorneria_801E2EE4,
     grCorneria_801E2EEC,
-    0x00000001,
+    (1 << 0),
     grCn_803E1D38,
     ARRAY_SIZE(grCn_803E1D38),
 };
@@ -318,25 +333,6 @@ static inline int grCn_CheckFar(Vec3* pos)
         }
     }
     return 1;
-}
-
-static inline void grCn_SpawnArwing(s32 slot, u32 type_id, int group)
-{
-    grCn_804D69A4 = slot;
-    arwing_types[slot] = type_id;
-    arwing_groups[slot] = group;
-    arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
-}
-
-static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
-{
-    int rand_id = arwing_types[slot];
-    while (rand_id == arwing_types[0] || rand_id == arwing_types[1] ||
-           rand_id == arwing_types[2])
-    {
-        rand_id = HSD_Randi(range) + base;
-    }
-    return rand_id;
 }
 
 void grCorneria_801DCE1C(void)
@@ -472,7 +468,7 @@ void grCorneria_801DD2C0(int unused)
     int rand;
     PAD_STACK(32);
 
-    obj = Ground_801C2BA4(3);
+    obj = Ground_GetMapGObj(3);
     if (obj != NULL) {
         obj = GET_JOBJ(obj);
         if (obj != NULL) {
@@ -490,10 +486,9 @@ void grCorneria_801DD2C0(int unused)
     grCn_804D69AC = true;
 }
 
-extern Vec3 grCn_803B8090;
-
 void grCorneria_801DD350(void)
 {
+    static Vec3 const light_pos_init = { 1.0f, 0.0f, 0.0f };
     Ground* gp;
     u8 _pad[8];
     Vec3 light_pos;
@@ -511,7 +506,7 @@ void grCorneria_801DD350(void)
     grCorneria_801DD534(0xB);
     Ground_801C39C0();
     Ground_801C3BB4();
-    light_pos = grCn_803B8090;
+    light_pos = light_pos_init;
     lb_80011A50(&light_pos, -1, 1.0f, 0.0f, 1.0471976f, -100000.0f, 100000.0f,
                 100000.0f, -100000.0f);
     grCn_804D69AC = true;
@@ -528,19 +523,19 @@ void grCorneria_801DD478(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    gobj = Ground_801C2BA4(11);
+    gobj = Ground_GetMapGObj(11);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(9);
+    gobj = Ground_GetMapGObj(9);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
@@ -561,12 +556,14 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 HSD_GObj* grCorneria_801DD534(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grCn_803E1D8C[arg0];
+    StageCallbacks* callbacks = &grCn_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 
@@ -578,11 +575,11 @@ HSD_GObj* grCorneria_801DD534(int arg0)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
@@ -591,7 +588,9 @@ HSD_GObj* grCorneria_801DD534(int arg0)
 
     return gobj;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {
@@ -784,7 +783,7 @@ void grCorneria_801DDCF0(Vec3* vec)
     HSD_GObj* gobj;
     PAD_STACK(4);
 
-    gobj = Ground_801C2BA4(3);
+    gobj = Ground_GetMapGObj(3);
     gp = GET_GROUND(gobj);
     vec->x = gp->u.corneria.offset_x - gp->u.corneria.xE4.x;
     vec->y = gp->u.corneria.offset_y.val - gp->u.corneria.xE4.y;
@@ -797,7 +796,7 @@ void grCorneria_801DDD4C(Vec3* vec)
     HSD_GObj* gobj;
     PAD_STACK(4);
 
-    gobj = Ground_801C2BA4(3);
+    gobj = Ground_GetMapGObj(3);
     gp = GET_GROUND(gobj);
     vec->x = gp->u.corneria.base_x + gp->u.corneria.offset_x;
     vec->y = gp->u.corneria.base_y + gp->u.corneria.offset_y.val;
@@ -816,7 +815,7 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
 
     if (gobj != NULL) {
         gp = gobj->user_data;
-        gp2 = Ground_801C2BA4(3)->user_data;
+        gp2 = Ground_GetMapGObj(3)->user_data;
         jobj = Ground_801C3FA4(gobj, 4);
         lb_8000B1CC(jobj, NULL, &pos);
         idx = arwing_types[gp->u.arwing.xC8];
@@ -834,18 +833,17 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
     }
 }
 
-extern Vec3 grCn_803B809C;
-
 void grCorneria_801DDE88(HSD_GObj* gobj)
 {
+    static Vec3 const sp2C_init = { 0.0f, 0.0f, 0.0f };
     Vec3 sp2C;
     Vec3 sp20;
     Ground* gp = GET_GROUND(gobj);
 
-    sp2C = grCn_803B809C;
+    sp2C = sp2C_init;
     if (gobj != NULL) {
         Ground* gp2 = HSD_GObjGetUserData(gobj);
-        Ground* ship = GET_GROUND(Ground_801C2BA4(3));
+        Ground* ship = GET_GROUND(Ground_GetMapGObj(3));
         s32 idx;
         lb_8000B1CC(Ground_801C3FA4(gobj, 4), NULL, &sp20);
         idx = arwing_types[gp2->u.arwing.xC8];
@@ -882,8 +880,6 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
     }
 }
 
-extern Vec3 grCn_803B80A8;
-
 /// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
 /// reads keep MWCC from duplicating them later in the literal pool.
 static const f32 grCn_ArwingMinX = -10.0f;
@@ -891,8 +887,9 @@ static const f32 grCn_ArwingMaxX = 2000.0f;
 
 static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 0.0f, 0.0f };
     Ground* gp = GET_GROUND(gobj);
-    Vec3 pos = grCn_803B80A8;
+    Vec3 pos = pos_init;
     grCorneria_801DDDA8(gobj, &pos);
     switch (gp->u.arwing.xD8) {
     case 0:
@@ -919,7 +916,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 translate;
-    HSD_GObj* ship_gobj = Ground_801C2BA4(3);
+    HSD_GObj* ship_gobj = Ground_GetMapGObj(3);
     HSD_JObj* ship_jobj = GET_JOBJ(ship_gobj);
     if (ship_jobj != NULL) {
         f32 y = HSD_JObjGetTranslationY(ship_jobj);
@@ -1143,8 +1140,6 @@ s32 grCorneria_801DEC94(Vec3* pos)
     return 0;
 }
 
-extern Vec3 grCn_803B80B4;
-
 static int grCn_803E21B0[] = { 1, 1, 1, 1, 1 };
 
 static inline int randi(int max)
@@ -1184,13 +1179,14 @@ static inline Ground* get_arwing_ground(HSD_GObj* gobj)
 
 void grCorneria_801DED50(Ground_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 0.0f, 0.0f };
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* arwing;
     HSD_GObj* far_arwing;
     Ground* ship_gp;
     Ground* arwing_gp;
-    Vec3 pos = grCn_803B80B4;
+    Vec3 pos = pos_init;
     PAD_STACK(6);
 
     if (grCn_804D69AC) {
@@ -1266,7 +1262,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 if ((arwing = (HSD_JObj*) arwing_gobjs[gp->u.corneria2.xC8])) {
                     Vec3 arwing_pos;
                     arwing_gp = get_arwing_ground((Ground_GObj*) arwing);
-                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    ship_gp = GET_GROUND(Ground_GetMapGObj(3));
                     lb_8000B1CC(Ground_801C3FA4((Ground_GObj*) arwing, 4),
                                 NULL, &arwing_pos);
                     {
@@ -1386,7 +1382,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 if ((far_arwing = arwing_gobjs[gp->u.corneria2.xC8])) {
                     Vec3 arwing_pos;
                     arwing_gp = far_arwing->user_data;
-                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    ship_gp = GET_GROUND(Ground_GetMapGObj(3));
                     lb_8000B1CC(Ground_801C3FA4(far_arwing, 4), NULL,
                                 &arwing_pos);
                     {
@@ -1723,16 +1719,16 @@ void grCorneria_801E0678(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    gobj = Ground_801C2BA4(0xB);
+    gobj = Ground_GetMapGObj(0xB);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     HSD_JObjSetTranslateX(gobj->hsd_obj, 0.0f);
     gp = GET_GROUND(gobj);
     gp->u.corneria.offset_y.flags.b0 = 1;
 
-    gobj = Ground_801C2BA4(9);
+    gobj = Ground_GetMapGObj(9);
     gp = GET_GROUND(gobj);
     gp->u.corneria.xC6.flags.b0 = 1;
     {
@@ -1741,7 +1737,7 @@ void grCorneria_801E0678(void)
                               -(3200.0f * Ground_801C0498() / 2 + half));
     }
 
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     gp = GET_GROUND(gobj);
     gp->u.corneria.xC6.flags.b0 = 1;
     {
@@ -1761,7 +1757,7 @@ int grCorneria_801E08CC(void)
 
     Camera_GetTransformInterest(&pos);
     cam_x = pos.x;
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
@@ -1770,7 +1766,7 @@ int grCorneria_801E08CC(void)
             return 8;
         }
     }
-    gobj = Ground_801C2BA4(9);
+    gobj = Ground_GetMapGObj(9);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
@@ -1779,7 +1775,7 @@ int grCorneria_801E08CC(void)
             return 9;
         }
     }
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(4800.0f * Ground_801C0498() / 2 - x) &&
@@ -1792,11 +1788,11 @@ int grCorneria_801E08CC(void)
     return -1;
 }
 
-int grCorneria_801E0A74(f32* arg0)
+int grCorneria_801E0A74(const f32* arg0)
 {
     HSD_GObj* gobj;
 
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
@@ -1805,7 +1801,7 @@ int grCorneria_801E0A74(f32* arg0)
             return 8;
         }
     }
-    gobj = Ground_801C2BA4(9);
+    gobj = Ground_GetMapGObj(9);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
@@ -1814,7 +1810,7 @@ int grCorneria_801E0A74(f32* arg0)
             return 9;
         }
     }
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 4800.0f * Ground_801C0498() / 2 &&
@@ -1957,7 +1953,7 @@ void grCorneria_801E0E40(void)
         return;
     }
 
-    if (Ground_801C2BA4(0xC) != NULL) {
+    if (Ground_GetMapGObj(0xC) != NULL) {
         return;
     }
 
@@ -2048,21 +2044,21 @@ void grCorneria_801E1060(Ground_GObj* gobj)
              (total + 3200.0f * Ground_801C0498() / 2)) /
             2400.0f);
 
-    bg = Ground_801C2BA4(8);
+    bg = Ground_GetMapGObj(8);
     if (bg != NULL) {
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     pos = pos -
           (3200.0f * Ground_801C0498() / 2 + 3200.0f * Ground_801C0498() / 2);
 
-    bg = Ground_801C2BA4(9);
+    bg = Ground_GetMapGObj(9);
     if (bg != NULL) {
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     pos = pos -
           (3200.0f * Ground_801C0498() / 2 + 4800.0f * Ground_801C0498() / 2);
 
-    bg = Ground_801C2BA4(4);
+    bg = Ground_GetMapGObj(4);
     if (bg != NULL) {
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
@@ -2477,11 +2473,11 @@ void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
         if (gp->u.smashtaunt.text == NULL) {
             return;
         }
-        ((HSD_Text*) gp->u.smashtaunt.text)->hidden = true;
+        (gp->u.smashtaunt.text)->hidden = true;
         return;
     }
     if (gp->u.smashtaunt.text != NULL) {
-        ((HSD_Text*) gp->u.smashtaunt.text)->hidden = false;
+        (gp->u.smashtaunt.text)->hidden = false;
     }
     grDisplay_801C5DB0(gobj, renderpass);
 }
@@ -2519,50 +2515,61 @@ static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
     }
 }
 
-/// @todo Only differs by a callee-saved register permutation.
-void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
-                         int line, int arg3, int arg4)
+static inline void grCn_SetupSmashTaunt(struct grSmashTaunt_GroundVars* gv,
+                                        int line, int arg3, int arg4,
+                                        HSD_GObj* gobj)
 {
-    struct grSmashTaunt_GroundVars* v = gv;
-    s16 joint1;
-    s16 joint0;
+    int joint1;
+    int joint0;
     int i;
     s16* joints;
-    PAD_STACK(8);
-
-    v->line = line;
-    v->sis_data_idx = arg3;
-    v->sound_id = arg4;
-    joint0 = grCn_803E21F0[v->line][0];
-    joint1 = grCn_803E21F0[v->line][1];
+    gv->line = line;
+    gv->sis_data_idx = arg3;
+    gv->sound_id = arg4;
     joints = &grCn_803E21F0[i = 0][0];
+    joint0 = grCn_803E21F0[gv->line][0];
+    joint1 = grCn_803E21F0[gv->line][1];
     do {
-        if (i != 0 && v->line != i) {
+        if (i != 0 && gv->line != i) {
             grCn_HideJointPair(gobj, joints);
         }
         i++;
         joints += 2;
     } while (i < 5);
-    v->jobj0 = Ground_801C3FA4(gobj, joint0);
-    v->jobj1 = Ground_801C3FA4(gobj, joint1);
-    v->jobj2 = Ground_801C3FA4(gobj, 5);
-    v->joint_idx0 = joint0;
-    v->joint_idx1 = joint1;
-    v->joint_idx2 = 5;
-    v->state = 0;
-    v->timer = 0xA;
+    gv->jobj0 = Ground_801C3FA4(gobj, joint0);
+    gv->jobj1 = Ground_801C3FA4(gobj, joint1);
+    gv->jobj2 = Ground_801C3FA4(gobj, 5);
+    gv->joint_idx0 = joint0;
+    gv->joint_idx1 = joint1;
+    gv->joint_idx2 = 5;
+    gv->state = 0;
+    gv->timer = 0xA;
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
+void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
+                         int line, int arg3, int arg4)
+{
+    PAD_STACK(8);
+    grCn_SetupSmashTaunt(gv, line, arg3, arg4, gobj);
+}
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {
     grCorneria_801E25C4(gobj, ptr, grCn_803E2204[idx1][idx2].data[0],
                         grCn_803E2204[idx1][idx2].data[1],
                         grCn_803E2204[idx1][idx2].data[2]);
 }
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -2641,18 +2648,18 @@ void grCorneria_801E2A6C(void)
     HSD_GObj* gobj;
     PAD_STACK(20);
 
-    if (stage_info.internal_stage_id == CORNERIA) {
-        gobj = Ground_801C2BA4(12);
+    if (stage_info.grkind == Gr_Kind_Corneria) {
+        gobj = Ground_GetMapGObj(12);
         if (gobj == NULL) {
             return;
         }
-        gobj = Ground_801C2BA4(5);
+        gobj = Ground_GetMapGObj(5);
         if (gobj != NULL) {
             Ground_801C5544(GET_GROUND(gobj), 0);
             Ground_801C4A08(gobj);
         }
         HSD_SisLib_803A5F50(1);
-    } else if (stage_info.internal_stage_id == VENOM) {
+    } else if (stage_info.grkind == Gr_Kind_Venom) {
         grVenom_80206CB0(0);
     }
 }
@@ -2662,33 +2669,35 @@ void grCorneria_801E2AF4(void)
     HSD_GObj* gobj;
     PAD_STACK(20);
 
-    if (stage_info.internal_stage_id == CORNERIA) {
-        gobj = Ground_801C2BA4(12);
+    if (stage_info.grkind == Gr_Kind_Corneria) {
+        gobj = Ground_GetMapGObj(12);
         if (gobj == NULL) {
             return;
         }
         Ground_801C4A08(gobj);
-        gobj = Ground_801C2BA4(5);
+        gobj = Ground_GetMapGObj(5);
         if (gobj != NULL) {
             Ground_801C5544(GET_GROUND(gobj), 0);
             Ground_801C4A08(gobj);
         }
         HSD_SisLib_803A5F50(1);
-    } else if (stage_info.internal_stage_id == VENOM) {
+    } else if (stage_info.grkind == Gr_Kind_Venom) {
         grVenom_80206CB0(1);
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool grCorneria_801E2B80(void)
 {
     int rand;
     HSD_GObj* wgobj;
     PAD_STACK(44);
 
-    if (stage_info.internal_stage_id == CORNERIA) {
-        if (Ground_801C2BA4(12) != NULL) {
+    if (stage_info.grkind == Gr_Kind_Corneria) {
+        if (Ground_GetMapGObj(12) != NULL) {
             return false;
         }
         rand = HSD_Randi(5) + 8;
@@ -2696,7 +2705,7 @@ bool grCorneria_801E2B80(void)
         HSD_ASSERT(3598, wgobj);
         grCorneria_801E0F34(wgobj, rand);
         return true;
-    } else if (stage_info.internal_stage_id == VENOM) {
+    } else if (stage_info.grkind == Gr_Kind_Venom) {
         return grVenom_80206BF0(2);
     }
     return true;
@@ -2708,8 +2717,8 @@ bool grCorneria_801E2C34(void)
     HSD_GObj* wgobj;
     PAD_STACK(44);
 
-    if (stage_info.internal_stage_id == CORNERIA) {
-        if (Ground_801C2BA4(12) != NULL) {
+    if (stage_info.grkind == Gr_Kind_Corneria) {
+        if (Ground_GetMapGObj(12) != NULL) {
             return false;
         }
         rand = HSD_Randi(5) + 13;
@@ -2717,17 +2726,19 @@ bool grCorneria_801E2C34(void)
         HSD_ASSERT(3598, wgobj);
         grCorneria_801E0F34(wgobj, rand);
         return true;
-    } else if (stage_info.internal_stage_id == VENOM) {
+    } else if (stage_info.grkind == Gr_Kind_Venom) {
         return grVenom_80206BF0(20);
     }
     return true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool grCorneria_801E2CE8(void)
 {
-    if (stage_info.internal_stage_id == CORNERIA ||
-        stage_info.internal_stage_id == VENOM)
+    if (stage_info.grkind == Gr_Kind_Corneria ||
+        stage_info.grkind == Gr_Kind_Venom)
     {
         return true;
     }
@@ -2737,14 +2748,14 @@ bool grCorneria_801E2CE8(void)
 bool grCorneria_801E2D14(void)
 {
     HSD_GObj* gobj;
-    if (stage_info.internal_stage_id == CORNERIA) {
-        gobj = Ground_801C2BA4(12);
+    if (stage_info.grkind == Gr_Kind_Corneria) {
+        gobj = Ground_GetMapGObj(12);
         if (gobj != NULL) {
             return true;
         }
         return false;
-    } else if (stage_info.internal_stage_id == VENOM) {
-        gobj = Ground_801C2BA4(8);
+    } else if (stage_info.grkind == Gr_Kind_Venom) {
+        gobj = Ground_GetMapGObj(8);
         if (gobj != NULL) {
             return true;
         }
@@ -2755,7 +2766,7 @@ bool grCorneria_801E2D14(void)
 
 bool grCorneria_801E2D90(enum_t line_id)
 {
-    if (stage_info.internal_stage_id == CORNERIA && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_Corneria && line_id != -1) {
         s32 joint = mpJointFromLine(line_id);
         s32 result;
 
@@ -2771,7 +2782,7 @@ bool grCorneria_801E2D90(enum_t line_id)
 
 bool grCorneria_801E2E50(int line_id)
 {
-    if (stage_info.internal_stage_id == CORNERIA && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_Corneria && line_id != -1) {
         if (mpJointFromLine(line_id) == 4) {
             return true;
         }
@@ -2784,7 +2795,7 @@ f32 grCorneria_801E2EA0(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    gobj = Ground_801C2BA4(3);
+    gobj = Ground_GetMapGObj(3);
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);
         if (gp != NULL) {
@@ -2799,10 +2810,6 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
-extern const f32 grCn_804DB260;
-extern const f32 grCn_804DB264;
-extern const f32 grCn_804DB268;
-
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
@@ -2812,15 +2819,17 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     float temp_f31_2;
 
     lb_8000B1CC(jobj, NULL, &sp14);
-    temp_r3 = Ground_801C2BA4(3);
+    temp_r3 = Ground_GetMapGObj(3);
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
         if (temp_r3_2 != NULL && temp_r3_2->u.corneria.x12C == jobj) {
-            temp_f31 = grCn_804DB264 * Ground_801C0498();
-            temp_f31_2 = ((v->y - sp14.y) *
-                          ((grCn_804DB260 * Ground_801C0498()) / temp_f31)) +
-                         sp14.x;
-            if (v->x > -((grCn_804DB260 * Ground_801C0498()) - temp_f31_2)) {
+            /// @todo float order hack
+            (void) 107.0f;
+            temp_f31 = 106.0f * Ground_801C0498();
+            temp_f31_2 =
+                ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
+                sp14.x;
+            if (v->x > -((107.0f * Ground_801C0498()) - temp_f31_2)) {
                 return false;
             }
         }
@@ -2836,18 +2845,12 @@ f32 grCorneria_801E2FCC(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    gobj = Ground_801C2BA4(3);
+    gobj = Ground_GetMapGObj(3);
     if (gobj != NULL) {
         gp = gobj->user_data;
         if (gp != NULL) {
             return (Ground_801C0498() * -35.0f - gp->u.corneria.xD0) + 5.0f;
         }
     }
-    return grCn_804DB268;
+    return -3.4028235e38f;
 }
-
-/// Defined after all readers so MWCC loads the named symbols instead of
-/// folding the values back into the literal pool.
-const f32 grCn_804DB260 = 107.0f;
-const f32 grCn_804DB264 = 106.0f;
-const f32 grCn_804DB268 = -3.4028235e38f;

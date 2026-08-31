@@ -194,7 +194,7 @@ void ftDr_Init_OnLoad(HSD_GObj* gobj)
     items = fp->ft_data->x48_items;
     ftMr_Init_OnLoadForDrMario(fp);
     sa = fp->dat_attrs;
-    it_8026B3F8(items[1], 0x31);
+    it_8026B3F8(items[1], It_Kind_DrMario_Vitamin);
     it_8026B3F8(items[3], sa->x14);
 }
 

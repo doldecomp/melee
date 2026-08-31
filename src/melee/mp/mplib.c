@@ -29,7 +29,6 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <stddef.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
@@ -62,7 +61,7 @@ struct mpLib_803BF248_t_x4 {
 };
 
 struct mpLib_803BF248_t {
-    InternalStageId id;
+    GrKind id;
     struct mpLib_803BF248_t_x4* (*x4)[20];
 };
 
@@ -74,6 +73,11 @@ struct mpLib_803BF248_t {
                                             float* int_y);
 /* 4D64B0 */ static bool didCheckBounding;
 /* 4D64B4 */ static MapCollData* mpLib_804D64B4;
+
+static size_t const groundCollVtx_count = 2048;
+static size_t const groundCollLine_count = 1536;
+static size_t const groundCollJoint_count = 256;
+
 /* 4D64B8 */ static CollVtx* groundCollVtx;
 /* 4D64BC */ static CollLine* groundCollLine;
 /* 4D64C0 */ static CollJoint* groundCollJoint;
@@ -730,81 +734,79 @@ static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
     &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 
-/// clang-format off
 static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
-    { InternalStageID_Unk00, &mpLib_803BDC18 },
-    { TEST, &mpLib_803BDC68 },
-    { CASTLE, &mpLib_803BDCB8 },
-    { RCRUISE, &mpLib_803BDD08 },
-    { KONGO, &mpLib_803BDD58 },
-    { GARDEN, &mpLib_803BDDA8 },
-    { GREATBAY, &mpLib_803BDDF8 },
-    { SHRINE, &mpLib_803BDE48 },
-    { ZEBES, &mpLib_803BDE98 },
-    { KRAID, &mpLib_803BDEE8 },
-    { STORY, &mpLib_803BDF38 },
-    { YORSTER, &mpLib_803BDF88 },
-    { IZUMI, &mpLib_803BDFD8 },
-    { GREENS, &mpLib_803BE028 },
-    { CORNERIA, &mpLib_803BE078 },
-    { VENOM, &mpLib_803BE0C8 },
-    { PSTADIUM, &mpLib_803BE118 },
-    { PURA, &mpLib_803BE168 },
-    { MUTECITY, &mpLib_803BE1B8 },
-    { BIGBLUE, &mpLib_803BE208 },
-    { ONETT, &mpLib_803BE258 },
-    { FOURSIDE, &mpLib_803BE2A8 },
-    { ICEMTN, &mpLib_803BE2F8 },
-    { InternalStageID_Unk23, &mpLib_803BE348 },
-    { INISHIE1, &mpLib_803BE398 },
-    { INISHIE2, &mpLib_803BE3E8 },
-    { InternalStageID_Unk26, &mpLib_803BE438 },
-    { FLATZONE, &mpLib_803BE488 },
-    { OLDPUPUPU, &mpLib_803BE4D8 },
-    { OLDYOSHI, &mpLib_803BE528 },
-    { OLDKONGO, &mpLib_803BE578 },
-    { KINOKOROUTE, &mpLib_803BE5C8 },
-    { SHRINEROUTE, &mpLib_803BE618 },
-    { ZEBESROUTE, &mpLib_803BE668 },
-    { BIGBLUEROUTE, &mpLib_803BE6B8 },
-    { InternalStageID_Unk35, &mpLib_803BE708 },
-    { BATTLE, &mpLib_803BE758 },
-    { LAST, &mpLib_803BE7A8 },
-    { FIGUREGET, &mpLib_803BE7F8 },
-    { PUSHON, &mpLib_803BE848 },
-    { TMARIO, &mpLib_803BE898 },
-    { TCAPTAIN, &mpLib_803BE8E8 },
-    { TCLINK, &mpLib_803BE938 },
-    { TDONKEY, &mpLib_803BE988 },
-    { TDRMARIO, &mpLib_803BE9D8 },
-    { TFALCO, &mpLib_803BEA28 },
-    { TFOX, &mpLib_803BEA78 },
-    { TICECLIMBER, &mpLib_803BEAC8 },
-    { TKIRBY, &mpLib_803BEB18 },
-    { TKOOPA, &mpLib_803BEB68 },
-    { TLINK, &mpLib_803BEBB8 },
-    { TLUIGI, &mpLib_803BEC08 },
-    { TMARS, &mpLib_803BEC58 },
-    { TMEWTWO, &mpLib_803BECA8 },
-    { TNESS, &mpLib_803BECF8 },
-    { TPEACH, &mpLib_803BED48 },
-    { TPICHU, &mpLib_803BED98 },
-    { TPIKACHU, &mpLib_803BEDE8 },
-    { TPURIN, &mpLib_803BEE38 },
-    { TSAMUS, &mpLib_803BEE88 },
-    { TSEAK, &mpLib_803BEED8 },
-    { TYOSHI, &mpLib_803BEF28 },
-    { TZELDA, &mpLib_803BEF78 },
-    { TGAMEWATCH, &mpLib_803BEFC8 },
-    { TEMBLEM, &mpLib_803BF018 },
-    { TGANON, &mpLib_803BF068 },
-    { HEAL, &mpLib_803BF0B8 },
-    { HOMERUN, &mpLib_803BF108 },
-    { FIGURE1, &mpLib_803BF158 },
-    { FIGURE2, &mpLib_803BF1A8 },
-    { FIGURE3, &mpLib_803BF1F8 },
+    { Gr_Kind_Unk00, &mpLib_803BDC18 },
+    { Gr_Kind_Test, &mpLib_803BDC68 },
+    { Gr_Kind_Castle, &mpLib_803BDCB8 },
+    { Gr_Kind_RCruise, &mpLib_803BDD08 },
+    { Gr_Kind_Kongo, &mpLib_803BDD58 },
+    { Gr_Kind_Garden, &mpLib_803BDDA8 },
+    { Gr_Kind_GreatBay, &mpLib_803BDDF8 },
+    { Gr_Kind_Shrine, &mpLib_803BDE48 },
+    { Gr_Kind_Zebes, &mpLib_803BDE98 },
+    { Gr_Kind_Kraid, &mpLib_803BDEE8 },
+    { Gr_Kind_Story, &mpLib_803BDF38 },
+    { Gr_Kind_Yorster, &mpLib_803BDF88 },
+    { Gr_Kind_Izumi, &mpLib_803BDFD8 },
+    { Gr_Kind_Greens, &mpLib_803BE028 },
+    { Gr_Kind_Corneria, &mpLib_803BE078 },
+    { Gr_Kind_Venom, &mpLib_803BE0C8 },
+    { Gr_Kind_PStadium, &mpLib_803BE118 },
+    { Gr_Kind_Pura, &mpLib_803BE168 },
+    { Gr_Kind_MuteCity, &mpLib_803BE1B8 },
+    { Gr_Kind_BigBlue, &mpLib_803BE208 },
+    { Gr_Kind_Onett, &mpLib_803BE258 },
+    { Gr_Kind_Fourside, &mpLib_803BE2A8 },
+    { Gr_Kind_Icemt, &mpLib_803BE2F8 },
+    { Gr_Kind_Unk23, &mpLib_803BE348 },
+    { Gr_Kind_Inishie1, &mpLib_803BE398 },
+    { Gr_Kind_Inishie2, &mpLib_803BE3E8 },
+    { Gr_Kind_Unk26, &mpLib_803BE438 },
+    { Gr_Kind_Flatzone, &mpLib_803BE488 },
+    { Gr_Kind_OldPupupu, &mpLib_803BE4D8 },
+    { Gr_Kind_OldYoshi, &mpLib_803BE528 },
+    { Gr_Kind_OldKongo, &mpLib_803BE578 },
+    { Gr_Kind_KinokoRoute, &mpLib_803BE5C8 },
+    { Gr_Kind_ShrineRoute, &mpLib_803BE618 },
+    { Gr_Kind_ZebesRoute, &mpLib_803BE668 },
+    { Gr_Kind_BigBlueRoute, &mpLib_803BE6B8 },
+    { Gr_Kind_Unk35, &mpLib_803BE708 },
+    { Gr_Kind_Battle, &mpLib_803BE758 },
+    { Gr_Kind_Last, &mpLib_803BE7A8 },
+    { Gr_Kind_FigureGet, &mpLib_803BE7F8 },
+    { Gr_Kind_Pushon, &mpLib_803BE848 },
+    { Gr_Kind_TMario, &mpLib_803BE898 },
+    { Gr_Kind_TCaptain, &mpLib_803BE8E8 },
+    { Gr_Kind_TClink, &mpLib_803BE938 },
+    { Gr_Kind_TDonkey, &mpLib_803BE988 },
+    { Gr_Kind_TDrmario, &mpLib_803BE9D8 },
+    { Gr_Kind_TFalco, &mpLib_803BEA28 },
+    { Gr_Kind_TFox, &mpLib_803BEA78 },
+    { Gr_Kind_TIceclimber, &mpLib_803BEAC8 },
+    { Gr_Kind_TKirby, &mpLib_803BEB18 },
+    { Gr_Kind_TKoopa, &mpLib_803BEB68 },
+    { Gr_Kind_TLink, &mpLib_803BEBB8 },
+    { Gr_Kind_TLuigi, &mpLib_803BEC08 },
+    { Gr_Kind_TMars, &mpLib_803BEC58 },
+    { Gr_Kind_TMewtwo, &mpLib_803BECA8 },
+    { Gr_Kind_TNess, &mpLib_803BECF8 },
+    { Gr_Kind_TPeach, &mpLib_803BED48 },
+    { Gr_Kind_TPichu, &mpLib_803BED98 },
+    { Gr_Kind_TPikachu, &mpLib_803BEDE8 },
+    { Gr_Kind_TPurin, &mpLib_803BEE38 },
+    { Gr_Kind_TSamus, &mpLib_803BEE88 },
+    { Gr_Kind_TSeak, &mpLib_803BEED8 },
+    { Gr_Kind_TYoshi, &mpLib_803BEF28 },
+    { Gr_Kind_TZelda, &mpLib_803BEF78 },
+    { Gr_Kind_TGamewatch, &mpLib_803BEFC8 },
+    { Gr_Kind_TEmblem, &mpLib_803BF018 },
+    { Gr_Kind_TGanon, &mpLib_803BF068 },
+    { Gr_Kind_Heal, &mpLib_803BF0B8 },
+    { Gr_Kind_Homerun, &mpLib_803BF108 },
+    { Gr_Kind_Figure1, &mpLib_803BF158 },
+    { Gr_Kind_Figure2, &mpLib_803BF1A8 },
+    { Gr_Kind_Figure3, &mpLib_803BF1F8 },
 };
-/// clang-format on
 
 extern Vec2 mpLib_803BF718[2];
 extern MapLine mpLib_803BF728;
@@ -837,7 +839,7 @@ void mpPruneEmptyLines(MapCollData* coll_data)
     Vec2* verts = coll_data->verts;
     int i;
 
-    if (stage_info.internal_stage_id == PURA) {
+    if (stage_info.grkind == Gr_Kind_Pura) {
         return;
     }
 
@@ -897,11 +899,13 @@ void mpLibLoad(MapCollData* coll_data)
     int i;
 
     joint_prev = NULL;
-    groundCollVtx = HSD_MemAlloc(0xC000);
+    groundCollVtx = HSD_MemAlloc(sizeof(*groundCollVtx) * groundCollVtx_count);
     HSD_ASSERT(412, groundCollVtx);
-    groundCollLine = HSD_MemAlloc(0x3000);
+    groundCollLine =
+        HSD_MemAlloc(sizeof(*groundCollLine) * groundCollLine_count);
     HSD_ASSERT(413, groundCollLine);
-    groundCollJoint = HSD_MemAlloc(0x3400);
+    groundCollJoint =
+        HSD_MemAlloc(sizeof(*groundCollJoint) * groundCollJoint_count);
     HSD_ASSERT(414, groundCollJoint);
     grDynamicAttr_801CA0B4();
     if (coll_data == NULL) {
@@ -1022,6 +1026,7 @@ void mpLibLoad(MapCollData* coll_data)
 int mpLineGetNext(int line_id)
 {
     s16 result = groundCollLine[line_id].x0->next_id1;
+    int ret = result;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -1031,7 +1036,7 @@ int mpLineGetNext(int line_id)
             CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
 
             if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
-                return result;
+                return ret;
             }
         }
     }
@@ -1042,6 +1047,7 @@ int mpLineGetNext(int line_id)
 int mpLineGetPrev(int line_id)
 {
     s16 result = groundCollLine[line_id].x0->prev_id1;
+    int ret = result;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -1051,7 +1057,7 @@ int mpLineGetPrev(int line_id)
             CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
 
             if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
-                return result;
+                return ret;
             }
         }
     }
@@ -1559,24 +1565,26 @@ static inline CollLine* mpLineGetCollLine(int line_id)
     return &groundCollLine[line_id];
 }
 
-static inline float* mpVtxGetYBase(void)
-{
-    return &groundCollVtx[0].pos.y;
-}
-
 void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
                     float* y1_out)
 {
     bool calculated_distance = false;
     CollLine* line = mpLineGetCollLine(line_id);
-    float* x_base = &groundCollVtx[0].pos.x;
-    float* y_base = mpVtxGetYBase();
 
-    float x0_f0 = x_base[line->x0->v0_idx * 6];
-    float y0_f1 = y_base[line->x0->v0_idx * 6];
-    float x1_f2 = x_base[line->x0->v1_idx * 6];
-    float y1_f3 = y_base[line->x0->v1_idx * 6];
+    int i0;
+    int i1;
+    float x0_f0;
+    float y0_f1;
+    float x1_f2;
+    float y1_f3;
     float distance;
+
+    i0 = line->x0->v0_idx;
+    x0_f0 = groundCollVtx[i0].pos.x;
+    y0_f1 = groundCollVtx[i0].pos.y;
+    i1 = line->x0->v1_idx;
+    x1_f2 = groundCollVtx[i1].pos.x;
+    y1_f3 = groundCollVtx[i1].pos.y;
 
     if (mpLineGetPrev(line_id) != -1) {
         distance = sqrtf(SQ(x0_f0 - x1_f2) + SQ(y0_f1 - y1_f3));
@@ -3927,8 +3935,13 @@ int mpLib_800534FC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetNextCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->next_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetNextCheckResultFirst(line->next_id1, line);
+#endif
             continue;
         }
         break;
@@ -3992,8 +4005,13 @@ int mpLib_800536CC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetPrevCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->prev_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
+#endif
             continue;
         }
         break;
@@ -4030,8 +4048,13 @@ int mpLib_80053A04_Ceiling(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetPrevCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->prev_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
+#endif
             continue;
         }
         break;
@@ -4124,231 +4147,315 @@ static inline u32 mpLineGetKindInline(int line_id)
 void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4465, line_id);
 
-    new_id = line_id;
+    w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-    do {
-        MapLine* line;
-        line_offset = new_id * sizeof(CollLine);
-        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
-    } while (new_id != -1 &&
-             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->next_id1;
+    w.id = mpLineGetNextCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v1_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpFloorGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4474, line_id);
 
-    new_id = line_id;
+    w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-    while (true) {
-        MapLine* line;
-        line_offset = new_id * sizeof(CollLine);
-        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInline(line, new_id);
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            break;
-        }
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->prev_id1;
+    w.id = mpLineGetPrevCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
-
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
     }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v0_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpCeilingGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4483, line_id);
 
     if (line_id != -1) {
     }
-    kind = mpLineGetKindInline(line_id);
-    new_id = line_id;
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    kind = mpLineGetKindInline(line_id);
+    w.id = line_id;
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->prev_id1;
+    w.id = mpLineGetPrevCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v0_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4492, line_id);
 
     if (line_id != -1) {
     }
-    new_id = line_id;
-    kind = mpLineGetKindInline(line_id);
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    w.id = line_id;
+    kind = mpLineGetKindInline(line_id);
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->next_id1;
+    w.id = mpLineGetNextCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v1_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4501, line_id);
 
     if (line_id != -1) {
     }
-    new_id = line_id;
-    kind = mpLineGetKindInline(line_id);
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    w.id = line_id;
+    kind = mpLineGetKindInline(line_id);
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->next_id1;
+    w.id = mpLineGetNextCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v1_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4510, line_id);
 
     if (line_id != -1) {
     }
-    kind = mpLineGetKindInline(line_id);
-    new_id = line_id;
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    kind = mpLineGetKindInline(line_id);
+    w.id = line_id;
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->prev_id1;
+    w.id = mpLineGetPrevCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v0_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpRightWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4519, line_id);
 
     if (line_id != -1) {
     }
-    new_id = line_id;
-    kind = mpLineGetKindInline(line_id);
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    w.id = line_id;
+    kind = mpLineGetKindInline(line_id);
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->prev_id1;
+    w.id = mpLineGetPrevCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v0_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
     int line_offset;
-    int new_id;
+    struct {
+        int id;
+    } w;
     u32 kind;
 
     LINEID_CHECK(4528, line_id);
 
     if (line_id != -1) {
     }
-    new_id = line_id;
-    kind = mpLineGetKindInline(line_id);
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
-    {
-        CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
-        pos_out->x = vtx->pos.x;
-        pos_out->y = vtx->pos.y;
-        pos_out->z = 0.0F;
+    w.id = line_id;
+    kind = mpLineGetKindInline(line_id);
+again: {
+    MapLine* line;
+    int next;
+    line = ((CollLine*) ((int) groundCollLine + w.id * sizeof(CollLine)))->x0;
+    line_offset = w.id * sizeof(CollLine);
+    next = line->next_id1;
+    w.id = mpLineGetNextCheckInline(line, next);
+}
+    if (w.id == -1) {
+        goto done;
     }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done: {
+    CollVtx* vtx =
+        &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                           ->x0->v1_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
+    pos_out->z = 0.0F;
+}
 }
 
 void mpLineGetV1Pos(int line_id, Vec3* pos_out)
@@ -4433,7 +4540,7 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
-static inline int mpLineGetNextFrom(MapLine* line, u32* flags_base)
+static inline int mpLineGetNextFrom(MapLine* line, const u32* flags_base)
 {
     int result = line->next_id1;
 
@@ -4453,7 +4560,7 @@ static inline int mpLineGetNextFrom(MapLine* line, u32* flags_base)
     return line->next_id0;
 }
 
-static inline int mpLineGetPrevFrom(MapLine* line, u32* flags_base)
+static inline int mpLineGetPrevFrom(MapLine* line, const u32* flags_base)
 {
     int result = line->prev_id1;
 
@@ -5036,7 +5143,7 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
     speed->x = new_x - pos->x;
     speed->y = new_y - pos->y;
     speed->z = 0.0F;
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         if (ABS(speed->x) > 10000.0F || ABS(speed->y) > 10000.0F) {
             OSReport("%s:%d: Error: mpGetSpeed() x=%f y=%f\n", __FILE__, 5333,
                      speed->x, speed->y);
@@ -5050,13 +5157,13 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 
 float mpLib_800569EC(u32 unk)
 {
-    return (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) unk]->x0;
+    return (*mpLib_803BF248[stage_info.grkind].x4)[(u8) unk]->x0;
 }
 
 int* mpLib_80056A1C(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x14[0];
     return temp->x4;
 }
@@ -5064,7 +5171,7 @@ int* mpLib_80056A1C(int arg0, int* arg1)
 int mpLib_80056A54(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x14[2];
     return temp->x14[1];
 }
@@ -5072,7 +5179,7 @@ int mpLib_80056A54(int arg0, int* arg1)
 int* mpLib_80056A8C(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x30[0];
     return temp->x20;
 }
@@ -5080,7 +5187,7 @@ int* mpLib_80056A8C(int arg0, int* arg1)
 int mpLib_80056AC4(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x30[2];
     return temp->x30[1];
 }
@@ -5088,7 +5195,7 @@ int mpLib_80056AC4(int arg0, int* arg1)
 int* mpLib_80056AFC(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x4C[0];
     return temp->x3C;
 }
@@ -5096,7 +5203,7 @@ int* mpLib_80056AFC(int arg0, int* arg1)
 int mpLib_80056B34(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x4C[2];
     return temp->x4C[1];
 }
@@ -5234,7 +5341,7 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
         }
     }
     if (line_id != -1) {
-        if (!(mpLineGetKind(line_id) & 1)) {
+        if (!(mpLineGetKind(line_id) & CollLine_Floor)) {
             line_id = -1;
         }
     }
@@ -5570,65 +5677,66 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     CollJoint* j0_r9;
     CollJoint* j1_r10;
     CollLine* line_base;
+    int vi;
     int i;
-    MapJoint* cd0;
-    int vstart0;
     int vcount0;
+    int vstart0;
+    struct {
+        CollLine* p;
+    } ln;
 
-    {
-        CollJoint* joint = &groundCollJoint[joint_id0];
-        j0_r9 = joint;
-    }
-    {
-        CollJoint* joint = &groundCollJoint[joint_id1];
-        j1_r10 = joint;
-    }
+    j0_r9 = &groundCollJoint[joint_id0];
+    j1_r10 = &groundCollJoint[joint_id1];
     line_base = groundCollLine;
     for (i = 0; i < 5; i++) {
-        int j;
-        int idx;
         struct pair* pair; /* r4 */
         int count;         /* r0 */
         int temp;          /* r0 */
-        CollLine* lines;   /* r5 */
-
-        pair = (struct pair*) j0_r9->inner + i;
-        count = pair->count;
-        lines = &line_base[idx = pair->start];
-        for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->next_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+        {
+            int j;
+            int idx;
+            pair = (struct pair*) j0_r9->inner + i;
+            count = pair->count;
+            (void) line_base[idx = pair->start];
+            ln.p = &line_base[idx];
+            for (j = 0; j < count; j++, idx++) {
+                temp = ln.p[j].x0->prev_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->next_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->prev_id1 = -1;
+                    }
                 }
-            }
-            temp = lines[j].x0->next_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->prev_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                temp = ln.p[j].x0->next_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->prev_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->next_id1 = -1;
+                    }
                 }
             }
         }
-
-        pair = (struct pair*) j1_r10->inner + i;
-        count = pair->count;
-        idx = pair->start;
-        lines = &line_base[idx];
-        for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->next_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+        {
+            int j;
+            int idx;
+            pair = (struct pair*) j1_r10->inner + i;
+            count = pair->count;
+            (void) line_base[idx = pair->start];
+            ln.p = &line_base[idx];
+            for (j = 0; j < count; j++, idx++) {
+                temp = ln.p[j].x0->prev_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->next_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->prev_id1 = -1;
+                    }
                 }
-            }
-            temp = lines[j].x0->next_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->prev_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                temp = ln.p[j].x0->next_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->prev_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->next_id1 = -1;
+                    }
                 }
             }
         }
@@ -5637,23 +5745,14 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     mpLib_GetJointVtxRange(j0_r9, &vstart0, &vcount0);
 
     // for every pair of verts
-    for (i = 0; i < vcount0; i++, vstart0++) {
+    for (vi = 0; vi < vcount0; vi++, vstart0++) {
         CollVtx* v0_r29;
         int v;       /* r28 */
         int vcount1; /* r27 */
         int vid_r26; /* r26 */
-        int vstart1_r4;
-        MapJoint* cd1 = j1_r10->inner;
-        {
-            CollVtx* vtx = &groundCollVtx[vstart0];
-            v0_r29 = vtx;
-        }
-        {
-            int start = cd1->vtx_start;
-            vstart1_r4 = start;
-        }
-        vcount1 = cd1->vtx_count;
-        vid_r26 = vstart1_r4;
+        v0_r29 = &groundCollVtx[vstart0];
+        vcount1 = j1_r10->inner->vtx_count;
+        vid_r26 = j1_r10->inner->vtx_start;
         for (v = 0; v < vcount1; v++, vid_r26++) {
             int var_r25;
             CollVtx* v1 = &groundCollVtx[vid_r26];
@@ -5667,58 +5766,62 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
             // find every line with the first vert
             for (var_r25 = 0; var_r25 < 5; var_r25++) {
-                int i_r23;
                 int lstart_r24;
+                int i_r23;
                 int lcount_r22;
-                CollLine* lines; /* r5 */
-                lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
-                (void) lstart_r24;
                 lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
-                lines = &line_base[lstart_r24];
-                for (i_r23 = 0; i_r23 < lcount_r22;
-                     i_r23++, lines++, lstart_r24++)
-                {
-                    int j;
-                    s16 lstart_r20;
-                    s16 lcount_r17;
-                    CollLine* iter_r3;
-                    if (vstart0 == lines->x0->v0_idx) {
+                (void) line_base[lstart_r24 =
+                                     ((struct pair*) j0_r9->inner)[var_r25]
+                                         .start];
+                for (i_r23 = 0; i_r23 < lcount_r22; i_r23++, lstart_r24++) {
+                    if (vstart0 == line_base[lstart_r24].x0->v0_idx) {
+                        int j;
+                        int lstart_r20;
+                        s16 lcount_r17;
                         // if the first vert is that line's v0
                         // find every line with the second vert as v1
                         for (j = 0; j < 5; j++) {
                             int k;
-                            lstart_r20 =
-                                ((struct pair*) j1_r10->inner)[j].start;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            iter_r3 = &line_base[lstart_r20];
-                            for (k = 0; k < lcount_r17; k++) {
-                                if (vid_r26 == iter_r3->x0->v1_idx) {
-                                    lines->x0->prev_id1 = lstart_r20 + k;
-                                    iter_r3->x0->next_id1 = lstart_r24;
+                            (void)
+                                line_base[lstart_r20 =
+                                              ((struct pair*) j1_r10->inner)[j]
+                                                  .start];
+                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
+                                if (vid_r26 ==
+                                    line_base[lstart_r20].x0->v1_idx)
+                                {
+                                    line_base[lstart_r24].x0->prev_id1 =
+                                        lstart_r20;
+                                    line_base[lstart_r20].x0->next_id1 =
+                                        lstart_r24;
                                 }
-                                iter_r3++;
                             }
                         }
-                    } else if (vstart0 == lines->x0->v1_idx) {
+                    } else if (vstart0 == line_base[lstart_r24].x0->v1_idx) {
+                        int j;
+                        int lstart_r20;
+                        s16 lcount_r17;
                         // else if the first vert is that line's v1
                         // find every line with the second vert as v0
                         for (j = 0; j < 5; j++) {
                             int k;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            {
-                                s16 start =
-                                    ((struct pair*) j1_r10->inner)[j].start;
-                                lstart_r20 = start;
-                            }
-                            iter_r3 = &line_base[lstart_r20];
-                            for (k = 0; k < lcount_r17; k++) {
-                                if (vid_r26 == iter_r3->x0->v0_idx) {
-                                    lines->x0->next_id1 = lstart_r20 + k;
-                                    iter_r3->x0->prev_id1 = lstart_r24;
+                            (void)
+                                line_base[lstart_r20 =
+                                              ((struct pair*) j1_r10->inner)[j]
+                                                  .start];
+                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
+                                if (vid_r26 ==
+                                    line_base[lstart_r20].x0->v0_idx)
+                                {
+                                    line_base[lstart_r24].x0->next_id1 =
+                                        lstart_r20;
+                                    line_base[lstart_r20].x0->prev_id1 =
+                                        lstart_r24;
                                 }
-                                iter_r3++;
                             }
                         }
                     }
@@ -5754,17 +5857,29 @@ void mpLib_80058560(void)
 void mpLib_80058614_Floor(void)
 {
     // CollLine* var_r31;
-    CollJoint* joint_r7;
+    CollJoint* jp;
     int count_r8;
     int count_r5;
     int i;
     int j;
+    CollLine* linebase;
+    CollLine* line_r31;
+    int count_r30;
+    int count_r29;
+    MapJoint* j_inner;
+    CollVtx* v0;
+    CollVtx* v1;
+    float* top_p;
+    float* bottom_p;
+    float* right_p;
+    float* left_p;
+    CollJoint* joint_r7;
     PAD_STACK(8);
 
-    joint_r7 = groundCollJoint;
+    jp = (joint_r7 = groundCollJoint);
     count_r8 = mpLib_804D64B4->joint_count;
-    for (count_r5 = 0; count_r5 < count_r8; count_r5++) {
-        if (joint_r7[count_r5].xE) {
+    for (count_r5 = 0; count_r5 < count_r8; count_r5++, jp++) {
+        if (jp->xE) {
             break;
         }
     }
@@ -5773,10 +5888,10 @@ void mpLib_80058614_Floor(void)
         return;
     }
 
-    mpLib_80458868[1].right = -F32_MAX;
-    mpLib_80458868[1].top = -F32_MAX;
-    mpLib_80458868[1].left = F32_MAX;
-    mpLib_80458868[1].bottom = F32_MAX;
+    *(right_p = &mpLib_80458868[1].right) = -F32_MAX;
+    *(top_p = &mpLib_80458868[1].top) = -F32_MAX;
+    *(left_p = &mpLib_80458868[1].left) = F32_MAX;
+    *(bottom_p = &mpLib_80458868[1].bottom) = F32_MAX;
 
     for (i = 0; i < count_r8; i++, joint_r7++) {
         joint_r7->xE = false;
@@ -5787,17 +5902,13 @@ void mpLib_80058614_Floor(void)
         }
 
         {
-            CollLine* line_r31;
-            int count_r30;
-            int count_r29;
-            MapJoint* j_inner = joint_r7->inner;
-            line_r31 = &groundCollLine[j_inner->floor_start];
-            count_r30 = j_inner->floor_count;
+            j_inner = joint_r7->inner;
             count_r29 = j_inner->dynamic_count;
+            (void) groundCollVtx[count_r30 = j_inner->floor_count];
+            linebase = groundCollLine;
+            line_r31 = &linebase[j_inner->floor_start];
 
             for (j = 0; j < count_r30; j++, line_r31++) {
-                CollVtx* v0;
-                CollVtx* v1;
                 float x0;
                 float y0;
                 float x1;
@@ -5817,36 +5928,36 @@ void mpLib_80058614_Floor(void)
                 x1 = v1->pos.x;
                 y1 = v1->pos.y;
 
-                if (mpLib_80458868[1].top < y0) {
-                    mpLib_80458868[1].top = y0;
+                if (*top_p < y0) {
+                    *top_p = y0;
                 }
-                if (mpLib_80458868[1].bottom > y0) {
-                    mpLib_80458868[1].bottom = y0;
+                if (*bottom_p > y0) {
+                    *bottom_p = y0;
                 }
-                if (mpLib_80458868[1].right < x0) {
-                    mpLib_80458868[1].right = x0;
+                if (*right_p < x0) {
+                    *right_p = x0;
                 }
-                if (mpLib_80458868[1].left > x0) {
-                    mpLib_80458868[1].left = x0;
+                if (*left_p > x0) {
+                    *left_p = x0;
                 }
-                if (mpLib_80458868[1].top < y1) {
-                    mpLib_80458868[1].top = y1;
+                if (*top_p < y1) {
+                    *top_p = y1;
                 }
-                if (mpLib_80458868[1].bottom > y1) {
-                    mpLib_80458868[1].bottom = y1;
+                if (*bottom_p > y1) {
+                    *bottom_p = y1;
                 }
-                if (mpLib_80458868[1].right < x1) {
-                    mpLib_80458868[1].right = x1;
+                if (*right_p < x1) {
+                    *right_p = x1;
                 }
-                if (mpLib_80458868[1].left > x1) {
-                    mpLib_80458868[1].left = x1;
+                if (*left_p > x1) {
+                    *left_p = x1;
                 }
             }
             if (count_r29 != 0) {
                 count_r30 = count_r29;
                 j = 0;
                 count_r29 = 0;
-                line_r31 = &groundCollLine[joint_r7->inner->dynamic_start];
+                line_r31 = &linebase[joint_r7->inner->dynamic_start];
                 goto block_8;
             }
         }
@@ -6282,7 +6393,14 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-int mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
+#ifdef MUST_MATCH
+#define UNINITIALIZED(x) x
+#else
+#define UNINITIALIZED(x) void
+#endif
+
+static UNINITIALIZED(int)
+    mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
     CollLine* line_r31;
     int count_r28;
@@ -6759,25 +6877,19 @@ void mpLib_80059E60(void)
 void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 {
     Vec3 sp34;
-    s16* idx_ptr;
-    Vec3* out_vtx;
     int i;
     Vec3* vtx;
     int idx_i;
     int out_count;
-    PAD_STACK(4);
 
-    out_vtx = (vtx = mpLib_80458888);
-    for (idx_ptr = &idx[idx_i = 0], out_count = 0;
+    for (idx_i = 0, out_count = 0;
          idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
          idx_i++)
     {
-        if (Ground_801C2D24(*idx_ptr, &sp34)) {
+        if (Ground_801C2D24(idx[idx_i], &sp34)) {
+            mpLib_80458888[out_count] = sp34;
             out_count += 1;
-            *out_vtx = sp34;
-            out_vtx++;
         }
-        idx_ptr += 1;
     }
 
     if (!out_count) {
@@ -6787,14 +6899,20 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     mpLib_SetupDraw(arg2);
     GXBegin(GX_LINES, GX_VTXFMT0, out_count * 6);
     for (i = 0; i < out_count; i++) {
-        GXPosition3f32(vtx->x - 3.0F, vtx->y, vtx->z);
-        GXPosition3f32(3.0F + vtx->x, vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y - 3.0F, vtx->z);
-        GXPosition3f32(vtx->x, 3.0F + vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y, vtx->z - 3.0F);
-        GXPosition3f32(vtx->x, vtx->y, 3.0F + vtx->z);
-        vtx++;
+        GXPosition3f32(mpLib_80458888[i].x - 3.0F, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(3.0F + mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y - 3.0F,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, 3.0F + mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z - 3.0F);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       3.0F + mpLib_80458888[i].z);
     }
+    GXEnd();
 }
 
 static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
@@ -7000,16 +7118,16 @@ void mpLib_DrawZones(void)
         if (Camera_8002928C(var_r30)) {
             GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.y,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.y,
-                           var_r30->x10.y + var_r30->x34.y, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.y, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
+                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
 
             GXEnd();
         }

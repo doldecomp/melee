@@ -1,14 +1,16 @@
 #include "ftSs_SpecialN.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -27,7 +29,7 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
@@ -83,7 +85,8 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
         vec2.x = 0;
         lb_8000B1CC(fp->parts[FtPart_RHandNb].joint, &vec2, &vec1);
         vec1.z = 0;
-        result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, 94, fp->facing_dir);
+        result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, It_Kind_Samus_Charge,
+                             fp->facing_dir);
         fp->u.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);
@@ -450,6 +453,5 @@ static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
         efSync_Spawn(1155, gobj, spawnlocation);
         fp->x2219_b0 = 1;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }

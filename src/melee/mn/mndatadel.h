@@ -1,8 +1,6 @@
 #ifndef MELEE_MN_DATADEL_H
 #define MELEE_MN_DATADEL_H
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 /* 24E940 */ void mnDataDel_8024E940(void);

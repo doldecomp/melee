@@ -3,7 +3,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
@@ -12,8 +16,6 @@
 #include "pl/player.h"
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
-
-#include <common_structs.h>
 
 #define FTFOX_APPEALS_ATTACKID 0x72
 
@@ -64,15 +66,13 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-static float setFloatOrder(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return 0.0f;
+    (void) 0.0f;
+    (void) 1.0f;
 }
-
-static float setFloatOrder2(void)
-{
-    return 1.0f;
-}
+#endif
 
 static inline bool ftFox_AppealS_GetLR(float x1, float x2)
 {
@@ -127,6 +127,8 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
                 fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
+            break;
+        default:
             break;
         }
     }

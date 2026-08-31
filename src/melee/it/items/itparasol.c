@@ -1,19 +1,16 @@
 #include "itparasol.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/// @todo Fix these to be in a single file, not math.h
-#define M_PI 3.14159265358979323846
-static float const deg_to_rad = M_PI / 180;
+static float const deg_to_rad = MTXDegToRad(1);
 
 ItemStateTable it_803F5AB0[] = {
     { -1, itParasol_UnkMotion0_Anim, itParasol_UnkMotion0_Phys,
@@ -74,15 +71,6 @@ void it_8028B17C(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return +x;
-    }
-}
-
 static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
@@ -102,7 +90,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
     if (jobj != NULL) {
         jobj = jobj_child(jobj);
         ry = HSD_JObjGetRotationY(jobj);
-        fm = attrs[2] + fabsf(item->x40_vel.y * attrs[3]);
+        fm = attrs[2] + ABS(item->x40_vel.y * attrs[3]);
         fm *= item->facing_dir;
         ry = deg_to_rad * fm + ry;
         HSD_JObjSetRotationY(jobj, ry);
@@ -110,9 +98,9 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-inline void decelerateItemX(Item* item, f32 decel_x)
+static inline void decelerateItemX(Item* item, f32 decel_x)
 {
-    if (fabsf(item->x40_vel.x) > decel_x) {
+    if (ABS(item->x40_vel.x) > decel_x) {
         if (item->x40_vel.x > decel_x) {
             item->x40_vel.x -= decel_x;
         }

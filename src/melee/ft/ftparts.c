@@ -13,7 +13,6 @@
 #include "ft/forward.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -24,8 +23,6 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <melee/lb/lbrefract.h>
-
-#define MAX_FT_PARTS 140
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
@@ -189,7 +186,10 @@ void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
 
     flags |= ftPartsGetSetupFlags(jobj, rendermode);
 
-    if (flags | SETUP_NORMAL) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_NORMAL)
+#endif
+    {
         GXSetCurrentMtx(GX_PNMTX0);
 
         GXLoadPosMtxImm(pmtx, GX_PNMTX0);
@@ -204,7 +204,10 @@ void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
         }
     }
 
-    if (flags | SETUP_REFLECTION) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_REFLECTION)
+#endif
+    {
         HSD_JObjSetupMatrix(pobj->u.jobj);
         PSMTXConcat(vmtx, pobj->u.jobj->mtx, tmp);
 

@@ -360,7 +360,7 @@ void ftLk_800EAF58(HSD_GObj* gobj)
     ftCl_Init_80149268(gobj);
 }
 
-void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1)
+void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (itIsHeavy(fp->item_gobj) == 1) {

@@ -2,16 +2,15 @@
 
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itanimlist.h"
+#include "it/itdrop.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itzako.h"
 #include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
@@ -30,7 +29,7 @@ void it_802EFA44(Item_GObj* catherine, Vec* pos, float dir)
     Item* eggData;
     PAD_STACK(0x50);
     if (catherine != NULL) {
-        egg = it_8027B5B0(0xEC, pos, 0, 0, 1);
+        egg = it_8027B5B0(It_Kind_Kyasarin_Egg, pos, 0, 0, 1);
         if (egg != NULL) {
             eggData = GET_ITEM((HSD_GObj*) egg);
             eggData->facing_dir = dir;
@@ -90,12 +89,12 @@ void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj)
     Item_ApplyFallingPhysics(gobj);
 }
 
-int itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
+bool itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if (it_8026DA08(gobj) != 0) {
         return it_2725_Logic28_DmgDealt(gobj);
     }
-    return 0;
+    return false;
 }
 
 void it_802EFCC0(Item_GObj* gobj)
@@ -112,9 +111,9 @@ void itKyasarinegg_UnkMotion1_Phys(Item_GObj* gobj)
     Item_ApplyFallingPhysics(gobj);
 }
 
-int itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
+bool itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    it_8026DFB0(gobj);
+    return it_8026DFB0(gobj);
 }
 
 void it_802EFD84(Item_GObj* gobj)
@@ -137,7 +136,7 @@ bool itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj)
     it_802751D8(gobj);
 }
 
-inline bool it_damage_inline(Item_GObj* gobj)
+static inline bool it_damage_inline(Item_GObj* gobj)
 {
     Item* egg = GET_ITEM(gobj);
     itKyasarinEggAttributes* ap;

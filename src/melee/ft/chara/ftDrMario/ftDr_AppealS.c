@@ -4,7 +4,10 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
@@ -30,8 +33,8 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
     if (fp->cmd_vars[0] == 1 && fp->u.mr.x2240 == NULL) {
         lb_8000B1CC(fp->parts->joint, 0, &sp18);
         vitamin_idx = ftMr_SpecialN_VitaminRandom(gobj);
-        tmp = itDrMarioPill_Appeal_Spawn(gobj, &sp18, vitamin_idx, 0x31,
-                                         fp->facing_dir);
+        tmp = itDrMarioPill_Appeal_Spawn(
+            gobj, &sp18, vitamin_idx, It_Kind_DrMario_Vitamin, fp->facing_dir);
         fp->u.mr.x2240 = tmp;
         if (tmp != 0) {
             fp->death2_cb = ftDr_Init_80149540;

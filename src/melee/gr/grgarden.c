@@ -16,7 +16,7 @@
 #include "gr/types.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
@@ -35,7 +35,7 @@ struct grGarden_YakumonoParam {
     float x1C;
 };
 
-StageCallbacks grGd_803E5248[] = {
+StageCallbacks grGd_StageCallbacks[] = {
     { grGarden_80202D60, grGarden_80202D8C, grGarden_80202D94,
       grGarden_80202D98, 0 },
     { grGarden_80203004, grGarden_80203090, grGarden_80203098,
@@ -52,9 +52,9 @@ StageCallbacks grGd_803E5248[] = {
       grGarden_80203000, 0 } // water
 };
 
-StageData grGd_803E52E0 = {
-    GARDEN,
-    grGd_803E5248,
+StageData grGd_StageData = {
+    Gr_Kind_Garden,
+    grGd_StageCallbacks,
     "/GrGd.dat",
     grGarden_80202B70,
     grGarden_80202B6C,
@@ -109,7 +109,7 @@ bool grGarden_80202C70(void)
 HSD_GObj* grGarden_80202C78(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grGd_803E5248[gobj_id];
+    StageCallbacks* callbacks = &grGd_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -245,9 +245,7 @@ void grGarden_80203098(Ground_GObj* gobj)
 {
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
-    if ((grAnime_801C83D0(gobj, 0, 7) != NULL) ||
-        (grAnime_801C84A4(gobj, 0, 7) != NULL))
-    {
+    if (grAnime_801C83D0(gobj, 0, 7) || grAnime_801C84A4(gobj, 0, 7)) {
         if (gp->u.garden.xc8 == 0) {
             gp->u.garden.xc4 = gp->u.garden.xc4 + 1;
             if (3 < gp->u.garden.xc4) {
@@ -298,14 +296,6 @@ void grGarden_802031A4(Ground_GObj* gobj)
 bool grGarden_80203248(Ground_GObj* arg)
 {
     return false;
-}
-
-inline float absoluteValue(float fVar1)
-{
-    if (fVar1 < 0.0f) {
-        fVar1 = -fVar1;
-    }
-    return fVar1;
 }
 
 void grGarden_80203250(Ground_GObj* gobj)
@@ -380,7 +370,7 @@ bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
         if (previous.y > dVar3) {
             dVar3 = ftLib_80086B80(player) / 10.0f;
             current.y = -30.0f;
-            grGarden_80203560((dVar3), &current);
+            grGarden_80203560(dVar3, &current);
             Ground_801C53EC(410000);
         }
         uVar1 = true;

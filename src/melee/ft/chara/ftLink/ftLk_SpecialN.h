@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
 #include "ftLink/forward.h"
-#include <baselib/forward.h>
 
 /* 0ECBC4 */ ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(Fighter_GObj* gobj);
 /* 0ECC0C */ void ftLk_SpecialN_UnsetArrow(Fighter_GObj* gobj);

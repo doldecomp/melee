@@ -309,7 +309,6 @@ u32 HSD_TexMtx2Index(GXTexMtx texmtx);
 GXTexMtx HSD_Index2TexMtx(u32 index);
 GXTexMapID HSD_Index2TexMap(u32 index);
 u32 HSD_TexMap2Index(GXTexMapID mapid);
-HSD_TObj* HSD_TObjAlloc(void);
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj);
 void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);

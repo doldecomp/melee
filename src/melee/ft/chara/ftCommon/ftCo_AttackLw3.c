@@ -13,6 +13,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -32,7 +33,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

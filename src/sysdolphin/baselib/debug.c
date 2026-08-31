@@ -1,21 +1,23 @@
 #include "debug.h"
 
+#include <stdio.h>
 #include <dolphin/os.h>
-#include <MSL/stdio.h>
 
 struct DebugContext {
     OSContext context;
     u8 unk[0x10];
 } HSD_Debug_804C2608;
 
-__io_proc logFunc;
-PanicCallback panicCallback;
-ReportCallback reportCallback;
+static ReportCallback reportCallback;
+static PanicCallback panicCallback;
+static __io_proc logFunc;
 
+#ifdef MUST_MATCH
 #pragma peephole off
+#endif
 
-int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
-                __idle_proc arg3)
+static int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
+                       __idle_proc arg3)
 {
     if (reportCallback != NULL) {
         reportCallback(arg1, *arg2);

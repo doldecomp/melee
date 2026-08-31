@@ -12,7 +12,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <printf.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -25,11 +24,8 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models
@@ -118,19 +114,21 @@
 
 /// .bss
 /* 4A1ED0 */ static StaticModelDesc un_804A1ED0;
-/* 4A1EE0 */ static HSD_GObj* un_804A1EE0[PL_SLOT_MAX];
-/* 4A1EF8 */ static int un_804A1EF8[PL_SLOT_MAX];
+/* 4A1EE0 */ static HSD_GObj* un_804A1EE0[Gm_Player_NumMax];
+/* 4A1EF8 */ static int un_804A1EF8[Gm_Player_NumMax];
 
 /// .sbss
 /* 4D6D68 */ static HSD_GObj* un_804D6D68;
 /* 4D6D6C */ static u8 un_804D6D6C;
-/* 4D6D70 */ static u8 un_804D6D70[PL_SLOT_MAX];
+/* 4D6D70 */ static u8 un_804D6D70[Gm_Player_NumMax];
 /* 4D6D78 */ static HSD_Text* un_804D6D78;
 /* 4D6D7C */ static int un_804D6D7C;
 
 /// NameTag_Create and un_802FD28C will try to inline this otherwise
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
                   unsigned char arg3)
 {
@@ -151,7 +149,9 @@ float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
     }
     return 18.0; // CP Gray
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static void NameTag_RenderCallback(HSD_GObj* gobj, int pass)
 {
@@ -162,7 +162,7 @@ void fn_802FCAC4(HSD_GObj* gobj, int pass)
 {
     if (ifAll_IsHUDHidden() || un_804D6D6C) {
         int i;
-        for (i = 0; i < PL_SLOT_MAX; i++) {
+        for (i = 0; i < Gm_Player_NumMax; i++) {
             int do_it;
             if (Player_GetPlayerSlotType(i) != Gm_PKind_Human ||
                 Player_GetNametagSlotID(i) == 0x78)
@@ -183,8 +183,10 @@ void fn_802FCAC4(HSD_GObj* gobj, int pass)
 }
 
 /// un_802FD4C8 will try to inline this otherwise
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void un_802FCBA0(void)
 {
     HSD_Archive** archive;
@@ -203,7 +205,9 @@ void un_802FCBA0(void)
         un_804A1ED0.shapeanim_joint = x[0]->shapeanims[0];
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline bool has_nametag(int slot)
 {
@@ -266,7 +270,7 @@ void NameTag_Create(int slot)
     un_804A1EE0[slot] = gobj;
     {
         HSD_JObj* jobj = HSD_JObjLoadJoint(un_804A1ED0.joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, NameTag_RenderCallback, 9, 0);
         HSD_JObjSetScaleX(jobj, 10.0f);
         HSD_JObjSetScaleY(jobj, 10.0f);
@@ -290,7 +294,7 @@ void NameTag_Create(int slot)
         HSD_JObjAnimAll(jobj);
     }
     {
-        unsigned char* user_data = HSD_MemAlloc(1);
+        unsigned char* user_data = HSD_MemAlloc(sizeof(*user_data));
         GObj_InitUserData(gobj, 0, mn_8022EB04, user_data);
         *user_data = slot;
     }
@@ -344,7 +348,7 @@ void un_802FD45C(void)
 void un_802FD468(void)
 {
     int i;
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         if (un_804A1EE0[i]) {
             HSD_GObjPLink_80390228(un_804A1EE0[i]);
         }
@@ -352,7 +356,7 @@ void un_802FD468(void)
     HSD_GObjPLink_80390228(un_804D6D68);
 }
 
-inline HSD_GObj* un_802FD4C8_inline(int arg0)
+static inline HSD_GObj* un_802FD4C8_inline(int arg0)
 {
     return GObj_Create(0xE, arg0, 0);
 }
@@ -363,7 +367,7 @@ void un_802FD4C8(void)
     HSD_CObj* new_var;
     int i;
     PAD_STACK(0x10);
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         un_804A1EE0[i] = NULL;
     }
     un_804D6D68 = NULL;
@@ -371,7 +375,7 @@ void un_802FD4C8(void)
     memzero(un_804D6D70, i = sizeof(un_804D6D70));
     un_804D6D68 = (gobj = un_802FD4C8_inline(15));
     new_var = lb_80013B14((HSD_CameraDescPerspective*) (&nametag_CObjDesc));
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, new_var);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, new_var);
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
     un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
@@ -381,7 +385,7 @@ void un_802FD4C8(void)
     un_804D6D78->pos_z = -10.0;
     un_804D6D78->default_alignment = 1;
     un_802FCBA0();
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         NameTag_Create(i);
     }
 }

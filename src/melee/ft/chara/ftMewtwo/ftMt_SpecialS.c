@@ -5,14 +5,16 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_CaptureMewtwo.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -131,7 +133,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victimGObj;
 
-    if ((u32) fp->cmd_vars[0] != 0) {
+    if (fp->cmd_vars[0] != 0) {
         victimGObj = fp->victim_gobj;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);

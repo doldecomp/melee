@@ -1,8 +1,8 @@
 #include "hsd_3933.h"
 
+#include <string.h>
 #include <dolphin/mcc.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/hsd_3915.h>
+#include <dolphin/os.h>
 #include <sysdolphin/baselib/hsd_392C.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -30,7 +30,7 @@ struct ParticleUsbMessages {
     /* 0x104 */ char dir_too_large[0x14];
     /* 0x118 */ char cannot_use_usb[0x18];
 };
-STATIC_ASSERT(sizeof(struct ParticleUsbMessages) == 0x130);
+ASSERT_SIZE(struct ParticleUsbMessages, 0x130);
 
 /* 4D78C0 */ int hsd_804D78C0;
 /* 4D78BC */ s32 hsd_804D78BC;
@@ -78,14 +78,14 @@ s32 hsd_80393328(void)
     }
     result = 1;
     startTick = OSGetTick();
-    ticksPerUnit = (*(u32*) 0x800000F8 >> 2) & 0xFFFFFFFFFFFFFFFF;
+    ticksPerUnit = OS_TIMER_CLOCK & 0xFFFFFFFFFFFFFFFF;
     do {
         hsd_80392E80();
         if (hsd_804D78B0 == 0) {
             result = 0;
             break;
         }
-    } while ((u32) (OSGetTick() - startTick) / ticksPerUnit < 3);
+    } while ((OSGetTick() - startTick) / ticksPerUnit < 3);
 
     if (result != 0) {
         hsd_804D78B4 = 0;
@@ -101,8 +101,6 @@ static void (*lbl_8040A93C[32])(void*, void*) = {
 };
 
 extern int hsd_804D78A0;
-extern s32 hsd_804D78A8;
-extern s32 hsd_804D78AC;
 
 // @TODO: Currently 90.11% match - needs register allocation fix
 void hsd_80393440(void* request, void* response)
@@ -277,7 +275,7 @@ void hsd_80393844(void)
                 u8 cmd;
                 memset((u8*) &base[0x105].x4, 0, 0x20);
                 ((MCCPacket*) &base[0x105].x4)->x4_b7 = 1;
-                *(s32*) &base[0x105].x4 = *(s32*) &base[0x10A].x8;
+                *(s32*) &base[0x105].x4 = *(&base[0x10A].x8);
                 cmd = ((u8*) &base[0x10A].x8)[5];
                 if (((u8*) &base[0x105].x4)[5] = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
@@ -352,7 +350,7 @@ int hsd_80393A5C(char* filename, int data, int size)
 
     fd_arg = fd;
     data_p = (u32*) data;
-    written_f = (f32) (u32) FIOFwrite(fd_arg, data_p, size);
+    written_f = (f32) FIOFwrite(fd_arg, data_p, size);
 
     if ((f32) (s32) size != written_f) {
         OSReport(messages->cannot_save);
@@ -361,11 +359,8 @@ int hsd_80393A5C(char* filename, int data, int size)
     }
 
     FIOFclose(fd);
-    elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
-    {
-        f32 bits = 8.0F * (f32) size;
-        OSReport(messages->done, filename, size, elapsed,
-                 bits / elapsed * kbps_scale());
-    }
+    elapsed = (OSGetTick() - start) / OSSecondsToTicks(1.0F);
+    OSReport(messages->done, filename, size, elapsed,
+             8.0F * size / elapsed * kbps_scale());
     return size;
 }

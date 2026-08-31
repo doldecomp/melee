@@ -5,7 +5,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -17,7 +21,6 @@
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
@@ -94,7 +97,8 @@ void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
     struct ftCo_DatAttrs* da = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_Fall(fp, pika_attr->specials_start_gravity, da->terminal_vel);
+        ftCommon_Fall(fp, pika_attr->specials_start_gravity,
+                      da->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, pika_attr->specials_start_friction);
@@ -467,7 +471,7 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
-    ftCommon_Fall(fp, sa->x58, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, sa->x58, fp->co_attrs.terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, sa->x54);
 }
 

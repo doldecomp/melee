@@ -1,10 +1,9 @@
 #include "ftYs_SpecialS.h"
 
+#include "ftyoshi.h"
+
 #include "ftYoshi/ftYs_SpecialS.static.h"
 
-#include "ftYs_Init.h"
-#include "ftYs_SpecialHi.h"
-#include "math.h"
 #include "placeholder.h"
 
 #include "baselib/forward.h"
@@ -38,7 +37,7 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
@@ -187,7 +186,7 @@ static inline s32 ftYs_SpecialS_CheckButtonPressure(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attrs = fp->dat_attrs;
     s32 result = 0;
-    if ((u8) fp->x673 < attrs->x98) {
+    if (fp->x673 < attrs->x98) {
         result = 1;
     }
     fp->x673 = 0;
@@ -298,6 +297,7 @@ void ftYs_SpecialS_8012F0DC(Fighter_GObj* gobj, s32 arg1, s32 arg2, f32 arg3)
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     (void) 0.5f;
@@ -312,6 +312,7 @@ static void order_sdata2_0(void)
     (void) -0.05f;
     (void) 0.01f;
 }
+#endif
 
 void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
 {
@@ -335,7 +336,7 @@ void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
         s32 var_r5 = 0;
         Fighter* fp2 = GET_FIGHTER(gobj);
         ftYoshiAttributes* attrs2 = fp2->dat_attrs;
-        if ((u8) fp2->x673 < attrs2->x98) {
+        if (fp2->x673 < attrs2->x98) {
             var_r5 = 1;
         }
         fp2->x673 = 0;
@@ -1007,7 +1008,7 @@ void ftYs_SpecialAirSEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.gr_friction);
+    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.ground_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
 

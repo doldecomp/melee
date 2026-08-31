@@ -5,13 +5,16 @@
 #include <platform.h>
 
 #include "ef/efasync.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -101,11 +104,8 @@ static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
         efAsync_Spawn(gobj, &fp->x60C, 1, 1228, fp->parts[FtPart_TopN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
-
-static void callback(HSD_GObj* gobj);
 
 static void doAnim(HSD_GObj* gobj)
 {
@@ -173,6 +173,7 @@ void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
@@ -183,4 +184,5 @@ void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }

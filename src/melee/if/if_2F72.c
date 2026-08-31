@@ -11,7 +11,6 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 
-#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -223,11 +222,12 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
     }
 }
 
-HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
+HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 {
     void** base = lbl_804A1340;
     HSD_JObj* jobj;
     Vec3* pos;
+    HSD_JObj* j;
 
     if (base[0] == NULL) {
         return NULL;
@@ -241,9 +241,10 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
     if (gobj != NULL) {
         jobj = HSD_JObjLoadJoint(*(*(HSD_Joint***) base[0]));
         if (jobj != NULL) {
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
-            gm_8016895C(jobj, *(DynamicModelDesc**) base[0], (u8) arg2);
+            j = jobj;
+            gm_8016895C(j, *(DynamicModelDesc**) base[0], (u8) arg2);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
 
@@ -260,45 +261,49 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
 
 void fn_802F7994(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    void** base = lbl_804A1340;
-    void** ptr;
-    void** entry;
     s32 slot;
+    void** entry;
+    HSD_JObj* jobj;
+    void** ptr;
+    void** ptr2;
+    void** ptr3;
+    void** ptr4;
+    void* t0;
+    void* t1;
+    void* t2;
+    void* t3;
+    void* t4;
+    void* t5;
+    void** base = lbl_804A1340;
     s32 idx;
-    void* cmp;
     f32 frame;
+    HSD_GObj* result;
+
+    PAD_STACK(8);
 
     jobj = gobj->hsd_obj;
     frame = lbGetJObjCurrFrame(jobj);
 
-    if (base[1] == gobj) {
+    ptr = base;
+    if ((t0 = ptr[1]) == gobj) {
         slot = 0;
     } else {
-        ptr = base;
-        ptr += 2;
-        cmp = ptr[1];
-        if (cmp == gobj) {
+        if ((t1 = (ptr += 2)[1]) == gobj) {
             slot = 1;
         } else {
-            cmp = ptr[3];
-            (void) cmp;
-            ptr += 2;
-            if (cmp == gobj) {
+            ptr2 = ptr + 2;
+            if ((t2 = ptr[3]) == gobj) {
                 slot = 2;
             } else {
-                cmp = ptr[3];
-                ptr += 2;
-                if (cmp == gobj) {
+                ptr3 = ptr2 + 2;
+                if ((t3 = ptr2[3]) == gobj) {
                     slot = 3;
                 } else {
-                    cmp = ptr[3];
-                    ptr += 2;
-                    if (cmp == gobj) {
+                    ptr4 = ptr3 + 2;
+                    if ((t4 = ptr3[3]) == gobj) {
                         slot = 4;
                     } else {
-                        cmp = ptr[3];
-                        if (cmp == gobj) {
+                        if ((t5 = ptr4[3]) == gobj) {
                             slot = 5;
                         } else {
                             slot = -1;
@@ -312,8 +317,9 @@ void fn_802F7994(HSD_GObj* gobj)
     if (slot >= 0) {
         if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
             idx = (u8) slot << 1;
-            entry = base + idx;
-            base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);
+            entry = base + ((u8) slot << 1);
+            result = fn_802F77F8(*(entry += 2), (u8) slot, 1);
+            base[idx + 2] = result;
             if (base[idx + 2] != NULL) {
                 HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
             }
@@ -330,27 +336,24 @@ void fn_802F7994(HSD_GObj* gobj)
 void if_802F7AF8(s32 slot)
 {
     s32 idx;
-    void** entry;
     void** base1;
     void** base = lbl_804A1340;
     s32 slot2 = Player_80036428(slot);
     HSD_GObj* result;
 
-    idx = slot << 1;
-    entry = base + idx;
-    result = fn_802F77F8(*++entry, (u8) slot, 1);
+    idx = (u8) slot << 1;
+    result = fn_802F77F8(base[idx + 1], (u8) slot, 1);
     base1 = &base[1];
     base1[idx] = result;
     if (base1[idx] != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(base[idx + 1], (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
     idx = (u8) slot2 << 1;
-    entry = base + idx;
-    result = fn_802F77F8(*++entry, (u8) slot2, 2);
+    result = fn_802F77F8(base[idx + 1], (u8) slot2, 2);
     base1[idx] = result;
     if (base1[idx] != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(base[idx + 1], (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
@@ -375,6 +378,16 @@ void if_802F7BB4(s32 player_idx)
     }
 }
 
+static inline void if_802F7C30_slot(void** base, s32 slot, s32 idx, s32 flag)
+{
+    void** entry = base + idx;
+
+    base[idx + 1] = fn_802F77F8(*++entry, (u8) slot, flag);
+    if (base[idx + 1] != NULL) {
+        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+    }
+}
+
 void if_802F7C30(s32 slot)
 {
     void** base = lbl_804A1340;
@@ -393,12 +406,17 @@ void if_802F7C30(s32 slot)
         }
     } else if (ret == -1) {
         idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 1);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
-        }
+        if_802F7C30_slot(base, slot, idx, 1);
+    }
+}
+
+static inline void if_802F7D08_slot(void** base, s32 slot, s32 idx, s32 flag)
+{
+    void** entry = base + idx;
+
+    base[idx + 1] = fn_802F77F8(*++entry, (u8) slot, flag);
+    if (base[idx + 1] != NULL) {
+        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
     }
 }
 
@@ -421,26 +439,16 @@ void if_802F7D08(s32 slot)
         }
     } else if (ret == -1) {
         idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 1);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
-        }
+        if_802F7D08_slot(base, slot, idx, 1);
     } else {
         idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 1);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
-        }
+        if_802F7C30_slot(base, slot, idx, 1);
     }
 }
 
 void if_802F7E24(void)
 {
-    memzero(lbl_804A1340, 0x34);
+    memzero(lbl_804A1340, sizeof(lbl_804A1340));
     lbArchive_LoadSections(*ifAll_GetArchive(), lbl_804A1340, lbl_803F9780, 0);
 }
 

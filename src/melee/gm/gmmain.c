@@ -1,6 +1,4 @@
-#include "gm_1A36.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "db/db.h"
@@ -22,7 +20,7 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/card/CARDBios.h>
+#include <dolphin/card.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
@@ -30,26 +28,14 @@
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
-#include <baselib/debugconsole_main.h>
 #include <baselib/hsd_392C.h>
 #include <baselib/hsd_3933.h>
 #include <baselib/initialize.h>
-#include <baselib/particle.h>
-#include <baselib/rumble.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 
-extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;
-
-enum {
-    DbLKind_Master = 0,
-    DbLKind_NoDebugRom = 1,
-    DbLKind_DebugDevelop = 2,
-    DbLKind_DebugRom = 3,
-    DbLKind_Develop = 4,
-};
 
 static u32 arena_size;
 static bool gmMain_804D6594;
@@ -80,7 +66,7 @@ static void gmMain_8015FDA4(void)
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         db_804D6B20 = true;
         if (db_gameLaunchButtonState & HSD_PAD_X) {
-            int level = DbLevel;
+            enum_t level = DbLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
                 level = DbLKind_DebugRom;
@@ -100,7 +86,7 @@ static void gmMain_8015FDA4(void)
             }
             DbLevel = level;
         } else if (db_gameLaunchButtonState & HSD_PAD_Y) {
-            int level = DbLevel;
+            enum_t level = DbLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
                 level = DbLKind_DebugRom;
@@ -108,14 +94,15 @@ static void gmMain_8015FDA4(void)
             case DbLKind_DebugDevelop:
                 level = DbLKind_Develop;
                 break;
+            default:
+                break;
             }
             DbLevel = level;
             db_804D6B20 = false;
         }
     } else {
-        HSD_ASSERTMSG(0xD2, DbLevel == DbLKind_NoDebugRom,
-                      "DbLevel == DbLKind_NoDebugRom");
-        DbLevel = 0;
+        HSD_ASSERT(210, DbLevel == DbLKind_NoDebugRom);
+        DbLevel = DbLKind_Master;
     }
 }
 
@@ -215,7 +202,7 @@ int main(void)
     OSReport("# %s\n", db_build_timestamp);
     {
         struct datetime dt;
-        gm_801692E8(lbTime_8000AFBC(), &dt);
+        gm_801692E8(lbTime_GetTimeInSeconds(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
                  dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,

@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -15,13 +14,13 @@
 #include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftMasterHand/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftCh_GrabUnk1_8015B8FC(HSD_GObj*);
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCh_GrabUnk1_8015B8FC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -46,7 +45,9 @@ void ftCh_GrabUnk1_8015B998(HSD_GObj* gobj)
     }
     fp->u.mh.x2258 = 0x185;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCh_GrabUnk1_8015BA34(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {

@@ -1,14 +1,16 @@
 #include "ftCa_SpecialN.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -16,12 +18,22 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/inlines.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
+#ifdef MUST_MATCH
+static void order_sdata2(void)
+{
+    (void) 2.0f;
+    (void) 0.0f;
+    (void) 4.0f;
+}
+#endif
+
 /// Create Aesthetic Wind Effect for Warlock Punch
-static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
+static inline void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int cur_frame = fp->cur_anim_frame;
@@ -39,6 +51,8 @@ static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
             }
         }
         return;
+    default:
+        break;
     }
 }
 
@@ -65,7 +79,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         }
         {
             /// @todo Eliminate @c f.
-            float f = deg_to_rad;
+            float f = MTXDegToRad(1);
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
     }
@@ -79,8 +93,7 @@ void ftCa_SpecialN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, 0, 1, 0, NULL);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -92,8 +105,7 @@ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, 0, 1, 0, NULL);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -152,6 +164,8 @@ static inline void doPhys(HSD_GObj* gobj)
                 efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].joint,
                              fp->parts[78].joint);
                 break;
+            default:
+                break;
             }
             fp->x2219_b0 = true;
         } else {
@@ -204,8 +218,7 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_GroundToAirStateChange(gobj, fp, ftCa_MS_SpecialAirN,
                                         transition_flags);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         ftCommon_ClampAirDrift(fp);
     }
 }
@@ -216,7 +229,6 @@ void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_AirToGroundStateChange(gobj, fp, ftCa_MS_SpecialN,
                                         transition_flags);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
