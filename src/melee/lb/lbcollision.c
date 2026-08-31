@@ -1045,7 +1045,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_param_from_hit_start;
     Mtx inv_hurt_mtx;
     float hurt_delta_z;
-    float hit_start_max_x;
+    float x_work;
     float hit_end_min_x;
     float hit_start_min_x;
     float hit_end_max_x;
@@ -1055,7 +1055,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float contact_lerp;
     float broadphase_radius;
     float hit_end_mid_z;
-    float hit_start_max_y;
+    float y_work;
     float hit_end_min_y;
     float hit_start_min_y;
     float hit_end_max_y;
@@ -1090,8 +1090,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     s32 is_hit_segment_degenerate;
     s32 is_parallel;
     s32 is_zero_distance;
-    float hurt_delta_x;
-    float hurt_delta_y;
+    float hurt_start_y;
+    float hurt_start_z;
     PAD_STACK(40);
 
     // Fast reject when the expanded hit segment AABB misses both hurt
@@ -1101,10 +1101,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_start_copy = *hurt_start;
     hit_end_x = hit_end->x;
     if (hit_start_copy.x > hit_end_x) {
-        hit_start_max_x = hit_start_copy.x + broadphase_radius;
-        if ((hit_start_max_x < hurt_start_copy.x) &&
-            (hit_start_max_x < hurt_end->x))
-        {
+        x_work = hit_start_copy.x + broadphase_radius;
+        if ((x_work < hurt_start_copy.x) && (x_work < hurt_end->x)) {
             return 0;
         }
         hit_end_min_x = hit_end_x - broadphase_radius;
@@ -1127,10 +1125,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     }
 block_13:
     if (hit_start_copy.y > (hit_end_y = hit_end->y)) {
-        hit_start_max_y = hit_start_copy.y + broadphase_radius;
-        if ((hit_start_max_y < hurt_start_copy.y) &&
-            (hit_start_max_y < hurt_end->y))
-        {
+        y_work = hit_start_copy.y + broadphase_radius;
+        if ((y_work < hurt_start_copy.y) && (y_work < hurt_end->y)) {
             return 0;
         }
         hit_end_min_y = hit_end_y - broadphase_radius;
@@ -1185,38 +1181,37 @@ block_39:
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
     (void) hurt_end_y;
-    start_delta_y = hurt_start_copy.y;
-    hurt_delta_y = hurt_end_y - start_delta_y;
-    start_delta_y = hit_start_copy.y - start_delta_y;
+    start_delta_y = hurt_start_y = hurt_start_copy.y;
+    y_work = hurt_end_y - hurt_start_y;
+    start_delta_y = hit_start_copy.y - hurt_start_y;
     hurt_end_x = hurt_end->x;
     (void) hurt_end_x;
-    hurt_delta_x = hurt_end_x - (start_delta_x = hurt_start_copy.x);
-    segment_dot = hit_delta.y * hurt_delta_y;
-    hurt_len_sq = hurt_delta_y * hurt_delta_y;
+    x_work = hurt_end_x - (start_delta_x = hurt_start_copy.x);
+    segment_dot = hit_delta.y * y_work;
+    hurt_len_sq = y_work * y_work;
     hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - start_delta_x;
-    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
-    segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
+    hurt_delta_z = hurt_end_z - (hurt_start_z = hurt_start_copy.z);
+    segment_dot = (hit_delta.x * x_work) + segment_dot;
     hit_start_min_z = 1.0F;
-    hurt_len_sq = (hurt_delta_x * hurt_delta_x) + hurt_len_sq;
+    hurt_len_sq = (x_work * x_work) + hurt_len_sq;
     segment_dot = (hit_delta.z * hurt_delta_z) + segment_dot;
     hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
     {
         float hit_delta_z_sq = hit_delta.z * hit_delta.z;
         hit_start_mid_z = hit_delta_z_sq;
     }
-    start_delta_z = hit_start_copy.z - hurt_start_copy.z;
+    start_delta_z = hit_start_copy.z - hurt_start_z;
     hit_len_sq = hit_start_mid_z + (hit_start_mid_y + hit_start_mid_x);
     hit_start_dot = hit_delta.y * start_delta_y;
     {
         float hit_start_dot_x = hit_delta.x * start_delta_x;
         hit_start_dot = hit_start_dot_x + hit_start_dot;
     }
-    hurt_start_dot =
-        (hurt_delta_x * start_delta_x) + (hurt_delta_y * start_delta_y);
+    hurt_start_dot = (x_work * start_delta_x) + (y_work * start_delta_y);
     hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
     hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
     closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
@@ -1253,13 +1248,12 @@ block_39:
         if (is_parallel != 0) {
             // For parallel axes, project the hit endpoint nearer the hurt
             // midpoint.
-            hurt_mid_y =
-                (float) ((0.5 * (f64) hurt_delta_y) + (f64) hurt_start_copy.y);
+            hurt_mid_y = (float) ((0.5 * (f64) y_work) + (f64) hurt_start_y);
             hurt_mid_x =
-                (float) ((0.5 * (f64) hurt_delta_x) + (f64) hurt_start_copy.x);
+                (float) ((0.5 * (f64) x_work) + (f64) hurt_start_copy.x);
             hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
             hurt_mid_z =
-                (float) ((0.5 * (f64) hurt_delta_z) + (f64) hurt_start_copy.z);
+                (float) ((0.5 * (f64) hurt_delta_z) + (f64) hurt_start_z);
             hit_end_mid_y = hit_end->y - hurt_mid_y;
             hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
             hit_end_mid_x = hit_end->x - hurt_mid_x;
@@ -1371,9 +1365,9 @@ block_39:
     hit_closest->x = (hit_delta.x * hit_param) + hit_start_copy.x;
     hit_closest->y = (hit_delta.y * hit_param) + hit_start_copy.y;
     hit_closest->z = (hit_delta.z * hit_param) + hit_start_copy.z;
-    hurt_closest->x = (hurt_delta_x * hurt_param) + hurt_start_copy.x;
-    hurt_closest->y = (hurt_delta_y * hurt_param) + hurt_start_copy.y;
-    hurt_closest->z = (hurt_delta_z * hurt_param) + hurt_start_copy.z;
+    hurt_closest->x = (x_work * hurt_param) + hurt_start_copy.x;
+    hurt_closest->y = (y_work * hurt_param) + hurt_start_y;
+    hurt_closest->z = (hurt_delta_z * hurt_param) + hurt_start_z;
     closest_delta_y = hit_closest->y - hurt_closest->y;
     closest_delta_x = hit_closest->x - hurt_closest->x;
     closest_delta_z = hit_closest->z - hurt_closest->z;
