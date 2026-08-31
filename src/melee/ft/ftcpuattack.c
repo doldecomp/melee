@@ -141,6 +141,18 @@ static inline f32 get_scale(Fighter* fp)
     return fp->x34_scale.y;
 }
 
+#ifdef MUST_MATCH
+/// Preserve the caller operand area used by the inlined physics calculation.
+static inline s32 ftCo_CpuAttackValue(
+    s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6,
+    s32 arg7, s64 arg8, s64 arg9)
+{
+    return value;
+}
+#else
+#define ftCo_CpuAttackValue(value, ...) (value)
+#endif
+
 static inline int ftCo_CpuSelectAttack(Fighter* fp,
                                        struct Fighter_x1A88_t* cpu,
                                        const ftCo_AttackEntry* entry)
@@ -610,7 +622,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 x50Vy;
     f32 x50Vx;
     f32 x50TermNeg;
-    f32 sq;
     f32 x50Grav;
     f32 sizeHalf;
     f32 yBound;
@@ -636,9 +647,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     while (list->cmd) {
         f32 relx;
         f32 diry;
-        f32 directionScale;
         f32 scale;
-        f32 upper;
         f32 lower;
         found = false;
         if (list->x20 > cpu->level) {
@@ -655,7 +664,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             list++;
             continue;
         }
-        t = list->x04;
+        t = ftCo_CpuAttackValue(list->x04, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         relx = (x50Vx * t + x50X) - (fpVx * t + fpX);
         if (x50->ground_or_air == GA_Air) {
             if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
@@ -671,15 +680,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             if (v <= 0.0f) {
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
-                sq = sqrtf(t);
                 fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
-                                              0.5 * (f64) (fpGrav * sq)));
+                                              0.5 * (f64) (fpGrav * sqrtf(t))));
             } else {
-                sq = sqrtf(v);
                 fpPredY =
                     (f32) ((f64) fpY +
                            ((f64) (fpTermNeg * (t - v)) +
-                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+                            ((f64) (fpVy * t) -
+                             0.5 * (f64) (fpGrav * sqrtf(v)))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -698,15 +706,13 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             if (v <= 0.0f) {
                 relPredY = (x50Vy * t + x50Y) - fpPredY;
             } else if (t < v) {
-                sq = sqrtf(t);
                 relPredY = (f32) (((f64) (x50Vy * t + x50Y) -
-                                   0.5 * (f64) (x50Grav * sq)) -
+                                   0.5 * (f64) (x50Grav * sqrtf(t))) -
                                   (f64) fpPredY);
             } else {
-                sq = sqrtf(v);
                 relPredY = (f32) (((f64) (x50TermNeg * (t - v)) +
                                    ((f64) (x50Vy * t + x50Y) -
-                                    0.5 * (f64) (x50Grav * sq))) -
+                                    0.5 * (f64) (x50Grav * sqrtf(v)))) -
                                   (f64) fpPredY);
             }
         } else {
@@ -714,17 +720,17 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         if (fp->facing_dir > 0.0f) {
             dirx = list->x08;
-            directionScale = get_scale(fp);
-            dirx *= directionScale;
-            diry = list->x0C * directionScale;
+            scale = get_scale(fp);
+            dirx *= scale;
+            diry = list->x0C * scale;
         } else {
-            dirx = -list->x0C * (directionScale = get_scale(fp));
-            diry = -list->x08 * directionScale;
+            dirx = -list->x0C * (scale = get_scale(fp));
+            diry = -list->x08 * scale;
         }
         scale = get_scale(fp);
-        upper = list->x14 * scale;
+        v = list->x14 * scale;
         lower = list->x10 * scale;
-        if (upper > relPredY && lower < relPredY + yBound &&
+        if (v > relPredY && lower < relPredY + yBound &&
             dirx < relx + sizeHalf && diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
