@@ -1103,8 +1103,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
             prev_yx = prev_x * pvmtx[1][0] + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
-            x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z +
-                                        (pvmtx[0][0] * pp->pos.x + cur_y))) -
+            x = w0inv * (pvmtx[0][3] + ((pp->pos.x * pvmtx[0][0] + cur_y) +
+                                        pvmtx[0][2] * pp->pos.z)) -
                 w1inv * (pvmtx[0][3] + (pvmtx[0][2] * prev_z + prev_x_sum));
             y = w0inv * (pvmtx[1][3] + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
                 w1inv * (pvmtx[1][3] + (pvmtx[1][2] * prev_z + prev_yx));
@@ -1468,7 +1468,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                                   (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
             prev_pos.z =
                 draw_mtx[2][3] + (draw_mtx[2][2] * dz +
-                                  (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
+                                  (draw_mtx[2][0] * dx + dy * draw_mtx[2][1]));
         }
         psScaleAppSRTAxes(pp, draw_mtx);
     }
