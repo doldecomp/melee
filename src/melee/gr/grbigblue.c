@@ -659,7 +659,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
 
     for (i = 0; i < 3; i++) {
-        Vec3 fwd, back;
+        Vec3 fwd, neg_pos;
         Point3d normal;
         Vec3 euler;
         s8 idx = gp->u.bigblue.data[i].index;
@@ -703,7 +703,6 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
         case 2: {
             Ground* base = gp;
             if (gp->u.bigblue.data[i].x4 <= 0) {
-                Vec3 neg_pos;
                 f32 right_y, left_y;
                 s32 found;
                 s32 retries;
@@ -902,6 +901,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
         case 3: {
             f32 surface_y;
+            Vec3 back;
             f32 speed_val;
 
             HSD_JObjGetTranslation(jobj, &pos);
