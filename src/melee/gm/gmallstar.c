@@ -380,6 +380,19 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
+static inline void gm_801B5324_inline(s8* char_ids,
+                                      gm_803DEBE8_t* opp_data, s32 round)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        char_ids[i] = 0x21;
+    }
+    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
+        char_ids[i] = opp_data[i].x3;
+    }
+}
+
 void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 {
     s8 chars[3];
@@ -389,37 +402,27 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gm_803DEBE8_t* opp_data;
     struct GameCache* gc;
     s32 slot_idx;
-    s32 count_processed;
     s32 i;
     u64 audio;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     is_last_round = 0;
-    chars_ptr = chars;
 
     {
-        gm_803DEBE8_t* opponent = &gm_803DEBE8[gm_803DEC4C[arg1].start];
-        opp_data = opponent;
+        u32 start = gm_803DEC4C[arg1].start;
+        opp_data = &gm_803DEBE8[start];
     }
 
-    chars_ptr[0] = 0x21;
-    chars_ptr[1] = 0x21;
-    chars_ptr[2] = 0x21;
-
-    for (count_processed = 0; count_processed < (s32) gm_803DEC4C[arg1].count;
-         count_processed++)
-    {
-        chars[count_processed] = opp_data[count_processed].x3;
-    }
+    gm_801B5324_inline(chars, opp_data, arg1);
 
     for (i = 0; i < 3; i++) {
         colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
     }
 
-    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
-                              colors);
+    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars, colors);
 
-    if ((s32) arg1 == 0xC) {
+    chars_ptr = chars;
+    if (arg1 == 0xC) {
         chars_ptr[0] = 3;
         colors[0] = 0;
         is_last_round = 1;
@@ -456,9 +459,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 
     audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
     {
-        for (i = 0; i < 3; i++) {
-            CharacterKind ckind = chars[i];
-            audio |= lbAudioAx_80026E84(ckind);
+        s32 j;
+        for (j = 0; j < 3; j++) {
+            audio |= lbAudioAx_80026E84(chars[j]);
         }
     }
 
