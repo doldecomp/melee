@@ -11,8 +11,6 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
 
-extern int psCmdListArray[65];
-
 /* 4D0E5C */
 
 /* 4D78F8 */ static u32 hsd_804D78F8;
