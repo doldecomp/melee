@@ -56,9 +56,9 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
 void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
     VsApproachData* temp_r31 = gm_GetGameModeStateEnterData(arg0);
-    lbl_8046DBD8_t* temp_r3 = gm_GetChallengerData();
-    temp_r31->x0 = temp_r3->x4;
-    temp_r31->x1 = temp_r3->x2;
+    ChallengerInfo* temp_r3 = gm_GetChallengerData();
+    temp_r31->x0 = temp_r3->cpu_ckind;
+    temp_r31->x1 = temp_r3->human_slot;
     lb_8001C550();
     lb_8001D164(0);
     lb_8001CE00();
@@ -66,34 +66,32 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 
 void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
 {
-    lbl_8046DBD8_t* challenger;
-    StartMeleeData* start;
-
-    start = gm_GetGameModeStateEnterData(state);
-    challenger = gm_GetChallengerData();
+    StartMeleeData* start = gm_GetGameModeStateEnterData(state);
+    ChallengerInfo* challenger = gm_GetChallengerData();
     gm_SetupRulesDefaults(&start->rules);
     gm_SetupAllPlayerDefaults(start->players);
     start->rules.x0_6 = false;
     start->rules.match_kind = MatchKind_Stock;
     start->rules.x0_3 = 2;
-    start->rules.stkind = gm_8016075C(gm_CKindToSelKind(challenger->x4));
-    gm_SetupHumanPlayer(&start->players[0], challenger->x0, challenger->x1, 1,
-                        challenger->x2);
-    gm_SetupCpuPlayer(&start->players[1], challenger->x4, 0, 1, 1);
+    start->rules.stkind =
+        gm_GetChallengerStKind(gm_CKindToSelKind(challenger->cpu_ckind));
+    gm_SetupHumanPlayer(&start->players[0], challenger->human_ckind,
+                        challenger->human_color, 1, challenger->human_slot);
+    gm_SetupCpuPlayer(&start->players[1], challenger->cpu_ckind, 0, 1, 1);
     {
-        u8 nametag = challenger->x3;
-        start->players[0].nametag = challenger->x3;
+        u8 human_nametag = challenger->human_nametag;
+        start->players[0].nametag = human_nametag;
         start->players[1].nametag = GM_NAMETAG_NONE;
         start->players[1].cpu_kind = CpuKind_4;
         start->players[1].cpu_level =
-            gm_DecideChallengerCpuLevel(challenger->x4, nametag);
+            gm_DecideChallengerCpuLevel(challenger->cpu_ckind, human_nametag);
     }
     gm_LoadRumbleEnabled(start);
 }
 
 void gm_801BFBA8(GameModeState* arg0)
 {
-    lbl_8046DBD8_t* temp_r31;
+    ChallengerInfo* temp_r31;
     u8 temp_r0;
     MatchExitInfo* mei;
 
@@ -105,14 +103,14 @@ void gm_801BFBA8(GameModeState* arg0)
     if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
         (mei->match_end.player_standings[0].stocks != 0))
     {
-        gm_UnlockCKind((s32) temp_r31->x4);
+        gm_UnlockCKind((s32) temp_r31->cpu_ckind);
     } else {
-        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->cpu_ckind));
     }
     gm_80173EEC();
     gm_80172898(0x100U);
     if (gm_801721EC() == 0) {
-        gm_SetPendingGameMode((s8) temp_r31->x5);
+        gm_SetPendingGameMode((s8) temp_r31->curr_mode);
         gm_SetNewGameModePending();
     }
 }
@@ -246,6 +244,6 @@ void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
 
 void onExitPrize(UNUSED GameModeState* state)
 {
-    gm_SetPendingGameMode(gm_GetChallengerData()->x5);
+    gm_SetPendingGameMode(gm_GetChallengerData()->curr_mode);
     gm_SetNewGameModePending();
 }

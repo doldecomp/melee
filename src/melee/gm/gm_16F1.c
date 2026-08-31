@@ -1816,10 +1816,10 @@ static const struct lbl_803B7AD0_t {
     { 9, 5, 2, 0x0C8 }, { 10, 5, 2, 0x258 },
 };
 
-static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
+static inline const struct lbl_803B7AD0_t* inline2(u8 cpu_ckind)
 {
     int i;
-    u8 temp_r3 = gm_CKindToUnlockIndex(arg0);
+    u8 temp_r3 = gm_CKindToUnlockIndex(cpu_ckind);
     const struct lbl_803B7AD0_t* tmp = lbl_803B7AD0;
     for (i = 0; i < 0xB; i++) {
         if (temp_r3 == tmp[i].x0) {
@@ -1830,13 +1830,13 @@ static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
 }
 
 /// @returns CPU level (0-9)
-u8 gm_DecideChallengerCpuLevel(u8 arg0, UNUSED u8 nametag)
+u8 gm_DecideChallengerCpuLevel(u8 cpu_ckind, UNUSED u8 human_nametag)
 {
     int var_r0;
-    const struct lbl_803B7AD0_t* var_r31 = inline2(arg0);
+    const struct lbl_803B7AD0_t* var_r31 = inline2(cpu_ckind);
 
-    var_r0 = var_r31->x1 -
-             var_r31->x2 * gmMainLib_8015DB6C(gm_CKindToUnlockIndex(arg0));
+    var_r0 = var_r31->x1 - var_r31->x2 * gmMainLib_8015DB6C(
+                                             gm_CKindToUnlockIndex(cpu_ckind));
     if (var_r0 < 0) {
         var_r0 = 0;
     } else if (var_r0 > 9) {

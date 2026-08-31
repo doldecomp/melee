@@ -23,7 +23,7 @@ struct lbl_8046B488_t;
 /* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
 /* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
 /* 160710 */ u8 fn_80160710(int);
-/* 16075C */ int gm_8016075C(CharacterKind);
+/* 16075C */ int gm_GetChallengerStKind(CharacterKind);
 /* 1607A8 */ u8 fn_801607A8(int);
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);

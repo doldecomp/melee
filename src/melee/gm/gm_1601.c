@@ -609,15 +609,15 @@ u8 fn_80160710(int arg0)
     return 0x42;
 }
 
-int gm_8016075C(SelectableCharacterKind selkind)
+StKind gm_GetChallengerStKind(SelectableCharacterKind selkind)
 {
-    int i;
+    ssize_t i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (selkind == lbl_803B78C8[i].selkind) {
-            return lbl_803B78C8[i].x4;
+            return lbl_803B78C8[i].stkind;
         }
     }
-    return 0x148;
+    return St_Kind_Unk328;
 }
 
 u8 fn_801607A8(int arg0)

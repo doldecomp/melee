@@ -986,14 +986,14 @@ struct gm_803DE650_t {
     u8 xF;
 };
 
-struct lbl_8046DBD8_t {
-    u8 x0; // c_kind
-    u8 x1; // color
-    u8 x2; // stocks
-    u8 x3;
-    u8 x4; // c_kind
-    u8 x5; ///< GameModeKind
-    u8 x6; ///< Previous GameModeKind
+struct ChallengerInfo {
+    u8 human_ckind;
+    u8 human_color;
+    u8 human_slot;
+    u8 human_nametag;
+    u8 cpu_ckind;
+    u8 curr_mode; ///< ::GameModeKind
+    u8 prev_mode; ///< ::GameModeKind
     u16 x8;
 };
 
