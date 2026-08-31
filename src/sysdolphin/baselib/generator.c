@@ -354,6 +354,7 @@ HSD_Generator* hsd_8039D9C8(void)
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Vec3 vel_copy;
+    f32 tmp;
     Vec3 emit_pos;
     Vec3 tmpvec;
     Vec3 vec;
@@ -590,7 +591,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             switch (gen->type & 0xF) {
             case 6:
                 if (gen->angle < 0.0F) {
-                    cur_angle += angle_step;
+                    tmp = cur_angle + angle_step;
+                    cur_angle = tmp;
                     if (fabsf_bitwise(sin_az) < 1.1754944e-38F) {
                         if (gen->aux.cone.height >= 0.0F) {
                             cone_angle = -gen->angle;
@@ -631,7 +633,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             case 7:
                 if (gen->angle < 0.0F) {
                     cone_angle = (f32) (M_PI_2 - gen->angle);
-                    cur_angle += angle_step;
+                    tmp = cur_angle + angle_step;
+                    cur_angle = tmp;
                 } else {
                     {
                         f32 min_angle = gen->aux.disc.minAngle;
