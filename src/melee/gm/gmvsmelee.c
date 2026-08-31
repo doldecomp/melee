@@ -17,6 +17,7 @@
 #include "lb/lbcardnew.h"
 #include "lb/lbdvd.h"
 #include "lb/lbtime.h"
+#include "mn/types.h"
 
 #include "pl/forward.h"
 
@@ -39,13 +40,13 @@ u8* gmVsMelee_GetKOCounts(void)
     return ko_counts;
 }
 
-void gm_801A5258(u8* ko_counts, MatchEnd* match_end)
+void gm_801A5258(u8* ko_counts, MatchEnd* end)
 {
     ssize_t i;
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (match_end->player_standings[i].slot_type == Gm_PKind_Human) {
-            ko_counts[i] = lbTime_8000AF74(ko_counts[i],
-                                           match_end->player_standings[i].x20);
+        if (end->player_standings[i].slot_type == Gm_PKind_Human) {
+            ko_counts[i] =
+                lbTime_8000AF74(ko_counts[i], end->player_standings[i].x20);
         }
     }
 }
@@ -116,8 +117,8 @@ void gm_Mode_Vs_OnLoad(void)
 
 void gm_Mode_Vs_OnUnload(void) {}
 
-/// CSS_Enter
-void gm_801A5618(GameModeState* state, VsModeData* vs, enum_t match_type)
+void gmVsMelee_EnterCss(GameModeState* state, VsModeData* vs,
+                        MatchKind match_type)
 {
     CSSData* css = gm_GetGameModeStateEnterData(state);
     css->match_type = match_type;
@@ -126,15 +127,15 @@ void gm_801A5618(GameModeState* state, VsModeData* vs, enum_t match_type)
     lbDvd_800174BC();
 }
 
-void gm_801A5680(GameModeState* state, VsModeData* vs)
+void gmVsMelee_ExitCss(GameModeState* state, VsModeData* vs)
 {
     CSSData* css = gm_GetGameModeStateExitData(state);
     if (css->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    *vs = css->vs;
 
+    *vs = css->vs;
     {
         u64 mask = 0;
         ssize_t i;
@@ -147,19 +148,17 @@ void gm_801A5680(GameModeState* state, VsModeData* vs)
     }
 }
 
-/// SSS_Enter
-void gm_801A5754(GameModeState* state, VsModeData* vs)
+void gmVsMelee_EnterSss(GameModeState* state, VsModeData* vs)
 {
     SSSData* sss = gm_GetGameModeStateEnterData(state);
     sss->vs = *vs;
     gm_80167FC4(sss);
 }
 
-/// SSS_Exit
-void gm_801A57A8(GameModeState* state, VsModeData* vs, u8 state_id)
+void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs, u8 state_id)
 {
     SSSData* sss = gm_GetGameModeStateExitData(state);
-    if (sss->start_game != 0) {
+    if (sss->start_game) {
         *vs = sss->vs;
         lbAudioAx_80026F2C(24);
         lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs->start.rules.stkind));
@@ -169,19 +168,17 @@ void gm_801A57A8(GameModeState* state, VsModeData* vs, u8 state_id)
     }
 }
 
-/// Match_Enter
 void gm_801A583C(GameModeState* state, VsModeData* vs,
-                 void (*start_cb)(StartMeleeData*, StartMeleeData*),
-                 void (*player_cb)(PlayerInitData*, PlayerInitData*))
+                 gm_StartMeleeCallback start_cb,
+                 gm_PlayerInitCallback player_cb)
 {
-    StartMeleeData* start;
+    StartMeleeData* start = gm_GetGameModeStateEnterData(state);
     ssize_t i;
 
-    start = gm_GetGameModeStateEnterData(state);
     gm_80167BC8(vs);
     start->rules = vs->start.rules;
 
-    if (start->rules.match_mode == 1) {
+    if (start->rules.match_kind == MatchKind_Stock) {
         start->rules.x2_0 = true;
     }
     start->rules.x4_1 = true;
@@ -200,69 +197,65 @@ void gm_801A583C(GameModeState* state, VsModeData* vs,
         }
     }
 
-    gm_801B0348(start);
+    gm_DetermineSubColors(start);
     gm_8016F088(start);
     gm_80168FC4();
 }
 
-// Match_Exit
-void gm_801A5AF0(GameModeState* state, u8 id, u8 id2)
+/// @param id0 Next state id if one or zero winners
+/// @param id1 Next state id if multiple winners
+void gm_801A5AF0(GameModeState* state, u8 id0, u8 id1)
 {
-    MatchExitInfo* match_exit_info = gm_GetGameModeStateExitData(state);
+    MatchExitInfo* exit = gm_GetGameModeStateExitData(state);
     ssize_t i;
 
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (match_exit_info->match_end.player_standings[i].slot_type ==
-            Gm_PKind_Human)
-        {
-            gm_80162574(
-                match_exit_info->match_end.player_standings[i].character_kind,
-                match_exit_info->match_end.result);
+        if (exit->match_end.player_standings[i].slot_type == Gm_PKind_Human) {
+            gm_80162574(exit->match_end.player_standings[i].ckind,
+                        exit->match_end.result);
         }
     }
 
-    if (gm_801A52D0(&match_exit_info->match_end)) {
-        gm_8016260C(match_exit_info->match_end.x5,
-                    match_exit_info->match_end.result);
-        gm_801628C4(match_exit_info->match_end.frame_count / 60,
-                    gm_80162800(&match_exit_info->match_end));
+    if (gm_801A52D0(&exit->match_end)) {
+        gm_8016260C(exit->match_end.match_kind, exit->match_end.result);
+        gm_801628C4(exit->match_end.frame_count / GM_FPS,
+                    gm_80162800(&exit->match_end));
     }
 
-    if (!gm_80167140(&match_exit_info->match_end)) {
-        gm_SetNextGameModeStateId(id);
+    if (!gm_MatchHasMultipleWinners(&exit->match_end)) {
+        gm_SetNextGameModeStateId(id0);
     } else {
-        gm_SetNextGameModeStateId(id2);
+        gm_SetNextGameModeStateId(id1);
     }
 }
 
 /// SuddenDeath_Enter ??
-void gm_801A5C3C(GameModeState* state, VsModeData* vs_data,
-                 void (*match_data_cb)(StartMeleeData*, StartMeleeData*),
-                 void (*player_data_cb)(PlayerInitData*, PlayerInitData*))
+void gm_801A5C3C(GameModeState* state, VsModeData* vs,
+                 gm_StartMeleeCallback start_cb,
+                 gm_PlayerInitCallback player_cb)
 {
-    StartMeleeData* match_start_data;
+    StartMeleeData* start;
     s32 i;
 
-    match_start_data = gm_GetGameModeStateEnterData(state);
-    match_start_data->rules = vs_data->start.rules;
+    start = gm_GetGameModeStateEnterData(state);
+    start->rules = vs->start.rules;
 
-    if (match_data_cb != NULL) {
-        match_data_cb(match_start_data, &vs_data->start);
+    if (start_cb != NULL) {
+        start_cb(start, &vs->start);
     }
 
-    for (i = 0; i < 6; ++i) {
-        match_start_data->players[i] = vs_data->start.players[i];
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        start->players[i] = vs->start.players[i];
     }
 
-    if (player_data_cb != NULL) {
+    if (player_cb != NULL) {
         for (i = 0; i < 6; ++i) {
-            player_data_cb(&match_start_data->players[i],
-                           &vs_data->start.players[i]);
+            player_cb(&start->players[i], &vs->start.players[i]);
         }
     }
-    gm_801B0348(match_start_data);
-    gm_8016F088(match_start_data);
-    gm_801B0474(match_start_data, &gm_80479D98.match_end);
+    gm_DetermineSubColors(start);
+    gm_8016F088(start);
+    gm_801B0474(start, &gm_80479D98.match_end);
 }
 
 /// SuddenDeath_Exit ??
@@ -306,19 +299,19 @@ void gm_801A5F64(GameModeState* state, VsModeData* vs, u8 state_id)
             idx = gm_801A5360(match_end);
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
             if (unk != CHKIND_NONE) {
-                gm_801736E8(match_end->player_standings[idx].character_kind,
+                gm_801736E8(match_end->player_standings[idx].ckind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172D78()) != CHKIND_NONE) {
-                gm_801736E8(match_end->player_standings[idx].character_kind,
+                gm_801736E8(match_end->player_standings[idx].ckind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172E74()) != CHKIND_NONE) {
-                gm_801736E8(match_end->player_standings[idx].character_kind,
+                gm_801736E8(match_end->player_standings[idx].ckind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
                 gm_SetNextGameModeStateId(0x80);

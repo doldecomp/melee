@@ -168,11 +168,11 @@ void gm_801B1834(GameModeState* arg0)
 
     mei = gm_GetGameModeStateExitData(arg0);
     if (gm_801A52D0(&mei->match_end) != 0) {
-        gm_8016260C(mei->match_end.x5, mei->match_end.result);
+        gm_8016260C(mei->match_end.match_kind, mei->match_end.result);
         gm_801628C4(mei->match_end.frame_count / 60,
                     gm_80162800(&mei->match_end));
     }
-    if ((gm_80167140(&mei->match_end) != 0) &&
+    if ((gm_MatchHasMultipleWinners(&mei->match_end) != 0) &&
         (gm_8018F1B0(&mei->match_end) != 0))
     {
         gm_SetNextGameModeStateId(5);

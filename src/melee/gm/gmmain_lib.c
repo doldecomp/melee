@@ -155,34 +155,34 @@ void* gmMainLib_GetCombinedVSPlayTime(void)
     return &gmMainLib_GetSaveData()->x1A38;
 }
 
-void* gmMainLib_GetTimeMatchTotal(void)
+u32* gmMainLib_GetTimeMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A18;
+    return &gmMainLib_GetSaveData()->time_matches;
 }
 
-void* gmMainLib_GetStockMatchTotal(void)
+u32* gmMainLib_GetStockMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A1C;
+    return &gmMainLib_GetSaveData()->stock_matches;
 }
 
-void* gmMainLib_GetCoinMatchTotal(void)
+u32* gmMainLib_GetCoinMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A20;
+    return &gmMainLib_GetSaveData()->coin_matches;
 }
 
-void* gmMainLib_GetBonusMatchTotal(void)
+u32* gmMainLib_GetBonusMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A24;
+    return &gmMainLib_GetSaveData()->bonus_matches;
 }
 
-void* gmMainLib_GetStaminaMatchTotal(void)
+u32* gmMainLib_GetStaminaMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A28;
+    return &gmMainLib_GetSaveData()->stamina_matches;
 }
 
-void* gmMainLib_GetMatchResetCounter(void)
+u32* gmMainLib_GetMatchResetCounter(void)
 {
-    return &gmMainLib_GetSaveData()->x1A2C;
+    return &gmMainLib_GetSaveData()->match_resets;
 }
 
 void* gmMainLib_GetSingleplayerTime(void)
@@ -743,8 +743,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        ptr = &store_vmd->start.players[i].xA;
-        if (load_vmd->start.players[i].xA == tag) {
+        ptr = &store_vmd->start.players[i].nametag;
+        if (load_vmd->start.players[i].nametag == tag) {
             *ptr = 0x78;
         } else if (*ptr > tag && *ptr != 0x78) {
             *ptr -= 1;
@@ -933,14 +933,14 @@ int gmMainLib_8015ED30(void)
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }
 
-int GetRumbleSettingOfPort(s32 arg0)
+int GetRumbleSettingOfPort(ssize_t port)
 {
-    return gmMainLib_GetSaveData()->x1CB0.rumble[arg0];
+    return gmMainLib_GetSaveData()->x1CB0.rumble_enabled[port];
 }
 
-void gmMainLib_8015ED4C(s32 arg0, s8 arg1)
+void gmMainLib_SetRumbleEnabled(ssize_t port, bool enabled)
 {
-    gmMainLib_8015CC58()->rumble[arg0] = arg1;
+    gmMainLib_8015CC58()->rumble_enabled[port] = enabled;
 }
 
 s32 gmMainLib_8015ED5C(void)
@@ -948,9 +948,9 @@ s32 gmMainLib_8015ED5C(void)
     return gmMainLib_804D3EE0->x1850.unk_14;
 }
 
-void gmMainLib_8015ED68(s32 arg0)
+void gmMainLib_8015ED68(ssize_t port)
 {
-    gmMainLib_804D3EE0->x1850.unk_14 = arg0;
+    gmMainLib_804D3EE0->x1850.unk_14 = port;
 }
 
 u8 gmMainLib_8015ED74(void)
@@ -1323,7 +1323,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                     data->namedata[0] = gmMainLib_804D3EE4[0];
                 }
             }
-            data->rumble_toggle = 1;
+            data->rumble_enabled = true;
             j++;
         } while (j < 19);
     }

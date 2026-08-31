@@ -4,8 +4,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#define PAD_ALL_CONTROLLERS 4
-
 /* 1A3680 */ u64 gm_GetButtonsPressed(u8);
 /* 1A36A0 */ u64 gm_GetButtonsTriggered(u8);
 /* 1A36C0 */ u64 gm_801A36C0(u8);

@@ -91,11 +91,11 @@ void gm_801B1B74(GameModeState* arg0)
         lb_8001CE00();
     }
     gm_801B06B0(css, 0x17U, vs_data->start.players[0].ckind, 1,
-                vs_data->start.players[0].color, vs_data->start.players[0].xA,
-                9U, gm_804D68C0);
+                vs_data->start.players[0].color,
+                vs_data->start.players[0].nametag, 9U, gm_804D68C0);
     gm_801B07B4(css, vs_data->start.players[1].ckind, 1,
-                vs_data->start.players[1].color, vs_data->start.players[1].xA,
-                0U, gm_804D68C0);
+                vs_data->start.players[1].color,
+                vs_data->start.players[1].nametag, 0U, gm_804D68C0);
     lbDvd_800174BC();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
 }
@@ -124,10 +124,11 @@ void gm_801B1C24(GameModeState* arg0)
     }
     gm_80167A14(vs->start.players);
     gm_801B0730(css, &vs->start.players[0].ckind, NULL,
-                &vs->start.players[0].color, &vs->start.players[0].xA, NULL);
+                &vs->start.players[0].color, &vs->start.players[0].nametag,
+                NULL);
     gm_801B07E8_layer(css, &vs->start.players[1].ckind, NULL,
                       (s8*) &vs->start.players[1].color,
-                      (s8*) &vs->start.players[1].xA, NULL);
+                      (s8*) &vs->start.players[1].nametag, NULL);
     j = (i = 2);
     vs->start.players[1].xE = 0;
     for (; i < 4; i++, j++) {
@@ -260,10 +261,10 @@ void gm_801B2204(GameModeState* arg0)
     temp_r3 = gm_GetGameModeStateExitData(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
-                (u16) gm_80188454(
-                    temp_r3->match_end.player_standings[0].character_kind));
-    gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
+    gm_80163298(
+        temp_r3->match_end.player_standings[0].ckind,
+        (u16) gm_80188454(temp_r3->match_end.player_standings[0].ckind));
+    gm_80173BC4(temp_r3->match_end.player_standings[0].ckind);
     gm_80173EEC();
     if (!gm_80173754(28, gm_804D68C0)) {
         gm_SetNextGameModeStateId(0);

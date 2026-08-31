@@ -161,7 +161,7 @@ void onEnterDebugVs(GameModeState* arg0)
     data->rules.stkind = 0x20;
     data->rules.xB = -1;
     data->rules.xC = -1;
-    data->rules.match_mode = 0;
+    data->rules.match_kind = 0;
 
     for (i = 0; i < 6; i++) {
         gm_8016795C(&data->players[i]);
@@ -189,22 +189,22 @@ void onEnterDebugVs(GameModeState* arg0)
 
 void onEnterCss(GameModeState* arg0)
 {
-    gm_801A5618(arg0, gm_801A5244(), 0);
+    gmVsMelee_EnterCss(arg0, gm_801A5244(), 0);
 }
 
 void onExitCss(GameModeState* arg0)
 {
-    gm_801A5680(arg0, gm_801A5244());
+    gmVsMelee_ExitCss(arg0, gm_801A5244());
 }
 
 void onEnterSss(GameModeState* arg0)
 {
-    gm_801A5754(arg0, gm_801A5244());
+    gmVsMelee_EnterSss(arg0, gm_801A5244());
 }
 
 void onExitSss(GameModeState* arg0)
 {
-    gm_801A57A8(arg0, gm_801A5244(), 0);
+    gmVsMelee_ExitSss(arg0, gm_801A5244(), 0);
 }
 
 void onEnterVs(GameModeState* arg0)

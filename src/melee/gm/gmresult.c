@@ -721,7 +721,7 @@ void fn_80175240(s32 slot)
     PAD_STACK(8);
 
     me = lbl_8046DBE8.x94;
-    if (me->x5 != 3) {
+    if (me->match_kind != 3) {
         /// maybe x4C is an array of Vec2's
         first_row_offset =
             1.14f * (lbl_8046DBE8.x4C[4].y - lbl_8046DBE8.x4C[0].y);
@@ -993,7 +993,7 @@ void fn_80175A94(s32 slot, Vec3* position)
     PAD_STACK(8);
 
     me = lbl_8046DBE8.x94;
-    if (me->x5 == 3) {
+    if (me->match_kind == 3) {
         lb_8000B1CC(lbl_8046DBE8.player_data[player].jobjs[12], NULL, &sp24);
         x_pos = 5.5F + sp24.x;
     } else {
@@ -1011,7 +1011,7 @@ void fn_80175A94(s32 slot, Vec3* position)
     new_var->player_data[player].ko_time->default_alignment = 1;
     new_var->player_data[player].ko_time->default_kerning = 1;
 
-    if (me->x5 == 2) {
+    if (me->match_kind == 2) {
         GXColor sp18;
         GXColor sp14;
         PAD_STACK(4);
@@ -1034,9 +1034,9 @@ void fn_80175A94(s32 slot, Vec3* position)
         color_ptr = &sp18;
         HSD_SisLib_803A74F0(new_var->player_data[player].ko_time, slot,
                             color_ptr);
-    } else if (me->x5 == 1) {
+    } else if (me->match_kind == 1) {
         fn_80175880(player);
-    } else if (me->x5 == 3) {
+    } else if (me->match_kind == 3) {
         fn_801756E0(player);
     } else {
         fn_8017556C(player);
@@ -1415,7 +1415,7 @@ void fn_80175DC8(HSD_GObj* gobj)
     }
 
     fn_801785B0(gobj);
-    if (me->x5 == 0) {
+    if (me->match_kind == 0) {
         title_text = data->x2C;
         title_jobj = data->x28;
         sp78 = lbl_803B7B18.translate;
@@ -1426,7 +1426,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp6C.x, -sp6C.y, sp6C.z, 12.0F, 300.0F),
             2);
-    } else if (me->x5 == 1) {
+    } else if (me->match_kind == 1) {
         title_text = data->x2C;
         title_jobj = data->x28;
         sp60 = lbl_803B7B18.translate;
@@ -1437,7 +1437,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp54.x, -sp54.y, sp54.z, 12.0F, 300.0F),
             3);
-    } else if (me->x5 == 2) {
+    } else if (me->match_kind == 2) {
         title_text = data->x2C;
         title_jobj = data->x28;
         sp48 = lbl_803B7B18.translate;
@@ -1448,7 +1448,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp3C.x, -sp3C.y, sp3C.z, 12.0F, 300.0F),
             4);
-    } else if (me->x5 == 3) {
+    } else if (me->match_kind == 3) {
         title_text = data->x2C;
         title_jobj = data->x28;
         sp30 = lbl_803B7B18.translate;
@@ -1637,9 +1637,8 @@ void fn_80176F60(void)
     GObj_SetupGXLink(temp_r29, fn_80175038, 0xB, 0);
     lb_8000C0E8(jobj, 0, temp_r27);
     HSD_JObjReqAnimAll(jobj, 0.0F);
-    data->x20 =
-        fn_80176BF0(jobj, temp_r30->player_standings[data->x6].character_kind,
-                    gm_801743A4(temp_r30->result));
+    data->x20 = fn_80176BF0(jobj, temp_r30->player_standings[data->x6].ckind,
+                            gm_801743A4(temp_r30->result));
     aobj = data->x20->u.dobj->mobj->aobj;
     tmp = gm_80160854(data->x6, Player_GetTeam(data->x6),
                       temp_r30->is_teams == 1,
@@ -1768,7 +1767,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
         lbl_8046DBE8.num_pages = 2;
     } else {
         lbl_8046DBE8.num_pages = 3;
-        if (match_end->x5 == 3) {
+        if (match_end->match_kind == 3) {
             lbl_8046DBE8.player_data[0].page = 2;
             lbl_8046DBE8.player_data[1].page = 2;
             lbl_8046DBE8.player_data[2].page = 2;
@@ -1820,7 +1819,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     fn_8017A004();
     if (!gm_801743A4(match_end->result)) {
         lbAudioAx_80023F28(
-            fn_80160400(match_end->player_standings[data->x6].character_kind));
+            fn_80160400(match_end->player_standings[data->x6].ckind));
     }
 
     me_iter = match_end;
@@ -1829,7 +1828,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
         if (me_iter->player_standings[0].slot_type != Gm_PKind_NA) {
             fn_8017A9B4(i);
             data_iter->player_data[0].fighter_gobj =
-                fn_8017A67C(me_iter->player_standings[0].character_kind,
+                fn_8017A67C(me_iter->player_standings[0].ckind,
                             me_iter->player_standings[0].x3, i);
             data_iter->player_data[0].camera = fn_8017A318(i);
         }

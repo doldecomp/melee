@@ -288,7 +288,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->sub_color = src->sub_color;
     arg0->handicap = 9;
     arg0->team = src->team;
-    arg0->xA = 0x78;
+    arg0->nametag = 0x78;
     arg0->xB = src->xB;
     arg0->xC_b0 = 0;
     arg0->xC_b1 = (src->flags & 0x80) >> 7;
@@ -376,7 +376,7 @@ void onEnterVs(GameModeState* arg0)
                           "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900[0];
     gm_80167A64(&md->rules);
-    md->rules.match_mode = levels[level]->x8->x0_0;
+    md->rules.match_kind = levels[level]->x8->x0_0;
     md->rules.x0_3 = levels[level]->x8->x0_3;
     md->rules.x0_6 = levels[level]->x8->x0_6;
     md->rules.timer_counts_up = levels[level]->x8->x0_7;
@@ -463,7 +463,7 @@ void onEnterVs(GameModeState* arg0)
             if (md->players[0].ckind == CHKIND_NONE) {
                 md->players[0].ckind = ev->x2;
                 md->players[0].color = ev->x3;
-                md->players[0].xA = ev->x4;
+                md->players[0].nametag = ev->x4;
             }
             c = md->players[0].ckind;
             ev->x0 = c;
@@ -471,7 +471,8 @@ void onEnterVs(GameModeState* arg0)
             c = md->players[0].color;
             ev->x1 = c;
             ev->x50[0] = c;
-            md->players[0].xC_b0 = gm_801677F8(ev->x6, md->players[0].xA);
+            md->players[0].xC_b0 =
+                gm_RumbleEnabledForPlayer(ev->x6, md->players[0].nametag);
         } else {
             s8 c_kind;
             if (levels[level]->player_init[player_idx]->team == 0) {
@@ -1298,7 +1299,7 @@ void gm_801BC754(HSD_GObj* gobj)
     PAD_STACK(0x48);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_530;
-    switch (gm_16AE_GetUnkData_0()->x24C8.match_mode) {
+    switch (gm_16AE_GetUnkData_0()->x24C8.match_kind) {
     case 1:
         count = 0;
         temp_r28 = &gmMainLib_804D3EE0->unk_530;
