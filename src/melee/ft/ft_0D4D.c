@@ -376,8 +376,8 @@ void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CmSubject* camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
-    camera_box->x10.x = fp->mv.co.common.x4.x;
-    camera_box->x10.y = fp->mv.co.common.x4.y + spC.x0.x;
-    camera_box->x10.z = 0.0f;
-    ftLib_800866DC(gobj, &camera_box->x1C);
+    camera_box->pos.x = fp->mv.co.common.x4.x;
+    camera_box->pos.y = fp->mv.co.common.x4.y + spC.x0.x;
+    camera_box->pos.z = 0.0f;
+    ftLib_800866DC(gobj, &camera_box->bone_pos);
 }
