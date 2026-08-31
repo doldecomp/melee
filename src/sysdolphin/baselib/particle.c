@@ -845,7 +845,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     tga = psTexGroupArray[bank];
                     texGrp = tga[tgIdx];
-                    if (texGrp != NULL && texGrp->texTable != NULL) {
+                    if (texGrp != NULL
+#ifdef MUST_MATCH
+                        && texGrp->texTable != NULL
+#endif
+                    )
+                    {
                         if (texGrp->texTable[pp->poseNum] != NULL) {
                             pp->kind |= DispTexture;
                         }
@@ -2023,7 +2028,12 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                         tga = psTexGroupArray[bank];
                         texGrp = tga[tgIdx];
-                        if (texGrp != NULL && texGrp->texTable != NULL) {
+                        if (texGrp != NULL
+#ifdef MUST_MATCH
+                            && texGrp->texTable != NULL
+#endif
+                        )
+                        {
                             if (texGrp->texTable[pp->poseNum] != NULL) {
                                 pp->kind |= DispTexture;
                             }
