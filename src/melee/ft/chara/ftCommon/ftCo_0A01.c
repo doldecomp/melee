@@ -1055,6 +1055,19 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
+static inline void ftCo_800A75DC_set_target(Fighter* fp, int* x60,
+                                            float arg1, float arg2,
+                                            float arg3)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (*x60 == 0) {
+        data->x54.x = arg1;
+        data->x54.y = arg2;
+        data->x38 = arg3;
+        ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
+    }
+}
+
 bool ftCo_800A1F98(int x, float y)
 {
     float slope;
@@ -3599,9 +3612,8 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         return;
     }
     if (fp1->ground_or_air == GA_Air) {
-        s32 blocked;
         s32 result;
-        mp_UnkStruct0* island;
+        s32 blocked;
         fx = fp1->cur_pos.x;
         {
             f32 fx2 = fx;
@@ -3628,8 +3640,11 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             }
         }
         if (result != 0) {
+            int* x60;
+            mp_UnkStruct0* island;
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
+                x60 = &fp0->x1A88.x60;
                 ftCo_800A1F3C(fp0, floor_pos.x, floor_pos.y,
                               data->x56C + fp1->x1A88.x564);
                 if (island != NULL) {
@@ -3638,8 +3653,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         d = -d;
                     }
                     if (d < 5.0) {
-                        ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
-                                      data->x56C + fp1->x1A88.x564);
+                        ftCo_800A75DC_set_target(
+                            fp0, x60, island->x14.x - 5.0, island->x14.y,
+                            data->x56C + fp1->x1A88.x564);
                     } else {
                         d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
@@ -3657,10 +3673,12 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)
     {
+        int* x60;
         mp_UnkStruct0* island;
         mp_UnkStruct0* fp0_island;
         s32 same_island;
 
+        x60 = &fp0->x1A88.x60;
         ftCo_800A1F3C(fp0, fp1->cur_pos.x, fp1->cur_pos.y,
                       data->x56C + fp1->x1A88.x564);
         if (fp0->ground_or_air == GA_Air) {
@@ -3685,8 +3703,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         {
             if (data->x54.x - fp0->cur_pos.x > 0.0) {
                 if (fp0->cur_pos.x < island->x8.x) {
-                    ftCo_800A1F3C(fp0, 5.0 + island->x8.x, island->x8.y,
-                                  data->x56C + fp1->x1A88.x564);
+                    ftCo_800A75DC_set_target(
+                        fp0, x60, 5.0 + island->x8.x, island->x8.y,
+                        data->x56C + fp1->x1A88.x564);
                 }
             } else {
                 if (fp0->cur_pos.x > island->x14.x) {
@@ -5290,7 +5309,6 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
-#ifdef MUST_MATCH
 /* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
 static inline float sqrtf_store(float x, volatile float* y)
 {
@@ -5304,9 +5322,6 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
-#else
-#define sqrtf_store(x, y) sqrtf(x)
-#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
