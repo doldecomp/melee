@@ -22,10 +22,9 @@ typedef union JpegWork {
     } data;
 } JpegWork;
 
-typedef struct JpegLumaPair {
-    s32 block0[0x40];
-    s32 block1[0x40];
-} JpegLumaPair;
+typedef struct JpegBlock {
+    s32 data[0x40];
+} JpegBlock;
 
 typedef struct JpegByteBuffer {
     u8 data[1];
@@ -199,44 +198,32 @@ extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 static s32 lbl_804D6398 = 3;
 
-static inline s32 hsd_803B3408_inline(s32 index)
-{
-    return (index & 1) * 0x20;
-}
-
 static inline s32 hsd_803B3408_offset(s32 tile_stride, s32 y, s32 x)
 {
     return ((x / 4) * 0x10) + ((y / 4) * tile_stride);
 }
 
-static inline void hsd_803B3408_set_stride(s32* tile_stride, s32 width)
-{
-    *tile_stride = ((width + 0xF) / 16) << 6;
-}
-
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
-    s32 luma_block_offset;
+    JpegBlock* luma_block;
     s32 tile_row_offset;
     s32 chroma_row_base;
-    JpegLumaPair* luma_pair;
-    s32 luma_offset;
-    s32 second_pixel_index;
     s32 luma_row_base;
-    s32 pixel_index;
+    s32 luma_offset;
+    s32 luma_row;
+    s32 luma_block_offset;
     s32 tile_stride;
     s32 luma_y;
-    s32 pair_count;
+    s32 block_count;
     s32 luma_x;
     s32 tile_y;
     s32 tile_x;
     u16 pixel;
-    s32 luma_row;
-    s32 second_pixel_offset;
+    s32 pixel_index;
     u16* pixel_ptr;
 
     tile_row_offset = 0;
-    hsd_803B3408_set_stride(&tile_stride, width);
+    tile_stride = ((width + 0xF) / 16) << 6;
     chroma_row_base = 0;
     luma_row_base = 0;
     for (tile_y = 0; tile_y < 2; tile_y++) {
@@ -303,21 +290,20 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                 luma_offset <<= 3;
                 for (luma_x = 0; luma_x < 4; luma_x++) {
                     pixel_index = 0;
-                    luma_pair =
-                        (JpegLumaPair*) (HSD_804D2648_BUF +
-                                         ((luma_block_offset + luma_offset) *
-                                          4) +
-                                         0x118);
-                    for (pair_count = 2; pair_count != 0; pair_count--) {
+                    luma_block =
+                        (JpegBlock*) (HSD_804D2648_BUF +
+                                      ((luma_block_offset + luma_offset) * 4) +
+                                      0x118);
+                    for (block_count = 4; block_count != 0; block_count--) {
                         s32 row_offset = (pixel_index & 2) * tile_stride;
 
-                        pixel = src[((pixel_index & 1) * 0x20) + row_offset];
-                        second_pixel_index = pixel_index + 1;
-                        second_pixel_offset =
-                            hsd_803B3408_inline(second_pixel_index) +
-                            ((second_pixel_index & 2) * tile_stride);
-                        pixel_index = second_pixel_index + 1;
-                        luma_pair->block0[0] =
+                        {
+                            s32 column_offset =
+                                (pixel_index & 1) * 0x20;
+                            pixel = src[column_offset + row_offset];
+                        }
+                        pixel_index += 1;
+                        luma_block->data[0] =
                             (s32) ((s32) ((0.114f *
                                            (f32) ((pixel * 8) & 0xF8)) +
                                           ((0.299f *
@@ -325,16 +311,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                            (0.587f *
                                             (f32) ((pixel >> 3U) & 0xFC)))) -
                                    0x80);
-                        pixel = src[second_pixel_offset];
-                        luma_pair->block1[0] =
-                            (s32) ((s32) ((0.114f *
-                                           (f32) ((pixel * 8) & 0xF8)) +
-                                          ((0.299f *
-                                            (f32) ((pixel >> 8U) & 0xF8)) +
-                                           (0.587f *
-                                            (f32) ((pixel >> 3U) & 0xFC)))) -
-                                   0x80);
-                        luma_pair += 1;
+                        luma_block += 1;
                     }
                     src += 1;
                     luma_offset += 1;
