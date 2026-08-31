@@ -231,26 +231,26 @@ void Camera_80028B9C(int n_subjects)
     cm_804D6468 = NULL;
 }
 
-void Camera_80028F5C(CmSubject* subject, s32 arg1)
+void Camera_80028F5C(CmSubject* subject, CmSubjectState state)
 {
     if (subject != NULL) {
-        subject->x8 = arg1;
-        subject->x10.z = 0.0f;
-        subject->x10.y = 0.0f;
-        subject->x10.x = 0.0f;
-        subject->x1C = subject->x10;
-        subject->x28 = 0.0f;
-        subject->xC_b0 = false;
-        subject->xC_b1 = false;
-        subject->xC_b2 = false;
-        subject->xE = 0;
-        subject->x2C.x = -1.0f;
-        subject->x2C.y = 1.0f;
-        subject->x34.x = 1.0f;
-        subject->x34.y = -1.0f;
-        subject->x34.z = 1.0f;
-        subject->x40 = subject->x2C;
-        subject->x48 = subject->x34;
+        subject->state = state;
+        subject->pos.z = 0.0f;
+        subject->pos.y = 0.0f;
+        subject->pos.x = 0.0f;
+        subject->bone_pos = subject->pos;
+        subject->facing_dir = 0.0f;
+        subject->on_ledge = false;
+        subject->force_inactive = false;
+        subject->was_framed = false;
+        subject->state_timer = 0;
+        subject->ext.h.x = -1.0f;
+        subject->ext.h.y = 1.0f;
+        subject->ext.v.x = 1.0f;
+        subject->ext.v.y = -1.0f;
+        subject->ext.v.z = 1.0f;
+        subject->target_ext.h = subject->ext.h;
+        subject->target_ext.v = subject->ext.v;
         subject->x54.x = 0.0f;
         subject->x54.y = 0.0f;
         subject->x54.z = 0.0f;
@@ -354,35 +354,36 @@ static inline bool cam_bound(float x)
     return x > 0.65f || x < 0.35f;
 }
 
-bool Camera_8002928C(CmSubject* cam)
+bool Camera_8002928C(CmSubject* subject)
 {
     float left;
     float right;
     float bottom;
     float top;
 
-    if (cam->x8 != 1 && !cam->xC_b1) {
-        if (cam->x8 == 2) {
-            if (cam->xE != 0) {
-                cam->xE--;
+    if (subject->state != CmSubjectState_Inactive && !subject->force_inactive)
+    {
+        if (subject->state == CmSubjectState_Auto) {
+            if (subject->state_timer != 0) {
+                subject->state_timer--;
                 return false;
             }
             left = Stage_GetCamBoundsLeftOffset();
             right = Stage_GetCamBoundsRightOffset();
             top = Stage_GetCamBoundsTopOffset();
             bottom = Stage_GetCamBoundsBottomOffset();
-            if (cam_bound((cam->x10.x - left) / (right - left)) ||
-                cam_bound((cam->x10.y - bottom) / (top - bottom)))
+            if (cam_bound((subject->pos.x - left) / (right - left)) ||
+                cam_bound((subject->pos.y - bottom) / (top - bottom)))
             {
-                if (cam->xC_b2) {
-                    cam->xC_b2 = false;
-                    cam->xE = 0x258;
+                if (subject->was_framed) {
+                    subject->was_framed = false;
+                    subject->state_timer = 600;
                 }
                 return false;
             }
-            cam->xE = 0;
+            subject->state_timer = 0;
         }
-        cam->xC_b2 = true;
+        subject->was_framed = true;
         return true;
     }
     return false;
@@ -397,68 +398,68 @@ void Camera_800293E0(void)
 
     for (curr = cm_804D6468; curr != NULL; curr = curr->prev) {
         if (Camera_8002928C(curr) != 0) {
-            temp_f1 = curr->x40.x;
-            temp_f0 = curr->x2C.x;
+            temp_f1 = curr->target_ext.h.x;
+            temp_f0 = curr->ext.h.x;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->x2C.x += 0.5f;
+                    curr->ext.h.x += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->x2C.x -= 0.5f;
+                    curr->ext.h.x -= 0.5f;
                 } else {
-                    curr->x2C.x = temp_f1;
+                    curr->ext.h.x = temp_f1;
                 }
             }
 
-            temp_f1 = curr->x40.y;
-            temp_f0 = curr->x2C.y;
+            temp_f1 = curr->target_ext.h.y;
+            temp_f0 = curr->ext.h.y;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->x2C.y += 0.5f;
+                    curr->ext.h.y += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->x2C.y -= 0.5f;
+                    curr->ext.h.y -= 0.5f;
                 } else {
-                    curr->x2C.y = temp_f1;
+                    curr->ext.h.y = temp_f1;
                 }
             }
 
-            temp_f1 = curr->x48.x;
-            temp_f0 = curr->x34.x;
+            temp_f1 = curr->target_ext.v.x;
+            temp_f0 = curr->ext.v.x;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->x34.x += 0.5f;
+                    curr->ext.v.x += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->x34.x -= 0.5f;
+                    curr->ext.v.x -= 0.5f;
                 } else {
-                    curr->x34.x = temp_f1;
+                    curr->ext.v.x = temp_f1;
                 }
             }
 
-            temp_f1 = curr->x48.y;
-            temp_f0 = curr->x34.y;
+            temp_f1 = curr->target_ext.v.y;
+            temp_f0 = curr->ext.v.y;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->x34.y += 0.5f;
+                    curr->ext.v.y += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->x34.y -= 0.5f;
+                    curr->ext.v.y -= 0.5f;
                 } else {
-                    curr->x34.y = temp_f1;
+                    curr->ext.v.y = temp_f1;
                 }
             }
 
-            temp_f1 = curr->x48.z;
-            temp_f0 = curr->x34.z;
+            temp_f1 = curr->target_ext.v.z;
+            temp_f0 = curr->ext.v.z;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->x34.z += 0.5f;
+                    curr->ext.v.z += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->x34.z = temp_f0 - 0.5f;
+                    curr->ext.v.z = temp_f0 - 0.5f;
                 } else {
-                    curr->x34.z = temp_f1;
+                    curr->ext.v.z = temp_f1;
                 }
             }
         }
@@ -517,8 +518,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
         while (subject != NULL) {
             if (Camera_8002928C(subject)) {
                 subject_count++;
-                base_pos = subject->x10;
-                test_pos = subject->x10;
+                base_pos = subject->pos;
+                test_pos = subject->pos;
                 cam_bounds_flags = Camera_80029124(&base_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&base_ground, &base_ground_intercept);
@@ -540,7 +541,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                     }
                 }
                 test_pos.x =
-                    (subject->x2C.x * tracking_multiplier) + base_pos.x;
+                    (subject->ext.h.x * tracking_multiplier) + base_pos.x;
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&x_extent_ground, &x_extent_intercept);
@@ -568,7 +569,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                     max_x = test_pos.x;
                 }
                 test_pos.x =
-                    (subject->x2C.y * tracking_multiplier) + base_pos.x;
+                    (subject->ext.h.y * tracking_multiplier) + base_pos.x;
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&alt_x_ground, &alt_x_intercept);
@@ -596,7 +597,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                     max_x = test_pos.x;
                 }
                 test_pos.y =
-                    (subject->x34.y * tracking_multiplier) + base_pos.y;
+                    (subject->ext.v.y * tracking_multiplier) + base_pos.y;
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&y_extent_ground, &y_extent_intercept);
@@ -624,7 +625,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                     max_y = test_pos.y;
                 }
                 test_pos.y =
-                    (subject->x34.x * tracking_multiplier) + base_pos.y;
+                    (subject->ext.v.x * tracking_multiplier) + base_pos.y;
                 cam_bounds_flags = Camera_80029124(&test_pos, 0);
                 if (cam_bounds_flags != CAM_BOUNDS_INSIDE) {
                     Ground_801C4368(&alt_y_ground, &alt_y_intercept);
@@ -1445,21 +1446,21 @@ void Camera_8002B1F8(CameraTransformState* transform)
     if ((((temp_r3 = Player_GetEntity(0), temp_r3 != NULL) &&
           (subject = ftLib_80086B74(temp_r3), subject != NULL) &&
           (Camera_8002928C(subject) != 0) &&
-          (Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE) &&
+          (Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE) &&
           !ftLib_8008732C(temp_r3)) ||
          ((Player_GetPlayerCharacter(1) == CHKIND_SANDBAG) &&
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (subject = ftLib_80086B74(temp_r3_2), ((subject == NULL) == 0)) &&
           (Camera_8002928C(subject) != 0) &&
-          (Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE))))
+          (Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE))))
     {
-        lbVector_Diff(&transform->target_interest, &subject->x1C, &vec);
+        lbVector_Diff(&transform->target_interest, &subject->bone_pos, &vec);
         temp_f1 = *temp_r31;
         temp_f1_2 = temp_f1 * temp_f1;
         vec.x *= temp_f1_2;
         vec.y *= temp_f1_2;
         vec.z *= temp_f1_2;
-        lbVector_Add(&vec, &subject->x1C);
+        lbVector_Add(&vec, &subject->bone_pos);
         transform->target_interest = vec;
         lbVector_Diff(&transform->target_position, &transform->target_interest,
                       &vec);
@@ -2180,7 +2181,7 @@ static inline bool get_subject_pos(Vec3* pos, const s8* slot_ptr)
     } else {
         gobj = Player_GetEntity(slot);
         if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            *pos = subject->x1C;
+            *pos = subject->bone_pos;
         } else {
             valid = false;
         }
@@ -2207,7 +2208,7 @@ static inline void get_subject_pos_out(Vec3* pos, const s8* slot_ptr,
     } else {
         gobj = Player_GetEntity(slot);
         if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            *pos = subject->x1C;
+            *pos = subject->bone_pos;
         } else {
             *valid_out = false;
         }
@@ -2481,9 +2482,9 @@ void Camera_8002CDDC(void* unused)
     if (*slot_ptr != 10 && *slot_ptr != 11 &&
         (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
-        !subject->x8 &&
-        Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
-        ABS(subject->x1C.z) < 30.0f)
+        subject->state == CmSubjectState_Active &&
+        Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE &&
+        ABS(subject->bone_pos.z) < 30.0f)
     {
         track_subject(late_transform, &interest_diff, &eye_diff);
         cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
@@ -2515,7 +2516,7 @@ static inline f32 compute_orbit_distance(s32 slot)
         (gobj = Player_GetEntity(slot)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL)
     {
-        distance = (2.0f * subject->x34.z) /
+        distance = (2.0f * subject->ext.v.z) /
                    tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
     } else {
         distance = 1000.0f;
@@ -2528,7 +2529,7 @@ static inline f32 compute_orbit_distance(s32 slot)
 // needs another hard look
 static inline Vec3* get_subject_x1C(CmSubject* subject)
 {
-    return &subject->x1C;
+    return &subject->bone_pos;
 }
 
 void Camera_8002D318(void* unused)
@@ -2558,15 +2559,15 @@ void Camera_8002D318(void* unused)
     gobj = Player_GetEntity(cm_80452C68.x2C4);
     if (gobj != NULL && ftLib_8008701C(gobj) == false &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
-        Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
-        ABS(subject->x1C.z) < 10.0f)
+        Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE &&
+        ABS(subject->bone_pos.z) < 10.0f)
     {
         Camera_80030DF8();
         if ((gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
             pos = get_subject_x1C(subject);
-            half_z = 0.5f * subject->x34.z;
+            half_z = 0.5f * subject->ext.v.z;
             cm_80452C68.transform.target_interest.x =
                 -((half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
             cm_80452C68.transform.target_interest.y = pos->y;
@@ -2595,7 +2596,7 @@ void Camera_8002D318(void* unused)
                 (gobj = Player_GetEntity(slot)) != NULL &&
                 (subject = ftLib_80086B74(gobj)) != NULL)
             {
-                distance = (2.0f * subject->x34.z) /
+                distance = (2.0f * subject->ext.v.z) /
                            tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
             } else {
                 distance = 1000.0f;
@@ -2657,8 +2658,8 @@ void Camera_8002D85C(void* unused)
 
     gobj = Player_GetEntity(cm_80452C68.x2C4);
     if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL &&
-        Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
-        ABS(subject->x1C.z) < 30.0f)
+        Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE &&
+        ABS(subject->bone_pos.z) < 30.0f)
     {
         Camera_80030DF8();
         gobj = Player_GetEntity(cm_80452C68.x2C4);
@@ -2690,7 +2691,7 @@ void Camera_8002D85C(void* unused)
                 (gobj = Player_GetEntity(slot)) != NULL &&
                 (subject = ftLib_80086B74(gobj)) != NULL)
             {
-                distance = (2.0f * subject->x34.z) /
+                distance = (2.0f * subject->ext.v.z) /
                            tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
             } else {
                 distance = 1000.0f;
@@ -3004,7 +3005,7 @@ void Camera_8002E490(void* unused)
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
-                cm_80452C68.transform.target_interest = subject->x1C;
+                cm_80452C68.transform.target_interest = subject->bone_pos;
             }
         }
         break;
@@ -3089,7 +3090,7 @@ void Camera_8002E6FC(int arg0)
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
-                cm_80452C68.transform.target_interest = subject->x1C;
+                cm_80452C68.transform.target_interest = subject->bone_pos;
             }
         }
         break;
@@ -3126,7 +3127,7 @@ void Camera_8002E818(Vec3* pos)
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
-                cm_80452C68.transform.target_interest = subject->x1C;
+                cm_80452C68.transform.target_interest = subject->bone_pos;
             }
         }
         break;
@@ -3163,7 +3164,7 @@ void Camera_8002E948(bool (*cb)(Vec*))
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
-                cm_80452C68.transform.target_interest = subject->x1C;
+                cm_80452C68.transform.target_interest = subject->bone_pos;
             }
         }
         break;
@@ -3333,7 +3334,7 @@ void Camera_8002EF14(void)
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
-                cm_80452C68.transform.target_interest = subject->x1C;
+                cm_80452C68.transform.target_interest = subject->bone_pos;
             }
         }
         break;
@@ -3616,7 +3617,7 @@ void Camera_8002F7AC(s8 slot)
     if (fighter_gobj != NULL) {
         cam_box = ftLib_80086B74(fighter_gobj);
         if (cam_box != NULL) {
-            direction = cam_box->x28;
+            direction = cam_box->facing_dir;
             if (direction > 0.0f) {
                 offset_dir = 1.0f;
             } else if (direction < 0.0f) {
@@ -3862,7 +3863,7 @@ void Camera_8002FEEC(s32 arg0)
             cm_80452C68.mode = CAMERA_DEBUG_FOLLOW;
             cm_80453004.ply_slot = arg0;
             temp_f1 = tanf(0.017453292f * cm_80452C68.transform.target_fov);
-            temp_f31 = (2.0f * box->x34.z) / temp_f1;
+            temp_f31 = (2.0f * box->ext.v.z) / temp_f1;
             cm_80453004.follow_int_offset.z = 0.0f;
             cm_80453004.follow_int_offset.y = 0.0f;
             cm_80453004.follow_int_offset.x = 0.0f;
@@ -3945,7 +3946,7 @@ bool Camera_80030178(void)
 
 Vec3* Camera_8003019C(void)
 {
-    return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
+    return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->bone_pos;
 }
 
 /// @todo these are probably somewhat fake, but maybe a combination of this +
@@ -4345,7 +4346,7 @@ bool Camera_80030BBC(Vec3* arg0, S32Vec2* arg1)
 
 bool Camera_80030CD8(CmSubject* arg0, S32Vec2* arg1)
 {
-    return Camera_80030BBC(&arg0->x1C, arg1);
+    return Camera_80030BBC(&arg0->bone_pos, arg1);
 }
 
 /// Camera_IsSubjectOnScreen
@@ -4363,18 +4364,18 @@ bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
     cobj = GET_COBJ(cm_80452C68.gobj);
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     HSD_CObjGetInterest(cobj, &interest);
-    if (lbVector_8000E838(&interest, &eye_pos, &cam_box->x1C, &sp38) <
-        (cam_box->x34.z + tolerance))
+    if (lbVector_8000E838(&interest, &eye_pos, &cam_box->bone_pos, &sp38) <
+        (cam_box->ext.v.z + tolerance))
     {
         return 1;
     }
-    lbVector_Diff(&sp38, &cam_box->x1C, &sp20);
+    lbVector_Diff(&sp38, &cam_box->bone_pos, &sp20);
     lbVector_Normalize(&sp20);
-    range = cam_box->x34.z + tolerance;
+    range = cam_box->ext.v.z + tolerance;
     sp20.x *= range;
     sp20.y *= range;
     sp20.z *= range;
-    lbVector_Add(&sp20, &cam_box->x1C);
+    lbVector_Add(&sp20, &cam_box->bone_pos);
     return Camera_80030BBC(&sp20, NULL);
 }
 

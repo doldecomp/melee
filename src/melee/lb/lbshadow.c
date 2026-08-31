@@ -504,21 +504,21 @@ void lbShadow_8000F38C(s32 arg0)
                 }
                 shadow2->intensity = intensity;
 
-                PSVECAdd(&cm->x1C, &lightPos, &eyePos);
-                PSVECAdd(&cm->x1C, &lightDir, &interestPos);
+                PSVECAdd(&cm->bone_pos, &lightPos, &eyePos);
+                PSVECAdd(&cm->bone_pos, &lightDir, &interestPos);
                 HSD_CObjSetEyePosition(fp->x20A4.shadow->camera, &eyePos);
                 HSD_CObjSetInterest(fp->x20A4.shadow->camera, &interestPos);
                 HSD_CObjSetUpVector(fp->x20A4.shadow->camera, &upVec);
 
                 if (cm != NULL) {
-                    camPos = cm->x1C;
+                    camPos = cm->bone_pos;
                     HSD_ViewingRectInit(&rect, &eyePos, &interestPos, &upVec,
                                         0);
 
                     {
                         i = 0;
                         do {
-                            f32 scale = cm->x48.z;
+                            f32 scale = cm->target_ext.v.z;
                             f32 top = 1.2f * scale;
                             f32 bot = 1.2f * -scale;
                             HSD_ViewingRectAddRect(&rect, &camPos, top, bot,
