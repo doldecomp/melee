@@ -735,6 +735,16 @@ static inline HSD_JObj* mnVibration_GetPortChildAt(HSD_GObj* gobj, s32 n)
     return child;
 }
 
+static inline MnVibrationData* mnVibration_GetUserData(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
+static inline u8 mnVibration_GetPadIndex(s32 port)
+{
+    return port;
+}
+
 static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
                                            HSD_JObj** port_anim_jobj)
 {
@@ -747,7 +757,7 @@ static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
     u8 anim_state;
     HSD_JObj* active_child;
     HSD_JObj* disconnected_child;
-    MnVibrationData* data = gobj->user_data;
+    MnVibrationData* data = mnVibration_GetUserData(gobj);
 
     if ((u8) mn_804A04F0.cur_menu != 0x13) {
         HSD_GObjProc* proc;
@@ -758,23 +768,7 @@ static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
     }
     port = 0;
     do {
-        void* temp_jobj;
-        temp_jobj = ((MnVibrationData*) gobj->user_data)->jobjs[23];
-        if (temp_jobj == NULL) {
-            port_child = NULL;
-        } else {
-            port_child = ((HSD_JObj*) temp_jobj)->child;
-        }
-        {
-            s32 i;
-            for (i = 0; i < port; i++) {
-                if (port_child == NULL) {
-                    port_child = NULL;
-                } else {
-                    port_child = port_child->next;
-                }
-            }
-        }
+        port_child = mnVibration_GetPortChildAt(gobj, port);
         lb_80011E24(port_child, port_anim_jobj, 1, -1);
         if (GetRumbleSettingOfPort(port) != 0) {
             mn_8022EC18(*port_anim_jobj, &mnVibration_803EECF8, MOBJ_MASK);
@@ -787,7 +781,7 @@ static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
     } while (port < 4);
     port_idx = 0;
     do {
-        pad_idx = port_idx;
+        pad_idx = mnVibration_GetPadIndex(port_idx);
         pad_err = HSD_PadCopyStatus[pad_idx].err;
         if ((((s8) pad_err != 0) && (data->x6[port_idx] != 0)) ||
             (((s8) pad_err == 0) && (data->x6[port_idx] == 0)))
@@ -852,7 +846,6 @@ void mnVibration_Think(HSD_GObj* gobj)
         HSD_JObj* port_anim_jobj;
         mnVibration_ThinkInline(gobj, &port_anim_jobj);
     }
-    PAD_STACK(24);
 }
 
 void mnVibration_IntroProc(HSD_GObj* arg0)
