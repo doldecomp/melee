@@ -479,23 +479,50 @@ static inline u8 mnEvent_GetPage(const MnEventData* data)
     return data->page;
 }
 
+static inline void mnEvent_SetPageCursorY(MnEventData* cursor_data,
+                                          HSD_JObj** jobj_0A,
+                                          HSD_JObj** jobj_0C,
+                                          HSD_JObj** jobj_0B)
+{
+    u8 page;
+    HSD_JObj* tree;
+    f32 y_a;
+    f32 y_b;
+
+    page = cursor_data->page;
+    tree = mnEvent_804D6C60->hsd_obj;
+    lb_80011E24(tree, jobj_0A, 0xA, -1);
+    lb_80011E24(tree, jobj_0C, 0xC, -1);
+    y_a = HSD_JObjGetTranslationY(*jobj_0A);
+    y_b = HSD_JObjGetTranslationY(*jobj_0C);
+    lb_80011E24(tree, jobj_0B, 0xB, -1);
+    HSD_JObjSetTranslateY(*jobj_0B, (f32) page * (y_b - y_a));
+}
+
 void fn_8024D864(HSD_GObj* gobj)
 {
     u8 page;
-    f32 y_a;
     MnEventData* data;
-    HSD_JObj* up_jobj_0B;
+    /// @remark These unreferenced declarations preserve MWCC allocation for
+    /// the inlined page-cursor helper and are excluded from non-matching
+    /// builds.
+#ifdef MUST_MATCH
     HSD_JObj* tree;
+#endif
+    HSD_JObj* up_jobj_0B;
     u64 inputs;
     /// @remark Volatile is required for code matching but rejected by
     /// clang-tidy.
 #ifdef MUST_MATCH
     HSD_JObj* volatile up_jobj_0C;
+    HSD_JObj* volatile up_jobj_0A;
 #else
     HSD_JObj* up_jobj_0C;
-#endif
     HSD_JObj* up_jobj_0A;
+#endif
+#ifdef MUST_MATCH
     f32 y_b;
+#endif
 
     {
         HSD_JObj* down_jobj_0B;
@@ -578,15 +605,8 @@ void fn_8024D864(HSD_GObj* gobj)
 
                 sfxMove();
                 data->page -= 1;
-                tree = mnEvent_804D6C60->hsd_obj;
-                page = mnEvent_GetPage(data);
-                lb_80011E24(tree, &up_jobj_0A, 0xA, -1);
-                lb_80011E24(tree, &up_jobj_0C, 0xC, -1);
-                y_a = HSD_JObjGetTranslationY(up_jobj_0A);
-                y_b = HSD_JObjGetTranslationY(up_jobj_0C);
-                lb_80011E24(tree, &up_jobj_0B, 0xB, -1);
-                tree = up_jobj_0B;
-                mnEvent_SetPageY(tree, page, y_a, y_b);
+                mnEvent_SetPageCursorY(data, &up_jobj_0A, &up_jobj_0C,
+                                       &up_jobj_0B);
                 mnEvent_ShowSelected(data, &jobj_09);
                 return;
             }
@@ -606,14 +626,8 @@ void fn_8024D864(HSD_GObj* gobj)
 
                 sfxMove();
                 data->page += 1;
-                tree = mnEvent_804D6C60->hsd_obj;
-                page = mnEvent_GetPage(data);
-                lb_80011E24(tree, &down_jobj_0A, 0xA, -1);
-                lb_80011E24(tree, &down_jobj_0C, 0xC, -1);
-                y_a = HSD_JObjGetTranslationY(down_jobj_0A);
-                y_b = HSD_JObjGetTranslationY(down_jobj_0C);
-                lb_80011E24(tree, &down_jobj_0B, 0xB, -1);
-                mnEvent_SetPageY(down_jobj_0B, page, y_a, y_b);
+                mnEvent_SetPageCursorY(data, &down_jobj_0A, &down_jobj_0C,
+                                       &down_jobj_0B);
                 mnEvent_ShowSelected(data, &jobj_09);
                 return;
             }
@@ -627,7 +641,7 @@ void fn_8024D864(HSD_GObj* gobj)
             }
         }
 
-        PAD_STACK(0x44);
+        PAD_STACK(0x34);
     }
 }
 
