@@ -1280,6 +1280,9 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
 }
 #ifdef MUST_MATCH
 #pragma dont_inline off
+
+/// @todo .sdata2 order hack
+static const u32 gmregclear_sdata2_order_pad0[1] = { 0 };
 #endif
 
 s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
@@ -1509,6 +1512,9 @@ u8 gm_8017E48C(GameModeState* scene)
 struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
 {
     struct gm_803DE650_t* ptr;
+#ifdef MUST_MATCH
+    (void) 100.0F;
+#endif
     for (ptr = gm_803DE650; ptr->x0 != 0xFF; ptr++) {
         if (ptr->x0 == arg0) {
             return ptr;
@@ -1516,6 +1522,10 @@ struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
     }
     return NULL;
 }
+
+#ifdef MUST_MATCH
+static const u32 gmregclear_sdata2_order_pad1[1] = { 0 };
+#endif
 
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
@@ -1574,6 +1584,11 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
+
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_hundred[1] = { 100.0F };
+static const f64 gmregclear_sdata2_order_u32_0[1] = { U32_TO_F32 };
+#endif
 
 void gm_8017E7A0(u8 matchResult)
 {
@@ -1959,13 +1974,32 @@ s32 fn_8017F1B8(void)
     }
 
     mask = (u8) fn_8017F008();
+#ifdef MUST_MATCH
+    (void) 0.560000002F;
+    (void) 0.600000024F;
+    (void) 281.0F;
+    (void) 32.0F;
+#endif
     return fn_8016FFD4(gm_8016B774(), mask, 0);
 }
 
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_zero_two[2] = { 0.0F, 2.0F };
+#endif
+
 int fn_8017F294(void)
 {
+#ifdef MUST_MATCH
+    (void) -12.0F;
+    (void) 9.0F;
+    (void) 134.400009F;
+#endif
     return lbl_80472D28.x104;
 }
+
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_0[1] = { S32_TO_F32 };
+#endif
 
 s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 {
@@ -2402,6 +2436,12 @@ void fn_8017FE54(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_one[1] = { 1.0F };
+static const f64 gmregclear_sdata2_order_u32_1[1] = { U32_TO_F32 };
+static const f32 gmregclear_sdata2_order_half[1] = { 0.5F };
+#endif
+
 void fn_8017FF1C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -2837,6 +2877,12 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     PAD_STACK(0x18);
 }
 
+#ifdef MUST_MATCH
+static const u32 gmregclear_sdata2_order_pad2[1] = { 0 };
+static const f32 gmregclear_sdata2_order_tenth_zero[2] = { 0.100000001F,
+                                                           0.0F };
+#endif
+
 int fn_80180AC0(void)
 {
     if (lbl_80472D28.x116 == 1) {
@@ -3044,6 +3090,10 @@ void fn_80180C60(HSD_GObj* gobj)
         lbAudioAx_80023870(0xBB, 0x7F, 0x40, 0x8A);
     }
 }
+
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_1[1] = { S32_TO_F32 };
+#endif
 
 s32 lbl_804D65D8;
 
@@ -4198,6 +4248,10 @@ void fn_80182F40(HSD_GObj* unused)
         break;
     }
 }
+
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_2[1] = { S32_TO_F32 };
+#endif
 
 void gm_80183218(void)
 {
