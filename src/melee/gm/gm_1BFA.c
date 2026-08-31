@@ -68,6 +68,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
 {
     lbl_8046DBD8_t* challenger;
     StartMeleeData* start;
+    u8 nametag;
 
     start = gm_GetGameModeStateEnterData(arg0);
     challenger = gm_GetChallengerData();
@@ -80,10 +81,11 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
     gm_801B0620(&start->players[0], challenger->x0, challenger->x1, 1,
                 challenger->x2);
     gm_801B0664(&start->players[1], challenger->x4, 0, 1, 1);
+    nametag = challenger->x3;
     start->players[0].nametag = challenger->x3;
     start->players[1].nametag = GM_NAMETAG_NONE;
     start->players[1].cpu_kind = CpuKind_4;
-    start->players[1].cpu_level = gm_80172CC0(challenger->x4, challenger->x3);
+    start->players[1].cpu_level = gm_80172CC0(challenger->x4, nametag);
     gm_LoadRumbleEnabled(start);
 }
 

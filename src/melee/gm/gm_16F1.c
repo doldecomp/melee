@@ -1830,7 +1830,7 @@ static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
 }
 
 /// @returns CPU level (0-9)
-u8 gm_80172CC0(u8 arg0, UNUSED u8 arg1)
+u8 gm_80172CC0(u8 arg0, UNUSED u8 nametag)
 {
     int var_r0;
     const struct lbl_803B7AD0_t* var_r31 = inline2(arg0);
