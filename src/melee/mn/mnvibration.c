@@ -220,6 +220,11 @@ static inline s32 mnVibration_GetNextCursorRow(s32 cursor_row)
     return cursor_row + 1;
 }
 
+static inline u8 mnVibration_GetPortRumble(s32 port)
+{
+    return GetRumbleSettingOfPort(port);
+}
+
 static inline void mnVibration_FreeNameTexts(MnVibrationData* data)
 {
     s32 i;
@@ -301,6 +306,10 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     u8 rumble_setting;
     HSD_JObj* loaded_joint;
     HSD_JObj* jobj;
+    HSD_JObj* panel_jobj2;
+    HSD_JObj* panel_jobj3;
+
+    PAD_STACK(96);
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
@@ -342,9 +351,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObj* temp_jobj;
                 sfxForward();
                 if (GetRumbleSettingOfPort(i) != 0) {
-                    HSD_JObj* panel_jobj2;
                     gmMainLib_SetRumbleEnabled(i, 0);
-                    rumble_setting = GetRumbleSettingOfPort(i);
+                    rumble_setting = mnVibration_GetPortRumble(i);
                     temp_jobj =
                         ((MnVibrationData*) mnVibration_804D6C28->user_data)
                             ->jobjs[23];
@@ -367,9 +375,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                     HSD_PadRumbleOffN(i);
                     return;
                 } else {
-                    HSD_JObj* panel_jobj2;
                     gmMainLib_SetRumbleEnabled(i, 1);
-                    rumble_setting = GetRumbleSettingOfPort(i);
+                    rumble_setting = mnVibration_GetPortRumble(i);
                     temp_jobj =
                         ((MnVibrationData*) mnVibration_804D6C28->user_data)
                             ->jobjs[23];
@@ -385,9 +392,9 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                             jobj = jobj->next;
                         }
                     }
-                    lb_80011E24(jobj, &panel_jobj2, 2, -1);
-                    HSD_JObjReqAnimAll(panel_jobj2, (f32) rumble_setting);
-                    HSD_JObjAnimAll(panel_jobj2);
+                    lb_80011E24(jobj, &panel_jobj3, 2, -1);
+                    HSD_JObjReqAnimAll(panel_jobj3, (f32) rumble_setting);
+                    HSD_JObjAnimAll(panel_jobj3);
                     HSD_PadRumbleAdd(i, 0, 14, 0, &mnVibration_804D4FF0);
                     return;
                 }
