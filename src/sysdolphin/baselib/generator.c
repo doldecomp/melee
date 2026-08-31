@@ -350,16 +350,11 @@ HSD_Generator* hsd_8039D9C8(void)
     return gen;
 }
 
-#ifdef MUST_MATCH
 static inline f32 hsd_8039DAD4_home(f32 value)
 {
     return value;
 }
-#else
-#define hsd_8039DAD4_home(value) (value)
-#endif
 
-/// @todo Only differs by register allocation.
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Vec3 vel_copy;
@@ -1127,6 +1122,8 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->aux.line.x2 = ptclref_804D0E5C[bank][idx]->param1;
             gen->aux.line.y2 = ptclref_804D0E5C[bank][idx]->param2;
             gen->aux.line.z2 = ptclref_804D0E5C[bank][idx]->param3;
+            break;
+        case 2:
             break;
         case 6:
         case 7: {

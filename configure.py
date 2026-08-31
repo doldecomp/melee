@@ -1925,7 +1925,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                Linkable,
+                Matching,
                 "sysdolphin/baselib/generator.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
