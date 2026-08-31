@@ -755,8 +755,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cur_angle += angle_step;
             } else {
                 f32 rnd = HSD_Randf();
-                cur_angle = (f32) (
-                    2.0 * (M_PI * (f64) hsd_8039DAD4_home(rnd)));
+                cur_angle =
+                    (f32) (2.0 * (M_PI * (f64) hsd_8039DAD4_home(rnd)));
             }
             gen->aux.line.x2 = elevation;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
@@ -903,8 +903,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
             {
                 cone_angle = HSD_Randf();
-                cone_angle = (f32) (
-                    2.0 * (M_PI * (f64) hsd_8039DAD4_home(cone_angle)));
+                cone_angle =
+                    (f32) (2.0 * (M_PI * (f64) hsd_8039DAD4_home(cone_angle)));
                 {
                     f32 r2 = gen->radius;
                     if (r2 < 0.0F) {
