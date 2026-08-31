@@ -474,11 +474,6 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_ShowSelected(user_data, &jobj_09);
 }
 
-static inline u8 mnEvent_GetPage(const MnEventData* data)
-{
-    return data->page;
-}
-
 static inline void mnEvent_SetPageCursorY(MnEventData* cursor_data,
                                           HSD_JObj** jobj_0A,
                                           HSD_JObj** jobj_0C,
