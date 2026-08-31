@@ -2522,8 +2522,8 @@ void mnSnap_80257F24(void)
     HSD_Text* text;
     void** main_joint;
     void** main_shapeanim;
-    void** warn_matanim;
-    void** main_animjoint;
+    void** warn_animjoint;
+    void** main_matanim;
     void** csr_shapeanim;
     void** csr_matanim;
     void** csr_animjoint;
@@ -2539,9 +2539,9 @@ void mnSnap_80257F24(void)
     void** arrows_shapeanim;
     void** warn_joint;
     Vec3 start_pos;
-    void** main_matanim;
+    void** main_animjoint;
     void** warn_shapeanim;
-    void** warn_animjoint;
+    void** warn_matanim;
     void** arrows_matanim;
     f32 dx;
     f32 dy;
