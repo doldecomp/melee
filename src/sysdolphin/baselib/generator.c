@@ -365,8 +365,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 cross1;
     Vec3 vel_norm;
     Mtx trig_mtx;
-    f64 eps;
-    f32 vel_mag_sq;
     f32 angle1;
     f32 sin_az;
     f32 cos_az;
@@ -383,16 +381,14 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         return gen->count;
     }
 
-    vel_mag_sq = angle3;
-
     /* Copy velocity */
     vel_copy.x = gen->vel.x;
     vel_copy.y = gen->vel.y;
     vel_copy.z = gen->vel.z;
 
     /* Compute velocity magnitude */
-    vel_mag_sq = sqrtf(vel_copy.z * vel_copy.z +
-                       (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
+    radius = sqrtf(vel_copy.z * vel_copy.z +
+                   (vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y));
 
     /* Initialize rotation matrix */
     PSMTXIdentity(rot_mtx);
@@ -458,7 +454,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Velocity-based rotation */
-    if ((gen->type & 0xF) != 1 && vel_mag_sq > 1.1920929e-7F) {
+    if ((gen->type & 0xF) != 1 && radius > 1.1920929e-7F) {
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -497,7 +493,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         {
             f32 cos_el = cosf(elevation);
             f32 neg_cos_az = -cos_az;
-            f32 neg_sin_az_s = -sin_az;
 
             trig_mtx[0][0] = cos_el;
             trig_mtx[0][1] = 0.0F;
@@ -507,13 +502,14 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             trig_mtx[1][1] = sin_az;
             trig_mtx[1][2] = cos_az * cos_el;
             trig_mtx[1][3] = 0.0F;
-            trig_mtx[2][0] = neg_sin_az_s * sin_el;
+            trig_mtx[2][0] = -sin_az * sin_el;
             trig_mtx[2][1] = neg_cos_az;
             trig_mtx[2][2] = sin_az * cos_el;
             trig_mtx[2][3] = 0.0F;
         }
         PSMTXConcat(rot_mtx, trig_mtx, rot_mtx);
     }
+    elevation = radius;
 
     /* Type 2: extract Euler angles from rotation matrix */
     if ((gen->type & 0xF) == 2) {
@@ -553,8 +549,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 4: {
             f32 min_a = gen->aux.disc.minAngle;
             f32 rnd = HSD_Randf();
-            f32 range = gen->aux.disc.maxAngle - min_a;
-            angle_step = range / (f32) (s32) gen->count;
+            angle_step = (gen->aux.disc.maxAngle - min_a) /
+                         (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
             break;
         }
@@ -562,8 +558,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 7: {
             f32 min_a = gen->aux.cone.minAngle;
             f32 rnd = HSD_Randf();
-            f32 range = gen->aux.cone.maxAngle - min_a;
-            angle_step = range / (f32) (s32) gen->count;
+            angle_step = (gen->aux.cone.maxAngle - min_a) /
+                         (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
             break;
         }
@@ -577,7 +573,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Main particle emission loop */
-    eps = 0.001F;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */
@@ -623,9 +618,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     }
                     {
                         f32 rnd = HSD_Randf();
-                        f32 range = gen->aux.cone.maxAngle - cur_angle;
+                        cone_angle = gen->aux.cone.maxAngle - cur_angle;
+                        cur_angle = cone_angle * rnd + cur_angle;
                         cone_angle = radius * gen->angle;
-                        cur_angle = range * rnd + cur_angle;
                     }
                     tmp = sin_az;
                     *(s32*) &tmp &= 0x7FFFFFFF;
@@ -654,8 +649,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     }
                     {
                         f32 rnd = HSD_Randf();
-                        f32 range = gen->aux.disc.maxAngle - cur_angle;
-                        cur_angle = range * rnd + cur_angle;
+                        cone_angle = gen->aux.disc.maxAngle - cur_angle;
+                        cur_angle = cone_angle * rnd + cur_angle;
                         cone_angle = (f32) (M_PI_2 + gen->angle);
                     }
                 }
@@ -669,9 +664,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     cur_angle = gen->aux.disc.minAngle;
                     {
                         f32 rnd = HSD_Randf();
-                        f32 range = gen->aux.disc.maxAngle - cur_angle;
                         cone_angle = radius * gen->angle;
-                        cur_angle = range * rnd + cur_angle;
+                        sin_el = gen->aux.disc.maxAngle - cur_angle;
+                        cur_angle = sin_el * rnd + cur_angle;
                     }
                 }
                 break;
@@ -695,10 +690,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
             /* Compute velocity direction from cone angle */
             {
-                f32 sin_ca = vel_mag_sq * sinf(cone_angle);
+                f32 sin_ca = elevation * sinf(cone_angle);
                 vec.x = sin_ca * cosf(cur_angle);
                 vec.y = sin_ca * sinf(cur_angle);
-                vec.z = vel_mag_sq * cosf(cone_angle);
+                vec.z = elevation * cosf(cone_angle);
             }
 
             /* Shape 3: scale velocity by radius factor */
@@ -759,7 +754,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 f32 rnd = HSD_Randf();
                 cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
             }
-            gen->aux.line.x2 = vel_mag_sq;
+            gen->aux.line.x2 = elevation;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen, 0.0F,
                          0.0F, 0.0F, cur_angle, sin_az, 0.0F, gen->size,
@@ -786,8 +781,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             {
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.x;
-                f32 b2 = gen->aux.rect.y;
-                if (rnd > a2 / (a2 + b2)) {
+                if (rnd > a2 / (a2 + gen->aux.rect.y)) {
                     emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                 } else {
                     emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
@@ -801,8 +795,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             {
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.x;
-                f32 b2 = gen->aux.rect.z;
-                if (rnd > a2 / (a2 + b2)) {
+                if (rnd > a2 / (a2 + gen->aux.rect.z)) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
                     emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
@@ -813,8 +806,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             {
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.y;
-                f32 b2 = gen->aux.rect.z;
-                if (rnd > a2 / (a2 + b2)) {
+                if (rnd > a2 / (a2 + gen->aux.rect.z)) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
                     emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
@@ -827,16 +819,11 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 f32 a2 = gen->aux.rect.z;
                 f32 b2 = gen->aux.rect.y;
                 f32 c2 = gen->aux.rect.x;
-                f32 ab = b2 * a2;
-                f32 ca = c2 * b2;
-                f32 total = c2 * (b2 + a2) + ab;
-                f32 r0 = 1.0F / total;
-                f32 t1 = r0 * ca;
-                if (rnd < t1) {
+                f32 r0 = 1.0F / (c2 * (b2 + a2) + b2 * a2);
+                if (rnd < r0 * (c2 * b2)) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    f32 t2 = 1.0F - r0 * (c2 * a2);
-                    if (rnd > t2) {
+                    if (rnd > 1.0F - r0 * (c2 * a2)) {
                         emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                     } else {
                         emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
@@ -876,7 +863,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                           gen->aux.rect.zz * gen->aux.rect.zz;
                 mag = sqrtf(mag);
                 {
-                    f32 scale = vel_mag_sq / mag;
+                    f32 scale = elevation / mag;
                     vec.x = gen->aux.rect.zx * scale;
                     vec.y = gen->aux.rect.zy * scale;
                     vec.z = gen->aux.rect.zz * scale;
@@ -895,9 +882,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 8: /* sphere emission */
         {
             f32 r0 = gen->aux.cone.height;
-            if (r0 == 0.0F || __fabs(r0 - M_PI) < eps) {
-                f32 rnd = sqrtf(HSD_Randf());
-                radius = (f32) (M_PI_2 * rnd);
+            if (r0 == 0.0F || __fabs(r0 - M_PI) < (f64) 0.001F) {
+                radius = HSD_Randf();
+                radius = sqrtf(radius);
+                radius = (f32) (M_PI_2 * radius);
                 {
                     f32 rnd2 = HSD_Randf();
                     if (rnd2 < 0.5F) {
@@ -905,21 +893,23 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     }
                 }
             } else {
-                f32 rnd = sqrtf(HSD_Randf());
-                radius = gen->aux.cone.height * rnd;
+                radius = HSD_Randf();
+                radius = sqrtf(radius);
+                radius = gen->aux.cone.height * radius;
             }
             {
-                f32 rnd = HSD_Randf();
-                f32 az_angle;
-                f32 r2 = gen->radius;
-                az_angle = (f32) (2.0 * (M_PI * (f64) rnd));
-                cone_angle = az_angle;
-
-                if (r2 < 0.0F) {
-                    sin_az = -r2;
-                } else {
-                    rnd = sqrtf(HSD_Randf());
-                    sin_az = r2 * rnd;
+                cone_angle = HSD_Randf();
+                cone_angle =
+                    (f32) (2.0 * (M_PI * (f64) cone_angle));
+                {
+                    f32 r2 = gen->radius;
+                    if (r2 < 0.0F) {
+                        sin_az = -r2;
+                    } else {
+                        sin_az = HSD_Randf();
+                        sin_az = sqrtf(sin_az);
+                        sin_az = r2 * sin_az;
+                    }
                 }
             }
             {
