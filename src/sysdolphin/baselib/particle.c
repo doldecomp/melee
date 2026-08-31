@@ -48,8 +48,8 @@ static HSD_JObj* hsd_804D08E8[8];
 /* 4D0948 */ HSD_Particle* hsd_804D0948[65];
 /* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0C54 */ int psNumCmdList[65];
-/* 4D0D58 */ HSD_PSCmdList** psCmdListArray[65];
+/* 4D0C54 */ HSD_PSFormGroup** psNumCmdList[65];
+/* 4D0D58 */ int psCmdListArray[65];
 /* 4D0E5C */ HSD_PSCmdList** ptclref_804D0E5C[65];
 /* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
 
@@ -347,11 +347,11 @@ void hsd_80398A08(u32 unused)
     hsd_804D78E2 = 0;
     numPeakParticles = 0;
     for (i = 0; i < 0x41; i++) {
-        psCmdListArray[i] = NULL;
+        psCmdListArray[i] = 0;
         psFormGroupArray[i] = NULL;
         ptclref_804D0E5C[i] = NULL;
         psTexGroupArray[i] = NULL;
-        psNumCmdList[i] = 0;
+        psNumCmdList[i] = NULL;
         hsd_804D0948[i] = NULL;
     }
     psCallback = NULL;
@@ -1062,10 +1062,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= psCmdListArray[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ptclref_804D0E5C[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1119,10 +1119,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= psCmdListArray[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ptclref_804D0E5C[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1430,10 +1430,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= psCmdListArray[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ptclref_804D0E5C[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1728,10 +1728,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= psCmdListArray[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ptclref_804D0E5C[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1790,10 +1790,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= psNumCmdList[bank]) {
+                    } else if (idx >= psCmdListArray[bank]) {
                         child = NULL;
                     } else {
-                        cl = psCmdListArray[bank][idx];
+                        cl = ptclref_804D0E5C[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {

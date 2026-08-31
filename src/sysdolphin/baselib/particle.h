@@ -33,7 +33,8 @@ psGenerateParticle0(HSD_Particle** head, int linkNo, int bank, u32 kind,
 /* 39CF4C */ void hsd_8039CF4C(s32, HSD_JObj*);
 /* 39D048 */ void hsd_8039D048(void* particle);
 /* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0D58 */ extern int psNumCmdList[65];
+/* 4D0C54 */ extern HSD_PSFormGroup** psNumCmdList[65];
+/* 4D0D58 */ extern int psCmdListArray[65];
 /* 4D0E5C */ extern HSD_PSCmdList** ptclref_804D0E5C[65];
 /* 4D78D8 */ extern u16 hsd_804D78D8;
 /* 4D78DA */ extern u16 hsd_804D78DA;
