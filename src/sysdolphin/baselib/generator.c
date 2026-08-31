@@ -382,7 +382,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 radius;
     f32 angle3;
 
-    angle1 = angle3 = 0.0F;
+    angle3 = angle1 = 0.0F;
     if (gen->count < 1.0F) {
         return gen->count;
     }
