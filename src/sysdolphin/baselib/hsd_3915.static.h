@@ -1,3 +1,5 @@
+#include <sysdolphin/baselib/psstructs.h> // IWYU pragma: keep
+
 // types
 
 // .bss
