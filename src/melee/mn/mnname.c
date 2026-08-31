@@ -1316,21 +1316,20 @@ void mnName_80239FFC(HSD_GObj* gobj)
 
 void mnName_8023A058(HSD_GObj* gobj)
 {
-    u8* p = (u8*) gobj;
-    HSD_JObj* jobj;
+    MnName_GObj* mn = (MnName_GObj*) gobj;
+    HSD_JObj* jobj = (HSD_JObj*) mn->gobj.user_data_remove_func;
     HSD_JObj* child;
 
-    jobj = *(HSD_JObj**) (p + 0x30);
     if (jobj == NULL) {
         child = NULL;
     } else {
-        child = *(HSD_JObj**) ((u8*) jobj + 0x10);
+        child = jobj->child;
     }
     HSD_JObjRemoveAll(child);
 
-    if (*(void**) (p + 0x3C) != NULL) {
-        HSD_SisLib_803A5CC4(*(void**) (p + 0x3C));
-        *(void**) (p + 0x3C) = NULL;
+    if (mn->text != NULL) {
+        HSD_SisLib_803A5CC4(mn->text);
+        mn->text = NULL;
     }
 
     mnName_80239A24(gobj);
