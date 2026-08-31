@@ -4149,11 +4149,9 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
     }
     /// @todo Matching tactic: reuse the loop index for the first copy to steer
     /// MWCC's instruction scheduling without changing the generated accesses.
-    i = 0;
-    hb[i] = handicaps[i];
-    hb[1] = handicaps[1];
-    hb[2] = handicaps[2];
-    hb[3] = handicaps[3];
+    for (i = 0; i < 4; i++) {
+        hb[i] = handicaps[i];
+    }
 }
 
 u8 gm_80169238(u8 ckind)
