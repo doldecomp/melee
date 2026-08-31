@@ -670,7 +670,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                     HSD_JObjSetFlagsAll(ifStock_802F98E8_get_x3C(player),
                                         JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++, user_data++) {
-                        icon_jobj = ifStock_804A1378.player[player].x4[i + 1];
+                        HSD_JObj* icon_jobj =
+                            ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
                             user_data[5] = 0;
                         } else {
@@ -704,7 +705,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x3C,
                                         JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++, user_data++) {
-                        icon_jobj = ifStock_804A1378.player[player].x4[i + 1];
+                        HSD_JObj* icon_jobj =
+                            ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
                             user_data[5] = 0;
                         } else {
