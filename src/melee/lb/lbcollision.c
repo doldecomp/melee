@@ -1014,7 +1014,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float broadphase_scale)
 {
     float hit_end_min_z;
-    float closest_delta_x;
+    float closest_delta_y;
     float hit_start_mid_x;
     float local_delta_x;
     float hurt_mid_z;
@@ -1041,7 +1041,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_end_x;
     float hit_start_mid_y;
     float hit_param_candidate;
-    float closest_delta_y;
+    float closest_delta_x;
     float closest_dist_sq;
     float local_delta_y;
     float start_delta_x;
@@ -1374,12 +1374,12 @@ block_39:
     hurt_closest->x = (x_work * hurt_param) + hurt_start_copy.x;
     hurt_closest->y = (y_work * hurt_param) + hurt_start_y;
     hurt_closest->z = (hurt_delta_z * hurt_param) + hurt_start_z;
-    closest_delta_y = hit_closest->y - hurt_closest->y;
     closest_delta_x = hit_closest->x - hurt_closest->x;
+    closest_delta_y = hit_closest->y - hurt_closest->y;
     closest_delta_z = hit_closest->z - hurt_closest->z;
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
-                      ((closest_delta_y * closest_delta_y) +
-                       (closest_delta_x * closest_delta_x));
+                      ((closest_delta_x * closest_delta_x) +
+                       (closest_delta_y * closest_delta_y));
     if (closest_dist_sq > 0.0F) {
         volatile float sp38;
 
