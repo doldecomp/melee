@@ -2286,8 +2286,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 px = 5.0 + ex;
                 ddx = px - fp->cur_pos.x;
                 ddy = ey - fp->cur_pos.y;
-                valid = ftCo_800A4038_inline1(
-                    px, ey, &floor_pos, &floor_normal, &line_id, &flags);
+                valid = ftCo_800A4038_inline1(px, ey, &floor_pos,
+                                              &floor_normal, &line_id, &flags);
                 if (valid != 0 && !ftCo_800A4038_inline0(fp, data2, px, ey)) {
                     ok = 1;
                 } else {
@@ -3617,9 +3617,10 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
     return 1;
 }
 
-static inline s32 ftCo_800A75DC_CheckFloor(
-    f32 x0, f32 above, f32 x1, f32 below, Vec3* floor_pos, int* line_id,
-    u32* flags, Vec3* floor_normal)
+static inline s32 ftCo_800A75DC_CheckFloor(f32 x0, f32 above, f32 x1,
+                                           f32 below, Vec3* floor_pos,
+                                           int* line_id, u32* flags,
+                                           Vec3* floor_normal)
 {
     int line;
     s32 blocked;
@@ -3627,9 +3628,9 @@ static inline s32 ftCo_800A75DC_CheckFloor(
 
     blocked = 0;
     *line_id = -1;
-    result = mpCheckFloor(x0, above, x1, below, 0.0f, floor_pos, line_id,
-                          flags, floor_normal, -1, -1, -1, NULL,
-                          (Fighter_GObj*) blocked);
+    result =
+        mpCheckFloor(x0, above, x1, below, 0.0f, floor_pos, line_id, flags,
+                     floor_normal, -1, -1, -1, NULL, (Fighter_GObj*) blocked);
     if (result != 0) {
         line = *line_id;
         if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
@@ -3671,9 +3672,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             fy = fp1->cur_pos.y;
             below = fy - 1000.0f;
             above = 10.0f + fy;
-            result = ftCo_800A75DC_CheckFloor(
-                fx2, above, fx, below, &floor_pos, &line_id, &flags,
-                &floor_normal);
+            result =
+                ftCo_800A75DC_CheckFloor(fx2, above, fx, below, &floor_pos,
+                                         &line_id, &flags, &floor_normal);
         }
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
@@ -3771,9 +3772,9 @@ void ftCo_800A7AAC(Fighter* fp)
         mp_UnkStruct0* island;
         f32 below = partner_pos.y - 1000.0f;
         f32 above = 10.0f + partner_pos.y;
-        result = ftCo_800A75DC_CheckFloor(
-            partner_pos.x, above, partner_pos.x, below, &floor_pos, &line_id,
-            &flags, &floor_normal);
+        result = ftCo_800A75DC_CheckFloor(partner_pos.x, above, partner_pos.x,
+                                          below, &floor_pos, &line_id, &flags,
+                                          &floor_normal);
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {

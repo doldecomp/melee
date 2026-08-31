@@ -3196,8 +3196,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             *(s32*) (car + 0xF0) = lo;
 
             {
-                Ground_801C5440(&gp->ground, k,
-                                 lbl_803E3010[HSD_Randi(4)]);
+                Ground_801C5440(&gp->ground, k, lbl_803E3010[HSD_Randi(4)]);
             }
 
             *(f32*) (car + 0xEC) = 1.0F;

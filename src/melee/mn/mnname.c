@@ -1189,8 +1189,8 @@ void mnName_80239A24(HSD_GObj* gobj)
         jobj = HSD_JObjLoadJoint(archive->joint);
         HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                            archive->shapeanim_joint);
-        HSD_JObjReqAnimAll(
-            jobj, (f32) ((u8) i == mn_804A04F0.hovered_selection));
+        HSD_JObjReqAnimAll(jobj,
+                           (f32) ((u8) i == mn_804A04F0.hovered_selection));
         HSD_JObjAnimAll(jobj);
         col_width = HSD_JObjGetTranslationX(
             (HSD_JObj*) data->gobj.user_data_remove_func);

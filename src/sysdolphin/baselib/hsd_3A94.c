@@ -1765,7 +1765,7 @@ s32 fn_803AC7DC(CardState* state)
     s32 i;
 
     if (state->x4C[0] > 0) {
-        total = (s32) fn_803AC7DC_block_count(state, 0) - 1;
+        total = fn_803AC7DC_block_count(state, 0) - 1;
     }
 
     for (i = 1; i < 9; i++) {
@@ -1781,8 +1781,8 @@ s32 fn_803AC7DC(CardState* state)
             break;
         case 1:
             total += fn_803AC7DC_block_count(state, i);
-            if (extra < (s32) fn_803AC7DC_block_count(state, i)) {
-                extra = (s32) fn_803AC7DC_block_count(state, i);
+            if (extra < fn_803AC7DC_block_count(state, i)) {
+                extra = fn_803AC7DC_block_count(state, i);
             }
             break;
         case 2:

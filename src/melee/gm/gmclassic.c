@@ -602,16 +602,16 @@ static gmClassicMatchupData gm_804D4328 = { { 0x053, { 0x21, 0x21, 0x21 }, 0 },
 
 static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
-    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
+    gmClassicRuntimeData* o =
+        (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
     gm_803DDEC8Struct* ptr;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
 
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
-            gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x2B0,
-                                     o->state.order.x60, arg0);
+            gmClassicMatchup* result = gmClassic_801B2BA4(
+                scene_data->matchups.x2B0, o->state.order.x60, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -624,9 +624,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
-            gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x26C,
-                                     o->state.order.x54, arg0);
+            gmClassicMatchup* result = gmClassic_801B2BA4(
+                scene_data->matchups.x26C, o->state.order.x54, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -639,9 +638,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
-            gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x1B8,
-                                     o->state.order.x34, arg0);
+            gmClassicMatchup* result = gmClassic_801B2BA4(
+                scene_data->matchups.x1B8, o->state.order.x34, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -654,9 +652,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
-            gmClassicMatchup* result =
-                gmClassic_801B2BA4(scene_data->matchups.x0CC,
-                                     o->state.order.x0C, arg0);
+            gmClassicMatchup* result = gmClassic_801B2BA4(
+                scene_data->matchups.x0CC, o->state.order.x0C, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -697,7 +694,8 @@ void gm_Mode_Classic_OnLoad(void)
     UnkAllstarData* data;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
-    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
+    gmClassicRuntimeData* o =
+        (gmClassicRuntimeData*) &gmClassicIntroDataBuffer;
     gm_803DDEC8Struct* entry;
     PAD_STACK(40);
 

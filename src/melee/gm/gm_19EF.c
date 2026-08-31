@@ -409,8 +409,7 @@ static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
     }
 }
 
-static inline void fn_8019F9C4_inline2(HSD_JObj* next_jobj,
-                                       HSD_JObj* model)
+static inline void fn_8019F9C4_inline2(HSD_JObj* next_jobj, HSD_JObj* model)
 {
     HSD_JObj* node;
 
@@ -639,7 +638,7 @@ void fn_8019F9C4(u32 arg0)
             // Preserve the retail return-value copy.
             character_gobj =
 #endif
-            GObj_Create(0xE, 0xF, 0);
+                GObj_Create(0xE, 0xF, 0);
         gobj = character_gobj;
     }
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);

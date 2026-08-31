@@ -1051,11 +1051,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     char* p = name_text;
                     if (null_char != (s8) *p) {
                         n = 1;
-                        if (null_char != (s8) *(p += 3)) {
+                        if (null_char != (s8) * (p += 3)) {
                             n = 2;
-                            if (null_char != (s8) *(p += 3)) {
+                            if (null_char != (s8) * (p += 3)) {
                                 n = 3;
-                                if (null_char != (s8) *(p += 3)) {
+                                if (null_char != (s8) * (p += 3)) {
                                     n = 4;
                                 }
                             }

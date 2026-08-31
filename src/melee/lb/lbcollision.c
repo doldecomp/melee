@@ -1018,10 +1018,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                             dot = d1.z * (c3.z - a2.z) +
                                                   ((d1.x * (c3.x - a2.x)) +
                                                    (d1.y * (c3.y - a2.y)));
-                                            scale =
-                                                -dot / ((d1.z * d1.z) +
-                                                        ((d1.x * d1.x) +
-                                                         (d1.y * d1.y)));
+                                            scale = -dot / ((d1.z * d1.z) +
+                                                            ((d1.x * d1.x) +
+                                                             (d1.y * d1.y)));
                                         }
                                         if (scale > 1.0) {
                                             scale = 1.0F;
@@ -1043,10 +1042,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                             dot = d2.z * (c2.z - b0.z) +
                                                   ((d2.x * (c2.x - b0.x)) +
                                                    (d2.y * (c2.y - b0.y)));
-                                            scale =
-                                                -dot / ((d2.z * d2.z) +
-                                                        ((d2.x * d2.x) +
-                                                         (d2.y * d2.y)));
+                                            scale = -dot / ((d2.z * d2.z) +
+                                                            ((d2.x * d2.x) +
+                                                             (d2.y * d2.y)));
                                             if (scale > 1.0) {
                                                 scale = 1.0F;
                                             } else if (scale < 0.0) {

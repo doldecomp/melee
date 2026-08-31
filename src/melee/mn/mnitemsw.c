@@ -472,10 +472,8 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             HSD_JObjSetFlagsAll(sp44, JOBJ_HIDDEN);
             anim_val = mn_8022F298(sp44);
             lb_80011E24(jobj, &sp44, 3, -1);
-            HSD_JObjReqAnimAll(
-                sp44,
-                (f32) mnItemSw_80233A98(
-                    (s32) tbl->item_order[old_cursor]));
+            HSD_JObjReqAnimAll(sp44, (f32) mnItemSw_80233A98(
+                                         (s32) tbl->item_order[old_cursor]));
             HSD_JObjAnimAll(sp44);
             HSD_JObjReqAnimAll(sp44, tbl->x30[0]);
             mn_8022F3D8(sp44, 1, TOBJ_MASK);
@@ -523,8 +521,7 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
                 (void) x;
                 HSD_JObjSetTranslateX(cjobj, x);
                 HSD_JObjSetTranslateY(
-                    cjobj,
-                    y_spacing * (f32) (s32) (cursor - 0x10) +
+                    cjobj, y_spacing * (f32) (s32) (cursor - 0x10) +
                                HSD_JObjGetTranslationY(data->jobjs[4]));
             }
         }

@@ -51,7 +51,10 @@ typedef struct {
 } CharScaleEntry;
 
 /* 3D6A08 */ u32 gmResultPlayerColors[4] = {
-    0x013C59FF, 0x064E01FF, 0x54010BFF, 0x408080FF,
+    0x013C59FF,
+    0x064E01FF,
+    0x54010BFF,
+    0x408080FF,
 };
 
 /* 3D6A18 */ CharScaleEntry gmResultCharacterScaleData[] = {
@@ -204,10 +207,9 @@ typedef struct {
 
 /* 3D7058 */ ResultsCharacterData gmResultCharacterData = {
     {
-        0.85F, 0.8F, 1.0F, 1.0F, 1.0F, 0.7F, 0.9F, 1.0F,
-        1.0F, 0.88F, 0.8F, 1.0F, 0.9F, 1.0F, 0.9F, 1.0F,
-        0.9F, 0.9F, 0.9F, 0.9F, 1.0F, 1.0F, 1.0F, 1.0F,
-        1.0F, 0.79F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+        0.85F, 0.8F, 1.0F, 1.0F,  1.0F, 0.7F, 0.9F, 1.0F, 1.0F, 0.88F, 0.8F,
+        1.0F,  0.9F, 1.0F, 0.9F,  1.0F, 0.9F, 0.9F, 0.9F, 0.9F, 1.0F,  1.0F,
+        1.0F,  1.0F, 1.0F, 0.79F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
     },
     {
         {
@@ -372,43 +374,20 @@ typedef struct {
         },
     },
     {
-        { 0x17 },
-        { 0x29 },
-        { 0x27 },
-        { 0x2C },
-        { 0x05 },
-        { 0x17 },
-        { 0x28 },
-        { 0x24 },
-        { 0x18 },
-        { 0x57 },
-        { 0x13 },
-        { 0x13 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
-        { 0x17 },
+        { 0x17 }, { 0x29 }, { 0x27 }, { 0x2C }, { 0x05 }, { 0x17 }, { 0x28 },
+        { 0x24 }, { 0x18 }, { 0x57 }, { 0x13 }, { 0x13 }, { 0x17 }, { 0x17 },
+        { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 },
+        { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 },
     },
     { 0 },
 };
 
-/* 3D78E8 */ HSD_WObjDesc gmResultCameraEyeDesc = {
-    NULL, { 0.0F, 0.0F, 62.0F }, NULL
-};
-/* 3D78FC */ HSD_WObjDesc gmResultCameraInterestDesc = {
-    NULL, { 0.0F, 0.0F, 0.0F }, NULL
-};
+/* 3D78E8 */ HSD_WObjDesc gmResultCameraEyeDesc = { NULL,
+                                                    { 0.0F, 0.0F, 62.0F },
+                                                    NULL };
+/* 3D78FC */ HSD_WObjDesc gmResultCameraInterestDesc = { NULL,
+                                                         { 0.0F, 0.0F, 0.0F },
+                                                         NULL };
 
 /* 3D7910 */ HSD_CameraDescPerspective gmResultCameraDesc = {
     NULL,
@@ -2007,7 +1986,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 pos2 = *(Vec3*) &config->x80;
                 pos2.y = 100.0f * (f32) (arg2 + 1);
                 Player_80032A04(arg2, &pos2);
-                Player_SetScale(arg2, 1.8f * gmResultCharacterData.scale[kind]);
+                Player_SetScale(arg2,
+                                1.8f * gmResultCharacterData.scale[kind]);
                 Player_80036F34(arg2, variant);
             } else {
                 int var_idx;
@@ -2061,7 +2041,6 @@ void fn_8017A9B4(int slot)
     inline1(disp->player_img2, slot, (u16*) disp->state.dim_w2 + lookup,
             (u16*) disp->state.dim_h2 + lookup);
 }
-
 
 static s32 lbl_804D3FD0 = 0x00500050;
 static s32 lbl_804D3FD4 = 0x00460034;

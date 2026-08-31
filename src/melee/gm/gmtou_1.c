@@ -538,8 +538,8 @@ typedef union TmPlayerAnimFrameTable {
 ASSERT_SIZE(TmPlayerAnimFrameTable, sizeof(s32) * 9);
 
 TmPlayerAnimFrameTable const lbl_803B7CE0 = {
-    { 0x0000001E, 0x00000032, 0x003B0000, 0x003C0046, 0x0001005A,
-      0x00640000, 0x006E0082, 0x00000096, 0x00A00000 }
+    { 0x0000001E, 0x00000032, 0x003B0000, 0x003C0046, 0x0001005A, 0x00640000,
+      0x006E0082, 0x00000096, 0x00A00000 }
 };
 
 void fn_80196FFC(HSD_GObj* gobj)

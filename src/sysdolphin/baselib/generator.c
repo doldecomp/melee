@@ -488,8 +488,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         sin_az = cosf(sin_az);
 
         {
-            f32 projected_z =
-                vel_norm.y * cos_az + vel_norm.z * sin_az;
+            f32 projected_z = vel_norm.y * cos_az + vel_norm.z * sin_az;
             abs_projected = projected_z;
             *(s32*) &abs_projected &= 0x7FFFFFFF;
             if (abs_projected < 1.1754944e-38F) {

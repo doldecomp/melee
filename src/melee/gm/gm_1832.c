@@ -1126,8 +1126,7 @@ void fn_80186634(void* arg0)
     lbl_804D65F4 =
         lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
                            &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
-    lbl_804D65F8 = lbArchive_80016DBC(gm_80186634_ArchiveName,
-                                      &lbl_804D6600,
+    lbl_804D65F8 = lbArchive_80016DBC(gm_80186634_ArchiveName, &lbl_804D6600,
                                       "ScItrAllstar_scene_data", 0);
 
     gm_80186634_SetupLight();

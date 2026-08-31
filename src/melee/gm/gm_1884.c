@@ -41,8 +41,7 @@
 #include <Runtime/runtime.h>
 
 /// @todo .sdata2 order hack
-static inline void
-gm_1884_sdata2_order(void)
+static inline void gm_1884_sdata2_order(void)
 {
     (void) U32_TO_F32;
     (void) 10.0f;
@@ -633,7 +632,8 @@ void fn_801891F4(void)
                 HSD_JObj* jobj;
                 Vec3 pos;
                 lbAudioAx_80024030(8);
-                item = gmTraining_ItemTable[lbl_80473700.css.menu_values[1]].item_id;
+                item = gmTraining_ItemTable[lbl_80473700.css.menu_values[1]]
+                           .item_id;
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
@@ -1036,40 +1036,47 @@ u8 gm_8018A160(u8 difficulty, u8 stage_slot)
 
 f32 gm_8018A188(u8 difficulty, u8 stage_slot)
 {
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)].scale0_pct /
+    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+               .scale0_pct /
            100.0F;
 }
 
 f32 gm_8018A1D8(u8 difficulty, u8 stage_slot)
 {
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)].scale1_pct /
+    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+               .scale1_pct /
            100.0F;
 }
 
 u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx)
 {
-    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)].pad_6[idx * 3];
+    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+        .pad_6[idx * 3];
 }
 
 u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return gmTraining_ClassicStages[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+    return gmTraining_ClassicStages[stage_slot + difficulty * 5]
+        .pad_6[arg2 * 3 + 1];
 }
 
 u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
 {
-    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)].pad_6[2 + idx * 3];
+    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+        .pad_6[2 + idx * 3];
 }
 
 f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)
 {
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)].scale0_pct /
+    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+               .scale0_pct /
            100.0F;
 }
 
 f32 gm_8018A314(u8 difficulty, u8 stage_slot)
 {
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)].scale1_pct /
+    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
+               .scale1_pct /
            100.0F;
 }
 

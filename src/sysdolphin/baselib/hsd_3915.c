@@ -470,8 +470,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 static const GXColor hsd_3915_default_color = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 #ifdef MUST_MATCH
-static inline void
-hsd_3915_sdata2_order0(void)
+static inline void hsd_3915_sdata2_order0(void)
 {
     (void) 1.0F;
     (void) 10.0F;
@@ -499,8 +498,7 @@ void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
 #ifdef MUST_MATCH
 static const f64 hsd_3915_sdata2_half[1] = { 0.5 };
 
-static inline void
-hsd_3915_sdata2_order1(void)
+static inline void hsd_3915_sdata2_order1(void)
 {
     (void) 2.0F;
 }
@@ -593,8 +591,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
 #ifdef MUST_MATCH
 static const f32 hsd_3915_sdata2_zero0[1] = { 0.0F };
 
-static inline void
-hsd_3915_sdata2_order2(void)
+static inline void hsd_3915_sdata2_order2(void)
 {
     (void) 600.0F;
 }
@@ -675,8 +672,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
 static const f64 hsd_3915_sdata2_s32_0[1] = { S32_TO_F32 };
 static const f32 hsd_3915_sdata2_zero1[1] = { 0.0F };
 
-static inline void
-hsd_3915_sdata2_order3(void)
+static inline void hsd_3915_sdata2_order3(void)
 {
     (void) 0.9999F;
     (void) -1.0F;

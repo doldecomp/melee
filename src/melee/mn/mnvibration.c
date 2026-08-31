@@ -1015,8 +1015,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
                 base_y = (spacing * (f32) cursor_row) +
                          mnVibration_JObjGetTranslationY(position_jobj);
                 dirty_jobj = cursor_jobj;
-                mnVibration_JObjSetTranslateY(cursor_jobj, base_y,
-                                               dirty_jobj);
+                mnVibration_JObjSetTranslateY(cursor_jobj, base_y, dirty_jobj);
             }
             {
                 HSD_JObj* position_jobj =

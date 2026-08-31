@@ -686,8 +686,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
 
                         if (mnDiagram2_IsDistanceStat(stat_type) &&
                             mnDiagram_IsDistanceOverflow(
-                                mnDiagram2_GetStatValue(
-                                    is_name_mode, stat_type, entity)))
+                                mnDiagram2_GetStatValue(is_name_mode,
+                                                        stat_type, entity)))
                         {
                             HSD_SisLib_803A6368(text2, 0x7F);
                         } else {
@@ -698,8 +698,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
 
                 {
                     if (mnDiagram2_IsIconOnlyStat(stat_type) &&
-                        (u32) mnDiagram2_GetStatValue(
-                            mode, stat_type, entity) < SELKIND_COUNT)
+                        (u32) mnDiagram2_GetStatValue(mode, stat_type,
+                                                      entity) < SELKIND_COUNT)
                     {
                         jobj = mnDiagram_CreateFighterIcon(
                             mnDiagram2_GetStatValue(mode, stat_type, entity),
@@ -733,8 +733,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     text3->default_alignment = 2;
 
                     if (mnDiagram2_IsTimeStat(stat_type)) {
-                        int val = mnDiagram2_GetStatValue(mode, stat_type,
-                                                          entity);
+                        int val =
+                            mnDiagram2_GetStatValue(mode, stat_type, entity);
                         {
                             u32 unsigned_val = (u32) val;
                             if (unsigned_val > 0x927BF) {
