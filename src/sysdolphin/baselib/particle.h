@@ -36,6 +36,12 @@ psGenerateParticle0(HSD_Particle** head, int linkNo, int bank, u32 kind,
 /* 4D0D58 */ extern int psNumCmdList[65];
 /* 4D0E5C */ extern HSD_PSCmdList** ptclref_804D0E5C[65];
 /* 4D78D8 */ extern u16 hsd_804D78D8;
+/* 4D78DA */ extern u16 hsd_804D78DA;
 /* 4D78DE */ extern u16 hsd_804D78DE;
+/* 4D78E0 */ extern u16 hsd_804D78E0;
+/* 4D78E8 */ extern u32 hsd_804D78E8;
+/* 4D78EC */ extern u32 hsd_804D78EC;
+/* 4D78F0 */ extern HSD_CObj* psCamera;
+/* 4D78F4 */ extern u32 hsd_804D78F4;
 
 #endif

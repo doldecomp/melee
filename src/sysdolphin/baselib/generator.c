@@ -15,18 +15,11 @@
 extern int psCmdListArray[65];
 #endif
 
-/* 4D78F0 */ HSD_CObj* psCamera;
 /* 4D0E5C */
 
-/* 4D78DA */ static u16 hsd_804D78DA;
-/* 4D78E0 */ static u16 hsd_804D78E0;
-/* 4D78E8 */ static u32 hsd_804D78E8;
-/* 4D78EC */ static u32 hsd_804D78EC;
-/* 4D78F0 */ static u32 hsd_804D78F0;
-/* 4D78F4 */ static u32 hsd_804D78F4;
 /* 4D78F8 */ static u32 hsd_804D78F8;
-/* 4D78FC */ HSD_Generator* hsd_804D78FC;
-/* 4D7900 */ void (*hsd_804D7900)(HSD_Generator*);
+/* 4D78FC */ HSD_Generator* hsd_804D78FC = NULL;
+/* 4D7900 */ void (*hsd_804D7900)(HSD_Generator*) = NULL;
 
 /* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
 
@@ -469,7 +462,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Velocity-based rotation */
-    if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
+    if ((gen->type & 0xF) != 1 && vel_mag_sq > 1.1920929e-7F) {
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -865,14 +858,14 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             emit_pos.z -= 0.5F;
 
             /* Multiply by rect's 3x3 matrix */
-            tmpvec.x = gen->aux.rect.yx * emit_pos.y +
-                       gen->aux.rect.xx * emit_pos.x +
+            tmpvec.x = gen->aux.rect.xx * emit_pos.x +
+                       gen->aux.rect.yx * emit_pos.y +
                        gen->aux.rect.zx * emit_pos.z;
-            tmpvec.y = gen->aux.rect.yy * emit_pos.y +
-                       gen->aux.rect.xy * emit_pos.x +
+            tmpvec.y = gen->aux.rect.xy * emit_pos.x +
+                       gen->aux.rect.yy * emit_pos.y +
                        gen->aux.rect.zy * emit_pos.z;
-            tmpvec.z = gen->aux.rect.yz * emit_pos.y +
-                       gen->aux.rect.xz * emit_pos.x +
+            tmpvec.z = gen->aux.rect.xz * emit_pos.x +
+                       gen->aux.rect.yz * emit_pos.y +
                        gen->aux.rect.zz * emit_pos.z;
 
             PSMTXMultVec(rot_mtx, &tmpvec, &emit_pos);
