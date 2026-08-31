@@ -506,6 +506,13 @@ struct grSmashTaunt_GroundVars {
     /* +28 */ f32 xEC;
 };
 
+struct grVenom_Platform_GroundVars {
+    /* +00 gp+C4 */ Ground_GObj* target_gobj;
+    /* +04 gp+C8 */ s32 smash_taunt_timer;
+    /* +08 gp+CC */ HSD_JObj* upper_jobj;
+    /* +0C gp+D0 */ HSD_JObj* lower_jobj;
+};
+
 struct grVenom_GroundVars {
     /* +00 gp+C4 */ union {
         u32 xC4; ///< @todo Not a #u32, either
@@ -1326,6 +1333,16 @@ struct grBigBlue_GroundData {
 };
 ASSERT_SIZE(struct grBigBlue_GroundData, 0x54);
 
+/// Platform manager state (gobj ID 32).
+struct grBigBlue_ManagerVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ void* event_data[3];
+    /* gp+D4 */ HSD_JObj* platform_jobjs[3];
+    /* gp+E0 */ void* event_extra;
+    /* gp+E4 */ struct grBigBlue_GroundData data[3];
+};
+ASSERT_SIZE(struct grBigBlue_ManagerVars, 0x11C);
+
 struct grBigBlue_PlatformVars {
     /* gp+C4 */ u32 xC4;
     /* gp+C8 */ s32 xC8_timer;
@@ -1338,11 +1355,24 @@ struct grBigBlue_PlatformVars {
     /* gp+EC */ f32 xEC;
 };
 
+/// Moving road gobj state (gobj ID 34).
+struct grBigBlue_RoadVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ Vec3 position;
+    /* gp+D4 */ Vec3 previous_position;
+    /* gp+E0 */ Vec3 drift;
+    /* gp+EC */ f32 lateral_drift;
+    /* gp+F0 */ s16 direction;
+    /* gp+F2 */ u8 pad_F2[6];
+    /* gp+F8 */ f32 rotation;
+};
+ASSERT_SIZE(struct grBigBlue_RoadVars, 0x38);
+
 /// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
 /// Different gobjs interpret the same offsets differently.
 ///
 /// Track gobj (ID 32): uses xC8 as HSD_JObj*[30], xCC as u8[30] flags.
-/// Road gobj (ID 34): uses xCC as f32 velocity, xD0/xD8 for position.
+/// Road gobj (ID 34): see #grBigBlue_RoadVars.
 /// Car gobj (ID 33): per-lane data at 0x40-byte stride from gp+D4,
 ///   with fields: state(+0), target(+4), delta(+8), pos Vec3(+C),
 ///   lateral(+20), direction(+2C), gravity(+30), height(+34),
@@ -1350,19 +1380,50 @@ struct grBigBlue_PlatformVars {
 ///   angular_vel(+48).
 
 /// Per-lane data for the Big Blue car gobj (ID 33), 0x40-byte stride from
-/// gp+D4. Only the fields read by the game logic are named here.
+/// gp+D4.
 struct grBigBlue_CarLane {
-    /* +00 gp+D4 */ u8 state : 6;
-    /* +00 gp+D4 */ u8 state_lo : 2;
-    /* +01 gp+D5 */ u8 x1;
+    union {
+        /* +00 gp+D4 */ u16 status;
+        struct {
+            /* +00 gp+D4 */ u8 state : 6;
+            /* +00 gp+D4 */ u8 direction : 1;
+            /* +00 gp+D4 */ u8 state_hi : 1;
+            /* +01 gp+D5 */ u8 x1;
+        };
+        struct {
+            /* +00 gp+D4 */ u16 pad_slot_0 : 7;
+            /* +00 gp+D4 */ u16 collision_slot : 5;
+            /* +00 gp+D4 */ u16 pad_slot_1 : 4;
+        };
+    };
     /* +02 gp+D6 */ s8 x2;
     /* +03 gp+D7 */ u8 x3;
-    /* +04 gp+D8 */ s32 x4;
-    /* +08 gp+DC */ s32 x8;
+    /* +04 gp+D8 */ f32 target;
+    /* +08 gp+DC */ f32 delta;
     /* +0C gp+E0 */ Vec3 pos;
-    /* +18 gp+EC */ u8 pad_18[0x40 - 0x18];
+    /* +18 gp+EC */ f32 alpha;
+    /* +1C gp+F0 */ s32 threshold;
+    /* +20 gp+F4 */ f32 gravity;
+    /* +24 gp+F8 */ f32 height;
+    /* +28 gp+FC */ f32 velocity;
+    /* +2C gp+100 */ f32 accel;
+    /* +30 gp+104 */ f32 rotation;
+    /* +34 gp+108 */ f32 amplitude;
+    /* +38 gp+10C */ f32 angular_velocity;
+    /* +3C gp+110 */ f32 x110;
 };
 ASSERT_SIZE(struct grBigBlue_CarLane, 0x40);
+
+/// Car manager state (gobj ID 33).
+struct grBigBlue_CarVars {
+    /* gp+C4 */ u32 flags;
+    /* gp+C8 */ HSD_JObj** collision_jobjs;
+    /* gp+CC */ u8* ranks;
+    /* gp+D0 */ s16 spawn_timer;
+    /* gp+D2 */ u8 pad_D2[2];
+    /* gp+D4 */ struct grBigBlue_CarLane lanes[4];
+};
+ASSERT_SIZE(struct grBigBlue_CarVars, 0x110);
 
 struct grBigBlue_GroundVars {
     union {
@@ -1397,11 +1458,10 @@ struct grBigBlue_GroundVars {
             /* pad */ char pad_3[4];
             /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
         };
+        struct grBigBlue_ManagerVars manager;
         struct grBigBlue_PlatformVars platform;
-        struct {
-            /* +00 gp+C4 */ u8 pad_C4[0x10];
-            /* +10 gp+D4 */ struct grBigBlue_CarLane lanes[4];
-        } car;
+        struct grBigBlue_RoadVars road;
+        struct grBigBlue_CarVars car;
     };
 };
 
@@ -1876,6 +1936,7 @@ struct Ground {
         struct GroundVars_unk unk;
         struct grHomeRun_GroundVars homerun;
         struct grHomeRun_GroundVars2 homerun2;
+        struct grVenom_Platform_GroundVars venom_platform;
         struct grVenom_GroundVars venom;
         struct grVenom_GroundVars2 venom2;
         struct grYorster_GroundVars yorster;
@@ -1895,10 +1956,11 @@ struct Ground {
         struct grPushOn_GroundVars pushon;
         struct ScrollVars scroll;
         struct grBigBlueRoute_GroundVars car;
+        /// Legacy spellings retained for stringified assertion text.
         struct {
-            /*  +0 gp+C4 */ UNK_T xC4;
+            /*  +0 gp+C4 */ u32 xC4;
             /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
-            /*  +8 gp+CC */ UNK_T rank;
+            /*  +8 gp+CC */ u8* rank;
         } carnull;
     } u;
 };

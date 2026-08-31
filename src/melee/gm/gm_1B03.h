@@ -5,8 +5,8 @@
 
 #include "melee/mn/forward.h"
 
-/* 1B0348 */ void gm_DetermineSubColors(StartMeleeData*); ///< Character tints?
-/* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
+/* 1B0348 */ void gm_SetupSubColors(StartMeleeData*); ///< Character tints?
+/* 1B0474 */ void gm_SetupSuddenDeath(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
 /* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
                               u8);

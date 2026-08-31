@@ -105,7 +105,7 @@ struct PlayerInitData {
     /*0x09*/ u8 team;      // team
     /*0x0A*/ u8 nametag;   // nametag
     /*0x0B*/ u8 xB;
-    /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
+    /*0x0C*/ u8 rumble_enabled : 1; ///< rumble enabled
     u8 xC_b1 : 1;
     u8 xC_b2 : 1; ///< metal
     u8 xC_b3 : 1;
@@ -166,7 +166,7 @@ struct StartMeleeRules {
 
     u32 friendly_fire : 1; ///< friendly fire on
 
-    u32 x2_0 : 1;
+    u32 is_stock : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 single_button : 1;   ///< single-button mode enabled
@@ -187,8 +187,8 @@ struct StartMeleeRules {
     u32 x3_6 : 1;
     u32 x3_7 : 1;
 
-    u32 x4_0 : 1; ///< pause camera enabled?
-    u32 x4_1 : 1;
+    u32 x4_0 : 1;  ///< pause camera enabled?
+    u32 is_vs : 1; ///< Set only by ::gm_801A583C
     u32 x4_2 : 1;
     u32 x4_3 : 1;
     u32 x4_4 : 1;
@@ -297,10 +297,14 @@ typedef enum CSSMatchType {
     TRAINING_MODE = 0x17
 } CSSMatchType;
 
+typedef enum CSSPendingSceneChangeKind {
+    CSSPendingSceneChange_2 = 2,
+} CSSSceneChangeKind;
+
 struct CSSData {
-    u16 unk_0x0; ///< 1p port?
-    u8 match_type;
-    u8 pending_scene_change;
+    u16 unk_0x0;             ///< 1p port?
+    u8 match_type;           ///< ::CSSMatchType
+    u8 pending_scene_change; ///< ::CSSPendingSceneChangeKind
     u8* ko_counts;
     VsModeData vs;
 };

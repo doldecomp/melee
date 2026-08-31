@@ -34,7 +34,7 @@ struct exitData {
 
 void gmTitleMode_OnEnter(UNUSED GameModeState* state)
 {
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 }
 
 void onExit(GameModeState* scene)

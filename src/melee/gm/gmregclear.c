@@ -264,7 +264,7 @@ lbl_80472ED8_t lbl_80472ED8;
 void fn_8017C0C8(void)
 {
     PlayerInitData sp8;
-    gm_8016795C(&sp8);
+    gm_SetupPlayerDefaults(&sp8);
     sp8.slot_type = Gm_PKind_Cpu;
     sp8.stocks = 1;
     sp8.xE = 4;
@@ -946,7 +946,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                         arg1->x50((u8) count, arg1->x0.cpu_level, enemy_idx);
                 }
             }
-            gm_8016795C(&arg0->players[player_idx]);
+            gm_SetupPlayerDefaults(&arg0->players[player_idx]);
             arg0->players[player_idx].slot_type = 1;
             arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
@@ -1273,7 +1273,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
     int i;
     for (i = 0; i < 3; i++) {
         if (arg1[i].ckind != CHKIND_NONE) {
-            gm_8016795C(&arg0[index]);
+            gm_SetupPlayerDefaults(&arg0[index]);
             arg0[index].ckind = arg1[i].ckind;
             arg0[index].slot_type = 1;
             arg0[index].stocks = 1;
@@ -3499,7 +3499,7 @@ void gm_80182174(void)
     lbl_80472ED8.x4 = 0;
     lbl_80472ED8.x8 = 0;
 
-    gm_8016795C(&lbl_80472ED8.xC);
+    gm_SetupPlayerDefaults(&lbl_80472ED8.xC);
 
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;

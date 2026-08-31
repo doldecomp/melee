@@ -16,7 +16,7 @@
  * If any two players are the same character, team, and subcolor (tint),
  * increment the tint of one of them.
  */
-void gm_DetermineSubColors(StartMeleeData* start)
+void gm_SetupSubColors(StartMeleeData* start)
 {
     ssize_t i;
     ssize_t j;
@@ -78,7 +78,7 @@ static inline int gm_801B0474_inline(MatchEnd* arg1, int i)
     return 1;
 }
 
-void gm_801B0474(StartMeleeData* start, MatchEnd* end)
+void gm_SetupSuddenDeath(StartMeleeData* start, MatchEnd* end)
 {
     int var_r7;
     int i;

@@ -543,18 +543,18 @@ void fn_8016B918(void)
     int var_r28;
     int var_r31;
     int i;
-    StartMeleeRules* temp_r3;
+    StartMeleeRules* rules;
     PAD_STACK(0x10);
 
-    temp_r3 = gm_GetRules();
-    if (!temp_r3->x4_1) {
+    rules = gm_GetRules();
+    if (!rules->is_vs) {
         return;
     }
-    if (temp_r3->is_teams != true) {
+    if (rules->is_teams != true) {
         return;
     }
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
             Player_GetEntity(i) != NULL && Player_8003219C(i) != 0 &&
             Player_GetStocks(i) == 0)
@@ -1589,7 +1589,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
-    Player_SetFlagsBit0(arg0, arg1->xC_b0);
+    Player_SetFlagsBit0(arg0, arg1->rumble_enabled);
     Player_SetNametagSlotID(arg0, arg1->nametag);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
@@ -2233,9 +2233,9 @@ void gm_8016F00C(int arg0)
 void fn_8016F030(StartMeleeData* arg0)
 {
     int i;
-    gm_80167A64(&arg0->rules);
+    gm_SetupRulesDefaults(&arg0->rules);
     for (i = 0; i < 6; i++) {
-        gm_8016795C(&arg0->players[i]);
+        gm_SetupPlayerDefaults(&arg0->players[i]);
     }
 }
 
@@ -2249,7 +2249,7 @@ int getPort(PlayerInitData* player, int i)
     }
 }
 
-void gm_8016F088(StartMeleeData* start)
+void gm_LoadRumbleEnabled(StartMeleeData* start)
 {
     ssize_t i;
 
@@ -2257,10 +2257,10 @@ void gm_8016F088(StartMeleeData* start)
         if (start->players[i].slot_type == Gm_PKind_Human &&
             i < PAD_MAX_CONTROLLERS)
         {
-            start->players[i].xC_b0 = gm_RumbleEnabledForPlayer(
+            start->players[i].rumble_enabled = gm_RumbleEnabledForPlayer(
                 getPort(&start->players[i], i), start->players[i].nametag);
         } else {
-            start->players[i].xC_b0 = false;
+            start->players[i].rumble_enabled = false;
         }
     }
 }

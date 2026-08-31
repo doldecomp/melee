@@ -1266,7 +1266,7 @@ config.libs = [
             Object(Matching, "melee/gr/groldkongo.c"),
             Object(Matching, "melee/gr/groldpupupu.c"),
             Object(Matching, "melee/gr/grpura.c"),
-            Object(Linkable, "melee/gr/grgreens.c"),
+            Object(Matching, "melee/gr/grgreens.c"),
             Object(Matching, "melee/gr/grflatzone.c"),
             Object(Matching, "melee/gr/grpushon.c"),
             Object(Matching, "melee/gr/grfigureget.c"),

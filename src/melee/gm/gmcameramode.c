@@ -76,7 +76,7 @@ GameModeState gm_Mode_Camera_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     { -1 },
@@ -96,7 +96,7 @@ void gm_801B24B4(GameModeState* arg0)
     struct GameCache* temp_r31;
 
     temp_r31 = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     temp_r31->mode_kind = GM_CAMERA_MODE;
     lbDvd_80018254();
     lb_8001C550();
@@ -130,7 +130,7 @@ void gm_801B254C(GameModeState* state)
     temp_r30->vs = *temp_r31;
 
     temp_r30_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     temp_r30_2->mode_kind = GM_CAMERA_MODE;
     lbDvd_80018254();
 }
@@ -227,9 +227,9 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
         start->players[i].xD_b3 = true;
     }
 
-    gm_DetermineSubColors(start);
-    gm_8016F088(start);
-    gm_80168FC4();
+    gm_SetupSubColors(start);
+    gm_LoadRumbleEnabled(start);
+    gm_LoadAnnouncer();
     lb_8001C550();
     lbSnap_8001E218(lbDvd_GetPreloadedArchive(2007),
                     lbDvd_GetPreloadedArchive(2008));
@@ -239,10 +239,10 @@ void gm_801B2AF8(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->vs_camera;
     u8* ko_counts = gmVsMelee_GetKOCounts();
-    gm_80168638(&gm_80479D98.match_end);
-    gm_80168710(&gm_80479D98.match_end, vs);
-    gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
-    gm_801A5258(ko_counts, &gm_80479D98.match_end);
+    gm_80168638(&gmVsMelee_VsExitInfo.match_end);
+    gm_80168710(&gmVsMelee_VsExitInfo.match_end, vs);
+    gm_8016247C(gm_801688AC(&gmVsMelee_VsExitInfo.match_end));
+    gmVsMelee_UpdateKOCounts(ko_counts, &gmVsMelee_VsExitInfo.match_end);
     gm_SetNextGameModeStateId(1);
 }
 

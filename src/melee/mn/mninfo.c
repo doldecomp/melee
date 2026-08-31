@@ -38,6 +38,7 @@ typedef struct MnInfoDataLayout {
     char top_shapeanim_joint[0x28];
 } MnInfoDataLayout;
 
+StaticModelDesc mnInfo_804A0958;
 u8 mnInfo_804A0968[0x48];
 HSD_GObj* mnInfo_804D6C78;
 extern GXColor mn_804D4B64;
@@ -164,8 +165,6 @@ static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
 };
 
-#define mnInfo_layout (*(MnInfoDataLayout*) mnInfo_803EFC08)
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -185,7 +184,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = &mnInfo_layout;
+    layout = (MnInfoDataLayout*) mnInfo_803EFC08;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -388,7 +387,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, &mnInfo_layout.anim);
+    mn_8022ED6C(jobj, mnInfo_803EFC08);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -446,7 +445,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, &mnInfo_layout.anim);
+        mn_8022ED6C(jobj, mnInfo_803EFC08);
     }
 }
 
@@ -501,12 +500,15 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
                 mnInfo_80251F04((mnInfo_GObj*) gobj, i, id);
             }
         }
-        jobj = HSD_JObjLoadJoint(mnInfo_804A0958.joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        HSD_JObjAddAnimAll(jobj, mnInfo_804A0958.animjoint,
-                           mnInfo_804A0958.matanim_joint,
-                           mnInfo_804A0958.shapeanim_joint);
+        {
+            StaticModelDesc* model = &mnInfo_804A0958;
+
+            jobj = HSD_JObjLoadJoint(model->joint);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+            HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                               model->shapeanim_joint);
+        }
         HSD_JObjReqAnimAll(jobj, 0.0f);
         mnInfo_802522B8(gobj);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -521,8 +523,6 @@ void fn_80252548(HSD_GObj* gobj)
     PAD_STACK(8);
     fn_80252548_inline(data, gobj);
 }
-
-StaticModelDesc mnInfo_804A0958;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -553,7 +553,8 @@ s32 mnInfo_80252758(void)
     HSD_GObj* gobj;
     HSD_Archive* archive;
     StaticModelDesc* model = &mnInfo_804A0958;
-    char* top_joint = mnInfo_layout.top_joint;
+    MnInfoDataLayout* layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    char* top_joint = layout->top_joint;
     HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);
 
@@ -567,11 +568,11 @@ s32 mnInfo_80252758(void)
     mn_804A04F0.hovered_selection = 0;
 
     archive = mn_804D6BB8;
-    lbArchive_LoadSections(
-        archive, (void**) &model->joint, top_joint, animjoint,
-        mnInfo_layout.top_animjoint, &model->matanim_joint,
-        mnInfo_layout.top_matanim_joint, &model->shapeanim_joint,
-        mnInfo_layout.top_shapeanim_joint, 0);
+    lbArchive_LoadSections(archive, (void**) &model->joint, top_joint,
+                           animjoint, layout->top_animjoint,
+                           &model->matanim_joint, layout->top_matanim_joint,
+                           &model->shapeanim_joint,
+                           layout->top_shapeanim_joint, 0);
 
     mnInfo_80251AFC();
 
@@ -580,8 +581,8 @@ s32 mnInfo_80252758(void)
 
     user_data = HSD_MemAlloc(sizeof(*user_data));
     if (user_data == NULL) {
-        OSReport(mnInfo_layout.assert_report);
-        __assert(mnInfo_layout.assert_file, 0x267, mnInfo_layout.assert_expr);
+        OSReport(layout->assert_report);
+        __assert(layout->assert_file, 0x267, layout->assert_expr);
     }
     mnInfo_80252720(user_data);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);

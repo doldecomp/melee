@@ -549,7 +549,7 @@ void gm_801B5624(GameModeState* arg0)
     }
 
     data->players[0].x10 = allstar->x74;
-    gm_8016F088(data);
+    gm_LoadRumbleEnabled(data);
     allstar->x0.x7 = arg0->id;
 }
 
@@ -676,7 +676,7 @@ void gm_801B5ACC(GameModeState* arg0)
     data->rules.x1_2 = 1;
     data->rules.x1_3 = 1;
     data->rules.x4_4 = 0;
-    gm_8016F088(data);
+    gm_LoadRumbleEnabled(data);
     gm_8016A92C(&data->rules);
 
     gm_801B5ACC_inline1(&gm_803DEC4C[round]);
@@ -718,7 +718,7 @@ void gm_801B5F50(GameModeState* arg0)
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
                 temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
                 gm_80473A18.x0.slot);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 }
 
 void gm_801B5FB4(GameModeState* arg0)
