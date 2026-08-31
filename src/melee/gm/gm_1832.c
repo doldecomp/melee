@@ -1656,6 +1656,9 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
+static char gm_Scene_IntroAllstar_SceneDataName[] =
+    "ScItrAllstar_scene_data";
+
 static char* lbl_803D9750[] = {
     "mc01",
     "mc02",
