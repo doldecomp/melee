@@ -1185,18 +1185,32 @@ block_39:
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
     (void) hurt_end_y;
+#ifdef MUST_MATCH
+    start_delta_y = hurt_start_copy.y;
+    hurt_delta_y = hurt_end_y - start_delta_y;
+    start_delta_y = hit_start_copy.y - start_delta_y;
+#else
     start_delta_y = hit_start_copy.y - hurt_start_copy.y;
     hurt_delta_y = hurt_end_y - hurt_start_copy.y;
+#endif
     hurt_end_x = hurt_end->x;
     (void) hurt_end_x;
+#ifdef MUST_MATCH
+    hurt_delta_x = hurt_end_x - (start_delta_x = hurt_start_copy.x);
+#else
     hurt_delta_x = hurt_end_x - hurt_start_copy.x;
+#endif
     segment_dot = hit_delta.y * hurt_delta_y;
     hurt_len_sq = hurt_delta_y * hurt_delta_y;
     hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
+#ifdef MUST_MATCH
+    start_delta_x = hit_start_copy.x - start_delta_x;
+#else
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
+#endif
     hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
     hit_start_min_z = 1.0F;
