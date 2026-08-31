@@ -572,7 +572,6 @@ inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
         n2 = (cfg->x08 / 3) * 2;
         if (0 < n2) {
             struct {
-                u8 pad0[4];
                 TySortElem tmp2;
                 u8 pad1[4];
                 TySortElem tmp1, tmp0;
@@ -674,7 +673,6 @@ inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 count)
     if (count > 1) {
         s32 pivot;
         s32 n2 = count - 1;
-        TyDspGrid* base = grid;
         if (n2 > 0) {
             struct {
                 TyDspPos tmp2;
@@ -762,7 +760,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
-    PAD_STACK(0x24);
+    PAD_STACK(0x2C);
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
