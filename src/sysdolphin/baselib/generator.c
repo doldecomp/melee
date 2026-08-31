@@ -475,8 +475,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         sin_az = cosf(sin_az);
 
         {
-            f32 projected_z = vel_norm.z * sin_az;
-            projected_z += vel_norm.y * cos_az;
+            f32 projected_z = vel_norm.y * cos_az + vel_norm.z * sin_az;
             if (fabsf_bitwise(projected_z) < 1.1754944e-38F) {
                 if (vel_norm.x >= 0.0F) {
                     elevation = 1.5707964F;
