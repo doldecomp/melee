@@ -34,6 +34,7 @@ typedef struct {
 
 /* 4D78D8 */ u16 hsd_804D78D8;
 /* 4D78DE */ u16 hsd_804D78DE;
+/* 4D78F0 */ HSD_CObj* psCamera;
 static HSD_JObj* hsd_804D08E8[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ HSD_Particle* hsd_804D0948[65];
