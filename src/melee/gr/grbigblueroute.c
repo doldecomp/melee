@@ -605,6 +605,12 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
         gp->u.car.x10A = (s16) new_timer;
     }
 
+#ifdef MUST_MATCH
+    /// @remark Matching tactic: this keeps @c gobj live through route setup
+    /// for MWCC register allocation.
+    if (gobj != NULL) {
+    }
+#endif
     if (route_idx != -1) {
         s32 offset = route_idx * sizeof(RouteEntry);
         RouteEntry* re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
