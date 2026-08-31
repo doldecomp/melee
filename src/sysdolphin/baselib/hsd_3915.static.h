@@ -1,5 +1,3 @@
-#include <sysdolphin/baselib/psstructs.h>
-
 // types
 
 // .bss
