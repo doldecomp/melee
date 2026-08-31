@@ -500,7 +500,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     s32 player_net;
-    s32 scores[6];
+    s32 scores[4];
     u8 rankings[7] = { 0 };
 
     if (lbl_804D65A0 != 0) {
@@ -544,8 +544,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             }
         }
     }
-
-    PAD_STACK(8);
 
     switch (arg2) {
     case 0xD7:
@@ -612,7 +610,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xDB: {
-        s32 vals[4];
+        s32 vals[6];
         int i, j;
         if (x58[arg1].x20 >= 3) {
             {
