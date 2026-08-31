@@ -598,7 +598,7 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
                 gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
-            gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
+            gm_InitChallengerData(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
                         temp_r31, 1U);
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }

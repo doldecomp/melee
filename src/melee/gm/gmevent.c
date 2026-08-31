@@ -734,7 +734,7 @@ void onExitVs(GameModeState* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != CHKIND_MAX) {
-        gm_801736E8(ev->x0, ev->x1, ev->slot, ev->nametag, kind, GM_MENU);
+        gm_InitChallengerData(ev->x0, ev->x1, ev->slot, ev->nametag, kind, GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }

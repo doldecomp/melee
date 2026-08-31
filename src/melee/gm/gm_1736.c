@@ -21,16 +21,17 @@ ChallengerData* gm_GetChallengerData(void)
     return &challenger_data;
 }
 
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
+void gm_InitChallengerData(u8 human_ckind, u8 human_color, u8 human_slot,
+                           u8 human_nametag, u8 cpu_ckind, u8 curr_mode)
 {
     ChallengerData* tmp = &challenger_data;
     memzero(tmp, sizeof(challenger_data));
-    tmp->human_ckind = arg0;
-    tmp->human_color = arg1;
-    tmp->human_slot = arg2;
-    tmp->human_nametag = arg3;
-    tmp->cpu_ckind = arg4;
-    tmp->curr_mode = game_mode;
+    tmp->human_ckind = human_ckind;
+    tmp->human_color = human_color;
+    tmp->human_slot = human_slot;
+    tmp->human_nametag = human_nametag;
+    tmp->cpu_ckind = cpu_ckind;
+    tmp->curr_mode = curr_mode;
 }
 
 #ifdef MUST_MATCH

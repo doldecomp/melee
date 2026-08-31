@@ -392,7 +392,7 @@ void gm_801B65D4(GameModeState* arg0)
         gm_80173EEC();
         gm_80172898(0x80);
         if (temp_r25_2 != CHKIND_NONE) {
-            gm_801736E8(temp_r28->unk_584, temp_r28->unk_585, gm_804D68E8,
+            gm_InitChallengerData(temp_r28->unk_584, temp_r28->unk_585, gm_804D68E8,
                         temp_r28->unk_586, temp_r25_2, 0xF);
             gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
             gm_SetNewGameModePending();
@@ -460,7 +460,7 @@ bool gm_801B688C(bool arg0)
     if ((gm_80181A14() != 0) && (gm_GetCurrentGameMode() == GM_100MAN_VS)) {
         temp_r3 = gm_80173460(temp_r29->start.players[0].ckind);
         if (temp_r3 != 0x21) {
-            gm_801736E8(temp_r29->start.players[0].ckind,
+            gm_InitChallengerData(temp_r29->start.players[0].ckind,
                         temp_r29->start.players[0].color, gm_804D68F0,
                         temp_r29->start.players[0].nametag, temp_r3,
                         gm_GetCurrentGameMode());
