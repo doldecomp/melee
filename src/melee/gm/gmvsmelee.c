@@ -11,6 +11,7 @@
 
 #include "gm/forward.h"
 
+#include "lb/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
@@ -335,16 +336,12 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
                 unk_bool = true;
             }
             if (unk_bool) {
-                lbCardNew_AllocWorkArea();
-                lbCardGame_LoadArchive(0);
-                lbCardGame_UpdatePowerTime();
+                lbCardGame_SetupArchive();
                 return;
             }
         }
     }
 
-    lbCardNew_AllocWorkArea();
-    lbCardGame_LoadArchive(0);
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SetupArchive();
     gm_SetNextGameModeStateId(state_id);
 }

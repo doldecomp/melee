@@ -13,9 +13,8 @@
 
 #include "lb/forward.h"
 
+#include "lb/inlines.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
 
@@ -74,11 +73,7 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
     ChallengerData* challenger = gm_GetChallengerData();
     vs->cpu_ckind = challenger->cpu_ckind;
     vs->human_slot = challenger->human_slot;
-    { /// @todo Inline?
-        lbCardNew_AllocWorkArea();
-        lbCardGame_LoadArchive(0);
-        lbCardGame_UpdatePowerTime();
-    }
+    lbCardGame_SetupArchive();
 }
 
 void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
@@ -110,7 +105,7 @@ void onExitVs(GameModeState* state)
 {
     MatchExitInfo* mei = gm_GetGameModeStateExitData(state);
     ChallengerData* challenger = gm_GetChallengerData();
-    gm_80162968(mei->match_end.frame_count / 60);
+    gm_80162968(mei->match_end.frame_count / GM_FPS);
     gm_8016247C(mei->match_end.player_standings[0].xE);
     if (mei->match_end.outome != OUTCOME_NO_CONTEST &&
         mei->match_end.outome != OUTCOME_RETRY &&
@@ -250,9 +245,7 @@ void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
     if (var_r31 != NULL) {
         *var_r31 = 0;
     }
-    lbCardNew_AllocWorkArea();
-    lbCardGame_LoadArchive(0);
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SetupArchive();
 }
 
 void onExitPrize(UNUSED GameModeState* state)
