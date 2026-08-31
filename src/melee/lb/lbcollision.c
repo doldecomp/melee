@@ -1745,8 +1745,8 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
 {
     Vec3 sp74;
     Vec3 sp68;
-    MtxPtr var_r9;
-    float var_f1;
+    MtxPtr hurt_mtx;
+    float hit_radius;
     Mtx sp38;
 
     if (!shield_hit->skip_update_pos) {
@@ -1765,14 +1765,14 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         PSMTXConcat(arg2, HSD_JObjGetMtxPtr(shield_hit->bone), sp38);
     }
     if (arg2 != NULL) {
-        var_r9 = sp38;
+        hurt_mtx = sp38;
     } else {
-        var_r9 = HSD_JObjGetMtxPtr(shield_hit->bone);
+        hurt_mtx = HSD_JObjGetMtxPtr(shield_hit->bone);
     }
     if (arg0->x43_b1) {
-        var_f1 = arg0->scale;
+        hit_radius = arg0->scale;
     } else {
-        var_f1 = arg0->scale * arg4;
+        hit_radius = arg0->scale * arg4;
     }
 
     return lbColl_80006E58(&arg0->x58,           // hit_start
@@ -1781,10 +1781,10 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                            &shield_hit->pos,     // hurt_end
                            &sp74,                // hit_closest
                            &sp68,                // hurt_closest
-                           var_r9,               // hurt_mtx
+                           hurt_mtx,              // hurt_mtx
                            &arg0->hurt_coll_pos, // out_contact_pos
                            &arg0->coll_distance, // out_overlap
-                           var_f1,               // hit_radius
+                           hit_radius,             // hit_radius
                            shield_hit->size,     // hurt_radius
                            20.0F * arg5          // broadphase_scale
     );
@@ -1819,8 +1819,8 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
     Vec3 sp70;
     Vec3 sp64;
     Mtx sp34;
-    float var_f1;
-    MtxPtr var_r9;
+    float hit_radius;
+    MtxPtr hurt_mtx;
 
     if (arg1->state == HurtCapsule_Enabled) {
         if (!arg1->skip_update_pos) {
@@ -1836,19 +1836,19 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
             PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp34);
         }
         if (arg2 != NULL) {
-            var_r9 = sp34;
+            hurt_mtx = sp34;
         } else {
-            var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
+            hurt_mtx = HSD_JObjGetMtxPtr(arg1->bone);
         }
         if (arg0->x43_b1) {
-            var_f1 = arg0->scale;
+            hit_radius = arg0->scale;
         } else {
-            var_f1 = arg0->scale * hit_scl_y;
+            hit_radius = arg0->scale * hit_scl_y;
         }
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
-                               &arg1->b_pos, &sp70, &sp64, var_r9,
+                               &arg1->b_pos, &sp70, &sp64, hurt_mtx,
                                &arg0->hurt_coll_pos, &arg0->coll_distance,
-                               var_f1, arg1->scale, 3.0F * hurt_scl_y);
+                               hit_radius, arg1->scale, 3.0F * hurt_scl_y);
     }
     return 0;
 }

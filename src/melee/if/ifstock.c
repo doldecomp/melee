@@ -1069,19 +1069,22 @@ void fn_802FAC34(HSD_GObj* arg)
 void ifStock_802FAEC4(void)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    DynamicModelDesc** scene_models;
+    union {
+        void* raw;
+        DynamicModelDesc** typed;
+    } scene_models;
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &scene_models,
+    lbArchive_LoadSections(*ifAll_GetArchive(), &scene_models.raw,
                            "Stc_scemdls", 0);
     {
         HSD_GObj** proc = (HSD_GObj**) &ifStock_804A1ACC.x108;
         HSD_GObj* gobj;
 
-        stock->x0 = scene_models;
-        stock->x4 = scene_models[1];
+        stock->x0 = scene_models.typed;
+        stock->x4 = scene_models.typed[1];
         *proc = NULL;
         ifStock_804A1ACC.x0 = 0;
         gobj = GObj_Create(14, 15, 0);
