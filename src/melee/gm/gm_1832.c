@@ -955,6 +955,8 @@ void fn_80186080(void)
     }
 }
 
+static char gm_80186634_ArchiveName[] = "IrRdMap";
+
 void fn_801861B8(void)
 {
     HSD_Text* text;
@@ -1028,8 +1030,6 @@ void fn_80186400(void)
         HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
-
-static char lbl_804D40B0[] = "IrRdMap";
 
 typedef struct ClassicArchiveNameArray {
     const char* v[4];
@@ -1126,7 +1126,8 @@ void fn_80186634(void* arg0)
     lbl_804D65F4 =
         lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
                            &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
-    lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
+    lbl_804D65F8 = lbArchive_80016DBC(gm_80186634_ArchiveName,
+                                      &lbl_804D6600,
                                       "ScItrAllstar_scene_data", 0);
 
     gm_80186634_SetupLight();
@@ -1282,6 +1283,11 @@ static gm_80186F6C_Entry lbl_803D9498[] = {
     { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
     { -1.1f, 2.5f, 0.0f, 0.4f, 0.4f, 0.4f },
 };
+
+/// Duplicate literals owned by the original All-Star intro split.
+static char gm_80186F6C_JObjFile[7] ATTRIBUTE_ALIGN(8) = "jobj.h";
+static char gm_80186F6C_JObjCondition[5] = "jobj";
+static char gm_Scene_IntroAllstar_ArchiveName[] = "IrAls";
 
 void fn_80186F6C(HSD_GObj* arg0)
 {
@@ -1651,8 +1657,6 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-static char lbl_804D4138[] = "IrNml";
-
 static char* lbl_803D9750[] = {
     "mc01",
     "mc02",
@@ -1773,7 +1777,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     data->x36.active = 0;
 
     stage_index = arg0->stage_index;
-    lbl_804D6620 = lbArchive_80016DBC(lbl_804D4138, &data->x0, &table[48],
+    lbl_804D6620 = lbArchive_80016DBC("IrNml", &data->x0, &table[48],
                                       &data->x4, table[stage_index], NULL);
 
     lbAudioAx_80026F2C((s32) table[stage_index + 12]);
