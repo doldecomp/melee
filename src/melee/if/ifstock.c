@@ -612,7 +612,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     GXColor c1;
     if (stock->x0 != NULL) {
 #ifdef MUST_MATCH
-        (void) stock->player[player = player].x0;
+        (void) &stock->player[player = player];
 #endif
         user_data = ((struct IfStockData*) stock)[player].x0;
         *(user_data += sizeof(struct IfStockDataOffset) -
