@@ -1389,7 +1389,7 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 }
 
-void gm_8016260C(u8 arg0, u8 arg1)
+void gm_SetupHumanResultsScreen(u8 arg0, u8 arg1)
 {
     u32* counter = NULL;
 
@@ -1444,17 +1444,17 @@ u32 gm_GetVsPlayMatchTotal(void)
     return total;
 }
 
-u32 gm_80162800(MatchEnd* arg0)
+u32 gm_80162800(MatchEnd* end)
 {
     u32 count;
     u32* temp_r3;
     u32 sum;
-    u32 i;
+    ssize_t i;
 
     temp_r3 = gmMainLib_GetVsPlayContestants();
     count = 0;
-    for (i = 0; i < 6; i++) {
-        if (arg0->player_standings[i].slot_type == 0) {
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        if (end->player_standings[i].slot_type == Gm_PKind_Human) {
             count++;
         }
     }
@@ -1463,7 +1463,7 @@ u32 gm_80162800(MatchEnd* arg0)
     return count;
 }
 
-void gm_801628C4(u32 arg0, u32 arg1)
+void gm_SetupResultsScreenPlayTime(u32 arg0, u32 arg1)
 {
     u32* temp_r3;
     u32 var_r4;
@@ -1537,7 +1537,7 @@ struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
     return ko_stats;
 }
 
-void gm_80162B4C(s32 amount)
+void gm_RecordSelfDestructs(s32 amount)
 {
     u32* ptr;
     u32 sum;
@@ -3495,74 +3495,74 @@ void gm_801678F8(int port, int arg1, int arg2)
     gm_80167858(port, 120, arg1, arg2);
 }
 
-void gm_8016795C(struct PlayerInitData* arg0)
+void gm_SetupPlayerDefaults(struct PlayerInitData* player)
 {
-    memzero(arg0, sizeof(*arg0));
-    arg0->ckind = CHKIND_NONE;
-    arg0->slot_type = Gm_PKind_NA;
-    arg0->stocks = 0;
-    arg0->color = 0;
-    arg0->slot = 0;
-    arg0->x5 = -1;
-    arg0->spawn_dir = 0;
-    arg0->xB = 0;
-    arg0->sub_color = 0;
-    arg0->handicap = 9;
-    arg0->team = 0;
-    arg0->xC_b0 = false;
-    arg0->nametag = 0x78;
-    arg0->xC_b1 = true;
-    arg0->xE = 4;
-    arg0->cpu_level = 0;
-    arg0->x12 = 0;
-    arg0->hp = 0;
-    arg0->x18 = 1.0F;
-    arg0->x1C = 1.0F;
-    arg0->x20 = 1.0F;
+    memzero(player, sizeof(*player));
+    player->ckind = CHKIND_NONE;
+    player->slot_type = Gm_PKind_NA;
+    player->stocks = 0;
+    player->color = 0;
+    player->slot = 0;
+    player->x5 = -1;
+    player->spawn_dir = 0;
+    player->xB = 0;
+    player->sub_color = 0;
+    player->handicap = 9;
+    player->team = 0;
+    player->rumble_enabled = false;
+    player->nametag = GM_NAMETAG_NONE;
+    player->xC_b1 = true;
+    player->xE = 4;
+    player->cpu_level = 0;
+    player->x12 = 0;
+    player->hp = 0;
+    player->x18 = 1.0F;
+    player->x1C = 1.0F;
+    player->x20 = 1.0F;
 }
 
 void gm_80167A14(struct PlayerInitData* arg0)
 {
     int i;
     for (i = 0; i < 6; i++) {
-        gm_8016795C(&arg0[i]);
+        gm_SetupPlayerDefaults(&arg0[i]);
     }
 }
 
-void gm_80167A64(struct StartMeleeRules* arg0)
+void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
 {
-    memzero(arg0, sizeof(*arg0));
-    arg0->x0_3 = 4;
+    memzero(rules, sizeof(*rules));
+    rules->x0_3 = 4;
 
-    arg0->xC = 0;
-    arg0->xB = 2;
+    rules->xC = 0;
+    rules->xB = 2;
 
-    arg0->x20 = -1;
-    arg0->x28 = 0;
+    rules->x20 = -1;
+    rules->x28 = 0;
 
-    arg0->x3_1 = 1;
+    rules->x3_1 = true;
 
-    arg0->x3_5 = 1;
-    arg0->x3_4 = 1;
-    arg0->x4_0 = 1;
+    rules->x3_5 = true;
+    rules->x3_4 = true;
+    rules->x4_0 = true;
 
-    arg0->timer_shows_hours = 0;
-    arg0->x2_5 = 1;
-    arg0->x2_6 = 1;
+    rules->timer_shows_hours = false;
+    rules->x2_5 = true;
+    rules->x2_6 = true;
 
-    arg0->x2C = 1.0f;
-    arg0->x30 = 1.0f;
-    arg0->x34 = 1.0f;
+    rules->x2C = 1.0f;
+    rules->x30 = 1.0f;
+    rules->x34 = 1.0f;
 
-    arg0->x4_6 = 1;
-    arg0->x4_7 = 1;
-    arg0->xD = 0x6E;
-    arg0->xA = 0;
+    rules->x4_6 = true;
+    rules->x4_7 = true;
+    rules->xD = 110;
+    rules->xA = 0;
 }
 
 void gm_80167B50(VsModeData* arg0)
 {
-    gm_80167A64(&arg0->start.rules);
+    gm_SetupRulesDefaults(&arg0->start.rules);
     gm_80167A14(arg0->start.players);
     arg0->loser = -1;
     arg0->ordered_stage_index = -1;
@@ -4081,7 +4081,7 @@ void gm_80168F88(void)
 }
 
 /// UnclePunch: Audio_LoadAnnouncer
-void gm_80168FC4(void)
+void gm_LoadAnnouncer(void)
 {
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 0x20);

@@ -16,6 +16,7 @@
 #include "baselib/gobjobject.h"
 
 #include "ft/forward.h"
+#include "gm/forward.h"
 
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
@@ -2640,8 +2641,8 @@ void gm_801905F0(StartMeleeData* arg0)
     GameRules* rules = gmMainLib_GetGameRules();
     TmVsData sp18;
 
-    gm_80168FC4();
-    gm_80167A64(&arg0->rules);
+    gm_LoadAnnouncer();
+    gm_SetupRulesDefaults(&arg0->rules);
     arg0->rules.is_teams = false;
     arg0->rules.stkind = tm->x28;
     fn_801640B0(&arg0->rules.x20);
@@ -2668,8 +2669,8 @@ void gm_801905F0(StartMeleeData* arg0)
             }
         }
     }
-    if (arg0->rules.match_kind == 1) {
-        arg0->rules.x2_0 = true;
+    if (arg0->rules.match_kind == MatchKind_Stock) {
+        arg0->rules.is_stock = true;
     }
     arg0->rules.timer_counts_up = false;
     arg0->rules.x4_2 = false;
@@ -2722,10 +2723,10 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].stocks = rules->stock_count;
             arg0->players[i].sub_color = 0;
             arg0->players[i].team = 0xFF;
-            arg0->players[i].xC_b0 =
+            arg0->players[i].rumble_enabled =
                 gm_RumbleEnabledForPlayer(i, arg0->players[i].nametag);
             if (tm->x4B8[i].x0 == 1) {
-                arg0->players[i].xC_b0 = false;
+                arg0->players[i].rumble_enabled = false;
             }
             arg0->players[i].xE = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;

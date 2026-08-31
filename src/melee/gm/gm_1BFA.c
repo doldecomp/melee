@@ -16,7 +16,7 @@
 
 extern UNK_T gm_804D6860[];
 extern StartMeleeData gmVsMelee_StartData;
-extern MatchExitInfo gm_80479D98;
+extern MatchExitInfo gmVsMelee_VsExitInfo;
 
 GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
@@ -35,12 +35,12 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         1,
         2,
         0,
-        gm_801BFABC,
+        gm_ModeState_EnterApproachVs,
         gm_801BFBA8,
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -72,7 +72,7 @@ void gm_801BFA6C(GameModeState* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFABC(GameModeState* arg0)
+void gm_ModeState_EnterApproachVs(GameModeState* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
@@ -80,7 +80,7 @@ void gm_801BFABC(GameModeState* arg0)
 
     temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_GetChallengerData();
-    gm_80167A64(&temp_r30->rules);
+    gm_SetupRulesDefaults(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
     temp_r30->rules.match_kind = 1;
@@ -94,7 +94,7 @@ void gm_801BFABC(GameModeState* arg0)
     temp_r30->players[1].nametag = 0x78;
     temp_r30->players[1].xE = 4;
     temp_r30->players[1].cpu_level = gm_80172CC0(temp_r31->x4, tmp);
-    gm_8016F088(temp_r30);
+    gm_LoadRumbleEnabled(temp_r30);
 }
 
 void gm_801BFBA8(GameModeState* arg0)

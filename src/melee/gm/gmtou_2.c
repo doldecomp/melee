@@ -1174,7 +1174,7 @@ void gm_Scene_TouAlt_OnEnter(void* arg0)
         local.stkind = tmd->x28;
     }
     fn_80196594(tmd);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 
     audio_mask = 0;
     for (j = 0; j < 4; j++) {

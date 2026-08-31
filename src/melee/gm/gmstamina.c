@@ -50,7 +50,7 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     { -1 },
@@ -69,7 +69,7 @@ void gm_801B91C8(GameModeState* state)
     css->match_type = 2;
     css->ko_counts = 0;
     css->vs = *vs;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 }
 
 void gm_801B922C(GameModeState* scene)
@@ -121,15 +121,15 @@ void gm_801B931C(GameModeState* state)
         start->players[i].hp = 150;
     }
 
-    gm_DetermineSubColors(start);
-    gm_8016F088(start);
-    gm_80168FC4();
+    gm_SetupSubColors(start);
+    gm_LoadRumbleEnabled(start);
+    gm_LoadAnnouncer();
 }
 
 void gm_801B9560(GameModeState* scene)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
-    gm_80168710(&gm_80479D98.match_end, vs);
+    gm_80168710(&gmVsMelee_VsExitInfo.match_end, vs);
     gm_801A5AF0(scene, 0, 0);
 }
 

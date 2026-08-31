@@ -1266,7 +1266,7 @@ void gm_801B4064(GameModeState* arg0)
 
     gm_8017CE34(temp_r28, temp_r27, temp_r31->xA, temp_r31->x4, var_r30,
                 var_r29, temp_r31->x2, temp_r31->x6, gm_8017E48C(arg0), tmp);
-    gm_8016F088(temp_r28);
+    gm_LoadRumbleEnabled(temp_r28);
     if (temp_r31->x1 & 8) {
         temp_r28->rules.x44 = gm_8017C838;
     }

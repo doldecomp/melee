@@ -1209,8 +1209,7 @@ void it_2725_Logic5_Dropped(Item_GObj* gobj)
     it_8027CBA4(gobj);
     ip->xDD4_itemVar.likelike.x4C = attr->x4;
 
-    // permuterslop
-    ip = ip2 = GET_ITEM(gobj);
+    ip2 = GET_ITEM(gobj);
     it_802762BC(ip2);
     if (ip2->xDD4_itemVar.likelike.x38 == 1) {
         ecb = ip2->xC1C;

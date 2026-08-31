@@ -151,35 +151,24 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     }
 }
 
-static inline s32 mnStageSw_IsRangeEmpty(u8 range_start, u8 range_end)
-{
-    s32 curr;
-
-    for (curr = range_start; curr <= range_end; curr++) {
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
-static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
-{
-    return index - offset;
-}
-
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
-    s32 lower;
+    s32 found;
+    s32 i;
     s32 curr;
+    s32 low_bound;
+    s32 high_bound;
+    s32 idx;
+    u8 low;
     u8 end;
-    s32 upper;
     u8 start;
     s32 low;
     s32 idx;
     s32 i;
     u8 high;
+    s32 temp;
+    s32 prev;
 
     if (arg0 < 15) {
         low = 0;
@@ -196,7 +185,18 @@ static s32 mnStageSw_80235C58(u8 arg0)
         end = 28;
     }
 
-    if (mnStageSw_IsRangeEmpty(start, end) != 0) {
+    curr = start;
+    next = end;
+    while (curr <= next) {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
+            found = 0;
+            goto loop_done;
+        }
+        curr++;
+    }
+    found = 1;
+loop_done:
+    if (found != 0) {
         return -1;
     }
 
@@ -206,29 +206,26 @@ static s32 mnStageSw_80235C58(u8 arg0)
         return arg0;
     }
 
-    i = 0;
     idx = arg0;
-    next = idx + ++i;
-    curr = idx + 1;
-    lower = (u8) low;
-    upper = high;
-    while (true) {
-        s32 temp = mnStageSw_GetPreviousIndex(i, idx);
-        s32 prev = temp;
-
-        if (lower <= prev &&
+    next = idx + 1;
+    curr = idx + (found = 1);
+    low_bound = low;
+    high_bound = high;
+    for (i = 1; found; i++) {
+        temp = idx - i;
+        prev = temp;
+        if (low_bound <= prev &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) prev])) != 0)
         {
             return prev;
         }
-        if (next <= upper &&
+        if (next <= high_bound &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0)
         {
             return idx + i;
         }
         next++;
         curr++;
-        i++;
     }
 }
 

@@ -87,7 +87,7 @@ static u8 mnCharSel_804D6CF2;
 static u8 mnCharSel_804D6CF3;
 static s8 mnCharSel_804D6CF4;
 static u8 mnCharSel_804D6CF5; ///< number of (open? valid?) CSS doors
-static u8 mnCharSel_804D6CF6;
+static u8 mnCharSel_804D6CF6; ///< ::CSSPendingSceneChangeKind
 static u8 mnCharSel_804D6CF7;
 static u8 mnCharSel_804D6CF8;
 static s8 mnCharSel_804D6CF9;
@@ -1583,7 +1583,7 @@ void mnCharSel_8025EE8C(u8 idx)
     u8 _[8];
 
     HSD_JObj* sp14;
-    HSD_JObj* sp10;
+    HSD_JObj* result_jobj;
     HSD_JObj* spC;
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1601,31 +1601,31 @@ void mnCharSel_8025EE8C(u8 idx)
         if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
             mnCharSel_8025DB34(1);
         }
+        return;
+    }
+    if (mnCharSel_804D6CB0->vs.start.rules.is_teams) {
+        mode_frame = mnCharSel_803F0A48.mode_info[idx].mode_teams_frame;
+        cc0 = mnCharSel_804D6CC0;
+        lb_80011E24(cc0, &result_jobj, 36, -1);
+        cc0 = result_jobj;
+        HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                        AOBJ_ARG_AF, mode_frame);
+        HSD_JObjAnimAll(result_jobj);
+        HSD_ForeachAnim(result_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
     } else {
-        if (mnCharSel_804D6CB0->vs.start.rules.is_teams) {
-            mode_frame = mnCharSel_803F0A48.mode_info[idx].mode_teams_frame;
-            cc0 = mnCharSel_804D6CC0;
-            lb_80011E24(cc0, &sp10, 0x24, -1);
-            cc0 = sp10;
-            HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                            AOBJ_ARG_AF, mode_frame);
-            HSD_JObjAnimAll(sp10);
-            HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
-        } else {
-            mode_frame = mnCharSel_803F0A48.mode_info[idx].mode_ffa_frame;
-            cc0 = mnCharSel_804D6CC0;
-            lb_80011E24(cc0, &spC, 0x24, -1);
-            cc0 = spC;
-            HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                            AOBJ_ARG_AF, mode_frame);
-            HSD_JObjAnimAll(spC);
-            HSD_ForeachAnim(spC, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
-        }
-        for (i = 0; i < mnCharSel_804D6CF5; i++) {
-            mnCharSel_8025DB34(i);
-        }
+        mode_frame = mnCharSel_803F0A48.mode_info[idx].mode_ffa_frame;
+        cc0 = mnCharSel_804D6CC0;
+        lb_80011E24(cc0, &spC, 36, -1);
+        cc0 = spC;
+        HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                        AOBJ_ARG_AF, mode_frame);
+        HSD_JObjAnimAll(spC);
+        HSD_ForeachAnim(spC, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
+    }
+    for (i = 0; i < mnCharSel_804D6CF5; i++) {
+        mnCharSel_8025DB34(i);
     }
 
     (void) 7.5f;
