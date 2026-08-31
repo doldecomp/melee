@@ -1072,7 +1072,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w0inv = -1.0f / w0;
-            w1 = vmtx[2][3] + (prev_z * vmtx[2][2] +
+            w1 = vmtx[2][3] + (vmtx[2][2] * prev_z +
                                (vmtx[2][1] * prev_y + vmtx[2][0] * prev_x));
             if (0.0f == w1) {
                 return;
