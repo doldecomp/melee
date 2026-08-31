@@ -64,13 +64,12 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
     lb_8001CE00();
 }
 
-void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
+void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
 {
     lbl_8046DBD8_t* challenger;
     StartMeleeData* start;
-    u8 nametag;
 
-    start = gm_GetGameModeStateEnterData(arg0);
+    start = gm_GetGameModeStateEnterData(state);
     challenger = gm_GetChallengerData();
     gm_SetupRulesDefaults(&start->rules);
     gm_SetupAllPlayerDefaults(start->players);
@@ -79,13 +78,16 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
     start->rules.x0_3 = 2;
     start->rules.stkind = gm_8016075C(gm_CKindToSelKind(challenger->x4));
     gm_SetupHumanPlayer(&start->players[0], challenger->x0, challenger->x1, 1,
-                challenger->x2);
+                        challenger->x2);
     gm_SetupCpuPlayer(&start->players[1], challenger->x4, 0, 1, 1);
-    nametag = challenger->x3;
-    start->players[0].nametag = challenger->x3;
-    start->players[1].nametag = GM_NAMETAG_NONE;
-    start->players[1].cpu_kind = CpuKind_4;
-    start->players[1].cpu_level = gm_DecideChallengerCpuLevel(challenger->x4, nametag);
+    {
+        u8 nametag = challenger->x3;
+        start->players[0].nametag = challenger->x3;
+        start->players[1].nametag = GM_NAMETAG_NONE;
+        start->players[1].cpu_kind = CpuKind_4;
+        start->players[1].cpu_level =
+            gm_DecideChallengerCpuLevel(challenger->x4, nametag);
+    }
     gm_LoadRumbleEnabled(start);
 }
 
