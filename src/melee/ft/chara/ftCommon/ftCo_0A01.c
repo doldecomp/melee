@@ -1993,14 +1993,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 dist;
     Vec3 island_pos;
-    Vec3 floor_pos0;
-    Vec3 floor_normal0;
-    int line_id0;
-    u32 flags0;
-    Vec3 floor_pos1;
-    Vec3 floor_normal1;
-    int line_id1;
-    u32 flags1;
     f32 ex;
     f32 ey;
     s32 valid;
@@ -2028,7 +2020,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
     info = &stage_info;
-    PAD_STACK(0x18);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -2057,6 +2048,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         dx = fp->cur_pos.x - ex;
         if (dx > 0.0f) {
             f32 land_y;
+
+            PAD_STACK(0x10);
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
                 land_y = fp->pos_delta.y * t + fp->cur_pos.y;
@@ -2073,6 +2066,11 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
+                    u32 flags0;
+                    int line_id0;
+                    Vec3 floor_normal0;
+                    Vec3 floor_pos0;
+
                     px = ex - 5.0;
                     valid = ftCo_800A3908_inline1(px, ey, &floor_pos0,
                                                   &floor_normal0, &line_id0,
@@ -2098,9 +2096,14 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     }
                 }
             } else {
-                ddy = ey - fp->cur_pos.y;
+                u32 flags1;
+                int line_id1;
+                Vec3 floor_normal1;
+                Vec3 floor_pos1;
+
                 px = ex - 5.0;
                 ddx = px - fp->cur_pos.x;
+                ddy = ey - fp->cur_pos.y;
                 valid = ftCo_800A3908_inline1(
                     px, ey, &floor_pos1, &floor_normal1, &line_id1, &flags1);
                 if (valid != 0 && !ftCo_800A3908_inline0(fp, data2, px, ey)) {
@@ -2126,6 +2129,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             }
         }
     }
+    PAD_STACK(8);
     return 0;
 }
 
