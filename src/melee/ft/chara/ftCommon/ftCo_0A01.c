@@ -1055,9 +1055,8 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
-static inline void ftCo_800A75DC_set_target(Fighter* fp, int* x60,
-                                            float arg1, float arg2,
-                                            float arg3)
+static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
+                                            float arg1, float arg2, float arg3)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (*x60 == 0) {
@@ -3653,9 +3652,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         d = -d;
                     }
                     if (d < 5.0) {
-                        ftCo_800A75DC_set_target(
-                            fp0, x60, island->x14.x - 5.0, island->x14.y,
-                            data->x56C + fp1->x1A88.x564);
+                        ftCo_800A75DC_set_target(fp0, x60, island->x14.x - 5.0,
+                                                 island->x14.y,
+                                                 data->x56C + fp1->x1A88.x564);
                     } else {
                         d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
@@ -3703,9 +3702,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         {
             if (data->x54.x - fp0->cur_pos.x > 0.0) {
                 if (fp0->cur_pos.x < island->x8.x) {
-                    ftCo_800A75DC_set_target(
-                        fp0, x60, 5.0 + island->x8.x, island->x8.y,
-                        data->x56C + fp1->x1A88.x564);
+                    ftCo_800A75DC_set_target(fp0, x60, 5.0 + island->x8.x,
+                                             island->x8.y,
+                                             data->x56C + fp1->x1A88.x564);
                 }
             } else {
                 if (fp0->cur_pos.x > island->x14.x) {
@@ -5318,7 +5317,7 @@ static inline float sqrtf_store(float x, volatile float* y)
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         *y = (float) (x * guess);
-        return *(volatile float*) y;
+        return *y;
     }
     return x;
 }
