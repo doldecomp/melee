@@ -2073,7 +2073,7 @@ void* mnNameNew_804A0710[4];
 void* mnNameNew_804A0700[4];
 void* mnNameNew_804A06F0[4];
 
-static u8 mnNameNew_804D4F98[8] = { 0 };
+static u8 mnNameNew_804D4F98[8] ATTRIBUTE_ALIGN(8) = { 0 };
 
 char* mnNameNew_803EE720[] = { (char*) mnNameNew_804D4F98 };
 char* mnNameNew_803EE724[] = { (char*) mnNameNew_804D4F98 };
