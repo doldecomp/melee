@@ -480,9 +480,21 @@ static void fn_803B376C(u8* arg0)
     }
 }
 
-static inline s32 hsd_803B3CD8_dec(s32 value)
+static inline s32 hsd_803B3CD8_bit_length(s32 value)
 {
-    return value - 1;
+    s32 bit;
+
+    for (bit = 0x1F; bit >= 0; bit--) {
+        if (value & (1 << bit)) {
+            return bit + 1;
+        }
+    }
+    return 0;
+}
+
+static inline s32 hsd_803B3CD8_abs(s32 sign, s32 value)
+{
+    return (sign ^ value) - sign;
 }
 
 void hsd_803B3CD8(s32 arg0)
@@ -497,20 +509,8 @@ void hsd_803B3CD8(s32 arg0)
     s32 work_r28_4;
     s32 work_r28_6;
     s32 scratch_r3;
-    s32 scratch_r4;
     s32 scratch_r4_12;
-    s32 scratch_r4_17;
-    s32 scratch_r4_18;
-    s32 scratch_r4_19;
-    s32 scratch_r4_20;
-    s32 scratch_r4_21;
-    s32 scratch_r4_22;
-    s32 scratch_r4_23;
-    s32 scratch_r4_2;
     s32 work_r22;
-    s32 scratch_r4_5;
-    s32 scratch_r4_6;
-    s32 scratch_r4_7;
     s32 scratch_r5;
     s32 scratch_r5_2;
     s32 scratch_r5_3;
@@ -520,10 +520,7 @@ void hsd_803B3CD8(s32 arg0)
     s32 scratch_r5_7;
     s32 scratch_r5_8;
     u8* work_r25_2;
-    s32 work_ctr;
     s32 work_ctr_2;
-    s32 work_ctr_3;
-    s32 scratch_r4_4;
     s32 work_r24;
     s32 work_r25;
     s32 work_r23;
@@ -535,8 +532,6 @@ void hsd_803B3CD8(s32 arg0)
     s32 work_r29;
     s32 work_r29_2;
     s32 work_r29_3;
-    s32 work_r4;
-    s32 work_r4_2;
     s32 work_r5;
     u16 scratch_r28;
     u16 scratch_r29;
@@ -569,53 +564,8 @@ void hsd_803B3CD8(s32 arg0)
     work_r25 = work->data.coef[0] - work->data.prev_dc[arg0];
     scratch_r0 = work_r25 >> 0x1F;
     work_r24 = 0;
-    scratch_r5 = (scratch_r0 ^ work_r25) - scratch_r0;
-    work_r4 = 0x1F;
-    for (work_ctr = 4; work_ctr != 0; work_ctr--) {
-        s32 scratch_r4_3;
-        if (scratch_r5 & (1 << work_r4)) {
-            work_r31 = work_r4 + 1;
-            goto loop_13;
-        }
-        scratch_r4 = work_r4 - 1;
-        if (scratch_r5 & (1 << scratch_r4)) {
-            work_r31 = scratch_r4 + 1;
-            goto loop_13;
-        }
-        scratch_r4_2 = scratch_r4 - 1;
-        if (scratch_r5 & (1 << scratch_r4_2)) {
-            work_r31 = scratch_r4_2 + 1;
-            goto loop_13;
-        }
-        scratch_r4_3 = scratch_r4_2 - 1;
-        if (scratch_r5 & (1 << scratch_r4_3)) {
-            work_r31 = scratch_r4_3 + 1;
-            goto loop_13;
-        }
-        scratch_r4_4 = scratch_r4_3 - 1;
-        if (scratch_r5 & (1 << scratch_r4_4)) {
-            work_r31 = scratch_r4_4 + 1;
-            goto loop_13;
-        }
-        scratch_r4_5 = scratch_r4_4 - 1;
-        if (scratch_r5 & (1 << scratch_r4_5)) {
-            work_r31 = scratch_r4_5 + 1;
-            goto loop_13;
-        }
-        scratch_r4_6 = scratch_r4_5 - 1;
-        if (scratch_r5 & (1 << scratch_r4_6)) {
-            work_r31 = scratch_r4_6 + 1;
-            goto loop_13;
-        }
-        scratch_r4_7 = scratch_r4_6 - 1;
-        if (scratch_r5 & (1 << scratch_r4_7)) {
-            work_r31 = scratch_r4_7 + 1;
-            goto loop_13;
-        }
-        work_r4 = scratch_r4_7 - 1;
-    }
-    work_r31 = 0;
-loop_13:
+    scratch_r5 = hsd_803B3CD8_abs(scratch_r0, work_r25);
+    work_r31 = hsd_803B3CD8_bit_length(scratch_r5);
     work->data.prev_dc[arg0] = work->data.coef[0];
     scratch_r28 = work_r6[work_r31];
     work_r29 = work_r7[work_r31] - 1;
@@ -794,51 +744,7 @@ loop_13:
             }
             scratch_r3 = work_r22 >> 0x1F;
             scratch_r5_9 = (scratch_r3 ^ work_r22) - scratch_r3;
-            work_r4_2 = 0x1F;
-            for (work_ctr_3 = 4; work_ctr_3 != 0; work_ctr_3--) {
-                if (scratch_r5_9 & (1 << work_r4_2)) {
-                    work_r28_4 = work_r4_2 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_17 = work_r4_2 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_17)) {
-                    work_r28_4 = scratch_r4_17 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_18 = scratch_r4_17 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_18)) {
-                    work_r28_4 = scratch_r4_18 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_19 = hsd_803B3CD8_dec(scratch_r4_18);
-                if (scratch_r5_9 & (1 << scratch_r4_19)) {
-                    work_r28_4 = scratch_r4_19 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_20 = scratch_r4_19 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_20)) {
-                    work_r28_4 = scratch_r4_20 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_21 = scratch_r4_20 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_21)) {
-                    work_r28_4 = scratch_r4_21 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_22 = scratch_r4_21 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_22)) {
-                    work_r28_4 = scratch_r4_22 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_23 = scratch_r4_22 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_23)) {
-                    work_r28_4 = scratch_r4_23 + 1;
-                    goto loop_112;
-                }
-                work_r4_2 = scratch_r4_23 - 1;
-            }
-            work_r28_4 = 0;
-        loop_112:
+            work_r28_4 = hsd_803B3CD8_bit_length(scratch_r5_9);
             scratch_r31_2 = work_r27[work_r28_4];
             work_r29_3 = *(work_r26 + work_r28_4) - 1;
             for (; work_r29_3 >= 0; work_r29_3--) {
