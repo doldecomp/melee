@@ -2495,13 +2495,20 @@ static inline s16* mnSnap_GetCardStatus(mnSnap_State* snap)
     return snap->card_status;
 }
 
-static inline void mnSnap_SetBlankImg(mnSnap_State* snap)
+static inline s32* mnSnap_GetPhotoCounts(mnSnap_State* snap)
 {
-    if (snap == NULL) {
-        return;
-    }
-    snap->blank_img =
-        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
+    return snap->photo_count;
+}
+
+static inline void mnSnap_InitPageText(HSD_Text** text)
+{
+    mnSnap_State* snap = &mnSnap_804A0A10;
+
+    snap->page_text = HSD_SisLib_803A6754(0, 0);
+    *text = snap->page_text;
+    (*text)->pos_x = -1.8F;
+    (*text)->pos_y = 9.2F;
+    (*text)->pos_z = 17.0F;
 }
 
 /// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
@@ -2548,7 +2555,7 @@ void mnSnap_80257F24(void)
     f32 dz;
     s32 i;
 
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2625,9 +2632,10 @@ void mnSnap_80257F24(void)
                 1, -1);
 
     slot_jobj_ptr = &snap->slot_a_jobj;
-    mnSnap_SetBlankImg(snap);
+    snap->blank_img =
+        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
 
-    if (snap->photo_count[snap->active_slot] <= 4) {
+    if (mnSnap_GetPhotoCounts(snap)[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);
     } else {
         HSD_JObjClearFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);
@@ -2758,11 +2766,7 @@ void mnSnap_80257F24(void)
     text->default_alignment = 1;
 
     /* Create page text objects */
-    snap->page_text = HSD_SisLib_803A6754(0, 0);
-    text = snap->page_text;
-    text->pos_x = -1.8F;
-    text->pos_y = 9.2F;
-    text->pos_z = 17.0F;
+    mnSnap_InitPageText(&text);
     text->font_size.x = 0.04F;
     text->font_size.y = 0.04F;
     text->default_alignment = 1;
