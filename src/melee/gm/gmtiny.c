@@ -73,7 +73,7 @@ GameModeState gm_Mode_TinyVs_States[] = {
         0x80,
         2,
         0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
@@ -97,8 +97,8 @@ GameModeState gm_Mode_TinyVs_States[] = {
         0xC0,
         2,
         0,
-        gm_801BFCFC,
-        gm_801A6308,
+        gm_ModeState_Prize_OnEnter,
+        gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
             &un_804A1F48,
