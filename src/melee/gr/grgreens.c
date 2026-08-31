@@ -85,9 +85,9 @@ static void sdata2_order(void)
 #define Gr_Greens_Block_Colum 3
 #define Gr_Greens_Block_Max 30
 
+static struct grGreens_YakumonoParam* yakumono_param;
 static u8 grGr_804D6AAC;
 static u8 grGr_804D6AAD;
-static struct grGreens_YakumonoParam* yakumono_param;
 
 static StageCallbacks grGr_callbacks[] = {
     {
