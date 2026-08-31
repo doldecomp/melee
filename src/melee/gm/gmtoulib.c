@@ -94,6 +94,11 @@ typedef struct BracketSrcPtr {
     BracketSrcEntry* ptr;
 } BracketSrcPtr;
 
+typedef union lbl_803D9D20_u {
+    struct lbl_803D9D20_t fields;
+    u8 bytes[sizeof(struct lbl_803D9D20_t)];
+} lbl_803D9D20_u;
+
 static inline void gmTournament_SetBracketByes(BracketEntry* entries,
                                                s32 entrant_count)
 {
@@ -116,7 +121,6 @@ void fn_8018A514(int count, float val)
     BracketEntry* entries;
     BracketSrcEntry* src;
     BracketSrcPtr* srcs;
-    u8* counts;
     int i;
     s32 n;
 
@@ -139,8 +143,7 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    counts = lbl_803D9D20.x20;
-    n = counts[count];
+    n = ((lbl_803D9D20_u*) &lbl_803D9D20)->bytes[i = count + 0x20];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -180,7 +183,6 @@ void fn_8018A514(int count, float val)
         src++;
     }
 
-    (void) counts;
     if (region == 0) {
         gmTournament_SetBracketByes(entries, count);
     }
