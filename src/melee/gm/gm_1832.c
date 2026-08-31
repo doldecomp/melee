@@ -370,6 +370,8 @@ static char lbl_804D40A0[] = { 0x8C, 0x52, 0x92, 0x63, 0x00 };
 static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
                                             "IrEzFigG" };
 
+static char lbl_803D9444[] = "ScItrAllstar_scene_data";
+
 void fn_80184AB8(HSD_GObj* arg0)
 {
     HSD_JObj* sp110;
@@ -380,8 +382,6 @@ void fn_80184AB8(HSD_GObj* arg0)
 
     PAD_STACK(4);
 
-    /// @todo .data order hack
-    (void) "ScItrAllstar_scene_data";
     jobj = arg0->hsd_obj;
     HSD_JObjAnimAll(jobj);
 
@@ -974,8 +974,6 @@ void fn_80186080(void)
     }
 }
 
-static char gm_80186634_ArchiveName[] = "IrRdMap";
-
 void fn_801861B8(void)
 {
     HSD_Text* text;
@@ -1049,6 +1047,8 @@ void fn_80186400(void)
         HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
+
+static char lbl_804D40B0[] = "IrRdMap";
 
 typedef struct ClassicArchiveNameArray {
     const char* v[4];
@@ -1142,11 +1142,10 @@ void fn_80186634(void* arg0)
     efAsync_LoadSync(0);
 
     local.names = *(const ClassicArchiveNameArray*) lbl_803B7C58;
-    lbl_804D65F4 =
-        lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
-                           &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
-    lbl_804D65F8 = lbArchive_80016DBC(gm_80186634_ArchiveName, &lbl_804D6600,
-                                      "ScItrAllstar_scene_data", 0);
+    lbl_804D65F4 = lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
+                                      &lbl_804D65FC, lbl_803D9444, 0);
+    lbl_804D65F8 =
+        lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600, lbl_803D9444, 0);
 
     gm_80186634_SetupLight();
 
