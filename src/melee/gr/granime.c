@@ -942,7 +942,6 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     HSD_JObj* child;
     HSD_MatAnimJoint* mj;
     HSD_MatAnimJoint* cmj;
-    HSD_ShapeAnimJoint* sj;
     u8* eflags;
     s32 flag;
 
@@ -970,18 +969,19 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         mj = NULL;
     }
     if ((arg3 & 4) && (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
-        ((sj = sjp[arg4]) != NULL))
+        ((HSD_ShapeAnimJoint*) (arg3 = (s32) sjp[arg4]) != NULL))
     {
-        sj = &sj[arg2];
+        arg3 += arg2 * sizeof(HSD_ShapeAnimJoint);
         anim_flags |= 0x100;
         req_flags |= 8;
     } else {
-        sj = NULL;
+        arg3 = 0;
     }
     request_flags = req_flags;
     if (arg5 != 0) {
         if (jobj != NULL) {
-            grAnime_801C6A54_noinline(jobj, aj, mj, sj);
+            grAnime_801C6A54_noinline(jobj, aj, mj,
+                                       (HSD_ShapeAnimJoint*) arg3);
             if (!(jobj->flags & 0x1000)) {
                 child = jobj->child;
                 if (aj != NULL) {
@@ -1002,9 +1002,9 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                 } else {
                     cmj = NULL;
                 }
-                if (sj != NULL) {
-                    if (sj != NULL) {
-                        csj = sj->child;
+                if ((HSD_ShapeAnimJoint*) arg3 != NULL) {
+                    if ((HSD_ShapeAnimJoint*) arg3 != NULL) {
+                        csj = ((HSD_ShapeAnimJoint*) arg3)->child;
                     } else {
                         csj = NULL;
                     }
@@ -1066,7 +1066,9 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
             if ((jobj->flags & 0x4020) ? false : true) {
                 grAnime_801C683C_noinline(
                     jobj->u.dobj, mj != NULL ? mj->matanim : NULL,
-                    sj != NULL ? sj->shapeanimdobj : NULL);
+                    (HSD_ShapeAnimJoint*) arg3 != NULL
+                        ? ((HSD_ShapeAnimJoint*) arg3)->shapeanimdobj
+                        : NULL);
             }
         }
         HSD_JObjReqAnimByFlags(jobj, request_flags, farg0);
