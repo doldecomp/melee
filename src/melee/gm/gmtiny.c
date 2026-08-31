@@ -42,7 +42,7 @@ GameModeState gm_Mode_TinyVs_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -54,7 +54,7 @@ GameModeState gm_Mode_TinyVs_States[] = {
         {
             GS_SUDDEN_DEATH,
             &gmVsMelee_StartData,
-            &gm_8047E2A4,
+            &gmVsMelee_SuddenDeathExitInfo,
         },
     },
     {
@@ -65,7 +65,7 @@ GameModeState gm_Mode_TinyVs_States[] = {
         gm_801B8F44,
         {
             GS_RESULTS,
-            &gm_8047C020,
+            &gmVsMelee_ResultsEnterData,
             NULL,
         },
     },
@@ -85,12 +85,12 @@ GameModeState gm_Mode_TinyVs_States[] = {
         0x81,
         2,
         0,
-        gm_801BFABC,
-        gm_801A6254,
+        gm_ModeState_EnterApproachVs,
+        gm_ModeState_ExitApproachVs,
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -150,22 +150,22 @@ void gm_801B8EA8(GameModeState* scene)
 void gm_801B8ED0(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_E50;
-    gm_801A5C3C(scene, data, NULL, fn_801B8E50);
+    gmVsMelee_EnterSuddenDeath(scene, data, NULL, fn_801B8E50);
 }
 
 void gm_801B8F04(GameModeState* scene)
 {
-    gm_801A5EC8(scene);
+    gmVsMelee_ExitSuddenDeath(scene);
 }
 
 void gm_801B8F24(GameModeState* scene)
 {
-    gm_801A5F00(scene);
+    gmVsMelee_EnterResults(scene);
 }
 
 void gm_801B8F44(GameModeState* scene)
 {
-    gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_E50, 0);
+    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->unk_E50, 0);
 }
 
 void gm_Mode_TinyVs_OnInit(void)

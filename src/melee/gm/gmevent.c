@@ -278,7 +278,7 @@ void onExitCss(GameModeState* arg0)
 
 void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
 {
-    gm_8016795C(arg0);
+    gm_SetupPlayerDefaults(arg0);
     arg0->ckind = src->c_kind;
     arg0->slot_type = src->slot_type;
     arg0->stocks = src->stocks;
@@ -290,7 +290,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->team = src->team;
     arg0->nametag = 0x78;
     arg0->xB = src->xB;
-    arg0->xC_b0 = 0;
+    arg0->rumble_enabled = 0;
     arg0->xC_b1 = (src->flags & 0x80) >> 7;
     arg0->xC_b2 = (src->flags & 0x40) >> 6;
     arg0->xC_b3 = (src->flags & 0x20) >> 5;
@@ -375,7 +375,7 @@ void onEnterVs(GameModeState* arg0)
     lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
                           "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900[0];
-    gm_80167A64(&md->rules);
+    gm_SetupRulesDefaults(&md->rules);
     md->rules.match_kind = levels[level]->x8->x0_0;
     md->rules.x0_3 = levels[level]->x8->x0_3;
     md->rules.x0_6 = levels[level]->x8->x0_6;
@@ -471,7 +471,7 @@ void onEnterVs(GameModeState* arg0)
             c = md->players[0].color;
             ev->x1 = c;
             ev->x50[0] = c;
-            md->players[0].xC_b0 =
+            md->players[0].rumble_enabled =
                 gm_RumbleEnabledForPlayer(ev->x6, md->players[0].nametag);
         } else {
             s8 c_kind;
@@ -630,7 +630,7 @@ void onEnterVs(GameModeState* arg0)
         gm_801BA938(ev, 1, 4, 1);
         break;
     }
-    gm_8016F088(md);
+    gm_LoadRumbleEnabled(md);
     gm_80168F88();
 }
 

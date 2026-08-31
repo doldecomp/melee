@@ -945,7 +945,7 @@ void gmClassic_801B3A34(GameModeState* arg0)
     spC = temp_r28;
     gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
                 temp_r31->x6, 1, 0, temp_r31->x4, var_r27, sp8, spC);
-    gm_8016F088(new_var);
+    gm_LoadRumbleEnabled(new_var);
 }
 
 void gmClassic_801B3B40(GameModeState* arg0)
@@ -1042,7 +1042,7 @@ void gmClassic_801B3DD8(GameModeState* scene)
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
                 gm_GetAllStarData()->x0.slot);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 }
 
 void gmClassic_801B3E44(GameModeState* scene)

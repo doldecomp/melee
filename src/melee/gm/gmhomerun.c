@@ -40,7 +40,7 @@ GameModeState gm_Mode_Homerun_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     { -1 },
@@ -66,7 +66,7 @@ void gm_801B98E8(GameModeState* scene)
                 vs->start.players[0].color, vs->start.players[0].nametag, 0,
                 gm_804D68F8);
     game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     game_cache->entries[1].char_id = CHKIND_SANDBAG;
     game_cache->entries[1].color = 0;
     game_cache->stkind = 0x54;
@@ -103,7 +103,7 @@ void gm_801B9A3C(GameModeState* arg0)
     int i;
 
     start = gm_GetGameModeStateEnterData(arg0);
-    gm_80167A64(&start->rules);
+    gm_SetupRulesDefaults(&start->rules);
 
     start->rules = vs->start.rules;
 
@@ -137,7 +137,7 @@ void gm_801B9A3C(GameModeState* arg0)
     gm_801B0620(&start->players[0], vs->start.players[0].ckind,
                 vs->start.players[0].color, 1, gm_804D68F8);
     start->players[0].xD_b2 = true;
-    gm_8016F088(start);
+    gm_LoadRumbleEnabled(start);
     gm_80181A00(start->players[0].ckind, start->players[0].nametag);
     gm_80180B18();
 }

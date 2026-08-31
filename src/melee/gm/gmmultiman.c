@@ -245,10 +245,10 @@ void gm_801B632C(GameModeState* arg0)
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_80167A64(&temp_r30->vs.start.rules);
+    gm_SetupRulesDefaults(&temp_r30->vs.start.rules);
     gm_801B06B0(temp_r30, 0xF, temp_r31->unk_584, 1, temp_r31->unk_585,
                 temp_r31->unk_586, 0, gm_804D68E8);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     gm_804D68E9 = lbTime_8000AF74(gm_804D68E9, 1);
 }
 
@@ -314,7 +314,7 @@ void gm_801B6428(GameModeState* arg0)
         scene->game_cache.stkind = temp_r3->rules.stkind;
     }
     lbDvd_80018254();
-    gm_8016F088(temp_r3);
+    gm_LoadRumbleEnabled(temp_r3);
 }
 
 void gm_801B65D4(GameModeState* arg0)
@@ -489,7 +489,7 @@ static void gm_801B6AD8_inline(GameModeState* scene, int x)
                 temp_r31->start.players[0].color,
                 temp_r31->start.players[0].nametag, 0, gm_804D68F0);
     temp_r31_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     temp_r31_2->entries[1].char_id = CKIND_BOY;
     temp_r31_2->entries[1].color = 0;
     temp_r31_2->entries[2].char_id = CKIND_GIRL;
@@ -559,7 +559,7 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
         }
     }
 
-    gm_8016F088(match);
+    gm_LoadRumbleEnabled(match);
 }
 
 static inline void gmMultiman_InitTimedRules(StartMeleeData* match,
@@ -1054,7 +1054,7 @@ void gm_801B874C(GameModeState* scene)
         temp_r3->players[i].xC_b1 = false;
     }
 
-    gm_8016F088(temp_r3);
+    gm_LoadRumbleEnabled(temp_r3);
     gm_80182554(temp_r3->players[0].ckind, 0x26);
     temp_r28 = gmMainLib_8015D7D4(
         gm_CKindToSelKind(temp_r29->start.players[0].ckind));

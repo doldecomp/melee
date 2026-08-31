@@ -475,9 +475,9 @@ void onEnterVs(GameModeState* arg0)
     temp_r30 = &gmMainLib_804D3EE0->unk_1710;
     md = gm_GetGameModeStateEnterData(arg0);
     gm_80167BC8(temp_r30);
-    gm_8016F088(md);
-    gm_80168FC4();
-    gm_80167A64(&md->rules);
+    gm_LoadRumbleEnabled(md);
+    gm_LoadAnnouncer();
+    gm_SetupRulesDefaults(&md->rules);
 
     md->rules.match_kind = gm_801BF6B8();
     md->rules.x0_6 = false;
@@ -653,7 +653,7 @@ void onEnterMovie(GameModeState* arg)
 {
     PreloadedGameModeState* temp_r31 = lbDvd_GetPreloadCacheScene();
     PAD_STACK(4);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     temp_r31->is_heap_persistent[1] = false;
     lbDvd_80018254();
 }

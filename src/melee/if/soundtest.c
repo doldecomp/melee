@@ -992,7 +992,7 @@ void un_802FFF2C(StartMeleeData* arg0)
     s32 i;
     u16 timer;
 
-    gm_80167A64(r);
+    gm_SetupRulesDefaults(r);
     r->x2_2 = 0;
     r->is_teams = s->x130.xC;
     switch (s->x130.xC8) {
@@ -1038,7 +1038,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         arg0->players[i].color = sp->x38[i];
         arg0->players[i].sub_color = sp->x48[i];
         arg0->players[i].team = sp->x58[i];
-        arg0->players[i].xC_b0 = sp->xDC[i];
+        arg0->players[i].rumble_enabled = sp->xDC[i];
         arg0->players[i].x12 = sp->x68[i];
         arg0->players[i].x18 = sp->x78[i];
         arg0->players[i].x1C = sp->x88[i];

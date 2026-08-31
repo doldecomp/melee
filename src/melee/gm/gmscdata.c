@@ -395,9 +395,9 @@ static GameMode modes[] = {
     {
         false,
         GM_VS,
-        gm_Mode_Vs_OnLoad,
+        gmVsMelee_Mode_OnLoad,
         gm_Mode_Vs_OnUnload,
-        gm_Mode_Vs_OnInit,
+        gmVsMelee_Mode_OnInit,
         gm_Mode_Vs_States,
     },
     {

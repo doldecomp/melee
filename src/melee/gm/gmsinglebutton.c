@@ -10,7 +10,7 @@
 
 /* extern functions referenced in Scenes */
 
-extern void gm_801A6254(GameModeState*);
+extern void gm_ModeState_ExitApproachVs(GameModeState*);
 extern void gm_801A6308(GameModeState*);
 
 GameModeState gm_Mode_SingleButtonVs_States[] = {
@@ -47,7 +47,7 @@ GameModeState gm_Mode_SingleButtonVs_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -59,7 +59,7 @@ GameModeState gm_Mode_SingleButtonVs_States[] = {
         {
             GS_SUDDEN_DEATH,
             &gmVsMelee_StartData,
-            &gm_8047E2A4,
+            &gmVsMelee_SuddenDeathExitInfo,
         },
     },
     {
@@ -70,7 +70,7 @@ GameModeState gm_Mode_SingleButtonVs_States[] = {
         gm_801BA298,
         {
             GS_RESULTS,
-            &gm_8047C020,
+            &gmVsMelee_ResultsEnterData,
             NULL,
         },
     },
@@ -90,12 +90,12 @@ GameModeState gm_Mode_SingleButtonVs_States[] = {
         0x81,
         2,
         0,
-        gm_801BFABC,
-        gm_801A6254,
+        gm_ModeState_EnterApproachVs,
+        gm_ModeState_ExitApproachVs,
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -156,23 +156,23 @@ void gm_801BA1FC(GameModeState* scene)
 void gm_801BA224(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
-    gm_801A5C3C(scene, data, fn_801BA1B4, NULL);
+    gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA1B4, NULL);
 }
 
 void gm_801BA258(GameModeState* scene)
 {
-    gm_801A5EC8(scene);
+    gmVsMelee_ExitSuddenDeath(scene);
 }
 
 void gm_801BA278(GameModeState* scene)
 {
-    gm_801A5F00(scene);
+    gmVsMelee_EnterResults(scene);
 }
 
 void gm_801BA298(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
-    gm_801A5F64(scene, data, 0);
+    gmVsMelee_ExitResults(scene, data, 0);
 }
 
 void gm_Mode_SingleButtonVs_OnInit(void)
