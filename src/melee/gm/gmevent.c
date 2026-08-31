@@ -419,7 +419,7 @@ void onEnterVs(GameModeState* arg0)
     md->rules.x20 = levels[level]->x8->x10;
     md->rules.x28 = levels[level]->x8->x18;
     md->rules.x30 = levels[level]->x8->x1C;
-    md->rules.x34 = levels[level]->x8->unk20;
+    md->rules.game_speed = levels[level]->x8->unk20;
     md->rules.x44 = fn_801BBFE8;
     if (md->rules.timer_counts_up & 1) {
         ev->xB_0 = 1;

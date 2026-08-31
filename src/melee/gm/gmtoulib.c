@@ -2661,7 +2661,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.xB = gmMainLib_8015CC58()->item_freq;
     arg0->rules.x2_2 = false;
     arg0->rules.x18 = 0;
-    arg0->rules.x34 = 1.0f;
+    arg0->rules.game_speed = 1.0f;
     arg0->rules.x30 = fn_801653E8(rules->damage_ratio);
     arg0->rules.x3_4 = false;
     arg0->rules.x3_5 = false;

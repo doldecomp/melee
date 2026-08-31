@@ -265,7 +265,7 @@ void gm_SetGameSpeed(float speed)
 
 void gm_ResetGameSpeed(void)
 {
-    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.x34));
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.game_speed));
 }
 
 void gm_8016B328(void)
@@ -1984,7 +1984,7 @@ void fn_8016E730(StartMeleeData* arg0)
     gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
-    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.x34));
+    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.game_speed));
     Camera_80028B9C(0x46);
     Camera_80030688();
     fn_8016DCC0(arg0);

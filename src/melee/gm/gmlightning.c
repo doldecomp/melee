@@ -129,9 +129,9 @@ void gm_801BA780(GameModeState* scene)
 }
 
 /// Sets game speed to 1.25F for lightning melee
-static void fn_801BA7AC(StartMeleeData* data, StartMeleeData* unused)
+static void fn_801BA7AC(StartMeleeData* start, UNUSED StartMeleeData* vs)
 {
-    data->rules.x34 = 1.25F;
+    start->rules.game_speed = 1.25F;
 }
 
 void gm_801BA7B8(GameModeState* scene)

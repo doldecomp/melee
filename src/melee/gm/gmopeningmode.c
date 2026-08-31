@@ -488,7 +488,7 @@ void onEnterVs(GameModeState* arg0)
     md->rules.disable_pausing = true;
     md->rules.x7 = 0;
     md->rules.x44 = gm_80183218;
-    md->rules.x34 = gm_804DAC88;
+    md->rules.game_speed = gm_804DAC88;
     md->rules.stkind = (u16) gm_801BF694();
     gm_SetupAllPlayerDefaults(md->players);
 

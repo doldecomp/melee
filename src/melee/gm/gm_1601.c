@@ -3552,7 +3552,7 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
 
     rules->x2C = 1.0f;
     rules->x30 = 1.0f;
-    rules->x34 = 1.0f;
+    rules->game_speed = 1.0f;
 
     rules->x4_6 = true;
     rules->x4_7 = true;

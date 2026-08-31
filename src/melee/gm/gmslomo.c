@@ -131,7 +131,7 @@ void gm_801BA588(GameModeState* scene)
 /// Sets game speed to 1/2 for slowmo melee
 void fn_801BA5B4(StartMeleeData* data, StartMeleeData* unused)
 {
-    data->rules.x34 = 0.5F;
+    data->rules.game_speed = 0.5F;
 }
 
 void gm_801BA5C0(GameModeState* scene)

@@ -117,7 +117,7 @@ void gm_801B9A3C(GameModeState* arg0)
     start->rules.is_teams = false;
     start->rules.xB = -1;
     start->rules.time_limit = 10;
-    start->rules.x34 = 1.0f;
+    start->rules.game_speed = 1.0f;
     start->rules.x30 = 1.0f;
 
     start->rules.x5_0 = true;
