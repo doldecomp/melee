@@ -20,7 +20,7 @@
 
 /* 0189EC */ static void lbDvd_800189EC(int);
 
-void lbDvd_800174BC(void)
+void lbDvd_SetupVsPreloadCache(void)
 {
     lbDvd_80018C6C();
     lbDvd_80018254();

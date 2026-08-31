@@ -20,7 +20,7 @@ struct StatsList;
 /* 174338 */ void fn_80174338(void);
 /* 17435C */ void fn_8017435C(void);
 /* 174380 */ void fn_80174380(void);
-/* 1743A4 */ bool gm_801743A4(u8);
+/* 1743A4 */ bool gm_WasMatchCanceled(u8);
 /* 1743C4 */ bool fn_801743C4(s32, struct StatsEntry*);
 /* 174468 */ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2,
                               HSD_Text* text3, struct StatsList* list,

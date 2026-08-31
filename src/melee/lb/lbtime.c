@@ -41,13 +41,12 @@ u32 lbTime_8000AF24(u32 a, int b)
 u32 lbTime_8000AF74(u32 a, int b)
 {
     if (b > 0) {
-        u32 r0 = a & 0xff;
-        r0 = 0xff - r0;
-
-        return (r0 > (unsigned) b) ? a + b : 0xff;
-    } else {
-        int c = a & 0xff;
-
+        u32 lo = a & U8_MAX;
+        lo = U8_MAX - lo;
+        return (lo > b) ? a + b : U8_MAX;
+    }
+    {
+        int c = a & U8_MAX;
         return (c > -b) ? a + b : 0;
     }
 }

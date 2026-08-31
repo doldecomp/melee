@@ -96,7 +96,7 @@ void gm_801B1B74(GameModeState* arg0)
     gm_801B07B4(css, vs_data->start.players[1].ckind, 1,
                 vs_data->start.players[1].color,
                 vs_data->start.players[1].nametag, 0U, gm_804D68C0);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
 }
 #ifdef MUST_MATCH
@@ -218,7 +218,7 @@ void gm_801B1F70(GameModeState* arg0)
 
     vs = &gmMainLib_804D3EE0->unk_D10;
     data = gm_GetGameModeStateEnterData(arg0);
-    gm_80167A64(&data->rules);
+    gm_SetupRulesDefaults(&data->rules);
 
     data->rules = vs->start.rules;
     data->rules.on_pause_override = fn_801B1F6C;
@@ -247,7 +247,7 @@ void gm_801B1F70(GameModeState* arg0)
         }
     }
 
-    gm_8016F088(data);
+    gm_LoadRumbleEnabled(data);
     gm_80189CDC(data);
 }
 #ifdef MUST_MATCH

@@ -110,7 +110,8 @@
 /* 16EF98 */ bool fn_8016EF98(int);
 /* 16F00C */ void gm_8016F00C(int);
 /* 16F030 */ void fn_8016F030(struct StartMeleeData*);
-/* 16F088 */ void gm_8016F088(struct StartMeleeData*); /// Checks rumble?
+/* 16F088 */ void
+gm_LoadRumbleEnabled(struct StartMeleeData*); /// Checks rumble?
 /* 16F120 */ int gm_8016F120(int);
 /* 16F140 */ void fn_8016F140(int);
 /* 16F160 */ int fn_8016F160(int, int);

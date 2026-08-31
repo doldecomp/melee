@@ -448,7 +448,7 @@ void onEnterResults1(GameModeState* arg0)
 
     lbAudioAx_80026F2C(0x14);
     lbAudioAx_8002702C(0x4, sfx_result);
-    gm_80168FC4();
+    gm_LoadAnnouncer();
     gm_801701A0();
     PAD_STACK(8);
 }
