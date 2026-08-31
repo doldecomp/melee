@@ -11,9 +11,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
 
-#ifdef MUST_MATCH
 extern int psCmdListArray[65];
-#endif
 
 /* 4D0E5C */
 
@@ -433,9 +431,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         rot_mtx[1][2] = vec.y;
         rot_mtx[2][2] = vec.z;
 
-        rot_mtx[0][3] = 0.0F;
-        rot_mtx[1][3] = 0.0F;
         rot_mtx[2][3] = 0.0F;
+        rot_mtx[1][3] = 0.0F;
+        rot_mtx[0][3] = 0.0F;
     }
 
     /* Billboard orientation: kind & 0x10000 */
@@ -1064,11 +1062,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     if (linkNo >= 8) {
         return NULL;
     }
-#ifdef MUST_MATCH
     if (idx >= psCmdListArray[bank]) {
-#else
-    if (idx >= psNumCmdList[bank]) {
-#endif
         return NULL;
     }
 
