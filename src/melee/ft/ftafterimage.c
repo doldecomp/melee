@@ -283,9 +283,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
-                            (void) basePosY;
                             basePosZ = curEntry->x0.z;
-
+#ifdef MUST_MATCH
+                            (void) basePosY;
+#endif
                             stepPosX = frac * (nextEntry->x0.x - basePosX);
                             stepPosY = frac * (nextEntry->x0.y - basePosY);
                             stepPosZ = frac * (nextEntry->x0.z - basePosZ);
