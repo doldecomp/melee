@@ -1021,7 +1021,9 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
+#ifdef MUST_MATCH
     u8 operand_pad[4];
+#endif
     float start_delta_z;
     float hit_start_dot;
     float scaled_hurt_radius;
