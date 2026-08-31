@@ -935,13 +935,8 @@ void fn_801AB200(HSD_GObj* gobj)
             lbAudioAx_800237A8(0x7A12A, 0x7F, 0x40);
 
             entry_data = &gm_803DBFD8[selected];
-            check_failed = 0;
-            if (entry_data->check != NULL &&
-                entry_data->check(entry_data->check_arg) == 0)
-            {
-                check_failed = 1;
-            }
-
+            check_failed = entry_data->check != NULL &&
+                           entry_data->check(entry_data->check_arg) == 0;
             base_page = selected * 0xF;
             jp_page = base_page + 7;
             jp_page1 = jp_page;
