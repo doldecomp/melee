@@ -299,7 +299,7 @@ void gm_801B6428(GameModeState* arg0)
     temp_r3->rules.x9 = 1;
     temp_r3->rules.xB = -1;
     temp_r3->rules.on_pause_override = gm_80165290;
-    gm_80167A14(temp_r3->players);
+    gm_SetupAllPlayerDefaults(temp_r3->players);
     if (temp_r31->unk_584 == 0xE) {
         var_r4_2 = 0x20;
     } else {
@@ -422,7 +422,7 @@ void gm_Mode_TargetTest_OnLoad(void)
 
 void gm_Mode_10ManVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_1490);
+    gm_InitVsMode(&gmMainLib_804D3EE0->unk_1490);
 }
 
 void gm_Mode_10ManVs_OnLoad(void)
@@ -531,7 +531,7 @@ void gm_801B6AD8(GameModeState* scene)
 
 static void gmMultiman_LeaveFinish(VsModeData* start_data, CSSData* css_data)
 {
-    gm_80167A14(start_data->start.players);
+    gm_SetupAllPlayerDefaults(start_data->start.players);
     gm_801B0730(css_data, &start_data->start.players[0].ckind, NULL,
                 &start_data->start.players[0].color,
                 &start_data->start.players[0].nametag, NULL);
@@ -543,7 +543,7 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
 {
     int i;
 
-    gm_80167A14(match->players);
+    gm_SetupAllPlayerDefaults(match->players);
 
     for (i = 0; i < 6; i++) {
         match->players[i] = multiman->start.players[i];
@@ -1039,7 +1039,7 @@ void gm_801B874C(GameModeState* scene)
     gm_801B69C0(temp_r3);
     temp_r3->rules.xB = -1;
     gmMultiman_InitScoreRules(temp_r3);
-    gm_80167A14(temp_r3->players);
+    gm_SetupAllPlayerDefaults(temp_r3->players);
 
     for (i = 0; i < 6; i++) {
         temp_r3->players[i] = temp_r29->start.players[i];

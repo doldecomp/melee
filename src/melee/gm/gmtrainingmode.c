@@ -122,7 +122,7 @@ void gm_801B1C24(GameModeState* arg0)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->start.players);
+    gm_SetupAllPlayerDefaults(vs->start.players);
     gm_801B0730(css, &vs->start.players[0].ckind, NULL,
                 &vs->start.players[0].color, &vs->start.players[0].nametag,
                 NULL);
@@ -226,7 +226,7 @@ void gm_801B1F70(GameModeState* arg0)
     data->rules.x3_6 = true;
     data->rules.x2_5 = false;
     data->rules.x2_1 = true;
-    gm_80167A14(data->players);
+    gm_SetupAllPlayerDefaults(data->players);
 
     for (i = 0; i < 4; i++) {
         data->players[i] = vs->start.players[i];
@@ -277,7 +277,7 @@ void gm_Mode_Training_OnInit(void)
     VsModeData* temp_r31 = &gmMainLib_804D3EE0->unk_D10;
     int i;
 
-    gm_80167B50(temp_r31);
+    gm_InitVsMode(temp_r31);
 
     for (i = 0; i < 4; i++) {
         temp_r31->start.players[i].color = i;

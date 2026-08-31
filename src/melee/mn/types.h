@@ -188,7 +188,7 @@ struct StartMeleeRules {
     u32 x3_7 : 1;
 
     u32 x4_0 : 1;  ///< pause camera enabled?
-    u32 is_vs : 1; ///< Set only by ::gm_801A583C
+    u32 is_vs : 1; ///< Set only by ::gmVsMelee_EnterVs
     u32 x4_2 : 1;
     u32 x4_3 : 1;
     u32 x4_4 : 1;

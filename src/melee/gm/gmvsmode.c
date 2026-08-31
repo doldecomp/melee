@@ -217,7 +217,7 @@ void onExitSss(GameModeState* state)
 
 void onEnterVs(GameModeState* state)
 {
-    gm_801A583C(state, gmVsMelee_GetVsData(), NULL, NULL);
+    gmVsMelee_EnterVs(state, gmVsMelee_GetVsData(), NULL, NULL);
 }
 
 void onExitVs(GameModeState* state)
@@ -225,7 +225,7 @@ void onExitVs(GameModeState* state)
     MatchExitInfo* mei;
     ssize_t i;
 
-    gm_801A5AF0(state, gmVsMode_State_Results, gmVsMode_State_SuddenDeath);
+    gmVsMelee_ExitVs(state, gmVsMode_State_Results, gmVsMode_State_SuddenDeath);
     mei = gm_GetGameModeStateExitData(state);
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {

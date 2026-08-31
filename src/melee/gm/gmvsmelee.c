@@ -102,7 +102,7 @@ u8 findSmallestLoser(MatchEnd* end)
 
 void gmVsMelee_Mode_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_melee);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_melee);
     gmMainLib_8015CDEC();
 }
 
@@ -169,7 +169,7 @@ void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs, u8 state_id)
     }
 }
 
-void gm_801A583C(GameModeState* state, VsModeData* vs,
+void gmVsMelee_EnterVs(GameModeState* state, VsModeData* vs,
                  gm_StartMeleeCallback start_cb,
                  gm_PlayerInitCallback player_cb)
 {
@@ -207,7 +207,7 @@ void gm_801A583C(GameModeState* state, VsModeData* vs,
 
 /// @param id0 Next state id if one or zero winners
 /// @param id1 Next state id if multiple winners
-void gm_801A5AF0(GameModeState* state, u8 id0, u8 id1)
+void gmVsMelee_ExitVs(GameModeState* state, u8 id0, u8 id1)
 {
     MatchExitInfo* exit = gm_GetGameModeStateExitData(state);
     ssize_t i;

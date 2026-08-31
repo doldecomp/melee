@@ -139,12 +139,12 @@ void fn_801B8E50(PlayerInitData* arg0, PlayerInitData* unused)
 void gm_801B8E74(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_E50;
-    gm_801A583C(scene, data, NULL, fn_801B8E50);
+    gmVsMelee_EnterVs(scene, data, NULL, fn_801B8E50);
 }
 
 void gm_801B8EA8(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4U, 3U);
+    gmVsMelee_ExitVs(scene, 4U, 3U);
 }
 
 void gm_801B8ED0(GameModeState* scene)
@@ -170,7 +170,7 @@ void gm_801B8F44(GameModeState* scene)
 
 void gm_Mode_TinyVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_E50);
+    gm_InitVsMode(&gmMainLib_804D3EE0->unk_E50);
 }
 
 void gm_Mode_TinyVs_OnLoad(void)

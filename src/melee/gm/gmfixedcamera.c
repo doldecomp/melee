@@ -137,12 +137,12 @@ void fn_801B9FB8(StartMeleeData* arg0, StartMeleeData* arg1)
 void gm_801B9FC8(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
-    gm_801A583C(scene, data, fn_801B9FB8, NULL);
+    gmVsMelee_EnterVs(scene, data, fn_801B9FB8, NULL);
 }
 
 void gm_801B9FFC(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4, 3);
+    gmVsMelee_ExitVs(scene, 4, 3);
 }
 
 void gm_801BA024(GameModeState* scene)
@@ -169,7 +169,7 @@ void gm_801BA098(GameModeState* scene)
 
 void gm_Mode_CameraVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_A90);
+    gm_InitVsMode(&gmMainLib_804D3EE0->unk_A90);
 }
 
 void gm_Mode_CameraVs_OnLoad(void)

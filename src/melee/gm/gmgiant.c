@@ -139,12 +139,12 @@ void fn_801B9060(PlayerInitData* arg0, PlayerInitData* unused)
 void gm_801B9084(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_F90;
-    gm_801A583C(scene, data, NULL, fn_801B9060);
+    gmVsMelee_EnterVs(scene, data, NULL, fn_801B9060);
 }
 
 void gm_801B90B8(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4U, 3U);
+    gmVsMelee_ExitVs(scene, 4U, 3U);
 }
 
 void gm_801B90E0(GameModeState* scene)
@@ -170,7 +170,7 @@ void gm_801B9154(GameModeState* scene)
 
 void gm_Mode_GiantVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_F90);
+    gm_InitVsMode(&gmMainLib_804D3EE0->unk_F90);
 }
 
 void gm_Mode_GiantVs_OnLoad(void)

@@ -2688,7 +2688,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.x3_0 = false;
     }
-    gm_80167A14(arg0->players);
+    gm_SetupAllPlayerDefaults(arg0->players);
 
     for (i = 0; i < 4; i++) {
         if (i < tm->x30) {

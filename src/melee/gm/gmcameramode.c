@@ -248,5 +248,5 @@ void gm_801B2AF8(GameModeState* arg0)
 
 void gm_Mode_Camera_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_camera);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_camera);
 }

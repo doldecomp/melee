@@ -1030,7 +1030,7 @@ void un_802FFF2C(StartMeleeData* arg0)
     r->xB = s->x130.xCC[3] - 1;
     r->xC = -1;
     r->x30 = s->x130.xEC;
-    gm_80167A14(arg0->players);
+    gm_SetupAllPlayerDefaults(arg0->players);
     sp = &s->x130;
     for (i = 0; i < 4; i++) {
         arg0->players[i].ckind = sp->x10[i];

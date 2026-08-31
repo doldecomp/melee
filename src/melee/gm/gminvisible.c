@@ -8,19 +8,20 @@
 
 #include "gm/gmvsmode.h"
 #include "if/if_2FD9.h"
+#include "mn/types.h"
 
 /* 1BA30C */ static void onEnterCss(GameModeState* state);
 /* 1BA338 */ static void onExitCss(GameModeState* state);
 /* 1BA360 */ static void onEnterSss(GameModeState* state);
 /* 1BA388 */ static void onExitSss(GameModeState* state);
-/* 1BA3B4 */ static void fn_801BA3B4(PlayerInitData* arg0,
-                                     PlayerInitData* unused);
+/* 1BA3B4 */ static void initVsPlayer(PlayerInitData* arg0,
+                                      PlayerInitData* unused);
 /* 1BA3C8 */ static void onEnterVs(GameModeState* state);
 /* 1BA3FC */ static void onExitVs(GameModeState* state);
-/* 1BA424 */ static void gm_801BA424(GameModeState* state);
-/* 1BA458 */ static void gm_801BA458(GameModeState* state);
-/* 1BA478 */ static void gm_801BA478(GameModeState* state);
-/* 1BA498 */ static void gm_801BA498(GameModeState* state);
+/* 1BA424 */ static void onEnterSuddenDeath(GameModeState* state);
+/* 1BA458 */ static void onExitSuddenDeath(GameModeState* state);
+/* 1BA478 */ static void onEnterResults(GameModeState* state);
+/* 1BA498 */ static void onExitResults(GameModeState* state);
 
 GameModeState gm_Mode_InvisibleVs_States[] = {
     {
@@ -63,8 +64,8 @@ GameModeState gm_Mode_InvisibleVs_States[] = {
         gmVsMode_State_SuddenDeath,
         lbDvdPreload_3,
         0,
-        gm_801BA424,
-        gm_801BA458,
+        onEnterSuddenDeath,
+        onExitSuddenDeath,
         {
             GS_SUDDEN_DEATH,
             &gmVsMelee_StartData,
@@ -75,8 +76,8 @@ GameModeState gm_Mode_InvisibleVs_States[] = {
         gmVsMode_State_Results,
         lbDvdPreload_3,
         0,
-        gm_801BA478,
-        gm_801BA498,
+        onEnterResults,
+        onExitResults,
         {
             GS_RESULTS,
             &gmVsMelee_ResultsEnterData,
@@ -122,28 +123,29 @@ GameModeState gm_Mode_InvisibleVs_States[] = {
     { GM_GAMEMODESTATE_TERMINATE },
 };
 
-void onEnterCss(GameModeState* scene)
+void onEnterCss(GameModeState* state)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->vs_invisible;
-    gmVsMelee_EnterCss(scene, data, 6);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_invisible;
+    gmVsMelee_EnterCss(state, vs, VS_INVISIBLE);
 }
 
-void onExitCss(GameModeState* scene)
+void onExitCss(GameModeState* state)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->vs_invisible);
+    gmVsMelee_ExitCss(state, &gmMainLib_804D3EE0->vs_invisible);
 }
 
-void onEnterSss(GameModeState* scene)
+void onEnterSss(GameModeState* state)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->vs_invisible);
+    gmVsMelee_EnterSss(state, &gmMainLib_804D3EE0->vs_invisible);
 }
 
-void onExitSss(GameModeState* scene)
+void onExitSss(GameModeState* state)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->vs_invisible, 0);
+    gmVsMelee_ExitSss(state, &gmMainLib_804D3EE0->vs_invisible,
+                      gmVsMode_State_Css);
 }
 
-void fn_801BA3B4(PlayerInitData* start, UNUSED PlayerInitData* vs)
+void initVsPlayer(PlayerInitData* start, UNUSED PlayerInitData* vs)
 {
     start->vs_invisible = true;
 }
@@ -151,39 +153,39 @@ void fn_801BA3B4(PlayerInitData* start, UNUSED PlayerInitData* vs)
 void onEnterVs(GameModeState* state)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->vs_invisible;
-    gm_801A583C(state, vs, NULL, fn_801BA3B4);
+    gmVsMelee_EnterVs(state, vs, NULL, initVsPlayer);
 }
 
 void onExitVs(GameModeState* state)
 {
-    gm_801A5AF0(state, gmVsMode_State_Results, gmVsMode_State_SuddenDeath);
+    gmVsMelee_ExitVs(state, gmVsMode_State_Results, gmVsMode_State_SuddenDeath);
 }
 
-void gm_801BA424(GameModeState* scene)
+void onEnterSuddenDeath(GameModeState* state)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->vs_invisible;
-    gmVsMelee_EnterSuddenDeath(scene, data, NULL, fn_801BA3B4);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_invisible;
+    gmVsMelee_EnterSuddenDeath(state, vs, NULL, initVsPlayer);
 }
 
-void gm_801BA458(GameModeState* scene)
+void onExitSuddenDeath(GameModeState* state)
 {
-    gmVsMelee_ExitSuddenDeath(scene);
+    gmVsMelee_ExitSuddenDeath(state);
 }
 
-void gm_801BA478(GameModeState* scene)
+void onEnterResults(GameModeState* state)
 {
-    gmVsMelee_EnterResults(scene);
+    gmVsMelee_EnterResults(state);
 }
 
-void gm_801BA498(GameModeState* scene)
+void onExitResults(GameModeState* state)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->vs_invisible;
-    gmVsMelee_ExitResults(scene, data, 0);
+    VsModeData* vs = &gmMainLib_804D3EE0->vs_invisible;
+    gmVsMelee_ExitResults(state, vs, gmVsMode_State_Css);
 }
 
 void gm_Mode_InvisibleVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_invisible);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_invisible);
 }
 
 void gm_Mode_InvisibleVs_OnLoad(void)

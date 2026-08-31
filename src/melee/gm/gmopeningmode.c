@@ -490,7 +490,7 @@ void onEnterVs(GameModeState* arg0)
     md->rules.x44 = gm_80183218;
     md->rules.x34 = gm_804DAC88;
     md->rules.stkind = (u16) gm_801BF694();
-    gm_80167A14(md->players);
+    gm_SetupAllPlayerDefaults(md->players);
 
     for (i = 0; i < 4; i++) {
         CharacterKind kind = gm_801BF648(i);

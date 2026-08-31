@@ -138,7 +138,7 @@ void gm_801B0664(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
                  u8 arg5, u8 level, u8 slot)
 {
-    gm_80167B50(&css_data->vs);
+    gm_InitVsMode(&css_data->vs);
     css_data->match_type = type;
     css_data->unk_0x0 = slot + 1;
     css_data->vs.start.players[slot].ckind = c_kind;

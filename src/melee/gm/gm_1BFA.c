@@ -81,7 +81,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
     temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_SetupRulesDefaults(&temp_r30->rules);
-    gm_80167A14(temp_r30->players);
+    gm_SetupAllPlayerDefaults(temp_r30->players);
     temp_r30->rules.x0_6 = false;
     temp_r30->rules.match_kind = 1;
     temp_r30->rules.x0_3 = 2;

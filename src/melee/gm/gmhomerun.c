@@ -84,7 +84,7 @@ void gm_801B999C(GameModeState* scene)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->start.players);
+    gm_SetupAllPlayerDefaults(vs->start.players);
     gm_801B0730(temp_r3, &vs->start.players[0].ckind, NULL,
                 &vs->start.players[0].color, &vs->start.players[0].nametag,
                 NULL);
@@ -178,7 +178,7 @@ void gm_801B9DD8(GameModeState* arg0)
 void gm_Mode_Homerun_OnInit(void)
 {
     VsModeData* data = &gm_80497618;
-    gm_80167B50(data);
+    gm_InitVsMode(data);
 }
 
 void gm_Mode_Homerun_OnLoad(void)

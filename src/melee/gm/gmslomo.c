@@ -137,12 +137,12 @@ void fn_801BA5B4(StartMeleeData* data, StartMeleeData* unused)
 void gm_801BA5C0(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_1210;
-    gm_801A583C(scene, data, fn_801BA5B4, NULL);
+    gmVsMelee_EnterVs(scene, data, fn_801BA5B4, NULL);
 }
 
 void gm_801BA5F4(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4, 3);
+    gmVsMelee_ExitVs(scene, 4, 3);
 }
 
 void gm_801BA61C(GameModeState* scene)
@@ -168,7 +168,7 @@ void gm_801BA690(GameModeState* scene)
 
 void gm_Mode_SlowMo_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_1210);
+    gm_InitVsMode(&gmMainLib_804D3EE0->unk_1210);
 }
 
 void gm_Mode_SlowMo_OnLoad(void)

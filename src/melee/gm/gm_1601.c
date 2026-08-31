@@ -3521,11 +3521,11 @@ void gm_SetupPlayerDefaults(struct PlayerInitData* player)
     player->x20 = 1.0F;
 }
 
-void gm_80167A14(struct PlayerInitData* arg0)
+void gm_SetupAllPlayerDefaults(struct PlayerInitData* player)
 {
-    int i;
-    for (i = 0; i < 6; i++) {
-        gm_SetupPlayerDefaults(&arg0[i]);
+    ssize_t i;
+    for (i = 0; i < Gm_Player_NumMax; i++) {
+        gm_SetupPlayerDefaults(&player[i]);
     }
 }
 
@@ -3560,13 +3560,13 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
     rules->xA = 0;
 }
 
-void gm_80167B50(VsModeData* arg0)
+void gm_InitVsMode(VsModeData* vs)
 {
-    gm_SetupRulesDefaults(&arg0->start.rules);
-    gm_80167A14(arg0->start.players);
-    arg0->loser = -1;
-    arg0->ordered_stage_index = -1;
-    arg0->winner = -1;
+    gm_SetupRulesDefaults(&vs->start.rules);
+    gm_SetupAllPlayerDefaults(vs->start.players);
+    vs->loser = -1;
+    vs->ordered_stage_index = -1;
+    vs->winner = -1;
 }
 
 void gm_80167BC8(VsModeData* vs_data)
