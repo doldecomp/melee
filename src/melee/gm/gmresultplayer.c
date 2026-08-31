@@ -2093,9 +2093,38 @@ static inline u32* fn_8017AA78_get_dim_h1(lbl_8046E3AC_t* state)
     return state->dim_h1;
 }
 
+static inline u32*
+fn_8017AA78_get_dim_h2(lbl_8046E3AC_t* result_layout_state)
+{
+    return result_layout_state->dim_h2;
+}
+
 static inline int fn_8017AA78_get_result(ResultsDisplayLayout* disp)
 {
     return disp->state.match_end.result;
+}
+
+typedef union {
+    lbl_8046E3AC_t* state;
+    u8* bytes;
+} ResultsStatePointer;
+
+static inline void fn_8017AA78_set_x0_0(u8 x0_0_value)
+{
+    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
+
+    disp->state.x0_0 = x0_0_value;
+}
+
+static inline void fn_8017AA78_inline4(PackedS16x4** x22f4,
+                                       lbl_8046E3AC_t** result_state,
+                                       PackedS16x4** score_table)
+{
+    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
+
+    *x22f4 = (PackedS16x4*) gmResultX22F4Init;
+    *result_state = &disp->state;
+    *score_table = (PackedS16x4*) gmResultScoreTableInit;
 }
 
 void fn_8017AA78(const u8* arg0)
@@ -2104,7 +2133,7 @@ void fn_8017AA78(const u8* arg0)
     PackedS16x4* p5;
     PackedS16x4* p7;
     lbl_8046E3AC_t* state;
-    u8* player_state;
+    ResultsStatePointer player_state;
 
     memzero(disp->pad_000, sizeof(disp->pad_000));
     lbBgFlash_800208EC(6);
@@ -2121,13 +2150,14 @@ void fn_8017AA78(const u8* arg0)
     ftDemo_ObjAllocInit();
     fn_8017AA78_init_state(GX_TF_RGB5A3);
 
-    disp->state.x0_0 = 1;
+    fn_8017AA78_set_x0_0(1);
     disp->state.x0_4 = 0;
     disp->state.x0_6 = 0;
+    fn_8017AA78_inline4(&p7, &state, &p5);
+#ifdef MUST_MATCH
     p5 = (PackedS16x4*) gmResultScoreTableInit;
-    state = &disp->state;
-    p7 = (PackedS16x4*) gmResultX22F4Init;
-    player_state = state->player_flags;
+#endif
+    player_state.state = state;
 
     {
         s32 a;
@@ -2148,13 +2178,20 @@ void fn_8017AA78(const u8* arg0)
             dim_h1[1] = b;
         }
         a = lbl_804D3FE0;
+        (void) a;
         b = lbl_804D3FE4;
+        (void) b;
         state->dim_w2[0] = a;
         state->dim_w2[1] = b;
-        a = lbl_804D3FE8;
-        b = lbl_804D3FEC;
-        state->dim_h2[0] = a;
-        state->dim_h2[1] = b;
+        {
+            u32* dim_h2 = fn_8017AA78_get_dim_h2(state);
+            a = lbl_804D3FE8;
+            (void) a;
+            b = lbl_804D3FEC;
+            (void) b;
+            dim_h2[0] = a;
+            dim_h2[1] = b;
+        }
         a = lbl_804D3FF0;
         b = lbl_804D3FF4;
         ((u32*) state->scissor_y)[0] = a;
@@ -2167,9 +2204,9 @@ void fn_8017AA78(const u8* arg0)
 
     {
         int i;
-        for (i = 0; i < 4; i++, player_state++) {
-            player_state[0] = 0;
-            player_state[0x23] = arg0[i];
+        for (i = 0; i < 4; player_state.bytes++, i++) {
+            player_state.bytes[1] = 0;
+            player_state.bytes[0x24] = arg0[i];
             if ((u8) fn_8017AA78_get_result(disp) == OUTCOME_NO_CONTEST) {
                 struct MatchTeamData* team_standings;
                 state->match_end.player_standings[i].is_big_loser = 1;
