@@ -1023,6 +1023,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     Vec3 hit_delta;
 #ifdef MUST_MATCH
     u8 operand_pad[4];
+    u8 frame_pad[32];
 #endif
     float start_delta_z;
     float hit_start_dot;
@@ -1045,7 +1046,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float local_delta_y;
     float start_delta_x;
     float hurt_param_from_hit_start;
-    Mtx inv_hurt_mtx;
     float hurt_delta_z;
     float x_work;
     float hit_end_min_x;
@@ -1063,8 +1063,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_max_y;
     float hurt_len_sq;
     float hit_end_max_z;
-    float candidate_hurt_param;
-    float candidate_hit_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
@@ -1088,13 +1086,16 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     f64 closest_rsqrt_estimate;
     f64 closest_rsqrt_step1;
     f64 closest_rsqrt_step2;
+    float candidate_hurt_param;
+    float candidate_hit_param;
+    Mtx inv_hurt_mtx;
     s32 is_hurt_segment_degenerate;
     s32 is_hit_segment_degenerate;
     s32 is_parallel;
     s32 is_zero_distance;
     float hurt_start_y;
     float hurt_start_z;
-    PAD_STACK(40);
+    PAD_STACK(4);
 
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
