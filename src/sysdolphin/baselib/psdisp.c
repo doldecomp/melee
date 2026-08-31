@@ -1055,6 +1055,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 prev_x_sum;
             f32 cur_yx;
             f32 prev_yx;
+            f32 cur_x_product;
             f32 cur_x_sum;
             f32 pv13;
 
@@ -1080,7 +1081,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             w1inv = -1.0f / w1;
             prev_xy = pvmtx[0][1] * prev_y;
             prev_y_terms = pvmtx[1][1] * prev_y;
-            cur_x_sum = pvmtx[0][1] * pp->pos.y;
+            cur_x_product = pvmtx[0][1] * pp->pos.y;
+            cur_x_sum = cur_x_product;
             cur_y_term = pvmtx[1][1] * pp->pos.y;
             prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
             prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
@@ -1846,7 +1848,7 @@ void psDispParticles(u32 target_link, u32 sw)
     s32 needs_setup;
     void* sp79C;
     psdisp_Tlut tlut_obj;
-    UNUSED s64 stack_pad;
+    UNUSED s32 stack_pad;
     GXTexObj sp764;
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
