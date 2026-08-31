@@ -1846,7 +1846,7 @@ void psDispParticles(u32 target_link, u32 sw)
     s32 needs_setup;
     void* sp79C;
     psdisp_Tlut tlut_obj;
-    UNUSED s32 stack_pad;
+    UNUSED s64 stack_pad;
     GXTexObj sp764;
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
