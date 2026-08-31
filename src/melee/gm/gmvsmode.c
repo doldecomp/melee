@@ -174,7 +174,7 @@ void onEnterDebugVs(GameModeState* state)
     for (i = 0; i < Gm_Player_NumMax; i++) {
         gm_SetupPlayerDefaults(&start->players[i]);
         start->players[i].stocks = 0;
-        start->players[i].xE = 4;
+        start->players[i].cpu_kind = 4;
     }
 
     start->players[0].ckind = CKIND_LINK;
@@ -225,7 +225,8 @@ void onExitVs(GameModeState* state)
     MatchExitInfo* mei;
     ssize_t i;
 
-    gmVsMelee_ExitVs(state, gmVsMode_State_Results, gmVsMode_State_SuddenDeath);
+    gmVsMelee_ExitVs(state, gmVsMode_State_Results,
+                     gmVsMode_State_SuddenDeath);
     mei = gm_GetGameModeStateExitData(state);
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {

@@ -92,6 +92,11 @@ struct Menu_GObj {
 typedef struct HSD_GObj Menu_GObj;
 #endif
 
+/// @todo Might be defined elsewhere
+typedef enum {
+    CpuKind_4 = 4
+} CpuKind;
+
 struct PlayerInitData {
     /*0x00*/ s8 ckind;     ///< ::CharacterKind
     /*0x01*/ u8 slot_type; ///< ::Gm_PKind
@@ -121,7 +126,7 @@ struct PlayerInitData {
     u8 xD_b5 : 1;
     u8 xD_b6 : 1;
     u8 xD_b7 : 1;
-    /*0x0E*/ u8 xE;        ///< CPU type
+    /*0x0E*/ u8 cpu_kind;  ///< CPU type
     /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
     /*0x12*/ u16 x12;
@@ -152,7 +157,7 @@ ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
     u32 match_kind : 3; ///< ::MatchKind
-    u32 x0_3 : 3;
+    u32 x0_3 : 3;       ///< unknown enum
     u32 x0_6 : 1;
     u32 timer_counts_up : 1; ///< ::bool
 

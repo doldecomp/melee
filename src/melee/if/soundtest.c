@@ -1042,7 +1042,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         arg0->players[i].x12 = sp->x68[i];
         arg0->players[i].x18 = sp->x78[i];
         arg0->players[i].x1C = sp->x88[i];
-        arg0->players[i].xE = sp->xA8[i];
+        arg0->players[i].cpu_kind = sp->xA8[i];
         arg0->players[i].cpu_level = sp->xB8[i];
         arg0->players[i].stocks = s->x130.xCC[2];
         arg0->players[i].xC_b1 = 0;

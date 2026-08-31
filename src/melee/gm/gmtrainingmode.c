@@ -130,7 +130,7 @@ void gm_801B1C24(GameModeState* arg0)
                       (s8*) &vs->start.players[1].color,
                       (s8*) &vs->start.players[1].nametag, NULL);
     j = (i = 2);
-    vs->start.players[1].xE = 0;
+    vs->start.players[1].cpu_kind = 0;
     for (; i < 4; i++, j++) {
         vs->start.players[i] = vs->start.players[1];
         vs->start.players[i].color = (vs->start.players[i - 1].color + 1) %
@@ -281,7 +281,7 @@ void gm_Mode_Training_OnInit(void)
 
     for (i = 0; i < 4; i++) {
         temp_r31->start.players[i].color = i;
-        temp_r31->start.players[i].xE = 0;
+        temp_r31->start.players[i].cpu_kind = 0;
         if (i != 0) {
             temp_r31->start.players[1].ckind = CHKIND_NONE;
         }

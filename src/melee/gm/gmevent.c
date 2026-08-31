@@ -300,7 +300,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->xD_b1 = 0;
     arg0->xD_b2 = 0;
     arg0->xD_b4 = 0;
-    arg0->xE = src->xE;
+    arg0->cpu_kind = src->xE;
     arg0->cpu_level = src->cpu_level;
     arg0->x10 = 0;
     arg0->x12 = src->x12;

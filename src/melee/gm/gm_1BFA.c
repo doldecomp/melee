@@ -1,9 +1,8 @@
-/// @file
-/// @brief Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+#include "gmvsmelee.h"
 #include "types.h"
 
 #include "baselib/memory.h"
@@ -13,10 +12,6 @@
 #include "lb/lbcardnew.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
-
-extern UNK_T gm_804D6860[];
-extern StartMeleeData gmVsMelee_StartData;
-extern MatchExitInfo gmVsMelee_VsExitInfo;
 
 GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
@@ -48,7 +43,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         2,
         0,
         gm_ModeState_Prize_OnEnter,
-        gm_801BFF7C,
+        onExitPrize,
         {
             GS_PRIZE_INTERFACE,
             &un_804A1F48,
@@ -60,11 +55,8 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
 
 void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
-    lbl_8046DBD8_t* temp_r3;
-    VsApproachData* temp_r31;
-
-    temp_r31 = gm_GetGameModeStateEnterData(arg0);
-    temp_r3 = gm_GetChallengerData();
+    VsApproachData* temp_r31 = gm_GetGameModeStateEnterData(arg0);
+    lbl_8046DBD8_t* temp_r3 = gm_GetChallengerData();
     temp_r31->x0 = temp_r3->x4;
     temp_r31->x1 = temp_r3->x2;
     lb_8001C550();
@@ -74,27 +66,25 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 
 void gm_ModeState_ApproachVs_OnEnter(GameModeState* arg0)
 {
-    lbl_8046DBD8_t* temp_r31;
-    StartMeleeData* temp_r30;
-    u8 tmp;
+    lbl_8046DBD8_t* challenger;
+    StartMeleeData* start;
 
-    temp_r30 = gm_GetGameModeStateEnterData(arg0);
-    temp_r31 = gm_GetChallengerData();
-    gm_SetupRulesDefaults(&temp_r30->rules);
-    gm_SetupAllPlayerDefaults(temp_r30->players);
-    temp_r30->rules.x0_6 = false;
-    temp_r30->rules.match_kind = 1;
-    temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
-    gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
-                temp_r31->x2);
-    gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
-    tmp = temp_r31->x3;
-    temp_r30->players[0].nametag = tmp;
-    temp_r30->players[1].nametag = 0x78;
-    temp_r30->players[1].xE = 4;
-    temp_r30->players[1].cpu_level = gm_80172CC0(temp_r31->x4, tmp);
-    gm_LoadRumbleEnabled(temp_r30);
+    start = gm_GetGameModeStateEnterData(arg0);
+    challenger = gm_GetChallengerData();
+    gm_SetupRulesDefaults(&start->rules);
+    gm_SetupAllPlayerDefaults(start->players);
+    start->rules.x0_6 = false;
+    start->rules.match_kind = MatchKind_Stock;
+    start->rules.x0_3 = 2;
+    start->rules.stkind = gm_8016075C(gm_CKindToSelKind(challenger->x4));
+    gm_801B0620(&start->players[0], challenger->x0, challenger->x1, 1,
+                challenger->x2);
+    gm_801B0664(&start->players[1], challenger->x4, 0, 1, 1);
+    start->players[0].nametag = challenger->x3;
+    start->players[1].nametag = GM_NAMETAG_NONE;
+    start->players[1].cpu_kind = CpuKind_4;
+    start->players[1].cpu_level = gm_80172CC0(challenger->x4, challenger->x3);
+    gm_LoadRumbleEnabled(start);
 }
 
 void gm_801BFBA8(GameModeState* arg0)
@@ -161,7 +151,9 @@ void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
     u8* var_r26;
     int var_r28_3;
     s32 var_r27_2_s11;
+#ifdef MUST_MATCH
     s32 var_r27_2;
+#endif
     void** var_r31;
     int var_r25_2;
     void** temp_r3;
@@ -248,8 +240,8 @@ void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFF7C(GameModeState* arg0)
+void onExitPrize(UNUSED GameModeState* state)
 {
-    gm_SetPendingGameMode((s8) gm_GetChallengerData()->x5);
+    gm_SetPendingGameMode(gm_GetChallengerData()->x5);
     gm_SetNewGameModePending();
 }

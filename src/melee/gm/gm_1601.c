@@ -3512,7 +3512,7 @@ void gm_SetupPlayerDefaults(struct PlayerInitData* player)
     player->rumble_enabled = false;
     player->nametag = GM_NAMETAG_NONE;
     player->xC_b1 = true;
-    player->xE = 4;
+    player->cpu_kind = 4;
     player->cpu_level = 0;
     player->x12 = 0;
     player->hp = 0;

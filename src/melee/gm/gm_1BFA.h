@@ -7,6 +7,6 @@
 /* 1BFABC */ void gm_ModeState_ApproachVs_OnEnter(GameModeState*);
 /* 1BFBA8 */ void gm_801BFBA8(GameModeState*);
 /* 1BFCFC */ void gm_ModeState_Prize_OnEnter(GameModeState*);
-/* 1BFF7C */ void gm_801BFF7C(GameModeState*);
+/* 1BFF7C */ void onExitPrize(GameModeState*);
 
 #endif

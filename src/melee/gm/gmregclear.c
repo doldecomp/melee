@@ -267,9 +267,9 @@ void fn_8017C0C8(void)
     gm_SetupPlayerDefaults(&sp8);
     sp8.slot_type = Gm_PKind_Cpu;
     sp8.stocks = 1;
-    sp8.xE = 4;
+    sp8.cpu_kind = 4;
     sp8.cpu_level = Player_GetCpuLevel(2);
-    sp8.xE = Player_GetCpuType(2);
+    sp8.cpu_kind = Player_GetCpuType(2);
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
@@ -951,7 +951,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
-            arg0->players[player_idx].xE = enemy_cpu_type;
+            arg0->players[player_idx].cpu_kind = enemy_cpu_type;
             arg0->players[player_idx].x18 = attack_ratio;
             arg0->players[player_idx].x1C = defense_ratio;
             arg0->players[player_idx].color = *color_iter;
@@ -964,7 +964,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
             if (arg1->x0.x8 & 4) {
                 arg0->players[player_idx].xC_b2 = 1;
-                arg0->players[player_idx].xE = 0x1B;
+                arg0->players[player_idx].cpu_kind = 0x1B;
             }
             if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
@@ -1279,7 +1279,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
             arg0[index].color = arg1[i].x1;
-            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_kind = arg1[i].x3;
             arg0[index].cpu_level = arg1[i].x2;
             arg0[index].x18 = arg1[i].x4;
             arg0[index].x1C = arg1[i].x8;
@@ -3327,7 +3327,7 @@ void fn_80181C80(s32 arg0)
         sp10.team = !Player_GetTeam(0);
         sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
-        sp10.xE = data->x54[arg0].x7;
+        sp10.cpu_kind = data->x54[arg0].x7;
         sp10.x18 = data->x54[arg0].x8;
         sp10.x1C = data->x54[arg0].xC;
         gm_8016EDDC(sp38, &sp10);

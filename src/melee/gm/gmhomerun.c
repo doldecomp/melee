@@ -89,7 +89,7 @@ void gm_801B999C(GameModeState* scene)
                 &vs->start.players[0].color, &vs->start.players[0].nametag,
                 NULL);
     vs->start.players[1].ckind = CHKIND_SANDBAG;
-    vs->start.players[1].xE = 0xF;
+    vs->start.players[1].cpu_kind = 0xF;
     vs->start.players[1].x1C = 1.0f;
     vs->start.players[1].slot_type = Gm_PKind_Cpu;
     vs->start.players[1].stocks = 1;

@@ -2711,7 +2711,7 @@ void gm_801905F0(StartMeleeData* arg0)
             if (tm->x4B8[i].x0 == 1) {
                 arg0->players[i].rumble_enabled = false;
             }
-            arg0->players[i].xE = 4;
+            arg0->players[i].cpu_kind = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
             if (gmMainLib_GetGameRules()->handicap != 0) {

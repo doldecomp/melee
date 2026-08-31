@@ -1596,7 +1596,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetFlagsBit3(arg0, 1);
         Player_SetUnk4C(arg0, tmp->unk_A);
     }
-    Player_SetPlayerAndEntityCpuType(arg0, arg1->xE);
+    Player_SetPlayerAndEntityCpuType(arg0, arg1->cpu_kind);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->cpu_level);
     if (arg1->x10 != 0) {
         Player_SetHUDDamage(arg0, arg1->x10);

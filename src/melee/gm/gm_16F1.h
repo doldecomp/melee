@@ -75,7 +75,7 @@ struct lbl_804D65A8_t;
 /* 172C04 */ bool gm_80172C04(void);
 /* 172C44 */ UNK_RET gm_80172C44(u32);
 /* 172C78 */ bool fn_80172C78(int);
-/* 172CC0 */ u8 gm_80172CC0(u8, u8); ///< returns a CPU level
+/* 172CC0 */ u8 gm_80172CC0(u8, u8);
 /* 172D78 */ u8 gm_80172D78(void);
 /* 172DD4 */ u8 gm_80172DD4(u32);
 /* 172E74 */ u8 gm_80172E74(void);
