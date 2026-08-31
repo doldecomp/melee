@@ -4927,15 +4927,14 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             s32 i;
             for (i = 0; i < max_redun; i++) {
                 if (arg1 != 0) {
-                    result =
-                        fn_803B1338_queue_write(state, logical, 0xFFFF, NULL,
-                                                0, index, cmd12, cmd13);
+                    result = fn_803B1338_queue_write(
+                        state, logical, 0xFFFF, NULL, 0, index, cmd12, cmd13);
                     if (result < 0) {
                         return result;
                     }
                 } else {
-                    result = fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0,
-                                         index);
+                    result =
+                        fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0, index);
                     state->x170[logical] = -0x7FFF;
                     state->x270[logical] = 0;
                     if (result < 0) {
@@ -4969,8 +4968,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                 fdata = state->x70[file_id].ptr;
                                 if (fdata == NULL) {
                                     result = fn_803B1338_queue_write(
-                                        state, logical, index, NULL, 0, file_id,
-                                        cmd14, cmd15);
+                                        state, logical, index, NULL, 0,
+                                        file_id, cmd14, cmd15);
                                 } else {
                                     s32 chunk = fn_803B1338_data_size(state);
                                     u8* wdata =
@@ -4990,10 +4989,10 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                     result = fn_803ACFC0(state, logical, index,
                                                          0, NULL, 0, file_id);
                                 } else {
-                                    result = fn_803ACFC0(
-                                        state, logical, index, 0,
-                                        fdata + offset, state->x8 - 0x20,
-                                        file_id);
+                                    result =
+                                        fn_803ACFC0(state, logical, index, 0,
+                                                    fdata + offset,
+                                                    state->x8 - 0x20, file_id);
                                     offset = state->x8 + offset;
                                     offset -= 0x20;
                                 }

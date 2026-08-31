@@ -477,7 +477,8 @@ void mnDiagram3_Create(int arg0)
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
 }
 
-static inline void mnDiagram3_SetupRows(HSD_JObj* jobj, Diagram3* popup_data, int count)
+static inline void mnDiagram3_SetupRows(HSD_JObj* jobj, Diagram3* popup_data,
+                                        int count)
 {
     f32 spacing;
     f32 row_spacing;

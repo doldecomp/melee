@@ -1659,11 +1659,13 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                             desc,
                             disp->state.scissor_x[lookup] +
                                 (0x140 -
-                                 ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) *
+                                 ((s32) ((u16*) disp->state.dim_w1)[lookup] /
+                                  4) *
                                      2),
                             disp->state.scissor_y[lookup] +
                                 (0xF4 -
-                                 ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) *
+                                 ((s32) ((u16*) disp->state.dim_h1)[lookup] /
+                                  2) *
                                      2),
                             0, 0);
 
@@ -2093,8 +2095,7 @@ static inline u32* fn_8017AA78_get_dim_h1(lbl_8046E3AC_t* state)
     return state->dim_h1;
 }
 
-static inline u32*
-fn_8017AA78_get_dim_h2(lbl_8046E3AC_t* result_layout_state)
+static inline u32* fn_8017AA78_get_dim_h2(lbl_8046E3AC_t* result_layout_state)
 {
     return result_layout_state->dim_h2;
 }

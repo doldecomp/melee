@@ -143,9 +143,9 @@ static inline f32 get_scale(Fighter* fp)
 
 #ifdef MUST_MATCH
 /// Preserve the caller operand area used by the inlined physics calculation.
-static inline s32 ftCo_CpuAttackValue(
-    s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6,
-    s32 arg7, s64 arg8, s64 arg9)
+static inline s32 ftCo_CpuAttackValue(s32 value, s32 arg1, s32 arg2, s32 arg3,
+                                      s32 arg4, s32 arg5, s32 arg6, s32 arg7,
+                                      s64 arg8, s64 arg9)
 {
     return value;
 }
@@ -680,14 +680,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             if (v <= 0.0f) {
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
-                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
-                                              0.5 * (f64) (fpGrav * sqrtf(t))));
+                fpPredY =
+                    (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                        0.5 * (f64) (fpGrav * sqrtf(t))));
             } else {
                 fpPredY =
-                    (f32) ((f64) fpY +
-                           ((f64) (fpTermNeg * (t - v)) +
-                            ((f64) (fpVy * t) -
-                             0.5 * (f64) (fpGrav * sqrtf(v)))));
+                    (f32) ((f64) fpY + ((f64) (fpTermNeg * (t - v)) +
+                                        ((f64) (fpVy * t) -
+                                         0.5 * (f64) (fpGrav * sqrtf(v)))));
             }
         } else {
             fpPredY = fpVy * t + fpY;

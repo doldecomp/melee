@@ -298,8 +298,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                         s32 row_offset = (pixel_index & 2) * tile_stride;
 
                         {
-                            s32 column_offset =
-                                (pixel_index & 1) * 0x20;
+                            s32 column_offset = (pixel_index & 1) * 0x20;
                             pixel = src[column_offset + row_offset];
                         }
                         pixel_index += 1;

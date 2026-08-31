@@ -595,10 +595,8 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                                          (chroma_x + ((work_r8_2 / 2) << 5))) *
                                         4);
                         }
-                        scratch_r20 =
-                            ((JpegState*) scratch_r16)->work.cr[0];
-                        scratch_r18 =
-                            ((JpegState*) scratch_r16)->work.cb[0];
+                        scratch_r20 = ((JpegState*) scratch_r16)->work.cr[0];
+                        scratch_r18 = ((JpegState*) scratch_r16)->work.cb[0];
                         store_off = ((work_r8_2 & 1) << 5) +
                                     (sc16 * ((work_r8_2 & 2) << 2));
                         scratch_f0 = (f32) ((1.402 * (f64) scratch_r20) +

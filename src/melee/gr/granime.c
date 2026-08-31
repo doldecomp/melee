@@ -981,7 +981,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     if (arg5 != 0) {
         if (jobj != NULL) {
             grAnime_801C6A54_noinline(jobj, aj, mj,
-                                       (HSD_ShapeAnimJoint*) arg3);
+                                      (HSD_ShapeAnimJoint*) arg3);
             if (!(jobj->flags & 0x1000)) {
                 child = jobj->child;
                 if (aj != NULL) {

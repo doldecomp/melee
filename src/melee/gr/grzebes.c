@@ -1921,8 +1921,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
                             f32 effective_dist = dist;
-                            f32 col_rad =
-                                grZebes_801DB3CC_half_radius(yp);
+                            f32 col_rad = grZebes_801DB3CC_half_radius(yp);
                             f32 avg_size = ea->x18_size + eb->x18_size;
                             col_rad *= avg_size;
                             {
@@ -1935,7 +1934,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 }
                                 if (effective_dist < col_rad) {
                                     f32 strength =
-                                        (f32) (((f64) (col_rad / effective_dist) -
+                                        (f32) (((f64) (col_rad /
+                                                       effective_dist) -
                                                 1.0) *
                                                0.5);
                                     strength = (f32) ((f64) strength * 0.9);
@@ -1950,8 +1950,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                         ea->x14 += clamp_vy;
                                     }
                                     if (b >= 7) {
-                                        f32 vx2 =
-                                            grZebes_801DB3CC_scale(strength, dx);
+                                        f32 vx2 = grZebes_801DB3CC_scale(
+                                            strength, dx);
                                         f32 vy2 = dy * strength;
                                         if (vy2 < 0.0f) {
                                             vy2 = 0.0f;

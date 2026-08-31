@@ -201,8 +201,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
             if (i < stock->player[user_data->player].stocks) {
                 HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
                 {
-                    unsigned char* data =
-                        stock->x204[user_data->player].x0;
+                    unsigned char* data = stock->x204[user_data->player].x0;
                     if (ifStock_802F8298_get_flag(user_data, stock) != 0) {
                         data[i + 5] = 0;
                     } else {
