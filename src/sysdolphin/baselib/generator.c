@@ -846,7 +846,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 if (rnd < t1) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    f32 t2 = 1.0F - c2 * r0 * a2;
+                    f32 t2 = 1.0F - c2 * a2 * r0;
                     if (rnd > t2) {
                         emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                     } else {
@@ -865,14 +865,14 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             emit_pos.z -= 0.5F;
 
             /* Multiply by rect's 3x3 matrix */
-            tmpvec.x = gen->aux.rect.yx * emit_pos.y +
-                       gen->aux.rect.xx * emit_pos.x +
+            tmpvec.x = gen->aux.rect.xx * emit_pos.x +
+                       gen->aux.rect.yx * emit_pos.y +
                        gen->aux.rect.zx * emit_pos.z;
-            tmpvec.y = gen->aux.rect.yy * emit_pos.y +
-                       gen->aux.rect.xy * emit_pos.x +
+            tmpvec.y = gen->aux.rect.xy * emit_pos.x +
+                       gen->aux.rect.yy * emit_pos.y +
                        gen->aux.rect.zy * emit_pos.z;
-            tmpvec.z = gen->aux.rect.yz * emit_pos.y +
-                       gen->aux.rect.xz * emit_pos.x +
+            tmpvec.z = gen->aux.rect.xz * emit_pos.x +
+                       gen->aux.rect.yz * emit_pos.y +
                        gen->aux.rect.zz * emit_pos.z;
 
             PSMTXMultVec(rot_mtx, &tmpvec, &emit_pos);
