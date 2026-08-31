@@ -1057,6 +1057,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 prev_yx;
             f32 cur_x_sum;
             f32 pv13;
+            f32 pv03;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -1085,9 +1086,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
             cur_x_sum = pvmtx[0][0] * pp->pos.x + pvmtx[0][1] * pp->pos.y;
+            pv03 = pvmtx[0][3];
             pv13 = pvmtx[1][3];
-            x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z + cur_x_sum)) -
-                w1inv * (pvmtx[0][3] + (pvmtx[0][2] * prev_z + prev_x_sum));
+            x = w0inv * (pv03 + (pvmtx[0][2] * pp->pos.z + cur_x_sum)) -
+                w1inv * (pv03 + (pvmtx[0][2] * prev_z + prev_x_sum));
             y = w0inv * (pv13 + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
                 w1inv * (pv13 + (pvmtx[1][2] * prev_z + prev_yx));
         } else if (pp->kind & Tornado) {
