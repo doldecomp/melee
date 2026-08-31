@@ -32,7 +32,7 @@ void gm_ModeState_ApproachVs_OnExit(GameModeState* arg0)
     temp_r31 = gm_GetChallengerData();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
-    temp_r0 = temp_r30->match_end.result;
+    temp_r0 = temp_r30->match_end.outome;
     if (temp_r0 != OUTCOME_NO_CONTEST && temp_r0 != OUTCOME_RETRY &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {

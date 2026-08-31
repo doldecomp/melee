@@ -135,7 +135,7 @@ void gm_801B9A3C(GameModeState* arg0)
     }
 
     gm_SetupHumanPlayer(&start->players[0], vs->start.players[0].ckind,
-                vs->start.players[0].color, 1, gm_804D68F8);
+                        vs->start.players[0].color, 1, gm_804D68F8);
     start->players[0].xD_b2 = true;
     gm_LoadRumbleEnabled(start);
     gm_80181A00(start->players[0].ckind, start->players[0].nametag);
@@ -154,7 +154,7 @@ void gm_801B9DD8(GameModeState* arg0)
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }

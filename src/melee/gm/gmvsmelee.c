@@ -216,13 +216,13 @@ void gmVsMelee_ExitVs(GameModeState* state, u8 id0, u8 id1)
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (exit->match_end.player_standings[i].slot_type == Gm_PKind_Human) {
             gm_80162574(exit->match_end.player_standings[i].ckind,
-                        exit->match_end.result);
+                        exit->match_end.outome);
         }
     }
 
     if (gmVsMelee_WasAnyPlayerHuman(&exit->match_end)) {
         gm_SetupHumanResultsScreen(exit->match_end.match_kind,
-                                   exit->match_end.result);
+                                   exit->match_end.outome);
         gm_SetupResultsScreenPlayTime(exit->match_end.frame_count / GM_FPS,
                                       gm_80162800(&exit->match_end));
     }
@@ -286,7 +286,7 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
     u16 foo;
 
     match_end = &gmVsMelee_VsExitInfo.match_end;
-    if (!gm_WasMatchCanceled(match_end->result)) {
+    if (!gm_WasMatchCanceled(match_end->outome)) {
         gm_80168638(match_end);
         gm_80168710(match_end, vs);
     }
@@ -302,20 +302,23 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
             if (unk != CHKIND_NONE) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                            (match_end->player_standings[idx].x3), idx,
-                            match_end->player_standings[idx].x4, unk, 0);
+                                      (match_end->player_standings[idx].x3),
+                                      idx, match_end->player_standings[idx].x4,
+                                      unk, 0);
                 gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172D78()) != CHKIND_NONE) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                            (match_end->player_standings[idx].x3), idx,
-                            match_end->player_standings[idx].x4, unk, 0);
+                                      (match_end->player_standings[idx].x3),
+                                      idx, match_end->player_standings[idx].x4,
+                                      unk, 0);
                 gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172E74()) != CHKIND_NONE) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
-                            (match_end->player_standings[idx].x3), idx,
-                            match_end->player_standings[idx].x4, unk, 0);
+                                      (match_end->player_standings[idx].x3),
+                                      idx, match_end->player_standings[idx].x4,
+                                      unk, 0);
                 gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             }

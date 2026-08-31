@@ -305,7 +305,8 @@ void gm_801B6428(GameModeState* arg0)
     } else {
         var_r4_2 = temp_r31->unk_584;
     }
-    gm_SetupHumanPlayer(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
+    gm_SetupHumanPlayer(temp_r3->players, var_r4_2, temp_r31->unk_585, 1,
+                        gm_804D68E8);
     temp_r3->players[0].nametag = temp_r31->unk_586;
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.stkind = gm_801647F8(temp_r3->players[0].ckind);
@@ -342,7 +343,7 @@ void gm_801B65D4(GameModeState* arg0)
     temp_r28 = &gmMainLib_804D3EE0->unk_530.unk_584;
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1U);
         return;
     }
@@ -392,8 +393,9 @@ void gm_801B65D4(GameModeState* arg0)
         gm_80173EEC();
         gm_80172898(0x80);
         if (temp_r25_2 != CHKIND_NONE) {
-            gm_InitChallengerData(temp_r28->unk_584, temp_r28->unk_585, gm_804D68E8,
-                        temp_r28->unk_586, temp_r25_2, 0xF);
+            gm_InitChallengerData(temp_r28->unk_584, temp_r28->unk_585,
+                                  gm_804D68E8, temp_r28->unk_586, temp_r25_2,
+                                  0xF);
             gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
             gm_SetNewGameModePending();
             return;
@@ -461,9 +463,10 @@ bool gm_801B688C(bool arg0)
         temp_r3 = gm_80173460(temp_r29->start.players[0].ckind);
         if (temp_r3 != 0x21) {
             gm_InitChallengerData(temp_r29->start.players[0].ckind,
-                        temp_r29->start.players[0].color, gm_804D68F0,
-                        temp_r29->start.players[0].nametag, temp_r3,
-                        gm_GetCurrentGameMode());
+                                  temp_r29->start.players[0].color,
+                                  gm_804D68F0,
+                                  temp_r29->start.players[0].nametag, temp_r3,
+                                  gm_GetCurrentGameMode());
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
             return true;
         }
@@ -550,7 +553,7 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
     }
 
     gm_SetupHumanPlayer(match->players, multiman->start.players[0].ckind,
-                multiman->start.players[0].color, 1, gm_804D68F0);
+                        multiman->start.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         match->players[i].team = !match->players[0].team;
@@ -673,7 +676,7 @@ void gm_801B6F44(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -748,7 +751,7 @@ void gm_801B74F0(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -871,7 +874,7 @@ void gm_801B7AA0(GameModeState* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -934,7 +937,7 @@ void gm_801B8024(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -994,7 +997,7 @@ void gm_801B8580(GameModeState* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1U);
         return;
     }
@@ -1046,7 +1049,7 @@ void gm_801B874C(GameModeState* scene)
     }
 
     gm_SetupHumanPlayer(temp_r3->players, temp_r29->start.players[0].ckind,
-                temp_r29->start.players[0].color, 1, gm_804D68F0);
+                        temp_r29->start.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -1071,7 +1074,7 @@ void gm_801B8AF8(GameModeState* arg0)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(arg0);
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }

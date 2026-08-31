@@ -644,7 +644,7 @@ void onExitVs(GameModeState* arg0)
     s32 t;
 
     gm_8016A164();
-    if (exit->match_end.result == OUTCOME_RETRY) {
+    if (exit->match_end.outome == OUTCOME_RETRY) {
         s32 do_save = 0;
         if (ev->x20 != 0) {
             do_save = 1;
@@ -674,7 +674,7 @@ void onExitVs(GameModeState* arg0)
         gm_SetNextGameModeStateId(1);
         return;
     }
-    if (exit->match_end.result == OUTCOME_NO_CONTEST) {
+    if (exit->match_end.outome == OUTCOME_NO_CONTEST) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
@@ -734,7 +734,8 @@ void onExitVs(GameModeState* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != CHKIND_MAX) {
-        gm_InitChallengerData(ev->x0, ev->x1, ev->slot, ev->nametag, kind, GM_MENU);
+        gm_InitChallengerData(ev->x0, ev->x1, ev->slot, ev->nametag, kind,
+                              GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }

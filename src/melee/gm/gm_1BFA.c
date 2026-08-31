@@ -6,32 +6,47 @@
 #include "types.h"
 
 #include "baselib/memory.h"
+
+#include "gm/forward.h"
+
 #include "if/if_2FD9.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbcardnew.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
 
+enum {
+    state_approach,
+    state_vs,
+    state_prize,
+};
+
+/* 1BFBA8 */ static void onExitVs(GameModeState*);
+/* 1BFF7C */ static void onExitPrize(GameModeState*);
+
 GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
-        0,
-        2,
+        state_approach,
+        lbDvdPreload_2,
         0,
         gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
-            gm_804D6860,
-            gm_804D6860,
+            gmVsMelee_ApproachData,
+            gmVsMelee_ApproachData,
         },
     },
     {
-        1,
-        2,
+        state_vs,
+        lbDvdPreload_2,
         0,
         gm_ModeState_ApproachVs_OnEnter,
-        gm_801BFBA8,
+        onExitVs,
         {
             GS_VS,
             &gmVsMelee_StartData,
@@ -39,26 +54,26 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         },
     },
     {
-        2,
-        2,
+        state_prize,
+        lbDvdPreload_2,
         0,
         gm_ModeState_Prize_OnEnter,
         onExitPrize,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
-    { -1 },
+    { GM_GAMEMODESTATE_TERMINATE },
 };
 
 void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
-    VsApproachData* temp_r31 = gm_GetGameModeStateEnterData(arg0);
-    ChallengerData* temp_r3 = gm_GetChallengerData();
-    temp_r31->x0 = temp_r3->cpu_ckind;
-    temp_r31->x1 = temp_r3->human_slot;
+    VsApproachData* vs = gm_GetGameModeStateEnterData(arg0);
+    ChallengerData* challenger = gm_GetChallengerData();
+    vs->cpu_ckind = challenger->cpu_ckind;
+    vs->human_slot = challenger->human_slot;
     lb_8001C550();
     lb_8001D164(0);
     lb_8001CE00();
@@ -89,28 +104,24 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
     gm_LoadRumbleEnabled(start);
 }
 
-void gm_801BFBA8(GameModeState* arg0)
+void onExitVs(GameModeState* state)
 {
-    ChallengerData* temp_r31;
-    u8 temp_r0;
-    MatchExitInfo* mei;
-
-    mei = gm_GetGameModeStateExitData(arg0);
-    temp_r31 = gm_GetChallengerData();
+    MatchExitInfo* mei = gm_GetGameModeStateExitData(state);
+    ChallengerData* challenger = gm_GetChallengerData();
     gm_80162968(mei->match_end.frame_count / 60);
-    gm_8016247C((s32) mei->match_end.player_standings[0].xE);
-    temp_r0 = mei->match_end.result;
-    if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
-        (mei->match_end.player_standings[0].stocks != 0))
+    gm_8016247C(mei->match_end.player_standings[0].xE);
+    if (mei->match_end.outome != OUTCOME_NO_CONTEST &&
+        mei->match_end.outome != OUTCOME_RETRY &&
+        mei->match_end.player_standings[0].stocks != 0)
     {
-        gm_UnlockCKind((s32) temp_r31->cpu_ckind);
+        gm_UnlockCKind(challenger->cpu_ckind);
     } else {
-        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->cpu_ckind));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex(challenger->cpu_ckind));
     }
     gm_80173EEC();
     gm_80172898(0x100U);
-    if (gm_801721EC() == 0) {
-        gm_SetPendingGameMode((s8) temp_r31->curr_mode);
+    if (!gm_801721EC()) {
+        gm_SetPendingGameMode(challenger->curr_mode);
         gm_SetNewGameModePending();
     }
 }
@@ -124,10 +135,10 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
     struct un_804A1F48_t* temp_r3;
 
     if (arg1 == 0) {
-        un_804A1F48.x0 = arg0;
-        un_804A1F48.x4 = arg3;
-        un_804A1F48.x2 = arg2;
-        return (&un_804A1F48.x8);
+        if_Scene_Prize_EnterData.x0 = arg0;
+        if_Scene_Prize_EnterData.x4 = arg3;
+        if_Scene_Prize_EnterData.x2 = arg2;
+        return (&if_Scene_Prize_EnterData.x8);
     }
     temp_r3 = HSD_MemAlloc(sizeof(struct un_804A1F48_t));
     if (temp_r3 != NULL) {

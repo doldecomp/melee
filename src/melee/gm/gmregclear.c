@@ -598,8 +598,8 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
                 gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
-            gm_InitChallengerData(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
-                        temp_r31, 1U);
+            gm_InitChallengerData(arg1->ckind, arg1->color, arg1->slot,
+                                  arg1->x4, temp_r31, 1U);
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }
     } else {
@@ -835,8 +835,8 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     player_ckind = (u8) arg1->x0.ckind;
     player_ckind = gm_8017CE34_ResolvePlayerCKind(arg1, player_ckind);
 
-    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.color, player_stocks,
-                arg1->x0.slot);
+    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.color,
+                        player_stocks, arg1->x0.slot);
     arg0->players[0].nametag = arg1->x0.x4;
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
 
@@ -1061,7 +1061,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (fn_8016B4BC() != 0) {
         arg1->xC.xE = 1;
     }
-    temp_r0 = arg0->match_end.result;
+    temp_r0 = arg0->match_end.outome;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
         DbLevel <= DbLKind_DebugDevelop)
     {
@@ -1083,7 +1083,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (!(arg1->x8 & 0x80)) {
         arg1->stocks = arg0->match_end.player_standings[0].stocks;
         if (arg1->stocks != 0) {
-            if (arg0->match_end.result == OUTCOME_TIMEOUT) {
+            if (arg0->match_end.outome == OUTCOME_TIMEOUT) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
                     gm_SetNextGameModeStateId(arg2);

@@ -661,8 +661,8 @@ struct MatchPlayerData {
 ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 
 struct MatchEnd {
-    /* 0x00 */ u32 x0; ///< timer
-    /* 0x04 */ u8 result;
+    /* 0x00 */ u32 x0;        ///< timer
+    /* 0x04 */ u8 outome;     ///< ::MatchOutcome
     /* 0x05 */ u8 match_kind; ///< ::MatchKind
     /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
@@ -998,8 +998,8 @@ struct ChallengerData {
 };
 
 struct VsApproachData {
-    u8 x0;
-    u8 x1;
+    u8 cpu_ckind; ///< ::CharacterKind
+    u8 human_slot;
 };
 
 /// @brief data passed to OnLoad callback for GM_MENU

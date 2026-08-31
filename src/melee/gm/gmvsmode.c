@@ -96,8 +96,8 @@ GameModeState gm_Mode_Vs_States[] = {
         NULL,
         {
             GS_APPROACH,
-            &gm_804D6860,
-            &gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
@@ -120,7 +120,7 @@ GameModeState gm_Mode_Vs_States[] = {
         gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
@@ -256,7 +256,7 @@ void onEnterResults(GameModeState* state)
 void onExitResults(GameModeState* state)
 {
     gmVsMelee_ExitResults(state, gmVsMelee_GetVsData(), gmVsMode_State_Css);
-    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.result)) {
+    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.outome)) {
         gm_801623A4(&gmVsMelee_ResultsEnterData.match_end);
     }
 }

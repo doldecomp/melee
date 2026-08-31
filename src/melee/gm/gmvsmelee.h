@@ -36,7 +36,7 @@ gmVsMelee_EnterVs(GameModeState*, struct VsModeData*,
                                      CSSMatchType);
 /* 1A52D0 */ bool gmVsMelee_WasAnyPlayerHuman(MatchEnd*);
 /* 1A5244 */ struct VsModeData* gmVsMelee_GetVsData(void);
-/* 4D6860 */ extern UNK_T gm_804D6860[];
+/* 4D6860 */ extern UNK_T gmVsMelee_ApproachData[];
 /* 47C020 */ extern ResultsMatchInfo gmVsMelee_ResultsEnterData;
 /* 47E2A4 */ extern MatchExitInfo gmVsMelee_SuddenDeathExitInfo;
 /* 1A5258 */ void gmVsMelee_UpdateKOCounts(u8*, MatchEnd*);

@@ -78,8 +78,8 @@ GameModeState gm_Mode_CameraVs_States[] = {
         NULL,
         {
             GS_APPROACH,
-            &gm_804D6860,
-            &gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
@@ -102,7 +102,7 @@ GameModeState gm_Mode_CameraVs_States[] = {
         gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },

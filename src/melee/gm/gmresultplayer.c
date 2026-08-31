@@ -178,7 +178,7 @@ void fn_80177748(void)
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[0], JOBJ_HIDDEN);
             inline0(data->player_data[i].jobjs[0], gm_80168B34(ckind, 0, 0));
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[4], JOBJ_HIDDEN);
-            if (gm_WasMatchCanceled(temp_r3->result) != 0) {
+            if (gm_WasMatchCanceled(temp_r3->outome) != 0) {
                 var_r24 = 4;
             } else if (temp_r3->is_teams == 0) {
                 if (temp_r3->player_standings[i].is_small_loser == 0) {
@@ -786,7 +786,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                 cid = match_end->player_standings[(*i)].ftkind;
                 is_big_loser = match_end->player_standings[(*i)].is_big_loser;
 
-                if (gm_WasMatchCanceled(match_end->result) == 0 &&
+                if (gm_WasMatchCanceled(match_end->outome) == 0 &&
                     match_end->is_teams == 0 && (s32) is_big_loser == 0)
                 {
                     ResultsData* d2 = &lbl_8046DBE8;
@@ -882,7 +882,7 @@ void fn_80178BB4(HSD_GObj* gobj)
     fn_80175DC8(gobj);
     fn_80175C5C();
 
-    if (gm_WasMatchCanceled(match_end->result) != 0) {
+    if (gm_WasMatchCanceled(match_end->outome) != 0) {
         int anim_n = 0xB8;
         HSD_TObj* tobj = data->x30->u.dobj->next->mobj->tobj;
         HSD_AObj* aobj = tobj->aobj;
@@ -928,7 +928,7 @@ bool fn_801791E4(void)
 
     PAD_STACK(8);
 
-    if (gm_WasMatchCanceled(end->result) != 0) {
+    if (gm_WasMatchCanceled(end->outome) != 0) {
         for (i = 0; i < 4; i++) {
             if (end->player_standings[i].slot_type == Gm_PKind_Human &&
                 HSD_PadMasterStatus[(u8) i].err == 0 &&
@@ -961,18 +961,18 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
     }
 
     if ((u32) data->x8 == 0xA2) {
-        if (gm_WasMatchCanceled(match_end->result) == 0) {
+        if (gm_WasMatchCanceled(match_end->outome) == 0) {
             lbAudioAx_800237A8(0xB5, 0x7F, 0x40);
         }
     } else if ((u32) data->x8 == 0x2) {
-        if (gm_WasMatchCanceled(match_end->result) == 0) {
+        if (gm_WasMatchCanceled(match_end->outome) == 0) {
             lbAudioAx_800237A8(0xC355, 0x7F, 0x40);
             lbAudioAx_800237A8(0x144, 0x7F, 0x40);
         } else {
             lbAudioAx_800237A8(0x148, 0x7F, 0x40);
         }
     } else if ((u32) data->x8 == 0x9A) {
-        if (gm_WasMatchCanceled(match_end->result) != 0) {
+        if (gm_WasMatchCanceled(match_end->outome) != 0) {
             lbAudioAx_800237A8(0xC350, 0x7F, 0x40);
         } else {
             fn_80168E54(match_end->player_standings[data->x6].ckind,
@@ -1676,7 +1676,7 @@ static inline u32* inline3(lbl_8046E3AC_t* state)
 
 static inline int inline4(ResultsDisplayLayout* disp)
 {
-    return disp->state.match_end.result;
+    return disp->state.match_end.outome;
 }
 
 void fn_8017AA78(const u8* arg0)
