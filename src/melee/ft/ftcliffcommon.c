@@ -147,6 +147,6 @@ void ftCo_Cliff_Cam(Fighter_GObj* gobj)
     ftCamera_UpdateCameraBox(gobj);
     if ((s32) fp->ground_or_air == GA_Air) {
         mpLib_8005811C(&fp->coll_data, fp->mv.co.cliff.ledge_id);
-        fp->x890_cameraBox->xC_b0 = true;
+        fp->x890_cameraBox->on_ledge = true;
     }
 }

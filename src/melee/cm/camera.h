@@ -13,7 +13,7 @@
 #include <baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
-/* 028F5C */ void Camera_80028F5C(CmSubject*, s32);
+/* 028F5C */ void Camera_80028F5C(CmSubject*, CmSubjectState);
 /* 029020 */ CmSubject* Camera_80029020(void);
 /* 029044 */ CmSubject* Camera_80029044(int);
 /* 0290D4 */ void Camera_800290D4(CmSubject*);

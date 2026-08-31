@@ -72,4 +72,87 @@ void Camera_SetModeToFixed(void);
  */
 /* 02F73C */ void Camera_SetUpPauseCameraWithDefaultZoom(s8, s8);
 
+/** @struct CmSubjectExtents
+ * @sz{14}
+ */
+
+/** @var CmSubjectExtents::h
+ * Horizontal extents: @c .x left, @c .y right.
+ * @at{0} @sz{8}
+ */
+
+/** @var CmSubjectExtents::v
+ * Vertical extents: @c .x up, @c .y down, @c .z forward (used by shadows).
+ * @at{8} @sz{C}
+ */
+
+/** @struct CmSubject
+ * A point of interest ("camera box") that the match camera tries to keep in
+ * frame.
+ * @sz{6C}
+ * @note Name from the <tt>"couldn't get CmSubject struct."</tt> @c OSReport
+ * in #Camera_80029044 at @c 80029070.
+ */
+
+/** @var CmSubject::on_ledge
+ * Set while the owning fighter is in a Cliff motion state. Never read.
+ * @at{C,0} @szb{1}
+ */
+
+/** @var CmSubject::force_inactive
+ * Excludes the subject from framing regardless of #CmSubject::state. Set only
+ * by Home-Run Contest, cleared only by #Camera_80028F5C.
+ * @at{C,1} @szb{1}
+ */
+
+/** @var CmSubject::was_framed
+ * Set while the subject is framed. #CmSubjectState_Auto uses it as an edge
+ * detector: cleared when the subject leaves the bounds, arming
+ * #CmSubject::state_timer.
+ * @at{C,2} @szb{1}
+ */
+
+/** @var CmSubject::state_timer
+ * #CmSubjectState_Auto lockout. Armed to @c 600 when the subject leaves the
+ * bounds; while non-zero it counts down once per framing check and the
+ * subject is not framed.
+ * @at{E} @sz{2}
+ */
+
+/** @var CmSubject::pos
+ * Anchor point of the subject's framing box. Only x/y are read.
+ * @at{10} @sz{C}
+ */
+
+/** @var CmSubject::bone_pos
+ * Position of the owning fighter's camera bone (#ftLib_800866DC).
+ * @at{1C} @sz{C}
+ */
+
+/** @var CmSubject::facing_dir
+ * Facing direction of the subject (±1).
+ * @at{28} @sz{4}
+ */
+
+/** @var CmSubject::ext
+ * Current framing extents, eased toward #CmSubject::target_ext by 0.5 per
+ * frame in #Camera_800293E0.
+ * @at{2C} @sz{14}
+ */
+
+/** @var CmSubject::target_ext
+ * Target framing extents, set by the subject's owner.
+ * @at{40} @sz{14}
+ */
+
+/** @var CmSubject::x54
+ * Zeroed but unused.
+ * @at{54} @sz{C}
+ */
+
+/** @var CmSubject::x60
+ * Zeroed but unused.
+ * @at{60} @sz{C}
+ */
+
 #endif
