@@ -85,7 +85,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     f32 cumDist[3];
     AfterimageVtx vtx_buf[152];
     f32 d2;
-    s32 numSubdiv;
+    f32* distPtr;
 
     if (arg1 != 2) {
         return;
@@ -119,6 +119,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     params = ftCo_800C2600_get_params(fp);
 
     {
+        s32 remaining;
+        struct Fighter_x20B0_t* curEntry;
         s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
@@ -178,8 +180,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            s32 remaining;
-            f32* distPtr;
             s32 numVerts;
             f32 scaleDiff;
             s32 curIdx2;
@@ -214,8 +214,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 f32 outerScale, innerScale;
                 s32 alpha;
                 struct Fighter_x20B0_t* nextEntry;
+                s32 numSubdiv;
 
-                struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
+                curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
