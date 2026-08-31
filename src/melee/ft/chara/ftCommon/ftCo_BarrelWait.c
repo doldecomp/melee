@@ -26,8 +26,8 @@
 
 static inline void setCamData(ftCommonData* cd, CmSubject* cam)
 {
-    cam->x40 = cd->x4DC;
-    cam->x48 = cd->x4E4;
+    cam->target_ext.h = cd->x4DC;
+    cam->target_ext.v = cd->x4E4;
 }
 
 void ftCo_8009EB18(Fighter_GObj* gobj)

@@ -651,8 +651,8 @@ void fn_801AAB74(HSD_GObj* gobj)
     HSD_CObjSetupViewingMtx(gm_804D6830);
 
     for (i = 0; i < gm_804D6800; i++) {
-        leaf = staffInfoSortBuf[i].jobj;
-        PSMTXConcat(gm_804D6830->view_mtx, HSD_JObjGetMtxPtr(leaf),
+        PSMTXConcat(gm_804D6830->view_mtx,
+                    HSD_JObjGetMtxPtr(staffInfoSortBuf[i].jobj),
                     staffInfoSortBuf[i].mtx);
     }
 

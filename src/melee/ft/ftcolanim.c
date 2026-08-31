@@ -41,7 +41,7 @@ void ftCo_800BFD04(Fighter_GObj* gobj)
     fp->x221E_b1 = true;
     fp->x221E_b2 = true;
     fp->x2219_b1 = true;
-    fp->x890_cameraBox->x8 = true;
+    fp->x890_cameraBox->state = CmSubjectState_Inactive;
     fp->x221F_b3 = true;
     fp->x221F_b1 = true;
 }
