@@ -501,10 +501,9 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     s32 work_r5;
     s32 work_r6;
     s32 work_r21;
-    s32 work_r22;
-    u32 work_r31;
-    s32 work_r4;
     s32 work_r7;
+    u32 work_r31;
+    s32 work_r22;
     u8* work_r8;
     u8* work_r9;
 
@@ -563,6 +562,8 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
             (u16*) arg0 + (((arg1 / 4) * 0x10) +
                            ((scratch_r6 << 6) * ((arg2 / 4) + work_r6)));
         for (work_r7 = 0, work_r24 = 0; work_r7 < 2; work_r7++) {
+            s32 work_r4;
+
             for (work_r4 = 0, work_r12 = work_r21 * 8; work_r4 < 4; work_r4++)
             {
                 work_r31 = (work_r24 + work_r12) * 4;
@@ -594,8 +595,10 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                                          (chroma_x + ((work_r8_2 / 2) << 5))) *
                                         4);
                         }
-                        scratch_r20 = M2C_FIELD(scratch_r16, s32*, 0x618);
-                        scratch_r18 = M2C_FIELD(scratch_r16, s32*, 0x518);
+                        scratch_r20 =
+                            ((JpegState*) scratch_r16)->work.cr[0];
+                        scratch_r18 =
+                            ((JpegState*) scratch_r16)->work.cb[0];
                         store_off = ((work_r8_2 & 1) << 5) +
                                     (sc16 * ((work_r8_2 & 2) << 2));
                         scratch_f0 = (f32) ((1.402 * (f64) scratch_r20) +
