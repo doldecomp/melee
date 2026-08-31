@@ -26,7 +26,7 @@ void gm_ModeState_ApproachVs_OnExit(GameModeState* arg0)
     u8 temp_ret;
     u8 temp_r0;
     MatchExitInfo* temp_r30;
-    ChallengerInfo* temp_r31;
+    ChallengerData* temp_r31;
 
     temp_r30 = gm_GetGameModeStateExitData(arg0);
     temp_r31 = gm_GetChallengerData();

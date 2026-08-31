@@ -986,7 +986,7 @@ struct gm_803DE650_t {
     u8 xF;
 };
 
-struct ChallengerInfo {
+struct ChallengerData {
     u8 human_ckind;
     u8 human_color;
     u8 human_slot;

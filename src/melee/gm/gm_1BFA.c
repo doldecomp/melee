@@ -56,7 +56,7 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
 void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
     VsApproachData* temp_r31 = gm_GetGameModeStateEnterData(arg0);
-    ChallengerInfo* temp_r3 = gm_GetChallengerData();
+    ChallengerData* temp_r3 = gm_GetChallengerData();
     temp_r31->x0 = temp_r3->cpu_ckind;
     temp_r31->x1 = temp_r3->human_slot;
     lb_8001C550();
@@ -67,7 +67,7 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
 {
     StartMeleeData* start = gm_GetGameModeStateEnterData(state);
-    ChallengerInfo* challenger = gm_GetChallengerData();
+    ChallengerData* challenger = gm_GetChallengerData();
     gm_SetupRulesDefaults(&start->rules);
     gm_SetupAllPlayerDefaults(start->players);
     start->rules.x0_6 = false;
@@ -91,7 +91,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
 
 void gm_801BFBA8(GameModeState* arg0)
 {
-    ChallengerInfo* temp_r31;
+    ChallengerData* temp_r31;
     u8 temp_r0;
     MatchExitInfo* mei;
 

@@ -94,7 +94,7 @@ struct lbl_804D65A8_t;
 /* 1735F0 */ bool fn_801735F0(void);
 /* 173644 */ bool fn_80173644(void);
 /* 17367C */ bool fn_8017367C(void);
-/* 1736DC */ ChallengerInfo* gm_GetChallengerData(void);
+/* 1736DC */ ChallengerData* gm_GetChallengerData(void);
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);

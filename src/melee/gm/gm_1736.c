@@ -14,16 +14,16 @@
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
 
-static ChallengerInfo challenger_data;
+static ChallengerData challenger_data;
 
-ChallengerInfo* gm_GetChallengerData(void)
+ChallengerData* gm_GetChallengerData(void)
 {
     return &challenger_data;
 }
 
 void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 {
-    ChallengerInfo* tmp = &challenger_data;
+    ChallengerData* tmp = &challenger_data;
     memzero(tmp, sizeof(challenger_data));
     tmp->human_ckind = arg0;
     tmp->human_color = arg1;
