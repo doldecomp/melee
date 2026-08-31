@@ -12,7 +12,7 @@
 #include "baselib/forward.h"
 
 #include "ft/ftlib.h"
-#include "gm/gmregclear.h"
+#include "gm/gm_17C0.h"
 
 #include "it/forward.h"
 
