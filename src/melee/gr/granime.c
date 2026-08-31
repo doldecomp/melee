@@ -274,16 +274,21 @@ HSD_AObj* grAnime_801C69FC(HSD_AObj* aobj)
     return aobj;
 }
 
+/// @note The head alias, self-initialization, and discarded comparison are
+/// required for register allocation when this helper is inlined.
 static inline HSD_AObj* grAnime_801C69FC_for_jobj(HSD_AObj* aobj)
 {
     HSD_FObj** cur;
-    HSD_FObj* fobj;
+    HSD_FObj** head;
 
     if (aobj == NULL || aobj->fobj == NULL) {
         return aobj;
     }
     cur = &aobj->fobj;
-    while ((fobj = *cur) != NULL) {
+    head = cur;
+    while (*cur != NULL) {
+        HSD_FObj* fobj = fobj = *cur;
+        (void) (fobj == *head);
         if (fobj->obj_type == 0xC) {
             *cur = fobj->next;
             fobj->next = aobj->fobj;
