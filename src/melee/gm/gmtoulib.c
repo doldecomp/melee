@@ -504,6 +504,12 @@ static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
     return &bracket_entries[bracket_entry_index];
 }
 
+static inline void fn_8018B090_inline3(BracketEntry* entry)
+{
+    fn_80190520((f32) (entry->xC + (entry->x14 / 2)),
+                -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     BracketEntry* entries = lbl_80473AB8;
@@ -715,8 +721,7 @@ void fn_8018B090(HSD_GObj* arg0)
     case 32: {
         s32 h = entries[idx].x18;
         if (h != 0) {
-            fn_80190520((f32) (entries[idx].xC + (entries[idx].x14 / 2)),
-                        -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
+            fn_8018B090_inline3(&entries[idx]);
             for (i = 0; i < 4; i++) {
                 if (entries[idx].slots[i].x4C == 0) {
                     entries[idx].slots[i].x3C =
