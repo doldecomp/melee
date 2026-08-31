@@ -601,6 +601,24 @@ void fn_801852FC(HSD_GObj* gobj)
     lbl_804735E8.xE1 = 1;
 }
 
+/// @todo .sdata2 order hack
+static inline void gm_1832_sdata2_order(int unused)
+{
+    (void) unused;
+    (void) 280.0f;
+    (void) 290.0f;
+    (void) 40.0f;
+    (void) -60.0f;
+    (void) 160.0f;
+    (void) U32_TO_F32;
+    (void) 0.0;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 200.0f;
+    (void) 340.0f;
+    (void) 10000.0f;
+}
+
 void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 {
     u8 _[0x30];
@@ -640,6 +658,7 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     GXWGFifo.f32 = -4932.0F;
     GXSetColorUpdate(1);
     HSD_StateInvalidate(-1);
+    gm_1832_sdata2_order(0);
 }
 
 extern float MSL_TrigF_80400770[];
@@ -1227,12 +1246,23 @@ void gm_Scene_IntroEasy_OnEnter(void* arg0_)
     gm_80168F88();
 }
 
+static inline void gm_1832_sdata2_order_tail1(int unused)
+{
+    (void) unused;
+    (void) 7.0f;
+}
+
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail0[1] ATTRIBUTE_ALIGN(8) = { 0.0f };
+#endif
+
 void fn_80186EFC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     gm_804736B0_t* state = &lbl_804736B0;
     int* counter;
     PAD_STACK(8);
+    gm_1832_sdata2_order_tail1(0);
     HSD_JObjReqAnimAll(state->xC, 0.0f);
     HSD_JObjAnimAll(jobj);
     counter = &state->x4;
@@ -1242,6 +1272,11 @@ void fn_80186EFC(HSD_GObj* gobj)
         state->x0 = 1;
     }
 }
+
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail2[1] = { 3.0f };
+static const f32 gm_1832_sdata2_tail3[1] = { 5.0f };
+#endif
 
 typedef struct gm_80186F6C_Entry {
     /* 0x00 */ f32 x0;
@@ -1329,6 +1364,8 @@ void fn_80186F6C(HSD_GObj* arg0)
 static HSD_Archive* lbl_804D6610;
 
 #ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail5[1] = { 1.0f };
+
 #pragma push
 #pragma dont_inline on
 #endif
@@ -1363,6 +1400,10 @@ void fn_80187494(HSD_GObj* gobj, int arg1)
 }
 
 static SceneDesc* lbl_804D6614;
+
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail6[1] = { 10000.0f };
+#endif
 
 void fn_801874FC(void)
 {
@@ -1489,6 +1530,17 @@ static struct gm_1832_804736C0_t {
 ASSERT_SIZE(struct gm_1832_804736C0_t, 0x40);
 typedef struct gm_1832_804736C0_t gm_1832_804736C0_t;
 
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail7[1] ATTRIBUTE_ALIGN(8) = { 0.0f };
+static const f64 gm_1832_sdata2_tail8[1] = { S32_TO_F32 };
+#endif
+
+static inline void gm_1832_sdata2_order_tail9(int unused)
+{
+    (void) unused;
+    (void) 0.0166666675f;
+}
+
 void fn_80187910(HSD_GObj* arg0)
 {
     Vec3 sp10;
@@ -1523,6 +1575,7 @@ void fn_80187910(HSD_GObj* arg0)
     sp10.y *= scale;
     sp10.z *= scale;
     HSD_CObjSetEyePosition(cobj, &sp10);
+    gm_1832_sdata2_order_tail9(0);
 }
 
 typedef struct {
