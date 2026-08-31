@@ -220,11 +220,6 @@ static inline s32 mnVibration_GetNextCursorRow(s32 cursor_row)
     return cursor_row + 1;
 }
 
-static inline u8 mnVibration_GetPortRumble(s32 port)
-{
-    return GetRumbleSettingOfPort(port);
-}
-
 static inline void mnVibration_FreeNameTexts(MnVibrationData* data)
 {
     s32 i;
