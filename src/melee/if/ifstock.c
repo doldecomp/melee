@@ -595,6 +595,9 @@ ifStock_802F98E8_get_anim(unsigned char* user_data)
     return &user_data[5];
 }
 
+static const GXColor ifStock_802F98E8_color1 = { 0x08, 0x08, 0x08, 0x80 };
+static const GXColor ifStock_802F98E8_color2 = { 0x3C, 0x3C, 0x46, 0x80 };
+
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
@@ -605,6 +608,8 @@ void ifStock_802F98E8(unsigned char player, int b)
     int i;
     lbl_8046B6A0_t* ae44;
     HSD_JObj* icon_jobj;
+    GXColor c2;
+    GXColor c1;
     if (stock->x0 != NULL) {
         user_data = ((struct IfStockData*) stock)[player].x0;
         *(user_data += sizeof(struct IfStockDataOffset) -
@@ -737,12 +742,14 @@ void ifStock_802F98E8(unsigned char player, int b)
                     struct IfStockMatchInfo* match_info =
                         ifStock_802F98E8_get_match_info(ae44, player);
                     if (match_info->x4_b1) {
-                        GXColor c = { 0x08, 0x08, 0x08, 0x80 };
-                        GXColor* color = &c;
+                        GXColor* color;
+                        c1 = ifStock_802F98E8_color1;
+                        color = &c1;
                         ifStock_802FB4EC(player, color);
                     } else if (match_info->x4_b0) {
-                        GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
-                        GXColor* color = &c;
+                        GXColor* color;
+                        c2 = ifStock_802F98E8_color2;
+                        color = &c2;
                         ifStock_802FB4EC(player, color);
                     }
                 }
