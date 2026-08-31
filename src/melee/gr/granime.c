@@ -274,23 +274,30 @@ HSD_AObj* grAnime_801C69FC(HSD_AObj* aobj)
     return aobj;
 }
 
-static inline void grAnime_JObjSortAnim(HSD_AObj* aobj)
+/// @todo The head alias, self-initialization, and discarded comparison are
+/// required for register allocation when this helper is inlined.
+static inline HSD_AObj* grAnime_801C69FC_for_jobj(HSD_AObj* aobj)
 {
     HSD_FObj** cur;
-    HSD_FObj* fobj;
+    HSD_FObj** head;
 
     if (aobj == NULL || aobj->fobj == NULL) {
-        return;
+        return aobj;
     }
-    for (cur = &aobj->fobj; *cur != NULL; cur = &fobj->next) {
-        fobj = *cur;
+    cur = &aobj->fobj;
+    head = cur;
+    while (*cur != NULL) {
+        HSD_FObj* fobj = fobj = *cur;
+        (void) (fobj == *head);
         if (fobj->obj_type == 0xC) {
             *cur = fobj->next;
             fobj->next = aobj->fobj;
             aobj->fobj = fobj;
             break;
         }
+        cur = &fobj->next;
     }
+    return aobj;
 }
 
 static inline HSD_AObj* grAnime_801C69FC_inner(HSD_AObj* aobj)
@@ -312,8 +319,6 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
-    HSD_AObj* loaded_aobj;
-
     if (jobj == NULL) {
         return;
     }
@@ -322,11 +327,8 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
             if (jobj->aobj != NULL) {
                 HSD_AObjRemove(jobj->aobj);
             }
-            loaded_aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
-            jobj->aobj = loaded_aobj;
-            grAnime_JObjSortAnim(jobj->aobj);
-            if (loaded_aobj != NULL) {
-            }
+            jobj->aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
+            grAnime_801C69FC_for_jobj(grAnime_GetAObj(jobj));
         }
         grAnime_801C6960(jobj->robj, animjoint->robj_anim);
     }
@@ -351,7 +353,7 @@ static inline void grAnime_801C6A54_inner(HSD_JObj* jobj,
                 HSD_AObjRemove(jobj->aobj);
             }
             jobj->aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
-            grAnime_JObjSortAnim(grAnime_GetAObj(jobj));
+            grAnime_801C69FC_for_jobj(grAnime_GetAObj(jobj));
         }
         grAnime_801C6960(jobj->robj, animjoint->robj_anim);
     }

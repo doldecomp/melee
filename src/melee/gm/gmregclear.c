@@ -3215,16 +3215,37 @@ void fn_80181708(void)
     gm_80168F88();
 }
 
+typedef struct RegClearArchiveNames {
+    char no_count[0xC];
+    char scene_models[0x18];
+    char record[0xC];
+} RegClearArchiveNames;
+ASSERT_SIZE(RegClearArchiveNames, 0x30);
+
+extern RegClearArchiveNames gmRegClear_ArchiveNames;
+
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
-                                      "ScInfCnt_scene_models", 0);
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
-                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 =
+        lbArchive_80016DBC(gmRegClear_ArchiveNames.no_count, &lbl_804D65CC,
+                           gmRegClear_ArchiveNames.scene_models, 0);
+    lbl_804D65C8 = lbArchive_80016DBC(
+        gmRegClear_ArchiveNames.record, &lbl_804D65D0,
+        // Prevent MWCC from hoisting this address.
+        (char*) ((volatile RegClearArchiveNames*) &gmRegClear_ArchiveNames)
+            ->scene_models,
+        0);
     fn_80181708();
     /// @todo Keep #lbl_80472ED8 before #lbl_80473594 in `.bss`.
     (void) &lbl_80472ED8;
 }
+
+// Keep this definition after gm_80181998 for matching code generation.
+RegClearArchiveNames gmRegClear_ArchiveNames = {
+    "IfHrNoCn",
+    "ScInfCnt_scene_models",
+    "IfHrReco",
+};
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {
