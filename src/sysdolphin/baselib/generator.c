@@ -837,7 +837,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 if (rnd < t1) {
                     emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    f32 t2 = 1.0F - c2 * r0 * a2;
+                    f32 t2 = 1.0F - r0 * (c2 * a2);
                     if (rnd > t2) {
                         emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                     } else {
