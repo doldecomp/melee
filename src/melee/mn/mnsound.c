@@ -144,7 +144,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         mn_80229894(4, 1, 3);
         return;
     }

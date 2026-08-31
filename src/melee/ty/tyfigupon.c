@@ -838,7 +838,7 @@ void _tyFigupon_80316420(s32 arg0)
     }
     Toy_SetUnlockState(arg0, 1);
     Toy_8031234C(1);
-    lb_8001CE00();
+    lbCardGame_UpdatePowerTime();
     HSD_SisLib_803A6368(data->x14, Toy_80308328(arg0));
     Toy_803083D8(ef4->jobjs[0xC], id);
     if (((TyModeState*) Toy_804A284C)->x0 == 2) {

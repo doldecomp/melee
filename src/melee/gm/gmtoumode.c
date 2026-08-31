@@ -120,8 +120,8 @@ GameModeState gm_Mode_Tournament_States[] = {
 
 void gm_801B1724(GameModeState* arg0)
 {
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
 }
 
 void gm_801B174C(GameModeState* arg0)

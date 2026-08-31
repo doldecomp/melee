@@ -1904,8 +1904,8 @@ bool un_80301634(enum soundtest_callback_arg0 arg0)
     void* r3;
 
     OSReport(un_804D5978);
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
     r31 = HSD_MemAlloc(lbSnap_8001E210());
     r3 = HSD_MemAlloc(lbSnap_8001E204());
     lbSnap_8001E218(r3, r31);
@@ -1965,7 +1965,7 @@ bool un_80301800(enum soundtest_callback_arg0 arg0)
         return 0;
     }
     OSReport(un_804D5980);
-    lb_8001CE00();
+    lbCardGame_UpdatePowerTime();
     return 0;
 }
 

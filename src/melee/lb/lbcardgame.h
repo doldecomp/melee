@@ -13,10 +13,10 @@
 /* 01CC4C */ int lb_8001CC4C(void);
 /* 01CC84 */ void lb_8001CC84(void);
 /* 01CDB4 */ void lb_8001CDB4(void);
-/* 01CE00 */ void lb_8001CE00(void);
+/* 01CE00 */ void lbCardGame_UpdatePowerTime(void);
 /* 01CE78 */ u8 lbCardGame_DecideGameMode(void);
 /* 01CF18 */ void lb_8001CF18(void);
-/* 01D164 */ void lb_8001D164(int);
+/* 01D164 */ void lbCardGame_LoadArchive(int);
 /* 01D1F4 */ void lb_8001D1F4(void);
 /* 01D21C */ void lb_8001D21C(void);
 

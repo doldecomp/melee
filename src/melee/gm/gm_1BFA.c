@@ -37,8 +37,8 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         NULL,
         {
             GS_APPROACH,
-            gmVsMelee_ApproachData,
-            gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
@@ -74,9 +74,11 @@ void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
     ChallengerData* challenger = gm_GetChallengerData();
     vs->cpu_ckind = challenger->cpu_ckind;
     vs->human_slot = challenger->human_slot;
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    { /// @todo Inline?
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
+    }
 }
 
 void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
@@ -93,7 +95,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
     gm_SetupHumanPlayer(&start->players[0], challenger->human_ckind,
                         challenger->human_color, 1, challenger->human_slot);
     gm_SetupCpuPlayer(&start->players[1], challenger->cpu_ckind, 0, 1, 1);
-    {
+    { /// @todo Inline?
         u8 human_nametag = challenger->human_nametag;
         start->players[0].nametag = human_nametag;
         start->players[1].nametag = GM_NAMETAG_NONE;
@@ -140,7 +142,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
         if_Scene_Prize_EnterData.x2 = arg2;
         return (&if_Scene_Prize_EnterData.x8);
     }
-    temp_r3 = HSD_MemAlloc(sizeof(struct un_804A1F48_t));
+    temp_r3 = HSD_MemAlloc(sizeof(*temp_r3));
     if (temp_r3 != NULL) {
         temp_r3->x0 = arg0;
         temp_r3->x4 = arg3;
@@ -248,9 +250,9 @@ void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
     if (var_r31 != NULL) {
         *var_r31 = 0;
     }
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
 }
 
 void onExitPrize(UNUSED GameModeState* state)

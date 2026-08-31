@@ -319,7 +319,7 @@ static void fn_80235F80(HSD_GObj* gobj)
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         mnStageSw_8023593C(mnStageSw_804D6BF0);
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         mn_804D6BC8.cooldown = 5;
         mn_802339FC();
         HSD_GObjPLink_80390228(gobj);
@@ -368,12 +368,12 @@ static void fn_80235F80(HSD_GObj* gobj)
             switch (result) {
             case GM_MENU:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
-                lb_8001CE00();
+                lbCardGame_UpdatePowerTime();
                 mn_80229860(GM_VS);
                 return;
             default:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
-                lb_8001CE00();
+                lbCardGame_UpdatePowerTime();
                 mn_8022F4CC();
                 return;
             }

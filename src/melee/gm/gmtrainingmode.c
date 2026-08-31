@@ -86,9 +86,9 @@ void gm_801B1B74(GameModeState* arg0)
     vs_data = &gmMainLib_804D3EE0->unk_D10;
     css = gm_GetGameModeStateEnterData(arg0);
     if (gm_804D68C1 != 0) {
-        lb_8001C550();
-        lb_8001D164(0);
-        lb_8001CE00();
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
     }
     gm_801B06B0(css, 0x17U, vs_data->start.players[0].ckind, 1,
                 vs_data->start.players[0].color,

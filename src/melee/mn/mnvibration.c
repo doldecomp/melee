@@ -36,7 +36,7 @@
 
 char* GetNameText(u8 slot);
 int GetNameCount(void);
-void lb_8001CE00(void);
+void lbCardGame_UpdatePowerTime(void);
 
 typedef struct MnVibrationDataLayout {
     AnimLoopSettings intro_anim;
@@ -283,7 +283,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         }
         HSD_GObjPLink_80390228(mnVibration_804D6C28);
         HSD_PadRumbleRemoveAll();
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         return;
     }
 

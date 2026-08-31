@@ -58,9 +58,9 @@ void gm_801B98E8(GameModeState* scene)
 
     css = gm_GetGameModeStateEnterData(scene);
     if (gm_804D68F9 != 0) {
-        lb_8001C550();
-        lb_8001D164(0);
-        lb_8001CE00();
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
     }
     gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
                 vs->start.players[0].color, vs->start.players[0].nametag, 0,

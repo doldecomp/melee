@@ -246,7 +246,7 @@ void fn_80233E10(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
         mnItemSw_CommitItems(data, i, mnItemSw_GetTable()->item_order);
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         mn_804D6BC8.cooldown = 5;
         mn_8023164C();
         HSD_GObjPLink_80390228(gobj);
@@ -281,14 +281,14 @@ void fn_80233E10(HSD_GObj* gobj)
             MnItemSwData* data2 = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
             mnItemSw_CommitItems(data2, i, mnItemSw_GetTable()->item_order);
         }
-            lb_8001CE00();
+            lbCardGame_UpdatePowerTime();
             mn_80229860(GM_VS);
             return;
         default: {
             MnItemSwData* data2 = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
             mnItemSw_CommitItems(data2, i, mnItemSw_GetTable()->item_order);
         }
-            lb_8001CE00();
+            lbCardGame_UpdatePowerTime();
             mn_8022F4CC();
             return;
         }

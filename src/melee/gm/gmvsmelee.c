@@ -335,16 +335,16 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
                 unk_bool = true;
             }
             if (unk_bool) {
-                lb_8001C550();
-                lb_8001D164(0);
-                lb_8001CE00();
+                lbCardNew_AllocWorkArea();
+                lbCardGame_LoadArchive(0);
+                lbCardGame_UpdatePowerTime();
                 return;
             }
         }
     }
 
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
     gm_SetNextGameModeStateId(state_id);
 }

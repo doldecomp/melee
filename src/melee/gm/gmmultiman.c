@@ -241,9 +241,9 @@ void gm_801B632C(GameModeState* arg0)
     CSSData* temp_r30 = gm_GetGameModeStateEnterData(arg0);
 
     if (gm_804D68E9 != 0) {
-        lb_8001C550();
-        lb_8001D164(0);
-        lb_8001CE00();
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
     }
     gm_SetupRulesDefaults(&temp_r30->vs.start.rules);
     gm_801B06B0(temp_r30, 0xF, temp_r31->unk_584, 1, temp_r31->unk_585,
@@ -431,7 +431,7 @@ void gm_Mode_10ManVs_OnLoad(void)
 {
     gm_804D68F0 = gm_801677F0();
     gm_804D68F1 = 0;
-    lb_8001C550();
+    lbCardNew_AllocWorkArea();
 }
 
 bool gm_801B688C(bool arg0)
@@ -445,9 +445,9 @@ bool gm_801B688C(bool arg0)
     PAD_STACK(8);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
     if ((gm_80181A14() != 0) && (gm_GetCurrentGameMode() == GM_15MIN_VS) &&
         ((tmp = gm_80173498()) != 0x148))
     {

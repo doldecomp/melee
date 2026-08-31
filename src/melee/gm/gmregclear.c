@@ -665,9 +665,9 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
         }
         break;
     }
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
     gm_SetPendingGameMode(arg2);
     gm_SetNewGameModePending();
 }
