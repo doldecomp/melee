@@ -62,8 +62,13 @@ static inline void gm_1884_sdata2_order(void)
 }
 
 typedef struct {
-    HSD_GObjEvent v[6];
-} ClassicProcArray;
+    f32 values[6];
+} TrainingSpeedArray;
+
+typedef struct {
+    TrainingSpeedArray speeds;
+    u8 pad[8];
+} TrainingSpeedStack;
 
 typedef struct {
     u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
@@ -97,8 +102,8 @@ static TrainingItemEntry gmTraining_ItemTable[] = {
     { It_Kind_None, 23 },
 };
 
-f32 const lbl_803B7C68[] = {
-    2.0f, 1.5f, 1.0f, 0.666f, 0.5f, 0.25f,
+TrainingSpeedArray const lbl_803B7C68 = {
+    { 2.0f, 1.5f, 1.0f, 0.666f, 0.5f, 0.25f },
 };
 
 static inline TrainingItemEntry* TrainingItemTable_Get(void)
@@ -554,6 +559,8 @@ void fn_801891F4(void)
 {
     CssSubStruct* sub;
     u64 buttons;
+    TrainingSpeedStack speed_stack;
+    Vec3 pos;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
     sub = &lbl_80473700.css;
@@ -630,7 +637,6 @@ void fn_801891F4(void)
             if (buttons & PAD_BUTTON_A) {
                 s16 item;
                 HSD_JObj* jobj;
-                Vec3 pos;
                 lbAudioAx_80024030(8);
                 item = gmTraining_ItemTable[lbl_80473700.css.menu_values[1]]
                            .item_id;
@@ -783,16 +789,15 @@ void fn_801891F4(void)
         }
     } else {
         if (sub->x01 == 1) {
-            f32 speeds[] = {
-                2, 1.5, 1, 0.666, 0.5, 0.25,
-            };
+            PAD_STACK(20);
 
-            PAD_STACK(32);
+            speed_stack.speeds = lbl_803B7C68;
 
             sfxBack();
             sub->anim_frames[22] = 0x14;
             {
-                f32 selected_speed = speeds[sub->menu_values[0]];
+                f32 selected_speed =
+                    speed_stack.speeds.values[sub->menu_values[0]];
                 lb_80019880(
                     __cvt_dbl_usll((f64) (0.016666668f / selected_speed *
                                           (f32) gm_801891F4_GetTickRate())));
