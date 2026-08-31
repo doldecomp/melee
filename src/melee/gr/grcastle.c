@@ -806,10 +806,10 @@ void grCastle_801CE260(Ground_GObj* gobj)
     *(u32*) &gp2->u.arwing.xD8 = (u32) Camera_80029044(2);
     subject = (CmSubject*) *(u32*) &gp2->u.arwing.xD8;
     if (subject != NULL) {
-        subject->x40.x = yakumono_param->x118;
-        subject->x40.y = yakumono_param->x11C;
-        subject->x48.x = yakumono_param->x120;
-        subject->x48.y = yakumono_param->x124;
+        subject->target_ext.h.x = yakumono_param->x118;
+        subject->target_ext.h.y = yakumono_param->x11C;
+        subject->target_ext.v.x = yakumono_param->x120;
+        subject->target_ext.v.y = yakumono_param->x124;
     }
 
     grMaterial_801C94D8(jobj);
@@ -882,8 +882,8 @@ void grCastle_801CE578(Ground_GObj* gobj)
         CmSubject* cam = (CmSubject*) gp->u.castle11.xD8;
         if (cam != NULL) {
             lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
-            cam->x10 = pos;
-            cam->x1C = pos;
+            cam->pos = pos;
+            cam->bone_pos = pos;
         }
     }
 
@@ -1011,10 +1011,10 @@ void grCastle_801CE8E8(Ground_GObj* gobj)
     gp2->u.arwing.xC8 = (u32) Camera_80029044(2);
     subject = (CmSubject*) gp2->u.arwing.xC8;
     if (subject != NULL) {
-        subject->x40.x = yakumono_param->x134;
-        subject->x40.y = yakumono_param->x138;
-        subject->x48.x = yakumono_param->x13C;
-        subject->x48.y = yakumono_param->x140;
+        subject->target_ext.h.x = yakumono_param->x134;
+        subject->target_ext.h.y = yakumono_param->x138;
+        subject->target_ext.v.x = yakumono_param->x13C;
+        subject->target_ext.v.y = yakumono_param->x140;
     }
     gp->u.arwing.xC4 = (u32) grMaterial_801C8CFC(
         0, 4, gp, Ground_801C3FA4((HSD_GObj*) gobj, 0),
@@ -1039,8 +1039,8 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
     PAD_STACK(8);
     if (subject != NULL) {
         lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
-        subject->x10 = pos;
-        subject->x1C = pos;
+        subject->pos = pos;
+        subject->bone_pos = pos;
     }
     if (grAnime_801C83D0(gobj, 0, 1)) {
         HSD_GObj* mat = (HSD_GObj*) (tmp = gp)->u.arwing.xC4;
