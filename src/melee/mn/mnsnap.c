@@ -2609,7 +2609,7 @@ void mnSnap_80257F24(void)
         "MenMainWarCmn_Top_joint", warn_animjoint,
         "MenMainWarCmn_Top_animjoint", warn_matanim,
         "MenMainWarCmn_Top_matanim_joint", warn_shapeanim,
-        "MenMainWarCmn_Top_shapeanim_joint", 0);
+        "MenMainWarCmn_Top_shapeanim_joint\0\0\0\0\0\0", 0);
 
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
