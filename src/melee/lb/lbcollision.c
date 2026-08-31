@@ -1271,6 +1271,9 @@ block_39:
                 Vec3 a2;
                 Vec3 d1;
                 Vec3 c3;
+#ifdef MUST_MATCH
+                PAD_STACK(4);
+#endif
                 c3 = *hurt_start;
                 hit_param = 0.0F;
                 d1.x = hurt_end_x - hurt_start->x;
