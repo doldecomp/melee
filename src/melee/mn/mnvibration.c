@@ -98,18 +98,14 @@ static inline void mnVibration_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
     }
 }
 
-static inline void mnVibration_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+static inline void mnVibration_JObjSetTranslateY(HSD_JObj* jobj, f32 y,
+                                                 HSD_JObj* dirty_jobj)
 {
-    HSD_JObj* temp =
-#ifdef MUST_MATCH
-        temp =
-#endif
-            jobj;
     (jobj ? ((void) 0)
           : __assert(mnVibration_804D4FF4, 0x3B3, mnVibration_804D4FFC));
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(temp);
+        (HSD_JObjSetMtxDirty)(dirty_jobj);
     }
 }
 
@@ -873,7 +869,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     MnVibrationJointAssets* assets;
     MnVibrationData* data2;
     HSD_GObj* cursor_gobj;
-    HSD_JObj* loaded_joint;
+    HSD_JObj* dirty_jobj;
     MnVibrationData* data3;
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj;
@@ -882,6 +878,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     HSD_JObj* jobj4;
     HSD_JObj* jobj17;
     HSD_JObj* jobj18;
+    HSD_JObj* loaded_joint;
     f32 base_y;
     f32 spacing;
     f32 temp_x;
@@ -1015,10 +1012,11 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
                     position_jobj =
 #endif
                         data3->jobjs[17];
-                mnVibration_JObjSetTranslateY(
-                    cursor_jobj,
-                    (spacing * (f32) cursor_row) +
-                        mnVibration_JObjGetTranslationY(position_jobj));
+                base_y = (spacing * (f32) cursor_row) +
+                         mnVibration_JObjGetTranslationY(position_jobj);
+                dirty_jobj = cursor_jobj;
+                mnVibration_JObjSetTranslateY(cursor_jobj, base_y,
+                                               dirty_jobj);
             }
             {
                 HSD_JObj* position_jobj =
