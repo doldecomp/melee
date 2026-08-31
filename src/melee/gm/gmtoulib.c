@@ -415,10 +415,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             *p34 = val1;
             {
                 x18 = lbl_80473AB8[entry_idx].x18;
-                {
-                    u8 entry_x2 = lbl_80473AB8[entry_idx].x2;
-                    x2 = entry_x2;
-                }
+                x2 = bracket->entries[entry_idx].x2;
                 x10 = lbl_80473AB8[entry_idx].x10;
                 val2 = x10 + x18 - x18 * x2;
                 *p40 = val2;
