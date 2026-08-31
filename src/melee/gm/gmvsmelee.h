@@ -27,10 +27,11 @@ gmVsMelee_EnterSuddenDeath(GameModeState* state, struct VsModeData* vs_data,
                                         u8);
 /* 1A583C */ void
 gmVsMelee_EnterVs(GameModeState*, struct VsModeData*,
-            void (*callback)(StartMeleeData*, StartMeleeData*),
-            void (*callback2)(PlayerInitData*, PlayerInitData*));
+                  void (*callback)(StartMeleeData*, StartMeleeData*),
+                  void (*callback2)(PlayerInitData*, PlayerInitData*));
 /* 1A5598 */ void gmVsMelee_Mode_OnInit(void);
-/* 1A57A8 */ void gmVsMelee_ExitSss(GameModeState*, struct VsModeData*, u8);
+/* 1A57A8 */ void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs,
+                                    u8 cancel_state_id);
 /* 1A5618 */ void gmVsMelee_EnterCss(GameModeState*, struct VsModeData*,
                                      CSSMatchType);
 /* 1A52D0 */ bool gmVsMelee_WasAnyPlayerHuman(MatchEnd*);

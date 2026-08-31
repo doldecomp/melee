@@ -156,7 +156,8 @@ void gmVsMelee_EnterSss(GameModeState* state, VsModeData* vs)
     gm_80167FC4(sss);
 }
 
-void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs, u8 state_id)
+void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs,
+                       u8 cancel_state_id)
 {
     SSSData* sss = gm_GetGameModeStateExitData(state);
     if (sss->start_game) {
@@ -165,13 +166,13 @@ void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs, u8 state_id)
         lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs->start.rules.stkind));
         lbAudioAx_80027168();
     } else {
-        gm_SetNextGameModeStateId(state_id);
+        gm_SetNextGameModeStateId(cancel_state_id);
     }
 }
 
 void gmVsMelee_EnterVs(GameModeState* state, VsModeData* vs,
-                 gm_StartMeleeCallback start_cb,
-                 gm_PlayerInitCallback player_cb)
+                       gm_StartMeleeCallback start_cb,
+                       gm_PlayerInitCallback player_cb)
 {
     StartMeleeData* start = gm_GetGameModeStateEnterData(state);
 

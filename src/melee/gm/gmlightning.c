@@ -6,6 +6,7 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
+#include "gm/gmvsmode.h"
 #include "if/if_2FD9.h"
 
 GameModeState gm_Mode_LightningVs_States[] = {
@@ -110,22 +111,23 @@ GameModeState gm_Mode_LightningVs_States[] = {
 
 void gm_801BA704(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_1350, 9);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->vs_lightning, 9);
 }
 
 void gm_801BA730(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_801BA758(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_801BA780(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->vs_lightning,
+                      gmVsMode_State_Css);
 }
 
 /// Sets game speed to 1.25F for lightning melee
@@ -136,7 +138,7 @@ static void fn_801BA7AC(StartMeleeData* start, UNUSED StartMeleeData* vs)
 
 void gm_801BA7B8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
+    VsModeData* data = &gmMainLib_804D3EE0->vs_lightning;
     gmVsMelee_EnterVs(scene, data, fn_801BA7AC, NULL);
 }
 
@@ -147,7 +149,7 @@ void gm_801BA7EC(GameModeState* scene)
 
 void gm_801BA814(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
+    VsModeData* data = &gmMainLib_804D3EE0->vs_lightning;
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA7AC, NULL);
 }
 
@@ -163,12 +165,12 @@ void gm_801BA868(GameModeState* scene)
 
 void gm_801BA888(GameModeState* scene)
 {
-    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->vs_lightning, 0);
 }
 
 void gm_Mode_LightningVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->unk_1350);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_Mode_LightningVs_OnLoad(void)
