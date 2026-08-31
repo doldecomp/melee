@@ -34,7 +34,6 @@ typedef struct {
 
 /* 4D78D8 */ u16 hsd_804D78D8;
 /* 4D78DE */ u16 hsd_804D78DE;
-/* 4D78F0 */ HSD_CObj* psCamera;
 static HSD_JObj* hsd_804D08E8[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ HSD_Particle* hsd_804D0948[65];
@@ -629,7 +628,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    PAD_STACK(464);
+    PAD_STACK(456);
 
 #define fval (*(f32*) &hsd_804D78D0)
 #define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
@@ -975,10 +974,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
+                    } else if (idx >= psNumCmdList[bank]) {
                         child = NULL;
                     } else {
-                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+                        cl = psCmdListArray[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1023,8 +1022,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx += pc[1];
                     pc += 2;
 
-                    if (hsd_804D0948[bank] != NULL) {
-                        idx = ((u32**) hsd_804D0948)[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1033,10 +1032,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
+                    } else if (idx >= psNumCmdList[bank]) {
                         child = NULL;
                     } else {
-                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+                        cl = psCmdListArray[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1103,7 +1102,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             if (gchild->appsrt == NULL) {
                                 break;
                             }
-                            if (gchild->appsrt == pp->appsrt) {
+                            if (pp->appsrt == gchild->appsrt) {
                                 gchild->pos.x = pp->pos.x;
                                 gchild->pos.y = pp->pos.y;
                                 gchild->pos.z = pp->pos.z;
@@ -1169,7 +1168,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (gchild->appsrt == NULL) {
                             break;
                         }
-                        if (gchild->appsrt == pp->appsrt) {
+                        if (pp->appsrt == gchild->appsrt) {
                             gchild->pos.x = pp->pos.x;
                             gchild->pos.y = pp->pos.y;
                             gchild->pos.z = pp->pos.z;
@@ -1205,8 +1204,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     flags = pc[2];
                     pc += 3;
 
-                    if (hsd_804D0948[pp->bank] != NULL) {
-                        idx = ((u32**) hsd_804D0948)[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -1239,7 +1238,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (gchild->appsrt == NULL) {
                             break;
                         }
-                        if (gchild->appsrt == pp->appsrt) {
+                        if (pp->appsrt == gchild->appsrt) {
                             gchild->pos.x = pp->pos.x;
                             gchild->pos.y = pp->pos.y;
                             gchild->pos.z = pp->pos.z;
@@ -1342,8 +1341,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
-                    if (hsd_804D0948[pp->bank] != NULL) {
-                        idx = ((u32**) hsd_804D0948)[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1352,10 +1351,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
+                    } else if (idx >= psNumCmdList[bank]) {
                         child = NULL;
                     } else {
-                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+                        cl = psCmdListArray[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1372,25 +1371,22 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 cl->size, cl->grav, cl->fric, NULL, 0);
                         }
                     }
-                    {
-                        HSD_Particle* child_arg = child;
-                        if (child != NULL) {
-                            child->pos.x = pp->pos.x;
-                            child->pos.y = pp->pos.y;
-                            child->pos.z = pp->pos.z;
-                            child->idnum = pp->idnum;
-                            child->gen = pp->gen;
-                            if (pp->gen != NULL) {
-                                pp->gen->numChild++;
-                            }
-                            {
-                                HSD_psAppSRT* srt;
-                                if ((srt = pp->appsrt) != NULL) {
-                                    psAttachParticleAppSRT(child_arg, srt);
-                                }
-                            }
-                            hsd_8039930C(child_arg, pp);
+                    if (child != NULL) {
+                        child->pos.x = pp->pos.x;
+                        child->pos.y = pp->pos.y;
+                        child->pos.z = pp->pos.z;
+                        child->idnum = pp->idnum;
+                        child->gen = pp->gen;
+                        if (pp->gen != NULL) {
+                            pp->gen->numChild++;
                         }
+                        {
+                            HSD_psAppSRT* srt;
+                            if ((srt = pp->appsrt) != NULL) {
+                                psAttachParticleAppSRT(child, srt);
+                            }
+                        }
+                        hsd_8039930C(child, pp);
                     }
                 }
                 break;
@@ -1623,7 +1619,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     dist_sq = dx * dx + dy * dy;
                     dist_sq += dz * dz;
-                    if (dist_sq == 0.0F) {
+                    if (dist_sq == 0.0) {
                         break;
                     }
                     if (dist_sq > 0.0F) {
@@ -1691,10 +1687,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
+                    } else if (idx >= psNumCmdList[bank]) {
                         child = NULL;
                     } else {
-                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+                        cl = psCmdListArray[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1711,26 +1707,23 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 cl->size, cl->grav, cl->fric, NULL, 0);
                         }
                     }
-                    {
-                        HSD_Particle* child_arg = child;
-                        if (child != NULL) {
-                            HSD_psAppSRT* srt;
-                            child->pos.x = pp->pos.x;
-                            child->pos.y = pp->pos.y;
-                            child->pos.z = pp->pos.z;
-                            child->vel.x = pp->vel.x;
-                            child->vel.y = pp->vel.y;
-                            child->vel.z = pp->vel.z;
-                            child->idnum = pp->idnum;
-                            child->gen = pp->gen;
-                            if (pp->gen != NULL) {
-                                pp->gen->numChild++;
-                            }
-                            if ((srt = pp->appsrt) != NULL) {
-                                psAttachParticleAppSRT(child_arg, srt);
-                            }
-                            hsd_8039930C(child_arg, pp);
+                    if (child != NULL) {
+                        HSD_psAppSRT* srt;
+                        child->pos.x = pp->pos.x;
+                        child->pos.y = pp->pos.y;
+                        child->pos.z = pp->pos.z;
+                        child->vel.x = pp->vel.x;
+                        child->vel.y = pp->vel.y;
+                        child->vel.z = pp->vel.z;
+                        child->idnum = pp->idnum;
+                        child->gen = pp->gen;
+                        if (pp->gen != NULL) {
+                            pp->gen->numChild++;
                         }
+                        if ((srt = pp->appsrt) != NULL) {
+                            psAttachParticleAppSRT(child, srt);
+                        }
+                        hsd_8039930C(child, pp);
                     }
                 }
                 break;
@@ -1748,8 +1741,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx += pc[1];
                     pc += 2;
 
-                    if (hsd_804D0948[bank] != NULL) {
-                        idx = ((u32**) hsd_804D0948)[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1757,10 +1750,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         child = NULL;
                     } else if (bank >= 65) {
                         child = NULL;
-                    } else if (idx >= ((int*) psCmdListArray)[bank]) {
+                    } else if (idx >= psNumCmdList[bank]) {
                         child = NULL;
                     } else {
-                        cl = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+                        cl = psCmdListArray[bank][idx];
                         if (cl == NULL) {
                             child = NULL;
                         } else {
@@ -1777,28 +1770,25 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 cl->size, cl->grav, cl->fric, NULL, 0);
                         }
                     }
-                    {
-                        HSD_Particle* child_arg = child;
-                        if (child != NULL) {
-                            child->pos.x = pp->pos.x;
-                            child->pos.y = pp->pos.y;
-                            child->pos.z = pp->pos.z;
-                            child->vel.x = pp->vel.x;
-                            child->vel.y = pp->vel.y;
-                            child->vel.z = pp->vel.z;
-                            child->idnum = pp->idnum;
-                            child->gen = pp->gen;
-                            if (pp->gen != NULL) {
-                                pp->gen->numChild++;
-                            }
-                            {
-                                HSD_psAppSRT* srt;
-                                if ((srt = pp->appsrt) != NULL) {
-                                    psAttachParticleAppSRT(child_arg, srt);
-                                }
-                            }
-                            hsd_8039930C(child_arg, pp);
+                    if (child != NULL) {
+                        child->pos.x = pp->pos.x;
+                        child->pos.y = pp->pos.y;
+                        child->pos.z = pp->pos.z;
+                        child->vel.x = pp->vel.x;
+                        child->vel.y = pp->vel.y;
+                        child->vel.z = pp->vel.z;
+                        child->idnum = pp->idnum;
+                        child->gen = pp->gen;
+                        if (pp->gen != NULL) {
+                            pp->gen->numChild++;
                         }
+                        {
+                            HSD_psAppSRT* srt;
+                            if ((srt = pp->appsrt) != NULL) {
+                                psAttachParticleAppSRT(child, srt);
+                            }
+                        }
+                        hsd_8039930C(child, pp);
                     }
                 }
                 break;
@@ -2431,8 +2421,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* R channel delta */
                     if (flags & 0x01) {
                         delta = (s8) *pc++;
-                        val = (f32) (delta * 2);
-                        delta_float = scale * val;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
                             val = delta_float + (f32) pp->primColTarget.r;
                             if (val < 0.0F) {
@@ -2458,8 +2447,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* G channel delta */
                     if (flags & 0x02) {
                         delta = (s8) *pc++;
-                        val = (f32) (delta * 2);
-                        delta_float = scale * val;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
                             val = delta_float + (f32) pp->primColTarget.g;
                             if (val < 0.0F) {
@@ -2485,8 +2473,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* B channel delta */
                     if (flags & 0x04) {
                         delta = (s8) *pc++;
-                        val = (f32) (delta * 2);
-                        delta_float = scale * val;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
                             val = delta_float + (f32) pp->primColTarget.b;
                             if (val < 0.0F) {
@@ -2577,9 +2564,9 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     if (pp->gen->userfunc != NULL &&
                         pp->gen->userfunc->setUserData != NULL)
                     {
-                        pp->gen->userfunc->setUserData(pp, idx, value);
+                        pp->gen->userfunc->setUserData(pp, idx, fval);
                     } else if (pp->userdata != NULL) {
-                        pp->userdata[idx] = value;
+                        pp->userdata[idx] = fval;
                     }
                 }
                 break;

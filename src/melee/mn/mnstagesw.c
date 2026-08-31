@@ -163,9 +163,6 @@ static s32 mnStageSw_80235C58(u8 arg0)
     u8 low;
     u8 end;
     u8 start;
-    s32 low;
-    s32 idx;
-    s32 i;
     u8 high;
     s32 temp;
     s32 prev;
