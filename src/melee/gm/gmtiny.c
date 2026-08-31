@@ -85,8 +85,8 @@ GameModeState gm_Mode_TinyVs_States[] = {
         0x81,
         2,
         0,
-        gm_801BFABC,
-        gm_801A6254,
+        gm_ModeState_ApproachVs_OnEnter,
+        gm_ModeState_ApproachVs_OnExit,
         {
             GS_VS,
             &gmVsMelee_StartData,
@@ -160,12 +160,12 @@ void gm_801B8F04(GameModeState* scene)
 
 void gm_801B8F24(GameModeState* scene)
 {
-    gm_801A5F00(scene);
+    gmVsMelee_EnterResults(scene);
 }
 
 void gm_801B8F44(GameModeState* scene)
 {
-    gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_E50, 0);
+    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->unk_E50, 0);
 }
 
 void gm_Mode_TinyVs_OnInit(void)
