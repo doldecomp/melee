@@ -571,22 +571,10 @@ static inline HSD_JObj* ifStock_802F98E8_get_x3C(unsigned char player)
     return ifStock_804A1378.player[player].x3C;
 }
 
-struct IfStockMatchInfo {
-    u8 x4_b0 : 1;
-    u8 x4_b1 : 1;
-    u8 x4_b2 : 1;
-    u8 x4_b3 : 1;
-    u8 x4_b4 : 1;
-    u8 x4_b5 : 1;
-    u8 x4_b6 : 1;
-    u8 x4_b7 : 1;
-};
-
-static inline struct IfStockMatchInfo*
+static inline struct lbl_8046B6A0_FighterMatchInfoFlags*
 ifStock_802F98E8_get_match_info(lbl_8046B6A0_t* data, int player)
 {
-    return (struct IfStockMatchInfo*) ((u8*) &data->FighterMatchInfo[player] +
-                                       4);
+    return &data->FighterMatchInfo[player].flags;
 }
 
 static inline unsigned char*
@@ -742,7 +730,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 HSD_JObjAnimAll(jobj);
                 ae44 = gm_16AE_GetUnkData_1();
                 {
-                    struct IfStockMatchInfo* match_info =
+                    struct lbl_8046B6A0_FighterMatchInfoFlags* match_info =
                         ifStock_802F98E8_get_match_info(ae44, player);
                     if (match_info->x4_b1) {
                         GXColor* color;

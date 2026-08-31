@@ -478,6 +478,44 @@ struct Placeholder_8016AE38_flags_2 {
     /* +2:7 */ u8 x2_b7 : 1;
 };
 
+struct lbl_8046B6A0_FighterMatchInfoFlags {
+    u8 x4_b0 : 1; ///< metal
+    u8 x4_b1 : 1;
+    u8 x4_b2 : 1; ///< invisible
+    u8 x4_b3 : 1;
+    u8 x4_b4 : 1; ///< Zelda/Sheik transforming on load
+    u8 x4_b5 : 1;
+    u8 x4_b6 : 1;
+    u8 x4_b7 : 1;
+};
+
+struct lbl_8046B6A0_FighterMatchInfo {
+    u8 x0; ///< CharacterKind
+    u8 x1;
+    u8 slot_type;
+    s8 spawn_point;
+    union {
+        struct {
+            u8 x4_b0 : 1; ///< metal
+            u8 x4_b1 : 1;
+            u8 x4_b2 : 1; ///< invisible
+            u8 x4_b3 : 1;
+            u8 x4_b4 : 1; ///< Zelda/Sheik transforming on load
+            u8 x4_b5 : 1;
+            u8 x4_b6 : 1;
+            u8 x4_b7 : 1;
+        };
+        struct lbl_8046B6A0_FighterMatchInfoFlags flags;
+    };
+    u8 x5;
+    u16 x6;
+    u8 x8;
+    u8 x9;
+    u8 respawn_timer;
+    u8 xB;
+    u16 xC;
+};
+
 struct lbl_8046B6A0_t {
     /* 0x0000 */ u8 unk_0; ///< 0 During a match
                            ///< 1 While GAME! or "TIMEOUT!" is displayed/match
@@ -519,27 +557,7 @@ struct lbl_8046B6A0_t {
     /* 0x002E */ u16 unk_2E;
     /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
-    /* 0x0038 */ struct {
-        u8 x0; ///< CharacterKind
-        u8 x1;
-        u8 slot_type;
-        s8 spawn_point;
-        u8 x4_b0 : 1; ///< metal
-        u8 x4_b1 : 1;
-        u8 x4_b2 : 1; ///< invisible
-        u8 x4_b3 : 1;
-        u8 x4_b4 : 1; ///< Zelda/Sheik transforming on load
-        u8 x4_b5 : 1;
-        u8 x4_b6 : 1;
-        u8 x4_b7 : 1;
-        u8 x5;
-        u16 x6;
-        u8 x8;
-        u8 x9;
-        u8 respawn_timer;
-        u8 xB;
-        u16 xC;
-    } FighterMatchInfo[6];
+    /* 0x0038 */ struct lbl_8046B6A0_FighterMatchInfo FighterMatchInfo[6];
     /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
     /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
     /* 0x24C8 */ struct StartMeleeRules x24C8;
