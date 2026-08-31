@@ -350,6 +350,15 @@ HSD_Generator* hsd_8039D9C8(void)
     return gen;
 }
 
+#ifdef MUST_MATCH
+static inline f32 hsd_8039DAD4_home(f32 value)
+{
+    return value;
+}
+#else
+#define hsd_8039DAD4_home(value) (value)
+#endif
+
 /// @todo Only differs by register allocation.
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
@@ -365,10 +374,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 cross1;
     Vec3 vel_norm;
     Mtx trig_mtx;
-    union {
-        f64 eps;
-        f64 angle;
-    } scalar;
+    f64 eps;
     f32 vel_mag_sq;
     f32 angle1;
     f32 sin_az;
@@ -380,7 +386,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 elevation;
     f32 radius;
     f32 angle3;
-
     angle3 = angle1 = 0.0F;
     if (gen->count < 1.0F) {
         return gen->count;
@@ -562,7 +567,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         default: {
             f32 rnd = HSD_Randf();
             cur_angle =
-                (f32) ((scalar.angle = M_PI * (f64) rnd) * 2.0);
+                (f32) ((eps = M_PI * (f64) hsd_8039DAD4_home(rnd)) * 2.0);
             angle_step = (f32) ((2.0 * M_PI) / (f64) (s32) gen->count);
             break;
         }
@@ -570,7 +575,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Main particle emission loop */
-    scalar.eps = 0.001F;
+    eps = 0.001F;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */
@@ -750,7 +755,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cur_angle += angle_step;
             } else {
                 f32 rnd = HSD_Randf();
-                cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
+                cur_angle = (f32) (
+                    2.0 * (M_PI * (f64) hsd_8039DAD4_home(rnd)));
             }
             gen->aux.line.x2 = elevation;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
@@ -880,7 +886,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 8: /* sphere emission */
         {
             f32 r0 = gen->aux.cone.height;
-            if (r0 == 0.0F || __fabs(r0 - M_PI) < scalar.eps) {
+            if (r0 == 0.0F || __fabs(r0 - M_PI) < eps) {
                 radius = HSD_Randf();
                 radius = sqrtf(radius);
                 radius = (f32) (M_PI_2 * radius);
@@ -897,7 +903,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
             {
                 cone_angle = HSD_Randf();
-                cone_angle = (f32) (2.0 * (M_PI * (f64) cone_angle));
+                cone_angle = (f32) (
+                    2.0 * (M_PI * (f64) hsd_8039DAD4_home(cone_angle)));
                 {
                     f32 r2 = gen->radius;
                     if (r2 < 0.0F) {
