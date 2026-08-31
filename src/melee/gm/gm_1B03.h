@@ -8,9 +8,9 @@
 /* 1B0348 */ void gm_SetupSubColors(StartMeleeData*); ///< Character tints?
 /* 1B0474 */ void gm_SetupSuddenDeath(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
-/* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
+/* 1B0620 */ void gm_SetupHumanPlayer(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
                               u8);
-/* 1B0664 */ void gm_801B0664(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
+/* 1B0664 */ void gm_SetupCpuPlayer(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
                               u8);
 /* 1B06B0 */ void gm_801B06B0(CSSData*, u8 match_type, s8 c_kind, s8 stocks,
                               s8 color, u8, u8 cpu_level, u8 slot);

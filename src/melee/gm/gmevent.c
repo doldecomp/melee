@@ -251,8 +251,8 @@ void onEnterCss(GameModeState* arg0)
     CSSData* css = gm_GetGameModeStateEnterData(arg0);
     PAD_STACK(8);
 
-    gm_801B06B0(css, 0xE, temp_r31->x2, 0, temp_r31->x3, temp_r31->x4, 0,
-                temp_r31->x6);
+    gm_801B06B0(css, 0xE, temp_r31->ckind, 0, temp_r31->color,
+                temp_r31->nametag, 0, temp_r31->slot);
     if (temp_r31->x44 == 1) {
         gm_801BA938(temp_r31, 1, 4, true);
     }
@@ -269,8 +269,8 @@ void onExitCss(GameModeState* arg0)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_801B0730(temp_r3, &temp_r31->x2, NULL, &temp_r31->x3, &temp_r31->x4,
-                NULL);
+    gm_801B0730(temp_r3, &temp_r31->ckind, NULL, &temp_r31->color,
+                &temp_r31->nametag, NULL);
     temp_r31->x8 = -1;
     temp_r31->x9 = -1;
     temp_r31->xA = -1;
@@ -458,12 +458,12 @@ void onEnterVs(GameModeState* arg0)
                     levels[level]->player_init[player_idx]);
         if (player_idx == 0) {
             u8 c;
-            gm_801B05F4(md->players, ev->x6);
+            gm_801B05F4(md->players, ev->slot);
             ev->x7 = md->players[0].team;
             if (md->players[0].ckind == CHKIND_NONE) {
-                md->players[0].ckind = ev->x2;
-                md->players[0].color = ev->x3;
-                md->players[0].nametag = ev->x4;
+                md->players[0].ckind = ev->ckind;
+                md->players[0].color = ev->color;
+                md->players[0].nametag = ev->nametag;
             }
             c = md->players[0].ckind;
             ev->x0 = c;
@@ -472,7 +472,7 @@ void onEnterVs(GameModeState* arg0)
             ev->x1 = c;
             ev->x50[0] = c;
             md->players[0].rumble_enabled =
-                gm_RumbleEnabledForPlayer(ev->x6, md->players[0].nametag);
+                gm_RumbleEnabledForPlayer(ev->slot, md->players[0].nametag);
         } else {
             s8 c_kind;
             if (levels[level]->player_init[player_idx]->team == 0) {
@@ -734,11 +734,11 @@ void onExitVs(GameModeState* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != CHKIND_MAX) {
-        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, GM_MENU);
+        gm_801736E8(ev->x0, ev->x1, ev->slot, ev->nametag, kind, GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }
-    if (gm_80173754(1, ev->x6) == 0) {
+    if (gm_80173754(1, ev->slot) == 0) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
     }
 }
@@ -751,11 +751,11 @@ void gm_Mode_Event_OnInit(void)
     temp_r6 = &gmMainLib_804D3EE0->unk_530;
     gmMainLib_804D3EE0->unk_530.x0 = 0;
     temp_r6->x1 = 0;
-    temp_r6->x2 = 0x21;
-    temp_r6->x3 = 0;
-    temp_r6->x4 = 0x78;
+    temp_r6->ckind = 0x21;
+    temp_r6->color = 0;
+    temp_r6->nametag = 0x78;
     temp_r6->unk_535 = 0;
-    temp_r6->x6 = 0;
+    temp_r6->slot = 0;
     temp_r6->x7 = 0;
     temp_r6->x8 = -1;
     temp_r6->x9 = -1;
@@ -916,7 +916,7 @@ void gm_Mode_Event_OnLoad(void)
     temp_r28 = temp_r30->unk_535;
     temp_r30->x0 = 0;
     temp_r30->x1 = 0;
-    temp_r30->x6 = gm_801677F0();
+    temp_r30->slot = gm_801677F0();
     temp_r30->x7 = 0;
     temp_r30->xB_0 = false;
     temp_r30->xB_1 = false;
@@ -2460,7 +2460,7 @@ void gm_801BE638(HSD_GObj* gobj)
             lbAudioAx_80028B6C();
         }
         if ((temp_r30->x10 % 30) == 0) {
-            gm_80167858((s32) temp_r30->x6, Player_GetNametagSlotID(0), 2,
+            gm_80167858((s32) temp_r30->slot, Player_GetNametagSlotID(0), 2,
                         0x1E);
             Camera_80030E44(3, NULL);
         }

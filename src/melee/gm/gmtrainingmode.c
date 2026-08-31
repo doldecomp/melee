@@ -234,12 +234,12 @@ void gm_801B1F70(GameModeState* arg0)
         data->players[i].xD_b2 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->start.players[0].ckind,
+    gm_SetupHumanPlayer(&data->players[0], vs->start.players[0].ckind,
                 vs->start.players[0].color, 1, gm_804D68C0);
 
     for (i = 1; i < 4; i++) {
         PlayerInitData* var_r30 = &data->players[i];
-        gm_801B0664(&data->players[i], vs->start.players[i].ckind,
+        gm_SetupCpuPlayer(&data->players[i], vs->start.players[i].ckind,
                     vs->start.players[i].color, 1,
                     vs->start.players[i].slot - 1);
         if (i - 1 != 0) {

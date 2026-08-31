@@ -134,7 +134,7 @@ void gm_801B9A3C(GameModeState* arg0)
         start->players[i].xD_b3 = true;
     }
 
-    gm_801B0620(&start->players[0], vs->start.players[0].ckind,
+    gm_SetupHumanPlayer(&start->players[0], vs->start.players[0].ckind,
                 vs->start.players[0].color, 1, gm_804D68F8);
     start->players[0].xD_b2 = true;
     gm_LoadRumbleEnabled(start);

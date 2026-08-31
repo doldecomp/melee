@@ -804,7 +804,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     }
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
-    ADJ_NAMETAG_78(config_all->unk_530.x4);
+    ADJ_NAMETAG_78(config_all->unk_530.nametag);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
     gmMainLib_AdjustNameTags(&gm_80497618, &gm_80497618, (u8) arg0);

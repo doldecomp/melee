@@ -337,11 +337,11 @@ struct gmm_x0 {
     struct EventData {
         /* 0x0530 */ u8 x0;
         /* 0x0531 */ u8 x1;
-        /* 0x0532 */ s8 x2;
-        /* 0x0533 */ u8 x3;
-        /* 0x0534 */ u8 x4;
+        /* 0x0532 */ s8 ckind;
+        /* 0x0533 */ u8 color;
+        /* 0x0534 */ u8 nametag;
         /* 0x0535 */ u8 unk_535;
-        /* 0x0536 */ u8 x6;
+        /* 0x0536 */ u8 slot;
         /* 0x0537 */ u8 x7;
         /* 0x0538 */ s8 x8;
         /* 0x0539 */ s8 x9;

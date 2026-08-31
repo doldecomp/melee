@@ -835,7 +835,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     player_ckind = (u8) arg1->x0.ckind;
     player_ckind = gm_8017CE34_ResolvePlayerCKind(arg1, player_ckind);
 
-    gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
+    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.color, player_stocks,
                 arg1->x0.slot);
     arg0->players[0].nametag = arg1->x0.x4;
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;

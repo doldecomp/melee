@@ -305,7 +305,7 @@ void gm_801B6428(GameModeState* arg0)
     } else {
         var_r4_2 = temp_r31->unk_584;
     }
-    gm_801B0620(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
+    gm_SetupHumanPlayer(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
     temp_r3->players[0].nametag = temp_r31->unk_586;
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.stkind = gm_801647F8(temp_r3->players[0].ckind);
@@ -549,7 +549,7 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
         match->players[i] = multiman->start.players[i];
     }
 
-    gm_801B0620(match->players, multiman->start.players[0].ckind,
+    gm_SetupHumanPlayer(match->players, multiman->start.players[0].ckind,
                 multiman->start.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
@@ -1045,7 +1045,7 @@ void gm_801B874C(GameModeState* scene)
         temp_r3->players[i] = temp_r29->start.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r29->start.players[0].ckind,
+    gm_SetupHumanPlayer(temp_r3->players, temp_r29->start.players[0].ckind,
                 temp_r29->start.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
