@@ -51,7 +51,6 @@ u8 lbl_804D6638[0x4];
 int lbl_804D663C;
 
 extern SceneDesc* lbl_804D666C;
-extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;
 extern u8 lbl_804D6680[8];
 extern char* const lbl_804DA6B4;
