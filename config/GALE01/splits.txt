@@ -712,9 +712,12 @@ melee/ft/ftcmdscript.c:
 
 melee/ft/ftcpuattack.c:
 	.text       start:0x800B4AB0 end:0x800BBB8C
-	.data       start:0x803C6108 end:0x803C6908
+	.data       start:0x803C6108 end:0x803C61F8
 	.sdata      start:0x804D3B70 end:0x804D3B88
 	.sdata2     start:0x804D89D8 end:0x804D8B60
+
+melee/ft/ft_3C61.c:
+	.data       start:0x803C61F8 end:0x803C6908
 
 melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c:
 	.text       start:0x800BBB8C end:0x800BBC88
@@ -2368,6 +2371,7 @@ melee/gm/gmtoulib.c:
 melee/gm/gmtou_0.c:
 	.text       start:0x80190ABC end:0x80196510
 	.data       start:0x803D9F80 end:0x803DA0D0
+	.bss        start:0x804799B8 end:0x804799D8
 	.sdata      start:0x804D4170 end:0x804D4190
 	.sbss       start:0x804D6640 end:0x804D6660
 	.sdata2     start:0x804DA6D8 end:0x804DA7E0
@@ -2376,9 +2380,9 @@ melee/gm/gmtou_1.c:
 	.text       start:0x80196510 end:0x8019BA08
 	.rodata     start:0x803B7CE0 end:0x803B7D18
 	.data       start:0x803DA0D0 end:0x803DA2E0
-	.bss        start:0x804799B8 end:0x80479A58
+	.bss        start:0x804799D8 end:0x80479A58
 	.sdata      start:0x804D4190 end:0x804D41D0
-	.sbss       start:0x804D6660 end:0x804D6698
+	.sbss       start:0x804D6660 end:0x804D6688
 	.sdata2     start:0x804DA7E0 end:0x804DA878
 
 melee/gm/gmtou_2.c:
@@ -2387,6 +2391,7 @@ melee/gm/gmtou_2.c:
 	.data       start:0x803DA2E0 end:0x803DA3E0
 	.bss        start:0x80479A58 end:0x80479A98
 	.sdata      start:0x804D41D0 end:0x804D41F0
+	.sbss       start:0x804D6688 end:0x804D6698
 	.sdata2     start:0x804DA878 end:0x804DA950
 
 melee/gm/gm_19EF.c:

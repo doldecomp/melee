@@ -41,23 +41,382 @@
 #include <baselib/mobj.h>
 #include <baselib/random.h>
 #include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
 extern ResultsData lbl_8046DBE8;
 
 typedef struct {
-    /* 0x00 */ u8 pad_00[0x20];
+    /* 0x00 */ f32 x0[8];
     /* 0x20 */ f32 x20[4];
 } CharScaleEntry;
 
-CharScaleEntry lbl_803D6A18[] = { 0 };
-f32 lbl_803D7058[0x890 / sizeof(f32)] = { 0 };
+/* 3D6A08 */ u32 gmResultPlayerColors[4] = {
+    0x013C59FF,
+    0x064E01FF,
+    0x54010BFF,
+    0x408080FF,
+};
+
+/* 3D6A18 */ CharScaleEntry gmResultCharacterScaleData[] = {
+    {
+        { 0.2F, 0.0F, 2.8F, 0.0F, 10.0F, 13.5F, 24.0F, 7.0F },
+        { 3.6F, 4.0F, 3.8F, 1.5F },
+    },
+    {
+        { -3.0F, 0.0F, -0.8F, 0.0F, 12.0F, 11.0F, 12.0F, 1.0F },
+        { 2.3F, 2.0F, 2.5F, 1.0F },
+    },
+    {
+        { 3.5F, -3.0F, 1.0F, 0.0F, 17.0F, 16.0F, 18.0F, 5.0F },
+        { 3.5F, 3.3F, 3.5F, 1.5F },
+    },
+    {
+        { 2.5F, -7.0F, -2.0F, -0.5F, 3.5F, -4.5F, -7.0F, 3.0F },
+        { 1.8F, 0.9F, 0.9F, 1.3F },
+    },
+    {
+        { 0.0F, -1.0F, 0.0F, 0.0F, 0.0F, 7.0F, -4.0F, 1.5F },
+        { 2.0F, 3.2F, 1.5F, 1.2F },
+    },
+    {
+        { 0.0F, -8.0F, 5.0F, 0.0F, 20.0F, 10.0F, 13.0F, 1.0F },
+        { 3.2F, 3.6F, 2.8F, 1.1F },
+    },
+    {
+        { -1.0F, -4.5F, 3.0F, 1.0F, 22.0F, 22.0F, 23.0F, 6.0F },
+        { 3.6F, 3.7F, 3.7F, 1.5F },
+    },
+    {
+        { 11.0F, 2.0F, 0.0F, 0.0F, -3.0F, 11.0F, 13.5F, 5.0F },
+        { 3.0F, 2.5F, 3.0F, 1.5F },
+    },
+    {
+        { 0.0F, -3.0F, 0.0F, 0.1F, 12.5F, 10.0F, 15.0F, 4.0F },
+        { 3.0F, 3.0F, 4.0F, 1.4F },
+    },
+    {
+        { -2.0F, 0.0F, 3.0F, 0.0F, 20.0F, 23.0F, 23.0F, 7.0F },
+        { 3.5F, 4.0F, 3.8F, 1.6F },
+    },
+    {
+        { -1.0F, 4.0F, -1.0F, -0.6F, 12.0F, 13.5F, 23.0F, 3.5F },
+        { 2.8F, 3.0F, 3.0F, 1.3F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 7.0F, 4.0F, 6.0F, 4.0F },
+        { 3.0F, 2.0F, 2.5F, 1.4F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 18.0F, 18.0F, 20.0F, 7.0F },
+        { 3.5F, 3.5F, 4.0F, 1.6F },
+    },
+    {
+        { 0.0F, 2.0F, -8.0F, 0.0F, 0.0F, 9.0F, -4.0F, 1.5F },
+        { 1.5F, 3.2F, 2.2F, 1.2F },
+    },
+    {
+        { -8.0F, -9.0F, -5.0F, -2.0F, 10.0F, 6.5F, 0.8F, 2.0F },
+        { 2.35F, 3.0F, 2.0F, 1.3F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, -2.0F, 0.0F, -7.0F, 0.0F },
+        { 1.6F, 2.8F, 1.0F, 1.1F },
+    },
+    {
+        { 0.0F, 1.0F, -2.0F, 0.0F, 18.0F, 12.5F, 25.0F, 6.5F },
+        { 3.2F, 3.8F, 4.2F, 1.5F },
+    },
+    {
+        { 3.0F, -1.0F, 2.5F, 0.1F, 13.0F, 9.5F, 13.0F, 2.8F },
+        { 2.6F, 2.2F, 2.3F, 1.2F },
+    },
+    {
+        { -1.0F, 1.0F, 0.0F, 0.2F, 23.5F, 22.0F, 23.0F, 8.0F },
+        { 4.0F, 4.0F, 4.0F, 1.6F },
+    },
+    {
+        { 1.0F, 0.0F, 1.0F, 0.0F, 20.0F, 25.0F, 16.0F, 7.0F },
+        { 3.5F, 4.0F, 4.0F, 1.5F },
+    },
+    {
+        { -11.0F, -9.0F, -3.0F, 0.5F, 9.0F, 7.0F, 24.0F, 5.0F },
+        { 3.0F, 3.5F, 3.8F, 1.5F },
+    },
+    {
+        { 1.0F, -5.5F, -0.5F, 1.0F, 18.0F, 19.0F, 20.0F, 6.5F },
+        { 3.3F, 4.0F, 3.8F, 1.5F },
+    },
+    {
+        { 0.0F, 0.5F, 0.0F, 0.2F, 10.0F, 13.0F, 14.0F, 5.0F },
+        { 3.0F, 3.0F, 3.6F, 1.5F },
+    },
+    {
+        { -15.0F, 3.5F, -0.3F, 0.0F, 15.0F, 23.0F, 22.0F, 5.5F },
+        { 4.0F, 3.5F, 4.0F, 1.5F },
+    },
+    {
+        { 0.0F, 2.0F, 0.0F, 0.0F, -3.0F, 1.0F, 1.0F, 0.5F },
+        { 1.3F, 2.5F, 2.0F, 1.3F },
+    },
+    {
+        { 0.5F, 0.0F, 0.0F, 0.0F, 19.0F, 27.0F, 25.0F, 7.5F },
+        { 4.1F, 4.0F, 4.0F, 1.5F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+    {
+        { 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+    },
+};
+
+/* 3D7018 */ u32 gmResultX22F4Init[0x20 / sizeof(u32)] = {
+    0x00180000, 0x00000000, 0x00150015, 0x00000000,
+    0x00120012, 0x00120000, 0x000E000E, 0x000E000E,
+};
+
+/* 3D7038 */ u32 gmResultScoreTableInit[0x20 / sizeof(u32)] = {
+    0x00000000, 0x00000000, 0xFFF2000E, 0x00000000,
+    0xFFEE0000, 0x00120000, 0xFFEAFFF9, 0x00070016,
+};
+
+typedef struct {
+    /* 0x000 */ f32 scale[32];
+    /* 0x080 */ f32 slot_off[32][3][4];
+    /* 0x680 */ u8 x680[27][0x10];
+    /* 0x830 */ u8 pad_830[0x60];
+} ResultsCharacterData;
+
+/* 3D7058 */ ResultsCharacterData gmResultCharacterData = {
+    {
+        0.85F, 0.8F, 1.0F, 1.0F,  1.0F, 0.7F, 0.9F, 1.0F, 1.0F, 0.88F, 0.8F,
+        1.0F,  0.9F, 1.0F, 0.9F,  1.0F, 0.9F, 0.9F, 0.9F, 0.9F, 1.0F,  1.0F,
+        1.0F,  1.0F, 1.0F, 0.79F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+    },
+    {
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.5F, -4.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -3.0F, -2.3F, -1.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.4F, -1.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.4F, -1.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, -0.3F, -0.6F },
+            { 0.0F, -2.7F, -3.1F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, -0.2F, -0.4F },
+            { 0.0F, -2.7F, -3.1F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.3F, -2.9F, -3.5F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.4F, 0.9F },
+            { 0.0F, -3.3F, -2.9F, -2.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.0F, -1.0F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.3F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.1F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.5F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.5F, -2.6F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, -0.1F, -0.3F, -0.6F },
+            { 0.0F, -2.7F, -2.9F, -3.2F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.9F, -3.1F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, -0.2F, -0.4F, -0.5F },
+            { 0.0F, -2.7F, -3.0F, -3.3F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.0F, -0.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -3.3F, -3.9F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+        {
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+            { 0.0F, -2.7F, -2.7F, -2.7F },
+            { 0.0F, 0.0F, 0.0F, 0.0F },
+        },
+    },
+    {
+        { 0x17 }, { 0x29 }, { 0x27 }, { 0x2C }, { 0x05 }, { 0x17 }, { 0x28 },
+        { 0x24 }, { 0x18 }, { 0x57 }, { 0x13 }, { 0x13 }, { 0x17 }, { 0x17 },
+        { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 },
+        { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 }, { 0x17 },
+    },
+    { 0 },
+};
+
+/* 3D78E8 */ HSD_WObjDesc gmResultCameraEyeDesc = { NULL,
+                                                    { 0.0F, 0.0F, 62.0F },
+                                                    NULL };
+/* 3D78FC */ HSD_WObjDesc gmResultCameraInterestDesc = { NULL,
+                                                         { 0.0F, 0.0F, 0.0F },
+                                                         NULL };
+
+/* 3D7910 */ HSD_CameraDescPerspective gmResultCameraDesc = {
+    NULL,
+    0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &gmResultCameraEyeDesc,
+    &gmResultCameraInterestDesc,
+    0.0F,
+    NULL,
+    1.0F,
+    5000.0F,
+    19.999998F,
+    1.216667F,
+};
+
+/* 3D7948 */ char gmResultMissingGObjMessage[] =
+    "Error : model gobj dont't find at gmResultSetViewPos\n";
+/* 3D7980 */ char gmResultSourceFileName[] = "gmresultplayer.c";
+/* 3D7994 */ char gmResultMissingJObjMessage[] =
+    "Error : model jobj dont't find at gmResultSetViewPos\n";
 
 typedef struct {
     GObj_RenderFunc funcs[4];
 } ResultsRenderFuncs;
 
 typedef struct {
-    /* 0x00 */ u8 pad_00[0x24];
+    /* 0x00 */ f32 x00[9];
     /* 0x24 */ Vec3 x24;
     /* 0x30 */ Vec3 x30;
     /* 0x3C */ ResultsRenderFuncs x3C;
@@ -74,11 +433,29 @@ typedef struct {
     /* 0x90 */ f32 x90;
     /* 0x94 */ f32 x94;
     /* 0x98 */ f32 x98;
-    /* 0x98 */ f32 x9C;
+    /* 0x9C */ f32 x9C;
 } ResultsPlayerConfig;
 
-ResultsPlayerConfig const lbl_803B7B68 = { 0 };
-HSD_CObjDesc lbl_803D7910 = { 0 };
+ResultsPlayerConfig const lbl_803B7B68 = {
+    { 0.0F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, -100.0F },
+    { 0.0F, 100.0F, 62.0F },
+    { 0.0F, 100.0F, 0.0F },
+    { { fn_80179DCC, fn_80179E34, fn_80179E9C, fn_80179F04 } },
+    { 0.0F, 100.0F, 62.0F },
+    { 0.0F, 100.0F, 0.0F },
+    { { fn_80179D3C, fn_80179D60, fn_80179D84, fn_80179DA8 } },
+    0.0F,
+    0.0F,
+    -100.0F,
+    0.0F,
+    0.0F,
+    -100.0F,
+    0.75F,
+    0.48F,
+    0.4F,
+    0.307F,
+    0.0F,
+};
 
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
@@ -93,8 +470,6 @@ typedef struct {
     /* 0xEE0 */ u8 pad_EE0[0xF08 - 0xEE0];
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
-
-CameraKindData lbl_803D6A08 = { 0 };
 
 typedef union {
     s16 h[4];
@@ -147,10 +522,32 @@ static HSD_GObj* lbl_8046E38C[4];
 static HSD_JObj* lbl_8046E39C[4];
 static lbl_8046E3AC_t lbl_8046E3AC;
 
+/// @todo .sdata2 order hack
 void gm_80177724(struct ResultsMatchInfo* arg0)
 {
+#ifdef MUST_MATCH
+    (void) 0.0;
+    (void) S32_TO_F32;
+    (void) 10.0f;
+    (void) 40.0f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 0.2f;
+    (void) 0.3f;
+    (void) 0.05f;
+    (void) 50.0f;
+    (void) 1.0;
+    (void) 29.0f;
+    (void) 30.0f;
+    (void) 120.0f;
+    (void) U32_TO_F32;
+#endif
     memzero(arg0, sizeof(*arg0));
 }
+
+#ifdef MUST_MATCH
+static const f32 sdata2_order_zero_one[2] = { 0.0f, 1.0f };
+#endif
 
 static inline void inline0(HSD_JObj* jobj, float f)
 {
@@ -170,6 +567,9 @@ void fn_80177748(void)
 
     ResultsData* data = &lbl_8046DBE8;
 
+#ifdef MUST_MATCH
+    (void) 100.0f;
+#endif
     temp_r3 = fn_80174274();
 
     for (i = 0; i < 4; i++) {
@@ -201,6 +601,11 @@ void fn_80177748(void)
     }
 }
 
+#ifdef MUST_MATCH
+static const f32 sdata2_order_ten[1] = { 10.0f };
+static const f64 sdata2_order_s32[1] = { S32_TO_F32 };
+#endif
+
 void fn_80177920(HSD_GObj* gobj)
 {
     MatchEnd* end;
@@ -211,6 +616,9 @@ void fn_80177920(HSD_GObj* gobj)
 
     PAD_STACK(8);
 
+#ifdef MUST_MATCH
+    (void) -300.0f;
+#endif
     end = fn_80174274();
     human_controller_count = 0;
 
@@ -1133,15 +1541,53 @@ static inline HSD_JObj** get_result_jobjs(ResultsDisplayLayout* disp)
     return disp->jobjs;
 }
 
+static inline u8* get_player_flags(ResultsDisplayLayout* disp)
+{
+    return disp->state.player_flags;
+}
+
+static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
+{
+    GXColor color;
+
+    color = gm_80160968(
+        gm_80160854((u8) slot, match_end->player_standings[slot].team,
+                    (u8) (match_end->is_teams == 1),
+                    match_end->player_standings[slot].slot_type));
+    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+}
+
+static inline HSD_ImageDesc*
+fn_80179990_get_player_img1(int slot, ResultsDisplayLayout* disp)
+{
+    HSD_ImageDesc* image_desc = disp->player_img1;
+    return &image_desc[slot];
+}
+
+static inline HSD_ImageDesc*
+fn_80179990_copy_player_image(ResultsDisplayLayout* disp, int slot, int lookup)
+{
+    HSD_ImageDesc* image_desc = disp->player_img2;
+    HSD_ImageDesc* desc = &image_desc[slot];
+
+    HSD_ImageDescCopyFromEFB(
+        desc,
+        disp->state.scissor_x[lookup] +
+            (0x140 - ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2),
+        disp->state.scissor_y[lookup] +
+            (0xF4 - ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) * 2),
+        0, 0);
+    return desc;
+}
+
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
-    int lookup;
     HSD_ImageDesc* desc;
     HSD_CObj* cobj;
     HSD_JObj* child_jobj;
-    PAD_STACK(8);
+    int lookup;
 
     fn_801795D4();
     fn_801796F0(arg2);
@@ -1155,42 +1601,27 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             match_end->team_standings[match_end->player_standings[arg2].team]
                 .is_big_loser;
     }
+
     if (lookup != 0) {
-        child_jobj = HSD_JObjGetChild((HSD_JObj*) disp->gobjs[arg2]->hsd_obj);
+        HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
+        child_jobj = root == NULL ? NULL : root->child;
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
         if (lookup != 0) {
-            GXColor color;
-
-            color = gm_80160968(
-                gm_80160854((u8) arg2, match_end->player_standings[arg2].team,
-                            (u8) (match_end->is_teams == 1),
-                            match_end->player_standings[arg2].slot_type));
-            HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+            fn_80179990_set_erase_color(match_end, arg2);
             HSD_CObjEraseScreen(cobj, 1, 0, 0);
             Camera_800313E0(arg0, 0);
 
             {
-                HSD_ImageDesc* image_desc = disp->player_img2;
-                desc = &image_desc[arg2];
-
-                HSD_ImageDescCopyFromEFB(
-                    desc,
-                    disp->state.scissor_x[lookup] +
-                        (0x140 -
-                         ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2),
-                    disp->state.scissor_y[lookup] +
-                        (0xF4 -
-                         ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) * 2),
-                    0, 0);
+                desc = fn_80179990_copy_player_image(disp, arg2, lookup);
 
                 if (!disp->state.x0_4) {
+                    s32 x_offset =
+                        ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2;
                     HSD_ImageDescCopyFromEFB(
-                        &disp->player_img1[arg2],
-                        0x140 -
-                            ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) *
-                                2,
+                        fn_80179990_get_player_img1(arg2, disp),
+                        0x140 - x_offset,
                         0xF4 -
                             ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) *
                                 2,
@@ -1215,22 +1646,15 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
         } else {
             HSD_GObj* entity = Player_GetEntity(arg2);
             if (ftLib_800876B4(entity) == 0) {
-                u8* player_flags = disp->state.player_flags;
-                if (player_flags[arg2] == 0 && disp->state.x0_6) {
-                    GXColor color;
-
-                    color = gm_80160968(gm_80160854(
-                        (u8) arg2, match_end->player_standings[arg2].team,
-                        (u8) (match_end->is_teams == 1),
-                        match_end->player_standings[arg2].slot_type));
-                    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+                u8* player_flags = &get_player_flags(disp)[arg2];
+                if (*player_flags == 0 && disp->state.x0_6) {
+                    fn_80179990_set_erase_color(match_end, arg2);
                     HSD_CObjEraseScreen(cobj, 1, 0, 0);
                     Camera_800313E0(arg0, 0);
 
                     {
                         HSD_ImageDesc* image_desc = disp->player_img2;
                         desc = &image_desc[arg2];
-
                         HSD_ImageDescCopyFromEFB(
                             desc,
                             disp->state.scissor_x[lookup] +
@@ -1250,7 +1674,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                                                  0x7C, 1, 0);
                         HSD_CObjEndCurrent();
 
-                        player_flags[arg2] = 1;
+                        *player_flags = 1;
                         {
                             HSD_JObj* jobj2 = get_result_jobjs(disp)[arg2];
                             jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
@@ -1376,7 +1800,7 @@ void fn_8017A078(s32 arg0)
     callbacks = config->x3C;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(&lbl_803D7910);
+    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gmResultCameraDesc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     eye.y = (eye.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
@@ -1412,7 +1836,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
 {
     static Scissor const scissor_init = { 270, 370, 124, 276 };
     u32* config = (u32*) &lbl_803B7B68;
-    CameraKindData* data = &lbl_803D6A08;
+    CameraKindData* data = (CameraKindData*) gmResultPlayerColors;
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     s32 _pad[2];
@@ -1581,7 +2005,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 pos2 = *(Vec3*) &config->x80;
                 pos2.y = 100.0f * (f32) (arg2 + 1);
                 Player_80032A04(arg2, &pos2);
-                Player_SetScale(arg2, 1.8f * lbl_803D7058[kind]);
+                Player_SetScale(arg2,
+                                1.8f * gmResultCharacterData.scale[kind]);
                 Player_80036F34(arg2, variant);
             } else {
                 int var_idx;
@@ -1592,7 +2017,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 } else {
                     var_idx = 3;
                 }
-                scale = lbl_803D6A18[kind].x20[var_idx];
+                scale = gmResultCharacterScaleData[kind].x20[var_idx];
                 Player_80036F34(arg2, variant);
                 Player_SetScale(
                     arg2,
@@ -1636,9 +2061,6 @@ void fn_8017A9B4(int slot)
             (u16*) disp->state.dim_h2 + lookup);
 }
 
-u32 lbl_803D7018[0x20 / sizeof(u32)] = { 0 };
-u32 lbl_803D7038[0x20 / sizeof(u32)] = { 0 };
-
 static s32 lbl_804D3FD0 = 0x00500050;
 static s32 lbl_804D3FD4 = 0x00460034;
 static s32 lbl_804D3FD8 = 0x006E0072;
@@ -1658,25 +2080,52 @@ fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
     return disp->state.match_end.team_standings;
 }
 
-static inline int inline2(int unused)
+static inline void fn_8017AA78_init_state(GXTexFmt image_format)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
 
     Player_InitAllPlayers();
     disp->shared_img.image_ptr = NULL;
-    lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
+    lb_800121FC(&disp->shared_img, 0x64, 0x98, image_format, 0);
     disp->state.match_end = *fn_80174274();
-    return unused;
 }
 
-static inline u32* inline3(lbl_8046E3AC_t* state)
+static inline u32* fn_8017AA78_get_dim_h1(lbl_8046E3AC_t* state)
 {
     return state->dim_h1;
 }
 
-static inline int inline4(ResultsDisplayLayout* disp)
+static inline u32* fn_8017AA78_get_dim_h2(lbl_8046E3AC_t* result_layout_state)
+{
+    return result_layout_state->dim_h2;
+}
+
+static inline int fn_8017AA78_get_result(ResultsDisplayLayout* disp)
 {
     return disp->state.match_end.result;
+}
+
+typedef union {
+    lbl_8046E3AC_t* state;
+    u8* bytes;
+} ResultsStatePointer;
+
+static inline void fn_8017AA78_set_x0_0(u8 x0_0_value)
+{
+    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
+
+    disp->state.x0_0 = x0_0_value;
+}
+
+static inline void fn_8017AA78_inline4(PackedS16x4** x22f4,
+                                       lbl_8046E3AC_t** result_state,
+                                       PackedS16x4** score_table)
+{
+    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
+
+    *x22f4 = (PackedS16x4*) gmResultX22F4Init;
+    *result_state = &disp->state;
+    *score_table = (PackedS16x4*) gmResultScoreTableInit;
 }
 
 void fn_8017AA78(const u8* arg0)
@@ -1685,6 +2134,7 @@ void fn_8017AA78(const u8* arg0)
     PackedS16x4* p5;
     PackedS16x4* p7;
     lbl_8046E3AC_t* state;
+    ResultsStatePointer player_state;
 
     memzero(disp->pad_000, sizeof(disp->pad_000));
     lbBgFlash_800208EC(6);
@@ -1699,14 +2149,16 @@ void fn_8017AA78(const u8* arg0)
     efLib_Init();
     efAsync_LoadSync(0);
     ftDemo_ObjAllocInit();
-    inline2(0);
+    fn_8017AA78_init_state(GX_TF_RGB5A3);
 
-    disp->state.x0_0 = 1;
+    fn_8017AA78_set_x0_0(1);
     disp->state.x0_4 = 0;
     disp->state.x0_6 = 0;
-    p5 = (PackedS16x4*) lbl_803D7038;
-    state = &disp->state;
-    p7 = (PackedS16x4*) lbl_803D7018;
+    fn_8017AA78_inline4(&p7, &state, &p5);
+#ifdef MUST_MATCH
+    p5 = (PackedS16x4*) gmResultScoreTableInit;
+#endif
+    player_state.state = state;
 
     {
         s32 a;
@@ -1718,7 +2170,7 @@ void fn_8017AA78(const u8* arg0)
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         {
-            u32* dim_h1 = inline3(state);
+            u32* dim_h1 = fn_8017AA78_get_dim_h1(state);
             a = lbl_804D3FD8;
             (void) a;
             b = lbl_804D3FDC;
@@ -1727,13 +2179,20 @@ void fn_8017AA78(const u8* arg0)
             dim_h1[1] = b;
         }
         a = lbl_804D3FE0;
+        (void) a;
         b = lbl_804D3FE4;
+        (void) b;
         state->dim_w2[0] = a;
         state->dim_w2[1] = b;
-        a = lbl_804D3FE8;
-        b = lbl_804D3FEC;
-        state->dim_h2[0] = a;
-        state->dim_h2[1] = b;
+        {
+            u32* dim_h2 = fn_8017AA78_get_dim_h2(state);
+            a = lbl_804D3FE8;
+            (void) a;
+            b = lbl_804D3FEC;
+            (void) b;
+            dim_h2[0] = a;
+            dim_h2[1] = b;
+        }
         a = lbl_804D3FF0;
         b = lbl_804D3FF4;
         ((u32*) state->scissor_y)[0] = a;
@@ -1746,10 +2205,10 @@ void fn_8017AA78(const u8* arg0)
 
     {
         int i;
-        for (i = 0; i < 4; i++) {
-            state->player_flags[i] = 0;
-            state->costume_override[i] = arg0[i];
-            if ((u8) inline4(disp) == OUTCOME_NO_CONTEST) {
+        for (i = 0; i < 4; player_state.bytes++, i++) {
+            player_state.bytes[1] = 0;
+            player_state.bytes[0x24] = arg0[i];
+            if ((u8) fn_8017AA78_get_result(disp) == OUTCOME_NO_CONTEST) {
                 struct MatchTeamData* team_standings;
                 state->match_end.player_standings[i].is_big_loser = 1;
                 team_standings = fn_8017AA78_get_team_standings(disp);

@@ -34,28 +34,32 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
-/// @todo Split-derived data; types are inferred.
-u8 lbl_804D6688[0x4];
-u8 lbl_804D668C[0x4];
-u8 lbl_804D6690[0x4];
-u8 lbl_804D6694[0x4];
-
-/* 4799D8 */ extern struct Lbl804799D8_t lbl_804799D8;
-/* 4D6660 */ HSD_Archive* lbl_804D6660;
-/* 4D6668 */ HSD_Archive* lbl_804D6668;
-/* 4D6664 */ HSD_Archive* lbl_804D6664;
+/* 4D6660 */ static HSD_Archive* lbl_804D6660;
+/* 4D6664 */ static HSD_Archive* lbl_804D6664;
+/* 4D6668 */ static HSD_Archive* lbl_804D6668;
+/* 4D666C */ static SceneDesc* lbl_804D666C;
+/* 4D6670 */ static SceneDesc* lbl_804D6670;
+/* 4D6674 */ static SceneDesc* lbl_804D6674;
+/* 4D6678 */ static s32 lbl_804D6678;
+/* 4D6678 */ static s32 lbl_804D667C;
+/* 4D6680 */ static u8 lbl_804D6680[3];
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) -19.5f;
     (void) 13.0f;
+    (void) 6.5f;
+    (void) 19.5f;
+    (void) 2.0f;
+    (void) S32_TO_F32;
+    (void) U32_TO_F32;
+    (void) 0.0f;
+    (void) 1.0f;
 }
 #endif
 
-/* 4799D8 */ struct Lbl804799D8_t lbl_804799D8;
-/* 4799B8 */ struct Lbl804799B8_t lbl_804799B8;
-/* 4D6670 */ SceneDesc* lbl_804D6670;
+/* 4799D8 */ static struct Lbl804799D8_t lbl_804799D8;
 
 /* 3DA0D0 */ struct lbl_803DA0D0_t lbl_803DA0D0 = {
     0,  1,  2,  3,  5,  6,  12, 6,  6,  7,  9,  8,  6,  9,  4,  9,  10, 11, 12,
@@ -530,7 +534,10 @@ typedef union TmPlayerAnimFrameTable {
 } TmPlayerAnimFrameTable;
 ASSERT_SIZE(TmPlayerAnimFrameTable, sizeof(s32) * 9);
 
-TmPlayerAnimFrameTable const lbl_803B7CE0 = { 0 };
+TmPlayerAnimFrameTable const lbl_803B7CE0 = {
+    { 0x0000001E, 0x00000032, 0x003B0000, 0x003C0046, 0x0001005A, 0x00640000,
+      0x006E0082, 0x00000096, 0x00A00000 }
+};
 
 void fn_80196FFC(HSD_GObj* gobj)
 {
@@ -1055,8 +1062,6 @@ void fn_80198584(ResultsData* results)
     }
 }
 
-s32 lbl_804D667C;
-
 void fn_801985D4(HSD_GObj* gobj)
 {
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
@@ -1240,8 +1245,6 @@ void fn_80198C60(void)
 #pragma pop
 #endif
 
-SceneDesc* lbl_804D666C;
-
 /// Initializes the scene rendering components for the gm_18A5 game mode.
 void fn_80198D18(void)
 {
@@ -1278,8 +1281,6 @@ void fn_80198D18(void)
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     fn_80198BA0();
 }
-
-SceneDesc* lbl_804D6674;
 
 /// Matched bar data relocations
 void fn_80198EBC(void)
@@ -1594,10 +1595,25 @@ static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
     return &lbl_80473AB8[bracket_idx];
 }
 
+typedef struct MatchEndStanding {
+    u8 pad[0x5D];
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 pad5F[0xA8 - 0x5F];
+} MatchEndStanding;
+ASSERT_SIZE(MatchEndStanding, 0xA8);
+
+typedef struct Lbl804799D8Text {
+    u8 pad[0x4E];
+    char x4E[20];
+} Lbl804799D8Text;
+
 /// @todo All instructions match; only the callee-saved register assignment
 /// is permuted against the target.
 void fn_8019A158(void)
 {
+    Lbl804799D8Text* base_ptr;
+    MatchEnd** x48_ptr;
     TmData* td1;
     TmData* td2;
     BracketEntry* bracket;
@@ -1616,9 +1632,11 @@ void fn_8019A158(void)
     s32 local1, local2;
     PAD_STACK(4);
 
+    base_ptr = (Lbl804799D8Text*) &lbl_804799D8;
     td1 = gm_GetTournamentData();
-    lbl_804799D8.x48 = &gm_80477738;
-    lbl_804799D8.x0 = mode = 0;
+    ((struct Lbl804799D8_t*) base_ptr)->x48 = &gm_80477738;
+    x48_ptr = &((struct Lbl804799D8_t*) base_ptr)->x48;
+    ((struct Lbl804799D8_t*) base_ptr)->x0 = mode = 0;
 
     td2 = gm_GetTournamentData();
 
@@ -1629,7 +1647,7 @@ void fn_8019A158(void)
         mode = 2;
     }
 
-    me = lbl_804799D8.x48;
+    me = *x48_ptr;
     (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
@@ -1651,7 +1669,7 @@ void fn_8019A158(void)
     bracket_idx = fn_8018F74C();
 
     for (k = 0; k < 20; k++) {
-        lbl_804799D8.x4E[k] = 0;
+        ((struct Lbl804799D8_t*) base_ptr)->x4E[k] = 0;
     }
 
     if (mode == 1) {
@@ -1672,32 +1690,28 @@ void fn_8019A158(void)
             if (cursor[0x4E] == 3) {
                 cursor[0x4C] = 3;
             } else {
+                MatchEndStanding* standing;
                 u8 v;
-                /// @todo byte-offset walker: player_standings[i] is biased
-                /// +0x58 from the MatchEnd base the original walks from.
-                u8* p = (u8*) lbl_804799D8.x48 + i * 0xA8;
-                v = p[0x5E];
-                p[0x5D] = v;
+
+                standing = &((MatchEndStanding*) *x48_ptr)[i];
+                v = standing->is_small_loser;
+                standing->is_big_loser = v;
                 cursor[0x4C] = v;
-                if (lbl_804799D8.x48->player_standings[i].is_small_loser == 0)
-                {
+                if ((*x48_ptr)->player_standings[i].is_small_loser == 0) {
                     sel = i;
                 }
             }
             cursor += 0x2C;
         }
     } else {
-        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
-        cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (cursor[0x4E] == 3) {
-                cursor[0x4C] = 4;
+            if (lbl_80473AB8[bracket_idx].slots[i].x4E == 3) {
+                lbl_80473AB8[bracket_idx].slots[i].x4C = 4;
             } else {
-                cursor[0x4C] = counter;
+                lbl_80473AB8[bracket_idx].slots[i].x4C = counter;
                 counter++;
             }
-            cursor += 0x2C;
         }
 
         switch (counter) {
@@ -1723,34 +1737,35 @@ void fn_8019A158(void)
 
         {
             u8 v = lbl_80473AB8[bracket_idx].slots[0].x4C;
-            lbl_804799D8.x48->player_standings[0].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[0].is_small_loser = v;
+            (*x48_ptr)->player_standings[0].is_big_loser = v;
+            (*x48_ptr)->player_standings[0].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[1].x4C;
-            lbl_804799D8.x48->player_standings[1].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[1].is_small_loser = v;
+            (*x48_ptr)->player_standings[1].is_big_loser = v;
+            (*x48_ptr)->player_standings[1].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[2].x4C;
-            lbl_804799D8.x48->player_standings[2].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[2].is_small_loser = v;
+            (*x48_ptr)->player_standings[2].is_big_loser = v;
+            (*x48_ptr)->player_standings[2].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[3].x4C;
-            lbl_804799D8.x48->player_standings[3].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[3].is_small_loser = v;
+            (*x48_ptr)->player_standings[3].is_big_loser = v;
+            (*x48_ptr)->player_standings[3].is_small_loser = v;
         }
 
-        cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (cursor[0x4C] == 0) {
+            if (lbl_80473AB8[bracket_idx].slots[i].x4C == 0) {
                 sel = i;
             }
-            cursor += 0x2C;
         }
     }
 
     {
-        lbl_804799D8.x4C = sel;
-        lbl_804799D8.x4D = lbl_80473AB8[bracket_idx].slots[sel].x4E;
+        ((struct Lbl804799D8_t*) base_ptr)->x4C = sel;
+        ((struct Lbl804799D8_t*) base_ptr)->x4D =
+            lbl_80473AB8[bracket_idx].slots[sel].x4E;
 
-        if (lbl_804799D8.x4D == 0 && lbl_80473AB8[bracket_idx].x18 != 0) {
-            u8 s = lbl_804799D8.x4C;
+        if (((struct Lbl804799D8_t*) base_ptr)->x4D == 0 &&
+            lbl_80473AB8[bracket_idx].x18 != 0)
+        {
+            u8 s = ((struct Lbl804799D8_t*) base_ptr)->x4C;
             u16 val = td1->x4B8[s].x6;
             if (val <= 0x78) {
                 gm_80167858(s, (s32) val, 0x1F, 0x78);
@@ -1762,7 +1777,7 @@ void fn_8019A158(void)
         cursor = (u8*) &lbl_80473AB8[bracket_idx] + sel * 0x2C;
         {
             u8 model_idx = cursor[0x50];
-            fn_8018F00C((char*) lbl_804799D8.x4E, td1->x37[model_idx].x9);
+            fn_8018F00C(base_ptr->x4E, td1->x37[model_idx].x9);
         }
     }
 }
@@ -1812,7 +1827,6 @@ void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
         *state = 0x1B;
     }
 }
-s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {
@@ -2083,8 +2097,6 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
         }
     }
 }
-
-u8 lbl_804D6680[8];
 
 typedef struct TimerFmt {
     s32 d[5];

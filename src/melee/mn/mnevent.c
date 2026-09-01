@@ -474,128 +474,169 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_ShowSelected(user_data, &jobj_09);
 }
 
-static inline u8 mnEvent_GetPage(const MnEventData* data)
+static inline void mnEvent_SetPageCursorY(MnEventData* cursor_data,
+                                          HSD_JObj** jobj_0A,
+                                          HSD_JObj** jobj_0C,
+                                          HSD_JObj** jobj_0B)
 {
-    return data->page;
+    u8 page;
+    HSD_JObj* tree;
+    f32 y_a;
+    f32 y_b;
+
+    page = cursor_data->page;
+    tree = mnEvent_804D6C60->hsd_obj;
+    lb_80011E24(tree, jobj_0A, 0xA, -1);
+    lb_80011E24(tree, jobj_0C, 0xC, -1);
+    y_a = HSD_JObjGetTranslationY(*jobj_0A);
+    y_b = HSD_JObjGetTranslationY(*jobj_0C);
+    lb_80011E24(tree, jobj_0B, 0xB, -1);
+    HSD_JObjSetTranslateY(*jobj_0B, (f32) page * (y_b - y_a));
 }
 
 void fn_8024D864(HSD_GObj* gobj)
 {
     u8 page;
-    f32 y_a;
     MnEventData* data;
-    HSD_JObj* jobj_09;
+    /// @remark These unreferenced declarations preserve MWCC allocation for
+    /// the inlined page-cursor helper and are excluded from non-matching
+    /// builds.
+#ifdef MUST_MATCH
     HSD_JObj* tree;
-    HSD_JObj* jobj_0B;
+#endif
+    HSD_JObj* up_jobj_0B;
     u64 inputs;
-    HSD_JObj* jobj_0C;
-    HSD_JObj* jobj_0A;
+    /// @remark Volatile is required for code matching but rejected by
+    /// clang-tidy.
+#ifdef MUST_MATCH
+    HSD_JObj* volatile up_jobj_0C;
+    HSD_JObj* volatile up_jobj_0A;
+#else
+    HSD_JObj* up_jobj_0C;
+    HSD_JObj* up_jobj_0A;
+#endif
+#ifdef MUST_MATCH
     f32 y_b;
-    PAD_STACK(0x70);
+#endif
 
-    if (mn_804D6BC8.cooldown != 0) {
-        mn_804D6BC8.cooldown -= 1;
-        mn_804D6BC8.x2 = 0;
-        mn_804D6BC8.x4 = 0;
-        return;
-    }
+    {
+        HSD_JObj* down_jobj_0B;
+        HSD_JObj* down_jobj_0C;
+        /// @remark Volatile is required for code matching but rejected by
+        /// clang-tidy.
+#ifdef MUST_MATCH
+        HSD_JObj* volatile down_jobj_0A;
+#else
+        HSD_JObj* down_jobj_0A;
+#endif
 
-    inputs = mn_804A04F0.buttons = mn_80229624(4);
-
-    if (inputs & MenuInput_Back) {
-        sfxBack();
-        mn_804A04F0.entering_menu = 0;
-        mn_80229894(1, 1, 3);
-        return;
-    }
-
-    if (mnEvent_804D6C64 != 0) {
-        mnEvent_804D6C64 -= 1;
-        return;
-    }
-
-    if (mnEvent_804D6C60 == NULL) {
-        mnEvent_8024E524(mnEvent_804D6C65);
-    }
-
-    data = mnEvent_804D6C60->user_data;
-    if (inputs & MenuInput_Confirm) {
-        sfxForward();
-        gm_801BEB74(data->first_event + data->page);
-        gm_801677E8(mn_802295AC());
-        mn_80229860(GM_EVENT);
-        return;
-    }
-
-    if (inputs & MenuInput_XButton) {
-        s32 max_events = mnEvent_8024CE74();
-        if (data->first_event + 9 < max_events ||
-            data->first_event != max_events)
-        {
-            sfxMove();
-            if (data->first_event + 9 < max_events) {
-                data->first_event += 9;
-            } else {
-                data->first_event = max_events;
-            }
-            mnEvent_RefreshRows(data->first_event);
-            mnEvent_ShowSelected(data, &jobj_09);
-        }
-    } else if (inputs & MenuInput_YButton) {
-        if (data->first_event - 9 >= 0 || data->first_event != 0) {
-            sfxMove();
-            if (data->first_event - 9 >= 0) {
-                data->first_event -= 9;
-            } else {
-                data->first_event = 0;
-            }
-            mnEvent_RefreshRows(data->first_event);
-            mnEvent_ShowSelected(data, &jobj_09);
-        }
-    } else if (inputs & MenuInput_Up) {
-        page = data->page;
-        if (page != 0) {
-            sfxMove();
-            data->page -= 1;
-            tree = mnEvent_804D6C60->hsd_obj;
-            page = mnEvent_GetPage(data);
-            lb_80011E24(tree, &jobj_0A, 0xA, -1);
-            lb_80011E24(tree, &jobj_0C, 0xC, -1);
-            y_a = HSD_JObjGetTranslationY(jobj_0A);
-            y_b = HSD_JObjGetTranslationY(jobj_0C);
-            lb_80011E24(tree, &jobj_0B, 0xB, -1);
-            mnEvent_SetPageY(jobj_0B, page, y_a, y_b);
-            mnEvent_ShowSelected(data, &jobj_09);
+        if (mn_804D6BC8.cooldown != 0) {
+            mn_804D6BC8.cooldown -= 1;
+            mn_804D6BC8.x2 = 0;
+            mn_804D6BC8.x4 = 0;
             return;
         }
-        if (data->first_event != 0) {
-            sfxMove();
-            data->first_event -= 1;
-            mnEvent_RefreshRows(data->first_event);
-            mnEvent_ShowSelected(data, &jobj_09);
-        }
-    } else if (inputs & MenuInput_Down) {
-        page = data->page;
-        if (page < 8) {
-            sfxMove();
-            data->page += 1;
-            tree = mnEvent_804D6C60->hsd_obj;
-            page = mnEvent_GetPage(data);
-            lb_80011E24(tree, &jobj_0A, 0xA, -1);
-            lb_80011E24(tree, &jobj_0C, 0xC, -1);
-            y_a = HSD_JObjGetTranslationY(jobj_0A);
-            y_b = HSD_JObjGetTranslationY(jobj_0C);
-            lb_80011E24(tree, &jobj_0B, 0xB, -1);
-            mnEvent_SetPageY(jobj_0B, page, y_a, y_b);
-            mnEvent_ShowSelected(data, &jobj_09);
+
+        inputs = mn_804A04F0.buttons = mn_80229624(4);
+
+        if (inputs & MenuInput_Back) {
+            sfxBack();
+            mn_804A04F0.entering_menu = 0;
+            mn_80229894(1, 1, 3);
             return;
         }
-        if (data->first_event < mnEvent_8024CE74()) {
-            sfxMove();
-            data->first_event += 1;
-            mnEvent_RefreshRows(data->first_event);
-            mnEvent_ShowSelected(data, &jobj_09);
+
+        if (mnEvent_804D6C64 != 0) {
+            mnEvent_804D6C64 -= 1;
+            return;
         }
+
+        if (mnEvent_804D6C60 == NULL) {
+            mnEvent_8024E524(mnEvent_804D6C65);
+        }
+
+        data = mnEvent_804D6C60->user_data;
+        if (inputs & MenuInput_Confirm) {
+            sfxForward();
+            gm_801BEB74(data->first_event + data->page);
+            gm_801677E8(mn_802295AC());
+            mn_80229860(GM_EVENT);
+            return;
+        }
+
+        if (inputs & MenuInput_XButton) {
+            HSD_JObj* jobj_09;
+            s32 max_events = mnEvent_8024CE74();
+            if (data->first_event + 9 < max_events ||
+                data->first_event != max_events)
+            {
+                sfxMove();
+                if (data->first_event + 9 < max_events) {
+                    data->first_event += 9;
+                } else {
+                    data->first_event = max_events;
+                }
+                mnEvent_RefreshRows(data->first_event);
+                mnEvent_ShowSelected(data, &jobj_09);
+            }
+        } else if (inputs & MenuInput_YButton) {
+            HSD_JObj* jobj_09;
+
+            if (data->first_event - 9 >= 0 || data->first_event != 0) {
+                sfxMove();
+                if (data->first_event - 9 >= 0) {
+                    data->first_event -= 9;
+                } else {
+                    data->first_event = 0;
+                }
+                mnEvent_RefreshRows(data->first_event);
+                mnEvent_ShowSelected(data, &jobj_09);
+            }
+            PAD_STACK(4);
+        } else if (inputs & MenuInput_Up) {
+            page = data->page;
+            if (page != 0) {
+                HSD_JObj* jobj_09;
+
+                sfxMove();
+                data->page -= 1;
+                mnEvent_SetPageCursorY(data, &up_jobj_0A, &up_jobj_0C,
+                                       &up_jobj_0B);
+                mnEvent_ShowSelected(data, &jobj_09);
+                return;
+            }
+            if (data->first_event != 0) {
+                HSD_JObj* jobj_09;
+
+                sfxMove();
+                data->first_event -= 1;
+                mnEvent_RefreshRows(data->first_event);
+                mnEvent_ShowSelected(data, &jobj_09);
+            }
+            PAD_STACK(4);
+        } else if (inputs & MenuInput_Down) {
+            page = data->page;
+            if (page < 8) {
+                HSD_JObj* jobj_09;
+
+                sfxMove();
+                data->page += 1;
+                mnEvent_SetPageCursorY(data, &down_jobj_0A, &down_jobj_0C,
+                                       &down_jobj_0B);
+                mnEvent_ShowSelected(data, &jobj_09);
+                return;
+            }
+            if (data->first_event < mnEvent_8024CE74()) {
+                HSD_JObj* jobj_09;
+
+                sfxMove();
+                data->first_event += 1;
+                mnEvent_RefreshRows(data->first_event);
+                mnEvent_ShowSelected(data, &jobj_09);
+            }
+        }
+
+        PAD_STACK(0x34);
     }
 }
 

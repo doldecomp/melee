@@ -130,6 +130,11 @@ static inline s8 readNameTerminator(const volatile char* terminator)
     return *terminator;
 }
 
+static inline bool signedCharactersEqual(s8 lhs, u8 rhs)
+{
+    return lhs == (s8) rhs;
+}
+
 static inline bool checkStringRest(const char* ptr, s8 terminator)
 {
     char c = "　"[0]; // SJIS full-width space
@@ -142,16 +147,27 @@ static inline bool checkStringRest(const char* ptr, s8 terminator)
     return true;
 }
 
+static inline u8 unsignedCharacter(s32 character)
+{
+    return (u8) character;
+}
+
 s32 CompareNameStrings(char* str1, char* str2)
 {
+    union {
+        char* signed_characters;
+        u8* unsigned_characters;
+    } string1;
+    u8* unsigned_str1;
     s8 terminator = (s8) *mnName_StringTerminator;
-    char* p1 = str1;
-    char* p2 = str2;
     s32 i = 0;
+
+    string1.signed_characters = str1;
+    unsigned_str1 = string1.unsigned_characters;
     while (true) {
         s8 ch1 = (s8) str1[i];
 
-        if (terminator == ch1) {
+        if (signedCharactersEqual(terminator, (u8) ch1)) {
             if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF],
                                 readNameTerminator(mnName_StringTerminator)))
             {
@@ -163,23 +179,23 @@ s32 CompareNameStrings(char* str1, char* str2)
         {
             s8 ch2 = (s8) str2[i];
 
-            if (*mnName_StringTerminator == ch2) {
+            if (signedCharactersEqual(*mnName_StringTerminator,
+                                      unsignedCharacter(ch2)))
+            {
                 if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }
                 return 1;
             }
 
-            if ((u8) *p1 > (u8) ch2) {
+            if (unsigned_str1[i] > unsignedCharacter(ch2)) {
                 return 1;
             }
-            if ((u8) *p1 < (u8) ch2) {
+            if (unsigned_str1[i] < unsignedCharacter(ch2)) {
                 return 2;
             }
         }
         i++;
-        p2++;
-        p1++;
     }
 }
 
@@ -1146,11 +1162,11 @@ static inline f32 mnName_80239A24_GetTextColumnWidth(HSD_GObj* gobj,
 void mnName_80239A24(HSD_GObj* gobj)
 {
     f32 text_row_height;
-    Vec3 text_position;
+    s32 row;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
-    s32 row;
+    Vec3 text_position;
     HSD_JObj* text_jobj0;
     HSD_JObj* text_jobj1;
     HSD_Text* text;
@@ -1161,7 +1177,6 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 j;
     s32 i;
     MnNameArchive* archive = &mnName_804A06C0;
-    MenuFlow* flow = &mn_804A04F0;
     MnName_GObj* data = (MnName_GObj*) gobj;
     HSD_JObj* ref_jobj3;
     s32 count;
@@ -1170,12 +1185,12 @@ void mnName_80239A24(HSD_GObj* gobj)
     u8 name_idx;
     PAD_STACK(8);
 
-    i = 0;
-    do {
+    for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(archive->joint);
         HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                            archive->shapeanim_joint);
-        HSD_JObjReqAnimAll(jobj, (f32) ((u8) i == flow->hovered_selection));
+        HSD_JObjReqAnimAll(jobj,
+                           (f32) ((u8) i == mn_804A04F0.hovered_selection));
         HSD_JObjAnimAll(jobj);
         col_width = HSD_JObjGetTranslationX(
             (HSD_JObj*) data->gobj.user_data_remove_func);
@@ -1192,8 +1207,7 @@ void mnName_80239A24(HSD_GObj* gobj)
             HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func,
                              child);
         }
-        i++;
-    } while (i < 0x18);
+    }
 
     text = HSD_SisLib_803A6754(0, 0);
     data->text = text;
@@ -1216,8 +1230,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
 
-    j = 0;
-    do {
+    for (j = 0; j < 0x18; j++) {
         MnName_GObj* global_data = (MnName_GObj*) mnName_804D6BF8->user_data;
         row = global_data->gobj.gx_link + ((u8) j / 6);
         count = GetNameCount_noinline();
@@ -1281,8 +1294,7 @@ void mnName_80239A24(HSD_GObj* gobj)
                 HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnName_StringTerminator);
             }
         }
-        j++;
-    } while (j < 0x18);
+    }
 }
 
 void mnName_80239EBC(HSD_JObj* jobj, f32 y)
