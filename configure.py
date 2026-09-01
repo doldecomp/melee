@@ -1342,7 +1342,7 @@ config.libs = [
             Object(Matching, "melee/mn/mnsoundtest.c"),
             Object(Matching, "melee/mn/mnlanguage.c"),
             Object(Matching, "melee/mn/mnhyaku.c"),
-            Object(Linkable, "melee/mn/mnevent.c"),
+            Object(Matching, "melee/mn/mnevent.c"),
             Object(Matching, "melee/mn/mndatadel.c"),
             Object(Matching, "melee/mn/mncount.c"),
             Object(Linkable, "melee/mn/mninfo.c"),
