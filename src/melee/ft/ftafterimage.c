@@ -26,44 +26,9 @@ typedef struct AfterimageVtx {
 
 #define AFTERIMAGE_ANGLE_STEP 0.0872664600610733f
 
-void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+static inline itSword_UnkBytes* ftCo_800C2600_get_params(Fighter* fp)
 {
-    Fighter* fp;
     itSword_UnkBytes* params;
-    UNUSED f32 inner_pad[1];
-    f32 cumDist[3];
-    AfterimageVtx vtx_buf[152];
-    f32* distPtr;
-    f32 d2;
-
-    if (arg1 != 2) {
-        return;
-    }
-
-    {
-        void* fighter = gobj->user_data;
-        fp = fighter;
-    }
-
-    if ((s8) (u8) fp->x2100 <= 1) {
-        return;
-    }
-
-    GXSetColorUpdate(1);
-    GXSetAlphaUpdate(0);
-    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
-    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
-    GXSetZMode(1, GX_LEQUAL, 0);
-    GXSetZCompLoc(0);
-    GXSetNumTexGens(0);
-    GXSetTevClampMode(0, 0);
-    GXSetNumTevStages(1);
-    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
-    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
-                  GX_AF_NONE);
-    GXSetCullMode(GX_CULL_NONE);
 
     if (fp->x2101_bits_8) {
         switch (itGetKind(fp->item_gobj)) {
@@ -96,22 +61,67 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             break;
         case FTKIND_LINK:
         case FTKIND_CLINK: {
-            params =
-                (itSword_UnkBytes*) &((ftLk_DatAttrs*) fp->dat_attrs)->x64;
+            ftLk_DatAttrs* da = fp->dat_attrs;
+            params = (itSword_UnkBytes*) &da->x64;
             break;
         }
         case FTKIND_MARS:
         case FTKIND_EMBLEM: {
-            params =
-                (itSword_UnkBytes*) &((MarsAttributes*) fp->dat_attrs)->x78;
+            MarsAttributes* da = fp->dat_attrs;
+            params = (itSword_UnkBytes*) &da->x78;
             break;
         }
         default:
             break;
         }
     }
+    return params;
+}
+
+void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+{
+    Fighter* fp;
+    itSword_UnkBytes* params;
+    f32 cumDist[3];
+    AfterimageVtx vtx_buf[152];
+    f32 d2;
+    f32* distPtr;
+
+    if (arg1 != 2) {
+        return;
+    }
 
     {
+        void* fighter = gobj->user_data;
+        fp = fighter;
+    }
+
+    if ((s8) (u8) fp->x2100 <= 1) {
+        return;
+    }
+
+    GXSetColorUpdate(1);
+    GXSetAlphaUpdate(0);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
+    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
+    GXSetZMode(1, GX_LEQUAL, 0);
+    GXSetZCompLoc(0);
+    GXSetNumTexGens(0);
+    GXSetTevClampMode(0, 0);
+    GXSetNumTevStages(1);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
+                  GX_AF_NONE);
+    GXSetCullMode(GX_CULL_NONE);
+
+    params = ftCo_800C2600_get_params(fp);
+
+    {
+        s32 remaining;
+        struct Fighter_x20B0_t* curEntry;
+        s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
         s32 ringIdx;
@@ -119,7 +129,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         f32* dp;
         Vec3 prevPos, delta, crossProd, tempDir;
 
-        PAD_STACK(0x1C);
+        PAD_STACK(0x14);
 
         {
             s32 idx = fp->x2101_bits_0to6;
@@ -141,7 +151,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             prevPos.x = prevPos.y = prevPos.z = 0.0f;
 
             for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
-                s32 nextIdx;
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
 
                 delta.x = entry->xC.x * x20FC + entry->x0.x - prevPos.x;
@@ -171,9 +180,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            s32 remaining;
-            struct Fighter_x20B0_t* curEntry;
-            s32 nextIdx;
             s32 numVerts;
             f32 scaleDiff;
             s32 curIdx2;
@@ -208,6 +214,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 f32 outerScale, innerScale;
                 s32 alpha;
                 struct Fighter_x20B0_t* nextEntry;
+                s32 numSubdiv;
 
                 curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
@@ -238,7 +245,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 if (remaining != 0) {
                     s32 nextRingIdx;
-                    s32 numSubdiv;
 
                     if (curIdx2 != 0) {
                         nextRingIdx = curIdx2 - 1;
@@ -281,10 +287,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
-                            basePosZ = curEntry->x0.z;
-#ifdef MUST_MATCH
                             (void) basePosY;
-#endif
+                            basePosZ = curEntry->x0.z;
+
                             stepPosX = frac * (nextEntry->x0.x - basePosX);
                             stepPosY = frac * (nextEntry->x0.y - basePosY);
                             stepPosZ = frac * (nextEntry->x0.z - basePosZ);
