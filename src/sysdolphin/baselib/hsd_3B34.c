@@ -22,10 +22,13 @@ typedef union JpegWork {
     } data;
 } JpegWork;
 
-typedef struct JpegLumaPair {
-    s32 block0[0x40];
-    s32 block1[0x40];
-} JpegLumaPair;
+typedef struct JpegBlock {
+    s32 data[0x40];
+} JpegBlock;
+
+typedef struct JpegByteBuffer {
+    u8 data[1];
+} JpegByteBuffer;
 
 typedef struct JpegComment {
     char data[0x15];
@@ -195,64 +198,50 @@ extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 static s32 lbl_804D6398 = 3;
 
-static inline s32 hsd_803B3408_inline(s32 index)
-{
-    return (index & 1) * 0x20;
-}
-
 static inline s32 hsd_803B3408_offset(s32 tile_stride, s32 y, s32 x)
 {
     return ((x / 4) * 0x10) + ((y / 4) * tile_stride);
 }
 
-static inline void hsd_803B3408_set_stride(s32* tile_stride, s32 width)
-{
-    *tile_stride = ((width + 0xF) / 16) << 6;
-}
-
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
-    s32 luma_block_offset;
-    s32 chroma_block_offset;
-    s32 second_pixel_offset;
-    s32 chroma_pixel_count;
-    s32 luma_offset;
+    JpegBlock* luma_block;
+    s32 tile_row_offset;
     s32 chroma_row_base;
-    s32 second_pixel_index;
     s32 luma_row_base;
-    s32 pixel_index;
+    s32 luma_offset;
     s32 luma_row;
+    s32 luma_block_offset;
     s32 tile_stride;
     s32 luma_y;
-    s32 pair_count;
+    s32 block_count;
     s32 luma_x;
     s32 tile_y;
     s32 tile_x;
     u16 pixel;
-    JpegLumaPair* luma_pair;
-    s32 tile_row_offset;
+    s32 pixel_index;
     u16* pixel_ptr;
 
     tile_row_offset = 0;
-    hsd_803B3408_set_stride(&tile_stride, width);
+    tile_stride = ((width + 0xF) / 16) << 6;
     chroma_row_base = 0;
     luma_row_base = 0;
     for (tile_y = 0; tile_y < 2; tile_y++) {
+        s32 chroma_block_offset;
         u16* src;
+
         chroma_block_offset = chroma_row_base;
-        src = (u16*) image +
-              (hsd_803B3408_offset(tile_stride, y, x) + tile_row_offset);
-        luma_block_offset = 0;
-        for (tile_x = 0; tile_x < 2; tile_x++) {
+        {
+            s32 image_offset = hsd_803B3408_offset(tile_stride, y, x);
+            src = (u16*) image + (image_offset + tile_row_offset);
+        }
+        for (tile_x = 0, luma_block_offset = 0; tile_x < 2; tile_x++) {
             s32 chroma_y;
 
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
                 s32 chroma_x;
 
-                chroma_x = 0;
-                for (chroma_pixel_count = 4; chroma_pixel_count != 0;
-                     chroma_pixel_count--)
-                {
+                for (chroma_x = 0; chroma_x < 4; chroma_x++) {
                     f32 green;
                     s32 chroma_x_offset;
                     s32 red_chroma;
@@ -282,7 +271,6 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                         (((chroma_y & 1) * 4) +
                                          ((chroma_y & 2) * 0x10)))) *
                                       4));
-                    chroma_x += 1;
                     chroma_work->data.x518[0] =
                         (s32) ((0.5f * (f32) blue_chroma) +
                                ((-0.1687f * (f32) red_chroma) -
@@ -295,26 +283,26 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                (0.0813f * (f32) ((pixel_again * 8) & 0xF8)));
                 }
             }
+            luma_y = 0;
             luma_row = luma_row_base;
-            for (luma_y = 0; luma_y < 4; luma_y++) {
-                luma_offset = luma_row * 8;
+            for (; luma_y < 4; luma_y++) {
+                luma_offset = luma_row;
+                luma_offset <<= 3;
                 for (luma_x = 0; luma_x < 4; luma_x++) {
                     pixel_index = 0;
-                    luma_pair =
-                        (JpegLumaPair*) (HSD_804D2648_BUF +
-                                         ((luma_block_offset + luma_offset) *
-                                          4) +
-                                         0x118);
-                    for (pair_count = 2; pair_count != 0; pair_count--) {
+                    luma_block =
+                        (JpegBlock*) (HSD_804D2648_BUF +
+                                      ((luma_block_offset + luma_offset) * 4) +
+                                      0x118);
+                    for (block_count = 4; block_count != 0; block_count--) {
                         s32 row_offset = (pixel_index & 2) * tile_stride;
 
-                        pixel = src[((pixel_index & 1) * 0x20) + row_offset];
-                        second_pixel_index = pixel_index + 1;
-                        second_pixel_offset =
-                            hsd_803B3408_inline(second_pixel_index) +
-                            ((second_pixel_index & 2) * tile_stride);
-                        pixel_index = second_pixel_index + 1;
-                        luma_pair->block0[0] =
+                        {
+                            s32 column_offset = (pixel_index & 1) * 0x20;
+                            pixel = src[column_offset + row_offset];
+                        }
+                        pixel_index += 1;
+                        luma_block->data[0] =
                             (s32) ((s32) ((0.114f *
                                            (f32) ((pixel * 8) & 0xF8)) +
                                           ((0.299f *
@@ -322,16 +310,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                            (0.587f *
                                             (f32) ((pixel >> 3U) & 0xFC)))) -
                                    0x80);
-                        pixel = src[second_pixel_offset];
-                        luma_pair->block1[0] =
-                            (s32) ((s32) ((0.114f *
-                                           (f32) ((pixel * 8) & 0xF8)) +
-                                          ((0.299f *
-                                            (f32) ((pixel >> 8U) & 0xF8)) +
-                                           (0.587f *
-                                            (f32) ((pixel >> 3U) & 0xFC)))) -
-                                   0x80);
-                        luma_pair += 1;
+                        luma_block += 1;
                     }
                     src += 1;
                     luma_offset += 1;
@@ -350,39 +329,37 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 static void fn_803B376C(u8* arg0)
 {
     f32 scratch_f4;
-    f32 scratch_f11_2;
     f32 scratch_f8_2;
-    f32 scratch_f11_4;
-    f32 scratch_f11_5;
-    f32 scratch_f11_6;
-    f32 scratch_f27;
-    f32 scratch_f6;
     f32 scratch_f8;
-    f32 scratch_f27_6;
-    f32 scratch_f30_4;
-    f32 scratch_f28;
-    f32 scratch_f11_3;
-    f32 scratch_f28_3;
-    f32 scratch_f28_4;
-    f32 scratch_f28_5;
-    f32 scratch_f28_6;
-    f32 scratch_f28_7;
+    f32 scratch_f11_4;
+    f32 scratch_f6;
     f32 scratch_f4_2;
-    f32 scratch_f29_2;
-    f32 scratch_f29_3;
     f32 scratch_f11;
-    f32 scratch_f30_2;
-    f32 scratch_f30_3;
-    f32 scratch_f8_4;
     f32 scratch_f30;
-    f32 scratch_f27_2;
-    f32 scratch_f6_2;
-    f32 scratch_f27_3;
-    f32 scratch_f28_2;
+    f32 scratch_f28;
+    f32 scratch_f28_3;
+    f32 scratch_f28_6;
+    f32 scratch_f28_4;
+    f32 scratch_f30_3;
+    f32 scratch_f28_7;
+    f32 scratch_f8_4;
+    f32 scratch_f11_6;
+    f32 scratch_f30_2;
+    f32 scratch_f29_2;
     f32 scratch_f8_3;
+    f32 scratch_f30_4;
+    f32 scratch_f28_5;
+    f32 scratch_f29_3;
+    f32 scratch_f6_2;
+    f32 scratch_f27;
+    f32 scratch_f11_3;
+    f32 scratch_f27_2;
+    f32 scratch_f27_3;
     f32 scratch_f27_5;
+    f32 scratch_f28_2;
     f32 scratch_f27_4;
     f32 scratch_f29;
+    f32 scratch_f27_6;
     f32 scratch_f26;
     s32 scratch_r7_2;
     s32 scratch_r9_2;
@@ -394,13 +371,12 @@ static void fn_803B376C(u8* arg0)
     s32 scratch_r29_2;
     s32 work_ctr;
     s32 work_ctr_2;
-    s32 work_ctr_3;
-    s32* work_r3;
     s32* work_r4;
     s32* work_r4_2;
 
     work_r4 = (s32*) arg0;
     for (work_ctr = 8; work_ctr != 0; work_ctr--) {
+        f32 scratch_f11_2;
         s32 scratch_r7;
         f32 scratch_f26_2;
         s32 scratch_r9;
@@ -436,8 +412,8 @@ static void fn_803B376C(u8* arg0)
                             (0.382683 * (f64) scratch_f26));
         work_r4[2] = (s32) ((0.382683 * (f64) scratch_f27_2) +
                             (0.92388 * (f64) scratch_f26));
-        scratch_f11_3 = (f32) (0.707107 * (f64) (scratch_f8 + scratch_f11_2));
         scratch_f8_2 = (f32) (0.707107 * (f64) (scratch_f8 - scratch_f11_2));
+        scratch_f11_3 = (f32) (0.707107 * (f64) (scratch_f8 + scratch_f11_2));
         scratch_f30_2 = scratch_f11_3 + scratch_f28_2;
         scratch_f26_2 = -scratch_f27_3 + scratch_f8_2;
         scratch_f28_3 = -scratch_f11_3 + scratch_f28_2;
@@ -454,6 +430,7 @@ static void fn_803B376C(u8* arg0)
     }
     work_r4_2 = (s32*) arg0;
     for (work_ctr_2 = 8; work_ctr_2 != 0; work_ctr_2--) {
+        f32 scratch_f11_5;
         scratch_r31_2 = work_r4_2[0];
         scratch_r30_2 = work_r4_2[56];
         scratch_r29_2 = work_r4_2[8];
@@ -480,18 +457,15 @@ static void fn_803B376C(u8* arg0)
                                (0.382683 * (f64) scratch_f27_5));
         work_r4_2[16] = (s32) ((0.382683 * (f64) scratch_f28_5) +
                                (0.92388 * (f64) scratch_f27_5));
+        scratch_f8_4 = (f32) (0.707107 * (f64) (scratch_f8_3 - scratch_f11_5));
         scratch_f11_6 =
             (f32) (0.707107 * (f64) (scratch_f8_3 + scratch_f11_5));
-        scratch_f8_4 = (f32) (0.707107 * (f64) (scratch_f8_3 - scratch_f11_5));
-        scratch_f30_4 = scratch_f29_2 + scratch_f11_6;
+        scratch_f30_4 = scratch_f11_6 + scratch_f29_2;
         scratch_f27_6 = -scratch_f28_6 + scratch_f8_4;
         scratch_f29_3 = -scratch_f11_6 + scratch_f29_2;
         scratch_f28_7 = scratch_f28_6 + scratch_f8_4;
-        {
-            f64 scratch_f30_5 = 0.19509 * (f64) scratch_f30_4;
-            work_r4_2[56] =
-                (s32) ((0.980785 * (f64) scratch_f27_6) + scratch_f30_5);
-        }
+        work_r4_2[56] = (s32) ((0.980785 * (f64) scratch_f27_6) +
+                               (0.19509 * (f64) scratch_f30_4));
         work_r4_2[40] = (s32) ((0.83147 * (f64) scratch_f28_7) +
                                (0.55557 * (f64) scratch_f29_3));
         work_r4_2[24] = (s32) ((-0.55557 * (f64) scratch_f28_7) +
@@ -500,33 +474,26 @@ static void fn_803B376C(u8* arg0)
                               (0.980785 * (f64) scratch_f30_4));
         work_r4_2 += 1;
     }
-    work_r3 = (s32*) arg0;
-    work_ctr_3 = 4;
-    do {
-        work_r3[0] = work_r3[0] >> 2;
-        work_r3[1] = work_r3[1] >> 2;
-        work_r3[2] = work_r3[2] >> 2;
-        work_r3[3] = work_r3[3] >> 2;
-        work_r3[4] = work_r3[4] >> 2;
-        work_r3[5] = work_r3[5] >> 2;
-        work_r3[6] = work_r3[6] >> 2;
-        work_r3[7] = work_r3[7] >> 2;
-        work_r3[8] = work_r3[8] >> 2;
-        work_r3[9] = work_r3[9] >> 2;
-        work_r3[10] = work_r3[10] >> 2;
-        work_r3[11] = work_r3[11] >> 2;
-        work_r3[12] = work_r3[12] >> 2;
-        work_r3[13] = work_r3[13] >> 2;
-        work_r3[14] = work_r3[14] >> 2;
-        work_r3[15] = work_r3[15] >> 2;
-        work_ctr_3 -= 1;
-        work_r3 += 16;
-    } while (work_ctr_3 != 0);
+    for (work_ctr = 0; 0x40 > work_ctr; work_ctr++) {
+        ((s32*) arg0)[work_ctr] >>= 2;
+    }
 }
 
-static inline s32 hsd_803B3CD8_dec(s32 value)
+static inline s32 hsd_803B3CD8_bit_length(s32 value)
 {
-    return value - 1;
+    s32 bit;
+
+    for (bit = 0x1F; bit >= 0; bit--) {
+        if (value & (1 << bit)) {
+            return bit + 1;
+        }
+    }
+    return 0;
+}
+
+static inline s32 hsd_803B3CD8_abs(s32 sign, s32 value)
+{
+    return (sign ^ value) - sign;
 }
 
 void hsd_803B3CD8(s32 arg0)
@@ -538,23 +505,11 @@ void hsd_803B3CD8(s32 arg0)
     s32 work_r28_2;
     s32 work_r28;
     u16* work_r6;
-    s32 scratch_r0;
+    s32 work_r28_4;
     s32 work_r28_6;
     s32 scratch_r3;
-    s32 scratch_r4;
     s32 scratch_r4_12;
-    s32 scratch_r4_17;
-    s32 scratch_r4_18;
-    s32 scratch_r4_19;
-    s32 scratch_r4_20;
-    s32 scratch_r4_21;
-    s32 scratch_r4_22;
-    s32 scratch_r4_23;
-    s32 scratch_r4_2;
     s32 work_r22;
-    s32 scratch_r4_5;
-    s32 scratch_r4_6;
-    s32 scratch_r4_7;
     s32 scratch_r5;
     s32 scratch_r5_2;
     s32 scratch_r5_3;
@@ -564,23 +519,18 @@ void hsd_803B3CD8(s32 arg0)
     s32 scratch_r5_7;
     s32 scratch_r5_8;
     u8* work_r25_2;
-    s32 work_ctr;
     s32 work_ctr_2;
-    s32 work_ctr_3;
-    s32 scratch_r4_4;
     s32 work_r24;
     s32 work_r25;
     s32 work_r23;
     u8* work_r26;
     s32 work_r28_3;
-    s32 work_r28_4;
+    s32 scratch_r0;
     u8 byte_out;
     s32 scratch_r0_2;
     s32 work_r29;
     s32 work_r29_2;
     s32 work_r29_3;
-    s32 work_r4;
-    s32 work_r4_2;
     s32 work_r5;
     u16 scratch_r28;
     u16 scratch_r29;
@@ -613,53 +563,8 @@ void hsd_803B3CD8(s32 arg0)
     work_r25 = work->data.coef[0] - work->data.prev_dc[arg0];
     scratch_r0 = work_r25 >> 0x1F;
     work_r24 = 0;
-    scratch_r5 = (scratch_r0 ^ work_r25) - scratch_r0;
-    work_r4 = 0x1F;
-    for (work_ctr = 4; work_ctr != 0; work_ctr--) {
-        s32 scratch_r4_3;
-        if (scratch_r5 & (1 << work_r4)) {
-            work_r31 = work_r4 + 1;
-            goto loop_13;
-        }
-        scratch_r4 = work_r4 - 1;
-        if (scratch_r5 & (1 << scratch_r4)) {
-            work_r31 = scratch_r4 + 1;
-            goto loop_13;
-        }
-        scratch_r4_2 = scratch_r4 - 1;
-        if (scratch_r5 & (1 << scratch_r4_2)) {
-            work_r31 = scratch_r4_2 + 1;
-            goto loop_13;
-        }
-        scratch_r4_3 = scratch_r4_2 - 1;
-        if (scratch_r5 & (1 << scratch_r4_3)) {
-            work_r31 = scratch_r4_3 + 1;
-            goto loop_13;
-        }
-        scratch_r4_4 = scratch_r4_3 - 1;
-        if (scratch_r5 & (1 << scratch_r4_4)) {
-            work_r31 = scratch_r4_4 + 1;
-            goto loop_13;
-        }
-        scratch_r4_5 = scratch_r4_4 - 1;
-        if (scratch_r5 & (1 << scratch_r4_5)) {
-            work_r31 = scratch_r4_5 + 1;
-            goto loop_13;
-        }
-        scratch_r4_6 = scratch_r4_5 - 1;
-        if (scratch_r5 & (1 << scratch_r4_6)) {
-            work_r31 = scratch_r4_6 + 1;
-            goto loop_13;
-        }
-        scratch_r4_7 = scratch_r4_6 - 1;
-        if (scratch_r5 & (1 << scratch_r4_7)) {
-            work_r31 = scratch_r4_7 + 1;
-            goto loop_13;
-        }
-        work_r4 = scratch_r4_7 - 1;
-    }
-    work_r31 = 0;
-loop_13:
+    scratch_r5 = hsd_803B3CD8_abs(scratch_r0, work_r25);
+    work_r31 = hsd_803B3CD8_bit_length(scratch_r5);
     work->data.prev_dc[arg0] = work->data.coef[0];
     scratch_r28 = work_r6[work_r31];
     work_r29 = work_r7[work_r31] - 1;
@@ -777,7 +682,7 @@ loop_13:
             }
             work_r28_2 = 0;
         loop_65:
-            scratch_r31 = *(work_r27 + (work_r28_2 * 2));
+            scratch_r31 = work_r27[work_r28_2];
             work_r29_2 = *(work_r26 + work_r28_2) - 1;
             for (; work_r29_2 >= 0; work_r29_2--) {
                 hsd_804D79B0 <<= 1;
@@ -838,52 +743,8 @@ loop_13:
             }
             scratch_r3 = work_r22 >> 0x1F;
             scratch_r5_9 = (scratch_r3 ^ work_r22) - scratch_r3;
-            work_r4_2 = 0x1F;
-            for (work_ctr_3 = 4; work_ctr_3 != 0; work_ctr_3--) {
-                if (scratch_r5_9 & (1 << work_r4_2)) {
-                    work_r28_4 = work_r4_2 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_17 = work_r4_2 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_17)) {
-                    work_r28_4 = scratch_r4_17 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_18 = scratch_r4_17 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_18)) {
-                    work_r28_4 = scratch_r4_18 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_19 = hsd_803B3CD8_dec(scratch_r4_18);
-                if (scratch_r5_9 & (1 << scratch_r4_19)) {
-                    work_r28_4 = scratch_r4_19 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_20 = scratch_r4_19 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_20)) {
-                    work_r28_4 = scratch_r4_20 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_21 = scratch_r4_20 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_21)) {
-                    work_r28_4 = scratch_r4_21 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_22 = scratch_r4_21 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_22)) {
-                    work_r28_4 = scratch_r4_22 + 1;
-                    goto loop_112;
-                }
-                scratch_r4_23 = scratch_r4_22 - 1;
-                if (scratch_r5_9 & (1 << scratch_r4_23)) {
-                    work_r28_4 = scratch_r4_23 + 1;
-                    goto loop_112;
-                }
-                work_r4_2 = scratch_r4_23 - 1;
-            }
-            work_r28_4 = 0;
-        loop_112:
-            scratch_r31_2 = *(work_r27 + (work_r28_4 * 2));
+            work_r28_4 = hsd_803B3CD8_bit_length(scratch_r5_9);
+            scratch_r31_2 = work_r27[work_r28_4];
             work_r29_3 = *(work_r26 + work_r28_4) - 1;
             for (; work_r29_3 >= 0; work_r29_3--) {
                 hsd_804D79B0 <<= 1;
@@ -987,7 +848,7 @@ loop_13:
 }
 
 static const s32 lbl_804DEB88[1] = { 0x4A464946 };
-static const u8 lbl_804DEB8C[4] = { 0 };
+static const u8 jpeg_jfif_terminator[1] = { 0 };
 
 void hsd_803B46D4(void)
 {
@@ -1014,7 +875,7 @@ void hsd_803B46D4(void)
 
     scratch_r4 = hsd_804D79A0;
     sp8.word = lbl_804DEB88[0];
-    sp8.byte[0] = lbl_804DEB8C[0];
+    sp8.byte[0] = jpeg_jfif_terminator[0];
     state.jmp_buf = &hsd_804D2648;
     if (scratch_r4 < &hsd_804D79A4[hsd_804D79A8]) {
         hsd_804D79A0 = scratch_r4 + 1;
@@ -1405,54 +1266,44 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
     hsd_803B4D64_inline(arg0, arg1, &hsd_804D2648);
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
-s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
+static inline s32
+hsd_803B51C8_inline(s32 image, s32 image_height, s32 image_width,
+                    const char* output, s32 output_capacity,
+                    const JpegMetadata* metadata, JpegComment* comment,
+                    JpegHuffDc* huff_dc_luma, JpegHuffDc* huff_dc_chroma,
+                    JpegHuffAc* huff_ac_luma, JpegHuffAc* huff_ac_chroma)
 {
-    JpegComment comment;
-    JpegHuffDc huff_dc_luma;
-    JpegHuffDc huff_dc_chroma;
-    JpegHuffAc huff_ac_luma;
+    s32 work_r24;
+    s32 work_r25;
     s32* work_r26_2;
     s32 scratch_r6_4;
     s32 scratch_r6_5;
     s32 scratch_r7_2;
     s32 scratch_r7_4;
     s32 quant_scale;
-    s32 work_r25;
-    s32 work_r24;
-    const JpegMetadata* const metadata = &lbl_803B9670;
-    s32 work_r3;
-    s32 work_r3_2;
-    u32 scratch_r23;
+    u16 scratch_r0;
     u8 scratch_r6_3;
     u8 scratch_r7_3;
-    JpegHuffAc huff_ac_chroma;
     struct {
         u8* base;
         JpegWork* work;
         u8* quant_table;
     } state;
-    s32* work_r4_3;
-    s32* work_r4_4;
-    u16 scratch_r0;
+    u32 scratch_r23;
     u32 comment_size;
-    s32 height;
     s32 width;
+    s32 height;
     u8* src;
-
-    PAD_STACK(0x1C);
 
     state.base = HSD_804D2648_BUF;
     state.work = (JpegWork*) state.base;
-    src = (u8*) arg0;
-    width = arg1;
-    height = arg2;
-    hsd_804D79A8 = arg4;
+    src = ((JpegByteBuffer*) image)->data;
+    width = image_width;
+    height = image_height;
+    hsd_804D79A8 = output_capacity;
     hsd_804D79AC = 0;
-    hsd_804D79A0 = (u8*) arg3;
-    hsd_804D79A4 = (u8*) arg3;
+    hsd_804D79A0 = ((JpegByteBuffer*) output)->data;
+    hsd_804D79A4 = ((JpegByteBuffer*) output)->data;
     state.quant_table = lbl_80430C40;
     state.work->data.prev_dc[0] = state.work->data.prev_dc[1] =
         state.work->data.prev_dc[2] = 0;
@@ -1470,44 +1321,44 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         longjmp((__jmp_buf*) state.base, 1);
     }
     hsd_803B46D4();
-    comment = metadata->data.comment;
-    scratch_r23 = strlen(comment.data) + 1;
+    *comment = metadata->data.comment;
+    scratch_r23 = strlen(comment->data) + 1;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xFEU);
     comment_size = scratch_r23 + 2;
     scratch_r0 = comment_size;
     hsd_803B3344((u8) (comment_size >> 8U));
     hsd_803B3344((u8) scratch_r0);
-    hsd_803B3398(comment.data, scratch_r23);
+    hsd_803B3398(comment->data, scratch_r23);
     hsd_803B4A2C();
-    huff_dc_luma = metadata->data.huff_dc_luma;
+    *huff_dc_luma = metadata->data.huff_dc_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(0U);
-    hsd_803B3398(huff_dc_luma.data, 0x1CU);
-    huff_dc_chroma = metadata->data.huff_dc_chroma;
+    hsd_803B3398(huff_dc_luma->data, 0x1CU);
+    *huff_dc_chroma = metadata->data.huff_dc_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(1U);
-    hsd_803B3398(huff_dc_chroma.data, 0x1CU);
-    huff_ac_luma = metadata->data.huff_ac_luma;
+    hsd_803B3398(huff_dc_chroma->data, 0x1CU);
+    *huff_ac_luma = metadata->data.huff_ac_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x10U);
-    hsd_803B3398(huff_ac_luma.data, 0xB2U);
-    huff_ac_chroma = metadata->data.huff_ac_chroma;
+    hsd_803B3398(huff_ac_luma->data, 0xB2U);
+    *huff_ac_chroma = metadata->data.huff_ac_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x11U);
-    hsd_803B3398(huff_ac_chroma.data, 0xB2U);
+    hsd_803B3398(huff_ac_chroma->data, 0xB2U);
     {
         void (*const write_frame_header)(u32, u32) = hsd_803B4D64;
         write_frame_header(width, height);
@@ -1586,20 +1437,20 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         for (work_r25 = 0; work_r25 < width; work_r25 += 0x10) {
             s32 work_r26;
             u8* work_r23;
-            s32 work_r3_3;
-            s32* work_r5_4;
             hsd_803B3408(src, work_r25, work_r24, width, height);
             work_r23 = state.base + ((work_r26 = 0) << 8);
             work_r23 += 0x118;
             while (work_r26 < 4) {
+                u8* scratch_r6;
                 s32* work_r5_3;
+                s32* work_r4_3;
+                s32 work_r3;
                 fn_803B376C(work_r23);
                 quant_scale = lbl_804D6398;
                 work_r4_3 = (s32*) work_r23;
                 work_r5_3 = (s32*) (state.base + 0x718);
                 for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
                     u8 scratch_r7;
-                    u8* scratch_r6;
                     scratch_r6 = state.quant_table + work_r3;
                     scratch_r7 = scratch_r6[0];
                     work_r5_3[0] =
@@ -1627,13 +1478,16 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
                 work_r26++;
             }
             {
+                u8* scratch_r6_2;
+                s32* work_r5_4;
+                s32* work_r4_4;
+                s32 work_r3_2;
                 u8* chroma_quant_table = state.quant_table + 0x40;
                 fn_803B376C(state.base + 0x518);
                 work_r5_4 = work_r26_2 = (s32*) (state.base + 0x718);
                 quant_scale = lbl_804D6398;
                 work_r4_4 = (s32*) (state.base + 0x518);
                 for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
-                    u8* scratch_r6_2;
                     scratch_r6_2 = chroma_quant_table + work_r3_2;
                     scratch_r7_3 = scratch_r6_2[0];
                     work_r5_4[0] =
@@ -1660,12 +1514,13 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
             }
             {
                 u8* chroma_quant_table = state.quant_table + 0x40;
+                u8* scratch_r5;
                 s32* work_r4_5;
+                s32 work_r3_3;
                 fn_803B376C(state.base + 0x618);
                 quant_scale = lbl_804D6398;
                 work_r4_5 = (s32*) (state.base + 0x618);
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    u8* scratch_r5;
                     scratch_r5 = chroma_quant_table + work_r3_3;
                     scratch_r6_3 = scratch_r5[0];
                     work_r26_2[0] =
@@ -1724,9 +1579,21 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     return hsd_804D79A0 - hsd_804D79A4;
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
+s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
+{
+    JpegComment comment;
+    JpegHuffDc huff_dc_luma;
+    JpegHuffDc huff_dc_chroma;
+    JpegHuffAc huff_ac_luma;
+    JpegHuffAc huff_ac_chroma;
+
+    PAD_STACK(0x18);
+
+    return hsd_803B51C8_inline(arg0, arg2, arg1, arg3, arg4, &lbl_803B9670,
+                               &comment, &huff_dc_luma, &huff_dc_chroma,
+                               &huff_ac_luma, &huff_ac_chroma);
+}
+
 void hsd_803B5C2C(s32 arg0)
 {
     lbl_804D6398 = arg0;

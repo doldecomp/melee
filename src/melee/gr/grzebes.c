@@ -950,8 +950,9 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         f32 accel;
         f32 vel;
         f32 t;
+        f32 target_level;
         f32 delta;
-        f32 abs_delta;
+        f64 abs_delta;
         f32 threshold;
 
         gp->u.zebes5.xC6 = (s16) (gp->u.zebes5.xC6 + 1);
@@ -967,12 +968,15 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         }
         threshold =
             (f32) ((f64) (vel * t) - (0.5 * (f64) accel * (f64) (t * t)));
-        delta = gp->u.zebes5.xD4;
-        delta -= gp->u.zebes5.xD8;
+        target_level = gp->u.zebes5.xD4;
+        delta = target_level - gp->u.zebes5.xD8;
 
-        abs_delta = ABS(delta);
+        abs_delta = delta;
+        target_level = 0.0f;
 
-        if (abs_delta < threshold || ABS(delta) < accel) {
+        if ((delta < 0 ? -abs_delta : abs_delta) < threshold ||
+            (abs_delta < target_level ? -abs_delta : abs_delta) < accel)
+        {
             gp->u.zebes5.xC8 = 4;
         } else {
             gp->u.zebes5.xD0 += accel;
@@ -1730,22 +1734,26 @@ static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
     return yp->x74 * 0.5f;
 }
 
-static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base, f32 old_y)
-{
-    return old_y + (*base)->x14;
-}
-
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
-    f32 left_anchor_x = grZe_8049F158[0].x;
-    f32 left_anchor_y = grZe_8049F158[0].y;
-    f32 left_bound_x = grZe_8049F140[0].x;
-    f32 left_bound_y = grZe_8049F140[0].y;
-    f32 right_anchor_y = grZe_8049F158[1].y;
-    f32 right_anchor_x = grZe_8049F158[1].x;
-    f32 right_bound_y = grZe_8049F140[1].y;
-    f32 right_bound_x = grZe_8049F140[1].x;
+    f32 right_bound_x;
+    f32 right_bound_y;
+    f32 left_bound_x;
+    f32 left_bound_y;
+    f32 right_anchor_y;
+    f32 right_anchor_x;
+    f32 left_anchor_y;
+    f32 left_anchor_x;
+
+    left_anchor_x = grZe_8049F158[0].x;
+    left_anchor_y = grZe_8049F158[0].y;
+    right_anchor_x = grZe_8049F158[1].x;
+    right_anchor_y = grZe_8049F158[1].y;
+    left_bound_y = grZe_8049F140[0].y;
+    left_bound_x = grZe_8049F140[0].x;
+    right_bound_y = grZe_8049F140[1].y;
+    right_bound_x = grZe_8049F140[1].x;
 
     (void) 0.0;
     for (k = 0; k < 20; (*base)++, k++) {
@@ -1761,10 +1769,11 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
                 (*base)->x08_x = right_anchor_x;
                 (*base)->x0C_y = right_anchor_y;
             } else {
-                f32 old_y = (*base)->x0C_y;
+                f32 current_y = (*base)->x0C_y;
+                f32 old_y = current_y;
                 f32 current_x = (*base)->x08_x;
                 f32 old_x = current_x;
-                f32 new_y = grZebes_801DB3CC_update_y(base, old_y);
+                f32 new_y = old_y + (*base)->x14;
                 f32 new_x = old_x + (*base)->x10;
                 if (new_y < left_bound_y && new_x < left_bound_x) {
                     if (old_y >= left_bound_y) {
@@ -1901,9 +1910,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_BubbleEntry* ea = base;
         int a;
-        for (a = 0; a < 19; a++, ea++) {
+        for (a = 0; a < 19; a++) {
+            grZe_BubbleEntry* ea = &base[a];
             if (ea->x00_active != 0) {
                 int b = a + 1;
                 grZe_BubbleEntry* eb = &grZe_8049F170[b];
@@ -1915,57 +1924,60 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
                             f32 effective_dist = dist;
+                            f32 col_rad = grZebes_801DB3CC_half_radius(yp);
                             f32 avg_size = ea->x18_size + eb->x18_size;
-                            f32 col_rad =
-                                grZebes_801DB3CC_half_radius(yp) * avg_size;
-                            f32 near_rad = yp->x70 * 0.5f * avg_size;
-                            f32 far_rad = yp->x6C * 0.5f * avg_size;
-                            if (dist < 0.001) {
-                                dy = 0.001;
-                                dx = 0.0f;
-                                effective_dist = 0.001;
-                            }
-                            if (effective_dist < col_rad) {
-                                f32 strength =
-                                    (f32) (((f64) (col_rad / effective_dist) -
-                                            1.0) *
-                                           0.5);
-                                strength = (f32) ((f64) strength * 0.9);
-                                if (a >= 7) {
-                                    f32 vx = -dx * strength;
-                                    f32 vy = -dy * strength;
-                                    f32 clamp_vy = vy;
-                                    if (vy < 0.0f) {
-                                        clamp_vy = 0.0f;
-                                    }
-                                    ea->x10 += vx;
-                                    ea->x14 += clamp_vy;
-                                }
-                                if (b >= 7) {
-                                    f32 vx2 =
-                                        grZebes_801DB3CC_scale(strength, dx);
-                                    f32 vy2 = dy * strength;
-                                    if (vy2 < 0.0f) {
-                                        vy2 = 0.0f;
-                                    }
-                                    eb->x10 += vx2;
-                                    eb->x14 += vy2;
-                                }
-                            } else if (!(effective_dist < near_rad) &&
-                                       effective_dist < far_rad)
+                            col_rad *= avg_size;
                             {
-                                f32 attract = yp->x78 / effective_dist;
-                                if (a >= 7) {
-                                    f32 vx = dx * attract;
-                                    f32 vy = dy * attract;
-                                    ea->x10 += vx;
-                                    ea->x14 += vy;
+                                f32 near_rad = yp->x70 * 0.5f * avg_size;
+                                f32 far_rad = yp->x6C * 0.5f * avg_size;
+                                if (dist < 0.001) {
+                                    dy = 0.001;
+                                    dx = 0.0f;
+                                    effective_dist = 0.001;
                                 }
-                                if (b >= 7) {
-                                    f32 vx2 = -dx * attract;
-                                    f32 vy2 = -dy * attract;
-                                    eb->x10 += vx2;
-                                    eb->x14 += vy2;
+                                if (effective_dist < col_rad) {
+                                    f32 strength =
+                                        (f32) (((f64) (col_rad /
+                                                       effective_dist) -
+                                                1.0) *
+                                               0.5);
+                                    strength = (f32) ((f64) strength * 0.9);
+                                    if (a >= 7) {
+                                        f32 vx = -dx * strength;
+                                        f32 vy = -dy * strength;
+                                        f32 clamp_vy = vy;
+                                        if (vy < 0.0f) {
+                                            clamp_vy = 0.0f;
+                                        }
+                                        ea->x10 += vx;
+                                        ea->x14 += clamp_vy;
+                                    }
+                                    if (b >= 7) {
+                                        f32 vx2 = grZebes_801DB3CC_scale(
+                                            strength, dx);
+                                        f32 vy2 = dy * strength;
+                                        if (vy2 < 0.0f) {
+                                            vy2 = 0.0f;
+                                        }
+                                        eb->x10 += vx2;
+                                        eb->x14 += vy2;
+                                    }
+                                } else if (!(effective_dist < near_rad) &&
+                                           effective_dist < far_rad)
+                                {
+                                    f32 attract = yp->x78 / effective_dist;
+                                    if (a >= 7) {
+                                        f32 vx = dx * attract;
+                                        f32 vy = dy * attract;
+                                        ea->x10 += vx;
+                                        ea->x14 += vy;
+                                    }
+                                    if (b >= 7) {
+                                        f32 vx2 = -dx * attract;
+                                        f32 vy2 = -dy * attract;
+                                        eb->x10 += vx2;
+                                        eb->x14 += vy2;
+                                    }
                                 }
                             }
                         }
@@ -2042,6 +2054,11 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_x;
                 f32 ei_size;
                 f32 ei_y;
+                f32 ej_y;
+                f32 ej_x;
+                f32 dx;
+                f32 dy;
+                f32 dist_sq;
                 grZe_BubbleEntry* ej = &grZe_8049F170[j];
 
                 ei_y = ei->x0C_y;
@@ -2049,22 +2066,20 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 ei_size = ei->x18_size;
                 for (; j < 20; ej++, j++) {
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
-                        f32 ej_x = ej->x08_x;
-                        f32 ej_y = ej->x0C_y;
-                        f32 dx = grZebes_Subtract(ei_x, ej_x);
-                        f32 dy = ei_y - ej_y;
-                        f32 dist_sq;
+                        ej_y = ej->x0C_y;
+                        ej_x = ej->x08_x;
+                        dx = grZebes_Subtract(ei_x, ej_x);
+                        dy = ei_y - ej_y;
                         dx *= dx;
                         dy *= dy;
-                        dist_sq = dx + dy;
+                        dist_sq = dy + dx;
                         if (max_dist_sq < dist_sq) {
-                            f32 ej_size = ej->x18_size;
                             max_dist_sq = dist_sq;
                             x1 = ei_x;
                             y1 = ei_y;
                             x2 = ej_x;
                             y2 = ej_y;
-                            if (ei_size > ej_size) {
+                            if (ei_size > ej->x18_size) {
                                 last_idx = i;
                             } else {
                                 last_idx = j;
@@ -2105,17 +2120,17 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     if (t < 0.0f) {
                         bx = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
-                        f32 ex = bx - x2;
-                        f32 ey = grZebes_Subtract(by, y2);
-                        f32 ex_sq = ex * ex;
-                        f32 ey_sq = ey * ey;
-                        bx = ex_sq + ey_sq;
+                        dpx = bx - x2;
+                        dpy = grZebes_Subtract(by, y2);
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     } else {
-                        f32 cx = (dx * t + x1) - bx;
-                        f32 cy = (dy * t + y1) - by;
-                        f32 cx_sq = cx * cx;
-                        f32 cy_sq = cy * cy;
-                        bx = cx_sq + cy_sq;
+                        dpx = (dx * t + x1) - bx;
+                        dpy = (dy * t + y1) - by;
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     }
 
                     bx = sqrtf(bx);

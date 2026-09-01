@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include "gm/forward.h"
+
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
@@ -238,8 +240,8 @@ struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 void gmMainLib_8015CDEC(void)
 {
     ssize_t i;
-    for (i = 0; i < GM_MAX_PLAYERS; ++i) {
-        s8* ptr = gmMainLib_8015CE44(i, 120);
+    for (i = 0; i < Gm_Player_NumMax; i++) {
+        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_NONE);
         if (ptr != 0) {
             *ptr = 5;
         }
@@ -248,7 +250,7 @@ void gmMainLib_8015CDEC(void)
 
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
-    if (arg1 == 120) {
+    if (arg1 == GM_NAMETAG_NONE) {
         if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
             return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
         }
@@ -745,10 +747,21 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
     for (i = 0; i < 6; i++) {
         ptr = &store_vmd->start.players[i].nametag;
         if (load_vmd->start.players[i].nametag == tag) {
-            *ptr = 0x78;
-        } else if (*ptr > tag && *ptr != 0x78) {
+            *ptr = GM_NAMETAG_NONE;
+        } else if (*ptr > tag && *ptr != GM_NAMETAG_NONE) {
             *ptr -= 1;
         }
+    }
+}
+
+inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
+{
+    u8 value = *tag_ptr;
+
+    if (value == tag) {
+        *tag_ptr = GM_NAMETAG_NONE;
+    } else if (value > tag && value != GM_NAMETAG_NONE) {
+        *tag_ptr = value - 1;
     }
 }
 
@@ -780,7 +793,6 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     }* base;
     GameRules* gr;
     u8 val;
-    u8* ptr;
 
 #define ADJ_NAMETAG_78(field)                                                 \
     do {                                                                      \
@@ -794,14 +806,8 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 
     config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
-    ptr = &config->x4;
-    val = *ptr;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    if (val == (u8) arg0) {
-        *ptr = 0x78;
-    } else if (val > (u8) arg0 && val != 0x78) {
-        *ptr = val - 1;
-    }
+    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.x4);
@@ -869,29 +875,38 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     return arg0;
 }
 
-static inline void gmMainLib_SetHandicaps(s8* base)
+static inline void
+SetPlayerHandicaps(struct PlayerInitData* p0, struct PlayerInitData* p1,
+                   struct PlayerInitData* p2, struct PlayerInitData* p3,
+                   struct PlayerInitData* p4, struct PlayerInitData* p5)
 {
-    s32 i;
-    s32 j;
-
-    for (i = 0; i < 6; i++) {
-        for (j = 0; j < 6; j++) {
-            base[0x78 + i * 0x140 + j * 0x24] = 9;
-        }
-    }
+    p5->handicap = p4->handicap = p3->handicap = p2->handicap = p1->handicap =
+        p0->handicap = 9;
 }
 
 void gmMainLib_8015EA80(void)
 {
-    s8* volatile base_temp = gmMainLib_804D3EE0->unk_530.unk_588;
-    s8* base = base_temp;
-    s8* base2 = base + 7 * 0x140;
+    struct gmMainLib_8015EA80_modes {
+        u8 pad[8];
+        VsModeData modes[13];
+    }* data =
+        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->unk_530.unk_588;
+    struct PlayerInitData* players;
+    s32 i;
 
     PAD_STACK(0x90);
 
     gmMainLib_8015CDEC();
-    gmMainLib_SetHandicaps(base);
-    gmMainLib_SetHandicaps(base2);
+    for (i = 0; i < 6; i++) {
+        players = data->modes[i].start.players;
+        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
+                           &players[4], &players[5]);
+    }
+    for (i = 7; i < 13; i++) {
+        players = data->modes[i].start.players;
+        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
+                           &players[4], &players[5]);
+    }
 }
 
 int gmMainLib_8015ECB0(void)

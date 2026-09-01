@@ -601,6 +601,24 @@ void fn_801852FC(HSD_GObj* gobj)
     lbl_804735E8.xE1 = 1;
 }
 
+/// @todo .sdata2 order hack
+static inline void gm_1832_sdata2_order(int unused)
+{
+    (void) unused;
+    (void) 280.0f;
+    (void) 290.0f;
+    (void) 40.0f;
+    (void) -60.0f;
+    (void) 160.0f;
+    (void) U32_TO_F32;
+    (void) 0.0;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 200.0f;
+    (void) 340.0f;
+    (void) 10000.0f;
+}
+
 void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 {
     u8 _[0x30];
@@ -640,6 +658,7 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     GXWGFifo.f32 = -4932.0F;
     GXSetColorUpdate(1);
     HSD_StateInvalidate(-1);
+    gm_1832_sdata2_order(0);
 }
 
 extern float MSL_TrigF_80400770[];
@@ -1226,12 +1245,23 @@ void gm_Scene_IntroEasy_OnEnter(void* arg0_)
     gm_80168F88();
 }
 
+static inline void gm_1832_sdata2_order_tail1(int unused)
+{
+    (void) unused;
+    (void) 7.0f;
+}
+
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail0[1] ATTRIBUTE_ALIGN(8) = { 0.0f };
+#endif
+
 void fn_80186EFC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     gm_804736B0_t* state = &lbl_804736B0;
     int* counter;
     PAD_STACK(8);
+    gm_1832_sdata2_order_tail1(0);
     HSD_JObjReqAnimAll(state->xC, 0.0f);
     HSD_JObjAnimAll(jobj);
     counter = &state->x4;
@@ -1241,6 +1271,11 @@ void fn_80186EFC(HSD_GObj* gobj)
         state->x0 = 1;
     }
 }
+
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail2[1] = { 3.0f };
+static const f32 gm_1832_sdata2_tail3[1] = { 5.0f };
+#endif
 
 typedef struct gm_80186F6C_Entry {
     /* 0x00 */ f32 x0;
@@ -1281,6 +1316,11 @@ static gm_80186F6C_Entry lbl_803D9498[] = {
     { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
     { -1.1f, 2.5f, 0.0f, 0.4f, 0.4f, 0.4f },
 };
+
+/// Duplicate literals owned by the original All-Star intro split.
+static char gm_80186F6C_JObjFile[7] ATTRIBUTE_ALIGN(8) = "jobj.h";
+static char gm_80186F6C_JObjCondition[5] = "jobj";
+static char gm_Scene_IntroAllstar_ArchiveName[] = "IrAls";
 
 void fn_80186F6C(HSD_GObj* arg0)
 {
@@ -1323,6 +1363,8 @@ void fn_80186F6C(HSD_GObj* arg0)
 static HSD_Archive* lbl_804D6610;
 
 #ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail5[1] = { 1.0f };
+
 #pragma push
 #pragma dont_inline on
 #endif
@@ -1358,6 +1400,10 @@ void fn_80187494(HSD_GObj* gobj, int arg1)
 
 static SceneDesc* lbl_804D6614;
 
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail6[1] = { 10000.0f };
+#endif
+
 void fn_801874FC(void)
 {
     HSD_JObj* sp8;
@@ -1379,6 +1425,8 @@ void fn_801874FC(void)
     lb_80011E24(jobj, &lbl_804736B0.x8, 5, -1);
     lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
 }
+
+/// #fn_801874FC
 
 #ifdef MUST_MATCH
 #pragma push
@@ -1481,6 +1529,17 @@ static struct gm_1832_804736C0_t {
 ASSERT_SIZE(struct gm_1832_804736C0_t, 0x40);
 typedef struct gm_1832_804736C0_t gm_1832_804736C0_t;
 
+#ifdef MUST_MATCH
+static const f32 gm_1832_sdata2_tail7[1] ATTRIBUTE_ALIGN(8) = { 0.0f };
+static const f64 gm_1832_sdata2_tail8[1] = { S32_TO_F32 };
+#endif
+
+static inline void gm_1832_sdata2_order_tail9(int unused)
+{
+    (void) unused;
+    (void) 0.0166666675f;
+}
+
 void fn_80187910(HSD_GObj* arg0)
 {
     Vec3 sp10;
@@ -1515,6 +1574,7 @@ void fn_80187910(HSD_GObj* arg0)
     sp10.y *= scale;
     sp10.z *= scale;
     HSD_CObjSetEyePosition(cobj, &sp10);
+    gm_1832_sdata2_order_tail9(0);
 }
 
 typedef struct {
@@ -1648,7 +1708,7 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-static char lbl_804D4138[] = "IrNml";
+static char gm_Scene_IntroAllstar_SceneDataName[] = "ScItrAllstar_scene_data";
 
 static char* lbl_803D9750[] = {
     "mc01",
@@ -1738,11 +1798,10 @@ static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data;
-    HSD_CObj* cobj;
-    u8 stage_index;
-    HSD_GObj* gobj;
     char** table = lbl_803D9750;
-    gm_1832_StageState* state;
+    HSD_CObj* cobj;
+    HSD_GObj* gobj;
+    u8 stage_index;
 
     data = &lbl_804736C0;
     data->x38 = arg0->x0;
@@ -1770,7 +1829,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     data->x36.active = 0;
 
     stage_index = arg0->stage_index;
-    lbl_804D6620 = lbArchive_80016DBC(lbl_804D4138, &data->x0, &table[48],
+    lbl_804D6620 = lbArchive_80016DBC("IrNml", &data->x0, &table[48],
                                       &data->x4, table[stage_index], NULL);
 
     lbAudioAx_80026F2C((s32) table[stage_index + 12]);
@@ -1802,13 +1861,12 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
     }
 
-    state = &data->x36;
     {
         HSD_JObj* model_jobj;
         HSD_GObj* model_gobj;
         model_gobj = GObj_Create(0xE, 0xF, 0);
         model_jobj =
-            HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
+            HSD_JObjLoadJoint((*data->x0)[11 - data->x36.stage_index]->joint);
         lb_80011C18(model_jobj, 0x08000000);
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);

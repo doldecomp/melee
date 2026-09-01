@@ -141,6 +141,18 @@ static inline f32 get_scale(Fighter* fp)
     return fp->x34_scale.y;
 }
 
+#ifdef MUST_MATCH
+/// Preserve the caller operand area used by the inlined physics calculation.
+static inline s32 ftCo_CpuAttackValue(s32 value, s32 arg1, s32 arg2, s32 arg3,
+                                      s32 arg4, s32 arg5, s32 arg6, s32 arg7,
+                                      s64 arg8, s64 arg9)
+{
+    return value;
+}
+#else
+#define ftCo_CpuAttackValue(value, ...) (value)
+#endif
+
 static inline int ftCo_CpuSelectAttack(Fighter* fp,
                                        struct Fighter_x1A88_t* cpu,
                                        const ftCo_AttackEntry* entry)
@@ -385,7 +397,6 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 acc;
     f32 t;
     f32 fpPredY;
-    f32 relPredY;
     f32 v;
     f32 sq;
     f32 scale;
@@ -407,9 +418,10 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 relx;
     f32 lower;
     f32 upper;
+    f32 relPredY;
     f32 halfRange;
 
-    PAD_STACK(0x10);
+    PAD_STACK(8);
 
     cpu->x74.y = 0.0f;
     cpu->x74.x = 0.0f;
@@ -525,10 +537,14 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         dirx *= halfRange;
         diry *= halfRange;
         scale = fp->x34_scale.y;
-        upper = list->x14 * scale + reach;
-        lower = list->x10 * scale;
-        upper *= halfRange;
-        lower *= halfRange;
+        {
+            f32 l = list->x10 * scale;
+            f32 u = list->x14 * scale + reach;
+            l *= halfRange;
+            u *= halfRange;
+            lower = l;
+            upper = u;
+        }
         if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
@@ -575,13 +591,6 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     HSD_ASSERT(0x1C5, 0);
 }
 
-ftCo_803C6594_t ftCo_803C639C = { 0 };
-ftCo_803C6594_t ftCo_803C61F8 = { 0 };
-
-ftCo_803C6594_t* ftCo_803C6594[Gr_Kind_Count] = {
-    NULL, NULL, NULL, NULL, NULL, NULL, &ftCo_803C639C, &ftCo_803C61F8,
-};
-
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
     Item* x50 = arg1;
@@ -613,7 +622,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 x50Vy;
     f32 x50Vx;
     f32 x50TermNeg;
-    f32 sq;
     f32 x50Grav;
     f32 sizeHalf;
     f32 yBound;
@@ -640,7 +648,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         f32 relx;
         f32 diry;
         f32 scale;
-        f32 upper;
         f32 lower;
         found = false;
         if (list->x20 > cpu->level) {
@@ -657,7 +664,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             list++;
             continue;
         }
-        t = list->x04;
+        t = ftCo_CpuAttackValue(list->x04, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         relx = (x50Vx * t + x50X) - (fpVx * t + fpX);
         if (x50->ground_or_air == GA_Air) {
             if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
@@ -673,15 +680,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             if (v <= 0.0f) {
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
-                sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
-                                              0.5 * (f64) (fpGrav * sq)));
-            } else {
-                sq = sqrtf(v);
                 fpPredY =
-                    (f32) ((f64) fpY +
-                           ((f64) (fpTermNeg * (t - v)) +
-                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+                    (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                        0.5 * (f64) (fpGrav * sqrtf(t))));
+            } else {
+                fpPredY =
+                    (f32) ((f64) fpY + ((f64) (fpTermNeg * (t - v)) +
+                                        ((f64) (fpVy * t) -
+                                         0.5 * (f64) (fpGrav * sqrtf(v)))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -700,31 +706,31 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             if (v <= 0.0f) {
                 relPredY = (x50Vy * t + x50Y) - fpPredY;
             } else if (t < v) {
-                sq = sqrtf(t);
                 relPredY = (f32) (((f64) (x50Vy * t + x50Y) -
-                                   0.5 * (f64) (x50Grav * sq)) -
+                                   0.5 * (f64) (x50Grav * sqrtf(t))) -
                                   (f64) fpPredY);
             } else {
-                sq = sqrtf(v);
                 relPredY = (f32) (((f64) (x50TermNeg * (t - v)) +
                                    ((f64) (x50Vy * t + x50Y) -
-                                    0.5 * (f64) (x50Grav * sq))) -
+                                    0.5 * (f64) (x50Grav * sqrtf(v)))) -
                                   (f64) fpPredY);
             }
         } else {
             relPredY = (x50Vy * t + x50Y) - fpPredY;
         }
         if (fp->facing_dir > 0.0f) {
-            dirx = list->x08 * fp->x34_scale.y;
-            diry = list->x0C * fp->x34_scale.y;
+            dirx = list->x08;
+            scale = get_scale(fp);
+            dirx *= scale;
+            diry = list->x0C * scale;
         } else {
-            dirx = -list->x0C * fp->x34_scale.y;
-            diry = -list->x08 * fp->x34_scale.y;
+            dirx = -list->x0C * (scale = get_scale(fp));
+            diry = -list->x08 * scale;
         }
         scale = get_scale(fp);
-        upper = list->x14 * scale;
+        v = list->x14 * scale;
         lower = list->x10 * scale;
-        if (upper > relPredY && lower < relPredY + yBound &&
+        if (v > relPredY && lower < relPredY + yBound &&
             dirx < relx + sizeHalf && diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
@@ -2954,3 +2960,244 @@ int ftCo_800BB9B4(Fighter* fp)
 
     return temp_r31->xF8_b12;
 }
+
+/// @todo Fix split
+static ftCo_803C6594_t ftCo_803C61F8[] ATTRIBUTE_ALIGN(8) = {
+    {
+        { 37.0F, -143.5F, 0.0F },
+        5.5F,
+        -111.0F,
+        0.0F,
+        5.5F,
+        -111.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        5.5F,
+        -111.0F,
+        0.0F,
+        0.7853982F,
+        -0.7853982F,
+        0,
+        0.0F,
+        0.0F,
+        &ftCo_803C61F8[1],
+    },
+    {
+        { 30.0F, -16.0F, 0.0F },
+        -3.5F,
+        24.0F,
+        0.0F,
+        -60.0F,
+        -86.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -3.5F,
+        24.0F,
+        0.0F,
+        0.7853982F,
+        -0.2617994F,
+        0,
+        0.0F,
+        0.0F,
+        &ftCo_803C61F8[2],
+    },
+    {
+        { -60.0F, -86.0F, 0.0F },
+        -131.0F,
+        -26.8F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -1000.0F,
+        -95.0F,
+        &ftCo_803C61F8[3],
+    },
+    {
+        { -60.0F, -86.0F, 0.0F },
+        -16.0F,
+        -46.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.2617994F,
+        -0.7853982F,
+        1,
+        -95.0F,
+        -25.0F,
+        &ftCo_803C61F8[4],
+    },
+    {
+        { -60.0F, -86.0F, 0.0F },
+        -60.0F,
+        -86.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -60.0F,
+        -86.0F,
+        0.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -25.0F,
+        1000.0F,
+        NULL,
+    },
+    {
+        { -130.0F, 6.0F, 0.0F },
+        -130.0F,
+        6.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -130.0F,
+        6.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -120.0F,
+        1000.0F,
+        &ftCo_803C61F8[6],
+    },
+    {
+        { -130.0F, 6.0F, 0.0F },
+        -100.0F,
+        34.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -100.0F,
+        34.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.7853982F,
+        -0.7853982F,
+        0,
+        0.0F,
+        0.0F,
+        &ftCo_803C61F8[7],
+    },
+    {
+        { -10.0F, 6.0F, 0.0F },
+        -10.0F,
+        6.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -10.0F,
+        6.0F,
+        0.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -1000.0F,
+        -20.0F,
+        &ftCo_803C61F8[8],
+    },
+    {
+        { -10.0F, 6.0F, 0.0F },
+        -30.0F,
+        34.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -30.0F,
+        34.0F,
+        0.0F,
+        0.7853982F,
+        -0.7853982F,
+        0,
+        0.0F,
+        0.0F,
+        &ftCo_803C61F8[9],
+    },
+    {
+        { -100.0F, 34.0F, 0.0F },
+        0.0F,
+        0.0F,
+        -1.0F,
+        -10.0F,
+        6.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -50.0F,
+        0.0F,
+        &ftCo_803C61F8[10],
+    },
+    {
+        { -100.0F, 34.0F, 0.0F },
+        0.0F,
+        0.0F,
+        -1.0F,
+        -130.0F,
+        6.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        0.7853982F,
+        -0.7853982F,
+        1,
+        -200.0F,
+        -80.0F,
+        NULL,
+    },
+};
+
+ftCo_803C6594_t* ftCo_803C6594[Gr_Kind_Count] = {
+    NULL, NULL, NULL, NULL, NULL, NULL, &ftCo_803C61F8[5], &ftCo_803C61F8[0],
+};
+
+static ftCo_803C6594_t* ftCo_803C6594_tail[151] = { NULL };

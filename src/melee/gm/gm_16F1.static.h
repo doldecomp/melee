@@ -64,8 +64,11 @@ struct lbl_803D5A4C_t {
     /* +6 */ u8 x6;
 };
 
-/* 3D5A4C */ static struct lbl_803D5A4C_t
-    lbl_803D5A4C[0x80C / sizeof(struct lbl_803D5A4C_t)] = {
+/* 3D5A4C */ static struct {
+    struct lbl_803D5A4C_t entries[0x80C / sizeof(struct lbl_803D5A4C_t)];
+    u8 pad[4];
+} lbl_803D5A4C = {
+    {
         { 0, 0x011, 0xFF, 0, 2 },
         { 1, 0x012, 0xFF, 0, 0 },
         { 2, 0x013, 0x7F, 1, 0 },
@@ -323,7 +326,8 @@ struct lbl_803D5A4C_t {
         { 0xFE, 0x0B4, 0x87, 0, 0 },
         { 0xFF, 0x0B5, 0x87, 0, 0 },
         { 0x29A },
-    };
+    },
+};
 
 /* 4D65A0 */ static u8 lbl_804D65A0;
 /* 4D65A8 */ static u8 lbl_804D65A8[6];
@@ -345,7 +349,7 @@ struct lbl_803B7A60_t {
     /* 0x60 */ u32 x60[4];
 };
 
-static struct lbl_803B7A60_t lbl_803B7A60 = {
+static const struct lbl_803B7A60_t lbl_803B7A60 = {
     { 0, 0, 0, 0 },
     { 0, 0, 0, 0 },
     { 0, 0, 0, 0 },

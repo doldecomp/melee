@@ -653,6 +653,7 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
                                   grInishie1_801FB3F0_Vars* vars, Vec3* pos)
 {
     u32 i;
+    HSD_DObj* dobj;
 
     for (i = 0; i < 0x13; ++i) {
         switch (vars->blocks[i].x2) {
@@ -693,7 +694,11 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
             } else {
                 lb_8000B1CC(vars->blocks[i].jobj, NULL, pos);
                 if (!grLib_801C9EE8(pos, 15.0f)) {
-                    DOBJ_CLEAR_LOOP(vars->blocks[i].jobj);
+                    dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                    while (dobj != NULL) {
+                        HSD_DObjClearFlags(dobj, 1U);
+                        dobj = (dobj != NULL) ? dobj->next : NULL;
+                    }
                     HSD_JObjClearFlagsAll(vars->blocks[i].jobj, JOBJ_HIDDEN);
                     grMaterial_801C8E08(vars->blocks[i].item_gobj);
                     vars->blocks[i].x2 = 1;
@@ -723,12 +728,24 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
                         HSD_JObjSetFlagsAll(target, JOBJ_HIDDEN);
                     }
 
-                    DOBJ_CLEAR_LOOP(vars->blocks[i].jobj);
+                    dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                    while (dobj != NULL) {
+                        HSD_DObjClearFlags(dobj, 1U);
+                        dobj = (dobj != NULL) ? dobj->next : NULL;
+                    }
                 } else {
                     if (vars->blocks[i].x22 & 1) {
-                        DOBJ_CLEAR_LOOP(vars->blocks[i].jobj);
+                        dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                        while (dobj != NULL) {
+                            HSD_DObjClearFlags(dobj, 1U);
+                            dobj = (dobj != NULL) ? dobj->next : NULL;
+                        }
                     } else {
-                        DOBJ_LOOP(vars->blocks[i].jobj);
+                        dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                        while (dobj != NULL) {
+                            HSD_DObjSetFlags(dobj, 1U);
+                            dobj = (dobj != NULL) ? dobj->next : NULL;
+                        }
                     }
                 }
 
