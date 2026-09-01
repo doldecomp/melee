@@ -548,12 +548,13 @@ void fn_8019D1BC(void)
     TmData* tmd;
     HSD_GObj* gobj;
     HSD_JObj* c;
+    HSD_JObj* j16;
     s32 i;
     f32 pos;
     f32 var_f1;
     f32 anim;
+    UNUSED unsigned char padding[0xA8];
     char name_buf[8][0x14];
-    PAD_STACK(0xA0);
 
     tmd = gm_GetTournamentData();
 
@@ -565,7 +566,7 @@ void fn_8019D1BC(void)
 
             first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
                                      1, fn_8019C048, (f32) i);
-            first_jobj = GET_JOBJ(first_gobj);
+            first_jobj = first_gobj->hsd_obj;
             first_c = first_gobj->hsd_obj;
             HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
@@ -595,7 +596,7 @@ void fn_8019D1BC(void)
 
         gobj = fn_8019035C(0, lbl_804D6694->models[10], 0, 0x1A, 2, 1,
                            fn_8019C3EC, pos);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         (void) jobj;
         HSD_JObjSetTranslateY(jobj, -2.5f);
         fn_8018FBD8(gobj, i);
@@ -662,7 +663,6 @@ void fn_8019D1BC(void)
     fn_8019035C(0, lbl_804D6694->models[5], 0, 0x1A, 2, 1, fn_8019C6AC, 0.0f);
 
     {
-        HSD_JObj* j16;
         j16 = GET_JOBJ(fn_8019035C(0, lbl_804D6694->models[0], 0, 0x1A, 2, 1,
                                    NULL, 0.0f));
         j16 = HSD_JObjGetChild(j16);
