@@ -741,6 +741,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
             c += 2;
         }
     }
+    (void) p;
     return last;
 }
 
