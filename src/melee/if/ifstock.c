@@ -659,8 +659,7 @@ void ifStock_802F98E8(unsigned char player, int b)
         (void) &stock->player[player = player];
 #endif
         user_data = ((struct IfStockData*) stock)[player].x0;
-        *(user_data += sizeof(struct IfStockDataOffset) -
-                       sizeof(struct IfStockData)) = player;
+        *(user_data += sizeof(struct IfStockDataOffset)) = player;
         stock->x204[player].x0[1] = b;
         stock->x204[player].x0[2] = 1;
         if (stock->player[player].x0 != NULL) {
@@ -907,6 +906,7 @@ void ifStock_802FA5BC(int arg)
     lb_80011E24(jobj, &ifStock_804A1378.jobj, 0, 1, 2, 3, 4, 5, -1);
 }
 
+#pragma dont_inline on
 void fn_802FA6C4(HSD_GObj* arg)
 {
     int i;
@@ -949,6 +949,7 @@ void fn_802FA6C4(HSD_GObj* arg)
         ifStock_804A1774.x0 = 0;
     }
 }
+#pragma dont_inline off
 
 void fn_802FA8C0(HSD_GObj* arg)
 {
