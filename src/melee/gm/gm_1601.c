@@ -4091,21 +4091,16 @@ void gm_LoadAnnouncer(void)
 
 void fn_80169000(MatchEnd* arg0, u8* arg1)
 {
-    u8 handicaps[6];
+    u8 operand_pad[4];
+    u8 handicaps[4];
     u8 positions[4];
     MatchEnd* p = arg0;
     u8* hb = arg1;
     s32 count;
     s32 i;
 
-    PAD_STACK(8);
-
     count = 0;
-    i = 0;
-    /// @todo Matching tactic: forming the initial destination address before
-    /// the loop makes MWCC advance that induction web before the first store.
-    (void) &handicaps[i];
-    for (; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         if (p->player_standings[i].slot_type != 3) {
             count += 1;
             positions[p->player_standings[i].is_small_loser] = i;
@@ -4151,10 +4146,11 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
             }
         }
     }
-    hb[0] = handicaps[0];
-    hb[1] = handicaps[1];
-    hb[2] = handicaps[2];
-    hb[3] = handicaps[3];
+    /// @todo Matching tactic: reuse the loop index for the first copy to steer
+    /// MWCC's instruction scheduling without changing the generated accesses.
+    for (i = 0; i < 4; i++) {
+        hb[i] = handicaps[i];
+    }
 }
 
 u8 gm_80169238(u8 ckind)
