@@ -2961,6 +2961,7 @@ int ftCo_800BB9B4(Fighter* fp)
     return temp_r31->xF8_b12;
 }
 
+/// @todo Fix split
 static ftCo_803C6594_t ftCo_803C61F8[] ATTRIBUTE_ALIGN(8) = {
     {
         { 37.0F, -143.5F, 0.0F },

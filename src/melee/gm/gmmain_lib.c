@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include "gm/forward.h"
+
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
@@ -237,9 +239,9 @@ struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 
 void gmMainLib_8015CDEC(void)
 {
-    s32 i;
-    for (i = 0; i < 6; ++i) {
-        s8* ptr = gmMainLib_8015CE44(i, 0x78);
+    ssize_t i;
+    for (i = 0; i < Gm_Player_NumMax; i++) {
+        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_NONE);
         if (ptr != 0) {
             *ptr = 5;
         }
@@ -248,7 +250,7 @@ void gmMainLib_8015CDEC(void)
 
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
-    if (arg1 == 0x78) {
+    if (arg1 == GM_NAMETAG_NONE) {
         if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
             return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
         }
@@ -745,8 +747,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
     for (i = 0; i < 6; i++) {
         ptr = &store_vmd->start.players[i].nametag;
         if (load_vmd->start.players[i].nametag == tag) {
-            *ptr = 0x78;
-        } else if (*ptr > tag && *ptr != 0x78) {
+            *ptr = GM_NAMETAG_NONE;
+        } else if (*ptr > tag && *ptr != GM_NAMETAG_NONE) {
             *ptr -= 1;
         }
     }
@@ -757,8 +759,8 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
     u8 value = *tag_ptr;
 
     if (value == tag) {
-        *tag_ptr = 0x78;
-    } else if (value > tag && value != 0x78) {
+        *tag_ptr = GM_NAMETAG_NONE;
+    } else if (value > tag && value != GM_NAMETAG_NONE) {
         *tag_ptr = value - 1;
     }
 }
