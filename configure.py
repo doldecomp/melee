@@ -1160,7 +1160,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmtou_0.c"),
             Object(Matching, "melee/gm/gmtou_1.c"),
             Object(Linkable, "melee/gm/gmtou_2.c"),
-            Object(Linkable, "melee/gm/gm_19EF.c"),
+            Object(Matching, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Matching, "melee/gm/gmtitle.c"),
             Object(Matching, "melee/gm/gmcamera.c"),

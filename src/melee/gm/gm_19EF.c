@@ -27,35 +27,25 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 
+struct unk_jobj_node {
+    HSD_JObj* x0;
+    s32 x4;
+};
+
 static HSD_Archive* lbl_804D6698;
 static SceneDesc* lbl_804D669C;
 static SceneDesc* lbl_804D66A0;
 static SceneDesc* lbl_804D66A4;
 static SceneDesc* lbl_804D66A8;
 static HSD_Joint* lbl_804D66AC;
-static struct {
-    HSD_JObj* x0;
-    s32 x4;
-} lbl_804D66B0;
-static HSD_JObj* lbl_804D66B8;
-static struct {
-    HSD_JObj* x0;
-    s32 x4;
-} lbl_804D66C0;
-static struct {
-    HSD_JObj* x0;
-    s32 x4;
-} lbl_804D66C8;
-static struct {
-    HSD_JObj* x0;
-    s32 x4;
-} lbl_804D66D0;
-static HSD_JObj* lbl_804D66D8;
-static struct {
-    HSD_JObj* x0;
-    s32 x4;
-} lbl_804D66E0;
-static HSD_JObj* lbl_804D66E8;
+static struct unk_jobj_node lbl_804D66B0;
+static struct unk_jobj_node lbl_804D66B8;
+static struct unk_jobj_node lbl_804D66C0;
+static struct unk_jobj_node lbl_804D66C8;
+static struct unk_jobj_node lbl_804D66D0;
+static struct unk_jobj_node lbl_804D66D8;
+static struct unk_jobj_node lbl_804D66E0;
+static struct unk_jobj_node lbl_804D66E8;
 static HSD_Archive* lbl_804D66F0;
 static HSD_JObj* lbl_804D66F4;
 static u32 lbl_804D66F8;
@@ -311,8 +301,8 @@ static void fn_8019F6EC(HSD_GObj* gobj)
         }
     }
     HSD_JObjAnimAll(jobj);
-    HSD_JObjAnimAll(lbl_804D66B8);
-    HSD_JObjAnimAll(lbl_804D66E8);
+    HSD_JObjAnimAll(lbl_804D66B8.x0);
+    HSD_JObjAnimAll(lbl_804D66E8.x0);
 }
 
 static void fn_8019F810(void)
@@ -429,7 +419,7 @@ static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
     f32 f;
     f32 scale;
 
-    lbl_804D66B8 = model;
+    lbl_804D66B8.x0 = model;
     HSD_GObjObject_80390A70(object, HSD_GObj_JObjKind, model);
     GObj_SetupGXLink(object, HSD_GObj_JObjCallback, 0xB, 0);
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
@@ -513,7 +503,7 @@ void fn_8019F9C4(u32 arg0)
     lbl_804D66E0.x4 = 0;
     lbl_804D66D0.x4 = 0x24E;
     lb_80011E24(jobj, &lbl_804D66B0.x0, 0x38, -1);
-    lb_80011E24(jobj, &lbl_804D66D8, 1, -1);
+    lb_80011E24(jobj, &lbl_804D66D8.x0, 1, -1);
     lb_80011E24(jobj, &lbl_804D66D0.x0, 2, -1);
     lb_80011E24(jobj, &lbl_804D66C8.x0, 0x35, -1);
     lb_80011E24(jobj, &lbl_804D66C0.x0, 0x37, -1);
@@ -597,7 +587,7 @@ void fn_8019F9C4(u32 arg0)
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(lbl_804D66A8->models[0]->joint);
-    lbl_804D66E8 = jobj;
+    lbl_804D66E8.x0 = jobj;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_JObjSetScaleX(jobj, 2.0f);
@@ -644,8 +634,8 @@ void fn_8019F9C4(u32 arg0)
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
     fn_8019F9C4_inline3(jobj, gobj, arg0);
 
-    lb_8000C1C0(jobj, lbl_804D66E8);
-    lb_8000C290(jobj, lbl_804D66E8);
+    lb_8000C1C0(jobj, lbl_804D66E8.x0);
+    lb_8000C290(jobj, lbl_804D66E8.x0);
 
     HSD_SisLib_803A611C(0, cam_gobj, 9, 0x12, 0, 0xB, 0, 0x13);
     HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
