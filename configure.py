@@ -1227,7 +1227,7 @@ config.libs = [
             Object(Matching, "melee/gr/ground.c"),
             Object(Matching, "melee/gr/grdisplay.c"),
             Object(Matching, "melee/gr/grdatfiles.c"),
-            Object(Linkable, "melee/gr/granime.c"),
+            Object(Matching, "melee/gr/granime.c"),
             Object(Matching, "melee/gr/grmaterial.c"),
             Object(Matching, "melee/gr/grlib.c"),
             Object(Matching, "melee/gr/grdynamicattr.c"),

@@ -211,7 +211,7 @@ void grAnime_801C68F4(HSD_RObj* robj, HSD_RObjAnimJoint* robjanimjoint)
     }
 }
 
-static inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
+static void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
 {
     HSD_RObj* phi_r31;
     HSD_RObjAnimJoint* phi_r30;
