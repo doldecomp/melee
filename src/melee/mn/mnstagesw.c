@@ -155,7 +155,7 @@ static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
     s32 found;
-    s32 i;
+    s32 temp;
     s32 curr;
     s32 low_bound;
     s32 high_bound;
@@ -164,8 +164,8 @@ static s32 mnStageSw_80235C58(u8 arg0)
     u8 end;
     u8 start;
     u8 high;
-    s32 temp;
     s32 prev;
+    s32 i;
 
     if (arg0 < 15) {
         low = 0;
