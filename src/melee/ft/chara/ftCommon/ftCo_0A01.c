@@ -10,6 +10,7 @@
 #include "ft/chara/ftPopo/ftPp_SpecialLw.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_3C61.h"
 #include "ft/ftcpuattack.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
