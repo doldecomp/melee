@@ -48,7 +48,6 @@ struct IfStockData {
 
 struct IfStockDataOffset {
     unsigned char x0[0x204];
-    struct IfStockData data;
 };
 
 int ifStock_802F7EFC(int arg0, int arg1)
@@ -57,15 +56,17 @@ int ifStock_802F7EFC(int arg0, int arg1)
     struct ifStock_804A1378* stock;
     struct IfStockData* arg1_data;
     struct IfStockData* arg0_data;
+    struct IfStockDataOffset* arg0_base;
+    struct IfStockDataOffset* arg1_base;
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
-    arg0_data = (struct IfStockData*) stock;
-    arg0_data += arg0;
-    arg1_data = (struct IfStockData*) stock;
-    arg1_data += arg1;
-    arg0_data = &((struct IfStockDataOffset*) arg0_data)->data;
-    arg1_data = &((struct IfStockDataOffset*) arg1_data)->data;
+    arg0_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg0);
+    arg1_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg1);
+    arg0_data = (struct IfStockData*) ++arg0_base;
+    arg1_data = (struct IfStockData*) ++arg1_base;
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -132,14 +133,55 @@ ifStock_802F8298_get_data(struct ifStock_804A1378* stock)
     return stock->x204;
 }
 
-static inline void ifStock_802F8298_init(HSD_GObj* gobj,
-                                         struct IfStockUserData** user_data,
-                                         HSD_JObj** jobj,
-                                         struct ifStock_804A1378** stock)
+static inline struct IfStockUserData*
+ifStock_802F8298_init(HSD_GObj* gobj, HSD_JObj** jobj,
+                      struct ifStock_804A1378** stock)
 {
-    *user_data = GET_IFSTOCK(gobj);
     *jobj = gobj->hsd_obj;
     *stock = &ifStock_804A1378;
+    return GET_IFSTOCK(gobj);
+}
+
+static inline int ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
+                                            struct ifStock_804A1378* stock)
+{
+    return stock->x204[user_data->player].x0[2];
+}
+
+static inline int
+ifStock_802F8298_get_player(struct IfStockUserData* user_data)
+{
+    return user_data->player;
+}
+
+static inline HSD_JObj*
+ifStock_802F8298_get_x3C(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
+{
+    return stock->player[user_data->player].x3C;
+}
+
+static inline HSD_JObj*
+ifStock_802F8298_get_x40(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
+{
+    return stock->player[user_data->player].x40;
+}
+
+static inline void ifStock_802F8298_init_stocks(
+    HSD_GObj* gobj, struct ifStock_804A1378** stock, HSD_JObj** jobj,
+    struct IfStockUserData** user_data, HSD_JObj** jobj_anim)
+{
+    *user_data = ifStock_802F8298_init(gobj, jobj, stock);
+    *jobj_anim = *jobj;
+    (*stock)->player[(*user_data)->player].stocks =
+        Player_GetStocks((*user_data)->player);
+    if ((*stock)->player[(*user_data)->player].stocks > 99) {
+        (*stock)->player[(*user_data)->player].stocks = 99;
+    }
+    if ((*stock)->player[(*user_data)->player].stocks < 0) {
+        (*stock)->player[(*user_data)->player].stocks = 1;
+    }
 }
 
 void ifStock_802F8298(HSD_GObj* gobj)
@@ -148,29 +190,23 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObj* jobj;
     struct ifStock_804A1378* stock;
     HSD_JObj* jobj_anim;
-    Vec3 vecA, vecB, vecC, vecD;
-    HSD_JObj* jobj2;
     int i;
-    ifStock_802F8298_init(gobj, &user_data, &jobj, &stock);
-    jobj_anim = jobj;
-    stock->player[user_data->player].stocks =
-        Player_GetStocks(user_data->player);
-    if (stock->player[user_data->player].stocks > 99) {
-        stock->player[user_data->player].stocks = 99;
-    }
-    if (stock->player[user_data->player].stocks < 0) {
-        stock->player[user_data->player].stocks = 1;
-    }
+    HSD_JObj* jobj2;
+    Vec3 vecA, vecB, vecC, vecD;
+    ifStock_802F8298_init_stocks(gobj, &stock, &jobj, &user_data, &jobj_anim);
     if (stock->player[user_data->player].stocks <= 5) {
         HSD_JObjSetFlagsAll(stock->player[user_data->player].x3C, JOBJ_HIDDEN);
         for (i = 0; i < 5; i++) {
             jobj2 = stock->player[user_data->player].x4[i + 1];
             if (i < stock->player[user_data->player].stocks) {
                 HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
-                if (stock->x204[user_data->player].x0[2] != 0) {
-                    stock->x204[user_data->player].x0[i + 5] = 0;
-                } else {
-                    stock->x204[user_data->player].x0[i + 5] = 10;
+                {
+                    unsigned char* data = stock->x204[user_data->player].x0;
+                    if (ifStock_802F8298_get_flag(user_data, stock) != 0) {
+                        data[i + 5] = 0;
+                    } else {
+                        data[i + 5] = 10;
+                    }
                 }
             } else {
                 if (stock->x204[user_data->player].x0[2] == 0) {
@@ -187,18 +223,22 @@ void ifStock_802F8298(HSD_GObj* gobj)
                     vecB.z += vecA.z;
                     efSync_Spawn(0x474, gobj, &vecB);
                 }
-                if (stock->x204[user_data->player].x0[i + 5] < 10) {
-                    stock->x204[user_data->player].x0[i + 5] += 1;
+                if (ifStock_802F8298_get_data(stock)[user_data->player]
+                        .x0[i + 5] < 10)
+                {
+                    ifStock_802F8298_get_data(stock)[user_data->player]
+                        .x0[i + 5] += 1;
                 }
             }
             HSD_JObjReqAnimAll(jobj2,
                                stock->x204[user_data->player].x0[i + 5]);
-            HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
-                               gm_80168BF8(user_data->player));
+            HSD_TObjReqAnimAll(
+                jobj2->u.dobj->mobj->tobj,
+                gm_80168BF8(ifStock_802F8298_get_player(user_data)));
             HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
         }
     } else {
-        HSD_JObjClearFlagsAll(stock->player[user_data->player].x3C,
+        HSD_JObjClearFlagsAll(ifStock_802F8298_get_x3C(user_data, stock),
                               JOBJ_HIDDEN);
         if (stock->player[user_data->player].stocks >= 10) {
             HSD_JObjReqAnimAll(stock->player[user_data->player].x44,
@@ -208,7 +248,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
         } else {
             HSD_JObjReqAnimAll(stock->player[user_data->player].x44,
                                stock->player[user_data->player].stocks);
-            HSD_JObjSetFlagsAll(stock->player[user_data->player].x40,
+            HSD_JObjSetFlagsAll(ifStock_802F8298_get_x40(user_data, stock),
                                 JOBJ_HIDDEN);
         }
         for (i = 0; i < 5; i++) {
@@ -302,33 +342,87 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj_anim);
 }
 
-static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
-                                           int count, int coins)
+static inline struct IfStockUserData* ifStock_802F89F8_get_data(HSD_GObj* gobj)
+{
+    struct IfStockUserData* user_data = GET_IFSTOCK(gobj);
+
+    return user_data;
+}
+
+static inline int ifStock_802F89F8_count(int coins)
 {
     int i;
-    int j;
-    int temp;
+
+    for (i = 0; i < 32; i++) {
+        if (coins == 0) {
+            return i;
+        }
+        coins /= 10;
+    }
+    return 0;
+}
+
+static inline int ifStock_802F89F8_divisor(int position)
+{
+    int i;
+    int divisor = 1;
+
+    if (position != 0) {
+        for (i = 0; i < position; i++) {
+            divisor *= 10;
+        }
+    }
+    return divisor;
+}
+
+static inline int ifStock_802F89F8_digit(int coins, int position)
+{
+    int i;
+    int divisor = 1;
+
+    if (position - 1 == 0) {
+        coins %= 10;
+        return coins;
+    }
+    for (i = 0; i < position - 1; i++) {
+        divisor *= 10;
+    }
+    return (coins / divisor) % 10;
+}
+
+void ifStock_802F89F8(HSD_GObj* gobj)
+{
+    struct IfStockUserData* user_data = ifStock_802F89F8_get_data(gobj);
+    int i;
+    int player = user_data->player;
+    HSD_JObj* jobj2 = ifStock_804A1378.player[player].x4[1];
+    HSD_JObj* jobj = gobj->hsd_obj;
+    int coins;
+    int count;
     int digit;
+    int divisor;
+    Player_GetCoins(player);
+    PAD_STACK(16);
+    coins = ifStock_804A1378.player[user_data->player].coins =
+        Player_GetCoins(user_data->player);
+    if ((u32) coins > 99999U) {
+        coins = 99999;
+    }
+    count = ifStock_802F89F8_count(coins);
+    if (count > 5) {
+        count = 5;
+    }
+    HSD_JObjReqAnimAll(jobj2, 0.0f);
+    HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
+                       gm_80168BF8(user_data->player));
+    HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
     for (i = 0; i < 5; i++) {
         if (i < count) {
-            int divisor;
-            divisor = 1;
-            for (j = 0; j < i; j++) {
-                divisor *= 10;
-            }
+            divisor = ifStock_802F89F8_divisor(i);
             HSD_JObjClearFlagsAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i],
                 JOBJ_HIDDEN);
-            temp = count - i - 1;
-            if (temp == 0) {
-                digit = coins % 10;
-            } else {
-                divisor = 1;
-                for (j = 0; j < temp; j++) {
-                    divisor *= 10;
-                }
-                digit = (coins / divisor) % 10;
-            }
+            digit = ifStock_802F89F8_digit(coins, count - i);
             HSD_JObjReqAnimAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i], digit);
         } else {
@@ -344,44 +438,6 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
             }
         }
     }
-}
-
-void ifStock_802F89F8(HSD_GObj* gobj)
-{
-    struct IfStockUserData* user_data = GET_IFSTOCK(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
-    int player = user_data->player;
-    HSD_JObj* jobj2 = ifStock_804A1378.player[player].x4[1];
-    int coins;
-    int i;
-    int coins2;
-    int count;
-    Player_GetCoins(player);
-    PAD_STACK(32);
-    coins = Player_GetCoins(user_data->player);
-    ifStock_804A1378.player[user_data->player].coins = coins;
-    if ((u32) coins > 99999U) {
-        coins = 99999;
-    }
-    coins2 = coins;
-    for (i = 0; i < 32; i++) {
-        if (coins2 != 0) {
-            coins2 /= 10;
-        } else {
-            goto count_done;
-        }
-    }
-    i = 0;
-count_done:
-    count = i;
-    if (count > 5) {
-        count = 5;
-    }
-    HSD_JObjReqAnimAll(jobj2, 0.0f);
-    HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
-                       gm_80168BF8(user_data->player));
-    HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
-    ifStock_802F89F8_inline(user_data, count, coins);
     HSD_JObjAnimAll(jobj);
 }
 

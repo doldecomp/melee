@@ -629,30 +629,41 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                               u8 row_idx, u8 entity_idx)
 {
-    Vec3 sp20;
-    Diagram2* data;
+    int mode;
+    u32 row;
+    f32 px;
+    f32 py;
+    f32 pz;
+    HSD_Text* text2;
     HSD_JObj* jobj;
+    int unit_glyph_id;
+    Diagram2* data;
     MnDiagram2RowLayout* base;
     HSD_Text* text;
-    HSD_Text* text2;
     f32 f31;
-    int mode = is_name_mode;
+    u8 str[8];
     f32 f30;
+    Vec3 position;
+    u8 entity = entity_idx;
 
+    mode = is_name_mode;
     data = gobj->user_data;
     base = &mnDiagram2_803EEAD0;
 
     f31 = HSD_JObjGetTranslationY(data->row0_ref);
     f30 = HSD_JObjGetTranslationY(data->row1_ref) - f31;
 
-    lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
+    lb_8000B1CC(data->row0_ref, &base->label_pos, &position);
 
     {
-        u32 r22 = row_idx;
-        f32 ny = -sp20.y;
-        f32 row_y_offset = -f30 * (f32) r22;
-        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + row_y_offset, sp20.z,
-                                   320.0f, 240.0f);
+        f32 ny;
+        f32 row_y_offset;
+
+        row = row_idx;
+        ny = -position.y;
+        row_y_offset = -f30 * (f32) row;
+        text = HSD_SisLib_803A5ACC(0, 1, position.x, ny + row_y_offset,
+                                   position.z, 320.0f, 240.0f);
 
         {
             data->row_labels[row_idx] = text;
@@ -661,42 +672,37 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 HSD_SisLib_803A6368(text, base->label_ids[stat_type]);
 
                 {
-                    int r21 = base->unit_glyph_ids[stat_type];
-                    if (r21 != 0xFFFF) {
-                        int var_r3;
-                        lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
-                        text2 = HSD_SisLib_803A5ACC(0, 1, 12.0f + sp20.x,
-                                                    -sp20.y + row_y_offset,
-                                                    sp20.z, 1.0f, 1.0f);
+                    unit_glyph_id = base->unit_glyph_ids[stat_type];
+                    if (unit_glyph_id != 0xFFFF) {
+                        lb_8000B1CC(data->row0_ref, &base->label_pos,
+                                    &position);
+                        text2 = HSD_SisLib_803A5ACC(0, 1, 12.0f + position.x,
+                                                    -position.y + row_y_offset,
+                                                    position.z, 1.0f, 1.0f);
 
                         data->row_icons[row_idx] = text2;
                         text2->default_alignment = 1;
                         text2->text_color = mnDiagram2_804D4FBC;
 
-                        var_r3 = mnDiagram2_IsDistanceStat(stat_type);
-
-                        if (var_r3 != 0 &&
+                        if (mnDiagram2_IsDistanceStat(stat_type) &&
                             mnDiagram_IsDistanceOverflow(
-                                mnDiagram2_GetStatValue(mode, stat_type,
-                                                        entity_idx)))
+                                mnDiagram2_GetStatValue(is_name_mode,
+                                                        stat_type, entity)))
                         {
                             HSD_SisLib_803A6368(text2, 0x7F);
                         } else {
-                            HSD_SisLib_803A6368(text2, r21);
+                            HSD_SisLib_803A6368(text2, unit_glyph_id);
                         }
                     }
                 }
 
                 {
-                    int var_r0 = mnDiagram2_IsIconOnlyStat(stat_type);
-
-                    if (var_r0 != 0 &&
-                        (u32) mnDiagram2_GetStatValue(
-                            mode, stat_type, entity_idx) < SELKIND_COUNT)
+                    if (mnDiagram2_IsIconOnlyStat(stat_type) &&
+                        (u32) mnDiagram2_GetStatValue(mode, stat_type,
+                                                      entity) < SELKIND_COUNT)
                     {
-                        HSD_JObj* jobj = mnDiagram_CreateFighterIcon(
-                            mnDiagram2_GetStatValue(mode, stat_type,
-                                                    entity_idx),
+                        jobj = mnDiagram_CreateFighterIcon(
+                            mnDiagram2_GetStatValue(mode, stat_type, entity),
                             0);
                         HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
@@ -709,24 +715,26 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 }
 
                 {
-                    u8 str[8];
                     HSD_Text* text3 = HSD_SisLib_803A6754(0, 1);
                     data->row_values[row_idx] = text3;
                     text3->font_size.x = 0.03f;
                     text3->font_size.y = 0.035f;
-                    lb_8000B1CC(data->icon_parent, &base->value_pos, &sp20);
+                    lb_8000B1CC(data->icon_parent, &base->value_pos,
+                                &position);
                     {
-                        f32 py = -sp20.y + row_y_offset;
-                        text3->pos_x = sp20.x;
+                        px = position.x;
+                        py = -position.y + row_y_offset;
+                        pz = position.z;
+                        text3->pos_x = px;
                         text3->pos_y = py;
-                        text3->pos_z = sp20.z;
+                        text3->pos_z = pz;
                     }
                     text3->text_color = mnDiagram2_804D4FBC;
                     text3->default_alignment = 2;
 
                     if (mnDiagram2_IsTimeStat(stat_type)) {
-                        int val = mnDiagram2_GetStatValue(mode, stat_type,
-                                                          entity_idx);
+                        int val =
+                            mnDiagram2_GetStatValue(mode, stat_type, entity);
                         {
                             u32 unsigned_val = (u32) val;
                             if (unsigned_val > 0x927BF) {
@@ -735,39 +743,31 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         }
                         mnDiagram_FormatTime((char*) str, val);
                     } else {
-                        int var_r0_3 = mnDiagram2_IsDistanceStat(stat_type);
-
-                        if (var_r0_3 != 0) {
+                        if (mnDiagram2_IsDistanceStat(stat_type)) {
                             u32 val = mnDiagram2_GetStatValue(mode, stat_type,
-                                                              entity_idx);
+                                                              entity);
                             val = mnDiagram_ConvertDistanceForDisplay(val);
                             if (val > 0x98967F) {
                                 val = 0x98967F;
                             }
                             mnDiagram_IntToStr((char*) str, val);
                         } else {
-                            int var_r0_4 =
-                                mnDiagram2_IsPercentageStat(stat_type);
-
-                            if (var_r0_4 != 0) {
+                            if (mnDiagram2_IsPercentageStat(stat_type)) {
                                 int val = mnDiagram2_GetStatValue(
-                                    mode, stat_type, entity_idx);
+                                    mode, stat_type, entity);
                                 if ((u32) val > 0xF423F) {
                                     val = 0xF423F;
                                 }
                                 mnDiagram_FormatDecimalNumber((char*) str, val,
                                                               2);
                             } else {
-                                int var_r0_5 =
-                                    mnDiagram2_IsIconOnlyStat(stat_type);
-
-                                if (var_r0_5 != 0) {
+                                if (mnDiagram2_IsIconOnlyStat(stat_type)) {
                                     str[0] = mnDiagram2_804D4FD0[0];
                                     str[1] = mnDiagram2_804D4FD0[1];
                                     str[2] = mnDiagram2_804D4FD0[2];
                                 } else {
                                     int val = mnDiagram2_GetStatValue(
-                                        mode, stat_type, entity_idx);
+                                        mode, stat_type, entity);
                                     if ((u32) val > 0x98967F) {
                                         val = 0x98967F;
                                     }

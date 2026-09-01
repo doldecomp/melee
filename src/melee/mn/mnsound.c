@@ -76,10 +76,10 @@ static inline void mnSound_InitChannelAnim(HSD_JObj* jobj, s32 channel,
 
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
-    HSD_JObj* jobj_anim_2;
-    HSD_JObj* jobj_anim_1;
-    HSD_JObj* jobj_anim_0;
     f32 right_frame, left_frame;
+    HSD_JObj* jobj_anim_1;
+    HSD_JObj* jobj_anim_2;
+    HSD_JObj* jobj_anim_0;
     lb_80011E24(jobj, &jobj_anim_0, 8, -1);
     lb_80011E24(jobj, &jobj_anim_1, 10, -1);
     lb_80011E24(jobj, &jobj_anim_2, 9, -1);
@@ -113,6 +113,7 @@ static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
                           (((f32) ((s8) sound_music_mix + 100) / 200.0f) *
                            (pos_1->x - pos_0->x)) +
                               pos_0->x);
+    gm_801602C0((u8) sound_music_mix);
 }
 
 static inline void mnSound_UpdateCenterText(void)
@@ -191,7 +192,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             sfxMove();
             menu->unk3 += 5;
             mix = menu->unk3;
-            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 18);
+            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 6);
             gm_801602C0(mix);
             gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         }
@@ -288,14 +289,13 @@ void mnSound_80249C08(int unused)
 {
     StaticModelDesc* model = &mnSound_804A08A8;
     AnimLoopSettings* anims = mnSound_803EEED8;
-    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
-    HSD_JObj* jobj;
-    Menu* user_data;
-    UNUSED HSD_GObjProc* proc;
     HSD_JObj* sound_selection_jobj;
     HSD_JObj* channel_selection_jobj;
     HSD_JObj* volume_cursor_jobj;
-    PAD_STACK(4);
+    HSD_JObj* jobj;
+    Menu* user_data;
+    UNUSED HSD_GObjProc* proc;
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
@@ -303,10 +303,7 @@ void mnSound_80249C08(int unused)
     HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
-    {
-        Menu* alloc = HSD_MemAlloc(sizeof(Menu));
-        user_data = alloc;
-    }
+    user_data = HSD_MemAlloc(sizeof(Menu));
     HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");
     gmMainLib_GetGameRules();
     user_data->cursor = 0x14;
@@ -316,16 +313,10 @@ void mnSound_80249C08(int unused)
 
     {
         Menu* menu = GET_MENU(mnSound_804D6C30);
-        s32 text_id;
         if (menu->text != NULL) {
             HSD_SisLib_803A5CC4(menu->text);
         }
-        if (menu->unk2 == 0) {
-            text_id = 0xBB;
-        } else {
-            text_id = 0xBC;
-        }
-        Menu_InitCenterText(menu, text_id);
+        Menu_InitCenterText(menu, menu->unk2 == 0 ? 0xBB : 0xBC);
     }
 
     {
@@ -356,7 +347,6 @@ void mnSound_80249C08(int unused)
     }
 
     {
-        gm_801602C0(user_data->unk3);
         lb_80011E24(jobj, &sound_selection_jobj, 0xE, -1);
         {
             AnimLoopSettings* anim = &anims[user_data->unk2];

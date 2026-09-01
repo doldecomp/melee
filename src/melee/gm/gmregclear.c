@@ -196,6 +196,12 @@ static void order_data(void)
     (void) "Error : gobj don\'t get (gmRegClearAddModel)\n";
     (void) "gmregclear.c";
     (void) "Error : jobj don\'t get (gmRegClearAddModel)\n";
+    (void) "SdClr.usd";
+    (void) "SIS_ClearData";
+    (void) "SdClr.dat";
+    (void) "IfHrNoCn";
+    (void) "ScInfCnt_scene_models";
+    (void) "IfHrReco";
 }
 #endif
 
@@ -694,7 +700,7 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if ((s32) arg0[i] != CHKIND_NONE) {
+        if ((s32) arg0[i] != 0x21) {
             count++;
         }
     }
@@ -704,28 +710,26 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    u8* out_color = colors;
     s32 color_idx;
-    s8* kind_iter = arg2;
+    u8* out_color = colors;
+    u8 num_colors;
+    u8 result;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
-        *out_color = gm_8017CD94(arg1, (u8) *kind_iter, count, color_idx);
+        num_colors = gm_80169238((u8) arg2[color_idx]);
+        if (arg1->x54 != NULL) {
+            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
+            if (num_colors != 0) {
+                result %= num_colors;
+            } else {
+                result = 0;
+            }
+        } else {
+            result = 0;
+        }
+        *out_color = result;
         out_color++;
-        kind_iter++;
     }
-}
-
-static inline u8 gm_8017CE34_ResolvePlayerCKind(UnkAdventureData* arg1,
-                                                u8 player_ckind)
-{
-    if (((s32) player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
-        player_ckind = CKIND_SEAK;
-    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               ((s8) player_ckind == CKIND_POPONANA))
-    {
-        player_ckind = CHKIND_POPO;
-    }
-    return player_ckind;
 }
 
 static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
@@ -745,13 +749,15 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     f32 attack_ratio;
     u8 player_stocks;
     u8 player_ckind;
-    u8 flags;
+    s32 flags;
     s8* enemy_kind;
     f32 defense_ratio;
     u8 enemy_ckind;
     s32 enemy_count;
     s32 enemy_idx;
     u8* color_iter;
+
+    PAD_STACK(4);
 
     boss_count = 0;
     enemy_level = 0;
@@ -832,8 +838,15 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         player_stocks = arg1->x0.stocks;
     }
 
-    player_ckind = (u8) arg1->x0.ckind;
-    player_ckind = gm_8017CE34_ResolvePlayerCKind(arg1, player_ckind);
+    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+        player_ckind = CKIND_SEAK;
+    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
+               (arg1->x0.ckind == CKIND_POPONANA))
+    {
+        player_ckind = CHKIND_POPO;
+    } else {
+        player_ckind = (u8) arg1->x0.ckind;
+    }
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
                 arg1->x0.slot);
@@ -865,6 +878,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
         if ((temp_r3_4 != 0) && (arg1->x0.xC.x11 == 0)) {
+            s32 base_enemy_count;
             s32 event_enemy_count;
             s32 special_stage;
             s32 special_enemy_mode;
@@ -872,8 +886,9 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             u8 first_enemy;
             u32 stage_flags;
 
-            event_enemy_count = gm_8017CE34_CountEnemies(arg2);
+            base_enemy_count = gm_8017CE34_CountEnemies(arg2);
             arg1->x0.xC.xC = 3;
+            event_enemy_count = base_enemy_count;
             special_stage = 0;
             special_enemy_mode = 0;
             sp8 = 0;
@@ -1265,6 +1280,9 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
 }
 #ifdef MUST_MATCH
 #pragma dont_inline off
+
+/// @todo .sdata2 order hack
+static const u32 gmregclear_sdata2_order_pad0[1] = { 0 };
 #endif
 
 s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
@@ -1494,6 +1512,9 @@ u8 gm_8017E48C(GameModeState* scene)
 struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
 {
     struct gm_803DE650_t* ptr;
+#ifdef MUST_MATCH
+    (void) 100.0F;
+#endif
     for (ptr = gm_803DE650; ptr->x0 != 0xFF; ptr++) {
         if (ptr->x0 == arg0) {
             return ptr;
@@ -1501,6 +1522,10 @@ struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
     }
     return NULL;
 }
+
+#ifdef MUST_MATCH
+static const u32 gmregclear_sdata2_order_pad1[1] = { 0 };
+#endif
 
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
@@ -1559,6 +1584,11 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
+
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_hundred[1] = { 100.0F };
+static const f64 gmregclear_sdata2_order_u32_0[1] = { U32_TO_F32 };
+#endif
 
 void gm_8017E7A0(u8 matchResult)
 {
@@ -1944,13 +1974,32 @@ s32 fn_8017F1B8(void)
     }
 
     mask = (u8) fn_8017F008();
+#ifdef MUST_MATCH
+    (void) 0.560000002F;
+    (void) 0.600000024F;
+    (void) 281.0F;
+    (void) 32.0F;
+#endif
     return fn_8016FFD4(gm_8016B774(), mask, 0);
 }
 
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_zero_two[2] = { 0.0F, 2.0F };
+#endif
+
 int fn_8017F294(void)
 {
+#ifdef MUST_MATCH
+    (void) -12.0F;
+    (void) 9.0F;
+    (void) 134.400009F;
+#endif
     return lbl_80472D28.x104;
 }
+
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_0[1] = { S32_TO_F32 };
+#endif
 
 s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 {
@@ -2387,49 +2436,63 @@ void fn_8017FE54(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
+static const f32 gmregclear_sdata2_order_one[1] = { 1.0F };
+static const f64 gmregclear_sdata2_order_u32_1[1] = { U32_TO_F32 };
+static const f32 gmregclear_sdata2_order_half[1] = { 0.5F };
+#endif
+
 void fn_8017FF1C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
-    struct lbl_80472D28_t* state = &lbl_80472D28;
+    /// @todo Consolidate these split-derived views of the same state object.
+    union {
+        struct lbl_80472D28_t* state;
+        fn_8017FA1C_arg* arg;
+    } data;
     s32 result;
     s32 i;
     u8 mask;
     HSD_JObj* sp28;
 
+    data.state = (data.state = &lbl_80472D28);
     jobj = gobj->hsd_obj;
-    HSD_JObjAnimAll(gobj->hsd_obj);
+    HSD_JObjAnimAll(jobj);
 
-    if (state->x118 == 0) {
-        fn_8017F608(state);
+    if (data.arg->x118 == 0) {
+        fn_8017F608(data.arg);
     }
 
-    result = fn_8017FA1C(state);
-    fn_8017FBA4(state);
+    {
+        fn_8017FA1C_arg* arg = data.arg;
+        result = fn_8017FA1C(arg);
+    }
+    fn_8017FBA4(data.arg);
 
-    if (state->x117 != 0 && state->x110 > 0x29U) {
-        state->xC0 = fn_8017F47C(&state->x84, (s32) state->xC0);
+    if (data.state->x117 != 0 && data.state->x110 > 0x29U) {
+        data.state->xC0 = fn_8017F47C(&data.state->x84, (s32) data.state->xC0);
 
         mask = fn_8017F008();
-        if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
-            state->x11F = 0;
+        if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
+            data.state->x11F = 0;
         } else {
-            state->x11F = 1;
+            data.state->x11F = 1;
         }
 
         mask = fn_8017F008();
-        if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) < 0) {
-            state->x11E = 1;
+        if (fn_8016F870(gm_8016B774(), data.state->xC0, mask, 0) < 0) {
+            data.state->x11E = 1;
         } else {
-            state->x11E = 0;
+            data.state->x11E = 0;
         }
 
-        if (state->x110 % 30 == 0 && state->xC8 == 0) {
+        if (data.state->x110 % 30 == 0 && data.state->xC8 == 0) {
             mask = fn_8017F008();
-            if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
-                state->xC0 = (u16) (state->xC0 + 1);
+            if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
+                data.state->xC0 = (u16) (data.state->xC0 + 1);
             } else {
-                state->xC8 = 1;
-                state->xC4 = state->x110;
+                data.state->xC8 = 1;
+                data.state->xC4 = data.state->x110;
             }
         }
 
@@ -2440,14 +2503,16 @@ void fn_8017FF1C(HSD_GObj* gobj)
                 ((repeat | buttons) & 0))
             {
                 mask = fn_8017F008();
-                if (fn_8016F740(gm_8016B774(), state->xC0, mask, 0) > 0) {
+                if (fn_8016F740(gm_8016B774(), data.state->xC0, mask, 0) > 0) {
                     mask = fn_8017F008();
-                    if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
+                    if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) >
+                        7)
+                    {
                         mask = fn_8017F008();
-                        state->xC0 =
-                            fn_8016F740(gm_8016B774(), state->xC0, mask, 0);
-                        state->xC8 = 1;
-                        state->xC4 = state->x110;
+                        data.state->xC0 = fn_8016F740(
+                            gm_8016B774(), data.state->xC0, mask, 0);
+                        data.state->xC8 = 1;
+                        data.state->xC4 = data.state->x110;
                     }
                 }
             } else {
@@ -2456,28 +2521,31 @@ void fn_8017FF1C(HSD_GObj* gobj)
                 if (((repeat | buttons) & (PAD_BUTTON_UP | PAD_STICK_UP)) |
                     ((repeat | buttons) & 0))
                 {
-                    mask = fn_8017F008();
-                    if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) >= 0) {
-                        mask = fn_8017F008();
-                        state->xC0 =
-                            fn_8016F870(gm_8016B774(), state->xC0, mask, 0);
-                        state->xC8 = 1;
-                        state->xC4 = state->x110;
+                    if (fn_8016F870(gm_8016B774(), data.state->xC0,
+                                    (u8) fn_8017F008(), 0) >= 0)
+                    {
+                        data.state->xC0 =
+                            fn_8016F870(gm_8016B774(), data.state->xC0,
+                                        (u8) fn_8017F008(), 0);
+                        data.state->xC8 = 1;
+                        data.state->xC4 = data.state->x110;
                     }
                 }
             }
         }
     }
 
-    if (state->x11A != 0 && state->x110 > 0x14U && state->x11D < state->x11C &&
-        (s32) (0.5f * (f32) (state->x110 - 0x14)) > (s32) state->x11D)
+    if (data.state->x11A != 0 && data.state->x110 > 0x14U &&
+        data.state->x11D < data.state->x11C &&
+        (s32) (0.5f * (f32) (data.state->x110 - 0x14)) >
+            (s32) data.state->x11D)
     {
-        lb_80011E24(jobj, &sp28, state->x11D + 7, -1);
+        lb_80011E24(jobj, &sp28, data.state->x11D + 7, -1);
         HSD_JObjClearFlagsAll(sp28, JOBJ_HIDDEN);
-        state->x11D = (u8) (state->x11D + 1);
+        data.state->x11D = (u8) (data.state->x11D + 1);
     }
 
-    if (state->x115 == 0 && result != 0) {
+    if (data.state->x115 == 0 && result != 0) {
         fn_80168F2C(0);
     }
 
@@ -2486,46 +2554,46 @@ void fn_8017FF1C(HSD_GObj* gobj)
             (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
              HSD_PAD_A))
         {
-            state->xFC = state->x104;
-            state->x115 = 1;
+            data.state->xFC = data.state->x104;
+            data.state->x115 = 1;
             break;
         }
     }
 
-    if (state->x110 > 0x3EU) {
+    if (data.state->x110 > 0x3EU) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
                 (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
                  0x1000))
             {
-                state->xFC = state->x104;
-                state->x116 = 1;
+                data.state->xFC = data.state->x104;
+                data.state->x116 = 1;
                 sfxForward();
                 break;
             }
         }
     }
 
-    if (state->x11E != 0) {
-        HSD_JObjSetFlagsAll(state->x20, JOBJ_HIDDEN);
+    if (data.state->x11E != 0) {
+        HSD_JObjSetFlagsAll(data.state->x20, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x20, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data.state->x20, JOBJ_HIDDEN);
     }
 
-    if (state->x11F != 0) {
-        HSD_JObjSetFlagsAll(state->x24, JOBJ_HIDDEN);
+    if (data.state->x11F != 0) {
+        HSD_JObjSetFlagsAll(data.state->x24, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x24, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data.state->x24, JOBJ_HIDDEN);
     }
 
-    if (state->x10C < 1.0f) {
-        state->x10C += 0.05f;
+    if (data.state->x10C < 1.0f) {
+        data.state->x10C += 0.05f;
     } else {
-        state->x10C = 1.0f;
+        data.state->x10C = 1.0f;
     }
 
-    if (state->x110 + 0x10000 != 0xFFFF) {
-        state->x110 = state->x110 + 1;
+    if (data.state->x110 + 0x10000 != 0xFFFF) {
+        data.state->x110 = data.state->x110 + 1;
     }
     PAD_STACK(0x1C);
 }
@@ -2606,6 +2674,27 @@ static inline void* fn_80180630_LoadLightList(struct lbl_80472D28_t* state)
     return lb_80011AC4(state->x5C);
 }
 
+static inline void* fn_80180630_LoadCameraDesc(struct lbl_80472D28_t* state)
+{
+    return HSD_CObjLoadDesc(state->x60);
+}
+
+static inline DynamicModelDesc*
+fn_80180630_GetModelDesc(struct lbl_80472D28_t* state)
+{
+    return &state->x4C;
+}
+
+static inline void fn_80180630_SetupSisLib(HSD_GObj* cam_gobj)
+{
+    HSD_SisLib_803A611C(0, cam_gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        HSD_SisLib_803A62A0(0, "SdClr.usd", "SIS_ClearData");
+    } else {
+        HSD_SisLib_803A62A0(0, "SdClr.dat", "SIS_ClearData");
+    }
+}
+
 static inline void
 fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
                                  HSD_GObj** cam_gobj)
@@ -2620,29 +2709,37 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     *cam_gobj = fn_80180630_CreateCameraGObj();
 }
 
+inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
+{
+    return state->x118;
+}
+
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
-    struct lbl_80472D28_t* state = &lbl_80472D28;
     s32 sp64;
     s32 sp60;
-    s32 sp5C;
-    s32 sp58;
-    void* sp38;
+    int special_score_value;
+    int coin_count;
+    u16 coins;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
     lbl_8046B6A0_t* temp;
     s32 total;
     s32 var_r4;
+    union {
+        struct lbl_80472D28_t* state;
+        fn_8017FA1C_arg* model;
+    } data;
     s32 special_score;
     s32 var_r3;
-    u16 coins;
+    struct lbl_80472D28_t* state;
     u8 mask;
     u8 var_r0;
-    PAD_STACK(0x38);
 
     special_score = 0;
     coins = arg4->x58[0].xE;
+    state = (data.state = &lbl_80472D28);
     memzero(state, sizeof(*state));
     state->xD4 = -1;
     state->xD8 = 0;
@@ -2658,8 +2755,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x114 = (u8) arg3;
 
     switch (arg2) {
-    case 1:
-        Ground_801C1DE4(&sp60, &sp64);
+    case 1: {
+        s32* first = &sp60;
+        Ground_801C1DE4(first, &sp64);
         state->x11A = 1;
         state->x11C = (u8) (sp64 - sp60);
         state->x108 = 0xC8;
@@ -2667,13 +2765,15 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
             state->x11B = 1;
         }
         break;
+    }
     case 3:
         temp = gm_16AE_GetUnkData_0();
         state->x118 = 1;
         if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
-            grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
-            special_score = sp5C;
-            coins = (u16) sp58;
+            grPushOn_80219204(Ground_801C1DD4(), &special_score_value,
+                              &coin_count);
+            special_score = special_score_value;
+            coins = (u16) coin_count;
             state->x108 = 0x1F4;
         }
         break;
@@ -2715,9 +2815,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->xFC = arg0 + arg1;
     state->xCC = arg1;
 
-    total = state->xF0;
-    total += state->xCC;
-    total = arg0 + total;
+    total = arg0 + state->xCC + state->xF0;
     var_r4 = total;
     if (total > 999999999) {
         var_r4 = 999999999;
@@ -2727,29 +2825,29 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x104 = var_r4;
     lbl_804D65C0 = (var_r4 - (arg0 + arg1)) / 10;
 
-    archive =
-        lbArchive_80016DBC("GmRegClr", &sp38, "ScGamRegClear_scene_data", 0);
-    state->x48 = archive;
-    if (sp38 == NULL) {
-        OSReport("Error : Cannot open archive file (File Name : %s).",
-                 "GmRegClr");
+    PAD_STACK(0x18);
+    {
+        void* scene_data;
+
+        archive = lbArchive_80016DBC("GmRegClr", &scene_data,
+                                     "ScGamRegClear_scene_data", 0);
+        state->x48 = archive;
+        if (scene_data == NULL) {
+            OSReport("Error : Cannot open archive file (File Name : %s).",
+                     "GmRegClr");
+        }
+        fn_80168A6C(scene_data, fn_80180630_GetModelDesc(state), 0);
     }
-    fn_80168A6C(sp38, &state->x4C, 0);
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind,
-                            HSD_CObjLoadDesc(state->x60));
+                            fn_80180630_LoadCameraDesc(state));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
     cam_gobj->gxlink_prios = 0x4C00;
 
-    HSD_SisLib_803A611C(0, cam_gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
-    if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, "SdClr.usd", "SIS_ClearData");
-    } else {
-        HSD_SisLib_803A62A0(0, "SdClr.dat", "SIS_ClearData");
-    }
+    fn_80180630_SetupSisLib(cam_gobj);
 
-    fn_801803FC(state);
+    fn_801803FC(data.model);
     fn_80168F7C();
 
     if (HSD_Randi(2) != 0) {
@@ -2760,14 +2858,14 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbAudioAx_80023F28(var_r3);
 
     Camera_8002F7AC(0);
-    lb_800121FC(&state->x30, 640, 480, GX_TF_RGB5A3, 0);
+    lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
     state->x2C =
         lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
     if (gm_GetRules()->x1_1 && coins != 0) {
-        if (state->x118 == 0) {
+        if (fn_80180630_GetX118(state) == 0U) {
             un_802FF128(0x5A, 0x1AE, (s32) coins, 5);
         } else {
             un_802FF128(0x86, 0xC8, (s32) coins, 5);
@@ -2776,7 +2874,14 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     arg4->x58[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
+    PAD_STACK(0x18);
 }
+
+#ifdef MUST_MATCH
+static const u32 gmregclear_sdata2_order_pad2[1] = { 0 };
+static const f32 gmregclear_sdata2_order_tenth_zero[2] = { 0.100000001F,
+                                                           0.0F };
+#endif
 
 int fn_80180AC0(void)
 {
@@ -2986,6 +3091,10 @@ void fn_80180C60(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_1[1] = { S32_TO_F32 };
+#endif
+
 s32 lbl_804D65D8;
 
 void fn_80181598(void)
@@ -3106,16 +3215,37 @@ void fn_80181708(void)
     gm_80168F88();
 }
 
+typedef struct RegClearArchiveNames {
+    char no_count[0xC];
+    char scene_models[0x18];
+    char record[0xC];
+} RegClearArchiveNames;
+ASSERT_SIZE(RegClearArchiveNames, 0x30);
+
+extern RegClearArchiveNames gmRegClear_ArchiveNames;
+
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
-                                      "ScInfCnt_scene_models", 0);
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
-                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 =
+        lbArchive_80016DBC(gmRegClear_ArchiveNames.no_count, &lbl_804D65CC,
+                           gmRegClear_ArchiveNames.scene_models, 0);
+    lbl_804D65C8 = lbArchive_80016DBC(
+        gmRegClear_ArchiveNames.record, &lbl_804D65D0,
+        // Prevent MWCC from hoisting this address.
+        (char*) ((volatile RegClearArchiveNames*) &gmRegClear_ArchiveNames)
+            ->scene_models,
+        0);
     fn_80181708();
     /// @todo Keep #lbl_80472ED8 before #lbl_80473594 in `.bss`.
     (void) &lbl_80472ED8;
 }
+
+// Keep this definition after gm_80181998 for matching code generation.
+RegClearArchiveNames gmRegClear_ArchiveNames = {
+    "IfHrNoCn",
+    "ScInfCnt_scene_models",
+    "IfHrReco",
+};
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {
@@ -4139,6 +4269,10 @@ void fn_80182F40(HSD_GObj* unused)
         break;
     }
 }
+
+#ifdef MUST_MATCH
+static const f64 gmregclear_sdata2_order_s32_2[1] = { S32_TO_F32 };
+#endif
 
 void gm_80183218(void)
 {

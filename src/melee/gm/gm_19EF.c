@@ -63,23 +63,33 @@ static u32 lbl_804D66F8;
 static struct {
     u8 x0;
     u8 pad_01[0x3];
-    s32 x4;
-    int x8;
-    s32 xC;
-    u32 x10;
-    u8 x14;
-    u8 x15;
-    u8 x16;
-    u8 pad_17;
-    int x18;
-    u16 x1C;
-    u16 x1E;
-    u8 x20;
-    u8 pad_21;
-    u16 x22;
-    HSD_Text* x24;
-    HSD_GObj* x28;
-    HSD_JObj* x2C[10];
+    union {
+        struct {
+            s32 x4;
+            int x8;
+            s32 xC;
+            u32 x10;
+            u8 x14;
+            u8 x15;
+            u8 x16;
+            u8 pad_17;
+            int x18;
+            u16 x1C;
+            u16 x1E;
+            u8 x20;
+            u8 pad_21;
+            u16 x22;
+            HSD_Text* x24;
+            union {
+                struct {
+                    HSD_GObj* gobj;
+                    HSD_JObj* jobjs[10];
+                } typed;
+                HSD_JObj* jobj_slots[11];
+            } x28;
+        };
+        HSD_JObj* jobj_slots[20];
+    };
     HSD_JObj* x54;
     HSD_JObj* x58;
     HSD_JObj* x5C;
@@ -99,7 +109,7 @@ static void fn_8019EFC4(HSD_PadStatus* pad)
     HSD_JObj* child_next;
     HSD_JObj* jobj;
 
-    jobj = lbl_80479A98.x28->hsd_obj;
+    jobj = lbl_80479A98.x28.typed.gobj->hsd_obj;
     if (lbl_80479A98.x60 != 0) {
         if (jobj == NULL) {
             jobj = NULL;
@@ -364,6 +374,86 @@ static inline s32 fn_8019F9C4_GetCharIdx(CharacterKind arg0)
     }
 }
 
+static inline void fn_8019F9C4_LoadSymbols(u32 arg0)
+{
+    u8 game_mode = gm_GetCurrentGameMode();
+    char* model_name = gm_80160564(arg0, game_mode);
+    char* scene_name = gm_801604DC(arg0, game_mode);
+
+    lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
+    lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
+                          "ScGamRegGover_scene_data", 0);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
+}
+
+static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
+{
+    if (next == NULL) {
+        *child = NULL;
+    } else {
+        *child = next->child;
+    }
+    lbl_80479A98.x54 = *child;
+
+    if (lbl_80479A98.x54 == NULL) {
+        *child = NULL;
+    } else {
+        *child = lbl_80479A98.x54->next;
+    }
+    lbl_80479A98.x58 = *child;
+
+    if (lbl_80479A98.x58 == NULL) {
+        *child = NULL;
+    } else {
+        *child = lbl_80479A98.x58->next;
+    }
+}
+
+static inline void fn_8019F9C4_inline2(HSD_JObj* next_jobj, HSD_JObj* model)
+{
+    HSD_JObj* node;
+
+    if (next_jobj == NULL) {
+        node = NULL;
+    } else {
+        node = next_jobj->child;
+    }
+    lb_8000C290(model, node);
+}
+
+static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
+                                       CharacterKind arg0)
+{
+    HSD_JObj* child;
+    s32 char_idx;
+    f32 f;
+    f32 scale;
+
+    lbl_804D66B8 = model;
+    HSD_GObjObject_80390A70(object, HSD_GObj_JObjKind, model);
+    GObj_SetupGXLink(object, HSD_GObj_JObjCallback, 0xB, 0);
+    char_idx = fn_8019F9C4_GetCharIdx(arg0);
+
+    if (model == NULL) {
+        child = NULL;
+    } else {
+        child = model->child;
+    }
+
+    HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
+    HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
+    HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
+    HSD_JObjSetRotationY(child, 0.017453292f * Toy_803060BC(char_idx, 5));
+    f = Toy_803060BC(char_idx, 4);
+    scale = Toy_803060BC(char_idx, 3) / f;
+    HSD_JObjSetScaleX(child, scale);
+    HSD_JObjSetScaleY(child, scale);
+    HSD_JObjSetScaleZ(child, scale);
+    HSD_JObjSetScaleX(model, 2.0f);
+    HSD_JObjSetScaleY(model, 2.0f);
+    HSD_JObjSetScaleZ(model, 2.0f);
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -376,9 +466,6 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObj** ptr;
     s32 char_idx;
     s32 i;
-    f32 f;
-    f32 scale;
-    PAD_STACK(16);
 
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
     arg0 = (char_idx == -1) ? 8 : arg0;
@@ -389,15 +476,14 @@ void fn_8019F9C4(u32 arg0)
                        "ScGamRegGover_scene_data", 0);
     Toy_803124BC();
     Toy_803102D0();
-    {
-        u8 game_mode = gm_GetCurrentGameMode();
-        char* model_name = gm_80160564(arg0, game_mode);
-        char* scene_name = gm_801604DC(arg0, game_mode);
-        lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
-        lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
-                              "ScGamRegGover_scene_data", 0);
-        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
-    }
+    fn_8019F9C4_LoadSymbols(arg0);
+#ifdef MUST_MATCH
+    // Preserve the retail literal order across the later inlined JObj helpers.
+    (void) 0.1f;
+    (void) "SdIntro.dat";
+    (void) "SIS_IntroData";
+    (void) " ";
+#endif
     cobj = HSD_CObjLoadDesc(lbl_804D669C->cameras->desc);
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind, cobj);
@@ -442,21 +528,17 @@ void fn_8019F9C4(u32 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, lbl_804D66A0->models[0], 0);
-    lbl_80479A98.x28 = gobj;
+    lbl_80479A98.x28.typed.gobj = gobj;
 
     if (jobj == NULL) {
         child = NULL;
     } else {
         child = jobj->child;
     }
-    if (child == NULL) {
-        node = NULL;
-    } else {
-        node = child->child;
-    }
+    node = child == NULL ? NULL : child->child;
 
-    for (i = 0; i < 10; i++) {
-        lbl_80479A98.x2C[i] = node;
+    for (i = 10; i < 20; i++) {
+        lbl_80479A98.jobj_slots[i] = node;
         if (node->next != NULL) {
             node = node->next;
         }
@@ -475,25 +557,7 @@ void fn_8019F9C4(u32 arg0)
         next = child->next;
     }
 
-    if (next == NULL) {
-        child = NULL;
-    } else {
-        child = next->child;
-    }
-    lbl_80479A98.x54 = child;
-
-    if (lbl_80479A98.x54 == NULL) {
-        child = NULL;
-    } else {
-        child = lbl_80479A98.x54->next;
-    }
-    lbl_80479A98.x58 = child;
-
-    if (lbl_80479A98.x58 == NULL) {
-        child = NULL;
-    } else {
-        child = lbl_80479A98.x58->next;
-    }
+    fn_8019F9C4_inline1(next, &child);
     lbl_80479A98.x5C = child;
 
     {
@@ -567,39 +631,18 @@ void fn_8019F9C4(u32 arg0)
     } else {
         next = child->child;
     }
-    if (next == NULL) {
-        node = NULL;
-    } else {
-        node = next->child;
+    fn_8019F9C4_inline2(next, jobj);
+    {
+        HSD_GObj* character_gobj =
+#ifdef MUST_MATCH
+            // Preserve the retail return-value copy.
+            character_gobj =
+#endif
+                GObj_Create(0xE, 0xF, 0);
+        gobj = character_gobj;
     }
-    lb_8000C290(jobj, node);
-
-    gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
-    lbl_804D66B8 = jobj;
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-
-    char_idx = fn_8019F9C4_GetCharIdx(arg0);
-
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-
-    HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
-    HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
-    HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
-    HSD_JObjSetRotationY(child, 0.017453292f * Toy_803060BC(char_idx, 5));
-    f = Toy_803060BC(char_idx, 4);
-    scale = Toy_803060BC(char_idx, 3) / f;
-    HSD_JObjSetScaleX(child, scale);
-    HSD_JObjSetScaleY(child, scale);
-    HSD_JObjSetScaleZ(child, scale);
-    HSD_JObjSetScaleX(jobj, 2.0f);
-    HSD_JObjSetScaleY(jobj, 2.0f);
-    HSD_JObjSetScaleZ(jobj, 2.0f);
+    fn_8019F9C4_inline3(jobj, gobj, arg0);
 
     lb_8000C1C0(jobj, lbl_804D66E8);
     lb_8000C290(jobj, lbl_804D66E8);
@@ -607,8 +650,11 @@ void fn_8019F9C4(u32 arg0)
     HSD_SisLib_803A611C(0, cam_gobj, 9, 0x12, 0, 0xB, 0, 0x13);
     HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
     lbl_80479A98.x24 = HSD_SisLib_803A6754(0, 0);
-    lbl_80479A98.x24->font_size.x = 0.1f;
-    lbl_80479A98.x24->font_size.y = 0.1f;
+    {
+        HSD_Text* text = lbl_80479A98.x24;
+        text->font_size.x = 0.1f;
+        text->font_size.y = 0.1f;
+    }
     lbl_80479A98.x24->default_alignment = 2;
     HSD_SisLib_803A6B98(lbl_80479A98.x24, 240.0f, 176.0f, " ");
     if (lbl_80479A98.x20 == 0) {

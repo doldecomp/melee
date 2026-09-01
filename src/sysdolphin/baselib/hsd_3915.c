@@ -407,7 +407,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     step_x = dx / count;
 
     GXWGFifo.f32 = x1;
-    i = 0;
     GXWGFifo.f32 = y1;
     r = color->r;
     GXWGFifo.u8 = r;
@@ -434,7 +433,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     GXWGFifo.u8 = b;
     GXWGFifo.u8 = a;
 
-    while ((f32) i <= count) {
+    for (i = 0; (f32) i <= count; i++) {
         GXBegin(0xA8, 0, 2);
         GXWGFifo.f32 = x1;
         GXWGFifo.f32 = y1;
@@ -457,9 +456,8 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
         b = color->b;
         g = color->g;
         r = color->r;
-        x1 += step_x;
+        x1 = step_x + x1;
         y1 += step_y;
-        i++;
         GXWGFifo.u8 = r;
         GXWGFifo.u8 = g;
         GXWGFifo.u8 = b;
@@ -467,9 +465,27 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     }
 }
 
+/// @todo .sdata2 order helpers; split-owned one-element arrays preserve the
+/// duplicate pool entries at their target boundaries.
+static const GXColor hsd_3915_default_color = { 0xFF, 0xFF, 0xFF, 0xFF };
+
+#ifdef MUST_MATCH
+static inline void hsd_3915_sdata2_order0(void)
+{
+    (void) 1.0F;
+    (void) 10.0F;
+    (void) -10.0F;
+    (void) 5.0F;
+    (void) 620.0F;
+}
+#endif
+
 void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
 {
     u8 b;
+#ifdef MUST_MATCH
+    hsd_3915_sdata2_order0();
+#endif
     dst[0] = src[0];
     if (flags & 1) {
         b = src[2];
@@ -478,6 +494,15 @@ void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
     }
     dst[1] = b;
 }
+
+#ifdef MUST_MATCH
+static const f64 hsd_3915_sdata2_half[1] = { 0.5 };
+
+static inline void hsd_3915_sdata2_order1(void)
+{
+    (void) 2.0F;
+}
+#endif
 
 typedef void (*GlyphFn)(u8* dst, s32 flags, s32 unused1, s32 unused2,
                         const u8* src);
@@ -494,7 +519,7 @@ GlyphEntry lbl_80408898[4] = {
     { 0xB3808000, hsd_80392194 },
 };
 
-DebugFontGlyph HSD_DebugFontAtlas[] ATTRIBUTE_ALIGN(32) = {
+DebugFontGlyph HSD_DebugFontAtlas[] = {
 #include <sysdolphin/baselib/debug_font.inc>
 };
 
@@ -516,6 +541,9 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     u8* bmp;
     GlyphEntry* entry;
 
+#ifdef MUST_MATCH
+    hsd_3915_sdata2_order1();
+#endif
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -560,6 +588,15 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     }
 }
 
+#ifdef MUST_MATCH
+static const f32 hsd_3915_sdata2_zero0[1] = { 0.0F };
+
+static inline void hsd_3915_sdata2_order2(void)
+{
+    (void) 600.0F;
+}
+#endif
+
 void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
                   s32 h, s32 stride, void* tbl)
 {
@@ -578,6 +615,9 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     u8* bmp;
     GlyphEntry* entry;
 
+#ifdef MUST_MATCH
+    hsd_3915_sdata2_order2();
+#endif
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -628,10 +668,28 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     }
 }
 
+#ifdef MUST_MATCH
+static const f64 hsd_3915_sdata2_s32_0[1] = { S32_TO_F32 };
+static const f32 hsd_3915_sdata2_zero1[1] = { 0.0F };
+
+static inline void hsd_3915_sdata2_order3(void)
+{
+    (void) 0.9999F;
+    (void) -1.0F;
+}
+#endif
+
 void hsd_80392474(void)
 {
+#ifdef MUST_MATCH
+    hsd_3915_sdata2_order3();
+#endif
     hsd_804D7850 = NULL;
 }
+
+#ifdef MUST_MATCH
+static const f64 hsd_3915_sdata2_s32_1[1] = { S32_TO_F32 };
+#endif
 
 struct EventPriority {
     Event event;
@@ -684,7 +742,6 @@ void hsd_80392528(Event event)
 #endif
 
 static u32 lbl_804D6084;
-static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 
 typedef struct {
     s32 count;
@@ -771,7 +828,7 @@ void hsd_8039254C(void)
     first = 1;
     line = 1.0F;
     event_node = hsd_804D7850;
-    default_col = *(GXColor*) &lbl_804DE8E0;
+    default_col = hsd_3915_default_color;
 
     while (event_node != NULL) {
         DispItem* item;

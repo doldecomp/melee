@@ -813,39 +813,19 @@ void grKongo_801D69B0(HSD_GObj* gobj)
     mpJointSetB10(4);
 }
 
-static inline void rad_compare(f32 a, f32 b, f32* ret)
-{
-    f32 c = MTXDegToRad(b);
-    if (a > c) {
-        *ret = c;
-    } else {
-        c = -c;
-        if (a < c) {
-            *ret = c;
-        }
-    }
-}
-
 static inline void rad_compare_b(f32 a, f32 b, f32* ret)
 {
-    f32 c = MTXDegToRad(b);
-    if (a > c) {
-        c = -c;
-    } else if (a < -c) {
-    } else {
-        c = 0.0F;
-    }
-    *ret = (f32) (0.99 * (f64) (c + *ret));
-}
+    f32 limit = MTXDegToRad(b);
+    f32 value;
 
-static inline void rad_compare_c(f32 a, f32 b, f32 d, f32* ret)
-{
-    f32 c = MTXDegToRad(b);
-    if (a > c) {
-        *ret += d * (a - c);
-    } else if (a < -c) {
-        *ret += d * (a + c);
+    if (a > limit) {
+        value = -limit;
+    } else if (a < -limit) {
+        value = limit;
+    } else {
+        value = 0.0f;
     }
+    *ret = (f32) (0.99 * (f64) (value + *ret));
 }
 
 typedef struct unk_struct_x14 {
@@ -856,143 +836,111 @@ typedef struct unk_struct_x14 {
     f32 unk10;
 } unk_struct_x14;
 
-static inline void grKongo_801D6AFC_apply(const f32* deltas,
-                                          _struct_grKg_803E188C_0x18* entries)
-{
-    int i;
-
-    for (i = 0; i < 0xF; i++) {
-        f32 delta = deltas[i];
-        if (delta != 0.0) {
-            entries[i].unkC += delta;
-        }
-    }
-}
-
 void grKongo_801D6AFC(void)
 {
     f32 sp44[15];
-    _struct_grKg_803E188C_0x18* entries;
-    f32* var_r5;
-    f32* deltas;
     f32 sp8[15];
+    f32* values = sp44;
 
     {
-        s32 var_ctr_1 = 3;
-        f32* p = sp44;
-        do {
-            p[0] = 0.0f;
-            p[1] = 0.0f;
-            p[2] = 0.0f;
-            p[3] = 0.0f;
-            p[4] = 0.0f;
-            p += 5;
-            var_ctr_1 -= 1;
-        } while (var_ctr_1 != 0);
+        f32* p = values;
+        s32 i;
+
+        for (i = 15; i > 0; i--) {
+            *p++ = 0.0f;
+        }
     }
-    var_r5 = sp44;
-    entries = grKg_803E188C;
+
     {
-        s32 var_ctr_2 = 5;
-        _struct_grKg_803E188C_0x18* var_r3_2 = grKg_803E188C;
-        do {
-            int i;
-            for (i = 0; i < 3; i++) {
-                rad_compare_b(var_r3_2->unkC - var_r3_2->unk8,
-                              yakumono_param->unk94, &var_r3_2->unk10);
-                var_r3_2++;
-            }
-            var_ctr_2 -= 1;
-        } while (var_ctr_2 != 0);
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            rad_compare_b(grKg_803E188C[i].unkC - grKg_803E188C[i].unk8,
+                          yakumono_param->unk94, &grKg_803E188C[i].unk10);
+        }
     }
+
     {
-        s32 var_ctr_3 = 3;
-        _struct_grKg_803E188C_0x18* var_r3_3 = grKg_803E188C;
-        f32 temp_f0;
-        do {
-            var_r3_3->unk10 += var_r5[0];
-            var_r3_3[1].unk10 += var_r5[1];
-            var_r3_3[2].unk10 += var_r5[2];
-            var_r3_3[3].unk10 += var_r5[3];
-            temp_f0 = var_r5[4];
-            var_r5 += 5;
-            var_r3_3[4].unk10 += temp_f0;
-            var_r3_3 += 5;
-            var_ctr_3 -= 1;
-        } while (var_ctr_3 != 0);
-    }
-    {
-        s32 var_ctr_4 = 3;
-        _struct_grKg_803E188C_0x18* var_r3_4 = grKg_803E188C;
-        do {
-            int i;
-            for (i = 0; i < 5; i++) {
-                rad_compare(var_r3_4->unk10, yakumono_param->unk98,
-                            &var_r3_4->unk10);
-                var_r3_4++;
-            }
-            var_ctr_4 -= 1;
-        } while (var_ctr_4 != 0);
-    }
-    deltas = sp8;
-    {
-        s32 var_ctr_5 = 3;
-        _struct_grKg_803E188C_0x18* var_r3_5 = grKg_803E188C;
-        do {
-            int i;
-            for (i = 0; i < 5; i++) {
-                var_r3_5->unkC += var_r3_5->unk10;
-                rad_compare(var_r3_5->unkC, yakumono_param->unk90,
-                            &var_r3_5->unkC);
-                var_r3_5++;
-            }
-            var_ctr_5 -= 1;
-        } while (var_ctr_5 != 0);
-    }
-    {
-        s32 var_ctr_6 = 3;
-        f32* delta_init = deltas;
-        do {
-            delta_init[0] = 0.0f;
-            delta_init[1] = 0.0f;
-            delta_init[2] = 0.0f;
-            delta_init[3] = 0.0f;
-            delta_init[4] = 0.0f;
-            delta_init += 5;
-            var_ctr_6 -= 1;
-        } while (var_ctr_6 != 0);
-    }
-    {
-        s32 var_ctr_7 = 0xF;
         _struct_grKg_803E188C_0x18* entry = grKg_803E188C;
-        f32* delta_ptr = deltas;
-        s32 i = 0;
-        do {
-            if (entry->unk2 == 0) {
-                if ((i != 0) && (entry[-1].unk2 == 0)) {
-                    {
-                        volatile f32 stiffness = yakumono_param->unkA0;
-                        rad_compare_c(entry[-1].unkC - entry->unkC,
-                                      yakumono_param->unk9C, stiffness,
-                                      delta_ptr);
+        s32 i;
+
+        for (i = 15; i > 0; i--) {
+            entry->unk10 += *values;
+            values++;
+            entry++;
+        }
+    }
+
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            Ground_ClampSymmetric(grKg_803E188C[i].unk10,
+                                  MTXDegToRad(yakumono_param->unk98),
+                                  &grKg_803E188C[i].unk10);
+        }
+    }
+
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            grKg_803E188C[i].unkC += grKg_803E188C[i].unk10;
+            Ground_ClampSymmetric(grKg_803E188C[i].unkC,
+                                  MTXDegToRad(yakumono_param->unk90),
+                                  &grKg_803E188C[i].unkC);
+        }
+    }
+
+    {
+        f32* p = sp8;
+        s32 i;
+
+        for (i = 15; i > 0; i--) {
+            *p++ = 0.0f;
+        }
+    }
+
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            if (grKg_803E188C[i].unk2 == 0) {
+                if (i != 0 && grKg_803E188C[i - 1].unk2 == 0) {
+                    f32 input =
+                        grKg_803E188C[i - 1].unkC - grKg_803E188C[i].unkC;
+                    f32 limit = MTXDegToRad(yakumono_param->unk9C);
+
+                    if (input > limit) {
+                        sp8[i] += yakumono_param->unkA0 * (input - limit);
+                    } else if (input < -limit) {
+                        sp8[i] += yakumono_param->unkA0 * (input + limit);
                     }
                 }
-                if (((u32) i != 0xEU) && (entry[1].unk2 == 0)) {
-                    {
-                        volatile f32 stiffness = yakumono_param->unkA0;
-                        rad_compare_c(entry[1].unkC - entry->unkC,
-                                      yakumono_param->unk9C, stiffness,
-                                      delta_ptr);
+                if ((u32) i != 14 && grKg_803E188C[i + 1].unk2 == 0) {
+                    f32 input =
+                        grKg_803E188C[i + 1].unkC - grKg_803E188C[i].unkC;
+                    f32 limit = MTXDegToRad(yakumono_param->unk9C);
+
+                    if (input > limit) {
+                        sp8[i] += yakumono_param->unkA0 * (input - limit);
+                    } else if (input < -limit) {
+                        sp8[i] += yakumono_param->unkA0 * (input + limit);
                     }
                 }
             }
-            entry += 1;
-            delta_ptr += 1;
-            i += 1;
-            var_ctr_7 -= 1;
-        } while (var_ctr_7 != 0);
+        }
     }
-    grKongo_801D6AFC_apply(deltas, entries);
+
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            if (sp8[i] != 0.0) {
+                grKg_803E188C[i].unkC += sp8[i];
+            }
+        }
+    }
 }
 
 #if 0
@@ -1040,8 +988,27 @@ extern ? grKg_804D6984;
 static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
 #endif
 
+static inline f32 grKongo_calc_angle(s32 index)
+{
+    f32 angle = (f32) (0.7853981633974483 *
+                       (0.5 * (f64) (((grKg_803E188C[index].unk14 -
+                                       grKg_803E188C[index - 1].unk14) /
+                                      6.0f) +
+                                     ((grKg_803E188C[index + 1].unk14 -
+                                       grKg_803E188C[index].unk14) /
+                                      6.0f))));
+
+    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
+        angle = MTXDegToRad(yakumono_param->unkAC);
+    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
+        angle = -MTXDegToRad(yakumono_param->unkAC);
+    }
+    return angle;
+}
+
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
+    u32 i;
     s32 line_id;
     Ground* gp;
     _struct_grKg_803E188C_0x18* table;
@@ -1051,31 +1018,21 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 old_angle;
     f32 temp;
     f32 displacement;
-    u32 i;
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     gp = gobj->user_data;
     grKongo_801D6AFC();
 
-    for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+    for (arg1 = 0; (u32) arg1 < 15U; arg1++) {
+        grKg_803E188C[arg1].unk14 =
+            (f32) (37.8 * tanf(-grKg_803E188C[arg1].unkC));
     }
 
     displacement =
         grKg_803E188C[2].unkC * (MTXDegToRad(yakumono_param->unkA8) /
                                      MTXDegToRad(yakumono_param->unk90) -
                                  1.0f);
-    angle = (f32) (0.7853981633974483 *
-                   (0.5 *
-                    (f64) (((grKg_803E188C[2].unk14 - grKg_803E188C[1].unk14) /
-                            6.0f) +
-                           ((grKg_803E188C[3].unk14 - grKg_803E188C[2].unk14) /
-                            6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_calc_angle(2);
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
@@ -1087,18 +1044,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         grKg_803E188C[12].unkC * ((MTXDegToRad(yakumono_param->unkA8) /
                                    MTXDegToRad(yakumono_param->unk90)) -
                                   1.0f);
-    angle =
-        (f32) (0.7853981633974483 *
-               (0.5 *
-                (f64) (((grKg_803E188C[12].unk14 - grKg_803E188C[11].unk14) /
-                        6.0f) +
-                       ((grKg_803E188C[13].unk14 - grKg_803E188C[12].unk14) /
-                        6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_calc_angle(12);
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
@@ -1106,19 +1052,23 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         gp->u.kongo.xD8 = -(angle - old_angle);
     }
 
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
-    for (i = 0; i < 15; i++) {
-        HSD_JObjSetRotationX(entry->unk4, entry->unkC);
-        entry++;
+    table = grKg_803E188C;
+    entry = table;
+    {
+        u32 index;
+
+        for (index = 0; index < 15; index++) {
+            HSD_JObjSetRotationX(entry->unk4, entry->unkC);
+            entry++;
+        }
     }
 
     mpLib_80057424(4);
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
     i = 0;
     line_id = 0x28;
     do {
         s32 id;
-        temp = entry->unk14;
+        temp = table->unk14;
         id = line_id;
         mpLib_80056758(id, 0.0f, temp, 0.0f, temp);
         if ((s32) i == 0) {
@@ -1128,7 +1078,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         }
         i++;
         line_id += 2;
-        entry++;
+        table++;
     } while (i < 15);
 }
 
