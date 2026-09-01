@@ -1001,14 +1001,6 @@ void gm_8019ECAC_OnEnter_inline(void)
 
 void gm_8019E634(void)
 {
-    union {
-        u8 (*u8_fn)(MatchEnd*, ssize_t);
-        s32 (*s32_fn)(MatchEnd*, ssize_t);
-    } get_result;
-    union {
-        u32 word;
-        u8 bytes[4];
-    } hbuf;
     struct Indices {
         s32 values[4];
     } indices;
@@ -1024,8 +1016,7 @@ void gm_8019E634(void)
 
     /* Get match results per player */
     for (i = 0; i < (s32) tmd->x30; i++) {
-        get_result.u8_fn = fn_80166CBC;
-        results[i] = get_result.s32_fn(&gm_80477738, i);
+        results[i] = fn_80166CBC(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
@@ -1044,6 +1035,10 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if (gmMainLib_GetGameRules()->handicap == 1) {
+        union {
+            u32 word;
+            u8 bytes[4];
+        } hbuf;
         hbuf.word = *(volatile u32 const*) &lbl_804DA948;
 
         /* Read handicap from x37 entries */
