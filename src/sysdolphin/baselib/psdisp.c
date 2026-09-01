@@ -1103,8 +1103,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
             prev_yx = prev_x * pvmtx[1][0] + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
-            x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z +
-                                        (pvmtx[0][0] * pp->pos.x + cur_y))) -
+            x = w0inv * (pvmtx[0][3] + ((pp->pos.x * pvmtx[0][0] + cur_y) +
+                                        pvmtx[0][2] * pp->pos.z)) -
                 w1inv * (pvmtx[0][3] + (pvmtx[0][2] * prev_z + prev_x_sum));
             y = w0inv * (pvmtx[1][3] + (pvmtx[1][2] * pp->pos.z + cur_yx)) -
                 w1inv * (pvmtx[1][3] + (pvmtx[1][2] * prev_z + prev_yx));
@@ -1288,13 +1288,13 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         f32 dz = pp->pos.z - pp->vel.z;
         prev_pos.x =
             pp->appsrt->x70 + (pp->appsrt->x6C * dz +
-                               (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
+                               (pp->appsrt->ssy * dy + pp->appsrt->ssx * dx));
         prev_pos.y =
             pp->appsrt->x80 + (pp->appsrt->x7C * dz +
                                (pp->appsrt->x78 * dy + pp->appsrt->x74 * dx));
         prev_pos.z =
             pp->appsrt->x90 + (pp->appsrt->x8C * dz +
-                               (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
+                               (pp->appsrt->x88 * dy + pp->appsrt->x84 * dx));
     }
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
@@ -1468,7 +1468,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                                   (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
             prev_pos.z =
                 draw_mtx[2][3] + (draw_mtx[2][2] * dz +
-                                  (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
+                                  (draw_mtx[2][0] * dx + dy * draw_mtx[2][1]));
         }
         psScaleAppSRTAxes(pp, draw_mtx);
     }
@@ -1860,8 +1860,8 @@ static inline void psUpdateBillboardAxes(const Mtx inv_view)
     f32 right;
     f32 up;
 
-    right = inv_view[0][0];
     up = inv_view[0][1];
+    right = inv_view[0][0];
     HSD_PSDisp_804D7914 = right + up;
     HSD_PSDisp_804D7918 = right - up;
     right = inv_view[1][0];
@@ -1908,10 +1908,10 @@ static inline void psUpdateProjectionCache(f32 perspective)
         y_offset = prj[4];
         y0 = y_offset * w0;
         y1 = y_offset * w1;
-        y2 = y_offset * w2;
+        y2 = w2 * y_offset;
         y3 = y_offset * w3;
-        pvmtx[1][0] = y_scale * vmtx[1][0] + y0;
-        pvmtx[1][1] = y_scale * vmtx[1][1] + y1;
+        pvmtx[1][0] = vmtx[1][0] * y_scale + y0;
+        pvmtx[1][1] = vmtx[1][1] * y_scale + y1;
         pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
         pvmtx[1][3] = y_scale * vmtx[1][3] + y3;
     } else {

@@ -687,6 +687,7 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
                     0.01f);
+        (void) &tmd->x534[i];
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
@@ -1000,6 +1001,14 @@ void gm_8019ECAC_OnEnter_inline(void)
 
 void gm_8019E634(void)
 {
+    union {
+        u8 (*u8_fn)(MatchEnd*, ssize_t);
+        s32 (*s32_fn)(MatchEnd*, ssize_t);
+    } get_result;
+    union {
+        u32 word;
+        u8 bytes[4];
+    } hbuf;
     struct Indices {
         s32 values[4];
     } indices;
@@ -1015,7 +1024,8 @@ void gm_8019E634(void)
 
     /* Get match results per player */
     for (i = 0; i < (s32) tmd->x30; i++) {
-        results[i] = fn_80166CBC(&gm_80477738, i);
+        get_result.u8_fn = fn_80166CBC;
+        results[i] = get_result.s32_fn(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
@@ -1034,11 +1044,6 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if (gmMainLib_GetGameRules()->handicap == 1) {
-        union {
-            u32 word;
-            u8 bytes[4];
-        } hbuf;
-
         hbuf.word = *(volatile u32 const*) &lbl_804DA948;
 
         /* Read handicap from x37 entries */

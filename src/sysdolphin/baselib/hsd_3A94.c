@@ -1730,32 +1730,32 @@ static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
     return (s32) total;
 }
 
-static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc,
+static inline s32 fn_803AC7DC_block_count(struct CardState* file_state,
                                           s32 file_idx)
 {
-    if (file_desc->x4C[file_idx] <= 0) {
-        return 0;
-    }
+    s32 blocks;
 
-    if (file_idx == 0) {
+    if (file_state->x4C[file_idx] <= 0) {
+        blocks = 0;
+    } else if (file_idx == 0) {
         u32 usable;
-        u32 sector_size = file_desc->x8;
+        u32 sector_size = file_state->x8;
         s32 remaining;
 
-        remaining = file_desc->x4C[0];
+        remaining = file_state->x4C[0];
         remaining = remaining - (s32) ((usable = sector_size - 0x20) -
-                                       (file_desc->x24 + 48) % sector_size);
+                                       (file_state->x24 + 48) % sector_size);
         if (remaining <= 0) {
-            return 1;
+            blocks = 1;
+        } else {
+            blocks = (u32) (remaining + sector_size - 0x21) / usable + 1;
         }
-        return (u32) (remaining + sector_size - 0x21) / usable + 1;
+    } else {
+        u32 sector_size = file_state->x8;
+        blocks = (u32) (file_state->x4C[file_idx] + sector_size - 0x21) /
+                 (sector_size - 0x20);
     }
-
-    {
-        u32 sector_size = file_desc->x8;
-        return (u32) (file_desc->x4C[file_idx] + sector_size - 0x21) /
-               (sector_size - 0x20);
-    }
+    return blocks;
 }
 
 s32 fn_803AC7DC(CardState* state)
@@ -1765,7 +1765,7 @@ s32 fn_803AC7DC(CardState* state)
     s32 i;
 
     if (state->x4C[0] > 0) {
-        total = (s32) fn_803AC7DC_block_count(state, 0) - 1;
+        total = fn_803AC7DC_block_count(state, 0) - 1;
     }
 
     for (i = 1; i < 9; i++) {
@@ -1781,8 +1781,8 @@ s32 fn_803AC7DC(CardState* state)
             break;
         case 1:
             total += fn_803AC7DC_block_count(state, i);
-            if (extra < (s32) fn_803AC7DC_block_count(state, i)) {
-                extra = (s32) fn_803AC7DC_block_count(state, i);
+            if (extra < fn_803AC7DC_block_count(state, i)) {
+                extra = fn_803AC7DC_block_count(state, i);
             }
             break;
         case 2:
@@ -4062,13 +4062,14 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 file_size;
     s32 total_blocks;
     s32 current_seq;
+    s32 seq;
     s32 secondary_count;
     s32 free_count;
     s32 i;
     s32 remaining;
     s32 result;
     u8* data;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
@@ -4091,47 +4092,16 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         s32 size = state->x4C[arg1];
         file_size = size;
     }
-    if (file_size <= 0) {
-        file_blocks = 0;
-    } else if (arg1 == 0) {
-        s32 hdr = state->x24;
-        u32 sector_size = state->x8;
-        s32 sz0;
-        s32 rem;
-        hdr += 0x30;
-        sz0 = state->x4C[0];
-        rem = (s32) ((u32) hdr % sector_size);
-        rem = (s32) (sector_size - 0x20) - rem;
-        rem = sz0 - rem;
-        if (rem <= 0) {
-            file_blocks = 1;
-        } else {
-            file_blocks =
-                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
-        }
-    } else {
-        u32 sector_size = state->x8;
-        file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
-    }
-
+    file_blocks = calculateFileBlockCount(state, arg1);
     total_blocks = fn_803AC7DC(state);
 
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
     } else {
-        s32 ofs = state->x20;
-        s32 fd = state->x4;
-        s32 retries;
-        s32 r;
-        for (retries = 0; retries < 10; retries++) {
-            r = CARDFastOpen(fd, ofs, &state->file_info);
-            if (r != -1) {
-                break;
-            }
-        }
-        if (r < 0) {
-            return r;
+        s32 open_result =
+            fn_803AF3F0_open(state->x4, state->x20, &state->file_info);
+        if (open_result < 0) {
+            return open_result;
         }
     }
 
@@ -4151,9 +4121,10 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     {
+        i = 1;
         secondary_count = 0;
         free_count = 0;
-        for (i = 1; i <= total_blocks; i++) {
+        for (; i <= total_blocks; i++) {
             s32 file_idx = state->x170[i];
 
             if (file_idx >= 0) {
@@ -4162,7 +4133,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     block_map[1][secondary_count] = i;
                     secondary_count++;
                 } else if (logical >= 0 && logical < file_blocks) {
-                    s32 seq = state->x270[i];
+                    seq = state->x270[i];
                     if (fn_803ACB74(current_seq, seq) < 0) {
                         current_seq = seq;
                     }
@@ -4228,17 +4199,19 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
             if (remaining > chunk) {
                 if (arg3 != 0) {
+                    s32 block = block_map[0][i];
                     s32 cmd_result = fn_803B0120_queue_verify(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, chunk);
+                        state, block, blocks_before + i, current_seq, data,
+                        chunk);
                     if (cmd_result < 0) {
                         fn_803B0120_rewind(entries);
                         return cmd_result;
                     }
                 } else {
-                    result =
+                    s32 verify_result =
                         fn_803ACC0C(state, block_map[0][i], blocks_before + i,
                                     current_seq, data, chunk);
+                    result = verify_result;
                     if (result < 0) {
                         fn_803B0120_close(state);
                         return result;
@@ -4311,14 +4284,15 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 return cmd_result;
             }
         } else {
-            s32 block = block_map[1][secondary_count];
-            result = fn_803ACFC0(state, block, 0xFFFF, 0, NULL, 0, arg1);
-            state->x170[block_map[1][secondary_count]] = -0x7FFF;
-            state->x270[block_map[1][secondary_count]] = 0;
+            s32* secondary = block_map[1];
+            s32* block = &secondary[secondary_count];
+            result = fn_803ACFC0(state, *block, 0xFFFF, 0, NULL, 0, arg1);
+            state->x170[*block] = -0x7FFF;
+            state->x270[*block] = 0;
             if (result < 0) {
                 fn_803B0120_close(state);
-                return result;
             }
+            return result;
         }
     }
 
@@ -4339,16 +4313,18 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
         if (remaining > chunk) {
             if (arg3 != 0) {
-                s32 cmd_result =
-                    fn_803B0120_queue_write(state, block_map[0][i], logical,
-                                            current_seq, data, chunk, arg1);
+                s32 block = block_map[0][i];
+                s32 cmd_result = fn_803B0120_queue_write(
+                    state, block, logical, current_seq, data, chunk, arg1);
                 if (cmd_result < 0) {
                     fn_803B0120_rewind(entries);
                     return cmd_result;
                 }
             } else {
-                result = fn_803ACFC0(state, block_map[0][i], blocks_before + i,
-                                     current_seq, data, chunk, arg1);
+                s32 write_result =
+                    fn_803ACFC0(state, block_map[0][i], blocks_before + i,
+                                current_seq, data, chunk, arg1);
+                result = write_result;
                 if (result < 0) {
                     state->x170[block_map[0][i]] = -0x7FFF;
                     state->x270[block_map[0][i]] = 0;
@@ -4362,9 +4338,9 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             data += chunk;
         } else {
             if (arg3 != 0) {
+                s32 block = block_map[0][i];
                 s32 cmd_result = fn_803B0120_queue_write(
-                    state, block_map[0][i], logical, current_seq, data,
-                    remaining, arg1);
+                    state, block, logical, current_seq, data, remaining, arg1);
                 if (cmd_result < 0) {
                     fn_803B0120_rewind(entries);
                     return cmd_result;
@@ -4749,7 +4725,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         s32 logical;
         s32 max_redun;
         s32 file_blocks;
-        s32 file_id;
+        s32 index;
         s32 phys;
         u8* fdata;
         PAD_STACK(32);
@@ -4880,24 +4856,24 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             }
         }
 
-        for (file_id = 1; file_id < 9; file_id++) {
+        for (index = 1; index < 9; index++) {
             s32 j;
             s32 offset;
-            file_blocks = fn_803AC634(state, file_id);
+            file_blocks = fn_803AC7DC_block_count(state, index);
             offset = 0;
             if (file_blocks > 0) {
                 for (j = 0; j < file_blocks; j++) {
                     if (arg1 != 0) {
-                        fdata = state->x70[file_id].ptr;
+                        fdata = state->x70[index].ptr;
                         if (fdata == NULL) {
                             result = fn_803B1338_queue_write(
-                                state, logical, phys, NULL, 0, file_id, cmd8,
+                                state, logical, phys, NULL, 0, index, cmd8,
                                 cmd9);
                         } else {
-                            u8* wdata = fn_803B1338_data_at(fdata, offset);
                             s32 chunk = fn_803B1338_data_size(state);
+                            u8* wdata = fn_803B1338_data_at(fdata, offset);
                             result = fn_803B1338_queue_write(
-                                state, logical, phys, wdata, chunk, file_id,
+                                state, logical, phys, wdata, chunk, index,
                                 cmd10, cmd11);
                             offset = state->x8 + offset;
                             offset -= 0x20;
@@ -4906,14 +4882,14 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                             return result;
                         }
                     } else {
-                        fdata = state->x70[file_id].ptr;
+                        fdata = state->x70[index].ptr;
                         if (fdata == NULL) {
                             result = fn_803ACFC0(state, logical, phys, 0, NULL,
-                                                 0, file_id);
+                                                 0, index);
                         } else {
                             result = fn_803ACFC0(state, logical, phys, 0,
                                                  fdata + offset,
-                                                 state->x8 - 0x20, file_id);
+                                                 state->x8 - 0x20, index);
                             offset = state->x8 + offset;
                             offset -= 0x20;
                         }
@@ -4928,7 +4904,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     logical++;
                     phys++;
                 }
-                switch (state->x28[file_id]) {
+                switch (state->x28[index]) {
                 case 0:
                     break;
                 case 1:
@@ -4951,15 +4927,14 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             s32 i;
             for (i = 0; i < max_redun; i++) {
                 if (arg1 != 0) {
-                    result =
-                        fn_803B1338_queue_write(state, logical, 0xFFFF, NULL,
-                                                0, file_id, cmd12, cmd13);
+                    result = fn_803B1338_queue_write(
+                        state, logical, 0xFFFF, NULL, 0, index, cmd12, cmd13);
                     if (result < 0) {
                         return result;
                     }
                 } else {
-                    result = fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0,
-                                         file_id);
+                    result =
+                        fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0, index);
                     state->x170[logical] = -0x7FFF;
                     state->x270[logical] = 0;
                     if (result < 0) {
@@ -4971,69 +4946,74 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             }
         }
 
-        phys = 1;
-        if ((s32) fn_803AC634(state, 0) != 0) {
-            file_blocks = fn_803AC634(state, 0);
-            phys = file_blocks;
-        }
-        for (file_id = 1; file_id < 9; file_id++) {
-            s32 k;
-            s32 offset;
-            file_blocks = fn_803AC634(state, file_id);
-            offset = 0;
-            if (file_blocks > 0) {
-                switch (state->x28[file_id]) {
-                case 0:
-                    for (k = 0; k < file_blocks; k++) {
-                        if (arg1 != 0) {
-                            fdata = state->x70[file_id].ptr;
-                            if (fdata == NULL) {
-                                result = fn_803B1338_queue_write(
-                                    state, logical, phys, NULL, 0, file_id,
-                                    cmd14, cmd15);
+        {
+            s32 block_idx;
+            s32 file_id;
+
+            index = 1;
+            if ((s32) fn_803AC634(state, 0) != 0) {
+                index = fn_803AC634(state, 0);
+            }
+            for (file_id = 1; file_id < 9; file_id++) {
+                s32 offset;
+                file_blocks = fn_803AC634(state, file_id);
+                offset = 0;
+                if (file_blocks > 0) {
+                    switch (state->x28[file_id]) {
+                    case 0:
+                        for (block_idx = 0; block_idx < file_blocks;
+                             block_idx++)
+                        {
+                            if (arg1 != 0) {
+                                fdata = state->x70[file_id].ptr;
+                                if (fdata == NULL) {
+                                    result = fn_803B1338_queue_write(
+                                        state, logical, index, NULL, 0,
+                                        file_id, cmd14, cmd15);
+                                } else {
+                                    s32 chunk = fn_803B1338_data_size(state);
+                                    u8* wdata =
+                                        fn_803B1338_data_at(fdata, offset);
+                                    result = fn_803B1338_queue_write(
+                                        state, logical, index, wdata, chunk,
+                                        file_id, cmd16, cmd17);
+                                    offset = state->x8 + offset;
+                                    offset -= 0x20;
+                                }
+                                if (result < 0) {
+                                    return result;
+                                }
                             } else {
-                                s32 chunk;
-                                u8* wdata;
-                                wdata = fn_803B1338_data_at(fdata, offset);
-                                chunk = fn_803B1338_data_size(state);
-                                result = fn_803B1338_queue_write(
-                                    state, logical, phys, wdata, chunk,
-                                    file_id, cmd16, cmd17);
-                                offset = state->x8 + offset;
-                                offset -= 0x20;
-                            }
-                            if (result < 0) {
-                                return result;
-                            }
-                        } else {
-                            fdata = state->x70[file_id].ptr;
-                            if (fdata == NULL) {
-                                result = fn_803ACFC0(state, logical, phys, 0,
-                                                     NULL, 0, file_id);
-                            } else {
-                                result = fn_803ACFC0(
-                                    state, logical, phys, 0, fdata + offset,
-                                    state->x8 - 0x20, file_id);
-                                offset = state->x8 + offset;
-                                offset -= 0x20;
-                            }
-                            if (result < 0) {
-                                state->x170[logical] = -0x7FFF;
+                                fdata = state->x70[file_id].ptr;
+                                if (fdata == NULL) {
+                                    result = fn_803ACFC0(state, logical, index,
+                                                         0, NULL, 0, file_id);
+                                } else {
+                                    result =
+                                        fn_803ACFC0(state, logical, index, 0,
+                                                    fdata + offset,
+                                                    state->x8 - 0x20, file_id);
+                                    offset = state->x8 + offset;
+                                    offset -= 0x20;
+                                }
+                                if (result < 0) {
+                                    state->x170[logical] = -0x7FFF;
+                                    state->x270[logical] = 0;
+                                    return result;
+                                }
+                                state->x170[logical] = index;
                                 state->x270[logical] = 0;
-                                return result;
                             }
-                            state->x170[logical] = phys;
-                            state->x270[logical] = 0;
+                            logical++;
+                            index++;
                         }
-                        logical++;
-                        phys++;
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                        index += file_blocks;
+                        break;
                     }
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                    phys += file_blocks;
-                    break;
                 }
             }
         }

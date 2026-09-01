@@ -26,45 +26,9 @@ typedef struct AfterimageVtx {
 
 #define AFTERIMAGE_ANGLE_STEP 0.0872664600610733f
 
-void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+static inline itSword_UnkBytes* ftCo_800C2600_get_params(Fighter* fp)
 {
-    Fighter* fp;
     itSword_UnkBytes* params;
-    f32 cumDist[3];
-    AfterimageVtx vtx_buf[151];
-    f32 d2;
-    s32 numSubdiv;
-
-    PAD_STACK(0x10);
-
-    if (arg1 != 2) {
-        return;
-    }
-
-    {
-        void* fighter = gobj->user_data;
-        fp = fighter;
-    }
-
-    if ((s8) (u8) fp->x2100 <= 1) {
-        return;
-    }
-
-    GXSetColorUpdate(1);
-    GXSetAlphaUpdate(0);
-    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
-    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
-    GXSetZMode(1, GX_LEQUAL, 0);
-    GXSetZCompLoc(0);
-    GXSetNumTexGens(0);
-    GXSetTevClampMode(0, 0);
-    GXSetNumTevStages(1);
-    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
-    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
-                  GX_AF_NONE);
-    GXSetCullMode(GX_CULL_NONE);
 
     if (fp->x2101_bits_8) {
         switch (itGetKind(fp->item_gobj)) {
@@ -111,8 +75,52 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             break;
         }
     }
+    return params;
+}
+
+void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
+{
+    Fighter* fp;
+    itSword_UnkBytes* params;
+    f32 cumDist[3];
+    AfterimageVtx vtx_buf[152];
+    f32 d2;
+    f32* distPtr;
+
+    if (arg1 != 2) {
+        return;
+    }
 
     {
+        void* fighter = gobj->user_data;
+        fp = fighter;
+    }
+
+    if ((s8) (u8) fp->x2100 <= 1) {
+        return;
+    }
+
+    GXSetColorUpdate(1);
+    GXSetAlphaUpdate(0);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
+    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
+    GXSetZMode(1, GX_LEQUAL, 0);
+    GXSetZCompLoc(0);
+    GXSetNumTexGens(0);
+    GXSetTevClampMode(0, 0);
+    GXSetNumTevStages(1);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
+                  GX_AF_NONE);
+    GXSetCullMode(GX_CULL_NONE);
+
+    params = ftCo_800C2600_get_params(fp);
+
+    {
+        s32 remaining;
+        struct Fighter_x20B0_t* curEntry;
         s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
@@ -172,8 +180,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            s32 remaining;
-            f32* distPtr;
             s32 numVerts;
             f32 scaleDiff;
             s32 curIdx2;
@@ -208,8 +214,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 f32 outerScale, innerScale;
                 s32 alpha;
                 struct Fighter_x20B0_t* nextEntry;
+                s32 numSubdiv;
 
-                struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
+                curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
@@ -226,10 +233,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                {
-                    f32 x = curEntry->xC.x * outerScale;
-                    (vp + 1)->x = x + curEntry->x0.x;
-                }
+                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
                 (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
                 (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;
@@ -263,9 +267,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                             f32 frac;
                             s32 j;
                             f32 cumAngle = 0.0f;
-                            f32 interpInner2, interpOuter2;
                             f32 basePosX, basePosY, basePosZ;
                             f32 stepPosX, stepPosY, stepPosZ;
+                            f32 interpInner2, interpOuter2;
                             s32 alphaStep;
 
                             tempDir = curEntry->xC;

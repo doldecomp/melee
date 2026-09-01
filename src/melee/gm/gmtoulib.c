@@ -95,6 +95,11 @@ typedef struct BracketSrcPtr {
     BracketSrcEntry* ptr;
 } BracketSrcPtr;
 
+typedef union lbl_803D9D20_u {
+    struct lbl_803D9D20_t fields;
+    u8 bytes[sizeof(struct lbl_803D9D20_t)];
+} lbl_803D9D20_u;
+
 static inline void gmTournament_SetBracketByes(BracketEntry* entries,
                                                s32 entrant_count)
 {
@@ -139,7 +144,7 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    n = lbl_803D9D20.x20[count];
+    n = ((lbl_803D9D20_u*) &lbl_803D9D20)->bytes[i = count + 0x20];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -206,39 +211,45 @@ void fn_8018A970(int arg0)
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
+    u8* px3;
+    s32 x14;
+    s32 val1;
+    s32* p48;
     s32* p34;
     s32* p3C;
-    s32* p44;
-    s32* p38;
-    s32* p40;
-    s32* p48;
     BracketEntry* entry;
+    s32* p44;
     s32* pX18;
-    s32* pX10;
+    s32* p38;
     s32 xC;
-    s32 x14;
+    s32* p40;
     s32 x10;
     s32 x18;
     s32 val;
-    s32 val1;
+    s32* pX10;
     s32 val2;
     s32 tmp;
     u8 x2;
+    u8 x3;
     u8 tm_x2E;
 
     TmData* tm = gm_GetTournamentData();
+    BracketData* bracket = (BracketData*) lbl_80473AB8;
 
-    p34 = &lbl_80473AB8[entry_idx].slots[slot_idx].x34;
-    p3C = &lbl_80473AB8[entry_idx].slots[slot_idx].x3C;
-    p44 = &lbl_80473AB8[entry_idx].slots[slot_idx].x44;
-    p38 = &lbl_80473AB8[entry_idx].slots[slot_idx].x38;
-    p40 = &lbl_80473AB8[entry_idx].slots[slot_idx].x40;
-    p48 = &lbl_80473AB8[entry_idx].slots[slot_idx].x48;
+    p34 = &bracket->entries[entry_idx].slots[slot_idx].x34;
+    p3C = &bracket->entries[entry_idx].slots[slot_idx].x3C;
+    p44 = &bracket->entries[entry_idx].slots[slot_idx].x44;
+    p38 = &bracket->entries[entry_idx].slots[slot_idx].x38;
+    p40 = &bracket->entries[entry_idx].slots[slot_idx].x40;
+    {
+        s32* slot_x48 = &bracket->entries[entry_idx].slots[slot_idx].x48;
+        p48 = slot_x48;
+    }
     entry = &lbl_80473AB8[entry_idx];
 
     if (entry->x1 != 0) {
-        u8* px3 = &entry->x3;
-        u8 x3 = *px3;
+        px3 = &entry->x3;
+        x3 = *px3;
         (void) px3;
         if (x3 == 0 && entry->x4 != 0) {
             switch (entry->x4) {
@@ -246,6 +257,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 xC = entry->xC;
                 pX18 = &entry->x18;
                 pX10 = &entry->x10;
+                (void) pX18;
                 *p3C = xC;
                 *p44 = xC;
                 *p34 = xC;
@@ -404,7 +416,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             *p34 = val1;
             {
                 x18 = lbl_80473AB8[entry_idx].x18;
-                x2 = lbl_80473AB8[entry_idx].x2;
+                x2 = bracket->entries[entry_idx].x2;
                 x10 = lbl_80473AB8[entry_idx].x10;
                 val2 = x10 + x18 - x18 * x2;
                 *p40 = val2;
@@ -488,6 +500,12 @@ static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
                                                 s32 bracket_entry_index)
 {
     return &bracket_entries[bracket_entry_index];
+}
+
+static inline void fn_8018B090_inline3(BracketEntry* entry)
+{
+    fn_80190520((f32) (entry->xC + (entry->x14 / 2)),
+                -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -701,8 +719,7 @@ void fn_8018B090(HSD_GObj* arg0)
     case 32: {
         s32 h = entries[idx].x18;
         if (h != 0) {
-            fn_80190520((f32) (entries[idx].xC + (entries[idx].x14 / 2)),
-                        -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
+            fn_8018B090_inline3(&entries[idx]);
             for (i = 0; i < 4; i++) {
                 if (entries[idx].slots[i].x4C == 0) {
                     entries[idx].slots[i].x3C =
@@ -758,8 +775,8 @@ void fn_8018B090(HSD_GObj* arg0)
                 }
             }
             if (var_r24 == 4) {
-                s32 slot_idx = lbl_804D6634;
-                entries[idx].slots[slot_idx].x3C =
+                s32 slot_idx;
+                entries[idx].slots[slot_idx = lbl_804D6634].x3C =
                     lbl_803D9E1C[tm->entrants][0];
                 entries[idx].slots[slot_idx].x40 =
                     lbl_803D9E1C[tm->entrants][1];

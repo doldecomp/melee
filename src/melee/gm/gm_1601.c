@@ -4098,7 +4098,6 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
     u8* hb = arg1;
     s32 count;
     s32 i;
-    UNUSED u8 pad[8];
 
     count = 0;
     for (i = 0; i < 4; i++) {
@@ -4147,10 +4146,11 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
             }
         }
     }
-    hb[0] = handicaps[0];
-    hb[1] = handicaps[1];
-    hb[2] = handicaps[2];
-    hb[3] = handicaps[3];
+    /// @todo Matching tactic: reuse the loop index for the first copy to steer
+    /// MWCC's instruction scheduling without changing the generated accesses.
+    for (i = 0; i < 4; i++) {
+        hb[i] = handicaps[i];
+    }
 }
 
 u8 gm_80169238(u8 ckind)

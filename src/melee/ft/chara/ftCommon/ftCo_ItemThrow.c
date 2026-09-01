@@ -516,9 +516,9 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
     }
 }
 
-static inline float getItemThrowFsm(Fighter* fp)
+inline float getItemThrowFsm(float fsm, Fighter* fp)
 {
-    return -fp->cmd_timer / fp->frame_speed_mul;
+    return fsm / fp->frame_speed_mul;
 }
 
 void ftCo_80095EFC(Fighter_GObj* gobj)
@@ -542,13 +542,14 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     fp->cmd_vars[1] = 0;
                 }
                 {
-                    float fsm = getItemThrowFsm(fp);
+                    float fsm = -fp->cmd_timer;
                     ftCo_ItemThrowAttrs* throw_speed_arr;
                     float velocity_multiplier;
                     float table_speed;
                     float base_throw_speed;
                     float throw_speed;
                     interpolation = fp->mv.co.itemthrow4.x8.x;
+                    fsm = getItemThrowFsm(fsm, fp);
                     throw_speed_arr = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
                     velocity_multiplier =
                         co_attrs->heavy_throw_velocity_multiplier;
