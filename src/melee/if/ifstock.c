@@ -50,30 +50,7 @@ struct IfStockDataOffset {
     unsigned char x0[0x204];
 };
 
-static char ifStock_802F98E8_scene_models[] = "Stc_scemdls";
-static char ifStock_802F98E8_translate[12] = "translate";
-
-static inline void ifStock_SetTranslate(HSD_JObj* jobj, Vec3* translate)
-{
-    if (jobj == NULL) {
-        __assert("jobj.h", 916, "jobj");
-    }
-    if (translate == NULL) {
-        __assert("jobj.h", 917, ifStock_802F98E8_translate);
-    }
-    jobj->translate = *translate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
-static inline void ifStock_GetTranslation(HSD_JObj* jobj, Vec3* translate)
-{
-    jobj ? (void) 0 : __assert("jobj.h", 979, "jobj");
-    translate ? (void) 0
-              : __assert("jobj.h", 980, ifStock_802F98E8_translate);
-    *translate = jobj->translate;
-}
+static char ifStock_SceneModels[] = "Stc_scemdls";
 
 int ifStock_802F7EFC(int arg0, int arg1)
 {
@@ -120,10 +97,10 @@ int ifStock_802F7EFC(int arg0, int arg1)
         }
         j = i != 0 ? stocks : 1;
     }
-    ifStock_GetTranslation(stock->player[arg1].x4[0], &pos);
+    HSD_JObjGetTranslation(stock->player[arg1].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg1].x4[j]);
-    ifStock_GetTranslation(stock->player[arg1].x4[j],
+    HSD_JObjGetTranslation(stock->player[arg1].x4[j],
                            &arg1_data->anim[slot - 5].start);
     arg1_data->anim[slot - 5].start.x += pos.x;
     arg1_data->anim[slot - 5].start.y += pos.y;
@@ -132,11 +109,11 @@ int ifStock_802F7EFC(int arg0, int arg1)
     j = i != 0 ? Player_GetStocks(arg0) : 0;
     {
         HSD_JObj* jobj = stock->player[arg0].x4[0];
-        ifStock_GetTranslation(jobj, &pos);
+        HSD_JObjGetTranslation(jobj, &pos);
     }
     HSD_JObjReqAnimAll(stock->player[arg0].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg0].x4[j]);
-    ifStock_GetTranslation(stock->player[arg0].x4[1],
+    HSD_JObjGetTranslation(stock->player[arg0].x4[1],
                            &arg1_data->anim[slot - 5].end);
     arg1_data->anim[slot - 5].end.x += (2.4f * j) + pos.x;
     arg1_data->anim[slot - 5].end.y = arg1_data->anim[slot - 5].start.y;
@@ -706,7 +683,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 gm_8016895C(jobj, *stock->x0, 0);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_GObj_SetupProc(gobj, fn_802F9410, 17);
-                ifStock_SetTranslate(jobj,
+                HSD_JObjSetTranslate(jobj,
                                      ifAll_GetPlayerHUDPosition(player));
                 lb_80011E24(jobj, ifStock_804A1378.player[player].x4, 0, 1, 2,
                             3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -1131,7 +1108,7 @@ void ifStock_802FAEC4(void)
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
     lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &scene_models,
-                           ifStock_802F98E8_scene_models, 0);
+                           ifStock_SceneModels, 0);
     stock->x0 = scene_models;
     stock->x4 = scene_models[1];
     ifStock_804A1ACC.x108 = NULL;
