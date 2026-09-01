@@ -92,12 +92,12 @@ static void sdata2_order(void)
 }
 #endif
 
-/* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3B7D3C */ extern const s32 lbl_803B7D3C[5];
-/* 479A58 */ struct TmAnimTimers lbl_80479A58;
-/* 4D6690 */ extern SceneDesc* lbl_804D6690;
-/* 4D668C */ extern HSD_Archive* lbl_804D668C;
-/* 4D6694 */ extern SceneDesc* lbl_804D6694;
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
+/* 4D6688 */ static HSD_Archive* lbl_804D6688;
+/* 479A58 */ static TmAnimTimers lbl_80479A58;
+/* 4D6690 */ static SceneDesc* lbl_804D6690;
+/* 4D668C */ static HSD_Archive* lbl_804D668C;
+/* 4D6694 */ static SceneDesc* lbl_804D6694;
 
 struct lbl_803DA2E0_t lbl_803DA2E0 = {
     {
@@ -1237,5 +1237,3 @@ static void order_data_1(void)
     (void) "ckind:%d\n";
 }
 #endif
-
-/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
