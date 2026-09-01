@@ -34,16 +34,15 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
-/// @todo Split-derived data; types are inferred.
-u8 lbl_804D6688[0x4];
-u8 lbl_804D668C[0x4];
-u8 lbl_804D6690[0x4];
-u8 lbl_804D6694[0x4];
-
-/* 4799D8 */ extern struct Lbl804799D8_t lbl_804799D8;
-/* 4D6660 */ HSD_Archive* lbl_804D6660;
-/* 4D6668 */ HSD_Archive* lbl_804D6668;
-/* 4D6664 */ HSD_Archive* lbl_804D6664;
+/* 4D6660 */ static HSD_Archive* lbl_804D6660;
+/* 4D6664 */ static HSD_Archive* lbl_804D6664;
+/* 4D6668 */ static HSD_Archive* lbl_804D6668;
+/* 4D666C */ static SceneDesc* lbl_804D666C;
+/* 4D6670 */ static SceneDesc* lbl_804D6670;
+/* 4D6674 */ static SceneDesc* lbl_804D6674;
+/* 4D6678 */ static s32 lbl_804D6678;
+/* 4D6678 */ static s32 lbl_804D667C;
+/* 4D6680 */ static u8 lbl_804D6680[3];
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)
@@ -60,9 +59,7 @@ static void sdata2_order(void)
 }
 #endif
 
-/* 4799D8 */ struct Lbl804799D8_t lbl_804799D8;
-/* 4799B8 */ struct Lbl804799B8_t lbl_804799B8;
-/* 4D6670 */ SceneDesc* lbl_804D6670;
+/* 4799D8 */ static struct Lbl804799D8_t lbl_804799D8;
 
 /* 3DA0D0 */ struct lbl_803DA0D0_t lbl_803DA0D0 = {
     0,  1,  2,  3,  5,  6,  12, 6,  6,  7,  9,  8,  6,  9,  4,  9,  10, 11, 12,
@@ -1065,8 +1062,6 @@ void fn_80198584(ResultsData* results)
     }
 }
 
-s32 lbl_804D667C;
-
 void fn_801985D4(HSD_GObj* gobj)
 {
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
@@ -1250,8 +1245,6 @@ void fn_80198C60(void)
 #pragma pop
 #endif
 
-SceneDesc* lbl_804D666C;
-
 /// Initializes the scene rendering components for the gm_18A5 game mode.
 void fn_80198D18(void)
 {
@@ -1288,8 +1281,6 @@ void fn_80198D18(void)
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     fn_80198BA0();
 }
-
-SceneDesc* lbl_804D6674;
 
 /// Matched bar data relocations
 void fn_80198EBC(void)
@@ -1836,7 +1827,6 @@ void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
         *state = 0x1B;
     }
 }
-s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {
@@ -2107,8 +2097,6 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
         }
     }
 }
-
-u8 lbl_804D6680[8];
 
 typedef struct TimerFmt {
     s32 d[5];

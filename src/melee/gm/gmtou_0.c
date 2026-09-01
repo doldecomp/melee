@@ -34,8 +34,7 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
-/* 4799B8 */ extern struct Lbl804799B8_t lbl_804799B8;
-
+/* 4799B8 */ static struct Lbl804799B8_t lbl_804799B8;
 /* 4D6640 */ static HSD_Archive* lbl_804D6640;
 /* 4D6644 */ static HSD_Archive* lbl_804D6644;
 /* 4D6648 */ static HSD_Archive* lbl_804D6648;
