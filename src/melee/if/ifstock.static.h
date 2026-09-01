@@ -55,7 +55,7 @@ struct ifStock_804A1ACC {
     char x0;
     signed char x1[130];
     signed char x83[133];
-    int x108;
+    HSD_GObj* x108;
     HSD_GObj* x10C[130];
 };
 

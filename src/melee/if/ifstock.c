@@ -50,6 +50,8 @@ struct IfStockDataOffset {
     unsigned char x0[0x204];
 };
 
+static char ifStock_SceneModels[] = "Stc_scemdls";
+
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
@@ -215,8 +217,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 if (ifStock_802F8298_get_data(stock)[user_data->player]
                         .x0[i + 5] == 0)
                 {
-                    HSD_JObjGetTranslation(jobj, &vecA);
-                    HSD_JObjGetTranslation(
+                    HSD_JObjGetTranslation2(jobj, &vecA);
+                    HSD_JObjGetTranslation2(
                         stock->player[user_data->player].x4[i + 1], &vecB);
                     vecB.x += vecA.x;
                     vecB.y += vecA.y;
@@ -284,12 +286,18 @@ void ifStock_802F8298(HSD_GObj* gobj)
                             stock->x204[user_data->player].x0[anim_offset],
                         &vecC, 0.1f * data[i + 5]);
                 }
-                HSD_JObjGetTranslation(stock->player[user_data->player].x4[0],
-                                       &vecD);
+                HSD_JObjGetTranslation2(stock->player[user_data->player].x4[0],
+                                        &vecD);
                 vecC.x -= vecD.x;
                 vecC.y -= vecD.y;
                 vecC.z -= vecD.z;
-                HSD_JObjSetTranslate(jobj2, &vecC);
+                if (jobj2 == NULL) {
+                    __assert("jobj.h", 916, "jobj");
+                }
+                jobj2->translate = vecC;
+                if (!(jobj2->flags & JOBJ_MTX_INDEP_SRT)) {
+                    HSD_JObjSetMtxDirty(jobj2);
+                }
                 if (stock->x204[user_data->player].x0[i + 5] == 1) {
                     vecC.x =
                         ((struct IfStockStealAnim*) &stock
@@ -627,16 +635,37 @@ static inline HSD_JObj* ifStock_802F98E8_get_x3C(unsigned char player)
     return ifStock_804A1378.player[player].x3C;
 }
 
+static inline struct lbl_8046B6A0_FighterMatchInfoFlags*
+ifStock_802F98E8_get_match_info(lbl_8046B6A0_t* data, int player)
+{
+    return &data->FighterMatchInfo[player].flags;
+}
+
+static inline unsigned char*
+ifStock_802F98E8_get_anim(unsigned char* user_data)
+{
+    return &user_data[5];
+}
+
+static const GXColor ifStock_802F98E8_color1 = { 0x08, 0x08, 0x08, 0x80 };
+static const GXColor ifStock_802F98E8_color2 = { 0x3C, 0x3C, 0x46, 0x80 };
+
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    unsigned char* data;
+    HSD_GObj* gobj;
     HSD_JObj* jobj;
     unsigned char* user_data;
+    int* stocks;
     int i;
-    HSD_GObj* gobj;
     lbl_8046B6A0_t* ae44;
+    HSD_JObj* icon_jobj;
+    GXColor c2;
+    GXColor c1;
     if (stock->x0 != NULL) {
+#ifdef MUST_MATCH
+        (void) &stock->player[player = player];
+#endif
         user_data = ((struct IfStockData*) stock)[player].x0;
         *(user_data += sizeof(struct IfStockDataOffset)) = player;
         stock->x204[player].x0[1] = b;
@@ -649,12 +678,9 @@ void ifStock_802F98E8(unsigned char player, int b)
         if (gobj != NULL) {
             jobj = HSD_JObjLoadJoint((*stock->x0)->joint);
             if (jobj != NULL) {
-                DynamicModelDesc* model_desc;
-
                 HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
                 GObj_SetupGXLink(gobj, fn_802F94E0, 11, 0);
-                model_desc = *stock->x0;
-                gm_8016895C(jobj, model_desc, 0);
+                gm_8016895C(jobj, *stock->x0, 0);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_GObj_SetupProc(gobj, fn_802F9410, 17);
                 HSD_JObjSetTranslate(jobj, ifAll_GetPlayerHUDPosition(player));
@@ -664,44 +690,40 @@ void ifStock_802F98E8(unsigned char player, int b)
                 stock->player[player].x0 = gobj;
                 ifStock_804A1378.player[player].coins =
                     Player_GetCoins(player);
-                ifStock_804A1378.player[player].stocks =
+                *(stocks = &ifStock_804A1378.player[player].stocks) =
                     Player_GetStocks(player);
-                if (ifStock_804A1378.player[player].stocks < 0) {
-                    ifStock_804A1378.player[player].stocks = 1;
+                if (*stocks < 0) {
+                    *stocks = 1;
                 }
-                data = user_data;
                 switch ((unsigned char) b) {
                 case 0:
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x24,
                                         JOBJ_HIDDEN);
-                    {
-                        struct ifStock_804A1378_per_player* players =
-                            stock->player;
-                        if (players[player].stocks <= 5) {
-                            HSD_JObjSetFlagsAll(
-                                ifStock_804A1378.player[player].x3C,
-                                JOBJ_HIDDEN);
-                            for (i = 0; i < 7; i++, data++) {
-                                jobj =
-                                    ifStock_804A1378.player[player].x4[i + 1];
-                                if (i < ifStock_804A1378.player[player]
-                                            .stocks ||
-                                    i >= 5)
-                                {
-                                    data[5] = 0;
-                                    if (i >= 5) {
-                                        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-                                    }
-                                } else {
-                                    data[5] = 10;
-                                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                    if (*stocks <= 5) {
+                        HSD_JObjSetFlagsAll(
+                            ifStock_804A1378.player[player].x3C, JOBJ_HIDDEN);
+                        for (i = 0; i < 7; i++, user_data++) {
+                            icon_jobj =
+                                ifStock_804A1378.player[player].x4[i + 1];
+                            if (i < ifStock_804A1378.player[player].stocks ||
+                                i >= 5)
+                            {
+                                user_data[5] = 0;
+                                if (i >= 5) {
+                                    HSD_JObjSetFlagsAll(icon_jobj,
+                                                        JOBJ_HIDDEN);
                                 }
-                                HSD_JObjReqAnimAll(jobj, data[5]);
-                                HSD_TObjReqAnimAll(jobj->u.dobj->mobj->tobj,
-                                                   gm_80168BF8(player));
-                                HSD_AObjSetRate(jobj->u.dobj->mobj->tobj->aobj,
-                                                0.0f);
+                            } else {
+                                user_data[5] = 10;
+                                HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                             }
+                            HSD_JObjReqAnimAll(
+                                icon_jobj,
+                                *ifStock_802F98E8_get_anim(user_data));
+                            HSD_TObjReqAnimAll(icon_jobj->u.dobj->mobj->tobj,
+                                               gm_80168BF8(player));
+                            HSD_AObjSetRate(
+                                icon_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
                         }
                     }
                     break;
@@ -710,24 +732,27 @@ void ifStock_802F98E8(unsigned char player, int b)
                                         JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_802F98E8_get_x3C(player),
                                         JOBJ_HIDDEN);
-                    for (i = 0; i < 7; i++, data++) {
-                        jobj = ifStock_804A1378.player[player].x4[i + 1];
+                    for (i = 0; i < 7; i++, user_data++) {
+                        HSD_JObj* icon_jobj =
+                            ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
-                            data[5] = 0;
+                            user_data[5] = 0;
                         } else {
-                            data[5] = 10;
+                            user_data[5] = 10;
                         }
                         if (i < 5) {
-                            HSD_JObjReqAnimAll(jobj, data[5]);
-                            HSD_TObjReqAnimAll(jobj->u.dobj->mobj->tobj,
+                            HSD_JObjReqAnimAll(
+                                icon_jobj,
+                                *ifStock_802F98E8_get_anim(user_data));
+                            HSD_TObjReqAnimAll(icon_jobj->u.dobj->mobj->tobj,
                                                gm_80168BF8(player));
-                            HSD_AObjSetRate(jobj->u.dobj->mobj->tobj->aobj,
-                                            0.0f);
+                            HSD_AObjSetRate(
+                                icon_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
                             if (i != 0) {
-                                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                                HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                             }
                         } else {
-                            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                            HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                         }
                     }
                     break;
@@ -742,38 +767,47 @@ void ifStock_802F98E8(unsigned char player, int b)
                                         JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x3C,
                                         JOBJ_HIDDEN);
-                    for (i = 0; i < 7; i++, data++) {
-                        jobj = ifStock_804A1378.player[player].x4[i + 1];
+                    for (i = 0; i < 7; i++, user_data++) {
+                        HSD_JObj* icon_jobj =
+                            ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {
-                            data[5] = 0;
+                            user_data[5] = 0;
                         } else {
-                            data[5] = 10;
+                            user_data[5] = 10;
                         }
                         if (i < 5) {
-                            HSD_JObjReqAnimAll(jobj, data[5]);
-                            HSD_TObjReqAnimAll(jobj->u.dobj->mobj->tobj,
+                            HSD_JObjReqAnimAll(
+                                icon_jobj,
+                                *ifStock_802F98E8_get_anim(user_data));
+                            HSD_TObjReqAnimAll(icon_jobj->u.dobj->mobj->tobj,
                                                gm_80168BF8(player));
-                            HSD_AObjSetRate(jobj->u.dobj->mobj->tobj->aobj,
-                                            0.0f);
+                            HSD_AObjSetRate(
+                                icon_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
                             if (i != 0) {
-                                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                                HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                             }
                         } else {
-                            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                            HSD_JObjSetFlagsAll(icon_jobj, JOBJ_HIDDEN);
                         }
                     }
                     break;
                 }
                 HSD_JObjAnimAll(jobj);
                 ae44 = gm_16AE_GetUnkData_1();
-                if (ae44->FighterMatchInfo[player].x4_b1) {
-                    GXColor c = { 0x08, 0x08, 0x08, 0x80 };
-                    GXColor* color = &c;
-                    ifStock_802FB4EC(player, color);
-                } else if (ae44->FighterMatchInfo[player].x4_b0) {
-                    GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
-                    GXColor* color = &c;
-                    ifStock_802FB4EC(player, color);
+                {
+                    struct lbl_8046B6A0_FighterMatchInfoFlags* match_info =
+                        ifStock_802F98E8_get_match_info(ae44, player);
+                    if (match_info->x4_b1) {
+                        GXColor* color;
+                        c1 = ifStock_802F98E8_color1;
+                        color = &c1;
+                        ifStock_802FB4EC(player, color);
+                    } else if (match_info->x4_b0) {
+                        GXColor* color;
+                        c2 = ifStock_802F98E8_color2;
+                        color = &c2;
+                        ifStock_802FB4EC(player, color);
+                    }
                 }
                 fn_802F9410(gobj); // inlined
             } else {
@@ -880,6 +914,9 @@ void ifStock_802FA5BC(int arg)
     lb_80011E24(jobj, &ifStock_804A1378.jobj, 0, 1, 2, 3, 4, 5, -1);
 }
 
+#ifdef MUST_MATCH
+#pragma dont_inline on
+#endif
 void fn_802FA6C4(HSD_GObj* arg)
 {
     int i;
@@ -922,6 +959,9 @@ void fn_802FA6C4(HSD_GObj* arg)
         ifStock_804A1774.x0 = 0;
     }
 }
+#ifdef MUST_MATCH
+#pragma dont_inline off
+#endif
 
 void fn_802FA8C0(HSD_GObj* arg)
 {
@@ -965,55 +1005,6 @@ void fn_802FA8C0(HSD_GObj* arg)
                 y -= 2.45f;
             }
         }
-    }
-}
-
-static inline void ifStock_802FAEC4_call_802FA5BC(int arg)
-{
-    ifStock_802FA5BC(arg);
-}
-
-static inline void ifStock_802FAEC4_clear_acc(int count)
-{
-    int i;
-
-    for (i = 0; i < count; i++) {
-        ifStock_804A1ACC.x10C[i] = NULL;
-    }
-}
-
-static inline void ifStock_802FAEC4_clear_1774(int count)
-{
-    int i;
-
-    for (i = 0; i < count; i++) {
-        ifStock_804A1774.x10C[i + 1] = NULL;
-    }
-}
-
-static inline void ifStock_802FAEC4_init_1A8C(HSD_GObj** p)
-{
-    struct ifStock_804A1378* stock = &ifStock_804A1378;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    int i;
-
-    for (i = 0; i < 16; i++, p++) {
-        *p = NULL;
-        if (gm_8016B1A8()) {
-            *p = ifStock_802FA118(i);
-        }
-    }
-    if (gm_IsMultimanSmashMode()) {
-        gobj = GObj_Create(14, 15, 0);
-        jobj = HSD_JObjLoadJoint(stock->x4->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj, fn_802F9598, 11, 0);
-        gm_8016895C(jobj, stock->x4, 0);
-        HSD_JObjReqAnimAll(jobj, 10.0f);
-        HSD_JObjAnimAll(jobj);
-        stock->gobj = gobj;
-        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
     }
 }
 
@@ -1066,47 +1057,77 @@ void fn_802FAC34(HSD_GObj* arg)
     }
 }
 
+static inline void ifStock_802FA5BC_noinline(int arg)
+{
+    ifStock_802FA5BC(arg);
+}
+
+static inline void ifStock_ClearGObjSlots(HSD_GObj** slots, int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++) {
+        slots[i] = NULL;
+    }
+}
+
+static inline void ifStock_CreateStockGObjs(HSD_GObj** slots)
+{
+    struct ifStock_804A1378* stock = &ifStock_804A1378;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
+
+    for (i = 0; i < 16; i++, slots++) {
+        *slots = NULL;
+        if (gm_8016B1A8()) {
+            *slots = ifStock_802FA118(i);
+        }
+    }
+    if (gm_IsMultimanSmashMode()) {
+        gobj = GObj_Create(14, 15, 0);
+        jobj = HSD_JObjLoadJoint(stock->x4->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+        GObj_SetupGXLink(gobj, fn_802F9598, 11, 0);
+        gm_8016895C(jobj, stock->x4, 0);
+        HSD_JObjReqAnimAll(jobj, 10.0f);
+        HSD_JObjAnimAll(jobj);
+        stock->gobj = gobj;
+        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
+    }
+}
+
 void ifStock_802FAEC4(void)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    union {
-        void* raw;
-        DynamicModelDesc** typed;
-    } scene_models;
+    DynamicModelDesc** scene_models;
+    HSD_GObj* gobj;
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_GetArchive(), &scene_models.raw,
-                           "Stc_scemdls", 0);
-    {
-        HSD_GObj** proc = (HSD_GObj**) &ifStock_804A1ACC.x108;
-        HSD_GObj* gobj;
-
-        stock->x0 = scene_models.typed;
-        stock->x4 = scene_models.typed[1];
-        *proc = NULL;
-        ifStock_804A1ACC.x0 = 0;
-        gobj = GObj_Create(14, 15, 0);
-        HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
-        *proc = gobj;
-        ifStock_802FAEC4_clear_acc(130);
-    }
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &scene_models,
+                           ifStock_SceneModels, 0);
+    stock->x0 = scene_models;
+    stock->x4 = scene_models[1];
+    ifStock_804A1ACC.x108 = NULL;
+    ifStock_804A1ACC.x0 = 0;
+    gobj = GObj_Create(14, 15, 0);
+    HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
+    ifStock_804A1ACC.x108 = gobj;
+    ifStock_ClearGObjSlots(&ifStock_804A1ACC.x10C[0], 130);
     if (gm_80169394() == 0) {
-        HSD_GObj** proc = &ifStock_804A1774.x10C[0];
-        HSD_GObj* gobj;
-
-        *proc = NULL;
+        ifStock_804A1774.x10C[0] = NULL;
         ifStock_804A1774.x0 = 0;
         gobj = GObj_Create(14, 15, 0);
         HSD_GObj_SetupProc(gobj, fn_802FA6C4, 17);
-        *proc = gobj;
-        ifStock_802FAEC4_clear_1774(130);
+        ifStock_804A1774.x10C[0] = gobj;
+        ifStock_ClearGObjSlots(&ifStock_804A1774.x10C[1], 130);
     } else if (gm_8016A1F8()) {
         ifStock_804A1774.x108 = -1;
-        ifStock_802FAEC4_call_802FA5BC(1);
+        ifStock_802FA5BC_noinline(1);
     }
-    ifStock_802FAEC4_init_1A8C(ifStock_804A1A8C);
+    ifStock_CreateStockGObjs(ifStock_804A1A8C);
 }
 
 void ifStock_802FB390(void)
