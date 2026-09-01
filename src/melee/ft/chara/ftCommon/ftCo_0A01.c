@@ -3762,9 +3762,7 @@ void ftCo_800A7AAC(Fighter* fp)
     u8 _[0x18];
     Vec3 partner_pos;
     f32 d;
-
-    PAD_STACK(0xA);
-    PAD_STACK(4);
+    PAD_STACK(4 * 4);
 
     partner = ftCo_800A589C(fp);
     if (partner == NULL) {
