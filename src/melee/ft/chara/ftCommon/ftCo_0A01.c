@@ -3734,8 +3734,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             }
         } else {
             ftCo_800A4768(fp1, &sp18);
-            ftCo_800A1F3C(fp0, sp18.x, sp18.y,
-                          data->x56C + fp1->x1A88.x564);
+            ftCo_800A1F3C(fp0, sp18.x, sp18.y, data->x56C + fp1->x1A88.x564);
         }
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)

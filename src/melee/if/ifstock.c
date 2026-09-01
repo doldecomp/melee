@@ -906,7 +906,9 @@ void ifStock_802FA5BC(int arg)
     lb_80011E24(jobj, &ifStock_804A1378.jobj, 0, 1, 2, 3, 4, 5, -1);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void fn_802FA6C4(HSD_GObj* arg)
 {
     int i;
@@ -949,7 +951,9 @@ void fn_802FA6C4(HSD_GObj* arg)
         ifStock_804A1774.x0 = 0;
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 void fn_802FA8C0(HSD_GObj* arg)
 {
