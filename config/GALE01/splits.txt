@@ -712,9 +712,12 @@ melee/ft/ftcmdscript.c:
 
 melee/ft/ftcpuattack.c:
 	.text       start:0x800B4AB0 end:0x800BBB8C
-	.data       start:0x803C6108 end:0x803C6908
+	.data       start:0x803C6108 end:0x803C61F8
 	.sdata      start:0x804D3B70 end:0x804D3B88
 	.sdata2     start:0x804D89D8 end:0x804D8B60
+
+melee/ft/ft_3C61.c:
+	.data       start:0x803C61F8 end:0x803C6908
 
 melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c:
 	.text       start:0x800BBB8C end:0x800BBC88
