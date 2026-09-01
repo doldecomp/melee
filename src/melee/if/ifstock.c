@@ -286,8 +286,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                             stock->x204[user_data->player].x0[anim_offset],
                         &vecC, 0.1f * data[i + 5]);
                 }
-                HSD_JObjGetTranslation2(
-                    stock->player[user_data->player].x4[0], &vecD);
+                HSD_JObjGetTranslation2(stock->player[user_data->player].x4[0],
+                                        &vecD);
                 vecC.x -= vecD.x;
                 vecC.y -= vecD.y;
                 vecC.z -= vecD.z;
@@ -683,8 +683,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 gm_8016895C(jobj, *stock->x0, 0);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_GObj_SetupProc(gobj, fn_802F9410, 17);
-                HSD_JObjSetTranslate(jobj,
-                                     ifAll_GetPlayerHUDPosition(player));
+                HSD_JObjSetTranslate(jobj, ifAll_GetPlayerHUDPosition(player));
                 lb_80011E24(jobj, ifStock_804A1378.player[player].x4, 0, 1, 2,
                             3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                             -1);
