@@ -1031,89 +1031,94 @@ static void hsd_80394E8C(struct lbl_8040B904_t* node_ptr)
     hsd_804CF810.x0_b5 = 1;
 }
 
-/// Draws one font glyph at the console cursor.
-static inline void hsd_80394F48_putc(u8 ch)
+/// Draws one font cell at the console cursor.
+static inline void hsd_80394F48_putc(u8 ch, void* const* color)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    s32 b6 = sp->x0_b6;
+    s32 b6 = hsd_804CF810.x0_b6;
 
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) (sp->x4C + ch * 0x38), hsd_804CF810.x4,
-                     hsd_804CF810.x8, b6, (&hsd_804CF810.x24)[sp->x34],
-                     sp->x3C, hsd_804CF810.x40, hsd_804CF810.x44, sp->x50);
+    if (hsd_804CF810.x0_b7 != 0) {
+        hsd_803922FC((void*) (hsd_804CF810.x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, b6,
+                     (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
+                     hsd_804CF810.x40, hsd_804CF810.x44, *color);
     } else {
-        hsd_803921B8((void*) (sp->x4C + ch * 0x38), hsd_804CF810.x4,
-                     hsd_804CF810.x8, (&hsd_804CF810.x24)[sp->x34], sp->x3C,
-                     hsd_804CF810.x40, hsd_804CF810.x44, sp->x50);
+        hsd_803921B8((void*) (hsd_804CF810.x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                     hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                     *color);
     }
 }
 
 /// Draws a `+---+` rule `width` cells wide.
-static inline void hsd_80394F48_rule(s32 width)
-{
-    s32 i;
+#define HSD_80394F48_RULE(width, color, i)                                    \
+    do {                                                                      \
+        hsd_80394F48_putc('+', color);                                        \
+        hsd_804CF810.x4 += 11;                                                \
+        for ((i) = 0; (i) < (width); (i)++) {                                 \
+            hsd_80394F48_putc('-', color);                                    \
+            hsd_804CF810.x4 += 11;                                            \
+        }                                                                     \
+        hsd_80394F48_putc('+', color);                                        \
+        hsd_804CF810.x4 += 11;                                                \
+    } while (0)
 
-    hsd_80394F48_putc('+');
-    hsd_804CF810.x4 += 11;
-
-    for (i = 0; i < width; i++) {
-        hsd_80394F48_putc('-');
-        hsd_804CF810.x4 += 11;
-    }
-
-    hsd_80394F48_putc('+');
-    hsd_804CF810.x4 += 11;
-}
-
-/// @todo Only differs by callee-saved register allocation.
+/// Draws a box around the event list.
 void hsd_80394F48(void* data)
 {
-    EventData* dp = data;
     s32 width;
-    s32 col_start;
-    s32 cur_row;
-    s32 x_base;
+    s32 k;
+    void** color;
+    EventData* dp = data;
     s32 i;
+    s32 cur_row;
+    s32 col_start;
+    s32 j;
     PAD_STACK(64);
 
     width = strlen(dp->entries[0]);
-    hsd_804CF810.x50 = &lbl_8040AB00;
+    color = &hsd_804CF810.x50;
+    *color = &lbl_8040AB00;
     col_start = hsd_804CF810.xC8;
     cur_row = hsd_804CF810.xCC;
     hsd_804CF810.x4 = col_start * 11 + 20;
     hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    hsd_80394F48_rule(width);
+    /* Without this the colour slot never reaches a register. */
+    (void) color;
+    HSD_80394F48_RULE(width, color, j);
 
-    x_base = col_start * 11 + 20;
     cur_row--;
 
     for (i = 0; dp->entries[i] != NULL; i++) {
-        hsd_804CF810.x4 = x_base;
+        hsd_804CF810.x4 = col_start * 11 + 20;
         hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row-- + 1) * 14;
 
-        hsd_80394F48_putc('|');
+        hsd_80394F48_putc('|', color);
 
         if (i == dp->index) {
-            hsd_804CF810.x50 = &lbl_8040AB20;
+            *color = &lbl_8040AB20;
         } else {
-            hsd_804CF810.x50 = &lbl_8040AB00;
+            *color = &lbl_8040AB00;
         }
 
         hsd_804CF810.x4 += 11;
         hsd_80394434(dp->entries[i]);
 
-        hsd_804CF810.x4 += strlen(dp->entries[i]) * 11;
-        hsd_804CF810.x50 = &lbl_8040AB00;
+        {
+            s32 len = strlen(dp->entries[i]);
 
-        hsd_80394F48_putc('|');
+            hsd_804CF810.x4 += len * 11;
+        }
+        *color = &lbl_8040AB00;
+
+        hsd_80394F48_putc('|', color);
     }
 
-    hsd_804CF810.x50 = &lbl_8040AB00;
-    hsd_804CF810.x4 = x_base;
+    *color = &lbl_8040AB00;
+    hsd_804CF810.x4 = col_start * 11 + 20;
     hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    hsd_80394F48_rule(width);
+    HSD_80394F48_RULE(width, color, k);
 
     hsd_804CF810.xC8 += 4;
     hsd_804CF810.xCC -= dp->index + 1;
