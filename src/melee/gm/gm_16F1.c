@@ -454,45 +454,6 @@ int fn_801701B8(void)
     return lbl_804D65A0;
 }
 
-/// One bubble pass over @p base, used by the two @c u32 sorts in
-/// #fn_801701C0.
-///
-/// The two sorts there are the only ones whose loop guard the original emits
-/// as
-/// @c cmplwi + @c ble rather than @c cmpwi + @c ble, which is why @p n is
-/// unsigned; and the pointer has to live inside an inline expansion, because a
-/// caller-level local is coloured after the compare temp and takes r4 instead
-/// of r3. The other five sorts in this function are written inline with plain
-/// @c vals[i] indexing, which puts their pointer in the same @c \@ band by way
-/// of strength reduction.
-static inline void gm_16F1_SortDescPass(u32* base, u32 n)
-{
-    int i;
-    u32* p = base;
-    for (i = 0; i < n; i++) {
-        if (p[0] > p[1]) {
-            u32 tmp = p[1];
-            p[1] = p[0];
-            p[0] = tmp;
-        }
-        p++;
-    }
-}
-
-static inline void gm_16F1_SortAscPass(u32* base, u32 n)
-{
-    int i;
-    u32* p = base;
-    for (i = 0; i < n; i++) {
-        if (p[0] < p[1]) {
-            u32 tmp = p[1];
-            p[1] = p[0];
-            p[0] = tmp;
-        }
-        p++;
-    }
-}
-
 int fn_801701C0(void* arg0, int arg1, int arg2)
 {
     struct lbl_8046B6A0_24C_t* rules = arg0;
@@ -1065,6 +1026,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
 
     case 0xFE: {
+        u32 tmp, k;
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1092,7 +1054,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    gm_16F1_SortDescPass(vals, j);
+                    for (k = 0; k < j; k++) {
+                        if (vals[k] > vals[k + 1]) {
+                            tmp = vals[k + 1];
+                            vals[k + 1] = vals[k];
+                            vals[k] = tmp;
+                        }
+                    }
                 }
                 if (vals[0] == pl_800408B8(arg1) && vals[0] <= vals[1] / 2) {
                     return 1;
@@ -1105,6 +1073,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xFF: {
+        u32 tmp, k;
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1129,7 +1098,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    gm_16F1_SortAscPass(vals, j);
+                    for (k = 0; k < j; k++) {
+                        if (vals[k] < vals[k + 1]) {
+                            tmp = vals[k + 1];
+                            vals[k + 1] = vals[k];
+                            vals[k] = tmp;
+                        }
+                    }
                 }
                 if (vals[0] == pl_80040894(arg1) && vals[0] >= vals[1] * 2) {
                     return 1;
