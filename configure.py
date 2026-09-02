@@ -1919,7 +1919,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_392C.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3933.c"),
             Object(Matching, "sysdolphin/baselib/hsd_393C.c"),
-            Object(Linkable, "sysdolphin/baselib/debugconsole_main.c"),
+            Object(Matching, "sysdolphin/baselib/debugconsole_main.c"),
             Object(Matching, "sysdolphin/baselib/hsd_397E.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3982.c"),
             Object(

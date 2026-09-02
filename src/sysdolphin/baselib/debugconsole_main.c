@@ -60,8 +60,8 @@ struct ParticleScreenState {
     /* 0xD4 */ OSContext* xD4;
 };
 
-/* 4D78C8 */ int hsd_804D78C8;
 /* 4D78CC */ u32 hsd_804D78CC;
+/* 4D78C8 */ int hsd_804D78C8;
 
 /* 4CF810 */ static struct ParticleScreenState hsd_804CF810;
 
