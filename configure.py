@@ -1146,7 +1146,7 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1601.c"),
             Object(Linkable, "melee/gm/gm_16A2.c"),
             Object(Matching, "melee/gm/gm_16AE.c"),
-            Object(Linkable, "melee/gm/gm_16F1.c"),
+            Object(Matching, "melee/gm/gm_16F1.c"),
             Object(Matching, "melee/gm/gm_1736.c"),
             Object(Matching, "melee/gm/gmresult.c"),
             Object(Linkable, "melee/gm/gmresultplayer.c"),
