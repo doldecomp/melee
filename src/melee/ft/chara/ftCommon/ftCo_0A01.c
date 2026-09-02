@@ -2003,6 +2003,7 @@ static inline float ftCo_GetTerminalVelocity(Fighter* fp)
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     f32 ez;
+    struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 dist;
     Vec3 island_pos;
@@ -2017,8 +2018,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    StageInfo* info;
     s32 ok;
 
     grav = fp->co_attrs.gravity;
@@ -2032,7 +2031,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    info = &stage_info;
+    data2 = &fp->x1A88;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -2131,10 +2130,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                             data2->x54.x = px;
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
-                            {
-                                GrKind kind = info->grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
+                            ftCo_800A1CC4(fp,
+                                          ftCo_803C6594[stage_info.grkind]);
                         }
                         ftCo_800A49B4(fp);
                     }
@@ -2192,6 +2189,7 @@ static inline s32 ftCo_800A4038_inline3(f32 y, f32 x, Vec3* arg_floor_pos,
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
+    struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     mp_UnkStruct0* island;
     Vec3 island_pos;
@@ -2206,8 +2204,6 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    StageInfo* info;
     s32 ok;
 
     grav = fp->co_attrs.gravity;
@@ -2221,7 +2217,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     } else {
         frames = ftCo_800A4038_inline2(fp) / grav;
     }
-    info = &stage_info;
+    data2 = &fp->x1A88;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -2317,10 +2313,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             data2->x54.x = px;
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
-                            {
-                                GrKind kind = info->grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
+                            ftCo_800A1CC4(fp,
+                                          ftCo_803C6594[stage_info.grkind]);
                         }
                         ftCo_800A49B4(fp);
                     }
