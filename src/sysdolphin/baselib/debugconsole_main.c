@@ -1068,7 +1068,6 @@ static inline void hsd_80394F48_rule(s32 width)
 /// @todo Only differs by callee-saved register allocation.
 void hsd_80394F48(void* data)
 {
-    struct lbl_8040AB00_t* colors = &lbl_8040AB00;
     EventData* dp = data;
     s32 width;
     s32 col_start;
@@ -1078,7 +1077,7 @@ void hsd_80394F48(void* data)
     PAD_STACK(64);
 
     width = strlen(dp->entries[0]);
-    hsd_804CF810.x50 = &colors[0];
+    hsd_804CF810.x50 = &lbl_8040AB00;
     col_start = hsd_804CF810.xC8;
     cur_row = hsd_804CF810.xCC;
     hsd_804CF810.x4 = col_start * 11 + 20;
@@ -1096,21 +1095,21 @@ void hsd_80394F48(void* data)
         hsd_80394F48_putc('|');
 
         if (i == dp->index) {
-            hsd_804CF810.x50 = &colors[1];
+            hsd_804CF810.x50 = &lbl_8040AB20;
         } else {
-            hsd_804CF810.x50 = &colors[0];
+            hsd_804CF810.x50 = &lbl_8040AB00;
         }
 
         hsd_804CF810.x4 += 11;
         hsd_80394434(dp->entries[i]);
 
         hsd_804CF810.x4 += strlen(dp->entries[i]) * 11;
-        hsd_804CF810.x50 = &colors[0];
+        hsd_804CF810.x50 = &lbl_8040AB00;
 
         hsd_80394F48_putc('|');
     }
 
-    hsd_804CF810.x50 = &colors[0];
+    hsd_804CF810.x50 = &lbl_8040AB00;
     hsd_804CF810.x4 = x_base;
     hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
