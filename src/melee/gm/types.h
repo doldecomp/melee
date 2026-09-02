@@ -331,7 +331,7 @@ struct gmm_x0 {
         /* 0x0529 */ u8 stocks;
         /* 0x052A */ u8 color;
         /* 0x052B */ u8 cpu_level;
-        /* 0x052C */ u8 x4; ///< nametag ID
+        /* 0x052C */ u8 nametag; ///< nametag ID
         /* 0x052D */ u8 x5;
     } unk_51C, unk_522, unk_528;
     struct EventData {

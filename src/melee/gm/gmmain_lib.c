@@ -822,7 +822,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
+    gmMainLib_AdjustNameTag(&config->nametag, (u8) arg0);
 
 #if 0
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
@@ -830,7 +830,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_NAMETAG_78(config_all->unk_530.nametag);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 #else
-    gmMainLib_AdjustNameTag(&gmMainLib_804D3EE0->unk_522.x4, arg0);
+    gmMainLib_AdjustNameTag(&gmMainLib_804D3EE0->unk_522.nametag, arg0);
 #endif
 
     gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, &gmHomeRun_VsModeData,
