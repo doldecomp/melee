@@ -329,15 +329,12 @@ struct lbl_803D5A4C_t {
     },
 };
 
-/* 4D65A0 */ static u8 lbl_804D65A0;
+/* 4D65A0 */ static struct {
+    /* 0x0 */ u8 x0;
+    /* 0x1 */ u8 x1[7];
+} lbl_804D65A0;
 /* 4D65A8 */ static u8 lbl_804D65A8[6];
 /* 4D65B0 */ static s32 lbl_804D65B0;
-
-static s32 lbl_804DA2F0;
-static s16 lbl_804DA2F4;
-static s8 lbl_804DA2F6;
-static float lbl_804DA2F8;
-static float lbl_804DA2FC;
 
 struct lbl_803B7A60_t {
     /* 0x00 */ s32 x0[4];
