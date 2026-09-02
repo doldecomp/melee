@@ -2095,14 +2095,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
-                        if (fp->x1A88.x60 == 0) {
-                            data3->x54.x = px;
-                            data3->x54.y = ey;
-                            data3->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
                     }
@@ -2126,13 +2120,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 if (ok != 0) {
                     dist = sqrtf(ddx * ddx + ddy * ddy);
                     if (data->x5C > dist) {
-                        if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                     }
                 }
@@ -2270,14 +2259,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
-                        if (fp->x1A88.x60 == 0) {
-                            data3->x54.x = px;
-                            data3->x54.y = ey;
-                            data3->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
                     }
@@ -2301,13 +2284,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 if (ok != 0) {
                     dist = sqrtf(ddx * ddx + ddy * ddy);
                     if (data->x5C > dist) {
-                        if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                     }
                 }
