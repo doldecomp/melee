@@ -1031,254 +1031,95 @@ static void hsd_80394E8C(struct lbl_8040B904_t* node_ptr)
     hsd_804CF810.x0_b5 = 1;
 }
 
-/// @todo Only differs by callee-saved register allocation.
-static inline const char* hsd_80394F48_get_first_entry(EventData* data)
-{
-    return data->entries[0];
-}
-
-static inline size_t hsd_80394F48_entry_length(s32 index, EventData* data)
-{
-    return strlen(data->entries[index]);
-}
-
-static inline void hsd_80394F48_set_base_color(void** color)
-{
-    *color = &lbl_8040AB00;
-}
-
-static inline s32 hsd_80394F48_get_x4(const s32* x4)
-{
-    return *x4;
-}
-
-static inline s32 hsd_80394F48_get_x40(const s32* px40)
-{
-    return *px40;
-}
-
-static inline s32 hsd_80394F48_get_x8(const s32* px8)
-{
-    return *px8;
-}
-
-static inline struct lbl_8040AB00_t*
-hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
-{
-    return base_color + 1;
-}
-
-static inline void hsd_80394F48_set_col_start(const s32* pxC8, s32* col_start)
-{
-    *col_start = *pxC8;
-}
-
-static inline s32 hsd_80394F48_get_x_base(s32 col_start)
-{
-    return col_start * 11 + 0x14;
-}
-
-static inline void** hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->x50;
-}
-
-static inline s32* hsd_80394F48_get_x8_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->x8;
-}
-
-static inline s32* hsd_80394F48_get_xCC_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->xCC;
-}
-
-static inline void hsd_80394F48_init(void* data, s32* num_entries,
-                                     void*** px50, s32** pxC8, s32** pxCC)
+/// Draws one font glyph at the console cursor.
+static inline void hsd_80394F48_putc(u8 ch)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
-    EventData* dp = data;
+    s32 b6 = sp->x0_b6;
 
-    *num_entries = strlen(hsd_80394F48_get_first_entry(dp));
-    *px50 = hsd_80394F48_get_x50_ptr(sp);
-    *pxC8 = &sp->xC8;
-    *pxCC = hsd_80394F48_get_xCC_ptr(sp);
+    if (sp->x0_b7 != 0) {
+        hsd_803922FC((void*) (sp->x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, b6, (&hsd_804CF810.x24)[sp->x34],
+                     sp->x3C, hsd_804CF810.x40, hsd_804CF810.x44, sp->x50);
+    } else {
+        hsd_803921B8((void*) (sp->x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, (&hsd_804CF810.x24)[sp->x34], sp->x3C,
+                     hsd_804CF810.x40, hsd_804CF810.x44, sp->x50);
+    }
 }
 
+/// @todo Only differs by callee-saved register allocation.
 void hsd_80394F48(void* data)
 {
-    struct lbl_8040AB00_t* base_color = &lbl_8040AB00;
-    struct ParticleScreenState* sp = &hsd_804CF810;
+    struct lbl_8040AB00_t* colors = &lbl_8040AB00;
     EventData* dp = data;
     s32 num_entries;
-    void** px50;
-    s32 cur_row;
-    s32* pxCC;
-    s32* px4;
-    s32* px40;
-    s32* px8;
     s32 col_start;
-    struct lbl_8040AB00_t* hi_color;
+    s32 cur_row;
     s32 x_base;
-    s32* pxC8;
-    s32 entry_idx;
     s32 i;
+    s32 j;
+    PAD_STACK(64);
 
-    hsd_80394F48_init(data, &num_entries, &px50, &pxC8, &pxCC);
+    num_entries = strlen(dp->entries[0]);
+    hsd_804CF810.x50 = &colors[0];
+    col_start = hsd_804CF810.xC8;
+    cur_row = hsd_804CF810.xCC;
+    hsd_804CF810.x4 = col_start * 11 + 20;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    px4 = &sp->x4;
-    px40 = &sp->x40;
-    px8 = hsd_80394F48_get_x8_ptr(sp);
-    hsd_80394F48_set_base_color(px50);
-    hsd_80394F48_set_col_start(pxC8, &col_start);
-    {
-        cur_row = *pxCC;
-        *px4 = col_start * 11 + 0x14;
-        *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
+    hsd_80394F48_putc('+');
+    hsd_804CF810.x4 += 11;
+
+    for (i = 0; i < num_entries; i++) {
+        hsd_80394F48_putc('-');
+        hsd_804CF810.x4 += 11;
     }
 
-    {
-        s32 b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    hsd_80394F48_putc('+');
+    hsd_804CF810.x4 += 11;
+
+    x_base = col_start * 11 + 20;
+    cur_row--;
+
+    for (i = 0; dp->entries[i] != NULL; i++) {
+        hsd_804CF810.x4 = x_base;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row-- + 1) * 14;
+
+        hsd_80394F48_putc('|');
+
+        if (i == dp->index) {
+            hsd_804CF810.x50 = &colors[1];
         } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+            hsd_804CF810.x50 = &colors[0];
         }
+
+        hsd_804CF810.x4 += 11;
+        hsd_80394434(dp->entries[i]);
+
+        hsd_804CF810.x4 += strlen(dp->entries[i]) * 11;
+        hsd_804CF810.x50 = &colors[0];
+
+        hsd_80394F48_putc('|');
     }
 
-    i = 0;
-    *px4 += 11;
-    while (i < num_entries) {
-        {
-            s32 b6 = sp->x0_b6;
-            if (sp->x0_b7 != 0) {
-                hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
-                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            } else {
-                hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
-                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            }
-        }
-        i++;
-        *px4 += 11;
+    hsd_804CF810.x50 = &colors[0];
+    hsd_804CF810.x4 = x_base;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
+
+    hsd_80394F48_putc('+');
+    hsd_804CF810.x4 += 11;
+
+    for (j = 0; j < num_entries; j++) {
+        hsd_80394F48_putc('-');
+        hsd_804CF810.x4 += 11;
     }
 
-    {
-        s32 b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        }
-    }
+    hsd_80394F48_putc('+');
+    hsd_804CF810.x4 += 11;
 
-    *px4 += 11;
-    x_base = hsd_80394F48_get_x_base(col_start);
-    hi_color = hsd_80394F48_get_highlight_color(base_color);
-    cur_row -= 1;
-
-    for (entry_idx = 0; dp->entries[entry_idx] != 0; entry_idx++) {
-        *px4 = x_base;
-        *px8 = (*px40 - 0x28) - (cur_row-- + 1) * 14;
-
-        {
-            s32 b6 = sp->x0_b6;
-            if (sp->x0_b7 != 0) {
-                hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            } else {
-                hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            }
-        }
-
-        if (entry_idx == dp->index) {
-            *px50 = hi_color;
-        } else {
-            hsd_80394F48_set_base_color(px50);
-        }
-
-        *px4 += 11;
-        hsd_80394434(dp->entries[entry_idx]);
-
-        *px4 += hsd_80394F48_entry_length(entry_idx, dp) * 11;
-        hsd_80394F48_set_base_color(px50);
-
-        {
-            s32 b6 = sp->x0_b6;
-            if (sp->x0_b7 != 0) {
-                hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            } else {
-                hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            }
-        }
-    }
-
-    hsd_80394F48_set_base_color(px50);
-    *px4 = x_base;
-    *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
-
-    {
-        s32 b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            s32 x = hsd_80394F48_get_x4(px4);
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, x,
-                         hsd_80394F48_get_x8(px8), (&sp->x24)[sp->x34],
-                         sp->x3C, *px40, sp->x44, *px50);
-        }
-    }
-
-    {
-        x_base = 0;
-        *px4 += 11;
-        while (x_base < num_entries) {
-            {
-                s32 b6 = sp->x0_b6;
-                if (sp->x0_b7 != 0) {
-                    hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4,
-                                 *px8, b6, (&sp->x24)[sp->x34], sp->x3C, *px40,
-                                 sp->x44, *px50);
-                } else {
-                    hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4,
-                                 *px8, (&sp->x24)[sp->x34], sp->x3C, *px40,
-                                 sp->x44, *px50);
-                }
-            }
-            x_base++;
-            *px4 += 11;
-        }
-    }
-
-    {
-        s32 b6 = hsd_804CF810.x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C,
-                         hsd_80394F48_get_x40(px40), sp->x44, *px50);
-        }
-    }
-
-    *px4 += 11;
-    *pxC8 += 4;
-    *pxCC -= dp->index + 1;
+    hsd_804CF810.xC8 += 4;
+    hsd_804CF810.xCC -= dp->index + 1;
 }
 
 s32 hsd_80395550(void* event_ptr)
