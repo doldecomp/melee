@@ -1,10 +1,14 @@
-#include "gmmain_lib.static.h"
+#include "gmmain_lib.h"
 
 #include "placeholder.h"
 
 #include <platform.h>
 
+#include "ft/inlines.h"
+
 #include "gm/forward.h"
+
+#include "gm/gmhomerun.h"
 
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>
@@ -21,6 +25,9 @@
 #include <melee/ty/toy.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
+/* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
+/* 45A6C0 */ struct gmm_x0 gmMainLib_8045A6C0[2];
+/* 4D3EE0 */ struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
 
 GameRules gmMainLib_803D4A48 = {
     0,
@@ -78,6 +85,14 @@ GXRenderModeObj gmMainLib_803D4A80 = {
     },
     { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
 };
+
+#ifdef MUST_MATCH
+static void order_bss(void)
+{
+    (void) gmMainLib_8045A6C0;
+    (void) gmMainLib_8046B0F0;
+}
+#endif
 
 GameRules* gmMainLib_GetGameRules(void)
 {
@@ -767,7 +782,7 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
-    extern VsModeData gm_80497618;
+    extern VsModeData gmHomeRun_VsModeData;
     struct gmm_x0_528_t* config;
     struct gmMainLib_8015DBF4_config {
         struct gmm_x0_528_t unk_51C;
@@ -808,41 +823,49 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
     gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
+
+#if 0
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.nametag);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
+#else
+    gmMainLib_AdjustNameTag(&gmMainLib_804D3EE0->unk_522.x4, arg0);
+#endif
 
-    gmMainLib_AdjustNameTags(&gm_80497618, &gm_80497618, (u8) arg0);
-
-    gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_D10,
-                             (VsModeData*) ((s8*) base + 0x788), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_590, (VsModeData*) ((s8*) base + 8),
+    gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, &gmHomeRun_VsModeData,
                              (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_6D0,
-                             (VsModeData*) ((s8*) base + 0x148), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_810,
-                             (VsModeData*) ((s8*) base + 0x288), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_950,
-                             (VsModeData*) ((s8*) base + 0x3C8), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_A90,
-                             (VsModeData*) ((s8*) base + 0x508), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_BD0,
-                             (VsModeData*) ((s8*) base + 0x648), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_E50,
-                             (VsModeData*) ((s8*) base + 0x8C8), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_F90,
-                             (VsModeData*) ((s8*) base + 0xA08), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_10D0,
-                             (VsModeData*) ((s8*) base + 0xB48), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1210,
-                             (VsModeData*) ((s8*) base + 0xC88), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1350,
-                             (VsModeData*) ((s8*) base + 0xDC8), (u8) arg0);
+
+#if 0
     gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xF08), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_D10,
+                             M2C_FIELD(base, VsModeData**, 0x788), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_590,
+                             M2C_FIELD(base, VsModeData**, 0x8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_6D0,
+                             M2C_FIELD(base, VsModeData**, 0x148), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_810,
+                             M2C_FIELD(base, VsModeData**, 0x288), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_950,
+                             M2C_FIELD(base, VsModeData**, 0x3C8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_A90,
+                             M2C_FIELD(base, VsModeData**, 0x508), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_BD0,
+                             M2C_FIELD(base, VsModeData**, 0x648), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_E50,
+                             M2C_FIELD(base, VsModeData**, 0x8C8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_F90,
+                             M2C_FIELD(base, VsModeData**, 0xA08), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_10D0,
+                             M2C_FIELD(base, VsModeData**, 0xB48), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1210,
+                             M2C_FIELD(base, VsModeData**, 0xC88), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1350,
+                             M2C_FIELD(base, VsModeData**, 0xDC8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1490,
+                             M2C_FIELD(base, VsModeData**, 0xF08), (u8) arg0);
+#endif
 
     {
         gr = &gmMainLib_804D3EE0->x1850;

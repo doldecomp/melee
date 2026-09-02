@@ -46,7 +46,7 @@ GameModeState gm_Mode_Homerun_States[] = {
     { -1 },
 };
 
-VsModeData gm_80497618;
+VsModeData gmHomeRun_VsModeData;
 static u8 gm_804D68F8;
 static u8 gm_804D68F9;
 
@@ -54,7 +54,7 @@ void gm_801B98E8(GameModeState* scene)
 {
     CSSData* css;
     struct GameCache* game_cache;
-    VsModeData* vs = &gm_80497618;
+    VsModeData* vs = &gmHomeRun_VsModeData;
 
     css = gm_GetGameModeStateEnterData(scene);
     if (gm_804D68F9 != 0) {
@@ -76,7 +76,7 @@ void gm_801B98E8(GameModeState* scene)
 
 void gm_801B999C(GameModeState* scene)
 {
-    VsModeData* vs = &gm_80497618;
+    VsModeData* vs = &gmHomeRun_VsModeData;
     CSSData* temp_r3;
 
     temp_r3 = gm_GetGameModeStateExitData(scene);
@@ -99,7 +99,7 @@ void gm_801B999C(GameModeState* scene)
 void gm_801B9A3C(GameModeState* arg0)
 {
     StartMeleeData* start;
-    VsModeData* vs = &gm_80497618;
+    VsModeData* vs = &gmHomeRun_VsModeData;
     int i;
 
     start = gm_GetGameModeStateEnterData(arg0);
@@ -177,7 +177,7 @@ void gm_801B9DD8(GameModeState* arg0)
 
 void gm_Mode_Homerun_OnInit(void)
 {
-    VsModeData* data = &gm_80497618;
+    VsModeData* data = &gmHomeRun_VsModeData;
     gm_InitVsMode(data);
 }
 
