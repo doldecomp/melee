@@ -112,11 +112,11 @@ void gm_8017390C(int arg0, int arg1)
             fn_80172C78(0xE7);
         }
         if (arg1 != 0) {
-            fn_80173834(temp_r3->x0.ckind, 4, 1);
+            fn_80173834(temp_r3->x0.x0.ckind, 4, 1);
             if (temp_r3->x0.xC.xD == 0 && temp_r3->x77 != 0) {
                 fn_80172C78(0x51);
             }
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.cpu_level >= 3) {
+            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.x0.cpu_level >= 3) {
                 fn_80172C78(0x53);
             }
             if (temp_r3->x0.xC.x20 < 0x101D0) {
@@ -127,8 +127,8 @@ void gm_8017390C(int arg0, int arg1)
     case 1:
         if (arg1 != 0) {
             temp_r3_2 = fn_8017DEC8(1);
-            fn_80173834(temp_r3_2->ckind, 3, 1);
-            if (temp_r3_2->xC.xD == 0 && temp_r3_2->cpu_level >= 3) {
+            fn_80173834(temp_r3_2->x0.ckind, 3, 1);
+            if (temp_r3_2->xC.xD == 0 && temp_r3_2->x0.cpu_level >= 3) {
                 fn_80172C78(0x52);
             }
             if (temp_r3_2->xC.x20 < 0x4650) {
@@ -139,12 +139,12 @@ void gm_8017390C(int arg0, int arg1)
     case 2:
         if (arg1 != 0) {
             temp_r3_3 = fn_8017DEC8(2);
-            fn_80173834(temp_r3_3->ckind, 5, 1);
+            fn_80173834(temp_r3_3->x0.ckind, 5, 1);
             fn_80172C78(0xBE);
             if (temp_r3_3->xC.xD == 0) {
                 fn_80172C78(0xCC);
             }
-            if (temp_r3_3->cpu_level >= 3) {
+            if (temp_r3_3->x0.cpu_level >= 3) {
                 fn_80172C78(0x86);
             }
         }

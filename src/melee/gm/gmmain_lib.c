@@ -1,10 +1,12 @@
-#include "gmmain_lib.static.h"
+#include "gmmain_lib.h"
 
 #include "placeholder.h"
 
 #include <platform.h>
 
 #include "gm/forward.h"
+
+#include "gm/gmhomerun.h"
 
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>
@@ -21,6 +23,9 @@
 #include <melee/ty/toy.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
+/* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
+/* 45A6C0 */ struct gmm_x0 gmMainLib_8045A6C0[2];
+/* 4D3EE0 */ struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
 
 GameRules gmMainLib_803D4A48 = {
     0,
@@ -79,14 +84,22 @@ GXRenderModeObj gmMainLib_803D4A80 = {
     { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
 };
 
+#ifdef MUST_MATCH
+static void order_bss(void)
+{
+    (void) gmMainLib_8045A6C0;
+    (void) gmMainLib_8046B0F0;
+}
+#endif
+
 GameRules* gmMainLib_GetGameRules(void)
 {
-    return &gmMainLib_804D3EE0->x1850;
+    return &gmMainLib_804D3EE0->vs.x1850;
 }
 
 struct gmm_x1868* gmMainLib_GetSaveData(void)
 {
-    return &gmMainLib_804D3EE0->thing;
+    return &gmMainLib_804D3EE0->vs.thing;
 }
 
 void* gmMainLib_8015CC4C(void)
@@ -224,17 +237,17 @@ void* gmMainLib_GetSelfDestructTotal(void)
 
 struct gmm_x0_528_t* gmMainLib_8015CDC8(void)
 {
-    return &gmMainLib_804D3EE0->unk_51C;
+    return &gmMainLib_804D3EE0->vs.unk_51C;
 }
 
 struct gmm_x0_528_t* gmMainLib_8015CDD4(void)
 {
-    return &gmMainLib_804D3EE0->unk_522;
+    return &gmMainLib_804D3EE0->vs.unk_522;
 }
 
 struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 {
-    return &gmMainLib_804D3EE0->unk_528;
+    return &gmMainLib_804D3EE0->vs.unk_528;
 }
 
 void gmMainLib_8015CDEC(void)
@@ -251,8 +264,9 @@ void gmMainLib_8015CDEC(void)
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == GM_NAMETAG_NONE) {
-        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
-            return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
+        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->vs.unk_530.unk_588))
+        {
+            return &gmMainLib_804D3EE0->vs.unk_530.unk_588[arg0];
         }
         return 0;
     } else {
@@ -269,7 +283,7 @@ void gmMainLib_8015CEB4(s32 arg0)
 
 bool gmMainLib_8015CEFC(int arg0)
 {
-    if (gmMainLib_804D3EE0->thing.x1A68 & (1LL << arg0)) {
+    if (gmMainLib_804D3EE0->vs.thing.x1A68 & (1LL << arg0)) {
         return true;
     } else {
         return false;
@@ -313,7 +327,7 @@ void gmMainLib_8015D00C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
     base[arg0].x7A.b0 = true;
     gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
@@ -348,7 +362,7 @@ void gmMainLib_8015D134(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
     base[arg0].x7C.b4 = true;
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
@@ -388,7 +402,7 @@ void gmMainLib_8015D25C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
     base[arg0].x7C.b5 = true;
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
@@ -428,7 +442,7 @@ void gmMainLib_8015D384(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
     base[arg0].x7C.b6 = true;
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
@@ -589,7 +603,7 @@ s32 gmMainLib_8015D818(u32 arg0)
     u8 _[40];
 
     if (gmMainLib_8015D94C(arg0) == 0) {
-        struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
+        struct gmm_x1868* base = &gmMainLib_804D3EE0->vs.thing;
         u32* q = &base->x1B80[arg0];
         *q = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
@@ -742,7 +756,7 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
                                             VsModeData* store_vmd, u8 tag)
 {
     u8* ptr;
-    s32 i;
+    ssize_t i;
 
     for (i = 0; i < 6; i++) {
         ptr = &store_vmd->start.players[i].nametag;
@@ -767,7 +781,6 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
-    extern VsModeData gm_80497618;
     struct gmm_x0_528_t* config;
     struct gmMainLib_8015DBF4_config {
         struct gmm_x0_528_t unk_51C;
@@ -807,45 +820,53 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
+    gmMainLib_AdjustNameTag(&config->nametag, (u8) arg0);
+
+#if 0
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.nametag);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
+#else
+    gmMainLib_AdjustNameTag(&gmMainLib_804D3EE0->vs.unk_522.nametag, arg0);
+#endif
 
-    gmMainLib_AdjustNameTags(&gm_80497618, &gm_80497618, (u8) arg0);
+    gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, &gmHomeRun_VsModeData,
+                             arg0);
 
     gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xF08), (u8) arg0);
+#if 0
     gmMainLib_AdjustNameTags(&base->unk_D10,
-                             (VsModeData*) ((s8*) base + 0x788), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_590, (VsModeData*) ((s8*) base + 8),
-                             (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x788), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_590,
+                             M2C_FIELD(base, VsModeData**, 0x8), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_6D0,
-                             (VsModeData*) ((s8*) base + 0x148), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x148), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_810,
-                             (VsModeData*) ((s8*) base + 0x288), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x288), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_950,
-                             (VsModeData*) ((s8*) base + 0x3C8), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x3C8), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_A90,
-                             (VsModeData*) ((s8*) base + 0x508), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x508), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_BD0,
-                             (VsModeData*) ((s8*) base + 0x648), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x648), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_E50,
-                             (VsModeData*) ((s8*) base + 0x8C8), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0x8C8), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_F90,
-                             (VsModeData*) ((s8*) base + 0xA08), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xA08), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_10D0,
-                             (VsModeData*) ((s8*) base + 0xB48), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xB48), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_1210,
-                             (VsModeData*) ((s8*) base + 0xC88), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xC88), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_1350,
-                             (VsModeData*) ((s8*) base + 0xDC8), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xDC8), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
+                             M2C_FIELD(base, VsModeData**, 0xF08), (u8) arg0);
+#endif
 
     {
-        gr = &gmMainLib_804D3EE0->x1850;
+        gr = &gmMainLib_804D3EE0->vs.x1850;
         (void) gr;
 
         val = gr->unk_x10;
@@ -889,8 +910,8 @@ void gmMainLib_8015EA80(void)
     struct gmMainLib_8015EA80_modes {
         u8 pad[8];
         VsModeData modes[13];
-    }* data =
-        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->unk_530.unk_588;
+    }* data = (struct gmMainLib_8015EA80_modes*)
+                  gmMainLib_804D3EE0->vs.unk_530.unk_588;
     struct PlayerInitData* players;
     s32 i;
 
@@ -911,14 +932,14 @@ void gmMainLib_8015EA80(void)
 
 int gmMainLib_8015ECB0(void)
 {
-    return gmMainLib_804D3EE0->x1850.bgm;
+    return gmMainLib_804D3EE0->vs.x1850.bgm;
 }
 
 void gmMainLib_8015ECBC(void)
 {
     u8 _[4];
 
-    GameRules* rules = &gmMainLib_804D3EE0->x1850;
+    GameRules* rules = &gmMainLib_804D3EE0->vs.x1850;
     if (gm_80164600() && gm_80164ABC()) {
         if (HSD_Randi(4) != 0) {
             rules->bgm = 0x34;
@@ -932,7 +953,7 @@ void gmMainLib_8015ECBC(void)
 
 int gmMainLib_8015ED30(void)
 {
-    return gmMainLib_804D3EE0->x1850.unk_xc;
+    return gmMainLib_804D3EE0->vs.x1850.unk_xc;
 }
 
 int GetRumbleSettingOfPort(ssize_t port)
@@ -947,12 +968,12 @@ void gmMainLib_SetRumbleEnabled(ssize_t port, bool enabled)
 
 s32 gmMainLib_8015ED5C(void)
 {
-    return gmMainLib_804D3EE0->x1850.unk_14;
+    return gmMainLib_804D3EE0->vs.x1850.unk_14;
 }
 
 void gmMainLib_8015ED68(ssize_t port)
 {
-    gmMainLib_804D3EE0->x1850.unk_14 = port;
+    gmMainLib_804D3EE0->vs.x1850.unk_14 = port;
 }
 
 u8 gmMainLib_8015ED74(void)
@@ -1099,7 +1120,7 @@ void InitializePersistentNameData(s32 arg0)
 
     PAD_STACK(16);
 
-    bank = gmMainLib_804D3EE0->thing.x2FF8;
+    bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
     data = &bank[(u8) arg0 / 19].inner[(u8) arg0 % 19];
     for (i = 0; i < 120; i++) {
         data->vs_kos[i] = 0;
@@ -1125,7 +1146,7 @@ static inline void ResetAllPersistentFighterData(void)
         int j = 0;
         u8 k = i;
         struct FighterData* base =
-            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->vs.thing);
         for (; 0x19 > j; j++) {
             base[k].fighter_kos[j] = 0;
         }
@@ -1137,7 +1158,7 @@ static inline void ResetPersistentFighterData(s32 i)
 {
     int j = 0;
     struct FighterData* base =
-        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->vs.thing);
     for (; 0x19 > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
@@ -1164,7 +1185,7 @@ void gmMainLib_8015F260(void)
         struct NameTagDataBank* bank;
 
         int j;
-        bank = gmMainLib_804D3EE0->thing.x2FF8;
+        bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
         data = &bank[(u8) i / 19].inner[(u8) i % 19];
 
         for (j = 0; j < 120; j++) {
@@ -1261,7 +1282,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
 
-        memzero(&gmMainLib_804D3EE0->thing.trophy_count, 0x25C);
+        memzero(&gmMainLib_804D3EE0->vs.thing.trophy_count, 0x25C);
         Toy_80311960();
 
         if (arg1 == 0) {
@@ -1270,7 +1291,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                                1);
         }
 
-        gmMainLib_804D3EE0->thing.x1CB0 =
+        gmMainLib_804D3EE0->vs.thing.x1CB0 =
             *(struct gmm_x1CB0*) gmMainLib_803D4A60;
 
         {
@@ -1285,7 +1306,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             lbLang_SetSavedLanguage(lang);
         }
 
-        memzero(&gmMainLib_804D3EE0->thing, 0x448);
+        memzero(&gmMainLib_804D3EE0->vs.thing, 0x448);
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
@@ -1304,7 +1325,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
 
             InitializePersistentNameData(idx);
 
-            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
             {
                 struct NameTagData* tmp =
                     &bank[(u8) idx / 19].inner[(u8) idx % 19];
@@ -1350,7 +1371,7 @@ void gmMainLib_8015FA34(s32 arg0)
         }
     }
     if (DbLevel > DbLKind_DebugDevelop && db_804D6B20 != 0) {
-        gmMainLib_804D3EE0->thing.x186C = 0xFF;
+        gmMainLib_804D3EE0->vs.thing.x186C = 0xFF;
         gm_80164F18();
         gm_8016468C();
         gm_8017297C();
@@ -1364,7 +1385,7 @@ void gmMainLib_8015FA34(s32 arg0)
 #endif
 void gmMainLib_8015FB68(void)
 {
-    gmMainLib_804D3EE0->thing.x186C = 0;
+    gmMainLib_804D3EE0->vs.thing.x186C = 0;
     gm_8016505C();
     gm_801647D0();
     gm_801729EC();
@@ -1389,7 +1410,7 @@ void gmMainLib_8015FBA4(void)
         lbLang_SetSavedLanguage(0);
     }
 
-    gmMainLib_8045A6C0[0].x1850 = gmMainLib_803D4A48;
+    gmMainLib_8045A6C0[0].vs.x1850 = gmMainLib_803D4A48;
     for (i = 1; i < 9; i++) {
         gmMainLib_8015F600(i, 1);
     }

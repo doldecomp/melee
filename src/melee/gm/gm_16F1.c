@@ -1955,11 +1955,12 @@ u8 fn_80173098(int arg0)
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
-        if (temp_r3->ckind == CKIND_MARS && !gm_IsCKindUnlocked(CKIND_EMBLEM))
+        if (temp_r3->x0.ckind == CKIND_MARS &&
+            !gm_IsCKindUnlocked(CKIND_EMBLEM))
         {
             return CKIND_EMBLEM;
         }
-        if (temp_r3->ckind == CKIND_MARIO &&
+        if (temp_r3->x0.ckind == CKIND_MARIO &&
             !gm_IsCKindUnlocked(CKIND_DRMARIO))
         {
             return CKIND_DRMARIO;

@@ -1301,7 +1301,7 @@ void gm_801B42E8(GameModeState* scene)
     CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level,
+                temp_r31->nametag, temp_r31->cpu_level,
                 gm_GetAdventureData()->x0.slot);
 }
 
@@ -1316,12 +1316,12 @@ void gm_801B4350(GameModeState* scene)
         return;
     }
     gm_801B0730(css, &temp_r29->c_kind, &temp_r29->stocks, &temp_r29->color,
-                &temp_r29->x4, &temp_r29->cpu_level);
+                &temp_r29->nametag, &temp_r29->cpu_level);
     temp_r31->x0.ckind = temp_r29->c_kind;
     temp_r31->x0.color = temp_r29->color;
     temp_r31->x0.cpu_level = temp_r29->cpu_level;
     temp_r31->x0.stocks = temp_r29->stocks;
-    temp_r31->x0.x4 = temp_r29->x4;
+    temp_r31->x0.x4 = temp_r29->nametag;
     gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
@@ -1668,7 +1668,7 @@ void gm_Mode_Adventure_OnInit(void)
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
-    temp_r3->x4 = 0x78;
+    temp_r3->nametag = GM_NAMETAG_NONE;
     temp_r3->x5 = 0;
 }
 

@@ -326,80 +326,83 @@ struct gmm_x0 {
     /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
     /* 0x006C */ u32 unk_6C[4];
     /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
-    struct gmm_x0_528_t {
-        /* 0x0528 */ s8 c_kind;
-        /* 0x0529 */ u8 stocks;
-        /* 0x052A */ u8 color;
-        /* 0x052B */ u8 cpu_level;
-        /* 0x052C */ u8 x4; ///< nametag ID
-        /* 0x052D */ u8 x5;
-    } unk_51C, unk_522, unk_528;
-    struct EventData {
-        /* 0x0530 */ u8 x0;
-        /* 0x0531 */ u8 x1;
-        /* 0x0532 */ s8 ckind;
-        /* 0x0533 */ u8 color;
-        /* 0x0534 */ u8 nametag;
-        /* 0x0535 */ u8 unk_535;
-        /* 0x0536 */ u8 slot;
-        /* 0x0537 */ u8 x7;
-        /* 0x0538 */ s8 x8;
-        /* 0x0539 */ s8 x9;
-        /* 0x053A */ s8 xA;
-        /* 0x053B */ u8 xB_0 : 1;
-        /* 0x053B */ u8 xB_1 : 1;
-        /* 0x053B */ u8 xB_2 : 1;
-        /* 0x053B */ u8 xB_3 : 1;
-        /* 0x053B */ u8 xB_4 : 1;
-        /* 0x053B */ u8 xB_5 : 1;
-        /* 0x053B */ u8 xB_6 : 1;
-        /* 0x053B */ u8 xB_7 : 1;
-        /* 0x053C */ int xC;
-        /* 0x0540 */ int x10;
-        /* 0x0544 */ int x14;
-        /* 0x0548 */ int x18;
-        /* 0x054C */ float x1C;
-        /* 0x0550 */ int x20;
-        /* 0x0554 */ int x24;
-        /* 0x0558 */ int x28;
-        /* 0x055C */ int x2C; // timer seconds
-        /* 0x0560 */ int x30;
-        /* 0x0564 */ int x34;
-        /* 0x0568 */ u8 x38;
-        /* 0x056C */ int x3C;
-        /* 0x0570 */ int x40;
-        /* 0x0574 */ s8 x44;
-        /* 0x0575 */ u8 x45;
-        /* 0x0578 */ StKind x48;
-        /* 0x057C */ s8 x4C[4]; ///< CharacterKind
-        /* 0x0580 */ u8 x50[4]; ///< character color
-        struct gmm_x0_584_t {
-            /* 0x0584 */ s8 unk_584;
-            /* 0x0585 */ u8 unk_585;
-            /* 0x0586 */ u8 unk_586;
-            /* 0x0587 */ s8 unk_587;
-        } unk_584;
-        /* 0x0588 */ s8 unk_588[4];   /* inferred */
-        /* 0x0590 */ char pad_58B[4]; /* inferred */
-    } unk_530;
-    /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
-    /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
-    /* 0x0950 */ VsModeData vs_camera;
-    /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
-    /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
-    /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
-    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
-    /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
-    /* 0x1850 */ GameRules x1850;
-    /* 0x1898 */ struct gmm_x1868 thing;
-    /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
+    struct gmm_x0_vsdata {           ///< @todo size unknown
+        struct gmm_x0_528_t {
+            /* 0x0528 */ s8 c_kind;
+            /* 0x0529 */ u8 stocks;
+            /* 0x052A */ u8 color;
+            /* 0x052B */ u8 cpu_level;
+            /* 0x052C */ u8 nametag;
+            /* 0x052D */ u8 x5;
+        } unk_51C, unk_522, unk_528;
+        struct EventData {
+            /* 0x0530 */ u8 x0;
+            /* 0x0531 */ u8 x1;
+            /* 0x0532 */ s8 ckind;
+            /* 0x0533 */ u8 color;
+            /* 0x0534 */ u8 nametag;
+            /* 0x0535 */ u8 unk_535;
+            /* 0x0536 */ u8 slot;
+            /* 0x0537 */ u8 x7;
+            /* 0x0538 */ s8 x8;
+            /* 0x0539 */ s8 x9;
+            /* 0x053A */ s8 xA;
+            /* 0x053B */ u8 xB_0 : 1;
+            /* 0x053B */ u8 xB_1 : 1;
+            /* 0x053B */ u8 xB_2 : 1;
+            /* 0x053B */ u8 xB_3 : 1;
+            /* 0x053B */ u8 xB_4 : 1;
+            /* 0x053B */ u8 xB_5 : 1;
+            /* 0x053B */ u8 xB_6 : 1;
+            /* 0x053B */ u8 xB_7 : 1;
+            /* 0x053C */ int xC;
+            /* 0x0540 */ int x10;
+            /* 0x0544 */ int x14;
+            /* 0x0548 */ int x18;
+            /* 0x054C */ float x1C;
+            /* 0x0550 */ int x20;
+            /* 0x0554 */ int x24;
+            /* 0x0558 */ int x28;
+            /* 0x055C */ int x2C; // timer seconds
+            /* 0x0560 */ int x30;
+            /* 0x0564 */ int x34;
+            /* 0x0568 */ u8 x38;
+            /* 0x056C */ int x3C;
+            /* 0x0570 */ int x40;
+            /* 0x0574 */ s8 x44;
+            /* 0x0575 */ u8 x45;
+            /* 0x0578 */ StKind x48;
+            /* 0x057C */ s8 x4C[4]; ///< CharacterKind
+            /* 0x0580 */ u8 x50[4]; ///< character color
+            struct gmm_x0_584_t {
+                /* 0x0584 */ s8 unk_584;
+                /* 0x0585 */ u8 unk_585;
+                /* 0x0586 */ u8 unk_586;
+                /* 0x0587 */ s8 unk_587;
+            } unk_584;
+            /* 0x0588 */ s8 unk_588[4];   /* inferred */
+            /* 0x0590 */ char pad_58B[4]; /* inferred */
+        } unk_530;
+        /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
+        /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
+        /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
+        /* 0x0950 */ VsModeData vs_camera;
+        /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
+        /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
+        /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
+        /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
+        /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
+        /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
+        /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
+        /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
+        /* 0x1490 */ VsModeData
+            unk_1490; ///< multiman, 3/15 min, endless, cruel
+        /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+        /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
+        /* 0x1850 */ GameRules x1850;
+        /* 0x1898 */ struct gmm_x1868 thing;
+        /* 0x6E50 */ u8 pad_6E50[0x8510 - 0x6E50];
+    } vs;
 };
 ASSERT_SIZE(struct gmm_x0, 0x8518);
 
@@ -718,15 +721,21 @@ struct ResultsMatchInfo {
     MatchEnd match_end;
 };
 
-struct Unk1PData {
+/// @todo This appears within other structs too, need to consolidate.
+/// Also not yet clear how many fields this has.
+typedef struct gmPlayerData {
     /* 00 */ s8 ckind;
     /* 01 */ u8 color;
     /* 02 */ u8 cpu_level;
     /* 03 */ u8 slot;
-    /* 04 */ u8 x4; ///< EntryName Slot
+    /* 04 */ u8 nametag;
     /* 05 */ u8 stocks;
     /* 06 */ u8 x6;
-    /* 07 */ u8 x7;
+    /* 07 */ u8 mode;
+} gmPlayerData;
+
+struct Unk1PData {
+    struct gmPlayerData x0;
     /* 08 */ u8 x8;
     /* 09 */ u8 x9;
     /* 0A */ u8 xA;

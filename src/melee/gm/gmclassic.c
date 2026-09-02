@@ -754,7 +754,7 @@ void gm_Mode_Classic_OnInit(void)
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
-    temp_r3->x4 = 0x78;
+    temp_r3->nametag = 0x78;
     temp_r3->x5 = 0;
 }
 
@@ -1062,7 +1062,7 @@ void gmClassic_801B3DD8(GameModeState* scene)
     CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level,
+                temp_r31->nametag, temp_r31->cpu_level,
                 gm_GetAllStarData()->x0.slot);
     lbDvd_SetupVsPreloadCache();
 }
@@ -1080,12 +1080,12 @@ void gmClassic_801B3E44(GameModeState* scene)
         return;
     }
     gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks,
-                &temp_r29->color, &temp_r29->x4, &temp_r29->cpu_level);
+                &temp_r29->color, &temp_r29->nametag, &temp_r29->cpu_level);
     temp_r31->x0.ckind = temp_r29->c_kind;
     temp_r31->x0.color = temp_r29->color;
     temp_r31->x0.cpu_level = temp_r29->cpu_level;
     temp_r31->x0.stocks = temp_r29->stocks;
-    temp_r31->x0.x4 = temp_r29->x4;
+    temp_r31->x0.x4 = temp_r29->nametag;
     gmClassic_801B2D54(r4);
     gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();

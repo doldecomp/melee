@@ -32,7 +32,7 @@
 
 VsModeData* gmVsMelee_GetVsData(void)
 {
-    return &gmMainLib_804D3EE0->vs_melee;
+    return &gmMainLib_804D3EE0->vs.vs_melee;
 }
 
 u8* gmVsMelee_GetKOCounts(void)
@@ -102,7 +102,7 @@ u8 findSmallestLoser(MatchEnd* end)
 
 void gmVsMelee_Mode_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->vs_melee);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs.vs_melee);
     gmMainLib_8015CDEC();
 }
 
