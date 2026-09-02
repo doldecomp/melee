@@ -3,14 +3,10 @@
 #include <string.h>
 #include <dolphin/pad.h>
 #include <dolphin/vi.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_393C.h>
+#include <sysdolphin/baselib/hsd_397E.h>
 #include <sysdolphin/baselib/video.h>
-#include <sysdolphin/baselib/wobj.h>
 
 #ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>
@@ -64,8 +60,8 @@ struct ParticleScreenState {
     /* 0xD4 */ OSContext* xD4;
 };
 
-/* 4D78C8 */ int hsd_804D78C8;
 /* 4D78CC */ u32 hsd_804D78CC;
+/* 4D78C8 */ int hsd_804D78C8;
 
 /* 4CF810 */ static struct ParticleScreenState hsd_804CF810;
 
@@ -1035,235 +1031,99 @@ static void hsd_80394E8C(struct lbl_8040B904_t* node_ptr)
     hsd_804CF810.x0_b5 = 1;
 }
 
-// @TODO: Currently 94.46% match - BSS relocation and register allocation
-// differences remain
-static inline const char* hsd_80394F48_get_first_entry(EventData* data)
+/// Draws one font cell at the console cursor.
+static inline void hsd_80394F48_putc(u8 ch, void* const* color)
 {
-    return data->entries[0];
+    s32 b6 = hsd_804CF810.x0_b6;
+
+    if (hsd_804CF810.x0_b7 != 0) {
+        hsd_803922FC((void*) (hsd_804CF810.x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, b6,
+                     (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
+                     hsd_804CF810.x40, hsd_804CF810.x44, *color);
+    } else {
+        hsd_803921B8((void*) (hsd_804CF810.x4C + ch * 0x38), hsd_804CF810.x4,
+                     hsd_804CF810.x8, (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                     hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                     *color);
+    }
 }
 
-static inline size_t hsd_80394F48_entry_length(s32 index, EventData* data)
+/// Draws a `+---+` rule `width` cells wide.
+static inline void hsd_80394F48_rule(s32 width, void* const* color, s32* i)
 {
-    return strlen(data->entries[index]);
+    hsd_80394F48_putc('+', color);
+    hsd_804CF810.x4 += 11;
+
+    for (*i = 0; *i < width; (*i)++) {
+        hsd_80394F48_putc('-', color);
+        hsd_804CF810.x4 += 11;
+    }
+
+    hsd_80394F48_putc('+', color);
+    hsd_804CF810.x4 += 11;
 }
 
-static inline void hsd_80394F48_set_base_color(void** color)
-{
-    *color = &lbl_8040AB00;
-}
-
-static inline s32 hsd_80394F48_get_x4(const s32* x4)
-{
-    return *x4;
-}
-
-static inline s32 hsd_80394F48_get_x40(const s32* px40)
-{
-    return *px40;
-}
-
-static inline s32 hsd_80394F48_get_x8(const s32* px8)
-{
-    return *px8;
-}
-
-static inline struct lbl_8040AB00_t*
-hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
-{
-    return base_color + 1;
-}
-
-static inline void hsd_80394F48_set_col_start(const s32* pxC8, s32* col_start)
-{
-    *col_start = *pxC8;
-}
-
-static inline s32 hsd_80394F48_get_x_base(s32 col_start)
-{
-    return col_start * 11 + 0x14;
-}
-
-static inline void** hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->x50;
-}
-
-static inline s32* hsd_80394F48_get_x8_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->x8;
-}
-
-static inline s32* hsd_80394F48_get_xCC_ptr(struct ParticleScreenState* sp)
-{
-    return &sp->xCC;
-}
-
-static inline void hsd_80394F48_init(void* data, s32* num_entries,
-                                     void*** px50, s32** pxC8, s32** pxCC)
-{
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    EventData* dp = data;
-    PAD_STACK(64);
-
-    *num_entries = strlen(hsd_80394F48_get_first_entry(dp));
-    *px50 = hsd_80394F48_get_x50_ptr(sp);
-    *pxC8 = &sp->xC8;
-    *pxCC = hsd_80394F48_get_xCC_ptr(sp);
-}
-
+/// Draws a box around the event list.
 void hsd_80394F48(void* data)
 {
-    struct lbl_8040AB00_t* base_color = &lbl_8040AB00;
-    struct ParticleScreenState* sp = &hsd_804CF810;
+    s32 width;
+    s32 k;
+    void** color;
     EventData* dp = data;
-    s32 num_entries;
-    void** px50;
-    s32 cur_row;
-    s32* pxCC;
-    s32* px4;
-    s32* px40;
-    s32* px8;
-    s32 col_start;
-    struct lbl_8040AB00_t* hi_color;
-    s32 x_base;
-    s32* pxC8;
-    s32 entry_idx;
     s32 i;
-    s32 b6;
+    s32 cur_row;
+    s32 col_start;
+    s32 j;
+    PAD_STACK(64);
 
-    hsd_80394F48_init(data, &num_entries, &px50, &pxC8, &pxCC);
+    width = strlen(dp->entries[0]);
+    color = &hsd_804CF810.x50;
+    *color = &lbl_8040AB00;
+    col_start = hsd_804CF810.xC8;
+    cur_row = hsd_804CF810.xCC;
+    hsd_804CF810.x4 = col_start * 11 + 20;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    px4 = &sp->x4;
-    px40 = &sp->x40;
-    px8 = hsd_80394F48_get_x8_ptr(sp);
-    hsd_80394F48_set_base_color(px50);
-    hsd_80394F48_set_col_start(pxC8, &col_start);
-    {
-        cur_row = *pxCC;
-        *px4 = col_start * 11 + 0x14;
-        *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
-    }
+    /* Without this the colour slot never reaches a register. */
+    (void) color;
+    hsd_80394F48_rule(width, color, &j);
 
-    b6 = sp->x0_b6;
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    } else {
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    }
+    cur_row--;
 
-    i = 0;
-    *px4 += 11;
-    while (i < num_entries) {
-        b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    for (i = 0; dp->entries[i] != NULL; i++) {
+        hsd_804CF810.x4 = col_start * 11 + 20;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row-- + 1) * 14;
+
+        hsd_80394F48_putc('|', color);
+
+        if (i == dp->index) {
+            *color = &lbl_8040AB20;
         } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        }
-        i++;
-        *px4 += 11;
-    }
-
-    b6 = sp->x0_b6;
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    } else {
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    }
-
-    *px4 += 11;
-    x_base = hsd_80394F48_get_x_base(col_start);
-    hi_color = hsd_80394F48_get_highlight_color(base_color);
-    cur_row -= 1;
-
-    for (entry_idx = 0; dp->entries[entry_idx] != 0; entry_idx++) {
-        *px4 = x_base;
-        *px8 = (*px40 - 0x28) - (cur_row-- + 1) * 14;
-
-        b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+            *color = &lbl_8040AB00;
         }
 
-        if (entry_idx == dp->index) {
-            *px50 = hi_color;
-        } else {
-            hsd_80394F48_set_base_color(px50);
+        hsd_804CF810.x4 += 11;
+        hsd_80394434(dp->entries[i]);
+
+        {
+            s32 len = strlen(dp->entries[i]);
+
+            hsd_804CF810.x4 += len * 11;
         }
+        *color = &lbl_8040AB00;
 
-        *px4 += 11;
-        hsd_80394434(dp->entries[entry_idx]);
-
-        *px4 += hsd_80394F48_entry_length(entry_idx, dp) * 11;
-        hsd_80394F48_set_base_color(px50);
-
-        b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        }
+        hsd_80394F48_putc('|', color);
     }
 
-    hsd_80394F48_set_base_color(px50);
-    *px4 = x_base;
-    *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
+    *color = &lbl_8040AB00;
+    hsd_804CF810.x4 = col_start * 11 + 20;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    b6 = sp->x0_b6;
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    } else {
-        s32 x = hsd_80394F48_get_x4(px4);
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, x,
-                     hsd_80394F48_get_x8(px8), (&sp->x24)[sp->x34], sp->x3C,
-                     *px40, sp->x44, *px50);
-    }
+    hsd_80394F48_rule(width, color, &k);
 
-    {
-        x_base = 0;
-        *px4 += 11;
-        while (x_base < num_entries) {
-            b6 = sp->x0_b6;
-            if (sp->x0_b7 != 0) {
-                hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
-                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            } else {
-                hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
-                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            }
-            x_base++;
-            *px4 += 11;
-        }
-    }
-
-    b6 = hsd_804CF810.x0_b6;
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    } else {
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, hsd_80394F48_get_x40(px40),
-                     sp->x44, *px50);
-    }
-
-    *px4 += 11;
-    *pxC8 += 4;
-    *pxCC -= dp->index + 1;
+    hsd_804CF810.xC8 += 4;
+    hsd_804CF810.xCC -= dp->index + 1;
 }
 
 s32 hsd_80395550(void* event_ptr)
@@ -3008,271 +2868,4 @@ void Exception_StoreDebugLevel(int level)
 void hsd_80397DFC(u32 size)
 {
     hsd_804D78CC = (size + 0xF) >> 4;
-}
-
-int baselib_mfspr(int spr)
-{
-    register int result;
-    switch (spr) {
-#ifdef MWERKS_GEKKO
-    case 0x1:
-        asm { mfxer result }
-        break;
-    case 0x8:
-        asm { mflr result }
-        break;
-    case 0x9:
-        asm { mfctr result }
-        break;
-    case 0x12:
-        asm { mfdsisr result }
-        break;
-    case 0x13:
-        asm { mfdar result }
-        break;
-    case 0x16:
-        asm { mfdec result }
-        break;
-    case 0x19:
-        asm { mfsdr1 result }
-        break;
-    case 0x1A:
-        asm { mfsrr0 result }
-        break;
-    case 0x1B:
-        asm { mfsrr1 result }
-        break;
-    case 0x110:
-        asm { mfsprg result, 0 }
-        break;
-    case 0x111:
-        asm { mfsprg result, 1 }
-        break;
-    case 0x112:
-        asm { mfsprg result, 2 }
-        break;
-    case 0x113:
-        asm { mfsprg result, 3 }
-        break;
-    case 0x118:
-        asm { mfspr result, 0x118 } ///< unknown spr?
-        break;
-    case 0x11A:
-        asm { mfear result }
-        break;
-    case 0x11F:
-        asm { mfspr result, pvr }
-        break;
-    case 0x210:
-        asm { mfibatu result, 0 }
-        break;
-    case 0x211:
-        asm { mfibatl result, 0 }
-        break;
-    case 0x212:
-        asm { mfibatu result, 1 }
-        break;
-    case 0x213:
-        asm { mfibatl result, 1 }
-        break;
-    case 0x214:
-        asm { mfibatu result, 2 }
-        break;
-    case 0x215:
-        asm { mfibatl result, 2 }
-        break;
-    case 0x216:
-        asm { mfibatu result, 3 }
-        break;
-    case 0x217:
-        asm { mfibatl result, 3 }
-        break;
-    case 0x218:
-        asm { mfdbatu result, 0 }
-        break;
-    case 0x219:
-        asm { mfdbatl result, 0 }
-        break;
-    case 0x21A:
-        asm { mfdbatu result, 1 }
-        break;
-    case 0x21B:
-        asm { mfdbatl result, 1 }
-        break;
-    case 0x21C:
-        asm { mfdbatu result, 2 }
-        break;
-    case 0x21D:
-        asm { mfdbatl result, 2 }
-        break;
-    case 0x21E:
-        asm { mfdbatu result, 3 }
-        break;
-    case 0x21F:
-        asm { mfdbatl result, 3 }
-        break;
-    case 0x390:
-        asm { mfspr result, gqr0 }
-        break;
-    case 0x391:
-        asm { mfspr result, gqr1 }
-        break;
-    case 0x392:
-        asm { mfspr result, gqr2 }
-        break;
-    case 0x393:
-        asm { mfspr result, gqr3 }
-        break;
-    case 0x394:
-        asm { mfspr result, gqr4 }
-        break;
-    case 0x395:
-        asm { mfspr result, gqr5 }
-        break;
-    case 0x396:
-        asm { mfspr result, gqr6 }
-        break;
-    case 0x397:
-        asm { mfspr result, gqr7 }
-        break;
-    case 0x398:
-        asm { mfspr result, SPR_HID2
-        } ///< hid2 gives incorrect codegen? compiler bug?
-        break;
-    case 0x399:
-        asm { mfspr result, wpar }
-        break;
-    case 0x39A:
-        asm { mfspr result, dma_u }
-        break;
-    case 0x39B:
-        asm { mfspr result, dma_l }
-        break;
-    case 0x3A8:
-        asm { mfspr result, ummcr0 }
-        break;
-    case 0x3A9:
-        asm { mfspr result, upmc1 }
-        break;
-    case 0x3AA:
-        asm { mfspr result, upmc2 }
-        break;
-    case 0x3AB:
-        asm { mfspr result, usia }
-        break;
-    case 0x3AC:
-        asm { mfspr result, ummcr1 }
-        break;
-    case 0x3AD:
-        asm { mfspr result, upmc3 }
-        break;
-    case 0x3AE:
-        asm { mfspr result, upmc4 }
-        break;
-    case 0x3AF:
-        asm { mfspr result, SPR_USDA } ///< usda not recognized by compiler?
-        break;
-    case 0x3B8:
-        asm { mfspr result, mmcr0 }
-        break;
-    case 0x3B9:
-        asm { mfspr result, pmc1 }
-        break;
-    case 0x3BA:
-        asm { mfspr result, pmc2 }
-        break;
-    case 0x3BB:
-        asm { mfspr result, sia }
-        break;
-    case 0x3BC:
-        asm { mfspr result, mmcr1 }
-        break;
-    case 0x3BD:
-        asm { mfspr result, pmc3 }
-        break;
-    case 0x3BE:
-        asm { mfspr result, pmc4 }
-        break;
-    case 0x3BF:
-        asm { mfspr result, sda }
-        break;
-    case 0x3F0:
-        asm { mfspr result, hid0 }
-        break;
-    case 0x3F1:
-        asm { mfspr result, hid1 }
-        break;
-    case 0x3F2:
-        asm { mfspr result, iabr }
-        break;
-    case 0x3F5:
-        asm { mfspr result, dabr }
-        break;
-    case 0x3F9:
-        asm { mfspr result, l2cr }
-        break;
-    case 0x3FB:
-        asm { mfspr result, ictc }
-        break;
-    case 0x3FC:
-        asm { mfspr result, thrm1 }
-        break;
-    case 0x3FD:
-        asm { mfspr result, thrm2 }
-        break;
-    case 0x3FE:
-        asm { mfspr result, thrm3 }
-        break;
-#endif
-    default:
-        OSReport("unsupported no. of special purpose register (%d).", spr);
-        return 0;
-    }
-    return result;
-}
-
-void fn_803982E4(HSD_GObj* gobj, int unused)
-{
-    HSD_CObjSetCurrent(gobj->hsd_obj);
-    fn_80392934();
-    hsd_8039254C();
-}
-
-HSD_WObjDesc lbl_8040BF48 = { NULL, { 0.0f, 0.0f, 1.0f }, NULL };
-HSD_WObjDesc lbl_8040BF5C = { NULL, { 0.0f, 0.0f, 0.0f }, NULL };
-
-/// @todo Ortho camera; typed as the frustum arm of the HSD_CObjDesc union.
-static HSD_CameraDescFrustum lbl_8040BF70 = {
-    NULL,
-    0,
-    3,
-    { 0, 640, 0, 480 },
-    { 0, 640, 0, 480 },
-    &lbl_8040BF48,
-    &lbl_8040BF5C,
-    0.0f,
-    NULL,
-    0.0f,
-    32768.0f,
-    -445.0f,
-    35.0f,
-    -20.0f,
-    620.0f,
-};
-
-HSD_GObj* hsd_80398310(u16 class_id, u8 p_link, u8 obj_kind, u32 gx_link)
-{
-    HSD_GObj* gobj;
-    HSD_CObj* cobj;
-
-    gobj = GObj_Create(class_id, p_link, obj_kind);
-    if (gobj == NULL) {
-        return NULL;
-    }
-    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_8040BF70);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(gobj, fn_803982E4, gx_link);
-    hsd_80392528((Event) fn_80392A3C);
-    fn_80392A08(4, 1, 0);
-    return gobj;
 }
