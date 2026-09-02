@@ -757,7 +757,7 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
                                             VsModeData* store_vmd, u8 tag)
 {
     u8* ptr;
-    s32 i;
+    ssize_t i;
 
     for (i = 0; i < 6; i++) {
         ptr = &store_vmd->start.players[i].nametag;
@@ -834,11 +834,11 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 #endif
 
     gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, &gmHomeRun_VsModeData,
-                             (u8) arg0);
+                             arg0);
 
-#if 0
     gmMainLib_AdjustNameTags(&base->unk_1490,
                              M2C_FIELD(base, VsModeData**, 0xF08), (u8) arg0);
+#if 0
     gmMainLib_AdjustNameTags(&base->unk_D10,
                              M2C_FIELD(base, VsModeData**, 0x788), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_590,
