@@ -3157,7 +3157,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     return fn_801661E0(arg0);
 }
 
-u8 fn_80166CBC(MatchEnd* arg0, ssize_t index)
+u32 fn_80166CBC(MatchEnd* arg0, ssize_t index)
 {
     return arg0->player_standings[index].is_small_loser;
 }

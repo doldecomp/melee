@@ -5,7 +5,6 @@
 
 #include <baselib/forward.h>
 
-/* 021CE8 */ void lbRefract_80021CE8(void*, s32);
 /* 0222A4 */ void lbRefract_800222A4(void);
 /* 02247C */ void lbRefract_8002247C(HSD_CObj*);
 /* 022560 */ void lbRefract_80022560(void);

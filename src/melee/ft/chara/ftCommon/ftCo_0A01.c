@@ -1056,6 +1056,18 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
+static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
+                                            float arg1, float arg2, float arg3)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (*x60 == 0) {
+        data->x54.x = arg1;
+        data->x54.y = arg2;
+        data->x38 = arg3;
+        ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
+    }
+}
+
 bool ftCo_800A1F98(int x, float y)
 {
     float slope;
@@ -3657,7 +3669,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     Vec3 floor_normal;
     int line_id;
     u32 flags;
-    u8 _[0x14];
+    u8 _[0x18];
     Vec3 sp18;
     f32 fx;
     f32 fy;
@@ -3668,22 +3680,38 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     }
     if (fp1->ground_or_air == GA_Air) {
         s32 result;
-        mp_UnkStruct0* island;
+        s32 blocked;
         fx = fp1->cur_pos.x;
         {
             f32 fx2 = fx;
             f32 below;
             f32 above;
             fy = fp1->cur_pos.y;
+            blocked = 0;
+            line_id = -1;
             below = fy - 1000.0f;
             above = 10.0f + fy;
-            result =
-                ftCo_800A75DC_CheckFloor(fx2, above, fx, below, &floor_pos,
-                                         &line_id, &flags, &floor_normal);
+            result = mpCheckFloor(fx2, above, fx, below, 0.0f, &floor_pos,
+                                  &line_id, &flags, &floor_normal, -1, -1, -1,
+                                  NULL, (Fighter_GObj*) blocked);
         }
         if (result != 0) {
+            int line = line_id;
+            if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
+                grCorneria_801E2D90(line) || grVenom_80206D10(line))
+            {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result != 0) {
+            int* x60;
+            mp_UnkStruct0* island;
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
+                x60 = &fp0->x1A88.x60;
                 ftCo_800A1F3C(fp0, floor_pos.x, floor_pos.y,
                               data->x56C + fp1->x1A88.x564);
                 if (island != NULL) {
@@ -3692,8 +3720,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         d = -d;
                     }
                     if (d < 5.0) {
-                        ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
-                                      data->x56C + fp1->x1A88.x564);
+                        ftCo_800A75DC_set_target(fp0, x60, island->x14.x - 5.0,
+                                                 island->x14.y,
+                                                 data->x56C + fp1->x1A88.x564);
                     } else {
                         d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
@@ -3711,10 +3740,12 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)
     {
+        int* x60;
         mp_UnkStruct0* island;
         mp_UnkStruct0* fp0_island;
         s32 same_island;
 
+        x60 = &fp0->x1A88.x60;
         ftCo_800A1F3C(fp0, fp1->cur_pos.x, fp1->cur_pos.y,
                       data->x56C + fp1->x1A88.x564);
         if (fp0->ground_or_air == GA_Air) {
@@ -3739,8 +3770,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         {
             if (data->x54.x - fp0->cur_pos.x > 0.0) {
                 if (fp0->cur_pos.x < island->x8.x) {
-                    ftCo_800A1F3C(fp0, 5.0 + island->x8.x, island->x8.y,
-                                  data->x56C + fp1->x1A88.x564);
+                    ftCo_800A75DC_set_target(fp0, x60, 5.0 + island->x8.x,
+                                             island->x8.y,
+                                             data->x56C + fp1->x1A88.x564);
                 }
             } else {
                 if (fp0->cur_pos.x > island->x14.x) {
