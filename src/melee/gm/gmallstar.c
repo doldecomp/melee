@@ -416,10 +416,11 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gm_801B5324_inline(chars, opp_data, arg1);
 
     for (i = 0; i < 3; i++) {
-        colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
+        colors[i] = arg0->x54(arg1, arg0->x0.x0.cpu_level, (u8) i);
     }
 
-    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars, colors);
+    gmRegSetupEnemyColorTable(arg0->x0.x0.ckind, arg0->x0.x0.color, chars,
+                              colors);
 
     chars_ptr = chars;
     if (arg1 == 0xC) {
@@ -435,8 +436,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     slot_idx = 0;
-    gc->entries[slot_idx].char_id = (s32) arg0->x0.ckind;
-    gc->entries[slot_idx].color = arg0->x0.color;
+    gc->entries[slot_idx].char_id = (s32) arg0->x0.x0.ckind;
+    gc->entries[slot_idx].color = arg0->x0.x0.color;
     slot_idx++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
@@ -457,7 +458,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc->stkind = opp_data->x2;
     lbDvd_80018254();
 
-    audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
+    audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.x0.ckind);
     {
         s32 j;
         for (j = 0; j < 3; j++) {
@@ -536,7 +537,7 @@ void gm_801B5624(GameModeState* arg0)
     }
 
     if (arg0->id == 0x60) {
-        u8* cpu_level = &allstar->x0.cpu_level;
+        u8* cpu_level = &allstar->x0.x0.cpu_level;
         f32 f31;
         f32 f30;
         u8 opp_count;
@@ -556,7 +557,7 @@ void gm_801B5624(GameModeState* arg0)
 
     data->players[0].x10 = allstar->x74;
     gm_LoadRumbleEnabled(data);
-    allstar->x0.x7 = arg0->id;
+    allstar->x0.x0.mode = arg0->id;
 }
 
 void gm_801B59AC(GameModeState* arg0)
@@ -713,8 +714,8 @@ void gm_801B5F50(GameModeState* arg0)
     temp_r31 = gm_GetGameModeStateEnterData(arg0);
     temp_r3 = gmMainLib_8015CDE0();
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
-                temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
-                gm_80473A18.x0.slot);
+                temp_r3->color, temp_r3->nametag, temp_r3->cpu_level,
+                gm_80473A18.x0.x0.slot);
     lbDvd_SetupVsPreloadCache();
 }
 
@@ -731,12 +732,12 @@ void gm_801B5FB4(GameModeState* arg0)
         return;
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
-                &temp_r30->color, &temp_r30->x4, &temp_r30->cpu_level);
-    r29->x0.ckind = temp_r30->c_kind;
-    r29->x0.color = temp_r30->color;
-    r29->x0.cpu_level = temp_r30->cpu_level;
-    r29->x0.stocks = temp_r30->stocks;
-    r29->x0.x4 = temp_r30->x4;
+                &temp_r30->color, &temp_r30->nametag, &temp_r30->cpu_level);
+    r29->x0.x0.ckind = temp_r30->c_kind;
+    r29->x0.x0.color = temp_r30->color;
+    r29->x0.x0.cpu_level = temp_r30->cpu_level;
+    r29->x0.x0.stocks = temp_r30->stocks;
+    r29->x0.x0.nametag = temp_r30->nametag;
     gm_SetNextGameModeStateId((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
@@ -769,7 +770,7 @@ void gm_Mode_AllStar_OnLoad(void)
     }
 
     gm_8017DB58(data->x0.xC.x24);
-    data->x0.slot = gm_801677F0();
+    data->x0.x0.slot = gm_801677F0();
     data->x48 = gm_8018A160;
     data->x4C = gm_8018A228;
     data->x50 = gm_8018A290;
@@ -823,6 +824,6 @@ void gm_Mode_AllStar_OnInit(void)
     temp_r3->color = 0;
     temp_r3->stocks = 1;
     temp_r3->cpu_level = 0;
-    temp_r3->x4 = 0x78;
+    temp_r3->nametag = 0x78;
     temp_r3->x5 = 0;
 }

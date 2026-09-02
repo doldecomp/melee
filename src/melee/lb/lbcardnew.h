@@ -69,7 +69,7 @@ struct CardEntry {
                              const char* game_name, const char* filename);
 /* 01C404 */ int lb_8001C404(int chan);
 /* 01C4A8 */ int lb_8001C4A8(void* file_entries, void* icon_data);
-/* 01C550 */ void lb_8001C550(void);
+/* 01C550 */ void lbCardNew_AllocWorkArea(void);
 /* 01C5A4 */ void lb_8001C5A4(void);
 /* 01C5BC */ void lb_8001C5BC(void);
 

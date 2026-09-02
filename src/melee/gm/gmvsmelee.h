@@ -1,7 +1,6 @@
 #ifndef MELEE_GM_VSMELEE_H
 #define MELEE_GM_VSMELEE_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "mn/forward.h"
@@ -26,16 +25,17 @@ gmVsMelee_EnterSuddenDeath(GameModeState* state, struct VsModeData* vs_data,
 /* 1A5F64 */ void gmVsMelee_ExitResults(GameModeState*, struct VsModeData*,
                                         u8);
 /* 1A583C */ void
-gm_801A583C(GameModeState*, struct VsModeData*,
-            void (*callback)(StartMeleeData*, StartMeleeData*),
-            void (*callback2)(PlayerInitData*, PlayerInitData*));
+gmVsMelee_EnterVs(GameModeState*, struct VsModeData*,
+                  void (*callback)(StartMeleeData*, StartMeleeData*),
+                  void (*callback2)(PlayerInitData*, PlayerInitData*));
 /* 1A5598 */ void gmVsMelee_Mode_OnInit(void);
-/* 1A57A8 */ void gmVsMelee_ExitSss(GameModeState*, struct VsModeData*, u8);
+/* 1A57A8 */ void gmVsMelee_ExitSss(GameModeState* state, VsModeData* vs,
+                                    u8 cancel_state_id);
 /* 1A5618 */ void gmVsMelee_EnterCss(GameModeState*, struct VsModeData*,
                                      CSSMatchType);
 /* 1A52D0 */ bool gmVsMelee_WasAnyPlayerHuman(MatchEnd*);
 /* 1A5244 */ struct VsModeData* gmVsMelee_GetVsData(void);
-/* 4D6860 */ extern UNK_T gm_804D6860[];
+/* 4D6860 */ extern struct VsApproachData gmVsMelee_ApproachData;
 /* 47C020 */ extern ResultsMatchInfo gmVsMelee_ResultsEnterData;
 /* 47E2A4 */ extern MatchExitInfo gmVsMelee_SuddenDeathExitInfo;
 /* 1A5258 */ void gmVsMelee_UpdateKOCounts(u8*, MatchEnd*);
@@ -43,7 +43,7 @@ gm_801A583C(GameModeState*, struct VsModeData*,
 /* 1A55EC */ void gmVsMelee_Mode_OnLoad(void);
 /* 1A5614 */ void gm_Mode_Vs_OnUnload(void);
 /* 1A55C4 */ void gmVsMelee_ResetKOCounts(void);
-/* 1A5AF0 */ void gm_801A5AF0(GameModeState*, u8, u8);
+/* 1A5AF0 */ void gmVsMelee_ExitVs(GameModeState*, u8, u8);
 /* 1A5754 */ void gmVsMelee_EnterSss(GameModeState*, struct VsModeData*);
 /* 4807B0 */ extern CSSData gmVsMelee_CssData;
 /* 480530 */ extern StartMeleeData gmVsMelee_StartData;

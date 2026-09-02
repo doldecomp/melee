@@ -1,4 +1,4 @@
-#include "gmmain_lib.static.h"
+#include "gmmain_lib.h"
 
 #include "placeholder.h"
 
@@ -6,7 +6,10 @@
 
 #include "gm/forward.h"
 
+#include "gm/gmhomerun.h"
+
 #include <dolphin/os/OSReset.h>
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
@@ -21,6 +24,9 @@
 #include <melee/ty/toy.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
+/* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
+/* 45A6C0 */ struct gmm_x0 gmMainLib_8045A6C0[2];
+/* 4D3EE0 */ struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
 
 GameRules gmMainLib_803D4A48 = {
     0,
@@ -78,6 +84,14 @@ GXRenderModeObj gmMainLib_803D4A80 = {
     },
     { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
 };
+
+#ifdef MUST_MATCH
+static void order_bss(void)
+{
+    (void) gmMainLib_8045A6C0;
+    (void) gmMainLib_8046B0F0;
+}
+#endif
 
 GameRules* gmMainLib_GetGameRules(void)
 {
@@ -224,17 +238,17 @@ void* gmMainLib_GetSelfDestructTotal(void)
 
 struct gmm_x0_528_t* gmMainLib_8015CDC8(void)
 {
-    return &gmMainLib_804D3EE0->unk_51C;
+    return &gmMainLib_804D3EE0->vs.unk_51C;
 }
 
 struct gmm_x0_528_t* gmMainLib_8015CDD4(void)
 {
-    return &gmMainLib_804D3EE0->unk_522;
+    return &gmMainLib_804D3EE0->vs.unk_522;
 }
 
 struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 {
-    return &gmMainLib_804D3EE0->unk_528;
+    return &gmMainLib_804D3EE0->vs.unk_528;
 }
 
 void gmMainLib_8015CDEC(void)
@@ -251,8 +265,8 @@ void gmMainLib_8015CDEC(void)
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == GM_NAMETAG_NONE) {
-        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
-            return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
+        if (arg0 < PAD_MAX_CONTROLLERS) {
+            return &gmMainLib_804D3EE0->modes.nametags[arg0];
         }
         return 0;
     } else {
@@ -738,15 +752,14 @@ void gmMainLib_8015DB80(void)
     }
 }
 
-static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
-                                            VsModeData* store_vmd, u8 tag)
+static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
 {
     u8* ptr;
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        ptr = &store_vmd->start.players[i].nametag;
-        if (load_vmd->start.players[i].nametag == tag) {
+        ptr = &vmd->start.players[i].nametag;
+        if (vmd->start.players[i].nametag == tag) {
             *ptr = GM_NAMETAG_NONE;
         } else if (*ptr > tag && *ptr != GM_NAMETAG_NONE) {
             *ptr -= 1;
@@ -767,30 +780,9 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
-    extern VsModeData gm_80497618;
     struct gmm_x0_528_t* config;
-    struct gmMainLib_8015DBF4_config {
-        struct gmm_x0_528_t unk_51C;
-        struct gmm_x0_528_t unk_522;
-        struct gmm_x0_528_t unk_528;
-        struct EventData unk_530;
-    }* config_all;
-    struct gmMainLib_8015DBF4_base {
-        u8 pad_0[8];
-        VsModeData unk_590;
-        VsModeData unk_6D0;
-        VsModeData unk_810;
-        VsModeData unk_950;
-        VsModeData unk_A90;
-        VsModeData unk_BD0;
-        VsModeData unk_D10;
-        VsModeData unk_E50;
-        VsModeData unk_F90;
-        VsModeData unk_10D0;
-        VsModeData unk_1210;
-        VsModeData unk_1350;
-        VsModeData unk_1490;
-    }* base;
+    struct gmm_x0_vsdata* vs;
+    struct gmm_x0_vsmodes* base;
     GameRules* gr;
     u8 val;
 
@@ -805,44 +797,29 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     } while (0)
 
     config = gmMainLib_8015CDC8();
-    config_all = (struct gmMainLib_8015DBF4_config*) config;
-    base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
-    ADJ_NAMETAG_78(config_all->unk_530.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
+    vs = (struct gmm_x0_vsdata*) config;
+    base = (struct gmm_x0_vsmodes*) (vs + 1);
+    gmMainLib_AdjustNameTag(&config->nametag, (u8) arg0);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_522.nametag);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_528.nametag);
+    ADJ_NAMETAG_78(vs->unk_530.nametag);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_530.unk_584.unk_586);
 
-    gmMainLib_AdjustNameTags(&gm_80497618, &gm_80497618, (u8) arg0);
-
-    gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_D10,
-                             (VsModeData*) ((s8*) base + 0x788), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_590, (VsModeData*) ((s8*) base + 8),
-                             (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_6D0,
-                             (VsModeData*) ((s8*) base + 0x148), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_810,
-                             (VsModeData*) ((s8*) base + 0x288), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_950,
-                             (VsModeData*) ((s8*) base + 0x3C8), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_A90,
-                             (VsModeData*) ((s8*) base + 0x508), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_BD0,
-                             (VsModeData*) ((s8*) base + 0x648), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_E50,
-                             (VsModeData*) ((s8*) base + 0x8C8), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_F90,
-                             (VsModeData*) ((s8*) base + 0xA08), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_10D0,
-                             (VsModeData*) ((s8*) base + 0xB48), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1210,
-                             (VsModeData*) ((s8*) base + 0xC88), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1350,
-                             (VsModeData*) ((s8*) base + 0xDC8), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1490,
-                             (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
+    gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_D10, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_melee, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_6D0, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_invisible, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_camera, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_fixed_camera, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_BD0, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_E50, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_F90, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_stamina, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1210, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_lightning, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
 
     {
         gr = &gmMainLib_804D3EE0->x1850;
@@ -890,7 +867,7 @@ void gmMainLib_8015EA80(void)
         u8 pad[8];
         VsModeData modes[13];
     }* data =
-        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->unk_530.unk_588;
+        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->modes.nametags;
     struct PlayerInitData* players;
     s32 i;
 

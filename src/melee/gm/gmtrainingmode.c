@@ -19,6 +19,8 @@
 #include "melee/mn/types.h"
 #include "mn/inlines.h"
 
+#include <dolphin/pad.h>
+
 /* 1B1B74 */ static void gm_801B1B74(GameModeState*);
 /* 1B1C24 */ static void gm_801B1C24(GameModeState*);
 /* 1B1EB8 */ static void gm_801B1EB8(GameModeState*);
@@ -83,12 +85,12 @@ void gm_801B1B74(GameModeState* arg0)
     CSSData* css;
     PAD_STACK(8);
 
-    vs_data = &gmMainLib_804D3EE0->unk_D10;
+    vs_data = &gmMainLib_804D3EE0->modes.unk_D10;
     css = gm_GetGameModeStateEnterData(arg0);
     if (gm_804D68C1 != 0) {
-        lb_8001C550();
-        lb_8001D164(0);
-        lb_8001CE00();
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
     }
     gm_801B06B0(css, 0x17U, vs_data->start.players[0].ckind, 1,
                 vs_data->start.players[0].color,
@@ -111,7 +113,7 @@ static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
 
 void gm_801B1C24(GameModeState* arg0)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.unk_D10;
     CSSData* css = gm_GetGameModeStateExitData(arg0);
     s32 i;
     struct GameCache* cache;
@@ -122,7 +124,7 @@ void gm_801B1C24(GameModeState* arg0)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->start.players);
+    gm_SetupAllPlayerDefaults(vs->start.players);
     gm_801B0730(css, &vs->start.players[0].ckind, NULL,
                 &vs->start.players[0].color, &vs->start.players[0].nametag,
                 NULL);
@@ -130,7 +132,7 @@ void gm_801B1C24(GameModeState* arg0)
                       (s8*) &vs->start.players[1].color,
                       (s8*) &vs->start.players[1].nametag, NULL);
     j = (i = 2);
-    vs->start.players[1].xE = 0;
+    vs->start.players[1].cpu_kind = 0;
     for (; i < 4; i++, j++) {
         vs->start.players[i] = vs->start.players[1];
         vs->start.players[i].color = (vs->start.players[i - 1].color + 1) %
@@ -190,7 +192,7 @@ void gm_801B1EEC(GameModeState* arg0)
     SSSData* sss;
     s16 stkind;
 
-    vs_data = &gmMainLib_804D3EE0->unk_D10;
+    vs_data = &gmMainLib_804D3EE0->modes.unk_D10;
     sss = gm_GetGameModeStateExitData(arg0);
     if (sss->start_game == 0) {
         gm_SetNextGameModeStateId(0);
@@ -216,7 +218,7 @@ void gm_801B1F70(GameModeState* arg0)
     StartMeleeData* data;
     int i;
 
-    vs = &gmMainLib_804D3EE0->unk_D10;
+    vs = &gmMainLib_804D3EE0->modes.unk_D10;
     data = gm_GetGameModeStateEnterData(arg0);
     gm_SetupRulesDefaults(&data->rules);
 
@@ -226,7 +228,7 @@ void gm_801B1F70(GameModeState* arg0)
     data->rules.x3_6 = true;
     data->rules.x2_5 = false;
     data->rules.x2_1 = true;
-    gm_80167A14(data->players);
+    gm_SetupAllPlayerDefaults(data->players);
 
     for (i = 0; i < 4; i++) {
         data->players[i] = vs->start.players[i];
@@ -234,14 +236,14 @@ void gm_801B1F70(GameModeState* arg0)
         data->players[i].xD_b2 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->start.players[0].ckind,
-                vs->start.players[0].color, 1, gm_804D68C0);
+    gm_SetupHumanPlayer(&data->players[0], vs->start.players[0].ckind,
+                        vs->start.players[0].color, 1, gm_804D68C0);
 
     for (i = 1; i < 4; i++) {
         PlayerInitData* var_r30 = &data->players[i];
-        gm_801B0664(&data->players[i], vs->start.players[i].ckind,
-                    vs->start.players[i].color, 1,
-                    vs->start.players[i].slot - 1);
+        gm_SetupCpuPlayer(&data->players[i], vs->start.players[i].ckind,
+                          vs->start.players[i].color, 1,
+                          vs->start.players[i].slot - 1);
         if (i - 1 != 0) {
             data->players[i].slot_type = Gm_PKind_NA;
         }
@@ -274,14 +276,14 @@ void gm_801B2204(GameModeState* arg0)
 
 void gm_Mode_Training_OnInit(void)
 {
-    VsModeData* temp_r31 = &gmMainLib_804D3EE0->unk_D10;
+    VsModeData* temp_r31 = &gmMainLib_804D3EE0->modes.unk_D10;
     int i;
 
-    gm_80167B50(temp_r31);
+    gm_InitVsMode(temp_r31);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         temp_r31->start.players[i].color = i;
-        temp_r31->start.players[i].xE = 0;
+        temp_r31->start.players[i].cpu_kind = 0;
         if (i != 0) {
             temp_r31->start.players[1].ckind = CHKIND_NONE;
         }

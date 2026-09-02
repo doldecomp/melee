@@ -1108,7 +1108,7 @@ void fn_8018A364(int arg0_int)
         total_time = data->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &arg0->_x448[0])->b5 = 1;
 
-        if (data->x0.cpu_level == 4) {
+        if (data->x0.x0.cpu_level == 4) {
             ((u8_bits*) &arg0->_x448[0])->b2 = 1;
         }
 

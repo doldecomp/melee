@@ -1116,7 +1116,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
     return hsd_803B2674((CardState*) ctx);
 }
 
-void lb_8001C550(void)
+void lbCardNew_AllocWorkArea(void)
 {
     if (_p(work_area) == NULL) {
         _p(work_area) = HSD_MemAlloc(0xA000);

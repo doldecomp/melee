@@ -218,9 +218,9 @@ void lb_8001CDB4(void)
     }
 }
 
-void lb_8001CE00(void)
+void lbCardGame_UpdatePowerTime(void)
 {
-    HSD_ASSERT(0x2A3, _p(enable));
+    HSD_ASSERT(675, _p(enable));
     *gm_GetPowerTime() += gmMainLib_8015FC74();
     _p(xC) = true;
 }
@@ -273,7 +273,7 @@ void lb_8001CF18(void)
     }
 }
 
-void lb_8001D164(int arg0)
+void lbCardGame_LoadArchive(int arg0)
 {
     if (_p(x5C) == 0) {
         lbArchive_80016DBC("LbMcGame.", &_p(x5C), "MemCardIconData", 0);

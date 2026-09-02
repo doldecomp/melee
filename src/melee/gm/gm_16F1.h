@@ -75,7 +75,7 @@ struct lbl_804D65A8_t;
 /* 172C04 */ bool gm_80172C04(void);
 /* 172C44 */ UNK_RET gm_80172C44(u32);
 /* 172C78 */ bool fn_80172C78(int);
-/* 172CC0 */ u8 gm_80172CC0(u8, u8); ///< returns a CPU level
+/* 172CC0 */ u8 gm_DecideChallengerCpuLevel(u8 cpu_ckind, u8 human_nametag);
 /* 172D78 */ u8 gm_80172D78(void);
 /* 172DD4 */ u8 gm_80172DD4(u32);
 /* 172E74 */ u8 gm_80172E74(void);
@@ -94,8 +94,10 @@ struct lbl_804D65A8_t;
 /* 1735F0 */ bool fn_801735F0(void);
 /* 173644 */ bool fn_80173644(void);
 /* 17367C */ bool fn_8017367C(void);
-/* 1736DC */ lbl_8046DBD8_t* gm_GetChallengerData(void);
-/* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
+/* 1736DC */ ChallengerData* gm_GetChallengerData(void);
+/* 1736E8 */ void gm_InitChallengerData(u8 human_ckind, u8 human_color,
+                                        u8 human_slot, u8 human_nametag,
+                                        u8 cpu_ckind, u8 curr_mode);
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
 /* 1737E8 */ void gm_Mode_ChallengerApproach_OnLoad(void);

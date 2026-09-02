@@ -273,9 +273,9 @@ void fn_8017C0C8(void)
     gm_SetupPlayerDefaults(&sp8);
     sp8.slot_type = Gm_PKind_Cpu;
     sp8.stocks = 1;
-    sp8.xE = 4;
+    sp8.cpu_kind = 4;
     sp8.cpu_level = Player_GetCpuLevel(2);
-    sp8.xE = Player_GetCpuType(2);
+    sp8.cpu_kind = Player_GetCpuType(2);
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
@@ -487,7 +487,7 @@ void fn_8017C7EC(void)
 
     temp_r30 = fn_8017DF28();
     temp_r31 = gm_16AE_GetUnkData_1();
-    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->ckind);
+    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->x0.ckind);
 }
 
 void gm_8017C838(void)
@@ -517,7 +517,8 @@ void gm_8017C838(void)
         break;
     case 0x44:
         sp10[0] = FTKIND_KIRBY;
-        if (temp_r30->x0.ckind == CKIND_KIRBY && temp_r30->x0.color == 0) {
+        if (temp_r30->x0.x0.ckind == CKIND_KIRBY && temp_r30->x0.x0.color == 0)
+        {
             var_r3 = 1;
         } else {
             var_r3 = 0;
@@ -568,11 +569,11 @@ void gm_8017C9A8(DebugGameOverData* arg0, Unk1PData* arg1, u8 arg2)
     PAD_STACK(8);
     arg0->x0 = arg1->xC.x18;
     arg0->x8 = arg2;
-    arg0->ckind = arg1->ckind;
-    arg0->slot = arg1->slot;
-    arg0->x15 = arg1->x4;
+    arg0->ckind = arg1->x0.ckind;
+    arg0->slot = arg1->x0.slot;
+    arg0->x15 = arg1->x0.nametag;
     arg0->x18 = gm_801623D8();
-    arg0->x16 = lbl_803B7C08[arg2][arg1->cpu_level];
+    arg0->x16 = lbl_803B7C08[arg2][arg1->x0.cpu_level];
 }
 
 void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
@@ -586,13 +587,13 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         temp_r31 = gm_80173224(arg3, 0);
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
-            fn_80162BFC(arg1->ckind, arg0->x4);
+            fn_80162BFC(arg1->x0.ckind, arg0->x4);
             break;
         case GM_ADVENTURE:
-            fn_80162DF8(arg1->ckind, arg0->x4);
+            fn_80162DF8(arg1->x0.ckind, arg0->x4);
             break;
         case GM_ALLSTAR:
-            fn_80162FF4(arg1->ckind, arg0->x4);
+            fn_80162FF4(arg1->x0.ckind, arg0->x4);
             break;
         }
         Ground_801C5A60();
@@ -600,19 +601,20 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         gm_80173EEC();
         gm_80172898(0x40);
         if (temp_r31 == CHKIND_NONE) {
-            if (gm_80173754(1, arg1->slot) == 0) {
+            if (gm_80173754(1, arg1->x0.slot) == 0) {
                 gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
-            gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
-                        temp_r31, 1U);
+            gm_InitChallengerData(arg1->x0.ckind, arg1->x0.color,
+                                  arg1->x0.slot, arg1->x0.nametag, temp_r31,
+                                  1U);
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }
     } else {
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
-        arg1->stocks = arg2->stocks;
+        arg1->x0.stocks = arg2->stocks;
         arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
-        gm_SetNextGameModeStateId(arg1->x7);
+        gm_SetNextGameModeStateId(arg1->x0.mode);
     }
 }
 
@@ -622,18 +624,18 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
     u8 temp_r31;
     u8* temp_r3;
 
-    temp_r31 = gm_CKindToSelKind(arg0->x0.ckind);
+    temp_r31 = gm_CKindToSelKind(arg0->x0.x0.ckind);
     Ground_801C5A60();
     switch (arg2) {
     case 21:
         gmMainLib_8015D134(temp_r31);
-        fn_80162BFC(arg0->x0.ckind, arg0->x0.xC.x18);
+        fn_80162BFC(arg0->x0.x0.ckind, arg0->x0.xC.x18);
         temp_r3 = gmMainLib_8015D194(temp_r31);
-        if (*temp_r3 < arg0->x0.cpu_level) {
-            *temp_r3 = arg0->x0.cpu_level;
+        if (*temp_r3 < arg0->x0.x0.cpu_level) {
+            *temp_r3 = arg0->x0.x0.cpu_level;
         }
         temp_r3_2 = gmMainLib_8015D1AC(temp_r31);
-        if ((arg0->x0.cpu_level == 4) &&
+        if ((arg0->x0.x0.cpu_level == 4) &&
             ((temp_r3_2 == 0) || (arg1->stocks < temp_r3_2)))
         {
             gmMainLib_8015D1C8(temp_r31, arg1->stocks);
@@ -641,13 +643,13 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
         break;
     case 22:
         gmMainLib_8015D25C(temp_r31);
-        fn_80162DF8(arg0->x0.ckind, arg0->x0.xC.x18);
+        fn_80162DF8(arg0->x0.x0.ckind, arg0->x0.xC.x18);
         temp_r3 = gmMainLib_8015D2BC(temp_r31);
-        if (*temp_r3 < arg0->x0.cpu_level) {
-            *temp_r3 = arg0->x0.cpu_level;
+        if (*temp_r3 < arg0->x0.x0.cpu_level) {
+            *temp_r3 = arg0->x0.x0.cpu_level;
         }
         temp_r3_2 = gmMainLib_8015D2D4(temp_r31);
-        if ((arg0->x0.cpu_level == 4) &&
+        if ((arg0->x0.x0.cpu_level == 4) &&
             ((temp_r3_2 == 0) || (arg1->stocks < temp_r3_2)))
         {
             gmMainLib_8015D2F0(temp_r31, arg1->stocks);
@@ -655,25 +657,25 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
         break;
     case 23:
         gmMainLib_8015D384(temp_r31);
-        fn_80162FF4(arg0->x0.ckind, arg0->x0.xC.x18);
+        fn_80162FF4(arg0->x0.x0.ckind, arg0->x0.xC.x18);
         if (!gm_80164430(0x1F)) {
             gm_80164504(0x1F);
         }
         temp_r3 = gmMainLib_8015D3E4(temp_r31);
-        if (*temp_r3 < arg0->x0.cpu_level) {
-            *temp_r3 = arg0->x0.cpu_level;
+        if (*temp_r3 < arg0->x0.x0.cpu_level) {
+            *temp_r3 = arg0->x0.x0.cpu_level;
         }
         temp_r3_2 = gmMainLib_8015D3FC(temp_r31);
-        if ((arg0->x0.cpu_level == 4) &&
+        if ((arg0->x0.x0.cpu_level == 4) &&
             (temp_r3_2 == 0 || arg1->stocks < temp_r3_2))
         {
             gmMainLib_8015D418(temp_r31, arg1->stocks);
         }
         break;
     }
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
     gm_SetPendingGameMode(arg2);
     gm_SetNewGameModePending();
 }
@@ -685,7 +687,7 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
 
     num_colors = gm_80169238(arg1);
     if (arg0->x54 != NULL) {
-        result = arg0->x54(arg2, arg0->x0.cpu_level, arg3);
+        result = arg0->x54(arg2, arg0->x0.x0.cpu_level, arg3);
         if (num_colors != 0) {
             return result % num_colors;
         }
@@ -718,7 +720,7 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     for (color_idx = 0; color_idx < 3; color_idx++) {
         num_colors = gm_80169238((u8) arg2[color_idx]);
         if (arg1->x54 != NULL) {
-            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
+            result = arg1->x54(count, arg1->x0.x0.cpu_level, color_idx);
             if (num_colors != 0) {
                 result %= num_colors;
             } else {
@@ -734,7 +736,7 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
 
 static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
 {
-    return arg1->x0.cpu_level;
+    return arg1->x0.x0.cpu_level;
 }
 
 void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
@@ -795,7 +797,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
     arg0->rules.x18 = (u32) arg1->x0.xC.x18;
     arg0->rules.stkind = (u16) arg7;
-    arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
+    arg0->rules.xB = arg1->x48((u8) count, arg1->x0.x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
 
@@ -835,22 +837,22 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     if ((arg1->x0.x8 & 0x80) != 0) {
         player_stocks = 1;
     } else {
-        player_stocks = arg1->x0.stocks;
+        player_stocks = arg1->x0.x0.stocks;
     }
 
-    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+    if ((arg1->x0.x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
         player_ckind = CKIND_SEAK;
     } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               (arg1->x0.ckind == CKIND_POPONANA))
+               (arg1->x0.x0.ckind == CKIND_POPONANA))
     {
         player_ckind = CHKIND_POPO;
     } else {
-        player_ckind = (u8) arg1->x0.ckind;
+        player_ckind = (u8) arg1->x0.x0.ckind;
     }
 
-    gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
-                arg1->x0.slot);
-    arg0->players[0].nametag = arg1->x0.x4;
+    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.x0.color,
+                        player_stocks, arg1->x0.x0.slot);
+    arg0->players[0].nametag = arg1->x0.x0.nametag;
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
 
     {
@@ -869,8 +871,8 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         }
     }
 
-    attack_ratio = arg1->x64((u8) count, arg1->x0.cpu_level);
-    defense_ratio = arg1->x68((u8) count, arg1->x0.cpu_level);
+    attack_ratio = arg1->x64((u8) count, arg1->x0.x0.cpu_level);
+    defense_ratio = arg1->x68((u8) count, arg1->x0.x0.cpu_level);
 
     color_iter = colors;
     gm_8017CE34_SetupColors(arg1, count, arg2, color_iter);
@@ -893,7 +895,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             special_enemy_mode = 0;
             sp8 = 0;
             if (arg1->x4C != NULL) {
-                enemy_level = arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
+                enemy_level = arg1->x4C((u8) count, arg1->x0.x0.cpu_level, 0U);
             }
 
             first_enemy = (u8) arg2[0];
@@ -915,8 +917,8 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
             gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
                         colors[1], (s32) colors[2], special_stage,
-                        special_enemy_mode, sp8, (u8) arg1->x0.ckind,
-                        arg1->x0.color, (s32) enemy_level, (s32) arg3,
+                        special_enemy_mode, sp8, (u8) arg1->x0.x0.ckind,
+                        arg1->x0.x0.color, (s32) enemy_level, (s32) arg3,
                         event_enemy_count, (s32) stage_flags, (s32) arg5,
                         (s32) arg4, attack_ratio, defense_ratio);
             gm_8016A21C(&arg0->rules);
@@ -934,8 +936,8 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         }
     }
 
-    gmRegSetupEnemyColorTable((s8) (u8) arg1->x0.ckind, arg1->x0.color, arg2,
-                              colors);
+    gmRegSetupEnemyColorTable((s8) (u8) arg1->x0.x0.ckind, arg1->x0.x0.color,
+                              arg2, colors);
 
     enemy_idx = 0;
     for (;;) {
@@ -944,21 +946,21 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             if (arg1->x0.x8 & 8) {
                 if (arg1->x4C != NULL) {
                     enemy_level =
-                        arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
+                        arg1->x4C((u8) count, arg1->x0.x0.cpu_level, 0U);
                 }
                 if (arg1->x50 != NULL) {
                     enemy_cpu_type =
-                        arg1->x50((u8) count, arg1->x0.cpu_level, 0U);
+                        arg1->x50((u8) count, arg1->x0.x0.cpu_level, 0U);
                 }
             } else {
                 if (arg1->x4C != NULL) {
-                    u8 selected_enemy_level =
-                        arg1->x4C((u8) count, arg1->x0.cpu_level, enemy_idx);
+                    u8 selected_enemy_level = arg1->x4C(
+                        (u8) count, arg1->x0.x0.cpu_level, enemy_idx);
                     enemy_level = selected_enemy_level;
                 }
                 if (arg1->x50 != NULL) {
-                    enemy_cpu_type =
-                        arg1->x50((u8) count, arg1->x0.cpu_level, enemy_idx);
+                    enemy_cpu_type = arg1->x50(
+                        (u8) count, arg1->x0.x0.cpu_level, enemy_idx);
                 }
             }
             gm_SetupPlayerDefaults(&arg0->players[player_idx]);
@@ -966,7 +968,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
-            arg0->players[player_idx].xE = enemy_cpu_type;
+            arg0->players[player_idx].cpu_kind = enemy_cpu_type;
             arg0->players[player_idx].x18 = attack_ratio;
             arg0->players[player_idx].x1C = defense_ratio;
             arg0->players[player_idx].color = *color_iter;
@@ -979,7 +981,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
             if (arg1->x0.x8 & 4) {
                 arg0->players[player_idx].xC_b2 = 1;
-                arg0->players[player_idx].xE = 0x1B;
+                arg0->players[player_idx].cpu_kind = 0x1B;
             }
             if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
@@ -1076,19 +1078,19 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (fn_8016B4BC() != 0) {
         arg1->xC.xE = 1;
     }
-    temp_r0 = arg0->match_end.result;
+    temp_r0 = arg0->match_end.outcome;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
         DbLevel <= DbLKind_DebugDevelop)
     {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
-            fn_80162BFC(arg1->ckind, arg1->xC.x18);
+            fn_80162BFC(arg1->x0.ckind, arg1->xC.x18);
             break;
         case GM_ADVENTURE:
-            fn_80162DF8(arg1->ckind, arg1->xC.x18);
+            fn_80162DF8(arg1->x0.ckind, arg1->xC.x18);
             break;
         case GM_ALLSTAR:
-            fn_80162FF4(arg1->ckind, arg1->xC.x18);
+            fn_80162FF4(arg1->x0.ckind, arg1->xC.x18);
             break;
         }
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -1096,11 +1098,11 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     }
     fn_8017E3C8();
     if (!(arg1->x8 & 0x80)) {
-        arg1->stocks = arg0->match_end.player_standings[0].stocks;
-        if (arg1->stocks != 0) {
-            if (arg0->match_end.result == OUTCOME_TIMEOUT) {
-                arg1->stocks--;
-                if (arg1->stocks == 0) {
+        arg1->x0.stocks = arg0->match_end.player_standings[0].stocks;
+        if (arg1->x0.stocks != 0) {
+            if (arg0->match_end.outcome == OUTCOME_TIMEOUT) {
+                arg1->x0.stocks--;
+                if (arg1->x0.stocks == 0) {
                     gm_SetNextGameModeStateId(arg2);
                     return 0;
                 }
@@ -1297,7 +1299,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
             arg0[index].color = arg1[i].x1;
-            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_kind = arg1[i].x3;
             arg0[index].cpu_level = arg1[i].x2;
             arg0[index].x18 = arg1[i].x4;
             arg0[index].x1C = arg1[i].x8;
@@ -1385,7 +1387,7 @@ int gm_8017DFF4(int arg0)
 {
     Unk1PData* var_r3 = fn_8017DEC8(arg0);
     if (var_r3 != NULL) {
-        return var_r3->cpu_level;
+        return var_r3->x0.cpu_level;
     }
     return -1;
 }
@@ -1394,7 +1396,7 @@ int gm_8017E068(void)
 {
     Unk1PData* var_r3 = fn_8017DF28();
     if (var_r3 != NULL) {
-        return var_r3->cpu_level;
+        return var_r3->x0.cpu_level;
     }
     return -1;
 }
@@ -1485,16 +1487,18 @@ UnkAdventureData* gm_GetAdventureData(void)
 
 u8 gm_8017E430(void)
 {
-    return gm_GetAdventureData()->x0.slot;
+    return gm_GetAdventureData()->x0.x0.slot;
 }
 
 u8 gm_8017E440(void)
 {
     UnkAdventureData* r31 = gm_GetAdventureData();
-    if (gm_RumbleEnabledForPlayer(r31->x0.slot, r31->x0.x4) == false) {
+    if (gm_RumbleEnabledForPlayer(r31->x0.x0.slot, r31->x0.x0.nametag) ==
+        false)
+    {
         return 4;
     }
-    return r31->x0.slot;
+    return r31->x0.x0.slot;
 }
 
 u8 gm_8017E48C(GameModeState* scene)
@@ -1609,7 +1613,7 @@ void gm_8017E7FC(u8 matchResult)
     UnkAdventureData* r31 = gm_GetAdventureData();
     bool cond;
 
-    if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.cpu_level >= 2 &&
+    if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.x0.cpu_level >= 2 &&
         r31->x0.xC.x20 + gm_8016AEDC() < 0xFD20U)
     {
         cond = true;
@@ -1656,7 +1660,7 @@ void fn_8017E8A4(int arg0_int)
         total_time = adv->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &flags[0])->b6 = 1;
 
-        if (adv->x0.cpu_level == 4) {
+        if (adv->x0.x0.cpu_level == 4) {
             ((u8_bits*) &flags[0])->b3 = 1;
         }
 
@@ -1795,7 +1799,8 @@ bool fn_8017EDDC(void)
 
     if (gm_GetCurrentGameMode() == GM_CLASSIC) {
         p = gm_GetAllStarData();
-        if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 && p->x0.xC.x20 < 0x5208)
+        if (p->x0.xC.xD == 0 && p->x0.x0.cpu_level >= 2 &&
+            p->x0.xC.x20 < 0x5208)
         {
             return true;
         }
@@ -1828,7 +1833,7 @@ void fn_8017EE40(int arg0_int)
         total_time = allstar->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &arg0->_x448[0])->b7 = 1;
 
-        if (allstar->x0.cpu_level == 4) {
+        if (allstar->x0.x0.cpu_level == 4) {
             ((u8_bits*) &arg0->_x448[0])->b4 = 1;
         }
 
@@ -3457,7 +3462,7 @@ void fn_80181C80(s32 arg0)
         sp10.team = !Player_GetTeam(0);
         sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
-        sp10.xE = data->x54[arg0].x7;
+        sp10.cpu_kind = data->x54[arg0].x7;
         sp10.x18 = data->x54[arg0].x8;
         sp10.x1C = data->x54[arg0].xC;
         gm_8016EDDC(sp38, &sp10);

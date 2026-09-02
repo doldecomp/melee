@@ -2962,7 +2962,7 @@ void mnMain_Scene_OnEnter(void* user_data)
         break;
     }
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
-    lb_8001CE00();
+    lbCardGame_UpdatePowerTime();
 }
 
 char null_terminator[1] = "\0";

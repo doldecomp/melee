@@ -64,7 +64,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
 static inline int gm_801B0474_inline(MatchEnd* arg1, int i)
 {
     if (arg1->match_kind == 1) {
-        if (arg1->result == OUTCOME_TIMEOUT) {
+        if (arg1->outcome == OUTCOME_TIMEOUT) {
             return arg1->player_standings[i].stocks;
         } else {
             u8 var_r7 = arg1->player_standings[i].stocks;
@@ -105,40 +105,42 @@ void gm_SetupSuddenDeath(StartMeleeData* start, MatchEnd* end)
     }
 }
 
-void gm_801B05F4(PlayerInitData* arg0, int arg1)
+void gm_801B05F4(PlayerInitData* player, int slot)
 {
-    arg0->slot = arg1 + 1;
-    if (arg1 == 2) {
-        arg1 = 3;
-    } else if (arg1 == 3) {
-        arg1 = 2;
+    player->slot = slot + 1;
+    if (slot == 2) {
+        slot = 3;
+    } else if (slot == 3) {
+        slot = 2;
     }
-    arg0->team = arg1;
+    player->team = slot;
 }
 
-void gm_801B0620(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
+void gm_SetupHumanPlayer(PlayerInitData* player, u8 ckind, u8 color, u8 stocks,
+                         u8 slot)
 {
-    arg0->slot_type = Gm_PKind_Human;
-    arg0->ckind = c_kind;
-    arg0->color = arg2;
-    arg0->stocks = arg3;
-    gm_801B05F4(arg0, arg4);
+    player->slot_type = Gm_PKind_Human;
+    player->ckind = ckind;
+    player->color = color;
+    player->stocks = stocks;
+    gm_801B05F4(player, slot);
 }
 
-void gm_801B0664(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
+void gm_SetupCpuPlayer(PlayerInitData* arg0, u8 ckind, u8 color, u8 stocks,
+                       u8 slot)
 {
     arg0->slot_type = Gm_PKind_Cpu;
-    arg0->ckind = c_kind;
-    arg0->color = arg2;
-    arg0->stocks = arg3;
-    gm_801B05F4(arg0, arg4);
+    arg0->ckind = ckind;
+    arg0->color = color;
+    arg0->stocks = stocks;
+    gm_801B05F4(arg0, slot);
     arg0->team = 4;
 }
 
 void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
                  u8 arg5, u8 level, u8 slot)
 {
-    gm_80167B50(&css_data->vs);
+    gm_InitVsMode(&css_data->vs);
     css_data->match_type = type;
     css_data->unk_0x0 = slot + 1;
     css_data->vs.start.players[slot].ckind = c_kind;

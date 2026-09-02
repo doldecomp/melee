@@ -30,7 +30,7 @@ void mnDeflicker_8024A6C4(HSD_GObj* arg0);
 void gmMainLib_8015F4F4(u8);
 void gmMainLib_8015F588(u8);
 u8 gmMainLib_8015F4E8(void);
-void lb_8001CE00(void);
+void lbCardGame_UpdatePowerTime(void);
 
 unsigned char mnDeflicker_804D6C3C;
 HSD_GObj* mnDeflicker_804D6C38;
@@ -55,7 +55,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         sfxBack();
         gmMainLib_8015F4F4(
             ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 2, 3);
     } else if (mnDeflicker_804D6C3C && (events & MenuInput_AButton)) {
