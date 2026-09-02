@@ -326,23 +326,26 @@ struct gmm_x0 {
     /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
     /* 0x006C */ u32 unk_6C[4];
     /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
-    struct gmm_x0_vsdata {           ///< @todo size unknown
+    /** @remarks `gmMainLib_8015CDC8` hands out a pointer to the start of this
+     * block and its callers read on into `unk_530`, so the three slots and the
+     * event data form one object. */
+    struct gmm_x0_vsdata {
         struct gmm_x0_528_t {
-            /* 0x0528 */ s8 c_kind;
-            /* 0x0529 */ u8 stocks;
-            /* 0x052A */ u8 color;
-            /* 0x052B */ u8 cpu_level;
-            /* 0x052C */ u8 nametag;
-            /* 0x052D */ u8 x5;
+            /* 0x051C */ s8 c_kind;
+            /* 0x051D */ u8 stocks;
+            /* 0x051E */ u8 color;
+            /* 0x051F */ u8 cpu_level;
+            /* 0x0520 */ u8 x4; ///< nametag ID
+            /* 0x0521 */ u8 x5;
         } unk_51C, unk_522, unk_528;
         struct EventData {
             /* 0x0530 */ u8 x0;
             /* 0x0531 */ u8 x1;
-            /* 0x0532 */ s8 ckind;
-            /* 0x0533 */ u8 color;
-            /* 0x0534 */ u8 nametag;
+            /* 0x0532 */ s8 x2;
+            /* 0x0533 */ u8 x3;
+            /* 0x0534 */ u8 x4;
             /* 0x0535 */ u8 unk_535;
-            /* 0x0536 */ u8 slot;
+            /* 0x0536 */ u8 x6;
             /* 0x0537 */ u8 x7;
             /* 0x0538 */ s8 x8;
             /* 0x0539 */ s8 x9;
@@ -380,9 +383,14 @@ struct gmm_x0 {
                 /* 0x0586 */ u8 unk_586;
                 /* 0x0587 */ s8 unk_587;
             } unk_584;
-            /* 0x0588 */ s8 unk_588[4];   /* inferred */
-            /* 0x0590 */ char pad_58B[4]; /* inferred */
         } unk_530;
+    } vs;
+    /** @remarks Directly follows #gmm_x0_vsdata; `gmMainLib_8015DBF4` and
+     * `gmMainLib_8015EA80` walk the table from a pointer to that block. */
+    struct gmm_x0_vsmodes {
+        /* 0x0588 */ s8
+            nametags[PAD_MAX_CONTROLLERS]; ///< per-port nametag slot
+        /* 0x058C */ char pad_58C[4];
         /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
         /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
         /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
@@ -395,15 +403,18 @@ struct gmm_x0 {
         /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
         /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
         /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
-        /* 0x1490 */ VsModeData
-            unk_1490; ///< multiman, 3/15 min, endless, cruel
-        /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
-        /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
-        /* 0x1850 */ GameRules x1850;
-        /* 0x1898 */ struct gmm_x1868 thing;
-        /* 0x6E50 */ u8 pad_6E50[0x8510 - 0x6E50];
-    } vs;
+        /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless,
+                                          ///< cruel
+    } modes;
+    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+    /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
+    /* 0x1850 */ GameRules x1850;
+    /* 0x1898 */ struct gmm_x1868 thing;
+    /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
+ASSERT_SIZE(struct EventData, 0x588 - 0x530);
+ASSERT_SIZE(struct gmm_x0_vsdata, 0x588 - 0x51C);
+ASSERT_SIZE(struct gmm_x0_vsmodes, 0x15D0 - 0x588);
 ASSERT_SIZE(struct gmm_x0, 0x8518);
 
 struct lbl_8046B6A0_24C_t {

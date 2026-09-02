@@ -9,6 +9,7 @@
 #include "gm/gmhomerun.h"
 
 #include <dolphin/os/OSReset.h>
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
@@ -94,12 +95,12 @@ static void order_bss(void)
 
 GameRules* gmMainLib_GetGameRules(void)
 {
-    return &gmMainLib_804D3EE0->vs.x1850;
+    return &gmMainLib_804D3EE0->x1850;
 }
 
 struct gmm_x1868* gmMainLib_GetSaveData(void)
 {
-    return &gmMainLib_804D3EE0->vs.thing;
+    return &gmMainLib_804D3EE0->thing;
 }
 
 void* gmMainLib_8015CC4C(void)
@@ -264,9 +265,8 @@ void gmMainLib_8015CDEC(void)
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == GM_NAMETAG_NONE) {
-        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->vs.unk_530.unk_588))
-        {
-            return &gmMainLib_804D3EE0->vs.unk_530.unk_588[arg0];
+        if (arg0 < PAD_MAX_CONTROLLERS) {
+            return &gmMainLib_804D3EE0->modes.nametags[arg0];
         }
         return 0;
     } else {
@@ -283,7 +283,7 @@ void gmMainLib_8015CEB4(s32 arg0)
 
 bool gmMainLib_8015CEFC(int arg0)
 {
-    if (gmMainLib_804D3EE0->vs.thing.x1A68 & (1LL << arg0)) {
+    if (gmMainLib_804D3EE0->thing.x1A68 & (1LL << arg0)) {
         return true;
     } else {
         return false;
@@ -327,7 +327,7 @@ void gmMainLib_8015D00C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7A.b0 = true;
     gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
@@ -362,7 +362,7 @@ void gmMainLib_8015D134(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b4 = true;
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
@@ -402,7 +402,7 @@ void gmMainLib_8015D25C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b5 = true;
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
@@ -442,7 +442,7 @@ void gmMainLib_8015D384(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->vs.thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b6 = true;
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
@@ -603,7 +603,7 @@ s32 gmMainLib_8015D818(u32 arg0)
     u8 _[40];
 
     if (gmMainLib_8015D94C(arg0) == 0) {
-        struct gmm_x1868* base = &gmMainLib_804D3EE0->vs.thing;
+        struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
         *q = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
@@ -782,28 +782,8 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     struct gmm_x0_528_t* config;
-    struct gmMainLib_8015DBF4_config {
-        struct gmm_x0_528_t unk_51C;
-        struct gmm_x0_528_t unk_522;
-        struct gmm_x0_528_t unk_528;
-        struct EventData unk_530;
-    }* config_all;
-    struct gmMainLib_8015DBF4_base {
-        u8 pad_0[8];
-        VsModeData unk_590;
-        VsModeData unk_6D0;
-        VsModeData unk_810;
-        VsModeData unk_950;
-        VsModeData unk_A90;
-        VsModeData unk_BD0;
-        VsModeData unk_D10;
-        VsModeData unk_E50;
-        VsModeData unk_F90;
-        VsModeData unk_10D0;
-        VsModeData unk_1210;
-        VsModeData unk_1350;
-        VsModeData unk_1490;
-    }* base;
+    struct gmm_x0_vsdata* vs;
+    struct gmm_x0_vsmodes* base;
     GameRules* gr;
     u8 val;
 
@@ -818,9 +798,30 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     } while (0)
 
     config = gmMainLib_8015CDC8();
-    config_all = (struct gmMainLib_8015DBF4_config*) config;
-    base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    gmMainLib_AdjustNameTag(&config->nametag, (u8) arg0);
+    vs = (struct gmm_x0_vsdata*) config;
+    base = (struct gmm_x0_vsmodes*) (vs + 1);
+    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_522.x4);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_528.x4);
+    ADJ_NAMETAG_78(vs->unk_530.x4);
+    ADJ_NAMETAG_78(gmMainLib_804D3EE0->vs.unk_530.unk_584.unk_586);
+
+    gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, (u8) arg0);
+
+    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_D10, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_melee, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_6D0, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_invisible, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_camera, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_fixed_camera, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_BD0, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_E50, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_F90, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_stamina, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1210, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->vs_lightning, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
 
 #if 0
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
@@ -910,8 +911,8 @@ void gmMainLib_8015EA80(void)
     struct gmMainLib_8015EA80_modes {
         u8 pad[8];
         VsModeData modes[13];
-    }* data = (struct gmMainLib_8015EA80_modes*)
-                  gmMainLib_804D3EE0->vs.unk_530.unk_588;
+    }* data =
+        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->modes.nametags;
     struct PlayerInitData* players;
     s32 i;
 
@@ -1120,7 +1121,7 @@ void InitializePersistentNameData(s32 arg0)
 
     PAD_STACK(16);
 
-    bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
+    bank = gmMainLib_804D3EE0->thing.x2FF8;
     data = &bank[(u8) arg0 / 19].inner[(u8) arg0 % 19];
     for (i = 0; i < 120; i++) {
         data->vs_kos[i] = 0;
@@ -1146,7 +1147,7 @@ static inline void ResetAllPersistentFighterData(void)
         int j = 0;
         u8 k = i;
         struct FighterData* base =
-            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->vs.thing);
+            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
         for (; 0x19 > j; j++) {
             base[k].fighter_kos[j] = 0;
         }
@@ -1158,7 +1159,7 @@ static inline void ResetPersistentFighterData(s32 i)
 {
     int j = 0;
     struct FighterData* base =
-        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->vs.thing);
+        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
     for (; 0x19 > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
@@ -1185,7 +1186,7 @@ void gmMainLib_8015F260(void)
         struct NameTagDataBank* bank;
 
         int j;
-        bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
+        bank = gmMainLib_804D3EE0->thing.x2FF8;
         data = &bank[(u8) i / 19].inner[(u8) i % 19];
 
         for (j = 0; j < 120; j++) {
@@ -1282,7 +1283,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
 
-        memzero(&gmMainLib_804D3EE0->vs.thing.trophy_count, 0x25C);
+        memzero(&gmMainLib_804D3EE0->thing.trophy_count, 0x25C);
         Toy_80311960();
 
         if (arg1 == 0) {
@@ -1291,7 +1292,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                                1);
         }
 
-        gmMainLib_804D3EE0->vs.thing.x1CB0 =
+        gmMainLib_804D3EE0->thing.x1CB0 =
             *(struct gmm_x1CB0*) gmMainLib_803D4A60;
 
         {
@@ -1306,7 +1307,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             lbLang_SetSavedLanguage(lang);
         }
 
-        memzero(&gmMainLib_804D3EE0->vs.thing, 0x448);
+        memzero(&gmMainLib_804D3EE0->thing, 0x448);
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
@@ -1325,7 +1326,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
 
             InitializePersistentNameData(idx);
 
-            bank = gmMainLib_804D3EE0->vs.thing.x2FF8;
+            bank = gmMainLib_804D3EE0->thing.x2FF8;
             {
                 struct NameTagData* tmp =
                     &bank[(u8) idx / 19].inner[(u8) idx % 19];
@@ -1371,7 +1372,7 @@ void gmMainLib_8015FA34(s32 arg0)
         }
     }
     if (DbLevel > DbLKind_DebugDevelop && db_804D6B20 != 0) {
-        gmMainLib_804D3EE0->vs.thing.x186C = 0xFF;
+        gmMainLib_804D3EE0->thing.x186C = 0xFF;
         gm_80164F18();
         gm_8016468C();
         gm_8017297C();
@@ -1385,7 +1386,7 @@ void gmMainLib_8015FA34(s32 arg0)
 #endif
 void gmMainLib_8015FB68(void)
 {
-    gmMainLib_804D3EE0->vs.thing.x186C = 0;
+    gmMainLib_804D3EE0->thing.x186C = 0;
     gm_8016505C();
     gm_801647D0();
     gm_801729EC();
