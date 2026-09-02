@@ -388,9 +388,8 @@ struct gmm_x0 {
     /** @remarks Directly follows #gmm_x0_vsdata; `gmMainLib_8015DBF4` and
      * `gmMainLib_8015EA80` walk the table from a pointer to that block. */
     struct gmm_x0_vsmodes {
-        /* 0x0588 */ s8
-            nametags[PAD_MAX_CONTROLLERS]; ///< per-port nametag slot
-        /* 0x058C */ char pad_58C[4];
+        /* 0x0588 */ s8 nametags[PAD_MAX_CONTROLLERS];
+        /// @todo Maybe array of ::VsModeData with kind-index
         /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
         /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
         /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
@@ -405,7 +404,7 @@ struct gmm_x0 {
         /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
         /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless,
                                           ///< cruel
-        /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+        /* 0x15D0 */ VsModeData unk_15D0; ///< unused?
         /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
     } modes;
     /* 0x1850 */ GameRules x1850;
@@ -417,6 +416,7 @@ ASSERT_SIZE(struct gmm_x0_vsdata, 0x588 - 0x51C);
 ASSERT_SIZE(struct gmm_x0_vsmodes, 0x1850 - 0x588);
 ASSERT_SIZE(struct gmm_x0, 0x8518);
 
+/// @todo ::MatchEnd
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
     u8 x4; ///< MatchOutcome
