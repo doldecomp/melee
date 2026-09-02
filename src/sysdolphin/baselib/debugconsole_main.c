@@ -1050,17 +1050,19 @@ static inline void hsd_80394F48_putc(u8 ch, void* const* color)
 }
 
 /// Draws a `+---+` rule `width` cells wide.
-#define HSD_80394F48_RULE(width, color, i)                                    \
-    do {                                                                      \
-        hsd_80394F48_putc('+', color);                                        \
-        hsd_804CF810.x4 += 11;                                                \
-        for ((i) = 0; (i) < (width); (i)++) {                                 \
-            hsd_80394F48_putc('-', color);                                    \
-            hsd_804CF810.x4 += 11;                                            \
-        }                                                                     \
-        hsd_80394F48_putc('+', color);                                        \
-        hsd_804CF810.x4 += 11;                                                \
-    } while (0)
+static inline void hsd_80394F48_rule(s32 width, void* const* color, s32* i)
+{
+    hsd_80394F48_putc('+', color);
+    hsd_804CF810.x4 += 11;
+
+    for (*i = 0; *i < width; (*i)++) {
+        hsd_80394F48_putc('-', color);
+        hsd_804CF810.x4 += 11;
+    }
+
+    hsd_80394F48_putc('+', color);
+    hsd_804CF810.x4 += 11;
+}
 
 /// Draws a box around the event list.
 void hsd_80394F48(void* data)
@@ -1085,7 +1087,7 @@ void hsd_80394F48(void* data)
 
     /* Without this the colour slot never reaches a register. */
     (void) color;
-    HSD_80394F48_RULE(width, color, j);
+    hsd_80394F48_rule(width, color, &j);
 
     cur_row--;
 
@@ -1118,7 +1120,7 @@ void hsd_80394F48(void* data)
     hsd_804CF810.x4 = col_start * 11 + 20;
     hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    HSD_80394F48_RULE(width, color, k);
+    hsd_80394F48_rule(width, color, &k);
 
     hsd_804CF810.xC8 += 4;
     hsd_804CF810.xCC -= dp->index + 1;
