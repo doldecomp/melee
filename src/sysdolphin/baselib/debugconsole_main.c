@@ -1048,36 +1048,43 @@ static inline void hsd_80394F48_putc(u8 ch)
     }
 }
 
-/// @todo Only differs by callee-saved register allocation.
-void hsd_80394F48(void* data)
+/// Draws a `+---+` rule `width` cells wide.
+static inline void hsd_80394F48_rule(s32 width)
 {
-    struct lbl_8040AB00_t* colors = &lbl_8040AB00;
-    EventData* dp = data;
-    s32 num_entries;
-    s32 col_start;
-    s32 cur_row;
-    s32 x_base;
     s32 i;
-    s32 j;
-    PAD_STACK(64);
-
-    num_entries = strlen(dp->entries[0]);
-    hsd_804CF810.x50 = &colors[0];
-    col_start = hsd_804CF810.xC8;
-    cur_row = hsd_804CF810.xCC;
-    hsd_804CF810.x4 = col_start * 11 + 20;
-    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
     hsd_80394F48_putc('+');
     hsd_804CF810.x4 += 11;
 
-    for (i = 0; i < num_entries; i++) {
+    for (i = 0; i < width; i++) {
         hsd_80394F48_putc('-');
         hsd_804CF810.x4 += 11;
     }
 
     hsd_80394F48_putc('+');
     hsd_804CF810.x4 += 11;
+}
+
+/// @todo Only differs by callee-saved register allocation.
+void hsd_80394F48(void* data)
+{
+    struct lbl_8040AB00_t* colors = &lbl_8040AB00;
+    EventData* dp = data;
+    s32 width;
+    s32 col_start;
+    s32 cur_row;
+    s32 x_base;
+    s32 i;
+    PAD_STACK(64);
+
+    width = strlen(dp->entries[0]);
+    hsd_804CF810.x50 = &colors[0];
+    col_start = hsd_804CF810.xC8;
+    cur_row = hsd_804CF810.xCC;
+    hsd_804CF810.x4 = col_start * 11 + 20;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
+
+    hsd_80394F48_rule(width);
 
     x_base = col_start * 11 + 20;
     cur_row--;
@@ -1107,16 +1114,7 @@ void hsd_80394F48(void* data)
     hsd_804CF810.x4 = x_base;
     hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (cur_row + 1) * 14;
 
-    hsd_80394F48_putc('+');
-    hsd_804CF810.x4 += 11;
-
-    for (j = 0; j < num_entries; j++) {
-        hsd_80394F48_putc('-');
-        hsd_804CF810.x4 += 11;
-    }
-
-    hsd_80394F48_putc('+');
-    hsd_804CF810.x4 += 11;
+    hsd_80394F48_rule(width);
 
     hsd_804CF810.xC8 += 4;
     hsd_804CF810.xCC -= dp->index + 1;
