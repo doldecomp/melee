@@ -343,7 +343,7 @@ void gm_801B65D4(GameModeState* arg0)
     temp_r28 = &gmMainLib_804D3EE0->vs.unk_530.unk_584;
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1U);
         return;
     }
@@ -676,7 +676,7 @@ void gm_801B6F44(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -751,7 +751,7 @@ void gm_801B74F0(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -874,7 +874,7 @@ void gm_801B7AA0(GameModeState* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -937,7 +937,7 @@ void gm_801B8024(GameModeState* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -997,7 +997,7 @@ void gm_801B8580(GameModeState* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(scene);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1U);
         return;
     }
@@ -1074,7 +1074,7 @@ void gm_801B8AF8(GameModeState* arg0)
 
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_1490;
     temp_r3 = gm_GetGameModeStateExitData(arg0);
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }

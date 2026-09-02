@@ -1078,7 +1078,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (fn_8016B4BC() != 0) {
         arg1->xC.xE = 1;
     }
-    temp_r0 = arg0->match_end.outome;
+    temp_r0 = arg0->match_end.outcome;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
         DbLevel <= DbLKind_DebugDevelop)
     {
@@ -1100,7 +1100,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (!(arg1->x8 & 0x80)) {
         arg1->x0.stocks = arg0->match_end.player_standings[0].stocks;
         if (arg1->x0.stocks != 0) {
-            if (arg0->match_end.outome == OUTCOME_TIMEOUT) {
+            if (arg0->match_end.outcome == OUTCOME_TIMEOUT) {
                 arg1->x0.stocks--;
                 if (arg1->x0.stocks == 0) {
                     gm_SetNextGameModeStateId(arg2);

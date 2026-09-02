@@ -107,8 +107,8 @@ void onExitVs(GameModeState* state)
     ChallengerData* challenger = gm_GetChallengerData();
     gm_80162968(mei->match_end.frame_count / GM_FPS);
     gm_8016247C(mei->match_end.player_standings[0].xE);
-    if (mei->match_end.outome != OUTCOME_NO_CONTEST &&
-        mei->match_end.outome != OUTCOME_RETRY &&
+    if (mei->match_end.outcome != OUTCOME_NO_CONTEST &&
+        mei->match_end.outcome != OUTCOME_RETRY &&
         mei->match_end.player_standings[0].stocks != 0)
     {
         gm_UnlockCKind(challenger->cpu_ckind);

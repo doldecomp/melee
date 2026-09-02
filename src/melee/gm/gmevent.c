@@ -40,6 +40,7 @@ struct UnkSmallLoadData {
     u8 pad[8];
 };
 
+/// @todo ::PlayerInitData
 typedef struct gm_801BAB40_src {
     /* 0x00 */ s8 c_kind;
     /* 0x01 */ u8 slot_type;
@@ -294,13 +295,13 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->xC_b1 = (src->flags & 0x80) >> 7;
     arg0->xC_b2 = (src->flags & 0x40) >> 6;
     arg0->xC_b3 = (src->flags & 0x20) >> 5;
-    arg0->xC_b4 = (src->flags & 0x10) >> 4;
+    arg0->vs_invisible = (src->flags & 0x10) >> 4;
     arg0->xC_b6 = (src->flags & 0x08) >> 3;
     arg0->xC_b7 = (src->flags & 0x04) >> 2;
     arg0->xD_b1 = 0;
     arg0->xD_b2 = 0;
     arg0->xD_b4 = 0;
-    arg0->xE = src->xE;
+    arg0->cpu_kind = src->xE;
     arg0->cpu_level = src->cpu_level;
     arg0->x10 = 0;
     arg0->x12 = src->x12;
@@ -419,7 +420,7 @@ void onEnterVs(GameModeState* arg0)
     md->rules.x20 = levels[level]->x8->x10;
     md->rules.x28 = levels[level]->x8->x18;
     md->rules.x30 = levels[level]->x8->x1C;
-    md->rules.x34 = levels[level]->x8->unk20;
+    md->rules.game_speed = levels[level]->x8->unk20;
     md->rules.x44 = fn_801BBFE8;
     if (md->rules.timer_counts_up & 1) {
         ev->xB_0 = 1;
@@ -644,7 +645,7 @@ void onExitVs(GameModeState* arg0)
     s32 t;
 
     gm_8016A164();
-    if (exit->match_end.result == OUTCOME_RETRY) {
+    if (exit->match_end.outcome == OUTCOME_RETRY) {
         s32 do_save = 0;
         if (ev->x20 != 0) {
             do_save = 1;
@@ -674,7 +675,7 @@ void onExitVs(GameModeState* arg0)
         gm_SetNextGameModeStateId(1);
         return;
     }
-    if (exit->match_end.result == OUTCOME_NO_CONTEST) {
+    if (exit->match_end.outcome == OUTCOME_NO_CONTEST) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
@@ -734,7 +735,8 @@ void onExitVs(GameModeState* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != CHKIND_MAX) {
-        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->nametag, kind, GM_MENU);
+        gm_InitChallengerData(ev->x0, ev->x1, ev->x6, ev->nametag, kind,
+                              GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }

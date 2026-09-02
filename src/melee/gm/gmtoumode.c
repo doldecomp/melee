@@ -167,7 +167,7 @@ void gm_801B1834(GameModeState* state)
     MatchExitInfo* mei = gm_GetGameModeStateExitData(state);
     if (gmVsMelee_WasAnyPlayerHuman(&mei->match_end)) {
         gm_SetupHumanResultsScreen(mei->match_end.match_kind,
-                                   mei->match_end.outome);
+                                   mei->match_end.outcome);
         gm_SetupResultsScreenPlayTime(mei->match_end.frame_count / GM_FPS,
                                       gm_80162800(&mei->match_end));
     }

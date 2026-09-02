@@ -64,7 +64,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
 static inline int gm_801B0474_inline(MatchEnd* arg1, int i)
 {
     if (arg1->match_kind == 1) {
-        if (arg1->outome == OUTCOME_TIMEOUT) {
+        if (arg1->outcome == OUTCOME_TIMEOUT) {
             return arg1->player_standings[i].stocks;
         } else {
             u8 var_r7 = arg1->player_standings[i].stocks;

@@ -3105,7 +3105,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     memzero(arg0, sizeof(*arg0));
 
-    arg0->outome = OUTCOME_TIMEOUT;
+    arg0->outcome = OUTCOME_TIMEOUT;
     arg0->match_kind = 0;
     arg0->is_teams = 0;
 
@@ -3169,11 +3169,11 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     s32 team_count;
     u8 result;
 
-    result = arg1->outome;
+    result = arg1->outcome;
     player_count = 0;
     team_count = 0;
     if (result == OUTCOME_NO_CONTEST || result == OUTCOME_RETRY) {
-        arg0->outome = result;
+        arg0->outcome = result;
     }
     if (arg1->n_winners > 1) {
         for (i = 0; i < 6; i++) {
@@ -3248,7 +3248,7 @@ bool gm_MatchHasMultipleWinners(MatchEnd* end)
 {
     s32 winners;
 
-    if (end->outome != OUTCOME_NO_CONTEST) {
+    if (end->outcome != OUTCOME_NO_CONTEST) {
         if (end->is_teams == 1) {
             winners = end->n_team_winners;
         } else {

@@ -32,7 +32,7 @@
 
 VsModeData* gmVsMelee_GetVsData(void)
 {
-    return &gmMainLib_804D3EE0->vs.vs_melee;
+    return &gmMainLib_804D3EE0->modes.vs_melee;
 }
 
 u8* gmVsMelee_GetKOCounts(void)
@@ -102,7 +102,7 @@ u8 findSmallestLoser(MatchEnd* end)
 
 void gmVsMelee_Mode_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->vs.vs_melee);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_melee);
     gmMainLib_8015CDEC();
 }
 
@@ -216,13 +216,13 @@ void gmVsMelee_ExitVs(GameModeState* state, u8 id0, u8 id1)
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (exit->match_end.player_standings[i].slot_type == Gm_PKind_Human) {
             gm_80162574(exit->match_end.player_standings[i].ckind,
-                        exit->match_end.outome);
+                        exit->match_end.outcome);
         }
     }
 
     if (gmVsMelee_WasAnyPlayerHuman(&exit->match_end)) {
         gm_SetupHumanResultsScreen(exit->match_end.match_kind,
-                                   exit->match_end.outome);
+                                   exit->match_end.outcome);
         gm_SetupResultsScreenPlayTime(exit->match_end.frame_count / GM_FPS,
                                       gm_80162800(&exit->match_end));
     }
@@ -286,7 +286,7 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
     u16 foo;
 
     match_end = &gmVsMelee_VsExitInfo.match_end;
-    if (!gm_WasMatchCanceled(match_end->outome)) {
+    if (!gm_WasMatchCanceled(match_end->outcome)) {
         gm_80168638(match_end);
         gm_80168710(match_end, vs);
     }

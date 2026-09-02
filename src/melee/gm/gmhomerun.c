@@ -154,7 +154,7 @@ void gm_801B9DD8(GameModeState* arg0)
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
-    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outcome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }

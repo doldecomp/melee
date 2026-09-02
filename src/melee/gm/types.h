@@ -694,7 +694,7 @@ ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 
 struct MatchEnd {
     /* 0x00 */ u32 x0;        ///< timer
-    /* 0x04 */ u8 outome;     ///< ::MatchOutcome
+    /* 0x04 */ u8 outcome;    ///< ::MatchOutcome
     /* 0x05 */ u8 match_kind; ///< ::MatchKind
     /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;

@@ -256,7 +256,7 @@ void onEnterResults(GameModeState* state)
 void onExitResults(GameModeState* state)
 {
     gmVsMelee_ExitResults(state, gmVsMelee_GetVsData(), gmVsMode_State_Css);
-    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.outome)) {
+    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.outcome)) {
         gm_801623A4(&gmVsMelee_ResultsEnterData.match_end);
     }
 }
