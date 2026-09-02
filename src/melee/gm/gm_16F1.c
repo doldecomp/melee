@@ -394,11 +394,6 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     return lbl_803D5648[entry->x2 - 2];
 }
 
-void fn_80171AD4(void)
-{
-    memzero(&lbl_8046DBC8, sizeof(lbl_8046DBC8));
-}
-
 int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 {
     int i;
@@ -441,17 +436,17 @@ int fn_80170110(void* arg0, int idx, int mask, u8 player_id)
 
 void gm_801701A0(void)
 {
-    lbl_804D65A0 = 1;
+    lbl_804D65A0.x0 = 1;
 }
 
 void fn_801701AC(void)
 {
-    lbl_804D65A0 = 0;
+    lbl_804D65A0.x0 = 0;
 }
 
 int fn_801701B8(void)
 {
-    return lbl_804D65A0;
+    return lbl_804D65A0.x0;
 }
 
 int fn_801701C0(void* arg0, int arg1, int arg2)
@@ -464,7 +459,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     s32 scores[4];
     u8 rankings[7] = { 0 };
 
-    if (lbl_804D65A0 != 0) {
+    if (lbl_804D65A0.x0 != 0) {
         return 0;
     }
     if (rules == NULL || x58 == NULL) {
@@ -1131,6 +1126,11 @@ int fn_80171A88(void)
         }
     }
     return result;
+}
+
+void fn_80171AD4(void)
+{
+    memzero(&lbl_8046DBC8, sizeof(lbl_8046DBC8));
 }
 
 bool fn_80171B00(int arg0)
