@@ -472,7 +472,7 @@ void onEnterVs(GameModeState* arg0)
     VsModeData* temp_r30;
     int i;
 
-    temp_r30 = &gmMainLib_804D3EE0->unk_1710;
+    temp_r30 = &gmMainLib_804D3EE0->vs.unk_1710;
     md = gm_GetGameModeStateEnterData(arg0);
     gm_80167BC8(temp_r30);
     gm_LoadRumbleEnabled(md);
