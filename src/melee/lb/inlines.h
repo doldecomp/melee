@@ -1,6 +1,9 @@
 #ifndef MELEE_LB_INLINES_H
 #define MELEE_LB_INLINES_H
 
+#include "lb/lbcardgame.h"
+#include "lb/lbcardnew.h"
+
 /// @todo Is a macro the best way?
 #define SKIP_CMD(cmd, n)                                                      \
     do {                                                                      \
@@ -14,5 +17,12 @@
     do {                                                                      \
         ++(cmd)->u;                                                           \
     } while (0);
+
+static inline void lbCardGame_SetupArchive(void)
+{
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
+}
 
 #endif

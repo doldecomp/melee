@@ -609,15 +609,15 @@ u8 fn_80160710(int arg0)
     return 0x42;
 }
 
-int gm_8016075C(SelectableCharacterKind selkind)
+StKind gm_GetChallengerStKind(SelectableCharacterKind selkind)
 {
-    int i;
+    ssize_t i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (selkind == lbl_803B78C8[i].selkind) {
-            return lbl_803B78C8[i].x4;
+            return lbl_803B78C8[i].stkind;
         }
     }
-    return 0x148;
+    return St_Kind_Unk328;
 }
 
 u8 fn_801607A8(int arg0)
@@ -3105,7 +3105,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     memzero(arg0, sizeof(*arg0));
 
-    arg0->result = OUTCOME_TIMEOUT;
+    arg0->outome = OUTCOME_TIMEOUT;
     arg0->match_kind = 0;
     arg0->is_teams = 0;
 
@@ -3169,11 +3169,11 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     s32 team_count;
     u8 result;
 
-    result = arg1->result;
+    result = arg1->outome;
     player_count = 0;
     team_count = 0;
     if (result == OUTCOME_NO_CONTEST || result == OUTCOME_RETRY) {
-        arg0->result = result;
+        arg0->outome = result;
     }
     if (arg1->n_winners > 1) {
         for (i = 0; i < 6; i++) {
@@ -3248,7 +3248,7 @@ bool gm_MatchHasMultipleWinners(MatchEnd* end)
 {
     s32 winners;
 
-    if (end->result != OUTCOME_NO_CONTEST) {
+    if (end->outome != OUTCOME_NO_CONTEST) {
         if (end->is_teams == 1) {
             winners = end->n_team_winners;
         } else {
@@ -3512,7 +3512,7 @@ void gm_SetupPlayerDefaults(struct PlayerInitData* player)
     player->rumble_enabled = false;
     player->nametag = GM_NAMETAG_NONE;
     player->xC_b1 = true;
-    player->xE = 4;
+    player->cpu_kind = 4;
     player->cpu_level = 0;
     player->x12 = 0;
     player->hp = 0;
@@ -3521,11 +3521,11 @@ void gm_SetupPlayerDefaults(struct PlayerInitData* player)
     player->x20 = 1.0F;
 }
 
-void gm_80167A14(struct PlayerInitData* arg0)
+void gm_SetupAllPlayerDefaults(struct PlayerInitData* player)
 {
-    int i;
-    for (i = 0; i < 6; i++) {
-        gm_SetupPlayerDefaults(&arg0[i]);
+    ssize_t i;
+    for (i = 0; i < Gm_Player_NumMax; i++) {
+        gm_SetupPlayerDefaults(&player[i]);
     }
 }
 
@@ -3552,7 +3552,7 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
 
     rules->x2C = 1.0f;
     rules->x30 = 1.0f;
-    rules->x34 = 1.0f;
+    rules->game_speed = 1.0f;
 
     rules->x4_6 = true;
     rules->x4_7 = true;
@@ -3560,13 +3560,13 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
     rules->xA = 0;
 }
 
-void gm_80167B50(VsModeData* arg0)
+void gm_InitVsMode(VsModeData* vs)
 {
-    gm_SetupRulesDefaults(&arg0->start.rules);
-    gm_80167A14(arg0->start.players);
-    arg0->loser = -1;
-    arg0->ordered_stage_index = -1;
-    arg0->winner = -1;
+    gm_SetupRulesDefaults(&vs->start.rules);
+    gm_SetupAllPlayerDefaults(vs->start.players);
+    vs->loser = -1;
+    vs->ordered_stage_index = -1;
+    vs->winner = -1;
 }
 
 void gm_80167BC8(VsModeData* vs_data)

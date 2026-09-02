@@ -114,8 +114,8 @@ void gm_801BEE9C(GameModeState* arg0)
             gm_SetPendingGameMode(*game_mode);
         }
     } else {
-        gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
-                    ckind, *game_mode);
+        gm_InitChallengerData(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(),
+                              gm_801BEFF0(), ckind, *game_mode);
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
     gm_SetNewGameModePending();

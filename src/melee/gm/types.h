@@ -337,11 +337,11 @@ struct gmm_x0 {
     struct EventData {
         /* 0x0530 */ u8 x0;
         /* 0x0531 */ u8 x1;
-        /* 0x0532 */ s8 x2;
-        /* 0x0533 */ u8 x3;
-        /* 0x0534 */ u8 x4;
+        /* 0x0532 */ s8 ckind;
+        /* 0x0533 */ u8 color;
+        /* 0x0534 */ u8 nametag;
         /* 0x0535 */ u8 unk_535;
-        /* 0x0536 */ u8 x6;
+        /* 0x0536 */ u8 slot;
         /* 0x0537 */ u8 x7;
         /* 0x0538 */ s8 x8;
         /* 0x0539 */ s8 x9;
@@ -382,19 +382,19 @@ struct gmm_x0 {
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
-    /* 0x0590 */ VsModeData vs_melee; ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0;  ///< super sudden death
-    /* 0x0810 */ VsModeData unk_810;  ///< invisible melee
+    /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
+    /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
     /* 0x0950 */ VsModeData vs_camera;
-    /* 0x0A90 */ VsModeData unk_A90;    ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;    ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;    ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;    ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;    ///< giant melee
-    /* 0x10D0 */ VsModeData vs_stamina; ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210;   ///< slowmo melee
-    /* 0x1350 */ VsModeData unk_1350;   ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490;   ///< multiman, 3/15 min, endless, cruel
+    /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
+    /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
+    /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
     /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
@@ -679,8 +679,8 @@ struct MatchPlayerData {
 ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 
 struct MatchEnd {
-    /* 0x00 */ u32 x0; ///< timer
-    /* 0x04 */ u8 result;
+    /* 0x00 */ u32 x0;        ///< timer
+    /* 0x04 */ u8 outome;     ///< ::MatchOutcome
     /* 0x05 */ u8 match_kind; ///< ::MatchKind
     /* 0x06 */ u8 is_teams;   ///< @todo enum between teams/not-teams
     /* 0x07 */ u8 x7;
@@ -1004,20 +1004,20 @@ struct gm_803DE650_t {
     u8 xF;
 };
 
-struct lbl_8046DBD8_t {
-    u8 x0; // c_kind
-    u8 x1; // color
-    u8 x2; // stocks
-    u8 x3;
-    u8 x4; // c_kind
-    u8 x5; ///< GameModeKind
-    u8 x6; ///< Previous GameModeKind
+struct ChallengerData {
+    u8 human_ckind;
+    u8 human_color;
+    u8 human_slot;
+    u8 human_nametag;
+    u8 cpu_ckind;
+    u8 curr_mode; ///< ::GameModeKind
+    u8 prev_mode; ///< ::GameModeKind
     u16 x8;
 };
 
 struct VsApproachData {
-    u8 x0;
-    u8 x1;
+    u8 cpu_ckind; ///< ::CharacterKind
+    u8 human_slot;
 };
 
 /// @brief data passed to OnLoad callback for GM_MENU

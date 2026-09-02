@@ -2677,7 +2677,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.xB = gmMainLib_8015CC58()->item_freq;
     arg0->rules.x2_2 = false;
     arg0->rules.x18 = 0;
-    arg0->rules.x34 = 1.0f;
+    arg0->rules.game_speed = 1.0f;
     arg0->rules.x30 = fn_801653E8(rules->damage_ratio);
     arg0->rules.x3_4 = false;
     arg0->rules.x3_5 = false;
@@ -2704,7 +2704,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.x3_0 = false;
     }
-    gm_80167A14(arg0->players);
+    gm_SetupAllPlayerDefaults(arg0->players);
 
     for (i = 0; i < 4; i++) {
         if (i < tm->x30) {
@@ -2727,7 +2727,7 @@ void gm_801905F0(StartMeleeData* arg0)
             if (tm->x4B8[i].x0 == 1) {
                 arg0->players[i].rumble_enabled = false;
             }
-            arg0->players[i].xE = 4;
+            arg0->players[i].cpu_kind = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
             if (gmMainLib_GetGameRules()->handicap != 0) {

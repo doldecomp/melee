@@ -31,7 +31,7 @@
     unsigned char x32;
     UNK_T pad_34;
 } un_804A1F10;
-/* 4A1F48 */ struct un_804A1F48_t un_804A1F48;
+/* 4A1F48 */ struct un_804A1F48_t if_Scene_Prize_EnterData;
 
 /// .sdata2
 /* 4DDBA8 */ static char const un_804DDBA8[4] = { 0, 1, 2, 3 };

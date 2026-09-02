@@ -265,7 +265,7 @@ void gm_SetGameSpeed(float speed)
 
 void gm_ResetGameSpeed(void)
 {
-    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.x34));
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.game_speed));
 }
 
 void gm_8016B328(void)
@@ -1596,7 +1596,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetFlagsBit3(arg0, 1);
         Player_SetUnk4C(arg0, tmp->unk_A);
     }
-    Player_SetPlayerAndEntityCpuType(arg0, arg1->xE);
+    Player_SetPlayerAndEntityCpuType(arg0, arg1->cpu_kind);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->cpu_level);
     if (arg1->x10 != 0) {
         Player_SetHUDDamage(arg0, arg1->x10);
@@ -1628,8 +1628,8 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->xC_b4;
-    if (arg1->xC_b4) {
+    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->vs_invisible;
+    if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
     } else {
@@ -1984,7 +1984,7 @@ void fn_8016E730(StartMeleeData* arg0)
     gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
-    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.x34));
+    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.game_speed));
     Camera_80028B9C(0x46);
     Camera_80030688();
     fn_8016DCC0(arg0);

@@ -1,42 +1,51 @@
-/// @file
-/// @brief Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+#include "gmvsmelee.h"
 #include "types.h"
 
 #include "baselib/memory.h"
+
+#include "gm/forward.h"
+
 #include "if/if_2FD9.h"
+
+#include "lb/forward.h"
+
+#include "lb/inlines.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
 
-extern UNK_T gm_804D6860[];
-extern StartMeleeData gmVsMelee_StartData;
-extern MatchExitInfo gmVsMelee_VsExitInfo;
+enum {
+    state_approach,
+    state_vs,
+    state_prize,
+};
+
+/* 1BFBA8 */ static void onExitVs(GameModeState*);
+/* 1BFF7C */ static void onExitPrize(GameModeState*);
 
 GameModeState gm_Mode_ChallengerApproach_States[] = {
     {
+        state_approach,
+        lbDvdPreload_2,
         0,
-        2,
-        0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
-            gm_804D6860,
-            gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
-        1,
-        2,
+        state_vs,
+        lbDvdPreload_2,
         0,
-        gm_ModeState_EnterApproachVs,
-        gm_801BFBA8,
+        gm_ModeState_ApproachVs_OnEnter,
+        onExitVs,
         {
             GS_VS,
             &gmVsMelee_StartData,
@@ -44,81 +53,72 @@ GameModeState gm_Mode_ChallengerApproach_States[] = {
         },
     },
     {
-        2,
-        2,
+        state_prize,
+        lbDvdPreload_2,
         0,
-        gm_801BFCFC,
-        gm_801BFF7C,
+        gm_ModeState_Prize_OnEnter,
+        onExitPrize,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
-    { -1 },
+    { GM_GAMEMODESTATE_TERMINATE },
 };
 
-void gm_801BFA6C(GameModeState* arg0)
+void gm_ModeState_Approach_OnEnter(GameModeState* arg0)
 {
-    lbl_8046DBD8_t* temp_r3;
-    VsApproachData* temp_r31;
-
-    temp_r31 = gm_GetGameModeStateEnterData(arg0);
-    temp_r3 = gm_GetChallengerData();
-    temp_r31->x0 = temp_r3->x4;
-    temp_r31->x1 = temp_r3->x2;
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    VsApproachData* vs = gm_GetGameModeStateEnterData(arg0);
+    ChallengerData* challenger = gm_GetChallengerData();
+    vs->cpu_ckind = challenger->cpu_ckind;
+    vs->human_slot = challenger->human_slot;
+    lbCardGame_SetupArchive();
 }
 
-void gm_ModeState_EnterApproachVs(GameModeState* arg0)
+void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
 {
-    lbl_8046DBD8_t* temp_r31;
-    StartMeleeData* temp_r30;
-    u8 tmp;
-
-    temp_r30 = gm_GetGameModeStateEnterData(arg0);
-    temp_r31 = gm_GetChallengerData();
-    gm_SetupRulesDefaults(&temp_r30->rules);
-    gm_80167A14(temp_r30->players);
-    temp_r30->rules.x0_6 = false;
-    temp_r30->rules.match_kind = 1;
-    temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
-    gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
-                temp_r31->x2);
-    gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
-    tmp = temp_r31->x3;
-    temp_r30->players[0].nametag = tmp;
-    temp_r30->players[1].nametag = 0x78;
-    temp_r30->players[1].xE = 4;
-    temp_r30->players[1].cpu_level = gm_80172CC0(temp_r31->x4, tmp);
-    gm_LoadRumbleEnabled(temp_r30);
+    StartMeleeData* start = gm_GetGameModeStateEnterData(state);
+    ChallengerData* challenger = gm_GetChallengerData();
+    gm_SetupRulesDefaults(&start->rules);
+    gm_SetupAllPlayerDefaults(start->players);
+    start->rules.x0_6 = false;
+    start->rules.match_kind = MatchKind_Stock;
+    start->rules.x0_3 = 2;
+    start->rules.stkind =
+        gm_GetChallengerStKind(gm_CKindToSelKind(challenger->cpu_ckind));
+    gm_SetupHumanPlayer(&start->players[0], challenger->human_ckind,
+                        challenger->human_color, 1, challenger->human_slot);
+    gm_SetupCpuPlayer(&start->players[1], challenger->cpu_ckind, 0, 1, 1);
+    { /// @todo Inline?
+        u8 human_nametag = challenger->human_nametag;
+        start->players[0].nametag = human_nametag;
+        start->players[1].nametag = GM_NAMETAG_NONE;
+        start->players[1].cpu_kind = CpuKind_4;
+        start->players[1].cpu_level =
+            gm_DecideChallengerCpuLevel(challenger->cpu_ckind, human_nametag);
+    }
+    gm_LoadRumbleEnabled(start);
 }
 
-void gm_801BFBA8(GameModeState* arg0)
+void onExitVs(GameModeState* state)
 {
-    lbl_8046DBD8_t* temp_r31;
-    u8 temp_r0;
-    MatchExitInfo* mei;
-
-    mei = gm_GetGameModeStateExitData(arg0);
-    temp_r31 = gm_GetChallengerData();
-    gm_80162968(mei->match_end.frame_count / 60);
-    gm_8016247C((s32) mei->match_end.player_standings[0].xE);
-    temp_r0 = mei->match_end.result;
-    if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
-        (mei->match_end.player_standings[0].stocks != 0))
+    MatchExitInfo* mei = gm_GetGameModeStateExitData(state);
+    ChallengerData* challenger = gm_GetChallengerData();
+    gm_80162968(mei->match_end.frame_count / GM_FPS);
+    gm_8016247C(mei->match_end.player_standings[0].xE);
+    if (mei->match_end.outome != OUTCOME_NO_CONTEST &&
+        mei->match_end.outome != OUTCOME_RETRY &&
+        mei->match_end.player_standings[0].stocks != 0)
     {
-        gm_UnlockCKind((s32) temp_r31->x4);
+        gm_UnlockCKind(challenger->cpu_ckind);
     } else {
-        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex(challenger->cpu_ckind));
     }
     gm_80173EEC();
     gm_80172898(0x100U);
-    if (gm_801721EC() == 0) {
-        gm_SetPendingGameMode((s8) temp_r31->x5);
+    if (!gm_801721EC()) {
+        gm_SetPendingGameMode(challenger->curr_mode);
         gm_SetNewGameModePending();
     }
 }
@@ -132,12 +132,12 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
     struct un_804A1F48_t* temp_r3;
 
     if (arg1 == 0) {
-        un_804A1F48.x0 = arg0;
-        un_804A1F48.x4 = arg3;
-        un_804A1F48.x2 = arg2;
-        return (&un_804A1F48.x8);
+        if_Scene_Prize_EnterData.x0 = arg0;
+        if_Scene_Prize_EnterData.x4 = arg3;
+        if_Scene_Prize_EnterData.x2 = arg2;
+        return (&if_Scene_Prize_EnterData.x8);
     }
-    temp_r3 = HSD_MemAlloc(sizeof(struct un_804A1F48_t));
+    temp_r3 = HSD_MemAlloc(sizeof(*temp_r3));
     if (temp_r3 != NULL) {
         temp_r3->x0 = arg0;
         temp_r3->x4 = arg3;
@@ -153,7 +153,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(GameModeState* arg0)
+void gm_ModeState_Prize_OnEnter(GameModeState* arg0)
 {
     u8* var_r28;
     u32* temp_r29_2;
@@ -161,7 +161,9 @@ void gm_801BFCFC(GameModeState* arg0)
     u8* var_r26;
     int var_r28_3;
     s32 var_r27_2_s11;
+#ifdef MUST_MATCH
     s32 var_r27_2;
+#endif
     void** var_r31;
     int var_r25_2;
     void** temp_r3;
@@ -243,13 +245,11 @@ void gm_801BFCFC(GameModeState* arg0)
     if (var_r31 != NULL) {
         *var_r31 = 0;
     }
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardGame_SetupArchive();
 }
 
-void gm_801BFF7C(GameModeState* arg0)
+void onExitPrize(UNUSED GameModeState* state)
 {
-    gm_SetPendingGameMode((s8) gm_GetChallengerData()->x5);
+    gm_SetPendingGameMode(gm_GetChallengerData()->curr_mode);
     gm_SetNewGameModePending();
 }

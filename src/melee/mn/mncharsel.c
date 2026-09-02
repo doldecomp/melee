@@ -5310,8 +5310,8 @@ void mnCharSel_Scene_OnEnter(void* arg0)
 {
     PAD_STACK(8);
 
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
     mnCharSel_804D6CB0 = (CSSData*) arg0;
 
     mnCharSel_804D6CF0 = mnCharSel_804D6CB0->unk_0x0 - 1;

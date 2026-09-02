@@ -6,6 +6,7 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
+#include "gm/gmvsmode.h"
 #include "if/if_2FD9.h"
 
 GameModeState gm_Mode_LightningVs_States[] = {
@@ -73,20 +74,20 @@ GameModeState gm_Mode_LightningVs_States[] = {
         0x80,
         2,
         0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
-            &gm_804D6860,
-            &gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
         0x81,
         2,
         0,
-        gm_ModeState_EnterApproachVs,
-        gm_ModeState_ExitApproachVs,
+        gm_ModeState_ApproachVs_OnEnter,
+        gm_ModeState_ApproachVs_OnExit,
         {
             GS_VS,
             &gmVsMelee_StartData,
@@ -97,11 +98,11 @@ GameModeState gm_Mode_LightningVs_States[] = {
         0xC0,
         2,
         0,
-        gm_801BFCFC,
-        gm_801A6308,
+        gm_ModeState_Prize_OnEnter,
+        gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
@@ -110,44 +111,45 @@ GameModeState gm_Mode_LightningVs_States[] = {
 
 void gm_801BA704(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_1350, 9);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->vs_lightning, 9);
 }
 
 void gm_801BA730(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_801BA758(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_1350);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_801BA780(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->vs_lightning,
+                      gmVsMode_State_Css);
 }
 
 /// Sets game speed to 1.25F for lightning melee
-static void fn_801BA7AC(StartMeleeData* data, StartMeleeData* unused)
+static void fn_801BA7AC(StartMeleeData* start, UNUSED StartMeleeData* vs)
 {
-    data->rules.x34 = 1.25F;
+    start->rules.game_speed = 1.25F;
 }
 
 void gm_801BA7B8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
-    gm_801A583C(scene, data, fn_801BA7AC, NULL);
+    VsModeData* data = &gmMainLib_804D3EE0->vs_lightning;
+    gmVsMelee_EnterVs(scene, data, fn_801BA7AC, NULL);
 }
 
 void gm_801BA7EC(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4, 3);
+    gmVsMelee_ExitVs(scene, 4, 3);
 }
 
 void gm_801BA814(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
+    VsModeData* data = &gmMainLib_804D3EE0->vs_lightning;
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA7AC, NULL);
 }
 
@@ -163,12 +165,12 @@ void gm_801BA868(GameModeState* scene)
 
 void gm_801BA888(GameModeState* scene)
 {
-    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->vs_lightning, 0);
 }
 
 void gm_Mode_LightningVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_1350);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_lightning);
 }
 
 void gm_Mode_LightningVs_OnLoad(void)

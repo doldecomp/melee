@@ -29,7 +29,7 @@
 /* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
 /* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
 /* 160710 */ u8 fn_80160710(int);
-/* 16075C */ int gm_8016075C(SelectableCharacterKind);
+/* 16075C */ StKind gm_GetChallengerStKind(SelectableCharacterKind);
 /* 1607A8 */ u8 fn_801607A8(int);
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
@@ -172,9 +172,9 @@
 /* 167858 */ void gm_80167858(int port, int, int, int);
 /* 1678F8 */ void gm_801678F8(int port, int, int);
 /* 16795C */ void gm_SetupPlayerDefaults(struct PlayerInitData*);
-/* 167A14 */ void gm_80167A14(struct PlayerInitData*);
+/* 167A14 */ void gm_SetupAllPlayerDefaults(struct PlayerInitData*);
 /* 167A64 */ void gm_SetupRulesDefaults(struct StartMeleeRules*);
-/* 167B50 */ void gm_80167B50(struct VsModeData*);
+/* 167B50 */ void gm_InitVsMode(struct VsModeData*);
 /* 167BC8 */ void gm_80167BC8(struct VsModeData*);
 /* 167FC4 */ void gm_80167FC4(struct SSSData*);
 /* 1685D4 */ s8 gm_801685D4(u8, u8);

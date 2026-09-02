@@ -27,22 +27,9 @@
 /* 1B16A8 */ static void onEnterResults(GameModeState*);
 /* 1B16C8 */ static void onExitResults(GameModeState*);
 
-/// @todo Shared with other vs modes
-enum {
-    state_css,
-    state_sss,
-    state_vs,
-    state_sudden_death,
-    state_results,
-    state_approach = (2 << 6),
-    state_approach_vs,
-    state_prize = (3 << 6),
-    state_end = GM_GAMEMODESTATE_TERMINATE,
-};
-
 GameModeState gm_Mode_Vs_States[] = {
     {
-        state_css,
+        gmVsMode_State_Css,
         lbDvdPreload_3,
         0,
         onEnterCss,
@@ -54,7 +41,7 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_sss,
+        gmVsMode_State_Sss,
         lbDvdPreload_3,
         0,
         onEnterSss,
@@ -66,7 +53,7 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_vs,
+        gmVsMode_State_Vs,
         lbDvdPreload_3,
         0,
         onEnterVs,
@@ -78,7 +65,7 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_sudden_death,
+        gmVsMode_State_SuddenDeath,
         lbDvdPreload_3,
         0,
         onEnterSuddenDeath,
@@ -90,7 +77,7 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_results,
+        gmVsMode_State_Results,
         lbDvdPreload_3,
         0,
         onEnterResults,
@@ -102,23 +89,23 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_approach,
+        gmVsMode_State_Approach,
         lbDvdPreload_2,
         0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
-            &gm_804D6860,
-            &gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
-        state_approach_vs,
+        gmVsMode_State_ApproachVs,
         lbDvdPreload_2,
         0,
-        gm_ModeState_EnterApproachVs,
-        gm_ModeState_ExitApproachVs,
+        gm_ModeState_ApproachVs_OnEnter,
+        gm_ModeState_ApproachVs_OnExit,
         {
             GS_VS,
             &gmVsMelee_StartData,
@@ -126,18 +113,18 @@ GameModeState gm_Mode_Vs_States[] = {
         },
     },
     {
-        state_prize,
+        gmVsMode_State_Prize,
         lbDvdPreload_2,
         0,
-        gm_801BFCFC,
-        gm_801A6308,
+        gm_ModeState_Prize_OnEnter,
+        gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
-    { state_end },
+    { GM_GAMEMODESTATE_TERMINATE },
 };
 
 enum {
@@ -170,7 +157,7 @@ GameModeState gm_Mode_DebugVs_States[] = {
             NULL,
         },
     },
-    { state_end },
+    { GM_GAMEMODESTATE_TERMINATE },
 };
 
 void onEnterDebugVs(GameModeState* state)
@@ -187,7 +174,7 @@ void onEnterDebugVs(GameModeState* state)
     for (i = 0; i < Gm_Player_NumMax; i++) {
         gm_SetupPlayerDefaults(&start->players[i]);
         start->players[i].stocks = 0;
-        start->players[i].xE = 4;
+        start->players[i].cpu_kind = 4;
     }
 
     start->players[0].ckind = CKIND_LINK;
@@ -225,12 +212,12 @@ void onEnterSss(GameModeState* state)
 
 void onExitSss(GameModeState* state)
 {
-    gmVsMelee_ExitSss(state, gmVsMelee_GetVsData(), state_css);
+    gmVsMelee_ExitSss(state, gmVsMelee_GetVsData(), gmVsMode_State_Css);
 }
 
 void onEnterVs(GameModeState* state)
 {
-    gm_801A583C(state, gmVsMelee_GetVsData(), NULL, NULL);
+    gmVsMelee_EnterVs(state, gmVsMelee_GetVsData(), NULL, NULL);
 }
 
 void onExitVs(GameModeState* state)
@@ -238,7 +225,8 @@ void onExitVs(GameModeState* state)
     MatchExitInfo* mei;
     ssize_t i;
 
-    gm_801A5AF0(state, state_results, state_sudden_death);
+    gmVsMelee_ExitVs(state, gmVsMode_State_Results,
+                     gmVsMode_State_SuddenDeath);
     mei = gm_GetGameModeStateExitData(state);
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {
@@ -267,8 +255,8 @@ void onEnterResults(GameModeState* state)
 
 void onExitResults(GameModeState* state)
 {
-    gmVsMelee_ExitResults(state, gmVsMelee_GetVsData(), state_css);
-    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.result)) {
+    gmVsMelee_ExitResults(state, gmVsMelee_GetVsData(), gmVsMode_State_Css);
+    if (!gm_WasMatchCanceled(gmVsMelee_ResultsEnterData.match_end.outome)) {
         gm_801623A4(&gmVsMelee_ResultsEnterData.match_end);
     }
 }

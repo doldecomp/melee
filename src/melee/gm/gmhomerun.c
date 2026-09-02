@@ -58,9 +58,9 @@ void gm_801B98E8(GameModeState* scene)
 
     css = gm_GetGameModeStateEnterData(scene);
     if (gm_804D68F9 != 0) {
-        lb_8001C550();
-        lb_8001D164(0);
-        lb_8001CE00();
+        lbCardNew_AllocWorkArea();
+        lbCardGame_LoadArchive(0);
+        lbCardGame_UpdatePowerTime();
     }
     gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
                 vs->start.players[0].color, vs->start.players[0].nametag, 0,
@@ -84,12 +84,12 @@ void gm_801B999C(GameModeState* scene)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(vs->start.players);
+    gm_SetupAllPlayerDefaults(vs->start.players);
     gm_801B0730(temp_r3, &vs->start.players[0].ckind, NULL,
                 &vs->start.players[0].color, &vs->start.players[0].nametag,
                 NULL);
     vs->start.players[1].ckind = CHKIND_SANDBAG;
-    vs->start.players[1].xE = 0xF;
+    vs->start.players[1].cpu_kind = 0xF;
     vs->start.players[1].x1C = 1.0f;
     vs->start.players[1].slot_type = Gm_PKind_Cpu;
     vs->start.players[1].stocks = 1;
@@ -117,7 +117,7 @@ void gm_801B9A3C(GameModeState* arg0)
     start->rules.is_teams = false;
     start->rules.xB = -1;
     start->rules.time_limit = 10;
-    start->rules.x34 = 1.0f;
+    start->rules.game_speed = 1.0f;
     start->rules.x30 = 1.0f;
 
     start->rules.x5_0 = true;
@@ -134,8 +134,8 @@ void gm_801B9A3C(GameModeState* arg0)
         start->players[i].xD_b3 = true;
     }
 
-    gm_801B0620(&start->players[0], vs->start.players[0].ckind,
-                vs->start.players[0].color, 1, gm_804D68F8);
+    gm_SetupHumanPlayer(&start->players[0], vs->start.players[0].ckind,
+                        vs->start.players[0].color, 1, gm_804D68F8);
     start->players[0].xD_b2 = true;
     gm_LoadRumbleEnabled(start);
     gm_80181A00(start->players[0].ckind, start->players[0].nametag);
@@ -154,7 +154,7 @@ void gm_801B9DD8(GameModeState* arg0)
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
-    if (temp_r3->match_end.result == OUTCOME_RETRY) {
+    if (temp_r3->match_end.outome == OUTCOME_RETRY) {
         gm_SetNextGameModeStateId(1);
         return;
     }
@@ -178,7 +178,7 @@ void gm_801B9DD8(GameModeState* arg0)
 void gm_Mode_Homerun_OnInit(void)
 {
     VsModeData* data = &gm_80497618;
-    gm_80167B50(data);
+    gm_InitVsMode(data);
 }
 
 void gm_Mode_Homerun_OnLoad(void)

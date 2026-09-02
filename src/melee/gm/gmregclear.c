@@ -273,9 +273,9 @@ void fn_8017C0C8(void)
     gm_SetupPlayerDefaults(&sp8);
     sp8.slot_type = Gm_PKind_Cpu;
     sp8.stocks = 1;
-    sp8.xE = 4;
+    sp8.cpu_kind = 4;
     sp8.cpu_level = Player_GetCpuLevel(2);
-    sp8.xE = Player_GetCpuType(2);
+    sp8.cpu_kind = Player_GetCpuType(2);
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
@@ -604,8 +604,8 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
                 gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
-            gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
-                        temp_r31, 1U);
+            gm_InitChallengerData(arg1->ckind, arg1->color, arg1->slot,
+                                  arg1->x4, temp_r31, 1U);
             gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }
     } else {
@@ -671,9 +671,9 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
         }
         break;
     }
-    lb_8001C550();
-    lb_8001D164(0);
-    lb_8001CE00();
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
+    lbCardGame_UpdatePowerTime();
     gm_SetPendingGameMode(arg2);
     gm_SetNewGameModePending();
 }
@@ -848,8 +848,8 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         player_ckind = (u8) arg1->x0.ckind;
     }
 
-    gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
-                arg1->x0.slot);
+    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.color,
+                        player_stocks, arg1->x0.slot);
     arg0->players[0].nametag = arg1->x0.x4;
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
 
@@ -966,7 +966,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             arg0->players[player_idx].ckind = (s8) (u8) enemy_kind[0];
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
-            arg0->players[player_idx].xE = enemy_cpu_type;
+            arg0->players[player_idx].cpu_kind = enemy_cpu_type;
             arg0->players[player_idx].x18 = attack_ratio;
             arg0->players[player_idx].x1C = defense_ratio;
             arg0->players[player_idx].color = *color_iter;
@@ -979,7 +979,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
             if (arg1->x0.x8 & 4) {
                 arg0->players[player_idx].xC_b2 = 1;
-                arg0->players[player_idx].xE = 0x1B;
+                arg0->players[player_idx].cpu_kind = 0x1B;
             }
             if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
@@ -1076,7 +1076,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (fn_8016B4BC() != 0) {
         arg1->xC.xE = 1;
     }
-    temp_r0 = arg0->match_end.result;
+    temp_r0 = arg0->match_end.outome;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
         DbLevel <= DbLKind_DebugDevelop)
     {
@@ -1098,7 +1098,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (!(arg1->x8 & 0x80)) {
         arg1->stocks = arg0->match_end.player_standings[0].stocks;
         if (arg1->stocks != 0) {
-            if (arg0->match_end.result == OUTCOME_TIMEOUT) {
+            if (arg0->match_end.outome == OUTCOME_TIMEOUT) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
                     gm_SetNextGameModeStateId(arg2);
@@ -1297,7 +1297,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
             arg0[index].color = arg1[i].x1;
-            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_kind = arg1[i].x3;
             arg0[index].cpu_level = arg1[i].x2;
             arg0[index].x18 = arg1[i].x4;
             arg0[index].x1C = arg1[i].x8;
@@ -3457,7 +3457,7 @@ void fn_80181C80(s32 arg0)
         sp10.team = !Player_GetTeam(0);
         sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
-        sp10.xE = data->x54[arg0].x7;
+        sp10.cpu_kind = data->x54[arg0].x7;
         sp10.x18 = data->x54[arg0].x8;
         sp10.x1C = data->x54[arg0].xC;
         gm_8016EDDC(sp38, &sp10);

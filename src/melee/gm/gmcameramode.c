@@ -99,7 +99,7 @@ void gm_801B24B4(GameModeState* arg0)
     lbDvd_SetupVsPreloadCache();
     temp_r31->mode_kind = GM_CAMERA_MODE;
     lbDvd_80018254();
-    lb_8001C550();
+    lbCardNew_AllocWorkArea();
     temp_r31_2 = lbDvd_GetPreloadedArchive(0x7D8);
     lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7), temp_r31_2);
 }
@@ -230,7 +230,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
     gm_SetupSubColors(start);
     gm_LoadRumbleEnabled(start);
     gm_LoadAnnouncer();
-    lb_8001C550();
+    lbCardNew_AllocWorkArea();
     lbSnap_8001E218(lbDvd_GetPreloadedArchive(2007),
                     lbDvd_GetPreloadedArchive(2008));
 }
@@ -248,5 +248,5 @@ void gm_801B2AF8(GameModeState* arg0)
 
 void gm_Mode_Camera_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_camera);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_camera);
 }

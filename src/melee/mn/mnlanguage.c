@@ -54,7 +54,7 @@ void mnLanguage_8024BFE0(HSD_GObj* unused)
             user_data = HSD_GObjGetUserData(mn_gobj);
             if (user_data->x1 != user_data->x0) {
                 lbLang_SetSavedLanguage(user_data->x0);
-                lb_8001CE00();
+                lbCardGame_UpdatePowerTime();
                 lbAudioAx_80027AB0(0xAD);
                 mn_80229860(GM_MENU);
                 mn_8022F1A8(1, 9);

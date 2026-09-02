@@ -112,7 +112,7 @@ void gm_801B931C(GameModeState* state)
     start->rules.match_kind = 1;
     start->rules.x44 = fn_801B9850;
     start->rules.x3_0 = false;
-    gm_80167A14(start->players);
+    gm_SetupAllPlayerDefaults(start->players);
 
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         start->players[i] = vs->start.players[i];
@@ -130,12 +130,12 @@ void gm_801B9560(GameModeState* scene)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
     gm_80168710(&gmVsMelee_VsExitInfo.match_end, vs);
-    gm_801A5AF0(scene, 0, 0);
+    gmVsMelee_ExitVs(scene, 0, 0);
 }
 
 void gm_Mode_StaminaVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_stamina);
+    gm_InitVsMode(&gmMainLib_804D3EE0->vs_stamina);
 }
 
 void gm_Mode_StaminaVs_OnLoad(void)
