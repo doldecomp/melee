@@ -3,14 +3,10 @@
 #include <string.h>
 #include <dolphin/pad.h>
 #include <dolphin/vi.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_393C.h>
+#include <sysdolphin/baselib/hsd_397E.h>
 #include <sysdolphin/baselib/video.h>
-#include <sysdolphin/baselib/wobj.h>
 
 #ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>

@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include <dolphin/os/OSContext.h>
 
 /* 394950 */ void hsd_80394950(OSContext*);

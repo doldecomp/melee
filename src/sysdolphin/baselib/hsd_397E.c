@@ -1,5 +1,7 @@
 #include "hsd_397E.h"
 
+#include <platform.h>
+
 #include <dolphin/os.h>
 
 #ifdef MWERKS_GEKKO
