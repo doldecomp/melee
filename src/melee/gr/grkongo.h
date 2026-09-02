@@ -6,7 +6,7 @@
 #include "gr/forward.h"
 #include <baselib/forward.h>
 
-/* 1D5238 */ void grKongo_801D5238(bool);
+/* 1D5238 */ void grKongo_801D5238(int);
 /* 1D523C */ void grKongo_801D523C(void);
 /* 1D52F8 */ void grKongo_801D52F8(void);
 /* 1D52FC */ void grKongo_801D52FC(void);

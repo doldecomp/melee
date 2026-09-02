@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 223160 */ void grTPurin_80223160(bool);
+/* 223160 */ void grTPurin_80223160(int);
 /* 223164 */ void grTPurin_80223164(void);
 /* 2231DC */ void grTpurin_UnkStage0_OnLoad(void);
 /* 2231E0 */ void grTpurin_UnkStage0_OnStart(void);

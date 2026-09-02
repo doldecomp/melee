@@ -40,7 +40,7 @@ struct GrPuVtxMapEntry {
     /* 0x8 */ HSD_JObj* jobj;
 };
 
-/* 211CFC */ static void grPura_80211CFC(bool);
+/* 211CFC */ static void grPura_80211CFC(int);
 /* 211D00 */ static void grPura_80211D00(void);
 /* 211DD8 */ static void grPura_80211DD8(void);
 /* 211DDC */ static void grPura_80211DDC(void);
@@ -293,7 +293,7 @@ StageData grPu_StageData = {
     0,
 };
 
-void grPura_80211CFC(bool num) {}
+void grPura_80211CFC(int num) {}
 
 /* 4D6AA0 */ static void* yakumono_param;
 

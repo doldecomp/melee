@@ -7,7 +7,6 @@
 
 #include <dolphin/mtx.h>
 
-/* 1E57BC */ void grBigBlue_801E57BC(bool);
 /* 1E57C0 */ void grBigBlue_801E57C0(void);
 /* 1E59C8 */ void grBigBlue_801E59C8(void);
 /* 1E59CC */ void grBigBlue_801E59CC(void);

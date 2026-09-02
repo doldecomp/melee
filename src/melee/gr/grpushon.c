@@ -115,7 +115,7 @@ StageData grPushOn_StageData = {
     0,
 };
 
-void grPushOn_802182C4(bool arg) {}
+void grPushOn_802182C4(int arg) {}
 
 void grPushOn_802182C8(void)
 {

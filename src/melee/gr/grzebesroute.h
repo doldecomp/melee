@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 20B160 */ void grZebesRoute_8020B160(bool);
+/* 20B160 */ void grZebesRoute_8020B160(int);
 /* 20B164 */ void grZebesRoute_8020B164(void);
 /* 20B1D4 */ void grZebesRoute_8020B1D4(void);
 /* 20B1F4 */ void grZebesRoute_8020B1F4(void);

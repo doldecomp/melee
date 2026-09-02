@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 206E2C */ void grTest_80206E2C(bool);
+/* 206E2C */ void grTest_80206E2C(int);
 /* 206E30 */ void grTest_80206E30(void);
 /* 207014 */ void grTest_UnkStage0_OnLoad(void);
 /* 207018 */ void grTest_UnkStage0_OnStart(void);

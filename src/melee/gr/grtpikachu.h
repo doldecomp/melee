@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 222E7C */ void grTPikachu_80222E7C(bool);
+/* 222E7C */ void grTPikachu_80222E7C(int);
 /* 222E80 */ void grTPikachu_80222E80(void);
 /* 222EF0 */ void grTpikachu_UnkStage0_OnLoad(void);
 /* 222EF4 */ void grTpikachu_UnkStage0_OnStart(void);

@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 216E74 */ void grFlatzone_80216E74(bool);
+/* 216E74 */ void grFlatzone_80216E74(int);
 /* 216E78 */ void grFlatzone_80216E78(void);
 /* 216F38 */ void grFlatzone_UnkStage0_OnLoad(void);
 /* 216F3C */ void grFlatzone_UnkStage0_OnStart(void);

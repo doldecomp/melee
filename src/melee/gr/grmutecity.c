@@ -361,7 +361,7 @@ static struct grMc_YakumonoParam* yakumono_param;
 
 static s32 grMc_804D69D4;
 
-void grMuteCity_801EFC68(bool arg) {}
+void grMuteCity_801EFC68(int arg) {}
 
 void grMuteCity_801EFC6C(void)
 {
@@ -1912,7 +1912,11 @@ s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
         if ((appsrt = gen->appsrt) == NULL) {
             appsrt = psAddGeneratorAppSRT_begin(gen, 0);
             if (appsrt == NULL) {
+#ifdef MUST_MATCH
                 return;
+#else
+                return 0;
+#endif
             }
         }
         appsrt->xA2 = 0;

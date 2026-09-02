@@ -1142,7 +1142,7 @@ f32 grKongo_801D8314(void)
     return var_f31;
 }
 
-void grKongo_801D5238(bool arg) {}
+void grKongo_801D5238(int arg) {}
 
 void grKongo_801D523C(void)
 {

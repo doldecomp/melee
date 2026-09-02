@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 20741C */ void grKinokoRoute_8020741C(bool);
+/* 20741C */ void grKinokoRoute_8020741C(int);
 /* 207420 */ void grKinokoRoute_80207420(void);
 /* 207490 */ void grKinokoRoute_80207490(void);
 /* 2074D8 */ void grKinokoRoute_802074D8(void);
@@ -33,7 +33,7 @@
 /* 207C88 */ void grKinokoRoute_80207C88(Ground_GObj*);
 /* 208368 */ void grKinokoRoute_80208368(Ground_GObj*);
 /* 20836C */ void grKinokoRoute_8020836C(Ground_GObj*, int);
-/* 208480 */ bool grKinokoRoute_80208480(bool);
+/* 208480 */ bool grKinokoRoute_80208480(int);
 /* 2084B4 */ void grKinokoRoute_802084B4(Ground_GObj*);
 /* 208564 */ void grKinokoRoute_80208564(Ground_GObj*);
 /* 208660 */ bool grKinokoRoute_80208660(int unused, Fighter_GObj*);

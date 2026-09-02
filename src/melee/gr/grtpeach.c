@@ -16,7 +16,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-/* 2228B4 */ static void grTPeach_802228B4(bool arg0);
+/* 2228B4 */ static void grTPeach_802228B4(int arg0);
 /* 2228B8 */ static void grTPeach_802228B8(void);
 /* 222928 */ static void grTpeach_UnkStage0_OnLoad(void);
 /* 22292C */ static void grTpeach_UnkStage0_OnStart(void);
@@ -85,7 +85,7 @@ StageData grTPe_StageData = {
     0,
 };
 
-void grTPeach_802228B4(bool arg0) {}
+void grTPeach_802228B4(int arg0) {}
 
 void grTPeach_802228B8(void)
 {

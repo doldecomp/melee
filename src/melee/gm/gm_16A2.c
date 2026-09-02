@@ -75,7 +75,7 @@ void fn_80169434(GmRouteCallback fn)
     gm_1601_GetUnkData()->x1B8 = fn;
 }
 
-bool fn_80169444(bool arg0)
+bool fn_80169444(int arg0)
 {
     struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
 

@@ -122,7 +122,7 @@ StageData grFz_StageData = {
 static struct grFlatzone_YakumonoParam* yakumono_param;
 static const Vec3 grFz_803B8430 = { 0 };
 
-void grFlatzone_80216E74(bool arg0) {}
+void grFlatzone_80216E74(int arg0) {}
 
 void grFlatzone_80216E78(void)
 {

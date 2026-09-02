@@ -18,7 +18,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-/* 220F10 */ static void grTIceClimber_80220F10(bool);
+/* 220F10 */ static void grTIceClimber_80220F10(int);
 /* 220F14 */ static void grTIceClimber_80220F14(void);
 /* 220F84 */ static void grTiceclimber_UnkStage0_OnLoad(void);
 /* 220F88 */ static void grTiceclimber_UnkStage0_OnStart(void);
@@ -83,7 +83,7 @@ StageData grTIc_StageData = {
     0,
 };
 
-void grTIceClimber_80220F10(bool unused) {}
+void grTIceClimber_80220F10(int unused) {}
 
 void grTIceClimber_80220F14(void)
 {

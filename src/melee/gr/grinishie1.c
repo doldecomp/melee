@@ -29,7 +29,7 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 
-/* 1FA908 */ static void grInishie1_801FA908(bool);
+/* 1FA908 */ static void grInishie1_801FA908(int);
 /* 1FA90C */ static void grInishie1_801FA90C(void);
 /* 1FA984 */ static void grInishie1_801FA984(void);
 /* 1FA988 */ static void grInishie1_801FA988(void);
@@ -222,7 +222,7 @@ static void order_data(void)
 }
 #endif
 
-void grInishie1_801FA908(bool arg) {}
+void grInishie1_801FA908(int arg) {}
 
 /// corresponds with the 3 - 13 - 3 block pattern on the stage
 #define BLOCK_COUNT 19

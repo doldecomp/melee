@@ -14,7 +14,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-static void grFigure3_8020E504(bool number);
+static void grFigure3_8020E504(int number);
 static void grFigure3_8020E508(void);
 static void grFigure3_OnLoad(void);
 static void grFigure3_OnStart(void);
@@ -62,7 +62,7 @@ StageData grEF3_StageData = {
 
 static void* yakumono_param;
 
-static void grFigure3_8020E504(bool number) {}
+static void grFigure3_8020E504(int number) {}
 
 static void grFigure3_8020E508(void)
 {

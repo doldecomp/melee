@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 221C10 */ void grTLuigi_80221C10(bool);
+/* 221C10 */ void grTLuigi_80221C10(int);
 /* 221C14 */ void grTLuigi_80221C14(void);
 /* 221C84 */ void grTluigi_UnkStage0_OnLoad(void);
 /* 221C88 */ void grTluigi_UnkStage0_OnStart(void);

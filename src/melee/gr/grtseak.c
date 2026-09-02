@@ -15,7 +15,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
-/* 223864 */ static void grTSeak_OnDemoInit(bool);
+/* 223864 */ static void grTSeak_OnDemoInit(int);
 /* 223868 */ static void grTSeak_OnInit(void);
 /* 2238D8 */ static void grTseak_OnLoad(void);
 /* 2238DC */ static void grTseak_OnStart(void);
@@ -75,7 +75,7 @@ StageData grTSk_StageData = {
     1,
 };
 
-void grTSeak_OnDemoInit(bool unk0) {}
+void grTSeak_OnDemoInit(int unk0) {}
 
 void grTSeak_OnInit(void)
 {

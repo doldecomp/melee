@@ -11,7 +11,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1CD338 */ void grCastle_801CD338(bool);
+/* 1CD338 */ void grCastle_801CD338(int);
 /* 1CD37C */ void grCastle_801CD37C(void);
 /* 1CD4A0 */ void grCastle_801CD4A0(void);
 /* 1CD4A4 */ void grCastle_801CD4A4(void);

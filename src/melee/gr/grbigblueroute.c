@@ -154,7 +154,7 @@ static void order_data(void)
 }
 #endif
 
-void grBigBlueRoute_8020B864(bool arg)
+void grBigBlueRoute_8020B864(int arg)
 {
     HSD_GObj* gobj;
     gobj = Ground_GetMapGObj(0x1F);

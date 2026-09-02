@@ -12,7 +12,7 @@ s32 gm_80169394(void);
 s32 fn_801693A8(void);
 bool gm_801693BC(int);
 void fn_80169434(GmRouteCallback fn);
-bool fn_80169444(bool);
+bool fn_80169444(int);
 int gm_801694A0(HSD_GObj*);
 void* gm_80169520(void);
 void* gm_80169530(void);

@@ -14,7 +14,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-/* 2225D0 */ static void grTNess_802225D0(bool);
+/* 2225D0 */ static void grTNess_802225D0(int);
 /* 2225D4 */ static void grTNess_802225D4(void);
 /* 222644 */ static void grTness_UnkStage0_OnLoad(void);
 /* 222648 */ static void grTness_UnkStage0_OnStart(void);
@@ -72,7 +72,7 @@ StageData grTNs_StageData = {
     0x00000001,
 };
 
-static void grTNess_802225D0(bool arg0)
+static void grTNess_802225D0(int arg0)
 {
     return;
 }

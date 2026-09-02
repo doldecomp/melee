@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
-/* 220228 */ static void grTDonkey_80220228(bool);
+/* 220228 */ static void grTDonkey_80220228(int);
 /* 22022C */ static void grTDonkey_8022022C(void);
 /* 22029C */ static void grTdonkey_UnkStage0_OnLoad(void);
 /* 2202A0 */ static void grTdonkey_UnkStage0_OnStart(void);
@@ -73,7 +73,7 @@ StageData grTDk_StageData = {
     0,
 };
 
-static void grTDonkey_80220228(bool arg0) {}
+static void grTDonkey_80220228(int arg0) {}
 
 static void grTDonkey_8022022C(void)
 {

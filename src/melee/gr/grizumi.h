@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1CBB84 */ void grIzumi_801CBB84(bool);
+/* 1CBB84 */ void grIzumi_801CBB84(int);
 /* 1CBB88 */ void grIzumi_801CBB88(void);
 /* 1CBC0C */ void grIzumi_OnLoad(void);
 /* 1CBCBC */ void grIzumi_OnStart(void);
