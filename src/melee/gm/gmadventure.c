@@ -1212,11 +1212,11 @@ void gm_801B3F40(GameModeState* arg0)
     temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = gm_8017E4C4(arg0->id);
     temp_r3 = gm_GetAdventureData();
-    temp_r3->x0.x7 = arg0->id;
+    temp_r3->x0.x0.mode = arg0->id;
     temp_r30->x1 = gm_8017BE84(arg0->id);
     temp_r30->x2 = temp_r31->x6;
-    temp_r30->x0 = temp_r3->x0.slot;
-    temp_ret |= lbAudioAx_80026E84(temp_r3->x0.ckind);
+    temp_r30->x0 = temp_r3->x0.x0.slot;
+    temp_ret |= lbAudioAx_80026E84(temp_r3->x0.x0.ckind);
     for (i = 0; i < 3; i++) {
         s8 ckind = temp_r3->x0.xC.x24[i].ckind;
         if (ckind != CHKIND_NONE) {
@@ -1302,7 +1302,7 @@ void gm_801B42E8(GameModeState* scene)
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->nametag, temp_r31->cpu_level,
-                gm_GetAdventureData()->x0.slot);
+                gm_GetAdventureData()->x0.x0.slot);
 }
 
 void gm_801B4350(GameModeState* scene)
@@ -1317,11 +1317,11 @@ void gm_801B4350(GameModeState* scene)
     }
     gm_801B0730(css, &temp_r29->c_kind, &temp_r29->stocks, &temp_r29->color,
                 &temp_r29->nametag, &temp_r29->cpu_level);
-    temp_r31->x0.ckind = temp_r29->c_kind;
-    temp_r31->x0.color = temp_r29->color;
-    temp_r31->x0.cpu_level = temp_r29->cpu_level;
-    temp_r31->x0.stocks = temp_r29->stocks;
-    temp_r31->x0.x4 = temp_r29->nametag;
+    temp_r31->x0.x0.ckind = temp_r29->c_kind;
+    temp_r31->x0.x0.color = temp_r29->color;
+    temp_r31->x0.x0.cpu_level = temp_r29->cpu_level;
+    temp_r31->x0.x0.stocks = temp_r29->stocks;
+    temp_r31->x0.x0.nametag = temp_r29->nametag;
     gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
@@ -1339,10 +1339,10 @@ void gm_801B4430(GameModeState* scene)
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
     u8 var_r0;
 
-    if (temp_r3->x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
+    if (temp_r3->x0.x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r0 = CKIND_SEAK;
     } else {
-        var_r0 = temp_r3->x0.ckind;
+        var_r0 = temp_r3->x0.x0.ckind;
     }
     temp_r30->x0 = var_r0;
     temp_r30->x1 = temp_r31->color;
@@ -1376,8 +1376,8 @@ void gm_801B45A4(GameModeState* scene)
     u8 colors[3] = { 0 };
     s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
 
-    gmRegSetupEnemyColorTable(temp_r7->x0.ckind, temp_r7->x0.color, ckinds,
-                              colors);
+    gmRegSetupEnemyColorTable(temp_r7->x0.x0.ckind, temp_r7->x0.x0.color,
+                              ckinds, colors);
     temp_r31->x1 = colors[0];
     temp_r31->x3 = colors[1];
 }
@@ -1434,7 +1434,7 @@ void gm_801B47FC(GameModeState* scene)
     temp_r31 = gm_GetAdventureData();
     gm_801B4064(scene);
     temp_r30->rules.x50 = gm_8017E7A0;
-    temp_r31->x0.x7 = 0x20;
+    temp_r31->x0.x0.mode = 0x20;
 }
 
 static inline void gm_801B4860_inline0(GameModeState* scene)
@@ -1474,11 +1474,11 @@ static void gm_8016A22C_inline(GameModeState* arg0, UnkAdventureData* temp_r29)
     struct gm_803DE650_t* temp_r25_2 = gm_8017E4C4(arg0->id);
     gm_8016A22C(temp_r25_2->xA[0], temp_r25_2->xA[1], temp_r25_2->xA[2],
                 temp_r25_2->xD, temp_r25_2->xE, temp_r25_2->xF, 1, 0, 1,
-                temp_r29->x0.ckind, temp_r29->x0.color,
-                temp_r29->x4C(count, temp_r29->x0.cpu_level, 0),
+                temp_r29->x0.x0.ckind, temp_r29->x0.x0.color,
+                temp_r29->x4C(count, temp_r29->x0.x0.cpu_level, 0),
                 temp_r25_2->x4, gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
-                temp_r29->x64(count, temp_r29->x0.cpu_level),
-                temp_r29->x68(count, temp_r29->x0.cpu_level));
+                temp_r29->x64(count, temp_r29->x0.x0.cpu_level),
+                temp_r29->x68(count, temp_r29->x0.x0.cpu_level));
     temp_r29->x0.xC.x11 = 1;
 }
 
@@ -1501,7 +1501,7 @@ void gm_801B4974(GameModeState* arg0)
     temp_r25 = gm_GetGameModeStateEnterData(arg0);
     temp_r24 = gmMainLib_8015CDD4();
     temp_r3 = gm_GetAdventureData();
-    var_r4 = temp_r3->x0.ckind;
+    var_r4 = temp_r3->x0.x0.ckind;
     if (var_r4 == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r4 = CKIND_SEAK;
     }
@@ -1576,7 +1576,7 @@ void gm_801B4DAC(GameModeState* scene)
         s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
         u8 colors[3] = { 0 };
         colors[0] = data->players[1].color;
-        gmRegSetupEnemyColorTable(temp_r30->x0.ckind, temp_r30->x0.color,
+        gmRegSetupEnemyColorTable(temp_r30->x0.x0.ckind, temp_r30->x0.x0.color,
                                   ckinds, colors);
         data->players[1].ckind = CKIND_FALCO;
         data->players[1].color = colors[0];
@@ -1644,7 +1644,9 @@ void gm_801B50C4(GameModeState* scene)
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
 
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
-    if (temp_r3->x0.stocks == temp_r31->match_end.player_standings[0].stocks) {
+    if (temp_r3->x0.x0.stocks ==
+        temp_r31->match_end.player_standings[0].stocks)
+    {
         temp_r3->x78 = 1;
     }
 
@@ -1689,7 +1691,7 @@ void gm_Mode_Adventure_OnLoad(void)
     }
 
     gm_8017DB58(data->x0.xC.x24);
-    data->x0.slot = gm_801677F0();
+    data->x0.x0.slot = gm_801677F0();
     data->x48 = gm_8017E500;
     data->x4C = gm_8017E5C8;
     data->x50 = gm_8017E630;

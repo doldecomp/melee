@@ -731,7 +731,7 @@ typedef struct gmPlayerData {
     /* 04 */ u8 nametag;
     /* 05 */ u8 stocks;
     /* 06 */ u8 x6;
-    /* 07 */ u8 mode;
+    /* 07 */ u8 mode; ///< @todo Actually ::GameModeState::id
 } gmPlayerData;
 
 struct Unk1PData {

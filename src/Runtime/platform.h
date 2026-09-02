@@ -153,8 +153,11 @@ typedef bool (*Predicate)(void);
 
 #if defined(MUST_MATCH) || defined(LINT)
 #define ASSERT_SIZE(expr, size) STATIC_ASSERT(sizeof(expr) == size)
+#define ASSERT_OFFSET(type, member, offset)                                   \
+    STATIC_ASSERT(offsetof(expr, member) == offset)
 #else
 #define ASSERT_SIZE(expr, size)
+#define ASSERT_OFFSET(expr, member, offset)
 #endif
 
 #define RETURN_IF(cond)                                                       \
