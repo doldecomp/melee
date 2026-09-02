@@ -1,16 +1,14 @@
 #include "hsd_397E.h"
 
-#include <platform.h>
-
 #include <dolphin/os.h>
 
 #ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>
 #endif
 
-int baselib_mfspr(int spr)
+s32 baselib_mfspr(s32 spr)
 {
-    register int result;
+    register s32 result;
     switch (spr) {
 #ifdef MWERKS_GEKKO
     case 0x1:

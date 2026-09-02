@@ -1,6 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_HSD_397E_H
 #define SYSDOLPHIN_BASELIB_HSD_397E_H
 
-/* 397E0C */ int baselib_mfspr(int);
+#include <platform.h>
+
+/* 397E0C */ s32 baselib_mfspr(s32);
 
 #endif
