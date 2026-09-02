@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include <dolphin/os/OSContext.h>
 
 /* 394950 */ void hsd_80394950(OSContext*);
@@ -49,8 +47,5 @@
 /* 397DA4 */ void hsd_80397DA4(OSContext*);
 /* 397DF4 */ void Exception_StoreDebugLevel(int);
 /* 397DFC */ void hsd_80397DFC(u32 size);
-/* 397E0C */ int baselib_mfspr(int);
-/* 3982E4 */ void fn_803982E4(HSD_GObj*, int);
-/* 398310 */ HSD_GObj* hsd_80398310(u16, u8, u8, u32);
 
 #endif
