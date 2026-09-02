@@ -988,8 +988,6 @@ void gm_Scene_TouAlt_OnFrame(void)
     }
 }
 
-/* 4DA948 */ u32 const lbl_804DA948 = { 0 };
-
 void gm_8019ECAC_OnEnter_inline(void)
 {
     lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
@@ -1035,29 +1033,24 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if (gmMainLib_GetGameRules()->handicap == 1) {
-        union {
-            u32 word;
-            u8 bytes[4];
-        } hbuf;
-
-        hbuf.word = *(volatile u32 const*) &lbl_804DA948;
+        u8 hbuf[4] = { 0 };
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 j = get_match_player_index_xF(results[i]);
-                hbuf.bytes[i] = tmd->x37[j].x2;
+                hbuf[i] = tmd->x37[j].x2;
             }
         }
 
-        fn_80169000(&gm_80477738, hbuf.bytes);
+        fn_80169000(&gm_80477738, hbuf);
 
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 s32 id = results[i];
                 j = get_match_player_index_xF(id);
-                tmd->x37[j].x2 = hbuf.bytes[i];
+                tmd->x37[j].x2 = hbuf[i];
             }
         }
     }
