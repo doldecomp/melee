@@ -1987,8 +1987,8 @@ inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
     s32 result;
 
     *out_line = -1;
-    result =
-        ftCo_800A3908_inline2(out_normal, out_flags, out_line, out_pos, y, x);
+    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
+                          out_flags, out_normal, -1, -1, -1, NULL, NULL);
     if (result != 0 && ftCo_800A1B38_noinline(*out_line) != 0) {
         return 0;
     }
@@ -2178,14 +2178,6 @@ static inline float ftCo_800A4038_inline2(Fighter* fp)
     return -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y);
 }
 
-static inline s32 ftCo_800A4038_inline3(f32 y, f32 x, Vec3* arg_floor_pos,
-                                        Vec3* arg_floor_normal,
-                                        int* arg_line_id, u32* arg_flags)
-{
-    return ftCo_800A4038_inline1(x, y, arg_floor_pos, arg_floor_normal,
-                                 arg_line_id, arg_flags);
-}
-
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
@@ -2268,8 +2260,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     Vec3 floor_pos;
 
                     px = 5.0 + ex;
-                    valid = ftCo_800A4038_inline3(
-                        ey, px, &floor_pos, &floor_normal, &line_id, &flags);
+                    valid = ftCo_800A4038_inline1(
+                        px, ey, &floor_pos, &floor_normal, &line_id, &flags);
                     if (valid != 0 &&
                         !ftCo_800A4038_inline0(fp, data2, px, ey))
                     {
