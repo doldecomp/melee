@@ -405,16 +405,16 @@ struct gmm_x0 {
         /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
         /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless,
                                           ///< cruel
+        /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+        /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
     } modes;
-    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
-    /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
     /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
 ASSERT_SIZE(struct EventData, 0x588 - 0x530);
 ASSERT_SIZE(struct gmm_x0_vsdata, 0x588 - 0x51C);
-ASSERT_SIZE(struct gmm_x0_vsmodes, 0x15D0 - 0x588);
+ASSERT_SIZE(struct gmm_x0_vsmodes, 0x1850 - 0x588);
 ASSERT_SIZE(struct gmm_x0, 0x8518);
 
 struct lbl_8046B6A0_24C_t {
