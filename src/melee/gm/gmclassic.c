@@ -729,7 +729,7 @@ void gm_Mode_Classic_OnLoad(void)
     }
 
     gm_8017DB58(data->x0.xC.x24);
-    data->x0.x0.slot = gm_801677F0();
+    data->x0.slot = gm_801677F0();
     data->x48 = gm_8017EB3C;
     data->x4C = gm_8017EB64;
     data->x50 = gm_8017EBCC;
@@ -762,7 +762,7 @@ static inline StKind gmClassic_GetStKind(gm_803DDEC8Struct* entry,
                                          UnkAllstarData* ad)
 {
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        return (u16) gm_801647F8(ad->x0.x0.ckind);
+        return (u16) gm_801647F8(ad->x0.ckind);
     }
     return entry->xC->x00;
 }
@@ -786,9 +786,9 @@ void gmClassic_801B3500(GameModeState* arg0)
     new_var = entry;
     ad = gm_GetAllStarData();
     enemy_count = 0;
-    ad->x0.x0.mode = arg0->id;
+    ad->x0.x7 = arg0->id;
     sd->x0A = entry->x0 + 1;
-    sd->x08 = ad->x0.x0.slot;
+    sd->x08 = ad->x0.slot;
 
     if (entry->x1 & 0x80) {
         sd->x00 = 3;
@@ -822,8 +822,8 @@ void gmClassic_801B3500(GameModeState* arg0)
         sd->x10[i] = entry->xC->x02[i];
         sd->x16[i] = gm_8017CD94((UnkAdventureData*) ad, entry->xC->x02[i],
                                  entry->x0, i);
-        gmRegSetupEnemyColorTable(ad->x0.x0.ckind, ad->x0.x0.color,
-                                  entry->xC->x02, sd->x16);
+        gmRegSetupEnemyColorTable(ad->x0.ckind, ad->x0.color, entry->xC->x02,
+                                  sd->x16);
         if (entry->x1 & 4) {
             sd->x1C[i] = 1;
         } else {
@@ -836,15 +836,15 @@ void gmClassic_801B3500(GameModeState* arg0)
     sd->x0C = enemy_count;
 
     ally_count = 1;
-    ckind = ad->x0.x0.ckind;
+    ckind = ad->x0.ckind;
     if (ckind == CKIND_ZELDA && ad->x0.xC.x12 != 0) {
         sd->x0D[0] = CKIND_SEAK;
     } else {
         sd->x0D[0] = ckind;
     }
-    sd->x13[0] = ad->x0.x0.color;
+    sd->x13[0] = ad->x0.color;
 
-    gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.x0.cpu_level,
+    gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
                 (u8) gm_8017BE84(arg0->id), entry->xC->x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x5C,
@@ -860,13 +860,13 @@ void gmClassic_801B3500(GameModeState* arg0)
         }
     }
     sd->x0B = ally_count;
-    sd->x09 = ad->x0.x0.nametag;
+    sd->x09 = ad->x0.x4;
 
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     count = 0;
     gc->entries[count].char_id = sd->x0D[0];
-    gc->entries[count].color = ad->x0.x0.color;
+    gc->entries[count].color = ad->x0.color;
     count++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
@@ -897,7 +897,7 @@ void gmClassic_801B3500(GameModeState* arg0)
     lbDvd_80018254();
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        gc->stkind = (u16) gm_801647F8(ad->x0.x0.ckind);
+        gc->stkind = (u16) gm_801647F8(ad->x0.ckind);
     } else if (entry->x1 == 4) {
         gc->stkind = 0xAF;
     } else {
@@ -906,7 +906,7 @@ void gmClassic_801B3500(GameModeState* arg0)
 
     lbDvd_80018254();
 
-    audio = lbAudioAx_80026E84(ad->x0.x0.ckind);
+    audio = lbAudioAx_80026E84(ad->x0.ckind);
 
     for (i = 0; i < 3; i++) {
         s8 achar = ad->x0.xC.x24[i].ckind;
@@ -952,7 +952,7 @@ void gmClassic_801B3A34(GameModeState* arg0)
     new_var = temp_r30;
     var_r27 = temp_r31->xC->x00;
     if (temp_r31->x1 == 0x80 && temp_r31->x2 == 1) {
-        var_r27 = gm_801647F8(temp_r29->x0.x0.ckind) & 0xFFFF;
+        var_r27 = gm_801647F8(temp_r29->x0.ckind) & 0xFFFF;
     }
     flags = temp_r31->x1;
     if (flags == 4) {
@@ -1004,14 +1004,14 @@ void gmClassic_801B3B40(GameModeState* arg0)
     }
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        char_id = gm_CKindToSelKind((u8) asd->x0.x0.ckind);
+        char_id = gm_CKindToSelKind((u8) asd->x0.ckind);
         time_ptr = gmMainLib_8015D438(char_id);
         best_ptr = gmMainLib_8015D450(char_id);
         Ground_801C1DE4(&sp18, &sp14);
 
         if (sp18 == 0) {
             mask = 1 << char_id;
-            if (asd->x0.x0.ckind && asd->x0.x0.ckind) {
+            if (asd->x0.ckind && asd->x0.ckind) {
             }
             if (!(mask & gmMainLib_8015EDBC()->x8)) {
                 *best_ptr = (s32) mei->match_end.frame_count;
@@ -1063,7 +1063,7 @@ void gmClassic_801B3DD8(GameModeState* scene)
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->nametag, temp_r31->cpu_level,
-                gm_GetAllStarData()->x0.x0.slot);
+                gm_GetAllStarData()->x0.slot);
     lbDvd_SetupVsPreloadCache();
 }
 
@@ -1081,11 +1081,11 @@ void gmClassic_801B3E44(GameModeState* scene)
     }
     gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks,
                 &temp_r29->color, &temp_r29->nametag, &temp_r29->cpu_level);
-    temp_r31->x0.x0.ckind = temp_r29->c_kind;
-    temp_r31->x0.x0.color = temp_r29->color;
-    temp_r31->x0.x0.cpu_level = temp_r29->cpu_level;
-    temp_r31->x0.x0.stocks = temp_r29->stocks;
-    temp_r31->x0.x0.nametag = temp_r29->nametag;
+    temp_r31->x0.ckind = temp_r29->c_kind;
+    temp_r31->x0.color = temp_r29->color;
+    temp_r31->x0.cpu_level = temp_r29->cpu_level;
+    temp_r31->x0.stocks = temp_r29->stocks;
+    temp_r31->x0.x4 = temp_r29->nametag;
     gmClassic_801B2D54(r4);
     gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
