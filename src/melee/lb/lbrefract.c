@@ -52,7 +52,7 @@ static inline void lbRefract_WriteTexCoord(lbRefract_CallbackData* cb, s32 row,
 /// @todo reconcile with MSL fmodf
 static inline float my_fmodf(float a, float b)
 {
-    long long quotient;
+    s64 quotient;
     float fb, fa;
 
     fa = fabsf(a);
@@ -554,9 +554,13 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
                 case GX_RGBX8:
                     stride += 4;
                     break;
+                default:
+                    break;
                 }
                 break;
             }
+            break;
+        default:
             break;
         }
         verts++;
