@@ -7,13 +7,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/object.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftaction.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbanim.h>

@@ -7,18 +7,18 @@
 #include "ft/ftlib.h"
 
 #include "ftKirby/forward.h"
-#include <melee/ft/chara/ftDonkey/forward.h>
-#include <melee/ft/chara/ftKoopa/forward.h>
-#include <melee/ft/chara/ftSamus/forward.h>
-#include <melee/ft/chara/ftYoshi/forward.h>
-#include <melee/ft/chara/ftZelda/forward.h>
+#include <melee/ft/kinds/ftDonkey/forward.h>
+#include <melee/ft/kinds/ftKoopa/forward.h>
+#include <melee/ft/kinds/ftSamus/forward.h>
+#include <melee/ft/kinds/ftYoshi/forward.h>
+#include <melee/ft/kinds/ftZelda/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/chara/ftCommon/ftCo_09F7.h>
-#include <melee/ft/chara/ftCommon/ftCo_0A01.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_09F7.h>
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

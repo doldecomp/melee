@@ -4,7 +4,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0CD1.h"
 #include "ft/inlines.h"
-#include "it/items/itstarrod.h"
+#include "it/kinds/itstarrod.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>

@@ -9,8 +9,8 @@
 
 #include "ftCommon/forward.h"
 
-#include "it/items/itgreatfoxlaser.h"
-#include "it/items/itleadead.h"
+#include "it/kinds/itgreatfoxlaser.h"
+#include "it/kinds/itleadead.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

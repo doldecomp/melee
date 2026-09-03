@@ -6,7 +6,7 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
-#include "it/items/types.h"
+#include "it/kinds/types.h"
 #include "it/types.h"
 
 typedef struct it_804D6D40_t {

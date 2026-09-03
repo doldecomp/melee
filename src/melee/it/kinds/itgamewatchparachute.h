@@ -1,0 +1,19 @@
+#ifndef GALE01_2C6C38
+#define GALE01_2C6C38
+
+#include "it/forward.h"
+
+#include "it/kinds/types.h"
+
+/* 2C6C38 */ HSD_GObj* it_802C6C38(Item_GObj*, Vec3*, enum_t part, float);
+/* 2C6D3C */ void itGameWatchParachute_Logic74_Destroyed(Item_GObj*);
+/* 2C6D6C */ void it_802C6D6C(Item_GObj*);
+/* 2C6DB8 */ void it_802C6DB8(Item_GObj*);
+/* 2C6DD8 */ void it_802C6DD8(Item_GObj*);
+/* 2C6DF8 */ void itGameWatchParachute_Logic74_PickedUp(Item_GObj*);
+/* 2C6E50 */ void it_802C6E50(Item_GObj*);
+/* 2C6E8C */ bool itGamewatchparachute_UnkMotion1_Anim(Item_GObj*);
+/* 2C6F20 */ void itGameWatchParachute_Logic74_EvtUnk(Item_GObj*, Item_GObj*);
+/* 3F78F8 */ extern ItemStateTable it_803F78F8[];
+
+#endif

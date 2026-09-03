@@ -2,14 +2,14 @@
 
 #include "forward.h"
 
-#include "ft/chara/ftCommon/ftCo_FallSpecial.h"
-#include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0CD1.h"
 #include "ft/ftlipstickswing.h"
 #include "ft/ftstarrodswing.h"
 #include "ft/inlines.h"
+#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
+#include "ft/kinds/ftCommon/ftpickupitem.h"
 #include "ft/types.h"
 
 #include <baselib/debug.h>

@@ -21,12 +21,12 @@
 #include "ftCommon/ftCo_FallAerial.h"
 
 #include <baselib/jobj.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
-#include <melee/it/items/itkinoko.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
+#include <melee/it/kinds/itkinoko.h>
 
 void ftCo_800D2770(Fighter_GObj* gobj, f32 arg8)
 {

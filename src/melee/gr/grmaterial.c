@@ -3,8 +3,8 @@
 #include "gr/types.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/items/ityaku.h"
 #include "it/ithitbox.h"
+#include "it/kinds/ityaku.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
