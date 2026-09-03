@@ -313,21 +313,12 @@ static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
            ((u64*) &table[24])[stage_index];
 }
 
-static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
-                                           gm_1832_804736C0_t* data,
-                                           HSD_CObj* cobj)
-{
-    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
-    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
-    HSD_CObjReqAnim(cobj, 0.0f);
-}
-
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data;
     char** table = lbl_803D9750;
-    HSD_CObj* cobj;
     HSD_GObj* gobj;
+    HSD_CObj* cobj;
     u8 stage_index;
 
     data = &lbl_804736C0;
@@ -370,7 +361,9 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *data->x4);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) Camera_800304E0, 8);
-    gm_80187F48_SetupCamera(gobj, data, cobj);
+    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
+    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
+    HSD_CObjReqAnim(cobj, 0.0f);
 
     {
         HSD_GObj* scene_gobj = GObj_Create(0x13, 0x14, 0);
