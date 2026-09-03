@@ -103,16 +103,18 @@ typedef struct CardQueueEntry {
 /* 4D798C */ extern s32 hsd_804D798C;
 /* 4D7998 */ extern s32 hsd_804D7998;
 /* 4D799C */ extern s32 hsd_804D799C;
-/* 4D79A0 */ u8* hsd_804D79A0;
-/* 4D79A4 */ u8* hsd_804D79A4;
-/* 4D79A8 */ s32 hsd_804D79A8;
-/* 4D79AC */ s32 hsd_804D79AC;
-/* 4D79B0 */ u8 hsd_804D79B0;
-/* 4D79B8 */ u8* hsd_804D79B8;
-/* 4D79BC */ u8* hsd_804D79BC;
-/* 4D79C0 */ s32 hsd_804D79C0;
-/* 4D79C4 */ s32 hsd_804D79C4;
+/// .sbss globals emit in reverse declaration order.
 /* 4D79C8 */ u8 hsd_804D79C8;
+/* 4D79C4 */ s32 hsd_804D79C4;
+/* 4D79C0 */ s32 hsd_804D79C0;
+/* 4D79BC */ u8* hsd_804D79BC;
+/* 4D79B8 */ u8* hsd_804D79B8;
+/* 4D79B4 */ s32 hsd_804D79B4;
+/* 4D79B0 */ u8 hsd_804D79B0;
+/* 4D79AC */ s32 hsd_804D79AC;
+/* 4D79A8 */ s32 hsd_804D79A8;
+/* 4D79A4 */ u8* hsd_804D79A4;
+/* 4D79A0 */ u8* hsd_804D79A0;
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
