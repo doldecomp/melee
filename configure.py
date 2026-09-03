@@ -1141,7 +1141,7 @@ config.libs = [
     MeleeLib(
         "gm (Main game loop)",
         [
-            Object(Linkable, "melee/gm/gmmain_lib.c"),
+            Object(Matching, "melee/gm/gmmain_lib.c"),
             Object(Matching, "melee/gm/gmmain.c"),
             Object(Matching, "melee/gm/gm_1601.c"),
             Object(Linkable, "melee/gm/gm_16A2.c"),
