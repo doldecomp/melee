@@ -3954,8 +3954,9 @@ after_verify:
 static inline s32 fn_803B0120_first_chunk(CardState* state)
 {
     u32 sector_size = state->x8;
-    s32 hdr = state->x24 + 0x30;
-    return (s32) (sector_size - 0x20) - (s32) ((u32) hdr % sector_size);
+
+    return (s32) (sector_size - 0x20) -
+           (s32) ((u32) (state->x24 + 0x30) % sector_size);
 }
 
 static inline void fn_803B0120_rewind(CardBufEntry* entries)
@@ -3986,11 +3987,25 @@ static inline void fn_803B0120_close(CardState* state)
     }
 }
 
+static inline s32 fn_803B0120_close_result(CardState* state)
+{
+    s32 result;
+    s32 retries;
+    s32 ret;
+
+    for (retries = 0; retries < 10; retries++) {
+        result = CARDClose(&state->file_info);
+        if (result != -1) {
+            break;
+        }
+    }
+    ret = result;
+    return ret;
+}
+
 static inline s32 fn_803B0120_chunk_size(CardState* state)
 {
-    s32 size = state->x8;
-
-    return size - 0x20;
+    return state->x8 - 0x20;
 }
 
 static inline s32 fn_803B0120_queue_verify(CardState* state, s32 block,
@@ -4071,7 +4086,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 result;
     u8* data;
-    PAD_STACK(4);
+    PAD_STACK(16);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
@@ -4366,13 +4381,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     if (arg3 == 0) {
-        s32 retries;
-        for (retries = 0; retries < 10; retries++) {
-            result = CARDClose(&state->file_info);
-            if (result != -1) {
-                break;
-            }
-        }
+        result = fn_803B0120_close_result(state);
         if (result < 0) {
             return -267;
         }
@@ -4383,6 +4392,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         entries[0].xC = arg1;
         hsd_804D7998 = -1;
     }
+    PAD_STACK(4);
 
     return 0;
 }
