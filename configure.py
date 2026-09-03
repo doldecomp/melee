@@ -739,7 +739,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09F7.c"),
             Object(Matching, "melee/ft/chara/ftMario/ftMr_Strings.c"),
-            Object(Linkable, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
             Object(Matching, "melee/ft/ftcmdscript.c"),
             Object(Matching, "melee/ft/ftcpuattack.c"),
             Object(Matching, "melee/ft/ft_3C61.c"),
