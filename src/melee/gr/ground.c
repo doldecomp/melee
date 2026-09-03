@@ -574,9 +574,9 @@ static bool Ground_801C0A70(Vec3* pos)
     }
 }
 
-BobOmbRain const Ground_803B7DEC = { 0, 0, 0, 0, 0, 6 };
+static BobOmbRain const Ground_803B7DEC = { 0, 0, 0, 0, 0, 6 };
 
-HSD_Joint const Ground_803B7E0C = {
+static HSD_Joint const Ground_803B7E0C = {
     NULL,        0,           NULL,        NULL, NULL,
     { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, NULL, NULL,
 };
@@ -1480,47 +1480,42 @@ bool Ground_801C28AC(StKind stkind, u32 arg1, s32* arg2)
     return Ground_801C24F8(stkind, arg1, arg2);
 }
 
-static char msg0[] =
-    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
-static char msg1[] =
-    "             check StageParam.csv or StageItem.csv, stdata.c\n";
-static char msg2[] = " stageid=%d\n";
-
-static inline void reportStageParams(s32 count)
+static void panicMissingStageParam(StKind stkind, s32 count)
 {
-    s32 i;
-
-    OSReport(msg1);
+    OSReport("%s:%d: not found stage param in DAT(grkind=%d "
+             "stkind=%d,num=%d)\n",
+             __FILE__, 2310, stage_info.grkind, stkind, count);
+    OSReport("             check StageParam.csv or StageItem.csv, stdata.c\n");
     {
+        ssize_t i;
         StageParam* p = stage_info.param->stage_params;
         for (i = 0; i < count; i++, p++) {
-            OSReport(msg2, p->stkind);
+            OSReport(" stageid=%d\n", p->stkind);
         }
+    }
+    while (true) {
     }
 }
 
 void Ground_801C28CC(s32* arg0, StKind stkind)
 {
     StageParam* param = stage_info.param->stage_params;
-    s32 count = stage_info.param->stage_param_count;
-    s32 i;
+    ssize_t count = stage_info.param->stage_param_count;
+    ssize_t i;
 
     for (i = 0; i < count; i++) {
         if (param->stkind == stkind) {
             s32 j;
-            for (j = 0; 0x23 > j; j++) {
-                arg0[j] = ((s16*) stage_info.param)[0x35 + j] *
-                          ((s16*) param)[0xD + j];
+            for (j = 0; 35 > j; j++) {
+                arg0[j] =
+                    ((s16*) stage_info.param)[53 + j] * ((s16*) param)[13 + j];
             }
             return;
         }
         param++;
     }
 
-    OSReport(msg0, __FILE__, 0x906, stage_info.grkind, stkind, count);
-    reportStageParams(count);
-    while (1) {
-    }
+    panicMissingStageParam(stkind, count);
 }
 
 s32* Ground_801C2AD8(void)
@@ -1861,39 +1856,41 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
     return result;
 }
 
-u32 unknown[] = {
-    0x00000002, 0,          0x42C80000, 0x43270000, 0,          0x00000002,
-    0x00000001, 0x42C80000, 0x43270000, 0,          0x00000002, 0x00000002,
-    0x42C80000, 0x43270000, 0,          0x00000002, 0x00000003, 0x42C80000,
-    0x43270000, 0,          0x00000002, 0x00000004, 0x42C80000, 0x43480000,
-    0,          0x00000002, 0x00000094, 0,          0x433B0000, 0,
-    0x0000000E, 0,          0xC28E0000, 0x436E0000, 0,          0x0000000E,
-    0x00000001, 0xC28E0000, 0x436E0000, 0,          0x0000000E, 0x00000002,
-    0xC28E0000, 0x436E0000, 0,          0x0000000E, 0x00000003, 0xC28E0000,
-    0x436E0000, 0,          0x0000000E, 0x00000094, 0,          0x43750000,
-    0,          0x00000015, 0x00000004, 0x41100000, 0x426C0000, 0,
-    0x00000015, 0,          0xC1100000, 0x42860000, 0,          0x00000015,
-    0x00000001, 0x42580000, 0x40000000, 0,          0x00000015, 0x00000002,
-    0xC2960000, 0x40800000, 0,          0x00000015, 0x00000003, 0x42AE0000,
-    0xC1500000, 0,          0x0000001F, 0,          0xC4750000, 0x42540000,
-    0,          0x0000001F, 0x00000004, 0xC4750000, 0x42F00000, 0,
-    0x0000001F, 0x00000099, 0x44C96000, 0x43480000, 0,          0x00000020,
-    0,          0x43700000, 0xC3928000, 0,          0x00000020, 0x00000099,
-    0x41200000, 0x40000000, 0,          0x00000020, 0x00000004, 0x43700000,
-    0,          0,          0x00000021, 0x00000099, 0,          0x446EC000,
-    0,          0x00000022, 0,          0xC47A0000, 0x42B00000, 0,
-    0x00000022, 0x00000004, 0xC47A0000, 0x42C80000, 0,          0x00000027,
-    0,          0x43C30000, 0x44610000, 0,          0x00000027, 0x00000094,
-    0x43C30000, 0x44610000, 0,          0x00000027, 0x00000004, 0x43C30000,
-    0x44610000, 0,          0x00000013, 0,          0xC2480000, 0x42700000,
-    0,          0x00000013, 0x00000004, 0x41F00000, 0x42C80000, 0,
-    0x00000006, 0,          0x41F00000, 0x42700000, 0,          0x00000006,
-    0x00000004, 0xC2200000, 0x42700000, 0,          0xFFFFFFFF, 0,
-    0,          0x40A00000, 0,          0xFFFFFFFF, 0x00000001, 0,
-    0x40A00000, 0,          0xFFFFFFFF, 0x00000002, 0,          0x40A00000,
-    0,          0xFFFFFFFF, 0x00000003, 0,          0x40A00000, 0,
-    0xFFFFFFFF, 0x00000094, 0,          0,          0,          0xFFFFFFFF,
-    0xFFFFFFFF, 0,          0,          0,
+/// @todo Flags maybe? Is this used by base pointer anywhere?
+/// Not stripped by mwcc.
+UNUSED static u32 unk_words[] = {
+    0x00000002, 0x00000000, 0x42C80000, 0x43270000, 0x00000000, 0x00000002,
+    0x00000001, 0x42C80000, 0x43270000, 0x00000000, 0x00000002, 0x00000002,
+    0x42C80000, 0x43270000, 0x00000000, 0x00000002, 0x00000003, 0x42C80000,
+    0x43270000, 0x00000000, 0x00000002, 0x00000004, 0x42C80000, 0x43480000,
+    0x00000000, 0x00000002, 0x00000094, 0x00000000, 0x433B0000, 0x00000000,
+    0x0000000E, 0x00000000, 0xC28E0000, 0x436E0000, 0x00000000, 0x0000000E,
+    0x00000001, 0xC28E0000, 0x436E0000, 0x00000000, 0x0000000E, 0x00000002,
+    0xC28E0000, 0x436E0000, 0x00000000, 0x0000000E, 0x00000003, 0xC28E0000,
+    0x436E0000, 0x00000000, 0x0000000E, 0x00000094, 0x00000000, 0x43750000,
+    0x00000000, 0x00000015, 0x00000004, 0x41100000, 0x426C0000, 0x00000000,
+    0x00000015, 0x00000000, 0xC1100000, 0x42860000, 0x00000000, 0x00000015,
+    0x00000001, 0x42580000, 0x40000000, 0x00000000, 0x00000015, 0x00000002,
+    0xC2960000, 0x40800000, 0x00000000, 0x00000015, 0x00000003, 0x42AE0000,
+    0xC1500000, 0x00000000, 0x0000001F, 0x00000000, 0xC4750000, 0x42540000,
+    0x00000000, 0x0000001F, 0x00000004, 0xC4750000, 0x42F00000, 0x00000000,
+    0x0000001F, 0x00000099, 0x44C96000, 0x43480000, 0x00000000, 0x00000020,
+    0x00000000, 0x43700000, 0xC3928000, 0x00000000, 0x00000020, 0x00000099,
+    0x41200000, 0x40000000, 0x00000000, 0x00000020, 0x00000004, 0x43700000,
+    0x00000000, 0x00000000, 0x00000021, 0x00000099, 0x00000000, 0x446EC000,
+    0x00000000, 0x00000022, 0x00000000, 0xC47A0000, 0x42B00000, 0x00000000,
+    0x00000022, 0x00000004, 0xC47A0000, 0x42C80000, 0x00000000, 0x00000027,
+    0x00000000, 0x43C30000, 0x44610000, 0x00000000, 0x00000027, 0x00000094,
+    0x43C30000, 0x44610000, 0x00000000, 0x00000027, 0x00000004, 0x43C30000,
+    0x44610000, 0x00000000, 0x00000013, 0x00000000, 0xC2480000, 0x42700000,
+    0x00000000, 0x00000013, 0x00000004, 0x41F00000, 0x42C80000, 0x00000000,
+    0x00000006, 0x00000000, 0x41F00000, 0x42700000, 0x00000000, 0x00000006,
+    0x00000004, 0xC2200000, 0x42700000, 0x00000000, 0xFFFFFFFF, 0x00000000,
+    0x00000000, 0x40A00000, 0x00000000, 0xFFFFFFFF, 0x00000001, 0x00000000,
+    0x40A00000, 0x00000000, 0xFFFFFFFF, 0x00000002, 0x00000000, 0x40A00000,
+    0x00000000, 0xFFFFFFFF, 0x00000003, 0x00000000, 0x40A00000, 0x00000000,
+    0xFFFFFFFF, 0x00000094, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF,
+    0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
 void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
@@ -2598,7 +2595,7 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
     NULL,
 };
 
-/* 4D4508 */ float Ground_804D4508 = 16.0f;
+/* 4D4508 */ static float Ground_804D4508 = 16.0f;
 
 /* 3E0680 */ static HSD_LightDesc Ground_803E0680 = {
     NULL,
@@ -3352,4 +3349,5 @@ void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
     }
 }
 
+/// @todo Is this used by base pointer anywhere? Not stripped by mwcc.
 static int unused_ints[] = { 1, 1, 0, 0, 0, 180, 0, 0, 0 };
