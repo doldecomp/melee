@@ -1995,14 +1995,6 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp,
     return false;
 }
 
-static inline s32 ftCo_800A3908_inline2(Vec3* out_normal, u32* out_flags,
-                                        int* out_line, Vec3* out_pos, float y,
-                                        float x)
-{
-    return mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
-                        out_flags, out_normal, -1, -1, -1, NULL, NULL);
-}
-
 inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
                                  Vec3* out_normal, int* out_line,
                                  u32* out_flags)
