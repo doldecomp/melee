@@ -237,62 +237,22 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-static char* lbl_803D9750[] = {
-    "mc01",
-    "mc02",
-    "mc03",
-    "mc04",
-    "mc05",
-    "mc06",
-    "mc07",
-    "mc08",
-    "mc09",
-    "mc10",
-    "mc11",
-    "mc12",
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x14,
-    (char*) 0x14,
-    (char*) 0x1C,
-    (char*) 0x20000,
-    (char*) 0x10000000,
-    (char*) 0x20,
-    (char*) 0x100,
-    (char*) 0x20000,
-    (char*) 0x10000,
-    (char*) 0x100,
-    (char*) 0x04000000,
-    (char*) 0x802,
-    (char*) 0x4000,
-    (char*) 8,
-    (char*) 0xC00,
-    (char*) 0x10000,
-    (char*) 0x01000000,
-    (char*) 0x20000,
-    (char*) 0x40,
-    (char*) 0x80,
-    (char*) 0x200000,
-    NULL,
-    (char*) 0x2000,
-    NULL,
-    (char*) 0x60000,
-    (char*) 0x200000,
-    (char*) 0x9000,
-    (char*) 0x53634974,
-    (char*) 0x724E6F72,
-    (char*) 0x6D616C5F,
-    (char*) 0x7363656E,
-    (char*) 0x655F6461,
-    (char*) 0x74610000,
+static char* gm_1832_NormalArchiveNames[12] = {
+    "mc01", "mc02", "mc03", "mc04", "mc05", "mc06",
+    "mc07", "mc08", "mc09", "mc10", "mc11", "mc12",
 };
+
+static s32 gm_1832_NormalBgmIds[12] = { 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C,
+                                        0x1C, 0x1C, 0x1C, 0x14, 0x14, 0x1C };
+
+static u64 gm_1832_NormalAudioMasks[12] = {
+    0x0002000010000000, 0x0000002000000100, 0x0002000000010000,
+    0x0000010004000000, 0x0000080200004000, 0x0000000800000C00,
+    0x0001000001000000, 0x0002000000000040, 0x0000008000200000,
+    0x0000000000002000, 0x0000000000060000, 0x0020000000009000,
+};
+
+static char gm_1832_NormalSceneDataName[] = "ScItrNormal_scene_data";
 
 static HSD_Archive* lbl_804D6620;
 
@@ -307,16 +267,15 @@ static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
     return data->stkind;
 }
 
-static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
+static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index)
 {
     return lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
-           ((u64*) &table[24])[stage_index];
+           gm_1832_NormalAudioMasks[stage_index];
 }
 
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data;
-    char** table = lbl_803D9750;
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     u8 stage_index;
@@ -347,12 +306,13 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     data->x36.active = 0;
 
     stage_index = arg0->stage_index;
-    lbl_804D6620 = lbArchive_80016DBC("IrNml", &data->x0, &table[48],
-                                      &data->x4, table[stage_index], NULL);
+    lbl_804D6620 = lbArchive_80016DBC(
+        "IrNml", &data->x0, gm_1832_NormalSceneDataName, &data->x4,
+        gm_1832_NormalArchiveNames[stage_index], NULL);
 
-    lbAudioAx_80026F2C((s32) table[stage_index + 12]);
-    lbAudioAx_8002702C((s32) table[stage_index + 12],
-                       gm_80187F48_GetAudioConfig(stage_index, table));
+    lbAudioAx_80026F2C(gm_1832_NormalBgmIds[stage_index]);
+    lbAudioAx_8002702C(gm_1832_NormalBgmIds[stage_index],
+                       gm_80187F48_GetAudioConfig(stage_index));
     lbAudioAx_80027168();
     lbAudioAx_80027648();
 
