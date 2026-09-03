@@ -1963,6 +1963,24 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
     return ftCo_IsAlly(fp0, fp1);
 }
 
+#ifdef MUST_MATCH
+/* MSL sqrtf writing its volatile result through a caller-provided slot. */
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+#else
+#define sqrtf_store(x, y) sqrtf(x)
+#endif
+
 static inline bool ftCo_800A3908_inline0(Fighter* fp,
                                          struct Fighter_x1A88_t* data, float x,
                                          float y)
@@ -2022,7 +2040,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 dx;
     f32 px;
     mp_UnkStruct0* island;
-    f32 ddx;
     f32 ddy;
     s32 t;
     s32 frames;
@@ -2067,25 +2084,30 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         }
         dx = fp->cur_pos.x - ex;
         if (dx > 0.0f) {
-            f32 land_y;
+            PAD_STACK(0xC);
 
-            PAD_STACK(0x10);
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
-                land_y = fp->pos_delta.y * t + fp->cur_pos.y;
+                dist = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y +
-                         (fp->pos_delta.y * t -
-                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
+                volatile f32 sqrt_time_store;
+
+                dist = fp->cur_pos.y +
+                       (fp->pos_delta.y * t -
+                        0.5 * (fp->co_attrs.gravity *
+                               sqrtf_store((f32) t, &sqrt_time_store)));
             } else {
-                land_y =
-                    fp->cur_pos.y +
-                    ((fp->pos_delta.y * frames -
-                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
+                volatile f32 sqrt_terminal_store;
+
+                dist = fp->cur_pos.y +
+                       ((fp->pos_delta.y * frames -
+                         0.5 * (fp->co_attrs.gravity *
+                                sqrtf_store((f32) frames,
+                                            &sqrt_terminal_store))) -
+                        (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
-                if (!(land_y + data->x558 < ey)) {
+                if (!(dist + data->x558 < ey)) {
                     u32 flags0;
                     int line_id0;
                     Vec3 floor_normal0;
@@ -2116,7 +2138,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 Vec3 floor_pos1;
 
                 px = ex - 5.0;
-                ddx = px - fp->cur_pos.x;
+                ex = px - fp->cur_pos.x;
                 ddy = ey - fp->cur_pos.y;
                 valid = ftCo_800A3908_inline1(
                     px, ey, &floor_pos1, &floor_normal1, &line_id1, &flags1);
@@ -2126,7 +2148,10 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     ok = 0;
                 }
                 if (ok != 0) {
-                    dist = sqrtf(ddx * ddx + ddy * ddy);
+                    volatile f32 sqrt_dist_store;
+
+                    PAD_STACK(8);
+                    dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
                         ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
                                                  5.0f);
@@ -2186,7 +2211,6 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     f32 dx;
     f32 px;
     f32 dist;
-    f32 ddx;
     f32 ddy;
     s32 t;
     s32 frames;
@@ -2231,23 +2255,28 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         }
         dx = ex - fp->cur_pos.x;
         if (dx > 0.0f) {
-            f32 land_y;
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
-                land_y = fp->pos_delta.y * t + fp->cur_pos.y;
+                dist = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y +
-                         (fp->pos_delta.y * t -
-                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
+                volatile f32 sqrt_time_store;
+
+                dist = fp->cur_pos.y +
+                       (fp->pos_delta.y * t -
+                        0.5 * (fp->co_attrs.gravity *
+                               sqrtf_store((f32) t, &sqrt_time_store)));
             } else {
-                land_y =
-                    fp->cur_pos.y +
-                    ((fp->pos_delta.y * frames -
-                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
+                volatile f32 sqrt_terminal_store;
+
+                dist = fp->cur_pos.y +
+                       ((fp->pos_delta.y * frames -
+                         0.5 * (fp->co_attrs.gravity *
+                                sqrtf_store((f32) frames,
+                                            &sqrt_terminal_store))) -
+                        (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
-                if (!(land_y + data->x558 < ey)) {
+                if (!(dist + data->x558 < ey)) {
                     u32 flags;
                     int line_id;
                     Vec3 floor_normal;
@@ -2277,7 +2306,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 Vec3 floor_pos;
 
                 px = 5.0 + ex;
-                ddx = px - fp->cur_pos.x;
+                ex = px - fp->cur_pos.x;
                 ddy = ey - fp->cur_pos.y;
                 valid = ftCo_800A4038_inline1(px, ey, &floor_pos,
                                               &floor_normal, &line_id, &flags);
@@ -2287,7 +2316,10 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     ok = 0;
                 }
                 if (ok != 0) {
-                    dist = sqrtf(ddx * ddx + ddy * ddy);
+                    volatile f32 sqrt_dist_store;
+
+                    PAD_STACK(8);
+                    dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
                         ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
                                                  5.0f);
@@ -5328,24 +5360,6 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
 
     *target = data->x44;
 }
-
-#ifdef MUST_MATCH
-/* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
-static inline float sqrtf_store(float x, volatile float* y)
-{
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        *y = (float) (x * guess);
-        return *(volatile float*) y;
-    }
-    return x;
-}
-#else
-#define sqrtf_store(x, y) sqrtf(x)
-#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
