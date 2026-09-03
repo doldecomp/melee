@@ -1953,7 +1953,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_3A76.c"),
             Object(Matching, "sysdolphin/baselib/sislib_font.c"),
             Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
-            Object(Linkable, "sysdolphin/baselib/hsd_3A94.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3A94.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2E.c"),
