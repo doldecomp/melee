@@ -574,9 +574,9 @@ static bool Ground_801C0A70(Vec3* pos)
     }
 }
 
-BobOmbRain const Ground_803B7DEC = { 0, 0, 0, 0, 0, 6 };
+static BobOmbRain const Ground_803B7DEC = { 0, 0, 0, 0, 0, 6 };
 
-HSD_Joint const Ground_803B7E0C = {
+static HSD_Joint const Ground_803B7E0C = {
     NULL,        0,           NULL,        NULL, NULL,
     { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, NULL, NULL,
 };
