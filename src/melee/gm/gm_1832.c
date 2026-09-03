@@ -84,12 +84,11 @@ static struct gm_1832_8047368C_t {
 } lbl_8047368C;
 ASSERT_SIZE(struct gm_1832_8047368C_t, 0x24);
 
+static HSD_GObj* lbl_804D65F0;
 static HSD_Archive* lbl_804D65F4;
 static HSD_Archive* lbl_804D65F8;
-static HSD_GObj* lbl_804D65F0;
+static SceneDesc* lbl_804D65FC;
 static SceneDesc* lbl_804D6600;
-
-static int lbl_804D6608;
 
 typedef struct {
     HSD_GObjEvent v[6];
@@ -148,6 +147,9 @@ static struct {
     /* 0x678 */ ClassicSlotVals x678[4];
     /* 0x6A8 */ ClassicCharLayout x6A8[28];
 }* lbl_804D6604;
+
+static int lbl_804D6608;
+static int lbl_804D660C;
 
 void fn_8018325C(HSD_GObj* arg0, int arg1)
 {
@@ -974,6 +976,8 @@ void fn_80186080(void)
     }
 }
 
+static char lbl_804D40B0[] = "IrRdMap";
+
 void fn_801861B8(void)
 {
     HSD_Text* text;
@@ -1026,8 +1030,6 @@ void fn_801861B8(void)
     }
 }
 
-static SceneDesc* lbl_804D65FC;
-
 void fn_80186400(void)
 {
     HSD_GObj* gobj = GObj_Create(0xE, 0xF, 0);
@@ -1047,8 +1049,6 @@ void fn_80186400(void)
         HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
-
-static char lbl_804D40B0[] = "IrRdMap";
 
 typedef struct ClassicArchiveNameArray {
     const char* v[4];
@@ -1194,6 +1194,9 @@ void gm_Scene_IntroEasy_OnFrame(void)
         gm_801A4B60();
     }
 }
+
+static HSD_Archive* lbl_804D6610;
+static SceneDesc* lbl_804D6614;
 
 static struct enterdata {
     int x0, x4;
@@ -1360,8 +1363,6 @@ void fn_80186F6C(HSD_GObj* arg0)
     }
 }
 
-static HSD_Archive* lbl_804D6610;
-
 #ifdef MUST_MATCH
 static const f32 gm_1832_sdata2_tail5[1] = { 1.0f };
 
@@ -1397,8 +1398,6 @@ void fn_80187494(HSD_GObj* gobj, int arg1)
         HSD_CObjEndCurrent();
     }
 }
-
-static SceneDesc* lbl_804D6614;
 
 #ifdef MUST_MATCH
 static const f32 gm_1832_sdata2_tail6[1] = { 10000.0f };
@@ -1707,8 +1706,6 @@ void fn_80187CF4(HSD_GObj* gobj)
     }
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
-
-static char gm_Scene_IntroAllstar_SceneDataName[] = "ScItrAllstar_scene_data";
 
 static char* lbl_803D9750[] = {
     "mc01",
