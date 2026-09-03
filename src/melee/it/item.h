@@ -6,10 +6,10 @@
 #include "ft/types.h"
 
 #include "it/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/objalloc.h>
+#include <hsd/objalloc.h>
 
 struct ItemStateDesc;
 

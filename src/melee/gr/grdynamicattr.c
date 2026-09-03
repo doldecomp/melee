@@ -6,7 +6,7 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/debug.h>
+#include <hsd/debug.h>
 
 static const s32 GC_Id_None = -1;
 

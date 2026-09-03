@@ -2,8 +2,8 @@
 
 #include "inlines.h"
 
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjuserdata.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjuserdata.h"
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -17,8 +17,8 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
 
 ItemStateTable it_803F7558[] = {
     { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion0_Phys, NULL },

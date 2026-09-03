@@ -27,12 +27,12 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <baselib/spline.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
+#include <hsd/spline.h>
 
 /* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

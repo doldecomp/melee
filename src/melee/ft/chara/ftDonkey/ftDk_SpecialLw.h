@@ -1,7 +1,7 @@
 #ifndef GALE01_10DC80
 #define GALE01_10DC80
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 10DC80 */ void ftDk_SpecialLw_Enter(HSD_GObj* gobj);
 /* 10DCD8 */ void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj);

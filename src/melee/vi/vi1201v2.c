@@ -2,7 +2,7 @@
 
 #include "vi.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -26,14 +26,14 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

@@ -3,7 +3,7 @@
 #ifndef GALE01_0E3278
 #define GALE01_0E3278
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E3278 */ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj);
 /* 0E32B0 */ void ftCa_SpecialS_Enter(HSD_GObj* gobj);

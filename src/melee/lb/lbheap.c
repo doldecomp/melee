@@ -1,9 +1,9 @@
 #include "lbheap.static.h"
 
 #include <stddef.h> // offsetof
-#include <baselib/debug.h>
-#include <baselib/initialize.h>
-#include <baselib/memory.h>
+#include <hsd/debug.h>
+#include <hsd/initialize.h>
+#include <hsd/memory.h>
 #include <melee/lb/lbmemory.h>
 
 struct lbHeap_HeapDesc {

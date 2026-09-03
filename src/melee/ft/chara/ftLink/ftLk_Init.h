@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftLink/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0EAD64 */ bool ftLk_Init_BoomerangExists(HSD_GObj* gobj);
 /* 0EAD84 */ void ftLk_Init_OnDeath(HSD_GObj* gobj);

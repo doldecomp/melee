@@ -9,7 +9,7 @@
 #include "lb/lbcollision.h"
 #include "lb/lbgx.h"
 
-#include <baselib/tev.h>
+#include <hsd/tev.h>
 
 U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 

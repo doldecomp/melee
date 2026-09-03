@@ -8,10 +8,10 @@
 #include "lb/lbmthp.h"
 #include "mn/inlines.h"
 
-#include <baselib/controller.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/sobjlib.h>
+#include <hsd/controller.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/sobjlib.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,

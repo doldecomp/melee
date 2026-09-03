@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_OPENING_H
 #define MELEE_GM_OPENING_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <sysdolphin/baselib/sobjlib.h>
+#include <hsd/sobjlib.h>
 
 /* 1A9DD0 */ void gm_801A9DD0(HSD_GObj*, u16, u16, int, int);
 /* 1A9FCC */ void* fn_801A9FCC(void);

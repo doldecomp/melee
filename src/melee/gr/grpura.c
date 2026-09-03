@@ -20,13 +20,13 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <baselib/tobj.h>
+#include <hsd/debug.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
+#include <hsd/tobj.h>
 
 struct GrPuModelDesc {
     /* 0x0 */ s32 x0;

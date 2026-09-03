@@ -10,8 +10,8 @@
 
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/video.h>
+#include <hsd/random.h>
+#include <hsd/video.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>

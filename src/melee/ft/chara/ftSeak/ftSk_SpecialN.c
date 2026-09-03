@@ -1,6 +1,6 @@
 #include "ftSk_SpecialN.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 

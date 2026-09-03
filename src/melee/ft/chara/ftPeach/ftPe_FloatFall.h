@@ -1,7 +1,7 @@
 #ifndef GALE01_11BDF0
 #define GALE01_11BDF0
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11BD6C */ void ftPe_UpdateFloatDir(HSD_GObj* gobj);
 /* 11BDF0 */ void ftPe_FloatFall_Anim(HSD_GObj* gobj);

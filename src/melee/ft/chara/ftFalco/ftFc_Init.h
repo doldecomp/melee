@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftFox/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 149ACC */ void ftFc_Init_OnDeath(HSD_GObj*);
 /* 149B00 */ void ftFc_Init_OnItemPickup(HSD_GObj*, bool flag);

@@ -1,7 +1,7 @@
 #ifndef GALE01_0E4040
 #define GALE01_0E4040
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E4354 */ void ftCa_SpecialHi_Anim(HSD_GObj* gobj);
 /* 0E49DC */ void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj);

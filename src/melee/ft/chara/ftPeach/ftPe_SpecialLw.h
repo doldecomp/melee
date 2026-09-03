@@ -1,7 +1,7 @@
 #ifndef GALE01_11D11C
 #define GALE01_11D11C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11CF84 */ void ftPe_SpecialLw_UnsetVeg(HSD_GObj* gobj);
 /* 11CFA0 */ void ftPe_SpecialLw_8011CFA0(HSD_GObj* gobj);

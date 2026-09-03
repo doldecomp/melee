@@ -3,7 +3,7 @@
 #ifndef GALE01_0E2B80
 #define GALE01_0E2B80
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E2B80 */ void ftCa_SpecialN_Enter(HSD_GObj* gobj);
 /* 0E2C00 */ void ftCa_SpecialAirN_Enter(HSD_GObj* gobj);

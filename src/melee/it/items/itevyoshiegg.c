@@ -3,8 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
+#include "hsd/gobj.h"
+#include "hsd/jobj.h"
 #include "ef/efsync.h"
 #include "gm/gmevent.h"
 

@@ -3,28 +3,28 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 #include "ft/forward.h"
 
 #include "lb/lb_013B.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/controller.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/mobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

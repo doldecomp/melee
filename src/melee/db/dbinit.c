@@ -6,8 +6,8 @@
 
 #include <dolphin/card.h>
 #include <dolphin/vi.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <hsd/controller.h>
+#include <hsd/gobj.h>
 
 /* 4D6B30 */ u16 db_gameLaunchButtonState;
 /* 4D6B2C */ char** db_bonus_names;

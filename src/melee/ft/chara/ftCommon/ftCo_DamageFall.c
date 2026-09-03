@@ -24,7 +24,7 @@
 #include "ftCommon/ftCo_ItemParasolDamageFall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {

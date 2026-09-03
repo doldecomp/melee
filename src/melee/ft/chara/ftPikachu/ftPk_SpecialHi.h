@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 125D80 */ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj);
 /* 125DE8 */ void ftPk_SpecialHi_Enter(HSD_GObj* gobj);

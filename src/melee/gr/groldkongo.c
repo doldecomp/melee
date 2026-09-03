@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include "hsd/debug.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 
@@ -23,9 +23,9 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;

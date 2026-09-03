@@ -5,11 +5,11 @@
 #include "efsync.h"
 #include "types.h"
 
-#include "baselib/gobj.h"
-#include "baselib/gobjproc.h"
-#include "baselib/particle.h"
-#include "baselib/psstructs.h"
-#include "baselib/random.h"
+#include "hsd/gobj.h"
+#include "hsd/gobjproc.h"
+#include "hsd/particle.h"
+#include "hsd/psstructs.h"
+#include "hsd/random.h"
 #include "cm/camera.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
@@ -17,7 +17,7 @@
 
 #include <math.h>
 #include <stdarg.h>
-#include <baselib/generator.h>
+#include <hsd/generator.h>
 
 HSD_ObjAllocData efAsync_AllocData;
 

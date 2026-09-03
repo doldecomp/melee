@@ -5,7 +5,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/jobj.h"
+#include "hsd/jobj.h"
 #include "ef/efasync.h"
 
 #include "it/forward.h"
@@ -21,7 +21,7 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 
 typedef struct itGShell_Attrs {
     float x0;

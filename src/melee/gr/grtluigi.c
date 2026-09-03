@@ -7,7 +7,7 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
     {

@@ -14,7 +14,7 @@
 #include "lb/lb_013B.h"
 #include "lb/lbcommand.h"
 
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

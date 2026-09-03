@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/mtx.h"
+#include "hsd/mtx.h"
 #include "ft/chara/ftLink/ftLk_SpecialS.h"
 #include "ft/ftlib.h"
 #include "ftLink/ftLk_SpecialHi.h"

@@ -9,7 +9,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 bool it_8026D564(Item_GObj* item_gobj)
 {

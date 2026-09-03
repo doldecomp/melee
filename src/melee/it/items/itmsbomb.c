@@ -1,6 +1,6 @@
 #include "itmsbomb.h"
 
-#include "baselib/jobj.h"
+#include "hsd/jobj.h"
 
 #include "it/forward.h"
 

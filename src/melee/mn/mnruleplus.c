@@ -1,16 +1,16 @@
 #include "placeholder.h"
 #include "platform.h"
 
-#include "baselib/debug.h"
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/gobjuserdata.h"
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
-#include "baselib/sislib.h"
+#include "hsd/debug.h"
+#include "hsd/gobj.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
+#include "hsd/gobjplink.h"
+#include "hsd/gobjproc.h"
+#include "hsd/gobjuserdata.h"
+#include "hsd/jobj.h"
+#include "hsd/memory.h"
+#include "hsd/sislib.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
@@ -25,7 +25,7 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;

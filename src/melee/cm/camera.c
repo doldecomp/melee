@@ -4,17 +4,17 @@
 
 #include <placeholder.h>
 
-#include "baselib/cobj.h"
-#include "baselib/displayfunc.h"
-#include "baselib/fog.h"
+#include "hsd/cobj.h"
+#include "hsd/displayfunc.h"
+#include "hsd/fog.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/gobj.h"
-#include "baselib/lobj.h"
-#include "baselib/memory.h"
-#include "baselib/random.h"
-#include "baselib/wobj.h"
+#include "hsd/gobj.h"
+#include "hsd/lobj.h"
+#include "hsd/memory.h"
+#include "hsd/random.h"
+#include "hsd/wobj.h"
 
 #include "cm/forward.h"
 
@@ -39,11 +39,11 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <baselib/controller.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
+#include <hsd/controller.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
 #include <melee/gr/grcastle.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grgarden.h>

@@ -1,7 +1,7 @@
 #ifndef GALE01_14FE10
 #define GALE01_14FE10
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14FE10 */ void ftMh_MS_341_8014FE10(HSD_GObj* gobj);
 /* 14FE58 */ void ftMh_MS_341_8014FE58(HSD_GObj* gobj);

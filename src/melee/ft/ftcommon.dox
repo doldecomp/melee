@@ -5,11 +5,11 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
 
 void ftCommon_ApplyFrictionGround(Fighter*, float);
 void ftCommon_8007C98C(Fighter*, float vel, float, float gr_friction);

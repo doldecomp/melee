@@ -1,6 +1,6 @@
 #include "sc/forward.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <sc/types.h>
 
 static int mnInfoBonus_803EFCE8[0x101] = {

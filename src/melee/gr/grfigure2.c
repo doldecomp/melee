@@ -12,8 +12,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 20E274 */ static void grFigure2_8020E274(void);
 /* 20E2E4 */ static void grFigure2_OnLoad(void);

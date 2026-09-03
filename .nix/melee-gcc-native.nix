@@ -10,7 +10,7 @@ stdenv.mkDerivation {
   src = lib.fileset.toSource {
     root = ../.;
     fileset = lib.fileset.unions [
-      ../src/sysdolphin
+      ../src/hsd
       ../src/melee
       ../src/Runtime
       ../src/placeholder.h

@@ -1,6 +1,6 @@
 #include "ifmagnify.h"
 
-#include "baselib/gobjuserdata.h"
+#include "hsd/gobjuserdata.h"
 #include "cm/camera.h"
 #include "ft/ftdrawcommon.h"
 #include "ft/ftlib.h"
@@ -18,18 +18,18 @@
 #include "sc/types.h"
 
 #include <math.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/mobj.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <hsd/cobj.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/mobj.h>
+#include <hsd/tobj.h>
+#include <hsd/wobj.h>
 
 static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
                                            { 0.0F, 0.0F, 300.0F },

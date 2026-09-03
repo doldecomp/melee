@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftCaptain/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E2888 */ void ftCa_Init_OnDeath(HSD_GObj* gobj);
 /* 0E28C8 */ void ftCa_Init_800E28C8(HSD_GObj* gobj);

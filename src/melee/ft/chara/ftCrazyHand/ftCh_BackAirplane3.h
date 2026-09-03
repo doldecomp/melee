@@ -1,7 +1,7 @@
 #ifndef GALE01_159670
 #define GALE01_159670
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 159670 */ void ftCh_Init_80159670(HSD_GObj* gobj);
 /* 1596D0 */ void ftCh_BackAirplane3_Anim(HSD_GObj* gobj);

@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 #include <melee/gm/forward.h>
 
 /* 1A45E8 */ bool gm_801A45E8(int bit);

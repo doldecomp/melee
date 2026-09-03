@@ -4,13 +4,13 @@
 
 #include "dolphin/pad.h"
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/sislib.h>
+#include <hsd/archive.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/jobj.h>
+#include <hsd/sislib.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

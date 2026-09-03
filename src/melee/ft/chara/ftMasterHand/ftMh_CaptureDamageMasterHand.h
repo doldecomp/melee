@@ -1,7 +1,7 @@
 #ifndef GALE01_155C94
 #define GALE01_155C94
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 155C94 */ void ftMh_CaptureDamageMasterHand_80155C94(HSD_GObj* gobj);
 /* 155C20 */ void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj);

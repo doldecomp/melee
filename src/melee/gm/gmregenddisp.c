@@ -15,17 +15,17 @@
 #include "ty/types.h"
 
 #include <math.h>
-#include <baselib/archive.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
+#include <hsd/archive.h>
+#include <hsd/cobj.h>
+#include <hsd/debug.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/random.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {

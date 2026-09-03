@@ -6,7 +6,7 @@
 
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h> // IWYU pragma: export
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

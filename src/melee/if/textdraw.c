@@ -5,17 +5,17 @@
 #include "if/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/hsd_3915.h>
-#include <baselib/lobj.h>
-#include <baselib/video.h>
-#include <baselib/wobj.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/hsd_3915.h>
+#include <hsd/lobj.h>
+#include <hsd/video.h>
+#include <hsd/wobj.h>
 
 /// .data
 /* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {

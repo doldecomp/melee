@@ -3,17 +3,17 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/controller.h"
+#include "hsd/archive.h"
+#include "hsd/controller.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
-#include "baselib/sislib.h"
+#include "hsd/gobj.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
+#include "hsd/gobjproc.h"
+#include "hsd/jobj.h"
+#include "hsd/sislib.h"
 #include "cm/cmsnap.h"
 #include "dolphin/pad.h"
 #include "gm/gm_1601.h"

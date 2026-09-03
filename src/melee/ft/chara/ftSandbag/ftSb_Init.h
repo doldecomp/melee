@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftSandbag/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14F9CC */ void ftSb_Init_OnDeath(HSD_GObj* gobj);
 /* 14F9D0 */ void ftSb_Init_OnLoad(HSD_GObj* gobj);

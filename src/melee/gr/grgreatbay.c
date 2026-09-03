@@ -4,7 +4,7 @@
 
 #include <platform.h>
 
-#include "baselib/psstructs.h"
+#include "hsd/psstructs.h"
 
 #include "forward.h"
 
@@ -27,11 +27,11 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 /* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
                                              CollData* coll, int coll_x50,

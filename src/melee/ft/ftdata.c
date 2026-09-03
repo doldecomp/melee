@@ -130,11 +130,11 @@
 #include "lb/lbfile.h"
 #include "pl/player.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <string.h>
-#include <baselib/debug.h>
-#include <baselib/objalloc.h>
+#include <hsd/debug.h>
+#include <hsd/objalloc.h>
 
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
     { &lbl_804599F0, 5 },       // Mario

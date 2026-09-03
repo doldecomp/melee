@@ -9,16 +9,16 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/sislib.h>
 
 /* 3EEED8 */ AnimLoopSettings mnSound_803EEED8[] = {
     { 0.0f, 199.0f, 0.0f },  { 0.0f, 29.0f, 0.0f }, { 30.0f, 59.0f, 30.0f },

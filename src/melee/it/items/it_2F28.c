@@ -15,7 +15,7 @@
 #include "it/types.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/it/item.h>
 
 static void it_802F2A58(Item_GObj*);             /* static */

@@ -26,9 +26,9 @@
 #include "ftPurin/types.h"
 
 #include <math.h>
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/archive.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>

@@ -1,7 +1,7 @@
 #ifndef GALE01_15377C
 #define GALE01_15377C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15377C */ void ftMh_FingerGun3_Anim(HSD_GObj* gobj);
 /* 1537B8 */ void ftMh_FingerGun3_IASA(HSD_GObj* gobj);

@@ -21,12 +21,12 @@
 #include <dolphin/ar.h>
 #include <dolphin/ax.h>
 #include <dolphin/axfx.h>
-#include <baselib/axdriver.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/random.h>
-#include <baselib/synth.h>
+#include <hsd/axdriver.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/random.h>
+#include <hsd/synth.h>
 
 #define GET_SOUND(x) ((lbAudioAx_UserData*) HSD_GObjGetUserData(x))
 

@@ -12,11 +12,11 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <melee/sc/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/spline.h>
+#include <hsd/spline.h>
 #include <melee/lb/types.h>
 
 typedef struct StageBlastZone {

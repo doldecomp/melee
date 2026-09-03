@@ -5387,20 +5387,20 @@ dolphin/axfx/axfx.c:
 	.text       start:0x8035DD3C end:0x8035DD98
 	.sdata      start:0x804D5C70 end:0x804D5C78
 
-sysdolphin/baselib/dobj.c:
+hsd/dobj.c:
 	.text       start:0x8035DD98 end:0x8035E560
 	.data       start:0x80405450 end:0x80405570
 	.sdata      start:0x804D5C78 end:0x804D5C90
 	.sbss       start:0x804D75A0 end:0x804D75A8
 
-sysdolphin/baselib/tobj.c:
+hsd/tobj.c:
 	.text       start:0x8035E560 end:0x803615D0
 	.data       start:0x80405570 end:0x80405A38
 	.sdata      start:0x804D5C90 end:0x804D5CC8
 	.sbss       start:0x804D75A8 end:0x804D75B0
 	.sdata2     start:0x804DE3E0 end:0x804DE418
 
-sysdolphin/baselib/state.c:
+hsd/state.c:
 	.text       start:0x803615D0 end:0x80362024
 	.data       start:0x80405A38 end:0x80405B98
 	.bss        start:0x804C07E0 end:0x804C07F8
@@ -5408,7 +5408,7 @@ sysdolphin/baselib/state.c:
 	.sbss       start:0x804D75B0 end:0x804D75F8
 	.sdata2     start:0x804DE418 end:0x804DE420
 
-sysdolphin/baselib/tev.c:
+hsd/tev.c:
 	.text       start:0x80362024 end:0x80362D30
 	.data       start:0x80405B98 end:0x80405E28
 	.bss        start:0x804C07F8 end:0x804C0880
@@ -5416,14 +5416,14 @@ sysdolphin/baselib/tev.c:
 	.sbss       start:0x804D75F8 end:0x804D7618
 	.sdata2     start:0x804DE420 end:0x804DE428
 
-sysdolphin/baselib/mobj.c:
+hsd/mobj.c:
 	.text       start:0x80362D30 end:0x80363FC8
 	.data       start:0x80405E28 end:0x80405FB8
 	.sdata      start:0x804D5CE0 end:0x804D5D08
 	.sbss       start:0x804D7618 end:0x804D7628
 	.sdata2     start:0x804DE428 end:0x804DE438
 
-sysdolphin/baselib/aobj.c:
+hsd/aobj.c:
 	.text       start:0x80363FC8 end:0x8036539C
 	.data       start:0x80405FB8 end:0x804060C0
 	.bss        start:0x804C0880 end:0x804C08B0
@@ -5431,7 +5431,7 @@ sysdolphin/baselib/aobj.c:
 	.sbss       start:0x804D7628 end:0x804D7638
 	.sdata2     start:0x804DE438 end:0x804DE440
 
-sysdolphin/baselib/lobj.c:
+hsd/lobj.c:
 	.text       start:0x8036539C end:0x803676F8
 	.rodata     start:0x803B94A0 end:0x803B94B8
 	.data       start:0x804060C0 end:0x80406220
@@ -5440,21 +5440,21 @@ sysdolphin/baselib/lobj.c:
 	.sbss       start:0x804D7638 end:0x804D7658
 	.sdata2     start:0x804DE440 end:0x804DE468
 
-sysdolphin/baselib/cobj.c:
+hsd/cobj.c:
 	.text       start:0x803676F8 end:0x8036A938
 	.data       start:0x80406220 end:0x80406349
 	.sdata      start:0x804D5D40 end:0x804D5D52
 	.sbss       start:0x804D7658 end:0x804D7660
 	.sdata2     start:0x804DE468 end:0x804DE4D0
 
-sysdolphin/baselib/fobj.c:
+hsd/fobj.c:
 	.text       start:0x8036A938 end:0x8036B8D0
 	.data       start:0x80406350 end:0x80406398
 	.bss        start:0x804C08D8 end:0x804C0908
 	.sdata      start:0x804D5D58 end:0x804D5D68
 	.sdata2     start:0x804DE4D0 end:0x804DE4F8
 
-sysdolphin/baselib/pobj.c:
+hsd/pobj.c:
 	.text       start:0x8036B8D0 end:0x8036EC10
 	.data       start:0x80406398 end:0x80406708
 	.bss        start:0x804C0908 end:0x804C0918
@@ -5462,7 +5462,7 @@ sysdolphin/baselib/pobj.c:
 	.sbss       start:0x804D7660 end:0x804D7680
 	.sdata2     start:0x804DE4F8 end:0x804DE528
 
-sysdolphin/baselib/jobj.c:
+hsd/jobj.c:
 	.text       start:0x8036EC10 end:0x803738A0
 	.rodata     start:0x803B94B8 end:0x803B94E0
 	.data       start:0x80406708 end:0x80406AE0
@@ -5470,7 +5470,7 @@ sysdolphin/baselib/jobj.c:
 	.sbss       start:0x804D7680 end:0x804D7698
 	.sdata2     start:0x804DE528 end:0x804DE578
 
-sysdolphin/baselib/displayfunc.c:
+hsd/displayfunc.c:
 	.text       start:0x803738A0 end:0x80374E48
 	.data       start:0x80406AE0 end:0x80406BC0
 	.bss        start:0x804C0918 end:0x804C0948
@@ -5478,7 +5478,7 @@ sysdolphin/baselib/displayfunc.c:
 	.sbss       start:0x804D7698 end:0x804D76B8
 	.sdata2     start:0x804DE578 end:0x804DE590
 
-sysdolphin/baselib/initialize.c:
+hsd/initialize.c:
 	.text       start:0x80374E48 end:0x8037588C
 	.rodata     start:0x803B94E0 end:0x803B9570
 	.data       start:0x80406BC0 end:0x80406CE0
@@ -5487,7 +5487,7 @@ sysdolphin/baselib/initialize.c:
 	.sbss       start:0x804D76B8 end:0x804D76D8
 	.sdata2     start:0x804DE590 end:0x804DE5A0
 
-sysdolphin/baselib/video.c:
+hsd/video.c:
 	.text       start:0x8037588C end:0x8037699C
 	.data       start:0x80406CE0 end:0x80406D68
 	.bss        start:0x804C0980 end:0x804C1F78
@@ -5495,40 +5495,40 @@ sysdolphin/baselib/video.c:
 	.sbss       start:0x804D76D8 end:0x804D76E0
 	.sdata2     start:0x804DE5A0 end:0x804DE5B0
 
-sysdolphin/baselib/controller.c:
+hsd/controller.c:
 	.text       start:0x8037699C end:0x80378090
 	.rodata     start:0x803B9570 end:0x803B9580
 	.data       start:0x80406D68 end:0x80406DE0
 	.bss        start:0x804C1F78 end:0x804C22E0
 	.sdata2     start:0x804DE5B0 end:0x804DE620
 
-sysdolphin/baselib/rumble.c:
+hsd/rumble.c:
 	.text       start:0x80378090 end:0x80378A34
 	.data       start:0x80406DE0 end:0x80406DF0
 	.bss        start:0x804C22E0 end:0x804C2310
 
-sysdolphin/baselib/spline.c:
+hsd/spline.c:
 	.text       start:0x80378A34 end:0x80379310
 	.sdata2     start:0x804DE620 end:0x804DE658
 
-sysdolphin/baselib/mtx.c:
+hsd/mtx.c:
 	.text       start:0x80379310 end:0x8037A780
 	.bss        start:0x804C2310 end:0x804C2368
 	.sdata      start:0x804D5E90 end:0x804D5EA0
 	.sdata2     start:0x804DE658 end:0x804DE6A0
 
-sysdolphin/baselib/util.c:
+hsd/util.c:
 	.text       start:0x8037A780 end:0x8037A94C
 	.data       start:0x80406DF0 end:0x80406E48
 	.sdata      start:0x804D5EA0 end:0x804D5EB0
 
-sysdolphin/baselib/objalloc.c:
+hsd/objalloc.c:
 	.text       start:0x8037A94C end:0x8037AE34
 	.data       start:0x80406E48 end:0x80406E68
 	.sdata      start:0x804D5EB0 end:0x804D5EB8
 	.sbss       start:0x804D76E0 end:0x804D76E8
 
-sysdolphin/baselib/robj.c:
+hsd/robj.c:
 	.text       start:0x8037AE34 end:0x8037CD80
 	.rodata     start:0x803B9580 end:0x803B95A8
 	.data       start:0x80406E68 end:0x80406FD0
@@ -5537,110 +5537,110 @@ sysdolphin/baselib/robj.c:
 	.sbss       start:0x804D76E8 end:0x804D76F0
 	.sdata2     start:0x804DE6A0 end:0x804DE6D0
 
-sysdolphin/baselib/id.c:
+hsd/id.c:
 	.text       start:0x8037CD80 end:0x8037D050
 	.bss        start:0x804C23C0 end:0x804C2580
 	.sdata      start:0x804D5EE8 end:0x804D5EF8
 
-sysdolphin/baselib/wobj.c:
+hsd/wobj.c:
 	.text       start:0x8037D050 end:0x8037D970
 	.data       start:0x80406FD0 end:0x80407078
 	.sdata      start:0x804D5EF8 end:0x804D5F20
 	.sbss       start:0x804D76F0 end:0x804D76F8
 	.sdata2     start:0x804DE6D0 end:0x804DE6F0
 
-sysdolphin/baselib/fog.c:
+hsd/fog.c:
 	.text       start:0x8037D970 end:0x8037E1BC
 	.rodata     start:0x803B95A8 end:0x803B95E8
 	.data       start:0x80407078 end:0x80407188
 	.sdata      start:0x804D5F20 end:0x804D5F38
 	.sdata2     start:0x804DE6F0 end:0x804DE718
 
-sysdolphin/baselib/perf.c:
+hsd/perf.c:
 	.text       start:0x8037E1BC end:0x8037E3FC
 	.data       start:0x80407188 end:0x804072A8
 	.sdata      start:0x804D5F38 end:0x804D5F48
 	.sbss       start:0x804D76F8 end:0x804D7700
 	.sdata2     start:0x804DE718 end:0x804DE720
 
-sysdolphin/baselib/list.c:
+hsd/list.c:
 	.text       start:0x8037E3FC end:0x8037E6C4
 	.bss        start:0x804C2580 end:0x804C25D8
 	.sdata      start:0x804D5F48 end:0x804D5F68
 
-sysdolphin/baselib/object.c:
+hsd/object.c:
 	.text       start:0x8037E6C4 end:0x8037E708
 	.data       start:0x804072A8 end:0x80407300
 	.sdata      start:0x804D5F68 end:0x804D5F70
 
-sysdolphin/baselib/quatlib.c:
+hsd/quatlib.c:
 	.text       start:0x8037E708 end:0x8037F1B0
 	.rodata     start:0x803B95E8 end:0x803B95F8
 	.sdata2     start:0x804DE720 end:0x804DE768
 
-sysdolphin/baselib/memory.c:
+hsd/memory.c:
 	.text       start:0x8037F1B0 end:0x8037F244
 	.data       start:0x80407300 end:0x80407310
 	.sdata      start:0x804D5F70 end:0x804D5F78
 
-sysdolphin/baselib/shadow.c:
+hsd/shadow.c:
 	.text       start:0x8037F244 end:0x803801E4
 	.data       start:0x80407310 end:0x804074A8
 	.bss        start:0x804C25D8 end:0x804C2608
 	.sdata      start:0x804D5F78 end:0x804D5F90
 	.sdata2     start:0x804DE768 end:0x804DE790
 
-sysdolphin/baselib/archive.c:
+hsd/archive.c:
 	.text       start:0x803801E4 end:0x803804F8
 	.data       start:0x804074A8 end:0x804074F0
 
-sysdolphin/baselib/random.c:
+hsd/random.c:
 	.text       start:0x803804F8 end:0x803805DC
 	.sdata      start:0x804D5F90 end:0x804D5F98
 	.sdata2     start:0x804DE790 end:0x804DE7A0
 
-sysdolphin/baselib/bytecode.c:
+hsd/bytecode.c:
 	.text       start:0x803805DC end:0x80381BE4
 	.data       start:0x804074F0 end:0x80407590
 	.sdata      start:0x804D5F98 end:0x804D5FA8
 	.sdata2     start:0x804DE7A0 end:0x804DE7D8
 
-sysdolphin/baselib/class.c:
+hsd/class.c:
 	.text       start:0x80381BE4 end:0x80382A40
 	.data       start:0x80407590 end:0x80407720
 	.sdata      start:0x804D5FA8 end:0x804D5FC0
 	.sbss       start:0x804D7700 end:0x804D7710
 
-sysdolphin/baselib/hash.c:
+hsd/hash.c:
 	.text       start:0x80382A40 end:0x80382C00
 	.data       start:0x80407720 end:0x80407738
 	.sdata      start:0x804D5FC0 end:0x804D5FC8
 
-sysdolphin/baselib/texp.c:
+hsd/texp.c:
 	.text       start:0x80382C00 end:0x80385798
 	.data       start:0x80407738 end:0x80407AA0
 	.sdata      start:0x804D5FC8 end:0x804D5FF0
 	.sdata2     start:0x804DE7D8 end:0x804DE7E8
 
-sysdolphin/baselib/texpdag.c:
+hsd/texpdag.c:
 	.text       start:0x80385798 end:0x80387DF8
 	.data       start:0x80407AA0 end:0x80407B58
 	.sdata      start:0x804D5FF0 end:0x804D6000
 	.sdata2     start:0x804DE7E8 end:0x804DE7F0
 
-sysdolphin/baselib/leak.c:
+hsd/leak.c:
 	.text       start:0x80387DF8 end:0x8038815C
 	.data       start:0x80407B58 end:0x80407D60
 	.sdata      start:0x804D6000 end:0x804D6010
 
-sysdolphin/baselib/debug.c:
+hsd/debug.c:
 	.text       start:0x8038815C end:0x80388330
 	.data       start:0x80407D60 end:0x80407D90
 	.bss        start:0x804C2608 end:0x804C28E0
 	.sdata      start:0x804D6010 end:0x804D6018
 	.sbss       start:0x804D7710 end:0x804D7720
 
-sysdolphin/baselib/synth.c:
+hsd/synth.c:
 	.text       start:0x80388330 end:0x8038BB34
 	.data       start:0x80407D90 end:0x80408140
 	.bss        start:0x804C28E0 end:0x804C45A0
@@ -5648,7 +5648,7 @@ sysdolphin/baselib/synth.c:
 	.sbss       start:0x804D7720 end:0x804D7788
 	.sdata2     start:0x804DE7F0 end:0x804DE840
 
-sysdolphin/baselib/axdriver.c:
+hsd/axdriver.c:
 	.text       start:0x8038BB34 end:0x8038EA50
 	.rodata     start:0x803B95F8 end:0x803B9628
 	.data       start:0x80408140 end:0x804083B8
@@ -5657,46 +5657,46 @@ sysdolphin/baselib/axdriver.c:
 	.sbss       start:0x804D7788 end:0x804D77F0
 	.sdata2     start:0x804DE840 end:0x804DE890
 
-sysdolphin/baselib/devcom.c:
+hsd/devcom.c:
 	.text       start:0x8038EA50 end:0x8038FAA8
 	.data       start:0x804083B8 end:0x80408480
 	.bss        start:0x804C62A0 end:0x804CE380
 	.sdata      start:0x804D6050 end:0x804D6060
 	.sbss       start:0x804D77F0 end:0x804D7810
 
-sysdolphin/baselib/gobjproc.c:
+hsd/gobjproc.c:
 	.text       start:0x8038FAA8 end:0x8038FF5C
 	.data       start:0x80408480 end:0x804084B8
 	.sdata      start:0x804D6060 end:0x804D6068
 
-sysdolphin/baselib/gobjplink.c:
+hsd/gobjplink.c:
 	.text       start:0x8038FF5C end:0x8039063C
 	.data       start:0x804084B8 end:0x804084F0
 	.sdata      start:0x804D6068 end:0x804D6070
 
-sysdolphin/baselib/gobjgxlink.c:
+hsd/gobjgxlink.c:
 	.text       start:0x8039063C end:0x80390A3C
 	.data       start:0x804084F0 end:0x80408558
 
-sysdolphin/baselib/gobjobject.c:
+hsd/gobjobject.c:
 	.text       start:0x80390A3C end:0x80390B68
 	.data       start:0x80408558 end:0x80408590
 
-sysdolphin/baselib/gobjuserdata.c:
+hsd/gobjuserdata.c:
 	.text       start:0x80390B68 end:0x80390C5C
 	.data       start:0x80408590 end:0x804085F0
 
-sysdolphin/baselib/gobj.c:
+hsd/gobj.c:
 	.text       start:0x80390C5C end:0x803912E0
 	.data       start:0x804085F0 end:0x80408620
 	.bss        start:0x804CE380 end:0x804CE3F8
 	.sbss       start:0x804D7810 end:0x804D7850
 
-sysdolphin/baselib/gobjinit.c:
+hsd/gobjinit.c:
 	.text       start:0x803912E0 end:0x80391580
 	.data       start:0x80408620 end:0x8040862C
 
-sysdolphin/baselib/hsd_3915.c:
+hsd/hsd_3915.c:
 	.text       start:0x80391580 end:0x80392CCC
 	.data       start:0x80408630 end:0x8040A540
 	.bss        start:0x804CE3F8 end:0x804CE728
@@ -5704,40 +5704,40 @@ sysdolphin/baselib/hsd_3915.c:
 	.sbss       start:0x804D7850 end:0x804D7890
 	.sdata2     start:0x804DE890 end:0x804DE930
 
-sysdolphin/baselib/hsd_392C.c:
+hsd/hsd_392C.c:
 	.text       start:0x80392CCC end:0x803932D0
 	.data       start:0x8040A540 end:0x8040A920
 	.bss        start:0x804CE728 end:0x804CEB40
 	.sdata      start:0x804D60A8 end:0x804D60B0
 	.sbss       start:0x804D7890 end:0x804D78A8
 
-sysdolphin/baselib/hsd_3933.c:
+hsd/hsd_3933.c:
 	.text       start:0x803932D0 end:0x80393C14
 	.data       start:0x8040A920 end:0x8040AB00
 	.bss        start:0x804CEB40 end:0x804CF7E8
 	.sbss       start:0x804D78A8 end:0x804D78C8
 	.sdata2     start:0x804DE930 end:0x804DE948
 
-sysdolphin/baselib/hsd_393C.c:
+hsd/hsd_393C.c:
 	.text       start:0x80393C14 end:0x80394314
 	.bss        start:0x804CF7E8 end:0x804CF810
 
-sysdolphin/baselib/debugconsole_main.c:
+hsd/debugconsole_main.c:
 	.text       start:0x80394314 end:0x80397E0C
 	.data       start:0x8040AB00 end:0x8040BF10
 	.bss        start:0x804CF810 end:0x804D08E8
 	.sdata      start:0x804D60B0 end:0x804D6358
 	.sbss       start:0x804D78C8 end:0x804D78D0
 
-sysdolphin/baselib/hsd_397E.c:
+hsd/hsd_397E.c:
 	.text       start:0x80397E0C end:0x803982E4
 	.data       start:0x8040BF10 end:0x8040BF48
 
-sysdolphin/baselib/hsd_3982.c:
+hsd/hsd_3982.c:
 	.text       start:0x803982E4 end:0x803983A4
 	.data       start:0x8040BF48 end:0x8040BFB0
 
-sysdolphin/baselib/particle.c:
+hsd/particle.c:
 	extab       start:0x80005520 end:0x80005588
 	extabindex  start:0x800056C0 end:0x8000575C
 	.text       start:0x803983A4 end:0x8039D1E4
@@ -5747,7 +5747,7 @@ sysdolphin/baselib/particle.c:
 	.sbss       start:0x804D78D0 end:0x804D78F8
 	.sdata2     start:0x804DE948 end:0x804DE9A8
 
-sysdolphin/baselib/generator.c:
+hsd/generator.c:
 	extab       start:0x80005588 end:0x800055F8
 	extabindex  start:0x8000575C end:0x80005804
 	.text       start:0x8039D1E4 end:0x8039F78C
@@ -5757,7 +5757,7 @@ sysdolphin/baselib/generator.c:
 	.sbss       start:0x804D78F8 end:0x804D7908
 	.sdata2     start:0x804DE9A8 end:0x804DEA10
 
-sysdolphin/baselib/psdisp.c:
+hsd/psdisp.c:
 	extab       start:0x800055F8 end:0x80005618
 	extabindex  start:0x80005804 end:0x80005834
 	.text       start:0x8039F78C end:0x803A3920
@@ -5768,13 +5768,13 @@ sysdolphin/baselib/psdisp.c:
 	.sbss       start:0x804D7908 end:0x804D7950
 	.sdata2     start:0x804DEA10 end:0x804DEA68
 
-sysdolphin/baselib/psdisptev.c:
+hsd/psdisptev.c:
 	extab       start:0x80005618 end:0x80005628
 	extabindex  start:0x80005834 end:0x8000584C
 	.text       start:0x803A3920 end:0x803A4138
 	.sbss       start:0x804D7950 end:0x804D7958
 
-sysdolphin/baselib/psappsrt.c:
+hsd/psappsrt.c:
 	extab       start:0x80005628 end:0x80005658
 	extabindex  start:0x8000584C end:0x80005894
 	.text       start:0x803A4138 end:0x803A44A4
@@ -5782,7 +5782,7 @@ sysdolphin/baselib/psappsrt.c:
 	.sbss       start:0x804D7958 end:0x804D7960
 	.sdata2     start:0x804DEA68 end:0x804DEA70
 
-sysdolphin/baselib/sobjlib.c:
+hsd/sobjlib.c:
 	.text       start:0x803A44A4 end:0x803A5798
 	.rodata     start:0x803B9658 end:0x803B9670
 	.data       start:0x8040C3A0 end:0x8040C490
@@ -5791,7 +5791,7 @@ sysdolphin/baselib/sobjlib.c:
 	.sbss       start:0x804D7960 end:0x804D7968
 	.sdata2     start:0x804DEA70 end:0x804DEAA8
 
-sysdolphin/baselib/sislib.c:
+hsd/sislib.c:
 	.text       start:0x803A5798 end:0x803A6478
 	.data       start:0x8040C490 end:0x8040C568
 	.bss        start:0x804D1110 end:0x804D1138
@@ -5799,44 +5799,44 @@ sysdolphin/baselib/sislib.c:
 	.sbss       start:0x804D7968 end:0x804D7980
 	.sdata2     start:0x804DEAA8 end:0x804DEAB8
 
-sysdolphin/baselib/hsd_4D11.c:
+hsd/hsd_4D11.c:
 	.bss        start:0x804D1138 end:0x804D3694
 	.sbss       start:0x804D7980 end:0x804D79A0
 
-sysdolphin/baselib/hsd_3A64.c:
+hsd/hsd_3A64.c:
 	.text       start:0x803A6478 end:0x803A7684
 	.data       start:0x8040C568 end:0x8040C5A8
 	.sdata2     start:0x804DEAB8 end:0x804DEAC8
 
-sysdolphin/baselib/hsd_3A76.c:
+hsd/hsd_3A76.c:
 	.text       start:0x803A7684 end:0x803A949C
 	.data       start:0x8040C5A8 end:0x8040CD40
 	.sdata2     start:0x804DEAC8 end:0x804DEB10
 
-sysdolphin/baselib/sislib_font.c:
+hsd/sislib_font.c:
 	.data       start:0x8040CD40 end:0x80430B40
 
-sysdolphin/baselib/hsd_3A94.c:
+hsd/hsd_3A94.c:
 	.text       start:0x803A949C end:0x803B27F4
 	.data       start:0x80430B40 end:0x80430BCC
 	.sbss       start:0x804D79A0 end:0x804D79C9
 
-sysdolphin/baselib/hsd_3B27.c:
+hsd/hsd_3B27.c:
 	.text       start:0x803B27F4 end:0x803B2B20
 
-sysdolphin/baselib/hsd_3B2B.c:
+hsd/hsd_3B2B.c:
 	.text       start:0x803B2B20 end:0x803B2E04
 
-sysdolphin/baselib/hsd_3B2E.c:
+hsd/hsd_3B2E.c:
 	.text       start:0x803B2E04 end:0x803B3344
 	.data       start:0x80430BD0 end:0x80430C40
 
-sysdolphin/baselib/hsd_3B33.c:
+hsd/hsd_3B33.c:
 	extab       start:0x80005658 end:0x80005668
 	extabindex  start:0x80005894 end:0x800058AC
 	.text       start:0x803B3344 end:0x803B3408
 
-sysdolphin/baselib/hsd_3B34.c:
+hsd/hsd_3B34.c:
 	extab       start:0x80005668 end:0x80005690
 	extabindex  start:0x800058AC end:0x800058E8
 	.text       start:0x803B3408 end:0x803B5C4C
@@ -5845,7 +5845,7 @@ sysdolphin/baselib/hsd_3B34.c:
 	.sdata      start:0x804D6398 end:0x804D639C
 	.sdata2     start:0x804DEB10 end:0x804DEB90
 
-sysdolphin/baselib/hsd_3B5C.c:
+hsd/hsd_3B5C.c:
 	extab       start:0x80005690 end:0x800056B0
 	extabindex  start:0x800058E8 end:0x80005918
 	.text       start:0x803B5C4C end:0x803B7230

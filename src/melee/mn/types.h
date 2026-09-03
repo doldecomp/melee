@@ -5,7 +5,7 @@
 
 #include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #ifdef M2C
 struct mnInfo_GObj {

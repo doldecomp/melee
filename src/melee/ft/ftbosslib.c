@@ -19,10 +19,10 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 /// @todo Float reorder hack
 #ifdef MUST_MATCH

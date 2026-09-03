@@ -13,7 +13,7 @@
 #include "ftCommon/types.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 /* 0C57B4 */ static void ftCo_800C57B4(Fighter_GObj* gobj);
 

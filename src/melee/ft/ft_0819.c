@@ -10,7 +10,7 @@
 #include "lb/lb_0146.h"
 #include "lb/types.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 void ft_80081938(HSD_GObj* gobj)
 {

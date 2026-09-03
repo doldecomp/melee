@@ -4,7 +4,7 @@
 
 #include <platform.h>
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -14,8 +14,8 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

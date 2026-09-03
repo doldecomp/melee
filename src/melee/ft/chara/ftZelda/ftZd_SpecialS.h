@@ -1,7 +1,7 @@
 #ifndef GALE01_13B638
 #define GALE01_13B638
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 13B638 */ void ftZd_SpecialS_Enter(HSD_GObj* gobj);
 /* 13B6D8 */ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj);

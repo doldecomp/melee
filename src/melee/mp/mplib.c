@@ -6,11 +6,11 @@
 #include "stdbool.h"
 #include "types.h"
 
-#include "baselib/debug.h"
+#include "hsd/debug.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/memory.h"
+#include "hsd/memory.h"
 #include "db/db.h"
 #include "dolphin/gx/GXGeometry.h"
 #include "dolphin/gx/GXStruct.h"
@@ -31,13 +31,13 @@
 #include <math.h>
 #include <stddef.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/texp.h>
+#include <hsd/jobj.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/tev.h>
+#include <hsd/texp.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/gr/stage.h>

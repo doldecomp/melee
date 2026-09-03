@@ -13,9 +13,9 @@
 #include "it/itmaplib.h"
 #include "it/itzako.h"
 
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
 
 /* 2D8894 */ static void it_802D8894(Item_GObj*);
 /* 2D88CC */ static bool itHeiho_UnkMotion0_Anim(Item_GObj* gobj);

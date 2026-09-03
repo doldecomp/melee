@@ -14,7 +14,7 @@
 #include "melee/mn/types.h"
 #include "mn/mnsnap.h"
 
-#include <sysdolphin/baselib/memory.h>
+#include <hsd/memory.h>
 
 struct DebugSoundTestData {
     struct SoundTestData* x0;

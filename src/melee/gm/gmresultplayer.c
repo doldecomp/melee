@@ -29,19 +29,19 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/controller.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/controller.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/jobj.h>
+#include <hsd/mobj.h>
+#include <hsd/random.h>
+#include <hsd/tobj.h>
+#include <hsd/wobj.h>
 
 extern ResultsData lbl_8046DBE8;
 

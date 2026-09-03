@@ -8,7 +8,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0219E4 */ void fn_800219E4(void*);
 /* 021A10 */ void lbBgFlash_80021A10(f32);

@@ -5,10 +5,10 @@
 
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 #include <melee/it/forward.h>
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /* 1C8D44 */ Item_GObj*
 grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,

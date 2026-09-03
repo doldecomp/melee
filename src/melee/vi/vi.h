@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/gobj.h>
+#include <hsd/cobj.h>
+#include <hsd/displayfunc.h>
+#include <hsd/gobj.h>
 
 /* 31C99C */ char* viGetCharAnimByIndex(s32);
 /* 31C9B4 */ void vi_8031C9B4(s32, s32);

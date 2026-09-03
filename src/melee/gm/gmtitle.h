@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_TITLE_H
 #define MELEE_GM_TITLE_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1A12C4 */ HSD_GObj* gmTitle_801A12C4(void);
 /* 1A165C */ HSD_GObj* gmTitle_801A165C(void);

@@ -1,7 +1,7 @@
 #ifndef GALE01_11F1F8
 #define GALE01_11F1F8
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11F1F8 */ void ftPp_SpecialN_Enter(HSD_GObj* gobj);
 /* 11F26C */ void ftPp_SpecialAirN_Enter(HSD_GObj* gobj);

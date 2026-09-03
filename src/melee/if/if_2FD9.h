@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx.h>
 

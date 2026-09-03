@@ -4,7 +4,7 @@
 #include <placeholder.h>
 
 #include <melee/sc/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1A659C */ bool gm_801A659C(int);
 /* 1A6630 */ void gm_801A6630(int);

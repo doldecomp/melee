@@ -10,7 +10,7 @@
 
 #include "dolphin/gx/GXStruct.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /* 01FC08 */ void fn_8001FC08(void);
 /* 01FEC4 */ void fn_8001FEC4(HSD_GObj* gobj, s32 code);

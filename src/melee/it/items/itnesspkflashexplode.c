@@ -14,7 +14,7 @@
 #include "it/itcoll.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 /* 2AFD44 */ static bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj);
 

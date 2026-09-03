@@ -13,8 +13,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 221648 */ static void grTKoopa_80221648(bool);
 /* 22164C */ static void grTKoopa_8022164C(void);

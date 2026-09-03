@@ -11,7 +11,7 @@
 #include "it/items/it_2E5A.h"
 #include "it/itspawn.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemKind it_8026F3AC(void)
 {

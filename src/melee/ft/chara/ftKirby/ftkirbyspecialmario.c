@@ -1,7 +1,7 @@
 #include "ftkirby.h"
 #include "types.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
@@ -26,8 +26,8 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
 
 void fn_800F9260(HSD_GObj*);
 

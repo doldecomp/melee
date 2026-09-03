@@ -25,9 +25,9 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "ftYoshi/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";

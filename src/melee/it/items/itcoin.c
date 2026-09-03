@@ -23,9 +23,9 @@
 #include "mp/mpcoll.h"
 #include "ty/tydisplay.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/jobj.h>
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
 /* 2F15B0 */ static bool itCoin_UnkMotion0_Anim(Item_GObj* gobj);

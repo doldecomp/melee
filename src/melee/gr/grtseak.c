@@ -10,10 +10,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 /* 223864 */ static void grTSeak_OnDemoInit(bool);
 /* 223868 */ static void grTSeak_OnInit(void);

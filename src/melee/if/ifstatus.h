@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "if/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 2F4910 */ HudIndex* ifStatus_GetHUDInfo(void);
 /* 2F4B84 */ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina);

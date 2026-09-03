@@ -2,7 +2,7 @@
 
 #include "gm/gm_1A36.static.h"
 
-#include <baselib/controller.h>
+#include <hsd/controller.h>
 #include <melee/gm/gmscdata.h>
 #include <melee/gm/types.h>
 

@@ -8,13 +8,13 @@
 #include "lb/lbspdisplay.h"
 
 #include <math.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
 #include <melee/sc/types.h>
 
 /* 09F480 */ static void ftCo_8009F480(Fighter_GObj* gobj);

@@ -5,7 +5,7 @@
 
 #include "it/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

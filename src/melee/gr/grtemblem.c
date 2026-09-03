@@ -12,10 +12,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 static void grTRoy_802243F4(bool);
 static void grTRoy_802243F8(void);

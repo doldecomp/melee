@@ -3,7 +3,7 @@
 
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 struct lbl_8046B488_t* gm_1601_GetUnkData(void);
 s8 gm_80169370(s32);

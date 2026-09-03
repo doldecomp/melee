@@ -8,10 +8,10 @@
 #include "lb/lbmthp.h"
 #include "mn/inlines.h"
 
-#include <baselib/controller.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/sobjlib.h>
+#include <hsd/controller.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/sobjlib.h>
 
 static HSD_GObj* gm_804D6858;
 

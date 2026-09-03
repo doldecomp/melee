@@ -5,7 +5,7 @@
 #include <platform.h>
 
 #include "it/items/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {

@@ -5,7 +5,7 @@
 
 #include "mn/types.h"
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 enum RulePlusOption {
     RULEPLUS_TIME_LIMIT,

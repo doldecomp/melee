@@ -29,7 +29,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);
 /* 0972E8 */ static void ftCo_8009794C(Fighter_GObj* gobj);

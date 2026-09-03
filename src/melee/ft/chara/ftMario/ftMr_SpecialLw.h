@@ -1,7 +1,7 @@
 #ifndef GALE01_0E207C
 #define GALE01_0E207C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E207C */ void ftMr_SpecialLw_Enter(HSD_GObj* gobj);
 /* 0E2194 */ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj);

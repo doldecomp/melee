@@ -13,15 +13,15 @@
 #include "ft/forward.h"
 
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/perf.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/util.h>
+#include <hsd/class.h>
+#include <hsd/debug.h>
+#include <hsd/displayfunc.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/mtx.h>
+#include <hsd/perf.h>
+#include <hsd/pobj.h>
+#include <hsd/util.h>
 #include <melee/lb/lbrefract.h>
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };

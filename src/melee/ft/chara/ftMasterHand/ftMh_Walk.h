@@ -3,7 +3,7 @@
 #ifndef GALE01_151D20
 #define GALE01_151D20
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 151D20 */ void ftMh_WalkShoot_Anim(HSD_GObj* gobj);
 /* 151D5C */ void ftMh_WalkShoot_IASA(HSD_GObj* gobj);

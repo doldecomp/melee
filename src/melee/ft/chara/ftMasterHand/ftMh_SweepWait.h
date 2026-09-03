@@ -1,7 +1,7 @@
 #ifndef GALE01_151B14
 #define GALE01_151B14
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 151B14 */ void ftMh_SweepWait_Anim(HSD_GObj* gobj);
 /* 151B50 */ void ftMh_SweepWait_Phys(HSD_GObj* gobj);

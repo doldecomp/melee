@@ -25,9 +25,9 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/jobj.h>
-#include <baselib/object.h>
+#include <hsd/aobj.h>
+#include <hsd/jobj.h>
+#include <hsd/object.h>
 
 MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
     {

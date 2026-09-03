@@ -25,7 +25,7 @@
 #include "ftZelda/forward.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 extern float ftKb_Init_803CB770[];
 

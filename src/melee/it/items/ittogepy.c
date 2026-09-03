@@ -8,8 +8,8 @@
 #include "it/itmaplib.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F8058[] = {
     { 0, itTogepy_UnkMotion0_Anim, itTogepy_UnkMotion0_Phys,

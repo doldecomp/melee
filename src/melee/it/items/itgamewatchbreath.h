@@ -1,7 +1,7 @@
 #ifndef GALE01_2C720C
 #define GALE01_2C720C
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 #include "it/forward.h"
 
 #include "it/items/types.h"

@@ -15,7 +15,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F5D28[] = {
     {

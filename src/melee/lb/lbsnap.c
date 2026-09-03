@@ -15,8 +15,8 @@
 #include <stdio.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-#include <baselib/debug.h>
-#include <baselib/hsd_3B34.h>
+#include <hsd/debug.h>
+#include <hsd/hsd_3B34.h>
 
 void lbSnap_8001D2BC(void)
 {

@@ -1,7 +1,7 @@
 #ifndef GALE01_2F7EFC
 #define GALE01_2F7EFC
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
 

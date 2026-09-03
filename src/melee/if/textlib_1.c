@@ -1,20 +1,20 @@
 #include "platform.h"
 #include "textlib.h"
 
-#include "baselib/controller.h"
+#include "hsd/controller.h"
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
 #include <printf.h> // IWYU pragma: keep
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
 
 /* 4D6E4C */ unsigned char un_804D6E4C;
 /* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;

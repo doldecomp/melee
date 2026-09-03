@@ -1,17 +1,17 @@
-#include "baselib/gobjuserdata.h"
+#include "hsd/gobjuserdata.h"
 
 #include "gm/forward.h"
 #include "sc/forward.h"
 
-#include <baselib/object.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sislib.h>
+#include <hsd/object.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/sislib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>

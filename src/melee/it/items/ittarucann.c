@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -21,8 +21,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 const lbColl_80008D30_arg1 it_803B8610 = {
     1, 1, 361, 0, 0, 180, 0, 1, 0,

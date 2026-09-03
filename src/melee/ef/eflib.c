@@ -13,17 +13,17 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "baselib/displayfunc.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/gobjuserdata.h"
-#include "baselib/particle.h"
-#include "baselib/psappsrt.h"
-#include "baselib/psdisp.h"
-#include "baselib/psstructs.h"
-#include "baselib/state.h"
+#include "hsd/displayfunc.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
+#include "hsd/gobjplink.h"
+#include "hsd/gobjproc.h"
+#include "hsd/gobjuserdata.h"
+#include "hsd/particle.h"
+#include "hsd/psappsrt.h"
+#include "hsd/psdisp.h"
+#include "hsd/psstructs.h"
+#include "hsd/state.h"
 #include "dolphin/mtx.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Bury.h"
@@ -32,7 +32,7 @@
 
 #include <math.h>
 #include <stdarg.h>
-#include <baselib/generator.h>
+#include <hsd/generator.h>
 // externs
 
 extern EF_DAT_Entry efAsync_DatEntries[51];

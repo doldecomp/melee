@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"

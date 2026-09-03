@@ -3,7 +3,7 @@
 
 #include "mn/forward.h"
 #include "sc/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 251A08 */ s32 mnInfo_80251A08(s32);
 /* 251AA4 */ s32 mnInfo_80251AA4(void);

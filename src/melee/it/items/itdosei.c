@@ -9,7 +9,7 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

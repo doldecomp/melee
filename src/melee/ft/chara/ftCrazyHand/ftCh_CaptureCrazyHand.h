@@ -1,7 +1,7 @@
 #ifndef GALE01_15B548
 #define GALE01_15B548
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15B548 */ void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2);
 /* 15B660 */ void ftCo_CaptureCrazyHand_Anim(HSD_GObj* gobj);

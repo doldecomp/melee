@@ -23,9 +23,9 @@
 #include "pl/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/gobjplink.h>
-#include <baselib/objalloc.h>
+#include <hsd/debug.h>
+#include <hsd/gobjplink.h>
+#include <hsd/objalloc.h>
 
 typedef struct _ftMapping {
     s8 internal_id;

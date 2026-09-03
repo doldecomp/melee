@@ -3,7 +3,7 @@
 #ifndef GALE01_1450A0
 #define GALE01_1450A0
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1450A0 */ void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj);
 /* 1450D4 */ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj);

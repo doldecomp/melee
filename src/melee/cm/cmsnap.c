@@ -4,10 +4,10 @@
 
 #include "lb/lbspdisplay.h"
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/tobj.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/tobj.h>
 
 typedef struct {
     CmSnapStatus status;

@@ -1,7 +1,7 @@
 #ifndef GALE01_0EB65C
 #define GALE01_0EB65C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0EB65C */ void ftLk_SpecialLw_Enter(HSD_GObj* gobj);
 /* 0EB6DC */ void ftLk_SpecialAirLw_Enter(HSD_GObj* gobj);

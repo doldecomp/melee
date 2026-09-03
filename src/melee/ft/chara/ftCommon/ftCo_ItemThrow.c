@@ -28,7 +28,7 @@
 #include "lb/lb_00B0.h"
 #include "pl/plbonuslib.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <math.h>
 

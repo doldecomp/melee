@@ -2,11 +2,11 @@
 
 #include "placeholder.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/object.h>
+#include <hsd/aobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/mtx.h>
+#include <hsd/object.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftaction.h>

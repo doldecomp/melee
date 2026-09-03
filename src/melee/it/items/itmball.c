@@ -18,8 +18,8 @@
 #include "mp/mpcoll.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 #include <melee/it/item.h>
 
 ItemStateTable it_803F6488[] = {

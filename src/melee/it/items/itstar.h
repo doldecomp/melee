@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 284644 */ void itStar_Logic10_Spawned(Item_GObj*);
 /* 2846D4 */ void it_802846D4(Item_GObj*);

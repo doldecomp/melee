@@ -24,8 +24,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 #ifdef MUST_MATCH
 #pragma force_active on

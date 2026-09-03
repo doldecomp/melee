@@ -5,7 +5,7 @@
 
 #include "dolphin/gx.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 #include <melee/sc/forward.h>
 
 /* 011AC4 */ HSD_LObj* lb_80011AC4(LightList**);

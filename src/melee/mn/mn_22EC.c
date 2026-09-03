@@ -3,15 +3,15 @@
 #include "dolphin/pad.h"
 #include "mn/types.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <hsd/aobj.h>
+#include <hsd/dobj.h>
+#include <hsd/fobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjplink.h>
+#include <hsd/jobj.h>
+#include <hsd/mobj.h>
+#include <hsd/sislib.h>
+#include <hsd/tobj.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/mn/mncharsel.h>

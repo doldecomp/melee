@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 void lbFile_800161C4(int file, uintptr_t src, uintptr_t dest, size_t size,
                      int type, int pri);

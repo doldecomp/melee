@@ -19,10 +19,10 @@
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F8EB0[] = {
     {

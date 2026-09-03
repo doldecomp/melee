@@ -12,8 +12,8 @@
 #include "it/types.h"
 
 #include <stdbool.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/it/item.h>

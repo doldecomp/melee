@@ -12,7 +12,7 @@
 
 #include "dolphin/gx/GXStruct.h"
 
-#include <baselib/wobj.h>
+#include <hsd/wobj.h>
 
 typedef struct BgFlashState {
     u8 active : 1;
@@ -41,12 +41,12 @@ typedef struct BgFlashData {
 BgFlashData lbl_80433658;
 
 #include <dolphin/gx.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/hsd_3915.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/hsd_3915.h>
 
 static GXColor lbl_804D3840 = { 0, 0, 0, 255 };
 static GXColor lbl_804D3844 = { 0, 0, 0, 0 };

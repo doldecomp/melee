@@ -4,10 +4,10 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/mtx.h>
+#include <hsd/mtx.h>
 
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);
 /* 1C96F8 */ HSD_Generator* grLib_801C96F8(s32, s32, Vec3*);

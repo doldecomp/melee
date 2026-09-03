@@ -31,11 +31,11 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
-#include <baselib/rumble.h>
+#include <hsd/cobj.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
+#include <hsd/rumble.h>
 
 s32 ftLib_800860C4(void)
 {

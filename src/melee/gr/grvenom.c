@@ -18,14 +18,14 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <baselib/aobj.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
+#include <hsd/aobj.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
 
 typedef struct grVe_Data {
     /* +0 */ GrJoint joints[5];

@@ -28,7 +28,7 @@
 #include "melee/vi/vi1201v2.h"
 #include "vi/vi0102.h"
 
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 
 struct gm_random_history {
     u8 pad0[2];

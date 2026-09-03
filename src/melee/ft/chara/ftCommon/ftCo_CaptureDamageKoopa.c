@@ -14,7 +14,7 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack100.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 void ftCo_800BC9C8(Fighter_GObj* gobj)
 {

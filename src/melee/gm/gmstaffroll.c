@@ -2,8 +2,8 @@
 
 #include "gm_unsplit.h"
 
-#include "baselib/psappsrt.h"
-#include "baselib/psstructs.h"
+#include "hsd/psappsrt.h"
+#include "hsd/psstructs.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 
@@ -20,22 +20,22 @@
 #include "ty/toy.h"
 
 #include <math.h>
-#include <baselib/generator.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <hsd/generator.h>
+#include <hsd/cobj.h>
+#include <hsd/controller.h>
+#include <hsd/debug.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
+#include <hsd/wobj.h>
 
 struct staffInfo_t {
     char pad_0[0x948];

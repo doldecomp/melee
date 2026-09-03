@@ -8,7 +8,7 @@
 
 #include "mp/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>

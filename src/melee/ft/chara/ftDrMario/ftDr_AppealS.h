@@ -1,7 +1,7 @@
 #ifndef GALE01_149954
 #define GALE01_149954
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 149954 */ void ftDr_AppealS_Anim(HSD_GObj* gobj);
 /* 149A6C */ void ftDr_AppealS_IASA(HSD_GObj* gobj);

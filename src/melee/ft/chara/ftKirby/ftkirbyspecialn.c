@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ef/efasync.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
@@ -45,8 +45,8 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

@@ -1,7 +1,7 @@
 #ifndef MELEE_MN_MNLANGUAGE_H
 #define MELEE_MN_MNLANGUAGE_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 void mnLanguage_8024BFE0(HSD_GObj*);
 void fn_8024C210(HSD_GObj*);

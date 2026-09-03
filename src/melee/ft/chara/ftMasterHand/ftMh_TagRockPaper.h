@@ -1,7 +1,7 @@
 #ifndef GALE01_15550C
 #define GALE01_15550C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15550C */ void ftMh_TagRockPaper_Anim(HSD_GObj* gobj);
 /* 155580 */ void ftMh_TagRockPaper_IASA(HSD_GObj* gobj);

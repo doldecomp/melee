@@ -3,7 +3,7 @@
 #ifndef GALE01_152BC8
 #define GALE01_152BC8
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 152BC8 */ void ftMh_Poke1_Coll(HSD_GObj* gobj);
 /* 152BCC */ void ftMh_MS_359_80152BCC(HSD_GObj* gobj);

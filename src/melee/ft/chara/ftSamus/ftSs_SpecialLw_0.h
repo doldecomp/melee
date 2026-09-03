@@ -1,7 +1,7 @@
 #ifndef GALE01_128944
 #define GALE01_128944
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 128C04 */ void ftSs_SpecialLw_Anim(HSD_GObj* gobj);
 /* 128CA0 */ void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj);

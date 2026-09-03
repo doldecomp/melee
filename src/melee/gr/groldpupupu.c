@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "cm/camera.h"
 
@@ -19,11 +19,11 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 struct grOldpupupu_YakumonoParam {
     s16 x0;

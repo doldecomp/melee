@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_1ADD_H
 #define MELEE_GM_1ADD_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 void gm_801ADDD8(void);
 bool gm_801ADE1C(int, int, float, float);

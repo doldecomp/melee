@@ -5,7 +5,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"

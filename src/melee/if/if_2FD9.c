@@ -7,16 +7,16 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
+#include <hsd/cobj.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
 
 /// .bss
 /* 4A1F10 */ static struct un_804A1F10_t {

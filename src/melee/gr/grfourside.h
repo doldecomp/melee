@@ -5,7 +5,7 @@
 
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1F2D0C */ void grFourside_801F2D0C(bool);
 /* 1F2D10 */ void grFourside_801F2D10(void);

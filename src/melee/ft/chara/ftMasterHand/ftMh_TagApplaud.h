@@ -3,7 +3,7 @@
 #ifndef GALE01_155388
 #define GALE01_155388
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 155388 */ void ftMh_TagApplaud_Anim(HSD_GObj* gobj);
 /* 15541C */ void ftMh_TagApplaud_IASA(HSD_GObj* gobj);

@@ -24,7 +24,7 @@
 #include "it/items/itlinkbomb.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

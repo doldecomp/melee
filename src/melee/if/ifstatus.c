@@ -14,18 +14,18 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
-#include <baselib/tobj.h>
+#include <hsd/aobj.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/mobj.h>
+#include <hsd/mtx.h>
+#include <hsd/random.h>
+#include <hsd/tobj.h>
 
 typedef struct FlagsX {
     u32 b80 : 1;

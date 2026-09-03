@@ -28,7 +28,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

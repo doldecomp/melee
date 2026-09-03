@@ -3,9 +3,9 @@
 
 #include <string.h>
 #include <dolphin/thp/thp.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <hsd/memory.h>
+#include <hsd/sobjlib.h>
+#include <hsd/tobj.h>
 
 struct lbl_804335B8_t {
     /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */

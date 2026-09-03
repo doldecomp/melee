@@ -1,6 +1,6 @@
 #include <platform.h>
 
-#include "baselib/psstructs.h"
+#include "hsd/psstructs.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
@@ -15,8 +15,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
 /* 21F844 */ static void grTMario_8021F844(void);

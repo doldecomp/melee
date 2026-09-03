@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11D518 */ bool ftPe_8011D518(HSD_GObj* gobj);
 /* 11D598 */ void ftPe_8011D598(HSD_GObj* gobj);

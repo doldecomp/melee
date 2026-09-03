@@ -19,14 +19,14 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
 
 static SceneDesc* un_804D6FB8;
 static GXColor un_804D6FBC;

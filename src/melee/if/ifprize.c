@@ -13,19 +13,19 @@
 #include "ty/toy.h"
 
 #include <stdio.h>
-#include <baselib/archive.h>
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
+#include <hsd/archive.h>
+#include <hsd/cobj.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
 
 /// .data
 /* 3F9A00 */ static int un_803F9A00[] = {

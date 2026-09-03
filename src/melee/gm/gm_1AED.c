@@ -1,6 +1,6 @@
 #include "gm_1AED.h"
 
-#include <sysdolphin/baselib/controller.h>
+#include <hsd/controller.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

@@ -3,7 +3,7 @@
 
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14949C */ void ftDr_Init_OnDeath(HSD_GObj* gobj);
 /* 1494E4 */ void ftDr_Init_OnLoad(HSD_GObj* gobj);

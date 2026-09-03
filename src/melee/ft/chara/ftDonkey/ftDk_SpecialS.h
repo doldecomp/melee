@@ -1,7 +1,7 @@
 #ifndef GALE01_10E1C4
 #define GALE01_10E1C4
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 10E1C4 */ void ftDk_SpecialS_Enter(HSD_GObj* gobj);
 /* 10E234 */ void ftDk_SpecialAirS_Enter(HSD_GObj* gobj);

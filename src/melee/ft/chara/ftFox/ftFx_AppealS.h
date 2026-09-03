@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E5970 */ bool ftFx_AppealS_CheckIfUsed(Fighter* fp);
 /* 0E59BC */ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj);

@@ -13,8 +13,8 @@
 #include "it/itgroundcoll.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F9388[] = {
     { 0, itMasterhandbullet_UnkMotion1_Anim,

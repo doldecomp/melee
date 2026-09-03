@@ -28,7 +28,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /* 1090D4 */ static void fn_801090D4(Fighter_GObj*);
 

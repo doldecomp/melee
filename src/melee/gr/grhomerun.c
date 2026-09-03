@@ -4,19 +4,19 @@
 
 #include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/debug.h"
-#include "baselib/fog.h"
+#include "hsd/archive.h"
+#include "hsd/debug.h"
+#include "hsd/fog.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
-#include "baselib/sislib.h"
-#include "baselib/wobj.h"
+#include "hsd/gobj.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
+#include "hsd/jobj.h"
+#include "hsd/memory.h"
+#include "hsd/sislib.h"
+#include "hsd/wobj.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"

@@ -17,8 +17,8 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
     DynamicsDesc* x0;

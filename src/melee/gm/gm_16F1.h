@@ -4,7 +4,7 @@
 #include <placeholder.h>
 
 #include <melee/gm/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 typedef enum Gm_DecType {
     Gm_DecType_Flag,  ///< true/false boolean player bonus

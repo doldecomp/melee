@@ -35,7 +35,7 @@
 #include "it/it_26B1.h"
 #include "lb/lbanim.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {

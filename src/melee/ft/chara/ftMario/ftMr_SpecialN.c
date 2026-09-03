@@ -22,7 +22,7 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 static MotionFlags const ftMr_MF_SpecialN_Coll =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;

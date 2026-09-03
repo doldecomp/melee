@@ -2,7 +2,7 @@
 #define _IFHAZARD_H_
 
 #include "sc/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 2FD604 */ void un_802FD604(int);
 /* 2FD65C */ void un_802FD65C(void);

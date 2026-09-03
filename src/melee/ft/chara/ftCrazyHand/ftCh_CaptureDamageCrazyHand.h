@@ -1,7 +1,7 @@
 #ifndef GALE01_15B670
 #define GALE01_15B670
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15B670 */ void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj);
 /* 15B704 */ void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj);

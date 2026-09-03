@@ -19,9 +19,9 @@
 #include "lb/lbgx.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/state.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/state.h>
 
 static U8Vec4 ftDrawCommon_804D3A88 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static U8Vec4 ftDrawCommon_804D3A8C = { 0x80, 0x80, 0xFF, 0x80 };

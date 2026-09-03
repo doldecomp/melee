@@ -7,7 +7,7 @@
 #include "gr/stage.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
+#include <hsd/debug.h>
 
 void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)
 {

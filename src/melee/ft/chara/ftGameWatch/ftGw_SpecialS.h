@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14C46C */ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj);
 /* 14C590 */ void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj);

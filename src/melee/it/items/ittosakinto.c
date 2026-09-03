@@ -2,7 +2,7 @@
 
 #include "platform.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"

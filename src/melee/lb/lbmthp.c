@@ -8,12 +8,12 @@
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/os.h>
 #include <dolphin/thp/thp.h>
-#include <baselib/memory.h>
-#include <baselib/tobj.h>
-#include <baselib/video.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/devcom.h>
-#include <sysdolphin/baselib/sobjlib.h>
+#include <hsd/memory.h>
+#include <hsd/tobj.h>
+#include <hsd/video.h>
+#include <hsd/debug.h>
+#include <hsd/devcom.h>
+#include <hsd/sobjlib.h>
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {

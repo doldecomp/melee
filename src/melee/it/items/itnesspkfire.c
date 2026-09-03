@@ -15,8 +15,8 @@
 #include "it/itgroundcoll.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F6B28[] = {
     { 0, itNesspkfire_UnkMotion0_Anim, NULL, itNesspkfire_UnkMotion0_Coll },

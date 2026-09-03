@@ -15,7 +15,7 @@
 #include "it/types.h"
 #include "pl/player.h"
 
-#include <sysdolphin/baselib/gobj.h>
+#include <hsd/gobj.h>
 
 void fn_SetupItemAndPokemonMenu(void)
 {

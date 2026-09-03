@@ -4,10 +4,10 @@
 #include "gr/forward.h"
 #include "lb/forward.h"
 #include "sc/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/spline.h>
+#include <hsd/spline.h>
 
 /* 1EFC68 */ void grMuteCity_801EFC68(bool);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);

@@ -46,10 +46,10 @@
 #include "sfx/crowdsfx.h"
 
 #include <math.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/rumble.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };

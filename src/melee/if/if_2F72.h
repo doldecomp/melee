@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 #include "if/forward.h"
 
 /* 2F7288 */ s32 fn_802F7288(HSD_GObj*, Element_803F9628*);

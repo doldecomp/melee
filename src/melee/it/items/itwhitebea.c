@@ -17,7 +17,7 @@
 #include "it/itzako.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
 #include <math.h> // IWYU pragma: keep
 

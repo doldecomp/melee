@@ -1,7 +1,7 @@
 #ifndef GALE01_13CE8C
 #define GALE01_13CE8C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 13CE8C */ void ftPr_SpecialLw_Enter(HSD_GObj* gobj);
 /* 13CF2C */ void ftPr_SpecialAirLw_Enter(HSD_GObj* gobj);

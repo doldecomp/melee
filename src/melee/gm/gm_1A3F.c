@@ -20,10 +20,10 @@
 #include "ty/tydisplay.h"
 
 #include <dolphin/vi.h>
-#include <baselib/controller.h>
-#include <baselib/devcom.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
+#include <hsd/controller.h>
+#include <hsd/devcom.h>
+#include <hsd/sislib.h>
+#include <hsd/video.h>
 
 struct routingInfo {
     u8 curr_mode;     ///< ::GameModeKind

@@ -27,17 +27,17 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/mobj.h>
-#include <baselib/sislib.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/mobj.h>
+#include <hsd/sislib.h>
+#include <hsd/tobj.h>
+#include <hsd/wobj.h>
 #include <Runtime/runtime.h>
 
 /// @todo .sdata2 order hack

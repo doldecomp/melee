@@ -2,7 +2,7 @@
 
 #include "gm_unsplit.h"
 
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
 #include <melee/gr/ground.h>

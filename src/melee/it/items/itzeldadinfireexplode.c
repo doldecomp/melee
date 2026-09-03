@@ -2,8 +2,8 @@
 
 #include "placeholder.h"
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
+#include "hsd/gobj.h"
+#include "hsd/jobj.h"
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/eflib.h"

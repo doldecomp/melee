@@ -6,8 +6,8 @@
 #include "itmaplib.h"
 #include "itmaterial.h"
 
-#include "baselib/jobj.h"
-#include "baselib/random.h"
+#include "hsd/jobj.h"
+#include "hsd/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"

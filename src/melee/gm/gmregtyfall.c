@@ -25,16 +25,16 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/sobjlib.h>
-#include <baselib/tobj.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/sobjlib.h>
+#include <hsd/tobj.h>
 
 struct ImageDesc_Array {
     HSD_ImageDesc x0[2][2];

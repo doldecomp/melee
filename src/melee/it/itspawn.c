@@ -13,10 +13,10 @@
 #include "it/item.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/memory.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/memory.h>
+#include <hsd/random.h>
 
 ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;

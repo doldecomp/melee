@@ -15,12 +15,12 @@
 #include "lb/lbbgflash.h"
 #include "lb/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/objalloc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/objalloc.h>
 #include <melee/lb/lbarchive.h>
 
 HSD_ObjAllocData lbl_804336A0;

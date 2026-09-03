@@ -3,7 +3,7 @@
 #ifndef GALE01_116B70
 #define GALE01_116B70
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 116B70 */ void ftNs_SpecialS_ItemPKFireSpawn(HSD_GObj* gobj);
 /* 116C94 */ void ftNs_SpecialS_Enter(HSD_GObj* gobj);

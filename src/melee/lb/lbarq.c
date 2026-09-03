@@ -4,7 +4,7 @@
 
 #include <dolphin/ar.h>
 #include <dolphin/os.h>
-#include <baselib/debug.h>
+#include <hsd/debug.h>
 
 typedef enum lbArqState {
     LB_ARQ_STATE_FREE = 0,

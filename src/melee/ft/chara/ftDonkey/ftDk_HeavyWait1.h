@@ -1,7 +1,7 @@
 #ifndef GALE01_0E0568
 #define GALE01_0E0568
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E0568 */ void ftDk_HeavyWait1_IASA(HSD_GObj* gobj);
 /* 0E05A4 */ void ftDk_HeavyWait1_Phys(HSD_GObj* gobj);

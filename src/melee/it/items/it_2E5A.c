@@ -20,11 +20,11 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 /* 2E614C */ static void it_802E614C(Item_GObj*, Item_GObj*, SpawnItem*, Vec3*,
                                      Vec3*);

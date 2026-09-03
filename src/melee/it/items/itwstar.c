@@ -15,8 +15,8 @@
 #include "it/ithitbox.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {

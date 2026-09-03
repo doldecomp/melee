@@ -3,9 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/jobj.h"
+#include "hsd/jobj.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 
@@ -24,7 +24,7 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 ItemStateTable it_803F9378[] = {
     {

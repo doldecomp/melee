@@ -1,7 +1,7 @@
 #ifndef GALE01_11444C
 #define GALE01_11444C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 12ADF0 */ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj);
 /* 12AEBC */ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj);

@@ -31,9 +31,9 @@
 
 #include "ftKoopa/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)
 {

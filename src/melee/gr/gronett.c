@@ -23,9 +23,9 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
 
 /* 1E40E4 */ static void grOnett_801E40E4(void* user_data, int joint_id,
                                           CollData* coll, int coll_x50,

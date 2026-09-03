@@ -1,7 +1,7 @@
 #ifndef GALE01_155FCC
 #define GALE01_155FCC
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 155FCC */ void ftCh_Init_80155FCC(HSD_GObj* gobj);
 /* 156014 */ void ftCh_Init_80156014(HSD_GObj* gobj);

@@ -39,7 +39,7 @@
 #include "ftPeach/ftPe_AttackS4.h"
 #include "it/it_26B1.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

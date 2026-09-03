@@ -16,8 +16,8 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
+#include <hsd/archive.h>
+#include <hsd/gobj.h>
 
 void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 {

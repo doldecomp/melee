@@ -3,7 +3,7 @@
 #ifndef GALE01_14CBF4
 #define GALE01_14CBF4
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14CBF4 */ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj);
 /* 14CC9C */ void ftGw_SpecialLw_ItemPanicSetFlag(HSD_GObj* gobj);

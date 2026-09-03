@@ -5,12 +5,12 @@
 
 #include <placeholder.h>
 
-#include "baselib/debug.h"
+#include "hsd/debug.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/state.h>
+#include <hsd/cobj.h>
+#include <hsd/state.h>
 #include <melee/ft/chara/ftLink/types.h>
 #include <melee/ft/chara/ftMars/types.h>
 #include <melee/ft/inlines.h>

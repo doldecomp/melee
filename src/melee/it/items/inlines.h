@@ -15,8 +15,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 static inline void Item_RetractChain(ItemLink* link, Vec3* pos,
                                      f32 target_dist, const f32* max_dist,

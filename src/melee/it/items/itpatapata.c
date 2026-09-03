@@ -21,8 +21,8 @@
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F88C0[] = {
     { 0, NULL, NULL, NULL },

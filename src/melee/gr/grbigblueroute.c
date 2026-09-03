@@ -2,8 +2,8 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
-#include "baselib/memory.h"
+#include "hsd/debug.h"
+#include "hsd/memory.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -22,12 +22,12 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/os.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <baselib/spline.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
+#include <hsd/spline.h>
 
 struct grBigBlueRoute_YakumonoParam {
     int x0;

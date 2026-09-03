@@ -4,12 +4,12 @@
 #include "gmtitle.h"
 
 #include <stdio.h>
-#include <baselib/controller.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/hsd_3915.h>
-#include <sysdolphin/baselib/sobjlib.h>
+#include <hsd/controller.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/hsd_3915.h>
+#include <hsd/sobjlib.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>

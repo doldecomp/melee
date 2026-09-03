@@ -6,7 +6,7 @@
 #include "pl/player.h"
 #include "pl/plbonus.h"
 
-#include <sysdolphin/baselib/memory.h>
+#include <hsd/memory.h>
 
 /* 228D18 */ static void fn_80228D18(void);
 /* 228D38 */ static void fn_80228D38(void);

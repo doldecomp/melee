@@ -10,7 +10,7 @@
 #include "it/items/itlipstick.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 void ftCo_800CDAB4(Fighter_GObj* gobj, int arg1, int arg2, float arg3)
 {

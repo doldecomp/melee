@@ -10,13 +10,13 @@
 
 #include "lb/lbshadow.h"
 
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/state.h>
+#include <hsd/cobj.h>
+#include <hsd/displayfunc.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/mtx.h>
+#include <hsd/state.h>
 
 /* 1C5B90 */ static void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 arg2,
                                             u32 rendermode);

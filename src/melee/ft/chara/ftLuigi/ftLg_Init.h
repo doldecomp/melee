@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftLuigi/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1422E8 */ void ftLg_Init_OnDeath(HSD_GObj* gobj);
 /* 142324 */ void ftLg_Init_OnLoad(HSD_GObj* gobj);

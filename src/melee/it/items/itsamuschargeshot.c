@@ -1,6 +1,6 @@
 #include "itsamuschargeshot.h"
 
-#include "baselib/mtx.h"
+#include "hsd/mtx.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftKirby/ftkirby.h"

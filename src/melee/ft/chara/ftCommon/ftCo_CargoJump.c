@@ -16,7 +16,7 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 bool ftCo_8009BB1C(Fighter_GObj* gobj)
 {

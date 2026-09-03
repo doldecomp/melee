@@ -7,9 +7,9 @@
 #include "it/inlines.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/class.h>
-#include <baselib/dobj.h>
-#include <baselib/tev.h>
+#include <hsd/class.h>
+#include <hsd/dobj.h>
+#include <hsd/tev.h>
 
 struct it_MObjInfo {
     /*   +0 */ HSD_ClassInfo parent;

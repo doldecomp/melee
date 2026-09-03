@@ -6,7 +6,7 @@
 #include "gm_unsplit.h"
 #include "gmregcommon.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "gr/ground.h"
 
 #include <melee/gm/gmmain_lib.h>

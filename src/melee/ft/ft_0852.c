@@ -6,8 +6,8 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 ftData* gFtDataList[FTKIND_MAX];
 

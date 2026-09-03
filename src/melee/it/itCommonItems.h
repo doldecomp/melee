@@ -13,7 +13,7 @@
 
 #include "lb/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 #include <melee/gr/forward.h>
 
 #include <dolphin/mtx.h>

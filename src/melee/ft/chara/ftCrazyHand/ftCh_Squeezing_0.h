@@ -1,7 +1,7 @@
 #ifndef GALE01_15A184
 #define GALE01_15A184
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15A184 */ void ftCh_Init_8015A184(HSD_GObj* gobj);
 /* 15A20C */ void ftCh_Squeezing0_Anim(HSD_GObj* gobj);

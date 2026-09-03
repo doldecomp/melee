@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_STAFFROLL_H
 #define MELEE_GM_STAFFROLL_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1AA644 */ bool gm_801AA644(s16);
 /* 1AA664 */ bool gm_801AA664(s16 ckind); ///< ckind is a CharacterKind

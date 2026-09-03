@@ -3,11 +3,11 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <stdbool.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 typedef struct MnName_GObj {
     /* +00 */ HSD_GObj gobj;

@@ -1,7 +1,7 @@
 #ifndef GALE01_124830
 #define GALE01_124830
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 124830 */ void ftPk_SpecialN_Enter(HSD_GObj* gobj);
 /* 12489C */ void ftPk_SpecialAirN_Enter(HSD_GObj* gobj);

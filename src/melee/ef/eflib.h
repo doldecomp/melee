@@ -2,7 +2,7 @@
 #define MELEE_EF_EFLIB_H
 
 #include "ef/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <stdarg.h>
 #include <dolphin/mtx.h>

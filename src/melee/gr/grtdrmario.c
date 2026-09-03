@@ -10,10 +10,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 /* 22050C */ static void grtDrMario_8022050C(bool);
 /* 220510 */ static void grtDrMario_80220510(void);

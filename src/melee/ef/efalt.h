@@ -1,7 +1,7 @@
 #ifndef MELEE_EF_EFALT_H
 #define MELEE_EF_EFALT_H
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <stdarg.h> // va_list, below
 

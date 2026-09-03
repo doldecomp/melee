@@ -9,7 +9,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 #include <melee/pl/player.h>
 
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;

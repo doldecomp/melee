@@ -31,7 +31,7 @@
 #include "ftCommon/ftCo_Walk.h"
 #include "ftFox/ftFx_AppealS.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {

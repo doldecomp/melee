@@ -3,7 +3,7 @@
 #ifndef GALE01_11659C
 #define GALE01_11659C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11659C */ void ftNs_AttackLw4_Enter(HSD_GObj* gobj);
 /* 116638 */ void ftNs_AttackLw4_Anim(HSD_GObj* gobj);

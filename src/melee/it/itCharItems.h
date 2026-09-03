@@ -5,7 +5,7 @@
 
 #include "platform.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "gm/types.h"
 
@@ -15,7 +15,7 @@
 #include "lb/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 typedef struct itCLinkMilk_ItemVars {
     /* +0 ip+DD4 */ Fighter_GObj* x0;

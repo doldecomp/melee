@@ -5,11 +5,11 @@
 
 #include <placeholder.h>
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
+#include "hsd/gobj.h"
+#include "hsd/jobj.h"
 
 #include <math.h>
-#include <baselib/generator.h>
+#include <hsd/generator.h>
 
 #define EFALT_VA_ARG(t) (*((t*) __va_arg(vlist_arg, _var_arg_typeof(t))))
 

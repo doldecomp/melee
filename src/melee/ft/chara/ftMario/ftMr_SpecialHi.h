@@ -1,7 +1,7 @@
 #ifndef GALE01_0E1A54
 #define GALE01_0E1A54
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0E1A54 */ void ftMr_SpecialHi_Enter(HSD_GObj* gobj);
 /* 0E1AB0 */ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj);

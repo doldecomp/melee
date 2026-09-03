@@ -5,7 +5,7 @@
 
 #include "ftGameWatch/forward.h"
 #include "it/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14A250 */ void ftGw_Init_OnDeath(HSD_GObj* gobj);
 /* 14A37C */ void ftGw_Init_OnLoad(HSD_GObj* gobj);

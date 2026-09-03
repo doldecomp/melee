@@ -1,7 +1,7 @@
 #ifndef GALE01_15A560
 #define GALE01_15A560
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15A560 */ void ftCh_Init_8015A560(HSD_GObj* gobj);
 /* 15A5D0 */ void ftCh_Throw_Anim(HSD_GObj* gobj);

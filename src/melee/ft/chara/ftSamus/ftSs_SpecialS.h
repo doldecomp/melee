@@ -1,7 +1,7 @@
 #ifndef GALE01_12A1D8
 #define GALE01_12A1D8
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 12A1D8 */ void ftSs_SpecialS_Enter(HSD_GObj* gobj);
 /* 12A2AC */ void ftSs_SpecialAirS_Enter(HSD_GObj* gobj);

@@ -3,8 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/jobj.h"
-#include "baselib/random.h"
+#include "hsd/jobj.h"
+#include "hsd/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gr/grkongo.h"

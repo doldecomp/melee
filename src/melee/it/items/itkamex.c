@@ -10,7 +10,7 @@
 #include "it/itgroundcoll.h"
 #include "lb/lbaudio_ax.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F7B08[] = {
     { 0, it_802CA5D8, it_802CA618, it_802CA654 },

@@ -3,10 +3,10 @@
 #include "itlinkhookshot.h"
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjuserdata.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjuserdata.h"
 #include "dolphin/types.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_0A01.h"
@@ -35,11 +35,11 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F73A8[] = {
     { -1, NULL, itSamusgrapple_UnkMotion0_Phys, NULL },

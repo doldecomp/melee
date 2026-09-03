@@ -12,7 +12,7 @@
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
-#include <baselib/mtx.h>
+#include <hsd/mtx.h>
 
 ItemStateTable it_803F7340[] = {
     { 0, itSamusmissile_UnkMotion0_Anim, itSamusmissile_UnkMotion0_Phys,

@@ -13,8 +13,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 2228B4 */ static void grTPeach_802228B4(bool arg0);
 /* 2228B8 */ static void grTPeach_802228B8(void);

@@ -1,7 +1,7 @@
 #ifndef GALE01_15755C
 #define GALE01_15755C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15755C */ void fn_8015755C(HSD_GObj* gobj);
 /* 1575A8 */ void ftCh_SweepWait_Anim(HSD_GObj* gobj);

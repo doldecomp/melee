@@ -10,10 +10,10 @@
 #include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/random.h>
 
 /* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
 /* 288E6C */ static void it_80288E6C(Item_GObj* gobj);

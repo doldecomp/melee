@@ -13,12 +13,12 @@
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 /** @var ::grBattle_YakumonoParam::bg_curr_color_overlay
  * @todo ::ColorOverlay_x8_t, from ::grMaterial_801C9604

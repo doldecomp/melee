@@ -10,7 +10,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 struct grTFox_YakumonoParam {
     UNK_T unk0;

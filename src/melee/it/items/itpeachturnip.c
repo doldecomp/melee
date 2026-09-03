@@ -11,7 +11,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F74A8[] = {
     {

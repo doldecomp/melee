@@ -29,7 +29,7 @@
 #include "lb/lbcollision.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((float*) p_ftCommonData)

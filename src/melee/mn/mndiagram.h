@@ -3,7 +3,7 @@
 
 #include "mn/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);

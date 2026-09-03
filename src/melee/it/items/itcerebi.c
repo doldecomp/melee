@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "ef/efsync.h"
 #include "gr/stage.h"
 #include "it/inlines.h"

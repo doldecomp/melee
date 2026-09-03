@@ -7,8 +7,8 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <baselib/debug.h>
-#include <baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/random.h>
 
 /// One #stage_id_map entry: the #GrKind for a #StKind.
 struct StageIdMapEntry {

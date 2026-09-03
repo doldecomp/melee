@@ -12,7 +12,7 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/it/item.h>
 
 /* 298300 */ static bool itLgunray_UnkMotion0_Anim(Item_GObj*);

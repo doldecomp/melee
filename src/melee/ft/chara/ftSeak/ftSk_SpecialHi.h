@@ -1,7 +1,7 @@
 #ifndef GALE01_1130D0
 #define GALE01_1130D0
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1130D0 */ void ftSk_SpecialHi_Enter(HSD_GObj* gobj);
 /* 11312C */ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj);

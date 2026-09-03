@@ -6,12 +6,12 @@
 
 #include <placeholder.h>
 
-#include "baselib/debug.h"
+#include "hsd/debug.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/psstructs.h"
-#include "baselib/tobj.h"
+#include "hsd/psstructs.h"
+#include "hsd/tobj.h"
 #include "dolphin/gx/GXCull.h"
 #include "dolphin/gx/GXGeometry.h"
 #include "dolphin/gx/GXPixel.h"
@@ -22,17 +22,17 @@
 #include "lb/lbdvd.h"
 #include "lb/types.h"
 
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
+#include <hsd/cobj.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/state.h>
+#include <hsd/tev.h>
 #include <melee/sc/types.h>
 
 HSD_LObj* lb_80011AC4(LightList** list)

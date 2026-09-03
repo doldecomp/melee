@@ -9,8 +9,8 @@
 
 #include <string.h>
 #include <dolphin/dvd.h>
-#include <baselib/debug.h>
-#include <baselib/devcom.h>
+#include <hsd/debug.h>
+#include <hsd/devcom.h>
 
 static bool cancel;
 

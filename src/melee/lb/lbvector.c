@@ -6,8 +6,8 @@
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
+#include <hsd/cobj.h>
+#include <hsd/debug.h>
 
 static inline float lbVector_Len_xy_accurate(Vec3* vec)
 {

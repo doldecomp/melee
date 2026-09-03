@@ -18,8 +18,8 @@
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftKirby/ftkirby.h"
 
-#include <baselib/dobj.h>
-#include <baselib/jobj.h>
+#include <hsd/dobj.h>
+#include <hsd/jobj.h>
 
 HSD_MObj* ft_804D6580;
 

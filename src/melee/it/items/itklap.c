@@ -13,7 +13,7 @@
 #include "lb/lbcollision.h"
 
 #include <math.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F8940[] = {
     {

@@ -12,7 +12,7 @@
 #include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F9260[] = {
     {

@@ -17,7 +17,7 @@
 
 #include "ftNess/ftNs_AttackHi4.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

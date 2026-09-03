@@ -31,14 +31,14 @@
 #include "pl/player.h"
 
 #include <dolphin/types.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/generator.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
+#include <hsd/controller.h>
+#include <hsd/debug.h>
+#include <hsd/generator.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
 
 struct grCorneria_YakumonoParam {
     /* 0x00 */ f32 x0;

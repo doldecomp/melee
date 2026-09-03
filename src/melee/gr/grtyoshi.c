@@ -11,9 +11,9 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
 
 /* 223B48 */ static void grTYoshi_OnDemoInit(bool);
 /* 223B4C */ static void grTYoshi_OnInit(void);

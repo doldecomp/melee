@@ -28,22 +28,22 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
-#include <baselib/sobjlib.h>
-#include <baselib/state.h>
-#include <baselib/tobj.h>
-#include <baselib/util.h>
-#include <baselib/wobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/mobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
+#include <hsd/sobjlib.h>
+#include <hsd/state.h>
+#include <hsd/tobj.h>
+#include <hsd/util.h>
+#include <hsd/wobj.h>
 
 static struct {
     int x0;

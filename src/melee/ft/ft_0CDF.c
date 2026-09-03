@@ -1,6 +1,6 @@
 #include "ft_0CDD.h"
 
-#include <sysdolphin/baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

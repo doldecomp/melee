@@ -11,10 +11,10 @@
 
 #include "it/items/itsamuschargeshot.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

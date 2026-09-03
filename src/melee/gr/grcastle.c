@@ -25,13 +25,13 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/psstructs.h>
-#include <baselib/random.h>
+#include <hsd/archive.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/psstructs.h>
+#include <hsd/random.h>
 
 struct unkCastle {
     /* 0x000 */ u8 _pad[0x10C];

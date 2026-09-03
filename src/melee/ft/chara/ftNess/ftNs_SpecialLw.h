@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 119E14 */ void ftNs_SpecialLwStart_Enter(HSD_GObj* gobj);
 /* 119E90 */ void ftNs_SpecialAirLwStart_Enter(HSD_GObj* gobj);

@@ -24,11 +24,11 @@
 
 #include "it/it_26B1.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/aobj.h>
-#include <baselib/debug.h>
-#include <baselib/mobj.h>
+#include <hsd/aobj.h>
+#include <hsd/debug.h>
+#include <hsd/mobj.h>
 
 /// @todo Belongs in #ftYs_Guard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };

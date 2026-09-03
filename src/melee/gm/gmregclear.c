@@ -2,7 +2,7 @@
 
 #include "platform.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "dolphin/pad.h"
 
@@ -10,18 +10,18 @@
 
 #include "mn/inlines.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <hsd/aobj.h>
+#include <hsd/controller.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/mobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
+#include <hsd/tobj.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ft/ft_0877.h>

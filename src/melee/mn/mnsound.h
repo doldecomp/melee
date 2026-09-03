@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 2492CC */ void mnSound_802492CC(HSD_GObj*);
 /* 249A1C */ void fn_80249A1C(HSD_GObj*);

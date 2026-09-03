@@ -1,9 +1,9 @@
 #ifndef MELEE_MN_STATIC_DATADEL_H
 #define MELEE_MN_STATIC_DATADEL_H
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/jobj.h"
+#include "hsd/jobj.h"
 #include "lb/lbspdisplay.h"
 
 #include "mn/forward.h"

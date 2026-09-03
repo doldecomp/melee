@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 struct mn_802307F8_t {
     /* 0x000 */ u8 x0;

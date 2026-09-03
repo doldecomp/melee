@@ -16,11 +16,11 @@
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
+#include <hsd/cobj.h>
+#include <hsd/jobj.h>
+#include <hsd/mtx.h>
+#include <hsd/state.h>
+#include <hsd/tev.h>
 
 /* 006E58 */ static bool
 lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,

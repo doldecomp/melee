@@ -1,7 +1,7 @@
 #ifndef GALE01_31CB00
 #define GALE01_31CB00
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 31CB00 */ void vi0102_8031CB00(int, int);
 /* 31CC68 */ void vi0102_JObjCallback(HSD_GObj*);

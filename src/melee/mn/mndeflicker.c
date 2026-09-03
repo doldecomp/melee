@@ -7,18 +7,18 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/sislib.h>
 
 void mnDeflicker_8024A168(HSD_GObj* gobj);
 void mnDeflicker_8024A2E8(HSD_GObj* gobj);

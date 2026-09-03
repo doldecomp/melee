@@ -14,7 +14,7 @@
 #include "ftCommon/ftCo_Wait.h"
 #include "ftPeach/types.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {

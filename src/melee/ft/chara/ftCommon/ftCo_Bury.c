@@ -48,8 +48,8 @@
 #include "pl/plbonuslib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

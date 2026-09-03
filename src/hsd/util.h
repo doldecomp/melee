@@ -1,0 +1,46 @@
+#ifndef _UTIL_H_
+#define _UTIL_H_
+
+#include <platform.h>
+
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <hsd/mtx.h>
+
+/// functions
+void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
+u32 HSD_GetNbBits(u32 arg0);
+s32 HSD_Index2PosNrmMtx(u32 arg0);
+
+/// variables
+extern Mtx HSD_identityMtx;
+
+#define FLT_MIN 1.17549435e-38f
+
+#define DEG_TO_RAD 0.017453292519943295
+#define RAD_TO_DEG 57.29577951308232
+
+static inline int vec_normalize_check(Vec3* src, Vec3* dst)
+{
+    if (!src || !dst) {
+        return -1;
+    }
+    if (fabsf_bitwise(src->x) <= FLT_MIN && fabsf_bitwise(src->y) <= FLT_MIN &&
+        fabsf_bitwise(src->z) <= FLT_MIN)
+    {
+        return -1;
+    }
+    PSVECNormalize(src, dst);
+    return 0;
+}
+
+static inline f32 atan2f_check(s8 y, s8 x)
+{
+    if (fabs(x) == 0.0) {
+        return y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
+    } else {
+        return atan2f(y, x);
+    }
+}
+
+#endif // _UTIL_H_

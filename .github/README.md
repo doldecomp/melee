@@ -150,7 +150,7 @@ Short|Full|Notes
 `gr`|Ground|Stages and other levels.
 `if`|Interface|User interface.
 `it`|Items|
-`lb`|Library|Utility functions that are often thin wrappers around `dolphin` or `baselib` code.
+`lb`|Library|Utility functions that are often thin wrappers around `dolphin` or `hsd` code.
 `mn`|Menu|
 `mp`|Map|Related to stages and contains things like `mpcoll` (map collisions).
 `pl`|Player|As in users.
@@ -201,7 +201,7 @@ Short|Full|Canonical English
 
 <sup>1</sup> Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."
 
-### `sysdolphin/baselib`
+### `hsd`
 
 HAL's core internal library.
 Class|Full

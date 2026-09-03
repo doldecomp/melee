@@ -7,9 +7,9 @@
 #include "it/items/types.h"
 #include "it/itgroundcoll.h"
 #include "it/itspawn.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /* 28FC84 */ bool itFoods_UnkMotion0_Anim(Item_GObj* arg0);
 /* 28FC8C */ void itFoods_UnkMotion0_Phys(Item_GObj* arg0);

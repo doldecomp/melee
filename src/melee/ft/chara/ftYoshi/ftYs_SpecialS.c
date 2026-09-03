@@ -6,7 +6,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -39,7 +39,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 static MotionFlags const ftYs_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;

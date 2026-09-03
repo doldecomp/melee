@@ -2,8 +2,8 @@
 
 #include "placeholder.h"
 
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjuserdata.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjuserdata.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 #include "ef/efsync.h"
@@ -25,9 +25,9 @@
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
 #include "mp/types.h"
-#include "sysdolphin/baselib/gobjobject.h"
-#include "sysdolphin/baselib/gobjplink.h"
-#include "sysdolphin/baselib/jobj.h"
+#include "hsd/gobjobject.h"
+#include "hsd/gobjplink.h"
+#include "hsd/jobj.h"
 
 #include <math.h>
 

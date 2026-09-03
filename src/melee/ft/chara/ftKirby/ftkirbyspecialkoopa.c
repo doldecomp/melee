@@ -1,6 +1,6 @@
 #include "ftkirby.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 

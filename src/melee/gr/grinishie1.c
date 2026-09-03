@@ -21,13 +21,13 @@
 #include "mp/mplib.h"
 
 #include <dolphin/types.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/dobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/random.h>
 
 /* 1FA908 */ static void grInishie1_801FA908(bool);
 /* 1FA90C */ static void grInishie1_801FA90C(void);

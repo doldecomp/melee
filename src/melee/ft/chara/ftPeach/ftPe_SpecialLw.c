@@ -29,10 +29,10 @@
 #include "it/items/itpeachturnip.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);

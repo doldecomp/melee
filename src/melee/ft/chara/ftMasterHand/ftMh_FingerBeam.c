@@ -1,6 +1,6 @@
 #include "ftMh_FingerBeam.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"

@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftPopo/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 11ED38 */ void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 11EE18 */ void ftPp_Init_OnItemInvisible(HSD_GObj* gobj);

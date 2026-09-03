@@ -18,7 +18,7 @@
 #include "lb/lbsnap.h"
 #include "lb/lbtime.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/card.h>
 #include <dolphin/dvd.h>
@@ -26,13 +26,13 @@
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
 #include <dolphin/vi.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/hsd_392C.h>
-#include <baselib/hsd_3933.h>
-#include <baselib/initialize.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
+#include <hsd/controller.h>
+#include <hsd/debug.h>
+#include <hsd/hsd_392C.h>
+#include <hsd/hsd_3933.h>
+#include <hsd/initialize.h>
+#include <hsd/sislib.h>
+#include <hsd/video.h>
 
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;

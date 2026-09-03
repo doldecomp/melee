@@ -7,10 +7,10 @@
 #include "ft/inlines.h" // IWYU pragma: export
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/objalloc.h>
+#include <hsd/objalloc.h>
 
 extern struct Fighter_804D64FC_t {
     u8** cmdscripts; ///< +00 per-character command script arrays

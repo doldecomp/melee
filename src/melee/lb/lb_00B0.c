@@ -3,13 +3,13 @@
 #include "sc/types.h" // IWYU pragma: keep
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/dobj.h> // IWYU pragma: keep
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/pobj.h>
-#include <baselib/quatlib.h>
-#include <baselib/robj.h>
+#include <hsd/aobj.h>
+#include <hsd/dobj.h> // IWYU pragma: keep
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/pobj.h>
+#include <hsd/quatlib.h>
+#include <hsd/robj.h>
 
 /* 00B9D8 */ static void lb_8000B9D8(HSD_JObj*, float**, s32);
 /* 00BC04 */ static HSD_JObj* lbFindJObjWithAObj(HSD_JObj*);

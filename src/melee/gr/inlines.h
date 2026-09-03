@@ -10,14 +10,14 @@
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 

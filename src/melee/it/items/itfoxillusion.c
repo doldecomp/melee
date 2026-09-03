@@ -13,8 +13,8 @@
 #include "it/item.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F6818[] = {
     {

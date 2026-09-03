@@ -1,7 +1,7 @@
 #ifndef GALE01_15B174
 #define GALE01_15B174
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
 /* 15B22C */ void ftCh_TagFail_Anim(HSD_GObj* gobj);

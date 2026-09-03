@@ -7,7 +7,7 @@
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 // TODO transitive include hack, should be included directly by dependers
 

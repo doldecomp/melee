@@ -20,8 +20,8 @@
 #include "ftPurin/types.h"
 
 #include <math.h>
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
+#include <hsd/archive.h>
+#include <hsd/gobj.h>
 
 static MotionFlags const ftPr_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;

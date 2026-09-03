@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /* 258940 */ void mnGallery_80258940(void);
 /* 25896C */ void mnGallery_8025896C(HSD_GObj* gobj, int render_pass);

@@ -7,8 +7,8 @@
 #include "ithitbox.h"
 #include "itmaplib.h"
 
-#include "baselib/jobj.h"
-#include "baselib/random.h"
+#include "hsd/jobj.h"
+#include "hsd/random.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -23,7 +23,7 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <baselib/gobjobject.h>
+#include <hsd/gobjobject.h>
 
 extern f32 it_804DC73C;
 

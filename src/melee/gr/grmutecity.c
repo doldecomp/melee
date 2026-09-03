@@ -21,13 +21,13 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/psappsrt.h>
-#include <baselib/psstructs.h>
-#include <sysdolphin/baselib/spline.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/psappsrt.h>
+#include <hsd/psstructs.h>
+#include <hsd/spline.h>
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 

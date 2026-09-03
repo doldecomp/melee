@@ -32,8 +32,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f

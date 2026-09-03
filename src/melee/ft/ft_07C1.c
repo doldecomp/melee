@@ -18,7 +18,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 void ft_8007C114(HSD_GObj* gobj)
 {

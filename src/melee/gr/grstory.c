@@ -13,8 +13,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobjproc.h>
-#include <baselib/random.h>
+#include <hsd/gobjproc.h>
+#include <hsd/random.h>
 
 struct grStory_YakumonoParam {
     float timer_min;

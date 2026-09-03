@@ -4,10 +4,10 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/debugconsole_main.h>
-#include <sysdolphin/baselib/hsd_393C.h>
-#include <sysdolphin/baselib/video.h>
+#include <hsd/debug.h>
+#include <hsd/debugconsole_main.h>
+#include <hsd/hsd_393C.h>
+#include <hsd/video.h>
 #include <melee/lb/lb_0195.h>
 
 /* 228AB4 */ static void fn_HSDPanicHandler(OSContext* ctx);

@@ -2,12 +2,12 @@
 
 #include "dolphin/pad.h"
 
-#include <baselib/debug.h>
+#include <hsd/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0)                                                      \
             : __assert(mnVibration_804D4FF4, line, mnVibration_804D4FFC))
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
@@ -22,15 +22,15 @@
 #include "mn/types.h"
 
 #include <dolphin/os.h>
-#include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
+#include <hsd/controller.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/memory.h>
+#include <hsd/sislib.h>
 
 /// --- Externs ---
 

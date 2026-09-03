@@ -5,10 +5,10 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/psstructs.h"
-#include "baselib/tobj.h"
+#include "hsd/psstructs.h"
+#include "hsd/tobj.h"
 
 #include "lb/forward.h"
 
@@ -19,14 +19,14 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/quatlib.h>
+#include <hsd/cobj.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/quatlib.h>
 #include <melee/mp/mplib.h>
 
 struct lb_Collider {

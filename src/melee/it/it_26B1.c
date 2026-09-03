@@ -34,11 +34,11 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 #if MUST_MATCH
 static inline float my_sqrtf(float x)

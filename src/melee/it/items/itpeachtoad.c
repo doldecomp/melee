@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ftKirby/ftkirbyspecialpeach.h"
 #include "ftPeach/ftPe_SpecialN.h"

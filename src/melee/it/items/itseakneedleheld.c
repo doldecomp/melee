@@ -12,7 +12,7 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 ItemStateTable it_803F70A8[] = {
     {

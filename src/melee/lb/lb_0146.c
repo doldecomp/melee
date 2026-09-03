@@ -7,13 +7,13 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/lobj.h>
-#include <baselib/psstructs.h>
-#include <baselib/tobj.h>
+#include <hsd/cobj.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/lobj.h>
+#include <hsd/psstructs.h>
+#include <hsd/tobj.h>
 
 bool lb_80014638(struct lb_80014638_arg0_t* arg0,
                  struct lb_80014638_arg1_t* arg1)

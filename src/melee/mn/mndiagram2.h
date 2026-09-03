@@ -1,7 +1,7 @@
 #ifndef MELEE_MN_MNDIAGRAM2_H
 #define MELEE_MN_MNDIAGRAM2_H
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/mn/types.h>
 
 /* 243A3C */ bool mnDiagram2_IsTimeStat(u8 stat_type);

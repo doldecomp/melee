@@ -4,14 +4,14 @@
 
 #include "placeholder.h"
 
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/gobjuserdata.h"
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
+#include "hsd/gobj.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
+#include "hsd/gobjplink.h"
+#include "hsd/gobjproc.h"
+#include "hsd/gobjuserdata.h"
+#include "hsd/jobj.h"
+#include "hsd/memory.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16F1.h"
 #include "gm/gm_1A36.h"
@@ -25,7 +25,7 @@
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "sc/types.h"
-#include "sysdolphin/baselib/debug.h"
+#include "hsd/debug.h"
 #include "ty/toy.h"
 
 HSD_Text* mnDataDel_804D6C6C;

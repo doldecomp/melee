@@ -17,7 +17,7 @@
 #include "ftKoopa/ftKp_SpecialS.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 
 void ftCo_800BC438(Fighter_GObj* gobj)
 {

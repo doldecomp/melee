@@ -3,7 +3,7 @@
 #ifndef GALE01_14C1E8
 #define GALE01_14C1E8
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14C1E8 */ void ftGw_Attack100Start_Enter(HSD_GObj* gobj);
 /* 14C224 */ void ftGw_Attack100Start_Anim(HSD_GObj* gobj);

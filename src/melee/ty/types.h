@@ -8,7 +8,7 @@
 #include "dolphin/gx/GXStruct.h"
 
 #include "ty/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

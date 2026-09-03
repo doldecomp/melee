@@ -25,7 +25,7 @@
 #include "lb/forward.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 /// Luigi's Green Missile GFX callback
 void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)

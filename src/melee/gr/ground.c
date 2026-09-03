@@ -101,23 +101,23 @@
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/particle.h>
-#include <baselib/psstructs.h>
-#include <baselib/random.h>
-#include <baselib/spline.h>
-#include <baselib/wobj.h>
+#include <hsd/cobj.h>
+#include <hsd/debug.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/particle.h>
+#include <hsd/psstructs.h>
+#include <hsd/random.h>
+#include <hsd/spline.h>
+#include <hsd/wobj.h>
 
 /* 1BFFA8 */ static void Ground_OnStart(void);
 /* 1BFFAC */ static void Ground_801BFFAC(int);

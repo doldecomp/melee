@@ -12,11 +12,11 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/random.h>
 
 struct grZebesRoute_YakumonoParam {
     int camera_timer;

@@ -21,7 +21,7 @@
 #include "it/itmaplib.h"
 #include "it/itspawn.h"
 #include "lb/lb_00B0.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
 ItemStateTable it_803F8190[] = {
     {

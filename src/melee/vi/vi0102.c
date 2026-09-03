@@ -25,16 +25,16 @@
 #include "vi/types.h"
 #include "vi/vi.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/gx.h>
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/wobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/wobj.h>
 
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;

@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/psstructs.h"
+#include "hsd/psstructs.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -18,11 +18,11 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 struct grGarden_YakumonoParam {
     float x0;

@@ -18,17 +18,17 @@
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/sobjlib.h>
-#include <baselib/tobj.h>
+#include <hsd/cobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/lobj.h>
+#include <hsd/memory.h>
+#include <hsd/sobjlib.h>
+#include <hsd/tobj.h>
 
 /* 2FF88C */ static bool un_802FF88C(enum soundtest_callback_arg0);
 /* 2FF934 */ static bool un_802FF934(enum soundtest_callback_arg0);

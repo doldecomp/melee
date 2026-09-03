@@ -33,8 +33,8 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/controller.h>
-#include <baselib/random.h>
+#include <hsd/controller.h>
+#include <hsd/random.h>
 
 static void ifStage251(HSD_GObj* gobj);
 

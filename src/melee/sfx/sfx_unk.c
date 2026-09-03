@@ -1,7 +1,7 @@
 #include "crowdsfx.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 void un_80321900(void)
 {

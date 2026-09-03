@@ -3,7 +3,7 @@
 
 #include "dolphin/mtx.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15B998 */ void ftCh_GrabUnk1_8015B998(HSD_GObj* gobj);
 /* 15BA34 */ void ftCh_GrabUnk1_8015BA34(HSD_GObj*, HSD_GObjEvent, Vec3*);

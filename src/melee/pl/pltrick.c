@@ -9,7 +9,7 @@
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
 
-#include <sysdolphin/baselib/debug.h>
+#include <hsd/debug.h>
 
 /* 037F00 */ static void fn_80037F00(HSD_GObj**, Fighter*, ft_800898B4_t*, s32,
                                      s32);

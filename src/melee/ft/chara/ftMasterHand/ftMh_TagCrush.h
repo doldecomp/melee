@@ -3,7 +3,7 @@
 #ifndef GALE01_15521C
 #define GALE01_15521C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 15521C */ void ftMh_TagCrush_Anim(HSD_GObj* gobj);
 /* 155290 */ void ftMh_TagCrush_IASA(HSD_GObj* gobj);

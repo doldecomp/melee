@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 0222A4 */ void lbRefract_800222A4(void);
 /* 02247C */ void lbRefract_8002247C(HSD_CObj*);

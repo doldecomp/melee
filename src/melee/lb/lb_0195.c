@@ -8,7 +8,7 @@
 
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
-#include <baselib/controller.h>
+#include <hsd/controller.h>
 
 struct lb_804329F0_t {
     union {

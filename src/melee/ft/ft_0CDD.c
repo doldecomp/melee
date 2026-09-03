@@ -4,7 +4,7 @@
 
 #include "ft/ft_084E.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/fighter.h>

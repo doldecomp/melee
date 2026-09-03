@@ -13,7 +13,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F7AD8[] = {
     { 0, itKabigon_UnkMotion0_Anim, itKabigon_UnkMotion0_Phys,

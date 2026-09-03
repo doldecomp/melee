@@ -19,7 +19,7 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itspawn.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
 #include <math.h>
 

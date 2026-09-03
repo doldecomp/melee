@@ -6,19 +6,19 @@
 
 #include "mnmain.h"
 
-#include "baselib/archive.h"
+#include "hsd/archive.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 #include "sc/forward.h"
 
-#include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/sislib.h>
+#include <hsd/controller.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/sislib.h>
 #include <db/db.h>
 #include <gm/gm_16AE.h>
 #include <gm/gm_16F1.h>

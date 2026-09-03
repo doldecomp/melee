@@ -1,9 +1,9 @@
 #ifndef MNDIAGRAM3_H
 #define MNDIAGRAM3_H
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/mn/types.h>
 
 /* 245BA4 */ void mnDiagram3_PopulateRankings(HSD_GObj* gobj);

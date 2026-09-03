@@ -16,9 +16,9 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F5468[] = {
     {

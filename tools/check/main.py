@@ -173,7 +173,7 @@ _HIDDEN_LITERAL = re.compile(r"(?:16|0[xX]0*10|0+20)[uUlL]*")
 _JOBJ_REPLACEMENT = "JOBJ_HIDDEN"
 _JOBJ_MESSAGE = (
     "Use JOBJ_HIDDEN instead of a raw 0x10 literal "
-    "(see src/sysdolphin/baselib/jobj.h)"
+    "(see src/hsd/jobj.h)"
 )
 
 
@@ -232,10 +232,10 @@ def fix_jobj_flags(path: Path, text: str) -> tuple[str, int]:
 _ASSERT_CALL = re.compile(r"__assert\s*\(")
 _ASSERT_MESSAGE = (
     "Use HSD_ASSERT/HSD_ASSERTMSG/HSD_ASSERTREPORT instead of a direct "
-    "__assert call (see src/sysdolphin/baselib/debug.h), or annotate with a "
+    "__assert call (see src/hsd/debug.h), or annotate with a "
     "@todo if no byte-matching form is known yet"
 )
-_ASSERT_EXEMPT_PATHS = frozenset({"src/sysdolphin/baselib/debug.h"})
+_ASSERT_EXEMPT_PATHS = frozenset({"src/hsd/debug.h"})
 
 
 def _has_todo(lines: list[str], line0: int) -> bool:

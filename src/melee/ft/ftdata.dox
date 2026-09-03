@@ -8,7 +8,7 @@
 
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[FTKIND_MAX];

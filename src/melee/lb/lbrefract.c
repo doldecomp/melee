@@ -16,13 +16,13 @@
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/os/OSCache.h>
-#include <baselib/class.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/memory.h>
-#include <baselib/pobj.h>
-#include <baselib/state.h>
+#include <hsd/class.h>
+#include <hsd/cobj.h>
+#include <hsd/debug.h>
+#include <hsd/dobj.h>
+#include <hsd/memory.h>
+#include <hsd/pobj.h>
+#include <hsd/state.h>
 
 /* 022650 */ static void fn_80022650(void);
 /* 022940 */ static void fn_80022940(void);

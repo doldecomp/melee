@@ -7,8 +7,8 @@
 
 #include "mn/inlines.h"
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/random.h>
+#include <hsd/controller.h>
+#include <hsd/random.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmresultplayer.h>
 #include <melee/gm/types.h>

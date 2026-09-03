@@ -16,7 +16,7 @@
 #include "it/it_26B1.h"
 #include "it/items/itclimbersice.h"
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
     {

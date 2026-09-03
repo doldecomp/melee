@@ -7,7 +7,7 @@
 
 #include "ty/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 304870 */ int Toy_GetTrophyTotal(void);
 /* 3048C0 */ s32 Toy_803048C0(int);

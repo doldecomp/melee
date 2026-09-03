@@ -2,8 +2,8 @@
 
 #include "ftcmdscript.h"
 
-#include "baselib/debug.h"
-#include "baselib/random.h"
+#include "hsd/debug.h"
+#include "hsd/random.h"
 #include "ft/ftlib.h"
 
 #include "ftKirby/forward.h"
@@ -14,7 +14,7 @@
 #include <melee/ft/chara/ftZelda/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <hsd/gobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_09F7.h>
 #include <melee/ft/chara/ftCommon/ftCo_0A01.h>
 #include <melee/ft/fighter.h>

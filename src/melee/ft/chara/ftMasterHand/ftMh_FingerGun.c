@@ -17,7 +17,7 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {

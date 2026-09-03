@@ -6,10 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dolphin/card.h>
-#include <baselib/hsd_3A94.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/hsd_3B27.h>
-#include <sysdolphin/baselib/memory.h>
+#include <hsd/hsd_3A94.h>
+#include <hsd/debug.h>
+#include <hsd/hsd_3B27.h>
+#include <hsd/memory.h>
 
 #define _p(x) (lb_80432A68.x)
 

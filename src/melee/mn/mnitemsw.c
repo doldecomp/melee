@@ -2,19 +2,19 @@
 
 #include <platform.h>
 
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
+#include "hsd/gobjgxlink.h"
+#include "hsd/gobjobject.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/sislib.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/memory.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
+#include <hsd/sislib.h>
+#include <hsd/debug.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/memory.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>

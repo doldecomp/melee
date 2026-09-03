@@ -3,7 +3,7 @@
 #ifndef GALE01_152138
 #define GALE01_152138
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 152138 */ void ftMh_WalkWait_Anim(HSD_GObj* gobj);
 /* 152174 */ void ftMh_WalkWait_IASA(HSD_GObj* gobj);

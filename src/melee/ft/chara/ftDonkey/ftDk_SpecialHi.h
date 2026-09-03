@@ -1,7 +1,7 @@
 #ifndef GALE01_10FB1C
 #define GALE01_10FB1C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 10FB1C */ void ftDk_SpecialHi_Enter(HSD_GObj* gobj);
 /* 10FBFC */ void ftDk_SpecialAirHi_Enter(HSD_GObj* gobj);

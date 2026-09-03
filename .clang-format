@@ -39,7 +39,7 @@ IncludeCategories:
     Priority: 2
   - Regex: '^<dolphin(/.*)?/forward\.h>$'
     Priority: 2
-  - Regex: '^<(sysdolphin/)?baselib(/.*)?/forward\.h>$'
+  - Regex: '^<hsd(/.*)?/forward\.h>$'
     Priority: 2
   - Regex: '^".*\.static\.h"$'
     Priority: 1
@@ -51,7 +51,7 @@ IncludeCategories:
   - Regex: '^<dolphin/.*>$'
     Priority: 6
     SortPriority: 4
-  - Regex: '^<(sysdolphin/)?baselib/.*>$'
+  - Regex: '^<hsd/.*>$'
     Priority: 6
     SortPriority: 5
   - Regex: '^<.*>$'

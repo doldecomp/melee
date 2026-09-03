@@ -10,8 +10,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/controller.h>
-#include <baselib/random.h>
+#include <hsd/controller.h>
+#include <hsd/random.h>
 
 struct grKraid_YakumonoParam {
     u32 map_time_min;

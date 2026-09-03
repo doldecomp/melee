@@ -33,13 +33,13 @@
 #include "pl/types.h"
 
 #include <math.h>
-#include <baselib/archive.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/objalloc.h>
+#include <hsd/archive.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/objalloc.h>
 
 static HSD_GObjEvent on_create_fighter[16] = {
     ftCo_800BECB0, ftCo_800BED88, ftCo_800BEF04, NULL,

@@ -7,10 +7,10 @@
 
 #include "dolphin/gx/GXStruct.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
+#include <hsd/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
 /* 028F5C */ void Camera_80028F5C(CmSubject*, CmSubjectState);

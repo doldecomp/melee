@@ -1,7 +1,7 @@
 #ifndef GALE01_153000
 #define GALE01_153000
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 153000 */ void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj);
 /* 15303C */ void ftMh_FingerBeamEnd_IASA(HSD_GObj* gobj);

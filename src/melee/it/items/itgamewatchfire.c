@@ -10,8 +10,8 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <hsd/gobj.h>
+#include <hsd/jobj.h>
 
 /* 2C6B20 */ static bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj);
 

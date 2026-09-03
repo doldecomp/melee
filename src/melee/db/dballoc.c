@@ -3,8 +3,8 @@
 #include "ef/efdata.h"
 #include "gm/types.h"
 
-#include <baselib/generator.h>
-#include <baselib/psappsrt.h>
+#include <hsd/generator.h>
+#include <hsd/psappsrt.h>
 
 static UnkFlagStruct db_804D6BA0;
 

@@ -17,7 +17,7 @@
 #include "lb/lblanguage.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F89C8[] = {
     { 0, itOldottosea_UnkMotion0_Anim, itOldottosea_UnkMotion0_Phys,

@@ -2,7 +2,7 @@
 
 #include "vi.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -16,13 +16,13 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <hsd/aobj.h>
+#include <hsd/cobj.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/jobj.h>
 
 static SceneDesc* un_804D7040;
 static SceneDesc* un_804D7044;

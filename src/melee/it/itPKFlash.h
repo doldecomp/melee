@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 typedef struct itPKFlush_ItemVars {
     s32 xDD4_PKFlash;

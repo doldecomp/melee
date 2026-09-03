@@ -18,7 +18,7 @@
 
 #include "ftCommon/types.h"
 
-#include <baselib/jobj.h>
+#include <hsd/jobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>

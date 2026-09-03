@@ -12,8 +12,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/mtx.h>
+#include <hsd/gobj.h>
+#include <hsd/mtx.h>
 
 ItemStateTable it_803F6788[] = {
     { 0, itMariofireball_UnkMotion0_Anim, itMariofireball_UnkMotion0_Phys,

@@ -16,7 +16,7 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
-#include "sysdolphin/baselib/random.h"
+#include "hsd/random.h"
 
 #include <math.h>
 

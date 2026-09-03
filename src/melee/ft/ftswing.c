@@ -12,7 +12,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <baselib/debug.h>
+#include <hsd/debug.h>
 
 int lbl_803C6D70[6][5] = {
     { 120, 121, 122, -1, 123 }, { 124, 125, 126, -1, 127 },

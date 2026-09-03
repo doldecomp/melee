@@ -15,7 +15,7 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 

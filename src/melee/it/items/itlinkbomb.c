@@ -2,10 +2,10 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/jobj.h"
-#include "baselib/random.h"
+#include "hsd/jobj.h"
+#include "hsd/random.h"
 #include "ft/chara/ftLink/ftLk_AttackAir.h"
 
 #include "it/forward.h"

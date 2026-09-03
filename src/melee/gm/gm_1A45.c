@@ -17,15 +17,15 @@
 #include "lb/lbheap.h"
 
 #include <dolphin/os/OSThread.h>
-#include <baselib/class.h>
-#include <baselib/controller.h>
-#include <baselib/gobjproc.h>
-#include <baselib/hsd_3915.h>
-#include <baselib/hsd_392C.h>
-#include <baselib/initialize.h>
-#include <baselib/leak.h>
-#include <baselib/perf.h>
-#include <baselib/sobjlib.h>
+#include <hsd/class.h>
+#include <hsd/controller.h>
+#include <hsd/gobjproc.h>
+#include <hsd/hsd_3915.h>
+#include <hsd/hsd_392C.h>
+#include <hsd/initialize.h>
+#include <hsd/leak.h>
+#include <hsd/perf.h>
+#include <hsd/sobjlib.h>
 
 static u64 gm_803DA888[8] = {
     0, 0x82FFFA, 0, 0x8EFFFA, 0x800FFA, 0x808FFA, 0x800FFA, 0,

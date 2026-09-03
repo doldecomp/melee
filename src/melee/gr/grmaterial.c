@@ -12,19 +12,19 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_013B.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/os.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
-#include <baselib/texp.h>
-#include <baselib/tobj.h>
+#include <hsd/debug.h>
+#include <hsd/dobj.h>
+#include <hsd/gobj.h>
+#include <hsd/id.h>
+#include <hsd/jobj.h>
+#include <hsd/mobj.h>
+#include <hsd/state.h>
+#include <hsd/tev.h>
+#include <hsd/texp.h>
+#include <hsd/tobj.h>
 
 /* 1C897C */ static void grMaterial_801C897C(HSD_JObj* jobj, u32 flags);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);

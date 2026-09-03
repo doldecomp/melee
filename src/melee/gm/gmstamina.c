@@ -6,7 +6,7 @@
 
 #include "gm/gm_1A3F.h"
 
-#include <sysdolphin/baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmvsmelee.h>

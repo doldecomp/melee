@@ -3,11 +3,11 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 #include <melee/ft/forward.h>
 #include <melee/gr/forward.h>
 
-#include <baselib/gobj.h>
+#include <hsd/gobj.h>
 
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1

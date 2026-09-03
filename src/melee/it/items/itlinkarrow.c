@@ -1,7 +1,7 @@
 #include "itlinkarrow.h"
 
-#include "baselib/gobj.h"
-#include "baselib/mtx.h"
+#include "hsd/gobj.h"
+#include "hsd/mtx.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Guard.h"
@@ -21,7 +21,7 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -9,10 +9,10 @@
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj);
 float ft_GetGroundFrictionMultiplier(Fighter* fp);

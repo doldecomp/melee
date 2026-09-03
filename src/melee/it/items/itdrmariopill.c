@@ -3,11 +3,11 @@
 #include "placeholder.h"
 #include "platform.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
-#include "baselib/mtx.h"
+#include "hsd/gobj.h"
+#include "hsd/jobj.h"
+#include "hsd/mtx.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"

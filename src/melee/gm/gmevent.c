@@ -28,9 +28,9 @@
 #include "melee/pl/player.h"
 #include "melee/pl/plbonuslib.h"
 
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
+#include <hsd/gobjplink.h>
+#include <hsd/gobjproc.h>
+#include <hsd/random.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>

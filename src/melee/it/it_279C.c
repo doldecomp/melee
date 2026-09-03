@@ -4,7 +4,7 @@
 #include "ithitbox.h"
 #include "itzako.h"
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"

@@ -8,7 +8,7 @@
 #include "it/itCommonItems.h"
 #include "it/items/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 2F2F34 */ void it_802F2F34(HSD_GObj*, itYoshiEggLay_DatAttrs*);
 /* 2F3020 */ void it_802F3020(HSD_GObj*);

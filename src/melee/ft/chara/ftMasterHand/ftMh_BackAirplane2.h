@@ -1,7 +1,7 @@
 #ifndef GALE01_1539EC
 #define GALE01_1539EC
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 1539EC */ void ftMh_BackAirplane2_IASA(HSD_GObj* gobj);
 /* 153A30 */ void ftMh_BackAirplane2_Phys(HSD_GObj* gobj);

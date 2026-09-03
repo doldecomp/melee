@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include <melee/ft/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 /**
  * @todo This was split out of ft/types.h to break a circular dependency with

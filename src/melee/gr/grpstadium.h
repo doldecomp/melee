@@ -5,7 +5,7 @@
 
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
 

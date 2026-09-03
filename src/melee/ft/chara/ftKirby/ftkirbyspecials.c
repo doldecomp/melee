@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -26,8 +26,8 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
+#include <hsd/debug.h>
+#include <hsd/gobj.h>
 
 char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
 char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";

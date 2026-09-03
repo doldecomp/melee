@@ -35,10 +35,10 @@
 #include "pl/player.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/gobj.h>
+#include <hsd/id.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {

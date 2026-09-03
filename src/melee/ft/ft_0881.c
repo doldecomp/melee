@@ -1,6 +1,6 @@
 #include "ft_0881.h"
 
-#include <sysdolphin/baselib/random.h>
+#include <hsd/random.h>
 #include <melee/db/db.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>

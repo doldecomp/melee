@@ -16,10 +16,10 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbmthp.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/sobjlib.h>
 
 void gm_ModeState_ApproachVs_OnExit(GameModeState* arg0)
 {

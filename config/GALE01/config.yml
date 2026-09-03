@@ -27,10 +27,10 @@ block_relocations:
 
 extract:
 - symbol: HSD_SisLib_FontAtlas
-  header: sysdolphin/baselib/sislib_font.inc
-  binary: sysdolphin/baselib/sislib_font.bin
+  header: hsd/sislib_font.inc
+  binary: hsd/sislib_font.bin
   header_type: raw
 - symbol: HSD_DebugFontAtlas
-  header: sysdolphin/baselib/debug_font.inc
-  binary: sysdolphin/baselib/debug_font.bin
+  header: hsd/debug_font.inc
+  binary: hsd/debug_font.bin
   header_type: raw

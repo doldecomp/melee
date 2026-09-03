@@ -2,9 +2,9 @@
 
 #include <placeholder.h>
 
-#include <baselib/aobj.h>
-#include <baselib/fobj.h>
-#include <baselib/jobj.h>
+#include <hsd/aobj.h>
+#include <hsd/fobj.h>
+#include <hsd/jobj.h>
 
 static HSD_FObj* lbAnim_InitFrames(FigaTrack* track, s8 frames)
 {

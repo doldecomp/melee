@@ -1,7 +1,7 @@
 #ifndef GALE01_159AA4
 #define GALE01_159AA4
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 159AA4 */ void fn_80159AA4(HSD_GObj* gobj);
 /* 159D04 */ void ftCh_Wait1_1_Anim(HSD_GObj* gobj);

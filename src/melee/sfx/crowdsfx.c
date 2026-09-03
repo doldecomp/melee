@@ -9,8 +9,8 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobj.h>
+#include <hsd/gobjproc.h>
 
 /* 4A2F08 */ CrowdSFX_UnkStruct un_804A2F08;
 /* 4D7050 */ CrowdSFX_UnkStruct* un_804D7050;

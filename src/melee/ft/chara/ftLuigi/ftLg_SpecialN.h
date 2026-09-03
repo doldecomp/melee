@@ -3,7 +3,7 @@
 #ifndef GALE01_14267C
 #define GALE01_14267C
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 14267C */ void ftLg_SpecialN_Enter(HSD_GObj* gobj);
 /* 1426EC */ void ftLg_SpecialAirN_Enter(HSD_GObj* gobj);

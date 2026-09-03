@@ -3,7 +3,7 @@
 #ifndef GALE01_146198
 #define GALE01_146198
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 146198 */ void ftMt_SpecialLw_ClearDisableGObj(HSD_GObj* gobj);
 /* 1461A8 */ void ftMt_SpecialLw_RemoveDisable(HSD_GObj* gobj);

@@ -14,8 +14,8 @@
 #include "lb/lb_00F9.h"
 
 #include <string.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include <hsd/controller.h>
+#include <hsd/gobjproc.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

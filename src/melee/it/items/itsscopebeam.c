@@ -9,7 +9,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/random.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F6568[] = {
     { 0, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,

@@ -1,24 +1,24 @@
 #include "grpstadium.h"
 
-#include "baselib/forward.h"
+#include "hsd/forward.h"
 
 #include "dolphin/gx/GXStruct.h"
 #include "lb/lb_00F9.h"
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <hsd/archive.h>
+#include <hsd/displayfunc.h>
+#include <hsd/dobj.h>
+#include <hsd/fog.h>
+#include <hsd/gobjgxlink.h>
+#include <hsd/gobjobject.h>
+#include <hsd/gobjproc.h>
+#include <hsd/gobjuserdata.h>
+#include <hsd/jobj.h>
+#include <hsd/memory.h>
+#include <hsd/mobj.h>
+#include <hsd/random.h>
+#include <hsd/sislib.h>
+#include <hsd/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>

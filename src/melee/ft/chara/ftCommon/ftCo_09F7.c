@@ -2,7 +2,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/random.h"
+#include "hsd/random.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"

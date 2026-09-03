@@ -7,7 +7,7 @@
 
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(FighterKind kind, u8 color);

@@ -5,48 +5,48 @@ project(melee-native LANGUAGES C)
 include(GNUInstallDirs)
 
 set(SOURCES
-    src/sysdolphin/baselib/aobj.c
-    src/sysdolphin/baselib/archive.c
-    src/sysdolphin/baselib/axdriver.c
-    src/sysdolphin/baselib/bytecode.c
-    src/sysdolphin/baselib/class.c
-    src/sysdolphin/baselib/cobj.c
-    src/sysdolphin/baselib/controller.c
-    src/sysdolphin/baselib/devcom.c
-    src/sysdolphin/baselib/dobj.c
-    src/sysdolphin/baselib/fobj.c
-    src/sysdolphin/baselib/gobj.c
-    src/sysdolphin/baselib/gobjgxlink.c
-    src/sysdolphin/baselib/gobjobject.c
-    src/sysdolphin/baselib/gobjplink.c
-    src/sysdolphin/baselib/gobjproc.c
-    src/sysdolphin/baselib/gobjuserdata.c
-    src/sysdolphin/baselib/hash.c
-    src/sysdolphin/baselib/id.c
-    src/sysdolphin/baselib/initialize.c
-    src/sysdolphin/baselib/jobj.c
-    src/sysdolphin/baselib/leak.c
-    src/sysdolphin/baselib/list.c
-    src/sysdolphin/baselib/lobj.c
-    src/sysdolphin/baselib/mobj.c
-    src/sysdolphin/baselib/mtx.c
-    src/sysdolphin/baselib/objalloc.c
-    src/sysdolphin/baselib/object.c
-    src/sysdolphin/baselib/perf.c
-    src/sysdolphin/baselib/psappsrt.c
-    src/sysdolphin/baselib/psdisptev.c
-    src/sysdolphin/baselib/quatlib.c
-    src/sysdolphin/baselib/random.c
-    src/sysdolphin/baselib/robj.c
-    src/sysdolphin/baselib/rumble.c
-    src/sysdolphin/baselib/shadow.c
-    src/sysdolphin/baselib/state.c
-    src/sysdolphin/baselib/tev.c
-    src/sysdolphin/baselib/texp.c
-    src/sysdolphin/baselib/texpdag.c
-    src/sysdolphin/baselib/tobj.c
-    src/sysdolphin/baselib/util.c
-    src/sysdolphin/baselib/wobj.c
+    src/hsd/aobj.c
+    src/hsd/archive.c
+    src/hsd/axdriver.c
+    src/hsd/bytecode.c
+    src/hsd/class.c
+    src/hsd/cobj.c
+    src/hsd/controller.c
+    src/hsd/devcom.c
+    src/hsd/dobj.c
+    src/hsd/fobj.c
+    src/hsd/gobj.c
+    src/hsd/gobjgxlink.c
+    src/hsd/gobjobject.c
+    src/hsd/gobjplink.c
+    src/hsd/gobjproc.c
+    src/hsd/gobjuserdata.c
+    src/hsd/hash.c
+    src/hsd/id.c
+    src/hsd/initialize.c
+    src/hsd/jobj.c
+    src/hsd/leak.c
+    src/hsd/list.c
+    src/hsd/lobj.c
+    src/hsd/mobj.c
+    src/hsd/mtx.c
+    src/hsd/objalloc.c
+    src/hsd/object.c
+    src/hsd/perf.c
+    src/hsd/psappsrt.c
+    src/hsd/psdisptev.c
+    src/hsd/quatlib.c
+    src/hsd/random.c
+    src/hsd/robj.c
+    src/hsd/rumble.c
+    src/hsd/shadow.c
+    src/hsd/state.c
+    src/hsd/tev.c
+    src/hsd/texp.c
+    src/hsd/texpdag.c
+    src/hsd/tobj.c
+    src/hsd/util.c
+    src/hsd/wobj.c
     src/melee/cm/camera.c
     src/melee/cm/cmsnap.c
     src/melee/db/dballoc.c
@@ -867,7 +867,6 @@ target_include_directories(melee PRIVATE
     src/Runtime
     src/melee
     src/melee/ft/chara
-    src/sysdolphin
 )
 
 install(TARGETS melee LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")

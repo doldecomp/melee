@@ -18,8 +18,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <hsd/jobj.h>
+#include <hsd/random.h>
 
 ItemStateTable it_803F6F50[] = {
     { 0, itSeakneedlethrown_UnkMotion0_Anim,

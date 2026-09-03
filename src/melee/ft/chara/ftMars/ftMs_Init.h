@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftMars/forward.h"
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 /* 136258 */ void ftMs_Init_OnDeath(HSD_GObj* gobj);
 /* 1362B0 */ void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

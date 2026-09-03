@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/gobj.h"
+#include "hsd/gobj.h"
 #include "gr/granime.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -13,10 +13,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <hsd/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <hsd/gobjproc.h>
 
 static void grTCaptain_OnDemoInit(int);
 static void grTCaptain_OnInit(void);

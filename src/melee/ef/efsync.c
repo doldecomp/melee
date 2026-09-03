@@ -6,14 +6,14 @@
 #include "eflib.h"
 #include "types.h"
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
-#include "baselib/psstructs.h"
-#include "baselib/random.h"
+#include "hsd/gobj.h"
+#include "hsd/jobj.h"
+#include "hsd/psstructs.h"
+#include "hsd/random.h"
 #include "ft/inlines.h"
 
 #include <math.h>
-#include <baselib/generator.h>
+#include <hsd/generator.h>
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 

@@ -22,7 +22,7 @@ CustomChecks:
   - Name: ban-primitive-c-types
     Query: |
       match varDecl(
-        isExpansionInFileMatching(".*/src/(melee|sysdolphin)/.*"),
+        isExpansionInFileMatching(".*/src/(melee|hsd)/.*"),
         hasType(anyOf(
           asString("long"),
           asString("short"),
