@@ -305,14 +305,16 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     data->x37.state2 = 0;
     data->x36.active = 0;
 
-    stage_index = arg0->stage_index;
-    lbl_804D6620 = lbArchive_80016DBC(
-        "IrNml", &data->x0, gm_1832_NormalSceneDataName, &data->x4,
-        gm_1832_NormalArchiveNames[stage_index], NULL);
+    {
+        u8 si = arg0->stage_index;
+        lbl_804D6620 = lbArchive_80016DBC(
+            "IrNml", &data->x0, gm_1832_NormalSceneDataName, &data->x4,
+            gm_1832_NormalArchiveNames[si], NULL);
 
-    lbAudioAx_80026F2C(gm_1832_NormalBgmIds[stage_index]);
-    lbAudioAx_8002702C(gm_1832_NormalBgmIds[stage_index],
-                       gm_80187F48_GetAudioConfig(stage_index));
+        lbAudioAx_80026F2C(gm_1832_NormalBgmIds[si]);
+        lbAudioAx_8002702C(gm_1832_NormalBgmIds[si],
+                           gm_80187F48_GetAudioConfig(si));
+    }
     lbAudioAx_80027168();
     lbAudioAx_80027648();
 
