@@ -12,7 +12,7 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "it/it_26B1.h"
-#include "it/items/itpeachparasol.h"
+#include "it/kinds/itpeachparasol.h"
 
 #include <baselib/gobj.h>
 

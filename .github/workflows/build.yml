@@ -67,7 +67,6 @@ jobs:
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
           '--max-errors 0' \
-          '--verbose' \
           '--version ${{matrix.version}}' \
           '--no-always-apply' \
           '--sym off')

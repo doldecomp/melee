@@ -11,11 +11,11 @@
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/state.h>
-#include <melee/ft/chara/ftLink/types.h>
-#include <melee/ft/chara/ftMars/types.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftLink/types.h>
+#include <melee/ft/kinds/ftMars/types.h>
 #include <melee/it/it_26B1.h>
-#include <melee/it/items/itsword.h>
+#include <melee/it/kinds/itsword.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 

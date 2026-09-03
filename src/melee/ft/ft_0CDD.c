@@ -5,11 +5,11 @@
 #include "ft/ft_084E.h"
 
 #include <baselib/jobj.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
 #include <melee/it/it_26B1.h>
 
 /// grounded

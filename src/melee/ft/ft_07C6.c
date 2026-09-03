@@ -9,7 +9,7 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>
 #include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
+#include <melee/it/kinds/it_2E5A.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>

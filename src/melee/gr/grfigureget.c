@@ -17,7 +17,7 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/items/itcoin.h"
+#include "it/kinds/itcoin.h"
 #include "it/types.h"
 
 #include "lb/forward.h"

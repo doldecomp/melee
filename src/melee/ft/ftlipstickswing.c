@@ -7,7 +7,7 @@
 
 #include "it/forward.h"
 
-#include "it/items/itlipstick.h"
+#include "it/kinds/itlipstick.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
