@@ -349,19 +349,27 @@ void fn_80184A94(HSD_GObj* gobj)
     fn_80184138(gobj, 2);
 }
 
-static f32 lbl_803D9248[] = {
-    0.6f,  0.35f, 0.6f,  0.5f,  0.6f,  0.35f, 0.6f,  0.6f,  0.7f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.6f,  0.5f,  0.6f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.5f,  0.0f,  -6.0f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  -1.0f, -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,
-    0.0f,  -1.0f, 0.0f,  0.0f,  -3.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.0f,
-    0.0f,  -0.5f, -3.5f, 0.0f,  -2.0f, -6.0f, 0.0f,  0.0f,  -2.5f, 0.0f,
-    0.0f,  -2.5f, 0.0f,  -1.0f, -1.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.0f, 0.0f,  -1.0f, -6.0f, 0.0f,  -1.0f, -2.5f, 0.0f,  -1.0f, -3.5f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -4.0f, 0.0f,  -1.0f, -3.5f, 0.0f,
-    0.0f,  -1.5f, 0.0f,  0.0f,  -4.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  3.0f,  4.0f,  -5.0f,
+typedef struct ClassicCharData {
+    /* 0x000 */ f32 scale[28];
+    /* 0x070 */ Vec3 offset[28];
+    /* 0x1C0 */ Vec3 samus_extra;
+} ClassicCharData;
+
+static ClassicCharData lbl_803D9248 = {
+    { 0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f, 0.6f, 0.6f, 0.7f, 0.6f,
+      0.5f, 0.6f,  0.6f, 0.6f, 0.5f, 0.5f,  0.6f, 0.5f, 0.6f, 0.6f,
+      0.5f, 0.6f,  0.6f, 0.6f, 0.6f, 0.5f,  0.5f, 0.5f },
+    { { 0.0f, -6.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+      { 0.0f, -3.5f, 0.0f },  { 0.0f, -1.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+      { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+      { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.0f, 0.0f },  { -0.5f, -3.5f, 0.0f },
+      { -2.0f, -6.0f, 0.0f }, { 0.0f, -2.5f, 0.0f },  { 0.0f, -2.5f, 0.0f },
+      { -1.0f, -1.0f, 0.0f }, { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+      { -1.0f, -6.0f, 0.0f }, { -1.0f, -2.5f, 0.0f }, { -1.0f, -3.5f, 0.0f },
+      { 0.0f, -3.5f, 0.0f },  { 0.0f, -4.0f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+      { 0.0f, -1.5f, 0.0f },  { 0.0f, -4.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+      { 0.0f, -3.5f, 0.0f } },
+    { 3.0f, 4.0f, -5.0f },
 };
 
 static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
@@ -540,12 +548,6 @@ void fn_8018504C(void)
     }
 }
 
-typedef struct ClassicCharData {
-    f32 scale[28];
-    Vec3 offset[28];
-    Vec3 samus_extra;
-} ClassicCharData;
-
 s32 fn_801851C0(void)
 {
     u8 pad_stack[8];
@@ -554,7 +556,7 @@ s32 fn_801851C0(void)
     s32 result;
 
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
-        ClassicCharData* data = (ClassicCharData*) lbl_803D9248;
+        ClassicCharData* data = &lbl_803D9248;
         result = i + 1;
         Player_SetPlayerCharacter(result, (CharacterKind) lbl_8047368C.xF4[0]);
         Player_SetPlayerId(result, 0);
