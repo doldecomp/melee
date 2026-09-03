@@ -52,8 +52,8 @@ typedef struct gm_1832_StageState {
 } gm_1832_StageState;
 
 static struct gm_1832_804736C0_t {
-    DynamicModelDesc*** x0;
-    HSD_CameraAnim** x4;
+    SceneDesc* x0;
+    struct SceneCameraDesc* x4;
     HSD_GObj* x8;
     u8 pad_C[0x28];
     u16 x34;
@@ -72,7 +72,7 @@ typedef struct gm_1832_804736C0_t gm_1832_804736C0_t;
 static inline void fn_80187AB4_LoadAnim(HSD_JObj* jobj,
                                         gm_1832_804736C0_t* data)
 {
-    DynamicModelDesc* desc = (*data->x0)[11 - data->x36.stage_index];
+    DynamicModelDesc* desc = data->x0->models[11 - data->x36.stage_index];
     int anim_state;
 
     if (desc->anims != NULL) {
@@ -104,7 +104,7 @@ void fn_80187910(HSD_GObj* arg0)
         }
         frame = data->x37.frame_counter * 0x12C;
         HSD_CObjRemoveAnim(cobj);
-        HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
+        HSD_CObjAddAnim(cobj, *data->x4->anims);
         HSD_CObjReqAnim(cobj, (f32) frame);
     }
     HSD_CObjAnim(cobj);
@@ -186,7 +186,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         if (lb_8000B09C(jobj) == 0) {
             data->x37.state2 = 1;
             anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
+            desc = data->x0->models[12];
             if (desc->anims[anim_state] != NULL) {
                 lb_8000C0E8(jobj, anim_state, desc);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -198,7 +198,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         if (lb_8000B09C(jobj) == 0) {
             data->x37.state2 = 2;
             anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
+            desc = data->x0->models[12];
             if (desc->anims[anim_state] != NULL) {
                 lb_8000C0E8(jobj, anim_state, desc);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -212,7 +212,7 @@ void fn_80187CF4(HSD_GObj* gobj)
             data->x36.active = 1;
             data->x37.state2 = 3;
             anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
+            desc = data->x0->models[12];
             if (desc->anims[anim_state] != NULL) {
                 lb_8000C0E8(jobj, anim_state, desc);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -220,7 +220,7 @@ void fn_80187CF4(HSD_GObj* gobj)
             }
         } else if (lb_8000B09C(jobj) == 0) {
             anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
+            desc = data->x0->models[12];
             if (desc->anims[anim_state] != NULL) {
                 lb_8000C0E8(jobj, anim_state, desc);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -320,17 +320,16 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     data->x8 = gobj;
-    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *data->x4);
+    cobj = HSD_CObjLoadDesc(data->x4->desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) Camera_800304E0, 8);
     HSD_GObj_SetupProc(gobj, fn_80187910, 0);
-    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
+    HSD_CObjAddAnim(cobj, *data->x4->anims);
     HSD_CObjReqAnim(cobj, 0.0f);
 
     {
         HSD_GObj* scene_gobj = GObj_Create(0x13, 0x14, 0);
-        HSD_CObj* scene_cobj =
-            HSD_CObjLoadDesc(((SceneDesc*) data->x0)->cameras[0].desc);
+        HSD_CObj* scene_cobj = HSD_CObjLoadDesc(data->x0->cameras[0].desc);
         HSD_GObjObject_80390A70(scene_gobj, HSD_GObj_CameraKind, scene_cobj);
         GObj_SetupGXLinkMax(scene_gobj, HSD_GObj_803910D8, 8);
         scene_gobj->gxlink_prios = 0xC00;
@@ -338,7 +337,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
     {
         HSD_GObj* light_gobj = GObj_Create(0xB, 3, 0);
-        HSD_LObj* lobj = lb_80011AC4(((SceneDesc*) data->x0)->lights);
+        HSD_LObj* lobj = lb_80011AC4(data->x0->lights);
         HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
         GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
     }
@@ -348,8 +347,8 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         HSD_GObj* model_gobj;
         gm_1832_StageState* state = &data->x36;
         model_gobj = GObj_Create(0xE, 0xF, 0);
-        model_jobj =
-            HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
+        model_jobj = HSD_JObjLoadJoint(
+            data->x0->models[11 - state->stage_index]->joint);
         lb_80011C18(model_jobj, 0x08000000);
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
@@ -360,7 +359,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
     {
         HSD_GObj* model_gobj = GObj_Create(0xE, 0xF, 0);
-        HSD_JObj* model_jobj = HSD_JObjLoadJoint((*data->x0)[12]->joint);
+        HSD_JObj* model_jobj = HSD_JObjLoadJoint(data->x0->models[12]->joint);
         int model_anim_idx;
         DynamicModelDesc* model_desc;
         lb_80011C18(model_jobj, 0x08000000);
@@ -368,7 +367,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
         model_anim_idx = data->x37.state2;
-        model_desc = (*data->x0)[12];
+        model_desc = data->x0->models[12];
         if (model_desc->anims[model_anim_idx] != NULL) {
             lb_8000C0E8(model_jobj, model_anim_idx, model_desc);
             HSD_JObjReqAnimAll(model_jobj, 0.0f);
