@@ -7,7 +7,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <melee/it/items/itlgun.h>
+#include <melee/it/kinds/itlgun.h>
 
 void ftCo_800CE1D4(HSD_GObj*); /* extern */
 

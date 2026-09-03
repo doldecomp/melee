@@ -11,9 +11,9 @@
 
 #include "ftFox/types.h"
 #include "ftMario/ftMr_SpecialN.h"
-#include "it/items/itdrmariopill.h"
-#include "it/items/itfoxblaster.h"
-#include "it/items/itnessbat.h"
+#include "it/kinds/itdrmariopill.h"
+#include "it/kinds/itfoxblaster.h"
+#include "it/kinds/itnessbat.h"
 
 void ftCo_800BF034(Fighter_GObj* gobj)
 {

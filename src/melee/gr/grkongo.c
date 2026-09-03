@@ -16,9 +16,9 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
-#include "it/items/itbox.h"
-#include "it/items/itklap.h"
 #include "it/itspawn.h"
+#include "it/kinds/itbox.h"
+#include "it/kinds/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 

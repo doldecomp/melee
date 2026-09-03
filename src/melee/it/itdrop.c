@@ -8,8 +8,8 @@
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
-#include "it/items/it_2E5A.h"
 #include "it/itspawn.h"
+#include "it/kinds/it_2E5A.h"
 
 #include <baselib/random.h>
 

@@ -1,7 +1,7 @@
 #ifndef GALE01_IT_3F2F
 #define GALE01_IT_3F2F
 
-#include "it/items/types.h"
+#include "it/kinds/types.h"
 #include "it/types.h"
 
 /* 3F2F28 */ extern struct sdata_ItemGXLink it_803F2F28[118];

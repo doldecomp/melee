@@ -26,7 +26,7 @@
 #include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/gr/types.h>
-#include <melee/it/items/itwhispyapple.h>
+#include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>

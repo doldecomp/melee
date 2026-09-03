@@ -12,11 +12,11 @@
 
 #include "it/itCharItems.h"
 #include "it/itCommonItems.h"
-
-#include "it/items/forward.h"
-
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"
+
+#include "it/kinds/forward.h"
+
 #include "lb/types.h"
 
 #include <baselib/forward.h>
