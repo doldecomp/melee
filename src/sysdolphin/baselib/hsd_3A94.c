@@ -4085,13 +4085,16 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 file_size;
     s32 total_blocks;
     s32 current_seq;
+    s32 file_idx;
     s32 seq;
+    s32 i;
     s32 secondary_count;
     s32 free_count;
-    s32 i;
+    s32 logical;
     s32 remaining;
     s32 result;
     u8* data;
+    s32 j;
     PAD_STACK(16);
 
     needs_rewrite = 0;
@@ -4128,9 +4131,9 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     }
 
-    for (i = 0; i < file_blocks; i++) {
-        block_map[0][i] = -1;
-        block_map[1][i] = -1;
+    for (j = 0; j < file_blocks; j++) {
+        block_map[0][j] = -1;
+        block_map[1][j] = -1;
     }
 
     current_seq = -1;
@@ -4144,14 +4147,13 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     {
-        i = 1;
         secondary_count = 0;
         free_count = 0;
-        for (; i <= total_blocks; i++) {
-            s32 file_idx = state->x170[i];
+        for (i = 1; i <= total_blocks; i++) {
+            file_idx = state->x170[i];
 
             if (file_idx >= 0) {
-                s32 logical = file_idx - blocks_before;
+                logical = file_idx - blocks_before;
                 if (arg1 == 0 && logical == 0) {
                     block_map[1][secondary_count] = i;
                     secondary_count++;
@@ -4163,7 +4165,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     block_map[0][logical] = i;
                 }
             } else {
-                s32 logical = -(file_idx + blocks_before);
+                logical = -(file_idx + blocks_before);
                 if (logical >= 0 && logical < file_blocks) {
                     block_map[1][secondary_count] = i;
                     secondary_count++;
