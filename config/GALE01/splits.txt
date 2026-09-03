@@ -2348,7 +2348,7 @@ melee/gm/gm_1832.c:
 	.bss        start:0x804735A8 end:0x80473700
 	.sdata      start:0x804D4090 end:0x804D4140
 	.sbss       start:0x804D65F0 end:0x804D6628
-	.sdata2     start:0x804DA538 end:0x804DA600
+	.sdata2     start:0x804DA538 end:0x804DA5F8
 
 melee/gm/gm_1884.c:
 	.text       start:0x80188454 end:0x8018A514
@@ -2357,7 +2357,7 @@ melee/gm/gm_1884.c:
 	.bss        start:0x80473700 end:0x80473AB8
 	.sdata      start:0x804D4140 end:0x804D4158
 	.sbss       start:0x804D6628 end:0x804D6630
-	.sdata2     start:0x804DA600 end:0x804DA650
+	.sdata2     start:0x804DA5F8 end:0x804DA650
 
 melee/gm/gmtoulib.c:
 	.text       start:0x8018A514 end:0x80190ABC

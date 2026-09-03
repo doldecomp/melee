@@ -1535,12 +1535,6 @@ static const f32 gm_1832_sdata2_tail7[1] ATTRIBUTE_ALIGN(8) = { 0.0f };
 static const f64 gm_1832_sdata2_tail8[1] = { S32_TO_F32 };
 #endif
 
-static inline void gm_1832_sdata2_order_tail9(int unused)
-{
-    (void) unused;
-    (void) 0.0166666675f;
-}
-
 void fn_80187910(HSD_GObj* arg0)
 {
     Vec3 sp10;
@@ -1575,7 +1569,6 @@ void fn_80187910(HSD_GObj* arg0)
     sp10.y *= scale;
     sp10.z *= scale;
     HSD_CObjSetEyePosition(cobj, &sp10);
-    gm_1832_sdata2_order_tail9(0);
 }
 
 typedef struct {
