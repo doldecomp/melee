@@ -1056,6 +1056,11 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
+static inline void ftCo_ApplyStageEntry(Fighter* fp, GrKind kind)
+{
+    ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
+}
+
 static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
                                             float arg1, float arg2, float arg3)
 {
@@ -1064,7 +1069,7 @@ static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
         data->x54.x = arg1;
         data->x54.y = arg2;
         data->x38 = arg3;
-        ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
+        ftCo_ApplyStageEntry(fp, stage_info.grkind);
     }
 }
 
@@ -2003,7 +2008,6 @@ static inline float ftCo_GetTerminalVelocity(Fighter* fp)
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 dist;
     Vec3 island_pos;
@@ -2031,10 +2035,10 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    data2 = &fp->x1A88;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
+        struct Fighter_x1A88_t* data2 = &fp->x1A88;
         island_pos = island->x14;
         ex = island_pos.x;
         {
@@ -2170,7 +2174,6 @@ static inline float ftCo_800A4038_inline2(Fighter* fp)
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     mp_UnkStruct0* island;
     Vec3 island_pos;
@@ -2198,10 +2201,10 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     } else {
         frames = ftCo_800A4038_inline2(fp) / grav;
     }
-    data2 = &fp->x1A88;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
+        struct Fighter_x1A88_t* data2 = &fp->x1A88;
         island_pos = island->x8;
         ex = island_pos.x;
         {
