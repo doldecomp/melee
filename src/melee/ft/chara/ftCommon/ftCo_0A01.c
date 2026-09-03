@@ -1056,6 +1056,11 @@ void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
     }
 }
 
+static inline void ftCo_ApplyStageEntry(Fighter* fp, GrKind kind)
+{
+    ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
+}
+
 static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
                                             float arg1, float arg2, float arg3)
 {
@@ -1064,7 +1069,7 @@ static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
         data->x54.x = arg1;
         data->x54.y = arg2;
         data->x38 = arg3;
-        ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.grkind]);
+        ftCo_ApplyStageEntry(fp, stage_info.grkind);
     }
 }
 
@@ -1958,6 +1963,24 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
     return ftCo_IsAlly(fp0, fp1);
 }
 
+#ifdef MUST_MATCH
+/* MSL sqrtf writing its volatile result through a caller-provided slot. */
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+#else
+#define sqrtf_store(x, y) sqrtf(x)
+#endif
+
 static inline bool ftCo_800A3908_inline0(Fighter* fp,
                                          struct Fighter_x1A88_t* data, float x,
                                          float y)
@@ -1972,27 +1995,23 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp,
     return false;
 }
 
-static inline s32 ftCo_800A3908_inline2(Vec3* out_normal, u32* out_flags,
-                                        int* out_line, Vec3* out_pos, float y,
-                                        float x)
-{
-    return mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
-                        out_flags, out_normal, -1, -1, -1, NULL, NULL);
-}
-
 inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
                                  Vec3* out_normal, int* out_line,
                                  u32* out_flags)
 {
     s32 result;
+    s32 valid;
 
     *out_line = -1;
-    result =
-        ftCo_800A3908_inline2(out_normal, out_flags, out_line, out_pos, y, x);
+    valid = 0;
+    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
+                          out_flags, out_normal, -1, -1, -1, NULL, NULL);
     if (result != 0 && ftCo_800A1B38_noinline(*out_line) != 0) {
-        return 0;
+        (void) result;
+    } else {
+        valid = result;
     }
-    return result;
+    return valid;
 }
 
 static inline float ftCo_GetTerminalVelocity(Fighter* fp)
@@ -2013,12 +2032,9 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 dx;
     f32 px;
     mp_UnkStruct0* island;
-    f32 ddx;
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    StageInfo* info;
     s32 ok;
 
     grav = fp->co_attrs.gravity;
@@ -2032,10 +2048,10 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    info = &stage_info;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
+        struct Fighter_x1A88_t* data2 = &fp->x1A88;
         island_pos = island->x14;
         ex = island_pos.x;
         {
@@ -2060,25 +2076,30 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         }
         dx = fp->cur_pos.x - ex;
         if (dx > 0.0f) {
-            f32 land_y;
+            PAD_STACK(0xC);
 
-            PAD_STACK(0x10);
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
-                land_y = fp->pos_delta.y * t + fp->cur_pos.y;
+                dist = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y +
-                         (fp->pos_delta.y * t -
-                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
+                volatile f32 sqrt_time_store;
+
+                dist = fp->cur_pos.y +
+                       (fp->pos_delta.y * t -
+                        0.5 * (fp->co_attrs.gravity *
+                               sqrtf_store((f32) t, &sqrt_time_store)));
             } else {
-                land_y =
-                    fp->cur_pos.y +
-                    ((fp->pos_delta.y * frames -
-                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
+                volatile f32 sqrt_terminal_store;
+
+                dist = fp->cur_pos.y +
+                       ((fp->pos_delta.y * frames -
+                         0.5 * (fp->co_attrs.gravity *
+                                sqrtf_store((f32) frames,
+                                            &sqrt_terminal_store))) -
+                        (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
-                if (!(land_y + data->x558 < ey)) {
+                if (!(dist + data->x558 < ey)) {
                     u32 flags0;
                     int line_id0;
                     Vec3 floor_normal0;
@@ -2096,14 +2117,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
-                        if (fp->x1A88.x60 == 0) {
-                            data3->x54.x = px;
-                            data3->x54.y = ey;
-                            data3->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
                     }
@@ -2115,7 +2130,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 Vec3 floor_pos1;
 
                 px = ex - 5.0;
-                ddx = px - fp->cur_pos.x;
+                ex = px - fp->cur_pos.x;
                 ddy = ey - fp->cur_pos.y;
                 valid = ftCo_800A3908_inline1(
                     px, ey, &floor_pos1, &floor_normal1, &line_id1, &flags1);
@@ -2125,24 +2140,19 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     ok = 0;
                 }
                 if (ok != 0) {
-                    dist = sqrtf(ddx * ddx + ddy * ddy);
+                    volatile f32 sqrt_dist_store;
+
+                    PAD_STACK(8);
+                    dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
-                        if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            {
-                                GrKind kind = info->grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                     }
                 }
             }
         }
     }
-    PAD_STACK(8);
     return 0;
 }
 
@@ -2165,28 +2175,19 @@ static inline s32 ftCo_800A4038_inline1(float x, float y, Vec3* arg_floor_pos,
                                         int* arg_line_id, u32* arg_flags)
 {
     s32 result;
+    s32 valid;
 
     *arg_line_id = -1;
+    valid = 0;
     result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, arg_floor_pos,
                           arg_line_id, arg_flags, arg_floor_normal, -1, -1, -1,
                           NULL, NULL);
     if (result != 0 && ftCo_800A1B38_noinline(*arg_line_id) != 0) {
-        return 0;
+        (void) result;
+    } else {
+        valid = result;
     }
-    return result;
-}
-
-static inline float ftCo_800A4038_inline2(Fighter* fp)
-{
-    return -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y);
-}
-
-static inline s32 ftCo_800A4038_inline3(f32 y, f32 x, Vec3* arg_floor_pos,
-                                        Vec3* arg_floor_normal,
-                                        int* arg_line_id, u32* arg_flags)
-{
-    return ftCo_800A4038_inline1(x, y, arg_floor_pos, arg_floor_normal,
-                                 arg_line_id, arg_flags);
+    return valid;
 }
 
 bool ftCo_800A4038(Fighter* fp, bool arg1)
@@ -2202,12 +2203,9 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     f32 dx;
     f32 px;
     f32 dist;
-    f32 ddx;
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    StageInfo* info;
     s32 ok;
 
     grav = fp->co_attrs.gravity;
@@ -2219,12 +2217,12 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     if (ok != 0) {
         frames = 0x3E8;
     } else {
-        frames = ftCo_800A4038_inline2(fp) / grav;
+        frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    info = &stage_info;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
+        struct Fighter_x1A88_t* data2 = &fp->x1A88;
         island_pos = island->x8;
         ex = island_pos.x;
         {
@@ -2249,31 +2247,36 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         }
         dx = ex - fp->cur_pos.x;
         if (dx > 0.0f) {
-            f32 land_y;
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
-                land_y = fp->pos_delta.y * t + fp->cur_pos.y;
+                dist = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y +
-                         (fp->pos_delta.y * t -
-                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
+                volatile f32 sqrt_time_store;
+
+                dist = fp->cur_pos.y +
+                       (fp->pos_delta.y * t -
+                        0.5 * (fp->co_attrs.gravity *
+                               sqrtf_store((f32) t, &sqrt_time_store)));
             } else {
-                land_y =
-                    fp->cur_pos.y +
-                    ((fp->pos_delta.y * frames -
-                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
+                volatile f32 sqrt_terminal_store;
+
+                dist = fp->cur_pos.y +
+                       ((fp->pos_delta.y * frames -
+                         0.5 * (fp->co_attrs.gravity *
+                                sqrtf_store((f32) frames,
+                                            &sqrt_terminal_store))) -
+                        (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
-                if (!(land_y + data->x558 < ey)) {
+                if (!(dist + data->x558 < ey)) {
                     u32 flags;
                     int line_id;
                     Vec3 floor_normal;
                     Vec3 floor_pos;
 
                     px = 5.0 + ex;
-                    valid = ftCo_800A4038_inline3(
-                        ey, px, &floor_pos, &floor_normal, &line_id, &flags);
+                    valid = ftCo_800A4038_inline1(
+                        px, ey, &floor_pos, &floor_normal, &line_id, &flags);
                     if (valid != 0 &&
                         !ftCo_800A4038_inline0(fp, data2, px, ey))
                     {
@@ -2282,14 +2285,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
-                        if (fp->x1A88.x60 == 0) {
-                            data3->x54.x = px;
-                            data3->x54.y = ey;
-                            data3->x38 = 5.0f;
-                            ftCo_800A1CC4(fp,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
                     }
@@ -2301,7 +2298,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 Vec3 floor_pos;
 
                 px = 5.0 + ex;
-                ddx = px - fp->cur_pos.x;
+                ex = px - fp->cur_pos.x;
                 ddy = ey - fp->cur_pos.y;
                 valid = ftCo_800A4038_inline1(px, ey, &floor_pos,
                                               &floor_normal, &line_id, &flags);
@@ -2311,17 +2308,13 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     ok = 0;
                 }
                 if (ok != 0) {
-                    dist = sqrtf(ddx * ddx + ddy * ddy);
+                    volatile f32 sqrt_dist_store;
+
+                    PAD_STACK(8);
+                    dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
-                        if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            {
-                                GrKind kind = info->grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
-                        }
+                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                                                 5.0f);
                         ftCo_800A49B4(fp);
                     }
                 }
@@ -5359,24 +5352,6 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
 
     *target = data->x44;
 }
-
-#ifdef MUST_MATCH
-/* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
-static inline float sqrtf_store(float x, volatile float* y)
-{
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        *y = (float) (x * guess);
-        return *(volatile float*) y;
-    }
-    return x;
-}
-#else
-#define sqrtf_store(x, y) sqrtf(x)
-#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
