@@ -346,6 +346,11 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         HSD_JObj* model_jobj;
         HSD_GObj* model_gobj;
         gm_1832_StageState* state = &data->x36;
+        DynamicModelDesc* model_desc;
+        HSD_AnimJoint** anims;
+        int model_stage;
+        int model_anim_idx;
+
         model_gobj = GObj_Create(0xE, 0xF, 0);
         model_jobj = HSD_JObjLoadJoint(
             data->x0->models[11 - state->stage_index]->joint);
@@ -353,7 +358,18 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
-        fn_80187AB4_LoadAnim(model_jobj, data);
+        model_stage = state->stage_index;
+        (void) model_stage;
+        model_desc = data->x0->models[11 - model_stage];
+        anims = model_desc->anims;
+        if (anims != NULL) {
+            model_anim_idx = data->x37.anim_state;
+            if (anims[model_anim_idx] != NULL) {
+                lb_8000C0E8(model_jobj, model_anim_idx, model_desc);
+                HSD_JObjReqAnimAll(model_jobj, 0.0f);
+                HSD_JObjAnimAll(model_jobj);
+            }
+        }
         HSD_GObj_SetupProc(model_gobj, fn_80187AB4, 0);
     }
 
@@ -383,7 +399,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
 void gm_Scene_IntroNormal_OnEnter(void* arg0)
 {
-    PAD_STACK(24);
+    PAD_STACK(32);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
