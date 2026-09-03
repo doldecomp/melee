@@ -428,7 +428,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
 void gm_Scene_IntroNormal_OnEnter(void* arg0)
 {
-    PAD_STACK(16);
+    PAD_STACK(24);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
