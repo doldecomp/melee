@@ -16,7 +16,7 @@
 
 #include "cm/camera.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1832.h"
+#include "gm/gm_1879.h"
 #include "gm/gm_1A45.h"
 #include "gm/gmregclear.h"
 #include "if/ifcoget.h"
