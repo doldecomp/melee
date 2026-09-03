@@ -4009,9 +4009,17 @@ static inline s32 fn_803B0120_close_result(CardState* state)
     return ret;
 }
 
-static inline s32 fn_803B0120_chunk_size(CardState* state)
+static inline s32 fn_803B0120_block_offset(CardState* state, s32 block_idx)
 {
-    return state->x8 - 0x20;
+    u32 size = state->x8;
+    u32 temp = state->x24 + size;
+    u32 num = temp + 0x2F;
+    u32 idx = num / size - 1;
+    u32 pos = block_idx + idx;
+
+    (void) temp;
+    (void) idx;
+    return size * pos;
 }
 
 static inline s32 fn_803B0120_queue_verify(CardState* state, s32 block,
@@ -4025,7 +4033,7 @@ static inline s32 fn_803B0120_queue_verify(CardState* state, s32 block,
     }
     {
         CardCmd cmd;
-        s32 ofs = fn_803ACBE8(state, block);
+        s32 ofs = fn_803B0120_block_offset(state, block);
         cmd.type = 5;
         cmd.state = state;
         cmd.x10 = logical;
@@ -4219,15 +4227,14 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             if (logical == 0) {
                 chunk = fn_803B0120_first_chunk(state);
             } else {
-                chunk = fn_803B0120_chunk_size(state);
+                chunk = state->x8 - 0x20;
             }
 
             if (remaining > chunk) {
                 if (arg3 != 0) {
-                    s32 block = block_map[0][i];
                     s32 cmd_result = fn_803B0120_queue_verify(
-                        state, block, blocks_before + i, current_seq, data,
-                        chunk);
+                        state, block_map[0][i], blocks_before + i, current_seq,
+                        data, chunk);
                     if (cmd_result < 0) {
                         fn_803B0120_rewind(entries);
                         return cmd_result;
@@ -4333,7 +4340,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (logical == 0) {
             chunk = fn_803B0120_first_chunk(state);
         } else {
-            chunk = fn_803B0120_chunk_size(state);
+            chunk = state->x8 - 0x20;
         }
 
         if (remaining > chunk) {
