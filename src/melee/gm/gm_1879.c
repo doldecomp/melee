@@ -6,8 +6,6 @@
 #include "dolphin/pad.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-#include "ft/ftdemo.h"
-#include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
@@ -20,10 +18,8 @@
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
-#include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
-#include "mn/mnname.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -37,12 +33,8 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/mobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
-#include <baselib/sobjlib.h>
 #include <baselib/state.h>
 #include <baselib/tobj.h>
-#include <baselib/util.h>
 #include <baselib/wobj.h>
 typedef struct gm_1832_StageState {
     u8 stage_index : 5;

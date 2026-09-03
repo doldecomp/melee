@@ -14,7 +14,6 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -29,7 +28,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/mobj.h>
 #include <baselib/tobj.h>
-#include <baselib/util.h>
 #include <baselib/wobj.h>
 static HSD_Archive* lbl_804D6610;
 static SceneDesc* lbl_804D6614;
