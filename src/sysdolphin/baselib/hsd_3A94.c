@@ -5008,7 +5008,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
 
             index = 1;
             if ((s32) fn_803AC634(state, 0) != 0) {
-                index = fn_803AC634(state, 0);
+                index += fn_803AC634(state, 0) - 1;
             }
             for (file_id = 1; file_id < 9; file_id++) {
                 s32 offset;
