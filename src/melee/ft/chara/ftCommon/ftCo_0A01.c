@@ -1990,14 +1990,18 @@ inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
                                  u32* out_flags)
 {
     s32 result;
+    s32 valid;
 
     *out_line = -1;
+    valid = 0;
     result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, out_pos, out_line,
                           out_flags, out_normal, -1, -1, -1, NULL, NULL);
     if (result != 0 && ftCo_800A1B38_noinline(*out_line) != 0) {
-        return 0;
+        (void) result;
+    } else {
+        valid = result;
     }
-    return result;
+    return valid;
 }
 
 static inline float ftCo_GetTerminalVelocity(Fighter* fp)
@@ -2132,7 +2136,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             }
         }
     }
-    PAD_STACK(8);
     return 0;
 }
 
@@ -2155,20 +2158,19 @@ static inline s32 ftCo_800A4038_inline1(float x, float y, Vec3* arg_floor_pos,
                                         int* arg_line_id, u32* arg_flags)
 {
     s32 result;
+    s32 valid;
 
     *arg_line_id = -1;
+    valid = 0;
     result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, arg_floor_pos,
                           arg_line_id, arg_flags, arg_floor_normal, -1, -1, -1,
                           NULL, NULL);
     if (result != 0 && ftCo_800A1B38_noinline(*arg_line_id) != 0) {
-        return 0;
+        (void) result;
+    } else {
+        valid = result;
     }
-    return result;
-}
-
-static inline float ftCo_800A4038_inline2(Fighter* fp)
-{
-    return -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y);
+    return valid;
 }
 
 bool ftCo_800A4038(Fighter* fp, bool arg1)
@@ -2199,7 +2201,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     if (ok != 0) {
         frames = 0x3E8;
     } else {
-        frames = ftCo_800A4038_inline2(fp) / grav;
+        frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
