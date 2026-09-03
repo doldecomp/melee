@@ -36,7 +36,7 @@ MWCC_FLAGS = [
     "-i",
     "src/melee",
     "-i",
-    "src/melee/ft/chara",
+    "src/melee/ft/kinds",
     "-I-",
     "-i",
     "src",
