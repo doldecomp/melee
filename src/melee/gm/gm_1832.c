@@ -348,28 +348,26 @@ void fn_80184A94(HSD_GObj* gobj)
     fn_80184138(gobj, 2);
 }
 
-typedef struct ClassicCharData {
-    /* 0x000 */ f32 scale[28];
-    /* 0x070 */ Vec3 offset[28];
-    /* 0x1C0 */ Vec3 samus_extra;
-} ClassicCharData;
+static f32 gm_1832_CharScale[28] = { 0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f,
+                                     0.6f, 0.6f,  0.7f, 0.6f, 0.5f, 0.6f,
+                                     0.6f, 0.6f,  0.5f, 0.5f, 0.6f, 0.5f,
+                                     0.6f, 0.6f,  0.5f, 0.6f, 0.6f, 0.6f,
+                                     0.6f, 0.5f,  0.5f, 0.5f };
 
-static ClassicCharData lbl_803D9248 = {
-    { 0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f, 0.6f, 0.6f, 0.7f, 0.6f,
-      0.5f, 0.6f,  0.6f, 0.6f, 0.5f, 0.5f,  0.6f, 0.5f, 0.6f, 0.6f,
-      0.5f, 0.6f,  0.6f, 0.6f, 0.6f, 0.5f,  0.5f, 0.5f },
-    { { 0.0f, -6.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { -1.0f, -3.5f, 0.0f },
-      { 0.0f, -3.5f, 0.0f },  { 0.0f, -1.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
-      { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
-      { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.0f, 0.0f },  { -0.5f, -3.5f, 0.0f },
-      { -2.0f, -6.0f, 0.0f }, { 0.0f, -2.5f, 0.0f },  { 0.0f, -2.5f, 0.0f },
-      { -1.0f, -1.0f, 0.0f }, { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
-      { -1.0f, -6.0f, 0.0f }, { -1.0f, -2.5f, 0.0f }, { -1.0f, -3.5f, 0.0f },
-      { 0.0f, -3.5f, 0.0f },  { 0.0f, -4.0f, 0.0f },  { -1.0f, -3.5f, 0.0f },
-      { 0.0f, -1.5f, 0.0f },  { 0.0f, -4.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
-      { 0.0f, -3.5f, 0.0f } },
-    { 3.0f, 4.0f, -5.0f },
+static Vec3 gm_1832_CharOffset[28] = {
+    { 0.0f, -6.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -1.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+    { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.0f, 0.0f },  { -0.5f, -3.5f, 0.0f },
+    { -2.0f, -6.0f, 0.0f }, { 0.0f, -2.5f, 0.0f },  { 0.0f, -2.5f, 0.0f },
+    { -1.0f, -1.0f, 0.0f }, { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+    { -1.0f, -6.0f, 0.0f }, { -1.0f, -2.5f, 0.0f }, { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -4.0f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -1.5f, 0.0f },  { 0.0f, -4.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f }
 };
+
+static Vec3 gm_1832_SamusOffset = { 3.0f, 4.0f, -5.0f };
 
 static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
                                0x82, 0x8D, 0,    0,    0,    0 };
@@ -555,22 +553,21 @@ s32 fn_801851C0(void)
     s32 result;
 
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
-        ClassicCharData* data = &lbl_803D9248;
         result = i + 1;
         Player_SetPlayerCharacter(result, (CharacterKind) lbl_8047368C.xF4[0]);
         Player_SetPlayerId(result, 0);
         Player_SetSlottype(result, Gm_PKind_Demo);
         Player_SetFacingDirection(result, 0.0f);
         Player_SetCostumeId(result, i);
-        pos = data->offset[lbl_8047368C.xF4[0]];
+        pos = gm_1832_CharOffset[lbl_8047368C.xF4[0]];
         Player_80032768(result, &pos);
         if (lbl_8047368C.xF4[0] == 0xE) {
-            pos.x += data->samus_extra.x;
-            pos.y += data->samus_extra.y;
-            pos.z += data->samus_extra.z;
+            pos.x += gm_1832_SamusOffset.x;
+            pos.y += gm_1832_SamusOffset.y;
+            pos.z += gm_1832_SamusOffset.z;
             Player_80032828(result, 1, &pos);
         }
-        Player_SetModelScale(result, data->scale[lbl_8047368C.xF4[0]]);
+        Player_SetModelScale(result, gm_1832_CharScale[lbl_8047368C.xF4[0]]);
         Player_SetFlagsBit5(result, lbl_8047368C.x100[0]);
         Player_80037054(result, 6);
     }
