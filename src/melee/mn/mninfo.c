@@ -331,20 +331,22 @@ void fn_80251FE4(void)
             sfxMove();
             mnInfo_FreeEntries();
             {
+                u8* other;
                 u8* trophy;
                 s32 i;
                 mnInfo_GObj* gobj;
 
                 gobj = mnInfo_804D6C78;
-                trophy = &mnInfo_804A0968[data->scroll_idx];
+                other = trophy = &mnInfo_804A0968[data->scroll_idx];
                 for (i = 0; i < 4; i++) {
+                    (void) (other == trophy);
                     if (mnInfo_80251A08(*trophy) != 0) {
-                        u8 id = *trophy;
+                        u32 id = *trophy;
 
                         mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
                         mnInfo_80251F04(gobj, i, id);
                     }
-                    trophy++;
+                    ++trophy;
                 }
             }
         }
