@@ -22,7 +22,7 @@
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-#include "ftYoshi/ftYs_SpecialN.h"
+#include "ftYoshi/ftyoshispecialn.h"
 
 #include "lb/forward.h"
 

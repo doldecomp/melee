@@ -3,7 +3,7 @@
 #include <platform.h>
 
 #include "db/db.h"
-#include "ftSamus/ftSs_Init.h"
+#include "ftSamus/ftsamus.h"
 
 #include "it/forward.h"
 

@@ -4,7 +4,7 @@
 #include "baselib/gobjuserdata.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftPopo/ftPp_SpecialS.h"
+#include "ft/kinds/ftPopo/ftpopospecials.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"

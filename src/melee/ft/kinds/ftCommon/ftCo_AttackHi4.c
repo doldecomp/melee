@@ -15,7 +15,7 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftNess/ftNs_AttackHi4.h"
+#include "ftNess/ftnessattackhi4.h"
 
 #include <baselib/forward.h>
 

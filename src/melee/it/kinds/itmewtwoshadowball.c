@@ -5,7 +5,7 @@
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirbyspecialmewtwo.h"
-#include "ft/kinds/ftMewtwo/ftMt_SpecialN.h"
+#include "ft/kinds/ftMewtwo/ftmewtwospecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

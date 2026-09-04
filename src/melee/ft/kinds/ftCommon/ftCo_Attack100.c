@@ -23,7 +23,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
-#include <melee/ft/kinds/ftGameWatch/ftGw_Attack100.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattack100.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>

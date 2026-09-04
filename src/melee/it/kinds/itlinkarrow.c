@@ -7,7 +7,7 @@
 #include "ft/ftlib.h"
 #include "ft/kinds/ftCommon/ftCo_Guard.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftLink/ftLk_SpecialN.h"
+#include "ft/kinds/ftLink/ftlinkspecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

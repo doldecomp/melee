@@ -4,7 +4,7 @@
 
 #include "ef/efasync.h"
 #include "ft/ftlib.h"
-#include "ft/kinds/ftMario/ftMr_SpecialS.h"
+#include "ft/kinds/ftMario/ftmariospecials.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

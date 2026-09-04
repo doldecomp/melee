@@ -6,7 +6,7 @@
 #include "baselib/jobj.h"
 #include "db/db.h"
 #include "ft/ftlib.h"
-#include "ftGameWatch/ftGw_SpecialS.h"
+#include "ftGameWatch/ftgamewatchspecials.h"
 
 #include "it/forward.h"
 

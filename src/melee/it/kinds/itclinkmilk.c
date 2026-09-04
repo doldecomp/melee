@@ -3,7 +3,7 @@
 #include "inlines.h"
 
 #include "ft/ftlib.h"
-#include "ft/kinds/ftCLink/ftCl_Init.h"
+#include "ft/kinds/ftCLink/ftclink.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"

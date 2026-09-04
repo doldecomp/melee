@@ -23,9 +23,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
-#include <melee/ft/kinds/ftFox/ftFx_SpecialN.h>
-#include <melee/ft/kinds/ftMewtwo/ftMt_SpecialN.h>
-#include <melee/ft/kinds/ftSamus/ftSs_Init.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospecialn.h>
+#include <melee/ft/kinds/ftSamus/ftsamus.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
