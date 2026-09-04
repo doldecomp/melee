@@ -3254,10 +3254,11 @@ void _Toy_80309404(HSD_GObj* gobj)
                         }
                         if (total > 3) {
                             if ((display->selectedIdx - 1) < 0) {
-                                s32 list_idx;
                                 ToyListEntry* entry;
+                                s32 list_idx;
                                 HSD_Archive* oa;
                                 char* md;
+                                uintptr_t keys;
 
                                 if ((gm_IsCurrently1PMode() != 0) ||
                                     (gm_GetCurrentGameMode() ==
@@ -3268,11 +3269,13 @@ void _Toy_80309404(HSD_GObj* gobj)
                                     list_idx = *gmMainLib_GetTrophyCount();
                                 }
                                 list_idx += display->selectedIdx;
+                                keys = (uintptr_t) Toy_sbss_804D6EDC;
                                 entry = display->first_entry;
                                 entry = entry->prev;
                                 {
                                     s32 idx = list_idx - 1;
-                                    s16 tid = Toy_sbss_804D6EDC[idx];
+                                    s16 tid = ((s16*) keys)[idx];
+                                    (void) keys;
                                     md = Toy_8030813C(tid);
                                     if ((oa = entry->archive) != NULL) {
                                         lbArchive_80016EFC(oa);
@@ -3979,10 +3982,11 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     }
                     if (total > 3) {
                         if ((display->selectedIdx - 1) < 0) {
-                            s32 lk;
                             ToyListEntry* entry;
+                            s32 lk;
                             HSD_Archive* oa;
                             char* md;
+                            uintptr_t keys;
                             if ((gm_IsCurrently1PMode() != 0) ||
                                 (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
@@ -3991,11 +3995,13 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                 lk = *gmMainLib_GetTrophyCount();
                             }
                             lk += display->selectedIdx;
+                            keys = (uintptr_t) Toy_sbss_804D6EDC;
                             entry = display->first_entry;
                             entry = entry->prev;
                             {
                                 s32 idx = lk - 1;
-                                s16 tid = Toy_sbss_804D6EDC[idx];
+                                s16 tid = ((s16*) keys)[idx];
+                                (void) keys;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
@@ -4530,11 +4536,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                             }
                             if (total > 3) {
                                 if ((display->selectedIdx - 1) < 0) {
+                                    ToyListEntry* list_entry;
                                     s32 list_idx;
                                     s32 count;
-                                    ToyListEntry* list_entry;
                                     HSD_Archive* old_archive;
                                     char* model_data;
+                                    uintptr_t keys;
 
                                     if ((gm_IsCurrently1PMode() != 0) ||
                                         (gm_GetCurrentGameMode() ==
@@ -4546,11 +4553,13 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     }
                                     count += display->selectedIdx;
                                     list_idx = count;
+                                    keys = (uintptr_t) Toy_sbss_804D6EDC;
                                     list_entry = display->first_entry;
                                     list_entry = list_entry->prev;
                                     {
                                         s32 idx = list_idx - 1;
-                                        s16 trophy_id = Toy_sbss_804D6EDC[idx];
+                                        s16 trophy_id = ((s16*) keys)[idx];
+                                        (void) keys;
                                         model_data = Toy_8030813C(trophy_id);
                                         if ((old_archive =
                                                  list_entry->archive) != NULL)
