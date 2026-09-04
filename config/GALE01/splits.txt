@@ -390,15 +390,11 @@ melee/ft/ft_084E.c:
 	.text       start:0x80084E1C end:0x8008521C
 	.sdata2     start:0x804D83B8 end:0x804D83C0
 
-melee/ft/ft_0852.c:
-	.text       start:0x8008521C end:0x80085560
-	.bss        start:0x804598B8 end:0x80459A68
-	.sdata      start:0x804D3AA8 end:0x804D3AB8
-
 melee/ft/ftdata.c:
-	.text       start:0x80085560 end:0x800860C4
+	.text       start:0x8008521C end:0x800860C4
 	.data       start:0x803C0EC0 end:0x803C2800
-	.sdata      start:0x804D3AB8 end:0x804D3AC8
+	.bss        start:0x804598B8 end:0x804599F0
+	.sdata      start:0x804D3AA8 end:0x804D3AC8
 
 melee/ft/ftmotionstates.c:
 	.data       start:0x803C2800 end:0x803C5460
@@ -698,6 +694,7 @@ melee/ft/kinds/ftCommon/ftCo_09F7.c:
 
 melee/ft/kinds/ftMario/ftMr_Strings.c:
 	.data       start:0x803C57D0 end:0x803C5A68
+	.bss        start:0x804599F0 end:0x80459A68
 
 melee/ft/kinds/ftCommon/ftCo_0A01.c:
 	.text       start:0x800A0148 end:0x800B3E04
@@ -803,9 +800,6 @@ melee/ft/ftdevice.c:
 	.bss        start:0x80459A68 end:0x80459A98
 	.sdata      start:0x804D3C18 end:0x804D3C20
 	.sbss       start:0x804D6570 end:0x804D6580
-
-melee/ft/ft_459A.c:
-	.bss        start:0x80459A98 end:0x8045A6C0
 
 melee/ft/kinds/ftCommon/ftCo_Bury.c:
 	.text       start:0x800C0874 end:0x800C15F4
@@ -1308,6 +1302,7 @@ melee/ft/kinds/ftMario/ftMr_SpecialLw.c:
 melee/ft/kinds/ftCaptain/ftCa_Init.c:
 	.text       start:0x800E2888 end:0x800E2B80
 	.data       start:0x803C72B8 end:0x803C7788
+	.bss        start:0x80459A98 end:0x80459B28
 
 melee/ft/kinds/ftCaptain/ftCa_SpecialN.c:
 	.text       start:0x800E2B80 end:0x800E3278
@@ -1328,6 +1323,7 @@ melee/ft/kinds/ftCaptain/ftCa_SpecialHi.c:
 melee/ft/kinds/ftFox/ftFx_Init.c:
 	.text       start:0x800E5534 end:0x800E5970
 	.data       start:0x803C7788 end:0x803C7DD0
+	.bss        start:0x80459B28 end:0x80459B88
 	.sdata2     start:0x804D9240 end:0x804D9248
 
 melee/ft/kinds/ftFox/ftFx_AppealS.c:
@@ -1383,6 +1379,7 @@ melee/ft/kinds/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CA304
+	.bss        start:0x80459B88 end:0x80459CA0
 	.sdata      start:0x804D3D98 end:0x804D3DAE
 	.sdata2     start:0x804D9350 end:0x804D9364
 
@@ -1510,6 +1507,7 @@ melee/ft/kinds/ftKirby/ftkirbyspecialgamewatch.c:
 melee/ft/kinds/ftDonkey/ftDk_Init.c:
 	.text       start:0x8010D740 end:0x8010DC80
 	.data       start:0x803CB838 end:0x803CC060
+	.bss        start:0x80459CA0 end:0x80459D18
 	.sdata2     start:0x804D95B0 end:0x804D95C8
 
 melee/ft/kinds/ftDonkey/ftDk_SpecialLw.c:
@@ -1531,6 +1529,7 @@ melee/ft/kinds/ftDonkey/ftDk_SpecialHi.c:
 melee/ft/kinds/ftSeak/ftSk_Init.c:
 	.text       start:0x80110094 end:0x80110490
 	.data       start:0x803CC060 end:0x803CC598
+	.bss        start:0x80459D18 end:0x80459D90
 	.sdata2     start:0x804D95F0 end:0x804D95F8
 
 melee/ft/kinds/ftSeak/ftSk_SpecialS.c:
@@ -1554,6 +1553,7 @@ melee/ft/kinds/ftSeak/ftSk_SpecialLw.c:
 melee/ft/kinds/ftNess/ftNs_Init.c:
 	.text       start:0x801147C0 end:0x80114BF4
 	.data       start:0x803CC650 end:0x803CCCB8
+	.bss        start:0x80459D90 end:0x80459DF0
 	.sdata2     start:0x804D96B0 end:0x804D96B8
 
 melee/ft/kinds/ftNess/ftNs_AttackS4.c:
@@ -1588,6 +1588,7 @@ melee/ft/kinds/ftNess/ftNs_SpecialLw.c:
 melee/ft/kinds/ftPeach/ftPe_Init.c:
 	.text       start:0x8011B51C end:0x8011BA20
 	.data       start:0x803CCCB8 end:0x803CD2D0
+	.bss        start:0x80459DF0 end:0x80459E68
 	.sdata2     start:0x804D97B8 end:0x804D97C0
 
 melee/ft/kinds/ftPeach/ftPe_Float.c:
@@ -1625,6 +1626,7 @@ melee/ft/kinds/ftPeach/ftPe_SpecialN.c:
 melee/ft/kinds/ftPopo/ftPp_Init.c:
 	.text       start:0x8011ED38 end:0x8011F1F8
 	.data       start:0x803CD2D0 end:0x803CD7F8
+	.bss        start:0x80459E68 end:0x80459EC8
 	.sdata2     start:0x804D9830 end:0x804D9838
 
 melee/ft/kinds/ftPopo/ftPp_SpecialN.c:
@@ -1648,6 +1650,7 @@ melee/ft/kinds/ftPopo/ftPp_SpecialLw.c:
 melee/ft/kinds/ftNana/ftNn_Init.c:
 	.text       start:0x80122EDC end:0x801230D0
 	.data       start:0x803CD838 end:0x803CDD5C
+	.bss        start:0x80459EC8 end:0x80459F28
 	.sdata2     start:0x804D9898 end:0x804D98A0
 
 melee/ft/kinds/ftNana/ftNn_SpecialHi.c:
@@ -1662,6 +1665,7 @@ melee/ft/kinds/ftNana/ftNn_SpecialS.c:
 melee/ft/kinds/ftPikachu/ftPk_Init.c:
 	.text       start:0x801243AC end:0x80124830
 	.data       start:0x803CDD78 end:0x803CE2D0
+	.bss        start:0x80459F28 end:0x80459F88
 	.sdata2     start:0x804D98F0 end:0x804D9900
 
 melee/ft/kinds/ftPikachu/ftPk_SpecialN.c:
@@ -1684,6 +1688,7 @@ melee/ft/kinds/ftPikachu/ftPk_SpecialLw.c:
 melee/ft/kinds/ftSamus/ftSs_Init.c:
 	.text       start:0x8012832C end:0x80128944
 	.data       start:0x803CE2D0 end:0x803CE6B8
+	.bss        start:0x80459F88 end:0x8045A000
 	.sdata      start:0x804D3E30 end:0x804D3E40
 	.sdata2     start:0x804D9988 end:0x804D9998
 
@@ -1711,13 +1716,13 @@ melee/ft/kinds/ftSamus/ftSs_SpecialLw_1.c:
 melee/ft/kinds/ftYoshi/ftyoshi.c:
 	.text       start:0x8012B6E8 end:0x8012BDA0
 	.rodata     start:0x803B75C0 end:0x803B75CC
-	.data       start:0x803CE6D0 end:0x803CEA98
+	.data       start:0x803CE6D0 end:0x803CED48
+	.bss        start:0x8045A000 end:0x8045A090
 	.sdata      start:0x804D3E40 end:0x804D3E58
 	.sdata2     start:0x804D9A18 end:0x804D9A28
 
 melee/ft/kinds/ftYoshi/ftYs_Guard.c:
 	.text       start:0x8012BDA0 end:0x8012CC6C
-	.data       start:0x803CEA98 end:0x803CED48
 	.sdata      start:0x804D3E58 end:0x804D3E68
 	.sdata2     start:0x804D9A28 end:0x804D9A38
 
@@ -1742,6 +1747,7 @@ melee/ft/kinds/ftYoshi/ftYs_SpecialS.c:
 melee/ft/kinds/ftKoopa/ftKp_Init.c:
 	.text       start:0x80132A0C end:0x80132EFC
 	.data       start:0x803CEDC0 end:0x803CF2A0
+	.bss        start:0x8045A090 end:0x8045A0F0
 	.sdata2     start:0x804D9AC8 end:0x804D9AD0
 
 melee/ft/kinds/ftKoopa/ftKp_SpecialS.c:
@@ -1764,6 +1770,7 @@ melee/ft/kinds/ftKoopa/ftKp_SpecialHi.c:
 melee/ft/kinds/ftMars/ftMs_Init.c:
 	.text       start:0x80136258 end:0x80136744
 	.data       start:0x803CF420 end:0x803CFA58
+	.bss        start:0x8045A0F0 end:0x8045A168
 	.sdata2     start:0x804D9B08 end:0x804D9B10
 
 melee/ft/kinds/ftMars/ftMs_SpecialN.c:
@@ -1785,6 +1792,7 @@ melee/ft/kinds/ftMars/ftMs_SpecialLw.c:
 melee/ft/kinds/ftZelda/ftZd_Init.c:
 	.text       start:0x801392DC end:0x801396AC
 	.data       start:0x803CFA58 end:0x803CFEF0
+	.bss        start:0x8045A168 end:0x8045A1E0
 	.sdata2     start:0x804D9B90 end:0x804D9B98
 
 melee/ft/kinds/ftZelda/ftZd_SpecialHi.c:
@@ -1806,6 +1814,7 @@ melee/ft/kinds/ftZelda/ftZd_SpecialS.c:
 melee/ft/kinds/ftPurin/ftPr_Init.c:
 	.text       start:0x8013C2F8 end:0x8013C9C8
 	.data       start:0x803CFEF0 end:0x803D0628
+	.bss        start:0x8045A1E0 end:0x8045A270
 	.sdata      start:0x804D3E80 end:0x804D3E94
 	.sdata2     start:0x804D9C08 end:0x804D9C10
 
@@ -1829,6 +1838,7 @@ melee/ft/kinds/ftPurin/ftPr_SpecialN.c:
 melee/ft/kinds/ftLuigi/ftLg_Init.c:
 	.text       start:0x801422E8 end:0x8014267C
 	.data       start:0x803D0628 end:0x803D0AE8
+	.bss        start:0x8045A270 end:0x8045A2D0
 	.sdata2     start:0x804D9C98 end:0x804D9CA0
 
 melee/ft/kinds/ftLuigi/ftLg_SpecialN.c:
@@ -1851,6 +1861,7 @@ melee/ft/kinds/ftLuigi/ftLg_SpecialLw.c:
 melee/ft/kinds/ftMewtwo/ftMt_Init.c:
 	.text       start:0x80144DFC end:0x801450A0
 	.data       start:0x803D0B00 end:0x803D0F90
+	.bss        start:0x8045A2D0 end:0x8045A330
 	.sdata2     start:0x804D9D00 end:0x804D9D18
 
 melee/ft/kinds/ftMewtwo/ftMt_SpecialHi.c:
@@ -1874,6 +1885,7 @@ melee/ft/kinds/ftMewtwo/ftMt_SpecialN.c:
 melee/ft/kinds/ftCLink/ftCl_Init.c:
 	.text       start:0x80148C64 end:0x80149354
 	.data       start:0x803D0FA0 end:0x803D1498
+	.bss        start:0x8045A330 end:0x8045A3A8
 	.sdata2     start:0x804D9DA0 end:0x804D9DA8
 
 melee/ft/kinds/ftCLink/ftCl_AppealS.c:
@@ -1882,6 +1894,7 @@ melee/ft/kinds/ftCLink/ftCl_AppealS.c:
 melee/ft/kinds/ftDrMario/ftDr_Init.c:
 	.text       start:0x8014949C end:0x80149954
 	.data       start:0x803D1498 end:0x803D1848
+	.bss        start:0x8045A3A8 end:0x8045A420
 	.sdata2     start:0x804D9DA8 end:0x804D9DB0
 
 melee/ft/kinds/ftDrMario/ftDr_AppealS.c:
@@ -1890,16 +1903,19 @@ melee/ft/kinds/ftDrMario/ftDr_AppealS.c:
 melee/ft/kinds/ftFalco/ftFc_Init.c:
 	.text       start:0x80149ACC end:0x80149E34
 	.data       start:0x803D1848 end:0x803D1EA8
+	.bss        start:0x8045A420 end:0x8045A480
 	.sdata2     start:0x804D9DB0 end:0x804D9DB8
 
 melee/ft/kinds/ftPichu/ftPc_Init.c:
 	.text       start:0x80149E34 end:0x8014A250
 	.data       start:0x803D1EA8 end:0x803D23E8
+	.bss        start:0x8045A480 end:0x8045A4E0
 	.sdata2     start:0x804D9DB8 end:0x804D9DC0
 
 melee/ft/kinds/ftGameWatch/ftGw_Init.c:
 	.text       start:0x8014A250 end:0x8014A848
 	.data       start:0x803D23E8 end:0x803D29F8
+	.bss        start:0x8045A4E0 end:0x8045A540
 
 melee/ft/kinds/ftGameWatch/ftGw_AttackS4.c:
 	.text       start:0x8014A848 end:0x8014AB48
@@ -1939,34 +1955,41 @@ melee/ft/kinds/ftGameWatch/ftGw_SpecialN.c:
 melee/ft/kinds/ftGanon/ftGn_Init.c:
 	.text       start:0x8014EBFC end:0x8014EEF8
 	.data       start:0x803D29F8 end:0x803D2E80
+	.bss        start:0x8045A540 end:0x8045A5B8
 	.sdata2     start:0x804D9E58 end:0x804D9E60
 
 melee/ft/kinds/ftEmblem/ftFe_Init.c:
 	.text       start:0x8014EEF8 end:0x8014F1F0
 	.data       start:0x803D2E80 end:0x803D34E8
+	.bss        start:0x8045A5B8 end:0x8045A630
 	.sdata2     start:0x804D9E60 end:0x804D9E68
 
 melee/ft/kinds/ftZakoBoy/ftBo_Init.c:
 	.text       start:0x8014F1F0 end:0x8014F418
 	.data       start:0x803D34E8 end:0x803D3568
+	.bss        start:0x8045A630 end:0x8045A648
 
 melee/ft/kinds/ftZakoGirl/ftGl_Init.c:
 	.text       start:0x8014F418 end:0x8014F640
 	.data       start:0x803D3568 end:0x803D35E8
+	.bss        start:0x8045A648 end:0x8045A660
 
 melee/ft/kinds/ftGigaKoopa/ftGk_Init.c:
 	.text       start:0x8014F640 end:0x8014F9CC
 	.data       start:0x803D35E8 end:0x803D3998
+	.bss        start:0x8045A660 end:0x8045A678
 	.sdata2     start:0x804D9E68 end:0x804D9E70
 
 melee/ft/kinds/ftSandbag/ftSb_Init.c:
 	.text       start:0x8014F9CC end:0x8014FC68
 	.data       start:0x803D3998 end:0x803D3A30
+	.bss        start:0x8045A678 end:0x8045A690
 	.sdata2     start:0x804D9E70 end:0x804D9E80
 
 melee/ft/kinds/ftMasterHand/ftMh_Init.c:
 	.text       start:0x8014FC68 end:0x8014FE10
 	.data       start:0x803D3A30 end:0x803D40D0
+	.bss        start:0x8045A690 end:0x8045A6A8
 	.sdata2     start:0x804D9E80 end:0x804D9E88
 
 melee/ft/kinds/ftMasterHand/ftMh_Wait1_0.c:
@@ -2107,6 +2130,7 @@ melee/ft/kinds/ftMasterHand/ftMh_ThrownMasterHand.c:
 melee/ft/kinds/ftCrazyHand/ftCh_Init.c:
 	.text       start:0x80155E18 end:0x80155FCC
 	.data       start:0x803D41F8 end:0x803D4878
+	.bss        start:0x8045A6A8 end:0x8045A6C0
 	.sdata2     start:0x804DA050 end:0x804DA058
 
 melee/ft/kinds/ftCrazyHand/ftCh_Wait1_0.c:

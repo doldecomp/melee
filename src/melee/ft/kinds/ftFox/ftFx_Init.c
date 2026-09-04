@@ -22,6 +22,8 @@
 
 #include "it/it_26B1.h"
 
+/* 459B28 */ UnkCostumeStruct ftFx_CostumeList[4];
+
 MotionState ftFx_Init_MotionStateTable[ftFx_MS_SelfCount] = {
     {
         // ftFx_MS_SpecialNStart = 341

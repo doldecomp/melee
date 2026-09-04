@@ -11,6 +11,7 @@ char ftBo_Init_DataName[] = "ftDataBoy";
 char ftBo_Init_803D3500[] = "PlBoNr.dat";
 char ftBo_Init_803D350C[] = "PlyBoy_Share_joint";
 char ftBo_Init_AnimDatFilename[] = "PlBoAJ.dat";
+/* 45A630 */ UnkCostumeStruct ftBo_CostumeList[1];
 
 #ifdef MUST_MATCH
 #pragma push

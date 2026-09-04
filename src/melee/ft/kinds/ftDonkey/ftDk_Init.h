@@ -23,5 +23,6 @@
 /* 3CBF88 */ extern char ftDk_Init_AnimDatFilename[];
 /* 3CC010 */ extern Fighter_DemoStrings ftDk_Init_DemoMotionFilenames;
 /* 3CC020 */ extern char ftDk_Init_DataName[];
+/* 459CA0 */ extern UnkCostumeStruct ftDk_CostumeList[5];
 
 #endif

@@ -15,6 +15,8 @@
 #include "ftSeak/types.h"
 #include "it/it_26B1.h"
 
+/* 459D18 */ UnkCostumeStruct ftSk_CostumeList[5];
+
 MotionState ftSk_Init_MotionStateTable[ftSk_MS_SelfCount] = {
     {
         // ftSk_MS_SpecialNStart = 341

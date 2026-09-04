@@ -11,7 +11,6 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -23,6 +22,7 @@
 
 #include "ftKirby/forward.h"
 
+#include "ftKirby/ftkirby.h"
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
@@ -67,7 +67,7 @@ static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
     KirbyHatStruct* mars_hat;
     KirbyHatStruct* fe_hat;
 
-    mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
+    mars_hat = ft_80459B88.hats[FTKIND_MARS - 1]; ///< @todo kirby hat enum
     fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
 
     if (fp->u.kb.hat.kind == FTKIND_MARS) {

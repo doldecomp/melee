@@ -25,5 +25,6 @@
 /* 3D2328 */ extern char ftPc_Init_AnimDatFilename[];
 /* 3D23A4 */ extern Fighter_DemoStrings ftPc_Init_DemoMotionFilenames;
 /* 3D23B4 */ extern Fighter_CostumeStrings ftPc_Init_CostumeStrings[];
+/* 45A480 */ extern UnkCostumeStruct ftPc_CostumeList[4];
 
 #endif

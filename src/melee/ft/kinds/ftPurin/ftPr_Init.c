@@ -13,7 +13,6 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
@@ -31,6 +30,12 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
+
+/* 45A1F8 */ UnkCostumeStruct ftPr_CostumeList[5];
+
+/// @todo Should be size 5, one for each costume,
+/// so there is a split at 0x8045A1F8
+/* 45A1E0 */ static HSD_Joint* ft_8045A1E0[6];
 
 MotionState ftPr_Init_MotionStateTable[ftPr_MS_SelfCount] = {
     {

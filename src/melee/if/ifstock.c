@@ -144,8 +144,8 @@ ifStock_802F8298_init(HSD_GObj* gobj, HSD_JObj** jobj,
     return GET_IFSTOCK(gobj);
 }
 
-static inline int ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
-                                            struct ifStock_804A1378* stock)
+static inline u8 ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
+                                           struct ifStock_804A1378* stock)
 {
     return stock->x204[user_data->player].x0[2];
 }

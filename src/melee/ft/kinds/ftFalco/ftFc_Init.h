@@ -23,5 +23,6 @@
 /* 3D1DE8 */ extern char ftFc_Init_AnimDatFilename[];
 /* 3D1E64 */ extern Fighter_DemoStrings ftFc_Init_DemoMotionFilenames;
 /* 3D1E74 */ extern char ftFc_Init_DataName[];
+/* 45A420 */ extern UnkCostumeStruct ftFc_CostumeList[4];
 
 #endif

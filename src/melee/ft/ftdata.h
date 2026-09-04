@@ -9,6 +9,9 @@
 
 #include <baselib/forward.h>
 
+/* 08521C */ void ft_8008521C(Fighter_GObj* gobj);
+/* 0852B0 */ void ft_800852B0(void);
+/* 08549C */ void ft_8008549C(void);
 /* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(FighterKind kind, u8 color);
 /* 08572C */ void ftData_8008572C(FighterKind);
@@ -54,5 +57,6 @@
 /* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 /* 3C52A0 */ extern MotionState ftData_803C52A0[14];
+/* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
 
 #endif

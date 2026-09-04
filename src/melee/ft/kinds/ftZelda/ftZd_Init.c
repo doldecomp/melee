@@ -14,6 +14,8 @@
 #include "ftZelda/types.h"
 #include "it/it_26B1.h"
 
+/* 45A168 */ UnkCostumeStruct ftZd_CostumeList[5];
+
 MotionState ftZd_Init_MotionStateTable[ftZd_MS_SelfCount] = {
     {
         // ftZd_MS_SpecialN = 341

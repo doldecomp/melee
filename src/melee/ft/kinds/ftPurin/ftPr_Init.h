@@ -37,5 +37,6 @@
 /* 3D05C8 */ extern f32 ftPr_Init_803D05C8[4];
 /* 3D05D8 */ extern f32 ftPr_Init_803D05D8[4];
 /* 3D0610 */ extern ftCollisionBox ftPr_Init_803D0610;
+/* 45A1F8 */ extern UnkCostumeStruct ftPr_CostumeList[5];
 
 #endif

@@ -31,5 +31,6 @@
 /* 3D13CC */ extern char ftCl_Init_AnimDatFilename[];
 /* 3D1448 */ extern Fighter_DemoStrings ftCl_Init_DemoMotionFilenames;
 /* 3D1458 */ extern Fighter_CostumeStrings ftCl_Init_CostumeStrings[];
+/* 45A330 */ extern UnkCostumeStruct ftCl_CostumeList[5];
 
 #endif

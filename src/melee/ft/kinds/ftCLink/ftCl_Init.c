@@ -37,6 +37,8 @@
 
 #include <baselib/forward.h>
 
+/* 45A330 */ UnkCostumeStruct ftCl_CostumeList[5];
+
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {
         // ftLk_MS_AttackS42 = 341

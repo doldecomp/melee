@@ -5,10 +5,10 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftKirby/ftkirby.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

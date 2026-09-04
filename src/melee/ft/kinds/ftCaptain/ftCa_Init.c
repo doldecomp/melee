@@ -17,6 +17,8 @@
 #include "ftCaptain/forward.h"
 #include "ftCommon/forward.h"
 
+/* 459A98 */ UnkCostumeStruct ftCa_CostumeList[6];
+
 MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
     {
         // ftCa_MS_SwordSwing4 = 341

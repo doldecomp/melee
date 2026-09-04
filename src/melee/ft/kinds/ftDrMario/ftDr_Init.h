@@ -26,5 +26,6 @@
 /* 3D1770 */ extern char ftDr_Init_AnimDatFilename[];
 /* 3D17FC */ extern Fighter_DemoStrings ftDr_Init_DemoMotionFilenames;
 /* 3D180C */ extern char ftDr_Init_DataName[];
+/* 45A3A8 */ extern UnkCostumeStruct ftDr_CostumeList[5];
 
 #endif

@@ -529,5 +529,7 @@ typedef struct ftKirby_CopyName {
 /* 3CB52C */ extern char ftKb_Init_803CB52C[];
 /* 3CB540 */ extern enum_t ftKb_Init_803CB540[];
 /* 4D3DB0 */ extern char ftKb_Init_804D3DB0[2];
+/* 459B88 */ extern struct ft_80459B88_t ft_80459B88;
+/* 459C10 */ extern UnkCostumeStruct ftKb_CostumeList[6];
 
 #endif

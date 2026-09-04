@@ -14,5 +14,6 @@
 /* 3D407C */ extern char ftMh_Init_DataName[];
 /* 3D40B8 */ extern char ftMh_Init_AnimDatFilename[];
 /* 3D40C4 */ extern Fighter_CostumeStrings ftMh_Init_CostumeStrings[];
+/* 45A690 */ extern UnkCostumeStruct ftMh_CostumeList[1];
 
 #endif

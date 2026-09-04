@@ -23,5 +23,6 @@
 /* 3D2DB4 */ extern char ftGn_Init_AnimDatFilename[];
 /* 3D2E30 */ extern Fighter_DemoStrings ftGn_Init_DemoMotionFilenames;
 /* 3D2E40 */ extern Fighter_CostumeStrings ftGn_Init_CostumeStrings[];
+/* 45A540 */ extern UnkCostumeStruct ftGn_CostumeList[5];
 
 #endif

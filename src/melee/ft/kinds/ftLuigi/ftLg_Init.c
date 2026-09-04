@@ -20,6 +20,8 @@
 
 #include "it/it_26B1.h"
 
+/* 45A270 */ UnkCostumeStruct ftLg_CostumeList[4];
+
 MotionState ftLg_Init_MotionStateTable[ftLg_MS_SelfCount] = {
     {
         // ftLg_MS_SpecialN = 341

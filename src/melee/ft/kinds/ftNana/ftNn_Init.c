@@ -23,6 +23,8 @@
 /* 1238E4 */ void ftNn_Init_801238E4(Fighter_GObj* gobj);
 /* 1232A4 */ void ftNn_Init_801232A4(Fighter_GObj* gobj);
 
+/* 459EC8 */ UnkCostumeStruct ftNn_CostumeList[4];
+
 MotionState ftNn_Init_MotionStateTable[ftPp_MS_SelfCount] = {
     {
         // ftPp_MS_SpecialN = 341

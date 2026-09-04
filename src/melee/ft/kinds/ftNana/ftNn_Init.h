@@ -5,6 +5,9 @@
 
 #include "ftPopo/forward.h"
 
+/// @todo Repeat for other fighters and in ftdata
+#define FTNANA_COSTUME_COUNT 4
+
 /* 122EDC */ void ftNn_Init_OnLoad(Fighter_GObj* gobj);
 /* 122F28 */ void ftNn_Init_OnDeath(Fighter_GObj* gobj);
 /* 122FAC */ void ftNn_Init_80122FAC(Fighter_GObj* gobj);
@@ -42,6 +45,8 @@
 /* 3CDB84 */ extern char ftNn_Init_DataName[];
 /* 3CDCA0 */ extern char ftNn_Init_AnimDatFilename[];
 /* 3CDD1C */ extern Fighter_DemoStrings ftNn_Init_DemoMotionFilenames;
-/* 3CDD2C */ extern Fighter_CostumeStrings ftNn_Init_CostumeStrings[];
+/* 3CDD2C */ extern Fighter_CostumeStrings
+    ftNn_Init_CostumeStrings[FTNANA_COSTUME_COUNT];
+/* 459EC8 */ extern UnkCostumeStruct ftNn_CostumeList[FTNANA_COSTUME_COUNT];
 
 #endif

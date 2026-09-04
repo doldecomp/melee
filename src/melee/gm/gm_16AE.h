@@ -49,7 +49,7 @@
 /* 16B350 */ void gm_8016B350(int arg0);
 /* 16B364 */ void gm_8016B364(int arg0);
 /* 16B378 */ void gm_8016B378(s8 arg0);
-/* 16B388 */ void fn_8016B388(int arg0, s16 arg1);
+/* 16B388 */ void fn_8016B388(int arg0, int arg1);
 /* 16B3A0 */ bool gm_8016B3A0(void);
 /* 16B3D8 */ bool gm_8016B3D8(void);
 /* 16B41C */ bool gm_8016B41C(void);

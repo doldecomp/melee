@@ -2,6 +2,8 @@
 
 #include "ft/types.h"
 
+/* 4599F0 */ UnkCostumeStruct ftMr_CostumeList[5];
+
 char ftMr_Init_DatFilename[] = "PlMr.dat";
 char ftMr_Init_DataName[] = "ftDataMario";
 char ftMr_Strings_803C57E8[] = "PlMrNr.dat";

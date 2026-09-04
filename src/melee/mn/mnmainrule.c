@@ -1045,7 +1045,7 @@ void fn_802309F0(HSD_GObj* arg0)
     }
 }
 
-s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
+s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, int arg2)
 {
     GameRules* rules;
     s32 ret;
