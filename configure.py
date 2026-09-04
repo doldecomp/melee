@@ -1574,7 +1574,15 @@ config.libs = [
     MeleeLib(
         "ty (Toy, trophies)",
         [
-            Object(Linkable, "melee/ty/toy.c"),
+            Object(
+                Matching,
+                "melee/ty/toy.c",
+                # MWCC always emits .rodata with 8-byte alignment, but this
+                # TU's .rodata starts at 0x803B8844 -- the only 4-mod-8
+                # .rodata boundary in the game -- so mwld cannot place the
+                # compiled object without the override.
+                section_align={".rodata": 4},
+            ),
             Object(Matching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
             Object(Linkable, "melee/ty/tydisplay.c"),
