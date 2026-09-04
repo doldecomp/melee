@@ -3524,9 +3524,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
     ToyAnimState* anim = &base->anim;
 
     if (base->x3F0 != NULL) {
+        HSD_JObj* n2;
         HSD_JObj* jobj_child;
         HSD_JObj* jobj_next;
-        HSD_JObj* n2;
         f32 stick_x;
         f32 stick_y;
         f32 adj_x;
@@ -3837,10 +3837,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     } else if ((adj_x > 0.8f) || (Toy_80305C44() & 2)) {
                         HSD_JObjAddScaleX(jobj_child, 0.01f);
                         HSD_JObjAddScaleZ(jobj_child, 0.01f);
-                        {
-                            HSD_JObj* next = jobj_next->next;
-                            n2 = next;
-                        }
+                        n2 = jobj_next->next;
+                        (void) n2;
                         HSD_JObjAddScaleX(n2, 0.01f);
                         HSD_JObjAddScaleZ(n2, 0.01f);
                         _Toy_803062EC((s32) anim->xC, 4U,
@@ -3852,6 +3850,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         HSD_JObjAddScaleX(jobj_child, -0.01f);
                         HSD_JObjAddScaleZ(jobj_child, -0.01f);
                         n2 = jobj_next->next;
+                        (void) n2;
                         HSD_JObjAddScaleX(n2, -0.01f);
                         HSD_JObjAddScaleZ(n2, -0.01f);
                         _Toy_803062EC((s32) anim->xC, 4U,
