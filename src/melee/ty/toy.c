@@ -4964,11 +4964,13 @@ void _Toy_8030FA50(void)
 
 static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
 {
-    Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
-    s32 sort_mode;
+    s16* keys = _Toy_sbss_804D6E64->key;
+    s32 sort_mode = ((Toy26B8*) &_Toy_804A26B8)->x195;
 
-    sort_mode = toy->x195;
-    *ptr = &_Toy_sbss_804D6E64->key[sort_mode];
+    // Integer-domain on purpose: a pointer sum emits the base register first.
+    *ptr = (s16*) ((sort_mode << 1) + (uintptr_t) keys);
+    (void) keys;
+    (void) sort_mode;
 }
 
 inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry, s16 trophy_idx)
@@ -5014,13 +5016,13 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
     s16* sel = &toy->selectedIdx;
     s32 sort_idx = 0;
-    void* sym2;
     s32 count;
     s32 entry_count;
     void* sym;
     void* zero;
     s16* ptr;
     s32 start;
+    void* sym2;
 
     _Toy_8030FE48_init_sort_key(&ptr);
     data->selectedIdx = *sel;
