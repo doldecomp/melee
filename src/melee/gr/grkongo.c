@@ -230,28 +230,6 @@ void grKongo_801D55D8(Ground_GObj* arg0)
         rand_range(yakumono_param->unk68, yakumono_param->unk64);
     lb_8000B1CC(Ground_801C3FA4(arg0, 1), NULL, &sp14);
     Ground_801C4D70(arg0, &sp14, temp_r31->u.kongo.xD8);
-#if 0
-    temp_r31->unkCC = var_r29;
-    var_r29_2 = yakumono_param->unk68;
-    temp_r28_3 = yakumono_param->unk64;
-    if (var_r29_2 > temp_r28_3) {
-        temp_r3_3 = var_r29_2 - temp_r28_3;
-        if (temp_r3_3 != 0) {
-            var_r3_3 = HSD_Randi(temp_r3_3);
-        } else {
-            var_r3_3 = 0;
-        }
-        var_r29_2 = temp_r28_3 + var_r3_3;
-    } else if (var_r29_2 < temp_r28_3) {
-        temp_r3_4 = temp_r28_3 - var_r29_2;
-        if (temp_r3_4 != 0) {
-            var_r3_4 = HSD_Randi(temp_r3_4);
-        } else {
-            var_r3_4 = 0;
-        }
-        var_r29_2 += var_r3_4;
-    }
-#endif
 }
 
 bool grKongo_801D5774(Ground_GObj* arg)
@@ -827,14 +805,6 @@ static inline void rad_compare_b(f32 a, f32 b, f32* ret)
     *ret = (f32) (0.99 * (f64) (b + *ret));
 }
 
-typedef struct unk_struct_x14 {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-} unk_struct_x14;
-
 void grKongo_801D6AFC(void)
 {
     f32 sp44[15];
@@ -941,51 +911,6 @@ void grKongo_801D6AFC(void)
         }
     }
 }
-
-#if 0
-
-void grKongo_801D69B0(HSD_GObj *arg0) {
-    HSD_JObj *temp_r29;
-    f32 temp_f31;
-    s32 temp_cr0_eq;
-    s32 var_r3;
-    struct _struct_grKg_803E188C_0x18 *var_r30;
-    u32 temp_r4;
-    u32 var_r28;
-
-    var_r28 = 0U;
-    var_r30 = &grKg_803E188C[0];
-    do {
-        var_r30->unk4 = Ground_801C3FA4(arg0, (s32) var_r30->unk0);
-        var_r30->unkC = var_r30->unk8;
-        temp_r29 = var_r30->unk4;
-        temp_f31 = var_r30->unkC;
-        temp_r29->rotate.x = temp_f31;
-        HSD_JObjSetRotationX(temp_r30, &temp_f31);
-        var_r28 += 1;
-        var_r30 += 0x18;
-    } while (var_r28 < 0xFU);
-    grKg_804D6984.unk0 = Ground_801C3FA4(arg0, 0xB);
-    grKg_804D6984.unk4 = Ground_801C3FA4(arg0, 0x21);
-    grKongo_801D7134(arg0, 1);
-    grKongo_801D77E0(arg0, 1);
-    mpJointSetB10(4);
-}
-#endif
-
-#if 0
-
-
-? ftCo_8009EC70(Vec3 *, s32 *);                     /* extern */
-u32 it_802E18B4(HSD_GObj *);                        /* extern */
-? it_802E2330(Vec3 *, s32 *);                       /* extern */
-? mpLib_8005667C(?);                                /* extern */
-? mpVtxGetPos(?, f32 *, ? *);                    /* extern */
-? mpLib_80056758(s32, ?, f32, ?, f32);              /* extern */
-? ftCo_800C0764(?, s32 (*)(HSD_GObj *, HSD_GObj *)); /* extern */
-extern ? grKg_804D6984;
-static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
-#endif
 
 static inline f32 grKongo_calc_angle(s32 index)
 {
