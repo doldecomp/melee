@@ -662,7 +662,8 @@ void gm_801B5ACC(GameModeState* arg0)
         }
 
         for (i = 0; i < (s32) (&gm_803DEC4C[round])[1].count; i++) {
-            gm_80473A18._94[2 + i] = gm_803DEBE8[(s32) (&gm_803DEC4C[round])[1].start + i].x3;
+            gm_80473A18._94[2 + i] =
+                gm_803DEBE8[(s32) (&gm_803DEC4C[round])[1].start + i].x3;
         }
 
         gm_80473A18._94[1] = (u8) i;
