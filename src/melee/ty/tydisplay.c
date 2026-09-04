@@ -728,7 +728,7 @@ static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
                                                   TyDspConfig* cfg)
 {
     s32 k;
-    TyDspPos* pos = grid->pos;
+    TyDspGrid* cur = grid;
     s32 jobj_idx = 0;
 
     for (k = 0; k < cfg->x08; k++) {
@@ -737,10 +737,12 @@ static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
         gobj = cfg->x78;
         if (gobj != NULL) {
             _tyDisplay_804D6F10[jobj_idx] = (HSD_JObj*) gobj->hsd_obj;
-            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx], pos->x);
-            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx], pos->z);
+            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx],
+                                  cur->pos[0].x);
+            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx],
+                                  cur->pos[0].z);
             jobj_idx++;
-            pos++;
+            cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos));
         }
     }
 }
