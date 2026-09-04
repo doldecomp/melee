@@ -1894,6 +1894,7 @@ melee/ft/kinds/ftCLink/ftCl_AppealS.c:
 melee/ft/kinds/ftDrMario/ftDr_Init.c:
 	.text       start:0x8014949C end:0x80149954
 	.data       start:0x803D1498 end:0x803D1848
+	.bss        start:0x8045A3A8 end:0x8045A420
 	.sdata2     start:0x804D9DA8 end:0x804D9DB0
 
 melee/ft/kinds/ftDrMario/ftDr_AppealS.c:
@@ -1902,7 +1903,7 @@ melee/ft/kinds/ftDrMario/ftDr_AppealS.c:
 melee/ft/kinds/ftFalco/ftFc_Init.c:
 	.text       start:0x80149ACC end:0x80149E34
 	.data       start:0x803D1848 end:0x803D1EA8
-	.bss        start:0x8045A3A8 end:0x8045A480
+	.bss        start:0x8045A420 end:0x8045A480
 	.sdata2     start:0x804D9DB0 end:0x804D9DB8
 
 melee/ft/kinds/ftPichu/ftPc_Init.c:
@@ -1988,6 +1989,7 @@ melee/ft/kinds/ftSandbag/ftSb_Init.c:
 melee/ft/kinds/ftMasterHand/ftMh_Init.c:
 	.text       start:0x8014FC68 end:0x8014FE10
 	.data       start:0x803D3A30 end:0x803D40D0
+	.bss        start:0x8045A690 end:0x8045A6A8
 	.sdata2     start:0x804D9E80 end:0x804D9E88
 
 melee/ft/kinds/ftMasterHand/ftMh_Wait1_0.c:
@@ -2128,7 +2130,7 @@ melee/ft/kinds/ftMasterHand/ftMh_ThrownMasterHand.c:
 melee/ft/kinds/ftCrazyHand/ftCh_Init.c:
 	.text       start:0x80155E18 end:0x80155FCC
 	.data       start:0x803D41F8 end:0x803D4878
-	.bss        start:0x8045A690 end:0x8045A6C0
+	.bss        start:0x8045A6A8 end:0x8045A6C0
 	.sdata2     start:0x804DA050 end:0x804DA058
 
 melee/ft/kinds/ftCrazyHand/ftCh_Wait1_0.c:
