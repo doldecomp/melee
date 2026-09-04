@@ -147,16 +147,91 @@ StageData grKg_StageData = {
     ARRAY_SIZE(grKg_803E16E0),
 };
 
-#ifdef MUST_MATCH
-static void order_data(void)
-{
-    (void) "%s:%d: couldn t get gobj(id=%d)\n";
-}
-#endif
-
 static const lbColl_80008D30_arg1 grKg_803B7FB0 = {
     HitCapsule_Enabled, 1, 361, 0, 0, 180, 0, 0, 0,
 };
+
+void grKongo_801D5238(bool arg) {}
+
+void grKongo_801D523C(void)
+{
+    u8* temp_r5;
+
+    yakumono_param = Ground_GetYakumonoParam();
+    temp_r5 = (u8*) &stage_info.unk8C;
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grKongo_801D5340(0);
+    grKongo_801D5340(10);
+    grKongo_801D5340(5);
+    grKongo_801D5340(3);
+    grKongo_801D5340(6);
+    grKongo_801D5340(4);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    mpLib_80057BC0(0);
+    mpLib_80057BC0(1);
+    if ((Stage_80225194() != 0x3D) && (gm_8016B238() == 0)) {
+        Ground_801C53EC(0x5A551U);
+    }
+}
+
+void grKongo_801D52F8(void) {}
+
+void grKongo_801D52FC(void)
+{
+    HSD_GObj* gobj = Ground_GetMapGObj(5);
+    ftCo_800C0764(gobj, 2, fn_801D8134);
+    grZakoGenerator_801CAE04(NULL);
+}
+
+bool grKongo_801D5338(void)
+{
+    return false;
+}
+
+Ground_GObj* grKongo_801D5340(int gobj_id)
+{
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &grKg_StageCallbacks[gobj_id];
+    gobj = Ground_GetStageGObj(gobj_id);
+
+    if (gobj != NULL) {
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
+        }
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 270, gobj_id);
+    }
+
+    return gobj;
+}
+
+void fn_801D542C(HSD_GObj* arg0)
+{
+    Ground* gp;
+    f32 range;
+    f32 rand;
+    f32 min;
+
+    gp = arg0->user_data;
+    mpJointSetCb1(4, gp, fn_801D7700);
+    rand = HSD_Randf();
+    min = yakumono_param->unk0;
+    range = yakumono_param->unk4 - min;
+    gp->u.kongo.xE4 = (s16) ((range * rand) + min);
+}
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {
@@ -597,27 +672,6 @@ static struct _struct_grKg_803E188C_0x18 grKg_803E188C[0xF] = {
     { 0x2D, 0, NULL, 0.10471976f, 0.0f, 0.0f },
 };
 
-#ifdef MUST_MATCH
-static void order_data_1(void)
-{
-    (void) "translate";
-}
-#endif
-
-void grKongo_801D828C(HSD_GObj* gobj)
-{
-    Ground* gp = GET_GROUND(gobj);
-    if (gp->u.kongo3.xC6 != 1) {
-        return;
-    }
-    HSD_ASSERTMSG(1719, gp->u.kongo.u.taru.keep, "gp->u.taru.keep");
-    if (((u8*) gp->u.kongo.u.taru.keep)[2] == 8) {
-        gp->u.kongo3.xC6 = 0;
-        gp->u.kongo.u.taru.keep = NULL;
-        grMaterial_801C95C4(gobj);
-    }
-}
-
 void grKongo_801D637C(Ground_GObj* arg0)
 {
     Ground* temp_r31;
@@ -930,6 +984,14 @@ static inline f32 grKongo_calc_angle(s32 index)
     return angle;
 }
 
+#ifdef MUST_MATCH
+static inline void grKg_sdata2_order(void)
+{
+    (void) 0.7853981633974483;
+    (void) 6.0f;
+}
+#endif
+
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
     u32 i;
@@ -944,6 +1006,9 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 displacement;
     PAD_STACK(0x10);
 
+#ifdef MUST_MATCH
+    grKg_sdata2_order();
+#endif
     gp = gobj->user_data;
     grKongo_801D6AFC();
 
@@ -1004,148 +1069,6 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         line_id += 2;
         table++;
     } while (i < 15);
-}
-
-f32 grKongo_801D8314(void)
-{
-    s32 var_r3;
-    f32 var_f31;
-    s32 temp_r3 = yakumono_param->unk44 + yakumono_param->unk46 +
-                  yakumono_param->unk48 + yakumono_param->unk4A +
-                  yakumono_param->unk4C + yakumono_param->unk4E +
-                  yakumono_param->unk50 + yakumono_param->unk52;
-    if (temp_r3 != 0) {
-        var_r3 = HSD_Randi(temp_r3);
-    } else {
-        var_r3 = 0;
-    }
-    {
-        s32 temp_r3_2 = var_r3 - yakumono_param->unk44;
-        if (temp_r3_2 < 0) {
-            var_f31 = 2.3561945f;
-        } else {
-            s32 temp_r3_3 = temp_r3_2 - yakumono_param->unk46;
-            if (temp_r3_3 < 0) {
-                var_f31 = 1.5707964f;
-            } else {
-                s32 temp_r3_4 = temp_r3_3 - yakumono_param->unk48;
-                if (temp_r3_4 < 0) {
-                    var_f31 = 0.7853982f;
-                } else {
-                    s32 temp_r3_5 = temp_r3_4 - yakumono_param->unk4A;
-                    if (temp_r3_5 < 0) {
-                        var_f31 = 0.0f;
-                    } else {
-                        s32 temp_r3_6 = temp_r3_5 - yakumono_param->unk4C;
-                        if (temp_r3_6 < 0) {
-                            var_f31 = -0.7853982f;
-                        } else {
-                            s32 temp_r3_7 = temp_r3_6 - yakumono_param->unk4E;
-                            if (temp_r3_7 < 0) {
-                                var_f31 = -1.5707964f;
-                            } else {
-                                s32 temp_r3_8 =
-                                    temp_r3_7 - yakumono_param->unk50;
-                                if (temp_r3_8 < 0) {
-                                    var_f31 = -2.3561945f;
-                                } else {
-                                    temp_r3_8 -= yakumono_param->unk52;
-                                    if (temp_r3_8 < 0) {
-                                        var_f31 = -3.1415927f;
-                                    } else {
-                                        HSD_ASSERT(1753, 0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return var_f31;
-}
-
-void grKongo_801D5238(bool arg) {}
-
-void grKongo_801D523C(void)
-{
-    u8* temp_r5;
-
-    yakumono_param = Ground_GetYakumonoParam();
-    temp_r5 = (u8*) &stage_info.unk8C;
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grKongo_801D5340(0);
-    grKongo_801D5340(10);
-    grKongo_801D5340(5);
-    grKongo_801D5340(3);
-    grKongo_801D5340(6);
-    grKongo_801D5340(4);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    mpLib_80057BC0(0);
-    mpLib_80057BC0(1);
-    if ((Stage_80225194() != 0x3D) && (gm_8016B238() == 0)) {
-        Ground_801C53EC(0x5A551U);
-    }
-}
-
-void grKongo_801D52F8(void) {}
-
-void grKongo_801D52FC(void)
-{
-    HSD_GObj* gobj = Ground_GetMapGObj(5);
-    ftCo_800C0764(gobj, 2, fn_801D8134);
-    grZakoGenerator_801CAE04(NULL);
-}
-
-bool grKongo_801D5338(void)
-{
-    return false;
-}
-
-Ground_GObj* grKongo_801D5340(int gobj_id)
-{
-    Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grKg_StageCallbacks[gobj_id];
-    gobj = Ground_GetStageGObj(gobj_id);
-
-    if (gobj != NULL) {
-        /// @todo ::Ground_SetupStageCallbacks
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->on_init != NULL) {
-            callbacks->on_init(gobj);
-        }
-        if (callbacks->gobj_proc != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
-        }
-    } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 270, gobj_id);
-    }
-
-    return gobj;
-}
-
-void fn_801D542C(HSD_GObj* arg0)
-{
-    Ground* gp;
-    f32 range;
-    f32 rand;
-    f32 min;
-
-    gp = arg0->user_data;
-    mpJointSetCb1(4, gp, fn_801D7700);
-    rand = HSD_Randf();
-    min = yakumono_param->unk0;
-    range = yakumono_param->unk4 - min;
-    gp->u.kongo.xE4 = (s16) ((range * rand) + min);
 }
 
 /// @copydoc mpLib_JointCollisionCallback
@@ -1520,6 +1443,80 @@ void grKongo_801D8270(Ground_GObj* gobj)
     if (gp->u.inishie2.xC6 == 1) {
         gp->u.inishie2.xC6 = 2;
     }
+}
+
+void grKongo_801D828C(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->u.kongo3.xC6 != 1) {
+        return;
+    }
+    HSD_ASSERTMSG(1719, gp->u.kongo.u.taru.keep, "gp->u.taru.keep");
+    if (((u8*) gp->u.kongo.u.taru.keep)[2] == 8) {
+        gp->u.kongo3.xC6 = 0;
+        gp->u.kongo.u.taru.keep = NULL;
+        grMaterial_801C95C4(gobj);
+    }
+}
+
+f32 grKongo_801D8314(void)
+{
+    s32 var_r3;
+    f32 var_f31;
+    s32 temp_r3 = yakumono_param->unk44 + yakumono_param->unk46 +
+                  yakumono_param->unk48 + yakumono_param->unk4A +
+                  yakumono_param->unk4C + yakumono_param->unk4E +
+                  yakumono_param->unk50 + yakumono_param->unk52;
+    if (temp_r3 != 0) {
+        var_r3 = HSD_Randi(temp_r3);
+    } else {
+        var_r3 = 0;
+    }
+    {
+        s32 temp_r3_2 = var_r3 - yakumono_param->unk44;
+        if (temp_r3_2 < 0) {
+            var_f31 = 2.3561945f;
+        } else {
+            s32 temp_r3_3 = temp_r3_2 - yakumono_param->unk46;
+            if (temp_r3_3 < 0) {
+                var_f31 = 1.5707964f;
+            } else {
+                s32 temp_r3_4 = temp_r3_3 - yakumono_param->unk48;
+                if (temp_r3_4 < 0) {
+                    var_f31 = 0.7853982f;
+                } else {
+                    s32 temp_r3_5 = temp_r3_4 - yakumono_param->unk4A;
+                    if (temp_r3_5 < 0) {
+                        var_f31 = 0.0f;
+                    } else {
+                        s32 temp_r3_6 = temp_r3_5 - yakumono_param->unk4C;
+                        if (temp_r3_6 < 0) {
+                            var_f31 = -0.7853982f;
+                        } else {
+                            s32 temp_r3_7 = temp_r3_6 - yakumono_param->unk4E;
+                            if (temp_r3_7 < 0) {
+                                var_f31 = -1.5707964f;
+                            } else {
+                                s32 temp_r3_8 =
+                                    temp_r3_7 - yakumono_param->unk50;
+                                if (temp_r3_8 < 0) {
+                                    var_f31 = -2.3561945f;
+                                } else {
+                                    temp_r3_8 -= yakumono_param->unk52;
+                                    if (temp_r3_8 < 0) {
+                                        var_f31 = -3.1415927f;
+                                    } else {
+                                        HSD_ASSERT(1753, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return var_f31;
 }
 
 DynamicsDesc* grKongo_801D8444(enum_t arg)
