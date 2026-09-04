@@ -12,13 +12,13 @@
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0D4D.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmetal.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageIce.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>

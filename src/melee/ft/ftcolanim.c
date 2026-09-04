@@ -1,10 +1,10 @@
 #include "ftcolanim.h"
 
-#include "ft/chara/ftCommon/ftCo_HammerWait.h"
 #include "ft/fighter.h"
 #include "ft/ft_0D4D.h"
 #include "ft/ftaction.h"
 #include "ft/ftdata.h"
+#include "ft/kinds/ftCommon/ftCo_HammerWait.h"
 #include "gm/gm_1601.h"
 #include "lb/lb_013B.h"
 #include "pl/player.h"

@@ -1,8 +1,8 @@
 #include "ft_0892.h"
 
-#include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/inlines.h"
+#include "ft/kinds/ftFox/ftFx_AppealS.h"
 #include "it/it_26B1.h"
 #include "pl/plattack.h"
 #include "pl/pltrick.h"

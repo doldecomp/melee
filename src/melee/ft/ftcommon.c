@@ -32,10 +32,10 @@
 
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/items/it_2E5A.h"
-#include "it/items/itfflowerflame.h"
-#include "it/items/itrabbitc.h"
-#include "it/items/itsword.h"
+#include "it/kinds/it_2E5A.h"
+#include "it/kinds/itfflowerflame.h"
+#include "it/kinds/itrabbitc.h"
+#include "it/kinds/itsword.h"
 #include "lb/lb_013B.h"
 
 #include "mp/forward.h"
@@ -50,7 +50,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
-#include <melee/it/items/itpeachparasol.h>
+#include <melee/it/kinds/itpeachparasol.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

@@ -8,7 +8,7 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
-#include "it/items/ittools.h"
+#include "it/kinds/ittools.h"
 #include "it/types.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"

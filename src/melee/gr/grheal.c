@@ -18,7 +18,7 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
-#include "it/items/itcoin.h"
+#include "it/kinds/itcoin.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

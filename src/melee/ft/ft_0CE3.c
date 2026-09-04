@@ -8,7 +8,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include <melee/it/items/itfflower.h>
+#include <melee/it/kinds/itfflower.h>
 #include <melee/lb/lb_00B0.h>
 
 void ftCo_800CE620(HSD_GObj*); /* extern */

@@ -9,7 +9,7 @@
 #include "types.h"
 
 #include "it/it_26B1.h"
-#include "it/items/itheiho.h"
+#include "it/kinds/itheiho.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
