@@ -1977,24 +1977,24 @@ static inline f32 grZebes_Subtract(f32 lhs, f32 rhs)
 
 bool grZebes_801DBB60(Item_GObj* yaku)
 {
-    s32 last_idx;
     grZe_BubbleEntry* bubbles;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
+    grZe_BubbleEntry* ei;
+    s32 i;
+    int n;
+    s32 last_idx;
 
     HSD_ASSERT(0x898, yaku);
 
     bubbles = grZe_8049F170;
 
-    {
-        int i;
-        for (i = 0; i < 20; i++) {
-            if (bubbles[i].x00_active == 1 && i != 0 && i != 6) {
-                count++;
-                last_idx = i;
-                if (count > 2) {
-                    break;
-                }
+    for (n = 0; n < 20; n++) {
+        if (bubbles[n].x00_active == 1 && n != 0 && n != 6) {
+            count++;
+            last_idx = n;
+            if (count > 2) {
+                break;
             }
         }
     }
@@ -2017,8 +2017,6 @@ bool grZebes_801DBB60(Item_GObj* yaku)
     grMaterial_801C8E08(yaku);
 
     {
-        grZe_BubbleEntry* ei;
-        s32 i;
         f32 x1, y1, x2, y2;
 
         i = 0;
