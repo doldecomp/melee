@@ -830,8 +830,8 @@ void grKongo_801D6AFC(void)
     }
 
     {
-        _struct_grKg_803E188C_0x18* entry = grKg_803E188C;
-        s32 i;
+        s32 i = 0;
+        _struct_grKg_803E188C_0x18* entry = &grKg_803E188C[i];
 
         for (i = 15; i > 0; i--) {
             entry->unk10 += *values;
@@ -862,8 +862,8 @@ void grKongo_801D6AFC(void)
     }
 
     {
-        f32* p = sp8;
-        s32 i;
+        s32 i = 0;
+        f32* p = &sp8[i];
 
         for (i = 15; i > 0; i--) {
             *p++ = 0.0f;
