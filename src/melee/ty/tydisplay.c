@@ -717,6 +717,14 @@ inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 count)
     }
 }
 
+static inline s32 _tyDisplay_80318CB4_start(s32 i, s32 prev_ring_size)
+{
+    if (i < 0x24) {
+        return 0;
+    }
+    return i - (prev_ring_size * 2 - 6);
+}
+
 static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
 {
     return dx * dx + dz * dz;
@@ -760,7 +768,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
-    PAD_STACK(0x2C);
+    PAD_STACK(0x24);
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
@@ -797,16 +805,10 @@ void _tyDisplay_80318CB4(s32 arg0)
                                 grid->pos[i].z * grid->pos[i].z);
                 s32 collided;
                 s32 tries;
-                s32 dist_limit_i;
                 s32 start;
 
-                if (i < 0x24) {
-                    start = 0;
-                } else {
-                    start = i - (prev_ring_size * 2 - 6);
-                }
+                start = _tyDisplay_80318CB4_start(i, prev_ring_size);
 
-                dist_limit_i = (s32) dist_limit;
                 collided = 0;
                 while (collided == 0) {
                     grid->pos[i].x = mag * cosf(theta);
@@ -828,7 +830,7 @@ void _tyDisplay_80318CB4(s32 arg0)
                         }
                         {
                             s32 near;
-                            if ((s32) dist <= dist_limit_i) {
+                            if ((s32) dist <= (s32) dist_limit) {
                                 near = 1;
                             } else {
                                 near = 0;
