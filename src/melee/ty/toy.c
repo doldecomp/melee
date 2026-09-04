@@ -5055,21 +5055,16 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     if (data->visible_count == entry_count) {
-        s32 offset;
-        ToyListEntry* entry;
-
-        start = 0;
-        offset = start;
-        entry = data->entries;
-        for (; start < data->visible_count; offset += 2, entry++, start += 1) {
+        for (start = 0; start < data->visible_count; start += 1) {
             if (start == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
-                entry->archive = lbArchive_LoadSymbols(
-                    entry->archive_name, &sym, entry->symbol_name, 0);
+                _Toy_8030FE48_setup_entry(&data->entries[start],
+                                          Toy_sbss_804D6EDC[start]);
+                data->entries[start].archive = lbArchive_LoadSymbols(
+                    data->entries[start].archive_name, &sym,
+                    data->entries[start].symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
+                _Toy_8030FE48_setup_entry(&data->entries[start],
+                                          Toy_sbss_804D6EDC[start]);
             }
         }
 
@@ -5080,9 +5075,9 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     {
+        s32 startIdx;
         s32 loopCount;
         s32 prevIdx;
-        s32 startIdx;
         ToyListEntry* cur;
 
         prevIdx = data->selectedIdx - 1;
