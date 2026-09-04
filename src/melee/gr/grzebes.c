@@ -1559,11 +1559,6 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
     }
 }
 
-static inline Ground* grZebes_801DB088_GetGround(HSD_GObj* gobj)
-{
-    return GET_GROUND(gobj);
-}
-
 static inline s16 grZebes_801DB088_GetTimer(s32 arg1)
 {
     return grZe_8049F170[arg1].x02_timer;
@@ -1577,9 +1572,9 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
         HSD_GObj* gobj = grZe_8049F170[arg1].x20_gobj;
 
         if (gobj != NULL) {
-            Ground* bgp = grZebes_801DB088_GetGround(gobj);
+            Ground* bgp;
 
-            if (bgp != NULL) {
+            if ((bgp = GET_GROUND(gobj)) != NULL) {
                 if (bgp->u.zebes3.xC4 != NULL) {
                     if (grZe_8049F170[arg1].x00_active == 1) {
                         grMaterial_801C8E08(bgp->u.zebes3.xC4);
@@ -1607,13 +1602,13 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         grAnime_801C83D0(grZe_8049F170[arg1].x20_gobj, 0, 7) !=
                             0)
                     {
-                        HSD_JObj* jobj = grZe_8049F170[arg1].x04;
-                        HSD_JObjRemoveAll(jobj);
+                        HSD_JObj* jobj;
+                        HSD_JObjRemoveAll(grZe_8049F170[arg1].x04);
                         grZe_8049F170[arg1].x04 = NULL;
-                        if (GET_JOBJ(grZe_8049F170[arg1].x20_gobj) != NULL) {
-                            HSD_JObjClearFlagsAll(
-                                GET_JOBJ(grZe_8049F170[arg1].x20_gobj),
-                                JOBJ_HIDDEN);
+                        if ((jobj = GET_JOBJ(grZe_8049F170[arg1].x20_gobj)) !=
+                            NULL)
+                        {
+                            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                         }
                     }
 
@@ -1669,9 +1664,10 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                             ex = entry->x08_x;
                             best_idx = -1;
                             for (j = 7; j < 20; j++) {
-                                if (grZe_8049F170[j].x00_active == 1) {
-                                    f32 cx = grZe_8049F170[j].x08_x;
-                                    f32 cy = grZe_8049F170[j].x0C_y;
+                                grZe_BubbleEntry* cand = &grZe_8049F170[j];
+                                if (cand->x00_active == 1) {
+                                    f32 cx = cand->x08_x;
+                                    f32 cy = cand->x0C_y;
                                     f32 dx = cx - ex;
                                     f32 dy = cy - ey;
                                     f32 dx2 = dx * dx;
