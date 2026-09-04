@@ -17,8 +17,6 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
     f32 x_max;
     f32 y_max;
-    GXColor c;
-    u8 r, g, b, a;
 
     GXBegin(0x80, 0, 4);
 
@@ -27,39 +25,14 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 
     // Send the corners in clockwise order, starting with top left
 
-    GXWGFifo.f32 = x_min;
-    GXWGFifo.f32 = y_min;
-    a = color->a;
-    b = color->b;
-    g = color->g;
-    r = color->r;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_max;
-    GXWGFifo.f32 = y_min;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_max;
-    GXWGFifo.f32 = y_max;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_min;
-    GXWGFifo.f32 = y_max;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXEnd();
+    GXPosition2f32(x_min, y_min);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_max, y_min);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_max, y_max);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_min, y_max);
+    GXColor4u8(color->r, color->g, color->b, color->a);
 }
 
 static u8 lbl_80408630[0x268] = {
@@ -335,17 +308,9 @@ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
         b = ((u8*) &color)[2];
         a = ((u8*) &color)[3];
 
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
-
-        GXWGFifo.f32 = prev_x;
-        GXWGFifo.f32 = prev_y;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXColor4u8(r, g, b, a);
+        GXPosition2f32(prev_x, prev_y);
+        GXColor4u8(r, g, b, a);
     }
 }
 
