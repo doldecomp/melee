@@ -2026,25 +2026,26 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_size;
                 f32 ei_x;
                 f32 ei_y;
-                f32 ej_x;
-                f32 ej_y;
                 f32 dist_sq;
 
                 ei_y = ei->x0C_y;
                 ei_x = ei->x08_x;
                 ei_size = ei->x18_size;
+                (void) ei_y;
+                (void) ei_x;
+                (void) ei_size;
                 for (j = i + 1; j < 20; j++) {
                     if (grZe_8049F170[j].x00_active == 1 && j != 0 && j != 6) {
-                        ej_x = grZe_8049F170[j].x08_x;
-                        ej_y = grZe_8049F170[j].x0C_y;
-                        dist_sq = (ei_x - ej_x) * (ei_x - ej_x) +
-                                  (ei_y - ej_y) * (ei_y - ej_y);
+                        dist_sq = (ei_x - grZe_8049F170[j].x08_x) *
+                                      (ei_x - grZe_8049F170[j].x08_x) +
+                                  (ei_y - grZe_8049F170[j].x0C_y) *
+                                      (ei_y - grZe_8049F170[j].x0C_y);
                         if (max_dist_sq < dist_sq) {
                             max_dist_sq = dist_sq;
-                            x1 = ei_x;
-                            y1 = ei_y;
-                            x2 = ej_x;
-                            y2 = ej_y;
+                            x1 = ei->x08_x;
+                            y1 = ei->x0C_y;
+                            x2 = grZe_8049F170[j].x08_x;
+                            y2 = grZe_8049F170[j].x0C_y;
                             if (ei_size > grZe_8049F170[j].x18_size) {
                                 last_idx = i;
                             } else {
