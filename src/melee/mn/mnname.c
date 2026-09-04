@@ -199,8 +199,6 @@ s32 CompareNameStrings(char* str1, char* str2)
     }
 }
 
-void fn_802377A4(void) {}
-
 bool IsNameUnique(char* name)
 {
     int i;
