@@ -200,6 +200,22 @@ static inline u8 mnVibration_GetNameSlot(MnVibrationData* data, s32 j)
     return (u8) name_idx;
 }
 
+static inline s32 mnVibration_GetNameSlotRaw(MnVibrationData* data, s32 j)
+{
+    u8 scroll_offset = data->scroll_offset;
+    s32 count = GetNameCount();
+    s32 name_idx;
+
+    if ((count < 8) && (j >= count)) {
+        return 0xFF;
+    }
+    name_idx = scroll_offset + j;
+    if (count <= name_idx) {
+        return 0xFF;
+    }
+    return name_idx;
+}
+
 static inline u8 mnVibration_GetNameRumble(s32 name_idx)
 {
     return GetPersistentNameData(name_idx)->rumble_enabled;
@@ -275,8 +291,9 @@ static inline void mnVibration_AnimatePortPanel(MnVibrationData* data,
     HSD_JObj* jobj;
     u8 state;
 
-    state = data->x0[port + 2];
-    jobj = data->jobjs[mnVibration_PortPanelJointIds[(u8) port]];
+    state = data->x0[port + 2] & 0xFF;
+    jobj = ((MnVibrationData*) mnVibration_804D6C28->user_data)
+               ->jobjs[mnVibration_PortPanelJointIds[(u8) port]];
     HSD_JObjReqAnimAll(jobj, (f32) state);
     HSD_JObjAnimAll(jobj);
 }
@@ -403,11 +420,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     }
 
     // Handle name list navigation if names exist
-    {
-        s32 names_empty = GetNameCount() == 0;
-        if (names_empty) {
-            return;
-        }
+    if (GetNameCount() == 0) {
+        return;
     }
 
     // Check for up/down navigation
@@ -529,7 +543,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                     cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
         } else if (GetNameCount() > 8) {
-            if (mnVibration_GetNameSlot(data, 8) != 0xFF) {
+            if ((u8) mnVibration_GetNameSlotRaw(data, 8) != 0xFF) {
                 sfxMove();
                 data->scroll_offset++;
                 if (data->scroll_offset >= GetNameCount()) {
