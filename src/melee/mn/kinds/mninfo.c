@@ -342,8 +342,8 @@ void fn_80251FE4(void)
         return;
     }
     if (buttons & MenuInput_Up) {
-        if (data->scroll_idx != 0) {
-            data->scroll_idx -= 1;
+        if (data->parent.scroll_position != 0) {
+            data->parent.scroll_position -= 1;
             sfxMove();
             mnInfo_FreeEntries();
             {
@@ -353,7 +353,8 @@ void fn_80251FE4(void)
                 mnInfo_GObj* gobj;
 
                 gobj = mnInfo_804D6C78;
-                other = trophy = &mnInfo_804A0968[data->scroll_idx];
+                other = trophy =
+                    &mnInfo_804A0968[data->parent.scroll_position];
                 for (i = 0; i < 4; i++) {
                     (void) (other == trophy);
                     if (mnInfo_80251A08(*trophy) != 0) {
@@ -368,11 +369,11 @@ void fn_80251FE4(void)
         }
     } else if (buttons & MenuInput_Down) {
         count = mnInfo_CountUnlocked();
-        if ((data->scroll_idx + 4) < count) {
+        if ((data->parent.scroll_position + 4) < count) {
             sfxMove();
-            data->scroll_idx += 1;
+            data->parent.scroll_position += 1;
             mnInfo_FreeEntries();
-            mnInfo_CreateEntries(data->scroll_idx);
+            mnInfo_CreateEntries(data->parent.scroll_position);
         }
     }
 }
@@ -392,7 +393,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     jobj = gobj->hsd_obj;
     data = gobj->user_data;
     lb_80011E24(jobj, &child, 2, -1);
-    if (data->scroll_idx != 0) {
+    if (data->parent.scroll_position != 0) {
         HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -400,7 +401,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     lb_80011E24(jobj, &child, 1, -1);
     count = mnInfo_CountUnlocked();
 
-    if ((data->scroll_idx + 4) < count) {
+    if ((data->parent.scroll_position + 4) < count) {
         HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -450,14 +451,14 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
         jobj = gobj->hsd_obj;
 
         lb_80011E24(jobj, &child, 2, -1);
-        if (data->scroll_idx != 0) {
+        if (data->parent.scroll_position != 0) {
             HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
         lb_80011E24(jobj, &child, 1, -1);
-        if ((data->scroll_idx + 4) < mnInfo_80251AA4()) {
+        if ((data->parent.scroll_position + 4) < mnInfo_80251AA4()) {
             HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -505,8 +506,8 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_SisLib_803A5CC4(data->description);
         }
     } else {
-        if ((s32) data->anim_timer != 0) {
-            data->anim_timer--;
+        if ((s32) data->parent.transition_frames != 0) {
+            data->parent.transition_frames--;
             return;
         }
         for (i = 0; i < 4; i++) {
@@ -548,8 +549,8 @@ void fn_80252548(HSD_GObj* gobj)
 #endif
 void mnInfo_80252720(MnInfoData* data)
 {
-    data->scroll_idx = 0;
-    data->anim_timer = 10;
+    data->parent.scroll_position = 0;
+    data->parent.transition_frames = 10;
     data->description = NULL;
     data->left_column[0] = NULL;
     data->right_column[0] = NULL;

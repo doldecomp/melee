@@ -82,7 +82,7 @@ static inline void inline_update_entries(HSD_GObj* gobj)
     MnCountData* userdata = GET_MNCOUNT(gobj);
     int i;
     for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
+        mnCount_CreateRow(gobj, i, userdata->parent.scroll_position + i);
     }
 }
 
@@ -588,15 +588,15 @@ void mnCount_HandleUserInput(HSD_GObj* gobj)
             mn_804A04F0.entering_menu = 0;
             mn_80229894(MENU_KIND_RECORDS, 2, 3);
         } else if (x & MenuInput_Up) {
-            if (userdata->scroll_pos != 0) {
-                userdata->scroll_pos -= 1;
+            if (userdata->parent.scroll_position != 0) {
+                userdata->parent.scroll_position -= 1;
                 sfxMove();
                 inline_update_entries(menu_gobj);
             }
         } else if (x & MenuInput_Down) {
-            if (userdata->scroll_pos < MAX_SCROLL) {
+            if (userdata->parent.scroll_position < MAX_SCROLL) {
                 sfxMove();
-                userdata->scroll_pos += 1;
+                userdata->parent.scroll_position += 1;
                 inline_update_entries(menu_gobj);
             }
         }
@@ -611,7 +611,7 @@ void mnCount_UpdateArrowIndicators(HSD_GObj* gobj)
 
     // up arrow
     lb_80011E24(jobj, &child, 2, -1);
-    if (userdata->scroll_pos != 0) {
+    if (userdata->parent.scroll_position != 0) {
         HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -619,7 +619,7 @@ void mnCount_UpdateArrowIndicators(HSD_GObj* gobj)
 
     // down arrow
     lb_80011E24(jobj, &child, 1, -1);
-    if (userdata->scroll_pos < MAX_SCROLL) {
+    if (userdata->parent.scroll_position < MAX_SCROLL) {
         HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -677,7 +677,7 @@ static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
 
         // up arrow
         lb_80011E24(jobj, &child, 2, -1);
-        if (userdata->scroll_pos != 0) {
+        if (userdata->parent.scroll_position != 0) {
             HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -685,7 +685,7 @@ static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
 
         // down arrow
         lb_80011E24(jobj, &child, 1, -1);
-        if (userdata->scroll_pos < MAX_SCROLL) {
+        if (userdata->parent.scroll_position < MAX_SCROLL) {
             HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
@@ -731,7 +731,7 @@ static inline void fn_80251640_InitModel(HSD_GObj* gobj, MnCountData* userdata,
     HSD_JObj* jobj;
 
     for (; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
+        mnCount_CreateRow(gobj, i, userdata->parent.scroll_position + i);
     }
     md = &model_desc;
     jobj = HSD_JObjLoadJoint(md->joint);
@@ -758,8 +758,8 @@ void fn_80251640(HSD_GObj* gobj)
         return;
     }
 
-    if (userdata->expand_anim_duration != 0) {
-        userdata->expand_anim_duration--;
+    if (userdata->parent.transition_frames != 0) {
+        userdata->parent.transition_frames--;
         return;
     }
 
@@ -773,8 +773,8 @@ void fn_80251640(HSD_GObj* gobj)
 void mnCount_InitUserData(MnCountData* userdata)
 {
     int i;
-    userdata->scroll_pos = 0;
-    userdata->expand_anim_duration = 10;
+    userdata->parent.scroll_position = 0;
+    userdata->parent.transition_frames = 10;
     for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
         userdata->labels[i] = NULL;
         userdata->values[i] = NULL;

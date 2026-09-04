@@ -60,6 +60,15 @@ struct Menu {
 };
 ASSERT_SIZE(struct Menu, 0x8);
 
+/// Common user-data prefix for scrolling list menu kinds.
+/// Embedded as the first member of each kind's specialized user data.
+typedef struct MenuListState {
+    /* +0 */ u8 scroll_position;
+    /* +1 */ u8 pad_1[3];
+    /* +4 */ int transition_frames; ///< Counts down from 10 during entry.
+} MenuListState;
+ASSERT_SIZE(MenuListState, 0x8);
+
 struct CountEntry {
     u8 selkind;
     u8 pad[3];
@@ -688,14 +697,13 @@ typedef struct NameNewEntry {
 
 /// seems like each menu probably has its own struct, and isnt just #Menu
 struct MnInfoData {
-    /* +00 */ u8 scroll_idx;
-    /* +04 */ u32 anim_timer; ///< decrements from 10 when transitioning from
-                              ///< main menu to special menu
+    /* +00 */ MenuListState parent;
     /* +08 */ HSD_Text*
         left_column[4]; ///< date and time of achievement unlock
     /* +18 */ HSD_Text* right_column[4]; ///< achievement
     /* +28 */ HSD_Text* description;
 };
+ASSERT_SIZE(struct MnInfoData, 0x2C);
 
 struct soundtest_user_data {
     u8 unk0;

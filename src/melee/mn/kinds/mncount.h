@@ -11,12 +11,12 @@
 #define MNCOUNT_VISIBLE_ROWS 10
 
 typedef struct MnCountData {
-    unsigned char scroll_pos;
-    int expand_anim_duration;
+    MenuListState parent;
     HSD_Text* labels[MNCOUNT_VISIBLE_ROWS];
     HSD_Text* values[MNCOUNT_VISIBLE_ROWS];
     HSD_Text* title;
 } MnCountData;
+ASSERT_SIZE(MnCountData, 0x5C);
 
 #ifdef M2C
 #define GET_MNCOUNT(gobj)                                                     \
