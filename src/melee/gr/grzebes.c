@@ -1724,16 +1724,6 @@ static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
     return value * scale;
 }
 
-static inline f32 grZebes_801DB3CC_dist(f32 dy, f32 dx)
-{
-    return sqrtf(dx * dx + dy * dy);
-}
-
-static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
-{
-    return yp->x74 * 0.5f;
-}
-
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
@@ -1839,7 +1829,6 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        f32 zero = 0.0f;
         grZe_BubbleEntry* cur = base;
         int idx;
         for (idx = 0; idx < 7; idx++, cur++) {
@@ -1848,15 +1837,15 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                 s32 right_idx;
                 s32 neighbor_count = 0;
                 if (idx != 0 && idx != 6) {
-                    f32 fx = zero;
-                    f32 fy = zero;
+                    f32 fx = 0.0f;
+                    f32 fy = 0.0f;
                     s32 left_idx = idx - 1;
                     right_idx = idx + 1;
                     if (grZe_8049F170[left_idx].x00_active != 0) {
                         grZe_BubbleEntry* left = &grZe_8049F170[left_idx];
                         f32 dx = left->x08_x - cur->x08_x;
                         f32 dy = left->x0C_y - cur->x0C_y;
-                        f32 dist = grZebes_801DB3CC_dist(dy, dx);
+                        f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             f32 col_r = yakumono_param->x74;
                             if (dist > col_r) {
@@ -1885,14 +1874,16 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 f32 col_r2 = yakumono_param->x74;
                                 if (dist2 > col_r2) {
                                     f32 max_force2 = yakumono_param->x80;
-                                    f32 norm_x2 = dx2 / dist2;
-                                    f32 norm_y2 = dy2 / dist2;
-                                    f32 push2 = dist2 - col_r2;
+                                    f32 push2;
+
+                                    dx2 /= dist2;
+                                    push2 = dist2 - col_r2;
+                                    dist2 = dy2 / dist2;
                                     if (push2 > max_force2) {
                                         push2 = max_force2;
                                     }
-                                    fx += norm_x2 * push2;
-                                    fy += norm_y2 * push2;
+                                    fx += dx2 * push2;
+                                    fy += dist2 * push2;
                                 }
                             }
                             neighbor_count += 1;
@@ -1923,8 +1914,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
-                            f32 effective_dist = dist;
-                            f32 col_rad = grZebes_801DB3CC_half_radius(yp);
+                            f32 col_rad = yp->x74 * 0.5f;
                             f32 avg_size = ea->x18_size + eb->x18_size;
                             col_rad *= avg_size;
                             {
@@ -1933,13 +1923,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 if (dist < 0.001) {
                                     dy = 0.001;
                                     dx = 0.0f;
-                                    effective_dist = 0.001;
+                                    dist = 0.001;
                                 }
-                                if (effective_dist < col_rad) {
+                                if (dist < col_rad) {
                                     f32 strength =
-                                        (f32) (((f64) (col_rad /
-                                                       effective_dist) -
-                                                1.0) *
+                                        (f32) (((f64) (col_rad / dist) - 1.0) *
                                                0.5);
                                     strength = (f32) ((f64) strength * 0.9);
                                     if (a >= 7) {
@@ -1962,10 +1950,10 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                         eb->x10 += vx2;
                                         eb->x14 += vy2;
                                     }
-                                } else if (!(effective_dist < near_rad) &&
-                                           effective_dist < far_rad)
+                                } else if (!(dist < near_rad) &&
+                                           dist < far_rad)
                                 {
-                                    f32 attract = yp->x78 / effective_dist;
+                                    f32 attract = yp->x78 / dist;
                                     if (a >= 7) {
                                         f32 vx = dx * attract;
                                         f32 vy = dy * attract;
