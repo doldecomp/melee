@@ -139,19 +139,17 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
             f32 px;
             f32 py;
             GXBegin(0xB8, 0, 1);
-            px = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
-            py = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
+            px = lbl_804D6070 * 0.3 + x;
+            py = lbl_804D6074 * 0.9 + y;
             GXPosition2f32(px, py);
             GXColor4u8(color->r, color->g, color->b, color->a);
             return lbl_804D6070;
         }
         case ':': {
             GXBegin(0xB8, 0, 2);
-            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                           (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
+            GXPosition2f32(lbl_804D6070 * 0.3 + x, lbl_804D6074 * 0.3 + y);
             GXColor4u8(color->r, color->g, color->b, color->a);
-            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                           (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
+            GXPosition2f32(lbl_804D6070 * 0.3 + x, lbl_804D6074 * 0.7 + y);
             GXColor4u8(color->r, color->g, color->b, color->a);
             return lbl_804D6070;
         }
@@ -263,7 +261,6 @@ ret_zero:
     return 0;
 }
 
-// @TODO: Currently 98.73% match - hexval branch condition inversion
 s32 hsd_80391AC8(char* str, GXColor* color, f32 x, f32 y)
 {
     GXColor col;
