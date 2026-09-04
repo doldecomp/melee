@@ -1905,12 +1905,12 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
-                            f32 col_rad = yp->x74 * 0.5f;
+                            f32 col_rad = yp->x74 / 2.0f;
                             f32 avg_size = ea->x18_size + eb->x18_size;
                             col_rad *= avg_size;
                             {
-                                f32 near_rad = yp->x70 * 0.5f * avg_size;
-                                f32 far_rad = yp->x6C * 0.5f * avg_size;
+                                f32 near_rad = yp->x70 / 2.0f * avg_size;
+                                f32 far_rad = yp->x6C / 2.0f * avg_size;
                                 if (dist < 0.001) {
                                     dy = 0.001;
                                     dx = 0.0f;
@@ -1918,9 +1918,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 }
                                 if (dist < col_rad) {
                                     f32 strength =
-                                        (f32) (((f64) (col_rad / dist) - 1.0) *
-                                               0.5);
-                                    strength = (f32) ((f64) strength * 0.9);
+                                        (f32) (((f64) (col_rad / dist) - 1.0) /
+                                               2.0);
+                                    strength *= 0.9;
                                     if (a >= 7) {
                                         f32 vx = -dx * strength;
                                         f32 vy = -dy * strength;
