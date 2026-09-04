@@ -21,7 +21,7 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmainrule.h>
+#include <melee/mn/kinds/mnmainrule.h>
 #include <melee/sc/types.h>
 
 HSD_GObj* mnItemSw_804D6BE8;

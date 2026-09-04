@@ -17,7 +17,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mnlanguage.h>
+#include <melee/mn/kinds/mnlanguage.h>
 #include <melee/mn/mnmain.h>
 
 struct mnUserData {

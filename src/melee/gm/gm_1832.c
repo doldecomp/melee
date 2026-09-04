@@ -16,7 +16,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
-#include "mn/mnname.h"
+#include "mn/kinds/mnname.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"

@@ -19,9 +19,9 @@
 #include "mn/forward.h"
 
 #include "mn/inlines.h"
+#include "mn/kinds/mnmainrule.h"
+#include "mn/kinds/mnstagesw.h"
 #include "mn/mnmain.h"
-#include "mn/mnmainrule.h"
-#include "mn/mnstagesw.h"
 #include "mn/types.h"
 #include "sc/types.h"
 

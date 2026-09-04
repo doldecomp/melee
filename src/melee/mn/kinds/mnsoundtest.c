@@ -1,16 +1,16 @@
 #include "mnsoundtest.h"
 
-#include "inlines.h"
-#include "types.h"
-
 #include <platform.h>
-
-#include "forward.h"
 
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
+
+#include "mn/forward.h"
+
+#include "mn/inlines.h"
+#include "mn/types.h"
 
 #include <baselib/forward.h>
 

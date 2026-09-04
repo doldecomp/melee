@@ -19,10 +19,10 @@
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mn/inlines.h"
+#include "mn/kinds/mnmainrule.h"
+#include "mn/kinds/mnname.h"
+#include "mn/kinds/mnnamenew.h"
 #include "mn/mnmain.h"
-#include "mn/mnmainrule.h"
-#include "mn/mnname.h"
-#include "mn/mnnamenew.h"
 #include "sc/types.h"
 
 #include <dolphin/pad.h>

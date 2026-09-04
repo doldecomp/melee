@@ -1,6 +1,6 @@
-#include "mn/mndatadel.h"
+#include "mn/kinds/mndatadel.h"
 
-#include "mn/mndatadel.static.h"
+#include "mn/kinds/mndatadel.static.h"
 
 #include "placeholder.h"
 
@@ -22,8 +22,8 @@
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
+#include "mn/kinds/mnmainrule.h"
 #include "mn/mnmain.h"
-#include "mn/mnmainrule.h"
 #include "sc/types.h"
 #include "sysdolphin/baselib/debug.h"
 #include "ty/toy.h"

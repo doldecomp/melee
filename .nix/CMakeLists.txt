@@ -801,30 +801,30 @@ set(SOURCES
     src/melee/lb/lbvector.c
     src/melee/mn/mn_22EC.c
     src/melee/mn/mncharsel.c
-    src/melee/mn/mncount.c
-    src/melee/mn/mndatadel.c
-    src/melee/mn/mndeflicker.c
-    src/melee/mn/mndiagram2.c
-    src/melee/mn/mndiagram3.c
-    src/melee/mn/mndiagram.c
-    src/melee/mn/mnevent.c
-    src/melee/mn/mngallery.c
-    src/melee/mn/mnhyaku.c
-    src/melee/mn/mninfobonus.c
-    src/melee/mn/mninfo.c
-    src/melee/mn/mnitemsw.c
-    src/melee/mn/mnlanguage.c
+    src/melee/mn/kinds/mncount.c
+    src/melee/mn/kinds/mndatadel.c
+    src/melee/mn/kinds/mndeflicker.c
+    src/melee/mn/kinds/mndiagram2.c
+    src/melee/mn/kinds/mndiagram3.c
+    src/melee/mn/kinds/mndiagram.c
+    src/melee/mn/kinds/mnevent.c
+    src/melee/mn/kinds/mngallery.c
+    src/melee/mn/kinds/mnhyaku.c
+    src/melee/mn/kinds/mninfobonus.c
+    src/melee/mn/kinds/mninfo.c
+    src/melee/mn/kinds/mnitemsw.c
+    src/melee/mn/kinds/mnlanguage.c
     src/melee/mn/mnmain.c
-    src/melee/mn/mnmainrule.c
-    src/melee/mn/mnname.c
-    src/melee/mn/mnnamenew.c
-    src/melee/mn/mnruleplus.c
-    src/melee/mn/mnsnap.c
-    src/melee/mn/mnsound.c
-    src/melee/mn/mnsoundtest.c
+    src/melee/mn/kinds/mnmainrule.c
+    src/melee/mn/kinds/mnname.c
+    src/melee/mn/kinds/mnnamenew.c
+    src/melee/mn/kinds/mnruleplus.c
+    src/melee/mn/kinds/mnsnap.c
+    src/melee/mn/kinds/mnsound.c
+    src/melee/mn/kinds/mnsoundtest.c
     src/melee/mn/mnstagesel.c
-    src/melee/mn/mnstagesw.c
-    src/melee/mn/mnvibration.c
+    src/melee/mn/kinds/mnstagesw.c
+    src/melee/mn/kinds/mnvibration.c
     src/melee/mp/mpcoll.c
     src/melee/mp/mpisland.c
     src/melee/mp/mplib.c

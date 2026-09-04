@@ -7,8 +7,8 @@
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
+#include "mn/kinds/mnname.h"
 #include "mn/mnmain.h"
-#include "mn/mnname.h"
 #include "pl/player.h"
 #include "sc/types.h"
 

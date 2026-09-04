@@ -16,8 +16,8 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
+#include <melee/mn/kinds/mnruleplus.h>
 #include <melee/mn/mnmain.h>
-#include <melee/mn/mnruleplus.h>
 #include <melee/sc/types.h>
 
 #define NUM_STAGES 29

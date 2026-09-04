@@ -1,7 +1,5 @@
 #include "mnname.h"
 
-#include "inlines.h"
-#include "mnmain.h"
 #include "mnmainrule.h"
 
 #include "mnname.static.h"
@@ -15,6 +13,8 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
 
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

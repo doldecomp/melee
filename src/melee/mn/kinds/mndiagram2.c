@@ -24,8 +24,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mndiagram.h>
-#include <melee/mn/mndiagram3.h>
+#include <melee/mn/kinds/mndiagram.h>
+#include <melee/mn/kinds/mndiagram3.h>
 #include <melee/mn/mnmain.h>
 
 GXColor mnDiagram2_804D4FB8 = { 0, 0, 0, 0xFF };

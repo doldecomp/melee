@@ -3346,35 +3346,35 @@ melee/mn/mn_22EC.c:
 	.text       start:0x8022EC18 end:0x8022F538
 	.sdata2     start:0x804DBDE0 end:0x804DBDF0
 
-melee/mn/mnmainrule.c:
+melee/mn/kinds/mnmainrule.c:
 	.text       start:0x8022F538 end:0x8023201C
 	.data       start:0x803EC600 end:0x803ED1D0
 	.sdata      start:0x804D4B88 end:0x804D4B98
 	.sbss       start:0x804D6BD0 end:0x804D6BE0
 	.sdata2     start:0x804DBDF0 end:0x804DBE38
 
-melee/mn/mnruleplus.c:
+melee/mn/kinds/mnruleplus.c:
 	.text       start:0x8023201C end:0x80233A98
 	.data       start:0x803ED1D0 end:0x803ED340
 	.sdata      start:0x804D4B98 end:0x804D4BA0
 	.sbss       start:0x804D6BE0 end:0x804D6BE8
 	.sdata2     start:0x804DBE38 end:0x804DBE70
 
-melee/mn/mnitemsw.c:
+melee/mn/kinds/mnitemsw.c:
 	.text       start:0x80233A98 end:0x8023593C
 	.data       start:0x803ED340 end:0x803ED488
 	.sdata      start:0x804D4BA0 end:0x804D4BB8
 	.sbss       start:0x804D6BE8 end:0x804D6BF0
 	.sdata2     start:0x804DBE70 end:0x804DBEA8
 
-melee/mn/mnstagesw.c:
+melee/mn/kinds/mnstagesw.c:
 	.text       start:0x8023593C end:0x8023749C
 	.data       start:0x803ED488 end:0x803ED538
 	.sdata      start:0x804D4BB8 end:0x804D4BD0
 	.sbss       start:0x804D6BF0 end:0x804D6BF8
 	.sdata2     start:0x804DBEA8 end:0x804DBED8
 
-melee/mn/mnname.c:
+melee/mn/kinds/mnname.c:
 	.text       start:0x8023749C end:0x8023B0F8
 	.rodata     start:0x803B8510 end:0x803B8528
 	.data       start:0x803ED538 end:0x803EDA58
@@ -3383,7 +3383,7 @@ melee/mn/mnname.c:
 	.sbss       start:0x804D6BF8 end:0x804D6C08
 	.sdata2     start:0x804DBED8 end:0x804DBF20
 
-melee/mn/mnnamenew.c:
+melee/mn/kinds/mnnamenew.c:
 	.text       start:0x8023B0F8 end:0x8023EA2C
 	.rodata     start:0x803B8528 end:0x803B8538
 	.data       start:0x803EDA58 end:0x803EE728
@@ -3392,7 +3392,7 @@ melee/mn/mnnamenew.c:
 	.sbss       start:0x804D6C08 end:0x804D6C10
 	.sdata2     start:0x804DBF20 end:0x804DBF70
 
-melee/mn/mndiagram.c:
+melee/mn/kinds/mndiagram.c:
 	.text       start:0x8023EA2C end:0x80243A3C
 	.data       start:0x803EE728 end:0x803EEACA
 	.bss        start:0x804A0750 end:0x804A0868
@@ -3400,21 +3400,21 @@ melee/mn/mndiagram.c:
 	.sbss       start:0x804D6C10 end:0x804D6C18
 	.sdata2     start:0x804DBF70 end:0x804DBFC8
 
-melee/mn/mndiagram2.c:
+melee/mn/kinds/mndiagram2.c:
 	.text       start:0x80243A3C end:0x80245BA4
 	.data       start:0x803EEAD0 end:0x803EEC10
 	.sdata      start:0x804D4FB8 end:0x804D4FD8
 	.sbss       start:0x804D6C18 end:0x804D6C20
 	.sdata2     start:0x804DBFC8 end:0x804DBFF0
 
-melee/mn/mndiagram3.c:
+melee/mn/kinds/mndiagram3.c:
 	.text       start:0x80245BA4 end:0x802474C4
 	.data       start:0x803EEC10 end:0x803EECE0
 	.sdata      start:0x804D4FD8 end:0x804D4FE8
 	.sbss       start:0x804D6C20 end:0x804D6C28
 	.sdata2     start:0x804DBFF0 end:0x804DC018
 
-melee/mn/mnvibration.c:
+melee/mn/kinds/mnvibration.c:
 	.text       start:0x802474C4 end:0x802492CC
 	.data       start:0x803EECE0 end:0x803EEED8
 	.bss        start:0x804A0868 end:0x804A08A8
@@ -3422,7 +3422,7 @@ melee/mn/mnvibration.c:
 	.sbss       start:0x804D6C28 end:0x804D6C30
 	.sdata2     start:0x804DC018 end:0x804DC068
 
-melee/mn/mnsound.c:
+melee/mn/kinds/mnsound.c:
 	.text       start:0x802492CC end:0x8024A168
 	.data       start:0x803EEED8 end:0x803EEFD1
 	.bss        start:0x804A08A8 end:0x804A08B8
@@ -3430,21 +3430,21 @@ melee/mn/mnsound.c:
 	.sbss       start:0x804D6C30 end:0x804D6C34
 	.sdata2     start:0x804DC068 end:0x804DC098
 
-melee/mn/mndeflicker.c:
+melee/mn/kinds/mndeflicker.c:
 	.text       start:0x8024A168 end:0x8024A790
 	.data       start:0x803EEFD8 end:0x803EF0A8
 	.bss        start:0x804A08B8 end:0x804A08C8
 	.sbss       start:0x804D6C38 end:0x804D6C40
 	.sdata2     start:0x804DC098 end:0x804DC0C0
 
-melee/mn/mnsoundtest.c:
+melee/mn/kinds/mnsoundtest.c:
 	.text       start:0x8024A790 end:0x8024BFE0
 	.data       start:0x803EF0A8 end:0x803EF5A0
 	.bss        start:0x804A08C8 end:0x804A08D8
 	.sbss       start:0x804D6C40 end:0x804D6C50
 	.sdata2     start:0x804DC0C0 end:0x804DC110
 
-melee/mn/mnlanguage.c:
+melee/mn/kinds/mnlanguage.c:
 	.text       start:0x8024BFE0 end:0x8024C68C
 	.data       start:0x803EF5A0 end:0x803EF661
 	.bss        start:0x804A08D8 end:0x804A08E8
@@ -3452,7 +3452,7 @@ melee/mn/mnlanguage.c:
 	.sbss       start:0x804D6C50 end:0x804D6C54
 	.sdata2     start:0x804DC110 end:0x804DC12C
 
-melee/mn/mnhyaku.c:
+melee/mn/kinds/mnhyaku.c:
 	.text       start:0x8024C68C end:0x8024CE74
 	.data       start:0x803EF668 end:0x803EF73D
 	.bss        start:0x804A08E8 end:0x804A08F8
@@ -3460,7 +3460,7 @@ melee/mn/mnhyaku.c:
 	.sbss       start:0x804D6C58 end:0x804D6C60
 	.sdata2     start:0x804DC130 end:0x804DC150
 
-melee/mn/mnevent.c:
+melee/mn/kinds/mnevent.c:
 	.text       start:0x8024CE74 end:0x8024E940
 	.data       start:0x803EF740 end:0x803EF870
 	.bss        start:0x804A08F8 end:0x804A0918
@@ -3468,7 +3468,7 @@ melee/mn/mnevent.c:
 	.sbss       start:0x804D6C60 end:0x804D6C68
 	.sdata2     start:0x804DC150 end:0x804DC1A0
 
-melee/mn/mndatadel.c:
+melee/mn/kinds/mndatadel.c:
 	.text       start:0x8024E940 end:0x802502CC
 	.data       start:0x803EF870 end:0x803EFA88
 	.bss        start:0x804A0918 end:0x804A0948
@@ -3476,7 +3476,7 @@ melee/mn/mndatadel.c:
 	.sbss       start:0x804D6C68 end:0x804D6C70
 	.sdata2     start:0x804DC1A0 end:0x804DC1D8
 
-melee/mn/mncount.c:
+melee/mn/kinds/mncount.c:
 	.text       start:0x802502CC end:0x80251A08
 	.data       start:0x803EFA88 end:0x803EFC08
 	.bss        start:0x804A0948 end:0x804A0958
@@ -3484,28 +3484,28 @@ melee/mn/mncount.c:
 	.sbss       start:0x804D6C70 end:0x804D6C78
 	.sdata2     start:0x804DC1D8 end:0x804DC218
 
-melee/mn/mninfo.c:
+melee/mn/kinds/mninfo.c:
 	.text       start:0x80251A08 end:0x802528F8
 	.data       start:0x803EFC08 end:0x803EFCE8
 	.bss        start:0x804A0958 end:0x804A09B0
 	.sbss       start:0x804D6C78 end:0x804D6C80
 	.sdata2     start:0x804DC218 end:0x804DC268
 
-melee/mn/mninfobonus.c:
+melee/mn/kinds/mninfobonus.c:
 	.text       start:0x802528F8 end:0x80253184
 	.data       start:0x803EFCE8 end:0x803F0168
 	.bss        start:0x804A09B0 end:0x804A0A10
 	.sbss       start:0x804D6C80 end:0x804D6C88
 	.sdata2     start:0x804DC268 end:0x804DC2C0
 
-melee/mn/mnsnap.c:
+melee/mn/kinds/mnsnap.c:
 	.text       start:0x80253184 end:0x80258940
 	.data       start:0x803F0168 end:0x803F0570
 	.bss        start:0x804A0A10 end:0x804A0BA0
 	.sdata      start:0x804D5070 end:0x804D5090
 	.sdata2     start:0x804DC2C0 end:0x804DC358
 
-melee/mn/mngallery.c:
+melee/mn/kinds/mngallery.c:
 	.text       start:0x80258940 end:0x802599EC
 	.rodata     start:0x803B8538 end:0x803B8550
 	.data       start:0x803F0570 end:0x803F06CC

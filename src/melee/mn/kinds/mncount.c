@@ -19,10 +19,10 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mncount.h>
-#include <melee/mn/mndiagram.h>
+#include <melee/mn/kinds/mncount.h>
+#include <melee/mn/kinds/mndiagram.h>
+#include <melee/mn/kinds/mnname.h>
 #include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
 #include <melee/mn/types.h>
 #include <melee/sc/types.h>
 

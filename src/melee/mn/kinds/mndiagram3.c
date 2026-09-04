@@ -1,6 +1,6 @@
 #include "mndiagram3.h"
 
-#include "mn/mndiagram2.static.h"
+#include "mn/kinds/mndiagram2.static.h"
 
 #include "baselib/debug.h"
 
@@ -18,10 +18,10 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mndiagram.h>
-#include <melee/mn/mndiagram2.h>
+#include <melee/mn/kinds/mndiagram.h>
+#include <melee/mn/kinds/mndiagram2.h>
+#include <melee/mn/kinds/mnname.h>
 #include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
 #include <melee/mn/types.h>
 
 typedef struct mnDiagram3_PosTable {

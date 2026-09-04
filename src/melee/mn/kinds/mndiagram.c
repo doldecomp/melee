@@ -23,10 +23,10 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
-#include "mn/mndiagram2.h"
-#include "mn/mndiagram3.h"
+#include "mn/kinds/mndiagram2.h"
+#include "mn/kinds/mndiagram3.h"
+#include "mn/kinds/mnname.h"
 #include "mn/mnmain.h"
-#include "mn/mnname.h"
 
 /// @todo Split-derived data; types are inferred.
 void* mnDiagram_804A0814[4];

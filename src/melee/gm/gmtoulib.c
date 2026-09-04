@@ -20,8 +20,8 @@
 
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
+#include "mn/kinds/mnname.h"
 #include "mn/mnmain.h"
-#include "mn/mnname.h"
 #include "mn/mnstagesel.h"
 
 #include "pl/forward.h"

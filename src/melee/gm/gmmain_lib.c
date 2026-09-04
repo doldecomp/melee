@@ -20,7 +20,7 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
-#include <melee/mn/mnname.h>
+#include <melee/mn/kinds/mnname.h>
 #include <melee/ty/toy.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);

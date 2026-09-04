@@ -1,14 +1,14 @@
 #include "mninfobonus.h"
 
-#include "inlines.h"
-
 #include "mninfobonus.static.h"
-
-#include "mnmain.h"
 
 #include "baselib/archive.h"
 
 #include "baselib/forward.h"
+
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
+
 #include "sc/forward.h"
 
 #include <baselib/controller.h>
