@@ -393,7 +393,7 @@ static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
     }
 }
 
-void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
+void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 {
     s8 chars[3];
     u8 colors[3];
