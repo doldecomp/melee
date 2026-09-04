@@ -30,7 +30,7 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/types.h"
-#include "ftYoshi/ftYs_Guard.h"
+#include "ftYoshi/ftyoshiguard.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "pl/player.h"

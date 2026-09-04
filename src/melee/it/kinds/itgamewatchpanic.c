@@ -3,7 +3,7 @@
 #include "inlines.h"
 
 #include "ft/ftlib.h"
-#include "ft/kinds/ftGameWatch/ftGw_SpecialLw.h"
+#include "ft/kinds/ftGameWatch/ftgamewatchspeciallw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"

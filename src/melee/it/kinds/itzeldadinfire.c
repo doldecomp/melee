@@ -7,7 +7,7 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
-#include "ft/kinds/ftZelda/ftZd_SpecialLw.h"
+#include "ft/kinds/ftZelda/ftzeldaspeciallw.h"
 
 #include "it/forward.h"
 

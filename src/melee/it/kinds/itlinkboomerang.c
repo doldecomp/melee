@@ -4,8 +4,8 @@
 
 #include "baselib/mtx.h"
 #include "ft/ftlib.h"
-#include "ft/kinds/ftLink/ftLk_SpecialS.h"
-#include "ftLink/ftLk_SpecialHi.h"
+#include "ft/kinds/ftLink/ftlinkspecials.h"
+#include "ftLink/ftlinkspecialhi.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

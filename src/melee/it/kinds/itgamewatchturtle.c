@@ -3,7 +3,7 @@
 #include "inlines.h"
 
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/kinds/ftGameWatch/ftGw_AttackAir.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattackair.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

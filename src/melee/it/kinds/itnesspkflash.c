@@ -6,7 +6,7 @@
 #include "db/db.h"
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftNess/ftNs_SpecialN.h"
+#include "ft/kinds/ftNess/ftnessspecialn.h"
 
 #include "it/forward.h"
 
