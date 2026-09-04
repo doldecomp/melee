@@ -1670,8 +1670,10 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                             best_idx = -1;
                             for (j = 7; j < 20; j++) {
                                 if (grZe_8049F170[j].x00_active == 1) {
-                                    f32 dx = grZe_8049F170[j].x08_x - ex;
-                                    f32 dy = grZe_8049F170[j].x0C_y - ey;
+                                    f32 cx = grZe_8049F170[j].x08_x;
+                                    f32 cy = grZe_8049F170[j].x0C_y;
+                                    f32 dx = cx - ex;
+                                    f32 dy = cy - ey;
                                     f32 dx2 = dx * dx;
                                     f32 dy2 = dy * dy;
                                     f32 dist = dx2 + dy2;
@@ -1715,7 +1717,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
             }
         }
     }
-    PAD_STACK(8);
     return result;
 }
 
