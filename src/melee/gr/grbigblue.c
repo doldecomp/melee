@@ -3284,12 +3284,12 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             active_count = 1;
         }
         p = bp + 0x40;
-        st = (bp[0x114] >> 2) & 0x3F;
+        st = (p[0xD4] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
-        st = (p[0x114] >> 2) & 0x3F;
         p += 0x40;
+        st = (p[0xD4] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
@@ -3314,6 +3314,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         if (found_ten == 0 && closest_lane != -1) {
             register s32 st_val;
             register u8 byte;
+            u8* p;
             u8* target_car = bp + (closest_lane << 6);
 
             st_val = 10;
@@ -3339,49 +3340,53 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 }
             }
 
+            p = bp + 0x40;
             {
-                u32 st = (bp[0x114] >> 2) & 0x3F;
+                u32 st = (p[0xD4] >> 2) & 0x3F;
                 if ((st == 7 &&
-                     *(f32*) (bp + 0x120) < *(f32*) (target_car + 0xE0)) ||
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
                     (st == 8 &&
-                     *(f32*) (bp + 0x120) > *(f32*) (target_car + 0xE0)))
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    byte = bp[0x114];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                    bp[0x114] = byte;
+                    p[0xD4] = byte;
                 }
             }
 
             {
-                u8* p2 = bp + 0x80;
-                u32 st = (bp[0x154] >> 2) & 0x3F;
+                u32 st;
+                p += 0x40;
+                st = (p[0xD4] >> 2) & 0x3F;
                 if ((st == 7 &&
-                     *(f32*) (p2 + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
                     (st == 8 &&
-                     *(f32*) (p2 + 0xE0) > *(f32*) (target_car + 0xE0)))
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    byte = p2[0xD4];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                    p2[0xD4] = byte;
+                    p[0xD4] = byte;
                 }
+            }
+
+            {
+                u32 st;
+                p += 0x40;
+                st = (p[0xD4] >> 2) & 0x3F;
+                if ((st == 7 &&
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                    (st == 8 &&
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    u8* p3 = p2 + 0x40;
-                    u32 st3 = (p2[0x114] >> 2) & 0x3F;
-                    if ((st3 == 7 &&
-                         *(f32*) (p3 + 0xE0) < *(f32*) (target_car + 0xE0)) ||
-                        (st3 == 8 &&
-                         *(f32*) (p3 + 0xE0) > *(f32*) (target_car + 0xE0)))
-                    {
-                        byte = p3[0xD4];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
-                        asm { rlwimi byte, st_val, 2, 24, 29 }
+                    asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                        p3[0xD4] = byte;
-                    }
+                    p[0xD4] = byte;
                 }
             }
         }
@@ -3390,25 +3395,33 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     /* Timer-based car spawn */
     {
         u8* bp = (u8*) gp;
+        u8* p;
+        u32 st;
         s16 timer = gp->u.bigblue.car.spawn_timer;
         gp->u.bigblue.car.spawn_timer = timer - 1;
         if (timer < 0) {
             active_count = -1;
             if ((u32) ((bp[0xD4] >> 2) & 0x3F) == 1) {
                 active_count = 0;
-            } else if ((u32) ((bp[0x114] >> 2) & 0x3F) == 1) {
-                active_count = 1;
-            } else if ((u32) ((bp[0x154] >> 2) & 0x3F) == 1) {
-                active_count = 2;
-            } else if ((u32) ((bp[0x194] >> 2) & 0x3F) == 1) {
-                active_count = 3;
+            } else {
+                p = bp + 0x40;
+                if ((u32) ((p[0xD4] >> 2) & 0x3F) == 1) {
+                    active_count = 1;
+                } else {
+                    p += 0x40;
+                    st = (p[0xD4] >> 2) & 0x3F;
+                    if (st == 1) {
+                        active_count = 2;
+                    } else if ((u32) ((p[0x114] >> 2) & 0x3F) == 1) {
+                        active_count = 3;
+                    }
+                }
             }
 
             if (active_count != -1) {
                 s32 right_count = 0;
                 s32 left_count = 0;
                 s32 direction;
-                u32 st;
 
                 st = (bp[0xD4] >> 2) & 0x3F;
                 if (st == 7) {
@@ -3416,19 +3429,21 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 } else if (st == 8) {
                     left_count = 1;
                 }
-                st = (bp[0x114] >> 2) & 0x3F;
+                p = bp + 0x40;
+                st = (p[0xD4] >> 2) & 0x3F;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (bp[0x154] >> 2) & 0x3F;
+                p += 0x40;
+                st = (p[0xD4] >> 2) & 0x3F;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (bp[0x194] >> 2) & 0x3F;
+                st = (p[0x114] >> 2) & 0x3F;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
@@ -3462,23 +3477,30 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    5) != 0)
                             {
-                                s32 tmin = yakumono_param->x10;
-                                s32 tmax = yakumono_param->x14;
+                                s32 tmax;
+                                s32 tmin;
+                                tmin = yakumono_param->x10;
+                                tmax = yakumono_param->x14;
                                 if (tmin > tmax) {
                                     s32 diff = tmin - tmax;
+                                    s32 random;
                                     if (diff != 0) {
-                                        tmin = tmax + HSD_Randi(diff);
+                                        random = HSD_Randi(diff);
                                     } else {
-                                        tmin = tmax;
+                                        random = 0;
                                     }
+                                    tmin = tmax + random;
                                 } else if (tmin < tmax) {
                                     s32 diff = tmax - tmin;
+                                    s32 random;
                                     if (diff != 0) {
-                                        tmin += HSD_Randi(diff);
+                                        random = HSD_Randi(diff);
+                                    } else {
+                                        random = 0;
                                     }
+                                    tmin = tmin + random;
                                 }
                                 gp->u.bigblue.car.spawn_timer = (s16) tmin;
-                                return;
                             }
                             return;
                         }
@@ -3496,23 +3518,30 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    6) != 0)
                             {
-                                s32 tmin = yakumono_param->x10;
-                                s32 tmax = yakumono_param->x14;
+                                s32 tmax;
+                                s32 tmin;
+                                tmin = yakumono_param->x10;
+                                tmax = yakumono_param->x14;
                                 if (tmin > tmax) {
                                     s32 diff = tmin - tmax;
+                                    s32 random;
                                     if (diff != 0) {
-                                        tmin = tmax + HSD_Randi(diff);
+                                        random = HSD_Randi(diff);
                                     } else {
-                                        tmin = tmax;
+                                        random = 0;
                                     }
+                                    tmin = tmax + random;
                                 } else if (tmin < tmax) {
                                     s32 diff = tmax - tmin;
+                                    s32 random;
                                     if (diff != 0) {
-                                        tmin += HSD_Randi(diff);
+                                        random = HSD_Randi(diff);
+                                    } else {
+                                        random = 0;
                                     }
+                                    tmin = tmin + random;
                                 }
                                 gp->u.bigblue.car.spawn_timer = (s16) tmin;
-                                return;
                             }
                             return;
                         }
