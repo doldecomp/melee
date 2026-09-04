@@ -6,7 +6,7 @@
 #include "gr/forward.h"
 #include "it/forward.h"
 
-/* 202B6C */ void grGarden_80202B6C(bool);
+/* 202B6C */ void grGarden_80202B6C(int);
 /* 202B70 */ void grGarden_80202B70(void);
 /* 202C24 */ void grGarden_80202C24(void);
 /* 202C4C */ void grGarden_80202C4C(void);

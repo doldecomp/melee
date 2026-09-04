@@ -6,7 +6,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2107DC */ void grOldPupupu_802107DC(bool);
+/* 2107DC */ void grOldPupupu_802107DC(int);
 /* 2107E0 */ void grOldPupupu_802107E0(void);
 /* 210884 */ void grOldPupupu_80210884(void);
 /* 210888 */ void grOldPupupu_80210888(void);

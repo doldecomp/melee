@@ -16,7 +16,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
-void grTKirby_80221364(bool);                  /* static */
+void grTKirby_80221364(int);                   /* static */
 void grTKirby_80221368(void);                  /* static */
 void grTkirby_UnkStage0_OnLoad(void);          /* static */
 void grTkirby_UnkStage0_OnStart(void);         /* static */
@@ -78,7 +78,7 @@ StageData grTKb_StageData = {
     0,
 };
 
-void grTKirby_80221364(bool unk) {}
+void grTKirby_80221364(int unk) {}
 
 void grTKirby_80221368(void)
 {

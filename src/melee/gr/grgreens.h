@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 213458 */ void grGreens_80213458(bool);
+/* 213458 */ void grGreens_80213458(int);
 /* 213464 */ void grGreens_Init(void);
 /* 2134F4 */ void grGreens_802134F4(void);
 /* 2134F8 */ void grGreens_802134F8(void);

@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1F423C */ void grGreatBay_801F423C(bool);
+/* 1F423C */ void grGreatBay_801F423C(int);
 /* 1F4240 */ void grGreatBay_801F4240(void);
 /* 1F42D0 */ void grGreatBay_801F42D0(void);
 /* 1F42D4 */ void grGreatBay_801F42D4(void);

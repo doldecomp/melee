@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 224110 */ void grTGameWatch_80224110(bool);
+/* 224110 */ void grTGameWatch_80224110(int);
 /* 224114 */ void grTGameWatch_80224114(void);
 /* 224184 */ void grTgamewatch_UnkStage0_OnLoad(void);
 /* 224188 */ void grTgamewatch_UnkStage0_OnStart(void);

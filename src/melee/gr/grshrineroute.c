@@ -56,7 +56,7 @@ struct grSh_Route_LightConfig {
     /* 0x30 */ GXDistAttnFn dist_func;
 };
 
-/* 2087B8 */ static void grShrineRoute_OnDemoInit(bool);
+/* 2087B8 */ static void grShrineRoute_OnDemoInit(int);
 /* 2087BC */ static void grShrineRoute_OnInit(void);
 /* 20882C */ static void grShrineRoute_OnLoad(void);
 /* 208850 */ static void grShrineRoute_OnStart(void);
@@ -178,7 +178,7 @@ StageData grSh_Route_StageData = {
 
 static struct grShrineRoute_YakumonoParam* yakumono_param;
 
-void grShrineRoute_OnDemoInit(bool arg) {}
+void grShrineRoute_OnDemoInit(int arg) {}
 
 void grShrineRoute_OnInit(void)
 {
@@ -538,8 +538,8 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                             }
                         }
                         grZakoGenerator_801CAF08();
-                        grShrineRoute_8020B020((HSD_GObj*) gobj,
-                                               (s32) gp->u.shrineroute.xC8, 1);
+                        grShrineRoute_8020B020(gobj, gp->u.shrineroute.xC8,
+                                               true);
                     }
                 }
             }
@@ -605,7 +605,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                 (u16) (gp->u.shrineroute.xC6 |
                        (1 << (gp->u.shrineroute.xC8 - 0xBD)));
             grZakoGenerator_801CAEF0(1);
-            grShrineRoute_8020B020((HSD_GObj*) gobj, -1, 0);
+            grShrineRoute_8020B020((HSD_GObj*) gobj, -1, false);
             gp->u.shrineroute.xCE = 0x3C;
             mpJointListAdd(0);
             mpJointListAdd(1);
@@ -1532,7 +1532,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     }
 }
 
-void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
+void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide)
 {
     Ground* gp = gobj->user_data;
     int comp;
@@ -1543,7 +1543,7 @@ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
         if (r4 == -1 || i != comp) {
             if (gp->u.map.symbol[i]) {
                 if (GET_JOBJ(gp->u.map.symbol[i])) {
-                    if (r5) {
+                    if (hide) {
                         HSD_JObjSetFlagsAll(gp->u.map.symbol[i]->hsd_obj,
                                             JOBJ_HIDDEN);
                     } else {

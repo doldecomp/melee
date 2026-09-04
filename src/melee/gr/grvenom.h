@@ -6,7 +6,7 @@
 #include "gr/forward.h"
 
 /* 20362C */ UNK_RET grVenom_8020362C(UNK_PARAMS);
-/* 203B14 */ void grVenom_80203B14(bool);
+/* 203B14 */ void grVenom_80203B14(int);
 /* 203B18 */ void grVenom_80203B18(void);
 /* 203DD0 */ void grVenom_80203DD0(void);
 /* 203E80 */ void grVenom_80203E80(void);

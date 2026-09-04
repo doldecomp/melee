@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1E3734 */ void grOnett_801E3734(bool);
+/* 1E3734 */ void grOnett_801E3734(int);
 /* 1E3738 */ void grOnett_801E3738(void);
 /* 1E37C4 */ void grOnett_801E37C4(void);
 /* 1E37C8 */ void grOnett_801E37C8(void);

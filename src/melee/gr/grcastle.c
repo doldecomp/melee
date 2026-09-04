@@ -215,7 +215,7 @@ typedef struct grCastle_YOffsets {
     f32 v[6];
 } grCastle_YOffsets;
 
-void grCastle_801CD338(bool arg0)
+void grCastle_801CD338(int arg0)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;

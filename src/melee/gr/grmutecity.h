@@ -9,7 +9,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/spline.h>
 
-/* 1EFC68 */ void grMuteCity_801EFC68(bool);
+/* 1EFC68 */ void grMuteCity_801EFC68(int);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);
 /* 1EFCDC */ void grMuteCity_801EFCDC(void);
 /* 1EFCE0 */ void grMuteCity_801EFCE0(void);

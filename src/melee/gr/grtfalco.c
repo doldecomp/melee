@@ -17,7 +17,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-/* 2207F0 */ static void grTFalco_802207F0(bool);
+/* 2207F0 */ static void grTFalco_802207F0(int);
 /* 2207F4 */ static void grTFalco_802207F4(void);
 /* 22086C */ static void grTfalco_UnkStage0_OnLoad(void);
 /* 220870 */ static void grTfalco_UnkStage0_OnStart(void);
@@ -88,7 +88,7 @@ struct grTFalco_YakumonoParam {
 
 static struct grTFalco_YakumonoParam* yakumono_param;
 
-void grTFalco_802207F0(bool arg0) {}
+void grTFalco_802207F0(int arg0) {}
 
 void grTFalco_802207F4(void)
 {

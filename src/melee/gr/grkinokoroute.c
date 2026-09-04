@@ -104,7 +104,7 @@ StageData grNKr_StageData = {
     0,
 };
 
-void grKinokoRoute_8020741C(bool arg) {}
+void grKinokoRoute_8020741C(int arg) {}
 
 void grKinokoRoute_80207420(void)
 {
@@ -558,9 +558,9 @@ bool grKinokoRoute_80208480(int arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 void grKinokoRoute_802084B4(HSD_GObj* gobj)

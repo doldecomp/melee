@@ -181,7 +181,7 @@ struct grInishie2_YakumonoParam {
 
 static struct grInishie2_YakumonoParam* yakumono_param;
 
-void grInishie2_801FCBC0(bool arg) {}
+void grInishie2_801FCBC0(int arg) {}
 
 void grInishie2_801FCBC4(void)
 {

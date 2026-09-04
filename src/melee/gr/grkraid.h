@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1FDFF8 */ void grKraid_OnDemoInit(bool);
+/* 1FDFF8 */ void grKraid_OnDemoInit(int);
 /* 1FDFFC */ void grKraid_OnInit(void);
 /* 1FE094 */ void grKraid_OnLoad(void);
 /* 1FE098 */ void grKraid_OnStart(void);

@@ -410,7 +410,8 @@ void grVenom_8020362C(void)
         }
     }
 }
-void grVenom_80203B14(bool arg) {}
+
+void grVenom_80203B14(int arg) {}
 
 static inline void inlineA0(void)
 {

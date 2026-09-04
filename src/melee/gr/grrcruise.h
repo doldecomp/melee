@@ -5,7 +5,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1FF164 */ void grRCruise_801FF164(bool);
+/* 1FF164 */ void grRCruise_801FF164(int);
 /* 1FF168 */ void grRCruise_801FF168(void);
 /* 1FF298 */ void grRCruise_801FF298(void);
 /* 1FF29C */ void grRCruise_801FF29C(void);

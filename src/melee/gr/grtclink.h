@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 21FF44 */ void grTCLink_8021FF44(bool);
+/* 21FF44 */ void grTCLink_8021FF44(int);
 /* 21FF48 */ void grTCLink_8021FF48(void);
 /* 21FFB8 */ void grTclink_UnkStage0_OnLoad(void);
 /* 21FFBC */ void grTclink_UnkStage0_OnStart(void);

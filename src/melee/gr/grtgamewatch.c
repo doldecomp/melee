@@ -35,7 +35,7 @@ StageData grTGw_StageData = {
     (1 << 0),
 };
 
-void grTGameWatch_80224110(bool unused)
+void grTGameWatch_80224110(int unused)
 {
     return;
 }

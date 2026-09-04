@@ -31,7 +31,7 @@ typedef struct grTMewtwo_UnkStruct {
     DynamicsDesc* x18;
 } grTMewtwo_UnkStruct;
 
-/* 2221D8 */ static void grTMewtwo_802221D8(bool arg0);
+/* 2221D8 */ static void grTMewtwo_802221D8(int arg0);
 /* 2221DC */ static void grTMewtwo_802221DC(void);
 /* 222254 */ static void grTmewtwo_UnkStage0_OnLoad(void);
 /* 222258 */ static void grTmewtwo_UnkStage0_OnStart(void);
@@ -100,7 +100,7 @@ StageData grTMewtwo_StageData = {
     NULL,
 };
 
-void grTMewtwo_802221D8(bool arg0) {}
+void grTMewtwo_802221D8(int arg0) {}
 
 void grTMewtwo_802221DC(void)
 {

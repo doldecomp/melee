@@ -46,7 +46,7 @@ typedef struct grTGn_YakumonoParam {
 
 static grTGn_YakumonoParam* yakumono_param;
 
-void grTGanon_802246D8(bool unused)
+void grTGanon_802246D8(int unused)
 {
     return;
 }

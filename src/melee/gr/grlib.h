@@ -28,6 +28,6 @@
 /* 1C9E40 */ int grLib_801C9E40(void);
 /* 1C9E50 */ void grLib_801C9E50(s16);
 /* 1C9E60 */ bool grLib_801C9E60(Vec3*);
-/* 1C9EE8 */ int grLib_801C9EE8(Vec3*, float);
+/* 1C9EE8 */ bool grLib_801C9EE8(Vec3*, float);
 
 #endif

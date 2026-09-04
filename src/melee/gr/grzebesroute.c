@@ -79,7 +79,7 @@ StageData grZe_Route_StageData = {
 
 static struct grZebesRoute_YakumonoParam* yakumono_param;
 
-void grZebesRoute_8020B160(bool arg) {}
+void grZebesRoute_8020B160(int arg) {}
 
 void grZebesRoute_8020B164(void)
 {

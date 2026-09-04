@@ -16,7 +16,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-static void grShrine_80201C60(bool);
+static void grShrine_80201C60(int);
 static void grShrine_80201C64(void);
 static void grShrine_UnkStage0_OnLoad(void);
 static void grShrine_UnkStage0_OnStart(void);
@@ -65,7 +65,7 @@ StageData grSh_StageData = {
     0,
 };
 
-static void grShrine_80201C60(bool arg0) {}
+static void grShrine_80201C60(int arg0) {}
 
 static void grShrine_80201C64(void)
 {

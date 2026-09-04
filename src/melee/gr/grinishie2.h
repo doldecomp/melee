@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1FCBC0 */ void grInishie2_801FCBC0(bool);
+/* 1FCBC0 */ void grInishie2_801FCBC0(int);
 /* 1FCBC4 */ void grInishie2_801FCBC4(void);
 /* 1FCCAC */ void grInishie2_801FCCAC(void);
 /* 1FCCB0 */ void grInishie2_801FCCB0(void);

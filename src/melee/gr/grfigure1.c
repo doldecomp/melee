@@ -167,4 +167,4 @@ static bool grFigure1_OnCheckShadowRender(Vec3* v, int n, HSD_JObj* o)
     return true;
 }
 
-void grFigure1_8020E270(bool n) {}
+void grFigure1_8020E270(int n) {}

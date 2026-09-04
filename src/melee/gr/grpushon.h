@@ -3,7 +3,7 @@
 
 #include "gr/forward.h"
 
-/* 2182C4 */ void grPushOn_802182C4(bool);
+/* 2182C4 */ void grPushOn_802182C4(int);
 /* 2182C8 */ void grPushOn_802182C8(void);
 /* 218330 */ void grPushOn_80218330(void);
 /* 218378 */ void grPushOn_80218378(void);

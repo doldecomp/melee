@@ -177,7 +177,7 @@ StageData grIz_StageData = {
     3,
 };
 
-void grIzumi_801CBB84(bool x)
+void grIzumi_801CBB84(int x)
 {
     return;
 }

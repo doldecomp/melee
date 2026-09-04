@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2246D8 */ void grTGanon_802246D8(bool);
+/* 2246D8 */ void grTGanon_802246D8(int);
 /* 2246DC */ void grTGanon_802246DC(void);
 /* 224754 */ void grTganon_UnkStage0_OnLoad(void);
 /* 224758 */ void grTganon_UnkStage0_OnStart(void);

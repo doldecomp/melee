@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 20B864 */ void grBigBlueRoute_8020B864(bool);
+/* 20B864 */ void grBigBlueRoute_8020B864(int);
 /* 20B89C */ void grBigBlueRoute_8020B89C(void);
 /* 20B920 */ void grBigBlueRoute_8020B920(void);
 /* 20B95C */ void grBigBlueRoute_8020B95C(void);

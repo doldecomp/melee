@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 21C750 */ void grHomeRun_8021C750(bool);
+/* 21C750 */ void grHomeRun_8021C750(int);
 /* 21C754 */ void grHomeRun_8021C754(void);
 /* 21C7FC */ void grHomeRun_8021C7FC(void);
 /* 21C800 */ void grHomeRun_8021C800(void);
