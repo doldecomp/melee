@@ -2021,7 +2021,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
 
         for (i = 0, ei = bubbles; i < 20; i++, ei++) {
             if (ei->x00_active == 1 && i != 0 && i != 6) {
-                s32 j = i + 1;
+                s32 j;
                 f32 ei_x;
                 f32 ei_size;
                 f32 ei_y;
@@ -2030,15 +2030,14 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 dx;
                 f32 dy;
                 f32 dist_sq;
-                grZe_BubbleEntry* ej = &grZe_8049F170[j];
 
                 ei_y = ei->x0C_y;
                 ei_x = ei->x08_x;
                 ei_size = ei->x18_size;
-                for (; j < 20; ej++, j++) {
-                    if (ej->x00_active == 1 && j != 0 && j != 6) {
-                        ej_x = ej->x08_x;
-                        ej_y = ej->x0C_y;
+                for (j = i + 1; j < 20; j++) {
+                    if (grZe_8049F170[j].x00_active == 1 && j != 0 && j != 6) {
+                        ej_x = grZe_8049F170[j].x08_x;
+                        ej_y = grZe_8049F170[j].x0C_y;
                         dx = ei_x - ej_x;
                         dy = grZebes_Subtract(ei_y, ej_y);
                         dx *= dx;
@@ -2050,7 +2049,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                             y1 = ei_y;
                             x2 = ej_x;
                             y2 = ej_y;
-                            if (ei_size > ej->x18_size) {
+                            if (ei_size > grZe_8049F170[j].x18_size) {
                                 last_idx = i;
                             } else {
                                 last_idx = j;
