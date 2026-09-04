@@ -355,9 +355,9 @@ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
     }
 }
 
-// @TODO: Currently 88.12% match - register allocation differences remain
-static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
-                                                    f32* perp_x, f32* perp_y)
+/// Newton-Raphson `sqrtf`; the volatile round-trip pins the single-precision
+/// result.
+static inline f32 hsd_80391F28_len(f32 dy, f32 dx)
 {
     f32 len;
 
@@ -373,95 +373,58 @@ static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
             len = temp;
         }
     }
-    *perp_x = -dy / len;
-    *perp_y = -dx / len;
-
-    GXBegin(0xA8, 0, 2);
+    return len;
 }
 
-static inline void hsd_80391F28_calc_tick4_y(f32 perp_y, f32* tick4_y)
-{
-    *tick4_y = 4.0F * perp_y;
-}
-
+/// Draws a line from (x1,y1) to (x2,y2) with a tick mark every step; every
+/// fifth tick is drawn longer.
+/// @todo Only the preheader instruction schedule still differs.
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
-    f32 step_y;
     f32 tick6_y;
-    f32 perp_x;
-    f32 perp_y;
     f32 dy;
     f32 tick4_x;
     f32 dx;
+    f32 x = x1;
+    f32 y = y1;
+    f32 perp_x;
+    f32 perp_y;
     f32 tick4_y;
-    f32 step_x;
+    f32 len;
     s32 i;
-    u8 r, g, b, a;
 
-    dy = y2 - y1;
-    dx = x2 - x1;
-    hsd_80391F28_calc_perp_and_begin(dy, dx, &perp_x, &perp_y);
+    dy = y2 - y;
+    dx = x2 - x;
 
-    step_y = dy / count;
-    step_x = dx / count;
+    len = hsd_80391F28_len(dy, dx);
+    perp_x = -dy / len;
+    perp_y = -dx / len;
 
-    GXWGFifo.f32 = x1;
-    GXWGFifo.f32 = y1;
-    r = color->r;
-    GXWGFifo.u8 = r;
-    g = color->g;
-    b = color->b;
-    a = color->a;
+    GXBegin(0xA8, 0, 2);
 
     tick6_y = 6.0F * perp_y;
-    {
-        f32 tmp_tick6_x = 6.0F * perp_x;
-        tick6_x = tmp_tick6_x;
-    }
+    tick6_x = 6.0F * perp_x;
     tick4_x = 4.0F * perp_x;
-    hsd_80391F28_calc_tick4_y(perp_y, &tick4_y);
+    tick4_y = 4.0F * perp_y;
 
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x2;
-    GXWGFifo.f32 = y2;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
+    GXPosition2f32(x, y);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x2, y2);
+    GXColor4u8(color->r, color->g, color->b, color->a);
 
     for (i = 0; (f32) i <= count; i++) {
         GXBegin(0xA8, 0, 2);
-        GXWGFifo.f32 = x1;
-        GXWGFifo.f32 = y1;
-        a = color->a;
-        b = color->b;
-        g = color->g;
-        r = color->r;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXPosition2f32(x, y);
+        GXColor4u8(color->r, color->g, color->b, color->a);
         if ((i % 5) == 0) {
-            GXWGFifo.f32 = x1 + tick6_x;
-            GXWGFifo.f32 = y1 + tick6_y;
+            GXPosition2f32(x + tick6_x, y + tick6_y);
         } else {
-            GXWGFifo.f32 = x1 + tick4_x;
-            GXWGFifo.f32 = y1 + tick4_y;
+            GXPosition2f32(x + tick4_x, y + tick4_y);
         }
-        a = color->a;
-        b = color->b;
-        g = color->g;
-        r = color->r;
-        x1 = step_x + x1;
-        y1 += step_y;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXColor4u8(color->r, color->g, color->b, color->a);
+        x += dx / count;
+        y += dy / count;
     }
 }
 
