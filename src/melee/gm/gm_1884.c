@@ -43,6 +43,7 @@
 /// @todo .sdata2 order hack
 static inline void gm_1884_sdata2_order(void)
 {
+    (void) 0.016666668f;
     (void) U32_TO_F32;
     (void) 10.0f;
     (void) 1.0f;
@@ -828,7 +829,7 @@ void fn_801891F4(void)
                 int i;
 
                 for (i = 1; i < 4; i++) {
-                    fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
+                    fn_8016B388(i, sub->menu_values[4]);
                 }
             }
 
@@ -1131,7 +1132,7 @@ void fn_8018A364(int arg0_int)
             ((u8_bits*) &arg0->_x448[2])->b4 = 1;
         }
 
-        if ((u32) (data->x0.xC.x1C + arg0->player_standings[0].x44) ==
+        if ((data->x0.xC.x1C + arg0->player_standings[0].x44) ==
             (u32) Player_GetDamage(0))
         {
             ((u8_bits*) &arg0->_x448[0])->b1 = 1;
