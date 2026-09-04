@@ -2017,12 +2017,10 @@ bool grZebes_801DBB60(Item_GObj* yaku)
 
     if (count == 1) {
         grZe_BubbleEntry* entry;
-        f32 zero;
         grMaterial_801C8E08(yaku);
         entry = &grZe_8049F170[last_idx];
-        zero = 0.0f;
-        grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, zero,
-                            entry->x08_x, entry->x0C_y, zero,
+        grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, 0.0f,
+                            entry->x08_x, entry->x0C_y, 0.0f,
                             (f32) (2.0 * (f64) entry->x18_size));
         return 1;
     }
