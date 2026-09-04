@@ -251,15 +251,6 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         -1);
 }
 
-static inline bool nearzero(float x)
-{
-    if (x < 1e-5F && x > -1e-5F) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
                      Vec3* arg3, float arg8, float arg9)
 {
@@ -332,7 +323,7 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
         float d1_dot_d2 = d1.x * d2_x + d1.y * d2_y + d1.z * d2_z;
         float scale;
 
-        if (nearzero(d1_dot_d1)) {
+        if (approximatelyZero(d1_dot_d1)) {
             scale = 0.0f;
         } else {
             scale = -d1_dot_d2 / d1_dot_d1;
@@ -1325,8 +1316,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         hurt_delta_z * hurt_delta_z + (x_work * x_work + y_work * y_work);
     closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
     (void) hit_len_sq;
-    if (nearzero(hurt_len_sq)) {
-        if (nearzero(hit_len_sq)) {
+    if (approximatelyZero(hurt_len_sq)) {
+        if (approximatelyZero(hit_len_sq)) {
             hit_param = 0.0F;
             hurt_param = hit_param;
         } else {
@@ -1339,7 +1330,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
             }
         }
     } else {
-        if (nearzero(closest_denom)) {
+        if (approximatelyZero(closest_denom)) {
             float hurt_mid_x;
             float hurt_mid_y;
             float hurt_mid_z;
@@ -1476,7 +1467,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                       ((closest_delta_x * closest_delta_x) +
                        (closest_delta_y * closest_delta_y));
     x_work = sqrtf(closest_dist_sq);
-    if (nearzero(x_work)) {
+    if (approximatelyZero(x_work)) {
         *out_overlap = (hit_radius + hurt_radius) - x_work;
         *out_contact_pos = *hit_closest;
         return true;
@@ -1577,7 +1568,7 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         dot_diff_cb = diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y +
                       diff_cb.z * diff_cb.z;
 
-        if (nearzero(dot_diff_cb)) {
+        if (approximatelyZero(dot_diff_cb)) {
             scl = 0.0f;
         } else {
             n0 = 2.0f * diff_cb.x * diff_ba.x + 2.0f * diff_cb.y * diff_ba.y +
