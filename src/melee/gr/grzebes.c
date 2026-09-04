@@ -1740,7 +1740,6 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
     right_bound_y = grZe_8049F140[1].y;
     right_bound_x = grZe_8049F140[1].x;
 
-    (void) 0.0;
     for (k = 0; k < 20; (*base)++, k++) {
         if ((*base)->x00_active != 0) {
             if (k == 0) {
