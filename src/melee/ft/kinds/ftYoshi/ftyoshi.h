@@ -30,5 +30,6 @@
 /* 12BD34 */ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 3B75C0 */ extern Vec3 const ftYs_Unk1_803B75C0;
 /* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount];
+/* 45A000 */ extern UnkCostumeStruct ftYs_CostumeList[6];
 
 #endif

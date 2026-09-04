@@ -25,5 +25,6 @@
 /* 3CD204 */ extern char ftPe_Init_AnimDatFilename[];
 /* 3CD280 */ extern Fighter_DemoStrings ftPe_Init_DemoMotionFilenames;
 /* 3CD290 */ extern Fighter_CostumeStrings ftPe_Init_CostumeStrings[];
+/* 459DF0 */ extern UnkCostumeStruct ftPe_CostumeList[5];
 
 #endif

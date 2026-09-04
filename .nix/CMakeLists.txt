@@ -443,7 +443,6 @@ set(SOURCES
     src/melee/ft/ft_0819.c
     src/melee/ft/ft_081B.c
     src/melee/ft/ft_084E.c
-    src/melee/ft/ft_0852.c
     src/melee/ft/ft_0877.c
     src/melee/ft/ft_0881.c
     src/melee/ft/ft_0892.c
@@ -465,7 +464,6 @@ set(SOURCES
     src/melee/ft/ft_0D4D.c
     src/melee/ft/ft_0DF0.c
     src/melee/ft/ft_0DF1.c
-    src/melee/ft/ft_459A.c
     src/melee/ft/ftaction.c
     src/melee/ft/ftafterimage.c
     src/melee/ft/ftanim.c

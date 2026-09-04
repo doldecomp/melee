@@ -39,6 +39,8 @@
 
 #include <dolphin/mtx.h>
 
+/* 459CA0 */ UnkCostumeStruct ftDk_CostumeList[5];
+
 MotionState ftDk_Init_MotionStateTable[ftDk_MS_SelfCount] = {
     {
         // ftDk_MS_HeavyWait = 341

@@ -29,6 +29,8 @@
 #include <baselib/jobj.h>
 #include <baselib/object.h>
 
+/* 459F88 */ UnkCostumeStruct ftSs_CostumeList[5];
+
 MotionState ftSs_Init_MotionStateTable[ftSs_MS_SelfCount] = {
     {
         // ftSs_MS_SpecialLw = 341

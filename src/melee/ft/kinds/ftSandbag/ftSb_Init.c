@@ -17,6 +17,8 @@
 
 #include <math.h>
 
+/* 45A678 */ UnkCostumeStruct ftSb_CostumeList[1];
+
 MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount] = {
     {
         // ftSb_MS_WaitReverse = 341

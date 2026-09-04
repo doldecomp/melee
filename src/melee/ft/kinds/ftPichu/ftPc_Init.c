@@ -18,6 +18,8 @@
 #include "ftPikachu/ftPk_SpecialS.h"
 #include "it/it_26B1.h"
 
+/* 45A480 */ UnkCostumeStruct ftPc_CostumeList[4];
+
 MotionState ftPc_Init_MotionStateTable[ftPk_MS_SelfCount] = {
     {
         // ftPk_MS_SpecialN = 341

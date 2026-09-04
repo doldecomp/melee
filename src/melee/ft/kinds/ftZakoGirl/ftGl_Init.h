@@ -18,5 +18,6 @@
 /* 3D3574 */ extern char ftGl_Init_DataName[];
 /* 3D35A0 */ extern char ftGl_Init_AnimDatFilename[];
 /* 3D35D8 */ extern Fighter_CostumeStrings ftGl_Init_CostumeStrings[];
+/* 45A648 */ extern UnkCostumeStruct ftGl_CostumeList[1];
 
 #endif

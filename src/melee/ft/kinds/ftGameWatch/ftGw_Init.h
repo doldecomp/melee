@@ -26,5 +26,6 @@
 /* 3D292C */ extern char ftGw_Init_AnimDatFilename[];
 /* 3D29B8 */ extern Fighter_DemoStrings ftGw_Init_DemoMotionFilenames;
 /* 3D29C8 */ extern Fighter_CostumeStrings ftGw_Init_CostumeStrings[];
+/* 45A4E0 */ extern UnkCostumeStruct ftGw_CostumeList[4];
 
 #endif
