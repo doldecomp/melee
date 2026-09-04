@@ -20,7 +20,7 @@
 #include <baselib/class.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
-#include <baselib/hsd_3915.h>
+#include <baselib/hsd_3924.h>
 #include <baselib/hsd_392C.h>
 #include <baselib/initialize.h>
 #include <baselib/leak.h>

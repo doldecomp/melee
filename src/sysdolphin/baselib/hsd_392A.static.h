@@ -23,7 +23,6 @@ typedef struct {
 
 static PerfDispItem hsd_804CE3F8[6];
 
-/* 4D7850 */ static HSD_SList* hsd_804D7850;
 /* 4D7858 */ static f32 hsd_804D7858;
 /* 4D785C */ static f32 hsd_804D785C;
 /* 4D7860 */ static f32 hsd_804D7860;

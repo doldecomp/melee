@@ -4,7 +4,7 @@
 #include <placeholder.h>
 
 #include <dolphin/gx/GXStruct.h>
-#include <baselib/list.h>
+#include <sysdolphin/baselib/list.h>
 
 /// One cell of the debug console's ASCII font: 14 rows of 4 bytes, 2 bits per
 /// pixel, 12 of the 16 pixels used.
@@ -24,13 +24,6 @@ typedef struct DebugFontGlyph {
 /* 3921B8 */ void hsd_803921B8(void*, s32, s32, s32, s32, s32, s32, void*);
 /* 3922FC */ void hsd_803922FC(void*, s32, s32, s32, s32, s32, s32, s32,
                                void*);
-/* 392474 */ UNK_RET hsd_80392474(UNK_PARAMS);
-/* 392480 */ HSD_SList* fn_80392480(Event event, int priority);
-/* 392528 */ void hsd_80392528(Event);
-/* 39254C */ void hsd_8039254C(void);
-/* 392934 */ UNK_RET fn_80392934(UNK_PARAMS);
-/* 392A08 */ UNK_RET fn_80392A08(int, int, int);
-/* 392A3C */ void* fn_80392A3C(void);
 /* 4088B8 */ extern DebugFontGlyph HSD_DebugFontAtlas[];
 
 #endif
