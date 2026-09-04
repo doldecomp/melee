@@ -34,13 +34,6 @@ GXColor mnName_804D4BE4 = { 0xA6, 0x81, 0x3D, 0xFF };
 u8 mnName_804D4BE8[4] = { 0x93, 0x94, 0x95, 0 };
 char mnName_StringTerminator[1] = "";
 
-#ifdef MUST_MATCH
-static void order_sdata(void)
-{
-    (void) "　";
-}
-#endif
-
 extern char mnName_804D4C04[8];
 
 typedef struct {
@@ -58,6 +51,8 @@ char* mnName_8023749C(int slot)
     char** array;
     s8 term;
     char* str;
+
+    (void) "　";
 
     if (lbLang_IsSavedLanguageUS()) {
         array = mnNameNew_803EE724;
@@ -88,7 +83,7 @@ char* GetNameText(int slot)
     return GetPersistentNameData((u8) slot)->namedata;
 }
 
-static int GetNameCount_noinline(void)
+static inline int GetNameCount_noinline(void)
 {
     return GetNameCount();
 }
@@ -739,6 +734,11 @@ s32 mnName_GetColumnCount(void)
     return count / 6 + extra;
 }
 
+static inline void mnName_80238754_noinline(HSD_GObj* gobj)
+{
+    mnName_80238754(gobj);
+}
+
 void mnName_80238754(HSD_GObj* gobj)
 {
     s32 extra;
@@ -755,6 +755,8 @@ void mnName_80238754(HSD_GObj* gobj)
     col_count = count / 6 + extra;
     f_col = (f32) col_count;
 
+    (void) 4503599627370496.0;
+
     if (f_col > 4.0f) {
         f32 scroll_pos;
 
@@ -766,12 +768,7 @@ void mnName_80238754(HSD_GObj* gobj)
     }
 }
 
-static void mnName_80238754_noinline(HSD_GObj* gobj)
-{
-    mnName_80238754(gobj);
-}
-
-static HSD_JObj* mnName_802388D4_noinline(HSD_GObj* gobj, u8 index)
+static inline HSD_JObj* mnName_802388D4_noinline(HSD_GObj* gobj, u8 index)
 {
     return mnName_802388D4(gobj, index);
 }
@@ -806,7 +803,7 @@ HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
     return (HSD_JObj*) gobj;
 }
 
-static f32 mnName_80238964_noinline(u8 index, u8 target, u8 flag)
+static inline f32 mnName_80238964_noinline(u8 index, u8 target, u8 flag)
 {
     return mnName_80238964(index, target, flag);
 }
