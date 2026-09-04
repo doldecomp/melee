@@ -27,5 +27,6 @@
 /* 3CF98C */ extern char ftMs_Init_AnimDatFilename[];
 /* 3CFA08 */ extern Fighter_DemoStrings ftMs_Init_DemoMotionFilenames;
 /* 3CFA18 */ extern Fighter_CostumeStrings ftMs_Init_CostumeStrings[];
+/* 45A0F0 */ extern UnkCostumeStruct ftMs_CostumeList[5];
 
 #endif

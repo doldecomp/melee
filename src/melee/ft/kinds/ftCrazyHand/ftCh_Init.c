@@ -49,6 +49,8 @@
 
 #include <dolphin/mtx.h>
 
+/* 45A6A8 */ UnkCostumeStruct ftCh_CostumeList[1];
+
 MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
         // ftMh_MS_Wait1_0 = 341

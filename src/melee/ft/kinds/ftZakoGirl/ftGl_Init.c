@@ -10,6 +10,7 @@ char ftGl_Init_DataName[] = "ftDataGirl";
 char ftGl_Init_803D3580[] = "PlGlNr.dat";
 char ftGl_Init_803D358C[] = "PlyGirl_Share_joint";
 char ftGl_Init_AnimDatFilename[] = "PlGlAJ.dat";
+/* 45A648 */ UnkCostumeStruct ftGl_CostumeList[1];
 
 #ifdef MUST_MATCH
 #pragma push

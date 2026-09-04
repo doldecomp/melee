@@ -18,6 +18,8 @@
 
 #include <baselib/gobj.h>
 
+/* 459E68 */ UnkCostumeStruct ftPp_CostumeList[4];
+
 MotionState ftPp_Init_MotionStateTable[ftPp_MS_SelfCount] = {
     {
         // ftPp_MS_SpecialN = 341

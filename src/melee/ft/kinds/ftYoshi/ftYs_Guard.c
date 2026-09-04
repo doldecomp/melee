@@ -29,44 +29,6 @@
 
 #include <baselib/jobj.h>
 
-char ftYs_Init_DatFilename[] = "PlYs.dat";
-char ftYs_Init_DataName[] = "ftDataYoshi";
-char ftYs_Unk2_803CEAB0[] = "PlYsNr.dat";
-char ftYs_Unk2_803CEABC[] = "PlyYoshi5K_Share_joint";
-char ftYs_Unk2_803CEAD4[] = "PlyYoshi5K_Share_matanim_joint";
-char ftYs_Unk2_803CEAF4[] = "PlYsRe.dat";
-char ftYs_Unk2_803CEB00[] = "PlyYoshi5KRe_Share_joint";
-char ftYs_Unk2_803CEB1C[] = "PlyYoshi5KRe_Share_matanim_joint";
-char ftYs_Unk2_803CEB40[] = "PlYsBu.dat";
-char ftYs_Unk2_803CEB4C[] = "PlyYoshi5KBu_Share_joint";
-char ftYs_Unk2_803CEB68[] = "PlyYoshi5KBu_Share_matanim_joint";
-char ftYs_Unk2_803CEB8C[] = "PlYsYe.dat";
-char ftYs_Unk2_803CEB98[] = "PlyYoshi5KYe_Share_joint";
-char ftYs_Unk2_803CEBB4[] = "PlyYoshi5KYe_Share_matanim_joint";
-char ftYs_Unk2_803CEBD8[] = "PlYsPi.dat";
-char ftYs_Unk2_803CEBE4[] = "PlyYoshi5KPi_Share_joint";
-char ftYs_Unk2_803CEC00[] = "PlyYoshi5KPi_Share_matanim_joint";
-char ftYs_Unk2_803CEC24[] = "PlYsAq.dat";
-char ftYs_Unk2_803CEC30[] = "PlyYoshi5KAq_Share_joint";
-char ftYs_Unk2_803CEC4C[] = "PlyYoshi5KAq_Share_matanim_joint";
-char ftYs_Init_AnimDatFilename[] = "PlYsAJ.dat";
-
-Fighter_DemoStrings ftYs_Init_DemoMotionFilenames = {
-    "ftDemoResultMotionFileYoshi",
-    "ftDemoIntroMotionFileYoshi",
-    "ftDemoEndingMotionFileYoshi",
-    "ftDemoViWaitMotionFileYoshi",
-};
-
-Fighter_CostumeStrings ftYs_Init_CostumeStrings[] = {
-    { ftYs_Unk2_803CEAB0, ftYs_Unk2_803CEABC, ftYs_Unk2_803CEAD4 },
-    { ftYs_Unk2_803CEAF4, ftYs_Unk2_803CEB00, ftYs_Unk2_803CEB1C },
-    { ftYs_Unk2_803CEB40, ftYs_Unk2_803CEB4C, ftYs_Unk2_803CEB68 },
-    { ftYs_Unk2_803CEB8C, ftYs_Unk2_803CEB98, ftYs_Unk2_803CEBB4 },
-    { ftYs_Unk2_803CEBD8, ftYs_Unk2_803CEBE4, ftYs_Unk2_803CEC00 },
-    { ftYs_Unk2_803CEC24, ftYs_Unk2_803CEC30, ftYs_Unk2_803CEC4C },
-};
-
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

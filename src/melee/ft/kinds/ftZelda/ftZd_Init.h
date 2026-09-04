@@ -25,5 +25,6 @@
 /* 3CFE24 */ extern char ftZd_Init_AnimDatFilename[];
 /* 3CFEA0 */ extern Fighter_DemoStrings ftZd_Init_DemoMotionFilenames;
 /* 3CFEB0 */ extern Fighter_CostumeStrings ftZd_Init_CostumeStrings[];
+/* 45A168 */ extern UnkCostumeStruct ftZd_CostumeList[5];
 
 #endif

@@ -25,5 +25,6 @@
 /* 3CC4CC */ extern char ftSk_Init_AnimDatFilename[];
 /* 3CC548 */ extern Fighter_DemoStrings ftSk_Init_DemoMotionFilenames;
 /* 3CC558 */ extern Fighter_CostumeStrings ftSk_Init_CostumeStrings[];
+/* 459D18 */ extern UnkCostumeStruct ftSk_CostumeList[5];
 
 #endif

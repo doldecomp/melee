@@ -22,6 +22,8 @@
 
 #include "it/it_26B1.h"
 
+/* 45A090 */ UnkCostumeStruct ftKp_CostumeList[4];
+
 MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {
         // ftKp_MS_SpecialNStart = 341

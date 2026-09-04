@@ -21,6 +21,8 @@
 
 #include "it/it_26B1.h"
 
+/* 459D90 */ UnkCostumeStruct ftNs_CostumeList[4];
+
 MotionState ftNs_Init_MotionStateTable[ftNs_MS_SelfCount] = {
     {
         // ftNs_MS_AttackS4 = 341

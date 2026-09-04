@@ -24,5 +24,6 @@
 /* 3D39C4 */ extern char ftSb_Init_DataName[];
 /* 3D3A18 */ extern char ftSb_Init_AnimDatFilename[];
 /* 3D3A24 */ extern Fighter_CostumeStrings ftSb_Init_CostumeStrings[];
+/* 45A678 */ extern UnkCostumeStruct ftSb_CostumeList[1];
 
 #endif

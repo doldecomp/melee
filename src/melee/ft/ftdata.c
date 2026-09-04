@@ -1,7 +1,6 @@
 #include "ftdata.h"
 
 #include "ft_0877.h"
-#include "ft_459A.h"
 
 #include <platform.h>
 
@@ -10,7 +9,10 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0852.h"
+
+#include "ft/forward.h"
+
+#include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
@@ -134,42 +136,127 @@
 
 #include <string.h>
 #include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 
+typedef struct ft_8045993C_t {
+    /* +0 */ u32 pad_x0;
+    /* +4 */ u8 pad_x4[0x2];
+    /* +6:0 */ u16 x6_b0 : 1;
+    /* +6:1-2 */ u16 x6_b1_b2 : 2;
+} ft_8045993C_t;
+
+/* 4598B8 */ ftData* gFtDataList[FTKIND_MAX];
+/* 45993C */ ft_8045993C_t ft_8045993C[6];
+/* 45996C */ int ft_8045996C[FTKIND_MAX];
+
+/// @todo All one struct maybe?
+#ifdef MUST_MATCH
+static void order_bss(void)
+{
+    (void) gFtDataList;
+    (void) ft_8045993C;
+    (void) ft_8045996C;
+}
+#endif
+
+void ft_8008521C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Vec3 pos;
+
+    HSD_JObjGetTranslation(jobj, &pos);
+    fp->self_vel.x = pos.x - fp->cur_pos.x;
+    fp->self_vel.y = pos.y - fp->cur_pos.y;
+    fp->self_vel.z = pos.z - fp->cur_pos.z;
+}
+
+static inline void ft_800852B0_Reset_ft_8045993C(ftData** list, int i)
+{
+    /// @todo Bitfields seem off
+    ((ft_8045993C_t*) &list[FTKIND_MAX])[i].pad_x0 = 0;
+    ((ft_8045993C_t*) &list[FTKIND_MAX])[i].x6_b0 = 0;
+    ((ft_8045993C_t*) &list[FTKIND_MAX])[i].x6_b1_b2 = 0;
+}
+
+void ft_800852B0(void)
+{
+    ftData** list;
+    ftData_UnkCountStruct* unk0 =
+        (ftData_UnkCountStruct*) &CostumeListsForeachCharacter[FTKIND_MAX];
+    ftData_UnkCountStruct* pairs =
+        (ftData_UnkCountStruct*) ((u8*) CostumeListsForeachCharacter + 5940);
+    int i;
+    int new_var = 0;
+
+    for (i = 0; i < FTKIND_MAX; ++i) {
+        int costume_idx = new_var;
+        list = gFtDataList;
+        list[i] = NULL;
+        for (costume_idx = new_var;
+             costume_idx < (s32) CostumeListsForeachCharacter[i].numCostumes;
+             ++costume_idx)
+        {
+            CostumeListsForeachCharacter[i].costume_list[costume_idx].joint =
+                NULL;
+            CostumeListsForeachCharacter[i].costume_list[costume_idx].pad_x8 =
+                0;
+        }
+        unk0[i].data = NULL;
+        pairs[i].data = NULL;
+    }
+    ft_800852B0_Reset_ft_8045993C(list, new_var);
+    ft_800852B0_Reset_ft_8045993C(list, 1);
+    ft_800852B0_Reset_ft_8045993C(list, 2);
+    ft_800852B0_Reset_ft_8045993C(list, 3);
+    ft_800852B0_Reset_ft_8045993C(list, 4);
+    ft_800852B0_Reset_ft_8045993C(list, 5);
+}
+
+void ft_8008549C(void)
+{
+    int i;
+    for (i = 0; i < FTKIND_MAX; i++) {
+        ft_8045996C[i] = 0;
+    }
+}
+
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
-    { &lbl_804599F0, 5 },       // Mario
-    { &ft_80459B28, 4 },        // Fox
-    { &ft_80459A98, 6 },        // Captain
-    { &ft_80459CA0, 5 },        // Donkey
-    { &ft_80459C10, 6 },        // Kirby
-    { &ft_8045A090, 4 },        // Koopa
-    { &ftLk_Init_803C82EC, 5 }, // Link
-    { &ft_80459D18, 5 },        // Seak
-    { &ft_80459D90, 4 },        // Ness
-    { &ft_80459DF0, 5 },        // Peach
-    { &ft_80459E68, 4 },        // Popo
-    { &ft_80459EC8, 4 },        // Nana
-    { &ft_80459F28, 4 },        // Pikachu
-    { &ft_80459F88, 5 },        // Samus
-    { &ft_8045A000, 6 },        // Yoshi
-    { &ft_8045A1F8, 5 },        // Purin
-    { &ft_8045A2D0, 4 },        // Mewtwo
-    { &ft_8045A270, 4 },        // Luigi
-    { &ft_8045A0F0, 5 },        // Mars
-    { &ft_8045A168, 5 },        // Zelda
-    { &ft_8045A330, 5 },        // CLink
-    { &ft_8045A3A8, 5 },        // DrMario
-    { &ft_8045A420, 4 },        // Falco
-    { &ft_8045A480, 4 },        // Pichu
-    { &ft_8045A4E0, 4 },        // GameWatch
-    { &ft_8045A540, 5 },        // Ganon
-    { &ft_8045A5B8, 5 },        // Emblem
-    { &ft_8045A690, 1 },        // MasterH
-    { &ft_8045A6A8, 1 },        // CrezyH
-    { &ft_8045A630, 1 },        // Boy
-    { &ft_8045A648, 1 },        // Girl
-    { &ft_8045A660, 1 },        // GKoops
-    { &ft_8045A678, 1 }         // Sandbag
+    { ftMr_CostumeList, ARRAY_SIZE(ftMr_CostumeList) },
+    { ftFx_CostumeList, ARRAY_SIZE(ftFx_CostumeList) },
+    { ftCa_CostumeList, ARRAY_SIZE(ftCa_CostumeList) },
+    { ftDk_CostumeList, ARRAY_SIZE(ftDk_CostumeList) },
+    { ftKb_CostumeList, ARRAY_SIZE(ftKb_CostumeList) },
+    { ftKp_CostumeList, ARRAY_SIZE(ftKp_CostumeList) },
+    { ftLk_CostumeList, ARRAY_SIZE(ftLk_CostumeList) },
+    { ftSk_CostumeList, ARRAY_SIZE(ftSk_CostumeList) },
+    { ftNs_CostumeList, ARRAY_SIZE(ftNs_CostumeList) },
+    { ftPe_CostumeList, ARRAY_SIZE(ftPe_CostumeList) },
+    { ftPp_CostumeList, ARRAY_SIZE(ftPp_CostumeList) },
+    { ftNn_CostumeList, FTNANA_COSTUME_COUNT },
+    { ftPk_CostumeList, ARRAY_SIZE(ftPk_CostumeList) },
+    { ftSs_CostumeList, ARRAY_SIZE(ftSs_CostumeList) },
+    { ftYs_CostumeList, ARRAY_SIZE(ftYs_CostumeList) },
+    { ftPr_CostumeList, ARRAY_SIZE(ftPr_CostumeList) },
+    { ftMt_CostumeList, ARRAY_SIZE(ftMt_CostumeList) },
+    { ftLg_CostumeList, ARRAY_SIZE(ftLg_CostumeList) },
+    { ftMs_CostumeList, ARRAY_SIZE(ftMs_CostumeList) },
+    { ftZd_CostumeList, ARRAY_SIZE(ftZd_CostumeList) },
+    { ftCl_CostumeList, ARRAY_SIZE(ftCl_CostumeList) },
+    { ftDr_CostumeList, ARRAY_SIZE(ftDr_CostumeList) },
+    { ftFc_CostumeList, ARRAY_SIZE(ftFc_CostumeList) },
+    { ftPc_CostumeList, ARRAY_SIZE(ftPc_CostumeList) },
+    { ftGw_CostumeList, ARRAY_SIZE(ftGw_CostumeList) },
+    { ftGn_CostumeList, ARRAY_SIZE(ftGn_CostumeList) },
+    { ftFe_CostumeList, ARRAY_SIZE(ftFe_CostumeList) },
+    { ftMh_CostumeList, ARRAY_SIZE(ftMh_CostumeList) },
+    { ftCh_CostumeList, ARRAY_SIZE(ftCh_CostumeList) },
+    { ftBo_CostumeList, ARRAY_SIZE(ftBo_CostumeList) },
+    { ftGl_CostumeList, ARRAY_SIZE(ftGl_CostumeList) },
+    { ftGk_CostumeList, ARRAY_SIZE(ftGk_CostumeList) },
+    { ftSb_CostumeList, ARRAY_SIZE(ftSb_CostumeList) }
 };
 
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {

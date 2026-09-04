@@ -18,6 +18,8 @@
 
 #include <dolphin/mtx.h>
 
+/* 459F28 */ UnkCostumeStruct ftPk_CostumeList[4];
+
 MotionState ftPk_Init_MotionStateTable[ftPk_MS_SelfCount] = {
     {
         // ftPk_MS_SpecialN = 341
