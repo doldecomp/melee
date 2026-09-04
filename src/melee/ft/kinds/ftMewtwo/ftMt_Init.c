@@ -22,6 +22,8 @@
 
 #include <dolphin/mtx.h>
 
+/* 45A2D0 */ UnkCostumeStruct ftMt_CostumeList[4];
+
 MotionState ftMt_Init_MotionStateTable[ftMt_MS_SelfCount] = {
     {
         // ftMt_MS_SpecialNStart = 341

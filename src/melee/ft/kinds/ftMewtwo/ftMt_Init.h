@@ -26,5 +26,6 @@
 /* 3D0EC4 */ extern char ftMt_Init_AnimDatFilename[];
 /* 3D0F4C */ extern Fighter_DemoStrings ftMt_Init_DemoMotionFilenames;
 /* 3D0F5C */ extern Fighter_CostumeStrings ftMt_Init_CostumeStrings[];
+/* 45A2D0 */ extern UnkCostumeStruct ftMt_CostumeList[4];
 
 #endif

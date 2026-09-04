@@ -24,5 +24,6 @@
 /* 3CCBF8 */ extern char ftNs_Init_AnimDatFilename[];
 /* 3CCC74 */ extern Fighter_DemoStrings ftNs_Init_DemoMotionFilenames;
 /* 3CCC84 */ extern Fighter_CostumeStrings ftNs_Init_CostumeStrings[];
+/* 459D90 */ extern UnkCostumeStruct ftNs_CostumeList[4];
 
 #endif

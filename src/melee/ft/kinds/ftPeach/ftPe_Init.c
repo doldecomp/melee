@@ -29,6 +29,8 @@
 #include "it/it_26B1.h"
 #include "lb/lbanim.h"
 
+/* 459DF0 */ UnkCostumeStruct ftPe_CostumeList[5];
+
 MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount] = {
     {
         // ftPe_MS_Float = 341

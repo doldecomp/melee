@@ -23,5 +23,6 @@
 /* 0E0CE0 */ char* ftMr_Init_GetMotionFileString(enum_t);
 /* 3C7120 */ extern MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount];
 /* 3C7260 */ extern MotionState ftMr_Init_UnkMotionStates0[2];
+/* 4599F0 */ extern UnkCostumeStruct ftMr_CostumeList[5];
 
 #endif

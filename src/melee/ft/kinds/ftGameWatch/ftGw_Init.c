@@ -25,6 +25,8 @@
 
 #include <dolphin/mtx.h>
 
+/* 45A4E0 */ UnkCostumeStruct ftGw_CostumeList[4];
+
 MotionState ftGw_Init_MotionStateTable[ftGw_MS_SelfCount] = {
     {
         // ftGw_MS_Attack11 = 341

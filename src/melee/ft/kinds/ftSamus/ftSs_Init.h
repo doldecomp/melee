@@ -32,5 +32,6 @@
 /* 3CE5EC */ extern char ftSs_Init_AnimDatFilename[];
 /* 3CE668 */ extern Fighter_DemoStrings ftSs_Init_DemoMotionFilenames;
 /* 3CE678 */ extern Fighter_CostumeStrings ftSs_Init_CostumeStrings[];
+/* 459F88 */ extern UnkCostumeStruct ftSs_CostumeList[5];
 
 #endif

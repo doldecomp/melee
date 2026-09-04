@@ -26,5 +26,6 @@
 /* 3CE204 */ extern char ftPk_Init_AnimDatFilename[];
 /* 3CE290 */ extern Fighter_DemoStrings ftPk_Init_DemoMotionFilenames;
 /* 3CE2A0 */ extern Fighter_CostumeStrings ftPk_Init_CostumeStrings[];
+/* 459F28 */ extern UnkCostumeStruct ftPk_CostumeList[4];
 
 #endif

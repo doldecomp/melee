@@ -21,5 +21,6 @@
 /* 3D3410 */ extern char ftFe_Init_AnimDatFilename[];
 /* 3D3498 */ extern Fighter_DemoStrings ftFe_Init_DemoMotionFilenames;
 /* 3D34A8 */ extern char ftFe_Init_DataName[];
+/* 45A5B8 */ extern UnkCostumeStruct ftFe_CostumeList[5];
 
 #endif

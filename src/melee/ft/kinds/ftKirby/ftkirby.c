@@ -40,6 +40,9 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+/* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
+/* 459B88 */ struct ft_80459B88_t ft_80459B88;
+
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
         // ftKb_MS_JumpAerialF1 = 341

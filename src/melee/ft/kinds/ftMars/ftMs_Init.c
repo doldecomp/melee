@@ -18,6 +18,8 @@
 #include "ft/types.h"
 #include "ftMars/types.h"
 
+/* 45A0F0 */ UnkCostumeStruct ftMs_CostumeList[5];
+
 MotionState ftMs_Init_MotionStateTable[ftMs_MS_SelfCount] = {
     {
         // ftMs_MS_SpecialNStart = 341
