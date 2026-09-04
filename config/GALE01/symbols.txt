@@ -21600,7 +21600,6 @@ ftYs_Init_MotionStateTable = .data:0x803CE6D0; // type:object size:0x380 scope:g
 @243 = .data:0x803CEA70; // type:object size:0xA scope:local data:string
 @273 = .data:0x803CEA7C; // type:object size:0x1A scope:local data:string
 ftYs_Init_DatFilename = .data:0x803CEA98; // type:object size:0x9 scope:global data:string
-...data.0 = .data:0x803CEA98; // type:label scope:local
 ftYs_Init_DataName = .data:0x803CEAA4; // type:object size:0xC scope:global data:string
 ftYs_Unk2_803CEAB0 = .data:0x803CEAB0; // type:object size:0xB scope:global data:string
 ftYs_Unk2_803CEABC = .data:0x803CEABC; // type:object size:0x17 scope:global data:string
