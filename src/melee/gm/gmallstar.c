@@ -617,7 +617,6 @@ void gm_801B5ACC(GameModeState* arg0)
     u16 round;
     StartMeleeData* data;
     s32 i;
-    s32 next_count;
 
     PAD_STACK(24);
     chars[0] = 0x21;
@@ -649,26 +648,25 @@ void gm_801B5ACC(GameModeState* arg0)
     {
         UnkAllstarData* allstar = &gm_80473A18;
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
-        s32 next_start;
 
         for (i = 0; i < (s32) ri->count; i++) {
             u8* slot_ptr;
             s32 slot;
+            u8* p;
             do {
                 slot = HSD_Randi(0x1A);
-                slot_ptr = &allstar->x76[slot];
-            } while ((s32) *slot_ptr != 0x21);
+                p = (u8*) allstar + slot;
+                slot_ptr = p + 0x76;
+            } while ((s32) p[0x76] != 0x21);
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
 
-        next_count = (s32) ri[1].count;
-        next_start = (s32) ri[1].start;
-        for (i = 0; i < next_count; i++) {
-            allstar->_94[2 + i] = gm_803DEBE8[next_start + i].x3;
+        for (i = 0; i < (s32) (&gm_803DEC4C[round])[1].count; i++) {
+            gm_80473A18._94[2 + i] = gm_803DEBE8[(s32) (&gm_803DEC4C[round])[1].start + i].x3;
         }
 
-        allstar->_94[1] = (u8) next_count;
-        allstar->_94[0] = (u8) (round + 1);
+        gm_80473A18._94[1] = (u8) i;
+        gm_80473A18._94[0] = (u8) (round + 1);
         data->players[0].xC_b1 = 0;
         data->rules.x1_2 = 1;
         data->rules.x1_3 = 1;
