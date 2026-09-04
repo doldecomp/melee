@@ -377,7 +377,6 @@ clang_system_includes = [
     "src",
     "src/MSL",
     "src/Runtime",
-    "src/sysdolphin",
     "extern/dolphin/include",
     "extern/dolphin/src",
     f"build/{config.version}/include",
@@ -504,7 +503,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         objects,
         includes=[
             *includes_base,
-            "src/sysdolphin",
             f"build/{config.version}/sysdolphin",
         ],
         category="hsd",
@@ -519,7 +517,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
             *includes_base,
             "src/melee",
             "src/melee/ft/kinds",
-            "src/sysdolphin",
         ],
         category="game",
     )

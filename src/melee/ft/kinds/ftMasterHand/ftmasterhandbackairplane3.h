@@ -3,7 +3,7 @@
 #ifndef GALE01_153AEC
 #define GALE01_153AEC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 153AEC */ void ftMh_BackAirplane3_Anim(HSD_GObj* gobj);
 /* 153B28 */ void ftMh_BackAirplane3_IASA(HSD_GObj* gobj);

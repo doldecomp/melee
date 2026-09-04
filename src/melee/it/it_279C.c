@@ -4,7 +4,6 @@
 #include "ithitbox.h"
 #include "itzako.h"
 
-#include "baselib/random.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -50,6 +49,8 @@
 #include "pl/plbonuslib.h"
 #include "pl/plstale.h"
 #include "pl/pltrick.h"
+
+#include <sysdolphin/baselib/random.h>
 
 #define IT_M_PI_2 1.5707963267948966
 

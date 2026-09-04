@@ -35,7 +35,7 @@
 #include "it/it_26B1.h"
 #include "lb/lbanim.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 45A330 */ UnkCostumeStruct ftCl_CostumeList[5];
 

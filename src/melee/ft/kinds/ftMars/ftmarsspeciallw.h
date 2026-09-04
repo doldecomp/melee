@@ -1,7 +1,7 @@
 #ifndef GALE01_138B64
 #define GALE01_138B64
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 138B64 */ void ftMs_SpecialAirLw_Anim(HSD_GObj* gobj);
 /* 138CFC */ void ftMs_SpecialAirLw_Coll(HSD_GObj* gobj);

@@ -6,7 +6,7 @@
 
 #include "melee/ft/dobjlist.h" // IWYU pragma: keep
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

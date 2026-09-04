@@ -13,10 +13,10 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grFlatzone_YakumonoParam {
     s32 unk0;

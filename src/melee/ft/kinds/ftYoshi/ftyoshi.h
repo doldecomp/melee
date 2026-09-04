@@ -8,7 +8,7 @@
 #include "ft/types.h"
 
 #include "ftYoshi/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 12B6E8 */ void ftYs_Init_8012B6E8(Fighter* fp,
                                      struct S_UNK_YOSHI1* unk_struct_arg);

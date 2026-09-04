@@ -3,11 +3,10 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/jobj.h"
-
-#include <baselib/psstructs.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/psstructs.h>
 
 /* 3983A4 */ void hsd_803983A4(HSD_Generator*);
 /* 3984F4 */ void psInitDataBankLoad(int bank, const int* cmdBank,

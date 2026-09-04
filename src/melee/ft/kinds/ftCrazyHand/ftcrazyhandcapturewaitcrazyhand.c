@@ -2,13 +2,13 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/kinds/ftCommon/ftCo_CaptureCut.h"
 #include "ft/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void ftCh_GrabUnk1_8015B778(HSD_GObj* gobj)
 {

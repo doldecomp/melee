@@ -21,8 +21,8 @@
 #include "gr/grpstadium.h"
 #include "lb/types.h"
 
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {

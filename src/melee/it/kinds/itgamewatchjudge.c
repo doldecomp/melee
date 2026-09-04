@@ -3,7 +3,6 @@
 #include "inlines.h"
 #include "placeholder.h"
 
-#include "baselib/jobj.h"
 #include "db/db.h"
 #include "ft/ftlib.h"
 #include "ftGameWatch/ftgamewatchspecials.h"
@@ -17,6 +16,7 @@
 #include "it/itzako.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7968[] = {
     { 0, itGamewatchjudge_UnkMotion0_Anim, NULL, NULL },

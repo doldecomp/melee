@@ -1,7 +1,7 @@
 #ifndef GALE01_1592D4
 #define GALE01_1592D4
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1592D4 */ void ftCh_Init_801592D4(HSD_GObj* gobj);
 /* 159388 */ void ftCh_BackAirplane1_Anim(HSD_GObj* gobj);

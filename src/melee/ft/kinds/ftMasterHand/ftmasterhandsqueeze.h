@@ -1,7 +1,7 @@
 #ifndef GALE01_154A78
 #define GALE01_154A78
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 154A78 */ void ftMh_MS_378_80154A78(HSD_GObj* gobj);
 /* 154B2C */ void ftMh_Squeeze_Anim(HSD_GObj* gobj);

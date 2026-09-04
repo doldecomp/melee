@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #define HSD_ARCHIVE_DONT_FREE 1
 

@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftLink/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0EBA4C */ static void onAccessory4(HSD_GObj* gobj);
 /* 0EBE64 */ static void doColl(HSD_GObj* gobj);

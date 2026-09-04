@@ -6,19 +6,18 @@
 
 #include "mnmain.h"
 
-#include "baselib/archive.h"
-
-#include "baselib/forward.h"
 #include "sc/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <db/db.h>
 #include <gm/gm_16AE.h>
 #include <gm/gm_16F1.h>

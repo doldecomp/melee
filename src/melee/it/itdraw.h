@@ -5,7 +5,7 @@
 
 #include "it/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 26EB18 */ void it_8026EB18(HSD_GObj*, s32, Vec3*);
 /* 26EBC8 */ void it_8026EBC8(HSD_GObj*, u16, u8*);

@@ -1,7 +1,7 @@
 #ifndef GALE01_1510B0
 #define GALE01_1510B0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1510B0 */ void ftMh_MS_343_801510B0(HSD_GObj* gobj);
 /* 151168 */ void ftMh_Entry_Anim(HSD_GObj* gobj);

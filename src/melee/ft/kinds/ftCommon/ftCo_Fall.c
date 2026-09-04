@@ -30,7 +30,7 @@
 #include "ftMasterHand/ftmasterhandwait12.h"
 #include "ftPeach/ftpeachfloat.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
 {

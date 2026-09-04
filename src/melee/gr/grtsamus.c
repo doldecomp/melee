@@ -10,10 +10,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 223580 */ static void grTSamus_OnDemoInit(int);
 /* 223584 */ static void grTSamus_OnInit(void);

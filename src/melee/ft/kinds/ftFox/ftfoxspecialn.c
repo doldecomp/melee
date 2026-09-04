@@ -30,7 +30,7 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <baselib/debug.h>
+#include <sysdolphin/baselib/debug.h>
 #include <melee/it/kinds/itfoxlaser.h>
 
 static inline void ftFox_SpecialN_GetHoldJoint(HSD_GObj* gobj, Vec3* pos,

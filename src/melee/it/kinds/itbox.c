@@ -3,8 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/jobj.h"
-#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gr/grkongo.h"
@@ -22,6 +20,9 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
+
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 

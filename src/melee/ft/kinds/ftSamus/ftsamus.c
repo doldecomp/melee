@@ -25,9 +25,9 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/jobj.h>
-#include <baselib/object.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/object.h>
 
 /* 459F88 */ UnkCostumeStruct ftSs_CostumeList[5];
 

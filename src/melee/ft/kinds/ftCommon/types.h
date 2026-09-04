@@ -10,7 +10,7 @@
 #include "lb/forward.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
 
 struct ftCollisionBox {
     /*  +0 */ float top;

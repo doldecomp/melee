@@ -3,11 +3,10 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #define DOBJ_TRSP_SHIFT 1
 #define JOBJ_TRSP_SHIFT 18

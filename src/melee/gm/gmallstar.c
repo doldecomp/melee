@@ -6,9 +6,9 @@
 #include "gm_unsplit.h"
 #include "gmregcommon.h"
 
-#include "baselib/random.h"
 #include "gr/ground.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>

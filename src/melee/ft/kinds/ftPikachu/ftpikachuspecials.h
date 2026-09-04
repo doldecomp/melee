@@ -1,7 +1,7 @@
 #ifndef GALE01_124EAC
 #define GALE01_124EAC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 124EAC */ void ftPk_SpecialAirS_Enter(HSD_GObj* gobj);
 /* 124FA0 */ void ftPk_SpecialAirSStart_Anim(HSD_GObj* gobj);

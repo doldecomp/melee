@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14AB48 */ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj);
 /* 14AC40 */ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj);

@@ -18,8 +18,8 @@
 #include "it/kinds/itkyasarinegg.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F90D0[] = {
     {

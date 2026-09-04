@@ -6,12 +6,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/debug.h"
-
-#include "baselib/forward.h"
-
-#include "baselib/psstructs.h"
-#include "baselib/tobj.h"
 #include "dolphin/gx/GXCull.h"
 #include "dolphin/gx/GXGeometry.h"
 #include "dolphin/gx/GXPixel.h"
@@ -22,17 +16,22 @@
 #include "lb/lbdvd.h"
 #include "lb/types.h"
 
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tev.h>
+#include <sysdolphin/baselib/tobj.h>
 #include <melee/sc/types.h>
 
 HSD_LObj* lb_80011AC4(LightList** list)

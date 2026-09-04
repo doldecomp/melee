@@ -7,10 +7,10 @@
 #include "gm/types.h"
 
 #include <dolphin/dvd.h>
-#include <baselib/initialize.h>
-#include <baselib/rumble.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/rumble.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 
 static struct strings {
     const char* x0;

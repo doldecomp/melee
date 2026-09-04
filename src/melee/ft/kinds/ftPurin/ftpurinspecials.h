@@ -1,7 +1,7 @@
 #ifndef GALE01_13D234
 #define GALE01_13D234
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 13D234 */ void ftPr_SpecialS_Enter(HSD_GObj* gobj);
 /* 13D2A0 */ void ftPr_SpecialAirS_Enter(HSD_GObj* gobj);
