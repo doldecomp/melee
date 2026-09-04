@@ -1,5 +1,8 @@
 #include "displayfunc.h"
 
+#include <string.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/lobj.h>
@@ -10,10 +13,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/util.h>
-
-#include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 

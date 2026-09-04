@@ -2,8 +2,6 @@
 
 #include "vi.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gm/gm_1601.h"
@@ -15,6 +13,8 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>

@@ -1,8 +1,6 @@
 #include "ftkirby.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
@@ -24,6 +22,8 @@
 #include "it/kinds/itdrmariopill.h"
 #include "it/kinds/itmariofireball.h"
 #include "lb/lb_00B0.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
 #include <sysdolphin/baselib/gobj.h>

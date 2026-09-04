@@ -1,9 +1,9 @@
 #include "grpstadium.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "dolphin/gx/GXStruct.h"
 #include "lb/lb_00F9.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/displayfunc.h>

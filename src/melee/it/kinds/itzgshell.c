@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
@@ -19,6 +18,8 @@
 #include "it/kinds/itnokonoko.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
+
+#include <sysdolphin/baselib/random.h>
 
 typedef struct itGShell_Attrs {
     float x0;

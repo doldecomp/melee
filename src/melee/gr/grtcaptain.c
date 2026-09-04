@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include "gr/granime.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -16,6 +15,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 static void grTCaptain_OnDemoInit(int);

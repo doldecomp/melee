@@ -8,8 +8,8 @@
 
 #include "pl/types.h"
 
-#include <sysdolphin/baselib/forward.h>
 #include <melee/pl/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

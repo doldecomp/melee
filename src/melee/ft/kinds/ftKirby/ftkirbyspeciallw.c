@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -28,6 +26,8 @@
 #include "ftKirby/inlines.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <stddef.h>

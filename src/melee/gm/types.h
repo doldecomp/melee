@@ -4,8 +4,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "dolphin/types.h"
 
 #include "ty/forward.h"
@@ -13,6 +11,7 @@
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/pad.h>

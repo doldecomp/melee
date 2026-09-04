@@ -10,11 +10,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-
 #include "ft/forward.h"
 #include "gm/forward.h"
 
@@ -36,8 +31,12 @@
 #include <string.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/hsd_3915.h>

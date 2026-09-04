@@ -6,8 +6,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -31,6 +29,8 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

@@ -1,13 +1,13 @@
 #include "platform.h"
 #include "textlib.h"
 
-#include <sysdolphin/baselib/controller.h>
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "mn/inlines.h"
 
 #include <printf.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>

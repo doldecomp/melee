@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
@@ -16,6 +14,8 @@
 #include "it/kinds/itcrazyhandbomb.h"
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

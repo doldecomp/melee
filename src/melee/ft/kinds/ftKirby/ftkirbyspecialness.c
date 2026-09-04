@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -24,6 +22,8 @@
 
 #include "it/kinds/itnesspkflash.h"
 #include "lb/lb_00B0.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
 #include <sysdolphin/baselib/gobj.h>

@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -11,6 +9,8 @@
 #include "ft/kinds/ftCommon/ftCo_Lift.h"
 #include "ft/kinds/ftCommon/ftCo_Throw.h"
 #include "ft/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {

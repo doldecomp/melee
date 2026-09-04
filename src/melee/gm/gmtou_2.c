@@ -9,9 +9,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjobject.h>
-
 #include "ft/forward.h"
 
 #include "lb/lbarchive.h"
@@ -28,8 +25,10 @@
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>

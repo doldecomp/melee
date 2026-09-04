@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/random.h>
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -16,6 +15,7 @@
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

@@ -5,9 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include <sysdolphin/baselib/objalloc.h>
-
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #define ROBJ_TYPE_MASK 0x70000000
 #define REFTYPE_EXP 0x00000000

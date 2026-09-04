@@ -5,9 +5,9 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/objalloc.h>
-
 #include <melee/ft/forward.h>
+
+#include <sysdolphin/baselib/objalloc.h>
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)
 typedef struct {

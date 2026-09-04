@@ -1,7 +1,5 @@
 #include "ftkoopaspecialn.h"
 
-#include <sysdolphin/baselib/random.h>
-
 #include "ft/forward.h"
 
 #include "ft/ft_084E.h"
@@ -10,6 +8,7 @@
 
 #include "ftKoopa/forward.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

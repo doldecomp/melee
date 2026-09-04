@@ -5,11 +5,10 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/debug.h>
-
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/state.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftLink/types.h>

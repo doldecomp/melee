@@ -1,6 +1,5 @@
 #include "ftseakspecialn.h"
 
-#include <sysdolphin/baselib/random.h>
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
@@ -22,6 +21,8 @@
 #include "ftSeak/ftseak.h"
 #include "it/kinds/itseakneedleheld.h"
 #include "it/kinds/itseakneedlethrown.h"
+
+#include <sysdolphin/baselib/random.h>
 
 /* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
 /* 112D44 */ static void shootNeedles(Fighter_GObj* gobj);

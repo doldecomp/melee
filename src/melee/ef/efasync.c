@@ -5,11 +5,6 @@
 #include "efsync.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/particle.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
@@ -18,6 +13,11 @@
 #include <math.h>
 #include <stdarg.h>
 #include <sysdolphin/baselib/generator.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/particle.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/random.h>
 
 HSD_ObjAllocData efAsync_AllocData;
 

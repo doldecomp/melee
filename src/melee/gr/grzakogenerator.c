@@ -4,8 +4,6 @@
 
 #include "placeholder.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -20,6 +18,8 @@
 #include "it/kinds/itpatapata.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

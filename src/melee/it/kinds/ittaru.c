@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -20,6 +19,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F58E0[] = {

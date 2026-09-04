@@ -3,11 +3,10 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/fobj.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/object.h>
 

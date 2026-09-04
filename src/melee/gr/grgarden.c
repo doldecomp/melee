@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/psstructs.h>
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -22,6 +21,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
 struct grGarden_YakumonoParam {

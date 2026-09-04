@@ -5,9 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/random.h>
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
@@ -19,7 +16,10 @@
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 static inline float my_sqrtf(float x)
 {

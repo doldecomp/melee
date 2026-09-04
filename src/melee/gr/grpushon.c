@@ -20,8 +20,8 @@
 
 #include <math.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grPushOn_Entry {
     s32 x0;

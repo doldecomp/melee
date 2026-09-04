@@ -4,10 +4,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
 #include "if/forward.h"
 
 #include "if/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 

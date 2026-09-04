@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
 #include <melee/ft/forward.h>
 #include <melee/gr/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

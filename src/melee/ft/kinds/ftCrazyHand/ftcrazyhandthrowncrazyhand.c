@@ -2,14 +2,14 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/kinds/ftCommon/ftCo_Thrown.h"
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid)
 {

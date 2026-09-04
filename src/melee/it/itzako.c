@@ -6,8 +6,6 @@
 #include "itmaplib.h"
 #include "itmaterial.h"
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -23,6 +21,9 @@
 #include "lb/lbvector.h"
 #include "pl/plbonuslib.h"
 #include "ty/tydisplay.h"
+
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

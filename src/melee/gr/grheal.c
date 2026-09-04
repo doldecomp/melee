@@ -4,9 +4,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
 #include "dolphin/types.h"
 #include "gm/gm_1884.h"
 
@@ -24,6 +21,10 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 #include "ty/toy.h"
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct grHeal_UnkData {
     s32 x0;

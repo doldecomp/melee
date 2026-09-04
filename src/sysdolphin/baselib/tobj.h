@@ -3,15 +3,13 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/class.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
-
-#include <sysdolphin/baselib/object.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/object.h>
 
 struct HSD_TObj;
 

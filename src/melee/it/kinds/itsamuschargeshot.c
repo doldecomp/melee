@@ -1,6 +1,5 @@
 #include "itsamuschargeshot.h"
 
-#include <sysdolphin/baselib/mtx.h>
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -13,6 +12,8 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
+
+#include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7288[] = {
     { 0, itSamuschargeshot_UnkMotion0_Anim, itSamuschargeshot_UnkMotion0_Phys,

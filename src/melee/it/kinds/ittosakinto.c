@@ -2,7 +2,6 @@
 
 #include "platform.h"
 
-#include <sysdolphin/baselib/random.h>
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -13,6 +12,8 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "lb/lbaudio_ax.h"
+
+#include <sysdolphin/baselib/random.h>
 
 #define GET_ATTRS(it)                                                         \
     ((itTosakinto_Attrs*) (it)->xC4_article_data->x4_specialAttributes)

@@ -5,8 +5,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -31,6 +29,8 @@
 #include "ftKirby/forward.h"
 
 #include "mp/mplib.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <stddef.h>

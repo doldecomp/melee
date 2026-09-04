@@ -12,7 +12,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/debug.h>
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "lb/lb_00B0.h"
@@ -22,13 +21,13 @@
 
 #include <math.h>
 #include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grRCruise_YakumonoParam {
     f32 x0;

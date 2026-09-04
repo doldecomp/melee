@@ -5,7 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include "ef/efasync.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -16,6 +15,8 @@
 #include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
 typedef struct itRShell_Attrs {

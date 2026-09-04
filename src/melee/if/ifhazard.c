@@ -1,9 +1,9 @@
 #include "ifhazard.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "gm/gm_unsplit.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

@@ -2,8 +2,6 @@
 
 #include "inlines.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ftKirby/ftkirbyspecialpeach.h"
 #include "ftPeach/ftpeachspecialn.h"
 
@@ -14,6 +12,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 ItemStateTable it_803F7528[] = {
     { 0, itPeachtoad_UnkMotion0_Anim, NULL, NULL },

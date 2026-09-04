@@ -14,7 +14,6 @@
 #include <MetroTRK/intrinsics.h>
 #endif
 
-#include <sysdolphin/baselib/debug.h>
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "gr/grzakogenerator.h"
@@ -30,6 +29,7 @@
 #include "mp/mplib.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>

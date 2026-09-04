@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 #define HSD_OBJ_NOREF ((u16) - 1)
 

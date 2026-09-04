@@ -1,6 +1,5 @@
 #include "itpikachutjoltground.h"
 
-#include <sysdolphin/baselib/jobj.h>
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -16,6 +15,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 

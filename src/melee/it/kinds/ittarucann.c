@@ -2,8 +2,6 @@
 
 #include "types.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -19,6 +17,8 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/jobj.h>

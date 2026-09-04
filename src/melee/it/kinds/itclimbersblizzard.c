@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/random.h>
 #include "db/db.h"
 
 #include "it/forward.h"
@@ -18,6 +17,7 @@
 #include "it/kinds/forward.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 #define M_TAU 6.283185307179586
 

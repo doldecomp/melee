@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 
 #include "forward.h"
@@ -18,6 +16,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

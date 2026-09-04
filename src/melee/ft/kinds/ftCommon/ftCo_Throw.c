@@ -2,13 +2,12 @@
 #include "platform.h"
 #include "stdbool.h"
 
-#include <sysdolphin/baselib/jobj.h>
-
 #include "ft/forward.h"
 
 #include "ft/ft_084E.h"
 #include "mp/types.h"
 
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0DF1.h>

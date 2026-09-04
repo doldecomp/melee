@@ -6,11 +6,10 @@
 
 #include "mnmain.h"
 
-#include <sysdolphin/baselib/archive.h>
-
-#include <sysdolphin/baselib/forward.h>
 #include "sc/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
+#include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

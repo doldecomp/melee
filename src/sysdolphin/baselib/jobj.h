@@ -3,17 +3,15 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/debug.h>
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/spline.h>
-
-#include <dolphin/mtx.h>
 
 #define JOBJ_PTCL_ACTIVE 0x7FFFFFFF
 #define JOBJ_PTCL_OFFSET_MASK 0xFFFFFF

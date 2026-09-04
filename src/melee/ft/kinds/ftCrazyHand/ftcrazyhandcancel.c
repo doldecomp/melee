@@ -4,14 +4,14 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCrazyHand/ftcrazyhandsqueezing0.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

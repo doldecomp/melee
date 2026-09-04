@@ -4,19 +4,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/fog.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/wobj.h>
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
@@ -33,6 +20,19 @@
 #include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
+
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /* 21E994 */ static void fn_8021E994(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

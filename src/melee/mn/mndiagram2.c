@@ -2,14 +2,13 @@
 
 #include "mndiagram2.static.h"
 
-#include <sysdolphin/baselib/debug.h>
-
-#include <sysdolphin/baselib/forward.h>
-
 #include "mn/inlines.h"
 #include "mn/types.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <stdbool.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

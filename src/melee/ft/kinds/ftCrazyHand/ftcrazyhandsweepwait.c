@@ -5,8 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
@@ -15,6 +13,8 @@
 #include "ftCrazyHand/ftcrazyhandtagcancel.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

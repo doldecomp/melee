@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
 #include "if/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 /* 2F7288 */ s32 fn_802F7288(HSD_GObj*, Element_803F9628*);
 /* 2F73C4 */ void if_802F73C4(HSD_GObj*);

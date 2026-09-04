@@ -6,8 +6,8 @@
 #include "gr/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
-#include <sysdolphin/baselib/forward.h>
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

@@ -5,14 +5,14 @@
 
 #include "platform.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "gm/types.h"
 
 #include "it/forward.h"
 #include "lb/forward.h"
 
 #include "lb/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>

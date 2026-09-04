@@ -14,6 +14,7 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
+
 #include <sysdolphin/baselib/random.h>
 
 typedef struct itOldkuriAttributes {

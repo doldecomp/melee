@@ -19,9 +19,9 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itspawn.h"
-#include <sysdolphin/baselib/random.h>
 
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F59F8[] = {
     { -1, itKusudama_UnkMotion0_Anim, itKusudama_UnkMotion0_Phys,

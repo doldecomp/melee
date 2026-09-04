@@ -5,9 +5,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/objalloc.h>
-
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #define HSD_A_OP_NONE 0
 #define HSD_A_OP_CON 1

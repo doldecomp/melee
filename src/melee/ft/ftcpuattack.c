@@ -2,8 +2,6 @@
 
 #include "ftcmdscript.h"
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/random.h>
 #include "ft/ftlib.h"
 
 #include "ftKirby/forward.h"
@@ -14,7 +12,9 @@
 #include <melee/ft/kinds/ftZelda/forward.h>
 
 #include <math.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_09F7.h>

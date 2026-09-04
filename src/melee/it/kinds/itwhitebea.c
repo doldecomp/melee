@@ -17,9 +17,9 @@
 #include "it/kinds/itfreeze.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include <sysdolphin/baselib/random.h>
 
 #include <math.h> // IWYU pragma: keep
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8A88[] = {
     {

@@ -2,7 +2,6 @@
 
 #include "platform.h"
 
-#include <sysdolphin/baselib/debug.h>
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
@@ -11,6 +10,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <sysdolphin/baselib/debug.h>
 
 struct unk_series {
     s16 values[26];

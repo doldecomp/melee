@@ -1,6 +1,5 @@
 #include "ifmagnify.h"
 
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include "cm/camera.h"
 #include "ft/ftdrawcommon.h"
 #include "ft/ftlib.h"
@@ -25,6 +24,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>

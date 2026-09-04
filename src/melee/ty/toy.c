@@ -7,7 +7,6 @@
 #include "tylist.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/fog.h>
 #include "db/db.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
@@ -44,6 +43,7 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

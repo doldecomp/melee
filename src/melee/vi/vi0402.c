@@ -1,7 +1,5 @@
 #include "vi/vi0402.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gm/gm_unsplit.h"
@@ -12,6 +10,8 @@
 #include "pl/player.h"
 #include "sc/types.h"
 #include "vi/vi.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>

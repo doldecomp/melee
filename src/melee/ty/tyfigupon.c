@@ -5,6 +5,25 @@
 #include "stddef.h"
 #include "toy.h"
 
+#include "dolphin/mtx.h"
+#include "dolphin/os.h"
+#include "gm/gm_1601.h"
+#include "gm/gm_1A45.h"
+#include "if/types.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbcardgame.h"
+#include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
+#include "lb/lbvector.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
+#include "sc/types.h"
+#include "ty/inlines.h"
+#include "ty/toy.h"
+#include "ty/types.h"
+
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -25,24 +44,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
-#include "dolphin/mtx.h"
-#include "dolphin/os.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_1A45.h"
-#include "if/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "sc/types.h"
-#include "ty/inlines.h"
-#include "ty/toy.h"
-#include "ty/types.h"
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);

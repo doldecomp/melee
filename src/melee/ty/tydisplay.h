@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
 #include "ty/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 /* 31B460 */ void tyDisplay_Scene_OnEnter(void*);
 /* 31B9A4 */ void tyDisplay_Scene_OnFrame(void);

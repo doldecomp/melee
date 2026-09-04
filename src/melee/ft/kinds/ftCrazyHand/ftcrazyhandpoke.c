@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
@@ -15,6 +13,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

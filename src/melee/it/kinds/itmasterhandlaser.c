@@ -3,9 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/jobj.h>
 #include "db/db.h"
 #include "ef/efsync.h"
 
@@ -24,7 +21,10 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F9378[] = {
     {

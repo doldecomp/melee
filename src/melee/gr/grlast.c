@@ -1,6 +1,5 @@
 #include "grlast.h"
 
-#include <sysdolphin/baselib/psstructs.h>
 #include "lb/lb_00F9.h"
 
 #include <math.h>
@@ -8,6 +7,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>

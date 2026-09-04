@@ -2,8 +2,6 @@
 
 #include "vi.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -25,6 +23,8 @@
 #include "pl/player.h"
 #include "sc/types.h"
 #include "ty/toy.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>

@@ -3,10 +3,6 @@
 #include "itlinkhookshot.h"
 #include "placeholder.h"
 
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include "dolphin/types.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -35,9 +31,13 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

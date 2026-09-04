@@ -1,6 +1,5 @@
 #include "mnnamenew.h"
 
-#include <sysdolphin/baselib/debug.h>
 #include "dolphin/gx/GXStruct.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
@@ -17,6 +16,8 @@
 #include "mn/mnname.h"
 #include "mn/types.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

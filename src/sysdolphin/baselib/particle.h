@@ -6,7 +6,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/jobj.h>
-
 #include <sysdolphin/baselib/psstructs.h>
 
 /* 3983A4 */ void hsd_803983A4(HSD_Generator*);

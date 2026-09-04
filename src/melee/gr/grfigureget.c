@@ -9,8 +9,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
 
@@ -28,6 +26,8 @@
 #include "mp/mplib.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

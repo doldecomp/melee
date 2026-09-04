@@ -1,10 +1,9 @@
 #include "controller.h"
 
-#include <sysdolphin/baselib/rumble.h>
-
 #include <math.h>
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
+#include <sysdolphin/baselib/rumble.h>
 
 HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };

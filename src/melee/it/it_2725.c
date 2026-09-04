@@ -7,8 +7,6 @@
 #include "ithitbox.h"
 #include "itmaplib.h"
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -24,6 +22,8 @@
 
 #include <math.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 extern f32 it_804DC73C;
 

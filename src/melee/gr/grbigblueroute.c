@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/memory.h>
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -22,10 +20,12 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/os.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
 

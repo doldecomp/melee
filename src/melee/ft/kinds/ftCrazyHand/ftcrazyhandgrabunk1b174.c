@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ft_0881.h"
@@ -17,6 +15,8 @@
 #include "ftMasterHand/types.h"
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/forward.h>
-
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 
@@ -41,6 +39,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "mp/mpcoll.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <stddef.h>

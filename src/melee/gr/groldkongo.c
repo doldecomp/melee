@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/debug.h>
 #include "cm/camera.h"
 #include "ef/efsync.h"
 
@@ -23,6 +22,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

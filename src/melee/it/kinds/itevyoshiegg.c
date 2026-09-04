@@ -3,8 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include "ef/efsync.h"
 #include "gm/gmevent.h"
 
@@ -19,6 +17,9 @@
 #include "it/ithitbox.h"
 
 #include "it/kinds/forward.h"
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6728[] = {
     { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,

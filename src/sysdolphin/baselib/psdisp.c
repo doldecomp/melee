@@ -1,10 +1,11 @@
 #include "psdisp.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/fog.h>
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <string.h>
+#include <dolphin/gx.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/particle.h>
@@ -12,9 +13,6 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/util.h>
-
-#include <string.h>
-#include <dolphin/gx.h>
 
 // MSL/math.h defines a non-IEEE FLT_EPSILON
 #undef FLT_EPSILON

@@ -3,10 +3,9 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/objalloc.h>
-
 #include <math.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #define VEC2_SQ_LEN(v) ((SQ((v).x) + SQ((v).y)))
 #define VEC3_SQ_LEN(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))

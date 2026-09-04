@@ -3,7 +3,6 @@
 #include "inlines.h"
 #include "itmaril.h"
 
-#include <sysdolphin/baselib/random.h>
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -19,6 +18,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
 

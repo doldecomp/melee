@@ -13,8 +13,8 @@
 
 #include "lb/types.h"
 
-#include <sysdolphin/baselib/forward.h>
 #include <melee/gr/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

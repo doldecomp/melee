@@ -17,6 +17,7 @@
 #include "it/kinds/itoctarockstone.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
+
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8B48[] = {

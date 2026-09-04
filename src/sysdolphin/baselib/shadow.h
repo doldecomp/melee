@@ -3,15 +3,13 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/cobj.h>
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include <dolphin/mtx.h>
 
 struct HSD_Shadow {
     HSD_SList* objects; // 0x0

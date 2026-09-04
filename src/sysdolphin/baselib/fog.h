@@ -5,10 +5,9 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include <sysdolphin/baselib/object.h>
-
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/object.h>
 
 struct HSD_FogAdj {
     /* 0x00 */ HSD_Obj parent;

@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/debug.h>
 #include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -14,6 +13,7 @@
 #include <setjmp.h>
 #include <stdarg.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/robj.h>
