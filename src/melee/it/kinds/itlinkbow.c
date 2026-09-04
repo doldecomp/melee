@@ -4,7 +4,7 @@
 
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ftLink/ftLk_SpecialN.h"
+#include "ftLink/ftlinkspecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"

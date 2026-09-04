@@ -16,10 +16,10 @@
 #include "ftswing.h"
 #include "types.h"
 
-#include "ftCrazyHand/ftCh_CaptureCrazyHand.h"
-#include "ftCrazyHand/ftCh_CaptureDamageCrazyHand.h"
-#include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
-#include "ftCrazyHand/ftCh_ThrownCrazyHand.h"
+#include "ftCrazyHand/ftcrazyhandcapturecrazyhand.h"
+#include "ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.h"
+#include "ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftCrazyHand/ftcrazyhandthrowncrazyhand.h"
 #include "ftKirby/ftkirbycaptureyoshi.h"
 #include "ftKirby/ftkirbyyoshiegg.h"
 
@@ -129,9 +129,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_WarpStar.h>
 #include <melee/ft/kinds/ftCommon/ftCo_YoshiEgg.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
-#include <melee/ft/kinds/ftMasterHand/ftMh_CaptureDamageMasterHand.h>
-#include <melee/ft/kinds/ftMasterHand/ftMh_CaptureMasterHand.h>
-#include <melee/ft/kinds/ftMasterHand/ftMh_ThrownMasterHand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.h>
+#include <melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.h>
 
 MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     {

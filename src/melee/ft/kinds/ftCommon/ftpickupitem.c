@@ -25,7 +25,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/types.h"
-#include "ftDonkey/ftDk_HeavyWait0.h"
+#include "ftDonkey/ftdonkeyheavywait0.h"
 
 #include "it/forward.h"
 

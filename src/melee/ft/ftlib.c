@@ -18,7 +18,7 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftGameWatch/ftGw_Init.h"
+#include "ftGameWatch/ftgamewatch.h"
 #include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 

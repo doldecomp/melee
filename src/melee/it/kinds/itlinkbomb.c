@@ -6,7 +6,7 @@
 
 #include "baselib/jobj.h"
 #include "baselib/random.h"
-#include "ft/kinds/ftLink/ftLk_AttackAir.h"
+#include "ft/kinds/ftLink/ftlinkattackair.h"
 
 #include "it/forward.h"
 

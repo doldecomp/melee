@@ -4,7 +4,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftLink/ftLk_Init.h"
+#include "ft/kinds/ftLink/ftlink.h"
 #include "it/inlines.h"
 #include "it/kinds/itlinkhookshot.h"
 #include "lb/lb_00B0.h"

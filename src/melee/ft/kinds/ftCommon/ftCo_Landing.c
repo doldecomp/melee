@@ -35,7 +35,7 @@
 #include "ftCommon/ftCo_SquatWait.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
-#include "ftPeach/ftPe_SpecialHi.h"
+#include "ftPeach/ftpeachspecialhi.h"
 
 #include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
