@@ -9,8 +9,8 @@
 #include "it/itgroundcoll.h"
 #include "it/kinds/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/it/item.h>
 
 /* 295138 */ static void it_80295138(Item_GObj*);

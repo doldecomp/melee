@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 

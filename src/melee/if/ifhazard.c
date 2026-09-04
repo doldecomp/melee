@@ -1,16 +1,16 @@
 #include "ifhazard.h"
 
-#include "baselib/forward.h"
-
 #include "gm/gm_unsplit.h"
 #include "sc/types.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /// .sbss
 /* 4D6D80 */ static HSD_GObj* un_804D6D80;

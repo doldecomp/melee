@@ -1,7 +1,5 @@
 #include "itmsbomb.h"
 
-#include "baselib/jobj.h"
-
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -15,6 +13,8 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
 #include "mp/mpcoll.h"
+
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct {
     float x0;

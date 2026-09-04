@@ -1,7 +1,7 @@
 #ifndef GALE01_154230
 #define GALE01_154230
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 154230 */ void ftMh_BackDisappear_Anim(HSD_GObj* gobj);
 /* 154278 */ void ftMh_BackDisappear_IASA(HSD_GObj* gobj);

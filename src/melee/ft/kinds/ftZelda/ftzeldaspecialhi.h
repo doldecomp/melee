@@ -1,7 +1,7 @@
 #ifndef GALE01_1396AC
 #define GALE01_1396AC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1396AC */ void ftZd_SpecialHi_801396AC(HSD_GObj* gobj);
 /* 1396E0 */ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj);

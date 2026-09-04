@@ -26,7 +26,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
 

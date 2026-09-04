@@ -6,9 +6,9 @@
 #include "mn/mnmain.h"
 #include "mn/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/sislib.h>
 
 typedef enum _MenuInput {
     MenuInput_Up = 1 << 0,          ///< 0x0001

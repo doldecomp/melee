@@ -1,7 +1,7 @@
 #ifndef GALE01_13A830
 #define GALE01_13A830
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 13A830 */ void ftZd_SpecialN_8013A830(HSD_GObj* gobj);
 /* 13A8AC */ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj);

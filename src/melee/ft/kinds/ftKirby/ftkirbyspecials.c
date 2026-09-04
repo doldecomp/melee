@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
@@ -25,9 +23,11 @@
 #include "it/kinds/itkirbyhammer.h"
 #include "lb/lb_00B0.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <stddef.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
 
 char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
 char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";

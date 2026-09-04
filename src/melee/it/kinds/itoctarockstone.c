@@ -12,7 +12,7 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8E90[] = {
     { 0, itOctarockstone_UnkMotion0_Anim, itOctarockstone_UnkMotion0_Phys,

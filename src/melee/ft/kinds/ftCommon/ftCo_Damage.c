@@ -56,8 +56,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 int ftCo_803C5520[2][4][3] = {
     {

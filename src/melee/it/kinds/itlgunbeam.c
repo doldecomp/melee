@@ -18,8 +18,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/it/item.h>
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);

@@ -13,7 +13,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
 {

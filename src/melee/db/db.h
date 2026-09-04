@@ -6,7 +6,7 @@
 #include "melee/ft/forward.h"
 #include "melee/it/forward.h"
 
-#include <baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
 
 typedef enum DbLKind {
     DbLKind_Master = 0,

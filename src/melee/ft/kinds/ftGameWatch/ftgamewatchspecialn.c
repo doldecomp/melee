@@ -18,7 +18,7 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
 {

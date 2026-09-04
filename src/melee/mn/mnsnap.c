@@ -2,17 +2,16 @@
 
 #include <placeholder.h>
 
-#include "baselib/debug.h"
-
-#include <baselib/aobj.h>
-#include <baselib/dobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

@@ -11,7 +11,7 @@
 
 #include <string.h>
 #include <dolphin/dvd.h>
-#include <baselib/debug.h>
+#include <sysdolphin/baselib/debug.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/gr/grdatfiles.h>

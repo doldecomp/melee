@@ -7,7 +7,6 @@
 #include "gm/gmopening.h"
 #include "mn/inlines.h"
 
-#include <baselib/sislib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -16,6 +15,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <melee/db/db.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>

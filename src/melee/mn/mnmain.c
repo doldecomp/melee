@@ -11,8 +11,6 @@
 #include "mn/types.h"
 
 #include <math.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/memory.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -21,8 +19,10 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

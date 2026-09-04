@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include <baselib/debug.h>
+#include <sysdolphin/baselib/debug.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
 

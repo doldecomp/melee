@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -23,8 +21,10 @@
 #include "it/kinds/ityoshistar.h"
 #include "lb/lb_00B0.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 12E644 */ static void fn_8012E644(Fighter_GObj*);
 /* 12EAD8 */ static void ftYs_SpecialS_8012EAD8(Fighter_GObj*);

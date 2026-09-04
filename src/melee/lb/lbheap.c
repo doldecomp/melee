@@ -1,9 +1,9 @@
 #include "lbheap.static.h"
 
 #include <stddef.h> // offsetof
-#include <baselib/debug.h>
-#include <baselib/initialize.h>
-#include <baselib/memory.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/memory.h>
 #include <melee/lb/lbmemory.h>
 
 struct lbHeap_HeapDesc {

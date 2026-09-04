@@ -5,8 +5,8 @@
 
 #include "dolphin/gx.h"
 
-#include <baselib/forward.h>
 #include <melee/sc/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 011AC4 */ HSD_LObj* lb_80011AC4(LightList**);
 /* 011B74 */ void lb_80011B74(HSD_DObj* dobj, u32 flags);

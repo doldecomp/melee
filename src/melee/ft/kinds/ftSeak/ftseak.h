@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftSeak/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 110094 */ void ftSk_Init_OnDeath(HSD_GObj* gobj);
 /* 1100EC */ void ftSk_Init_OnLoad(HSD_GObj* gobj);

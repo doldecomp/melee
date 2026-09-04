@@ -10,7 +10,7 @@
 #include "it/itzako.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 ItemStateTable it_803F87F0[] = {
     { 0, itZrshell_UnkMotion0_Anim, itZrshell_UnkMotion0_Phys,

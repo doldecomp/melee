@@ -7,7 +7,7 @@
 
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 08521C */ void ft_8008521C(Fighter_GObj* gobj);
 /* 0852B0 */ void ft_800852B0(void);

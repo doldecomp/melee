@@ -13,8 +13,8 @@
 #include "it/itmaplib.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);
 /* 2C02E4 */ static bool itLuigifireball_UnkMotion0_Anim(Item_GObj* gobj);

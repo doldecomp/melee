@@ -25,9 +25,9 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "ftYoshi/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {

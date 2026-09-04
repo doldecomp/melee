@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -11,6 +9,8 @@
 #include "ft/types.h"
 #include "ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
 #include "ftCrazyHand/ftcrazyhandfingerbeam.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
 {

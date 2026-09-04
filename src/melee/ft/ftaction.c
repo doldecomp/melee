@@ -31,9 +31,9 @@
 #include "lb/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 07121C */ static void ftAction_8007121C(Fighter_GObj* gobj,
                                            CommandInfo* cmd);

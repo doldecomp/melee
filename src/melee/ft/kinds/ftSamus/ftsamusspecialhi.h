@@ -1,7 +1,7 @@
 #ifndef GALE01_12A674
 #define GALE01_12A674
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 12A674 */ void ftSs_SpecialHi_Enter(HSD_GObj* gobj);
 /* 12A738 */ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj);

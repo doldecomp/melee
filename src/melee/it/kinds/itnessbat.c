@@ -13,7 +13,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6C68[] = {
     { 0, itNessbat_UnkMotion0_Anim, itNessbat_UnkMotion0_Phys,

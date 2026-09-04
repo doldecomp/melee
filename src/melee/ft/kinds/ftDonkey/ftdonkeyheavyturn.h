@@ -1,7 +1,7 @@
 #ifndef GALE01_0E01BC
 #define GALE01_0E01BC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0E01BC */ void ftDk_HeavyTurn_Anim(HSD_GObj* gobj);
 /* 0E0200 */ void ftDk_HeavyTurn_IASA(HSD_GObj* gobj);

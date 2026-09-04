@@ -11,7 +11,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F74A8[] = {
     {

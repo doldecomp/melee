@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftMario/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0E08CC */ void ftMr_Init_OnDeath(HSD_GObj* gobj);
 /* 0E0920 */ void ftMr_Init_OnLoadForDrMario(Fighter*);

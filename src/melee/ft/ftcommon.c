@@ -46,10 +46,10 @@
 #include "sfx/crowdsfx.h"
 
 #include <math.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/rumble.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/rumble.h>
 #include <melee/it/kinds/itpeachparasol.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };

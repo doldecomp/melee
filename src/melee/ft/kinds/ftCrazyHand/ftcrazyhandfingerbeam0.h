@@ -1,7 +1,7 @@
 #ifndef GALE01_1587B0
 #define GALE01_1587B0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1587B0 */ void fn_801587B0(HSD_GObj* gobj);
 /* 158814 */ void ftCh_FingerBeamStart_Anim(HSD_GObj* gobj);

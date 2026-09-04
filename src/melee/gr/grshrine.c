@@ -13,8 +13,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 static void grShrine_80201C60(bool);
 static void grShrine_80201C64(void);

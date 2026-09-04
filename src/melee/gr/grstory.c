@@ -13,8 +13,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobjproc.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grStory_YakumonoParam {
     float timer_min;

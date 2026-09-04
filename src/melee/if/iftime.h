@@ -1,7 +1,7 @@
 #ifndef MELEE_IF_TIME_H
 #define MELEE_IF_TIME_H
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 2F3AE8 */ void ifTime_SetTime(HSD_JObj*, int, int);
 /* 2F405C */ void ifTime_HideTimers(void);

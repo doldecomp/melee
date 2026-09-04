@@ -6,8 +6,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -32,8 +30,10 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ft_80081B38(Fighter_GObj* gobj)
 {

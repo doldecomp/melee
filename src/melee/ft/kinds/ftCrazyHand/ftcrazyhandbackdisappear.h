@@ -1,7 +1,7 @@
 #ifndef GALE01_159908
 #define GALE01_159908
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 156F6C */ void fn_80159908(HSD_GObj* gobj);
 /* 1599C0 */ void ftCh_BackDisappear_Anim(HSD_GObj* gobj);

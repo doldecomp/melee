@@ -24,11 +24,11 @@
 
 #include "it/it_26B1.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/aobj.h>
-#include <baselib/debug.h>
-#include <baselib/mobj.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/mobj.h>
 
 /// @todo Belongs in #ftyoshiguard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };

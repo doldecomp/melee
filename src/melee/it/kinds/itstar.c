@@ -8,7 +8,7 @@
 #include "it/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 

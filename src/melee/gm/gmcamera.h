@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "dolphin/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct _gmCameraUnkStruct4 {
     /*0x00*/ bool x0;

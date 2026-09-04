@@ -41,12 +41,12 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
 /* 090B48 */ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj);

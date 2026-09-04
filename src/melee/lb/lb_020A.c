@@ -15,9 +15,9 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/quatlib.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/quatlib.h>
 #include <melee/lb/lbvector.h>
 
 static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)

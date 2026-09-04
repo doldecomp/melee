@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "gr/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1D5238 */ void grKongo_801D5238(bool);
 /* 1D523C */ void grKongo_801D523C(void);

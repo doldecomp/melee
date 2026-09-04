@@ -15,7 +15,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 void ftCo_80098E3C(Fighter_GObj* gobj)
 {

@@ -1,8 +1,8 @@
 #ifndef MELEE_MN_ITEMSW_H
 #define MELEE_MN_ITEMSW_H
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct MnItemSwData {
     /* 0x00 */ u8 menu_kind;

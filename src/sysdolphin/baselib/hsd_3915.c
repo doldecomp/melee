@@ -6,11 +6,11 @@
 #include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
-#include <baselib/cobj.h>
-#include <baselib/list.h>
-#include <baselib/memory.h>
-#include <baselib/perf.h>
-#include <baselib/state.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/list.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/perf.h>
+#include <sysdolphin/baselib/state.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 

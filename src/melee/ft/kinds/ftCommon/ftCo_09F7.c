@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/random.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"
@@ -10,6 +9,7 @@
 #include "ft/types.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/ftcmdscript.h>
 
 struct _m2c_stack_ftCo_8009F834 {

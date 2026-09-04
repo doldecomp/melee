@@ -19,26 +19,26 @@
 
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/archive.h>
-#include <baselib/cobj.h>
-#include <baselib/debug.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/object.h>
-#include <baselib/random.h>
-#include <baselib/state.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 struct grIzumi_YakumonoParam {
     float x0;

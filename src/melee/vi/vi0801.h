@@ -1,7 +1,7 @@
 #ifndef MELEE_VI_0801_H
 #define MELEE_VI_0801_H
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 31EE60 */ void vi0801_8031EE60(HSD_GObj*);
 /* 31EE84 */ void vi0801_8031EE84(void);

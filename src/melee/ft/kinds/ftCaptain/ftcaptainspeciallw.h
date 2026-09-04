@@ -1,7 +1,7 @@
 #ifndef GALE01_0E415C
 #define GALE01_0E415C
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0E3EAC */ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj);
 /* 0E4040 */ void ftCa_SpecialLw_Enter(HSD_GObj* gobj);

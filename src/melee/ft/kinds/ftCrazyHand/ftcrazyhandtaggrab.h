@@ -1,7 +1,7 @@
 #ifndef GALE01_15ADD0
 #define GALE01_15ADD0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15ADD0 */ void ftCh_GrabUnk1_8015ADD0(HSD_GObj* gobj);
 /* 15AF04 */ void ftCh_TagGrab_Anim(HSD_GObj* gobj);

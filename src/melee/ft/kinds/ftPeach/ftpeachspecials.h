@@ -1,7 +1,7 @@
 #ifndef GALE01_11C2F4
 #define GALE01_11C2F4
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 11C34C */ void ftPe_SpecialS_Enter(HSD_GObj* gobj);
 /* 11C3C4 */ void ftPe_SpecialAirS_Enter(HSD_GObj* gobj);

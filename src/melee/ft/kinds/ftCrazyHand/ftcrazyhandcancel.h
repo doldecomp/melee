@@ -1,7 +1,7 @@
 #ifndef GALE01_15A030
 #define GALE01_15A030
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15A030 */ void ftCh_Init_8015A030(HSD_GObj* gobj);
 /* 15A0C4 */ void ftCh_Cancel_Anim(HSD_GObj* gobj);

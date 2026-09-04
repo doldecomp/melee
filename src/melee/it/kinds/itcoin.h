@@ -8,7 +8,7 @@
 #include "it/kinds/types.h"
 #include "it/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 2F13B4 */ void it_802F13B4(HSD_GObj*, int);
 /* 2F14E4 */ void itCoin_Logic116_Spawned(Item_GObj*);

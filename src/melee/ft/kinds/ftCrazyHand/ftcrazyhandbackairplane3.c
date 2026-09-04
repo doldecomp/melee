@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
@@ -16,6 +14,8 @@
 #include "ftCrazyHand/ftcrazyhandthrowncrazyhand.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void ftCh_Init_80159670(HSD_GObj* gobj)
 {

@@ -1,7 +1,7 @@
 #ifndef GALE01_13C9C8
 #define GALE01_13C9C8
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 13C9C8 */ void ftPr_SpecialHi_Enter(HSD_GObj* gobj);
 /* 13CA98 */ void ftPr_SpecialAirHi_Enter(HSD_GObj* gobj);

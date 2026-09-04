@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 void psDispParticles(u32 target_link, u32 sw);
 HSD_Particle* particleSort(s32, u8, HSD_Particle**, HSD_Particle**);

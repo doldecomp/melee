@@ -9,7 +9,7 @@
 #include "it/types.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 #define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
 

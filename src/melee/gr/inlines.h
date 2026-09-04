@@ -10,14 +10,14 @@
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 

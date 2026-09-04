@@ -37,8 +37,8 @@
 #include "pl/plbonuslib.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 091BC4 */ static void ftCo_80091BC4(Fighter* fp);
 /* 091E78 */ static void ftCo_80091E78(Fighter_GObj* gobj, float);

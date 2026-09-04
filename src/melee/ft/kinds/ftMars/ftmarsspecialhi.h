@@ -1,7 +1,7 @@
 #ifndef GALE01_138348
 #define GALE01_138348
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 138348 */ void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj);
 /* 138940 */ void ftMs_SpecialAirHi_Coll(HSD_GObj* gobj);

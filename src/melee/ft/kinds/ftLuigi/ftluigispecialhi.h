@@ -3,7 +3,7 @@
 #ifndef GALE01_143FC8
 #define GALE01_143FC8
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 143FC8 */ void ftLg_SpecialHi_Enter(HSD_GObj* gobj);
 /* 144024 */ void ftLg_SpecialAirHi_Enter(HSD_GObj* gobj);

@@ -8,7 +8,7 @@
 
 #include "sc/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 // How efAsync_Spawn resolves position and forwards args to efSync_Spawn.
 // ATTACH = passes jobj directly (effect tracks the joint).

@@ -10,8 +10,8 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F57B0[] = {
     { -1, itBat_UnkMotion0_Anim, itBat_UnkMotion0_Phys,

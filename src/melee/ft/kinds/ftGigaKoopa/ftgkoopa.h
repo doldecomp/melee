@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftKoopa/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14F640 */ void ftGk_Init_OnDeath(HSD_GObj*);
 /* 14F698 */ void ftGk_Init_UnkMotionStates3(HSD_GObj*);

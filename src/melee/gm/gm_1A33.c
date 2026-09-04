@@ -10,7 +10,7 @@
 #include "mn/mnmain.h"
 
 #include <dolphin/pad.h>
-#include <baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/sislib.h>
 
 static f32 gmCamera_803DA758[12] = {

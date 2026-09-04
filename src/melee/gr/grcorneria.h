@@ -8,7 +8,7 @@
 #include "gr/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1DCCFC */ void grCorneria_801DCCFC(void);
 /* 1DCE1C */ void grCorneria_801DCE1C(void);

@@ -3,7 +3,7 @@
 #ifndef GALE01_142A24
 #define GALE01_142A24
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 142A24 */ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj);
 /* 142A5C */ void ftLg_SpecialS_SetVars(HSD_GObj* gobj);

@@ -9,7 +9,7 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 2AF32C */ static void it_802AF32C(HSD_GObj*);
 /* 2AF64C */ static bool itLinkbow_UnkMotion5_Anim(Item_GObj* gobj);

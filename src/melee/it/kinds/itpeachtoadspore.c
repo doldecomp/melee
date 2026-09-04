@@ -2,9 +2,6 @@
 
 #include "inlines.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/random.h"
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -16,7 +13,10 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7548[] = { {
     0,

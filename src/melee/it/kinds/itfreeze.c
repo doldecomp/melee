@@ -15,7 +15,7 @@
 
 #include "it/kinds/itwhitebea.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F5D28[] = {
     {

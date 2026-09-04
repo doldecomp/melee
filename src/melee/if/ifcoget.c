@@ -6,15 +6,15 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/wobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /* 3F9E08 */ static struct un_803F9E08_t {
     unsigned char x0_b0 : 1;

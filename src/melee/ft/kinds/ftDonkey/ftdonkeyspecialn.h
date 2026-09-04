@@ -1,7 +1,7 @@
 #ifndef GALE01_10E574
 #define GALE01_10E574
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 10E574 */ void ftDk_SpecialN_Enter(HSD_GObj* gobj);
 /* 10E69C */ void ftDk_SpecialAirN_Enter(HSD_GObj* gobj);

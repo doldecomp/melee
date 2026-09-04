@@ -1,7 +1,7 @@
 #ifndef GALE01_151828
 #define GALE01_151828
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1517B0 */ void ftMh_Damage_IASA(HSD_GObj* gobj);
 /* 1517F4 */ void ftMh_Damage_Phys(HSD_GObj* gobj);

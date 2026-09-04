@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 117B70 */ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj);
 /* 117BBC */ bool

@@ -28,7 +28,7 @@
 #include "it/kinds/itseakneedlethrown.h"
 
 #include <stddef.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 106DB0 */ static void fn_80106DB0(Fighter_GObj*);
 /* 3CB770 */ static float ftKb_Init_803CB770[] = {

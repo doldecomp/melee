@@ -21,9 +21,9 @@
 #include "mp/mplib.h"
 
 #include <dolphin/types.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>

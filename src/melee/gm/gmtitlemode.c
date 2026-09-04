@@ -6,7 +6,7 @@
 #include "gm/types.h"
 #include "lb/lbdvd.h"
 
-#include <baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
 
 struct exitData {
     int buttons;

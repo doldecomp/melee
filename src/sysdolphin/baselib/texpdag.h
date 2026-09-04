@@ -4,9 +4,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/texp.h"
+#include <sysdolphin/baselib/texp.h>
 
 typedef struct HSD_TExpDag {
     struct _HSD_TETev* tev;

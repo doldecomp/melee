@@ -24,18 +24,18 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/mobj.h>
-#include <baselib/state.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 typedef struct gm_1832_StageState {
     u8 stage_index : 5;
     u8 done : 1;

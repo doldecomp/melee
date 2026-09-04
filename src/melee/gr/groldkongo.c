@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 
@@ -23,9 +22,10 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;

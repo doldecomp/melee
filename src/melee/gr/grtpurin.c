@@ -10,9 +10,9 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 StageCallbacks grTPr_StageCallbacks[] = {
     { grTPurin_802232F4, grTPurin_80223320, grTPurin_80223328,

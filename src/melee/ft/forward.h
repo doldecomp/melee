@@ -5,7 +5,7 @@
 
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -71,7 +71,7 @@ struct Fighter_GObj {
     /* +34 */ void* x34_unk;
 };
 #else
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 

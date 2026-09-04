@@ -10,8 +10,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 08998C */ static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal);
 

@@ -16,7 +16,7 @@
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/spline.h>
+#include <sysdolphin/baselib/spline.h>
 #include <melee/lb/types.h>
 
 typedef struct StageBlastZone {

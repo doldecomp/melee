@@ -1,7 +1,7 @@
 #ifndef GALE01_158B3C
 #define GALE01_158B3C
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 158B3C */ void ftCh_Init_80158B3C(HSD_GObj* gobj);
 /* 158BBC */ void ftCh_FingerBeamLoop_Anim(HSD_GObj* gobj);

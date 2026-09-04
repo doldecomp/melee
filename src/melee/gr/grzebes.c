@@ -21,11 +21,11 @@
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);

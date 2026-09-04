@@ -1,4 +1,4 @@
-#include <baselib/wobj.h>
+#include <sysdolphin/baselib/wobj.h>
 #include <melee/gm/types.h>
 
 typedef struct BracketSrcEntry {

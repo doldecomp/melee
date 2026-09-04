@@ -6,11 +6,6 @@
 
 #include <platform.h>
 
-#include "baselib/controller.h"
-
-#include "baselib/forward.h"
-
-#include "baselib/random.h"
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
@@ -37,7 +32,11 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);
 static void ftCh_Init_80156AD8(HSD_GObj* gobj);

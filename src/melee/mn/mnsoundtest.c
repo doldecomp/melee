@@ -12,20 +12,20 @@
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/os.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sislib.h>
 
 static mnSoundTest_GObj* mnSoundTest_804D6C40;
 static u8 mnSoundTest_804D6C44;

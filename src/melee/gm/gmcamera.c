@@ -3,17 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/controller.h"
-
-#include "baselib/forward.h"
-
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
-#include "baselib/sislib.h"
 #include "cm/cmsnap.h"
 #include "dolphin/pad.h"
 #include "gm/gm_1601.h"
@@ -29,6 +18,17 @@
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/sislib.h>
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];

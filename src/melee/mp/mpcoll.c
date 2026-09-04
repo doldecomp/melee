@@ -21,8 +21,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

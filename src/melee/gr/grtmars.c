@@ -9,7 +9,7 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
 /* 221EF8 */ static void grTMars_80221EF8(void);

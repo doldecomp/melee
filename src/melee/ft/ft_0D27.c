@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallAerial.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>

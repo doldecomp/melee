@@ -3,7 +3,7 @@
 #ifndef GALE01_155074
 #define GALE01_155074
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 155074 */ void ftMh_Slam_Anim(HSD_GObj* gobj);
 /* 15512C */ void ftMh_Slam_IASA(HSD_GObj* gobj);

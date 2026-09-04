@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/eflib.h"
@@ -14,6 +12,9 @@
 #include "it/itCharItems.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2C4998 */ bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj);
 

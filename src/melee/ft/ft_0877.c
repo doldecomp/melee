@@ -10,8 +10,8 @@
 #include "lb/lbaudio_ax.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define TEST(expr) (expr) ? true : false
 

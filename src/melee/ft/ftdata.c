@@ -132,13 +132,13 @@
 #include "lb/lbfile.h"
 #include "pl/player.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <string.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 typedef struct ft_8045993C_t {
     /* +0 */ u32 pad_x0;

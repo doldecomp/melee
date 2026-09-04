@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF

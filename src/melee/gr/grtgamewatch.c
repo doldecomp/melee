@@ -8,8 +8,8 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 StageCallbacks grTGw_StageCallbacks[] = {
     { grTGameWatch_8022429C, grTGameWatch_802242C8, grTGameWatch_802242D0,

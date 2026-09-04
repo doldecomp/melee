@@ -81,17 +81,17 @@
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 

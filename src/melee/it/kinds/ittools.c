@@ -12,7 +12,7 @@
 #include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F9260[] = {
     {

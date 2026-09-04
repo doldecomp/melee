@@ -3,11 +3,11 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <stdbool.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct MnName_GObj {
     /* +00 */ HSD_GObj gobj;

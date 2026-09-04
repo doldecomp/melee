@@ -7,9 +7,9 @@
 #include "ftLink/types.h"
 #include "it/kinds/itclinkmilk.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void checkFighter2244(HSD_GObj* gobj)
 {

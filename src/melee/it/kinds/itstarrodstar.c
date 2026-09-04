@@ -3,7 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/jobj.h"
 #include "db/db.h"
 
 #include "it/forward.h"
@@ -19,6 +18,7 @@
 #include "lb/forward.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6530[] = { { 0, itStarrodstar_UnkMotion0_Anim,
                                    itStarrodstar_UnkMotion0_Phys,

@@ -18,7 +18,7 @@
 
 #include "ftCommon/types.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftdata.h>

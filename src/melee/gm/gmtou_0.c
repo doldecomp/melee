@@ -10,10 +10,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/fog.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-
 #include "gm/forward.h"
 
 #include "lb/lbarchive.h"
@@ -26,13 +22,16 @@
 #include "sc/types.h"
 
 #include <dolphin/pad.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 
 /* 4799B8 */ static struct Lbl804799B8_t lbl_804799B8;
 /* 4D6640 */ static HSD_Archive* lbl_804D6640;

@@ -16,7 +16,7 @@
 #include "it/it_26B1.h"
 #include "it/kinds/itclimbersice.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 459E68 */ UnkCostumeStruct ftPp_CostumeList[4];
 

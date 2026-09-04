@@ -14,9 +14,9 @@
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void ftCo_SpawnEf(Fighter_GObj* gobj, HSD_JObj* joint, u32 arg2,
                                 enum_t arg3)

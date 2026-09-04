@@ -1,8 +1,5 @@
 #include "itzeldadinfire.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/jobj.h"
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -18,7 +15,10 @@
 #include "it/itgroundcoll.h"
 #include "it/kinds/itzeldadinfireexplode.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 

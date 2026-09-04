@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 11BE80 */ bool ftPe_8011BE80(HSD_GObj* gobj);
 /* 11BF88 */ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj);

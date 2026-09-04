@@ -26,10 +26,10 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "it/it_26B1.h"
 
-#include <baselib/archive.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 /* 45A1F8 */ UnkCostumeStruct ftPr_CostumeList[5];
 

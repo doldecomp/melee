@@ -6,7 +6,7 @@
 #include "ft/types.h"
 
 #include "ftPikachu/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1243AC */ void ftPk_Init_OnLoad(HSD_GObj* gobj);
 /* 1243E4 */ void ftPk_Init_OnLoadForPichu(Fighter* fp);

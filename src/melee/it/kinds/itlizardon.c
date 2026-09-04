@@ -16,9 +16,9 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
-#include "sysdolphin/baselib/random.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7BC0[] = { {
                                      0,

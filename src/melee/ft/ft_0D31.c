@@ -1,6 +1,5 @@
 #include "ft/ft_0D31.h"
 
-#include "baselib/random.h"
 #include "ft/fighter.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcolanim.h"
@@ -9,6 +8,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "lb/lbvector.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>

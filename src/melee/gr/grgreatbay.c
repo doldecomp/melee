@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include "baselib/psstructs.h"
-
 #include "forward.h"
 
 #include "ft/ft_0877.h"
@@ -27,11 +25,12 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
                                              CollData* coll, int coll_x50,

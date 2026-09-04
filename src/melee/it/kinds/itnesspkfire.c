@@ -15,8 +15,8 @@
 #include "it/kinds/itnesspkfirepillar.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6B28[] = {
     { 0, itNesspkfire_UnkMotion0_Anim, NULL, itNesspkfire_UnkMotion0_Coll },

@@ -4,10 +4,10 @@
 
 #include "lb/lbspdisplay.h"
 
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/tobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/tobj.h>
 
 typedef struct {
     CmSnapStatus status;

@@ -1,7 +1,7 @@
 #ifndef GALE01_157DF8
 #define GALE01_157DF8
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 157DF8 */ void ftCh_Init_80157DF8(HSD_GObj* gobj);
 /* 157EA0 */ void ftCh_RockCrushUp_Anim(HSD_GObj* gobj);

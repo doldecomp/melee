@@ -5,7 +5,7 @@
 
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14F1F0 */ void ftBo_Init_OnDeath(HSD_GObj* gobj);
 /* 14F218 */ void ftBo_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

@@ -1,6 +1,5 @@
 #include "ftkirby.h"
 
-#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 
@@ -17,6 +16,8 @@
 #include "it/item.h"
 #include "it/kinds/itkoopaflame.h"
 #include "lb/lb_00B0.h"
+
+#include <sysdolphin/baselib/random.h>
 
 enum_t ftKb_Init_803CB540[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,

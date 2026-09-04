@@ -4,7 +4,7 @@
 #include <placeholder.h>
 
 #include <dolphin/gx/GXStruct.h>
-#include <baselib/list.h>
+#include <sysdolphin/baselib/list.h>
 
 /// One cell of the debug console's ASCII font: 14 rows of 4 bytes, 2 bits per
 /// pixel, 12 of the 16 pixels used.

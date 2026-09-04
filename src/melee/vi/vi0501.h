@@ -2,7 +2,7 @@
 #define GALE01_31D9F8
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 31D9E4 */ void un_8031D9E4(int arg0, int arg1, int arg2);
 /* 31D9F8 */ void un_8031D9F8(CharacterKind char_kind, int costume,

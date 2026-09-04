@@ -5,11 +5,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
-#include "baselib/psstructs.h"
-#include "baselib/tobj.h"
-
 #include "lb/forward.h"
 
 #include "lb/lbcollision.h"
@@ -17,16 +12,20 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/quatlib.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/quatlib.h>
+#include <sysdolphin/baselib/tobj.h>
 #include <melee/mp/mplib.h>
 
 struct lb_Collider {

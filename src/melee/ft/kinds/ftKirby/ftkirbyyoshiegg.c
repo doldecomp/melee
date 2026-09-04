@@ -23,7 +23,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static void fn_8010AA64(Fighter_GObj* gobj)
 {

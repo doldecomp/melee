@@ -6,10 +6,6 @@
 
 #include "platform.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/gobjplink.h"
-#include "baselib/jobj.h"
 #include "dolphin/mtx.h"
 #include "ft/ftcoll.h"
 #include "ft/ftlib.h"
@@ -32,10 +28,14 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },

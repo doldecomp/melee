@@ -2,8 +2,8 @@
 
 #include "devcom.static.h"
 
-#include <baselib/debug.h>
-#include <baselib/synth.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/synth.h>
 
 bool HSD_DevComIsBusy(int idx)
 {

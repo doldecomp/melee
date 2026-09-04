@@ -5,7 +5,7 @@
 
 #include "lb/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

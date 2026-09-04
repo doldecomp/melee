@@ -1,19 +1,19 @@
 #include "platform.h"
 #include "textlib.h"
 
-#include "baselib/controller.h"
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "mn/inlines.h"
 
 #include <printf.h> // IWYU pragma: keep
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
 
 /* 4D6E4C */ unsigned char un_804D6E4C;
 /* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;

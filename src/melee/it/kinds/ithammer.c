@@ -14,7 +14,7 @@
 #include "lb/lbvector.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct itHammerData {
     u32 x0;
