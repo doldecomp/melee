@@ -2786,6 +2786,18 @@ f32 _Toy_80309338(Vec3* arg0, Vec3* arg1)
 #pragma dont_inline off
 #endif
 
+static inline void _Toy_ReadTrigger(u32* out)
+{
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        if ((*out = HSD_PadCopyStatus[(u8) i].trigger)) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+}
+
 void _Toy_80309404(HSD_GObj* gobj)
 {
     struct {
@@ -2821,7 +2833,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         u8 trailing_pad[0x78];
     } archive_symbols;
 
-    PAD_STACK(160);
+    PAD_STACK(172);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) &_Toy_804A26B8;
@@ -3327,8 +3339,17 @@ void _Toy_80309404(HSD_GObj* gobj)
                             display->selected_entry =
                                 display->selected_entry->prev;
                         }
-                    } else if ((state->x30 > 0.0f) || (Toy_80305B88() & 0x822))
-                    {
+                    } else {
+                        u32 btn3;
+
+                        if (state->x30 > 0.0f) {
+                            goto next_body;
+                        }
+                        _Toy_ReadTrigger(&btn3);
+                        if (!(btn3 & 0x822)) {
+                            goto next_done;
+                        }
+                    next_body: {
                         s32 total;
 
                         sfxMove();
@@ -3423,6 +3444,8 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 display->selected_entry->next;
                         }
                     }
+                    next_done:;
+                    }
 
                     _Toy_80307828(0);
                     _Toy_8030715C(0.0f, 0.0f);
@@ -3466,37 +3489,45 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        trigger = Toy_80305B88();
-        if (trigger & HSD_PAD_START) {
-            sfxMove();
-            state->x58 = 0;
-            ed4->x10 = (s32) (ed4->x10 + 1);
-            if (ed4->x10 == 6) {
-                ed4->x10 = 0;
+        {
+            u32 btn;
+
+            _Toy_ReadTrigger(&btn);
+            if (btn & HSD_PAD_START) {
+                sfxMove();
+                state->x58 = 0;
+                ed4->x10 = (s32) (ed4->x10 + 1);
+                if (ed4->x10 == 6) {
+                    ed4->x10 = 0;
+                }
+                Toy_80306D70(ed4->x10);
+                _Toy_803075E8(ed4->x10);
             }
-            Toy_80306D70(ed4->x10);
-            _Toy_803075E8(ed4->x10);
         }
 
-        trigger = Toy_80305B88();
-        if (trigger & HSD_PAD_Z) {
-            ToyCameraControl* camera;
+        {
+            u32 btn2;
 
-            _Toy_80307828(0);
+            _Toy_ReadTrigger(&btn2);
+            if (btn2 & HSD_PAD_Z) {
+                ToyCameraControl* camera;
+
+                _Toy_80307828(0);
 /// @todo Redundant cast improves match
 #ifdef MUST_MATCH
-            camera = (ToyCameraControl*) Toy_sbss_804D6ED4;
+                camera = (ToyCameraControl*) Toy_sbss_804D6ED4;
 #else
-            camera = Toy_sbss_804D6ED4;
+                camera = Toy_sbss_804D6ED4;
 #endif
-            camera->x10 = 0;
-            Toy_80306D70(camera->x10);
-            _Toy_803075E8(camera->x10);
-            anim->x11 = 2;
-            anim->x10 = 2;
-            anim->x0F = 0;
-            anim->x0E = 0;
-            _Toy_80307F64(2, 0);
+                camera->x10 = 0;
+                Toy_80306D70(camera->x10);
+                _Toy_803075E8(camera->x10);
+                anim->x11 = 2;
+                anim->x10 = 2;
+                anim->x0F = 0;
+                anim->x0E = 0;
+                _Toy_80307F64(2, 0);
+            }
         }
         _Toy_80308DC8(cobj);
     }
