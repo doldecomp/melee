@@ -1234,19 +1234,20 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         {
             return 0;
         }
-        goto block_13;
+    } else {
+        hit_start_min_x = hit_start_copy.x - broadphase_radius;
+        if ((hit_start_min_x > hurt_start_copy.x) &&
+            (hit_start_min_x > hurt_end->x))
+        {
+            return 0;
+        }
+        hit_end_max_x = hit_end_x + broadphase_radius;
+        if ((hit_end_max_x < hurt_start_copy.x) &&
+            (hit_end_max_x < hurt_end->x))
+        {
+            return 0;
+        }
     }
-    hit_start_min_x = hit_start_copy.x - broadphase_radius;
-    if ((hit_start_min_x > hurt_start_copy.x) &&
-        (hit_start_min_x > hurt_end->x))
-    {
-        return 0;
-    }
-    hit_end_max_x = hit_end_x + broadphase_radius;
-    if ((hit_end_max_x < hurt_start_copy.x) && (hit_end_max_x < hurt_end->x)) {
-        return 0;
-    }
-block_13:
     hit_start_y = hit_start_copy.y;
     if (hit_start_y > hit_end->y) {
         y_work = hit_start_y + broadphase_radius;
@@ -1259,19 +1260,20 @@ block_13:
         {
             return 0;
         }
-        goto block_26;
+    } else {
+        hit_start_min_y = hit_start_y - broadphase_radius;
+        if ((hit_start_min_y > hurt_start_copy.y) &&
+            (hit_start_min_y > hurt_end->y))
+        {
+            return 0;
+        }
+        hit_end_max_y = hit_end->y + broadphase_radius;
+        if ((hit_end_max_y < hurt_start_copy.y) &&
+            (hit_end_max_y < hurt_end->y))
+        {
+            return 0;
+        }
     }
-    hit_start_min_y = hit_start_y - broadphase_radius;
-    if ((hit_start_min_y > hurt_start_copy.y) &&
-        (hit_start_min_y > hurt_end->y))
-    {
-        return 0;
-    }
-    hit_end_max_y = hit_end->y + broadphase_radius;
-    if ((hit_end_max_y < hurt_start_copy.y) && (hit_end_max_y < hurt_end->y)) {
-        return 0;
-    }
-block_26:
     hit_start_z = hit_start_copy.z;
     if (hit_start_z > hit_end->z) {
         hit_start_max_z = hit_start_z + broadphase_radius;
@@ -1286,20 +1288,21 @@ block_26:
         {
             return 0;
         }
-        goto block_39;
+    } else {
+        hit_start_min_z = hit_start_z - broadphase_radius;
+        if ((hit_start_min_z > hurt_start_copy.z) &&
+            (hit_start_min_z > hurt_end->z))
+        {
+            return 0;
+        }
+        hit_end_max_z = hit_end->z;
+        hit_end_max_z += broadphase_radius;
+        if ((hit_end_max_z < hurt_start_copy.z) &&
+            (hit_end_max_z < hurt_end->z))
+        {
+            return 0;
+        }
     }
-    hit_start_min_z = hit_start_z - broadphase_radius;
-    if ((hit_start_min_z > hurt_start_copy.z) &&
-        (hit_start_min_z > hurt_end->z))
-    {
-        return 0;
-    }
-    hit_end_max_z = hit_end->z;
-    hit_end_max_z += broadphase_radius;
-    if ((hit_end_max_z < hurt_start_copy.z) && (hit_end_max_z < hurt_end->z)) {
-        return 0;
-    }
-block_39:
     // Solve closest points between the two segment axes.
     hit_delta.x = hit_end_x - hit_start_copy.x;
     hit_delta.y = hit_end->y - hit_start_copy.y;
