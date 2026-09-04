@@ -1794,6 +1794,9 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 s32 grZebes_801DB3CC(HSD_GObj* gobj)
 {
     grZe_BubbleEntry* base = grZe_8049F170;
+    grZe_BubbleEntry* cur;
+    s32 right_idx;
+    int idx;
     s32 popped = 0;
     int i;
     for (i = 0; i < 20; i++) {
@@ -1816,12 +1819,10 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_BubbleEntry* cur = base;
-        int idx;
+        cur = base;
         for (idx = 0; idx < 7; idx++, cur++) {
             u8 active = cur->x00_active;
             if (active == 1 || active == 4) {
-                s32 right_idx;
                 s32 neighbor_count = 0;
                 if (idx != 0 && idx != 6) {
                     f32 fx = 0.0f;
