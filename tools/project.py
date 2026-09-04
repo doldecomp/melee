@@ -58,7 +58,6 @@ class Object:
             "asm_dir": None,
             "cflags": None,
             "extab_padding": None,
-            "section_align": None,
             "extra_asflags": [],
             "extra_cflags": [],
             "extra_clang_flags": [],
@@ -95,7 +94,6 @@ class Object:
         set_default("asflags", config.asflags)
         set_default("asm_dir", config.asm_dir)
         set_default("extab_padding", None)
-        set_default("section_align", None)
         set_default("mw_version", config.linker_version)
         set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
@@ -691,16 +689,6 @@ def generate_build_ninja(
     mwcc_sjis_extab_cmd = f'{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean --padding "$extab_padding" $out $out'
     mwcc_sjis_extab_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, dtk]
 
-    # MWCC with section alignment override
-    set_section_align = config.tools_dir / "set_section_align.py"
-    mwcc_sjis_align_cmd = (
-        f"{CHAIN}{mwcc_sjis_cmd} && $python {set_section_align} $out $section_align"
-    )
-    mwcc_sjis_align_implicit: List[Optional[Path]] = [
-        *mwcc_sjis_implicit,
-        set_section_align,
-    ]
-
     # MWLD
     mwld = compiler_path / "mwldeppc.exe"
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
@@ -783,13 +771,6 @@ def generate_build_ninja(
     n.rule(
         name="mwcc_sjis_extab",
         command=mwcc_sjis_extab_cmd,
-        description="MWCC $out",
-        depfile="$basefile.d",
-        deps="gcc",
-    )
-    n.rule(
-        name="mwcc_sjis_align",
-        command=mwcc_sjis_align_cmd,
         description="MWCC $out",
         depfile="$basefile.d",
         deps="gcc",
@@ -1059,13 +1040,6 @@ def generate_build_ninja(
                 build_implcit = mwcc_sjis_extab_implicit
                 variables["extab_padding"] = "".join(
                     f"{i:02x}" for i in obj.options["extab_padding"]
-                )
-            elif obj.options["shift_jis"] and obj.options["section_align"] is not None:
-                build_rule = "mwcc_sjis_align"
-                build_implcit = mwcc_sjis_align_implicit
-                variables["section_align"] = " ".join(
-                    f"{name}={align}"
-                    for name, align in obj.options["section_align"].items()
                 )
             elif obj.options["shift_jis"]:
                 build_rule = "mwcc_sjis"
