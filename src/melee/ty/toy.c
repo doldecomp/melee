@@ -4078,9 +4078,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             } else {
                                 cnt2 = *gmMainLib_GetTrophyCount();
                             }
-                            entry = display->last_entry->next;
                             lk = display->selectedIdx - cnt2;
                             tid = Toy_sbss_804D6EDC[lk + 1];
+                            entry = display->last_entry->next;
                             md = Toy_8030813C(tid);
                             if ((oa = entry->archive) != NULL) {
                                 lbArchive_80016EFC(oa);
