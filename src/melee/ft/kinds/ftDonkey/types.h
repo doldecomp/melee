@@ -47,7 +47,7 @@ typedef struct _ftDonkeyAttributes {
     s32 motion_state;
     s32 x4_motion_state;
 
-    //// used by ftDk_HeavyWalk.c (maybe Cargo Hold) ////
+    //// used by ftdonkeyheavywalk.c (maybe Cargo Hold) ////
     float x8;
     float xC;
     float x10;

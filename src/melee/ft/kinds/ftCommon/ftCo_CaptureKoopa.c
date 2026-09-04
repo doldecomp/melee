@@ -14,7 +14,7 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
-#include "ftKoopa/ftKp_SpecialS.h"
+#include "ftKoopa/ftkoopaspecials.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>

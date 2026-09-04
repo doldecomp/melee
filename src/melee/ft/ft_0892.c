@@ -2,7 +2,7 @@
 
 #include "ft/fighter.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftFox/ftFx_AppealS.h"
+#include "ft/kinds/ftFox/ftfoxappeals.h"
 #include "it/it_26B1.h"
 #include "pl/plattack.h"
 #include "pl/pltrick.h"

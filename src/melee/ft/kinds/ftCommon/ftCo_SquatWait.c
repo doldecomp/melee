@@ -15,7 +15,7 @@
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCLink/ftCl_Init.h"
+#include "ftCLink/ftclink.h"
 
 #include "ftCommon/forward.h"
 
@@ -33,7 +33,7 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftCommon/ftCo_SquatRv.h"
-#include "ftLink/ftLk_AttackAir.h"
+#include "ftLink/ftlinkattackair.h"
 
 #include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>

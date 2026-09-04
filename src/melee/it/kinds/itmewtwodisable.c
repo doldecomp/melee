@@ -9,7 +9,7 @@
 
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/kinds/ftMewtwo/ftMt_SpecialLw.h>
+#include <melee/ft/kinds/ftMewtwo/ftmewtwospeciallw.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

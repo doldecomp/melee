@@ -17,7 +17,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
-#include "ftNess/ftNs_AttackLw4.h"
+#include "ftNess/ftnessattacklw4.h"
 
 #include <dolphin/mtx.h>
 

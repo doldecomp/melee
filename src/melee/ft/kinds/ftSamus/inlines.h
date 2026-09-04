@@ -4,7 +4,7 @@
 #include "ef/eflib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftSamus/ftSs_Init.h"
+#include "ftSamus/ftsamus.h"
 #include "ftSamus/types.h"
 
 #include "it/forward.h"

@@ -28,7 +28,7 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_KneeBend.h"
 #include "ftCommon/ftCo_SpecialAir.h"
-#include "ftPeach/ftPe_Float.h"
+#include "ftPeach/ftpeachfloat.h"
 
 ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {

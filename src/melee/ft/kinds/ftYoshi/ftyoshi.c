@@ -1,7 +1,7 @@
 #include "ftyoshi.h"
 
-#include "ftYs_Guard.h"
-#include "ftYs_SpecialN.h"
+#include "ftyoshiguard.h"
+#include "ftyoshispecialn.h"
 #include "types.h"
 
 #include "forward.h"
@@ -17,8 +17,8 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftYoshi/ftYs_SpecialHi.h"
-#include "ftYoshi/ftYs_SpecialS.h"
+#include "ftYoshi/ftyoshispecialhi.h"
+#include "ftYoshi/ftyoshispecials.h"
 
 #include "it/forward.h"
 
@@ -30,7 +30,7 @@
 #include <baselib/debug.h>
 #include <baselib/mobj.h>
 
-/// @todo Belongs in #ftYs_Guard.c?
+/// @todo Belongs in #ftyoshiguard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 
 MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {

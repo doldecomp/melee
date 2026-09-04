@@ -26,9 +26,9 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_SpecialAir.h"
-#include "ftCrazyHand/ftCh_TagCancel.h"
-#include "ftMasterHand/ftMh_Wait1_2.h"
-#include "ftPeach/ftPe_Float.h"
+#include "ftCrazyHand/ftcrazyhandtagcancel.h"
+#include "ftMasterHand/ftmasterhandwait12.h"
+#include "ftPeach/ftpeachfloat.h"
 
 #include <baselib/jobj.h>
 

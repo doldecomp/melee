@@ -29,7 +29,7 @@
 #include "ftCommon/ftCo_ItemScrew.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_SpecialAir.h"
-#include "ftPeach/ftPe_Float.h"
+#include "ftPeach/ftpeachfloat.h"
 
 #include <baselib/jobj.h>
 

@@ -16,7 +16,7 @@
 
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
-#include "ftDrMario/ftDr_Init.h"
+#include "ftDrMario/ftdrmario.h"
 
 #include "it/forward.h"
 

@@ -28,7 +28,7 @@
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftCommon/types.h"
-#include "ftGameWatch/ftGw_Attack11.h"
+#include "ftGameWatch/ftgamewatchattack11.h"
 #include "it/it_26B1.h"
 
 /* 08AB50 */ static void onPkPc21EC(Fighter_GObj* gobj);

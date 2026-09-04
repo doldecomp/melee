@@ -12,7 +12,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftFox/types.h"
-#include "ftMario/ftMr_SpecialN.h"
+#include "ftMario/ftmariospecialn.h"
 #include "it/it_26B1.h"
 #include "it/kinds/itdrmariopill.h"
 #include "it/kinds/itfoxblaster.h"

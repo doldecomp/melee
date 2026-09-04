@@ -13,7 +13,7 @@
 #include "ft/ftcpuattack.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftPopo/ftPp_SpecialLw.h"
+#include "ft/kinds/ftPopo/ftpopospeciallw.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"

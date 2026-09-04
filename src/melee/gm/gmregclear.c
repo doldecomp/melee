@@ -916,7 +916,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             stage_flags = Ground_801C5AD0(Stage_8022519C(arg7));
 
             gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
-                        colors[1], (s32) colors[2], special_stage,
+                        colors[1], colors[2], special_stage,
                         special_enemy_mode, sp8, (u8) arg1->x0.x0.ckind,
                         arg1->x0.x0.color, (s32) enemy_level, (s32) arg3,
                         event_enemy_count, (s32) stage_flags, (s32) arg5,

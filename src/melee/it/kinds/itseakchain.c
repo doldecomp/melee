@@ -17,7 +17,7 @@
 
 #include "ftSeak/forward.h"
 
-#include "ftSeak/ftSk_SpecialS.h"
+#include "ftSeak/ftseakspecials.h"
 
 #include "it/forward.h"
 

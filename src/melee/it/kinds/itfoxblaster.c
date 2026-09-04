@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <melee/ft/kinds/ftFox/ftFx_SpecialN.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
 

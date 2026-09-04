@@ -5,7 +5,7 @@
 #include "baselib/forward.h"
 
 #include "ftKirby/ftkirbyspecialpeach.h"
-#include "ftPeach/ftPe_SpecialN.h"
+#include "ftPeach/ftpeachspecialn.h"
 
 #include "it/forward.h"
 

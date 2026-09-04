@@ -4,7 +4,7 @@
 
 #include "it/inlines.h"
 
-#include <melee/ft/kinds/ftPeach/ftPe_SpecialHi.h>
+#include <melee/ft/kinds/ftPeach/ftpeachspecialhi.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 

@@ -620,8 +620,9 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     if (count > 1) {
         s32 n2;
         s32 pivot;
-        TyDspGrid* base = grid;
+        TyDspGrid* base;
         n2 = count - 1;
+        base = grid;
         if (n2 > 0) {
             struct {
                 TyDspPos tmp2;
@@ -1005,10 +1006,10 @@ void _tyDisplay_80319994(s32 arg0)
         grid->x0C_max_x = 3.5f;
 
         {
-            s32 ring;
             s32 i;
             s32 col;
             s32 row;
+            s32 ring;
 
             cur = grid;
             row = 0;

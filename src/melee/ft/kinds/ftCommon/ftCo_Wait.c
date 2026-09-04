@@ -29,7 +29,7 @@
 #include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
-#include "ftFox/ftFx_AppealS.h"
+#include "ftFox/ftfoxappeals.h"
 
 #include <baselib/forward.h>
 

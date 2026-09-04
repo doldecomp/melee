@@ -1,4 +1,64 @@
-#include "toy.static.h" // IWYU pragma: associated
+#include "toy.h"
+
+#include "m2c_macros.h"
+#include "placeholder.h"
+#include "platform.h"
+#include "stddef.h"
+#include "tylist.h"
+#include "types.h"
+
+#include "baselib/fog.h"
+#include "db/db.h"
+#include "gm/gm_1601.h"
+#include "gm/gm_16AE.h"
+#include "gm/gm_16F1.h"
+#include "gm/gm_1A3F.h"
+#include "gm/gm_1A45.h"
+#include "gm/gmmain_lib.h"
+
+#include "if/forward.h"
+
+#include "if/textdraw.h"
+#include "if/textlib.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00CE.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
+#include "lb/lbvector.h"
+#include "melee/if/textlib.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
+#include "sc/types.h"
+#include "ty/types.h"
+
+#include <math.h>
+#include <string.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/controller.h>
+#include <baselib/debug.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
+#include <baselib/sislib.h>
+#include <baselib/sobjlib.h>
+#include <baselib/state.h>
+#include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
 typedef struct ToyDisplayList {
     /* 0x000 */ ToyListEntry entries[13];
@@ -46,6 +106,447 @@ typedef struct ToyUnkJObjData {
 /* 311788 */ static void _Toy_80311788(void);
 /* 311F5C */ static void _Toy_80311F5C(void);
 /* 312050 */ static void _Toy_80312050(HSD_GObj* gobj, int code);
+
+bool un_80304470(void)
+{
+    int i;
+    int sum = 0;
+    int count;
+    for (i = 0; i < 8; i++) {
+        sum += Toy_80304B94(i);
+    }
+    count = 0;
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
+        if (i != 0xE6 && i != 0xC9 && Toy_803048C0(i)) {
+            count++;
+        }
+    }
+    if (sum <= count) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+bool un_80304510(void)
+{
+    int i;
+    int sum = 0;
+    int count;
+    for (i = 0; i < 9; i++) {
+        sum += Toy_80304B94(i);
+    }
+    count = 0;
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
+        if (Toy_803048C0(i)) {
+            count++;
+        }
+    }
+    if (sum == count) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+bool un_803045A0(void)
+{
+    s16 sp[] = {
+        0,  3,  6,  9,  12, 15, 18, 21, 24, 27, 30, 33, 36,
+        39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75,
+    };
+    unsigned int i;
+    unsigned int count = 0;
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
+            count++;
+        }
+    }
+    if (count == ARRAY_SIZE(sp)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/// @todo Duplicate code of #un_803045A0 with different data
+bool un_80304690(void)
+{
+    s16 sp[] = {
+        1,  4,  7,  10, 13, 16, 19, 22, 25, 28, 31, 34, 37,
+        40, 43, 46, 49, 52, 55, 58, 61, 64, 67, 70, 73, 76,
+    };
+
+    unsigned int i;
+    unsigned int count = 0;
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
+            count++;
+        }
+    }
+    if (count == ARRAY_SIZE(sp)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/// @todo Duplicate code of #un_803045A0 with different data
+bool un_80304780(void)
+{
+    s16 sp[] = {
+        2,  5,  8,  11, 14, 17, 20, 23, 26, 29, 32, 35, 38,
+        41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77,
+    };
+
+    unsigned int i;
+    unsigned int count = 0;
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
+            count++;
+        }
+    }
+    if (count == ARRAY_SIZE(sp)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/* 3B8844 */ static HSD_FogDesc const _Toy_803B8844 = {
+    GX_FOG_LIN, NULL, 0.0f, 1.0f, { 0xFF, 0xFF, 0xFF, 0xFF },
+};
+/* 3B8858 */ static Vec3 const _Toy_803B8858 = { 0.0f, 8.0f, 0.0f };
+/* 3B8864 */ static PosArrayFull const _Toy_803B8864 = { {
+    { 526, 176 },
+    { 512, 74 },
+    { 0, 74 },
+    { 491, 174 },
+    { 46, 423 },
+    { 66, 37 },
+    { 546, 37 },
+} };
+/* 3B889C */ static PosArrayFull const _Toy_803B889C = { {
+    { 526, 172 },
+    { 496, 74 },
+    { 0, 72 },
+    { 491, 174 },
+    { 46, 423 },
+    { 66, 37 },
+    { 546, 37 },
+} };
+/* 3B88D4 */ static Vec3 const _Toy_803B88D4 = { 0 };
+/* 3B88E0 */ static Vec3 const _Toy_803B88E0 = { 0 };
+/* 3B88EC */ static Vec3 const _Toy_803B88EC = { 0 };
+/* 3B88F8 */ static Vec3 const _Toy_803B88F8 = { 0 };
+/* 3B8904 */ static Vec3 const _Toy_803B8904 = { 0 };
+/* 3B8910 */ static ToyEntry const _Toy_803B8910[] = {
+    { 7, 65 }, { 6, 66 }, { 5, 67 }, { 4, 68 }, { 3, 69 },
+    { 2, 70 }, { 0, 73 }, { 1, 88 }, { 8, 83 },
+};
+/* 4A26B8 */ static struct _Toy_804A26B8_t _Toy_804A26B8;
+/* 4A26C4 */ static char _Toy_devtext_buf_804A26C4[0x8C];
+/* 4A2750 */ static char _Toy_devtext_buf_804A2750[0xFC];
+/* 4A284C */ u16 Toy_804A284C[302];
+/* 4A2AA8 */ ToyAnimState Toy_804A2AA8;
+/* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
+/* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
+
+/// Number of sort keys held per trophy.
+#define TY_SORT_KEY_COUNT 3
+
+/// One row of the trophy sort table: one key per sort mode.
+typedef struct TySortRow {
+    /* 0x0 */ s16 key[TY_SORT_KEY_COUNT];
+} TySortRow;
+
+/// @warning do not sort. Private members cannot be declared @c static.
+/* 4D6EE0 */ TyDisplayData* Toy_sbss_804D6EE0;
+/* 4D6EDC */ s16* Toy_sbss_804D6EDC;
+/* 4D6ED8 */ ToyED8Data* Toy_sbss_804D6ED8;
+/* 4D6ED4 */ ToyCameraControl* Toy_sbss_804D6ED4;
+/* 4D6ED0 */ HSD_Archive* _Toy_sbss_804D6ED0;
+/* 4D6ECC */ HSD_Archive* _Toy_sbss_804D6ECC;
+/* 4D6EC8 */ HSD_Archive* Toy_sbss_804D6EC8;
+/* 4D6EC4 */ struct TrophyData* _Toy_sbss_804D6EC4;
+/* 4D6EC0 */ struct TrophyData* _Toy_sbss_804D6EC0;
+/* 4D6EBC */ void* _Toy_sbss_804D6EBC;
+/* 4D6EB8 */ void* _Toy_sbss_804D6EB8;
+/* 4D6EB4 */ s16* _Toy_sbss_804D6EB4;
+/* 4D6EB0 */ TyDspEntry* Toy_sbss_804D6EB0;
+/* 4D6EAC */ TyDspEntry* Toy_sbss_804D6EAC;
+/* 4D6EA8 */ void* _Toy_sbss_804D6EA8;
+/* 4D6EA4 */ void* _Toy_sbss_804D6EA4;
+/* 4D6EA2 */ s8 _Toy_sbss_804D6EA2;
+/* 4D6EA1 */ u8 _Toy_sbss_804D6EA1;
+/* 4D6EA0 */ u8 _Toy_sbss_804D6EA0;
+/* 4D6E9C */ DevText* _Toy_sbss_804D6E9C;
+/* 4D6E98 */ DevText* _Toy_sbss_804D6E98;
+/* 4D6E94 */ f32 _Toy_sbss_804D6E94;
+/* 4D6E90 */ f32 _Toy_sbss_804D6E90;
+/* 4D6E8C */ f32 _Toy_sbss_804D6E8C;
+/* 4D6E88 */ f32 _Toy_sbss_804D6E88;
+/* 4D6E84 */ f32 _Toy_sbss_804D6E84;
+/* 4D6E80 */ f32 _Toy_sbss_804D6E80;
+/* 4D6E7C */ s32 _Toy_sbss_804D6E7C;
+/* 4D6E78 */ s32 _Toy_sbss_804D6E78;
+/* 4D6E74 */ s32 _Toy_sbss_804D6E74;
+/* 4D6E70 */ s32 _Toy_sbss_804D6E70;
+/* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C;
+/* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
+/* 4D6E64 */ TySortRow* _Toy_sbss_804D6E64;
+/* 4D6E60 */ s32 _Toy_sbss_804D6E60;
+/* 4D6E5C */ void** _Toy_sbss_804D6E5C;
+/* 4D6E58 */ s32 _Toy_sbss_804D6E58;
+/* 4D6E54 */ s32 _Toy_sbss_804D6E54;
+/* 4D6E50 */ s8 _Toy_sbss_804D6E50;
+
+ASSERT_SIZE(_Toy_803B8910, 0x48);
+ASSERT_SIZE(_Toy_devtext_buf_804A26C4, 0x8C);
+ASSERT_SIZE(_Toy_devtext_buf_804A2750, 0xFC);
+
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void order_sdata2_0(void)
+{
+    /*   +0 */ (void) 100.0f;
+    /*   +8 */ (void) S32_TO_F32;
+    /*  +10 */ (void) 0.0f;
+    /*  +14 */ (void) 0.1f;
+    /*  +18 */ (void) 1.0f;
+    /*  +1C */ (void) -3000.0f;
+    /*  +20 */ (void) 3000.0f;
+    /*  +24 */ (void) MTXDegToRad(1);
+    /*  +28 */ (void) 2.0f;
+    /*  +2C */ (void) 38.0f;
+    /*  +30 */ (void) 0.25f;
+}
+#endif
+
+/* 4DDCFC */ static GXColor const _Toy_color_FFBA00FF = { 0xFF, 0xBA, 0x00,
+                                                          0xFF };
+
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void order_sdata2_38(void)
+{
+    /*  +38 */ (void) 0.9f;
+    /*  +3C */ (void) -10.9f;
+    /*  +40 */ (void) 384.0f;
+    /*  +44 */ (void) 64.0f;
+    /*  +48 */ (void) 0.044f;
+    /*  +4C */ (void) 0.103f;
+    /*  +50 */ (void) 1.75f;
+    /*  +54 */ (void) 0.2f;
+    /*  +58 */ (void) -5.1f;
+    /*  +5C */ (void) 17.2f;
+    /*  +60 */ (void) 0.035f;
+    /*  +64 */ (void) 0.034f;
+    /*  +68 */ (void) -5.0f;
+    /*  +6C */ (void) 0.033f;
+    /*  +70 */ (void) 0.7f;
+    /*  +74 */ (void) 7.9f;
+    /*  +78 */ (void) 9.0f;
+    /*  +7C */ (void) 0.03f;
+    /*  +80 */ (void) 25.0f;
+    /*  +84 */ (void) -3.0f;
+    /*  +88 */ (void) 15.0f;
+    /*  +8C */ (void) 10.0f;
+    /*  +90 */ (void) 0.0013187003f;
+    /*  +94 */ (void) 0.036397f;
+    /*  +98 */ (void) 0.00008119978f;
+    /*  +9C */ (void) -0.036397f;
+    /*  +A0 */ (void) 0.0032531999f;
+    /*  +A4 */ (void) 0.044307f;
+    /*  +A8 */ (void) 0.0017468001f;
+    /*  +AC */ (void) -0.044307f;
+    /*  +B0 */ (void) 0.049584f;
+    /*  +B4 */ (void) -0.035585f;
+    /*  +B8 */ (void) 0.076839f;
+    /*  +BC */ (void) -0.026839f;
+    /*  +C0 */ (void) 0.5;
+    /*  +C8 */ (void) 3.0;
+    /*  +D0 */ (void) -0.2f;
+    /*  +D4 */ (void) 0.8f;
+    /*  +D8 */ (void) 2400.0f;
+    /*  +DC */ (void) 0.01f;
+    /*  +E0 */ (void) -360.0f;
+    /*  +E4 */ (void) 360.0f;
+    /*  +E8 */ (void) 7200.0f;
+    /*  +EC */ (void) 8.0f;
+    /*  +F0 */ (void) -0.3f;
+    /*  +F4 */ (void) 0.3f;
+    /*  +F8 */ (void) 0.025f;
+    /*  +FC */ (void) -0.025f;
+    /* +100 */ (void) 5.0f;
+    /* +104 */ (void) 250.0f;
+    /* +108 */ (void) 3.0f;
+    /* +10C */ (void) -89.0f;
+    /* +110 */ (void) 89.0f;
+    /* +118 */ (void) U32_TO_F32;
+    /* +120 */ (void) 0.001f;
+    /* +124 */ (void) -0.01f;
+    /* +128 */ (void) 57.29578f;
+    /* +12C */ (void) -1.0f;
+    /* +130 */ (void) -25.0f;
+    /* +134 */ (void) -0.8f;
+    /* +138 */ (void) 0.57595867f;
+    /* +13C */ (void) -0.6f;
+    /* +140 */ (void) 0.6f;
+}
+#endif
+
+/* 4DDE0C */ static GXColor const _Toy_color_4080D060_0 = { 0x40, 0x80, 0xD0,
+                                                            0x60 };
+
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void order_sdata2_148(void)
+{
+    /* +148 */ (void) 12.0f;
+    /* +14C */ (void) 18.0f;
+}
+#endif
+
+/* 4DDE18 */ static GXColor const _Toy_color_40B0D060_1 = { 0x40, 0x80, 0xD0,
+                                                            0x60 };
+
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void order_sdata2_154(void)
+{
+    /* +154 */ (void) -3.25f;
+    /* +158 */ (void) 3.25f;
+}
+#endif
+
+// STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT == 0x6DE);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E68) == 0x64);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E6C) == 0x8);
+// STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED8) == 0x5C);
+// STATIC_ASSERT(sizeof(*Toy_sbss_804D6EDC) == 0x24A);
+// STATIC_ASSERT(sizeof(*Toy_sbss_804D6EE0) == 0x158);
+
+/// @todo .sdata order hack
+#ifdef MUST_MATCH
+static void order_sdata_8(void)
+{
+    /*  +8 */ (void) "toy.c";
+    /* +10 */ (void) "0";
+    /* +14 */ (void) "lobj.h";
+    /* +1C */ (void) "lobj";
+    /* +24 */ (void) "jobj.h";
+    /* +2C */ (void) "jobj";
+}
+#endif
+
+/// @todo Should be a literal, probably a getter function
+///       or part of #_Toy_803FDDE4.
+/* 3FDD18 */ static char _Toy_str_TyLight_dat[] = "TyLight.dat";
+
+/* 3FDDE4 */ static struct lbl_803FDDE4_t _Toy_803FDDE4 = {
+    {
+        { "ScToyLightMaster0_scene_lights", 0 },
+        { "ScToyLightMaster1_scene_lights", 0 },
+        { "ScToyLightMaster2_scene_lights", 0 },
+        { "ScToyLightMaster4_scene_lights", 0 },
+        { "ScToyLightMaster5_scene_lights", 0 },
+        { "ScToyLightMaster6_scene_lights", 0 },
+    },
+    {
+        { 0, { 0x00, 0x00, 0x19, 0xFF }, true },
+        { 1, { 0x10, 0x20, 0x20, 0xFF }, true },
+        { 2, { 0x26, 0x13, 0x30, 0xFF }, false },
+        { 3, { 0x12, 0x12, 0x12, 0xFF }, true },
+        { 4, { 0x00, 0x00, 0x19, 0xFF }, false },
+        { 5, { 0x00, 0x00, 0x19, 0xFF }, false },
+    },
+};
+
+/// @todo .data order hack
+#ifdef MUST_MATCH
+static void order_data_144(void)
+{
+    /* +144 */ (void) "TyStand.dat";
+    /* +150 */ (void) "ToyStandModel_TopN_joint";
+}
+#endif
+
+/// @todo Should be @c static but changing it affects .data order.
+///       #_Toy_803FDEA0 points to #_Toy_803FDEA4, which contains the string.
+/* 3FDEA0 */ char* _Toy_803FDEA0[] = {
+    "ToyFigurePanel_Top_joint",
+};
+
+/* 3FDEBC */ static char* _Toy_803FDEBC[] = {
+    "ToyFigureBack_Top_joint",
+    "ToyFigureBack_Top_joint",
+    NULL,
+    "ToyFigureBack_Top_joint",
+    NULL,
+    NULL,
+};
+
+struct ModelNamesDesc {
+    char* animjoint;
+    char* matanim_joint;
+    char* shapeanim_joint;
+};
+
+/* 3FDF3C */ static struct ModelNamesDesc _Toy_803FDF3C = {
+    "ToyFigurePanel_Top_animjoint",
+    "ToyFigurePanel_Top_matanim_joint",
+    "ToyFigurePanel_Top_shapeanim_joint",
+};
+
+/* 3FDFA8 */ static struct ModelNamesDesc _Toy_803FDFA8[6] = {
+    {
+        "ToyFigureBack_Top_animjoint",
+        "ToyFigureBack_Top_matanim_joint",
+        "ToyFigureBack_Top_shapeanim_joint",
+    },
+    {
+        "ToyFigureBack_Top_animjoint",
+        "ToyFigureBack_Top_matanim_joint",
+        "ToyFigureBack_Top_shapeanim_joint",
+    },
+    { 0 },
+    {
+        "ToyFigureBack_Top_animjoint",
+        "ToyFigureBack_Top_matanim_joint",
+        "ToyFigureBack_Top_shapeanim_joint",
+    }
+};
+
+/* 3FE038 */ static char* _Toy_803FE038[3] = {
+    "ToyFigureBg3_sobjdesc",
+    "ToyFigureBg5_sobjdesc",
+    "ToyFigureBg6_sobjdesc",
+};
+
+/* 3FE108 */ static char* _Toy_803FE108[7] = {
+
+    "ToyCameraInfoBoad_sobjdesc",   "ToyCameraInfoNext_sobjdesc",
+    "ToyCameraInfoPrev_sobjdesc",   "ToyCameraInfoButton_sobjdesc",
+    "ToyCameraInfoReturn_sobjdesc", "ToyCameraInfoL_sobjdesc",
+    "ToyCameraInfoR_sobjdesc",
+};
+
+/* 3FE244 */ static struct ModelNamesDesc _Toy_803FE244[2] = {
+
+    {
+        "ToyStandModel_TopN_ACTION_action1_animjoint",
+        "ToyStandModel_TopN_ACTION_action1_matanim_joint",
+        "ToyStandModel_TopN_ACTION_action1_shapeanim_joint",
+    },
+    {
+        "ToyStandModel_TopN_ACTION_action2_animjoint",
+        "ToyStandModel_TopN_ACTION_action2_matanim_joint",
+        "ToyStandModel_TopN_ACTION_action2_shapeanim_joint",
+    },
+};
 
 int Toy_GetTrophyTotal(void)
 {
@@ -2786,6 +3287,18 @@ f32 _Toy_80309338(Vec3* arg0, Vec3* arg1)
 #pragma dont_inline off
 #endif
 
+static inline void _Toy_ReadTrigger(u32* out)
+{
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        if ((*out = HSD_PadCopyStatus[(u8) i].trigger)) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+}
+
 void _Toy_80309404(HSD_GObj* gobj)
 {
     struct {
@@ -2821,7 +3334,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         u8 trailing_pad[0x78];
     } archive_symbols;
 
-    PAD_STACK(160);
+    PAD_STACK(172);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) &_Toy_804A26B8;
@@ -3254,10 +3767,11 @@ void _Toy_80309404(HSD_GObj* gobj)
                         }
                         if (total > 3) {
                             if ((display->selectedIdx - 1) < 0) {
-                                s32 list_idx;
                                 ToyListEntry* entry;
+                                s32 list_idx;
                                 HSD_Archive* oa;
                                 char* md;
+                                uintptr_t keys;
 
                                 if ((gm_IsCurrently1PMode() != 0) ||
                                     (gm_GetCurrentGameMode() ==
@@ -3268,11 +3782,13 @@ void _Toy_80309404(HSD_GObj* gobj)
                                     list_idx = *gmMainLib_GetTrophyCount();
                                 }
                                 list_idx += display->selectedIdx;
+                                keys = (uintptr_t) Toy_sbss_804D6EDC;
                                 entry = display->first_entry;
                                 entry = entry->prev;
                                 {
                                     s32 idx = list_idx - 1;
-                                    s16 tid = Toy_sbss_804D6EDC[idx];
+                                    s16 tid = ((s16*) keys)[idx];
+                                    (void) keys;
                                     md = Toy_8030813C(tid);
                                     if ((oa = entry->archive) != NULL) {
                                         lbArchive_80016EFC(oa);
@@ -3324,8 +3840,17 @@ void _Toy_80309404(HSD_GObj* gobj)
                             display->selected_entry =
                                 display->selected_entry->prev;
                         }
-                    } else if ((state->x30 > 0.0f) || (Toy_80305B88() & 0x822))
-                    {
+                    } else {
+                        u32 btn3;
+
+                        if (state->x30 > 0.0f) {
+                            goto next_body;
+                        }
+                        _Toy_ReadTrigger(&btn3);
+                        if (!(btn3 & 0x822)) {
+                            goto next_done;
+                        }
+                    next_body: {
                         s32 total;
 
                         sfxMove();
@@ -3420,6 +3945,8 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 display->selected_entry->next;
                         }
                     }
+                    next_done:;
+                    }
 
                     _Toy_80307828(0);
                     _Toy_8030715C(0.0f, 0.0f);
@@ -3463,37 +3990,45 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        trigger = Toy_80305B88();
-        if (trigger & HSD_PAD_START) {
-            sfxMove();
-            state->x58 = 0;
-            ed4->x10 = (s32) (ed4->x10 + 1);
-            if (ed4->x10 == 6) {
-                ed4->x10 = 0;
+        {
+            u32 btn;
+
+            _Toy_ReadTrigger(&btn);
+            if (btn & HSD_PAD_START) {
+                sfxMove();
+                state->x58 = 0;
+                ed4->x10 = (s32) (ed4->x10 + 1);
+                if (ed4->x10 == 6) {
+                    ed4->x10 = 0;
+                }
+                Toy_80306D70(ed4->x10);
+                _Toy_803075E8(ed4->x10);
             }
-            Toy_80306D70(ed4->x10);
-            _Toy_803075E8(ed4->x10);
         }
 
-        trigger = Toy_80305B88();
-        if (trigger & HSD_PAD_Z) {
-            ToyCameraControl* camera;
+        {
+            u32 btn2;
 
-            _Toy_80307828(0);
+            _Toy_ReadTrigger(&btn2);
+            if (btn2 & HSD_PAD_Z) {
+                ToyCameraControl* camera;
+
+                _Toy_80307828(0);
 /// @todo Redundant cast improves match
 #ifdef MUST_MATCH
-            camera = (ToyCameraControl*) Toy_sbss_804D6ED4;
+                camera = (ToyCameraControl*) Toy_sbss_804D6ED4;
 #else
-            camera = Toy_sbss_804D6ED4;
+                camera = Toy_sbss_804D6ED4;
 #endif
-            camera->x10 = 0;
-            Toy_80306D70(camera->x10);
-            _Toy_803075E8(camera->x10);
-            anim->x11 = 2;
-            anim->x10 = 2;
-            anim->x0F = 0;
-            anim->x0E = 0;
-            _Toy_80307F64(2, 0);
+                camera->x10 = 0;
+                Toy_80306D70(camera->x10);
+                _Toy_803075E8(camera->x10);
+                anim->x11 = 2;
+                anim->x10 = 2;
+                anim->x0F = 0;
+                anim->x0E = 0;
+                _Toy_80307F64(2, 0);
+            }
         }
         _Toy_80308DC8(cobj);
     }
@@ -3521,9 +4056,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
     ToyAnimState* anim = &base->anim;
 
     if (base->x3F0 != NULL) {
+        HSD_JObj* n2;
         HSD_JObj* jobj_child;
         HSD_JObj* jobj_next;
-        HSD_JObj* n2;
         f32 stick_x;
         f32 stick_y;
         f32 adj_x;
@@ -3834,10 +4369,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     } else if ((adj_x > 0.8f) || (Toy_80305C44() & 2)) {
                         HSD_JObjAddScaleX(jobj_child, 0.01f);
                         HSD_JObjAddScaleZ(jobj_child, 0.01f);
-                        {
-                            HSD_JObj* next = jobj_next->next;
-                            n2 = next;
-                        }
+                        n2 = jobj_next->next;
+                        (void) n2;
                         HSD_JObjAddScaleX(n2, 0.01f);
                         HSD_JObjAddScaleZ(n2, 0.01f);
                         _Toy_803062EC((s32) anim->xC, 4U,
@@ -3849,6 +4382,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         HSD_JObjAddScaleX(jobj_child, -0.01f);
                         HSD_JObjAddScaleZ(jobj_child, -0.01f);
                         n2 = jobj_next->next;
+                        (void) n2;
                         HSD_JObjAddScaleX(n2, -0.01f);
                         HSD_JObjAddScaleZ(n2, -0.01f);
                         _Toy_803062EC((s32) anim->xC, 4U,
@@ -3979,10 +4513,11 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     }
                     if (total > 3) {
                         if ((display->selectedIdx - 1) < 0) {
-                            s32 lk;
                             ToyListEntry* entry;
+                            s32 lk;
                             HSD_Archive* oa;
                             char* md;
+                            uintptr_t keys;
                             if ((gm_IsCurrently1PMode() != 0) ||
                                 (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
@@ -3991,11 +4526,13 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                 lk = *gmMainLib_GetTrophyCount();
                             }
                             lk += display->selectedIdx;
+                            keys = (uintptr_t) Toy_sbss_804D6EDC;
                             entry = display->first_entry;
                             entry = entry->prev;
                             {
                                 s32 idx = lk - 1;
-                                s16 tid = Toy_sbss_804D6EDC[idx];
+                                s16 tid = ((s16*) keys)[idx];
+                                (void) keys;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
@@ -4078,9 +4615,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             } else {
                                 cnt2 = *gmMainLib_GetTrophyCount();
                             }
-                            entry = display->last_entry->next;
                             lk = display->selectedIdx - cnt2;
                             tid = Toy_sbss_804D6EDC[lk + 1];
+                            entry = display->last_entry->next;
                             md = Toy_8030813C(tid);
                             if ((oa = entry->archive) != NULL) {
                                 lbArchive_80016EFC(oa);
@@ -4530,11 +5067,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                             }
                             if (total > 3) {
                                 if ((display->selectedIdx - 1) < 0) {
+                                    ToyListEntry* list_entry;
                                     s32 list_idx;
                                     s32 count;
-                                    ToyListEntry* list_entry;
                                     HSD_Archive* old_archive;
                                     char* model_data;
+                                    uintptr_t keys;
 
                                     if ((gm_IsCurrently1PMode() != 0) ||
                                         (gm_GetCurrentGameMode() ==
@@ -4546,11 +5084,13 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     }
                                     count += display->selectedIdx;
                                     list_idx = count;
+                                    keys = (uintptr_t) Toy_sbss_804D6EDC;
                                     list_entry = display->first_entry;
                                     list_entry = list_entry->prev;
                                     {
                                         s32 idx = list_idx - 1;
-                                        s16 trophy_id = Toy_sbss_804D6EDC[idx];
+                                        s16 trophy_id = ((s16*) keys)[idx];
+                                        (void) keys;
                                         model_data = Toy_8030813C(trophy_id);
                                         if ((old_archive =
                                                  list_entry->archive) != NULL)
@@ -4964,11 +5504,13 @@ void _Toy_8030FA50(void)
 
 static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
 {
-    Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
-    s32 sort_mode;
+    s16* keys = _Toy_sbss_804D6E64->key;
+    s32 sort_mode = ((Toy26B8*) &_Toy_804A26B8)->x195;
 
-    sort_mode = toy->x195;
-    *ptr = &_Toy_sbss_804D6E64->key[sort_mode];
+    // Integer-domain on purpose: a pointer sum emits the base register first.
+    *ptr = (s16*) ((sort_mode << 1) + (uintptr_t) keys);
+    (void) keys;
+    (void) sort_mode;
 }
 
 inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry, s16 trophy_idx)
@@ -5014,13 +5556,13 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
     s16* sel = &toy->selectedIdx;
     s32 sort_idx = 0;
-    void* sym2;
     s32 count;
     s32 entry_count;
     void* sym;
     void* zero;
     s16* ptr;
     s32 start;
+    void* sym2;
 
     _Toy_8030FE48_init_sort_key(&ptr);
     data->selectedIdx = *sel;
@@ -5055,21 +5597,16 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     if (data->visible_count == entry_count) {
-        s32 offset;
-        ToyListEntry* entry;
-
-        start = 0;
-        offset = start;
-        entry = data->entries;
-        for (; start < data->visible_count; offset += 2, entry++, start += 1) {
+        for (start = 0; start < data->visible_count; start += 1) {
             if (start == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
-                entry->archive = lbArchive_LoadSymbols(
-                    entry->archive_name, &sym, entry->symbol_name, 0);
+                _Toy_8030FE48_setup_entry(&data->entries[start],
+                                          Toy_sbss_804D6EDC[start]);
+                data->entries[start].archive = lbArchive_LoadSymbols(
+                    data->entries[start].archive_name, &sym,
+                    data->entries[start].symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
+                _Toy_8030FE48_setup_entry(&data->entries[start],
+                                          Toy_sbss_804D6EDC[start]);
             }
         }
 
@@ -5080,9 +5617,9 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     {
+        s32 startIdx;
         s32 loopCount;
         s32 prevIdx;
-        s32 startIdx;
         ToyListEntry* cur;
 
         prevIdx = data->selectedIdx - 1;

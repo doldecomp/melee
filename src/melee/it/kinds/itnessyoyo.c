@@ -6,7 +6,7 @@
 #include "baselib/gobjuserdata.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftNess/ftNs_AttackHi4.h"
+#include "ft/kinds/ftNess/ftnessattackhi4.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

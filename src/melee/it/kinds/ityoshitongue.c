@@ -3,7 +3,7 @@
 #include <platform.h>
 
 #include "ft/ftlib.h"
-#include "ftYoshi/ftYs_SpecialN.h"
+#include "ftYoshi/ftyoshispecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

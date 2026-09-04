@@ -25,7 +25,7 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-#include "ftSandbag/ftSb_Init.h"
+#include "ftSandbag/ftsandbag.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>

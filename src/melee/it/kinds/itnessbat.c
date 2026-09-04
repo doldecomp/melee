@@ -7,7 +7,7 @@
 
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
-#include "ft/kinds/ftNess/ftNs_AttackS4.h"
+#include "ft/kinds/ftNess/ftnessattacks4.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

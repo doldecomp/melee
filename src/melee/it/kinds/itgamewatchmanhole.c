@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "ft/kinds/ftGameWatch/ftGw_AttackLw3.h"
+#include "ft/kinds/ftGameWatch/ftgamewatchattacklw3.h"
 
 #include "it/forward.h"
 
