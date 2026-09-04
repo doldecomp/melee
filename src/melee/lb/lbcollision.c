@@ -465,7 +465,9 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         {
             float candidate0_arg5_scl;
             float candidate1_arg4_scl;
-            Vec3 vec4 = *arg0;
+            float arg3_z;
+            float dot0;
+            float dot1;
             Vec3 a2;
             Vec3 d1;
             Vec3 c3;
@@ -474,6 +476,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             Vec3 d2;
             Vec3 c2;
             Vec3 arg2_copy;
+            Vec3 vec4 = *arg0;
 
             (void) vec4;
             arg4_offset = vec4;
@@ -597,7 +600,6 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                         float d2_x;
                         float d2_y;
                         float d2_z;
-                        float arg3_z;
                         float offset_delta_y;
                         float offset_delta_z;
                         float offset_delta_x;
@@ -690,15 +692,13 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                         d1.y = arg3->y - arg2->y;
                                         d1.z = arg3_z - arg2->z;
                                         {
-                                            float dot;
-
                                             a2 = vec4;
-                                            dot = (d1.z * (c3.z - a2.z)) +
-                                                  ((d1.x * (c3.x - a2.x)) +
-                                                   (d1.y * (c3.y - a2.y)));
-                                            scale = -dot / ((d1.z * d1.z) +
-                                                            ((d1.x * d1.x) +
-                                                             (d1.y * d1.y)));
+                                            dot0 = (d1.z * (c3.z - a2.z)) +
+                                                   ((d1.x * (c3.x - a2.x)) +
+                                                    (d1.y * (c3.y - a2.y)));
+                                            scale = -dot0 / ((d1.z * d1.z) +
+                                                             ((d1.x * d1.x) +
+                                                              (d1.y * d1.y)));
                                         }
                                         if (scale > 1.0) {
                                             scale = 1.0F;
@@ -713,16 +713,15 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                         d2.y = arg3->y - arg2->y;
                                         d2.z = arg3_z - arg2->z;
                                         {
-                                            float dot;
                                             float scale;
 
                                             b0 = *arg1;
-                                            dot = (d2.z * (c2.z - b0.z)) +
-                                                  ((d2.x * (c2.x - b0.x)) +
-                                                   (d2.y * (c2.y - b0.y)));
-                                            scale = -dot / ((d2.z * d2.z) +
-                                                            ((d2.x * d2.x) +
-                                                             (d2.y * d2.y)));
+                                            dot1 = (d2.z * (c2.z - b0.z)) +
+                                                   ((d2.x * (c2.x - b0.x)) +
+                                                    (d2.y * (c2.y - b0.y)));
+                                            scale = -dot1 / ((d2.z * d2.z) +
+                                                             ((d2.x * d2.x) +
+                                                              (d2.y * d2.y)));
 
                                             if (scale > 1.0) {
                                                 scale = 1.0F;
