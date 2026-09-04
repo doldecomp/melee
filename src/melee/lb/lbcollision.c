@@ -1140,21 +1140,16 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float closest_delta_y;
     float hit_start_mid_x;
     float local_delta_x;
-    float hurt_mid_z;
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
     u8 operand_pad[4];
-    u8 frame_pad[32];
+    u8 frame_pad[40];
     float scaled_hurt_radius;
     float hit_start_dot;
-    float hurt_mid_x;
-    float hurt_mid_y;
     float hurt_len_sq;
     float start_delta_y;
     float closest_denom;
-    float hit_end_mid_y;
-    float projected_hit_param;
     float local_dist_sq;
     float allowed_distance;
     float hurt_closest_x;
@@ -1178,13 +1173,11 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_start_dot;
     float contact_lerp;
     float broadphase_radius;
-    float hit_end_mid_z;
     float y_work;
     float hit_end_min_y;
     float hit_start_min_y;
     float hit_end_max_y;
     float hit_end_max_z;
-    float hit_end_mid_x;
     float hit_end_x;
     float hit_len_sq;
     float hit_start_y;
@@ -1200,12 +1193,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_param;
     float hurt_param_from_hit_end;
     float hurt_end_z;
-    f64 local_rsqrt_estimate;
-    f64 local_rsqrt_step1;
-    f64 local_rsqrt_step2;
-    f64 closest_rsqrt_estimate;
-    f64 closest_rsqrt_step1;
-    f64 closest_rsqrt_step2;
     float candidate_hurt_param;
     float candidate_hit_param;
     Mtx inv_hurt_mtx;
@@ -1304,7 +1291,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
-    start_delta_y = hurt_start_y = hurt_start_copy.y;
+    hurt_start_y = hurt_start_copy.y;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
     y_work = hurt_end_y - hurt_start_y;
@@ -1314,13 +1301,12 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         PAD_STACK(4);
         hit_start_mid_z = hit_delta_z_sq;
     }
-    hurt_delta_z = hurt_end_z - (hurt_start_z = hurt_start_copy.z);
+    hurt_start_z = hurt_start_copy.z;
+    hurt_delta_z = hurt_end_z - hurt_start_z;
     hurt_end_x = hurt_end->x;
     hit_len_sq = hit_start_mid_z + (hit_start_mid_x + hit_start_mid_y);
-    hurt_len_sq = y_work * y_work;
     x_work = hurt_end_x - (start_delta_x = hurt_start_copy.x);
     start_delta_x = hit_start_copy.x - start_delta_x;
-    hurt_len_sq = (x_work * x_work) + hurt_len_sq;
     start_delta_y = hit_start_copy.y - hurt_start_y;
     (void) hurt_end_z;
     start_delta_z = hit_start_copy.z - hurt_start_z;
@@ -1336,7 +1322,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
             hit_delta.z * start_delta_z +
             (hit_delta.x * start_delta_x + hit_delta.y * start_delta_y);
     }
-    hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
+    hurt_len_sq =
+        hurt_delta_z * hurt_delta_z + (x_work * x_work + y_work * y_work);
     closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
     hit_start_min_z = 1.0F;
     (void) hit_len_sq;
@@ -1346,9 +1333,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
             hurt_param = hit_param;
         } else {
             hurt_param = 0.0F;
-            projected_hit_param = -hit_start_dot / hit_len_sq;
-            hit_param = projected_hit_param;
-            if (projected_hit_param > 1.0) {
+            hit_param = -hit_start_dot / hit_len_sq;
+            if (hit_param > 1.0) {
                 hit_param = hit_start_min_z;
             } else if (hit_param < 0.0) {
                 hit_param = hurt_param;
@@ -1356,6 +1342,13 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         }
     } else {
         if (nearzero(closest_denom)) {
+            float hurt_mid_x;
+            float hurt_mid_y;
+            float hurt_mid_z;
+            float hit_end_mid_x;
+            float hit_end_mid_y;
+            float hit_end_mid_z;
+
             // For parallel axes, project the hit endpoint nearer the hurt
             // midpoint.
             hurt_mid_y = (float) ((0.5 * (f64) y_work) + (f64) hurt_start_y);
@@ -1485,28 +1478,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
                       ((closest_delta_x * closest_delta_x) +
                        (closest_delta_y * closest_delta_y));
-    if (closest_dist_sq > 0.0F) {
-        volatile float sp38;
-
-        closest_rsqrt_estimate = __frsqrte(closest_dist_sq);
-        closest_rsqrt_step1 =
-            0.5 * closest_rsqrt_estimate *
-            -(((f64) closest_dist_sq *
-               (closest_rsqrt_estimate * closest_rsqrt_estimate)) -
-              3.0);
-        closest_rsqrt_step2 = 0.5 * closest_rsqrt_step1 *
-                              -(((f64) closest_dist_sq *
-                                 (closest_rsqrt_step1 * closest_rsqrt_step1)) -
-                                3.0);
-        sp38 = (float) ((f64) closest_dist_sq *
-                        (0.5 * closest_rsqrt_step2 *
-                         -(((f64) closest_dist_sq *
-                            (closest_rsqrt_step2 * closest_rsqrt_step2)) -
-                           3.0)));
-        x_work = sp38;
-    } else {
-        x_work = closest_dist_sq;
-    }
+    x_work = sqrtf(closest_dist_sq);
     if (nearzero(x_work)) {
         *out_overlap = (hit_radius + hurt_radius) - x_work;
         *out_contact_pos = *hit_closest;
@@ -1523,31 +1495,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     local_dist_sq =
         (local_delta_z * local_delta_z) +
         ((local_delta_x * local_delta_x) + (local_delta_y * local_delta_y));
-    if (local_dist_sq > 0.0F) {
-        volatile float sp34;
-
-        local_rsqrt_estimate = __frsqrte(local_dist_sq);
-        {
-            f64 local_rsqrt_first_step =
-                0.5 * local_rsqrt_estimate *
-                -(((f64) local_dist_sq *
-                   (local_rsqrt_estimate * local_rsqrt_estimate)) -
-                  3.0);
-            local_rsqrt_step1 = local_rsqrt_first_step;
-        }
-        local_rsqrt_step2 =
-            0.5 * local_rsqrt_step1 *
-            -(((f64) local_dist_sq * (local_rsqrt_step1 * local_rsqrt_step1)) -
-              3.0);
-        sp34 = (float) ((f64) local_dist_sq *
-                        (0.5 * local_rsqrt_step2 *
-                         -(((f64) local_dist_sq *
-                            (local_rsqrt_step2 * local_rsqrt_step2)) -
-                           3.0)));
-        local_dist = sp34;
-    } else {
-        local_dist = local_dist_sq;
-    }
+    local_dist = sqrtf(local_dist_sq);
     scaled_hurt_radius = (hurt_radius * x_work) / local_dist;
     contact_lerp = scaled_hurt_radius / x_work;
     allowed_distance = hit_radius + scaled_hurt_radius;
