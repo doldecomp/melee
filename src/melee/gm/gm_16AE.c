@@ -293,7 +293,7 @@ void gm_8016B378(s8 arg0)
     gm_16AE_GetUnkData_0()->unk_18 = arg0;
 }
 
-void fn_8016B388(int arg0, s16 arg1)
+void fn_8016B388(int arg0, int arg1)
 {
     gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x6 = arg1;
 }
