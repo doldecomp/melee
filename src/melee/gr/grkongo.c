@@ -816,16 +816,15 @@ void grKongo_801D69B0(HSD_GObj* gobj)
 static inline void rad_compare_b(f32 a, f32 b, f32* ret)
 {
     f32 limit = MTXDegToRad(b);
-    f32 value;
 
     if (a > limit) {
-        value = -limit;
+        b = -limit;
     } else if (a < -limit) {
-        value = limit;
+        b = limit;
     } else {
-        value = 0.0f;
+        b = 0.0f;
     }
-    *ret = (f32) (0.99 * (f64) (value + *ret));
+    *ret = (f32) (0.99 * (f64) (b + *ret));
 }
 
 typedef struct unk_struct_x14 {
