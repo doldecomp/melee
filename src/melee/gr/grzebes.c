@@ -2030,8 +2030,8 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_x;
                 f32 ei_size;
                 f32 ei_y;
-                f32 ej_y;
                 f32 ej_x;
+                f32 ej_y;
                 f32 dx;
                 f32 dy;
                 f32 dist_sq;
@@ -2042,13 +2042,13 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 ei_size = ei->x18_size;
                 for (; j < 20; ej++, j++) {
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
-                        ej_y = ej->x0C_y;
                         ej_x = ej->x08_x;
-                        dx = grZebes_Subtract(ei_x, ej_x);
-                        dy = ei_y - ej_y;
+                        ej_y = ej->x0C_y;
+                        dx = ei_x - ej_x;
+                        dy = grZebes_Subtract(ei_y, ej_y);
                         dx *= dx;
                         dy *= dy;
-                        dist_sq = dy + dx;
+                        dist_sq = dx + dy;
                         if (max_dist_sq < dist_sq) {
                             max_dist_sq = dist_sq;
                             x1 = ei_x;
