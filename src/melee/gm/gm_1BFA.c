@@ -5,7 +5,7 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
-#include "baselib/memory.h"
+#include <sysdolphin/baselib/memory.h>
 
 #include "gm/forward.h"
 

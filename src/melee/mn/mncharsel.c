@@ -3,7 +3,7 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 #include "ft/forward.h"
 
 #include "lb/lb_013B.h"

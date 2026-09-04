@@ -5,7 +5,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"

@@ -1,6 +1,6 @@
 #include "ft/ft_0D31.h"
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "ft/fighter.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcolanim.h"

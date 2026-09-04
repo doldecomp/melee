@@ -6,11 +6,11 @@
 #include "stdbool.h"
 #include "types.h"
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/memory.h"
+#include <sysdolphin/baselib/memory.h>
 #include "db/db.h"
 #include "dolphin/gx/GXGeometry.h"
 #include "dolphin/gx/GXStruct.h"
@@ -31,7 +31,7 @@
 #include <math.h>
 #include <stddef.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

@@ -4,7 +4,7 @@
 #include "ft/types.h"
 
 #include "ftMasterHand/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14FC68 */ void ftMh_Init_OnDeath(HSD_GObj* gobj);
 /* 14FC6C */ void ftMh_Init_OnLoad(HSD_GObj* gobj);

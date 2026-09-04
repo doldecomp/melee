@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "db/db.h"
 
 #include "it/forward.h"

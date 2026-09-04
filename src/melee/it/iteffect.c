@@ -14,7 +14,7 @@
 #include "lb/lblanguage.h"
 
 #include <math.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 void it_8027870C(s32 arg0)
 {

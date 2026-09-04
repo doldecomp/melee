@@ -3,12 +3,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/gobjproc.h"
-#include "baselib/random.h"
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -31,8 +31,8 @@
 #include "mp/mplib.h"
 
 #include <dolphin/types.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
                                      HSD_GObj* u3, f32 u4);

@@ -8,10 +8,10 @@
 #include "lb/lbmthp.h"
 #include "mn/inlines.h"
 
-#include <baselib/controller.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/sobjlib.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/sobjlib.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,

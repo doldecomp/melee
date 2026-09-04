@@ -1,7 +1,7 @@
 #ifndef GALE01_15B778
 #define GALE01_15B778
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15B778 */ void ftCh_GrabUnk1_8015B778(HSD_GObj* gobj);
 /* 15B800 */ void ftCh_GrabUnk1_8015B800(HSD_GObj* gobj);

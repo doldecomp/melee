@@ -1,6 +1,6 @@
 #include "itsamuschargeshot.h"
 
-#include "baselib/mtx.h"
+#include <sysdolphin/baselib/mtx.h>
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"

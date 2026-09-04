@@ -5,7 +5,7 @@
 
 #include "mn/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 #include <melee/mn/forward.h>
 
 #define MNCOUNT_VISIBLE_ROWS 10

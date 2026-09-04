@@ -4,9 +4,9 @@
 
 #include <platform.h>
 
-#include "baselib/gobj.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 #include "dolphin/types.h"
 #include "gm/gm_1884.h"
 

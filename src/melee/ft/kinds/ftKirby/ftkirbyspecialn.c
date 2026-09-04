@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -44,8 +44,8 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

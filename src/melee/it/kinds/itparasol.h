@@ -7,7 +7,7 @@
 
 #include "it/kinds/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 28B08C */ int it_8028B08C(Item_GObj* item_gobj, int statenum);
 /* 28B0B8 */ void itParasol_Logic13_Spawned(Item_GObj* item_gobj);

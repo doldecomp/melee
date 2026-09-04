@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 
 typedef struct _objheap {
     u32 top;

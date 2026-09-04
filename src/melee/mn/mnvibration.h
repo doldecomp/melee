@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 extern SDATA char mnVibration_804D4FF4[];
 extern SDATA char mnVibration_804D4FFC[];

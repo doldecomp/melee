@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/video.h"
+#include <sysdolphin/baselib/video.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/os/OSAlloc.h>

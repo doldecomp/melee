@@ -13,7 +13,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8128[] = {
     {

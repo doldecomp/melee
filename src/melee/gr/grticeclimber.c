@@ -14,9 +14,9 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 220F10 */ static void grTIceClimber_80220F10(bool);
 /* 220F14 */ static void grTIceClimber_80220F14(void);

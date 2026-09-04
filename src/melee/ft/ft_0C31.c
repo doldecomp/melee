@@ -21,8 +21,8 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/dobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0C63BC */ static void fn_800C63BC(Fighter_GObj* gobj);
 /* 0C63E0 */ static void fn_800C63E0(Fighter_GObj* gobj);

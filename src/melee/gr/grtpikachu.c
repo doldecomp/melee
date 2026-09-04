@@ -7,8 +7,8 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 StageCallbacks grTPk_StageCallbacks[] = {
     { grTPikachu_80223008, grTPikachu_80223034, grTPikachu_8022303C,

@@ -16,10 +16,10 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2024F0 */ static void grYorster_802024F0(void* user_data, int joint_id,
                                             CollData* coll, int coll_x50,

@@ -16,7 +16,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/mtx.h>
+#include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {
     { 0, itSamusbomb_UnkMotion0_Anim, itSamusbomb_UnkMotion0_Phys,

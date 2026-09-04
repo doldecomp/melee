@@ -26,10 +26,10 @@
 #include "lb/lbmthp.h"
 #include "mn/inlines.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/sobjlib.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/sobjlib.h>
 
 static u8 gmRegend_InputDelayTimer;
 static u8 gmRegend_ExitTimer;

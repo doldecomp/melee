@@ -3,11 +3,11 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include "baselib/object.h"
+#include <sysdolphin/baselib/object.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>

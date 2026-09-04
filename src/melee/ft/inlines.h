@@ -16,10 +16,10 @@
 #include "mp/forward.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/archive.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/lobj.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/lobj.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \

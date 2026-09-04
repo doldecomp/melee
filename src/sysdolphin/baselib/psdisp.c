@@ -1,17 +1,17 @@
 #include "psdisp.h"
 
-#include "baselib/cobj.h"
-#include "baselib/fog.h"
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/lobj.h"
-#include "baselib/mtx.h"
-#include "baselib/particle.h"
-#include "baselib/psdisptev.h"
-#include "baselib/psstructs.h"
-#include "baselib/state.h"
-#include "baselib/util.h"
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/particle.h>
+#include <sysdolphin/baselib/psdisptev.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/util.h>
 
 #include <string.h>
 #include <dolphin/gx.h>

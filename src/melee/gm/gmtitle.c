@@ -7,7 +7,7 @@
 #include "gm/gmopening.h"
 #include "mn/inlines.h"
 
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>

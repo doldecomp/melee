@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -28,7 +28,7 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 12CEE0 */ static void fn_8012CEE0(Fighter_GObj*);
 /* 12CF7C */ static void fn_8012CF7C(Fighter_GObj*);

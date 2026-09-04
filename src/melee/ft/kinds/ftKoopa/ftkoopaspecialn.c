@@ -1,6 +1,6 @@
 #include "ftkoopaspecialn.h"
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 
 #include "ft/forward.h"
 

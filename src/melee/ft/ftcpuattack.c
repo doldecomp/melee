@@ -2,8 +2,8 @@
 
 #include "ftcmdscript.h"
 
-#include "baselib/debug.h"
-#include "baselib/random.h"
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/random.h>
 #include "ft/ftlib.h"
 
 #include "ftKirby/forward.h"

@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

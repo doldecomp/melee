@@ -1,6 +1,6 @@
 #include "grlast.h"
 
-#include "baselib/psstructs.h"
+#include <sysdolphin/baselib/psstructs.h>
 #include "lb/lb_00F9.h"
 
 #include <math.h>

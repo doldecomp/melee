@@ -1,7 +1,7 @@
 #ifndef GALE01_0E7100
 #define GALE01_0E7100
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0E7100 */ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj);
 /* 0E719C */ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj);

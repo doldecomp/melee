@@ -1,8 +1,8 @@
 #include "itzeldadinfire.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"

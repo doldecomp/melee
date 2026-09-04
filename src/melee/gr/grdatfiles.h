@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "gr/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1C5FC0 */ void grDatFiles_801C5FC0(HSD_Archive*, void* data, size_t length);
 /* 1C6038 */ void grDatFiles_801C6038(void*, s32, s32);

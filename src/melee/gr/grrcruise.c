@@ -12,7 +12,7 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "lb/lb_00B0.h"
@@ -21,12 +21,12 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/archive.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>
 

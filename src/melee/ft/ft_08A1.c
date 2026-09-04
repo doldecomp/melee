@@ -14,7 +14,7 @@
 #include "it/it_26B1.h"
 #include "it/kinds/itpeachparasol.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

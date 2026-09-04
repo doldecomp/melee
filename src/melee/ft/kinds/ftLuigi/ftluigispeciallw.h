@@ -3,7 +3,7 @@
 #ifndef GALE01_1445C4
 #define GALE01_1445C4
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1445C4 */ void ftLg_SpecialLw_UpdateRot(HSD_GObj* gobj);
 /* 1445F0 */ void ftLg_SpecialLw_Enter(HSD_GObj* gobj);

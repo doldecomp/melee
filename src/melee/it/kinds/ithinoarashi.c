@@ -3,7 +3,7 @@
 #include "inlines.h"
 #include "itmaril.h"
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"

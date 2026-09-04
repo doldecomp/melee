@@ -1,6 +1,6 @@
 #include "itmewtwoshadowball.h"
 
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -14,8 +14,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 2C5B18 */ static void it_802C5B18(Item_GObj*, Item_GObj*);
 

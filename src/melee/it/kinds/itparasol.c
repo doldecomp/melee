@@ -7,8 +7,8 @@
 #include "it/itgroundcoll.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static float const deg_to_rad = MTXDegToRad(1);
 

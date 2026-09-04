@@ -4,19 +4,19 @@
 
 #include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/debug.h"
-#include "baselib/fog.h"
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/fog.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
-#include "baselib/sislib.h"
-#include "baselib/wobj.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/wobj.h>
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"

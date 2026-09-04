@@ -4,7 +4,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "cm/camera.h"
 #include "gm/gm_unsplit.h"
@@ -20,11 +20,11 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/gobjgxlink.h"
-#include "sysdolphin/baselib/gobjproc.h"
-#include "sysdolphin/baselib/random.h"
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },

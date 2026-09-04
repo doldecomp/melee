@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -26,7 +26,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 {

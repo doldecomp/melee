@@ -4,7 +4,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "gr/grlib.h"
 #include "gr/ground.h"
@@ -21,10 +21,10 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/memory.h>
-#include <baselib/psstructs.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
 grZakoGenerator_Config*

@@ -19,8 +19,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/gobjproc.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/lobj.h>
 
 struct grPushOn_Entry {

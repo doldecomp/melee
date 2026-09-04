@@ -2,7 +2,7 @@
 #include "platform.h"
 #include "stdbool.h"
 
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
 
 #include "ft/forward.h"
 

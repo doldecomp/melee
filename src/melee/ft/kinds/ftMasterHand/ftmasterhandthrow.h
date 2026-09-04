@@ -1,7 +1,7 @@
 #ifndef GALE01_154FAC
 #define GALE01_154FAC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 154FAC */ void ftMh_Throw_IASA(HSD_GObj* gobj);
 /* 154FF0 */ void ftMh_Throw_Phys(HSD_GObj* gobj);

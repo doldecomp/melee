@@ -3,7 +3,7 @@
 #ifndef GALE01_114BF4
 #define GALE01_114BF4
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 114BF4 */ void ftNs_AttackS4_OnReflect(HSD_GObj* gobj);
 /* 114C24 */ void ftNs_AttackS4_Enter(HSD_GObj* gobj);

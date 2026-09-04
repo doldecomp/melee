@@ -10,8 +10,8 @@
 
 #include <platform.h>
 
-#include "baselib/gobjplink.h"
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/jobj.h>
 #include "cm/camera.h"
 
 #include "ft/forward.h"
@@ -38,8 +38,8 @@
 #include "ty/toy.h"
 
 #include <dolphin/pad.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_3982.h>

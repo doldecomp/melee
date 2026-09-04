@@ -3,15 +3,15 @@
 
 #include <platform.h>
 
-#include "baselib/class.h"
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/debug.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/list.h"
-#include "baselib/object.h"
-#include "baselib/pobj.h"
-#include "baselib/spline.h"
+#include <sysdolphin/baselib/list.h>
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/spline.h>
 
 #include <dolphin/mtx.h>
 

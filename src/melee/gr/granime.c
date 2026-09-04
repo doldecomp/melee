@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 #include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -13,11 +13,11 @@
 
 #include <setjmp.h>
 #include <stdarg.h>
-#include <baselib/aobj.h>
-#include <baselib/dobj.h>
-#include <baselib/mobj.h>
-#include <baselib/robj.h>
-#include <baselib/tobj.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/tobj.h>
 
 /* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
 /* 1C6710 */ static void grAnime_801C6710(HSD_TObj* tobj,

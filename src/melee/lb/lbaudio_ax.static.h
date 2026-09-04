@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include "baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 #include <melee/ft/forward.h>
 

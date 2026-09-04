@@ -2,9 +2,9 @@
 
 #include "inlines.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"

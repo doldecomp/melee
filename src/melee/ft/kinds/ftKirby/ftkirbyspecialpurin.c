@@ -5,7 +5,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -34,8 +34,8 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);

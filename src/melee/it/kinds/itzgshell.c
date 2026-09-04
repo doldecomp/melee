@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"

@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 116EBC */ bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);
 /* 116F00 */ void ftNs_SpecialN_SetNULL(HSD_GObj* gobj);

@@ -6,7 +6,7 @@
 
 #include "ft/forward.h"
 #include "lb/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0C0874 */ void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1,
                                 ftCommon_BuryType arg2);

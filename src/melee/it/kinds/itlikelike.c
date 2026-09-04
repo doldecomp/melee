@@ -25,8 +25,8 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)

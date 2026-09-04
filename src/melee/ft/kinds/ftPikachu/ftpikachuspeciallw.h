@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1275CC */ bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj);
 /* 127608 */ void ftPk_SpecialLw_80127608(HSD_GObj* gobj);

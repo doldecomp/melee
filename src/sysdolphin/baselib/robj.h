@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include "baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 #include <dolphin/mtx.h>
 

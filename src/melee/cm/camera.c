@@ -4,17 +4,17 @@
 
 #include <placeholder.h>
 
-#include "baselib/cobj.h"
-#include "baselib/displayfunc.h"
-#include "baselib/fog.h"
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/fog.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/gobj.h"
-#include "baselib/lobj.h"
-#include "baselib/memory.h"
-#include "baselib/random.h"
-#include "baselib/wobj.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/wobj.h>
 
 #include "cm/forward.h"
 
@@ -39,11 +39,11 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <baselib/controller.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/gr/grcastle.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grgarden.h>

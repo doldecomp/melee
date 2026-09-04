@@ -2,8 +2,8 @@
 
 #include "gm_unsplit.h"
 
-#include "baselib/psappsrt.h"
-#include "baselib/psstructs.h"
+#include <sysdolphin/baselib/psappsrt.h>
+#include <sysdolphin/baselib/psstructs.h>
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 
@@ -20,7 +20,7 @@
 #include "ty/toy.h"
 
 #include <math.h>
-#include <baselib/generator.h>
+#include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

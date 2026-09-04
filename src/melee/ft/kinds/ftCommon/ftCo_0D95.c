@@ -9,7 +9,7 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 bool fn_800D9558(Fighter_GObj* gobj)
 {

@@ -12,10 +12,10 @@
 
 #include "sc/types.h"
 
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/memory.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/memory.h>
 
 static HSD_GObj* mnHyaku_804D6C58;
 

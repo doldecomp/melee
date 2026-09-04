@@ -1,7 +1,7 @@
 #include "itclimbersstring.h"
 
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjuserdata.h"
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/kinds/ftPopo/ftpopospecials.h"
@@ -12,8 +12,8 @@
 #include "it/kinds/itlinkhookshot.h"
 #include "lb/lbvector.h"
 
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
 
 /* 2C248C */ static Item_GObj* it_802C248C(Item* ip, HSD_JObj* jobj);
 /* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);

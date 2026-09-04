@@ -11,8 +11,8 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 static void grFigure3_8020E504(bool number);
 static void grFigure3_8020E508(void);

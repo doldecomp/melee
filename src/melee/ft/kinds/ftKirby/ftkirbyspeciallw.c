@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
@@ -31,8 +31,8 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct ftKb_Init_803CB490_layout {
     char pad[0x74];

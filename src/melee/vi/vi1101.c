@@ -23,9 +23,9 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
 u8 un_804D6FD8[8];
 GXColor un_804D5B08 = { 0, 0, 0, 0xff };
 

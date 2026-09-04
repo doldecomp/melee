@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ftKirby/ftkirbyspecialpeach.h"
 #include "ftPeach/ftpeachspecialn.h"

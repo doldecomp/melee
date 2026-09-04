@@ -4,12 +4,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/cobj.h"
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/cobj.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/sislib_font.h"
+#include <sysdolphin/baselib/sislib_font.h>
 #include "dolphin/gx/GXStruct.h"
 
 #include <dolphin/mtx.h>

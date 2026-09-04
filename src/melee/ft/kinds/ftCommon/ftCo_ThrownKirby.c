@@ -24,8 +24,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ft/fighter.h"
 
@@ -27,7 +27,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static void setDamageCallbacks(Fighter_GObj* gobj)
 {

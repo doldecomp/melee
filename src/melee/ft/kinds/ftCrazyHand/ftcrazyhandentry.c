@@ -4,7 +4,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"

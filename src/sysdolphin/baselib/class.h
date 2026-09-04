@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*) o)->class_info)

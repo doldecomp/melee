@@ -3,7 +3,7 @@
 #include "inlines.h"
 #include "placeholder.h"
 
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
 #include "db/db.h"
 #include "ft/ftlib.h"
 #include "ftGameWatch/ftgamewatchspecials.h"

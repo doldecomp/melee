@@ -9,7 +9,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
@@ -30,8 +30,8 @@
 #include "ty/tydisplay.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 typedef struct grFigureGet_Data {
     s32 x0;

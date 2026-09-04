@@ -2,10 +2,10 @@
 
 #include <platform.h>
 
-#include "baselib/debug.h"
-#include "baselib/list.h"
-#include "baselib/random.h"
-#include "baselib/util.h"
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/list.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/util.h>
 
 #include <math.h>
 #include <dolphin/os.h>

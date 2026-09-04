@@ -29,8 +29,8 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

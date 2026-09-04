@@ -1,7 +1,7 @@
 #ifndef GALE01_15AAC8
 #define GALE01_15AAC8
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15AAC8 */ void fn_8015AAC8(HSD_GObj* gobj);
 /* 15AB04 */ void ftCh_TagRockPaper_Anim(HSD_GObj* gobj);

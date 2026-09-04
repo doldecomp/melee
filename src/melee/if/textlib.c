@@ -2,7 +2,7 @@
 
 #include "platform.h"
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"

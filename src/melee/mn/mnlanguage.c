@@ -1,9 +1,9 @@
-#include "baselib/gobjuserdata.h"
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 #include "gm/forward.h"
 #include "sc/forward.h"
 
-#include <baselib/object.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

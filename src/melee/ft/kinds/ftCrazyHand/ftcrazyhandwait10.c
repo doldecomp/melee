@@ -6,11 +6,11 @@
 
 #include <platform.h>
 
-#include "baselib/controller.h"
+#include <sysdolphin/baselib/controller.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"

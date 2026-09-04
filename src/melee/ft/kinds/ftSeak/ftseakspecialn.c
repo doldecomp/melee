@@ -1,6 +1,6 @@
 #include "ftseakspecialn.h"
 
-#include "baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 

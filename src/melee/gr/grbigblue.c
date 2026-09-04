@@ -14,7 +14,7 @@
 #include <MetroTRK/intrinsics.h>
 #endif
 
-#include "baselib/debug.h"
+#include <sysdolphin/baselib/debug.h>
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "gr/grzakogenerator.h"
@@ -30,11 +30,11 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1E8560 */ static void fn_801E8560(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

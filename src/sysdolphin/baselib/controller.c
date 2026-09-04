@@ -1,6 +1,6 @@
 #include "controller.h"
 
-#include "baselib/rumble.h"
+#include <sysdolphin/baselib/rumble.h>
 
 #include <math.h>
 #include <dolphin/os.h>

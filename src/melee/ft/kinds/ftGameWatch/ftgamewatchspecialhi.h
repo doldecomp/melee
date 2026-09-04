@@ -3,7 +3,7 @@
 #ifndef GALE01_14DEF0
 #define GALE01_14DEF0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14DEF0 */ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj);
 /* 14DFB8 */ bool ftGw_SpecialHi_ItemCheckRescueRemove(HSD_GObj* gobj);

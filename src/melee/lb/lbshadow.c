@@ -1,7 +1,7 @@
 #include "lbshadow.h"
 
 #include <dolphin/gx/GXVert.h>
-#include <baselib/spline.h>
+#include <sysdolphin/baselib/spline.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/initialize.h>

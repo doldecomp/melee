@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 #include <melee/lb/forward.h>
 
 struct FigaTrack {

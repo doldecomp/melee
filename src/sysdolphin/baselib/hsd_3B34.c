@@ -6,7 +6,7 @@
 
 #include <setjmp.h>
 #include <string.h>
-#include <baselib/hsd_3A94.h>
+#include <sysdolphin/baselib/hsd_3A94.h>
 
 #define HSD_804D2648_BUF ((u8*) &hsd_804D2648)
 

@@ -1,7 +1,7 @@
 #ifndef GALE01_2B2560
 #define GALE01_2B2560
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 #include "it/forward.h"
 
 #include "it/kinds/types.h"

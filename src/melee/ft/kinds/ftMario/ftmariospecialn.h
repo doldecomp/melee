@@ -1,7 +1,7 @@
 #ifndef GALE01_0E0D1C
 #define GALE01_0E0D1C
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 0E0D1C */ int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj);
 /* 0E0DA8 */ void ftMr_SpecialN_Enter(HSD_GObj* gobj);

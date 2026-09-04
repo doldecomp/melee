@@ -1,4 +1,4 @@
-#include "baselib/wobj.h"
+#include <sysdolphin/baselib/wobj.h>
 
 #include "aobj.h"
 #include "class.h"

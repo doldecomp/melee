@@ -5,7 +5,7 @@
 
 #include "lb/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 struct ftMewtwo_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;

@@ -3,13 +3,13 @@
 
 #include <platform.h>
 
-#include "baselib/cobj.h"
+#include <sysdolphin/baselib/cobj.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/list.h"
-#include "baselib/objalloc.h"
-#include "baselib/tobj.h"
+#include <sysdolphin/baselib/list.h>
+#include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/tobj.h>
 
 #include <dolphin/mtx.h>
 

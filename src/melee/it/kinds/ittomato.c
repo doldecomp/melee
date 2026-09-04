@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
 #include "gm/gm_1884.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"

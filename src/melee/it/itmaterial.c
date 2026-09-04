@@ -7,9 +7,9 @@
 #include "it/inlines.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/class.h>
-#include <baselib/dobj.h>
-#include <baselib/tev.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/tev.h>
 
 struct it_MObjInfo {
     /*   +0 */ HSD_ClassInfo parent;

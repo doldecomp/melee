@@ -2,7 +2,7 @@
 
 #include "placeholder.h"
 
-#include "baselib/mtx.h"
+#include <sysdolphin/baselib/mtx.h>
 #include "ft/ftlib.h"
 #include "ft/kinds/ftLink/ftlinkspecials.h"
 #include "ftLink/ftlinkspecialhi.h"

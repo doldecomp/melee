@@ -5,10 +5,10 @@
 #include "ground.h"
 #include "grrcruise.h"
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/psappsrt.h"
-#include "baselib/psstructs.h"
+#include <sysdolphin/baselib/psappsrt.h>
+#include <sysdolphin/baselib/psstructs.h>
 #include "cm/camera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -19,10 +19,10 @@
 #include "lb/types.h" // IWYU pragma: keep
 #include "sc/types.h"
 
-#include <baselib/generator.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/generator.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);

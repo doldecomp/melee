@@ -1,7 +1,7 @@
 #ifndef MELEE_EF_DATA_H
 #define MELEE_EF_DATA_H
 
-#include "baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 #include <dolphin/types.h>
 

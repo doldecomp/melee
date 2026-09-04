@@ -1,18 +1,18 @@
 #include "mngallery.h"
 
-#include "baselib/debug.h"
-#include "baselib/memory.h"
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/memory.h>
 #include "mn/inlines.h"
 
-#include <baselib/controller.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/sobjlib.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/sobjlib.h>
 #include <melee/gm/gmhowto.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>

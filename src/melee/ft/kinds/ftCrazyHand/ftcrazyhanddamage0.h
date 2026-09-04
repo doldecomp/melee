@@ -2,7 +2,7 @@
 #define GALE01_157080
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 157080 */ void fn_80157080(Fighter_GObj* gobj);
 /* 1570CC */ void ftCh_Damage_Anim(HSD_GObj* gobj);
