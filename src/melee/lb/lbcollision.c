@@ -1146,13 +1146,12 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     Vec3 hit_delta;
     u8 operand_pad[4];
     u8 frame_pad[32];
-    float start_delta_z;
-    float hit_start_dot;
     float scaled_hurt_radius;
+    float hit_start_dot;
     float hurt_mid_x;
     float hurt_mid_y;
-    float hurt_start_dot;
     float hit_end_mid_y;
+    float start_delta_y;
     float closest_denom;
     float projected_hit_param;
     float local_dist_sq;
@@ -1165,16 +1164,18 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float closest_delta_x;
     float closest_dist_sq;
     float local_delta_y;
-    float start_delta_x;
     float hurt_param_from_hit_start;
+    float start_delta_x;
     float hurt_delta_z;
     float x_work;
+    float start_delta_z;
     float hit_end_min_x;
     float hit_start_min_x;
     float hit_end_max_x;
     float hit_start_mid_z;
     float closest_delta_z;
     float local_delta_z;
+    float hurt_start_dot;
     float contact_lerp;
     float broadphase_radius;
     float hit_end_mid_z;
@@ -1197,7 +1198,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_param;
     float local_dist;
     float hurt_param;
-    float start_delta_y;
     float hurt_param_from_hit_end;
     float hurt_end_z;
     f64 local_rsqrt_estimate;
@@ -1305,41 +1305,41 @@ block_39:
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
-    (void) hurt_end_y;
     start_delta_y = hurt_start_y = hurt_start_copy.y;
-    y_work = hurt_end_y - hurt_start_y;
-    start_delta_y = hit_start_copy.y - hurt_start_y;
-    hurt_end_x = hurt_end->x;
-    (void) hurt_end_x;
-    x_work = hurt_end_x - (start_delta_x = hurt_start_copy.x);
-    segment_dot = hit_delta.y * y_work;
-    hurt_len_sq = y_work * y_work;
-    hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
-    hurt_end_z = hurt_end->z;
-    (void) hurt_end_z;
-    start_delta_x = hit_start_copy.x - start_delta_x;
-    hurt_delta_z = hurt_end_z - (hurt_start_z = hurt_start_copy.z);
-    segment_dot = (hit_delta.x * x_work) + segment_dot;
-    hit_start_min_z = 1.0F;
-    hurt_len_sq = (x_work * x_work) + hurt_len_sq;
-    segment_dot = (hit_delta.z * hurt_delta_z) + segment_dot;
-    hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
+    y_work = hurt_end_y - hurt_start_y;
+    hit_start_mid_x = hit_delta.x * hit_delta.x;
     {
         float hit_delta_z_sq = hit_delta.z * hit_delta.z;
+        PAD_STACK(4);
         hit_start_mid_z = hit_delta_z_sq;
     }
+    hurt_end_z = hurt_end->z;
+    hurt_delta_z = hurt_end_z - (hurt_start_z = hurt_start_copy.z);
+    hit_len_sq = hit_start_mid_z + (hit_start_mid_x + hit_start_mid_y);
+    hurt_end_x = hurt_end->x;
+    hurt_len_sq = y_work * y_work;
+    x_work = hurt_end_x - (start_delta_x = hurt_start_copy.x);
+    start_delta_y = hit_start_copy.y - hurt_start_y;
+    hurt_len_sq = (x_work * x_work) + hurt_len_sq;
+    start_delta_x = hit_start_copy.x - start_delta_x;
+    (void) hurt_end_z;
     start_delta_z = hit_start_copy.z - hurt_start_z;
-    hit_len_sq = hit_start_mid_z + (hit_start_mid_y + hit_start_mid_x);
-    hit_start_dot = hit_delta.y * start_delta_y;
+    (void) hurt_end_y;
+    hurt_start_dot = hurt_delta_z * start_delta_z +
+                     (x_work * start_delta_x + y_work * start_delta_y);
+    hit_start_min_z = 1.0F;
+    (void) hurt_end_x;
+    segment_dot = hit_delta.z * hurt_delta_z +
+                  (hit_delta.x * x_work + hit_delta.y * y_work);
     {
-        float hit_start_dot_x = hit_delta.x * start_delta_x;
-        hit_start_dot = hit_start_dot_x + hit_start_dot;
+        PAD_STACK(4);
+        hit_start_dot =
+            hit_delta.z * start_delta_z +
+            (hit_delta.x * start_delta_x + hit_delta.y * start_delta_y);
     }
-    hurt_start_dot = (x_work * start_delta_x) + (y_work * start_delta_y);
-    hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
-    hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
-    closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
+    hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
+    closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
     if ((hurt_len_sq < 1e-5F) && (hurt_len_sq > -1e-5F)) {
         is_hurt_segment_degenerate = 1;
     } else {
