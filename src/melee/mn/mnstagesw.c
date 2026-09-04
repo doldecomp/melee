@@ -151,33 +151,21 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     }
 }
 
-static inline s32 mnStageSw_IsRangeEmpty(u8 range_start, u8 range_end)
-{
-    s32 curr;
-
-    for (curr = range_start; curr <= range_end; curr++) {
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
-static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
-{
-    return index - offset;
-}
-
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
-    u8 low;
-    s32 idx;
-    u8 end;
+    s32 found;
+    s32 temp;
     s32 curr;
-    s32 i;
+    s32 low_bound;
+    s32 high_bound;
+    s32 idx;
+    u8 low;
+    u8 end;
     u8 start;
     u8 high;
+    s32 prev;
+    s32 i;
 
     if (arg0 < 15) {
         low = 0;
@@ -194,7 +182,18 @@ static s32 mnStageSw_80235C58(u8 arg0)
         end = 28;
     }
 
-    if (mnStageSw_IsRangeEmpty(start, end) != 0) {
+    curr = start;
+    next = end;
+    while (curr <= next) {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
+            found = 0;
+            goto loop_done;
+        }
+        curr++;
+    }
+    found = 1;
+loop_done:
+    if (found != 0) {
         return -1;
     }
 
@@ -204,27 +203,26 @@ static s32 mnStageSw_80235C58(u8 arg0)
         return arg0;
     }
 
-    i = 1;
-    curr = arg0 + 1;
     idx = arg0;
     next = idx + 1;
-    while (true) {
-        s32 temp = mnStageSw_GetPreviousIndex(i, idx);
-        s32 prev = temp;
-
-        if (low <= prev &&
+    curr = idx + (found = 1);
+    low_bound = low;
+    high_bound = high;
+    for (i = 1; found; i++) {
+        temp = idx - i;
+        prev = temp;
+        if (low_bound <= prev &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) prev])) != 0)
         {
             return prev;
         }
-        if (next <= high &&
+        if (next <= high_bound &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0)
         {
             return idx + i;
         }
         next++;
         curr++;
-        i++;
     }
 }
 
@@ -321,7 +319,7 @@ static void fn_80235F80(HSD_GObj* gobj)
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         mnStageSw_8023593C(mnStageSw_804D6BF0);
-        lb_8001CE00();
+        lbCardGame_UpdatePowerTime();
         mn_804D6BC8.cooldown = 5;
         mn_802339FC();
         HSD_GObjPLink_80390228(gobj);
@@ -370,12 +368,12 @@ static void fn_80235F80(HSD_GObj* gobj)
             switch (result) {
             case GM_MENU:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
-                lb_8001CE00();
+                lbCardGame_UpdatePowerTime();
                 mn_80229860(GM_VS);
                 return;
             default:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
-                lb_8001CE00();
+                lbCardGame_UpdatePowerTime();
                 mn_8022F4CC();
                 return;
             }
@@ -508,10 +506,38 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
     mn_8022ED6C(hover_anim_jobj, mnStageSw_803ED488);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma inline_depth(0)
-#endif
+static inline void mnStageSw_FinishEnter(HSD_GObj* menu_gobj,
+                                         MnStageSwData* data, HSD_JObj** child)
+{
+    HSD_JObj* jobj;
+    s32 i;
+
+    data->x1F = i = 0;
+    mnStageSw_802359C8(data);
+    menu_gobj = menu_gobj->user_data;
+    HSD_JObjClearFlagsAll(((MnStageSwData*) menu_gobj)->x2C, JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(((MnStageSwData*) menu_gobj)->x34, JOBJ_HIDDEN);
+    for (; i < NUM_STAGES; i++) {
+        jobj = mnStageSw_802364A0((MnStageSwData*) menu_gobj, i);
+        if (i != ((MnStageSwData*) menu_gobj)->x1) {
+            lb_80011E24(jobj, child, 3, -1);
+            HSD_JObjSetFlagsAll(*child, JOBJ_HIDDEN);
+        }
+    }
+    mnStageSw_80236178((MnStageSwData*) menu_gobj,
+                       ((MnStageSwData*) menu_gobj)->x1);
+    mnStageSw_804D6BF4 = 0;
+}
+
+static inline void mnStageSw_FreeTexts(MnStageSwData* data)
+{
+    s32 i;
+
+    for (i = 0; i < NUM_STAGES; i++) {
+        HSD_SisLib_803A5CC4(data->x40[i]);
+    }
+}
+
 static void fn_80236998(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -519,7 +545,6 @@ static void fn_80236998(HSD_GObj* gobj)
     MnStageSwData* data = current_data;
     AnimLoopSettings* anims;
     s32 changed_menu;
-    s32 i;
     s32 changed_hovered;
     u64 pad3;
     HSD_JObj* child;
@@ -585,30 +610,11 @@ static void fn_80236998(HSD_GObj* gobj)
             switch ((s32) data->x1F) {
             case 1:
             case 3:
-                data->x1F = changed_menu = 0;
-                mnStageSw_802359C8(data);
-                gobj = gobj->user_data;
-                HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
-                                      JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x34,
-                                      JOBJ_HIDDEN);
-                for (; changed_menu < NUM_STAGES; changed_menu++) {
-                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj,
-                                              changed_menu);
-                    if (changed_menu != ((MnStageSwData*) gobj)->x1) {
-                        lb_80011E24(jobj, &child, 3, -1);
-                        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
-                    }
-                }
-                mnStageSw_80236178((MnStageSwData*) gobj,
-                                   ((MnStageSwData*) gobj)->x1);
-                mnStageSw_804D6BF4 = 0;
+                mnStageSw_FinishEnter(gobj, data, &child);
                 return;
             case 2:
             case 4:
-                for (i = 0; i < NUM_STAGES; i++) {
-                    HSD_SisLib_803A5CC4(data->x40[i]);
-                }
+                mnStageSw_FreeTexts(data);
                 HSD_GObjPLink_80390228(gobj);
                 return;
             }
@@ -640,9 +646,6 @@ static void fn_80236998(HSD_GObj* gobj)
             mn_804A04F0.confirmed_selection;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
 {

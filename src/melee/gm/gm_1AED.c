@@ -292,7 +292,7 @@ void gm_Scene_MemCard_OnFrame(void)
                     gm_80480DA8.unk8.unk0 = 1;
                     gm_80480DA8.unk14 = 0x14;
                     lb_8001CBAC(0);
-                    lb_8001CE00();
+                    lbCardGame_UpdatePowerTime();
                 }
             } else {
                 unk_inline();
@@ -457,8 +457,8 @@ void gm_Scene_MemCard_OnEnter(void* user_data)
     }
     gm_80480DA8.unk14 = checkUnk0();
     gm_80480DA8.unk8.unk4 = gm_80480DA8.unk0.unk5;
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
     gm_801ADDD8();
     gm_804D6870 = 0;
     gm_804D6872 = 6;

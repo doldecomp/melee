@@ -380,7 +380,20 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
-void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
+static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
+                                      s32 round)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        char_ids[i] = 0x21;
+    }
+    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
+        char_ids[i] = opp_data[i].x3;
+    }
+}
+
+void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 {
     s8 chars[3];
     u8 colors[3];
@@ -389,34 +402,28 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gm_803DEBE8_t* opp_data;
     struct GameCache* gc;
     s32 slot_idx;
-    s32 count_processed;
     s32 i;
     u64 audio;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     is_last_round = 0;
-    chars_ptr = chars;
 
-    opp_data = &gm_803DEBE8[gm_803DEC4C[arg1].start];
-
-    chars_ptr[0] = 0x21;
-    chars_ptr[1] = 0x21;
-    chars_ptr[2] = 0x21;
-
-    for (count_processed = 0; count_processed < (s32) gm_803DEC4C[arg1].count;
-         count_processed++)
     {
-        chars[count_processed] = opp_data[count_processed].x3;
+        u32 start = gm_803DEC4C[arg1].start;
+        opp_data = &gm_803DEBE8[start];
     }
+
+    gm_801B5324_inline(chars, opp_data, arg1);
 
     for (i = 0; i < 3; i++) {
-        colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
+        colors[i] = arg0->x54(arg1, arg0->x0.x0.cpu_level, (u8) i);
     }
 
-    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
+    gmRegSetupEnemyColorTable(arg0->x0.x0.ckind, arg0->x0.x0.color, chars,
                               colors);
 
-    if ((s32) arg1 == 0xC) {
+    chars_ptr = chars;
+    if (arg1 == 0xC) {
         chars_ptr[0] = 3;
         colors[0] = 0;
         is_last_round = 1;
@@ -429,8 +436,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     slot_idx = 0;
-    gc->entries[slot_idx].char_id = (s32) arg0->x0.ckind;
-    gc->entries[slot_idx].color = arg0->x0.color;
+    gc->entries[slot_idx].char_id = (s32) arg0->x0.x0.ckind;
+    gc->entries[slot_idx].color = arg0->x0.x0.color;
     slot_idx++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
@@ -451,11 +458,11 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc->stkind = opp_data->x2;
     lbDvd_80018254();
 
-    audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
+    audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.x0.ckind);
     {
-        for (i = 0; i < 3; i++) {
-            CharacterKind ckind = chars[i];
-            audio |= lbAudioAx_80026E84(ckind);
+        s32 j;
+        for (j = 0; j < 3; j++) {
+            audio |= lbAudioAx_80026E84(chars[j]);
         }
     }
 
@@ -530,7 +537,7 @@ void gm_801B5624(GameModeState* arg0)
     }
 
     if (arg0->id == 0x60) {
-        u8* cpu_level = &allstar->x0.cpu_level;
+        u8* cpu_level = &allstar->x0.x0.cpu_level;
         f32 f31;
         f32 f30;
         u8 opp_count;
@@ -549,8 +556,8 @@ void gm_801B5624(GameModeState* arg0)
     }
 
     data->players[0].x10 = allstar->x74;
-    gm_8016F088(data);
-    allstar->x0.x7 = arg0->id;
+    gm_LoadRumbleEnabled(data);
+    allstar->x0.x0.mode = arg0->id;
 }
 
 void gm_801B59AC(GameModeState* arg0)
@@ -582,16 +589,12 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline void gm_801B5ACC_inline0(StartMeleeData* data,
-                                       GameModeState* arg0, u16* round)
+static inline u16 gm_801B5ACC_inline0(StartMeleeData* match_data,
+                                      GameModeState* arg0)
 {
-    data->players[0].xD_b2 = 1;
-    data->rules.x7 = 9;
-
-    {
-        u16 current_round = gm_8017BE84(arg0->id);
-        *round = current_round;
-    }
+    match_data->players[0].xD_b2 = 1;
+    match_data->rules.x7 = 9;
+    return gm_8017BE84(arg0->id);
 }
 
 static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
@@ -609,11 +612,10 @@ static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
 void gm_801B5ACC(GameModeState* arg0)
 {
     s8 chars[3];
-    StartMeleeData* data;
-    u8* base;
-    UnkAllstarData* allstar;
-    u16 round;
     u8 color;
+    u8* base;
+    u16 round;
+    StartMeleeData* data;
     s32 i;
     s32 next_count;
 
@@ -623,8 +625,7 @@ void gm_801B5ACC(GameModeState* arg0)
     chars[2] = 0x21;
     base = (u8*) gm_Mode_AllStar_States;
     data = gm_GetGameModeStateEnterData(arg0);
-    allstar = &gm_80473A18;
-    allstar->x0.x8 |= 0x80;
+    gm_80473A18.x0.x8 |= 0x80;
 
     round = gm_8017BE84(arg0->id);
     {
@@ -633,56 +634,53 @@ void gm_801B5ACC(GameModeState* arg0)
         color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
-    gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0, 0x55, 0,
-                (s32) color);
+    gm_8017CE34(data, (UnkAdventureData*) &gm_80473A18, chars, 0, 0, 0, 0,
+                0x55, 0, (s32) color);
 
     data->rules.x0_6 = 0;
     data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
-    data->rules.time_limit = (s32) allstar->x9C / 60;
-    data->rules.x14 = (s32) allstar->x9C % 60;
+    data->rules.time_limit = (s32) gm_80473A18.x9C / 60;
+    data->rules.x14 = (s32) gm_80473A18.x9C % 60;
     data->rules.xD = 0x78;
-    data->players[0].x10 = allstar->x74;
-    gm_801B5ACC_inline0(data, arg0, &round);
+    data->players[0].x10 = gm_80473A18.x74;
+    round = gm_801B5ACC_inline0(data, arg0);
 
     {
+        UnkAllstarData* allstar = &gm_80473A18;
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
-        u8* slot_base = allstar->x76;
+        s32 next_start;
+
         for (i = 0; i < (s32) ri->count; i++) {
             u8* slot_ptr;
             s32 slot;
             do {
                 slot = HSD_Randi(0x1A);
-                slot_ptr = &slot_base[slot];
+                slot_ptr = &allstar->x76[slot];
             } while ((s32) *slot_ptr != 0x21);
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
-    }
 
-    {
-        AllstarRoundInfo* ri2 = &gm_803DEC4C[round];
-        s32 next_start;
-
-        next_count = (s32) ri2[1].count;
-        next_start = (s32) ri2[1].start;
+        next_count = (s32) ri[1].count;
+        next_start = (s32) ri[1].start;
         for (i = 0; i < next_count; i++) {
             allstar->_94[2 + i] = gm_803DEBE8[next_start + i].x3;
         }
+
+        allstar->_94[1] = (u8) next_count;
+        allstar->_94[0] = (u8) (round + 1);
+        data->players[0].xC_b1 = 0;
+        data->rules.x1_2 = 1;
+        data->rules.x1_3 = 1;
+        data->rules.x4_4 = 0;
+        gm_LoadRumbleEnabled(data);
+        gm_8016A92C(&data->rules);
+
+        gm_801B5ACC_inline1(&gm_803DEC4C[round]);
+
+        gm_801B5324(allstar, round + 1);
+        data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
     }
-
-    allstar->_94[1] = (u8) next_count;
-    allstar->_94[0] = (u8) (round + 1);
-    data->players[0].xC_b1 = 0;
-    data->rules.x1_2 = 1;
-    data->rules.x1_3 = 1;
-    data->rules.x4_4 = 0;
-    gm_8016F088(data);
-    gm_8016A92C(&data->rules);
-
-    gm_801B5ACC_inline1(&gm_803DEC4C[round]);
-
-    gm_801B5324(allstar, round + 1);
-    data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
 }
 
 void gm_801B5E7C(GameModeState* arg0)
@@ -716,10 +714,12 @@ void gm_801B5F50(GameModeState* arg0)
     temp_r31 = gm_GetGameModeStateEnterData(arg0);
     temp_r3 = gmMainLib_8015CDE0();
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
-                temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
-                gm_80473A18.x0.slot);
-    lbDvd_800174BC();
+                temp_r3->color, temp_r3->nametag, temp_r3->cpu_level,
+                gm_80473A18.x0.x0.slot);
+    lbDvd_SetupVsPreloadCache();
 }
+
+/// #gm_801B5F50
 
 void gm_801B5FB4(GameModeState* arg0)
 {
@@ -732,12 +732,12 @@ void gm_801B5FB4(GameModeState* arg0)
         return;
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
-                &temp_r30->color, &temp_r30->x4, &temp_r30->cpu_level);
-    r29->x0.ckind = temp_r30->c_kind;
-    r29->x0.color = temp_r30->color;
-    r29->x0.cpu_level = temp_r30->cpu_level;
-    r29->x0.stocks = temp_r30->stocks;
-    r29->x0.x4 = temp_r30->x4;
+                &temp_r30->color, &temp_r30->nametag, &temp_r30->cpu_level);
+    r29->x0.x0.ckind = temp_r30->c_kind;
+    r29->x0.x0.color = temp_r30->color;
+    r29->x0.x0.cpu_level = temp_r30->cpu_level;
+    r29->x0.x0.stocks = temp_r30->stocks;
+    r29->x0.x0.nametag = temp_r30->nametag;
     gm_SetNextGameModeStateId((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
@@ -770,7 +770,7 @@ void gm_Mode_AllStar_OnLoad(void)
     }
 
     gm_8017DB58(data->x0.xC.x24);
-    data->x0.slot = gm_801677F0();
+    data->x0.x0.slot = gm_801677F0();
     data->x48 = gm_8018A160;
     data->x4C = gm_8018A228;
     data->x50 = gm_8018A290;
@@ -824,6 +824,6 @@ void gm_Mode_AllStar_OnInit(void)
     temp_r3->color = 0;
     temp_r3->stocks = 1;
     temp_r3->cpu_level = 0;
-    temp_r3->x4 = 0x78;
+    temp_r3->nametag = 0x78;
     temp_r3->x5 = 0;
 }

@@ -642,12 +642,12 @@ void grFourside_801F3B70(Ground_GObj* gobj)
                 gp->u.foursideUfo.x3 = 1;
             }
             cam = gp->u.foursideUfo.xC;
-            cam->x10 = local18;
-            cam->x1C = local18;
-            cam->x40.x = -50.0f;
-            cam->x40.y = 50.0f;
-            cam->x48.x = 15.0f;
-            cam->x48.y = -15.0f;
+            cam->pos = local18;
+            cam->bone_pos = local18;
+            cam->target_ext.h.x = -50.0f;
+            cam->target_ext.h.y = 50.0f;
+            cam->target_ext.v.x = 15.0f;
+            cam->target_ext.v.y = -15.0f;
         }
     }
 }

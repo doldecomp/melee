@@ -92,12 +92,12 @@ static void sdata2_order(void)
 }
 #endif
 
-/* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3B7D3C */ extern const s32 lbl_803B7D3C[5];
-/* 479A58 */ struct TmAnimTimers lbl_80479A58;
-/* 4D6690 */ extern SceneDesc* lbl_804D6690;
-/* 4D668C */ extern HSD_Archive* lbl_804D668C;
-/* 4D6694 */ extern SceneDesc* lbl_804D6694;
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
+/* 4D6688 */ static HSD_Archive* lbl_804D6688;
+/* 479A58 */ static TmAnimTimers lbl_80479A58;
+/* 4D6690 */ static SceneDesc* lbl_804D6690;
+/* 4D668C */ static HSD_Archive* lbl_804D668C;
+/* 4D6694 */ static SceneDesc* lbl_804D6694;
 
 struct lbl_803DA2E0_t lbl_803DA2E0 = {
     {
@@ -687,6 +687,7 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
                     0.01f);
+        (void) &tmd->x534[i];
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
@@ -987,8 +988,6 @@ void gm_Scene_TouAlt_OnFrame(void)
     }
 }
 
-/* 4DA948 */ u32 const lbl_804DA948 = { 0 };
-
 void gm_8019ECAC_OnEnter_inline(void)
 {
     lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
@@ -1034,29 +1033,24 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if (gmMainLib_GetGameRules()->handicap == 1) {
-        union {
-            u32 word;
-            u8 bytes[4];
-        } hbuf;
-
-        hbuf.word = *(volatile u32 const*) &lbl_804DA948;
+        u8 hbuf[4] = { 0 };
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 j = get_match_player_index_xF(results[i]);
-                hbuf.bytes[i] = tmd->x37[j].x2;
+                hbuf[i] = tmd->x37[j].x2;
             }
         }
 
-        fn_80169000(&gm_80477738, hbuf.bytes);
+        fn_80169000(&gm_80477738, hbuf);
 
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 s32 id = results[i];
                 j = get_match_player_index_xF(id);
-                tmd->x37[j].x2 = hbuf.bytes[i];
+                tmd->x37[j].x2 = hbuf[i];
             }
         }
     }
@@ -1169,7 +1163,7 @@ void gm_Scene_TouAlt_OnEnter(void* arg0)
         local.stkind = tmd->x28;
     }
     fn_80196594(tmd);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 
     audio_mask = 0;
     for (j = 0; j < 4; j++) {
@@ -1232,5 +1226,3 @@ static void order_data_1(void)
     (void) "ckind:%d\n";
 }
 #endif
-
-/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };

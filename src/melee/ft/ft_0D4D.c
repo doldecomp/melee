@@ -9,23 +9,23 @@
 #include "ft/ftwalkcommon.h"
 
 #include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_AirCatch.h>
-#include <melee/ft/chara/ftCommon/ftCo_AppealS.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackAir.h>
-#include <melee/ft/chara/ftCommon/ftCo_EscapeAir.h>
-#include <melee/ft/chara/ftCommon/ftCo_Fall.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_JumpAerial.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialAir.h>
-#include <melee/ft/chara/ftCommon/ftCo_Squat.h>
-#include <melee/ft/chara/ftCommon/ftCo_Turn.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0D31.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
+#include <melee/ft/kinds/ftCommon/ftCo_EscapeAir.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Squat.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
 #include <melee/gr/stage.h>
-#include <melee/it/items/it_2E5A.h>
+#include <melee/it/kinds/it_2E5A.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
@@ -376,8 +376,8 @@ void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CmSubject* camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
-    camera_box->x10.x = fp->mv.co.common.x4.x;
-    camera_box->x10.y = fp->mv.co.common.x4.y + spC.x0.x;
-    camera_box->x10.z = 0.0f;
-    ftLib_800866DC(gobj, &camera_box->x1C);
+    camera_box->pos.x = fp->mv.co.common.x4.x;
+    camera_box->pos.y = fp->mv.co.common.x4.y + spC.x0.x;
+    camera_box->pos.z = 0.0f;
+    ftLib_800866DC(gobj, &camera_box->bone_pos);
 }

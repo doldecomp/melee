@@ -35,54 +35,9 @@ struct lbl_803D6300_t {
     bool (*x4)(void);
 };
 
-struct lbl_803D6300_t lbl_803D6300[] = {
-    { 0x0016, 0xFFFF, fn_801735F0 },
-    { 0x0017, 0x0001, fn_80173644 },
-    { 0x0018, 0xFFFF, fn_80173510 },
-    { 0x0019, 0xFFFF, NULL },
-    { 0x001A, 0xFFFF, NULL },
-    { 0x001B, 0xFFFF, fn_8017367C },
-    { 0x001C, 0xFFFF, gm_80164ABC },
-    { 0x001D, 0xFFFF, gm_80164600 },
-    { 0x001E, 0x0040, fn_80162CCC },
-    { 0x001F, 0x0040, gm_80162EC8 },
-    { 0x0020, 0x0040, fn_801630C4 },
-    { 0x0021, 0x0040, gm_80162D1C },
-    { 0x0022, 0x0040, gm_80162F18 },
-    { 0x0023, 0x0040, gm_80163114 },
-    { 0x0024, 0x0010, fn_801722BC },
-    { 0x0025, 0x0010, fn_801722F4 },
-    { 0x0026, 0x0080, gmMainLib_8015D508 },
-    { 0x0027, 0x0020, fn_80163D24 },
-    { 0x0028, 0x0020, fn_80163D74 },
-    { 0x0029, 0x0040, fn_8017232C },
-    { 0x002A, 0x0040, fn_80172428 },
-    { 0x002B, 0x0040, fn_80172380 },
-    { 0x002C, 0x0040, fn_80172478 },
-    { 0x002D, 0x0040, fn_801723D4 },
-    { 0x002E, 0x0040, fn_801724C8 },
-    { 0x002F, 0x0001, fn_801724D0 },
-    { 0x0030, 0x0001, fn_80172504 },
-    { 0x0031, 0x0001, fn_80172538 },
-    { 0x0032, 0x0001, fn_8017256C },
-    { 0x0033, 0x0001, fn_801725A8 },
-    { 0x0034, 0x0001, fn_801725E4 },
-    { 0x0035, 0x0001, fn_80172624 },
-    { 0x0036, 0x0001, fn_80172664 },
-    { 0x0037, 0xFFFF, fn_80172698 },
-    { 0x0038, 0xFFFF, fn_801726CC },
-    { 0x0039, 0xFFFF, fn_80172700 },
-    { 0x003A, 0xFFFF, fn_80172734 },
-    { 0x003B, 0xFFFF, fn_80172768 },
-    { 0x003C, 0xFFFF, un_80304470 },
-    { 0x003D, 0xFFFF, un_80304510 },
-    { 0x0041, 0x0010, gmMainLib_8015CF94 },
-    { 0x0042, 0x0000, NULL },
-};
-
 int fn_8016F180(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -95,7 +50,7 @@ int fn_8016F180(int kind)
 Gm_DecType gmDecisionGetType(int kind)
 {
     struct lbl_803D5A4C_t* curr;
-    for (curr = lbl_803D5A4C; curr->kind != kind; curr++) {
+    for (curr = lbl_803D5A4C.entries; curr->kind != kind; curr++) {
         if (curr->kind == 0x29A) {
             return Gm_DecType_Flag;
         }
@@ -105,12 +60,12 @@ Gm_DecType gmDecisionGetType(int kind)
 
 s32 fn_8016F1F0(int idx)
 {
-    return lbl_803D5A4C[idx].kind;
+    return lbl_803D5A4C.entries[idx].kind;
 }
 
 int gm_8016F208(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -130,7 +85,7 @@ int fn_8016F280(int arg0)
 
 int gm_8016F2F8(int kind, u8 arg1)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return -1;
@@ -160,7 +115,7 @@ void fn_8016F344(struct lbl_8046B6A0_24C_t* arg0)
 /// drops that zero-extension and regresses gm_8016F208/fn_8016F280.
 static inline u16 fn_8016F39C_GetSisTextId(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -188,7 +143,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
     idx = arg3;
     while ((u32) idx < 0x101U) {
         matched = 0;
-        if (lbl_803D5A4C[idx].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[idx].kind < 0xD7) {
             flags = fn_8016F180(idx);
             if (arg4 & flags) {
                 if (pl_80039418(arg5, idx) != 0) {
@@ -226,7 +181,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -242,7 +197,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = 0x100; i >= 0; i--) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -275,7 +230,7 @@ int fn_8016F740(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
     i = temp;
     for (; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -308,7 +263,7 @@ int fn_8016F870(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1 - 1; i >= 0; i--) {
-        kind = lbl_803D5A4C[i].kind;
+        kind = lbl_803D5A4C.entries[i].kind;
 
         if (kind < 0xD7) {
             flags = fn_8016F180(i);
@@ -341,7 +296,7 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -365,7 +320,7 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
 int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
                 u8 player)
 {
-    struct lbl_803D5A4C_t* entry = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* entry = lbl_803D5A4C.entries;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     u8 rankings[7] = { 0 };
     s32 scores[6];
@@ -381,7 +336,8 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     for (i = 0; i < 6; i++) {
         if (x58[i].x0 != 3) {
             u16 sd = x58[i].xA;
-            scores[i] = x58[i].x20 - (x58[i].x24 - sd) + (s8) rules->xC * sd;
+            scores[i] =
+                x58[i].x20 - (x58[i].x24 - sd) + *(s8*) &rules->xC * sd;
         }
     }
 
@@ -405,12 +361,13 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
         {
-            int j;
-            for (j = 0; j < 4; j++) {
-                if (x58[j].x0 == 3) {
-                    break;
+            int active_count = 0;
+            for (i = 0; i < 4; i++) {
+                if (x58[i].x0 != 3) {
+                    active_count++;
                 }
             }
+            (void) active_count;
         }
         if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
@@ -437,18 +394,13 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     return lbl_803D5648[entry->x2 - 2];
 }
 
-void fn_80171AD4(void)
-{
-    memzero(&lbl_8046DBC8, sizeof(lbl_8046DBC8));
-}
-
 int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 {
     int i;
     int count = 0;
 
     for (i = 0; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
                 pl_80039418(arg2, i) != 0)
             {
@@ -468,8 +420,8 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 
 int fn_80170110(void* arg0, int idx, int mask, u8 player_id)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    int kind = lbl_803D5A4C[idx].kind;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
+    int kind = lbl_803D5A4C.entries[idx].kind;
     u8 flags;
 
     flags = (fn_8016F180(kind));
@@ -484,69 +436,30 @@ int fn_80170110(void* arg0, int idx, int mask, u8 player_id)
 
 void gm_801701A0(void)
 {
-    lbl_804D65A0 = 1;
+    lbl_804D65A0.x0 = 1;
 }
 
 void fn_801701AC(void)
 {
-    lbl_804D65A0 = 0;
+    lbl_804D65A0.x0 = 0;
 }
 
 int fn_801701B8(void)
 {
-    return lbl_804D65A0;
-}
-
-/// One bubble pass over @p base, used by the two @c u32 sorts in
-/// #fn_801701C0.
-///
-/// The two sorts there are the only ones whose loop guard the original emits
-/// as
-/// @c cmplwi + @c ble rather than @c cmpwi + @c ble, which is why @p n is
-/// unsigned; and the pointer has to live inside an inline expansion, because a
-/// caller-level local is coloured after the compare temp and takes r4 instead
-/// of r3. The other five sorts in this function are written inline with plain
-/// @c vals[i] indexing, which puts their pointer in the same @c \@ band by way
-/// of strength reduction.
-static inline void gm_16F1_SortDescPass(u32* base, u32 n)
-{
-    int i;
-    u32* p = base;
-    for (i = 0; i < n; i++) {
-        if (p[0] > p[1]) {
-            u32 tmp = p[1];
-            p[1] = p[0];
-            p[0] = tmp;
-        }
-        p++;
-    }
-}
-
-static inline void gm_16F1_SortAscPass(u32* base, u32 n)
-{
-    int i;
-    u32* p = base;
-    for (i = 0; i < n; i++) {
-        if (p[0] < p[1]) {
-            u32 tmp = p[1];
-            p[1] = p[0];
-            p[0] = tmp;
-        }
-        p++;
-    }
+    return lbl_804D65A0.x0;
 }
 
 int fn_801701C0(void* arg0, int arg1, int arg2)
 {
     struct lbl_8046B6A0_24C_t* rules = arg0;
-    struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
+    const struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     s32 player_net;
-    s32 scores[6];
+    s32 scores[4];
     u8 rankings[7] = { 0 };
 
-    if (lbl_804D65A0 != 0) {
+    if (lbl_804D65A0.x0 != 0) {
         return 0;
     }
     if (rules == NULL || x58 == NULL) {
@@ -562,7 +475,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             if (x58[k].x0 != 3) {
                 u16 xA = x58[k].xA;
                 scores[k] =
-                    (x58[k].x20 - (x58[k].x24 - xA)) + ((s8) rules->xC * xA);
+                    (x58[k].x20 - (x58[k].x24 - xA)) + *(s8*) &rules->xC * xA;
             }
         }
 
@@ -587,8 +500,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             }
         }
     }
-
-    PAD_STACK(8);
 
     switch (arg2) {
     case 0xD7:
@@ -655,7 +566,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xDB: {
-        s32 vals[4];
+        s32 vals[6];
         int i, j;
         if (x58[arg1].x20 >= 3) {
             {
@@ -1110,6 +1021,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
 
     case 0xFE: {
+        u32 tmp, k;
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1137,7 +1049,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    gm_16F1_SortDescPass(vals, j);
+                    for (k = 0; k < j; k++) {
+                        if (vals[k] > vals[k + 1]) {
+                            tmp = vals[k + 1];
+                            vals[k + 1] = vals[k];
+                            vals[k] = tmp;
+                        }
+                    }
                 }
                 if (vals[0] == pl_800408B8(arg1) && vals[0] <= vals[1] / 2) {
                     return 1;
@@ -1150,6 +1068,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xFF: {
+        u32 tmp, k;
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1174,7 +1093,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    gm_16F1_SortAscPass(vals, j);
+                    for (k = 0; k < j; k++) {
+                        if (vals[k] < vals[k + 1]) {
+                            tmp = vals[k + 1];
+                            vals[k + 1] = vals[k];
+                            vals[k] = tmp;
+                        }
+                    }
                 }
                 if (vals[0] == pl_80040894(arg1) && vals[0] >= vals[1] * 2) {
                     return 1;
@@ -1201,6 +1126,11 @@ int fn_80171A88(void)
         }
     }
     return result;
+}
+
+void fn_80171AD4(void)
+{
+    memzero(&lbl_8046DBC8, sizeof(lbl_8046DBC8));
 }
 
 bool fn_80171B00(int arg0)
@@ -1613,6 +1543,51 @@ bool fn_80172768(void)
     return false;
 }
 
+struct lbl_803D6300_t lbl_803D6300[] ATTRIBUTE_ALIGN(8) = {
+    { 0x0016, 0xFFFF, fn_801735F0 },
+    { 0x0017, 0x0001, fn_80173644 },
+    { 0x0018, 0xFFFF, fn_80173510 },
+    { 0x0019, 0xFFFF, NULL },
+    { 0x001A, 0xFFFF, NULL },
+    { 0x001B, 0xFFFF, fn_8017367C },
+    { 0x001C, 0xFFFF, gm_80164ABC },
+    { 0x001D, 0xFFFF, gm_80164600 },
+    { 0x001E, 0x0040, fn_80162CCC },
+    { 0x001F, 0x0040, gm_80162EC8 },
+    { 0x0020, 0x0040, fn_801630C4 },
+    { 0x0021, 0x0040, gm_80162D1C },
+    { 0x0022, 0x0040, gm_80162F18 },
+    { 0x0023, 0x0040, gm_80163114 },
+    { 0x0024, 0x0010, fn_801722BC },
+    { 0x0025, 0x0010, fn_801722F4 },
+    { 0x0026, 0x0080, gmMainLib_8015D508 },
+    { 0x0027, 0x0020, fn_80163D24 },
+    { 0x0028, 0x0020, fn_80163D74 },
+    { 0x0029, 0x0040, fn_8017232C },
+    { 0x002A, 0x0040, fn_80172428 },
+    { 0x002B, 0x0040, fn_80172380 },
+    { 0x002C, 0x0040, fn_80172478 },
+    { 0x002D, 0x0040, fn_801723D4 },
+    { 0x002E, 0x0040, fn_801724C8 },
+    { 0x002F, 0x0001, fn_801724D0 },
+    { 0x0030, 0x0001, fn_80172504 },
+    { 0x0031, 0x0001, fn_80172538 },
+    { 0x0032, 0x0001, fn_8017256C },
+    { 0x0033, 0x0001, fn_801725A8 },
+    { 0x0034, 0x0001, fn_801725E4 },
+    { 0x0035, 0x0001, fn_80172624 },
+    { 0x0036, 0x0001, fn_80172664 },
+    { 0x0037, 0xFFFF, fn_80172698 },
+    { 0x0038, 0xFFFF, fn_801726CC },
+    { 0x0039, 0xFFFF, fn_80172700 },
+    { 0x003A, 0xFFFF, fn_80172734 },
+    { 0x003B, 0xFFFF, fn_80172768 },
+    { 0x003C, 0xFFFF, un_80304470 },
+    { 0x003D, 0xFFFF, un_80304510 },
+    { 0x0041, 0x0010, gmMainLib_8015CF94 },
+    { 0x0042, 0x0000, NULL },
+};
+
 bool fn_8017279C(int arg0, u16 arg1)
 {
     struct lbl_803D6300_t* cur = lbl_803D6300;
@@ -1816,10 +1791,10 @@ static const struct lbl_803B7AD0_t {
     { 9, 5, 2, 0x0C8 }, { 10, 5, 2, 0x258 },
 };
 
-static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
+static inline const struct lbl_803B7AD0_t* inline2(u8 cpu_ckind)
 {
     int i;
-    u8 temp_r3 = gm_CKindToUnlockIndex(arg0);
+    u8 temp_r3 = gm_CKindToUnlockIndex(cpu_ckind);
     const struct lbl_803B7AD0_t* tmp = lbl_803B7AD0;
     for (i = 0; i < 0xB; i++) {
         if (temp_r3 == tmp[i].x0) {
@@ -1829,13 +1804,14 @@ static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
     return NULL;
 }
 
-u8 gm_80172CC0(u8 arg0, u8 arg1)
+/// @returns CPU level (0-9)
+u8 gm_DecideChallengerCpuLevel(u8 cpu_ckind, UNUSED u8 human_nametag)
 {
     int var_r0;
-    const struct lbl_803B7AD0_t* var_r31 = inline2(arg0);
+    const struct lbl_803B7AD0_t* var_r31 = inline2(cpu_ckind);
 
-    var_r0 = var_r31->x1 -
-             var_r31->x2 * gmMainLib_8015DB6C(gm_CKindToUnlockIndex(arg0));
+    var_r0 = var_r31->x1 - var_r31->x2 * gmMainLib_8015DB6C(
+                                             gm_CKindToUnlockIndex(cpu_ckind));
     if (var_r0 < 0) {
         var_r0 = 0;
     } else if (var_r0 > 9) {
@@ -1979,11 +1955,12 @@ u8 fn_80173098(int arg0)
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
-        if (temp_r3->ckind == CKIND_MARS && !gm_IsCKindUnlocked(CKIND_EMBLEM))
+        if (temp_r3->x0.ckind == CKIND_MARS &&
+            !gm_IsCKindUnlocked(CKIND_EMBLEM))
         {
             return CKIND_EMBLEM;
         }
-        if (temp_r3->ckind == CKIND_MARIO &&
+        if (temp_r3->x0.ckind == CKIND_MARIO &&
             !gm_IsCKindUnlocked(CKIND_DRMARIO))
         {
             return CKIND_DRMARIO;

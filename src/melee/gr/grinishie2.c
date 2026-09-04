@@ -15,7 +15,7 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
-#include "it/items/itkyasarin.h"
+#include "it/kinds/itkyasarin.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"

@@ -120,8 +120,8 @@ GameModeState gm_Mode_Tournament_States[] = {
 
 void gm_801B1724(GameModeState* arg0)
 {
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
 }
 
 void gm_801B174C(GameModeState* arg0)
@@ -162,23 +162,22 @@ void gm_801B1810(GameModeState* arg0)
     gm_801905F0(data);
 }
 
-void gm_801B1834(GameModeState* arg0)
+void gm_801B1834(GameModeState* state)
 {
-    MatchExitInfo* mei;
-
-    mei = gm_GetGameModeStateExitData(arg0);
-    if (gm_801A52D0(&mei->match_end) != 0) {
-        gm_8016260C(mei->match_end.match_kind, mei->match_end.result);
-        gm_801628C4(mei->match_end.frame_count / 60,
-                    gm_80162800(&mei->match_end));
+    MatchExitInfo* mei = gm_GetGameModeStateExitData(state);
+    if (gmVsMelee_WasAnyPlayerHuman(&mei->match_end)) {
+        gm_SetupHumanResultsScreen(mei->match_end.match_kind,
+                                   mei->match_end.outcome);
+        gm_SetupResultsScreenPlayTime(mei->match_end.frame_count / GM_FPS,
+                                      gm_80162800(&mei->match_end));
     }
-    if ((gm_MatchHasMultipleWinners(&mei->match_end) != 0) &&
-        (gm_8018F1B0(&mei->match_end) != 0))
+    if (gm_MatchHasMultipleWinners(&mei->match_end) &&
+        gm_8018F1B0(&mei->match_end))
     {
         gm_SetNextGameModeStateId(5);
-        return;
+    } else {
+        gm_SetNextGameModeStateId(6);
     }
-    gm_SetNextGameModeStateId(6);
 }
 
 #ifdef MUST_MATCH
@@ -198,7 +197,7 @@ void gm_801B18D4(GameModeState* arg0)
     }
 
     /// @todo :: figure out how to call this not inlined
-    gm_801B0474(smd, &((MatchExitInfo*) (src + 1))->match_end);
+    gm_SetupSuddenDeath(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
 #ifdef MUST_MATCH
 #pragma pop

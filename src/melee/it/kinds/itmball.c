@@ -1,0 +1,308 @@
+#include "itmball.h"
+
+#include <platform.h>
+
+#include "ef/efasync.h"
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/it_279C.h"
+#include "it/itCommonItems.h"
+#include "it/item.h"
+#include "it/itgroundcoll.h"
+#include "it/itmaplib.h"
+
+#include "it/kinds/forward.h"
+
+#include "it/types.h"
+#include "mp/mpcoll.h"
+
+#include <dolphin/mtx.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <melee/it/item.h>
+
+ItemStateTable it_803F6488[] = {
+    { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },
+    { -1, itMball_Motion3_Anim, itMball_Motion1_Phys, itMball_Motion1_Coll },
+    { -1, itMball_Motion2_Anim, itMball_Motion2_Phys, NULL },
+    { 0, itMball_Motion3_Anim, itMball_Motion3_Phys, itMball_Motion3_Coll },
+    { -1, itMball_Motion4_Anim, itMball_Motion4_Phys, itMball_Motion4_Coll },
+    { 1, itMball_Motion5_Anim, itMball_Motion5_Phys, itMball_Motion5_Coll },
+    { 1, itMball_Motion6_Anim, itMball_Motion6_Phys, itMball_Motion6_Coll },
+};
+
+void itMball_Destroyed(Item_GObj* item_gobj)
+{
+    Item* it = GET_ITEM(item_gobj);
+    if (!(it->xDD4_itemVar.mball.b1)) {
+        Item_804A0C64.x1C -= 1;
+    }
+}
+
+void itMball_Spawned(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+
+    item->xDD4_itemVar.mball.b0 = false;
+    item->xDD4_itemVar.mball.b1 = false;
+    itMball_802979D4(arg0);
+}
+
+void itMball_80297944(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    HSD_JObj* jobj = GET_JOBJ(arg0);
+    it_8026B390(arg0);
+    itResetVelocity(item);
+    Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
+}
+
+bool itMball_Motion0_Anim(Item_GObj* gobj)
+{
+    return false;
+}
+
+void itMball_Motion0_Phys(Item_GObj* gobj) {}
+
+bool itMball_Motion0_Coll(Item_GObj* arg0)
+{
+    it_8026D62C(arg0, itMball_802979D4);
+    return 0;
+}
+
+void itMball_802979D4(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+
+    if (!item->xDD4_itemVar.mball.b0) {
+        Item_80268E5C(arg0, 1, ITEM_UNK_0x1);
+        return;
+    }
+    Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
+}
+
+bool itMball_Motion3_Anim(Item_GObj* gobj)
+{
+    return false;
+}
+
+void itMball_Motion1_Phys(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
+                item->xCC_item_attr->x14_fall_speed_max);
+}
+
+bool itMball_Motion1_Coll(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    f32 previous_vel_x;
+
+    previous_vel_x = item->x40_vel.x;
+    it_8026E15C(arg0, itMball_80297944);
+    if (item->x40_vel.x != previous_vel_x) {
+        it_80272980(arg0);
+    }
+    return 0;
+}
+
+void itMball_PickedUp(Item_GObj* arg0)
+{
+    Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
+}
+
+bool itMball_Motion2_Anim(Item_GObj* gobj)
+{
+    return false;
+}
+
+void itMball_Motion2_Phys(Item_GObj* gobj) {}
+
+void itMball_Dropped(Item_GObj* arg0)
+{
+    Item_80268E5C(arg0, 3, 6);
+}
+
+void itMball_Thrown(Item_GObj* arg0)
+{
+    Item_80268E5C(arg0, 3, 6);
+}
+
+void itMball_Motion3_Phys(Item_GObj* arg0)
+{
+    Item_ApplyFallingPhysics(arg0);
+}
+
+bool itMball_Motion3_Coll(Item_GObj* arg0)
+{
+    it_8026E414(arg0, (void (*)(HSD_GObj*)) itMball_80297CC4);
+    return 0;
+}
+
+bool itMball_DmgDealt(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    it_802725D4(arg0);
+    itColl_BounceOffVictim(arg0);
+    return 0;
+}
+
+void itMball_EnteredAir(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->facing_dir =
+        (ip->x40_vel.x + ip->x7C.x + ip->x88.x) >= 0.0f ? 1.0f : -1.0f;
+    mpCollSetFacingDir(&ip->x378_itemColl, -1.0f == ip->facing_dir ? -1 : 1);
+}
+
+bool itMball_Motion4_Anim(Item_GObj* gobj)
+{
+    return false;
+}
+
+void itMball_Motion4_Phys(Item_GObj* gobj) {}
+
+bool itMball_Motion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, itMball_80297944, itMball_802979D4);
+    return false;
+}
+
+void itMball_80297CC4(Item_GObj* arg0)
+{
+    f32 zero = 0.0f;
+    Item* item = GET_ITEM(arg0);
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* hsd_obj = arg0->hsd_obj;
+
+    it_8026B3A8(arg0);
+    it_80275D5C(arg0, &item->xC0C);
+    item->xDC8_word.flags.x1A = 0;
+    item->xD5C = 0;
+    item->x40_vel.z = zero;
+    item->x40_vel.y = zero;
+    item->x40_vel.x = zero;
+    it_80274740(arg0);
+    if (!item->xDD4_itemVar.mball.b0) {
+        item->xD44_lifeTimer = spec_attrs->x0;
+        item->xDD4_itemVar.mball.b0 = true;
+        efAsync_Spawn(arg0, &GET_ITEM(arg0)->xBC0, 0U, 0x449U, hsd_obj);
+        Item_8026AE84(item, 0x10C, 0x7F, 0x40);
+        Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_UNK_0x1);
+    }
+    item->on_accessory = itMball_OnAccessory;
+}
+
+void itMball_OnAccessory(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
+
+    if (item->xD44_lifeTimer == spec_attrs->x4) {
+        item->xDD4_itemVar.mball.b1 = it_8027AB64(arg0);
+    }
+}
+
+bool itMball_Motion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    return Item_TickLifetime(ip);
+}
+
+void itMball_Motion5_Phys(Item_GObj* gobj) {}
+
+bool itMball_Motion5_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, itMball_80297E8C);
+    return false;
+}
+
+void itMball_80297E8C(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    it_8026B3A8(gobj);
+    item->xDC8_word.flags.x1A = 0;
+    item->xD5C = 0;
+    itResetVelocity(item);
+    it_80274740(gobj);
+    if (item->xDD4_itemVar.mball.b0 == 0) {
+        item->xD44_lifeTimer = spec_attrs->x0;
+        item->xDD4_itemVar.mball.b0 = 1;
+        efAsync_Spawn(gobj, &(GET_ITEM(gobj)->xBC0), 0, 1097, jobj);
+        Item_8026AE84(item, 0x10C, 0x7F, 0x40);
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 6, ITEM_UNK_0x1);
+    }
+    item->on_accessory = itMball_OnAccessory;
+}
+
+bool itMball_Motion6_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    return Item_TickLifetime(ip);
+}
+
+void itMball_Motion6_Phys(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+
+    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
+                item->xCC_item_attr->x14_fall_speed_max);
+}
+
+bool itMball_Motion6_Coll(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    f32 previous_vel_x;
+
+    previous_vel_x = item->x40_vel.x;
+    it_8026E15C(arg0, (void (*)(HSD_GObj*)) itMball_80297CC4);
+    if (item->x40_vel.x != previous_vel_x) {
+        it_80272980(arg0);
+    }
+    return 0;
+}
+
+bool itMball_Clanked(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    it_802725D4(arg0);
+    itColl_BounceOffVictim(arg0);
+    return 0;
+}
+
+bool itMball_Reflected(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    return it_80273030(arg0);
+}
+
+bool itMball_HitShield(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    it_802725D4(arg0);
+    itColl_BounceOffVictim(arg0);
+    return 0;
+}
+
+bool itMball_ShieldBounced(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    return itColl_BounceOffShield(arg0);
+}
+
+void itMball_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

@@ -15,7 +15,7 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCommon/ftCo_Throw.h"
-#include "it/items/itleadead.h"
+#include "it/kinds/itleadead.h"
 #include "pl/player.h"
 
 /* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* gobj);

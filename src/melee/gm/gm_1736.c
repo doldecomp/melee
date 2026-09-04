@@ -14,23 +14,24 @@
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
 
-static lbl_8046DBD8_t challenger_data;
+static ChallengerData challenger_data;
 
-lbl_8046DBD8_t* gm_GetChallengerData(void)
+ChallengerData* gm_GetChallengerData(void)
 {
     return &challenger_data;
 }
 
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
+void gm_InitChallengerData(u8 human_ckind, u8 human_color, u8 human_slot,
+                           u8 human_nametag, u8 cpu_ckind, u8 curr_mode)
 {
-    lbl_8046DBD8_t* tmp = &challenger_data;
+    ChallengerData* tmp = &challenger_data;
     memzero(tmp, sizeof(challenger_data));
-    tmp->x0 = arg0;
-    tmp->x1 = arg1;
-    tmp->x2 = arg2;
-    tmp->x3 = arg3;
-    tmp->x4 = arg4;
-    tmp->x5 = game_mode;
+    tmp->human_ckind = human_ckind;
+    tmp->human_color = human_color;
+    tmp->human_slot = human_slot;
+    tmp->human_nametag = human_nametag;
+    tmp->cpu_ckind = cpu_ckind;
+    tmp->curr_mode = curr_mode;
 }
 
 #ifdef MUST_MATCH
@@ -41,9 +42,9 @@ bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
         memzero(&challenger_data, sizeof(challenger_data));
-        challenger_data.x0 = CHKIND_NONE;
-        challenger_data.x2 = arg1;
-        challenger_data.x5 = gameMode;
+        challenger_data.human_ckind = CHKIND_NONE;
+        challenger_data.human_slot = arg1;
+        challenger_data.curr_mode = gameMode;
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
         gm_SetNewGameModePending();
         return true;
@@ -56,13 +57,13 @@ bool gm_80173754(u8 gameMode, u8 arg1)
 
 u8 gm_801737D8(void)
 {
-    return challenger_data.x6;
+    return challenger_data.prev_mode;
 }
 
 void gm_Mode_ChallengerApproach_OnLoad(void)
 {
-    challenger_data.x6 = gm_GetPreviousGameMode();
-    if (challenger_data.x0 == CHKIND_NONE) {
+    challenger_data.prev_mode = gm_GetPreviousGameMode();
+    if (challenger_data.human_ckind == CHKIND_NONE) {
         gm_SetGameModeStateId(2);
     } else {
         gm_SetGameModeStateId(0);
@@ -111,11 +112,11 @@ void gm_8017390C(int arg0, int arg1)
             fn_80172C78(0xE7);
         }
         if (arg1 != 0) {
-            fn_80173834(temp_r3->x0.ckind, 4, 1);
+            fn_80173834(temp_r3->x0.x0.ckind, 4, 1);
             if (temp_r3->x0.xC.xD == 0 && temp_r3->x77 != 0) {
                 fn_80172C78(0x51);
             }
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.cpu_level >= 3) {
+            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.x0.cpu_level >= 3) {
                 fn_80172C78(0x53);
             }
             if (temp_r3->x0.xC.x20 < 0x101D0) {
@@ -126,8 +127,8 @@ void gm_8017390C(int arg0, int arg1)
     case 1:
         if (arg1 != 0) {
             temp_r3_2 = fn_8017DEC8(1);
-            fn_80173834(temp_r3_2->ckind, 3, 1);
-            if (temp_r3_2->xC.xD == 0 && temp_r3_2->cpu_level >= 3) {
+            fn_80173834(temp_r3_2->x0.ckind, 3, 1);
+            if (temp_r3_2->xC.xD == 0 && temp_r3_2->x0.cpu_level >= 3) {
                 fn_80172C78(0x52);
             }
             if (temp_r3_2->xC.x20 < 0x4650) {
@@ -138,12 +139,12 @@ void gm_8017390C(int arg0, int arg1)
     case 2:
         if (arg1 != 0) {
             temp_r3_3 = fn_8017DEC8(2);
-            fn_80173834(temp_r3_3->ckind, 5, 1);
+            fn_80173834(temp_r3_3->x0.ckind, 5, 1);
             fn_80172C78(0xBE);
             if (temp_r3_3->xC.xD == 0) {
                 fn_80172C78(0xCC);
             }
-            if (temp_r3_3->cpu_level >= 3) {
+            if (temp_r3_3->x0.cpu_level >= 3) {
                 fn_80172C78(0x86);
             }
         }

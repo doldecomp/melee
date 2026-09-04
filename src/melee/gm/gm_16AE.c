@@ -265,7 +265,7 @@ void gm_SetGameSpeed(float speed)
 
 void gm_ResetGameSpeed(void)
 {
-    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.x34));
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.game_speed));
 }
 
 void gm_8016B328(void)
@@ -293,7 +293,7 @@ void gm_8016B378(s8 arg0)
     gm_16AE_GetUnkData_0()->unk_18 = arg0;
 }
 
-void fn_8016B388(int arg0, s16 arg1)
+void fn_8016B388(int arg0, int arg1)
 {
     gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x6 = arg1;
 }
@@ -543,18 +543,18 @@ void fn_8016B918(void)
     int var_r28;
     int var_r31;
     int i;
-    StartMeleeRules* temp_r3;
+    StartMeleeRules* rules;
     PAD_STACK(0x10);
 
-    temp_r3 = gm_GetRules();
-    if (!temp_r3->x4_1) {
+    rules = gm_GetRules();
+    if (!rules->is_vs) {
         return;
     }
-    if (temp_r3->is_teams != true) {
+    if (rules->is_teams != true) {
         return;
     }
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
             Player_GetEntity(i) != NULL && Player_8003219C(i) != 0 &&
             Player_GetStocks(i) == 0)
@@ -1051,7 +1051,7 @@ void fn_8016C7F0(void)
         if (gm_GetCurrentGameMode() == GM_TARGET_TEST) {
             var_r29_2 = gm_CKindToSelKind(*temp_r29_2);
         } else {
-            var_r29_2 = gm_CKindToSelKind(temp_r30->x0.ckind);
+            var_r29_2 = gm_CKindToSelKind(temp_r30->x0.x0.ckind);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);
@@ -1589,14 +1589,14 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
-    Player_SetFlagsBit0(arg0, arg1->xC_b0);
+    Player_SetFlagsBit0(arg0, arg1->rumble_enabled);
     Player_SetNametagSlotID(arg0, arg1->nametag);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);
         Player_SetUnk4C(arg0, tmp->unk_A);
     }
-    Player_SetPlayerAndEntityCpuType(arg0, arg1->xE);
+    Player_SetPlayerAndEntityCpuType(arg0, arg1->cpu_kind);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->cpu_level);
     if (arg1->x10 != 0) {
         Player_SetHUDDamage(arg0, arg1->x10);
@@ -1628,8 +1628,8 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->xC_b4;
-    if (arg1->xC_b4) {
+    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->vs_invisible;
+    if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
     } else {
@@ -1984,7 +1984,7 @@ void fn_8016E730(StartMeleeData* arg0)
     gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
-    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.x34));
+    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.game_speed));
     Camera_80028B9C(0x46);
     Camera_80030688();
     fn_8016DCC0(arg0);
@@ -2233,9 +2233,9 @@ void gm_8016F00C(int arg0)
 void fn_8016F030(StartMeleeData* arg0)
 {
     int i;
-    gm_80167A64(&arg0->rules);
+    gm_SetupRulesDefaults(&arg0->rules);
     for (i = 0; i < 6; i++) {
-        gm_8016795C(&arg0->players[i]);
+        gm_SetupPlayerDefaults(&arg0->players[i]);
     }
 }
 
@@ -2249,7 +2249,7 @@ int getPort(PlayerInitData* player, int i)
     }
 }
 
-void gm_8016F088(StartMeleeData* start)
+void gm_LoadRumbleEnabled(StartMeleeData* start)
 {
     ssize_t i;
 
@@ -2257,10 +2257,10 @@ void gm_8016F088(StartMeleeData* start)
         if (start->players[i].slot_type == Gm_PKind_Human &&
             i < PAD_MAX_CONTROLLERS)
         {
-            start->players[i].xC_b0 = gm_RumbleEnabledForPlayer(
+            start->players[i].rumble_enabled = gm_RumbleEnabledForPlayer(
                 getPort(&start->players[i], i), start->players[i].nametag);
         } else {
-            start->players[i].xC_b0 = false;
+            start->players[i].rumble_enabled = false;
         }
     }
 }

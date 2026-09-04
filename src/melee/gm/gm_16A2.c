@@ -357,7 +357,21 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             src += 1;
             dst += 1;
         }
-        break;
+        return (s32) src;
+    }
+}
+
+static inline struct lbl_8046B488_t* fn_80169C54_inline(void)
+{
+    return fn_8016AE60();
+}
+
+static inline void fn_80169C54_apply(s32 p, s32 count, s32* buf)
+{
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        Player_80031DA8(p, buf[i]);
     }
 }
 
@@ -371,12 +385,14 @@ void fn_80169C54(s8 arg0, s8 arg1)
     s32 count;
     s32 k;
     s32 j;
+    s32 p1;
+    s32 p0;
     s8* cp;
     s32 p;
     s32 ch;
 
     n = 0;
-    st = fn_8016AE60();
+    st = fn_80169C54_inline();
     pc = &st->x0;
     for (i = 0; i < 7; i++) {
         buf[i] = -1;
@@ -410,31 +426,27 @@ void fn_80169C54(s8 arg0, s8 arg1)
             if (0x21 != ch && ch != 4) {
                 p = Player_800325C8((CharacterKind) ch, 0);
                 if ((p != -1) && (p != 4)) {
-                    for (k = 0; k < n; k++) {
-                        Player_80031DA8(p, buf[k]);
-                    }
+                    fn_80169C54_apply(p, n, buf);
                 }
                 p = Player_800325C8((CharacterKind) ch, 1);
                 if ((p != -1) && (p != 4)) {
-                    for (k = 0; k < n; k++) {
-                        Player_80031DA8(p, buf[k]);
-                    }
+                    fn_80169C54_apply(p, n, buf);
                 }
             }
             j++;
             cp++;
         } while (j < 3);
         if (arg0 != 4) {
-            p = Player_800325C8((CharacterKind) arg0, 0);
-            if ((p != -1) && (p != 4)) {
+            p0 = Player_800325C8((CharacterKind) arg0, 0);
+            if ((p0 != -1) && (p0 != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8(p, buf[k]);
+                    Player_80031DA8(p0, buf[k]);
                 }
             }
-            p = Player_800325C8((CharacterKind) arg0, 1);
-            if ((p != -1) && (p != 4)) {
+            p1 = Player_800325C8((CharacterKind) arg0, 1);
+            if ((p1 != -1) && (p1 != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8(p, buf[k]);
+                    Player_80031DA8(p1, buf[k]);
                 }
             }
         }

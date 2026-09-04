@@ -3,26 +3,19 @@
 #include "gm_unsplit.h"
 
 #include "cm/camera.h"
-#include "dolphin/pad.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
-#include "gm/gm_1A36.h"
-#include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
-#include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbbgflash.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
 #include "mn/mnname.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -84,12 +77,11 @@ static struct gm_1832_8047368C_t {
 } lbl_8047368C;
 ASSERT_SIZE(struct gm_1832_8047368C_t, 0x24);
 
+static HSD_GObj* lbl_804D65F0;
 static HSD_Archive* lbl_804D65F4;
 static HSD_Archive* lbl_804D65F8;
-static HSD_GObj* lbl_804D65F0;
+static SceneDesc* lbl_804D65FC;
 static SceneDesc* lbl_804D6600;
-
-static int lbl_804D6608;
 
 typedef struct {
     HSD_GObjEvent v[6];
@@ -148,6 +140,8 @@ static struct {
     /* 0x678 */ ClassicSlotVals x678[4];
     /* 0x6A8 */ ClassicCharLayout x6A8[28];
 }* lbl_804D6604;
+
+static int lbl_804D6608;
 
 void fn_8018325C(HSD_GObj* arg0, int arg1)
 {
@@ -347,6 +341,27 @@ void fn_80184A94(HSD_GObj* gobj)
     fn_80184138(gobj, 2);
 }
 
+static f32 gm_1832_CharScale[28] = { 0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f,
+                                     0.6f, 0.6f,  0.7f, 0.6f, 0.5f, 0.6f,
+                                     0.6f, 0.6f,  0.5f, 0.5f, 0.6f, 0.5f,
+                                     0.6f, 0.6f,  0.5f, 0.6f, 0.6f, 0.6f,
+                                     0.6f, 0.5f,  0.5f, 0.5f };
+
+static Vec3 gm_1832_CharOffset[28] = {
+    { 0.0f, -6.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -1.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+    { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -3.0f, 0.0f },  { -0.5f, -3.5f, 0.0f },
+    { -2.0f, -6.0f, 0.0f }, { 0.0f, -2.5f, 0.0f },  { 0.0f, -2.5f, 0.0f },
+    { -1.0f, -1.0f, 0.0f }, { 0.0f, -5.0f, 0.0f },  { 0.0f, -3.0f, 0.0f },
+    { -1.0f, -6.0f, 0.0f }, { -1.0f, -2.5f, 0.0f }, { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f },  { 0.0f, -4.0f, 0.0f },  { -1.0f, -3.5f, 0.0f },
+    { 0.0f, -1.5f, 0.0f },  { 0.0f, -4.5f, 0.0f },  { 0.0f, -3.5f, 0.0f },
+    { 0.0f, -3.5f, 0.0f }
+};
+
+static Vec3 gm_1832_SamusOffset = { 3.0f, 4.0f, -5.0f };
+
 static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
                                0x82, 0x8D, 0,    0,    0,    0 };
 
@@ -354,6 +369,8 @@ static char lbl_804D40A0[] = { 0x8C, 0x52, 0x92, 0x63, 0x00 };
 
 static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
                                             "IrEzFigG" };
+
+static char lbl_803D9444[] = "ScItrAllstar_scene_data";
 
 void fn_80184AB8(HSD_GObj* arg0)
 {
@@ -521,27 +538,6 @@ void fn_8018504C(void)
     }
 }
 
-static f32 lbl_803D9248[] = {
-    0.6f,  0.35f, 0.6f,  0.5f,  0.6f,  0.35f, 0.6f,  0.6f,  0.7f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.6f,  0.5f,  0.6f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.5f,  0.0f,  -6.0f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  -1.0f, -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,
-    0.0f,  -1.0f, 0.0f,  0.0f,  -3.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.0f,
-    0.0f,  -0.5f, -3.5f, 0.0f,  -2.0f, -6.0f, 0.0f,  0.0f,  -2.5f, 0.0f,
-    0.0f,  -2.5f, 0.0f,  -1.0f, -1.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.0f, 0.0f,  -1.0f, -6.0f, 0.0f,  -1.0f, -2.5f, 0.0f,  -1.0f, -3.5f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -4.0f, 0.0f,  -1.0f, -3.5f, 0.0f,
-    0.0f,  -1.5f, 0.0f,  0.0f,  -4.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  3.0f,  4.0f,  -5.0f,
-};
-
-typedef struct ClassicCharData {
-    f32 scale[28];
-    Vec3 offset[28];
-    Vec3 samus_extra;
-} ClassicCharData;
-
 s32 fn_801851C0(void)
 {
     u8 pad_stack[8];
@@ -550,22 +546,21 @@ s32 fn_801851C0(void)
     s32 result;
 
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
-        ClassicCharData* data = (ClassicCharData*) lbl_803D9248;
         result = i + 1;
         Player_SetPlayerCharacter(result, (CharacterKind) lbl_8047368C.xF4[0]);
         Player_SetPlayerId(result, 0);
         Player_SetSlottype(result, Gm_PKind_Demo);
         Player_SetFacingDirection(result, 0.0f);
         Player_SetCostumeId(result, i);
-        pos = data->offset[lbl_8047368C.xF4[0]];
+        pos = gm_1832_CharOffset[lbl_8047368C.xF4[0]];
         Player_80032768(result, &pos);
         if (lbl_8047368C.xF4[0] == 0xE) {
-            pos.x += data->samus_extra.x;
-            pos.y += data->samus_extra.y;
-            pos.z += data->samus_extra.z;
+            pos.x += gm_1832_SamusOffset.x;
+            pos.y += gm_1832_SamusOffset.y;
+            pos.z += gm_1832_SamusOffset.z;
             Player_80032828(result, 1, &pos);
         }
-        Player_SetModelScale(result, data->scale[lbl_8047368C.xF4[0]]);
+        Player_SetModelScale(result, gm_1832_CharScale[lbl_8047368C.xF4[0]]);
         Player_SetFlagsBit5(result, lbl_8047368C.x100[0]);
         Player_80037054(result, 6);
     }
@@ -597,6 +592,24 @@ void fn_801852FC(HSD_GObj* gobj)
         HSD_CObjEndCurrent();
     }
     lbl_804735E8.xE1 = 1;
+}
+
+/// @todo .sdata2 order hack
+static inline void gm_1832_sdata2_order(int unused)
+{
+    (void) unused;
+    (void) 280.0f;
+    (void) 290.0f;
+    (void) 40.0f;
+    (void) -60.0f;
+    (void) 160.0f;
+    (void) U32_TO_F32;
+    (void) 0.0;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 200.0f;
+    (void) 340.0f;
+    (void) 10000.0f;
 }
 
 void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
@@ -638,6 +651,7 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     GXWGFifo.f32 = -4932.0F;
     GXSetColorUpdate(1);
     HSD_StateInvalidate(-1);
+    gm_1832_sdata2_order(0);
 }
 
 extern float MSL_TrigF_80400770[];
@@ -953,6 +967,8 @@ void fn_80186080(void)
     }
 }
 
+static char lbl_804D40B0[] = "IrRdMap";
+
 void fn_801861B8(void)
 {
     HSD_Text* text;
@@ -1005,8 +1021,6 @@ void fn_801861B8(void)
     }
 }
 
-static SceneDesc* lbl_804D65FC;
-
 void fn_80186400(void)
 {
     HSD_GObj* gobj = GObj_Create(0xE, 0xF, 0);
@@ -1026,8 +1040,6 @@ void fn_80186400(void)
         HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
-
-static char lbl_804D40B0[] = "IrRdMap";
 
 typedef struct ClassicArchiveNameArray {
     const char* v[4];
@@ -1121,11 +1133,10 @@ void fn_80186634(void* arg0)
     efAsync_LoadSync(0);
 
     local.names = *(const ClassicArchiveNameArray*) lbl_803B7C58;
-    lbl_804D65F4 =
-        lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
-                           &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
-    lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
-                                      "ScItrAllstar_scene_data", 0);
+    lbl_804D65F4 = lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
+                                      &lbl_804D65FC, lbl_803D9444, 0);
+    lbl_804D65F8 =
+        lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600, lbl_803D9444, 0);
 
     gm_80186634_SetupLight();
 
@@ -1174,19 +1185,6 @@ void gm_Scene_IntroEasy_OnFrame(void)
         gm_801A4B60();
     }
 }
-
-static struct enterdata {
-    int x0, x4;
-} lbl_804D6618;
-
-typedef struct gm_804736B0_t {
-    int x0, x4;
-    HSD_JObj* x8;
-    HSD_JObj* xC;
-} gm_804736B0_t;
-
-gm_804736B0_t lbl_804736B0;
-
 /// Classic Mode intro scene enter data (0x20 bytes)
 typedef struct ClassicModeEnterData {
     /* 0x00 */ int x0;
@@ -1223,677 +1221,4 @@ void gm_Scene_IntroEasy_OnEnter(void* arg0_)
     lbl_804D6608 = -1;
     gm_80167858((int) (s8) lbl_8047368C.xEC, lbl_8047368C.xED, 0xB, 0x2D);
     gm_80168F88();
-}
-
-void fn_80186EFC(HSD_GObj* gobj)
-{
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    gm_804736B0_t* state = &lbl_804736B0;
-    int* counter;
-    PAD_STACK(8);
-    HSD_JObjReqAnimAll(state->xC, 0.0f);
-    HSD_JObjAnimAll(jobj);
-    counter = &state->x4;
-    if (*counter < 0x8C) {
-        (*counter)++;
-    } else {
-        state->x0 = 1;
-    }
-}
-
-typedef struct gm_80186F6C_Entry {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
-} gm_80186F6C_Entry;
-
-static gm_80186F6C_Entry lbl_803D9498[] = {
-    { 0.0f, -4.5f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, 1.5f, 0.0f, 0.6f, 0.6f, 0.6f },
-    { 0.0f, -5.3f, 0.0f, 1.3f, 1.3f, 1.3f },
-    { 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, 5.5f, 0.0f, 0.75f, 0.75f, 0.75f },
-    { -1.1f, -2.0f, 0.0f, 0.5f, 0.5f, 0.5f },
-    { -1.0f, -3.5f, 0.0f, 1.3f, 1.3f, 1.3f },
-    { -1.0f, -0.5f, 0.0f, 1.35f, 1.35f, 1.35f },
-    { -1.0f, -2.0f, 0.0f, 1.4f, 1.4f, 1.4f },
-    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, -6.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { -1.0f, -0.5f, 0.0f, 1.1f, 1.1f, 1.1f },
-    { -2.0f, -6.5f, 0.0f, 1.3f, 1.3f, 1.3f },
-    { -0.5f, 2.5f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { -0.8f, 5.0f, 0.0f, 0.7f, 0.7f, 0.7f },
-    { -1.0f, 4.0f, 0.0f, 0.8f, 0.8f, 0.8f },
-    { 0.0f, -5.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, 2.0f, 0.0f, 0.9f, 0.9f, 0.9f },
-    { -1.0f, -12.5f, 0.0f, 1.8f, 1.8f, 1.8f },
-    { -3.5f, 0.0f, 0.0f, 1.8f, 1.8f, 1.8f },
-    { 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, -2.5f, 0.0f, 1.1f, 1.1f, 1.1f },
-    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { 0.0f, 5.5f, 0.0f, 0.4f, 0.4f, 0.4f },
-    { 1.0f, -11.0f, 0.0f, 1.3f, 1.3f, 1.3f },
-    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
-    { -1.1f, 2.5f, 0.0f, 0.4f, 0.4f, 0.4f },
-};
-
-void fn_80186F6C(HSD_GObj* arg0)
-{
-    Vec3 pos;
-    HSD_JObj* jobj = arg0->hsd_obj;
-    HSD_JObj* child = lbl_804736B0.x8;
-    gm_80186F6C_Entry* entry = lbl_803D9498;
-    PAD_STACK(4);
-
-    HSD_JObjGetTranslation(child, &pos);
-
-    pos.x -= 7.0f;
-    pos.x += entry[lbl_804D6618.x0].x0;
-    pos.y += entry[lbl_804D6618.x0].x4;
-    pos.z += entry[lbl_804D6618.x0].x8;
-
-    HSD_JObjSetTranslate(jobj, &pos);
-
-    HSD_JObjSetScaleX(jobj, entry[lbl_804D6618.x0].xC);
-    HSD_JObjSetScaleY(jobj, entry[lbl_804D6618.x0].x10);
-    HSD_JObjSetScaleZ(jobj, entry[lbl_804D6618.x0].x14);
-
-    {
-        HSD_GObj* entity2 = Player_GetEntityAtIndex(0, 1);
-        if (entity2 != NULL) {
-            HSD_JObj* jobj2 = entity2->hsd_obj;
-
-            HSD_JObjGetTranslation(jobj, &pos);
-            pos.x += 3.0f;
-            pos.z -= 5.0f;
-            pos.y += 4.0f;
-            HSD_JObjSetTranslate(jobj2, &pos);
-
-            HSD_JObjGetScale(jobj, &pos);
-            HSD_JObjSetScale(jobj2, &pos);
-        }
-    }
-}
-
-static HSD_Archive* lbl_804D6610;
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-HSD_GObjProc* fn_801873F0(void)
-{
-    ftDemo_ObjAllocInit();
-    Player_InitAllPlayers();
-    Player_80036E20(lbl_804D6618.x0, lbl_804D6610, 1);
-    Player_SetPlayerCharacter(0, lbl_804D6618.x0);
-    Player_SetCostumeId(0, lbl_804D6618.x4);
-    Player_SetPlayerId(0, 0);
-    Player_SetSlottype(0, Gm_PKind_Demo);
-    Player_SetFacingDirection(0, 0.0f);
-    Player_SetModelScale(0, 1.0f);
-    Player_80036F34(0, 6);
-    return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-void fn_80187494(HSD_GObj* gobj, int arg1)
-{
-    int temp_ret = HSD_CObjSetCurrent(gobj->hsd_obj);
-    PAD_STACK(4);
-    if (temp_ret != 0) {
-        Camera_800313E0(gobj, 1);
-        gobj->gxlink_prios = 0x801;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
-}
-
-static SceneDesc* lbl_804D6614;
-
-void fn_801874FC(void)
-{
-    HSD_JObj* sp8;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-
-    gobj = GObj_Create(0xE, 0xF, 0);
-    jobj = HSD_JObjLoadJoint(lbl_804D6614->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObj_SetupProc(gobj, fn_80186EFC, 0);
-    gm_8016895C(jobj, lbl_804D6614->models[0], 0);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, &sp8, 0x3A, -1);
-    HSD_JObjSetTranslateZ(sp8, 10000.0F);
-    lb_80011E24(jobj, &sp8, 0x3B, -1);
-    HSD_JObjSetTranslateZ(sp8, 10000.0F);
-    lb_80011E24(jobj, &lbl_804736B0.x8, 5, -1);
-    lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void fn_80187714(void)
-{
-    Camera_80028B9C(6);
-    lb_8000FCDC();
-    mpColl_80041C78();
-    Ground_801C0378(64);
-    Stage_802251E8(St_Kind_Dummy, NULL);
-    Stage_8022524C();
-    Item_80266FA8();
-    Item_80266FCC();
-    efLib_Init();
-    efAsync_LoadSync(0);
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-void gm_Scene_IntroAllstar_OnFrame(void)
-{
-    if (lbl_804736B0.x0 != 0) {
-        lbArchive_80016EFC(lbl_804D6610);
-        lbAudioAx_800236DC();
-        gm_801A4B60();
-    }
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void gm_Scene_IntroAllstar_OnEnter(void* arg0_)
-{
-    struct enterdata* arg0 = arg0_;
-    HSD_GObj* temp_r30;
-    HSD_GObj* temp_r30_2;
-    HSD_GObj* temp_r30_3;
-    HSD_LObj* lobj;
-    HSD_CObj* cobj;
-    HSD_Fog* fog;
-    PAD_STACK(8);
-
-    lbl_804736B0.x0 = 0;
-    lbl_804736B0.x4 = 0;
-
-    lbl_804D6618 = *arg0;
-    fn_80187714();
-    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614,
-                                      "ScItrAllstar_scene_data", 0);
-
-    temp_r30 = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(lbl_804D6614->cameras[0].desc);
-    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(temp_r30, fn_80187494, 8);
-    temp_r30->gxlink_prios = 0x801;
-
-    temp_r30_2 = GObj_Create(0xB, 3, 0);
-    lobj = lb_80011AC4(lbl_804D6614->lights);
-    HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_LightKind, lobj);
-    GObj_SetupGXLink(temp_r30_2, HSD_GObj_LObjCallback, 0, 0);
-    fn_801874FC();
-
-    temp_r30_3 = GObj_Create(0xE, 0xF, 0);
-    fog = HSD_FogLoadDesc(lbl_804D6614->fogs[0].desc);
-    HSD_GObjObject_80390A70(temp_r30_3, HSD_GObj_FogKind, fog);
-    GObj_SetupGXLink(temp_r30_3, HSD_GObj_FogCallback, 0xB, 0);
-    fn_801873F0();
-    lbAudioAx_80023F28(0x2D);
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-typedef struct gm_1832_StageState {
-    u8 stage_index : 5;
-    u8 done : 1;
-    u8 flash : 1;
-    u8 active : 1;
-} gm_1832_StageState;
-
-static struct gm_1832_804736C0_t {
-    DynamicModelDesc*** x0;
-    HSD_CameraAnim** x4;
-    HSD_GObj* x8;
-    u8 pad_C[0x28];
-    u16 x34;
-    gm_1832_StageState x36;
-    struct {
-        u8 frame_counter : 4;
-        u8 anim_state : 2;
-        u8 state2 : 2;
-    } x37;
-    u8 x38;
-    u8 pad_39[7];
-} lbl_804736C0;
-ASSERT_SIZE(struct gm_1832_804736C0_t, 0x40);
-typedef struct gm_1832_804736C0_t gm_1832_804736C0_t;
-
-void fn_80187910(HSD_GObj* arg0)
-{
-    Vec3 sp10;
-    gm_1832_804736C0_t* data;
-    HSD_CObj* cobj;
-    s32 frame;
-    f32 scale;
-
-    PAD_STACK(4);
-    data = &lbl_804736C0;
-    cobj = arg0->hsd_obj;
-    if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_A) {
-        data->x37.frame_counter = (s32) cobj->eyepos->aobj->curr_frame / 300;
-        if (++data->x37.frame_counter >= 8U) {
-            data->x37.frame_counter = 0;
-        }
-        frame = data->x37.frame_counter * 0x12C;
-        HSD_CObjRemoveAnim(cobj);
-        HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
-        HSD_CObjReqAnim(cobj, (f32) frame);
-    }
-    HSD_CObjAnim(cobj);
-    HSD_CObjGetInterest(cobj, &sp10);
-    scale = Ground_801C0498();
-    sp10.x *= scale;
-    sp10.y *= scale;
-    sp10.z *= scale;
-    HSD_CObjSetInterest(cobj, &sp10);
-    HSD_CObjGetEyePosition(cobj, &sp10);
-    scale = Ground_801C0498();
-    sp10.x *= scale;
-    sp10.y *= scale;
-    sp10.z *= scale;
-    HSD_CObjSetEyePosition(cobj, &sp10);
-}
-
-typedef struct {
-    u8 pad_hi : 4;
-    u8 state : 2;
-    u8 pad_lo : 2;
-} x37_state_bits;
-
-static inline void fn_80187AB4_LoadAnim(HSD_JObj* jobj,
-                                        gm_1832_804736C0_t* data)
-{
-    DynamicModelDesc* desc = (*data->x0)[11 - data->x36.stage_index];
-    int anim_state;
-
-    if (desc->anims != NULL) {
-        anim_state = data->x37.anim_state;
-        if (desc->anims[anim_state] != NULL) {
-            lb_8000C0E8(jobj, anim_state, desc);
-            HSD_JObjReqAnimAll(jobj, 0.0f);
-            HSD_JObjAnimAll(jobj);
-        }
-    }
-}
-
-void fn_80187AB4(HSD_GObj* gobj)
-{
-    gm_1832_804736C0_t* data = &lbl_804736C0;
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    int state = data->x37.anim_state;
-    PAD_STACK(16);
-
-    switch (state) {
-    case 0:
-        if (lb_8000B09C(jobj) == 0) {
-            data->x37.anim_state = 1;
-            fn_80187AB4_LoadAnim(jobj, data);
-            data->x34 = 0x960;
-        }
-        break;
-    case 1:
-        if ((u32) data->x36.active == 1U) {
-            data->x36.flash = 1;
-        }
-        if (data->x36.flash) {
-            data->x37.anim_state = 2;
-            data->x36.done = 1;
-            lbBgFlash_8002063C(1);
-        }
-        if (lb_8000B09C(jobj) == 0) {
-            fn_80187AB4_LoadAnim(jobj, data);
-        }
-        break;
-    case 2:
-        if (lb_8000B09C(jobj) == 0) {
-            data->x36.done = 1;
-            HSD_GObjPLink_80390228(gobj);
-        }
-        break;
-    }
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
-}
-
-void fn_80187C9C(HSD_GObj* gobj, int arg1)
-{
-    GXSetZMode(0, GX_NEVER, 0);
-    HSD_GObj_JObjCallback(gobj, arg1);
-    HSD_StateInvalidate(0x40);
-}
-
-void fn_80187CF4(HSD_GObj* gobj)
-{
-    gm_1832_804736C0_t* data = &lbl_804736C0;
-    HSD_JObj* jobj = gobj->hsd_obj;
-    int state = data->x37.state2;
-    DynamicModelDesc* desc;
-    int anim_state;
-
-    switch (state) {
-    case 0:
-        if (lb_8000B09C(jobj) == 0) {
-            data->x37.state2 = 1;
-            anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
-            if (desc->anims[anim_state] != NULL) {
-                lb_8000C0E8(jobj, anim_state, desc);
-                HSD_JObjReqAnimAll(jobj, 0.0f);
-                HSD_JObjAnimAll(jobj);
-            }
-        }
-        break;
-    case 1:
-        if (lb_8000B09C(jobj) == 0) {
-            data->x37.state2 = 2;
-            anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
-            if (desc->anims[anim_state] != NULL) {
-                lb_8000C0E8(jobj, anim_state, desc);
-                HSD_JObjReqAnimAll(jobj, 0.0f);
-                HSD_JObjAnimAll(jobj);
-            }
-        }
-        break;
-    case 2:
-        if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_START) {
-            sfxForward();
-            data->x36.active = 1;
-            data->x37.state2 = 3;
-            anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
-            if (desc->anims[anim_state] != NULL) {
-                lb_8000C0E8(jobj, anim_state, desc);
-                HSD_JObjReqAnimAll(jobj, 0.0f);
-                HSD_JObjAnimAll(jobj);
-            }
-        } else if (lb_8000B09C(jobj) == 0) {
-            anim_state = data->x37.state2;
-            desc = (*data->x0)[12];
-            if (desc->anims[anim_state] != NULL) {
-                lb_8000C0E8(jobj, anim_state, desc);
-                HSD_JObjReqAnimAll(jobj, 0.0f);
-                HSD_JObjAnimAll(jobj);
-            }
-        }
-        break;
-    case 3:
-        if (lb_8000B09C(jobj) == 0) {
-            HSD_GObjPLink_80390228(gobj);
-        }
-        break;
-    }
-    HSD_JObjAnimAll(gobj->hsd_obj);
-}
-
-static char lbl_804D4138[] = "IrNml";
-
-static char* lbl_803D9750[] = {
-    "mc01",
-    "mc02",
-    "mc03",
-    "mc04",
-    "mc05",
-    "mc06",
-    "mc07",
-    "mc08",
-    "mc09",
-    "mc10",
-    "mc11",
-    "mc12",
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x1C,
-    (char*) 0x14,
-    (char*) 0x14,
-    (char*) 0x1C,
-    (char*) 0x20000,
-    (char*) 0x10000000,
-    (char*) 0x20,
-    (char*) 0x100,
-    (char*) 0x20000,
-    (char*) 0x10000,
-    (char*) 0x100,
-    (char*) 0x04000000,
-    (char*) 0x802,
-    (char*) 0x4000,
-    (char*) 8,
-    (char*) 0xC00,
-    (char*) 0x10000,
-    (char*) 0x01000000,
-    (char*) 0x20000,
-    (char*) 0x40,
-    (char*) 0x80,
-    (char*) 0x200000,
-    NULL,
-    (char*) 0x2000,
-    NULL,
-    (char*) 0x60000,
-    (char*) 0x200000,
-    (char*) 0x9000,
-    (char*) 0x53634974,
-    (char*) 0x724E6F72,
-    (char*) 0x6D616C5F,
-    (char*) 0x7363656E,
-    (char*) 0x655F6461,
-    (char*) 0x74610000,
-};
-
-static HSD_Archive* lbl_804D6620;
-
-typedef struct gm_80187F48_EnterData {
-    u8 x0;
-    u8 stage_index;
-    u16 stkind;
-} gm_80187F48_EnterData;
-
-static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
-{
-    return data->stkind;
-}
-
-static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
-{
-    return lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
-           ((u64*) &table[24])[stage_index];
-}
-
-static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
-                                           gm_1832_804736C0_t* data,
-                                           HSD_CObj* cobj)
-{
-    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
-    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
-    HSD_CObjReqAnim(cobj, 0.0f);
-}
-
-static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
-{
-    gm_1832_804736C0_t* data;
-    HSD_CObj* cobj;
-    u8 stage_index;
-    HSD_GObj* gobj;
-    char** table = lbl_803D9750;
-    gm_1832_StageState* state;
-
-    data = &lbl_804736C0;
-    data->x38 = arg0->x0;
-    lb_8000FCDC();
-    mpColl_80041C78();
-    Ground_801C0378(0x40);
-    Stage_802251E8(gm_GetStKind(arg0), NULL);
-    Item_80266F70();
-    Item_80266FCC();
-    efLib_Init();
-    efAsync_LoadSync(0);
-    efAsync_LoadSync(0x1F);
-    Stage_8022524C();
-    Player_InitAllPlayers();
-    lbBgFlash_800209F4();
-
-    stage_index = arg0->stage_index;
-    data->x37.anim_state = 0;
-    data->x37.frame_counter = 0;
-    data->x34 = 0;
-    data->x36.done = 0;
-    data->x36.flash = 0;
-    data->x36.stage_index = stage_index;
-    data->x37.state2 = 0;
-    data->x36.active = 0;
-
-    stage_index = arg0->stage_index;
-    lbl_804D6620 = lbArchive_80016DBC(lbl_804D4138, &data->x0, &table[48],
-                                      &data->x4, table[stage_index], NULL);
-
-    lbAudioAx_80026F2C((s32) table[stage_index + 12]);
-    lbAudioAx_8002702C((s32) table[stage_index + 12],
-                       gm_80187F48_GetAudioConfig(stage_index, table));
-    lbAudioAx_80027168();
-    lbAudioAx_80027648();
-
-    gobj = GObj_Create(0x13, 0x14, 0);
-    data->x8 = gobj;
-    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *data->x4);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) Camera_800304E0, 8);
-    gm_80187F48_SetupCamera(gobj, data, cobj);
-
-    {
-        HSD_GObj* scene_gobj = GObj_Create(0x13, 0x14, 0);
-        HSD_CObj* scene_cobj =
-            HSD_CObjLoadDesc(((SceneDesc*) data->x0)->cameras[0].desc);
-        HSD_GObjObject_80390A70(scene_gobj, HSD_GObj_CameraKind, scene_cobj);
-        GObj_SetupGXLinkMax(scene_gobj, HSD_GObj_803910D8, 8);
-        scene_gobj->gxlink_prios = 0xC00;
-    }
-
-    {
-        HSD_GObj* light_gobj = GObj_Create(0xB, 3, 0);
-        HSD_LObj* lobj = lb_80011AC4(((SceneDesc*) data->x0)->lights);
-        HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
-        GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
-    }
-
-    state = &data->x36;
-    {
-        HSD_JObj* model_jobj;
-        HSD_GObj* model_gobj;
-        model_gobj = GObj_Create(0xE, 0xF, 0);
-        model_jobj =
-            HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
-        lb_80011C18(model_jobj, 0x08000000);
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
-        GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
-
-        fn_80187AB4_LoadAnim(model_jobj, data);
-        HSD_GObj_SetupProc(model_gobj, fn_80187AB4, 0);
-    }
-
-    {
-        HSD_GObj* model_gobj = GObj_Create(0xE, 0xF, 0);
-        HSD_JObj* model_jobj = HSD_JObjLoadJoint((*data->x0)[12]->joint);
-        int model_anim_idx;
-        DynamicModelDesc* model_desc;
-        lb_80011C18(model_jobj, 0x08000000);
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
-        GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
-
-        model_anim_idx = data->x37.state2;
-        model_desc = (*data->x0)[12];
-        if (model_desc->anims[model_anim_idx] != NULL) {
-            lb_8000C0E8(model_jobj, model_anim_idx, model_desc);
-            HSD_JObjReqAnimAll(model_jobj, 0.0f);
-            HSD_JObjAnimAll(model_jobj);
-        }
-
-        HSD_JObjReqAnimAll(model_jobj, 0.0f);
-        HSD_JObjAnimAll(model_jobj);
-        HSD_GObj_SetupProc(model_gobj, fn_80187CF4, 0);
-    }
-    lbAudioAx_80023F28(0x2E);
-}
-
-void gm_Scene_IntroNormal_OnEnter(void* arg0)
-{
-    PAD_STACK(16);
-    gm_80187F48_OnEnter_inline(arg0);
-}
-
-void gm_Scene_IntroNormal_OnLeave(void* arg0)
-{
-    HSD_Archive** var = &lbl_804D6620;
-    lbArchive_80016EFC(*var);
-}
-
-void gm_Scene_IntroNormal_OnFrame(void)
-{
-    if (lbl_804736C0.x36.done) {
-        gm_801A4B60();
-    }
-}
-
-f32 gm_801883C0(void)
-{
-    HSD_GObj* gobj;
-    HSD_CObj* cobj;
-    HSD_AObj* aobj;
-
-    gobj = lbl_804736C0.x8;
-    if (gobj == NULL) {
-        goto return_default;
-    }
-
-    cobj = gobj->hsd_obj;
-    goto check_cobj;
-
-return_default:
-    return 0.0f;
-
-check_cobj:
-    aobj = cobj->eyepos->aobj;
-    if (aobj != NULL) {
-        return aobj->curr_frame;
-    }
-
-    aobj = cobj->interest->aobj;
-    if (aobj != NULL) {
-        return aobj->curr_frame;
-    }
-
-    return 0.0f;
-}
-
-bool gm_8018841C(void)
-{
-    if (gm_GetCurrentGameMode() == GM_TRAINING) {
-        return true;
-    }
-    return false;
 }

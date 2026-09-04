@@ -1,7 +1,7 @@
 #include "ftCo_800C739C.h"
 
-#include "ft_0852.h"
 #include "ftCo_800C7070.h"
+#include "ftdata.h"
 
 #include "ft/fighter.h"
 #include "ft/types.h"

@@ -472,12 +472,12 @@ void onEnterVs(GameModeState* arg0)
     VsModeData* temp_r30;
     int i;
 
-    temp_r30 = &gmMainLib_804D3EE0->unk_1710;
+    temp_r30 = &gmMainLib_804D3EE0->modes.unk_1710;
     md = gm_GetGameModeStateEnterData(arg0);
     gm_80167BC8(temp_r30);
-    gm_8016F088(md);
-    gm_80168FC4();
-    gm_80167A64(&md->rules);
+    gm_LoadRumbleEnabled(md);
+    gm_LoadAnnouncer();
+    gm_SetupRulesDefaults(&md->rules);
 
     md->rules.match_kind = gm_801BF6B8();
     md->rules.x0_6 = false;
@@ -488,9 +488,9 @@ void onEnterVs(GameModeState* arg0)
     md->rules.disable_pausing = true;
     md->rules.x7 = 0;
     md->rules.x44 = gm_80183218;
-    md->rules.x34 = gm_804DAC88;
+    md->rules.game_speed = gm_804DAC88;
     md->rules.stkind = (u16) gm_801BF694();
-    gm_80167A14(md->players);
+    gm_SetupAllPlayerDefaults(md->players);
 
     for (i = 0; i < 4; i++) {
         CharacterKind kind = gm_801BF648(i);
@@ -498,7 +498,7 @@ void onEnterVs(GameModeState* arg0)
         md->players[i].color = gm_801BF670(i);
         md->players[i].slot_type = Gm_PKind_Cpu;
         md->players[i].cpu_level = 9;
-        md->players[i].xE = 4;
+        md->players[i].cpu_kind = 4;
         md->players[i].xC_b1 = false;
         if (md->rules.match_kind == 1) {
             md->players[i].stocks = 99;
@@ -653,7 +653,7 @@ void onEnterMovie(GameModeState* arg)
 {
     PreloadedGameModeState* temp_r31 = lbDvd_GetPreloadCacheScene();
     PAD_STACK(4);
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
     temp_r31->is_heap_persistent[1] = false;
     lbDvd_80018254();
 }

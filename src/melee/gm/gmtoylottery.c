@@ -29,8 +29,8 @@ GameModeState gm_Mode_ToyLottery_States[] = {
 
 void onEnter(UNUSED GameModeState* state)
 {
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
 }
 
 void onExit(UNUSED GameModeState* state)

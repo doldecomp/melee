@@ -383,23 +383,69 @@ Vec3 grZe_803E1C80[8] = {
     { 56.0f,  15.0f,  6.0f }, { 56.0f,   4.5f,  6.0f },
 }; // clang-format on
 
+static inline void
+grZebes_UpdateCollisionColumns(grZe_BubbleState* state, f32 column_width,
+                               f32* column_x, f32* column_heights,
+                               int* bubble_idx, int* vertex_idx)
+{
+    grZe_BubbleEntry* bubble = state->bubbles;
+    f32 top_y;
+    f32 x_offset;
+    f32 left_x;
+    left_x = state->positions[0].x;
+    for (*bubble_idx = 0; *bubble_idx < 20; (*bubble_idx)++, bubble++) {
+        if (bubble->x00_active == 1) {
+            f32 left_vertex;
+            f32 right_offset;
+            x_offset = bubble->x08_x - left_x;
+            left_vertex = (f32) ((f64) x_offset - 0.9) / column_width;
+            right_offset = (f32) (0.9 + (f64) x_offset);
+            top_y = (f32) (1.8 * (f64) bubble->x18_size + (f64) bubble->x0C_y);
+            {
+                *vertex_idx = (s32) (0.5 + (f64) left_vertex);
+                if (5 < *vertex_idx) {
+                    *vertex_idx = 5;
+                } else if (*vertex_idx < 0) {
+                    *vertex_idx = 0;
+                }
+                column_x[*vertex_idx] =
+                    (f32) *vertex_idx * column_width + left_x;
+                if (top_y > column_heights[*vertex_idx]) {
+                    column_heights[*vertex_idx] = top_y;
+                }
+            }
+            {
+                *vertex_idx =
+                    (s32) (0.5 + (f64) (right_offset / column_width));
+                if (5 < *vertex_idx) {
+                    *vertex_idx = 5;
+                } else if (*vertex_idx < 0) {
+                    *vertex_idx = 0;
+                }
+                column_x[*vertex_idx] =
+                    (f32) *vertex_idx * column_width + left_x;
+                if (top_y > column_heights[*vertex_idx]) {
+                    column_heights[*vertex_idx] = top_y;
+                }
+            }
+        }
+    }
+}
+
 void grZebes_801D881C(HSD_GObj* gobj)
 {
-    f32 intercept;
     Vec3 spot_pos;
     Vec3 spot_interest;
-    Vec3 lower_point_pos;
-    f32 slope;
-    f32 col_heights[6];
-    f32 col_x[6];
-    Vec3 upper_point_pos;
+    int first_column;
     f32* heights;
     Ground* gp = GET_GROUND(gobj);
-    HSD_GObj* secondary_gobj;
+    HSD_GObj* sima_gobj;
+    HSD_JObj* sima_jobj;
     s32 result;
-    secondary_gobj = (HSD_GObj*) gp->u.zebes5.xF0;
+    int vertex_idx;
+    sima_gobj = (HSD_GObj*) gp->u.zebes5.xF0;
     result = grZebes_801DA528(gobj, &gp->u.zebes5.xC8, 1, 2);
-    PAD_STACK(0xC);
+    PAD_STACK(0x8);
 
     if ((s32) gp->u.zebes5.xEC != result) {
         gp->u.zebes5.xEC = result;
@@ -438,8 +484,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 gp->u.zebes5.xC4 = 1;
                 grAnime_801C8098(gobj, 0xE, 1, 3, 0.0f, 1.0f);
                 grAnime_801C7980(gobj, 0xE, 1U);
-                grAnime_801C8098(secondary_gobj, 1, 1, 3, 0.0f, 1.0f);
-                grAnime_801C7980(secondary_gobj, 1, 1U);
+                grAnime_801C8098(sima_gobj, 1, 1, 3, 0.0f, 1.0f);
+                grAnime_801C7980(sima_gobj, 1, 1U);
             }
             break;
         case 1:
@@ -460,8 +506,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 gp->u.zebes5.xC4 = 3;
                 grAnime_801C8098(gobj, 0xE, 1, 4, 0.0f, 1.0f);
                 grAnime_801C7980(gobj, 0xE, 1U);
-                grAnime_801C8098(secondary_gobj, 1, 1, 4, 0.0f, 1.0f);
-                grAnime_801C7980(secondary_gobj, 1, 1U);
+                grAnime_801C8098(sima_gobj, 1, 1, 4, 0.0f, 1.0f);
+                grAnime_801C7980(sima_gobj, 1, 1U);
                 gp->u.zebes5.xF6 = 0;
                 grZe_804D6994 = 0;
             }
@@ -500,11 +546,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 }
             }
             if (grAnime_801C83D0(gobj, 0xE, 1) != 0) {
-                int i;
                 gp->u.zebes5.xC4 = 0;
-                for (i = 0; i < 20; i++) {
-                    if (grZe_8049F170[i].x00_active == 4) {
-                        grZe_8049F170[i].x00_active = 1;
+                for (result = 0; result < 20; result++) {
+                    if (grZe_8049F170[result].x00_active == 4) {
+                        grZe_8049F170[result].x00_active = 1;
                     }
                 }
             }
@@ -524,63 +569,31 @@ void grZebes_801D881C(HSD_GObj* gobj)
     }
 
     if (gp->u.zebes5.xC4 == 0) {
+        f32 column_heights[6];
+        f32 column_x[6];
+        Vec3 upper_point_pos;
+        Vec3 lower_point_pos;
         int i;
-        f32 colWidth;
+        f32 column_width;
         grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
 
-        mpJointListAdd(0);
-        mpLib_80057424(0);
+        first_column = 0;
+        mpJointListAdd(first_column);
+        mpLib_80057424(first_column);
 
-        colWidth = (state->positions[1].x - state->positions[0].x) / 5.0f;
-        heights = col_heights;
+        column_width =
+            (state->positions[1].x - state->positions[first_column].x) / 5.0f;
+        heights = column_heights;
 
-        col_heights[0] = -9999.0f;
-        col_heights[1] = -9999.0f;
-        col_heights[2] = -9999.0f;
-        col_heights[3] = -9999.0f;
-        col_heights[4] = -9999.0f;
-        col_heights[5] = -9999.0f;
+        column_heights[first_column] = -9999.0f;
+        column_heights[1] = -9999.0f;
+        column_heights[2] = -9999.0f;
+        column_heights[3] = -9999.0f;
+        column_heights[4] = -9999.0f;
+        column_heights[5] = -9999.0f;
 
-        (void) 0.9;
-
-        {
-            f32 left_x = state->positions[0].x;
-            grZe_BubbleEntry* entry = state->bubbles;
-            for (i = 0; i < 20; i++, entry++) {
-                if (entry->x00_active == 1) {
-                    f32 dx = entry->x08_x - left_x;
-                    f32 left_frac = (f32) ((f64) dx - 0.9) / colWidth;
-                    f32 right_frac = (f32) (0.9 + (f64) dx);
-                    f32 top = (f32) (1.8 * (f64) entry->x18_size +
-                                     (f64) entry->x0C_y);
-                    {
-                        s32 col_left = (s32) (0.5 + (f64) left_frac);
-                        if (5 < col_left) {
-                            col_left = 5;
-                        } else if (col_left < 0) {
-                            col_left = 0;
-                        }
-                        col_x[col_left] = (f32) col_left * colWidth + left_x;
-                        if (top > col_heights[col_left]) {
-                            col_heights[col_left] = top;
-                        }
-                    }
-                    {
-                        s32 col_right =
-                            (s32) (0.5 + (f64) (right_frac / colWidth));
-                        if (5 < col_right) {
-                            col_right = 5;
-                        } else if (col_right < 0) {
-                            col_right = 0;
-                        }
-                        col_x[col_right] = (f32) col_right * colWidth + left_x;
-                        if (top > col_heights[col_right]) {
-                            col_heights[col_right] = top;
-                        }
-                    }
-                }
-            }
-        }
+        grZebes_UpdateCollisionColumns(state, column_width, column_x,
+                                       column_heights, &i, &vertex_idx);
 
         upper_point_pos = grZe_803B7FF0.upper_point_pos;
         lower_point_pos = grZe_803B7FF0.lower_point_pos;
@@ -591,35 +604,33 @@ void grZebes_801D881C(HSD_GObj* gobj)
             HSD_ASSERT(0x293, sima_jobj);
             lb_8000B1CC(sima_jobj, &upper_point_pos, &upper_point_pos);
         }
-        col_x[0] = upper_point_pos.x;
-        col_heights[0] = upper_point_pos.y;
+        column_x[first_column] = upper_point_pos.x;
+        column_heights[first_column] = upper_point_pos.y;
 
-        {
-            HSD_JObj* sima_jobj;
-            sima_jobj = Ground_801C3FA4(secondary_gobj, 1);
-            HSD_ASSERT(0x299, sima_jobj);
-            lb_8000B1CC(sima_jobj, &lower_point_pos, &lower_point_pos);
-        }
-        col_x[5] = lower_point_pos.x;
-        col_heights[5] = lower_point_pos.y;
+        sima_jobj = Ground_801C3FA4(sima_gobj, 1);
+        HSD_ASSERT(0x299, sima_jobj);
+        lb_8000B1CC(sima_jobj, &lower_point_pos, &lower_point_pos);
+        column_x[5] = lower_point_pos.x;
+        column_heights[5] = lower_point_pos.y;
 
-        for (i = 0; i < 5; i++) {
-            if (i != 0) {
-                if (heights[i] < heights[i + 1] - colWidth) {
-                    heights[i] = heights[i + 1] - colWidth;
+        for (i = first_column; i < 5; i++) {
+            if (i != first_column) {
+                if (heights[i] < heights[i + 1] - column_width) {
+                    heights[i] = heights[i + 1] - column_width;
                 }
             }
             if (i != 5) {
-                if (heights[i + 1] < heights[i] - colWidth) {
-                    heights[i + 1] = heights[i] - colWidth;
+                if (heights[i + 1] < heights[i] - column_width) {
+                    heights[i + 1] = heights[i] - column_width;
                 }
             }
         }
 
         {
-            int k;
-            for (i = 0, k = 0; i <= 5; i++, k++) {
-                mpVtxSetPos(k, col_x[i], col_heights[i]);
+            for (i = first_column, vertex_idx = first_column; i <= 5;
+                 i++, vertex_idx++)
+            {
+                mpVtxSetPos(vertex_idx, column_x[i], column_heights[i]);
             }
         }
         mpLib_80055E24(0);
@@ -627,9 +638,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
         mpLib_80057BC0(0);
     }
 
-    Ground_801C4368(&slope, &intercept);
-    grZakoGenerator_801CA43C((grZakoGenerator_Config*) gp->u.zebes5.xFC,
-                             Ground_801C3FA4(gobj, 0xE), slope);
+    {
+        f32 slope;
+        f32 intercept;
+        Ground_801C4368(&slope, &intercept);
+        grZakoGenerator_801CA43C((grZakoGenerator_Config*) gp->u.zebes5.xFC,
+                                 Ground_801C3FA4(gobj, 0xE), slope);
+    }
     Ground_801C2FE0((Ground_GObj*) gobj);
     lb_800115F4();
 }
@@ -935,8 +950,9 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         f32 accel;
         f32 vel;
         f32 t;
+        f32 target_level;
         f32 delta;
-        f32 abs_delta;
+        f64 abs_delta;
         f32 threshold;
 
         gp->u.zebes5.xC6 = (s16) (gp->u.zebes5.xC6 + 1);
@@ -952,12 +968,15 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         }
         threshold =
             (f32) ((f64) (vel * t) - (0.5 * (f64) accel * (f64) (t * t)));
-        delta = gp->u.zebes5.xD4;
-        delta -= gp->u.zebes5.xD8;
+        target_level = gp->u.zebes5.xD4;
+        delta = target_level - gp->u.zebes5.xD8;
 
-        abs_delta = ABS(delta);
+        abs_delta = delta;
+        target_level = 0.0f;
 
-        if (abs_delta < threshold || ABS(delta) < accel) {
+        if ((delta < 0 ? -abs_delta : abs_delta) < threshold ||
+            (abs_delta < target_level ? -abs_delta : abs_delta) < accel)
+        {
             gp->u.zebes5.xC8 = 4;
         } else {
             gp->u.zebes5.xD0 += accel;
@@ -1715,22 +1734,26 @@ static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
     return yp->x74 * 0.5f;
 }
 
-static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base, f32 old_y)
-{
-    return old_y + (*base)->x14;
-}
-
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
-    f32 left_anchor_x = grZe_8049F158[0].x;
-    f32 left_anchor_y = grZe_8049F158[0].y;
-    f32 left_bound_x = grZe_8049F140[0].x;
-    f32 left_bound_y = grZe_8049F140[0].y;
-    f32 right_anchor_y = grZe_8049F158[1].y;
-    f32 right_anchor_x = grZe_8049F158[1].x;
-    f32 right_bound_y = grZe_8049F140[1].y;
-    f32 right_bound_x = grZe_8049F140[1].x;
+    f32 right_bound_x;
+    f32 right_bound_y;
+    f32 left_bound_x;
+    f32 left_bound_y;
+    f32 right_anchor_y;
+    f32 right_anchor_x;
+    f32 left_anchor_y;
+    f32 left_anchor_x;
+
+    left_anchor_x = grZe_8049F158[0].x;
+    left_anchor_y = grZe_8049F158[0].y;
+    right_anchor_x = grZe_8049F158[1].x;
+    right_anchor_y = grZe_8049F158[1].y;
+    left_bound_y = grZe_8049F140[0].y;
+    left_bound_x = grZe_8049F140[0].x;
+    right_bound_y = grZe_8049F140[1].y;
+    right_bound_x = grZe_8049F140[1].x;
 
     (void) 0.0;
     for (k = 0; k < 20; (*base)++, k++) {
@@ -1746,10 +1769,11 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
                 (*base)->x08_x = right_anchor_x;
                 (*base)->x0C_y = right_anchor_y;
             } else {
-                f32 old_y = (*base)->x0C_y;
+                f32 current_y = (*base)->x0C_y;
+                f32 old_y = current_y;
                 f32 current_x = (*base)->x08_x;
                 f32 old_x = current_x;
-                f32 new_y = grZebes_801DB3CC_update_y(base, old_y);
+                f32 new_y = old_y + (*base)->x14;
                 f32 new_x = old_x + (*base)->x10;
                 if (new_y < left_bound_y && new_x < left_bound_x) {
                     if (old_y >= left_bound_y) {
@@ -1886,9 +1910,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_BubbleEntry* ea = base;
         int a;
-        for (a = 0; a < 19; a++, ea++) {
+        for (a = 0; a < 19; a++) {
+            grZe_BubbleEntry* ea = &base[a];
             if (ea->x00_active != 0) {
                 int b = a + 1;
                 grZe_BubbleEntry* eb = &grZe_8049F170[b];
@@ -1900,57 +1924,60 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
                             f32 effective_dist = dist;
+                            f32 col_rad = grZebes_801DB3CC_half_radius(yp);
                             f32 avg_size = ea->x18_size + eb->x18_size;
-                            f32 col_rad =
-                                grZebes_801DB3CC_half_radius(yp) * avg_size;
-                            f32 near_rad = yp->x70 * 0.5f * avg_size;
-                            f32 far_rad = yp->x6C * 0.5f * avg_size;
-                            if (dist < 0.001) {
-                                dy = 0.001;
-                                dx = 0.0f;
-                                effective_dist = 0.001;
-                            }
-                            if (effective_dist < col_rad) {
-                                f32 strength =
-                                    (f32) (((f64) (col_rad / effective_dist) -
-                                            1.0) *
-                                           0.5);
-                                strength = (f32) ((f64) strength * 0.9);
-                                if (a >= 7) {
-                                    f32 vx = -dx * strength;
-                                    f32 vy = -dy * strength;
-                                    f32 clamp_vy = vy;
-                                    if (vy < 0.0f) {
-                                        clamp_vy = 0.0f;
-                                    }
-                                    ea->x10 += vx;
-                                    ea->x14 += clamp_vy;
-                                }
-                                if (b >= 7) {
-                                    f32 vx2 =
-                                        grZebes_801DB3CC_scale(strength, dx);
-                                    f32 vy2 = dy * strength;
-                                    if (vy2 < 0.0f) {
-                                        vy2 = 0.0f;
-                                    }
-                                    eb->x10 += vx2;
-                                    eb->x14 += vy2;
-                                }
-                            } else if (!(effective_dist < near_rad) &&
-                                       effective_dist < far_rad)
+                            col_rad *= avg_size;
                             {
-                                f32 attract = yp->x78 / effective_dist;
-                                if (a >= 7) {
-                                    f32 vx = dx * attract;
-                                    f32 vy = dy * attract;
-                                    ea->x10 += vx;
-                                    ea->x14 += vy;
+                                f32 near_rad = yp->x70 * 0.5f * avg_size;
+                                f32 far_rad = yp->x6C * 0.5f * avg_size;
+                                if (dist < 0.001) {
+                                    dy = 0.001;
+                                    dx = 0.0f;
+                                    effective_dist = 0.001;
                                 }
-                                if (b >= 7) {
-                                    f32 vx2 = -dx * attract;
-                                    f32 vy2 = -dy * attract;
-                                    eb->x10 += vx2;
-                                    eb->x14 += vy2;
+                                if (effective_dist < col_rad) {
+                                    f32 strength =
+                                        (f32) (((f64) (col_rad /
+                                                       effective_dist) -
+                                                1.0) *
+                                               0.5);
+                                    strength = (f32) ((f64) strength * 0.9);
+                                    if (a >= 7) {
+                                        f32 vx = -dx * strength;
+                                        f32 vy = -dy * strength;
+                                        f32 clamp_vy = vy;
+                                        if (vy < 0.0f) {
+                                            clamp_vy = 0.0f;
+                                        }
+                                        ea->x10 += vx;
+                                        ea->x14 += clamp_vy;
+                                    }
+                                    if (b >= 7) {
+                                        f32 vx2 = grZebes_801DB3CC_scale(
+                                            strength, dx);
+                                        f32 vy2 = dy * strength;
+                                        if (vy2 < 0.0f) {
+                                            vy2 = 0.0f;
+                                        }
+                                        eb->x10 += vx2;
+                                        eb->x14 += vy2;
+                                    }
+                                } else if (!(effective_dist < near_rad) &&
+                                           effective_dist < far_rad)
+                                {
+                                    f32 attract = yp->x78 / effective_dist;
+                                    if (a >= 7) {
+                                        f32 vx = dx * attract;
+                                        f32 vy = dy * attract;
+                                        ea->x10 += vx;
+                                        ea->x14 += vy;
+                                    }
+                                    if (b >= 7) {
+                                        f32 vx2 = -dx * attract;
+                                        f32 vy2 = -dy * attract;
+                                        eb->x10 += vx2;
+                                        eb->x14 += vy2;
+                                    }
                                 }
                             }
                         }
@@ -2027,6 +2054,11 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_x;
                 f32 ei_size;
                 f32 ei_y;
+                f32 ej_y;
+                f32 ej_x;
+                f32 dx;
+                f32 dy;
+                f32 dist_sq;
                 grZe_BubbleEntry* ej = &grZe_8049F170[j];
 
                 ei_y = ei->x0C_y;
@@ -2034,22 +2066,20 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 ei_size = ei->x18_size;
                 for (; j < 20; ej++, j++) {
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
-                        f32 ej_x = ej->x08_x;
-                        f32 ej_y = ej->x0C_y;
-                        f32 dx = grZebes_Subtract(ei_x, ej_x);
-                        f32 dy = ei_y - ej_y;
-                        f32 dist_sq;
+                        ej_y = ej->x0C_y;
+                        ej_x = ej->x08_x;
+                        dx = grZebes_Subtract(ei_x, ej_x);
+                        dy = ei_y - ej_y;
                         dx *= dx;
                         dy *= dy;
-                        dist_sq = dx + dy;
+                        dist_sq = dy + dx;
                         if (max_dist_sq < dist_sq) {
-                            f32 ej_size = ej->x18_size;
                             max_dist_sq = dist_sq;
                             x1 = ei_x;
                             y1 = ei_y;
                             x2 = ej_x;
                             y2 = ej_y;
-                            if (ei_size > ej_size) {
+                            if (ei_size > ej->x18_size) {
                                 last_idx = i;
                             } else {
                                 last_idx = j;
@@ -2090,17 +2120,17 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     if (t < 0.0f) {
                         bx = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
-                        f32 ex = bx - x2;
-                        f32 ey = grZebes_Subtract(by, y2);
-                        f32 ex_sq = ex * ex;
-                        f32 ey_sq = ey * ey;
-                        bx = ex_sq + ey_sq;
+                        dpx = bx - x2;
+                        dpy = grZebes_Subtract(by, y2);
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     } else {
-                        f32 cx = (dx * t + x1) - bx;
-                        f32 cy = (dy * t + y1) - by;
-                        f32 cx_sq = cx * cx;
-                        f32 cy_sq = cy * cy;
-                        bx = cx_sq + cy_sq;
+                        dpx = (dx * t + x1) - bx;
+                        dpy = (dy * t + y1) - by;
+                        dpx *= dpx;
+                        dpy *= dpy;
+                        bx = dpx + dpy;
                     }
 
                     bx = sqrtf(bx);

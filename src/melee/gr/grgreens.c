@@ -26,7 +26,7 @@
 #include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/gr/types.h>
-#include <melee/it/items/itwhispyapple.h>
+#include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
@@ -85,9 +85,9 @@ static void sdata2_order(void)
 #define Gr_Greens_Block_Colum 3
 #define Gr_Greens_Block_Max 30
 
+static struct grGreens_YakumonoParam* yakumono_param;
 static u8 grGr_804D6AAC;
 static u8 grGr_804D6AAD;
-static struct grGreens_YakumonoParam* yakumono_param;
 
 static StageCallbacks grGr_callbacks[] = {
     {

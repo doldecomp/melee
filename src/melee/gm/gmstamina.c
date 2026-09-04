@@ -50,7 +50,7 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     { -1 },
@@ -64,27 +64,27 @@ static struct {
 
 void gm_801B91C8(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_stamina;
     CSSData* css = gm_GetGameModeStateEnterData(state);
     css->match_type = 2;
     css->ko_counts = 0;
     css->vs = *vs;
-    lbDvd_800174BC();
+    lbDvd_SetupVsPreloadCache();
 }
 
 void gm_801B922C(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->vs_stamina);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.vs_stamina);
 }
 
 void gm_801B9254(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->vs_stamina);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.vs_stamina);
 }
 
 void gm_801B927C(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_stamina;
     SSSData* sss = gm_GetGameModeStateExitData(state);
     if (sss->start_game != 0) {
         *vs = sss->vs;
@@ -99,7 +99,7 @@ void gm_801B927C(GameModeState* state)
 
 void gm_801B931C(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_stamina;
     StartMeleeData* start = gm_GetGameModeStateEnterData(state);
     int i;
 
@@ -112,7 +112,7 @@ void gm_801B931C(GameModeState* state)
     start->rules.match_kind = 1;
     start->rules.x44 = fn_801B9850;
     start->rules.x3_0 = false;
-    gm_80167A14(start->players);
+    gm_SetupAllPlayerDefaults(start->players);
 
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         start->players[i] = vs->start.players[i];
@@ -121,21 +121,21 @@ void gm_801B931C(GameModeState* state)
         start->players[i].hp = 150;
     }
 
-    gm_DetermineSubColors(start);
-    gm_8016F088(start);
-    gm_80168FC4();
+    gm_SetupSubColors(start);
+    gm_LoadRumbleEnabled(start);
+    gm_LoadAnnouncer();
 }
 
 void gm_801B9560(GameModeState* scene)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->vs_stamina;
-    gm_80168710(&gm_80479D98.match_end, vs);
-    gm_801A5AF0(scene, 0, 0);
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_stamina;
+    gm_80168710(&gmVsMelee_VsExitInfo.match_end, vs);
+    gmVsMelee_ExitVs(scene, 0, 0);
 }
 
 void gm_Mode_StaminaVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->vs_stamina);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_stamina);
 }
 
 void gm_Mode_StaminaVs_OnLoad(void)
@@ -159,7 +159,7 @@ int gm_801B9600(void)
             gm_804975F8.eliminated[i] = true;
         }
         if (!gm_804975F8.eliminated[i]) {
-            if (gmMainLib_804D3EE0->vs_stamina.start.rules.is_teams) {
+            if (gmMainLib_804D3EE0->modes.vs_stamina.start.rules.is_teams) {
                 for (j = 0; j < i; j++) {
                     if (!gm_804975F8.eliminated[j] &&
                         Player_GetTeam(i) == Player_GetTeam(j))

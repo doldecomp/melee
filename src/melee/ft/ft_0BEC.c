@@ -14,9 +14,9 @@
 #include "ftFox/types.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "it/it_26B1.h"
-#include "it/items/itdrmariopill.h"
-#include "it/items/itfoxblaster.h"
-#include "it/items/itnessbat.h"
+#include "it/kinds/itdrmariopill.h"
+#include "it/kinds/itfoxblaster.h"
+#include "it/kinds/itnessbat.h"
 
 #include <dolphin/mtx.h>
 

@@ -20,7 +20,7 @@ struct UnlockableCharacterData {
     /* 0x1 */ u8 selkind;
     /* 0x2 */ u8 notification_id;
     /* 0x3 */ u8 x3;
-    /* 0x4 */ u16 x4;
+    /* 0x4 */ u16 stkind;
 }; /* size = 0x6 */
 
 struct VictoryTheme {

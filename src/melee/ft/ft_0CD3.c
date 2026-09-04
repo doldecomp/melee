@@ -4,7 +4,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
-#include "it/items/itharisen.h"
+#include "it/kinds/itharisen.h"
 
 void ftCo_800CD350(Fighter_GObj* gobj, int arg1, int arg2, float arg3)
 {

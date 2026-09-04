@@ -7118,16 +7118,16 @@ void mpLib_DrawZones(void)
         if (Camera_8002928C(var_r30)) {
             GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.y,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.y,
-                           var_r30->x10.y + var_r30->x34.y, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.y, 0.0F);
-            GXPosition3f32(var_r30->x10.x + var_r30->x2C.x,
-                           var_r30->x10.y + var_r30->x34.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.y,
+                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.y, 0.0F);
+            GXPosition3f32(var_r30->pos.x + var_r30->ext.h.x,
+                           var_r30->pos.y + var_r30->ext.v.x, 0.0F);
 
             GXEnd();
         }

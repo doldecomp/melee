@@ -78,8 +78,8 @@ void onEnter(GameModeState* scene)
     GameModeKind previous_mode;
 
     data = scene->info.enter_data;
-    lb_8001C550();
-    lb_8001D164(0);
+    lbCardNew_AllocWorkArea();
+    lbCardGame_LoadArchive(0);
     lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()),
                     HSD_MemAlloc(lbSnap_8001E210()));
     {

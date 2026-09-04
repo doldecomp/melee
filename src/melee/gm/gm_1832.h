@@ -32,22 +32,5 @@
 /* 186634 */ void fn_80186634(void*);
 /* 186DFC */ void gm_Scene_IntroEasy_OnFrame(void);
 /* 186E30 */ void gm_Scene_IntroEasy_OnEnter(void*);
-/* 186EFC */ void fn_80186EFC(HSD_GObj*);
-/* 186F6C */ void fn_80186F6C(HSD_GObj*);
-/* 1873F0 */ HSD_GObjProc* fn_801873F0(void);
-/* 187494 */ void fn_80187494(HSD_GObj*, int);
-/* 1874FC */ UNK_RET fn_801874FC(UNK_PARAMS);
-/* 187714 */ UNK_RET fn_80187714(UNK_PARAMS);
-/* 18776C */ void gm_Scene_IntroAllstar_OnFrame(void);
-/* 1877A8 */ void gm_Scene_IntroAllstar_OnEnter(UNK_T);
-/* 187910 */ void fn_80187910(HSD_GObj*);
-/* 187AB4 */ void fn_80187AB4(HSD_GObj*);
-/* 187C9C */ void fn_80187C9C(HSD_GObj*, int);
-/* 187CF4 */ void fn_80187CF4(HSD_GObj*);
-/* 187F48 */ void gm_Scene_IntroNormal_OnEnter(UNK_T);
-/* 188364 */ void gm_Scene_IntroNormal_OnLeave(UNK_T);
-/* 18838C */ void gm_Scene_IntroNormal_OnFrame(void);
-/* 1883C0 */ f32 gm_801883C0(void);
-/* 18841C */ bool gm_8018841C(void);
 
 #endif

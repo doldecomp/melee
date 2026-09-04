@@ -92,6 +92,11 @@ struct Menu_GObj {
 typedef struct HSD_GObj Menu_GObj;
 #endif
 
+/// @todo Might be defined elsewhere
+typedef enum {
+    CpuKind_4 = 4
+} CpuKind;
+
 struct PlayerInitData {
     /*0x00*/ s8 ckind;     ///< ::CharacterKind
     /*0x01*/ u8 slot_type; ///< ::Gm_PKind
@@ -105,11 +110,11 @@ struct PlayerInitData {
     /*0x09*/ u8 team;      // team
     /*0x0A*/ u8 nametag;   // nametag
     /*0x0B*/ u8 xB;
-    /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
+    /*0x0C*/ u8 rumble_enabled : 1; ///< rumble enabled
     u8 xC_b1 : 1;
     u8 xC_b2 : 1; ///< metal
     u8 xC_b3 : 1;
-    u8 xC_b4 : 1; ///< invisible
+    u8 vs_invisible : 1;
     u8 xC_b5 : 1;
     u8 xC_b6 : 1;
     u8 xC_b7 : 1;
@@ -121,7 +126,7 @@ struct PlayerInitData {
     u8 xD_b5 : 1;
     u8 xD_b6 : 1;
     u8 xD_b7 : 1;
-    /*0x0E*/ u8 xE;        ///< CPU type
+    /*0x0E*/ u8 cpu_kind;  ///< CPU type
     /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
     /*0x12*/ u16 x12;
@@ -152,7 +157,7 @@ ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
     u32 match_kind : 3; ///< ::MatchKind
-    u32 x0_3 : 3;
+    u32 x0_3 : 3;       ///< unknown enum
     u32 x0_6 : 1;
     u32 timer_counts_up : 1; ///< ::bool
 
@@ -166,7 +171,7 @@ struct StartMeleeRules {
 
     u32 friendly_fire : 1; ///< friendly fire on
 
-    u32 x2_0 : 1;
+    u32 is_stock : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 single_button : 1;   ///< single-button mode enabled
@@ -187,8 +192,8 @@ struct StartMeleeRules {
     u32 x3_6 : 1;
     u32 x3_7 : 1;
 
-    u32 x4_0 : 1; ///< pause camera enabled?
-    u32 x4_1 : 1;
+    u32 x4_0 : 1;  ///< pause camera enabled?
+    u32 is_vs : 1; ///< Set only by ::gmVsMelee_EnterVs
     u32 x4_2 : 1;
     u32 x4_3 : 1;
     u32 x4_4 : 1;
@@ -223,8 +228,8 @@ struct StartMeleeRules {
     u64 x20; // item mask
     int x28;
     float x2C;
-    float x30; ///< damage ratio
-    float x34; ///< game speed
+    float x30;        ///< damage ratio
+    float game_speed; ///< game speed
     void (*on_unpause_override)(
         int); ///< on unpause callback. When set, this method is called with
               ///< the pauser playerId when a player unpauses the match. If not
@@ -297,10 +302,14 @@ typedef enum CSSMatchType {
     TRAINING_MODE = 0x17
 } CSSMatchType;
 
+typedef enum CSSPendingSceneChangeKind {
+    CSSPendingSceneChange_2 = 2,
+} CSSSceneChangeKind;
+
 struct CSSData {
-    u16 unk_0x0; ///< 1p port?
-    u8 match_type;
-    u8 pending_scene_change;
+    u16 unk_0x0;             ///< 1p port?
+    u8 match_type;           ///< ::CSSMatchType
+    u8 pending_scene_change; ///< ::CSSPendingSceneChangeKind
     u8* ko_counts;
     VsModeData vs;
 };

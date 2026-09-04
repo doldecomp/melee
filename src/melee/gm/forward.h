@@ -3,12 +3,14 @@
 
 #include <platform.h>
 
-/// @todo Put in proper places
+/// @todo Put in proper places. ::GM_MAX_PLAYERS is ::Gm_Player_NumMax but
+/// needs to be used for array size declarations.
 /// @{
 #define GM_MAX_PLAYERS 6
 #define GM_MAX_TEAMS 5
 #define GM_NAMETAG_NONE 120
 #define GM_FPS 60
+#define GM_GAMEMODESTATE_TERMINATE 0xFF
 /// @}
 
 typedef enum GameModeKind {
@@ -152,7 +154,7 @@ typedef struct gm_8017DB6C_arg0_t gm_8017DB6C_arg0_t;
 typedef struct gmm_x0_528_t gmm_x0_528_t;
 typedef struct lbl_8046B6A0_24C_t lbl_8046B6A0_24C_t;
 typedef struct lbl_8046B6A0_t lbl_8046B6A0_t;
-typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
+typedef struct ChallengerData ChallengerData;
 typedef struct MatchEnd MatchEnd;
 typedef struct MatchExitInfo MatchExitInfo;
 typedef struct MatchPlayerData MatchPlayerData;
@@ -185,7 +187,7 @@ typedef enum Gm_Player {
     /* 0x03 */ Gm_Player_Unk3,
     /* 0x04 */ Gm_Player_Unk4,
     /* 0x05 */ Gm_Player_Unk5,
-    /* 0x06 */ Gm_Player_NumMax = 6,
+    /* 0x06 */ Gm_Player_NumMax = GM_MAX_PLAYERS,
     /* 0x06 */ Gm_Player_Other = Gm_Player_NumMax,
 } Gm_Player;
 

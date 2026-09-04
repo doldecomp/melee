@@ -198,18 +198,6 @@ void grAnime_801C683C(HSD_DObj* arg0, HSD_MatAnim* arg1,
     }
 }
 
-static inline void grAnime_801C683C_inner(HSD_DObj* arg0, HSD_MatAnim* arg1,
-                                          HSD_ShapeAnimDObj* arg2)
-{
-    grAnime_801C683C(arg0, arg1, arg2);
-}
-
-static inline void grAnime_801C683C_noinline(HSD_DObj* arg0, HSD_MatAnim* arg1,
-                                             HSD_ShapeAnimDObj* arg2)
-{
-    grAnime_801C683C_inner(arg0, arg1, arg2);
-}
-
 void grAnime_801C68F4(HSD_RObj* robj, HSD_RObjAnimJoint* robjanimjoint)
 {
     if (robj == NULL || robjanimjoint == NULL) {
@@ -223,7 +211,7 @@ void grAnime_801C68F4(HSD_RObj* robj, HSD_RObjAnimJoint* robjanimjoint)
     }
 }
 
-static inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
+static void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
 {
     HSD_RObj* phi_r31;
     HSD_RObjAnimJoint* phi_r30;
@@ -238,18 +226,6 @@ static inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
         phi_r31 = phi_r31->next;
         phi_r30 = phi_r30->next;
     }
-}
-
-static inline void grAnime_801C6960_inner(HSD_RObj* robj,
-                                          HSD_RObjAnimJoint* arg1)
-{
-    grAnime_801C6960(robj, arg1);
-}
-
-static inline void grAnime_801C6960_noinline(HSD_RObj* robj,
-                                             HSD_RObjAnimJoint* arg1)
-{
-    grAnime_801C6960_inner(robj, arg1);
 }
 
 HSD_AObj* grAnime_801C69FC(HSD_AObj* aobj)
@@ -274,16 +250,21 @@ HSD_AObj* grAnime_801C69FC(HSD_AObj* aobj)
     return aobj;
 }
 
+/// @todo The head alias, self-initialization, and discarded comparison are
+/// required for register allocation when this helper is inlined.
 static inline HSD_AObj* grAnime_801C69FC_for_jobj(HSD_AObj* aobj)
 {
     HSD_FObj** cur;
-    HSD_FObj* fobj;
+    HSD_FObj** head;
 
     if (aobj == NULL || aobj->fobj == NULL) {
         return aobj;
     }
     cur = &aobj->fobj;
-    while ((fobj = *cur) != NULL) {
+    head = cur;
+    while (*cur != NULL) {
+        HSD_FObj* fobj = fobj = *cur;
+        (void) (fobj == *head);
         if (fobj->obj_type == 0xC) {
             *cur = fobj->next;
             fobj->next = aobj->fobj;
@@ -339,7 +320,24 @@ static inline void grAnime_801C6A54_inner(HSD_JObj* jobj,
                                           HSD_MatAnimJoint* matanimjoint,
                                           HSD_ShapeAnimJoint* shapeanimjoint)
 {
-    grAnime_801C6A54(jobj, animjoint, matanimjoint, shapeanimjoint);
+    if (jobj == NULL) {
+        return;
+    }
+    if (animjoint != NULL) {
+        if (animjoint->aobjdesc != NULL) {
+            if (jobj->aobj != NULL) {
+                HSD_AObjRemove(jobj->aobj);
+            }
+            jobj->aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
+            grAnime_801C69FC_noinline(jobj->aobj);
+        }
+        grAnime_801C6960(jobj->robj, animjoint->robj_anim);
+    }
+    if (union_type_dobj(jobj)) {
+        grAnime_801C683C(
+            jobj->u.dobj, matanimjoint != NULL ? matanimjoint->matanim : NULL,
+            shapeanimjoint != NULL ? shapeanimjoint->shapeanimdobj : NULL);
+    }
 }
 
 static inline void
@@ -347,7 +345,72 @@ grAnime_801C6A54_noinline(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                           HSD_MatAnimJoint* matanimjoint,
                           HSD_ShapeAnimJoint* shapeanimjoint)
 {
-    grAnime_801C6A54_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
+    grAnime_801C6A54(jobj, animjoint, matanimjoint, shapeanimjoint);
+}
+
+/// One recursion level of grAnime_801C6C0C, inlined once into itself and
+/// into grAnime_801C7C1C.
+static inline void grAnime_801C6C0C_inner(HSD_JObj* jobj,
+                                          HSD_AnimJoint* animjoint,
+                                          HSD_MatAnimJoint* matanimjoint,
+                                          HSD_ShapeAnimJoint* shapeanimjoint)
+{
+    HSD_JObj* child;
+    HSD_AnimJoint* caj;
+    HSD_MatAnimJoint* cmj;
+    HSD_ShapeAnimJoint* csj;
+    HSD_AnimJoint* next_caj;
+    HSD_MatAnimJoint* next_cmj;
+    HSD_ShapeAnimJoint* next_csj;
+
+    if (jobj != NULL) {
+        grAnime_801C6A54_noinline(jobj, animjoint, matanimjoint,
+                                  shapeanimjoint);
+        if (!(jobj->flags & 0x1000)) {
+            child = jobj->child;
+            if (animjoint != NULL) {
+                next_caj = animjoint != NULL ? animjoint->child : NULL;
+            } else {
+                next_caj = NULL;
+            }
+            caj = next_caj;
+            if (matanimjoint != NULL) {
+                next_cmj = matanimjoint != NULL ? matanimjoint->child : NULL;
+            } else {
+                next_cmj = NULL;
+            }
+            cmj = next_cmj;
+            if (shapeanimjoint != NULL) {
+                next_csj =
+                    shapeanimjoint != NULL ? shapeanimjoint->child : NULL;
+            } else {
+                next_csj = NULL;
+            }
+            csj = next_csj;
+            while (child != NULL) {
+                grAnime_801C6C0C(child, caj, cmj, csj);
+                child = child->next;
+                if (caj != NULL) {
+                    next_caj = caj != NULL ? caj->next : NULL;
+                } else {
+                    next_caj = NULL;
+                }
+                caj = next_caj;
+                if (cmj != NULL) {
+                    next_cmj = cmj != NULL ? cmj->next : NULL;
+                } else {
+                    next_cmj = NULL;
+                }
+                cmj = next_cmj;
+                if (csj != NULL) {
+                    next_csj = csj != NULL ? csj->next : NULL;
+                } else {
+                    next_csj = NULL;
+                }
+                csj = next_csj;
+            }
+        }
+    }
 }
 
 void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
@@ -358,16 +421,12 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
     HSD_AnimJoint* aj;
     HSD_MatAnimJoint* mj;
     HSD_ShapeAnimJoint* sj;
-    HSD_JObj* child;
-    HSD_AnimJoint* caj;
-    HSD_MatAnimJoint* cmj;
-    HSD_ShapeAnimJoint* csj;
     HSD_AnimJoint* next_aj;
     HSD_MatAnimJoint* next_mj;
     HSD_ShapeAnimJoint* next_sj;
 
     if (jobj != NULL) {
-        grAnime_801C6A54(jobj, animjoint, matanimjoint, shapeanimjoint);
+        grAnime_801C6A54_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
         if (!(jobj->flags & 0x1000)) {
             jp = jobj->child;
             if (animjoint != NULL) {
@@ -390,70 +449,7 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
             }
             sj = next_sj;
             while (jp != NULL) {
-                if (jp != NULL) {
-                    grAnime_801C6A54_noinline(jp, aj, mj, sj);
-                    if (!(jp->flags & 0x1000)) {
-                        child = jp->child;
-                        if (aj != NULL) {
-                            if (aj != NULL) {
-                                caj = aj->child;
-                            } else {
-                                caj = NULL;
-                            }
-                        } else {
-                            caj = NULL;
-                        }
-                        if (mj != NULL) {
-                            if (mj != NULL) {
-                                cmj = mj->child;
-                            } else {
-                                cmj = NULL;
-                            }
-                        } else {
-                            cmj = NULL;
-                        }
-                        if (sj != NULL) {
-                            if (sj != NULL) {
-                                csj = sj->child;
-                            } else {
-                                csj = NULL;
-                            }
-                        } else {
-                            csj = NULL;
-                        }
-                        while (child != NULL) {
-                            grAnime_801C6C0C(child, caj, cmj, csj);
-                            child = child->next;
-                            if (caj != NULL) {
-                                if (caj != NULL) {
-                                    caj = caj->next;
-                                } else {
-                                    caj = NULL;
-                                }
-                            } else {
-                                caj = NULL;
-                            }
-                            if (cmj != NULL) {
-                                if (cmj != NULL) {
-                                    cmj = cmj->next;
-                                } else {
-                                    cmj = NULL;
-                                }
-                            } else {
-                                cmj = NULL;
-                            }
-                            if (csj != NULL) {
-                                if (csj != NULL) {
-                                    csj = csj->next;
-                                } else {
-                                    csj = NULL;
-                                }
-                            } else {
-                                csj = NULL;
-                            }
-                        }
-                    }
-                }
+                grAnime_801C6C0C_inner(jp, aj, mj, sj);
                 jp = jp->next;
                 if (aj != NULL) {
                     next_aj = aj != NULL ? aj->next : NULL;
@@ -476,22 +472,6 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
             }
         }
     }
-}
-
-static inline void grAnime_801C6C0C_inner(HSD_JObj* jobj,
-                                          HSD_AnimJoint* animjoint,
-                                          HSD_MatAnimJoint* matanimjoint,
-                                          HSD_ShapeAnimJoint* shapeanimjoint)
-{
-    grAnime_801C6C0C(jobj, animjoint, matanimjoint, shapeanimjoint);
-}
-
-static inline void
-grAnime_801C6C0C_noinline(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
-                          HSD_MatAnimJoint* matanimjoint,
-                          HSD_ShapeAnimJoint* shapeanimjoint)
-{
-    grAnime_801C6C0C_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
 }
 
 void fn_801C6EE4(HSD_AObj* aobj)
@@ -909,18 +889,14 @@ void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2, f32 arg8)
 void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                       int arg5, f32 farg0, f32 farg1)
 {
+    u32 req_flags = 0;
     s32 anim_flags = 0;
     UnkArchiveStruct* archive;
     HSD_AnimJoint** ajp;
     HSD_MatAnimJoint** mjp;
     HSD_ShapeAnimJoint** sjp;
-    u32 req_flags = 0;
     HSD_AnimJoint* aj;
-    HSD_AnimJoint* caj;
-    HSD_ShapeAnimJoint* csj;
-    HSD_JObj* child;
     HSD_MatAnimJoint* mj;
-    HSD_MatAnimJoint* cmj;
     HSD_ShapeAnimJoint* sj;
     u8* eflags;
     s32 flag;
@@ -934,8 +910,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((aj = ajp[arg4]) != NULL))
     {
         aj = &aj[arg2];
-        anim_flags |= 0x220;
         req_flags |= 0x81;
+        anim_flags |= 0x220;
     } else {
         aj = NULL;
     }
@@ -943,8 +919,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((mj = mjp[arg4]) != NULL))
     {
         mj = &mj[arg2];
-        anim_flags |= 0x7484;
         req_flags |= 0x416;
+        anim_flags |= 0x7484;
     } else {
         mj = NULL;
     }
@@ -952,101 +928,16 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((sj = sjp[arg4]) != NULL))
     {
         sj = &sj[arg2];
-        anim_flags |= 0x100;
         req_flags |= 8;
+        anim_flags |= 0x100;
     } else {
         sj = NULL;
     }
     if (arg5 != 0) {
-        if (jobj != NULL) {
-            grAnime_801C6A54_noinline(jobj, aj, mj, sj);
-            if (!(jobj->flags & 0x1000)) {
-                child = jobj->child;
-                if (aj != NULL) {
-                    if (aj != NULL) {
-                        caj = aj->child;
-                    } else {
-                        caj = NULL;
-                    }
-                } else {
-                    caj = NULL;
-                }
-                if (mj != NULL) {
-                    if (mj != NULL) {
-                        cmj = mj->child;
-                    } else {
-                        cmj = NULL;
-                    }
-                } else {
-                    cmj = NULL;
-                }
-                if (sj != NULL) {
-                    if (sj != NULL) {
-                        csj = sj->child;
-                    } else {
-                        csj = NULL;
-                    }
-                } else {
-                    csj = NULL;
-                }
-                while (child != NULL) {
-                    grAnime_801C6C0C_noinline(child, caj, cmj, csj);
-                    child = child->next;
-                    if (caj != NULL) {
-                        if (caj != NULL) {
-                            caj = caj->next;
-                        } else {
-                            caj = NULL;
-                        }
-                    } else {
-                        caj = NULL;
-                    }
-                    if (cmj != NULL) {
-                        if (cmj != NULL) {
-                            cmj = cmj->next;
-                        } else {
-                            cmj = NULL;
-                        }
-                    } else {
-                        cmj = NULL;
-                    }
-                    if (csj != NULL) {
-                        if (csj != NULL) {
-                            csj = csj->next;
-                        } else {
-                            csj = NULL;
-                        }
-                    } else {
-                        csj = NULL;
-                    }
-                }
-            }
-        }
+        grAnime_801C6C0C_inner(jobj, aj, mj, sj);
         HSD_JObjReqAnimAllByFlags(jobj, req_flags, farg0);
     } else {
-        if (jobj != NULL) {
-            if (aj != NULL) {
-                if (aj->aobjdesc != NULL) {
-                    if (jobj->aobj != NULL) {
-                        HSD_AObjRemove(grAnime_GetAObj(jobj));
-                    }
-                    {
-                        HSD_AObjDesc* aobjdesc = aj->aobjdesc;
-                        jobj->aobj = HSD_AObjLoadDesc(aobjdesc);
-                    }
-                    grAnime_801C69FC_noinline(jobj->aobj);
-                }
-                {
-                    HSD_RObj* robj = jobj->robj;
-                    grAnime_801C6960_noinline(robj, aj->robj_anim);
-                }
-            }
-            if ((jobj->flags & 0x4020) ? false : true) {
-                grAnime_801C683C_noinline(
-                    jobj->u.dobj, mj != NULL ? mj->matanim : NULL,
-                    sj != NULL ? sj->shapeanimdobj : NULL);
-            }
-        }
+        grAnime_801C6A54_inner(jobj, aj, mj, sj);
         HSD_JObjReqAnimByFlags(jobj, req_flags, farg0);
     }
     grAnime_801C752C(jobj, arg5, anim_flags, HSD_AObjSetRate, 1, farg1);

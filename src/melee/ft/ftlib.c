@@ -550,19 +550,19 @@ CmSubject* ftLib_80086B74(HSD_GObj* gobj)
 
 float ftLib_80086B80(HSD_GObj* gobj)
 {
-    return ftLib_80086B74(gobj)->x48.z;
+    return ftLib_80086B74(gobj)->target_ext.v.z;
 }
 
 void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
 {
     CmSubject* cam = ftLib_80086B74(gobj);
-    *v = cam->x1C;
+    *v = cam->bone_pos;
 }
 
 bool ftLib_80086BB4(HSD_GObj* gobj)
 {
     CmSubject* cam = ftLib_80086B74(gobj);
-    return Camera_80031154(&cam->x10);
+    return Camera_80031154(&cam->pos);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)

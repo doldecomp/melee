@@ -8,7 +8,7 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 
 /* 015BD0 */ void* lbDvd_80015BD0(s8, s32);
 /* 01634C */ u32 lbDvd_8001634C(s16);
-/* 0174BC */ void lbDvd_800174BC(void);
+/* 0174BC */ void lbDvd_SetupVsPreloadCache(void);
 /* 0174E8 */ void lbDvd_800174E8(int index);
 /* 017598 */ bool lbDvd_80017598(int heap);
 /* 017700 */ void lbDvd_80017700(int);

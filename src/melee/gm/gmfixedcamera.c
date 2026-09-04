@@ -43,7 +43,7 @@ GameModeState gm_Mode_CameraVs_States[] = {
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
@@ -55,7 +55,7 @@ GameModeState gm_Mode_CameraVs_States[] = {
         {
             GS_SUDDEN_DEATH,
             &gmVsMelee_StartData,
-            &gm_8047E2A4,
+            &gmVsMelee_SuddenDeathExitInfo,
         },
     },
     {
@@ -66,7 +66,7 @@ GameModeState gm_Mode_CameraVs_States[] = {
         gm_801BA098,
         {
             GS_RESULTS,
-            &gm_8047C020,
+            &gmVsMelee_ResultsEnterData,
             NULL,
         },
     },
@@ -74,35 +74,35 @@ GameModeState gm_Mode_CameraVs_States[] = {
         0x80,
         2,
         0,
-        gm_801BFA6C,
+        gm_ModeState_Approach_OnEnter,
         NULL,
         {
             GS_APPROACH,
-            &gm_804D6860,
-            &gm_804D6860,
+            &gmVsMelee_ApproachData,
+            &gmVsMelee_ApproachData,
         },
     },
     {
         0x81,
         2,
         0,
-        gm_801BFABC,
-        gm_801A6254,
+        gm_ModeState_ApproachVs_OnEnter,
+        gm_ModeState_ApproachVs_OnExit,
         {
             GS_VS,
             &gmVsMelee_StartData,
-            &gm_80479D98,
+            &gmVsMelee_VsExitInfo,
         },
     },
     {
         0xC0,
         2,
         0,
-        gm_801BFCFC,
-        gm_801A6308,
+        gm_ModeState_Prize_OnEnter,
+        gm_ModeState_Prize_OnExit,
         {
             GS_PRIZE_INTERFACE,
-            &un_804A1F48,
+            &if_Scene_Prize_EnterData,
             NULL,
         },
     },
@@ -111,65 +111,65 @@ GameModeState gm_Mode_CameraVs_States[] = {
 
 void gm_801B9F10(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->unk_A90, 7);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera, 7);
 }
 
 void gm_801B9F3C(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->unk_A90);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera);
 }
 
 void gm_801B9F64(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->unk_A90);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera);
 }
 
 void gm_801B9F8C(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->unk_A90, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera, 0);
 }
 
-void fn_801B9FB8(StartMeleeData* arg0, StartMeleeData* arg1)
+void fn_801B9FB8(StartMeleeData* start, UNUSED StartMeleeData* vs)
 {
-    arg0->rules.on_unpause_override = gm_80165290;
+    start->rules.on_unpause_override = gm_80165290;
 }
 
 void gm_801B9FC8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
-    gm_801A583C(scene, data, fn_801B9FB8, NULL);
+    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    gmVsMelee_EnterVs(scene, data, fn_801B9FB8, NULL);
 }
 
 void gm_801B9FFC(GameModeState* scene)
 {
-    gm_801A5AF0(scene, 4, 3);
+    gmVsMelee_ExitVs(scene, 4, 3);
 }
 
 void gm_801BA024(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
-    gm_801A5C3C(scene, data, fn_801B9FB8, NULL);
+    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    gmVsMelee_EnterSuddenDeath(scene, data, fn_801B9FB8, NULL);
 }
 
 void gm_801BA058(GameModeState* scene)
 {
-    gm_801A5EC8(scene);
+    gmVsMelee_ExitSuddenDeath(scene);
 }
 
 void gm_801BA078(GameModeState* scene)
 {
-    gm_801A5F00(scene);
+    gmVsMelee_EnterResults(scene);
 }
 
 void gm_801BA098(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
-    gm_801A5F64(scene, data, 0);
+    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    gmVsMelee_ExitResults(scene, data, 0);
 }
 
 void gm_Mode_CameraVs_OnInit(void)
 {
-    gm_80167B50(&gmMainLib_804D3EE0->unk_A90);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_fixed_camera);
 }
 
 void gm_Mode_CameraVs_OnLoad(void)

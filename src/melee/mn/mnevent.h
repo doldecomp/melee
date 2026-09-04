@@ -33,8 +33,5 @@ typedef struct MnEventData {
 
 extern void* mnEvent_804A08F8[];
 extern void* mnEvent_804A0908[4];
-extern HSD_GObj* mnEvent_804D6C60;
-extern u8 mnEvent_804D6C64;
-extern u8 mnEvent_804D6C65;
 
 #endif
