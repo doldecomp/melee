@@ -1754,23 +1754,19 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
                 (*base)->x08_x = right_anchor_x;
                 (*base)->x0C_y = right_anchor_y;
             } else {
-                f32 current_y = (*base)->x0C_y;
-                f32 old_y = current_y;
-                f32 current_x = (*base)->x08_x;
-                f32 old_x = current_x;
-                f32 new_y = old_y + (*base)->x14;
-                f32 new_x = old_x + (*base)->x10;
+                f32 new_x = (*base)->x08_x + (*base)->x10;
+                f32 new_y = (*base)->x0C_y + (*base)->x14;
                 if (new_y < left_bound_y && new_x < left_bound_x) {
-                    if (old_y >= left_bound_y) {
+                    if ((*base)->x0C_y >= left_bound_y) {
                         new_y = left_bound_y;
-                    } else if (old_x >= left_bound_x) {
+                    } else if ((*base)->x08_x >= left_bound_x) {
                         new_x = left_bound_x;
                     }
                 }
                 if (new_y < right_bound_y && new_x > right_bound_x) {
-                    if (old_y >= right_bound_y) {
+                    if ((*base)->x0C_y >= right_bound_y) {
                         new_y = right_bound_y;
-                    } else if (old_x <= right_bound_x) {
+                    } else if ((*base)->x08_x <= right_bound_x) {
                         new_x = right_bound_x;
                     }
                 }
