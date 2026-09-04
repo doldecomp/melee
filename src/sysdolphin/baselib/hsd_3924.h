@@ -1,8 +1,6 @@
 #ifndef HSD_3924_H
 #define HSD_3924_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/list.h>
 
 /* 392474 */ void hsd_80392474(void);

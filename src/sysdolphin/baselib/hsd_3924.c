@@ -1,6 +1,7 @@
 #include "hsd_3924.h"
 
 #include "hsd_3924.static.h"
+#include <placeholder.h>
 
 #include <string.h>
 #include <dolphin/gx.h>
@@ -159,7 +160,7 @@ void hsd_8039254C(void)
         item = cb(event_node->data);
 
         while (item != NULL) {
-            if (first != 0) {
+            if (first) {
                 GXColor bg_col0;
                 p_bg_col0 = &bg_col0;
                 if (lbl_804D6080.a != 0) {
@@ -189,14 +190,14 @@ void hsd_8039254C(void)
                 txt_col = default_col;
                 hsd_80391AC8(item->content.text, p_txt_col,
                              (f32) (col_pos * 10), 10.0F * line);
-                col_pos = col_pos + (2 + char_count);
+                col_pos += char_count + 2;
                 break;
             }
             case 2: {
                 GXColor bg_col2;
                 p_bg_col2 = &bg_col2;
                 if (col_pos != 0) {
-                    line = (f32) ((f64) line - 0.5);
+                    line -= 0.5;
                     if (lbl_804D6080.a != 0) {
                         bg_col2 = lbl_804D6080;
                         DrawRectangle(-10.0F, (10.0F * line) - 5.0F, 620.0F,
@@ -217,7 +218,7 @@ void hsd_8039254C(void)
                 char_count = count_bar_units(item);
                 if (char_count > 0) {
                     if (col_pos != 0) {
-                        line = (f32) ((f64) line - 0.5);
+                        line -= 0.5;
                         if (lbl_804D6080.a != 0) {
                             bg_col3 = lbl_804D6080;
                             DrawRectangle(-10.0F, (10.0F * line) - 5.0F,
@@ -227,21 +228,17 @@ void hsd_8039254C(void)
                     hsd_80391A04(10.0F, 10.0F, 12);
                     bar_y = (10.0F * line) + 2.0F;
                     bar_x = 0.0F;
-                    {
-                        bar_draw_ptr = item;
-                        while ((count = bar_draw_ptr->content.bars[0].count) >
-                               0)
-                        {
-                            f32 prev_x;
-                            prev_x = bar_x;
-                            bar_x += (600.0F / (f32) char_count) * (f32) count;
-                            bar_col = bar_draw_ptr->content.bars[0].color;
-                            hsd_80391F28(
-                                p_bar_col, prev_x, bar_y, bar_x, bar_y,
-                                (f32) bar_draw_ptr->content.bars[0].count);
-                            bar_draw_ptr =
-                                (DispItem*) ((DispBar*) bar_draw_ptr + 1);
-                        }
+                    bar_draw_ptr = item;
+                    while ((count = bar_draw_ptr->content.bars[0].count) > 0) {
+                        f32 prev_x;
+                        prev_x = bar_x;
+                        bar_x += (600.0F / (f32) char_count) * (f32) count;
+                        bar_col = bar_draw_ptr->content.bars[0].color;
+                        hsd_80391F28(
+                            p_bar_col, prev_x, bar_y, bar_x, bar_y,
+                            (f32) bar_draw_ptr->content.bars[0].count);
+                        bar_draw_ptr =
+                            (DispItem*) ((DispBar*) bar_draw_ptr + 1);
                     }
                     col_pos = 60;
                 }

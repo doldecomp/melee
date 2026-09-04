@@ -1,5 +1,7 @@
 #include "hsd_3915.h"
 
+#include <placeholder.h>
+
 #include <math.h> // IWYU pragma: keep
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
