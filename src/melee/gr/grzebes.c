@@ -1895,17 +1895,17 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
         for (a = 0; a < 19; a++) {
             grZe_BubbleEntry* ea = &base[a];
             if (ea->x00_active != 0) {
-                int b = a + 1;
-                grZe_BubbleEntry* eb = &grZe_8049F170[b];
-                for (; b < 20; eb++, b++) {
-                    if (eb->x00_active != 0) {
-                        f32 dx = eb->x08_x - ea->x08_x;
-                        f32 dy = eb->x0C_y - ea->x0C_y;
+                int b;
+                for (b = a + 1; b < 20; b++) {
+                    if (grZe_8049F170[b].x00_active != 0) {
+                        f32 dx = grZe_8049F170[b].x08_x - ea->x08_x;
+                        f32 dy = grZe_8049F170[b].x0C_y - ea->x0C_y;
                         f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
                             f32 col_rad = yp->x74 / 2.0f;
-                            f32 avg_size = ea->x18_size + eb->x18_size;
+                            f32 avg_size =
+                                ea->x18_size + grZe_8049F170[b].x18_size;
                             col_rad *= avg_size;
                             {
                                 f32 near_rad = yp->x70 / 2.0f * avg_size;
@@ -1937,8 +1937,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                         if (vy2 < 0.0f) {
                                             clamp_vy2 = 0.0f;
                                         }
-                                        eb->x10 += vx2;
-                                        eb->x14 += clamp_vy2;
+                                        grZe_8049F170[b].x10 += vx2;
+                                        grZe_8049F170[b].x14 += clamp_vy2;
                                     }
                                 } else if (!(dist < near_rad) &&
                                            dist < far_rad)
@@ -1953,8 +1953,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                     if (b >= 7) {
                                         f32 vx2 = -dx * attract;
                                         f32 vy2 = -dy * attract;
-                                        eb->x10 += vx2;
-                                        eb->x14 += vy2;
+                                        grZe_8049F170[b].x10 += vx2;
+                                        grZe_8049F170[b].x14 += vy2;
                                     }
                                 }
                             }
