@@ -2089,15 +2089,15 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     } else if (t > 1.0f) {
                         dpx = bx - x2;
                         dpy = grZebes_Subtract(by, y2);
-                        dpx *= dpx;
-                        dpy *= dpy;
-                        bx = dpx + dpy;
+                        by = dpx * dpx;
+                        dpx = dpy * dpy;
+                        bx = by + dpx;
                     } else {
                         dpx = (dx * t + x1) - bx;
                         dpy = (dy * t + y1) - by;
-                        dpx *= dpx;
-                        dpy *= dpy;
-                        bx = dpx + dpy;
+                        by = dpx * dpx;
+                        dpx = dpy * dpy;
+                        bx = by + dpx;
                     }
 
                     bx = sqrtf(bx);
