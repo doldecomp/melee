@@ -1156,7 +1156,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_end_x;
     float hit_start_mid_y;
     float hurt_closest_y;
-    float hit_param_candidate;
     float closest_delta_x;
     float closest_dist_sq;
     float local_delta_y;
@@ -1325,7 +1324,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_len_sq =
         hurt_delta_z * hurt_delta_z + (x_work * x_work + y_work * y_work);
     closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
-    hit_start_min_z = 1.0F;
     (void) hit_len_sq;
     if (nearzero(hurt_len_sq)) {
         if (nearzero(hit_len_sq)) {
@@ -1335,7 +1333,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
             hurt_param = 0.0F;
             hit_param = -hit_start_dot / hit_len_sq;
             if (hit_param > 1.0) {
-                hit_param = hit_start_min_z;
+                hit_param = 1.0F;
             } else if (hit_param < 0.0) {
                 hit_param = hurt_param;
             }
@@ -1389,7 +1387,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                         ((d1.z * d1.z) + ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
                 if (hurt_param_from_hit_start > 1.0) {
-                    hurt_param_from_hit_start = hit_start_min_z;
+                    hurt_param_from_hit_start = 1.0F;
                 } else if (hurt_param_from_hit_start < 0.0) {
                     hurt_param_from_hit_start = hit_param;
                 }
@@ -1400,7 +1398,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 Vec3 d1;
                 Vec3 c2;
                 c2 = *hurt_start;
-                hit_param = hit_start_min_z;
+                hit_param = 1.0F;
                 d1.x = hurt_end_x - hurt_start->x;
                 d1.y = hurt_end_y - hurt_start->y;
                 d1.z = hurt_end_z - hurt_start->z;
@@ -1420,15 +1418,14 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 hurt_param = hurt_param_from_hit_end;
             }
         } else {
-            hit_param =
-                (hit_param_candidate = ((segment_dot * hurt_start_dot) -
-                                        (hurt_len_sq * hit_start_dot)) /
-                                       closest_denom);
-            hurt_param = ((hurt_start_dot * hit_len_sq) -
+            hit_param = ((segment_dot * hurt_start_dot) -
+                         (hurt_len_sq * hit_start_dot)) /
+                        closest_denom;
+            hurt_param = ((hit_len_sq * hurt_start_dot) -
                           (segment_dot * hit_start_dot)) /
                          closest_denom;
-            if ((hit_param_candidate > 1.0) || (hit_param < 0.0) ||
-                (hurt_param > 1.0) || (hurt_param < 0.0))
+            if ((hit_param > 1.0) || (hit_param < 0.0) || (hurt_param > 1.0) ||
+                (hurt_param < 0.0))
             {
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
@@ -1443,7 +1440,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                         lbColl_80005EBC(hurt_start, hurt_end, hit_start,
                                         &candidate_hurt_param);
                 } else {
-                    hit_endpoint_param = hit_start_min_z;
+                    hit_endpoint_param = 1.0F;
                     hit_endpoint_dist_sq = lbColl_80005EBC(
                         hurt_start, hurt_end, hit_end, &candidate_hurt_param);
                 }
@@ -1452,7 +1449,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                     hurt_endpoint_dist_sq = lbColl_80005EBC(
                         hit_start, hit_end, hurt_start, &candidate_hit_param);
                 } else {
-                    hurt_endpoint_param = hit_start_min_z;
+                    hurt_endpoint_param = 1.0F;
                     hurt_endpoint_dist_sq = lbColl_80005EBC(
                         hit_start, hit_end, hurt_end, &candidate_hit_param);
                 }
