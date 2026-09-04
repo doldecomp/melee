@@ -2019,9 +2019,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
     {
         f32 x1, y1, x2, y2;
 
-        i = 0;
-        ei = bubbles;
-        for (; i < 20; i++, ei++) {
+        for (i = 0, ei = bubbles; i < 20; i++, ei++) {
             if (ei->x00_active == 1 && i != 0 && i != 6) {
                 s32 j = i + 1;
                 f32 ei_x;
