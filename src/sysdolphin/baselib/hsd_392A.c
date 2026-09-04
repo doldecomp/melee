@@ -2,7 +2,7 @@
 
 #include "hsd_392A.static.h"
 
-#include <baselib/perf.h>
+#include <sysdolphin/baselib/perf.h>
 
 void fn_80392934(void)
 {

@@ -7,8 +7,8 @@
 #include "pl/plattack.h"
 #include "pl/pltrick.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);
 void lbBgFlash_80021410(IKState*);

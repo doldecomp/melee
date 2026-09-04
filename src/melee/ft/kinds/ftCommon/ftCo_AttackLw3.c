@@ -31,7 +31,7 @@
 #include "ftCommon/types.h"
 #include "ftGameWatch/ftgamewatchattacklw3.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

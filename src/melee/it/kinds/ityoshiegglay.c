@@ -14,8 +14,8 @@
 #include "it/kinds/types.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/it/item.h>
 
 ItemStateTable it_803F94A0[] = {

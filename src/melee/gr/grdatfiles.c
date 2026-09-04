@@ -7,10 +7,10 @@
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
 
-#include <baselib/archive.h>
-#include <baselib/debug.h>
-#include <baselib/particle.h>
-#include <baselib/psstructs.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/particle.h>
+#include <sysdolphin/baselib/psstructs.h>
 
 /* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
 /* 1C62B4 */ static UnkArchiveStruct* grDatFiles_801C62B4(void);

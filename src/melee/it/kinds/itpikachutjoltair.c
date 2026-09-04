@@ -5,7 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/gobj.h"
 #include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -18,7 +17,8 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 

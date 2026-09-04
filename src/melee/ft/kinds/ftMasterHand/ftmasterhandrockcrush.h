@@ -3,7 +3,7 @@
 #ifndef GALE01_15236C
 #define GALE01_15236C
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15236C */ void ftMh_Drill_Coll(HSD_GObj* gobj);
 /* 152370 */ void ftMh_MS_354_80152370(HSD_GObj* gobj);

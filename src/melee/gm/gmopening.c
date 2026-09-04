@@ -4,7 +4,7 @@
 #include "gmtitle.h"
 
 #include <stdio.h>
-#include <baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>

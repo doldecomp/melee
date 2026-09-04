@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1A7A44 */ void fn_801A7A44(HSD_GObj*);
 /* 1A7A68 */ void fn_801A7A68(HSD_GObj*);

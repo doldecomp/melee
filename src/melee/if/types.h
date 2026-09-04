@@ -5,10 +5,10 @@
 
 #include "if/forward.h" // IWYU pragma: export
 #include "sc/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
-#include <baselib/tobj.h>
+#include <sysdolphin/baselib/tobj.h>
 
 struct IfDamageFlags {
     u8 explode_animation : 1;

@@ -9,9 +9,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/fog.h"
-#include "baselib/gobjobject.h"
-
 #include "ft/forward.h"
 
 #include "lb/lbarchive.h"
@@ -26,14 +23,16 @@
 #include "sc/types.h"
 
 #include <dolphin/os.h>
-#include <baselib/controller.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

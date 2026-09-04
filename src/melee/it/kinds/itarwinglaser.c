@@ -17,7 +17,7 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;

@@ -1,13 +1,12 @@
 #include "hsd_3924.h"
 
-#include "hsd_3915.h"
-
 #include "hsd_3924.static.h"
 
 #include <string.h>
 #include <dolphin/gx.h>
-#include <baselib/list.h>
-#include <baselib/memory.h>
+#include <sysdolphin/baselib/hsd_3915.h>
+#include <sysdolphin/baselib/list.h>
+#include <sysdolphin/baselib/memory.h>
 
 void hsd_80392474(void)
 {

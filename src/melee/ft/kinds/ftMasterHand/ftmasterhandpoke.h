@@ -1,7 +1,7 @@
 #ifndef GALE01_15287C
 #define GALE01_15287C
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15287C */ void ftMh_PaperCrush_Coll(HSD_GObj* gobj);
 /* 152880 */ void ftMh_MS_358_80152880(HSD_GObj* gobj);

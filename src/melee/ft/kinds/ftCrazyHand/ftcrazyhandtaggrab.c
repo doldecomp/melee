@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
@@ -18,6 +16,8 @@
 #include "it/kinds/itmasterhandlaser.h"
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

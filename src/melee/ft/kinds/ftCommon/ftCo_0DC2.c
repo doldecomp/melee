@@ -4,7 +4,7 @@
 #include "ft/ft_081B.h"
 #include "ft/inlines.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 bool fn_800DAD18(Fighter_GObj*);
 

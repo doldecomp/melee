@@ -3,7 +3,7 @@
 #ifndef GALE01_14E4F0
 #define GALE01_14E4F0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 14E4F0 */ void ftGw_SpecialN_Coll(HSD_GObj* gobj);
 /* 14E644 */ void ftGw_SpecialN_Enter(HSD_GObj* gobj);

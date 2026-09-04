@@ -12,7 +12,7 @@
 #include "it/itzako.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F9328[] = {
     { 0, 0, 0, itKyasarinegg_UnkMotion0_Coll },

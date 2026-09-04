@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/jobj.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -20,7 +19,8 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F58E0[] = {
     { -1, itTaru_UnkMotion0_Anim, itTaru_UnkMotion0_Phys,

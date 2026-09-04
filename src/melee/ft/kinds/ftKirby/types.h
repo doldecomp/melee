@@ -14,7 +14,7 @@
 
 #include "lb/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {

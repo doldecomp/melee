@@ -62,12 +62,6 @@ extern HSD_Archive* lbl_804D65B8;
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
 
-#include "baselib/dobj.h"
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
 #include "gm/gm_1601.h"
@@ -82,6 +76,13 @@ extern HSD_Archive* lbl_804D65B8;
 #include "mn/mnmain.h"
 #include "pl/player.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 MatchEnd* fn_80174274(void)
 {

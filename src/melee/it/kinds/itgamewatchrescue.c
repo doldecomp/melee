@@ -4,9 +4,9 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "it/itzako.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.h>
 #include <melee/it/inlines.h>

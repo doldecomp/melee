@@ -2,13 +2,13 @@
 
 #include "platform.h"
 
-#include "baselib/forward.h"
-
 #include "dolphin/pad.h"
 
 #include "gm/forward.h"
 
 #include "mn/inlines.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>

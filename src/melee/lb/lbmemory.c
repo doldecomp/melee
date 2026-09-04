@@ -5,8 +5,8 @@
 #include <string.h>
 #include <dolphin/ar.h>
 #include <dolphin/os/OSAlarm.h>
-#include <baselib/debug.h>
-#include <baselib/devcom.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/devcom.h>
 
 struct MemEntry {
     struct MemEntry* x0_next;

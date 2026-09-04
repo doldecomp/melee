@@ -1,7 +1,7 @@
 #ifndef GALE01_15A6CC
 #define GALE01_15A6CC
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 15A6CC */ void ftCh_Slam_Anim(HSD_GObj* gobj);
 /* 15A750 */ void ftCh_Slam_IASA(HSD_GObj* gobj);

@@ -2,10 +2,6 @@
 
 #include "placeholder.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/jobj.h"
-#include "baselib/random.h"
 #include "ft/kinds/ftLink/ftlinkattackair.h"
 
 #include "it/forward.h"
@@ -20,6 +16,11 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
 #include "mp/mpcoll.h"
+
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 const Vec3 it_803B8640 = { 0 };
 

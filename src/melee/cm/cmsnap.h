@@ -1,9 +1,9 @@
 #ifndef _CMSNAP_H_
 #define _CMSNAP_H_
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void cmSnap_800315C8(void);
 void cmSnap_800316B4(void);

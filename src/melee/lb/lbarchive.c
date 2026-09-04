@@ -6,8 +6,8 @@
 #include <stdarg.h>
 #include <string.h>
 #include <dolphin/os.h>
-#include <baselib/archive.h>
-#include <baselib/debug.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
 #include <melee/lb/lbdvd.h>
 
 #ifdef MUST_MATCH

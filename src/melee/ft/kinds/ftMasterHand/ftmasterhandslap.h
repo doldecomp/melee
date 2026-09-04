@@ -1,7 +1,7 @@
 #ifndef GALE01_151C04
 #define GALE01_151C04
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 151C04 */ void ftMh_Slap_Anim(HSD_GObj* gobj);
 /* 151C40 */ void ftMh_Slap_IASA(HSD_GObj* gobj);

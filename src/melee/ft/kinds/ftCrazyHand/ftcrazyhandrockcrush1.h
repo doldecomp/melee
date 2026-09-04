@@ -1,7 +1,7 @@
 #ifndef GALE01_158144
 #define GALE01_158144
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 158144 */ void fn_80158144(HSD_GObj* gobj);
 /* 1581A4 */ void ftCh_RockCrushDown_Anim(HSD_GObj* gobj);

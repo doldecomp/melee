@@ -1,7 +1,7 @@
 #ifndef GALE01_11C1C0
 #define GALE01_11C1C0
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 11C1C0 */ void ftPe_AttackS4_Enter(HSD_GObj* gobj);
 /* 11C248 */ void ftPe_AttackS4_Anim(HSD_GObj* gobj);

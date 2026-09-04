@@ -8,8 +8,8 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 static StageCallbacks grTCLink_StageCallbacks[] = {
     {

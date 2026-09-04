@@ -1,8 +1,8 @@
 #ifndef GALE01_1C65B0
 #define GALE01_1C65B0
 
-#include <baselib/forward.h>
 #include <melee/gr/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1C65B0 */ void grAnime_801C65B0(UnkArchiveStruct*);
 /* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj*, HSD_AnimJoint*,

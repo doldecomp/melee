@@ -45,9 +45,9 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

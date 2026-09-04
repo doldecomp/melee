@@ -3,7 +3,7 @@
 #ifndef GALE01_152634
 #define GALE01_152634
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 152634 */ void ftMh_RockCrushDown_Anim(HSD_GObj* gobj);
 /* 152670 */ void ftMh_RockCrushDown_IASA(HSD_GObj* gobj);

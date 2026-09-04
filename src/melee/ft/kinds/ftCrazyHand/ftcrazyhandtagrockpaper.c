@@ -2,14 +2,14 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "ft/fighter.h"
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCrazyHand/ftcrazyhandtagcancel.h"
 #include "pl/player.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 void fn_8015AAC8(Fighter_GObj* gobj)
 {

@@ -1,7 +1,5 @@
 #include "itlinkarrow.h"
 
-#include "baselib/gobj.h"
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -21,6 +19,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH

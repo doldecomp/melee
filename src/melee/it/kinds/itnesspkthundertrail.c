@@ -14,7 +14,7 @@
 #include "it/kinds/itnesspkthunderball.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6C08[] = {
     { 0, itNesspkthundertrail_UnkMotion0_Anim,

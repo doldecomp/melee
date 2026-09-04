@@ -1,7 +1,7 @@
 #ifndef GALE01_1582D8
 #define GALE01_1582D8
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1582D8 */ void fn_801582D8(HSD_GObj* gobj);
 /* 158340 */ void ftCh_PaperCrush_Anim(HSD_GObj* gobj);

@@ -3,8 +3,8 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
 #include <melee/gm/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 1A45E8 */ bool gm_801A45E8(int bit);
 /* 1A4624 */ int gm_801A4624(void);

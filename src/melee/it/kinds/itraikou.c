@@ -13,7 +13,7 @@
 #include "it/itgroundcoll.h"
 #include "it/types.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7DE8[] = {
     { 0, itRaikou_UnkMotion0_Anim, itRaikou_UnkMotion0_Phys,

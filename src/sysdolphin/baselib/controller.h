@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/pad.h>
-#include <baselib/rumble.h>
+#include <sysdolphin/baselib/rumble.h>
 
 typedef u32 HSD_Pad;
 

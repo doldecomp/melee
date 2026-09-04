@@ -2,8 +2,6 @@
 
 #include "types.h"
 
-#include "baselib/forward.h"
-
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -20,9 +18,11 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <math.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 const lbColl_80008D30_arg1 it_803B8610 = {
     1, 1, 361, 0, 0, 180, 0, 1, 0,

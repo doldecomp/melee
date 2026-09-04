@@ -13,10 +13,10 @@
 #include "it/item.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/memory.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;

@@ -7,8 +7,8 @@
 
 #include "lb/lb_00B0.h"
 
-#include <baselib/debug.h>
-#include <baselib/memory.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/memory.h>
 
 /* 3B73E8 */ mpIsland_Palette const mpIsland_TerrainPalette = { {
     { mp_Terrain_Rock, { 0x80, 0x60, 0x60, 0xFF } },

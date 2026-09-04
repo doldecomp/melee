@@ -13,7 +13,7 @@
 #include "it/itspawn.h"
 #include "lb/lb_00F9.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F91D0[] = {
     {

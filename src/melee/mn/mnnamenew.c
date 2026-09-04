@@ -1,6 +1,5 @@
 #include "mnnamenew.h"
 
-#include "baselib/debug.h"
 #include "dolphin/gx/GXStruct.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
@@ -17,16 +16,18 @@
 #include "mn/mnname.h"
 #include "mn/types.h"
 #include "sc/types.h"
-#include "sysdolphin/baselib/gobj.h"
-#include "sysdolphin/baselib/gobjgxlink.h"
-#include "sysdolphin/baselib/gobjobject.h"
-#include "sysdolphin/baselib/gobjplink.h"
-#include "sysdolphin/baselib/gobjproc.h"
-#include "sysdolphin/baselib/gobjuserdata.h"
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/memory.h"
-#include "sysdolphin/baselib/random.h"
-#include "sysdolphin/baselib/sislib.h"
+
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 
 typedef char* GlyphRow[4];
 
