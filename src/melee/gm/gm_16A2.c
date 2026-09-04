@@ -598,7 +598,7 @@ gm_8016A22C_header(struct lbl_8046B488_t* gp)
     return (struct gm_8016A22C_header*) gp;
 }
 
-s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
+s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
@@ -615,7 +615,7 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     lbl_8046B488.x3 = a3;
     lbl_8046B488.x4 = a4;
-    lbl_8046B488.x5 = (u8) a5;
+    lbl_8046B488.x5 = a5;
 
     lbl_8046B488.x1AC = p87;
     lbl_8046B488.x1AD = 0x21;
