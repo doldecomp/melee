@@ -30,7 +30,7 @@ void gm_8016A164(void);
 s32 fn_8016A1E4(void);
 bool gm_8016A1F8(void);
 void gm_8016A21C(StartMeleeRules*);
-s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, int, int, int,
+s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, u8, int, int,
                 u8 color, u8, u8, int opp_count, int, int, int, int, int, f32,
                 f32);
 void gm_8016A404(s32 arg0);
