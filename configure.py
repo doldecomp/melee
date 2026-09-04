@@ -1240,7 +1240,7 @@ config.libs = [
             Object(Matching, "melee/gr/grcastle.c"),
             Object(Matching, "melee/gr/grpstadium.c"),
             Object(Linkable, "melee/gr/grkongo.c"),
-            Object(Linkable, "melee/gr/grzebes.c"),
+            Object(Matching, "melee/gr/grzebes.c"),
             Object(Matching, "melee/gr/grcorneria.c"),
             Object(Matching, "melee/gr/grstory.c"),
             Object(Matching, "melee/gr/gronett.c"),

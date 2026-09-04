@@ -1134,7 +1134,7 @@ grZe_BubbleConfig const grZe_803B8044 = {
     },
 };
 
-grZe_ColorEntry table[3] = {
+static grZe_ColorEntry table[3] = {
     { -320.0f, 0.0f, 0.0f, 0.0f },
     { -80.0f, 1.0f, 20.0f, 30.0f },
     { 90.0f, 90.0f, 75.0f, 0.0f },
