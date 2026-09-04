@@ -21,7 +21,6 @@ typedef struct MnName_GObj {
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
 /* 237654 */ s32 CompareNameStrings(char* str, char* slot);
-/* 2377A4 */ void fn_802377A4(void);
 /* 2377A8 */ bool IsNameUnique(char* name);
 /* 237834 */ void DeleteName(u8);
 /* 2379BC */ bool IsNameValid(int slot);
