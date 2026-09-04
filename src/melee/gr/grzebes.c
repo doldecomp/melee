@@ -1719,11 +1719,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
-{
-    return value * scale;
-}
-
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
@@ -1941,14 +1936,14 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                         ea->x14 += clamp_vy;
                                     }
                                     if (b >= 7) {
-                                        f32 vx2 = grZebes_801DB3CC_scale(
-                                            strength, dx);
+                                        f32 vx2 = dx * strength;
                                         f32 vy2 = dy * strength;
+                                        f32 clamp_vy2 = vy2;
                                         if (vy2 < 0.0f) {
-                                            vy2 = 0.0f;
+                                            clamp_vy2 = 0.0f;
                                         }
                                         eb->x10 += vx2;
-                                        eb->x14 += vy2;
+                                        eb->x14 += clamp_vy2;
                                     }
                                 } else if (!(dist < near_rad) &&
                                            dist < far_rad)
