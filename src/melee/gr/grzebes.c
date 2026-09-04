@@ -1901,9 +1901,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             grZe_YakumonoParam* yp = yakumono_param;
+                            f32 avg_size;
                             f32 col_rad = yp->x74 / 2.0f;
-                            f32 avg_size =
+                            avg_size =
                                 ea->x18_size + grZe_8049F170[b].x18_size;
+                            (void) col_rad;
                             col_rad *= avg_size;
                             {
                                 f32 near_rad = yp->x70 / 2.0f * avg_size;
