@@ -40,6 +40,14 @@ typedef struct MnInfoDataLayout {
 
 StaticModelDesc mnInfo_804A0958;
 u8 mnInfo_804A0968[0x48];
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+#endif
+u32 gap_10_804D6C7C_sbss;
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 HSD_GObj* mnInfo_804D6C78;
 extern GXColor mn_804D4B64;
 
@@ -164,6 +172,14 @@ static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 7.3738955e28f, 1.5307577e19f, 1.7539375e19f },
     { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
 };
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+#endif
+DATA char gap_07_803EFCE0_data[8] = "";
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 #ifdef MUST_MATCH
 #pragma push
@@ -559,10 +575,6 @@ s32 mnInfo_80252758(void)
     char* top_joint = layout->top_joint;
     HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);
-
-    (void) "Can't get user_data.\n";
-    (void) __FILE__;
-    (void) "user_data";
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
