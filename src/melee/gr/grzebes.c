@@ -1979,14 +1979,13 @@ static inline f32 grZebes_Subtract(f32 lhs, f32 rhs)
 bool grZebes_801DBB60(Item_GObj* yaku)
 {
     s32 last_idx;
-    grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
     grZe_BubbleEntry* bubbles;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
 
     HSD_ASSERT(0x898, yaku);
 
-    bubbles = state->bubbles;
+    bubbles = grZe_8049F170;
 
     {
         int i;
