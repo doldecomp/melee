@@ -2023,13 +2023,11 @@ bool grZebes_801DBB60(Item_GObj* yaku)
         for (i = 0, ei = bubbles; i < 20; i++, ei++) {
             if (ei->x00_active == 1 && i != 0 && i != 6) {
                 s32 j;
-                f32 ei_x;
                 f32 ei_size;
+                f32 ei_x;
                 f32 ei_y;
                 f32 ej_x;
                 f32 ej_y;
-                f32 dx;
-                f32 dy;
                 f32 dist_sq;
 
                 ei_y = ei->x0C_y;
@@ -2039,11 +2037,8 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     if (grZe_8049F170[j].x00_active == 1 && j != 0 && j != 6) {
                         ej_x = grZe_8049F170[j].x08_x;
                         ej_y = grZe_8049F170[j].x0C_y;
-                        dx = ei_x - ej_x;
-                        dy = grZebes_Subtract(ei_y, ej_y);
-                        dx *= dx;
-                        dy *= dy;
-                        dist_sq = dx + dy;
+                        dist_sq = (ei_x - ej_x) * (ei_x - ej_x) +
+                                  (ei_y - ej_y) * (ei_y - ej_y);
                         if (max_dist_sq < dist_sq) {
                             max_dist_sq = dist_sq;
                             x1 = ei_x;
