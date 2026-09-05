@@ -1884,7 +1884,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
                         HSD_LObjGetColor(lobj2,
                                          &gp->u.mutecity2.saved_colors[j]);
                     }
-                    HSD_LObjSetColor(lobj2, gp->x6C);
+                    HSD_LObjSetColor(lobj2, gp->color_overlay.x2C_hex);
                     j++;
                     if (j >= 4) {
                         break;
