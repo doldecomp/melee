@@ -2428,6 +2428,40 @@ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
     return 0;
 }
 
+bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
+{
+    GXColor* c = &lbColl_804D36F8;
+    u32 var_r0;
+    if (c->a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        lbColl_80008FC8(arg0->x14, arg0->x8, c, &lbColl_804D36FC,
+                        arg0->x0 * arg2);
+        return true;
+    }
+    return false;
+}
+
+bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
+{
+    u32 var_r0;
+
+    if (lbColl_804D36F0.a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        lbColl_80008FC8(arg0->x14, arg0->x8, &lbColl_804D36F0,
+                        &lbColl_804D36F4, arg0->x0 * scale_y);
+        return true;
+    }
+    return false;
+}
+
 bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
 {
     Mtx sp9C;
@@ -2469,40 +2503,6 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
         }
         lbColl_DrawHitResult(var_r28, &sp90, &sp84, temp_r3, temp_r31_2,
                              temp_f31);
-        return true;
-    }
-    return false;
-}
-
-bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
-{
-    GXColor* c = &lbColl_804D36F8;
-    u32 var_r0;
-    if (c->a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        lbColl_80008FC8(arg0->x14, arg0->x8, c, &lbColl_804D36FC,
-                        arg0->x0 * arg2);
-        return true;
-    }
-    return false;
-}
-
-bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
-{
-    u32 var_r0;
-
-    if (lbColl_804D36F0.a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        lbColl_80008FC8(arg0->x14, arg0->x8, &lbColl_804D36F0,
-                        &lbColl_804D36F4, arg0->x0 * scale_y);
         return true;
     }
     return false;
