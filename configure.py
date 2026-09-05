@@ -1337,7 +1337,7 @@ config.libs = [
             Object(Linkable, "melee/mn/mndiagram2.c"),
             Object(Linkable, "melee/mn/mndiagram3.c"),
             Object(Linkable, "melee/mn/mnvibration.c"),
-            Object(Linkable, "melee/mn/mnsound.c"),
+            Object(Matching, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
             Object(Matching, "melee/mn/mnsoundtest.c"),
             Object(Matching, "melee/mn/mnlanguage.c"),
