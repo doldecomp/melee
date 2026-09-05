@@ -38,7 +38,12 @@ typedef struct {
 /* 4D78DE */ u16 hsd_804D78DE = 0;
 /* 4D78E0 */ u16 hsd_804D78E0 = 0;
 /* 4D78E2 */ static u16 hsd_804D78E2;
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
 /* 4D78E4 */ static u16 hsd_804D78E4 = 0;
+#pragma pop
+#endif
 /* 4D78E8 */ u32 hsd_804D78E8 = 0;
 /* 4D78EC */ u32 hsd_804D78EC = 0;
 /* 4D78F0 */ HSD_CObj* psCamera = NULL;
@@ -112,37 +117,38 @@ void hsd_803983A4(HSD_Generator* gen)
 void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
                         const u32* ref, const int* formBank)
 {
-    s32* base = (s32*) hsd_804D08E8;
     u16 version;
+
+    (void) hsd_804D0908;
 
     if (formBank != NULL && *formBank != *texBank) {
         OSPanic(__FILE__, 177,
                 "illigal form data (strange number of group)\n");
     }
 
-    (base + bank)[0x60 / 4] = (s32) ref;
-    (base + bank)[0x164 / 4] = *texBank;
-    (base + bank)[0x268 / 4] = (s32) (texBank + 1);
+    hsd_804D0948[bank] = (u32*) ref;
+    ((s32*) psFormGroupArray)[bank] = *texBank;
+    psTexGroupArray[bank] = (HSD_PSTexGroup**) (texBank + 1);
 
     if (formBank != NULL) {
-        (base + bank)[0x36C / 4] = (s32) (formBank + 1);
+        psNumCmdList[bank] = (HSD_PSFormGroup**) (formBank + 1);
     } else {
-        (base + bank)[0x36C / 4] = 0;
+        psNumCmdList[bank] = NULL;
     }
 
     version = *(u16*) cmdBank;
     switch (version) {
     case 0:
-        (base + bank)[0x470 / 4] = cmdBank[1];
-        (base + bank)[0x574 / 4] = (s32) (cmdBank + 2);
+        psCmdListArray[bank] = cmdBank[1];
+        ptclref_804D0E5C[bank] = (HSD_PSCmdList**) (cmdBank + 2);
         break;
     case 0x40:
     case 0x41:
     case 0x42:
     case 0x43: {
         s32 count = cmdBank[1];
-        (base + bank)[0x470 / 4] = cmdBank[2] + count;
-        (base + bank)[0x574 / 4] = (s32) (cmdBank + 3 - count);
+        psCmdListArray[bank] = cmdBank[2] + count;
+        ptclref_804D0E5C[bank] = (HSD_PSCmdList**) (cmdBank + 3 - count);
         break;
     }
     default:
@@ -685,7 +691,6 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
     UNUSED u8 pad_bot[120];
 
 #define fval (*(f32*) &hsd_804D78D0)
-#define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
 
     /* Early exit: bit 11 of kind set */
     if (pp->kind & 0x800) {
@@ -2954,7 +2959,6 @@ do_life:
     }
 
     return pp->next;
-#undef fbytes
 #undef fval
 }
 
