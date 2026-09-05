@@ -383,7 +383,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     HSD_JObj* key_jobj;
     GXColor* color_ptr;
 
-    FORCE_PAD_STACK(16);
+    PAD_STACK(16);
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     sp4C = mnNameNew_804DBF44;
@@ -739,49 +739,47 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     char* var_r4;
     char** table;
     MnNameNewDataLayout* layout;
-    u32 temp;
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    if ((s32) arg3 != 2) {
-        if (((((s32) (temp = arg3)) < ((u16) 2)) & 0xFFFFFFFF) &&
-            (((s32) ((u32) arg3)) >= 0))
-        {
-            char null;
-            s32 idx;
+    switch (arg3) {
+    case 0:
+    case 1: {
+        char null;
+        s32 idx;
 
-            if ((u8) (arg1 - 0x30) <= 1U) {
-                if ((arg2 % 2) != 0) {
-                    table = AddCharacterToName_getGlyphs(layout->upper_glyphs,
-                                                         arg1);
-                } else {
-                    table = AddCharacterToName_getGlyphs(layout->lower_glyphs,
-                                                         arg1);
-                }
-            } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
-                       (arg3 == 1 && (arg2 % 2) != 0))
-            {
-                table =
-                    AddCharacterToName_getGlyphs(layout->lower_glyphs, arg1);
-            } else {
+        if ((u8) (arg1 - 0x30) <= 1U) {
+            if ((arg2 % 2) != 0) {
                 table =
                     AddCharacterToName_getGlyphs(layout->upper_glyphs, arg1);
+            } else {
+                table =
+                    AddCharacterToName_getGlyphs(layout->lower_glyphs, arg1);
             }
-            var_r4 = arg0;
-
-            for (idx = layout->character_bytes[arg1][1] * 0;
-                 (null = (*mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
-                 (ch = table[arg2 / 2][idx] & (0xFF & 0xFFu));
-                 idx++)
-            {
-                var_r4[idx] = ch;
-            }
-            arg0[idx] = null;
+        } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
+                   (arg3 == 1 && (arg2 % 2) != 0))
+        {
+            table = AddCharacterToName_getGlyphs(layout->lower_glyphs, arg1);
+        } else {
+            table = AddCharacterToName_getGlyphs(layout->upper_glyphs, arg1);
         }
-        return arg0;
+        var_r4 = arg0;
+
+        for (idx = layout->character_bytes[arg1][1] * 0;
+             (null = *mnNameNew_NullCharacter & 0xFFFF) !=
+             (ch = table[arg2 / 2][idx] & 0xFFU);
+             idx++)
+        {
+            var_r4[idx] = ch;
+        }
+        arg0[idx] = null;
+        break;
     }
-    arg0[0] = layout->character_bytes[arg1][0];
-    arg0[1] = layout->character_bytes[arg1][1];
-    arg0[2] = layout->character_bytes[arg1][2];
+    case 2:
+        arg0[0] = layout->character_bytes[arg1][0];
+        arg0[1] = layout->character_bytes[arg1][1];
+        arg0[2] = layout->character_bytes[arg1][2];
+        break;
+    }
     return arg0;
 }
 
@@ -2076,5 +2074,5 @@ void* mnNameNew_804A06F0[4];
 
 static u8 mnNameNew_804D4F98[8] ATTRIBUTE_ALIGN(8) = { 0 };
 
-char* mnNameNew_803EE720[] = { (char*) mnNameNew_804D4F98 };
+char* mnNameNew_803EE720[] ATTRIBUTE_ALIGN(8) = { (char*) mnNameNew_804D4F98 };
 char* mnNameNew_803EE724[] = { (char*) mnNameNew_804D4F98 };
