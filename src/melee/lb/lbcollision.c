@@ -1127,7 +1127,6 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float hit_end_min_z;
     float closest_delta_y;
     float hit_start_mid_x;
     float local_delta_x;
@@ -1151,29 +1150,20 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float closest_dist_sq;
     float local_delta_y;
     float hurt_param_from_hit_start;
-    float hurt_delta_z;
     float x_work;
+    float y_work;
     float start_delta_z;
-    float hit_end_min_x;
-    float hit_start_min_x;
-    float hit_end_max_x;
     float hit_start_mid_z;
     float closest_delta_z;
     float local_delta_z;
     float hurt_start_dot;
     float contact_lerp;
     float broadphase_radius;
-    float y_work;
-    float hit_end_min_y;
-    float hit_start_min_y;
-    float hit_end_max_y;
-    float hit_end_max_z;
+    float hurt_delta_z;
     float hit_end_x;
     float hit_len_sq;
     float hit_start_y;
-    float hit_start_max_z;
     float start_delta_x;
-    float hit_start_min_z;
     float hurt_closest_z;
     float hit_start_z;
     float segment_dot;
@@ -1197,82 +1187,62 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_start_copy = *hurt_start;
     hit_end_x = hit_end->x;
     if (hit_start_copy.x > hit_end_x) {
-        x_work = hit_start_copy.x + broadphase_radius;
-        if ((x_work < hurt_start_copy.x) && (x_work < hurt_end->x)) {
+        float bound = hit_start_copy.x + broadphase_radius;
+        if (bound < hurt_start_copy.x && bound < hurt_end->x) {
             return false;
         }
-        hit_end_min_x = hit_end_x - broadphase_radius;
-        if ((hit_end_min_x > hurt_start_copy.x) &&
-            (hit_end_min_x > hurt_end->x))
-        {
+        bound = hit_end_x - broadphase_radius;
+        if (bound > hurt_start_copy.x && bound > hurt_end->x) {
             return false;
         }
     } else {
-        hit_start_min_x = hit_start_copy.x - broadphase_radius;
-        if ((hit_start_min_x > hurt_start_copy.x) &&
-            (hit_start_min_x > hurt_end->x))
-        {
+        float bound = hit_start_copy.x - broadphase_radius;
+        if (bound > hurt_start_copy.x && bound > hurt_end->x) {
             return false;
         }
-        hit_end_max_x = hit_end_x + broadphase_radius;
-        if ((hit_end_max_x < hurt_start_copy.x) &&
-            (hit_end_max_x < hurt_end->x))
-        {
+        bound = hit_end_x + broadphase_radius;
+        if (bound < hurt_start_copy.x && bound < hurt_end->x) {
             return false;
         }
     }
     hit_start_y = hit_start_copy.y;
     if (hit_start_y > hit_end->y) {
-        y_work = hit_start_y + broadphase_radius;
-        if ((y_work < hurt_start_copy.y) && (y_work < hurt_end->y)) {
+        float bound = hit_start_y + broadphase_radius;
+        if (bound < hurt_start_copy.y && bound < hurt_end->y) {
             return false;
         }
-        hit_end_min_y = hit_end->y - broadphase_radius;
-        if ((hit_end_min_y > hurt_start_copy.y) &&
-            (hit_end_min_y > hurt_end->y))
-        {
+        bound = hit_end->y - broadphase_radius;
+        if (bound > hurt_start_copy.y && bound > hurt_end->y) {
             return false;
         }
     } else {
-        hit_start_min_y = hit_start_y - broadphase_radius;
-        if ((hit_start_min_y > hurt_start_copy.y) &&
-            (hit_start_min_y > hurt_end->y))
-        {
+        float bound = hit_start_y - broadphase_radius;
+        if (bound > hurt_start_copy.y && bound > hurt_end->y) {
             return false;
         }
-        hit_end_max_y = hit_end->y + broadphase_radius;
-        if ((hit_end_max_y < hurt_start_copy.y) &&
-            (hit_end_max_y < hurt_end->y))
-        {
+        bound = hit_end->y + broadphase_radius;
+        if (bound < hurt_start_copy.y && bound < hurt_end->y) {
             return false;
         }
     }
     hit_start_z = hit_start_copy.z;
     if (hit_start_z > hit_end->z) {
-        hit_start_max_z = hit_start_z + broadphase_radius;
-        if ((hit_start_max_z < hurt_start_copy.z) &&
-            (hit_start_max_z < hurt_end->z))
-        {
+        float bound = hit_start_z + broadphase_radius;
+        if (bound < hurt_start_copy.z && bound < hurt_end->z) {
             return false;
         }
-        hit_end_min_z = hit_end->z - broadphase_radius;
-        if ((hit_end_min_z > hurt_start_copy.z) &&
-            (hit_end_min_z > hurt_end->z))
-        {
+        bound = hit_end->z - broadphase_radius;
+        if (bound > hurt_start_copy.z && bound > hurt_end->z) {
             return false;
         }
     } else {
-        hit_start_min_z = hit_start_z - broadphase_radius;
-        if ((hit_start_min_z > hurt_start_copy.z) &&
-            (hit_start_min_z > hurt_end->z))
-        {
+        float bound = hit_start_z - broadphase_radius;
+        if (bound > hurt_start_copy.z && bound > hurt_end->z) {
             return false;
         }
-        hit_end_max_z = hit_end->z;
-        hit_end_max_z += broadphase_radius;
-        if ((hit_end_max_z < hurt_start_copy.z) &&
-            (hit_end_max_z < hurt_end->z))
-        {
+        bound = hit_end->z;
+        bound += broadphase_radius;
+        if (bound < hurt_start_copy.z && bound < hurt_end->z) {
             return false;
         }
     }
