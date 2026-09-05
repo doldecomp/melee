@@ -1327,7 +1327,7 @@ config.libs = [
         [
             Object(Matching, "melee/mn/mnmain.c"),
             Object(Matching, "melee/mn/mn_22EC.c"),
-            Object(Linkable, "melee/mn/mnmainrule.c"),
+            Object(Matching, "melee/mn/mnmainrule.c"),
             Object(Linkable, "melee/mn/mnruleplus.c"),
             Object(Linkable, "melee/mn/mnitemsw.c"),
             Object(Linkable, "melee/mn/mnstagesw.c"),
