@@ -1,8 +1,4 @@
-#include "lb/lblanguage.h"
-#include "mn/types.h"
-#define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"
-#include "mndiagram2.static.h"
 
 #include "dolphin/types.h"
 #include "gm/gm_1601.h"
@@ -12,12 +8,14 @@
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mndiagram2.h"
 #include "mn/mndiagram3.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
+#include "mn/types.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -197,7 +195,7 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
     return distance / 100;
 }
 
-s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index)
+s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 player_attacks;
     f32 tag_player_attacks;
@@ -259,7 +257,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
+s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 {
     f32 temp_f31;
     f32 temp_f31_2;
