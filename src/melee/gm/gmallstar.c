@@ -266,9 +266,8 @@ void gm_801B5ACC(GameModeState* arg0)
             u8* p;
             do {
                 slot = HSD_Randi(CKIND_PLAYABLE_COUNT);
-                p = (u8*) allstar + slot;
-                slot_ptr = p + 0x76;
-            } while ((s32) p[0x76] != CHKIND_NONE);
+                slot_ptr = (p = (u8*) allstar + slot) + 0x76;
+            } while ((s32) *slot_ptr != CHKIND_NONE);
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
 
