@@ -1562,15 +1562,14 @@ static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
     HSD_SetEraseColor(color.r, color.g, color.b, color.a);
 }
 
-static inline HSD_ImageDesc*
-fn_80179990_get_player_img1(int slot)
+static inline HSD_ImageDesc* fn_80179990_get_player_img1(int slot)
 {
     HSD_ImageDesc* image_desc = lbl_8046E1B0.player_img1;
     return &image_desc[slot];
 }
 
-static inline HSD_ImageDesc*
-fn_80179990_copy_player_image(int slot, int lookup)
+static inline HSD_ImageDesc* fn_80179990_copy_player_image(int slot,
+                                                           int lookup)
 {
     HSD_ImageDesc* image_desc = lbl_8046E1B0.player_img2;
     HSD_ImageDesc* desc = &image_desc[slot];
@@ -1624,8 +1623,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                     s32 x_offset =
                         ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] / 4) * 2;
                     HSD_ImageDescCopyFromEFB(
-                        fn_80179990_get_player_img1(arg2),
-                        0x140 - x_offset,
+                        fn_80179990_get_player_img1(arg2), 0x140 - x_offset,
                         0xF4 -
                             ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] / 2) *
                                 2,
@@ -1633,7 +1631,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 }
 
                 HSD_CObjEraseScreen(cobj, 1, 1, 1);
-                HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C, 1, 0);
+                HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C,
+                                         1, 0);
                 HSD_CObjEndCurrent();
 
                 if (!lbl_8046E3AC.x0_4) {
@@ -1674,8 +1673,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                             0, 0);
 
                         HSD_CObjEraseScreen(cobj, 1, 1, 1);
-                        HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E,
-                                                 0x7C, 1, 0);
+                        HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img,
+                                                 0x10E, 0x7C, 1, 0);
                         HSD_CObjEndCurrent();
 
                         *player_flags = 1;
@@ -2108,10 +2107,11 @@ void fn_8017AA78(const u8* arg0)
     for (i = 0; i < 4; i++) {
         lbl_8046E3AC.player_flags[i] = 0;
         lbl_8046E3AC.costume_override[i] = arg0[i];
-        if ((u8) lbl_8046E3AC.match_end.outcome == OUTCOME_NO_CONTEST) {
+        if (lbl_8046E3AC.match_end.outcome == OUTCOME_NO_CONTEST) {
             lbl_8046E3AC.match_end.player_standings[i].is_big_loser = 1;
             lbl_8046E3AC.match_end
-                .team_standings[lbl_8046E3AC.match_end.player_standings[i].team]
+                .team_standings[lbl_8046E3AC.match_end.player_standings[i]
+                                    .team]
                 .is_big_loser = 1;
         }
         lbl_8046E3AC.x6[i] = 0;
