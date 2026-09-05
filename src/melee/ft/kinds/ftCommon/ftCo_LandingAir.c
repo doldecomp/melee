@@ -1,8 +1,8 @@
 #include "ftCo_LandingAir.h"
 
+#include "forward.h"
 #include "ftCo_Landing.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

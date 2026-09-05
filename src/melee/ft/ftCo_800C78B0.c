@@ -7,7 +7,6 @@
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_Damage.h"
 #include "kinds/ftCommon/ftCo_Lift.h"
 #include "kinds/ftCommon/ftCo_Throw.h"

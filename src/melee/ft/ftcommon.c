@@ -1,6 +1,7 @@
 #include "ftcommon.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
 #include "ft_0881.h"
@@ -15,8 +16,6 @@
 #include "ftmetal.h"
 #include "ftparts.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/ftCommon/ftCo_Damage.h"
 #include "kinds/ftCommon/ftCo_DamageFall.h"

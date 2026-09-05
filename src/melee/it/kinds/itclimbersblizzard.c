@@ -1,6 +1,7 @@
 #include "itclimbersblizzard.h"
 
 #include "forward.h"
+
 #include <melee/it/forward.h>
 
 #include <math.h>

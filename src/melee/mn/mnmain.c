@@ -1,5 +1,6 @@
 #include "mnmain.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "mncount.h"
 #include "mndatadel.h"
@@ -19,7 +20,6 @@
 #include "mnvibration.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/gm/forward.h>
 
 #include <math.h>

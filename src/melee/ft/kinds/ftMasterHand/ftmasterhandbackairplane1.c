@@ -1,8 +1,7 @@
 #include "ftmasterhandbackairplane1.h"
 
-#include "ftmasterhandbackairplane2.h"
-
 #include "forward.h"
+#include "ftmasterhandbackairplane2.h"
 
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>

@@ -1,8 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_TYPES_H
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
-#include "forward.h"         // IWYU pragma: export
+#include "forward.h" // IWYU pragma: export
+
 #include "ftMario/forward.h" // IWYU pragma: export
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>

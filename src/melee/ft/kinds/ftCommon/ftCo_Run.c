@@ -1,5 +1,6 @@
 #include "ftCo_Run.h"
 
+#include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_AttackDash.h"
@@ -11,7 +12,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

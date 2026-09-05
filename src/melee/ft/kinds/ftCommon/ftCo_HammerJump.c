@@ -1,11 +1,11 @@
 #include "ftCo_HammerJump.h"
 
+#include "forward.h"
 #include "ftCo_HammerFall.h"
 #include "ftCo_HammerKneeBend.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_Jump.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

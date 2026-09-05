@@ -17,7 +17,6 @@
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_AppealS.h"
 #include "kinds/ftCommon/ftCo_Attack1.h"
 #include "kinds/ftCommon/ftCo_Attack100.h"

@@ -1,5 +1,6 @@
 #include "grzebes.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grdatfiles.h"
 #include "grdisplay.h"
@@ -7,8 +8,6 @@
 #include "grmaterial.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

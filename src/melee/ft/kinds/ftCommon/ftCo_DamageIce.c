@@ -1,5 +1,6 @@
 #include "ftCo_DamageIce.h"
 
+#include "forward.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
@@ -14,7 +15,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>

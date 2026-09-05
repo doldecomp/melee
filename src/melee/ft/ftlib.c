@@ -1,6 +1,7 @@
 #include "ftlib.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
 #include "ft_0D4D.h"
@@ -11,9 +12,7 @@
 #include "ftmetal.h"
 #include "ftparts.h"
 
-#include "forward.h"
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftGameWatch/ftgamewatch.h"
 #include "kinds/ftKirby/ftkirby.h"
 

@@ -1,12 +1,11 @@
 #include "ftzelda.h"
 
+#include "forward.h"
 #include "ftzeldaspecialhi.h"
 #include "ftzeldaspeciallw.h"
 #include "ftzeldaspecialn.h"
 #include "ftzeldaspecials.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

@@ -1,9 +1,8 @@
 #include "vi0501.h"
 
+#include "forward.h"
 #include "types.h"
 #include "vi.h"
-
-#include "forward.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

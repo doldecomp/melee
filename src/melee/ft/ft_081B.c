@@ -1,6 +1,7 @@
 #include "ft_081B.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_0819.h"
 #include "ft_0892.h"
 #include "ftchangeparam.h"
@@ -12,9 +13,7 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_Landing.h"
 #include "kinds/ftCommon/ftCo_MissFoot.h"

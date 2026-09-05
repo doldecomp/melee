@@ -1,5 +1,6 @@
 #include "ftCo_ItemThrow.h"
 
+#include "forward.h"
 #include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Lift.h"
@@ -7,7 +8,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

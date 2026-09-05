@@ -1,14 +1,13 @@
 #include "ftswing.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ft_0CD1.h"
 #include "ftlipstickswing.h"
 #include "ftstarrodswing.h"
 #include "inlines.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/ftCommon/ftCo_FallSpecial.h"
 #include "kinds/ftCommon/ftpickupitem.h"

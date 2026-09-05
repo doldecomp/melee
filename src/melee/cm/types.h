@@ -2,6 +2,7 @@
 #define MELEE_CM_TYPES_H
 
 #include "cm/forward.h" // IWYU pragma: export
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

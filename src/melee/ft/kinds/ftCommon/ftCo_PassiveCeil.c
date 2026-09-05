@@ -1,11 +1,10 @@
 #include "ftCo_PassiveCeil.h"
 
+#include "forward.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>

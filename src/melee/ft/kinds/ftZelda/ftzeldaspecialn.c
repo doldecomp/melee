@@ -1,8 +1,8 @@
 #include "ftzeldaspecialn.h"
 
+#include "forward.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

@@ -1,5 +1,6 @@
 #include "ftCo_DownBound.h"
 
+#include "forward.h"
 #include "ftCo_09F7.h"
 #include "ftCo_Down.h"
 #include "ftCo_DownAttack.h"
@@ -8,8 +9,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>

@@ -1,5 +1,6 @@
 #include "groldkongo.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grmaterial.h"
 #include "ground.h"
@@ -7,7 +8,6 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/lb/forward.h>
 
 #include <melee/cm/camera.h>

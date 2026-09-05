@@ -1,9 +1,9 @@
 #include "ftlinkspecials.h"
 
+#include "forward.h"
 #include "ftlink.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

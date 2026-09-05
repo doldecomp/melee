@@ -1,5 +1,6 @@
 #include "grheal.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -7,8 +8,6 @@
 #include "stage.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <dolphin/types.h>
 #include <melee/gm/gm_18A1.h>

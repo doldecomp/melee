@@ -1,5 +1,6 @@
 #include "it_26B1.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "it_2725.h"
 #include "it_3F14.h"
@@ -9,8 +10,6 @@
 #include "ithitbox.h"
 #include "itspawn.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/itbat.h"
 #include "kinds/itbombhei.h"

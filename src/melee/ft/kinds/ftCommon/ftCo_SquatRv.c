@@ -1,5 +1,6 @@
 #include "ftCo_SquatRv.h"
 
+#include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_Attack100.h"
@@ -13,7 +14,6 @@
 #include "ftCo_Jump.h"
 #include "ftCo_Walk.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>

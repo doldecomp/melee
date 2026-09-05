@@ -1,5 +1,6 @@
 #include "grgreatbay.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grdisplay.h"
 #include "grlib.h"
@@ -9,8 +10,6 @@
 #include "stage.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftdevice.h>

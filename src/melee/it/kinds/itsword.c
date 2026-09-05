@@ -2,12 +2,11 @@
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
 #include "itsword.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "types.h" // IWYU pragma: keep
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

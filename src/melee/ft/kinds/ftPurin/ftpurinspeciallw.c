@@ -1,8 +1,8 @@
 #include "ftpurinspeciallw.h"
 
+#include "forward.h"
 #include "ftpurinspecialhi.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

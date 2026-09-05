@@ -1,6 +1,7 @@
 #include "ft_0C31.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ftcolanim.h"
 #include "ftcoll.h"
@@ -9,9 +10,7 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/types.h"
 
 #include <dolphin/mtx.h>

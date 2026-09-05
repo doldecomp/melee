@@ -1,11 +1,10 @@
 #include "itpikachutjoltair.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "itpikachutjoltground.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <math.h>
 #include <melee/db/db.h>

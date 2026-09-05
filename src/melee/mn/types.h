@@ -2,6 +2,7 @@
 #define MELEE_MN_TYPES_H
 
 #include "mn/forward.h" // IWYU pragma: export
+
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

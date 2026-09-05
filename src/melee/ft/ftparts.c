@@ -1,6 +1,7 @@
 #include "ftparts.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ftdata.h"
 #include "ftmaterial.h"
 
@@ -10,8 +11,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <melee/lb/lbrefract.h>

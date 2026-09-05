@@ -1,12 +1,11 @@
 #include "ftdynamics.h"
 
+#include "forward.h"
 #include "ftcoll.h"
 #include "inlines.h"
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include "kinds/ftKirby/ftkirby.h"
 

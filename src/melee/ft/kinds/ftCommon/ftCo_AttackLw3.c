@@ -1,5 +1,6 @@
 #include "ftCo_AttackLw3.h"
 
+#include "forward.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
@@ -16,7 +17,6 @@
 #include "ftpickupitem.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

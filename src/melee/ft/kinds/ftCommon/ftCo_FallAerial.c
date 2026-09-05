@@ -1,8 +1,8 @@
 #include "ftCo_FallAerial.h"
 
+#include "forward.h"
 #include "ftCo_Fall.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

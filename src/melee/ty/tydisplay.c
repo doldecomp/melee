@@ -1,11 +1,10 @@
 #include "tydisplay.h"
 
+#include "forward.h"
 #include "toy.h"
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <math.h>
 #include <stddef.h>

@@ -5,9 +5,9 @@
 #include <platform.h>
 
 #include "ft/types.h"
-
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
+
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>

@@ -1,12 +1,12 @@
 #include "ftcaptain.h"
 
+#include "forward.h"
 #include "ftcaptainspecialhi.h"
 #include "ftcaptainspeciallw.h"
 #include "ftcaptainspecialn.h"
 #include "ftcaptainspecials.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/ft_0CD1.h>

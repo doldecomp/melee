@@ -4,6 +4,7 @@
 #include "class.h"
 #include "debug.h"
 #include "displayfunc.h"
+#include "forward.h"
 #include "id.h"
 #include "jobj.h"
 #include "memory.h"
@@ -12,8 +13,6 @@
 #include "state.h"
 #include "tobj.h"
 #include "util.h"
-
-#include "forward.h"
 
 #include <math.h> // IWYU pragma: keep
 #include <string.h>

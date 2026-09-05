@@ -1,10 +1,10 @@
 #include "ftyoshispeciallw.h"
 
+#include "forward.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

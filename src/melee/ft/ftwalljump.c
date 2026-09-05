@@ -4,7 +4,6 @@
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_PassiveWall.h"
 
 #include <dolphin/mtx.h>

@@ -1,9 +1,9 @@
 #include "mnsoundtest.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/os.h>

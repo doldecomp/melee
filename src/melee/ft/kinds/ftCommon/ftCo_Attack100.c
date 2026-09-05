@@ -1,11 +1,11 @@
 #include "ftCo_Attack100.h"
 
+#include "forward.h"
 #include "ftpickupitem.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>

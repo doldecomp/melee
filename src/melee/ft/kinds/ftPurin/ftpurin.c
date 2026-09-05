@@ -1,5 +1,6 @@
 #include "ftpurin.h"
 
+#include "forward.h"
 #include "ftpurinspecialhi.h"
 #include "ftpurinspeciallw.h"
 #include "ftpurinspecialn.h"
@@ -8,7 +9,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ef/efsync.h>

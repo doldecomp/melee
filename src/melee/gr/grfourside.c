@@ -1,5 +1,6 @@
 #include "grfourside.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grdisplay.h"
 #include "ground.h"
@@ -9,8 +10,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <m2c_macros.h>
 #include <dolphin/mtx.h>

@@ -2,6 +2,7 @@
 #define MELEE_MP_TYPES_H
 
 #include "mp/forward.h" // IWYU pragma: export
+
 #include <melee/gr/forward.h>
 
 #include <dolphin/gx/GXStruct.h>

@@ -1,8 +1,8 @@
 #include "ftCo_KinokoGiantStart.h"
 
+#include "forward.h"
 #include "ftCo_KinokoSmallEnd.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>

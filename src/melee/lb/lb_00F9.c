@@ -1,5 +1,6 @@
 #include "lb_00F9.h"
 
+#include "forward.h"
 #include "lbcollision.h"
 #include "lbspdisplay.h"
 #include "lbvector.h"
@@ -7,7 +8,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>

@@ -4,7 +4,6 @@
 #include "itzako.h"
 
 #include "kinds/forward.h"
-
 #include "kinds/it_2ADA.h"
 #include "kinds/it_2E5A.h"
 #include "kinds/it_2F28.h"

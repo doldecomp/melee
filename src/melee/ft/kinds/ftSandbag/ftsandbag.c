@@ -1,6 +1,7 @@
 #include "ftsandbag.h"
 
 #include "forward.h"
+
 #include <melee/ft/forward.h>
 
 #include <math.h>

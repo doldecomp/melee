@@ -1,9 +1,8 @@
 #include "ftdonkeyspecialhi.h"
 
+#include "forward.h"
 #include "ftdonkey.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>

@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "ftCommon/forward.h" // IWYU pragma: export
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>

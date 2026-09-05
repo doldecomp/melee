@@ -1,5 +1,6 @@
 #include "ftdonkey.h"
 
+#include "forward.h"
 #include "ftdonkeyheavyfall.h"
 #include "ftdonkeyheavyjump.h"
 #include "ftdonkeyheavylanding.h"
@@ -13,7 +14,6 @@
 #include "ftdonkeyspecials.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>

@@ -1,5 +1,6 @@
 #include "gricemt.h"
 
+#include "forward.h"
 #include "grdatfiles.h"
 #include "grlib.h"
 #include "grmaterial.h"
@@ -11,7 +12,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/types.h>

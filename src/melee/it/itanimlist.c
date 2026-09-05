@@ -1,5 +1,6 @@
 #include "itanimlist.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "it_2725.h"
 #include "it_3F14.h"
@@ -7,8 +8,6 @@
 #include "iteffect.h"
 #include "item.h"
 #include "ithitbox.h"
-
-#include "forward.h"
 
 #include <melee/lb/inlines.h>
 #include <melee/lb/lb_013B.h>

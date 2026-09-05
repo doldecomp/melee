@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTNESS_TYPES_H
 
 #include "ftNess/forward.h" // IWYU pragma: export
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

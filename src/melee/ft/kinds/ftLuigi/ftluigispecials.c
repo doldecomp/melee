@@ -1,8 +1,8 @@
 #include "ftluigispecials.h"
 
+#include "forward.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 

@@ -1,9 +1,9 @@
 #include "ftCo_AttackLw4.h"
 
+#include "forward.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

@@ -10,7 +10,6 @@
 #include <placeholder.h>
 
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_DamageFall.h"
 #include "kinds/ftCommon/ftCo_DownBound.h"
 #include "kinds/ftKirby/ftkirby.h"

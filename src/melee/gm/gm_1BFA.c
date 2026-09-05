@@ -1,11 +1,11 @@
 #include "gm_1BFA.h"
 
+#include "forward.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/lb/forward.h>
 
 #include <melee/if/if_2FD9.h>

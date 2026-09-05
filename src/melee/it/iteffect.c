@@ -1,10 +1,9 @@
 #include "iteffect.h"
 
+#include "forward.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <math.h>
 #include <melee/ef/efasync.h>

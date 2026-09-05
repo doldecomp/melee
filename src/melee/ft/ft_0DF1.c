@@ -1,11 +1,10 @@
 #include "ft_0DF1.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ftcommon.h"
 #include "inlines.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <stdbool.h>
 #include <melee/gm/gm_unsplit.h>

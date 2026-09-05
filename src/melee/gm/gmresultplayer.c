@@ -1,5 +1,6 @@
 #include "gmresultplayer.h"
 
+#include "forward.h"
 #include "gm_1601.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
@@ -7,8 +8,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>

@@ -1,11 +1,10 @@
 #include "ft_0CDD.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ft_084E.h"
 #include "ftcommon.h"
-
-#include "forward.h"
 
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftpickupitem.h"

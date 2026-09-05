@@ -1,12 +1,11 @@
 #include "gmmain_lib.h"
 
+#include "forward.h"
 #include "gm_unsplit.h"
 #include "gmhomerun.h"
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>

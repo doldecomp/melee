@@ -1,11 +1,10 @@
 #include "ftCo_CaptureMewtwo.h"
 
+#include "forward.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
 #include "ftCo_ThrownMewtwo.h"
-
-#include "forward.h"
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>

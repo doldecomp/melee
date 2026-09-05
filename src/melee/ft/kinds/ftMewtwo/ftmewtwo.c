@@ -1,12 +1,12 @@
 #include "ftmewtwo.h"
 
+#include "forward.h"
 #include "ftmewtwospecialhi.h"
 #include "ftmewtwospeciallw.h"
 #include "ftmewtwospecialn.h"
 #include "ftmewtwospecials.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>

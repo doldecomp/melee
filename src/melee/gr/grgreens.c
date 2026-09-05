@@ -1,5 +1,6 @@
 #include "grgreens.h"
 
+#include "forward.h"
 #include "grdisplay.h"
 #include "grlib.h"
 #include "grmaterial.h"
@@ -9,8 +10,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>

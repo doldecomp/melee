@@ -1,13 +1,12 @@
 #include "gryorster.h"
 
+#include "forward.h"
 #include "grdisplay.h"
 #include "grlib.h"
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-
-#include "forward.h"
 
 #include <melee/ft/ftlib.h>
 #include <melee/it/it_26B1.h>

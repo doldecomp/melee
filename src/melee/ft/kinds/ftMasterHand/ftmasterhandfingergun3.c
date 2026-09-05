@@ -1,8 +1,8 @@
 #include "ftmasterhandfingergun3.h"
 
+#include "forward.h"
 #include "ftmasterhandwait12.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

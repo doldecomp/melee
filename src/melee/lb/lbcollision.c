@@ -1,13 +1,12 @@
 #include "lbcollision.h"
 
+#include "forward.h"
 #include "lb_00B0.h"
 #include "lbaudio_ax.h"
 #include "lbvector.h"
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <math.h>
 #include <dolphin/gx.h>

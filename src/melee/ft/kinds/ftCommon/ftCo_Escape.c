@@ -1,9 +1,9 @@
 #include "ftCo_Escape.h"
 
+#include "forward.h"
 #include "ftCo_ItemThrow.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

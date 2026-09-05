@@ -1,3 +1,4 @@
+#include "forward.h"
 #include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
@@ -6,7 +7,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/gm/gm_1A3F.h>

@@ -33,14 +33,6 @@ IncludeCategories:
     Priority: 1
   - Regex: '^<placeholder\.h>$'
     Priority: 1
-  - Regex: '^"forward\.h"$'
-    Priority: 2
-  - Regex: '^".*/forward\.h"$'
-    Priority: 2
-  - Regex: '^<dolphin(/.*)?/forward\.h>$'
-    Priority: 2
-  - Regex: '^<sysdolphin/baselib(/.*)?/forward\.h>$'
-    Priority: 2
   - Regex: '^".*\.static\.h"$'
     Priority: 1
   - Regex: '^<(.*/)?forward\.h>$'

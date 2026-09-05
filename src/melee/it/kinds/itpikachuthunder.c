@@ -1,8 +1,8 @@
 #include "itpikachuthunder.h"
 
-#include <placeholder.h>
-
 #include "forward.h"
+
+#include <placeholder.h>
 
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>

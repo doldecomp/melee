@@ -2,6 +2,7 @@
 
 #include "cobj.h"
 #include "fog.h"
+#include "forward.h"
 #include "lobj.h"
 #include "mtx.h"
 #include "particle.h"
@@ -9,8 +10,6 @@
 #include "psstructs.h"
 #include "state.h"
 #include "util.h"
-
-#include "forward.h"
 
 #include <string.h>
 #include <dolphin/gx.h>

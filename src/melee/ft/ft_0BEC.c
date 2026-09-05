@@ -1,12 +1,11 @@
 #include "ft_0BEC.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ftparts.h"
 #include "types.h"
 
-#include "forward.h"
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftFox/types.h"
 #include "kinds/ftMario/ftmariospecialn.h"
 

@@ -1,9 +1,9 @@
+#include "forward.h"
 #include "ftkirby.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <math.h>

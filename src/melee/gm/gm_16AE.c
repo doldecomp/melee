@@ -1,5 +1,7 @@
 #include "gm_16AE.h"
 
+#include "forward.h"
+
 #include "gm_16AE.static.h"
 
 #include "gm_1884.h"
@@ -8,8 +10,6 @@
 #include "gmmain_lib.h"
 #include "gmmultiman.h"
 #include "gmpause.h"
-
-#include "forward.h"
 
 #include <string.h>
 #include <dolphin/pad.h>

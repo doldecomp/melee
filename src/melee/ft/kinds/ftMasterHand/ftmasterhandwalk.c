@@ -1,9 +1,8 @@
 #include "ftmasterhandwalk.h"
 
+#include "forward.h"
 #include "ftmasterhandslap.h"
 #include "ftmasterhandwait12.h"
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>

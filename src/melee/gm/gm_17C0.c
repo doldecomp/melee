@@ -1,3 +1,4 @@
+#include "forward.h"
 #include "gm_18A1.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
@@ -5,7 +6,6 @@
 #include "gmregcommon.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/cm/camera.h>

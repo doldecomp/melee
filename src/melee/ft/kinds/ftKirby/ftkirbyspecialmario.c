@@ -1,7 +1,7 @@
+#include "forward.h"
 #include "ftkirby.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

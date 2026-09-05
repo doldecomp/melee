@@ -1,11 +1,11 @@
 
 #include "ftcaptainspeciallw.h"
 
+#include "forward.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

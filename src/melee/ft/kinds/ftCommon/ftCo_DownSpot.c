@@ -1,8 +1,8 @@
 #include "ftCo_DownSpot.h"
 
+#include "forward.h"
 #include "ftCo_DownBound.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

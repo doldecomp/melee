@@ -1,9 +1,9 @@
 #include "ftmewtwospecialn.h"
 
+#include "forward.h"
 #include "ftmewtwo.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 

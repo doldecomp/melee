@@ -1,6 +1,7 @@
 #include "ft_0DF0.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_0877.h"
 #include "ftcolanim.h"
 #include "ftcommon.h"
@@ -8,8 +9,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <stdbool.h>
 #include <Runtime/platform.h>

@@ -1,5 +1,6 @@
 #include "ftcrazyhand.h"
 
+#include "forward.h"
 #include "ftcrazyhandbackairplane1.h"
 #include "ftcrazyhandbackairplane2.h"
 #include "ftcrazyhandbackairplane3.h"
@@ -32,7 +33,6 @@
 #include "ftcrazyhandwalk.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

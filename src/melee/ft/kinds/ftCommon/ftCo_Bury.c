@@ -1,5 +1,6 @@
 #include "ftCo_Bury.h"
 
+#include "forward.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_AttackAir.h"
@@ -18,7 +19,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>

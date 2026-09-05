@@ -1,11 +1,10 @@
 #include "ftdata.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_0877.h"
 #include "inlines.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/ftCaptain/ftcaptain.h"
 #include "kinds/ftCaptain/ftcaptainspecialhi.h"

@@ -1,12 +1,11 @@
 #include "ftseak.h"
 
+#include "forward.h"
 #include "ftseakspecialhi.h"
 #include "ftseakspeciallw.h"
 #include "ftseakspecialn.h"
 #include "ftseakspecials.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>

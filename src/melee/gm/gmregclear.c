@@ -1,9 +1,9 @@
 #include "gmregclear.h"
 
+#include "forward.h"
 #include "gm_unsplit.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/pad.h>

@@ -1,10 +1,10 @@
 #include "ftCo_AttackS3.h"
 
+#include "forward.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

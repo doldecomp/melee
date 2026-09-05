@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTFOX_TYPES_H
 
 #include "ftFox/forward.h" // IWYU pragma: export
+
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

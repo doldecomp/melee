@@ -1,12 +1,12 @@
 #include "ftyoshi.h"
 
+#include "forward.h"
 #include "ftyoshiguard.h"
 #include "ftyoshispecialhi.h"
 #include "ftyoshispecialn.h"
 #include "ftyoshispecials.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>

@@ -1,6 +1,7 @@
 #include "ftCo_KinokoGiantEnd.h"
 
 #include "forward.h"
+
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

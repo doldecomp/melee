@@ -1,6 +1,7 @@
 #include "ft_0C8C.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_0877.h"
 #include "ft_0D4D.h"
 #include "ftCo_800C7CA0.h"
@@ -8,8 +9,6 @@
 #include "ftcommon.h"
 #include "inlines.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftCo_CaptureCut.h"

@@ -1,11 +1,11 @@
 #include "ftCo_ThrownKirby.h"
 
+#include "forward.h"
 #include "ftCo_Fall.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

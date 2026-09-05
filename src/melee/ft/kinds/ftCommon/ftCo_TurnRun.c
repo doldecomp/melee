@@ -1,12 +1,12 @@
 #include "ftCo_TurnRun.h"
 
+#include "forward.h"
 #include "ftCo_Fall.h"
 #include "ftCo_Jump.h"
 #include "ftCo_Run.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

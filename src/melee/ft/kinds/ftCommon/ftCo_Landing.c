@@ -1,5 +1,6 @@
 #include "ftCo_Landing.h"
 
+#include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_Attack100.h"
@@ -21,7 +22,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>

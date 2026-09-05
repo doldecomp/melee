@@ -1,8 +1,7 @@
 #include "itmaterial.h"
 
-#include "inlines.h"
-
 #include "forward.h"
+#include "inlines.h"
 
 #include <melee/ft/ftdevice.h>
 #include <melee/lb/lb_00B0.h>

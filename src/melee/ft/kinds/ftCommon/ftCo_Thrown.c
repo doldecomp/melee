@@ -1,10 +1,10 @@
 #include "ftCo_Thrown.h"
 
+#include "forward.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

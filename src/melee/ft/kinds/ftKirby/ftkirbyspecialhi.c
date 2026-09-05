@@ -1,11 +1,11 @@
 #include "ftkirbyspecialhi.h"
 
+#include "forward.h"
 #include "inlines.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <math.h>

@@ -2,6 +2,7 @@
 #define MELEE_IF_TYPES_H
 
 #include "if/forward.h" // IWYU pragma: export
+
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

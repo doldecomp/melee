@@ -1,5 +1,6 @@
 #include "ftCo_AttackAir.h"
 
+#include "forward.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_Fall.h"
@@ -7,7 +8,6 @@
 #include "ftCo_JumpAerial.h"
 #include "ftCo_LandingAir.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

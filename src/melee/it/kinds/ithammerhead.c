@@ -1,6 +1,7 @@
 #include "ithammerhead.h"
 
 #include "forward.h"
+
 #include <melee/it/forward.h>
 
 #include <melee/db/db.h>

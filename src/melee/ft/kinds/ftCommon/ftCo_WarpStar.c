@@ -1,8 +1,7 @@
 #include "ftCo_WarpStar.h"
 
-#include "types.h"
-
 #include "forward.h"
+#include "types.h"
 
 #include <math.h>
 #include <stdbool.h>

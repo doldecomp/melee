@@ -1,11 +1,11 @@
 #include "ftCo_CaptureCut.h"
 
+#include "forward.h"
 #include "ftCo_Damage.h"
 #include "ftCo_Throw.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
 

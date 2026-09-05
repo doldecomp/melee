@@ -1,8 +1,8 @@
 #include "ftseakspecialn.h"
 
+#include "forward.h"
 #include "ftseak.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ef/efsync.h>

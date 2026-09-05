@@ -1,6 +1,7 @@
 #include "ft_0D27.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
 #include "ftcamera.h"
@@ -10,9 +11,7 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "forward.h"
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftCo_CaptureCut.h"
 #include "kinds/ftCommon/ftCo_Fall.h"

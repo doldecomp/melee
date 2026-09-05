@@ -6,7 +6,6 @@
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"
-
 #include "kinds/ftMasterHand/types.h"
 
 #include <melee/pl/forward.h>

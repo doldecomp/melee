@@ -1,11 +1,11 @@
 #include "grtest.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <Runtime/platform.h>

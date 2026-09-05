@@ -1,9 +1,9 @@
 #include "ftclink.h"
 
+#include "forward.h"
 #include "ftclinkappeals.h"
 #include "inlines.h"
 
-#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftLink/forward.h>
 #include <melee/it/forward.h>

@@ -1,9 +1,9 @@
 #include "ftgamewatchattack100.h"
 
+#include "forward.h"
 #include "ftgamewatch.h"
 #include "ftgamewatchattack11.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stddef.h>

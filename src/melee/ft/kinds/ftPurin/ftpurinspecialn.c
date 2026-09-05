@@ -1,11 +1,11 @@
 #include "ftpurinspecialn.h"
 
+#include "forward.h"
 #include "ftpurin.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <math.h>

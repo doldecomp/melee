@@ -1,6 +1,7 @@
 #include "ftkoopaspecialn.h"
 
 #include "forward.h"
+
 #include <melee/ft/forward.h>
 
 #include <melee/cm/camera.h>

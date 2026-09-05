@@ -1,9 +1,9 @@
 #include "ftCo_ItemParasolDamageFall.h"
 
+#include "forward.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DamageIce.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

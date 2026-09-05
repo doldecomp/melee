@@ -1,10 +1,10 @@
 #include "ftCo_DamageScrew.h"
 
+#include "forward.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>

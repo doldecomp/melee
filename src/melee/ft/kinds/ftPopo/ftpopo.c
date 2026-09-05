@@ -1,12 +1,11 @@
 #include "ftpopo.h"
 
+#include "forward.h"
 #include "ftpopospecialhi.h"
 #include "ftpopospeciallw.h"
 #include "ftpopospecialn.h"
 #include "ftpopospecials.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

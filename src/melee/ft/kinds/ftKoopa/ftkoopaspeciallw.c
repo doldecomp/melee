@@ -1,6 +1,7 @@
 #include "ftkoopaspeciallw.h"
 
 #include "forward.h"
+
 #include <melee/ft/forward.h>
 
 #include <melee/ef/efsync.h>

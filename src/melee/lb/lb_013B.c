@@ -1,8 +1,8 @@
+#include "forward.h"
 #include "lbarchive.h"
 #include "lbcommand.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/pad.h>

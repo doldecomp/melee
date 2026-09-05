@@ -1,10 +1,10 @@
 #include "ftkirbyspecialzelda.h"
 
+#include "forward.h"
 #include "ftkirbyspecialdonkey.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftZelda/forward.h>
 

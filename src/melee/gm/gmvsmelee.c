@@ -1,5 +1,6 @@
 #include "gmvsmelee.h"
 
+#include "forward.h"
 #include "gm_1A3F.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
@@ -8,7 +9,6 @@
 #include "gmvsmode.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/pl/forward.h>
 
 #include <melee/lb/inlines.h>

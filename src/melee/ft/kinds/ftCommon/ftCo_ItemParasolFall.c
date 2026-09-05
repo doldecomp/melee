@@ -1,5 +1,6 @@
 #include "ftCo_ItemParasolFall.h"
 
+#include "forward.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_EscapeAir.h"
@@ -10,7 +11,6 @@
 #include "ftCo_SpecialAir.h"
 #include "inlines.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>

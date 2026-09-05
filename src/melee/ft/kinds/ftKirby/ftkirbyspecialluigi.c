@@ -1,6 +1,6 @@
+#include "forward.h"
 #include "ftkirby.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftLuigi/forward.h>
 

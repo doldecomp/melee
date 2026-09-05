@@ -1,5 +1,6 @@
 #include "gmtou_1.h"
 
+#include "forward.h"
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
@@ -9,8 +10,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-
-#include "forward.h"
 
 #include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>

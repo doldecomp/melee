@@ -1,3 +1,4 @@
+#include "forward.h"
 #include "ftkirby.h"
 #include "ftkirbycaptureyoshi.h"
 #include "ftkirbyspecialdonkey.h"
@@ -6,7 +7,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftYoshi/forward.h>
 

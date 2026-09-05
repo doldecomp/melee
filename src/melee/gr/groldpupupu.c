@@ -1,5 +1,6 @@
 #include "groldpupupu.h"
 
+#include "forward.h"
 #include "granime.h"
 #include "grmaterial.h"
 #include "ground.h"
@@ -8,7 +9,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/cm/camera.h>

@@ -1,10 +1,10 @@
 #include "ftCo_0A01.h"
 
+#include "forward.h"
 #include "ftpickupitem.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/kinds/ftDonkey/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
 #include <melee/ft/kinds/ftKoopa/forward.h>

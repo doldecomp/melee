@@ -1,5 +1,6 @@
 #include "ftsamus.h"
 
+#include "forward.h"
 #include "ftsamusspecialhi.h"
 #include "ftsamusspeciallw0.h"
 #include "ftsamusspeciallw1.h"
@@ -7,7 +8,6 @@
 #include "ftsamusspecials.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <dolphin/mtx.h>

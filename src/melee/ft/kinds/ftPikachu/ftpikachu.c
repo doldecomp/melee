@@ -1,12 +1,11 @@
 #include "ftpikachu.h"
 
+#include "forward.h"
 #include "ftpikachuspecialhi.h"
 #include "ftpikachuspeciallw.h"
 #include "ftpikachuspecialn.h"
 #include "ftpikachuspecials.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>

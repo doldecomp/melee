@@ -1,10 +1,9 @@
 #include "gmadventure.h"
 
+#include "forward.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmregcommon.h"
-
-#include "forward.h"
 
 #include <melee/gr/ground.h>
 #include <melee/lb/lb_00B0.h>

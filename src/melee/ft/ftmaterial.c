@@ -1,12 +1,11 @@
 #include "ftmaterial.h"
 
 #include "fighter.h"
+#include "forward.h"
 #include "ft_0C8C.h"
 #include "ftCo_800C7CA0.h"
 #include "ftdevice.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include "kinds/ftCommon/ftCo_09F4.h"
 

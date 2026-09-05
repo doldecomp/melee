@@ -1,9 +1,9 @@
 #include "ftmewtwospeciallw.h"
 
+#include "forward.h"
 #include "ftmewtwo.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>

@@ -1,11 +1,11 @@
 #include "ftlinkspecialn.h"
 
+#include "forward.h"
 #include "ftlink.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 

@@ -1,8 +1,8 @@
 #include "ftluigispeciallw.h"
 
+#include "forward.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <dolphin/mtx.h>

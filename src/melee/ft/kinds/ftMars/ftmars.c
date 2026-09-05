@@ -1,12 +1,11 @@
 #include "ftmars.h"
 
+#include "forward.h"
 #include "ftmarsspecialhi.h"
 #include "ftmarsspeciallw.h"
 #include "ftmarsspecialn.h"
 #include "ftmarsspecials.h"
 #include "types.h"
-
-#include "forward.h"
 
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftcamera.h>

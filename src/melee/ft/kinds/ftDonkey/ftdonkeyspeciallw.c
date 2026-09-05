@@ -1,9 +1,9 @@
 #include "ftdonkeyspeciallw.h"
 
+#include "forward.h"
 #include "ftdonkey.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 
 #include <melee/ef/efasync.h>

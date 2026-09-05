@@ -1,5 +1,6 @@
 #include "gmtoulib.h"
 
+#include "forward.h"
 #include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
@@ -10,7 +11,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>

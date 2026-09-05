@@ -1,6 +1,7 @@
 #include "ftkirbyattackdash.h"
 
 #include "forward.h"
+
 #include <melee/ft/forward.h>
 
 #include <stddef.h>

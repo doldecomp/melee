@@ -1,5 +1,6 @@
 #include "ftkoopa.h"
 
+#include "forward.h"
 #include "ftkoopaspecialhi.h"
 #include "ftkoopaspeciallw.h"
 #include "ftkoopaspecialn.h"
@@ -8,7 +9,6 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
 #include <melee/it/forward.h>
 
 #include <melee/ft/fighter.h>

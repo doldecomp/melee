@@ -1,11 +1,11 @@
 #include "ftCo_AttackDash.h"
 
+#include "forward.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "types.h"
 
-#include "forward.h"
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

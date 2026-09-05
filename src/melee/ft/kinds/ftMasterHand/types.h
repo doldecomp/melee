@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
 #include "ftMasterHand/forward.h" // IWYU pragma: export
+
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
