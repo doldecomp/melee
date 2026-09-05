@@ -200,7 +200,7 @@ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
     f32 player_attacks;
     f32 tag_player_attacks;
 
-    if ((u8) is_name_mode != 0) {
+    if (is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->attacks_total != 0) {
             tag_player_attacks =
                 GetPersistentNameData(player_index)->attacks_total;
@@ -262,7 +262,7 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
     f32 temp_f31;
     f32 temp_f31_2;
 
-    if ((u8) is_name_mode != 0) {
+    if (is_name_mode != 0) {
         if (GetPersistentNameData((s32) player_index)->match_count != 0) {
             temp_f31_2 =
                 (f32) GetPersistentNameData((s32) player_index)->match_count;
