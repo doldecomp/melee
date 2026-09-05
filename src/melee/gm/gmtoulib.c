@@ -147,39 +147,39 @@ void fn_8018A514(int count, float val)
     n = ((lbl_803D9D20_u*) &lbl_803D9D20)->bytes[i = count + 0x20];
 
     for (i = 0; i < n; i++) {
-        entries[i].x0 = src->x0;
-        entries[i].x1 = src->x1;
-        entries[i].x2 = src->x2;
-        entries[i].x3 = src->x3;
-        entries[i].x4 = src->x4;
-        entries[i].x5 = src->x5;
-        entries[i].x6 = src->x6;
-        entries[i].x1C = val;
-        entries[i].xC = src->x8;
-        entries[i].x14 = src->xC;
-        entries[i].x10 = src->x10;
-        entries[i].x18 = src->x14;
-        entries[i].x20.r = src->x18;
-        entries[i].x20.g = src->x1A;
-        entries[i].x20.b = src->x1C;
-        entries[i].x20.a = src->x1E;
-        entries[i].x24 = src->x19;
-        entries[i].x25 = src->x1B;
-        entries[i].x26 = src->x1D;
-        entries[i].x27 = src->x1F;
-        entries[i].x28 = src->x20;
-        entries[i].slots[0].x52 = 9;
-        entries[i].slots[0].x32 = 0;
-        entries[i].slots[1].x52 = 9;
-        entries[i].slots[1].x32 = 0;
-        entries[i].slots[2].x52 = 9;
-        entries[i].slots[2].x32 = 0;
-        entries[i].slots[3].x52 = 9;
-        entries[i].slots[3].x32 = 0;
-        entries[i].slots[0].x30 = src->x21;
-        entries[i].slots[1].x30 = src->x22;
-        entries[i].slots[2].x30 = src->x23;
-        entries[i].slots[3].x30 = src->x24;
+        lbl_80473AB8[i].x0 = src->x0;
+        lbl_80473AB8[i].x1 = src->x1;
+        lbl_80473AB8[i].x2 = src->x2;
+        lbl_80473AB8[i].x3 = src->x3;
+        lbl_80473AB8[i].x4 = src->x4;
+        lbl_80473AB8[i].x5 = src->x5;
+        lbl_80473AB8[i].x6 = src->x6;
+        lbl_80473AB8[i].x1C = val;
+        lbl_80473AB8[i].xC = src->x8;
+        lbl_80473AB8[i].x14 = src->xC;
+        lbl_80473AB8[i].x10 = src->x10;
+        lbl_80473AB8[i].x18 = src->x14;
+        lbl_80473AB8[i].x20.r = src->x18;
+        lbl_80473AB8[i].x20.g = src->x1A;
+        lbl_80473AB8[i].x20.b = src->x1C;
+        lbl_80473AB8[i].x20.a = src->x1E;
+        lbl_80473AB8[i].x24 = src->x19;
+        lbl_80473AB8[i].x25 = src->x1B;
+        lbl_80473AB8[i].x26 = src->x1D;
+        lbl_80473AB8[i].x27 = src->x1F;
+        lbl_80473AB8[i].x28 = src->x20;
+        lbl_80473AB8[i].slots[0].x52 = 9;
+        lbl_80473AB8[i].slots[0].x32 = 0;
+        lbl_80473AB8[i].slots[1].x52 = 9;
+        lbl_80473AB8[i].slots[1].x32 = 0;
+        lbl_80473AB8[i].slots[2].x52 = 9;
+        lbl_80473AB8[i].slots[2].x32 = 0;
+        lbl_80473AB8[i].slots[3].x52 = 9;
+        lbl_80473AB8[i].slots[3].x32 = 0;
+        lbl_80473AB8[i].slots[0].x30 = src->x21;
+        lbl_80473AB8[i].slots[1].x30 = src->x22;
+        lbl_80473AB8[i].slots[2].x30 = src->x23;
+        lbl_80473AB8[i].slots[3].x30 = src->x24;
         src++;
     }
 
@@ -1945,15 +1945,6 @@ void fn_8018F00C(char* dest, s32 slot_id)
         strcpy(dest, GetNameText((u8) slot_id));
     }
 }
-
-char* const lbl_804DA6B4 = NULL;
-char* const lbl_804DA6B8 = NULL;
-char* const lbl_804DA6BC = NULL;
-char* const lbl_804DA6C0 = NULL;
-char* const lbl_804DA6C4 = lbl_803D9EE8;
-char* const lbl_804DA6C8 = NULL;
-char* const lbl_804DA6CC = NULL;
-char* const lbl_804DA6D0 = NULL;
 
 s32 gm_8018F1B0(MatchEnd* me)
 {
