@@ -1,12 +1,11 @@
 #ifndef GALE01_0EAD64
 #define GALE01_0EAD64
 
-#include <platform.h>
-
-#include "ft/types.h"
-
-#include "ftLink/forward.h"
+#include <melee/ft/kinds/ftLink/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0EAD64 */ bool ftLk_Init_BoomerangExists(HSD_GObj* gobj);
 /* 0EAD84 */ void ftLk_Init_OnDeath(HSD_GObj* gobj);

@@ -1,35 +1,34 @@
 #include "itlinkhookshot.h"
 
-#include "placeholder.h"
-
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
-#include "ef/efsync.h"
-#include "ft/ft_081B.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_AirCatch.h"
-#include "ft/kinds/ftCommon/ftCo_CliffJump.h"
-#include "ft/kinds/ftCommon/ftCo_DamageFall.h"
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "mp/mpisland.h"
-#include "mp/mplib.h"
-#include "mp/types.h"
+#include <placeholder.h>
 
 #include <math.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CliffJump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mpisland.h>
+#include <melee/mp/mplib.h>
+#include <melee/mp/types.h>
 
 /* 2A5770 */ static void it_802A5770_inline(ItemLink* link_1,
                                             itLinkHookshotAttributes* arg2,

@@ -1,10 +1,10 @@
 #ifndef GALE01_01E560
 #define GALE01_01E560
 
-#include <platform.h>
-
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 struct FigaTrack {
     u16 length;

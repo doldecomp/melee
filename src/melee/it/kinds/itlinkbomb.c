@@ -1,26 +1,23 @@
 #include "itlinkbomb.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "ft/kinds/ftLink/ftlinkattackair.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
-#include "mp/mpcoll.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ft/kinds/ftLink/ftlinkattackair.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mpcoll.h>
 
 const Vec3 it_803B8640 = { 0 };
 

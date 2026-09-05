@@ -1,44 +1,41 @@
 #include "it_26B1.h"
 
+#include "inlines.h"
 #include "it_2725.h"
+#include "it_3F14.h"
 #include "itanimlist.h"
+#include "itCommonItems.h"
+#include "item.h"
+#include "ithitbox.h"
+#include "itspawn.h"
+#include "types.h"
 
-#include "ft/ftlib.h"
-#include "ft/types.h"
-#include "gm/gm_unsplit.h"
+#include "forward.h"
 
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itanimlist.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itspawn.h"
-#include "it/kinds/itbat.h"
-#include "it/kinds/itbombhei.h"
-#include "it/kinds/itbox.h"
-#include "it/kinds/itfflower.h"
-#include "it/kinds/itflipper.h"
-#include "it/kinds/itheart.h"
-#include "it/kinds/itkusudama.h"
-#include "it/kinds/itlinkbomb.h"
-#include "it/kinds/itmarumine.h"
-#include "it/kinds/itmsbomb.h"
-#include "it/kinds/itrabbitc.h"
-#include "it/kinds/itsscope.h"
-#include "it/kinds/itsword.h"
-#include "it/kinds/ittomato.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
+#include "kinds/itbat.h"
+#include "kinds/itbombhei.h"
+#include "kinds/itbox.h"
+#include "kinds/itfflower.h"
+#include "kinds/itflipper.h"
+#include "kinds/itheart.h"
+#include "kinds/itkusudama.h"
+#include "kinds/itlinkbomb.h"
+#include "kinds/itmarumine.h"
+#include "kinds/itmsbomb.h"
+#include "kinds/itrabbitc.h"
+#include "kinds/itsscope.h"
+#include "kinds/itsword.h"
+#include "kinds/ittomato.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/types.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
 
 #if MUST_MATCH
 static inline float my_sqrtf(float x)

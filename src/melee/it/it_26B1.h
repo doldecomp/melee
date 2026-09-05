@@ -1,15 +1,13 @@
 #ifndef GALE01_26B1D4
 #define GALE01_26B1D4
 
-#include <platform.h>
-
-#include "ft/types.h"
-
-#include "it/forward.h"
-#include "lb/forward.h"
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 26B1D4 */ float it_8026B1D4(Item_GObj* gobj, HitCapsule* itemHitboxUnk);
 /* 26B294 */ void it_8026B294(Item_GObj* gobj, Vec3* pos);

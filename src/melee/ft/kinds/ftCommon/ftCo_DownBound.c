@@ -4,32 +4,30 @@
 #include "ftCo_Down.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownStand.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftCo_800C7CA0.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/types.h"
-#include "ftSandbag/ftsandbag.h"
+#include "forward.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftSandbag/ftsandbag.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);
 /* 0972E8 */ static void ftCo_8009794C(Fighter_GObj* gobj);

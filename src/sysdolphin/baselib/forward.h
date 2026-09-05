@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_FORWARD_H
 #define SYSDOLPHIN_BASELIB_FORWARD_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 typedef struct GObjFuncs GObjFuncs;
 typedef struct HSD_AnimJoint HSD_AnimJoint;

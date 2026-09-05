@@ -9,10 +9,9 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXEnum.h"
-
 #include "forward.h"
 
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

@@ -5,11 +5,10 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "lb/lb_00F9.h"
-#include "lb/types.h"
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/types.h>
 
 static StageCallbacks grTCLink_StageCallbacks[] = {
     {

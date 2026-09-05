@@ -1,22 +1,22 @@
 #include "ftCo_800C7590.h"
 
+#include "fighter.h"
 #include "ft_081B.h"
+#include "ftCo_800C7434.h"
 #include "ftCo_800C78B0.h"
 #include "ftcommon.h"
+#include "types.h"
 
-#include "cm/camera.h"
-#include "ft/fighter.h"
-#include "ft/ftCo_800C7434.h"
-#include "ft/types.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/ftCo_Damage.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/ftCo_Lift.h"
+#include "kinds/ftCommon/ftCo_Throw.h"
 
-#include "ftCommon/ftCo_Damage.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_Lift.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "it/kinds/itleadead.h"
-#include "pl/player.h"
+#include <melee/cm/camera.h>
+#include <melee/it/kinds/itleadead.h>
+#include <melee/pl/player.h>
 
 /* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* gobj);
 

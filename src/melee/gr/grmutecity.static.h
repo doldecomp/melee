@@ -1,7 +1,7 @@
 #ifndef __GALE01_1EFC68
 #define __GALE01_1EFC68
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
 typedef struct grMc_CarEntry {
     /* 0x00 */ f32 x0;

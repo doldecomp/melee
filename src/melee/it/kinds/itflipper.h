@@ -1,11 +1,10 @@
 #ifndef GALE01_290938
 #define GALE01_290938
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 typedef enum itFlipper_MotionState {
     FLIPPER_MS_RESTING,

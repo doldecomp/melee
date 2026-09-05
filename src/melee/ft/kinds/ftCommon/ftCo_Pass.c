@@ -2,29 +2,26 @@
 
 #include "ftCo_0C60.h"
 #include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_EscapeAir.h"
+#include "ftCo_Fall.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
 #include "ftCo_SpecialAir.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/types.h"
-#include "mp/mpcoll.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mpcoll.h>
+#include <Runtime/platform.h>
 
 bool ftCo_80099F1C(Fighter_GObj* gobj)
 {

@@ -2,9 +2,8 @@
 #ifndef __GALE01_1A3680
 #define __GALE01_1A3680
 
-#include <platform.h>
-
 #include <dolphin/pad.h>
+#include <Runtime/platform.h>
 
 struct gm_controller_map {
     /* 00 */ u64 button;

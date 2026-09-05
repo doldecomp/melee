@@ -1,9 +1,9 @@
 #ifndef GALE01_10D740
 #define GALE01_10D740
 
-#include "ft/types.h"
+#include <melee/ft/kinds/ftDonkey/forward.h>
 
-#include "ftDonkey/forward.h"
+#include <melee/ft/types.h>
 
 /* 10D740 */ void ftDk_Init_OnDeath(HSD_GObj* gobj);
 /* 10D774 */ void ftDk_Init_8010D774(HSD_GObj* gobj);

@@ -2,14 +2,13 @@
 
 #include "gm_unsplit.h"
 
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "if/ifnametag.h"
-#include "if/ifstatus.h"
-#include "lb/lb_00B0.h"
-
 #include <stddef.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/if/ifnametag.h>
+#include <melee/if/ifstatus.h>
+#include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
 
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
@@ -363,87 +362,93 @@ static inline struct lbl_8046B488_t* fn_80169C54_inline(void)
     return fn_8016AE60();
 }
 
-static inline void fn_80169C54_apply(s32 p, s32 count, s32* buf)
-{
-    s32 i;
-
-    for (i = 0; i < count; i++) {
-        Player_80031DA8(p, buf[i]);
-    }
-}
-
 void fn_80169C54(s8 arg0, s8 arg1)
 {
+    s8* character;
+    s32* costume_it0;
+    s32* costume_it1;
+    s32 fighter0;
+    s32 fighter1;
+    s32 slot;
+    s32 extra_fighter0;
+    s32 extra_fighter1;
+    s32 costume_idx0;
+    s32 costume_idx1;
+    s32 ckind;
     struct lbl_8046B488_t* st;
-    s32 buf[7];
-    s8* pc;
-    s32 n;
+    s32 costumes[7];
+    s8* scan;
+    s32 ncostumes;
     s32 i;
     s32 count;
-    s32 k;
-    s32 j;
-    s32 p1;
-    s32 p0;
-    s8* cp;
-    s32 p;
-    s32 ch;
+    s32 costume_idx;
 
-    n = 0;
+    ncostumes = 0;
     st = fn_80169C54_inline();
-    pc = &st->x0;
+    scan = &st->x0;
     for (i = 0; i < 7; i++) {
-        buf[i] = -1;
+        costumes[i] = -1;
     }
     for (i = 0; i < 3; i++) {
-        if ((s32) *pc == 4) {
+        if ((s32) *scan == 4) {
             if (st->xB == 0) {
                 count = gm_80169238(4U);
-                for (k = 0; k < count; k++) {
-                    buf[k] = k;
-                    n++;
+                for (costume_idx = 0; costume_idx < count; costume_idx++) {
+                    costumes[costume_idx] = costume_idx;
+                    ncostumes++;
                 }
             } else {
-                n = 1;
-                buf[0] = st->xC;
+                ncostumes = 1;
+                costumes[0] = st->xC;
             }
             break;
         }
-        pc++;
+        scan++;
     }
 
     if (arg0 == 4) {
-        buf[n] = arg1;
-        n++;
+        costumes[ncostumes] = arg1;
+        ncostumes++;
     }
-    if (n > 0) {
-        j = 0;
-        cp = &st->x0;
+    if (ncostumes > 0) {
+        slot = 0;
+        character = &st->x0;
         do {
-            ch = *cp;
-            if (0x21 != ch && ch != 4) {
-                p = Player_800325C8((CharacterKind) ch, 0);
-                if ((p != -1) && (p != 4)) {
-                    fn_80169C54_apply(p, n, buf);
+            ckind = *character;
+            if (0x21 != ckind && ckind != 4) {
+                fighter0 = Player_800325C8((CharacterKind) ckind, 0);
+                if ((fighter0 != -1) && (fighter0 != 4)) {
+                    for (costume_it0 = &costumes[costume_idx0 = 0];
+                         costume_idx0 < ncostumes;
+                         costume_it0++, costume_idx0++)
+                    {
+                        Player_80031DA8(fighter0, *costume_it0);
+                    }
                 }
-                p = Player_800325C8((CharacterKind) ch, 1);
-                if ((p != -1) && (p != 4)) {
-                    fn_80169C54_apply(p, n, buf);
+                fighter1 = Player_800325C8((CharacterKind) ckind, 1);
+                if ((fighter1 != -1) && (fighter1 != 4)) {
+                    for (costume_it1 = &costumes[costume_idx1 = 0];
+                         costume_idx1 < ncostumes;
+                         costume_it1++, costume_idx1++)
+                    {
+                        Player_80031DA8(fighter1, *costume_it1);
+                    }
                 }
             }
-            j++;
-            cp++;
-        } while (j < 3);
+            slot++;
+            character++;
+        } while (slot < 3);
         if (arg0 != 4) {
-            p0 = Player_800325C8((CharacterKind) arg0, 0);
-            if ((p0 != -1) && (p0 != 4)) {
-                for (k = 0; k < n; k++) {
-                    Player_80031DA8(p0, buf[k]);
+            extra_fighter0 = Player_800325C8((CharacterKind) arg0, 0);
+            if ((extra_fighter0 != -1) && (extra_fighter0 != 4)) {
+                for (costume_idx = 0; costume_idx < ncostumes; costume_idx++) {
+                    Player_80031DA8(extra_fighter0, costumes[costume_idx]);
                 }
             }
-            p1 = Player_800325C8((CharacterKind) arg0, 1);
-            if ((p1 != -1) && (p1 != 4)) {
-                for (k = 0; k < n; k++) {
-                    Player_80031DA8(p1, buf[k]);
+            extra_fighter1 = Player_800325C8((CharacterKind) arg0, 1);
+            if ((extra_fighter1 != -1) && (extra_fighter1 != 4)) {
+                for (costume_idx = 0; costume_idx < ncostumes; costume_idx++) {
+                    Player_80031DA8(extra_fighter1, costumes[costume_idx]);
                 }
             }
         }

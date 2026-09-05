@@ -1,9 +1,9 @@
 #ifndef GALE01_2D1438
 #define GALE01_2D1438
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D1438 */ void it_2725_Logic17_Spawned(Item_GObj*);
 /* 2D14D0 */ UNK_RET it_802D14D0(UNK_PARAMS);

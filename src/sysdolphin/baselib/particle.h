@@ -1,12 +1,11 @@
 #ifndef GALE01_391580
 #define GALE01_391580
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
+#include <Runtime/platform.h>
 
 /* 3983A4 */ void hsd_803983A4(HSD_Generator*);
 /* 3984F4 */ void psInitDataBankLoad(int bank, const int* cmdBank,
@@ -27,7 +26,7 @@ psGenerateParticle0(HSD_Particle** head, int linkNo, int bank, u32 kind,
                                f32, f32, f32, f32, f32, f32, f32, f32);
 /* 398F8C */ void hsd_80398F8C(HSD_Particle*, f32);
 /* 3991D8 */ s32 hsd_803991D8(HSD_Generator*, HSD_JObj*, f32, f32);
-/* 39930C */ void* hsd_8039930C(void*, void*);
+/* 39930C */ void* hsd_8039930C(HSD_Particle*, HSD_Particle*);
 /* 39CEAC */ void hsd_8039CEAC(u32);
 /* 39CF4C */ void hsd_8039CF4C(s32, HSD_JObj*);
 /* 39D048 */ void hsd_8039D048(void* particle);

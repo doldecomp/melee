@@ -1,18 +1,16 @@
-#include "ft/kinds/ftCommon/ftCo_DownSpot.h"
+#include "ftCo_DownSpot.h"
 
-#include "ft/fighter.h"
+#include "ftCo_DownBound.h"
 
-#include "ft/forward.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/inlines.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_DownBound.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/inlines.h>
 
 void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
 {

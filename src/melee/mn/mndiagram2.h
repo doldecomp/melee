@@ -12,7 +12,7 @@
 /* 243BBC */ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode,
                                           u8 entity_idx);
 /* 243D40 */ void mnDiagram2_HandleInput(HSD_GObj* gobj);
-/* 244330 */ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type,
+/* 244330 */ int mnDiagram2_GetStatValue(u8 is_name_mode, u8 stat_type,
                                          u8 entity_idx);
 /* 24469C */ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode,
                                            u8 stat_type, u8 row_idx,
@@ -31,5 +31,7 @@
 /* 24589C */ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type,
                                                       u8 idx);
 /* 245AE4 */ void mnDiagram2_ClearDetailView(HSD_GObj* gobj);
+
+/* 4D4FD0 */ extern u8 mnDiagram2_804D4FD0[3];
 
 #endif

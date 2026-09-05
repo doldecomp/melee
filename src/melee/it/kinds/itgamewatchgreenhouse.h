@@ -1,13 +1,11 @@
 #ifndef GALE01_2C61F4
 #define GALE01_2C61F4
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2C61F4 */ HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj*, Vec3*,
                                                    Fighter_Part, float);

@@ -1,11 +1,10 @@
 #ifndef GALE01_IT_EFFECT
 #define GALE01_IT_EFFECT
 
-#include <platform.h>
-
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 27870C */ void it_8027870C(s32);
 /* 2787B4 */ void it_802787B4(Item_GObj*, s32);

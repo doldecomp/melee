@@ -5,12 +5,12 @@
 #include "ftCo_ItemThrow.h"
 #include "ftpickupitem.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 

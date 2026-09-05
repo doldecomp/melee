@@ -1,9 +1,8 @@
 #ifndef _plstale_h_
 #define _plstale_h_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 void plStale_InitAttackInstance(void);
 void plStale_ResetStaleMoveTableForPlayer(s32 slot);

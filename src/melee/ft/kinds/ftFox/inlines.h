@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTFOX_INLINES_H
 #define MELEE_FT_CHARA_FTFOX_INLINES_H
 
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 static inline void ftFox_SpecialN_CheckLoopInput(HSD_GObj* gobj)
 {

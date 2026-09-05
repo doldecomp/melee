@@ -1,12 +1,11 @@
 #ifndef GALE01_0735BC
 #define GALE01_0735BC
 
-#include <platform.h>
-
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 struct Fighter_804D6540_x0_t;
 

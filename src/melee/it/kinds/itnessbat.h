@@ -1,10 +1,10 @@
 #ifndef GALE01_2AD478
 #define GALE01_2AD478
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2AD478 */ HSD_GObj* it_802AD478(Item_GObj*, Vec3*, Fighter_Part, f32);
 /* 2AD590 */ Item_GObj* it_802AD590(Fighter_GObj*, Fighter_Part);

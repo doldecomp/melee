@@ -1,9 +1,9 @@
 #ifndef _IFPRIZE_H_
 #define _IFPRIZE_H_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 2FE3F8 */ void un_802FE3F8(int a, int b, s16* c, s16* d);
 /* 2FE470 */ void fn_802FE470(HSD_GObj* gobj);

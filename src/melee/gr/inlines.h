@@ -1,15 +1,6 @@
 #ifndef MELEE_GR_INLINES_H
 #define MELEE_GR_INLINES_H
 
-#include "gr/granime.h"
-#include "gr/grcorneria.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/types.h"
-#include "if/ifcoget.h"
-#include "if/ifstatus.h"
-#include "lb/lb_00B0.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
@@ -18,6 +9,14 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gr/granime.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/types.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/ifstatus.h>
+#include <melee/lb/lb_00B0.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 

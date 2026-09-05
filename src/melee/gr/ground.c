@@ -71,32 +71,7 @@
 #include "grzebes.h"
 #include "grzebesroute.h"
 #include "inlines.h"
-#include "platform.h"
 #include "stage.h"
-
-#include "cm/camera.h"
-#include "ft/ftdevice.h"
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "it/it_26B1.h"
-#include "it/it_3F14.h"
-#include "it/itzako.h"
-#include "it/kinds/itcoin.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbdvd.h"
-#include "lb/lbshadow.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
-#include "mp/types.h"
-#include "pl/player.h"
-#include "sc/types.h"
-#include "ty/toy.h"
-#include "ty/tydisplay.h"
 
 #include <math.h>
 #include <dolphin/gx.h>
@@ -118,6 +93,30 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itzako.h>
+#include <melee/it/kinds/itcoin.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
+#include <melee/mp/types.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tydisplay.h>
+#include <Runtime/platform.h>
 
 /* 1BFFA8 */ static void Ground_OnStart(void);
 /* 1BFFAC */ static void Ground_801BFFAC(int);

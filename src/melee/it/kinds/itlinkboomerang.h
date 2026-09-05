@@ -1,12 +1,11 @@
 #ifndef GALE01_29FDBC
 #define GALE01_29FDBC
 
-#include <platform.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 29FDBC */ bool it_8029FDBC(Item_GObj* gobj);
 /* 29FDDC */ void it_8029FDDC(Item_GObj*, int);

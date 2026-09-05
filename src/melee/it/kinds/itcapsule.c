@@ -1,24 +1,22 @@
 #include "itcapsule.h"
 
-#include <platform.h>
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itCommonItems.h"
-#include "it/itdrop.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/types.h"
-#include "lb/lb_00F9.h"
-
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itdrop.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F5468[] = {
     {

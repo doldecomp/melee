@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTLINK_FORWARD_H
 #define MELEE_FT_CHARA_FTLINK_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 typedef struct ftLk_DatAttrs ftLk_DatAttrs;
 typedef struct ftLk_FighterVars ftLk_FighterVars;

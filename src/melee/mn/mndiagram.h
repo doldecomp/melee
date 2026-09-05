@@ -1,22 +1,17 @@
 #ifndef GALE01_23EA2C
 #define GALE01_23EA2C
 
-#include "mn/types.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/mn/types.h>
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);
 /* 23EA54 */ bool mnDiagram_IsDistanceOverflow(u32 distance);
 /* 23EAC4 */ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance);
-/* 23EB84 */ s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index);
-#ifdef MNDIAGRAM_SOURCE
+/* 23EB84 */ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index);
 /* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index);
-#else
-/* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(int is_name_mode,
-                                             u8 player_index);
-#endif
-/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(int is_name_mode,
+/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode,
                                                  u8 player_index);
 /* 23EF70 */ int mnDiagram_GetNameTotalKOs(u8 field_index);
 /* 23EFE4 */ int mnDiagram_GetNameTotalFalls(u8 field_index);
@@ -62,5 +57,9 @@ mnDiagram_GetNamePlayTimeByFighter(int name_idx,
 /* 2433AC */ void mnDiagram_CreateCursor(void);
 /* 243434 */ void mnDiagram_CreateScreen(u8 arg0);
 /* 2437E8 */ void mnDiagram_Init(u8 arg0, u8 arg1);
+
+/* 4A0834 */ extern mnDiagram_ArchiveData mnDiagram_804A0834;
+/* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
+/* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
 
 #endif

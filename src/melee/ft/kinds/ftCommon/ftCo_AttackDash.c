@@ -1,29 +1,24 @@
 #include "ftCo_AttackDash.h"
 
+#include "ftCo_Attack100.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftswing.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/types.h"
-#include "ftKirby/ftkirbyattackdash.h"
-#include "it/it_26B1.h"
-
+#include "forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftswing.h>
+#include <melee/ft/kinds/ftKirby/ftkirbyattackdash.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
 
 /* 08B498 */ static void decideFighter(Fighter_GObj* gobj);
 /* 08B4D4 */ static void doEnter(Fighter_GObj* gobj);

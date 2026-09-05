@@ -1,25 +1,22 @@
-#include "ftNess/ftness.h"
+#include "ftness.h"
 
 #include "ftnessattackhi4.h"
 #include "ftnessattacklw4.h"
 #include "ftnessattacks4.h"
 #include "ftnessspecialhi.h"
+#include "ftnessspeciallw.h"
 #include "ftnessspecialn.h"
 #include "ftnessspecials.h"
+#include "types.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
 
-#include "ftCommon/forward.h"
-
-#include "ftNess/ftnessspeciallw.h"
-#include "ftNess/types.h"
-
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 459D90 */ UnkCostumeStruct ftNs_CostumeList[4];
 

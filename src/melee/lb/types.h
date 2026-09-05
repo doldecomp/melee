@@ -2,7 +2,6 @@
 #define MELEE_LB_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h> // IWYU pragma: export
@@ -10,6 +9,7 @@
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 struct HitResult {
     HSD_JObj* bone;

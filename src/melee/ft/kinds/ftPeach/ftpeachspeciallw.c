@@ -1,38 +1,30 @@
 #include "ftpeachspeciallw.h"
 
 #include "ftpeach.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftpickupitem.h"
-#include "ftCommon/inlines.h"
-#include "ftPeach/types.h"
-
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
-#include "it/kinds/itpeachturnip.h"
-#include "lb/lb_00B0.h"
-
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itpeachturnip.h>
+#include <melee/lb/lb_00B0.h>
+#include <Runtime/platform.h>
 
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);

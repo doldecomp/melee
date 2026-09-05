@@ -3,20 +3,19 @@
 #include "ftclink.h"
 #include "inlines.h"
 
-#include <platform.h>
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftLink/ftlink.h"
-#include "ftLink/types.h"
-#include "it/kinds/itclinkmilk.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
+#include <melee/ft/kinds/ftLink/ftlink.h>
+#include <melee/ft/kinds/ftLink/types.h>
+#include <melee/ft/types.h>
+#include <melee/it/kinds/itclinkmilk.h>
+#include <Runtime/platform.h>
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {

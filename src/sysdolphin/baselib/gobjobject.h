@@ -2,9 +2,10 @@
 #define SYSDOLPHIN_BASELIB_GOBJOBJECT_H
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
+
+#include <Runtime/platform.h>
 
 UNK_T HSD_GObjObject_80390ADC(HSD_GObj* gobj);
 void HSD_GObjObject_80390A70(HSD_GObj* gobj, u8 kind, void* obj);

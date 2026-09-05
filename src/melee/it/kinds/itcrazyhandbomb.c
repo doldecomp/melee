@@ -1,15 +1,14 @@
 #include "itcrazyhandbomb.h"
 
-#include "db/db.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-
 #include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
 
 ItemStateTable it_803F93A8[] = {
     { 0, itCrazyhandbomb_UnkMotion0_Anim, itCrazyhandbomb_UnkMotion0_Phys,

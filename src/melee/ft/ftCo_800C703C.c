@@ -1,7 +1,7 @@
 #include "ftCo_800C703C.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
+#include "fighter.h"
+#include "types.h"
 
 void ftCo_800C703C(Fighter_GObj* gobj)
 {

@@ -1,7 +1,7 @@
 #ifndef GALE01_09CD5C
 #define GALE01_09CD5C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 09CD5C */ void ftCo_8009F39C(Fighter_GObj* gobj);
 /* 09CDC0 */ void ftCo_MissFoot_Anim(Fighter_GObj* gobj);

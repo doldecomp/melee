@@ -3,9 +3,9 @@
 #ifndef GALE01_116D04
 #define GALE01_116D04
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 117B70 */ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj);
 /* 117BBC */ bool

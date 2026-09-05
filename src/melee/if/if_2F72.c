@@ -1,15 +1,9 @@
 #include "if_2F72.h"
 
-#include "gm/gm_1601.h"
-#include "gm/gm_16AE.h"
-#include "if/if_2F6E.h"
-#include "if/ifall.h"
-#include "if/ifstatus.h"
-#include "if/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "pl/player.h"
+#include "if_2F6E.h"
+#include "ifall.h"
+#include "ifstatus.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -17,6 +11,12 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
 
 /// Orphaned data strings from original ROM
 static char lbl_803F9780[] = "ScInfStc_scene_models";

@@ -2,17 +2,16 @@
 
 #include "inlines.h"
 
-#include "cm/camera.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itgroundcoll.h"
-#include "it/types.h"
-
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/types.h>
 
 ItemStateTable it_803F7DC8[] = {
     { 0, itEntei_UnkMotion0_Anim, itEntei_UnkMotion0_Phys,

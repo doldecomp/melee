@@ -1,11 +1,10 @@
 #ifndef GALE01_114EB8
 #define GALE01_114EB8
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 114EB8 */ void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj);
 /* 114F0C */ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);

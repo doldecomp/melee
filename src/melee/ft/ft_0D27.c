@@ -1,32 +1,29 @@
 #include "ft_0D27.h"
 
-#include "platform.h"
-#include "stdbool.h"
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ftcamera.h"
+#include "ftchangeparam.h"
+#include "ftcommon.h"
+#include "ftlib.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "ft/fighter.h"
+#include "forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ft/forward.h"
+#include "kinds/ftCommon/ftCo_Attack100.h"
+#include "kinds/ftCommon/ftCo_CaptureCut.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_FallAerial.h"
+#include "kinds/ftCommon/ftCo_FallSpecial.h"
+#include "kinds/ftCommon/ftCo_Lift.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallAerial.h"
-
+#include <stdbool.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
 #include <melee/it/kinds/itkinoko.h>
+#include <Runtime/platform.h>
 
 void ftCo_800D2770(Fighter_GObj* gobj, f32 arg8)
 {

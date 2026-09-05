@@ -1,10 +1,9 @@
 #ifndef _METROTRK_MSG_H
 #define _METROTRK_MSG_H
 
-#include <platform.h>
-
-#include "MetroTRK/dserror.h"
-#include "MetroTRK/msgbuf.h"
+#include <MetroTRK/dserror.h>
+#include <MetroTRK/msgbuf.h>
+#include <Runtime/platform.h>
 
 typedef struct TRKPacketSeq {
     /* 0x00 */ u16 unk00;

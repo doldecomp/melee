@@ -1,11 +1,10 @@
 #ifndef GALE01_12C030
 #define GALE01_12C030
 
-#include <platform.h>
-
-#include "ft/types.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 12BDA0 */ void ftYs_Init_8012BDA0(Fighter_GObj* gobj);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);

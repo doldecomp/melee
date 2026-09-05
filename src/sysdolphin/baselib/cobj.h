@@ -1,13 +1,12 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/object.h>
+#include <Runtime/platform.h>
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTUM 2

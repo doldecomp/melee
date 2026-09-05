@@ -1,7 +1,7 @@
 #ifndef GALE01_0BCC20
 #define GALE01_0BCC20
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 099150 */ void ftCo_CaptureWaitKoopa_Anim(Fighter_GObj* gobj);
 /* 0991C8 */ void ftCo_CaptureWaitKoopa_IASA(Fighter_GObj* gobj);

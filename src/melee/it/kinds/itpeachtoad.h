@@ -1,12 +1,11 @@
 #ifndef GALE01_2BDE18
 #define GALE01_2BDE18
 
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2BDE18 */ Item_GObj* it_802BDE18(Item_GObj*, Vec3*, Fighter_Part, ItemKind,
                                     f32);

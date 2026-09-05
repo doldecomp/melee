@@ -1,12 +1,11 @@
-#include "gr/grdynamicattr.h"
-
-#include <platform.h>
+#include "grdynamicattr.h"
 
 #include "gr/types.h" // IWYU pragma: keep
-#include "mp/mplib.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 static const s32 GC_Id_None = -1;
 

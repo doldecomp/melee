@@ -1,12 +1,11 @@
 #include "db.h"
 
-#include "gm/gm_unsplit.h"
-
 #include <string.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/video.h>
+#include <melee/gm/gm_unsplit.h>
 
 /* 2289F8 */ static int fn_802289F8(char* arg0, int arg1, int arg2);
 /* 4D6B94 */ int db_ScreenshotNumber;

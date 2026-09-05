@@ -2,18 +2,17 @@
 
 #include "inlines.h"
 
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
 
 ItemStateTable it_803F8128[] = {
     {

@@ -1,5 +1,9 @@
 #include "mnstagesw.h"
 
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnruleplus.h"
+
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -15,9 +19,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnruleplus.h>
 #include <melee/sc/types.h>
 
 #define NUM_STAGES 29

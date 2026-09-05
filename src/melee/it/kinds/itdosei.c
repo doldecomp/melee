@@ -1,15 +1,14 @@
 #include "itdosei.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-#include "lb/lb_00B0.h"
-
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lb_00B0.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FORWARD_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FORWARD_H
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 typedef struct ftMasterHand_SpecialAttrs ftMasterHand_SpecialAttrs;
 

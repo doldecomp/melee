@@ -1,10 +1,10 @@
 #ifndef GALE01_2C65E4
 #define GALE01_2C65E4
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
-#include "it/types.h"
+#include <melee/it/kinds/types.h>
+#include <melee/it/types.h>
 
 /* 2C65E4 */ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec,
                                    enum Fighter_Part arg2, float arg3);

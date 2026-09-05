@@ -1,9 +1,9 @@
 #ifndef GALE01_2E1820
 #define GALE01_2E1820
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2E1820 */ void it_802E1820(Item_GObj*);
 /* 2E1874 */ void itKlap_Logic10_Destroyed(Item_GObj*);

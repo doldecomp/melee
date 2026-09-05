@@ -1,12 +1,11 @@
 #ifndef GALE01_ITMATERIAL
 #define GALE01_ITMATERIAL
 
-#include <platform.h>
-
-#include "it/forward.h"
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
+#include <Runtime/platform.h>
 
 struct it_MObjInfo;
 

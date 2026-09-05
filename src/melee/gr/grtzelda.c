@@ -1,21 +1,18 @@
-#include "gr/grtzelda.h"
+#include "grtzelda.h"
 
-#include <platform.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "gr/granime.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00F9.h"
-
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 void grTZelda_OnDemoInit(bool);                           /* static */
 void grTZelda_OnInit(void);                               /* static */

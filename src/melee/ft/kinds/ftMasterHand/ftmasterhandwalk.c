@@ -3,22 +3,19 @@
 #include "ftmasterhandslap.h"
 #include "ftmasterhandwait12.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftanim.h"
-#include "ft/ftbosslib.h"
-#include "ft/ftlib.h"
-#include "ft/types.h"
-
-#include "ftMasterHand/forward.h"
-
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
+#include "forward.h"
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 void ftMh_WalkShoot_Anim(HSD_GObj* gobj)
 {

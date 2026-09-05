@@ -1,19 +1,19 @@
-#include "ftSeak/ftseak.h"
+#include "ftseak.h"
 
 #include "ftseakspecialhi.h"
 #include "ftseakspeciallw.h"
 #include "ftseakspecialn.h"
 #include "ftseakspecials.h"
+#include "types.h"
 
 #include "forward.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftSeak/types.h"
-#include "it/it_26B1.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 459D18 */ UnkCostumeStruct ftSk_CostumeList[5];
 

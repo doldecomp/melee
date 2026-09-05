@@ -1,11 +1,10 @@
 #ifndef GALE01_2D84F8
 #define GALE01_2D84F8
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D84F8 */ void it_802D84F8(Item_GObj*);
 /* 2D8554 */ void it_802D8554(Item_GObj*);

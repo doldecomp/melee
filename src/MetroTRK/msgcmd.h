@@ -1,7 +1,7 @@
 #ifndef _METROTRK_MSGCMD_H
 #define _METROTRK_MSGCMD_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #define DSFetch_s8(_p_) (*((s8*) _p_))
 #define DSFetch_s16(_p_) (*((s16*) _p_))

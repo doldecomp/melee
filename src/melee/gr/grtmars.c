@@ -6,10 +6,9 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "lb/lb_00F9.h"
-
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
 /* 221EF8 */ static void grTMars_80221EF8(void);

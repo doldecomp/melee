@@ -1,16 +1,14 @@
 #include "crowdsfx.h"
 
-#include "ft/ftlib.h"
-#include "lb/lbaudio_ax.h"
-
-#include "mp/forward.h"
-
-#include "mp/mplib.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
+#include <melee/mp/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 
 /* 4A2F08 */ CrowdSFX_UnkStruct un_804A2F08;
 /* 4D7050 */ CrowdSFX_UnkStruct* un_804D7050;

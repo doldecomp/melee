@@ -1,20 +1,19 @@
 #include "ftkirby.h"
+#include "inlines.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ft/kinds/ftCommon/ftpickupitem.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftKirby/inlines.h"
-#include "it/kinds/itlinkarrow.h"
-#include "it/kinds/itlinkbow.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/it/kinds/itlinkarrow.h>
+#include <melee/it/kinds/itlinkbow.h>
+#include <melee/lb/lb_00B0.h>
 
 ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 {

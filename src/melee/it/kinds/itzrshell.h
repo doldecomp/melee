@@ -1,11 +1,10 @@
 #ifndef _itzrshell_h_
 #define _itzrshell_h_
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 void it_802E02E8(Item_GObj*);
 void itZRShell_Logic12_PickedUp(Item_GObj*);

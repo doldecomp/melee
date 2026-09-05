@@ -5,10 +5,9 @@
 
 #include <placeholder.h>
 
-#include "lb/lb_00B0.h"
-
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>
+#include <melee/lb/lb_00B0.h>
 
 /* 3B73E8 */ mpIsland_Palette const mpIsland_TerrainPalette = { {
     { mp_Terrain_Rock, { 0x80, 0x60, 0x60, 0xFF } },

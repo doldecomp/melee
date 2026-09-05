@@ -1,6 +1,6 @@
 #include "ftdevice.h"
 
-#include "ft/inlines.h"
+#include "inlines.h"
 
 #include <sysdolphin/baselib/debug.h>
 

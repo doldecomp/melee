@@ -1,13 +1,11 @@
 #ifndef GALE01_2AB3F0
 #define GALE01_2AB3F0
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2AB3F0 */ void it_802AB3F0(Item_GObj*, Vec3*, s32);
 /* 2AB468 */ void it_802AB468(Item_GObj*, f32*, s32);

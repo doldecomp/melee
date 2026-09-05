@@ -1,7 +1,7 @@
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 extern ItemStateTable it_803F9328[];
 void it_802EFA44(Item_GObj*, Vec*, float);

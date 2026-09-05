@@ -1,12 +1,11 @@
 #include "db.h"
 
-#include "gm/gm_unsplit.h"
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "pl/player.h"
-#include "pl/plbonus.h"
-
 #include <sysdolphin/baselib/memory.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonus.h>
 
 /* 228D18 */ static void fn_80228D18(void);
 /* 228D38 */ static void fn_80228D38(void);

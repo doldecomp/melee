@@ -1,4 +1,4 @@
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

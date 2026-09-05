@@ -1,10 +1,9 @@
 #include "db.h"
 
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "lb/lbaudio_ax.h"
-
 #include <dolphin/gx/GXStruct.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
+#include <melee/lb/lbaudio_ax.h>
 
 static char db_SoundInfoText_buf[0x70];
 

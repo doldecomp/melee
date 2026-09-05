@@ -1,9 +1,9 @@
 #ifndef GALE01_2EE200
 #define GALE01_2EE200
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2EE200 */ Item_GObj* it_802EE200(HSD_GObj* parent, Vec3* pos,
                                     f32 threshold1, f32 threshold2);

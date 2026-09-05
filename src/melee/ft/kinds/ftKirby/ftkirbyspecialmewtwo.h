@@ -1,7 +1,7 @@
 #ifndef GALE01_106F44
 #define GALE01_106F44
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 106F44 */ s32 ftKb_SpecialNMt_80106F44(Fighter_GObj* gobj, s32* chargeLevel,
                                           s32* chargeCycles);

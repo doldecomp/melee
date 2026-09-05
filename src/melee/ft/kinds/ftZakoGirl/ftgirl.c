@@ -1,9 +1,8 @@
-#include "ftZakoGirl/ftgirl.h"
+#include "ftgirl.h"
 
-#include <platform.h>
-
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <Runtime/platform.h>
 
 char ftGl_Init_DatFilename[] = "PlGl.dat";
 char ftGl_Init_DataName[] = "ftDataGirl";

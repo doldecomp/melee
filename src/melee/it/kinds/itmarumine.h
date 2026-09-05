@@ -1,11 +1,10 @@
 #ifndef GALE01_2D09D0
 #define GALE01_2D09D0
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D09D0 */ void it_802D09D0(Item_GObj*);
 /* 2D0A0C */ void itMarumine_Logic16_Spawned(Item_GObj*);

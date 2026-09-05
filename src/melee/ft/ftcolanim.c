@@ -1,13 +1,15 @@
 #include "ftcolanim.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_0D4D.h"
-#include "ft/ftaction.h"
-#include "ft/ftdata.h"
-#include "ft/kinds/ftCommon/ftCo_HammerWait.h"
-#include "gm/gm_1601.h"
-#include "lb/lb_013B.h"
-#include "pl/player.h"
+#include "fighter.h"
+#include "ft_0D4D.h"
+#include "ftaction.h"
+#include "ftdata.h"
+
+#include "kinds/ftCommon/ftCo_HammerWait.h"
+
+#include <melee/gm/gm_1601.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/pl/player.h>
 
 #ifdef MUST_MATCH
 #pragma force_active on

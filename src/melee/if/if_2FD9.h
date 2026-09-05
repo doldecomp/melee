@@ -1,11 +1,10 @@
 #ifndef _IF_2FC93_H_
 #define _IF_2FC93_H_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
+#include <Runtime/platform.h>
 
 /* 2FD910 */ void un_802FD910(void);
 /* 2FD91C */ void un_802FD91C(void);

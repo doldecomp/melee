@@ -1,7 +1,7 @@
 #ifndef GALE01_01955C
 #define GALE01_01955C
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 01955C */ void lb_8001955C(void);
 /* 0195D0 */ void lb_800195D0(void);

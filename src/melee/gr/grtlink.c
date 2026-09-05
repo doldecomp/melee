@@ -6,14 +6,12 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <platform.h>
-
-#include "lb/lb_00F9.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 /* 22192C */ static void grTLink_8022192C(bool);
 /* 221930 */ static void grTLink_80221930(void);

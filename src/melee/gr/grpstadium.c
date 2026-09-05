@@ -1,10 +1,17 @@
 #include "grpstadium.h"
 
-#include "dolphin/gx/GXStruct.h"
-#include "lb/lb_00F9.h"
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -22,15 +29,8 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdatfiles.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/inlines.h>
-#include <melee/gr/stage.h>
-#include <melee/gr/types.h>
 #include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbfile.h>
 #include <melee/lb/lblanguage.h>

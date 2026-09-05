@@ -1,9 +1,8 @@
 #include "mnitemsw.h"
 
-#include <platform.h>
-
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -21,8 +20,8 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmainrule.h>
 #include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 HSD_GObj* mnItemSw_804D6BE8;
 u8 mnItemSw_804D6BEC;

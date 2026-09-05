@@ -1,8 +1,8 @@
 #ifndef GALE01_07C114
 #define GALE01_07C114
 
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 
 /* 07C114 */ void ft_8007C114(Fighter_GObj* gobj);
 /* 07C17C */ void ft_8007C17C(Fighter_GObj* gobj);

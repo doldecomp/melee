@@ -1,15 +1,15 @@
 #include "pltrick.h"
 
-#include "ft/ft_0892.h"
-#include "ft/ftdata.h"
-#include "ft/inlines.h"
-#include "if/ifmagnify.h"
-#include "pl/pl_040D.h"
-#include "pl/player.h"
-#include "pl/plbonus.h"
-#include "pl/plbonuslib.h"
+#include "pl_040D.h"
+#include "player.h"
+#include "plbonus.h"
+#include "plbonuslib.h"
 
 #include <sysdolphin/baselib/debug.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/inlines.h>
+#include <melee/if/ifmagnify.h>
 
 /* 037F00 */ static void fn_80037F00(HSD_GObj**, Fighter*, ft_800898B4_t*, s32,
                                      s32);

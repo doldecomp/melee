@@ -1,46 +1,34 @@
 #include "ftCo_Squat.h"
 
-#include "placeholder.h"
-#include "platform.h"
-#include "stdbool.h"
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack1.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_Guard.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Pass.h"
+#include "ftCo_SpecialS.h"
+#include "ftCo_SquatWait.h"
 
-#include "ft/fighter.h"
+#include <placeholder.h>
 
-#include "ft/forward.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackHi3.h"
-#include "ftCommon/ftCo_AttackHi4.h"
-#include "ftCommon/ftCo_AttackLw3.h"
-#include "ftCommon/ftCo_AttackLw4.h"
-#include "ftCommon/ftCo_AttackS3.h"
-#include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Pass.h"
-#include "ftCommon/ftCo_SpecialS.h"
-#include "ftCommon/ftCo_SquatWait.h"
-#include "mp/mpcoll.h"
-
-#include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
-#include <melee/ft/kinds/ftCommon/ftCo_SpecialS.h>
+#include <stdbool.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mpcoll.h>
+#include <Runtime/platform.h>
 
 /* 0D600C */ static void ftCo_Squat_Enter(Fighter_GObj* gobj);
 

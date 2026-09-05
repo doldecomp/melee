@@ -1,9 +1,9 @@
 #ifndef GALE01_295C48
 #define GALE01_295C48
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 295C48 */ void itSpyCloak_Logic33_Spawned(Item_GObj*);
 /* 295D90 */ void itSpyCloak_Logic33_PickedUp(Item_GObj*);

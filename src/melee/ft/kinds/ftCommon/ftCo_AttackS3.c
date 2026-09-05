@@ -4,26 +4,22 @@
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
 
-#include <platform.h>
-
 #include "forward.h"
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0CDD.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftswing.h"
-#include "ft/types.h"
-#include "it/it_26B1.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftswing.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
 

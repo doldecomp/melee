@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPROC_H
 #define SYSDOLPHIN_BASELIB_GOBJPROC_H
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
+
+#include <Runtime/platform.h>
 
 struct HSD_GObjProc {
     /* 0x00 */ HSD_GObjProc* child;

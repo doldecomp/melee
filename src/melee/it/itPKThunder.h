@@ -1,11 +1,10 @@
 #ifndef MELEE_IT_ITPKTHUNDER_H
 #define MELEE_IT_ITPKTHUNDER_H
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 typedef struct itPKThunderAttributes {
     float x0_PKTHUNDER_LIFETIME;

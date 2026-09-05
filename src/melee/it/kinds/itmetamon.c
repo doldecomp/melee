@@ -1,15 +1,13 @@
 #include "itmetamon.h"
 
-#include <platform.h>
-
-#include "it/inlines.h"
-#include "it/itgroundcoll.h"
-
+#include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+#include <Runtime/platform.h>
 
 static Item_GObj* it_804D6D50;
 

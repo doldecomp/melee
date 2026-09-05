@@ -1,11 +1,10 @@
 #ifndef _METROTRK_MSGHNDLR_H
 #define _METROTRK_MSGHNDLR_H
 
-#include <platform.h>
-
-#include "MetroTRK/dserror.h"
-#include "MetroTRK/msgbuf.h"
-#include "MetroTRK/msgcmd.h"
+#include <MetroTRK/dserror.h>
+#include <MetroTRK/msgbuf.h>
+#include <MetroTRK/msgcmd.h>
+#include <Runtime/platform.h>
 
 typedef struct msgbuf_t {
     /* 0x00 */ u32 msgLength;

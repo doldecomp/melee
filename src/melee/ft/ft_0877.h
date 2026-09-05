@@ -1,9 +1,9 @@
 #ifndef GALE01_0877F8
 #define GALE01_0877F8
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 /* 0877F8 */ bool ft_800877F8(Fighter_GObj*, s32);
 /* 087818 */ bool ft_80087818(Fighter_GObj*, s32);

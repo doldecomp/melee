@@ -1,11 +1,10 @@
 #ifndef _itcoll_h_
 #define _itcoll_h_
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "lb/types.h"
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 /* 26F9A0 */ void it_8026F9A0(void);
 /* 26F9AC */ void it_8026F9AC(s32, void*, HitCapsule*, Item*, HurtCapsule*);

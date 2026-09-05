@@ -1,15 +1,13 @@
 #ifndef GALE01_IT_279C
 #define GALE01_IT_279C
 
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-#include "it/types.h"
-
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/kinds/types.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 279C48 */ void it_80279C48(Item_GObj*);
 /* 279CDC */ void it_80279CDC(Item_GObj*, f32);

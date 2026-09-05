@@ -1,28 +1,25 @@
 #include "ftnessspeciallw.h"
 
 #include "ftness.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0881.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/inlines.h"
-#include "ftNess/types.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
+#include <Runtime/platform.h>
 
 /// SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \

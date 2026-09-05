@@ -1,11 +1,10 @@
 #ifndef GALE01_132A0C
 #define GALE01_132A0C
 
-#include <platform.h>
+#include <melee/ft/kinds/ftKoopa/forward.h>
 
-#include "ft/types.h"
-
-#include "ftKoopa/forward.h"
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 132A0C */ void ftKp_Init_OnDeath(Fighter_GObj* gobj);
 /* 132A64 */ void ftKp_Init_UnkMotionStates3(Fighter_GObj* gobj);

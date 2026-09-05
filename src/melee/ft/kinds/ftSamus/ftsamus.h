@@ -1,12 +1,11 @@
 #ifndef GALE01_12832C
 #define GALE01_12832C
 
-#include <platform.h>
-
-#include "ft/types.h"
-
-#include "ftSamus/forward.h"
+#include <melee/ft/kinds/ftSamus/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 12832C */ void ftSs_Init_OnDeath(HSD_GObj* gobj);
 /* 12837C */ void ftSs_Init_OnLoad(HSD_GObj* gobj);

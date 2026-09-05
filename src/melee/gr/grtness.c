@@ -1,18 +1,16 @@
-#include <platform.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "gr/granime.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00F9.h"
+#include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 /* 2225D0 */ static void grTNess_802225D0(bool);
 /* 2225D4 */ static void grTNess_802225D4(void);

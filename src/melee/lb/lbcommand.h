@@ -1,9 +1,9 @@
 #ifndef _lbcommands_h_
 #define _lbcommands_h_
 
-#include <platform.h>
+#include <melee/lb/forward.h>
 
-#include "lb/forward.h"
+#include <Runtime/platform.h>
 
 void Command_00(CommandInfo* info);
 void Command_01(CommandInfo* info);

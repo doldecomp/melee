@@ -2,47 +2,42 @@
 #define MELEE_FT_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
-
-#include "cm/types.h"
 
 #include "ft/forward.h" // IWYU pragma: export
-
-#include "ft/ftwaitanim.h"
-#include "ftCaptain/types.h"
-#include "ftCommon/types.h"
-#include "ftDonkey/types.h"
-#include "ftFox/types.h"
-#include "ftGameWatch/types.h"
-#include "ftKirby/types.h"
-#include "ftKoopa/types.h"
-#include "ftLink/types.h"
-#include "ftLuigi/types.h"
-#include "ftMario/types.h"
-#include "ftMars/types.h"
-#include "ftMasterHand/types.h"
-#include "ftMewtwo/types.h"
-#include "ftNess/types.h"
-#include "ftPeach/types.h"
-#include "ftPikachu/types.h"
-#include "ftPopo/types.h"
-#include "ftPurin/types.h"
-#include "ftSamus/types.h"
-#include "ftSandbag/types.h"
-#include "ftSeak/types.h"
-#include "ftYoshi/types.h"
-#include "ftZakoBoy/types.h"
-#include "ftZelda/types.h"
-#include "gm/types.h"
-
-#include "it/forward.h"
-
-#include "lb/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <melee/cm/types.h>
+#include <melee/ft/ftwaitanim.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
+#include <melee/ft/kinds/ftCommon/types.h>
+#include <melee/ft/kinds/ftDonkey/types.h>
+#include <melee/ft/kinds/ftFox/types.h>
+#include <melee/ft/kinds/ftGameWatch/types.h>
+#include <melee/ft/kinds/ftKirby/types.h>
+#include <melee/ft/kinds/ftKoopa/types.h>
+#include <melee/ft/kinds/ftLink/types.h>
+#include <melee/ft/kinds/ftLuigi/types.h>
+#include <melee/ft/kinds/ftMario/types.h>
+#include <melee/ft/kinds/ftMars/types.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/kinds/ftMewtwo/types.h>
+#include <melee/ft/kinds/ftNess/types.h>
+#include <melee/ft/kinds/ftPeach/types.h>
+#include <melee/ft/kinds/ftPikachu/types.h>
+#include <melee/ft/kinds/ftPopo/types.h>
+#include <melee/ft/kinds/ftPurin/types.h>
+#include <melee/ft/kinds/ftSamus/types.h>
+#include <melee/ft/kinds/ftSandbag/types.h>
+#include <melee/ft/kinds/ftSeak/types.h>
+#include <melee/ft/kinds/ftYoshi/types.h>
+#include <melee/ft/kinds/ftZakoBoy/types.h>
+#include <melee/ft/kinds/ftZelda/types.h>
+#include <melee/gm/types.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 #define FTPART_INVALID 0xFF
 

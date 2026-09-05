@@ -1,23 +1,21 @@
-#include "ftSeak/ftseakspeciallw.h"
+#include "ftseakspeciallw.h"
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
-#include "ftZelda/ftzeldaspeciallw.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include <melee/ft/forward.h>
 
 #include <math.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/kinds/ftZelda/ftzeldaspeciallw.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
 static MotionFlags const ftSk_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

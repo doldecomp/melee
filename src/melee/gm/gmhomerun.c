@@ -1,16 +1,13 @@
 #include "gmhomerun.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
-#include "gm/forward.h"
-
-#include "gm/gmvsmelee.h"
-
+#include "forward.h"
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>

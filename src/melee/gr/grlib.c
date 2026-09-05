@@ -4,16 +4,9 @@
 #include "gricemt.h"
 #include "ground.h"
 #include "grrcruise.h"
+#include "types.h"
 
-#include "cm/camera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "gr/types.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "lb/lb_00F9.h"
 #include "lb/types.h" // IWYU pragma: keep
-#include "sc/types.h"
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -23,6 +16,13 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/sc/types.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);

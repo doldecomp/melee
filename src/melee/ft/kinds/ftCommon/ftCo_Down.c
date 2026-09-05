@@ -2,18 +2,16 @@
 
 #include "ftCo_DownAttack.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0DF1.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0DF1.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 097EAC */ static void ftCo_80098324(Fighter_GObj* gobj, FtMotionId msid);
 

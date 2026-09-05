@@ -1,7 +1,8 @@
 #include "hsd_392A.h"
 
+#include "perf.h"
+
 #include <stdio.h>
-#include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/psstructs.h> // IWYU pragma: keep
 
 // types

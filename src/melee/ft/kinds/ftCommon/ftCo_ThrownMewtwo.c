@@ -1,18 +1,17 @@
 #include "ftCo_ThrownMewtwo.h"
 
-#include "placeholder.h"
+#include "ftCo_Thrown.h"
+#include "types.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Thrown.h"
-#include "ftCommon/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_800BD0E8(Fighter_GObj* gobj, FtMotionId msid)
 {

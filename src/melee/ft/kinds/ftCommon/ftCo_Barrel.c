@@ -1,26 +1,23 @@
 #include "ftCo_Barrel.h"
 
+#include "ftCo_Damage.h"
+#include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "ft/fighter.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Damage.h"
-#include "ftCommon/ftCo_Lift.h"
-#include "ftCommon/inlines.h"
-#include "ftCommon/types.h"
-#include "it/kinds/ittarucann.h"
-#include "lb/lbcollision.h"
-#include "mp/mpcoll.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/kinds/ittarucann.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/mp/mpcoll.h>
 
 /* 0C9290 */ static void fn_800C9290(Fighter_GObj* gobj);
 

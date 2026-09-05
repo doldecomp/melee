@@ -1,13 +1,11 @@
 #ifndef GALE01_ITGROUNDCOLL_H
 #define GALE01_ITGROUNDCOLL_H
 
-#include <platform.h>
-
-#include "it/types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 26D564 */ bool it_8026D564(Item_GObj*);
 /* 26D5CC */ bool it_8026D5CC(Item_GObj*);

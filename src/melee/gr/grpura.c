@@ -7,17 +7,7 @@
 #include "stage.h"
 #include "types.h"
 
-#include <platform.h>
-
-#include "cm/camera.h"
-
-#include "cm/forward.h"
-
-#include "cm/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mplib.h"
+#include <melee/cm/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
@@ -27,6 +17,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <melee/cm/camera.h>
+#include <melee/cm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 struct GrPuModelDesc {
     /* 0x0 */ s32 x0;
