@@ -633,27 +633,68 @@ typedef struct grInishie1_801FB3F0_Vars {
     grInishie1_801FB3F0_Block* blocks;
 } grInishie1_801FB3F0_Vars;
 
-static inline void set_all_hatena(HSD_GObj* gobj,
-                                  grInishie1_801FB3F0_Vars* vars)
+static inline void
+grInishie1_801FB3F0_UpdateY(grInishie1_801FB3F0_Block* block)
 {
-    u32 i = 0;
+    f32 y = block->x8 + block->xC;
+    HSD_JObjSetTranslateY(block->jobj, y);
+}
 
-    vars->xC8 = 0;
-    vars->xC6 = 0;
+static inline bool grInishie1_801FB3F0_IsFar(HSD_JObj* jobj, Vec3* pos)
+{
+    lb_8000B1CC(jobj, NULL, pos);
+    return grLib_801C9EE8(pos, 15.0f);
+}
 
-    for (; i < 0x13; ++i) {
-        vars->blocks[i].x0 = 3;
-        grInishie1_801FBAA0(gobj, i);
-        vars->blocks[i].x20 = 0;
+static inline void grInishie1_801FB3F0_dobj_clear(HSD_JObj* jobj)
+{
+    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
+    while (dobj != NULL) {
+        HSD_DObjClearFlags(dobj, 1U);
+        dobj = (dobj != NULL) ? dobj->next : NULL;
     }
 }
 
-static inline void
-grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
-                                  grInishie1_801FB3F0_Vars* vars, Vec3* pos)
+static inline void grInishie1_801FB3F0_dobj_set(HSD_JObj* jobj)
 {
+    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
+    while (dobj != NULL) {
+        HSD_DObjSetFlags(dobj, 1U);
+        dobj = (dobj != NULL) ? dobj->next : NULL;
+    }
+}
+
+void grInishie1_801FB3F0(HSD_GObj* gobj)
+{
+    grInishie1_801FB3F0_Vars* vars = gobj->user_data;
     u32 i;
     HSD_DObj* dobj;
+    Vec3 pos;
+    PAD_STACK(48);
+
+    if (vars->xD8 > 0) {
+        vars->xD8--;
+    }
+
+    if (vars->xD8 == 0 && ((vars->xC6 == 1 && vars->xC8 > 0 &&
+                            vars->xC8 < yakumono_param->unk14) ||
+                           (vars->xC8 == 1 && vars->xC6 > 0 &&
+                            vars->xC6 < yakumono_param->unk14)))
+    {
+        // this is likely the rare case mentioned on smashwiki
+        // where every block will become a hatena block
+        vars->xC8 = 0;
+        vars->xC6 = 0;
+
+        for (i = 0; i < 0x13; ++i) {
+            vars->blocks[i].x0 = 3;
+            grInishie1_801FBAA0(gobj, i);
+            vars->blocks[i].x20 = 0;
+        }
+    } else {
+        HATENA_APPEAR_CHECKLOOP(vars->xC6, vars->xCA, 1, 0x2D0U);
+        HATENA_APPEAR_CHECKLOOP(vars->xC8, vars->xCC, 2, 0x2EBU);
+    }
 
     for (i = 0; i < 0x13; ++i) {
         switch (vars->blocks[i].x2) {
@@ -682,18 +723,14 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
 
             // the blocks appear to not move at all, so not
             // sure what this is
-            {
-                f32 y = vars->blocks[i].x8 + vars->blocks[i].xC;
-                HSD_JObjSetTranslateY(vars->blocks[i].jobj, y);
-            }
+            grInishie1_801FB3F0_UpdateY(&vars->blocks[i]);
             break;
 
         case 0:
             if (vars->blocks[i].x20 != 0) {
                 vars->blocks[i].x20--;
             } else {
-                lb_8000B1CC(vars->blocks[i].jobj, NULL, pos);
-                if (!grLib_801C9EE8(pos, 15.0f)) {
+                if (!grInishie1_801FB3F0_IsFar(vars->blocks[i].jobj, &pos)) {
                     dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
                     while (dobj != NULL) {
                         HSD_DObjClearFlags(dobj, 1U);
@@ -721,6 +758,7 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
                 HSD_JObjGetDObj(vars->blocks[i].jobj);
                 if (vars->blocks[i].hatena_gobj != NULL) {
                     HSD_JObj* target = vars->blocks[i].hatena_gobj->hsd_obj;
+                    HSD_DObj* dobj;
 
                     if (vars->blocks[i].x22 & 1) {
                         HSD_JObjClearFlagsAll(target, JOBJ_HIDDEN);
@@ -735,17 +773,9 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
                     }
                 } else {
                     if (vars->blocks[i].x22 & 1) {
-                        dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
-                        while (dobj != NULL) {
-                            HSD_DObjClearFlags(dobj, 1U);
-                            dobj = (dobj != NULL) ? dobj->next : NULL;
-                        }
+                        grInishie1_801FB3F0_dobj_clear(vars->blocks[i].jobj);
                     } else {
-                        dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
-                        while (dobj != NULL) {
-                            HSD_DObjSetFlags(dobj, 1U);
-                            dobj = (dobj != NULL) ? dobj->next : NULL;
-                        }
+                        grInishie1_801FB3F0_dobj_set(vars->blocks[i].jobj);
                     }
                 }
 
@@ -757,32 +787,6 @@ grInishie1_801FB3F0_update_blocks(HSD_GObj* gobj,
             break;
         }
     }
-}
-
-void grInishie1_801FB3F0(HSD_GObj* gobj)
-{
-    grInishie1_801FB3F0_Vars* vars = gobj->user_data;
-    Vec3 pos;
-    PAD_STACK(48);
-
-    if (vars->xD8 > 0) {
-        vars->xD8--;
-    }
-
-    if (vars->xD8 == 0 && ((vars->xC6 == 1 && vars->xC8 > 0 &&
-                            vars->xC8 < yakumono_param->unk14) ||
-                           (vars->xC8 == 1 && vars->xC6 > 0 &&
-                            vars->xC6 < yakumono_param->unk14)))
-    {
-        // this is likely the rare case mentioned on smashwiki
-        // where every block will become a hatena block
-        set_all_hatena(gobj, vars);
-    } else {
-        HATENA_APPEAR_CHECKLOOP(vars->xC6, vars->xCA, 1, 0x2D0U);
-        HATENA_APPEAR_CHECKLOOP(vars->xC8, vars->xCC, 2, 0x2EBU);
-    }
-
-    grInishie1_801FB3F0_update_blocks(gobj, vars, &pos);
 }
 
 /// gives item from hatena block upwards velocity, maybe handles spawning it as
