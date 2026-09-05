@@ -1195,7 +1195,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmtrainingmode.c"),
             Object(Matching, "melee/gm/gmclassic.c"),
             Object(Matching, "melee/gm/gmadventure.c"),
-            Object(Linkable, "melee/gm/gmallstar.c"),
+            Object(Matching, "melee/gm/gmallstar.c"),
             Object(Matching, "melee/gm/gmmultiman.c"),
             Object(Matching, "melee/gm/gmsupersudden.c"),
             Object(Matching, "melee/gm/gmtiny.c"),
