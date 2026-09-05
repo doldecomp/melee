@@ -1,7 +1,5 @@
 #include "mndiagram3.h"
 
-#include "mn/mndiagram2.static.h"
-
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -45,8 +43,6 @@ typedef struct mnDiagram3_DataTable {
 /* 3EEC1C */ extern AnimLoopSettings mnDiagram3_803EEC1C;
 /* 3EEC28 */ extern mnDiagram3_PosTable mnDiagram3_803EEC28;
 /* 3EEC4C */ extern mnDiagram3_StatTable mnDiagram3_803EEC4C;
-/* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
-/* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
 /* 4D6C20 */ extern HSD_GObj* mnDiagram3_804D6C20;
 /* 4D6C24 */ extern HSD_GObj* mnDiagram3_804D6C24;
 /* 4D4B64 */ extern GXColor mn_804D4B64;
