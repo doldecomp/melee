@@ -22,7 +22,7 @@ void fn_80169574(ssize_t size, s8* buf);
 void fn_801697FC(s8, s8, s8, s8, s8*);
 void fn_8016989C(u8*, u8, u8, u8*, s8*);
 void fn_80169900(u8, struct lbl_8046B488_t*, s8*, s8*);
-s32 fn_80169A84(u8, s8*, s8*);
+void fn_80169A84(u8, s8*, s8*);
 void fn_80169C54(s8, s8);
 void fn_80169F50(s8, s8);
 void fn_8016A09C(void);
@@ -30,9 +30,9 @@ void gm_8016A164(void);
 s32 fn_8016A1E4(void);
 bool gm_8016A1F8(void);
 void gm_8016A21C(StartMeleeRules*);
-s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, u8, int, int,
-                u8 color, u8, u8, int opp_count, int, int, int, int, int, f32,
-                f32);
+void gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, u8, int, int,
+                 u8 color, u8, u8, int opp_count, int, int, int, int, int, f32,
+                 f32);
 void gm_8016A404(s32 arg0);
 void gm_8016A414(f32 arg8);
 void gm_8016A424(s8 arg0);

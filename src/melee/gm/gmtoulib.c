@@ -1794,8 +1794,6 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     }
 }
 
-char* const lbl_804DA6C4 = lbl_803D9EE8;
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
@@ -1889,6 +1887,15 @@ void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
                             GetNameText((u8) char_id));
     }
 }
+
+char* const lbl_804DA6B4 = lbl_803D9EE8;
+char* const lbl_804DA6B8 = lbl_803D9EF4;
+char* const lbl_804DA6BC = lbl_803D9F00;
+char* const lbl_804DA6C0 = lbl_803D9F00;
+char* const lbl_804DA6C4 = lbl_803D9EE8;
+char* const lbl_804DA6C8 = lbl_803D9EF4;
+char* const lbl_804DA6CC = lbl_803D9F00;
+char* const lbl_804DA6D0 = lbl_803D9F00;
 
 /// Formats a tournament slot display name into a destination buffer.
 void fn_8018F00C(char* dest, s32 slot_id)
@@ -2749,11 +2756,3 @@ void gm_801905F0(StartMeleeData* arg0)
 
     fn_8019EF08(&sp18);
 }
-
-char* const lbl_804DA6B4 = NULL;
-char* const lbl_804DA6B8 = NULL;
-char* const lbl_804DA6BC = NULL;
-char* const lbl_804DA6C0 = NULL;
-char* const lbl_804DA6C8 = NULL;
-char* const lbl_804DA6CC = NULL;
-char* const lbl_804DA6D0 = NULL;
