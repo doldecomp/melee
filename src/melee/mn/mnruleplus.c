@@ -36,8 +36,8 @@ extern StaticModelDesc MenMainCursorTr03_Top;
 extern StaticModelDesc MenMainCursorTr04_Top;
 extern StaticModelDesc MenMainNmRl_Top;
 extern MenuKindData mn_803EB6B0[];
-HSD_GObj* mn_804D6BE0;
 f32 mn_804D6BE4;
+HSD_GObj* mn_804D6BE0;
 
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;
@@ -123,17 +123,6 @@ typedef union {
 /// is disabled. Retail mn_802324E4 loads this TU-owned .sdata variable
 /// (see symbols.txt) instead of materializing an .sdata2 constant.
 f32 mnRulePlus_TimeLimitOffFrame = 1.0f;
-volatile const f64 mn_804DBE38 = 4503599627370496.0;
-const JObjIndices mn_804DBE40 = { 0x02030506 };
-volatile const f32 mn_804DBE44[1] = { 0.0f };
-const JObjIndices mn_804DBE48 = { 0x02030506 };
-const f32 mn_804DBE4C = -9.5f;
-const f32 mn_804DBE50 = 8.0f;
-const f32 mn_804DBE54 = 17.0f;
-const f32 mn_804DBE58 = 364.68332f;
-const f32 mn_804DBE5C = 76.77544f;
-const f32 mn_804DBE60 = 0.0521f;
-volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
 {
@@ -296,7 +285,9 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
     return &mn_803ED294[count - value];
 }
 
-static inline void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
+/* Automatic inlining preserves the constant-pool order around the digit index
+ * tables below. */
+static void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
 {
     HSD_JObj* jobj;
     jobj = jobjs[2];
@@ -307,7 +298,9 @@ static inline void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
     HSD_JObjAnimAll(jobj);
 }
 
-static inline void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
+const JObjIndices mn_804DBE40 = { 0x02030506 };
+
+static void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
 {
     HSD_JObj* jobj1;
     HSD_JObj* jobj2;
@@ -400,7 +393,7 @@ static inline void mn_802327A4_InitOptionRoots(HSD_JObj** option_roots,
 {
     HSD_JObj** option_root;
     u8 j8;
-    s32 j;
+    register s32 j;
     s32 visible;
 
     option_root = option_roots;
@@ -611,6 +604,8 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     }
 }
 
+const JObjIndices mn_804DBE48 = { 0x02030506 };
+
 void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
     MenuRulesPlusData* data = gobj->user_data;
@@ -640,10 +635,10 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
             confirmed = mn_804A04F0.confirmed_selection;
             SisLib_ClearText(&data->description);
             desc_idx = mnRulePlus_GetDescIdx(selection, confirmed);
-            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
-                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                       76.77544f);
             data->description = text;
-            text->font_size.y = text->font_size.x = mn_804DBE60;
+            text->font_size.y = text->font_size.x = 0.0521f;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
             return;
         }
@@ -659,10 +654,10 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
             } else {
                 desc_idx = mn_803ED2E8.desc[selection][confirmed];
             }
-            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
-                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                       76.77544f);
             data->description = text;
-            text->font_size.y = text->font_size.x = mn_804DBE60;
+            text->font_size.y = text->font_size.x = 0.0521f;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
         }
         break;
@@ -785,13 +780,26 @@ void fn_80232F44(HSD_GObj* gobj)
     }
 }
 
-static inline s32 mnRulePlus_CountVisible(u8 limit)
+static inline void mnRulePlus_CountAllVisible(u8 limit, s32* result)
 {
-    s32 i;
     s32 count = 0;
+    s32 iter = count;
 
-    for (i = 0; i < (s32) limit; i++) {
-        if (mn_80231F80((u8) i) != 0) {
+    for (; iter < (s32) limit; iter++) {
+        if (mn_80231F80((u8) iter) != 0) {
+            count++;
+        }
+    }
+    *result = count;
+}
+
+static inline s32 mnRulePlus_CountVisibleBefore(u8 limit)
+{
+    s32 count = 0;
+    s32 iter;
+
+    for (iter = 0; iter < (s32) limit; iter++) {
+        if (mn_80231F80((u8) iter) != 0) {
             count++;
         }
     }
@@ -842,7 +850,10 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObjAnimAll(root_jobj);
 
     user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
-    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
+    if (user_data == NULL) {
+        OSReport(mn_803ED308);
+        __assert(mn_803ED320, 0x3DFU, mn_803ED330);
+    }
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
@@ -883,12 +894,10 @@ HSD_GObj* mn_80233218(MenuState state)
 
     sub_count_ptr = mn_803ED1D0.x10;
     for (i = 0; i < (s32) num_options; i++) {
-        vis_before = mnRulePlus_CountVisible((u8) i);
-
+        vis_before = mnRulePlus_CountVisibleBefore((u8) i);
         option_jobj = user_data->xC[mn_803ED1D0.x0[(u8) vis_before]];
-        vis_total = mnRulePlus_CountVisible(6);
-
-        HSD_JObjReqAnim(option_jobj, (f32) vis_total);
+        mnRulePlus_CountAllVisible(6, &vis_total);
+        HSD_JObjReqAnim(option_jobj, vis_total);
         HSD_JObjAnim(option_jobj);
 
         if ((gm_GetCurrentGameMode() == GM_TOURNAMENT) && ((u8) i == 1)) {
@@ -988,7 +997,8 @@ HSD_GObj* mn_80233218(MenuState state)
                 switch (i) {
                 case 0: {
                     JObjIndices digit_indices = mn_804DBE48;
-                    u8* index_ptr = digit_indices.idx;
+                    u8* index_ptr;
+                    index_ptr = digit_indices.idx;
                     for (j = 0; j < 4; j++, index_ptr++) {
                         HSD_JObj* num_jobj =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
@@ -1037,10 +1047,10 @@ HSD_GObj* mn_80233218(MenuState state)
         confirmed = mn_804A04F0.confirmed_selection;
         SisLib_ClearText(&user_data->description);
         desc_idx = mnRulePlus_GetDescIdx(selected, confirmed);
-        text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50, mn_804DBE54,
-                                   mn_804DBE58, mn_804DBE5C);
+        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                   76.77544f);
         user_data->description = text;
-        text->font_size.y = text->font_size.x = mn_804DBE60;
+        text->font_size.y = text->font_size.x = 0.0521f;
         HSD_SisLib_803A6368(text, (s32) desc_idx);
     }
 

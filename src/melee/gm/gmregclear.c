@@ -994,7 +994,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
             grPushOn_80219204(Ground_801C1DD4(), &special_score_value,
                               &coin_count);
             special_score = special_score_value;
-            coins = (u16) coin_count;
+            /* Keep the 64-bit round trip for register allocation. */
+            coins = (s32) (s64) coin_count;
             state->x108 = 0x1F4;
         }
         break;
