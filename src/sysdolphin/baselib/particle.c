@@ -622,6 +622,16 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     return 0;
 }
 
+static inline void psReadFloat(u8** stream)
+{
+    u8* p = *stream;
+    ((ParticleFloatBytes*) &hsd_804D78D0)->bytes[0] = *p++;
+    ((ParticleFloatBytes*) &hsd_804D78D0)->bytes[1] = *p++;
+    ((ParticleFloatBytes*) &hsd_804D78D0)->bytes[2] = *p++;
+    ((ParticleFloatBytes*) &hsd_804D78D0)->bytes[3] = *p++;
+    *stream = p;
+}
+
 void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 {
     f32 val;
@@ -633,12 +643,12 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    UNUSED u8 pad_top[84];
+    UNUSED u8 pad_top[80];
     volatile f32 sqrt_res;
     UNUSED u8 pad_mid[144];
     volatile f32 vel_res;
     volatile f32 dist_res;
-    UNUSED u8 pad_bot[248];
+    UNUSED u8 pad_bot[124];
 
 #define fval (*(f32*) &hsd_804D78D0)
 #define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
@@ -783,28 +793,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Set position */
                 if (opcode & 1) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.x = fval;
                 }
                 if (opcode & 2) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.y = fval;
                 }
                 if (opcode & 4) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.z = fval;
                 }
@@ -814,28 +815,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Add to position */
                 if (opcode & 1) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.x += fval;
                 }
                 if (opcode & 2) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.y += fval;
                 }
                 if (opcode & 4) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->pos.z += fval;
                 }
@@ -845,28 +837,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Set velocity */
                 if (opcode & 1) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.x = fval;
                 }
                 if (opcode & 2) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.y = fval;
                 }
                 if (opcode & 4) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.z = fval;
                 }
@@ -876,28 +859,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Add to velocity */
                 if (opcode & 1) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.x += fval;
                 }
                 if (opcode & 2) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.y += fval;
                 }
                 if (opcode & 4) {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     pp->vel.z += fval;
                 }
@@ -917,10 +891,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     }
                     {
                         u8* q = p;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         p = q;
                     }
                     pc = p;
@@ -940,10 +911,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Set gravity */
                 {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                 }
                 pp->grav = fval;
@@ -958,10 +926,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Set friction */
                 {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                 }
                 pp->fric = fval;
@@ -1289,11 +1254,10 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 {
                     int baseLife;
                     int randomRange;
-                    baseLife = pc[0] << 8;
-                    baseLife += pc[1];
-                    randomRange = pc[2] << 8;
-                    randomRange += pc[3];
-                    pc += 4;
+                    baseLife = *pc++ << 8;
+                    baseLife += *pc++;
+                    randomRange = *pc++ << 8;
+                    randomRange += *pc++;
                     pp->life =
                         baseLife + (s32) ((f32) randomRange * HSD_Randf());
                 }
@@ -1315,28 +1279,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 {
                     {
                         u8* q = pc;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         pc = q;
                     }
                     pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
                     {
                         u8* q = pc;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         pc = q;
                     }
                     pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
                     {
                         u8* q = pc;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         pc = q;
                     }
                     pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
@@ -1347,10 +1302,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Call force function with float parameter */
                 {
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                 }
                 hsd_80398F8C(pp, fval);
@@ -1366,11 +1318,10 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     int bank;
                     HSD_Particle* c;
 
-                    idx = pc[0] << 8;
-                    idx += pc[1];
-                    randomRange = pc[2] << 8;
-                    randomRange += pc[3];
-                    pc += 4;
+                    idx = *pc++ << 8;
+                    idx += *pc++;
+                    randomRange = *pc++ << 8;
+                    randomRange += *pc++;
 
                     idx += (s32) ((f32) randomRange * HSD_Randf());
 
@@ -1432,10 +1383,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 {
                     f32 scale;
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     scale = fval;
                     pp->vel.x *= scale;
@@ -1457,15 +1405,9 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->sizeCount = cnt;
                         }
-                        fbytes[0] = *p++;
-                        fbytes[1] = *p++;
-                        fbytes[2] = *p++;
-                        fbytes[3] = *p++;
+                        psReadFloat(&p);
                         pp->sizeTarget = fval;
-                        fbytes[0] = *p++;
-                        fbytes[1] = *p++;
-                        fbytes[2] = *p++;
-                        fbytes[3] = *p++;
+                        psReadFloat(&p);
                         range = fval;
                         pc = p;
                     }
@@ -1514,9 +1456,18 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         break;
                     }
                     hsd_803983A4(srt->gp);
-                    srt = pp->appsrt;
-                    HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) &srt->rot,
-                               &srt->translate, NULL);
+                    {
+                        Vec3* translate;
+                        Vec3* rot;
+                        Vec3* scale;
+                        MtxPtr mtx;
+                        srt = pp->appsrt;
+                        translate = &srt->translate;
+                        rot = (Vec3*) &srt->rot;
+                        scale = &srt->scale;
+                        mtx = srt->mmtx;
+                        HSD_MtxSRT(mtx, scale, rot, translate, NULL);
+                    }
                     pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
                                 pp->appsrt->mmtx[0][1] * pp->pos.y +
                                 pp->appsrt->mmtx[0][2] * pp->pos.z +
@@ -1603,10 +1554,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     }
                     {
                         u8* q = p;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         p = q;
                     }
                     pc = p;
@@ -1670,22 +1618,15 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
             case 0xB8:
                 /* Force toward JObj with kill on proximity */
                 {
-                    u8* p = pc;
-                    int idx = *p++;
+                    int idx = *pc++;
                     f32 force, range;
 
                     idx += pp->pJObjOfs;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&pc);
                     force = fval;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&pc);
                     range = fval;
-                    pc = p;
+
                     {
                         HSD_JObj* jobj = hsd_804D08E8[idx];
                         if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
@@ -2038,26 +1979,18 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     f32 mag;
 
                     {
-                        u8* p = pc;
                         {
-                            u8* q = p;
-                            fbytes[0] = *q++;
-                            fbytes[1] = *q++;
-                            fbytes[2] = *q++;
-                            fbytes[3] = *q++;
-                            p = q;
+                            u8* q = pc;
+                            psReadFloat(&q);
+                            pc = q;
                         }
                         base_speed = fval;
                         {
-                            u8* q = p;
-                            fbytes[0] = *q++;
-                            fbytes[1] = *q++;
-                            fbytes[2] = *q++;
-                            fbytes[3] = *q++;
-                            p = q;
+                            u8* q = pc;
+                            psReadFloat(&q);
+                            pc = q;
                         }
                         random_range = fval;
-                        pc = p;
                     }
                     base_speed += random_range * HSD_Randf();
                     mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
@@ -2085,28 +2018,19 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     u8* p = pc;
                     {
                         u8* q = p;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         p = q;
                     }
                     pp->vel.x *= fval;
                     {
                         u8* q = p;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         p = q;
                     }
                     pp->vel.y *= fval;
                     {
                         u8* q = p;
-                        fbytes[0] = *q++;
-                        fbytes[1] = *q++;
-                        fbytes[2] = *q++;
-                        fbytes[3] = *q++;
+                        psReadFloat(&q);
                         p = q;
                     }
                     pc = p;
@@ -2611,10 +2535,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     int idx = *pc++;
                     u8* p = pc;
                     f32 v;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     v = fval;
                     if (pp->gen->userfunc != NULL &&
@@ -2702,10 +2623,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 {
                     f32 trail;
                     u8* p = pc;
-                    fbytes[0] = *p++;
-                    fbytes[1] = *p++;
-                    fbytes[2] = *p++;
-                    fbytes[3] = *p++;
+                    psReadFloat(&p);
                     pc = p;
                     trail = fval;
                     if (trail < 0.0F) {
@@ -2744,8 +2662,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->matColCount = cnt;
                         }
-                        flags = *p++;
                         pc = p;
+                        flags = *pc++;
                     }
                     pp->matRGBTarget = pp->matRGB;
                     if (flags & 1) {
@@ -2790,8 +2708,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                             cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->ambColCount = cnt;
                         }
-                        flags = *p++;
                         pc = p;
+                        flags = *pc++;
                     }
                     pp->ambRGBTarget = pp->ambRGB;
                     if (flags & 1) {
@@ -2820,24 +2738,18 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         u8* p = pc;
                         {
                             u8* q = p;
-                            fbytes[0] = *q++;
-                            fbytes[1] = *q++;
-                            fbytes[2] = *q++;
-                            fbytes[3] = *q++;
+                            psReadFloat(&q);
                             p = q;
                         }
                         base_val = fval;
                         {
                             u8* q = p;
-                            fbytes[0] = *q++;
-                            fbytes[1] = *q++;
-                            fbytes[2] = *q++;
-                            fbytes[3] = *q++;
+                            psReadFloat(&q);
                             p = q;
                         }
                         range_val = fval;
-                        timing = *p++;
                         pc = p;
+                        timing = *pc++;
                     }
 
                     if (timing != 0) {
