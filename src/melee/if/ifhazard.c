@@ -2,12 +2,12 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/sc/types.h>
 

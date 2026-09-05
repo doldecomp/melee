@@ -6,9 +6,9 @@
 #include "lbcardnew.h"
 #include "lbsnap.h"
 
+#include <sysdolphin/baselib/controller.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
-#include <sysdolphin/baselib/controller.h>
 
 struct lb_804329F0_t {
     union {

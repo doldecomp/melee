@@ -5,7 +5,6 @@
 #include "gmmain_lib.h"
 #include "types.h"
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -13,6 +12,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>

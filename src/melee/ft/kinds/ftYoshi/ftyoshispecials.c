@@ -14,8 +14,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

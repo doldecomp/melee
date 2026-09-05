@@ -21,9 +21,9 @@
 #include "ftmasterhandwalk.h"
 #include "types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>

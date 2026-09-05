@@ -26,10 +26,10 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/it_26B1.h>

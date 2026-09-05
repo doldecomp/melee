@@ -8,10 +8,10 @@
 
 #include "forward.h"
 
-#include <dolphin/os/OSReset.h>
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
+#include <dolphin/os/OSReset.h>
+#include <dolphin/pad.h>
 #include <melee/db/db.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>

@@ -24,10 +24,10 @@
 
 #include <melee/lb/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/lb/inlines.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcommand.h>

@@ -10,10 +10,10 @@
 
 #include "forward.h"
 
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/types.h>
 #include <melee/gm/gm_18A1.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itcoin.h>

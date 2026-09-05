@@ -8,14 +8,14 @@
 #include "stage.h"
 #include "types.h"
 
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/mtx.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/lb/lb_00F9.h>
 

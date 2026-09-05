@@ -1,9 +1,9 @@
 #ifndef MELEE_MN_EVENT_H
 #define MELEE_MN_EVENT_H
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 
 typedef struct MnEventData {
     /* 0x00 */ u8 page;

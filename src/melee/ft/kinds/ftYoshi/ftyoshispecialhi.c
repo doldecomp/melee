@@ -10,8 +10,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>

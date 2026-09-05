@@ -64,14 +64,14 @@ HSD_Archive* lbl_804D65B8;
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
 
-#include <dolphin/gx/GXStruct.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/gx/GXStruct.h>
+#include <dolphin/types.h>
 #include <melee/if/ifcoget.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

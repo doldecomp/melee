@@ -3,13 +3,13 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcliffcommon.h>

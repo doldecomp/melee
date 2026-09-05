@@ -13,12 +13,12 @@
 #include "forward.h"
 
 #include <m2c_macros.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/lb/lb_00B0.h>

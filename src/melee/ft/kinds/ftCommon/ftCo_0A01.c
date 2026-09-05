@@ -14,8 +14,8 @@
 #include <melee/gr/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>

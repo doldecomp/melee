@@ -13,11 +13,6 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXStruct.h>
-#include <dolphin/gx/GXVert.h>
-#include <dolphin/mtx.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -27,6 +22,11 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXStruct.h>
+#include <dolphin/gx/GXVert.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
 #include <melee/db/db.h>

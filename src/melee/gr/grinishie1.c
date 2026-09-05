@@ -7,7 +7,6 @@
 #include "stage.h"
 #include "types.h"
 
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -15,6 +14,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>

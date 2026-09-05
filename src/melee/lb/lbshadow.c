@@ -3,7 +3,6 @@
 #include "lbvector.h"
 #include "types.h"
 
-#include <dolphin/gx/GXVert.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/initialize.h>
@@ -16,6 +15,7 @@
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/util.h>
 #include <sysdolphin/baselib/video.h>
+#include <dolphin/gx/GXVert.h>
 #include <melee/cm/types.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>

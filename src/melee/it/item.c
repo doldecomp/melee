@@ -18,7 +18,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -29,6 +28,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

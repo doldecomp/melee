@@ -1,10 +1,10 @@
 #include "db.h"
 #include "dbsound.h"
 
-#include <dolphin/card.h>
-#include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/card.h>
+#include <dolphin/vi.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lbarchive.h>
 

@@ -11,9 +11,9 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
 #include <melee/it/inlines.h>

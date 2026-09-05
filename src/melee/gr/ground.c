@@ -74,8 +74,6 @@
 #include "stage.h"
 
 #include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>
@@ -93,6 +91,8 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>

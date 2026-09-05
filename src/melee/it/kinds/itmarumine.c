@@ -2,8 +2,8 @@
 
 #include "inlines.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

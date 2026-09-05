@@ -2,9 +2,9 @@
 
 #include "forward.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

@@ -5,12 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/card.h>
-#include <dolphin/dvd.h>
-#include <dolphin/gx.h>
-#include <dolphin/os.h>
-#include <dolphin/pad.h>
-#include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_392C.h>
@@ -18,6 +12,12 @@
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
+#include <dolphin/card.h>
+#include <dolphin/dvd.h>
+#include <dolphin/gx.h>
+#include <dolphin/os.h>
+#include <dolphin/pad.h>
+#include <dolphin/vi.h>
 #include <melee/db/db.h>
 #include <melee/lb/lb_0195.h>
 #include <melee/lb/lbarq.h>

@@ -1,8 +1,8 @@
 #include "itmasterhandbullet.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>

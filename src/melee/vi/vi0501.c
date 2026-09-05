@@ -5,8 +5,6 @@
 
 #include "forward.h"
 
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -16,6 +14,8 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

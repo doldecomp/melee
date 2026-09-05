@@ -6,8 +6,8 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 
 /* 220228 */ static void grTDonkey_80220228(bool);

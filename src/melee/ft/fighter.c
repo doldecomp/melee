@@ -57,8 +57,6 @@
 #include "kinds/ftPeach/types.h"
 
 #include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -70,6 +68,8 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

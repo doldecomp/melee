@@ -6,8 +6,8 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

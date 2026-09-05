@@ -6,8 +6,8 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/spline.h>
+#include <dolphin/mtx.h>
 
 /* 1EFC68 */ void grMuteCity_801EFC68(bool);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);

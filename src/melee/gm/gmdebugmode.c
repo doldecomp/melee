@@ -5,9 +5,9 @@
 
 #include <melee/mn/forward.h>
 
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/types.h>
 #include <melee/if/soundtest.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mn/inlines.h>

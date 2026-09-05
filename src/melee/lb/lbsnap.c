@@ -10,10 +10,10 @@
 #include <placeholder.h>
 
 #include <stdio.h>
-#include <dolphin/card.h>
-#include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3B34.h>
+#include <dolphin/card.h>
+#include <dolphin/os.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/gm/gm_unsplit.h>
 

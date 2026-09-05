@@ -4,11 +4,11 @@
 #include <melee/ft/forward.h>
 #include <melee/mp/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/types.h>

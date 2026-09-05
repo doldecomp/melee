@@ -5,8 +5,8 @@
 #include "gmmain_lib.h"
 #include "gmregcommon.h"
 
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>

@@ -1,10 +1,10 @@
 #include "lbmemory.h"
 
 #include <string.h>
-#include <dolphin/ar.h>
-#include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
+#include <dolphin/ar.h>
+#include <dolphin/os/OSAlarm.h>
 #include <Runtime/platform.h>
 
 struct MemEntry {

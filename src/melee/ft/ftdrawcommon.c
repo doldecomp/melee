@@ -13,10 +13,10 @@
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/state.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_0146.h>

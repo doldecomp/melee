@@ -5,7 +5,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -16,6 +15,7 @@
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/os.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/ithitbox.h>

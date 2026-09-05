@@ -48,9 +48,6 @@ IncludeCategories:
   - Regex: '^<[^/]*>$'
     Priority: 6
     SortPriority: 3
-  - Regex: '^<dolphin/.*>$'
-    Priority: 6
-    SortPriority: 4
   - Regex: '^<sysdolphin/baselib/.*>$'
     Priority: 6
     SortPriority: 5

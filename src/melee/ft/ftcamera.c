@@ -4,8 +4,8 @@
 #include "ftlib.h"
 #include "types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
+#include <dolphin/mtx.h>
 #include <melee/gr/stage.h>
 
 void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)

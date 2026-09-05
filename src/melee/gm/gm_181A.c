@@ -6,7 +6,6 @@
 #include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -16,6 +15,7 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/if/ifnametag.h>
 #include <melee/if/ifstock.h>

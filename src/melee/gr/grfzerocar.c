@@ -4,8 +4,8 @@
 #include "grdatfiles.h"
 #include "ground.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/sc/types.h>
 

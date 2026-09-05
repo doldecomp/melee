@@ -3,10 +3,10 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include <dolphin/gx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/gx.h>
 #include <Runtime/platform.h>
 
 #define MOBJ_ANIM 0x4

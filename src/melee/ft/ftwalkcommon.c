@@ -13,8 +13,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
+#include <dolphin/mtx.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {

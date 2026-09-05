@@ -23,7 +23,6 @@
 #include <melee/gm/forward.h>
 
 #include <math.h>
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -37,6 +36,7 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>
+#include <dolphin/pad.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmevent.h>
 #include <melee/gm/gmmain_lib.h>

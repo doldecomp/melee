@@ -5,9 +5,9 @@
 #include "gmcamera.h"
 #include "types.h"
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <dolphin/pad.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>

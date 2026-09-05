@@ -8,10 +8,10 @@
 #include "forward.h"
 #include <melee/ft/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0D4D.h>

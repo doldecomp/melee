@@ -3,11 +3,11 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <Runtime/platform.h>
 
 struct HSD_Fog;

@@ -3,8 +3,8 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 #define ROBJ_TYPE_MASK 0x70000000

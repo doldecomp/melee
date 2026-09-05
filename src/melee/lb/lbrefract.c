@@ -7,6 +7,13 @@
 
 #include <math.h>
 #include <string.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/state.h>
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -16,13 +23,6 @@
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/os/OSCache.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/state.h>
 
 /* 022650 */ static void fn_80022650(void);
 /* 022940 */ static void fn_80022940(void);

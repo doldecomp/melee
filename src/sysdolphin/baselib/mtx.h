@@ -2,8 +2,8 @@
 #define _mtx_h_
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 #define VEC2_SQ_LEN(v) ((SQ((v).x) + SQ((v).y)))

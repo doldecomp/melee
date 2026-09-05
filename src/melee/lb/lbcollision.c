@@ -10,13 +10,13 @@
 #include "forward.h"
 
 #include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 

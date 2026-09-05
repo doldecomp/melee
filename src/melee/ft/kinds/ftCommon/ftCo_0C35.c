@@ -3,8 +3,8 @@
 #include "ftCo_Damage.h"
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>

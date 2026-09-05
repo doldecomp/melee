@@ -12,7 +12,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -23,6 +22,7 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
 

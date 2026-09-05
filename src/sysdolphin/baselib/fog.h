@@ -3,9 +3,9 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <sysdolphin/baselib/object.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/object.h>
 #include <Runtime/platform.h>
 
 struct HSD_FogAdj {

@@ -7,11 +7,11 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
 #include <melee/db/db.h>
 #include <melee/ft/ft_0BF0.h>
 #include <melee/ft/ftlib.h>

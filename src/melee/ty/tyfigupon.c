@@ -7,8 +7,6 @@
 #include <placeholder.h>
 
 #include <stddef.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -29,6 +27,8 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/if/types.h>

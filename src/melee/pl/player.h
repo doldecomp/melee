@@ -5,9 +5,9 @@
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/pl/types.h>
 #include <Runtime/platform.h>
 

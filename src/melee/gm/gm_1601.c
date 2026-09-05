@@ -15,7 +15,6 @@
 #include <melee/pl/forward.h>
 
 #include <stddef.h>
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>
@@ -24,6 +23,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
+#include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>

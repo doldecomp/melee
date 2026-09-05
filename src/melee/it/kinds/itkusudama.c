@@ -5,8 +5,8 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>

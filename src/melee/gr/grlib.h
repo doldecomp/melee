@@ -4,8 +4,8 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/mtx.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);

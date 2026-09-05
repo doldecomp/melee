@@ -4,9 +4,9 @@
 #include <melee/cm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <sysdolphin/baselib/cobj.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <Runtime/platform.h>
 
 /* 028B9C */ void Camera_80028B9C(int);

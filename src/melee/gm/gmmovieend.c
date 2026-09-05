@@ -10,11 +10,11 @@
 #include "gmopening.h"
 #include "types.h"
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
+#include <dolphin/pad.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/textlib.h>
 #include <melee/lb/lbaudio_ax.h>

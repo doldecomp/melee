@@ -3,8 +3,8 @@
 
 #include <melee/mn/forward.h>
 
-#include <dolphin/gx.h>
 #include <sysdolphin/baselib/object.h>
+#include <dolphin/gx.h>
 #include <melee/mn/types.h>
 #include <melee/sc/types.h>
 #include <Runtime/platform.h>

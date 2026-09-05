@@ -13,7 +13,6 @@
 
 #include "forward.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -23,6 +22,7 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
+#include <dolphin/mtx.h>
 #include <melee/lb/lbrefract.h>
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };

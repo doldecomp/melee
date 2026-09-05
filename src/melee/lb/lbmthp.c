@@ -4,16 +4,16 @@
 
 #include <placeholder.h>
 
-#include <dolphin/dvd.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/os.h>
-#include <dolphin/thp/thp.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/video.h>
+#include <dolphin/dvd.h>
+#include <dolphin/gx/GXTexture.h>
+#include <dolphin/os.h>
+#include <dolphin/thp/thp.h>
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {

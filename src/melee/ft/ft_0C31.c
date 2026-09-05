@@ -14,9 +14,9 @@
 
 #include "kinds/ftCommon/types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>

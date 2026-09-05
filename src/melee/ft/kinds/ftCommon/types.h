@@ -8,8 +8,8 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 struct ftCollisionBox {

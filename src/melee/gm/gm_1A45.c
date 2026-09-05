@@ -8,7 +8,6 @@
 #include "gmmain_lib.h"
 #include "gmscdata.h"
 
-#include <dolphin/os/OSThread.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -18,6 +17,7 @@
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/sobjlib.h>
+#include <dolphin/os/OSThread.h>
 #include <melee/db/db.h>
 #include <melee/if/ifcoget.h>
 #include <melee/lb/lb_013B.h>

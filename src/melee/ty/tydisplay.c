@@ -9,9 +9,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -29,6 +26,9 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/if/textdraw.h>

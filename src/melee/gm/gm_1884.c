@@ -8,7 +8,6 @@
 
 #include <melee/it/forward.h>
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -20,6 +19,7 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/pad.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
 #include <melee/if/ifstatus.h>

@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -14,6 +13,7 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/video.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 /// .data

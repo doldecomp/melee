@@ -9,9 +9,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <dolphin/mtx.h>
-#include <dolphin/pad.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -25,6 +22,9 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <dolphin/mtx.h>
+#include <dolphin/pad.h>
+#include <dolphin/types.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grcastle.h>

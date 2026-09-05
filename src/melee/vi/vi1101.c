@@ -2,10 +2,10 @@
 
 #include "vi.h"
 
-#include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <dolphin/gx/GXStruct.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>

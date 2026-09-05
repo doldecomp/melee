@@ -10,7 +10,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/pad.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -19,6 +18,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <dolphin/pad.h>
 #include <melee/cm/cmsnap.h>
 #include <melee/if/ifall.h>
 #include <melee/lb/lbarchive.h>

@@ -8,8 +8,8 @@
 #include "types.h"
 
 #include <string.h>
-#include <dolphin/dvd.h>
 #include <sysdolphin/baselib/debug.h>
+#include <dolphin/dvd.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/gm/gmcameramode.h>

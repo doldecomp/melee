@@ -3,10 +3,10 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 
 static inline float lbVector_Len_xy_accurate(Vec3* vec)

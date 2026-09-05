@@ -9,13 +9,6 @@
 
 #include <stdarg.h>
 #include <stddef.h>
-#include <dolphin/gx/GXCull.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GXVert.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -30,6 +23,13 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/gx/GXCull.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTexture.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx/GXVert.h>
 #include <melee/sc/types.h>
 #include <Runtime/platform.h>
 

@@ -6,8 +6,8 @@
 #include "ftCo_Throw.h"
 #include "types.h"
 
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>

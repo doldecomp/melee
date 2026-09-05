@@ -11,10 +11,10 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <sysdolphin/baselib/spline.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/spline.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
 

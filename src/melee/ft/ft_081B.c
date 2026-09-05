@@ -25,8 +25,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdbool.h>
-#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>

@@ -5,8 +5,8 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/gx.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <dolphin/gx.h>
 #include <Runtime/platform.h>
 
 struct IfDamageFlags {

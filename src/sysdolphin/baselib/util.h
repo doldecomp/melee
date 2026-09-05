@@ -1,9 +1,9 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
+#include <sysdolphin/baselib/mtx.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/mtx.h>
 #include <Runtime/platform.h>
 
 /// functions

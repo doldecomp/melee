@@ -6,8 +6,8 @@
 #ifndef GALE01_01FC08
 #define GALE01_01FC08
 
-#include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <dolphin/gx/GXStruct.h>
 #include <Runtime/platform.h>
 
 /* 01FC08 */ void fn_8001FC08(void);
