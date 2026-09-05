@@ -4,7 +4,7 @@
 
 #include <dolphin/mcc.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/hsd_3933.h>
+#include "hsd_3933.h"
 
 struct ParticleConsoleState {
     /* 00 */ u8 x0_b0 : 1;

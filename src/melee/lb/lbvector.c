@@ -1,7 +1,7 @@
 #include "lbvector.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>

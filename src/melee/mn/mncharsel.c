@@ -3,9 +3,9 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "lb/lb_013B.h"
+#include <melee/lb/lb_013B.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -39,12 +39,12 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
-#include <melee/mn/mncharsel.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnmainrule.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/mnnamenew.h>
-#include <melee/mn/types.h>
+#include "mncharsel.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnname.h"
+#include "mnnamenew.h"
+#include "types.h"
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };

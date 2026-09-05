@@ -2,7 +2,7 @@
 #define __GALE01_391580
 
 #include "particle.h" // IWYU pragma: export
-#include "platform.h"
+#include <Runtime/platform.h>
 
 // .data
 

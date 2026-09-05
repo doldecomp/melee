@@ -1,15 +1,15 @@
 #include "ft_0CDD.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ft_084E.h"
+#include "ft_084E.h"
 
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ftcommon.h"
+#include "kinds/ftCommon/ftCo_Attack100.h"
+#include "kinds/ftCommon/ftpickupitem.h"
 #include <melee/it/it_26B1.h>
 
 /// grounded

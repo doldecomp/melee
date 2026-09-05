@@ -7,7 +7,7 @@
 #include "lbheap.h"
 #include "types.h"
 
-#include "gm/gmcameramode.h"
+#include <melee/gm/gmcameramode.h>
 
 #include <string.h>
 #include <dolphin/dvd.h>

@@ -1,24 +1,24 @@
-#include "ftDonkey/ftdonkeyspecials.h"
+#include "ftdonkeyspecials.h"
 
 #include "ftdonkeyspeciallw.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "forward.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
-#include "ftDonkey/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "types.h"
 
 #include <dolphin/mtx.h>
 

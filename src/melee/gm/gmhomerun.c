@@ -2,15 +2,15 @@
 
 #include "gm_unsplit.h"
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "gm/gmvsmelee.h"
+#include "gmvsmelee.h"
 
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>

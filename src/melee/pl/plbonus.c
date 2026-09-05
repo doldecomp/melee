@@ -9,8 +9,8 @@
 #include "pltrick.h"
 #include "types.h"
 
-#include "it/it_26B1.h"
-#include "pl/plbonusinline.h"
+#include <melee/it/it_26B1.h>
+#include "plbonusinline.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <melee/cm/camera.h>

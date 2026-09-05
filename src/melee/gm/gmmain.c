@@ -1,22 +1,22 @@
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "db/db.h"
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "lb/lb_0195.h"
-#include "lb/lbarq.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lbdvd.h"
-#include "lb/lbheap.h"
-#include "lb/lblanguage.h"
-#include "lb/lbmemory.h"
-#include "lb/lbmthp.h"
-#include "lb/lbsnap.h"
-#include "lb/lbtime.h"
+#include <melee/db/db.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbarq.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmemory.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/lbtime.h>
 
 #include <sysdolphin/baselib/forward.h>
 

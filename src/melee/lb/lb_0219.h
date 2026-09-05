@@ -6,7 +6,7 @@
 #ifndef GALE01_0219E4
 #define GALE01_0219E4
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

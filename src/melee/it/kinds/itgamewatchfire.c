@@ -2,13 +2,13 @@
 
 #include "inlines.h"
 
-#include "ft/ftlib.h"
-#include "ftGameWatch/ftgamewatchattacks4.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

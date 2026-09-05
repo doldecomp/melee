@@ -1,22 +1,22 @@
-#include "ft/ft_07C1.h"
+#include "ft_07C1.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftcoll.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_HammerWait.h"
+#include "fighter.h"
+#include "ftcoll.h"
+#include "inlines.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_HammerWait.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
+#include <melee/it/it_26B1.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lbcollision.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbcollision.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

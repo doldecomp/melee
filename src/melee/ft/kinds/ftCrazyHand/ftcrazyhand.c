@@ -2,48 +2,48 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCrazyHand/forward.h"
+#include "forward.h"
 
-#include "ftCrazyHand/ftcrazyhandbackairplane1.h"
-#include "ftCrazyHand/ftcrazyhandbackairplane2.h"
-#include "ftCrazyHand/ftcrazyhandbackairplane3.h"
-#include "ftCrazyHand/ftcrazyhandbackcrush.h"
-#include "ftCrazyHand/ftcrazyhandbackdisappear.h"
-#include "ftCrazyHand/ftcrazyhandcancel.h"
-#include "ftCrazyHand/ftcrazyhanddamage0.h"
-#include "ftCrazyHand/ftcrazyhanddrill.h"
-#include "ftCrazyHand/ftcrazyhandentry.h"
-#include "ftCrazyHand/ftcrazyhandfingerbeam.h"
-#include "ftCrazyHand/ftcrazyhandfingerbeam0.h"
-#include "ftCrazyHand/ftcrazyhandfingergun2.h"
-#include "ftCrazyHand/ftcrazyhandgrab.h"
-#include "ftCrazyHand/ftcrazyhandgrabunk1b174.h"
-#include "ftCrazyHand/ftcrazyhandpoke.h"
-#include "ftCrazyHand/ftcrazyhandrockcrush0.h"
-#include "ftCrazyHand/ftcrazyhandrockcrush1.h"
-#include "ftCrazyHand/ftcrazyhandslam.h"
-#include "ftCrazyHand/ftcrazyhandsqueeze.h"
-#include "ftCrazyHand/ftcrazyhandsqueezing0.h"
-#include "ftCrazyHand/ftcrazyhandsqueezing1.h"
-#include "ftCrazyHand/ftcrazyhandsweep.h"
-#include "ftCrazyHand/ftcrazyhandsweepwait.h"
-#include "ftCrazyHand/ftcrazyhandtagcancel.h"
-#include "ftCrazyHand/ftcrazyhandtaggrab.h"
-#include "ftCrazyHand/ftcrazyhandtagrockpaper.h"
-#include "ftCrazyHand/ftcrazyhandthrow.h"
-#include "ftCrazyHand/ftcrazyhandwait10.h"
-#include "ftCrazyHand/ftcrazyhandwait11.h"
-#include "ftCrazyHand/ftcrazyhandwalk.h"
-#include "ftMasterHand/types.h"
-#include "it/it_26B1.h"
+#include "ftcrazyhandbackairplane1.h"
+#include "ftcrazyhandbackairplane2.h"
+#include "ftcrazyhandbackairplane3.h"
+#include "ftcrazyhandbackcrush.h"
+#include "ftcrazyhandbackdisappear.h"
+#include "ftcrazyhandcancel.h"
+#include "ftcrazyhanddamage0.h"
+#include "ftcrazyhanddrill.h"
+#include "ftcrazyhandentry.h"
+#include "ftcrazyhandfingerbeam.h"
+#include "ftcrazyhandfingerbeam0.h"
+#include "ftcrazyhandfingergun2.h"
+#include "ftcrazyhandgrab.h"
+#include "ftcrazyhandgrabunk1b174.h"
+#include "ftcrazyhandpoke.h"
+#include "ftcrazyhandrockcrush0.h"
+#include "ftcrazyhandrockcrush1.h"
+#include "ftcrazyhandslam.h"
+#include "ftcrazyhandsqueeze.h"
+#include "ftcrazyhandsqueezing0.h"
+#include "ftcrazyhandsqueezing1.h"
+#include "ftcrazyhandsweep.h"
+#include "ftcrazyhandsweepwait.h"
+#include "ftcrazyhandtagcancel.h"
+#include "ftcrazyhandtaggrab.h"
+#include "ftcrazyhandtagrockpaper.h"
+#include "ftcrazyhandthrow.h"
+#include "ftcrazyhandwait10.h"
+#include "ftcrazyhandwait11.h"
+#include "ftcrazyhandwalk.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/it/it_26B1.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,11 +1,11 @@
 #ifndef GALE01_136258
 #define GALE01_136258
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftMars/forward.h"
+#include <melee/ft/kinds/ftMars/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 136258 */ void ftMs_Init_OnDeath(HSD_GObj* gobj);

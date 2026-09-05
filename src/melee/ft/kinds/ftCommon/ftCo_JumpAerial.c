@@ -2,34 +2,34 @@
 
 #include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ft_0D27.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0C8C.h>
+#include <melee/ft/ft_0D27.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_AirCatch.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackAir.h"
-#include "ftCommon/ftCo_EscapeAir.h"
-#include "ftCommon/ftCo_FallAerial.h"
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_HammerWait.h"
-#include "ftCommon/ftCo_ItemParasolOpen.h"
-#include "ftCommon/ftCo_ItemScrew.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_SpecialAir.h"
-#include "ftPeach/ftpeachfloat.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackAir.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_FallAerial.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_ItemParasolOpen.h"
+#include "ftCo_ItemScrew.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_SpecialAir.h"
+#include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
 
 #include <sysdolphin/baselib/jobj.h>
 

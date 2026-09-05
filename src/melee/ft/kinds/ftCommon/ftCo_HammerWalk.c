@@ -4,14 +4,14 @@
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftwalkcommon.h"
-#include "ft/types.h"
-#include "ftCommon/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftwalkcommon.h>
+#include <melee/ft/types.h>
+#include "types.h"
 
 #include <dolphin/mtx.h>
 

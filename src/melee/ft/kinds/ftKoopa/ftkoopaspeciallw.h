@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_KP_SPECIAL_LW_H
 #define MELEE_FT_KP_SPECIAL_LW_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <melee/ft/forward.h>
 
 /* 13460C */ void ftKp_SpecialLw_Enter(Fighter_GObj* gobj);

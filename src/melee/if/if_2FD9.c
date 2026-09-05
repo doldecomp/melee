@@ -1,11 +1,11 @@
 #include "if_2FD9.h"
 
-#include "gm/gm_unsplit.h"
-#include "if/ifall.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/gm/gm_unsplit.h>
+#include "ifall.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>

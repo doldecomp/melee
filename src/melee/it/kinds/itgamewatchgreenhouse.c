@@ -2,11 +2,11 @@
 
 #include "inlines.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_2725.h"
+#include <melee/it/it_2725.h>
 
-#include "it/kinds/forward.h"
+#include "forward.h"
 
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattack11.h>
 #include <melee/it/inlines.h>

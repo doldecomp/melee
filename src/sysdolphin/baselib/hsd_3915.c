@@ -5,9 +5,9 @@
 #include <math.h> // IWYU pragma: keep
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/state.h>
+#include "cobj.h"
+#include "pobj.h"
+#include "state.h"
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 

@@ -2,10 +2,10 @@
 
 #include "ftdynamics.h"
 
-#include "ft/ftanim.h"
-#include "ft/ftdata.h"
-#include "ft/inlines.h"
-#include "it/it_26B1.h"
+#include "ftanim.h"
+#include "ftdata.h"
+#include "inlines.h"
+#include <melee/it/it_26B1.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/random.h>

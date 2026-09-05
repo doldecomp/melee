@@ -1,26 +1,26 @@
-#include "ft/ft_0C8C.h"
+#include "ft_0C8C.h"
 
-#include "ft/fighter.h"
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0D4D.h"
-#include "ft/ftCo_800C7CA0.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_DownSpot.h"
-#include "ftCommon/ftCo_Lift.h"
-#include "ftCrazyHand/ftcrazyhandtaggrab.h"
-#include "ftMasterHand/ftmasterhanddamage0.h"
-#include "gm/gm_unsplit.h"
-#include "lb/lb_0219.h"
-#include "pl/player.h"
+#include "ft_0877.h"
+#include "ft_0D4D.h"
+#include "ftCo_800C7CA0.h"
+#include "ftcolanim.h"
+#include "ftcommon.h"
+#include "inlines.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_Attack100.h"
+#include "kinds/ftCommon/ftCo_CaptureCut.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/ftCo_DownSpot.h"
+#include "kinds/ftCommon/ftCo_Lift.h"
+#include "kinds/ftCrazyHand/ftcrazyhandtaggrab.h"
+#include "kinds/ftMasterHand/ftmasterhanddamage0.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_0219.h>
+#include <melee/pl/player.h>
 
 HSD_MObj* ft_804D6588;
 

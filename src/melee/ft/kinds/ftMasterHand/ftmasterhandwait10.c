@@ -20,17 +20,17 @@
 #include "ftmasterhandwait12.h"
 #include "ftmasterhandwalk.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftanim.h"
-#include "ft/ftbosslib.h"
-#include "ft/types.h"
-#include "ftMasterHand/types.h"
-#include "gr/stage.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/types.h>
+#include "types.h"
+#include <melee/gr/stage.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>

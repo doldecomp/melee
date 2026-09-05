@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-#include "ft/forward.h"
-#include "melee/ft/forward.h"
-#include "melee/it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 /* 0D67C4 */ bool ftCo_800D67C4(Fighter*);
 /* 0D6824 */ bool ftCo_800D6824(Fighter_GObj*);

@@ -1,12 +1,12 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
-#include "ftPurin/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftPurin/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

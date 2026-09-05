@@ -2,17 +2,17 @@
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "ft/dobjlist.h" // IWYU pragma: keep
-#include "ftGameWatch/types.h"
-#include "ftMars/types.h"
-#include "ftNess/types.h"
+#include <melee/ft/kinds/ftGameWatch/types.h>
+#include <melee/ft/kinds/ftMars/types.h>
+#include <melee/ft/kinds/ftNess/types.h>
 
-#include "it/forward.h"
-#include "lb/forward.h"
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

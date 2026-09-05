@@ -1,22 +1,22 @@
 #include "soundtest.h"
 
-#include "db/db.h"
-#include "db/dbsound.h"
+#include <melee/db/db.h>
+#include <melee/db/dbsound.h>
 
-#include "gm/forward.h"
+#include <melee/gm/forward.h>
 
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
-#include "if/textlib.h"
-#include "if/types.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lblanguage.h"
-#include "lb/lbsnap.h"
-#include "mn/inlines.h"
-#include "ty/toy.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include "textlib.h"
+#include "types.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/mn/inlines.h>
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>

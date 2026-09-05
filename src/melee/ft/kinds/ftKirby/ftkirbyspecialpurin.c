@@ -5,30 +5,30 @@
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "ft/fighter.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ft/kinds/ftCommon/ftCo_Landing.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 
-#include "ftKirby/forward.h"
+#include "forward.h"
 
-#include "mp/mplib.h"
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/forward.h>
 

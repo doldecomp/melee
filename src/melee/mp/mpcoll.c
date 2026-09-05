@@ -1,24 +1,24 @@
-#include "mp/mpcoll.h"
+#include "mpcoll.h"
 
-#include "platform.h"
-#include "stdbool.h"
+#include <Runtime/platform.h>
+#include <stdbool.h>
 
 #include <placeholder.h>
 
-#include "db/db.h"
-#include "ft/ftlib.h"
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "gr/grdynamicattr.h"
-#include "it/it_26B1.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
-#include "lb/types.h"
+#include <melee/gr/grdynamicattr.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/types.h>
 
-#include "mp/forward.h"
+#include "forward.h"
 
-#include "mp/mplib.h"
+#include "mplib.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>

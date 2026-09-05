@@ -10,7 +10,7 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
+#include "gmmain_lib.h"
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>

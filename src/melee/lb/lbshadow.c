@@ -18,8 +18,8 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
-#include <melee/lb/lbvector.h>
-#include <melee/lb/types.h>
+#include "lbvector.h"
+#include "types.h"
 
 static void splGetCardinalTangent(Vec3* p, Vec3* cp, f32 tension, f32 u)
 {

@@ -1,7 +1,7 @@
 #include "main_TRK.h"
 
-#include "MetroTRK/mainloop.h"
-#include "MetroTRK/nubinit.h"
+#include "mainloop.h"
+#include "nubinit.h"
 
 static int TRK_mainError;
 

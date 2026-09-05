@@ -7,8 +7,8 @@
 #include "sislib_font.h"
 #include "wobj.h"
 
-#include "dolphin/gx.h"
-#include "dolphin/mtx.h"
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>

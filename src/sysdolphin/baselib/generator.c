@@ -4,12 +4,12 @@
 
 #include <math.h>
 #include <string.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/wobj.h>
+#include "cobj.h"
+#include "mtx.h"
+#include "psappsrt.h"
+#include "psstructs.h"
+#include "random.h"
+#include "wobj.h"
 
 /* 4D0E5C */
 

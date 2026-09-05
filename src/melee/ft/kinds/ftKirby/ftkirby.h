@@ -2,14 +2,14 @@
 #define GALE01_0EE528
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
-#include "ftFox/forward.h"
-#include "ftKirby/forward.h"
-#include "ftLink/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftFox/forward.h>
+#include <melee/ft/kinds/ftKirby/forward.h>
+#include <melee/ft/kinds/ftLink/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

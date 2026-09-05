@@ -3,20 +3,20 @@
 #include "ft_0877.h"
 #include "ftlib.h"
 
-#include "cm/camera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/cm/camera.h>
+#include "inlines.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftMasterHand/types.h"
-#include "it/it_26B1.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
+#include "kinds/ftMasterHand/types.h"
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
-#include "pl/forward.h"
+#include <melee/pl/forward.h>
 
-#include "pl/player.h"
+#include <melee/pl/player.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>

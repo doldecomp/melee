@@ -2,13 +2,13 @@
 
 #include "gm_unsplit.h"
 
-#include "gm/gmevent.h"
-#include "gm/gmregtyfall.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
-#include "mn/mnmain.h"
-#include "sc/types.h"
-#include "ty/toy.h"
+#include "gmevent.h"
+#include "gmregtyfall.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>

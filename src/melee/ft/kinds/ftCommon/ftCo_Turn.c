@@ -2,31 +2,31 @@
 
 #include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackHi3.h"
-#include "ftCommon/ftCo_AttackHi4.h"
-#include "ftCommon/ftCo_AttackLw3.h"
-#include "ftCommon/ftCo_AttackLw4.h"
-#include "ftCommon/ftCo_AttackS3.h"
-#include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_SpecialS.h"
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack1.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_Dash.h"
+#include "ftCo_Guard.h"
+#include "ftCo_Jump.h"
+#include "ftCo_SpecialS.h"
 
 bool ftCo_800C97A8(Fighter_GObj* gobj)
 {

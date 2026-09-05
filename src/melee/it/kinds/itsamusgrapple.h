@@ -1,11 +1,11 @@
 #ifndef GALE01_2B7150
 #define GALE01_2B7150
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/itCharItems.h"
-#include "it/kinds/types.h"
+#include <melee/it/itCharItems.h>
+#include <melee/it/kinds/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

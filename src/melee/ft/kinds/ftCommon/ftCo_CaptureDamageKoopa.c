@@ -4,15 +4,15 @@
 #include "ftCo_CaptureKoopa.h"
 #include "ftCo_CaptureWaitKoopa.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ftCommon/ftCo_Attack100.h"
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include "ftCo_Attack100.h"
 
 #include <sysdolphin/baselib/forward.h>
 

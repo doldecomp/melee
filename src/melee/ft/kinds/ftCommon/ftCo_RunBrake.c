@@ -2,22 +2,22 @@
 
 #include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_TurnRun.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_TurnRun.h"
 
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {

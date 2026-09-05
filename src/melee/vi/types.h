@@ -1,7 +1,7 @@
 #ifndef MELEE_VI_TYPES_H
 #define MELEE_VI_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "vi/forward.h" // IWYU pragma: export
 

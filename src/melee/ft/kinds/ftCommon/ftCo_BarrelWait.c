@@ -5,22 +5,22 @@
 #include "ftCo_Throw.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdynamics.h"
-#include "ft/types.h"
-#include "ftCommon/inlines.h"
-#include "gr/ground.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdynamics.h>
+#include <melee/ft/types.h>
+#include "inlines.h"
+#include <melee/gr/ground.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lbcollision.h"
-#include "mp/mpcoll.h"
+#include <melee/lb/lbcollision.h>
+#include <melee/mp/mpcoll.h>
 
 /* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
 

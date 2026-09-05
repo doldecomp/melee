@@ -1,12 +1,12 @@
 #include "hsd_3982.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/hsd_3924.h>
-#include <sysdolphin/baselib/hsd_392A.h>
-#include <sysdolphin/baselib/wobj.h>
+#include "cobj.h"
+#include "gobj.h"
+#include "gobjgxlink.h"
+#include "gobjobject.h"
+#include "hsd_3924.h"
+#include "hsd_392A.h"
+#include "wobj.h"
 
 void fn_803982E4(HSD_GObj* gobj, int unused)
 {

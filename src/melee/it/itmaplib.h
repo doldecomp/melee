@@ -1,12 +1,12 @@
 #ifndef GALE01_ITMAPLIB
 #define GALE01_ITMAPLIB
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
-#include "lb/forward.h"
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -42,28 +42,28 @@
 #include "gmvsmode.h"
 #include "types.h"
 
-#include "gm/gmcameramode.h"
-#include "gm/gmmenumode.h"
-#include "gm/gmprogressivemode.h"
-#include "gm/gmtrainingmode.h"
-#include "if/ifprize.h"
-#include "mn/mncharsel.h"
-#include "mn/mnmain.h"
-#include "mn/mnstagesel.h"
-#include "ty/toy.h"
-#include "ty/tydisplay.h"
-#include "ty/tyfigupon.h"
-#include "vi/vi0102.h"
-#include "vi/vi0401.h"
-#include "vi/vi0402.h"
-#include "vi/vi0501.h"
-#include "vi/vi0502.h"
-#include "vi/vi0601.h"
-#include "vi/vi0801.h"
-#include "vi/vi1101.h"
-#include "vi/vi1201v1.h"
-#include "vi/vi1201v2.h"
-#include "vi/vi1202.h"
+#include "gmcameramode.h"
+#include "gmmenumode.h"
+#include "gmprogressivemode.h"
+#include "gmtrainingmode.h"
+#include <melee/if/ifprize.h>
+#include <melee/mn/mncharsel.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnstagesel.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tydisplay.h>
+#include <melee/ty/tyfigupon.h>
+#include <melee/vi/vi0102.h>
+#include <melee/vi/vi0401.h>
+#include <melee/vi/vi0402.h>
+#include <melee/vi/vi0501.h>
+#include <melee/vi/vi0502.h>
+#include <melee/vi/vi0601.h>
+#include <melee/vi/vi0801.h>
+#include <melee/vi/vi1101.h>
+#include <melee/vi/vi1201v1.h>
+#include <melee/vi/vi1201v2.h>
+#include <melee/vi/vi1202.h>
 
 static GameScene scenes[] = {
     {

@@ -1,9 +1,9 @@
 #ifndef GALE01_2CCAB4
 #define GALE01_2CCAB4
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2CCAB4 */ void itThunder_Logic7_Spawned(Item_GObj*);
 /* 2CCB10 */ void it_802CCB10(Item_GObj*);

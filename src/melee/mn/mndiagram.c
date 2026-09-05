@@ -1,21 +1,21 @@
 #include "mndiagram.static.h"
 
-#include "dolphin/types.h"
-#include "gm/gm_1601.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00CE.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mndiagram2.h"
-#include "mn/mndiagram3.h"
-#include "mn/mnmain.h"
-#include "mn/mnname.h"
-#include "mn/types.h"
+#include <dolphin/types.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00CE.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include "inlines.h"
+#include "mndiagram2.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

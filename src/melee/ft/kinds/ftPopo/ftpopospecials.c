@@ -1,16 +1,16 @@
-#include "ft/kinds/ftPopo/ftpopospecials.h"
+#include "ftpopospecials.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/kinds/ftCommon/ftCo_Fall.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/inlines.h"
-#include "ftNana/ftnana.h"
-#include "ftPopo/ftpopo.h"
-#include "pl/player.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/kinds/ftNana/ftnana.h>
+#include "ftpopo.h"
+#include <melee/pl/player.h>
 
 #include <math.h>
 

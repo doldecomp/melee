@@ -1,4 +1,4 @@
-#include "lb/lb_00B0.h"
+#include "lb_00B0.h"
 
 #include "sc/types.h" // IWYU pragma: keep
 

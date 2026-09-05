@@ -2,21 +2,21 @@
 
 #include "inlines.h"
 #include "pl_040D.h"
-#include "placeholder.h"
+#include <placeholder.h>
 #include "player.h"
 #include "plbonus.h"
 #include "plbonusinline.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
-#include <ft/ft_0877.h>
-#include <ft/ft_0892.h>
-#include <ft/ftlib.h>
-#include <gm/gm_16F1.h>
-#include <gr/stage.h>
-#include <if/ifmagnify.h>
-#include <it/it_26B1.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gr/stage.h>
+#include <melee/if/ifmagnify.h>
+#include <melee/it/it_26B1.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been

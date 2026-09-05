@@ -8,13 +8,13 @@
 
 #include "forward.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftNana/ftnana.h"
-#include "it/it_26B1.h"
-#include "it/kinds/itclimbersice.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftNana/ftnana.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itclimbersice.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

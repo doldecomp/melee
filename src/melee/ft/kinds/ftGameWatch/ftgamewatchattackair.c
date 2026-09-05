@@ -2,22 +2,22 @@
 
 #include "ftgamewatch.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/ft_081B.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftCommon/ftCo_AttackAir.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_LandingAir.h"
-#include "ftGameWatch/types.h"
-#include "it/kinds/itgamewatchbreath.h"
-#include "it/kinds/itgamewatchparachute.h"
-#include "it/kinds/itgamewatchturtle.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/kinds/ftCommon/ftCo_LandingAir.h>
+#include "types.h"
+#include <melee/it/kinds/itgamewatchbreath.h>
+#include <melee/it/kinds/itgamewatchparachute.h>
+#include <melee/it/kinds/itgamewatchturtle.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <dolphin/mtx.h>
 

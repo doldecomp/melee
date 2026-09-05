@@ -1,6 +1,6 @@
-#include <platform.h>
+#include "platform.h"
 
-#include <global_destructor_chain.h>
+#include "global_destructor_chain.h"
 
 typedef void (*Destructor)(void*, int);
 typedef struct DestructorChain {

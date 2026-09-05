@@ -1,16 +1,16 @@
 #include "grmaterial.h"
 
-#include "gr/types.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/kinds/ityaku.h"
-#include "it/types.h"
+#include "types.h"
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/kinds/ityaku.h>
+#include <melee/it/types.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lb_013B.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
 
 #include <sysdolphin/baselib/forward.h>
 

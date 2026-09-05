@@ -1,9 +1,9 @@
 #ifndef _METROTRK_TRK_GLUE_H
 #define _METROTRK_TRK_GLUE_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "MetroTRK/dserror.h"
+#include <MetroTRK/dserror.h>
 
 #include <dolphin/os.h>
 

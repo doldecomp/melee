@@ -5,17 +5,17 @@
 #include "ftCo_CliffJump.h"
 #include "ftCo_DamageFall.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/types.h"
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include "types.h"
 
 /* 09A9AC */ static bool ftCo_8009A9AC(Fighter_GObj* gobj);
 

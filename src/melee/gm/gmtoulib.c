@@ -10,19 +10,19 @@
 
 #include <placeholder.h>
 
-#include "ft/forward.h"
-#include "gm/forward.h"
+#include <melee/ft/forward.h>
+#include "forward.h"
 
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "mn/mnmain.h"
-#include "mn/mnname.h"
-#include "mn/mnstagesel.h"
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/mnstagesel.h>
 
-#include "pl/forward.h"
+#include <melee/pl/forward.h>
 
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,9 +1,9 @@
 #include "ftmasterhandwait11.h"
 
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "ftMasterHand/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include "types.h"
 
 #include <dolphin/mtx.h>
 

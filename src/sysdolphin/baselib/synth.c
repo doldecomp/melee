@@ -8,8 +8,8 @@
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/devcom.h>
+#include "debug.h"
+#include "devcom.h"
 
 /* 389334 */ static int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan,
                                            int priority, int itd_flag,

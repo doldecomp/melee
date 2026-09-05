@@ -1,27 +1,27 @@
 #include "mplib.h"
 
 #include "mpisland.h"
-#include "placeholder.h"
-#include "platform.h"
-#include "stdbool.h"
+#include <placeholder.h>
+#include <Runtime/platform.h>
+#include <stdbool.h>
 #include "types.h"
 
-#include "db/db.h"
-#include "dolphin/gx/GXGeometry.h"
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/gx/GXVert.h"
-#include "dolphin/types.h"
-#include "ft/ftlib.h"
-#include "gr/grdynamicattr.h"
-#include "gr/ground.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/itCharItems.h"
+#include <melee/db/db.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXStruct.h>
+#include <dolphin/gx/GXVert.h>
+#include <dolphin/types.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gr/grdynamicattr.h>
+#include <melee/gr/ground.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itCharItems.h>
 
-#include "lb/forward.h"
-#include "mp/forward.h"
+#include <melee/lb/forward.h>
+#include "forward.h"
 
-#include "mp/mpcoll.h"
+#include "mpcoll.h"
 
 #include <sysdolphin/baselib/forward.h>
 

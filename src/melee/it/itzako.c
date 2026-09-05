@@ -6,21 +6,21 @@
 #include "itmaplib.h"
 #include "itmaterial.h"
 
-#include "cm/camera.h"
-#include "ft/fighter.h"
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "it/inlines.h"
-#include "it/itgroundcoll.h"
-#include "it/kinds/itcoin.h"
-#include "it/kinds/itheiho.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
-#include "pl/plbonuslib.h"
-#include "ty/tydisplay.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
+#include "inlines.h"
+#include "itgroundcoll.h"
+#include "kinds/itcoin.h"
+#include "kinds/itheiho.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
+#include <melee/pl/plbonuslib.h>
+#include <melee/ty/tydisplay.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

@@ -1,9 +1,9 @@
 #ifndef GALE01_2C68F8
 #define GALE01_2C68F8
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,17 +1,17 @@
 #include "ftdynamics.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ftcoll.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftKirby/ftkirby.h"
-#include "gr/ground.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "ftcoll.h"
+#include "inlines.h"
+#include "types.h"
+#include "kinds/ftKirby/ftkirby.h"
+#include <melee/gr/ground.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <stddef.h>
 #include <sysdolphin/baselib/debug.h>

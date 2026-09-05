@@ -1,29 +1,29 @@
 #include "grgreatbay.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "forward.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ftdevice.h"
-#include "ft/ftlib.h"
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "it/itspawn.h"
-#include "it/kinds/ittincle.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/types.h"
-#include "mp/mplib.h"
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include <melee/it/item.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/kinds/ittincle.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

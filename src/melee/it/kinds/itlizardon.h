@@ -1,11 +1,11 @@
 #ifndef GALE01_2CB8AC
 #define GALE01_2CB8AC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2CB8AC */ void it_802CB8AC(Item_GObj*);
 /* 2CB93C */ void it_802CB93C(Item_GObj*);

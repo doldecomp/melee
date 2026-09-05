@@ -1,11 +1,11 @@
 #ifndef GALE01_305058
 #define GALE01_305058
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 
-#include "ty/types.h"
+#include <melee/ty/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

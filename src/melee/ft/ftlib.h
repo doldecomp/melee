@@ -1,7 +1,7 @@
 #ifndef GALE01_0860C4
 #define GALE01_0860C4
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

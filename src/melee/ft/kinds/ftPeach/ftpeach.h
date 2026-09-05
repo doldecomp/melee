@@ -1,11 +1,11 @@
 #ifndef GALE01_11B51C
 #define GALE01_11B51C
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftPeach/forward.h"
+#include <melee/ft/kinds/ftPeach/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 11B51C */ void ftPe_Init_OnDeath(HSD_GObj* gobj);

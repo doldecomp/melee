@@ -2,31 +2,31 @@
 
 #include "inlines.h"
 
-#include "it/kinds/itseakchain.static.h"
+#include "itseakchain.static.h"
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "dolphin/mtx.h"
-#include "ft/ftcoll.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
+#include <dolphin/mtx.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
 
-#include "ftSeak/forward.h"
+#include <melee/ft/kinds/ftSeak/forward.h>
 
-#include "ftSeak/ftseakspecials.h"
+#include <melee/ft/kinds/ftSeak/ftseakspecials.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/kinds/inlines.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include "inlines.h"
+#include "itlinkhookshot.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 #include <sysdolphin/baselib/forward.h>
 

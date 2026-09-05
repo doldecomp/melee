@@ -2,14 +2,14 @@
 
 #include "inlines.h"
 
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "ft/ft_0BF0.h"
-#include "ft/ftlib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/itCharItems.h"
-#include "it/types.h"
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ft_0BF0.h>
+#include <melee/ft/ftlib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/types.h>
 
 #include <stdbool.h>
 #include <sysdolphin/baselib/gobj.h>

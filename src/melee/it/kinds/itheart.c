@@ -2,13 +2,13 @@
 
 #include "inlines.h"
 
-#include "gm/gm_18A1.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
+#include <melee/gm/gm_18A1.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

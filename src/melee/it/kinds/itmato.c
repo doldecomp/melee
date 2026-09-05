@@ -1,11 +1,11 @@
 #include "itmato.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/inlines.h"
-#include "it/itCommonItems.h"
-#include "it/itzako.h"
-#include "it/types.h"
+#include <melee/it/inlines.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itzako.h>
+#include <melee/it/types.h>
 
 #include <dolphin/mtx.h>
 #include <melee/gr/ground.h>

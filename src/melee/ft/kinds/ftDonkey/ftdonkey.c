@@ -1,4 +1,4 @@
-#include "ftDonkey/ftdonkey.h"
+#include "ftdonkey.h"
 
 #include "ftdonkeyheavyfall.h"
 #include "ftdonkeyheavyjump.h"
@@ -12,30 +12,30 @@
 #include "ftdonkeyspecialn.h"
 #include "ftdonkeyspecials.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "forward.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftdata.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_CargoFall.h"
-#include "ftCommon/ftCo_CargoJump.h"
-#include "ftCommon/ftCo_CargoKneebend.h"
-#include "ftCommon/ftCo_CargoLanding.h"
-#include "ftCommon/ftCo_CargoThrow.h"
-#include "ftCommon/ftCo_CargoTurn.h"
-#include "ftCommon/ftCo_CargoWait.h"
-#include "ftCommon/ftCo_CargoWalk.h"
-#include "ftDonkey/types.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoFall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoJump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoKneebend.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoLanding.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoThrow.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoTurn.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CargoWalk.h>
+#include "types.h"
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lbanim.h"
-#include "mp/mplib.h"
+#include <melee/lb/lbanim.h>
+#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
 

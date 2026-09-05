@@ -5,20 +5,20 @@
 #include "ftmewtwospecialn.h"
 #include "ftmewtwospecials.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "forward.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftMewtwo/types.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "types.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
+#include <melee/it/it_26B1.h>
 
 #include <dolphin/mtx.h>
 

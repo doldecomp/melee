@@ -3,14 +3,14 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
-#include "it/forward.h"
-#include "lb/forward.h"
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

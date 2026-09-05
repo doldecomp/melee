@@ -2,14 +2,14 @@
 
 #include "ftCo_FallSpecial.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftKirby/ftkirby.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include "ftCo_Fall.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 
 #include <dolphin/mtx.h>
 

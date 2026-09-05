@@ -1,9 +1,9 @@
 #include "itporygon2.h"
 
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itgroundcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itgroundcoll.h>
 
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

@@ -3,11 +3,11 @@
 #include "ftkoopa.h"
 #include "ftkoopaspecialn.h"
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_084E.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

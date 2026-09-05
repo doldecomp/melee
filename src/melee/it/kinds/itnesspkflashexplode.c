@@ -1,18 +1,18 @@
 #include "itnesspkflashexplode.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "db/db.h"
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/item.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
 
 #include <sysdolphin/baselib/jobj.h>
 

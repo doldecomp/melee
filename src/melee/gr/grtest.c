@@ -1,13 +1,13 @@
-#include "gr/grtest.h"
+#include "grtest.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
+#include "forward.h"
 
-#include "gr/granime.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
+#include "granime.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
 

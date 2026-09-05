@@ -10,10 +10,10 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
-#include "lb/lb_013B.h"
-#include "lb/lbbgflash.h"
-#include "lb/types.h"
+#include <dolphin/gx/GXStruct.h>
+#include "lb_013B.h"
+#include "lbbgflash.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -21,7 +21,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/objalloc.h>
-#include <melee/lb/lbarchive.h>
+#include "lbarchive.h"
 
 HSD_ObjAllocData lbl_804336A0;
 

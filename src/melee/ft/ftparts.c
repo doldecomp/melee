@@ -7,10 +7,10 @@
 #include "ftparts.static.h"
 
 #include "inlines.h"
-#include "placeholder.h"
+#include <placeholder.h>
 #include "types.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>

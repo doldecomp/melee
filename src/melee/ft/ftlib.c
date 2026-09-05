@@ -1,35 +1,35 @@
 #include "ftlib.h"
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0D4D.h"
-#include "ft/ftanim.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftmetal.h"
-#include "ft/ftparts.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0D4D.h"
+#include "ftanim.h"
+#include "ftchangeparam.h"
+#include "ftcommon.h"
+#include "ftdata.h"
+#include "ftmetal.h"
+#include "ftparts.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftGameWatch/ftgamewatch.h"
-#include "ftKirby/ftkirby.h"
-#include "gm/gm_unsplit.h"
+#include "kinds/ftGameWatch/ftgamewatch.h"
+#include "kinds/ftKirby/ftkirby.h"
+#include <melee/gm/gm_unsplit.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_013B.h"
-#include "mn/types.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/mn/types.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>

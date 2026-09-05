@@ -1,11 +1,11 @@
 #include "ft_0892.h"
 
-#include "ft/fighter.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftFox/ftfoxappeals.h"
-#include "it/it_26B1.h"
-#include "pl/plattack.h"
-#include "pl/pltrick.h"
+#include "fighter.h"
+#include "inlines.h"
+#include "kinds/ftFox/ftfoxappeals.h"
+#include <melee/it/it_26B1.h>
+#include <melee/pl/plattack.h>
+#include <melee/pl/pltrick.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

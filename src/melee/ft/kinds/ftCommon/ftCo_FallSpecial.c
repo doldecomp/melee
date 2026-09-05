@@ -2,22 +2,22 @@
 
 #include "ftCo_DamageFall.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0892.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_ItemParasolOpen.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/types.h"
-#include "mp/mplib.h"
-#include "sfx/crowdsfx.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemParasolOpen.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_Landing.h"
+#include "types.h"
+#include <melee/mp/mplib.h>
+#include <melee/sfx/crowdsfx.h>
 
 #include <dolphin/mtx.h>
 

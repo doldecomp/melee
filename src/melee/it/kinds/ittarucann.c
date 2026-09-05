@@ -2,21 +2,21 @@
 
 #include "types.h"
 
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftCommon/ftCo_Barrel.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/iteffect.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Barrel.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/iteffect.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/forward.h>
 

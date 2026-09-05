@@ -2,35 +2,35 @@
 
 #include "it_26B1.h"
 
-#include "cm/camera.h"
-#include "db/db.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "gr/grlib.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/it_3F14.h"
-#include "it/it_3F2F.h"
-#include "it/itanimlist.h"
-#include "it/itcoll.h"
-#include "it/iteffect.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itmaterial.h"
-#include "it/types.h"
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/stage.h>
+#include "inlines.h"
+#include "it_2725.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "it_3F2F.h"
+#include "itanimlist.h"
+#include "itcoll.h"
+#include "iteffect.h"
+#include "itgroundcoll.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
+#include "itmaterial.h"
+#include "types.h"
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

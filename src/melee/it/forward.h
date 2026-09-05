@@ -1,7 +1,7 @@
 #ifndef MELEE_IT_FORWARD_H
 #define MELEE_IT_FORWARD_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 typedef struct Article Article;

@@ -1,9 +1,9 @@
 #ifndef MELEE_MN_MNCOUNT_H
 #define MELEE_MN_MNCOUNT_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>

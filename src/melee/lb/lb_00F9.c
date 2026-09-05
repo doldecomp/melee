@@ -1,16 +1,16 @@
 #include "lb_00F9.h"
 
-#include "platform.h"
-#include "stddef.h"
+#include <Runtime/platform.h>
+#include <stddef.h>
 
 #include <placeholder.h>
 
-#include "lb/forward.h"
+#include "forward.h"
 
-#include "lb/lbcollision.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "lb/types.h"
+#include "lbcollision.h"
+#include "lbspdisplay.h"
+#include "lbvector.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,10 +1,10 @@
 #include "ftchangeparam.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/debug.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/inlines.h>
+#include "fighter.h"
+#include "inlines.h"
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {

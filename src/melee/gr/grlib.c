@@ -5,15 +5,15 @@
 #include "ground.h"
 #include "grrcruise.h"
 
-#include "cm/camera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "gr/types.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "lb/lb_00F9.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "types.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00F9.h>
 #include "lb/types.h" // IWYU pragma: keep
-#include "sc/types.h"
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

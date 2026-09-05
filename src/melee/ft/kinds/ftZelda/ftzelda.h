@@ -1,11 +1,11 @@
 #ifndef GALE01_1393AC
 #define GALE01_1393AC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftZelda/forward.h"
+#include <melee/ft/kinds/ftZelda/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 1392DC */ void ftZd_Init_OnDeath(HSD_GObj* gobj);

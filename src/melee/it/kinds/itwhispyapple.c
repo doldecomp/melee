@@ -1,17 +1,17 @@
 #include "itwhispyapple.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itspawn.h"
-#include "lb/lb_00F9.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itspawn.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <sysdolphin/baselib/random.h>
 

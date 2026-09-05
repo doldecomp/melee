@@ -1,19 +1,19 @@
 #ifndef MELEE_FT_INLINES_H
 #define MELEE_FT_INLINES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/eflib.h"
+#include <melee/ef/eflib.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "gm/gm_16AE.h"
-#include "it/it_26B1.h"
-#include "lb/lbvector.h"
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbvector.h>
 
-#include "mp/forward.h"
+#include <melee/mp/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>

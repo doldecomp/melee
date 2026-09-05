@@ -2,21 +2,21 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftPikachu/forward.h"
+#include <melee/ft/kinds/ftPikachu/forward.h>
 
-#include "ftPikachu/ftpikachu.h"
-#include "ftPikachu/ftpikachuspecialhi.h"
-#include "ftPikachu/ftpikachuspeciallw.h"
-#include "ftPikachu/ftpikachuspecialn.h"
-#include "ftPikachu/ftpikachuspecials.h"
-#include "it/it_26B1.h"
+#include <melee/ft/kinds/ftPikachu/ftpikachu.h>
+#include <melee/ft/kinds/ftPikachu/ftpikachuspecialhi.h>
+#include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
+#include <melee/ft/kinds/ftPikachu/ftpikachuspecialn.h>
+#include <melee/ft/kinds/ftPikachu/ftpikachuspecials.h>
+#include <melee/it/it_26B1.h>
 
 /* 45A480 */ UnkCostumeStruct ftPc_CostumeList[4];
 

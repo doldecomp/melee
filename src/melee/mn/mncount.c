@@ -1,6 +1,6 @@
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "ty/toy.h"
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -17,12 +17,12 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mncount.h>
-#include <melee/mn/mndiagram.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mncount.h"
+#include "mndiagram.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 #include <melee/sc/types.h>
 
 // DATA / MELEE RECORDS / MISC RECORDS

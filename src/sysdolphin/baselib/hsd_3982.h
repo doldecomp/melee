@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_HSD_3982_H
 #define SYSDOLPHIN_BASELIB_HSD_3982_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -2,32 +2,32 @@
 
 #include "ftfox.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0C8C.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftpickupitem.h"
-#include "ftFox/inlines.h"
-#include "ftFox/types.h"
-#include "it/it_26B1.h"
-#include "it/kinds/itfoxblaster.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include "inlines.h"
+#include "types.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itfoxblaster.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>

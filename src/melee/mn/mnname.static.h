@@ -3,9 +3,9 @@
 
 #include "mnname.h" // IWYU pragma: export
 
-#include "mn/forward.h"
+#include <melee/mn/forward.h>
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <dolphin/mtx.h>
 

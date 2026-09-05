@@ -1,9 +1,9 @@
 #ifndef GALE01_2EAF28
 #define GALE01_2EAF28
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2EAF28 */ s32 it_802EAF28(Item_GObj* gobj);
 /* 2EAF34 */ Item_GObj* it_802EAF34(HSD_GObj*, Vec3*, int);

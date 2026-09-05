@@ -1,9 +1,9 @@
-#include "gr/grdynamicattr.h"
+#include "grdynamicattr.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "gr/types.h" // IWYU pragma: keep
-#include "mp/mplib.h"
+#include <melee/mp/mplib.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>

@@ -1,12 +1,12 @@
 #include "gmregclear.h"
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmadventure.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "gmadventure.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/if/ifstatus.h>
 #include <melee/pl/player.h>
 

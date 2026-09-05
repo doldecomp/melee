@@ -1,11 +1,11 @@
 #ifndef GALE01_20741C
 #define GALE01_20741C
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
 

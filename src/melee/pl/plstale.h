@@ -1,7 +1,7 @@
 #ifndef _plstale_h_
 #define _plstale_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

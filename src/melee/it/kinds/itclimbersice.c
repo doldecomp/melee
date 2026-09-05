@@ -2,18 +2,18 @@
 
 #include <placeholder.h>
 
-#include "db/db.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/kinds/ftPopo/ftpopo.h"
-#include "ftKirby/ftkirbyspecialiceclimber.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/kinds/ftPopo/ftpopo.h>
+#include <melee/ft/kinds/ftKirby/ftkirbyspecialiceclimber.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
 
 #include <sysdolphin/baselib/jobj.h>
 

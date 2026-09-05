@@ -2,12 +2,12 @@
 #define GALE01_0763C0
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

@@ -4,14 +4,14 @@
 #define MELEE_IT_ITCOMMONITEMS_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/types.h"
-#include "gm/types.h"
+#include <dolphin/types.h>
+#include <melee/gm/types.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>

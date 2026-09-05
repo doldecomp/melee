@@ -1,13 +1,13 @@
 #include "ftCo_Attack100.h"
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-#include "ft/ft_0892.h"
-#include "ft/inlines.h"
-#include "it/kinds/itsamusgrapple.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "mp/mplib.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/inlines.h>
+#include <melee/it/kinds/itsamusgrapple.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/random.h>
 

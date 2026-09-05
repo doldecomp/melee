@@ -2,14 +2,14 @@
 
 #include "inlines.h"
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftlib.h"
-#include "ft/kinds/ftKirby/ftkirbyspecialdonkey.h"
-#include "ft/kinds/ftSeak/ftseakspecials.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
+#include <melee/ft/kinds/ftSeak/ftseakspecials.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
 
 #include <sysdolphin/baselib/jobj.h>
 

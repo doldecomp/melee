@@ -1,48 +1,48 @@
 #include "ftCo_SquatWait.h"
 
-#include "platform.h"
-#include "stdbool.h"
+#include <Runtime/platform.h>
+#include <stdbool.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftwaitanim.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCLink/ftclink.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftwaitanim.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCLink/ftclink.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackHi3.h"
-#include "ftCommon/ftCo_AttackHi4.h"
-#include "ftCommon/ftCo_AttackLw3.h"
-#include "ftCommon/ftCo_AttackLw4.h"
-#include "ftCommon/ftCo_AttackS3.h"
-#include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Pass.h"
-#include "ftCommon/ftCo_SquatRv.h"
-#include "ftLink/ftlinkattackair.h"
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack1.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_Dash.h"
+#include "ftCo_Guard.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Pass.h"
+#include "ftCo_SquatRv.h"
+#include <melee/ft/kinds/ftLink/ftlinkattackair.h>
 
-#include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include "ftCo_Attack1.h"
+#include "ftCo_AttackHi3.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_AttackLw3.h"
+#include "ftCo_AttackLw4.h"
+#include "ftCo_AttackS3.h"
+#include "ftCo_AttackS4.h"
+#include "ftCo_Guard.h"
 
 /* 0D62C4 */ static void fn_800D62C4(Fighter_GObj* gobj);
 

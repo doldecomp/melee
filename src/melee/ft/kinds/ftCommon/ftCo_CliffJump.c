@@ -3,17 +3,17 @@
 #include "ftCo_CliffClimb.h"
 #include "ftCo_FallSpecial.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include "ftCo_Fall.h"
+#include "ftCo_Jump.h"
+#include "types.h"
 
 #include <dolphin/mtx.h>
 

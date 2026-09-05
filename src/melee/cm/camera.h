@@ -1,11 +1,11 @@
 #ifndef GALE01_028B9C
 #define GALE01_028B9C
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/forward.h"
+#include <melee/cm/forward.h>
 
-#include "dolphin/gx/GXStruct.h"
+#include <dolphin/gx/GXStruct.h>
 
 #include <sysdolphin/baselib/forward.h>
 

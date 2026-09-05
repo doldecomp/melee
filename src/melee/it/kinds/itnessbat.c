@@ -3,15 +3,15 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/ft_0BF0.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftNess/ftnessattacks4.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
+#include <melee/ft/ft_0BF0.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftNess/ftnessattacks4.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
 
 #include <sysdolphin/baselib/jobj.h>
 

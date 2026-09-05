@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_HOMERUN_H
 #define MELEE_GM_HOMERUN_H
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <melee/gm/forward.h>
 

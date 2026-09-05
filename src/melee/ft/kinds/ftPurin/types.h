@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTPURIN_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "melee/ft/dobjlist.h" // IWYU pragma: keep
 

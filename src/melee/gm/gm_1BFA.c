@@ -5,16 +5,16 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "if/if_2FD9.h"
+#include <melee/if/if_2FD9.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbtime.h"
-#include "ty/toy.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbtime.h>
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/memory.h>
 

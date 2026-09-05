@@ -1,19 +1,19 @@
 #include "ft_0BF0.h"
 
-#include "ft/fighter.h"
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include "ftparts.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftFox/types.h"
-#include "ftMario/ftmariospecialn.h"
-#include "it/kinds/itdrmariopill.h"
-#include "it/kinds/itfoxblaster.h"
-#include "it/kinds/itnessbat.h"
+#include "kinds/ftFox/types.h"
+#include "kinds/ftMario/ftmariospecialn.h"
+#include <melee/it/kinds/itdrmariopill.h>
+#include <melee/it/kinds/itfoxblaster.h>
+#include <melee/it/kinds/itnessbat.h>
 
 void ftCo_800BF034(Fighter_GObj* gobj)
 {

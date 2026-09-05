@@ -1,16 +1,16 @@
 #include "ifnametag.h"
 
-#include "cm/camera.h"
-#include "gm/gm_unsplit.h"
-#include "if/ifall.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "mn/mnmain.h"
-#include "mn/mnname.h"
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_unsplit.h>
+#include "ifall.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>

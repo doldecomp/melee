@@ -1,11 +1,11 @@
 #ifndef GALE01_294AB0
 #define GALE01_294AB0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 294AB0 */ void itScball_Logic30_Spawned(Item_GObj*);
 /* 294BE4 */ void itScball_Logic30_PickedUp(Item_GObj*);

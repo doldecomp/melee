@@ -1,11 +1,11 @@
 #ifndef GALE01_2D5050
 #define GALE01_2D5050
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D5050 */ void it_802D5050(Item_GObj*);
 /* 2D50F0 */ void it_802D50F0(Item_GObj*);

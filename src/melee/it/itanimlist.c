@@ -5,14 +5,14 @@
 #include "iteffect.h"
 #include "ithitbox.h"
 
-#include "it/forward.h"
+#include "forward.h"
 
-#include "it/inlines.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "lb/inlines.h"
-#include "lb/lb_013B.h"
-#include "lb/lbcommand.h"
+#include "inlines.h"
+#include "itcoll.h"
+#include "item.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbcommand.h>
 
 #include <sysdolphin/baselib/gobjproc.h>
 

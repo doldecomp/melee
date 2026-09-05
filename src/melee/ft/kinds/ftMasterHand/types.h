@@ -1,10 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "ftMasterHand/forward.h" // IWYU pragma: export
-#include "it/forward.h"
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

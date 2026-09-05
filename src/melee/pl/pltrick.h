@@ -1,9 +1,9 @@
 #ifndef MELEE_PL_PLTRICK_H
 #define MELEE_PL_PLTRICK_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 struct plActionStats;
 struct plAttackStats;

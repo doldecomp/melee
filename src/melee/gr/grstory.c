@@ -8,10 +8,10 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "it/it_26B1.h"
-#include "it/kinds/itheiho.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itheiho.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>

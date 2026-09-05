@@ -1,13 +1,13 @@
 #include "ftcrazyhandthrowncrazyhand.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_Thrown.h"
-#include "ft/types.h"
-#include "ftMasterHand/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

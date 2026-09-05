@@ -6,15 +6,15 @@
 
 #include "gm_unsplit.h"
 
-#include "db/db.h"
-#include "gm/gmmain_lib.h"
-#include "gm/gmscdata.h"
-#include "if/ifcoget.h"
-#include "lb/lb_013B.h"
-#include "lb/lb_0195.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbheap.h"
+#include <melee/db/db.h>
+#include "gmmain_lib.h"
+#include "gmscdata.h"
+#include <melee/if/ifcoget.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbheap.h>
 
 #include <dolphin/os/OSThread.h>
 #include <sysdolphin/baselib/class.h>

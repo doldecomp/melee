@@ -2,13 +2,13 @@
 
 #include <placeholder.h>
 
-#include "db/db.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/kinds/inlines.h"
-#include "it/kinds/itfoxlaser.h"
-#include "it/types.h"
+#include <melee/db/db.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include "inlines.h"
+#include "itfoxlaser.h"
+#include <melee/it/types.h>
 
 #include <math.h>
 #include <stdbool.h>

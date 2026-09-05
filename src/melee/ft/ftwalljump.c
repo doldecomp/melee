@@ -2,14 +2,14 @@
 
 #include "fighter.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftCommon/ftCo_PassiveWall.h"
-#include "mp/mplib.h"
+#include "kinds/ftCommon/ftCo_PassiveWall.h"
+#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
 

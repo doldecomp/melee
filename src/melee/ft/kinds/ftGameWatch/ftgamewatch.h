@@ -1,10 +1,10 @@
 #ifndef GALE01_14A250
 #define GALE01_14A250
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftGameWatch/forward.h"
-#include "it/forward.h"
+#include <melee/ft/kinds/ftGameWatch/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 14A250 */ void ftGw_Init_OnDeath(HSD_GObj* gobj);

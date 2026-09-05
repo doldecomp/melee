@@ -2,11 +2,11 @@
 #define GALE01_081B38
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 // TODO transitive include hack, should be included directly by dependers

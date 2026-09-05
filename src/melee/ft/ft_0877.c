@@ -3,11 +3,11 @@
 #include "ftcommon.h"
 #include "ftdevice.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_0A01.h"
-#include "it/it_26B1.h"
-#include "lb/lbaudio_ax.h"
+#include "fighter.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbaudio_ax.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

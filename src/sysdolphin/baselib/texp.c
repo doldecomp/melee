@@ -3,10 +3,10 @@
 #include "debug.h"
 
 #include <string.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/texpdag.h>
-#include <sysdolphin/baselib/tobj.h>
+#include "class.h"
+#include "tev.h"
+#include "texpdag.h"
+#include "tobj.h"
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
 {

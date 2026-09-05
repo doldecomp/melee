@@ -6,8 +6,8 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>

@@ -1,11 +1,11 @@
 #include "ftCo_09F4.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/ftdevice.h"
-#include "gr/ground.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include <melee/ft/ftdevice.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbspdisplay.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/cobj.h>

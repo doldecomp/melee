@@ -6,26 +6,26 @@
 #include "ftCo_DownStand.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftCo_800C7CA0.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/types.h"
-#include "ftSandbag/ftsandbag.h"
+#include "ftCo_Fall.h"
+#include "types.h"
+#include <melee/ft/kinds/ftSandbag/ftsandbag.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

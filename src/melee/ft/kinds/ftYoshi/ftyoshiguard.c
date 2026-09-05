@@ -4,26 +4,26 @@
 
 #include <placeholder.h>
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Escape.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_Pass.h"
-#include "ftYoshi/types.h"
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
+#include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
 

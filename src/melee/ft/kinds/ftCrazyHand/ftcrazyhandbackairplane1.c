@@ -2,19 +2,19 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftbosslib.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandbackairplane2.h"
-#include "ftCrazyHand/ftcrazyhandbackairplane3.h"
-#include "ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.h"
-#include "ftMasterHand/types.h"
-#include "pl/player.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "ftcrazyhandbackairplane2.h"
+#include "ftcrazyhandbackairplane3.h"
+#include "ftcrazyhandcapturedamagecrazyhand.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 

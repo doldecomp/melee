@@ -1,11 +1,11 @@
 #ifndef GALE01_281164
 #define GALE01_281164
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /// Keep this if it is NOT defined in itCommonItems.h or similar.
 /// If you get a redefinition error for this too, remove it.

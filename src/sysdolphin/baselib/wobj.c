@@ -7,7 +7,7 @@
 #include "spline.h"
 
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/wobj.h>
+#include "wobj.h"
 
 static void WObjInfoInit(void);
 

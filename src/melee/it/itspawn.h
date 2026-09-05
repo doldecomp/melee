@@ -1,7 +1,7 @@
 #ifndef GALE01_ITSPAWN_H
 #define GALE01_ITSPAWN_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 

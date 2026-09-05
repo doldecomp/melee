@@ -19,8 +19,8 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbsnap.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
+#include "inlines.h"
+#include "mnmain.h"
 
 typedef struct mnSnap_State {
     /* 0x000 */ s32 frame_count;

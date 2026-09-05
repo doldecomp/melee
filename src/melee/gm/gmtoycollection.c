@@ -1,8 +1,8 @@
 #include "gm_unsplit.h"
 
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/types.h"
-#include "melee/lb/types.h"
+#include "gm_unsplit.h"
+#include "types.h"
+#include <melee/lb/types.h>
 
 /* 1BED14 */ static void gm_801BED14(GameModeState*);
 /* 4D6910 */ static UNK_T gm_804D6918[2];

@@ -2,10 +2,10 @@
 #define GALE01_0C0874
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 0C0874 */ void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1,

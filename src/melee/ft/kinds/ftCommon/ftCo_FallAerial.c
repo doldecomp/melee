@@ -1,14 +1,14 @@
 #include "ftCo_FallAerial.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
+#include <melee/ft/ft_081B.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_Fall.h"
+#include "ftCo_Fall.h"
 
 void ftCo_FallAerial_Enter(Fighter_GObj* gobj)
 {

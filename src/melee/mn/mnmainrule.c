@@ -3,9 +3,9 @@
 #include "inlines.h"
 #include "mnmain.h"
 
-#include "gm/gm_1A36.h"
-#include "gm/gm_1A3F.h"
-#include "gm/gmtoulib.h"
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gmtoulib.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

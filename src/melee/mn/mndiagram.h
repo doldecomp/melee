@@ -1,7 +1,7 @@
 #ifndef GALE01_23EA2C
 #define GALE01_23EA2C
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

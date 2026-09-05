@@ -5,20 +5,20 @@
 
 #include <placeholder.h>
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
+#include <melee/ef/efasync.h>
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/types.h"
+#include "ftcolanim.h"
+#include "ftcoll.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftCommon/types.h"
-#include "lb/lbaudio_ax.h"
-#include "pl/player.h"
+#include "kinds/ftCommon/types.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/dobj.h>

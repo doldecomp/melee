@@ -11,27 +11,27 @@
 #include "ftCo_Escape.h"
 #include "ftCo_Guard.h"
 #include "ftCo_SpecialS.h"
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "db/db.h"
-#include "ft/fighter.h"
+#include <melee/db/db.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftdata.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCLink/ftclink.h"
-#include "ftDrMario/ftdrmario.h"
-#include "ftKirby/ftkirby.h"
-#include "ftPeach/ftpeach.h"
-#include "ftZelda/ftzelda.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "pl/plbonuslib.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCLink/ftclink.h>
+#include <melee/ft/kinds/ftDrMario/ftdrmario.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/kinds/ftPeach/ftpeach.h>
+#include <melee/ft/kinds/ftZelda/ftzelda.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/pl/plbonuslib.h>
 
 bool ftCo_800DE9B8(Fighter_GObj* gobj)
 {

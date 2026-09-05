@@ -1,11 +1,11 @@
 #ifndef GALE01_1422E8
 #define GALE01_1422E8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftLuigi/forward.h"
+#include <melee/ft/kinds/ftLuigi/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 1422E8 */ void ftLg_Init_OnDeath(HSD_GObj* gobj);

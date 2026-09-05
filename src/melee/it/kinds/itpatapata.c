@@ -1,25 +1,25 @@
 #include "itpatapata.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ft/ftlib.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "it/kinds/itnokonoko.h"
-#include "lb/lb_00B0.h"
-#include "mp/mpcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include "itnokonoko.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mpcoll.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

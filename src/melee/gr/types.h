@@ -2,11 +2,11 @@
 #define MELEE_GR_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx/GXStruct.h"
+#include <dolphin/gx/GXStruct.h>
 
-#include "mp/forward.h"
+#include <melee/mp/forward.h>
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>

@@ -2,10 +2,10 @@
 #define LBSPDISPLAY_1_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>

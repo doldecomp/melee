@@ -1,7 +1,7 @@
 #ifndef _gobjgxlink_h_
 #define _gobjgxlink_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

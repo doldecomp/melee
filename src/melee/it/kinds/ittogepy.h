@@ -1,11 +1,11 @@
 #ifndef GALE01_2D36B0
 #define GALE01_2D36B0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 void itTogepy_Logic21_Spawned(Item_GObj*);
 void it_802D3728(Item_GObj*);

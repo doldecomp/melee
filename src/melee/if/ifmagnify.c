@@ -1,20 +1,20 @@
 #include "ifmagnify.h"
 
-#include "cm/camera.h"
-#include "ft/ftdrawcommon.h"
-#include "ft/ftlib.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_16AE.h"
-#include "gm/types.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "if/if_2FD9.h"
-#include "if/ifall.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/types.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include "if_2FD9.h"
+#include "ifall.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/cobj.h>

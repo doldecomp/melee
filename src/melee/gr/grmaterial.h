@@ -1,10 +1,10 @@
 #ifndef GALE01_1C87D0
 #define GALE01_1C87D0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

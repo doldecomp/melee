@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMEWTWO_TYPES_H
 #define MELEE_FT_CHARA_FTMEWTWO_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

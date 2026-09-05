@@ -1,11 +1,11 @@
 #ifndef GALE01_28FE90
 #define GALE01_28FE90
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 28FE90 */ void it_8028FE90(Item_GObj* gobj);
 /* 28FED4 */ void itMSBomb_Logic19_Spawned(Item_GObj* gobj);

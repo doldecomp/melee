@@ -9,37 +9,37 @@
 #include "ftCo_PassiveStand.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdynamics.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0C8C.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdynamics.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/types.h"
-#include "ftKirby/ftkirby.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Throw.h"
+#include "types.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/forward.h>
 

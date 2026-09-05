@@ -2,7 +2,7 @@
 #define MELEE_IF_2F6E_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/if/forward.h>
 

@@ -1,9 +1,9 @@
 #ifndef MELEE_MN_RULEPLUS_H
 #define MELEE_MN_RULEPLUS_H
 
-#include "mn/forward.h"
+#include <melee/mn/forward.h>
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

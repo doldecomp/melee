@@ -2,14 +2,14 @@
 
 #include "inlines.h"
 
-#include "cm/camera.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "lb/lbvector.h"
+#include <melee/cm/camera.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbvector.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/random.h>

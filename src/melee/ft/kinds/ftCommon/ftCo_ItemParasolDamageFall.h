@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_ITEMPARASOLDAMAGEFALL_H
 #define MELEE_FTCO_ITEMPARASOLDAMAGEFALL_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0CF4DC */ void ftCo_800CF4DC(Fighter_GObj* gobj);
 /* 0CF528 */ void ftCo_ItemParasolDamageFall_Anim(Fighter_GObj* gobj);

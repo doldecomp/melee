@@ -5,13 +5,13 @@
 #include "lbvector.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "lb/forward.h"
+#include "forward.h"
 
-#include "lb/types.h"
+#include "types.h"
 
 #include <math.h>
 #include <dolphin/gx.h>

@@ -1,11 +1,11 @@
 #ifndef GALE01_2978DC
 #define GALE01_2978DC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2978DC */ void itMball_Destroyed(Item_GObj*);
 /* 297904 */ void itMball_Spawned(Item_GObj*);

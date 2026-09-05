@@ -5,25 +5,25 @@
 
 #include "forward.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftCommon/ftCo_AppealS.h"
+#include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
 
-#include "ftMario/forward.h"
+#include <melee/ft/kinds/ftMario/forward.h>
 
-#include "ftMario/ftmario.h"
-#include "ftMario/ftmariospecialhi.h"
-#include "ftMario/ftmariospeciallw.h"
-#include "ftMario/ftmariospecialn.h"
-#include "ftMario/ftmariospecials.h"
-#include "ftMario/types.h"
-#include "it/it_26B1.h"
-#include "it/kinds/itdrmariopill.h"
+#include <melee/ft/kinds/ftMario/ftmario.h>
+#include <melee/ft/kinds/ftMario/ftmariospecialhi.h>
+#include <melee/ft/kinds/ftMario/ftmariospeciallw.h>
+#include <melee/ft/kinds/ftMario/ftmariospecialn.h>
+#include <melee/ft/kinds/ftMario/ftmariospecials.h>
+#include <melee/ft/kinds/ftMario/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itdrmariopill.h>
 
 /* 45A3A8 */ UnkCostumeStruct ftDr_CostumeList[5];
 

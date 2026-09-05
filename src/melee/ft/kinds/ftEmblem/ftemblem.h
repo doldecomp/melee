@@ -1,9 +1,9 @@
 #ifndef GALE01_14EEF8
 #define GALE01_14EEF8
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftMars/forward.h"
+#include <melee/ft/kinds/ftMars/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 14EEF8 */ void ftFe_Init_OnDeath(HSD_GObj*);

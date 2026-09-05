@@ -11,7 +11,7 @@
 #include "tev.h"
 #include "tobj.h"
 
-#include "dolphin/gx.h"
+#include <dolphin/gx.h>
 
 #include <math.h>
 #include <dolphin/os.h>

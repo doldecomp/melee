@@ -2,13 +2,13 @@
 
 #include "inlines.h"
 
-#include "cm/camera.h"
-#include "ft/ftlib.h"
-#include "gr/ground.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include "ground.h"
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lbshadow.h"
+#include <melee/lb/lbshadow.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>

@@ -1,9 +1,9 @@
 #ifndef GALE01_12CDE8
 #define GALE01_12CDE8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

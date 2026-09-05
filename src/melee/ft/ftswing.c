@@ -2,15 +2,15 @@
 
 #include "forward.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0CD1.h"
-#include "ft/ftlipstickswing.h"
-#include "ft/ftstarrodswing.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ft/kinds/ftCommon/ftpickupitem.h"
-#include "ft/types.h"
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ft_0CD1.h"
+#include "ftlipstickswing.h"
+#include "ftstarrodswing.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_FallSpecial.h"
+#include "kinds/ftCommon/ftpickupitem.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/debug.h>
 

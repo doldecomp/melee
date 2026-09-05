@@ -1,7 +1,7 @@
 #ifndef __GALE01_1E57BC
 #define __GALE01_1E57BC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
 

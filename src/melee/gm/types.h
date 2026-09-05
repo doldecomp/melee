@@ -2,12 +2,12 @@
 #define MELEE_GM_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
-#include "ft/forward.h"
-#include "ty/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ty/forward.h>
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>

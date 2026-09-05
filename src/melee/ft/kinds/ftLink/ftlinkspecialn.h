@@ -1,10 +1,10 @@
 #ifndef GALE01_0ECBC4
 #define GALE01_0ECBC4
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "ftLink/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftLink/forward.h>
 
 /* 0ECBC4 */ ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(Fighter_GObj* gobj);
 /* 0ECC0C */ void ftLk_SpecialN_UnsetArrow(Fighter_GObj* gobj);

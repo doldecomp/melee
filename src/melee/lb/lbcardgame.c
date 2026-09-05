@@ -2,12 +2,12 @@
 
 #include "lbcardgame.static.h"
 
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
-#include "if/textlib.h"
-#include "lb/lbarchive.h"
-#include "lb/lbcardnew.h"
-#include "lb/lblanguage.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
+#include "lbarchive.h"
+#include "lbcardnew.h"
+#include "lblanguage.h"
 
 #include <dolphin/card.h> // IWYU pragma: keep
 #include <dolphin/os.h>

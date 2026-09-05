@@ -1,7 +1,7 @@
 #include "db.h"
 
-#include "ef/efdata.h"
-#include "gm/types.h"
+#include <melee/ef/efdata.h>
+#include <melee/gm/types.h>
 
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/psappsrt.h>

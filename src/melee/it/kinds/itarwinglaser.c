@@ -1,20 +1,20 @@
 #include "itarwinglaser.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "gr/grcorneria.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/jobj.h>

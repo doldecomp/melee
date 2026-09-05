@@ -2,18 +2,18 @@
 
 #include "dbitem.static.h"
 
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "it/itspawn.h"
-#include "it/types.h"
-#include "pl/player.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/item.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/types.h>
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

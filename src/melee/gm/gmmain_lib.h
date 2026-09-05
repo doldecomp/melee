@@ -1,7 +1,7 @@
 #ifndef GALE01_15CC34
 #define GALE01_15CC34
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/gm/forward.h>
 

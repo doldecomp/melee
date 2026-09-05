@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_TEXPDAG_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

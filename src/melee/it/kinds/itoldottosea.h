@@ -1,9 +1,9 @@
 #ifndef GALE01_2E2470
 #define GALE01_2E2470
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2E2470 */ void it_802E2470(Item_GObj*);
 /* 2E257C */ bool it_2725_Logic8_DmgReceived(Item_GObj*);

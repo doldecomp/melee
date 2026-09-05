@@ -8,21 +8,21 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_ItemParasolDamageFall.h"
-#include "ftCommon/ftCo_JumpAerial.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemParasolDamageFall.h"
+#include "ftCo_JumpAerial.h"
 
 #include <sysdolphin/baselib/forward.h>
 

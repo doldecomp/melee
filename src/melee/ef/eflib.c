@@ -13,11 +13,11 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "dolphin/mtx.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_Bury.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include <dolphin/mtx.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Bury.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbspdisplay.h>
 
 #include <math.h>
 #include <stdarg.h>

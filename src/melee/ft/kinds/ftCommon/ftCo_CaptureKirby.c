@@ -2,16 +2,16 @@
 
 #include "ftCo_Lift.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/types.h"
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/types.h>
+#include "ftCo_Throw.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/jobj.h>
 

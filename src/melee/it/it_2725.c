@@ -7,18 +7,18 @@
 #include "ithitbox.h"
 #include "itmaplib.h"
 
-#include "db/db.h"
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcollision.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include "inlines.h"
+#include "it_26B1.h"
+#include "itcoll.h"
+#include "item.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobjobject.h>

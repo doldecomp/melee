@@ -1,14 +1,14 @@
 #include "grkraid.h"
 
-#include "cm/camera.h"
-#include "ft/ftlib.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
 
-#include "gr/forward.h"
+#include "forward.h"
 
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>

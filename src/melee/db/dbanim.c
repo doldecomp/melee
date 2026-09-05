@@ -1,9 +1,9 @@
 #include "db.h"
 
-#include "ftCommon/ftCo_KinokoGiantEnd.h"
-#include "ftCommon/ftCo_KinokoGiantStart.h"
-#include "ftCommon/ftCo_KinokoSmallEnd.h"
-#include "ftCommon/ftCo_KinokoSmallStart.h"
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoGiantEnd.h>
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoGiantStart.h>
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoSmallEnd.h>
+#include <melee/ft/kinds/ftCommon/ftCo_KinokoSmallStart.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>

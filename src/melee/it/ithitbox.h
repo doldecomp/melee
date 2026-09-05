@@ -1,11 +1,11 @@
 #ifndef GALE01_IT_HITBOX
 #define GALE01_IT_HITBOX
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/types.h"
+#include <melee/it/types.h>
 
 #include <dolphin/mtx.h>
 

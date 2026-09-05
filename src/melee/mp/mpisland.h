@@ -1,9 +1,9 @@
 #ifndef GALE01_05A6F8
 #define GALE01_05A6F8
 
-#include "mp/forward.h"
+#include <melee/mp/forward.h>
 
-#include "mp/types.h"
+#include <melee/mp/types.h>
 
 #include <dolphin/mtx.h>
 

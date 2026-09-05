@@ -1,9 +1,9 @@
 #ifndef GALE01_2FB6E8
 #define GALE01_2FB6E8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "if/types.h"
+#include <melee/if/types.h>
 
 #include <dolphin/mtx.h>
 

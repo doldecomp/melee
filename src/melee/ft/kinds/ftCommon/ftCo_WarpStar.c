@@ -1,26 +1,26 @@
 #include "ftCo_WarpStar.h"
 
-#include "stdbool.h"
+#include <stdbool.h>
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/types.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "it/kinds/itwstar.h"
-#include "mp/mpcoll.h"
+#include "types.h"
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/it/kinds/itwstar.h>
+#include <melee/mp/mpcoll.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

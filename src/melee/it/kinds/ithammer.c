@@ -2,16 +2,16 @@
 
 #include "ithammerhead.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/random.h>

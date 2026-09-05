@@ -2,7 +2,7 @@
 #ifndef __GALE01_1A3680
 #define __GALE01_1A3680
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/pad.h>
 

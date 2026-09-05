@@ -1,14 +1,14 @@
 #include "itclimbersstring.h"
 
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftPopo/ftpopospecials.h"
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/kinds/inlines.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "lb/lbvector.h"
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecials.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include "inlines.h"
+#include "itlinkhookshot.h"
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

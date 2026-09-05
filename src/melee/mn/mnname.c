@@ -7,14 +7,14 @@
 #include "mnname.static.h"
 
 #include "mnnamenew.h"
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
+#include <dolphin/gx/GXStruct.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

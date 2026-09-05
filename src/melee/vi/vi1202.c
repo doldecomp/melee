@@ -1,18 +1,18 @@
-#include "vi/vi1202.h"
+#include "vi1202.h"
 
 #include "vi.h"
 
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_unsplit.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_013B.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "sc/types.h"
-#include "ty/toy.h"
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/forward.h>
 

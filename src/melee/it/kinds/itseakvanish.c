@@ -2,8 +2,8 @@
 
 #include "inlines.h"
 
-#include "it/inlines.h"
-#include "it/it_2725.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
 
 #include <melee/db/db.h>
 #include <melee/it/it_26B1.h>

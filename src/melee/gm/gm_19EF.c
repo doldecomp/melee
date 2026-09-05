@@ -6,8 +6,8 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-#include "mn/inlines.h"
+#include <dolphin/pad.h>
+#include <melee/mn/inlines.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>

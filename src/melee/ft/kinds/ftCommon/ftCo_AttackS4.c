@@ -10,34 +10,34 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialS.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0CDD.h"
-#include "ft/ft_0DF1.h"
-#include "ft/ftanim.h"
-#include "ft/ftattacks4combo.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftswing.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ft_0DF1.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftattacks4combo.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftswing.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/ftCo_Walk.h"
-#include "ftGameWatch/ftgamewatchattacks4.h"
-#include "ftNess/ftnessattacks4.h"
-#include "ftPeach/ftpeachattacks4.h"
-#include "it/it_26B1.h"
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Dash.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_Turn.h"
+#include "ftCo_Walk.h"
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.h>
+#include <melee/ft/kinds/ftNess/ftnessattacks4.h>
+#include <melee/ft/kinds/ftPeach/ftpeachattacks4.h>
+#include <melee/it/it_26B1.h>
 
 #include <sysdolphin/baselib/forward.h>
 

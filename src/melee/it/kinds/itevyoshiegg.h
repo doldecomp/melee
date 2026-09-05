@@ -1,11 +1,11 @@
 #ifndef GALE01_29B0C8
 #define GALE01_29B0C8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 29B0C8 */ void itEvYoshiEgg_Spawn(Vec3*);
 /* 29B188 */ void itEvYoshiEgg_Logic42_Destroyed(Item_GObj*);

@@ -2,19 +2,19 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ft/fighter.h"
-#include "ft/ft_0881.h"
-#include "ft/ftbosslib.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandtagcancel.h"
-#include "ftMasterHand/types.h"
-#include "lb/lb_00B0.h"
-#include "pl/player.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "ftcrazyhandtagcancel.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 

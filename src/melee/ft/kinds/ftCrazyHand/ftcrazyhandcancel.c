@@ -2,14 +2,14 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftbosslib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandsqueezing0.h"
-#include "pl/player.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "ftcrazyhandsqueezing0.h"
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 

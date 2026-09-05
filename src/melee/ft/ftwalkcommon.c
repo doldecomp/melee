@@ -4,14 +4,14 @@
 #include "ft_081B.h"
 #include "ftcommon.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ftanim.h"
-#include "ft/types.h"
+#include "ftanim.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftCommon/types.h"
+#include "kinds/ftCommon/types.h"
 
 #include <sysdolphin/baselib/forward.h>
 

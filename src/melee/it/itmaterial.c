@@ -1,11 +1,11 @@
 #include "itmaterial.h"
 
-#include "ft/ftdevice.h"
+#include <melee/ft/ftdevice.h>
 
-#include "it/forward.h"
+#include "forward.h"
 
-#include "it/inlines.h"
-#include "lb/lb_00B0.h"
+#include "inlines.h"
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/dobj.h>

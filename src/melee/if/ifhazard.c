@@ -1,7 +1,7 @@
 #include "ifhazard.h"
 
-#include "gm/gm_unsplit.h"
-#include "sc/types.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

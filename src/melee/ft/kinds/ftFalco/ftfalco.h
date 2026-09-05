@@ -1,11 +1,11 @@
 #ifndef GALE01_149ACC
 #define GALE01_149ACC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftFox/forward.h"
+#include <melee/ft/kinds/ftFox/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 149ACC */ void ftFc_Init_OnDeath(HSD_GObj*);

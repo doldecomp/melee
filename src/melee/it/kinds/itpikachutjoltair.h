@@ -1,13 +1,13 @@
 #ifndef GALE01_2B3EFC
 #define GALE01_2B3EFC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
 /* 2B3EFC */ Item_GObj* it_802B3EFC(Item_GObj* gobj);
 /* 2B3F20 */ void it_802B3F20(Item_GObj*, Vec3*);

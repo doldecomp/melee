@@ -1,23 +1,23 @@
-#include "gr/grinishie2.h"
+#include "grinishie2.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "gm/gm_unsplit.h"
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/kinds/itkyasarin.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_unsplit.h>
+#include "granime.h"
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+#include <melee/it/kinds/itkyasarin.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,7 +1,7 @@
 #ifndef MSL_MATH_H
 #define MSL_MATH_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 #include <math_ppc.h>

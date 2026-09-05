@@ -2,21 +2,21 @@
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "gr/gricemt.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "it/kinds/itfreeze.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <melee/cm/camera.h>
+#include <melee/gr/gricemt.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include "itfreeze.h"
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 
 #include <math.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/random.h>

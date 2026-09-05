@@ -2,18 +2,18 @@
 
 #include "inlines.h"
 
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftNess/ftnessattackhi4.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itYoyo.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itYoyo.h>
+#include "itlinkhookshot.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

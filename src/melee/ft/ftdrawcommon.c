@@ -1,22 +1,22 @@
-#include "ft/ftdrawcommon.h"
+#include "ftdrawcommon.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ft/ft_0C88.h"
-#include "ft/ftafterimage.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftlib.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_09F4.h"
-#include "ftCommon/ftCo_0A01.h"
-#include "lb/lb_00F9.h"
-#include "lb/lb_0146.h"
-#include "lb/lbcollision.h"
-#include "lb/lbgx.h"
+#include <melee/cm/camera.h>
+#include "ft_0C88.h"
+#include "ftafterimage.h"
+#include "ftcommon.h"
+#include "ftdata.h"
+#include "ftlib.h"
+#include "ftparts.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_09F4.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_0146.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbgx.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>

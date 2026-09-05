@@ -13,39 +13,39 @@
 #include "ftCo_Throw.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCaptain/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/types.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_JumpAerial.h"
+#include "types.h"
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
-#include "gr/ground.h"
+#include <melee/gr/ground.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lbcollision.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

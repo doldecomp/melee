@@ -14,12 +14,12 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mndiagram.h>
-#include <melee/mn/mndiagram2.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
+#include "inlines.h"
+#include "mndiagram.h"
+#include "mndiagram2.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 
 typedef struct mnDiagram3_PosTable {
     /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)

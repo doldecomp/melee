@@ -1,11 +1,11 @@
 #ifndef GALE01_14EE40
 #define GALE01_14EE40
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftCaptain/forward.h"
+#include <melee/ft/kinds/ftCaptain/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 14EBFC */ void ftGn_Init_OnDeath(HSD_GObj* gobj);

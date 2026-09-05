@@ -10,16 +10,16 @@
 
 #include <placeholder.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mn/mnmainrule.h"
-#include "mn/mnname.h"
-#include "mn/mnnamenew.h"
-#include "sc/types.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnmainrule.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/mnnamenew.h>
+#include <melee/sc/types.h>
 
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/dobj.h>

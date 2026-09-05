@@ -11,17 +11,17 @@
 #include "ftgamewatchspecials.h"
 #include "types.h"
 
-#include "ft/ftcamera.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftmaterial.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftmaterial.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "it/it_26B1.h"
-#include "it/types.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/types.h>
 
 #include <dolphin/mtx.h>
 

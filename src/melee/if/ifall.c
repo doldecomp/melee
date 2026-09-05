@@ -1,19 +1,19 @@
 #include "ifall.h"
 
-#include "if/if_2F6E.h"
-#include "if/if_2F72.h"
-#include "if/if_2FD9.h"
-#include "if/ifcoget.h"
-#include "if/ifhazard.h"
-#include "if/ifmagnify.h"
-#include "if/ifnametag.h"
-#include "if/ifstatus.h"
-#include "if/ifstock.h"
-#include "if/iftime.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
-#include "sc/types.h"
+#include "if_2F6E.h"
+#include "if_2F72.h"
+#include "if_2FD9.h"
+#include "ifcoget.h"
+#include "ifhazard.h"
+#include "ifmagnify.h"
+#include "ifnametag.h"
+#include "ifstatus.h"
+#include "ifstock.h"
+#include "iftime.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>

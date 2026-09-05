@@ -2,19 +2,19 @@
 
 #include "ftmasterhandthrownmasterhand.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
-#include "ft/ftanim.h"
-#include "ft/ftbosslib.h"
-#include "ft/types.h"
-#include "ftMasterHand/types.h"
-#include "it/kinds/itmasterhandlaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0D4D.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/types.h>
+#include "types.h"
+#include <melee/it/kinds/itmasterhandlaser.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
 
 bool ftMh_MS_343_80151428(Vec3* vec)
 {

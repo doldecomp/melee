@@ -1,10 +1,10 @@
 #include "gm_unsplit.h"
 
-#include "melee/gm/gm_1601.h"
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmvsmelee.h"
-#include "melee/gm/types.h"
-#include "melee/mn/types.h"
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmvsmelee.h"
+#include "types.h"
+#include <melee/mn/types.h>
 
 /* 1BED3C */ static void gm_801BED3C(GameModeState*);
 /* 1BEDA8 */ static void gm_801BEDA8(GameModeState*);

@@ -1,8 +1,8 @@
 #ifndef GALE01_0BE7E0
 #define GALE01_0BE7E0
 
-#include "ft/forward.h"
-#include "pl/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
 
 /* 0BE7E0 */ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info);
 /* 0BEB28 */ void ftDemo_ObjAllocInit(void);

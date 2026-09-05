@@ -1,10 +1,10 @@
 #ifndef GALE01_294364
 #define GALE01_294364
 
-#include "ftCommon/forward.h"
-#include "it/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

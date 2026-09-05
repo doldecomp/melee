@@ -10,9 +10,9 @@
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/state.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftLink/types.h>
-#include <melee/ft/kinds/ftMars/types.h>
+#include "inlines.h"
+#include "kinds/ftLink/types.h"
+#include "kinds/ftMars/types.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itsword.h>
 #include <melee/lb/lb_00B0.h>

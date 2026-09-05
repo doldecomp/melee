@@ -1,28 +1,28 @@
 #include "gricemt.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
 
-#include "gr/forward.h"
+#include "forward.h"
 
-#include "gr/grdatfiles.h"
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "mp/mplib.h"
+#include "grdatfiles.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/forward.h>
 

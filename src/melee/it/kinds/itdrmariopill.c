@@ -1,29 +1,29 @@
 #include "itdrmariopill.h"
 
-#include "placeholder.h"
-#include "platform.h"
+#include <placeholder.h>
+#include <Runtime/platform.h>
 
-#include "db/db.h"
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
+#include <melee/db/db.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_0BF0.h"
-#include "ft/ftlib.h"
-#include "ftDrMario/ftdrmario.h"
+#include <melee/ft/ft_0BF0.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftDrMario/ftdrmario.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -9,18 +9,18 @@
 
 #include "forward.h"
 
-#include "ft/fighter.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/ftCo_Thrown.h"
-#include "ftKoopa/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
+#include "types.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
+#include <melee/it/it_26B1.h>
 
 /* 45A090 */ UnkCostumeStruct ftKp_CostumeList[4];
 

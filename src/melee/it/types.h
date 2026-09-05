@@ -2,22 +2,22 @@
 #define MELEE_IT_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/forward.h"
+#include <melee/cm/forward.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 #include "it/forward.h" // IWYU pragma: export
 
-#include "it/itCharItems.h"
-#include "it/itCommonItems.h"
-#include "it/itPKFlash.h"
-#include "it/itPKThunder.h"
+#include <melee/it/itCharItems.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itPKFlash.h>
+#include <melee/it/itPKThunder.h>
 
-#include "it/kinds/forward.h"
+#include <melee/it/kinds/forward.h>
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

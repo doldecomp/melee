@@ -4,17 +4,17 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveWall.h"
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ftKirby/ftkirby.h"
-#include "lb/lbvector.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/lb/lbvector.h>
 
 #ifdef MUST_MATCH
 #pragma force_active on

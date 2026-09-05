@@ -3,7 +3,7 @@
 
 #include "lbcardgame.h" // IWYU pragma: export
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/sc/types.h>
 

@@ -4,12 +4,12 @@
 #include "ftCo_ItemScrew.h"
 #include "ftCo_JumpAerial.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0D27.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0D27.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 
 static inline struct Fighter_x2D0_t* ftCo_800D74A4_inline(Fighter* fp)
 {

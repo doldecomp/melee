@@ -1,7 +1,7 @@
 #ifndef GALE01_15B8FC
 #define GALE01_15B8FC
 
-#include "dolphin/mtx.h"
+#include <dolphin/mtx.h>
 
 #include <sysdolphin/baselib/forward.h>
 

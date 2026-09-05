@@ -1,16 +1,16 @@
 #include "mnhyaku.h"
 
-#include "gm/forward.h"
+#include <melee/gm/forward.h>
 
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mn/types.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 
-#include "sc/types.h"
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjplink.h>

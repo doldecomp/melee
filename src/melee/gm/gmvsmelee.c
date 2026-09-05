@@ -7,19 +7,19 @@
 #include "gmresultplayer.h"
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "gm/gmvsmode.h"
-#include "lb/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbdvd.h"
-#include "lb/lbtime.h"
-#include "mn/types.h"
+#include "gmvsmode.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbtime.h>
+#include <melee/mn/types.h>
 
-#include "pl/forward.h"
+#include <melee/pl/forward.h>
 
 /* 1A5360 */ static u8 findSmallestLoser(MatchEnd*);
 /* 4807B0 */ CSSData gmVsMelee_CssData;

@@ -25,12 +25,12 @@ typedef struct {
 #include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
+#include "cobj.h"
+#include "gobjobject.h"
+#include "mtx.h"
+#include "psappsrt.h"
+#include "psstructs.h"
+#include "random.h"
 
 /* 4D78D8 */ u16 hsd_804D78D8 = 0;
 /* 4D78DA */ u16 hsd_804D78DA = 0;

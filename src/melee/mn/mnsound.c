@@ -1,13 +1,13 @@
 #include "mnsound.h"
 
-#include "gm/gm_1601.h"
-#include "gm/gmmain_lib.h"
-#include "lb/lbarchive.h"
-#include "lb/lbcardgame.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mn/types.h"
-#include "sc/types.h"
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardgame.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

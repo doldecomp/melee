@@ -3,9 +3,9 @@
 #include "ground.h"
 #include "types.h"
 
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbheap.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>

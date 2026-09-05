@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FORWARD_H
 #define MELEE_FT_CHARA_FTSEAK_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 static MotionFlags const ftSk_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |

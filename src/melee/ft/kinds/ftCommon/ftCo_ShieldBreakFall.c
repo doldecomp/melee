@@ -1,15 +1,15 @@
 #include "ftCo_ShieldBreakFall.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftcommon.h"
-#include "ftCommon/ftCo_ShieldBreakDown.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcommon.h>
+#include "ftCo_ShieldBreakDown.h"
 
 void ftCo_80098D90(Fighter_GObj* gobj)
 {

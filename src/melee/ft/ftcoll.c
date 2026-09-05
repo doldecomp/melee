@@ -12,36 +12,36 @@
 #include "ftlib.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/efsync.h"
+#include <melee/ef/efsync.h>
 
-#include "ef/forward.h"
-#include "ft/forward.h"
+#include <melee/ef/forward.h>
+#include "forward.h"
 
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Bury.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/types.h"
-#include "gm/gm_unsplit.h"
+#include "inlines.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_Bury.h"
+#include "kinds/ftCommon/ftCo_Guard.h"
+#include "kinds/ftCommon/types.h"
+#include <melee/gm/gm_unsplit.h>
 
-#include "gr/forward.h"
-#include "it/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itcoll.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbcollision.h"
-#include "lb/types.h"
-#include "pl/pl_040D.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
-#include "pl/plstale.h"
-#include "pl/pltrick.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/types.h>
+#include <melee/pl/pl_040D.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
+#include <melee/pl/plstale.h>
+#include <melee/pl/pltrick.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>

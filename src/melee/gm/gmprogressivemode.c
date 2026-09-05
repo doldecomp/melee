@@ -1,6 +1,6 @@
 #include "gmprogressivemode.h"
 
-#include "gm/gm_1A3F.h"
+#include "gm_1A3F.h"
 
 /* 1BF8F8 */ static void gm_801BF8F8(GameModeState*);
 /* 1BF920 */ static void gm_801BF920(GameModeState*);

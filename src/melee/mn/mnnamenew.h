@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "mn/types.h"
+#include <melee/mn/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

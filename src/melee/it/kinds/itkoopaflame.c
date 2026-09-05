@@ -3,10 +3,10 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/it_2725.h"
-#include "it/itgroundcoll.h"
+#include <melee/it/it_2725.h>
+#include <melee/it/itgroundcoll.h>
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>

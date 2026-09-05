@@ -1,7 +1,7 @@
 #ifndef GALE01_01E2F8
 #define GALE01_01E2F8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
 

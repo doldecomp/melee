@@ -4,9 +4,9 @@
 
 #include "mnstagesel.static.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "lb/lb_013B.h"
+#include <melee/lb/lb_013B.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
@@ -28,7 +28,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
-#include <melee/mn/mnmain.h>
+#include "mnmain.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

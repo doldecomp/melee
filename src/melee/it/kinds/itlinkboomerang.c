@@ -1,20 +1,20 @@
 #include "itlinkboomerang.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "ft/ftlib.h"
-#include "ft/kinds/ftLink/ftlinkspecials.h"
-#include "ftLink/ftlinkspecialhi.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/itdraw.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftLink/ftlinkspecials.h>
+#include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/mtx.h>
 

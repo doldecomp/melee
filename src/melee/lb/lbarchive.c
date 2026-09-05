@@ -8,7 +8,7 @@
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
-#include <melee/lb/lbdvd.h>
+#include "lbdvd.h"
 
 #ifdef MUST_MATCH
 #pragma push

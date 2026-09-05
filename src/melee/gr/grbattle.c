@@ -8,8 +8,8 @@
 #include "stage.h"
 #include "types.h"
 
-#include "gm/gm_16AE.h"
-#include "lb/lb_00F9.h"
+#include <melee/gm/gm_16AE.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>

@@ -1,7 +1,7 @@
 #ifndef GALE01_2AC8A8
 #define GALE01_2AC8A8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 

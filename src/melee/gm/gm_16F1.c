@@ -4,12 +4,12 @@
 
 #include "gm_unsplit.h"
 
-#include "gm/gm_1601.h"
-#include "mn/types.h"
+#include "gm_1601.h"
+#include <melee/mn/types.h>
 
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/gmmain_lib.h>
+#include "gm_16AE.h"
+#include "gmmain_lib.h"
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>

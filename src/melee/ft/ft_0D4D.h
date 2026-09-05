@@ -1,7 +1,7 @@
 #ifndef GALE01_0D4DD4
 #define GALE01_0D4DD4
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0D4DD4 */ void fn_800D4DD4(Fighter_GObj* gobj);
 /* 0D4E30 */ void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj);

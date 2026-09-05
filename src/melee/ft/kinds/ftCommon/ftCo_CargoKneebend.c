@@ -5,16 +5,16 @@
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "ftCaptain/types.h"
-#include "ftCommon/ftCo_KneeBend.h"
-#include "ftCommon/types.h"
-#include "ftDonkey/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
+#include "ftCo_KneeBend.h"
+#include "types.h"
+#include <melee/ft/kinds/ftDonkey/types.h>
 
 #include <dolphin/mtx.h>
 

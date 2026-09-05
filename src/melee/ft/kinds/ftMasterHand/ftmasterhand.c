@@ -31,13 +31,13 @@
 #include "types.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "it/it_26B1.h"
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 #include <dolphin/mtx.h>
 

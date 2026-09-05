@@ -1,7 +1,7 @@
 #include "lbtrigf.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
 

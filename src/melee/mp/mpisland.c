@@ -5,7 +5,7 @@
 
 #include <placeholder.h>
 
-#include "lb/lb_00B0.h"
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>

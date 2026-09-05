@@ -4,13 +4,13 @@
 #include "ftCo_800C7590.h"
 #include "ftdata.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
+#include "fighter.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "it/kinds/itgreatfoxlaser.h"
-#include "it/kinds/itleadead.h"
+#include <melee/it/kinds/itgreatfoxlaser.h>
+#include <melee/it/kinds/itleadead.h>
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

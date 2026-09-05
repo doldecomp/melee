@@ -1,26 +1,26 @@
 #include "itlucky.h"
 
-#include "m2c_macros.h"
+#include <m2c_macros.h>
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/eflib.h"
+#include <melee/ef/eflib.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itspawn.h"
-#include "it/kinds/itegg.h"
-#include "lb/lb_00B0.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itspawn.h>
+#include "itegg.h"
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/random.h>
 

@@ -3,10 +3,10 @@
 #include "ftCo_800C7070.h"
 #include "ftdata.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
+#include "fighter.h"
+#include "types.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftCommon/forward.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

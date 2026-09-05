@@ -2,11 +2,11 @@
 #define GALE01_1BFFA8
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/types.h"
+#include <melee/gr/types.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>

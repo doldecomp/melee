@@ -1,28 +1,28 @@
-#include "vi/vi1201v2.h"
+#include "vi1201v2.h"
 
 #include "vi.h"
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/ftdemo.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_unsplit.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lb_013B.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbshadow.h"
-#include "lb/lbspdisplay.h"
-#include "mn/mnmain.h"
-#include "mp/mpcoll.h"
-#include "pl/player.h"
-#include "sc/types.h"
-#include "ty/toy.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/forward.h>
 

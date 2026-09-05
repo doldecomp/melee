@@ -10,26 +10,26 @@
 #include "ftCo_Guard.h"
 #include "ftCo_SpecialS.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/ftCo_Walk.h"
-#include "mp/mplib.h"
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Dash.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_Turn.h"
+#include "ftCo_Walk.h"
+#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/forward.h>
 

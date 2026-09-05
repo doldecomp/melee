@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "it/inlines.h"
+#include <melee/it/inlines.h>
 
 #include <melee/ft/kinds/ftPeach/ftpeachspecialhi.h>
 #include <melee/it/it_26B1.h>

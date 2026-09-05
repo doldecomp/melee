@@ -3,15 +3,15 @@
 #include "it_2725.h"
 #include "it_3F14.h"
 
-#include "ef/efasync.h"
-#include "ef/efsync.h"
+#include <melee/ef/efasync.h>
+#include <melee/ef/efsync.h>
 
-#include "it/forward.h"
+#include "forward.h"
 
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lblanguage.h"
+#include "types.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lblanguage.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/random.h>

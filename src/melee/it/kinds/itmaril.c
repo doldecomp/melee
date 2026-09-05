@@ -1,17 +1,17 @@
 #include "itmaril.h"
 
-#include "ef/eflib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/kinds/ithinoarashi.h"
-#include "lb/lbvector.h"
+#include <melee/ef/eflib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include "ithinoarashi.h"
+#include <melee/lb/lbvector.h>
 
 #include <math.h>
 

@@ -1,7 +1,7 @@
 #ifndef _MN_HYAKU_
 #define _MN_HYAKU_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

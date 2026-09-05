@@ -1,12 +1,12 @@
-#include "it/kinds/itfoods.h"
+#include "itfoods.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itspawn.h"
-#include "it/kinds/types.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itspawn.h>
+#include "types.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>

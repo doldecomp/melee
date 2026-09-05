@@ -1,5 +1,5 @@
-#include "gm/forward.h"
-#include "sc/forward.h"
+#include <melee/gm/forward.h>
+#include <melee/sc/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -15,9 +15,9 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnlanguage.h>
-#include <melee/mn/mnmain.h>
+#include "inlines.h"
+#include "mnlanguage.h"
+#include "mnmain.h"
 
 struct mnUserData {
     u8 x0, x1, x2, x3;

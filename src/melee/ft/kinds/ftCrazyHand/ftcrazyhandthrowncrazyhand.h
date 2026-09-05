@@ -1,7 +1,7 @@
 #ifndef GALE01_15B850
 #define GALE01_15B850
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 15B850 */ void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid);

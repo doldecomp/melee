@@ -1,9 +1,9 @@
 #ifndef GALE01_08B3E4
 #define GALE01_08B3E4
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 08B3E4 */ bool ftCo_AttackDash_CheckInput(Fighter_GObj* gobj);
 /* 08B548 */ void ftCo_AttackDash_Anim(Fighter_GObj* gobj);

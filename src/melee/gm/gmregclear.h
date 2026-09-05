@@ -2,11 +2,11 @@
 #define MELEE_gmregclear_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
 #include <melee/gm/forward.h>
 #include <melee/gr/forward.h>

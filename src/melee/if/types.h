@@ -1,10 +1,10 @@
 #ifndef MELEE_IF_TYPES_H
 #define MELEE_IF_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "if/forward.h" // IWYU pragma: export
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>

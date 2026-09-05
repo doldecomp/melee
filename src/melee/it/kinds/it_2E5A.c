@@ -2,22 +2,22 @@
 
 #include "types.h"
 
-#include "db/db.h"
-#include "gm/gm_unsplit.h"
+#include <melee/db/db.h>
+#include <melee/gm/gm_unsplit.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/cobj.h>

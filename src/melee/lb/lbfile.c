@@ -1,11 +1,11 @@
-#include "lb/lbfile.h"
+#include "lbfile.h"
 
 #include <placeholder.h>
 
-#include "lb/lb_0195.h"
-#include "lb/lbdvd.h"
-#include "lb/lbheap.h"
-#include "lb/lblanguage.h"
+#include "lb_0195.h"
+#include "lbdvd.h"
+#include "lbheap.h"
+#include "lblanguage.h"
 
 #include <string.h>
 #include <dolphin/dvd.h>

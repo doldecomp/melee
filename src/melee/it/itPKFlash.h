@@ -1,7 +1,7 @@
 #ifndef MELEE_IT_ITPKFLASH_H
 #define MELEE_IT_ITPKFLASH_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

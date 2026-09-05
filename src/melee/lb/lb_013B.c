@@ -1,9 +1,9 @@
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include "forward.h"
 
-#include "lb/lbarchive.h"
-#include "lb/lbcommand.h"
-#include "lb/types.h"
+#include "lbarchive.h"
+#include "lbcommand.h"
+#include "types.h"
 
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/rumble.h>

@@ -1,22 +1,22 @@
 #include "ftCo_KinokoGiantStart.h"
 
-#include "platform.h"
-#include "stdbool.h"
+#include <Runtime/platform.h>
+#include <stdbool.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0D27.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0D27.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include "forward.h"
 
-#include "ftCommon/ftCo_KinokoSmallEnd.h"
+#include "ftCo_KinokoSmallEnd.h"
 
 /* 0D17FC */ static void fn_800D17FC(Fighter_GObj* gobj);
 

@@ -1,13 +1,13 @@
 #include "pltrick.h"
 
-#include "ft/ft_0892.h"
-#include "ft/ftdata.h"
-#include "ft/inlines.h"
-#include "if/ifmagnify.h"
-#include "pl/pl_040D.h"
-#include "pl/player.h"
-#include "pl/plbonus.h"
-#include "pl/plbonuslib.h"
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/inlines.h>
+#include <melee/if/ifmagnify.h>
+#include "pl_040D.h"
+#include "player.h"
+#include "plbonus.h"
+#include "plbonuslib.h"
 
 #include <sysdolphin/baselib/debug.h>
 

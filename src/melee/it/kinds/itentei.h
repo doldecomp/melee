@@ -1,11 +1,11 @@
 #ifndef GALE01_2CF3E0
 #define GALE01_2CF3E0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 void it_802CF3E0(Item_GObj*);
 void it_802CF44C(Item_GObj*);

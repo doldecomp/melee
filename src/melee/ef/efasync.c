@@ -5,10 +5,10 @@
 #include "efsync.h"
 #include "types.h"
 
-#include "cm/camera.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbdvd.h"
+#include <melee/cm/camera.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbdvd.h>
 
 #include <math.h>
 #include <stdarg.h>

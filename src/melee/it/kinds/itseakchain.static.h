@@ -1,10 +1,10 @@
 #ifndef __GALE01_2BAEEC
 #define __GALE01_2BAEEC
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "it/itCharItems.h"
-#include "it/types.h"
+#include <melee/it/itCharItems.h>
+#include <melee/it/types.h>
 
 #include <dolphin/mtx.h>
 

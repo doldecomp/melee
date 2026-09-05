@@ -1,9 +1,9 @@
 #ifndef GALE01_1CA0B4
 #define GALE01_1CA0B4
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
 #include <dolphin/mtx.h>
 

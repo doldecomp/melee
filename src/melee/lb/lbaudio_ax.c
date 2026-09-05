@@ -2,17 +2,17 @@
 
 #include "lbaudio_ax.static.h"
 
-#include "cm/camera.h"
-#include "ft/ftlib.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_16A2.h"
-#include "gm/gm_16AE.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "lb/lb_0195.h"
-#include "lb/lbarchive.h"
-#include "lb/lblanguage.h"
-#include "pl/player.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16A2.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gr/stage.h>
+#include <melee/it/it_26B1.h>
+#include "lb_0195.h"
+#include "lbarchive.h"
+#include "lblanguage.h"
+#include <melee/pl/player.h>
 
 #include <stdbool.h>
 #include <stddef.h>

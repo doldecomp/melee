@@ -1,9 +1,9 @@
 #ifndef GALE01_00F9F8
 #define GALE01_00F9F8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx.h"
+#include <dolphin/gx.h>
 
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>

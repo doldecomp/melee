@@ -1,6 +1,6 @@
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/card.h>
 #include <melee/lb/types.h>

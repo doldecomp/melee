@@ -1,12 +1,12 @@
 #ifndef GALE01_2B5518
 #define GALE01_2B5518
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 #include <dolphin/mtx.h>
 

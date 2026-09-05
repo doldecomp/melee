@@ -1,8 +1,8 @@
 #include "support.h"
 
-#include "MetroTRK/msg.h"
-#include "MetroTRK/msgcmd.h"
-#include "MetroTRK/serpoll.h"
+#include "msg.h"
+#include "msgcmd.h"
+#include "serpoll.h"
 
 DSError TRKSuppAccessFile(u32 file_handle, u8* data, size_t* count,
                           u8* io_result, bool need_reply, bool read)

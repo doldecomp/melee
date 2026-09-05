@@ -5,27 +5,27 @@
 
 #include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Landing.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 
-#include "ftKirby/forward.h"
+#include "forward.h"
 
-#include "ftKirby/ftkirbyspecialdonkey.h"
-#include "it/kinds/itclimbersice.h"
-#include "lb/lb_00B0.h"
+#include "ftkirbyspecialdonkey.h"
+#include <melee/it/kinds/itclimbersice.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <stddef.h>
 #include <sysdolphin/baselib/gobj.h>

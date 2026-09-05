@@ -1,14 +1,14 @@
 #include "ftlipstickswing.h"
 
-#include "ef/efasync.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0CD1.h"
-#include "ft/inlines.h"
+#include <melee/ef/efasync.h>
+#include "ft_0877.h"
+#include "ft_0CD1.h"
+#include "inlines.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/itlipstick.h"
-#include "lb/lb_00B0.h"
+#include <melee/it/kinds/itlipstick.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

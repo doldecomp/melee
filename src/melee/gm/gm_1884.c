@@ -2,29 +2,29 @@
 
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_1A36.h"
-#include "gm/gm_1A45.h"
-#include "gm/types.h"
-#include "gr/stage.h"
-#include "if/ifall.h"
-#include "if/ifstatus.h"
+#include <dolphin/pad.h>
+#include "gm_1601.h"
+#include "gm_1A36.h"
+#include "gm_1A45.h"
+#include "types.h"
+#include <melee/gr/stage.h>
+#include <melee/if/ifall.h>
+#include <melee/if/ifstatus.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/itspawn.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_0195.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/types.h"
-#include "pl/pl_040D.h"
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/it/itspawn.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/types.h>
+#include <melee/pl/pl_040D.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>

@@ -1,10 +1,10 @@
 #ifndef GALE01_014638
 #define GALE01_014638
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx.h"
-#include "lb/types.h"
+#include <dolphin/gx.h>
+#include <melee/lb/types.h>
 
 #include <dolphin/mtx.h>
 

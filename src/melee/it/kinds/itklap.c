@@ -1,16 +1,16 @@
 #include "itklap.h"
 
-#include "gr/grkongo.h"
-#include "gr/ground.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbcollision.h"
+#include <melee/gr/grkongo.h>
+#include <melee/gr/ground.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbcollision.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/random.h>

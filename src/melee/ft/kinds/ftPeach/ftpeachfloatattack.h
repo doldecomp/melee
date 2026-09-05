@@ -1,7 +1,7 @@
 #ifndef GALE01_11BF88
 #define GALE01_11BF88
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

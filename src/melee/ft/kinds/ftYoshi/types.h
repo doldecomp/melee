@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTYOSHI_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 

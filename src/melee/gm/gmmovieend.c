@@ -8,13 +8,13 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
-#include "dolphin/pad.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "if/ifcoget.h"
-#include "if/textlib.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbmthp.h"
+#include <dolphin/pad.h>
+#include "gmmain_lib.h"
+#include "types.h"
+#include <melee/if/ifcoget.h>
+#include <melee/if/textlib.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbmthp.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

@@ -1,7 +1,7 @@
 #ifndef MELEE_FTANIM_H
 #define MELEE_FTANIM_H
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>

@@ -2,20 +2,20 @@
 
 #include "types.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
-#include "ft/ftbosslib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftMasterHand/types.h"
-#include "it/kinds/itmasterhandlaser.h"
-#include "lb/lbaudio_ax.h"
-#include "pl/player.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0D4D.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/it/kinds/itmasterhandlaser.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,7 +1,7 @@
 #include "gmregclear.h"
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/aobj.h>
@@ -17,11 +17,11 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_18A1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmregcommon.h>
-#include <melee/gm/types.h>
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregcommon.h"
+#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>

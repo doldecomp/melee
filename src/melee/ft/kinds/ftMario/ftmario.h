@@ -1,11 +1,11 @@
 #ifndef GALE01_0E08CC
 #define GALE01_0E08CC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftMario/forward.h"
+#include <melee/ft/kinds/ftMario/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 0E08CC */ void ftMr_Init_OnDeath(HSD_GObj* gobj);

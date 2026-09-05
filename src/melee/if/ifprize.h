@@ -1,7 +1,7 @@
 #ifndef _IFPRIZE_H_
 #define _IFPRIZE_H_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

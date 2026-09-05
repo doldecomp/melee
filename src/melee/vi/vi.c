@@ -1,11 +1,11 @@
 #include "vi.h"
 
-#include "cm/camera.h"
-#include "dolphin/pad.h"
-#include "gm/gm_1A36.h"
-#include "gm/gm_unsplit.h"
-#include "lb/lb_013B.h"
-#include "lb/lbaudio_ax.h"
+#include <melee/cm/camera.h>
+#include <dolphin/pad.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbaudio_ax.h>
 
 char* vi_animation_table[26] = {
     "PlCaDViWaitAJ.dat", "PlDkDViWaitAJ.dat", "PlFxDViWaitAJ.dat",

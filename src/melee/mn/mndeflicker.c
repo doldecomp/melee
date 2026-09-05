@@ -1,11 +1,11 @@
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mn/types.h"
-#include "sc/types.h"
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -4,34 +4,34 @@
 #include "ftCo_Lift.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
-#include "ft/ftanim.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftlib.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_0A01.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_WarpStar.h"
-#include "ftCommon/types.h"
-#include "ftDonkey/ftdonkeyheavywait0.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0C88.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/types.h>
+#include "ftCo_0A01.h"
+#include "ftCo_Fall.h"
+#include "ftCo_WarpStar.h"
+#include "types.h"
+#include <melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "pl/plbonuslib.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
+#include <melee/pl/plbonuslib.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>

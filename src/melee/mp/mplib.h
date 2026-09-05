@@ -1,12 +1,12 @@
 #ifndef GALE01_04D164
 #define GALE01_04D164
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 
-#include "mp/types.h"
+#include <melee/mp/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

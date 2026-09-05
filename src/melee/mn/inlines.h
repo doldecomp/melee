@@ -1,10 +1,10 @@
 #ifndef MELEE_MN_INLINES_H
 #define MELEE_MN_INLINES_H
 
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "mn/mnmain.h"
-#include "mn/types.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/types.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

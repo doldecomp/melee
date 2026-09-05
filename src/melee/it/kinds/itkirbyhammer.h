@@ -1,13 +1,13 @@
 #ifndef GALE01_2ADC04
 #define GALE01_2ADC04
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,7 +1,7 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 

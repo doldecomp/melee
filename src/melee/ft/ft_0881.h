@@ -1,11 +1,11 @@
 #ifndef GALE01_0881D8
 #define GALE01_0881D8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 /* 0881D8 */ void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan);
 /* 088328 */ void ft_80088328(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan);

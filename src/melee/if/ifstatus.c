@@ -1,18 +1,18 @@
 #include "ifstatus.h"
 
 #include "ifall.h"
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "gm/gm_unsplit.h"
-#include "if/if_2F72.h"
-#include "if/ifcoget.h"
-#include "if/ifstock.h"
-#include "if/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "mn/mnmain.h"
-#include "pl/player.h"
-#include "sc/types.h"
+#include <melee/gm/gm_unsplit.h>
+#include "if_2F72.h"
+#include "ifcoget.h"
+#include "ifstock.h"
+#include "types.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/mn/mnmain.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>

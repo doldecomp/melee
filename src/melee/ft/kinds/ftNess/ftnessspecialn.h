@@ -3,7 +3,7 @@
 #ifndef GALE01_116EBC
 #define GALE01_116EBC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

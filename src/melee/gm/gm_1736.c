@@ -6,7 +6,7 @@
 #include "gmregclear.h"
 #include "types.h"
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>

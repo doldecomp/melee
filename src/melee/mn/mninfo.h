@@ -1,8 +1,8 @@
 #ifndef MELEE_MN_INFO_H
 #define MELEE_MN_INFO_H
 
-#include "mn/forward.h"
-#include "sc/forward.h"
+#include <melee/mn/forward.h>
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 251A08 */ s32 mnInfo_80251A08(s32);

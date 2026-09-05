@@ -1,7 +1,7 @@
 #ifndef GALE01_219530
 #define GALE01_219530
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 219C34 */ void grFigureGet_80219C34(HSD_GObj*);

@@ -2,22 +2,22 @@
 
 #include "gm_1B03.h"
 
-#include "gm/gm_1884.h"
-#include "gm/gm_1A3F.h"
+#include "gm_1884.h"
+#include "gm_1A3F.h"
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmmain_lib.h"
-#include "melee/gm/types.h"
-#include "melee/lb/lbaudio_ax.h"
-#include "melee/lb/lbcardgame.h"
-#include "melee/lb/lbcardnew.h"
-#include "melee/lb/lbdvd.h"
-#include "melee/lb/lbtime.h"
-#include "melee/lb/types.h"
-#include "melee/mn/types.h"
-#include "mn/inlines.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbtime.h>
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
+#include <melee/mn/inlines.h>
 
 #include <dolphin/pad.h>
 

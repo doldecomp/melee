@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_S
 #define SYSDOLPHIN_BASELIB_S
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

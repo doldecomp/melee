@@ -6,23 +6,23 @@
 
 #include "forward.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
-#include "ftYoshi/ftyoshispecialhi.h"
-#include "ftYoshi/ftyoshispecials.h"
+#include "ftyoshispecialhi.h"
+#include "ftyoshispecials.h"
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/it_26B1.h"
+#include <melee/it/it_26B1.h>
 
 #include <sysdolphin/baselib/forward.h>
 

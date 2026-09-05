@@ -1,30 +1,30 @@
 #include "camera.h"
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
 #include <placeholder.h>
 
-#include "cm/forward.h"
+#include "forward.h"
 
-#include "cm/types.h"
-#include "dolphin/mtx.h"
-#include "dolphin/pad.h"
-#include "dolphin/types.h"
+#include "types.h"
+#include <dolphin/mtx.h>
+#include <dolphin/pad.h>
+#include <dolphin/types.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
-#include "lb/lbshadow.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbrefract.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,25 +1,25 @@
 #include "grfourside.h"
 
-#include "m2c_macros.h"
-#include "placeholder.h"
+#include <m2c_macros.h>
+#include <placeholder.h>
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "cm/types.h"
+#include <melee/cm/camera.h>
+#include <melee/cm/types.h>
 
 #include "forward.h"
 
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
+#include "granime.h"
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

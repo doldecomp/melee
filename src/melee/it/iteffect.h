@@ -1,9 +1,9 @@
 #ifndef GALE01_IT_EFFECT
 #define GALE01_IT_EFFECT
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 

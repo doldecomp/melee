@@ -1,12 +1,12 @@
 #include "gmregclear.h"
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
-#include "dolphin/pad.h"
+#include <dolphin/pad.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "mn/inlines.h"
+#include <melee/mn/inlines.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -23,8 +23,8 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/if/ifcoget.h>

@@ -1,20 +1,20 @@
 #include "gmmain_lib.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "gm/gmhomerun.h"
+#include "gmhomerun.h"
 
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardnew.h>

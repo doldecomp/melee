@@ -2,9 +2,9 @@
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx/GXStruct.h"
+#include <dolphin/gx/GXStruct.h>
 
 #include <sysdolphin/baselib/forward.h>
 

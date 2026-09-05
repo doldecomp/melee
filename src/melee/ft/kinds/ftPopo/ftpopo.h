@@ -1,11 +1,11 @@
 #ifndef GALE01_11ED38
 #define GALE01_11ED38
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftPopo/forward.h"
+#include <melee/ft/kinds/ftPopo/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 11ED38 */ void ftPp_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

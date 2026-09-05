@@ -7,12 +7,12 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
-#include "dolphin/pad.h"
+#include <dolphin/pad.h>
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include "it/itspawn.h"
-#include "lb/lb_00F9.h"
+#include <melee/it/itspawn.h>
+#include <melee/lb/lb_00F9.h>
 
 #include <string.h>
 #include <sysdolphin/baselib/controller.h>
@@ -23,8 +23,8 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gmmultiman.h>
-#include <melee/gm/gmpause.h>
+#include "gmmultiman.h"
+#include "gmpause.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpstadium.h>
 #include <melee/gr/stage.h>

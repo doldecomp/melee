@@ -5,9 +5,9 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
-#include "gm/gmmovieend.h"
-#include "if/if_2FD9.h"
-#include "mn/types.h"
+#include "gmmovieend.h"
+#include <melee/if/if_2FD9.h>
+#include <melee/mn/types.h>
 
 GameModeState gm_Mode_CameraVs_States[] = {
     {

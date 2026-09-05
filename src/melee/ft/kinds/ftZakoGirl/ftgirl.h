@@ -1,9 +1,9 @@
 #ifndef GALE01_14F418
 #define GALE01_14F418
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

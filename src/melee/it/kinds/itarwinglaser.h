@@ -1,7 +1,7 @@
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 extern ItemStateTable it_803F8DE8[];
 s32 it_802E70BC(Item_GObj*);

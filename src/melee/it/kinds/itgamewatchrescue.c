@@ -2,9 +2,9 @@
 
 #include "inlines.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/itzako.h"
+#include <melee/it/itzako.h>
 
 #include <sysdolphin/baselib/forward.h>
 

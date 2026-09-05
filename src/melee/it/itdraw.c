@@ -1,13 +1,13 @@
-#include "it/itdraw.h"
+#include "itdraw.h"
 
 #include "inlines.h"
 
-#include "cm/camera.h"
-#include "ft/ftlib.h"
-#include "it/it_2725.h"
-#include "lb/lb_0146.h"
-#include "lb/lbcollision.h"
-#include "lb/lbgx.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include "it_2725.h"
+#include <melee/lb/lb_0146.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbgx.h>
 
 #include <sysdolphin/baselib/tev.h>
 

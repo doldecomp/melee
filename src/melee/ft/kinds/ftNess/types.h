@@ -1,11 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTNESS_TYPES_H
 #define MELEE_FT_CHARA_FTNESS_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "ftNess/forward.h" // IWYU pragma: export
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

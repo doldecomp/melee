@@ -1,9 +1,9 @@
 #include "gmboot.h"
 
-#include "gm/gmmain_lib.h"
+#include "gmmain_lib.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "types.h"
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>

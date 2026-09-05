@@ -1,13 +1,13 @@
 #include "gm_1B03.h"
 
-#include "dolphin/types.h"
-#include "gm/types.h"
+#include <dolphin/types.h>
+#include "types.h"
 
-#include "mn/forward.h"
+#include <melee/mn/forward.h>
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "types.h"
 #include <melee/mn/types.h>
 
 /**

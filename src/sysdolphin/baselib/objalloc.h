@@ -1,7 +1,7 @@
 #ifndef _objalloc_h_
 #define _objalloc_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/debug.h>
 

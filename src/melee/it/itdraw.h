@@ -1,9 +1,9 @@
 #ifndef GALE01_ITDRAW_H
 #define GALE01_ITDRAW_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/types.h"
+#include <melee/it/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

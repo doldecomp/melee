@@ -1,19 +1,19 @@
 #include "ftCo_RunDirect.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_0892.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackDash.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Run.h"
-#include "ftCommon/ftCo_SpecialS.h"
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include "ftCo_AppealS.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackDash.h"
+#include "ftCo_Guard.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Run.h"
+#include "ftCo_SpecialS.h"
 
 void ftCo_RunDirect_Anim(Fighter_GObj* gobj)
 {

@@ -1,9 +1,9 @@
 #ifndef GALE01_14FC68
 #define GALE01_14FC68
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftMasterHand/forward.h"
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 14FC68 */ void ftMh_Init_OnDeath(HSD_GObj* gobj);

@@ -6,7 +6,7 @@
 #include "eflib.h"
 #include "types.h"
 
-#include "ft/inlines.h"
+#include <melee/ft/inlines.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/generator.h>

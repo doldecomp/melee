@@ -1,5 +1,5 @@
 #include "gmregclear.h"
-#include "platform.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -13,8 +13,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include <melee/gr/ground.h>
 #include <melee/if/iftime.h>
 #include <melee/lb/lbarchive.h>

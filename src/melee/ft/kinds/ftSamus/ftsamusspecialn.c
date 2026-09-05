@@ -2,30 +2,30 @@
 
 #include "inlines.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Escape.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/inlines.h"
-#include "ftSamus/types.h"
-#include "it/kinds/itsamusmissile.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include "types.h"
+#include <melee/it/kinds/itsamusmissile.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/forward.h>
 

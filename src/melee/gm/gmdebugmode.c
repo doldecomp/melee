@@ -1,17 +1,17 @@
-#include "dolphin/types.h"
-#include "gm/gm_1A3F.h"
-#include "gm/types.h"
-#include "if/soundtest.h"
+#include <dolphin/types.h>
+#include "gm_1A3F.h"
+#include "types.h"
+#include <melee/if/soundtest.h>
 
-#include "mn/forward.h"
+#include <melee/mn/forward.h>
 
-#include "mn/inlines.h"
+#include <melee/mn/inlines.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmresultplayer.h>
-#include <melee/gm/types.h>
+#include "gm_unsplit.h"
+#include "gmresultplayer.h"
+#include "types.h"
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mn/types.h>
 

@@ -1,12 +1,12 @@
 #include "ftkoopaspecialn.h"
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_084E.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 
-#include "ftKoopa/forward.h"
+#include "forward.h"
 
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>

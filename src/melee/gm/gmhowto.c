@@ -4,9 +4,9 @@
 #include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include "lb/lbaudio_ax.h"
-#include "lb/lbmthp.h"
-#include "mn/inlines.h"
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

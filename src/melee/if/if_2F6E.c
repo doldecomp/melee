@@ -8,9 +8,9 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/types.h>
-#include <melee/if/if_2F72.h>
-#include <melee/if/ifall.h>
-#include <melee/if/types.h>
+#include "if_2F72.h"
+#include "ifall.h"
+#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

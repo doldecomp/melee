@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTCRAZYHAND_TYPES_H
 #define MELEE_FT_CHARA_FTCRAZYHAND_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
 

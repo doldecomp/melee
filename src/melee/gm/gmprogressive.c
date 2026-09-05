@@ -2,7 +2,7 @@
 
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
+#include <dolphin/pad.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -11,9 +11,9 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "gm_1A36.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>

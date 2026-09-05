@@ -9,7 +9,7 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXEnum.h"
+#include <dolphin/gx/GXEnum.h>
 
 #include "forward.h"
 

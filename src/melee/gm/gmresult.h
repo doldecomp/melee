@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
+#include <dolphin/gx/GXStruct.h>
 
-#include "gm/forward.h"
+#include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

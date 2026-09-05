@@ -1,13 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftYoshi/forward.h"
+#include <melee/ft/kinds/ftYoshi/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 12B6E8 */ void ftYs_Init_8012B6E8(Fighter* fp,

@@ -1,27 +1,27 @@
 #include "ftyoshispecialhi.h"
 
-#include "placeholder.h"
+#include <placeholder.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 
-#include "ftYoshi/forward.h"
+#include "forward.h"
 
-#include "ftYoshi/ftyoshi.h"
-#include "ftYoshi/types.h"
-#include "it/kinds/ityoshieggthrow.h"
-#include "it/kinds/ityoshitongue.h"
-#include "lb/lb_00B0.h"
+#include "ftyoshi.h"
+#include "types.h"
+#include <melee/it/kinds/ityoshieggthrow.h>
+#include <melee/it/kinds/ityoshitongue.h>
+#include <melee/lb/lb_00B0.h>
 
 #include <sysdolphin/baselib/forward.h>
 

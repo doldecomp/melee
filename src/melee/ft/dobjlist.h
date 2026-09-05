@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_DOBJLIST_H
 #define MELEE_FT_DOBJLIST_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>

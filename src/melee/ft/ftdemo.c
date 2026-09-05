@@ -2,35 +2,35 @@
 
 #include "ftdynamics.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_0BEC.h"
-#include "ft/ft_0BEF.h"
-#include "ft/ft_0BF0.h"
-#include "ft/ft_0C88.h"
-#include "ft/ftanim.h"
-#include "ft/ftCo_800C7070.h"
-#include "ft/ftCo_800C70D0.h"
-#include "ft/ftCo_800C7178.h"
-#include "ft/ftCo_800C7220.h"
-#include "ft/ftCo_800C739C.h"
-#include "ft/ftCo_800C7434.h"
-#include "ft/ftcoll.h"
-#include "ft/ftdata.h"
-#include "ft/ftdrawcommon.h"
-#include "ft/ftlib.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_09F4.h"
-#include "ftCommon/ftCo_DemoCallback0.h"
-#include "lb/lbshadow.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include "fighter.h"
+#include "ft_0BEC.h"
+#include "ft_0BEF.h"
+#include "ft_0BF0.h"
+#include "ft_0C88.h"
+#include "ftanim.h"
+#include "ftCo_800C7070.h"
+#include "ftCo_800C70D0.h"
+#include "ftCo_800C7178.h"
+#include "ftCo_800C7220.h"
+#include "ftCo_800C739C.h"
+#include "ftCo_800C7434.h"
+#include "ftcoll.h"
+#include "ftdata.h"
+#include "ftdrawcommon.h"
+#include "ftlib.h"
+#include "ftparts.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_09F4.h"
+#include "kinds/ftCommon/ftCo_DemoCallback0.h"
+#include <melee/lb/lbshadow.h>
 
-#include "pl/forward.h"
+#include <melee/pl/forward.h>
 
-#include "pl/types.h"
+#include <melee/pl/types.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/archive.h>

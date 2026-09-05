@@ -1,18 +1,18 @@
 #ifndef MELEE_IT_ITEMS_INLINES_H
 #define MELEE_IT_ITEMS_INLINES_H
 
-#include "db/db.h"
-#include "ef/eflib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "it/types.h"
-#include "lb/lbvector.h"
+#include <melee/db/db.h>
+#include <melee/ef/eflib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include <melee/it/kinds/itlinkhookshot.h>
+#include <melee/it/types.h>
+#include <melee/lb/lbvector.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>

@@ -1,34 +1,34 @@
 #include "ftaction.h"
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0899.h"
-#include "ft/ft_0C88.h"
-#include "ft/ft_0DF0.h"
-#include "ft/ftanim.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdynamics.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_09F7.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0899.h"
+#include "ft_0C88.h"
+#include "ft_0DF0.h"
+#include "ftanim.h"
+#include "ftcolanim.h"
+#include "ftcoll.h"
+#include "ftcommon.h"
+#include "ftdynamics.h"
+#include "ftparts.h"
+#include "inlines.h"
+#include "types.h"
+#include "kinds/ftCommon/ftCo_09F7.h"
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/inlines.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcommand.h"
-#include "lb/types.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcommand.h>
+#include <melee/lb/types.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>

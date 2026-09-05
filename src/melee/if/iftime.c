@@ -1,13 +1,13 @@
-#include "if/iftime.h"
+#include "iftime.h"
 
 #include <placeholder.h>
 
-#include "dolphin/os.h"
-#include "gm/gm_unsplit.h"
-#include "if/ifall.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "sc/types.h"
+#include <dolphin/os.h>
+#include <melee/gm/gm_unsplit.h>
+#include "ifall.h"
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/sc/types.h>
 
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

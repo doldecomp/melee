@@ -1,9 +1,9 @@
 #ifndef GALE01_1B0348
 #define GALE01_1B0348
 
-#include "melee/gm/types.h"
+#include <melee/gm/types.h>
 
-#include "melee/mn/forward.h"
+#include <melee/mn/forward.h>
 
 /* 1B0348 */ void gm_SetupSubColors(StartMeleeData*); ///< Character tints?
 /* 1B0474 */ void gm_SetupSuddenDeath(StartMeleeData*, MatchEnd*);

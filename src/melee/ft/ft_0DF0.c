@@ -1,19 +1,19 @@
 #include "ft_0DF0.h"
 
-#include "placeholder.h"
-#include "platform.h"
-#include "stdbool.h"
+#include <placeholder.h>
+#include <Runtime/platform.h>
+#include <stdbool.h>
 
-#include "ft/fighter.h"
+#include "fighter.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include "ftcolanim.h"
+#include "ftcommon.h"
+#include "inlines.h"
+#include "types.h"
 
-#include <melee/ft/ft_0877.h>
+#include "ft_0877.h"
 
 void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)
 {

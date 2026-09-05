@@ -1,9 +1,9 @@
 #include "itmetamon.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/inlines.h"
-#include "it/itgroundcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/itgroundcoll.h>
 
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>

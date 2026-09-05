@@ -1,11 +1,11 @@
 #ifndef GALE01_2927E8
 #define GALE01_2927E8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2927E8 */ void it_802927E8(Item_GObj*);
 /* 29282C */ void it_8029282C(Item_GObj*);

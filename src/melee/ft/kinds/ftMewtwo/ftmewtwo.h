@@ -1,11 +1,11 @@
 #ifndef GALE01_144DFC
 #define GALE01_144DFC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
-#include "ftMewtwo/forward.h"
+#include <melee/ft/kinds/ftMewtwo/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 144DFC */ void ftMt_Init_OnDeath2(HSD_GObj* gobj);

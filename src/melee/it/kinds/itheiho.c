@@ -1,17 +1,17 @@
-#include "it/kinds/itheiho.h"
+#include "itheiho.h"
 
 #include "inlines.h"
 
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "it/kinds/itfoods.h"
-#include "it/kinds/itfreeze.h"
-#include "it/kinds/types.h"
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include "itfoods.h"
+#include "itfreeze.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

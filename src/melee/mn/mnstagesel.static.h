@@ -1,7 +1,7 @@
 #ifndef __GALE01_2599EC
 #define __GALE01_2599EC
 
-#include "platform.h"
+#include <Runtime/platform.h>
 
 #include <melee/mn/forward.h>
 

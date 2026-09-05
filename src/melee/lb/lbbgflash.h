@@ -6,9 +6,9 @@
 #ifndef GALE01_01FC08
 #define GALE01_01FC08
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx/GXStruct.h"
+#include <dolphin/gx/GXStruct.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

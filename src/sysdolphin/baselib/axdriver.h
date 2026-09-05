@@ -1,7 +1,7 @@
 #ifndef _AXDRIVER_H_
 #define _AXDRIVER_H_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

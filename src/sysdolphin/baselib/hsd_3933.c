@@ -3,8 +3,8 @@
 #include <string.h>
 #include <dolphin/mcc.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/hsd_392C.h>
-#include <sysdolphin/baselib/random.h>
+#include "hsd_392C.h"
+#include "random.h"
 
 typedef struct {
     s32 x0;

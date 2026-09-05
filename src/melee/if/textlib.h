@@ -2,11 +2,11 @@
 #define GALE01_302834
 
 #include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "if/forward.h"
+#include <melee/if/forward.h>
 
-#include "if/types.h"
+#include <melee/if/types.h>
 
 #include <sysdolphin/baselib/forward.h>
 

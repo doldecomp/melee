@@ -2,9 +2,9 @@
 
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/inlines.h>
+#include "fighter.h"
+#include "ft_0877.h"
+#include "inlines.h"
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plstale.h>

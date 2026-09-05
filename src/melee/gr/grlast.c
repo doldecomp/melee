@@ -1,6 +1,6 @@
 #include "grlast.h"
 
-#include "lb/lb_00F9.h"
+#include <melee/lb/lb_00F9.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -11,14 +11,14 @@
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/inlines.h>
-#include <melee/gr/stage.h>
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 

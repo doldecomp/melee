@@ -2,13 +2,13 @@
 
 #include "ftCo_CliffClimb.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 
 /// @todo Shared code with #ftCo_8009AEA4.
 void ftCo_8009B040(Fighter_GObj* gobj)

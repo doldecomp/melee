@@ -1,9 +1,9 @@
 #ifndef GALE01_0C0658
 #define GALE01_0C0658
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 /* 0C0658 */ ColorOverlay* ftCo_800C0658(Fighter* fp);
 /* 0C0674 */ ColorOverlay* ftCo_800C0674(Fighter_GObj* gobj);

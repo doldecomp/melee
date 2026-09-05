@@ -1,7 +1,7 @@
 #ifndef GALE01_081938
 #define GALE01_081938
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 081938 */ void ft_80081938(HSD_GObj* gobj);

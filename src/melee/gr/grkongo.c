@@ -1,30 +1,30 @@
-#include "gr/grkongo.h"
+#include "grkongo.h"
 
 #include "grkongo.static.h"
 
 #include "grmaterial.h"
 #include "types.h"
 
-#include "ef/efsync.h"
-#include "ft/ftdevice.h"
-#include "ft/ftlib.h"
-#include "ftCommon/ftCo_BarrelWait.h"
-#include "gm/gm_unsplit.h"
-#include "gr/granime.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/itspawn.h"
-#include "it/kinds/itbox.h"
-#include "it/kinds/itklap.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
+#include <melee/gm/gm_unsplit.h>
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include <melee/it/it_26B1.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/kinds/itbox.h>
+#include <melee/it/kinds/itklap.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
-#include "mp/forward.h"
+#include <melee/mp/forward.h>
 
-#include "mp/mplib.h"
+#include <melee/mp/mplib.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>

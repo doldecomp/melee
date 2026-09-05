@@ -2,9 +2,9 @@
 
 #include "ftlib.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
-#include "gr/stage.h"
+#include "fighter.h"
+#include "types.h"
+#include <melee/gr/stage.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>

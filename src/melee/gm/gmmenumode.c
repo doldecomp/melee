@@ -1,18 +1,18 @@
-#include "gm/gm_1A3F.h"
-#include "if/soundtest.h"
+#include "gm_1A3F.h"
+#include <melee/if/soundtest.h>
 
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmmain_lib.h"
-#include "melee/gm/types.h"
-#include "melee/lb/lbcardgame.h"
-#include "melee/lb/lbcardnew.h"
-#include "melee/lb/lbdvd.h"
-#include "melee/lb/lbsnap.h"
-#include "melee/mn/mngallery.h"
-#include "melee/mn/types.h"
-#include "mn/mnsnap.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/mn/mngallery.h>
+#include <melee/mn/types.h>
+#include <melee/mn/mnsnap.h>
 
 #include <sysdolphin/baselib/memory.h>
 
