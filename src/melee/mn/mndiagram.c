@@ -2654,113 +2654,117 @@ HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
     return temp_r3;
 }
 
+static inline HSD_JObj*
+mnDiagram_LoadHeaderIcon(void** joint_data, int fighter_id, HSD_JObj** child)
+{
+    HSD_JObj* jobj = HSD_JObjLoadJoint(joint_data[0]);
+    HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, child, 2, -1);
+    HSD_JObjReqAnimAll(*child, (f32) (fighter_id & 0xFF));
+    HSD_JObjAnimAll(*child);
+    return jobj;
+}
+
 void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
 {
-    int selkind;
-    s32 count;
-    void** joint_data;
-    int remr;
-    HSD_JObj* jobj;
-    Diagram* data = GET_DIAGRAM(arg0);
-    int fighter_id;
+    HSD_JObj* col_ref;
+    HSD_JObj* row_ref;
+    u8* col_cursor;
     u8* sorted;
-    u8 stack_obj[8];
-    HSD_JObj* sp_jobj;
-    u8 stack_obj2[4];
-    HSD_JObj* jobj2;
+    u8* col_next;
+    u8* row_next;
+    int row_fighter;
+    s32 unlocked_count;
+    void** joint_data;
+    u8* row_cursor;
+    int row_idx;
+    int row_remaining;
+    Diagram* data = GET_DIAGRAM(arg0);
+    int col_fighter;
+    HSD_JObj* col_jobj;
     HSD_JObj* row_jobj;
-    HSD_JObj* sp_jobj2;
-    u8 stack_obj3[12];
-    int idx;
-    int remaining;
-    u8* p2;
-    u8* p;
+    int col_idx;
+    int col_remaining;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
-    u8* pr2;
     f32 x_spacing;
     f32 y_spacing;
-    int fighter_kind;
     int i;
-    HSD_JObj* ref_jobj;
-
-    (void) &stack_obj;
-    (void) &stack_obj2;
-    (void) &stack_obj3;
+    // Preserve the original gap before the integer-to-float conversion slot.
+    PAD_STACK(8);
 
     // Column headers (fighter icons)
     for (i = 0; i < 7; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
         joint_data = assets->FaceB;
-        count = mnDiagram_CountUnlockedFightersForHeaders();
-        if (count > i) {
-            remaining = i;
-            idx = arg2;
-            p = sorted + idx;
-            while (remaining >= 0) {
-                if (remaining == 0) {
-                    fighter_id = sorted[idx];
+        unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
+        if (unlocked_count > i) {
+            HSD_JObj* child;
+            col_remaining = i;
+            col_idx = arg2;
+            col_cursor = sorted + col_idx;
+            while (col_remaining >= 0) {
+                if (col_remaining == 0) {
+                    col_fighter = sorted[col_idx];
                     goto col_found;
                 }
-                p2 = p;
+                col_next = col_cursor;
             col_inner:
-                idx++;
-                p2++;
-                p++;
-                if (idx >= 0x19) {
-                    fighter_id = 0x19;
+                col_idx++;
+                col_next++;
+                col_cursor++;
+                if (col_idx >= SELKIND_COUNT) {
+                    col_fighter = SELKIND_COUNT;
                     goto col_found;
                 }
-                if (mn_IsFighterUnlocked(*p2) == 0) {
+                if (mn_IsFighterUnlocked(*col_next) == 0) {
                     goto col_inner;
                 }
-                remaining--;
+                col_remaining--;
             }
         col_found:
-            jobj = HSD_JObjLoadJoint(joint_data[0]);
-            HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
-                               joint_data[3]);
-            HSD_JObjReqAnimAll(jobj, 0.0f);
-            HSD_JObjAnimAll(jobj);
-            lb_80011E24(jobj, &sp_jobj, 2, -1);
-            HSD_JObjReqAnimAll(sp_jobj, (f32) (fighter_id & 0xFF));
-            HSD_JObjAnimAll(sp_jobj);
-            jobj2 = jobj;
-            x_spacing =
-                HSD_JObjGetTranslationX(data->jobjs[8]) -
-                HSD_JObjGetTranslationX(jobj = ref_jobj = data->jobjs[7]);
-            HSD_JObjSetTranslateX(jobj2, x_spacing * i);
-            HSD_JObjAddChild(data->jobjs[7], jobj2);
+            col_jobj =
+                mnDiagram_LoadHeaderIcon(joint_data, col_fighter, &child);
+            {
+                f32 reference_x =
+                    HSD_JObjGetTranslationX(col_ref = data->jobjs[7]);
+                x_spacing = HSD_JObjGetTranslationX(col_ref = data->jobjs[8]) -
+                            reference_x;
+            }
+            HSD_JObjSetTranslateX(col_jobj, x_spacing * i);
+            HSD_JObjAddChild(data->jobjs[7], col_jobj);
         }
     }
 
     // Row headers (fighter icons)
     joint_data = assets->FaceB;
-    for (i = 0; i < 0xA; i++) {
+    for (i = 0; i < 10; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
-        count = mnDiagram_CountUnlockedFightersForHeaders();
-        if (count > i) {
-            u8* pr;
-            remr = i;
-            idx = arg1;
-            pr = sorted + idx;
-            while (remr >= 0) {
-                if (remr == 0) {
-                    selkind = sorted[idx];
+        unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
+        if (unlocked_count > i) {
+            HSD_JObj* row_child;
+            row_remaining = i;
+            row_idx = arg1;
+            row_cursor = sorted + row_idx;
+            while (row_remaining >= 0) {
+                if (row_remaining == 0) {
+                    row_fighter = sorted[row_idx];
                     goto row_found;
                 }
-                pr2 = pr;
+                row_next = row_cursor;
             row_inner:
-                idx++;
-                pr2++;
-                pr++;
-                if (idx >= 0x19) {
-                    selkind = SELKIND_COUNT;
+                row_idx++;
+                row_next++;
+                row_cursor++;
+                if (row_idx >= SELKIND_COUNT) {
+                    row_fighter = SELKIND_COUNT;
                     goto row_found;
                 }
-                if (mn_IsFighterUnlocked(*pr2) == 0) {
+                if (mn_IsFighterUnlocked(*row_next) == 0) {
                     goto row_inner;
                 }
-                remr--;
+                row_remaining--;
             }
         row_found:
             row_jobj = HSD_JObjLoadJoint(joint_data[0]);
@@ -2768,12 +2772,16 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                                joint_data[3]);
             HSD_JObjReqAnimAll(row_jobj, 0.0f);
             HSD_JObjAnimAll(row_jobj);
-            lb_80011E24(row_jobj, &sp_jobj2, 2, -1);
-            fighter_kind = selkind & 0xFF;
-            HSD_JObjReqAnimAll(sp_jobj2, (f32) fighter_kind);
-            HSD_JObjAnimAll(sp_jobj2);
-            y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
-                        HSD_JObjGetTranslationY(jobj2 = data->jobjs[9]);
+            lb_80011E24(row_jobj, &row_child, 2, -1);
+            HSD_JObjReqAnimAll(row_child, (f32) (row_fighter & 0xFF));
+            HSD_JObjAnimAll(row_child);
+            {
+                f32 reference_y =
+                    HSD_JObjGetTranslationY(row_ref = data->jobjs[9]);
+                y_spacing =
+                    HSD_JObjGetTranslationY(row_ref = data->jobjs[10]) -
+                    reference_y;
+            }
             HSD_JObjSetTranslateY(row_jobj, y_spacing * i);
             HSD_JObjAddChild(data->jobjs[9], row_jobj);
         }
