@@ -97,20 +97,17 @@ static void sdata2_order(void)
 }
 #endif
 
-/// these inlines are probably shared in other places
-static inline s32 test_random(s32 val)
-{
-    return ((val != 0) ? HSD_Randi(val) : 0);
-}
-
-static inline s32 randi_between(s32 min, s32 max)
+static inline void grInishie1_SetRespawnTimer(Ground* gp, u32 index, s32 min,
+                                              s32 max)
 {
     if (max > min) {
-        max = min + test_random(max - min);
+        s32 difference = max - min;
+        max = min + (difference != 0 ? HSD_Randi(difference) : 0);
     } else if (max < min) {
-        max += test_random(min - max);
+        s32 difference = min - max;
+        max += difference != 0 ? HSD_Randi(difference) : 0;
     }
-    return max;
+    gp->u.inishie1.block[index].x20 = max;
 }
 
 static inline f32 fabsf_inline(f32 x)
@@ -805,8 +802,8 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Vec3 effect_pos;
 
     gp->u.inishie1.block[index].x2 = 0;
-    gp->u.inishie1.block[index].x20 =
-        randi_between(yakumono_param->unk1A, yakumono_param->unk1C);
+    grInishie1_SetRespawnTimer(gp, index, yakumono_param->unk1A,
+                               yakumono_param->unk1C);
 
     HSD_DObjSetFlags(HSD_JObjGetDObj(gp->u.inishie1.block[index].jobj2), 1U);
 
@@ -816,17 +813,17 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
         s16 status = gp->u.inishie1.block[index].status;
         if (status == 1 || (u16) (status - 2) <= 1U) {
             Vec3 item_vel;
+            Vec3 item_pos;
 
             Ground_801C4A08(gp->u.inishie1.block[index].hatena_gobj);
             gp->u.inishie1.block[index].hatena_gobj = NULL;
 
-            lb_8000B1CC(gp->u.inishie1.block[index].jobj2, NULL,
-                        &item_vel - 1);
+            lb_8000B1CC(gp->u.inishie1.block[index].jobj2, NULL, &item_pos);
 
             item_vel = grI1_803B8268;
-            (&effect_pos - 2)->y += 5.0f;
+            item_pos.y += 5.0f;
 
-            it_8026F7C8(&effect_pos - 2, &item_vel, 0);
+            it_8026F7C8(&item_pos, &item_vel, 0);
         }
     }
 
