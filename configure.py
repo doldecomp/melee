@@ -1155,7 +1155,7 @@ config.libs = [
             Object(Matching, "melee/gm/gm_17EB.c"),
             Object(Linkable, "melee/gm/gmregclear.c"),
             Object(Matching, "melee/gm/gm_180A.c"),
-            Object(Linkable, "melee/gm/gm_181A.c"),
+            Object(Matching, "melee/gm/gm_181A.c"),
             Object(Matching, "melee/gm/gm_1832.c"),
             Object(Matching, "melee/gm/gm_186E.c"),
             Object(Matching, "melee/gm/gm_1879.c"),

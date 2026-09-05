@@ -426,7 +426,6 @@ void fn_80181E18(void)
 void gm_80182174(void)
 {
     s32 i;
-    lbl_80472ED8_t* state = &lbl_80472ED8;
     RegClearSpawnEntry* src;
     RegClearSpawnEntry* dst;
     RegClearSpawnEntry** spawn_table_22;
@@ -437,24 +436,21 @@ void gm_80182174(void)
     s32 mode;
 
     mode = gm_GetCurrentGameMode();
-    spawn_table_25 = &state->x6B4;
-    spawn_table_22 = &state->x6A8;
-    spawn_table_23 = &state->x6AC;
-    spawn_table_26 = &state->x6B8;
-    spawn_table_24 = &state->x6B0;
 
     lbArchive_80016DBC(
-        "GmKumite.dat", &state->x6A4, "gmKumiteSystemTable10man",
-        spawn_table_22, "gmKumiteSystemTable100man", spawn_table_23,
-        "gmKumiteSystemTable10min", spawn_table_24, "gmKumiteSystemTable60min",
-        spawn_table_25, "gmKumiteSystemTableEndless", spawn_table_26,
+        "GmKumite.dat", &lbl_80472ED8.x6A4, "gmKumiteSystemTable10man",
+        (spawn_table_22 = &lbl_80472ED8.x6A8), "gmKumiteSystemTable100man",
+        (spawn_table_23 = &lbl_80472ED8.x6AC), "gmKumiteSystemTable10min",
+        (spawn_table_24 = &lbl_80472ED8.x6B0), "gmKumiteSystemTable60min",
+        (spawn_table_25 = &lbl_80472ED8.x6B4), "gmKumiteSystemTableEndless",
+        (spawn_table_26 = &lbl_80472ED8.x6B8),
         "gmKumiteSystemTableMercilessly", 0);
 
-    state->x0 = 0;
-    state->x4 = 0;
-    state->x8 = 0;
+    lbl_80472ED8.x0 = 0;
+    lbl_80472ED8.x4 = 0;
+    lbl_80472ED8.x8 = 0;
 
-    gm_SetupPlayerDefaults(&state->xC);
+    gm_SetupPlayerDefaults(&lbl_80472ED8.xC);
 
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
@@ -464,7 +460,7 @@ void gm_80182174(void)
     switch (mode) {
     case 0x21:
         src = ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->x6A4;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
@@ -482,7 +478,7 @@ void gm_80182174(void)
         break;
     case 0x22:
         src = *spawn_table_22;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
@@ -500,7 +496,7 @@ void gm_80182174(void)
         break;
     case 0x23:
         src = *spawn_table_23;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
@@ -518,7 +514,7 @@ void gm_80182174(void)
         break;
     case 0x24:
         src = *spawn_table_24;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
@@ -536,7 +532,7 @@ void gm_80182174(void)
         break;
     case 0x25:
         src = *spawn_table_25;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
@@ -554,7 +550,7 @@ void gm_80182174(void)
         break;
     case 0x26:
         src = *spawn_table_26;
-        dst = state->x54;
+        dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
             dst->x4 = src->x4;
