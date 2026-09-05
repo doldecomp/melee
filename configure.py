@@ -764,7 +764,7 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_FlyReflect.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_PassiveCeil.c"),
-            Object(Linkable, "melee/ft/ftafterimage.c"),
+            Object(Matching, "melee/ft/ftafterimage.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_DamageSong.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_0C35.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_AirCatch.c"),
