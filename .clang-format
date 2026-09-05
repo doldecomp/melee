@@ -26,7 +26,6 @@ SortIncludes: CaseInsensitive
 WhitespaceSensitiveMacros:
   - 'HSD_ASSERT'
   - 'HSD_ASSERTREPORT'
-  - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<placeholder\.h>$'
