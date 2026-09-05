@@ -46,8 +46,8 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
 
-u8 lbl_804D6638[0x4];
 int lbl_804D663C;
+u8 lbl_804D6638[0x4];
 
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6674;
@@ -120,14 +120,15 @@ void fn_8018A514(int count, float val)
     s32 region;
     BracketEntry* entries;
     BracketSrcEntry* src;
-    BracketSrcPtr* srcs;
+    BracketSrcEntry** srcs;
     int i;
     s32 n;
 
+    entries = lbl_80473AB8;
     region = count < 9 ? 0 : count >= 14 ? 2 : 1;
 
-    srcs = (BracketSrcPtr*) ((BracketData*) lbl_80473AB8)->srcs;
-    src = srcs[region].ptr;
+    srcs = (BracketSrcEntry**) &lbl_804771B8;
+    src = srcs[region];
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
@@ -145,7 +146,6 @@ void fn_8018A514(int count, float val)
 
     n = ((lbl_803D9D20_u*) &lbl_803D9D20)->bytes[i = count + 0x20];
 
-    entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
         entries[i].x0 = src->x0;
         entries[i].x1 = src->x1;
@@ -2316,7 +2316,7 @@ void fn_8018F888(void)
 
     lbl_80473AB8[i].x20.g = 0;
 
-    if (gm_804771C4.x37[0].x8 != 5) {
+    if (gm_804771C4.x33 != 5) {
         return;
     }
 
@@ -2351,7 +2351,7 @@ void fn_8018FA24(void)
 
     PAD_STACK(8);
 
-    tmdata = (u8*) &gm_804771C4 + 0xc;
+    tmdata = (u8*) &gm_804771C4;
 
     entry = lbl_80473AB8;
     for (i = 0; i < 64; entry++, i++) {
