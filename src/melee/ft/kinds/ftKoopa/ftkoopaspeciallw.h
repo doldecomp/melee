@@ -2,7 +2,6 @@
 #define MELEE_FT_KP_SPECIAL_LW_H
 
 #include <melee/ft/forward.h>
-#include <melee/ft/forward.h>
 
 /* 13460C */ void ftKp_SpecialLw_Enter(Fighter_GObj* gobj);
 /* 1346A4 */ void ftKp_SpecialAirLw_Enter(Fighter_GObj* gobj);

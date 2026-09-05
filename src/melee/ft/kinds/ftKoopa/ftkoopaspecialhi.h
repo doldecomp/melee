@@ -2,7 +2,6 @@
 #define MELEE_FT_KP_SPECIAL_HI_H
 
 #include <melee/ft/forward.h>
-#include <melee/ft/forward.h>
 
 /* 135A2C */ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj);
 /* 135B04 */ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj);

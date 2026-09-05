@@ -10,9 +10,7 @@
 
 #include "fighter.h"
 
-#include "forward.h"
 
-#include "ftdata.h"
 #include "inlines.h"
 #include "types.h"
 #include "kinds/ftCaptain/ftcaptain.h"

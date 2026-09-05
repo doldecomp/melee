@@ -18,7 +18,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include "itgshell.h"
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

@@ -21,7 +21,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_CliffJump.h>
 #include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
 #include <melee/ft/kinds/ftSamus/types.h>
-#include <melee/ft/kinds/ftSamus/types.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itCharItems.h>

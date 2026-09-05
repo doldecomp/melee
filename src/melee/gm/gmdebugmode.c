@@ -11,7 +11,6 @@
 #include <sysdolphin/baselib/random.h>
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
-#include "types.h"
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mn/types.h>
 

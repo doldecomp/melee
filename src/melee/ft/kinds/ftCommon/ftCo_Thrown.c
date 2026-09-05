@@ -18,7 +18,6 @@
 #include "ftCo_Damage.h"
 #include <melee/lb/lb_00B0.h>
 
-#include <melee/ft/ftcamera.h>
 #include <melee/pl/plbonuslib.h>
 
 /* 0DE5A4 */ static void ftCo_800DE5A4(Fighter_GObj*);

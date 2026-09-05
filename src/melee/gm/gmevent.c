@@ -9,7 +9,6 @@
 #include <melee/ft/ftlib.h>
 #include "gm_1601.h"
 #include "gm_16F1.h"
-#include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "types.h"
 #include <melee/gr/ground.h>

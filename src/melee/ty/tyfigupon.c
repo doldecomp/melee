@@ -21,7 +21,6 @@
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 #include "inlines.h"
-#include "toy.h"
 #include "types.h"
 
 #include <sysdolphin/baselib/archive.h>

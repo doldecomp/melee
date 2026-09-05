@@ -11,8 +11,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
-#include "toy.h"
-#include "types.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

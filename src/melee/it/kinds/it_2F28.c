@@ -16,7 +16,6 @@
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/it/item.h>
 
 static void it_802F2A58(Item_GObj*);             /* static */
 static bool it_2F28_UnkMotion0_Anim(Item_GObj*); /* static */

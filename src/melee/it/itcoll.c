@@ -22,8 +22,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
 #include <melee/gm/gm_unsplit.h>
 #include "it_26B1.h"
-#include "it_2725.h"
-#include "it_279C.h"
 #include "it_3F14.h"
 #include "item.h"
 #include <melee/lb/lb_00B0.h>

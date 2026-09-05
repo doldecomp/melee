@@ -8,7 +8,6 @@
 
 #include <melee/pl/types.h>
 
-#include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

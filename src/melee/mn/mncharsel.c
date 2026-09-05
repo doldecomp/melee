@@ -39,12 +39,10 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
-#include "mncharsel.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
 #include "mnname.h"
 #include "mnnamenew.h"
-#include "types.h"
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };

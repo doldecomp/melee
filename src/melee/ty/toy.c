@@ -26,11 +26,9 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
-#include <melee/if/textlib.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
-#include "types.h"
 
 #include <math.h>
 #include <string.h>

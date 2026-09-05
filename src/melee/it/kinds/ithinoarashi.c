@@ -13,7 +13,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include "itmaril.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 

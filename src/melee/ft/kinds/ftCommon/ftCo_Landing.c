@@ -37,15 +37,6 @@
 #include "ftCo_Walk.h"
 #include <melee/ft/kinds/ftPeach/ftpeachspecialhi.h>
 
-#include "ftCo_Attack1.h"
-#include "ftCo_AttackHi3.h"
-#include "ftCo_AttackHi4.h"
-#include "ftCo_AttackLw3.h"
-#include "ftCo_AttackLw4.h"
-#include "ftCo_AttackS3.h"
-#include "ftCo_AttackS4.h"
-#include "ftCo_Guard.h"
-#include "ftCo_SpecialS.h"
 
 void ftCo_Landing_Enter(Fighter_GObj* gobj, FtMotionId msid,
                         bool allow_interrupt, MotionFlags flags,

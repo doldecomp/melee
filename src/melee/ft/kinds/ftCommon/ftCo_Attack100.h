@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
-#include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
 /* 0D67C4 */ bool ftCo_800D67C4(Fighter*);

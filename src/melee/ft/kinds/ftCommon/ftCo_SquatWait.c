@@ -35,14 +35,6 @@
 #include "ftCo_SquatRv.h"
 #include <melee/ft/kinds/ftLink/ftlinkattackair.h>
 
-#include "ftCo_Attack1.h"
-#include "ftCo_AttackHi3.h"
-#include "ftCo_AttackHi4.h"
-#include "ftCo_AttackLw3.h"
-#include "ftCo_AttackLw4.h"
-#include "ftCo_AttackS3.h"
-#include "ftCo_AttackS4.h"
-#include "ftCo_Guard.h"
 
 /* 0D62C4 */ static void fn_800D62C4(Fighter_GObj* gobj);
 

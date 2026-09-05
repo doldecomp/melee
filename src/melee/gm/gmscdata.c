@@ -43,9 +43,7 @@
 #include "types.h"
 
 #include "gmcameramode.h"
-#include "gmmenumode.h"
 #include "gmprogressivemode.h"
-#include "gmtrainingmode.h"
 #include <melee/if/ifprize.h>
 #include <melee/mn/mncharsel.h>
 #include <melee/mn/mnmain.h>

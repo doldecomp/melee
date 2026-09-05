@@ -45,7 +45,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
 #include "gm_1A45.h"
-#include <melee/pl/player.h>
 
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 

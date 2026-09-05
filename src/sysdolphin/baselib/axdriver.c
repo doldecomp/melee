@@ -8,7 +8,6 @@
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>
 #include <dolphin/os.h>
-#include "axdriver.h"
 #include "debug.h"
 #include "synth.h"
 

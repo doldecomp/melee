@@ -7,7 +7,6 @@
 #include <melee/pl/forward.h>
 
 #include "gm_unsplit.h"
-#include "types.h"
 #include <melee/mn/types.h>
 
 /**

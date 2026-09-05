@@ -43,6 +43,5 @@
 /* 28B850 */ void it_8028B850(Item_GObj* item_gobj, f32 speed);
 /* 28B8B8 */ void itParasol_Logic13_EvtUnk(Item_GObj* item_gobj, HSD_GObj*);
 /* 3F5AB0 */ extern ItemStateTable it_803F5AB0[];
-/* 3F70B8 */ extern ItemStateTable it_803F70B8[];
 
 #endif

@@ -10,9 +10,7 @@
 #include "forward.h"
 
 #include "inlines.h"
-#include "it_2725.h"
 #include "it_3F14.h"
-#include "itanimlist.h"
 #include "itCommonItems.h"
 #include "item.h"
 #include "ithitbox.h"

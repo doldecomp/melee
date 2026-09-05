@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-#include <melee/it/forward.h>
+#include <melee/it/types.h>
 
 #include <melee/it/kinds/types.h>
 

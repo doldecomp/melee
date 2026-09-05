@@ -20,7 +20,6 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/it/item.h>
 
 ItemStateTable it_803F6488[] = {
     { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },
