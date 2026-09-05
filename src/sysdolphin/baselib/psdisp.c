@@ -1540,8 +1540,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     if (abs_angle > 0.01) {
         f32 c = cosf(angle);
         f32 s = sinf(angle);
-        f32 old_ax = ax;
-        f32 old_bx = bx;
+        f32 old_bx;
+        f32 old_ax;
+        old_ax = ax;
+        old_bx = bx;
         ax = c * ax - s * ay;
         ay = s * old_ax + c * ay;
         bx = c * bx - s * by;
