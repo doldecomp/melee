@@ -1,14 +1,13 @@
 #include "ftcrazyhandcapturewaitcrazyhand.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_CaptureCut.h"
-#include "ft/types.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureCut.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCh_GrabUnk1_8015B778(HSD_GObj* gobj)
 {

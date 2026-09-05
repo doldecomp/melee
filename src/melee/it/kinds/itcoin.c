@@ -1,31 +1,29 @@
 #include "itcoin.h"
 
-#include "cm/camera.h"
-#include "gm/gm_unsplit.h"
-#include "gr/grfigureget.h"
-#include "gr/ground.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/itCommonItems.h"
-#include "it/itdraw.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "ty/tydisplay.h"
+#include <melee/it/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grfigureget.h>
+#include <melee/gr/ground.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/ty/tydisplay.h>
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
 /* 2F15B0 */ static bool itCoin_UnkMotion0_Anim(Item_GObj* gobj);

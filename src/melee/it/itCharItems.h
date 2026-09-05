@@ -3,19 +3,15 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
-#include "platform.h"
-
-#include "gm/types.h"
-
-#include "it/forward.h"
-#include "lb/forward.h"
-
-#include "lb/types.h"
-
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/types.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 typedef struct itCLinkMilk_ItemVars {
     /* +0 ip+DD4 */ Fighter_GObj* x0;

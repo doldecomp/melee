@@ -1,15 +1,13 @@
 #ifndef GALE01_266F3C
 #define GALE01_266F3C
 
-#include <platform.h>
-
-#include "ft/types.h"
-
-#include "it/forward.h"
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 struct ItemStateDesc;
 

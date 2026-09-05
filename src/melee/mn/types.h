@@ -1,11 +1,12 @@
 #ifndef MELEE_MN_TYPES_H
 #define MELEE_MN_TYPES_H
 
-#include "platform.h"
-
-#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
+#include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 #ifdef M2C
 struct mnInfo_GObj {
@@ -559,6 +560,22 @@ struct MenuKindData {
     u16* description_indices; ///< array of sis idx's for each selection
     u8 selection_count;       ///< number of options/cursors in the menu
     void (*think)(HSD_GObj*);
+};
+
+struct mnDiagram_ArchiveData {
+    /* 0x00 */ HSD_Joint* x0;
+    /* 0x04 */ HSD_AnimJoint* x4;
+    /* 0x08 */ HSD_MatAnimJoint* x8;
+    /* 0x0C */ HSD_ShapeAnimJoint* xC;
+};
+
+struct MnDiagram2RowLayout {
+    /* 0x00 */ Vec3 header_pos;
+    /* 0x0C */ Vec3 label_pos;
+    /* 0x18 */ Vec3 value_pos;
+    /* 0x24 */ Vec3 icon_pos;
+    /* 0x30 */ u16 label_ids[24];
+    /* 0x60 */ u16 unit_glyph_ids[24];
 };
 
 /// User data for VS Records page 2 (character details screen)

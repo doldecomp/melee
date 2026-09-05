@@ -1,11 +1,10 @@
 #ifndef GALE01_151428
 #define GALE01_151428
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 151428 */ bool ftMh_MS_343_80151428(Vec3* vec);
 /* 151484 */ void ftMh_MS_343_80151484(HSD_GObj* gobj);

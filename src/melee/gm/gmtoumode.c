@@ -1,19 +1,18 @@
 #include "gmtoumode.h"
 
+#include "gm_1A3F.h"
 #include "gm_1B03.h"
+#include "gm_unsplit.h"
+#include "gmtoulib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
-#include "gm/gm_1A3F.h"
+#include <melee/lb/forward.h>
 
-#include "lb/forward.h"
-
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmtoulib.h"
-#include "melee/gm/gmvsmelee.h"
-#include "melee/gm/types.h"
-#include "melee/lb/lbcardgame.h"
-#include "melee/lb/lbcardnew.h"
-#include "melee/lb/types.h"
-#include "melee/mn/types.h"
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
 
 /* 1B1724 */ static void gm_801B1724(GameModeState*);
 /* 1B174C */ static void gm_801B174C(GameModeState*);

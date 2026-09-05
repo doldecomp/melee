@@ -3,11 +3,10 @@
 
 #include "lbsnap.h" // IWYU pragma: export
 
-#include <platform.h>
-
-#include "it/types.h"
-#include "lb/lbcardnew.h"
-#include "lb/types.h"
+#include <melee/it/types.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 struct Unk80433380_48 {
     int card_result;

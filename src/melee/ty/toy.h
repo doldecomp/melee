@@ -1,13 +1,11 @@
 #ifndef GALE01_305058
 #define GALE01_305058
 
-#include <platform.h>
-
-#include "sc/forward.h"
-
-#include "ty/types.h"
-
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ty/types.h>
+#include <Runtime/platform.h>
 
 /* 304870 */ int Toy_GetTrophyTotal(void);
 /* 3048C0 */ s32 Toy_803048C0(int);

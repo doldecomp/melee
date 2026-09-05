@@ -1,16 +1,13 @@
 #ifndef GALE01_284D54
 #define GALE01_284D54
 
-#include <platform.h>
-
-#include "it/forward.h"
-#include "it/kinds/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
+#include <melee/it/kinds/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 284D54 */ Item_GObj* itSword_Spawn(Vec3* pos);
 /* 284E10 */ void it_80284E10(HSD_GObj*, int);

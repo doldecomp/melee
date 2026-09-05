@@ -10,11 +10,10 @@
 #include "tev.h"
 #include "wobj.h"
 
-#include "dolphin/gx.h"
-#include "dolphin/mtx.h"
-
 #include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 

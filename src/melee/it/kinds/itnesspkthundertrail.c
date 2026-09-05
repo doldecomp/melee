@@ -1,20 +1,19 @@
 #include "itnesspkthundertrail.h"
 
+#include "itnesspkthunderball.h"
+
 #include <placeholder.h>
-#include <platform.h>
 
-#include "db/db.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/kinds/itnesspkthunderball.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F6C08[] = {
     { 0, itNesspkthundertrail_UnkMotion0_Anim,

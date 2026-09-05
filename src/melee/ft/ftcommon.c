@@ -3,54 +3,50 @@
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0892.h"
+#include "ft_0C88.h"
+#include "ft_0DF0.h"
 #include "ftcamera.h"
+#include "ftchangeparam.h"
+#include "ftcolanim.h"
 #include "ftcoll.h"
 #include "ftlib.h"
+#include "ftmetal.h"
 #include "ftparts.h"
-#include "stdbool.h"
+#include "types.h"
 
-#include "ef/eflib.h"
+#include "forward.h"
 
-#include "ft/forward.h"
+#include "kinds/ftCommon/ftCo_Damage.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_HammerWait.h"
+#include "kinds/ftCommon/ftpickupitem.h"
 
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
-#include "ft/ft_0DF0.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftmetal.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Damage.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_HammerWait.h"
-#include "ftCommon/ftpickupitem.h"
-#include "gm/gm_unsplit.h"
-
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/kinds/it_2E5A.h"
-#include "it/kinds/itfflowerflame.h"
-#include "it/kinds/itrabbitc.h"
-#include "it/kinds/itsword.h"
-#include "lb/lb_013B.h"
-
-#include "mp/forward.h"
-
-#include "mp/mplib.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
-#include "sfx/crowdsfx.h"
+#include <melee/it/forward.h>
+#include <melee/mp/forward.h>
 
 #include <math.h>
+#include <stdbool.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/rumble.h>
+#include <melee/ef/eflib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
+#include <melee/it/kinds/it_2E5A.h>
+#include <melee/it/kinds/itfflowerflame.h>
 #include <melee/it/kinds/itpeachparasol.h>
+#include <melee/it/kinds/itrabbitc.h>
+#include <melee/it/kinds/itsword.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
+#include <melee/sfx/crowdsfx.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

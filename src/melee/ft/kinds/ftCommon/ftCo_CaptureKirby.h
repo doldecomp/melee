@@ -1,7 +1,7 @@
 #ifndef GALE01_0BD19C
 #define GALE01_0BD19C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
 

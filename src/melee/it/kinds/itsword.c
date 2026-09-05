@@ -6,23 +6,21 @@
 #include "types.h" // IWYU pragma: keep
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "ft/ftlib.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/itdraw.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-
-#include "it/kinds/forward.h"
-
-#include "it/types.h"
+#include "forward.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/ftlib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 284E30 */ static void it_80284E30(Item_GObj* gobj);
 /* 285084 */ static void it_80285084(Item_GObj* gobj);

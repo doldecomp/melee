@@ -1,7 +1,7 @@
 #ifndef __GALE01_1CA394
 #define __GALE01_1CA394
 
-#include "gr/types.h"
+#include <melee/gr/types.h>
 
 static struct {
     /* +0 */ grZakoGenerator_SpawnDesc* x0;

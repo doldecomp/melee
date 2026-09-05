@@ -1,9 +1,8 @@
 #ifndef __GALE01_1D5238
 #define __GALE01_1D5238
 
-#include <platform.h>
-
-#include "gr/types.h"
+#include <melee/gr/types.h>
+#include <Runtime/platform.h>
 
 extern GrJoint grKg_803E16E0[6];
 extern StageCallbacks grKg_StageCallbacks[12];

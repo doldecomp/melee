@@ -1,14 +1,12 @@
 #ifndef GALE01_2AA7E4
 #define GALE01_2AA7E4
 
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2AA7E4 */ Fighter_GObj* it_802AA7E4(Item_GObj*);
 /* 2AA7F0 */ bool it_802AA7F0(Item_GObj*);

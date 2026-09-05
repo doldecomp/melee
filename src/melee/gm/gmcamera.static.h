@@ -1,7 +1,7 @@
 #ifndef MELEE_GMCAMERA_H
 #define MELEE_GMCAMERA_H
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
 static struct CameraVsData gmCamera_VsCameraTextLayout;
 static f32 gmCamera_803DA758[12] = {

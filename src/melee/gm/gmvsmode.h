@@ -1,7 +1,7 @@
 #ifndef GALE01_1B14A0
 #define GALE01_1B14A0
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
 typedef enum {
     gmVsMode_State_Css,

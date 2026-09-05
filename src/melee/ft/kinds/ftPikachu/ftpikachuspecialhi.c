@@ -1,39 +1,33 @@
 #include "ftpikachuspecialhi.h"
 
-#include <platform.h>
-
-#include "ef/efsync.h"
+#include "types.h"
 
 #include "forward.h"
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_Pass.h"
-#include "ftCommon/inlines.h"
-#include "ftPikachu/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
+#include <Runtime/platform.h>
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f

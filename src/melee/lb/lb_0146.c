@@ -1,4 +1,4 @@
-#include "lb/types.h"
+#include "types.h"
 
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>

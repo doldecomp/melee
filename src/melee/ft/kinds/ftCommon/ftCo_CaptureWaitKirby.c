@@ -1,13 +1,13 @@
 #include "ftCo_CaptureWaitKirby.h"
 
-#include "ft/fighter.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftKirby/ftkirby.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureCut.h"
 
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 
 void ftCo_800BD620(Fighter_GObj* gobj)
 {

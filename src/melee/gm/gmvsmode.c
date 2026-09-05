@@ -1,19 +1,18 @@
 #include "gmvsmode.h"
 
-#include "gm/forward.h"
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmmovieend.h"
+#include "gmresult.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
-#include "gm/gm_1A3F.h"
-#include "gm/gmmovieend.h"
-#include "if/if_2FD9.h"
+#include "forward.h"
+#include <melee/lb/forward.h>
 
-#include "lb/forward.h"
-
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmresult.h"
-#include "melee/gm/gmvsmelee.h"
-#include "melee/gm/types.h"
-#include "melee/lb/types.h"
-#include "mn/types.h"
+#include <melee/if/if_2FD9.h>
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
 
 /* 1B13B8 */ static void onEnterDebugVs(GameModeState*);
 /* 1B14A0 */ static void onEnterCss(GameModeState*);

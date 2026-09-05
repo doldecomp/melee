@@ -2,17 +2,16 @@
 
 #include "ftdonkeyheavyjump.h"
 #include "ftdonkeyheavywait1.h"
+#include "types.h"
 
-#include "ft/fighter.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftDonkey/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
 
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {

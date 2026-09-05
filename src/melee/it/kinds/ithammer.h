@@ -1,11 +1,10 @@
 #ifndef GALE01_293D94
 #define GALE01_293D94
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/kinds/types.h>
 
 /* 293D94 */ void it_80293D94(Item_GObj* gobj);
 /* 293DCC */ int it_80293DCC(Item_GObj* gobj);

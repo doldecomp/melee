@@ -1,26 +1,23 @@
 #include "ftnana.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_Fall.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ft/types.h"
-#include "ftPopo/ftpopospecials.h"
-#include "ftPopo/types.h"
-#include "pl/player.h"
+#include <melee/ft/forward.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecials.h>
+#include <melee/ft/kinds/ftPopo/types.h>
+#include <melee/ft/types.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 /* 123B3C */ static void ftNn_Init_80123B3C(Fighter_GObj* nana_gobj);
 /* 123BF0 */ static void ftNn_Init_80123BF0(Fighter_GObj* gobj);

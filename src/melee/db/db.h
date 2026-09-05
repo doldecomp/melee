@@ -3,8 +3,8 @@
 
 #include <placeholder.h>
 
-#include "melee/ft/forward.h"
-#include "melee/it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
 

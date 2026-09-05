@@ -1,4 +1,4 @@
-#include "ftLuigi/ftluigi.h"
+#include "ftluigi.h"
 
 #include "ftluigispecialhi.h"
 #include "ftluigispeciallw.h"
@@ -7,18 +7,16 @@
 #include "types.h"
 
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
 
-#include "ft/ftcamera.h"
-#include "ft/ftCo_800C70D0.h"
-#include "ft/ftCo_800C7178.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftCo_800C70D0.h>
+#include <melee/ft/ftCo_800C7178.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 45A270 */ UnkCostumeStruct ftLg_CostumeList[4];
 

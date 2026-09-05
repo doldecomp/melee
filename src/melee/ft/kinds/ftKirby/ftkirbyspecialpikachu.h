@@ -1,7 +1,7 @@
 #ifndef GALE01_0F9FD4
 #define GALE01_0F9FD4
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0F9FD4 */ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj);
 /* 0FA064 */ void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj);

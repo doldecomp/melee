@@ -1,11 +1,10 @@
 #ifndef GALE01_284854
 #define GALE01_284854
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 Item_GObj* it_80284854(Vec3*);
 void itBat_Logic11_Spawned(Item_GObj*);

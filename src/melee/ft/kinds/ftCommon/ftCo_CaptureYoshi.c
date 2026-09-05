@@ -1,15 +1,14 @@
 #include "ftCo_CaptureYoshi.h"
 
+#include "ftCo_Attack100.h"
 #include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Throw.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_800BBB8C(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
 {

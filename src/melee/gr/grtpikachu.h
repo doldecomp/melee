@@ -1,13 +1,12 @@
 #ifndef _grtpikachu_h_
 #define _grtpikachu_h_
 
-#include <platform.h>
-
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 222E7C */ void grTPikachu_80222E7C(bool);
 /* 222E80 */ void grTPikachu_80222E80(void);

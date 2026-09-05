@@ -1,7 +1,7 @@
 #ifndef GALE01_0C8C84
 #define GALE01_0C8C84
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 #define SFX_VOLUME_MAX 127
 #define SFX_PAN_MID 64

@@ -1,17 +1,17 @@
 #include "ft_0CD1.h"
 
 #include "fighter.h"
+#include "ft_081B.h"
+#include "ft_084E.h"
+#include "ft_0892.h"
+#include "ftanim.h"
+#include "ftcommon.h"
 #include "ftswing.h"
+#include "inlines.h"
 
-#include "ft/forward.h"
+#include "forward.h"
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,
                    float arg4)

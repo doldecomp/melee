@@ -1,27 +1,26 @@
 #include "itlinkarrow.h"
 
-#include "db/db.h"
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftCommon/ftCo_Guard.h"
-#include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftLink/ftlinkspecialn.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/itdraw.h"
-#include "it/iteffect.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
-
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/kinds/ftLink/ftlinkspecialn.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/iteffect.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

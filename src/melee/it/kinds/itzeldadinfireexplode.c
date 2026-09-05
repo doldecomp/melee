@@ -1,20 +1,19 @@
 #include "itzeldadinfireexplode.h"
 
-#include "placeholder.h"
-
-#include "cm/camera.h"
-#include "db/db.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/itcoll.h"
-#include "it/item.h"
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
 
 /* 2C4998 */ bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj);
 

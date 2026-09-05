@@ -1,24 +1,20 @@
 #include "ftnana.h"
 
-#include <platform.h>
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftPopo/forward.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftPopo/forward.h"
-
-#include "ftPopo/ftpopo.h"
-#include "ftPopo/ftpopospecialhi.h"
-#include "ftPopo/ftpopospeciallw.h"
-#include "ftPopo/ftpopospecialn.h"
-#include "ftPopo/ftpopospecials.h"
-#include "ftPopo/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftPopo/ftpopo.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecialhi.h>
+#include <melee/ft/kinds/ftPopo/ftpopospeciallw.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecialn.h>
+#include <melee/ft/kinds/ftPopo/ftpopospecials.h>
+#include <melee/ft/kinds/ftPopo/types.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 1238E4 */ void ftNn_Init_801238E4(Fighter_GObj* gobj);
 /* 1232A4 */ void ftNn_Init_801232A4(Fighter_GObj* gobj);

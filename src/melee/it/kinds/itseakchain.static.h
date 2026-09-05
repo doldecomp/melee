@@ -1,12 +1,10 @@
 #ifndef __GALE01_2BAEEC
 #define __GALE01_2BAEEC
 
-#include "platform.h"
-
-#include "it/itCharItems.h"
-#include "it/types.h"
-
 #include <dolphin/mtx.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 struct _m2c_stack_it_802BCA30 {
     /* 0x00 */ char pad_0[0x18];

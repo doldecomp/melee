@@ -1,20 +1,18 @@
 #include "itmasterhandbullet.h"
 
-#include <platform.h>
-
-#include "db/db.h"
-#include "ef/efsync.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F9388[] = {
     { 0, itMasterhandbullet_UnkMotion1_Anim,

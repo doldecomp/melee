@@ -1,11 +1,10 @@
 #ifndef GALE01_28CFE0
 #define GALE01_28CFE0
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 28CFE0 */ void it_8028CFE0(Item_GObj*);
 /* 28D090 */ void it_8028D090(Item_GObj*);

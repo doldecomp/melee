@@ -3,21 +3,20 @@
 #include "ftkoopa.h"
 #include "ftkoopaspecialn.h"
 
-#include "ft/forward.h"
-
-#include "ft/ft_084E.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
+#include <melee/ft/forward.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 
 static inline void ftKp_SpecialHi_Enter_inline(Fighter_GObj* gobj)
 {

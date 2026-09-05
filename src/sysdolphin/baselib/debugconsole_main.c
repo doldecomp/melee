@@ -1,13 +1,14 @@
 #include "debugconsole_main.h"
 
+#include "hsd_3915.h"
+#include "hsd_393C.h"
+#include "hsd_397E.h"
+#include "video.h"
+
 #include <string.h>
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
 #include <dolphin/vi.h>
-#include <sysdolphin/baselib/hsd_3915.h>
-#include <sysdolphin/baselib/hsd_393C.h>
-#include <sysdolphin/baselib/hsd_397E.h>
-#include <sysdolphin/baselib/video.h>
 
 #ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>

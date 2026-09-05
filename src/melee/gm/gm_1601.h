@@ -3,15 +3,13 @@
 
 #include <placeholder.h>
 
-#include "ft/forward.h"
-#include "gm/forward.h"
-#include "mn/forward.h"
-
-#include "mn/types.h"
-
-#include "sc/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/gm/forward.h>
+#include <melee/mn/forward.h>
+#include <melee/sc/forward.h>
 
 #include <dolphin/gx.h>
+#include <melee/mn/types.h>
 
 #define NUM_UNLOCKABLE_CHARACTERS 11
 #define NUM_UNLOCKABLE_STAGES 11

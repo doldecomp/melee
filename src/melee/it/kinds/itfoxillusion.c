@@ -2,19 +2,18 @@
 
 #include "inlines.h"
 
-#include "db/db.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftFox/ftfoxspecials.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/itdraw.h"
-#include "it/item.h"
-#include "it/types.h"
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecials.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/itdraw.h>
+#include <melee/it/item.h>
+#include <melee/it/types.h>
 
 ItemStateTable it_803F6818[] = {
     {

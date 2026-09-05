@@ -1,11 +1,10 @@
 #ifndef GALE01_2F23AC
 #define GALE01_2F23AC
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2F23AC */ f64 it_802F23AC(Item_GObj* obj, Vec3* pos);
 /* 2F23EC */ void it_802F23EC(Item_GObj* gobj, Fighter_GObj* owner_gobj,

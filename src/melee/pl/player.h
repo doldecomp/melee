@@ -1,19 +1,15 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "pl/forward.h"
-
-#include "pl/types.h"
-
+#include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/pl/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _StaticPlayer {
     /// @at{0} @sz{4}

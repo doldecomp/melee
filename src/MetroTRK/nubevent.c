@@ -1,6 +1,6 @@
 #include "nubevent.h"
 
-#include "MetroTRK/mem_TRK.h"
+#include "mem_TRK.h"
 
 typedef struct EventQueue {
     u8 pad[4];

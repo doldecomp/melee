@@ -1,11 +1,10 @@
 #ifndef GALE01_2D73D0
 #define GALE01_2D73D0
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D73D0 */ void itOldKuri_Logic29_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D73F0 */ void it_802D73F0(Item_GObj*);

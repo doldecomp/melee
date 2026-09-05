@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_APPEALS_H
 #define MELEE_FTCO_APPEALS_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0DE9B8 */ bool ftCo_800DE9B8(Fighter_GObj* gobj);
 /* 0DE9D8 */ bool ftCo_800DE9D8(Fighter_GObj* gobj);

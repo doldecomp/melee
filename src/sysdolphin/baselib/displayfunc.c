@@ -1,18 +1,19 @@
 #include "displayfunc.h"
 
+#include "cobj.h"
+#include "dobj.h"
+#include "lobj.h"
+#include "mobj.h"
+#include "mtx.h"
+#include "objalloc.h"
+#include "pobj.h"
+#include "state.h"
+#include "tev.h"
+#include "util.h"
+
 #include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/util.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 

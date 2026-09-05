@@ -1,27 +1,23 @@
 #include "ftdonkeyspeciallw.h"
 
 #include "ftdonkey.h"
-
-#include <platform.h>
-
-#include "ef/efasync.h"
-#include "ef/efsync.h"
+#include "types.h"
 
 #include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftDonkey/types.h"
+#include <melee/ef/efasync.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
 {

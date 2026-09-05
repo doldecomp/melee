@@ -1,20 +1,18 @@
 #include "ftnessattacklw4.h"
 
 #include "ftnessattackhi4.h"
+#include "types.h"
 
-#include <platform.h>
+#include <melee/ft/forward.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Wait.h"
-#include "ftNess/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /// 0x8011659C
 /// https://decomp.me/scratch/xVTx7

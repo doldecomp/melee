@@ -6,15 +6,13 @@
 #include "gm_18A1.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+#include "gmmultiman.h"
+#include "gmpause.h"
 
-#include "dolphin/pad.h"
-
-#include "gm/forward.h"
-
-#include "it/itspawn.h"
-#include "lb/lb_00F9.h"
+#include "forward.h"
 
 #include <string.h>
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>
@@ -23,8 +21,6 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gmmultiman.h>
-#include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpstadium.h>
 #include <melee/gr/stage.h>
@@ -36,7 +32,9 @@
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
 #include <melee/it/item.h>
+#include <melee/it/itspawn.h>
 #include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_0195.h>
 #include <melee/lb/lb_0219.h>
 #include <melee/lb/lbaudio_ax.h>

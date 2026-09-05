@@ -1,13 +1,12 @@
 #ifndef GALE01_15BD20
 #define GALE01_15BD20
 
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "ftMasterHand/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 15BD20 */ void ftBossLib_8015BD20(HSD_GObj*);
 /* 15BD24 */ void ftBossLib_8015BD24(s32, float*, float, s32, s32, s32);

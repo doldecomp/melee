@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_KINOKOGIANTSTART_H
 #define MELEE_FTCO_KINOKOGIANTSTART_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0D14E4 */ bool Fighter_SuperMushroomApply(Fighter_GObj* gobj);
 /* 0D15D0 */ void ftCo_800D15D0(Fighter_GObj*);

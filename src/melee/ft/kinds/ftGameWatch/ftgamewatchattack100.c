@@ -4,17 +4,14 @@
 #include "ftgamewatchattack11.h"
 
 #include "forward.h"
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftanim.h"
-#include "ftCommon/ftCo_Attack100.h"
+#include <melee/ft/forward.h>
 
 #include <stddef.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 
 /// 0x8014C1E8
 /// https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start

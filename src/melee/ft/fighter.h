@@ -2,15 +2,15 @@
 #define GALE01_0679B0
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include "ft/inlines.h" // IWYU pragma: export
-#include "ft/types.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 extern struct Fighter_804D64FC_t {
     u8** cmdscripts; ///< +00 per-character command script arrays

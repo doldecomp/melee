@@ -1,9 +1,10 @@
 #include "gm_1AED.h"
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <melee/db/db.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>

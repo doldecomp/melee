@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTPOPO_TYPES_H
 #define MELEE_FT_CHARA_FTPOPO_TYPES_H
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
+#include <Runtime/platform.h>
 
 struct ftPopo_FighterVars {
     /* 0x222C */ Item_GObj* x222C;

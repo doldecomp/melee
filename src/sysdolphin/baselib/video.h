@@ -1,10 +1,9 @@
 #ifndef _video_h_
 #define _video_h_
 
-#include <platform.h>
-
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
+#include <Runtime/platform.h>
 
 #define HSD_VI_XFB_MAX 3
 #define HSD_ANTIALIAS_OVERLAP 4

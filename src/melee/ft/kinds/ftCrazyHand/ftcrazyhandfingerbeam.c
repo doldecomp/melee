@@ -1,26 +1,24 @@
 #include "ftcrazyhandfingerbeam.h"
 
+#include "ftcrazyhandcapturecrazyhand.h"
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftcrazyhandfingergun2.h"
+#include "ftcrazyhandtagcancel.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftbosslib.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandcapturecrazyhand.h"
-#include "ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftCrazyHand/ftcrazyhandfingergun2.h"
-#include "ftCrazyHand/ftcrazyhandtagcancel.h"
-#include "ftMasterHand/types.h"
-#include "lb/lbvector.h"
-#include "pl/player.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lbvector.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 static inline float my_sqrtf(float x)
 {

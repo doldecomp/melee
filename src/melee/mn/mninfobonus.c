@@ -6,7 +6,7 @@
 
 #include "mnmain.h"
 
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/archive.h>
@@ -18,13 +18,13 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <db/db.h>
-#include <gm/gm_16AE.h>
-#include <gm/gm_16F1.h>
-#include <lb/lb_00B0.h>
-#include <lb/lbarchive.h>
-#include <lb/lbaudio_ax.h>
-#include <sc/types.h>
+#include <melee/db/db.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/sc/types.h>
 
 static inline int mnInfoBonus_802528F8_inline(int j)
 {

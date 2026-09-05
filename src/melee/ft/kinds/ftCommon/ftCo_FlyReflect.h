@@ -1,11 +1,10 @@
 #ifndef GALE01_0C15F4
 #define GALE01_0C15F4
 
-#include <platform.h>
-
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 0C15F4 */ bool ftCo_800C15F4(Fighter_GObj* gobj);
 /* 0C1718 */ bool ftCo_800C1718(Fighter_GObj* gobj);

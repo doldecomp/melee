@@ -1,11 +1,10 @@
 #ifndef GALE01_1CA0B4
 #define GALE01_1CA0B4
 
-#include <platform.h>
-
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 1CA0B4 */ void grDynamicAttr_801CA0B4(void);
 /* 1CA0F8 */ grDynamicAttr_UnkStruct*

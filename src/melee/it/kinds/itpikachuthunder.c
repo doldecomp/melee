@@ -2,22 +2,20 @@
 
 #include <placeholder.h>
 
-#include "db/db.h"
-#include "ft/kinds/ftPikachu/ftpikachuspeciallw.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-
-#include "it/kinds/forward.h"
-
-#include "it/types.h"
+#include "forward.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/types.h>
 
 ItemStateTable it_803F70C8[] = {
     {

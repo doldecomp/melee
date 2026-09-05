@@ -1,9 +1,9 @@
 #ifndef GALE01_286088
 #define GALE01_286088
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 286088 */ Item_GObj* it_80286088(Item_GObj*);
 /* 2861CC */ void itBox_Logic1_Spawned(Item_GObj*);

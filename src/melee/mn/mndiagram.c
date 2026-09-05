@@ -1,24 +1,14 @@
-#include "lb/lblanguage.h"
-#include "mn/types.h"
-#define MNDIAGRAM_SOURCE
+#include "inlines.h"
+
 #include "mndiagram.static.h"
-#include "mndiagram2.static.h"
 
-#include "dolphin/types.h"
-#include "gm/gm_1601.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00CE.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mndiagram2.h"
-#include "mn/mndiagram3.h"
-#include "mn/mnmain.h"
-#include "mn/mnname.h"
+#include "mndiagram2.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -28,6 +18,15 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00CE.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 
 /// @todo Split-derived data; types are inferred.
 void* mnDiagram_804A0814[4];
@@ -197,12 +196,12 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
     return distance / 100;
 }
 
-s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index)
+s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 player_attacks;
     f32 tag_player_attacks;
 
-    if ((u8) is_name_mode != 0) {
+    if (is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->attacks_total != 0) {
             tag_player_attacks =
                 GetPersistentNameData(player_index)->attacks_total;
@@ -259,12 +258,12 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
+s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 {
     f32 temp_f31;
     f32 temp_f31_2;
 
-    if ((u8) is_name_mode != 0) {
+    if (is_name_mode != 0) {
         if (GetPersistentNameData((s32) player_index)->match_count != 0) {
             temp_f31_2 =
                 (f32) GetPersistentNameData((s32) player_index)->match_count;

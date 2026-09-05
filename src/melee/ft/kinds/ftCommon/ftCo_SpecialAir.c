@@ -1,13 +1,11 @@
 #include "ftCo_SpecialAir.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/types.h"
-
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
 {

@@ -1,11 +1,10 @@
 #ifndef GALE01_2D42C4
 #define GALE01_2D42C4
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D42C4 */ void it_2725_Logic24_Spawned(Item_GObj*);
 /* 2D43AC */ void it_802D43AC(Item_GObj* gobj);

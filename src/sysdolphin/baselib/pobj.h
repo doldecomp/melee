@@ -1,8 +1,6 @@
 #ifndef _pobj_h_
 #define _pobj_h_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/gx/GXEnum.h>
@@ -10,6 +8,7 @@
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/list.h>
+#include <Runtime/platform.h>
 
 #define HSD_MTX_RIGID 1
 #define HSD_MTX_ENVELOPE 2

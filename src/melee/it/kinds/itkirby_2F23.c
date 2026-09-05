@@ -1,13 +1,13 @@
 #include "itkirby_2F23.h"
 
-#include "ft/kinds/ftKirby/ftkirby.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "lb/lbvector.h"
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/lb/lbvector.h>
 
 ItemStateTable it_803F9450[] = {
     { -1, itKirby_2F23_UnkMotion0_Anim, itKirby_2F23_UnkMotion0_Phys,

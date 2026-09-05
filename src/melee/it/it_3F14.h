@@ -1,13 +1,12 @@
 #ifndef GALE01_IT_3F14
 #define GALE01_IT_3F14
 
-#include <platform.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-#include "it/types.h"
+#include <melee/it/kinds/types.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 typedef struct it_804D6D40_t {
     /* 0x00 */ s32 x0;

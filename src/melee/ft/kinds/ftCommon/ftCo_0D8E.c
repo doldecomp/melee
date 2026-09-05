@@ -1,13 +1,13 @@
 #include "ftCo_Attack100.h"
 
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftLink/ftlink.h"
-#include "it/inlines.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftLink/ftlink.h>
+#include <melee/it/inlines.h>
+#include <melee/it/kinds/itlinkhookshot.h>
+#include <melee/lb/lb_00B0.h>
 
 typedef struct {
     u8 pad_0[0x84];

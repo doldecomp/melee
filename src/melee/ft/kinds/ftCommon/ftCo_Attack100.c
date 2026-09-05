@@ -1,32 +1,29 @@
 #include "ftCo_Attack100.h"
 
-#include "placeholder.h"
-#include "platform.h"
-#include "stdbool.h"
+#include "ftpickupitem.h"
+#include "types.h"
 
-#include "ft/fighter.h"
+#include <placeholder.h>
 
-#include "ft/forward.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/types.h"
-
+#include <stdbool.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
 #include <melee/ft/ftdata.h>
-#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattack100.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/types.h>
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/platform.h>
 
 /* 0D769C */ FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);

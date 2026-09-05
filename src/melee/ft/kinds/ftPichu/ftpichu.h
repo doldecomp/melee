@@ -1,14 +1,12 @@
 #ifndef GALE01_149E34
 #define GALE01_149E34
 
-#include <platform.h>
-
-#include "ft/forward.h"
-
-#include "ft/types.h"
-
-#include "ftPikachu/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftPikachu/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 149E34 */ void ftPc_Init_OnLoad(HSD_GObj* gobj);
 /* 149EAC */ void ftPc_Init_OnDeath(HSD_GObj* gobj);

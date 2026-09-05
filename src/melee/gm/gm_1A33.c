@@ -5,13 +5,12 @@
 #include "gmcamera.h"
 #include "types.h"
 
-#include "lb/lbsnap.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
 
 static f32 gmCamera_803DA758[12] = {
     0.7f,   0.7f,   168.0f, 160.0f, 0.7f, 0.7f,

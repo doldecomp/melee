@@ -3,11 +3,10 @@
 
 #include "mnname.h" // IWYU pragma: export
 
-#include "mn/forward.h"
-
-#include "mn/types.h"
+#include <melee/mn/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/mn/types.h>
 
 /// Loaded section pointers for one of the name-entry menu archive models
 /// (joint, animjoint, matanim_joint, shapeanim_joint).

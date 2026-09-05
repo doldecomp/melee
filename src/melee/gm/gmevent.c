@@ -1,36 +1,32 @@
 #include "gmevent.h"
 
+#include "gm_1601.h"
+#include "gm_16F1.h"
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
-#include "ft/forward.h"
-
-#include "melee/cm/camera.h"
-#include "melee/ft/ftbosslib.h"
-#include "melee/ft/ftlib.h"
-#include "melee/gm/gm_1601.h"
-#include "melee/gm/gm_16F1.h"
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmmain_lib.h"
-#include "melee/gm/types.h"
-#include "melee/gr/ground.h"
-#include "melee/if/ifstock.h"
-#include "melee/it/kinds/itevyoshiegg.h"
-#include "melee/lb/lb_0219.h"
-#include "melee/lb/lbarchive.h"
-#include "melee/lb/lbaudio_ax.h"
-#include "melee/lb/lbbgflash.h"
-#include "melee/lb/lbdvd.h"
-#include "melee/lb/types.h"
-#include "melee/mn/types.h"
-
-#include "melee/pl/forward.h"
-
-#include "melee/pl/player.h"
-#include "melee/pl/plbonuslib.h"
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gr/ground.h>
+#include <melee/if/ifstock.h>
+#include <melee/it/kinds/itevyoshiegg.h>
+#include <melee/lb/lb_0219.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbbgflash.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>

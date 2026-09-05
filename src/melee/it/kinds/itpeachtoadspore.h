@@ -1,13 +1,11 @@
 #ifndef GALE01_2BE214
 #define GALE01_2BE214
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2BE214 */ Item_GObj* it_802BE214(Item_GObj* gobj, Vec3* pos, ItemKind kind,
                                     f32 facing_dir);

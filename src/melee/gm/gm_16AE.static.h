@@ -1,6 +1,5 @@
-#include <platform.h>
-
 #include <melee/gm/types.h>
+#include <Runtime/platform.h>
 
 /* 1693A8 */ s32 fn_801693A8(void);
 /* 16A1E4 */ s32 fn_8016A1E4(void);

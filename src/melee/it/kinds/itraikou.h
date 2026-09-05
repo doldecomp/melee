@@ -1,11 +1,10 @@
 #ifndef GALE01_2CF814
 #define GALE01_2CF814
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2CF814 */ void it_802CF814(Item_GObj*);
 /* 2CF880 */ void it_802CF880(Item_GObj*);

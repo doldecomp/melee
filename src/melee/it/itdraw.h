@@ -1,11 +1,10 @@
 #ifndef GALE01_ITDRAW_H
 #define GALE01_ITDRAW_H
 
-#include <platform.h>
-
-#include "it/types.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 26EB18 */ void it_8026EB18(HSD_GObj*, s32, Vec3*);
 /* 26EBC8 */ void it_8026EBC8(HSD_GObj*, u16, u8*);

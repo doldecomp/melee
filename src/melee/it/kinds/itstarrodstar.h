@@ -1,11 +1,10 @@
 #ifndef GALE01_2988E4
 #define GALE01_2988E4
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2988E4 */ void it_802988E4(Fighter_GObj*, Vec*, int, float);
 /* 2989C8 */ void it_802989C8(Item_GObj*, Fighter_GObj*);

@@ -1,11 +1,11 @@
 #include "ftCo_Attack100.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0CDD.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "it/kinds/itsscope.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/it/kinds/itsscope.h>
 
 typedef struct {
     u8 pad_1A4C[0x1A4C];

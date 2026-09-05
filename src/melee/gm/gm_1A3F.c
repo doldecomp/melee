@@ -6,24 +6,23 @@
 #include "gmscdata.h"
 #include "types.h"
 
-#include "db/db.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lbdvd.h"
-#include "lb/lbheap.h"
-#include "lb/lbmthp.h"
-#include "lb/lbsnap.h"
-#include "lb/types.h"
-#include "ty/toy.h"
-#include "ty/tydisplay.h"
-
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/devcom.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
+#include <melee/db/db.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/types.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tydisplay.h>
 
 struct routingInfo {
     u8 curr_mode;     ///< ::GameModeKind

@@ -1,38 +1,35 @@
 #include "ftgamewatchattacklw3.h"
 
 #include "ftgamewatch.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_AttackHi3.h"
-#include "ftCommon/ftCo_AttackHi4.h"
-#include "ftCommon/ftCo_AttackLw3.h"
-#include "ftCommon/ftCo_AttackLw4.h"
-#include "ftCommon/ftCo_AttackS3.h"
-#include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_SquatWait.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/ftCo_Walk.h"
-#include "ftCommon/ftpickupitem.h"
-#include "ftGameWatch/types.h"
-#include "it/it_26B1.h"
-#include "it/kinds/itgamewatchmanhole.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackLw3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackLw4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackS3.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackS4.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Dash.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Squat.h>
+#include <melee/ft/kinds/ftCommon/ftCo_SquatWait.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Walk.h>
+#include <melee/ft/kinds/ftCommon/ftpickupitem.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itgamewatchmanhole.h>
+#include <melee/lb/lb_00B0.h>
+#include <Runtime/platform.h>
 
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);

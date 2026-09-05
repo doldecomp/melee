@@ -1,39 +1,34 @@
 #include "ftCo_PassiveWall.h"
 
 #include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_EscapeAir.h"
+#include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
+#include "ftCo_ItemParasolOpen.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
 #include "ftCo_SpecialAir.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ftanim.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_ItemParasolOpen.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/types.h"
-#include "ftKirby/ftkirby.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 bool ftCo_800C1D38(Fighter_GObj* gobj)
 {

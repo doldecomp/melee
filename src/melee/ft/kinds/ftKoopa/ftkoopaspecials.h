@@ -1,7 +1,7 @@
 #ifndef GALE01_80134288
 #define GALE01_80134288
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 132DC0 */ float ftKp_SpecialS_80132DC0(Fighter_GObj* gobj);
 /* 132DD0 */ float ftKp_SpecialS_80132DD0(Fighter_GObj* gobj);

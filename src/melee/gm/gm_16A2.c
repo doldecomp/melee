@@ -2,14 +2,13 @@
 
 #include "gm_unsplit.h"
 
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "if/ifnametag.h"
-#include "if/ifstatus.h"
-#include "lb/lb_00B0.h"
-
 #include <stddef.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/if/ifnametag.h>
+#include <melee/if/ifstatus.h>
+#include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
 
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;

@@ -1,13 +1,11 @@
 #ifndef GALE01_291BE0
 #define GALE01_291BE0
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void itSScope_Logic21_Spawned(Item_GObj*);

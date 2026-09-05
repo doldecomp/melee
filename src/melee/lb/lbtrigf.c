@@ -1,9 +1,9 @@
 #include "lbtrigf.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <math.h>
+#include <Runtime/platform.h>
 
 /* 022DF8 */ static float lb_sqrtf(float x);
 /* 400770 */ extern float MSL_TrigF_80400770[];

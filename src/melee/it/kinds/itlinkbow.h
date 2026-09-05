@@ -1,10 +1,10 @@
 #ifndef GALE01_2AF1A4
 #define GALE01_2AF1A4
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2AF1A4 */ HSD_GObj* it_802AF1A4(f32, Fighter_GObj*, Vec3*, Fighter_Part,
                                    int);

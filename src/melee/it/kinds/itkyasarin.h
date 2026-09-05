@@ -1,9 +1,9 @@
 #ifndef GALE01_2ECCDC
 #define GALE01_2ECCDC
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2ECCDC */ void itKyasarin_Logic25_Destroyed(Item_GObj*);
 /* 2ECD1C */ void it_802ECD1C(Item_GObj*, Vec3*);

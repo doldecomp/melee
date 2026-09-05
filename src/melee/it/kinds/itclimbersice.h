@@ -1,13 +1,11 @@
 #ifndef GALE01_2C1590
 #define GALE01_2C1590
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C1590 */ Item_GObj* it_802C1590(Item_GObj*, Vec3*, enum_t,
                                     float facing_dir);

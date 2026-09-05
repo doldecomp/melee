@@ -1,16 +1,29 @@
 #include "mnmain.h"
 
-#include "dolphin/pad.h"
+#include "inlines.h"
+#include "mncount.h"
+#include "mndatadel.h"
+#include "mndeflicker.h"
+#include "mndiagram.h"
+#include "mnevent.h"
+#include "mngallery.h"
+#include "mnhyaku.h"
+#include "mninfo.h"
+#include "mninfobonus.h"
+#include "mnlanguage.h"
+#include "mnmainrule.h"
+#include "mnname.h"
+#include "mnsnap.h"
+#include "mnsound.h"
+#include "mnsoundtest.h"
+#include "mnvibration.h"
+#include "types.h"
 
-#include "gm/forward.h"
-
-#include "gm/gmevent.h"
-
-#include "mn/forward.h"
-
-#include "mn/types.h"
+#include "forward.h"
+#include <melee/gm/forward.h>
 
 #include <math.h>
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -25,6 +38,7 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmevent.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -35,23 +49,6 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mncount.h>
-#include <melee/mn/mndatadel.h>
-#include <melee/mn/mndeflicker.h>
-#include <melee/mn/mndiagram.h>
-#include <melee/mn/mnevent.h>
-#include <melee/mn/mngallery.h>
-#include <melee/mn/mnhyaku.h>
-#include <melee/mn/mninfo.h>
-#include <melee/mn/mninfobonus.h>
-#include <melee/mn/mnlanguage.h>
-#include <melee/mn/mnmainrule.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/mnsnap.h>
-#include <melee/mn/mnsound.h>
-#include <melee/mn/mnsoundtest.h>
-#include <melee/mn/mnvibration.h>
 #include <melee/sc/types.h>
 
 /* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);

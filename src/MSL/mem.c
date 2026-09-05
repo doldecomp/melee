@@ -1,7 +1,7 @@
-#include <platform.h>
+#include "mem_funcs.h"
+#include "string.h"
 
-#include <mem_funcs.h>
-#include <string.h>
+#include <Runtime/platform.h>
 
 void* memmove(void* dst, const void* src, size_t len)
 {

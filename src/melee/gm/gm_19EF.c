@@ -6,9 +6,7 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-#include "mn/inlines.h"
-
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -24,6 +22,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 

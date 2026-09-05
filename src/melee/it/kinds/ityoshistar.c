@@ -2,14 +2,13 @@
 
 #include "inlines.h"
 
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/itgroundcoll.h"
-
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/db/db.h>
+#include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 
 ItemStateTable it_803F7158[] = { {
     0,

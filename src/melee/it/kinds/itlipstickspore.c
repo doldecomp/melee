@@ -1,24 +1,22 @@
 #include "itlipstickspore.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "db/db.h"
-#include "ef/efsync.h"
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/types.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 

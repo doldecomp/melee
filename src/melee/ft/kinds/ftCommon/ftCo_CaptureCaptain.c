@@ -1,16 +1,15 @@
 #include "ftCo_CaptureCaptain.h"
 
+#include "ftCo_Attack100.h"
 #include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {

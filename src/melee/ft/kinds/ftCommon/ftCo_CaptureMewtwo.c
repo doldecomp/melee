@@ -1,19 +1,17 @@
 #include "ftCo_CaptureMewtwo.h"
 
+#include "ftCo_Attack100.h"
 #include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
 #include "ftCo_ThrownMewtwo.h"
 
-#include <platform.h>
+#include "forward.h"
 
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Throw.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
                            FtMotionId msid, FtMotionId victim_msid)

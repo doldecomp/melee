@@ -1,15 +1,19 @@
-#include "placeholder.h"
-#include "platform.h"
-#include "stdbool.h"
+#include "ftCo_Throw.h"
 
-#include "ft/forward.h"
+#include "ftCo_CargoWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Thrown.h"
 
-#include "ft/ft_084E.h"
-#include "mp/types.h"
+#include <placeholder.h>
 
+#include <melee/ft/forward.h>
+
+#include <stdbool.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0DF1.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
@@ -17,11 +21,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CargoWait.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
 #include <melee/ft/kinds/ftMewtwo/ftmewtwospecialn.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>
@@ -31,8 +30,10 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <melee/mp/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <Runtime/platform.h>
 
 void fn_800DD568(Fighter_GObj* gobj);
 void fn_800DD5EC(Fighter_GObj* gobj);

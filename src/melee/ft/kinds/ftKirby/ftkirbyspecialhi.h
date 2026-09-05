@@ -1,7 +1,7 @@
 #ifndef GALE01_0F21E8
 #define GALE01_0F21E8
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0F22D4 */ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj);
 /* 0F2300 */ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj);

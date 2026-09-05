@@ -4,13 +4,11 @@
 #include "pl_040D.h"
 #include "plattack.h"
 #include "player.h"
+#include "plbonusinline.h"
 #include "plbonuslib.h"
 #include "plstale.h"
 #include "pltrick.h"
 #include "types.h"
-
-#include "it/it_26B1.h"
-#include "pl/plbonusinline.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <melee/cm/camera.h>
@@ -18,6 +16,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
 
 /// Sets a bonus flag boolean to true
 static void setFlag(int player, int kind)

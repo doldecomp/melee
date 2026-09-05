@@ -1,13 +1,11 @@
 #ifndef GALE01_28B08C
 #define GALE01_28B08C
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 28B08C */ int it_8028B08C(Item_GObj* item_gobj, int statenum);
 /* 28B0B8 */ void itParasol_Logic13_Spawned(Item_GObj* item_gobj);
@@ -43,6 +41,5 @@
 /* 28B850 */ void it_8028B850(Item_GObj* item_gobj, f32 speed);
 /* 28B8B8 */ void itParasol_Logic13_EvtUnk(Item_GObj* item_gobj, HSD_GObj*);
 /* 3F5AB0 */ extern ItemStateTable it_803F5AB0[];
-/* 3F70B8 */ extern ItemStateTable it_803F70B8[];
 
 #endif

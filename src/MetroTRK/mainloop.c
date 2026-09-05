@@ -1,11 +1,10 @@
 #include "mainloop.h"
 
-#include "MetroTRK/dispatch.h"
-#include "MetroTRK/msgbuf.h"
-#include "MetroTRK/serpoll.h"
-#include "MetroTRK/targimpl.h"
-
-#include <MetroTRK/targcont.h>
+#include "dispatch.h"
+#include "msgbuf.h"
+#include "serpoll.h"
+#include "targcont.h"
+#include "targimpl.h"
 
 void TRKHandleRequestEvent(NubEvent* ev)
 {

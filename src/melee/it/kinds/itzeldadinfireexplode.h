@@ -1,11 +1,10 @@
 #ifndef GALE01_2C4580
 #define GALE01_2C4580
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C4580 */ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1,
                                     Vec3* pos, f32 facing_dir, f32 scale);

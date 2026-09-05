@@ -1,30 +1,11 @@
 #include "vi0401.h"
 
+#include "types.h"
+#include "vi.h"
+
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "dolphin/pad.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/ftdemo.h"
-#include "gm/gm_1A36.h"
-#include "gm/gm_1A45.h"
-#include "gm/gm_unsplit.h"
-#include "gm/gmregclear.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "lb/lb_00F9.h"
-#include "lb/lb_013B.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mpcoll.h"
-#include "pl/player.h"
-#include "sc/types.h"
-#include "vi/types.h"
-#include "vi/vi.h"
-
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -34,6 +15,25 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 static SceneDesc* un_804D6F48;
 static SceneDesc* un_804D6F4C;

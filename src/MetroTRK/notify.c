@@ -1,8 +1,8 @@
 #include "notify.h"
 
-#include "MetroTRK/msgbuf.h"
-#include "MetroTRK/support.h"
-#include "MetroTRK/targimpl.h"
+#include "msgbuf.h"
+#include "support.h"
+#include "targimpl.h"
 
 DSError TRKDoNotifyStopped(u8 cmdId)
 {

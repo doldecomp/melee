@@ -1,10 +1,10 @@
 #include "msghndlr.h"
 
-#include "MetroTRK/msg.h"
-#include "MetroTRK/msgbuf.h"
-#include "MetroTRK/nubevent.h"
-#include "MetroTRK/targcont.h"
-#include "MetroTRK/targimpl.h"
+#include "msg.h"
+#include "msgbuf.h"
+#include "nubevent.h"
+#include "targcont.h"
+#include "targimpl.h"
 
 extern void __TRK_copy_vectors(void);
 extern void __TRK_reset(void);

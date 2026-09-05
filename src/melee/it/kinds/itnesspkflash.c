@@ -1,24 +1,23 @@
 #include "itnesspkflash.h"
 
+#include "itnesspkflashexplode.h"
+
 #include <placeholder.h>
-#include <platform.h>
 
-#include "db/db.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftNess/ftnessspecialn.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/kinds/itnesspkflashexplode.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/kinds/ftNess/ftnessspecialn.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <Runtime/platform.h>
 
 /* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj);

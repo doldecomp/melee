@@ -1,11 +1,10 @@
+#include "gm_16F1.h"
 #include "gm_unsplit.h"
+#include "types.h"
 
-#include "melee/gm/gm_16F1.h"
-#include "melee/gm/gm_unsplit.h"
-#include "melee/gm/types.h"
-#include "melee/lb/lbcardgame.h"
-#include "melee/lb/lbcardnew.h"
-#include "melee/lb/types.h"
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/types.h>
 
 /* 1BECA8 */ static void onEnter(GameModeState*);
 /* 1BECD0 */ static void onExit(GameModeState*);

@@ -1,11 +1,10 @@
 #ifndef _hash_h_
 #define _hash_h_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/class.h>
+#include <Runtime/platform.h>
 
 #define hash(s) (s % 0x65)
 

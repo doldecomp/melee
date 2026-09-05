@@ -1,38 +1,14 @@
 #include "itsamusgrapple.h"
 
+#include "inlines.h"
 #include "itlinkhookshot.h"
-#include "placeholder.h"
 
-#include "dolphin/types.h"
-#include "ef/efsync.h"
-#include "ft/fighter.h"
+#include <placeholder.h>
 
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_0A01.h"
-#include "ft/kinds/ftCommon/ftCo_AirCatch.h"
-#include "ft/kinds/ftCommon/ftCo_CliffJump.h"
-#include "ft/kinds/ftCommon/ftCo_DamageFall.h"
-#include "ft/kinds/ftSamus/types.h"
-#include "ftSamus/types.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/kinds/inlines.h"
-#include "lb/lbvector.h"
-#include "lb/types.h"
-#include "mp/mpcoll.h"
-
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -40,6 +16,27 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_0A01.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CliffJump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DamageFall.h>
+#include <melee/ft/kinds/ftSamus/types.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mpcoll.h>
 
 ItemStateTable it_803F73A8[] = {
     { -1, NULL, itSamusgrapple_UnkMotion0_Phys, NULL },

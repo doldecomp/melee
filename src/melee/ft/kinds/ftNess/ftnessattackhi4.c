@@ -1,38 +1,32 @@
 #include "ftnessattackhi4.h"
 
 #include "ftness.h"
+#include "types.h"
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ftanim.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Wait.h"
-#include "ftNess/types.h"
-#include "it/itYoyo.h"
-#include "it/kinds/itnessyoyo.h"
-#include "it/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00B0.h"
-#include "lb/lbcollision.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0C8C.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
+#include <melee/ft/types.h>
+#include <melee/it/itYoyo.h>
+#include <melee/it/kinds/itnessyoyo.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)
 {

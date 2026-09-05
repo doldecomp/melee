@@ -1,11 +1,10 @@
 #ifndef MELEE_MN_RULEPLUS_H
 #define MELEE_MN_RULEPLUS_H
 
-#include "mn/forward.h"
-
-#include "mn/types.h"
-
+#include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/mn/types.h>
 
 enum RulePlusOption {
     RULEPLUS_TIME_LIMIT,
@@ -58,13 +57,5 @@ ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 /* 232F44 */ void fn_80232F44(HSD_GObj*);
 /* 233218 */ HSD_GObj* mn_80233218(MenuState);
 /* 2339FC */ void mn_802339FC(void);
-
-extern volatile f32 mn_804DBE44;
-extern const f32 mn_804DBE4C;
-extern const f32 mn_804DBE50;
-extern const f32 mn_804DBE54;
-extern const f32 mn_804DBE58;
-extern const f32 mn_804DBE5C;
-extern const f32 mn_804DBE60;
 
 #endif

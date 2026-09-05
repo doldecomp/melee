@@ -1,17 +1,17 @@
 #include "ft_0877.h"
 
+#include "fighter.h"
 #include "ftcommon.h"
 #include "ftdevice.h"
+#include "types.h"
 
-#include "ft/fighter.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_0A01.h"
-#include "it/it_26B1.h"
-#include "lb/lbaudio_ax.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbaudio_ax.h>
 
 #define TEST(expr) (expr) ? true : false
 

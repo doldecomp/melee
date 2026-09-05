@@ -1,11 +1,16 @@
-#include "placeholder.h"
+#include "grgreens.h"
 
-#include <platform.h>
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
-#include "it/ithitbox.h"
-#include "lb/lb_00F9.h"
+#include <placeholder.h>
 
-#include <melee/gr/forward.h>
+#include "forward.h"
 
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
@@ -18,18 +23,13 @@
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grgreens.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/inlines.h>
-#include <melee/gr/stage.h>
-#include <melee/gr/types.h>
+#include <melee/it/ithitbox.h>
 #include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 struct grGreens_YakumonoParam {
     int x0_blockTimerMin;

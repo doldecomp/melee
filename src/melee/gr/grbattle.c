@@ -8,9 +8,6 @@
 #include "stage.h"
 #include "types.h"
 
-#include "gm/gm_16AE.h"
-#include "lb/lb_00F9.h"
-
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
@@ -19,6 +16,8 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/lb/lb_00F9.h>
 
 /** @var ::grBattle_YakumonoParam::bg_curr_color_overlay
  * @todo ::ColorOverlay_x8_t, from ::grMaterial_801C9604

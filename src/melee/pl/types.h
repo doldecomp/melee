@@ -1,11 +1,10 @@
 #ifndef MELEE_PL_TYPES_H
 #define MELEE_PL_TYPES_H
 
-#include <platform.h>
-
 #include <melee/pl/forward.h>
 
 #include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 struct plAllocInfo {
     FighterKind internal_id;
