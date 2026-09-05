@@ -2636,42 +2636,42 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     case 1:
         mpLib_80057424(50);
         break;
-    case 2:
+    case 6:
         mpLib_80057424(52);
         mpLib_80057424(53);
         mpLib_80057424(54);
         break;
-    case 3:
+    case 7:
         mpLib_80057424(55);
         mpLib_80057424(56);
         mpLib_80057424(57);
         break;
-    case 4:
+    case 8:
         mpLib_80057424(58);
         mpLib_80057424(59);
         mpLib_80057424(60);
         break;
-    case 5:
+    case 9:
         mpLib_80057424(61);
         mpLib_80057424(62);
         mpLib_80057424(63);
         break;
-    case 6:
+    case 10:
         mpLib_80057424(51);
         break;
-    case 7:
+    case 5:
         mpLib_80057424(33);
         break;
-    case 8:
+    case 2:
         mpLib_80057424(38);
         mpLib_80057424(39);
         mpLib_80057424(40);
         break;
-    case 9:
+    case 3:
         mpLib_80057424(36);
         mpLib_80057424(37);
         break;
-    case 10:
+    case 4:
         mpLib_80057424(64);
         mpLib_80057424(65);
         break;
