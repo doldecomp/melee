@@ -666,7 +666,7 @@ void fn_8018B090(HSD_GObj* arg0)
                     } else {
                         switch (entries[idx].x4) {
                         case 1:
-                            if (i == 0) {
+                            if (k == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
@@ -680,7 +680,7 @@ void fn_8018B090(HSD_GObj* arg0)
                             break;
                         case 2:
                         case 3:
-                            if (i <= 1) {
+                            if (k <= 1) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
