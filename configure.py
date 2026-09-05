@@ -574,7 +574,7 @@ config.libs = [
         "lb (Library)",
         [
             Object(Matching, "melee/lb/lbcommand.c"),
-            Object(Linkable, "melee/lb/lbcollision.c"),
+            Object(Matching, "melee/lb/lbcollision.c"),
             Object(Matching, "melee/lb/lblanguage.c"),
             Object(Matching, "melee/lb/lbtime.c"),
             Object(Matching, "melee/lb/lb_00B0.c"),
