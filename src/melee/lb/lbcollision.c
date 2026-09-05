@@ -1243,7 +1243,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_end_z = hurt_end->z;
     hurt_start_z = hurt_start_copy.z;
     axis.z = hurt_end_z - hurt_start_z;
-    separation.y = hit_delta.y * hit_delta.y;
+    midpoint.y = hit_delta.y;
+    separation.y = midpoint.y * midpoint.y;
     separation.x = hit_delta.x * hit_delta.x;
     {
         PAD_STACK(4);
@@ -1259,11 +1260,11 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     (void) hurt_end_y;
     (void) hurt_end_x;
     segment_dot =
-        hit_delta.z * axis.z + (hit_delta.x * axis.x + hit_delta.y * axis.y);
+        hit_delta.z * axis.z + (hit_delta.x * axis.x + midpoint.y * axis.y);
     {
         PAD_STACK(4);
         hit_start_dot = hit_delta.z * offset.z +
-                        (hit_delta.x * offset.x + hit_delta.y * offset.y);
+                        (hit_delta.x * offset.x + midpoint.y * offset.y);
     }
     hurt_len_sq = axis.y * axis.y;
     hurt_len_sq = axis.x * axis.x + hurt_len_sq;
