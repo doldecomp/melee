@@ -817,7 +817,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 u8 a = color.a;
                 u8 b = color.b;
                 u8 g = color.g;
-                u8 r = color.r;
+                u16 r = color.r;
                 GXColor4u8(r, g, b, (u8) ((f32) a * pp->trail));
             }
             if (pp->kind & DispTexture) {
@@ -830,7 +830,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 u8 a = color.a;
                 u8 b = color.b;
                 u8 g = color.g;
-                u8 r = color.r;
+                u16 r = color.r;
                 GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
@@ -841,7 +841,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 u8 a = color.a;
                 u8 b = color.b;
                 u8 g = color.g;
-                u8 r = color.r;
+                u16 r = color.r;
                 GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
@@ -853,7 +853,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 f32 alpha = (f32) a * pp->trail;
                 u8 b = color.b;
                 u8 g = color.g;
-                u8 r = color.r;
+                u16 r = color.r;
                 GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
