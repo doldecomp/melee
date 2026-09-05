@@ -633,7 +633,7 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
 
     name_ptr = &AutoNamesList[pick];
     while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = GetAutoNameCharacter(name_ptr, char_idx)))
+           (ch = GetAutoNameCharacter(name_ptr, char_idx)))
     {
         text[0] = ch;
         text[1] = GetAutoNameCharacter(name_ptr, char_idx + 1);
@@ -661,6 +661,10 @@ static inline s32 PickAutoNameInline(HSD_GObj* arg0)
     return (s32) null_ch;
 }
 
+#ifdef MUST_MATCH
+#pragma push
+#pragma auto_inline off
+#endif
 s32 PickAutoName(HSD_GObj* arg0)
 {
     PAD_STACK(16);
@@ -728,6 +732,9 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     return ret;
 }
 
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 static inline char** AddCharacterToName_getGlyphs(GlyphRow* arg0, u8 arg1)
 {
     return (char**) &arg0[arg1];
@@ -879,10 +886,36 @@ void mnNameNew_GlyphVariantInput(void)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void copyName(char* name_text, char* name_buffer)
+{
+    char ch;
+    char* dest;
+    char* src;
+    char* dest_iter;
+    char* src_iter;
+    int len;
+    char null_char;
+    int i;
+
+    src = name_text;
+    dest = name_buffer;
+    len = 0;
+    for (i = 0; i < 4; i++) {
+        src_iter = src;
+        dest_iter = dest;
+        while ((s8) (null_char = *mnNameNew_NullCharacter) !=
+               (s8) (ch = *src_iter))
+        {
+            *dest_iter++ = ch;
+            dest++;
+            len++;
+            src_iter++;
+        }
+        src += 3;
+    }
+    name_buffer[len] = null_char;
+}
+
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     char name_buffer[16];
@@ -893,9 +926,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     char* key_char;
     s8 null_char;
     s32 n;
-    char* src;
-    char* dest;
-    s32 len;
     u8 cursor;
 
     name_text = mnNameNew_CurrentNameText;
@@ -1071,54 +1101,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 
             case 0x38:
             case 0x39:
-                dest = name_buffer;
-                len = 0;
-
-                {
-                    char* src_iter;
-                    char* dest_iter;
-
-                    src_iter = (src = name_text);
-                    dest_iter = dest;
-                    for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                           (s8) *src_iter;
-                         dest_iter++, dest++, len++, src_iter++)
-                    {
-                        *dest_iter = *src_iter;
-                    }
-
-                    src_iter = (src += 3);
-                    dest_iter = dest;
-                    for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                           (s8) *src_iter;
-                         dest_iter++, dest++, len++, src_iter++)
-                    {
-                        *dest_iter = *src_iter;
-                    }
-
-                    src_iter = (src += 3);
-                    dest_iter = dest;
-                    for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                           (s8) *src_iter;
-                         dest_iter++, dest++, len++, src_iter++)
-                    {
-                        *dest_iter = *src_iter;
-                    }
-
-                    src_iter = (src += 3);
-                    dest_iter = dest;
-                    while ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                           (s8) *src_iter)
-                    {
-                        *dest_iter = *src_iter;
-                        dest_iter++;
-                        dest++;
-                        len++;
-                        src_iter++;
-                    }
-                }
-
-                name_buffer[len] = *mnNameNew_NullCharacter;
+                copyName(name_text, name_buffer);
 
                 if ((s8) name_text[0] ==
                     (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
@@ -1154,54 +1137,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         if (mn_804A04F0.hovered_selection == 0x38 ||
             mn_804A04F0.hovered_selection == 0x39)
         {
-            dest = name_buffer;
-            len = 0;
-
-            {
-                char* src_iter;
-                char* dest_iter;
-
-                src_iter = (src = name_text);
-                dest_iter = dest;
-                for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                       (s8) *src_iter;
-                     dest_iter++, dest++, len++, src_iter++)
-                {
-                    *dest_iter = *src_iter;
-                }
-
-                src_iter = (src += 3);
-                dest_iter = dest;
-                for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                       (s8) *src_iter;
-                     dest_iter++, dest++, len++, src_iter++)
-                {
-                    *dest_iter = *src_iter;
-                }
-
-                src_iter = (src += 3);
-                dest_iter = dest;
-                for (; (s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                       (s8) *src_iter;
-                     dest_iter++, dest++, len++, src_iter++)
-                {
-                    *dest_iter = *src_iter;
-                }
-
-                src_iter = (src += 3);
-                dest_iter = dest;
-                while ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) !=
-                       (s8) *src_iter)
-                {
-                    *dest_iter = *src_iter;
-                    dest_iter++;
-                    dest++;
-                    len++;
-                    src_iter++;
-                }
-            }
-
-            name_buffer[len] = *mnNameNew_NullCharacter;
+            copyName(name_text, name_buffer);
 
             if ((s8) name_text[0] ==
                 (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
@@ -1300,9 +1236,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline NameNewEntry* mnNameNew_GetEntryData(void)
 {
@@ -1558,7 +1491,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     sp2C = mnNameNew_803B8528;
 
     if (arg2 >= 0x32U && arg2 < 0x3AU) {
-        key_jobj = (arg0->jobjs[layout->key_jobj_ids[arg2 - 0x32]]);
+        key_jobj = arg0->jobjs[layout->key_jobj_ids[arg2 - 0x32]];
     } else {
         key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
         for (i = 0; i < 50; i++) {
