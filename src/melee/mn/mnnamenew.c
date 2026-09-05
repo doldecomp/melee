@@ -63,10 +63,6 @@ typedef struct MnNameNewDataLayout {
     GlyphRow upper_glyphs[50];
     Vec3 x8CC;
     Vec3 x8D8;
-    u8 assert_pad[0x20];
-    char assert_msg[0x18];
-    char assert_file[0xC];
-    char assert_cond[0xC];
 } MnNameNewDataLayout;
 
 extern StaticModelDesc mnNameNew_804A06F0;
@@ -1434,37 +1430,47 @@ HSD_Text* mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2,
 
 static const Vec3 mnNameNew_803B8528 = { -0.5f, 0.7f, 0.0f };
 
-static inline void
-mnNameNew_GlyphVariantSetup_InitJobjs(GlyphVariantEntry* user_data,
-                                      HSD_JObj* jobj)
+#ifdef MUST_MATCH
+#pragma push
+#pragma inline_depth(2)
+#endif
+static inline void AnimateGlyphVariant(HSD_JObj* variant,
+                                       GlyphVariantEntry* user_data, s32 i)
 {
-    s32 i;
+    HSD_JObjReqAnimAll(variant, (f32) (user_data->selection == i));
+    HSD_JObjAnimAll(variant);
+}
 
-    for (i = 0; i < 7; i++) {
-        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
-    }
+static inline void CreateGlyphVariant(StaticModelDesc* variant_desc,
+                                      GlyphVariantEntry* user_data, s32 i,
+                                      HSD_JObj** out)
+{
+    HSD_JObj* variant;
+    variant = HSD_JObjLoadJoint(variant_desc->joint);
+    HSD_JObjAddAnimAll(variant, variant_desc->animjoint,
+                       variant_desc->matanim_joint,
+                       variant_desc->shapeanim_joint);
+    AnimateGlyphVariant(variant, user_data, i);
+    *out = variant;
 }
 
 HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
 {
-    MnNameNewDataLayout* layout;
+    HSD_JObj* jobj;
     HSD_JObj* variant;
     HSD_JObj* key_jobj;
     HSD_JObj* ref_jobj;
     s32 i;
-    HSD_JObj* ref3;
-    GlyphVariantEntry* user_data;
+    HSD_JObj* ref2;
     Vec3 position;
     Vec3 offset;
     f32 dx;
     f32 dy;
     StaticModelDesc* setup_desc;
-    HSD_JObj* ref2;
-    HSD_JObj* jobj;
+    HSD_JObj* ref3;
     HSD_GObj* gobj;
     StaticModelDesc* variant_desc;
 
-    layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     setup_desc = &mnNameNew_804A0710;
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(setup_desc->joint);
@@ -1476,58 +1482,65 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
     HSD_JObjReqAnimAll(jobj, ((f32) (u8) arg1) / 2.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(*user_data));
-    HSD_ASSERTREPORT(0x5B4, user_data, "Can't get user_data.\n");
-    GObj_InitUserData(gobj, 0U, fn_8023D0F8, user_data);
+    {
+        GlyphVariantEntry* user_data = HSD_MemAlloc(sizeof(*user_data));
+        HSD_ASSERTREPORT(0x5B4, user_data, "Can't get user_data.\n");
+        GObj_InitUserData(gobj, 0U, fn_8023D0F8, user_data);
 
-    user_data->selection = mn_804A04F0.confirmed_selection;
-    mnNameNew_GlyphVariantSetup_InitJobjs(user_data, jobj);
+        user_data->selection = mn_804A04F0.confirmed_selection;
+        for (i = 0; i < 7; i++) {
+            lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
+        }
 
-    offset = mnNameNew_803B8528;
+        offset = mnNameNew_803B8528;
 
-    if ((u8) arg2 >= 0x32U && (u8) arg2 < 0x3AU) {
-        key_jobj = arg0->jobjs[layout->key_jobj_ids[(u8) arg2 - 0x32]];
-    } else {
-        key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
-        for (i = 0; i < 50; i++) {
-            if (i == (s32) (u8) arg2) {
-                break;
-            }
-            if (key_jobj == NULL) {
-                key_jobj = NULL;
-            } else {
-                key_jobj = key_jobj->next;
+        if ((u8) arg2 >= 0x32U && (u8) arg2 < 0x3AU) {
+            key_jobj =
+                arg0->jobjs[mnNameNew_KeyMap.key_jobj_ids[(u8) arg2 - 0x32]];
+        } else {
+            key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
+            for (i = 0; i < 50; i++) {
+                if (i == (s32) (u8) arg2) {
+                    break;
+                }
+                if (key_jobj == NULL) {
+                    key_jobj = NULL;
+                } else {
+                    key_jobj = key_jobj->next;
+                }
             }
         }
+
+        lb_8000B1CC(key_jobj, &offset, &position);
+        HSD_JObjSetTranslate(jobj, &position);
+
+        ref_jobj = user_data->jobjs[4];
+        ref2 = user_data->jobjs[5];
+        ref3 = user_data->jobjs[6];
+
+        dx = HSD_JObjGetTranslationX(ref2) - HSD_JObjGetTranslationX(ref_jobj);
+        dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
+
+        variant_desc = mnNameNew_804A0720;
+        i = 0;
+        for (; i < (s32) (u8) arg1; i++) {
+            {
+                HSD_JObj* created;
+                CreateGlyphVariant(variant_desc, user_data, i, &created);
+                variant = created;
+            }
+            HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
+            HSD_JObjSetTranslateY(variant, dy * (f32) (i % 2));
+            HSD_JObjAddChild(ref_jobj, variant);
+        }
+
+        mnNameNew_8023D130(user_data, arg1, arg0->mode, arg2);
+        return gobj;
     }
-
-    lb_8000B1CC(key_jobj, &offset, &position);
-    HSD_JObjSetTranslate(jobj, &position);
-
-    ref_jobj = user_data->jobjs[4];
-    ref2 = user_data->jobjs[5];
-    ref3 = user_data->jobjs[6];
-
-    dx = HSD_JObjGetTranslationX(ref2) - HSD_JObjGetTranslationX(ref_jobj);
-    dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
-
-    variant_desc = mnNameNew_804A0720;
-    i = 0;
-    for (; i < (s32) (u8) arg1; i++) {
-        variant = HSD_JObjLoadJoint(variant_desc->joint);
-        HSD_JObjAddAnimAll(variant, variant_desc->animjoint,
-                           variant_desc->matanim_joint,
-                           variant_desc->shapeanim_joint);
-        HSD_JObjReqAnimAll(variant, (f32) (user_data->selection == i));
-        HSD_JObjAnimAll(variant);
-        HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
-        HSD_JObjSetTranslateY(variant, dy * (f32) (i % 2));
-        HSD_JObjAddChild(ref_jobj, variant);
-    }
-
-    mnNameNew_8023D130(user_data, arg1, arg0->mode, arg2);
-    return gobj;
 }
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 {
