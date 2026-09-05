@@ -45,7 +45,7 @@ typedef struct {
 /* 4D78F4 */ u32 hsd_804D78F4 = 0;
 static HSD_JObj* hsd_804D08E8[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
-/* 4D0948 */ HSD_Particle* hsd_804D0948[65];
+/* 4D0948 */ u32* hsd_804D0948[65];
 /* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ HSD_PSFormGroup** psNumCmdList[65];
@@ -637,7 +637,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    UNUSED u8 pad_top[84];
+    UNUSED u8 pad_top[76];
     volatile f32 sqrt_res;
     UNUSED u8 pad_mid[144];
     volatile f32 vel_res;
@@ -1045,8 +1045,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx += pc[1];
                     pc += 2;
 
-                    if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = (u32) ptclref_804D0E5C[pp->bank][idx];
+                    if (hsd_804D0948[pp->bank] != NULL) {
+                        idx = hsd_804D0948[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1232,8 +1232,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     bank = pp->bank;
                     (void) bank;
-                    if (ptclref_804D0E5C[bank] != NULL) {
-                        idx = (u32) ptclref_804D0E5C[bank][idx];
+                    if (hsd_804D0948[bank] != NULL) {
+                        idx = hsd_804D0948[bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, bank, idx);
@@ -1382,8 +1382,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     bank = pp->bank;
                     (void) bank;
-                    if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = (u32) ptclref_804D0E5C[pp->bank][idx];
+                    if (hsd_804D0948[pp->bank] != NULL) {
+                        idx = hsd_804D0948[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -1780,8 +1780,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx += pc[1];
                     pc += 2;
 
-                    if (ptclref_804D0E5C[pp->bank] != NULL) {
-                        idx = (u32) ptclref_804D0E5C[pp->bank][idx];
+                    if (hsd_804D0948[pp->bank] != NULL) {
+                        idx = hsd_804D0948[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
