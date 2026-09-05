@@ -1075,14 +1075,16 @@ typedef struct CssSubStruct {
     /* 0x001 */ u8 x01;
     /* 0x002 */ u8 pad02;
     /* 0x003 */ u8 x03;
-    /* 0x004 */ u8 pad04[0x10];
+    /* 0x004 */ u8 pad04[2];
+    /* 0x006 */ s16 stage_id;
+    /* 0x008 */ u8 pad08[0xC];
     /* 0x014 */ PlayerInitData saved_players[4];
     /* 0x0A4 */ HSD_GObj* gobj;
     /* 0x0A8 */ HSD_JObj* jobjs[39];
     /* 0x144 */ s32 anim_frames[39];
     /* 0x1E0 */ s32 menu_values[7];
     /* 0x1FC */ HSD_Text* text;
-    /* 0x200 */ u8 pad200[0x0C];
+    /* 0x200 */ u8 pad200[4];
 } CssSubStruct;
 
 typedef struct TrainingModeState {
@@ -1092,28 +1094,8 @@ typedef struct TrainingModeState {
     /* 0x06C */ s32 pad_6C[2];
     /* 0x074 */ PlayerInitData players[4];
     /* 0x104 */ s32 result_cache[4];
-    /* 0x114 */ CssSubStruct css;
 } TrainingModeState;
 
-struct TrainingMenuData {
-    u8 pad_x0[0x6 - 0x0];
-    s16 x6;
-    u8 pad_x8[0x14 - 0x8];
-    PlayerInitData players[6];
-    HSD_GObj* xA4;
-    HSD_JObj* xA8[39];
-    u32 x144[39];
-    u32 x1E0;
-    u32 x1E4;
-    u32 x1E8;
-    u32 x1EC;
-    u32 x1F0;
-    u32 x1F4;
-    u32 x1F8;
-    HSD_Text* x1FC;
-    u32 x200;
-}; /// 80473814
-///
 struct gm_8049E548_t {
     /* 0x00 */ u8 c_kind[4];
     /* 0x04 */ u8 x4[4];
