@@ -730,17 +730,17 @@ void gm_Mode_Classic_OnLoad(void)
 
     gm_8017DB58(data->x0.xC.x24);
     data->x0.x0.slot = gm_801677F0();
-    data->x48 = gm_8017EB3C;
-    data->x4C = gm_8017EB64;
-    data->x50 = gm_8017EBCC;
-    data->x54 = gm_8017EB98;
-    data->x64 = gm_8017ED3C;
-    data->x68 = gm_8017ED8C;
-    data->x58 = gm_8017ECA0;
-    data->x5C = gm_8017ED08;
-    data->x60 = gm_8017ECD4;
-    data->x6C = gm_8017EC00;
-    data->x70 = gm_8017EC50;
+    data->x0.x48 = gm_8017EB3C;
+    data->x0.x4C = gm_8017EB64;
+    data->x0.x50 = gm_8017EBCC;
+    data->x0.x54 = gm_8017EB98;
+    data->x0.x64 = gm_8017ED3C;
+    data->x0.x68 = gm_8017ED8C;
+    data->x0.x58 = gm_8017ECA0;
+    data->x0.x5C = gm_8017ED08;
+    data->x0.x60 = gm_8017ECD4;
+    data->x0.x6C = gm_8017EC00;
+    data->x0.x70 = gm_8017EC50;
 
     gm_SetGameModeStateId(0x70U);
     gm_80172174();
@@ -846,11 +846,11 @@ void gmClassic_801B3500(GameModeState* arg0)
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.x0.cpu_level,
                 (u8) gm_8017BE84(arg0->id), entry->xC->x02_u8, sd->x0D[0],
-                (u8 (*)(s32, s32, u8))(Event) ad->x58,
-                (u8 (*)(s32, s32, u8))(Event) ad->x5C,
-                (u8 (*)(s32, s32, u8))(Event) ad->x60,
-                (f32 (*)(s32, s32))(Event) ad->x6C,
-                (f32 (*)(s32, s32))(Event) ad->x70);
+                (u8 (*)(s32, s32, u8))(Event) ad->x0.x58,
+                (u8 (*)(s32, s32, u8))(Event) ad->x0.x5C,
+                (u8 (*)(s32, s32, u8))(Event) ad->x0.x60,
+                (f32 (*)(s32, s32))(Event) ad->x0.x6C,
+                (f32 (*)(s32, s32))(Event) ad->x0.x70);
 
     for (i = 1; i < 3; i++) {
         sd->x0D[i] = gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
@@ -965,8 +965,8 @@ void gmClassic_801B3A34(GameModeState* arg0)
     temp_r28 = gm_804908A0[idx_val];
     sp8 = (u16) gm_8017BE84(arg0->id);
     spC = temp_r28;
-    gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
-                temp_r31->x6, 1, 0, temp_r31->x4, var_r27, sp8, spC);
+    gm_8017CE34(new_var, &temp_r29->x0, temp_r31->xC->x02, temp_r31->x6, 1, 0,
+                temp_r31->x4, var_r27, sp8, spC);
     gm_LoadRumbleEnabled(new_var);
 }
 

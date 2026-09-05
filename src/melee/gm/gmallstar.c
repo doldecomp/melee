@@ -1,384 +1,4 @@
-#include "gmallstar.h"
-
 #include "gm/gmallstar.static.h"
-
-#include "gm_18A1.h"
-#include "gm_unsplit.h"
-#include "gmregcommon.h"
-
-#include "gr/ground.h"
-
-#include <sysdolphin/baselib/random.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbdvd.h>
-
-extern CSSData gmClassic_80470708;
-extern DebugGameOverData gmClassic_80470850;
-extern MatchExitInfo gmClassic_8047086C;
-extern StartMeleeData gmClassic_80472AF8;
-
-GameModeState gm_Mode_AllStar_States[] = {
-    {
-        0,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        1,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        8,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        9,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x10,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x11,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x18,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x19,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x20,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x21,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x28,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x29,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x30,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x31,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x38,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x39,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x40,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x41,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x48,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x49,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x50,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x51,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x58,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x59,
-        3,
-        0,
-        gm_801B5ACC,
-        gm_801B5E7C,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x60,
-        3,
-        0,
-        gm_801B5624,
-        gm_801B59AC,
-        {
-            GS_VS,
-            &gmClassic_80472AF8,
-            &gmClassic_8047086C,
-        },
-    },
-    {
-        0x68,
-        3,
-        0,
-        NULL,
-        gm_801B607C,
-        {
-            GS_COMING_SOON,
-            NULL,
-            NULL,
-        },
-    },
-    {
-        0x69,
-        3,
-        0,
-        gm_801B5EB4,
-        gm_801B5EE4,
-        {
-            GS_GAMEOVER,
-            &gmClassic_80470850,
-            &gmClassic_80470850,
-        },
-    },
-    {
-        0x70,
-        3,
-        0,
-        gm_801B5F50,
-        gm_801B5FB4,
-        {
-            GS_CSS,
-            &gmClassic_80470708,
-            &gmClassic_80470708,
-        },
-    },
-    {
-        -1,
-    },
-};
-
-static gm_803DEBE8_t gm_803DEBE8[25] = {
-    { 0xB1, 0xB1, 0, 8 },    { 0xB2, 0xB2, 0, 1 },    { 0xB3, 0xB3, 0, 6 },
-    { 0xB4, 0xB4, 0, 0x10 }, { 0xB5, 0xB5, 0, 0x11 }, { 0xB6, 0xB6, 0, 4 },
-    { 0xB7, 0xB7, 0, 2 },    { 0xB8, 0xB8, 0, 0xD },  { 0xB9, 0xB9, 0, 7 },
-    { 0xBA, 0xBA, 0, 0 },    { 0xBB, 0xBB, 0, 0xB },  { 0xBC, 0xBC, 0, 0xF },
-    { 0xBD, 0xBD, 0, 0xE },  { 0xBE, 0xBE, 0, 0xC },  { 0xBF, 0xBF, 0, 0x12 },
-    { 0xC0, 0xC0, 0, 9 },    { 0xC1, 0xC1, 0, 0xA },  { 0xC2, 0xC2, 0, 5 },
-    { 0xC3, 0xC3, 0, 0x16 }, { 0xC4, 0xC4, 0, 0x15 }, { 0xC5, 0xC5, 0, 0x14 },
-    { 0xC6, 0xC6, 0, 0x18 }, { 0xC7, 0xC7, 0, 0x17 }, { 0xC9, 0xC9, 0, 0x19 },
-    { 0xC8, 0xC8, 0, 3 }
-};
-
-static AllstarRoundInfo gm_803DEC4C[13] = {
-    { 0, 1 },  { 1, 1 },  { 2, 1 },  { 3, 1 },  { 4, 2 },  { 6, 2 },  { 8, 2 },
-    { 10, 2 }, { 12, 3 }, { 15, 3 }, { 18, 3 }, { 21, 3 }, { 24, 1 },
-};
-
-gm_80490940_t gm_80490940[5];
 
 static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
                                       s32 round)
@@ -388,7 +8,7 @@ static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
     for (i = 0; i < 3; i++) {
         char_ids[i] = 0x21;
     }
-    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
+    for (i = 0; i < gm_803DEC4C[round].count; i++) {
         char_ids[i] = opp_data[i].x3;
     }
 }
@@ -416,7 +36,7 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
     gm_801B5324_inline(chars, opp_data, arg1);
 
     for (i = 0; i < 3; i++) {
-        colors[i] = arg0->x54(arg1, arg0->x0.x0.cpu_level, (u8) i);
+        colors[i] = arg0->x0.x54(arg1, arg0->x0.x0.cpu_level, (u8) i);
     }
 
     gmRegSetupEnemyColorTable(arg0->x0.x0.ckind, arg0->x0.x0.color, chars,
@@ -480,7 +100,7 @@ static inline void gm_801B5624_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
     for (i = 0; i < 3; i++) {
         char_ids[i] = 0x21;
     }
-    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
+    for (i = 0; i < gm_803DEC4C[round].count; i++) {
         char_ids[i] = opp_data[i].x3;
     }
 }
@@ -520,8 +140,8 @@ void gm_801B5624(GameModeState* arg0)
 
     round = gm_8017BE84(arg0->id);
 
-    gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0,
-                (s32) opp_data->x2, (s32) round, (s32) color);
+    gm_8017CE34(data, &allstar->x0, chars, 0, 0, 0, 0, (s32) opp_data->x2,
+                (s32) round, (s32) color);
 
     data->rules.x0_6 = 1;
     data->rules.timer_counts_up = 1;
@@ -599,7 +219,7 @@ static inline u16 gm_801B5ACC_inline0(StartMeleeData* match_data,
 
 static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
 {
-    s32 end_idx = (s32) ri[1].start;
+    s32 end_idx = ri[1].start;
     gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
 
     while (end_idx < 0x19) {
@@ -613,35 +233,31 @@ void gm_801B5ACC(GameModeState* arg0)
 {
     s8 chars[3];
     u8 color;
-    u8* base;
     u16 round;
     StartMeleeData* data;
     s32 i;
+    PAD_STACK(6 * 4);
 
-    PAD_STACK(24);
-    chars[0] = 0x21;
-    chars[1] = 0x21;
-    chars[2] = 0x21;
-    base = (u8*) gm_Mode_AllStar_States;
+    chars[0] = CHKIND_NONE;
+    chars[1] = CHKIND_NONE;
+    chars[2] = CHKIND_NONE;
     data = gm_GetGameModeStateEnterData(arg0);
-    gm_80473A18.x0.x8 |= 0x80;
+    gm_80473A18.x0.x8 |= (1 << 7);
 
     round = gm_8017BE84(arg0->id);
     {
-        gm_803DEBE8_t* opp =
-            (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
-        color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
+        uintptr_t opp = (uintptr_t) &gm_803DEBE8[gm_803DEC4C[round].start];
+        color = ((u8*) gm_80490940)[((u32) opp - (u32) gm_803DEBE8) >> 2];
     }
 
-    gm_8017CE34(data, (UnkAdventureData*) &gm_80473A18, chars, 0, 0, 0, 0,
-                0x55, 0, (s32) color);
+    gm_8017CE34(data, &gm_80473A18.x0, chars, 0, 0, 0, 0, 85, 0, (s32) color);
 
     data->rules.x0_6 = 0;
     data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
-    data->rules.time_limit = (s32) gm_80473A18.x9C / 60;
-    data->rules.x14 = (s32) gm_80473A18.x9C % 60;
-    data->rules.xD = 0x78;
+    data->rules.time_limit = (s32) gm_80473A18.x9C / GM_FPS;
+    data->rules.x14 = (s32) gm_80473A18.x9C % GM_FPS;
+    data->rules.xD = GM_NAMETAG_NONE;
     data->players[0].x10 = gm_80473A18.x74;
     round = gm_801B5ACC_inline0(data, arg0);
 
@@ -649,21 +265,21 @@ void gm_801B5ACC(GameModeState* arg0)
         UnkAllstarData* allstar = &gm_80473A18;
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
 
-        for (i = 0; i < (s32) ri->count; i++) {
+        for (i = 0; i < ri->count; i++) {
             u8* slot_ptr;
             s32 slot;
             u8* p;
             do {
-                slot = HSD_Randi(0x1A);
+                slot = HSD_Randi(CKIND_PLAYABLE_COUNT);
                 p = (u8*) allstar + slot;
                 slot_ptr = p + 0x76;
-            } while ((s32) p[0x76] != 0x21);
+            } while ((s32) p[0x76] != CHKIND_NONE);
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
 
-        for (i = 0; i < (s32) (&gm_803DEC4C[round])[1].count; i++) {
-            gm_80473A18._94[2 + i] =
-                gm_803DEBE8[(s32) (&gm_803DEC4C[round])[1].start + i].x3;
+        for (i = 0; i < (&gm_803DEC4C[round])[1].count; i++) {
+            gm_80473A18.x96[i] =
+                gm_803DEBE8[(&gm_803DEC4C[round])[1].start + i].x3;
         }
 
         gm_80473A18._94[1] = (u8) i;
@@ -770,13 +386,13 @@ void gm_Mode_AllStar_OnLoad(void)
 
     gm_8017DB58(data->x0.xC.x24);
     data->x0.x0.slot = gm_801677F0();
-    data->x48 = gm_8018A160;
-    data->x4C = gm_8018A228;
-    data->x50 = gm_8018A290;
-    data->x54 = gm_8018A25C;
-    data->x58 = NULL;
-    data->x64 = gm_8018A2C4;
-    data->x68 = gm_8018A314;
+    data->x0.x48 = gm_8018A160;
+    data->x0.x4C = gm_8018A228;
+    data->x0.x50 = gm_8018A290;
+    data->x0.x54 = gm_8018A25C;
+    data->x0.x58 = NULL;
+    data->x0.x64 = gm_8018A2C4;
+    data->x0.x68 = gm_8018A314;
 
     for (index = 0; index < 25; index++) {
         gm_803DEBE8_t* opponent = &gm_803DEBE8[index];
