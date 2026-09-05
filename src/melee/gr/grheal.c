@@ -5,7 +5,7 @@
 #include <platform.h>
 
 #include "dolphin/types.h"
-#include "gm/gm_1884.h"
+#include "gm/gm_18A1.h"
 
 #include "gr/forward.h"
 
