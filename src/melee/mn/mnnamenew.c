@@ -31,9 +31,6 @@
 
 typedef char* GlyphRow[4];
 
-/// Glyph strings in the keyboard tables are read through
-/// mnNameNew_NullCharacter, which this translation unit declares
-/// volatile, so the tables store pointers to volatile characters.
 typedef volatile char GlyphChar;
 
 /* 4D6C0C */ u8 mnNameNew_PortInUse;
@@ -269,13 +266,13 @@ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1)
 
 void mnNameNew_8023B224(u8 arg0)
 {
-    NameNewEntry* temp_r31;
-    u8 temp_r30;
+    NameNewEntry* data;
+    u8 name_index;
 
     PAD_STACK(8);
 
-    temp_r31 = mnNameNew_804D6C08->user_data;
-    temp_r30 = temp_r31->name_index;
+    data = mnNameNew_804D6C08->user_data;
+    name_index = data->name_index;
     if (arg0 != 0) {
         lbCardGame_UpdatePowerTime();
     }
@@ -283,7 +280,7 @@ void mnNameNew_8023B224(u8 arg0)
         HSD_SisLib_803A5E70();
         mn_8022EBDC();
         if (arg0 != 0) {
-            gm_80190FE4((s32) temp_r30);
+            gm_80190FE4((s32) name_index);
             return;
         }
         gm_80190FE4(0x78);
@@ -292,7 +289,7 @@ void mnNameNew_8023B224(u8 arg0)
     if (gm_GetCurrentGameMode() == GM_MENU) {
         mn_804D6BC8.cooldown = 5;
         if (arg0 != 0 && GetNameCount() > 0x18) {
-            mnName_8023A9B4((u8) (temp_r31->name_index / 6));
+            mnName_8023A9B4((u8) (data->name_index / 6));
             return;
         }
         mnName_8023A9B4(0U);
@@ -307,24 +304,24 @@ void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
 {
     HSD_Text* text;
     u8 idx;
-    s32 var_r4;
+    s32 selection;
 
-    var_r4 = arg1;
-    if (var_r4 < 0x32) {
+    selection = arg1;
+    if (selection < 0x32) {
         switch (arg0->mode) {
         case 0:
-            var_r4 = 0x33;
+            selection = 0x33;
             break;
         case 1:
-            var_r4 = 0x34;
+            selection = 0x34;
             break;
         case 2:
-            var_r4 = 0x35;
+            selection = 0x35;
             break;
         }
     }
     text = arg0->desc_text;
-    idx = mnNameNew_804D4F7C[var_r4 - 0x32];
+    idx = mnNameNew_804D4F7C[selection - 0x32];
     if (text != NULL) {
         if (text->sis_buffer == ((SIS**) HSD_SisLib_804D1124[0])[idx]) {
             return;
@@ -358,11 +355,11 @@ static inline void mnNameNew_SetKeyColor(HSD_Text* text, s32 index,
     HSD_SisLib_803A74F0(text, index, color_ptr);
 }
 
-s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
+HSD_Text* mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
-    Vec3 sp50;
-    GXColor sp4C;
-    GXColor sp48;
+    Vec3 text_pos;
+    GXColor key_color;
+    GXColor selected_key_color;
     GXColor color;
     MnNameNewDataLayout* layout;
     s32 j;
@@ -386,8 +383,8 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     PAD_STACK(16);
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    sp4C = mnNameNew_804DBF44;
-    sp48 = mnNameNew_804DBF48;
+    key_color = mnNameNew_804DBF44;
+    selected_key_color = mnNameNew_804DBF48;
 
     switch ((s32) arg1) {
     case 0:
@@ -427,10 +424,10 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
         }
     }
 
-    lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
-    pos_x = sp50.x;
-    pos_y = -sp50.y;
-    pos_z = sp50.z;
+    lb_8000B1CC(key_jobj, &layout->x8CC, &text_pos);
+    pos_x = text_pos.x;
+    pos_y = -text_pos.y;
+    pos_z = text_pos.z;
     text->pos_x = pos_x;
     text->pos_y = pos_y;
     text->pos_z = pos_z;
@@ -486,14 +483,14 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
                             ((f32) (j % 5) * y_range) / text->font_size.y,
                             str_table[j]);
         if (j == (s32) mn_804A04F0.hovered_selection) {
-            color_ptr = &sp48;
+            color_ptr = &selected_key_color;
         } else {
-            color_ptr = &sp4C;
+            color_ptr = &key_color;
         }
         mnNameNew_SetKeyColor(text, j, color_ptr, &color);
     }
 
-    return (s32) text;
+    return text;
 }
 
 s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
@@ -743,7 +740,7 @@ static inline char** AddCharacterToName_getGlyphs(GlyphRow* arg0, u8 arg1)
 char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 {
     char ch;
-    char* var_r4;
+    char* dest;
     char** table;
     MnNameNewDataLayout* layout;
 
@@ -769,14 +766,13 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
         } else {
             table = AddCharacterToName_getGlyphs(layout->upper_glyphs, arg1);
         }
-        var_r4 = arg0;
+        dest = arg0;
 
-        for (idx = layout->character_bytes[arg1][1] * 0;
-             (null = *mnNameNew_NullCharacter & 0xFFFF) !=
-             (ch = table[arg2 / 2][idx] & 0xFFU);
+        for (idx = 0; (null = *mnNameNew_NullCharacter & 0xFFFF) !=
+                      (ch = table[arg2 / 2][idx] & 0xFFU);
              idx++)
         {
-            var_r4[idx] = ch;
+            dest[idx] = ch;
         }
         arg0[idx] = null;
         break;
@@ -964,8 +960,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         u16 sel2 = *hovered;
                         GlyphRow* glyphs = layout->lower_glyphs;
                         char** ptrs = glyphs[(u8) sel2];
-                        null_char =
-                            (s8) * ((GlyphChar*) mnNameNew_NullCharacter);
+                        null_char = (s8) *mnNameNew_NullCharacter;
                         while ((s8) *ptrs[0] != null_char) {
                             ptrs++;
                             n++;
@@ -1244,7 +1239,7 @@ static inline NameNewEntry* mnNameNew_GetEntryData(void)
 
 void mnNameNew_8023CE4C(void)
 {
-    Vec3 sp24;
+    Vec3 text_pos;
     GXColor name_char_color;
     GXColor* name_char_color_ptr[1];
     NameNewEntry* data;
@@ -1267,11 +1262,11 @@ void mnNameNew_8023CE4C(void)
         HSD_SisLib_803A5CC4(data->name_disp_text);
     }
     text = HSD_SisLib_803A6754(0, mn_804D6BB5);
-    lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
-    y_minus = -sp24.y;
-    z = sp24.z;
+    lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &text_pos);
+    y_minus = -text_pos.y;
+    z = text_pos.z;
     name_char_color_ptr[0] = &name_char_color;
-    text->pos_x = sp24.x;
+    text->pos_x = text_pos.x;
     i = 0;
     text->pos_y = y_minus;
     text->pos_z = z;
@@ -1303,8 +1298,8 @@ void fn_8023CFC8(HSD_GObj* arg0)
     GlyphVariantEntry* data;
     u32 pad1;
     u32 pad2;
-    GXColor sp30;
-    GXColor sp2C;
+    GXColor key_color;
+    GXColor selected_key_color;
 
     PAD_STACK(0x20);
 
@@ -1328,8 +1323,8 @@ void fn_8023CFC8(HSD_GObj* arg0)
         root = jobj;
         HSD_JObjReqAnimAll(root, 0.0f);
         HSD_JObjAnimAll(root);
-        sp30 = mnNameNew_804D4F74;
-        HSD_SisLib_803A74F0(data->text, (s32) data->selection, &sp30);
+        key_color = mnNameNew_804D4F74;
+        HSD_SisLib_803A74F0(data->text, (s32) data->selection, &key_color);
         root = data->jobjs[4];
         new_var = mn_804A04F0.confirmed_selection;
         if (root == NULL) {
@@ -1347,9 +1342,9 @@ void fn_8023CFC8(HSD_GObj* arg0)
         one = 1.0f;
         HSD_JObjReqAnimAll(jobj, one);
         HSD_JObjAnimAll(jobj);
-        sp2C = mnNameNew_804D4F70;
+        selected_key_color = mnNameNew_804D4F70;
         HSD_SisLib_803A74F0(data->text, (s32) mn_804A04F0.confirmed_selection,
-                            &sp2C);
+                            &selected_key_color);
         data->selection = mn_804A04F0.confirmed_selection;
     }
 }
@@ -1361,7 +1356,8 @@ void fn_8023D0F8(void* arg0)
     HSD_Free(arg0);
 }
 
-s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
+HSD_Text* mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2,
+                             s32 arg3)
 {
     f32 pos_z;
     f32 y_range;
@@ -1433,7 +1429,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
         mnNameNew_SetKeyColor(text, i, color_ptr, &glyph_color);
     }
     arg0->text = text;
-    return (s32) text;
+    return text;
 }
 
 static const Vec3 mnNameNew_803B8528 = { -0.5f, 0.7f, 0.0f };
@@ -1459,8 +1455,8 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     s32 i;
     HSD_JObj* ref3;
     GlyphVariantEntry* user_data;
-    Vec3 sp38;
-    Vec3 sp2C;
+    Vec3 position;
+    Vec3 offset;
     f32 dx;
     f32 dy;
     f32 base_x;
@@ -1482,14 +1478,14 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     HSD_JObjReqAnimAll(jobj, ((f32) (u8) arg1) / 2.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(GlyphVariantEntry));
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x5B4, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0U, fn_8023D0F8, user_data);
 
     user_data->selection = mn_804A04F0.confirmed_selection;
     mnNameNew_GlyphVariantSetup_InitJobjs(user_data, jobj);
 
-    sp2C = mnNameNew_803B8528;
+    offset = mnNameNew_803B8528;
 
     if (arg2 >= 0x32U && arg2 < 0x3AU) {
         key_jobj = arg0->jobjs[layout->key_jobj_ids[arg2 - 0x32]];
@@ -1507,8 +1503,8 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
         }
     }
 
-    lb_8000B1CC(key_jobj, &sp2C, &sp38);
-    HSD_JObjSetTranslate(jobj, &sp38);
+    lb_8000B1CC(key_jobj, &offset, &position);
+    HSD_JObjSetTranslate(jobj, &position);
 
     ref_jobj = user_data->jobjs[4];
     ref2 = user_data->jobjs[5];
@@ -1569,7 +1565,7 @@ s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 
 void fn_8023DAEC(HSD_GObj* arg0)
 {
-    s32 var_r30;
+    s32 all_anims_done;
     NameNewEntry* data;
     MnNameNewDataLayout* layout;
     f32* end_frame;
@@ -1589,19 +1585,19 @@ void fn_8023DAEC(HSD_GObj* arg0)
         HSD_SisLib_803A5CC4(data->desc_text);
         data->desc_text = NULL;
     }
-    var_r30 = 1;
+    all_anims_done = 1;
     if (mn_8022EFD8(data->jobjs[4], &layout->anim[1]) <
         *(end_frame = &layout->anim[1].end_frame))
     {
-        var_r30 = 0;
+        all_anims_done = 0;
     }
     if (mn_8022EFD8(data->jobjs[2], &layout->anim[1]) < *end_frame) {
-        var_r30 = 0;
+        all_anims_done = 0;
     }
     if (mn_8022EFD8(data->jobjs[6], &layout->anim[1]) < *end_frame) {
-        var_r30 = 0;
+        all_anims_done = 0;
     }
-    if (var_r30 != 0 || mn_804A04F0.x10 == 1) {
+    if (all_anims_done != 0 || mn_804A04F0.x10 == 1) {
         HSD_GObjPLink_80390228(arg0);
     }
 }
@@ -1868,8 +1864,7 @@ void mnNameNew_8023E32C(s32 arg0)
         HSD_JObj* child;
         mnNameNew_InitKeyJobjs(user_data, &child);
     }
-    user_data->key_text =
-        (HSD_Text*) mnNameNew_KeySetup(user_data, user_data->mode);
+    user_data->key_text = mnNameNew_KeySetup(user_data, user_data->mode);
     mnNameNew_8023B314(user_data, (s32) user_data->x1);
     mnNameNew_8023B0F8(gobj, user_data->x1);
 }
