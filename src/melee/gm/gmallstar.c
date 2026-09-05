@@ -209,14 +209,6 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline u16 gm_801B5ACC_inline0(StartMeleeData* match_data,
-                                      GameModeState* arg0)
-{
-    match_data->players[0].xD_b2 = 1;
-    match_data->rules.x7 = 9;
-    return gm_8017BE84(arg0->id);
-}
-
 static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
 {
     s32 end_idx = ri[1].start;
@@ -235,8 +227,9 @@ void gm_801B5ACC(GameModeState* arg0)
     u8 color;
     u16 round;
     StartMeleeData* data;
+    u16 rest_round;
     s32 i;
-    PAD_STACK(6 * 4);
+    PAD_STACK(7 * 4);
 
     chars[0] = CHKIND_NONE;
     chars[1] = CHKIND_NONE;
@@ -259,11 +252,13 @@ void gm_801B5ACC(GameModeState* arg0)
     data->rules.x14 = (s32) gm_80473A18.x9C % GM_FPS;
     data->rules.xD = GM_NAMETAG_NONE;
     data->players[0].x10 = gm_80473A18.x74;
-    round = gm_801B5ACC_inline0(data, arg0);
+    data->players[0].xD_b2 = 1;
+    data->rules.x7 = 9;
+    rest_round = gm_8017BE84(arg0->id);
 
     {
         UnkAllstarData* allstar = &gm_80473A18;
-        AllstarRoundInfo* ri = &gm_803DEC4C[round];
+        AllstarRoundInfo* ri = &gm_803DEC4C[rest_round];
 
         for (i = 0; i < ri->count; i++) {
             u8* slot_ptr;
@@ -277,13 +272,13 @@ void gm_801B5ACC(GameModeState* arg0)
             *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
 
-        for (i = 0; i < (&gm_803DEC4C[round])[1].count; i++) {
+        for (i = 0; i < (&gm_803DEC4C[rest_round])[1].count; i++) {
             gm_80473A18.x96[i] =
-                gm_803DEBE8[(&gm_803DEC4C[round])[1].start + i].x3;
+                gm_803DEBE8[(&gm_803DEC4C[rest_round])[1].start + i].x3;
         }
 
         gm_80473A18._94[1] = (u8) i;
-        gm_80473A18._94[0] = (u8) (round + 1);
+        gm_80473A18._94[0] = (u8) (rest_round + 1);
         data->players[0].xC_b1 = 0;
         data->rules.x1_2 = 1;
         data->rules.x1_3 = 1;
@@ -291,9 +286,9 @@ void gm_801B5ACC(GameModeState* arg0)
         gm_LoadRumbleEnabled(data);
         gm_8016A92C(&data->rules);
 
-        gm_801B5ACC_inline1(&gm_803DEC4C[round]);
+        gm_801B5ACC_inline1(&gm_803DEC4C[rest_round]);
 
-        gm_801B5324(allstar, round + 1);
+        gm_801B5324(allstar, (s32) rest_round + 1);
         data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
     }
 }
