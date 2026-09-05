@@ -757,10 +757,11 @@ struct grIceMt_GObj10_GroundVars {
 typedef struct grInishie1_Block {
     s16 status;
     s16 x2;
-    s32 x4; ///< probably a counter
+    s16 x4;
+    s16 x6;
     f32 x8; ///< probably a y transform
     f32 xC; ///< probably a delta for x8
-    HSD_JObj* jobj;
+    f32 x10;
     HSD_JObj* jobj2;
     HSD_GObj* hatena_gobj; ///< named in an assert
     Item_GObj* item_gobj;
@@ -771,7 +772,7 @@ typedef struct grInishie1_Block {
 /// @todo probably mistakes in this and Vars2
 /// @todo this is #Map_GroundVars
 typedef struct grInishie1_GroundVars {
-    char pad_C4[2];
+    u16 xC4;
     s16 xC6;
     s16 xC8;
     s16 xCA;

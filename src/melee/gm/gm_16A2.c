@@ -278,16 +278,11 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
     }
 }
 
-s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
+void fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
     s8* p;
-    s32 count;
     s8* list;
     int i;
-    s8* src;
-    s8* dst;
-    u8 tmp;
-    s8 result;
     switch (arg0) {
     case 1:
         i = 0;
@@ -310,6 +305,7 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         p = list;
         do {
             s8* q;
+            u8 tmp;
             q = &lbl_8046B488.x0 + HSD_Randi(0x1B);
             tmp = q[0x1C0];
             i += 1;
@@ -320,8 +316,10 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 
         {
             s32 j;
+            s32 count;
             count = 0;
-            for (j = 0; j < 0x1A; j++) {
+            j = 0;
+            for (; j < 0x1A; j++) {
                 if (*list != -1) {
                     count += 1;
                     if (count > 0x10) {
@@ -335,6 +333,7 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         {
             s8* q;
             s32 idx = 0;
+            s8 result;
             p = arg1;
             arg1 = arg2;
             while (*arg1 != -2) {
@@ -349,15 +348,13 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             }
         }
         break;
-    case 0:
-        dst = arg1;
-        src = arg2;
-        while (*src != -2) {
-            *dst = -1;
-            src += 1;
-            dst += 1;
+    case 0: {
+        int i;
+        for (i = 0; arg2[i] != -2; i++) {
+            arg1[i] = -1;
         }
-        return (s32) src;
+        break;
+    }
     }
 }
 
@@ -598,9 +595,9 @@ gm_8016A22C_header(struct lbl_8046B488_t* gp)
     return (struct gm_8016A22C_header*) gp;
 }
 
-s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
-                u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
-                int flag2, int flag1, f32 f1, f32 f2)
+void gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
+                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
+                 int flag2, int flag1, f32 f1, f32 f2)
 {
     int i;
     struct lbl_8046B488_t* gp = &lbl_8046B488;
@@ -669,7 +666,7 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
     }
     }
 
-    return fn_80169A84(gp->xE, gp->x124, gp->x20);
+    fn_80169A84(gp->xE, gp->x124, gp->x20);
 }
 
 void gm_8016A404(s32 arg0)

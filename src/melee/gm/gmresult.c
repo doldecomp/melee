@@ -57,7 +57,7 @@ union {
     char text[8];
 } lbl_804D3FA8 = { { 0x817C8146, 0x817C0000 } };
 
-extern HSD_Archive* lbl_804D65B8;
+HSD_Archive* lbl_804D65B8;
 
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"

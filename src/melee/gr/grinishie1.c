@@ -97,20 +97,17 @@ static void sdata2_order(void)
 }
 #endif
 
-/// these inlines are probably shared in other places
-static inline s32 test_random(s32 val)
-{
-    return ((val != 0) ? HSD_Randi(val) : 0);
-}
-
-static inline s32 randi_between(s32 min, s32 max)
+static inline void grInishie1_SetRespawnTimer(Ground* gp, u32 index, s32 min,
+                                              s32 max)
 {
     if (max > min) {
-        max = min + test_random(max - min);
+        s32 difference = max - min;
+        max = min + (difference != 0 ? HSD_Randi(difference) : 0);
     } else if (max < min) {
-        max += test_random(min - max);
+        s32 difference = min - max;
+        max += difference != 0 ? HSD_Randi(difference) : 0;
     }
-    return max;
+    gp->u.inishie1.block[index].x20 = max;
 }
 
 static inline f32 fabsf_inline(f32 x)
@@ -397,46 +394,16 @@ void grInishie1_801FAD80(Ground_GObj* gobj) {}
 
 void grInishie1_801FAD84(HSD_GObj* gobj)
 {
-    /// @todo same layout as #grInishie1_801FB3F0_Vars; the shared
-    /// grInishie1_GroundVars/grInishie1_Block structs are likely wrong
-    /// (xC4 should be u16, block x4 is s16 and x10 is an f32)
-    typedef struct grInishie1_InitBlock {
-        s16 status;
-        s16 x2;
-        s16 x4;
-        s16 x6;
-        f32 x8;
-        f32 xC;
-        f32 x10;
-        HSD_JObj* jobj;
-        HSD_GObj* hatena_gobj;
-        Item_GObj* item_gobj;
-        s16 x20;
-        s16 x22;
-    } grInishie1_InitBlock;
-    typedef struct grInishie1_InitGround {
-        u8 pad[0xC4];
-        u16 xC4;
-        s16 xC6;
-        s16 xC8;
-        s16 xCA;
-        s16 xCC;
-        s16 xCE;
-        s32 xD0;
-        s32 xD4;
-        s32 xD8;
-        grInishie1_InitBlock* blocks;
-    } grInishie1_InitGround;
     HSD_JObj* jobj;
     struct block_table_struct* block_table;
     u32 j;
     int i;
     s32 value;
-    grInishie1_InitGround* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     PAD_STACK(8);
 
-    gp->blocks = (grInishie1_InitBlock*) HSD_MemAlloc(
-        sizeof(grInishie1_InitBlock) * BLOCK_COUNT);
+    gp->u.inishie1.block = (grInishie1_Block*) HSD_MemAlloc(
+        sizeof(grInishie1_Block) * BLOCK_COUNT);
 
     block_table = grI1_803E49B8;
 
@@ -471,21 +438,21 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             }
         }
 
-        gp->blocks[i].x2 = 2;
-        gp->blocks[i].x4 = 0;
-        gp->blocks[i].jobj = jobj;
-        gp->blocks[i].hatena_gobj = NULL;
-        gp->blocks[i].x8 = HSD_JObjGetTranslationY(jobj);
-        gp->blocks[i].xC = 0.0f;
-        gp->blocks[i].x10 = 0.0f;
+        gp->u.inishie1.block[i].x2 = 2;
+        gp->u.inishie1.block[i].x4 = 0;
+        gp->u.inishie1.block[i].jobj2 = jobj;
+        gp->u.inishie1.block[i].hatena_gobj = NULL;
+        gp->u.inishie1.block[i].x8 = HSD_JObjGetTranslationY(jobj);
+        gp->u.inishie1.block[i].xC = 0.0f;
+        gp->u.inishie1.block[i].x10 = 0.0f;
         mpJointSetCb2(value, gp, fn_801FBEB8);
-        gp->blocks[i].status = 0;
+        gp->u.inishie1.block[i].status = 0;
         i++;
     }
 
     for (i = 0; (u32) i < BLOCK_COUNT; i++) {
         HSD_GObj* new_gobj = grMaterial_801C8CFC(
-            8, 0, (Ground*) gp, gp->blocks[i].jobj, NULL, fn_801FBF6C, NULL);
+            8, 0, gp, gp->u.inishie1.block[i].jobj2, NULL, fn_801FBF6C, NULL);
 
         if (new_gobj != NULL) {
             grMaterial_801C8DE0(new_gobj, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
@@ -494,7 +461,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             grMaterial_801C8E68(new_gobj, 0);
         }
 
-        gp->blocks[i].item_gobj = new_gobj;
+        gp->u.inishie1.block[i].item_gobj = new_gobj;
     }
 
     if (gm_8016AE80() != -1 && gm_8016B238() == 0) {
@@ -516,21 +483,23 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
                 index2 = HSD_Randi(BLOCK_COUNT);
             } while (index1 == (index2_copy = index2));
 
-            gp->blocks[index1].status = 1;
+            gp->u.inishie1.block[index1].status = 1;
             grInishie1_801FBAA0(gobj, index1_copy);
-            GET_GROUND(gp->blocks[index1].hatena_gobj)->u.inishie12.xCC = 1;
+            GET_GROUND(gp->u.inishie1.block[index1].hatena_gobj)
+                ->u.inishie12.xCC = 1;
 
-            gp->blocks[index2].status = 2;
+            gp->u.inishie1.block[index2].status = 2;
             grInishie1_801FBAA0(gobj, index2_copy);
-            GET_GROUND(gp->blocks[index2].hatena_gobj)->u.inishie12.xCC = 1;
+            GET_GROUND(gp->u.inishie1.block[index2].hatena_gobj)
+                ->u.inishie12.xCC = 1;
         }
     }
 
-    gp->xC6 = 0;
-    gp->xC8 = 0;
-    gp->xCA = -1;
-    gp->xCC = -1;
-    gp->xD8 = 0;
+    gp->u.inishie1.xC6 = 0;
+    gp->u.inishie1.xC8 = 0;
+    gp->u.inishie1.xCA = -1;
+    gp->u.inishie1.xCC = -1;
+    gp->u.inishie1.xD8 = 0;
 }
 
 void grInishie1_801FB0AC(HSD_GObj* gobj, u32 ix)
@@ -583,16 +552,21 @@ enum {
     HATENA_APPEAR_CHECKLOOP = 0x14
 };
 
-#define HATENA_APPEAR_CHECKLOOP(countdown, last_index, status_val, line)      \
+#define HATENA_APPEAR_CHECKLOOP(countdown, last_index, status_val, line,      \
+                                index)                                        \
     if (countdown > 0) {                                                      \
         countdown--;                                                          \
         if (countdown == 0) {                                                 \
+            s32 zero;                                                         \
             int i = 0;                                                        \
-            s32 index;                                                        \
                                                                               \
             do {                                                              \
-                index = HSD_Randi(0x13);                                      \
-                if (index != last_index && vars->blocks[index].x0 == 0) {     \
+                s32 result = HSD_Randi(0x13);                                 \
+                /* Keep MWCC's saved index separate from result. */           \
+                index = result | (zero = 0);                                  \
+                if (result != last_index &&                                   \
+                    vars->u.inishie1.block[result].status == 0)               \
+                {                                                             \
                     break;                                                    \
                 }                                                             \
                 i++;                                                          \
@@ -601,43 +575,21 @@ enum {
             HSD_ASSERT(line, i!=HATENA_APPEAR_CHECKLOOP);                      \
                                                                               \
             last_index = index;                                               \
-            vars->blocks[index].x0 = status_val;                              \
+            vars->u.inishie1.block[index].status = status_val;                \
             grInishie1_801FBAA0(gobj, index);                                 \
-            vars->blocks[index].x20 = 0;                                      \
+            vars->u.inishie1.block[index].x20 = 0;                            \
         }                                                                     \
     }
 
-typedef struct grInishie1_801FB3F0_Block {
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    HSD_JObj* jobj;
-    HSD_GObj* hatena_gobj;
-    Item_GObj* item_gobj;
-    s16 x20;
-    s16 x22;
-} grInishie1_801FB3F0_Block;
+static inline void grInishie1_ShowBlock(HSD_JObj* jobj)
+{
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+}
 
-typedef struct grInishie1_801FB3F0_Vars {
-    u8 pad0[0xC6];
-    s16 xC6;
-    s16 xC8;
-    s16 xCA;
-    s16 xCC;
-    u8 padCE[0xD8 - 0xCE];
-    s32 xD8;
-    grInishie1_801FB3F0_Block* blocks;
-} grInishie1_801FB3F0_Vars;
-
-static inline void
-grInishie1_801FB3F0_UpdateY(grInishie1_801FB3F0_Block* block)
+static inline void grInishie1_801FB3F0_UpdateY(grInishie1_Block* block)
 {
     f32 y = block->x8 + block->xC;
-    HSD_JObjSetTranslateY(block->jobj, y);
+    HSD_JObjSetTranslateY(block->jobj2, y);
 }
 
 static inline bool grInishie1_801FB3F0_IsFar(HSD_JObj* jobj, Vec3* pos)
@@ -646,105 +598,116 @@ static inline bool grInishie1_801FB3F0_IsFar(HSD_JObj* jobj, Vec3* pos)
     return grLib_801C9EE8(pos, 15.0f);
 }
 
-static inline void grInishie1_801FB3F0_dobj_clear(HSD_JObj* jobj)
+static inline void grInishie1_UpdateDObjFlags(HSD_JObj* jobj,
+                                              HSD_DObj** walker, bool hidden)
 {
-    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
-    while (dobj != NULL) {
-        HSD_DObjClearFlags(dobj, 1U);
-        dobj = (dobj != NULL) ? dobj->next : NULL;
-    }
-}
-
-static inline void grInishie1_801FB3F0_dobj_set(HSD_JObj* jobj)
-{
-    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
-    while (dobj != NULL) {
-        HSD_DObjSetFlags(dobj, 1U);
-        dobj = (dobj != NULL) ? dobj->next : NULL;
+    *walker = HSD_JObjGetDObj(jobj);
+    while (*walker != NULL) {
+        HSD_DObj* next;
+        if (hidden) {
+            HSD_DObjSetFlags(*walker, DOBJ_HIDDEN);
+        } else {
+            HSD_DObjClearFlags(*walker, DOBJ_HIDDEN);
+        }
+        next = *walker != NULL ? (*walker)->next : NULL;
+        *walker = next;
     }
 }
 
 void grInishie1_801FB3F0(HSD_GObj* gobj)
 {
-    grInishie1_801FB3F0_Vars* vars = gobj->user_data;
-    u32 i;
+    Ground* vars = gobj->user_data;
+    s32 index;
     HSD_DObj* dobj;
     Vec3 pos;
-    PAD_STACK(48);
+    PAD_STACK(40);
 
-    if (vars->xD8 > 0) {
-        vars->xD8--;
+    if (vars->u.inishie1.xD8 > 0) {
+        vars->u.inishie1.xD8--;
     }
 
-    if (vars->xD8 == 0 && ((vars->xC6 == 1 && vars->xC8 > 0 &&
-                            vars->xC8 < yakumono_param->unk14) ||
-                           (vars->xC8 == 1 && vars->xC6 > 0 &&
-                            vars->xC6 < yakumono_param->unk14)))
+    if (vars->u.inishie1.xD8 == 0 &&
+        ((vars->u.inishie1.xC6 == 1 && vars->u.inishie1.xC8 > 0 &&
+          vars->u.inishie1.xC8 < yakumono_param->unk14) ||
+         (vars->u.inishie1.xC8 == 1 && vars->u.inishie1.xC6 > 0 &&
+          vars->u.inishie1.xC6 < yakumono_param->unk14)))
     {
         // this is likely the rare case mentioned on smashwiki
         // where every block will become a hatena block
-        vars->xC8 = 0;
-        vars->xC6 = 0;
+        vars->u.inishie1.xC8 = 0;
+        vars->u.inishie1.xC6 = 0;
 
-        for (i = 0; i < 0x13; ++i) {
-            vars->blocks[i].x0 = 3;
-            grInishie1_801FBAA0(gobj, i);
-            vars->blocks[i].x20 = 0;
+        for (index = 0; (u32) index < 0x13; ++index) {
+            vars->u.inishie1.block[index].status = 3;
+            grInishie1_801FBAA0(gobj, index);
+            vars->u.inishie1.block[index].x20 = 0;
         }
     } else {
-        HATENA_APPEAR_CHECKLOOP(vars->xC6, vars->xCA, 1, 0x2D0U);
-        HATENA_APPEAR_CHECKLOOP(vars->xC8, vars->xCC, 2, 0x2EBU);
+        index = 0;
+        HATENA_APPEAR_CHECKLOOP(vars->u.inishie1.xC6, vars->u.inishie1.xCA, 1,
+                                0x2D0U, index);
+        HATENA_APPEAR_CHECKLOOP(vars->u.inishie1.xC8, vars->u.inishie1.xCC, 2,
+                                0x2EBU, index);
     }
 
-    for (i = 0; i < 0x13; ++i) {
-        switch (vars->blocks[i].x2) {
+#ifdef MUST_MATCH
+    (void) index;
+#endif
+    for (index = 0; (u32) index < 0x13; ++index) {
+        switch (vars->u.inishie1.block[index].x2) {
         case 2:
-            if (vars->blocks[i].x4 != 0) {
-                vars->blocks[i].x4--;
+            if (vars->u.inishie1.block[index].x4 != 0) {
+                vars->u.inishie1.block[index].x4--;
             }
             break;
 
         case 3:
-            vars->blocks[i].x10 = 1.2f;
-            grInishie1_801FB0AC(gobj, i);
-            vars->blocks[i].x2 = 4;
+            vars->u.inishie1.block[index].x10 = 1.2f;
+            grInishie1_801FB0AC(gobj, index);
+            vars->u.inishie1.block[index].x2 = 4;
             // fallthrough
 
         case 4:
-            vars->blocks[i].xC += vars->blocks[i].x10;
+            vars->u.inishie1.block[index].xC +=
+                vars->u.inishie1.block[index].x10;
 
-            if (vars->blocks[i].xC > 5.0) {
-                vars->blocks[i].x10 = -1.2f;
-            } else if (vars->blocks[i].xC < 0.0) {
-                vars->blocks[i].xC = 0.0f;
-                vars->blocks[i].x2 = 2;
-                vars->blocks[i].x4 = 10;
+            if (vars->u.inishie1.block[index].xC > 5.0) {
+                vars->u.inishie1.block[index].x10 = -1.2f;
+            } else if (vars->u.inishie1.block[index].xC < 0.0) {
+                vars->u.inishie1.block[index].xC = 0.0f;
+                vars->u.inishie1.block[index].x2 = 2;
+                vars->u.inishie1.block[index].x4 = 10;
             }
 
             // the blocks appear to not move at all, so not
             // sure what this is
-            grInishie1_801FB3F0_UpdateY(&vars->blocks[i]);
+            grInishie1_801FB3F0_UpdateY(&vars->u.inishie1.block[index]);
             break;
 
         case 0:
-            if (vars->blocks[i].x20 != 0) {
-                vars->blocks[i].x20--;
+            if (vars->u.inishie1.block[index].x20 != 0) {
+                vars->u.inishie1.block[index].x20--;
             } else {
-                if (!grInishie1_801FB3F0_IsFar(vars->blocks[i].jobj, &pos)) {
-                    dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                if (!grInishie1_801FB3F0_IsFar(
+                        vars->u.inishie1.block[index].jobj2, &pos))
+                {
+                    dobj =
+                        HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
                     while (dobj != NULL) {
                         HSD_DObjClearFlags(dobj, 1U);
                         dobj = (dobj != NULL) ? dobj->next : NULL;
                     }
-                    HSD_JObjClearFlagsAll(vars->blocks[i].jobj, JOBJ_HIDDEN);
-                    grMaterial_801C8E08(vars->blocks[i].item_gobj);
-                    vars->blocks[i].x2 = 1;
-                    vars->blocks[i].x22 = yakumono_param->unk18;
+                    grInishie1_ShowBlock(vars->u.inishie1.block[index].jobj2);
+                    grMaterial_801C8E08(
+                        vars->u.inishie1.block[index].item_gobj);
+                    vars->u.inishie1.block[index].x2 = 1;
+                    vars->u.inishie1.block[index].x22 = yakumono_param->unk18;
                 }
             }
 
-            if (vars->blocks[i].hatena_gobj != NULL) {
-                HSD_JObj* sub_jobj = vars->blocks[i].hatena_gobj->hsd_obj;
+            if (vars->u.inishie1.block[index].hatena_gobj != NULL) {
+                HSD_JObj* sub_jobj =
+                    vars->u.inishie1.block[index].hatena_gobj->hsd_obj;
                 if (!(HSD_JObjGetFlags(sub_jobj) & 0x10)) {
                     HSD_JObjSetFlagsAll(sub_jobj, JOBJ_HIDDEN);
                 }
@@ -754,35 +717,39 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
             /*
                probably sets the flickering for blocks when they spawn
             */
-            if (vars->blocks[i].x22 > 0) {
-                HSD_JObjGetDObj(vars->blocks[i].jobj);
-                if (vars->blocks[i].hatena_gobj != NULL) {
-                    HSD_JObj* target = vars->blocks[i].hatena_gobj->hsd_obj;
+            if (vars->u.inishie1.block[index].x22 > 0) {
+                HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
+                if (vars->u.inishie1.block[index].hatena_gobj != NULL) {
+                    HSD_JObj* target =
+                        vars->u.inishie1.block[index].hatena_gobj->hsd_obj;
                     HSD_DObj* dobj;
 
-                    if (vars->blocks[i].x22 & 1) {
+                    if (vars->u.inishie1.block[index].x22 & 1) {
                         HSD_JObjClearFlagsAll(target, JOBJ_HIDDEN);
                     } else {
                         HSD_JObjSetFlagsAll(target, JOBJ_HIDDEN);
                     }
 
-                    dobj = HSD_JObjGetDObj(vars->blocks[i].jobj);
+                    dobj =
+                        HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
                     while (dobj != NULL) {
                         HSD_DObjClearFlags(dobj, 1U);
                         dobj = (dobj != NULL) ? dobj->next : NULL;
                     }
                 } else {
-                    if (vars->blocks[i].x22 & 1) {
-                        grInishie1_801FB3F0_dobj_clear(vars->blocks[i].jobj);
+                    if (vars->u.inishie1.block[index].x22 & 1) {
+                        grInishie1_UpdateDObjFlags(
+                            vars->u.inishie1.block[index].jobj2, &dobj, false);
                     } else {
-                        grInishie1_801FB3F0_dobj_set(vars->blocks[i].jobj);
+                        grInishie1_UpdateDObjFlags(
+                            vars->u.inishie1.block[index].jobj2, &dobj, true);
                     }
                 }
 
-                vars->blocks[i].x22--;
+                vars->u.inishie1.block[index].x22--;
             } else {
-                vars->blocks[i].x2 = 2;
-                vars->blocks[i].x4 = 0;
+                vars->u.inishie1.block[index].x2 = 2;
+                vars->u.inishie1.block[index].x4 = 0;
             }
             break;
         }
@@ -848,8 +815,8 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Vec3 effect_pos;
 
     gp->u.inishie1.block[index].x2 = 0;
-    gp->u.inishie1.block[index].x20 =
-        randi_between(yakumono_param->unk1A, yakumono_param->unk1C);
+    grInishie1_SetRespawnTimer(gp, index, yakumono_param->unk1A,
+                               yakumono_param->unk1C);
 
     HSD_DObjSetFlags(HSD_JObjGetDObj(gp->u.inishie1.block[index].jobj2), 1U);
 
@@ -859,17 +826,17 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
         s16 status = gp->u.inishie1.block[index].status;
         if (status == 1 || (u16) (status - 2) <= 1U) {
             Vec3 item_vel;
+            Vec3 item_pos;
 
             Ground_801C4A08(gp->u.inishie1.block[index].hatena_gobj);
             gp->u.inishie1.block[index].hatena_gobj = NULL;
 
-            lb_8000B1CC(gp->u.inishie1.block[index].jobj2, NULL,
-                        &item_vel - 1);
+            lb_8000B1CC(gp->u.inishie1.block[index].jobj2, NULL, &item_pos);
 
             item_vel = grI1_803B8268;
-            (&effect_pos - 2)->y += 5.0f;
+            item_pos.y += 5.0f;
 
-            it_8026F7C8(&effect_pos - 2, &item_vel, 0);
+            it_8026F7C8(&item_pos, &item_vel, 0);
         }
     }
 
@@ -881,6 +848,35 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
 
     Ground_801C5414(0x136, 0xBA);
     Camera_80030E44(2, &effect_pos);
+}
+
+static inline s32 get_block_id(s32 block_id)
+{
+    int i = BLOCK_COUNT;
+    s32 idx = 0;
+    while (i != 0) {
+        if (block_id == grI1_803E49B8[idx].idx) {
+            return idx;
+        }
+        idx += 1;
+        i -= 1;
+    }
+    OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F0);
+    while (true) {
+    }
+    return idx;
+}
+
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801FBEB8(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
+{
+    s32 id = get_block_id(joint_id);
+    if (fabsf_inline(delta_y) > 0.7) {
+        HSD_GObj* gobj = Ground_GetMapGObj(3);
+        grInishie1_801FB0AC(gobj, id);
+        grInishie1_801FBCEC(gobj, id);
+    }
 }
 
 static inline Item* GET_ITEM2(Item_GObj* arg0)
@@ -1034,35 +1030,6 @@ void grInishie1_801FC110(HSD_GObj* gobj)
         gp->u.inishie1.xEA = 0;
         gp->u.inishie1.xE0 = 0.0f;
         gp->u.inishie1.xE4 = 0.0f;
-    }
-}
-
-static inline s32 get_block_id(s32 block_id)
-{
-    int i = BLOCK_COUNT;
-    s32 idx = 0;
-    while (i != 0) {
-        if (block_id == grI1_803E49B8[idx].idx) {
-            return idx;
-        }
-        idx += 1;
-        i -= 1;
-    }
-    OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F0);
-    while (true) {
-    }
-    return idx;
-}
-
-/// @copydoc mpLib_JointCollisionCallback
-void fn_801FBEB8(void* user_data, int joint_id, CollData* coll, int coll_x50,
-                 mpLib_GroundEnum ground_kind, float delta_y)
-{
-    s32 id = get_block_id(joint_id);
-    if (fabsf_inline(delta_y) > 0.7) {
-        HSD_GObj* gobj = Ground_GetMapGObj(3);
-        grInishie1_801FB0AC(gobj, id);
-        grInishie1_801FBCEC(gobj, id);
     }
 }
 
