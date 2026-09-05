@@ -36,8 +36,8 @@ extern StaticModelDesc MenMainCursorTr03_Top;
 extern StaticModelDesc MenMainCursorTr04_Top;
 extern StaticModelDesc MenMainNmRl_Top;
 extern MenuKindData mn_803EB6B0[];
-HSD_GObj* mn_804D6BE0;
 f32 mn_804D6BE4;
+HSD_GObj* mn_804D6BE0;
 
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;
@@ -123,17 +123,6 @@ typedef union {
 /// is disabled. Retail mn_802324E4 loads this TU-owned .sdata variable
 /// (see symbols.txt) instead of materializing an .sdata2 constant.
 f32 mnRulePlus_TimeLimitOffFrame = 1.0f;
-volatile const f64 mn_804DBE38 = 4503599627370496.0;
-const JObjIndices mn_804DBE40 = { 0x02030506 };
-volatile const f32 mn_804DBE44[1] = { 0.0f };
-const JObjIndices mn_804DBE48 = { 0x02030506 };
-const f32 mn_804DBE4C = -9.5f;
-const f32 mn_804DBE50 = 8.0f;
-const f32 mn_804DBE54 = 17.0f;
-const f32 mn_804DBE58 = 364.68332f;
-const f32 mn_804DBE5C = 76.77544f;
-const f32 mn_804DBE60 = 0.0521f;
-volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
 {
@@ -296,7 +285,9 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
     return &mn_803ED294[count - value];
 }
 
-static inline void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
+/* Automatic inlining preserves the constant-pool order around the digit index
+ * tables below. */
+static void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
 {
     HSD_JObj* jobj;
     jobj = jobjs[2];
@@ -307,7 +298,9 @@ static inline void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
     HSD_JObjAnimAll(jobj);
 }
 
-static inline void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
+const JObjIndices mn_804DBE40 = { 0x02030506 };
+
+static void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
 {
     HSD_JObj* jobj1;
     HSD_JObj* jobj2;
@@ -611,6 +604,8 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     }
 }
 
+const JObjIndices mn_804DBE48 = { 0x02030506 };
+
 void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
     MenuRulesPlusData* data = gobj->user_data;
@@ -640,10 +635,10 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
             confirmed = mn_804A04F0.confirmed_selection;
             SisLib_ClearText(&data->description);
             desc_idx = mnRulePlus_GetDescIdx(selection, confirmed);
-            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
-                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                       76.77544f);
             data->description = text;
-            text->font_size.y = text->font_size.x = mn_804DBE60;
+            text->font_size.y = text->font_size.x = 0.0521f;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
             return;
         }
@@ -659,10 +654,10 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
             } else {
                 desc_idx = mn_803ED2E8.desc[selection][confirmed];
             }
-            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
-                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                       76.77544f);
             data->description = text;
-            text->font_size.y = text->font_size.x = mn_804DBE60;
+            text->font_size.y = text->font_size.x = 0.0521f;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
         }
         break;
@@ -1052,10 +1047,10 @@ HSD_GObj* mn_80233218(MenuState state)
         confirmed = mn_804A04F0.confirmed_selection;
         SisLib_ClearText(&user_data->description);
         desc_idx = mnRulePlus_GetDescIdx(selected, confirmed);
-        text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50, mn_804DBE54,
-                                   mn_804DBE58, mn_804DBE5C);
+        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                   76.77544f);
         user_data->description = text;
-        text->font_size.y = text->font_size.x = mn_804DBE60;
+        text->font_size.y = text->font_size.x = 0.0521f;
         HSD_SisLib_803A6368(text, (s32) desc_idx);
     }
 
