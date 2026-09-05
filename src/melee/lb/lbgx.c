@@ -2,9 +2,9 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/cobj.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/cobj.h>
 
 bool lbGx_8001E2F8(Vec4* arg0, Vec3* arg1, U8Vec4* arg2, u32 arg3, float argf1)
 {

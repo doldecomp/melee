@@ -10,6 +10,8 @@
 
 #include "kinds/ftCommon/ftCo_09F4.h"
 
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -18,8 +20,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbrefract.h>
 
 HSD_MObjInfo ftMObj = { ftMaterial_800BF260 };
 

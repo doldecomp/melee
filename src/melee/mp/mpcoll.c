@@ -9,8 +9,6 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>
@@ -19,6 +17,8 @@
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

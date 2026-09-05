@@ -5,13 +5,13 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>
 #include <melee/ft/kinds/ftSamus/types.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itsamuschargeshot.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

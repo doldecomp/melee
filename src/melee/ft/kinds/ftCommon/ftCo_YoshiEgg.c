@@ -10,8 +10,6 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -27,6 +25,8 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

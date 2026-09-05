@@ -8,7 +8,6 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -28,6 +27,7 @@
 #include <melee/it/kinds/itfoxblaster.h>
 #include <melee/it/kinds/itfoxlaser.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/debug.h>
 
 static inline void ftFox_SpecialN_GetHoldJoint(HSD_GObj* gobj, Vec3* pos,
                                                f32 z_offset)

@@ -9,14 +9,6 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/spline.h>
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
@@ -27,6 +19,14 @@
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/spline.h>
 
 struct grBigBlueRoute_YakumonoParam {
     int x0;

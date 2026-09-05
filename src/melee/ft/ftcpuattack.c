@@ -16,9 +16,6 @@
 #include "kinds/ftZelda/forward.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -27,6 +24,9 @@
 #include <melee/mp/mpisland.h>
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct ftCo_AttackEntry {
     /* +00 */ s32 cmd;

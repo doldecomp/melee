@@ -8,14 +8,6 @@
 #include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/tobj.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ft/ft_0877.h>
@@ -33,6 +25,14 @@
 #include <melee/pl/player.h>
 #include <melee/ty/toy.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/tobj.h>
 
 typedef struct lbl_804706D8_t {
     s16 x0;

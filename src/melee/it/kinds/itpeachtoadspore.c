@@ -6,7 +6,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -14,6 +13,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7548[] = { {
     0,

@@ -7,12 +7,12 @@
 #include "forward.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
+#include <sysdolphin/baselib/random.h>
 
 void it_8027870C(s32 arg0)
 {

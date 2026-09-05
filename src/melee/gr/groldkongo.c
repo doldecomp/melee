@@ -10,10 +10,6 @@
 #include "forward.h"
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
@@ -22,6 +18,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;

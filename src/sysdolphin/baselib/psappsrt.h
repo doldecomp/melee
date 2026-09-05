@@ -3,8 +3,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/objalloc.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #define PSAPPSRT_UNK_B09 (1 << 9)
 #define PSAPPSRT_UNK_B10 (1 << 10)

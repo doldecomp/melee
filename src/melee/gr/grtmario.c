@@ -7,14 +7,14 @@
 
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/psstructs.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/psstructs.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
 /* 21F844 */ static void grTMario_8021F844(void);

@@ -6,7 +6,6 @@
 #include "ftCo_Throw.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -16,6 +15,7 @@
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecials.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void ftCo_800BC438(Fighter_GObj* gobj)
 {

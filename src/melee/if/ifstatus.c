@@ -8,6 +8,12 @@
 
 #include <placeholder.h>
 
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/mn/mnmain.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -20,12 +26,6 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/mn/mnmain.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 typedef struct FlagsX {
     u32 b80 : 1;

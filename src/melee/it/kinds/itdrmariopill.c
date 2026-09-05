@@ -7,9 +7,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/db/db.h>
@@ -26,6 +23,9 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)

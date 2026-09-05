@@ -6,11 +6,11 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_0146.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ft_80081938(HSD_GObj* gobj)
 {

@@ -4,11 +4,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grdisplay.h>
@@ -17,6 +12,11 @@
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 

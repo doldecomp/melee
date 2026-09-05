@@ -18,7 +18,6 @@
 #include "forward.h"
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
@@ -28,6 +27,7 @@
 #include <melee/ft/kinds/ftMasterHand/ftmasterhandwait12.h>
 #include <melee/ft/kinds/ftPeach/ftpeachfloat.h>
 #include <melee/ft/types.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
 {

@@ -8,7 +8,6 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -27,6 +26,7 @@
 #include <melee/it/kinds/ityoshiegglay.h>
 #include <melee/it/kinds/ityoshitongue.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 12CEE0 */ static void fn_8012CEE0(Fighter_GObj*);
 /* 12CF7C */ static void fn_8012CF7C(Fighter_GObj*);

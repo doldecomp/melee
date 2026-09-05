@@ -3,7 +3,6 @@
 #include "ftmasterhandwait12.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -11,6 +10,7 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}
 

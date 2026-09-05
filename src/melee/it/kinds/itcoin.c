@@ -2,9 +2,6 @@
 
 #include <melee/it/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grfigureget.h>
@@ -24,6 +21,9 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/ty/tydisplay.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
 /* 2F15B0 */ static bool itCoin_UnkMotion0_Anim(Item_GObj* gobj);

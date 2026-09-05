@@ -5,9 +5,6 @@
 #include "itfreeze.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -15,6 +12,9 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 2D8894 */ static void it_802D8894(Item_GObj*);
 /* 2D88CC */ static bool itHeiho_UnkMotion0_Anim(Item_GObj* gobj);

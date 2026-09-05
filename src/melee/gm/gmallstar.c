@@ -5,12 +5,12 @@
 #include "gmmain_lib.h"
 #include "gmregcommon.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbdvd.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct AllStarOpponent {
     /* +0 */ u8 stages[2];

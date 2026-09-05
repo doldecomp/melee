@@ -1,9 +1,6 @@
 #include "itcapsule.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -17,6 +14,9 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F5468[] = {
     {

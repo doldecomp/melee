@@ -10,15 +10,15 @@
 #include "kinds/ftLink/types.h"
 #include "kinds/ftMars/types.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/state.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itsword.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/state.h>
 
 typedef struct AfterimageVtx {
     f32 x, y, z;

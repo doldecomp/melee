@@ -6,12 +6,12 @@
 #include "types.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0C57B4 */ static void ftCo_800C57B4(Fighter_GObj* gobj);
 

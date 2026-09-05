@@ -9,7 +9,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -27,6 +26,7 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((float*) p_ftCommonData)

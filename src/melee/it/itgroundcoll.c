@@ -6,9 +6,9 @@
 #include "item.h"
 #include "itmaplib.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/random.h>
 
 bool it_8026D564(Item_GObj* item_gobj)
 {

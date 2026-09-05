@@ -19,9 +19,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -40,6 +37,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
 /* 090B48 */ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj);

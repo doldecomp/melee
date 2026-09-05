@@ -4,6 +4,12 @@
 #include "mnmain.h"
 #include "mnruleplus.h"
 
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -14,12 +20,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/sc/types.h>
 
 #define NUM_STAGES 29
 

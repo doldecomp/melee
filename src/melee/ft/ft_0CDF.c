@@ -5,9 +5,9 @@
 #include "ftcommon.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/kinds/itlgun.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftCo_800CE1D4(HSD_GObj*); /* extern */
 

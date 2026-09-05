@@ -4,9 +4,9 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 00B074 */ bool lb_8000B074(HSD_JObj*);
 /* 00B09C */ bool lb_8000B09C(HSD_JObj*);

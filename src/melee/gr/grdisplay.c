@@ -5,6 +5,9 @@
 
 #include <melee/lb/forward.h>
 
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lbshadow.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -12,9 +15,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
-#include <melee/cm/camera.h>
-#include <melee/ft/ftlib.h>
-#include <melee/lb/lbshadow.h>
 
 /* 1C5B90 */ static void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 arg2,
                                             u32 rendermode);

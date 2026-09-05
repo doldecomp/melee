@@ -6,8 +6,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -23,6 +21,8 @@
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/it/kinds/itmariofireball.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 void fn_800F9260(HSD_GObj*);
 

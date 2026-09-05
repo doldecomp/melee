@@ -10,13 +10,13 @@
 #include "pltrick.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/debug.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/it_26B1.h>
+#include <sysdolphin/baselib/debug.h>
 
 /// Sets a bonus flag boolean to true
 static void setFlag(int player, int kind)

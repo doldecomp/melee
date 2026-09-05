@@ -10,12 +10,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/generator.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/psstructs.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
@@ -23,6 +17,12 @@
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/generator.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/psappsrt.h>
+#include <sysdolphin/baselib/psstructs.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);

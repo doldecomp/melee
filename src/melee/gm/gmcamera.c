@@ -10,14 +10,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/sislib.h>
 #include <dolphin/pad.h>
 #include <melee/cm/cmsnap.h>
 #include <melee/if/ifall.h>
@@ -29,6 +21,14 @@
 #include <melee/mn/inlines.h>
 #include <melee/sc/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/sislib.h>
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];

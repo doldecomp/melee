@@ -9,19 +9,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <dolphin/mtx.h>
 #include <dolphin/pad.h>
 #include <dolphin/types.h>
@@ -44,6 +31,19 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
                                          CameraTransformState* transform,

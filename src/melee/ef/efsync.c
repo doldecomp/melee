@@ -7,12 +7,12 @@
 #include "types.h"
 
 #include <math.h>
+#include <melee/ft/inlines.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/ft/inlines.h>
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 

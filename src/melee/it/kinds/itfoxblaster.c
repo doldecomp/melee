@@ -3,8 +3,6 @@
 #include "inlines.h"
 
 #include <stdbool.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ft_0BF0.h>
@@ -16,6 +14,8 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2AE200 */ static void it_802AE200(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);

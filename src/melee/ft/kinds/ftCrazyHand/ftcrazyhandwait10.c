@@ -22,8 +22,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -35,6 +33,8 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);
 static void ftCh_Init_80156AD8(HSD_GObj* gobj);

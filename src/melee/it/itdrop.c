@@ -9,9 +9,9 @@
 
 #include "kinds/it_2E5A.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemKind it_8026F3AC(void)
 {

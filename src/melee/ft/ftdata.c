@@ -122,10 +122,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <string.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/objalloc.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbarq.h>
@@ -133,6 +129,10 @@
 #include <melee/lb/lbfile.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 typedef struct ft_8045993C_t {
     /* +0 */ u32 pad_x0;

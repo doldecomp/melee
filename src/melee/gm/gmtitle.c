@@ -6,15 +6,6 @@
 #include "gmopening.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
 #include <melee/db/db.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -25,6 +16,15 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 
 static StaticModelDesc model_desc_0;
 static StaticModelDesc model_desc_1;

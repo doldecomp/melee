@@ -2,8 +2,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
@@ -16,6 +14,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {

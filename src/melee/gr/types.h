@@ -11,12 +11,12 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/spline.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/spline.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74

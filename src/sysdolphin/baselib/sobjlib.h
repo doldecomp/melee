@@ -3,9 +3,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <dolphin/gx/GXStruct.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 extern GObjFuncs HSD_SObjLib_8040C3A4;
 extern u8 HSD_SObjLib_804D7960;

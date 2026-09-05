@@ -7,13 +7,13 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

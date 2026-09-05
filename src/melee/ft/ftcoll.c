@@ -26,9 +26,6 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
@@ -46,6 +43,9 @@
 #include <melee/pl/plstale.h>
 #include <melee/pl/pltrick.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

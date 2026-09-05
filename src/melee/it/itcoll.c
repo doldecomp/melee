@@ -12,11 +12,6 @@
 
 #include <melee/ef/forward.h>
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>
@@ -32,6 +27,11 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);

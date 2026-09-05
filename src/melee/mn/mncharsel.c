@@ -11,6 +11,20 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -27,20 +41,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/types.h>
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };

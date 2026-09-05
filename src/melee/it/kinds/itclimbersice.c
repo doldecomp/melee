@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -15,6 +14,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7668[] = {
     {

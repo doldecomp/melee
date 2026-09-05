@@ -29,8 +29,6 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -57,6 +55,8 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 int ftCo_803C5520[2][4][3] = {
     {

@@ -6,6 +6,10 @@
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -16,10 +20,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
 
 struct mnUserData {
     u8 x0, x1, x2, x3;

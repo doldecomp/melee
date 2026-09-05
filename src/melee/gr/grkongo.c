@@ -14,12 +14,6 @@
 #include <melee/mp/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/spline.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -32,6 +26,12 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/spline.h>
 
 /* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

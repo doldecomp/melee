@@ -7,11 +7,11 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct itCLinkMilk_ItemVars {
     /* +0 ip+DD4 */ Fighter_GObj* x0;

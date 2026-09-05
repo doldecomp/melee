@@ -30,12 +30,12 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #if MUST_MATCH
 static inline float my_sqrtf(float x)

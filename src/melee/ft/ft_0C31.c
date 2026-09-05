@@ -14,12 +14,12 @@
 
 #include "kinds/ftCommon/types.h"
 
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0C63BC */ static void fn_800C63BC(Fighter_GObj* gobj);
 /* 0C63E0 */ static void fn_800C63E0(Fighter_GObj* gobj);

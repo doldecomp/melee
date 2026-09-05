@@ -4,13 +4,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/gm/gm_1601.h>
@@ -22,6 +15,13 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static SceneDesc* un_804D7040;
 static SceneDesc* un_804D7044;

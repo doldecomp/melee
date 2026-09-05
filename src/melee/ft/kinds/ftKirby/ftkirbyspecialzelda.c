@@ -9,7 +9,6 @@
 #include <melee/ft/kinds/ftZelda/forward.h>
 
 #include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -22,6 +21,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 extern float ftKb_Init_803CB770[];
 

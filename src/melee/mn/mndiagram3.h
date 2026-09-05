@@ -3,8 +3,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/mn/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 245BA4 */ void mnDiagram3_PopulateRankings(HSD_GObj* gobj);
 /* 246D40 */ void mnDiagram3_UpdateScrollArrows(HSD_GObj* gobj);

@@ -14,14 +14,6 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/generator.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
@@ -38,6 +30,14 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/generator.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 
 struct grCorneria_YakumonoParam {
     /* 0x00 */ f32 x0;

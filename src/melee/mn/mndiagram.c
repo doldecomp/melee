@@ -8,15 +8,6 @@
 #include "mnname.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
 #include <dolphin/types.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
@@ -27,6 +18,15 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
 
 /// @todo Split-derived data; types are inferred.
 void* mnDiagram_804A0814[4];

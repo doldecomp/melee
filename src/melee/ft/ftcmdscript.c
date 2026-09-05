@@ -4,8 +4,8 @@
 #include "types.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/lb/lb_00CE.h>
+#include <sysdolphin/baselib/debug.h>
 
 void ftCo_800B3E04(Fighter* fp)
 {

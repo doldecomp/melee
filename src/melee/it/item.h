@@ -4,10 +4,10 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/objalloc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 struct ItemStateDesc;
 

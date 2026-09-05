@@ -12,9 +12,9 @@
 #include "kinds/ftLink/ftlinkattackair.h"
 #include "kinds/ftMasterHand/ftmasterhandwait12.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itpeachparasol.h>
+#include <sysdolphin/baselib/gobj.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

@@ -11,8 +11,6 @@
 #include "kinds/itcoin.h"
 #include "kinds/itheiho.h"
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>
@@ -24,6 +22,8 @@
 #include <melee/lb/lbvector.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/ty/tydisplay.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

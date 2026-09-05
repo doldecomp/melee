@@ -5,13 +5,13 @@
 
 #include <melee/mn/forward.h>
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/types.h>
 #include <melee/if/soundtest.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
 
 struct DebugResultsData {
     u8 x0_0 : 1;

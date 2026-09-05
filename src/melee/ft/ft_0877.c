@@ -7,11 +7,11 @@
 
 #include "kinds/ftCommon/ftCo_0A01.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define TEST(expr) (expr) ? true : false
 

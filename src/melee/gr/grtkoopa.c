@@ -8,11 +8,11 @@
 
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 221648 */ static void grTKoopa_80221648(bool);
 /* 22164C */ static void grTKoopa_8022164C(void);

@@ -1,6 +1,5 @@
 #include "itstar.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,6 +9,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F57A0[] = {
     {

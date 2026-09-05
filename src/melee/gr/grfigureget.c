@@ -11,8 +11,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
@@ -26,6 +24,8 @@
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 typedef struct grFigureGet_Data {
     s32 x0;

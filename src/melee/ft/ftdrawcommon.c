@@ -13,9 +13,6 @@
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/state.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/lb/lb_00F9.h>
@@ -23,6 +20,9 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbgx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/state.h>
 
 static U8Vec4 ftDrawCommon_804D3A88 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static U8Vec4 ftDrawCommon_804D3A8C = { 0x80, 0x80, 0xFF, 0x80 };

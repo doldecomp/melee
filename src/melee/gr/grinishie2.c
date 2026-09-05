@@ -12,10 +12,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/kinds/itkyasarin.h>
@@ -24,6 +20,10 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },

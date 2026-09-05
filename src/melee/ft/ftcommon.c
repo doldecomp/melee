@@ -29,10 +29,6 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/rumble.h>
 #include <melee/ef/eflib.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/it_26B1.h>
@@ -47,6 +43,10 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/rumble.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

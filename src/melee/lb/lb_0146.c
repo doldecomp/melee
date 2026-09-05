@@ -1,12 +1,5 @@
 #include "types.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/tobj.h>
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLighting.h>
@@ -14,6 +7,13 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/tobj.h>
 
 bool lb_80014638(struct lb_80014638_arg0_t* arg0,
                  struct lb_80014638_arg1_t* arg1)

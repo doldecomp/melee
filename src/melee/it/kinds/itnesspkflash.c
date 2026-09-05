@@ -7,7 +7,6 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
@@ -18,6 +17,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj);

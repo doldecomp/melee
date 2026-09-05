@@ -3,9 +3,9 @@
 #include "gr/types.h" // IWYU pragma: keep
 
 #include <math.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
 
 static const s32 GC_Id_None = -1;
 

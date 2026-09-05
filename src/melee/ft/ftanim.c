@@ -12,14 +12,14 @@
 
 #include "kinds/ftCommon/ftCo_Attack100.h"
 
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbanim.h>
+#include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/object.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbanim.h>
-#include <melee/lb/lbvector.h>
 
 static HSD_AnimJoint* ftAnim_804590D8[30];
 static HSD_MatAnimJoint* ftAnim_804590D8_unk[30];

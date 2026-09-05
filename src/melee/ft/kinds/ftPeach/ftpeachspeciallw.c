@@ -8,7 +8,6 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -25,6 +24,7 @@
 #include <melee/it/kinds/itpeachturnip.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);

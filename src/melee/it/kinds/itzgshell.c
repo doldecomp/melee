@@ -3,7 +3,6 @@
 #include "inlines.h"
 #include "itnokonoko.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/gr/grzakogenerator.h>
@@ -19,6 +18,7 @@
 #include <melee/it/itzako.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct itGShell_Attrs {
     float x0;

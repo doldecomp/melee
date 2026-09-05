@@ -4,8 +4,6 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
 #include <melee/it/inlines.h>
@@ -16,6 +14,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F70C8[] = {
     {

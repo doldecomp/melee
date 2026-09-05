@@ -8,14 +8,6 @@
 #include "stage.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/kinds/itarwinglaser.h>
@@ -25,6 +17,14 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
 
 typedef struct grVe_Data {
     /* +0 */ GrJoint joints[5];

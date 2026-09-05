@@ -8,9 +8,9 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/controller.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/controller.h>
 
 struct ftCollisionBox {
     /*  +0 */ float top;

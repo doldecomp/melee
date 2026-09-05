@@ -2,8 +2,6 @@
 
 #include "inlines.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecials.h>
@@ -14,6 +12,8 @@
 #include <melee/it/itdraw.h>
 #include <melee/it/item.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6818[] = {
     {

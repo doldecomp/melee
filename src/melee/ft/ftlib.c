@@ -19,11 +19,6 @@
 
 #include <melee/it/forward.h>
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/rumble.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/gm/gm_unsplit.h>
@@ -33,6 +28,11 @@
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/rumble.h>
 
 s32 ftLib_800860C4(void)
 {

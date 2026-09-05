@@ -21,9 +21,9 @@
 #include "kinds/ftCommon/ftCo_Lift.h"
 
 #include <stdbool.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/it/kinds/itkinoko.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void ftCo_800D2770(Fighter_GObj* gobj, f32 arg8)
 {

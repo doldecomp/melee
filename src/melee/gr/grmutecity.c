@@ -10,13 +10,6 @@
 #include "stage.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/spline.h>
 #include <melee/cm/camera.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>
@@ -26,6 +19,13 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/psappsrt.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/spline.h>
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 

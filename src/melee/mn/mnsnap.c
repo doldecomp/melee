@@ -5,6 +5,13 @@
 
 #include <placeholder.h>
 
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbsnap.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -15,13 +22,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbsnap.h>
 
 typedef struct mnSnap_State {
     /* 0x000 */ s32 frame_count;

@@ -4,10 +4,10 @@
 #include <melee/cm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/cobj.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
 /* 028F5C */ void Camera_80028F5C(CmSubject*, CmSubjectState);

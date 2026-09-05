@@ -11,7 +11,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -30,6 +29,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwoshadowball.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 3B7570 */ static Vec3 const ftKb_Init_803B7570 = { 0.0f, 4.0f, 0.0f };
 /* 3B757C */ static Vec3 const ftKb_Init_803B757C = { 0.0f, 4.0f, 0.0f };

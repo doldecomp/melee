@@ -5,7 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
@@ -15,6 +14,7 @@
 #include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void ftCo_SpawnEf(Fighter_GObj* gobj, HSD_JObj* joint, u32 arg2,
                                 enum_t arg3)

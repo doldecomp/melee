@@ -8,12 +8,12 @@
 #include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <Runtime/platform.h>
 
 GrJoint grTe_803E56B8[] = {
     { 0, 2, 1 },   { 1, 2, 2 },   { 2, 2, 3 },   { 3, 2, 4 }, { 4, 2, 5 },

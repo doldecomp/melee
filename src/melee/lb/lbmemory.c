@@ -1,11 +1,11 @@
 #include "lbmemory.h"
 
 #include <string.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/devcom.h>
 #include <dolphin/ar.h>
 #include <dolphin/os/OSAlarm.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/devcom.h>
 
 struct MemEntry {
     struct MemEntry* x0_next;

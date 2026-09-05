@@ -3,10 +3,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <Runtime/platform.h>
 
 void mnHyaku_8024C68C(HSD_GObj*);
 void mnHyaku_8024CB94(u8);

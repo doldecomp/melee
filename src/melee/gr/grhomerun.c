@@ -10,16 +10,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
@@ -32,6 +22,16 @@
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /* 21E994 */ static void fn_8021E994(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

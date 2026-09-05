@@ -1,7 +1,6 @@
 #include "itsscopebeam.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -9,6 +8,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F6568[] = {
     { 0, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,

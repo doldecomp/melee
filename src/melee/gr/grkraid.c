@@ -5,12 +5,12 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grKraid_YakumonoParam {
     u32 map_time_min;

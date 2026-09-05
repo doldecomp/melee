@@ -3,8 +3,6 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C7590.h>
 #include <melee/ft/ftlib.h>
@@ -22,6 +20,8 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F8EB0[] = {
     {

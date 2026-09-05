@@ -6,8 +6,8 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
     {

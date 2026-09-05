@@ -7,10 +7,10 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 struct lbColl_8000A10C_arg0_t;
 

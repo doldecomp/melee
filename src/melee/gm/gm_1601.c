@@ -15,14 +15,6 @@
 #include <melee/pl/forward.h>
 
 #include <stddef.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/hsd_3924.h>
-#include <sysdolphin/baselib/hsd_3982.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/gr/ground.h>
@@ -41,6 +33,14 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/hsd_3924.h>
+#include <sysdolphin/baselib/hsd_3982.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 

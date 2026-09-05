@@ -14,7 +14,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -34,6 +33,7 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static MotionFlags const ftYs_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;

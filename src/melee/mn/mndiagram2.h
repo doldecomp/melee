@@ -1,8 +1,8 @@
 #ifndef MELEE_MN_MNDIAGRAM2_H
 #define MELEE_MN_MNDIAGRAM2_H
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/mn/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 243A3C */ bool mnDiagram2_IsTimeStat(u8 stat_type);
 /* 243A5C */ bool mnDiagram2_IsDistanceStat(u8 stat_type);

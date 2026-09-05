@@ -9,12 +9,12 @@
 #include <melee/lb/forward.h>
 #include <melee/mp/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
     DynamicsDesc* x0;

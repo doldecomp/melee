@@ -8,7 +8,6 @@
 #include "types.h"
 
 #include <string.h>
-#include <sysdolphin/baselib/debug.h>
 #include <dolphin/dvd.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
@@ -16,6 +15,7 @@
 #include <melee/gr/grdatfiles.h>
 #include <melee/gr/stage.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/debug.h>
 
 /* 0189EC */ static void lbDvd_800189EC(int);
 

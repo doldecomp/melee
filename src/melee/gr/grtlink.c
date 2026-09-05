@@ -8,10 +8,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 22192C */ static void grTLink_8022192C(bool);
 /* 221930 */ static void grTLink_80221930(void);

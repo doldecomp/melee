@@ -18,16 +18,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
@@ -42,6 +32,16 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 267130 */ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem);
 /* 2674AC */ static void Item_802674AC(SpawnItem* spawnItem);

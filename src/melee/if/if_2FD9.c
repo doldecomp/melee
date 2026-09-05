@@ -2,6 +2,11 @@
 
 #include "ifall.h"
 
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -12,11 +17,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 /// .bss
 /* 4A1F10 */ static struct un_804A1F10_t {

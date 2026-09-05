@@ -2,9 +2,9 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/debug.h>
 #include <dolphin/ar.h>
 #include <dolphin/os.h>
+#include <sysdolphin/baselib/debug.h>
 
 typedef enum lbArqState {
     LB_ARQ_STATE_FREE = 0,

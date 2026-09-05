@@ -1,7 +1,5 @@
 #include "itmasterhandbullet.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
@@ -13,6 +11,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F9388[] = {
     { 0, itMasterhandbullet_UnkMotion1_Anim,

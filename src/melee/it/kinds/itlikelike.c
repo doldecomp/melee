@@ -5,8 +5,6 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C78B0.h>
 #include <melee/ft/ftlib.h>
@@ -25,6 +23,8 @@
 #include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)

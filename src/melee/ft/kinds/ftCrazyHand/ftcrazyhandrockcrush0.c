@@ -7,7 +7,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -19,6 +18,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
 
 static inline float my_sqrtf(float x)
 {

@@ -19,15 +19,15 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
 #include <dolphin/pad.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/sobjlib.h>
 
 static u8 gmRegend_InputDelayTimer;
 static u8 gmRegend_ExitTimer;

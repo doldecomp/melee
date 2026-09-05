@@ -14,7 +14,6 @@
 #include <melee/gr/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
@@ -48,6 +47,7 @@
 #include <melee/mp/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 09D044 */ static void ftCo_800A0148(Fighter*);
 /* 09D06C */ static void ftCo_800AC7D4(Fighter*);

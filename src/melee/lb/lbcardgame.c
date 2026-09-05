@@ -7,17 +7,17 @@
 #include "lbcardnew.h"
 #include "lblanguage.h"
 
+#include <dolphin/card.h> // IWYU pragma: keep
+#include <dolphin/os.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <dolphin/card.h> // IWYU pragma: keep
-#include <dolphin/os.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/if/textlib.h>
 
 #define _p(x) (lb_80433318.x)
 

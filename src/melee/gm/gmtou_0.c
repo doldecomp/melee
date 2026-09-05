@@ -12,6 +12,15 @@
 
 #include "forward.h"
 
+#include <dolphin/pad.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnmainrule.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/mnnamenew.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -22,15 +31,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <dolphin/pad.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnmainrule.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/mnnamenew.h>
-#include <melee/sc/types.h>
 
 /* 4799B8 */ static struct Lbl804799B8_t lbl_804799B8;
 /* 4D6640 */ static HSD_Archive* lbl_804D6640;

@@ -9,16 +9,16 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2024F0 */ static void grYorster_802024F0(void* user_data, int joint_id,
                                             CollData* coll, int coll_x50,

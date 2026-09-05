@@ -8,7 +8,6 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -22,6 +21,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static void fn_8010AA64(Fighter_GObj* gobj)
 {

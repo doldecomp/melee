@@ -8,6 +8,14 @@
 #include "gmmain_lib.h"
 #include "gmscdata.h"
 
+#include <dolphin/os/OSThread.h>
+#include <melee/db/db.h>
+#include <melee/if/ifcoget.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbheap.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -17,14 +25,6 @@
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <dolphin/os/OSThread.h>
-#include <melee/db/db.h>
-#include <melee/if/ifcoget.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/lb/lb_0195.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbheap.h>
 
 static u64 gm_803DA888[8] = {
     0, 0x82FFFA, 0, 0x8EFFFA, 0x800FFA, 0x808FFA, 0x800FFA, 0,

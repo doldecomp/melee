@@ -11,6 +11,10 @@
 #include "ifstock.h"
 #include "iftime.h"
 
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -18,10 +22,6 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/sc/types.h>
 
 static struct ifAll_804A0FD8_t {
     /* 0x00 */ HSD_GObj* gobj;

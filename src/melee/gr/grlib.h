@@ -4,9 +4,9 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/mtx.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/mtx.h>
 
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);
 /* 1C96F8 */ HSD_Generator* grLib_801C96F8(s32, s32, Vec3*);

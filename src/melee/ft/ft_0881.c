@@ -4,11 +4,11 @@
 #include "ft_0877.h"
 #include "inlines.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plstale.h>
+#include <sysdolphin/baselib/random.h>
 
 void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
 {

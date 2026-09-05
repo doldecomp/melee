@@ -4,19 +4,6 @@
 #include "ifall.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>
@@ -30,6 +17,19 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
                                            { 0.0F, 0.0F, 300.0F },

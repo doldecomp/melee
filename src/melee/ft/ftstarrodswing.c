@@ -4,10 +4,10 @@
 #include "ft_0CD1.h"
 #include "inlines.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/kinds/itstarrod.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftCo_800CD82C(Fighter_GObj* gobj, int arg1, int arg2, float arg3)
 {

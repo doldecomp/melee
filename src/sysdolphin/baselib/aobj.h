@@ -3,11 +3,11 @@
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/object.h>
-#include <Runtime/platform.h>
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)

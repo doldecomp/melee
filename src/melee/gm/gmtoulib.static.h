@@ -1,5 +1,5 @@
-#include <sysdolphin/baselib/wobj.h>
 #include <melee/gm/types.h>
+#include <sysdolphin/baselib/wobj.h>
 
 typedef struct BracketSrcEntry {
     /* 0x00 */ u8 x0;

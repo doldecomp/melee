@@ -13,15 +13,6 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/texp.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/gx/GXVert.h>
@@ -39,6 +30,15 @@
 #include <melee/it/itCharItems.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/tev.h>
+#include <sysdolphin/baselib/texp.h>
 
 #define LINEID_CHECK(line, line_id)                                           \
     do {                                                                      \

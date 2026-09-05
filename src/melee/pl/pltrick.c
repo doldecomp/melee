@@ -5,11 +5,11 @@
 #include "plbonus.h"
 #include "plbonuslib.h"
 
-#include <sysdolphin/baselib/debug.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
 #include <melee/if/ifmagnify.h>
+#include <sysdolphin/baselib/debug.h>
 
 /* 037F00 */ static void fn_80037F00(HSD_GObj**, Fighter*, ft_800898B4_t*, s32,
                                      s32);

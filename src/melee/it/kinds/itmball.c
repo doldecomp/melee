@@ -2,8 +2,6 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
@@ -17,6 +15,8 @@
 #include <melee/it/types.h>
 #include <melee/mp/mpcoll.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6488[] = {
     { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },

@@ -8,8 +8,6 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/video.h>
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
 #include <melee/db/db.h>
@@ -21,6 +19,8 @@
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/video.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 /* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

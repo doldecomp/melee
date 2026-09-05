@@ -6,6 +6,14 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 
+#include <dolphin/pad.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -17,14 +25,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <dolphin/pad.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/sc/types.h>
-#include <melee/ty/toy.h>
 
 struct unk_jobj_node {
     HSD_JObj* x0;

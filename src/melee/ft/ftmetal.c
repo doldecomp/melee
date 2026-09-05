@@ -9,8 +9,8 @@
 #include "ftparts.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/id.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/id.h>
 
 void ft_800C8170(Fighter* fp)
 {

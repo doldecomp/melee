@@ -6,8 +6,6 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -23,6 +21,8 @@
 #include <melee/it/kinds/itwstar.h>
 #include <melee/mp/mpcoll.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #ifdef MUST_MATCH
 #pragma force_active on

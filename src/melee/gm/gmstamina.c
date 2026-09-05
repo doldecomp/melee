@@ -8,11 +8,11 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 GameModeState gm_Mode_StaminaVs_States[] = {
     {

@@ -4,7 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -17,6 +16,7 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchchef.h>
 #include <melee/lb/lb_00B0.h>
+#include <sysdolphin/baselib/random.h>
 
 static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
 {

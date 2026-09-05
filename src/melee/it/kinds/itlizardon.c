@@ -7,7 +7,6 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -17,6 +16,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7BC0[] = { {
                                      0,

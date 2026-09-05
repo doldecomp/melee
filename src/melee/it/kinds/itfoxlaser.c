@@ -7,8 +7,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -17,6 +15,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F67D0[] = {
     { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,

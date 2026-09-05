@@ -12,11 +12,11 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ft_8007C114(HSD_GObj* gobj)
 {

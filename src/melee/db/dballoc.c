@@ -1,9 +1,9 @@
 #include "db.h"
 
-#include <sysdolphin/baselib/generator.h>
-#include <sysdolphin/baselib/psappsrt.h>
 #include <melee/ef/efdata.h>
 #include <melee/gm/types.h>
+#include <sysdolphin/baselib/generator.h>
+#include <sysdolphin/baselib/psappsrt.h>
 
 static UnkFlagStruct db_804D6BA0;
 

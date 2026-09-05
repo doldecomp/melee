@@ -10,15 +10,15 @@
 #include "forward.h"
 
 #include <math.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 006E58 */ static bool
 lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,

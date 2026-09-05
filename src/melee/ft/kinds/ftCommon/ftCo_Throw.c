@@ -10,7 +10,6 @@
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -34,6 +33,7 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void fn_800DD568(Fighter_GObj* gobj);
 void fn_800DD5EC(Fighter_GObj* gobj);

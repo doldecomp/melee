@@ -8,10 +8,10 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 void grTKirby_80221364(bool);                  /* static */
 void grTKirby_80221368(void);                  /* static */

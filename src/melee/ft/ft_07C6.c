@@ -5,7 +5,6 @@
 #include "ftlib.h"
 #include "types.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>
@@ -16,6 +15,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ft_8007C630(Fighter_GObj* gobj)
 {

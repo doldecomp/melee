@@ -2,10 +2,10 @@
 #include "lbmthp.h"
 
 #include <string.h>
+#include <dolphin/thp/thp.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <dolphin/thp/thp.h>
 
 struct lbl_804335B8_t {
     /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */

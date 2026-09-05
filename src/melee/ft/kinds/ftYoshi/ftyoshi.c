@@ -12,15 +12,15 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/mobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/mobj.h>
 
 /// @todo Belongs in #ftyoshiguard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };

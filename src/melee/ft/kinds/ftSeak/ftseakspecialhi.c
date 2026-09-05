@@ -6,7 +6,6 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -25,6 +24,7 @@
 #include <melee/it/kinds/itseakvanish.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

@@ -4,22 +4,6 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/util.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -36,6 +20,22 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/sobjlib.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/util.h>
+#include <sysdolphin/baselib/wobj.h>
 
 static struct {
     int x0;

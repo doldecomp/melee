@@ -6,8 +6,6 @@
 
 #include <melee/it/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -19,6 +17,8 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct itGShell_Attrs {
     float x0;

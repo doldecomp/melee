@@ -4,6 +4,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -14,10 +18,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/sc/types.h>
-#include <Runtime/platform.h>
 
 void mnDeflicker_8024A168(HSD_GObj* gobj);
 void mnDeflicker_8024A2E8(HSD_GObj* gobj);

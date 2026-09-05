@@ -5,13 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/hsd_392C.h>
-#include <sysdolphin/baselib/hsd_3933.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
 #include <dolphin/card.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx.h>
@@ -32,6 +25,13 @@
 #include <melee/lb/lbsnap.h>
 #include <melee/lb/lbtime.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/hsd_392C.h>
+#include <sysdolphin/baselib/hsd_3933.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;

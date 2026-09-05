@@ -3,11 +3,11 @@
 
 #include <melee/mn/forward.h>
 
-#include <sysdolphin/baselib/object.h>
 #include <dolphin/gx.h>
 #include <melee/mn/types.h>
 #include <melee/sc/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/object.h>
 
 typedef struct _MainMenuData {
     /* 0x0000 */ MenuKind8 menu_kind;

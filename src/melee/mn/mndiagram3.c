@@ -7,6 +7,10 @@
 #include "mnname.h"
 #include "types.h"
 
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -17,10 +21,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbspdisplay.h>
 
 typedef struct mnDiagram3_PosTable {
     /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)

@@ -8,9 +8,6 @@
 #include "forward.h"
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/objalloc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
@@ -23,6 +20,9 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/if/ifstatus.h>
 #include <melee/lb/lbarchive.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 typedef struct _ftMapping {
     s8 internal_id;

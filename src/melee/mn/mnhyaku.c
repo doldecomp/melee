@@ -7,13 +7,13 @@
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/sc/types.h>
 
 static HSD_GObj* mnHyaku_804D6C58;
 

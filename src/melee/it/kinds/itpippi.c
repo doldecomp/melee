@@ -1,7 +1,5 @@
 #include "itpippi.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -9,6 +7,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7FF8[] = {
     { 0, itPippi_UnkMotion0_Anim, itPippi_UnkMotion0_Phys,

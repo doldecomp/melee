@@ -14,11 +14,6 @@
 #include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -30,6 +25,11 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
                                      HSD_GObj* u3, f32 u4);

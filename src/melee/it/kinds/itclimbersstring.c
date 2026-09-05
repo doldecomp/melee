@@ -3,10 +3,6 @@
 #include "inlines.h"
 #include "itlinkhookshot.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftPopo/ftpopospecials.h>
@@ -14,6 +10,10 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 /* 2C248C */ static Item_GObj* it_802C248C(Item* ip, HSD_JObj* jobj);
 /* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);

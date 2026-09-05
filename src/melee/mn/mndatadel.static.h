@@ -4,10 +4,10 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/jobj.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/types.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/jobj.h>
 
 struct WarnCmnData {
     /* +00 */ u8 x0;

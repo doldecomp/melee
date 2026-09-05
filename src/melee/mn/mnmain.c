@@ -23,19 +23,6 @@
 #include <melee/gm/forward.h>
 
 #include <math.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mobj.h>
 #include <dolphin/pad.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmevent.h>
@@ -50,6 +37,19 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mobj.h>
 
 /* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);
 

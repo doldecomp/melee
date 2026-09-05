@@ -5,7 +5,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -20,6 +19,7 @@
 #include <melee/it/kinds/itgamewatchjudge.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/random.h>
 
 static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialS_ItemJudgementEnterHitlag(HSD_GObj* gobj);

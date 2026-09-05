@@ -10,11 +10,6 @@
 
 #include "forward.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>
@@ -24,6 +19,11 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);

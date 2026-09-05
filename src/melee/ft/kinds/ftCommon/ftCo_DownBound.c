@@ -12,7 +12,6 @@
 #include "forward.h"
 
 #include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -28,6 +27,7 @@
 #include <melee/ft/kinds/ftSandbag/ftsandbag.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);
 /* 0972E8 */ static void ftCo_8009794C(Fighter_GObj* gobj);

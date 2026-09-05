@@ -7,10 +7,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <sysdolphin/baselib/objalloc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 extern struct Fighter_804D64FC_t {
     u8** cmdscripts; ///< +00 per-character command script arrays

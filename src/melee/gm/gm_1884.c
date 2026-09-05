@@ -8,17 +8,6 @@
 
 #include <melee/it/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <dolphin/pad.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
@@ -36,6 +25,17 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <Runtime/runtime.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /// @todo .sdata2 order hack
 static inline void gm_1884_sdata2_order(void)

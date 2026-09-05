@@ -9,23 +9,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -44,6 +27,23 @@
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 static size_t const _tyDisplay_804D6F10_len = 300;
 

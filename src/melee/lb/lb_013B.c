@@ -5,8 +5,8 @@
 #include "forward.h"
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/rumble.h>
 #include <dolphin/pad.h>
+#include <sysdolphin/baselib/rumble.h>
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 /* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);

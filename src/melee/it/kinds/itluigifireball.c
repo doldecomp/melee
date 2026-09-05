@@ -1,7 +1,5 @@
 #include "itluigifireball.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/mtx.h>
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
@@ -13,6 +11,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);
 /* 2C02E4 */ static bool itLuigifireball_UnkMotion0_Anim(Item_GObj* gobj);

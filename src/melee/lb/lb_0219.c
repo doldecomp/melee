@@ -15,13 +15,13 @@
 
 #include <placeholder.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/objalloc.h>
-#include <dolphin/gx/GXStruct.h>
 
 HSD_ObjAllocData lbl_804336A0;
 

@@ -7,16 +7,16 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/mp/mpcoll.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;

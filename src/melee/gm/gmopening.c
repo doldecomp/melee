@@ -5,17 +5,17 @@
 #include "gmtitle.h"
 
 #include <stdio.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/types.h>
 
 /* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
 /* 3B7D74 */ static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };

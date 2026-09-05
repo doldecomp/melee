@@ -12,8 +12,6 @@
 #include "forward.h"
 
 #include <string.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobjproc.h>
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
@@ -46,6 +44,8 @@
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void)
 {

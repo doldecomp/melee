@@ -8,9 +8,9 @@
 #include <placeholder.h>
 
 #include <string.h>
+#include <dolphin/dvd.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
-#include <dolphin/dvd.h>
 
 static bool cancel;
 

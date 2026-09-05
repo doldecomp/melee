@@ -7,16 +7,16 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
 
 struct grZebesRoute_YakumonoParam {
     int camera_timer;

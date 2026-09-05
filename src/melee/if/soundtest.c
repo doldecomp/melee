@@ -5,17 +5,6 @@
 
 #include <melee/gm/forward.h>
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <sysdolphin/baselib/tobj.h>
 #include <melee/db/db.h>
 #include <melee/db/dbsound.h>
 #include <melee/gm/gm_unsplit.h>
@@ -28,6 +17,17 @@
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>
 #include <melee/ty/toy.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sobjlib.h>
+#include <sysdolphin/baselib/tobj.h>
 
 /* 2FF88C */ static bool un_802FF88C(enum soundtest_callback_arg0);
 /* 2FF934 */ static bool un_802FF934(enum soundtest_callback_arg0);
