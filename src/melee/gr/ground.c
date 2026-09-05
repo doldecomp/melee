@@ -837,6 +837,11 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
         OSReport("%s:%d: couldn t get gobj!\n", __FILE__, 0x522);
         return NULL;
     }
+    /**
+     * @bug #alloc_user_data_ground returns the block uncleared and nothing
+     * below zeroes it, so any field a stage's callbacks read before its
+     * @c on_init writes it sees stale heap contents.
+     */
     gp = alloc_user_data_ground();
     if (gp == NULL) {
         HSD_GObjPLink_80390228(gobj);

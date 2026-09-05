@@ -852,6 +852,11 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 8, 0);
     GObj_SetupGXLink(gobj, &ftDrawCommon_80080E18, 5U, 0U);
+    /**
+     * @bug #HSD_ObjAlloc returns the block uncleared and nothing below zeroes
+     * it, so any field read before the init path writes it sees stale heap
+     * contents. For example, Luigi's @c x222C_cycloneCharge.
+     */
     fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->dat_attrs_backup = HSD_ObjAlloc(&fighter_dat_attrs_alloc_data);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
@@ -1264,7 +1269,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start - anim_speed,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : anim_blend ? anim_blend
+                                        : anim_blend          ? anim_blend
                                                      : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
@@ -1285,7 +1290,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     if (fp->x590 != 0U) {
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : anim_blend ? anim_blend
+                                        : anim_blend          ? anim_blend
                                                      : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
