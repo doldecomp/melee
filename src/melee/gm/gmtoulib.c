@@ -208,6 +208,51 @@ void fn_8018A970(int arg0)
     }
 }
 
+static inline void gmTournament_SetTripleRightCoords(BracketEntry* entry,
+                                                     s32* p3C, s32* p44,
+                                                     s32* p34, s32* p40,
+                                                     s32* p48, s32* p38)
+{
+    s32 val1;
+    s32 val;
+    s32* pX10;
+    s32* pX18;
+
+    val1 = entry->xC + entry->x14;
+    pX10 = &entry->x10;
+    pX18 = &entry->x18;
+    *p3C = val1;
+    *p44 = val1;
+    *p34 = val1;
+    val = *pX10 + *pX18;
+    *p40 = val;
+    *p48 = val;
+    *p38 = val;
+    *p40 = *pX10 + *pX18 - *pX18 / 3;
+}
+
+static inline void gmTournament_SetRegularCoords(s32 entry_idx, s32 slot_idx,
+                                                 u8 x3, BracketData* bracket,
+                                                 s32* p3C, s32* p44, s32* p34,
+                                                 s32* p40, s32* p48, s32* p38)
+{
+    s32 val1;
+    s32 val2;
+
+    val1 = lbl_80473AB8[entry_idx].xC +
+           slot_idx * (lbl_80473AB8[entry_idx].x14 / (s32) x3);
+    *p3C = val1;
+    *p44 = val1;
+    *p34 = val1;
+    val2 = lbl_80473AB8[entry_idx].x10 + lbl_80473AB8[entry_idx].x18 -
+           lbl_80473AB8[entry_idx].x18 * bracket->entries[entry_idx].x2;
+    *p40 = val2;
+    *p48 = val2;
+    *p38 = val2;
+    *p40 = lbl_80473AB8[entry_idx].x10 +
+           lbl_80473AB8[entry_idx].x18 * bracket->entries[entry_idx].x2;
+}
+
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
     u8* px3;
@@ -348,22 +393,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 1: {
-                    xC = entry->xC;
-                    val1 = xC + entry->x14;
-                    pX10 = &entry->x10;
-                    pX18 = &entry->x18;
-                    *p3C = val1;
-                    *p44 = val1;
-                    *p34 = val1;
-                    {
-                        x10 = *pX10;
-                        x18 = *pX18;
-                        val = x10 + x18;
-                        *p40 = val;
-                        *p48 = val;
-                        *p38 = val;
-                    }
-                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    gmTournament_SetTripleRightCoords(entry, p3C, p44, p34,
+                                                      p40, p48, p38);
                     break;
                 }
                 case 2: {
@@ -400,22 +431,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 break;
             }
         } else {
-            xC = lbl_80473AB8[entry_idx].xC;
-            val1 = xC + slot_idx * (lbl_80473AB8[entry_idx].x14 / (s32) x3);
-            pX18 = &lbl_80473AB8[entry_idx].x18;
-            *p3C = val1;
-            *p44 = val1;
-            *p34 = val1;
-            {
-                x10 = lbl_80473AB8[entry_idx].x10;
-                val2 = x10 + *pX18 - *pX18 * bracket->entries[entry_idx].x2;
-                *p40 = val2;
-                *p48 = val2;
-                *p38 = val2;
-            }
-            *p40 = lbl_80473AB8[entry_idx].x10 +
-                   *pX18 * bracket->entries[entry_idx].x2;
-
+            gmTournament_SetRegularCoords(entry_idx, slot_idx, x3, bracket,
+                                          p3C, p44, p34, p40, p48, p38);
             if (*px3 == 1) {
                 tm_x2E = tm->x2E;
                 if (tm_x2E == 6) {
@@ -496,6 +513,12 @@ static inline void fn_8018B090_inline3(BracketEntry* entry)
 {
     fn_80190520((f32) (entry->xC + (entry->x14 / 2)),
                 -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
+}
+
+static inline void gmTournament_GetBracketCenterY(BracketEntry* entry,
+                                                  s32 height, f32* y)
+{
+    *y = -(f32) (entry->x10 + height / 2);
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -830,7 +853,8 @@ void fn_8018B090(HSD_GObj* arg0)
             f32 d;
             lbl_803D9DAC.current.x =
                 (f32) (entries[idx].xC + (entries[idx].x14 / 2));
-            lbl_803D9DAC.current.y = -(f32) ((h / 2) + entries[idx].x10);
+            gmTournament_GetBracketCenterY(&entries[idx], h,
+                                           &lbl_803D9DAC.current.y);
             lbl_803D9DAC.current.z = -150.0f;
             lbl_803D9DAC.target.x = 320.0f;
             lbl_803D9DAC.target.y = -240.0f;
