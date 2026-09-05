@@ -109,7 +109,6 @@ void hsd_803983A4(HSD_Generator* gen)
     }
 }
 
-// @TODO: Currently 96.40% match - lis hoisting and r29/r30 register swap
 void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
                         const u32* ref, const int* formBank)
 {
@@ -623,12 +622,9 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     return 0;
 }
 
-// @TODO: Currently 95.43% match - register allocation differences and
-// remaining PC advance codegen patterns
-void* hsd_8039930C(void* pp_arg, void* prev_arg)
+void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 {
-    HSD_Particle* pp = pp_arg;
-    HSD_Particle* prev = prev_arg;
+    f32 val;
     u8* pc;
     u16 operand;
     u8 opcode;
@@ -637,7 +633,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    UNUSED u8 pad_top[76];
+    UNUSED u8 pad_top[84];
     volatile f32 sqrt_res;
     UNUSED u8 pad_mid[144];
     volatile f32 vel_res;
@@ -1037,10 +1033,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int palflag;
                     HSD_Particle* c;
                     int linkNo;
-                    int bank;
+                    int bank = pp->bank;
 
-                    bank = pp->bank;
-                    (void) bank;
                     idx = pc[0] << 8;
                     idx += pc[1];
                     pc += 2;
@@ -1627,8 +1621,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Aim velocity toward JObj */
                 {
                     HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
-                    f32 dz, dy, dx, dist_sq;
-                    f32 vel_mag_sq;
+                    f32 dz, dy, dist_sq, vel_mag_sq, dx;
 
                     if (jobj == NULL) {
                         break;
@@ -1640,8 +1633,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     dx -= pp->pos.x;
                     dy = jobj->mtx[1][3];
                     dy -= pp->pos.y;
-                    dz = jobj->mtx[2][3];
-                    dz -= pp->pos.z;
+                    dz = jobj->mtx[2][3] - pp->pos.z;
                     if (vel_mag_sq > 0.0F) {
                         double guess = __frsqrte((double) vel_mag_sq);
                         guess =
@@ -1772,10 +1764,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int palflag;
                     HSD_Particle* c;
                     int linkNo;
-                    int bank;
+                    int bank = pp->bank;
 
-                    bank = pp->bank;
-                    (void) bank;
                     idx = pc[0] << 8;
                     idx += pc[1];
                     pc += 2;
@@ -1840,7 +1830,6 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     s32 step;
                     s8 delta;
                     f32 rand_val;
-                    f32 val;
 
                     if (pp->primColCount != 0) {
                         step = ((s32) pp->primColRemain << 16) /
@@ -1869,7 +1858,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->primColTarget.r + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1881,7 +1870,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->primColTarget.g + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1893,7 +1882,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->primColTarget.b + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1905,7 +1894,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->primColTarget.a + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1929,7 +1918,6 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     s32 step;
                     s8 delta;
                     f32 rand_val;
-                    f32 val;
 
                     if (pp->envColCount != 0) {
                         step = ((s32) pp->envColRemain << 16) /
@@ -1958,7 +1946,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->envColTarget.r + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1970,7 +1958,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->envColTarget.g + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1982,7 +1970,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->envColTarget.b + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -1994,7 +1982,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_val = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
+                    rand_val = (f32) (delta << 1) * rand_val;
                     val = (f32) pp->envColTarget.a + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -2267,7 +2255,6 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 rand_g;
                     f32 rand_b;
                     f32 rand_a;
-                    f32 val;
 
                     if (pp->primColCount != 0) {
                         step = ((s32) pp->primColRemain << 16) /
@@ -2321,7 +2308,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     rand_r = HSD_Randf();
 
                     delta = (s8) *pc++;
-                    rand_r *= (f32) (delta * 2);
+                    rand_r = (f32) (delta << 1) * rand_r;
                     val = (f32) pp->primColTarget.r + rand_r;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -2341,7 +2328,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_g = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_g *= (f32) (delta * 2);
+                    rand_g = (f32) (delta << 1) * rand_g;
                     val = (f32) pp->primColTarget.g + rand_g;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -2361,7 +2348,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_b = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_b *= (f32) (delta * 2);
+                    rand_b = (f32) (delta << 1) * rand_b;
                     val = (f32) pp->primColTarget.b + rand_b;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -2381,7 +2368,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     rand_a = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_a *= (f32) (delta * 2);
+                    rand_a = (f32) (delta << 1) * rand_a;
                     val = (f32) pp->primColTarget.a + rand_a;
                     if (val < 0.0F) {
                         val = 0.0F;
@@ -2419,7 +2406,6 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 scale;
                     s8 delta;
                     f32 delta_float;
-                    f32 val;
 
                     /* Interpolate primCol */
                     if (pp->primColCount != 0) {
@@ -2489,7 +2475,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* R channel delta */
                     if (flags & 0x01) {
                         delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta * 2);
+                        delta_float = scale * (f32) (delta << 1);
                         if (flags & 0x10) {
                             val = (f32) pp->primColTarget.r + delta_float;
                             if (val < 0.0F) {
@@ -2515,7 +2501,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* G channel delta */
                     if (flags & 0x02) {
                         delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta * 2);
+                        delta_float = scale * (f32) (delta << 1);
                         if (flags & 0x10) {
                             val = (f32) pp->primColTarget.g + delta_float;
                             if (val < 0.0F) {
@@ -2541,7 +2527,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     /* B channel delta */
                     if (flags & 0x04) {
                         delta = (s8) *pc++;
-                        delta_float = scale * (f32) (delta * 2);
+                        delta_float = scale * (f32) (delta << 1);
                         if (flags & 0x10) {
                             val = (f32) pp->primColTarget.b + delta_float;
                             if (val < 0.0F) {
@@ -2571,7 +2557,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         delta = (s8) *pc++;
                         delta_float =
                             (f32) (s32) ((f32) (timing + 1) * a_rand);
-                        delta_float *= (f32) (delta * 2);
+                        delta_float *= (f32) (delta << 1);
                         delta_float /= (f32) timing;
                         if (flags & 0x10) {
                             val = (f32) pp->primColTarget.a + delta_float;
@@ -2829,7 +2815,6 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 range_val;
                     f32 base_val;
                     int timing;
-                    f32 result;
 
                     {
                         u8* p = pc;
@@ -2857,13 +2842,13 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     if (timing != 0) {
                         s32 randi = (s32) ((f32) (timing + 1) * HSD_Randf());
-                        result =
+                        base_val =
                             base_val + range_val * (f32) randi / (f32) timing;
                     } else {
-                        result = base_val + range_val * HSD_Randf();
+                        base_val = base_val + range_val * HSD_Randf();
                     }
-                    pp->rotateTarget += result;
-                    pp->rotate += result;
+                    pp->rotateTarget += base_val;
+                    pp->rotate += base_val;
                 }
                 break;
 
@@ -2978,7 +2963,8 @@ do_life:
             if ((ang = gp->angle) < particle_zero) {
                 ang = -ang;
             }
-            R = pp->vel.y * (pp->vel.z * tanf(ang) + R);
+            R += pp->vel.z * tanf(ang);
+            R *= pp->vel.y;
         }
         pp->vel.x += gp->grav;
 
@@ -3020,10 +3006,10 @@ do_life:
 
     /* JObj attachment - update JObj position to match particle */
     if (pp->kind & 0x8000) {
-        s32 jobj_idx = (pp->kind >> 12) & 7;
+        s32 jobj_idx;
 
         /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx] == NULL) {
+        if (hsd_804D08E8[jobj_idx = (pp->kind >> 12) & 7] == NULL) {
             HSD_JObj* new_jobj = HSD_JObjAlloc();
             if (new_jobj != NULL) {
                 hsd_8039CF4C(jobj_idx + 1, new_jobj);
