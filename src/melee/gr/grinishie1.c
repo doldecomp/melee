@@ -557,12 +557,15 @@ enum {
     if (countdown > 0) {                                                      \
         countdown--;                                                          \
         if (countdown == 0) {                                                 \
+            s32 zero;                                                         \
             int i = 0;                                                        \
                                                                               \
             do {                                                              \
-                index = HSD_Randi(0x13);                                      \
-                if (index != last_index &&                                    \
-                    vars->u.inishie1.block[index].status == 0)                \
+                s32 result = HSD_Randi(0x13);                                 \
+                /* Keep MWCC's saved index separate from result. */           \
+                index = result | (zero = 0);                                  \
+                if (result != last_index &&                                   \
+                    vars->u.inishie1.block[result].status == 0)               \
                 {                                                             \
                     break;                                                    \
                 }                                                             \
@@ -577,6 +580,11 @@ enum {
             vars->u.inishie1.block[index].x20 = 0;                            \
         }                                                                     \
     }
+
+static inline void grInishie1_ShowBlock(HSD_JObj* jobj)
+{
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+}
 
 static inline void grInishie1_801FB3F0_UpdateY(grInishie1_Block* block)
 {
@@ -643,7 +651,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
     }
 
 #ifdef MUST_MATCH
-    (void) &vars->u.inishie1.block[index];
+    (void) index;
 #endif
     for (index = 0; (u32) index < 0x13; ++index) {
         switch (vars->u.inishie1.block[index].x2) {
@@ -689,8 +697,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
                         HSD_DObjClearFlags(dobj, 1U);
                         dobj = (dobj != NULL) ? dobj->next : NULL;
                     }
-                    HSD_JObjClearFlagsAll(vars->u.inishie1.block[index].jobj2,
-                                          JOBJ_HIDDEN);
+                    grInishie1_ShowBlock(vars->u.inishie1.block[index].jobj2);
                     grMaterial_801C8E08(
                         vars->u.inishie1.block[index].item_gobj);
                     vars->u.inishie1.block[index].x2 = 1;
@@ -841,6 +848,35 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
 
     Ground_801C5414(0x136, 0xBA);
     Camera_80030E44(2, &effect_pos);
+}
+
+static inline s32 get_block_id(s32 block_id)
+{
+    int i = BLOCK_COUNT;
+    s32 idx = 0;
+    while (i != 0) {
+        if (block_id == grI1_803E49B8[idx].idx) {
+            return idx;
+        }
+        idx += 1;
+        i -= 1;
+    }
+    OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F0);
+    while (true) {
+    }
+    return idx;
+}
+
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801FBEB8(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
+{
+    s32 id = get_block_id(joint_id);
+    if (fabsf_inline(delta_y) > 0.7) {
+        HSD_GObj* gobj = Ground_GetMapGObj(3);
+        grInishie1_801FB0AC(gobj, id);
+        grInishie1_801FBCEC(gobj, id);
+    }
 }
 
 static inline Item* GET_ITEM2(Item_GObj* arg0)
@@ -994,35 +1030,6 @@ void grInishie1_801FC110(HSD_GObj* gobj)
         gp->u.inishie1.xEA = 0;
         gp->u.inishie1.xE0 = 0.0f;
         gp->u.inishie1.xE4 = 0.0f;
-    }
-}
-
-static inline s32 get_block_id(s32 block_id)
-{
-    int i = BLOCK_COUNT;
-    s32 idx = 0;
-    while (i != 0) {
-        if (block_id == grI1_803E49B8[idx].idx) {
-            return idx;
-        }
-        idx += 1;
-        i -= 1;
-    }
-    OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F0);
-    while (true) {
-    }
-    return idx;
-}
-
-/// @copydoc mpLib_JointCollisionCallback
-void fn_801FBEB8(void* user_data, int joint_id, CollData* coll, int coll_x50,
-                 mpLib_GroundEnum ground_kind, float delta_y)
-{
-    s32 id = get_block_id(joint_id);
-    if (fabsf_inline(delta_y) > 0.7) {
-        HSD_GObj* gobj = Ground_GetMapGObj(3);
-        grInishie1_801FB0AC(gobj, id);
-        grInishie1_801FBCEC(gobj, id);
     }
 }
 
