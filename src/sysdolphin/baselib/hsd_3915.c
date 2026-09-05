@@ -337,7 +337,6 @@ static inline f32 hsd_80391F28_len(f32 dy, f32 dx)
 
 /// Draws a line from (x1,y1) to (x2,y2) with a tick mark every step; every
 /// fifth tick is drawn longer.
-/// @todo Only the preheader instruction schedule still differs.
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
@@ -345,16 +344,16 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     f32 dy;
     f32 tick4_x;
     f32 dx;
-    f32 x = x1;
-    f32 y = y1;
+    f32 x;
+    f32 y;
     f32 perp_x;
     f32 perp_y;
     f32 tick4_y;
     f32 len;
     s32 i;
 
-    dy = y2 - y;
-    dx = x2 - x;
+    dy = y2 - y1;
+    dx = x2 - x1;
 
     len = hsd_80391F28_len(dy, dx);
     perp_x = -dy / len;
@@ -367,10 +366,13 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     tick4_x = 4.0F * perp_x;
     tick4_y = 4.0F * perp_y;
 
-    GXPosition2f32(x, y);
+    GXPosition2f32(x1, y1);
     GXColor4u8(color->r, color->g, color->b, color->a);
     GXPosition2f32(x2, y2);
     GXColor4u8(color->r, color->g, color->b, color->a);
+
+    x = x1;
+    y = y1;
 
     for (i = 0; (f32) i <= count; i++) {
         GXBegin(0xA8, 0, 2);

@@ -1914,7 +1914,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(Matching, "sysdolphin/baselib/gobj.c"),
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
-            Object(Linkable, "sysdolphin/baselib/hsd_3915.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3915.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3924.c"),
             Object(Matching, "sysdolphin/baselib/hsd_392A.c"),
             Object(Matching, "sysdolphin/baselib/hsd_392C.c"),
