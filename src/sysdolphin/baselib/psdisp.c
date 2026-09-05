@@ -714,8 +714,10 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         }
     }
     if (count != 0) {
+        const GXColor* color;
+
         p = vbuf;
-        c = cbuf;
+        color = cbuf;
         if (pp->kind & DispTexture) {
             setVtxDesc(2);
             GXBegin(GX_LINES, GX_VTXFMT2, count * 2);
@@ -725,17 +727,17 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         }
         for (i = count; i != 0; i--) {
             GXPosition3f32(p[1].x, p[1].y, p[1].z);
-            GXColor4u8(c[1].r, c[1].g, c[1].b, c[1].a);
+            GXColor4u8(color[1].r, color[1].g, color[1].b, color[1].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(0);
             }
             GXPosition3f32(p[0].x, p[0].y, p[0].z);
-            GXColor4u8(c[0].r, c[0].g, c[0].b, c[0].a);
+            GXColor4u8(color[0].r, color[0].g, color[0].b, color[0].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(1);
             }
             p += 2;
-            c += 2;
+            color += 2;
         }
     }
     (void) p;
