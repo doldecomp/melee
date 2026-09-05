@@ -691,7 +691,7 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_DamageIce.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_Guard.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftpickupitem.c"),
-            Object(Linkable, "melee/ft/kinds/ftCommon/ftCo_ItemThrow.c"),
+            Object(Matching, "melee/ft/kinds/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_SpecialS.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_SpecialAir.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_FallSpecial.c"),
