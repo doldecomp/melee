@@ -509,11 +509,6 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline float getItemThrowFsm(float fsm, Fighter* fp)
-{
-    return fsm / fp->frame_speed_mul;
-}
-
 void ftCo_80095EFC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -529,39 +524,34 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
             {
                 u32 cmd_var1 = fp->cmd_vars[1];
                 ftCo_DatAttrs* co_attrs = &fp->co_attrs;
-                float throw_scale = 1;
+                // Aggregate storage preserves MWCC register allocation.
+                struct {
+                    /* +0 */ float value;
+                } scale;
+                scale.value = 1;
                 if (cmd_var1 != 0) {
-                    throw_scale = 0.01f * (cmd_var1 & 0x3FFFFF);
+                    scale.value = 0.01f * (cmd_var1 & 0x3FFFFF);
                     fp->cmd_vars[1] = 0;
                 }
                 {
-                    float fsm = -fp->cmd_timer;
+                    float fsm;
                     ftCo_ItemThrowAttrs* throw_speed_arr;
-                    float velocity_multiplier;
-                    float table_speed;
-                    float base_throw_speed;
                     float throw_speed;
-                    interpolation = fp->mv.co.itemthrow4.x8.x;
-                    fsm = getItemThrowFsm(fsm, fp);
+                    fsm = -fp->cmd_timer / fp->frame_speed_mul;
                     throw_speed_arr = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
-                    velocity_multiplier =
-                        co_attrs->heavy_throw_velocity_multiplier;
-                    table_speed =
+                    scale.value *=
+                        co_attrs->heavy_throw_velocity_multiplier *
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
                             .x8;
-                    base_throw_speed = velocity_multiplier * table_speed;
-                    throw_scale *= base_throw_speed;
-                    throw_speed = throw_scale;
-                    interpolation = fsm * (interpolation - vec0.x) + vec0.x;
+                    throw_speed = scale.value;
+                    interpolation =
+                        fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) + vec0.x;
                     vec2.x = interpolation;
                     interpolation =
                         fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;
                     vec2.y = interpolation;
                     vec2.z = 0;
-                    pl_8003E978(fp->player_id, fp->x221F_b4, fp->item_gobj,
-                                interpolation, base_throw_speed,
-                                velocity_multiplier, throw_speed, vec0.x,
-                                vec0.y, fsm);
+                    pl_8003E978(fp->player_id, fp->x221F_b4, fp->item_gobj);
                     {
                         FtMoveId msid = fp->motion_id;
                         if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
