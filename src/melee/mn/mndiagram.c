@@ -1184,7 +1184,7 @@ static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
 
 static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
                                                         Diagram* data,
-                                                        u16* selection)
+                                                        const u16* selection)
 {
     u16 selected_word;
     u16 cursor_word;
@@ -1221,8 +1221,9 @@ static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
     return result;
 }
 
-static inline u8 mnDiagram_GetVisibleFighterFromPointer(u8* sorted, u8* p,
-                                                        int start, int rank)
+static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
+                                                        u8* p, int start,
+                                                        int rank)
 {
     u8 result;
     u8* p2;
