@@ -2,9 +2,7 @@
 
 #include "ifall.h"
 #include "ifstatus.h"
-
 #include "ifstock.static.h"
-
 #include "types.h"
 
 #include <placeholder.h>

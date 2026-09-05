@@ -2,8 +2,8 @@
 
 #include "inlines.h"
 #include "mnmain.h"
-
 #include "mnstagesel.static.h"
+
 #include <placeholder.h>
 
 #include <melee/gm/gm_unsplit.h>

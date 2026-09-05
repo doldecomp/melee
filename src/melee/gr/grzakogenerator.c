@@ -2,9 +2,7 @@
 
 #include "grlib.h"
 #include "ground.h"
-
 #include "grzakogenerator.static.h"
-
 #include "stage.h"
 #include "types.h"
 

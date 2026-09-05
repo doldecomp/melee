@@ -1,7 +1,6 @@
 #include "grbigblue.h"
 
 #include "grbigblue.static.h"
-
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"

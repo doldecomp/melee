@@ -1,5 +1,4 @@
 #include "lbheap.static.h"
-
 #include "lbmemory.h"
 
 #include <stddef.h> // offsetof

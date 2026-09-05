@@ -1,9 +1,7 @@
 #include "ftyoshispecials.h"
 
 #include "ftyoshi.h"
-
 #include "ftYs_SpecialS.static.h"
-
 #include "types.h"
 
 #include <placeholder.h>

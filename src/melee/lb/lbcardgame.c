@@ -1,9 +1,7 @@
 #include "lbcardgame.h"
 
 #include "lbarchive.h"
-
 #include "lbcardgame.static.h"
-
 #include "lbcardnew.h"
 #include "lblanguage.h"
 

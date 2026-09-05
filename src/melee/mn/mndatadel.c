@@ -1,9 +1,7 @@
 #include "mndatadel.h"
 
 #include "inlines.h"
-
 #include "mndatadel.static.h"
-
 #include "mnmain.h"
 #include "mnmainrule.h"
 

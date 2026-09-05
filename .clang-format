@@ -33,8 +33,6 @@ IncludeCategories:
     Priority: 1
   - Regex: '^<placeholder\.h>$'
     Priority: 1
-  - Regex: '^".*\.static\.h"$'
-    Priority: 1
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: 2
   - Regex: '^<[^/]*>$'

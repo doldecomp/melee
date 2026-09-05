@@ -1,7 +1,6 @@
 #include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
-
 #include "lbsnap.static.h"
 
 #include <melee/it/itspawn.h>

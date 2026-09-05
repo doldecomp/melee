@@ -4,9 +4,7 @@
 #include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-
 #include "gmtoulib.static.h"
-
 #include "types.h"
 
 #include <placeholder.h>

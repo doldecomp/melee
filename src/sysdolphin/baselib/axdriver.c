@@ -1,7 +1,6 @@
 #include "axdriver.h"
 
 #include "axdriver.static.h"
-
 #include "debug.h"
 #include "synth.h"
 

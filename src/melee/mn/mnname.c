@@ -3,9 +3,7 @@
 #include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
-
 #include "mnname.static.h"
-
 #include "mnnamenew.h"
 
 #include <placeholder.h>

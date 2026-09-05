@@ -1,7 +1,6 @@
 #include "gm_1A36.h"
 
 #include "gm_1A36.static.h"
-
 #include "gmscdata.h"
 #include "types.h"
 

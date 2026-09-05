@@ -4,9 +4,7 @@
 #include "forward.h"
 #include "ftdata.h"
 #include "ftmaterial.h"
-
 #include "ftparts.static.h"
-
 #include "inlines.h"
 #include "types.h"
 

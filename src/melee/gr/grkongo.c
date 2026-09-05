@@ -1,9 +1,7 @@
 #include "grkongo.h"
 
 #include "granime.h"
-
 #include "grkongo.static.h"
-
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"

@@ -2,8 +2,8 @@
 
 #include "debug.h"
 #include "devcom.h"
-
 #include "synth.static.h"
+
 #include <placeholder.h>
 
 #include <math.h> // IWYU pragma: keep

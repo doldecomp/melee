@@ -1,9 +1,7 @@
 #include "devcom.h"
 
 #include "debug.h"
-
 #include "devcom.static.h"
-
 #include "synth.h"
 
 bool HSD_DevComIsBusy(int idx)

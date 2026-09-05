@@ -1,9 +1,7 @@
 #include "mninfobonus.h"
 
 #include "inlines.h"
-
 #include "mninfobonus.static.h"
-
 #include "mnmain.h"
 
 #include <melee/sc/forward.h>

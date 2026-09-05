@@ -22,9 +22,7 @@ typedef struct {
 #include "cobj.h"
 #include "gobjobject.h"
 #include "mtx.h"
-
 #include "particle.static.h"
-
 #include "psappsrt.h"
 #include "psstructs.h"
 #include "random.h"

@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 #include "itlinkhookshot.h"
-
 #include "itseakchain.static.h"
 
 #include <melee/ft/kinds/ftSeak/forward.h>

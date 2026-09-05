@@ -1,9 +1,7 @@
 #include "cobj.h"
 #include "gobjobject.h"
 #include "sislib.h"
-
 #include "sislib.static.h"
-
 #include "sislib_font.h"
 #include "wobj.h"
 

@@ -1,7 +1,6 @@
 #include "ftkirby.h"
 
 #include "ftKb_Init.static.h"
-
 #include "ftkirbyattackdash.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialgamewatch.h"

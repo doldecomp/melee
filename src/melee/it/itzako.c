@@ -9,7 +9,6 @@
 #include "itmaterial.h"
 
 #include "kinds/itcoin.h"
-#include "kinds/itheiho.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
