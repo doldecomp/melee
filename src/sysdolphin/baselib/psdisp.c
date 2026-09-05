@@ -774,12 +774,9 @@ static inline void psSetCurrentMtx(GXPosNrmMtx idx)
 
 static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                                         f32 y, f32 z, f32 x0, f32 y0, f32 z0,
-                                        f32 x1, f32 y1, f32 z1)
+                                        f32 x1, f32 y1, f32 z1, GXColor* color,
+                                        f32* prev_x, f32* prev_y, f32* prev_z)
 {
-    GXColor color;
-    f32 prev_x;
-    f32 prev_y;
-    f32 prev_z;
     Vec2 right;
     f32 right_z;
     Vec2 up;
@@ -796,13 +793,13 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     psSetCurrentMtx(GX_PNMTX0);
     if (pp->kind & Trail) {
         if (pp->kind & Tornado) {
-            calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
+            calcTornadoLastPos(pp, prev_x, prev_y, prev_z);
         } else {
-            prev_x = x - pp->vel.x;
-            prev_y = y - pp->vel.y;
-            prev_z = z - pp->vel.z;
+            *prev_x = x - pp->vel.x;
+            *prev_y = y - pp->vel.y;
+            *prev_z = z - pp->vel.z;
         }
-        getClrTrail(pp, &color);
+        getClrTrail(pp, color);
         if (it == NULL) {
             if (pp->kind & DispTexture) {
                 setVtxDesc(2);
@@ -811,13 +808,13 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4);
             }
-            GXPosition3f32(prev_x - right.x, prev_y - right.y,
-                           prev_z - right_z);
+            GXPosition3f32((*prev_x) - right.x, (*prev_y) - right.y,
+                           (*prev_z) - right_z);
             {
-                u8 a = color.a;
-                u8 b = color.b;
-                u8 g = color.g;
-                u16 r = color.r;
+                u8 a = color->a;
+                u8 b = color->b;
+                u8 g = color->g;
+                u16 r = color->r;
                 GXColor4u8(r, g, b, (u8) ((f32) a * pp->trail));
             }
             if (pp->kind & DispTexture) {
@@ -827,10 +824,10 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
             GXPosition3f32(x - up.x, y - up.y, z - up_z);
             {
-                u8 a = color.a;
-                u8 b = color.b;
-                u8 g = color.g;
-                u16 r = color.r;
+                u8 a = color->a;
+                u8 b = color->b;
+                u8 g = color->g;
+                u16 r = color->r;
                 GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
@@ -838,22 +835,23 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
             GXPosition3f32(x + right.x, y + right.y, z + right_z);
             {
-                u8 a = color.a;
-                u8 b = color.b;
-                u8 g = color.g;
-                u16 r = color.r;
+                u8 a = color->a;
+                u8 b = color->b;
+                u8 g = color->g;
+                u16 r = color->r;
                 GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
-            GXPosition3f32(prev_x + up.x, prev_y + up.y, prev_z + up_z);
+            GXPosition3f32((*prev_x) + up.x, (*prev_y) + up.y,
+                           (*prev_z) + up_z);
             {
-                u8 a = color.a;
+                u8 a = color->a;
                 f32 alpha = (f32) a * pp->trail;
-                u8 b = color.b;
-                u8 g = color.g;
-                u16 r = color.r;
+                u8 b = color->b;
+                u8 g = color->g;
+                u16 r = color->r;
                 GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
@@ -864,9 +862,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             f32 up_len = sqrtf(up.x * up.x + up.y * up.y + up_z * up_z);
 
             if (up_len != 0.0f) {
-                f32 dz = z - prev_z;
-                f32 dx = x - prev_x;
-                f32 dy = y - prev_y;
+                f32 dz = z - (*prev_z);
+                f32 dx = x - (*prev_x);
+                f32 dy = y - (*prev_y);
                 f32 xl = dx * dx;
                 f32 yl = dy * dy;
                 f32 zl = dz * dz;
@@ -919,7 +917,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         GXWGFifo.f32 = up.x * tx + (right.x * sx + x);
                         GXWGFifo.f32 = up.y * tx + (right.y * sx + y);
                         GXWGFifo.f32 = up_z * tx + (right_z * sx + z);
-                        GXColor4u8(color.r, color.g, color.b, alpha);
+                        GXColor4u8(color->r, color->g, color->b, alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
                             GXWGFifo.f32 = t;
@@ -1001,10 +999,42 @@ static inline void psMaskAbsF32(f32* value)
     *(s32*) value &= 0x7FFFFFFF;
 }
 
+/* AppSRT tests its magnitudes through these: the compare temp then belongs
+ * to this expansion (one inline level below the caller), which is where the
+ * retail frame keeps it. */
+static inline bool psMaskAbsLtF32(f32 value, f32 limit)
+{
+    psMaskAbsF32(&value);
+    return value < limit;
+}
+
+static inline bool psMaskAbsGtF32(f32 value, f64 limit)
+{
+    psMaskAbsF32(&value);
+    return value > limit;
+}
+
+/* psDispSub tests its magnitudes through the value helper instead: the retail
+ * frame keeps those compare temps one inline level deeper than AppSRT's, after
+ * psDispSubMakePolygon's own locals. */
+static inline f32 psAbsF32(f32 value)
+{
+    *(s32*) &value &= 0x7FFFFFFF;
+    return value;
+}
+
+static inline bool psAbsLtF32(f32 value, f32 limit)
+{
+    return psAbsF32(value) < limit;
+}
+
+static inline bool psAbsGtF32(f32 value, f64 limit)
+{
+    return psAbsF32(value) > limit;
+}
+
 static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
-    f32 abs_angle;
-    f32 abs_y;
     f32 right_y;
     f32 right_x;
     f32 right_z;
@@ -1046,8 +1076,6 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w0inv;
             f32 w1;
             f32 w1inv;
-            f32 prev_y_terms;
-            f32 prev_x_sum;
             f32 pv13;
             f32 pv03;
 
@@ -1071,23 +1099,24 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_y_terms = pvmtx[1][1] * prev_y;
-            prev_x_sum = prev_x * pvmtx[0][0] + pvmtx[0][1] * prev_y;
             pv03 = pvmtx[0][3];
             pv13 = pvmtx[1][3];
             x = w0inv * (pv03 + (pvmtx[0][2] * pp->pos.z +
                                  (pvmtx[0][0] * pp->pos.x +
                                   pvmtx[0][1] * pp->pos.y))) -
-                w1inv * (pv03 + (pvmtx[0][2] * prev_z + prev_x_sum));
+                w1inv *
+                    (pv03 + (pvmtx[0][2] * prev_z +
+                             (prev_x * pvmtx[0][0] + pvmtx[0][1] * prev_y)));
             y = w0inv * (pv13 + (pp->pos.z * pvmtx[1][2] +
                                  (pvmtx[1][0] * pp->pos.x +
                                   pp->pos.y * pvmtx[1][1]))) -
-                w1inv * (pv13 + (prev_z * pvmtx[1][2] +
-                                 (prev_x * pvmtx[1][0] + prev_y_terms)));
+                w1inv *
+                    (pv13 + (prev_z * pvmtx[1][2] +
+                             (prev_x * pvmtx[1][0] + pvmtx[1][1] * prev_y)));
         } else if (pp->kind & Tornado) {
-            f32 prev_z;
             f32 prev_x;
             f32 prev_y;
+            f32 prev_z;
             f32 dx;
             f32 dy;
             f32 dz;
@@ -1104,14 +1133,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             y = pvmtx[1][2] * pp->vel.z +
                 (pvmtx[1][0] * pp->vel.x + pvmtx[1][1] * pp->vel.y);
         }
-        {
-            abs_y = y;
-            psMaskAbsF32(&abs_y);
-            if (abs_y < FLT_MIN) {
-                angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
-            } else {
-                angle = atan2f(x, y);
-            }
+        if (psAbsLtF32(y, FLT_MIN)) {
+            angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
+        } else {
+            angle = atan2f(x, y);
         }
         if (pp->kind & DirVec) {
             angle += pp->rotate;
@@ -1119,9 +1144,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     } else {
         angle = pp->rotate;
     }
-    abs_angle = angle;
-    psMaskAbsF32(&abs_angle);
-    if (abs_angle > 0.01) {
+    if (psAbsGtF32(angle, 0.01)) {
         Mtx mtx;
         Vec3 axis;
 
@@ -1152,8 +1175,16 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up_y = mtx[1][2] * uz + (mtx[1][0] * ux + mtx[1][1] * uy);
         up_z = mtx[2][2] * uz + (mtx[2][0] * ux + mtx[2][1] * uy);
     }
-    psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z, up_x,
-                         up_y, up_z);
+    {
+        GXColor color;
+        f32 prev_x;
+        f32 prev_y;
+        f32 prev_z;
+
+        psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z,
+                             up_x, up_y, up_z, &color, &prev_x, &prev_y,
+                             &prev_z);
+    }
 }
 
 static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
@@ -1174,58 +1205,6 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
  * point path stamps @c frameNum unconditionally under its own NULL guard, the
  * polygon path only inside the changed-frame block. Both branches fold away.
  */
-static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
-                                  Mtx scratch_mtx, Vec3* scratch_scale)
-{
-    if (pp->appsrt->frameNum != psFrameNum) {
-        f32 scale_x;
-        f32 scale_y;
-
-        if (pp->appsrt->status != PS_APPSTATUS_STILL) {
-            HSD_psAppSRT* appsrt = pp->appsrt;
-            Vec3* translate = &appsrt->translate;
-            Vec3* rotate = (Vec3*) &appsrt->rot;
-            Vec3* scale = &appsrt->scale;
-            MtxPtr mmtx = appsrt->mmtx;
-
-            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
-        }
-        if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
-            pp->appsrt->status = PS_APPSTATUS_STILL;
-        }
-        PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
-        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                  pp->appsrt->x74 * pp->appsrt->x74 +
-                  pp->appsrt->x84 * pp->appsrt->x84;
-        scale_x = sqrtf(scale_x);
-        pp->appsrt->x94 = scale_x;
-        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                  pp->appsrt->x78 * pp->appsrt->x78 +
-                  pp->appsrt->x88 * pp->appsrt->x88;
-        scale_y = sqrtf(scale_y);
-        pp->appsrt->x98 = scale_y;
-        if (pp->appsrt->xA2 != 0) {
-            PSMTXIdentity(scratch_mtx);
-            scratch_mtx[0][3] = pp->appsrt->translate.x;
-            scratch_mtx[1][3] = pp->appsrt->translate.y;
-            scratch_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(vmtx, scratch_mtx, scratch_mtx);
-            HSD_MtxGetScale(scratch_mtx, scratch_scale);
-            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scratch_scale->x,
-                       scratch_scale->y, scratch_scale->z);
-            pp->appsrt->x70 = scratch_mtx[0][3];
-            pp->appsrt->x80 = scratch_mtx[1][3];
-            pp->appsrt->x90 = scratch_mtx[2][3];
-        }
-        if (!always_stamp) {
-            pp->appsrt->frameNum = psFrameNum;
-        }
-    }
-    if (always_stamp) {
-        pp->appsrt->frameNum = psFrameNum;
-    }
-}
-
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     Mtx scratch_mtx;
@@ -1240,7 +1219,54 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
     psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
-        psUpdateAppSRT(pp, true, scratch_mtx, &scratch_scale);
+        {
+            if (pp->appsrt->frameNum != psFrameNum) {
+                f32 scale_x;
+                f32 scale_y;
+
+                if (pp->appsrt->status != PS_APPSTATUS_STILL) {
+                    Vec3* translate = &pp->appsrt->translate;
+                    Vec3* rotate = (Vec3*) &pp->appsrt->rot;
+                    Vec3* scale = &pp->appsrt->scale;
+                    MtxPtr mmtx = pp->appsrt->mmtx;
+
+                    HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+                }
+                if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
+                    pp->appsrt->status = PS_APPSTATUS_STILL;
+                }
+                PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
+                scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
+                          pp->appsrt->x74 * pp->appsrt->x74 +
+                          pp->appsrt->x84 * pp->appsrt->x84;
+                scale_x = sqrtf(scale_x);
+                pp->appsrt->x94 = scale_x;
+                scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
+                          pp->appsrt->x78 * pp->appsrt->x78 +
+                          pp->appsrt->x88 * pp->appsrt->x88;
+                scale_y = sqrtf(scale_y);
+                pp->appsrt->x98 = scale_y;
+                if (pp->appsrt->xA2 != 0) {
+                    PSMTXIdentity(scratch_mtx);
+                    scratch_mtx[0][3] = pp->appsrt->translate.x;
+                    scratch_mtx[1][3] = pp->appsrt->translate.y;
+                    scratch_mtx[2][3] = pp->appsrt->translate.z;
+                    PSMTXConcat(vmtx, scratch_mtx, scratch_mtx);
+                    HSD_MtxGetScale(scratch_mtx, (&scratch_scale));
+                    PSMTXScale((MtxPtr) &pp->appsrt->ssx, (&scratch_scale)->x,
+                               (&scratch_scale)->y, (&scratch_scale)->z);
+                    pp->appsrt->x70 = scratch_mtx[0][3];
+                    pp->appsrt->x80 = scratch_mtx[1][3];
+                    pp->appsrt->x90 = scratch_mtx[2][3];
+                }
+                if (!true) {
+                    pp->appsrt->frameNum = psFrameNum;
+                }
+            }
+            if (true) {
+                pp->appsrt->frameNum = psFrameNum;
+            }
+        }
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
@@ -1338,12 +1364,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 {
-    f32 abs_angle;
-    f32 abs_v;
     Mtx draw_mtx;
     Vec3 cur_pos;
     Vec3 scratch_scale;
-    Vec3 prev_pos;
     f32 x_extent;
     f32 y_extent;
     f32 ax;
@@ -1352,8 +1375,58 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     f32 by;
     f32 angle;
     u8* it = texform;
+    f32 prev_pos_x;
+    f32 prev_pos_y;
+    f32 prev_pos_z;
 
-    psUpdateAppSRT(pp, false, draw_mtx, &scratch_scale);
+    {
+        if (pp->appsrt->frameNum != psFrameNum) {
+            f32 scale_x;
+            f32 scale_y;
+
+            if (pp->appsrt->status != PS_APPSTATUS_STILL) {
+                Vec3* translate = &pp->appsrt->translate;
+                Vec3* rotate = (Vec3*) &pp->appsrt->rot;
+                Vec3* scale = &pp->appsrt->scale;
+                MtxPtr mmtx = pp->appsrt->mmtx;
+
+                HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+            }
+            if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
+                pp->appsrt->status = PS_APPSTATUS_STILL;
+            }
+            PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
+            scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
+                      pp->appsrt->x74 * pp->appsrt->x74 +
+                      pp->appsrt->x84 * pp->appsrt->x84;
+            scale_x = sqrtf(scale_x);
+            pp->appsrt->x94 = scale_x;
+            scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
+                      pp->appsrt->x78 * pp->appsrt->x78 +
+                      pp->appsrt->x88 * pp->appsrt->x88;
+            scale_y = sqrtf(scale_y);
+            pp->appsrt->x98 = scale_y;
+            if (pp->appsrt->xA2 != 0) {
+                PSMTXIdentity(draw_mtx);
+                draw_mtx[0][3] = pp->appsrt->translate.x;
+                draw_mtx[1][3] = pp->appsrt->translate.y;
+                draw_mtx[2][3] = pp->appsrt->translate.z;
+                PSMTXConcat(vmtx, draw_mtx, draw_mtx);
+                HSD_MtxGetScale(draw_mtx, (&scratch_scale));
+                PSMTXScale((MtxPtr) &pp->appsrt->ssx, (&scratch_scale)->x,
+                           (&scratch_scale)->y, (&scratch_scale)->z);
+                pp->appsrt->x70 = draw_mtx[0][3];
+                pp->appsrt->x80 = draw_mtx[1][3];
+                pp->appsrt->x90 = draw_mtx[2][3];
+            }
+            if (!false) {
+                pp->appsrt->frameNum = psFrameNum;
+            }
+        }
+        if (false) {
+            pp->appsrt->frameNum = psFrameNum;
+        }
+    }
     {
         f32 app_cur_x;
         f32 app_cur_y;
@@ -1380,13 +1453,13 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 z;
 
             calcTornadoLastPos(pp, &x, &y, &z);
-            prev_pos.x =
+            prev_pos_x =
                 draw_mtx[0][3] + (draw_mtx[0][2] * z +
                                   (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
-            prev_pos.y =
+            prev_pos_y =
                 draw_mtx[1][3] + (draw_mtx[1][2] * z +
                                   (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
-            prev_pos.z =
+            prev_pos_z =
                 draw_mtx[2][3] + (draw_mtx[2][2] * z +
                                   (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
         } else {
@@ -1394,13 +1467,13 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 dx = pp->pos.x - pp->vel.x;
             f32 dy = pp->pos.y - pp->vel.y;
 
-            prev_pos.x =
+            prev_pos_x =
                 draw_mtx[0][3] + (draw_mtx[0][2] * dz +
                                   (draw_mtx[0][0] * dx + draw_mtx[0][1] * dy));
-            prev_pos.y =
+            prev_pos_y =
                 draw_mtx[1][3] + (draw_mtx[1][2] * dz +
                                   (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
-            prev_pos.z =
+            prev_pos_z =
                 draw_mtx[2][3] + (draw_mtx[2][2] * dz +
                                   (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
         }
@@ -1421,6 +1494,20 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1;
         f32 vf2;
+        /* The retail frame reserves twelve float slots here, matching one
+         * unused copy of each AppSRT matrix element. */
+        UNUSED f32 m00 = pp->appsrt->ssx;
+        UNUSED f32 m01 = pp->appsrt->ssy;
+        UNUSED f32 m02 = pp->appsrt->x6C;
+        UNUSED f32 m03 = pp->appsrt->x70;
+        UNUSED f32 m10 = pp->appsrt->x74;
+        UNUSED f32 m11 = pp->appsrt->x78;
+        UNUSED f32 m12 = pp->appsrt->x7C;
+        UNUSED f32 m13 = pp->appsrt->x80;
+        UNUSED f32 m20 = pp->appsrt->x84;
+        UNUSED f32 m21 = pp->appsrt->x88;
+        UNUSED f32 m22 = pp->appsrt->x8C;
+        UNUSED f32 m23 = pp->appsrt->x90;
         if (0.0f == prj[0]) {
             f32 prev_x;
             f32 prev_y;
@@ -1429,10 +1516,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 w1;
             f32 w0inv;
             f32 w1inv;
-            f32 x0;
-            f32 x1;
-            f32 y0;
-            f32 y1;
             f32 f11;
             f32 f8;
             f32 f12;
@@ -1471,13 +1554,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            x0 = f20 +
-                 (f16 * pp->pos.z + (s808 * pp->pos.x + s804 * pp->pos.y));
-            x1 = f20 + (f16 * prev_z + (s808 * prev_x + s804 * prev_y));
-            y0 = f13 + (f11 * pp->pos.z + (f12 * pp->pos.x + f8 * pp->pos.y));
-            y1 = f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y));
-            vf1 = w0inv * x0 - w1inv * x1;
-            vf2 = w0inv * y0 - w1inv * y1;
+            vf1 = w0inv * (f20 + (f16 * pp->pos.z +
+                                  (s808 * pp->pos.x + s804 * pp->pos.y))) -
+                  w1inv *
+                      (f20 + (f16 * prev_z + (s808 * prev_x + s804 * prev_y)));
+            vf2 =
+                w0inv * (f13 + (f11 * pp->pos.z +
+                                (f12 * pp->pos.x + f8 * pp->pos.y))) -
+                w1inv * (f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y)));
         } else {
             f32 f17;
             f32 f18;
@@ -1520,14 +1604,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 vf2 = f20 * vz + (f17 * vx + f18 * vy);
             }
         }
-        {
-            abs_v = vf2;
-            psMaskAbsF32(&abs_v);
-            if (abs_v < FLT_MIN) {
-                angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
-            } else {
-                angle = atan2f(-vf1, vf2);
-            }
+        if (psMaskAbsLtF32(vf2, FLT_MIN)) {
+            angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
+        } else {
+            angle = atan2f(-vf1, vf2);
         }
         if (pp->kind & DirVec) {
             angle += pp->rotate;
@@ -1535,9 +1615,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     } else {
         angle = pp->rotate;
     }
-    abs_angle = angle;
-    psMaskAbsF32(&abs_angle);
-    if (abs_angle > 0.01) {
+    if (psMaskAbsGtF32(angle, 0.01)) {
         f32 c = cosf(angle);
         f32 s = sinf(angle);
         f32 old_bx;
@@ -1556,6 +1634,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
      * @c GXPosition3f32: the inline's argument evaluation forces an extra
      * live FP register here and grows the frame past the target. */
     if (pp->kind & Trail) {
+        f32 xl;
+        f32 yl;
+        f32 zl;
         GXColor draw_color;
 
         getClrTrail(pp, &draw_color);
@@ -1567,52 +1648,29 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
             }
-            GXPosition3f32(-ax + prev_pos.x, -ay + prev_pos.y, prev_pos.z);
-            {
-                f32 alpha = (f32) draw_color.a * pp->trail;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXPosition3f32(-ax + prev_pos_x, -ay + prev_pos_y, prev_pos_z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                       (u8) ((f32) draw_color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
             }
             GXWGFifo.f32 = -bx + cur_pos.x;
             GXWGFifo.f32 = -by + cur_pos.y;
             GXWGFifo.f32 = cur_pos.z;
-            {
-                u8 a = draw_color.a;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
             }
             GXWGFifo.f32 = ax + cur_pos.x;
             GXWGFifo.f32 = ay + cur_pos.y;
             GXWGFifo.f32 = cur_pos.z;
-            {
-                u8 a = draw_color.a;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
-            GXPosition3f32(bx + prev_pos.x, by + prev_pos.y, prev_pos.z);
-            {
-                u8 a = draw_color.a;
-                f32 alpha = (f32) a * pp->trail;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXPosition3f32(bx + prev_pos_x, by + prev_pos_y, prev_pos_z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                       (u8) ((f32) draw_color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
             }
@@ -1621,17 +1679,19 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 axis_len = sqrtf(bx * bx + by * by);
 
             if (axis_len != 0.0f) {
-                f32 dx = cur_pos.x - prev_pos.x;
-                f32 dy = cur_pos.y - prev_pos.y;
-                f32 dz = cur_pos.z - prev_pos.z;
-                f32 xl = dx * dx;
-                f32 yl = dy * dy;
-                f32 zl = dz * dz;
-                f32 ratio = sqrtf(zl + (xl + yl)) / axis_len;
-                u32 primitive_count = *(u32*) it;
+                f32 dx = cur_pos.x - prev_pos_x;
+                f32 dy = cur_pos.y - prev_pos_y;
+                f32 dz = cur_pos.z - prev_pos_z;
+                u32 primitive_count;
 
-                bx *= ratio;
-                by *= ratio;
+                xl = dx * dx;
+                yl = dy * dy;
+                zl = dz * dz;
+                axis_len = sqrtf(zl + (xl + yl)) / axis_len;
+                primitive_count = *(u32*) it;
+
+                bx *= axis_len;
+                by *= axis_len;
                 it += sizeof(u32);
                 for (; primitive_count != 0; primitive_count--) {
                     GXPrimitive primitive = it[0];
