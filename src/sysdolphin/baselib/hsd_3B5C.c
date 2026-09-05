@@ -522,13 +522,12 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     s32 group_chroma;
     s32 luma_groups;
     struct {
-        s32* luma;
         u8 red;
         u8 green;
         u8 blue;
     } pixel;
+    s32* luma_base;
     PAD_STACK(24);
-    pixel.red = 0;
     base = hsd_804D2E70;
     luma_block = (u8*) ((JpegState*) base)->work.luma;
     for (bias_block = 0; bias_block < 4; bias_block++) {
@@ -562,10 +561,10 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                 for (tile_x = 0; tile_x < 4; tile_x++) {
                     chroma_row = tile_x >> 1;
                     chroma_row += chroma_x_base + ((tile_y & 2) * 4);
-                    pixel.luma =
+                    luma_base =
                         &((JpegWorkData*) &base[0x118])->luma[luma_offset / 4];
                     for (block = 0; block < 4; block++) {
-                        luminance = *pixel.luma;
+                        luminance = luma_base[block * 64];
                         {
                             chroma_column = (block % 2) * 4;
                             chroma = base + ((chroma_row + ((block / 2) << 5) +
@@ -590,7 +589,6 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                         out[out_offset] = ((pixel.red << 8) & 0xF800) |
                                           ((pixel.green << 3) & 0x7E0) |
                                           (pixel.blue >> 3U);
-                        pixel.luma += 0x40;
                     }
                     out += 1;
                     luma_offset += 4;
