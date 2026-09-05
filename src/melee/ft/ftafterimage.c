@@ -84,16 +84,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     f32 cumDist[3];
     AfterimageVtx vtx_buf[152];
     f32 d2;
-    f32* distPtr;
+    s32 distIdx;
 
     if (arg1 != 2) {
         return;
     }
 
-    {
-        void* fighter = gobj->user_data;
-        fp = fighter;
-    }
+    fp = GET_FIGHTER(gobj);
 
     if (fp->x2100 <= 1) {
         return;
@@ -128,7 +125,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         f32* dp;
         Vec3 prevPos, delta, crossProd, tempDir;
 
-        PAD_STACK(0x14);
+        PAD_STACK(0xC);
 
         {
             s32 idx = fp->x2101_bits_0to6;
@@ -207,7 +204,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             interpFactor = 1.0f;
             remaining = fp->x2100 - 1;
             outerDiff = x20FC - blendedOuter;
-            distPtr = &cumDist[0];
+            distIdx = 0;
 
             for (; remaining >= 0; remaining--) {
                 f32 outerScale, innerScale;
@@ -219,7 +216,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
-                distPtr++;
+                distIdx++;
 
                 alpha = (s32) (interpFactor * (f32) (params->x8 - params->x9) +
                                (f32) params->x9);
@@ -260,7 +257,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                             lbVector_Angle(&curEntry->xC, &nextEntry->xC);
                         f32 subdivAngle = angle / AFTERIMAGE_ANGLE_STEP;
                         numSubdiv = (s32) subdivAngle;
-                        interpFactor = 1.0f - (*distPtr / totalDist);
+                        interpFactor = 1.0f - (cumDist[distIdx] / totalDist);
 
                         if (numSubdiv) {
                             f32 frac;
@@ -271,22 +268,16 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                             f32 interpInner2, interpOuter2;
                             s32 alphaStep;
 
-                            tempDir = curEntry->xC;
-
                             frac = 1.0f / (f32) (numSubdiv + 1);
 
+                            angle *= frac;
+                            tempDir = curEntry->xC;
                             interpInner2 =
                                 frac *
                                 ((interpFactor * innerDiff + blendedInner) -
                                  innerScale);
-                            interpOuter2 =
-                                frac *
-                                ((interpFactor * outerDiff + blendedOuter) -
-                                 outerScale);
-
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
-                            (void) basePosY;
                             basePosZ = curEntry->x0.z;
 
                             stepPosX = frac * (nextEntry->x0.x - basePosX);
@@ -300,8 +291,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                          (f32) params->x9) -
                                         (f32) alpha));
 
+                            interpOuter2 =
+                                frac *
+                                ((interpFactor * outerDiff + blendedOuter) -
+                                 outerScale);
+
                             for (j = 0; j < numSubdiv; j++) {
-                                cumAngle += frac * angle;
+                                cumAngle += angle;
                                 basePosX += stepPosX;
                                 basePosY += stepPosY;
                                 basePosZ += stepPosZ;
@@ -342,10 +338,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0);
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
-            {
-                HSD_CObj* cobj = HSD_CObjGetCurrent();
-                GXLoadPosMtxImm(HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
-            }
+            GXLoadPosMtxImm(
+                HSD_CObjGetViewingMtxPtrDirect(HSD_CObjGetCurrent()), 0);
             GXSetCurrentMtx(0);
             GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, numVerts + 1);
 
@@ -383,10 +377,10 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
 {
     Fighter* fp;
     HSD_JObj* jobj;
-    struct Fighter_x20B0_t* temp_r30;
-    int var_r29;
-    struct SwordAttrs* var_r5;
-    int var_r0;
+    struct Fighter_x20B0_t* entry;
+    int axis;
+    struct SwordAttrs* attrs;
+    int nextIndex;
     PAD_STACK(0x8);
 
     fp = GET_FIGHTER(gobj);
@@ -394,7 +388,7 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
         return;
     }
 
-    temp_r30 = &fp->x20B0[fp->x2101_bits_0to6];
+    entry = &fp->x20B0[fp->x2101_bits_0to6];
     if (fp->x2101_bits_8) {
         if (fp->item_gobj == NULL) {
             fp->x2100 = -1;
@@ -403,7 +397,7 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
         switch (itGetKind(fp->item_gobj)) {
         case It_Kind_Sword:
             it_802852B8(fp->item_gobj, &fp->x20F8, &fp->x20FC);
-            var_r29 = 1;
+            axis = 1;
             break;
         default:
             HSD_ASSERTREPORT(365, 0, "no afterimage item!\n");
@@ -434,33 +428,33 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
         case FTKIND_LINK:
         case FTKIND_CLINK: {
             ftLk_DatAttrs* da = fp->dat_attrs;
-            var_r5 = &da->x64;
+            attrs = &da->x64;
             break;
         }
         case FTKIND_MARS:
         case FTKIND_EMBLEM: {
             MarsAttributes* da = fp->dat_attrs;
-            var_r5 = &da->x78;
+            attrs = &da->x78;
             break;
         }
         default:
             break;
         }
-        var_r29 = 0;
-        fp->x20F8 = var_r5->x18;
-        fp->x20FC = var_r5->x1C;
-        jobj = fp->parts[var_r5->x14].joint;
+        axis = 0;
+        fp->x20F8 = attrs->x18;
+        fp->x20FC = attrs->x1C;
+        jobj = fp->parts[attrs->x14].joint;
     }
-    lb_8000B1CC(jobj, NULL, &temp_r30->x0);
-    temp_r30->xC.x = jobj->mtx[0][var_r29];
-    temp_r30->xC.y = jobj->mtx[1][var_r29];
-    temp_r30->xC.z = jobj->mtx[2][var_r29];
+    lb_8000B1CC(jobj, NULL, &entry->x0);
+    entry->xC.x = jobj->mtx[0][axis];
+    entry->xC.y = jobj->mtx[1][axis];
+    entry->xC.z = jobj->mtx[2][axis];
     if (fp->x2101_bits_0to6 == 2) {
-        var_r0 = 0;
+        nextIndex = 0;
     } else {
-        var_r0 = fp->x2101_bits_0to6 + 1;
+        nextIndex = fp->x2101_bits_0to6 + 1;
     }
-    fp->x2101_bits_0to6 = var_r0;
+    fp->x2101_bits_0to6 = nextIndex;
     if (fp->x2100 < 3) {
         fp->x2100++;
     }
