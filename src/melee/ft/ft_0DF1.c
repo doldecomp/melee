@@ -1,5 +1,7 @@
 #include "ft_0DF1.h"
 
+#include <Runtime/platform.h>
+
 #include <stdbool.h>
 
 #include "fighter.h"
@@ -8,7 +10,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <melee/gm/gm_unsplit.h>
-#include <Runtime/platform.h>
 
 bool ftCo_800DF1C8(Fighter* fp)
 {

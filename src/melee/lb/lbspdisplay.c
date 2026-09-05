@@ -1,9 +1,10 @@
 #include "lbspdisplay.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
 #include <stdarg.h>
 #include <stddef.h>
 
@@ -17,7 +18,6 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GXVert.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>

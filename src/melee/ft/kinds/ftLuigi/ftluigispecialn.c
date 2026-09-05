@@ -1,5 +1,7 @@
 #include "ftluigispecialn.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
@@ -18,7 +20,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itluigifireball.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 /// 0x8014267C
 /// https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Motion State

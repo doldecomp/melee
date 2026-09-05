@@ -1,11 +1,12 @@
 #include "itstarrodstar.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
@@ -15,7 +16,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6530[] = { { 0, itStarrodstar_UnkMotion0_Anim,

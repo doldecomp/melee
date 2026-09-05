@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_GENERATOR_H
 #define SYSDOLPHIN_GENERATOR_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/objalloc.h>
 

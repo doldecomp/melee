@@ -1,11 +1,12 @@
 #include "toy.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/if/forward.h>
 
 #include <m2c_macros.h>
 #include <math.h>
+#include <placeholder.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -33,7 +34,6 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

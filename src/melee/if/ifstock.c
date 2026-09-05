@@ -1,9 +1,9 @@
 #include "ifstock.h"
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
+
+#include <placeholder.h>
 
 #include "ifall.h"
 #include "ifstatus.h"

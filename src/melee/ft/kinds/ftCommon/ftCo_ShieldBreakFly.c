@@ -1,5 +1,7 @@
 #include "ftCo_ShieldBreakFly.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -15,7 +17,6 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_80098B20(Fighter_GObj* gobj)
 {

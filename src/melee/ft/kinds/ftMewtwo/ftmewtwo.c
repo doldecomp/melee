@@ -1,5 +1,7 @@
 #include "ftmewtwo.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 
 #include "forward.h"
@@ -15,7 +17,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A2D0 */ UnkCostumeStruct ftMt_CostumeList[4];
 

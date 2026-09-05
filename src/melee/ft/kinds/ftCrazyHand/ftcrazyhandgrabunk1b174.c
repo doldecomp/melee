@@ -1,5 +1,7 @@
 #include "ftcrazyhandgrabunk1b174.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
@@ -17,7 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 bool fn_8015B4EC(Vec3* vec);
 

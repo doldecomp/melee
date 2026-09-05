@@ -1,7 +1,6 @@
 #include "lbfile.h"
 
 #include <placeholder.h>
-
 #include <string.h>
 
 #include "lb_0195.h"

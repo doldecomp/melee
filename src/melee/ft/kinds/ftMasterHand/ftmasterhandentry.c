@@ -1,5 +1,7 @@
 #include "ftmasterhandentry.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include "ftmasterhanddamage0.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 

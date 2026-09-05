@@ -1,10 +1,11 @@
 #ifndef _fobj_h_
 #define _fobj_h_
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 #define HSD_A_OP_NONE 0

@@ -1,9 +1,11 @@
 #include "ftCo_YoshiEgg.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
+
+#include <placeholder.h>
 
 #include "ftCo_Bury.h"
 #include "ftCo_CaptureKoopa.h"
@@ -23,7 +25,6 @@
 #include <melee/ft/kinds/ftYoshi/ftyoshispecialn.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

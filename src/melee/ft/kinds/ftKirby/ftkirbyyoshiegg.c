@@ -1,9 +1,8 @@
 #include "ftkirbyyoshiegg.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "ftkirbyspecialdonkey.h"

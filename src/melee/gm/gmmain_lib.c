@@ -1,5 +1,7 @@
 #include "gmmain_lib.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "forward.h"
@@ -16,7 +18,6 @@
 #include <melee/lb/lbtime.h>
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
 

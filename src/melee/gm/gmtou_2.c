@@ -1,9 +1,9 @@
 #include "gmtou_2.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
+
+#include <placeholder.h>
 
 #include "gm_1601.h"
 #include "gm_1A3F.h"

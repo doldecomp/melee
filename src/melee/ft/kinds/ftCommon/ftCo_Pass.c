@@ -1,5 +1,7 @@
 #include "ftCo_Pass.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftCo_0C60.h"
@@ -20,7 +22,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
 
 bool ftCo_80099F1C(Fighter_GObj* gobj)
 {

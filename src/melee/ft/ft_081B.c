@@ -1,9 +1,10 @@
 #include "ft_081B.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "fighter.h"
@@ -27,7 +28,6 @@
 #include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 void ft_80081B38(Fighter_GObj* gobj)

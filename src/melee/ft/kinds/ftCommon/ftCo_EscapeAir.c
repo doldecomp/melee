@@ -1,5 +1,7 @@
 #include "ftCo_EscapeAir.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include "ftCo_AirCatch.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 099D70 */ static void ftCo_80099D70(Fighter_GObj* gobj);
 

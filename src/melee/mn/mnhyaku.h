@@ -1,9 +1,10 @@
 #ifndef _MN_HYAKU_
 #define _MN_HYAKU_
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>

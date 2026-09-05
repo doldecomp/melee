@@ -1,9 +1,10 @@
 #ifndef _lbarchive_h_
 #define _lbarchive_h_
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length);

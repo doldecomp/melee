@@ -1,7 +1,8 @@
 #include "ftdynamics.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "forward.h"
@@ -12,7 +13,6 @@
 #include <melee/gr/ground.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/jobj.h>
 

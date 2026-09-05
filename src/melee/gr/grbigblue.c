@@ -1,5 +1,7 @@
 #include "grbigblue.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "grbigblue.static.h"
@@ -7,7 +9,6 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
-#include <Runtime/platform.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>

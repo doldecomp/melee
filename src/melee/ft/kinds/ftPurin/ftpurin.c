@@ -1,8 +1,8 @@
 #include "ftpurin.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/kinds/ftCommon/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftpurinspecialhi.h"

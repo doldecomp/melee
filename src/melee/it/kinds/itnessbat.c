@@ -1,5 +1,7 @@
 #include "itnessbat.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "inlines.h"
@@ -10,7 +12,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6C68[] = {

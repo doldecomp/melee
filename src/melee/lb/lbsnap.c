@@ -6,7 +6,6 @@
 
 #define _p(x) (lbSnap_80433380.x)
 #include <placeholder.h>
-
 #include <stdio.h>
 
 #include <dolphin/card.h>

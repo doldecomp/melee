@@ -1,5 +1,7 @@
 #include "itmasterhandbullet.h"
 
+#include <Runtime/platform.h>
+
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
@@ -10,7 +12,6 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

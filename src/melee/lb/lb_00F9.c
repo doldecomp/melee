@@ -1,10 +1,11 @@
 #include "lb_00F9.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "forward.h"
@@ -14,7 +15,6 @@
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>

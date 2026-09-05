@@ -1,11 +1,10 @@
 #ifndef GALE01_00F9F8
 #define GALE01_00F9F8
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 #include <melee/sc/forward.h>
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/forward.h"

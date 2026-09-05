@@ -1,6 +1,6 @@
 #include "ftCo_0A01.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftDonkey/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
@@ -11,6 +11,7 @@
 #include <melee/gr/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftpickupitem.h"
@@ -46,7 +47,6 @@
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 09D044 */ static void ftCo_800A0148(Fighter*);

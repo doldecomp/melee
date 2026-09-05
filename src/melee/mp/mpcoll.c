@@ -1,10 +1,11 @@
 #include "mpcoll.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "forward.h"
@@ -16,7 +17,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 

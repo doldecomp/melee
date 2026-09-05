@@ -1,10 +1,12 @@
 #include "ftkoopaspecials.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "types.h"
@@ -24,7 +26,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_ThrownKoopa.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)

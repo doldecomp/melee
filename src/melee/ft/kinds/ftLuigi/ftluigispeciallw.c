@@ -1,5 +1,7 @@
 #include "ftluigispeciallw.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include "forward.h"
@@ -15,7 +17,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /// SpecialLw (Luigi Cyclone)
 #define FTLUIGI_SPECIALLW_FLAG                                                \

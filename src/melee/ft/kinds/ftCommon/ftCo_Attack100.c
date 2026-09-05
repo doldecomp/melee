@@ -1,9 +1,10 @@
 #include "ftCo_Attack100.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "forward.h"
@@ -22,7 +23,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 0D769C */ FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);

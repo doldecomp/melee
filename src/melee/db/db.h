@@ -1,10 +1,10 @@
 #ifndef MELEE_DB_H
 #define MELEE_DB_H
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/controller.h>
 

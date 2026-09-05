@@ -1,9 +1,9 @@
 #include "itlinkbomb.h"
 
-#include <placeholder.h>
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <melee/ft/kinds/ftLink/ftlinkattackair.h>
 #include <melee/it/inlines.h>

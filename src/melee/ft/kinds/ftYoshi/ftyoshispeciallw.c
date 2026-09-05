@@ -1,9 +1,9 @@
 #include "ftyoshispeciallw.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "types.h"

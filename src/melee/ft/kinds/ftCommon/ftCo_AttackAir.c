@@ -1,5 +1,7 @@
 #include "ftCo_AttackAir.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -20,7 +22,6 @@
 #include <melee/ft/kinds/ftLink/ftlinkattackair.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);
 

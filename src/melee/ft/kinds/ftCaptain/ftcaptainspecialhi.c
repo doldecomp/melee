@@ -1,5 +1,7 @@
 #include "ftcaptainspecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -21,7 +23,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj)
 {

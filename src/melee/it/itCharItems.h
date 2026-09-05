@@ -3,6 +3,8 @@
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -10,7 +12,6 @@
 #include <dolphin/mtx.h>
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct itCLinkMilk_ItemVars {

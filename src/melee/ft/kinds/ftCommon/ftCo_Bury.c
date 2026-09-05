@@ -1,10 +1,12 @@
 #include "ftCo_Bury.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftCo_AirCatch.h"
@@ -38,7 +40,6 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

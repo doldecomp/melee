@@ -1,5 +1,7 @@
 #include "ftdonkeyspecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "ftdonkey.h"
 #include "types.h"
@@ -16,7 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 static u32 const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
                            Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |

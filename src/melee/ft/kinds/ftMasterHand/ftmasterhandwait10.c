@@ -1,5 +1,7 @@
 #include "ftmasterhandwait10.h"
 
+#include <Runtime/platform.h>
+
 #include "ftmasterhandbackairplane3.h"
 #include "ftmasterhandbackcrush0.h"
 #include "ftmasterhandbackcrush1.h"
@@ -29,7 +31,6 @@
 #include <melee/gr/stage.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 

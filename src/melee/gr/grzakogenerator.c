@@ -1,8 +1,8 @@
 #include "grzakogenerator.h"
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "grlib.h"
 #include "ground.h"

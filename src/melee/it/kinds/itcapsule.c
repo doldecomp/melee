@@ -1,5 +1,7 @@
 #include "itcapsule.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include <dolphin/mtx.h>
@@ -14,7 +16,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

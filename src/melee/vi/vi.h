@@ -2,6 +2,7 @@
 #define GALE01_31C99C
 
 #include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/gobj.h>

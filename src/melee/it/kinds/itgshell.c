@@ -1,8 +1,10 @@
 #include "itgshell.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
+
+#include <placeholder.h>
 
 #include "inlines.h"
 #include <melee/ef/efasync.h>
@@ -15,7 +17,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

@@ -1,7 +1,8 @@
 #include "ft_0DF0.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "fighter.h"
@@ -11,7 +12,6 @@
 #include "ftcommon.h"
 #include "inlines.h"
 #include "types.h"
-#include <Runtime/platform.h>
 
 void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)
 {

@@ -1,5 +1,7 @@
 #include "ftcrazyhandwait10.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftcrazyhandbackcrush.h"
@@ -31,7 +33,6 @@
 #include <melee/gr/stage.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 

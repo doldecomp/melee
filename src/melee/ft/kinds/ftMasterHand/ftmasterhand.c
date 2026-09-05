@@ -1,5 +1,7 @@
 #include "ftmasterhand.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "ftmasterhandbackairplane1.h"
@@ -37,7 +39,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A690 */ UnkCostumeStruct ftMh_CostumeList[1];
 

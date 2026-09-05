@@ -1,5 +1,7 @@
 #include "ftcrazyhandbackairplane3.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftcrazyhandtagcancel.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 void ftCh_Init_80159670(HSD_GObj* gobj)
 {

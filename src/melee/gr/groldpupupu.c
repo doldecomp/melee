@@ -1,8 +1,8 @@
 #include "groldpupupu.h"
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "granime.h"

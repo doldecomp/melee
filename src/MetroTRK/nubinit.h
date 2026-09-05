@@ -1,8 +1,9 @@
 #ifndef GALE01_326AD8
 #define GALE01_326AD8
 
-#include <MetroTRK/dserror.h>
 #include <Runtime/platform.h>
+
+#include <MetroTRK/dserror.h>
 
 DSError TRKInitializeNub(void);
 DSError TRKTerminateNub(void);

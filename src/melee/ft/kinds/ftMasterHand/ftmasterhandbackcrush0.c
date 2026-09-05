@@ -1,5 +1,7 @@
 #include "ftmasterhandbackcrush0.h"
 
+#include <Runtime/platform.h>
+
 #include "ftmasterhandwait12.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -8,7 +10,6 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}

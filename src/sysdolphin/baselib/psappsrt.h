@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_PSAPPSRT_H
 #define SYSDOLPHIN_BASELIB_PSAPPSRT_H
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 #define PSAPPSRT_UNK_B09 (1 << 9)

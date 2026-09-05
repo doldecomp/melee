@@ -1,5 +1,7 @@
 #include "ft_0BEC.h"
 
+#include <Runtime/platform.h>
+
 #include "fighter.h"
 #include "forward.h"
 #include "ftparts.h"
@@ -12,7 +14,6 @@
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/it/kinds/itfoxblaster.h>
 #include <melee/it/kinds/itnessbat.h>
-#include <Runtime/platform.h>
 
 static inline void setupInitialState(Fighter* fp)
 {

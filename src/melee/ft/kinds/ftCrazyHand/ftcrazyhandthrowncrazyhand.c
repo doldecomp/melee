@@ -1,5 +1,7 @@
 #include "ftcrazyhandthrowncrazyhand.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -8,7 +10,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid)
 {

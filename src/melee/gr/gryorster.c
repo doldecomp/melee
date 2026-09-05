@@ -1,5 +1,7 @@
 #include "gryorster.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "grdisplay.h"
 #include "grlib.h"
@@ -12,7 +14,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>

@@ -1,8 +1,8 @@
 #include "grtfalco.h"
 
-#include <placeholder.h>
-
 #include <melee/mp/forward.h>
+
+#include <placeholder.h>
 
 #include "granime.h"
 #include "ground.h"

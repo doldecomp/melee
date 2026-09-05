@@ -1,12 +1,13 @@
 #include "ftcoll.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ef/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "fighter.h"
 #include "forward.h"
@@ -40,7 +41,6 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 #include <melee/pl/pltrick.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>

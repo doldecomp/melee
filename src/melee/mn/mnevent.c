@@ -1,8 +1,8 @@
 #include "mnevent.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
+
+#include <placeholder.h>
 
 #include "inlines.h"
 #include "mnmain.h"

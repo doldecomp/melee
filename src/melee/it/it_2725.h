@@ -1,6 +1,8 @@
 #ifndef GALE01_IT_2725
 #define GALE01_IT_2725
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -8,7 +10,6 @@
 #include <dolphin/mtx.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/types.h>
-#include <Runtime/platform.h>
 
 struct lb_80014638_arg1_t;
 

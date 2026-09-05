@@ -1,5 +1,7 @@
 #include "ftCo_WarpStar.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 #include <stdbool.h>
 
@@ -19,7 +21,6 @@
 #include <melee/it/item.h>
 #include <melee/it/kinds/itwstar.h>
 #include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

@@ -1,5 +1,7 @@
 #include "ftCo_StopCeil.h"
 
+#include <Runtime/platform.h>
+
 #include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include <dolphin/mtx.h>
@@ -8,7 +10,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09CAD4 */ static void ftCo_8009EFA4(Fighter_GObj* gobj);
 

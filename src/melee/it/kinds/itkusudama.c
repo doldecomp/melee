@@ -1,10 +1,11 @@
 #include "itkusudama.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -19,7 +20,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F59F8[] = {

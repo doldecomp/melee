@@ -1,7 +1,6 @@
 #include "hsd_3924.h"
 
 #include <placeholder.h>
-
 #include <string.h>
 
 #include "hsd_3915.h"

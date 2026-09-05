@@ -1,5 +1,7 @@
 #include "ftCo_CargoKneebend.h"
 
+#include <Runtime/platform.h>
+
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
@@ -13,7 +15,6 @@
 #include <melee/ft/kinds/ftCaptain/types.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_8009B9C8(Fighter_GObj* gobj, int arg1)
 {

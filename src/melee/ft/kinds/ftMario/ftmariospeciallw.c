@@ -1,5 +1,7 @@
 #include "ftmariospeciallw.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include "inlines.h"
@@ -16,7 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 static void updateRot(HSD_GObj* gobj)
 {

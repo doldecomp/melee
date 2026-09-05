@@ -1,5 +1,7 @@
 #include "ftpeachspecialn.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -19,7 +21,6 @@
 #include <melee/it/kinds/itpeachtoad.h>
 #include <melee/it/kinds/itpeachtoadspore.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 typedef enum cmd_var_idx {
     cmd_phys_state,

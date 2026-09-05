@@ -1,5 +1,7 @@
 #include "ftCo_Furafura.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -9,7 +11,6 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_80099010(Fighter_GObj* gobj)
 {

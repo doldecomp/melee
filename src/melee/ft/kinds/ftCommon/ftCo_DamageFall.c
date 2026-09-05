@@ -1,5 +1,7 @@
 #include "ftCo_DamageFall.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -20,7 +22,6 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {

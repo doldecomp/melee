@@ -1,9 +1,10 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/objalloc.h>

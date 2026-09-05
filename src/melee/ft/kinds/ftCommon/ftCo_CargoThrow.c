@@ -1,5 +1,7 @@
 #include "ftCo_CargoThrow.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftCo_CargoFall.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09C02C */ static void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(Fighter_GObj* gobj);

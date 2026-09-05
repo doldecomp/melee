@@ -3,17 +3,18 @@
 #ifndef MELEE_IT_ITCOMMONITEMS_H
 #define MELEE_IT_ITCOMMONITEMS_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 
 typedef struct {
     bool x0;

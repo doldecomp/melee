@@ -1,5 +1,7 @@
 #include "grfigure2.h"
 
+#include <Runtime/platform.h>
+
 #include "granime.h"
 #include "grfigure1.h"
 #include "ground.h"
@@ -8,7 +10,6 @@
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

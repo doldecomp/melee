@@ -1,14 +1,15 @@
 #ifndef MELEE_TY_TYPES_H
 #define MELEE_TY_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "ty/forward.h" // IWYU pragma: export
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 
 struct TySortElem {
     s32 key;

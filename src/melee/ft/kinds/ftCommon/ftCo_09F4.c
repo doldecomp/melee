@@ -1,5 +1,7 @@
 #include "ftCo_09F4.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include <melee/ft/ftdevice.h>
@@ -7,7 +9,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

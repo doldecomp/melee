@@ -1,11 +1,12 @@
 #include "ftCo_09C4.h"
 
+#include <Runtime/platform.h>
+
 #include "ftCo_Pass.h"
 #include "ftCo_Shouldered.h"
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09C540 */ static void ftCo_8009C540(Fighter_GObj* gobj);
 

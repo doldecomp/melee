@@ -1,8 +1,7 @@
 #include "cobj.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "aobj.h"
 #include "class.h"

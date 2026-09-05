@@ -1,9 +1,8 @@
 #include "ftkirbyspecialgamewatch.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "forward.h"

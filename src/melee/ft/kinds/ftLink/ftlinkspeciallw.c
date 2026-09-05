@@ -1,5 +1,7 @@
 #include "ftlinkspeciallw.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -20,7 +22,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itlinkbomb.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 /* 0EB75C */ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid);
 /* 0EB7C8 */ static void spawnBomb(HSD_GObj* gobj);

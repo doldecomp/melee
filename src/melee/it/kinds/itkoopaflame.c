@@ -1,11 +1,12 @@
 #include "itkoopaflame.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "inlines.h"
 #include <melee/db/db.h>
@@ -19,7 +20,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 #define itkpf_Floor 1

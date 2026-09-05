@@ -1,10 +1,12 @@
 #include "ftCo_DamageIce.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftCo_DamageFall.h"
@@ -35,7 +37,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>

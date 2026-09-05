@@ -1,5 +1,7 @@
 #include "ftmarsspecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "types.h"
@@ -13,7 +15,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /// 80138208 00134DE8
 /// https://decomp.me/scratch/lrV6F

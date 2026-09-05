@@ -1,8 +1,9 @@
 #include "plbonuslib.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "inlines.h"
 #include "pl_040D.h"
@@ -16,7 +17,6 @@
 #include <melee/gr/stage.h>
 #include <melee/if/ifmagnify.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been

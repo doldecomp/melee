@@ -1,11 +1,12 @@
 #include "camera.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "types.h"
@@ -30,7 +31,6 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>

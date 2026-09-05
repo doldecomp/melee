@@ -1,5 +1,7 @@
 #include "itarwinglaser.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include <melee/ef/efsync.h>
@@ -15,7 +17,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct ArwingLaserAttr {

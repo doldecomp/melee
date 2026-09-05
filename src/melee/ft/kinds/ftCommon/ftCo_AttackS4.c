@@ -1,5 +1,7 @@
 #include "ftCo_AttackS4.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -36,7 +38,6 @@
 #include <melee/ft/kinds/ftPeach/ftpeachattacks4.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

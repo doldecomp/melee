@@ -1,5 +1,7 @@
 #include "itseakchain.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftSeak/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -20,7 +22,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

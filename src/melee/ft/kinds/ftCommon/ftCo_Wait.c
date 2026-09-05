@@ -1,5 +1,7 @@
 #include "ftCo_Wait.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -28,7 +30,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftFox/ftfoxappeals.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {

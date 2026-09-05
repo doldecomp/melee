@@ -1,9 +1,10 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
+#include <Runtime/platform.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/mtx.h>
 
 /// functions

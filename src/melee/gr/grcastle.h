@@ -1,12 +1,12 @@
 #ifndef GALE01_1CD338
 #define GALE01_1CD338
 
-#include <placeholder.h>
-
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 

@@ -1,10 +1,9 @@
 #include "itseakneedlethrown.h"
 
-#include <placeholder.h>
-
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>

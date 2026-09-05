@@ -1,8 +1,9 @@
 #include "itpikachutjoltair.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "inlines.h"
@@ -13,7 +14,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

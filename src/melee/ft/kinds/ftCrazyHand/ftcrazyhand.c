@@ -1,5 +1,7 @@
 #include "ftcrazyhand.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -42,7 +44,6 @@
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A6A8 */ UnkCostumeStruct ftCh_CostumeList[1];
 

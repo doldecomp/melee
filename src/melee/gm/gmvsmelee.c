@@ -1,5 +1,7 @@
 #include "gmvsmelee.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/pl/forward.h>
 
 #include "forward.h"
@@ -16,7 +18,6 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/types.h>
-#include <Runtime/platform.h>
 
 /* 1A5360 */ static u8 findSmallestLoser(MatchEnd*);
 /* 4807B0 */ CSSData gmVsMelee_CssData;

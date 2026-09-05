@@ -1,5 +1,7 @@
 #include "grinishie1.h"
 
+#include <Runtime/platform.h>
+
 #include "grlib.h"
 #include "grmaterial.h"
 #include "grzakogenerator.h"
@@ -17,7 +19,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

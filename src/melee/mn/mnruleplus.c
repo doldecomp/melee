@@ -1,6 +1,8 @@
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "inlines.h"
@@ -13,7 +15,6 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

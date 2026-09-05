@@ -1,5 +1,7 @@
 #include "ftmewtwospeciallw.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -17,7 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwodisable.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 /// SpecialLw/SpecialAirLw
 

@@ -1,5 +1,7 @@
 #include "tylist.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "toy.h"
@@ -11,7 +13,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

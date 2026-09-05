@@ -1,15 +1,16 @@
 #ifndef MELEE_FT_CHARA_FTCOMMON_TYPES_H
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
+#include <placeholder.h>
+
 #include "ftCommon/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 
 struct ftCollisionBox {

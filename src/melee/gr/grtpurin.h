@@ -2,12 +2,13 @@
 #ifndef _grtpurin_h_
 #define _grtpurin_h_
 
+#include <Runtime/platform.h>
+
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 
 /* 223160 */ void grTPurin_80223160(bool);
 /* 223164 */ void grTPurin_80223164(void);

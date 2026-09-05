@@ -1,5 +1,7 @@
 #include "ftdonkeyspecialn.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
@@ -22,7 +24,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 static void setCallbacks(HSD_GObj* gobj)
 {

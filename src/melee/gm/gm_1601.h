@@ -1,12 +1,12 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <melee/sc/forward.h>
+
+#include <placeholder.h>
 
 #include <dolphin/gx.h>
 #include <melee/mn/types.h>

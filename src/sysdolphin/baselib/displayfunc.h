@@ -1,10 +1,11 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 #define DOBJ_TRSP_SHIFT 1

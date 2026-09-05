@@ -1,5 +1,7 @@
 #include "ftgamewatchattacks4.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftgamewatch.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchfire.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 /// 0x8014A848
 /// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up

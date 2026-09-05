@@ -1,5 +1,7 @@
 #include "ftpeachspeciallw.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
@@ -22,7 +24,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itpeachturnip.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);

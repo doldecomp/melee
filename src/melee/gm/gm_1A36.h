@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_1A36_H
 #define MELEE_GM_1A36_H
 
-#include <placeholder.h>
-
 #include <Runtime/platform.h>
+
+#include <placeholder.h>
 
 /* 1A3680 */ u64 gm_GetButtonsPressed(u8);
 /* 1A36A0 */ u64 gm_GetButtonsTriggered(u8);

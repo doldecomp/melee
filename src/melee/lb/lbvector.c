@@ -1,12 +1,12 @@
 #include "lbvector.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 

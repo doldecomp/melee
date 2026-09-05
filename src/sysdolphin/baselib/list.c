@@ -1,9 +1,10 @@
 #include "list.h"
 
+#include <Runtime/platform.h>
+
 #include <string.h>
 
 #include "debug.h"
-#include <Runtime/platform.h>
 
 HSD_ObjAllocData slist_alloc_data;
 HSD_ObjAllocData dlist_alloc_data;

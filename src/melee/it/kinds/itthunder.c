@@ -1,5 +1,7 @@
 #include "itthunder.h"
 
+#include <Runtime/platform.h>
+
 #include "inlines.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -10,7 +12,6 @@
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <Runtime/platform.h>
 
 ItemStateTable it_803F7C40[] = {
     { 0, itThunder_UnkMotion0_Anim, itThunder_UnkMotion0_Phys,

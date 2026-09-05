@@ -1,9 +1,9 @@
 #include "vi0102.h"
 
-#include <placeholder.h>
-
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "types.h"
 #include "vi.h"

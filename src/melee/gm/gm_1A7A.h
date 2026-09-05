@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_1A50_H
 #define MELEE_GM_1A50_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 1A7A44 */ void fn_801A7A44(HSD_GObj*);
 /* 1A7A68 */ void fn_801A7A68(HSD_GObj*);

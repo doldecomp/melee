@@ -1,12 +1,13 @@
 #ifndef MELEE_MN_TYPES_H
 #define MELEE_MN_TYPES_H
 
+#include <Runtime/platform.h>
+
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include "mn/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 
 #ifdef M2C
 struct mnInfo_GObj {

@@ -1,8 +1,9 @@
 #include "textdraw.h"
 
+#include <Runtime/platform.h>
+
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>

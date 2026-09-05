@@ -1,10 +1,12 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "ft/forward.h" // IWYU pragma: export
 #include <dolphin/gx.h>
@@ -37,7 +39,6 @@
 #include <melee/ft/kinds/ftZelda/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 
 #define FTPART_INVALID 0xFF
 

@@ -1,5 +1,7 @@
 #include "itsamusbomb.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -13,7 +15,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {

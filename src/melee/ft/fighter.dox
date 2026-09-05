@@ -1,10 +1,9 @@
 #ifndef GALE01_0679B0
 #define GALE01_0679B0
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/inlines.h" // IWYU pragma: export

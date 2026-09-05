@@ -1,8 +1,9 @@
 #include "lbcollision.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "lb_00B0.h"
@@ -12,7 +13,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>

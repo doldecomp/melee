@@ -1,5 +1,7 @@
 #include "ftCo_LandingAir.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -8,7 +10,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
 {

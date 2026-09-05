@@ -2,6 +2,8 @@
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
 #include "itsword.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "forward.h"
@@ -16,7 +18,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

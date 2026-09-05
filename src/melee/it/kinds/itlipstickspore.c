@@ -1,11 +1,12 @@
 #include "itlipstickspore.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
@@ -16,7 +17,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);

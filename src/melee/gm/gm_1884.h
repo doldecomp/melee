@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_1884_H
 #define MELEE_GM_1884_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <melee/gm/types.h>
 

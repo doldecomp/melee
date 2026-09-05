@@ -1,5 +1,7 @@
 #include "ftcliffcommon.h"
 
+#include <Runtime/platform.h>
+
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
@@ -16,7 +18,6 @@
 #include <melee/ef/efasync.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 
 bool ftCliffCommon_80081298(Fighter_GObj* gobj)
 {

@@ -1,5 +1,7 @@
 #include "ftCo_CargoWait.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftCo_09C4.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
-#include <Runtime/platform.h>
 
 bool ftCo_8009B4D0(Fighter_GObj* gobj)
 {

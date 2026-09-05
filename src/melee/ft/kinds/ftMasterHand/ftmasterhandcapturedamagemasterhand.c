@@ -1,12 +1,13 @@
 #include "ftmasterhandcapturedamagemasterhand.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftMh_CaptureDamageMasterHand_IASA(HSD_GObj* gobj) {}
 

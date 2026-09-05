@@ -1,8 +1,10 @@
 #include "grinishie2.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "granime.h"
 #include "grdisplay.h"
@@ -18,7 +20,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>

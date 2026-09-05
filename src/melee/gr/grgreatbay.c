@@ -1,5 +1,7 @@
 #include "grgreatbay.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "forward.h"
@@ -21,7 +23,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>

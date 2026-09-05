@@ -1,5 +1,7 @@
 #include "ftCo_CaptureMewtwo.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "ftCo_Attack100.h"
 #include "ftCo_Lift.h"
@@ -9,7 +11,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
                            FtMotionId msid, FtMotionId victim_msid)

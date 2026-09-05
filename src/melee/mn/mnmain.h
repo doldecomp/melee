@@ -1,12 +1,13 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
+#include <Runtime/platform.h>
+
 #include <melee/mn/forward.h>
 
 #include <dolphin/gx.h>
 #include <melee/mn/types.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/object.h>
 
 typedef struct _MainMenuData {

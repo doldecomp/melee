@@ -1,8 +1,10 @@
 #include "itcoll.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ef/forward.h>
+
+#include <placeholder.h>
 
 #include "inlines.h"
 #include "it_26B1.h"
@@ -25,7 +27,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

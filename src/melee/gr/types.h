@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
@@ -11,11 +11,12 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/spline.h>
 
 typedef struct StageBlastZone {

@@ -1,5 +1,7 @@
 #include "grmutecity.h"
 
+#include <Runtime/platform.h>
+
 #include "grdatfiles.h"
 #include "grfzerocar.h"
 #include "grlib.h"
@@ -17,7 +19,6 @@
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

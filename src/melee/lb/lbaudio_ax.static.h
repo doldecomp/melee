@@ -1,10 +1,11 @@
 #ifndef __GALE01_02305C
 #define __GALE01_02305C
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "lbaudio_ax.h" // IWYU pragma: export
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)

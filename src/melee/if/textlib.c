@@ -1,5 +1,7 @@
 #include "textlib.h"
 
+#include <Runtime/platform.h>
+
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
@@ -8,7 +10,6 @@
 #include "textdraw.h"
 #include "types.h"
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 
 struct unk_series {

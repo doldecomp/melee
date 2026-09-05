@@ -1,3 +1,5 @@
+#include <Runtime/platform.h>
+
 #include <melee/lb/forward.h>
 
 #include "granime.h"
@@ -10,7 +12,6 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/psstructs.h>

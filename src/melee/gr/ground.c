@@ -1,5 +1,7 @@
 #include "ground.h"
 
+#include <Runtime/platform.h>
+
 #include <math.h>
 
 #include "grbattle.h"
@@ -99,7 +101,6 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>

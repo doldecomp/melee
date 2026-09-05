@@ -1,11 +1,12 @@
 #ifndef GALE01_3A949C
 #define GALE01_3A949C
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include <dolphin/card.h>
 #include <Runtime/Gecko_setjmp.h>
-#include <Runtime/platform.h>
 
 typedef struct CardFileData {
     u8* ptr;

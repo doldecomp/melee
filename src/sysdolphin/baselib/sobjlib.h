@@ -1,10 +1,11 @@
 #ifndef SYSDOLPHIN_BASELIB_SOBJLIB_H
 #define SYSDOLPHIN_BASELIB_SOBJLIB_H
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 extern GObjFuncs HSD_SObjLib_8040C3A4;

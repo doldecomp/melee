@@ -1,5 +1,7 @@
 #include "itmball.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
@@ -13,7 +15,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/types.h>
 #include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

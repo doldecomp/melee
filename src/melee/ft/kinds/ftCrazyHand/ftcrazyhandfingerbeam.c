@@ -1,5 +1,7 @@
 #include "ftcrazyhandfingerbeam.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftcrazyhandcapturecrazyhand.h"
@@ -17,7 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 static inline float my_sqrtf(float x)
 {

@@ -1,5 +1,7 @@
 #include "ftCo_Lift.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -17,7 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void ftCo_80096D9C(Fighter_GObj* gobj)

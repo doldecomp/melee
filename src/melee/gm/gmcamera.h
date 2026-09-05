@@ -1,9 +1,9 @@
 #ifndef GALE01_1A2224
 #define GALE01_1A2224
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <dolphin/types.h>
 

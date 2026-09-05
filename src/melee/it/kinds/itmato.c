@@ -1,5 +1,7 @@
 #include "itmato.h"
 
+#include <Runtime/platform.h>
+
 #include <dolphin/mtx.h>
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
@@ -8,7 +10,6 @@
 #include <melee/it/itzako.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 ItemStateTable it_803F83E0[] = {
     {

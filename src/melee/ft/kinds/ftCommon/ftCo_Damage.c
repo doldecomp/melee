@@ -1,8 +1,9 @@
 #include "ftCo_Damage.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "ftCo_0C35.h"
 #include "ftCo_Attack100.h"
@@ -54,7 +55,6 @@
 #include <melee/lb/types.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 

@@ -1,5 +1,7 @@
 #include "ftmewtwospecials.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -18,7 +20,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /// Flag values read during Confusion's reflect think function
 

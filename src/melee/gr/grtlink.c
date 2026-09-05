@@ -1,5 +1,7 @@
 #include "grtlink.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "granime.h"
@@ -9,7 +11,6 @@
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 22192C */ static void grTLink_8022192C(bool);

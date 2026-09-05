@@ -1,8 +1,8 @@
 #include "ftCo_Turn.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftCo_AppealS.h"

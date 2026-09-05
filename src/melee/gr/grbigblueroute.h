@@ -1,11 +1,11 @@
 #ifndef GALE01_20B864
 #define GALE01_20B864
 
-#include <placeholder.h>
-
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 #include <melee/sc/forward.h>
+
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 

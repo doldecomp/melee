@@ -1,5 +1,7 @@
 #include "grpura.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/cm/forward.h>
 
 #include "grdisplay.h"
@@ -15,7 +17,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

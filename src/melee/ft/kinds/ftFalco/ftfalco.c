@@ -1,5 +1,7 @@
 #include "ftfalco.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftFox/forward.h>
 
 #include <melee/ft/ftanim.h>
@@ -15,7 +17,6 @@
 #include <melee/ft/kinds/ftFox/types.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A420 */ UnkCostumeStruct ftFc_CostumeList[4];
 

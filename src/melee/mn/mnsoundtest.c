@@ -1,5 +1,7 @@
 #include "mnsoundtest.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -10,7 +12,6 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

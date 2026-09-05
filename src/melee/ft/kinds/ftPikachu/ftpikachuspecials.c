@@ -1,5 +1,7 @@
 #include "ftpikachuspecials.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
@@ -16,7 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {

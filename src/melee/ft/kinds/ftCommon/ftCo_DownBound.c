@@ -1,8 +1,9 @@
 #include "ftCo_DownBound.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftCo_09F7.h"
@@ -25,7 +26,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/kinds/ftSandbag/ftsandbag.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);

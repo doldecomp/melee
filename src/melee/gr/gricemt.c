@@ -1,8 +1,10 @@
 #include "gricemt.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "grdatfiles.h"
@@ -23,7 +25,6 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>

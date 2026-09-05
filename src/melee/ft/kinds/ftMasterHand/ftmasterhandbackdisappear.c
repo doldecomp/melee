@@ -1,5 +1,7 @@
 #include "ftmasterhandbackdisappear.h"
 
+#include <Runtime/platform.h>
+
 #include "ftmasterhandtagcancel.h"
 #include "ftmasterhandthrownmasterhand.h"
 #include "ftmasterhandwait11.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {

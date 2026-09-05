@@ -1,9 +1,10 @@
 #ifndef __GALE01_019880
 #define __GALE01_019880
 
+#include <Runtime/platform.h>
+
 #include "lbcardgame.h" // IWYU pragma: export
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 
 struct lb_80433318_t {
     /* +0  */ int x0;

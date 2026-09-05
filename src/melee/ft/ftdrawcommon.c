@@ -1,5 +1,7 @@
 #include "ftdrawcommon.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "ft_0C88.h"
@@ -17,7 +19,6 @@
 #include <melee/lb/lb_0146.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbgx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/state.h>

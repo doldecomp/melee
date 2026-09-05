@@ -1,9 +1,10 @@
 #include "ftCo_Throw.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "ftCo_CargoWait.h"
@@ -32,7 +33,6 @@
 #include <melee/mp/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 
 void fn_800DD568(Fighter_GObj* gobj);

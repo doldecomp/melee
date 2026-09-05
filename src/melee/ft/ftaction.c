@@ -1,8 +1,10 @@
 #include "ftaction.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
+
+#include <placeholder.h>
 
 #include "fighter.h"
 #include "forward.h"
@@ -26,7 +28,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcommand.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>

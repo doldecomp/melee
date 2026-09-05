@@ -1,9 +1,9 @@
 #ifndef GALE01_20362C
 #define GALE01_20362C
 
-#include <placeholder.h>
-
 #include <melee/gr/forward.h>
+
+#include <placeholder.h>
 
 /* 20362C */ UNK_RET grVenom_8020362C(UNK_PARAMS);
 /* 203B14 */ void grVenom_80203B14(bool);

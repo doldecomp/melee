@@ -1,9 +1,11 @@
 #include "ftpickupitem.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
+
+#include <placeholder.h>
 
 #include "ftCo_0A01.h"
 #include "ftCo_Fall.h"
@@ -28,7 +30,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 

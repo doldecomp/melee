@@ -1,13 +1,13 @@
 #ifndef GALE01_18A514
 #define GALE01_18A514
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <melee/gm/types.h>
 

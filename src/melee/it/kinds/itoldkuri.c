@@ -1,5 +1,7 @@
 #include "itoldkuri.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include <melee/cm/camera.h>
@@ -13,7 +15,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 typedef struct itOldkuriAttributes {

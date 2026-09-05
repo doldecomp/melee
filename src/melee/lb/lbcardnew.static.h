@@ -1,11 +1,12 @@
 #ifndef MELEE_LB_LBCARDNEW_STATIC_H
 #define MELEE_LB_LBCARDNEW_STATIC_H
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include <dolphin/card.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;

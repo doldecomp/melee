@@ -1,11 +1,12 @@
 #ifndef GALE01_2BD32C
 #define GALE01_2BD32C
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 #include <melee/it/kinds/types.h>
-#include <Runtime/platform.h>
 
 /* 2BD32C */ s32 it_802BD32C(Item_GObj*);
 /* 2BD45C */ void it_802BD45C(Item_GObj* gobj);

@@ -1,5 +1,7 @@
 #include "ftdemo.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/pl/forward.h>
 
 #include <math.h>
@@ -29,7 +31,6 @@
 #include <melee/ef/efasync.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/pl/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

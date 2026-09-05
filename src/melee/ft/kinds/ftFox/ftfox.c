@@ -1,5 +1,7 @@
 #include "ftfox.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
@@ -15,7 +17,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 459B28 */ UnkCostumeStruct ftFx_CostumeList[4];
 

@@ -2,6 +2,7 @@
 #define _objalloc_h_
 
 #include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/debug.h>
 
 typedef struct _objheap {

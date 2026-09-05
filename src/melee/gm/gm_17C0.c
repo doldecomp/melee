@@ -1,3 +1,5 @@
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -23,7 +25,6 @@
 #include <melee/lb/lbtime.h>
 #include <melee/pl/player.h>
 #include <melee/ty/toy.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

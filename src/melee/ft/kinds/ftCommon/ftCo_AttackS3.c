@@ -1,5 +1,7 @@
 #include "ftCo_AttackS3.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -18,7 +20,6 @@
 #include <melee/ft/ftswing.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
 

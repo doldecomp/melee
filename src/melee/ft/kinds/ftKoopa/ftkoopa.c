@@ -1,8 +1,8 @@
 #include "ftkoopa.h"
 
-#include <placeholder.h>
-
 #include <melee/it/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftkoopaspecialhi.h"

@@ -2,6 +2,7 @@
 #define _id_h_
 
 #include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/objalloc.h>
 
 typedef struct _IDEntry {

@@ -9,9 +9,8 @@
 
 #include "lb_020A.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "lbvector.h"
 #include <dolphin/mtx.h>

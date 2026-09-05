@@ -1,8 +1,9 @@
 #ifndef __GALE01_1E57BC
 #define __GALE01_1E57BC
 
-#include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+
+#include <dolphin/mtx.h>
 
 typedef struct grBb_LineIds {
     s32 v[32];

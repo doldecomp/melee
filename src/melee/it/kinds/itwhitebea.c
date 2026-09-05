@@ -1,8 +1,7 @@
 #include "itwhitebea.h"
 
-#include <placeholder.h>
-
 #include <math.h> // IWYU pragma: keep
+#include <placeholder.h>
 
 #include "itfreeze.h"
 #include <melee/cm/camera.h>

@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_3B27_H
 #define SYSDOLPHIN_BASELIB_3B27_H
 
-#include <placeholder.h>
-
 #include <Runtime/platform.h>
+
+#include <placeholder.h>
 
 /* 3B27F4 */ int hsd_803B27F4(const s32*, const char*, int, int,
                               void (*)(int, int));

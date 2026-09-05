@@ -1,8 +1,7 @@
 #include "ftCo_09F7.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>

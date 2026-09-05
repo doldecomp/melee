@@ -1,5 +1,7 @@
 #include "itrshell.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "inlines.h"
@@ -13,7 +15,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

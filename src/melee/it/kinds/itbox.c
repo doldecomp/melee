@@ -1,5 +1,7 @@
 #include "itbox.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include <melee/cm/camera.h>
@@ -19,7 +21,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

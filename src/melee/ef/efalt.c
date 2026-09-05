@@ -1,8 +1,7 @@
 #include "efalt.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "eflib.h"
 #include "types.h"

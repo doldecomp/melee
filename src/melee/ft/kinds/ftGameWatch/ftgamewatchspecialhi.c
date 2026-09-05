@@ -1,5 +1,7 @@
 #include "ftgamewatchspecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -21,7 +23,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchrescue.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);

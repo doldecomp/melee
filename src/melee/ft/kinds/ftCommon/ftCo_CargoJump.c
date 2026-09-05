@@ -1,5 +1,7 @@
 #include "ftCo_CargoJump.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -12,7 +14,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
-#include <Runtime/platform.h>
 
 bool ftCo_8009BB1C(Fighter_GObj* gobj)
 {

@@ -28,10 +28,13 @@ WhitespaceSensitiveMacros:
   - 'HSD_ASSERTREPORT'
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: '^<placeholder\.h>$'
+  # TODO: Required for weird interactions with dolphin headers
+  - Regex: '^<Runtime/platform\.h>$'
     Priority: 1
+  # TODO: Required for unknown reasons
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: 2
+  # TODO: Required for unknown reasons
   - Regex: '^<[^/]*>$'
     Priority: 6
     SortPriority: 3

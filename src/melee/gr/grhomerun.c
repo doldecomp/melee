@@ -1,8 +1,10 @@
 #include "grhomerun.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "grdatfiles.h"
 #include "ground.h"
@@ -20,7 +22,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>

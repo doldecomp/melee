@@ -1,5 +1,7 @@
 #include "ftCo_AttackHi3.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
@@ -11,7 +13,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 08BA38 */ static void doEnter(Fighter_GObj* gobj);
 

@@ -1,5 +1,7 @@
 #include "ftnessattacklw4.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftnessattackhi4.h"
@@ -11,7 +13,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /// 0x8011659C
 /// https://decomp.me/scratch/xVTx7

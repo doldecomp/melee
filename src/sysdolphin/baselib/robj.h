@@ -1,10 +1,11 @@
 #ifndef _robj_h_
 #define _robj_h_
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 #define ROBJ_TYPE_MASK 0x70000000

@@ -1,8 +1,7 @@
 #include "synth.h"
 
-#include <placeholder.h>
-
 #include <math.h> // IWYU pragma: keep
+#include <placeholder.h>
 #include <string.h>
 
 #include "debug.h"

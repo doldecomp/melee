@@ -1,5 +1,7 @@
 #include "ftCo_PassiveWall.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -27,7 +29,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 bool ftCo_800C1D38(Fighter_GObj* gobj)
 {

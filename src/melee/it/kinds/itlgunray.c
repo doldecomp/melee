@@ -1,8 +1,7 @@
 #include "itlgunray.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 #include <stdbool.h>
 
 #include "inlines.h"

@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPLINK_H
 #define SYSDOLPHIN_BASELIB_GOBJPLINK_H
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 void HSD_GObjPLink_80390228(HSD_GObj*);

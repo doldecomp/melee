@@ -1,8 +1,9 @@
 #include "grfourside.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <m2c_macros.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "granime.h"
@@ -18,7 +19,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>

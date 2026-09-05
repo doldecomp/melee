@@ -1,7 +1,8 @@
 #include "tyfigupon.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "inlines.h"
@@ -22,7 +23,6 @@
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

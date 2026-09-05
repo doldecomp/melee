@@ -1,5 +1,7 @@
 #include "ftCo_CliffClimb.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftCo_CliffAttack.h"
@@ -16,7 +18,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);

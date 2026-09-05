@@ -1,5 +1,7 @@
 #include "ftmarsspecials.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "types.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {

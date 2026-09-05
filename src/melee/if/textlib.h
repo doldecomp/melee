@@ -1,14 +1,15 @@
 #ifndef GALE01_302834
 #define GALE01_302834
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/if/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
 #include <melee/if/types.h>
-#include <Runtime/platform.h>
 
 /* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
 /* 3029B4 */ void DevText_EraseFirstLine(DevText* text);

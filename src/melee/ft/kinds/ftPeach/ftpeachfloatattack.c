@@ -1,5 +1,7 @@
 #include "ftpeachfloatattack.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include "ftpeachfloat.h"
@@ -16,7 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_LandingAir.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 static void ftPe_8011BF34(HSD_GObj* gobj);
 

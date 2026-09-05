@@ -1,5 +1,7 @@
 #include "ftmasterhandpoke.h"
 
+#include <Runtime/platform.h>
+
 #include "ftmasterhandwait12.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -11,7 +13,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}

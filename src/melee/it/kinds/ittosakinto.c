@@ -1,5 +1,7 @@
 #include "ittosakinto.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,7 +12,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 #define GET_ATTRS(it)                                                         \

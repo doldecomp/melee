@@ -1,5 +1,7 @@
 #include "ftcrazyhandtagcancel.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftcrazyhandwait10.h"
@@ -11,7 +13,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCh_GrabUnk1_8015B8FC(HSD_GObj*);
 #ifdef MUST_MATCH

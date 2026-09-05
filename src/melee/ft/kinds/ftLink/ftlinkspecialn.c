@@ -1,11 +1,12 @@
 #include "ftlinkspecialn.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftlink.h"
@@ -26,7 +27,6 @@
 #include <melee/it/kinds/itlinkarrow.h>
 #include <melee/it/kinds/itlinkbow.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

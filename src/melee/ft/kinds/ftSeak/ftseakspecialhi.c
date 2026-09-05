@@ -1,10 +1,9 @@
 #include "ftseakspecialhi.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include <melee/ef/efsync.h>

@@ -1,5 +1,7 @@
 #include "grtzelda.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -10,7 +12,6 @@
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 void grTZelda_OnDemoInit(bool);                           /* static */

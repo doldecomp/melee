@@ -1,7 +1,6 @@
 #include "hsd_393C.h"
 
 #include <placeholder.h>
-
 #include <string.h>
 
 #include "debug.h"

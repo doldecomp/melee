@@ -1,5 +1,7 @@
 #include "ftmasterhandsweep.h"
 
+#include <Runtime/platform.h>
+
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -9,7 +11,6 @@
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 void ftMh_Damage_IASA(HSD_GObj* gobj)
 {

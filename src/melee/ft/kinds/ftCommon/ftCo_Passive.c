@@ -1,5 +1,7 @@
 #include "ftCo_Passive.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "inlines.h"
@@ -13,7 +15,6 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_800987D0(Fighter_GObj* gobj)
 {

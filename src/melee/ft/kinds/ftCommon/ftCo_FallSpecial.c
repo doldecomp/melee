@@ -1,5 +1,7 @@
 #include "ftCo_FallSpecial.h"
 
+#include <Runtime/platform.h>
+
 #include "ftCo_Attack100.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_Fall.h"
@@ -16,7 +18,6 @@
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <melee/sfx/crowdsfx.h>
-#include <Runtime/platform.h>
 
 void ftCo_800968C8(Fighter_GObj* gobj)
 {

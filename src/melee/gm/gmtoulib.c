@@ -1,12 +1,11 @@
 #include "gmtoulib.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <m2c_macros.h>
+#include <placeholder.h>
 #include <stdio.h>
 #include <string.h>
 

@@ -1,5 +1,7 @@
 #include "grheal.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "forward.h"
@@ -17,7 +19,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <melee/ty/toy.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>

@@ -1,5 +1,7 @@
 #include "ftCo_StopWall.h"
 
+#include <Runtime/platform.h>
+
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -8,7 +10,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09EE30 */ static void ftCo_8009EE30(Fighter_GObj* gobj);
 

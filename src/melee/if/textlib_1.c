@@ -1,10 +1,11 @@
+#include <Runtime/platform.h>
+
 #include <printf.h> // IWYU pragma: keep
 
 #include "textdraw.h"
 #include "textlib.h"
 #include "types.h"
 #include <melee/mn/inlines.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>

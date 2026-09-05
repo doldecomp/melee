@@ -1,14 +1,15 @@
 #ifndef GALE01_0679B0
 #define GALE01_0679B0
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "ft/inlines.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 extern struct Fighter_804D64FC_t {

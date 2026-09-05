@@ -1,5 +1,7 @@
 #include "ftmasterhanddrill.h"
 
+#include <Runtime/platform.h>
+
 #include "ftmasterhandwait12.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -9,7 +11,6 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 void ftMh_WalkWait_Anim(HSD_GObj* gobj)
 {

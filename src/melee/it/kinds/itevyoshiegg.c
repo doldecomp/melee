@@ -1,8 +1,10 @@
 #include "itevyoshiegg.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
+
+#include <placeholder.h>
 
 #include "forward.h"
 #include <melee/ef/efsync.h>
@@ -14,7 +16,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

@@ -1,7 +1,7 @@
 #ifndef MELEE_gmregclear_H
 #define MELEE_gmregclear_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
@@ -9,8 +9,9 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <melee/gm/types.h>
-#include <Runtime/platform.h>
 
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);

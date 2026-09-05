@@ -1,5 +1,7 @@
 #include "ftpeachfloat.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftpeachfloatattack.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {

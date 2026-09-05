@@ -1,8 +1,7 @@
 #include "itlugia.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "inlines.h"
 #include <melee/ef/eflib.h>

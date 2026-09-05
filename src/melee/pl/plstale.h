@@ -2,6 +2,7 @@
 #define _plstale_h_
 
 #include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 void plStale_InitAttackInstance(void);

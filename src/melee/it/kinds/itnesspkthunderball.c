@@ -1,8 +1,7 @@
 #include "itnesspkthunderball.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "itnesspkthundertrail.h"
 #include <melee/db/db.h>

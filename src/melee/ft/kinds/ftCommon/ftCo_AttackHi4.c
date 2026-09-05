@@ -1,5 +1,7 @@
 #include "ftCo_AttackHi4.h"
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
@@ -14,7 +16,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 08CA38 */ void doEnter(Fighter_GObj* gobj);
 

@@ -1,8 +1,7 @@
 #include "lbrefract.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 #include <string.h>
 
 #include "lbarchive.h"

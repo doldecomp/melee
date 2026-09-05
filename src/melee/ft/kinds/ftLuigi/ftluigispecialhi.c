@@ -1,5 +1,7 @@
 #include "ftluigispecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -16,7 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /// 0x80143FC8
 /// https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action

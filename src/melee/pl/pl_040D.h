@@ -1,9 +1,9 @@
 #ifndef MELEE_PL_PL040D_H
 #define MELEE_PL_PL040D_H
 
-#include <placeholder.h>
-
 #include <Runtime/platform.h>
+
+#include <placeholder.h>
 
 /* 040DDC */ void pl_80040DDC(int slot);
 /* 040ED4 */ void pl_80040ED4(int slot, int, int, int, int, float);

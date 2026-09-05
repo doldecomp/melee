@@ -1,5 +1,7 @@
 #include "ftCo_HammerWalk.h"
 
+#include <Runtime/platform.h>
+
 #include "ftCo_0C60.h"
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
@@ -10,7 +12,6 @@
 #include <melee/ft/ftchangeparam.h>
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 0C5614 */ static void ftCo_800C5614(Fighter_GObj* gobj);
 

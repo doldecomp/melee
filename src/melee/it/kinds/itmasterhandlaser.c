@@ -1,10 +1,12 @@
 #include "itmasterhandlaser.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
@@ -17,7 +19,6 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

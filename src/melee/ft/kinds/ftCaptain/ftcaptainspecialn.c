@@ -1,5 +1,7 @@
 #include "ftcaptainspecialn.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -18,7 +20,6 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
 
 #ifdef MUST_MATCH
 static void order_sdata2(void)

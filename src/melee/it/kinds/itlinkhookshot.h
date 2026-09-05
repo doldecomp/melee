@@ -1,6 +1,8 @@
 #ifndef GALE01_2A2418
 #define GALE01_2A2418
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -9,7 +11,6 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
-#include <Runtime/platform.h>
 
 /// /* 2A2418 */ void it_802A2418(Item_GObj*);
 /// /* 2A2B10 */ void it_802A2B10(Item_GObj* gobj);

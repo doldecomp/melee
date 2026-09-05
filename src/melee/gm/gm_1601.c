@@ -1,10 +1,11 @@
 #include "gm_1601.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 
+#include <placeholder.h>
 #include <stddef.h>
 
 #include "forward.h"
@@ -31,7 +32,6 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>

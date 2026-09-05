@@ -1,11 +1,12 @@
 #include "ftCo_ItemThrow.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftCo_Fall.h"
@@ -25,7 +26,6 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/plbonuslib.h>
-#include <Runtime/platform.h>
 
 /* 09549C */ static void ftCo_800958FC(Fighter_GObj* gobj, int);
 /* 0955D0 */ static void ftCo_80095A30(Fighter_GObj* gobj);

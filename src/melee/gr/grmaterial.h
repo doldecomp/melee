@@ -1,12 +1,13 @@
 #ifndef GALE01_1C87D0
 #define GALE01_1C87D0
 
+#include <Runtime/platform.h>
+
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 1C8D44 */ Item_GObj*

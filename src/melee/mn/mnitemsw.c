@@ -1,5 +1,7 @@
 #include "mnitemsw.h"
 
+#include <Runtime/platform.h>
+
 #include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
@@ -10,7 +12,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

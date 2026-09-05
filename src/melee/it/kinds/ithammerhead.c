@@ -1,5 +1,7 @@
 #include "ithammerhead.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/it/forward.h>
 
 #include "forward.h"
@@ -11,7 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-#include <Runtime/platform.h>
 
 ItemStateTable it_803F6640[] = {
     {

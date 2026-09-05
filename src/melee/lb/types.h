@@ -1,15 +1,16 @@
 #ifndef MELEE_LB_TYPES_H
 #define MELEE_LB_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 
 struct HitResult {
     HSD_JObj* bone;

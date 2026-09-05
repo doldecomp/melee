@@ -1,5 +1,7 @@
 #include "grvenom.h"
 
+#include <Runtime/platform.h>
+
 #include "grcorneria.h"
 #include "grdisplay.h"
 #include "grmaterial.h"
@@ -15,7 +17,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

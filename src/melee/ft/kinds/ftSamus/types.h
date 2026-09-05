@@ -1,14 +1,15 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_TYPES_H
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/mtx.h>
 #include <melee/ft/kinds/ftCommon/types.h>
-#include <Runtime/platform.h>
 
 struct ftSamus_FighterVars {
     /* 0x222C */ Item_GObj* x222C;

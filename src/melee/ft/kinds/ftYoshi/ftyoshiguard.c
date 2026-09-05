@@ -1,10 +1,10 @@
 #include "ftyoshiguard.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "ftyoshi.h"
 #include "types.h"

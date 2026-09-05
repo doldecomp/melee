@@ -1,9 +1,10 @@
 #ifndef GALE01_391580
 #define GALE01_391580
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h>
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 

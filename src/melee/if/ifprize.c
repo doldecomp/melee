@@ -1,7 +1,6 @@
 #include "ifprize.h"
 
 #include <placeholder.h>
-
 #include <stdio.h>
 
 #include <dolphin/pad.h>

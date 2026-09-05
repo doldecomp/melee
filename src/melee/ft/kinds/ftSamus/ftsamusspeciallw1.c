@@ -1,5 +1,7 @@
 #include "ftsamusspeciallw1.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "types.h"
@@ -18,7 +20,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itsamusbomb.h>
 #include <melee/lb/lb_00B0.h>
-#include <Runtime/platform.h>
 
 static MotionFlags const ftSs_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |

@@ -1,7 +1,7 @@
 #ifndef GALE01_0EE528
 #define GALE01_0EE528
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftFox/forward.h>
@@ -9,9 +9,10 @@
 #include <melee/ft/kinds/ftLink/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 typedef struct ftKirby_CopyName {
     char* filename;

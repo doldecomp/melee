@@ -1,5 +1,7 @@
 #include "ftCo_SquatRv.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
@@ -23,7 +25,6 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 0D6620 */ static void ftCo_SquatRv_Enter(Fighter_GObj* gobj);
 

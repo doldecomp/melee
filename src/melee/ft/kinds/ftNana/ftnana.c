@@ -1,5 +1,7 @@
 #include "ftnana.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftPopo/forward.h>
 
@@ -14,7 +16,6 @@
 #include <melee/ft/kinds/ftPopo/ftpopospecials.h>
 #include <melee/ft/kinds/ftPopo/types.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 1238E4 */ void ftNn_Init_801238E4(Fighter_GObj* gobj);
 /* 1232A4 */ void ftNn_Init_801232A4(Fighter_GObj* gobj);

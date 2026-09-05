@@ -1,10 +1,9 @@
 #include "itfoxlaser.h"
 
-#include <placeholder.h>
-
 #include <melee/lb/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "inlines.h"
 #include <melee/db/db.h>

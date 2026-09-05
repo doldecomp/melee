@@ -1,5 +1,7 @@
 #include "grbigblueroute.h"
 
+#include <Runtime/platform.h>
+
 #include "grdatfiles.h"
 #include "grdisplay.h"
 #include "grfzerocar.h"
@@ -17,7 +19,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

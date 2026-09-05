@@ -1,5 +1,7 @@
 #include "itkireihana.h"
 
+#include <Runtime/platform.h>
+
 #include <placeholder.h>
 
 #include "inlines.h"
@@ -9,7 +11,6 @@
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7E28[] = {

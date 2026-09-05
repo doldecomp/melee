@@ -1,11 +1,12 @@
 #include "mplib.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -29,7 +30,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/itCharItems.h>
 #include <melee/lb/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

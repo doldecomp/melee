@@ -1,5 +1,7 @@
 #include "ftpikachu.h"
 
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "ftpikachuspecialhi.h"
 #include "ftpikachuspeciallw.h"
@@ -12,7 +14,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 459F28 */ UnkCostumeStruct ftPk_CostumeList[4];
 

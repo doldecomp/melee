@@ -1,8 +1,10 @@
 #include "ftCo_ThrownMewtwo.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+
+#include <placeholder.h>
 
 #include "ftCo_Thrown.h"
 #include "types.h"
@@ -10,7 +12,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_800BD0E8(Fighter_GObj* gobj, FtMotionId msid)
 {

@@ -1,12 +1,13 @@
 #ifndef GALE01_028B9C
 #define GALE01_028B9C
 
+#include <Runtime/platform.h>
+
 #include <melee/cm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);

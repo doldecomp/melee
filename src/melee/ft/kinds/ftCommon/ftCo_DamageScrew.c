@@ -1,5 +1,7 @@
 #include "ftCo_DamageScrew.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
@@ -13,7 +15,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 bool ftCo_800D2FA4(Fighter_GObj* gobj)
 {

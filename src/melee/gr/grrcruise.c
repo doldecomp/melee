@@ -1,8 +1,9 @@
 #include "grrcruise.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "grdatfiles.h"
 #include "grdisplay.h"
@@ -18,7 +19,6 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>

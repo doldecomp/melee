@@ -1,5 +1,7 @@
 #include "ftCo_DownStand.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -11,7 +13,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 bool ftCo_800980BC(Fighter_GObj* gobj)
 {

@@ -1,10 +1,9 @@
 #include "itgamewatchjudge.h"
 
-#include <placeholder.h>
-
 #include <melee/it/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "inlines.h"
 #include <melee/db/db.h>

@@ -4,9 +4,9 @@
 #include <placeholder.h>
 #endif
 
-#include <math.h>
-
 #include <Runtime/platform.h>
+
+#include <math.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -1,7 +1,6 @@
 #include "tobj.h"
 
 #include <placeholder.h>
-
 #include <string.h>
 
 #include "aobj.h"

@@ -1,11 +1,12 @@
 #ifndef SYSDOLPHIN_BASELIB_FOG_H
 #define SYSDOLPHIN_BASELIB_FOG_H
 
+#include <Runtime/platform.h>
+
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/object.h>
 
 struct HSD_FogAdj {

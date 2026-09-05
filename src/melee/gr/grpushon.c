@@ -1,8 +1,9 @@
 #include "grpushon.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "granime.h"
 #include "ground.h"
@@ -17,7 +18,6 @@
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>

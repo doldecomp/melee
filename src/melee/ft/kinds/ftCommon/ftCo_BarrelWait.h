@@ -1,9 +1,9 @@
 #ifndef GALE01_09EB18
 #define GALE01_09EB18
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
+
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 

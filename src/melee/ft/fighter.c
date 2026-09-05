@@ -1,8 +1,7 @@
 #include "fighter.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 #include "ft_07C1.h"
 #include "ft_07C6.h"

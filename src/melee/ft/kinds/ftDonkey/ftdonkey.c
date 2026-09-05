@@ -1,5 +1,7 @@
 #include "ftdonkey.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/lb/forward.h>
 
 #include "forward.h"
@@ -32,7 +34,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_CargoWalk.h>
 #include <melee/lb/lbanim.h>
 #include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
 
 /* 459CA0 */ UnkCostumeStruct ftDk_CostumeList[5];
 

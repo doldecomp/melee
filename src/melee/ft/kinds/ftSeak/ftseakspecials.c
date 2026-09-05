@@ -1,11 +1,10 @@
 #include "ftseakspecials.h"
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
 
 #include "ftseak.h"
 #include "types.h"

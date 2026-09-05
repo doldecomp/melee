@@ -1,5 +1,7 @@
 #include "ftsamusspecialhi.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -20,7 +22,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {

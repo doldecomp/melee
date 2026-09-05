@@ -1,11 +1,11 @@
 #ifndef MELEE_GM_16AE_H
 #define MELEE_GM_16AE_H
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
 #include <melee/it/forward.h>
 #include <melee/mn/forward.h>
+
+#include <placeholder.h>
 
 /* 16AE38 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void);
 /* 16AE44 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_1(void);

@@ -1,5 +1,7 @@
 #include "ftmasterhandsweepwait.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "forward.h"
@@ -9,7 +11,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 void ftMh_SweepWait_Anim(HSD_GObj* gobj)
 {

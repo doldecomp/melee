@@ -1,5 +1,7 @@
 #include "ftCo_ShieldBreakStand.h"
 
+#include <Runtime/platform.h>
+
 #include <melee/ft/forward.h>
 
 #include "ftCo_Furafura.h"
@@ -7,7 +9,6 @@
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
-#include <Runtime/platform.h>
 
 void ftCo_80098F3C(Fighter_GObj* gobj)
 {

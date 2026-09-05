@@ -1,8 +1,10 @@
 #include "gmcamera.h"
 
-#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 #include "gm_1601.h"
 #include "gm_16AE.h"
@@ -19,7 +21,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/sc/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
