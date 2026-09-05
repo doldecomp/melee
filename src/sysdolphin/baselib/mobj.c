@@ -1,7 +1,6 @@
 #include "mobj.h"
 
 #include <string.h>
-#include <dolphin/gx/GXEnum.h>
 
 #include "aobj.h"
 #include "class.h"
@@ -9,6 +8,7 @@
 #include "state.h"
 #include "tev.h"
 #include "texp.h"
+#include <dolphin/gx/GXEnum.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;

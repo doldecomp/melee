@@ -2,13 +2,12 @@
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <Runtime/platform.h>
-
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureCut.h"
 #include "ftCo_CaptureKoopa.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <Runtime/platform.h>
 
 void ftCo_800BCC20(Fighter_GObj* gobj)
 {

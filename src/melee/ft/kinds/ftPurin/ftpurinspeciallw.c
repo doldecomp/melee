@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftpurinspecialhi.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -12,9 +14,6 @@
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "ftpurinspecialhi.h"
 
 void ftPr_SpecialLw_Enter(Fighter_GObj* gobj)
 {

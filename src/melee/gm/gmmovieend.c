@@ -5,6 +5,10 @@
 
 #include "gmmovieend.h"
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmopening.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/textlib.h>
@@ -14,11 +18,6 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
-
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmopening.h"
-#include "types.h"
 
 void gm_ModeState_ApproachVs_OnExit(GameModeState* arg0)
 {

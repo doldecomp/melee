@@ -1,6 +1,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <dolphin/card.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx.h>
@@ -28,10 +31,6 @@
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
-
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
 
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;

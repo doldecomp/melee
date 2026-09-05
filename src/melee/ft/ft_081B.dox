@@ -6,12 +6,11 @@
 
 #include <baselib/forward.h>
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-
 #include "ft/forward.h"
 #include "ft/types.h"
 #include "ftCommon/forward.h"
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
 
 Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj);
 float ft_GetGroundFrictionMultiplier(Fighter* fp);

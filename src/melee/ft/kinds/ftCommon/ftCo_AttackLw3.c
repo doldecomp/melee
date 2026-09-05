@@ -2,18 +2,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
-
 #include "forward.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
@@ -30,6 +18,17 @@
 #include "ftCo_Walk.h"
 #include "ftpickupitem.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

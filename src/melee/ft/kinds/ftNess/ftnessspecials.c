@@ -2,6 +2,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -14,8 +15,6 @@
 #include <melee/it/kinds/itnesspkfire.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "types.h"
 
 /// https://decomp.me/scratch/apf7Y
 void ftNs_SpecialS_ItemPKFireSpawn(

@@ -2,14 +2,13 @@
 
 #include <melee/ft/forward.h>
 
+#include "ftCo_DamageFall.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <Runtime/platform.h>
-
-#include "ftCo_DamageFall.h"
 
 void ftCo_8009F39C(Fighter_GObj* gobj)
 {

@@ -1,5 +1,7 @@
 #include "ftdonkeyheavywait1.h"
 
+#include "ftdonkeyheavywait0.h"
+#include "types.h"
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/inlines.h>
@@ -7,9 +9,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_KneeBend.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-
-#include "ftdonkeyheavywait0.h"
-#include "types.h"
 
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {

@@ -3,6 +3,32 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "ftCo_0C35.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Bury.h"
+#include "ftCo_DamageBind.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DamageIce.h"
+#include "ftCo_DamageScrew.h"
+#include "ftCo_DamageSong.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_DownDamage.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FlyReflect.h"
+#include "ftCo_HammerFall.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_Jump.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_Landing.h"
+#include "ftCo_PassiveCeil.h"
+#include "ftCo_PassiveStand.h"
+#include "ftCo_PassiveWall.h"
+#include "ftCo_Throw.h"
+#include "ftCo_Thrown.h"
+#include "ftCo_Wait.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -31,32 +57,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "ftCo_0C35.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_Bury.h"
-#include "ftCo_DamageBind.h"
-#include "ftCo_DamageFall.h"
-#include "ftCo_DamageIce.h"
-#include "ftCo_DamageScrew.h"
-#include "ftCo_DamageSong.h"
-#include "ftCo_DownAttack.h"
-#include "ftCo_DownBound.h"
-#include "ftCo_DownDamage.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FlyReflect.h"
-#include "ftCo_HammerFall.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_Jump.h"
-#include "ftCo_JumpAerial.h"
-#include "ftCo_Landing.h"
-#include "ftCo_PassiveCeil.h"
-#include "ftCo_PassiveStand.h"
-#include "ftCo_PassiveWall.h"
-#include "ftCo_Throw.h"
-#include "ftCo_Thrown.h"
-#include "ftCo_Wait.h"
-#include "types.h"
 
 int ftCo_803C5520[2][4][3] = {
     {

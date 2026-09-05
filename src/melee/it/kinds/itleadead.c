@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <math.h>
+
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C7590.h>
 #include <melee/ft/ftlib.h>

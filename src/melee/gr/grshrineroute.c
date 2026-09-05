@@ -1,5 +1,14 @@
 #include "grshrineroute.h"
 
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -18,16 +27,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "granime.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 struct grShrineRoute_YakumonoParam {
     int x0;

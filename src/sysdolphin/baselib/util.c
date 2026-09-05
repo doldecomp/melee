@@ -1,8 +1,7 @@
 #include "util.h"
 
-#include <dolphin/gx.h>
-
 #include "debug.h"
+#include <dolphin/gx.h>
 
 Mtx HSD_identityMtx = { { 1.0f, 0, 0, 0 },
                         { 0, 1.0f, 0, 0 },

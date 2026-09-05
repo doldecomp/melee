@@ -1,5 +1,10 @@
 #include "mnnamenew.h"
 
+#include "inlines.h"
+#include "mncharsel.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 #include <dolphin/gx/GXStruct.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
@@ -22,12 +27,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "inlines.h"
-#include "mncharsel.h"
-#include "mnmain.h"
-#include "mnname.h"
-#include "types.h"
 
 typedef char* GlyphRow[4];
 

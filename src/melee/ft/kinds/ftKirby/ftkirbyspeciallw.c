@@ -5,6 +5,11 @@
 
 #include <math.h>
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -23,11 +28,6 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "inlines.h"
-#include "types.h"
 
 struct ftKb_Init_803CB490_layout {
     char pad[0x74];

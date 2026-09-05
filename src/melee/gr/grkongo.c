@@ -3,6 +3,15 @@
 #include <melee/mp/forward.h>
 
 #include <math.h>
+
+#include "granime.h"
+#include "grkongo.static.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -21,15 +30,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
-
-#include "granime.h"
-#include "grkongo.static.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 /* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

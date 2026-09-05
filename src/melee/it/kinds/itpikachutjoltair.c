@@ -3,6 +3,10 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "inlines.h"
+#include "itpikachutjoltground.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -12,10 +16,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "inlines.h"
-#include "itpikachutjoltground.h"
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 

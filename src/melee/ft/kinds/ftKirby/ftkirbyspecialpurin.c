@@ -7,6 +7,10 @@
 
 #include <math.h>
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -27,10 +31,6 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
 
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);

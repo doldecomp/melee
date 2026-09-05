@@ -3,6 +3,14 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "ftCo_09F7.h"
+#include "ftCo_Down.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_DownStand.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -19,14 +27,6 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftCo_09F7.h"
-#include "ftCo_Down.h"
-#include "ftCo_DownAttack.h"
-#include "ftCo_DownStand.h"
-#include "ftCo_Fall.h"
-#include "types.h"
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);
 /* 0972E8 */ static void ftCo_8009794C(Fighter_GObj* gobj);

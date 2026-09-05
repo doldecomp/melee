@@ -5,6 +5,8 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -17,8 +19,6 @@
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "inlines.h"
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
 /* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);

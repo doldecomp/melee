@@ -1,5 +1,10 @@
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/if/ifnametag.h>
@@ -18,12 +23,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "forward.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmregclear.h"
-#include "types.h"
 
 typedef struct RegClearSpawnEntry {
     /* 0x00 */ s32 x0;

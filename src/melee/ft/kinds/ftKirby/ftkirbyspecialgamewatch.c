@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -19,10 +23,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
 
 static MotionFlags const ftKb_MF_GwSpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;

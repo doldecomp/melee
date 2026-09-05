@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftcaptain.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -20,9 +22,6 @@
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "ftcaptain.h"
-#include "types.h"
 
 void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {

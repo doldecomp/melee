@@ -2,10 +2,9 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/debug.h>
-
 #include "fighter.h"
 #include "inlines.h"
+#include <sysdolphin/baselib/debug.h>
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {

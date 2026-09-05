@@ -1,8 +1,5 @@
 #include "ft_0CDD.h"
 
-#include <melee/it/it_26B1.h>
-#include <sysdolphin/baselib/jobj.h>
-
 #include "fighter.h"
 #include "forward.h"
 #include "ft_081B.h"
@@ -10,6 +7,8 @@
 #include "ftcommon.h"
 #include "kinds/ftCommon/ftCo_Attack100.h"
 #include "kinds/ftCommon/ftpickupitem.h"
+#include <melee/it/it_26B1.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /// grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)

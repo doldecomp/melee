@@ -5,12 +5,11 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"         // IWYU pragma: export
+#include "ftMario/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"         // IWYU pragma: export
-#include "ftMario/forward.h" // IWYU pragma: export
 
 struct ftMario_FighterVars {
     /// Current Megavitamin color combo

@@ -4,14 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftwalkcommon.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
 #include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
@@ -27,6 +19,13 @@
 #include "ftCo_Jump.h"
 #include "ftCo_SpecialS.h"
 #include "ftCo_Squat.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftwalkcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 bool ftCo_Walk_CheckInput(Fighter_GObj* gobj)
 {

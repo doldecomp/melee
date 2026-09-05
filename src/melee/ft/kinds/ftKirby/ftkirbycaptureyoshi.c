@@ -3,6 +3,7 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
+
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>

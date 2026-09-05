@@ -4,6 +4,8 @@
 
 #include <melee/it/forward.h>
 
+#include "inlines.h"
+#include "itsscopebeam.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -11,9 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
-
-#include "inlines.h"
-#include "itsscopebeam.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)

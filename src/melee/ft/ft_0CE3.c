@@ -1,7 +1,3 @@
-#include <melee/ef/efsync.h>
-#include <melee/it/kinds/itfflower.h>
-#include <melee/lb/lb_00B0.h>
-
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
@@ -10,6 +6,9 @@
 #include "ft_0CDD.h"
 #include "ftcommon.h"
 #include "inlines.h"
+#include <melee/ef/efsync.h>
+#include <melee/it/kinds/itfflower.h>
+#include <melee/lb/lb_00B0.h>
 
 void ftCo_800CE620(HSD_GObj*); /* extern */
 

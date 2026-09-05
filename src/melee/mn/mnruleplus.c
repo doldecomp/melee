@@ -2,6 +2,12 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnstagesw.h"
+#include "types.h"
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
@@ -18,13 +24,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "forward.h"
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-#include "mnstagesw.h"
-#include "types.h"
 
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;

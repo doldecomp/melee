@@ -1,5 +1,8 @@
 #include "if_2F6E.h"
 
+#include "if_2F72.h"
+#include "ifall.h"
+#include "types.h"
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -13,10 +16,6 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "if_2F72.h"
-#include "ifall.h"
-#include "types.h"
 
 /* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
     { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },

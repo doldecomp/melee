@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "ftpurin.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -26,10 +30,6 @@
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftpurin.h"
-#include "types.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

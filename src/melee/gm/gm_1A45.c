@@ -1,5 +1,10 @@
 #include "gm_1A45.h"
 
+#include "gm_1A36.h"
+#include "gm_1A45.static.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmscdata.h"
 #include <dolphin/os/OSThread.h>
 #include <melee/db/db.h>
 #include <melee/if/ifcoget.h>
@@ -17,12 +22,6 @@
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/sobjlib.h>
-
-#include "gm_1A36.h"
-#include "gm_1A45.static.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmscdata.h"
 
 static u64 gm_803DA888[8] = {
     0, 0x82FFFA, 0, 0x8EFFFA, 0x800FFA, 0x808FFA, 0x800FFA, 0,

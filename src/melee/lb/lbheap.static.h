@@ -1,9 +1,8 @@
 #ifndef __GALE01_0158D0
 #define __GALE01_0158D0
 
-#include <melee/lb/lbmemory.h>
-
 #include "lbheap.h" // IWYU pragma: export
+#include <melee/lb/lbmemory.h>
 
 struct Heap {
     /* 10 */ s32 id;

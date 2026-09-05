@@ -2,14 +2,6 @@
 
 #include <melee/lb/forward.h>
 
-#include <dolphin/os.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/types.h>
-#include <melee/mn/types.h>
-
 #include "gm_1A3F.h"
 #include "gm_1B03.h"
 #include "gm_unsplit.h"
@@ -17,6 +9,13 @@
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"
+#include <dolphin/os.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
 
 /* 1B24B4 */ static void gm_801B24B4(GameModeState*);
 /* 1B2510 */ static void gm_801B2510(GameModeState*);

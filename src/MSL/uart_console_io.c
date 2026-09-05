@@ -1,6 +1,5 @@
-#include <Runtime/platform.h>
-
 #include "console_io.h"
+#include <Runtime/platform.h>
 
 s32 InitializeUART(u32);
 int WriteUARTN(const void*, u32);

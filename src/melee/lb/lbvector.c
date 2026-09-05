@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <math.h>
+
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>

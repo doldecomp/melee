@@ -3,14 +3,14 @@
 #include <placeholder.h>
 
 #include <string.h>
-#include <dolphin/dvd.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/devcom.h>
 
 #include "lb_0195.h"
 #include "lbdvd.h"
 #include "lbheap.h"
 #include "lblanguage.h"
+#include <dolphin/dvd.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/devcom.h>
 
 static bool cancel;
 

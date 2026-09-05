@@ -4,6 +4,12 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include "forward.h"
+#include "ftpurinspecialhi.h"
+#include "ftpurinspeciallw.h"
+#include "ftpurinspecialn.h"
+#include "ftpurinspecials.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -19,13 +25,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/objalloc.h>
-
-#include "forward.h"
-#include "ftpurinspecialhi.h"
-#include "ftpurinspeciallw.h"
-#include "ftpurinspecialn.h"
-#include "ftpurinspecials.h"
-#include "types.h"
 
 /* 45A1F8 */ UnkCostumeStruct ftPr_CostumeList[5];
 

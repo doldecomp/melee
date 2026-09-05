@@ -3,6 +3,8 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "inlines.h"
 #include <melee/ef/eflib.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
@@ -14,8 +16,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "inlines.h"
 
 ItemStateTable it_803F7EE8[] = {
     { 0, it_802D1DB4, it_802D1DD8, it_802D1E64 },

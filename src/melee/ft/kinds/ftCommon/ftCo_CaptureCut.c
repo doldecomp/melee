@@ -5,6 +5,9 @@
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
 
+#include "forward.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Throw.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcoll.h>
@@ -16,10 +19,6 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "ftCo_Damage.h"
-#include "ftCo_Throw.h"
 
 void ftCo_CaptureCut_Enter(Fighter_GObj* gobj)
 {

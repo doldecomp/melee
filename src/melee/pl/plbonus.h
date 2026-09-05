@@ -4,6 +4,7 @@
 #include <melee/pl/forward.h>
 
 #include <stdbool.h>
+
 #include <Runtime/platform.h>
 
 /* 0386D8 */ unsigned int pl_800386D8(plActionStats*, ssize_t);

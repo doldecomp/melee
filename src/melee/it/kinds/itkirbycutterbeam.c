@@ -1,6 +1,7 @@
 #include "itkirbycutterbeam.h"
 
 #include <math.h>
+
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyattackdash.h>
 #include <melee/it/inlines.h>

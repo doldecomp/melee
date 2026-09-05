@@ -4,11 +4,10 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "if/forward.h" // IWYU pragma: export
 #include <dolphin/gx.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "if/forward.h" // IWYU pragma: export
 
 struct IfDamageFlags {
     u8 explode_animation : 1;

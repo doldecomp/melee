@@ -1,17 +1,17 @@
 #include "iteffect.h"
 
 #include <math.h>
+
+#include "forward.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "it_2725.h"
-#include "it_3F14.h"
-#include "types.h"
 
 void it_8027870C(s32 arg0)
 {

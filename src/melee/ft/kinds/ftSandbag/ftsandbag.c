@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -11,8 +13,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
 
 /* 45A678 */ UnkCostumeStruct ftSb_CostumeList[1];
 

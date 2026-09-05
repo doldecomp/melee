@@ -4,6 +4,9 @@
 
 #include <melee/ft/forward.h>
 
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 #include <melee/db/db.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmevent.h>
@@ -20,10 +23,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
 
 void* mnEvent_804A08F8[4];
 void* mnEvent_804A0908[4];

@@ -2,6 +2,12 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
@@ -11,13 +17,6 @@
 #include <melee/it/kinds/ittarucann.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/mp/mpcoll.h>
-
-#include "forward.h"
-#include "ftCo_Damage.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-#include "inlines.h"
-#include "types.h"
 
 /* 0C9290 */ static void fn_800C9290(Fighter_GObj* gobj);
 

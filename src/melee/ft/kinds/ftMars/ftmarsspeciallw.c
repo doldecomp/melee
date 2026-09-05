@@ -4,6 +4,8 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
+
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -21,8 +23,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
-
-#include "types.h"
 
 static MotionFlags const ftMs_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;

@@ -3,11 +3,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ef/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/sc/types.h>
-
-#include "ef/forward.h" // IWYU pragma: export
 
 // How efAsync_Spawn resolves position and forwards args to efSync_Spawn.
 // ATTACH = passes jobj directly (effect tracks the joint).

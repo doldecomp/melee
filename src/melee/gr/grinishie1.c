@@ -1,5 +1,11 @@
 #include "grinishie1.h"
 
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -19,13 +25,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "grlib.h"
-#include "grmaterial.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 /* 1FA908 */ static void grInishie1_801FA908(bool);
 /* 1FA90C */ static void grInishie1_801FA90C(void);

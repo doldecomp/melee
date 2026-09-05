@@ -1,24 +1,5 @@
 #include "gmscdata.h"
 
-#include <melee/if/ifprize.h>
-#include <melee/mn/mncharsel.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnstagesel.h>
-#include <melee/ty/toy.h>
-#include <melee/ty/tydisplay.h>
-#include <melee/ty/tyfigupon.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0401.h>
-#include <melee/vi/vi0402.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi0502.h>
-#include <melee/vi/vi0601.h>
-#include <melee/vi/vi0801.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
-#include <melee/vi/vi1201v2.h>
-#include <melee/vi/vi1202.h>
-
 #include "gm_1A33.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
@@ -62,6 +43,24 @@
 #include "gmvsmelee.h"
 #include "gmvsmode.h"
 #include "types.h"
+#include <melee/if/ifprize.h>
+#include <melee/mn/mncharsel.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnstagesel.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tydisplay.h>
+#include <melee/ty/tyfigupon.h>
+#include <melee/vi/vi0102.h>
+#include <melee/vi/vi0401.h>
+#include <melee/vi/vi0402.h>
+#include <melee/vi/vi0501.h>
+#include <melee/vi/vi0502.h>
+#include <melee/vi/vi0601.h>
+#include <melee/vi/vi0801.h>
+#include <melee/vi/vi1101.h>
+#include <melee/vi/vi1201v1.h>
+#include <melee/vi/vi1201v2.h>
+#include <melee/vi/vi1202.h>
 
 static GameScene scenes[] = {
     {

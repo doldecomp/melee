@@ -1,11 +1,5 @@
 #include <melee/ft/forward.h>
 
-#include <melee/if/textlib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbtime.h>
-#include <melee/ty/toy.h>
-
 #include "gm_1601.h"
 #include "gm_16F1.h"
 #include "gm_1A3F.h"
@@ -13,6 +7,11 @@
 #include "gmmain_lib.h"
 #include "gmregclear.h"
 #include "types.h"
+#include <melee/if/textlib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbtime.h>
+#include <melee/ty/toy.h>
 
 static ChallengerData challenger_data;
 

@@ -4,6 +4,13 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "granime.h"
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/kinds/itkyasarin.h>
@@ -16,14 +23,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "granime.h"
-#include "grdisplay.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },

@@ -4,6 +4,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+
 #include <melee/gr/granime.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grdisplay.h>

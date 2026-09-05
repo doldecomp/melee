@@ -1,14 +1,13 @@
 #include "gmadventure.h"
 
-#include <melee/gr/ground.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <sysdolphin/baselib/random.h>
-
 #include "forward.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmregcommon.h"
+#include <melee/gr/ground.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <sysdolphin/baselib/random.h>
 
 extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;

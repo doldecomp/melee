@@ -1,11 +1,10 @@
 #include "gm_18A1.h"
 
-#include <melee/pl/player.h>
-
 #include "gm_16AE.h"
 #include "gmmain_lib.h"
 #include "gmregclear.h"
 #include "types.h"
+#include <melee/pl/player.h>
 
 /// Classic mode stage data.
 typedef struct ClassicStageEntry {

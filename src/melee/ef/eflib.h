@@ -5,6 +5,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdarg.h>
+
 #include <dolphin/mtx.h>
 
 typedef struct EF_ParamEntry {

@@ -6,6 +6,7 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "ft/forward.h" // IWYU pragma: export
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/types.h>
@@ -37,8 +38,6 @@
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
-
-#include "ft/forward.h" // IWYU pragma: export
 
 #define FTPART_INVALID 0xFF
 

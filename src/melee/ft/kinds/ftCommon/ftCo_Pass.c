@@ -2,15 +2,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <dolphin/mtx.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/mp/mpcoll.h>
-#include <Runtime/platform.h>
-
 #include "ftCo_0C60.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_Attack100.h"
@@ -22,6 +13,14 @@
 #include "ftCo_JumpAerial.h"
 #include "ftCo_SpecialAir.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mpcoll.h>
+#include <Runtime/platform.h>
 
 bool ftCo_80099F1C(Fighter_GObj* gobj)
 {

@@ -6,6 +6,9 @@
 #include <melee/mp/forward.h>
 
 #include <math.h>
+
+#include "ftness.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -26,9 +29,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
-
-#include "ftness.h"
-#include "types.h"
 
 /// SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                            \

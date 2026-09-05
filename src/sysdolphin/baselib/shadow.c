@@ -2,8 +2,6 @@
 
 #include <math.h>
 #include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 
 #include "class.h"
 #include "cobj.h"
@@ -20,6 +18,8 @@
 #include "tev.h"
 #include "tobj.h"
 #include "util.h"
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 HSD_ObjAllocData shadow_alloc_data;
 

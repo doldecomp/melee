@@ -1,9 +1,8 @@
 #ifndef __GALE01_391580
 #define __GALE01_391580
 
-#include <Runtime/platform.h>
-
 #include "particle.h" // IWYU pragma: export
+#include <Runtime/platform.h>
 
 // .data
 

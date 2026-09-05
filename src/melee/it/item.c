@@ -3,6 +3,21 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
+
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "it_3F2F.h"
+#include "itanimlist.h"
+#include "itcoll.h"
+#include "iteffect.h"
+#include "itgroundcoll.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
+#include "itmaterial.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
@@ -27,21 +42,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "inlines.h"
-#include "it_26B1.h"
-#include "it_2725.h"
-#include "it_279C.h"
-#include "it_3F14.h"
-#include "it_3F2F.h"
-#include "itanimlist.h"
-#include "itcoll.h"
-#include "iteffect.h"
-#include "itgroundcoll.h"
-#include "ithitbox.h"
-#include "itmaplib.h"
-#include "itmaterial.h"
-#include "types.h"
 
 /* 267130 */ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem);
 /* 2674AC */ static void Item_802674AC(SpawnItem* spawnItem);

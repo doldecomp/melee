@@ -3,6 +3,12 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftfoxappeals.h"
+#include "ftfoxspecialhi.h"
+#include "ftfoxspeciallw.h"
+#include "ftfoxspecialn.h"
+#include "ftfoxspecials.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
@@ -10,13 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
-
-#include "ftfoxappeals.h"
-#include "ftfoxspecialhi.h"
-#include "ftfoxspeciallw.h"
-#include "ftfoxspecialn.h"
-#include "ftfoxspecials.h"
-#include "types.h"
 
 /* 459B28 */ UnkCostumeStruct ftFx_CostumeList[4];
 

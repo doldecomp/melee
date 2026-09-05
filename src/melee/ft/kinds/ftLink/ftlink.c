@@ -2,6 +2,11 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include "ftlinkspecialhi.h"
+#include "ftlinkspeciallw.h"
+#include "ftlinkspecialn.h"
+#include "ftlinkspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -17,12 +22,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbanim.h>
-
-#include "ftlinkspecialhi.h"
-#include "ftlinkspeciallw.h"
-#include "ftlinkspecialn.h"
-#include "ftlinkspecials.h"
-#include "types.h"
 
 MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {

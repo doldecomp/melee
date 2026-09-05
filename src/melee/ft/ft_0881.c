@@ -1,14 +1,13 @@
 #include "ft_0881.h"
 
+#include "fighter.h"
+#include "ft_0877.h"
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plstale.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "fighter.h"
-#include "ft_0877.h"
-#include "inlines.h"
 
 void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
 {

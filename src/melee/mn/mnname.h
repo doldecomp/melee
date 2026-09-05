@@ -6,6 +6,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdbool.h>
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

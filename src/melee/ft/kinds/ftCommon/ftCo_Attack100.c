@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
+
+#include "forward.h"
+#include "ftpickupitem.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -20,10 +24,6 @@
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftpickupitem.h"
-#include "types.h"
 
 /* 0D769C */ FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);

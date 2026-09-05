@@ -2,6 +2,13 @@
 
 #include <melee/lb/forward.h>
 
+#include "forward.h"
+#include "granime.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
@@ -14,14 +21,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "granime.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
 
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;

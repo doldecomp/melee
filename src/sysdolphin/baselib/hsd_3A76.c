@@ -1,9 +1,5 @@
 #include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <dolphin/types.h>
-#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 #include "cobj.h"
 #include "gobj.h"
@@ -14,6 +10,10 @@
 #include "state.h"
 #include "tev.h"
 #include "wobj.h"
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
+#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static inline f32 HSD_SisLib_GlyphWidth(HSD_Text* text, f32 scale_x)
 {

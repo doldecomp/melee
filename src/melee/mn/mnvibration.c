@@ -11,6 +11,9 @@
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
@@ -26,10 +29,6 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
 
 /// --- Externs ---
 

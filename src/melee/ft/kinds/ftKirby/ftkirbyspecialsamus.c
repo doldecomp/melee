@@ -1,6 +1,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "ftkirby.h"
+#include "inlines.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -17,9 +20,6 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itsamuschargeshot.h>
 #include <melee/lb/lb_00B0.h>
-
-#include "ftkirby.h"
-#include "inlines.h"
 
 int ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, int* out1, int* out2)
 {

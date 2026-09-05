@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -17,8 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
-
-#include "types.h"
 
 #ifdef MUST_MATCH
 static void order_sdata2(void)

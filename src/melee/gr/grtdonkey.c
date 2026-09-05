@@ -1,14 +1,13 @@
 #include "grtdonkey.h"
 
-#include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
-#include <sysdolphin/baselib/gobjproc.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 220228 */ static void grTDonkey_80220228(bool);
 /* 22022C */ static void grTDonkey_8022022C(void);

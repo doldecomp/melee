@@ -3,12 +3,12 @@
 #include <placeholder.h>
 
 #include <math.h> // IWYU pragma: keep
-#include <dolphin/gx.h>
-#include <dolphin/gx/GXGeometry.h>
 
 #include "cobj.h"
 #include "pobj.h"
 #include "state.h"
+#include <dolphin/gx.h>
+#include <dolphin/gx/GXGeometry.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 

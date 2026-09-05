@@ -1,6 +1,8 @@
 #include "ftCo_0C35.h"
 
 #include <math.h>
+
+#include "ftCo_Damage.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
@@ -8,8 +10,6 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftCo_Damage.h"
 
 static void inlineA0(Fighter_GObj* gobj)
 {

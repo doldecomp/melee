@@ -1,10 +1,9 @@
 #include "ft_0BEF.h"
 
-#include <Runtime/platform.h>
-
 #include "fighter.h"
 #include "kinds/ftCommon/forward.h"
 #include "types.h"
+#include <Runtime/platform.h>
 
 void ftCo_800BEFD4(Fighter_GObj* gobj)
 {

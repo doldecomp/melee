@@ -1,5 +1,11 @@
 #include "ftmars.h"
 
+#include "forward.h"
+#include "ftmarsspecialhi.h"
+#include "ftmarsspeciallw.h"
+#include "ftmarsspecialn.h"
+#include "ftmarsspecials.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
@@ -7,13 +13,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "ftmarsspecialhi.h"
-#include "ftmarsspeciallw.h"
-#include "ftmarsspecialn.h"
-#include "ftmarsspecials.h"
-#include "types.h"
 
 /* 45A0F0 */ UnkCostumeStruct ftMs_CostumeList[5];
 

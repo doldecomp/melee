@@ -2,10 +2,6 @@
 
 #include <printf.h> // IWYU pragma: keep
 #include <stdio.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
-#include <dolphin/types.h>
 
 #include "cobj.h"
 #include "gobj.h"
@@ -15,6 +11,10 @@
 #include "gobjuserdata.h"
 #include "memory.h"
 #include "wobj.h"
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
+#include <dolphin/types.h>
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,

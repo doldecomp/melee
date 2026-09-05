@@ -1,5 +1,13 @@
 #include "grzebes.h"
 
+#include "forward.h"
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>
@@ -14,15 +22,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "granime.h"
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);

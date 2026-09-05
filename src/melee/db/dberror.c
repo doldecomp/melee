@@ -1,4 +1,6 @@
 #include <stdarg.h>
+
+#include "db.h"
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>
@@ -7,8 +9,6 @@
 #include <sysdolphin/baselib/debugconsole_main.h>
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
-
-#include "db.h"
 
 /* 228AB4 */ static void fn_HSDPanicHandler(OSContext* ctx);
 /* 228B28 */ static void fn_OSErrorHandler(u16 error, OSContext* ctx, ...);

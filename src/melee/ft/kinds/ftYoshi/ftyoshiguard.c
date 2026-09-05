@@ -6,6 +6,8 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftyoshi.h"
+#include "types.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
@@ -20,9 +22,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftyoshi.h"
-#include "types.h"
 
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {

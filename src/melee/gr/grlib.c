@@ -2,6 +2,12 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "grbigblue.h"
+#include "gricemt.h"
+#include "ground.h"
+#include "grrcruise.h"
+#include "lb/types.h" // IWYU pragma: keep
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
@@ -15,13 +21,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
-
-#include "grbigblue.h"
-#include "gricemt.h"
-#include "ground.h"
-#include "grrcruise.h"
-#include "lb/types.h" // IWYU pragma: keep
-#include "types.h"
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);

@@ -1,9 +1,6 @@
 #include "ft_0D27.h"
 
 #include <stdbool.h>
-#include <melee/it/kinds/itkinoko.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/jobj.h>
 
 #include "fighter.h"
 #include "forward.h"
@@ -22,6 +19,9 @@
 #include "kinds/ftCommon/ftCo_FallSpecial.h"
 #include "kinds/ftCommon/ftCo_Lift.h"
 #include "types.h"
+#include <melee/it/kinds/itkinoko.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void ftCo_800D2770(Fighter_GObj* gobj, f32 arg8)
 {

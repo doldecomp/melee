@@ -1,5 +1,10 @@
 #include "ftCo_CaptureKoopa.h"
 
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureDamageKoopa.h"
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -10,12 +15,6 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftCo_Attack100.h"
-#include "ftCo_CaptureDamageKoopa.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-#include "types.h"
 
 void ftCo_800BC438(Fighter_GObj* gobj)
 {

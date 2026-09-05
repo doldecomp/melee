@@ -2,6 +2,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -11,8 +12,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-
-#include "forward.h"
 
 static void fn_80134518(Fighter_GObj* gobj)
 {

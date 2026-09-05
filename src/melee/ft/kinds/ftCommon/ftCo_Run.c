@@ -4,12 +4,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
 #include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack100.h"
@@ -19,6 +13,11 @@
 #include "ftCo_RunBrake.h"
 #include "ftCo_SpecialS.h"
 #include "ftCo_TurnRun.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 bool fn_800CA5F0(Fighter_GObj* gobj)
 {

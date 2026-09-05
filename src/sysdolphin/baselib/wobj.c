@@ -1,7 +1,5 @@
 #include "wobj.h"
 
-#include <dolphin/mtx.h>
-
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -9,6 +7,7 @@
 #include "object.h"
 #include "robj.h"
 #include "spline.h"
+#include <dolphin/mtx.h>
 
 static void WObjInfoInit(void);
 

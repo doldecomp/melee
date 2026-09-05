@@ -2,6 +2,12 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <dolphin/types.h>
 #include <melee/gm/gm_18A1.h>
 #include <melee/it/it_26B1.h>
@@ -15,13 +21,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
 
 typedef struct grHeal_UnkData {
     s32 x0;

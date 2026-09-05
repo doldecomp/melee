@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "ftzelda.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -18,9 +20,6 @@
 #include <melee/it/kinds/itzeldadinfire.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "ftzelda.h"
-#include "types.h"
 
 static MotionFlags const ftZd_MF_SpecialSStart_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

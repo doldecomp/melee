@@ -1,9 +1,5 @@
 #include "ft_0BF0.h"
 
-#include <melee/it/kinds/itdrmariopill.h>
-#include <melee/it/kinds/itfoxblaster.h>
-#include <melee/it/kinds/itnessbat.h>
-
 #include "fighter.h"
 #include "forward.h"
 #include "ftparts.h"
@@ -11,6 +7,9 @@
 #include "kinds/ftFox/types.h"
 #include "kinds/ftMario/ftmariospecialn.h"
 #include "types.h"
+#include <melee/it/kinds/itdrmariopill.h>
+#include <melee/it/kinds/itfoxblaster.h>
+#include <melee/it/kinds/itnessbat.h>
 
 void ftCo_800BF034(Fighter_GObj* gobj)
 {

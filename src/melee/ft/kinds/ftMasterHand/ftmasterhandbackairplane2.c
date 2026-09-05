@@ -1,13 +1,12 @@
 #include "ftmasterhandbackairplane2.h"
 
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-
-#include "types.h"
 
 void ftMh_BackAirplane2_IASA(HSD_GObj* gobj)
 {

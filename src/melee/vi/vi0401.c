@@ -2,6 +2,8 @@
 
 #include <placeholder.h>
 
+#include "types.h"
+#include "vi.h"
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -31,9 +33,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-
-#include "types.h"
-#include "vi.h"
 
 static SceneDesc* un_804D6F48;
 static SceneDesc* un_804D6F4C;

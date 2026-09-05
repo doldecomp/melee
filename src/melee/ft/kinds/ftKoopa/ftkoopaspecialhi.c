@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "ftkoopa.h"
+#include "ftkoopaspecialn.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -14,9 +16,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-
-#include "ftkoopa.h"
-#include "ftkoopaspecialn.h"
 
 static inline void ftKp_SpecialHi_Enter_inline(Fighter_GObj* gobj)
 {

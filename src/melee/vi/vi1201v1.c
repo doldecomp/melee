@@ -2,6 +2,7 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "vi.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -34,8 +35,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-
-#include "vi.h"
 
 /* 4D6FE0 */ static SceneDesc* un_804D6FE0;
 /* 4D6FE4 */ static SceneDesc* un_804D6FE4;

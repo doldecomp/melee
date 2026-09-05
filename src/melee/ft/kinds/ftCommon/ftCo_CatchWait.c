@@ -1,3 +1,6 @@
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Throw.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -5,10 +8,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/it/kinds/itsamusgrapple.h>
-
-#include "ftCo_Attack100.h"
-#include "ftCo_Fall.h"
-#include "ftCo_Throw.h"
 
 void fn_800DA054(Fighter_GObj* gobj);
 

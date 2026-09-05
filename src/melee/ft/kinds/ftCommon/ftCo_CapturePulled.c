@@ -1,14 +1,13 @@
+#include "ftCo_Attack100.h"
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
-
-#include "ftCo_Attack100.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-#include "inlines.h"
 
 /* 0DAECC */ static void fn_800DAECC(Fighter_GObj* gobj);
 /* 0DAEEC */ static void fn_800DAEEC(Fighter_GObj* gobj);

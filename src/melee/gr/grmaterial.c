@@ -3,6 +3,7 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
@@ -21,8 +22,6 @@
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "types.h"
 
 /* 1C897C */ static void grMaterial_801C897C(HSD_JObj* jobj, u32 flags);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);

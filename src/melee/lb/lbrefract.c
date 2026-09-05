@@ -4,6 +4,9 @@
 
 #include <math.h>
 #include <string.h>
+
+#include "lbarchive.h"
+#include "types.h"
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -20,9 +23,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/state.h>
-
-#include "lbarchive.h"
-#include "types.h"
 
 /* 022650 */ static void fn_80022650(void);
 /* 022940 */ static void fn_80022940(void);

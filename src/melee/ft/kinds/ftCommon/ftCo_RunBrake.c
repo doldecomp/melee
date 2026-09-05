@@ -4,6 +4,10 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_TurnRun.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
@@ -11,11 +15,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-#include "ftCo_Jump.h"
-#include "ftCo_Squat.h"
-#include "ftCo_TurnRun.h"
 
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {

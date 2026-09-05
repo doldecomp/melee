@@ -1,4 +1,6 @@
 #include <math.h>
+
+#include "db.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
 #include <melee/gm/gm_unsplit.h>
@@ -8,8 +10,6 @@
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/controller.h>
-
-#include "db.h"
 
 /* 2270C4 */ static void fn_802270C4(int arg0);
 /* 22713C */ static void fn_8022713C(int arg0);

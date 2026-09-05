@@ -1,5 +1,7 @@
 #include "itnokonoko.h"
 
+#include "itzgshell.h"
+#include "itzrshell.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
@@ -11,9 +13,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/mp/mpcoll.h>
-
-#include "itzgshell.h"
-#include "itzrshell.h"
 
 ItemStateTable it_803F85F0[] = {
     { 0, NULL, NULL, NULL },

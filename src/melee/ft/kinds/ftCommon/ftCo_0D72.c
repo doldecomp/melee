@@ -1,6 +1,5 @@
-#include <melee/ft/types.h>
-
 #include "ftCo_Attack100.h"
+#include <melee/ft/types.h>
 
 bool ftCo_800D72A0(Fighter* fp)
 {

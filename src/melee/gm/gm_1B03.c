@@ -3,11 +3,10 @@
 #include <melee/mn/forward.h>
 #include <melee/pl/forward.h>
 
-#include <dolphin/types.h>
-#include <melee/mn/types.h>
-
 #include "gm_unsplit.h"
 #include "types.h"
+#include <dolphin/types.h>
+#include <melee/mn/types.h>
 
 /**
  * Update character tints

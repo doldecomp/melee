@@ -2,13 +2,12 @@
 
 #include <melee/ft/forward.h>
 
+#include "ftCo_ShieldBreakDown.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftcommon.h>
 #include <Runtime/platform.h>
-
-#include "ftCo_ShieldBreakDown.h"
 
 void ftCo_80098D90(Fighter_GObj* gobj)
 {

@@ -3,6 +3,9 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "inlines.h"
+#include "mninfobonus.static.h"
+#include "mnmain.h"
 #include <melee/db/db.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gm_16F1.h>
@@ -19,10 +22,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "inlines.h"
-#include "mninfobonus.static.h"
-#include "mnmain.h"
 
 static inline int mnInfoBonus_802528F8_inline(int j)
 {

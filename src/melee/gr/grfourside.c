@@ -3,6 +3,15 @@
 #include <placeholder.h>
 
 #include <m2c_macros.h>
+
+#include "forward.h"
+#include "granime.h"
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
@@ -15,15 +24,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "granime.h"
-#include "grdisplay.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 struct grFourside_YakumonoParam {
     /* 00 */ int heli_wait;

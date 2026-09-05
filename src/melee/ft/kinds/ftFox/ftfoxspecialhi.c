@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -20,8 +22,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
-
-#include "types.h"
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \

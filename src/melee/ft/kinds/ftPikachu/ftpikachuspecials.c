@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
+#include "ftpikachuspecialn.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -15,9 +17,6 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "ftpikachuspecialn.h"
-#include "types.h"
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {

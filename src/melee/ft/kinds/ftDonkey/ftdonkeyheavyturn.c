@@ -1,6 +1,10 @@
 #include "ftdonkeyheavyturn.h"
 
 #include <stddef.h>
+
+#include "ftdonkeyheavyfall.h"
+#include "ftdonkeyheavywait0.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
@@ -8,10 +12,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
 #include <melee/ft/types.h>
-
-#include "ftdonkeyheavyfall.h"
-#include "ftdonkeyheavywait0.h"
-#include "types.h"
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {

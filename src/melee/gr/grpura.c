@@ -2,6 +2,12 @@
 
 #include <melee/cm/forward.h>
 
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
@@ -17,13 +23,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "grdisplay.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 struct GrPuModelDesc {
     /* 0x0 */ s32 x0;

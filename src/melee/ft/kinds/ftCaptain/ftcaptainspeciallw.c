@@ -5,6 +5,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -18,9 +20,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "types.h"
 
 /// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
 /// /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;

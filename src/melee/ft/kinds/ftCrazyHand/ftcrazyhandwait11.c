@@ -2,6 +2,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftbosslib.h>
@@ -10,9 +12,6 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
 
 /// @todo Figure out how to use #GET_JOBJ instead.
 static inline HSD_JObj* get_jobj(HSD_GObj* gobj)

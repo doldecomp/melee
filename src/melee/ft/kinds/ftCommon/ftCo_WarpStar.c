@@ -2,6 +2,9 @@
 
 #include <math.h>
 #include <stdbool.h>
+
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -19,9 +22,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "types.h"
 
 #ifdef MUST_MATCH
 #pragma force_active on

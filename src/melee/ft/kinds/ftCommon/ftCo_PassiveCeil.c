@@ -1,5 +1,10 @@
 #include "ftCo_PassiveCeil.h"
 
+#include "forward.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -11,12 +16,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-#include "ftCo_DamageFall.h"
-#include "ftCo_DownAttack.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FallSpecial.h"
 
 bool ftCo_800C23A0(Fighter_GObj* gobj)
 {

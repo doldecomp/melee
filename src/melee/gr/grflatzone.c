@@ -1,5 +1,12 @@
 #include "grflatzone.h"
 
+#include "grdisplay.h"
+#include "grdynamicattr.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/it/kinds/ittools.h>
 #include <melee/it/types.h>
@@ -9,14 +16,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "grdisplay.h"
-#include "grdynamicattr.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 struct grFlatzone_YakumonoParam {
     s32 unk0;

@@ -10,6 +10,11 @@
 
 #include <math.h>
 #include <stdarg.h>
+
+#include "efasync.h"
+#include "efdata.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Bury.h>
@@ -27,11 +32,6 @@
 #include <sysdolphin/baselib/psdisp.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/state.h>
-
-#include "efasync.h"
-#include "efdata.h"
-#include "inlines.h"
-#include "types.h"
 // externs
 
 extern EF_DAT_Entry efAsync_DatEntries[51];

@@ -1,5 +1,15 @@
 #include "ifall.h"
 
+#include "if_2F6E.h"
+#include "if_2F72.h"
+#include "if_2FD9.h"
+#include "ifcoget.h"
+#include "ifhazard.h"
+#include "ifmagnify.h"
+#include "ifnametag.h"
+#include "ifstatus.h"
+#include "ifstock.h"
+#include "iftime.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
@@ -11,17 +21,6 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-
-#include "if_2F6E.h"
-#include "if_2F72.h"
-#include "if_2FD9.h"
-#include "ifcoget.h"
-#include "ifhazard.h"
-#include "ifmagnify.h"
-#include "ifnametag.h"
-#include "ifstatus.h"
-#include "ifstock.h"
-#include "iftime.h"
 
 static struct ifAll_804A0FD8_t {
     /* 0x00 */ HSD_GObj* gobj;

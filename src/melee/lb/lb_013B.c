@@ -1,12 +1,11 @@
 #include <melee/ft/forward.h>
 
-#include <dolphin/pad.h>
-#include <sysdolphin/baselib/rumble.h>
-
 #include "forward.h"
 #include "lbarchive.h"
 #include "lbcommand.h"
 #include "types.h"
+#include <dolphin/pad.h>
+#include <sysdolphin/baselib/rumble.h>
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 /* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);

@@ -1,6 +1,7 @@
 #include "itarwinglaser.h"
 
 #include <math.h>
+
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grcorneria.h>

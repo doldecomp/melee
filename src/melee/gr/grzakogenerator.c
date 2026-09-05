@@ -4,6 +4,11 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.static.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
@@ -19,12 +24,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.static.h"
-#include "stage.h"
-#include "types.h"
 
 grZakoGenerator_Config*
 grZakoGenerator_801CA394(grZakoGenerator_Spawn* spawn_descs, int count,

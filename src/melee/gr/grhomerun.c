@@ -4,6 +4,11 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "grdatfiles.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
@@ -26,12 +31,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "grdatfiles.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
 
 /* 21E994 */ static void fn_8021E994(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

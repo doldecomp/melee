@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
+#include "ftgamewatch.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -18,9 +20,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchpanic.h>
 #include <melee/lb/lb_00B0.h>
-
-#include "ftgamewatch.h"
-#include "types.h"
 
 /// Create Oil Panic Item
 void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)

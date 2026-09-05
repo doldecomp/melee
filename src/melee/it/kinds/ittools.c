@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -11,8 +12,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "inlines.h"
 
 ItemStateTable it_803F9260[] = {
     {

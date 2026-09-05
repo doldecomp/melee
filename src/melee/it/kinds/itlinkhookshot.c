@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <math.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>

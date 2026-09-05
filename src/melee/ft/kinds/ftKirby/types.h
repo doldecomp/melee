@@ -7,13 +7,12 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "ft/dobjlist.h" // IWYU pragma: keep
 #include <melee/ft/kinds/ftGameWatch/types.h>
 #include <melee/ft/kinds/ftMars/types.h>
 #include <melee/ft/kinds/ftNess/types.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
-
-#include "ft/dobjlist.h" // IWYU pragma: keep
 
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {

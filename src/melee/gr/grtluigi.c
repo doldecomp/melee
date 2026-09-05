@@ -1,13 +1,12 @@
 #include "grtluigi.h"
 
-#include <melee/lb/lb_00F9.h>
-#include <sysdolphin/baselib/gobjproc.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
     {

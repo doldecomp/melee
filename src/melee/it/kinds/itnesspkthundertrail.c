@@ -5,6 +5,8 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
+#include "itnesspkthunderball.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -12,8 +14,6 @@
 #include <melee/it/item.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "itnesspkthunderball.h"
 
 ItemStateTable it_803F6C08[] = {
     { 0, itNesspkthundertrail_UnkMotion0_Anim,

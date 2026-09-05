@@ -1,5 +1,7 @@
 #include "mnmainrule.h"
 
+#include "inlines.h"
+#include "mnmain.h"
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
@@ -18,9 +20,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "inlines.h"
-#include "mnmain.h"
 
 extern StaticModelDesc MenMainConTop_Top;
 extern StaticModelDesc MenMainCursor_Top;

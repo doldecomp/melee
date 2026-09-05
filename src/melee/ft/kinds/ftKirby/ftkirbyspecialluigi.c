@@ -2,6 +2,9 @@
 #include <melee/ft/kinds/ftLuigi/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -16,9 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itluigifireball.h>
 #include <melee/lb/lb_00B0.h>
-
-#include "forward.h"
-#include "ftkirby.h"
 
 static void fn_800F98F4(Fighter_GObj*);
 

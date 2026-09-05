@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -19,10 +23,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
 

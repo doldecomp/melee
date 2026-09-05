@@ -2,6 +2,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -19,8 +20,6 @@
 #include <melee/it/kinds/itkoopaflame.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
 
 static MotionFlags const ftKp_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble;

@@ -3,6 +3,7 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>
 #include <melee/it/inlines.h>

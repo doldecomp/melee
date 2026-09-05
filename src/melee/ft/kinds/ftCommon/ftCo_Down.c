@@ -1,5 +1,6 @@
 #include "ftCo_Down.h"
 
+#include "ftCo_DownAttack.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -10,8 +11,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "ftCo_DownAttack.h"
 
 /* 097EAC */ static void ftCo_80098324(Fighter_GObj* gobj, FtMotionId msid);
 

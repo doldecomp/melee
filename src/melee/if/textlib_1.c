@@ -1,4 +1,8 @@
 #include <printf.h> // IWYU pragma: keep
+
+#include "textdraw.h"
+#include "textlib.h"
+#include "types.h"
 #include <melee/mn/inlines.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -9,10 +13,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
-
-#include "textdraw.h"
-#include "textlib.h"
-#include "types.h"
 
 /* 4D6E4C */ unsigned char un_804D6E4C;
 /* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;

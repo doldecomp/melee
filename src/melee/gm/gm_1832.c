@@ -1,5 +1,8 @@
 #include "gm_1832.h"
 
+#include "gm_1601.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -32,10 +35,6 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "gm_1601.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
 
 static struct {
     int x0;

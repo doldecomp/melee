@@ -1,5 +1,7 @@
 #include "gmapproach.h"
 
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
@@ -12,9 +14,6 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
 
 static struct {
     HSD_Archive* x0;

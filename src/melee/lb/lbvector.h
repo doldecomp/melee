@@ -4,6 +4,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+
 #include <dolphin/mtx.h>
 
 static inline float lbVector_Len(Vec3* vec)

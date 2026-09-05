@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -19,10 +23,6 @@
 #include <melee/it/kinds/itpeachtoadspore.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
 
 /* 10C344 */ static void fn_8010C344(Fighter_GObj* gobj);
 /* 10C44C */ static void fn_8010C44C(Fighter_GObj* gobj);

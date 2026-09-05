@@ -6,6 +6,7 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
+
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

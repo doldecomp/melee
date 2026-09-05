@@ -1,13 +1,12 @@
 #include "itmaterial.h"
 
+#include "forward.h"
+#include "inlines.h"
 #include <melee/ft/ftdevice.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/tev.h>
-
-#include "forward.h"
-#include "inlines.h"
 
 struct it_MObjInfo {
     /*   +0 */ HSD_ClassInfo parent;

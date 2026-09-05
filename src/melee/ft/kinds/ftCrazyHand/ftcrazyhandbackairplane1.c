@@ -2,6 +2,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftcrazyhandbackairplane2.h"
+#include "ftcrazyhandbackairplane3.h"
+#include "ftcrazyhandcapturedamagecrazyhand.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -12,11 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-
-#include "ftcrazyhandbackairplane2.h"
-#include "ftcrazyhandbackairplane3.h"
-#include "ftcrazyhandcapturedamagecrazyhand.h"
-#include "types.h"
 
 void ftCh_Init_801592D4(HSD_GObj* gobj)
 {

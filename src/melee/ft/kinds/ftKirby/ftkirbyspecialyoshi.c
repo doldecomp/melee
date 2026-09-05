@@ -4,6 +4,13 @@
 #include <melee/ft/kinds/ftYoshi/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "ftkirbycaptureyoshi.h"
+#include "ftkirbyspecialdonkey.h"
+#include "ftkirbyyoshiegg.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -20,13 +27,6 @@
 #include <melee/it/kinds/ityoshiegglay.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "ftkirbycaptureyoshi.h"
-#include "ftkirbyspecialdonkey.h"
-#include "ftkirbyyoshiegg.h"
-#include "types.h"
 
 /* 1095DC */ static void fn_801095DC(HSD_GObj*);
 /* 109680 */ static void fn_80109680(HSD_GObj*);

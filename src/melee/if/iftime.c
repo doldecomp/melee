@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "ifall.h"
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
@@ -14,8 +15,6 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ifall.h"
 
 static struct ifTime_data {
     HSD_GObj* match_timer;

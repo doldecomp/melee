@@ -2,15 +2,14 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DamageIce.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-#include "ftCo_DamageFall.h"
-#include "ftCo_DamageIce.h"
 
 void ftCo_800CF4DC(Fighter_GObj* gobj)
 {

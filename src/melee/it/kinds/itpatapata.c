@@ -4,6 +4,7 @@
 
 #include <melee/it/forward.h>
 
+#include "itnokonoko.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
@@ -20,8 +21,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "itnokonoko.h"
 
 ItemStateTable it_803F88C0[] = {
     { 0, NULL, NULL, NULL },

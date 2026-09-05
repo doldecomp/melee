@@ -1,6 +1,14 @@
 #include "grkinokoroute.h"
 
 #include <math.h>
+
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
@@ -19,14 +27,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
 
 static struct {
     int x0;

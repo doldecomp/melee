@@ -5,6 +5,12 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "ftyoshiguard.h"
+#include "ftyoshispecialhi.h"
+#include "ftyoshispecialn.h"
+#include "ftyoshispecials.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
@@ -14,13 +20,6 @@
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/mobj.h>
-
-#include "forward.h"
-#include "ftyoshiguard.h"
-#include "ftyoshispecialhi.h"
-#include "ftyoshispecialn.h"
-#include "ftyoshispecials.h"
-#include "types.h"
 
 /// @todo Belongs in #ftyoshiguard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };

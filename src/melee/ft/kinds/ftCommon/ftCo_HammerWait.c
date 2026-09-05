@@ -3,6 +3,11 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftCo_0C60.h"
+#include "ftCo_HammerFall.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerTurn.h"
+#include "ftCo_HammerWalk.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -20,12 +25,6 @@
 #include <melee/it/item.h>
 #include <melee/it/kinds/ithammer.h>
 #include <melee/pl/plbonuslib.h>
-
-#include "ftCo_0C60.h"
-#include "ftCo_HammerFall.h"
-#include "ftCo_HammerJump.h"
-#include "ftCo_HammerTurn.h"
-#include "ftCo_HammerWalk.h"
 
 /* 0C5408 */ static void ftCo_800C5408(Fighter* fp);
 /* 0C5588 */ static void ftCo_800C5588(Fighter* fp);

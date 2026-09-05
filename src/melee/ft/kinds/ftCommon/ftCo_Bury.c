@@ -6,6 +6,22 @@
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 
+#include "forward.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackAir.h"
+#include "ftCo_BarrelWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_Fall.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_Lift.h"
+#include "ftCo_SpecialAir.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -25,23 +41,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftCo_AirCatch.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_AttackAir.h"
-#include "ftCo_BarrelWait.h"
-#include "ftCo_Damage.h"
-#include "ftCo_EscapeAir.h"
-#include "ftCo_Fall.h"
-#include "ftCo_HammerJump.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_JumpAerial.h"
-#include "ftCo_Lift.h"
-#include "ftCo_SpecialAir.h"
-#include "ftCo_Throw.h"
-#include "types.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

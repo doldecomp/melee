@@ -2,7 +2,6 @@
 
 #include <math.h>
 #include <string.h>
-#include <dolphin/mtx.h>
 
 #include "aobj.h"
 #include "class.h"
@@ -16,6 +15,7 @@
 #include "pobj.h"
 #include "robj.h"
 #include "spline.h"
+#include <dolphin/mtx.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };

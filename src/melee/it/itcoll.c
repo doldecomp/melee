@@ -4,6 +4,13 @@
 
 #include <melee/ef/forward.h>
 
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "item.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>
@@ -24,14 +31,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "inlines.h"
-#include "it_26B1.h"
-#include "it_2725.h"
-#include "it_279C.h"
-#include "it_3F14.h"
-#include "item.h"
-#include "types.h"
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);

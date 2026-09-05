@@ -4,6 +4,12 @@
 
 #include <melee/it/forward.h>
 
+#include "forward.h"
+#include "ftkoopaspecialhi.h"
+#include "ftkoopaspeciallw.h"
+#include "ftkoopaspecialn.h"
+#include "ftkoopaspecials.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcommon.h>
@@ -12,13 +18,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-
-#include "forward.h"
-#include "ftkoopaspecialhi.h"
-#include "ftkoopaspeciallw.h"
-#include "ftkoopaspecialn.h"
-#include "ftkoopaspecials.h"
-#include "types.h"
 
 /* 45A090 */ UnkCostumeStruct ftKp_CostumeList[4];
 

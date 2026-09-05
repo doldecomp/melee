@@ -1,9 +1,5 @@
 #include "itdrop.h"
 
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_unsplit.h>
-#include <sysdolphin/baselib/random.h>
-
 #include "inlines.h"
 #include "it_26B1.h"
 #include "it_2725.h"
@@ -11,6 +7,9 @@
 #include "item.h"
 #include "itspawn.h"
 #include "kinds/it_2E5A.h"
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemKind it_8026F3AC(void)
 {

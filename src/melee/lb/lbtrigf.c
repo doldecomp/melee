@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <math.h>
+
 #include <Runtime/platform.h>
 
 /* 022DF8 */ static float lb_sqrtf(float x);

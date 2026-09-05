@@ -1,5 +1,12 @@
 #include "grvenom.h"
 
+#include "grcorneria.h"
+#include "grdisplay.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/kinds/itarwinglaser.h>
@@ -17,14 +24,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "grcorneria.h"
-#include "grdisplay.h"
-#include "grmaterial.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 typedef struct grVe_Data {
     /* +0 */ GrJoint joints[5];

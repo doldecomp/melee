@@ -5,6 +5,11 @@
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
+
+#include "ftCo_CargoWait.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Fall.h"
+#include "ftCo_Thrown.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -29,11 +34,6 @@
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftCo_CargoWait.h"
-#include "ftCo_Damage.h"
-#include "ftCo_Fall.h"
-#include "ftCo_Thrown.h"
 
 void fn_800DD568(Fighter_GObj* gobj);
 void fn_800DD5EC(Fighter_GObj* gobj);

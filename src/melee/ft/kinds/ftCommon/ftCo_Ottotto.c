@@ -2,16 +2,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
-#include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
-
 #include "forward.h"
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
@@ -30,6 +20,15 @@
 #include "ftCo_Squat.h"
 #include "ftCo_Turn.h"
 #include "ftCo_Walk.h"
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 09A410 */ static void ftCo_8009A410(Fighter_GObj* gobj);
 /* 09A6B8 */ static void ftCo_8009A6B8(Fighter_GObj* gobj);

@@ -2,9 +2,8 @@
 
 #include <melee/ft/forward.h>
 
-#include <sysdolphin/baselib/debug.h>
-
 #include "gm_unsplit.h"
+#include <sysdolphin/baselib/debug.h>
 
 #define NUM_OPPONENTS 3
 

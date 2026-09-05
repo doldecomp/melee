@@ -1,5 +1,6 @@
 #include "itmariocape.h"
 
+#include "inlines.h"
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftMario/ftmariospecials.h>
@@ -7,8 +8,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-
-#include "inlines.h"
 
 ItemStateTable it_803F70F8[] = {
     { 0, itMariocape_UnkMotion1_Anim, NULL, NULL },

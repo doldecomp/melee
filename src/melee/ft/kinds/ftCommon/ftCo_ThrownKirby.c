@@ -4,6 +4,9 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
@@ -19,10 +22,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "ftCo_Fall.h"
-#include "types.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

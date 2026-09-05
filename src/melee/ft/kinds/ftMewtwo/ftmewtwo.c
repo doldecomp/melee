@@ -2,6 +2,12 @@
 
 #include <melee/it/forward.h>
 
+#include "forward.h"
+#include "ftmewtwospecialhi.h"
+#include "ftmewtwospeciallw.h"
+#include "ftmewtwospecialn.h"
+#include "ftmewtwospecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>
@@ -10,13 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "ftmewtwospecialhi.h"
-#include "ftmewtwospeciallw.h"
-#include "ftmewtwospecialn.h"
-#include "ftmewtwospecials.h"
-#include "types.h"
 
 /* 45A2D0 */ UnkCostumeStruct ftMt_CostumeList[4];
 

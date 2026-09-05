@@ -1,6 +1,9 @@
 #include "ifmagnify.h"
 
 #include <math.h>
+
+#include "if_2FD9.h"
+#include "ifall.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>
@@ -27,9 +30,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "if_2FD9.h"
-#include "ifall.h"
 
 static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
                                            { 0.0F, 0.0F, 300.0F },

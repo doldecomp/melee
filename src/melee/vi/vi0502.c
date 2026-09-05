@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "types.h"
+#include "vi.h"
 #include <dolphin/gx.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -32,9 +34,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "types.h"
-#include "vi.h"
 
 typedef struct Vi0502Data {
     Vec3 initial_pos;

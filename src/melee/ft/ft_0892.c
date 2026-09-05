@@ -1,14 +1,13 @@
 #include "ft_0892.h"
 
+#include "fighter.h"
+#include "inlines.h"
+#include "kinds/ftFox/ftfoxappeals.h"
 #include <melee/it/it_26B1.h>
 #include <melee/pl/plattack.h>
 #include <melee/pl/pltrick.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "fighter.h"
-#include "inlines.h"
-#include "kinds/ftFox/ftfoxappeals.h"
 
 void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);
 void lbBgFlash_80021410(IKState*);

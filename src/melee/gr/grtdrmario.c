@@ -1,16 +1,15 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobjproc.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 22050C */ static void grtDrMario_8022050C(bool);
 /* 220510 */ static void grtDrMario_80220510(void);

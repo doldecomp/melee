@@ -2,17 +2,16 @@
 
 #include <melee/lb/forward.h>
 
-#include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 2228B4 */ static void grTPeach_802228B4(bool arg0);
 /* 2228B8 */ static void grTPeach_802228B8(void);

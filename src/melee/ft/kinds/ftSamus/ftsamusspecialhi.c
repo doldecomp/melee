@@ -3,6 +3,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -18,9 +21,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "inlines.h"
-#include "types.h"
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 {

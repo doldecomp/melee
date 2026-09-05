@@ -1,9 +1,5 @@
 #include "ft_0C8C.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/lb/lb_0219.h>
-#include <melee/pl/player.h>
-
 #include "fighter.h"
 #include "forward.h"
 #include "ft_0877.h"
@@ -20,6 +16,9 @@
 #include "kinds/ftCrazyHand/ftcrazyhandtaggrab.h"
 #include "kinds/ftMasterHand/ftmasterhanddamage0.h"
 #include "types.h"
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_0219.h>
+#include <melee/pl/player.h>
 
 HSD_MObj* ft_804D6588;
 

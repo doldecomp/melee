@@ -3,6 +3,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -14,9 +17,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "types.h"
 
 /// 0x80143FC8
 /// https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action

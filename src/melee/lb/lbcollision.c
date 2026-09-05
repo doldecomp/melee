@@ -3,6 +3,12 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "lb_00B0.h"
+#include "lbaudio_ax.h"
+#include "lbvector.h"
+#include "types.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/types.h>
@@ -12,12 +18,6 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
-
-#include "forward.h"
-#include "lb_00B0.h"
-#include "lbaudio_ax.h"
-#include "lbvector.h"
-#include "types.h"
 
 /* 006E58 */ static bool
 lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,

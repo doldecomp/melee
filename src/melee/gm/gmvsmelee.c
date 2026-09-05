@@ -2,14 +2,6 @@
 
 #include <melee/pl/forward.h>
 
-#include <melee/lb/inlines.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbtime.h>
-#include <melee/mn/types.h>
-#include <Runtime/platform.h>
-
 #include "forward.h"
 #include "gm_1A3F.h"
 #include "gm_unsplit.h"
@@ -18,6 +10,13 @@
 #include "gmresultplayer.h"
 #include "gmvsmode.h"
 #include "types.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbtime.h>
+#include <melee/mn/types.h>
+#include <Runtime/platform.h>
 
 /* 1A5360 */ static u8 findSmallestLoser(MatchEnd*);
 /* 4807B0 */ CSSData gmVsMelee_CssData;

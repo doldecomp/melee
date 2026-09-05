@@ -5,6 +5,12 @@
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 
+#include "gm_1601.h"
+#include "gm_1A3F.h"
+#include "gm_1A45.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.h"
+#include "types.h"
 #include <dolphin/os.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -23,13 +29,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "gm_1601.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.h"
-#include "types.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

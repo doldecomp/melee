@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
@@ -20,9 +22,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachutjoltground.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "types.h"
 
 static void doEnter(Fighter_GObj* gobj, ftPikachu_MotionState msid)
 {

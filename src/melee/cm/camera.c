@@ -6,6 +6,9 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <dolphin/pad.h>
 #include <dolphin/types.h>
@@ -41,9 +44,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "forward.h"
-#include "types.h"
 
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
                                          CameraTransformState* transform,

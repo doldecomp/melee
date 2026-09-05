@@ -3,6 +3,8 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftpeach.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -18,9 +20,6 @@
 #include <melee/it/kinds/itpeachtoadspore.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "ftpeach.h"
-#include "types.h"
 
 typedef enum cmd_var_idx {
     cmd_phys_state,

@@ -2,6 +2,13 @@
 
 #include <placeholder.h>
 
+#include "fighter.h"
+#include "forward.h"
+#include "ftdata.h"
+#include "ftmaterial.h"
+#include "ftparts.static.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/class.h>
@@ -13,14 +20,6 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
-
-#include "fighter.h"
-#include "forward.h"
-#include "ftdata.h"
-#include "ftmaterial.h"
-#include "ftparts.static.h"
-#include "inlines.h"
-#include "types.h"
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };

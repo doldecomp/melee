@@ -1,5 +1,7 @@
 #include "itfflower.h"
 
+#include "inlines.h"
+#include "itlgunbeam.h"
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -7,9 +9,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-
-#include "inlines.h"
-#include "itlgunbeam.h"
 
 /* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
 /* 293040 */ static bool itFflower_UnkMotion0_Anim(Item_GObj* gobj);

@@ -1,3 +1,10 @@
+#include "inlines.h"
+#include "mndiagram.static.h"
+#include "mndiagram2.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
 #include <dolphin/types.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
@@ -17,14 +24,6 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
-
-#include "inlines.h"
-#include "mndiagram.static.h"
-#include "mndiagram2.h"
-#include "mndiagram3.h"
-#include "mnmain.h"
-#include "mnname.h"
-#include "types.h"
 
 /// @todo Split-derived data; types are inferred.
 void* mnDiagram_804A0814[4];

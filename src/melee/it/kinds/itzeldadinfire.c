@@ -4,6 +4,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+
+#include "itzeldadinfireexplode.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -15,8 +17,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "itzeldadinfireexplode.h"
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 

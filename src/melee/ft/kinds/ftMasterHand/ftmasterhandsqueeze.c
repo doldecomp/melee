@@ -1,5 +1,9 @@
 #include "ftmasterhandsqueeze.h"
 
+#include "ftmasterhandcapturemasterhand.h"
+#include "ftmasterhandsqueezing.h"
+#include "ftmasterhandthrow.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -9,11 +13,6 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-
-#include "ftmasterhandcapturemasterhand.h"
-#include "ftmasterhandsqueezing.h"
-#include "ftmasterhandthrow.h"
-#include "types.h"
 
 void ftMh_MS_378_80154A78(HSD_GObj* gobj)
 {

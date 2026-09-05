@@ -2,6 +2,13 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include "forward.h"
+#include "ftsamusspecialhi.h"
+#include "ftsamusspeciallw0.h"
+#include "ftsamusspeciallw1.h"
+#include "ftsamusspecialn.h"
+#include "ftsamusspecials.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcamera.h>
@@ -17,14 +24,6 @@
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/object.h>
-
-#include "forward.h"
-#include "ftsamusspecialhi.h"
-#include "ftsamusspeciallw0.h"
-#include "ftsamusspeciallw1.h"
-#include "ftsamusspecialn.h"
-#include "ftsamusspecials.h"
-#include "types.h"
 
 /* 459F88 */ UnkCostumeStruct ftSs_CostumeList[5];
 

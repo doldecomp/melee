@@ -6,6 +6,9 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+
+#include "lbdvd.h"
+#include "types.h"
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>
@@ -29,9 +32,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "lbdvd.h"
-#include "types.h"
 
 HSD_LObj* lb_80011AC4(LightList** list)
 {

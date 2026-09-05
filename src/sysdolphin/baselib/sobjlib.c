@@ -2,8 +2,6 @@
 #include "sobjlib.h"
 
 #include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/os.h>
 
 #include "cobj.h"
 #include "gobj.h"
@@ -14,6 +12,8 @@
 #include "state.h"
 #include "tev.h"
 #include "tobj.h"
+#include <dolphin/gx.h>
+#include <dolphin/os.h>
 
 /* 004DB678 */ extern const f32 HSD_SObjLib_804DEA98;
 /* 004D4540 */ u8 HSD_SObjLib_804D7960;

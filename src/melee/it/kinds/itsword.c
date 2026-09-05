@@ -4,6 +4,9 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include "inlines.h"
+#include "types.h" // IWYU pragma: keep
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -16,10 +19,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "forward.h"
-#include "inlines.h"
-#include "types.h" // IWYU pragma: keep
 
 /* 284E30 */ static void it_80284E30(Item_GObj* gobj);
 /* 285084 */ static void it_80285084(Item_GObj* gobj);

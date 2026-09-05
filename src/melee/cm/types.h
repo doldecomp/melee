@@ -3,9 +3,8 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 #include "cm/forward.h" // IWYU pragma: export
+#include <dolphin/mtx.h>
 
 typedef struct CmSubjectExtents {
     Vec2 h;

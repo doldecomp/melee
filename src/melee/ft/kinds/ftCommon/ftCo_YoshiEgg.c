@@ -5,6 +5,10 @@
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
+#include "ftCo_Bury.h"
+#include "ftCo_CaptureKoopa.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -22,11 +26,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftCo_Bury.h"
-#include "ftCo_CaptureKoopa.h"
-#include "ftCo_Fall.h"
-#include "types.h"
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

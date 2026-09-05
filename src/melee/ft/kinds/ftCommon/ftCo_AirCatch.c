@@ -5,6 +5,9 @@
 #include <melee/ft/kinds/ftSamus/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Landing.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
@@ -21,10 +24,6 @@
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Landing.h"
-#include "types.h"
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)
 {

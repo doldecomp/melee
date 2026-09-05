@@ -4,6 +4,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -13,10 +16,6 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-
-#include "ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
 
 void ftCh_Slam_Anim(HSD_GObj* gobj)
 {

@@ -1,6 +1,7 @@
 #include "itmariofireball.h"
 
 #include <math.h>
+
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>

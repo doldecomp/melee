@@ -4,6 +4,10 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
+#include "ftmewtwo.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -24,10 +28,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwoshadowball.h>
 #include <melee/lb/lb_00B0.h>
-
-#include "forward.h"
-#include "ftmewtwo.h"
-#include "types.h"
 
 /// SpecialN/SpecialAirN
 

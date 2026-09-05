@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "ftgamewatch.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -14,9 +16,6 @@
 #include <melee/it/kinds/itgamewatchgreenhouse.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "ftgamewatch.h"
-#include "types.h"
 
 /// 0x8014BDB0
 /// https://decomp.me/scratch/7BADg // Create Insecticide Spray Item

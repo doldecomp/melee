@@ -1,5 +1,8 @@
 #include "gmhowto.h"
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmopening.h"
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
@@ -7,10 +10,6 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
-
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmopening.h"
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,

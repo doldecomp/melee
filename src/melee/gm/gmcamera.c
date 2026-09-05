@@ -4,6 +4,11 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "gm_1601.h"
+#include "gm_16AE.h"
+#include "gm_1A45.h"
+#include "gmpause.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/cmsnap.h>
 #include <melee/if/ifall.h>
@@ -23,12 +28,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "gm_1601.h"
-#include "gm_16AE.h"
-#include "gm_1A45.h"
-#include "gmpause.h"
-#include "types.h"
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];

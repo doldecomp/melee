@@ -4,6 +4,10 @@
 
 #include <math.h>
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -14,10 +18,6 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
 
 void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 {

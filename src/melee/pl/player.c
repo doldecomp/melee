@@ -2,6 +2,11 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "plattack.h"
+#include "plbonus.h"
+#include "plstale.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
@@ -17,12 +22,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/objalloc.h>
-
-#include "forward.h"
-#include "plattack.h"
-#include "plbonus.h"
-#include "plstale.h"
-#include "types.h"
 
 typedef struct _ftMapping {
     s8 internal_id;

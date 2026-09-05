@@ -2,6 +2,7 @@
 
 #include <melee/ft/forward.h>
 
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -18,8 +19,6 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itfoxillusion.h>
-
-#include "types.h"
 
 static MotionFlags const ftFx_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble;

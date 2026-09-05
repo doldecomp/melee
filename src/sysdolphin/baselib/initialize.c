@@ -1,9 +1,6 @@
 #include "initialize.h"
 
 #include <stdarg.h>
-#include <dolphin/gx.h>
-#include <dolphin/os.h>
-#include <dolphin/vi.h>
 
 #include "aobj.h"
 #include "class.h"
@@ -22,6 +19,9 @@
 #include "synth.h"
 #include "tev.h"
 #include "video.h"
+#include <dolphin/gx.h>
+#include <dolphin/os.h>
+#include <dolphin/vi.h>
 
 static void HSD_DVDInit(void);
 static void HSD_GXInit(void);

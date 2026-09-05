@@ -6,6 +6,9 @@
 
 #include <math.h>
 #include <stdbool.h>
+
+#include "forward.h"
+#include "mplib.h"
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>
@@ -16,9 +19,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "mplib.h"
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

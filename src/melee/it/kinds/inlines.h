@@ -2,6 +2,7 @@
 #define MELEE_IT_ITEMS_INLINES_H
 
 #include <math.h>
+
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>

@@ -1,5 +1,6 @@
 #include "itbat.h"
 
+#include "inlines.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -9,8 +10,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "inlines.h"
 
 ItemStateTable it_803F57B0[] = {
     { -1, itBat_UnkMotion0_Anim, itBat_UnkMotion0_Phys,

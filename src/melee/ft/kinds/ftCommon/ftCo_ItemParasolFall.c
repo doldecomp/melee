@@ -2,12 +2,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
 #include "forward.h"
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
@@ -18,6 +12,11 @@
 #include "ftCo_Landing.h"
 #include "ftCo_SpecialAir.h"
 #include "inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 void ftCo_800CF280(Fighter_GObj* gobj)
 {

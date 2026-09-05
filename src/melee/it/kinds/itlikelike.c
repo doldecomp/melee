@@ -5,6 +5,7 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C78B0.h>
 #include <melee/ft/ftlib.h>

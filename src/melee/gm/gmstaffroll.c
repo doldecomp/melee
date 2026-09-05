@@ -3,6 +3,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/lb/lb_00B0.h>
@@ -31,9 +34,6 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
 
 struct staffInfo_t {
     char pad_0[0x948];

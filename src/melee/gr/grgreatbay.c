@@ -2,6 +2,14 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -20,15 +28,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
-#include "granime.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
 
 /* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
                                              CollData* coll, int coll_x50,

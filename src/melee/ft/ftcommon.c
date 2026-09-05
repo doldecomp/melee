@@ -5,24 +5,6 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <melee/ef/eflib.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
-#include <melee/it/kinds/it_2E5A.h>
-#include <melee/it/kinds/itfflowerflame.h>
-#include <melee/it/kinds/itpeachparasol.h>
-#include <melee/it/kinds/itrabbitc.h>
-#include <melee/it/kinds/itsword.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/sfx/crowdsfx.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/rumble.h>
 
 #include "fighter.h"
 #include "forward.h"
@@ -45,6 +27,24 @@
 #include "kinds/ftCommon/ftCo_HammerWait.h"
 #include "kinds/ftCommon/ftpickupitem.h"
 #include "types.h"
+#include <melee/ef/eflib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
+#include <melee/it/kinds/it_2E5A.h>
+#include <melee/it/kinds/itfflowerflame.h>
+#include <melee/it/kinds/itpeachparasol.h>
+#include <melee/it/kinds/itrabbitc.h>
+#include <melee/it/kinds/itsword.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
+#include <melee/sfx/crowdsfx.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/rumble.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

@@ -4,9 +4,8 @@
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 
-#include <melee/lb/types.h>
-
 #include "lbdvd.h" // IWYU pragma: export
+#include <melee/lb/types.h>
 
 /* 3BA638 */ static PreloadedGameModeState preload_cache_scene = {
     {

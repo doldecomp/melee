@@ -5,10 +5,9 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 #include "ft/fighter.h"
 #include "ft/types.h"
+#include <dolphin/mtx.h>
 
 void mpColl_SetLedgeSnap(CollData*, f32, f32, f32);
 void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj, HSD_JObj*,

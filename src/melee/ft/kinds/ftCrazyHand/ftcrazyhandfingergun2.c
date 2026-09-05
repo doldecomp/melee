@@ -2,6 +2,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftcrazyhandbackairplane1.h"
+#include "ftcrazyhandfingerbeam.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -11,10 +14,6 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-
-#include "ftcrazyhandbackairplane1.h"
-#include "ftcrazyhandfingerbeam.h"
-#include "types.h"
 
 void ftCh_GrabUnk1_8015ABD0(HSD_GObj* gobj)
 {

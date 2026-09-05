@@ -1,5 +1,6 @@
 #include "ftpeachfloatfall.h"
 
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -9,8 +10,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "types.h"
 
 static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 {

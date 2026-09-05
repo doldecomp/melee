@@ -4,10 +4,9 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftMasterHand/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
-
-#include "ftMasterHand/forward.h" // IWYU pragma: export
 
 struct ftMasterhand_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;

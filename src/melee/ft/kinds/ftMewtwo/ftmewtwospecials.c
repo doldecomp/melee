@@ -2,6 +2,8 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -17,9 +19,6 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "types.h"
 
 /// Flag values read during Confusion's reflect think function
 

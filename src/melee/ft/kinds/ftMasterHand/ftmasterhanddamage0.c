@@ -1,5 +1,7 @@
 #include "ftmasterhanddamage0.h"
 
+#include "ftmasterhandthrownmasterhand.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -11,9 +13,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <Runtime/platform.h>
-
-#include "ftmasterhandthrownmasterhand.h"
-#include "types.h"
 
 bool ftMh_MS_343_80151428(Vec3* vec)
 {

@@ -3,6 +3,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "ftgamewatch.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -19,9 +22,6 @@
 #include <melee/it/kinds/itgamewatchrescue.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
-
-#include "ftgamewatch.h"
-#include "types.h"
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);

@@ -2,6 +2,9 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -12,10 +15,6 @@
 #include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
 
 /* 08CA38 */ void doEnter(Fighter_GObj* gobj);
 

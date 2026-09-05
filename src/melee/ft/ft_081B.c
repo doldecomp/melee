@@ -5,12 +5,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdbool.h>
-#include <dolphin/mtx.h>
-#include <melee/lb/types.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
 
 #include "fighter.h"
 #include "forward.h"
@@ -29,6 +23,12 @@
 #include "kinds/ftCommon/ftCo_StopCeil.h"
 #include "kinds/ftCommon/ftCo_StopWall.h"
 #include "types.h"
+#include <dolphin/mtx.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ft_80081B38(Fighter_GObj* gobj)
 {

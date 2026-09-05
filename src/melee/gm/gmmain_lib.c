@@ -2,6 +2,10 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmhomerun.h"
+#include "types.h"
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
 #include <melee/db/db.h>
@@ -15,11 +19,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
-
-#include "forward.h"
-#include "gm_unsplit.h"
-#include "gmhomerun.h"
-#include "types.h"
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 /* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

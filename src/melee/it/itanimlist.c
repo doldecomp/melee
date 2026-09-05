@@ -1,10 +1,5 @@
 #include "itanimlist.h"
 
-#include <melee/lb/inlines.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/lb/lbcommand.h>
-#include <sysdolphin/baselib/gobjproc.h>
-
 #include "forward.h"
 #include "inlines.h"
 #include "it_2725.h"
@@ -13,6 +8,10 @@
 #include "iteffect.h"
 #include "item.h"
 #include "ithitbox.h"
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbcommand.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

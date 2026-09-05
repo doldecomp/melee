@@ -6,6 +6,9 @@
 #include <melee/ft/kinds/ftPikachu/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -17,9 +20,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachutjoltground.h>
-
-#include "forward.h"
-#include "types.h"
 
 static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
                     ftKirby_MotionState pc_msid)

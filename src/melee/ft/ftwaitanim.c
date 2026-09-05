@@ -1,13 +1,12 @@
 #include "ftwaitanim.h"
 
-#include <melee/it/it_26B1.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/random.h>
-
 #include "ftanim.h"
 #include "ftdata.h"
 #include "ftdynamics.h"
 #include "inlines.h"
+#include <melee/it/it_26B1.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/random.h>
 
 bool ftCo_8008A698(Fighter* fp)
 {

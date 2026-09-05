@@ -1,5 +1,8 @@
 #include "ftCo_CargoLanding.h"
 
+#include "ftCo_CargoWait.h"
+#include "ftCo_Landing.h"
+#include "ftCo_Shouldered.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
@@ -8,10 +11,6 @@
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "ftCo_CargoWait.h"
-#include "ftCo_Landing.h"
-#include "ftCo_Shouldered.h"
 
 void ftCo_8009BD4C(Fighter_GObj* gobj)
 {

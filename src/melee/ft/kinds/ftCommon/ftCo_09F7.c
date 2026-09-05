@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include <math.h>
+
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcmdscript.h>

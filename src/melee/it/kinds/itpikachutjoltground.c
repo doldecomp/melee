@@ -3,6 +3,8 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
+#include "itpikachutjoltair.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -13,8 +15,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/jobj.h>
-
-#include "itpikachutjoltair.h"
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 

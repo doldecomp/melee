@@ -1,9 +1,9 @@
 #include "perf.h"
 
 #include <string.h>
-#include <dolphin/os.h>
 
 #include "debug.h"
+#include <dolphin/os.h>
 
 s64 start_time;
 

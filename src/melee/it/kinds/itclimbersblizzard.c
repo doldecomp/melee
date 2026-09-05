@@ -3,6 +3,8 @@
 #include <melee/it/forward.h>
 
 #include <math.h>
+
+#include "forward.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -13,8 +15,6 @@
 #include <melee/it/itmaplib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "forward.h"
 
 #define M_TAU 6.283185307179586
 

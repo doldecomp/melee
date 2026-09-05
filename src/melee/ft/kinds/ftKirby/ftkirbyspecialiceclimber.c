@@ -5,6 +5,11 @@
 #include <melee/ft/forward.h>
 
 #include <stddef.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "ftkirbyspecialdonkey.h"
+#include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -20,11 +25,6 @@
 #include <melee/it/kinds/itclimbersice.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "forward.h"
-#include "ftkirby.h"
-#include "ftkirbyspecialdonkey.h"
-#include "types.h"
 
 /* 1090D4 */ static void fn_801090D4(Fighter_GObj*);
 

@@ -5,6 +5,8 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftpopo.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -20,9 +22,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "ftpopo.h"
-#include "types.h"
 
 /* 11F500 */ static void ftPp_SpecialN_8011F500(Fighter_GObj* gobj);
 

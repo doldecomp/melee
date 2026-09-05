@@ -1,6 +1,5 @@
-#include <melee/if/ifall.h>
-
 #include "db.h"
+#include <melee/if/ifall.h>
 
 int db_MiscVisualEffectsStatus;
 

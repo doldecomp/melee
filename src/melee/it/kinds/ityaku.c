@@ -2,6 +2,7 @@
 
 #include <melee/it/forward.h>
 
+#include "types.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_3F14.h>
@@ -11,8 +12,6 @@
 #include <melee/it/itzako.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
-
-#include "types.h"
 
 static void it_2E6A_UnkMotion19_Phys(HSD_GObj* arg0);
 static bool it_802E7054(HSD_GObj* gobj);

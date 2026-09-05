@@ -3,13 +3,6 @@
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 #include "forward.h"
 #include "ftCo_AppealS.h"
@@ -24,6 +17,13 @@
 #include "ftCo_Guard.h"
 #include "ftCo_Jump.h"
 #include "ftCo_Walk.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0D6620 */ static void ftCo_SquatRv_Enter(Fighter_GObj* gobj);
 

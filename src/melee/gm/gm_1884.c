@@ -2,6 +2,11 @@
 
 #include <melee/it/forward.h>
 
+#include "gm_1601.h"
+#include "gm_1A36.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
@@ -30,12 +35,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-#include "types.h"
 
 /// @todo .sdata2 order hack
 static inline void gm_1884_sdata2_order(void)

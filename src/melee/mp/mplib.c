@@ -8,6 +8,11 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
+
+#include "forward.h"
+#include "mpcoll.h"
+#include "mpisland.h"
+#include "types.h"
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/gx/GXVert.h>
@@ -34,11 +39,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
-
-#include "forward.h"
-#include "mpcoll.h"
-#include "mpisland.h"
-#include "types.h"
 
 #define LINEID_CHECK(line, line_id)                                           \
     do {                                                                      \

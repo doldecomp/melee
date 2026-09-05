@@ -9,6 +9,13 @@
 #include <m2c_macros.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "forward.h"
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.static.h"
+#include "types.h"
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>
@@ -32,13 +39,6 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "forward.h"
-#include "gm_1601.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.static.h"
-#include "types.h"
 
 int lbl_804D663C;
 u8 lbl_804D6638[0x4];

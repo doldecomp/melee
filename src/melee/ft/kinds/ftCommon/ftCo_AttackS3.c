@@ -2,6 +2,10 @@
 
 #include <melee/ft/forward.h>
 
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+#include "ftpickupitem.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -15,11 +19,6 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
-
-#include "forward.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-#include "ftpickupitem.h"
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
 

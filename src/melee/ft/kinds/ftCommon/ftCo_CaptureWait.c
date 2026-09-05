@@ -1,3 +1,5 @@
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureCut.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcoll.h>
@@ -7,9 +9,6 @@
 #include <melee/ft/kinds/ftYoshi/ftyoshi.h>
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/it/kinds/itsamusgrapple.h>
-
-#include "ftCo_Attack100.h"
-#include "ftCo_CaptureCut.h"
 
 typedef struct {
     u8 pad_1A4C[0x1A4C];

@@ -4,6 +4,9 @@
 #include <melee/ft/forward.h>
 
 #include <math.h>
+
+#include "ftpopo.h"
+#include "ftpopospecials.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -20,9 +23,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include "ftpopo.h"
-#include "ftpopospecials.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

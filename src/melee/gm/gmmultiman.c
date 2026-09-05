@@ -4,16 +4,15 @@
  */
 #include "gmmultiman.h"
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
-
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
 
 static CSSData gm_80490960;
 static StartMeleeData gm_80490AA8;

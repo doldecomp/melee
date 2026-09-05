@@ -5,6 +5,12 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
+#include "ftCo_0A01.h"
+#include "ftCo_Fall.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_Lift.h"
+#include "ftCo_WarpStar.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -25,13 +31,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
-
-#include "ftCo_0A01.h"
-#include "ftCo_Fall.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_Lift.h"
-#include "ftCo_WarpStar.h"
-#include "types.h"
 
 /* 094B6C */ static void ftpickupitem_80094B6C(Fighter_GObj* gobj,
                                                Item_GObj* item_gobj);

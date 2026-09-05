@@ -3,6 +3,8 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "itnesspkthundertrail.h"
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftNess/ftnessspecialhi.h>
@@ -13,8 +15,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
-
-#include "itnesspkthundertrail.h"
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 

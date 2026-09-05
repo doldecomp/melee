@@ -1,5 +1,7 @@
 #include "ftCo_CliffAttack.h"
 
+#include "ftCo_CliffClimb.h"
+#include "ftCo_CliffEscape.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0DF1.h>
 #include <melee/ft/ftanim.h>
@@ -7,9 +9,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-
-#include "ftCo_CliffClimb.h"
-#include "ftCo_CliffEscape.h"
 
 /* 09AEA4 */ static void ftCo_8009AEA4(Fighter_GObj* gobj);
 

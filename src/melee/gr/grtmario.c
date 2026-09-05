@@ -1,5 +1,11 @@
 #include <melee/lb/forward.h>
 
+#include "granime.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -8,13 +14,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/psstructs.h>
-
-#include "granime.h"
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
 
 /* 21F840 */ static void grTMario_8021F840(bool);
 /* 21F844 */ static void grTMario_8021F844(void);

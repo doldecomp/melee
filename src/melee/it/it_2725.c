@@ -1,17 +1,6 @@
 #include "it_2725.h"
 
 #include <math.h>
-#include <melee/db/db.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/ftlib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mpcoll.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 #include "inlines.h"
 #include "it_26B1.h"
@@ -23,6 +12,17 @@
 #include "item.h"
 #include "ithitbox.h"
 #include "itmaplib.h"
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 extern f32 it_804DC73C;
 

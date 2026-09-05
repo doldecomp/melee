@@ -1,12 +1,11 @@
 #include <melee/ft/forward.h>
 
-#include <melee/lb/lbmthp.h>
-
 #include "gm_1601.h"
 #include "gm_16F1.h"
 #include "gm_unsplit.h"
 #include "gmevent.h"
 #include "types.h"
+#include <melee/lb/lbmthp.h>
 
 /* 1BEE9C */ static void gm_801BEE9C(GameModeState*);
 /* 1BEF84 */ static void gm_801BEF84(GameModeState*);

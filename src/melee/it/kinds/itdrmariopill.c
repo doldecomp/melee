@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/db/db.h>

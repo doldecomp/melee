@@ -3,6 +3,13 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -14,13 +21,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 struct grPushOn_Entry {
     s32 x0;

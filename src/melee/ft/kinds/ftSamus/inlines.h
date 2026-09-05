@@ -5,6 +5,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
+
 #include <melee/ef/eflib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>

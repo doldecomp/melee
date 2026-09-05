@@ -2,6 +2,14 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include "gm_1601.h"
+#include "gm_1A3F.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -21,15 +29,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-
-#include "forward.h"
-#include "gm_1601.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.h"
-#include "types.h"
 
 /* 4799B8 */ static struct Lbl804799B8_t lbl_804799B8;
 /* 4D6640 */ static HSD_Archive* lbl_804D6640;

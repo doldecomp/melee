@@ -2,6 +2,7 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "vi.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -31,8 +32,6 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
-
-#include "vi.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

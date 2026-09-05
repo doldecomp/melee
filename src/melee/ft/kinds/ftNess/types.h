@@ -3,11 +3,10 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "ftNess/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
-
-#include "ftNess/forward.h" // IWYU pragma: export
 
 struct ftNess_FighterVars {
     /* 0x222C */ HSD_GObj* yoyo_gobj;

@@ -5,6 +5,10 @@
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
+#include "ifall.h"
+#include "ifstatus.h"
+#include "ifstock.static.h"
+#include "types.h"
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmregclear.h>
@@ -26,11 +30,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
-
-#include "ifall.h"
-#include "ifstatus.h"
-#include "ifstock.static.h"
-#include "types.h"
 
 struct IfStockStealAnim {
     Vec3 start;

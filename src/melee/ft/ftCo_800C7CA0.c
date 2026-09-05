@@ -2,11 +2,6 @@
 
 #include <placeholder.h>
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
-
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftanim.h"
@@ -17,6 +12,10 @@
 #include "kinds/ftCommon/ftCo_DownBound.h"
 #include "kinds/ftKirby/ftkirby.h"
 #include "types.h"
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 HSD_MObj* ft_804D6580;
 

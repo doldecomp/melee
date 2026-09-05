@@ -8,6 +8,9 @@
 #include <math.h>
 #include <stddef.h>
 #include <string.h>
+
+#include "tylist.h"
+#include "types.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -53,9 +56,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
-
-#include "tylist.h"
-#include "types.h"
 
 typedef struct ToyDisplayList {
     /* 0x000 */ ToyListEntry entries[13];

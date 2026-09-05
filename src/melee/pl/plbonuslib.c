@@ -3,6 +3,12 @@
 #include <placeholder.h>
 
 #include <math.h>
+
+#include "inlines.h"
+#include "pl_040D.h"
+#include "player.h"
+#include "plbonus.h"
+#include "plbonusinline.h"
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftlib.h>
@@ -11,12 +17,6 @@
 #include <melee/if/ifmagnify.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
-
-#include "inlines.h"
-#include "pl_040D.h"
-#include "player.h"
-#include "plbonus.h"
-#include "plbonusinline.h"
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
