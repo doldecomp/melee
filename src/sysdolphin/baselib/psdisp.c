@@ -1125,33 +1125,32 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         Mtx mtx;
         Vec3 axis;
 
-        f32 t1;
-        f32 t2;
-        f32 t3;
-        f32 t4;
         f32 rx = right_x;
         f32 ry = right_y;
         f32 rz = right_z;
         f32 ux = up_x;
         f32 uz = up_z;
+        f32 uy = up_y;
+        f32 ax;
+        f32 ay;
+        f32 az;
 
-        axis.x = ry * uz - rz * up_y;
+        ax = ry * uz - rz * uy;
         {
             f32 axis_y_product = rx * uz;
-            axis.y = rz * ux - axis_y_product;
+            ay = rz * ux - axis_y_product;
         }
-        axis.z = rx * up_y - ry * ux;
+        az = rx * uy - ry * ux;
+        axis.x = ax;
+        axis.y = ay;
+        axis.z = az;
         PSMTXRotAxisRad(mtx, &axis, angle);
-        t1 = mtx[1][0] * rx + mtx[1][1] * ry;
-        t2 = mtx[1][0] * ux + mtx[1][1] * up_y;
-        t3 = mtx[2][0] * rx + mtx[2][1] * ry;
-        t4 = mtx[2][0] * ux + mtx[2][1] * up_y;
         right_x = mtx[0][2] * rz + (mtx[0][0] * rx + mtx[0][1] * ry);
-        right_y = mtx[1][2] * rz + t1;
-        right_z = mtx[2][2] * rz + t3;
-        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * up_y);
-        up_y = mtx[1][2] * uz + t2;
-        up_z = mtx[2][2] * uz + t4;
+        right_y = mtx[1][2] * rz + (mtx[1][0] * rx + mtx[1][1] * ry);
+        right_z = mtx[2][2] * rz + (mtx[2][0] * rx + mtx[2][1] * ry);
+        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * uy);
+        up_y = mtx[1][2] * uz + (mtx[1][0] * ux + mtx[1][1] * uy);
+        up_z = mtx[2][2] * uz + (mtx[2][0] * ux + mtx[2][1] * uy);
     }
     psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z, up_x,
                          up_y, up_z);
