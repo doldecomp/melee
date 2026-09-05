@@ -969,7 +969,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     {
                         s32 variant_count = (n * 2) & 0xFE;
                         data->variant_gobj = mnNameNew_GlyphVariantSetup(
-                            data, variant_count, *hovered);
+                            data, variant_count, (u8) *hovered);
                     }
                     return;
                 }
@@ -1445,9 +1445,8 @@ mnNameNew_GlyphVariantSetup_InitJobjs(GlyphVariantEntry* user_data,
     }
 }
 
-HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
+HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
 {
-    f32 base_y;
     MnNameNewDataLayout* layout;
     HSD_JObj* variant;
     HSD_JObj* key_jobj;
@@ -1459,7 +1458,6 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     Vec3 offset;
     f32 dx;
     f32 dy;
-    f32 base_x;
     StaticModelDesc* setup_desc;
     HSD_JObj* ref2;
     HSD_JObj* jobj;
@@ -1487,12 +1485,12 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
 
     offset = mnNameNew_803B8528;
 
-    if (arg2 >= 0x32U && arg2 < 0x3AU) {
-        key_jobj = arg0->jobjs[layout->key_jobj_ids[arg2 - 0x32]];
+    if ((u8) arg2 >= 0x32U && (u8) arg2 < 0x3AU) {
+        key_jobj = arg0->jobjs[layout->key_jobj_ids[(u8) arg2 - 0x32]];
     } else {
         key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
         for (i = 0; i < 50; i++) {
-            if (i == (s32) arg2) {
+            if (i == (s32) (u8) arg2) {
                 break;
             }
             if (key_jobj == NULL) {
@@ -1510,10 +1508,8 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     ref2 = user_data->jobjs[5];
     ref3 = user_data->jobjs[6];
 
-    base_x = HSD_JObjGetTranslationX(ref_jobj);
-    dx = HSD_JObjGetTranslationX(ref2) - base_x;
-    base_y = HSD_JObjGetTranslationY(ref_jobj);
-    dy = HSD_JObjGetTranslationY(ref3) - base_y;
+    dx = HSD_JObjGetTranslationX(ref2) - HSD_JObjGetTranslationX(ref_jobj);
+    dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
 
     variant_desc = mnNameNew_804A0720;
     i = 0;

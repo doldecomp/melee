@@ -24,7 +24,7 @@
 /* 23D130 */ HSD_Text* mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1,
                                           u8 arg2, s32 arg3);
 /* 23D3E8 */ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0,
-                                                   u16 arg1, u8 arg2);
+                                                   u16 arg1, s32 arg2);
 /* 23DA08 */ s32 mnNameNew_8023DA08(NameNewEntry*);
 /* 23DAEC */ void fn_8023DAEC(HSD_GObj*);
 /* 23DBE8 */ void fn_8023DBE8(HSD_GObj*);
