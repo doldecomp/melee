@@ -95,7 +95,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         fp = fighter;
     }
 
-    if ((s8) (u8) fp->x2100 <= 1) {
+    if (fp->x2100 <= 1) {
         return;
     }
 
@@ -149,14 +149,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             prevPos.x = prevPos.y = prevPos.z = 0.0f;
 
-            for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
+            for (i = fp->x2100 - 1; i >= 0; i--) {
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
 
                 delta.x = entry->xC.x * x20FC + entry->x0.x - prevPos.x;
                 delta.y = entry->xC.y * x20FC + entry->x0.y - prevPos.y;
                 delta.z = entry->xC.z * x20FC + entry->x0.z - prevPos.z;
 
-                if (i != (s8) (u8) fp->x2100 - 1) {
+                if (i != fp->x2100 - 1) {
                     d2 = delta.z * delta.z +
                          (delta.x * delta.x + delta.y * delta.y);
                     d2 = sqrtf(d2);
@@ -205,11 +205,11 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             innerDiff = x20F8 - blendedInner;
             interpFactor = 1.0f;
-            remaining = (s8) (u8) fp->x2100 - 1;
+            remaining = fp->x2100 - 1;
             outerDiff = x20FC - blendedOuter;
             distPtr = &cumDist[0];
 
-            while (remaining >= 0) {
+            for (; remaining >= 0; remaining--) {
                 f32 outerScale, innerScale;
                 s32 alpha;
                 struct Fighter_x20B0_t* nextEntry;
@@ -232,13 +232,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
-                (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
-                (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
-                (vp + 1)->r = params->xE;
-                (vp + 1)->g = params->xF;
-                (vp + 1)->b = params->x10;
-                (vp + 1)->a = alpha;
+                vp[1].x = curEntry->xC.x * outerScale + curEntry->x0.x;
+                vp[1].y = curEntry->xC.y * outerScale + curEntry->x0.y;
+                vp[1].z = curEntry->xC.z * outerScale + curEntry->x0.z;
+                vp[1].r = params->xE;
+                vp[1].g = params->xF;
+                vp[1].b = params->x10;
+                vp[1].a = alpha;
 
                 vp += 2;
 
@@ -321,16 +321,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                 vp->g = params->xB;
                                 vp->b = params->xC;
                                 vp->a = alpha;
-                                (vp + 1)->x =
-                                    tempDir.x * outerScale + basePosX;
-                                (vp + 1)->y =
-                                    tempDir.y * outerScale + basePosY;
-                                (vp + 1)->z =
-                                    tempDir.z * outerScale + basePosZ;
-                                (vp + 1)->r = params->xE;
-                                (vp + 1)->g = params->xF;
-                                (vp + 1)->b = params->x10;
-                                (vp + 1)->a = alpha;
+                                vp[1].x = tempDir.x * outerScale + basePosX;
+                                vp[1].y = tempDir.y * outerScale + basePosY;
+                                vp[1].z = tempDir.z * outerScale + basePosZ;
+                                vp[1].r = params->xE;
+                                vp[1].g = params->xF;
+                                vp[1].b = params->x10;
+                                vp[1].a = alpha;
                                 vp += 2;
                             }
                         }
@@ -338,7 +335,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 }
 
                 curIdx2 = nextIdx;
-                remaining--;
             }
 
             GXClearVtxDesc();
