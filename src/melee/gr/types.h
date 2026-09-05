@@ -1823,16 +1823,7 @@ struct Ground {
     HSD_GObj* x18; // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    Vec3 self_vel;
-    Vec3 cur_pos;
-    int x58;
-    int x5C;
-    int x60;
-    int x64;
-    int x68;
-    GXColor x6C;
-    int x70;
-    char pad_74[0xC0 - 0x74];
+    ColorOverlay color_overlay; // 0x40
     f32 xC0;
 
     /**
