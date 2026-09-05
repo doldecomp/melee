@@ -522,13 +522,13 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     HSD_Particle* q;
     s32 count;
     s32 i;
-    s32 w;
+    u8 w;
 
     psSetCurrentMtx(GX_PNMTX0);
-    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
-    if (prevPointSize != (s32) (u8) w) {
-        prevPointSize = (u8) w;
-        GXSetPointSize((u8) w, GX_TO_ONE);
+    w = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
+    if (prevPointSize != (s32) w) {
+        prevPointSize = w;
+        GXSetPointSize(w, GX_TO_ONE);
     }
     last = pp;
     p = buf;
@@ -614,14 +614,14 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     HSD_Particle* q;
     s32 count;
     s32 i;
-    s32 w;
+    u8 w;
 
     (void) c;
     psSetCurrentMtx(GX_PNMTX0);
-    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
-    if (prevLineWidth != (s32) (u8) w) {
-        prevLineWidth = (u8) w;
-        GXSetLineWidth((u8) w, GX_TO_ONE);
+    w = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
+    if (prevLineWidth != (s32) w) {
+        prevLineWidth = w;
+        GXSetLineWidth(w, GX_TO_ONE);
     }
     p = vbuf;
     c = cbuf;
@@ -1236,7 +1236,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     f32 prev_x;
     f32 prev_y;
     f32 prev_z;
-    s32 w;
+    u8 w;
 
     psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
@@ -1290,13 +1290,13 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                                (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
     }
 
-    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
+    w = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     if (pp->kind & Trail) {
         GXColor draw_color;
 
-        if (prevLineWidth != (s32) (u8) w) {
-            prevLineWidth = (u8) w;
-            GXSetLineWidth((u8) w, GX_TO_ONE);
+        if (prevLineWidth != (s32) w) {
+            prevLineWidth = w;
+            GXSetLineWidth(w, GX_TO_ONE);
         }
         getClrTrail(pp, &draw_color);
         if (pp->kind & DispTexture) {
@@ -1318,9 +1318,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXTexCoord1x8(1);
         }
     } else {
-        if (prevPointSize != (s32) (u8) w) {
-            prevPointSize = (u8) w;
-            GXSetPointSize((u8) w, GX_TO_ONE);
+        if (prevPointSize != (s32) w) {
+            prevPointSize = w;
+            GXSetPointSize(w, GX_TO_ONE);
         }
         if (pp->kind & DispTexture) {
             setVtxDesc(0);
