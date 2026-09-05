@@ -137,8 +137,7 @@ struct mn_803EC818_t mn_803EC818[7] = {
     { 0x36, { 0x00, 0x00, 0x00, 0x00 } },
 };
 
-f32 mn_804D4B88 = 4.0F;
-f32 lbl_804D4B8C = 5.0F;
+static f32 mn_804D4B88[2] = { 4.0F, 5.0F };
 f32 mn_804D4B90 = 1.0F;
 /// Stock count {min, max} for the Stock Match rule item (1-99). Retail
 /// .sdata has two objects here (0x804D4B94 size 0x2 and 0x804D4B96 size
@@ -149,9 +148,8 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 u8 mn_StockCountTextId = 0x2B;
 
 f32 mn_804D6BD8;
-HSD_GObj* mn_804D6BD0;
-
 s32 mn_804D6BD4;
+HSD_GObj* mn_804D6BD0;
 
 void mnItemSw_802358C0(void);
 void mn_802339FC(void);
@@ -736,7 +734,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         if (selected == 1 &&
             ((struct mn_802307F8_t*) mn_804D6BD0->user_data)->x2 == 1)
         {
-            HSD_JObjReqAnim(roots[7], mn_804D4B88);
+            HSD_JObjReqAnim(roots[7], mn_804D4B88[0]);
         } else {
             HSD_JObjReqAnim(roots[7], rule_label_frames[selected][0]);
         }
@@ -763,7 +761,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         if (hovered == 1 &&
             ((struct mn_802307F8_t*) mn_804D6BD0->user_data)->x2 == 1)
         {
-            HSD_JObjReqAnim(roots[7], (&mn_804D4B88)[1]);
+            HSD_JObjReqAnim(roots[7], mn_804D4B88[1]);
         } else {
             HSD_JObjReqAnim(roots[7], rule_label_frames[hovered][1]);
         }
@@ -809,7 +807,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             mn_80230198(arg0, data->x34[i].joints[0], i);
             if (i == 1 && arg2 != 0 && focus == 0) {
                 if (mn_804A04F0.confirmed_selection == 1) {
-                    HSD_JObjReqAnim(roots[7], mn_804D4B88);
+                    HSD_JObjReqAnim(roots[7], mn_804D4B88[0]);
                 } else {
                     HSD_JObjReqAnim(roots[7], rule_label_frames[1][0]);
                 }
@@ -1162,7 +1160,7 @@ HSD_GObj* mn_80230E38(int arg0)
             if (i == 1 &&
                 ((struct mn_802307F8_t*) mn_804D6BD0->user_data)->x2 == 1)
             {
-                HSD_JObjReqAnim(jobj_parts[7], (&mn_804D4B88)[selected == i]);
+                HSD_JObjReqAnim(jobj_parts[7], mn_804D4B88[selected == i]);
             } else {
                 HSD_JObjReqAnim(jobj_parts[7],
                                 rule_label_frames[i][selected == i]);
@@ -1205,9 +1203,9 @@ HSD_GObj* mn_80230E38(int arg0)
                     JObjIndices6 time_indices;
                     u8* index_ptr;
 
+                    index_ptr = &time_indices.idx[j = 0];
                     time_indices = time_digit_indices;
-                    index_ptr = time_indices.idx;
-                    for (j = 0; j < 6; j++, index_ptr++) {
+                    for (; j < 6; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
