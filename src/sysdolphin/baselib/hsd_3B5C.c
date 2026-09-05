@@ -25,10 +25,6 @@ typedef struct JpegState {
     JpegWorkData work;
 } JpegState;
 
-typedef struct JpegLumaRow {
-    s32 values[16];
-} JpegLumaRow;
-
 typedef struct JpegQuantTables {
     u8 luma[0x40];
     u8 chroma[0x40];
@@ -481,173 +477,133 @@ void fn_803B61B4(s32* block)
     }
 }
 
-static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
-                        s32 unused_arg4)
+static inline s32 jpeg_clamp(f32 value)
 {
-    s32 sc16;
-    s32 scratch_r6;
-    s32 temp_v;
-    u8 work_r16;
-    u8 work_r16_2;
-    u8 work_r17;
-    u8* base;
-    s32 work_ctr;
-    s32 work_ctr_2;
-    s32 work_r10;
-    s32 work_r12;
-    s32 work_r5;
-    s32 work_r6;
-    s32 work_r21;
-    s32 work_r7;
-    u32 work_r31;
-    s32 work_r22;
-    u8* work_r8;
-    u8* work_r9;
-
-    PAD_STACK(0x28);
-    work_r9 = &hsd_804D2E70[0x118];
-    for (work_r10 = 0; work_r10 < 4; work_r10++) {
-        work_r8 = work_r9;
-        for (work_ctr = 4; work_ctr != 0; work_ctr--) {
-            temp_v = ((JpegLumaRow*) work_r8)->values[0];
-            ((JpegLumaRow*) work_r8)->values[0] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[1];
-            ((JpegLumaRow*) work_r8)->values[1] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[2];
-            ((JpegLumaRow*) work_r8)->values[2] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[3];
-            ((JpegLumaRow*) work_r8)->values[3] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[4];
-            ((JpegLumaRow*) work_r8)->values[4] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[5];
-            ((JpegLumaRow*) work_r8)->values[5] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[6];
-            ((JpegLumaRow*) work_r8)->values[6] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[7];
-            ((JpegLumaRow*) work_r8)->values[7] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[8];
-            ((JpegLumaRow*) work_r8)->values[8] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[9];
-            ((JpegLumaRow*) work_r8)->values[9] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[10];
-            ((JpegLumaRow*) work_r8)->values[10] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[11];
-            ((JpegLumaRow*) work_r8)->values[11] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[12];
-            ((JpegLumaRow*) work_r8)->values[12] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[13];
-            ((JpegLumaRow*) work_r8)->values[13] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[14];
-            ((JpegLumaRow*) work_r8)->values[14] = temp_v + 0x80;
-            temp_v = ((JpegLumaRow*) work_r8)->values[15];
-            ((JpegLumaRow*) work_r8)->values[15] = temp_v + 0x80;
-            work_r8 += 0x40;
-        }
-        work_r9 += 0x100;
+    if (value < 0.0f) {
+        return 0;
     }
-    base = hsd_804D2E70;
-    scratch_r6 = (arg3 + 0xF) / 16;
-    sc16 = scratch_r6 << 4;
-    work_r21 = work_r22 = 0;
-    for (work_r6 = 0; work_r6 < 2; work_r6++) {
-        u16* work_r9_2;
-        s32 work_r25;
-        s32 work_r24;
-
-        work_r25 = work_r22;
-        work_r9_2 =
-            (u16*) arg0 + (((arg1 / 4) * 0x10) +
-                           ((scratch_r6 << 6) * ((arg2 / 4) + work_r6)));
-        for (work_r7 = 0, work_r24 = 0; work_r7 < 2; work_r7++) {
-            s32 work_r4;
-
-            for (work_r4 = 0, work_r12 = work_r21 * 8; work_r4 < 4; work_r4++)
-            {
-                work_r31 = (work_r24 + work_r12) * 4;
-                for (work_r5 = 0; work_r5 < 4; work_r5++) {
-                    s32 work_r8_2;
-                    s32* work_r27;
-
-                    work_r8_2 = 0;
-                    work_r27 =
-                        &((JpegWorkData*) &base[0x118])->luma[work_r31 / 4];
-                    for (work_ctr_2 = 4; work_ctr_2 != 0; work_ctr_2--) {
-                        f32 scratch_f0;
-                        f32 scratch_f0_2;
-                        f32 scratch_f0_3;
-                        s32 store_off;
-                        s32 scratch_r18;
-                        s32 scratch_r19;
-                        s32 scratch_r20;
-                        u8* scratch_r16;
-
-                        scratch_r19 = *work_r27;
-                        {
-                            s32 chroma_x;
-
-                            chroma_x = (work_r8_2 % 2) * 4;
-                            scratch_r16 =
-                                base + (((work_r5 >> 1) +
-                                         (work_r25 + ((work_r4 & 2) * 4)) +
-                                         (chroma_x + ((work_r8_2 / 2) << 5))) *
-                                        4);
-                        }
-                        scratch_r20 = ((JpegState*) scratch_r16)->work.cr[0];
-                        scratch_r18 = ((JpegState*) scratch_r16)->work.cb[0];
-                        store_off = ((work_r8_2 & 1) << 5) +
-                                    (sc16 * ((work_r8_2 & 2) << 2));
-                        scratch_f0 = (f32) ((1.402 * (f64) scratch_r20) +
-                                            (f64) scratch_r19);
-                        if (scratch_f0 < 0.0f) {
-                            temp_v = 0;
-                        } else if (255.0f < scratch_f0) {
-                            temp_v = 0xFF;
-                        } else {
-                            temp_v = (u8) (s32) scratch_f0;
-                        }
-                        work_r16 = temp_v;
-                        scratch_f0_2 = ((f32) scratch_r19 -
-                                        (0.3441f * (f32) scratch_r18)) -
-                                       (0.7139f * (f32) scratch_r20);
-                        if (scratch_f0_2 < 0.0f) {
-                            temp_v = 0;
-                        } else if (255.0f < scratch_f0_2) {
-                            temp_v = 0xFF;
-                        } else {
-                            temp_v = (u8) (s32) scratch_f0_2;
-                        }
-                        work_r17 = temp_v;
-                        scratch_f0_3 =
-                            (f32) ((f64) ((1.7718f * (f32) scratch_r18) +
-                                          (f32) scratch_r19) -
-                                   (0.0012 * (f64) scratch_r20));
-                        if (scratch_f0_3 < 0.0f) {
-                            temp_v = 0;
-                        } else if (255.0f < scratch_f0_3) {
-                            temp_v = 0xFF;
-                        } else {
-                            temp_v = (u8) (s32) scratch_f0_3;
-                        }
-                        work_r16_2 = temp_v;
-                        work_r9_2[store_off] = ((work_r16 << 8) & 0xF800) |
-                                               ((work_r17 << 3) & 0x7E0) |
-                                               (work_r16_2 >> 3U);
-                        work_r27 += 0x40;
-                        work_r8_2 += 1;
-                    }
-                    work_r9_2 += 1;
-                    work_r31 += 4;
-                }
-                work_r12 += 8;
-            }
-            work_r25 += 2;
-            work_r24 += 4;
-        }
-        work_r21 += 4;
-        work_r22 += 0x10;
+    if (255.0f < value) {
+        return 255;
     }
+    return (u8) (s32) value;
 }
 
+static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
+{
+    s32 tile_y;
+    s32 chroma_column;
+    s32 cr;
+    s32 block_columns;
+    s32 tile_x;
+    s32 group_y;
+    s32 group_x;
+    s32 block;
+    s32* luma;
+    u8* luma_block;
+    u16* out;
+    s32 luminance;
+    f32 red_value;
+    u32 luma_offset;
+    s32 luma_x;
+    s32 row;
+    s32 aligned_width;
+    u8 green;
+    s32 channel;
+    u8 blue;
+    s32 chroma_row;
+    s32 cb;
+    f32 green_value;
+    s32 bias_block;
+    s32 out_offset;
+    f32 blue_value;
+    s32 group_row;
+    s32 block_count;
+    u8* base;
+    s32 chroma_x_base;
+    s32 luma_row_offset;
+    u8* chroma;
+    s32 group_chroma;
+    s32 luma_groups;
+    struct {
+        s32* luma;
+        u8 red;
+    } pixel;
+    PAD_STACK(24);
+    pixel.red = 0;
+    base = hsd_804D2E70;
+    luma_block = (u8*) ((JpegState*) base)->work.luma;
+    for (bias_block = 0; bias_block < 4; bias_block++) {
+        luma = (s32*) luma_block;
+        for (luma_groups = 16; luma_groups != 0; luma_groups--) {
+            channel = luma[0];
+            luma[0] = channel + 0x80;
+            channel = luma[1];
+            luma[1] = channel + 0x80;
+            channel = luma[2];
+            luma[2] = channel + 0x80;
+            channel = luma[3];
+            luma[3] = channel + 0x80;
+            luma += 4;
+        }
+        luma_block += 0x100;
+    }
+    block_columns = (width + 0xF) / 16;
+    aligned_width = block_columns << 4;
+    for (group_y = 0; group_y < 2; group_y++) {
+        out = (u16*) dst + (((x / 4) * 0x10) +
+                            ((aligned_width << 2) * ((y / 4) + group_y)));
+        group_chroma = group_y * 16;
+        group_row = group_y * 4;
+        for (group_x = 0; group_x < 2; group_x++) {
+            row = group_row;
+            chroma_x_base = group_chroma + group_x * 2;
+            luma_x = group_x * 4;
+            for (tile_y = 0, luma_row_offset = row * 8; tile_y < 4; tile_y++) {
+                luma_offset = (luma_x + luma_row_offset) * 4;
+                for (tile_x = 0; tile_x < 4; tile_x++) {
+                    chroma_row = tile_x >> 1;
+                    chroma_row += chroma_x_base + ((tile_y & 2) * 4);
+                    block = 0;
+                    pixel.luma =
+                        &((JpegWorkData*) &base[0x118])->luma[luma_offset / 4];
+                    for (block_count = 4; block_count != 0; block_count--) {
+                        luminance = *pixel.luma;
+                        {
+                            chroma_column = (block % 2) * 4;
+                            chroma = base + ((chroma_row + ((block / 2) << 5) +
+                                              chroma_column) *
+                                             4);
+                        }
+                        cr = ((JpegState*) chroma)->work.cr[0];
+                        cb = ((JpegState*) chroma)->work.cb[0];
+                        out_offset = ((block & 1) << 5) +
+                                     (aligned_width * ((block & 2) << 2));
+                        red_value =
+                            (f32) ((1.402 * (f64) cr) + (f64) luminance);
+                        pixel.red = jpeg_clamp(red_value);
+                        green_value =
+                            ((f32) luminance - (0.3441f * (f32) cb)) -
+                            (0.7139f * (f32) cr);
+                        green = jpeg_clamp(green_value);
+                        blue_value = (f32) ((f64) ((1.7718f * (f32) cb) +
+                                                   (f32) luminance) -
+                                            (0.0012 * (f64) cr));
+                        blue = jpeg_clamp(blue_value);
+                        out[out_offset] = ((pixel.red << 8) & 0xF800) |
+                                          ((green << 3) & 0x7E0) |
+                                          (blue >> 3U);
+                        pixel.luma += 0x40;
+                        block += 1;
+                    }
+                    out += 1;
+                    luma_offset += 4;
+                }
+                luma_row_offset += 8;
+            }
+            group_row = row;
+        }
+    }
+}
 static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
 {
     s32 cr_coeff7;
