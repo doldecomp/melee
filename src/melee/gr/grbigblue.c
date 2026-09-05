@@ -829,13 +829,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     gp->u.bigblue.data[i].x50 = 0;
                     {
                         s32 chance = yakumono_param->xB8;
-                        s32 spawn;
-                        if (chance != 0) {
-                            spawn = HSD_Randi(chance);
-                        } else {
-                            spawn = 0;
-                        }
-                        if (spawn == 0) {
+                        if ((chance != 0 ? HSD_Randi(chance) : 0) == 0) {
                             grBigBlue_801E8A1C(i);
                         }
                     }
@@ -1044,12 +1038,13 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         gp->u.bigblue.data[i].x4 = yakumono_param->xB4;
                         gp->u.bigblue.data[i].x34 = 2;
                     } else {
-                        f32 prev_x = gp->u.bigblue.data[i].x24;
-                        f32 prev_y = gp->u.bigblue.data[i].x28;
-
-                        if (prev_y > prev_x) {
+                        if (gp->u.bigblue.data[i].x24 <
+                            gp->u.bigblue.data[i].x28)
+                        {
                             gp->u.bigblue.data[i].x18.z =
-                                yakumono_param->xA0 * (prev_y - prev_x);
+                                yakumono_param->xA0 *
+                                (gp->u.bigblue.data[i].x28 -
+                                 gp->u.bigblue.data[i].x24);
                             if (gp->u.bigblue.data[i].x18.z >=
                                 yakumono_param->xA4)
                             {
@@ -1059,7 +1054,9 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             pos.y -= yakumono_param->xA8;
                         } else {
                             gp->u.bigblue.data[i].x18.z =
-                                -yakumono_param->xA0 * (prev_x - prev_y);
+                                -yakumono_param->xA0 *
+                                (gp->u.bigblue.data[i].x24 -
+                                 gp->u.bigblue.data[i].x28);
                             if (gp->u.bigblue.data[i].x18.z <=
                                 -yakumono_param->xA4)
                             {
@@ -1105,7 +1102,6 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                 f32 coll_y;
                 s32 coll_result;
                 f32 target_y;
-                f32 y_diff;
                 f32 y_vel;
 
                 {
@@ -1153,19 +1149,17 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     gp->u.bigblue.data[i].xC.z = pos.y + (pos.y - coll_y);
                 }
 
-                y_diff = pos.y - (target_y = gp->u.bigblue.data[i].xC.z);
-                if (y_diff < 0.0f) {
-                    y_diff = -y_diff;
-                }
-                if (y_diff < 0.5f) {
+                if (ABS(pos.y - gp->u.bigblue.data[i].xC.z) < 0.5f) {
                     y_vel = 0.0f;
-                } else if (pos.y < target_y) {
-                    y_vel = (target_y - pos.y) / yakumono_param->xBC;
+                } else if (pos.y < gp->u.bigblue.data[i].xC.z) {
+                    y_vel = (gp->u.bigblue.data[i].xC.z - pos.y) /
+                            yakumono_param->xBC;
                     if (y_vel > yakumono_param->xC0) {
                         y_vel = yakumono_param->xC0;
                     }
                 } else {
-                    y_vel = (target_y - pos.y) / yakumono_param->xC4;
+                    y_vel = (gp->u.bigblue.data[i].xC.z - pos.y) /
+                            yakumono_param->xC4;
                     if (y_vel < -yakumono_param->xC8) {
                         y_vel = -yakumono_param->xC8;
                     }
@@ -1212,14 +1206,9 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     gp->u.bigblue.data[i].x2C = 0;
                     {
                         s32 range = yakumono_param->x8C;
-                        s32 rand_val;
-                        if (range != 0) {
-                            rand_val = HSD_Randi(range);
-                        } else {
-                            rand_val = 0;
-                        }
                         gp->u.bigblue.data[i].x4 =
-                            (yakumono_param->x88 + rand_val) / 2;
+                            (yakumono_param->x88 +
+                             (range != 0 ? HSD_Randi(range) : 0)) / 2;
                     }
                     gp->u.bigblue.data[i].x1 = 1;
                 }
