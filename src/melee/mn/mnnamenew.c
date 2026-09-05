@@ -957,16 +957,13 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         GlyphRow* glyphs = layout->lower_glyphs;
                         char** ptrs = glyphs[(u8) sel2];
                         null_char = (s8) *mnNameNew_NullCharacter;
-                        while ((s8) *ptrs[0] != null_char) {
+                        while (null_char != (s8) *ptrs[0]) {
                             ptrs++;
                             n++;
                         }
                     }
-                    {
-                        s32 variant_count = (n * 2) & 0xFE;
-                        data->variant_gobj = mnNameNew_GlyphVariantSetup(
-                            data, variant_count, (u8) *hovered);
-                    }
+                    data->variant_gobj = mnNameNew_GlyphVariantSetup(
+                        data, (n * 2) & 0xFE, (u8) *hovered);
                     return;
                 }
                 cursor = data->cursor_pos;
