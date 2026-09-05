@@ -2066,59 +2066,18 @@ void fn_8017A9B4(int slot)
             (u16*) disp->state.dim_h2 + lookup);
 }
 
-static s32 lbl_804D3FD0 = 0x00500050;
-static s32 lbl_804D3FD4 = 0x00460034;
-static s32 lbl_804D3FD8 = 0x006E0072;
-static s32 lbl_804D3FDC = 0x0064004A;
-static s32 lbl_804D3FE0 = 0x00340034;
-static s32 lbl_804D3FE4 = 0x00340034;
-static s32 lbl_804D3FE8 = 0x004A004A;
-static s32 lbl_804D3FEC = 0x004A004A;
-static s32 lbl_804D3FF0 = 0x000C0008;
-static s32 lbl_804D3FF4 = 0x00060000;
-static s32 lbl_804D3FF8 = 0x000E000E;
-static s32 lbl_804D3FFC = 0x00060000;
-
-#define RESULTS_DISP ((ResultsDisplayLayout*) &lbl_8046E1B0)
-
-static inline struct MatchTeamData*
-fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
-{
-    return disp->state.match_end.team_standings;
-}
-
-static inline void fn_8017AA78_init_state(GXTexFmt image_format)
-{
-    Player_InitAllPlayers();
-    RESULTS_DISP->shared_img.image_ptr = NULL;
-    lb_800121FC(&RESULTS_DISP->shared_img, 0x64, 0x98, image_format, 0);
-    RESULTS_DISP->state.match_end = *fn_80174274();
-}
-
-static inline int fn_8017AA78_get_result(ResultsDisplayLayout* disp)
-{
-    return disp->state.match_end.outcome;
-}
-
-typedef union {
-    lbl_8046E3AC_t* state;
-    u8* bytes;
-} ResultsStatePointer;
-
-static inline void fn_8017AA78_set_x0_0(u8 x0_0_value)
-{
-    RESULTS_DISP->state.x0_0 = x0_0_value;
-}
+static U32Pair lbl_804D3FD0 = { 0x00500050, 0x00460034 };
+static U32Pair lbl_804D3FD8 = { 0x006E0072, 0x0064004A };
+static U32Pair lbl_804D3FE0 = { 0x00340034, 0x00340034 };
+static U32Pair lbl_804D3FE8 = { 0x004A004A, 0x004A004A };
+static U32Pair lbl_804D3FF0 = { 0x000C0008, 0x00060000 };
+static U32Pair lbl_804D3FF8 = { 0x000E000E, 0x00060000 };
 
 void fn_8017AA78(const u8* arg0)
 {
-    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
-    PackedS16x4* p5;
-    PackedS16x4* p7;
-    lbl_8046E3AC_t* state;
-    ResultsStatePointer player_state;
+    int i;
 
-    memzero(disp->pad_000, sizeof(disp->pad_000));
+    memzero(lbl_8046E1B0.pad_000, sizeof(lbl_8046E1B0.pad_000));
     lbBgFlash_800208EC(6);
     Camera_80028B9C(8);
     lb_8000FCDC();
@@ -2131,62 +2090,33 @@ void fn_8017AA78(const u8* arg0)
     efLib_Init();
     efAsync_LoadSync(0);
     ftDemo_ObjAllocInit();
-    fn_8017AA78_init_state(GX_TF_RGB5A3);
+    Player_InitAllPlayers();
+    lbl_8046E1B0.shared_img.image_ptr = NULL;
+    lb_800121FC(&lbl_8046E1B0.shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
+    lbl_8046E3AC.match_end = *fn_80174274();
 
-    fn_8017AA78_set_x0_0(1);
-    disp->state.x0_4 = 0;
-    disp->state.x0_6 = 0;
-    p7 = (PackedS16x4*) gmResultX22F4Init;
-    state = &RESULTS_DISP->state;
-    p5 = (PackedS16x4*) gmResultScoreTableInit;
-    player_state.state = state;
+    lbl_8046E3AC.x0_0 = 1;
+    lbl_8046E3AC.x0_4 = 0;
+    lbl_8046E3AC.x0_6 = 0;
 
-    {
-        s32 a;
-        s32 b;
-        a = lbl_804D3FD0;
-        (void) a;
-        b = lbl_804D3FD4;
-        (void) b;
-        state->dim_w1[0] = a;
-        state->dim_w1[1] = b;
-        a = lbl_804D3FD8;
-        (void) a;
-        b = lbl_804D3FDC;
-        (void) b;
-        state->dim_h1[0] = a;
-        state->dim_h1[1] = b;
-        a = lbl_804D3FE0;
-        (void) a;
-        b = lbl_804D3FE4;
-        (void) b;
-        state->dim_w2[0] = a;
-        state->dim_w2[1] = b;
-        a = lbl_804D3FE8;
-        (void) a;
-        b = lbl_804D3FEC;
-        (void) b;
-        state->dim_h2[0] = a;
-        state->dim_h2[1] = b;
-        *(U32Pair*) state->scissor_y = *(U32Pair*) &lbl_804D3FF0;
-        *(U32Pair*) state->scissor_x = *(U32Pair*) &lbl_804D3FF8;
-    }
+    *(U32Pair*) lbl_8046E3AC.dim_w1 = lbl_804D3FD0;
+    *(U32Pair*) lbl_8046E3AC.dim_h1 = lbl_804D3FD8;
+    *(U32Pair*) lbl_8046E3AC.dim_w2 = lbl_804D3FE0;
+    *(U32Pair*) lbl_8046E3AC.dim_h2 = lbl_804D3FE8;
+    *(U32Pair*) lbl_8046E3AC.scissor_y = lbl_804D3FF0;
+    *(U32Pair*) lbl_8046E3AC.scissor_x = lbl_804D3FF8;
 
-    {
-        int i;
-        for (i = 0; i < 4; player_state.bytes++, i++) {
-            player_state.bytes[1] = 0;
-            player_state.bytes[0x24] = arg0[i];
-            if ((u8) fn_8017AA78_get_result(disp) == OUTCOME_NO_CONTEST) {
-                struct MatchTeamData* team_standings;
-                state->match_end.player_standings[i].is_big_loser = 1;
-                team_standings = fn_8017AA78_get_team_standings(disp);
-                team_standings[state->match_end.player_standings[i].team]
-                    .is_big_loser = 1;
-            }
-            state->x6[i] = 0;
-            state->score_tbl[i] = p5[i];
-            state->x22F4[i] = p7[i];
+    for (i = 0; i < 4; i++) {
+        lbl_8046E3AC.player_flags[i] = 0;
+        lbl_8046E3AC.costume_override[i] = arg0[i];
+        if ((u8) lbl_8046E3AC.match_end.outcome == OUTCOME_NO_CONTEST) {
+            lbl_8046E3AC.match_end.player_standings[i].is_big_loser = 1;
+            lbl_8046E3AC.match_end
+                .team_standings[lbl_8046E3AC.match_end.player_standings[i].team]
+                .is_big_loser = 1;
         }
+        lbl_8046E3AC.x6[i] = 0;
+        lbl_8046E3AC.score_tbl[i] = ((PackedS16x4*) gmResultScoreTableInit)[i];
+        lbl_8046E3AC.x22F4[i] = ((PackedS16x4*) gmResultX22F4Init)[i];
     }
 }
