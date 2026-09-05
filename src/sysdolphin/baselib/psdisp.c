@@ -874,11 +874,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 u32 primitive_count = *(u32*) it;
 
                 it += sizeof(u32);
-                if (primitive_count != 0) {
-                    up.x *= ratio;
-                    up.y *= ratio;
-                    up_z *= ratio;
-                }
+                up.x *= ratio;
+                up.y *= ratio;
+                up_z *= ratio;
                 for (; primitive_count != 0; primitive_count--) {
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
@@ -994,6 +992,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
         }
     }
+    (void) (up.x + up.y + up_z);
 }
 
 static inline void psMaskAbsF32(f32* value)
