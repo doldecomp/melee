@@ -127,12 +127,12 @@ volatile const f64 mn_804DBE38 = 4503599627370496.0;
 const JObjIndices mn_804DBE40 = { 0x02030506 };
 volatile const f32 mn_804DBE44[1] = { 0.0f };
 const JObjIndices mn_804DBE48 = { 0x02030506 };
-const f32 mn_804DBE4C = -9.5f;
-const f32 mn_804DBE50 = 8.0f;
-const f32 mn_804DBE54 = 17.0f;
-const f32 mn_804DBE58 = 364.68332f;
-const f32 mn_804DBE5C = 76.77544f;
-const f32 mn_804DBE60 = 0.0521f;
+f32 mn_804DBE4C = -9.5f;
+f32 mn_804DBE50 = 8.0f;
+f32 mn_804DBE54 = 17.0f;
+f32 mn_804DBE58 = 364.68332f;
+f32 mn_804DBE5C = 76.77544f;
+f32 mn_804DBE60 = 0.0521f;
 volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
@@ -400,7 +400,7 @@ static inline void mn_802327A4_InitOptionRoots(HSD_JObj** option_roots,
 {
     HSD_JObj** option_root;
     u8 j8;
-    s32 j;
+    register s32 j;
     s32 visible;
 
     option_root = option_roots;
@@ -785,13 +785,26 @@ void fn_80232F44(HSD_GObj* gobj)
     }
 }
 
-static inline s32 mnRulePlus_CountVisible(u8 limit)
+static inline void mnRulePlus_CountAllVisible(u8 limit, s32* result)
 {
-    s32 i;
     s32 count = 0;
+    s32 iter = count;
 
-    for (i = 0; i < (s32) limit; i++) {
-        if (mn_80231F80((u8) i) != 0) {
+    for (; iter < (s32) limit; iter++) {
+        if (mn_80231F80((u8) iter) != 0) {
+            count++;
+        }
+    }
+    *result = count;
+}
+
+static inline s32 mnRulePlus_CountVisibleBefore(u8 limit)
+{
+    s32 count = 0;
+    s32 iter;
+
+    for (iter = 0; iter < (s32) limit; iter++) {
+        if (mn_80231F80((u8) iter) != 0) {
             count++;
         }
     }
@@ -838,11 +851,14 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_GObj_SetupProc(gobj, fn_80232F44, 0);
     HSD_JObjAddAnimAll(root_jobj, desc->animjoint, desc->matanim_joint,
                        desc->shapeanim_joint);
-    HSD_JObjReqAnimAll(root_jobj, 0.0f);
+    HSD_JObjReqAnimAll(root_jobj, mn_804DBE44[0]);
     HSD_JObjAnimAll(root_jobj);
 
     user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
-    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
+    if (user_data == NULL) {
+        OSReport(mn_803ED308);
+        __assert(mn_803ED320, 0x3DFU, mn_803ED330);
+    }
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
@@ -883,12 +899,10 @@ HSD_GObj* mn_80233218(MenuState state)
 
     sub_count_ptr = mn_803ED1D0.x10;
     for (i = 0; i < (s32) num_options; i++) {
-        vis_before = mnRulePlus_CountVisible((u8) i);
-
+        vis_before = mnRulePlus_CountVisibleBefore((u8) i);
         option_jobj = user_data->xC[mn_803ED1D0.x0[(u8) vis_before]];
-        vis_total = mnRulePlus_CountVisible(6);
-
-        HSD_JObjReqAnim(option_jobj, (f32) vis_total);
+        mnRulePlus_CountAllVisible(6, &vis_total);
+        HSD_JObjReqAnim(option_jobj, vis_total);
         HSD_JObjAnim(option_jobj);
 
         if ((gm_GetCurrentGameMode() == GM_TOURNAMENT) && ((u8) i == 1)) {
@@ -914,7 +928,7 @@ HSD_GObj* mn_80233218(MenuState state)
             cursor_jobj = HSD_JObjLoadJoint(desc->joint);
             HSD_JObjAddAnimAll(cursor_jobj, desc->animjoint,
                                desc->matanim_joint, desc->shapeanim_joint);
-            HSD_JObjReqAnimAll(cursor_jobj, 0.0f);
+            HSD_JObjReqAnimAll(cursor_jobj, mn_804DBE44[0]);
             HSD_JObjAnimAll(cursor_jobj);
 
             lb_8001204C(cursor_jobj, jobj_parts, jobj_map, 17);
@@ -978,7 +992,7 @@ HSD_GObj* mn_80233218(MenuState state)
                 value_jobj = HSD_JObjLoadJoint(desc->joint);
                 HSD_JObjAddAnimAll(value_jobj, desc->animjoint,
                                    desc->matanim_joint, desc->shapeanim_joint);
-                HSD_JObjReqAnimAll(value_jobj, 0.0f);
+                HSD_JObjReqAnimAll(value_jobj, mn_804DBE44[0]);
                 HSD_JObjAnimAll(value_jobj);
 
                 for (j = 0; j < sub_count_ptr[i]; j++) {
@@ -988,7 +1002,8 @@ HSD_GObj* mn_80233218(MenuState state)
                 switch (i) {
                 case 0: {
                     JObjIndices digit_indices = mn_804DBE48;
-                    u8* index_ptr = digit_indices.idx;
+                    u8* index_ptr;
+                    index_ptr = digit_indices.idx;
                     for (j = 0; j < 4; j++, index_ptr++) {
                         HSD_JObj* num_jobj =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);

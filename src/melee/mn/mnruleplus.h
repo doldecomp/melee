@@ -59,12 +59,12 @@ ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 /* 233218 */ HSD_GObj* mn_80233218(MenuState);
 /* 2339FC */ void mn_802339FC(void);
 
-extern volatile f32 mn_804DBE44;
-extern const f32 mn_804DBE4C;
-extern const f32 mn_804DBE50;
-extern const f32 mn_804DBE54;
-extern const f32 mn_804DBE58;
-extern const f32 mn_804DBE5C;
-extern const f32 mn_804DBE60;
+extern volatile const f32 mn_804DBE44[1];
+extern f32 mn_804DBE4C;
+extern f32 mn_804DBE50;
+extern f32 mn_804DBE54;
+extern f32 mn_804DBE58;
+extern f32 mn_804DBE5C;
+extern f32 mn_804DBE60;
 
 #endif
