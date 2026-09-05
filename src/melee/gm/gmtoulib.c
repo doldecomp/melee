@@ -125,6 +125,10 @@ void fn_8018A514(int count, float val)
     s32 n;
 
     entries = lbl_80473AB8;
+    /// @todo Dead read; a third early lbl_80473AB8-rooted expression is needed
+    /// so the compiler binds the .bss anchor to a register before
+    /// lbl_803D9D20.
+    (void) lbl_80473AB8;
     region = count < 9 ? 0 : count >= 14 ? 2 : 1;
 
     srcs = (BracketSrcEntry**) &lbl_804771B8;
