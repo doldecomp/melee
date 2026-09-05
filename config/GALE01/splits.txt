@@ -2332,6 +2332,7 @@ melee/gm/gmresult.c:
 	.data       start:0x803D6488 end:0x803D6A08
 	.bss        start:0x8046DBE8 end:0x8046E1B0
 	.sdata      start:0x804D3F68 end:0x804D3FC8
+	.sbss       start:0x804D65B8 end:0x804D65C0
 	.sdata2     start:0x804DA300 end:0x804DA368
 
 melee/gm/gmresultplayer.c:
@@ -2356,14 +2357,47 @@ melee/gm/gmregcommon.c:
 	.data       start:0x803D79F0 end:0x803D7A50
 	.sdata      start:0x804D4050 end:0x804D4058
 
+melee/gm/gm_17C0.c:
+	.text       start:0x8017C0C8 end:0x8017E424
+	.rodata     start:0x803B7C08 end:0x803B7C18
+	.data       start:0x803D7A50 end:0x803D7AC0
+	.bss        start:0x804706C0 end:0x80472C30
+	.sdata2     start:0x804DA428 end:0x804DA448
+
+melee/gm/gm_17E4.c:
+	.text       start:0x8017E424 end:0x8017EB30
+	.data       start:0x803D7AC0 end:0x803D85F0
+	.bss        start:0x80472C30 end:0x80472CB0
+	.sdata2     start:0x804DA448 end:0x804DA458
+
+melee/gm/gm_17EB.c:
+	.text       start:0x8017EB30 end:0x8017F008
+	.data       start:0x803D85F0 end:0x803D8B88
+	.bss        start:0x80472CB0 end:0x80472D28
+	.sdata2     start:0x804DA458 end:0x804DA468
+
 melee/gm/gmregclear.c:
-	.text       start:0x8017C0C8 end:0x8018325C
-	.rodata     start:0x803B7C08 end:0x803B7C28
-	.data       start:0x803D7A50 end:0x803D9248
-	.bss        start:0x804706C0 end:0x804735A8
+	.text       start:0x8017F008 end:0x80180AE4
+	.rodata     start:0x803B7C18 end:0x803B7C28
+	.data       start:0x803D8B88 end:0x803D8CD8
+	.bss        start:0x80472D28 end:0x80472E48
 	.sdata      start:0x804D4058 end:0x804D408D
-	.sbss       start:0x804D65B8 end:0x804D65F0
-	.sdata2     start:0x804DA428 end:0x804DA538
+	.sbss       start:0x804D65C0 end:0x804D65C8
+	.sdata2     start:0x804DA468 end:0x804DA500
+
+melee/gm/gm_180A.c:
+	.text       start:0x80180AE4 end:0x80181A14
+	.data       start:0x803D8CD8 end:0x803D8D08
+	.bss        start:0x80472E48 end:0x80472ED8
+	.sbss       start:0x804D65C8 end:0x804D65E0
+	.sdata2     start:0x804DA500 end:0x804DA520
+
+melee/gm/gm_181A.c:
+	.text       start:0x80181A14 end:0x8018325C
+	.data       start:0x803D8D08 end:0x803D9248
+	.bss        start:0x80472ED8 end:0x804735A8
+	.sbss       start:0x804D65E0 end:0x804D65F0
+	.sdata2     start:0x804DA520 end:0x804DA538
 
 melee/gm/gm_1832.c:
 	.text       start:0x8018325C end:0x80186EFC
