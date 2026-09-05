@@ -72,10 +72,10 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-extern void* mnNameNew_804A06F0[4];
-extern void* mnNameNew_804A0700[4];
-extern void* mnNameNew_804A0710[4];
-extern void* mnNameNew_804A0720[8];
+extern StaticModelDesc mnNameNew_804A06F0;
+extern StaticModelDesc mnNameNew_804A0700;
+extern StaticModelDesc mnNameNew_804A0710;
+extern StaticModelDesc mnNameNew_804A0720[2];
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8 mnNameNew_804D4F7C[8];
 HSD_GObj* mnNameNew_804D6C08;
@@ -834,7 +834,7 @@ void mnNameNew_GlyphVariantInput(void)
             }
             mnNameNew_KeySetup(data, data->mode);
             mnNameNew_8023B0F8(mnNameNew_804D6C08,
-                               (u8) mn_804A04F0.hovered_selection);
+                               mn_804A04F0.hovered_selection);
             mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
         }
     } else {
@@ -972,10 +972,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     }
                     {
                         s32 variant_count = (n * 2) & 0xFE;
-                        data->variant_gobj =
-                            (HSD_GObj*) mnNameNew_GlyphVariantSetup(
-                                data, variant_count,
-                                mn_804A04F0.hovered_selection);
+                        data->variant_gobj = mnNameNew_GlyphVariantSetup(
+                            data, variant_count,
+                            mn_804A04F0.hovered_selection);
                     }
                     return;
                 }
@@ -1449,7 +1448,7 @@ mnNameNew_GlyphVariantSetup_InitJobjs(GlyphVariantEntry* user_data,
     }
 }
 
-s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
+HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
 {
     f32 base_y;
     MnNameNewDataLayout* layout;
@@ -1464,20 +1463,21 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     f32 dx;
     f32 dy;
     f32 base_x;
-    void** setup_desc;
+    StaticModelDesc* setup_desc;
     HSD_JObj* ref2;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
-    void** variant_desc;
+    StaticModelDesc* variant_desc;
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    setup_desc = mnNameNew_804A0710;
+    setup_desc = &mnNameNew_804A0710;
     gobj = GObj_Create(6U, 7U, 0x80U);
-    jobj = HSD_JObjLoadJoint(setup_desc[0]);
+    jobj = HSD_JObjLoadJoint(setup_desc->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023CFC8, 0U);
-    HSD_JObjAddAnimAll(jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
+    HSD_JObjAddAnimAll(jobj, setup_desc->animjoint, setup_desc->matanim_joint,
+                       setup_desc->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, ((f32) (u8) arg1) / 2.0f);
     HSD_JObjAnimAll(jobj);
 
@@ -1521,9 +1521,10 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     variant_desc = mnNameNew_804A0720;
     i = 0;
     for (; i < (s32) (u8) arg1; i++) {
-        variant = HSD_JObjLoadJoint(variant_desc[0]);
-        HSD_JObjAddAnimAll(variant, variant_desc[1], variant_desc[2],
-                           variant_desc[3]);
+        variant = HSD_JObjLoadJoint(variant_desc->joint);
+        HSD_JObjAddAnimAll(variant, variant_desc->animjoint,
+                           variant_desc->matanim_joint,
+                           variant_desc->shapeanim_joint);
         HSD_JObjReqAnimAll(variant, (f32) (user_data->selection == i));
         HSD_JObjAnimAll(variant);
         HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
@@ -1532,7 +1533,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     }
 
     mnNameNew_8023D130(user_data, arg1, arg0->mode, arg2);
-    return (s32) gobj;
+    return gobj;
 }
 
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
@@ -1816,9 +1817,10 @@ static inline void mnNameNew_InitKeyJobjs(NameNewEntry* user_data,
     f32 y_range;
 
     for (k = 0; k < 0x32; k++) {
-        key_jobj = HSD_JObjLoadJoint(mnNameNew_804A0700[0]);
-        HSD_JObjAddAnimAll(key_jobj, mnNameNew_804A0700[1],
-                           mnNameNew_804A0700[2], mnNameNew_804A0700[3]);
+        key_jobj = HSD_JObjLoadJoint(mnNameNew_804A0700.joint);
+        HSD_JObjAddAnimAll(key_jobj, mnNameNew_804A0700.animjoint,
+                           mnNameNew_804A0700.matanim_joint,
+                           mnNameNew_804A0700.shapeanim_joint);
         HSD_JObjReqAnimAll(key_jobj, (f32) ((u8) k == user_data->x1));
         HSD_JObjAnimAll(key_jobj);
         x_range = HSD_JObjGetTranslationX(user_data->jobjs[17]) -
@@ -1838,18 +1840,19 @@ void mnNameNew_8023E32C(s32 arg0)
     HSD_JObj* root_jobj;
     NameNewEntry* user_data;
     s32 i;
-    void** setup_desc;
+    StaticModelDesc* setup_desc;
 
     PAD_STACK(8);
 
-    setup_desc = mnNameNew_804A06F0;
+    setup_desc = &mnNameNew_804A06F0;
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnNameNew_804D6C08 = gobj;
-    root_jobj = HSD_JObjLoadJoint(setup_desc[0]);
+    root_jobj = HSD_JObjLoadJoint(setup_desc->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
-    HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
+    HSD_JObjAddAnimAll(root_jobj, setup_desc->animjoint,
+                       setup_desc->matanim_joint, setup_desc->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
     user_data = HSD_MemAlloc(sizeof(*user_data));
@@ -1937,28 +1940,33 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
         &MenMainPanel_Top.shapeanim_joint, "MenMainPanel_Top_shapeanim_joint",
 
         // Row 1
-        &mnNameNew_804A06F0[0], "MenMainConEtNw_Top_joint",
-        &mnNameNew_804A06F0[1], "MenMainConEtNw_Top_animjoint",
-        &mnNameNew_804A06F0[2], "MenMainConEtNw_Top_matanim_joint",
-        &mnNameNew_804A06F0[3], "MenMainConEtNw_Top_shapeanim_joint",
+        &mnNameNew_804A06F0.joint, "MenMainConEtNw_Top_joint",
+        &mnNameNew_804A06F0.animjoint, "MenMainConEtNw_Top_animjoint",
+        &mnNameNew_804A06F0.matanim_joint, "MenMainConEtNw_Top_matanim_joint",
+        &mnNameNew_804A06F0.shapeanim_joint,
+        "MenMainConEtNw_Top_shapeanim_joint",
 
         // Row 2
-        &mnNameNew_804A0700[0], "MenMainBaseEtNw_Top_joint",
-        &mnNameNew_804A0700[1], "MenMainBaseEtNw_Top_animjoint",
-        &mnNameNew_804A0700[2], "MenMainBaseEtNw_Top_matanim_joint",
-        &mnNameNew_804A0700[3], "MenMainBaseEtNw_Top_shapeanim_joint",
+        &mnNameNew_804A0700.joint, "MenMainBaseEtNw_Top_joint",
+        &mnNameNew_804A0700.animjoint, "MenMainBaseEtNw_Top_animjoint",
+        &mnNameNew_804A0700.matanim_joint, "MenMainBaseEtNw_Top_matanim_joint",
+        &mnNameNew_804A0700.shapeanim_joint,
+        "MenMainBaseEtNw_Top_shapeanim_joint",
 
         // Row 3
-        &mnNameNew_804A0710[0], "MenMainSubEtNw_Top_joint",
-        &mnNameNew_804A0710[1], "MenMainSubEtNw_Top_animjoint",
-        &mnNameNew_804A0710[2], "MenMainSubEtNw_Top_matanim_joint",
-        &mnNameNew_804A0710[3], "MenMainSubEtNw_Top_shapeanim_joint",
+        &mnNameNew_804A0710.joint, "MenMainSubEtNw_Top_joint",
+        &mnNameNew_804A0710.animjoint, "MenMainSubEtNw_Top_animjoint",
+        &mnNameNew_804A0710.matanim_joint, "MenMainSubEtNw_Top_matanim_joint",
+        &mnNameNew_804A0710.shapeanim_joint,
+        "MenMainSubEtNw_Top_shapeanim_joint",
 
         // Row 4
-        &mnNameNew_804A0720[0], "MenMainSbaseEtNw_Top_joint",
-        &mnNameNew_804A0720[1], "MenMainSbaseEtNw_Top_animjoint",
-        &mnNameNew_804A0720[2], "MenMainSbaseEtNw_Top_matanim_joint",
-        &mnNameNew_804A0720[3], "MenMainSbaseEtNw_Top_shapeanim_joint",
+        &mnNameNew_804A0720[0].joint, "MenMainSbaseEtNw_Top_joint",
+        &mnNameNew_804A0720[0].animjoint, "MenMainSbaseEtNw_Top_animjoint",
+        &mnNameNew_804A0720[0].matanim_joint,
+        "MenMainSbaseEtNw_Top_matanim_joint",
+        &mnNameNew_804A0720[0].shapeanim_joint,
+        "MenMainSbaseEtNw_Top_shapeanim_joint",
 
         NULL);
 
@@ -2000,10 +2008,10 @@ void mnNameNew_8023EA08(UNK_T arg0)
 }
 
 char mnNameNew_CurrentNameText[0x10];
-void* mnNameNew_804A0720[8];
-void* mnNameNew_804A0710[4];
-void* mnNameNew_804A0700[4];
-void* mnNameNew_804A06F0[4];
+StaticModelDesc mnNameNew_804A0720[2];
+StaticModelDesc mnNameNew_804A0710;
+StaticModelDesc mnNameNew_804A0700;
+StaticModelDesc mnNameNew_804A06F0;
 
 static u8 mnNameNew_804D4F98[8] ATTRIBUTE_ALIGN(8) = { 0 };
 
