@@ -552,12 +552,12 @@ enum {
     HATENA_APPEAR_CHECKLOOP = 0x14
 };
 
-#define HATENA_APPEAR_CHECKLOOP(countdown, last_index, status_val, line)      \
+#define HATENA_APPEAR_CHECKLOOP(countdown, last_index, status_val, line,      \
+                                index)                                        \
     if (countdown > 0) {                                                      \
         countdown--;                                                          \
         if (countdown == 0) {                                                 \
             int i = 0;                                                        \
-            s32 index;                                                        \
                                                                               \
             do {                                                              \
                 index = HSD_Randi(0x13);                                      \
@@ -590,31 +590,29 @@ static inline bool grInishie1_801FB3F0_IsFar(HSD_JObj* jobj, Vec3* pos)
     return grLib_801C9EE8(pos, 15.0f);
 }
 
-static inline void grInishie1_801FB3F0_dobj_clear(HSD_JObj* jobj)
+static inline void grInishie1_UpdateDObjFlags(HSD_JObj* jobj,
+                                              HSD_DObj** walker, bool hidden)
 {
-    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
-    while (dobj != NULL) {
-        HSD_DObjClearFlags(dobj, 1U);
-        dobj = (dobj != NULL) ? dobj->next : NULL;
-    }
-}
-
-static inline void grInishie1_801FB3F0_dobj_set(HSD_JObj* jobj)
-{
-    HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
-    while (dobj != NULL) {
-        HSD_DObjSetFlags(dobj, 1U);
-        dobj = (dobj != NULL) ? dobj->next : NULL;
+    *walker = HSD_JObjGetDObj(jobj);
+    while (*walker != NULL) {
+        HSD_DObj* next;
+        if (hidden) {
+            HSD_DObjSetFlags(*walker, DOBJ_HIDDEN);
+        } else {
+            HSD_DObjClearFlags(*walker, DOBJ_HIDDEN);
+        }
+        next = *walker != NULL ? (*walker)->next : NULL;
+        *walker = next;
     }
 }
 
 void grInishie1_801FB3F0(HSD_GObj* gobj)
 {
     Ground* vars = gobj->user_data;
-    u32 i;
+    s32 index;
     HSD_DObj* dobj;
     Vec3 pos;
-    PAD_STACK(48);
+    PAD_STACK(40);
 
     if (vars->u.inishie1.xD8 > 0) {
         vars->u.inishie1.xD8--;
@@ -631,71 +629,78 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
         vars->u.inishie1.xC8 = 0;
         vars->u.inishie1.xC6 = 0;
 
-        for (i = 0; i < 0x13; ++i) {
-            vars->u.inishie1.block[i].status = 3;
-            grInishie1_801FBAA0(gobj, i);
-            vars->u.inishie1.block[i].x20 = 0;
+        for (index = 0; (u32) index < 0x13; ++index) {
+            vars->u.inishie1.block[index].status = 3;
+            grInishie1_801FBAA0(gobj, index);
+            vars->u.inishie1.block[index].x20 = 0;
         }
     } else {
+        index = 0;
         HATENA_APPEAR_CHECKLOOP(vars->u.inishie1.xC6, vars->u.inishie1.xCA, 1,
-                                0x2D0U);
+                                0x2D0U, index);
         HATENA_APPEAR_CHECKLOOP(vars->u.inishie1.xC8, vars->u.inishie1.xCC, 2,
-                                0x2EBU);
+                                0x2EBU, index);
     }
 
-    for (i = 0; i < 0x13; ++i) {
-        switch (vars->u.inishie1.block[i].x2) {
+#ifdef MUST_MATCH
+    (void) &vars->u.inishie1.block[index];
+#endif
+    for (index = 0; (u32) index < 0x13; ++index) {
+        switch (vars->u.inishie1.block[index].x2) {
         case 2:
-            if (vars->u.inishie1.block[i].x4 != 0) {
-                vars->u.inishie1.block[i].x4--;
+            if (vars->u.inishie1.block[index].x4 != 0) {
+                vars->u.inishie1.block[index].x4--;
             }
             break;
 
         case 3:
-            vars->u.inishie1.block[i].x10 = 1.2f;
-            grInishie1_801FB0AC(gobj, i);
-            vars->u.inishie1.block[i].x2 = 4;
+            vars->u.inishie1.block[index].x10 = 1.2f;
+            grInishie1_801FB0AC(gobj, index);
+            vars->u.inishie1.block[index].x2 = 4;
             // fallthrough
 
         case 4:
-            vars->u.inishie1.block[i].xC += vars->u.inishie1.block[i].x10;
+            vars->u.inishie1.block[index].xC +=
+                vars->u.inishie1.block[index].x10;
 
-            if (vars->u.inishie1.block[i].xC > 5.0) {
-                vars->u.inishie1.block[i].x10 = -1.2f;
-            } else if (vars->u.inishie1.block[i].xC < 0.0) {
-                vars->u.inishie1.block[i].xC = 0.0f;
-                vars->u.inishie1.block[i].x2 = 2;
-                vars->u.inishie1.block[i].x4 = 10;
+            if (vars->u.inishie1.block[index].xC > 5.0) {
+                vars->u.inishie1.block[index].x10 = -1.2f;
+            } else if (vars->u.inishie1.block[index].xC < 0.0) {
+                vars->u.inishie1.block[index].xC = 0.0f;
+                vars->u.inishie1.block[index].x2 = 2;
+                vars->u.inishie1.block[index].x4 = 10;
             }
 
             // the blocks appear to not move at all, so not
             // sure what this is
-            grInishie1_801FB3F0_UpdateY(&vars->u.inishie1.block[i]);
+            grInishie1_801FB3F0_UpdateY(&vars->u.inishie1.block[index]);
             break;
 
         case 0:
-            if (vars->u.inishie1.block[i].x20 != 0) {
-                vars->u.inishie1.block[i].x20--;
+            if (vars->u.inishie1.block[index].x20 != 0) {
+                vars->u.inishie1.block[index].x20--;
             } else {
-                if (!grInishie1_801FB3F0_IsFar(vars->u.inishie1.block[i].jobj2,
-                                               &pos))
+                if (!grInishie1_801FB3F0_IsFar(
+                        vars->u.inishie1.block[index].jobj2, &pos))
                 {
-                    dobj = HSD_JObjGetDObj(vars->u.inishie1.block[i].jobj2);
+                    dobj =
+                        HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
                     while (dobj != NULL) {
                         HSD_DObjClearFlags(dobj, 1U);
                         dobj = (dobj != NULL) ? dobj->next : NULL;
                     }
-                    HSD_JObjClearFlagsAll(vars->u.inishie1.block[i].jobj2,
+                    HSD_JObjClearFlagsAll(vars->u.inishie1.block[index].jobj2,
                                           JOBJ_HIDDEN);
-                    grMaterial_801C8E08(vars->u.inishie1.block[i].item_gobj);
-                    vars->u.inishie1.block[i].x2 = 1;
-                    vars->u.inishie1.block[i].x22 = yakumono_param->unk18;
+                    grMaterial_801C8E08(
+                        vars->u.inishie1.block[index].item_gobj);
+                    vars->u.inishie1.block[index].x2 = 1;
+                    vars->u.inishie1.block[index].x22 = yakumono_param->unk18;
                 }
             }
 
-            if (vars->u.inishie1.block[i].hatena_gobj != NULL) {
+            if (vars->u.inishie1.block[index].hatena_gobj != NULL) {
                 HSD_JObj* sub_jobj =
-                    vars->u.inishie1.block[i].hatena_gobj->hsd_obj;
+                    vars->u.inishie1.block[index].hatena_gobj->hsd_obj;
                 if (!(HSD_JObjGetFlags(sub_jobj) & 0x10)) {
                     HSD_JObjSetFlagsAll(sub_jobj, JOBJ_HIDDEN);
                 }
@@ -705,38 +710,39 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
             /*
                probably sets the flickering for blocks when they spawn
             */
-            if (vars->u.inishie1.block[i].x22 > 0) {
-                HSD_JObjGetDObj(vars->u.inishie1.block[i].jobj2);
-                if (vars->u.inishie1.block[i].hatena_gobj != NULL) {
+            if (vars->u.inishie1.block[index].x22 > 0) {
+                HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
+                if (vars->u.inishie1.block[index].hatena_gobj != NULL) {
                     HSD_JObj* target =
-                        vars->u.inishie1.block[i].hatena_gobj->hsd_obj;
+                        vars->u.inishie1.block[index].hatena_gobj->hsd_obj;
                     HSD_DObj* dobj;
 
-                    if (vars->u.inishie1.block[i].x22 & 1) {
+                    if (vars->u.inishie1.block[index].x22 & 1) {
                         HSD_JObjClearFlagsAll(target, JOBJ_HIDDEN);
                     } else {
                         HSD_JObjSetFlagsAll(target, JOBJ_HIDDEN);
                     }
 
-                    dobj = HSD_JObjGetDObj(vars->u.inishie1.block[i].jobj2);
+                    dobj =
+                        HSD_JObjGetDObj(vars->u.inishie1.block[index].jobj2);
                     while (dobj != NULL) {
                         HSD_DObjClearFlags(dobj, 1U);
                         dobj = (dobj != NULL) ? dobj->next : NULL;
                     }
                 } else {
-                    if (vars->u.inishie1.block[i].x22 & 1) {
-                        grInishie1_801FB3F0_dobj_clear(
-                            vars->u.inishie1.block[i].jobj2);
+                    if (vars->u.inishie1.block[index].x22 & 1) {
+                        grInishie1_UpdateDObjFlags(
+                            vars->u.inishie1.block[index].jobj2, &dobj, false);
                     } else {
-                        grInishie1_801FB3F0_dobj_set(
-                            vars->u.inishie1.block[i].jobj2);
+                        grInishie1_UpdateDObjFlags(
+                            vars->u.inishie1.block[index].jobj2, &dobj, true);
                     }
                 }
 
-                vars->u.inishie1.block[i].x22--;
+                vars->u.inishie1.block[index].x22--;
             } else {
-                vars->u.inishie1.block[i].x2 = 2;
-                vars->u.inishie1.block[i].x4 = 0;
+                vars->u.inishie1.block[index].x2 = 2;
+                vars->u.inishie1.block[index].x4 = 0;
             }
             break;
         }
