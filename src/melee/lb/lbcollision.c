@@ -1127,14 +1127,15 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float closest_delta_y;
     float hit_start_mid_x;
-    float local_delta_x;
+
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
     u8 operand_pad[4];
-    u8 frame_pad[40];
+    Vec3 midpoint;
+    Vec3 separation;
+    u8 frame_pad[16];
     float scaled_hurt_radius;
     float hit_start_dot;
     float hurt_len_sq;
@@ -1146,16 +1147,15 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_end_x;
     float hit_start_mid_y;
     float hurt_closest_y;
-    float closest_delta_x;
+
     float closest_dist_sq;
-    float local_delta_y;
+
     float hurt_param_from_hit_start;
     float x_work;
     float y_work;
     float start_delta_z;
     float hit_start_mid_z;
-    float closest_delta_z;
-    float local_delta_z;
+
     float hurt_start_dot;
     float contact_lerp;
     float broadphase_radius;
@@ -1301,26 +1301,23 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         }
     } else {
         if (approximatelyZero(closest_denom)) {
-            float hurt_mid_x;
-            float hurt_mid_y;
-            float hurt_mid_z;
             float hit_end_mid_x;
             float hit_end_mid_y;
             float hit_end_mid_z;
 
             // For parallel axes, project the hit endpoint nearer the hurt
             // midpoint.
-            hurt_mid_y = (float) ((0.5 * (f64) y_work) + (f64) hurt_start_y);
-            hurt_mid_x =
+            midpoint.x =
                 (float) ((0.5 * (f64) x_work) + (f64) hurt_start_copy.x);
-            hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
-            hurt_mid_z =
+            midpoint.y = (float) ((0.5 * (f64) y_work) + (f64) hurt_start_y);
+            hit_start_mid_y = hit_start_copy.y - midpoint.y;
+            midpoint.z =
                 (float) ((0.5 * (f64) hurt_delta_z) + (f64) hurt_start_z);
-            hit_end_mid_y = hit_end->y - hurt_mid_y;
-            hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
-            hit_end_mid_x = hit_end->x - hurt_mid_x;
-            hit_start_mid_z = hit_start_copy.z - hurt_mid_z;
-            hit_end_mid_z = hit_end->z - hurt_mid_z;
+            hit_end_mid_y = hit_end->y - midpoint.y;
+            hit_start_mid_x = hit_start_copy.x - midpoint.x;
+            hit_end_mid_x = hit_end->x - midpoint.x;
+            hit_start_mid_z = hit_start_copy.z - midpoint.z;
+            hit_end_mid_z = hit_end->z - midpoint.z;
             if (((hit_start_mid_z * hit_start_mid_z) +
                  ((hit_start_mid_x * hit_start_mid_x) +
                   (hit_start_mid_y * hit_start_mid_y))) <
@@ -1430,12 +1427,12 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_closest->x = (x_work * hurt_param) + hurt_start_copy.x;
     hurt_closest->y = (y_work * hurt_param) + hurt_start_y;
     hurt_closest->z = (hurt_delta_z * hurt_param) + hurt_start_z;
-    closest_delta_x = hit_closest->x - hurt_closest->x;
-    closest_delta_y = hit_closest->y - hurt_closest->y;
-    closest_delta_z = hit_closest->z - hurt_closest->z;
-    closest_dist_sq = (closest_delta_z * closest_delta_z) +
-                      ((closest_delta_x * closest_delta_x) +
-                       (closest_delta_y * closest_delta_y));
+    separation.x = hit_closest->x - hurt_closest->x;
+    separation.y = hit_closest->y - hurt_closest->y;
+    separation.z = hit_closest->z - hurt_closest->z;
+    closest_dist_sq =
+        (separation.z * separation.z) +
+        ((separation.x * separation.x) + (separation.y * separation.y));
     x_work = sqrtf(closest_dist_sq);
     if (approximatelyZero(x_work)) {
         *out_overlap = (hit_radius + hurt_radius) - x_work;
@@ -1447,12 +1444,12 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     HSD_MtxInverse(hurt_mtx, inv_hurt_mtx);
     PSMTXMultVec(inv_hurt_mtx, hit_closest, &hit_start_copy);
     PSMTXMultVec(inv_hurt_mtx, hurt_closest, &hit_delta);
-    local_delta_x = hit_start_copy.x - hit_delta.x;
-    local_delta_y = hit_start_copy.y - hit_delta.y;
-    local_delta_z = hit_start_copy.z - hit_delta.z;
+    separation.x = hit_start_copy.x - hit_delta.x;
+    separation.y = hit_start_copy.y - hit_delta.y;
+    separation.z = hit_start_copy.z - hit_delta.z;
     local_dist_sq =
-        (local_delta_z * local_delta_z) +
-        ((local_delta_x * local_delta_x) + (local_delta_y * local_delta_y));
+        (separation.z * separation.z) +
+        ((separation.x * separation.x) + (separation.y * separation.y));
     local_dist = sqrtf(local_dist_sq);
     scaled_hurt_radius = (hurt_radius * x_work) / local_dist;
     contact_lerp = scaled_hurt_radius / x_work;
