@@ -212,6 +212,19 @@ void fn_8018A970(int arg0)
     }
 }
 
+static inline void fn_8018AA74_inline0(
+    BracketEntry* entry, s32* p38, s32* p40, s32* p48)
+{
+    s32* pX10 = &entry->x10;
+    s32* pX18 = &entry->x18;
+    s32 val = *pX10 + *pX18;
+
+    *p40 = val;
+    *p48 = val;
+    *p38 = val;
+    *p40 = *pX10 + *pX18 - *pX18 / 3;
+}
+
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
     u8* px3;
@@ -258,7 +271,6 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 xC = entry->xC;
                 pX18 = &entry->x18;
                 pX10 = &entry->x10;
-                (void) pX18;
                 *p3C = xC;
                 *p44 = xC;
                 *p34 = xC;
@@ -354,20 +366,10 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 case 1: {
                     xC = entry->xC;
                     val1 = xC + entry->x14;
-                    pX10 = &entry->x10;
-                    pX18 = &entry->x18;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
-                    {
-                        x10 = *pX10;
-                        x18 = *pX18;
-                        val = x10 + x18;
-                        *p40 = val;
-                        *p48 = val;
-                        *p38 = val;
-                    }
-                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    fn_8018AA74_inline0(entry, p38, p40, p48);
                     break;
                 }
                 case 2: {
