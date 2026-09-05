@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "gm/forward.h"
+
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
@@ -1264,7 +1266,7 @@ void gm_801B4064(GameModeState* arg0)
     temp_r27->x0.xA = temp_r31->x9;
     tmp = gm_80490910[getIndex(arg0->id)];
 
-    gm_8017CE34(temp_r28, temp_r27, temp_r31->xA, temp_r31->x4, var_r30,
+    gm_8017CE34(temp_r28, &temp_r27->x0, temp_r31->xA, temp_r31->x4, var_r30,
                 var_r29, temp_r31->x2, temp_r31->x6, gm_8017E48C(arg0), tmp);
     gm_LoadRumbleEnabled(temp_r28);
     if (temp_r31->x1 & 8) {
@@ -1475,10 +1477,10 @@ static void gm_8016A22C_inline(GameModeState* arg0, UnkAdventureData* temp_r29)
     gm_8016A22C(temp_r25_2->xA[0], temp_r25_2->xA[1], temp_r25_2->xA[2],
                 temp_r25_2->xD, temp_r25_2->xE, temp_r25_2->xF, 1, 0, 1,
                 temp_r29->x0.x0.ckind, temp_r29->x0.x0.color,
-                temp_r29->x4C(count, temp_r29->x0.x0.cpu_level, 0),
+                temp_r29->x0.x4C(count, temp_r29->x0.x0.cpu_level, 0),
                 temp_r25_2->x4, gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
-                temp_r29->x64(count, temp_r29->x0.x0.cpu_level),
-                temp_r29->x68(count, temp_r29->x0.x0.cpu_level));
+                temp_r29->x0.x64(count, temp_r29->x0.x0.cpu_level),
+                temp_r29->x0.x68(count, temp_r29->x0.x0.cpu_level));
     temp_r29->x0.xC.x11 = 1;
 }
 
@@ -1692,17 +1694,17 @@ void gm_Mode_Adventure_OnLoad(void)
 
     gm_8017DB58(data->x0.xC.x24);
     data->x0.x0.slot = gm_801677F0();
-    data->x48 = gm_8017E500;
-    data->x4C = gm_8017E5C8;
-    data->x50 = gm_8017E630;
-    data->x54 = gm_8017E5FC;
-    data->x64 = gm_8017E528;
-    data->x68 = gm_8017E578;
-    data->x58 = gm_8017E704;
-    data->x5C = gm_8017E76C;
-    data->x60 = gm_8017E738;
-    data->x6C = gm_8017E664;
-    data->x70 = gm_8017E6B4;
+    data->x0.x48 = gm_8017E500;
+    data->x0.x4C = gm_8017E5C8;
+    data->x0.x50 = gm_8017E630;
+    data->x0.x54 = gm_8017E5FC;
+    data->x0.x64 = gm_8017E528;
+    data->x0.x68 = gm_8017E578;
+    data->x0.x58 = gm_8017E704;
+    data->x0.x5C = gm_8017E76C;
+    data->x0.x60 = gm_8017E738;
+    data->x0.x6C = gm_8017E664;
+    data->x0.x70 = gm_8017E6B4;
     gm_SetGameModeStateId(ADVENTURE_BACK_TO_CSS);
     gm_80172174();
     Ground_801C5A28();
