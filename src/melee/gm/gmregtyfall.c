@@ -2,14 +2,23 @@
 
 #include "gm_unsplit.h"
 
-#include <melee/cm/camera.h>
+#include "forward.h"
+
 #include <dolphin/pad.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/sobjlib.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>
-
-#include "forward.h"
-
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
@@ -24,17 +33,6 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
-
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <sysdolphin/baselib/tobj.h>
 
 struct ImageDesc_Array {
     HSD_ImageDesc x0[2][2];

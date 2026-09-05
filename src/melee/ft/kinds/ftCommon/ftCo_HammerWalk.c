@@ -3,17 +3,15 @@
 #include "ftCo_0C60.h"
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftchangeparam.h>
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/ft/types.h>
-#include "types.h"
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 0C5614 */ static void ftCo_800C5614(Fighter_GObj* gobj);
 

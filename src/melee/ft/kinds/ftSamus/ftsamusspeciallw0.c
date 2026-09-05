@@ -4,17 +4,16 @@
 #include "ftsamusspeciallw1.h"
 #include "types.h"
 
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
@@ -27,9 +26,8 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/kinds/ftCommon/ftCo_SquatWait.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbcollision.h>
-
-#include <dolphin/mtx.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
 {

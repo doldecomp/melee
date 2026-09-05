@@ -1,15 +1,15 @@
 #include "generator.h"
 
-#include "particle.h"
-
-#include <math.h>
-#include <string.h>
 #include "cobj.h"
 #include "mtx.h"
+#include "particle.h"
 #include "psappsrt.h"
 #include "psstructs.h"
 #include "random.h"
 #include "wobj.h"
+
+#include <math.h>
+#include <string.h>
 
 /* 4D0E5C */
 

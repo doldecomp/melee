@@ -1,5 +1,6 @@
 #include "ittincle.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,8 +11,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <sysdolphin/baselib/random.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 

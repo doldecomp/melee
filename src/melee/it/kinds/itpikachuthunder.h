@@ -1,13 +1,11 @@
 #ifndef GALE01_2B1DEC
 #define GALE01_2B1DEC
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2B1DEC */ s32 it_802B1DEC(Item_GObj*);
 /* 2B1DF8 */ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel,

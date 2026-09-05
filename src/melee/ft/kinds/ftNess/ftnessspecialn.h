@@ -3,9 +3,9 @@
 #ifndef GALE01_116EBC
 #define GALE01_116EBC
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 116EBC */ bool ftNs_SpecialN_CheckSpecialNHold(HSD_GObj* gobj);
 /* 116F00 */ void ftNs_SpecialN_SetNULL(HSD_GObj* gobj);

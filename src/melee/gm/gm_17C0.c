@@ -1,5 +1,9 @@
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmregclear.h"
-#include <Runtime/platform.h>
+#include "gmregcommon.h"
+#include "types.h"
 
 #include "forward.h"
 #include <sysdolphin/baselib/forward.h>
@@ -17,11 +21,6 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include "gm_18A1.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmregcommon.h"
-#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
@@ -33,6 +32,7 @@
 #include <melee/lb/lbtime.h>
 #include <melee/pl/player.h>
 #include <melee/ty/toy.h>
+#include <Runtime/platform.h>
 
 typedef struct lbl_804706D8_t {
     s16 x0;

@@ -1,25 +1,23 @@
 #include "ftcrazyhandtaggrab.h"
 
+#include "ftcrazyhandcapturewaitcrazyhand.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0D4D.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include "ftcrazyhandcapturewaitcrazyhand.h"
 #include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itmasterhandlaser.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static inline void func_8015ADD0_inline(HSD_GObj* gobj)
 {

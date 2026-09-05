@@ -1,15 +1,5 @@
 #include "groldkongo.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-
-#include "forward.h"
-
-#include <melee/ft/ftdevice.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
 #include "granime.h"
 #include "grmaterial.h"
 #include "ground.h"
@@ -17,15 +7,21 @@
 #include "inlines.h"
 #include "types.h"
 
+#include "forward.h"
 #include <melee/lb/forward.h>
-
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;

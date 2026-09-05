@@ -2,11 +2,10 @@
 #define GALE01_14F9CC
 
 #include <melee/ft/forward.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftSandbag/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
 
 /* 14F9CC */ void ftSb_Init_OnDeath(HSD_GObj* gobj);
 /* 14F9D0 */ void ftSb_Init_OnLoad(HSD_GObj* gobj);

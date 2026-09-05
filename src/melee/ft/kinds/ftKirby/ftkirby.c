@@ -4,13 +4,21 @@
 
 #include "ftkirbyattackdash.h"
 #include "ftkirbyspecialdonkey.h"
+#include "ftkirbyspecialgamewatch.h"
 #include "ftkirbyspecialhi.h"
 #include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialmars.h"
+#include "ftkirbyspecialmewtwo.h"
 #include "ftkirbyspecialpeach.h"
 #include "ftkirbyspecialpikachu.h"
+#include "ftkirbyspecialpurin.h"
 #include "ftkirbyspecialzelda.h"
 
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0877.h>
@@ -23,22 +31,13 @@
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include "ftkirbyspecialmewtwo.h"
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include "ftkirbyspecialgamewatch.h"
-#include "ftkirbyspecialpurin.h"
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/pl/player.h>
-
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/id.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
 /* 459B88 */ struct ft_80459B88_t ft_80459B88;

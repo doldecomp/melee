@@ -5,12 +5,17 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <math.h>
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -21,21 +26,11 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-
-#include "forward.h"
-
 #include <melee/mp/mplib.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);

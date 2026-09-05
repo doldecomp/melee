@@ -1,7 +1,21 @@
 #include "vi0102.h"
 
+#include "types.h"
+#include "vi.h"
+
 #include <placeholder.h>
 
+#include <melee/sc/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/gx.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -18,23 +32,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
-
-#include <melee/sc/forward.h>
-
 #include <melee/sc/types.h>
-#include "types.h"
-#include "vi.h"
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/gx.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/wobj.h>
 
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;

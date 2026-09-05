@@ -1,10 +1,10 @@
 #ifndef MELEE_IF_STATUS_H
 #define MELEE_IF_STATUS_H
 
-#include <Runtime/platform.h>
-
 #include <melee/if/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 2F4910 */ HudIndex* ifStatus_GetHUDInfo(void);
 /* 2F4B84 */ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina);

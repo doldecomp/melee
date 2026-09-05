@@ -1,9 +1,8 @@
 #ifndef GALE01_1CA394
 #define GALE01_1CA394
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/types.h>
+#include <Runtime/platform.h>
 
 /* 1CA394 */ grZakoGenerator_Config*
 grZakoGenerator_801CA394(grZakoGenerator_Spawn*, int,

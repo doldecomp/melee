@@ -1,7 +1,5 @@
 #include "grtmewtwo.h"
 
-#include <Runtime/platform.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -9,16 +7,14 @@
 #include "types.h"
 
 #include <melee/lb/forward.h>
-
-#include <melee/lb/lb_00F9.h>
-
 #include <melee/mp/forward.h>
-
-#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 typedef struct grTMewtwo_UnkStruct {
     DynamicsDesc* x0;

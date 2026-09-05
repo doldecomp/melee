@@ -1,11 +1,9 @@
 #include "lbcardgame.h"
 
+#include "lbarchive.h"
+
 #include "lbcardgame.static.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/if/textlib.h>
-#include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
 
@@ -17,6 +15,9 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
 
 #define _p(x) (lb_80433318.x)
 

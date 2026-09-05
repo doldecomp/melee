@@ -4,13 +4,6 @@
 #include "types.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_0146.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -31,6 +24,12 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_0146.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <Runtime/platform.h>
 
 /* 312834 */ static char* _tyList_80312834(char* buf, u32 num);
 /* 312904 */ static void _tyList_80312904(void*, s8);

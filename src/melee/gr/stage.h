@@ -1,12 +1,11 @@
 #ifndef GALE01_224A54
 #define GALE01_224A54
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 224A54 */ float Stage_GetCamBoundsLeftOffset(void);
 /* 224A68 */ float Stage_GetCamBoundsRightOffset(void);

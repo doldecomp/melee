@@ -1,14 +1,12 @@
 #ifndef GALE01_2F13B4
 #define GALE01_2F13B4
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 /* 2F13B4 */ void it_802F13B4(HSD_GObj*, int);
 /* 2F14E4 */ void itCoin_Logic116_Spawned(Item_GObj*);

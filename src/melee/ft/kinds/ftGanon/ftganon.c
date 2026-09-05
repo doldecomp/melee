@@ -1,21 +1,19 @@
 #include "ftganon.h"
 
+#include <melee/ft/kinds/ftCaptain/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCaptain/forward.h>
-
 #include <melee/ft/kinds/ftCaptain/ftcaptain.h>
 #include <melee/ft/kinds/ftCaptain/ftcaptainspecialhi.h>
 #include <melee/ft/kinds/ftCaptain/ftcaptainspeciallw.h>
 #include <melee/ft/kinds/ftCaptain/ftcaptainspecialn.h>
 #include <melee/ft/kinds/ftCaptain/ftcaptainspecials.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/types.h>
 
 /* 45A540 */ UnkCostumeStruct ftGn_CostumeList[5];
 

@@ -1,13 +1,11 @@
 #ifndef GALE01_28B08C
 #define GALE01_28B08C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/it/kinds/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 /* 28B08C */ int it_8028B08C(Item_GObj* item_gobj, int statenum);
 /* 28B0B8 */ void itParasol_Logic13_Spawned(Item_GObj* item_gobj);

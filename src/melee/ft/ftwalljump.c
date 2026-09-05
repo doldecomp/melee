@@ -1,17 +1,15 @@
 #include "ftwalljump.h"
 
 #include "fighter.h"
-
-#include <Runtime/platform.h>
-
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"
 
 #include "kinds/ftCommon/ftCo_PassiveWall.h"
-#include <melee/mp/mplib.h>
 
 #include <dolphin/mtx.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 static int const max_input_frames = 254;
 

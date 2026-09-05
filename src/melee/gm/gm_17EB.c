@@ -1,12 +1,12 @@
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmregclear.h"
-#include <Runtime/platform.h>
+#include "types.h"
 
 #include "forward.h"
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 typedef struct AllstarStageEntry {
     /* 0x00 */ u8 stage_kind;

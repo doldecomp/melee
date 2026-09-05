@@ -11,19 +11,17 @@
 #include "ftgamewatchspecials.h"
 #include "types.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
+
+#include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/it/it_26B1.h>
 #include <melee/it/types.h>
-
-#include <dolphin/mtx.h>
 
 /* 45A4E0 */ UnkCostumeStruct ftGw_CostumeList[4];
 

@@ -1,10 +1,10 @@
 #ifndef GALE01_11BAD8
 #define GALE01_11BAD8
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 11BA20 */ bool ftPe_Float_CheckContinueInput(Fighter* fp);
 /* 11BA54 */ bool ftPe_8011BA54(HSD_GObj* gobj);

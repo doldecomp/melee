@@ -1,10 +1,11 @@
 #include "hsd_3933.h"
 
+#include "hsd_392C.h"
+#include "random.h"
+
 #include <string.h>
 #include <dolphin/mcc.h>
 #include <dolphin/os.h>
-#include "hsd_392C.h"
-#include "random.h"
 
 typedef struct {
     s32 x0;

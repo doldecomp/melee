@@ -1,15 +1,18 @@
 #include "ftCo_ItemThrow.h"
 
+#include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Lift.h"
+#include "types.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <math.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0DF1.h>
@@ -17,20 +20,12 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "ftCo_Fall.h"
-#include "types.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/plbonuslib.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
+#include <Runtime/platform.h>
 
 /* 09549C */ static void ftCo_800958FC(Fighter_GObj* gobj, int);
 /* 0955D0 */ static void ftCo_80095A30(Fighter_GObj* gobj);

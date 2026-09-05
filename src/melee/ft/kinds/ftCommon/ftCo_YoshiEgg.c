@@ -2,15 +2,19 @@
 
 #include "ftCo_Bury.h"
 #include "ftCo_CaptureKoopa.h"
+#include "ftCo_Fall.h"
+#include "types.h"
+
 #include <placeholder.h>
 
-#include <Runtime/platform.h>
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -18,19 +22,11 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
-#include "ftCo_Fall.h"
-#include "types.h"
 #include <melee/ft/kinds/ftYoshi/ftyoshispecialn.h>
-
-#include <melee/lb/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

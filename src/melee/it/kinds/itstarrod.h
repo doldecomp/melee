@@ -1,11 +1,10 @@
 #ifndef GALE01_292360
 #define GALE01_292360
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 292360 */ void itStarRod_Logic22_Spawned(Item_GObj*);
 /* 292394 */ void it_80292394(Item_GObj*, Vec*);

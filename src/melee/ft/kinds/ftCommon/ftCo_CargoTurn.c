@@ -4,15 +4,14 @@
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
-
-#include <Runtime/platform.h>
+#include "ftCo_Turn.h"
+#include "types.h"
 
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
-#include "ftCo_Turn.h"
-#include "types.h"
 #include <melee/ft/kinds/ftDonkey/types.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 bool ftCo_8009B818(Fighter_GObj* gobj)
 {

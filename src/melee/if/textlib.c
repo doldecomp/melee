@@ -1,16 +1,15 @@
 #include "textlib.h"
 
-#include <Runtime/platform.h>
-
 #include "textdraw.h"
 #include "types.h"
-#include <melee/lb/lb_00B0.h>
 
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 #include <sysdolphin/baselib/debug.h>
+#include <melee/lb/lb_00B0.h>
+#include <Runtime/platform.h>
 
 struct unk_series {
     s16 values[26];

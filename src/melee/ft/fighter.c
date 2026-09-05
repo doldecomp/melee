@@ -29,12 +29,10 @@
 #include "ftlib.h"
 #include "ftmetal.h"
 #include "ftparts.h"
-#include <placeholder.h>
 #include "types.h"
 
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ef/efasync.h>
+#include <placeholder.h>
+
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
 #include "kinds/ftCommon/ftCo_0C35.h"
@@ -57,6 +55,24 @@
 #include "kinds/ftKirby/ftkirby.h"
 #include "kinds/ftMasterHand/ftmasterhandwait10.h"
 #include "kinds/ftPeach/types.h"
+
+#include <math.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
@@ -77,21 +93,6 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/pltrick.h>
 #include <melee/sfx/crowdsfx.h>
-
-#include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
 
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 

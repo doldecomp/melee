@@ -1,13 +1,11 @@
 #ifndef _METROTRK_TARGIMPL_H
 #define _METROTRK_TARGIMPL_H
 
-#include <Runtime/platform.h>
-
-#include <MetroTRK/msgbuf.h>
-#include <MetroTRK/nubevent.h>
-
 #include <dolphin/os/OSThread.h>
+#include <MetroTRK/msgbuf.h>
 #include <MetroTRK/msgcmd.h>
+#include <MetroTRK/nubevent.h>
+#include <Runtime/platform.h>
 
 typedef enum ValidMemoryOptions {
     kValidMemoryReadable = 0,

@@ -1,9 +1,9 @@
 #ifndef GALE01_08CB44
 #define GALE01_08CB44
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 08CB44 */ bool ftCo_AttackLw4_CheckInput(Fighter_GObj* gobj);
 /* 08CCBC */ void ftCo_AttackLw4_Anim(Fighter_GObj* gobj);

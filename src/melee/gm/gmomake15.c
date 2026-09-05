@@ -4,14 +4,13 @@
 #include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mn/inlines.h>
-
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 
 static HSD_GObj* gm_804D6858;
 

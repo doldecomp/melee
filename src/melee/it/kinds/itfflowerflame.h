@@ -1,13 +1,12 @@
 #ifndef GALE01_29A748
 #define GALE01_29A748
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 29A748 */ HSD_GObj* it_8029A748(Item_GObj*, Vec3*, Fighter_Part, f32);
 /* 29A89C */ void it_8029A89C(Item_GObj*, f32);

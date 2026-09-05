@@ -1,21 +1,19 @@
 #include "ftmasterhandpoke.h"
 
 #include "ftmasterhandwait12.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 

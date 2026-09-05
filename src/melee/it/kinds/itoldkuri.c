@@ -1,8 +1,8 @@
 #include "itoldkuri.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
@@ -14,8 +14,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
-
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 typedef struct itOldkuriAttributes {
     s32* x0;

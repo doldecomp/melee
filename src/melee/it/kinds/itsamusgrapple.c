@@ -1,14 +1,23 @@
 #include "itsamusgrapple.h"
 
+#include "inlines.h"
 #include "itlinkhookshot.h"
+
 #include <placeholder.h>
 
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>
@@ -25,20 +34,9 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
-#include "inlines.h"
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F73A8[] = {
     { -1, NULL, itSamusgrapple_UnkMotion0_Phys, NULL },

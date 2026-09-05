@@ -1,14 +1,8 @@
 #include "gm_1A7A.h"
 
 #include "gm_unsplit.h"
-
 #include "gmevent.h"
 #include "gmregtyfall.h"
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmain.h>
-#include <melee/sc/types.h>
-#include <melee/ty/toy.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -20,6 +14,11 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 void fn_801A7A44(HSD_GObj* gobj)
 {

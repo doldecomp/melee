@@ -1,16 +1,5 @@
 #include "ftcrazyhandwait10.h"
 
-#include "ftcrazyhandgrabunk1b174.h"
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include "ftcrazyhandbackcrush.h"
 #include "ftcrazyhandbackdisappear.h"
 #include "ftcrazyhanddamage0.h"
@@ -19,24 +8,33 @@
 #include "ftcrazyhandfingerbeam.h"
 #include "ftcrazyhandfingerbeam0.h"
 #include "ftcrazyhandgrab.h"
+#include "ftcrazyhandgrabunk1b174.h"
 #include "ftcrazyhandpoke.h"
 #include "ftcrazyhandrockcrush0.h"
 #include "ftcrazyhandrockcrush1.h"
 #include "ftcrazyhandsweep.h"
 #include "ftcrazyhandsweepwait.h"
+#include "ftcrazyhandtagcancel.h"
 #include "ftcrazyhandtagrockpaper.h"
 #include "ftcrazyhandwait11.h"
 #include "ftcrazyhandwalk.h"
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/gr/stage.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
+#include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
+#include <melee/gr/stage.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);
 static void ftCh_Init_80156AD8(HSD_GObj* gobj);

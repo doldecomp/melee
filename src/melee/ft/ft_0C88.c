@@ -1,15 +1,15 @@
 #include "ft_0C88.h"
 
 #include "fighter.h"
-
-#include "forward.h"
-
 #include "ftCo_800C7CA0.h"
 #include "ftcolanim.h"
 #include "ftmetal.h"
 #include "ftparts.h"
 #include "inlines.h"
 #include "types.h"
+
+#include "forward.h"
+
 #include <melee/lb/lbrefract.h>
 
 void ftCo_800C884C(Fighter_GObj* gobj)

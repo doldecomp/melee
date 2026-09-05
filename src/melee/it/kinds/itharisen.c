@@ -1,13 +1,13 @@
 #include "itharisen.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F5FF0[] = {
     { -1, itHarisen_UnkMotion0_Anim, itHarisen_UnkMotion0_Phys,

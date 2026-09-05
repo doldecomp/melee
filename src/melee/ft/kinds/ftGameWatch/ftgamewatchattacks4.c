@@ -1,24 +1,21 @@
 #include "ftgamewatchattacks4.h"
 
 #include "ftgamewatch.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchfire.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /// 0x8014A848
 /// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up

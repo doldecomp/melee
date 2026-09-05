@@ -2,15 +2,14 @@
 
 #include "ftdonkeyheavyfall.h"
 #include "ftdonkeyheavywait0.h"
-
-#include <Runtime/platform.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
-#include "types.h"
+#include <Runtime/platform.h>
 
 bool ftDk_MS_341_800DFA98(HSD_GObj* gobj)
 {

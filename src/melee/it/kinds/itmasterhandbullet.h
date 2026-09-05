@@ -1,13 +1,11 @@
 #ifndef GALE01_2F0AE0
 #define GALE01_2F0AE0
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2F0AE0 */ void it_802F0AE0(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
                               ItemKind kind, s32 msid, f32 facing_dir,

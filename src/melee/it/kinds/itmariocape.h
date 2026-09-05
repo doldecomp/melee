@@ -2,10 +2,9 @@
 #define GALE01_2B2560
 
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/it/kinds/types.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 /* 2B2560 */ Item_GObj* it_802B2560(Fighter_GObj* gobj, float facing_dir,
                                     Vec3* pos, Fighter_Part part,

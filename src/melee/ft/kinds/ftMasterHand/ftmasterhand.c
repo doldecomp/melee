@@ -31,15 +31,14 @@
 #include "types.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include <dolphin/mtx.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 45A690 */ UnkCostumeStruct ftMh_CostumeList[1];
 

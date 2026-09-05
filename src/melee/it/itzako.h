@@ -1,12 +1,11 @@
 #ifndef GALE01_ITZAKO
 #define GALE01_ITZAKO
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 27B5B0 */ Item_GObj* it_8027B5B0(ItemKind, Vec3*, HSD_JObj*, Vec3*, bool);
 /* 27B730 */ void it_8027B730(Item_GObj*);

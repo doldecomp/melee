@@ -1,11 +1,10 @@
 #ifndef GALE01_29A114
 #define GALE01_29A114
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 typedef struct itLipstickSporeAttributes {
     f32 x0;

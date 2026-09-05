@@ -1,11 +1,10 @@
 #ifndef GALE01_2AF940
 #define GALE01_2AF940
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2AF940 */ Item_GObj* it_802AF940(Item_GObj*, Item_GObj*, Vec3*, ItemKind,
                                     f32, f32);

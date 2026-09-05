@@ -1,28 +1,24 @@
 #include "mpcoll.h"
 
-#include <Runtime/platform.h>
-#include <stdbool.h>
+#include "mplib.h"
 
 #include <placeholder.h>
 
-#include <melee/db/db.h>
-#include <melee/ft/ftlib.h>
-
+#include "forward.h"
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <math.h>
+#include <stdbool.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
-
-#include "forward.h"
-
-#include "mplib.h"
-
-#include <math.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

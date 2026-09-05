@@ -1,26 +1,16 @@
 #include "gmcamera.h"
 
-#include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/cm/cmsnap.h>
-#include <dolphin/pad.h>
 #include "gm_1601.h"
 #include "gm_16AE.h"
 #include "gm_1A45.h"
 #include "gmpause.h"
 #include "types.h"
-#include <melee/if/ifall.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/sc/types.h>
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -29,6 +19,16 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/cm/cmsnap.h>
+#include <melee/if/ifall.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];

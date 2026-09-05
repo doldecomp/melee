@@ -1,27 +1,24 @@
 #include "ftCo_Lift.h"
 
 #include "ftCo_DamageFall.h"
+#include "ftCo_Fall.h"
 #include "ftCo_ItemThrow.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
+#include <melee/it/forward.h>
 
+#include <math.h>
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
-#include "ftCo_Fall.h"
-#include "types.h"
-
-#include <melee/it/forward.h>
-
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-
-#include <math.h>
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 void ftCo_80096D9C(Fighter_GObj* gobj)
 {

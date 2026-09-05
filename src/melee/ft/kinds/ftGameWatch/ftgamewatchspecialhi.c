@@ -3,12 +3,11 @@
 #include "ftgamewatch.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0881.h>
@@ -16,15 +15,13 @@
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchrescue.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj);

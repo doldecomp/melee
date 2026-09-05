@@ -1,28 +1,14 @@
 #include "tyfigupon.h"
 
-#include <placeholder.h>
-#include <Runtime/platform.h>
-#include <stddef.h>
-#include "toy.h"
-
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/if/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
-#include <melee/sc/types.h>
 #include "inlines.h"
+#include "toy.h"
 #include "types.h"
 
+#include <placeholder.h>
+
+#include <stddef.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -43,6 +29,20 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/if/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);

@@ -1,14 +1,12 @@
 #ifndef GALE01_2E6AEC
 #define GALE01_2E6AEC
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2E6AEC */ Item_GObj* it_802E6AEC(Ground*, int, int, HSD_JObj*, Vec3*, int,
                                     void (*)(Item_GObj*, Ground*),

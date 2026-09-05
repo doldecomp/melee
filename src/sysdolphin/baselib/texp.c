@@ -1,12 +1,12 @@
 #include "texp.h"
 
-#include "debug.h"
-
-#include <string.h>
 #include "class.h"
+#include "debug.h"
 #include "tev.h"
 #include "texpdag.h"
 #include "tobj.h"
+
+#include <string.h>
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
 {

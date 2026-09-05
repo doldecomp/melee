@@ -1,7 +1,7 @@
 #include "itarwinglaser.h"
 
-#include <Runtime/platform.h>
-
+#include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grcorneria.h>
@@ -15,9 +15,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;

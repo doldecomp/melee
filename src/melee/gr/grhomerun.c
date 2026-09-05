@@ -1,25 +1,12 @@
 #include "grhomerun.h"
 
-#include <placeholder.h>
-
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gmregclear.h>
 #include "grdatfiles.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "stage.h"
-#include <melee/it/it_26B1.h>
-#include <melee/it/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/types.h>
-#include <melee/mp/mplib.h>
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -33,6 +20,18 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 21E994 */ static void fn_8021E994(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

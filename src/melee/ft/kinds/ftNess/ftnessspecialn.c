@@ -1,30 +1,26 @@
 #include "ftnessspecialn.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "ftness.h"
+#include "types.h"
 
 #include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "ftness.h"
-#include "types.h"
-
-#include <melee/it/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itnesspkflash.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /// SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \

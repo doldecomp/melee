@@ -1,20 +1,22 @@
 #include "gronett.h"
 
-#include "types.h"
-
-#include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/cm/types.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_16AE.h>
 #include "grdatfiles.h"
 #include "grdisplay.h"
 #include "grlib.h"
 #include "grmaterial.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
+#include "types.h"
+
+#include <placeholder.h>
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <melee/cm/camera.h>
+#include <melee/cm/types.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_16AE.h>
 #include <melee/if/ifhazard.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
@@ -22,10 +24,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include <Runtime/platform.h>
 
 /* 1E40E4 */ static void grOnett_801E40E4(void* user_data, int joint_id,
                                           CollData* coll, int coll_x50,

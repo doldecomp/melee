@@ -1,5 +1,8 @@
 #include "itmewtwoshadowball.h"
 
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -12,10 +15,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 2C5B18 */ static void it_802C5B18(Item_GObj*, Item_GObj*);
 

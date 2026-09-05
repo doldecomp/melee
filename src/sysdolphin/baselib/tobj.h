@@ -1,8 +1,6 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/gx.h>
@@ -10,6 +8,7 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/object.h>
+#include <Runtime/platform.h>
 
 struct HSD_TObj;
 

@@ -1,8 +1,8 @@
-#include "gm_unsplit.h"
-
 #include "gm_1601.h"
+#include "gm_unsplit.h"
 #include "gmvsmelee.h"
 #include "types.h"
+
 #include <melee/mn/types.h>
 
 /* 1BED3C */ static void gm_801BED3C(GameModeState*);

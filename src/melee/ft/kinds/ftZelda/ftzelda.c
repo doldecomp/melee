@@ -4,6 +4,7 @@
 #include "ftzeldaspeciallw.h"
 #include "ftzeldaspecialn.h"
 #include "ftzeldaspecials.h"
+#include "types.h"
 
 #include "forward.h"
 
@@ -11,7 +12,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/it/it_26B1.h>
 
 /* 45A168 */ UnkCostumeStruct ftZd_CostumeList[5];

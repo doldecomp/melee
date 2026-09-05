@@ -1,10 +1,11 @@
 #include "ftdonkeyms3450.h"
 
+#include "types.h"
+
 #include <melee/ft/forward.h>
 
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
-#include "types.h"
 
 static void ifSomething(HSD_GObj* gobj);
 

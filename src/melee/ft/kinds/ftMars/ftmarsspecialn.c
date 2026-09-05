@@ -1,12 +1,17 @@
 #include "ftmarsspecialn.h"
 
+#include "ftmars.h"
+#include "types.h"
+
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -15,23 +20,12 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-
-#include "ftmars.h"
-#include "types.h"
-
-#include <melee/lb/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {

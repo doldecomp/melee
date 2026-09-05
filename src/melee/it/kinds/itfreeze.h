@@ -1,11 +1,10 @@
 #ifndef GALE01_28EB88
 #define GALE01_28EB88
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 28EB88 */ Item_GObj* it_8028EB88(Item_GObj*, Vec3*, f32, f32);
 /* 28EC98 */ void it_8028EC98(Item_GObj* gobj, f32 vel);

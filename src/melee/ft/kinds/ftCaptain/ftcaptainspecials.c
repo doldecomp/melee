@@ -3,31 +3,26 @@
 #include "ftcaptain.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
-
-#include <melee/it/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {

@@ -1,11 +1,14 @@
 #include "ftnessattackhi4.h"
 
 #include "ftness.h"
-
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/lb/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0881.h>
@@ -15,24 +18,15 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/itYoyo.h>
 #include <melee/it/kinds/itnessyoyo.h>
 #include <melee/it/types.h>
-
-#include <melee/lb/forward.h>
-
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
-
-#include <dolphin/mtx.h>
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)
 {

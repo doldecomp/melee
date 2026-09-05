@@ -2,6 +2,7 @@
 #define MELEE_PL_PL040D_H
 
 #include <placeholder.h>
+
 #include <Runtime/platform.h>
 
 /* 040DDC */ void pl_80040DDC(int slot);

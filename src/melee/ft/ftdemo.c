@@ -1,11 +1,5 @@
 #include "ftdemo.h"
 
-#include "ftdynamics.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
 #include "fighter.h"
 #include "ft_0BEC.h"
 #include "ft_0BEF.h"
@@ -21,16 +15,15 @@
 #include "ftcoll.h"
 #include "ftdata.h"
 #include "ftdrawcommon.h"
+#include "ftdynamics.h"
 #include "ftlib.h"
 #include "ftparts.h"
 #include "types.h"
+
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_DemoCallback0.h"
-#include <melee/lb/lbshadow.h>
 
 #include <melee/pl/forward.h>
-
-#include <melee/pl/types.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/archive.h>
@@ -40,6 +33,11 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/pl/types.h>
+#include <Runtime/platform.h>
 
 static HSD_GObjEvent on_create_fighter[16] = {
     ftCo_800BECB0, ftCo_800BED88, ftCo_800BEF04, NULL,

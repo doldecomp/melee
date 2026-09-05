@@ -1,7 +1,11 @@
 #include "it_2F28.h"
 
+#include "types.h"
+
 #include <melee/it/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -11,11 +15,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itzako.h>
-#include "types.h"
 #include <melee/it/types.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
 
 static void it_802F2A58(Item_GObj*);             /* static */
 static bool it_2F28_UnkMotion0_Anim(Item_GObj*); /* static */

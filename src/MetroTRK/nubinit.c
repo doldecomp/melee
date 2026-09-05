@@ -1,13 +1,12 @@
 #include "nubinit.h"
 
 #include "dispatch.h"
+#include "dolphin_trk.h"
 #include "dolphin_trk_glue.h"
 #include "msgbuf.h"
 #include "serpoll.h"
 #include "targimpl.h"
 #include "usr_put.h"
-
-#include "dolphin_trk.h"
 
 bool gTRKBigEndian;
 

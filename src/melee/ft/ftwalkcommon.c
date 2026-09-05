@@ -2,13 +2,11 @@
 
 #include "fighter.h"
 #include "ft_081B.h"
-#include "ftcommon.h"
-
-#include "forward.h"
-
 #include "ftanim.h"
+#include "ftcommon.h"
 #include "types.h"
 
+#include "forward.h"
 #include "kinds/ftCommon/forward.h"
 
 #include "kinds/ftCommon/types.h"

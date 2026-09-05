@@ -7,8 +7,9 @@
 #include "ftparts.static.h"
 
 #include "inlines.h"
-#include <placeholder.h>
 #include "types.h"
+
+#include <placeholder.h>
 
 #include "forward.h"
 

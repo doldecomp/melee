@@ -2,13 +2,12 @@
 #define GALE01_2DDB38
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2DDB38 */ void it_802DDB38(Item_GObj*);
 /* 2DDBE8 */ void it_802DDBE8(Item_GObj*);

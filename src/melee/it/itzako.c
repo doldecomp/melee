@@ -1,11 +1,18 @@
 #include "itzako.h"
 
+#include "inlines.h"
 #include "it_2725.h"
 #include "it_3F14.h"
+#include "itgroundcoll.h"
 #include "ithitbox.h"
 #include "itmaplib.h"
 #include "itmaterial.h"
 
+#include "kinds/itcoin.h"
+#include "kinds/itheiho.h"
+
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>
@@ -13,17 +20,10 @@
 #include <melee/gr/grlib.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
-#include "inlines.h"
-#include "itgroundcoll.h"
-#include "kinds/itcoin.h"
-#include "kinds/itheiho.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/ty/tydisplay.h>
-
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

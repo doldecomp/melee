@@ -1,9 +1,14 @@
+#include "grgreens.h"
+
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+
 #include <placeholder.h>
-
-#include <Runtime/platform.h>
-
-#include <melee/it/ithitbox.h>
-#include <melee/lb/lb_00F9.h>
 
 #include "forward.h"
 
@@ -18,18 +23,13 @@
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include "grdisplay.h"
-#include "grgreens.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include <melee/it/ithitbox.h>
 #include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 struct grGreens_YakumonoParam {
     int x0_blockTimerMin;

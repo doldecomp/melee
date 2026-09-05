@@ -1,13 +1,20 @@
 #include "ftpurinspecialn.h"
 
+#include "ftpurin.h"
+#include "types.h"
+
 #include <placeholder.h>
 
 #include "forward.h"
-
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -22,15 +29,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
-#include "ftpurin.h"
-#include "types.h"
-
-#include <math.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>
 
 #ifdef MUST_MATCH

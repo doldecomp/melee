@@ -1,12 +1,11 @@
 #ifndef GALE01_0E2888
 #define GALE01_0E2888
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftCaptain/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0E2888 */ void ftCa_Init_OnDeath(HSD_GObj* gobj);
 /* 0E28C8 */ void ftCa_Init_800E28C8(HSD_GObj* gobj);

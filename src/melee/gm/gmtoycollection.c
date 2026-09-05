@@ -1,6 +1,6 @@
 #include "gm_unsplit.h"
-
 #include "types.h"
+
 #include <melee/lb/types.h>
 
 /* 1BED14 */ static void gm_801BED14(GameModeState*);

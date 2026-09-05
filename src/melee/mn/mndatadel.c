@@ -1,23 +1,13 @@
 #include "mndatadel.h"
 
+#include "inlines.h"
+
 #include "mndatadel.static.h"
 
-#include <placeholder.h>
-
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
-#include <melee/sc/types.h>
-#include <melee/ty/toy.h>
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -28,6 +18,17 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 HSD_Text* mnDataDel_804D6C6C;
 HSD_GObj* mnDataDel_804D6C68;

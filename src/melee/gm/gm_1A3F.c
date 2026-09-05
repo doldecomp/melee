@@ -6,6 +6,11 @@
 #include "gmscdata.h"
 #include "types.h"
 
+#include <dolphin/vi.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/devcom.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -18,12 +23,6 @@
 #include <melee/lb/types.h>
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
-
-#include <dolphin/vi.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/devcom.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
 
 struct routingInfo {
     u8 curr_mode;     ///< ::GameModeKind

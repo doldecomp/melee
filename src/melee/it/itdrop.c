@@ -1,17 +1,17 @@
 #include "itdrop.h"
 
 #include "inlines.h"
-
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_unsplit.h>
 #include "it_26B1.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "item.h"
 #include "itspawn.h"
+
 #include "kinds/it_2E5A.h"
 
 #include <sysdolphin/baselib/random.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
 
 ItemKind it_8026F3AC(void)
 {

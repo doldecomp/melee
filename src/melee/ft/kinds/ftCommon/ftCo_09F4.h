@@ -2,9 +2,10 @@
 #define GALE01_09F480
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 09F4A4 */ UNK_RET ftCo_8009F4A4(UNK_PARAMS);
 /* 09F578 */ void ftCo_8009F578(Fighter* fp);

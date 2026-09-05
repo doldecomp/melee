@@ -4,9 +4,9 @@
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
 #include "gmvsmelee.h"
+#include "gmvsmode.h"
 #include "types.h"
 
-#include "gmvsmode.h"
 #include <melee/if/if_2FD9.h>
 
 GameModeState gm_Mode_LightningVs_States[] = {

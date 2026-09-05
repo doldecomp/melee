@@ -1,10 +1,10 @@
 #ifndef GALE01_0E5970
 #define GALE01_0E5970
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 0E5970 */ bool ftFx_AppealS_CheckIfUsed(Fighter* fp);
 /* 0E59BC */ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj);

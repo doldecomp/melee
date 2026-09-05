@@ -1,12 +1,13 @@
 #include "plstale.h"
 
+#include "player.h"
+#include "types.h"
+
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/inlines.h>
 #include <melee/it/types.h>
-#include "player.h"
-#include "types.h"
 
 u16 staleAttackInstance;
 

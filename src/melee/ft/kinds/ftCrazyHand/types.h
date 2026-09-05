@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTCRAZYHAND_TYPES_H
 #define MELEE_FT_CHARA_FTCRAZYHAND_TYPES_H
 
-#include <Runtime/platform.h>
-
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 typedef struct _ftCrazyHandAttributes {
     s32 x0;

@@ -1,12 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_TYPES_H
 #define MELEE_FT_CHARA_FTSEAK_TYPES_H
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 struct ftSeak_FighterVars {
     /* fp+222C */ int x0;

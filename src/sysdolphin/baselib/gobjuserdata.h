@@ -1,9 +1,9 @@
 #ifndef _gobjuserdata_h_
 #define _gobjuserdata_h_
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 #define HSD_GOBJ_USER_DATA_NONE (u8) - 1
 

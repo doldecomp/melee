@@ -1,11 +1,10 @@
 #ifndef GALE01_2CD44C
 #define GALE01_2CD44C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2CD44C */ void it_802CD44C(Item_GObj*);
 /* 2CD4D8 */ void it_802CD4D8(Item_GObj*);

@@ -1,23 +1,21 @@
 #include "ftCo_CaptureKoopa.h"
 
+#include "ftCo_Attack100.h"
 #include "ftCo_CaptureDamageKoopa.h"
 #include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
-#include "ftCo_Attack100.h"
-#include "ftCo_Throw.h"
-#include "types.h"
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecials.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_800BC438(Fighter_GObj* gobj)
 {

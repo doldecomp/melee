@@ -1,23 +1,21 @@
 #include "ftcrazyhandfingerbeam0.h"
 
+#include "ftcrazyhandtagcancel.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-#include "ftcrazyhandtagcancel.h"
 #include <melee/it/kinds/itcrazyhandbomb.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static void fn_801588B8(HSD_GObj* gobj);
 

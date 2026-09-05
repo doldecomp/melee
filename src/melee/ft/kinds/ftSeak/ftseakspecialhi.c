@@ -2,11 +2,13 @@
 
 #include <placeholder.h>
 
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -15,20 +17,14 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itseakvanish.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

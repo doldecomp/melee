@@ -2,6 +2,8 @@
 
 #include "inlines.h"
 
+#include <math.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -9,9 +11,6 @@
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7B58[] = {
     { 0, it_802CB118, it_802CB14C, it_802CB150 },

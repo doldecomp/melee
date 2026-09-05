@@ -2,13 +2,13 @@
 
 #include "ftCo_ShieldBreakDown.h"
 #include "ftCo_ShieldBreakFall.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "inlines.h"
 
 #include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -16,11 +16,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include "inlines.h"
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 void ftCo_80098B20(Fighter_GObj* gobj)
 {

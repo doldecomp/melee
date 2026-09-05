@@ -5,6 +5,7 @@
 #include "gmadventure.h"
 #include "gmallstar.h"
 #include "gmapproach.h"
+#include "gmcameramode.h"
 #include "gmclassic.h"
 #include "gmdebugmode.h"
 #include "gmfixedcamera.h"
@@ -22,6 +23,7 @@
 #include "gmomake15.h"
 #include "gmopening.h"
 #include "gmprogressive.h"
+#include "gmprogressivemode.h"
 #include "gmregtyfall.h"
 #include "gmresult.h"
 #include "gmsinglebutton.h"
@@ -42,8 +44,6 @@
 #include "gmvsmode.h"
 #include "types.h"
 
-#include "gmcameramode.h"
-#include "gmprogressivemode.h"
 #include <melee/if/ifprize.h>
 #include <melee/mn/mncharsel.h>
 #include <melee/mn/mnmain.h>

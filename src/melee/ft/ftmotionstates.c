@@ -16,13 +16,6 @@
 #include "ftswing.h"
 #include "types.h"
 
-#include "kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.h"
-#include "kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.h"
-#include "kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
-#include "kinds/ftCrazyHand/ftcrazyhandthrowncrazyhand.h"
-#include "kinds/ftKirby/ftkirbycaptureyoshi.h"
-#include "kinds/ftKirby/ftkirbyyoshiegg.h"
-
 #include "kinds/ftCommon/forward.h"
 
 #include "kinds/ftCommon/ftCo_AppealS.h"
@@ -129,6 +122,12 @@
 #include "kinds/ftCommon/ftCo_WarpStar.h"
 #include "kinds/ftCommon/ftCo_YoshiEgg.h"
 #include "kinds/ftCommon/ftpickupitem.h"
+#include "kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.h"
+#include "kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.h"
+#include "kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.h"
+#include "kinds/ftCrazyHand/ftcrazyhandthrowncrazyhand.h"
+#include "kinds/ftKirby/ftkirbycaptureyoshi.h"
+#include "kinds/ftKirby/ftkirbyyoshiegg.h"
 #include "kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandcapturemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandthrownmasterhand.h"

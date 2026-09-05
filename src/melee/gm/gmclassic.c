@@ -1,10 +1,10 @@
 #include "gmclassic.h"
 
 #include "gm_unsplit.h"
-
-#include <sysdolphin/baselib/random.h>
 #include "gmmain_lib.h"
 #include "gmregcommon.h"
+
+#include <sysdolphin/baselib/random.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbaudio_ax.h>

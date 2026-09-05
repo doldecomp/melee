@@ -1,5 +1,6 @@
 #include "itflipper.h"
 
+#include <math.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -11,8 +12,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
 
 ItemStateTable ItemStateTable_Flipper[] = {
     {

@@ -1,15 +1,11 @@
 #include "ftfalco.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/kinds/ftFox/forward.h>
 
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftFox/forward.h>
-
 #include <melee/ft/kinds/ftFox/ftfox.h>
 #include <melee/ft/kinds/ftFox/ftfoxappeals.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecialhi.h>
@@ -17,7 +13,9 @@
 #include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecials.h>
 #include <melee/ft/kinds/ftFox/types.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
 
 /* 45A420 */ UnkCostumeStruct ftFc_CostumeList[4];
 

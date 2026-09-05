@@ -1,5 +1,7 @@
 #include "ityaku.h"
 
+#include "types.h"
+
 #include <melee/it/forward.h>
 
 #include <melee/it/inlines.h>
@@ -9,7 +11,6 @@
 #include <melee/it/item.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itzako.h>
-#include "types.h"
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 

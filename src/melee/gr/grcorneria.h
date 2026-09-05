@@ -1,14 +1,13 @@
 #ifndef GALE01_1DCCFC
 #define GALE01_1DCCFC
 
-#include <melee/gr/types.h>
-
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/gr/types.h>
+#include <Runtime/platform.h>
 
 /* 1DCCFC */ void grCorneria_801DCCFC(void);
 /* 1DCE1C */ void grCorneria_801DCE1C(void);

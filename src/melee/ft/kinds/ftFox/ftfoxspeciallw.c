@@ -1,12 +1,13 @@
 #include "ftfoxspeciallw.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <dolphin/mtx.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
@@ -14,18 +15,15 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
 #include <melee/ft/kinds/ftCommon/ftCo_JumpAerial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
-
-#include <math.h>
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static MotionFlags const ftFx_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

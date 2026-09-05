@@ -2,12 +2,10 @@
 #define GALE01_2C68F8
 
 #include <melee/it/forward.h>
-
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2C68F8 */ HSD_GObj* itGamewatchFire_Spawn(HSD_GObj*, Vec3*, Fighter_Part,
                                              float);

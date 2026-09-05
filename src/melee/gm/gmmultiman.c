@@ -7,6 +7,7 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "types.h"
+
 #include <melee/gr/ground.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>

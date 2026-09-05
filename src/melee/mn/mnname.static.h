@@ -5,9 +5,8 @@
 
 #include <melee/mn/forward.h>
 
-#include <melee/mn/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/mn/types.h>
 
 /// Loaded section pointers for one of the name-entry menu archive models
 /// (joint, animjoint, matanim_joint, shapeanim_joint).

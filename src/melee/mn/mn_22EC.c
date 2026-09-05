@@ -1,8 +1,8 @@
+#include "mncharsel.h"
 #include "mnmain.h"
-
-#include <dolphin/pad.h>
 #include "types.h"
 
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fobj.h>
@@ -14,7 +14,6 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
-#include "mncharsel.h"
 
 float mn_8022EC18(HSD_JObj* arg0, AnimLoopSettings* arg1, HSD_TypeMask arg2)
 {

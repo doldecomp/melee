@@ -1,16 +1,13 @@
 #include "ftCo_800C7CA0.h"
 
-#include "ftcommon.h"
-
-#include <placeholder.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftanim.h"
 #include "ftcoll.h"
+#include "ftcommon.h"
 #include "types.h"
+
+#include <placeholder.h>
 
 #include "kinds/ftCommon/forward.h"
 
@@ -20,6 +17,8 @@
 
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
 
 HSD_MObj* ft_804D6580;
 

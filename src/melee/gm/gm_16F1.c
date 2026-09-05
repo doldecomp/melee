@@ -1,19 +1,19 @@
 #include "gm_16F1.h"
 
+#include "gm_1601.h"
+#include "gm_16AE.h"
+
 #include "gm_16F1.static.h"
 
 #include "gm_unsplit.h"
-
-#include "gm_1601.h"
-#include <melee/mn/types.h>
+#include "gmmain_lib.h"
 
 #include <sysdolphin/baselib/sislib.h>
-#include "gm_16AE.h"
-#include "gmmain_lib.h"
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
+#include <melee/mn/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>

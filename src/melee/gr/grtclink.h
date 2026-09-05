@@ -1,13 +1,12 @@
 #ifndef _grtclink_h_
 #define _grtclink_h_
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 21FF44 */ void grTCLink_8021FF44(bool);
 /* 21FF48 */ void grTCLink_8021FF48(void);

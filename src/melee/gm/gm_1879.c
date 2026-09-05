@@ -1,15 +1,27 @@
 #include "gm_1879.h"
 
-#include "gm_unsplit.h"
-
-#include <melee/cm/camera.h>
-#include <dolphin/pad.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
 #include "gm_1A36.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
+#include "gm_unsplit.h"
 #include "types.h"
+
+#include <dolphin/pad.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
@@ -23,19 +35,6 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/wobj.h>
 typedef struct gm_1832_StageState {
     u8 stage_index : 5;
     u8 done : 1;

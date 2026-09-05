@@ -3,8 +3,8 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/ft_0BF0.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftNess/ftnessattacks4.h>
@@ -12,8 +12,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-
-#include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F6C68[] = {
     { 0, itNessbat_UnkMotion0_Anim, itNessbat_UnkMotion0_Phys,

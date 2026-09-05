@@ -1,13 +1,11 @@
 #ifndef GALE01_2B4AC8
 #define GALE01_2B4AC8
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2B4AC8 */ Item_GObj* it_802B4AC8(Item_GObj* gobj, Vec3* pos,
                                     float facing_dir);

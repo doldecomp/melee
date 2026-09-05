@@ -1,15 +1,13 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftPurin/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 13C2F8 */ void ftPr_Init_8013C2F8(void);
 /* 13C318 */ void ftPr_Init_OnDeath(HSD_GObj* gobj);

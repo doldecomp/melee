@@ -1,11 +1,10 @@
 #include "gmtitle.h"
 
 #include "gm_unsplit.h"
-
 #include "gmevent.h"
 #include "gmmain_lib.h"
 #include "gmopening.h"
-#include <melee/mn/inlines.h>
+#include "types.h"
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -17,13 +16,13 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <melee/db/db.h>
-#include "types.h"
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 

@@ -2,11 +2,16 @@
 
 #include "types.h"
 
-#include <melee/db/db.h>
-#include <melee/gm/gm_unsplit.h>
-
 #include <melee/it/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -18,13 +23,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 2E614C */ static void it_802E614C(Item_GObj*, Item_GObj*, SpawnItem*, Vec3*,
                                      Vec3*);

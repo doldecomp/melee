@@ -1,18 +1,16 @@
 #include "ftkirbycaptureyoshi.h"
 
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <stddef.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/types.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-
-#include <stddef.h>
 
 /* 4D95A0 */ extern f64 ftKb_Init_804D95A0;
 

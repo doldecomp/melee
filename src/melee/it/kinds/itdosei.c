@@ -1,5 +1,7 @@
 #include "itdosei.h"
 
+#include <math.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -7,9 +9,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -1,22 +1,31 @@
 #include "ftCo_DamageIce.h"
 
+#include "ftCo_DamageFall.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownBound.h"
+#include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -26,27 +35,11 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "ftCo_DamageFall.h"
-#include "ftCo_Fall.h"
-#include "ftCo_Throw.h"
-#include "types.h"
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
-
-#include <melee/lb/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
 /* 090B48 */ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj);

@@ -1,15 +1,18 @@
 #include "ftkirbyspecialhi.h"
 
+#include "inlines.h"
 #include "types.h"
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+
+#include <math.h>
+#include <stddef.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -18,18 +21,11 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-
-#include "inlines.h"
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itkirbycutterbeam.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <stddef.h>
 
 static MotionFlags const ftKb_MF_SpecialHi_Coll =
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis |

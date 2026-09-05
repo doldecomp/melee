@@ -4,18 +4,15 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_ShieldBreakStand.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void ftCo_80098E3C(Fighter_GObj* gobj)
 {

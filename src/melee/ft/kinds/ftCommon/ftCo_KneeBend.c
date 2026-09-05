@@ -1,23 +1,21 @@
 #include "ftCo_KneeBend.h"
 
+#include "ftCo_Attack100.h"
+#include "ftCo_AttackHi4.h"
+#include "ftCo_ItemScrew.h"
+#include "ftCo_Jump.h"
+
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0D27.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "ftCo_Attack100.h"
-#include "ftCo_AttackHi4.h"
-#include "ftCo_ItemScrew.h"
-#include "ftCo_Jump.h"
 
 void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
 {

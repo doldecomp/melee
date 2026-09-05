@@ -4,23 +4,21 @@
 
 #include <placeholder.h>
 
-#include <melee/db/db.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-
 #include <melee/it/forward.h>
-
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/itgroundcoll.h>
-#include <melee/it/types.h>
-#include <melee/lb/lbvector.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/types.h>
+#include <melee/lb/lbvector.h>
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
 /* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);

@@ -1,11 +1,16 @@
 #include "ftyoshispecialn.h"
 
+#include "ftyoshi.h"
+#include "types.h"
+
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -13,22 +18,15 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_CaptureYoshi.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_YoshiEgg.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "ftyoshi.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/kinds/ityoshiegglay.h>
 #include <melee/it/kinds/ityoshitongue.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /* 12CEE0 */ static void fn_8012CEE0(Fighter_GObj*);
 /* 12CF7C */ static void fn_8012CF7C(Fighter_GObj*);

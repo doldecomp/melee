@@ -1,16 +1,6 @@
 #include "ifnametag.h"
 
-#include <melee/cm/camera.h>
-#include <melee/gm/gm_unsplit.h>
 #include "ifall.h"
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -26,6 +16,16 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models

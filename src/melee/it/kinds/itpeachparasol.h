@@ -1,17 +1,13 @@
 #ifndef GALE01_2BDA40
 #define GALE01_2BDA40
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/it/forward.h>
-
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2BDA40 */ int it_802BDA40(Item_GObj*, int);
 /* 2BDA64 */ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos,

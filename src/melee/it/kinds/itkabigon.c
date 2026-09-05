@@ -2,6 +2,7 @@
 
 #include "inlines.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/stage.h>
@@ -12,8 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7AD8[] = {
     { 0, itKabigon_UnkMotion0_Anim, itKabigon_UnkMotion0_Phys,

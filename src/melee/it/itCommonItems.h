@@ -4,19 +4,16 @@
 #define MELEE_IT_ITCOMMONITEMS_H
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <dolphin/types.h>
-#include <melee/gm/types.h>
-
-#include <melee/it/forward.h>
-
-#include <melee/lb/types.h>
 
 #include <melee/gr/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <dolphin/types.h>
+#include <melee/gm/types.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 typedef struct {
     bool x0;

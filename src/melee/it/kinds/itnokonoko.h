@@ -1,13 +1,11 @@
 #ifndef GALE01_2DC69C
 #define GALE01_2DC69C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2DC69C */ void it_802DC69C(Item_GObj*);
 /* 2DC774 */ bool itNokonoko_Logic3_DmgReceived(Item_GObj*);

@@ -1,14 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftYoshi/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 12B6E8 */ void ftYs_Init_8012B6E8(Fighter* fp,
                                      struct S_UNK_YOSHI1* unk_struct_arg);

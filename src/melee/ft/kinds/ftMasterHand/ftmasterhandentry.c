@@ -4,8 +4,8 @@
 #include "ftmasterhandwait12.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <math.h>
+#include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>
@@ -14,9 +14,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
-
-#include <math.h>
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static void ftMh_MS_343_801511FC(HSD_GObj* gobj);
 

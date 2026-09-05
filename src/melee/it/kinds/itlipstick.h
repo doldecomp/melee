@@ -1,13 +1,11 @@
 #ifndef GALE01_29570C
 #define GALE01_29570C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 29570C */ void itLipstick_Logic23_Spawned(Item_GObj*);
 /* 295748 */ void it_80295748(Item_GObj* gobj, Vec* pos);

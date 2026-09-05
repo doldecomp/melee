@@ -11,9 +11,8 @@
 #include "tev.h"
 #include "tobj.h"
 
-#include <dolphin/gx.h>
-
 #include <math.h>
+#include <dolphin/gx.h>
 #include <dolphin/os.h>
 
 /* 004DB678 */ extern const f32 HSD_SObjLib_804DEA98;

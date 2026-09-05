@@ -1,13 +1,11 @@
 #ifndef _SOUNDTEST_H_
 #define _SOUNDTEST_H_
 
-#include <Runtime/platform.h>
-
 #include <melee/if/forward.h>
+#include <melee/mn/forward.h>
 
 #include <melee/if/types.h>
-
-#include <melee/mn/forward.h>
+#include <Runtime/platform.h>
 
 /// @todo Merge with ::SoundTestMenuData
 struct SoundTestData {

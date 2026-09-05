@@ -8,26 +8,23 @@
 #include "types.h"
 
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/object.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/object.h>
 
 /* 459F88 */ UnkCostumeStruct ftSs_CostumeList[5];
 

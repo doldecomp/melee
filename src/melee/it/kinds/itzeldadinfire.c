@@ -1,24 +1,22 @@
 #include "itzeldadinfire.h"
 
+#include "itzeldadinfireexplode.h"
+
+#include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <math.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftZelda/ftzeldaspeciallw.h>
-
-#include <melee/it/forward.h>
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include "itzeldadinfireexplode.h"
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 

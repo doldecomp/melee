@@ -1,6 +1,12 @@
-#include <placeholder.h>
+#include "mncount.h"
 
-#include <melee/ty/toy.h>
+#include "inlines.h"
+#include "mndiagram.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
+
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -17,13 +23,8 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
-#include "inlines.h"
-#include "mncount.h"
-#include "mndiagram.h"
-#include "mnmain.h"
-#include "mnname.h"
-#include "types.h"
 #include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 // DATA / MELEE RECORDS / MISC RECORDS
 #define NUM_STAGES 29

@@ -1,14 +1,12 @@
 #ifndef GALE01_2E5AC4
 #define GALE01_2E5AC4
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
+#include <dolphin/mtx.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/kinds/types.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 2E5AC4 */ bool it_802E5AC4(Item_GObj*, bool);
 /* 2E5EF4 */ s32 it_802E5EF4(Item_GObj*);

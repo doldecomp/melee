@@ -1,5 +1,9 @@
 #include "itegg.h"
 
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -9,11 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
 /* 288E6C */ static void it_80288E6C(Item_GObj* gobj);

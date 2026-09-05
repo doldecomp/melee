@@ -3,18 +3,14 @@
 #include "ftCo_HammerFall.h"
 #include "ftCo_HammerKneeBend.h"
 #include "ftCo_HammerWait.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
-#include <melee/ft/ftcommon.h>
+#include "ftCo_Jump.h"
 
 #include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ftCo_Jump.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <Runtime/platform.h>
 
 bool ftCo_800C5A50(Fighter_GObj* gobj)
 {

@@ -3,9 +3,8 @@
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 289784 */ void itKusudama_Logic4_Spawned(Item_GObj*);

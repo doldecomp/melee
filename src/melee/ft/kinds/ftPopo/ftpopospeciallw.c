@@ -1,11 +1,13 @@
 #include "ftpopospeciallw.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
+#include "ftpopo.h"
+#include "ftpopospecialhi.h"
 
 #include <melee/ft/forward.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0881.h>
@@ -14,8 +16,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "ftpopo.h"
-#include "ftpopospecialhi.h"
 #include <melee/it/kinds/itclimbersblizzard.h>
 #include <melee/lb/lb_00B0.h>
 

@@ -6,6 +6,9 @@
 #include "ftlinkspecials.h"
 #include "types.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
+
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
@@ -13,18 +16,13 @@
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCLink/ftclink.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbanim.h>
-
-#include <dolphin/mtx.h>
 
 MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {

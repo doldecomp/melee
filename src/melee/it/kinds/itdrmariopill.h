@@ -1,14 +1,12 @@
 #ifndef GALE01_2C0510
 #define GALE01_2C0510
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C0510 */ void itDrMarioPill_Spawn(Item_GObj*, Vec3*, s32, ItemKind, f32);
 /* 2C0850 */ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj*, Vec3*, s32,

@@ -1,10 +1,10 @@
 #ifndef GALE01_ITANIMLIST
 #define GALE01_ITANIMLIST
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 278F2C */ void it_80278F2C(Item_GObj*, CommandInfo*);
 /* 2790C0 */ void it_802790C0(Item_GObj*, CommandInfo*);

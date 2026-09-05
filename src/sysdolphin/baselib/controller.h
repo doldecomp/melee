@@ -1,12 +1,11 @@
 #ifndef _controller_h_
 #define _controller_h_
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/rumble.h>
+#include <Runtime/platform.h>
 
 typedef u32 HSD_Pad;
 

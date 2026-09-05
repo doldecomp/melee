@@ -1,6 +1,6 @@
 #include "ftcrazyhandcapturecrazyhand.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
@@ -9,8 +9,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {

@@ -1,11 +1,12 @@
 #include "ftkirby.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
+#include "inlines.h"
 
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -14,14 +15,11 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "inlines.h"
 #include <melee/it/kinds/itsamuschargeshot.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
 
 int ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, int* out1, int* out2)
 {

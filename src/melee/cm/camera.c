@@ -1,34 +1,17 @@
 #include "camera.h"
 
-#include <Runtime/platform.h>
+#include "types.h"
 
 #include <placeholder.h>
 
 #include "forward.h"
-
-#include "types.h"
-#include <dolphin/mtx.h>
-#include <dolphin/pad.h>
-#include <dolphin/types.h>
-
 #include <melee/ft/forward.h>
-
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/lb/lbshadow.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <dolphin/mtx.h>
+#include <dolphin/pad.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -42,12 +25,25 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grcastle.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grgarden.h>
 #include <melee/gr/grhomerun.h>
 #include <melee/gr/grkinokoroute.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/ground.h>
 #include <melee/gr/grzebes.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbrefract.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
                                          CameraTransformState* transform,

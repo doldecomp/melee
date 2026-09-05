@@ -1,14 +1,12 @@
 #ifndef GALE01_2B5518
 #define GALE01_2B5518
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2B5518 */ bool it_802B5518(Item_GObj*, CollData*);
 /* 2B55C8 */ HSD_GObj* it_802B55C8(Item_GObj* owner, Vec3*, Fighter_Part, s32,

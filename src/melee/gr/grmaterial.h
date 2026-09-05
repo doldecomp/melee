@@ -1,14 +1,13 @@
 #ifndef GALE01_1C87D0
 #define GALE01_1C87D0
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
-#include <melee/lb/forward.h>
 #include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 /* 1C8D44 */ Item_GObj*
 grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,

@@ -1,13 +1,13 @@
 #include "bytecode.h"
 
-#include <Runtime/platform.h>
-
-#include <math.h>
-#include <dolphin/os.h>
 #include "debug.h"
 #include "list.h"
 #include "random.h"
 #include "util.h"
+
+#include <math.h>
+#include <dolphin/os.h>
+#include <Runtime/platform.h>
 
 typedef union {
     void* p;

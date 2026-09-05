@@ -2,10 +2,9 @@
 #define MELEE_MN_RULEPLUS_H
 
 #include <melee/mn/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/mn/types.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 enum RulePlusOption {
     RULEPLUS_TIME_LIMIT,

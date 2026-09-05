@@ -2,6 +2,7 @@
 
 #include <melee/it/forward.h>
 
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -13,8 +14,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mpcoll.h>
-
-#include <sysdolphin/baselib/jobj.h>
 
 typedef struct {
     float x0;

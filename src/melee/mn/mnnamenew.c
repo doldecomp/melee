@@ -1,22 +1,12 @@
 #include "mnnamenew.h"
 
-#include <dolphin/gx/GXStruct.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmtoulib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
 #include "inlines.h"
 #include "mncharsel.h"
 #include "mnmain.h"
 #include "mnname.h"
 #include "types.h"
-#include <melee/sc/types.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -28,6 +18,16 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmtoulib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 
 typedef char* GlyphRow[4];
 

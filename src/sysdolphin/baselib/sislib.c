@@ -9,11 +9,10 @@
 #include "memory.h"
 #include "wobj.h"
 
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-
 #include <printf.h> // IWYU pragma: keep
 #include <stdio.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <dolphin/types.h>
 

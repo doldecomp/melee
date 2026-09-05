@@ -1,11 +1,6 @@
 #include "ftlib.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
 #include "fighter.h"
-
-#include "forward.h"
-
 #include "ft_081B.h"
 #include "ft_0877.h"
 #include "ft_0D4D.h"
@@ -16,26 +11,28 @@
 #include "ftmetal.h"
 #include "ftparts.h"
 
+#include "forward.h"
 #include "kinds/ftCommon/forward.h"
 
 #include "kinds/ftGameWatch/ftgamewatch.h"
 #include "kinds/ftKirby/ftkirby.h"
-#include <melee/gm/gm_unsplit.h>
 
 #include <melee/it/forward.h>
-
-#include <melee/it/it_26B1.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/mn/types.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/rumble.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/mn/types.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 
 s32 ftLib_800860C4(void)
 {

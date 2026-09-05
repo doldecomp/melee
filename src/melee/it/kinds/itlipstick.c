@@ -1,15 +1,15 @@
 #include "itlipstick.h"
 
+#include "itlipstickspore.h"
+
+#include "forward.h"
+
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-
-#include "forward.h"
-
-#include "itlipstickspore.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLipstickAttributes*) (ip)->xC4_article_data->x4_specialAttributes)

@@ -3,9 +3,9 @@
 #ifndef GALE01_14C46C
 #define GALE01_14C46C
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 14C46C */ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj);
 /* 14C590 */ void ftGw_SpecialS_ItemJudgementSetFlag(HSD_GObj* gobj);

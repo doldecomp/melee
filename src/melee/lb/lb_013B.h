@@ -1,10 +1,10 @@
 #ifndef GALE01_013C18
 #define GALE01_013C18
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
+
+#include <Runtime/platform.h>
 
 bool lb_80014258(Fighter_GObj* gobj, void* arg1, FtCmd2 cmd);
 void lb_80014498(ColorOverlay*);

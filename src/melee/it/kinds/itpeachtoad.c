@@ -2,18 +2,16 @@
 
 #include "inlines.h"
 
+#include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
 #include <melee/ft/kinds/ftKirby/ftkirbyspecialpeach.h>
 #include <melee/ft/kinds/ftPeach/ftpeachspecialn.h>
-
-#include <melee/it/forward.h>
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 ItemStateTable it_803F7528[] = {
     { 0, itPeachtoad_UnkMotion0_Anim, NULL, NULL },

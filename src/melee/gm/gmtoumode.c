@@ -1,15 +1,14 @@
 #include "gmtoumode.h"
 
-#include "gm_1B03.h"
-
 #include "gm_1A3F.h"
-
-#include <melee/lb/forward.h>
-
+#include "gm_1B03.h"
 #include "gm_unsplit.h"
 #include "gmtoulib.h"
 #include "gmvsmelee.h"
 #include "types.h"
+
+#include <melee/lb/forward.h>
+
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/types.h>

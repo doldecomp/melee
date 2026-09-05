@@ -1,28 +1,25 @@
 #include "ft_0C31.h"
 
+#include "fighter.h"
 #include "ft_081B.h"
+#include "ftcolanim.h"
+#include "ftcoll.h"
 #include "ftcommon.h"
+#include "types.h"
 
 #include <placeholder.h>
 
-#include <melee/ef/efasync.h>
-#include "fighter.h"
-
 #include "forward.h"
-
-#include "ftcolanim.h"
-#include "ftcoll.h"
-#include "types.h"
-
 #include "kinds/ftCommon/forward.h"
 
 #include "kinds/ftCommon/types.h"
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/pl/player.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ef/efasync.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/pl/player.h>
 
 /* 0C63BC */ static void fn_800C63BC(Fighter_GObj* gobj);
 /* 0C63E0 */ static void fn_800C63E0(Fighter_GObj* gobj);

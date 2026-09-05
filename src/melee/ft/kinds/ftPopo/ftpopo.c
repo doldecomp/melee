@@ -8,15 +8,14 @@
 
 #include "forward.h"
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftNana/ftnana.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itclimbersice.h>
-
-#include <sysdolphin/baselib/gobj.h>
 
 /* 459E68 */ UnkCostumeStruct ftPp_CostumeList[4];
 

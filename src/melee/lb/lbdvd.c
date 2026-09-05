@@ -7,13 +7,12 @@
 #include "lbheap.h"
 #include "types.h"
 
-#include <melee/gm/gmcameramode.h>
-
 #include <string.h>
 #include <dolphin/dvd.h>
 #include <sysdolphin/baselib/debug.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
+#include <melee/gm/gmcameramode.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/gr/stage.h>
 #include <melee/pl/player.h>

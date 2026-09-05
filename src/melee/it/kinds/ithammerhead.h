@@ -1,15 +1,12 @@
 #ifndef GALE01_299C48
 #define GALE01_299C48
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
-
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 299C48 */ void it_80299C48(HSD_GObj*, Vec3*, Vec3*, f32);
 /* 299D4C */ void itHammerHead_Logic40_Spawned(Item_GObj*);

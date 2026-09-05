@@ -1,13 +1,12 @@
 #ifndef GALE01_221C10
 #define GALE01_221C10
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 221C10 */ void grTLuigi_80221C10(bool);
 /* 221C14 */ void grTLuigi_80221C14(void);

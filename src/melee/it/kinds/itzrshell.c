@@ -3,14 +3,13 @@
 #include "itnokonoko.h"
 #include "itzgshell.h"
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/it/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
 
 ItemStateTable it_803F87F0[] = {
     { 0, itZrshell_UnkMotion0_Anim, itZrshell_UnkMotion0_Phys,

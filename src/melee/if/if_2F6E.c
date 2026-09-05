@@ -1,5 +1,9 @@
 #include "if_2F6E.h"
 
+#include "if_2F72.h"
+#include "ifall.h"
+#include "types.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -8,9 +12,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/types.h>
-#include "if_2F72.h"
-#include "ifall.h"
-#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

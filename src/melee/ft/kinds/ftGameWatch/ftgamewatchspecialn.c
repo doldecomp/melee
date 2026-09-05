@@ -2,23 +2,21 @@
 
 #include "types.h"
 
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itgamewatchchef.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/random.h>
 
 static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
 {

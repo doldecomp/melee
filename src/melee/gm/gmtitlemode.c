@@ -1,12 +1,12 @@
 #include "gmtitlemode.h"
 
-#include <melee/db/db.h>
 #include "gm_1A3F.h"
 #include "gm_unsplit.h"
 #include "types.h"
-#include <melee/lb/lbdvd.h>
 
 #include <sysdolphin/baselib/controller.h>
+#include <melee/db/db.h>
+#include <melee/lb/lbdvd.h>
 
 struct exitData {
     int buttons;

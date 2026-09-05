@@ -1,5 +1,12 @@
 #include "mndiagram3.h"
 
+#include "inlines.h"
+#include "mndiagram.h"
+#include "mndiagram2.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
+
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -14,12 +21,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
-#include "inlines.h"
-#include "mndiagram.h"
-#include "mndiagram2.h"
-#include "mnmain.h"
-#include "mnname.h"
-#include "types.h"
 
 typedef struct mnDiagram3_PosTable {
     /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)

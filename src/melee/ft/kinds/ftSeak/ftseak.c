@@ -4,6 +4,7 @@
 #include "ftseakspeciallw.h"
 #include "ftseakspecialn.h"
 #include "ftseakspecials.h"
+#include "types.h"
 
 #include "forward.h"
 
@@ -12,7 +13,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/it/it_26B1.h>
 
 /* 459D18 */ UnkCostumeStruct ftSk_CostumeList[5];

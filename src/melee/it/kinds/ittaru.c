@@ -2,6 +2,8 @@
 
 #include <placeholder.h>
 
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -18,9 +20,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F58E0[] = {
     { -1, itTaru_UnkMotion0_Anim, itTaru_UnkMotion0_Phys,

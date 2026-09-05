@@ -3,9 +3,8 @@
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2F0340 */ Item_GObj* it_802F0340(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
                                     Fighter_Part part, ItemKind kind,

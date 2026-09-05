@@ -1,9 +1,9 @@
 #ifndef MELEE_MP_FORWARD_H
 #define MELEE_MP_FORWARD_H
 
-#include <Runtime/platform.h>
-
 #include <melee/lb/forward.h>
+
+#include <Runtime/platform.h>
 
 typedef struct CollJoint CollJoint;
 typedef struct CollLine CollLine;

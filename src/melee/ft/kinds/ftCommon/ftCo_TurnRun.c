@@ -1,23 +1,21 @@
 #include "ftCo_TurnRun.h"
 
+#include "ftCo_Fall.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Run.h"
+
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "ftCo_Fall.h"
-#include "ftCo_Jump.h"
-#include "ftCo_Run.h"
 
 bool fn_800C9CEC(Fighter_GObj* gobj)
 {

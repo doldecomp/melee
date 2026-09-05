@@ -1,18 +1,28 @@
 #include "gm_1884.h"
 
-#include "gm_unsplit.h"
-
-#include <dolphin/pad.h>
 #include "gm_1601.h"
 #include "gm_1A36.h"
 #include "gm_1A45.h"
+#include "gm_unsplit.h"
 #include "types.h"
-#include <melee/gr/stage.h>
-#include <melee/if/ifall.h>
-#include <melee/if/ifstatus.h>
 
 #include <melee/it/forward.h>
 
+#include <dolphin/pad.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
+#include <melee/gr/stage.h>
+#include <melee/if/ifall.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/itspawn.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_0195.h>
@@ -25,18 +35,6 @@
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/wobj.h>
 #include <Runtime/runtime.h>
 
 /// @todo .sdata2 order hack

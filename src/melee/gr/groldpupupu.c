@@ -1,22 +1,14 @@
 #include "groldpupupu.h"
 
-#include <placeholder.h>
-
-#include <melee/cm/camera.h>
-
-#include "forward.h"
-
-#include <melee/ft/ftdevice.h>
-#include <melee/ft/ftlib.h>
 #include "granime.h"
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbaudio_ax.h>
 
+#include <placeholder.h>
+
+#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/debug.h>
@@ -24,6 +16,12 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
 
 struct grOldpupupu_YakumonoParam {
     s16 x0;

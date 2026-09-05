@@ -1,6 +1,7 @@
 #include "gmresult.h"
 
 #include "types.h"
+
 #include <melee/lb/lb_013B.h>
 
 /// @todo .sdata order hack
@@ -59,12 +60,18 @@ union {
 
 HSD_Archive* lbl_804D65B8;
 
+#include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
 
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/types.h>
-#include "gm_1601.h"
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/if/ifcoget.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
@@ -76,13 +83,6 @@ HSD_Archive* lbl_804D65B8;
 #include <melee/mn/mnmain.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
 
 MatchEnd* fn_80174274(void)
 {

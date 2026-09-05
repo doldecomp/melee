@@ -2,21 +2,20 @@
 #define MELEE_GM_TYPES_H
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <dolphin/types.h>
 
 #include <melee/ft/forward.h>
-#include <melee/ty/forward.h>
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
+#include <melee/ty/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/pad.h>
+#include <dolphin/types.h>
 #include <melee/mn/types.h>
+#include <Runtime/platform.h>
 
 /// @deprecated Replace with inline bitfields
 typedef union UnkFlagStruct {

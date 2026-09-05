@@ -1,11 +1,10 @@
 #ifndef GALE01_293A08
 #define GALE01_293A08
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 void itDKinoko_Logic27_Spawned(Item_GObj*);
 void it_80293A70(Item_GObj*);

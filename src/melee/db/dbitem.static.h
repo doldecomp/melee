@@ -1,6 +1,6 @@
-#include <melee/if/types.h>
-
 #include <melee/it/forward.h>
+
+#include <melee/if/types.h>
 
 /* 49FA50 */ static char db_ItemAndPokemonMenuText_buf[0x50];
 

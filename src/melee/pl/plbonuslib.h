@@ -1,10 +1,10 @@
 #ifndef GALE01_03D514
 #define GALE01_03D514
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 #include <melee/pl/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 03D60C */ bool pl_8003D60C(int);
 /* 03D644 */ void pl_8003D644(int, int, int, int);

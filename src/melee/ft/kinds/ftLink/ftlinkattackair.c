@@ -1,23 +1,19 @@
 #include "ftlinkattackair.h"
 
 #include "ftlink.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
-#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
 #include "types.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AttackAir.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0EB484 */ static void lwOnHit(HSD_GObj* gobj);
 /* 0EB528 */ static void lwOnAnim(HSD_GObj* gobj);

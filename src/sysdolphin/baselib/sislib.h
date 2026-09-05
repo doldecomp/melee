@@ -2,16 +2,15 @@
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <dolphin/gx/GXStruct.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/sislib_font.h>
+#include <Runtime/platform.h>
 
 /// How many glyphs the font atlas holds.
 #define HSD_SISLIB_FONT_GLYPHS                                                \

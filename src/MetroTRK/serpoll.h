@@ -1,9 +1,8 @@
 #ifndef _METROTRK_SERPOLL_H
 #define _METROTRK_SERPOLL_H
 
-#include <Runtime/platform.h>
-
 #include <MetroTRK/msgbuf.h>
+#include <Runtime/platform.h>
 
 typedef unsigned char FCSType;
 

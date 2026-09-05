@@ -1,10 +1,9 @@
 #ifndef _METROTRK_NUBEVENT_H
 #define _METROTRK_NUBEVENT_H
 
-#include <Runtime/platform.h>
-
 #include <MetroTRK/dserror.h>
 #include <MetroTRK/msgbuf.h>
+#include <Runtime/platform.h>
 
 typedef unsigned long NubEventID;
 

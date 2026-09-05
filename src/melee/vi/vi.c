@@ -1,7 +1,7 @@
 #include "vi.h"
 
-#include <melee/cm/camera.h>
 #include <dolphin/pad.h>
+#include <melee/cm/camera.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_013B.h>

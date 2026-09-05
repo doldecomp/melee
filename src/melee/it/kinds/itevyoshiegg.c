@@ -1,13 +1,14 @@
 #include "itevyoshiegg.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
-#include <melee/ef/efsync.h>
-#include <melee/gm/gmevent.h>
-
+#include "forward.h"
 #include <melee/it/forward.h>
 
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/ef/efsync.h>
+#include <melee/gm/gmevent.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -15,11 +16,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
-
-#include "forward.h"
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F6728[] = {
     { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,

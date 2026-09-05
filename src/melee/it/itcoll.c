@@ -1,17 +1,23 @@
 #include "itcoll.h"
 
 #include "inlines.h"
+#include "it_26B1.h"
 #include "it_2725.h"
 #include "it_279C.h"
-#include <placeholder.h>
+#include "it_3F14.h"
+#include "item.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
+#include <placeholder.h>
 
 #include <melee/ef/forward.h>
 
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftchangeparam.h>
@@ -21,19 +27,11 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
 #include <melee/gm/gm_unsplit.h>
-#include "it_26B1.h"
-#include "it_3F14.h"
-#include "item.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);

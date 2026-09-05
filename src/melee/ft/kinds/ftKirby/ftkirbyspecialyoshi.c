@@ -1,13 +1,18 @@
+#include "ftkirby.h"
+#include "ftkirbycaptureyoshi.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyyoshiegg.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftYoshi/forward.h>
 
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -15,24 +20,13 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-
-#include "ftkirby.h"
-#include "ftkirbycaptureyoshi.h"
-
-#include <melee/ft/kinds/ftYoshi/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itkirbyyoshispecialn.h>
 #include <melee/it/kinds/ityoshiegglay.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /* 1095DC */ static void fn_801095DC(HSD_GObj*);
 /* 109680 */ static void fn_80109680(HSD_GObj*);

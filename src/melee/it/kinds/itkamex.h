@@ -1,11 +1,10 @@
 #ifndef GALE01_2CA49C
 #define GALE01_2CA49C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2CA49C */ void it_802CA49C(Item_GObj*);
 /* 2CA534 */ void it_802CA534(Item_GObj*);

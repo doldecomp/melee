@@ -1,14 +1,16 @@
 
 #include "ftcaptainspeciallw.h"
 
+#include "types.h"
+
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
-#include <melee/ef/efasync.h>
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -16,14 +18,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "types.h"
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
 /// /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;

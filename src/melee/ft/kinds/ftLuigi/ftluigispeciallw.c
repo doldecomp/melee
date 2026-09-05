@@ -2,26 +2,21 @@
 
 #include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
-
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /// SpecialLw (Luigi Cyclone)
 #define FTLUIGI_SPECIALLW_FLAG                                                \

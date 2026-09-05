@@ -1,17 +1,15 @@
 #include "itspycloak.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 295C68 */ static void it_80295C68(Item_GObj* gobj);
 /* 295CB8 */ static bool itSpycloak_UnkMotion0_Anim(Item_GObj* gobj);

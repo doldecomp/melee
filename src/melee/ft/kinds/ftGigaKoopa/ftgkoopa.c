@@ -1,23 +1,20 @@
 #include "ftgkoopa.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftKoopa/forward.h>
+#include <melee/it/forward.h>
+
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C7434.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/ft/kinds/ftKoopa/forward.h>
-
 #include <melee/ft/kinds/ftKoopa/ftkoopa.h>
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecialhi.h>
 #include <melee/ft/kinds/ftKoopa/ftkoopaspeciallw.h>
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecialn.h>
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecials.h>
 #include <melee/ft/kinds/ftKoopa/types.h>
-
-#include <melee/it/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 
 /* 45A660 */ UnkCostumeStruct ftGk_CostumeList[1];

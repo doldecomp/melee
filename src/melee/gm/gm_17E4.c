@@ -1,14 +1,14 @@
-#include "gmregclear.h"
-#include <Runtime/platform.h>
-
-#include "forward.h"
-
 #include "gm_unsplit.h"
 #include "gmadventure.h"
 #include "gmmain_lib.h"
+#include "gmregclear.h"
 #include "types.h"
+
+#include "forward.h"
+
 #include <melee/if/ifstatus.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 typedef struct AdventureStageEntry {
     /* 0x00 */ u8 stage_kind;

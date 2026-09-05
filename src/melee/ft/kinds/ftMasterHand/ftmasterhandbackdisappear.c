@@ -4,20 +4,18 @@
 #include "ftmasterhandthrownmasterhand.h"
 #include "ftmasterhandwait11.h"
 #include "ftmasterhandwait12.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {

@@ -7,10 +7,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshi.h>
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/it/kinds/itsamusgrapple.h>
-
-#include <melee/ft/kinds/ftYoshi/ftyoshi.h>
 
 typedef struct {
     u8 pad_1A4C[0x1A4C];

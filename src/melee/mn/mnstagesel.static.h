@@ -1,11 +1,10 @@
 #ifndef __GALE01_2599EC
 #define __GALE01_2599EC
 
-#include <Runtime/platform.h>
-
 #include <melee/mn/forward.h>
 
 #include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 struct stagelistinfo {
     HSD_JObj* x0;

@@ -3,13 +3,11 @@
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
-
-#include <melee/it/itCharItems.h>
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/kinds/types.h>
 
 typedef struct itSamusGrapple_Hitbox {
     struct spawn_hitbox_0 create_hitbox_0;

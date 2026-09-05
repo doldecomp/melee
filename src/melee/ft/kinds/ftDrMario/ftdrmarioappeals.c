@@ -2,23 +2,21 @@
 
 #include "ftdrmario.h"
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
 #include <melee/ft/kinds/ftMario/ftmariospecialn.h>
 #include <melee/ft/kinds/ftMario/types.h>
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 void ftDr_AppealS_Anim(HSD_GObj* gobj)
 {

@@ -1,23 +1,21 @@
 #include "ftcrazyhanddamage0.h"
 
+#include "ftcrazyhandtagcancel.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include "ftcrazyhandtagcancel.h"
 #include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 void fn_80157080(Fighter_GObj* gobj)
 {

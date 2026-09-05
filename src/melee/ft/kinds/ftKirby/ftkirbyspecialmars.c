@@ -1,14 +1,17 @@
 #include "ftkirbyspecialmars.h"
 
+#include "ftkirby.h"
 #include "types.h"
 
 #include <placeholder.h>
 
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -17,16 +20,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-
-#include "forward.h"
-
-#include "ftkirby.h"
+#include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
 

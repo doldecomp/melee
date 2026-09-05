@@ -2,7 +2,6 @@
 #define GALE01_0763C0
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -11,6 +10,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 0763C0 */ void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
                                   enum_t attackID);

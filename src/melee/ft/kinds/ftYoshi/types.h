@@ -2,9 +2,10 @@
 #define MELEE_FT_CHARA_FTYOSHI_TYPES_H
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/it/forward.h>
+
+#include <Runtime/platform.h>
 
 struct ftYoshi_FighterVars {
     /* 0x222C */ Vec3 x222C;

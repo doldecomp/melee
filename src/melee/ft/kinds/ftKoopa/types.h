@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTKOOPA_TYPES_H
 
 #include <placeholder.h>
+
 #include <Runtime/platform.h>
 
 struct ftKoopa_FighterVars {

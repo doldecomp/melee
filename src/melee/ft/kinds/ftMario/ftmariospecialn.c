@@ -1,28 +1,26 @@
 #include "ftmariospecialn.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/it/kinds/itmariofireball.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 static MotionFlags const ftMr_MF_SpecialN_Coll =
     Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;

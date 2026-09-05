@@ -1,15 +1,5 @@
 #include "gricemt.h"
 
-#include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-
-#include "forward.h"
-
 #include "grdatfiles.h"
 #include "grlib.h"
 #include "grmaterial.h"
@@ -18,12 +8,10 @@
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/types.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/mp/mplib.h>
 
+#include <placeholder.h>
+
+#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/types.h>
@@ -32,6 +20,16 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
                                      HSD_GObj* u3, f32 u4);

@@ -2,6 +2,7 @@
 
 #include "inlines.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
@@ -9,8 +10,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
-
-#include <sysdolphin/baselib/random.h>
 
 /* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);
 /* 2D3FA0 */ static void it_802D3FA0(Item_GObj* gobj);

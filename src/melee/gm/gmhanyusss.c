@@ -1,7 +1,7 @@
 #include "gm_unsplit.h"
-
 #include "gmmain_lib.h"
 #include "types.h"
+
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>
 

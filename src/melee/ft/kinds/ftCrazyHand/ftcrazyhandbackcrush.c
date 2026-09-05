@@ -1,16 +1,15 @@
 #include "ftcrazyhandbackcrush.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
 #include <melee/pl/player.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void ftCh_Init_801597F0(HSD_GObj* gobj, HSD_GObjEvent cb)
 {

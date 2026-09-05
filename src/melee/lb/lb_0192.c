@@ -3,14 +3,13 @@
 #include "lbaudio_ax.h"
 #include "lblanguage.h"
 
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
-
 #include <dolphin/dvd.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/rumble.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 
 static struct strings {
     const char* x0;

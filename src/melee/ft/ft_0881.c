@@ -1,10 +1,11 @@
 #include "ft_0881.h"
 
-#include <sysdolphin/baselib/random.h>
-#include <melee/db/db.h>
 #include "fighter.h"
 #include "ft_0877.h"
 #include "inlines.h"
+
+#include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plstale.h>

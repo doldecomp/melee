@@ -1,14 +1,14 @@
 #include "stage.h"
 
-#include <melee/gm/gm_unsplit.h>
 #include "ground.h"
 #include "types.h"
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 /// One #stage_id_map entry: the #GrKind for a #StKind.
 struct StageIdMapEntry {

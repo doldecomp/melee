@@ -1,15 +1,14 @@
 #include "itdraw.h"
 
 #include "inlines.h"
+#include "it_2725.h"
 
+#include <sysdolphin/baselib/tev.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-#include "it_2725.h"
 #include <melee/lb/lb_0146.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbgx.h>
-
-#include <sysdolphin/baselib/tev.h>
 
 U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 

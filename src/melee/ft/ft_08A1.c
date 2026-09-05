@@ -1,20 +1,20 @@
-#include "ft_0892.h"
-
 #include "fighter.h"
+#include "ft_0892.h"
 #include "ftcommon.h"
 #include "ftdata.h"
 #include "ftlib.h"
 #include "inlines.h"
+
 #include "kinds/ftCLink/ftclink.h"
 #include "kinds/ftCommon/ftCo_DownSpot.h"
 #include "kinds/ftCommon/ftCo_HammerWait.h"
 #include "kinds/ftCrazyHand/ftcrazyhandtagcancel.h"
 #include "kinds/ftLink/ftlinkattackair.h"
 #include "kinds/ftMasterHand/ftmasterhandwait12.h"
-#include <melee/it/it_26B1.h>
-#include <melee/it/kinds/itpeachparasol.h>
 
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itpeachparasol.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

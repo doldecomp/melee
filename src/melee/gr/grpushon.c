@@ -8,8 +8,11 @@
 #include "types.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
@@ -17,11 +20,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 struct grPushOn_Entry {
     s32 x0;

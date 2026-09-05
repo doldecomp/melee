@@ -1,12 +1,13 @@
 #include "hsd_3924.h"
 
+#include "hsd_3915.h"
+#include "list.h"
+#include "memory.h"
+
 #include <placeholder.h>
 
 #include <string.h>
 #include <dolphin/gx.h>
-#include "hsd_3915.h"
-#include "list.h"
-#include "memory.h"
 
 // .sbss
 /* 4D7850 */ static HSD_SList* hsd_804D7850;

@@ -7,6 +7,8 @@
 #include "types.h"
 
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
 
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C70D0.h>
@@ -14,10 +16,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/it/forward.h>
-
 #include <melee/it/it_26B1.h>
 
 /* 45A270 */ UnkCostumeStruct ftLg_CostumeList[4];

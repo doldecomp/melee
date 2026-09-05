@@ -1,8 +1,6 @@
 #ifndef SYSDOLPHIN_BASELIB_LOBJ_H
 #define SYSDOLPHIN_BASELIB_LOBJ_H
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/gx.h>
@@ -10,6 +8,7 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/object.h>
+#include <Runtime/platform.h>
 
 #define MAX_GXLIGHT 9
 

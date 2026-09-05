@@ -1,9 +1,5 @@
 #include "ftdrawcommon.h"
 
-#include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
 #include "ft_0C88.h"
 #include "ftafterimage.h"
 #include "ftcommon.h"
@@ -11,17 +7,22 @@
 #include "ftlib.h"
 #include "ftparts.h"
 #include "inlines.h"
+
+#include <placeholder.h>
+
 #include "kinds/ftCommon/ftCo_09F4.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lb_0146.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbgx.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/state.h>
+#include <melee/cm/camera.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_0146.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbgx.h>
+#include <Runtime/platform.h>
 
 static U8Vec4 ftDrawCommon_804D3A88 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static U8Vec4 ftDrawCommon_804D3A8C = { 0x80, 0x80, 0xFF, 0x80 };

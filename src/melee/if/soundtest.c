@@ -1,22 +1,9 @@
 #include "soundtest.h"
 
-#include <melee/db/db.h>
-#include <melee/db/dbsound.h>
-
-#include <melee/gm/forward.h>
-
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
 #include "textlib.h"
 #include "types.h"
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/mn/inlines.h>
-#include <melee/ty/toy.h>
+
+#include <melee/gm/forward.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -29,6 +16,18 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <melee/db/db.h>
+#include <melee/db/dbsound.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/mn/inlines.h>
+#include <melee/ty/toy.h>
 
 /* 2FF88C */ static bool un_802FF88C(enum soundtest_callback_arg0);
 /* 2FF934 */ static bool un_802FF934(enum soundtest_callback_arg0);

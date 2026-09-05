@@ -1,9 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_DEBUG_H
 #define SYSDOLPHIN_BASELIB_DEBUG_H
 
-#include <Runtime/platform.h>
-
 #include <dolphin/os.h> // IWYU pragma: keep
+#include <Runtime/platform.h>
 
 typedef void (*ReportCallback)(const unsigned char*, size_t);
 typedef void (*PanicCallback)(OSContext*, ...);

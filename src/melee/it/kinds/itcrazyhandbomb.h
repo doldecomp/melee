@@ -1,11 +1,10 @@
 #ifndef GALE01_2F0F6C
 #define GALE01_2F0F6C
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2F0F6C */ void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos,
                               ItemKind kind, f32 facing_dir);

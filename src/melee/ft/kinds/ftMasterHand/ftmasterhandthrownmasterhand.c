@@ -1,15 +1,15 @@
 #include "ftmasterhandthrownmasterhand.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
+#include "types.h"
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_CaptureCut.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
-#include "types.h"
+#include <melee/ft/types.h>
 
 void ftMh_CaptureWaitMasterHand_80155D1C(HSD_GObj* gobj)
 {

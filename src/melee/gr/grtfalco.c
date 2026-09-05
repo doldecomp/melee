@@ -8,14 +8,12 @@
 
 #include <placeholder.h>
 
-#include <melee/lb/lb_00F9.h>
-
 #include <melee/mp/forward.h>
-
-#include <melee/mp/mplib.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
 
 /* 2207F0 */ static void grTFalco_802207F0(bool);
 /* 2207F4 */ static void grTFalco_802207F4(void);

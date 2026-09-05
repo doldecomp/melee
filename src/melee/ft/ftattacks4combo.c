@@ -2,6 +2,7 @@
 #include "ftattacks4combo.h"
 
 #include "fighter.h"
+
 #include "kinds/ftCommon/ftCo_AttackS4.h"
 #include "kinds/ftCommon/ftCo_Wait.h"
 

@@ -1,6 +1,7 @@
 #include "it_3F14.h"
 
 #include "itdraw.h"
+
 #include "kinds/itarwinglaser.h"
 #include "kinds/itbat.h"
 #include "kinds/itbombhei.h"

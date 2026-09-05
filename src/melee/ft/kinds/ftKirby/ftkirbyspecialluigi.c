@@ -1,28 +1,24 @@
 #include "ftkirby.h"
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftLuigi/forward.h>
+
+#include <stddef.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Wait.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-#include <melee/ft/kinds/ftLuigi/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itluigifireball.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <stddef.h>
 
 static void fn_800F98F4(Fighter_GObj*);
 

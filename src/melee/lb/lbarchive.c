@@ -1,5 +1,6 @@
 #include "lbarchive.h"
 
+#include "lbdvd.h"
 #include "lbfile.h"
 #include "lbheap.h"
 
@@ -8,7 +9,6 @@
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
-#include "lbdvd.h"
 
 #ifdef MUST_MATCH
 #pragma push

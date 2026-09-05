@@ -1,18 +1,7 @@
 #ifndef MELEE_FT_INLINES_H
 #define MELEE_FT_INLINES_H
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/eflib.h>
-
 #include <melee/ft/forward.h>
-
-#include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/it/it_26B1.h>
-#include <melee/lb/lbvector.h>
-
 #include <melee/mp/forward.h>
 
 #include <dolphin/mtx.h>
@@ -20,6 +9,13 @@
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/lobj.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/types.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbvector.h>
+#include <Runtime/platform.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \

@@ -10,20 +10,9 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/forward.h>
 #include "forward.h"
-
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/mnstagesel.h>
-
+#include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
-
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <m2c_macros.h>
@@ -45,6 +34,13 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/mnstagesel.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 int lbl_804D663C;
 u8 lbl_804D6638[0x4];

@@ -1,14 +1,12 @@
 #ifndef MELEE_MP_TYPES_H
 #define MELEE_MP_TYPES_H
 
-#include <Runtime/platform.h>
+#include "mp/forward.h" // IWYU pragma: export
+#include <melee/gr/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
-
-#include <melee/gr/forward.h>
-#include "mp/forward.h" // IWYU pragma: export
-
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 struct mpIsland_80458E88_t {
     /*  +0 */ mp_UnkStruct0* next;

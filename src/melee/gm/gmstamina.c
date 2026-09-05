@@ -1,15 +1,14 @@
 #include "gmstamina.h"
 
-#include "gm_unsplit.h"
-
-#include <placeholder.h>
-
 #include "gm_1A3F.h"
-
-#include <sysdolphin/baselib/gobjproc.h>
+#include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"
+
+#include <placeholder.h>
+
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/mn/types.h>

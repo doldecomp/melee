@@ -1,9 +1,9 @@
 #ifndef MELEE_IT_ITYOYO_H
 #define MELEE_IT_ITYOYO_H
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 typedef struct itYoyoAttributes {
     s32 x0_CHARGE_SPAWN_POS;

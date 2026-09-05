@@ -1,9 +1,9 @@
 #ifndef GALE01_021CE8
 #define GALE01_021CE8
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 0222A4 */ void lbRefract_800222A4(void);
 /* 02247C */ void lbRefract_8002247C(HSD_CObj*);

@@ -1,8 +1,5 @@
 #include "ifhazard.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/sc/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -11,6 +8,8 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/sc/types.h>
 
 /// .sbss
 /* 4D6D80 */ static HSD_GObj* un_804D6D80;

@@ -1,11 +1,10 @@
 #ifndef GALE01_14F418
 #define GALE01_14F418
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 /* 14F418 */ void ftGl_Init_OnDeath(HSD_GObj* gobj);
 /* 14F440 */ void ftGl_Init_OnLoad(HSD_GObj* gobj);

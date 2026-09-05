@@ -6,9 +6,9 @@
 #ifndef GALE01_0219E4
 #define GALE01_0219E4
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 0219E4 */ void fn_800219E4(void*);
 /* 021A10 */ void lbBgFlash_80021A10(f32);

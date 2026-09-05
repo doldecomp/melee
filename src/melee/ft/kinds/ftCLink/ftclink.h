@@ -1,11 +1,10 @@
 #ifndef GALE01_148C64
 #define GALE01_148C64
 
-#include <Runtime/platform.h>
+#include <melee/ft/kinds/ftLink/forward.h>
 
 #include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftLink/forward.h>
+#include <Runtime/platform.h>
 
 /* 148C64 */ void ftCl_Init_OnDeath(Fighter_GObj* gobj);
 /* 148CE4 */ void ftCl_Init_OnLoad(Fighter_GObj* gobj);

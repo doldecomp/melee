@@ -2,23 +2,20 @@
 
 #include "ftpeachfloatattack.h"
 #include "ftpeachfloatfall.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ef/efasync.h>
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
-#include "types.h"
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {

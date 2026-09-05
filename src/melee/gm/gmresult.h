@@ -3,11 +3,10 @@
 
 #include <placeholder.h>
 
-#include <dolphin/gx/GXStruct.h>
-
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 struct ResultsPlayerData;

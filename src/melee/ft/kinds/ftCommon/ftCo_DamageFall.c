@@ -1,14 +1,19 @@
 #include "ftCo_DamageFall.h"
 
 #include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_DamageIce.h"
+#include "ftCo_Fall.h"
 #include "ftCo_HammerFall.h"
 #include "ftCo_HammerWait.h"
+#include "ftCo_ItemParasolDamageFall.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
 #include "ftCo_SpecialAir.h"
 
-#include <Runtime/platform.h>
+#include "forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -16,15 +21,7 @@
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "ftCo_Attack100.h"
-#include "ftCo_Fall.h"
-#include "ftCo_ItemParasolDamageFall.h"
-#include "ftCo_JumpAerial.h"
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {

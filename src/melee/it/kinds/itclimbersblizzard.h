@@ -1,11 +1,10 @@
 #ifndef GALE01_2C2144
 #define GALE01_2C2144
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C2144 */ Item_GObj* itClimbersBlizzard_Spawn(Item_GObj*, Vec3*, f32);
 /* 2C2248 */ void itClimbersBlizzard_802C2248(Item_GObj*);

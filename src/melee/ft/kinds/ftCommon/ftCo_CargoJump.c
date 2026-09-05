@@ -3,20 +3,17 @@
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoKneebend.h"
 #include "ftCo_CargoThrow.h"
+#include "ftCo_Jump.h"
 #include "ftCo_Shouldered.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include "ftCo_Jump.h"
 #include <melee/ft/kinds/ftDonkey/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 bool ftCo_8009BB1C(Fighter_GObj* gobj)
 {

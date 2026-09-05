@@ -2,14 +2,16 @@
 
 #include "inlines.h"
 
+#include <melee/it/forward.h>
+
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/gm/gm_unsplit.h>
-
-#include <melee/it/forward.h>
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -19,10 +21,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/types.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 
 /* 2CDC5C */ static void itHassam_802CDC5C(Item_GObj* gobj);
 /* 2CDC80 */ static void itHassam_802CDC80(Item_GObj* gobj);

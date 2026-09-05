@@ -1,20 +1,7 @@
 #include "ifmagnify.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ft/ftdrawcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
 #include "if_2FD9.h"
 #include "ifall.h"
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -30,6 +17,19 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/types.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
                                            { 0.0F, 0.0F, 300.0F },

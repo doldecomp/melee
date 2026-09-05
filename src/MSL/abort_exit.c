@@ -1,6 +1,5 @@
-#include <Runtime/platform.h>
-
 #include <dolphin/os/init/__ppc_eabi_init.h>
+#include <Runtime/platform.h>
 
 void __destroy_global_chain(void);
 void __kill_critical_regions(void);

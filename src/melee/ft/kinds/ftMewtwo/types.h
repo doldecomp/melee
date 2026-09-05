@@ -1,11 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTMEWTWO_TYPES_H
 #define MELEE_FT_CHARA_FTMEWTWO_TYPES_H
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/lb/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 struct ftMewtwo_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;

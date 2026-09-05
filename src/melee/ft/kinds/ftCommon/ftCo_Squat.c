@@ -1,21 +1,5 @@
 #include "ftCo_Squat.h"
 
-#include <placeholder.h>
-#include <Runtime/platform.h>
-#include <stdbool.h>
-
-#include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include "forward.h"
-
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_Attack100.h"
@@ -30,8 +14,21 @@
 #include "ftCo_Pass.h"
 #include "ftCo_SpecialS.h"
 #include "ftCo_SquatWait.h"
-#include <melee/mp/mpcoll.h>
 
+#include <placeholder.h>
+
+#include "forward.h"
+#include <melee/ft/forward.h>
+
+#include <stdbool.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mpcoll.h>
+#include <Runtime/platform.h>
 
 /* 0D600C */ static void ftCo_Squat_Enter(Fighter_GObj* gobj);
 

@@ -1,12 +1,5 @@
 #include "grcastle.h"
 
-#include <placeholder.h>
-#include "types.h"
-
-#include <melee/cm/camera.h>
-#include <melee/ft/ftdevice.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_16AE.h>
 #include "granime.h"
 #include "grdatfiles.h"
 #include "grdisplay.h"
@@ -15,14 +8,9 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include <melee/it/it_26B1.h>
-#include <melee/it/itdrop.h>
-#include <melee/it/ithitbox.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbvector.h>
-#include <melee/lb/types.h>
-#include <melee/mp/mplib.h>
+#include "types.h"
+
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
@@ -32,6 +20,18 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itdrop.h>
+#include <melee/it/ithitbox.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mplib.h>
 
 struct unkCastle {
     /* 0x000 */ u8 _pad[0x10C];

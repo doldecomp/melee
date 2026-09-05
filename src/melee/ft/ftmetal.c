@@ -1,6 +1,5 @@
 #include "ftmetal.h"
 
-#include <sysdolphin/baselib/id.h>
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftanim.h"
@@ -9,6 +8,8 @@
 #include "ftmaterial.h"
 #include "ftparts.h"
 #include "types.h"
+
+#include <sysdolphin/baselib/id.h>
 #include <melee/lb/lb_00B0.h>
 
 void ft_800C8170(Fighter* fp)

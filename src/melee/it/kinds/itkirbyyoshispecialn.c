@@ -1,7 +1,5 @@
 #include "itkirbyyoshispecialn.h"
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyspecialdonkey.h>
 #include <melee/it/inlines.h>
@@ -13,6 +11,7 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/lb/lb_00B0.h>
+#include <Runtime/platform.h>
 
 /* 2F2E68 */ static bool itKirbyyoshispecialn_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2F2E70 */ static void itKirbyyoshispecialn_UnkMotion0_Phys(Item_GObj* gobj);

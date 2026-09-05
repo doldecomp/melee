@@ -1,10 +1,11 @@
 #include "hsd_393C.h"
 
+#include "debug.h"
+#include "video.h"
+
 #include <placeholder.h>
 
 #include <string.h>
-#include "debug.h"
-#include "video.h"
 
 /// @todo misnomer - moved from particle file, not particle-related
 struct ParticleConsoleState {

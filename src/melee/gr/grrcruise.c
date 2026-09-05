@@ -6,18 +6,10 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include <placeholder.h>
 #include "stage.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
+#include <placeholder.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/archive.h>
@@ -28,6 +20,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 struct grRCruise_YakumonoParam {
     f32 x0;

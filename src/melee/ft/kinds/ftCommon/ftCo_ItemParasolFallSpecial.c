@@ -1,22 +1,19 @@
 #include "ftCo_ItemParasolFallSpecial.h"
 
-#include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include "forward.h"
-
 #include "ftCo_FallSpecial.h"
 #include "ftCo_JumpAerial.h"
 #include "ftCo_Landing.h"
 #include "inlines.h"
 
+#include "forward.h"
+#include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftPeach/forward.h>
+
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 void ftCo_800CF3C8(Fighter_GObj* gobj)
 {

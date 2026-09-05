@@ -1,17 +1,14 @@
 #ifndef GALE01_04D164
 #define GALE01_04D164
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
-
-#include <melee/mp/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
+#include <melee/mp/types.h>
+#include <Runtime/platform.h>
 
 /* 04D164 */ MapCollData* mpLib_8004D164(void);
 /* 04D16C */ CollVtx* mpGetGroundCollVtx(void);

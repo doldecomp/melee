@@ -1,5 +1,9 @@
 #include "itoldottosea.h"
 
+#include "itfreeze.h"
+#include "itwhitebea.h"
+
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/it/inlines.h>
@@ -12,12 +16,8 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/itzako.h>
-#include "itfreeze.h"
-#include "itwhitebea.h"
 #include <melee/lb/lblanguage.h>
 #include <melee/mp/mpcoll.h>
-
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F89C8[] = {
     { 0, itOldottosea_UnkMotion0_Anim, itOldottosea_UnkMotion0_Phys,

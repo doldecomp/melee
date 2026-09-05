@@ -2,7 +2,6 @@
 #define GALE01_005BB0
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
@@ -11,6 +10,7 @@
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 struct lbColl_8000A10C_arg0_t;
 

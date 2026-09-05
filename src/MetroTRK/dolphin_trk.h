@@ -1,9 +1,8 @@
 #ifndef METROTRK_DOLPHIN_TRK_H
 #define METROTRK_DOLPHIN_TRK_H
 
-#include <Runtime/platform.h>
-
 #include <MetroTRK/dserror.h>
+#include <Runtime/platform.h>
 
 SECTION_INIT void __TRK_reset(void);
 void InitMetroTRK(void);

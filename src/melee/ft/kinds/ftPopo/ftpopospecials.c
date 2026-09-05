@@ -1,5 +1,8 @@
 #include "ftpopospecials.h"
 
+#include "ftpopo.h"
+
+#include <math.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>
@@ -9,10 +12,7 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftNana/ftnana.h>
-#include "ftpopo.h"
 #include <melee/pl/player.h>
-
-#include <math.h>
 
 static inline void setRefGObjFlagAndClear(Fighter* fp)
 {

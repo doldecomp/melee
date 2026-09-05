@@ -1,5 +1,8 @@
 #include "itmaril.h"
 
+#include "ithinoarashi.h"
+
+#include <math.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,10 +13,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include "ithinoarashi.h"
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
 
 ItemStateTable it_803F82B0[] = {
     {

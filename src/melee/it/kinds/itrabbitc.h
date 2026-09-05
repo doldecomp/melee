@@ -1,13 +1,11 @@
 #ifndef GALE01_294DA0
 #define GALE01_294DA0
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 294DA0 */ bool itRabbitC_Logic30_ShieldBounced(Item_GObj*);
 /* 294DC0 */ HSD_GObj* it_80294DC0(Vec3*);

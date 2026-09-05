@@ -3,10 +3,6 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/it/it_2725.h>
-#include <melee/it/itgroundcoll.h>
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
@@ -20,8 +16,11 @@
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecialn.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+#include <Runtime/platform.h>
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2

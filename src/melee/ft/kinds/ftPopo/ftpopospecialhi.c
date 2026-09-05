@@ -1,10 +1,13 @@
 
 #include "ftpopospecialhi.h"
 
-#include <melee/ft/fighter.h>
+#include "ftpopo.h"
+#include "ftpopospecials.h"
 
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -13,17 +16,13 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
-#include "ftpopospecials.h"
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftNana/ftnana.h>
-#include "ftpopo.h"
 #include <melee/it/kinds/itclimbersstring.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include <math.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

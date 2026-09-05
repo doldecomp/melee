@@ -1,20 +1,19 @@
 #include "gm_1A3F.h"
-#include <melee/if/soundtest.h>
-
-#include <melee/lb/forward.h>
-
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "types.h"
+
+#include <melee/lb/forward.h>
+
+#include <sysdolphin/baselib/memory.h>
+#include <melee/if/soundtest.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/mngallery.h>
-#include <melee/mn/types.h>
 #include <melee/mn/mnsnap.h>
-
-#include <sysdolphin/baselib/memory.h>
+#include <melee/mn/types.h>
 
 struct DebugSoundTestData {
     struct SoundTestData* x0;

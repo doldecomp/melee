@@ -1,11 +1,10 @@
 #ifndef GALE01_2C9588
 #define GALE01_2C9588
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C9588 */ void it_802C9588(Item_GObj*);
 /* 2C9618 */ void it_802C9618(HSD_GObj*);

@@ -2,9 +2,10 @@
 #define MELEE_LB_CARDNEW_H
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
+
+#include <Runtime/platform.h>
 
 struct CardEntry {
     int file_size;

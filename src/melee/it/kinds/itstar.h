@@ -1,13 +1,11 @@
 #ifndef GALE01_284644
 #define GALE01_284644
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/it/kinds/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 /* 284644 */ void itStar_Logic10_Spawned(Item_GObj*);
 /* 2846D4 */ void it_802846D4(Item_GObj*);

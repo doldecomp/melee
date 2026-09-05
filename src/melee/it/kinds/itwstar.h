@@ -3,12 +3,10 @@
 
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
-
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 294364 */ HSD_AnimJoint* it_80294364(Item_GObj*);
 /* 294430 */ void it_80294430(Item_GObj*, float, float);

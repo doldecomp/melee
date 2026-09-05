@@ -1,12 +1,13 @@
 #include "ftfoxspecialhi.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <math.h>
+#include <dolphin/mtx.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -15,15 +16,12 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | \

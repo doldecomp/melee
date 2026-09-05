@@ -3,7 +3,6 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
 #include <melee/gr/stage.h>
 #include <melee/it/inlines.h>
@@ -14,6 +13,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F7F58[] = {
     { 0, it_802D2C54, it_802D2C78, it_802D2D04 },

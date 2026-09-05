@@ -3,12 +3,12 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/ef/efsync.h>
 
 #include <melee/it/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -16,9 +16,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F7BC0[] = { {
                                      0,

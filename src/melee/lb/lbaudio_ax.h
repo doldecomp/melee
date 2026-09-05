@@ -1,13 +1,12 @@
 #ifndef GALE01_02305C
 #define GALE01_02305C
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1

@@ -1,10 +1,10 @@
 #ifndef GALE01_14FC68
 #define GALE01_14FC68
 
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
 
 /* 14FC68 */ void ftMh_Init_OnDeath(HSD_GObj* gobj);
 /* 14FC6C */ void ftMh_Init_OnLoad(HSD_GObj* gobj);

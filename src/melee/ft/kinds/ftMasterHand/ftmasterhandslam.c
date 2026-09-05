@@ -2,23 +2,21 @@
 
 #include "ftmasterhandthrownmasterhand.h"
 #include "ftmasterhandwait12.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/kinds/ftCrazyHand/ftcrazyhandsqueezing1.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 void ftMh_Slam_Anim(HSD_GObj* gobj)
 {

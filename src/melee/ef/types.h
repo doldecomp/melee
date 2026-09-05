@@ -1,14 +1,12 @@
 #ifndef MELEE_EF_TYPES_H
 #define MELEE_EF_TYPES_H
 
+#include "ef/forward.h" // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
-
-#include "ef/forward.h" // IWYU pragma: export
-
 #include <melee/sc/types.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 // How efAsync_Spawn resolves position and forwards args to efSync_Spawn.
 // ATTACH = passes jobj directly (effect tracks the joint).

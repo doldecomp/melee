@@ -1,20 +1,21 @@
 #include "itdrmariopill.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
-
-#include <melee/db/db.h>
-#include <dolphin/mtx.h>
-#include <dolphin/types.h>
 
 #include <melee/ft/forward.h>
+#include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <math.h>
+#include <dolphin/mtx.h>
+#include <dolphin/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <melee/db/db.h>
 #include <melee/ft/ft_0BF0.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftDrMario/ftdrmario.h>
-
-#include <melee/it/forward.h>
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -24,13 +25,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
+#include <Runtime/platform.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)

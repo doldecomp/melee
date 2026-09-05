@@ -1,13 +1,13 @@
 #include "ftdonkeyheavyjump.h"
 
 #include "ftdonkeyheavyfall.h"
+#include "types.h"
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
-#include "types.h"
+#include <melee/ft/types.h>
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 {

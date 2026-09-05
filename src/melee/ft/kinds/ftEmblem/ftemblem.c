@@ -1,18 +1,17 @@
 #include "ftemblem.h"
 
+#include <melee/ft/kinds/ftMars/forward.h>
+
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftMars/forward.h>
-
 #include <melee/ft/kinds/ftMars/ftmars.h>
 #include <melee/ft/kinds/ftMars/ftmarsspecialhi.h>
 #include <melee/ft/kinds/ftMars/ftmarsspeciallw.h>
 #include <melee/ft/kinds/ftMars/ftmarsspecialn.h>
 #include <melee/ft/kinds/ftMars/ftmarsspecials.h>
 #include <melee/ft/kinds/ftMars/types.h>
+#include <melee/ft/types.h>
 
 /* 45A5B8 */ UnkCostumeStruct ftFe_CostumeList[5];
 

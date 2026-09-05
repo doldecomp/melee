@@ -1,9 +1,8 @@
 #ifndef _METROTRK_M7XX_M603E_REG_H
 #define _METROTRK_M7XX_M603E_REG_H
 
-#include <Runtime/platform.h>
-
 #include <MetroTRK/ppc_reg.h>
+#include <Runtime/platform.h>
 
 typedef struct Extended1_PPC_6xx_7xx {
     /* 0x000 */ u32 SR[16];

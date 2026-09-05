@@ -1,26 +1,22 @@
 #include "ftdonkeyspecials.h"
 
 #include "ftdonkeyspeciallw.h"
-
-#include <Runtime/platform.h>
+#include "types.h"
 
 #include "forward.h"
-
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-#include "types.h"
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 static u32 const coll_mf =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |

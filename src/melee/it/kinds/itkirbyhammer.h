@@ -1,17 +1,13 @@
 #ifndef GALE01_2ADC04
 #define GALE01_2ADC04
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/it/forward.h>
-
-#include <melee/it/kinds/types.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2ADC04 */ void itKirbyHammer_Logic8_Destroyed(Item_GObj* gobj);
 /* 2ADC34 */ void it_802ADC34(Item_GObj* gobj);

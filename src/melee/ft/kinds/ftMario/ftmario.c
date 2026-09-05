@@ -7,16 +7,15 @@
 #include "ftmariostrings.h"
 #include "types.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/it/forward.h>
+
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftCo_800C70D0.h>
 #include <melee/ft/ftCo_800C7178.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-#include <melee/it/forward.h>
-
 #include <melee/it/it_26B1.h>
 
 MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount] = {

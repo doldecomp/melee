@@ -1,11 +1,10 @@
 #ifndef GALE01_2E4A44
 #define GALE01_2E4A44
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2E4A44 */ void it_802E4A44(Item_GObj*);
 /* 2E4B00 */ bool it_802E4B00(Item_GObj*);

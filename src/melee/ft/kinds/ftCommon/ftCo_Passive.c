@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -14,8 +14,7 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void ftCo_800987D0(Fighter_GObj* gobj)
 {

@@ -1,10 +1,9 @@
 #ifndef _METROTRK_MSGBUF_H
 #define _METROTRK_MSGBUF_H
 
-#include <Runtime/platform.h>
-
 #include <MetroTRK/dserror.h>
 #include <MetroTRK/mutex_TRK.h>
+#include <Runtime/platform.h>
 
 typedef unsigned char u128[16];
 typedef int MessageBufferID;

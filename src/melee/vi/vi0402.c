@@ -1,14 +1,5 @@
 #include "vi0402.h"
 
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/lb/lb_013B.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 #include "vi.h"
 
 #include <sysdolphin/baselib/forward.h>
@@ -19,6 +10,15 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 static SceneDesc* un_804D6F68;
 

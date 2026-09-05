@@ -1,13 +1,12 @@
 #ifndef GALE01_1CBB84
 #define GALE01_1CBB84
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 1CBB84 */ void grIzumi_801CBB84(bool);
 /* 1CBB88 */ void grIzumi_801CBB88(void);

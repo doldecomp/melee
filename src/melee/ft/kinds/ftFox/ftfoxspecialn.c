@@ -1,11 +1,15 @@
 #include "ftfoxspecialn.h"
 
 #include "ftfox.h"
-
-#include <melee/ft/fighter.h>
+#include "inlines.h"
+#include "types.h"
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/debug.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -16,22 +20,14 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
-#include "inlines.h"
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itfoxblaster.h>
-#include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/it/kinds/itfoxlaser.h>
+#include <melee/lb/lb_00B0.h>
 
 static inline void ftFox_SpecialN_GetHoldJoint(HSD_GObj* gobj, Vec3* pos,
                                                f32 z_offset)

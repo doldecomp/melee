@@ -1,13 +1,11 @@
 #ifndef GALE01_2C49E0
 #define GALE01_2C49E0
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2C49E0 */ void itMewtwoDisable_Logic67_Destroy(Item_GObj*);
 /* 2C4A00 */ void itMewtwoDisable_Logic67_Destroyed(Item_GObj*);

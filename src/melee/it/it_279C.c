@@ -1,18 +1,12 @@
 #include "it_279C.h"
 
+#include "inlines.h"
 #include "it_2725.h"
+#include "itdraw.h"
+#include "itgroundcoll.h"
 #include "ithitbox.h"
 #include "itzako.h"
 
-#include <melee/db/db.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_unsplit.h>
-#include "inlines.h"
-#include "itdraw.h"
-#include "itgroundcoll.h"
 #include "kinds/itcerebi.h"
 #include "kinds/itchicorita.h"
 #include "kinds/itentei.h"
@@ -44,13 +38,19 @@
 #include "kinds/ittogepy.h"
 #include "kinds/ittosakinto.h"
 #include "kinds/itunknown.h"
+
+#include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/plattack.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 #include <melee/pl/pltrick.h>
-
-#include <sysdolphin/baselib/random.h>
 
 #define IT_M_PI_2 1.5707963267948966
 

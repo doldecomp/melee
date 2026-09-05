@@ -1,5 +1,3 @@
-#include <Runtime/platform.h>
-
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -7,13 +5,12 @@
 #include "types.h"
 
 #include <melee/lb/forward.h>
-
-#include <melee/lb/lb_00F9.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 /* 222B98 */ static void grTPichu_80222B98(bool);
 /* 222B9C */ static void grTPichu_80222B9C(void);

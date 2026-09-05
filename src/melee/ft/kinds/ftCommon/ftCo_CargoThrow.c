@@ -3,22 +3,19 @@
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Damage.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "ftCo_Throw.h"
+#include "ftCo_Thrown.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include "ftCo_Throw.h"
-#include "ftCo_Thrown.h"
 #include <melee/ft/kinds/ftDonkey/types.h>
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 09C02C */ static void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(Fighter_GObj* gobj);

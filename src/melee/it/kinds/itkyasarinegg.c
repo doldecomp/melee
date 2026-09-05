@@ -1,5 +1,6 @@
 #include "itkyasarinegg.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -11,8 +12,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itzako.h>
 #include <melee/mp/mpcoll.h>
-
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F9328[] = {
     { 0, 0, 0, itKyasarinegg_UnkMotion0_Coll },

@@ -1,14 +1,5 @@
 #include "grgreatbay.h"
 
-#include <placeholder.h>
-
-#include <Runtime/platform.h>
-
-#include "forward.h"
-
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ftdevice.h>
-#include <melee/ft/ftlib.h>
 #include "granime.h"
 #include "grdisplay.h"
 #include "grlib.h"
@@ -16,6 +7,20 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "stage.h"
+
+#include <placeholder.h>
+
+#include "forward.h"
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/random.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
 #include <melee/it/item.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/kinds/ittincle.h>
@@ -24,13 +29,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 /* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
                                              CollData* coll, int coll_x50,

@@ -1,16 +1,15 @@
 #include "ftmasterhandbackairplane3.h"
 
 #include "ftmasterhandwait12.h"
+#include "types.h"
 
+#include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/pl/player.h>
-
-#include <dolphin/mtx.h>
 
 void ftMh_BackAirplane3_Anim(HSD_GObj* gobj)
 {

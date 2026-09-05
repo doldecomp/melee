@@ -1,16 +1,7 @@
 #include "item.h"
 
-#include "it_26B1.h"
-
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/stage.h>
 #include "inlines.h"
+#include "it_26B1.h"
 #include "it_2725.h"
 #include "it_279C.h"
 #include "it_3F14.h"
@@ -26,12 +17,6 @@
 
 #include <melee/lb/forward.h>
 
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
-
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
@@ -44,6 +29,19 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 
 /* 267130 */ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem);
 /* 2674AC */ static void Item_802674AC(SpawnItem* spawnItem);

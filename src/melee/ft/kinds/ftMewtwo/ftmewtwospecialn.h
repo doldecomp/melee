@@ -3,9 +3,9 @@
 #ifndef GALE01_146CCC
 #define GALE01_146CCC
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 146CCC */ s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
                                               s32* chargeCycles);

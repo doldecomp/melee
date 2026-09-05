@@ -4,6 +4,7 @@
 #include "ftCo_DownBound.h"
 #include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveWall.h"
+
 #include <placeholder.h>
 
 #include <melee/cm/camera.h>

@@ -1,10 +1,10 @@
 #ifndef GALE01_202B6C
 #define GALE01_202B6C
 
-#include <Runtime/platform.h>
-
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 202B6C */ void grGarden_80202B6C(bool);
 /* 202B70 */ void grGarden_80202B70(void);

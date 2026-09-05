@@ -1,11 +1,10 @@
 #ifndef GALE01_2D3008
 #define GALE01_2D3008
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D3008 */ void it_802D3008(Item_GObj*);
 /* 2D306C */ void it_802D306C(Item_GObj*);

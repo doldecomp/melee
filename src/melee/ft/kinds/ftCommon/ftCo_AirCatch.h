@@ -1,9 +1,9 @@
 #ifndef GALE01_0C3A14
 #define GALE01_0C3A14
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 0C3A14 */ bool ftCo_800C3A14(Fighter_GObj* gobj);
 /* 0C3B10 */ bool ftCo_800C3B10(Fighter_GObj* gobj);

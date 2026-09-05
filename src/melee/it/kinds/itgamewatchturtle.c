@@ -1,13 +1,13 @@
 #include "itgamewatchturtle.h"
 
 #include "inlines.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattackair.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-#include "types.h"
 
 ItemStateTable it_803F7918[] = {
     {

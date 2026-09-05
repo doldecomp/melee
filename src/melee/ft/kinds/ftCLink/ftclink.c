@@ -4,6 +4,10 @@
 #include "inlines.h"
 
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftLink/forward.h>
+#include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -13,29 +17,18 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Guard.h>
-
-#include <melee/ft/kinds/ftLink/forward.h>
-
 #include <melee/ft/kinds/ftLink/ftlink.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
 #include <melee/ft/kinds/ftLink/ftlinkspeciallw.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialn.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecials.h>
 #include <melee/ft/kinds/ftLink/types.h>
-
-#include <melee/it/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbanim.h>
-
-#include <sysdolphin/baselib/forward.h>
 
 /* 45A330 */ UnkCostumeStruct ftCl_CostumeList[5];
 

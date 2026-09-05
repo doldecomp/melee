@@ -1,11 +1,10 @@
 #ifndef GALE01_31C99C
 #define GALE01_31C99C
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 /* 31C99C */ char* viGetCharAnimByIndex(s32);
 /* 31C9B4 */ void vi_8031C9B4(s32, s32);

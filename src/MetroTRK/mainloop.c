@@ -3,9 +3,8 @@
 #include "dispatch.h"
 #include "msgbuf.h"
 #include "serpoll.h"
-#include "targimpl.h"
-
 #include "targcont.h"
+#include "targimpl.h"
 
 void TRKHandleRequestEvent(NubEvent* ev)
 {

@@ -1,11 +1,10 @@
 #ifndef GALE01_29D968
 #define GALE01_29D968
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29D9A4 */ void it_8029D9A4(HSD_GObj*, enum_t, Item_StateChangeFlags);

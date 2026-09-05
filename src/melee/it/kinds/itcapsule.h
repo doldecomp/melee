@@ -1,13 +1,11 @@
 #ifndef GALE01_27CF00
 #define GALE01_27CF00
 
-#include <Runtime/platform.h>
-
 #include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <melee/it/kinds/types.h>
-
-#include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 /* 27CF00 */ void itCapsule_Logic0_Spawned(Item_GObj*);
 /* 27CF30 */ void it_8027CF30(Item_GObj*);

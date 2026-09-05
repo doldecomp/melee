@@ -6,10 +6,11 @@
 #include "ftCo_HammerTurn.h"
 #include "ftCo_HammerWalk.h"
 
-#include <melee/ft/fighter.h>
-
 #include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -20,16 +21,11 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/types.h>
-
-#include <melee/it/forward.h>
-
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_279C.h>
 #include <melee/it/item.h>
 #include <melee/it/kinds/ithammer.h>
 #include <melee/pl/plbonuslib.h>
-
-#include <dolphin/mtx.h>
 
 /* 0C5408 */ static void ftCo_800C5408(Fighter* fp);
 /* 0C5588 */ static void ftCo_800C5588(Fighter* fp);

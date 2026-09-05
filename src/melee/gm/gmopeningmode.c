@@ -1,22 +1,21 @@
-#include "gm_unsplit.h"
-#include "gmevent.h"
-
-#include <melee/ft/forward.h>
-
-#include "gmtitlemode.h"
-#include "types.h"
-#include <melee/db/db.h>
 #include "gm_1601.h"
 #include "gm_16F1.h"
+#include "gm_unsplit.h"
+#include "gmevent.h"
 #include "gmmain_lib.h"
+#include "gmtitlemode.h"
+#include "types.h"
+
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
+
+#include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>
-
-#include <melee/pl/forward.h>
-
 #include <melee/vi/vi0102.h>
 #include <melee/vi/vi0401.h>
 #include <melee/vi/vi0501.h>
@@ -24,8 +23,6 @@
 #include <melee/vi/vi1101.h>
 #include <melee/vi/vi1201v1.h>
 #include <melee/vi/vi1201v2.h>
-
-#include <sysdolphin/baselib/random.h>
 
 struct gm_random_history {
     u8 pad0[2];

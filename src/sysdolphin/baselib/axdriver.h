@@ -1,9 +1,9 @@
 #ifndef _AXDRIVER_H_
 #define _AXDRIVER_H_
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 #define SMSTATE_MASK 0xC0000000
 #define SMSTATE_ACTIVE 0x40000000

@@ -1,9 +1,8 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_QUATLIB_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_QUATLIB_H
 
-#include <Runtime/platform.h>
-
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 s32 MatToQuat(Mtx, Quaternion*);
 s32 HSD_QuatLib_8037EB28(Mtx, Vec3*);

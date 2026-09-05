@@ -1,14 +1,13 @@
 #ifndef GALE01_041C78
 #define GALE01_041C78
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/mp/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 041C78 */ void mpColl_80041C78(void);
 /* 041C8C */ void mpCollPrev(CollData* cd);

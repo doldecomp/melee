@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_INLINES_H
 #define MELEE_IT_INLINES_H
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/it_3F14.h>
@@ -8,8 +9,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/types.h>
 #include <melee/mp/mplib.h>
-
-#include <sysdolphin/baselib/gobj.h>
 
 #define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
 

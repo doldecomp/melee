@@ -1,20 +1,18 @@
 #include "gmmain_lib.h"
 
+#include "gm_unsplit.h"
+#include "gmhomerun.h"
+#include "types.h"
+
 #include <placeholder.h>
 
-#include <Runtime/platform.h>
-
 #include "forward.h"
-
-#include "gmhomerun.h"
 
 #include <dolphin/os/OSReset.h>
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
-#include "gm_unsplit.h"
-#include "types.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardnew.h>
@@ -22,6 +20,7 @@
 #include <melee/lb/lbtime.h>
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
+#include <Runtime/platform.h>
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 /* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

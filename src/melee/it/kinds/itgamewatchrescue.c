@@ -2,16 +2,14 @@
 
 #include "inlines.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/it/itzako.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
+#include <melee/it/itzako.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F79C0[] = { {
                                      0,

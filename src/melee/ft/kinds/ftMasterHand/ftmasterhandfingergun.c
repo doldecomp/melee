@@ -1,23 +1,21 @@
 #include "ftmasterhandfingergun.h"
 
 #include "ftmasterhandwait12.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/types.h>
-#include "types.h"
 #include <melee/it/kinds/itmasterhandbullet.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include <dolphin/mtx.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {

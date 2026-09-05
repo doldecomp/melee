@@ -1,32 +1,26 @@
 #include "ftlinkspeciallw.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
+#include <melee/it/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-#include <melee/it/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itlinkbomb.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 0EB75C */ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid);
 /* 0EB7C8 */ static void spawnBomb(HSD_GObj* gobj);

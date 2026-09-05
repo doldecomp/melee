@@ -5,12 +5,16 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftMewtwo/forward.h>
+
+#include <math.h>
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -20,20 +24,12 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-#include <melee/ft/kinds/ftMewtwo/forward.h>
-
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwoshadowball.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <math.h>
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /* 3B7570 */ static Vec3 const ftKb_Init_803B7570 = { 0.0f, 4.0f, 0.0f };
 /* 3B757C */ static Vec3 const ftKb_Init_803B757C = { 0.0f, 4.0f, 0.0f };

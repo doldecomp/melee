@@ -1,5 +1,9 @@
 #include "itlinkarrow.h"
 
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -17,11 +21,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

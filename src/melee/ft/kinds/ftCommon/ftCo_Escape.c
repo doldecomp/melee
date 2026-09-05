@@ -1,13 +1,13 @@
 #include "ftCo_Escape.h"
 
 #include "ftCo_ItemThrow.h"
+#include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
@@ -15,17 +15,12 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-
-#include "forward.h"
-
-#include "types.h"
 #include <melee/ft/kinds/ftSamus/ftsamusspeciallw1.h>
 #include <melee/ft/kinds/ftSamus/types.h>
 #include <melee/ft/kinds/ftYoshi/ftyoshi.h>
 #include <melee/ft/kinds/ftYoshi/ftyoshiguard.h>
-
-#include <dolphin/mtx.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,
                                        bool);

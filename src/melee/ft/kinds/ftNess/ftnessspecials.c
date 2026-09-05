@@ -1,23 +1,21 @@
 #include "ftnessspecials.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/kinds/itnesspkfire.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /// https://decomp.me/scratch/apf7Y
 void ftNs_SpecialS_ItemPKFireSpawn(

@@ -2,6 +2,11 @@
 
 #include "types.h"
 
+#include <sysdolphin/baselib/forward.h>
+
+#include <math.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -17,12 +22,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 const lbColl_80008D30_arg1 it_803B8610 = {
     1, 1, 361, 0, 0, 180, 0, 1, 0,

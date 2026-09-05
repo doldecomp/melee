@@ -1,15 +1,12 @@
 #include "ftmasterhandthrow.h"
 
-#include <melee/ft/fighter.h>
-
+#include "forward.h"
 #include <melee/ft/forward.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
-
-#include "forward.h"
-
 #include <melee/pl/player.h>
 
 void ftMh_Throw_IASA(HSD_GObj* gobj)

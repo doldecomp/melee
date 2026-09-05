@@ -3,17 +3,16 @@
 #include "ftdonkeyheavyfall.h"
 #include "ftdonkeyheavyturn.h"
 #include "ftdonkeyms3450.h"
-
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
-#include "types.h"
 
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {

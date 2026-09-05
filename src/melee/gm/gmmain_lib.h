@@ -1,11 +1,10 @@
 #ifndef GALE01_15CC34
 #define GALE01_15CC34
 
-#include <Runtime/platform.h>
-
 #include <melee/gm/forward.h>
 
 #include <melee/gm/types.h>
+#include <Runtime/platform.h>
 
 /* 15CC34 */ GameRules* gmMainLib_GetGameRules(void);
 /* 15CC40 */ struct gmm_x1868* gmMainLib_GetSaveData(void);

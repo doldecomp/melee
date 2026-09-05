@@ -1,18 +1,16 @@
 #include "ftgamewatchattacklw3.h"
 
 #include "ftgamewatch.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack1.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AttackHi3.h>
 #include <melee/ft/kinds/ftCommon/ftCo_AttackHi4.h>
@@ -27,12 +25,11 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Turn.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Walk.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
-#include "types.h"
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itgamewatchmanhole.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);

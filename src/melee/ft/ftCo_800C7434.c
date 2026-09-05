@@ -1,10 +1,9 @@
 #include "ftCo_800C7434.h"
 
+#include "fighter.h"
 #include "ftCo_800C7070.h"
 #include "ftCo_800C7590.h"
 #include "ftdata.h"
-
-#include "fighter.h"
 #include "types.h"
 
 #include "kinds/ftCommon/forward.h"

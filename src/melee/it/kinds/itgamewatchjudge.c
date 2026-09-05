@@ -1,22 +1,21 @@
 #include "itgamewatchjudge.h"
 
 #include "inlines.h"
-#include <placeholder.h>
 
-#include <melee/db/db.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecials.h>
+#include <placeholder.h>
 
 #include <melee/it/forward.h>
 
+#include <math.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchspecials.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itzako.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7968[] = {
     { 0, itGamewatchjudge_UnkMotion0_Anim, NULL, NULL },

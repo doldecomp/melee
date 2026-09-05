@@ -1,5 +1,6 @@
 #include "itsamusmissile.h"
 
+#include <sysdolphin/baselib/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -11,8 +12,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
-
-#include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7340[] = {
     { 0, itSamusmissile_UnkMotion0_Anim, itSamusmissile_UnkMotion0_Phys,

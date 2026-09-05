@@ -1,9 +1,9 @@
 #ifndef GALE01_11BF88
 #define GALE01_11BF88
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 11BE80 */ bool ftPe_8011BE80(HSD_GObj* gobj);
 /* 11BF88 */ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj);

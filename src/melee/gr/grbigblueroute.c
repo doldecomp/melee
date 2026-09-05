@@ -1,10 +1,5 @@
 #include "grbigblueroute.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/cm/camera.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_16AE.h>
 #include "grdatfiles.h"
 #include "grdisplay.h"
 #include "grfzerocar.h"
@@ -13,11 +8,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/if/ifhazard.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbshadow.h>
-#include <melee/lb/lbvector.h>
 
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
@@ -28,6 +18,15 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/spline.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/if/ifhazard.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbvector.h>
+#include <Runtime/platform.h>
 
 struct grBigBlueRoute_YakumonoParam {
     int x0;

@@ -3,9 +3,8 @@
 
 #include <melee/mp/forward.h>
 
-#include <melee/mp/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/mp/types.h>
 
 /* 05A6F8 */ void mpIsland_8005A6F8(void);
 /* 05A728 */ void mpIsland_8005A728(void);

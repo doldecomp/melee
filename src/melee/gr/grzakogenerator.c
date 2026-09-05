@@ -1,13 +1,22 @@
 #include "grzakogenerator.h"
 
+#include "grlib.h"
+#include "ground.h"
+
 #include "grzakogenerator.static.h"
+
+#include "stage.h"
+#include "types.h"
 
 #include <placeholder.h>
 
-#include "grlib.h"
-#include "ground.h"
-#include "stage.h"
-#include "types.h"
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/psstructs.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
@@ -18,14 +27,6 @@
 #include <melee/it/kinds/itpatapata.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
 
 grZakoGenerator_Config*
 grZakoGenerator_801CA394(grZakoGenerator_Spawn* spawn_descs, int count,

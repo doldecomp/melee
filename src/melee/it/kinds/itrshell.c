@@ -3,8 +3,9 @@
 #include "inlines.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
 
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -15,9 +16,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <Runtime/platform.h>
 
 typedef struct itRShell_Attrs {
     float x0;

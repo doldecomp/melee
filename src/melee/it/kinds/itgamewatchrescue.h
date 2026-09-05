@@ -3,9 +3,8 @@
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2C8038 */ Item_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C8158 */ void it_802C8158(Item_GObj* item_gobj);

@@ -1,15 +1,12 @@
 #include "gmregclear.h"
 
-#include <Runtime/platform.h>
-
-#include <dolphin/pad.h>
+#include "gm_unsplit.h"
+#include "types.h"
 
 #include "forward.h"
-
-#include <melee/mn/inlines.h>
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -23,8 +20,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/cm/camera.h>
-#include "gm_unsplit.h"
-#include "types.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/if/ifcoget.h>
@@ -33,8 +28,10 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x20];

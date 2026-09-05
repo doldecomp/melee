@@ -4,24 +4,20 @@
 #include "types.h"
 
 #include "forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/ft/kinds/ftMario/forward.h>
 
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_AppealS.h>
-
-#include <melee/ft/kinds/ftMario/forward.h>
-
 #include <melee/ft/kinds/ftMario/ftmario.h>
 #include <melee/ft/kinds/ftMario/ftmariospecialhi.h>
 #include <melee/ft/kinds/ftMario/ftmariospeciallw.h>
 #include <melee/ft/kinds/ftMario/ftmariospecialn.h>
 #include <melee/ft/kinds/ftMario/ftmariospecials.h>
 #include <melee/ft/kinds/ftMario/types.h>
+#include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itdrmariopill.h>
 

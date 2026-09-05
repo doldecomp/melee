@@ -1,5 +1,6 @@
 #include "itkirbycutterbeam.h"
 
+#include <math.h>
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyattackdash.h>
 #include <melee/it/inlines.h>
@@ -9,8 +10,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
 
 ItemStateTable it_803F6798[] = {
     0,

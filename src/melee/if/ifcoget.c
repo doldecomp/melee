@@ -1,11 +1,5 @@
 #include "ifcoget.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/sc/types.h>
-
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -15,6 +9,11 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 
 /* 3F9E08 */ static struct un_803F9E08_t {
     unsigned char x0_b0 : 1;

@@ -3,11 +3,16 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <math.h>
+#include <stddef.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
-
-#include <melee/ft/forward.h>
-
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0877.h>
@@ -19,19 +24,16 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureKirby.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureWaitKirby.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
 #include <melee/ft/kinds/ftCommon/ftCo_KneeBend.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ThrownKirby.h>
-#include <melee/ft/types.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureKirby.h>
-#include <melee/ft/kinds/ftCommon/ftCo_CaptureWaitKirby.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
-
-#include "forward.h"
-
+#include <melee/ft/types.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/kinds/it_2ADA.h>
 #include <melee/it/kinds/it_2F28.h>
@@ -39,13 +41,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbanim.h>
 #include <melee/mp/mpcoll.h>
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <math.h>
-#include <stddef.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/random.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

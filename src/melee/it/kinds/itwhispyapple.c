@@ -2,6 +2,7 @@
 
 #include <melee/it/forward.h>
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -12,8 +13,6 @@
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
 #include <melee/lb/lb_00F9.h>
-
-#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F91D0[] = {
     {

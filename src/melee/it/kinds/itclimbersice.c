@@ -2,11 +2,12 @@
 
 #include <placeholder.h>
 
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
-#include <melee/ft/kinds/ftPopo/ftpopo.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyspecialiceclimber.h>
+#include <melee/ft/kinds/ftPopo/ftpopo.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -14,8 +15,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-
-#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7668[] = {
     {

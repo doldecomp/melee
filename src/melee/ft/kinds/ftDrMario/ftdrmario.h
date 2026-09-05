@@ -1,9 +1,9 @@
 #ifndef GALE01_14949C
 #define GALE01_14949C
 
-#include <melee/ft/types.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
 
 /* 14949C */ void ftDr_Init_OnDeath(HSD_GObj* gobj);
 /* 1494E4 */ void ftDr_Init_OnLoad(HSD_GObj* gobj);

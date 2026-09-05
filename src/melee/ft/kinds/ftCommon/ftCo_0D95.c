@@ -1,5 +1,6 @@
 #include "ftCo_Attack100.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0892.h>
@@ -8,8 +9,6 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
-
-#include <sysdolphin/baselib/random.h>
 
 bool fn_800D9558(Fighter_GObj* gobj)
 {

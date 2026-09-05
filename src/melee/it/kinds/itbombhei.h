@@ -3,9 +3,8 @@
 
 #include <melee/it/forward.h>
 
-#include <melee/it/kinds/types.h>
-
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 27D670 */ Item_GObj* it_8027D670(Vec3* const);
 /* 27D730 */ void it_8027D730(Item_GObj* gobj);

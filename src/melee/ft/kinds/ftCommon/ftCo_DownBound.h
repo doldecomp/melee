@@ -1,9 +1,9 @@
 #ifndef GALE01_096F0C
 #define GALE01_096F0C
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 096FCC */ void ftCo_80097630(Fighter* fp, enum_t* sfx_ids, float threshold);
 /* 097570 */ bool ftCo_80097570(Fighter_GObj* gobj);

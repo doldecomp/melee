@@ -2,12 +2,12 @@
 
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
+#include "ftCo_KneeBend.h"
+#include "types.h"
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/types.h>
-#include "ftCo_KneeBend.h"
-#include "types.h"
 
 void ftCo_800C5B88(Fighter_GObj* gobj, enum_t arg1)
 {

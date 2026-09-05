@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_RUMBLE_H
 #define SYSDOLPHIN_BASELIB_RUMBLE_H
 
-#include <Runtime/platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 struct HSD_RumbleData {
     u8 last_status;

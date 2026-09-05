@@ -6,15 +6,13 @@
 #include "inlines.h"
 #include "types.h"
 
-#include <Runtime/platform.h>
-
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
 
 static void grShrine_80201C60(bool);
 static void grShrine_80201C64(void);

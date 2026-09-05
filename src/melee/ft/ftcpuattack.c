@@ -1,11 +1,15 @@
 #include "ftcpuattack.h"
 
+#include "fighter.h"
 #include "ftcmdscript.h"
-
 #include "ftlib.h"
+#include "inlines.h"
 
-#include "kinds/ftKirby/forward.h"
+#include "kinds/ftCommon/ftCo_09F7.h"
+#include "kinds/ftCommon/ftCo_0A01.h"
+
 #include "kinds/ftDonkey/forward.h"
+#include "kinds/ftKirby/forward.h"
 #include "kinds/ftKoopa/forward.h"
 #include "kinds/ftSamus/forward.h"
 #include "kinds/ftYoshi/forward.h"
@@ -15,10 +19,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
-#include "fighter.h"
-#include "inlines.h"
-#include "kinds/ftCommon/ftCo_09F7.h"
-#include "kinds/ftCommon/ftCo_0A01.h"
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

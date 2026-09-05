@@ -1,12 +1,11 @@
 #ifndef GALE01_14F640
 #define GALE01_14F640
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftKoopa/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 14F640 */ void ftGk_Init_OnDeath(HSD_GObj*);
 /* 14F698 */ void ftGk_Init_UnkMotionStates3(HSD_GObj*);

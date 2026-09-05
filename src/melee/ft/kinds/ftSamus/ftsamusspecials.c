@@ -1,21 +1,19 @@
 #include "ftsamusspecials.h"
 
 #include "ftsamusspecialn.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ft/fighter.h>
+#include "types.h"
 
 #include <melee/ft/forward.h>
 
+#include <dolphin/mtx.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
-#include "types.h"
-
-#include <dolphin/mtx.h>
 
 static void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {

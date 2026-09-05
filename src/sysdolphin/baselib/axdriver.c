@@ -2,14 +2,15 @@
 
 #include "axdriver.static.h"
 
+#include "debug.h"
+#include "synth.h"
+
 #include <math.h>
 #include <string.h>
 #include <dolphin/ax.h>
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>
 #include <dolphin/os.h>
-#include "debug.h"
-#include "synth.h"
 
 void* AXDriverAlloc(size_t size)
 {

@@ -1,17 +1,15 @@
 #include "ftmasterhandtagcancel.h"
 
-#include <Runtime/platform.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-
-#include <melee/ft/kinds/ftCommon/forward.h>
-
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
 {

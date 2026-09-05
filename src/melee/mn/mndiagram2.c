@@ -1,6 +1,9 @@
 #include "mndiagram2.h"
 
 #include "inlines.h"
+#include "mndiagram.h"
+#include "mndiagram3.h"
+#include "mnmain.h"
 #include "types.h"
 
 #include <sysdolphin/baselib/forward.h>
@@ -21,9 +24,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
-#include "mndiagram.h"
-#include "mndiagram3.h"
-#include "mnmain.h"
 
 static GXColor mnDiagram2_804D4FB8 = { 0, 0, 0, 0xFF };
 static GXColor mnDiagram2_804D4FBC = { 0xFF, 0xC8, 0, 0xFF };

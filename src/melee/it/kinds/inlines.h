@@ -1,6 +1,9 @@
 #ifndef MELEE_IT_ITEMS_INLINES_H
 #define MELEE_IT_ITEMS_INLINES_H
 
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
@@ -13,10 +16,6 @@
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/it/types.h>
 #include <melee/lb/lbvector.h>
-
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
 
 static inline void Item_RetractChain(ItemLink* link, Vec3* pos,
                                      f32 target_dist, const f32* max_dist,

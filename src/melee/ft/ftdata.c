@@ -1,18 +1,12 @@
 #include "ftdata.h"
 
+#include "fighter.h"
 #include "ft_0877.h"
-
-#include <Runtime/platform.h>
-
-#include <melee/ef/efasync.h>
+#include "inlines.h"
+#include "types.h"
 
 #include "forward.h"
 
-#include "fighter.h"
-
-
-#include "inlines.h"
-#include "types.h"
 #include "kinds/ftCaptain/ftcaptain.h"
 #include "kinds/ftCaptain/ftcaptainspecialhi.h"
 #include "kinds/ftCaptain/ftcaptainspeciallw.h"
@@ -124,11 +118,6 @@
 #include "kinds/ftZelda/ftzeldaspeciallw.h"
 #include "kinds/ftZelda/ftzeldaspecialn.h"
 #include "kinds/ftZelda/ftzeldaspecials.h"
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbarq.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbfile.h>
-#include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -137,6 +126,13 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <melee/ef/efasync.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbarq.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbfile.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 typedef struct ft_8045993C_t {
     /* +0 */ u32 pad_x0;

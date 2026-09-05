@@ -1,12 +1,11 @@
 #ifndef GALE01_110094
 #define GALE01_110094
 
-#include <Runtime/platform.h>
-
-#include <melee/ft/types.h>
-
 #include <melee/ft/kinds/ftSeak/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 110094 */ void ftSk_Init_OnDeath(HSD_GObj* gobj);
 /* 1100EC */ void ftSk_Init_OnLoad(HSD_GObj* gobj);
