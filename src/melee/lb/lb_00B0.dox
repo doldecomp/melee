@@ -2,9 +2,10 @@
 #define GALE01_00B074
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 #include "sc/forward.h"
 #include <baselib/jobj.h>

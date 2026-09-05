@@ -2,9 +2,10 @@
 #define MELEE_FT_CODE_80081B38_H
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 #include "ft/forward.h"
 #include "ft/types.h"

@@ -2,9 +2,10 @@
 #define GALE01_028B9C
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 #include <dolphin/mtx.h>
 

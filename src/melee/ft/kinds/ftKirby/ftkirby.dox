@@ -2,9 +2,10 @@
 #define GALE01_0EE528
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 #include "ft/types.h"
 #include "ftCommon/forward.h"

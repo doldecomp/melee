@@ -1,5 +1,4 @@
 #include <platform.h> // IWYU pragma: keep
-
 #include <stdarg.h>
 
 #ifdef MWERKS_GEKKO
