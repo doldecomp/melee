@@ -503,9 +503,13 @@ void fn_8018B090(HSD_GObj* arg0)
 {
     BracketEntry* entries = lbl_80473AB8;
     TmData* tm = gm_GetTournamentData();
-    s32 var_r24 = 0;
-    s32 idx = fn_8018F74C();
+    HSD_JObj* jobj2;
+    s32 k;
     s32 i;
+    s32 idx;
+    s32 var_r24;
+    var_r24 = 0;
+    idx = fn_8018F74C();
 
     switch (tm->cur_option) {
     case 20:
@@ -516,7 +520,6 @@ void fn_8018B090(HSD_GObj* arg0)
             for (i = 0; i < 4; i++) {
                 if (entries[idx].slots[i].x30 != 0) {
                     HSD_JObj* jobj;
-                    HSD_JObj* jobj2;
                     jobj = fn_8018B090_inline0(entries, i, idx);
                     jobj2 = jobj;
                     if (entries[idx].x2 != 0) {
@@ -653,12 +656,12 @@ void fn_8018B090(HSD_GObj* arg0)
             sp = lbl_803B7C80;
             arr = sp.v;
             lbl_804D6630 += 1;
-            for (i = 0; i < 4; i++) {
-                if (entries[idx].slots[i].x30 != 0) {
-                    HSD_JObj* jobj = entries[idx].slots[i].x2C->hsd_obj;
+            for (k = 0; k < 4; k++) {
+                if (entries[idx].slots[k].x30 != 0) {
+                    HSD_JObj* jobj = entries[idx].slots[k].x2C->hsd_obj;
                     if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -((f32) entries[idx].slots[i].x40 -
+                            jobj, -((f32) entries[idx].slots[k].x40 -
                                     (0.1f * (f32) arr[lbl_804D6630 % 10])));
                     } else {
                         switch (entries[idx].x4) {
@@ -667,11 +670,11 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) entries[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[k].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) entries[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[k].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
@@ -681,18 +684,18 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) entries[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[k].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) entries[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[k].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
                                 jobj, -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                        (f32) entries[idx].slots[i].x40));
+                                        (f32) entries[idx].slots[k].x40));
                             break;
                         }
                     }
