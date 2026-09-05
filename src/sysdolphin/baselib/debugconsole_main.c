@@ -1,6 +1,7 @@
 #include "debugconsole_main.h"
 
 #include <string.h>
+#include <dolphin/os.h>
 #include <dolphin/pad.h>
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/hsd_3915.h>

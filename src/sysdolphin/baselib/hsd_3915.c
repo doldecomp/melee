@@ -1,15 +1,12 @@
 #include "hsd_3915.h"
 
-#include "hsd_3915.static.h"
+#include <placeholder.h>
 
 #include <math.h> // IWYU pragma: keep
-#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/list.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/perf.h>
+#include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/state.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
@@ -20,8 +17,6 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
     f32 x_max;
     f32 y_max;
-    GXColor c;
-    u8 r, g, b, a;
 
     GXBegin(0x80, 0, 4);
 
@@ -30,39 +25,14 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 
     // Send the corners in clockwise order, starting with top left
 
-    GXWGFifo.f32 = x_min;
-    GXWGFifo.f32 = y_min;
-    a = color->a;
-    b = color->b;
-    g = color->g;
-    r = color->r;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_max;
-    GXWGFifo.f32 = y_min;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_max;
-    GXWGFifo.f32 = y_max;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXWGFifo.f32 = x_min;
-    GXWGFifo.f32 = y_max;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
-
-    GXEnd();
+    GXPosition2f32(x_min, y_min);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_max, y_min);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_max, y_max);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x_min, y_max);
+    GXColor4u8(color->r, color->g, color->b, color->a);
 }
 
 static u8 lbl_80408630[0x268] = {
@@ -142,19 +112,17 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
             f32 px;
             f32 py;
             GXBegin(0xB8, 0, 1);
-            px = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
-            py = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
+            px = lbl_804D6070 * 0.3 + x;
+            py = lbl_804D6074 * 0.9 + y;
             GXPosition2f32(px, py);
             GXColor4u8(color->r, color->g, color->b, color->a);
             return lbl_804D6070;
         }
         case ':': {
             GXBegin(0xB8, 0, 2);
-            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                           (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
+            GXPosition2f32(lbl_804D6070 * 0.3 + x, lbl_804D6074 * 0.3 + y);
             GXColor4u8(color->r, color->g, color->b, color->a);
-            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                           (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
+            GXPosition2f32(lbl_804D6070 * 0.3 + x, lbl_804D6074 * 0.7 + y);
             GXColor4u8(color->r, color->g, color->b, color->a);
             return lbl_804D6070;
         }
@@ -266,7 +234,6 @@ ret_zero:
     return 0;
 }
 
-// @TODO: Currently 98.73% match - hexval branch condition inversion
 s32 hsd_80391AC8(char* str, GXColor* color, f32 x, f32 y)
 {
     GXColor col;
@@ -341,23 +308,15 @@ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
         b = ((u8*) &color)[2];
         a = ((u8*) &color)[3];
 
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
-
-        GXWGFifo.f32 = prev_x;
-        GXWGFifo.f32 = prev_y;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXColor4u8(r, g, b, a);
+        GXPosition2f32(prev_x, prev_y);
+        GXColor4u8(r, g, b, a);
     }
 }
 
-// @TODO: Currently 88.12% match - register allocation differences remain
-static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
-                                                    f32* perp_x, f32* perp_y)
+/// Newton-Raphson `sqrtf`; the volatile round-trip pins the single-precision
+/// result.
+static inline f32 hsd_80391F28_len(f32 dy, f32 dx)
 {
     f32 len;
 
@@ -373,119 +332,66 @@ static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
             len = temp;
         }
     }
-    *perp_x = -dy / len;
-    *perp_y = -dx / len;
-
-    GXBegin(0xA8, 0, 2);
+    return len;
 }
 
-static inline void hsd_80391F28_calc_tick4_y(f32 perp_y, f32* tick4_y)
-{
-    *tick4_y = 4.0F * perp_y;
-}
-
+/// Draws a line from (x1,y1) to (x2,y2) with a tick mark every step; every
+/// fifth tick is drawn longer.
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
-    f32 step_y;
     f32 tick6_y;
-    f32 perp_x;
-    f32 perp_y;
     f32 dy;
     f32 tick4_x;
     f32 dx;
+    f32 x;
+    f32 y;
+    f32 perp_x;
+    f32 perp_y;
     f32 tick4_y;
-    f32 step_x;
+    f32 len;
     s32 i;
-    u8 r, g, b, a;
 
     dy = y2 - y1;
     dx = x2 - x1;
-    hsd_80391F28_calc_perp_and_begin(dy, dx, &perp_x, &perp_y);
 
-    step_y = dy / count;
-    step_x = dx / count;
+    len = hsd_80391F28_len(dy, dx);
+    perp_x = -dy / len;
+    perp_y = -dx / len;
 
-    GXWGFifo.f32 = x1;
-    GXWGFifo.f32 = y1;
-    r = color->r;
-    GXWGFifo.u8 = r;
-    g = color->g;
-    b = color->b;
-    a = color->a;
+    GXBegin(0xA8, 0, 2);
 
     tick6_y = 6.0F * perp_y;
-    {
-        f32 tmp_tick6_x = 6.0F * perp_x;
-        tick6_x = tmp_tick6_x;
-    }
+    tick6_x = 6.0F * perp_x;
     tick4_x = 4.0F * perp_x;
-    hsd_80391F28_calc_tick4_y(perp_y, &tick4_y);
+    tick4_y = 4.0F * perp_y;
 
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
+    GXPosition2f32(x1, y1);
+    GXColor4u8(color->r, color->g, color->b, color->a);
+    GXPosition2f32(x2, y2);
+    GXColor4u8(color->r, color->g, color->b, color->a);
 
-    GXWGFifo.f32 = x2;
-    GXWGFifo.f32 = y2;
-    GXWGFifo.u8 = r;
-    GXWGFifo.u8 = g;
-    GXWGFifo.u8 = b;
-    GXWGFifo.u8 = a;
+    x = x1;
+    y = y1;
 
     for (i = 0; (f32) i <= count; i++) {
         GXBegin(0xA8, 0, 2);
-        GXWGFifo.f32 = x1;
-        GXWGFifo.f32 = y1;
-        a = color->a;
-        b = color->b;
-        g = color->g;
-        r = color->r;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXPosition2f32(x, y);
+        GXColor4u8(color->r, color->g, color->b, color->a);
         if ((i % 5) == 0) {
-            GXWGFifo.f32 = x1 + tick6_x;
-            GXWGFifo.f32 = y1 + tick6_y;
+            GXPosition2f32(x + tick6_x, y + tick6_y);
         } else {
-            GXWGFifo.f32 = x1 + tick4_x;
-            GXWGFifo.f32 = y1 + tick4_y;
+            GXPosition2f32(x + tick4_x, y + tick4_y);
         }
-        a = color->a;
-        b = color->b;
-        g = color->g;
-        r = color->r;
-        x1 = step_x + x1;
-        y1 += step_y;
-        GXWGFifo.u8 = r;
-        GXWGFifo.u8 = g;
-        GXWGFifo.u8 = b;
-        GXWGFifo.u8 = a;
+        GXColor4u8(color->r, color->g, color->b, color->a);
+        x += dx / count;
+        y += dy / count;
     }
 }
-
-/// @todo .sdata2 order helpers; split-owned one-element arrays preserve the
-/// duplicate pool entries at their target boundaries.
-static const GXColor hsd_3915_default_color = { 0xFF, 0xFF, 0xFF, 0xFF };
-
-#ifdef MUST_MATCH
-static inline void hsd_3915_sdata2_order0(void)
-{
-    (void) 1.0F;
-    (void) 10.0F;
-    (void) -10.0F;
-    (void) 5.0F;
-    (void) 620.0F;
-}
-#endif
 
 void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
 {
     u8 b;
-#ifdef MUST_MATCH
-    hsd_3915_sdata2_order0();
-#endif
     dst[0] = src[0];
     if (flags & 1) {
         b = src[2];
@@ -494,15 +400,6 @@ void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
     }
     dst[1] = b;
 }
-
-#ifdef MUST_MATCH
-static const f64 hsd_3915_sdata2_half[1] = { 0.5 };
-
-static inline void hsd_3915_sdata2_order1(void)
-{
-    (void) 2.0F;
-}
-#endif
 
 typedef void (*GlyphFn)(u8* dst, s32 flags, s32 unused1, s32 unused2,
                         const u8* src);
@@ -541,9 +438,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     u8* bmp;
     GlyphEntry* entry;
 
-#ifdef MUST_MATCH
-    hsd_3915_sdata2_order1();
-#endif
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -588,15 +482,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     }
 }
 
-#ifdef MUST_MATCH
-static const f32 hsd_3915_sdata2_zero0[1] = { 0.0F };
-
-static inline void hsd_3915_sdata2_order2(void)
-{
-    (void) 600.0F;
-}
-#endif
-
 void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
                   s32 h, s32 stride, void* tbl)
 {
@@ -615,9 +500,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     u8* bmp;
     GlyphEntry* entry;
 
-#ifdef MUST_MATCH
-    hsd_3915_sdata2_order2();
-#endif
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -666,428 +548,4 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
         row_idx++;
         y += 2;
     }
-}
-
-#ifdef MUST_MATCH
-static const f64 hsd_3915_sdata2_s32_0[1] = { S32_TO_F32 };
-static const f32 hsd_3915_sdata2_zero1[1] = { 0.0F };
-
-static inline void hsd_3915_sdata2_order3(void)
-{
-    (void) 0.9999F;
-    (void) -1.0F;
-}
-#endif
-
-void hsd_80392474(void)
-{
-#ifdef MUST_MATCH
-    hsd_3915_sdata2_order3();
-#endif
-    hsd_804D7850 = NULL;
-}
-
-#ifdef MUST_MATCH
-static const f64 hsd_3915_sdata2_s32_1[1] = { S32_TO_F32 };
-#endif
-
-struct EventPriority {
-    Event event;
-    int priority;
-};
-
-HSD_SList* fn_80392480(Event event, int priority)
-{
-    HSD_SList* prev = NULL;
-    HSD_SList* cur = hsd_804D7850;
-
-    goto loop_5;
-block_1: {
-    HSD_SList* ret = cur->data;
-    if (event != (Event) ret->next) {
-        if (((struct EventPriority*) ret)->priority <= priority) {
-            prev = cur;
-        }
-        cur = cur->next;
-    loop_5:
-        if (cur != NULL) {
-            goto block_1;
-        }
-        {
-            struct EventPriority* data =
-                HSD_MemAlloc(sizeof(struct EventPriority));
-            data->event = event;
-            data->priority = priority;
-            if (prev != NULL) {
-                return HSD_SListAllocAndAppend(prev, data);
-            }
-            ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
-        }
-        hsd_804D7850 = ret;
-    }
-    return ret;
-}
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void hsd_80392528(Event event)
-{
-    fn_80392480(event, 0x80);
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-static u32 lbl_804D6084;
-
-typedef struct {
-    s32 count;
-    GXColor color;
-} DispBar;
-
-typedef struct _DispItem {
-    /* 0x00 */ struct _DispItem* next;
-    /* 0x04 */ s32 type;
-    /* 0x08 */ union {
-        char text[128];
-        DispBar bars[1];
-        u8 gradient[8];
-    } content;
-} DispItem;
-
-typedef DispItem* (*DispCallback)(void*);
-
-static inline s32 count_bar_units(DispItem* item)
-{
-    s32 total = 0;
-    s32 count;
-
-    while ((count = item->content.bars[0].count) > 0) {
-        total += count;
-        item = (DispItem*) ((DispBar*) item + 1);
-    }
-    return total;
-}
-
-static inline s32 count_text_chars(char* text)
-{
-    s32 count;
-    s32 i;
-    s32 len;
-
-    if (text == NULL) {
-        return 0;
-    }
-    count = 0;
-    len = strlen(text);
-    i = count;
-    while (i < len) {
-        if ((s8) text[i] != '\\') {
-            count++;
-        } else {
-            i++;
-            switch ((s8) text[i]) {
-            case 'c':
-            case 'C':
-                i += 6;
-                break;
-            }
-        }
-        i++;
-    }
-    return count;
-}
-
-void hsd_8039254C(void)
-{
-    static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
-    f32 line;
-    f32 bar_y;
-    f32 bar_x;
-    f32 t2;
-    GXColor default_col;
-    DispItem* bar_draw_ptr;
-    s32 char_count;
-    s32 count;
-    GXColor* p_bg_col0;
-    GXColor* p_bg_col1;
-    GXColor* p_txt_col;
-    GXColor* p_bg_col2;
-    GXColor* p_bg_col3;
-    GXColor* p_bar_col;
-    s32 col_pos;
-    s32 first;
-    HSD_SList* event_node;
-
-    PAD_STACK(4);
-
-    col_pos = 60;
-    first = 1;
-    line = 1.0F;
-    event_node = hsd_804D7850;
-    default_col = hsd_3915_default_color;
-
-    while (event_node != NULL) {
-        DispItem* item;
-        DispCallback cb;
-        cb = (DispCallback) ((void**) event_node->data)[0];
-        item = cb(event_node->data);
-
-        while (item != NULL) {
-            if (first != 0) {
-                GXColor bg_col0;
-                p_bg_col0 = &bg_col0;
-                if (lbl_804D6080.a != 0) {
-                    hsd_80391A04(10.0F, 10.0F, 6);
-                    bg_col0 = lbl_804D6080;
-                    DrawRectangle(-10.0F, 5.0F, 620.0F, 10.0F, p_bg_col0);
-                }
-                first = 0;
-            }
-            switch (item->type) {
-            case 0: {
-                GXColor bg_col1;
-                GXColor txt_col;
-                p_bg_col1 = &bg_col1;
-                p_txt_col = &txt_col;
-                char_count = count_text_chars(item->content.text);
-                if (col_pos + char_count > 60) {
-                    line -= 1.0F;
-                    col_pos = 0;
-                    if (lbl_804D6080.a != 0) {
-                        bg_col1 = lbl_804D6080;
-                        DrawRectangle(-10.0F, (10.0F * line) - 5.0F, 620.0F,
-                                      10.0F, p_bg_col1);
-                    }
-                }
-                hsd_80391A04(10.0F, 10.0F, 6);
-                txt_col = default_col;
-                hsd_80391AC8(item->content.text, p_txt_col,
-                             (f32) (col_pos * 10), 10.0F * line);
-                col_pos = col_pos + (2 + char_count);
-                break;
-            }
-            case 2: {
-                GXColor bg_col2;
-                p_bg_col2 = &bg_col2;
-                if (col_pos != 0) {
-                    line = (f32) ((f64) line - 0.5);
-                    if (lbl_804D6080.a != 0) {
-                        bg_col2 = lbl_804D6080;
-                        DrawRectangle(-10.0F, (10.0F * line) - 5.0F, 620.0F,
-                                      5.0F, p_bg_col2);
-                    }
-                }
-                hsd_80391A04(10.0F, 10.0F, 24);
-                t2 = (10.0F * line) + 2.0F;
-                hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
-                col_pos = 60;
-                break;
-            }
-            case 1: {
-                GXColor bg_col3;
-                GXColor bar_col;
-                p_bar_col = &bar_col;
-                p_bg_col3 = &bg_col3;
-                char_count = count_bar_units(item);
-                if (char_count > 0) {
-                    if (col_pos != 0) {
-                        line = (f32) ((f64) line - 0.5);
-                        if (lbl_804D6080.a != 0) {
-                            bg_col3 = lbl_804D6080;
-                            DrawRectangle(-10.0F, (10.0F * line) - 5.0F,
-                                          620.0F, 5.0F, p_bg_col3);
-                        }
-                    }
-                    hsd_80391A04(10.0F, 10.0F, 12);
-                    bar_y = (10.0F * line) + 2.0F;
-                    bar_x = 0.0F;
-                    {
-                        bar_draw_ptr = item;
-                        while ((count = bar_draw_ptr->content.bars[0].count) >
-                               0)
-                        {
-                            f32 prev_x;
-                            prev_x = bar_x;
-                            bar_x += (600.0F / (f32) char_count) * (f32) count;
-                            bar_col = bar_draw_ptr->content.bars[0].color;
-                            hsd_80391F28(
-                                p_bar_col, prev_x, bar_y, bar_x, bar_y,
-                                (f32) bar_draw_ptr->content.bars[0].count);
-                            bar_draw_ptr =
-                                (DispItem*) ((DispBar*) bar_draw_ptr + 1);
-                        }
-                    }
-                    col_pos = 60;
-                }
-                break;
-            }
-            }
-            item = item->next;
-        }
-        event_node = event_node->next;
-    }
-}
-
-void fn_80392934(void)
-{
-    f32 cpu;
-    f32 draw;
-    f32 total;
-
-    cpu = HSD_PerfLastStat.cpu_time;
-    hsd_804D7858 = cpu;
-    draw = HSD_PerfLastStat.draw_time;
-    hsd_804D785C = draw;
-    total = HSD_PerfLastStat.total_time;
-    hsd_804D7860 = total;
-
-    if (hsd_804D7864 < cpu || hsd_804D7870-- < 0) {
-        hsd_804D7864 = cpu;
-        hsd_804D7870 = 60;
-    }
-    if (hsd_804D7868 < draw || hsd_804D7874-- < 0) {
-        hsd_804D7868 = draw;
-        hsd_804D7874 = 60;
-    }
-    if (hsd_804D786C < total || hsd_804D7878-- < 0) {
-        hsd_804D786C = total;
-        hsd_804D7878 = 60;
-    }
-    if (hsd_804D787C < cpu) {
-        hsd_804D787C = cpu;
-    }
-    if (hsd_804D7880 < draw) {
-        hsd_804D7880 = draw;
-    }
-    if (hsd_804D7884 < total) {
-        hsd_804D7884 = total;
-    }
-}
-
-static s32 lbl_804D6088 = 4;
-static s32 lbl_804D608C = 1;
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void fn_80392A08(int mode, int scale, int enable)
-{
-    lbl_804D6088 = mode;
-    lbl_804D608C = scale;
-    if (hsd_804D7888 == 0 && enable != 0) {
-        hsd_804D787C = 0.0F;
-        hsd_804D7880 = 0.0F;
-        hsd_804D7884 = 0.0F;
-    }
-    hsd_804D7888 = enable;
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-static s32 lbl_804D6090 = -1;
-static s32 lbl_804D6094 = (s32) 0xFF0000FF;
-static s32 lbl_804D6098 = 0x00FF00FF;
-static s32 lbl_804D609C = 0x00FFFFFF;
-static s32 lbl_804D60A0 = 0x8080FF;
-static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
-
-static inline PerfDispItem* get_perf_disp_item(s32 count)
-{
-    return &hsd_804CE3F8[count];
-}
-
-void* fn_80392A3C(void)
-{
-    volatile s32 green;
-    s32 numFrames;
-    s32 bar_count;
-    s32 count;
-    PerfDispItem* entry;
-    PerfDispItem* entry2;
-
-    count = 0;
-    numFrames = lbl_804D6088;
-    if (0 != numFrames) {
-        u8* counts = &hsd_804CE3F8[0].content.bytes[0];
-        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
-        // Self-assign forces colors into r5 and green's stack slot to 0x8.
-#ifdef MUST_MATCH
-        colors = colors;
-#endif
-        hsd_804CE3F8[0].type = 1;
-        *(s32*) counts = 1;
-        bar_count = count;
-        bar_count++;
-        green = lbl_804D6098;
-        *(s32*) colors = green;
-        if (numFrames > 1) {
-            s32 val = numFrames - 1;
-            if (val > 3) {
-                val = 3;
-            }
-            *(s32*) (counts + bar_count * 8) = val;
-            *(s32*) (colors + bar_count * 8) = lbl_804D60A4;
-            bar_count = 2;
-        }
-        if (numFrames > 4) {
-            *(s32*) (counts + bar_count * 8) = numFrames - 4;
-            *(s32*) (colors + bar_count * 8) = lbl_804D6094;
-            bar_count++;
-        }
-        *(s32*) (counts + bar_count * 8) = -1;
-        hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
-        hsd_804CE3F8[1].type = 2;
-        count = 4;
-        hsd_804CE3F8[1].content.gradient[0].pos =
-            hsd_804D7860 / (f32) numFrames;
-        hsd_804CE3F8[1].content.gradient[0].color = lbl_804D609C;
-        hsd_804CE3F8[1].content.gradient[1].pos =
-            (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
-        hsd_804CE3F8[1].content.gradient[1].color = lbl_804D60A0;
-        hsd_804CE3F8[1].content.gradient[2].pos = -1.0F;
-        hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
-        hsd_804CE3F8[2].type = 2;
-        hsd_804CE3F8[2].content.gradient[0].pos =
-            hsd_804D785C / (f32) numFrames;
-        hsd_804CE3F8[2].content.gradient[0].color = lbl_804D6090;
-        hsd_804CE3F8[2].content.gradient[1].pos = -1.0F;
-        hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
-        hsd_804CE3F8[3].type = 2;
-        hsd_804CE3F8[3].content.gradient[0].pos =
-            hsd_804D7858 / (f32) numFrames;
-        hsd_804CE3F8[3].content.gradient[0].color = green;
-        hsd_804CE3F8[3].content.gradient[1].pos = -1.0F;
-        hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
-    }
-    if (lbl_804D608C != 0) {
-        hsd_804CE3F8[count].type = 0;
-        entry = get_perf_disp_item(count);
-        sprintf(entry->content.text,
-                "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f  "
-                "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
-                hsd_804D7858, hsd_804D785C, hsd_804D7860, hsd_804D7864,
-                hsd_804D7868, hsd_804D786C);
-        entry->next = &hsd_804CE3F8[count + 1];
-        count++;
-        if (hsd_804D7888 != 0) {
-            hsd_804CE3F8[count].type = 0;
-            entry2 = &hsd_804CE3F8[count];
-            sprintf(entry2->content.text,
-                    "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
-                    hsd_804D787C, hsd_804D7880, hsd_804D7884);
-            entry2->next = &hsd_804CE3F8[count + 1];
-            count++;
-        }
-    }
-    if (count == 0) {
-        return NULL;
-    }
-    hsd_804CE3F8[count - 1].next = NULL;
-    return hsd_804CE3F8;
 }
