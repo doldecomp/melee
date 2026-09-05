@@ -37,13 +37,6 @@
 /* 0958FC */ static void ftCo_80095D5C(Fighter* fp, Vec3* arg1);
 /* 095A9C */ static void ftCo_80095EFC(Fighter_GObj* gobj);
 
-/* static */ float const ftCo_804D8590 = 0;
-/* static */ double const ftCo_804D8598 = 4503599627370496;
-/* static */ double const ftCo_804D85A0 = 4503601774854144;
-/* static */ float const ftCo_804D85A8 = 1;
-/* static */ float const ftCo_804D85AC = 0.01;
-/* static */ float const ftCo_804D85B0 = MTXDegToRad(1);
-
 typedef struct ftCo_ItemThrowAttrs {
     float velocity_mul;
     float angle;
