@@ -677,27 +677,22 @@ static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
 static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
 {
     s32 i;
-    u8 disabled;
-    u8* stage_ids;
 
     user_data->x0 = mn_804A04F0.cur_menu;
     user_data->x1 = (u8) mn_804A04F0.hovered_selection;
     user_data->x1F = state;
-    i = 0;
-    disabled = i;
-    stage_ids = mnStageSw_803ED4C4;
-    for (; (u8) i < NUM_STAGES; stage_ids++, i++) {
+    for (i = 0; (u8) i < NUM_STAGES; i++) {
         if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
-            user_data->x2[(u8) i] = gm_80164250(*stage_ids);
+            user_data->x2[(u8) i] = gm_80164250(mnStageSw_803ED4C4[i]);
         } else {
-            user_data->x2[(u8) i] = disabled;
+            user_data->x2[(u8) i] = 0;
         }
     }
 }
 
 static inline void mnStageSw_SetCursorAnim(s32 index, MnStageSwData* user_data,
                                            HSD_JObj* cursor_jobj,
-                                           u8* cursor_index,
+                                           u32* cursor_index,
                                            HSD_JObj** cursor_anim_jobj)
 {
     u8 enabled;
@@ -716,7 +711,7 @@ static inline HSD_JObj* mnStageSw_CreateCursor(MnStageSwData* user_data,
     HSD_JObj* cursor_anim_jobj;
     HSD_JObj* hover_anim_jobj;
     u8 hovered;
-    u8 idx;
+    u32 idx;
 
     hovered = mn_804A04F0.hovered_selection;
     cursor_jobj = HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
