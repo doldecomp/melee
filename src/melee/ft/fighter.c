@@ -53,9 +53,9 @@
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
-#include "ftCrazyHand/ftCh_Wait1_0.h"
+#include "ftCrazyHand/ftcrazyhandwait10.h"
 #include "ftKirby/ftkirby.h"
-#include "ftMasterHand/ftMh_Wait1_0.h"
+#include "ftMasterHand/ftmasterhandwait10.h"
 #include "ftPeach/types.h"
 #include "gm/gm_unsplit.h"
 #include "gr/ground.h"
@@ -81,17 +81,17 @@
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 

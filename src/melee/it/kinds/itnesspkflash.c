@@ -6,7 +6,7 @@
 #include "db/db.h"
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftNess/ftNs_SpecialN.h"
+#include "ft/kinds/ftNess/ftnessspecialn.h"
 
 #include "it/forward.h"
 
@@ -18,7 +18,7 @@
 #include "it/kinds/itnesspkflashexplode.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj);

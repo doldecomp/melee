@@ -14,8 +14,8 @@
 #include "lb/lb_00F9.h"
 
 #include <stddef.h>
-#include <baselib/debug.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
                                        FigaTree*);

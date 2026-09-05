@@ -6,12 +6,12 @@
 
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirbyspecialdonkey.h"
-#include "ft/kinds/ftSeak/ftSk_SpecialS.h"
+#include "ft/kinds/ftSeak/ftseakspecials.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F70A8[] = {
     {

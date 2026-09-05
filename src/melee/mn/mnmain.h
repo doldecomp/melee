@@ -9,7 +9,7 @@
 #include "sc/types.h"
 
 #include <dolphin/gx.h>
-#include <baselib/object.h>
+#include <sysdolphin/baselib/object.h>
 
 typedef struct _MainMenuData {
     /* 0x0000 */ MenuKind8 menu_kind;

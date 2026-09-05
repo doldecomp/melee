@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "gm/gm_1884.h"
+#include "gm/gm_18A1.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -10,8 +10,8 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 283C7C */ static void it_80283C7C(Item_GObj* gobj);
 /* 283CD4 */ static bool itHeart_UnkMotion0_Anim(Item_GObj* gobj);

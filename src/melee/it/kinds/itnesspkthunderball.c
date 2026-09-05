@@ -4,7 +4,7 @@
 
 #include "db/db.h"
 #include "ft/ftlib.h"
-#include "ft/kinds/ftNess/ftNs_SpecialHi.h"
+#include "ft/kinds/ftNess/ftnessspecialhi.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"

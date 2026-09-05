@@ -199,7 +199,7 @@ void gm_801B1EEC(GameModeState* arg0)
         return;
     }
     stkind = sss->vs.start.rules.stkind;
-    gm_80473814.x6 = stkind;
+    gm_80473814.stage_id = stkind;
     vs_data->start.rules.stkind = stkind;
     lbAudioAx_80026F2C(0x18);
     lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->start.rules.stkind));
@@ -287,7 +287,7 @@ void gm_Mode_Training_OnInit(void)
         if (i != 0) {
             temp_r31->start.players[1].ckind = CHKIND_NONE;
         }
-        gm_80473814.players[i] = temp_r31->start.players[i];
+        gm_80473814.saved_players[i] = temp_r31->start.players[i];
     }
 }
 

@@ -2,7 +2,7 @@
 
 #include "inlines.h"
 
-#include "ft/kinds/ftPeach/ftPe_SpecialLw.h"
+#include "ft/kinds/ftPeach/ftpeachspeciallw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -11,7 +11,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F74A8[] = {
     {

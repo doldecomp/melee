@@ -7,7 +7,7 @@
 #include "it/kinds/itstarrod.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftCo_800CD82C(Fighter_GObj* gobj, int arg1, int arg2, float arg3)
 {

@@ -11,7 +11,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itzako.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F79E0[] = {
     { 0, itGamewatchchef_UnkMotion0_Anim, itGamewatchchef_UnkMotion0_Phys,

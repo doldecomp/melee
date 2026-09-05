@@ -7,7 +7,7 @@
 #include "gm/gm_1601.h"
 #include "mn/types.h"
 
-#include <baselib/sislib.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/if/textlib.h>

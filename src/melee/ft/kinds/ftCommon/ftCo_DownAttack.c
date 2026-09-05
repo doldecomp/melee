@@ -17,7 +17,7 @@
 #include "ft/types.h"
 #include "it/types.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /** @details Summed with ::Item::xBEC in ::it_80271B60; seems to describe an
  * upward expansion along the Y-axis and a symmetrical contraction along the

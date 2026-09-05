@@ -4,7 +4,7 @@
 
 #include "ft/ft_084E.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>

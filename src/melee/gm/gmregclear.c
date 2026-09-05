@@ -2,13 +2,13 @@
 
 #include "platform.h"
 
-#include "baselib/forward.h"
-
 #include "dolphin/pad.h"
 
 #include "gm/forward.h"
 
 #include "mn/inlines.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -27,7 +27,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1884.h>
+#include <melee/gm/gm_18A1.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>

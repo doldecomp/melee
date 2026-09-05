@@ -6,7 +6,7 @@
 #include "lb/types.h"
 
 #include <dolphin/pad.h>
-#include <baselib/rumble.h>
+#include <sysdolphin/baselib/rumble.h>
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 /* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);

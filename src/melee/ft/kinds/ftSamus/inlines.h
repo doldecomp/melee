@@ -4,17 +4,17 @@
 #include "ef/eflib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftSamus/ftSs_Init.h"
+#include "ftSamus/ftsamus.h"
 #include "ftSamus/types.h"
 
 #include "it/forward.h"
 
 #include "it/kinds/itsamuschargeshot.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <stddef.h>
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

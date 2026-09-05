@@ -3,7 +3,7 @@
 #include <placeholder.h>
 
 #include "db/db.h"
-#include "ft/kinds/ftPikachu/ftPk_SpecialLw.h"
+#include "ft/kinds/ftPikachu/ftpikachuspeciallw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -16,8 +16,8 @@
 
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F70C8[] = {
     {

@@ -1,13 +1,11 @@
 #include "itlinkarrow.h"
 
-#include "baselib/gobj.h"
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "ft/kinds/ftCommon/ftCo_Guard.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftLink/ftLk_SpecialN.h"
+#include "ft/kinds/ftLink/ftlinkspecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -21,6 +19,8 @@
 #include "mp/mplib.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 
 #ifdef MUST_MATCH

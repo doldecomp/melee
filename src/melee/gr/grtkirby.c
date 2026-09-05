@@ -11,10 +11,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 void grTKirby_80221364(bool);                  /* static */
 void grTKirby_80221368(void);                  /* static */

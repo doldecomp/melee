@@ -14,8 +14,8 @@
 
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 2207F0 */ static void grTFalco_802207F0(bool);
 /* 2207F4 */ static void grTFalco_802207F4(void);

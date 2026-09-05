@@ -7,7 +7,7 @@
 #include "sc/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 typedef struct grFZeroCarEntry {
     s16 unk0;

@@ -1,18 +1,19 @@
 #include "itsamuschargeshot.h"
 
-#include "baselib/mtx.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "ft/kinds/ftKirby/ftkirby.h"
-#include "ft/kinds/ftSamus/ftSs_SpecialLw_0.h"
-#include "ft/kinds/ftSamus/ftSs_SpecialN.h"
+#include "ft/kinds/ftSamus/ftsamusspeciallw0.h"
+#include "ft/kinds/ftSamus/ftsamusspecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
+
+#include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7288[] = {
     { 0, itSamuschargeshot_UnkMotion0_Anim, itSamuschargeshot_UnkMotion0_Phys,

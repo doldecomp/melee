@@ -5,7 +5,7 @@
 
 #include "ftMasterHand/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

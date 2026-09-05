@@ -11,7 +11,7 @@
 #include "it/itspawn.h"
 #include "it/kinds/it_2E5A.h"
 
-#include <baselib/random.h>
+#include <sysdolphin/baselib/random.h>
 
 ItemKind it_8026F3AC(void)
 {

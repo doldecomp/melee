@@ -692,7 +692,7 @@ melee/ft/kinds/ftCommon/ftCo_09F7.c:
 	.data       start:0x803C57B0 end:0x803C57D0
 	.sdata2     start:0x804D87C0 end:0x804D87D8
 
-melee/ft/kinds/ftMario/ftMr_Strings.c:
+melee/ft/kinds/ftMario/ftmariostrings.c:
 	.data       start:0x803C57D0 end:0x803C5A68
 	.bss        start:0x804599F0 end:0x80459A68
 
@@ -1239,11 +1239,11 @@ melee/ft/ft_0DF1.c:
 	.text       start:0x800DF1C8 end:0x800DF938
 	.sdata2     start:0x804D9138 end:0x804D913C
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyWait0.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavywait0.c:
 	.text       start:0x800DF938 end:0x800DFA98
 	.sdata2     start:0x804D9140 end:0x804D9148
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyWalk.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavywalk.c:
 	.text       start:0x800DFA98 end:0x800DFBF8
 	.sdata2     start:0x804D9148 end:0x804D9150
 
@@ -1253,124 +1253,124 @@ melee/ft/ftwalkcommon.c:
 	.sdata      start:0x804D3D78 end:0x804D3D80
 	.sdata2     start:0x804D9150 end:0x804D9160
 
-melee/ft/kinds/ftDonkey/ftDk_MS_345_0.c:
+melee/ft/kinds/ftDonkey/ftdonkeyms3450.c:
 	.text       start:0x800E0134 end:0x800E01BC
 	.sdata2     start:0x804D9160 end:0x804D9168
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyTurn.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavyturn.c:
 	.text       start:0x800E01BC end:0x800E030C
 	.sdata2     start:0x804D9168 end:0x804D9170
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyFall.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavyfall.c:
 	.text       start:0x800E030C end:0x800E0440
 	.sdata2     start:0x804D9170 end:0x804D9178
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyJump.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavyjump.c:
 	.text       start:0x800E0440 end:0x800E0568
 	.sdata2     start:0x804D9178 end:0x804D9180
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyWait1.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavywait1.c:
 	.text       start:0x800E0568 end:0x800E0698
 	.sdata2     start:0x804D9180 end:0x804D9188
 
-melee/ft/kinds/ftDonkey/ftDk_HeavyLanding.c:
+melee/ft/kinds/ftDonkey/ftdonkeyheavylanding.c:
 	.text       start:0x800E0698 end:0x800E08CC
 	.sdata2     start:0x804D9188 end:0x804D9190
 
-melee/ft/kinds/ftMario/ftMr_Init.c:
+melee/ft/kinds/ftMario/ftmario.c:
 	.text       start:0x800E08CC end:0x800E0D1C
 	.data       start:0x803C7120 end:0x803C72A0
 	.sdata2     start:0x804D9190 end:0x804D9198
 
-melee/ft/kinds/ftMario/ftMr_SpecialN.c:
+melee/ft/kinds/ftMario/ftmariospecialn.c:
 	.text       start:0x800E0D1C end:0x800E1248
 	.sdata2     start:0x804D9198 end:0x804D91A0
 
-melee/ft/kinds/ftMario/ftMr_SpecialS.c:
+melee/ft/kinds/ftMario/ftmariospecials.c:
 	.text       start:0x800E1248 end:0x800E1A54
 	.sdata2     start:0x804D91A0 end:0x804D91C0
 
-melee/ft/kinds/ftMario/ftMr_SpecialHi.c:
+melee/ft/kinds/ftMario/ftmariospecialhi.c:
 	.text       start:0x800E1A54 end:0x800E2050
 	.sdata2     start:0x804D91C0 end:0x804D91E0
 
-melee/ft/kinds/ftMario/ftMr_SpecialLw.c:
+melee/ft/kinds/ftMario/ftmariospeciallw.c:
 	.text       start:0x800E2050 end:0x800E2888
 	.data       start:0x803C72A0 end:0x803C72B8
 	.sdata2     start:0x804D91E0 end:0x804D91F8
 
-melee/ft/kinds/ftCaptain/ftCa_Init.c:
+melee/ft/kinds/ftCaptain/ftcaptain.c:
 	.text       start:0x800E2888 end:0x800E2B80
 	.data       start:0x803C72B8 end:0x803C7788
 	.bss        start:0x80459A98 end:0x80459B28
 
-melee/ft/kinds/ftCaptain/ftCa_SpecialN.c:
+melee/ft/kinds/ftCaptain/ftcaptainspecialn.c:
 	.text       start:0x800E2B80 end:0x800E3278
 	.sdata2     start:0x804D91F8 end:0x804D9210
 
-melee/ft/kinds/ftCaptain/ftCa_SpecialS.c:
+melee/ft/kinds/ftCaptain/ftcaptainspecials.c:
 	.text       start:0x800E3278 end:0x800E3EAC
 	.sdata2     start:0x804D9210 end:0x804D9220
 
-melee/ft/kinds/ftCaptain/ftCa_SpecialLw.c:
+melee/ft/kinds/ftCaptain/ftcaptainspeciallw.c:
 	.text       start:0x800E3EAC end:0x800E49DC
 	.sdata2     start:0x804D9220 end:0x804D9230
 
-melee/ft/kinds/ftCaptain/ftCa_SpecialHi.c:
+melee/ft/kinds/ftCaptain/ftcaptainspecialhi.c:
 	.text       start:0x800E49DC end:0x800E5534
 	.sdata2     start:0x804D9230 end:0x804D9240
 
-melee/ft/kinds/ftFox/ftFx_Init.c:
+melee/ft/kinds/ftFox/ftfox.c:
 	.text       start:0x800E5534 end:0x800E5970
 	.data       start:0x803C7788 end:0x803C7DD0
 	.bss        start:0x80459B28 end:0x80459B88
 	.sdata2     start:0x804D9240 end:0x804D9248
 
-melee/ft/kinds/ftFox/ftFx_AppealS.c:
+melee/ft/kinds/ftFox/ftfoxappeals.c:
 	.text       start:0x800E5970 end:0x800E5CB0
 	.data       start:0x803C7DD0 end:0x803C7DE8
 	.sdata2     start:0x804D9248 end:0x804D9250
 
-melee/ft/kinds/ftFox/ftFx_SpecialN.c:
+melee/ft/kinds/ftFox/ftfoxspecialn.c:
 	.text       start:0x800E5CB0 end:0x800E7100
 	.data       start:0x803C7DE8 end:0x803C7E18
 	.sdata      start:0x804D3D80 end:0x804D3D98
 	.sdata2     start:0x804D9250 end:0x804D9278
 
-melee/ft/kinds/ftFox/ftFx_SpecialHi.c:
+melee/ft/kinds/ftFox/ftfoxspecialhi.c:
 	.text       start:0x800E7100 end:0x800E83E0
 	.sdata2     start:0x804D9278 end:0x804D92A8
 
-melee/ft/kinds/ftFox/ftFx_SpecialLw.c:
+melee/ft/kinds/ftFox/ftfoxspeciallw.c:
 	.text       start:0x800E83E0 end:0x800E9DF8
 	.sdata2     start:0x804D92A8 end:0x804D92D0
 
-melee/ft/kinds/ftFox/ftFx_SpecialS.c:
+melee/ft/kinds/ftFox/ftfoxspecials.c:
 	.text       start:0x800E9DF8 end:0x800EAD64
 	.sdata2     start:0x804D92D0 end:0x804D92D8
 
-melee/ft/kinds/ftLink/ftLk_Init.c:
+melee/ft/kinds/ftLink/ftlink.c:
 	.text       start:0x800EAD64 end:0x800EB3BC
 	.data       start:0x803C7E18 end:0x803C8368
 	.sdata2     start:0x804D92D8 end:0x804D92E8
 
-melee/ft/kinds/ftLink/ftLk_AttackAir.c:
+melee/ft/kinds/ftLink/ftlinkattackair.c:
 	.text       start:0x800EB3BC end:0x800EB65C
 	.sdata2     start:0x804D92E8 end:0x804D92F0
 
-melee/ft/kinds/ftLink/ftLk_SpecialLw.c:
+melee/ft/kinds/ftLink/ftlinkspeciallw.c:
 	.text       start:0x800EB65C end:0x800EBA4C
 	.sdata2     start:0x804D92F0 end:0x804D92F8
 
-melee/ft/kinds/ftLink/ftLk_SpecialHi.c:
+melee/ft/kinds/ftLink/ftlinkspecialhi.c:
 	.text       start:0x800EBA4C end:0x800EBF2C
 	.sdata2     start:0x804D92F8 end:0x804D9300
 
-melee/ft/kinds/ftLink/ftLk_SpecialS.c:
+melee/ft/kinds/ftLink/ftlinkspecials.c:
 	.text       start:0x800EBF2C end:0x800ECBC4
 	.sdata2     start:0x804D9300 end:0x804D9340
 
-melee/ft/kinds/ftLink/ftLk_SpecialN.c:
+melee/ft/kinds/ftLink/ftlinkspecialn.c:
 	.text       start:0x800ECBC4 end:0x800EE528
 	.rodata     start:0x803B7520 end:0x803B7544
 	.sdata2     start:0x804D9340 end:0x804D9350
@@ -1504,212 +1504,212 @@ melee/ft/kinds/ftKirby/ftkirbyspecialgamewatch.c:
 	.text       start:0x8010CE5C end:0x8010D740
 	.sdata2     start:0x804D9590 end:0x804D95B0
 
-melee/ft/kinds/ftDonkey/ftDk_Init.c:
+melee/ft/kinds/ftDonkey/ftdonkey.c:
 	.text       start:0x8010D740 end:0x8010DC80
 	.data       start:0x803CB838 end:0x803CC060
 	.bss        start:0x80459CA0 end:0x80459D18
 	.sdata2     start:0x804D95B0 end:0x804D95C8
 
-melee/ft/kinds/ftDonkey/ftDk_SpecialLw.c:
+melee/ft/kinds/ftDonkey/ftdonkeyspeciallw.c:
 	.text       start:0x8010DC80 end:0x8010E1C4
 	.sdata2     start:0x804D95C8 end:0x804D95D0
 
-melee/ft/kinds/ftDonkey/ftDk_SpecialS.c:
+melee/ft/kinds/ftDonkey/ftdonkeyspecials.c:
 	.text       start:0x8010E1C4 end:0x8010E574
 	.sdata2     start:0x804D95D0 end:0x804D95D8
 
-melee/ft/kinds/ftDonkey/ftDk_SpecialN.c:
+melee/ft/kinds/ftDonkey/ftdonkeyspecialn.c:
 	.text       start:0x8010E574 end:0x8010FB1C
 	.sdata2     start:0x804D95D8 end:0x804D95E8
 
-melee/ft/kinds/ftDonkey/ftDk_SpecialHi.c:
+melee/ft/kinds/ftDonkey/ftdonkeyspecialhi.c:
 	.text       start:0x8010FB1C end:0x80110094
 	.sdata2     start:0x804D95E8 end:0x804D95F0
 
-melee/ft/kinds/ftSeak/ftSk_Init.c:
+melee/ft/kinds/ftSeak/ftseak.c:
 	.text       start:0x80110094 end:0x80110490
 	.data       start:0x803CC060 end:0x803CC598
 	.bss        start:0x80459D18 end:0x80459D90
 	.sdata2     start:0x804D95F0 end:0x804D95F8
 
-melee/ft/kinds/ftSeak/ftSk_SpecialS.c:
+melee/ft/kinds/ftSeak/ftseakspecials.c:
 	.text       start:0x80110490 end:0x80111FBC
 	.rodata     start:0x803B7588 end:0x803B7598
 	.sdata2     start:0x804D95F8 end:0x804D9650
 
-melee/ft/kinds/ftSeak/ftSk_SpecialN.c:
+melee/ft/kinds/ftSeak/ftseakspecialn.c:
 	.text       start:0x80111FBC end:0x80112ED8
 	.data       start:0x803CC598 end:0x803CC64C
 	.sdata2     start:0x804D9650 end:0x804D965C
 
-melee/ft/kinds/ftSeak/ftSk_SpecialHi.c:
+melee/ft/kinds/ftSeak/ftseakspecialhi.c:
 	.text       start:0x80112ED8 end:0x80114034
 	.sdata2     start:0x804D9660 end:0x804D9698
 
-melee/ft/kinds/ftSeak/ftSk_SpecialLw.c:
+melee/ft/kinds/ftSeak/ftseakspeciallw.c:
 	.text       start:0x80114034 end:0x801147C0
 	.sdata2     start:0x804D9698 end:0x804D96B0
 
-melee/ft/kinds/ftNess/ftNs_Init.c:
+melee/ft/kinds/ftNess/ftness.c:
 	.text       start:0x801147C0 end:0x80114BF4
 	.data       start:0x803CC650 end:0x803CCCB8
 	.bss        start:0x80459D90 end:0x80459DF0
 	.sdata2     start:0x804D96B0 end:0x804D96B8
 
-melee/ft/kinds/ftNess/ftNs_AttackS4.c:
+melee/ft/kinds/ftNess/ftnessattacks4.c:
 	.text       start:0x80114BF4 end:0x80114EB8
 	.sdata2     start:0x804D96B8 end:0x804D96C0
 
-melee/ft/kinds/ftNess/ftNs_AttackHi4.c:
+melee/ft/kinds/ftNess/ftnessattackhi4.c:
 	.text       start:0x80114EB8 end:0x8011659C
 	.rodata     start:0x803B7598 end:0x803B75C0
 	.sdata2     start:0x804D96C0 end:0x804D96F8
 
-melee/ft/kinds/ftNess/ftNs_AttackLw4.c:
+melee/ft/kinds/ftNess/ftnessattacklw4.c:
 	.text       start:0x8011659C end:0x80116B70
 	.sdata2     start:0x804D96F8 end:0x804D9718
 
-melee/ft/kinds/ftNess/ftNs_SpecialS.c:
+melee/ft/kinds/ftNess/ftnessspecials.c:
 	.text       start:0x80116B70 end:0x80116EBC
 	.sdata2     start:0x804D9718 end:0x804D9720
 
-melee/ft/kinds/ftNess/ftNs_SpecialN.c:
+melee/ft/kinds/ftNess/ftnessspecialn.c:
 	.text       start:0x80116EBC end:0x80117B70
 	.sdata2     start:0x804D9720 end:0x804D9730
 
-melee/ft/kinds/ftNess/ftNs_SpecialHi.c:
+melee/ft/kinds/ftNess/ftnessspecialhi.c:
 	.text       start:0x80117B70 end:0x80119E14
 	.sdata2     start:0x804D9730 end:0x804D97A0
 
-melee/ft/kinds/ftNess/ftNs_SpecialLw.c:
+melee/ft/kinds/ftNess/ftnessspeciallw.c:
 	.text       start:0x80119E14 end:0x8011B51C
 	.sdata2     start:0x804D97A0 end:0x804D97B8
 
-melee/ft/kinds/ftPeach/ftPe_Init.c:
+melee/ft/kinds/ftPeach/ftpeach.c:
 	.text       start:0x8011B51C end:0x8011BA20
 	.data       start:0x803CCCB8 end:0x803CD2D0
 	.bss        start:0x80459DF0 end:0x80459E68
 	.sdata2     start:0x804D97B8 end:0x804D97C0
 
-melee/ft/kinds/ftPeach/ftPe_Float.c:
+melee/ft/kinds/ftPeach/ftpeachfloat.c:
 	.text       start:0x8011BA20 end:0x8011BD6C
 	.sdata2     start:0x804D97C0 end:0x804D97C8
 
-melee/ft/kinds/ftPeach/ftPe_FloatFall.c:
+melee/ft/kinds/ftPeach/ftpeachfloatfall.c:
 	.text       start:0x8011BD6C end:0x8011BE80
 	.sdata2     start:0x804D97C8 end:0x804D97D0
 
-melee/ft/kinds/ftPeach/ftPe_FloatAttack.c:
+melee/ft/kinds/ftPeach/ftpeachfloatattack.c:
 	.text       start:0x8011BE80 end:0x8011C1C0
 	.sdata2     start:0x804D97D0 end:0x804D97D8
 
-melee/ft/kinds/ftPeach/ftPe_AttackS4.c:
+melee/ft/kinds/ftPeach/ftpeachattacks4.c:
 	.text       start:0x8011C1C0 end:0x8011C2F4
 	.sdata2     start:0x804D97D8 end:0x804D97E0
 
-melee/ft/kinds/ftPeach/ftPe_SpecialS.c:
+melee/ft/kinds/ftPeach/ftpeachspecials.c:
 	.text       start:0x8011C2F4 end:0x8011CE48
 	.sdata2     start:0x804D97E0 end:0x804D97F8
 
-melee/ft/kinds/ftPeach/ftPe_SpecialLw.c:
+melee/ft/kinds/ftPeach/ftpeachspeciallw.c:
 	.text       start:0x8011CE48 end:0x8011D424
 	.sdata2     start:0x804D97F8 end:0x804D9800
 
-melee/ft/kinds/ftPeach/ftPe_SpecialHi.c:
+melee/ft/kinds/ftPeach/ftpeachspecialhi.c:
 	.text       start:0x8011D424 end:0x8011E174
 	.sdata2     start:0x804D9800 end:0x804D9820
 
-melee/ft/kinds/ftPeach/ftPe_SpecialN.c:
+melee/ft/kinds/ftPeach/ftpeachspecialn.c:
 	.text       start:0x8011E174 end:0x8011ED38
 	.sdata2     start:0x804D9820 end:0x804D9830
 
-melee/ft/kinds/ftPopo/ftPp_Init.c:
+melee/ft/kinds/ftPopo/ftpopo.c:
 	.text       start:0x8011ED38 end:0x8011F1F8
 	.data       start:0x803CD2D0 end:0x803CD7F8
 	.bss        start:0x80459E68 end:0x80459EC8
 	.sdata2     start:0x804D9830 end:0x804D9838
 
-melee/ft/kinds/ftPopo/ftPp_SpecialN.c:
+melee/ft/kinds/ftPopo/ftpopospecialn.c:
 	.text       start:0x8011F1F8 end:0x8011F68C
 	.sdata2     start:0x804D9838 end:0x804D9848
 
-melee/ft/kinds/ftPopo/ftPp_SpecialS.c:
+melee/ft/kinds/ftPopo/ftpopospecials.c:
 	.text       start:0x8011F68C end:0x80120E68
 	.data       start:0x803CD7F8 end:0x803CD838
 	.sdata      start:0x804D3E10 end:0x804D3E20
 	.sdata2     start:0x804D9848 end:0x804D9860
 
-melee/ft/kinds/ftPopo/ftPp_SpecialHi.c:
+melee/ft/kinds/ftPopo/ftpopospecialhi.c:
 	.text       start:0x80120E68 end:0x80122898
 	.sdata2     start:0x804D9860 end:0x804D9890
 
-melee/ft/kinds/ftPopo/ftPp_SpecialLw.c:
+melee/ft/kinds/ftPopo/ftpopospeciallw.c:
 	.text       start:0x80122898 end:0x80122EDC
 	.sdata2     start:0x804D9890 end:0x804D9898
 
-melee/ft/kinds/ftNana/ftNn_Init.c:
+melee/ft/kinds/ftNana/ftnana.c:
 	.text       start:0x80122EDC end:0x801230D0
 	.data       start:0x803CD838 end:0x803CDD5C
 	.bss        start:0x80459EC8 end:0x80459F28
 	.sdata2     start:0x804D9898 end:0x804D98A0
 
-melee/ft/kinds/ftNana/ftNn_SpecialHi.c:
+melee/ft/kinds/ftNana/ftnanaspecialhi.c:
 	.text       start:0x801230D0 end:0x801238E4
 	.sdata2     start:0x804D98A0 end:0x804D98C0
 
-melee/ft/kinds/ftNana/ftNn_SpecialS.c:
+melee/ft/kinds/ftNana/ftnanaspecials.c:
 	.text       start:0x801238E4 end:0x801243AC
 	.data       start:0x803CDD60 end:0x803CDD78
 	.sdata2     start:0x804D98C0 end:0x804D98F0
 
-melee/ft/kinds/ftPikachu/ftPk_Init.c:
+melee/ft/kinds/ftPikachu/ftpikachu.c:
 	.text       start:0x801243AC end:0x80124830
 	.data       start:0x803CDD78 end:0x803CE2D0
 	.bss        start:0x80459F28 end:0x80459F88
 	.sdata2     start:0x804D98F0 end:0x804D9900
 
-melee/ft/kinds/ftPikachu/ftPk_SpecialN.c:
+melee/ft/kinds/ftPikachu/ftpikachuspecialn.c:
 	.text       start:0x80124830 end:0x80124E38
 	.sdata2     start:0x804D9900 end:0x804D9910
 
-melee/ft/kinds/ftPikachu/ftPk_SpecialS.c:
+melee/ft/kinds/ftPikachu/ftpikachuspecials.c:
 	.text       start:0x80124E38 end:0x80125D80
 	.sdata2     start:0x804D9910 end:0x804D9928
 
-melee/ft/kinds/ftPikachu/ftPk_SpecialHi.c:
+melee/ft/kinds/ftPikachu/ftpikachuspecialhi.c:
 	.text       start:0x80125D80 end:0x801275CC
 	.sdata      start:0x804D3E20 end:0x804D3E30
 	.sdata2     start:0x804D9928 end:0x804D9980
 
-melee/ft/kinds/ftPikachu/ftPk_SpecialLw.c:
+melee/ft/kinds/ftPikachu/ftpikachuspeciallw.c:
 	.text       start:0x801275CC end:0x8012832C
 	.sdata2     start:0x804D9980 end:0x804D9988
 
-melee/ft/kinds/ftSamus/ftSs_Init.c:
+melee/ft/kinds/ftSamus/ftsamus.c:
 	.text       start:0x8012832C end:0x80128944
 	.data       start:0x803CE2D0 end:0x803CE6B8
 	.bss        start:0x80459F88 end:0x8045A000
 	.sdata      start:0x804D3E30 end:0x804D3E40
 	.sdata2     start:0x804D9988 end:0x804D9998
 
-melee/ft/kinds/ftSamus/ftSs_SpecialLw_0.c:
+melee/ft/kinds/ftSamus/ftsamusspeciallw0.c:
 	.text       start:0x80128944 end:0x801291F0
 	.sdata2     start:0x804D9998 end:0x804D99A8
 
-melee/ft/kinds/ftSamus/ftSs_SpecialN.c:
+melee/ft/kinds/ftSamus/ftsamusspecialn.c:
 	.text       start:0x801291F0 end:0x8012A1D8
 	.data       start:0x803CE6B8 end:0x803CE6D0
 	.sdata2     start:0x804D99A8 end:0x804D99E0
 
-melee/ft/kinds/ftSamus/ftSs_SpecialS.c:
+melee/ft/kinds/ftSamus/ftsamusspecials.c:
 	.text       start:0x8012A1D8 end:0x8012A674
 	.sdata2     start:0x804D99E0 end:0x804D99F0
 
-melee/ft/kinds/ftSamus/ftSs_SpecialHi.c:
+melee/ft/kinds/ftSamus/ftsamusspecialhi.c:
 	.text       start:0x8012A674 end:0x8012ADF0
 	.sdata2     start:0x804D99F0 end:0x804D9A08
 
-melee/ft/kinds/ftSamus/ftSs_SpecialLw_1.c:
+melee/ft/kinds/ftSamus/ftsamusspeciallw1.c:
 	.text       start:0x8012ADF0 end:0x8012B6E8
 	.sdata2     start:0x804D9A08 end:0x804D9A18
 
@@ -1721,554 +1721,554 @@ melee/ft/kinds/ftYoshi/ftyoshi.c:
 	.sdata      start:0x804D3E40 end:0x804D3E58
 	.sdata2     start:0x804D9A18 end:0x804D9A28
 
-melee/ft/kinds/ftYoshi/ftYs_Guard.c:
+melee/ft/kinds/ftYoshi/ftyoshiguard.c:
 	.text       start:0x8012BDA0 end:0x8012CC6C
 	.sdata      start:0x804D3E58 end:0x804D3E68
 	.sdata2     start:0x804D9A28 end:0x804D9A38
 
-melee/ft/kinds/ftYoshi/ftYs_SpecialN.c:
+melee/ft/kinds/ftYoshi/ftyoshispecialn.c:
 	.text       start:0x8012CC6C end:0x8012DF18
 	.sdata2     start:0x804D9A38 end:0x804D9A40
 
-melee/ft/kinds/ftYoshi/ftYs_SpecialHi.c:
+melee/ft/kinds/ftYoshi/ftyoshispecialhi.c:
 	.text       start:0x8012DF18 end:0x8012E644
 	.sdata2     start:0x804D9A40 end:0x804D9A58
 
-melee/ft/kinds/ftYoshi/ftYs_SpecialLw.c:
+melee/ft/kinds/ftYoshi/ftyoshispeciallw.c:
 	.text       start:0x8012E644 end:0x8012EB48
 	.sdata2     start:0x804D9A58 end:0x804D9A68
 
-melee/ft/kinds/ftYoshi/ftYs_SpecialS.c:
+melee/ft/kinds/ftYoshi/ftyoshispecials.c:
 	.text       start:0x8012EB48 end:0x80132A0C
 	.data       start:0x803CED48 end:0x803CEDBC
 	.sdata      start:0x804D3E68 end:0x804D3E80
 	.sdata2     start:0x804D9A68 end:0x804D9AC8
 
-melee/ft/kinds/ftKoopa/ftKp_Init.c:
+melee/ft/kinds/ftKoopa/ftkoopa.c:
 	.text       start:0x80132A0C end:0x80132EFC
 	.data       start:0x803CEDC0 end:0x803CF2A0
 	.bss        start:0x8045A090 end:0x8045A0F0
 	.sdata2     start:0x804D9AC8 end:0x804D9AD0
 
-melee/ft/kinds/ftKoopa/ftKp_SpecialS.c:
+melee/ft/kinds/ftKoopa/ftkoopaspecials.c:
 	.text       start:0x80132EFC end:0x80134518
 	.sdata2     start:0x804D9AD0 end:0x804D9AE0
 
-melee/ft/kinds/ftKoopa/ftKp_SpecialLw.c:
+melee/ft/kinds/ftKoopa/ftkoopaspeciallw.c:
 	.text       start:0x80134518 end:0x80134ACC
 	.sdata2     start:0x804D9AE0 end:0x804D9AF0
 
-melee/ft/kinds/ftKoopa/ftKp_SpecialN.c:
+melee/ft/kinds/ftKoopa/ftkoopaspecialn.c:
 	.text       start:0x80134ACC end:0x80135A2C
 	.data       start:0x803CF2A0 end:0x803CF420
 	.sdata2     start:0x804D9AF0 end:0x804D9B00
 
-melee/ft/kinds/ftKoopa/ftKp_SpecialHi.c:
+melee/ft/kinds/ftKoopa/ftkoopaspecialhi.c:
 	.text       start:0x80135A2C end:0x80136258
 	.sdata2     start:0x804D9B00 end:0x804D9B08
 
-melee/ft/kinds/ftMars/ftMs_Init.c:
+melee/ft/kinds/ftMars/ftmars.c:
 	.text       start:0x80136258 end:0x80136744
 	.data       start:0x803CF420 end:0x803CFA58
 	.bss        start:0x8045A0F0 end:0x8045A168
 	.sdata2     start:0x804D9B08 end:0x804D9B10
 
-melee/ft/kinds/ftMars/ftMs_SpecialN.c:
+melee/ft/kinds/ftMars/ftmarsspecialn.c:
 	.text       start:0x80136744 end:0x8013741C
 	.sdata2     start:0x804D9B10 end:0x804D9B38
 
-melee/ft/kinds/ftMars/ftMs_SpecialS.c:
+melee/ft/kinds/ftMars/ftmarsspecials.c:
 	.text       start:0x8013741C end:0x80138208
 	.sdata2     start:0x804D9B38 end:0x804D9B40
 
-melee/ft/kinds/ftMars/ftMs_SpecialHi.c:
+melee/ft/kinds/ftMars/ftmarsspecialhi.c:
 	.text       start:0x80138208 end:0x801389CC
 	.sdata2     start:0x804D9B40 end:0x804D9B70
 
-melee/ft/kinds/ftMars/ftMs_SpecialLw.c:
+melee/ft/kinds/ftMars/ftmarsspeciallw.c:
 	.text       start:0x801389CC end:0x801392DC
 	.sdata2     start:0x804D9B70 end:0x804D9B90
 
-melee/ft/kinds/ftZelda/ftZd_Init.c:
+melee/ft/kinds/ftZelda/ftzelda.c:
 	.text       start:0x801392DC end:0x801396AC
 	.data       start:0x803CFA58 end:0x803CFEF0
 	.bss        start:0x8045A168 end:0x8045A1E0
 	.sdata2     start:0x804D9B90 end:0x804D9B98
 
-melee/ft/kinds/ftZelda/ftZd_SpecialHi.c:
+melee/ft/kinds/ftZelda/ftzeldaspecialhi.c:
 	.text       start:0x801396AC end:0x8013A830
 	.sdata2     start:0x804D9B98 end:0x804D9BE0
 
-melee/ft/kinds/ftZelda/ftZd_SpecialN.c:
+melee/ft/kinds/ftZelda/ftzeldaspecialn.c:
 	.text       start:0x8013A830 end:0x8013ADB4
 	.sdata2     start:0x804D9BE0 end:0x804D9BE8
 
-melee/ft/kinds/ftZelda/ftZd_SpecialLw.c:
+melee/ft/kinds/ftZelda/ftzeldaspeciallw.c:
 	.text       start:0x8013ADB4 end:0x8013B638
 	.sdata2     start:0x804D9BE8 end:0x804D9C00
 
-melee/ft/kinds/ftZelda/ftZd_SpecialS.c:
+melee/ft/kinds/ftZelda/ftzeldaspecials.c:
 	.text       start:0x8013B638 end:0x8013C2F8
 	.sdata2     start:0x804D9C00 end:0x804D9C08
 
-melee/ft/kinds/ftPurin/ftPr_Init.c:
+melee/ft/kinds/ftPurin/ftpurin.c:
 	.text       start:0x8013C2F8 end:0x8013C9C8
 	.data       start:0x803CFEF0 end:0x803D0628
 	.bss        start:0x8045A1E0 end:0x8045A270
 	.sdata      start:0x804D3E80 end:0x804D3E94
 	.sdata2     start:0x804D9C08 end:0x804D9C10
 
-melee/ft/kinds/ftPurin/ftPr_SpecialHi.c:
+melee/ft/kinds/ftPurin/ftpurinspecialhi.c:
 	.text       start:0x8013C9C8 end:0x8013CE8C
 	.sdata2     start:0x804D9C10 end:0x804D9C1C
 
-melee/ft/kinds/ftPurin/ftPr_SpecialLw.c:
+melee/ft/kinds/ftPurin/ftpurinspeciallw.c:
 	.text       start:0x8013CE8C end:0x8013D234
 	.sdata2     start:0x804D9C20 end:0x804D9C2C
 
-melee/ft/kinds/ftPurin/ftPr_SpecialS.c:
+melee/ft/kinds/ftPurin/ftpurinspecials.c:
 	.text       start:0x8013D234 end:0x8013D658
 	.sdata2     start:0x804D9C30 end:0x804D9C3C
 
-melee/ft/kinds/ftPurin/ftPr_SpecialN.c:
+melee/ft/kinds/ftPurin/ftpurinspecialn.c:
 	.text       start:0x8013D658 end:0x801422E8
 	.sdata      start:0x804D3E98 end:0x804D3EB0
 	.sdata2     start:0x804D9C40 end:0x804D9C98
 
-melee/ft/kinds/ftLuigi/ftLg_Init.c:
+melee/ft/kinds/ftLuigi/ftluigi.c:
 	.text       start:0x801422E8 end:0x8014267C
 	.data       start:0x803D0628 end:0x803D0AE8
 	.bss        start:0x8045A270 end:0x8045A2D0
 	.sdata2     start:0x804D9C98 end:0x804D9CA0
 
-melee/ft/kinds/ftLuigi/ftLg_SpecialN.c:
+melee/ft/kinds/ftLuigi/ftluigispecialn.c:
 	.text       start:0x8014267C end:0x80142A24
 	.sdata2     start:0x804D9CA0 end:0x804D9CA8
 
-melee/ft/kinds/ftLuigi/ftLg_SpecialS.c:
+melee/ft/kinds/ftLuigi/ftluigispecials.c:
 	.text       start:0x80142A24 end:0x80143FC8
 	.sdata2     start:0x804D9CA8 end:0x804D9CC8
 
-melee/ft/kinds/ftLuigi/ftLg_SpecialHi.c:
+melee/ft/kinds/ftLuigi/ftluigispecialhi.c:
 	.text       start:0x80143FC8 end:0x801445C4
 	.sdata2     start:0x804D9CC8 end:0x804D9CE8
 
-melee/ft/kinds/ftLuigi/ftLg_SpecialLw.c:
+melee/ft/kinds/ftLuigi/ftluigispeciallw.c:
 	.text       start:0x801445C4 end:0x80144DFC
 	.data       start:0x803D0AE8 end:0x803D0B00
 	.sdata2     start:0x804D9CE8 end:0x804D9D00
 
-melee/ft/kinds/ftMewtwo/ftMt_Init.c:
+melee/ft/kinds/ftMewtwo/ftmewtwo.c:
 	.text       start:0x80144DFC end:0x801450A0
 	.data       start:0x803D0B00 end:0x803D0F90
 	.bss        start:0x8045A2D0 end:0x8045A330
 	.sdata2     start:0x804D9D00 end:0x804D9D18
 
-melee/ft/kinds/ftMewtwo/ftMt_SpecialHi.c:
+melee/ft/kinds/ftMewtwo/ftmewtwospecialhi.c:
 	.text       start:0x801450A0 end:0x80146198
 	.sdata2     start:0x804D9D18 end:0x804D9D50
 
-melee/ft/kinds/ftMewtwo/ftMt_SpecialLw.c:
+melee/ft/kinds/ftMewtwo/ftmewtwospeciallw.c:
 	.text       start:0x80146198 end:0x8014665C
 	.sdata2     start:0x804D9D50 end:0x804D9D58
 
-melee/ft/kinds/ftMewtwo/ftMt_SpecialS.c:
+melee/ft/kinds/ftMewtwo/ftmewtwospecials.c:
 	.text       start:0x8014665C end:0x80146CCC
 	.sdata2     start:0x804D9D58 end:0x804D9D60
 
-melee/ft/kinds/ftMewtwo/ftMt_SpecialN.c:
+melee/ft/kinds/ftMewtwo/ftmewtwospecialn.c:
 	.text       start:0x80146CCC end:0x80148C64
 	.rodata     start:0x803B75D0 end:0x803B75E8
 	.data       start:0x803D0F90 end:0x803D0FA0
 	.sdata2     start:0x804D9D60 end:0x804D9DA0
 
-melee/ft/kinds/ftCLink/ftCl_Init.c:
+melee/ft/kinds/ftCLink/ftclink.c:
 	.text       start:0x80148C64 end:0x80149354
 	.data       start:0x803D0FA0 end:0x803D1498
 	.bss        start:0x8045A330 end:0x8045A3A8
 	.sdata2     start:0x804D9DA0 end:0x804D9DA8
 
-melee/ft/kinds/ftCLink/ftCl_AppealS.c:
+melee/ft/kinds/ftCLink/ftclinkappeals.c:
 	.text       start:0x80149354 end:0x8014949C
 
-melee/ft/kinds/ftDrMario/ftDr_Init.c:
+melee/ft/kinds/ftDrMario/ftdrmario.c:
 	.text       start:0x8014949C end:0x80149954
 	.data       start:0x803D1498 end:0x803D1848
 	.bss        start:0x8045A3A8 end:0x8045A420
 	.sdata2     start:0x804D9DA8 end:0x804D9DB0
 
-melee/ft/kinds/ftDrMario/ftDr_AppealS.c:
+melee/ft/kinds/ftDrMario/ftdrmarioappeals.c:
 	.text       start:0x80149954 end:0x80149ACC
 
-melee/ft/kinds/ftFalco/ftFc_Init.c:
+melee/ft/kinds/ftFalco/ftfalco.c:
 	.text       start:0x80149ACC end:0x80149E34
 	.data       start:0x803D1848 end:0x803D1EA8
 	.bss        start:0x8045A420 end:0x8045A480
 	.sdata2     start:0x804D9DB0 end:0x804D9DB8
 
-melee/ft/kinds/ftPichu/ftPc_Init.c:
+melee/ft/kinds/ftPichu/ftpichu.c:
 	.text       start:0x80149E34 end:0x8014A250
 	.data       start:0x803D1EA8 end:0x803D23E8
 	.bss        start:0x8045A480 end:0x8045A4E0
 	.sdata2     start:0x804D9DB8 end:0x804D9DC0
 
-melee/ft/kinds/ftGameWatch/ftGw_Init.c:
+melee/ft/kinds/ftGameWatch/ftgamewatch.c:
 	.text       start:0x8014A250 end:0x8014A848
 	.data       start:0x803D23E8 end:0x803D29F8
 	.bss        start:0x8045A4E0 end:0x8045A540
 
-melee/ft/kinds/ftGameWatch/ftGw_AttackS4.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.c:
 	.text       start:0x8014A848 end:0x8014AB48
 	.sdata2     start:0x804D9DC0 end:0x804D9DC8
 
-melee/ft/kinds/ftGameWatch/ftGw_AttackLw3.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.c:
 	.text       start:0x8014AB48 end:0x8014AFC0
 	.sdata2     start:0x804D9DC8 end:0x804D9DD0
 
-melee/ft/kinds/ftGameWatch/ftGw_AttackAir.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchattackair.c:
 	.text       start:0x8014AFC0 end:0x8014BDB0
 
-melee/ft/kinds/ftGameWatch/ftGw_Attack11.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchattack11.c:
 	.text       start:0x8014BDB0 end:0x8014C1E8
 	.sdata2     start:0x804D9DD0 end:0x804D9DD8
 
-melee/ft/kinds/ftGameWatch/ftGw_Attack100.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchattack100.c:
 	.text       start:0x8014C1E8 end:0x8014C46C
 	.sdata2     start:0x804D9DD8 end:0x804D9DE0
 
-melee/ft/kinds/ftGameWatch/ftGw_SpecialS.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchspecials.c:
 	.text       start:0x8014C46C end:0x8014CBF4
 	.sdata2     start:0x804D9DE0 end:0x804D9DF0
 
-melee/ft/kinds/ftGameWatch/ftGw_SpecialLw.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchspeciallw.c:
 	.text       start:0x8014CBF4 end:0x8014DEF0
 	.sdata2     start:0x804D9DF0 end:0x804D9E18
 
-melee/ft/kinds/ftGameWatch/ftGw_SpecialHi.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchspecialhi.c:
 	.text       start:0x8014DEF0 end:0x8014E4F0
 	.sdata2     start:0x804D9E18 end:0x804D9E38
 
-melee/ft/kinds/ftGameWatch/ftGw_SpecialN.c:
+melee/ft/kinds/ftGameWatch/ftgamewatchspecialn.c:
 	.text       start:0x8014E4F0 end:0x8014EBFC
 	.sdata2     start:0x804D9E38 end:0x804D9E58
 
-melee/ft/kinds/ftGanon/ftGn_Init.c:
+melee/ft/kinds/ftGanon/ftganon.c:
 	.text       start:0x8014EBFC end:0x8014EEF8
 	.data       start:0x803D29F8 end:0x803D2E80
 	.bss        start:0x8045A540 end:0x8045A5B8
 	.sdata2     start:0x804D9E58 end:0x804D9E60
 
-melee/ft/kinds/ftEmblem/ftFe_Init.c:
+melee/ft/kinds/ftEmblem/ftemblem.c:
 	.text       start:0x8014EEF8 end:0x8014F1F0
 	.data       start:0x803D2E80 end:0x803D34E8
 	.bss        start:0x8045A5B8 end:0x8045A630
 	.sdata2     start:0x804D9E60 end:0x804D9E68
 
-melee/ft/kinds/ftZakoBoy/ftBo_Init.c:
+melee/ft/kinds/ftZakoBoy/ftboy.c:
 	.text       start:0x8014F1F0 end:0x8014F418
 	.data       start:0x803D34E8 end:0x803D3568
 	.bss        start:0x8045A630 end:0x8045A648
 
-melee/ft/kinds/ftZakoGirl/ftGl_Init.c:
+melee/ft/kinds/ftZakoGirl/ftgirl.c:
 	.text       start:0x8014F418 end:0x8014F640
 	.data       start:0x803D3568 end:0x803D35E8
 	.bss        start:0x8045A648 end:0x8045A660
 
-melee/ft/kinds/ftGigaKoopa/ftGk_Init.c:
+melee/ft/kinds/ftGigaKoopa/ftgkoopa.c:
 	.text       start:0x8014F640 end:0x8014F9CC
 	.data       start:0x803D35E8 end:0x803D3998
 	.bss        start:0x8045A660 end:0x8045A678
 	.sdata2     start:0x804D9E68 end:0x804D9E70
 
-melee/ft/kinds/ftSandbag/ftSb_Init.c:
+melee/ft/kinds/ftSandbag/ftsandbag.c:
 	.text       start:0x8014F9CC end:0x8014FC68
 	.data       start:0x803D3998 end:0x803D3A30
 	.bss        start:0x8045A678 end:0x8045A690
 	.sdata2     start:0x804D9E70 end:0x804D9E80
 
-melee/ft/kinds/ftMasterHand/ftMh_Init.c:
+melee/ft/kinds/ftMasterHand/ftmasterhand.c:
 	.text       start:0x8014FC68 end:0x8014FE10
 	.data       start:0x803D3A30 end:0x803D40D0
 	.bss        start:0x8045A690 end:0x8045A6A8
 	.sdata2     start:0x804D9E80 end:0x804D9E88
 
-melee/ft/kinds/ftMasterHand/ftMh_Wait1_0.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandwait10.c:
 	.text       start:0x8014FE10 end:0x80150C8C
 	.data       start:0x803D40D0 end:0x803D41D0
 	.sdata2     start:0x804D9E88 end:0x804D9E98
 
-melee/ft/kinds/ftMasterHand/ftMh_Wait1_2.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandwait12.c:
 	.text       start:0x80150C8C end:0x801510B0
 	.sdata2     start:0x804D9E98 end:0x804D9EA0
 
-melee/ft/kinds/ftMasterHand/ftMh_Entry.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandentry.c:
 	.text       start:0x801510B0 end:0x80151428
 	.data       start:0x803D41D0 end:0x803D41F8
 	.sdata2     start:0x804D9EA0 end:0x804D9ED8
 
-melee/ft/kinds/ftMasterHand/ftMh_Damage_0.c:
+melee/ft/kinds/ftMasterHand/ftmasterhanddamage0.c:
 	.text       start:0x80151428 end:0x801517B0
 	.sdata2     start:0x804D9ED8 end:0x804D9EE0
 
-melee/ft/kinds/ftMasterHand/ftMh_Sweep.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandsweep.c:
 	.text       start:0x801517B0 end:0x80151B14
 	.sdata2     start:0x804D9EE0 end:0x804D9EE8
 
-melee/ft/kinds/ftMasterHand/ftMh_SweepWait.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandsweepwait.c:
 	.text       start:0x80151B14 end:0x80151C04
 	.sdata2     start:0x804D9EE8 end:0x804D9EF0
 
-melee/ft/kinds/ftMasterHand/ftMh_Slap.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandslap.c:
 	.text       start:0x80151C04 end:0x80151D20
 	.sdata2     start:0x804D9EF0 end:0x804D9EF8
 
-melee/ft/kinds/ftMasterHand/ftMh_Walk.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandwalk.c:
 	.text       start:0x80151D20 end:0x80152138
 	.sdata2     start:0x804D9EF8 end:0x804D9F10
 
-melee/ft/kinds/ftMasterHand/ftMh_Drill.c:
+melee/ft/kinds/ftMasterHand/ftmasterhanddrill.c:
 	.text       start:0x80152138 end:0x8015236C
 	.sdata2     start:0x804D9F10 end:0x804D9F28
 
-melee/ft/kinds/ftMasterHand/ftMh_RockCrush.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandrockcrush.c:
 	.text       start:0x8015236C end:0x80152634
 	.sdata2     start:0x804D9F28 end:0x804D9F30
 
-melee/ft/kinds/ftMasterHand/ftMh_PaperCrush.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandpapercrush.c:
 	.text       start:0x80152634 end:0x8015287C
 	.sdata2     start:0x804D9F30 end:0x804D9F40
 
-melee/ft/kinds/ftMasterHand/ftMh_Poke.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandpoke.c:
 	.text       start:0x8015287C end:0x80152BC8
 	.sdata2     start:0x804D9F40 end:0x804D9F60
 
-melee/ft/kinds/ftMasterHand/ftMh_FingerBeam.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandfingerbeam.c:
 	.text       start:0x80152BC8 end:0x80153000
 	.sdata2     start:0x804D9F60 end:0x804D9F68
 
-melee/ft/kinds/ftMasterHand/ftMh_FingerGun.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandfingergun.c:
 	.text       start:0x80153000 end:0x8015377C
 	.sdata2     start:0x804D9F68 end:0x804D9F88
 
-melee/ft/kinds/ftMasterHand/ftMh_FingerGun3.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandfingergun3.c:
 	.text       start:0x8015377C end:0x8015386C
 	.sdata2     start:0x804D9F88 end:0x804D9F90
 
-melee/ft/kinds/ftMasterHand/ftMh_BackAirplane1.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackairplane1.c:
 	.text       start:0x8015386C end:0x801539EC
 	.sdata2     start:0x804D9F90 end:0x804D9F98
 
-melee/ft/kinds/ftMasterHand/ftMh_BackAirplane2.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackairplane2.c:
 	.text       start:0x801539EC end:0x80153AEC
 	.sdata2     start:0x804D9F98 end:0x804D9FA0
 
-melee/ft/kinds/ftMasterHand/ftMh_BackAirplane3.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackairplane3.c:
 	.text       start:0x80153AEC end:0x80153D28
 	.sdata2     start:0x804D9FA0 end:0x804D9FB0
 
-melee/ft/kinds/ftMasterHand/ftMh_BackCrush_0.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackcrush0.c:
 	.text       start:0x80153D28 end:0x801541C4
 	.sdata      start:0x804D3EB0 end:0x804D3EC0
 	.sdata2     start:0x804D9FB0 end:0x804D9FC0
 
-melee/ft/kinds/ftMasterHand/ftMh_BackCrush_1.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackcrush1.c:
 	.text       start:0x801541C4 end:0x80154230
 	.sdata2     start:0x804D9FC0 end:0x804D9FC8
 
-melee/ft/kinds/ftMasterHand/ftMh_BackDisappear.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandbackdisappear.c:
 	.text       start:0x80154230 end:0x80154A78
 	.sdata2     start:0x804D9FC8 end:0x804D9FE0
 
-melee/ft/kinds/ftMasterHand/ftMh_Squeeze.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandsqueeze.c:
 	.text       start:0x80154A78 end:0x80154C78
 	.sdata2     start:0x804D9FE0 end:0x804D9FE8
 
-melee/ft/kinds/ftMasterHand/ftMh_Wait1_1.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandwait11.c:
 	.text       start:0x80154C78 end:0x80154D78
 	.sdata2     start:0x804D9FE8 end:0x804D9FF0
 
-melee/ft/kinds/ftMasterHand/ftMh_Squeezing.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandsqueezing.c:
 	.text       start:0x80154D78 end:0x80154FAC
 	.sdata2     start:0x804D9FF0 end:0x804DA000
 
-melee/ft/kinds/ftMasterHand/ftMh_Throw.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandthrow.c:
 	.text       start:0x80154FAC end:0x80155074
 	.sdata2     start:0x804DA000 end:0x804DA008
 
-melee/ft/kinds/ftMasterHand/ftMh_Slam.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandslam.c:
 	.text       start:0x80155074 end:0x8015521C
 	.sdata2     start:0x804DA008 end:0x804DA010
 
-melee/ft/kinds/ftMasterHand/ftMh_TagCrush.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandtagcrush.c:
 	.text       start:0x8015521C end:0x80155388
 	.sdata2     start:0x804DA010 end:0x804DA018
 
-melee/ft/kinds/ftMasterHand/ftMh_TagApplaud.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandtagapplaud.c:
 	.text       start:0x80155388 end:0x8015550C
 	.sdata2     start:0x804DA018 end:0x804DA020
 
-melee/ft/kinds/ftMasterHand/ftMh_TagRockPaper.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandtagrockpaper.c:
 	.text       start:0x8015550C end:0x80155A58
 	.sdata2     start:0x804DA020 end:0x804DA030
 
-melee/ft/kinds/ftMasterHand/ftMh_TagCancel.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandtagcancel.c:
 	.text       start:0x80155A58 end:0x80155B70
 	.sdata2     start:0x804DA030 end:0x804DA038
 
-melee/ft/kinds/ftMasterHand/ftMh_CaptureMasterHand.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.c:
 	.text       start:0x80155B70 end:0x80155C88
 	.sdata2     start:0x804DA038 end:0x804DA040
 
-melee/ft/kinds/ftMasterHand/ftMh_CaptureDamageMasterHand.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.c:
 	.text       start:0x80155C88 end:0x80155D1C
 	.sdata2     start:0x804DA040 end:0x804DA048
 
-melee/ft/kinds/ftMasterHand/ftMh_ThrownMasterHand.c:
+melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.c:
 	.text       start:0x80155D1C end:0x80155E18
 	.sdata2     start:0x804DA048 end:0x804DA050
 
-melee/ft/kinds/ftCrazyHand/ftCh_Init.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhand.c:
 	.text       start:0x80155E18 end:0x80155FCC
 	.data       start:0x803D41F8 end:0x803D4878
 	.bss        start:0x8045A6A8 end:0x8045A6C0
 	.sdata2     start:0x804DA050 end:0x804DA058
 
-melee/ft/kinds/ftCrazyHand/ftCh_Wait1_0.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandwait10.c:
 	.text       start:0x80155FCC end:0x80156F6C
 	.data       start:0x803D4878 end:0x803D4998
 	.sdata2     start:0x804DA058 end:0x804DA068
 
-melee/ft/kinds/ftCrazyHand/ftCh_Entry.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandentry.c:
 	.text       start:0x80156F6C end:0x80157080
 	.sdata2     start:0x804DA068 end:0x804DA070
 
-melee/ft/kinds/ftCrazyHand/ftCh_Damage_0.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhanddamage0.c:
 	.text       start:0x80157080 end:0x8015746C
 	.sdata2     start:0x804DA070 end:0x804DA078
 
-melee/ft/kinds/ftCrazyHand/ftCh_Sweep.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandsweep.c:
 	.text       start:0x8015746C end:0x8015755C
 	.sdata2     start:0x804DA078 end:0x804DA080
 
-melee/ft/kinds/ftCrazyHand/ftCh_SweepWait.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandsweepwait.c:
 	.text       start:0x8015755C end:0x801578E8
 	.sdata2     start:0x804DA080 end:0x804DA088
 
-melee/ft/kinds/ftCrazyHand/ftCh_Walk.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandwalk.c:
 	.text       start:0x801578E8 end:0x80157C50
 	.sdata2     start:0x804DA088 end:0x804DA090
 
-melee/ft/kinds/ftCrazyHand/ftCh_Drill.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhanddrill.c:
 	.text       start:0x80157C50 end:0x80157DF8
 	.sdata2     start:0x804DA090 end:0x804DA0A0
 
-melee/ft/kinds/ftCrazyHand/ftCh_RockCrush_0.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush0.c:
 	.text       start:0x80157DF8 end:0x80158144
 	.sdata2     start:0x804DA0A0 end:0x804DA0C0
 
-melee/ft/kinds/ftCrazyHand/ftCh_RockCrush_1.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandrockcrush1.c:
 	.text       start:0x80158144 end:0x801582D8
 	.sdata2     start:0x804DA0C0 end:0x804DA0D8
 
-melee/ft/kinds/ftCrazyHand/ftCh_Poke.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandpoke.c:
 	.text       start:0x801582D8 end:0x801587B0
 	.sdata2     start:0x804DA0D8 end:0x804DA0E0
 
-melee/ft/kinds/ftCrazyHand/ftCh_FingerBeam_0.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam0.c:
 	.text       start:0x801587B0 end:0x80158B3C
 	.sdata2     start:0x804DA0E0 end:0x804DA0E8
 
-melee/ft/kinds/ftCrazyHand/ftCh_FingerBeam.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandfingerbeam.c:
 	.text       start:0x80158B3C end:0x801592D4
 	.sdata2     start:0x804DA0E8 end:0x804DA100
 
-melee/ft/kinds/ftCrazyHand/ftCh_BackAirplane1.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandbackairplane1.c:
 	.text       start:0x801592D4 end:0x801594D4
 	.sdata2     start:0x804DA100 end:0x804DA108
 
-melee/ft/kinds/ftCrazyHand/ftCh_BackAirplane2.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandbackairplane2.c:
 	.text       start:0x801594D4 end:0x80159670
 	.sdata2     start:0x804DA108 end:0x804DA118
 
-melee/ft/kinds/ftCrazyHand/ftCh_BackAirplane3.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandbackairplane3.c:
 	.text       start:0x80159670 end:0x801597F0
 	.sdata2     start:0x804DA118 end:0x804DA120
 
-melee/ft/kinds/ftCrazyHand/ftCh_BackCrush.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandbackcrush.c:
 	.text       start:0x801597F0 end:0x80159908
 	.sdata2     start:0x804DA120 end:0x804DA128
 
-melee/ft/kinds/ftCrazyHand/ftCh_BackDisappear.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandbackdisappear.c:
 	.text       start:0x80159908 end:0x80159AA4
 	.sdata2     start:0x804DA128 end:0x804DA138
 
-melee/ft/kinds/ftCrazyHand/ftCh_Wait1_1.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandwait11.c:
 	.text       start:0x80159AA4 end:0x80159F40
 	.sdata      start:0x804D3EC0 end:0x804D3ED0
 	.sdata2     start:0x804DA138 end:0x804DA148
 
-melee/ft/kinds/ftCrazyHand/ftCh_Grab.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandgrab.c:
 	.text       start:0x80159F40 end:0x8015A030
 	.sdata2     start:0x804DA148 end:0x804DA150
 
-melee/ft/kinds/ftCrazyHand/ftCh_Cancel.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandcancel.c:
 	.text       start:0x8015A030 end:0x8015A184
 	.sdata2     start:0x804DA150 end:0x804DA158
 
-melee/ft/kinds/ftCrazyHand/ftCh_Squeezing_0.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandsqueezing0.c:
 	.text       start:0x8015A184 end:0x8015A2B0
 	.sdata2     start:0x804DA158 end:0x804DA160
 
-melee/ft/kinds/ftCrazyHand/ftCh_Squeezing_1.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandsqueezing1.c:
 	.text       start:0x8015A2B0 end:0x8015A3F4
 	.sdata2     start:0x804DA160 end:0x804DA168
 
-melee/ft/kinds/ftCrazyHand/ftCh_Squeeze.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandsqueeze.c:
 	.text       start:0x8015A3F4 end:0x8015A560
 	.sdata2     start:0x804DA168 end:0x804DA170
 
-melee/ft/kinds/ftCrazyHand/ftCh_Throw.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandthrow.c:
 	.text       start:0x8015A560 end:0x8015A6CC
 	.sdata2     start:0x804DA170 end:0x804DA178
 
-melee/ft/kinds/ftCrazyHand/ftCh_Slam.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandslam.c:
 	.text       start:0x8015A6CC end:0x8015AAC8
 	.sdata2     start:0x804DA178 end:0x804DA180
 
-melee/ft/kinds/ftCrazyHand/ftCh_TagRockPaper.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandtagrockpaper.c:
 	.text       start:0x8015AAC8 end:0x8015ABD0
 	.sdata2     start:0x804DA180 end:0x804DA188
 
-melee/ft/kinds/ftCrazyHand/ftCh_FingerGun2.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandfingergun2.c:
 	.text       start:0x8015ABD0 end:0x8015ADD0
 	.sdata2     start:0x804DA188 end:0x804DA190
 
-melee/ft/kinds/ftCrazyHand/ftCh_TagGrab.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandtaggrab.c:
 	.text       start:0x8015ADD0 end:0x8015B174
 	.sdata2     start:0x804DA190 end:0x804DA198
 
-melee/ft/kinds/ftCrazyHand/ftCh_GrabUnk1_B174.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandgrabunk1b174.c:
 	.text       start:0x8015B174 end:0x8015B548
 	.data       start:0x803D4998 end:0x803D49C0
 	.sdata2     start:0x804DA198 end:0x804DA1D0
 
-melee/ft/kinds/ftCrazyHand/ftCh_CaptureCrazyHand.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.c:
 	.text       start:0x8015B548 end:0x8015B670
 	.sdata2     start:0x804DA1D0 end:0x804DA1D8
 
-melee/ft/kinds/ftCrazyHand/ftCh_CaptureDamageCrazyHand.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.c:
 	.text       start:0x8015B670 end:0x8015B778
 	.sdata2     start:0x804DA1D8 end:0x804DA1E0
 
-melee/ft/kinds/ftCrazyHand/ftCh_CaptureWaitCrazyHand.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.c:
 	.text       start:0x8015B778 end:0x8015B850
 	.sdata2     start:0x804DA1E0 end:0x804DA1E8
 
-melee/ft/kinds/ftCrazyHand/ftCh_ThrownCrazyHand.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandthrowncrazyhand.c:
 	.text       start:0x8015B850 end:0x8015B8FC
 	.sdata2     start:0x804DA1E8 end:0x804DA1F0
 
-melee/ft/kinds/ftCrazyHand/ftCh_TagCancel.c:
+melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.c:
 	.text       start:0x8015B8FC end:0x8015BD20
 	.sdata2     start:0x804DA1F0 end:0x804DA1F8
 
@@ -2391,13 +2391,19 @@ melee/gm/gm_1879.c:
 	.sdata2     start:0x804DA5E8 end:0x804DA5F8
 
 melee/gm/gm_1884.c:
-	.text       start:0x80188454 end:0x8018A514
+	.text       start:0x80188454 end:0x8018A160
 	.rodata     start:0x803B7C68 end:0x803B7C80
-	.data       start:0x803D9828 end:0x803D9D20
-	.bss        start:0x80473700 end:0x80473AB8
+	.data       start:0x803D9828 end:0x803D9910
+	.bss        start:0x80473700 end:0x80473A18
 	.sdata      start:0x804D4140 end:0x804D4158
 	.sbss       start:0x804D6628 end:0x804D6630
-	.sdata2     start:0x804DA5F8 end:0x804DA650
+	.sdata2     start:0x804DA5F8 end:0x804DA640
+
+melee/gm/gm_18A1.c:
+	.text       start:0x8018A160 end:0x8018A514
+	.data       start:0x803D9910 end:0x803D9D20
+	.bss        start:0x80473A18 end:0x80473AB8
+	.sdata2     start:0x804DA640 end:0x804DA650
 
 melee/gm/gmtoulib.c:
 	.text       start:0x8018A514 end:0x80190ABC

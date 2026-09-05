@@ -12,9 +12,9 @@
 #include "it/types.h"
 
 #include <stdbool.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <melee/ft/kinds/ftFox/ftFx_SpecialN.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/kinds/ftFox/ftfoxspecialn.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
 

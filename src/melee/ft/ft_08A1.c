@@ -5,16 +5,16 @@
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
-#include "ftCLink/ftCl_Init.h"
+#include "ftCLink/ftclink.h"
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_HammerWait.h"
-#include "ftCrazyHand/ftCh_TagCancel.h"
-#include "ftLink/ftLk_AttackAir.h"
-#include "ftMasterHand/ftMh_Wait1_2.h"
+#include "ftCrazyHand/ftcrazyhandtagcancel.h"
+#include "ftLink/ftlinkattackair.h"
+#include "ftMasterHand/ftmasterhandwait12.h"
 #include "it/it_26B1.h"
 #include "it/kinds/itpeachparasol.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

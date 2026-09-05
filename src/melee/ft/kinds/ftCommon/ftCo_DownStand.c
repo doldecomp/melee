@@ -13,7 +13,7 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

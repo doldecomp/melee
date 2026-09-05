@@ -11,8 +11,8 @@
 #include "lb/forward.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <melee/db/db.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

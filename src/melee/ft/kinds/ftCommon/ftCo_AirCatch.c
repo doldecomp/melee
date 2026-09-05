@@ -28,7 +28,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)
 {

@@ -5,8 +5,6 @@
 #include "gmvsmelee.h"
 #include "types.h"
 
-#include "baselib/memory.h"
-
 #include "gm/forward.h"
 
 #include "if/if_2FD9.h"
@@ -17,6 +15,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
+
+#include <sysdolphin/baselib/memory.h>
 
 enum {
     state_approach,

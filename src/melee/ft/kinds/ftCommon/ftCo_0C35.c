@@ -11,7 +11,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static void inlineA0(Fighter_GObj* gobj)
 {

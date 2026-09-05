@@ -10,10 +10,10 @@
 
 #include "lb/lb_00F9.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* 222B98 */ static void grTPichu_80222B98(bool);
 /* 222B9C */ static void grTPichu_80222B9C(void);

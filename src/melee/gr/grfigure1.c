@@ -13,9 +13,9 @@
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 20DFDC */ static void grFigure1_OnDemoInit(int);
 /* 20DFE0 */ static void grFigure1_OnInit(void);

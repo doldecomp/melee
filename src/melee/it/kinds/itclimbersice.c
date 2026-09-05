@@ -2,11 +2,10 @@
 
 #include <placeholder.h>
 
-#include "baselib/jobj.h"
 #include "db/db.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-#include "ft/kinds/ftPopo/ftPp_Init.h"
+#include "ft/kinds/ftPopo/ftpopo.h"
 #include "ftKirby/ftkirbyspecialiceclimber.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -15,6 +14,8 @@
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
+
+#include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F7668[] = {
     {

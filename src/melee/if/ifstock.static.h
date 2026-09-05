@@ -1,6 +1,6 @@
 #include "sc/forward.h"
 
-#include <baselib/gobj.h>
+#include <sysdolphin/baselib/gobj.h>
 
 struct IfStockUserData {
     unsigned char player;

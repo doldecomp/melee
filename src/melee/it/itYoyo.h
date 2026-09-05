@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct itYoyoAttributes {
     s32 x0_CHARGE_SPAWN_POS;

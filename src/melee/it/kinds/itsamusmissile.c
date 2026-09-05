@@ -3,7 +3,7 @@
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ftSamus/ftSs_SpecialN.h"
+#include "ftSamus/ftsamusspecialn.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -12,7 +12,7 @@
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
-#include <baselib/mtx.h>
+#include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7340[] = {
     { 0, itSamusmissile_UnkMotion0_Anim, itSamusmissile_UnkMotion0_Phys,

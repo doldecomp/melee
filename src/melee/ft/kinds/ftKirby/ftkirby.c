@@ -35,10 +35,10 @@
 #include "pl/player.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/id.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
 /* 459B88 */ struct ft_80459B88_t ft_80459B88;

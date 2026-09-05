@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/forward.h>
 
 #define SMSTATE_MASK 0xC0000000
 #define SMSTATE_ACTIVE 0x40000000

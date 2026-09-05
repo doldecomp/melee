@@ -5,7 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
@@ -13,7 +12,7 @@
 #include "ft/ftcpuattack.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
-#include "ft/kinds/ftPopo/ftPp_SpecialLw.h"
+#include "ft/kinds/ftPopo/ftpopospeciallw.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -51,6 +50,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/ftcmdscript.h>
 
 /* 09D044 */ static void ftCo_800A0148(Fighter*);

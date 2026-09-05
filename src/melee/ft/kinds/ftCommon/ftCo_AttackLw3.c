@@ -29,9 +29,9 @@
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftCommon/types.h"
-#include "ftGameWatch/ftGw_AttackLw3.h"
+#include "ftGameWatch/ftgamewatchattacklw3.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

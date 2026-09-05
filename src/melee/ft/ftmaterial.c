@@ -12,14 +12,14 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
 
-#include <baselib/class.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/mobj.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
-#include <baselib/tobj.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tev.h>
+#include <sysdolphin/baselib/tobj.h>
 
 HSD_MObjInfo ftMObj = { ftMaterial_800BF260 };
 

@@ -45,7 +45,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/types.h"
-#include "ftDonkey/ftDk_HeavyLanding.h"
+#include "ftDonkey/ftdonkeyheavylanding.h"
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lb_0219.h"
@@ -56,8 +56,8 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <baselib/mtx.h>
-#include <baselib/random.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 
 int ftCo_803C5520[2][4][3] = {
     {

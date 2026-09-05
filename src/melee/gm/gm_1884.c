@@ -6,7 +6,6 @@
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
-#include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "gr/stage.h"
 #include "if/ifall.h"
@@ -27,22 +26,23 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjproc.h>
-#include <baselib/mobj.h>
-#include <baselib/sislib.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 #include <Runtime/runtime.h>
 
 /// @todo .sdata2 order hack
 static inline void gm_1884_sdata2_order(void)
 {
+    (void) 0.016666668f;
     (void) U32_TO_F32;
     (void) 10.0f;
     (void) 1.0f;
@@ -57,7 +57,6 @@ static inline void gm_1884_sdata2_order(void)
     (void) 0.699999988f;
     (void) 0.600000024f;
     (void) 0.0f;
-    (void) 100.0f;
 }
 
 typedef struct {
@@ -68,10 +67,6 @@ typedef struct {
     TrainingSpeedArray speeds;
     u8 pad[8];
 } TrainingSpeedStack;
-
-typedef struct {
-    u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
-} u8_bits;
 
 DynamicModelDesc** lbl_804D662C;
 HSD_Archive* lbl_804D6628;
@@ -110,20 +105,11 @@ static inline TrainingItemEntry* TrainingItemTable_Get(void)
     return (TrainingItemEntry*) gmTraining_ItemTable;
 }
 
-/// Classic mode stage data table entry (size 0x10)
-/// Table has 65 entries: 13 stages × 5 difficulty levels
-typedef struct ClassicStageEntry {
-    /* 0x00 */ u8 stage_kind;
-    /* 0x01 */ u8 pad_1;
-    /* 0x02 */ u16 scale0_pct; ///< Divided by 100 to get ratio
-    /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
-    /* 0x06 */ u8 pad_6[0xA];
-} ClassicStageEntry;
-ASSERT_SIZE(ClassicStageEntry, 0x10);
-
 /* 473700 */ static TrainingModeState lbl_80473700;
-/* 473814 */ struct TrainingMenuData gm_80473814;
-/* 473A18 */ UnkAllstarData gm_80473A18;
+/* 473814 */ CssSubStruct gm_80473814;
+
+STATIC_ASSERT(sizeof(lbl_80473700) == 0x114);
+STATIC_ASSERT(sizeof(gm_80473814) == 0x204);
 
 int gm_80188454(int idx)
 {
@@ -256,15 +242,15 @@ void fn_80188644(void)
         i++;
     } while (i < 4);
 
-    lbl_80473700.css.menu_values[0] = 0;
-    lbl_80473700.css.menu_values[1] = 0;
-    lbl_80473700.css.menu_values[2] = 0;
-    lbl_80473700.css.menu_values[3] = 0;
+    gm_80473814.menu_values[0] = 0;
+    gm_80473814.menu_values[1] = 0;
+    gm_80473814.menu_values[2] = 0;
+    gm_80473814.menu_values[3] = 0;
     saved_count = 0;
-    lbl_80473700.css.menu_values[4] = saved_count;
-    lbl_80473700.css.menu_values[5] = saved_count;
-    lbl_80473700.css.menu_values[6] = saved_count;
-    lbl_80473700.css.menu_values[saved_count] = 2;
+    gm_80473814.menu_values[4] = saved_count;
+    gm_80473814.menu_values[5] = saved_count;
+    gm_80473814.menu_values[6] = saved_count;
+    gm_80473814.menu_values[saved_count] = 2;
 }
 
 void fn_80188738(HSD_JObj* arg0)
@@ -403,7 +389,7 @@ void fn_80188D3C(HSD_JObj* arg0)
     int val;
     int hundreds;
 
-    val = gm_80473814.x144[0x19];
+    val = gm_80473814.menu_values[4];
 
     jobjs[2] = (arg0 == NULL) ? NULL : arg0->child;
     jobjs[1] = (jobjs[2] == NULL) ? NULL : jobjs[2]->next;
@@ -432,7 +418,7 @@ void fn_80188D3C(HSD_JObj* arg0)
 void fn_80188EE8(HSD_GObj* gobj)
 {
     TrainingModeState* state = &lbl_80473700;
-    CssSubStruct* sub = &state->css;
+    CssSubStruct* sub = &gm_80473814;
     HSD_JObj* jobj;
     HSD_JObj* cursor_jobj;
     HSD_Text* text;
@@ -477,24 +463,24 @@ void fn_80188EE8(HSD_GObj* gobj)
     fn_80188B3C(sub->jobjs[19]);
 
     jobj = sub->jobjs[12];
-    HSD_JObjReqAnimAll(jobj, (f32) state->css.x03);
+    HSD_JObjReqAnimAll(jobj, (f32) gm_80473814.x03);
     HSD_JObjAnimAll(jobj);
 
-    menu_values = state->css.menu_values;
+    menu_values = gm_80473814.menu_values;
     jobj = sub->jobjs[13];
     HSD_JObjReqAnimAll(jobj, (f32) (u32) menu_values[0]);
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[23];
-    HSD_JObjReqAnimAll(jobj, (f32) state->css.x00);
+    HSD_JObjReqAnimAll(jobj, (f32) gm_80473814.x00);
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[34];
     HSD_JObjReqAnimAll(jobj, (f32) (u32) menu_values[0]);
     HSD_JObjAnimAll(jobj);
 
-    val = state->css.menu_values[1];
-    text = state->css.text;
+    val = gm_80473814.menu_values[1];
+    text = gm_80473814.text;
     if (lbLang_IsSettingUS() != 0 && val == 0x13) {
         HSD_SisLib_803A6368(text, 0x17);
     } else {
@@ -503,18 +489,18 @@ void fn_80188EE8(HSD_GObj* gobj)
     }
 
     jobj = sub->jobjs[32];
-    HSD_JObjReqAnimAll(jobj, (f32) (u32) (state->css.menu_values[2] + 1));
+    HSD_JObjReqAnimAll(jobj, (f32) (u32) (gm_80473814.menu_values[2] + 1));
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[31];
-    HSD_JObjReqAnimAll(jobj, (f32) (u32) state->css.menu_values[3]);
+    HSD_JObjReqAnimAll(jobj, (f32) (u32) gm_80473814.menu_values[3]);
     HSD_JObjAnimAll(jobj);
 
     fn_80188D3C(sub->jobjs[27]);
 
     HSD_JObjSetFlags(sub->jobjs[25], JOBJ_HIDDEN);
 
-    val = state->css.menu_values[6];
+    val = gm_80473814.menu_values[6];
     cursor_jobj = sub->jobjs[26];
     if (val == 2 && state->mode == 3) {
         val = 3;
@@ -542,7 +528,7 @@ static inline void gm_801891F4_SetCpuType(int cpu_type)
     int count;
 
     count = lbl_80473700.count;
-    lbl_80473700.css.x03 = (u8) cpu_type;
+    gm_80473814.x03 = (u8) cpu_type;
     for (i = 0; i < 4; i++) {
         if (i != 0 && count != 0) {
             Player_SetPlayerAndEntityCpuType(i, cpu_type);
@@ -562,7 +548,7 @@ void fn_801891F4(void)
     Vec3 pos;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
-    sub = &lbl_80473700.css;
+    sub = &gm_80473814;
 
     if (gm_801A45E8(2) != 0) {
         if (sub->x01 == 0) {
@@ -637,8 +623,8 @@ void fn_801891F4(void)
                 s16 item;
                 HSD_JObj* jobj;
                 lbAudioAx_80024030(8);
-                item = gmTraining_ItemTable[lbl_80473700.css.menu_values[1]]
-                           .item_id;
+                item =
+                    gmTraining_ItemTable[gm_80473814.menu_values[1]].item_id;
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
@@ -828,7 +814,7 @@ void fn_801891F4(void)
                 int i;
 
                 for (i = 1; i < 4; i++) {
-                    fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
+                    fn_8016B388(i, sub->menu_values[4]);
                 }
             }
 
@@ -864,14 +850,14 @@ void fn_80189B88(void)
     int i;
 
     state = &lbl_80473700;
-    sub = &state->css;
+    sub = &gm_80473814;
     sub->x00 = 0;
     sub->x01 = 0;
     HSD_GObj_SetupProc(GObj_Create(0xE, 2, 0), (HSD_GObjEvent) fn_801891F4,
                        0x15);
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*lbl_804D662C)->joint);
-    state->css.gobj = gobj;
+    gm_80473814.gobj = gobj;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80188EE8, 0x11);
@@ -906,7 +892,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     arg0->rules.x5_0 = 1;
 
     for (i = 0; i < 4; i++) {
-        state->players[i] = state->css.saved_players[i] = arg0->players[i];
+        state->players[i] = gm_80473814.saved_players[i] = arg0->players[i];
     }
 
     state->mode = (s32) (arg0->players[0].slot - 1);
@@ -934,20 +920,20 @@ HSD_Text* fn_8018A000(void)
     data = M2C_BITWISE(u8*, gmTraining_ItemTable);
     state = &lbl_80473700;
     memzero(state->result_cache, sizeof(state->result_cache));
-    lbl_804D6628 =
-        lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
+    lbl_804D6628 = lbArchive_80016DBC("GmTrain", &lbl_804D662C,
+                                      "ScGamTraining_scene_models", 0);
     fn_80189B88();
     ifAll_GetHUDGObj();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
     if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(0, (char*) &data[0xBC], (char*) &data[0xC8]);
+        HSD_SisLib_803A62A0(0, "SdTrain.usd", "SIS_TrainingData");
     } else {
-        HSD_SisLib_803A62A0(0, (char*) &data[0xDC], (char*) &data[0xC8]);
+        HSD_SisLib_803A62A0(0, "SdTrain.dat", "SIS_TrainingData");
     }
 
-    *(text_ptr = &state->css.text) = HSD_SisLib_803A5ACC(
+    *(text_ptr = &gm_80473814.text) = HSD_SisLib_803A5ACC(
         0, 0,
-        (12.0f * (HSD_JObjGetTranslationX(state->css.jobjs[1]) + 9.798828f)) +
+        (12.0f * (HSD_JObjGetTranslationX(gm_80473814.jobjs[1]) + 9.798828f)) +
             50.0f,
         150.0f, 0.1f, 167.0f, 16.0f);
     text = *text_ptr;
@@ -958,192 +944,4 @@ HSD_Text* fn_8018A000(void)
     text = *text_ptr;
     (*text_ptr)->default_alignment = 2;
     return text;
-}
-
-char gmTraining_SceneModelsName[] = "ScGamTraining_scene_models";
-char gmTraining_UsdName[] = "SdTrain.usd";
-char gmTraining_SisDataName[] = "SIS_TrainingData";
-char gmTraining_DatName[] = "SdTrain.dat";
-
-ClassicStageEntry gmTraining_ClassicStages[65] = {
-    { 4, 0, 50, 170, { 0, 1, 0x17, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 70, 140, { 1, 1, 0x17, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 80, 120, { 3, 1, 0x17, 0, 0, 0, 0, 0, 0, 0 } },
-    { 2, 0, 90, 100, { 5, 1, 0x17, 0, 0, 0, 0, 0, 0, 0 } },
-    { 1, 0, 100, 95, { 7, 1, 0x17, 0, 0, 0, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 1, 2, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 70, 140, { 3, 2, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 80, 115, { 4, 2, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 2, 0, 90, 100, { 6, 2, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 1, 0, 100, 95, { 8, 2, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 2, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 70, 140, { 4, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 80, 110, { 5, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 2, 0, 90, 100, { 7, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 1, 0, 100, 95, { 9, 3, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 3, 1, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 70, 140, { 5, 1, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 80, 120, { 6, 1, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 2, 0, 90, 105, { 8, 1, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 1, 0, 100, 95, { 9, 1, 4, 0, 0, 0, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 0, 2, 0x17, 0, 2, 0x17, 0, 0, 0, 0 } },
-    { 3, 0, 67, 140, { 2, 2, 0x17, 2, 2, 0x17, 0, 0, 0, 0 } },
-    { 3, 0, 78, 120, { 3, 2, 0x17, 3, 2, 0x17, 0, 0, 0, 0 } },
-    { 2, 0, 90, 105, { 5, 2, 4, 4, 2, 4, 0, 0, 0, 0 } },
-    { 1, 0, 100, 100, { 6, 2, 4, 6, 2, 4, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 1, 3, 0x17, 1, 3, 0x17, 0, 0, 0, 0 } },
-    { 3, 0, 67, 140, { 3, 3, 4, 3, 3, 0x17, 0, 0, 0, 0 } },
-    { 3, 0, 78, 120, { 4, 3, 4, 3, 3, 4, 0, 0, 0, 0 } },
-    { 2, 0, 90, 105, { 5, 3, 4, 5, 3, 4, 0, 0, 0, 0 } },
-    { 1, 0, 100, 100, { 7, 3, 4, 7, 3, 4, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 2, 1, 0x17, 1, 1, 0x17, 0, 0, 0, 0 } },
-    { 3, 0, 70, 140, { 3, 1, 4, 3, 1, 4, 0, 0, 0, 0 } },
-    { 3, 0, 78, 120, { 4, 1, 4, 4, 1, 4, 0, 0, 0, 0 } },
-    { 2, 0, 90, 105, { 6, 1, 4, 5, 1, 4, 0, 0, 0, 0 } },
-    { 1, 0, 102, 100, { 8, 1, 4, 7, 1, 4, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 2, 2, 4, 2, 2, 4, 0, 0, 0, 0 } },
-    { 3, 0, 70, 130, { 3, 2, 4, 3, 2, 4, 0, 0, 0, 0 } },
-    { 3, 0, 80, 110, { 5, 2, 4, 4, 2, 4, 0, 0, 0, 0 } },
-    { 2, 0, 90, 105, { 7, 2, 4, 5, 2, 4, 0, 0, 0, 0 } },
-    { 1, 0, 105, 100, { 9, 2, 4, 8, 2, 4, 0, 0, 0, 0 } },
-    { 4, 0, 50, 170, { 0, 3, 0x17, 0, 3, 0x17, 0, 3, 0x17, 0 } },
-    { 3, 0, 67, 130, { 2, 3, 0x17, 2, 3, 0x17, 1, 3, 0x17, 0 } },
-    { 3, 0, 78, 110, { 3, 3, 0x17, 3, 3, 0x17, 3, 3, 0x17, 0 } },
-    { 2, 0, 89, 100, { 4, 3, 4, 4, 3, 0x17, 4, 3, 0x17, 0 } },
-    { 1, 0, 100, 100, { 6, 3, 4, 6, 3, 4, 6, 3, 0x17, 0 } },
-    { 4, 0, 50, 170, { 1, 1, 0x17, 1, 1, 0x17, 1, 1, 0x17, 0 } },
-    { 3, 0, 69, 125, { 2, 1, 0x17, 2, 1, 0x17, 2, 1, 0x17, 0 } },
-    { 3, 0, 75, 110, { 4, 1, 0x11, 4, 1, 0x17, 3, 1, 0x17, 0 } },
-    { 2, 0, 89, 100, { 5, 1, 4, 4, 1, 0x11, 4, 1, 0x17, 0 } },
-    { 1, 0, 100, 100, { 7, 1, 4, 7, 1, 4, 7, 1, 0x11, 0 } },
-    { 4, 0, 50, 170, { 1, 2, 0x17, 1, 2, 0x17, 1, 2, 0x17, 0 } },
-    { 3, 0, 70, 125, { 3, 2, 0x11, 3, 2, 0x17, 3, 2, 0x17, 0 } },
-    { 3, 0, 79, 112, { 4, 2, 4, 4, 2, 0x11, 4, 2, 0x17, 0 } },
-    { 2, 0, 90, 100, { 5, 2, 4, 5, 2, 4, 4, 2, 0x11, 0 } },
-    { 1, 0, 100, 100, { 8, 2, 4, 8, 2, 4, 7, 2, 4, 0 } },
-    { 4, 0, 50, 170, { 2, 3, 0x17, 2, 3, 0x17, 1, 3, 0x17, 0 } },
-    { 3, 0, 70, 125, { 4, 3, 0x11, 4, 3, 4, 3, 3, 0x17, 0 } },
-    { 3, 0, 80, 110, { 5, 3, 4, 4, 3, 0x11, 4, 3, 0x17, 0 } },
-    { 2, 0, 92, 100, { 6, 3, 4, 5, 3, 4, 5, 3, 0x11, 0 } },
-    { 1, 0, 105, 96, { 9, 3, 4, 8, 3, 4, 8, 3, 0x11, 0 } },
-    { 4, 0, 20, 360, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 30, 320, { 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-    { 3, 0, 40, 300, { 3, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-    { 2, 0, 48, 240, { 5, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-    { 1, 0, 55, 200, { 7, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
-};
-
-#ifdef MUST_MATCH
-static const f64 gm_1884_sdata2_order_u32[1] = { U32_TO_F32 };
-#endif
-
-u8 gm_8018A160(u8 difficulty, u8 stage_slot)
-{
-    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)].stage_kind;
-}
-
-f32 gm_8018A188(u8 difficulty, u8 stage_slot)
-{
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-               .scale0_pct /
-           100.0F;
-}
-
-f32 gm_8018A1D8(u8 difficulty, u8 stage_slot)
-{
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-               .scale1_pct /
-           100.0F;
-}
-
-u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx)
-{
-    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-        .pad_6[idx * 3];
-}
-
-u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
-{
-    return gmTraining_ClassicStages[stage_slot + difficulty * 5]
-        .pad_6[arg2 * 3 + 1];
-}
-
-u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
-{
-    return gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-        .pad_6[2 + idx * 3];
-}
-
-f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)
-{
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-               .scale0_pct /
-           100.0F;
-}
-
-f32 gm_8018A314(u8 difficulty, u8 stage_slot)
-{
-    return (f32) gmTraining_ClassicStages[stage_slot + (difficulty * 5)]
-               .scale1_pct /
-           100.0F;
-}
-
-void fn_8018A364(int arg0_int)
-{
-    MatchEnd* arg0 = (MatchEnd*) arg0_int;
-    struct StartMeleeRules* rules;
-    gmm_x0_528_t* main_data;
-    UnkAllstarData* data;
-    u32 total_time;
-
-    rules = gm_GetRules();
-    data = &gm_80473A18;
-
-    if (fn_8017E318() > 0) {
-        ((u8_bits*) &arg0->_x448[2])->b3 = 1;
-    }
-
-    if (rules->x4_5) {
-        main_data = gmMainLib_8015CDE0();
-        total_time = data->x0.xC.x20 + gm_8016AEDC();
-        ((u8_bits*) &arg0->_x448[0])->b5 = 1;
-
-        if (data->x0.x0.cpu_level == 4) {
-            ((u8_bits*) &arg0->_x448[0])->b2 = 1;
-        }
-
-        if (total_time < 0x6270U) {
-            ((u8_bits*) &arg0->_x448[2])->b6 = 1;
-        } else if (total_time < 0x9AB0U) {
-            ((u8_bits*) &arg0->_x448[2])->b7 = 1;
-        }
-
-        if ((u32) data->x0.xC.x1C == 0U && arg0->player_standings[0].x44 == 0)
-        {
-            ((u8_bits*) &arg0->_x448[1])->b1 = 1;
-        }
-
-        if (data->x0.xC.xE != 0) {
-            ((u8_bits*) &arg0->_x448[2])->b5 = 1;
-        }
-
-        if (data->x0.xC.xF != 0) {
-            ((u8_bits*) &arg0->_x448[2])->b4 = 1;
-        }
-
-        if ((u32) (data->x0.xC.x1C + arg0->player_standings[0].x44) ==
-            (u32) Player_GetDamage(0))
-        {
-            ((u8_bits*) &arg0->_x448[0])->b1 = 1;
-        }
-
-        if (data->x0.xC.xD != 0) {
-            ((u8_bits*) &arg0->_x448[1])->b0 = 1;
-            return;
-        }
-
-        if (arg0->player_standings[0].stocks == main_data->stocks) {
-            ((u8_bits*) &arg0->_x448[1])->b2 = 1;
-        }
-    }
 }

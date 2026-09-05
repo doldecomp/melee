@@ -30,15 +30,15 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/types.h"
-#include "ftYoshi/ftYs_Guard.h"
+#include "ftYoshi/ftyoshiguard.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 091BC4 */ static void ftCo_80091BC4(Fighter* fp);
 /* 091E78 */ static void ftCo_80091E78(Fighter_GObj* gobj, float);

@@ -5,7 +5,7 @@
 
 #include "it/kinds/types.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 293D94 */ void it_80293D94(Item_GObj* gobj);
 /* 293DCC */ int it_80293DCC(Item_GObj* gobj);

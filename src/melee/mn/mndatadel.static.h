@@ -1,15 +1,16 @@
 #ifndef MELEE_MN_STATIC_DATADEL_H
 #define MELEE_MN_STATIC_DATADEL_H
 
-#include "baselib/forward.h"
-
-#include "baselib/jobj.h"
 #include "lb/lbspdisplay.h"
 
 #include "mn/forward.h"
 
 #include "mn/types.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/jobj.h>
 
 struct WarnCmnData {
     /* +00 */ u8 x0;

@@ -22,8 +22,8 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
-#include "ftGameWatch/ftGw_AttackAir.h"
-#include "ftLink/ftLk_AttackAir.h"
+#include "ftGameWatch/ftgamewatchattackair.h"
+#include "ftLink/ftlinkattackair.h"
 #include "it/it_26B1.h"
 
 #include <dolphin/mtx.h>

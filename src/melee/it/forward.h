@@ -2,7 +2,7 @@
 #define MELEE_IT_FORWARD_H
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct Article Article;
 typedef struct BobOmbRain BobOmbRain;

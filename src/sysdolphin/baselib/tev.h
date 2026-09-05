@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "baselib/objalloc.h"
-#include "baselib/state.h"
-#include "baselib/texp.h"
+#include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/texp.h>
 
 void HSD_RenderInitAllocData(void);
 HSD_ObjAllocData* HSD_RenderGetAllocData(void);

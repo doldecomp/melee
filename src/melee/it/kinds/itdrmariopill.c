@@ -3,11 +3,6 @@
 #include "placeholder.h"
 #include "platform.h"
 
-#include "baselib/forward.h"
-
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
@@ -16,7 +11,7 @@
 
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
-#include "ftDrMario/ftDr_Init.h"
+#include "ftDrMario/ftdrmario.h"
 
 #include "it/forward.h"
 
@@ -30,7 +25,12 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)

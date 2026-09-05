@@ -22,15 +22,15 @@
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-#include "ftYoshi/ftYs_SpecialN.h"
+#include "ftYoshi/ftyoshispecialn.h"
 
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

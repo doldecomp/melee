@@ -5,23 +5,6 @@
 #include "stddef.h"
 #include "toy.h"
 
-#include "baselib/archive.h"
-#include "baselib/cobj.h"
-#include "baselib/debug.h"
-#include "baselib/dobj.h"
-#include "baselib/fog.h"
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
-#include "baselib/lobj.h"
-#include "baselib/memory.h"
-#include "baselib/mobj.h"
-#include "baselib/random.h"
-#include "baselib/tobj.h"
-#include "baselib/wobj.h"
 #include "db/db.h"
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
@@ -47,6 +30,23 @@
 #include "ty/types.h"
 
 #include <math.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 static size_t const _tyDisplay_804D6F10_len = 300;
 
@@ -620,8 +620,9 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     if (count > 1) {
         s32 n2;
         s32 pivot;
-        TyDspGrid* base = grid;
+        TyDspGrid* base;
         n2 = count - 1;
+        base = grid;
         if (n2 > 0) {
             struct {
                 TyDspPos tmp2;
@@ -1005,10 +1006,10 @@ void _tyDisplay_80319994(s32 arg0)
         grid->x0C_max_x = 3.5f;
 
         {
-            s32 ring;
             s32 i;
             s32 col;
             s32 row;
+            s32 ring;
 
             cur = grid;
             row = 0;

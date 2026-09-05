@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "baselib/class.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "baselib/forward.h"
+#include <sysdolphin/baselib/class.h>
 
 #define hash(s) (s % 0x65)
 

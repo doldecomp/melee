@@ -34,12 +34,12 @@
 #include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
-#include "ftGameWatch/ftGw_AttackS4.h"
-#include "ftNess/ftNs_AttackS4.h"
-#include "ftPeach/ftPe_AttackS4.h"
+#include "ftGameWatch/ftgamewatchattacks4.h"
+#include "ftNess/ftnessattacks4.h"
+#include "ftPeach/ftpeachattacks4.h"
 #include "it/it_26B1.h"
 
-#include <baselib/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
