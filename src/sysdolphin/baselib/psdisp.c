@@ -576,8 +576,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
                 p = buf;
                 count = 0;
             }
-            last = q;
-            q = q->next;
+            q = (last = q)->next;
         } else {
             break;
         }
