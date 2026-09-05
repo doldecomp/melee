@@ -127,12 +127,12 @@ volatile const f64 mn_804DBE38 = 4503599627370496.0;
 const JObjIndices mn_804DBE40 = { 0x02030506 };
 volatile const f32 mn_804DBE44[1] = { 0.0f };
 const JObjIndices mn_804DBE48 = { 0x02030506 };
-f32 mn_804DBE4C = -9.5f;
-f32 mn_804DBE50 = 8.0f;
-f32 mn_804DBE54 = 17.0f;
-f32 mn_804DBE58 = 364.68332f;
-f32 mn_804DBE5C = 76.77544f;
-f32 mn_804DBE60 = 0.0521f;
+const f32 mn_804DBE4C = -9.5f;
+const f32 mn_804DBE50 = 8.0f;
+const f32 mn_804DBE54 = 17.0f;
+const f32 mn_804DBE58 = 364.68332f;
+const f32 mn_804DBE5C = 76.77544f;
+const f32 mn_804DBE60 = 0.0521f;
 volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
@@ -851,7 +851,7 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_GObj_SetupProc(gobj, fn_80232F44, 0);
     HSD_JObjAddAnimAll(root_jobj, desc->animjoint, desc->matanim_joint,
                        desc->shapeanim_joint);
-    HSD_JObjReqAnimAll(root_jobj, mn_804DBE44[0]);
+    HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
 
     user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
@@ -928,7 +928,7 @@ HSD_GObj* mn_80233218(MenuState state)
             cursor_jobj = HSD_JObjLoadJoint(desc->joint);
             HSD_JObjAddAnimAll(cursor_jobj, desc->animjoint,
                                desc->matanim_joint, desc->shapeanim_joint);
-            HSD_JObjReqAnimAll(cursor_jobj, mn_804DBE44[0]);
+            HSD_JObjReqAnimAll(cursor_jobj, 0.0f);
             HSD_JObjAnimAll(cursor_jobj);
 
             lb_8001204C(cursor_jobj, jobj_parts, jobj_map, 17);
@@ -992,7 +992,7 @@ HSD_GObj* mn_80233218(MenuState state)
                 value_jobj = HSD_JObjLoadJoint(desc->joint);
                 HSD_JObjAddAnimAll(value_jobj, desc->animjoint,
                                    desc->matanim_joint, desc->shapeanim_joint);
-                HSD_JObjReqAnimAll(value_jobj, mn_804DBE44[0]);
+                HSD_JObjReqAnimAll(value_jobj, 0.0f);
                 HSD_JObjAnimAll(value_jobj);
 
                 for (j = 0; j < sub_count_ptr[i]; j++) {
