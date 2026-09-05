@@ -632,6 +632,39 @@ static inline void psReadFloat(u8** stream)
     *stream = p;
 }
 
+static inline HSD_Particle* psSpawnChild(HSD_Particle** head, int linkNo,
+                                         int bank, int idx)
+{
+    HSD_Particle* child;
+    HSD_PSCmdList* cl;
+    HSD_PSTexGroup* tg;
+    int palflag;
+    if (linkNo >= 8) {
+        child = NULL;
+    } else if (bank >= 65) {
+        child = NULL;
+    } else if (idx >= psCmdListArray[bank]) {
+        child = NULL;
+    } else {
+        cl = ptclref_804D0E5C[bank][idx];
+        if (cl == NULL) {
+            child = NULL;
+        } else {
+            tg = psTexGroupArray[bank][cl->texGroup];
+            if (tg != NULL) {
+                palflag = tg->palflag;
+            } else {
+                palflag = 0;
+            }
+            child = psGenerateParticle0(
+                head, linkNo, bank, cl->kind, cl->texGroup, cl->cmdList,
+                cl->life, palflag, 0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
+                cl->size, cl->grav, cl->fric, NULL, 0);
+        }
+    }
+    return child;
+}
+
 void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 {
     f32 val;
@@ -643,12 +676,12 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    UNUSED u8 pad_top[80];
+    UNUSED u8 pad_top[88];
     volatile f32 sqrt_res;
     UNUSED u8 pad_mid[144];
     volatile f32 vel_res;
     volatile f32 dist_res;
-    UNUSED u8 pad_bot[124];
+    UNUSED u8 pad_bot[116];
 
 #define fval (*(f32*) &hsd_804D78D0)
 #define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
@@ -950,30 +983,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     idx += pc[1];
                     pc += 2;
 
-                    if (linkNo >= 8) {
-                        child = NULL;
-                    } else if (bank >= 65) {
-                        child = NULL;
-                    } else if (idx >= psCmdListArray[bank]) {
-                        child = NULL;
-                    } else {
-                        cl = ptclref_804D0E5C[bank][idx];
-                        if (cl == NULL) {
-                            child = NULL;
-                        } else {
-                            tg = psTexGroupArray[bank][cl->texGroup];
-                            if (tg != NULL) {
-                                palflag = tg->palflag;
-                            } else {
-                                palflag = 0;
-                            }
-                            child = psGenerateParticle0(
-                                &pp->next, linkNo, bank, cl->kind,
-                                cl->texGroup, cl->cmdList, cl->life, palflag,
-                                0.0F, 0.0F, 0.0F, cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric, NULL, 0);
-                        }
-                    }
+                    child = psSpawnChild(&pp->next, linkNo, bank, idx);
                     c = child;
                     (void) c;
                     if (child != NULL) {
@@ -1266,7 +1276,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
             case 0xA7:
                 /* Conditional kill */
                 {
-                    u8 threshold = *pc++;
+                    int threshold = *pc++;
                     if (threshold >= (s32) (100.0F * HSD_Randf())) {
                         pp->life = 1;
                         goto exit_loop;
@@ -1593,8 +1603,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         vel_res = (f32) (vel_mag_sq * guess);
                         vel_mag_sq = vel_res;
                     }
-                    dist_sq = dx * dx + dy * dy;
-                    dist_sq += dz * dz;
+                    dist_sq = dx * dx + dy * dy + dz * dz;
                     if (dist_sq == 0.0F) {
                         break;
                     }
@@ -2812,6 +2821,7 @@ exit_loop:
 do_life:
     /* Life countdown */
     if (--pp->life == 0) {
+    delete_particle:
         /* Call hookDelete if available */
         if (pp->gen != NULL && pp->gen->userfunc != NULL &&
             pp->gen->userfunc->hookDelete != NULL)
@@ -2856,8 +2866,7 @@ do_life:
         /* Tornado rotational physics */
         HSD_Generator* gp = pp->gen;
         f32 sinA, sinB, cosA, cosB;
-        f32 t0, t1, t2, t3, t4;
-        f32 d, e, nd, vz;
+        f32 d, nd, e, vz;
         f32 R;
 
         sinA = sinf(pp->grav);
@@ -2867,9 +2876,7 @@ do_life:
 
         pp->vel.z += gp->aux.tornado.vel;
 
-        if ((R = gp->radius) < particle_zero) {
-            R = -R;
-        }
+        R = gp->radius < particle_zero ? -gp->radius : gp->radius;
         {
             f32 ang;
             if ((ang = gp->angle) < particle_zero) {
@@ -2885,22 +2892,11 @@ do_life:
         nd = -d;
         vz = pp->vel.z;
 
-        /* Rotation matrix application */
-        t0 = vz * sinB;
-        t1 = e * cosA;
-        t2 = nd * sinA;
-        t3 = d * cosB + t0;
-        t0 = vz * sinA;
-        t1 = sinB * t2 + t1;
-        pp->pos.x = gp->pos.x + t3;
-        t2 = nd * cosA;
-        t4 = e * sinA;
-        t1 = cosB * t0 + t1;
-        t0 = vz * cosA;
-        t4 = sinB * t2 - t4;
-        pp->pos.y = gp->pos.y + t1;
-        t4 = cosB * t0 + t4;
-        pp->pos.z = gp->pos.z + t4;
+        pp->pos.x = gp->pos.x + (d * cosB + vz * sinB);
+        pp->pos.y =
+            gp->pos.y + (cosB * (vz * sinA) + (sinB * (nd * sinA) + e * cosA));
+        pp->pos.z =
+            gp->pos.z + (cosB * (vz * cosA) + (sinB * (nd * cosA) - e * sinA));
     } else {
         /* Simple physics */
         if (pp->kind & 1) {
@@ -2918,10 +2914,10 @@ do_life:
 
     /* JObj attachment - update JObj position to match particle */
     if (pp->kind & 0x8000) {
-        s32 jobj_idx;
+        s32 jobj_idx = (pp->kind >> 12) & 7;
 
         /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx = (pp->kind >> 12) & 7] == NULL) {
+        if (hsd_804D08E8[jobj_idx] == NULL) {
             HSD_JObj* new_jobj = HSD_JObjAlloc();
             if (new_jobj != NULL) {
                 hsd_8039CF4C(jobj_idx + 1, new_jobj);
@@ -2933,7 +2929,7 @@ do_life:
             HSD_JObj* jobj;
 
             if ((jobj = hsd_804D08E8[jobj_idx]) != NULL) {
-                HSD_JObjSetupMatrix(jobj);
+                HSD_JObjSetupMatrix(hsd_804D08E8[jobj_idx]);
 
                 jobj = hsd_804D08E8[jobj_idx];
                 HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
@@ -2951,7 +2947,7 @@ do_life:
     if (pp->callback != NULL) {
         int result = pp->callback(pp);
         if (result == -1) {
-            goto do_life;
+            goto delete_particle;
         }
     }
 
