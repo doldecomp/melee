@@ -494,14 +494,22 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 jobj18 = data2->jobjs[18];
                 spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
                 jobj17 = data2->jobjs[17];
-                HSD_JObjSetTranslateX(cursor_jobj,
-                                      HSD_JObjGetTranslationX(jobj17));
-                HSD_JObjSetTranslateY(
-                    cursor_jobj,
-                    (spacing * (f32) cursor_row) +
-                        HSD_JObjGetTranslationY(data2->jobjs[17]));
-                HSD_JObjSetTranslateZ(
-                    cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
+                {
+                    f32 x = HSD_JObjGetTranslationX(jobj17);
+                    jobj = cursor_jobj;
+                    HSD_JObjSetTranslateX(jobj, x);
+                }
+                {
+                    f32 y = (spacing * (f32) cursor_row) +
+                            HSD_JObjGetTranslationY(data2->jobjs[17]);
+                    jobj = cursor_jobj;
+                    HSD_JObjSetTranslateY(jobj, y);
+                }
+                {
+                    f32 z = HSD_JObjGetTranslationZ(data2->jobjs[17]);
+                    jobj = cursor_jobj;
+                    HSD_JObjSetTranslateZ(jobj, z);
+                }
             }
         } else if (GetNameCount() > 8 && data->scroll_offset != 0) {
             sfxMove();
