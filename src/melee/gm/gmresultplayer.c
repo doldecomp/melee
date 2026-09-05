@@ -1541,14 +1541,14 @@ static inline int get_big_loser(int slot, MatchEnd* match_end)
     return match_end->player_standings[slot].is_big_loser;
 }
 
-static inline HSD_JObj** get_result_jobjs(ResultsDisplayLayout* disp)
+static inline HSD_JObj** get_result_jobjs(void)
 {
-    return disp->jobjs;
+    return lbl_8046E39C;
 }
 
-static inline u8* get_player_flags(ResultsDisplayLayout* disp)
+static inline u8* get_player_flags(void)
 {
-    return disp->state.player_flags;
+    return lbl_8046E3AC.player_flags;
 }
 
 static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
@@ -1563,32 +1563,31 @@ static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
 }
 
 static inline HSD_ImageDesc*
-fn_80179990_get_player_img1(int slot, ResultsDisplayLayout* disp)
+fn_80179990_get_player_img1(int slot)
 {
-    HSD_ImageDesc* image_desc = disp->player_img1;
+    HSD_ImageDesc* image_desc = lbl_8046E1B0.player_img1;
     return &image_desc[slot];
 }
 
 static inline HSD_ImageDesc*
-fn_80179990_copy_player_image(ResultsDisplayLayout* disp, int slot, int lookup)
+fn_80179990_copy_player_image(int slot, int lookup)
 {
-    HSD_ImageDesc* image_desc = disp->player_img2;
+    HSD_ImageDesc* image_desc = lbl_8046E1B0.player_img2;
     HSD_ImageDesc* desc = &image_desc[slot];
 
     HSD_ImageDescCopyFromEFB(
         desc,
-        disp->state.scissor_x[lookup] +
-            (0x140 - ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2),
-        disp->state.scissor_y[lookup] +
-            (0xF4 - ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) * 2),
+        lbl_8046E3AC.scissor_x[lookup] +
+            (0x140 - ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] / 4) * 2),
+        lbl_8046E3AC.scissor_y[lookup] +
+            (0xF4 - ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] / 2) * 2),
         0, 0);
     return desc;
 }
 
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
-    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
-    MatchEnd* match_end = &disp->state.match_end;
+    MatchEnd* match_end = &lbl_8046E3AC.match_end;
     HSD_ImageDesc* desc;
     HSD_CObj* cobj;
     HSD_JObj* child_jobj;
@@ -1608,7 +1607,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     }
 
     if (lookup != 0) {
-        HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
+        HSD_JObj* root = (HSD_JObj*) lbl_8046E38C[arg2]->hsd_obj;
         child_jobj = root == NULL ? NULL : root->child;
     }
 
@@ -1619,70 +1618,70 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             Camera_800313E0(arg0, 0);
 
             {
-                desc = fn_80179990_copy_player_image(disp, arg2, lookup);
+                desc = fn_80179990_copy_player_image(arg2, lookup);
 
-                if (!disp->state.x0_4) {
+                if (!lbl_8046E3AC.x0_4) {
                     s32 x_offset =
-                        ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) * 2;
+                        ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] / 4) * 2;
                     HSD_ImageDescCopyFromEFB(
-                        fn_80179990_get_player_img1(arg2, disp),
+                        fn_80179990_get_player_img1(arg2),
                         0x140 - x_offset,
                         0xF4 -
-                            ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) *
+                            ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] / 2) *
                                 2,
                         0, 0);
                 }
 
                 HSD_CObjEraseScreen(cobj, 1, 1, 1);
-                HSD_ImageDescCopyFromEFB(&disp->shared_img, 0x10E, 0x7C, 1, 0);
+                HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C, 1, 0);
                 HSD_CObjEndCurrent();
 
-                if (!disp->state.x0_4) {
-                    HSD_ImageDesc* image_desc1 = disp->player_img1;
+                if (!lbl_8046E3AC.x0_4) {
+                    HSD_ImageDesc* image_desc1 = lbl_8046E1B0.player_img1;
                     child_jobj->u.dobj->mobj->tobj->imagedesc =
                         &image_desc1[arg2];
                 }
 
-                if (disp->state.x0_4) {
-                    HSD_JObj* jobj2 = disp->jobjs[arg2];
-                    jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
+                if (lbl_8046E3AC.x0_4) {
+                    lbl_8046E39C[arg2]->u.dobj->next->mobj->tobj->imagedesc =
+                        desc;
                 }
             }
         } else {
             HSD_GObj* entity = Player_GetEntity(arg2);
             if (ftLib_800876B4(entity) == 0) {
-                u8* player_flags = &get_player_flags(disp)[arg2];
-                if (*player_flags == 0 && disp->state.x0_6) {
+                u8* player_flags = &get_player_flags()[arg2];
+                if (*player_flags == 0 && lbl_8046E3AC.x0_6) {
                     fn_80179990_set_erase_color(match_end, arg2);
                     HSD_CObjEraseScreen(cobj, 1, 0, 0);
                     Camera_800313E0(arg0, 0);
 
                     {
-                        HSD_ImageDesc* image_desc = disp->player_img2;
+                        HSD_ImageDesc* image_desc = lbl_8046E1B0.player_img2;
                         desc = &image_desc[arg2];
                         HSD_ImageDescCopyFromEFB(
                             desc,
-                            disp->state.scissor_x[lookup] +
+                            lbl_8046E3AC.scissor_x[lookup] +
                                 (0x140 -
-                                 ((s32) ((u16*) disp->state.dim_w1)[lookup] /
+                                 ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] /
                                   4) *
                                      2),
-                            disp->state.scissor_y[lookup] +
+                            lbl_8046E3AC.scissor_y[lookup] +
                                 (0xF4 -
-                                 ((s32) ((u16*) disp->state.dim_h1)[lookup] /
+                                 ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] /
                                   2) *
                                      2),
                             0, 0);
 
                         HSD_CObjEraseScreen(cobj, 1, 1, 1);
-                        HSD_ImageDescCopyFromEFB(&disp->shared_img, 0x10E,
+                        HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E,
                                                  0x7C, 1, 0);
                         HSD_CObjEndCurrent();
 
                         *player_flags = 1;
                         {
-                            HSD_JObj* jobj2 = get_result_jobjs(disp)[arg2];
-                            jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
+                            get_result_jobjs()[arg2]
+                                ->u.dobj->next->mobj->tobj->imagedesc = desc;
                         }
                     }
                 }
