@@ -1930,7 +1930,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_397E.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3982.c"),
             Object(
-                Linkable,
+                Matching,
                 "sysdolphin/baselib/particle.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
