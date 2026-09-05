@@ -1,12 +1,12 @@
 #include "gmgiant.h"
 
+#include <melee/if/if_2FD9.h>
+
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
 #include "gmvsmelee.h"
 #include "types.h"
-
-#include <melee/if/if_2FD9.h>
 
 GameModeState gm_Mode_GiantVs_States[] = {
     {

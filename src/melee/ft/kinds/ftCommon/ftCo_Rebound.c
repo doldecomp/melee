@@ -1,7 +1,5 @@
 #include "ftCo_Rebound.h"
 
-#include "types.h"
-
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_084E.h>
@@ -10,6 +8,8 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "types.h"
 
 /* 099E44 */ static void ftCo_80099E44(Fighter_GObj* gobj);
 

@@ -1,8 +1,8 @@
 #include "ftdevice.h"
 
-#include "inlines.h"
-
 #include <sysdolphin/baselib/debug.h>
+
+#include "inlines.h"
 
 /// @remarks MWCC lays out unreferenced .bss objects in reverse declaration
 /// order after referenced objects, so ft_80459A8C must be declared

@@ -8,11 +8,6 @@
 
 #include "lb_0219.h"
 
-#include "lb_013B.h"
-#include "lbarchive.h"
-#include "lbbgflash.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <dolphin/gx/GXStruct.h>
@@ -22,6 +17,11 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/objalloc.h>
+
+#include "lb_013B.h"
+#include "lbarchive.h"
+#include "lbbgflash.h"
+#include "types.h"
 
 HSD_ObjAllocData lbl_804336A0;
 

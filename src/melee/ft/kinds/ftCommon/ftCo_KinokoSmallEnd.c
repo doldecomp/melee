@@ -1,7 +1,5 @@
 #include "ftCo_KinokoSmallEnd.h"
 
-#include "forward.h"
-
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
@@ -13,6 +11,8 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
 
 /* 0D2530 */ static void fn_800D2530(Fighter_GObj* gobj);
 

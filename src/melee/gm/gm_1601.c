@@ -1,13 +1,5 @@
 #include "gm_1601.h"
 
-#include "forward.h"
-#include "gm_1601.static.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmstamina.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -40,6 +32,14 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
+
+#include "forward.h"
+#include "gm_1601.static.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmstamina.h"
+#include "types.h"
 
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 

@@ -1,9 +1,5 @@
 #include "ftmarsspecialn.h"
 
-#include "forward.h"
-#include "ftmars.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -26,6 +22,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftmars.h"
+#include "types.h"
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {

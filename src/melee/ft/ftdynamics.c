@@ -1,13 +1,6 @@
 #include "ftdynamics.h"
 
-#include "forward.h"
-#include "ftcoll.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftKirby/ftkirby.h"
 
 #include <stddef.h>
 #include <melee/gr/ground.h>
@@ -16,6 +9,12 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "ftcoll.h"
+#include "inlines.h"
+#include "kinds/ftKirby/ftkirby.h"
+#include "types.h"
 
 /* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
                                        FigaTree*);

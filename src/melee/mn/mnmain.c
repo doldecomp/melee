@@ -1,25 +1,5 @@
 #include "mnmain.h"
 
-#include "forward.h"
-#include "inlines.h"
-#include "mncount.h"
-#include "mndatadel.h"
-#include "mndeflicker.h"
-#include "mndiagram.h"
-#include "mnevent.h"
-#include "mngallery.h"
-#include "mnhyaku.h"
-#include "mninfo.h"
-#include "mninfobonus.h"
-#include "mnlanguage.h"
-#include "mnmainrule.h"
-#include "mnname.h"
-#include "mnsnap.h"
-#include "mnsound.h"
-#include "mnsoundtest.h"
-#include "mnvibration.h"
-#include "types.h"
-
 #include <melee/gm/forward.h>
 
 #include <math.h>
@@ -50,6 +30,26 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>
+
+#include "forward.h"
+#include "inlines.h"
+#include "mncount.h"
+#include "mndatadel.h"
+#include "mndeflicker.h"
+#include "mndiagram.h"
+#include "mnevent.h"
+#include "mngallery.h"
+#include "mnhyaku.h"
+#include "mninfo.h"
+#include "mninfobonus.h"
+#include "mnlanguage.h"
+#include "mnmainrule.h"
+#include "mnname.h"
+#include "mnsnap.h"
+#include "mnsound.h"
+#include "mnsoundtest.h"
+#include "mnvibration.h"
+#include "types.h"
 
 /* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);
 

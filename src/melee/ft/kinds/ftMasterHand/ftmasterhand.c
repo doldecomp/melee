@@ -1,5 +1,15 @@
 #include "ftmasterhand.h"
 
+#include <placeholder.h>
+
+#include <dolphin/mtx.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
+
 #include "ftmasterhandbackairplane1.h"
 #include "ftmasterhandbackairplane2.h"
 #include "ftmasterhandbackairplane3.h"
@@ -29,16 +39,6 @@
 #include "ftmasterhandwait12.h"
 #include "ftmasterhandwalk.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include <dolphin/mtx.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A690 */ UnkCostumeStruct ftMh_CostumeList[1];
 

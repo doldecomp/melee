@@ -1,7 +1,3 @@
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -23,6 +19,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 
 char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
 char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";

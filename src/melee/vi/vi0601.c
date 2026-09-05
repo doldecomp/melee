@@ -1,7 +1,5 @@
 #include "vi0601.h"
 
-#include "vi.h"
-
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -27,6 +25,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "vi.h"
 
 static SceneDesc* un_804D6FB0;
 static GXColor erase_colors_vi0601;

@@ -1,6 +1,3 @@
-#include "ftkirby.h"
-#include "inlines.h"
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -20,6 +17,9 @@
 #include <melee/it/kinds/itfoxlaser.h>
 #include <melee/it/kinds/itnesspkflash.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "ftkirby.h"
+#include "inlines.h"
 
 static u32 ftKb_Init_804D3DB8[] = {
     0x0001AE17,

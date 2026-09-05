@@ -1,7 +1,3 @@
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -23,6 +19,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 
 void fn_800F9260(HSD_GObj*);
 

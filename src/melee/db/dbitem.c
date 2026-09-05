@@ -1,6 +1,3 @@
-#include "db.h"
-#include "dbitem.static.h"
-
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
@@ -14,6 +11,9 @@
 #include <melee/it/types.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "db.h"
+#include "dbitem.static.h"
 
 void fn_SetupItemAndPokemonMenu(void)
 {

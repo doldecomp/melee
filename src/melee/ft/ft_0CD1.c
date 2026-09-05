@@ -9,7 +9,6 @@
 #include "ftcommon.h"
 #include "ftswing.h"
 #include "inlines.h"
-
 #include "kinds/ftCommon/ftCo_Fall.h"
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,

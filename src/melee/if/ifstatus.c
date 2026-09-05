@@ -1,11 +1,5 @@
 #include "ifstatus.h"
 
-#include "if_2F72.h"
-#include "ifall.h"
-#include "ifcoget.h"
-#include "ifstock.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/gm/gm_unsplit.h>
@@ -26,6 +20,12 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "if_2F72.h"
+#include "ifall.h"
+#include "ifcoget.h"
+#include "ifstock.h"
+#include "types.h"
 
 typedef struct FlagsX {
     u32 b80 : 1;

@@ -1,12 +1,5 @@
 #include "ftpikachu.h"
 
-#include "forward.h"
-#include "ftpikachuspecialhi.h"
-#include "ftpikachuspeciallw.h"
-#include "ftpikachuspecialn.h"
-#include "ftpikachuspecials.h"
-#include "types.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
@@ -14,6 +7,13 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftpikachuspecialhi.h"
+#include "ftpikachuspeciallw.h"
+#include "ftpikachuspecialn.h"
+#include "ftpikachuspecials.h"
+#include "types.h"
 
 /* 459F28 */ UnkCostumeStruct ftPk_CostumeList[4];
 

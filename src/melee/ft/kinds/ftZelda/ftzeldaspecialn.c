@@ -1,8 +1,5 @@
 #include "ftzeldaspecialn.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -19,6 +16,9 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "types.h"
 
 void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {

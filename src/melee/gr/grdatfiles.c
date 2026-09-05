@@ -1,8 +1,5 @@
 #include "grdatfiles.h"
 
-#include "ground.h"
-#include "types.h"
-
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbheap.h>
@@ -10,6 +7,9 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/psstructs.h>
+
+#include "ground.h"
+#include "types.h"
 
 /* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
 /* 1C62B4 */ static UnkArchiveStruct* grDatFiles_801C62B4(void);

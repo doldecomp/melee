@@ -1,9 +1,5 @@
 #include "mnstagesw.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnruleplus.h"
-
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -20,6 +16,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnruleplus.h"
 
 #define NUM_STAGES 29
 

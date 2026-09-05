@@ -1,14 +1,5 @@
 #include "gm_16AE.h"
 
-#include "forward.h"
-#include "gm_16AE.static.h"
-#include "gm_1884.h"
-#include "gm_18A1.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmmultiman.h"
-#include "gmpause.h"
-
 #include <string.h>
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
@@ -44,6 +35,15 @@
 #include <melee/sfx/crowdsfx.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "forward.h"
+#include "gm_16AE.static.h"
+#include "gm_1884.h"
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmmultiman.h"
+#include "gmpause.h"
 
 lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void)
 {

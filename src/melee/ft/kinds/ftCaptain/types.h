@@ -1,12 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
-#include "ftCaptain/forward.h" // IWYU pragma: export
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+
+#include "ftCaptain/forward.h" // IWYU pragma: export
 
 struct ftCaptain_FighterVars {
     /* 0x222C */ u32 during_specials_start;

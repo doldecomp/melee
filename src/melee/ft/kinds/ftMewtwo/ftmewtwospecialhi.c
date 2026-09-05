@@ -1,8 +1,5 @@
 #include "ftmewtwospecialhi.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -27,6 +24,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "types.h"
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {

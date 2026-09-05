@@ -1,11 +1,5 @@
 #include "gmevent.h"
 
-#include "gm_1601.h"
-#include "gm_16F1.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/pl/forward.h>
 
@@ -27,6 +21,12 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "gm_1601.h"
+#include "gm_16F1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>

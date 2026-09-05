@@ -1,7 +1,3 @@
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmregclear.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/gr/ground.h>
@@ -22,6 +18,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
 
 struct lbl_80472E48_t {
     /* 0x00 */ u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;

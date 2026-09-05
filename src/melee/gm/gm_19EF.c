@@ -1,11 +1,5 @@
 #include "gm_19EF.h"
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-
 #include <dolphin/pad.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
@@ -25,6 +19,12 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "gm_1601.h"
+#include "gm_1A36.h"
+#include "gm_1A3F.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
 
 struct unk_jobj_node {
     HSD_JObj* x0;

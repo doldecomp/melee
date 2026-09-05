@@ -1,8 +1,3 @@
-#include "ifall.h"
-#include "ifcoget.h"
-#include "textdraw.h"
-#include "textlib.h"
-
 #include <dolphin/mtx.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lb_00B0.h>
@@ -16,6 +11,11 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "ifall.h"
+#include "ifcoget.h"
+#include "textdraw.h"
+#include "textlib.h"
 
 /* 3F9E38 */ static HSD_WObjDesc eyepos = {
     NULL,

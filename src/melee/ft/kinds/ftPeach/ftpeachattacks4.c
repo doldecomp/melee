@@ -1,7 +1,5 @@
 #include "ftpeachattacks4.h"
 
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -13,6 +11,8 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "types.h"
 
 void ftPe_AttackS4_Enter(HSD_GObj* gobj)
 {

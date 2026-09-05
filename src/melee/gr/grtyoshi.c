@@ -1,9 +1,3 @@
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
@@ -12,6 +6,12 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 /* 223B48 */ static void grTYoshi_OnDemoInit(bool);
 /* 223B4C */ static void grTYoshi_OnInit(void);

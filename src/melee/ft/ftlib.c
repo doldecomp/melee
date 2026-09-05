@@ -1,21 +1,5 @@
 #include "ftlib.h"
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ft_0877.h"
-#include "ft_0D4D.h"
-#include "ftanim.h"
-#include "ftchangeparam.h"
-#include "ftcommon.h"
-#include "ftdata.h"
-#include "ftmetal.h"
-#include "ftparts.h"
-
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftGameWatch/ftgamewatch.h"
-#include "kinds/ftKirby/ftkirby.h"
-
 #include <melee/it/forward.h>
 
 #include <melee/cm/camera.h>
@@ -32,6 +16,21 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/rumble.h>
+
+#include "fighter.h"
+#include "forward.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0D4D.h"
+#include "ftanim.h"
+#include "ftchangeparam.h"
+#include "ftcommon.h"
+#include "ftdata.h"
+#include "ftmetal.h"
+#include "ftparts.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftGameWatch/ftgamewatch.h"
+#include "kinds/ftKirby/ftkirby.h"
 
 s32 ftLib_800860C4(void)
 {

@@ -1,10 +1,5 @@
 #include "grzebesroute.h"
 
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -17,6 +12,11 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 struct grZebesRoute_YakumonoParam {
     int camera_timer;

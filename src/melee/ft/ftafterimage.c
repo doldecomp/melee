@@ -3,12 +3,7 @@
 
 #include "ftafterimage.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftLink/types.h"
-#include "kinds/ftMars/types.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
@@ -19,6 +14,10 @@
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/state.h>
+
+#include "inlines.h"
+#include "kinds/ftLink/types.h"
+#include "kinds/ftMars/types.h"
 
 typedef struct AfterimageVtx {
     f32 x, y, z;

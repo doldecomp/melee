@@ -1,13 +1,5 @@
 #include "ftCo_CargoWait.h"
 
-#include "ftCo_09C4.h"
-#include "ftCo_CargoFall.h"
-#include "ftCo_CargoJump.h"
-#include "ftCo_CargoThrow.h"
-#include "ftCo_CargoTurn.h"
-#include "ftCo_CargoWalk.h"
-#include "ftCo_Shouldered.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -16,6 +8,14 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_09C4.h"
+#include "ftCo_CargoFall.h"
+#include "ftCo_CargoJump.h"
+#include "ftCo_CargoThrow.h"
+#include "ftCo_CargoTurn.h"
+#include "ftCo_CargoWalk.h"
+#include "ftCo_Shouldered.h"
 
 bool ftCo_8009B4D0(Fighter_GObj* gobj)
 {

@@ -1,8 +1,5 @@
 #include "ftcrazyhandrockcrush0.h"
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -19,6 +16,9 @@
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 
 static inline float my_sqrtf(float x)
 {

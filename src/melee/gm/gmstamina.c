@@ -1,11 +1,5 @@
 #include "gmstamina.h"
 
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmvsmelee.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/lbaudio_ax.h>
@@ -13,6 +7,12 @@
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
 GameModeState gm_Mode_StaminaVs_States[] = {
     {

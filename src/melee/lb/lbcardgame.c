@@ -1,10 +1,5 @@
 #include "lbcardgame.h"
 
-#include "lbarchive.h"
-#include "lbcardgame.static.h"
-#include "lbcardnew.h"
-#include "lblanguage.h"
-
 #include <dolphin/card.h> // IWYU pragma: keep
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
@@ -16,6 +11,11 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "lbarchive.h"
+#include "lbcardgame.static.h"
+#include "lbcardnew.h"
+#include "lblanguage.h"
 
 #define _p(x) (lb_80433318.x)
 

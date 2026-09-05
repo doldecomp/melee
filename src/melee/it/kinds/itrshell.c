@@ -1,7 +1,5 @@
 #include "itrshell.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/ef/efasync.h>
@@ -17,6 +15,8 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 typedef struct itRShell_Attrs {
     float x0;

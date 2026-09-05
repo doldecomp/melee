@@ -1,8 +1,5 @@
 #include "ftseakspecials.h"
 
-#include "ftseak.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -27,6 +24,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "ftseak.h"
+#include "types.h"
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((float*) p_ftCommonData)

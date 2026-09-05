@@ -1,11 +1,5 @@
 #include "ftCo_AttackDash.h"
 
-#include "forward.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -19,6 +13,12 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+#include "types.h"
 
 /* 08B498 */ static void decideFighter(Fighter_GObj* gobj);
 /* 08B4D4 */ static void doEnter(Fighter_GObj* gobj);

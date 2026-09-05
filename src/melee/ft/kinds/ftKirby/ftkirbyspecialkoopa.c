@@ -1,5 +1,3 @@
-#include "ftkirby.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/cm/camera.h>
@@ -16,6 +14,8 @@
 #include <melee/it/kinds/itkoopaflame.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ftkirby.h"
 
 enum_t ftKb_Init_803CB540[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,

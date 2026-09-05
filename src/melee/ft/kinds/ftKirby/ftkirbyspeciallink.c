@@ -1,6 +1,3 @@
-#include "ftkirby.h"
-#include "inlines.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -14,6 +11,9 @@
 #include <melee/it/kinds/itlinkarrow.h>
 #include <melee/it/kinds/itlinkbow.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "ftkirby.h"
+#include "inlines.h"
 
 ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 {

@@ -1,9 +1,5 @@
 #include "mnhyaku.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
-
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 
@@ -14,6 +10,10 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/memory.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 
 static HSD_GObj* mnHyaku_804D6C58;
 

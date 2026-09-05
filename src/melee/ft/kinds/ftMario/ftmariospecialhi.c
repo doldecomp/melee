@@ -1,8 +1,5 @@
 #include "ftmariospecialhi.h"
 
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -17,6 +14,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "inlines.h"
+#include "types.h"
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
 {

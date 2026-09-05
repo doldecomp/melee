@@ -1,7 +1,5 @@
 #include "itfoods.h"
 
-#include "types.h"
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -10,6 +8,8 @@
 #include <melee/it/itspawn.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "types.h"
 
 /* 28FC84 */ bool itFoods_UnkMotion0_Anim(Item_GObj* arg0);
 /* 28FC8C */ void itFoods_UnkMotion0_Phys(Item_GObj* arg0);

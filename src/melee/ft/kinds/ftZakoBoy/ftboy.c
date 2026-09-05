@@ -1,10 +1,10 @@
 #include "ftboy.h"
 
-#include "types.h"
-
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
+
+#include "types.h"
 
 char ftBo_Init_DatFilename[] = "PlBo.dat";
 char ftBo_Init_DataName[] = "ftDataBoy";

@@ -1,7 +1,5 @@
 #include "itpeachtoadspore.h"
 
-#include "inlines.h"
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -14,6 +12,8 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F7548[] = { {
     0,

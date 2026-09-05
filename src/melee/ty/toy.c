@@ -1,8 +1,5 @@
 #include "toy.h"
 
-#include "tylist.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/if/forward.h>
@@ -56,6 +53,9 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "tylist.h"
+#include "types.h"
 
 typedef struct ToyDisplayList {
     /* 0x000 */ ToyListEntry entries[13];

@@ -1,13 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
-#include "ftMasterHand/forward.h" // IWYU pragma: export
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+
+#include "ftMasterHand/forward.h" // IWYU pragma: export
 
 struct ftMasterhand_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;

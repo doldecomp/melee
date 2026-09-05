@@ -1,8 +1,5 @@
 #include "ftcrazyhandcapturedamagecrazyhand.h"
 
-#include "ftcrazyhandcapturewaitcrazyhand.h"
-#include "ftcrazyhandfingerbeam.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -11,6 +8,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "ftcrazyhandcapturewaitcrazyhand.h"
+#include "ftcrazyhandfingerbeam.h"
 
 void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
 {

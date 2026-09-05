@@ -1,7 +1,5 @@
 #include "lbmthp.h"
 
-#include "lbfile.h"
-
 #include <placeholder.h>
 
 #include <dolphin/dvd.h>
@@ -14,6 +12,8 @@
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/video.h>
+
+#include "lbfile.h"
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {

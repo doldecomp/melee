@@ -1,7 +1,5 @@
 #include "ftcrazyhandpoke.h"
 
-#include "ftcrazyhandtagcancel.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -16,6 +14,8 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+
+#include "ftcrazyhandtagcancel.h"
 
 void fn_80158534(HSD_GObj* gobj);
 void ftCh_Init_8015868C(HSD_GObj* gobj);

@@ -1,14 +1,14 @@
 #include "efalt.h"
 
-#include "eflib.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "eflib.h"
+#include "types.h"
 
 #define EFALT_VA_ARG(t) (*((t*) __va_arg(vlist_arg, _var_arg_typeof(t))))
 

@@ -1,8 +1,5 @@
 #include "itsamusgrapple.h"
 
-#include "inlines.h"
-#include "itlinkhookshot.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -37,6 +34,9 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
+#include "itlinkhookshot.h"
 
 ItemStateTable it_803F73A8[] = {
     { -1, NULL, itSamusgrapple_UnkMotion0_Phys, NULL },

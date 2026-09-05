@@ -1,9 +1,5 @@
 #include "ftpurinspecialn.h"
 
-#include "forward.h"
-#include "ftpurin.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -30,6 +26,10 @@
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "ftpurin.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

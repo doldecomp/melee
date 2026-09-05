@@ -1,8 +1,5 @@
 #include "ftmasterhandtagapplaud.h"
 
-#include "forward.h"
-#include "ftmasterhandwait12.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -11,6 +8,9 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/kinds/ftCrazyHand/ftcrazyhandthrow.h>
 #include <melee/pl/player.h>
+
+#include "forward.h"
+#include "ftmasterhandwait12.h"
 
 void ftMh_TagApplaud_Anim(HSD_GObj* gobj)
 {

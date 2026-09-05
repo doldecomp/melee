@@ -1,7 +1,5 @@
 #include "ithammer.h"
 
-#include "ithammerhead.h"
-
 #include <dolphin/mtx.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -13,6 +11,8 @@
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ithammerhead.h"
 
 typedef struct itHammerData {
     u32 x0;

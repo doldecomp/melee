@@ -1,8 +1,3 @@
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 
 #include <melee/if/soundtest.h>
@@ -14,6 +9,11 @@
 #include <melee/mn/mnsnap.h>
 #include <melee/mn/types.h>
 #include <sysdolphin/baselib/memory.h>
+
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 struct DebugSoundTestData {
     struct SoundTestData* x0;

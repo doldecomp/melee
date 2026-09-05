@@ -1,7 +1,5 @@
 #include "lbcardnew.h"
 
-#include "lbcardnew.static.h"
-
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +8,8 @@
 #include <sysdolphin/baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
+
+#include "lbcardnew.static.h"
 
 #define _p(x) (lb_80432A68.x)
 

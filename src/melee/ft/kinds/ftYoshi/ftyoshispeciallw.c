@@ -1,8 +1,5 @@
 #include "ftyoshispeciallw.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -21,6 +18,9 @@
 #include <melee/it/kinds/ityoshistar.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "types.h"
 
 /* 12E644 */ static void fn_8012E644(Fighter_GObj*);
 /* 12EAD8 */ static void ftYs_SpecialS_8012EAD8(Fighter_GObj*);

@@ -1,7 +1,5 @@
 #include "ifnametag.h"
 
-#include "ifall.h"
-
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
@@ -26,6 +24,8 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "ifall.h"
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models

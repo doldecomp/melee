@@ -1,5 +1,17 @@
 #include "ftCo_Wait.h"
 
+#include <melee/ft/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftwaitanim.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftFox/ftfoxappeals.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
+
 #include "ftCo_AppealS.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_Attack100.h"
@@ -18,18 +30,6 @@
 #include "ftCo_Squat.h"
 #include "ftCo_Turn.h"
 #include "ftCo_Walk.h"
-
-#include <melee/ft/forward.h>
-#include <sysdolphin/baselib/forward.h>
-
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftwaitanim.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftFox/ftfoxappeals.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {

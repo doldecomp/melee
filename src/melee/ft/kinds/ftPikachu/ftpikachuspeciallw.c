@@ -1,8 +1,5 @@
 #include "ftpikachuspeciallw.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -20,6 +17,9 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachuthunder.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "types.h"
 
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {

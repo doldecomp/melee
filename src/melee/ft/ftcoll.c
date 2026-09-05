@@ -1,24 +1,6 @@
 #include "ftcoll.h"
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_081B.h"
-#include "ft_0877.h"
-#include "ft_0881.h"
-#include "ft_0DF0.h"
-#include "ftchangeparam.h"
-#include "ftcolanim.h"
-#include "ftcommon.h"
-#include "ftdevice.h"
-#include "ftlib.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftCommon/ftCo_Bury.h"
-#include "kinds/ftCommon/ftCo_Guard.h"
-#include "kinds/ftCommon/types.h"
 
 #include <melee/ef/forward.h>
 #include <melee/gr/forward.h>
@@ -45,6 +27,23 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "fighter.h"
+#include "forward.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0DF0.h"
+#include "ftchangeparam.h"
+#include "ftcolanim.h"
+#include "ftcommon.h"
+#include "ftdevice.h"
+#include "ftlib.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_Bury.h"
+#include "kinds/ftCommon/ftCo_Guard.h"
+#include "kinds/ftCommon/types.h"
+#include "types.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

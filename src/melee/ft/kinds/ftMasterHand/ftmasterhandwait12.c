@@ -1,8 +1,5 @@
 #include "ftmasterhandwait12.h"
 
-#include "ftmasterhandwait10.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -11,6 +8,9 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "ftmasterhandwait10.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 #pragma push

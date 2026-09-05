@@ -1,8 +1,5 @@
 #include "ftnessspecialhi.h"
 
-#include "ftness.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -29,6 +26,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
+
+#include "ftness.h"
+#include "types.h"
 
 /// SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                            \

@@ -1,10 +1,5 @@
 #include "ftCo_BarrelWait.h"
 
-#include "ftCo_Damage.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/forward.h>
@@ -20,6 +15,11 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/mp/mpcoll.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_Damage.h"
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "inlines.h"
 
 /* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
 

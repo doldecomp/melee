@@ -3,12 +3,12 @@
 
 #include <placeholder.h>
 
-#include "melee/ft/dobjlist.h" // IWYU pragma: keep
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
+
+#include "melee/ft/dobjlist.h" // IWYU pragma: keep
 
 struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;

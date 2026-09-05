@@ -1,8 +1,3 @@
-#include "forward.h"
-#include "ftkirby.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -28,6 +23,11 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "inlines.h"
+#include "types.h"
 
 struct ftKb_Init_803CB490_layout {
     char pad[0x74];

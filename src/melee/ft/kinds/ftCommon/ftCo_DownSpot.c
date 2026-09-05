@@ -1,8 +1,5 @@
 #include "ftCo_DownSpot.h"
 
-#include "forward.h"
-#include "ftCo_DownBound.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -11,6 +8,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
+
+#include "forward.h"
+#include "ftCo_DownBound.h"
 
 void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
 {

@@ -1,15 +1,5 @@
 #include "grmutecity.h"
 
-#include "grdatfiles.h"
-#include "grfzerocar.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
 #include <melee/cm/camera.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>
@@ -26,6 +16,16 @@
 #include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/spline.h>
+
+#include "grdatfiles.h"
+#include "grfzerocar.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 

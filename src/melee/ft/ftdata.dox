@@ -4,10 +4,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <baselib/forward.h>
+
 #include "ft/forward.h"
 #include "ft/types.h"
-
-#include <baselib/forward.h>
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[FTKIND_MAX];

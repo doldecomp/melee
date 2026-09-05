@@ -1,7 +1,5 @@
 #include "ftmasterhandfingerbeam.h"
 
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -14,6 +12,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
+
+#include "types.h"
 
 void ftMh_Poke1_Coll(HSD_GObj* gobj) {}
 

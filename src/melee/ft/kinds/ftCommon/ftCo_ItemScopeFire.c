@@ -1,6 +1,3 @@
-#include "ftCo_Attack100.h"
-#include "ftCo_ItemScopeStart.h"
-
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -9,6 +6,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/kinds/itsscope.h>
+
+#include "ftCo_Attack100.h"
+#include "ftCo_ItemScopeStart.h"
 
 void fn_800D8140(Fighter_GObj* gobj, int arg1)
 {

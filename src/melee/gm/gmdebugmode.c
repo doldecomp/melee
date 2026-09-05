@@ -1,8 +1,3 @@
-#include "gm_1A3F.h"
-#include "gm_unsplit.h"
-#include "gmresultplayer.h"
-#include "types.h"
-
 #include <melee/mn/forward.h>
 
 #include <dolphin/types.h>
@@ -12,6 +7,11 @@
 #include <melee/mn/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "gm_1A3F.h"
+#include "gm_unsplit.h"
+#include "gmresultplayer.h"
+#include "types.h"
 
 struct DebugResultsData {
     u8 x0_0 : 1;

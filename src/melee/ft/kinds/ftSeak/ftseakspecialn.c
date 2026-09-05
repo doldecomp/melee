@@ -1,8 +1,5 @@
 #include "ftseakspecialn.h"
 
-#include "forward.h"
-#include "ftseak.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ef/efsync.h>
@@ -20,6 +17,9 @@
 #include <melee/it/kinds/itseakneedleheld.h>
 #include <melee/it/kinds/itseakneedlethrown.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "ftseak.h"
 
 /* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
 /* 112D44 */ static void shootNeedles(Fighter_GObj* gobj);

@@ -1,7 +1,5 @@
 #include "itpikachutjoltground.h"
 
-#include "itpikachutjoltair.h"
-
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -15,6 +13,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "itpikachutjoltair.h"
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 

@@ -1,10 +1,5 @@
 #include "efasync.h"
 
-#include "efdata.h"
-#include "eflib.h"
-#include "efsync.h"
-#include "types.h"
-
 #include <math.h>
 #include <stdarg.h>
 #include <melee/cm/camera.h>
@@ -17,6 +12,11 @@
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "efdata.h"
+#include "eflib.h"
+#include "efsync.h"
+#include "types.h"
 
 HSD_ObjAllocData efAsync_AllocData;
 

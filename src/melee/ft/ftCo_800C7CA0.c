@@ -1,23 +1,22 @@
 #include "ftCo_800C7CA0.h"
 
-#include "fighter.h"
-#include "ft_081B.h"
-#include "ftanim.h"
-#include "ftcoll.h"
-#include "ftcommon.h"
-#include "types.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftCommon/ftCo_DownBound.h"
-#include "kinds/ftKirby/ftkirby.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ftanim.h"
+#include "ftcoll.h"
+#include "ftcommon.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/ftCo_DownBound.h"
+#include "kinds/ftKirby/ftkirby.h"
+#include "types.h"
 
 HSD_MObj* ft_804D6580;
 

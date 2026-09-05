@@ -1,14 +1,5 @@
 #include "grlast.h"
 
-#include "granime.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-
 #include <math.h>
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
@@ -21,6 +12,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "granime.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 
 /* 21A620 */ static void grLast_OnDemoInit(enum_t);
 /* 21A740 */ static void grLast_OnInit(void);

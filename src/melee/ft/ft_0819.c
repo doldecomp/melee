@@ -1,9 +1,5 @@
 #include "ft_0819.h"
 
-#include "ftCo_800C703C.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/it/inlines.h>
@@ -11,6 +7,10 @@
 #include <melee/lb/lb_0146.h>
 #include <melee/lb/types.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "ftCo_800C703C.h"
+#include "inlines.h"
+#include "types.h"
 
 void ft_80081938(HSD_GObj* gobj)
 {

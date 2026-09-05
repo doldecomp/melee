@@ -1,7 +1,5 @@
 #include "itgamewatchmanhole.h"
 
-#include "inlines.h"
-
 #include <melee/it/forward.h>
 
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
@@ -10,6 +8,8 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+
+#include "inlines.h"
 
 bool itGamewatchmanhole_UnkMotion0_Anim(Item_GObj* gobj);
 

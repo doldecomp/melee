@@ -1,12 +1,5 @@
 #include "gmtou_2.h"
 
-#include "gm_1601.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -30,6 +23,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "gm_1601.h"
+#include "gm_1A3F.h"
+#include "gm_1A45.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.h"
+#include "types.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

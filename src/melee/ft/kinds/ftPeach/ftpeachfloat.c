@@ -1,9 +1,5 @@
 #include "ftpeachfloat.h"
 
-#include "ftpeachfloatattack.h"
-#include "ftpeachfloatfall.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -16,6 +12,10 @@
 #include <melee/ft/kinds/ftCommon/ftCo_SpecialAir.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "ftpeachfloatattack.h"
+#include "ftpeachfloatfall.h"
+#include "types.h"
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {

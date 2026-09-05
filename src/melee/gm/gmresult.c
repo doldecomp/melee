@@ -1,8 +1,8 @@
 #include "gmresult.h"
 
-#include "types.h"
-
 #include <melee/lb/lb_013B.h>
+
+#include "types.h"
 
 /// @todo .sdata order hack
 #ifdef MUST_MATCH
@@ -60,10 +60,6 @@ union {
 
 HSD_Archive* lbl_804D65B8;
 
-#include "gm_1601.h"
-#include "gm_unsplit.h"
-#include "gmresultplayer.h"
-
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/types.h>
 #include <melee/if/ifcoget.h>
@@ -83,6 +79,10 @@ HSD_Archive* lbl_804D65B8;
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmresultplayer.h"
 
 MatchEnd* fn_80174274(void)
 {

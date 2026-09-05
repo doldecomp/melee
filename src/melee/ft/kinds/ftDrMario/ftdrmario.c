@@ -1,9 +1,5 @@
 #include "ftdrmario.h"
 
-#include "forward.h"
-#include "ftdrmarioappeals.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftMario/forward.h>
 
@@ -20,6 +16,10 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itdrmariopill.h>
+
+#include "forward.h"
+#include "ftdrmarioappeals.h"
+#include "types.h"
 
 /* 45A3A8 */ UnkCostumeStruct ftDr_CostumeList[5];
 

@@ -1,7 +1,5 @@
 #include "itdkinoko.h"
 
-#include "itkinoko.h"
-
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -9,6 +7,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
+
+#include "itkinoko.h"
 
 ItemStateTable it_803F6130[] = {
     { 0, itDkinoko_UnkMotion0_Anim, itDkinoko_UnkMotion0_Phys,

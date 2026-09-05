@@ -1,8 +1,5 @@
 #include "ftkoopaspecials.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -27,6 +24,9 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "types.h"
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)
 {

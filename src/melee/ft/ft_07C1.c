@@ -1,13 +1,6 @@
 #include "ft_07C1.h"
 
-#include "fighter.h"
-#include "ftcoll.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftCommon/ftCo_HammerWait.h"
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
@@ -17,6 +10,12 @@
 #include <melee/lb/lbcollision.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "fighter.h"
+#include "ftcoll.h"
+#include "inlines.h"
+#include "kinds/ftCommon/ftCo_HammerWait.h"
+#include "types.h"
 
 void ft_8007C114(HSD_GObj* gobj)
 {

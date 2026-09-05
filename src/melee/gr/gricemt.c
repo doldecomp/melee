@@ -1,15 +1,5 @@
 #include "gricemt.h"
 
-#include "forward.h"
-#include "grdatfiles.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -30,6 +20,16 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "grdatfiles.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
                                      HSD_GObj* u3, f32 u4);

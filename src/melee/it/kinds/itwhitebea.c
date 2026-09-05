@@ -1,7 +1,5 @@
 #include "itwhitebea.h"
 
-#include "itfreeze.h"
-
 #include <placeholder.h>
 
 #include <math.h> // IWYU pragma: keep
@@ -20,6 +18,8 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "itfreeze.h"
 
 ItemStateTable it_803F8A88[] = {
     {

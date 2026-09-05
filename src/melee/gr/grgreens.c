@@ -1,14 +1,5 @@
 #include "grgreens.h"
 
-#include "forward.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <dolphin/os.h>
@@ -29,6 +20,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 struct grGreens_YakumonoParam {
     int x0_blockTimerMin;

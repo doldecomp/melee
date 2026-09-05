@@ -1,9 +1,5 @@
 #include "ft_0899.h"
 
-#include "fighter.h"
-#include "ftparts.h"
-#include "inlines.h"
-
 #include <math.h>
 #include <melee/db/dbsound.h>
 #include <melee/lb/lb_00B0.h>
@@ -12,6 +8,10 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "fighter.h"
+#include "ftparts.h"
+#include "inlines.h"
 
 /* 08998C */ static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal);
 

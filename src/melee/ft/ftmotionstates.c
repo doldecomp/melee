@@ -14,8 +14,6 @@
 #include "ftlipstickswing.h"
 #include "ftstarrodswing.h"
 #include "ftswing.h"
-#include "types.h"
-
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_AppealS.h"
 #include "kinds/ftCommon/ftCo_Attack1.h"
@@ -130,6 +128,7 @@
 #include "kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandcapturemasterhand.h"
 #include "kinds/ftMasterHand/ftmasterhandthrownmasterhand.h"
+#include "types.h"
 
 MotionState ftData_MotionStateList[ftCo_MS_Count] = {
     {

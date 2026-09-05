@@ -1,5 +1,13 @@
 #include "ftCo_DownDamage.h"
 
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftCo_800C7CA0.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
+
 #include "ftCo_Damage.h"
 #include "ftCo_DamageFall.h"
 #include "ftCo_DownBound.h"
@@ -8,14 +16,6 @@
 #include "ftCo_FlyReflect.h"
 #include "ftCo_PassiveWall.h"
 #include "types.h"
-
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftCo_800C7CA0.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09F184 */ static void ftCo_8009F184(Fighter_GObj* gobj);
 

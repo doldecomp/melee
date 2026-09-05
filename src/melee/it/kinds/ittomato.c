@@ -1,7 +1,5 @@
 #include "ittomato.h"
 
-#include "inlines.h"
-
 #include <melee/gm/gm_18A1.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,6 +8,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 /* 284358 */ static void it_80284358(Item_GObj* gobj);
 /* 284380 */ static bool itTomato_UnkMotion0_Anim(HSD_GObj* gobj);

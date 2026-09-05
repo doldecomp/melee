@@ -1,7 +1,5 @@
 #include "itgamewatchjudge.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -16,6 +14,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itzako.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F7968[] = {
     { 0, itGamewatchjudge_UnkMotion0_Anim, NULL, NULL },

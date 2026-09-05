@@ -1,10 +1,5 @@
 #include "mplib.h"
 
-#include "forward.h"
-#include "mpcoll.h"
-#include "mpisland.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/forward.h>
@@ -39,6 +34,11 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
+
+#include "forward.h"
+#include "mpcoll.h"
+#include "mpisland.h"
+#include "types.h"
 
 #define LINEID_CHECK(line, line_id)                                           \
     do {                                                                      \

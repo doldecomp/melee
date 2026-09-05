@@ -1,9 +1,5 @@
 #include "ftclink.h"
 
-#include "forward.h"
-#include "ftclinkappeals.h"
-#include "inlines.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftLink/forward.h>
 #include <melee/it/forward.h>
@@ -29,6 +25,10 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbanim.h>
+
+#include "forward.h"
+#include "ftclinkappeals.h"
+#include "inlines.h"
 
 /* 45A330 */ UnkCostumeStruct ftCl_CostumeList[5];
 

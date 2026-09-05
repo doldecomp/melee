@@ -1,7 +1,5 @@
 #include "ftfoxappeals.h"
 
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -15,6 +13,8 @@
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
+
+#include "types.h"
 
 #define FTFOX_APPEALS_ATTACKID 0x72
 

@@ -1,17 +1,17 @@
 #include "grfigure2.h"
 
+#include <dolphin/mtx.h>
+#include <melee/lb/lb_00F9.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+
 #include "granime.h"
 #include "grfigure1.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-
-#include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
 
 /* 20E274 */ static void grFigure2_8020E274(void);
 /* 20E2E4 */ static void grFigure2_OnLoad(void);

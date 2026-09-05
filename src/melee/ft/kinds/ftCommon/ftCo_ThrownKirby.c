@@ -1,9 +1,5 @@
 #include "ftCo_ThrownKirby.h"
 
-#include "forward.h"
-#include "ftCo_Fall.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -23,6 +19,10 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

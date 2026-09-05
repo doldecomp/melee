@@ -1,8 +1,5 @@
 #include "soundtest.h"
 
-#include "textlib.h"
-#include "types.h"
-
 #include <melee/gm/forward.h>
 
 #include <melee/db/db.h>
@@ -28,6 +25,9 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "textlib.h"
+#include "types.h"
 
 /* 2FF88C */ static bool un_802FF88C(enum soundtest_callback_arg0);
 /* 2FF934 */ static bool un_802FF934(enum soundtest_callback_arg0);

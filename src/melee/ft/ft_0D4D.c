@@ -1,5 +1,12 @@
 #include "ft_0D4D.h"
 
+#include <melee/ef/efsync.h>
+#include <melee/gr/stage.h>
+#include <melee/it/kinds/it_2E5A.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
+
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ft_0877.h"
@@ -11,7 +18,6 @@
 #include "ftcommon.h"
 #include "ftlib.h"
 #include "ftwalkcommon.h"
-
 #include "kinds/ftCommon/ftCo_AirCatch.h"
 #include "kinds/ftCommon/ftCo_AppealS.h"
 #include "kinds/ftCommon/ftCo_Attack100.h"
@@ -23,13 +29,6 @@
 #include "kinds/ftCommon/ftCo_SpecialAir.h"
 #include "kinds/ftCommon/ftCo_Squat.h"
 #include "kinds/ftCommon/ftCo_Turn.h"
-
-#include <melee/ef/efsync.h>
-#include <melee/gr/stage.h>
-#include <melee/it/kinds/it_2E5A.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
 
 void fn_800D4DD4(Fighter_GObj* gobj)
 {

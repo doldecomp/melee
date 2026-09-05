@@ -1,19 +1,5 @@
 #include "ftdonkey.h"
 
-#include "forward.h"
-#include "ftdonkeyheavyfall.h"
-#include "ftdonkeyheavyjump.h"
-#include "ftdonkeyheavylanding.h"
-#include "ftdonkeyheavyturn.h"
-#include "ftdonkeyheavywait0.h"
-#include "ftdonkeyheavywait1.h"
-#include "ftdonkeyheavywalk.h"
-#include "ftdonkeyspecialhi.h"
-#include "ftdonkeyspeciallw.h"
-#include "ftdonkeyspecialn.h"
-#include "ftdonkeyspecials.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
@@ -34,6 +20,20 @@
 #include <melee/lb/lbanim.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftdonkeyheavyfall.h"
+#include "ftdonkeyheavyjump.h"
+#include "ftdonkeyheavylanding.h"
+#include "ftdonkeyheavyturn.h"
+#include "ftdonkeyheavywait0.h"
+#include "ftdonkeyheavywait1.h"
+#include "ftdonkeyheavywalk.h"
+#include "ftdonkeyspecialhi.h"
+#include "ftdonkeyspeciallw.h"
+#include "ftdonkeyspecialn.h"
+#include "ftdonkeyspecials.h"
+#include "types.h"
 
 /* 459CA0 */ UnkCostumeStruct ftDk_CostumeList[5];
 

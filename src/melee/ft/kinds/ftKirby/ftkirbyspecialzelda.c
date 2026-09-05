@@ -1,8 +1,5 @@
 #include "ftkirbyspecialzelda.h"
 
-#include "forward.h"
-#include "ftkirbyspecialdonkey.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -22,6 +19,9 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "ftkirbyspecialdonkey.h"
 
 extern float ftKb_Init_803CB770[];
 

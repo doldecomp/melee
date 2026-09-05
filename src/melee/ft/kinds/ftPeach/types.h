@@ -1,13 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTPEACH_TYPES_H
 #define MELEE_FT_CHARA_FTPEACH_TYPES_H
 
-#include "ftPeach/forward.h" // IWYU pragma: export
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+
+#include "ftPeach/forward.h" // IWYU pragma: export
 
 struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;

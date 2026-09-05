@@ -1,12 +1,12 @@
 #ifndef __GALE01_0174BC
 #define __GALE01_0174BC
 
-#include "lbdvd.h" // IWYU pragma: export
-
 #include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 
 #include <melee/lb/types.h>
+
+#include "lbdvd.h" // IWYU pragma: export
 
 /* 3BA638 */ static PreloadedGameModeState preload_cache_scene = {
     {

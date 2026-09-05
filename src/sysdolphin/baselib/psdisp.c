@@ -1,5 +1,8 @@
 #include "psdisp.h"
 
+#include <string.h>
+#include <dolphin/gx.h>
+
 #include "cobj.h"
 #include "fog.h"
 #include "forward.h"
@@ -10,9 +13,6 @@
 #include "psstructs.h"
 #include "state.h"
 #include "util.h"
-
-#include <string.h>
-#include <dolphin/gx.h>
 
 // MSL/math.h defines a non-IEEE FLT_EPSILON
 #undef FLT_EPSILON

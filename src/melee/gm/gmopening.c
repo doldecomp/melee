@@ -1,9 +1,5 @@
 #include "gmopening.h"
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtitle.h"
-
 #include <stdio.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
@@ -16,6 +12,10 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>
 #include <sysdolphin/baselib/sobjlib.h>
+
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmtitle.h"
 
 /* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
 /* 3B7D74 */ static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };

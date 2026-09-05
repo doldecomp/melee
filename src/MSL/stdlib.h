@@ -1,10 +1,10 @@
 #ifndef _STDLIB_H_
 #define _STDLIB_H_
 
-#include "strtoul.h" // IWYU pragma: export
-
 #include <stddef.h>
 #include <wchar.h>
+
+#include "strtoul.h" // IWYU pragma: export
 
 #define RAND_MAX 32767
 

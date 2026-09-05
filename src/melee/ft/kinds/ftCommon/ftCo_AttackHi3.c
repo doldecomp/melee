@@ -1,9 +1,5 @@
 #include "ftCo_AttackHi3.h"
 
-#include "forward.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -13,6 +9,10 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
 
 /* 08BA38 */ static void doEnter(Fighter_GObj* gobj);
 

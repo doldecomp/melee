@@ -1,9 +1,5 @@
 #include "ftkirbyspecialhi.h"
 
-#include "forward.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -26,6 +22,10 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itkirbycutterbeam.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "forward.h"
+#include "inlines.h"
+#include "types.h"
 
 static MotionFlags const ftKb_MF_SpecialHi_Coll =
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis |

@@ -2,6 +2,7 @@
 #define _DOLPHIN_GX_GXGEOMETRY_H_
 
 #include <dolphin/gx/GXEnum.h>
+#include <dolphin/gx/GXStruct.h>
 
 #ifdef __cplusplus
 extern "C" {

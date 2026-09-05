@@ -1,8 +1,5 @@
 #include "grdisplay.h"
 
-#include "ground.h"
-#include "inlines.h"
-
 #include <melee/lb/forward.h>
 
 #include <melee/cm/camera.h>
@@ -15,6 +12,9 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
+
+#include "ground.h"
+#include "inlines.h"
 
 /* 1C5B90 */ static void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 arg2,
                                             u32 rendermode);

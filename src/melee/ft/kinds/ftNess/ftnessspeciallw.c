@@ -1,8 +1,5 @@
 #include "ftnessspeciallw.h"
 
-#include "ftness.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -20,6 +17,9 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
+
+#include "ftness.h"
+#include "types.h"
 
 /// SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                            \

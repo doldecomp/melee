@@ -1,7 +1,3 @@
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -18,6 +14,10 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/types.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 
 void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 {

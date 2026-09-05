@@ -1,10 +1,5 @@
 #include "ftCo_FlyReflect.h"
 
-#include "ftCo_Damage.h"
-#include "ftCo_DownBound.h"
-#include "ftCo_PassiveCeil.h"
-#include "ftCo_PassiveWall.h"
-
 #include <placeholder.h>
 
 #include <melee/cm/camera.h>
@@ -16,6 +11,11 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/lb/lbvector.h>
+
+#include "ftCo_Damage.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_PassiveCeil.h"
+#include "ftCo_PassiveWall.h"
 
 #ifdef MUST_MATCH
 #pragma force_active on

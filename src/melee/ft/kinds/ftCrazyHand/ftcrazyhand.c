@@ -1,5 +1,17 @@
 #include "ftcrazyhand.h"
 
+#include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
+
 #include "forward.h"
 #include "ftcrazyhandbackairplane1.h"
 #include "ftcrazyhandbackairplane2.h"
@@ -32,18 +44,6 @@
 #include "ftcrazyhandwait11.h"
 #include "ftcrazyhandwalk.h"
 #include "types.h"
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <dolphin/mtx.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftMasterHand/types.h>
-#include <melee/ft/types.h>
-#include <melee/it/it_26B1.h>
-#include <Runtime/platform.h>
 
 /* 45A6A8 */ UnkCostumeStruct ftCh_CostumeList[1];
 

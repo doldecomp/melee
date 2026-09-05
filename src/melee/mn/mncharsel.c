@@ -1,12 +1,5 @@
 #include "mncharsel.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-#include "mnname.h"
-#include "mnnamenew.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -41,6 +34,13 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnname.h"
+#include "mnnamenew.h"
+#include "types.h"
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };

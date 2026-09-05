@@ -1,12 +1,5 @@
 #include "ftluigi.h"
 
-#include "forward.h"
-#include "ftluigispecialhi.h"
-#include "ftluigispeciallw.h"
-#include "ftluigispecialn.h"
-#include "ftluigispecials.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
 
@@ -17,6 +10,13 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
+
+#include "forward.h"
+#include "ftluigispecialhi.h"
+#include "ftluigispeciallw.h"
+#include "ftluigispecialn.h"
+#include "ftluigispecials.h"
+#include "types.h"
 
 /* 45A270 */ UnkCostumeStruct ftLg_CostumeList[4];
 

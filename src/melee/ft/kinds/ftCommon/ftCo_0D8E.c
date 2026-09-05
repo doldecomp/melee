@@ -1,5 +1,3 @@
-#include "ftCo_Attack100.h"
-
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftparts.h>
@@ -8,6 +6,8 @@
 #include <melee/it/inlines.h>
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "ftCo_Attack100.h"
 
 typedef struct {
     u8 pad_0[0x84];

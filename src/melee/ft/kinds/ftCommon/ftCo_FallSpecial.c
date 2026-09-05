@@ -1,13 +1,5 @@
 #include "ftCo_FallSpecial.h"
 
-#include "ftCo_Attack100.h"
-#include "ftCo_DamageFall.h"
-#include "ftCo_Fall.h"
-#include "ftCo_ItemParasolOpen.h"
-#include "ftCo_JumpAerial.h"
-#include "ftCo_Landing.h"
-#include "types.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -18,6 +10,14 @@
 #include <melee/mp/mplib.h>
 #include <melee/sfx/crowdsfx.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_Attack100.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemParasolOpen.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_Landing.h"
+#include "types.h"
 
 void ftCo_800968C8(Fighter_GObj* gobj)
 {

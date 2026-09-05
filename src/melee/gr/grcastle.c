@@ -1,15 +1,5 @@
 #include "grcastle.h"
 
-#include "granime.h"
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -32,6 +22,16 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 struct unkCastle {
     /* 0x000 */ u8 _pad[0x10C];

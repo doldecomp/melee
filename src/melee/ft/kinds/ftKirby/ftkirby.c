@@ -1,18 +1,5 @@
 #include "ftkirby.h"
 
-#include "ftKb_Init.static.h"
-#include "ftkirbyattackdash.h"
-#include "ftkirbyspecialdonkey.h"
-#include "ftkirbyspecialgamewatch.h"
-#include "ftkirbyspecialhi.h"
-#include "ftkirbyspecialiceclimber.h"
-#include "ftkirbyspecialmars.h"
-#include "ftkirbyspecialmewtwo.h"
-#include "ftkirbyspecialpeach.h"
-#include "ftkirbyspecialpikachu.h"
-#include "ftkirbyspecialpurin.h"
-#include "ftkirbyspecialzelda.h"
-
 #include <stddef.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
@@ -37,6 +24,19 @@
 #include <sysdolphin/baselib/id.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ftKb_Init.static.h"
+#include "ftkirbyattackdash.h"
+#include "ftkirbyspecialdonkey.h"
+#include "ftkirbyspecialgamewatch.h"
+#include "ftkirbyspecialhi.h"
+#include "ftkirbyspecialiceclimber.h"
+#include "ftkirbyspecialmars.h"
+#include "ftkirbyspecialmewtwo.h"
+#include "ftkirbyspecialpeach.h"
+#include "ftkirbyspecialpikachu.h"
+#include "ftkirbyspecialpurin.h"
+#include "ftkirbyspecialzelda.h"
 
 /* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
 /* 459B88 */ struct ft_80459B88_t ft_80459B88;

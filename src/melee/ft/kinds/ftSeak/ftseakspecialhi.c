@@ -1,7 +1,5 @@
 #include "ftseakspecialhi.h"
 
-#include "forward.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -26,6 +24,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

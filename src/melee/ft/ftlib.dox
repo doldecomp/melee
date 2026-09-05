@@ -3,13 +3,13 @@
 
 #include <platform.h>
 
-#include "ft/fighter.h"
-#include "ft/types.h"
-
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 #include <dolphin/mtx.h>
+
+#include "ft/fighter.h"
+#include "ft/types.h"
 
 s32 ftLib_800860C4(void);
 bool ftLib_800860E8(void);

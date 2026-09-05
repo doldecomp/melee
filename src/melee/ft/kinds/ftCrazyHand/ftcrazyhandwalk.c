@@ -1,8 +1,5 @@
 #include "ftcrazyhandwalk.h"
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -14,6 +11,9 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 
 void fn_801578E8(HSD_GObj* gobj)
 {

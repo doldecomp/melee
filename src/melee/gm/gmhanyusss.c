@@ -1,9 +1,9 @@
+#include <melee/lb/types.h>
+#include <melee/mn/types.h>
+
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "types.h"
-
-#include <melee/lb/types.h>
-#include <melee/mn/types.h>
 
 /* 1BEE58 */ static void gm_801BEE58(GameModeState*);
 /* 49C030 */ static CSSData gm_8049C030;

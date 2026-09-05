@@ -1,5 +1,19 @@
 #include "ftaction.h"
 
+#include <placeholder.h>
+
+#include <melee/lb/forward.h>
+
+#include <dolphin/mtx.h>
+#include <melee/lb/inlines.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcommand.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
+
 #include "fighter.h"
 #include "forward.h"
 #include "ft_081B.h"
@@ -15,23 +29,8 @@
 #include "ftdynamics.h"
 #include "ftparts.h"
 #include "inlines.h"
-#include "types.h"
-
-#include <placeholder.h>
-
 #include "kinds/ftCommon/ftCo_09F7.h"
-
-#include <melee/lb/forward.h>
-
-#include <dolphin/mtx.h>
-#include <melee/lb/inlines.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcommand.h>
-#include <melee/lb/types.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
+#include "types.h"
 
 /* 07121C */ static void ftAction_8007121C(Fighter_GObj* gobj,
                                            CommandInfo* cmd);

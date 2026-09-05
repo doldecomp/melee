@@ -1,7 +1,5 @@
 #include "itlgunbeam.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -19,6 +17,8 @@
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
 /* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);

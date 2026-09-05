@@ -1,16 +1,5 @@
 #include "ftgamewatch.h"
 
-#include "ftgamewatchattack100.h"
-#include "ftgamewatchattack11.h"
-#include "ftgamewatchattackair.h"
-#include "ftgamewatchattacklw3.h"
-#include "ftgamewatchattacks4.h"
-#include "ftgamewatchspecialhi.h"
-#include "ftgamewatchspeciallw.h"
-#include "ftgamewatchspecialn.h"
-#include "ftgamewatchspecials.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <dolphin/mtx.h>
@@ -22,6 +11,17 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/types.h>
+
+#include "ftgamewatchattack100.h"
+#include "ftgamewatchattack11.h"
+#include "ftgamewatchattackair.h"
+#include "ftgamewatchattacklw3.h"
+#include "ftgamewatchattacks4.h"
+#include "ftgamewatchspecialhi.h"
+#include "ftgamewatchspeciallw.h"
+#include "ftgamewatchspecialn.h"
+#include "ftgamewatchspecials.h"
+#include "types.h"
 
 /* 45A4E0 */ UnkCostumeStruct ftGw_CostumeList[4];
 

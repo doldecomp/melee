@@ -1,10 +1,5 @@
 #include "ftCo_Shouldered.h"
 
-#include "ftCo_Attack100.h"
-#include "ftCo_Damage.h"
-#include "ftCo_Throw.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/forward.h>
@@ -18,6 +13,11 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_Attack100.h"
+#include "ftCo_Damage.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 #pragma force_active on

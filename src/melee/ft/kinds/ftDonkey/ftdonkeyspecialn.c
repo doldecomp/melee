@@ -1,9 +1,5 @@
 #include "ftdonkeyspecialn.h"
 
-#include "forward.h"
-#include "ftdonkey.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
@@ -24,6 +20,10 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftdonkey.h"
+#include "types.h"
 
 static void setCallbacks(HSD_GObj* gobj)
 {

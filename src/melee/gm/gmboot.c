@@ -1,13 +1,13 @@
 #include "gmboot.h"
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
-
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/ty/toy.h>
+
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 /* 1BF948 */ static void bootOnLoad(GameModeState*);
 /* 1BF9A8 */ static void bootOnLeave(GameModeState*);

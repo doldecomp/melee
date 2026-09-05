@@ -1,9 +1,3 @@
-#include "gm_1A7A.h"
-#include "gm_unsplit.h"
-#include "gmevent.h"
-#include "gmregtyfall.h"
-#include "inlines.h"
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -25,6 +19,12 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "gm_1A7A.h"
+#include "gm_unsplit.h"
+#include "gmevent.h"
+#include "gmregtyfall.h"
+#include "inlines.h"
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {

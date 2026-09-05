@@ -1,10 +1,5 @@
 #include "itspawn.h"
 
-#include "it_26B1.h"
-#include "it_2725.h"
-#include "it_3F14.h"
-#include "item.h"
-
 #include <placeholder.h>
 
 #include <melee/db/db.h>
@@ -17,6 +12,11 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "item.h"
 
 ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;

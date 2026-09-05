@@ -1,7 +1,5 @@
 #include "itgamewatchfire.h"
 
-#include "inlines.h"
-
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattacks4.h>
 #include <melee/it/inlines.h>
@@ -11,6 +9,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 /* 2C6B20 */ static bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj);
 

@@ -1,8 +1,5 @@
 #include "ftpeachspeciallw.h"
 
-#include "ftpeach.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/it/forward.h>
@@ -25,6 +22,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ftpeach.h"
+#include "types.h"
 
 /* 11CE48 */ static ItemKind pickVeg(HSD_GObj* gobj);
 /* 11D018 */ static void spawnVeg(HSD_GObj* gobj);

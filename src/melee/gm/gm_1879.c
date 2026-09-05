@@ -1,11 +1,5 @@
 #include "gm_1879.h"
 
-#include "gm_1A36.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-#include "types.h"
-
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -35,6 +29,12 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "gm_1A36.h"
+#include "gm_1A3F.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
+#include "types.h"
 typedef struct gm_1832_StageState {
     u8 stage_index : 5;
     u8 done : 1;

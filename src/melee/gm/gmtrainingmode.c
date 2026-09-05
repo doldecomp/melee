@@ -1,12 +1,5 @@
 #include "gmtrainingmode.h"
 
-#include "gm_1884.h"
-#include "gm_1A3F.h"
-#include "gm_1B03.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 
 #include <dolphin/pad.h>
@@ -18,6 +11,13 @@
 #include <melee/lb/types.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
+
+#include "gm_1884.h"
+#include "gm_1A3F.h"
+#include "gm_1B03.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 /* 1B1B74 */ static void gm_801B1B74(GameModeState*);
 /* 1B1C24 */ static void gm_801B1C24(GameModeState*);

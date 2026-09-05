@@ -1,9 +1,5 @@
 #include "ftdonkeyheavyfall.h"
 
-#include "ftdonkeyheavyjump.h"
-#include "ftdonkeyheavywait1.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -12,6 +8,10 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemThrow.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+
+#include "ftdonkeyheavyjump.h"
+#include "ftdonkeyheavywait1.h"
+#include "types.h"
 
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
 {

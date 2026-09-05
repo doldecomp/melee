@@ -1,14 +1,5 @@
 #include "grrcruise.h"
 
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -27,6 +18,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 struct grRCruise_YakumonoParam {
     f32 x0;

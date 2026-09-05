@@ -1,9 +1,5 @@
 #include "mnstagesel.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnstagesel.static.h"
-
 #include <placeholder.h>
 
 #include <melee/gm/gm_unsplit.h>
@@ -27,6 +23,10 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnstagesel.static.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

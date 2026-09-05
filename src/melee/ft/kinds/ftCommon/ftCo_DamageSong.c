@@ -1,9 +1,5 @@
 #include "ftCo_DamageSong.h"
 
-#include "ftCo_0C35.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -14,6 +10,10 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
+
+#include "ftCo_0C35.h"
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
 
 /* 0C3390 */ static void ftCo_800C3390(Fighter_GObj* gobj);
 /* 0C3480 */ static void ftCo_800C3480(Fighter_GObj* gobj);

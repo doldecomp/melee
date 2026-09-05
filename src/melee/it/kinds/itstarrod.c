@@ -1,7 +1,5 @@
 #include "itstarrod.h"
 
-#include "itstarrodstar.h"
-
 #include <melee/it/forward.h>
 
 #include <melee/it/inlines.h>
@@ -10,6 +8,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
+
+#include "itstarrodstar.h"
 
 typedef struct StarRodAttributes {
     int x0;

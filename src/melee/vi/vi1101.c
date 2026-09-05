@@ -1,7 +1,5 @@
 #include "vi1101.h"
 
-#include "vi.h"
-
 #include <dolphin/gx/GXStruct.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -25,6 +23,8 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "vi.h"
 u8 un_804D6FD8[8];
 GXColor un_804D5B08 = { 0, 0, 0, 0xff };
 

@@ -1,15 +1,15 @@
 #include "ftCo_CargoWalk.h"
 
+#include <melee/ft/ftwalkcommon.h>
+#include <melee/ft/kinds/ftDonkey/types.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
+
 #include "ftCo_09C4.h"
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
-
-#include <melee/ft/ftwalkcommon.h>
-#include <melee/ft/kinds/ftDonkey/types.h>
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 /* 09B6C8 */ static void ftCo_8009B6C8(Fighter_GObj* gobj, float anim_start);
 

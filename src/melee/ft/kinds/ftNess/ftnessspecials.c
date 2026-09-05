@@ -1,7 +1,5 @@
 #include "ftnessspecials.h"
 
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -16,6 +14,8 @@
 #include <melee/it/kinds/itnesspkfire.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+
+#include "types.h"
 
 /// https://decomp.me/scratch/apf7Y
 void ftNs_SpecialS_ItemPKFireSpawn(

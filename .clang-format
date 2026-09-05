@@ -41,9 +41,3 @@ IncludeCategories:
   - Regex: '^<.*>$'
     Priority: 6
     SortPriority: 6
-  - Regex: '^"[^/]*"$'
-    Priority: 4
-    SortPriority: 1
-  - Regex: '^.*$'
-    Priority: 5
-    SortPriority: 2

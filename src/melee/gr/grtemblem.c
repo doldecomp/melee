@@ -1,11 +1,5 @@
 #include "grtemblem.h"
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -13,6 +7,12 @@
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 static void grTRoy_802243F4(bool);
 static void grTRoy_802243F8(void);

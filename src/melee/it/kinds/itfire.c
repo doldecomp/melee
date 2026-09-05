@@ -1,7 +1,5 @@
 #include "itfire.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/gr/stage.h>
@@ -12,6 +10,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F7C10[] = {
     { 0, itFire_UnkMotion0_Anim, itFire_UnkMotion0_Phys,

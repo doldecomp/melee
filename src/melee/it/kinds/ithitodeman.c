@@ -1,7 +1,5 @@
 #include "ithitodeman.h"
 
-#include "inlines.h"
-
 #include <math.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -13,6 +11,8 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F8128[] = {
     {

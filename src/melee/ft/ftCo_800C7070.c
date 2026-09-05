@@ -1,9 +1,8 @@
 #include "ftCo_800C7070.h"
 
 #include "fighter.h"
-#include "types.h"
-
 #include "kinds/ftCommon/forward.h"
+#include "types.h"
 
 /// @todo #ftCo_800C6150
 void ftCo_800C7070(Fighter_GObj* gobj)

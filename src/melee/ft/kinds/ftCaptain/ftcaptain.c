@@ -1,12 +1,5 @@
 #include "ftcaptain.h"
 
-#include "forward.h"
-#include "ftcaptainspecialhi.h"
-#include "ftcaptainspeciallw.h"
-#include "ftcaptainspecialn.h"
-#include "ftcaptainspecials.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/ft_0CD1.h>
@@ -16,6 +9,13 @@
 #include <melee/ft/ftstarrodswing.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
+
+#include "forward.h"
+#include "ftcaptainspecialhi.h"
+#include "ftcaptainspeciallw.h"
+#include "ftcaptainspecialn.h"
+#include "ftcaptainspecials.h"
+#include "types.h"
 
 /* 459A98 */ UnkCostumeStruct ftCa_CostumeList[6];
 

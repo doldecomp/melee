@@ -1,7 +1,5 @@
 #include "it_2E5A.h"
 
-#include "types.h"
-
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -23,6 +21,8 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "types.h"
 
 /* 2E614C */ static void it_802E614C(Item_GObj*, Item_GObj*, SpawnItem*, Vec3*,
                                      Vec3*);

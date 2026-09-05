@@ -1,8 +1,5 @@
 #include "ftclinkappeals.h"
 
-#include "ftclink.h"
-#include "inlines.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/ft_081B.h>
@@ -16,6 +13,9 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itclinkmilk.h>
 #include <Runtime/platform.h>
+
+#include "ftclink.h"
+#include "inlines.h"
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {

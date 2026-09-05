@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include "it/forward.h" // IWYU pragma: export
-
 #include <melee/cm/forward.h>
 #include <melee/it/kinds/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -18,6 +16,8 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+
+#include "it/forward.h" // IWYU pragma: export
 
 struct CameraBoxFlags {
     struct {

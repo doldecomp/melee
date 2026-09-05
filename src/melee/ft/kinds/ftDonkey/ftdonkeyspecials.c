@@ -1,9 +1,5 @@
 #include "ftdonkeyspecials.h"
 
-#include "forward.h"
-#include "ftdonkeyspeciallw.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -17,6 +13,10 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftdonkeyspeciallw.h"
+#include "types.h"
 
 static u32 const coll_mf =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |

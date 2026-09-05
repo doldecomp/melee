@@ -1,8 +1,5 @@
 #include "ftkirbyspecialpikachu.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -20,6 +17,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itpikachutjoltground.h>
+
+#include "forward.h"
+#include "types.h"
 
 static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
                     ftKirby_MotionState pc_msid)

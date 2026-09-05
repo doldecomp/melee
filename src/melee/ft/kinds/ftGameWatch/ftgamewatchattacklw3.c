@@ -1,8 +1,5 @@
 #include "ftgamewatchattacklw3.h"
 
-#include "ftgamewatch.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -30,6 +27,9 @@
 #include <melee/it/kinds/itgamewatchmanhole.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+
+#include "ftgamewatch.h"
+#include "types.h"
 
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);

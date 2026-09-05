@@ -1,7 +1,5 @@
 #include "iftime.h"
 
-#include "ifall.h"
-
 #include <placeholder.h>
 
 #include <dolphin/os.h>
@@ -16,6 +14,8 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "ifall.h"
 
 static struct ifTime_data {
     HSD_GObj* match_timer;

@@ -1,16 +1,5 @@
 #include "it_2725.h"
 
-#include "inlines.h"
-#include "it_26B1.h"
-#include "it_279C.h"
-#include "it_3F14.h"
-#include "itanimlist.h"
-#include "itcoll.h"
-#include "iteffect.h"
-#include "item.h"
-#include "ithitbox.h"
-#include "itmaplib.h"
-
 #include <math.h>
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
@@ -23,6 +12,17 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
+#include "it_26B1.h"
+#include "it_279C.h"
+#include "it_3F14.h"
+#include "itanimlist.h"
+#include "itcoll.h"
+#include "iteffect.h"
+#include "item.h"
+#include "ithitbox.h"
+#include "itmaplib.h"
 
 extern f32 it_804DC73C;
 

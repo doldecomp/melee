@@ -1,13 +1,5 @@
 #include "ftbosslib.h"
 
-#include "ft_0877.h"
-#include "ftlib.h"
-#include "inlines.h"
-#include "types.h"
-
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftMasterHand/types.h"
-
 #include <melee/pl/forward.h>
 
 #include <math.h>
@@ -20,6 +12,13 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "ft_0877.h"
+#include "ftlib.h"
+#include "inlines.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftMasterHand/types.h"
+#include "types.h"
 
 /// @todo Float reorder hack
 #ifdef MUST_MATCH

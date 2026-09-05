@@ -1,10 +1,5 @@
 #include "lbaudio_ax.h"
 
-#include "lb_0195.h"
-#include "lbarchive.h"
-#include "lbaudio_ax.static.h"
-#include "lblanguage.h"
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
@@ -26,6 +21,11 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/synth.h>
+
+#include "lb_0195.h"
+#include "lbarchive.h"
+#include "lbaudio_ax.static.h"
+#include "lblanguage.h"
 
 #define GET_SOUND(x) ((lbAudioAx_UserData*) HSD_GObjGetUserData(x))
 

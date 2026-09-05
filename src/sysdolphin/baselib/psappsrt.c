@@ -1,10 +1,10 @@
 #include "psappsrt.h"
 
+#include <string.h>
+
 #include "objalloc.h"
 #include "particle.h"
 #include "psstructs.h"
-
-#include <string.h>
 
 /* 004D4538 */ static u16 HSD_PSAppSrt_804D7958[4];
 /* 004CDC90 */ HSD_ObjAllocData HSD_PSAppSrt_804D10B0;

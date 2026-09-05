@@ -1,17 +1,17 @@
 #include "grtlink.h"
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 /* 22192C */ static void grTLink_8022192C(bool);
 /* 221930 */ static void grTLink_80221930(void);

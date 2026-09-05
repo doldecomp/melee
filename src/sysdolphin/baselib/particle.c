@@ -19,6 +19,11 @@ typedef struct {
     } content;
 } PerfDispItem;
 
+#include <math.h>
+#include <string.h>
+#include <dolphin/gx.h>
+#include <dolphin/os.h>
+
 #include "cobj.h"
 #include "gobjobject.h"
 #include "mtx.h"
@@ -26,11 +31,6 @@ typedef struct {
 #include "psappsrt.h"
 #include "psstructs.h"
 #include "random.h"
-
-#include <math.h>
-#include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/os.h>
 
 /* 4D78D8 */ u16 hsd_804D78D8 = 0;
 /* 4D78DA */ u16 hsd_804D78DA = 0;

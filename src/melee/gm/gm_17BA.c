@@ -1,13 +1,13 @@
 #include "gm_17BA.h"
 
+#include <melee/lb/lblanguage.h>
+
 #include "gm_17AD.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmresult.h"
 #include "inlines.h"
 #include "types.h"
-
-#include <melee/lb/lblanguage.h>
 
 static const char* lbl_803D79D0[] = {
     "１Ｐ",

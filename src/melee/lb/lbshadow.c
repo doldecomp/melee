@@ -1,8 +1,5 @@
 #include "lbshadow.h"
 
-#include "lbvector.h"
-#include "types.h"
-
 #include <dolphin/gx/GXVert.h>
 #include <melee/cm/types.h>
 #include <melee/ft/ftdrawcommon.h>
@@ -21,6 +18,9 @@
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/util.h>
 #include <sysdolphin/baselib/video.h>
+
+#include "lbvector.h"
+#include "types.h"
 
 static void splGetCardinalTangent(Vec3* p, Vec3* cp, f32 tension, f32 u)
 {

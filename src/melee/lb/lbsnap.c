@@ -1,9 +1,9 @@
+#include <melee/it/itspawn.h>
+
 #include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
 #include "lbsnap.static.h"
-
-#include <melee/it/itspawn.h>
 
 #define _p(x) (lbSnap_80433380.x)
 #include <placeholder.h>

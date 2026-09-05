@@ -1,8 +1,5 @@
 #include "ftyoshispecialn.h"
 
-#include "ftyoshi.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -27,6 +24,9 @@
 #include <melee/it/kinds/ityoshitongue.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "ftyoshi.h"
+#include "types.h"
 
 /* 12CEE0 */ static void fn_8012CEE0(Fighter_GObj*);
 /* 12CF7C */ static void fn_8012CF7C(Fighter_GObj*);

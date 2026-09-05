@@ -1,10 +1,5 @@
 #include "ftCo_CliffClimb.h"
 
-#include "ftCo_CliffAttack.h"
-#include "ftCo_Fall.h"
-#include "ftCo_StopCeil.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -18,6 +13,11 @@
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_CliffAttack.h"
+#include "ftCo_Fall.h"
+#include "ftCo_StopCeil.h"
+#include "types.h"
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);

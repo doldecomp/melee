@@ -1,5 +1,11 @@
 #include "tobj.h"
 
+#include <placeholder.h>
+
+#include <string.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+
 #include "aobj.h"
 #include "cobj.h"
 #include "debug.h"
@@ -7,12 +13,6 @@
 #include "memory.h"
 #include "mtx.h"
 #include "tev.h"
-
-#include <placeholder.h>
-
-#include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 

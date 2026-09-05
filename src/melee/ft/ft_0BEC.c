@@ -1,20 +1,19 @@
 #include "ft_0BEC.h"
 
-#include "fighter.h"
-#include "forward.h"
-#include "ftparts.h"
-#include "types.h"
-
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftFox/types.h"
-#include "kinds/ftMario/ftmariospecialn.h"
-
 #include <dolphin/mtx.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itdrmariopill.h>
 #include <melee/it/kinds/itfoxblaster.h>
 #include <melee/it/kinds/itnessbat.h>
 #include <Runtime/platform.h>
+
+#include "fighter.h"
+#include "forward.h"
+#include "ftparts.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftFox/types.h"
+#include "kinds/ftMario/ftmariospecialn.h"
+#include "types.h"
 
 static inline void setupInitialState(Fighter* fp)
 {

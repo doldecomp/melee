@@ -1,6 +1,3 @@
-#include "ftCo_Attack100.h"
-#include "ftCo_ItemScopeFire.h"
-
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0881.h>
@@ -9,6 +6,9 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/kinds/itsscope.h>
+
+#include "ftCo_Attack100.h"
+#include "ftCo_ItemScopeFire.h"
 
 FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 

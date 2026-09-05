@@ -1,7 +1,5 @@
 #include "gm_16A2.h"
 
-#include "gm_unsplit.h"
-
 #include <stddef.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
@@ -10,6 +8,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "gm_unsplit.h"
 
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;

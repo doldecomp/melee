@@ -1,18 +1,5 @@
 #include "ftCo_DamageIce.h"
 
-#include "forward.h"
-#include "ftCo_DamageFall.h"
-#include "ftCo_DownAttack.h"
-#include "ftCo_DownBound.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FallSpecial.h"
-#include "ftCo_HammerJump.h"
-#include "ftCo_HammerWait.h"
-#include "ftCo_Lift.h"
-#include "ftCo_PassiveStand.h"
-#include "ftCo_Throw.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -40,6 +27,19 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "ftCo_DamageFall.h"
+#include "ftCo_DownAttack.h"
+#include "ftCo_DownBound.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_HammerJump.h"
+#include "ftCo_HammerWait.h"
+#include "ftCo_Lift.h"
+#include "ftCo_PassiveStand.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
 /* 090B48 */ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj);

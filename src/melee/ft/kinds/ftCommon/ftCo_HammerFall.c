@@ -1,9 +1,5 @@
 #include "ftCo_HammerFall.h"
 
-#include "ftCo_Fall.h"
-#include "ftCo_HammerLanding.h"
-#include "ftCo_HammerWait.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -12,6 +8,10 @@
 #include <melee/it/item.h>
 #include <melee/pl/plbonuslib.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_Fall.h"
+#include "ftCo_HammerLanding.h"
+#include "ftCo_HammerWait.h"
 
 bool ftCo_800C5CD4(Fighter_GObj* gobj)
 {

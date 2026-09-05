@@ -1,9 +1,5 @@
 #include "ftkirbyspecialdonkey.h"
 
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -25,6 +21,10 @@
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 static void sdata2_order0(void)

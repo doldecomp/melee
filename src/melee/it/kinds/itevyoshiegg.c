@@ -1,7 +1,5 @@
 #include "itevyoshiegg.h"
 
-#include "forward.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -18,6 +16,8 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
 
 ItemStateTable it_803F6728[] = {
     { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,

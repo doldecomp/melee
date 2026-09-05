@@ -1,9 +1,5 @@
 #include "ftmasterhandtagrockpaper.h"
 
-#include "ftmasterhandthrownmasterhand.h"
-#include "ftmasterhandwait12.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <dolphin/mtx.h>
@@ -17,6 +13,10 @@
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+
+#include "ftmasterhandthrownmasterhand.h"
+#include "ftmasterhandwait12.h"
+#include "types.h"
 
 void ftMh_TagRockPaper_Anim(HSD_GObj* gobj)
 {

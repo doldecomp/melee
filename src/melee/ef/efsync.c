@@ -1,11 +1,5 @@
 #include "efsync.h"
 
-#include "efalt.h"
-#include "efasync.h"
-#include "efdata.h"
-#include "eflib.h"
-#include "types.h"
-
 #include <math.h>
 #include <melee/ft/inlines.h>
 #include <sysdolphin/baselib/generator.h>
@@ -13,6 +7,12 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "efalt.h"
+#include "efasync.h"
+#include "efdata.h"
+#include "eflib.h"
+#include "types.h"
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 

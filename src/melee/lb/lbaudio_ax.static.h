@@ -1,12 +1,12 @@
 #ifndef __GALE01_02305C
 #define __GALE01_02305C
 
-#include "lbaudio_ax.h" // IWYU pragma: export
-
 #include <melee/ft/forward.h>
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/objalloc.h>
+
+#include "lbaudio_ax.h" // IWYU pragma: export
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)
 typedef struct {

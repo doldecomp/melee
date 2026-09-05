@@ -1,11 +1,5 @@
 #include "mnname.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-#include "mnname.static.h"
-#include "mnnamenew.h"
-
 #include <placeholder.h>
 
 #include <dolphin/gx/GXStruct.h>
@@ -24,6 +18,12 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnname.static.h"
+#include "mnnamenew.h"
 
 f32 mnName_804D4BD0[2] = { 39.0f, 59.0f };
 f32 mnName_804D4BD8[2] = { 39.0f, 19.0f };

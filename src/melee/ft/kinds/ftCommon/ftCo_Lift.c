@@ -1,10 +1,5 @@
 #include "ftCo_Lift.h"
 
-#include "ftCo_DamageFall.h"
-#include "ftCo_Fall.h"
-#include "ftCo_ItemThrow.h"
-#include "types.h"
-
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -19,6 +14,11 @@
 #include <melee/it/item.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "ftCo_DamageFall.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemThrow.h"
+#include "types.h"
 
 void ftCo_80096D9C(Fighter_GObj* gobj)
 {

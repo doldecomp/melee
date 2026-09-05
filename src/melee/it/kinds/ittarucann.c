@@ -1,7 +1,5 @@
 #include "ittarucann.h"
 
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
@@ -22,6 +20,8 @@
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "types.h"
 
 const lbColl_80008D30_arg1 it_803B8610 = {
     1, 1, 361, 0, 0, 180, 0, 1, 0,

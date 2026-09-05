@@ -1,11 +1,5 @@
 #include "gm_1884.h"
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A45.h"
-#include "gm_unsplit.h"
-#include "types.h"
-
 #include <melee/it/forward.h>
 
 #include <dolphin/pad.h>
@@ -36,6 +30,12 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "gm_1601.h"
+#include "gm_1A36.h"
+#include "gm_1A45.h"
+#include "gm_unsplit.h"
+#include "types.h"
 
 /// @todo .sdata2 order hack
 static inline void gm_1884_sdata2_order(void)

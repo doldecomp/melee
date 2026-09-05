@@ -1,7 +1,5 @@
 #include "itgshell.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -19,6 +17,8 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 typedef struct itGShell_Attrs {
     float x0;

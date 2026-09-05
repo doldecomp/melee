@@ -1,10 +1,10 @@
 #include "ftCo_DemoCallback0.h"
 
-#include "forward.h"
-
 #include <melee/ft/fighter.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
 
 /// @todo #ftCo_800C7070
 void ftCo_800C6150(Fighter_GObj* gobj)

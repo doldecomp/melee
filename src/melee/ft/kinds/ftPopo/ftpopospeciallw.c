@@ -1,8 +1,5 @@
 #include "ftpopospeciallw.h"
 
-#include "ftpopo.h"
-#include "ftpopospecialhi.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ef/eflib.h>
@@ -18,6 +15,9 @@
 #include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itclimbersblizzard.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "ftpopo.h"
+#include "ftpopospecialhi.h"
 
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {

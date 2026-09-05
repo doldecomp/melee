@@ -1,7 +1,5 @@
 #include "vi0402.h"
 
-#include "vi.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ef/efasync.h>
@@ -19,6 +17,8 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "vi.h"
 
 static SceneDesc* un_804D6F68;
 

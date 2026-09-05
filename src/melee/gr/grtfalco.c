@@ -1,11 +1,5 @@
 #include "grtfalco.h"
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/mp/forward.h>
@@ -14,6 +8,12 @@
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 /* 2207F0 */ static void grTFalco_802207F0(bool);
 /* 2207F4 */ static void grTFalco_802207F4(void);

@@ -1,7 +1,3 @@
-#include "inlines.h"
-#include "mnmain.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/lb/lbarchive.h>
@@ -18,6 +14,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "types.h"
 
 void mnDeflicker_8024A168(HSD_GObj* gobj);
 void mnDeflicker_8024A2E8(HSD_GObj* gobj);

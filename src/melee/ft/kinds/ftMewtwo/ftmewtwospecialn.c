@@ -1,9 +1,5 @@
 #include "ftmewtwospecialn.h"
 
-#include "forward.h"
-#include "ftmewtwo.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
@@ -28,6 +24,10 @@
 #include <melee/ft/types.h>
 #include <melee/it/kinds/itmewtwoshadowball.h>
 #include <melee/lb/lb_00B0.h>
+
+#include "forward.h"
+#include "ftmewtwo.h"
+#include "types.h"
 
 /// SpecialN/SpecialAirN
 

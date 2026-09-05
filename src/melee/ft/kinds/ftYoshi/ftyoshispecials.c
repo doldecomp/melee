@@ -1,9 +1,5 @@
 #include "ftyoshispecials.h"
 
-#include "ftyoshi.h"
-#include "ftYs_SpecialS.static.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -32,6 +28,10 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "ftyoshi.h"
+#include "ftYs_SpecialS.static.h"
+#include "types.h"
 
 static MotionFlags const ftYs_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;

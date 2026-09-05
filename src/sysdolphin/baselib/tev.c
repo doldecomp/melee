@@ -1,9 +1,9 @@
 #include "tev.h"
 
-#include "debug.h"
-
 #include <string.h>
 #include <dolphin/gx.h>
+
+#include "debug.h"
 
 static struct {
     GXColorS10 a;

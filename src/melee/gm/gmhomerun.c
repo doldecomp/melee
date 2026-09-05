@@ -1,11 +1,5 @@
 #include "gmhomerun.h"
 
-#include "forward.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmvsmelee.h"
-#include "types.h"
-
 #include <melee/pl/forward.h>
 
 #include <melee/lb/lbcardgame.h>
@@ -14,6 +8,12 @@
 #include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>
+
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
 GameModeState gm_Mode_Homerun_States[] = {
     {

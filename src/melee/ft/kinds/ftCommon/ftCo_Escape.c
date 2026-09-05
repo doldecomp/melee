@@ -1,9 +1,5 @@
 #include "ftCo_Escape.h"
 
-#include "forward.h"
-#include "ftCo_ItemThrow.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -21,6 +17,10 @@
 #include <melee/ft/kinds/ftYoshi/ftyoshiguard.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "types.h"
 
 /* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,
                                        bool);

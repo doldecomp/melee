@@ -1,8 +1,5 @@
 #include "mnsnap.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/lb_00B0.h>
@@ -22,6 +19,9 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
 
 typedef struct mnSnap_State {
     /* 0x000 */ s32 frame_count;

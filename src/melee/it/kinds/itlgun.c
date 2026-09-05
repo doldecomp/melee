@@ -1,7 +1,5 @@
 #include "itlgun.h"
 
-#include "itlgunray.h"
-
 #include <stdbool.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -10,6 +8,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "itlgunray.h"
 
 /* 28E7D8 */ static void it_8028E7D8(Item_GObj*);
 /* 28E828 */ static bool itLgun_UnkMotion0_Anim(Item_GObj*);

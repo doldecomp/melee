@@ -9,8 +9,6 @@
 
 #include "lb_020A.h"
 
-#include "lbvector.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -19,6 +17,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/quatlib.h>
+
+#include "lbvector.h"
 
 static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 {

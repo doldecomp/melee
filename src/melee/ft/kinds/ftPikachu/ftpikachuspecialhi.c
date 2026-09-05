@@ -1,8 +1,5 @@
 #include "ftpikachuspecialhi.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 
@@ -28,6 +25,9 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "types.h"
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f

@@ -1,8 +1,5 @@
 #include "mninfo.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-
 #include <placeholder.h>
 
 #include <melee/gm/gm_1601.h>
@@ -23,6 +20,9 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
 
 typedef struct MnInfoDataLayout {
     AnimLoopSettings anim;

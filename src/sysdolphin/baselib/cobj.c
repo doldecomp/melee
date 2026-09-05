@@ -1,5 +1,13 @@
 #include "cobj.h"
 
+#include <placeholder.h>
+
+#include <math.h>
+#include <dolphin/gx.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/mtx.h>
+#include <dolphin/vi.h> // IWYU pragma: keep
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -9,14 +17,6 @@
 #include "util.h"
 #include "video.h"
 #include "wobj.h"
-
-#include <placeholder.h>
-
-#include <math.h>
-#include <dolphin/gx.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/mtx.h>
-#include <dolphin/vi.h> // IWYU pragma: keep
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;

@@ -1,5 +1,11 @@
 #include "pobj.h"
 
+#include <math.h> // IWYU pragma: keep
+#include <string.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -13,12 +19,6 @@
 #include "state.h"
 #include "tobj.h"
 #include "util.h"
-
-#include <math.h> // IWYU pragma: keep
-#include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
 
 static void PObjInfoInit(void);
 

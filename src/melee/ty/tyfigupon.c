@@ -1,9 +1,5 @@
 #include "tyfigupon.h"
 
-#include "inlines.h"
-#include "toy.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <stddef.h>
@@ -43,6 +39,10 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "inlines.h"
+#include "toy.h"
+#include "types.h"
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);

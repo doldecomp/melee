@@ -1,9 +1,5 @@
 #include "itseakchain.h"
 
-#include "inlines.h"
-#include "itlinkhookshot.h"
-#include "itseakchain.static.h"
-
 #include <melee/ft/kinds/ftSeak/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -28,6 +24,10 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
+#include "itlinkhookshot.h"
+#include "itseakchain.static.h"
 
 ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },

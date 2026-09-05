@@ -1,7 +1,3 @@
-#include "forward.h"
-#include "ftkirby.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -22,6 +18,10 @@
 #include <melee/it/kinds/itnesspkflash.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "ftkirby.h"
+#include "types.h"
 
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 {

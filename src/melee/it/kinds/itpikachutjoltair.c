@@ -1,9 +1,5 @@
 #include "itpikachutjoltair.h"
 
-#include "forward.h"
-#include "inlines.h"
-#include "itpikachutjoltground.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -16,6 +12,10 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "inlines.h"
+#include "itpikachutjoltground.h"
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 

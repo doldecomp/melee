@@ -1,12 +1,12 @@
 #include "itgamewatchpanic.h"
 
-#include "inlines.h"
-
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchspeciallw.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
+
+#include "inlines.h"
 
 /* 2C7FAC */ static bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj*);
 

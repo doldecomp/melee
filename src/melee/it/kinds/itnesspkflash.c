@@ -1,7 +1,5 @@
 #include "itnesspkflash.h"
 
-#include "itnesspkflashexplode.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -18,6 +16,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "itnesspkflashexplode.h"
 
 /* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj);

@@ -1,7 +1,5 @@
 #include "ittools.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/ftlib.h>
@@ -13,6 +11,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F9260[] = {
     {

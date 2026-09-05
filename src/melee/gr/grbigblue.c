@@ -1,23 +1,18 @@
 #include "grbigblue.h"
 
+#include <placeholder.h>
+
+#include <Runtime/platform.h>
+
 #include "grbigblue.static.h"
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
 
-#include <placeholder.h>
-
-#include <Runtime/platform.h>
-
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
-
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
 
 #include <math.h>
 #include <melee/cm/camera.h>
@@ -35,6 +30,11 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 /* 1E8560 */ static void fn_801E8560(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

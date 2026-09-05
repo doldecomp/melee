@@ -1,8 +1,5 @@
 #include "vi0102.h"
 
-#include "types.h"
-#include "vi.h"
-
 #include <placeholder.h>
 
 #include <melee/sc/forward.h>
@@ -33,6 +30,9 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "types.h"
+#include "vi.h"
 
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;

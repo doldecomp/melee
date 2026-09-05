@@ -1,16 +1,16 @@
 #include "grfigure3.h"
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <dolphin/mtx.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 static void grFigure3_8020E504(bool number);
 static void grFigure3_8020E508(void);

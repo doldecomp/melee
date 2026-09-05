@@ -1,12 +1,5 @@
 #include "gmtoulib.h"
 
-#include "forward.h"
-#include "gm_1601.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmtoulib.static.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -39,6 +32,13 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "forward.h"
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.static.h"
+#include "types.h"
 
 int lbl_804D663C;
 u8 lbl_804D6638[0x4];

@@ -1,8 +1,5 @@
 #include "ftCo_WarpStar.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <math.h>
 #include <stdbool.h>
 #include <dolphin/mtx.h>
@@ -22,6 +19,9 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "types.h"
 
 #ifdef MUST_MATCH
 #pragma force_active on

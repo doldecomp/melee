@@ -1,8 +1,5 @@
 #include "ftcrazyhanddamage0.h"
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -16,6 +13,9 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 
 void fn_80157080(Fighter_GObj* gobj)
 {

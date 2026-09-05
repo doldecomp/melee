@@ -1,9 +1,3 @@
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -11,6 +5,12 @@
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 /* 223580 */ static void grTSamus_OnDemoInit(int);
 /* 223584 */ static void grTSamus_OnInit(void);

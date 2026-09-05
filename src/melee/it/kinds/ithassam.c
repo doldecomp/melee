@@ -1,7 +1,5 @@
 #include "ithassam.h"
 
-#include "inlines.h"
-
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -21,6 +19,8 @@
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 /* 2CDC5C */ static void itHassam_802CDC5C(Item_GObj* gobj);
 /* 2CDC80 */ static void itHassam_802CDC80(Item_GObj* gobj);

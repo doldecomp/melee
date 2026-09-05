@@ -1,10 +1,5 @@
 #include "gmprogressive.h"
 
-#include "gm_1A36.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "types.h"
-
 #include <dolphin/pad.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
@@ -17,6 +12,11 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "gm_1A36.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 static struct {
     HSD_Archive* x0;

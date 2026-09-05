@@ -1,7 +1,5 @@
 #include "itfoxblaster.h"
 
-#include "inlines.h"
-
 #include <stdbool.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -16,6 +14,8 @@
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 /* 2AE200 */ static void it_802AE200(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);

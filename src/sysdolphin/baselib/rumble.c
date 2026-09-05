@@ -3,10 +3,10 @@
 #include <Runtime/platform.h>
 
 /// @todo Circular dependency
-#include "controller.h" // IWYU pragma: keep
-
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
+
+#include "controller.h" // IWYU pragma: keep
 
 extern PadLibData HSD_PadLibData;
 

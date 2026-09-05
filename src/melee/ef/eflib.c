@@ -8,11 +8,6 @@
  */
 #include "eflib.h"
 
-#include "efasync.h"
-#include "efdata.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <math.h>
 #include <stdarg.h>
 #include <dolphin/mtx.h>
@@ -32,6 +27,11 @@
 #include <sysdolphin/baselib/psdisp.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/state.h>
+
+#include "efasync.h"
+#include "efdata.h"
+#include "inlines.h"
+#include "types.h"
 // externs
 
 extern EF_DAT_Entry efAsync_DatEntries[51];

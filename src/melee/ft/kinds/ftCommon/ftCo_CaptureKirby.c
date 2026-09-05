@@ -1,9 +1,5 @@
 #include "ftCo_CaptureKirby.h"
 
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -12,6 +8,10 @@
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
+#include "types.h"
 
 float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
 {

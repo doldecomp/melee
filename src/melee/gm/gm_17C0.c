@@ -1,11 +1,3 @@
-#include "forward.h"
-#include "gm_18A1.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-#include "gmregclear.h"
-#include "gmregcommon.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/cm/camera.h>
@@ -33,6 +25,14 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "forward.h"
+#include "gm_18A1.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
+#include "gmregcommon.h"
+#include "types.h"
 
 typedef struct lbl_804706D8_t {
     s16 x0;

@@ -1,13 +1,5 @@
 #include "ftCo_AttackAir.h"
 
-#include "forward.h"
-#include "ftCo_AirCatch.h"
-#include "ftCo_Attack100.h"
-#include "ftCo_Fall.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_JumpAerial.h"
-#include "ftCo_LandingAir.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -22,6 +14,14 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_Attack100.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_LandingAir.h"
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);
 

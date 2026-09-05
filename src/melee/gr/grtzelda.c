@@ -1,11 +1,5 @@
 #include "grtzelda.h"
 
-#include "granime.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -13,6 +7,12 @@
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 void grTZelda_OnDemoInit(bool);                           /* static */
 void grTZelda_OnInit(void);                               /* static */

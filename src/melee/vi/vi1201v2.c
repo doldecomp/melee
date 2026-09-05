@@ -1,7 +1,5 @@
 #include "vi1201v2.h"
 
-#include "vi.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/cm/camera.h>
@@ -33,6 +31,8 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
+
+#include "vi.h"
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

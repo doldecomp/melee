@@ -1,7 +1,5 @@
 #include "itclimbersblizzard.h"
 
-#include "forward.h"
-
 #include <melee/it/forward.h>
 
 #include <math.h>
@@ -15,6 +13,8 @@
 #include <melee/it/itmaplib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
 
 #define M_TAU 6.283185307179586
 

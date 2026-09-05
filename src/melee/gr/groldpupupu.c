@@ -1,12 +1,5 @@
 #include "groldpupupu.h"
 
-#include "forward.h"
-#include "granime.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -22,6 +15,13 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "granime.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 
 struct grOldpupupu_YakumonoParam {
     s16 x0;

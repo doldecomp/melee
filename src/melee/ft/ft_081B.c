@@ -1,25 +1,6 @@
 #include "ft_081B.h"
 
-#include "fighter.h"
-#include "forward.h"
-#include "ft_0819.h"
-#include "ft_0892.h"
-#include "ftchangeparam.h"
-#include "ftcliffcommon.h"
-#include "ftcommon.h"
-#include "ftwalljump.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <placeholder.h>
-
-#include "kinds/ftCommon/forward.h"
-#include "kinds/ftCommon/ftCo_Fall.h"
-#include "kinds/ftCommon/ftCo_Landing.h"
-#include "kinds/ftCommon/ftCo_MissFoot.h"
-#include "kinds/ftCommon/ftCo_Ottotto.h"
-#include "kinds/ftCommon/ftCo_StopCeil.h"
-#include "kinds/ftCommon/ftCo_StopWall.h"
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -30,6 +11,24 @@
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "fighter.h"
+#include "forward.h"
+#include "ft_0819.h"
+#include "ft_0892.h"
+#include "ftchangeparam.h"
+#include "ftcliffcommon.h"
+#include "ftcommon.h"
+#include "ftwalljump.h"
+#include "inlines.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_Landing.h"
+#include "kinds/ftCommon/ftCo_MissFoot.h"
+#include "kinds/ftCommon/ftCo_Ottotto.h"
+#include "kinds/ftCommon/ftCo_StopCeil.h"
+#include "kinds/ftCommon/ftCo_StopWall.h"
+#include "types.h"
 
 void ft_80081B38(Fighter_GObj* gobj)
 {

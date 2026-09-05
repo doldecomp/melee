@@ -1,9 +1,5 @@
 #include "gmregclear.h"
 
-#include "forward.h"
-#include "gm_unsplit.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/pad.h>
@@ -32,6 +28,10 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "types.h"
 
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x20];

@@ -1,7 +1,5 @@
 #include "itbombhei.h"
 
-#include "itbombhei.static.h"
-
 #include <math.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -10,6 +8,8 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/lb/lb_00F9.h>
+
+#include "itbombhei.static.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)

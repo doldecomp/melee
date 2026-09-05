@@ -1,7 +1,5 @@
 #include "itlizardon.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -17,6 +15,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F7BC0[] = { {
                                      0,

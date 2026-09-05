@@ -1,12 +1,12 @@
 #include "class.h"
 
+#include <string.h>
+#include <dolphin/os.h>
+
 #include "debug.h"
 #include "hash.h"
 #include "memory.h"
 #include "object.h" // IWYU pragma: keep
-
-#include <string.h>
-#include <dolphin/os.h>
 
 void _hsdClassInfoInit(void);
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };

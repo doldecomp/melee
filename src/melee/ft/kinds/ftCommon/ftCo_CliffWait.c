@@ -1,11 +1,5 @@
 #include "ftCo_CliffWait.h"
 
-#include "ftCo_CliffAttack.h"
-#include "ftCo_CliffClimb.h"
-#include "ftCo_CliffJump.h"
-#include "ftCo_DamageFall.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -14,6 +8,12 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_CliffAttack.h"
+#include "ftCo_CliffClimb.h"
+#include "ftCo_CliffJump.h"
+#include "ftCo_DamageFall.h"
+#include "types.h"
 
 /* 09A9AC */ static bool ftCo_8009A9AC(Fighter_GObj* gobj);
 

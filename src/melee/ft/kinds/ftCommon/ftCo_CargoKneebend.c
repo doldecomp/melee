@@ -1,12 +1,5 @@
 #include "ftCo_CargoKneebend.h"
 
-#include "ftCo_CargoJump.h"
-#include "ftCo_CargoThrow.h"
-#include "ftCo_CargoWait.h"
-#include "ftCo_KneeBend.h"
-#include "ftCo_Shouldered.h"
-#include "types.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
@@ -15,6 +8,13 @@
 #include <melee/ft/kinds/ftDonkey/types.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_CargoJump.h"
+#include "ftCo_CargoThrow.h"
+#include "ftCo_CargoWait.h"
+#include "ftCo_KneeBend.h"
+#include "ftCo_Shouldered.h"
+#include "types.h"
 
 void ftCo_8009B9C8(Fighter_GObj* gobj, int arg1)
 {

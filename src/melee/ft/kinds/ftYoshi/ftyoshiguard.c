@@ -1,8 +1,5 @@
 #include "ftyoshiguard.h"
 
-#include "ftyoshi.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -23,6 +20,9 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Pass.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "ftyoshi.h"
+#include "types.h"
 
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {

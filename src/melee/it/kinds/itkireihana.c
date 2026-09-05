@@ -1,7 +1,5 @@
 #include "itkireihana.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/inlines.h>
@@ -12,6 +10,8 @@
 #include <melee/it/itgroundcoll.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F7E28[] = {
     { 0, itKireihana_UnkMotion0_Anim, itKireihana_UnkMotion0_Phys,

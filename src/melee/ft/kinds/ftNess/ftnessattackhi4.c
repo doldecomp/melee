@@ -1,8 +1,5 @@
 #include "ftnessattackhi4.h"
 
-#include "ftness.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/lb/forward.h>
@@ -27,6 +24,9 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
+
+#include "ftness.h"
+#include "types.h"
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)
 {

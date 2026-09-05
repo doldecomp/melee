@@ -1,10 +1,5 @@
 #include "ftCo_AttackS3.h"
 
-#include "forward.h"
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-#include "ftpickupitem.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -20,6 +15,11 @@
 #include <melee/ft/types.h>
 #include <melee/it/it_26B1.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
+#include "ftpickupitem.h"
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
 

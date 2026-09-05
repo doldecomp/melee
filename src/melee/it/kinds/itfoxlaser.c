@@ -1,7 +1,5 @@
 #include "itfoxlaser.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/lb/forward.h>
@@ -17,6 +15,8 @@
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F67D0[] = {
     { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,

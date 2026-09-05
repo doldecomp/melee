@@ -1,10 +1,5 @@
 #include "ftCo_CaptureDamageKoopa.h"
 
-#include "ftCo_Attack100.h"
-#include "ftCo_CaptureCut.h"
-#include "ftCo_CaptureKoopa.h"
-#include "ftCo_CaptureWaitKoopa.h"
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -12,6 +7,11 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <Runtime/platform.h>
+
+#include "ftCo_Attack100.h"
+#include "ftCo_CaptureCut.h"
+#include "ftCo_CaptureKoopa.h"
+#include "ftCo_CaptureWaitKoopa.h"
 
 void ftCo_800BC9C8(Fighter_GObj* gobj)
 {

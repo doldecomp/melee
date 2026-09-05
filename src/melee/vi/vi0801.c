@@ -1,7 +1,5 @@
 #include "vi0801.h"
 
-#include "vi.h"
-
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -26,6 +24,8 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
+
+#include "vi.h"
 
 static SceneDesc* un_804D6FB8;
 static GXColor un_804D6FBC;

@@ -1,14 +1,14 @@
 #ifndef MELEE_IF_TYPES_H
 #define MELEE_IF_TYPES_H
 
-#include "if/forward.h" // IWYU pragma: export
-
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "if/forward.h" // IWYU pragma: export
 
 struct IfDamageFlags {
     u8 explode_animation : 1;

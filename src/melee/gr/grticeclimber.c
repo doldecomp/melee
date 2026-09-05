@@ -1,12 +1,5 @@
 #include "grticeclimber.h"
 
-#include "granime.h"
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -16,6 +9,13 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "granime.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 /* 220F10 */ static void grTIceClimber_80220F10(bool);
 /* 220F14 */ static void grTIceClimber_80220F14(void);

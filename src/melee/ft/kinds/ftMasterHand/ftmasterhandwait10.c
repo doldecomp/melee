@@ -1,5 +1,18 @@
 #include "ftmasterhandwait10.h"
 
+#include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/types.h>
+#include <melee/gr/stage.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
+
 #include "ftmasterhandbackairplane3.h"
 #include "ftmasterhandbackcrush0.h"
 #include "ftmasterhandbackcrush1.h"
@@ -20,19 +33,6 @@
 #include "ftmasterhandwait12.h"
 #include "ftmasterhandwalk.h"
 #include "types.h"
-
-#include <dolphin/mtx.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_084E.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/random.h>
 
 static void ifStage251(HSD_GObj* gobj);
 

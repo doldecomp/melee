@@ -3,9 +3,8 @@
 #include "fighter.h"
 #include "ftCo_800C7070.h"
 #include "ftdata.h"
-#include "types.h"
-
 #include "kinds/ftCommon/forward.h"
+#include "types.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

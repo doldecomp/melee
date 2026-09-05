@@ -1,7 +1,5 @@
 #include "itfoxillusion.h"
 
-#include "inlines.h"
-
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftFox/ftfoxspecials.h>
@@ -14,6 +12,8 @@
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "inlines.h"
 
 ItemStateTable it_803F6818[] = {
     {

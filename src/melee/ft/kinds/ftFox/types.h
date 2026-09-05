@@ -1,14 +1,14 @@
 #ifndef MELEE_FT_CHARA_FTFOX_TYPES_H
 #define MELEE_FT_CHARA_FTFOX_TYPES_H
 
-#include "ftFox/forward.h" // IWYU pragma: export
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+
+#include "ftFox/forward.h" // IWYU pragma: export
 
 struct ftFox_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;

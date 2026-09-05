@@ -1,10 +1,5 @@
 #include "mndatadel.h"
 
-#include "inlines.h"
-#include "mndatadel.static.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-
 #include <placeholder.h>
 
 #include <melee/gm/gm_1601.h>
@@ -27,6 +22,11 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
+
+#include "inlines.h"
+#include "mndatadel.static.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
 
 HSD_Text* mnDataDel_804D6C6C;
 HSD_GObj* mnDataDel_804D6C68;

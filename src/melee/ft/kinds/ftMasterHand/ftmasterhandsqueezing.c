@@ -1,11 +1,5 @@
 #include "ftmasterhandsqueezing.h"
 
-#include "ftmasterhandbackdisappear.h"
-#include "ftmasterhandsqueeze.h"
-#include "ftmasterhandthrownmasterhand.h"
-#include "ftmasterhandwait12.h"
-#include "types.h"
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -17,6 +11,12 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
+
+#include "ftmasterhandbackdisappear.h"
+#include "ftmasterhandsqueeze.h"
+#include "ftmasterhandthrownmasterhand.h"
+#include "ftmasterhandwait12.h"
+#include "types.h"
 
 void ftMh_Squeezing_Anim(HSD_GObj* gobj)
 {

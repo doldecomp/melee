@@ -1,8 +1,5 @@
 #include "gmstaffroll.h"
 
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
-
 #include <melee/ft/forward.h>
 
 #include <math.h>
@@ -34,6 +31,9 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 
 struct staffInfo_t {
     char pad_0[0x948];

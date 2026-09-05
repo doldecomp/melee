@@ -1,8 +1,5 @@
 #include "ftzeldaspeciallw.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
@@ -22,6 +19,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "types.h"
 
 /// 8013ADB4 - 8013AE30 (124 bytes)
 /// https://decomp.me/scratch/LbMVE

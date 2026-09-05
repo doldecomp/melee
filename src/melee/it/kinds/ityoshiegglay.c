@@ -1,7 +1,5 @@
 #include "ityoshiegglay.h"
 
-#include "types.h"
-
 #include <melee/it/forward.h>
 
 #include <melee/ef/efasync.h>
@@ -15,6 +13,8 @@
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "types.h"
 
 ItemStateTable it_803F94A0[] = {
     { -1, it_27CF_UnkMotion0_Anim, it_27CF_UnkMotion0_Phys,

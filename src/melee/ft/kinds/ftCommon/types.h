@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include "ftCommon/forward.h" // IWYU pragma: export
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
@@ -12,6 +10,8 @@
 #include <dolphin/mtx.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
+
+#include "ftCommon/forward.h" // IWYU pragma: export
 
 struct ftCollisionBox {
     /*  +0 */ float top;

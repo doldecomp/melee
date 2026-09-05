@@ -1,11 +1,5 @@
 #include "gmtitle.h"
 
-#include "gm_unsplit.h"
-#include "gmevent.h"
-#include "gmmain_lib.h"
-#include "gmopening.h"
-#include "types.h"
-
 #include <melee/db/db.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -25,6 +19,12 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "gm_unsplit.h"
+#include "gmevent.h"
+#include "gmmain_lib.h"
+#include "gmopening.h"
+#include "types.h"
 
 static StaticModelDesc model_desc_0;
 static StaticModelDesc model_desc_1;

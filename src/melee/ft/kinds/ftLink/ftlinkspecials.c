@@ -1,9 +1,5 @@
 #include "ftlinkspecials.h"
 
-#include "forward.h"
-#include "ftlink.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -29,6 +25,10 @@
 #include <melee/it/kinds/itlinkboomerang.h>
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftlink.h"
+#include "types.h"
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

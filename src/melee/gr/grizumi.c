@@ -1,14 +1,5 @@
 #include "grizumi.h"
 
-#include "granime.h"
-#include "grdatfiles.h"
-#include "grdisplay.h"
-#include "grlib.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
@@ -38,6 +29,15 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 struct grIzumi_YakumonoParam {
     float x0;

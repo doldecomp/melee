@@ -1,8 +1,5 @@
 #include "tylist.h"
 
-#include "toy.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <dolphin/mtx.h>
@@ -30,6 +27,9 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "toy.h"
+#include "types.h"
 
 /* 312834 */ static char* _tyList_80312834(char* buf, u32 num);
 /* 312904 */ static void _tyList_80312904(void*, s8);

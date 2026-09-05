@@ -1,7 +1,5 @@
 #include "itnesspkthunderball.h"
 
-#include "itnesspkthundertrail.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -15,6 +13,8 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/lb/lbvector.h>
+
+#include "itnesspkthundertrail.h"
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 

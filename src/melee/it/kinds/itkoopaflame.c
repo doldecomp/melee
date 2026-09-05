@@ -1,7 +1,5 @@
 #include "itkoopaflame.h"
 
-#include "inlines.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -21,6 +19,8 @@
 #include <melee/lb/lbvector.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2

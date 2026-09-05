@@ -1,9 +1,5 @@
 #include "mnitemsw.h"
 
-#include "inlines.h"
-#include "mnmain.h"
-#include "mnmainrule.h"
-
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
@@ -22,6 +18,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
 
 HSD_GObj* mnItemSw_804D6BE8;
 u8 mnItemSw_804D6BEC;

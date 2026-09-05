@@ -1,11 +1,5 @@
 #include "grtest.h"
 
-#include "forward.h"
-#include "granime.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <Runtime/platform.h>
@@ -14,6 +8,12 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include "forward.h"
+#include "granime.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 GrJoint grTe_803E56B8[] = {
     { 0, 2, 1 },   { 1, 2, 2 },   { 2, 2, 3 },   { 3, 2, 4 }, { 4, 2, 5 },

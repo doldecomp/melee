@@ -1,7 +1,5 @@
 #include "mngallery.h"
 
-#include "inlines.h"
-
 #include <melee/gm/gmhowto.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
@@ -18,6 +16,8 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
+
+#include "inlines.h"
 
 static StaticModelDesc mnGallery_804A0BA0;
 static StaticModelDesc mnGallery_804A0BB0;

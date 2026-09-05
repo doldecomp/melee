@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include "ft/forward.h" // IWYU pragma: export
-
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -39,6 +37,8 @@
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+
+#include "ft/forward.h" // IWYU pragma: export
 
 #define FTPART_INVALID 0xFF
 

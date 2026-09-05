@@ -1,7 +1,5 @@
 #include "itmarumine.h"
 
-#include "inlines.h"
-
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -14,6 +12,8 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "inlines.h"
 
 static Vec3 const it_803B86C8 = { 0 };
 

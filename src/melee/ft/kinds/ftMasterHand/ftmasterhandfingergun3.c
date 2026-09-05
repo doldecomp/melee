@@ -1,8 +1,5 @@
 #include "ftmasterhandfingergun3.h"
 
-#include "forward.h"
-#include "ftmasterhandwait12.h"
-
 #include <melee/ft/forward.h>
 
 #include <melee/ft/fighter.h>
@@ -10,6 +7,9 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/pl/player.h>
+
+#include "forward.h"
+#include "ftmasterhandwait12.h"
 
 void ftMh_FingerGun3_Anim(HSD_GObj* gobj)
 {

@@ -1,8 +1,5 @@
 #include "ithinoarashi.h"
 
-#include "inlines.h"
-#include "itmaril.h"
-
 #include <math.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -17,6 +14,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "inlines.h"
+#include "itmaril.h"
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
 

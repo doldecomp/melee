@@ -1,8 +1,5 @@
 #include "mpcoll.h"
 
-#include "forward.h"
-#include "mplib.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/kinds/ftCommon/forward.h>
@@ -19,6 +16,9 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "forward.h"
+#include "mplib.h"
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

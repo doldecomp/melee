@@ -1,8 +1,5 @@
 #include "camera.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/ft/forward.h>
@@ -44,6 +41,9 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "forward.h"
+#include "types.h"
 
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
                                          CameraTransformState* transform,

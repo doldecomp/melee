@@ -1,7 +1,6 @@
 #include "it_3F14.h"
 
 #include "itdraw.h"
-
 #include "kinds/itbat.h"
 #include "kinds/itbombhei.h"
 #include "kinds/itbox.h"

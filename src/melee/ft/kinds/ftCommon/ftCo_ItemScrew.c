@@ -1,12 +1,5 @@
 #include "ftCo_ItemScrew.h"
 
-#include "forward.h"
-#include "ftCo_Fall.h"
-#include "ftCo_FallAerial.h"
-#include "ftCo_FallSpecial.h"
-#include "ftCo_Jump.h"
-#include "ftCo_JumpAerial.h"
-
 #include <melee/ft/forward.h>
 
 #include <stdbool.h>
@@ -16,6 +9,13 @@
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
+
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallAerial.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Jump.h"
+#include "ftCo_JumpAerial.h"
 
 void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
 {

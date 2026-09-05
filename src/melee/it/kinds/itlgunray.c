@@ -1,8 +1,5 @@
 #include "itlgunray.h"
 
-#include "inlines.h"
-#include "itfoxlaser.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -14,6 +11,9 @@
 #include <melee/it/item.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include "inlines.h"
+#include "itfoxlaser.h"
 
 /* 298300 */ static bool itLgunray_UnkMotion0_Anim(Item_GObj*);
 /* 2983AC */ static void it_802982AC(Item_GObj*, Item_GObj*, Article*);

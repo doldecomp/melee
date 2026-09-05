@@ -1,9 +1,5 @@
 #include "tydisplay.h"
 
-#include "forward.h"
-#include "toy.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <math.h>
@@ -43,6 +39,10 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
+
+#include "forward.h"
+#include "toy.h"
+#include "types.h"
 
 static size_t const _tyDisplay_804D6F10_len = 300;
 

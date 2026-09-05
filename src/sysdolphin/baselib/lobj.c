@@ -1,5 +1,11 @@
 #include "lobj.h"
 
+#include <placeholder.h>
+
+#include <dolphin/gx/GXEnum.h>
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "cobj.h"
@@ -7,12 +13,6 @@
 #include "list.h"
 #include "object.h"
 #include "wobj.h"
-
-#include <placeholder.h>
-
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
 
 static void LObjInfoInit(void);
 

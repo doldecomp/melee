@@ -1,10 +1,5 @@
 #include "ifstock.h"
 
-#include "ifall.h"
-#include "ifstatus.h"
-#include "ifstock.static.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <melee/gm/forward.h>
@@ -31,6 +26,11 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "ifall.h"
+#include "ifstatus.h"
+#include "ifstock.static.h"
+#include "types.h"
 
 struct IfStockStealAnim {
     Vec3 start;

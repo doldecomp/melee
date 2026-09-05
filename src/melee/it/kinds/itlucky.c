@@ -1,7 +1,5 @@
 #include "itlucky.h"
 
-#include "itegg.h"
-
 #include <placeholder.h>
 
 #include <melee/it/forward.h>
@@ -21,6 +19,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "itegg.h"
 
 ItemStateTable it_803F8190[] = {
     {

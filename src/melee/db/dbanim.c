@@ -1,5 +1,3 @@
-#include "db.h"
-
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_KinokoGiantEnd.h>
@@ -9,6 +7,8 @@
 #include <melee/if/textdraw.h>
 #include <melee/if/textlib.h>
 #include <melee/pl/player.h>
+
+#include "db.h"
 
 static struct {
     DevText* text;

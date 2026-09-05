@@ -1,8 +1,5 @@
 #include "lbspdisplay.h"
 
-#include "lbdvd.h"
-#include "types.h"
-
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -32,6 +29,9 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/tobj.h>
+
+#include "lbdvd.h"
+#include "types.h"
 
 HSD_LObj* lb_80011AC4(LightList** list)
 {

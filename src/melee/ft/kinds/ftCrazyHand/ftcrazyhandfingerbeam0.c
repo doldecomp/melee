@@ -1,8 +1,5 @@
 #include "ftcrazyhandfingerbeam0.h"
 
-#include "ftcrazyhandtagcancel.h"
-#include "types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -16,6 +13,9 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+
+#include "ftcrazyhandtagcancel.h"
+#include "types.h"
 
 static void fn_801588B8(HSD_GObj* gobj);
 

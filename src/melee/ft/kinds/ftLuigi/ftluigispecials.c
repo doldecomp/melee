@@ -1,8 +1,5 @@
 #include "ftluigispecials.h"
 
-#include "forward.h"
-#include "types.h"
-
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 
@@ -20,6 +17,9 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/random.h>
+
+#include "forward.h"
+#include "types.h"
 
 /// Luigi's Green Missile GFX callback
 void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)

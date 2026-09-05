@@ -1,10 +1,10 @@
 #include "objalloc.h"
 
-#include "initialize.h"
-#include "memory.h"
-
 #include <string.h>
 #include <dolphin/os/OSAlloc.h>
+
+#include "initialize.h"
+#include "memory.h"
 
 static objheap obj_heap = { 0, 0, -1, -1 };
 

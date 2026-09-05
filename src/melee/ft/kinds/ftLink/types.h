@@ -3,14 +3,14 @@
 
 #include <placeholder.h>
 
-#include "ftLink/forward.h" // IWYU pragma: export
-
 #include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 #include <melee/ft/kinds/ftMars/types.h>
 #include <melee/lb/types.h>
 #include <Runtime/platform.h>
+
+#include "ftLink/forward.h" // IWYU pragma: export
 
 struct ftLk_DatAttrs {
     /* +0 */ float x0;
