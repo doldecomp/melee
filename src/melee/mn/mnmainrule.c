@@ -577,17 +577,27 @@ static inline AnimLoopSettings* mn_8022FEC8_GetSettings(u8 rule_kind,
     return &mn_803EC770[default_value - rule_value];
 }
 
+static inline void mn_8022FEC8_AnimStockDigits(struct mn_8022FB88_arg1_t* data,
+                                               int value)
+{
+    HSD_JObj** digit_jobjs;
+    HSD_JObj* digit_jobj;
+    HSD_JObj* digit_jobj2;
+    digit_jobjs = data->x58;
+    digit_jobj = digit_jobjs[7];
+    mn_8022FEC8_AnimDigit(digit_jobj, (u8) (value / 10));
+    digit_jobj2 = digit_jobjs[8];
+    mn_8022FEC8_AnimDigit(digit_jobj2, (u8) (value % 10));
+}
+
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
     AnimLoopSettings* settings;
     struct mn_8022FB88_arg1_t* data;
-    HSD_JObj** digit_jobjs;
-    HSD_JObj* digit_jobj;
-    HSD_JObj* digit_jobj2;
     int value;
     u8 default_value;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     data = HSD_GObjGetUserData(arg0);
     switch ((s32) arg2) {
@@ -596,12 +606,8 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
             mn_8022FB88(arg3, data);
             return;
         }
-        digit_jobjs = data->x58;
         value = arg3;
-        digit_jobj = digit_jobjs[7];
-        mn_8022FEC8_AnimDigit(digit_jobj, (u8) (value / 10));
-        digit_jobj2 = digit_jobjs[8];
-        mn_8022FEC8_AnimDigit(digit_jobj2, (u8) (value % 10));
+        mn_8022FEC8_AnimStockDigits(data, value);
         return;
     case 3:
         mn_8022FEC8_AnimDamageDigits(arg3, data);
@@ -1161,17 +1167,17 @@ HSD_GObj* mn_80230E38(int arg0)
         case 2:
             break;
         case 1:
-            als = (AnimLoopSettings*) (mn_803EC600 + 0x1AC);
+            als = &mn_803EC770[5];
             break;
         case 3:
-            als = (AnimLoopSettings*) (mn_803EC600 + 0x1B8);
+            als = &mn_803EC770[6];
             break;
         }
         HSD_JObjReqAnim(anim_jobj, als->start_frame);
         HSD_JObjAnim(anim_jobj);
     }
 
-    sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
+    sub_count_ptr = mn_803EC808;
     for (i = 0; i < (s32) num_options; i++) {
         vis_before = mn_80230E38_CountVisible((u8) i);
 
@@ -1226,7 +1232,7 @@ HSD_GObj* mn_80230E38(int arg0)
             HSD_JObjAddChild(option_jobj, cursor_jobj);
 
             if (i != 5 && i != 6) {
-                desc = ((StaticModelDesc**) (mn_803EC600 + 0x1EC))[i];
+                desc = mn_803EC7EC[i];
                 value_jobj = HSD_JObjLoadJoint(desc->joint);
                 HSD_JObjAddAnimAll(value_jobj, desc->animjoint,
                                    desc->matanim_joint, desc->shapeanim_joint);
