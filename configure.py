@@ -1252,7 +1252,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfourside.c"),
             Object(Matching, "melee/gr/grgreatbay.c"),
             Object(Matching, "melee/gr/gricemt.c"),
-            Object(Linkable, "melee/gr/grinishie1.c"),
+            Object(Matching, "melee/gr/grinishie1.c"),
             Object(Matching, "melee/gr/grinishie2.c"),
             Object(Matching, "melee/gr/grkraid.c"),
             Object(Matching, "melee/gr/grrcruise.c"),
@@ -1332,7 +1332,7 @@ config.libs = [
         [
             Object(Matching, "melee/mn/mnmain.c"),
             Object(Matching, "melee/mn/mn_22EC.c"),
-            Object(Linkable, "melee/mn/mnmainrule.c"),
+            Object(Matching, "melee/mn/mnmainrule.c"),
             Object(Linkable, "melee/mn/mnruleplus.c"),
             Object(Linkable, "melee/mn/mnitemsw.c"),
             Object(Linkable, "melee/mn/mnstagesw.c"),
