@@ -95,7 +95,6 @@ typedef struct RegClearEv {
 } RegClearEv;
 
 static struct lbl_80472D28_t lbl_80472D28;
-u8 lbl_804D65B8[8];
 
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
 
@@ -221,22 +220,11 @@ s32 fn_8017F1B8(void)
     }
 
     mask = (u8) fn_8017F008();
-#ifdef MUST_MATCH
-    (void) 0.560000002F;
-    (void) 0.600000024F;
-    (void) 281.0F;
-    (void) 32.0F;
-#endif
     return fn_8016FFD4(gm_8016B774(), mask, 0);
 }
 
 int fn_8017F294(void)
 {
-#ifdef MUST_MATCH
-    (void) -12.0F;
-    (void) 9.0F;
-    (void) 134.400009F;
-#endif
     return lbl_80472D28.x104;
 }
 

@@ -2332,6 +2332,7 @@ melee/gm/gmresult.c:
 	.data       start:0x803D6488 end:0x803D6A08
 	.bss        start:0x8046DBE8 end:0x8046E1B0
 	.sdata      start:0x804D3F68 end:0x804D3FC8
+	.sbss       start:0x804D65B8 end:0x804D65C0
 	.sdata2     start:0x804DA300 end:0x804DA368
 
 melee/gm/gmresultplayer.c:
@@ -2381,7 +2382,7 @@ melee/gm/gmregclear.c:
 	.data       start:0x803D8B88 end:0x803D8CD8
 	.bss        start:0x80472D28 end:0x80472E48
 	.sdata      start:0x804D4058 end:0x804D408D
-	.sbss       start:0x804D65B8 end:0x804D65C8
+	.sbss       start:0x804D65C0 end:0x804D65C8
 	.sdata2     start:0x804DA468 end:0x804DA500
 
 melee/gm/gm_180A.c:
