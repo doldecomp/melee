@@ -497,10 +497,10 @@ typedef struct {
 
     /* 0x22A4 */ u16 scissor_x[4];
     /* 0x22AC */ u16 scissor_y[4];
-    /* 0x22B4 */ u32 dim_w1[2];
-    /* 0x22BC */ u32 dim_w2[2];
-    /* 0x22C4 */ u32 dim_h1[2];
-    /* 0x22CC */ u32 dim_h2[2];
+    /* 0x22B4 */ u16 dim_w1[4];
+    /* 0x22BC */ u16 dim_w2[4];
+    /* 0x22C4 */ u16 dim_h1[4];
+    /* 0x22CC */ u16 dim_h2[4];
     /* 0x22D4 */ PackedS16x4 score_tbl[4];
     /* 0x22F4 */ PackedS16x4 x22F4[4];
 } lbl_8046E3AC_t;
@@ -1577,9 +1577,9 @@ static inline HSD_ImageDesc* fn_80179990_copy_player_image(int slot,
     HSD_ImageDescCopyFromEFB(
         desc,
         lbl_8046E3AC.scissor_x[lookup] +
-            (0x140 - ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] / 4) * 2),
+            (0x140 - ((s32) lbl_8046E3AC.dim_w1[lookup] / 4) * 2),
         lbl_8046E3AC.scissor_y[lookup] +
-            (0xF4 - ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] / 2) * 2),
+            (0xF4 - ((s32) lbl_8046E3AC.dim_h1[lookup] / 2) * 2),
         0, 0);
     return desc;
 }
@@ -1620,14 +1620,11 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 desc = fn_80179990_copy_player_image(arg2, lookup);
 
                 if (!lbl_8046E3AC.x0_4) {
-                    s32 x_offset =
-                        ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] / 4) * 2;
+                    s32 x_offset = ((s32) lbl_8046E3AC.dim_w1[lookup] / 4) * 2;
                     HSD_ImageDescCopyFromEFB(
                         fn_80179990_get_player_img1(arg2), 0x140 - x_offset,
-                        0xF4 -
-                            ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] / 2) *
-                                2,
-                        0, 0);
+                        0xF4 - ((s32) lbl_8046E3AC.dim_h1[lookup] / 2) * 2, 0,
+                        0);
                 }
 
                 HSD_CObjEraseScreen(cobj, 1, 1, 1);
@@ -1662,14 +1659,10 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                             desc,
                             lbl_8046E3AC.scissor_x[lookup] +
                                 (0x140 -
-                                 ((s32) ((u16*) lbl_8046E3AC.dim_w1)[lookup] /
-                                  4) *
-                                     2),
+                                 ((s32) lbl_8046E3AC.dim_w1[lookup] / 4) * 2),
                             lbl_8046E3AC.scissor_y[lookup] +
                                 (0xF4 -
-                                 ((s32) ((u16*) lbl_8046E3AC.dim_h1)[lookup] /
-                                  2) *
-                                     2),
+                                 ((s32) lbl_8046E3AC.dim_h1[lookup] / 2) * 2),
                             0, 0);
 
                         HSD_CObjEraseScreen(cobj, 1, 1, 1);
@@ -2058,10 +2051,10 @@ void fn_8017A9B4(int slot)
         lookup = match_end->team_standings[idx].is_big_loser;
     }
 
-    inline1(disp->player_img1, slot, (u16*) disp->state.dim_w1 + lookup,
-            (u16*) disp->state.dim_h1 + lookup);
-    inline1(disp->player_img2, slot, (u16*) disp->state.dim_w2 + lookup,
-            (u16*) disp->state.dim_h2 + lookup);
+    inline1(disp->player_img1, slot, disp->state.dim_w1 + lookup,
+            disp->state.dim_h1 + lookup);
+    inline1(disp->player_img2, slot, disp->state.dim_w2 + lookup,
+            disp->state.dim_h2 + lookup);
 }
 
 static U32Pair lbl_804D3FD0 = { 0x00500050, 0x00460034 };
