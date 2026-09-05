@@ -667,6 +667,7 @@ static inline HSD_Particle* psSpawnChild(HSD_Particle** head, int linkNo,
 
 void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 {
+    int bank;
     f32 val;
     u8* pc;
     u16 operand;
@@ -676,12 +677,12 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    UNUSED u8 pad_top[88];
+    UNUSED u8 pad_top[84];
     volatile f32 sqrt_res;
     UNUSED u8 pad_mid[144];
     volatile f32 vel_res;
     volatile f32 dist_res;
-    UNUSED u8 pad_bot[116];
+    UNUSED u8 pad_bot[120];
 
 #define fval (*(f32*) &hsd_804D78D0)
 #define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
@@ -974,10 +975,10 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Spawn child particle by cmdList ID */
                 {
                     int linkNo = pp->linkNo;
-                    int bank = pp->bank;
                     int idx;
                     int palflag;
                     HSD_Particle* c;
+                    bank = pp->bank;
 
                     idx = pc[0] << 8;
                     idx += pc[1];
@@ -1008,7 +1009,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     int palflag;
                     HSD_Particle* c;
                     int linkNo;
-                    int bank = pp->bank;
+                    bank = pp->bank;
 
                     idx = pc[0] << 8;
                     idx += pc[1];
@@ -1325,7 +1326,6 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     int idx;
                     int palflag;
                     int linkNo;
-                    int bank;
                     HSD_Particle* c;
 
                     idx = *pc++ << 8;
@@ -1579,19 +1579,22 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Aim velocity toward JObj */
                 {
                     HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
-                    f32 dz, dy, dist_sq, vel_mag_sq, dx;
+                    MtxPtr matrix;
+                    f32 dz, dy, dx, vel_mag_sq, dist_sq;
 
                     if (jobj == NULL) {
                         break;
                     }
                     HSD_JObjSetupMatrix(jobj);
-                    vel_mag_sq = pp->vel.x * pp->vel.x +
-                                 pp->vel.y * pp->vel.y + pp->vel.z * pp->vel.z;
-                    dx = jobj->mtx[0][3];
-                    dx -= pp->pos.x;
-                    dy = jobj->mtx[1][3];
+                    matrix = jobj->mtx;
+
+                    val = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
+                    vel_mag_sq = pp->vel.z * pp->vel.z;
+                    vel_mag_sq += val;
+                    dx = matrix[0][3] - pp->pos.x;
+                    dy = matrix[1][3];
                     dy -= pp->pos.y;
-                    dz = jobj->mtx[2][3] - pp->pos.z;
+                    dz = matrix[2][3] - pp->pos.z;
                     if (vel_mag_sq > 0.0F) {
                         double guess = __frsqrte((double) vel_mag_sq);
                         guess =
@@ -1603,8 +1606,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                         vel_res = (f32) (vel_mag_sq * guess);
                         vel_mag_sq = vel_res;
                     }
-                    dist_sq = dx * dx + dy * dy + dz * dz;
-                    if (dist_sq == 0.0F) {
+                    val = dx * dx + dy * dy;
+                    if ((dist_sq = dz * dz + val) == 0.0F) {
                         break;
                     }
                     if (dist_sq > 0.0F) {
@@ -1652,10 +1655,10 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                 /* Spawn child particle + inherit pos and vel */
                 {
                     int linkNo = pp->linkNo;
-                    int bank = pp->bank;
                     int idx;
                     int palflag;
                     HSD_Particle* c;
+                    bank = pp->bank;
 
                     idx = pc[0] << 8;
                     idx += pc[1];
@@ -1714,7 +1717,7 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     int palflag;
                     HSD_Particle* c;
                     int linkNo;
-                    int bank = pp->bank;
+                    bank = pp->bank;
 
                     idx = pc[0] << 8;
                     idx += pc[1];
@@ -2487,11 +2490,10 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
                     if (flags & 0x08) {
                         f32 a_rand;
                         a_rand = HSD_Randf();
-                        delta = (s8) *pc++;
+                        delta = *(s8*) pc++;
+                        a_rand = (f32) (s32) ((f32) (timing + 1) * a_rand);
                         delta_float =
-                            (f32) (s32) ((f32) (timing + 1) * a_rand);
-                        delta_float *= (f32) (delta << 1);
-                        delta_float /= (f32) timing;
+                            ((f32) (delta << 1) * a_rand) / (f32) timing;
                         if (flags & 0x10) {
                             val = (f32) pp->primColTarget.a + delta_float;
                             if (val < 0.0F) {
@@ -2914,7 +2916,7 @@ do_life:
 
     /* JObj attachment - update JObj position to match particle */
     if (pp->kind & 0x8000) {
-        s32 jobj_idx = (pp->kind >> 12) & 7;
+        s32 jobj_idx = (pp->kind & 0x7000) >> 12;
 
         /* Allocate JObj if slot is empty */
         if (hsd_804D08E8[jobj_idx] == NULL) {
