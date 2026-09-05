@@ -1,3 +1,6 @@
+#ifndef SYSDOLPHIN_BASELIB_SYNTH_STATIC_H
+#define SYSDOLPHIN_BASELIB_SYNTH_STATIC_H
+
 #include "synth.h" // IWYU pragma: export
 
 #include <dolphin/ax.h>
@@ -101,3 +104,5 @@ static struct {
 /* 4D777C */ static s32 HSD_Synth_804D777C;
 /* 4D7780 */ static u32 HSD_Synth_804D7780;
 /* 4D7784 */ static u32 HSD_Synth_804D7784;
+
+#endif

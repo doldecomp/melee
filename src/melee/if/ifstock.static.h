@@ -1,3 +1,6 @@
+#ifndef MELEE_IF_IFSTOCK_STATIC_H
+#define MELEE_IF_IFSTOCK_STATIC_H
+
 #include <melee/sc/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
@@ -64,3 +67,5 @@ struct ifStock_804A1378 ifStock_804A1378;
 struct ifStock_804A1774 ifStock_804A1774;
 HSD_GObj* ifStock_804A1A8C[16];
 struct ifStock_804A1ACC ifStock_804A1ACC;
+
+#endif

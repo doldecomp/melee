@@ -1,3 +1,5 @@
+#ifndef MELEE_IT_KINDS_ITARWINGLASER_H
+#define MELEE_IT_KINDS_ITARWINGLASER_H
 
 #include <melee/it/forward.h>
 
@@ -14,3 +16,5 @@ bool it_802E8418(Item_GObj*);
 bool it_802E8420(Item_GObj*);
 bool it_802E85F4(Item_GObj*);
 bool it_802E8784(Item_GObj*);
+
+#endif

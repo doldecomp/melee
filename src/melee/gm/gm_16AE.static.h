@@ -1,3 +1,6 @@
+#ifndef MELEE_GM_GM_16AE_STATIC_H
+#define MELEE_GM_GM_16AE_STATIC_H
+
 #include <melee/gm/types.h>
 #include <Runtime/platform.h>
 
@@ -20,3 +23,5 @@ static struct {
 };
 
 /* 46B6A0 */ static lbl_8046B6A0_t lbl_8046B6A0;
+
+#endif

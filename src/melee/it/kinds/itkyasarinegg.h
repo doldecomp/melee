@@ -1,3 +1,5 @@
+#ifndef MELEE_IT_KINDS_ITKYASARINEGG_H
+#define MELEE_IT_KINDS_ITKYASARINEGG_H
 
 #include <melee/it/forward.h>
 
@@ -24,3 +26,5 @@ bool itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj);
 bool itKyasarinegg_UnkMotion0_Coll(Item_GObj* gobj);
 void it_802EFCC0(Item_GObj*);
 void it_802EFD84(Item_GObj*);
+
+#endif

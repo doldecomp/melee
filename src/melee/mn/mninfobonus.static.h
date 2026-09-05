@@ -1,3 +1,6 @@
+#ifndef MELEE_MN_MNINFOBONUS_STATIC_H
+#define MELEE_MN_MNINFOBONUS_STATIC_H
+
 #include <melee/sc/forward.h>
 
 #include <melee/sc/types.h>
@@ -62,3 +65,5 @@ struct mnInfoBonus_804A09B0_t {
 } mnInfoBonus_804A09B0;
 
 static u8 mnInfoBonus_804D6C80[0x8];
+
+#endif

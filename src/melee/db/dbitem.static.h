@@ -1,3 +1,6 @@
+#ifndef MELEE_DB_DBITEM_STATIC_H
+#define MELEE_DB_DBITEM_STATIC_H
+
 #include <melee/it/forward.h>
 
 #include <melee/if/types.h>
@@ -95,3 +98,5 @@ static struct {
 static char unused_db_string_803EAC10[] =
     "Item=%d Foods=%d Yaku=%d Sp_Item=%d Pokemon=%d PokeShot=%d CZako=%d "
     "CZakoShot=%d Zako=%d ZakoShot=%d Shot=%d Etc=%d\n";
+
+#endif

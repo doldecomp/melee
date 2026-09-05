@@ -1,3 +1,6 @@
+#ifndef MELEE_IT_KINDS_ITHEIHO_H
+#define MELEE_IT_KINDS_ITHEIHO_H
+
 #include <melee/it/forward.h>
 
 #include <melee/it/kinds/types.h>
@@ -7,3 +10,5 @@
 /* 2D8EC8 */ bool it_802D8EC8(Item_GObj*);
 /* 2D9A0C */ void it_802D9A0C(Item_GObj*, HSD_GObj*);
 /* 3F83F0 */ extern ItemStateTable it_803F83F0[];
+
+#endif
