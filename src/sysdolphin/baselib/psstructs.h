@@ -298,7 +298,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp);
 static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp);
 static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                                         f32 y, f32 z, f32 x0, f32 y0, f32 z0,
-                                        f32 x1, f32 y1, f32 z1);
+                                        f32 x1, f32 y1, f32 z1, GXColor* color,
+                                        f32* prev_x, f32* prev_y, f32* prev_z);
 
 static inline void psDispSub(HSD_Particle* pp, u8* texform);
 
