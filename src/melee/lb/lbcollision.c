@@ -1127,59 +1127,44 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float hit_start_mid_x;
-
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
-    u8 operand_pad[4];
+    Vec3 axis;
+    Vec3 offset;
     Vec3 midpoint;
     Vec3 separation;
-    u8 frame_pad[16];
     float scaled_hurt_radius;
     float hit_start_dot;
-    float hurt_len_sq;
-    float start_delta_y;
-    float closest_denom;
+    float hit_len_sq;
+    float hurt_start_dot;
     float local_dist_sq;
     float allowed_distance;
     float hurt_closest_x;
     float hurt_end_x;
-    float hit_start_mid_y;
     float hurt_closest_y;
-
     float closest_dist_sq;
-
     float hurt_param_from_hit_start;
-    float x_work;
-    float y_work;
-    float start_delta_z;
-    float hit_start_mid_z;
-
-    float hurt_start_dot;
+    float closest_denom;
     float contact_lerp;
     float broadphase_radius;
-    float hurt_delta_z;
     float hit_end_x;
-    float hit_len_sq;
+    float hurt_end_y;
     float hit_start_y;
-    float start_delta_x;
     float hurt_closest_z;
     float hit_start_z;
-    float segment_dot;
-    float hurt_end_y;
+    float hurt_end_z;
+    float hurt_len_sq;
     float hit_param;
-    float local_dist;
     float hurt_param;
     float hurt_param_from_hit_end;
-    float hurt_end_z;
+    float segment_dot;
     float candidate_hurt_param;
     float candidate_hit_param;
     Mtx inv_hurt_mtx;
     float hurt_start_y;
     float hurt_start_z;
     PAD_STACK(4);
-
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
     broadphase_radius = (hurt_radius * broadphase_scale) + hit_radius;
@@ -1250,40 +1235,39 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hit_delta.x = hit_end_x - hit_start_copy.x;
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
+    hurt_end_x = hurt_end->x;
+    axis.x = hurt_end_x - (offset.x = hurt_start_copy.x);
     hurt_end_y = hurt_end->y;
     hurt_start_y = hurt_start_copy.y;
-    hit_start_mid_y = hit_delta.y * hit_delta.y;
+    axis.y = hurt_end_y - hurt_start_y;
     hurt_end_z = hurt_end->z;
-    y_work = hurt_end_y - hurt_start_y;
-    hit_start_mid_x = hit_delta.x * hit_delta.x;
-    {
-        float hit_delta_z_sq = hit_delta.z * hit_delta.z;
-        PAD_STACK(4);
-        hit_start_mid_z = hit_delta_z_sq;
-    }
     hurt_start_z = hurt_start_copy.z;
-    hurt_delta_z = hurt_end_z - hurt_start_z;
-    hurt_end_x = hurt_end->x;
-    hit_len_sq = hit_start_mid_z + (hit_start_mid_x + hit_start_mid_y);
-    x_work = hurt_end_x - (start_delta_x = hurt_start_copy.x);
-    start_delta_x = hit_start_copy.x - start_delta_x;
-    start_delta_y = hit_start_copy.y - hurt_start_y;
+    axis.z = hurt_end_z - hurt_start_z;
+    separation.y = hit_delta.y * hit_delta.y;
+    separation.x = hit_delta.x * hit_delta.x;
+    {
+        PAD_STACK(4);
+        separation.z = hit_delta.z * hit_delta.z;
+    }
+    hit_len_sq = separation.z + (separation.x + separation.y);
+    offset.x = hit_start_copy.x - offset.x;
+    offset.y = hit_start_copy.y - hurt_start_y;
     (void) hurt_end_z;
-    start_delta_z = hit_start_copy.z - hurt_start_z;
-    hurt_start_dot = hurt_delta_z * start_delta_z +
-                     (x_work * start_delta_x + y_work * start_delta_y);
+    offset.z = hit_start_copy.z - hurt_start_z;
+    hurt_start_dot =
+        axis.z * offset.z + (axis.x * offset.x + axis.y * offset.y);
     (void) hurt_end_y;
     (void) hurt_end_x;
-    segment_dot = hit_delta.z * hurt_delta_z +
-                  (hit_delta.x * x_work + hit_delta.y * y_work);
+    segment_dot =
+        hit_delta.z * axis.z + (hit_delta.x * axis.x + hit_delta.y * axis.y);
     {
         PAD_STACK(4);
-        hit_start_dot =
-            hit_delta.z * start_delta_z +
-            (hit_delta.x * start_delta_x + hit_delta.y * start_delta_y);
+        hit_start_dot = hit_delta.z * offset.z +
+                        (hit_delta.x * offset.x + hit_delta.y * offset.y);
     }
-    hurt_len_sq =
-        hurt_delta_z * hurt_delta_z + (x_work * x_work + y_work * y_work);
+    hurt_len_sq = axis.y * axis.y;
+    hurt_len_sq = axis.x * axis.x + hurt_len_sq;
+    hurt_len_sq = axis.z * axis.z + hurt_len_sq;
     closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
     (void) hit_len_sq;
     if (approximatelyZero(hurt_len_sq)) {
@@ -1301,29 +1285,20 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
         }
     } else {
         if (approximatelyZero(closest_denom)) {
-            float hit_end_mid_x;
-            float hit_end_mid_y;
-            float hit_end_mid_z;
-
-            // For parallel axes, project the hit endpoint nearer the hurt
-            // midpoint.
-            midpoint.x =
-                (float) ((0.5 * (f64) x_work) + (f64) hurt_start_copy.x);
-            midpoint.y = (float) ((0.5 * (f64) y_work) + (f64) hurt_start_y);
-            hit_start_mid_y = hit_start_copy.y - midpoint.y;
-            midpoint.z =
-                (float) ((0.5 * (f64) hurt_delta_z) + (f64) hurt_start_z);
-            hit_end_mid_y = hit_end->y - midpoint.y;
-            hit_start_mid_x = hit_start_copy.x - midpoint.x;
-            hit_end_mid_x = hit_end->x - midpoint.x;
-            hit_start_mid_z = hit_start_copy.z - midpoint.z;
-            hit_end_mid_z = hit_end->z - midpoint.z;
-            if (((hit_start_mid_z * hit_start_mid_z) +
-                 ((hit_start_mid_x * hit_start_mid_x) +
-                  (hit_start_mid_y * hit_start_mid_y))) <
-                ((hit_end_mid_z * hit_end_mid_z) +
-                 ((hit_end_mid_x * hit_end_mid_x) +
-                  (hit_end_mid_y * hit_end_mid_y))))
+            midpoint.x = 0.5 * axis.x + hurt_start_copy.x;
+            midpoint.y = 0.5 * axis.y + hurt_start_y;
+            midpoint.z = 0.5 * axis.z + hurt_start_z;
+            separation.x = hit_start_copy.x - midpoint.x;
+            midpoint.x = hit_end->x - midpoint.x;
+            separation.y = hit_start_copy.y - midpoint.y;
+            midpoint.y = hit_end->y - midpoint.y;
+            separation.z = hit_start_copy.z - midpoint.z;
+            midpoint.z = hit_end->z - midpoint.z;
+            if (((separation.z * separation.z) +
+                 ((separation.x * separation.x) +
+                  (separation.y * separation.y))) <
+                ((midpoint.z * midpoint.z) +
+                 ((midpoint.x * midpoint.x) + (midpoint.y * midpoint.y))))
             {
                 Vec3 a2;
                 Vec3 d1;
@@ -1424,18 +1399,18 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hit_closest->x = (hit_delta.x * hit_param) + hit_start_copy.x;
     hit_closest->y = (hit_delta.y * hit_param) + hit_start_copy.y;
     hit_closest->z = (hit_delta.z * hit_param) + hit_start_copy.z;
-    hurt_closest->x = (x_work * hurt_param) + hurt_start_copy.x;
-    hurt_closest->y = (y_work * hurt_param) + hurt_start_y;
-    hurt_closest->z = (hurt_delta_z * hurt_param) + hurt_start_z;
+    hurt_closest->x = (axis.x * hurt_param) + hurt_start_copy.x;
+    hurt_closest->y = (axis.y * hurt_param) + hurt_start_y;
+    hurt_closest->z = (axis.z * hurt_param) + hurt_start_z;
     separation.x = hit_closest->x - hurt_closest->x;
     separation.y = hit_closest->y - hurt_closest->y;
     separation.z = hit_closest->z - hurt_closest->z;
     closest_dist_sq =
         (separation.z * separation.z) +
         ((separation.x * separation.x) + (separation.y * separation.y));
-    x_work = sqrtf(closest_dist_sq);
-    if (approximatelyZero(x_work)) {
-        *out_overlap = (hit_radius + hurt_radius) - x_work;
+    axis.x = sqrtf(closest_dist_sq);
+    if (approximatelyZero(axis.x)) {
+        *out_overlap = (hit_radius + hurt_radius) - axis.x;
         *out_contact_pos = *hit_closest;
         return true;
     }
@@ -1450,11 +1425,11 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     local_dist_sq =
         (separation.z * separation.z) +
         ((separation.x * separation.x) + (separation.y * separation.y));
-    local_dist = sqrtf(local_dist_sq);
-    scaled_hurt_radius = (hurt_radius * x_work) / local_dist;
-    contact_lerp = scaled_hurt_radius / x_work;
+    local_dist_sq = sqrtf(local_dist_sq);
+    scaled_hurt_radius = (hurt_radius * axis.x) / local_dist_sq;
+    contact_lerp = scaled_hurt_radius / axis.x;
     allowed_distance = hit_radius + scaled_hurt_radius;
-    *out_overlap = allowed_distance - x_work;
+    *out_overlap = allowed_distance - axis.x;
     hurt_closest_x = hurt_closest->x;
     out_contact_pos->x =
         (contact_lerp * (hit_closest->x - hurt_closest_x)) + hurt_closest_x;
@@ -1464,7 +1439,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     hurt_closest_z = hurt_closest->z;
     out_contact_pos->z =
         (contact_lerp * (hit_closest->z - hurt_closest_z)) + hurt_closest_z;
-    if (allowed_distance < x_work) {
+    if (allowed_distance < axis.x) {
         return false;
     }
     return true;
