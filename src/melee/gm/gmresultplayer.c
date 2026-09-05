@@ -477,6 +477,11 @@ typedef union {
 } PackedS16x4;
 
 typedef struct {
+    u32 lo;
+    u32 hi;
+} U32Pair;
+
+typedef struct {
     /* 0x00:0 */ u8 x0_0 : 4;
     /* 0x00:4 */ u8 x0_4 : 2;
     /* 0x00:6 */ u8 x0_6 : 2;
@@ -2074,6 +2079,8 @@ static s32 lbl_804D3FF4 = 0x00060000;
 static s32 lbl_804D3FF8 = 0x000E000E;
 static s32 lbl_804D3FFC = 0x00060000;
 
+#define RESULTS_DISP ((ResultsDisplayLayout*) &lbl_8046E1B0)
+
 static inline struct MatchTeamData*
 fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
 {
@@ -2082,22 +2089,10 @@ fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
 
 static inline void fn_8017AA78_init_state(GXTexFmt image_format)
 {
-    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
-
     Player_InitAllPlayers();
-    disp->shared_img.image_ptr = NULL;
-    lb_800121FC(&disp->shared_img, 0x64, 0x98, image_format, 0);
-    disp->state.match_end = *fn_80174274();
-}
-
-static inline u32* fn_8017AA78_get_dim_h1(lbl_8046E3AC_t* state)
-{
-    return state->dim_h1;
-}
-
-static inline u32* fn_8017AA78_get_dim_h2(lbl_8046E3AC_t* result_layout_state)
-{
-    return result_layout_state->dim_h2;
+    RESULTS_DISP->shared_img.image_ptr = NULL;
+    lb_800121FC(&RESULTS_DISP->shared_img, 0x64, 0x98, image_format, 0);
+    RESULTS_DISP->state.match_end = *fn_80174274();
 }
 
 static inline int fn_8017AA78_get_result(ResultsDisplayLayout* disp)
@@ -2112,20 +2107,7 @@ typedef union {
 
 static inline void fn_8017AA78_set_x0_0(u8 x0_0_value)
 {
-    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
-
-    disp->state.x0_0 = x0_0_value;
-}
-
-static inline void fn_8017AA78_inline4(PackedS16x4** x22f4,
-                                       lbl_8046E3AC_t** result_state,
-                                       PackedS16x4** score_table)
-{
-    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
-
-    *x22f4 = (PackedS16x4*) gmResultX22F4Init;
-    *result_state = &disp->state;
-    *score_table = (PackedS16x4*) gmResultScoreTableInit;
+    RESULTS_DISP->state.x0_0 = x0_0_value;
 }
 
 void fn_8017AA78(const u8* arg0)
@@ -2154,10 +2136,9 @@ void fn_8017AA78(const u8* arg0)
     fn_8017AA78_set_x0_0(1);
     disp->state.x0_4 = 0;
     disp->state.x0_6 = 0;
-    fn_8017AA78_inline4(&p7, &state, &p5);
-#ifdef MUST_MATCH
+    p7 = (PackedS16x4*) gmResultX22F4Init;
+    state = &RESULTS_DISP->state;
     p5 = (PackedS16x4*) gmResultScoreTableInit;
-#endif
     player_state.state = state;
 
     {
@@ -2169,38 +2150,26 @@ void fn_8017AA78(const u8* arg0)
         (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
-        {
-            u32* dim_h1 = fn_8017AA78_get_dim_h1(state);
-            a = lbl_804D3FD8;
-            (void) a;
-            b = lbl_804D3FDC;
-            (void) b;
-            dim_h1[0] = a;
-            dim_h1[1] = b;
-        }
+        a = lbl_804D3FD8;
+        (void) a;
+        b = lbl_804D3FDC;
+        (void) b;
+        state->dim_h1[0] = a;
+        state->dim_h1[1] = b;
         a = lbl_804D3FE0;
         (void) a;
         b = lbl_804D3FE4;
         (void) b;
         state->dim_w2[0] = a;
         state->dim_w2[1] = b;
-        {
-            u32* dim_h2 = fn_8017AA78_get_dim_h2(state);
-            a = lbl_804D3FE8;
-            (void) a;
-            b = lbl_804D3FEC;
-            (void) b;
-            dim_h2[0] = a;
-            dim_h2[1] = b;
-        }
-        a = lbl_804D3FF0;
-        b = lbl_804D3FF4;
-        ((u32*) state->scissor_y)[0] = a;
-        ((u32*) state->scissor_y)[1] = b;
-        a = lbl_804D3FF8;
-        b = lbl_804D3FFC;
-        ((u32*) state->scissor_x)[0] = a;
-        ((u32*) state->scissor_x)[1] = b;
+        a = lbl_804D3FE8;
+        (void) a;
+        b = lbl_804D3FEC;
+        (void) b;
+        state->dim_h2[0] = a;
+        state->dim_h2[1] = b;
+        *(U32Pair*) state->scissor_y = *(U32Pair*) &lbl_804D3FF0;
+        *(U32Pair*) state->scissor_x = *(U32Pair*) &lbl_804D3FF8;
     }
 
     {
