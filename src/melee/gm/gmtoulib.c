@@ -56,6 +56,7 @@ extern char* const lbl_804DA6B4;
 extern char* const lbl_804DA6B8;
 extern char* const lbl_804DA6BC;
 extern char* const lbl_804DA6C0;
+extern char* const lbl_804DA6C4;
 extern char* const lbl_804DA6C8;
 extern char* const lbl_804DA6CC;
 extern char* const lbl_804DA6D0;
@@ -1786,8 +1787,6 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     }
 }
 
-char* const lbl_804DA6C4 = lbl_803D9EE8;
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
@@ -1933,6 +1932,15 @@ void fn_8018F00C(char* dest, s32 slot_id)
         strcpy(dest, GetNameText((u8) slot_id));
     }
 }
+
+char* const lbl_804DA6B4 = NULL;
+char* const lbl_804DA6B8 = NULL;
+char* const lbl_804DA6BC = NULL;
+char* const lbl_804DA6C0 = NULL;
+char* const lbl_804DA6C4 = lbl_803D9EE8;
+char* const lbl_804DA6C8 = NULL;
+char* const lbl_804DA6CC = NULL;
+char* const lbl_804DA6D0 = NULL;
 
 s32 gm_8018F1B0(MatchEnd* me)
 {
@@ -2741,11 +2749,3 @@ void gm_801905F0(StartMeleeData* arg0)
 
     fn_8019EF08(&sp18);
 }
-
-char* const lbl_804DA6B4 = NULL;
-char* const lbl_804DA6B8 = NULL;
-char* const lbl_804DA6BC = NULL;
-char* const lbl_804DA6C0 = NULL;
-char* const lbl_804DA6C8 = NULL;
-char* const lbl_804DA6CC = NULL;
-char* const lbl_804DA6D0 = NULL;
