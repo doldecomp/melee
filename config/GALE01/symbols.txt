@@ -22539,6 +22539,7 @@ gmClassic_803DDEC8 = .data:0x803DDEC8; // type:object size:0x2F0 scope:local dat
 gm_Mode_Adventure_States = .data:0x803DE1B8; // type:object size:0x498 scope:global data:4byte
 gm_803DE650 = .data:0x803DE650; // type:object size:0x2E0 scope:local data:byte
 gm_Mode_AllStar_States = .data:0x803DE930; // type:object size:0x2B8 scope:global
+...data.0 = .data:0x803DE930; // type:label scope:local
 gm_803DEBE8 = .data:0x803DEBE8; // type:object size:0x64 scope:local data:4byte
 gm_803DEC4C = .data:0x803DEC4C; // type:object size:0x68
 gm_Mode_TargetTest_States = .data:0x803DECB8; // type:object size:0x48 scope:global
