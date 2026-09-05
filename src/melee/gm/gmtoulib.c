@@ -210,7 +210,6 @@ void fn_8018A970(int arg0)
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
     u8* px3;
-    s32 x14;
     s32 val1;
     s32* p48;
     s32* p34;
@@ -227,7 +226,6 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     s32* pX10;
     s32 val2;
     s32 tmp;
-    u8 x2;
     u8 x3;
     u8 tm_x2E;
 
@@ -293,8 +291,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 }
                 case 1: {
                     xC = entry->xC;
-                    x14 = entry->x14;
-                    val1 = xC + x14;
+                    val1 = xC + entry->x14;
                     pX10 = &entry->x10;
                     pX18 = &entry->x18;
                     *p3C = val1;
@@ -312,9 +309,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 default: {
-                    x14 = lbl_80473AB8[entry_idx].x14;
                     xC = lbl_80473AB8[entry_idx].xC;
-                    val1 = xC + x14 / 2;
+                    val1 = xC + lbl_80473AB8[entry_idx].x14 / 2;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
@@ -352,8 +348,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 }
                 case 1: {
                     xC = entry->xC;
-                    x14 = entry->x14;
-                    val1 = xC + x14;
+                    val1 = xC + entry->x14;
                     pX10 = &entry->x10;
                     pX18 = &entry->x18;
                     *p3C = val1;
@@ -386,8 +381,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 }
                 default: {
                     xC = lbl_80473AB8[entry_idx].xC;
-                    x14 = lbl_80473AB8[entry_idx].x14;
-                    val1 = xC + x14;
+                    val1 = xC + lbl_80473AB8[entry_idx].x14;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
@@ -405,18 +399,16 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 break;
             }
         } else {
-            x14 = lbl_80473AB8[entry_idx].x14;
             xC = lbl_80473AB8[entry_idx].xC;
-            val1 = xC + slot_idx * (x14 / (s32) x3);
+            val1 = xC + slot_idx * (lbl_80473AB8[entry_idx].x14 / (s32) x3);
             pX18 = &lbl_80473AB8[entry_idx].x18;
             *p3C = val1;
             *p44 = val1;
             *p34 = val1;
             {
                 x18 = lbl_80473AB8[entry_idx].x18;
-                x2 = bracket->entries[entry_idx].x2;
                 x10 = lbl_80473AB8[entry_idx].x10;
-                val2 = x10 + x18 - x18 * x2;
+                val2 = x10 + x18 - x18 * bracket->entries[entry_idx].x2;
                 *p40 = val2;
                 *p48 = val2;
                 *p38 = val2;
