@@ -927,6 +927,38 @@ static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
     return p[0x1C];
 }
 
+static inline u8 mnDiagram_GetVisibleNameRowForInput(u8* sorted, int start,
+                                                     int rank)
+{
+    u8* p;
+    u8* p2;
+    int remaining;
+    int idx;
+
+    remaining = rank;
+    p = sorted;
+    p = p + start;
+    idx = start;
+    p = p + 0x1C;
+    while (remaining > 0) {
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x78) {
+            return 0x78;
+        }
+        if (GetNameText(*p2) == NULL) {
+            goto loop;
+        }
+        remaining--;
+    }
+    p = sorted;
+    p += idx;
+    return p[0x1C];
+}
+
 static inline u8 mnDiagram_GetVisibleNameFrom2(u8* sorted, int start, int rank)
 {
     int remaining;
@@ -1037,18 +1069,18 @@ loop:
     return (u8) found;
 }
 
-static inline u8 mnDiagram_FindNextName(s32 cur)
+static inline int mnDiagram_FindNextName(s32 cur)
 {
     s32 found = cur;
 loop:
     found++;
     if (found >= 0x78) {
-        return cur;
+        return (u8) cur;
     }
     if (GetNameText(found & 0xFF) == NULL) {
         goto loop;
     }
-    return found;
+    return (u8) found;
 }
 
 static inline u8 mnDiagram_GetVisibleNameCursorFrom(u8* sorted, int start,
@@ -1116,6 +1148,112 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
     return result;
 }
 
+static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
+                                                           int start, int rank)
+{
+    u8 result;
+    int idx;
+    u8* p;
+    u8* p2;
+    int remaining;
+
+    remaining = rank;
+    idx = start;
+    p = sorted + start;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[idx];
+            break;
+        }
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
+
+static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
+                                                        Diagram* data,
+                                                        const u16* selection)
+{
+    u16 selected_word;
+    u16 cursor_word;
+    int start;
+    u8 result;
+    u8* p;
+    u8* p2;
+    int remaining;
+
+    selected_word = *selection;
+    cursor_word = data->fighter_cursor_pos;
+    remaining = selected_word >> 8;
+    start = cursor_word >> 8;
+    p = sorted + start;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[start];
+            break;
+        }
+        p2 = p;
+    loop:
+        start++;
+        p2++;
+        p++;
+        if (start >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
+
+static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
+                                                        u8* p, int start,
+                                                        int rank)
+{
+    u8 result;
+    u8* p2;
+    int remaining;
+    int idx;
+
+    remaining = rank;
+    idx = start;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[idx];
+            break;
+        }
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
+
 static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
                                                         int rank)
 {
@@ -1150,6 +1288,37 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
     return result;
 }
 
+static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
+{
+    return mnDiagram_804D6C10->user_data;
+}
+
+static inline u8 mnDiagram_GetVisibleNameColumnForInput(int start, int rank)
+{
+    while (rank > 0) {
+        do {
+            start++;
+            if (start >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
+        rank--;
+    }
+    return mnDiagram_GetNameByIndex(start);
+}
+
+static inline s32 mnDiagram_CountUnlockedFightersForInput(void)
+{
+    int i;
+    s32 count = 0;
+    for (i = 0; i < 0x19; i++) {
+        if (mn_IsFighterUnlocked(i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
 ///
 /// Dispatches the current frame's menu input:
@@ -1166,31 +1335,20 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
 ///   - D-pad (1/2/4/8): move the cursor within the grid, scrolling the data
 ///                  window by a page when moving past a visible edge.
 ///
-/// The "visible entry" scans skip locked fighters / empty name slots, and are
-/// factored into the mnDiagram_GetVisible*From /
-/// mnDiagram_Get{Prev,Next}*Index helpers shared with mndiagram2.
-static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
-{
-    return mnDiagram_804D6C10->user_data;
-}
-
+/// The visible-entry scans skip locked fighters and empty name slots.
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
-    u8* ptr2;
-    u8* ptr;
     HSD_GObjProc* proc;
     u8 row_result;
     s32 i;
-    u8* ptr3;
     u16* selection;
     s16 new_var;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
     Diagram* data = mnDiagram_GetCurrentDiagramData();
     u32 input = mn_80229624(4);
-    s32 count = 0;
+    s32 count;
     s32 col;
     s32 row;
-    s32 row2;
     s32 new_var2;
     s32 row3;
     s32 row4;
@@ -1207,7 +1365,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 cur;
     s32 cursor_pos;
     s32 count2;
-    PAD_STACK(48);
+    /* Preserve the original 0x80-byte frame while this remains unmatched. */
+    PAD_STACK(24);
     mn_804A04F0.buttons = input;
     count2 = 0;
     if (input & MenuInput_Confirm) {
@@ -1221,73 +1380,21 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         if (data->is_name_mode != 0) {
             col = mn_804A04F0.hovered_selection;
             cur = col;
-            col_result = mnDiagram_GetVisibleNameFrom(
-                sorted, (u8) data->name_cursor_pos, (u8) cur);
+            col_result = mnDiagram_GetVisibleNameColumnForInput(
+                (u8) data->name_cursor_pos, (u8) cur);
             row = mn_804A04F0.hovered_selection >> 8;
-            (void) row;
             cursor_pos = data->name_cursor_pos;
-            row_result = mnDiagram_GetVisibleNameFrom(
-                sorted, cursor_pos >> 8, mn_804A04F0.hovered_selection >> 8);
+            row_result = mnDiagram_GetVisibleNameRowForInput(
+                sorted, cursor_pos >> 8, row);
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }
-        selection = (u16*) &mn_804A04F0;
-        cursor_pos = data->fighter_cursor_pos;
-        col = (u8) * ++selection;
-        i = (u8) cursor_pos;
-        ptr = sorted + i;
-        goto fc_test;
-    fc_outer:
-        if (col == 0) {
-            col_result2 = sorted[i];
-        } else {
-            ptr2 = ptr;
-        fc_inner:
-            i++;
-
-            ptr2++;
-            ptr++;
-            if (i >= 0x19) {
-                col_result2 = 0x19;
-            } else if (mn_IsFighterUnlocked(*ptr2) != 0) {
-                col--;
-            fc_test:
-                if (col >= 0) {
-                    goto fc_outer;
-                }
-
-            } else {
-                goto fc_inner;
-            }
-        }
-
-        row2 = *selection >> 8;
-        i = data->fighter_cursor_pos >> 8;
-        ptr = sorted + i;
-        goto fr_test;
-    fr_outer:
-        if (row2 == 0) {
-            row_result2 = sorted[i];
-        } else {
-            ptr2 = ptr;
-        fr_inner:
-            i++;
-
-            ptr2++;
-            ptr++;
-            if (i >= 0x19) {
-                row_result2 = 0x19;
-            } else if (mn_IsFighterUnlocked(*ptr2) != 0) {
-                row2--;
-            fr_test:
-                if (row2 >= 0) {
-                    goto fr_outer;
-                }
-
-            } else {
-                goto fr_inner;
-            }
-        }
+        selection = &mn_804A04F0.hovered_selection;
+        row_result2 = (u8) data->fighter_cursor_pos;
+        col_result2 = mnDiagram_GetVisibleFighterColumnForInput(
+            sorted, row_result2, (u8) *selection);
+        row_result2 =
+            mnDiagram_GetVisibleFighterRowForInput(sorted, data, selection);
 
         mnDiagram_CreatePopup(col_result2, row_result2, 0);
         return;
@@ -1348,13 +1455,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                                   data->name_cursor_pos >> 8);
             return;
         }
-        count = 0;
-        ptr3 = sorted;
-        for (i = 0; i < 0x19; i++) {
-            if (mn_IsFighterUnlocked(i) != 0) {
-                count++;
-            }
-        }
+        count = mnDiagram_CountUnlockedFightersForInput();
 
         new_var2 = count;
         if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= new_var2) {
@@ -1396,6 +1497,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & 2) {
+            u8 next_name;
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count > (col + 1))) {
                 sfxMove();
@@ -1406,35 +1508,14 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
             if (count > 0xA) {
                 cur = (u8) data->name_cursor_pos;
-                found = mnDiagram_FindNextName(cur);
-                if (cur != found) {
-                    row2 = 0xA;
-                    ptr2 = sorted + cur;
-                    ptr2 = ptr2 + 0x1C;
-                dn_n_outer:
-                    ptr = ptr2;
-
-                dn_n_inner:
-                    cur++;
-
-                    ptr++;
-                    ptr2++;
-                    if (cur >= 0x78) {
-                        col_result3 = 0x78;
-                    } else if (GetNameText(*ptr) != 0L) {
-                        row2--;
-                        if (row2 <= 0) {
-                            col_result3 = sorted[cur + 0x1C];
-                        } else {
-                            goto dn_n_outer;
-                        }
-                    } else {
-                        goto dn_n_inner;
-                    }
+                next_name = (u8) mnDiagram_FindNextName(cur);
+                if (cur != next_name) {
+                    col_result3 =
+                        mnDiagram_GetVisibleNameFrom(sorted, cur, 0xA);
                     if (col_result3 != 0x78) {
                         sfxMove();
                         data->name_cursor_pos =
-                            (data->name_cursor_pos & 0xFF00) | found;
+                            (data->name_cursor_pos & 0xFF00) | next_name;
                         mnDiagram_RefreshGrid(mnDiagram_804D6C10,
                                               (u8) data->name_cursor_pos,
                                               data->name_cursor_pos >> 8);
@@ -1462,6 +1543,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & 8) {
+            u8 next_name;
             row4 = mn_804A04F0.hovered_selection >> 8;
             if ((row4 < 6) && (count > (row4 + 1))) {
                 sfxMove();
@@ -1471,35 +1553,13 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
             if (count > 7) {
                 cur = data->name_cursor_pos >> 8;
-                found = mnDiagram_FindNextName(cur);
-                if (cur != found) {
-                    row2 = 7;
-                    ptr2 = sorted + cur;
-                    ptr2 = ptr2 + 0x1C;
-                rt_n_outer:
-                    ptr = ptr2;
-
-                rt_n_inner:
-                    cur++;
-
-                    ptr++;
-                    ptr2++;
-                    if (cur >= 0x78) {
-                        row_result3 = 0x78;
-                    } else if (GetNameText(*ptr) != 0L) {
-                        row2--;
-                        if (row2 <= 0) {
-                            row_result3 = sorted[cur + 0x1C];
-                        } else {
-                            goto rt_n_outer;
-                        }
-                    } else {
-                        goto rt_n_inner;
-                    }
+                next_name = (u8) mnDiagram_FindNextName(cur);
+                if (cur != next_name) {
+                    row_result3 = mnDiagram_GetVisibleNameFrom(sorted, cur, 7);
                     if (row_result3 != 0x78) {
                         sfxMove();
                         data->name_cursor_pos =
-                            ((u8) data->name_cursor_pos) | (found << 8);
+                            ((u8) data->name_cursor_pos) | (next_name << 8);
                         mnDiagram_RefreshGrid(mnDiagram_804D6C10,
                                               (u8) data->name_cursor_pos,
                                               data->name_cursor_pos >> 8);
@@ -1509,11 +1569,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
     } else {
         new_var = 0;
-        for (count = count2; count < 0x19; count++) {
-            if (mn_IsFighterUnlocked(count) != new_var) {
-                count2++;
-            }
-        }
+        count2 = mnDiagram_CountUnlockedFightersForHeaders();
 
         if (input & 1) {
             col = (u8) mn_804A04F0.hovered_selection;
@@ -1537,6 +1593,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & 2) {
+            u8* nav_ptr;
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count2 > (col + 1))) {
                 sfxMove();
@@ -1547,31 +1604,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
             if (count2 > 0xA) {
                 cur = (u8) data->fighter_cursor_pos;
-                ptr = sorted + cur;
+                nav_ptr = sorted + cur;
                 row5 = mnDiagram_FindNextFighter(sorted, cur);
                 found = row5;
-                row2 = 0xA;
-            dn_f_outer:
-                if (row2 == new_var) {
-                    col_result4 = sorted[cur];
-                } else {
-                    ptr3 = ptr;
-                dn_f_inner:
-                    cur++;
-
-                    ptr3++;
-                    ptr++;
-                    if (cur >= 0x19) {
-                        col_result4 = 0x19;
-                    } else if (mn_IsFighterUnlocked(*ptr3) != new_var) {
-                        row2--;
-                        if (row2 >= new_var) {
-                            goto dn_f_outer;
-                        }
-                    } else {
-                        goto dn_f_inner;
-                    }
-                }
+                col_result4 = mnDiagram_GetVisibleFighterFromPointer(
+                    sorted, nav_ptr, cur, 0xA);
 
                 if (col_result4 != 0x19) {
                     sfxMove();
@@ -1603,6 +1640,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
             }
         } else if (input & 8) {
+            u8* nav_ptr;
             row6 = mn_804A04F0.hovered_selection >> 8;
             if ((row6 < 6) && (count2 > (row6 + 1))) {
                 sfxMove();
@@ -1612,30 +1650,10 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             }
             if (count2 > 7) {
                 cur = data->fighter_cursor_pos >> 8;
-                ptr = sorted + cur;
+                nav_ptr = sorted + cur;
                 found = mnDiagram_FindNextFighter(sorted, cur);
-                row2 = 7;
-            rt_f_outer:
-                if (row2 == new_var) {
-                    row_result4 = sorted[cur];
-                } else {
-                    ptr3 = ptr;
-                rt_f_inner:
-                    cur++;
-
-                    ptr3++;
-                    ptr++;
-                    if (cur >= 0x19) {
-                        row_result4 = 0x19;
-                    } else if (mn_IsFighterUnlocked(*ptr3) != new_var) {
-                        row2--;
-                        if (row2 >= new_var) {
-                            goto rt_f_outer;
-                        }
-                    } else {
-                        goto rt_f_inner;
-                    }
-                }
+                row_result4 = mnDiagram_GetVisibleFighterFromPointer(
+                    sorted, nav_ptr, cur, 7);
 
                 if (row_result4 != 0x19) {
                     sfxMove();

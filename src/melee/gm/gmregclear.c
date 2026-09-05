@@ -686,8 +686,8 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
     u8 result;
 
     num_colors = gm_80169238(arg1);
-    if (arg0->x54 != NULL) {
-        result = arg0->x54(arg2, arg0->x0.x0.cpu_level, arg3);
+    if (arg0->x0.x54 != NULL) {
+        result = arg0->x0.x54(arg2, arg0->x0.x0.cpu_level, arg3);
         if (num_colors != 0) {
             return result % num_colors;
         }
@@ -709,7 +709,7 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
     return count;
 }
 
-static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
+static inline void gm_8017CE34_SetupColors(Unk1PData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
     s32 color_idx;
@@ -720,7 +720,7 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     for (color_idx = 0; color_idx < 3; color_idx++) {
         num_colors = gm_80169238((u8) arg2[color_idx]);
         if (arg1->x54 != NULL) {
-            result = arg1->x54(count, arg1->x0.x0.cpu_level, color_idx);
+            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
             if (num_colors != 0) {
                 result %= num_colors;
             } else {
@@ -734,14 +734,13 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     }
 }
 
-static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
+static inline u8 gm_8017CE34_GetCpuLevel(Unk1PData* arg1)
 {
-    return arg1->x0.x0.cpu_level;
+    return arg1->x0.cpu_level;
 }
 
-void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
-                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
-                 s32 arg9)
+void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
+                 u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count, s32 arg9)
 {
     u8 colors[16];
     u8 enemy_level;
@@ -764,7 +763,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     boss_count = 0;
     enemy_level = 0;
     enemy_cpu_type = 0;
-    arg1->x0.xC.xC = 1;
+    arg1->xC.xC = 1;
     fn_8017E21C();
     fn_8016F030(arg0);
     arg0->rules.x30 = 1.0f;
@@ -786,7 +785,7 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     arg0->rules.x4_2 = 1;
     arg0->rules.x4_3 = 1;
     arg0->rules.x2_5 = 0;
-    arg0->rules.x0_3 = arg1->x0.xB;
+    arg0->rules.x0_3 = arg1->xB;
 
     if (arg6 != 0) {
         arg0->rules.time_limit = (u32) arg6;
@@ -795,9 +794,9 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x0_6 = 0;
     }
 
-    arg0->rules.x18 = (u32) arg1->x0.xC.x18;
+    arg0->rules.x18 = (u32) arg1->xC.x18;
     arg0->rules.stkind = (u16) arg7;
-    arg0->rules.xB = arg1->x48((u8) count, arg1->x0.x0.cpu_level);
+    arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
 
@@ -805,15 +804,15 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     if (enemy_count == 0) {
         arg0->rules.x5_1 = 1;
     }
-    if (arg1->x0.x8 & 1) {
+    if (arg1->x8 & 1) {
         arg0->rules.x2_7 = 1;
     }
-    if (arg1->x0.x8 & 0x20) {
+    if (arg1->x8 & 0x20) {
         arg0->rules.x4_5 = 1;
     }
-    if (arg1->x0.x8 & 0x80) {
-        arg1->x0.xC.xC = 5;
-        switch ((s32) arg1->x0.x9) {
+    if (arg1->x8 & 0x80) {
+        arg1->xC.xC = 5;
+        switch ((s32) arg1->x9) {
         case 1:
             arg0->rules.on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
@@ -834,26 +833,26 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         }
     }
 
-    if ((arg1->x0.x8 & 0x80) != 0) {
+    if ((arg1->x8 & 0x80) != 0) {
         player_stocks = 1;
     } else {
-        player_stocks = arg1->x0.x0.stocks;
+        player_stocks = arg1->x0.stocks;
     }
 
-    if ((arg1->x0.x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->xC.x12 != 0)) {
         player_ckind = CKIND_SEAK;
-    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               (arg1->x0.x0.ckind == CKIND_POPONANA))
+    } else if (((arg1->x8 & 0x80) != 0) && (arg1->x9 == 1) &&
+               (arg1->x0.ckind == CKIND_POPONANA))
     {
         player_ckind = CHKIND_POPO;
     } else {
-        player_ckind = (u8) arg1->x0.x0.ckind;
+        player_ckind = (u8) arg1->x0.ckind;
     }
 
-    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.x0.color,
-                        player_stocks, arg1->x0.x0.slot);
-    arg0->players[0].nametag = arg1->x0.x0.nametag;
-    arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
+    gm_SetupHumanPlayer(arg0->players, player_ckind, arg1->x0.color,
+                        player_stocks, arg1->x0.slot);
+    arg0->players[0].nametag = arg1->x0.nametag;
+    arg0->players[0].spawn_dir = (s8) arg1->xA;
 
     {
         u8 team_color;
@@ -866,20 +865,20 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
         {
             player_idx =
-                fn_8017DD7C(arg0->players, arg1->x0.xC.x24, team_color) + 1;
+                fn_8017DD7C(arg0->players, arg1->xC.x24, team_color) + 1;
             arg0->rules.is_teams = 1;
         }
     }
 
-    attack_ratio = arg1->x64((u8) count, arg1->x0.x0.cpu_level);
-    defense_ratio = arg1->x68((u8) count, arg1->x0.x0.cpu_level);
+    attack_ratio = arg1->x64((u8) count, arg1->x0.cpu_level);
+    defense_ratio = arg1->x68((u8) count, arg1->x0.cpu_level);
 
     color_iter = colors;
     gm_8017CE34_SetupColors(arg1, count, arg2, color_iter);
 
     {
-        s32 temp_r3_4 = arg1->x0.x8 & 8;
-        if ((temp_r3_4 != 0) && (arg1->x0.xC.x11 == 0)) {
+        s32 temp_r3_4 = arg1->x8 & 8;
+        if ((temp_r3_4 != 0) && (arg1->xC.x11 == 0)) {
             s32 base_enemy_count;
             s32 event_enemy_count;
             s32 special_stage;
@@ -889,13 +888,13 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             u32 stage_flags;
 
             base_enemy_count = gm_8017CE34_CountEnemies(arg2);
-            arg1->x0.xC.xC = 3;
+            arg1->xC.xC = 3;
             event_enemy_count = base_enemy_count;
             special_stage = 0;
             special_enemy_mode = 0;
             sp8 = 0;
             if (arg1->x4C != NULL) {
-                enemy_level = arg1->x4C((u8) count, arg1->x0.x0.cpu_level, 0U);
+                enemy_level = arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
             }
 
             first_enemy = (u8) arg2[0];
@@ -917,13 +916,13 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
             gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
                         colors[1], colors[2], special_stage,
-                        special_enemy_mode, sp8, (u8) arg1->x0.x0.ckind,
-                        arg1->x0.x0.color, (s32) enemy_level, (s32) arg3,
+                        special_enemy_mode, sp8, (u8) arg1->x0.ckind,
+                        arg1->x0.color, (s32) enemy_level, (s32) arg3,
                         event_enemy_count, (s32) stage_flags, (s32) arg5,
                         (s32) arg4, attack_ratio, defense_ratio);
             gm_8016A21C(&arg0->rules);
-            arg1->x0.xC.x11 = 0;
-            if (arg1->x0.x8 & 4) {
+            arg1->xC.x11 = 0;
+            if (arg1->x8 & 4) {
                 fn_8016A450();
             }
             if ((u8) special_enemy_mode == 1) {
@@ -932,35 +931,35 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
         } else if (temp_r3_4 != 0) {
             gm_8016A21C(&arg0->rules);
-            arg1->x0.xC.x11 = 0;
+            arg1->xC.x11 = 0;
         }
     }
 
-    gmRegSetupEnemyColorTable((s8) (u8) arg1->x0.x0.ckind, arg1->x0.x0.color,
-                              arg2, colors);
+    gmRegSetupEnemyColorTable((s8) (u8) arg1->x0.ckind, arg1->x0.color, arg2,
+                              colors);
 
     enemy_idx = 0;
     for (;;) {
         enemy_kind = &arg2[enemy_idx];
         if ((s32) (u8) enemy_kind[0] != 0x21) {
-            if (arg1->x0.x8 & 8) {
+            if (arg1->x8 & 8) {
                 if (arg1->x4C != NULL) {
                     enemy_level =
-                        arg1->x4C((u8) count, arg1->x0.x0.cpu_level, 0U);
+                        arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
                 }
                 if (arg1->x50 != NULL) {
                     enemy_cpu_type =
-                        arg1->x50((u8) count, arg1->x0.x0.cpu_level, 0U);
+                        arg1->x50((u8) count, arg1->x0.cpu_level, 0U);
                 }
             } else {
                 if (arg1->x4C != NULL) {
-                    u8 selected_enemy_level = arg1->x4C(
-                        (u8) count, arg1->x0.x0.cpu_level, enemy_idx);
+                    u8 selected_enemy_level =
+                        arg1->x4C((u8) count, arg1->x0.cpu_level, enemy_idx);
                     enemy_level = selected_enemy_level;
                 }
                 if (arg1->x50 != NULL) {
-                    enemy_cpu_type = arg1->x50(
-                        (u8) count, arg1->x0.x0.cpu_level, enemy_idx);
+                    enemy_cpu_type =
+                        arg1->x50((u8) count, arg1->x0.cpu_level, enemy_idx);
                 }
             }
             gm_SetupPlayerDefaults(&arg0->players[player_idx]);
@@ -972,14 +971,14 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             arg0->players[player_idx].x18 = attack_ratio;
             arg0->players[player_idx].x1C = defense_ratio;
             arg0->players[player_idx].color = *color_iter;
-            if (arg1->x0.x8 & 2) {
+            if (arg1->x8 & 2) {
                 arg0->players[player_idx].x20 = 2.0f;
                 arg0->players[player_idx].xB = 2;
             } else {
                 arg0->players[player_idx].x20 = 1.0f;
                 arg0->players[player_idx].xB = 0;
             }
-            if (arg1->x0.x8 & 4) {
+            if (arg1->x8 & 4) {
                 arg0->players[player_idx].xC_b2 = 1;
                 arg0->players[player_idx].cpu_kind = 0x1B;
             }
@@ -1028,14 +1027,14 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         }
     }
 
-    flags = arg1->x0.x8;
+    flags = arg1->x8;
     if (flags & 0x40) {
-        arg1->x0.xC.xC = 7;
+        arg1->xC.xC = 7;
     } else if (flags & 1) {
         if ((flags & 8) && (arg3 > 1U)) {
-            arg1->x0.xC.xC = 4;
+            arg1->xC.xC = 4;
         } else {
-            arg1->x0.xC.xC = 2;
+            arg1->xC.xC = 2;
         }
     }
     if (boss_count != 0) {
@@ -1046,10 +1045,10 @@ void gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
         arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
-        arg1->x0.xC.xC = 6;
+        arg1->xC.xC = 6;
     }
     if (arg7 == 0x49) {
-        arg1->x0.xC.xC = 8;
+        arg1->xC.xC = 8;
     }
 }
 

@@ -4,7 +4,8 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/hsd_3915.h>
+#include <sysdolphin/baselib/hsd_3924.h>
+#include <sysdolphin/baselib/hsd_392A.h>
 #include <sysdolphin/baselib/wobj.h>
 
 void fn_803982E4(HSD_GObj* gobj, int unused)

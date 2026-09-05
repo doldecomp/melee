@@ -800,7 +800,7 @@ static inline s32 mnRulePlus_CountVisible(u8 limit)
 
 HSD_GObj* mn_80233218(MenuState state)
 {
-    u16* volatile sub_count_ptr;
+    u16* sub_count_ptr;
     GameRules* rules;
     HSD_GObj* gobj;
     MenuRulesPlusData* user_data;
@@ -816,12 +816,12 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObj* cursor_jobj;
     HSD_JObj* value_jobj;
     StaticModelDesc* desc;
+    mn_803ED1D0_t* rule_data;
     HSD_JObj* root_jobj;
-    f32* frame_ptr;
     HSD_JObj* jobj_parts[17];
     u16 jobj_map[17];
-    PAD_STACK(4);
 
+    rule_data = &mn_803ED1D0;
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[15].selection_count;
 
@@ -864,8 +864,6 @@ HSD_GObj* mn_80233218(MenuState state)
 
     mn_804A04F0.confirmed_selection =
         user_data->rule_values.values[user_data->hovered_selection];
-
-    frame_ptr = mn_803ED1D0.text_start_frames;
 
     if ((u8) state != 0) {
         HSD_JObj* anim_jobj = user_data->xC[2];
@@ -923,7 +921,12 @@ HSD_GObj* mn_80233218(MenuState state)
 
             {
                 HSD_JObj* text_jobj = jobj_parts[7];
-                HSD_JObjReqAnim(text_jobj, frame_ptr[selected == i]);
+                /* Retail indexes text_start_frames as a [6][2] table; the
+                 * cast keeps the row pointer as a loop induction variable
+                 * (a [6][2] struct member compiles differently). */
+                HSD_JObjReqAnim(text_jobj,
+                                ((f32(*)[2]) mn_803ED1D0
+                                     .text_start_frames)[i][selected == i]);
                 HSD_JObjAnim(text_jobj);
             }
 
@@ -943,11 +946,11 @@ HSD_GObj* mn_80233218(MenuState state)
             }
 
             if (i == 5) {
-                als = &mn_803ED1D0.x4C + (i == selected);
-                als += 4;
+                AnimLoopSettings* tmp = rule_data->x7C;
+                als = &tmp[i == selected];
             } else {
-                als = &mn_803ED1D0.x4C + (i == selected);
-                als += 2;
+                AnimLoopSettings* tmp = rule_data->x64;
+                als = &tmp[i == selected];
             }
             HSD_JObjReqAnimAll(jobj_parts[2], als->start_frame);
             HSD_JObjAnimAll(jobj_parts[2]);
@@ -1026,7 +1029,6 @@ HSD_GObj* mn_80233218(MenuState state)
                 HSD_JObjAddChild(option_jobj, value_jobj);
             }
         }
-        frame_ptr += 2;
     }
 
     {

@@ -6,6 +6,7 @@
 
 #include "dolphin/types.h"
 
+#include "ft/forward.h"
 #include "ty/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
@@ -770,12 +771,8 @@ struct Unk1PData {
             /* 27 */ u8 x3;
             /* 28 */ f32 x4;
             /* 2C */ f32 x8;
-        } x24[3];
+        } x24[3]; ///< @todo ::gmPlayerData?
     } xC;
-};
-
-struct UnkAdventureData {
-    /* 00 */ Unk1PData x0;
     /* 48 */ u8 (*x48)(u8, u8);
     /* 4C */ u8 (*x4C)(u8, u8, u8);
     /* 50 */ u8 (*x50)(u8, u8, u8);
@@ -787,6 +784,10 @@ struct UnkAdventureData {
     /* 68 */ float (*x68)(u8, u8);
     /* 6C */ float (*x6C)(u8, u8);
     /* 70 */ float (*x70)(u8, u8);
+};
+
+struct UnkAdventureData {
+    /*  +0 */ struct Unk1PData x0;
     /* 74 */ u8 x74;
     /* 75 */ u8 x75;
     /* 76 */ u8 x76;
@@ -796,27 +797,18 @@ struct UnkAdventureData {
     /* 7C */ u8 x7C; ///< CharacterKind
     /* 7D */ s8 pad_x7D[0x80 - 0x7D];
 };
+ASSERT_SIZE(struct UnkAdventureData, 0x80);
 
 struct UnkAllstarData {
-    /*  +0 */ Unk1PData x0;
-    /* 48 */ u8 (*x48)(u8, u8);
-    /* 4C */ u8 (*x4C)(u8, u8, u8);
-    /* 50 */ u8 (*x50)(u8, u8, u8);
-    /* 54 */ u8 (*x54)(u8, u8, u8);
-    /* 58 */ u8 (*x58)(u8, u8, u8);
-    /* 5C */ u8 (*x5C)(u8, u8, u8);
-    /* 60 */ u8 (*x60)(u8, u8, u8);
-    /* 64 */ float (*x64)(u8, u8);
-    /* 68 */ float (*x68)(u8, u8);
-    /* 6C */ float (*x6C)(u8, u8);
-    /* 70 */ float (*x70)(u8, u8);
-    /* +74*/ u16 x74;    ///< current percent
-    /* +76*/ u8 x76[24]; ///< character id array
-    /* +8E*/ u8 x8E[2];
+    /*  +0 */ struct Unk1PData x0;
+    /* +74*/ u16 x74;                      ///< current percent
+    /* +76*/ u8 x76[CKIND_PLAYABLE_COUNT]; ///< character id array
     /* +90*/ u8 x90[4];
-    /* +94*/ u8 _94[0x9C - 0x94];
+    /* +94*/ u8 _94[2];
+    /* +94*/ u8 x96[6];
     /* +9C*/ u32 x9C; ///< current time (frames)
 };
+ASSERT_SIZE(struct UnkAllstarData, 0xA0);
 
 struct TmData {
     int cur_option;

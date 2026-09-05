@@ -631,9 +631,7 @@ void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
     Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCA8 = 0;
 }
 
-void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
-                 float arg4, float arg5, float arg6, float x1, float y1,
-                 float frame_speed_mul)
+void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj)
 {
     /// @todo Not actually sure what the second argument should be
     fn_8003E998(slot, fp_x221F_b4);

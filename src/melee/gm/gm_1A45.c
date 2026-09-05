@@ -20,7 +20,7 @@
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/hsd_3915.h>
+#include <sysdolphin/baselib/hsd_3924.h>
 #include <sysdolphin/baselib/hsd_392C.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/leak.h>

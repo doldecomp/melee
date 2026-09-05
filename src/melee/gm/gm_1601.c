@@ -38,7 +38,7 @@
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/hsd_3915.h>
+#include <sysdolphin/baselib/hsd_3924.h>
 #include <sysdolphin/baselib/hsd_3982.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
