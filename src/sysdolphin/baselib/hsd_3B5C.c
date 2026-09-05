@@ -507,9 +507,7 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     s32 luma_x;
     s32 row;
     s32 aligned_width;
-    u8 green;
     s32 channel;
-    u8 blue;
     s32 chroma_row;
     s32 cb;
     f32 green_value;
@@ -517,7 +515,6 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     s32 out_offset;
     f32 blue_value;
     s32 group_row;
-    s32 block_count;
     u8* base;
     s32 chroma_x_base;
     s32 luma_row_offset;
@@ -527,6 +524,8 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     struct {
         s32* luma;
         u8 red;
+        u8 green;
+        u8 blue;
     } pixel;
     PAD_STACK(24);
     pixel.red = 0;
@@ -563,10 +562,9 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                 for (tile_x = 0; tile_x < 4; tile_x++) {
                     chroma_row = tile_x >> 1;
                     chroma_row += chroma_x_base + ((tile_y & 2) * 4);
-                    block = 0;
                     pixel.luma =
                         &((JpegWorkData*) &base[0x118])->luma[luma_offset / 4];
-                    for (block_count = 4; block_count != 0; block_count--) {
+                    for (block = 0; block < 4; block++) {
                         luminance = *pixel.luma;
                         {
                             chroma_column = (block % 2) * 4;
@@ -584,16 +582,15 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                         green_value =
                             ((f32) luminance - (0.3441f * (f32) cb)) -
                             (0.7139f * (f32) cr);
-                        green = jpeg_clamp(green_value);
+                        pixel.green = jpeg_clamp(green_value);
                         blue_value = (f32) ((f64) ((1.7718f * (f32) cb) +
                                                    (f32) luminance) -
                                             (0.0012 * (f64) cr));
-                        blue = jpeg_clamp(blue_value);
+                        pixel.blue = jpeg_clamp(blue_value);
                         out[out_offset] = ((pixel.red << 8) & 0xF800) |
-                                          ((green << 3) & 0x7E0) |
-                                          (blue >> 3U);
+                                          ((pixel.green << 3) & 0x7E0) |
+                                          (pixel.blue >> 3U);
                         pixel.luma += 0x40;
-                        block += 1;
                     }
                     out += 1;
                     luma_offset += 4;
