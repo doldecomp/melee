@@ -2,8 +2,7 @@
 
 #include "inlines.h"
 
-#include "ftKirby/ftkirbyspecialgamewatch.h"
-
+#include <melee/ft/kinds/ftKirby/ftkirbyspecialgamewatch.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>

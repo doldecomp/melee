@@ -1,18 +1,15 @@
 #include "ftCo_LandingAir.h"
 
-#include <platform.h>
+#include "ftCo_Landing.h"
 
-#include "ft/fighter.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
-
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Landing.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
 {

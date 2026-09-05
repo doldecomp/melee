@@ -8,28 +8,24 @@
 
 #include <placeholder.h>
 
-#include "ef/efsync.h"
-
 #include "forward.h"
-
-#include "ft/fighter.h"
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftdata.h"
-#include "ft/ftdynamics.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Attack100.h"
-#include "it/it_26B1.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftdynamics.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 45A1F8 */ UnkCostumeStruct ftPr_CostumeList[5];
 

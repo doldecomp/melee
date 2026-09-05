@@ -1,7 +1,7 @@
-#include "lb/lblanguage.h"
+#include "lblanguage.h"
 
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 
 enum_t lbLang_GetLanguageSetting(void)
 {

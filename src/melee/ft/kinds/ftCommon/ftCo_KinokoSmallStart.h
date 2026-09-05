@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_KINOKOSMALLSTART_H
 #define MELEE_FTCO_KINOKOSMALLSTART_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0D1E80 */ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj);
 /* 0D1F6C */ void ftCo_800D1F6C(Fighter_GObj*);

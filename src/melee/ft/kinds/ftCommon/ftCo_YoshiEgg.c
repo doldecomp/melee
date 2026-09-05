@@ -2,35 +2,31 @@
 
 #include "ftCo_Bury.h"
 #include "ftCo_CaptureKoopa.h"
-#include "placeholder.h"
+#include "ftCo_Fall.h"
+#include "types.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCaptain/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/types.h"
-#include "ftYoshi/ftyoshispecialn.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00B0.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCaptain/types.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshispecialn.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <Runtime/platform.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 

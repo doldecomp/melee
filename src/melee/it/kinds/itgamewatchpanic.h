@@ -1,14 +1,12 @@
 #ifndef GALE01_2C7D60
 #define GALE01_2C7D60
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "ft/types.h"
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-#include "it/types.h"
+#include <melee/ft/types.h>
+#include <melee/it/kinds/types.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 2C7D60 */ HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, Fighter_Part, f32);
 /* 2C7E64 */ void itGameWatchPanic_Logic78_Destroyed(Item_GObj*);

@@ -2,11 +2,11 @@
 #define MELEE_IF_2F6E_H
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <melee/if/forward.h>
 
 #include <melee/if/types.h>
+#include <Runtime/platform.h>
 
 /* 2F6EA4 */ void ifStatus_802F6EA4(int, int, int, int, Event, Event);
 /* 2F7034 */ void ifStatus_802F7034(UNK_T);

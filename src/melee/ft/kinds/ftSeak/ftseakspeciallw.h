@@ -1,7 +1,6 @@
 #ifndef GALE01_11108C
 #define GALE01_11108C
 
-#include "ft/forward.h"
 #include <melee/ft/forward.h>
 
 /* 114160 */ void ftSk_SpecialLw_Enter(Fighter_GObj*);

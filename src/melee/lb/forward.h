@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_FORWARD_H
 #define MELEE_LB_FORWARD_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 struct lb_80011A50_t;
 

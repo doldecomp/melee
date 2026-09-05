@@ -1,12 +1,11 @@
 #ifndef GALE01_12CDE8
 #define GALE01_12CDE8
 
-#include <platform.h>
-
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 12CC6C */ Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj);
 /* 12CC94 */ void ftYs_SpecialN_SetupItemVel(Fighter_GObj* gobj, Vec3* out);

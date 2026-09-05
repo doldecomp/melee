@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_STAMINA_H
 #define MELEE_GM_STAMINA_H
 
-#include <platform.h>
-
 #include <melee/gm/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 1B91C8 */ void gm_801B91C8(GameModeState*);
 /* 1B922C */ void gm_801B922C(GameModeState*);

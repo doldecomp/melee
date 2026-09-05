@@ -1,9 +1,9 @@
 #ifndef GALE01_390730
 #define GALE01_390730
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF

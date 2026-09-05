@@ -6,27 +6,19 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
-#include "placeholder.h"
 
-#include <platform.h>
+#include <placeholder.h>
+
+#include <Runtime/platform.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
 
-#include "cm/camera.h"
-#include "gm/gm_1A45.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/it_26B1.h"
-#include "it/itspawn.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
@@ -35,6 +27,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 /* 1E8560 */ static void fn_801E8560(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

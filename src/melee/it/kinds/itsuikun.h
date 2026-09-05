@@ -1,11 +1,10 @@
 #ifndef GALE01_2CFC48
 #define GALE01_2CFC48
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 void itSuikun_Logic14_Spawned(Item_GObj*);
 void it_802CFCB4(Item_GObj*);

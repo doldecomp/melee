@@ -1,23 +1,14 @@
-#include "gr/grinishie2.h"
+#include "grinishie2.h"
 
-#include "placeholder.h"
+#include "granime.h"
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "cm/camera.h"
-#include "gm/gm_unsplit.h"
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/kinds/itkyasarin.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
 
@@ -25,6 +16,14 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/kinds/itkyasarin.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },

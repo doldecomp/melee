@@ -1,11 +1,11 @@
 #ifndef GALE01_1F2D0C
 #define GALE01_1F2D0C
 
-#include "dolphin/mtx.h"
-
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1F2D0C */ void grFourside_801F2D0C(bool);
 /* 1F2D10 */ void grFourside_801F2D10(void);

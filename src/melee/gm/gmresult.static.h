@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_RESULT_STATIC_H
 #define MELEE_GM_RESULT_STATIC_H
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
 static struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C;

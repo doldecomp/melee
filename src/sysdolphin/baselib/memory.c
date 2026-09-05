@@ -3,9 +3,8 @@
 #include "debug.h"
 #include "initialize.h"
 
-#include <platform.h>
-
 #include <dolphin/os/OSAlloc.h>
+#include <Runtime/platform.h>
 
 void HSD_Free(void* ptr)
 {

@@ -1,9 +1,9 @@
 #ifndef GALE01_01D2BC
 #define GALE01_01D2BC
 
-#include <platform.h>
+#include <melee/lb/forward.h>
 
-#include "lb/forward.h"
+#include <Runtime/platform.h>
 
 /* 01D2BC */ void lbSnap_8001D2BC(void);
 /* 01D338 */ int lbSnap_8001D338(int);

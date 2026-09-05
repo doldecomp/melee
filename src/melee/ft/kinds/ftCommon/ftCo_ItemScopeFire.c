@@ -1,14 +1,14 @@
 #include "ftCo_Attack100.h"
 #include "ftCo_ItemScopeStart.h"
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0CDD.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "it/kinds/itsscope.h"
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0CDD.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/it/kinds/itsscope.h>
 
 void fn_800D8140(Fighter_GObj* gobj, int arg1)
 {

@@ -1,12 +1,12 @@
 #ifndef ITBOMBHEI_STATIC_H
 #define ITBOMBHEI_STATIC_H
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/inlines.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/kinds/itbombhei.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/kinds/itbombhei.h>
 
 static inline HSD_JObj* itGetDynamicBone(Item_GObj* igp, u32 bone_id)
 {

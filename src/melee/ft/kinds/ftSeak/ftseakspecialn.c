@@ -1,28 +1,25 @@
 #include "ftseakspecialn.h"
 
-#include "ef/efsync.h"
-#include "ft/fighter.h"
+#include "ftseak.h"
 
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcolanim.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/inlines.h"
-
-#include "ftSeak/forward.h"
-
-#include "ftSeak/ftseak.h"
-#include "it/kinds/itseakneedleheld.h"
-#include "it/kinds/itseakneedlethrown.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/it/kinds/itseakneedleheld.h>
+#include <melee/it/kinds/itseakneedlethrown.h>
 
 /* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
 /* 112D44 */ static void shootNeedles(Fighter_GObj* gobj);

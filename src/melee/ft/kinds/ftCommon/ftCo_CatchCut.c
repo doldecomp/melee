@@ -1,10 +1,10 @@
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureCut.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 
 void ftCo_800DA698(Fighter_GObj* gobj, bool arg1)
 {

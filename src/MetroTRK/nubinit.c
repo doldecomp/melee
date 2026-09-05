@@ -1,13 +1,12 @@
 #include "nubinit.h"
 
-#include "MetroTRK/dispatch.h"
-#include "MetroTRK/dolphin_trk_glue.h"
-#include "MetroTRK/msgbuf.h"
-#include "MetroTRK/serpoll.h"
-#include "MetroTRK/targimpl.h"
-#include "MetroTRK/usr_put.h"
-
-#include <MetroTRK/dolphin_trk.h>
+#include "dispatch.h"
+#include "dolphin_trk.h"
+#include "dolphin_trk_glue.h"
+#include "msgbuf.h"
+#include "serpoll.h"
+#include "targimpl.h"
+#include "usr_put.h"
 
 bool gTRKBigEndian;
 

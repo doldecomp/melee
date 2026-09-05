@@ -4,11 +4,11 @@
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
 #include "gmvsmelee.h"
+#include "gmvsmode.h"
 #include "types.h"
 
-#include "gm/gmvsmode.h"
-#include "if/if_2FD9.h"
-#include "mn/types.h"
+#include <melee/if/if_2FD9.h>
+#include <melee/mn/types.h>
 
 /* 1BA30C */ static void onEnterCss(GameModeState* state);
 /* 1BA338 */ static void onExitCss(GameModeState* state);

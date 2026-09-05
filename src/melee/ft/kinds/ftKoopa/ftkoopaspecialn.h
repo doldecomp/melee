@@ -1,10 +1,9 @@
 #ifndef MELEE_FT_KP_SPECIAL_N_H
 #define MELEE_FT_KP_SPECIAL_N_H
 
-#include <platform.h>
-
-#include "ft/forward.h"
 #include <melee/ft/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 134ACC */ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj);
 /* 134D78 */ void ftKp_SpecialLw_80134D78(Fighter_GObj* gobj);

@@ -7,16 +7,15 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "it/inlines.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 
 /* 220F10 */ static void grTIceClimber_80220F10(bool);
 /* 220F14 */ static void grTIceClimber_80220F14(void);

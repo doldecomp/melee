@@ -1,26 +1,22 @@
-#include "ftFox/ftfox.h"
+#include "ftfox.h"
 
 #include "ftfoxappeals.h"
 #include "ftfoxspecialhi.h"
 #include "ftfoxspeciallw.h"
 #include "ftfoxspecialn.h"
 #include "ftfoxspecials.h"
+#include "types.h"
 
-#include <platform.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftFox/types.h"
-
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <Runtime/platform.h>
 
 /* 459B28 */ UnkCostumeStruct ftFx_CostumeList[4];
 

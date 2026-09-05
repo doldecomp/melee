@@ -1,14 +1,12 @@
 #ifndef GALE01_27CF30
 #define GALE01_27CF30
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/itCommonItems.h"
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/itCommonItems.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2F2F34 */ void it_802F2F34(HSD_GObj*, itYoshiEggLay_DatAttrs*);
 /* 2F3020 */ void it_802F3020(HSD_GObj*);

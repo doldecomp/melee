@@ -1,8 +1,8 @@
 #ifndef GALE01_09805C
 #define GALE01_09805C
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 /* 097270 */ void ftCo_800978D4(Fighter_GObj* gobj);
 /* 09813C */ void ftCo_DownAttack_Anim(Fighter_GObj* gobj);

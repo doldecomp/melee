@@ -1,15 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 #define MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 
-#include <platform.h>
-
-#include "ft/forward.h"
-
-#include "ftCommon/types.h"
-
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/kinds/ftCommon/types.h>
+#include <Runtime/platform.h>
 
 struct ftPikachu_FighterVars {
     char filler0[FIGHTERVARS_SIZE];

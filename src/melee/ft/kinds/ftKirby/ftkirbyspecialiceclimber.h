@@ -1,8 +1,8 @@
 #ifndef GALE01_108CE8
 #define GALE01_108CE8
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 /* 108CE8 */ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj,
                                            Item_GObj* it_gobj);

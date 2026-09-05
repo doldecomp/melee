@@ -1,17 +1,18 @@
 #include "ityaku.h"
 
-#include "it/forward.h"
+#include "types.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_3F14.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itzako.h"
-#include "it/kinds/types.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
+#include <melee/it/forward.h>
+
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itzako.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
 
 static void it_2E6A_UnkMotion19_Phys(HSD_GObj* arg0);
 static bool it_802E7054(HSD_GObj* gobj);

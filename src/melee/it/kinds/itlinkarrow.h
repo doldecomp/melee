@@ -1,12 +1,11 @@
 #ifndef GALE01_2A7D8C
 #define GALE01_2A7D8C
 
-#include <platform.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2A7D8C */ void it_802A7D8C(HSD_GObj*, int);
 /* 2A7E40 */ void it_802A7E40(Item_GObj*);

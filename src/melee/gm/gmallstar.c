@@ -2,13 +2,12 @@
 
 #include "gm_18A1.h"
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmregcommon.h"
 
-#include "dolphin/types.h"
-#include "gr/ground.h"
-
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/gm/gmmain_lib.h>
+#include <melee/gr/ground.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbdvd.h>

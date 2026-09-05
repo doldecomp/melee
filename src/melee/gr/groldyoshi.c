@@ -1,21 +1,19 @@
 #include "groldyoshi.h"
 
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,

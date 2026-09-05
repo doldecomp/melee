@@ -1,7 +1,7 @@
 #ifndef GALE01_0F1FDC
 #define GALE01_0F1FDC
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj);
 /* 0F203C */ void ftKb_AttackDash_Anim(Fighter_GObj* gobj);

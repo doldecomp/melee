@@ -2,15 +2,14 @@
 
 #include <placeholder.h>
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ftcmdscript.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 struct _m2c_stack_ftCo_8009F834 {
     /* 0x00 */ char pad_0[0x7C];

@@ -1,11 +1,10 @@
 #ifndef GALE01_29BAB8
 #define GALE01_29BAB8
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 typedef struct itKirbyCutterBeamAttributes {
     f32 x0_speed;

@@ -1,11 +1,10 @@
 #ifndef GALE01_293660
 #define GALE01_293660
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 typedef struct KinokoAnim {
     HSD_AnimJoint* joint;

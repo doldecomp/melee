@@ -2,15 +2,14 @@
 
 #include "inlines.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "lb/lbaudio_ax.h"
-
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/lb/lbaudio_ax.h>
 
 ItemStateTable it_803F7B08[] = {
     { 0, it_802CA5D8, it_802CA618, it_802CA654 },

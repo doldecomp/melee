@@ -1,11 +1,9 @@
 #ifndef GALE01_2FB6E8
 #define GALE01_2FB6E8
 
-#include <platform.h>
-
-#include "if/types.h"
-
 #include <dolphin/mtx.h>
+#include <melee/if/types.h>
+#include <Runtime/platform.h>
 
 /* 2FB6E8 */ s32 ifMagnify_802FB6E8(s32);
 /* 2FB73C */ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer*, Vec2*,

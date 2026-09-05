@@ -1,23 +1,19 @@
 #include "itclimbersblizzard.h"
 
-#include <platform.h>
-
-#include "db/db.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCharItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-
-#include "it/kinds/forward.h"
+#include "forward.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
+#include <Runtime/platform.h>
 
 #define M_TAU 6.283185307179586
 

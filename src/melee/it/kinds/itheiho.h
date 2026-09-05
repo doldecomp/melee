@@ -1,6 +1,6 @@
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D8618 */ void it_802D8618(s32, Vec3*, s32, s32);
 /* 2D8688 */ void it_802D8688(Item_GObj*);

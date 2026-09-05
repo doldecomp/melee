@@ -1,9 +1,9 @@
 #ifndef GALE01_125D80
 #define GALE01_125D80
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 125D80 */ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj);
 /* 125DE8 */ void ftPk_SpecialHi_Enter(HSD_GObj* gobj);

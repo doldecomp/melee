@@ -1,9 +1,9 @@
 #ifndef GALE01_2CCF9C
 #define GALE01_2CCF9C
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2CCF9C */ void itFreezer_802CCF9C(Item_GObj*);
 /* 2CCFFC */ void itFreezer_802CCFFC(Item_GObj*);

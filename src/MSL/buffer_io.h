@@ -1,7 +1,7 @@
 #ifndef _BUFFER_IO
 #define _BUFFER_IO
 
-#include "stdio.h"
+#include <stdio.h>
 
 enum {
     __align_buffer,

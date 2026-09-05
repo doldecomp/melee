@@ -2,14 +2,14 @@
 #define LBSPDISPLAY_1_H
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "ft/forward.h"
-#include "lb/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
 /* 00FA94 */ void lb_8000FA94(void);

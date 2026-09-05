@@ -1,13 +1,12 @@
 #include "it_2ADA.h"
 
-#include <platform.h>
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <Runtime/platform.h>
 
 /* 2ADAF0 */ static void it_802ADAF0(Item_GObj* gobj);
 /* 2ADB48 */ static bool it_2ADA_UnkMotion0_Anim(Item_GObj* gobj);

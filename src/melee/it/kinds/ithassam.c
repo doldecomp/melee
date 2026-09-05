@@ -2,27 +2,25 @@
 
 #include "inlines.h"
 
-#include "cm/camera.h"
-#include "ef/eflib.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "gm/gm_unsplit.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-#include "it/types.h"
-#include "lb/lbvector.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/types.h>
+#include <melee/lb/lbvector.h>
 
 /* 2CDC5C */ static void itHassam_802CDC5C(Item_GObj* gobj);
 /* 2CDC80 */ static void itHassam_802CDC80(Item_GObj* gobj);

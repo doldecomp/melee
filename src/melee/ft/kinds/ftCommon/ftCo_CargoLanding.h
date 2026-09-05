@@ -1,7 +1,7 @@
 #ifndef GALE01_09BD4C
 #define GALE01_09BD4C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 09BD4C */ void ftCo_8009BD4C(Fighter_GObj* gobj);
 /* 09BDC4 */ void ftCo_CargoLanding_Anim(Fighter_GObj* gobj);

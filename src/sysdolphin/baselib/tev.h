@@ -1,11 +1,10 @@
 #ifndef _tev_h_
 #define _tev_h_
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/texp.h>
+#include <Runtime/platform.h>
 
 void HSD_RenderInitAllocData(void);
 HSD_ObjAllocData* HSD_RenderGetAllocData(void);

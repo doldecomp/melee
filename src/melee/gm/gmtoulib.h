@@ -3,13 +3,13 @@
 
 #include <placeholder.h>
 
-#include "gm/types.h"
-
-#include "melee/ft/forward.h"
-#include "melee/gm/forward.h"
-#include "melee/mn/forward.h"
-#include "melee/sc/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/gm/forward.h>
+#include <melee/mn/forward.h>
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/gm/types.h>
 
 /* 18A514 */ void fn_8018A514(int, float);
 /* 18A970 */ void fn_8018A970(int);

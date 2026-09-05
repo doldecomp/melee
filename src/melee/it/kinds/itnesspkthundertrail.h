@@ -1,10 +1,10 @@
 #ifndef GALE01_2AC43C
 #define GALE01_2AC43C
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2AC43C */ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball,
                                     Vec3* pos, s32 trail_idx, s32 arg4,

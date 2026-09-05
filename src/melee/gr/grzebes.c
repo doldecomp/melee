@@ -1,23 +1,14 @@
 #include "grzebes.h"
 
-#include <platform.h>
-
-#include "cm/camera.h"
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 
 #include "forward.h"
-
-#include "ft/ftdevice.h"
-#include "ft/ftlib.h"
-#include "gr/granime.h"
-#include "gr/grdatfiles.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -26,6 +17,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);

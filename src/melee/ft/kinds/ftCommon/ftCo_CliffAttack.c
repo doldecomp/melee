@@ -3,14 +3,13 @@
 #include "ftCo_CliffClimb.h"
 #include "ftCo_CliffEscape.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_0DF1.h"
-#include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0DF1.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 09AEA4 */ static void ftCo_8009AEA4(Fighter_GObj* gobj);
 

@@ -1,14 +1,13 @@
 #include "ftCo_HammerLanding.h"
 
 #include "ftCo_HammerWait.h"
+#include "ftCo_Landing.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 void ftCo_HammerLanding_Enter(Fighter_GObj* gobj)
 {

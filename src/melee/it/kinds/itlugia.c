@@ -1,21 +1,21 @@
 #include "itlugia.h"
 
 #include "inlines.h"
-#include "placeholder.h"
 
-#include "ef/eflib.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <placeholder.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/eflib.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 
 ItemStateTable it_803F7EE8[] = {
     { 0, it_802D1DB4, it_802D1DD8, it_802D1E64 },

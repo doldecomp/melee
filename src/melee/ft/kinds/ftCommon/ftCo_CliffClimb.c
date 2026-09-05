@@ -1,26 +1,23 @@
 #include "ftCo_CliffClimb.h"
 
 #include "ftCo_CliffAttack.h"
+#include "ftCo_Fall.h"
 #include "ftCo_StopCeil.h"
+#include "types.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0DF1.h"
-#include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/types.h"
-#include "mp/mplib.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0DF1.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);

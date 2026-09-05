@@ -1,9 +1,9 @@
 #ifndef GALE01_2F28C8
 #define GALE01_2F28C8
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2F28C8 */ void it_802F28C8(Item_GObj*, int, float);
 /* 2F295C */ float it_802F295C(HSD_GObj* owner_gobj, itUnk2_DatAttrs* attr);

@@ -5,35 +5,31 @@
 
 #include <placeholder.h>
 
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_Escape.h"
-#include "ft/kinds/ftCommon/ftCo_FallSpecial.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
-
-#include "ftKirby/forward.h"
-#include "ftMewtwo/forward.h"
-
-#include "it/kinds/itmewtwoshadowball.h"
-#include "lb/lb_00B0.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftMewtwo/forward.h>
 
 #include <math.h>
 #include <stddef.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/kinds/itmewtwoshadowball.h>
+#include <melee/lb/lb_00B0.h>
 
 /* 3B7570 */ static Vec3 const ftKb_Init_803B7570 = { 0.0f, 4.0f, 0.0f };
 /* 3B757C */ static Vec3 const ftKb_Init_803B757C = { 0.0f, 4.0f, 0.0f };

@@ -1,25 +1,23 @@
 #include "ftCo_ItemParasolFall.h"
 
-#include "ft/fighter.h"
+#include "ftCo_AirCatch.h"
+#include "ftCo_AttackAir.h"
+#include "ftCo_EscapeAir.h"
+#include "ftCo_Fall.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_JumpAerial.h"
+#include "ftCo_Landing.h"
+#include "ftCo_SpecialAir.h"
+#include "inlines.h"
 
-#include "ft/forward.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_AirCatch.h"
-#include "ftCommon/ftCo_AttackAir.h"
-#include "ftCommon/ftCo_EscapeAir.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_SpecialAir.h"
-#include "ftCommon/inlines.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 void ftCo_800CF280(Fighter_GObj* gobj)
 {

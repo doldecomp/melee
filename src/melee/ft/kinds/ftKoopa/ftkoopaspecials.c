@@ -1,39 +1,32 @@
-#include "ftKoopa/ftkoopaspecials.h"
+#include "ftkoopaspecials.h"
 
-#include "placeholder.h"
+#include "types.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_CaptureDamageKoopa.h"
-#include "ftCommon/ftCo_CaptureKoopa.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/ftCo_Thrown.h"
-#include "ftCommon/ftCo_ThrownKoopa.h"
-#include "ftCommon/inlines.h"
-
-#include "ftKoopa/forward.h"
-
-#include "ftKoopa/types.h"
-
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureDamageKoopa.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureKoopa.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ThrownKoopa.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)
 {

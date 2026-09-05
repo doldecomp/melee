@@ -1,22 +1,6 @@
-#include "vi/vi0601.h"
+#include "vi0601.h"
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "gm/gm_unsplit.h"
-#include "gr/grcorneria.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "lb/lb_00F9.h"
-#include "lb/lb_013B.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mpcoll.h"
-#include "pl/player.h"
-#include "sc/types.h"
-#include "vi/vi.h"
+#include "vi.h"
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -27,6 +11,22 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 static SceneDesc* un_804D6FB0;
 static GXColor erase_colors_vi0601;

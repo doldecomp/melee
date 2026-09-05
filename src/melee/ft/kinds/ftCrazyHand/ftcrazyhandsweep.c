@@ -1,17 +1,17 @@
 #include "ftcrazyhandsweep.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftbosslib.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCrazyHand/ftcrazyhandtagcancel.h"
-#include "ftMasterHand/types.h"
-#include "pl/player.h"
+#include "ftcrazyhandtagcancel.h"
 
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftMasterHand/types.h>
+#include <melee/ft/types.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 void fn_8015746C(HSD_GObj* gobj)
 {

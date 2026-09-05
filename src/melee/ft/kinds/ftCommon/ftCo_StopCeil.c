@@ -1,17 +1,15 @@
 #include "ftCo_StopCeil.h"
 
+#include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftKirby/ftkirby.h"
-
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 09CAD4 */ static void ftCo_8009EFA4(Fighter_GObj* gobj);
 

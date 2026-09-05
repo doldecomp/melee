@@ -1,12 +1,11 @@
-#include "lb/lb_00CE.h"
+#include "lb_00CE.h"
 
 #ifdef MUST_MATCH
 #include <placeholder.h>
 #endif
 
-#include <platform.h>
-
 #include <math.h>
+#include <Runtime/platform.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

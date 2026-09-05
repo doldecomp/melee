@@ -1,9 +1,9 @@
 #ifndef GALE01_2D251C
 #define GALE01_2D251C
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D251C */ void it_2725_Logic18_Spawned(Item_GObj*);
 /* 2D25B8 */ void it_802D25B8(HSD_GObj* gobj);

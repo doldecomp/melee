@@ -1,13 +1,11 @@
 #ifndef GALE01_2D5ABC
 #define GALE01_2D5ABC
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2D5ABC */ void itPorygon2_Logic26_Spawned(Item_GObj*);
 /* 2D5B14 */ void it_802D5B14(Item_GObj*);

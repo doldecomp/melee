@@ -1,9 +1,9 @@
 #ifndef GALE01_1275CC
 #define GALE01_1275CC
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 /* 1275CC */ bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj);
 /* 127608 */ void ftPk_SpecialLw_80127608(HSD_GObj* gobj);

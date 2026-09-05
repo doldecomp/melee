@@ -1,13 +1,11 @@
 #ifndef GALE01_IT_HITBOX
 #define GALE01_IT_HITBOX
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 /* 2753DC */ void it_802753DC(Item_GObj*);
 /* 275414 */ void it_80275414(Item_GObj*);

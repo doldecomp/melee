@@ -1,13 +1,11 @@
 #ifndef GALE01_28E738
 #define GALE01_28E738
 
-#include <platform.h>
-
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 28E738 */ void itLGun_Logic16_Spawned(Item_GObj*);
 /* 28E904 */ void itLGun_Logic16_PickedUp(Item_GObj*);

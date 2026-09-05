@@ -2,15 +2,14 @@
 #define GALE01_1BFFA8
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "gr/types.h"
-
-#include "lb/forward.h"
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <melee/gr/types.h>
+#include <Runtime/platform.h>
 
 /* 1BFFB0 */ void Ground_801BFFB0(void);
 /* 1C0378 */ void Ground_801C0378(int);

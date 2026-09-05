@@ -1,17 +1,9 @@
 #include "mninfo.h"
 
-#include "placeholder.h"
+#include "inlines.h"
+#include "mnmain.h"
 
-#include "gm/gm_1601.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "if/ifprize.h"
-#include "lb/lbarchive.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "sc/types.h"
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -23,6 +15,14 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/if/ifprize.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 
 typedef struct MnInfoDataLayout {
     AnimLoopSettings anim;

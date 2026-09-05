@@ -1,27 +1,25 @@
 #include "itkusudama.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "dolphin/mtx.h"
-#include "ef/efsync.h"
-#include "ft/ftlib.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/itdrop.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itspawn.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
+#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itdrop.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itspawn.h>
+#include <Runtime/platform.h>
 
 ItemStateTable it_803F59F8[] = {
     { -1, itKusudama_UnkMotion0_Anim, itKusudama_UnkMotion0_Phys,

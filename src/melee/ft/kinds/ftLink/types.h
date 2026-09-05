@@ -2,17 +2,14 @@
 #define MELEE_FT_CHARA_FTLINK_TYPES_H
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include "ftLink/forward.h" // IWYU pragma: export
-
-#include "ftMars/types.h"
-
-#include "it/forward.h"
-
-#include "lb/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/kinds/ftMars/types.h>
+#include <melee/lb/types.h>
+#include <Runtime/platform.h>
 
 struct ftLk_DatAttrs {
     /* +0 */ float x0;

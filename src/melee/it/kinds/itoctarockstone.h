@@ -1,11 +1,10 @@
 #ifndef GALE01_2E878C
 #define GALE01_2E878C
 
-#include <platform.h>
+#include <melee/it/forward.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
+#include <Runtime/platform.h>
 
 /* 2E878C */ void itOctarockstone_802E878C(Item_GObj*);
 /* 2E87D8 */ bool itOctarockstone_Logic4_DmgDealt(Item_GObj*);

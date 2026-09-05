@@ -1,7 +1,8 @@
 #include "gmresult.h"
 
-#include "gm/types.h"
-#include "lb/lb_013B.h"
+#include "types.h"
+
+#include <melee/lb/lb_013B.h>
 
 /// @todo .sdata order hack
 #ifdef MUST_MATCH
@@ -59,30 +60,29 @@ union {
 
 HSD_Archive* lbl_804D65B8;
 
+#include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
 
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/types.h"
-#include "gm/gm_1601.h"
-#include "if/ifcoget.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "pl/player.h"
-#include "sc/types.h"
-
+#include <dolphin/gx/GXStruct.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/if/ifcoget.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 MatchEnd* fn_80174274(void)
 {

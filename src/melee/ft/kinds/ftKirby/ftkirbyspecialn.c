@@ -3,49 +3,44 @@
 
 #include <placeholder.h>
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftparts.h"
-#include "ft/ftwalkcommon.h"
-#include "ft/inlines.h"
-#include "ft/kinds/ftCommon/ftCo_Damage.h"
-#include "ft/kinds/ftCommon/ftCo_Jump.h"
-#include "ft/kinds/ftCommon/ftCo_KneeBend.h"
-#include "ft/kinds/ftCommon/ftCo_Throw.h"
-#include "ft/kinds/ftCommon/ftCo_ThrownKirby.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_CaptureKirby.h"
-#include "ftCommon/ftCo_CaptureWaitKirby.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/inlines.h"
-
-#include "ftKirby/forward.h"
-
-#include "it/itCommonItems.h"
-#include "it/kinds/it_2ADA.h"
-#include "it/kinds/it_2F28.h"
-#include "it/kinds/itkirby_2F23.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbanim.h"
-#include "mp/mpcoll.h"
-
+#include "forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
 #include <stddef.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ftwalkcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureKirby.h>
+#include <melee/ft/kinds/ftCommon/ftCo_CaptureWaitKirby.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Jump.h>
+#include <melee/ft/kinds/ftCommon/ftCo_KneeBend.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include <melee/ft/kinds/ftCommon/ftCo_ThrownKirby.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/kinds/it_2ADA.h>
+#include <melee/it/kinds/it_2F28.h>
+#include <melee/it/kinds/itkirby_2F23.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbanim.h>
+#include <melee/mp/mpcoll.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

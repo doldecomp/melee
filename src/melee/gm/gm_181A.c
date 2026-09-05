@@ -1,14 +1,12 @@
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmregclear.h"
-#include "platform.h"
+#include "types.h"
 
-#include "dolphin/pad.h"
-
-#include "gm/forward.h"
-
-#include "mn/inlines.h"
-
+#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -19,14 +17,13 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
 #include <melee/if/ifnametag.h>
 #include <melee/if/ifstock.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/mn/inlines.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 typedef struct RegClearSpawnEntry {
     /* 0x00 */ s32 x0;

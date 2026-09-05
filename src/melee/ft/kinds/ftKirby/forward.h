@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 #define MELEE_FT_CHARA_FTKIRBY_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 typedef struct Fighter ftKb_Fighter;
 typedef struct ftKb_DatAttrs ftKb_DatAttrs;

@@ -1,22 +1,12 @@
 #include "grvenom.h"
 
-#include <platform.h>
-
-#include "gr/grcorneria.h"
-#include "gr/grdisplay.h"
-#include "gr/grmaterial.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "if/ifcoget.h"
-#include "if/ifstatus.h"
-#include "it/kinds/itarwinglaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
+#include "grcorneria.h"
+#include "grdisplay.h"
+#include "grmaterial.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -26,6 +16,15 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/ifstatus.h>
+#include <melee/it/kinds/itarwinglaser.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 typedef struct grVe_Data {
     /* +0 */ GrJoint joints[5];

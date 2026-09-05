@@ -1,7 +1,7 @@
 #ifndef GALE01_800C7220
 #define GALE01_800C7220
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 7220 */ void ftCo_800C7220(Fighter_GObj* gobj);
 /* 7294 */ void ftCo_800C7294(Fighter_GObj* gobj);

@@ -2,18 +2,16 @@
 
 #include "ftCo_HammerJump.h"
 #include "ftCo_HammerWait.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_084E.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/types.h"
+#include "ftCo_Turn.h"
+#include "types.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0C57B4 */ static void ftCo_800C57B4(Fighter_GObj* gobj);
 

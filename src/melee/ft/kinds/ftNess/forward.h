@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTNESS_FORWARD_H
 #define MELEE_FT_CHARA_FTNESS_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 static MotionFlags const ftNs_MF_Attack4 =
     Ft_MF_SkipHit | Ft_MF_SkipRumble | Ft_MF_SkipItemVis | Ft_MF_FreezeState;

@@ -1,7 +1,7 @@
 #ifndef _METROTRK_MEMMAP_H
 #define _METROTRK_MEMMAP_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 typedef struct memRange {
     /* 0x00 */ u8* start;

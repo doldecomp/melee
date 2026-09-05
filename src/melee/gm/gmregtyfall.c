@@ -2,29 +2,9 @@
 
 #include "gm_unsplit.h"
 
-#include "cm/camera.h"
-#include "dolphin/pad.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/ftdemo.h"
+#include "forward.h"
 
-#include "gm/forward.h"
-
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mp/mpcoll.h"
-#include "pl/player.h"
-#include "sc/types.h"
-#include "ty/toy.h"
-
+#include <dolphin/pad.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -35,6 +15,24 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 struct ImageDesc_Array {
     HSD_ImageDesc x0[2][2];

@@ -1,11 +1,10 @@
 #ifndef GALE01_2C720C
 #define GALE01_2C720C
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
-
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/it/kinds/types.h>
 /* 2C720C */ HSD_GObj* it_802C720C(HSD_GObj*, Vec3*, Fighter_Part, float);
 /* 2C7310 */ void itGameWatchBreath_Logic76_Destroyed(Item_GObj*);
 /* 2C7340 */ void it_802C7340(Item_GObj*);

@@ -1,6 +1,6 @@
 #include "mngallery.h"
 
-#include "mn/inlines.h"
+#include "inlines.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

@@ -1,14 +1,12 @@
 #ifndef __GALE01_1601C4
 #define __GALE01_1601C4
 
-#include "platform.h"
-
-#include "ft/forward.h"
-
-#include "gm/gm_1601.h"
-#include "mn/types.h"
+#include <melee/ft/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/mn/types.h>
+#include <Runtime/platform.h>
 
 struct lbl_80473700_t {
     /* +0 */ char pad_0[0x114];

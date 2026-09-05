@@ -1,22 +1,22 @@
-#include "it/itspawn.h"
+#include "itspawn.h"
 
-#include "placeholder.h"
+#include "it_26B1.h"
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "item.h"
 
-#include "db/db.h"
-#include "ef/efsync.h"
-#include "gm/gm_unsplit.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "mp/mpcoll.h"
+#include <placeholder.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/db/db.h>
+#include <melee/ef/efsync.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/mp/mpcoll.h>
 
 ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;

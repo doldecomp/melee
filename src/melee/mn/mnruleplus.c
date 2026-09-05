@@ -1,20 +1,12 @@
-#include "placeholder.h"
-#include "platform.h"
+#include "inlines.h"
+#include "mnmain.h"
+#include "mnmainrule.h"
+#include "mnstagesw.h"
+#include "types.h"
 
-#include "gm/gm_1A3F.h"
-#include "gm/gmmain_lib.h"
-#include "gm/types.h"
-#include "lb/lbspdisplay.h"
+#include <placeholder.h>
 
-#include "mn/forward.h"
-
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "mn/mnmainrule.h"
-#include "mn/mnstagesw.h"
-#include "mn/types.h"
-#include "sc/types.h"
-
+#include "forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/debug.h>
@@ -27,6 +19,12 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
+#include <Runtime/platform.h>
 
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;

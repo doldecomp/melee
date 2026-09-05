@@ -1,30 +1,11 @@
-#include "vi/vi0102.h"
+#include "vi0102.h"
+
+#include "types.h"
+#include "vi.h"
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ft/ftdemo.h"
-#include "gm/gm_unsplit.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "it/item.h"
-#include "lb/lb_00F9.h"
-#include "lb/lb_013B.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbshadow.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mpcoll.h"
-#include "pl/player.h"
-
-#include "sc/forward.h"
-
-#include "sc/types.h"
-#include "vi/types.h"
-#include "vi/vi.h"
-
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
@@ -35,6 +16,23 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;

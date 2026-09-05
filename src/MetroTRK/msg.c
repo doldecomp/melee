@@ -1,6 +1,6 @@
-#include "MetroTRK/msg.h"
+#include "msg.h"
 
-#include "MetroTRK/dolphin_trk_glue.h"
+#include "dolphin_trk_glue.h"
 
 DSError TRKMessageSend(MessageBuffer* msg)
 {

@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_THROW_H
 #define MELEE_FTCO_THROW_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0DC8D8 */ void fn_800DC8D8(Fighter_GObj* gobj);
 /* 0DC8FC */ void fn_800DC8FC(Fighter_GObj* gobj);

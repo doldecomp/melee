@@ -1,30 +1,28 @@
-#include "gr/grheal.h"
+#include "grheal.h"
 
-#include "placeholder.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "dolphin/types.h"
-#include "gm/gm_18A1.h"
+#include "forward.h"
 
-#include "gr/forward.h"
-
-#include "gr/granime.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/kinds/itcoin.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
-#include "ty/toy.h"
-
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/gm_18A1.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/kinds/itcoin.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
+#include <melee/ty/toy.h>
+#include <Runtime/platform.h>
 
 typedef struct grHeal_UnkData {
     s32 x0;

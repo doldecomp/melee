@@ -1,11 +1,10 @@
 #ifndef MELEE_IF_IFALL_H
 #define MELEE_IF_IFALL_H
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 2F3394 */ void ifAll_802F3394(void);
 /* 2F33CC */ void ifAll_802F33CC(void);

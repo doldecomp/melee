@@ -1,14 +1,9 @@
-#include "gr/granime.h"
+#include "granime.h"
 
-#include <platform.h>
-
-#include "gr/grdatfiles.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbheap.h"
+#include "grdatfiles.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "inlines.h"
 
 #include <setjmp.h>
 #include <stdarg.h>
@@ -18,6 +13,10 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
+#include <Runtime/platform.h>
 
 /* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
 /* 1C6710 */ static void grAnime_801C6710(HSD_TObj* tobj,

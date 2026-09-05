@@ -1,11 +1,10 @@
 #ifndef _METROTRK_PPC_TARGIMPL_H
 #define _METROTRK_PPC_TARGIMPL_H
 
-#include <platform.h>
-
-#include "MetroTRK/dserror.h"
-#include "MetroTRK/m7xx_m603e_reg.h"
-#include "MetroTRK/ppc_reg.h"
+#include <MetroTRK/dserror.h>
+#include <MetroTRK/m7xx_m603e_reg.h>
+#include <MetroTRK/ppc_reg.h>
+#include <Runtime/platform.h>
 
 typedef struct TRKState_PPC {
     /* 0x00 */ DefaultType GPR[32];

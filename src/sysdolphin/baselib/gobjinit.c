@@ -1,8 +1,7 @@
 #include "gobj.h"
 #include "gobjproc.h"
 #include "memory.h"
-
-#include <sysdolphin/baselib/objalloc.h>
+#include "objalloc.h"
 
 static HSD_GObjLibInitDataType HSD_GObj_80408620 = {
     0x3F,

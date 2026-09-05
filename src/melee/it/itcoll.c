@@ -1,41 +1,37 @@
-#include "it/itcoll.h"
+#include "itcoll.h"
 
 #include "inlines.h"
+#include "it_26B1.h"
 #include "it_2725.h"
 #include "it_279C.h"
-#include "placeholder.h"
+#include "it_3F14.h"
+#include "item.h"
 #include "types.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "ef/efsync.h"
-
-#include "ef/forward.h"
-
-#include "ft/fighter.h"
-#include "ft/ft_0881.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
-#include "ft/inlines.h"
-#include "ftCommon/ftCo_DownAttack.h"
-#include "gm/gm_unsplit.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcollision.h"
-#include "lb/lbvector.h"
+#include <melee/ef/forward.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_DownAttack.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbvector.h>
+#include <Runtime/platform.h>
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);

@@ -1,11 +1,10 @@
 #ifndef GALE01_0E9DF8
 #define GALE01_0E9DF8
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 0E9DF8 */ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj);
 /* 0E9E78 */ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj);

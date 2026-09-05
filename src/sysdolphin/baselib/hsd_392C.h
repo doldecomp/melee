@@ -1,7 +1,7 @@
 #ifndef HSD_392C_H
 #define HSD_392C_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 392CCC */ s32 fn_80392CCC(s32);
 /* 392CD8 */ u8 fn_80392CD8(char*);

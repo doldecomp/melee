@@ -1,16 +1,15 @@
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureCut.h"
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "it/kinds/itsamusgrapple.h"
-
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftYoshi/ftyoshi.h>
+#include <melee/it/kinds/itlinkhookshot.h>
+#include <melee/it/kinds/itsamusgrapple.h>
 
 typedef struct {
     u8 pad_1A4C[0x1A4C];

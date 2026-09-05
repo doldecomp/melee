@@ -1,20 +1,19 @@
 #include "itanimlist.h"
 
+#include "inlines.h"
 #include "it_2725.h"
 #include "it_3F14.h"
+#include "itcoll.h"
 #include "iteffect.h"
+#include "item.h"
 #include "ithitbox.h"
 
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "lb/inlines.h"
-#include "lb/lb_013B.h"
-#include "lb/lbcommand.h"
+#include "forward.h"
 
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbcommand.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

@@ -1,9 +1,9 @@
 #ifndef MELEE_LB_FILE_H
 #define MELEE_LB_FILE_H
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 void lbFile_800161C4(int file, uintptr_t src, uintptr_t dest, size_t size,
                      int type, int pri);

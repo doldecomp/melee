@@ -6,12 +6,11 @@
 #ifndef GALE01_020AEC
 #define GALE01_020AEC
 
-#include <platform.h>
-
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 
 /* 020AEC */ void fn_80020AEC(HSD_JObj*, Mtx);
 /* 020E38 */ void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);

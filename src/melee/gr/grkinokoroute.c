@@ -1,25 +1,12 @@
 #include "grkinokoroute.h"
 
+#include "grdisplay.h"
+#include "grlib.h"
+#include "grmaterial.h"
 #include "ground.h"
-
-#include <platform.h>
-
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "ft/ftdevice.h"
-#include "ft/ftlib.h"
-#include "gm/gm_1601.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
@@ -29,6 +16,17 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ftdevice.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 static struct {
     int x0;

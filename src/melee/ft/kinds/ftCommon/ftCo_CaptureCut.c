@@ -2,27 +2,24 @@
 
 #include "ftCo_Damage.h"
 #include "ftCo_Throw.h"
-#include "placeholder.h"
-#include "platform.h"
+
+#include <placeholder.h>
 
 #include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftKirby/forward.h>
 
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftKirby/forward.h"
-
-#include "lb/lb_00B0.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 void ftCo_CaptureCut_Enter(Fighter_GObj* gobj)
 {

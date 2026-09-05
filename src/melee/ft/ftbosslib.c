@@ -2,27 +2,25 @@
 
 #include "ft_0877.h"
 #include "ftlib.h"
+#include "inlines.h"
+#include "types.h"
 
-#include "cm/camera.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include "kinds/ftCommon/forward.h"
 
-#include "ftCommon/forward.h"
+#include "kinds/ftMasterHand/types.h"
 
-#include "ftMasterHand/types.h"
-#include "it/it_26B1.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-
-#include "pl/forward.h"
-
-#include "pl/player.h"
+#include <melee/pl/forward.h>
 
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
 
 /// @todo Float reorder hack
 #ifdef MUST_MATCH

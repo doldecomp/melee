@@ -1,22 +1,22 @@
-#include "gr/grflatzone.h"
+#include "grflatzone.h"
 
-#include "cm/camera.h"
-#include "gr/grdisplay.h"
-#include "gr/grdynamicattr.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/kinds/ittools.h"
-#include "it/types.h"
-#include "lb/lb_00F9.h"
-#include "mp/mplib.h"
+#include "grdisplay.h"
+#include "grdynamicattr.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/cm/camera.h>
+#include <melee/it/kinds/ittools.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
 
 struct grFlatzone_YakumonoParam {
     s32 unk0;

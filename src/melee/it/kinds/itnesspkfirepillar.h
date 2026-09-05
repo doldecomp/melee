@@ -1,9 +1,9 @@
 #ifndef _ITNESSPKFIREPILLAR_H_
 #define _ITNESSPKFIREPILLAR_H_
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 void itNesspkfirepillar_802AA494(HSD_GObj* parent1_gobj,
                                  HSD_GObj* parent2_gobj, Vec3* offset,

@@ -1,24 +1,24 @@
-#include "ft/ftcliffcommon.h"
+#include "ftcliffcommon.h"
 
-#include <platform.h>
+#include "fighter.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
+#include "ft_0881.h"
+#include "ftanim.h"
+#include "ftcamera.h"
+#include "ftcommon.h"
+#include "types.h"
 
-#include "ef/efasync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_CliffWait.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_StopCeil.h"
-#include "ftCommon/types.h"
-#include "mp/mplib.h"
-#include "pl/plbonuslib.h"
+#include "kinds/ftCommon/ftCo_CliffWait.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_StopCeil.h"
+#include "kinds/ftCommon/types.h"
 
 #include <dolphin/mtx.h>
+#include <melee/ef/efasync.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/plbonuslib.h>
+#include <Runtime/platform.h>
 
 bool ftCliffCommon_80081298(Fighter_GObj* gobj)
 {

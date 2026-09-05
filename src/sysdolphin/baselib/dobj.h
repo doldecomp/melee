@@ -1,13 +1,12 @@
 #ifndef SYSDOLPHIN_BASELIB_DOBJ_H
 #define SYSDOLPHIN_BASELIB_DOBJ_H
 
-#include <platform.h>
-
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/mobj.h>
+#include <Runtime/platform.h>
 
 #define DOBJ_HIDDEN 0x1
 

@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
 /* 20362C */ UNK_RET grVenom_8020362C(UNK_PARAMS);
 /* 203B14 */ void grVenom_80203B14(bool);

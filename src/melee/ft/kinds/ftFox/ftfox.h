@@ -1,12 +1,11 @@
 #ifndef GALE01_0E5534
 #define GALE01_0E5534
 
-#include <platform.h>
-
-#include "ft/types.h"
-
-#include "ftFox/forward.h"
+#include <melee/ft/kinds/ftFox/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /* 0E5534 */ bool ftFx_Init_800E5534(HSD_GObj* gobj);
 /* 0E5554 */ void ftFx_Init_OnDeath(HSD_GObj* gobj);

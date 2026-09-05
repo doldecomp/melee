@@ -2,39 +2,19 @@
 
 #include "gm_1601.static.h"
 
+#include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmstamina.h"
-#include "placeholder.h"
-#include "stddef.h"
+#include "types.h"
 
-#include <platform.h>
+#include <placeholder.h>
 
-#include "cm/camera.h"
+#include "forward.h"
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
 
-#include "ft/forward.h"
-#include "gm/forward.h"
-
-#include "gm/types.h"
-#include "gr/ground.h"
-#include "gr/stage.h"
-#include "if/ifstatus.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_013B.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbtime.h"
-#include "mn/mnstagesel.h"
-#include "mn/types.h"
-
-#include "pl/forward.h"
-
-#include "pl/player.h"
-#include "pl/plbonus.h"
-#include "pl/plbonuslib.h"
-#include "sc/types.h"
-#include "ty/toy.h"
-
+#include <stddef.h>
 #include <dolphin/pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -44,8 +24,23 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
-#include <melee/gm/gm_1A45.h>
+#include <melee/cm/camera.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/if/ifstatus.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbtime.h>
+#include <melee/mn/mnstagesel.h>
+#include <melee/mn/types.h>
 #include <melee/pl/player.h>
+#include <melee/pl/plbonus.h>
+#include <melee/pl/plbonuslib.h>
+#include <melee/sc/types.h>
+#include <melee/ty/toy.h>
+#include <Runtime/platform.h>
 
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 

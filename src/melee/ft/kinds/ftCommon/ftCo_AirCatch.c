@@ -1,34 +1,30 @@
 #include "ftCo_AirCatch.h"
 
 #include "ftCo_FallSpecial.h"
+#include "ftCo_Landing.h"
+#include "types.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/types.h"
-#include "ftLink/types.h"
-
-#include "ftSamus/forward.h"
-
-#include "ftSamus/types.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/kinds/itlinkhookshot.h"
-#include "it/kinds/itsamusgrapple.h"
-#include "lb/lb_00B0.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <melee/ft/kinds/ftSamus/forward.h>
+#include <melee/it/forward.h>
 
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftLink/types.h>
+#include <melee/ft/kinds/ftSamus/types.h>
+#include <melee/it/inlines.h>
+#include <melee/it/kinds/itlinkhookshot.h>
+#include <melee/it/kinds/itsamusgrapple.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
+#include <Runtime/platform.h>
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)
 {

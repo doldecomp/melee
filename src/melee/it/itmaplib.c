@@ -1,15 +1,15 @@
 #include "itmaplib.h"
 
+#include "inlines.h"
+#include "it_26B1.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "iteffect.h"
 #include "ithitbox.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)

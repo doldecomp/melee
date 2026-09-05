@@ -3,8 +3,8 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_Pass.h"
 
-#include "ft/inlines.h"
-#include "ft/types.h"
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 bool ftCo_800C60C8(Fighter_GObj* gobj)
 {

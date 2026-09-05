@@ -7,12 +7,11 @@
 #include "sislib_font.h"
 #include "wobj.h"
 
-#include "dolphin/gx.h"
-#include "dolphin/mtx.h"
-
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <dolphin/types.h>
 
 u8* HSD_SisLib_803A6478(u8* dst, u8* src)

@@ -1,20 +1,20 @@
 #include "itnesspkthunderball.h"
 
+#include "itnesspkthundertrail.h"
+
 #include <placeholder.h>
 
-#include "db/db.h"
-#include "ft/ftlib.h"
-#include "ft/kinds/ftNess/ftnessspecialhi.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/kinds/itnesspkthundertrail.h"
-#include "lb/lbvector.h"
-
 #include <math.h>
+#include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftNess/ftnessspecialhi.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/lb/lbvector.h>
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 
