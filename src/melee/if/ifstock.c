@@ -298,14 +298,16 @@ void ifStock_802F8298(HSD_GObj* gobj)
                     vecC.x =
                         ((struct IfStockStealAnim*) &stock
                              ->x204[user_data->player]
-                             .x0[0xC + i * sizeof(struct IfStockStealAnim) -
-                                 5 * sizeof(struct IfStockStealAnim)])
+                             .x0[0xC +
+                                 i * (int) sizeof(struct IfStockStealAnim) -
+                                 5 * (int) sizeof(struct IfStockStealAnim)])
                             ->start.x;
                     vecC.y =
                         ((struct IfStockStealAnim*) &ifStock_802F8298_get_data(
                              stock)[user_data->player]
-                             .x0[0xC + i * sizeof(struct IfStockStealAnim) -
-                                 5 * sizeof(struct IfStockStealAnim)])
+                             .x0[0xC +
+                                 i * (int) sizeof(struct IfStockStealAnim) -
+                                 5 * (int) sizeof(struct IfStockStealAnim)])
                             ->start.y;
                     efSync_Spawn(0x475, gobj, &vecC);
                 } else if (stock->x204[user_data->player].x0[i + 5] == 10) {
@@ -316,15 +318,18 @@ void ifStock_802F8298(HSD_GObj* gobj)
                             ((struct IfStockStealAnim*) &data[user_data
                                                                   ->player]
                                  .x0[0xC +
-                                     i * sizeof(struct IfStockStealAnim) -
-                                     5 * sizeof(struct IfStockStealAnim)])
+                                     i * (int) sizeof(
+                                             struct IfStockStealAnim) -
+                                     5 * (int) sizeof(
+                                             struct IfStockStealAnim)])
                                 ->end.x;
                     }
                     vecC.y =
                         ((struct IfStockStealAnim*) &ifStock_802F8298_get_data(
                              stock)[user_data->player]
-                             .x0[0xC + i * sizeof(struct IfStockStealAnim) -
-                                 5 * sizeof(struct IfStockStealAnim)])
+                             .x0[0xC +
+                                 i * (int) sizeof(struct IfStockStealAnim) -
+                                 5 * (int) sizeof(struct IfStockStealAnim)])
                             ->end.y;
                     efSync_Spawn(0x476, gobj, &vecC);
                 }
