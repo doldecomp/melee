@@ -491,20 +491,24 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
                 spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
+                (void) spacing;
                 jobj17 = data2->jobjs[17];
                 {
                     f32 x = HSD_JObjGetTranslationX(jobj17);
+                    (void) x;
                     jobj = cursor_jobj;
                     HSD_JObjSetTranslateX(jobj, x);
                 }
                 {
                     f32 y = (spacing * (f32) cursor_row) +
                             HSD_JObjGetTranslationY(data2->jobjs[17]);
+                    (void) y;
                     jobj = cursor_jobj;
                     HSD_JObjSetTranslateY(jobj, y);
                 }
                 {
                     f32 z = HSD_JObjGetTranslationZ(data2->jobjs[17]);
+                    (void) z;
                     jobj = cursor_jobj;
                     HSD_JObjSetTranslateZ(jobj, z);
                 }
@@ -532,21 +536,34 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 sfxMove();
                 data->x0[1]++;
                 data2 = mnVibration_804D6C28->user_data;
+                (void) data2;
                 cursor_jobj = data->cursor_gobj->hsd_obj;
                 jobj17 = data2->jobjs[17];
                 cursor_row = mnVibration_GetCursorRow(data);
                 base_y = HSD_JObjGetTranslationY(jobj17);
+                (void) base_y;
                 jobj18 = data2->jobjs[18];
                 spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
                 jobj17 = data2->jobjs[17];
-                HSD_JObjSetTranslateX(cursor_jobj,
-                                      HSD_JObjGetTranslationX(jobj17));
-                HSD_JObjSetTranslateY(
-                    cursor_jobj,
-                    (spacing * (f32) cursor_row) +
-                        HSD_JObjGetTranslationY(data2->jobjs[17]));
-                HSD_JObjSetTranslateZ(
-                    cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
+                {
+                    f32 x = HSD_JObjGetTranslationX(jobj17);
+                    HSD_JObj* position_jobj = cursor_jobj;
+                    (void) x;
+                    HSD_JObjSetTranslateX(position_jobj, x);
+                }
+                {
+                    f32 y = (spacing * (f32) cursor_row) +
+                            HSD_JObjGetTranslationY(data2->jobjs[17]);
+                    HSD_JObj* position_jobj = cursor_jobj;
+                    (void) y;
+                    HSD_JObjSetTranslateY(position_jobj, y);
+                }
+                {
+                    f32 z = HSD_JObjGetTranslationZ(data2->jobjs[17]);
+                    HSD_JObj* position_jobj = cursor_jobj;
+                    (void) z;
+                    HSD_JObjSetTranslateZ(position_jobj, z);
+                }
             }
         } else if (GetNameCount() > 8) {
             if ((u8) mnVibration_GetNameSlotRaw(data, 8) != 0xFF) {
