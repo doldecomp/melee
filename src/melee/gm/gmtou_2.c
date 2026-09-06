@@ -547,8 +547,7 @@ void fn_8019D1BC(void)
     f32 pos;
     f32 var_f1;
     f32 anim;
-    char name_buf[8][0x14];
-    PAD_STACK(0xA0);
+    char name_buf[16][0x14];
 
     tmd = gm_GetTournamentData();
 
