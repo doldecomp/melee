@@ -3795,38 +3795,31 @@ heading_converge:
 #pragma pop
 #endif
 
-/// @todo The remaining mismatch swaps the gp and offset registers.
 s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 {
-    u8* self;
-    s32 offset;
-    grBigBlue_CarPhysics* gp;
+    Ground* gp;
     s32 result;
+    s32 i;
+    PAD_STACK(8);
 
-    offset = index;
-    offset <<= 6;
     result = 0;
     gp = gobj->user_data;
 
-    switch (gp->data.lanes[index].state) {
+    switch (gp->u.bigblue.car.lanes[index].state) {
     case 1:
         break;
     case 9:
-        if (0.0F == gp->data.lanes[index].alpha) {
+        if (0.0F == gp->u.bigblue.car.lanes[index].alpha) {
             result = 1;
         }
         break;
     case 7: {
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
-        struct grBigBlue_CarLane* lane;
 
-        self = gp->raw;
-        self += offset;
         blast += yakumono_param->x68 * scale;
-        lane = &gp->data.lanes[index];
-        if (lane->pos.x > blast) {
-            if (0.0F != lane->alpha) {
+        if (gp->u.bigblue.car.lanes[index].pos.x > blast) {
+            if (0.0F != gp->u.bigblue.car.lanes[index].alpha) {
                 result = 9;
             } else {
                 result = 1;
@@ -3837,14 +3830,10 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 8: {
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
-        struct grBigBlue_CarLane* lane;
 
-        self = gp->raw;
-        self += offset;
         blast -= yakumono_param->x68 * scale;
-        lane = &gp->data.lanes[index];
-        if (lane->pos.x < blast) {
-            if (0.0F != lane->alpha) {
+        if (gp->u.bigblue.car.lanes[index].pos.x < blast) {
+            if (0.0F != gp->u.bigblue.car.lanes[index].alpha) {
                 result = 9;
             } else {
                 result = 1;
@@ -3858,15 +3847,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 5:
     case 6:
     case 10: {
-        s32 counter;
-        s32 j;
-
-        self = gp->raw;
-        self += offset;
-        counter = *(s32*) (self + 0xF0);
-        *(s32*) (self + 0xF0) = counter - 1;
-
-        if (counter < 0) {
+        if (gp->u.bigblue.car.lanes[index].threshold-- < 0) {
             while (result == 0) {
                 s32 rnd = HSD_Randi(4);
 
@@ -3877,21 +3858,19 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
                     result = 4;
                     break;
                 case 3: {
-                    u8* p = gp->raw;
-                    s32 i;
                     s32 right_cnt = 0;
                     s32 left_cnt = 0;
                     s32 right_10 = 0;
                     s32 left_10 = 0;
 
-                    for (i = 0; i < 4; p += 0x40, i++) {
+                    for (i = 0; i < 4; i++) {
                         u32 st;
 
                         if (i == index) {
                             continue;
                         }
 
-                        st = (p[0xD4] >> 2) & 0x3F;
+                        st = gp->u.bigblue.car.lanes[i].state;
 
                         if (st == 1) {
                             continue;
@@ -3903,13 +3882,16 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
                             continue;
                         }
 
-                        if (*(f32*) (p + 0xE0) > *(f32*) (self + 0xE0)) {
+                        if (gp->u.bigblue.car.lanes[i].pos.x >
+                            gp->u.bigblue.car.lanes[index].pos.x)
+                        {
                             if (st == 10) {
                                 right_10++;
                             } else {
                                 right_cnt++;
                             }
-                        } else if (*(f32*) (p + 0xE0) < *(f32*) (self + 0xE0))
+                        } else if (gp->u.bigblue.car.lanes[i].pos.x <
+                                   gp->u.bigblue.car.lanes[index].pos.x)
                         {
                             if (st == 10) {
                                 left_10++;
@@ -3944,34 +3926,34 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Override: check other platforms heading toward self */
-        self = gp->raw;
-        self += offset;
-        for (j = 0; j < 4; j++) {
+        for (i = 0; i < 4; i++) {
             u32 st;
-            u8* p;
 
-            if (j == index) {
+            if (i == index) {
                 continue;
             }
 
-            p = gp->raw + j * 0x40;
-            st = (p[0xD4] >> 2) & 0x3F;
+            st = gp->u.bigblue.car.lanes[i].state;
 
             if (st == 7) {
-                if (*(f32*) (p + 0xE0) < *(f32*) (self + 0xE0)) {
+                if (gp->u.bigblue.car.lanes[i].pos.x <
+                    gp->u.bigblue.car.lanes[index].pos.x)
+                {
                     result = 7;
                     continue;
                 }
             }
             if (st == 8) {
-                if (*(f32*) (p + 0xE0) > *(f32*) (self + 0xE0)) {
+                if (gp->u.bigblue.car.lanes[i].pos.x >
+                    gp->u.bigblue.car.lanes[index].pos.x)
+                {
                     result = 8;
                 }
             }
         }
 
         /* Final threshold check */
-        if (gp->data.lanes[index].pos.y < -2000.0F) {
+        if (gp->u.bigblue.car.lanes[index].pos.y < -2000.0F) {
             result = 1;
         }
         break;
