@@ -781,7 +781,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     return arg0;
 }
 
-void mnNameNew_GlyphVariantInput(void)
+void mnNameNew_GlyphVariantInput(HSD_GObj* gobj)
 {
     NameNewEntry* data;
     u32 buttons;
@@ -793,7 +793,7 @@ void mnNameNew_GlyphVariantInput(void)
     s32 total;
     s8 null_ch;
 
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     data = mnNameNew_804D6C08->user_data;
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
@@ -929,7 +929,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
 
     if (data->variant_gobj != NULL) {
-        mnNameNew_GlyphVariantInput();
+        mnNameNew_GlyphVariantInput(arg0);
         return;
     }
 
