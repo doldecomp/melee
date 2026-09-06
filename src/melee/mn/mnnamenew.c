@@ -910,7 +910,7 @@ static inline void copyName(char* name_text, char* name_buffer)
 static inline s32 mnNameNew_CountVariants(GlyphRow* glyphs, u8 selected_key)
 {
     s32 count = 0;
-    char** ptrs = glyphs[(u8) selected_key];
+    char** ptrs = glyphs[selected_key];
     s8 terminator = (s8) *mnNameNew_NullCharacter;
 
     while (terminator != (s8) *ptrs[0]) {
