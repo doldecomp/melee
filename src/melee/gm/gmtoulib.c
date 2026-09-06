@@ -492,14 +492,6 @@ static inline HSD_JObj* fn_8018B090_inline0(BracketEntry* bracket_entries,
         .x2C->hsd_obj;
 }
 
-static inline HSD_JObj* fn_8018B090_inline1(BracketEntry* bracket_entries,
-                                            s32 bracket_entry_index)
-{
-    return bracket_entries[bracket_entry_index]
-        .slots[lbl_804D6634]
-        .x2C->hsd_obj;
-}
-
 static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
                                                 s32 bracket_entry_index)
 {
@@ -510,12 +502,6 @@ static inline void fn_8018B090_inline3(BracketEntry* entry)
 {
     fn_80190520((f32) (entry->xC + (entry->x14 / 2)),
                 -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
-}
-
-static inline void gmTournament_GetBracketCenterY(BracketEntry* entry,
-                                                  s32 height, f32* y)
-{
-    *y = -(f32) (entry->x10 + height / 2);
 }
 
 static inline s32 fn_8018B090_inline4(BracketEntry* entry)
