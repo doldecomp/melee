@@ -134,7 +134,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
     int i;
     HSD_JObj* jobj2;
     Vec3 vecA, vecB, vecC, vecD;
-    unsigned char* anim_data;
+    struct IfStockData* anim_data;
     struct IfStockDataOffset* anim_base;
     user_data = gobj->user_data;
     jobj = gobj->hsd_obj;
@@ -222,13 +222,10 @@ void ifStock_802F8298(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
             if (stock->x204[user_data->player].x0[(int) (i + 5)] <= 10) {
                 {
-                    unsigned char* data = stock->x204[user_data->player].x0;
-                    u32 anim_offset =
-                        0xC + (i - 5) * sizeof(struct IfStockStealAnim);
-                    lbVector_8000DE38(
-                        (float (*)[4]) &
-                            stock->x204[user_data->player].x0[anim_offset],
-                        &vecC, 0.1f * data[i + 5]);
+                    struct IfStockData* data =
+                        (struct IfStockData*) &stock->x204[user_data->player];
+                    lbVector_8000DE38((float (*)[4]) & data->anim[i - 5],
+                                      &vecC, 0.1f * data->x0[i + 5]);
                 }
                 HSD_JObjGetTranslation(stock->player[user_data->player].x4[0],
                                        &vecD);
@@ -239,14 +236,9 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 anim_base =
                     (struct IfStockDataOffset*) ((struct IfStockData*) stock +
                                                  user_data->player);
-                anim_data = (unsigned char*) ++anim_base;
-                if (anim_data[i + 5] == 1) {
-                    vecC.x = ((struct IfStockStealAnim*) &anim_data
-                                  [0xC +
-                                   (int) (i * (int) sizeof(
-                                                  struct IfStockStealAnim)) -
-                                   5 * sizeof(struct IfStockStealAnim)])
-                                 ->start.x;
+                anim_data = (struct IfStockData*) ++anim_base;
+                if (anim_data->x0[i + 5] == 1) {
+                    vecC.x = anim_data->anim[i - 5].start.x;
                     vecC.y =
                         ((struct IfStockStealAnim*) &(
                              stock->x204)[user_data->player]
@@ -258,16 +250,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                                                 struct IfStockStealAnim))])
                             ->start.y;
                     efSync_Spawn(0x475, gobj, &vecC);
-                } else if (anim_data[i + 5] == 10) {
-                    {
-                        vecC.x =
-                            ((struct IfStockStealAnim*) &anim_data
-                                 [0xC +
-                                  (int) (i * (int) sizeof(
-                                                 struct IfStockStealAnim)) -
-                                  5 * sizeof(struct IfStockStealAnim)])
-                                ->end.x;
-                    }
+                } else if (anim_data->x0[i + 5] == 10) {
+                    vecC.x = anim_data->anim[i - 5].end.x;
                     vecC.y =
                         ((struct IfStockStealAnim*) &(
                              stock->x204)[user_data->player]
