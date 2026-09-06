@@ -185,11 +185,6 @@ static inline u8* lbSnap_GetMemSnapIconData(void)
     return _p(x44_LbMcSnap_MemSnapIconData)[0].ptr;
 }
 
-static inline int lbSnap_GetTiledColumn(int x)
-{
-    return (x / 4) * 24;
-}
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma global_optimizer off
