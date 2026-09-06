@@ -683,6 +683,44 @@ void fn_801AAB74(HSD_GObj* gobj)
 
 /* 4DAAEC */ volatile const s32 gm_804DAAEC = 0xFFB40000;
 
+static inline f32 gm_801AB200_GetXPos(s32 idx)
+{
+    f32 x = gm_803DBFD8_extra.x_positions[idx];
+    return x;
+}
+
+static inline u32 gm_801AB200_GetTrigger(u8 pad_idx)
+{
+    return HSD_PadCopyStatus[pad_idx].trigger;
+}
+
+static inline u8 gm_801AB200_HasCheck(StaffEntryData* entry_data)
+{
+    return entry_data->has_check;
+}
+
+static inline void gm_801AB200_SetAppSRT(HSD_psAppSRT* appsrt, HSD_JObj* jobj)
+{
+    f32 tx;
+    f32 ty;
+    f32 tz;
+    f32 sx;
+    f32 sy;
+    f32 sz;
+    tx = jobj->mtx[0][3];
+    appsrt->translate.x = tx;
+    ty = jobj->mtx[1][3];
+    appsrt->translate.y = ty;
+    tz = jobj->mtx[2][3];
+    appsrt->translate.z = tz;
+    sx = jobj->scale.x;
+    appsrt->scale.x = 1.3f * sx;
+    sy = jobj->scale.y;
+    appsrt->scale.y = 1.3f * sy;
+    sz = jobj->scale.z;
+    appsrt->scale.z = 1.3f * sz;
+}
+
 static inline void gm_801AB200_ptcl(s32 idx, GXColor* color)
 {
     HSD_JObj* jobj;
@@ -753,6 +791,7 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 page_8;
     s32 jp_page;
     s32 line_num;
+    s32 sel;
     int text_idx;
     HSD_JObj* root = GET_JOBJ(gobj);
     s32 check_failed;
@@ -762,7 +801,6 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* hover_jobj;
     s32 button;
     HSD_psAppSRT* appsrt;
-    PAD_STACK(76);
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
@@ -871,13 +909,13 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     button = 0;
-    if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & HSD_PAD_A) {
+    if (gm_801AB200_GetTrigger(gm_801BF010()) & HSD_PAD_A) {
         button = HSD_PAD_A;
-    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & HSD_PAD_B) {
+    } else if (gm_801AB200_GetTrigger(gm_801BF010()) & HSD_PAD_B) {
         button = HSD_PAD_B;
-    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & HSD_PAD_START) {
+    } else if (gm_801AB200_GetTrigger(gm_801BF010()) & HSD_PAD_START) {
         button = HSD_PAD_START;
-    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & HSD_PAD_Z) {
+    } else if (gm_801AB200_GetTrigger(gm_801BF010()) & HSD_PAD_Z) {
         button = HSD_PAD_Z;
     }
 
@@ -901,30 +939,34 @@ void fn_801AB200(HSD_GObj* gobj)
             base_page = selected * 0xF;
             jp_page = base_page + 7;
             entry_data = &gm_803DBFD8[selected];
+            text_arr = gm_80480D58;
+            sel = selected;
             jp_page1 = jp_page;
             en_page = base_page + 0xB;
             page_5 = base_page + 5;
             page_6 = base_page + 6;
             page_8 = base_page + 8;
-            text_arr = gm_80480D58;
-            for (text_idx = 0; text_idx < 6; text_idx++) {
-                if (text_arr[text_idx] != NULL) {
-                    HSD_SisLib_803A5CC4(text_arr[text_idx]);
+            for (text_idx = 0; text_idx < 6;
+                 text_idx++, text_arr++, jp_page++, en_page++)
+            {
+                if (*text_arr != NULL) {
+                    HSD_SisLib_803A5CC4(*text_arr);
                 }
 
                 gm_804D6810 = entry_data->x0;
 
                 if (text_idx == 0) {
-                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     gm_80480D58[0] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
+                        0, 0, 1.45f + gm_801AB200_GetXPos(gm_804D6810), 0.86f,
+                        0.0f, 0.0f, 100.0f);
                 } else if (text_idx == 1) {
-                    if (selected == 0xAC) {
+                    sel = selected;
+                    if (sel == 0xAC) {
                         offset1 = 0.2f;
                     } else {
                         offset1 = 0.0f;
                     }
-                    if (selected == 0xAF) {
+                    if (sel == 0xAF) {
                         offset2 = 0.1f;
                     } else {
                         offset2 = 0.0f;
@@ -934,22 +976,23 @@ void fn_801AB200(HSD_GObj* gobj)
                         0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
                         0.0f, 100.0f);
                 } else {
-                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-                    text_arr[text_idx] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f,
-                        0.0f, 0.0f, 100.0f);
+                    *text_arr = HSD_SisLib_803A5ACC(
+                        0, 0, 1.45f + gm_801AB200_GetXPos(gm_804D6810),
+                        (0.19f * (f32) text_idx) + 0.67f, 0.0f, 0.0f, 100.0f);
                 }
 
-                text_arr[text_idx]->default_kerning = 1;
-                text = text_arr[text_idx];
+                (*text_arr)->default_kerning = 1;
+                text = *text_arr;
                 text->font_size.x = 0.00376f;
                 text->font_size.y = 0.0045f;
 
                 if (text_idx == 0) {
-                    if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[text_idx]->text_color.r = 0xC3;
-                        text_arr[text_idx]->text_color.g = 0xC3;
-                        text_arr[text_idx]->text_color.b = 0xC3;
+                    if (check_failed == 0 ||
+                        gm_801AB200_HasCheck(entry_data) == 0)
+                    {
+                        (*text_arr)->text_color.r = 0xC3;
+                        (*text_arr)->text_color.g = 0xC3;
+                        (*text_arr)->text_color.b = 0xC3;
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(gm_80480D58[0], page_5);
                         } else {
@@ -957,10 +1000,12 @@ void fn_801AB200(HSD_GObj* gobj)
                         }
                     }
                 } else if (text_idx == 1) {
-                    if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[text_idx]->text_color.r = 0xE8;
-                        text_arr[text_idx]->text_color.g = 0x37;
-                        text_arr[text_idx]->text_color.b = 0xE0;
+                    if (check_failed == 0 ||
+                        gm_801AB200_HasCheck(entry_data) == 0)
+                    {
+                        (*text_arr)->text_color.r = 0xE8;
+                        (*text_arr)->text_color.g = 0x37;
+                        (*text_arr)->text_color.b = 0xE0;
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(gm_80480D58[1], jp_page1);
                         } else {
@@ -968,31 +1013,28 @@ void fn_801AB200(HSD_GObj* gobj)
                         }
                     }
                 } else {
-                    text_arr[text_idx]->text_color.r = 0xFF;
-                    text_arr[text_idx]->text_color.g = 0xB4;
-                    text_arr[text_idx]->text_color.b = 0;
-                    if (selected == 0x4B && text_idx == 2) {
-                        line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
+                    (*text_arr)->text_color.r = 0xFF;
+                    (*text_arr)->text_color.g = 0xB4;
+                    (*text_arr)->text_color.b = 0;
+                    if (sel == 0x4B && text_idx == 2) {
                         HSD_SisLib_803A6368(
-                            text_arr[text_idx],
+                            *text_arr,
                             0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) +
-                                line_num);
+                                gm_IsCKindUnlocked(CKIND_DRMARIO) * 2);
                     } else if (text_idx == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(text_arr[text_idx],
+                            HSD_SisLib_803A6368(*text_arr,
                                                 entry_data->alt_page + 2);
                         } else {
-                            HSD_SisLib_803A6368(text_arr[text_idx],
+                            HSD_SisLib_803A6368(*text_arr,
                                                 entry_data->alt_page + 3);
                         }
                     } else if (lbLang_IsSavedLanguageJP() != 0) {
-                        HSD_SisLib_803A6368(text_arr[text_idx], jp_page);
+                        HSD_SisLib_803A6368(*text_arr, jp_page);
                     } else {
-                        HSD_SisLib_803A6368(text_arr[text_idx], en_page);
+                        HSD_SisLib_803A6368(*text_arr, en_page);
                     }
                 }
-                jp_page++;
-                en_page++;
             }
 
             if (button == HSD_PAD_A && gm_804D6820 == 0) {
@@ -1001,12 +1043,7 @@ void fn_801AB200(HSD_GObj* gobj)
                     appsrt = psAddGeneratorAppSRT_begin(gen, 1);
                 }
 
-                appsrt->translate.x = hover_jobj->mtx[0][3];
-                appsrt->translate.y = hover_jobj->mtx[1][3];
-                appsrt->translate.z = hover_jobj->mtx[2][3];
-                appsrt->scale.x = 1.3f * hover_jobj->scale.x;
-                appsrt->scale.y = 1.3f * hover_jobj->scale.y;
-                appsrt->scale.z = 1.3f * hover_jobj->scale.z;
+                gm_801AB200_SetAppSRT(appsrt, hover_jobj);
 
                 staffInfo[selected].x8 += 1;
                 if (staffInfo[selected].x8 >= 1) {
