@@ -546,6 +546,18 @@ static inline void fn_8018B090_inline7(BracketEntry* entry, s32 slot_idx)
     HSD_JObjSetTranslateY(jobj, -(f32) entry->slots[slot_idx].x48);
 }
 
+static inline void fn_8018B090_inline8(struct lbl_803D9DAC_t* camera)
+{
+    f32* y;
+    f32* z;
+    mn_8022F410(&camera->current.x, &camera->target.x, camera->step.x);
+    y = &camera->current.y;
+    mn_8022F410(y, &camera->target.y, camera->step.y);
+    z = &camera->current.z;
+    mn_8022F410(z, &camera->target.z, camera->step.z);
+    fn_80190520(camera->current.x, *y, *z);
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     BracketEntry* entries = lbl_80473AB8;
@@ -903,15 +915,8 @@ void fn_8018B090(HSD_GObj* arg0)
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
-            f32* z;
             lbl_804D6630 += 1;
-            mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
-                        lbl_803D9DAC.step.x);
-            mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
-                        lbl_803D9DAC.step.y);
-            z = &lbl_803D9DAC.current.z;
-            mn_8022F410(z, &lbl_803D9DAC.target.z, lbl_803D9DAC.step.z);
-            fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y, *z);
+            fn_8018B090_inline8(&lbl_803D9DAC);
             return;
         }
         lbl_804D6630 = 0;
