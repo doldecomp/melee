@@ -140,18 +140,6 @@ ifStock_802F8298_init(HSD_GObj* gobj, HSD_JObj** jobj,
     return GET_IFSTOCK(gobj);
 }
 
-static inline u8 ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
-                                           struct ifStock_804A1378* stock)
-{
-    return stock->x204[user_data->player].x0[2];
-}
-
-static inline int
-ifStock_802F8298_get_player(struct IfStockUserData* user_data)
-{
-    return user_data->player;
-}
-
 static inline HSD_JObj*
 ifStock_802F8298_get_x3C(struct IfStockUserData* user_data,
                          struct ifStock_804A1378* stock)
@@ -200,7 +188,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
                 {
                     unsigned char* data = stock->x204[user_data->player].x0;
-                    if (ifStock_802F8298_get_flag(user_data, stock) != 0) {
+                    if (stock->x204[user_data->player].x0[2] != 0) {
                         data[i + 5] = 0;
                     } else {
                         data[i + 5] = 10;
@@ -230,9 +218,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
             }
             HSD_JObjReqAnimAll(jobj2,
                                stock->x204[user_data->player].x0[i + 5]);
-            HSD_TObjReqAnimAll(
-                jobj2->u.dobj->mobj->tobj,
-                gm_80168BF8(ifStock_802F8298_get_player(user_data)));
+            HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
+                               gm_80168BF8(user_data->player));
             HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
         }
     } else {
