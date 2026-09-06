@@ -120,6 +120,7 @@ int ifStock_802F7EFC(int arg0, int arg1)
     return 0;
 }
 
+/// @todo remove these cursed macros for something proper.
 /// Per-player animation data, addressed as a 0x54-byte element from the struct
 /// base with the x204 array offset applied afterwards.
 #define ifStock_802F8298_elem(p)                                              \
