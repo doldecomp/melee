@@ -671,25 +671,117 @@ void fn_801AAB74(HSD_GObj* gobj)
     }
 }
 
-typedef struct StaffRollPoints {
-    s32 particles[7];
-    Vec3 corners[4];
-} StaffRollPoints;
+static inline void gmStaffRoll_UpdateText(s32 selected)
+{
+    int text_idx;
+    HSD_Text** text_arr;
+    HSD_Text* text;
+    f32 offset1, offset2;
+    f32 x_pos;
+    s32 check_failed;
+    s32 line_num;
 
-/* 3DD1C8 */ static StaffRollPoints gm_803DD1C8 = {
-    { 0x10, 0x63, 0x62, 0x64, 0x5B, 0x5A, 0x59 },
-    {
+    check_failed = gm_803DBFD8[selected].check != NULL &&
+                   gm_803DBFD8[selected].check(
+                       gm_803DBFD8[selected].check_arg) == 0;
+    text_arr = gm_80480D58;
+    for (text_idx = 0; text_idx < 6; text_idx++) {
+        if (text_arr[text_idx] != NULL) {
+            HSD_SisLib_803A5CC4(text_arr[text_idx]);
+        }
+
+        gm_804D6810 = gm_803DBFD8[selected].x0;
+
+        if (text_idx == 0) {
+            x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
+            gm_80480D58[0] = HSD_SisLib_803A5ACC(
+                0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
+        } else if (text_idx == 1) {
+            if (selected == 0xAC) {
+                offset1 = 0.2f;
+            } else {
+                offset1 = 0.0f;
+            }
+            offset2 = selected == 0xAF ? 0.1f : 0.0f;
+            x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
+            gm_80480D58[1] = HSD_SisLib_803A5ACC(
+                0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
+                0.0f, 100.0f);
+        } else {
+            x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
+            text_arr[text_idx] = HSD_SisLib_803A5ACC(
+                0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f,
+                0.0f, 0.0f, 100.0f);
+        }
+
+        text_arr[text_idx]->default_kerning = 1;
+        text = text_arr[text_idx];
+        text->font_size.x = 0.00376f;
+        text->font_size.y = 0.0045f;
+
+        if (text_idx == 0) {
+            if (check_failed == 0 || gm_803DBFD8[selected].has_check == 0) {
+                text_arr[text_idx]->text_color.r = 0xC3;
+                text_arr[text_idx]->text_color.g = 0xC3;
+                text_arr[text_idx]->text_color.b = 0xC3;
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    HSD_SisLib_803A6368(gm_80480D58[0], selected * 15 + 5);
+                } else {
+                    HSD_SisLib_803A6368(gm_80480D58[0], selected * 15 + 6);
+                }
+            }
+        } else if (text_idx == 1) {
+            if (check_failed == 0 || gm_803DBFD8[selected].has_check == 0) {
+                text_arr[text_idx]->text_color.r = 0xE8;
+                text_arr[text_idx]->text_color.g = 0x37;
+                text_arr[text_idx]->text_color.b = 0xE0;
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    HSD_SisLib_803A6368(gm_80480D58[1], selected * 15 + 7);
+                } else {
+                    HSD_SisLib_803A6368(gm_80480D58[1], selected * 15 + 8);
+                }
+            }
+        } else {
+            text_arr[text_idx]->text_color.r = 0xFF;
+            text_arr[text_idx]->text_color.g = 0xB4;
+            text_arr[text_idx]->text_color.b = 0;
+            if (selected == 0x4B && text_idx == 2) {
+                line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
+                HSD_SisLib_803A6368(
+                    text_arr[text_idx],
+                    0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) + line_num);
+            } else if (text_idx == 2 && check_failed == 1) {
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    HSD_SisLib_803A6368(text_arr[text_idx],
+                                       gm_803DBFD8[selected].alt_page + 2);
+                } else {
+                    HSD_SisLib_803A6368(text_arr[text_idx],
+                                       gm_803DBFD8[selected].alt_page + 3);
+                }
+            } else if (lbLang_IsSavedLanguageJP() != 0) {
+                HSD_SisLib_803A6368(text_arr[text_idx],
+                                   selected * 15 + 7 + text_idx);
+            } else {
+                HSD_SisLib_803A6368(text_arr[text_idx],
+                                   selected * 15 + 11 + text_idx);
+            }
+        }
+    }
+}
+
+void fn_801AB200(HSD_GObj* gobj)
+{
+    static s32 particles[7] = {
+        0x10, 0x63, 0x62, 0x64, 0x5B, 0x5A, 0x59,
+    };
+
+    static Vec3 corners[4] = {
         { -13.5F, -4.5F, 0.0F },
         { -13.5F, 6.5F, 0.0F },
         { 13.5F, 6.5F, 0.0F },
         { 13.5F, -4.5F, 0.0F },
-    },
-};
-
-/* 4DAAEC */ volatile const s32 gm_804DAAEC = 0xFFB40000;
-
-void fn_801AB200(HSD_GObj* gobj)
-{
+    };
+    static const GXColor tally_color_init = { 0xFF, 0xB4, 0, 0 };
     HSD_JObj* hover_jobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj_pair[2];
@@ -701,8 +793,6 @@ void fn_801AB200(HSD_GObj* gobj)
     GXColor tally_color2;
     GXColor tally_color_copy;
     f32 fov_scale;
-    f32 offset1, offset2;
-    HSD_JObj* ptcl_jobj3;
     s32 selected;
     s32 button;
     HSD_JObj* root = GET_JOBJ(gobj);
@@ -715,24 +805,14 @@ void fn_801AB200(HSD_GObj* gobj)
     StaffRollPtclNode* p;
     int entry_idx;
     int broke;
-    s32 base_page;
-    s32 jp_page, en_page;
-    s32 page_5, page_6, page_8;
-    HSD_Text** text_arr;
-    StaffEntryData* entry_data;
-    f32 x_pos;
     s32 tally_count;
-    s32 check_failed;
     s32 line_num;
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;
-    HSD_JObj* ptcl_jobj;
     f32 half_size;
     f32 highlight_val;
-    HSD_JObj* ptcl_jobj2;
-    HSD_Text* text;
     HSD_Text* tally_text;
-    PAD_STACK(72);
+    PAD_STACK(8);
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
@@ -781,8 +861,9 @@ void fn_801AB200(HSD_GObj* gobj)
         entry_idx = staffInfoSortBuf[i].index;
         if (staffInfo[entry_idx].x8 < 1) {
             if (entry_idx < 7) {
+                HSD_JObj* ptcl_jobj;
                 lb_80011E24(gm_804D682C, &ptcl_jobj,
-                            gm_803DD1C8.particles[entry_idx], -1);
+                            particles[entry_idx], -1);
                 if (entry_idx == 0) {
                     p = (StaffRollPtclNode*) ptcl_jobj->u.ptcl;
                     tally_color = *(s32*) &gm_804D42C4;
@@ -830,13 +911,13 @@ void fn_801AB200(HSD_GObj* gobj)
                     half_size =
                         0.16875f * (f32) gm_803DBFD8[entry_idx]
                                        .x11[lbLang_IsSavedLanguageUS()];
-                    gm_803DD1C8.corners[1].x = -half_size;
-                    gm_803DD1C8.corners[0].x = -half_size;
-                    gm_803DD1C8.corners[3].x = half_size;
-                    gm_803DD1C8.corners[2].x = half_size;
+                    corners[1].x = -half_size;
+                    corners[0].x = -half_size;
+                    corners[3].x = half_size;
+                    corners[2].x = half_size;
                     for (j = 0; j < 4; j++) {
                         PSMTXMultVec(staffInfoSortBuf[i].mtx,
-                                     &gm_803DD1C8.corners[j], &xform_result);
+                                     &corners[j], &xform_result);
                         if (xform_result.z >= -1.0f) {
                             broke = 1;
                             break;
@@ -859,9 +940,9 @@ void fn_801AB200(HSD_GObj* gobj)
                         selected = entry_idx;
                         if (staffInfo[entry_idx].x8 < 1) {
                             if (entry_idx < 7) {
+                                HSD_JObj* ptcl_jobj2;
                                 lb_80011E24(gm_804D682C, &ptcl_jobj2,
-                                            gm_803DD1C8.particles[entry_idx],
-                                            -1);
+                                            particles[entry_idx], -1);
                                 if (entry_idx == 0) {
                                     s32 hover_color = *(s32*) &gm_804D42CC;
                                     p = (StaffRollPtclNode*)
@@ -926,109 +1007,13 @@ void fn_801AB200(HSD_GObj* gobj)
         if (selected != -1 &&
             (button == HSD_PAD_B || (gm_804D6818 == 0 && button == HSD_PAD_A)))
         {
-            int text_idx;
-
             lb_80011E24(root, &temp_jobj, 8, -1);
             HSD_JObjReqAnimAll(temp_jobj, 0.0f);
             lbAudioAx_800237A8(0x7A12A, 0x7F, 0x40);
 
-            entry_data = &gm_803DBFD8[selected];
-            check_failed = entry_data->check != NULL &&
-                           entry_data->check(entry_data->check_arg) == 0;
-            base_page = selected * 0xF;
-            jp_page = base_page + 7;
-            page_8 = base_page + 8;
-            en_page = base_page + 0xB;
-            page_5 = base_page + 5;
-            page_6 = base_page + 6;
-            text_arr = gm_80480D58;
-            for (text_idx = 0; text_idx < 6; text_idx++) {
-                if (text_arr[text_idx] != NULL) {
-                    HSD_SisLib_803A5CC4(text_arr[text_idx]);
-                }
+            gmStaffRoll_UpdateText(selected);
 
-                gm_804D6810 = entry_data->x0;
-
-                if (text_idx == 0) {
-                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-                    gm_80480D58[0] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
-                } else if (text_idx == 1) {
-                    if (selected == 0xAC) {
-                        offset1 = 0.2f;
-                    } else {
-                        offset1 = 0.0f;
-                    }
-                    if (selected == 0xAF) {
-                        offset2 = 0.1f;
-                    } else {
-                        offset2 = 0.0f;
-                    }
-                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-                    gm_80480D58[1] = HSD_SisLib_803A5ACC(
-                        0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
-                        0.0f, 100.0f);
-                } else {
-                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-                    text_arr[text_idx] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f,
-                        0.0f, 0.0f, 100.0f);
-                }
-
-                text_arr[text_idx]->default_kerning = 1;
-                text = text_arr[text_idx];
-                text->font_size.x = 0.00376f;
-                text->font_size.y = 0.0045f;
-
-                if (text_idx == 0) {
-                    if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[text_idx]->text_color.r = 0xC3;
-                        text_arr[text_idx]->text_color.g = 0xC3;
-                        text_arr[text_idx]->text_color.b = 0xC3;
-                        if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(gm_80480D58[0], page_5);
-                        } else {
-                            HSD_SisLib_803A6368(gm_80480D58[0], page_6);
-                        }
-                    }
-                } else if (text_idx == 1) {
-                    if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[text_idx]->text_color.r = 0xE8;
-                        text_arr[text_idx]->text_color.g = 0x37;
-                        text_arr[text_idx]->text_color.b = 0xE0;
-                        if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(gm_80480D58[1], base_page + 7);
-                        } else {
-                            HSD_SisLib_803A6368(gm_80480D58[1], page_8);
-                        }
-                    }
-                } else {
-                    text_arr[text_idx]->text_color.r = 0xFF;
-                    text_arr[text_idx]->text_color.g = 0xB4;
-                    text_arr[text_idx]->text_color.b = 0;
-                    if (selected == 0x4B && text_idx == 2) {
-                        line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
-                        HSD_SisLib_803A6368(
-                            text_arr[text_idx],
-                            0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) +
-                                line_num);
-                    } else if (text_idx == 2 && check_failed == 1) {
-                        if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(text_arr[text_idx],
-                                                entry_data->alt_page + 2);
-                        } else {
-                            HSD_SisLib_803A6368(text_arr[text_idx],
-                                                entry_data->alt_page + 3);
-                        }
-                    } else if (lbLang_IsSavedLanguageJP() != 0) {
-                        HSD_SisLib_803A6368(text_arr[text_idx], jp_page);
-                    } else {
-                        HSD_SisLib_803A6368(text_arr[text_idx], en_page);
-                    }
-                }
-                jp_page++;
-                en_page++;
-            }
+            PAD_STACK(36);
 
             if (button == HSD_PAD_A && gm_804D6820 == 0) {
                 gen = hsd_8039F05C(0, 0, 0x27);
@@ -1046,8 +1031,9 @@ void fn_801AB200(HSD_GObj* gobj)
                 staffInfo[selected].x8 += 1;
                 if (staffInfo[selected].x8 >= 1) {
                     if (selected < 7) {
+                        HSD_JObj* ptcl_jobj3;
                         lb_80011E24(gm_804D682C, &ptcl_jobj3,
-                                    gm_803DD1C8.particles[selected], -1);
+                                    particles[selected], -1);
                         if (selected == 0) {
                             p = (StaffRollPtclNode*) ptcl_jobj3->u.ptcl;
                             tally_color = *(s32*) &gm_804D42C8;
@@ -1082,6 +1068,8 @@ void fn_801AB200(HSD_GObj* gobj)
         }
     }
 
+    PAD_STACK(28);
+
     gm_804D6828 -= 0.017f;
     if (gm_804D6828 < 0.0f) {
         gm_804D6828 = 0.0f;
@@ -1112,7 +1100,7 @@ void fn_801AB200(HSD_GObj* gobj)
 
         if (gm_804D6814 >= 0x1285 && gm_804D680C == NULL) {
             tally_count = 0;
-            tally_color2 = *(GXColor*) &gm_804DAAEC;
+            tally_color2 = tally_color_init;
             for (j = 0; j < 6; j++) {
                 HSD_SisLib_803A5CC4(gm_80480D58[j]);
                 gm_80480D58[j] = NULL;
