@@ -58,6 +58,7 @@ typedef struct {
 } SortBufEntry;
 
 /* 4D67FC */ static SortBufEntry* staffInfoSortBuf;
+/* 4D6800 */ static int gm_804D6800;
 
 struct gm_804D6804_t {
     /* +0 */ float x0;
@@ -427,7 +428,6 @@ void fn_801AA7F8(HSD_GObj* gobj)
     }
 }
 
-static int gm_804D6800;
 enum {
     Gm_GObj_GXLink_PlyCursor = 9
 };

@@ -1176,7 +1176,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmregenddisp.c"),
             Object(Matching, "melee/gm/gm_1A9B.c"),
             Object(Matching, "melee/gm/gmopening.c"),
-            Object(Linkable, "melee/gm/gmstaffroll.c"),
+            Object(Matching, "melee/gm/gmstaffroll.c"),
             Object(Matching, "melee/gm/gmhowto.c"),
             Object(Matching, "melee/gm/gmomake15.c"),
             Object(Matching, "melee/gm/gmprogressive.c"),
