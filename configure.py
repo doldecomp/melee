@@ -396,11 +396,11 @@ clang_disabled_warnings = [
     "return-type",
     "sign-compare",
     "sometimes-uninitialized",
-    "unused-but-set-variable", # TODO: enable
-    "unused-parameter", # TODO: enable
-    "unused-value", # TODO: enable
-    "unused-variable", # TODO: enable
-    "typedef-redefinition", # TODO: enable
+    "unused-but-set-variable",  # TODO: enable
+    "unused-parameter",  # TODO: enable
+    "unused-value",  # TODO: enable
+    "unused-variable",  # TODO: enable
+    "typedef-redefinition",  # TODO: enable
 ]
 
 

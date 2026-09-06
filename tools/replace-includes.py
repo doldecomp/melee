@@ -58,20 +58,20 @@ def main():
 
                     if src_path.suffix == ".c":
                         try:
-                            return p.relative_to(src_path.parent), '#include "{}"'
+                            return p.relative_to(src_path.parent), '#include "{}"{}'
                         except ValueError:
                             pass
 
                     for root in out_roots:
                         try:
-                            return p.relative_to(root), "#include <{}>"
+                            return p.relative_to(root), "#include <{}>{}"
                         except ValueError:
                             continue
                     logging.error("Out root not found: %s", mp)
                     return p, m[0]
 
                 p, fmt = decide_fmt()
-                s = fmt.format(p.as_posix()) + m["remaining"]
+                s = fmt.format(p.as_posix(), m["remaining"])
                 logging.info("Replaced `%s`", s)
                 return s
 
