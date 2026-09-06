@@ -1333,7 +1333,7 @@ config.libs = [
             Object(Linkable, "melee/mn/mnnamenew.c"),
             Object(Linkable, "melee/mn/mndiagram.c"),
             Object(Matching, "melee/mn/mndiagram2.c"),
-            Object(Linkable, "melee/mn/mndiagram3.c"),
+            Object(Matching, "melee/mn/mndiagram3.c"),
             Object(Linkable, "melee/mn/mnvibration.c"),
             Object(Matching, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
@@ -1573,7 +1573,7 @@ config.libs = [
             Object(Matching, "melee/ty/toy.c"),
             Object(Matching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
-            Object(Linkable, "melee/ty/tydisplay.c"),
+            Object(Matching, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(
