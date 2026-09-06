@@ -1,6 +1,6 @@
 #include "grbigblue.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "grbigblue.static.h"
 #include "grdisplay.h"
@@ -15,19 +15,19 @@
 
 #include <math.h>
 
-#include "cm/camera.h"
-#include "gm/gm_1A45.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/it_26B1.h"
-#include "it/itspawn.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gr/grzakogenerator.h>
+#include <melee/gr/inlines.h>
+#include <melee/gr/stage.h>
+#include <melee/gr/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
