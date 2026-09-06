@@ -4,8 +4,9 @@
 #include <setjmp.h>
 #include <string.h>
 
-#include "hsd_3A94.h"
 #include "hsd_3B33.h"
+#include <libc/stdlib.h> // IWYU pragma: keep
+#include <sysdolphin/baselib/hsd_3A94.h>
 
 #define HSD_804D2648_BUF ((u8*) &hsd_804D2648)
 
@@ -20,10 +21,6 @@ typedef union JpegWork {
         s32 prev_dc[3];
     } data;
 } JpegWork;
-
-typedef struct JpegBlock {
-    s32 data[0x40];
-} JpegBlock;
 
 typedef struct JpegByteBuffer {
     u8 data[1];
@@ -439,6 +436,17 @@ static void fn_803B376C(u8* arg0)
     }
 }
 
+typedef struct JpegEncodeTables {
+    u8 quant_luma[0x40];
+    u8 quant_chroma[0x40];
+    u16 ac_code_luma[0xA2];
+    u8 ac_length_luma[0xA2];
+    u8 pad_266[2];
+    u16 ac_code_chroma[0xA2];
+    u8 ac_length_chroma[0xA2];
+    u8 pad_44E[2];
+} JpegEncodeTables;
+
 static inline s32 hsd_803B3CD8_bit_length(s32 value)
 {
     s32 bit;
@@ -451,359 +459,99 @@ static inline s32 hsd_803B3CD8_bit_length(s32 value)
     return 0;
 }
 
-static inline s32 hsd_803B3CD8_abs(s32 sign, s32 value)
+static inline void hsd_803B3CD8_write_byte(u8 byte, JpegWork* work)
 {
-    return (sign ^ value) - sign;
+    u8* dst = hsd_804D79A0;
+
+    if (dst < &hsd_804D79A4[hsd_804D79A8]) {
+        hsd_804D79A0 = dst + 1;
+        *dst = byte;
+    } else {
+        longjmp(&work->jmp_buf, 1);
+    }
 }
 
-void hsd_803B3CD8(s32 arg0)
+static inline void hsd_803B3CD8_write_bits(s32 value, s32 length,
+                                           JpegWork* work)
 {
-    s32 work_r31;
-    JpegWork* work;
-    s32 work_r28_5;
-    s32 scratch_r5_9;
-    s32 work_r28_2;
-    s32 work_r28;
-    u16* work_r6;
-    s32 work_r28_4;
-    s32 work_r28_6;
-    s32 scratch_r3;
-    s32 scratch_r4_12;
-    s32 work_r22;
-    s32 scratch_r5;
-    s32 scratch_r5_2;
-    s32 scratch_r5_3;
-    s32 scratch_r5_4;
-    s32 scratch_r5_5;
-    s32 scratch_r5_6;
-    s32 scratch_r5_7;
-    s32 scratch_r5_8;
-    u8* work_r25_2;
-    s32 work_ctr_2;
-    s32 work_r24;
-    s32 work_r25;
-    s32 work_r23;
-    u8* work_r26;
-    s32 work_r28_3;
-    s32 scratch_r0;
-    u8 byte_out;
-    s32 scratch_r0_2;
-    s32 work_r29;
-    s32 work_r29_2;
-    s32 work_r29_3;
-    s32 work_r5;
-    u16 scratch_r28;
-    u16 scratch_r29;
-    u16 scratch_r31;
-    u16 scratch_r31_2;
-    u8* scratch_r4_10;
-    u8* scratch_r4_11;
-    u8* scratch_r4_13;
-    u8* scratch_r4_14;
-    u8* scratch_r4_15;
-    u8* scratch_r4_16;
-    u8* scratch_r4_24;
-    u8* scratch_r4_25;
-    u8* scratch_r4_26;
-    u8* scratch_r4_27;
-    u8* scratch_r4_28;
-    u8* scratch_r4_29;
-    u8* scratch_r4_8;
-    u8* scratch_r4_9;
-    u8* work_r7;
-    u16* work_r27;
+    s32 bit;
 
-    PAD_STACK(24);
-    work_r6 = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
-    work = (JpegWork*) &hsd_804D2648;
-    work_r7 = (arg0 == 0) ? lbl_80431690 : lbl_804316B4;
-    work_r27 =
-        (u16*) ((arg0 == 0) ? (lbl_80430C40 + 0x80) : (lbl_80430C40 + 0x268));
-    work_r26 = (arg0 == 0) ? (lbl_80430C40 + 0x1C4) : (lbl_80430C40 + 0x3AC);
-    work_r25 = work->data.coef[0] - work->data.prev_dc[arg0];
-    scratch_r0 = work_r25 >> 0x1F;
-    work_r24 = 0;
-    scratch_r5 = hsd_803B3CD8_abs(scratch_r0, work_r25);
-    work_r31 = hsd_803B3CD8_bit_length(scratch_r5);
-    work->data.prev_dc[arg0] = work->data.coef[0];
-    scratch_r28 = work_r6[work_r31];
-    work_r29 = work_r7[work_r31] - 1;
-    for (; work_r29 >= 0; work_r29--) {
+    for (bit = length - 1; bit >= 0; bit--) {
         hsd_804D79B0[0] <<= 1;
         hsd_804D79AC += 1;
-        if (scratch_r28 & (1 << work_r29)) {
+        if (value & (1 << bit)) {
             hsd_804D79B0[0] |= 1;
         }
         if (hsd_804D79AC == 8) {
-            scratch_r4_8 = hsd_804D79A0;
-            byte_out = hsd_804D79B0[0];
-            if (scratch_r4_8 < &hsd_804D79A4[hsd_804D79A8]) {
-                hsd_804D79A0 = scratch_r4_8 + 1;
-                *scratch_r4_8 = byte_out;
-            } else {
-                longjmp(&work->jmp_buf, 1);
-            }
+            hsd_803B3CD8_write_byte(hsd_804D79B0[0], work);
             if (hsd_804D79B0[0] == 0xFF) {
-                scratch_r4_9 = hsd_804D79A0;
-                if (scratch_r4_9 < &hsd_804D79A4[hsd_804D79A8]) {
-                    hsd_804D79A0 = scratch_r4_9 + 1;
-                    *scratch_r4_9 = 0;
-                } else {
-                    longjmp(&work->jmp_buf, 1);
-                }
+                hsd_803B3CD8_write_byte(0, work);
             }
             hsd_804D79AC = 0;
             hsd_804D79B0[0] = 0;
         }
     }
-    if (work_r31 != 0) {
-        if (work_r25 < 0) {
-            work_r25 -= 1;
+}
+
+void hsd_803B3CD8(s32 component)
+{
+    struct {
+        JpegWork* work;
+    } state;
+    JpegEncodeTables* tables;
+    u16* dc_code;
+    u8* dc_length;
+    u16* ac_code;
+    u8* ac_length;
+    s32 value;
+    s32 length;
+    s32 run;
+    s32 index;
+
+    PAD_STACK(16);
+
+    state.work = (JpegWork*) &hsd_804D2648;
+    tables = (JpegEncodeTables*) lbl_80430C40;
+    dc_code = component == 0 ? lbl_80431678 : lbl_8043169C;
+    dc_length = component == 0 ? lbl_80431690 : lbl_804316B4;
+    ac_code = component == 0 ? tables->ac_code_luma : tables->ac_code_chroma;
+    ac_length =
+        component == 0 ? tables->ac_length_luma : tables->ac_length_chroma;
+
+    value = state.work->data.coef[0] - state.work->data.prev_dc[component];
+    run = 0;
+    length = hsd_803B3CD8_bit_length(abs(value));
+    state.work->data.prev_dc[component] = state.work->data.coef[0];
+    hsd_803B3CD8_write_bits(dc_code[length], dc_length[length], state.work);
+    if (length != 0) {
+        if (value < 0) {
+            value--;
         }
-        work_r28 = work_r31 - 1;
-        for (; work_r28 >= 0; work_r28--) {
-            hsd_804D79B0[0] <<= 1;
-            hsd_804D79AC += 1;
-            if (work_r25 & (1 << work_r28)) {
-                hsd_804D79B0[0] |= 1;
+        hsd_803B3CD8_write_bits(value, length, state.work);
+    }
+    for (index = 1; index < 64; index++) {
+        s32 coefficient = state.work->data.coef[lbl_80431638[index]];
+        s32 ac_value = coefficient;
+
+        if (coefficient != 0) {
+            length = hsd_803B3CD8_bit_length(run + 1);
+            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length],
+                                    state.work);
+            hsd_803B3CD8_write_bits(run + 1, length, state.work);
+            length = hsd_803B3CD8_bit_length(abs(ac_value));
+            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length],
+                                    state.work);
+            if (ac_value < 0) {
+                ac_value--;
             }
-            if (hsd_804D79AC == 8) {
-                scratch_r4_10 = hsd_804D79A0;
-                byte_out = hsd_804D79B0[0];
-                if (scratch_r4_10 < &hsd_804D79A4[hsd_804D79A8]) {
-                    hsd_804D79A0 = scratch_r4_10 + 1;
-                    *scratch_r4_10 = byte_out;
-                } else {
-                    longjmp(&work->jmp_buf, 1);
-                }
-                if (hsd_804D79B0[0] == 0xFF) {
-                    scratch_r4_11 = hsd_804D79A0;
-                    if (scratch_r4_11 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_11 + 1;
-                        *scratch_r4_11 = 0;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                }
-                hsd_804D79AC = 0;
-                hsd_804D79B0[0] = 0;
-            }
+            hsd_803B3CD8_write_bits(ac_value, length, state.work);
+            run = 0;
+        } else {
+            run++;
         }
     }
-    work_r25_2 = &lbl_80431638[1];
-    work_r23 = 1;
-    do {
-        work_r22 = work->data.coef[*work_r25_2];
-        scratch_r0_2 = work_r22;
-        if (scratch_r0_2 != 0) {
-            scratch_r4_12 = work_r24 + 1;
-            work_r5 = 0x1F;
-            for (work_ctr_2 = 4; work_ctr_2 != 0; work_ctr_2--) {
-                if (scratch_r4_12 & (1 << work_r5)) {
-                    work_r28_2 = work_r5 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_2 = work_r5 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_2)) {
-                    work_r28_2 = scratch_r5_2 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_3 = scratch_r5_2 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_3)) {
-                    work_r28_2 = scratch_r5_3 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_4 = scratch_r5_3 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_4)) {
-                    work_r28_2 = scratch_r5_4 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_5 = scratch_r5_4 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_5)) {
-                    work_r28_2 = scratch_r5_5 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_6 = scratch_r5_5 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_6)) {
-                    work_r28_2 = scratch_r5_6 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_7 = scratch_r5_6 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_7)) {
-                    work_r28_2 = scratch_r5_7 + 1;
-                    goto loop_65;
-                }
-                scratch_r5_8 = scratch_r5_7 - 1;
-                if (scratch_r4_12 & (1 << scratch_r5_8)) {
-                    work_r28_2 = scratch_r5_8 + 1;
-                    goto loop_65;
-                }
-                work_r5 = scratch_r5_8 - 1;
-            }
-            work_r28_2 = 0;
-        loop_65:
-            scratch_r31 = work_r27[work_r28_2];
-            work_r29_2 = *(work_r26 + work_r28_2) - 1;
-            for (; work_r29_2 >= 0; work_r29_2--) {
-                hsd_804D79B0[0] <<= 1;
-                hsd_804D79AC += 1;
-                if (scratch_r31 & (1 << work_r29_2)) {
-                    hsd_804D79B0[0] |= 1;
-                }
-                if (hsd_804D79AC == 8) {
-                    scratch_r4_13 = hsd_804D79A0;
-                    byte_out = hsd_804D79B0[0];
-                    if (scratch_r4_13 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_13 + 1;
-                        *scratch_r4_13 = byte_out;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                    if (hsd_804D79B0[0] == 0xFF) {
-                        scratch_r4_14 = hsd_804D79A0;
-                        if (scratch_r4_14 < &hsd_804D79A4[hsd_804D79A8]) {
-                            hsd_804D79A0 = scratch_r4_14 + 1;
-                            *scratch_r4_14 = 0;
-                        } else {
-                            longjmp(&work->jmp_buf, 1);
-                        }
-                    }
-                    hsd_804D79AC = 0;
-                    hsd_804D79B0[0] = 0;
-                }
-            }
-            work_r28_3 = work_r28_2 - 1;
-            for (; work_r28_3 >= 0; work_r28_3--) {
-                hsd_804D79B0[0] <<= 1;
-                hsd_804D79AC += 1;
-                if ((work_r24 + 1) & (1 << work_r28_3)) {
-                    hsd_804D79B0[0] |= 1;
-                }
-                if (hsd_804D79AC == 8) {
-                    scratch_r4_15 = hsd_804D79A0;
-                    byte_out = hsd_804D79B0[0];
-                    if (scratch_r4_15 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_15 + 1;
-                        *scratch_r4_15 = byte_out;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                    if (hsd_804D79B0[0] == 0xFF) {
-                        scratch_r4_16 = hsd_804D79A0;
-                        if (scratch_r4_16 < &hsd_804D79A4[hsd_804D79A8]) {
-                            hsd_804D79A0 = scratch_r4_16 + 1;
-                            *scratch_r4_16 = 0;
-                        } else {
-                            longjmp(&work->jmp_buf, 1);
-                        }
-                    }
-                    hsd_804D79AC = 0;
-                    hsd_804D79B0[0] = 0;
-                }
-            }
-            scratch_r3 = work_r22 >> 0x1F;
-            scratch_r5_9 = (scratch_r3 ^ work_r22) - scratch_r3;
-            work_r28_4 = hsd_803B3CD8_bit_length(scratch_r5_9);
-            scratch_r31_2 = work_r27[work_r28_4];
-            work_r29_3 = *(work_r26 + work_r28_4) - 1;
-            for (; work_r29_3 >= 0; work_r29_3--) {
-                hsd_804D79B0[0] <<= 1;
-                hsd_804D79AC += 1;
-                if (scratch_r31_2 & (1 << work_r29_3)) {
-                    hsd_804D79B0[0] |= 1;
-                }
-                if (hsd_804D79AC == 8) {
-                    scratch_r4_24 = hsd_804D79A0;
-                    byte_out = hsd_804D79B0[0];
-                    if (scratch_r4_24 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_24 + 1;
-                        *scratch_r4_24 = byte_out;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                    if (hsd_804D79B0[0] == 0xFF) {
-                        scratch_r4_25 = hsd_804D79A0;
-                        if (scratch_r4_25 < &hsd_804D79A4[hsd_804D79A8]) {
-                            hsd_804D79A0 = scratch_r4_25 + 1;
-                            *scratch_r4_25 = 0;
-                        } else {
-                            longjmp(&work->jmp_buf, 1);
-                        }
-                    }
-                    hsd_804D79AC = 0;
-                    hsd_804D79B0[0] = 0;
-                }
-            }
-            if (work_r22 < 0) {
-                work_r22 -= 1;
-            }
-            work_r28_5 = work_r28_4 - 1;
-            for (; work_r28_5 >= 0; work_r28_5--) {
-                hsd_804D79B0[0] <<= 1;
-                hsd_804D79AC += 1;
-                if (work_r22 & (1 << work_r28_5)) {
-                    hsd_804D79B0[0] |= 1;
-                }
-                if (hsd_804D79AC == 8) {
-                    scratch_r4_26 = hsd_804D79A0;
-                    byte_out = hsd_804D79B0[0];
-                    if (scratch_r4_26 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_26 + 1;
-                        *scratch_r4_26 = byte_out;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                    if (hsd_804D79B0[0] == 0xFF) {
-                        scratch_r4_27 = hsd_804D79A0;
-                        if (scratch_r4_27 < &hsd_804D79A4[hsd_804D79A8]) {
-                            hsd_804D79A0 = scratch_r4_27 + 1;
-                            *scratch_r4_27 = 0;
-                        } else {
-                            longjmp(&work->jmp_buf, 1);
-                        }
-                    }
-                    hsd_804D79AC = 0;
-                    hsd_804D79B0[0] = 0;
-                }
-            }
-            work_r24 = 0;
-        } else {
-            work_r24 += 1;
-        }
-        work_r23 += 1;
-        work_r25_2 += 1;
-    } while (work_r23 < 0x40);
-    if (work_r24 != 0) {
-        scratch_r29 = *work_r27;
-        work_r28_6 = *work_r26 - 1;
-        for (; work_r28_6 >= 0; work_r28_6--) {
-            hsd_804D79B0[0] <<= 1;
-            hsd_804D79AC += 1;
-            if (scratch_r29 & (1 << work_r28_6)) {
-                hsd_804D79B0[0] |= 1;
-            }
-            if (hsd_804D79AC == 8) {
-                scratch_r4_28 = hsd_804D79A0;
-                byte_out = hsd_804D79B0[0];
-                if (scratch_r4_28 < &hsd_804D79A4[hsd_804D79A8]) {
-                    hsd_804D79A0 = scratch_r4_28 + 1;
-                    *scratch_r4_28 = byte_out;
-                } else {
-                    longjmp(&work->jmp_buf, 1);
-                }
-                if (hsd_804D79B0[0] == 0xFF) {
-                    scratch_r4_29 = hsd_804D79A0;
-                    if (scratch_r4_29 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_29 + 1;
-                        *scratch_r4_29 = 0;
-                    } else {
-                        longjmp(&work->jmp_buf, 1);
-                    }
-                }
-                hsd_804D79AC = 0;
-                hsd_804D79B0[0] = 0;
-            }
-        }
+    if (run != 0) {
+        hsd_803B3CD8_write_bits(ac_code[0], ac_length[0], state.work);
     }
 }
 
