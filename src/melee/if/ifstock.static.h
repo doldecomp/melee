@@ -27,9 +27,20 @@ struct ifStock_804A1378_per_player {
     int stocks;
 };
 
+struct IfStockStealAnim {
+    Vec3 start;
+    Vec3 mid;
+    Vec3 end;
+};
+
 /// @todo merge with IfStockUserData
 struct ifStock_804A1378_x204 {
-    unsigned char x0[0x54];
+    u8 player;
+    u8 mode;
+    u8 flag;
+    u8 x3[2];
+    u8 anim[7];
+    struct IfStockStealAnim steal[2];
 };
 
 struct ifStock_804A1378 {
