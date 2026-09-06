@@ -1,9 +1,9 @@
 #ifndef GALE01_287458
 #define GALE01_287458
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 287458 */ void it_3F14_Logic2_Spawned(Item_GObj*);
 /* 2874F0 */ void it_802874F0(Item_GObj* gobj);

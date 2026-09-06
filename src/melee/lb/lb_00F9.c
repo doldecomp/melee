@@ -1,21 +1,20 @@
 #include "lb_00F9.h"
 
-#include "platform.h"
-#include "stddef.h"
-
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
-#include "lb/lbcollision.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "lb/types.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
 #include <math.h>
+#include <placeholder.h>
+#include <stddef.h>
+
+#include "forward.h"
+#include "lbcollision.h"
+#include "lbspdisplay.h"
+#include "lbvector.h"
+#include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -26,7 +25,6 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/mp/mplib.h>
 
 struct lb_Collider {
     /* 0x00 */ char pad_00[0x0C];

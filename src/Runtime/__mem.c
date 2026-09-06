@@ -1,6 +1,6 @@
-#include "platform.h"
-
 #include <string.h>
+
+#include "platform.h"
 
 SECTION_INIT static void __fill_mem(void* dst, int val, unsigned long n);
 

@@ -1,9 +1,9 @@
 #ifndef GALE01_2EB5C8
 #define GALE01_2EB5C8
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2EB5C8 */ void it_802EB5C8(Item_GObj*);
 /* 2EB684 */ bool itTincle_Logic13_DmgReceived(Item_GObj*);

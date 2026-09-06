@@ -1,8 +1,8 @@
 #ifndef GALE01_0CAE80
 #define GALE01_0CAE80
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 /* 0CAE80 */ ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj);
 /* 0CAED0 */ bool ftCo_Jump_CheckInput(Fighter_GObj* gobj);

@@ -1,21 +1,19 @@
 #include "mnname.h"
 
+#include <placeholder.h>
+
 #include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
-
 #include "mnname.static.h"
-
 #include "mnnamenew.h"
-#include "placeholder.h"
-
-#include "dolphin/gx/GXStruct.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-
+#include <dolphin/gx/GXStruct.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -25,7 +23,6 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/gm/gmmain_lib.h>
 
 f32 mnName_804D4BD0[2] = { 39.0f, 59.0f };
 f32 mnName_804D4BD8[2] = { 39.0f, 19.0f };

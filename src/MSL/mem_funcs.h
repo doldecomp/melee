@@ -1,7 +1,7 @@
 #ifndef __MEM_FUNCS_H__
 #define __MEM_FUNCS_H__
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <stddef.h>
 

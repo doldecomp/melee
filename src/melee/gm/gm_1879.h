@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_1879_H
 #define MELEE_GM_1879_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 187910 */ void fn_80187910(HSD_GObj*);
 /* 187AB4 */ void fn_80187AB4(HSD_GObj*);

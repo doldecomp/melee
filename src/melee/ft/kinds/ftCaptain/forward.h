@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FORWARD_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 typedef struct ftCaptain_DatAttrs ftCaptain_DatAttrs;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;

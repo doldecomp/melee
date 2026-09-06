@@ -1,7 +1,10 @@
-#include "sc/forward.h"
+#ifndef MELEE_MN_MNINFOBONUS_STATIC_H
+#define MELEE_MN_MNINFOBONUS_STATIC_H
 
+#include <melee/sc/forward.h>
+
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <sc/types.h>
 
 static int mnInfoBonus_803EFCE8[0x101] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005,
@@ -62,3 +65,5 @@ struct mnInfoBonus_804A09B0_t {
 } mnInfoBonus_804A09B0;
 
 static u8 mnInfoBonus_804D6C80[0x8];
+
+#endif

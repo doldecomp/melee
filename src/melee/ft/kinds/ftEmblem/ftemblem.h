@@ -1,10 +1,10 @@
 #ifndef GALE01_14EEF8
 #define GALE01_14EEF8
 
-#include "ft/types.h"
-
-#include "ftMars/forward.h"
+#include <melee/ft/kinds/ftMars/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
 
 /* 14EEF8 */ void ftFe_Init_OnDeath(HSD_GObj*);
 /* 14EF60 */ void ftFe_Init_OnItemPickup(HSD_GObj*, bool);

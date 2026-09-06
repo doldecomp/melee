@@ -1,25 +1,21 @@
 #include "ftCo_AttackHi4.h"
 
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0DF1.h"
-#include "ft/ftanim.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftNess/ftnessattackhi4.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ft_0DF1.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/kinds/ftNess/ftnessattackhi4.h>
+#include <melee/ft/types.h>
 
 /* 08CA38 */ void doEnter(Fighter_GObj* gobj);
 

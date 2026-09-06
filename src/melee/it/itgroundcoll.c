@@ -1,14 +1,12 @@
-#include "it/itgroundcoll.h"
+#include "itgroundcoll.h"
 
 #include "inlines.h"
-
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/item.h"
-#include "it/itmaplib.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
-
+#include "it_2725.h"
+#include "it_3F14.h"
+#include "item.h"
+#include "itmaplib.h"
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/random.h>
 
 bool it_8026D564(Item_GObj* item_gobj)

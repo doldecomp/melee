@@ -1,19 +1,16 @@
 #include "grtfalco.h"
 
+#include <melee/mp/forward.h>
+
+#include <placeholder.h>
+
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include "lb/lb_00F9.h"
-
-#include "mp/forward.h"
-
-#include "mp/mplib.h"
-
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

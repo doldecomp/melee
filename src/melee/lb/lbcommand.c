@@ -1,8 +1,8 @@
-#include "lb/lbcommand.h"
+#include "lbcommand.h"
 
-#include "lb/inlines.h"
-#include "lb/lb_0219.h"
-#include "lb/types.h"
+#include "inlines.h"
+#include "lb_0219.h"
+#include "types.h"
 
 void (*lbCommand_803B9840[16])(CommandInfo*) = {
     Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,

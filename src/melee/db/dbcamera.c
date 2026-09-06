@@ -1,14 +1,14 @@
-#include "cm/camera.h"
-#include "db/db.h"
-#include "ft/inlines.h"
-#include "gm/gm_unsplit.h"
-#include "gr/ground.h"
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "lb/lbshadow.h"
-#include "lb/lbvector.h"
-
 #include <math.h>
+
+#include "db.h"
+#include <melee/cm/camera.h>
+#include <melee/ft/inlines.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gr/ground.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/controller.h>
 
 /* 2270C4 */ static void fn_802270C4(int arg0);

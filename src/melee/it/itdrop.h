@@ -1,9 +1,9 @@
 #ifndef GALE01_ITDROP_H
 #define GALE01_ITDROP_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/types.h"
+#include <melee/it/types.h>
 
 /* 26F3AC */ ItemKind it_8026F3AC(void);
 /* 26F3D4 */ bool it_8026F3D4(Item_GObj*, struct it_8026F3D4_arg1_t*, s32,

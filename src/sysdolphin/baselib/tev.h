@@ -1,7 +1,7 @@
 #ifndef _tev_h_
 #define _tev_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/state.h>

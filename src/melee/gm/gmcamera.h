@@ -1,11 +1,11 @@
 #ifndef GALE01_1A2224
 #define GALE01_1A2224
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <placeholder.h>
 
-#include "dolphin/types.h"
-
-#include <sysdolphin/baselib/forward.h>
+#include <dolphin/types.h>
 
 typedef struct _gmCameraUnkStruct4 {
     /*0x00*/ bool x0;

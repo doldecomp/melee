@@ -1,10 +1,10 @@
 #include "lbcardnew.h"
 
-#include "lbcardnew.static.h"
-
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "lbcardnew.static.h"
 #include <dolphin/card.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3A94.h>

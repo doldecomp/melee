@@ -1,12 +1,13 @@
 #ifndef GALE01_0A0148
 #define GALE01_0A0148
 
+#include <Runtime/platform.h>
+
+#include <melee/ft/forward.h>
+
 #include <placeholder.h>
-#include <platform.h>
 
-#include "ft/forward.h"
-
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 struct _m2c_stack_ftCo_800A3554 {
     /* 0x00 */ char pad_0[0x10];

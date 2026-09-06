@@ -1,18 +1,16 @@
 #include "itkabigon.h"
 
 #include "inlines.h"
-
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
-
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7AD8[] = {

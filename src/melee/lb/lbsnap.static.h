@@ -1,13 +1,12 @@
 #ifndef __GALE01_01D2BC
 #define __GALE01_01D2BC
 
-#include "lbsnap.h" // IWYU pragma: export
+#include <Runtime/platform.h>
 
-#include <platform.h>
-
-#include "it/types.h"
-#include "lb/lbcardnew.h"
-#include "lb/types.h"
+#include <melee/it/types.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbsnap.h> // IWYU pragma: export
+#include <melee/lb/types.h>
 
 struct Unk80433380_48 {
     int card_result;

@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_PSDISP_H
 #define SYSDOLPHIN_BASELIB_PSDISP_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

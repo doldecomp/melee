@@ -1,9 +1,9 @@
 #ifndef GALE01_2D007C
 #define GALE01_2D007C
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D007C */ void itKireihana_Logic15_Spawned(Item_GObj*);
 /* 2D0118 */ void itKireihana_Logic15_EvtUnk(Item_GObj*, Item_GObj*);

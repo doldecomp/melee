@@ -1,7 +1,7 @@
 #ifndef GALE01_00CE50
 #define GALE01_00CE50
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 00CF74 */ s32 powi(s32, s32);
 /* 00D008 */ float lb_8000D008(float, float);

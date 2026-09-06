@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTPICHU_TYPES_H
 #define MELEE_FT_CHARA_FTPICHU_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 struct ftPichu_FighterVars {
     char filler0[0x100];

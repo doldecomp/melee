@@ -1,14 +1,14 @@
 #ifndef MELEE_FT_CHARA_FTPURIN_TYPES_H
 #define MELEE_FT_CHARA_FTPURIN_TYPES_H
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "melee/ft/dobjlist.h" // IWYU pragma: keep
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/mtx.h>
+#include <melee/ft/dobjlist.h> // IWYU pragma: keep
 
 struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;

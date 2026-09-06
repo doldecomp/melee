@@ -1,9 +1,9 @@
 #ifndef GALE01_2E05A0
 #define GALE01_2E05A0
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2E05A0 */ void it_802E05A0(Item_GObj*);
 /* 2E0678 */ void it_802E0678(Item_GObj* gobj);

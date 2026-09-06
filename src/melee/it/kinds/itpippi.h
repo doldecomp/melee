@@ -1,11 +1,11 @@
 #ifndef GALE01_2D3260
 #define GALE01_2D3260
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 void itPippi_Logic20_Spawned(Item_GObj*);
 void it_802D32D8(Item_GObj*);

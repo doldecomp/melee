@@ -1,3 +1,6 @@
+#ifndef _DOLPHIN_VI_INTERNAL_H_
+#define _DOLPHIN_VI_INTERNAL_H_
+
 /* gpioexi.c */
 
 void __VIInitI2C(void);
@@ -19,3 +22,5 @@ void __VIInitPhilips(void);
 void __VIInit(VITVMode mode);
 void __VISetAdjustingValues(s16 x, s16 y);
 void __VIGetAdjustingValues(s16 *x, s16 *y);
+
+#endif

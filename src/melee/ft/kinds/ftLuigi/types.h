@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTLUIGI_TYPES_H
 #define MELEE_FT_CHARA_FTLUIGI_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 struct ftLuigi_FighterVars {
     /* 0x222C */ bool x222C_cycloneCharge;

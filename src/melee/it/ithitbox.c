@@ -1,9 +1,8 @@
 #include "ithitbox.h"
 
+#include "inlines.h"
 #include "it_2725.h"
-
-#include "it/inlines.h"
-#include "it/itcoll.h"
+#include "itcoll.h"
 
 void it_802753DC(Item_GObj* item_gobj)
 {

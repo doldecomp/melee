@@ -1,39 +1,35 @@
 #include "ftCo_AttackLw3.h"
 
+#include <Runtime/platform.h>
+
+#include <sysdolphin/baselib/forward.h>
+
+#include "forward.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw4.h"
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
+#include "ftCo_Dash.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Jump.h"
+#include "ftCo_Squat.h"
+#include "ftCo_SquatWait.h"
+#include "ftCo_Turn.h"
+#include "ftCo_Walk.h"
 #include "ftpickupitem.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_SquatWait.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/ftCo_Walk.h"
-#include "ftCommon/types.h"
-#include "ftGameWatch/ftgamewatchattacklw3.h"
-
-#include <sysdolphin/baselib/forward.h>
-
+#include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftGameWatch/ftgamewatchattacklw3.h>
+#include <melee/ft/types.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

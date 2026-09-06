@@ -1,11 +1,11 @@
 #ifndef GALE01_29A114
 #define GALE01_29A114
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 typedef struct itLipstickSporeAttributes {
     f32 x0;

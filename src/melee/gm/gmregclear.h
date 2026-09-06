@@ -1,17 +1,17 @@
 #ifndef MELEE_gmregclear_H
 #define MELEE_gmregclear_H
 
-#include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-
-#include "gm/types.h"
-
+#include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
+
+#include <melee/gm/types.h>
 
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);
@@ -69,6 +69,7 @@
 /* 17E76C */ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E7A0 */ void gm_8017E7A0(u8);
 /* 17E7E0 */ bool gm_8017E7E0(void);
+/* 17F294 */ int fn_8017F294(void);
 /* 17E7FC */ void gm_8017E7FC(u8);
 /* 17E8A4 */ void fn_8017E8A4(int);
 /* 17EB30 */ UnkAllstarData* gm_GetAllStarData(void);

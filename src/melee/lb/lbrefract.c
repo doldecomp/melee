@@ -1,12 +1,11 @@
 #include "lbrefract.h"
 
+#include <math.h>
+#include <placeholder.h>
+#include <string.h>
+
 #include "lbarchive.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include <math.h>
-#include <string.h>
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>

@@ -1,21 +1,20 @@
 #include "itsamusbomb.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "db/db.h"
-#include "ftSamus/ftsamus.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
+#include <melee/it/forward.h>
 
 #include <math.h>
+
+#include <melee/db/db.h>
+#include <melee/ft/kinds/ftSamus/ftsamus.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {

@@ -1,28 +1,24 @@
 #include "gmtou_2.h"
 
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
+
+#include <placeholder.h>
+
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gmmain_lib.h"
 #include "gmtoulib.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include "ft/forward.h"
-
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbdvd.h"
-#include "lb/types.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-
-#include "pl/forward.h"
-
-#include "sc/types.h"
-
 #include <dolphin/os.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -91,11 +87,10 @@ static void sdata2_order(void)
 }
 #endif
 
-/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
 /* 4D6688 */ static HSD_Archive* lbl_804D6688;
 /* 479A58 */ static TmAnimTimers lbl_80479A58;
-/* 4D6690 */ static SceneDesc* lbl_804D6690;
 /* 4D668C */ static HSD_Archive* lbl_804D668C;
+/* 4D6690 */ static SceneDesc* lbl_804D6690;
 /* 4D6694 */ static SceneDesc* lbl_804D6694;
 
 struct lbl_803DA2E0_t lbl_803DA2E0 = {
@@ -114,6 +109,8 @@ const TmAnimFrameTable lbl_803B7D18 = {
       { 110, 130, 0 },
       { 150, 160, 0 } },
 };
+
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
 
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
 {
@@ -541,6 +538,11 @@ void fn_8019D074(HSD_GObj* gobj)
     fn_8018FDC4(jobj, var_f1, 666.0f, 666.0f);
 }
 
+static inline HSD_JObj* gmTournament_GetJObj(HSD_GObj* gobj)
+{
+    return gobj->hsd_obj;
+}
+
 void fn_8019D1BC(void)
 {
     HSD_JObj* jobj;
@@ -551,8 +553,8 @@ void fn_8019D1BC(void)
     f32 pos;
     f32 var_f1;
     f32 anim;
-    char name_buf[8][0x14];
-    PAD_STACK(0xA0);
+    Vec2 name_font_size;
+    char name_buf[16][0x14];
 
     tmd = gm_GetTournamentData();
 
@@ -562,10 +564,10 @@ void fn_8019D1BC(void)
             HSD_JObj* first_c;
             HSD_JObj* first_jobj;
 
-            first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
-                                     1, fn_8019C048, (f32) i);
-            first_jobj = GET_JOBJ(first_gobj);
-            first_c = first_gobj->hsd_obj;
+            first_c = gmTournament_GetJObj(
+                first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A,
+                                         2, 1, fn_8019C048, (f32) i));
+            first_jobj = first_gobj->hsd_obj;
             HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
 
@@ -594,7 +596,7 @@ void fn_8019D1BC(void)
 
         gobj = fn_8019035C(0, lbl_804D6694->models[10], 0, 0x1A, 2, 1,
                            fn_8019C3EC, pos);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         (void) jobj;
         HSD_JObjSetTranslateY(jobj, -2.5f);
         fn_8018FBD8(gobj, i);
@@ -602,7 +604,7 @@ void fn_8019D1BC(void)
 
         gobj = fn_8019035C(0, lbl_804D6694->models[4], 0, 0x1A, 2, 1,
                            fn_8019C570, pos);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         fn_8018FBD8(gobj, i);
 
         var_f1 = gmTournament_GetPlayerX(tmd->x30, i);
@@ -620,7 +622,7 @@ void fn_8019D1BC(void)
 
         gobj = fn_8019035C(0, lbl_804D6694->models[9], 0, 0x1A, 2, 1,
                            fn_8019C744, pos);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         HSD_JObjSetTranslateY(jobj, -2.5f);
         fn_8018FBD8(gobj, i);
 
@@ -633,7 +635,7 @@ void fn_8019D1BC(void)
 
         gobj = fn_8019035C(0, lbl_804D6694->models[8], 0, 0x1A, 2, 1,
                            fn_8019CA38, 0.0f);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         HSD_JObjSetTranslateY(jobj, -2.5f);
         fn_8018FBD8(gobj, i);
 
@@ -686,7 +688,6 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
                     0.01f);
-        (void) &tmd->x534[i];
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
@@ -697,13 +698,16 @@ void fn_8019D1BC(void)
         fn_8018FBD8(gobj, i);
         fn_8018F00C(name_buf[i], tmd->x37[i].x9);
 
+        name_font_size.x = 0.1f;
+        name_font_size.y = 0.1f;
+
         tmd->x534[i] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         tmd->x534[i]->default_kerning = 1;
         tmd->x534[i]->x4C = 1;
         {
             HSD_Text* text = tmd->x534[i];
-            text->font_size.x = 0.1f;
-            text->font_size.y = 0.1f;
+            text->font_size.x = name_font_size.x;
+            text->font_size.y = name_font_size.y;
         }
         tmd->x534[i]->default_alignment = 1;
         HSD_SisLib_803A6B98(tmd->x534[i],

@@ -1,7 +1,6 @@
 #include "ftdevice.h"
 
-#include "ft/inlines.h"
-
+#include "inlines.h"
 #include <sysdolphin/baselib/debug.h>
 
 /// @remarks MWCC lays out unreferenced .bss objects in reverse declaration

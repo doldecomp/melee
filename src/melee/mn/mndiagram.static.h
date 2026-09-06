@@ -1,7 +1,7 @@
 #ifndef __GALE01_23EA2C
 #define __GALE01_23EA2C
 
-#include "mndiagram.h" // IWYU pragma: export
+#include <melee/mn/mndiagram.h> // IWYU pragma: export
 
 extern char mnDiagram_804D4FA4[1];
 extern char mnDiagram_804D4FA8[7];

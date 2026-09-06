@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_CAPTURECUT_H
 #define MELEE_FTCO_CAPTURECUT_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0DC750 */ void ftCo_CaptureCut_Enter(Fighter_GObj* gobj);
 /* 0DC7F0 */ void ftCo_CaptureCut_Anim(Fighter_GObj* gobj);

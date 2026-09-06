@@ -5,7 +5,6 @@
 #include "debug.h"
 #include "mobj.h"
 #include "pobj.h"
-
 #include <dolphin/os.h>
 
 static void DObjInfoInit(void);

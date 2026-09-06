@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_FILE_H
 #define MELEE_LB_FILE_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,5 +1,5 @@
-#include <console_io.h>
-#include <stdio.h>
+#include "console_io.h"
+#include "stdio.h"
 
 FILE __files[3] = {
     {

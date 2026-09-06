@@ -5,9 +5,8 @@
 #include "gmmovieend.h"
 #include "gmvsmelee.h"
 #include "types.h"
-
-#include "if/if_2FD9.h"
-#include "mn/types.h"
+#include <melee/if/if_2FD9.h>
+#include <melee/mn/types.h>
 
 GameModeState gm_Mode_SuperSuddenDeath_States[] = {
     {

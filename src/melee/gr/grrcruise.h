@@ -1,7 +1,7 @@
 #ifndef GALE01_1FF164
 #define GALE01_1FF164
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
 #include <dolphin/mtx.h>
 

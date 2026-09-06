@@ -1,7 +1,7 @@
 #ifndef GALE01_0BD620
 #define GALE01_0BD620
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0BD620 */ void ftCo_800BD620(Fighter_GObj* gobj);
 /* 0BD6E8 */ void ftCo_CaptureWaitKirby_Anim(Fighter_GObj* gobj);

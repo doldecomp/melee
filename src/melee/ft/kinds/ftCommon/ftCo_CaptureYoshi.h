@@ -1,7 +1,7 @@
 #ifndef GALE01_09D6E8
 #define GALE01_09D6E8
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 09D6E8 */ void ftCo_800BBB8C(Fighter_GObj* gobj,
                                 Fighter_GObj* attacker_gobj);

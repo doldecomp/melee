@@ -1,13 +1,12 @@
 #include "itscball.h"
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 294AD0 */ static void it_80294AD0(Item_GObj* gobj);

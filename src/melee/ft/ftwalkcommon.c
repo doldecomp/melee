@@ -1,20 +1,15 @@
 #include "ftwalkcommon.h"
 
-#include "fighter.h"
-#include "ft_081B.h"
-#include "ftcommon.h"
-
-#include "ft/forward.h"
-
-#include "ft/ftanim.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
+#include "fighter.h"
+#include "forward.h"
+#include "ft_081B.h"
+#include "ftanim.h"
+#include "ftcommon.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftCommon/types.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/debug.h>
 

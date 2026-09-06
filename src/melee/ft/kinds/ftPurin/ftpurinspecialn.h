@@ -1,7 +1,7 @@
 #ifndef GALE01_13D658
 #define GALE01_13D658
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 13D658 */ void ftPr_SpecialS_8013D658(HSD_GObj* gobj);

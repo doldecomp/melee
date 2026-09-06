@@ -26,40 +26,15 @@ SortIncludes: CaseInsensitive
 WhitespaceSensitiveMacros:
   - 'HSD_ASSERT'
   - 'HSD_ASSERTREPORT'
-  - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: '^<platform\.h>$'
+  # TODO: Required for weird interactions with dolphin headers
+  - Regex: '^<Runtime/platform\.h>$'
     Priority: 1
-  - Regex: '^<placeholder\.h>$'
-    Priority: 1
-  - Regex: '^"forward\.h"$'
-    Priority: 2
-  - Regex: '^".*/forward\.h"$'
-    Priority: 2
-  - Regex: '^<dolphin(/.*)?/forward\.h>$'
-    Priority: 2
-  - Regex: '^<sysdolphin/baselib(/.*)?/forward\.h>$'
-    Priority: 2
-  - Regex: '^".*\.static\.h"$'
-    Priority: 1
+  # TODO: Required for unknown reasons
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: 2
+  # TODO: Required for unknown reasons
   - Regex: '^<[^/]*>$'
     Priority: 6
     SortPriority: 3
-  - Regex: '^<dolphin/.*>$'
-    Priority: 6
-    SortPriority: 4
-  - Regex: '^<sysdolphin/baselib/.*>$'
-    Priority: 6
-    SortPriority: 5
-  - Regex: '^<.*>$'
-    Priority: 6
-    SortPriority: 6
-  - Regex: '^"[^/]*"$'
-    Priority: 4
-    SortPriority: 1
-  - Regex: '^.*$'
-    Priority: 5
-    SortPriority: 2

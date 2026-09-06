@@ -1,22 +1,18 @@
 #include "gm_1A45.h"
 
 #include "gm_1A36.h"
-
 #include "gm_1A45.static.h"
-
 #include "gm_unsplit.h"
-
-#include "db/db.h"
-#include "gm/gmmain_lib.h"
-#include "gm/gmscdata.h"
-#include "if/ifcoget.h"
-#include "lb/lb_013B.h"
-#include "lb/lb_0195.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbheap.h"
-
+#include "gmmain_lib.h"
+#include "gmscdata.h"
 #include <dolphin/os/OSThread.h>
+#include <melee/db/db.h>
+#include <melee/if/ifcoget.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lb_0195.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbheap.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>

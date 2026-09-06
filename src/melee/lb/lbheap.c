@@ -1,10 +1,10 @@
-#include "lbheap.static.h"
-
 #include <stddef.h> // offsetof
+
+#include "lbheap.static.h"
+#include "lbmemory.h"
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/lb/lbmemory.h>
 
 struct lbHeap_HeapDesc {
     u32 idx;

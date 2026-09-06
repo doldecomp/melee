@@ -1,12 +1,12 @@
 #ifndef GALE01_2E8BCC
 #define GALE01_2E8BCC
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2E8BCC */ void it_802E8BCC(Item_GObj*);
 /* 2E8CD8 */ bool it_802E8CD8(Item_GObj*);

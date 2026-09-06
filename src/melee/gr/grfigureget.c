@@ -1,35 +1,29 @@
 #include "grfigureget.h"
 
+#include <Runtime/platform.h>
+
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
+#include <sysdolphin/baselib/forward.h>
+
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "ft/ftlib.h"
-#include "gm/gmregclear.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/kinds/itcoin.h"
-#include "it/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/types.h"
-#include "mp/mplib.h"
-#include "ty/toy.h"
-#include "ty/tydisplay.h"
-
-#include <sysdolphin/baselib/forward.h>
-
 #include <dolphin/mtx.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/it/inlines.h>
+#include <melee/it/kinds/itcoin.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mplib.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tydisplay.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

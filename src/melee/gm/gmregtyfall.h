@@ -1,10 +1,10 @@
 #ifndef MELEE_GM_REG_TY_FALL_H
 #define MELEE_GM_REG_TY_FALL_H
 
-#include <placeholder.h>
-
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 1A659C */ bool gm_801A659C(int);
 /* 1A6630 */ void gm_801A6630(int);

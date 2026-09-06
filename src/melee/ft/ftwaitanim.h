@@ -1,7 +1,7 @@
 #ifndef GALE01_08A698
 #define GALE01_08A698
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 typedef struct WaitStruct {
     union {

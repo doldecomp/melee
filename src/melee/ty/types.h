@@ -1,15 +1,14 @@
 #ifndef MELEE_TY_TYPES_H
 #define MELEE_TY_TYPES_H
 
-#include "platform.h"
+#include <Runtime/platform.h>
+
+#include <melee/ty/forward.h> // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h>
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
-
-#include "ty/forward.h" // IWYU pragma: export
-#include <sysdolphin/baselib/forward.h>
-
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 struct TySortElem {

@@ -1,16 +1,15 @@
 #include "itmatadogas.h"
 
-#include "inlines.h"
-
-#include "ef/efsync.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-
 #include <math.h>
+
+#include "inlines.h"
+#include <melee/ef/efsync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F7B58[] = {

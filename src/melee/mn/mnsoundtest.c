@@ -1,20 +1,17 @@
 #include "mnsoundtest.h"
 
-#include "inlines.h"
-#include "types.h"
-
-#include <platform.h>
-
-#include "forward.h"
-
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "inlines.h"
+#include "types.h"
 #include <dolphin/os.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

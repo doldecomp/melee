@@ -1,7 +1,7 @@
 #ifndef _IF_2FC93_H_
 #define _IF_2FC93_H_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

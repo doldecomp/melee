@@ -1,34 +1,34 @@
 #include "grbigblue.h"
 
-#include "grbigblue.static.h"
+#include <Runtime/platform.h>
 
+#include <placeholder.h>
+
+#include "grbigblue.static.h"
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
-#include "placeholder.h"
-
-#include <platform.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
 
-#include "cm/camera.h"
-#include "gm/gm_1A45.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-#include "it/it_26B1.h"
-#include "it/itspawn.h"
-#include "it/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-
 #include <math.h>
+
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itspawn.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>

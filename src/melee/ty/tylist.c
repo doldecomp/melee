@@ -1,21 +1,18 @@
 #include "tylist.h"
 
-#include "toy.h"
-#include "types.h"
+#include <Runtime/platform.h>
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "lb/lb_00B0.h"
-#include "lb/lb_0146.h"
-#include "lb/lbspdisplay.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "ty/toy.h"
-#include "ty/types.h"
-
+#include "toy.h"
+#include "types.h"
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_0146.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

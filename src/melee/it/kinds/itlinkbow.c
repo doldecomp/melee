@@ -1,14 +1,12 @@
-#include "it/kinds/itlinkbow.h"
+#include "itlinkbow.h"
 
 #include "inlines.h"
-
-#include "ft/ftlib.h"
-#include "ft/kinds/ftKirby/ftkirby.h"
-#include "ftLink/ftlinkspecialn.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
-
+#include <melee/ft/ftlib.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
+#include <melee/ft/kinds/ftLink/ftlinkspecialn.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
 #include <sysdolphin/baselib/gobj.h>
 
 /* 2AF32C */ static void it_802AF32C(HSD_GObj*);

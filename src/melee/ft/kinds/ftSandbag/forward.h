@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTSANDBAG_FORWARD_H
 #define MELEE_FT_CHARA_FTSANDBAG_FORWARD_H
 
-#include "ftCommon/forward.h"
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 typedef enum ftSb_MotionState {
     ftSb_MS_WaitReverse = ftCo_MS_Count,

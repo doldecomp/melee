@@ -1,8 +1,7 @@
-#include "db.h"
-
-#include "gm/gm_unsplit.h"
-
 #include <string.h>
+
+#include "db.h"
+#include <melee/gm/gm_unsplit.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3933.h>

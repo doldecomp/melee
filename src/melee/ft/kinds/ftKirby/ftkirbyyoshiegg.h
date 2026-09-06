@@ -1,7 +1,7 @@
 #ifndef GALE01_10AA2C
 #define GALE01_10AA2C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 10AC78 */ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim,
                                            Fighter_GObj* gobj);

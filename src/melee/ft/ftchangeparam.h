@@ -1,9 +1,9 @@
 #ifndef GALE01_0CF138
 #define GALE01_0CF138
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 /* 0CF138 */ float ftCo_CalcYScaledKnockback(float, float, float);
 /* 0CF6E8 */ void ftCo_800CF6E8(ftCo_DatAttrs*, f32);

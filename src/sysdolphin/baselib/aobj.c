@@ -1,5 +1,9 @@
 #include "aobj.h"
 
+#include <math.h>
+#include <stdarg.h>
+#include <string.h>
+
 #include "cobj.h"
 #include "debug.h"
 #include "dobj.h"
@@ -13,10 +17,6 @@
 #include "robj.h"
 #include "tobj.h"
 #include "wobj.h"
-
-#include <math.h>
-#include <stdarg.h>
-#include <string.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 

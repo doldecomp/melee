@@ -1,10 +1,9 @@
 #include "memory.h"
 
+#include <Runtime/platform.h>
+
 #include "debug.h"
 #include "initialize.h"
-
-#include <platform.h>
-
 #include <dolphin/os/OSAlloc.h>
 
 void HSD_Free(void* ptr)

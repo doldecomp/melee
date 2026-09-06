@@ -354,13 +354,8 @@ cflags_trk = [
 includes_base = [
     "src",
     "src/MSL",
-    "src/Runtime",
     "extern/dolphin/include",
     f"build/{config.version}/include",
-]
-
-cflags_melee = [
-    *cflags_base,
 ]
 
 
@@ -369,14 +364,11 @@ config.linker_version = "GC/1.3.2"
 # Native compiler flags
 
 clang_includes = [
-    "src/melee",
-    "src/melee/ft/kinds",
+    "src",
 ]
 
 clang_system_includes = [
-    "src",
     "src/MSL",
-    "src/Runtime",
     "extern/dolphin/include",
     "extern/dolphin/src",
     f"build/{config.version}/include",
@@ -391,7 +383,6 @@ clang_warnings = [
     "incompatible-pointer-types",
     "pointer-type-mismatch",
     "strict-prototypes",
-    "typedef-redefinition",
 ]
 
 if args.lint_error:
@@ -405,10 +396,11 @@ clang_disabled_warnings = [
     "return-type",
     "sign-compare",
     "sometimes-uninitialized",
-    "unused-but-set-variable",
-    "unused-parameter",
-    "unused-value",
-    "unused-variable",
+    "unused-but-set-variable",  # TODO: enable
+    "unused-parameter",  # TODO: enable
+    "unused-value",  # TODO: enable
+    "unused-variable",  # TODO: enable
+    "typedef-redefinition",  # TODO: enable
 ]
 
 
@@ -501,10 +493,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
-        includes=[
-            *includes_base,
-            f"build/{config.version}/sysdolphin",
-        ],
         category="hsd",
     )
 
@@ -513,11 +501,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
-        includes=[
-            *includes_base,
-            "src/melee",
-            "src/melee/ft/kinds",
-        ],
         category="game",
     )
 
@@ -1088,11 +1071,16 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagapplaud.c"),
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagrockpaper.c"),
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagcancel.c"),
-            Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.c"),
             Object(
-                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.c"
+                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.c"
             ),
-            Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.c"),
+            Object(
+                Matching,
+                "melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.c",
+            ),
+            Object(
+                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.c"
+            ),
             # Crazy Hand
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhand.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandwait10.c"),
@@ -1124,11 +1112,16 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandfingergun2.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandtaggrab.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandgrabunk1b174.c"),
-            Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.c"),
             Object(
-                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.c"
+                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.c"
             ),
-            Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.c"),
+            Object(
+                Matching,
+                "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.c",
+            ),
+            Object(
+                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.c"
+            ),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandthrowncrazyhand.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.c"),
             # Main
@@ -1146,14 +1139,15 @@ config.libs = [
             Object(Matching, "melee/gm/gm_16F1.c"),
             Object(Matching, "melee/gm/gm_1736.c"),
             Object(Matching, "melee/gm/gmresult.c"),
-            Object(Linkable, "melee/gm/gmresultplayer.c"),
+            Object(Matching, "melee/gm/gmresultplayer.c"),
+            Object(Matching, "melee/gm/gm_1798.c"),
             Object(Matching, "melee/gm/gm_17AD.c"),
             Object(Matching, "melee/gm/gm_17BA.c"),
             Object(Matching, "melee/gm/gmregcommon.c"),
             Object(Matching, "melee/gm/gm_17C0.c"),
             Object(Matching, "melee/gm/gm_17E4.c"),
             Object(Matching, "melee/gm/gm_17EB.c"),
-            Object(Linkable, "melee/gm/gmregclear.c"),
+            Object(Matching, "melee/gm/gmregclear.c"),
             Object(Matching, "melee/gm/gm_180A.c"),
             Object(Matching, "melee/gm/gm_181A.c"),
             Object(Matching, "melee/gm/gm_1832.c"),
@@ -1164,7 +1158,7 @@ config.libs = [
             Object(Linkable, "melee/gm/gmtoulib.c"),
             Object(Matching, "melee/gm/gmtou_0.c"),
             Object(Matching, "melee/gm/gmtou_1.c"),
-            Object(Linkable, "melee/gm/gmtou_2.c"),
+            Object(Matching, "melee/gm/gmtou_2.c"),
             Object(Matching, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Matching, "melee/gm/gmtitle.c"),
@@ -1333,14 +1327,14 @@ config.libs = [
             Object(Matching, "melee/mn/mnmain.c"),
             Object(Matching, "melee/mn/mn_22EC.c"),
             Object(Matching, "melee/mn/mnmainrule.c"),
-            Object(Linkable, "melee/mn/mnruleplus.c"),
+            Object(Matching, "melee/mn/mnruleplus.c"),
             Object(Linkable, "melee/mn/mnitemsw.c"),
-            Object(Linkable, "melee/mn/mnstagesw.c"),
+            Object(Matching, "melee/mn/mnstagesw.c"),
             Object(Matching, "melee/mn/mnname.c"),
             Object(Linkable, "melee/mn/mnnamenew.c"),
             Object(Linkable, "melee/mn/mndiagram.c"),
             Object(Matching, "melee/mn/mndiagram2.c"),
-            Object(Linkable, "melee/mn/mndiagram3.c"),
+            Object(Matching, "melee/mn/mndiagram3.c"),
             Object(Linkable, "melee/mn/mnvibration.c"),
             Object(Matching, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
@@ -1580,7 +1574,7 @@ config.libs = [
             Object(Matching, "melee/ty/toy.c"),
             Object(Matching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
-            Object(Linkable, "melee/ty/tydisplay.c"),
+            Object(Matching, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(

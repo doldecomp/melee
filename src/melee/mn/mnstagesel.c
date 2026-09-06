@@ -1,13 +1,19 @@
 #include "mnstagesel.h"
 
+#include <placeholder.h>
+
 #include "inlines.h"
-
+#include "mnmain.h"
 #include "mnstagesel.static.h"
-
-#include "placeholder.h"
-
-#include "lb/lb_013B.h"
-
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -20,15 +26,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/types.h>
-#include <melee/mn/mnmain.h>
 
 /// @todo .sdata2 order hack
 #ifdef MUST_MATCH

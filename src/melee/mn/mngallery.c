@@ -1,7 +1,11 @@
 #include "mngallery.h"
 
-#include "mn/inlines.h"
-
+#include "inlines.h"
+#include <melee/gm/gmhowto.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -13,11 +17,6 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmhowto.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/sc/types.h>
 
 static StaticModelDesc mnGallery_804A0BA0;
 static StaticModelDesc mnGallery_804A0BB0;

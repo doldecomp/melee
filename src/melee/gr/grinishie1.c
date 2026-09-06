@@ -1,26 +1,24 @@
 #include "grinishie1.h"
 
+#include <Runtime/platform.h>
+
 #include "grlib.h"
 #include "grmaterial.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "gm/gm_unsplit.h"
-#include "it/it_26B1.h"
-#include "it/itdrop.h"
-#include "it/itspawn.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
-
 #include <dolphin/types.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efsync.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/itdrop.h>
+#include <melee/it/itspawn.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

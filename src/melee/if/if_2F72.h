@@ -1,9 +1,9 @@
 #ifndef GALE01_2F7288
 #define GALE01_2F7288
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "if/forward.h"
+#include <melee/if/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 2F7288 */ s32 fn_802F7288(HSD_GObj*, Element_803F9628*);

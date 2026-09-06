@@ -1,8 +1,9 @@
 #ifndef __GALE01_391580
 #define __GALE01_391580
 
-#include "particle.h" // IWYU pragma: export
-#include "platform.h"
+#include <Runtime/platform.h>
+
+#include <sysdolphin/baselib/particle.h> // IWYU pragma: export
 
 // .data
 

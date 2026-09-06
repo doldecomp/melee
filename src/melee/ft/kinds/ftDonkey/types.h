@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_TYPES_H
 #define MELEE_FT_CHARA_FTDONKEY_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 struct ftDonkey_FighterVars {
     /* 0x222C */ s32 x222C;

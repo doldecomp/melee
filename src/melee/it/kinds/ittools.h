@@ -1,9 +1,9 @@
 #ifndef GALE01_2EEFA8
 #define GALE01_2EEFA8
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2EEFA8 */ Item_GObj* it_802EEFA8(Vec3*, s32, f32);
 /* 2EF074 */ bool itTools_Logic22_DmgDealt(Item_GObj*);

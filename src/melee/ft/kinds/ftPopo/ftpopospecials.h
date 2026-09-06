@@ -1,7 +1,7 @@
 #ifndef GALE01_11F99C
 #define GALE01_11F99C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 11F68C */ void ftPp_SpecialS_8011F68C(Fighter_GObj* gobj);
 /* 11F6FC */ bool ftPp_SpecialS_8011F6FC(Fighter_GObj* gobj);

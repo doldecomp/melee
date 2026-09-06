@@ -1,17 +1,15 @@
 #include "ftCo_ThrownKoopa.h"
 
+#include <Runtime/platform.h>
+
+#include <melee/ft/forward.h>
+
 #include "inlines.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-#include "ftCommon/types.h"
+#include "types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 
 void ftCo_800BCDE0(Fighter_GObj* gobj, FtMotionId msid)
 {

@@ -1,10 +1,10 @@
 #ifndef MELEE_GM_MULTIMAN_H
 #define MELEE_GM_MULTIMAN_H
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
+
+#include <placeholder.h>
 
 /* 1B6320 */ UNK_T gm_801B6320(void);
 /* 1B632C */ void gm_801B632C(GameModeState*);

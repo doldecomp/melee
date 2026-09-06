@@ -1,7 +1,7 @@
 #ifndef _IFHAZARD_H_
 #define _IFHAZARD_H_
 
-#include "sc/forward.h"
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 2FD604 */ void un_802FD604(int);

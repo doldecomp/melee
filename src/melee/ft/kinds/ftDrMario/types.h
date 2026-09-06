@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTDRMARIO_TYPES_H
 #define MELEE_FT_CHARA_FTDRMARIO_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 typedef struct _ftDrMarioAttributes {
     u8 pad_x0[4];

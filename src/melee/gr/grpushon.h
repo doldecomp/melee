@@ -1,7 +1,7 @@
 #ifndef GALE01_2182C4
 #define GALE01_2182C4
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 
 /* 2182C4 */ void grPushOn_802182C4(bool);
 /* 2182C8 */ void grPushOn_802182C8(void);

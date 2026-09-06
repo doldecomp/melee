@@ -8,17 +8,15 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-
-#include "cm/camera.h"
-#include "ft/ftdrawcommon.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbdvd.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mplib.h"
-
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftdrawcommon.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>

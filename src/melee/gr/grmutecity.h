@@ -1,9 +1,9 @@
 #ifndef GALE01_1EFC68
 #define GALE01_1EFC68
 
-#include "gr/forward.h"
-#include "lb/forward.h"
-#include "sc/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
+#include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

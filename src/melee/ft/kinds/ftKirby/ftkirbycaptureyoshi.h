@@ -1,7 +1,7 @@
 #ifndef GALE01_10A930
 #define GALE01_10A930
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 10A930 */ void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 /* 10AA1C */ void ftCo_CaptureKirbyYoshi_Anim(Fighter_GObj* gobj);

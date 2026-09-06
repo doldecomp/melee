@@ -1,9 +1,9 @@
 #ifndef GALE01_1C5FC0
 #define GALE01_1C5FC0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 1C5FC0 */ void grDatFiles_801C5FC0(HSD_Archive*, void* data, size_t length);

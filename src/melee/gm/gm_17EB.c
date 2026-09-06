@@ -1,11 +1,10 @@
+#include <Runtime/platform.h>
+
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmregclear.h"
-#include "platform.h"
-
-#include "gm/forward.h"
-
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
+#include "types.h"
 #include <melee/pl/player.h>
 
 typedef struct AllstarStageEntry {

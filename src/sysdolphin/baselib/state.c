@@ -6,7 +6,6 @@
 #include "tev.h"
 #include "texp.h"
 #include "util.h"
-
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>

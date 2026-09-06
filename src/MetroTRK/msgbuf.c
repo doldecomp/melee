@@ -1,7 +1,7 @@
 #include "msgbuf.h"
 
-#include "MetroTRK/mem_TRK.h"
-#include "MetroTRK/nubinit.h"
+#include "mem_TRK.h"
+#include "nubinit.h"
 
 TRKMsgBufs gTRKMsgBufs;
 

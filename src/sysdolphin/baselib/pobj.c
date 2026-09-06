@@ -1,9 +1,13 @@
 #include "pobj.h"
 
+#include <math.h> // IWYU pragma: keep
+#include <string.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
 #include "displayfunc.h"
+#include "forward.h"
 #include "id.h"
 #include "jobj.h"
 #include "memory.h"
@@ -12,11 +16,6 @@
 #include "state.h"
 #include "tobj.h"
 #include "util.h"
-
-#include "forward.h"
-
-#include <math.h> // IWYU pragma: keep
-#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_REGCOMMON_H
 #define MELEE_GM_REGCOMMON_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 int gm_8017BE84(u32 arg0);
 int gm_8017BE8C(const s8*);

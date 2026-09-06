@@ -1,3 +1,5 @@
+#include <melee/ft/forward.h>
+
 #include "gm_1601.h"
 #include "gm_16F1.h"
 #include "gm_1A3F.h"
@@ -5,9 +7,6 @@
 #include "gmmain_lib.h"
 #include "gmregclear.h"
 #include "types.h"
-
-#include "ft/forward.h"
-
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>

@@ -1,11 +1,11 @@
 #ifndef GALE01_2953C8
 #define GALE01_2953C8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 void itMetalB_Logic32_Spawned(Item_GObj*);
 void it_802953FC(Item_GObj*);

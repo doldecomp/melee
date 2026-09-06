@@ -1,3 +1,6 @@
+#ifndef SYSDOLPHIN_BASELIB_DEVCOM_STATIC_H
+#define SYSDOLPHIN_BASELIB_DEVCOM_STATIC_H
+
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/ar.h>
@@ -37,3 +40,5 @@ static struct HSD_DevCom* aramDC;
 static u8 devComRelayBufFlag[2];
 
 static int HSD_DevCom_804D6050 = 4;
+
+#endif

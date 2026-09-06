@@ -1,13 +1,12 @@
 #ifndef MELEE_GM_VSMELEE_H
 #define MELEE_GM_VSMELEE_H
 
-#include <platform.h>
-
-#include "mn/forward.h"
-
-#include "mn/types.h"
+#include <Runtime/platform.h>
 
 #include <melee/gm/forward.h>
+#include <melee/mn/forward.h>
+
+#include <melee/mn/types.h>
 
 typedef void (*gm_StartMeleeCallback)(StartMeleeData* start,
                                       StartMeleeData* vs);

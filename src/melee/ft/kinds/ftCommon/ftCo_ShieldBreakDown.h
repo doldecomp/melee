@@ -1,7 +1,7 @@
 #ifndef GALE01_098E3C
 #define GALE01_098E3C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 /* 098E3C */ void ftCo_80098E3C(Fighter_GObj* gobj);
 /* 098A44 */ void ftCo_ShieldBreakDown_Anim(Fighter_GObj* gobj);
 /* 098A80 */ void ftCo_ShieldBreakDown_IASA(Fighter_GObj* gobj);

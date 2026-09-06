@@ -1,9 +1,9 @@
 #ifndef MELEE_VI_TYPES_H
 #define MELEE_VI_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "vi/forward.h" // IWYU pragma: export
+#include <melee/vi/forward.h> // IWYU pragma: export
 
 struct ViCharaDesc {
     /* 0x0 */ u8 p1_char_index;

@@ -1,25 +1,22 @@
 #include "itgshell.h"
 
-#include "inlines.h"
+#include <Runtime/platform.h>
+
+#include <melee/it/forward.h>
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "ef/efasync.h"
-
-#include "it/forward.h"
-
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/kinds/itgshell.h"
-
+#include "inlines.h"
+#include <melee/ef/efasync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

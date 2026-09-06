@@ -1,9 +1,7 @@
 #include "ftCo_Attack100.h"
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/inlines.h"
-
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/inlines.h>
 #include <sysdolphin/baselib/jobj.h>
 
 bool fn_800DAD18(Fighter_GObj*);

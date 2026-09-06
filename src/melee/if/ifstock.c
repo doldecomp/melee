@@ -1,29 +1,25 @@
-#include "if/ifstock.h"
+#include "ifstock.h"
 
-#include "if/ifstock.static.h"
+#include <melee/gm/forward.h>
+#include <melee/sc/forward.h>
+
 #include <placeholder.h>
 
-#include "ef/efsync.h"
-
-#include "gm/forward.h"
-
-#include "gm/gm_unsplit.h"
-#include "gm/gmregclear.h"
-#include "gm/types.h"
-#include "gr/ground.h"
-#include "if/ifall.h"
-#include "if/ifstatus.h"
-#include "if/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbarchive.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "pl/player.h"
-
-#include "sc/forward.h"
-
-#include "sc/types.h"
-
+#include "ifall.h"
+#include "ifstatus.h"
+#include "ifstock.static.h"
+#include "types.h"
+#include <melee/ef/efsync.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/gm/types.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbvector.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -702,7 +698,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                     if (*stocks <= 5) {
                         HSD_JObjSetFlagsAll(
                             ifStock_804A1378.player[player].x3C, JOBJ_HIDDEN);
-                        for (i = 0; i < 7; i++, user_data++) {
+                        // Keep the narrowed result for register allocation.
+                        for (i = 0; i < 7; (u16) i++, user_data++) {
                             icon_jobj =
                                 ifStock_804A1378.player[player].x4[i + 1];
                             if (i < ifStock_804A1378.player[player].stocks ||

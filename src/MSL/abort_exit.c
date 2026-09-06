@@ -1,4 +1,4 @@
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/os/init/__ppc_eabi_init.h>
 

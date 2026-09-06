@@ -5,7 +5,6 @@
 #include "cobj.h"
 #include "debug.h"
 #include "object.h"
-
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/mtx.h>
 

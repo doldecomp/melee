@@ -1,22 +1,19 @@
 #include "itpikachutjoltair.h"
 
-#include "inlines.h"
-
-#include <placeholder.h>
-#include <platform.h>
-
-#include "db/db.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-
-#include "it/kinds/forward.h"
-
-#include "it/kinds/itpikachutjoltground.h"
-#include "lb/lb_00B0.h"
+#include <Runtime/platform.h>
 
 #include <math.h>
+#include <placeholder.h>
+
+#include "forward.h"
+#include "inlines.h"
+#include "itpikachutjoltground.h"
+#include <melee/db/db.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

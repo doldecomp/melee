@@ -1,7 +1,7 @@
 #ifndef _lblanguage_h_
 #define _lblanguage_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 enum {
     LANG_JP,

@@ -1,38 +1,33 @@
-#include "ft/ft_081B.h"
+#include "ft_081B.h"
 
-#include "inlines.h"
-#include "stdbool.h"
-
-#include <placeholder.h>
-#include <platform.h>
-
-#include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_0819.h"
-#include "ft/ft_0892.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcommon.h"
-#include "ft/ftwalljump.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_MissFoot.h"
-#include "ftCommon/ftCo_Ottotto.h"
-#include "ftCommon/ftCo_StopCeil.h"
-#include "ftCommon/ftCo_StopWall.h"
-#include "lb/types.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+#include <stdbool.h>
+
+#include "fighter.h"
+#include "forward.h"
+#include "ft_0819.h"
+#include "ft_0892.h"
+#include "ftchangeparam.h"
+#include "ftcliffcommon.h"
+#include "ftcommon.h"
+#include "ftwalljump.h"
+#include "inlines.h"
+#include "kinds/ftCommon/forward.h"
+#include "kinds/ftCommon/ftCo_Fall.h"
+#include "kinds/ftCommon/ftCo_Landing.h"
+#include "kinds/ftCommon/ftCo_MissFoot.h"
+#include "kinds/ftCommon/ftCo_Ottotto.h"
+#include "kinds/ftCommon/ftCo_StopCeil.h"
+#include "kinds/ftCommon/ftCo_StopWall.h"
+#include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/lb/types.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 
 void ft_80081B38(Fighter_GObj* gobj)

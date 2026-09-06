@@ -1,8 +1,8 @@
 #ifndef GALE01_07C930
 #define GALE01_07C930
 
-#include "ft/forward.h"
-#include "it/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 07C930 */ void ftCommon_ApplyFrictionGround(Fighter*, float);

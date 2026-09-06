@@ -1,22 +1,19 @@
+#include <string.h>
+
 #include "lb_0195.h"
 #include "lbarchive.h"
-
 #include "lbdvd.static.h"
-
 #include "lbfile.h"
 #include "lbheap.h"
 #include "types.h"
-
-#include "gm/gmcameramode.h"
-
-#include <string.h>
 #include <dolphin/dvd.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
+#include <melee/gm/gmcameramode.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/gr/stage.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/debug.h>
 
 /* 0189EC */ static void lbDvd_800189EC(int);
 

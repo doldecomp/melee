@@ -1,16 +1,14 @@
 #include "lbcardgame.h"
 
+#include "lbarchive.h"
 #include "lbcardgame.static.h"
-
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
-#include "if/textlib.h"
-#include "lb/lbarchive.h"
-#include "lb/lbcardnew.h"
-#include "lb/lblanguage.h"
-
+#include "lbcardnew.h"
+#include "lblanguage.h"
 #include <dolphin/card.h> // IWYU pragma: keep
 #include <dolphin/os.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

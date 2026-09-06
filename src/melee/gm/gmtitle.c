@@ -1,12 +1,20 @@
 #include "gmtitle.h"
 
 #include "gm_unsplit.h"
-
-#include "gm/gmevent.h"
-#include "gm/gmmain_lib.h"
-#include "gm/gmopening.h"
-#include "mn/inlines.h"
-
+#include "gmevent.h"
+#include "gmmain_lib.h"
+#include "gmopening.h"
+#include "types.h"
+#include <melee/db/db.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/lb/lbtime.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -16,16 +24,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/db/db.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/lb/lbtime.h>
-#include <melee/mn/mnmain.h>
-#include <melee/sc/types.h>
 
 static StaticModelDesc model_desc_0;
 static StaticModelDesc model_desc_1;

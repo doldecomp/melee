@@ -1,9 +1,9 @@
 #ifndef GALE01_2C6C38
 #define GALE01_2C6C38
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2C6C38 */ HSD_GObj* it_802C6C38(Item_GObj*, Vec3*, enum_t part, float);
 /* 2C6D3C */ void itGameWatchParachute_Logic74_Destroyed(Item_GObj*);

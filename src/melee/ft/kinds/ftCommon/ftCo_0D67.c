@@ -1,5 +1,5 @@
-#include "ft/fighter.h"
-#include "ft/types.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/types.h>
 
 bool ftCo_800D67C4(Fighter* fp)
 {

@@ -1,16 +1,15 @@
 #include "ftCo_0C35.h"
 
-#include "ftCo_Damage.h"
-
-#include <platform.h>
-
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
+#include <Runtime/platform.h>
 
 #include <math.h>
+
+#include "ftCo_Damage.h"
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>
 
 static void inlineA0(Fighter_GObj* gobj)

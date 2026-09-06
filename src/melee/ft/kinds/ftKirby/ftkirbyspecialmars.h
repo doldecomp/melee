@@ -1,7 +1,7 @@
 #ifndef GALE01_10B1F4
 #define GALE01_10B1F4
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 10B1F4 */ void fn_8010B1F4(Fighter_GObj* gobj);
 /* 10B2FC */ void ftKb_SpecialNMs_8010B2FC(Fighter_GObj* gobj);

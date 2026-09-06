@@ -1,9 +1,9 @@
 #ifndef GALE01_15B8FC
 #define GALE01_15B8FC
 
-#include "dolphin/mtx.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 15B998 */ void ftCh_GrabUnk1_8015B998(HSD_GObj* gobj);
 /* 15BA34 */ void ftCh_GrabUnk1_8015BA34(HSD_GObj*, HSD_GObjEvent, Vec3*);

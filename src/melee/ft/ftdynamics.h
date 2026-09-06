@@ -1,10 +1,10 @@
 #ifndef GALE01_09CB40
 #define GALE01_09CB40
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "ftKirby/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftKirby/forward.h>
 
 /* 09CF84 */ void ftCo_8009CF84(Fighter* fp);
 /* 09D074 */ void ftCo_8009D074(Fighter* fp);

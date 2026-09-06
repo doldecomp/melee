@@ -1,9 +1,9 @@
 #ifndef GALE01_800C78B0
 #define GALE01_800C78B0
 
-#include "types.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
+#include <melee/ft/types.h>
 
 /* 78B0 */ void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner);
 /* 7A30 */ void ftCo_800C7A30(Fighter_GObj* gobj);

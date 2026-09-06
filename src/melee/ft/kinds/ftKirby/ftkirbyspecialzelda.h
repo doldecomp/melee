@@ -1,7 +1,7 @@
 #ifndef GALE01_105B2C
 #define GALE01_105B2C
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 105B2C */ void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj);
 /* 105BA8 */ void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj);

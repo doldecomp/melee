@@ -1,7 +1,7 @@
 #ifndef GALE01_31C99C
 #define GALE01_31C99C
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>

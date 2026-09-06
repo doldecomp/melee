@@ -1,13 +1,13 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "dolphin/gx/GXStruct.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>

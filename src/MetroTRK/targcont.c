@@ -1,7 +1,7 @@
 #include "targcont.h"
 
-#include "MetroTRK/dolphin_trk_glue.h"
-#include "MetroTRK/targimpl.h"
+#include "dolphin_trk_glue.h"
+#include "targimpl.h"
 
 DSError TRKTargetContinue(void)
 {

@@ -1,11 +1,10 @@
 #include "efalt.h"
 
-#include "eflib.h"
-#include "types.h"
-
+#include <math.h>
 #include <placeholder.h>
 
-#include <math.h>
+#include "eflib.h"
+#include "types.h"
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

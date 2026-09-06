@@ -1,21 +1,18 @@
 #include "ftCo_AttackHi3.h"
 
-#include "ftCo_ItemThrow.h"
-#include "ftCo_Wait.h"
-
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include "forward.h"
-
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcommon.h"
-#include "ft/types.h"
-
+#include "ftCo_ItemThrow.h"
+#include "ftCo_Wait.h"
 #include <dolphin/mtx.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 
 /* 08BA38 */ static void doEnter(Fighter_GObj* gobj);
 
