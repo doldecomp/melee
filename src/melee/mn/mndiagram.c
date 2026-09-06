@@ -1228,7 +1228,8 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(int start, int rank)
             if (start >= SELKIND_COUNT) {
                 return SELKIND_COUNT;
             }
-        } while (mn_IsFighterUnlocked(mnDiagram_GetFighterByIndex(start)) == 0);
+        } while (mn_IsFighterUnlocked(mnDiagram_GetFighterByIndex(start)) ==
+                 0);
         rank--;
     }
 }
@@ -1238,8 +1239,9 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_804D6C10->user_data;
 }
 
-static inline u8 mnDiagram_GetVisibleNameColumnForInput(
-    u8* sorted, Diagram* data, const u16* selection)
+static inline u8 mnDiagram_GetVisibleNameColumnForInput(u8* sorted,
+                                                        Diagram* data,
+                                                        const u16* selection)
 {
     u8* p;
     u8* next;
@@ -1339,8 +1341,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
             selection = &mn_804A04F0.hovered_selection;
-            col_result =
-                mnDiagram_GetVisibleNameColumnForInput(sorted, data, selection);
+            col_result = mnDiagram_GetVisibleNameColumnForInput(sorted, data,
+                                                                selection);
             row = *selection >> 8;
             cursor_pos = data->name_cursor_pos;
             row_result = mnDiagram_GetVisibleNameRowForInput(
@@ -2423,7 +2425,8 @@ static inline int mnDiagram_GetFighterPairKOs(u8 fighter, u8 opponent)
     return GetPersistentFighterData(kind)->fighter_kos[opponent];
 }
 
-void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start, u8 arg3)
+void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start,
+                              u8 arg3)
 {
     s32 name_col;
     u8 is_name_mode = arg3;
@@ -2453,8 +2456,8 @@ void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start, u8 arg3)
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
                             mnDiagram_SumNameFalls(
-                                mnDiagram_GetVisibleNameCursorFrom(col_start,
-                                                                   bottom_col)));
+                                mnDiagram_GetVisibleNameCursorFrom(
+                                    col_start, bottom_col)));
                     }
                 } else {
                     bottom_unlocked_count =
@@ -2477,8 +2480,8 @@ void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start, u8 arg3)
                     if ((name_col == 7) || (entry_count = GetNameCount(),
                                             (entry_count > name_col)))
                     {
-                        row_name = mnDiagram_GetVisibleNameCursorFrom(
-                            row_start, row);
+                        row_name =
+                            mnDiagram_GetVisibleNameCursorFrom(row_start, row);
                         if (name_col == 7) {
                             total_kos = mnDiagram_GetNameTotalKOs(row_name);
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
@@ -2509,10 +2512,12 @@ void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start, u8 arg3)
                         row_fighter = mnDiagram_GetVisibleFighterCursorFrom2(
                             row_start, row);
                         if (fighter_col == 7) {
-                            total_kos = mnDiagram_GetFighterTotalKOs(row_fighter);
-                            total_kos = total_kos > 999999 ? 999999 : total_kos;
-                            mnDiagram_DrawCellValue(
-                                arg0, (u8) fighter_col, (u8) row, total_kos);
+                            total_kos =
+                                mnDiagram_GetFighterTotalKOs(row_fighter);
+                            total_kos =
+                                total_kos > 999999 ? 999999 : total_kos;
+                            mnDiagram_DrawCellValue(arg0, (u8) fighter_col,
+                                                    (u8) row, total_kos);
                         } else {
                             col_fighter =
                                 mnDiagram_GetVisibleFighterCursorFrom2(
@@ -2520,7 +2525,7 @@ void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start, u8 arg3)
                             mnDiagram_DrawCellValue(
                                 arg0, (u8) fighter_col, (u8) row,
                                 mnDiagram_GetFighterPairKOs(row_fighter,
-                                                           col_fighter));
+                                                            col_fighter));
                         }
                     }
                     fighter_col += 1;

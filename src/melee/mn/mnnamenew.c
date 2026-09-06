@@ -1516,7 +1516,8 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
         dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
 
         variant_desc = mnNameNew_804A0720;
-        for (variant_index = 0; variant_index < (arg1 & 0xFF); variant_index++) {
+        for (variant_index = 0; variant_index < (arg1 & 0xFF); variant_index++)
+        {
             {
                 HSD_JObj* created;
                 CreateGlyphVariant(variant_desc, user_data, variant_index,

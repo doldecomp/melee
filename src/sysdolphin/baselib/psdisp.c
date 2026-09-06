@@ -620,9 +620,9 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     (void) c;
     psSetCurrentMtx(GX_PNMTX0);
     w = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
-    if (prevLineWidth != (s32) (u8) w) {
-        prevLineWidth = (u8) w;
-        GXSetLineWidth((u8) w, GX_TO_ONE);
+    if (prevLineWidth != (s32) w) {
+        prevLineWidth = w;
+        GXSetLineWidth(w, GX_TO_ONE);
     }
     p = vbuf;
     c = cbuf;
@@ -728,14 +728,14 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         }
         for (i = count; i != 0; i--) {
             GXPosition3f32(p[1].x, p[1].y, p[1].z);
-            GXColor4u8(draw_colors[1].r, draw_colors[1].g,
-                       draw_colors[1].b, draw_colors[1].a);
+            GXColor4u8(draw_colors[1].r, draw_colors[1].g, draw_colors[1].b,
+                       draw_colors[1].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(0);
             }
             GXPosition3f32(p[0].x, p[0].y, p[0].z);
-            GXColor4u8(draw_colors[0].r, draw_colors[0].g,
-                       draw_colors[0].b, draw_colors[0].a);
+            GXColor4u8(draw_colors[0].r, draw_colors[0].g, draw_colors[0].b,
+                       draw_colors[0].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(1);
             }
@@ -1194,7 +1194,7 @@ static inline void psUpdateAppSRTMtx(HSD_Particle* pp)
 }
 
 static inline void psUpdateAppSRTBillboard(HSD_Particle* pp, Mtx scratch_mtx,
-                                         Vec3* scratch_scale)
+                                           Vec3* scratch_scale)
 {
     if (pp->appsrt->xA2 != 0) {
         PSMTXIdentity(scratch_mtx);
@@ -1296,9 +1296,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     if (pp->kind & Trail) {
         GXColor draw_color;
 
-        if (prevLineWidth != (s32) (u8) w) {
-            prevLineWidth = (u8) w;
-            GXSetLineWidth((u8) w, GX_TO_ONE);
+        if (prevLineWidth != (s32) w) {
+            prevLineWidth = w;
+            GXSetLineWidth(w, GX_TO_ONE);
         }
         getClrTrail(pp, &draw_color);
         if (pp->kind & DispTexture) {
@@ -1320,9 +1320,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXTexCoord1x8(1);
         }
     } else {
-        if (prevPointSize != (s32) (u8) w) {
-            prevPointSize = (u8) w;
-            GXSetPointSize((u8) w, GX_TO_ONE);
+        if (prevPointSize != (s32) w) {
+            prevPointSize = w;
+            GXSetPointSize(w, GX_TO_ONE);
         }
         if (pp->kind & DispTexture) {
             setVtxDesc(0);

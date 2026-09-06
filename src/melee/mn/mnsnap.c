@@ -2505,12 +2505,10 @@ static inline void** mnSnap_GetMainShapeAnim(mnSnap_State* snap)
 }
 
 /// Creates five thumbnail joints using the spacing between two markers.
-static inline void mnSnap_CreateThumbnails(mnSnap_State* snap,
-                                          HSD_JObj** thumb_root_ptr,
-                                          void** photo_joint,
-                                          void** sub_animjoint,
-                                          void** sub_matanim,
-                                          void** sub_shapeanim)
+static inline void
+mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
+                        void** photo_joint, void** sub_animjoint,
+                        void** sub_matanim, void** sub_shapeanim)
 {
     HSD_JObj* jobj2;
     HSD_JObj* marker;
@@ -2798,8 +2796,8 @@ void mnSnap_80257F24(void)
                        (HSD_ShapeAnimJoint*) *warn_shapeanim);
     HSD_JObjReqAnimAll(jobj, 10.0F);
     HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, &mnSnap_804A0A10.dlg_root, 0, 2, 4, 5, 6, 7, 8, 0xA,
-                0xB, 0xD, -1);
+    lb_80011E24(jobj, &mnSnap_804A0A10.dlg_root, 0, 2, 4, 5, 6, 7, 8, 0xA, 0xB,
+                0xD, -1);
 
     snap->dlg_active = 0;
 

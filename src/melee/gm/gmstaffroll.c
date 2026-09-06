@@ -681,9 +681,9 @@ static inline void gmStaffRoll_UpdateText(s32 selected)
     s32 check_failed;
     s32 line_num;
 
-    check_failed = gm_803DBFD8[selected].check != NULL &&
-                   gm_803DBFD8[selected].check(
-                       gm_803DBFD8[selected].check_arg) == 0;
+    check_failed =
+        gm_803DBFD8[selected].check != NULL &&
+        gm_803DBFD8[selected].check(gm_803DBFD8[selected].check_arg) == 0;
     text_arr = gm_80480D58;
     for (text_idx = 0; text_idx < 6; text_idx++) {
         if (text_arr[text_idx] != NULL) {
@@ -694,8 +694,8 @@ static inline void gmStaffRoll_UpdateText(s32 selected)
 
         if (text_idx == 0) {
             x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-            gm_80480D58[0] = HSD_SisLib_803A5ACC(
-                0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
+            gm_80480D58[0] = HSD_SisLib_803A5ACC(0, 0, 1.45f + x_pos, 0.86f,
+                                                 0.0f, 0.0f, 100.0f);
         } else if (text_idx == 1) {
             if (selected == 0xAC) {
                 offset1 = 0.2f;
@@ -704,14 +704,14 @@ static inline void gmStaffRoll_UpdateText(s32 selected)
             }
             offset2 = selected == 0xAF ? 0.1f : 0.0f;
             x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-            gm_80480D58[1] = HSD_SisLib_803A5ACC(
-                0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
-                0.0f, 100.0f);
+            gm_80480D58[1] =
+                HSD_SisLib_803A5ACC(0, 0, offset2 + (3.0f + x_pos + offset1),
+                                    0.86f, 0.0f, 0.0f, 100.0f);
         } else {
             x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
             text_arr[text_idx] = HSD_SisLib_803A5ACC(
-                0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f,
-                0.0f, 0.0f, 100.0f);
+                0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f, 0.0f,
+                0.0f, 100.0f);
         }
 
         text_arr[text_idx]->default_kerning = 1;
@@ -747,23 +747,23 @@ static inline void gmStaffRoll_UpdateText(s32 selected)
             text_arr[text_idx]->text_color.b = 0;
             if (selected == 0x4B && text_idx == 2) {
                 line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
-                HSD_SisLib_803A6368(
-                    text_arr[text_idx],
-                    0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) + line_num);
+                HSD_SisLib_803A6368(text_arr[text_idx],
+                                    0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) +
+                                        line_num);
             } else if (text_idx == 2 && check_failed == 1) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
                     HSD_SisLib_803A6368(text_arr[text_idx],
-                                       gm_803DBFD8[selected].alt_page + 2);
+                                        gm_803DBFD8[selected].alt_page + 2);
                 } else {
                     HSD_SisLib_803A6368(text_arr[text_idx],
-                                       gm_803DBFD8[selected].alt_page + 3);
+                                        gm_803DBFD8[selected].alt_page + 3);
                 }
             } else if (lbLang_IsSavedLanguageJP() != 0) {
                 HSD_SisLib_803A6368(text_arr[text_idx],
-                                   selected * 15 + 7 + text_idx);
+                                    selected * 15 + 7 + text_idx);
             } else {
                 HSD_SisLib_803A6368(text_arr[text_idx],
-                                   selected * 15 + 11 + text_idx);
+                                    selected * 15 + 11 + text_idx);
             }
         }
     }
@@ -862,8 +862,7 @@ void fn_801AB200(HSD_GObj* gobj)
         if (staffInfo[entry_idx].x8 < 1) {
             if (entry_idx < 7) {
                 HSD_JObj* ptcl_jobj;
-                lb_80011E24(gm_804D682C, &ptcl_jobj,
-                            particles[entry_idx], -1);
+                lb_80011E24(gm_804D682C, &ptcl_jobj, particles[entry_idx], -1);
                 if (entry_idx == 0) {
                     p = (StaffRollPtclNode*) ptcl_jobj->u.ptcl;
                     tally_color = *(s32*) &gm_804D42C4;
@@ -916,8 +915,8 @@ void fn_801AB200(HSD_GObj* gobj)
                     corners[3].x = half_size;
                     corners[2].x = half_size;
                     for (j = 0; j < 4; j++) {
-                        PSMTXMultVec(staffInfoSortBuf[i].mtx,
-                                     &corners[j], &xform_result);
+                        PSMTXMultVec(staffInfoSortBuf[i].mtx, &corners[j],
+                                     &xform_result);
                         if (xform_result.z >= -1.0f) {
                             broke = 1;
                             break;
