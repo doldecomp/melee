@@ -530,7 +530,11 @@ void hsd_803B3CD8(s32 component)
         hsd_803B3CD8_write_bits(value, length, state.work);
     }
     for (index = 1; index < 64; index++) {
-        s32 coefficient = state.work->data.coef[lbl_80431638[index]];
+        JpegWork* indexed;
+        /* Apply the zigzag index before the coefficient array offset. */
+        s32 coefficient =
+            (indexed = (JpegWork*) ((s32*) state.work + lbl_80431638[index]))
+                ->data.coef[0];
         s32 ac_value = coefficient;
 
         if (coefficient != 0) {
