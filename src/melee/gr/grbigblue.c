@@ -4107,6 +4107,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
 
             if (count != 0) {
                 s32 pick;
+                u32 sfx_id;
+                struct grBigBlue_CarLane* lanes;
 
                 slot = 0;
                 pick = ZRANDI(count);
@@ -4119,7 +4121,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                     }
                 }
 
-                gp->u.bigblue.car.lanes[arg1].collision_slot = slot;
+                lanes = gp->u.bigblue.car.lanes;
+                lanes[arg1].collision_slot = slot;
                 gp->u.bigblue.car.lanes[arg1].direction = 0;
 
                 gp->u.bigblue.car.lanes[arg1].pos.x = pos->x;
@@ -4145,7 +4148,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.car.ranks[slot] = 1;
                 gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                Ground_801C5440(gp, slot, lbl_803E3010[HSD_Randi(4)]);
+                sfx_id = lbl_803E3010[HSD_Randi(4)];
+                Ground_801C5440(gp, slot, sfx_id);
 
                 Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
 
@@ -4185,7 +4189,6 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     s32 result = 0;
     Ground* gp = gobj->user_data;
     Vec3 pos;
-    PAD_STACK(4);
 
     grBigBlue_801EE398_inline(gp, arg1, arg2, &result, &pos);
 
