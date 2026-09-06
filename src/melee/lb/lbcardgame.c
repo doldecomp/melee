@@ -4,7 +4,7 @@
 #include "lbcardgame.static.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
-#include <dolphin/card.h> // IWYU pragma: keep
+#include <dolphin/card.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>

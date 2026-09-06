@@ -279,8 +279,8 @@ void fn_80181C80(s32 arg0)
         sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
         sp10.cpu_kind = data->x54[arg0].x7;
-        sp10.x18 = data->x54[arg0].x8;
-        sp10.x1C = data->x54[arg0].xC;
+        sp10.attack_ratio = data->x54[arg0].x8;
+        sp10.defense_ratio = data->x54[arg0].xC;
         gm_8016EDDC(sp38, &sp10);
         Player_SetNametagSlotID(sp38, 0x78);
         un_802FD28C(sp38);
