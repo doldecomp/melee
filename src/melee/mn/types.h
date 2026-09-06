@@ -129,13 +129,13 @@ struct PlayerInitData {
     u8 xD_b6 : 1;
     u8 xD_b7 : 1;
     /*0x0E*/ u8 cpu_kind;  ///< CPU type
-    /*0x0F*/ u8 cpu_level; // CPU level
-    /*0x10*/ u16 x10;
-    /*0x12*/ u16 x12;
-    /*0x14*/ u16 hp;    ///< hit points, for stamina mode
-    /*0x18*/ float x18; ///< offense ratio
-    /*0x1C*/ float x1C; ///< defense ratio
-    /*0x20*/ float x20;
+    /*0x0F*/ u8 cpu_level; ///< CPU level
+    /*0x10*/ u16 x10;      ///< some damage value
+    /*0x12*/ u16 x12;      ///< some damage value
+    /*0x14*/ u16 hp;       ///< hit points, for stamina mode
+    /*0x18*/ float attack_ratio;
+    /*0x1C*/ float defense_ratio;
+    /*0x20*/ float model_scale;
 };
 
 struct lbl_8046B668_t {
@@ -160,7 +160,7 @@ ASSERT_SIZE(lbl_8046B378_t, 0x110);
 struct StartMeleeRules {
     u32 match_kind : 3; ///< ::MatchKind
     u32 x0_3 : 3;       ///< unknown enum
-    u32 x0_6 : 1;
+    u32 timer_enabled : 1;
     u32 timer_counts_up : 1; ///< ::bool
 
     u32 x1_0 : 1;
