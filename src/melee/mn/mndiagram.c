@@ -384,18 +384,6 @@ int mnDiagram_GetFighterTotalFalls(u8 field_index)
 
 /// @brief Counts the number of unlocked fighters (inline-expanded form).
 /// @return Number of unlocked fighters.
-static inline int mnDiagram_CountUnlockedFightersInline(void)
-{
-    int count = 0;
-    int i;
-    for (i = 0; i < SELKIND_COUNT; i++) {
-        if (mn_IsFighterUnlocked(i)) {
-            count++;
-        }
-    }
-    return count;
-}
-
 static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
 {
     int i;
