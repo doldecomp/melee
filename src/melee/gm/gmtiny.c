@@ -129,9 +129,9 @@ void gm_801B8E24(GameModeState* scene)
 
 void fn_801B8E50(PlayerInitData* arg0, PlayerInitData* unused)
 {
-    arg0->x20 = 0.35f;
-    arg0->x1C = 0.5f;
-    arg0->x18 = 1.0f;
+    arg0->model_scale = 0.35f;
+    arg0->defense_ratio = 0.5f;
+    arg0->attack_ratio = 1.0f;
     arg0->xB = 1;
 }
 

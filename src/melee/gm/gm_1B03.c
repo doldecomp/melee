@@ -53,7 +53,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
         }
         arg0->players[i].ckind = var_r6;
         arg0->players[i].stocks = 1;
-        arg0->players[i].x12 = 0x12C;
+        arg0->players[i].x12 = 300;
     } else {
         arg0->players[i].slot_type = Gm_PKind_NA;
     }
@@ -82,7 +82,7 @@ void gm_SetupSuddenDeath(StartMeleeData* start, MatchEnd* end)
     int i;
 
     start->rules.match_kind = MatchKind_Stock;
-    start->rules.x0_6 = false;
+    start->rules.timer_enabled = false;
     start->rules.x2_5 = false;
 
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
