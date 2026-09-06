@@ -564,9 +564,9 @@ void fn_8019D1BC(void)
             HSD_JObj* first_c;
             HSD_JObj* first_jobj;
 
-            first_c = gmTournament_GetJObj(first_gobj = fn_8019035C(
-                0, lbl_804D6694->models[12], 0, 0x1A, 2, 1, fn_8019C048,
-                (f32) i));
+            first_c = gmTournament_GetJObj(
+                first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A,
+                                         2, 1, fn_8019C048, (f32) i));
             first_jobj = first_gobj->hsd_obj;
             HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
