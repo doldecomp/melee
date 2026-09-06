@@ -2504,6 +2504,46 @@ static inline void** mnSnap_GetMainShapeAnim(mnSnap_State* snap)
     return &snap->main_shapeanim;
 }
 
+/// Creates five thumbnail joints using the spacing between two markers.
+static inline void mnSnap_CreateThumbnails(mnSnap_State* snap,
+                                          HSD_JObj** thumb_root_ptr,
+                                          void** photo_joint,
+                                          void** sub_animjoint,
+                                          void** sub_matanim,
+                                          void** sub_shapeanim)
+{
+    HSD_JObj* jobj2;
+    HSD_JObj* marker;
+    f32 step_z;
+    f32 step_y;
+    f32 step_x;
+    s32 i;
+    Vec3 start_pos;
+    Vec3 end_pos;
+
+    /* Get thumbnail start/end positions */
+    HSD_JObjGetTranslation(snap->thumb_start, &start_pos);
+    marker = snap->thumb_end;
+    HSD_JObjGetTranslation(marker, &end_pos);
+    step_x = end_pos.x - start_pos.x;
+    step_y = end_pos.y - start_pos.y;
+    step_z = end_pos.z - start_pos.z;
+
+    /* Create 5 thumbnail position JObjs by interpolating */
+    for (i = 0; i < 5; i++) {
+        jobj2 = HSD_JObjLoadJoint((HSD_Joint*) *photo_joint);
+        HSD_JObjAddAnimAll(jobj2, (HSD_AnimJoint*) *sub_animjoint,
+                           (HSD_MatAnimJoint*) *sub_matanim,
+                           (HSD_ShapeAnimJoint*) *sub_shapeanim);
+        end_pos.x = step_x * (f32) i + start_pos.x;
+        end_pos.y = step_y * (f32) i + start_pos.y;
+        end_pos.z = step_z * (f32) i + start_pos.z;
+        HSD_JObjSetTranslate(jobj2, &end_pos);
+        snap->option_jobjs[i] = jobj2;
+        HSD_JObjAddChild(*thumb_root_ptr, jobj2);
+    }
+}
+
 /// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
@@ -2512,8 +2552,6 @@ void mnSnap_80257F24(void)
     HSD_JObj* jobj;
     HSD_GObj* gobj;
     HSD_JObj* jobj2;
-    HSD_JObj* pos_start;
-    HSD_JObj* pos_end;
     HSD_JObj** move_jobj_ptr;
     HSD_JObj** slot_jobj_ptr;
     HSD_JObj** thumb_root_ptr;
@@ -2541,7 +2579,6 @@ void mnSnap_80257F24(void)
     void** warn_matanim;
     void** warn_animjoint;
     void** arrows_matanim;
-    Vec3 step;
     s32 i;
     s32 zero = 0;
 
@@ -2667,34 +2704,8 @@ void mnSnap_80257F24(void)
     thumb_root_ptr = &snap->thumb_root;
     lb_80011E24(jobj, thumb_root_ptr, 0, 1, 7, 8, -1);
 
-    {
-        Vec3 start_pos;
-        Vec3 end_pos;
-
-        /* Get thumbnail start/end positions */
-        pos_start = snap->thumb_start;
-        HSD_JObjGetTranslation(pos_start, &start_pos);
-
-        pos_end = snap->thumb_end;
-        HSD_JObjGetTranslation(pos_end, &end_pos);
-        step.x = end_pos.x - start_pos.x;
-        step.y = end_pos.y - start_pos.y;
-        step.z = end_pos.z - start_pos.z;
-
-        /* Create 5 thumbnail position JObjs by interpolating */
-        for (i = 0; i < 5; i++) {
-            jobj2 = HSD_JObjLoadJoint((HSD_Joint*) *photo_joint);
-            HSD_JObjAddAnimAll(jobj2, (HSD_AnimJoint*) *sub_animjoint,
-                               (HSD_MatAnimJoint*) *sub_matanim,
-                               (HSD_ShapeAnimJoint*) *sub_shapeanim);
-            end_pos.x = step.x * (f32) i + start_pos.x;
-            end_pos.y = step.y * (f32) i + start_pos.y;
-            end_pos.z = step.z * (f32) i + start_pos.z;
-            HSD_JObjSetTranslate(jobj2, &end_pos);
-            snap->option_jobjs[i] = jobj2;
-            HSD_JObjAddChild(*thumb_root_ptr, jobj2);
-        }
-    }
+    mnSnap_CreateThumbnails(snap, thumb_root_ptr, photo_joint, sub_animjoint,
+                            sub_matanim, sub_shapeanim);
 
     /* Load page indicator */
     mnSnap_LoadPageIndicator(page_joint, snap, thumb_root_ptr, &jobj2);
@@ -2787,8 +2798,8 @@ void mnSnap_80257F24(void)
                        (HSD_ShapeAnimJoint*) *warn_shapeanim);
     HSD_JObjReqAnimAll(jobj, 10.0F);
     HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, (&snap->dlg_root), 0, 2, 4, 5, 6, 7, 8, 0xA, 0xB, 0xD,
-                -1);
+    lb_80011E24(jobj, &mnSnap_804A0A10.dlg_root, 0, 2, 4, 5, 6, 7, 8, 0xA,
+                0xB, 0xD, -1);
 
     snap->dlg_active = 0;
 
