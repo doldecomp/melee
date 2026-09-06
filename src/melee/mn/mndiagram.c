@@ -357,22 +357,6 @@ static inline int mnDiagram_SumFighterKOs(u8 field_index)
     return total;
 }
 
-static inline int mnDiagram_SumFighterKOsClamped(u8 field_index)
-{
-    int total = 0;
-    int i;
-    for (i = 0; i < 25; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
-            total +=
-                GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
-        }
-    }
-    if (total > 999999) {
-        total = 999999;
-    }
-    return total;
-}
-
 /// @brief Gets total falls (deaths) of a fighter against all other fighters.
 /// @details Iterates through all unlocked fighters and sums how many times
 ///          each fighter KO'd the target fighter. This is the column sum
@@ -400,18 +384,6 @@ int mnDiagram_GetFighterTotalFalls(u8 field_index)
 
 /// @brief Counts the number of unlocked fighters (inline-expanded form).
 /// @return Number of unlocked fighters.
-static inline int mnDiagram_CountUnlockedFightersInline(void)
-{
-    int count = 0;
-    int i;
-    for (i = 0; i < SELKIND_COUNT; i++) {
-        if (mn_IsFighterUnlocked(i)) {
-            count++;
-        }
-    }
-    return count;
-}
-
 static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
 {
     int i;
@@ -1079,35 +1051,18 @@ loop:
     return (u8) found;
 }
 
-static inline u8 mnDiagram_GetVisibleNameCursorFrom(u8* sorted, int start,
-                                                    int rank)
+static inline u8 mnDiagram_GetVisibleNameCursorFrom(int start, int rank)
 {
-    u8* p;
-    int remaining;
-    int idx;
-
-    p = sorted + start;
-    remaining = rank;
-    idx = start;
-    p = p + 0x1C;
-    while (remaining > 0) {
-        u8* p2;
-        p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x78) {
-            return 0x78;
-        }
-        if (GetNameText(*p2) == NULL) {
-            goto loop;
-        }
-        remaining--;
+    while (rank > 0) {
+        do {
+            start++;
+            if (start >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
+        rank--;
     }
-    p = sorted;
-    p += idx;
-    return p[0x1C];
+    return mnDiagram_GetNameByIndex(start);
 }
 
 static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
@@ -1250,38 +1205,21 @@ static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
     return result;
 }
 
-static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
-                                                        int rank)
+static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(int start, int rank)
 {
-    u8 result;
-    int remaining;
-    int idx;
-    u8* p;
-    u8* p2;
-
-    remaining = rank;
-    idx = start;
-    p = sorted + start;
-    while (remaining >= 0) {
-        if (remaining == 0) {
-            result = sorted[idx];
-            break;
+    while (rank >= 0) {
+        if (rank == 0) {
+            return mnDiagram_GetFighterByIndex(start);
         }
-        p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
-        remaining--;
+        do {
+            start++;
+            if (start >= SELKIND_COUNT) {
+                return SELKIND_COUNT;
+            }
+        } while (mn_IsFighterUnlocked(mnDiagram_GetFighterByIndex(start)) ==
+                 0);
+        rank--;
     }
-    return result;
 }
 
 static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
@@ -1289,18 +1227,34 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_804D6C10->user_data;
 }
 
-static inline u8 mnDiagram_GetVisibleNameColumnForInput(int start, int rank)
+static inline u8 mnDiagram_GetVisibleNameColumnForInput(u8* sorted,
+                                                        Diagram* data,
+                                                        const u16* selection)
 {
-    while (rank > 0) {
+    u8* p;
+    u8* next;
+    int remaining;
+    int idx;
+
+    remaining = (u8) *selection;
+    idx = (u8) data->name_cursor_pos;
+    p = sorted + idx;
+    p += 0x1C;
+    while (remaining > 0) {
+        next = p;
         do {
-            start++;
-            if (start >= 0x78) {
+            idx++;
+            next++;
+            p++;
+            if (idx >= 0x78) {
                 return 0x78;
             }
-        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
-        rank--;
+        } while (GetNameText(*next) == NULL);
+        remaining--;
     }
-    return mnDiagram_GetNameByIndex(start);
+    p = sorted;
+    p += idx;
+    return p[0x1C];
 }
 
 static inline s32 mnDiagram_CountUnlockedFightersForInput(void)
@@ -1374,11 +1328,10 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, i);
         proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
-            col = mn_804A04F0.hovered_selection;
-            cur = col;
-            col_result = mnDiagram_GetVisibleNameColumnForInput(
-                (u8) data->name_cursor_pos, (u8) cur);
-            row = mn_804A04F0.hovered_selection >> 8;
+            selection = &mn_804A04F0.hovered_selection;
+            col_result = mnDiagram_GetVisibleNameColumnForInput(sorted, data,
+                                                                selection);
+            row = *selection >> 8;
             cursor_pos = data->name_cursor_pos;
             row_result = mnDiagram_GetVisibleNameRowForInput(
                 sorted, cursor_pos >> 8, row);
@@ -2454,54 +2407,55 @@ void mnDiagram_DrawCellValue(void* arg0, u8 arg1, u8 arg2, int arg3)
     }
 }
 
-void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
+static inline int mnDiagram_GetFighterPairKOs(u8 fighter, u8 opponent)
+{
+    SelectableCharacterKind kind = fighter;
+    return GetPersistentFighterData(kind)->fighter_kos[opponent];
+}
+
+void mnDiagram_DrawGridValues(void* arg0, s32 row_start, s32 col_start,
+                              u8 arg3)
 {
     s32 name_col;
-    s32 row_start = arg1;
-    s32 col_start = arg2;
     u8 is_name_mode = arg3;
-    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
-    s32 max_value = 0xF423F;
     s32 unlocked_count;
     s32 col_unlocked_count;
     s32 bottom_unlocked_count;
-    s32 name_falls;
     s32 bottom_col;
     s32 fighter_col;
     s32 row;
     s32 entry_count;
-    s32 name_kos;
-    s32 fighter_falls;
+    s32 total_kos;
     s32 row_name;
     s32 col_name;
     s32 row_fighter;
     u8 col_fighter;
-    u8* sorted;
+    // Preserve the original gap before the saved registers.
+    PAD_STACK(16);
 
     row = 0;
     do {
         if (row == 0xA) {
             bottom_col = 0;
             do {
-                sorted = (u8*) assets;
                 if (is_name_mode != 0) {
                     entry_count = GetNameCount();
                     if (entry_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
                             mnDiagram_SumNameFalls(
-                                mnDiagram_GetVisibleNameFrom(sorted, col_start,
-                                                             bottom_col)));
+                                mnDiagram_GetVisibleNameCursorFrom(
+                                    col_start, bottom_col)));
                     }
                 } else {
                     bottom_unlocked_count =
-                        mnDiagram_CountUnlockedFightersInline();
+                        mnDiagram_CountUnlockedFightersForHeaders();
                     if (bottom_unlocked_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
                             mnDiagram_SumFighterFalls(
                                 mnDiagram_GetVisibleFighterCursorFrom2(
-                                    sorted, col_start, bottom_col)));
+                                    col_start, bottom_col)));
                     }
                 }
                 bottom_col += 1;
@@ -2511,20 +2465,19 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
             if (entry_count > row) {
                 name_col = 0;
                 do {
-                    sorted = (u8*) assets;
                     if ((name_col == 7) || (entry_count = GetNameCount(),
                                             (entry_count > name_col)))
                     {
-                        row_name = mnDiagram_GetVisibleNameFrom2(
-                            sorted, row_start, row);
+                        row_name =
+                            mnDiagram_GetVisibleNameCursorFrom(row_start, row);
                         if (name_col == 7) {
-                            name_kos = mnDiagram_GetNameTotalKOs(row_name);
+                            total_kos = mnDiagram_GetNameTotalKOs(row_name);
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
-                                                    (u8) row, name_kos);
+                                                    (u8) row, total_kos);
                         } else {
                             int ko_count;
                             col_name = mnDiagram_GetVisibleNameCursorFrom(
-                                sorted, col_start, name_col);
+                                col_start, name_col);
                             ko_count = GetPersistentNameData((u8) row_name)
                                            ->vs_kos[col_name];
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
@@ -2535,30 +2488,32 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                 } while (name_col <= 7);
             }
         } else {
-            unlocked_count = mnDiagram_CountUnlockedFightersInline();
+            unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
             if (unlocked_count > row) {
                 fighter_col = 0;
                 do {
-                    sorted = (u8*) assets;
                     if ((fighter_col == 7) ||
                         (col_unlocked_count =
-                             mnDiagram_CountUnlockedFightersInline(),
+                             mnDiagram_CountUnlockedFightersForHeaders(),
                          (col_unlocked_count > fighter_col)))
                     {
                         row_fighter = mnDiagram_GetVisibleFighterCursorFrom2(
-                            sorted, row_start, row);
+                            row_start, row);
                         if (fighter_col == 7) {
-                            mnDiagram_DrawCellValue(
-                                arg0, (u8) fighter_col, (u8) row,
-                                mnDiagram_SumFighterKOsClamped(row_fighter));
+                            total_kos =
+                                mnDiagram_GetFighterTotalKOs(row_fighter);
+                            total_kos =
+                                total_kos > 999999 ? 999999 : total_kos;
+                            mnDiagram_DrawCellValue(arg0, (u8) fighter_col,
+                                                    (u8) row, total_kos);
                         } else {
                             col_fighter =
                                 mnDiagram_GetVisibleFighterCursorFrom2(
-                                    sorted, col_start, fighter_col);
+                                    col_start, fighter_col);
                             mnDiagram_DrawCellValue(
                                 arg0, (u8) fighter_col, (u8) row,
-                                GetPersistentFighterData((u8) row_fighter)
-                                    ->fighter_kos[col_fighter]);
+                                mnDiagram_GetFighterPairKOs(row_fighter,
+                                                            col_fighter));
                         }
                     }
                     fighter_col += 1;
