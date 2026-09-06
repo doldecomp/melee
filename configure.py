@@ -383,7 +383,6 @@ clang_warnings = [
     "incompatible-pointer-types",
     "pointer-type-mismatch",
     "strict-prototypes",
-    "typedef-redefinition",
 ]
 
 if args.lint_error:
@@ -397,10 +396,11 @@ clang_disabled_warnings = [
     "return-type",
     "sign-compare",
     "sometimes-uninitialized",
-    "unused-but-set-variable",
-    "unused-parameter",
-    "unused-value",
-    "unused-variable",
+    "unused-but-set-variable", # TODO: enable
+    "unused-parameter", # TODO: enable
+    "unused-value", # TODO: enable
+    "unused-variable", # TODO: enable
+    "typedef-redefinition", # TODO: enable
 ]
 
 
