@@ -962,7 +962,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         }
                     }
                     {
-                        s32 variant_count = (n * 2) & 0xFE;
+                        s32 variant_count = (u8) (n * 2);
                         data->variant_gobj = mnNameNew_GlyphVariantSetup(
                             data, variant_count, (u8) *hovered);
                     }
