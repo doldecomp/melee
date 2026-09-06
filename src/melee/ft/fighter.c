@@ -851,6 +851,11 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 8, 0);
     GObj_SetupGXLink(gobj, &ftDrawCommon_80080E18, 5U, 0U);
+    /**
+     * @bug #HSD_ObjAlloc returns the block uncleared and nothing below zeroes
+     * it, so any field read before the init path writes it sees stale heap
+     * contents. For example, Luigi's @c x222C_cycloneCharge.
+     */
     fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->dat_attrs_backup = HSD_ObjAlloc(&fighter_dat_attrs_alloc_data);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
