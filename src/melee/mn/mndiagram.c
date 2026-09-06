@@ -32,9 +32,9 @@ void* mnDiagram_804A07F4[4];
 void* mnDiagram_804A0804[4];
 void* mnDiagram_804A0824[4];
 HSD_GObj* mnDiagram_804D6C10;
-mnDiagram_ArchiveData mnDiagram_804A0834;
-mnDiagram_ArchiveData mnDiagram_804A0844;
 mnDiagram_ArchiveData mnDiagram_804A0854;
+mnDiagram_ArchiveData mnDiagram_804A0844;
+mnDiagram_ArchiveData mnDiagram_804A0834;
 
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
@@ -1227,34 +1227,18 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_804D6C10->user_data;
 }
 
-static inline u8 mnDiagram_GetVisibleNameColumnForInput(u8* sorted,
-                                                        Diagram* data,
-                                                        const u16* selection)
+static inline u8 mnDiagram_GetVisibleNameColumnForInput(int start, int rank)
 {
-    u8* p;
-    u8* next;
-    int remaining;
-    int idx;
-
-    remaining = (u8) *selection;
-    idx = (u8) data->name_cursor_pos;
-    p = sorted + idx;
-    p += 0x1C;
-    while (remaining > 0) {
-        next = p;
+    while (rank > 0) {
         do {
-            idx++;
-            next++;
-            p++;
-            if (idx >= 0x78) {
+            start++;
+            if (start >= 0x78) {
                 return 0x78;
             }
-        } while (GetNameText(*next) == NULL);
-        remaining--;
+        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
+        rank--;
     }
-    p = sorted;
-    p += idx;
-    return p[0x1C];
+    return mnDiagram_GetNameByIndex(start);
 }
 
 static inline s32 mnDiagram_CountUnlockedFightersForInput(void)
@@ -1326,10 +1310,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, i);
         proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
-            selection = &mn_804A04F0.hovered_selection;
-            col_result = mnDiagram_GetVisibleNameColumnForInput(sorted, data,
-                                                                selection);
-            row = *selection >> 8;
+            col = mn_804A04F0.hovered_selection;
+            cur = col;
+            col_result = mnDiagram_GetVisibleNameColumnForInput(
+                (u8) data->name_cursor_pos, (u8) cur);
+            row = mn_804A04F0.hovered_selection >> 8;
             cursor_pos = data->name_cursor_pos;
             row_result = mnDiagram_GetVisibleNameRowForInput(
                 sorted, cursor_pos >> 8, row);
