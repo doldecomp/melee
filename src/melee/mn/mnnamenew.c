@@ -958,9 +958,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         GlyphRow* glyphs = layout->lower_glyphs;
                         char** ptrs = glyphs[(u8) sel2];
                         null_char = (s8) *mnNameNew_NullCharacter;
-                        while ((s8) *ptrs[0] != null_char) {
-                            n++;
+                        while (null_char != (s8) *ptrs[0]) {
                             ptrs++;
+                            n++;
                         }
                     }
                     {
