@@ -485,7 +485,8 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             arg1_ = mnItemSw_ReqFreqAnim(
                 data->jobjs[3], tbl, mn_804A04F0.confirmed_selection, arg1_);
         } else {
-            HSD_JObj* jobj = mnItemSw_8023405C(data, cursor);
+            HSD_JObj* jobj = mnItemSw_8023405C(
+                data, (u8) mn_804A04F0.hovered_selection);
             lb_80011E24(jobj, &sp44, 8, -1);
             HSD_JObjClearFlagsAll(sp44, JOBJ_HIDDEN);
             HSD_JObjReqAnimAll(sp44, anim_val);
