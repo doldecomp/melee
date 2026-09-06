@@ -716,7 +716,7 @@ void fn_801AB200(HSD_GObj* gobj)
     int entry_idx;
     int broke;
     s32 base_page;
-    s32 jp_page, en_page, jp_page1;
+    s32 jp_page, en_page;
     s32 page_5, page_6, page_8;
     HSD_Text** text_arr;
     StaffEntryData* entry_data;
@@ -937,11 +937,10 @@ void fn_801AB200(HSD_GObj* gobj)
                            entry_data->check(entry_data->check_arg) == 0;
             base_page = selected * 0xF;
             jp_page = base_page + 7;
-            jp_page1 = jp_page;
+            page_8 = base_page + 8;
             en_page = base_page + 0xB;
             page_5 = base_page + 5;
             page_6 = base_page + 6;
-            page_8 = base_page + 8;
             text_arr = gm_80480D58;
             for (text_idx = 0; text_idx < 6; text_idx++) {
                 if (text_arr[text_idx] != NULL) {
@@ -998,7 +997,7 @@ void fn_801AB200(HSD_GObj* gobj)
                         text_arr[text_idx]->text_color.g = 0x37;
                         text_arr[text_idx]->text_color.b = 0xE0;
                         if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(gm_80480D58[1], jp_page1);
+                            HSD_SisLib_803A6368(gm_80480D58[1], base_page + 7);
                         } else {
                             HSD_SisLib_803A6368(gm_80480D58[1], page_8);
                         }
