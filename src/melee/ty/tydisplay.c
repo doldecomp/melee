@@ -669,99 +669,82 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
     }
 }
 
-inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* grid, s32 count)
+inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* base, s32 hi)
 {
-    if (count > 1) {
-        s32 pivot;
-        s32 n2 = count - 1;
-        if (n2 > 0) {
-            struct {
-                TyDspPos tmp2;
-                u8 pad1[4];
-                TyDspPos tmp1, tmp0;
-            } temps;
-            s32 mid = n2 / 2;
-            TyDspPos* p;
-            TyDspGrid* cur;
-            s32 n;
+    s32 pivot;
+    struct {
+        TyDspPos tmp2;
+        u8 pad1[4];
+        TyDspPos tmp1, tmp0;
+        u8 pad2[0x20];
+    } temps;
+    s32 mid = hi / 2;
+    TyDspPos* p;
+    TyDspGrid* cur;
+    s32 n;
 
-            if (mid != 0) {
-                temps.tmp0 = grid->pos[0];
-                grid->pos[0] = grid->pos[mid];
-                grid->pos[mid] = temps.tmp0;
+    if (mid != 0) {
+        temps.tmp0 = base->pos[0];
+        base->pos[0] = base->pos[mid];
+        base->pos[mid] = temps.tmp0;
+    }
+
+    pivot = 0;
+    cur = (TyDspGrid*) ((size_t) base + sizeof(TyDspPos));
+    for (n = 1; hi >= n;
+         cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
+    {
+        if (cur->pos[0].z < base->pos[0].z) {
+            pivot += 1;
+            if (pivot != n) {
+                p = (TyDspPos*) ((size_t) base +
+                                 pivot * sizeof(TyDspPos) + 0x97C);
+                temps.tmp1 = *p;
+                *p = cur->pos[0];
+                cur->pos[0] = temps.tmp1;
             }
-
-            pivot = 0;
-            cur = (TyDspGrid*) ((size_t) grid + sizeof(TyDspPos));
-            for (n = 1; n2 >= n;
-                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
-            {
-                if (cur->pos[0].z < grid->pos[0].z) {
-                    pivot += 1;
-                    if (pivot != n) {
-                        p = (TyDspPos*) ((size_t) grid +
-                                         pivot * sizeof(TyDspPos) + 0x97C);
-                        temps.tmp1 = *p;
-                        *p = cur->pos[0];
-                        cur->pos[0] = temps.tmp1;
-                    }
-                }
-            }
-
-            if (pivot != 0) {
-                temps.tmp2 = grid->pos[0];
-                grid->pos[0] = grid->pos[pivot];
-                grid->pos[pivot] = temps.tmp2;
-            }
-
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
         }
     }
-}
 
-static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
-{
-    return dx * dx + dz * dz;
-}
-
-static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
-                                                  TyDspConfig* cfg)
-{
-    s32 k;
-    TyDspPos* pos = grid->pos;
-    s32 jobj_idx = 0;
-
-    for (k = 0; k < cfg->x08; k++) {
-        HSD_GObj* gobj;
-        cfg->x78 = _tyDisplay_8031BC54(grid->sort[k].key);
-        gobj = cfg->x78;
-        if (gobj != NULL) {
-            _tyDisplay_804D6F10[jobj_idx] = (HSD_JObj*) gobj->hsd_obj;
-            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx], pos->x);
-            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx], pos->z);
-            jobj_idx++;
-            pos++;
-        }
+    if (pivot != 0) {
+        temps.tmp2 = base->pos[0];
+        base->pos[0] = base->pos[pivot];
+        base->pos[pivot] = temps.tmp2;
     }
+
+    _tyDisplay_8031830C((TySortElem*) base->pos, 0, pivot - 1);
+    _tyDisplay_8031830C((TySortElem*) base->pos, pivot + 1, hi);
+}
+
+static inline s32 _tyDisplay_80318CB4_is_near(const TyDspPos* a,
+                                             const TyDspPos* b, f32 limit)
+{
+    f32 dx = a->x - b->x;
+    f32 dz = a->z - b->z;
+    f32 dist = sqrtf(dx * dx + dz * dz);
+    if (dist > 2.1474836e9f || dist < -2.1474836e9f) {
+        HSD_ASSERTREPORT(0xC6, 0, "*** tyDisplay Atari Irregul!\n");
+    }
+    return (s32) dist <= (s32) limit ? 1 : 0;
 }
 
 void _tyDisplay_80318CB4(s32 arg0)
 {
+    s32 hi;
     TyDspGrid* grid = _tyDisplay_804D6F14;
     s32 i;
     s32 k;
     s32 ring_count;
     s32 ring_max;
     s32 prev_ring_size;
-    f32 angle;
     f32 radius;
+    f32 angle;
     f32 base_step;
     f32 dist_limit;
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
 
-    PAD_STACK(0x2C);
+    PAD_STACK(0x8);
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
@@ -798,46 +781,26 @@ void _tyDisplay_80318CB4(s32 arg0)
                                 grid->pos[i].z * grid->pos[i].z);
                 s32 collided;
                 s32 tries;
-                s32 dist_limit_i;
-                s32 start;
+                s32 start = i < 0x24 ? 0 :
+                    i - (prev_ring_size + (prev_ring_size - 6));
 
-                if (i < 0x24) {
-                    start = 0;
-                } else {
-                    start = i - (prev_ring_size * 2 - 6);
-                }
-
-                dist_limit_i = (s32) dist_limit;
                 collided = 0;
                 while (collided == 0) {
                     grid->pos[i].x = mag * cosf(theta);
                     grid->pos[i].z = mag * sinf(theta);
                     tries = (s32) (mag / 0.1f);
                     if (HSD_Randi(2) != 0) {
-                        f32 half = mag * 0.5f;
+                        f32 half = mag / 2.0f;
                         if ((s32) half > 1) {
                             tries -= HSD_Randi((s32) half);
                         }
                     }
                     for (k = i - 1; k >= start; k--) {
-                        f32 dx = grid->pos[i].x - grid->pos[k].x;
-                        f32 dist = sqrtf(_tyDisplay_80318CB4_calc_dist_sq(
-                            grid->pos[i].z - grid->pos[k].z, dx));
-                        if (dist > 2.1474836e9f || dist < -2.1474836e9f) {
-                            OSReport("*** tyDisplay Atari Irregul!\n");
-                            HSD_ASSERT(0xC6, 0);
-                        }
+                        if (_tyDisplay_80318CB4_is_near(
+                                &grid->pos[i], &grid->pos[k], dist_limit))
                         {
-                            s32 near;
-                            if ((s32) dist <= dist_limit_i) {
-                                near = 1;
-                            } else {
-                                near = 0;
-                            }
-                            if (near != 0) {
-                                collided = 1;
-                                break;
-                            }
+                            collided = 1;
+                            break;
                         }
                     }
                     if (tries == 0) {
@@ -880,11 +843,29 @@ void _tyDisplay_80318CB4(s32 arg0)
     }
 
     count = cfg->x08;
-    _tyDisplay_80318CB4_sort_pos(grid, count);
+    if (count > 1) {
+        TyDspGrid* base;
+        hi = count - 1;
+        base = grid;
+        if (hi > 0) {
+            _tyDisplay_80318CB4_sort_pos(base, hi);
+        }
+    }
 
     _tyDisplay_80318CB4_sort(cfg, grid);
 
-    _tyDisplay_80318CB4_place_toys(grid, cfg);
+    k = 0;
+    for (i = 0; i < cfg->x08; i++) {
+        HSD_GObj* gobj;
+        cfg->x78 = _tyDisplay_8031BC54(grid->sort[i].key);
+        gobj = cfg->x78;
+        if (gobj != NULL) {
+            _tyDisplay_804D6F10[k] = (HSD_JObj*) gobj->hsd_obj;
+            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[k], grid->pos[k].x);
+            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[k], grid->pos[k].z);
+            k++;
+        }
+    }
 }
 
 void _tyDisplay_80319540(s32 arg0)
