@@ -14,6 +14,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -23,6 +24,12 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
+
+/// Shared model descriptors loaded by both name-entry menus.
+StaticModelDesc mnNameNew_804A06F0;
+StaticModelDesc mnNameNew_804A0700;
+StaticModelDesc mnNameNew_804A0710;
+StaticModelDesc mnNameNew_804A0720[2];
 
 f32 mnName_804D4BD0[2] = { 39.0f, 59.0f };
 f32 mnName_804D4BD8[2] = { 39.0f, 19.0f };
@@ -1688,13 +1695,6 @@ s32 mnName_8023AC40(void)
     HSD_Archive* archive = mn_804D6BB8;
     HSD_GObjProc* proc;
 
-    /// @remarks The retail caller fills all seven name-entry archive slots
-    /// through one .bss anchor: the three archives owned by this translation
-    /// unit followed by the four "EtNw" slots that now belong to mnnamenew.c
-    /// (mnNameNew_804A06F0..mnNameNew_804A0720, loaded again by
-    /// mnNameNew_8023D8AC-era code from the same section names). The
-    /// past-the-end archive indices below reproduce that contiguous layout;
-    /// see symbols.txt 0x804A0648..0x804A0750.
     lbArchive_LoadSections(
         archive, &mnName_804A06E0.joint, "MenMainConNmTp_Top_joint",
         &mnName_804A06E0.anim_joint, "MenMainConNmTp_Top_animjoint",
@@ -1708,26 +1708,26 @@ s32 mnName_8023AC40(void)
         "MenMainWarCmn_Top_joint", &mnName_804A06D0.anim_joint,
         "MenMainWarCmn_Top_animjoint", &mnName_804A06D0.matanim_joint,
         "MenMainWarCmn_Top_matanim_joint", &mnName_804A06D0.shapeanim_joint,
-        "MenMainWarCmn_Top_shapeanim_joint", &(&mnName_804A06E0)[1].joint,
-        "MenMainConEtNw_Top_joint", &(&mnName_804A06E0)[1].anim_joint,
-        "MenMainConEtNw_Top_animjoint", &(&mnName_804A06E0)[1].matanim_joint,
+        "MenMainWarCmn_Top_shapeanim_joint", &mnNameNew_804A06F0.joint,
+        "MenMainConEtNw_Top_joint", &mnNameNew_804A06F0.animjoint,
+        "MenMainConEtNw_Top_animjoint", &mnNameNew_804A06F0.matanim_joint,
         "MenMainConEtNw_Top_matanim_joint",
-        &(&mnName_804A06E0)[1].shapeanim_joint,
-        "MenMainConEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[2].joint,
-        "MenMainBaseEtNw_Top_joint", &(&mnName_804A06E0)[2].anim_joint,
-        "MenMainBaseEtNw_Top_animjoint", &(&mnName_804A06E0)[2].matanim_joint,
+        &mnNameNew_804A06F0.shapeanim_joint,
+        "MenMainConEtNw_Top_shapeanim_joint", &mnNameNew_804A0700.joint,
+        "MenMainBaseEtNw_Top_joint", &mnNameNew_804A0700.animjoint,
+        "MenMainBaseEtNw_Top_animjoint", &mnNameNew_804A0700.matanim_joint,
         "MenMainBaseEtNw_Top_matanim_joint",
-        &(&mnName_804A06E0)[2].shapeanim_joint,
-        "MenMainBaseEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[3].joint,
-        "MenMainSubEtNw_Top_joint", &(&mnName_804A06E0)[3].anim_joint,
-        "MenMainSubEtNw_Top_animjoint", &(&mnName_804A06E0)[3].matanim_joint,
+        &mnNameNew_804A0700.shapeanim_joint,
+        "MenMainBaseEtNw_Top_shapeanim_joint", &mnNameNew_804A0710.joint,
+        "MenMainSubEtNw_Top_joint", &mnNameNew_804A0710.animjoint,
+        "MenMainSubEtNw_Top_animjoint", &mnNameNew_804A0710.matanim_joint,
         "MenMainSubEtNw_Top_matanim_joint",
-        &(&mnName_804A06E0)[3].shapeanim_joint,
-        "MenMainSubEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[4].joint,
-        "MenMainSbaseEtNw_Top_joint", &(&mnName_804A06E0)[4].anim_joint,
-        "MenMainSbaseEtNw_Top_animjoint", &(&mnName_804A06E0)[4].matanim_joint,
+        &mnNameNew_804A0710.shapeanim_joint,
+        "MenMainSubEtNw_Top_shapeanim_joint", &mnNameNew_804A0720[0].joint,
+        "MenMainSbaseEtNw_Top_joint", &mnNameNew_804A0720[0].animjoint,
+        "MenMainSbaseEtNw_Top_animjoint", &mnNameNew_804A0720[0].matanim_joint,
         "MenMainSbaseEtNw_Top_matanim_joint",
-        &(&mnName_804A06E0)[4].shapeanim_joint,
+        &mnNameNew_804A0720[0].shapeanim_joint,
         "MenMainSbaseEtNw_Top_shapeanim_joint", 0);
 
     if (lbLang_IsSavedLanguageUS()) {

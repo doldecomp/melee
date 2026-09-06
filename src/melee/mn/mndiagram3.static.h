@@ -1,8 +1,8 @@
 #ifndef MELEE_MN_MNDIAGRAM3_STATIC_H
 #define MELEE_MN_MNDIAGRAM3_STATIC_H
 
-#include "mndiagram3.h" // IWYU pragma: export
 #include <dolphin/gx/GXStruct.h>
+#include <melee/mn/mndiagram3.h> // IWYU pragma: export
 
 typedef struct mnDiagram3_PosTable {
     /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)

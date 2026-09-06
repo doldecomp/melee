@@ -78,7 +78,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
     ChallengerData* challenger = gm_GetChallengerData();
     gm_SetupRulesDefaults(&start->rules);
     gm_SetupAllPlayerDefaults(start->players);
-    start->rules.x0_6 = false;
+    start->rules.timer_enabled = false;
     start->rules.match_kind = MatchKind_Stock;
     start->rules.x0_3 = 2;
     start->rules.stkind =

@@ -280,7 +280,7 @@ void gm_801B6428(GameModeState* arg0)
 
     temp_r3->rules.match_kind = 1;
     temp_r3->rules.is_teams = false;
-    temp_r3->rules.x0_6 = true;
+    temp_r3->rules.timer_enabled = true;
     temp_r3->rules.time_limit = 0;
     temp_r3->rules.timer_counts_up = true;
     temp_r3->rules.timer_shows_hours = true;
@@ -486,8 +486,8 @@ static void gm_801B6AD8_inline(GameModeState* scene, int x)
     temp_r31 = &gmMainLib_804D3EE0->modes.unk_1490;
     temp_r3 = gm_GetGameModeStateEnterData(scene);
     temp_r31->start.players[0].stocks = 1;
-    temp_r31->start.players[0].x18 = 1.0F;
-    temp_r31->start.players[0].x1C = 1.0F;
+    temp_r31->start.players[0].attack_ratio = 1.0F;
+    temp_r31->start.players[0].defense_ratio = 1.0F;
     gm_801B06B0(temp_r3, x, temp_r31->start.players[0].ckind, 1,
                 temp_r31->start.players[0].color,
                 temp_r31->start.players[0].nametag, 0, gm_804D68F0);
@@ -505,7 +505,7 @@ void gm_801B69C0(StartMeleeData* arg0)
 {
     gmMainLib_GetGameRules();
     arg0->rules.match_kind = 0;
-    arg0->rules.x0_6 = true;
+    arg0->rules.timer_enabled = true;
     arg0->rules.timer_counts_up = true;
     arg0->rules.time_limit = 0;
     arg0->rules.timer_shows_hours = true;
@@ -568,14 +568,14 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
 static inline void gmMultiman_InitTimedRules(StartMeleeData* match,
                                              u32 time_limit)
 {
-    match->rules.x0_6 = true;
+    match->rules.timer_enabled = true;
     match->rules.timer_counts_up = false;
     match->rules.time_limit = time_limit;
 }
 
 static inline void gmMultiman_InitScoreRules(StartMeleeData* match)
 {
-    match->rules.x0_6 = false;
+    match->rules.timer_enabled = false;
     match->rules.timer_counts_up = false;
     match->rules.time_limit = 0;
     match->rules.x5_0 = true;

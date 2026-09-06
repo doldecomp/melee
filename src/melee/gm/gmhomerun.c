@@ -86,7 +86,7 @@ void gm_801B999C(GameModeState* scene)
                 NULL);
     vs->start.players[1].ckind = CHKIND_SANDBAG;
     vs->start.players[1].cpu_kind = 0xF;
-    vs->start.players[1].x1C = 1.0f;
+    vs->start.players[1].defense_ratio = 1.0f;
     vs->start.players[1].slot_type = Gm_PKind_Cpu;
     vs->start.players[1].stocks = 1;
     vs->start.players[1].team = 1;
@@ -105,7 +105,7 @@ void gm_801B9A3C(GameModeState* arg0)
 
     start->rules.stkind = St_Kind_Unk84;
     start->rules.match_kind = 1;
-    start->rules.x0_6 = true;
+    start->rules.timer_enabled = true;
     start->rules.x1_0 = true;
     start->rules.x4_2 = false;
     start->rules.x4_4 = false;

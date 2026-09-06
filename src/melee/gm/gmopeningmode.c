@@ -473,7 +473,7 @@ void onEnterVs(GameModeState* arg0)
     gm_SetupRulesDefaults(&md->rules);
 
     md->rules.match_kind = gm_801BF6B8();
-    md->rules.x0_6 = false;
+    md->rules.timer_enabled = false;
     md->rules.time_limit = 0;
     md->rules.x1_0 = false;
     md->rules.x1_2 = true;

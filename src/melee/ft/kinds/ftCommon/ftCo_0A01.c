@@ -5668,6 +5668,8 @@ void ftCo_800AC5A0(Fighter* fp)
                 stick_x = 127.0F * -x;
             }
         }
+        /// @bug These can be called with stick_x and stick_y being
+        /// uninitialized.
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, stick_y);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, stick_x);
     } else {
