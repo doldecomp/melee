@@ -198,8 +198,8 @@ static inline int lbSnap_GetTiledColumn(int x)
 void lbSnap_8001DA5C(const u8* src)
 {
     u8* banner;
-    int src_row_accum;
     int row;
+    int src_row_accum;
     PAD_STACK(24);
 
     row = 0;
