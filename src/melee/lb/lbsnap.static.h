@@ -19,11 +19,11 @@ ASSERT_SIZE(struct Unk80433380_48, 0x408);
 
 struct Unk80433380_0 {
     s32 x0;
-    u16 x4;
-    u16 x6;
+    u16 width;
+    u16 height;
     u8 x8;
     s32 xC;
-    u16 x10;
+    u16 stkind;
     struct it_8026C47C_arg0_t x14;
     s32 x34;
     char x38[4];
@@ -36,14 +36,15 @@ typedef union LbMcSnapMemSnapIconData {
 } LbMcSnapMemSnapIconData;
 
 struct Unk80433380 {
-    /* 0x00 */ struct Unk80433380_0* x0;
-    /* 0x04 */ char x4_string[0x40];
-    /* 0x44 */ LbMcSnapMemSnapIconData* x44_LbMcSnap_MemSnapIconData;
+    /* 0x00 */ struct Unk80433380_0* snap;
+    /* 0x04 */ char filename[64];
+    /* 0x44 */ LbMcSnapMemSnapIconData* icon_data;
     /* 0x48 */ struct Unk80433380_48* slot;
-    /* 0x4C */ int x4C_cardState[2];
-    /* 0x54 */ int x54_stateChanged[3];
+    /* 0x4C */ int card_state[2];
+    /* 0x54 */ int state_changed[3];
 }; /* size = 0x60 */
 ASSERT_SIZE(struct Unk80433380, 0x60);
+
 // snapshot save descriptor
 struct Unk803BACC8 {
     /* 0x00 */ u8 icon[0x14];

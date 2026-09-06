@@ -118,7 +118,7 @@ void gm_801B9A3C(GameModeState* arg0)
 
     start->rules.x5_0 = true;
     start->rules.x1_3 = true;
-    start->rules.x44 = gm_80181998;
+    start->rules.on_match_start = gm_80181998;
 
     start->rules.x3_3 = true;
     start->rules.x3_2 = true;

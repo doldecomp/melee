@@ -240,7 +240,7 @@ void ft_80087BEC(HSD_GObj* gobj, int arg1)
     ftCo_800A101C(fp, fp->x1A88.xC, arg1, fp->x1A88.x14);
 }
 
-s32 ft_80087C1C(void)
+s32 ft_GetFtKindMask(void)
 {
     HSD_GObj* gobj;
     s32 ftKind;

@@ -619,13 +619,13 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
             break;
         case 2:
             arg0->rules.x9 = 3;
-            arg0->rules.x44 = fn_8017C7EC;
+            arg0->rules.on_match_start = fn_8017C7EC;
             break;
         case 3:
             arg0->rules.x9 = 2;
             arg0->rules.x7 = 9;
             arg0->rules.x4_4 = 0;
-            arg0->rules.x50 = (void (*)(u8)) fn_8017C7A0;
+            arg0->rules.on_match_end = (void (*)(u8)) fn_8017C7A0;
             arg0->rules.xD = 0x30;
             break;
         }
@@ -842,7 +842,7 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
         arg0->rules.x0_3 = 3;
         arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
-        arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
+        arg0->rules.on_match_start = (void (*)(void)) fn_8017C71C;
         arg1->xC.xC = 6;
     }
     if (arg7 == 0x49) {
