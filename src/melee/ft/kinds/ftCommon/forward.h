@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 #define MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 typedef struct ftHurtboxInit ftHurtboxInit;
 typedef struct ftCollisionBox ftCollisionBox;

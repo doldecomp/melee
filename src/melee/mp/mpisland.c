@@ -1,12 +1,10 @@
 #include "mpisland.h" // IWYU pragma: keep
 
-#include "mplib.h"
-#include "types.h"
-
 #include <placeholder.h>
 
-#include "lb/lb_00B0.h"
-
+#include "mplib.h"
+#include "types.h"
+#include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>
 

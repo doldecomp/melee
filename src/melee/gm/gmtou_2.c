@@ -1,28 +1,24 @@
 #include "gmtou_2.h"
 
+#include <melee/ft/forward.h>
+#include <melee/pl/forward.h>
+
+#include <placeholder.h>
+
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gmmain_lib.h"
 #include "gmtoulib.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include "ft/forward.h"
-
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbdvd.h"
-#include "lb/types.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-
-#include "pl/forward.h"
-
-#include "sc/types.h"
-
 #include <dolphin/os.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mnmain.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>

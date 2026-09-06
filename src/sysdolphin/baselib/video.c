@@ -2,7 +2,6 @@
 
 #include "debug.h"
 #include "state.h"
-
 #include <dolphin/gx.h>
 #include <dolphin/vi.h>
 

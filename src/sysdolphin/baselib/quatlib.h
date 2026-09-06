@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_QUATLIB_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_QUATLIB_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
 

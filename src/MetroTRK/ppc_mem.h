@@ -1,7 +1,7 @@
 #ifndef _METROTRK_PPC_MEM_H
 #define _METROTRK_PPC_MEM_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 static inline u8 ppc_readbyte1(const u8* ptr)
 {

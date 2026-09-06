@@ -1,15 +1,15 @@
 #include "itgreatfoxlaser.h"
 
-#include "ft/ftlib.h"
-#include "gr/ground.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itcoll.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itzako.h"
-#include "lb/lb_00B0.h"
+#include <melee/ft/ftlib.h>
+#include <melee/gr/ground.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itcoll.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itzako.h>
+#include <melee/lb/lb_00B0.h>
 
 ItemStateTable it_803F8FD0[] = {
     { 0, itGreatfoxlaser_UnkMotion1_Anim, itGreatfoxlaser_UnkMotion1_Phys,

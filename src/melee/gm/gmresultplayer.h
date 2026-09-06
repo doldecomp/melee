@@ -1,10 +1,10 @@
 #ifndef MELEE_GM_RESULTPLAYER_H
 #define MELEE_GM_RESULTPLAYER_H
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 struct ResultsMatchInfo;
 

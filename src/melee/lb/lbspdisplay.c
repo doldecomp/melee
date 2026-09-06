@@ -1,23 +1,23 @@
 #include "lbspdisplay.h"
 
-#include "platform.h"
-#include "stdarg.h"
-#include "stddef.h"
-
-#include <placeholder.h>
-
-#include "dolphin/gx/GXCull.h"
-#include "dolphin/gx/GXGeometry.h"
-#include "dolphin/gx/GXPixel.h"
-#include "dolphin/gx/GXTev.h"
-#include "dolphin/gx/GXTexture.h"
-#include "dolphin/gx/GXTransform.h"
-#include "dolphin/gx/GXVert.h"
-#include "lb/lbdvd.h"
-#include "lb/types.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+#include <stdarg.h>
+#include <stddef.h>
+
+#include "lbdvd.h"
+#include "types.h"
+#include <dolphin/gx/GXCull.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTexture.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx/GXVert.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -32,7 +32,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/sc/types.h>
 
 HSD_LObj* lb_80011AC4(LightList** list)
 {

@@ -1,13 +1,12 @@
 #ifndef GALE01_298168
 #define GALE01_298168
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 298168 */ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir);
 /* 298634 */ bool itLGunRay_Logic35_DmgDealt(Item_GObj*);

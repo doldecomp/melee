@@ -1,7 +1,7 @@
 #ifndef GALE01_0C9CEC
 #define GALE01_0C9CEC
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0C9CEC */ bool fn_800C9CEC(Fighter_GObj* gobj);
 /* 0C9D40 */ bool fn_800C9D40(Fighter_GObj* gobj);

@@ -1,15 +1,13 @@
 #include "itcerebi.h"
 
 #include "inlines.h"
-
-#include "ef/efsync.h"
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/item.h"
-
+#include <melee/ef/efsync.h>
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/item.h>
 #include <sysdolphin/baselib/random.h>
 
 /* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);

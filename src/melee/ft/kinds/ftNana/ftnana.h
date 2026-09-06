@@ -1,9 +1,9 @@
 #ifndef GALE01_122EDC
 #define GALE01_122EDC
 
-#include "ft/types.h"
+#include <melee/ft/kinds/ftPopo/forward.h>
 
-#include "ftPopo/forward.h"
+#include <melee/ft/types.h>
 
 /// @todo Repeat for other fighters and in ftdata
 #define FTNANA_COSTUME_COUNT 4

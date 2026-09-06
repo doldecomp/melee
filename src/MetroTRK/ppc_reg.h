@@ -1,7 +1,7 @@
 #ifndef _METROTRK_PPC_REG_H
 #define _METROTRK_PPC_REG_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /*
  *    Default register block (all registers typically requested by debugger)

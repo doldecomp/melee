@@ -1,5 +1,8 @@
 #include "shadow.h"
 
+#include <math.h>
+#include <string.h>
+
 #include "class.h"
 #include "cobj.h"
 #include "debug.h"
@@ -15,9 +18,6 @@
 #include "tev.h"
 #include "tobj.h"
 #include "util.h"
-
-#include <math.h>
-#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 

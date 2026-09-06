@@ -862,10 +862,6 @@ add_library(melee STATIC ${SOURCES})
 target_include_directories(melee PRIVATE
     $ENV{AURORA_SRC}/include
     src
-    src/Runtime
-    src/melee
-    src/melee/ft/kinds
-    src/sysdolphin
 )
 
 install(TARGETS melee LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")

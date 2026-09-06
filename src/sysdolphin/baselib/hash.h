@@ -1,7 +1,7 @@
 #ifndef _hash_h_
 #define _hash_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

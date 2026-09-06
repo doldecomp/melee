@@ -1,11 +1,11 @@
 #ifndef MELEE_MN_NAME_NEW_H
 #define MELEE_MN_NAME_NEW_H
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <placeholder.h>
 
-#include "mn/types.h"
-
-#include <sysdolphin/baselib/forward.h>
+#include <melee/mn/types.h>
 
 /* 23B0F8 */ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1);
 /* 23B224 */ void mnNameNew_8023B224(u8);

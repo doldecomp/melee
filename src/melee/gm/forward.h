@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_FORWARD_H
 #define MELEE_GM_FORWARD_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /// @todo Put in proper places. ::GM_MAX_PLAYERS is ::Gm_Player_NumMax but
 /// needs to be used for array size declarations.

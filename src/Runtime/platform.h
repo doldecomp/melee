@@ -1,8 +1,9 @@
 #ifndef RUNTIME_PLATFORM_H
 #define RUNTIME_PLATFORM_H
 
-#include <stdbool.h>       // IWYU pragma: export
-#include <stddef.h>        // IWYU pragma: export
+#include <stdbool.h> // IWYU pragma: export
+#include <stddef.h>  // IWYU pragma: export
+
 #include <dolphin/types.h> // IWYU pragma: export
 
 /// @typedef bool

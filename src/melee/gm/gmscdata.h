@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_SCDATA_H
 #define MELEE_GM_SCDATA_H
 
-#include "melee/gm/types.h"
+#include <melee/gm/types.h>
 
 /* 1A50A0 */ GameScene* gm_GetAllGameScenes(void);
 /* 1A50AC */ GameMode* gm_GetAllGameModes(void);

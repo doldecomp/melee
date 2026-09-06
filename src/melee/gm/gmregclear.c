@@ -1,15 +1,25 @@
 #include "gmregclear.h"
 
-#include "platform.h"
-
-#include "dolphin/pad.h"
-
-#include "gm/forward.h"
-
-#include "mn/inlines.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "forward.h"
+#include "gm_unsplit.h"
+#include "types.h"
+#include <dolphin/pad.h>
+#include <melee/cm/camera.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grpushon.h>
+#include <melee/if/ifcoget.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -22,19 +32,6 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/cm/camera.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grpushon.h>
-#include <melee/if/ifcoget.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x20];

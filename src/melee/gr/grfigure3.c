@@ -1,16 +1,14 @@
 #include "grfigure3.h"
 
+#include <Runtime/platform.h>
+
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "lb/lb_00F9.h"
-
 #include <dolphin/mtx.h>
+#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

@@ -1,8 +1,7 @@
 #include "quatlib.h"
 
-#include <placeholder.h>
-
 #include <math.h>
+#include <placeholder.h>
 
 s32 MatToQuat(Mtx m, Quaternion* q)
 {

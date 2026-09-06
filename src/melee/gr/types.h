@@ -1,23 +1,23 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
-#include <placeholder.h>
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "dolphin/gx/GXStruct.h"
-
-#include "mp/forward.h"
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
+#include <melee/mp/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/spline.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/spline.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
@@ -1824,16 +1824,7 @@ struct Ground {
     HSD_GObj* x18; // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    Vec3 self_vel;
-    Vec3 cur_pos;
-    int x58;
-    int x5C;
-    int x60;
-    int x64;
-    int x68;
-    GXColor x6C;
-    int x70;
-    char pad_74[0xC0 - 0x74];
+    ColorOverlay color_overlay; // 0x40
     f32 xC0;
 
     /**

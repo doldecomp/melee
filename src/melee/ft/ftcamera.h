@@ -1,7 +1,7 @@
 #ifndef GALE01_076018
 #define GALE01_076018
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 076018 */ void ftCamera_80076018(UnkFloat6_Camera* in,

@@ -2,7 +2,7 @@
 #ifndef MELEE_GR_GRFZEROCAR_H
 #define MELEE_GR_GRFZEROCAR_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

@@ -1,9 +1,9 @@
 #ifndef GALE01_11BAD8
 #define GALE01_11BAD8
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 11BA20 */ bool ftPe_Float_CheckContinueInput(Fighter* fp);

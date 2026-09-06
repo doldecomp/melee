@@ -2,11 +2,11 @@
 
 #include <placeholder.h>
 
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
 
 /* 29AA1C */ static void it_8029AA1C(HSD_GObj*);
 /* 29AA6C */ static bool itFflowerflame_UnkMotion0_Anim(Item_GObj*);

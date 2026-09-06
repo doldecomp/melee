@@ -1,10 +1,10 @@
 #ifndef GALE01_15BD20
 #define GALE01_15BD20
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "ftMasterHand/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftMasterHand/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

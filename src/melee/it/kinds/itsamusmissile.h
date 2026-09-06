@@ -1,11 +1,11 @@
 #ifndef GALE01_2B62D0
 #define GALE01_2B62D0
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 struct _m2c_stack_it_802B64FC {
     /* 0x00 */ char pad_0[0x10];

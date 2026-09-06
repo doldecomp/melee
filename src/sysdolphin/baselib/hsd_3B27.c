@@ -1,9 +1,9 @@
 #include "hsd_3B27.h"
 
-#include "hsd_3A94.h"
-
 #include <stddef.h>
 #include <string.h>
+
+#include "hsd_3A94.h"
 
 typedef struct {
     s32 type;

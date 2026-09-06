@@ -1,10 +1,10 @@
 #ifndef GALE01_2BAEEC
 #define GALE01_2BAEEC
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/itCharItems.h"
-#include "it/kinds/types.h"
+#include <melee/it/itCharItems.h>
+#include <melee/it/kinds/types.h>
 
 /* 2BAEEC */ void it_802BAEEC(Item_GObj*);
 /* 2BAF0C */ void it_802BAF0C(Item_GObj*);

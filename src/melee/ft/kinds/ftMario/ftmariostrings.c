@@ -1,6 +1,6 @@
 #include "ftmariostrings.h"
 
-#include "ft/types.h"
+#include <melee/ft/types.h>
 
 /* 4599F0 */ UnkCostumeStruct ftMr_CostumeList[5];
 

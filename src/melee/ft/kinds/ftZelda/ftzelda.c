@@ -1,18 +1,16 @@
 #include "ftzelda.h"
 
+#include "forward.h"
 #include "ftzeldaspecialhi.h"
 #include "ftzeldaspeciallw.h"
 #include "ftzeldaspecialn.h"
 #include "ftzeldaspecials.h"
-
-#include "forward.h"
-
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftZelda/types.h"
-#include "it/it_26B1.h"
+#include "types.h"
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 45A168 */ UnkCostumeStruct ftZd_CostumeList[5];
 

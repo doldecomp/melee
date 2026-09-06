@@ -1,9 +1,9 @@
 #ifndef GALE01_1BA8FC
 #define GALE01_1BA8FC
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
-#include "gm/types.h"
+#include <melee/gm/types.h>
 
 /* 1BA8FC */ void gm_801BA8FC(void);
 /* 1BBA60 */ void gm_Mode_Event_OnInit(void);

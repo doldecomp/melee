@@ -1,9 +1,9 @@
 #ifndef GALE01_2841B4
 #define GALE01_2841B4
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2841B4 */ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* arg1, s32 arg2);
 /* 28428C */ void it_8028428C(Item_GObj* gobj);

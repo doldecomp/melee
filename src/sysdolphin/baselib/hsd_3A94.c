@@ -7,6 +7,7 @@
 #include <stddef.h>
 #endif
 #include <string.h>
+
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 

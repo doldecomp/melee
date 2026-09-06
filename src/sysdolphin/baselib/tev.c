@@ -1,8 +1,8 @@
 #include "tev.h"
 
-#include "debug.h"
-
 #include <string.h>
+
+#include "debug.h"
 #include <dolphin/gx.h>
 
 static struct {

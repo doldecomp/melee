@@ -1,22 +1,20 @@
 #include "ftdonkeyheavylanding.h"
 
+#include <Runtime/platform.h>
+
+#include <melee/ft/forward.h>
+
 #include "ftdonkeyheavyturn.h"
 #include "ftdonkeyheavywait0.h"
-
-#include <platform.h>
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Damage.h"
-#include "ftDonkey/types.h"
-#include "it/item.h"
-
+#include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Damage.h>
+#include <melee/ft/types.h>
+#include <melee/it/item.h>
 
 void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)
 {

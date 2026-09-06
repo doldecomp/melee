@@ -1,18 +1,15 @@
 #include "lobj.h"
 
+#include <placeholder.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "cobj.h"
+#include "forward.h"
 #include "list.h"
 #include "object.h"
 #include "wobj.h"
-
-#include <placeholder.h>
-
-#include "dolphin/gx/GXEnum.h"
-
-#include "forward.h"
-
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

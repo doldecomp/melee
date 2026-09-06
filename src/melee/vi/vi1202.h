@@ -1,9 +1,9 @@
 #ifndef MELEE_VI_VI1202_H
 #define MELEE_VI_VI1202_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);

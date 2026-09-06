@@ -1,6 +1,7 @@
 #include "archive.h"
 
 #include <string.h>
+
 #include <dolphin/os.h>
 
 static inline void Locate(HSD_Archive* archive)

@@ -1,11 +1,10 @@
 #ifndef GALE01_2C8B28
 #define GALE01_2C8B28
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2C8B28 */ HSD_GObj* it_802C8B28(Item_GObj*, Vec3*, u32, float);
 /* 2C8C34 */ void it_802C8C34(Item_GObj*);

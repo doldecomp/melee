@@ -1,7 +1,7 @@
 #ifndef MELEE_MN_VIBRATION_H
 #define MELEE_MN_VIBRATION_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 

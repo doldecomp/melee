@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_THROWN_H
 #define MELEE_FTCO_THROWN_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0DE3FC */ void ftCo_800DE3FC(Fighter_GObj* gobj, FtMotionId msid,
                                 float anim_speed);

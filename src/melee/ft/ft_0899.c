@@ -1,15 +1,15 @@
 #include "ft_0899.h"
 
-#include "db/dbsound.h"
-#include "ft/fighter.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_020A.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-
 #include <math.h>
+
+#include "fighter.h"
+#include "ftparts.h"
+#include "inlines.h"
+#include <melee/db/dbsound.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_020A.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

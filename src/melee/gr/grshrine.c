@@ -1,18 +1,17 @@
 #include "grshrine.h"
 
+#include <Runtime/platform.h>
+
+#include <math.h>
+
 #include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-
-#include <math.h>
 #include <dolphin/mtx.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

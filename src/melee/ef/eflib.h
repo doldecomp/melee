@@ -1,10 +1,11 @@
 #ifndef MELEE_EF_EFLIB_H
 #define MELEE_EF_EFLIB_H
 
-#include "ef/forward.h"
+#include <melee/ef/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <stdarg.h>
+
 #include <dolphin/mtx.h>
 
 typedef struct EF_ParamEntry {

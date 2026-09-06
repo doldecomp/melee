@@ -1,7 +1,7 @@
 #ifndef GALE01_157080
 #define GALE01_157080
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 157080 */ void fn_80157080(Fighter_GObj* gobj);

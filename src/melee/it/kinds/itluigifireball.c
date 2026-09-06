@@ -1,18 +1,17 @@
 #include "itluigifireball.h"
 
-#include <platform.h>
-
-#include "db/db.h"
-#include "ef/efasync.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "it/itmaplib.h"
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/it/itmaplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/mtx.h>
 

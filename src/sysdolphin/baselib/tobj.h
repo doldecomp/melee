@@ -1,7 +1,7 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h> // IWYU pragma: export
 

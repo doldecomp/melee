@@ -1,9 +1,9 @@
 #ifndef GALE01_2C9D40
 #define GALE01_2C9D40
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2C9D40 */ void it_802C9D40(Item_GObj*);
 /* 2C9DFC */ void it_802C9DFC(Item_GObj*);

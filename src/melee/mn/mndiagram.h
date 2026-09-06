@@ -1,9 +1,9 @@
 #ifndef GALE01_23EA2C
 #define GALE01_23EA2C
 
-#include "mn/types.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/mn/types.h>
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);

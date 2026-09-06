@@ -1,8 +1,9 @@
 #include "lbmemory.h"
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <string.h>
+
 #include <dolphin/ar.h>
 #include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/debug.h>

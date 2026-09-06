@@ -1,9 +1,9 @@
 #ifndef MELEE_MN_MAINRULE_H
 #define MELEE_MN_MAINRULE_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 struct mn_802307F8_t {
     /* 0x000 */ u8 x0;

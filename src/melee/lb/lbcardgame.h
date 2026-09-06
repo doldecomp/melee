@@ -1,7 +1,7 @@
 #ifndef GALE01_019880
 #define GALE01_019880
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 01C600 */ void lb_8001C600(void);
 /* 01C87C */ u32 lb_8001C87C(void);

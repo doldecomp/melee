@@ -1,7 +1,7 @@
 #ifndef GALE01_0DF0D0
 #define GALE01_0DF0D0
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0DEE84 */ void ftCo_800DEE84(Fighter_GObj* gobj, u32, f32, f32);
 /* 0DEEA8 */ void ftCo_800DEEA8(Fighter_GObj* gobj);

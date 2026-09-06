@@ -1,15 +1,13 @@
 #ifndef GALE01_2B7150
 #define GALE01_2B7150
 
-#include "ft/forward.h"
-#include "it/forward.h"
-
-#include "it/itCharItems.h"
-#include "it/kinds/types.h"
-
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/itCharItems.h>
+#include <melee/it/kinds/types.h>
 
 typedef struct itSamusGrapple_Hitbox {
     struct spawn_hitbox_0 create_hitbox_0;

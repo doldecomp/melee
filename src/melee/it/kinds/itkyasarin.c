@@ -1,23 +1,20 @@
 #include "itkyasarin.h"
 
-#include "placeholder.h"
-
-#include "gr/grinishie2.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
-#include "it/itzako.h"
-
-#include "it/kinds/forward.h"
-
-#include "it/kinds/itkyasarinegg.h"
-
 #include <math.h>
+#include <placeholder.h>
+
+#include "forward.h"
+#include "itkyasarinegg.h"
+#include <melee/gr/grinishie2.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_3F14.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/itmaplib.h>
+#include <melee/it/itzako.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

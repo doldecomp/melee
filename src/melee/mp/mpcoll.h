@@ -1,11 +1,11 @@
 #ifndef GALE01_041C78
 #define GALE01_041C78
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "mp/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
+#include <melee/mp/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

@@ -1,8 +1,8 @@
 #ifndef MELEE_GM_INLINES_H
 #define MELEE_GM_INLINES_H
 
-#include "gm/gmregtyfall.h"
-#include "ty/toy.h"
+#include <melee/gm/gmregtyfall.h>
+#include <melee/ty/toy.h>
 
 static inline s32 gmClampResultStat(s32 value)
 {

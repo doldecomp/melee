@@ -1,7 +1,7 @@
 #ifndef MELEE_FTCO_SQUATWAIT_H
 #define MELEE_FTCO_SQUATWAIT_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0D627C */ bool ftCo_SquatWait_CheckInput(Fighter_GObj* gobj);
 /* 0D638C */ void ftCo_800D638C(Fighter_GObj* gobj);

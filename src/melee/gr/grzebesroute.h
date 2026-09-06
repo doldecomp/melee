@@ -1,8 +1,8 @@
 #ifndef GALE01_20B160
 #define GALE01_20B160
 
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 
 #include <dolphin/mtx.h>
 

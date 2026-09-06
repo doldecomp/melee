@@ -1,6 +1,9 @@
+#ifndef MELEE_LB_LBCARDNEW_STATIC_H
+#define MELEE_LB_LBCARDNEW_STATIC_H
+
+#include <Runtime/platform.h>
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <dolphin/card.h>
 #include <melee/lb/types.h>
@@ -50,3 +53,5 @@ struct lb_80432A68_t {
 ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
 
 /* 432A68 */ static struct lb_80432A68_t lb_80432A68;
+
+#endif

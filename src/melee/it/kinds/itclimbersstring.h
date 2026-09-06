@@ -1,10 +1,10 @@
 #ifndef GALE01_2C248C
 #define GALE01_2C248C
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/itCharItems.h"
-#include "it/kinds/types.h"
+#include <melee/it/itCharItems.h>
+#include <melee/it/kinds/types.h>
 
 /* 2C2DB0 */ void it_802C2DB0(ItemLink*, Vec3*, itClimbersStringAttributes*,
                               f32);

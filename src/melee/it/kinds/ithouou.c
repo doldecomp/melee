@@ -1,19 +1,19 @@
 #include "ithouou.h"
 
-#include "inlines.h"
+#include <Runtime/platform.h>
 
 #include <placeholder.h>
-#include <platform.h>
 
-#include "gr/stage.h"
-#include "it/inlines.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
-#include "it/it_279C.h"
-#include "it/itCommonItems.h"
-#include "it/item.h"
-#include "it/itgroundcoll.h"
-#include "mp/mplib.h"
+#include "inlines.h"
+#include <melee/gr/stage.h>
+#include <melee/it/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/it_279C.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/item.h>
+#include <melee/it/itgroundcoll.h>
+#include <melee/mp/mplib.h>
 
 ItemStateTable it_803F7F58[] = {
     { 0, it_802D2C54, it_802D2C78, it_802D2D04 },

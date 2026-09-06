@@ -1,13 +1,12 @@
 #ifndef MELEE_GM_RESULT_H
 #define MELEE_GM_RESULT_H
 
-#include <placeholder.h>
-
-#include "dolphin/gx/GXStruct.h"
-
-#include "gm/forward.h"
+#include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
+
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 struct ResultsPlayerData;

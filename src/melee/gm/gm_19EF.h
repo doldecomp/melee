@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_GM_19EF_H
 #define MELEE_GM_GM_19EF_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 19F9C4 */ void fn_8019F9C4(u32);
 /* 1A0A10 */ void gm_Scene_GOver_OnEnter(void*);

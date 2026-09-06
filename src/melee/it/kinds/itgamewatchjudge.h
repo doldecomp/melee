@@ -1,9 +1,9 @@
 #ifndef GALE01_2C7774
 #define GALE01_2C7774
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2C7A54 */ void itGameWatchJudge_Logic77_Destroyed(Item_GObj*);
 /* 2C7774 */ HSD_GObj* it_802C7774(float facing_dir, HSD_GObj* owner_gobj,

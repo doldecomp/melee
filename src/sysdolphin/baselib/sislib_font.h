@@ -1,7 +1,7 @@
 #ifndef GALE01_40CD40
 #define GALE01_40CD40
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 typedef struct TextGlyphTexture {
     /*0x00*/ u8 data[512];

@@ -1,20 +1,17 @@
 #include "grmaterial.h"
 
-#include "gr/types.h"
-#include "it/it_2725.h"
-#include "it/item.h"
-#include "it/ithitbox.h"
-#include "it/kinds/ityaku.h"
-#include "it/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lb_00B0.h"
-#include "lb/lb_013B.h"
-
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include "types.h"
 #include <dolphin/os.h>
+#include <melee/it/it_2725.h>
+#include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
+#include <melee/it/kinds/ityaku.h>
+#include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_013B.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -32,7 +29,7 @@
 
 static inline ColorOverlay* grMaterial_GetOverlay(Ground* gp)
 {
-    return (ColorOverlay*) ((u8*) gp + 0x40);
+    return &gp->color_overlay;
 }
 
 struct grMaterial_MObjInfo {
@@ -335,7 +332,7 @@ static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj)
             cnst.comp = reg1_lt4 = 1;
             cnst.ctype = temp = 0;
             cnst.reg = (u8) reg1;
-            cnst.val = &gp->x6C;
+            cnst.val = &gp->color_overlay.x2C_hex;
             grMaterial_SetTExpReg(&cnst);
             if (reg1 < 4) {
                 !reg1;
@@ -355,9 +352,9 @@ static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj)
             cnst.comp = temp = 1;
             cnst.ctype = reg1_lt4_for_kcsel = 0;
             cnst.reg = (u8) reg2;
-            color.r = gp->x6C.a;
-            color.g = gp->x6C.a;
-            color.b = gp->x6C.a;
+            color.r = gp->color_overlay.x2C_hex.a;
+            color.g = gp->color_overlay.x2C_hex.a;
+            color.b = gp->color_overlay.x2C_hex.a;
             cnst.val = &color;
             grMaterial_SetTExpReg(&cnst);
             tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg1);

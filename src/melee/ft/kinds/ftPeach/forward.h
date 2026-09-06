@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTPEACH_FORWARD_H
 #define MELEE_FT_CHARA_FTPEACH_FORWARD_H
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
+#include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h>
 
 static MotionFlags const ftPe_MF_Base = Ft_MF_SkipItemVis | Ft_MF_FreezeState;
 

@@ -5,7 +5,7 @@
  * cannot be defined alongside them.
  */
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 4D2E70 */ u8 hsd_804D2E70[2084];
 /// @todo Declared as `__jmp_buf` (0xF8 bytes) by users, but the object is

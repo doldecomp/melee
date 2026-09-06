@@ -1,9 +1,9 @@
 #ifndef GALE01_08B980
 #define GALE01_08B980
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 08B980 */ bool ftCo_AttackHi3_CheckInput(Fighter_GObj* gobj);
 /* 08BA98 */ void ftCo_AttackHi3_Anim(Fighter_GObj* gobj);

@@ -1,8 +1,8 @@
 #ifndef GALE01_1FDFF8
 #define GALE01_1FDFF8
 
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

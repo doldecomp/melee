@@ -1,10 +1,10 @@
 #ifndef MELEE_GM_16F1_H
 #define MELEE_GM_16F1_H
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 typedef enum Gm_DecType {
     Gm_DecType_Flag,  ///< true/false boolean player bonus

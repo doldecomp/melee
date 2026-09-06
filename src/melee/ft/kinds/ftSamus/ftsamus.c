@@ -1,30 +1,26 @@
 #include "ftsamus.h"
 
+#include <melee/ft/kinds/ftCommon/forward.h>
+
+#include "forward.h"
 #include "ftsamusspecialhi.h"
 #include "ftsamusspeciallw0.h"
 #include "ftsamusspeciallw1.h"
 #include "ftsamusspecialn.h"
 #include "ftsamusspecials.h"
 #include "types.h"
-
-#include "forward.h"
-
-#include "ft/ft_081B.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_AirCatch.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "it/it_26B1.h"
-#include "lb/lb_00B0.h"
-
 #include <dolphin/mtx.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcolanim.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/ftCo_AirCatch.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/object.h>

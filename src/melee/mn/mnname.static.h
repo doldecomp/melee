@@ -1,13 +1,11 @@
 #ifndef MELEE_MN_STATIC_NAME_H
 #define MELEE_MN_STATIC_NAME_H
 
-#include "mnname.h" // IWYU pragma: export
-
-#include "mn/forward.h"
-
-#include "mn/types.h"
+#include <melee/mn/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/mn/mnname.h> // IWYU pragma: export
+#include <melee/mn/types.h>
 
 /// Loaded section pointers for one of the name-entry menu archive models
 /// (joint, animjoint, matanim_joint, shapeanim_joint).

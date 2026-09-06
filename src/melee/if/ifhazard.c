@@ -1,11 +1,10 @@
 #include "ifhazard.h"
 
-#include "gm/gm_unsplit.h"
-#include "sc/types.h"
-
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

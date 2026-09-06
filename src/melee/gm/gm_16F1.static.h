@@ -1,4 +1,7 @@
-#include <platform.h>
+#ifndef MELEE_GM_GM_16F1_STATIC_H
+#define MELEE_GM_GM_16F1_STATIC_H
+
+#include <Runtime/platform.h>
 
 static struct {
     u8 x0;
@@ -355,3 +358,5 @@ static const struct lbl_803B7A60_t lbl_803B7A60 = {
     { 0x0FFFFFFF, 0x0FFFFFFF, 0x0FFFFFFF, 0x0FFFFFFF },
     { 0, 0, 0, 0 },
 };
+
+#endif

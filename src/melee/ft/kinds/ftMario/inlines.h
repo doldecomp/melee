@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_INLINES_H
 #define MELEE_FT_CHARA_FTMARIO_INLINES_H
 
-#include "ft/types.h"
-#include "ftMario/types.h"
+#include <melee/ft/kinds/ftMario/types.h>
+#include <melee/ft/types.h>
 
 static inline ftMario_DatAttrs* GetMarioAttr(Fighter* fp)
 {

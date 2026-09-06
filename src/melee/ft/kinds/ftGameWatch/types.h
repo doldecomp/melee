@@ -1,15 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTGAMEWATCH_TYPES_H
 #define MELEE_FT_CHARA_FTGAMEWATCH_TYPES_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ftGameWatch/forward.h" // IWYU pragma: export
-
-#include "lb/types.h"
-
+#include <melee/ft/kinds/ftGameWatch/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
+#include <melee/lb/types.h>
 
 struct ftGameWatch_FighterVars {
     /* 0x222C */ s32 x222C_judgeVar1;

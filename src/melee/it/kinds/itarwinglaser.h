@@ -1,7 +1,9 @@
+#ifndef MELEE_IT_KINDS_ITARWINGLASER_H
+#define MELEE_IT_KINDS_ITARWINGLASER_H
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 extern ItemStateTable it_803F8DE8[];
 s32 it_802E70BC(Item_GObj*);
@@ -14,3 +16,5 @@ bool it_802E8418(Item_GObj*);
 bool it_802E8420(Item_GObj*);
 bool it_802E85F4(Item_GObj*);
 bool it_802E8784(Item_GObj*);
+
+#endif

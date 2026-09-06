@@ -2,10 +2,10 @@
 #ifndef _grtpurin_h_
 #define _grtpurin_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
-#include "lb/forward.h"
+#include <melee/gr/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>

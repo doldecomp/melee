@@ -1,9 +1,9 @@
 #ifndef GALE01_1D5238
 #define GALE01_1D5238
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "gr/forward.h"
+#include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 1D5238 */ void grKongo_801D5238(bool);

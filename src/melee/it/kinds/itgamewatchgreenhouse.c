@@ -1,13 +1,9 @@
 #include "itgamewatchgreenhouse.h"
 
+#include <melee/it/forward.h>
+
+#include "forward.h"
 #include "inlines.h"
-
-#include "it/forward.h"
-
-#include "it/it_2725.h"
-
-#include "it/kinds/forward.h"
-
 #include <melee/ft/kinds/ftGameWatch/ftgamewatchattack11.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

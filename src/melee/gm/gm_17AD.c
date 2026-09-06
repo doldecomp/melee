@@ -1,11 +1,10 @@
 #include "gm_17AD.h"
 
-#include "gm/inlines.h"
-
 #include <melee/pl/forward.h>
 
-#include <melee/gm/gmresult.h>
-#include <melee/gm/types.h>
+#include "gmresult.h"
+#include "inlines.h"
+#include "types.h"
 #include <melee/lb/lblanguage.h>
 
 /// @todo Figure out how to force the other functions not to inline this

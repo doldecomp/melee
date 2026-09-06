@@ -1,7 +1,10 @@
 #include "ftCo_Guard.h"
 
+#include <math.h>
+
 #include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
+#include "ftCo_Attack100.h"
 #include "ftCo_AttackHi3.h"
 #include "ftCo_AttackHi4.h"
 #include "ftCo_AttackLw3.h"
@@ -10,33 +13,29 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
 #include "ftCo_ItemThrow.h"
+#include "ftCo_Jump.h"
 #include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
 #include "ftCo_SpecialS.h"
-
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_084E.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftparts.h"
-#include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/types.h"
-#include "ftYoshi/ftyoshiguard.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00CE.h"
-#include "pl/player.h"
-#include "pl/plbonuslib.h"
-
-#include <math.h>
+#include "types.h"
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_084E.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftYoshi/ftyoshiguard.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00CE.h>
+#include <melee/pl/player.h>
+#include <melee/pl/plbonuslib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

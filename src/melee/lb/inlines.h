@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_INLINES_H
 #define MELEE_LB_INLINES_H
 
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 
 /// @todo Is a macro the best way?
 #define SKIP_CMD(cmd, n)                                                      \

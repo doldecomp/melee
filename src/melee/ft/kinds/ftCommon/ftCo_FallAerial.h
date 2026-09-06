@@ -1,7 +1,7 @@
 #ifndef GALE01_0CCDA8
 #define GALE01_0CCDA8
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0CCDA8 */ void ftCo_FallAerial_Enter(Fighter_GObj* gobj);
 /* 0CCDFC */ void ftCo_FallAerial_Anim(Fighter_GObj* gobj);

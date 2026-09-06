@@ -1,9 +1,9 @@
 #ifndef GALE01_2D6FD0
 #define GALE01_2D6FD0
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2D6FD0 */ void itFushigibana_Logic29_Spawned(Item_GObj*);
 /* 2D705C */ void it_802D705C(Item_GObj*);

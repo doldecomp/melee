@@ -1,5 +1,7 @@
 #include "initialize.h"
 
+#include <stdarg.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -17,8 +19,6 @@
 #include "synth.h"
 #include "tev.h"
 #include "video.h"
-
-#include <stdarg.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>

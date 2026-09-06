@@ -1,25 +1,22 @@
 #include "ftCo_ItemScrew.h"
 
-#include "platform.h"
-#include "stdbool.h"
+#include <Runtime/platform.h>
 
-#include "ft/fighter.h"
+#include <melee/ft/forward.h>
 
-#include "ft/forward.h"
+#include <stdbool.h>
 
-#include "ft/ft_081B.h"
-#include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallAerial.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-
-#include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
+#include "forward.h"
+#include "ftCo_Fall.h"
+#include "ftCo_FallAerial.h"
+#include "ftCo_FallSpecial.h"
+#include "ftCo_Jump.h"
+#include "ftCo_JumpAerial.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
 
 void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
 {

@@ -1,9 +1,9 @@
 #ifndef MELEE_GM_186E_H
 #define MELEE_GM_186E_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 186EFC */ void fn_80186EFC(HSD_GObj*);
 /* 186F6C */ void fn_80186F6C(HSD_GObj*);

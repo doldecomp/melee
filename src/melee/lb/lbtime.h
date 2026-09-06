@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBTIME_H
 #define MELEE_LB_LBTIME_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/os.h>
 

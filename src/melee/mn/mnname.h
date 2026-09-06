@@ -1,11 +1,11 @@
 #ifndef GALE01_23749C
 #define GALE01_23749C
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
 
+#include <placeholder.h>
 #include <stdbool.h>
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

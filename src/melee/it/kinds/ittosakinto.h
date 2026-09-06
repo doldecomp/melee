@@ -1,9 +1,9 @@
 #ifndef GALE01_2C8F4C
 #define GALE01_2C8F4C
 
-#include "it/forward.h"
+#include <melee/it/forward.h>
 
-#include "it/kinds/types.h"
+#include <melee/it/kinds/types.h>
 
 /* 2C8F4C */ void it_802C8F4C(Item_GObj*);
 /* 2C8FC4 */ void it_802C8FC4(Item_GObj*, Item_GObj*);

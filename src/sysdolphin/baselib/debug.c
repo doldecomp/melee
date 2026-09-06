@@ -1,6 +1,7 @@
 #include "debug.h"
 
 #include <stdio.h>
+
 #include <dolphin/os.h>
 
 struct DebugContext {

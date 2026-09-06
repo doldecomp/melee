@@ -1,7 +1,7 @@
 #ifndef GALE01_0892D4
 #define GALE01_0892D4
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 0892D4 */ void ft_800892D4(Fighter*);
 /* 089460 */ void ft_80089460(Fighter*);

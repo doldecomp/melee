@@ -1,12 +1,10 @@
+#include "ifall.h"
 #include "ifcoget.h"
-
-#include "gm/gm_unsplit.h"
-#include "if/ifall.h"
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "lb/lb_00B0.h"
-
+#include "textdraw.h"
+#include "textlib.h"
 #include <dolphin/mtx.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>

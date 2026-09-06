@@ -1,8 +1,8 @@
 #ifndef __MELEE_GM_GM_1A45_H
 #define __MELEE_GM_GM_1A45_H
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/gm/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 479D30 */ static struct {
     HSD_GObjLibInitDataType initdata;

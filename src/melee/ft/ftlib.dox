@@ -1,15 +1,14 @@
 #ifndef _ftlib_h_
 #define _ftlib_h_
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/types.h"
-
-#include <baselib/forward.h>
-
-#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
+#include <dolphin/mtx.h>
 
 s32 ftLib_800860C4(void);
 bool ftLib_800860E8(void);

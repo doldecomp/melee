@@ -1,7 +1,7 @@
 #ifndef MELEE_VI_0401_H
 #define MELEE_VI_0401_H
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 31D020 */ void vi0401_8031D020(int, int);
 /* 31D030 */ void un_8031D030(CharacterKind, int);

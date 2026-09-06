@@ -1,21 +1,17 @@
 #include "gm_1BFA.h"
 
+#include <melee/lb/forward.h>
+
+#include "forward.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmvsmelee.h"
 #include "types.h"
-
-#include "gm/forward.h"
-
-#include "if/if_2FD9.h"
-
-#include "lb/forward.h"
-
-#include "lb/inlines.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbtime.h"
-#include "ty/toy.h"
-
+#include <melee/if/if_2FD9.h>
+#include <melee/lb/inlines.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbtime.h>
+#include <melee/ty/toy.h>
 #include <sysdolphin/baselib/memory.h>
 
 enum {

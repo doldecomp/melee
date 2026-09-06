@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_STAMINA_H
 #define MELEE_GM_STAMINA_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/gm/forward.h>
 

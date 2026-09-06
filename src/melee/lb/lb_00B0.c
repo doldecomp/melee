@@ -1,8 +1,7 @@
-#include "lb/lb_00B0.h"
-
-#include "sc/types.h" // IWYU pragma: keep
+#include "lb_00B0.h"
 
 #include <dolphin/mtx.h>
+#include <melee/sc/types.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/jobj.h>

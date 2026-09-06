@@ -1,7 +1,7 @@
 #ifndef GALE01_122904
 #define GALE01_122904
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 122904 */ void ftPp_SpecialLw_Enter(Fighter_GObj* gobj);
 /* 122988 */ void ftPp_SpecialAirLw_Enter(Fighter_GObj* gobj);

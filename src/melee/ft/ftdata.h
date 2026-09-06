@@ -1,13 +1,12 @@
 #ifndef GALE01_085560
 #define GALE01_085560
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
-#include "ft/forward.h"
-
-#include "ft/types.h"
-
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/ft/types.h>
 
 /* 08521C */ void ft_8008521C(Fighter_GObj* gobj);
 /* 0852B0 */ void ft_800852B0(void);

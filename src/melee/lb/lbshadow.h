@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_SHADOW_H
 #define MELEE_LB_SHADOW_H
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>

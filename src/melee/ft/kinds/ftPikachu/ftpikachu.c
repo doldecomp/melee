@@ -1,22 +1,19 @@
 #include "ftpikachu.h"
 
+#include <Runtime/platform.h>
+
+#include "forward.h"
 #include "ftpikachuspecialhi.h"
 #include "ftpikachuspeciallw.h"
 #include "ftpikachuspecialn.h"
 #include "ftpikachuspecials.h"
 #include "types.h"
-
-#include <platform.h>
-
-#include "forward.h"
-
-#include "ft/ftcamera.h"
-#include "ft/ftparts.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "it/it_26B1.h"
-
 #include <dolphin/mtx.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/it/it_26B1.h>
 
 /* 459F28 */ UnkCostumeStruct ftPk_CostumeList[4];
 

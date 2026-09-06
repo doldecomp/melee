@@ -1,11 +1,10 @@
 #ifndef GALE01_2896CC
 #define GALE01_2896CC
 
-#include "it/forward.h"
-
-#include "it/kinds/types.h"
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/it/kinds/types.h>
 
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 289784 */ void itKusudama_Logic4_Spawned(Item_GObj*);

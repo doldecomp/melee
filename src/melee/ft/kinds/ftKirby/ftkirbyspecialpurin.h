@@ -1,7 +1,7 @@
 #ifndef GALE01_100DE0
 #define GALE01_100DE0
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 100F94 */ void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj);
 /* 1010D4 */ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj, bool unk,

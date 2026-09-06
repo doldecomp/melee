@@ -1,8 +1,17 @@
-#include "gmregclear.h"
-#include "platform.h"
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmregclear.h"
+#include <melee/gr/ground.h>
+#include <melee/if/iftime.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -13,15 +22,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gr/ground.h>
-#include <melee/if/iftime.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 
 struct lbl_80472E48_t {
     /* 0x00 */ u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;

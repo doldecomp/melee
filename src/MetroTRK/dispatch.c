@@ -1,6 +1,6 @@
 #include "dispatch.h"
 
-#include "MetroTRK/msghndlr.h"
+#include "msghndlr.h"
 
 /* 4A4B40 */ u32 gTRKDispatchTableSize;
 

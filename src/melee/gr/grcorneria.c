@@ -1,5 +1,7 @@
 #include "grcorneria.h"
 
+#include <placeholder.h>
+
 #include "granime.h"
 #include "grdatfiles.h"
 #include "grdisplay.h"
@@ -11,26 +13,22 @@
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
-
-#include <placeholder.h>
-
-#include "cm/camera.h"
-#include "ft/ftlib.h"
-#include "gm/gm_1879.h"
-#include "gm/gm_1A45.h"
-#include "gm/gmregclear.h"
-#include "if/ifcoget.h"
-#include "if/ifstatus.h"
-#include "it/item.h"
-#include "it/kinds/itarwinglaser.h"
-#include "it/kinds/itgreatfoxlaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
-
 #include <dolphin/types.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1879.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmregclear.h>
+#include <melee/if/ifcoget.h>
+#include <melee/if/ifstatus.h>
+#include <melee/it/item.h>
+#include <melee/it/kinds/itarwinglaser.h>
+#include <melee/it/kinds/itgreatfoxlaser.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/generator.h>

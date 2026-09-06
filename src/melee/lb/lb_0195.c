@@ -5,7 +5,6 @@
 #include "lbcardgame.h"
 #include "lbcardnew.h"
 #include "lbsnap.h"
-
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>

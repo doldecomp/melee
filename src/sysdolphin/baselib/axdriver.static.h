@@ -1,6 +1,8 @@
-#include "axdriver.h" // IWYU pragma: export
+#ifndef SYSDOLPHIN_BASELIB_AXDRIVER_STATIC_H
+#define SYSDOLPHIN_BASELIB_AXDRIVER_STATIC_H
 
 #include <dolphin/axfx.h>
+#include <sysdolphin/baselib/axdriver.h> // IWYU pragma: export
 
 static HSD_SM AXDriver_804C45A0[0x60];
 static HSD_SM* AXDriver_804C5920[0x40];
@@ -43,3 +45,5 @@ static u8 AXDriver_804C5A20[2][0x10]; // unknown type
 /* 4D77E4 */ static int AXDriver_804D77E4;
 /* 4D77E8 */ static int AXDriver_804D77E8;
 /* 4D77EC */ static int AXDriver_804D77EC;
+
+#endif

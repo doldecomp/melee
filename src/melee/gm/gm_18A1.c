@@ -4,7 +4,6 @@
 #include "gmmain_lib.h"
 #include "gmregclear.h"
 #include "types.h"
-
 #include <melee/pl/player.h>
 
 /// Classic mode stage data.

@@ -1,5 +1,8 @@
 #include "robj.h"
 
+#include <math.h>
+#include <string.h>
+
 #include "aobj.h"
 #include "class.h"
 #include "debug.h"
@@ -11,9 +14,6 @@
 #include "mtx.h"
 #include "object.h"
 #include "util.h"
-
-#include <math.h>
-#include <string.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

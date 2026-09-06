@@ -1,9 +1,9 @@
 #ifndef GALE01_2599EC
 #define GALE01_2599EC
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <placeholder.h>
 
 /* 2599EC */ int mnStageSel_802599EC(void);
 /* 259C28 */ void mnStageSel_80259C28(void);

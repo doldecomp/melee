@@ -1,10 +1,10 @@
-#include "lb/lb_00CE.h"
+#include "lb_00CE.h"
 
 #ifdef MUST_MATCH
 #include <placeholder.h>
 #endif
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 #include <math.h>
 

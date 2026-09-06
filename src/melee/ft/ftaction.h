@@ -1,7 +1,7 @@
 #ifndef GALE01_071028
 #define GALE01_071028
 
-#include "ft/forward.h"
+#include <melee/ft/forward.h>
 
 /* 071028 */ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd);
 /* 0711DC */ void ftAction_800711DC(Fighter_GObj* gobj, CommandInfo* cmd);

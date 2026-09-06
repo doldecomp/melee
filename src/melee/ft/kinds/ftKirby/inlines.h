@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_INLINES_H
 #define MELEE_FT_CHARA_FTKIRBY_INLINES_H
 
-#include "ft/inlines.h"
-#include "ftKirby/ftkirby.h"
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftKirby/ftkirby.h>
 
 static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {
