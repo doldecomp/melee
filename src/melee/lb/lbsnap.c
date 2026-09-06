@@ -215,7 +215,6 @@ void lbSnap_8001DA5C(const u8* src)
     PAD_STACK(24);
 
     banner = lbSnap_GetMemSnapIconData();
-    ;
     row = 0;
     src_row_accum = 0;
     do {
