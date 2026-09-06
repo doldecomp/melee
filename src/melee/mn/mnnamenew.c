@@ -909,6 +909,7 @@ static inline void copyName(char* name_text, char* name_buffer)
 
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
+    char space_lead;
     char unused[12];
     char name_buffer[16];
     NameNewEntry* data;
@@ -940,7 +941,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         if (sel < 0x32U) {
             if (data->mode != 2 && sel < 0x32U) {
                 key_char = layout->lower_glyphs[(u8) sel][0];
-                if ("　"[0] == (s8) key_char[0] &&
+                space_lead = "　"[0];
+                if (space_lead == (s8) key_char[0] &&
                     (s8) "　"[1] == (s8) key_char[1])
                 {
                     n = 1;
