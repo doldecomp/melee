@@ -185,11 +185,6 @@ static inline u8* lbSnap_GetMemSnapIconData(void)
     return _p(x44_LbMcSnap_MemSnapIconData)[0].ptr;
 }
 
-static inline int lbSnap_GetTiledColumn(int x)
-{
-    return (x / 4) * 24;
-}
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma global_optimizer off
@@ -197,32 +192,40 @@ static inline int lbSnap_GetTiledColumn(int x)
 // Scale the 448x204 snapshot region to 64x32, centered in the 96x32 banner.
 void lbSnap_8001DA5C(const u8* src)
 {
-    u8* banner;
-    int row;
+    int src_column_in_tile;
+    int src_row_in_tile;
+    int src_tile;
+    int src_tile_row;
+    int pair;
+    int pixel_column;
+    int offset_base;
+    int offset;
+    int src_row;
+    u16 rgb565;
+    u16 rgb5a3;
+    int src_column_accum;
+    int src_row_base;
+    u8* dst_row;
+    int dst_tile_row;
     int src_row_accum;
+    u8* banner;
+    int column;
+    int row;
+
     PAD_STACK(24);
 
+    banner = lbSnap_GetMemSnapIconData();
     row = 0;
     src_row_accum = 0;
-    banner = lbSnap_GetMemSnapIconData();
     do {
-        int src_row_base = src_row_accum / 32;
-        u8* dst_row = banner + ((row % 4) * 8);
-        int dst_tile_row = lbSnap_GetTiledColumn(row);
-        int column = 0;
-        int pair;
-        int src_column_accum = 0;
+        src_row_base = src_row_accum / 32;
+        dst_row = banner + ((row % 4) * 8);
+        dst_tile_row = (row / 4);
+        dst_tile_row *= 24;
+        column = 0;
+        src_column_accum = 0;
         for (pair = 0; pair < 32; pair++) {
-            int src_column_in_tile;
-            int src_row_in_tile;
-            int src_tile;
-            int src_tile_row;
-            int pixel_column;
-            int offset_base;
-            u16 rgb565;
-            u16 rgb5a3;
-            int offset;
-            int src_row = src_row_base + 138;
+            src_row = src_row_base + 138;
             src_tile_row = (src_row / 4) * 160;
             src_tile = src_column_accum / 64;
             pixel_column = src_tile + 96;
@@ -240,23 +243,18 @@ void lbSnap_8001DA5C(const u8* src)
             src_tile = src_column_accum / 64;
             pixel_column = src_tile + 96;
             src_tile = pixel_column / 4;
-
             src_row_in_tile = src_row % 4;
             src_column_in_tile = pixel_column % 4;
-            offset_base += dst_tile_row;
-
             rgb5a3 = RGB565_TO_RGB5A3(rgb565);
+            offset_base += dst_tile_row;
             src_tile += src_tile_row;
             offset = (offset_base << 5) + (offset << 1);
             *(u16*) &dst_row[offset] = rgb5a3;
             pixel_column = column + 17;
-            offset_base = (
-#ifdef MUST_MATCH
-                              offset_base =
-#endif
-                                  src_tile << 5) +
-                          (offset = src_row_in_tile << 3);
-            offset = (src_column_in_tile << 1) + offset_base;
+            offset_base = src_tile << 5;
+            offset = src_row_in_tile << 3;
+            offset_base += offset;
+            offset = offset_base + (src_column_in_tile << 1);
             rgb565 = *(u16*) &src[offset];
             offset_base = pixel_column / 4;
             offset_base += dst_tile_row;

@@ -1,6 +1,11 @@
 #include "mnnamenew.h"
 
-#include "dolphin/gx/GXStruct.h"
+#include "inlines.h"
+#include "mncharsel.h"
+#include "mnmain.h"
+#include "mnname.h"
+#include "types.h"
+#include <dolphin/gx/GXStruct.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmtoulib.h>
@@ -10,11 +15,6 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mncharsel.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
 #include <melee/sc/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -781,7 +781,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     return arg0;
 }
 
-void mnNameNew_GlyphVariantInput(HSD_GObj* arg0)
+void mnNameNew_GlyphVariantInput(HSD_GObj* gobj)
 {
     NameNewEntry* data;
     u32 buttons;
@@ -877,19 +877,6 @@ void mnNameNew_GlyphVariantInput(HSD_GObj* arg0)
     }
 }
 
-static inline s32 CountGlyphVariants(GlyphRow* glyphs, u8 key)
-{
-    char** ptrs = glyphs[key];
-    s32 count = 0;
-    s8 null_char = (s8) *mnNameNew_NullCharacter;
-
-    while (null_char != (s8) *ptrs[0]) {
-        ptrs++;
-        count++;
-    }
-    return count;
-}
-
 static inline void copyName(char* name_text, char* name_buffer)
 {
     char ch;
@@ -920,8 +907,22 @@ static inline void copyName(char* name_text, char* name_buffer)
     name_buffer[len] = null_char;
 }
 
+static inline s32 mnNameNew_CountVariants(GlyphRow* glyphs, u8 selected_key)
+{
+    char** ptrs = glyphs[selected_key];
+    s32 count = 0;
+    s8 terminator = (s8) *mnNameNew_NullCharacter;
+
+    while (terminator != (s8) *ptrs[0]) {
+        ptrs++;
+        count++;
+    }
+    return count;
+}
+
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
+    char space_lead;
     char unused[12];
     char name_buffer[16];
     NameNewEntry* data;
@@ -952,10 +953,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         u16 sel = *(hovered = &mn_804A04F0.hovered_selection);
         if (sel < 0x32U) {
             if (data->mode != 2 && sel < 0x32U) {
-                char space_char;
                 key_char = layout->lower_glyphs[(u8) sel][0];
-                space_char = "　"[0];
-                if (space_char == (s8) key_char[0] &&
+                space_lead = "　"[0];
+                if (space_lead == (s8) key_char[0] &&
                     (s8) "　"[1] == (s8) key_char[1])
                 {
                     n = 1;
@@ -965,9 +965,13 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 if (n == 0) {
                     lbAudioAx_80024030(1);
                     mn_804A04F0.confirmed_selection = 0;
-                    n = CountGlyphVariants(layout->lower_glyphs, *hovered);
-                    data->variant_gobj = mnNameNew_GlyphVariantSetup(
-                        data, (u8) (n * 2), *hovered & 0xFF);
+                    n = mnNameNew_CountVariants(layout->lower_glyphs,
+                                                (u8) *hovered);
+                    {
+                        u8 variant_count = (u8) (n * 2);
+                        data->variant_gobj = mnNameNew_GlyphVariantSetup(
+                            data, variant_count, *hovered & 0xFF);
+                    }
                     return;
                 }
                 cursor = data->cursor_pos;
@@ -1067,9 +1071,16 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 null_char = (s8) * ((GlyphChar*) mnNameNew_NullCharacter);
                 {
                     char* p = mnNameNew_CurrentNameText;
-                    for (; n < 4; n++, p += 3) {
-                        if (null_char == (s8) *p) {
-                            break;
+                    if (null_char != (s8) *p) {
+                        n = 1;
+                        if (null_char != (s8) * (p += 3)) {
+                            n = 2;
+                            if (null_char != (s8) * (p += 3)) {
+                                n = 3;
+                                if (null_char != (s8) * (p += 3)) {
+                                    n = 4;
+                                }
+                            }
                         }
                     }
                 }
@@ -1450,8 +1461,8 @@ static inline void CreateGlyphVariant(StaticModelDesc* variant_desc,
 
 HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
 {
-    s32 variant_index;
     HSD_JObj* jobj;
+    HSD_JObj* variant;
     HSD_JObj* key_jobj;
     HSD_JObj* ref_jobj;
     s32 i;
@@ -1516,17 +1527,16 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
         dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
 
         variant_desc = mnNameNew_804A0720;
-        for (variant_index = 0; variant_index < (arg1 & 0xFF); variant_index++)
-        {
+        i = 0;
+        for (; i < (s32) (u8) arg1; i++) {
             {
                 HSD_JObj* created;
-                CreateGlyphVariant(variant_desc, user_data, variant_index,
-                                   &created);
-                ref2 = created;
+                CreateGlyphVariant(variant_desc, user_data, i, &created);
+                variant = created;
             }
-            HSD_JObjSetTranslateX(ref2, dx * (f32) (variant_index / 2));
-            HSD_JObjSetTranslateY(ref2, dy * (f32) (variant_index % 2));
-            HSD_JObjAddChild(ref_jobj, ref2);
+            HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
+            HSD_JObjSetTranslateY(variant, dy * (f32) (i % 2));
+            HSD_JObjAddChild(ref_jobj, variant);
         }
 
         mnNameNew_8023D130(user_data, arg1, arg0->mode, arg2);
