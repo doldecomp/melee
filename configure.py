@@ -1332,7 +1332,7 @@ config.libs = [
             Object(Matching, "melee/mn/mnstagesw.c"),
             Object(Matching, "melee/mn/mnname.c"),
             Object(Matching, "melee/mn/mnnamenew.c"),
-            Object(Linkable, "melee/mn/mndiagram.c"),
+            Object(Matching, "melee/mn/mndiagram.c"),
             Object(Matching, "melee/mn/mndiagram2.c"),
             Object(Matching, "melee/mn/mndiagram3.c"),
             Object(Matching, "melee/mn/mnvibration.c"),
