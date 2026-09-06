@@ -1461,8 +1461,8 @@ static inline void CreateGlyphVariant(StaticModelDesc* variant_desc,
 
 HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
 {
+    s32 variant_index;
     HSD_JObj* jobj;
-    HSD_JObj* variant;
     HSD_JObj* key_jobj;
     HSD_JObj* ref_jobj;
     s32 i;
@@ -1527,16 +1527,17 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
         dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
 
         variant_desc = mnNameNew_804A0720;
-        i = 0;
-        for (; i < (s32) (u8) arg1; i++) {
+        for (variant_index = 0; variant_index < (arg1 & 0xFF); variant_index++)
+        {
             {
                 HSD_JObj* created;
-                CreateGlyphVariant(variant_desc, user_data, i, &created);
-                variant = created;
+                CreateGlyphVariant(variant_desc, user_data, variant_index,
+                                   &created);
+                ref2 = created;
             }
-            HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
-            HSD_JObjSetTranslateY(variant, dy * (f32) (i % 2));
-            HSD_JObjAddChild(ref_jobj, variant);
+            HSD_JObjSetTranslateX(ref2, dx * (f32) (variant_index / 2));
+            HSD_JObjSetTranslateY(ref2, dy * (f32) (variant_index % 2));
+            HSD_JObjAddChild(ref_jobj, ref2);
         }
 
         mnNameNew_8023D130(user_data, arg1, arg0->mode, arg2);
