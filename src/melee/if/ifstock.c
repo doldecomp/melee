@@ -698,7 +698,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                     if (*stocks <= 5) {
                         HSD_JObjSetFlagsAll(
                             ifStock_804A1378.player[player].x3C, JOBJ_HIDDEN);
-                        for (i = 0; i < 7; i++, user_data++) {
+                        // Keep the narrowed result for register allocation.
+                        for (i = 0; i < 7; (u16) i++, user_data++) {
                             icon_jobj =
                                 ifStock_804A1378.player[player].x4[i + 1];
                             if (i < ifStock_804A1378.player[player].stocks ||

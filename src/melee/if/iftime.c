@@ -233,7 +233,7 @@ void ifTime_CreateTimers(void)
     HSD_JObj* digit;
     int i;
     void *anims, *matanims, *shapeanims;
-    if (!rules->x1_0 && !rules->x0_6) {
+    if (!rules->x1_0 && !rules->timer_enabled) {
         ifTime_data.match_timer = NULL;
         return;
     }

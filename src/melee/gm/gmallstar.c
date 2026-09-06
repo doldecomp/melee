@@ -534,7 +534,7 @@ void gm_801B5624(GameModeState* arg0)
     gm_8017CE34(data, &allstar->x0, chars, 0, 0, 0, 0, (s32) opp_data->stage,
                 (s32) round, (s32) color);
 
-    data->rules.x0_6 = 1;
+    data->rules.timer_enabled = 1;
     data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
     data->rules.time_limit = (s32) allstar->x9C / GM_FPS;
@@ -636,7 +636,7 @@ void gm_801B5ACC(GameModeState* arg0)
 
     gm_8017CE34(data, &gm_80473A18.x0, chars, 0, 0, 0, 0, 85, 0, (s32) color);
 
-    data->rules.x0_6 = 0;
+    data->rules.timer_enabled = 0;
     data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
     data->rules.time_limit = (s32) gm_80473A18.x9C / GM_FPS;

@@ -74,8 +74,8 @@ void fn_8017C0C8(void)
     sp8.cpu_kind = 4;
     sp8.cpu_level = Player_GetCpuLevel(2);
     sp8.cpu_kind = Player_GetCpuType(2);
-    sp8.x18 = Player_GetAttackRatio(2);
-    sp8.x1C = Player_GetUnk50(2);
+    sp8.attack_ratio = Player_GetAttackRatio(2);
+    sp8.defense_ratio = Player_GetUnk50(2);
     sp8.color = 0;
     sp8.ckind = CKIND_CREZYH;
     sp8.team = 4;
@@ -225,7 +225,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             Player_80031790(0);
             Player_80036844(0, 1);
             temp_r3_4 = gm_16AE_GetUnkData_0();
-            temp_r3_4->x24C8.x0_6 = false;
+            temp_r3_4->x24C8.timer_enabled = false;
         } else if (tmp->x8 == temp_r31) {
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
@@ -587,9 +587,9 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
 
     if (arg6 != 0) {
         arg0->rules.time_limit = (u32) arg6;
-        arg0->rules.x0_6 = 1;
+        arg0->rules.timer_enabled = 1;
     } else {
-        arg0->rules.x0_6 = 0;
+        arg0->rules.timer_enabled = 0;
     }
 
     arg0->rules.x18 = (u32) arg1->xC.x18;
@@ -766,14 +766,14 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
             arg0->players[player_idx].stocks = 1;
             arg0->players[player_idx].cpu_level = enemy_level;
             arg0->players[player_idx].cpu_kind = enemy_cpu_type;
-            arg0->players[player_idx].x18 = attack_ratio;
-            arg0->players[player_idx].x1C = defense_ratio;
+            arg0->players[player_idx].attack_ratio = attack_ratio;
+            arg0->players[player_idx].defense_ratio = defense_ratio;
             arg0->players[player_idx].color = *color_iter;
             if (arg1->x8 & 2) {
-                arg0->players[player_idx].x20 = 2.0f;
+                arg0->players[player_idx].model_scale = 2.0f;
                 arg0->players[player_idx].xB = 2;
             } else {
-                arg0->players[player_idx].x20 = 1.0f;
+                arg0->players[player_idx].model_scale = 1.0f;
                 arg0->players[player_idx].xB = 0;
             }
             if (arg1->x8 & 4) {
@@ -1098,8 +1098,8 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].color = arg1[i].x1;
             arg0[index].cpu_kind = arg1[i].x3;
             arg0[index].cpu_level = arg1[i].x2;
-            arg0[index].x18 = arg1[i].x4;
-            arg0[index].x1C = arg1[i].x8;
+            arg0[index].attack_ratio = arg1[i].x4;
+            arg0[index].defense_ratio = arg1[i].x8;
             arg0[index].xD_b1 = 1;
             if (arg0[index].ckind == CKIND_GKOOPS) {
                 arg0[index].xC_b1 = 0;
