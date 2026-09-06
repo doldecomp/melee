@@ -2987,56 +2987,120 @@ f32 grBigBlue_801EC58C(Vec3* pos, Vec3* normal_out, f32 half_height)
     return max_y;
 }
 
-/// @todo Needs register allocation fixes.
 #ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
 #endif
-static inline f32 grBigBlue_801EC6C0_inline(s32 index)
+static inline void grBigBlue_801EC6C0_inline2(s32 range, s32* result)
+{
+    s32 random = HSD_Randi(range);
+    *result = random;
+}
+
+static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
+                                           s32 line_idx)
 {
     grBb_YakumonoParam* params;
     f32 scale;
-    f32 result;
+    f32 lerp;
+    s32 hi;
+    s32 lo;
+
+    gp->u.bigblue.car.lanes[car_idx].collision_slot = line_idx;
+
+    gp->u.bigblue.car.lanes[car_idx].direction = 0;
 
     params = yakumono_param;
     scale = Ground_801C0498();
-    result = (f32) params->x1C * scale;
-    scale = result / (f32) (params->x18 + 1);
-    result = (f32) (index + 1) * scale;
+    lerp = (f32) params->x1C * scale;
+    scale = lerp / (f32) (params->x18 + 1);
+    lerp = (f32) (car_idx + 1) * scale;
+    scale = Ground_801C0498();
+    params = yakumono_param;
+    gp->u.bigblue.car.lanes[car_idx].pos.x =
+        lerp + 0.5F * -((f32) params->x1C * scale);
 
     scale = Ground_801C0498();
     params = yakumono_param;
-    return result + 0.5F * -((f32) params->x1C * scale);
-}
+    lerp = params->x2C * scale;
 
-static inline f32 grBigBlue_801EC6C0_inline2(s32 k)
-{
-    return grBigBlue_801EC6C0_inline(k);
+    scale = Ground_801C0498();
+    params = yakumono_param;
+    gp->u.bigblue.car.lanes[car_idx].pos.y = params->x0 * scale + lerp;
+
+    gp->u.bigblue.car.lanes[car_idx].pos.z = 0.0F;
+
+    params = yakumono_param;
+    scale = Ground_801C0498();
+    lerp = (f32) params->x1C * scale;
+    scale = lerp / (f32) (params->x18 + 1);
+    lerp = (f32) (car_idx + 1) * scale;
+    scale = Ground_801C0498();
+    params = yakumono_param;
+    gp->u.bigblue.car.lanes[car_idx].target =
+        lerp + 0.5F * -((f32) params->x1C * scale);
+
+    gp->u.bigblue.car.lanes[car_idx].delta = 0.0F;
+
+    gp->u.bigblue.car.lanes[car_idx].gravity = 0.0F;
+    gp->u.bigblue.car.lanes[car_idx].height = 0.0F;
+    gp->u.bigblue.car.lanes[car_idx].velocity = 0.0F;
+    gp->u.bigblue.car.lanes[car_idx].accel = 0.0F;
+
+    gp->u.bigblue.car.lanes[car_idx].rotation = (f32) (2.0 * M_PI * HSD_Randf());
+
+    scale = Ground_801C0498();
+    params = yakumono_param;
+    gp->u.bigblue.car.lanes[car_idx].amplitude = params->x34 * scale;
+
+    gp->u.bigblue.car.lanes[car_idx].angular_velocity = 0.0F;
+
+    params = yakumono_param;
+    hi = (s32) params->x60;
+    lo = (s32) params->x5C;
+    if (lo > hi) {
+        s32 diff = lo - hi;
+        s32 random;
+        if (diff != 0) {
+            grBigBlue_801EC6C0_inline2(diff, &random);
+        } else {
+            random = 0;
+        }
+        lo = hi + random;
+    } else if (lo < hi) {
+        s32 diff = hi - lo;
+        s32 random;
+        if (diff != 0) {
+            grBigBlue_801EC6C0_inline2(diff, &random);
+        } else {
+            random = 0;
+        }
+        lo += random;
+    }
+    gp->u.bigblue.car.lanes[car_idx].threshold = lo;
+
+    Ground_801C5440(gp, car_idx, lbl_803E3010[HSD_Randi(4)]);
+
+    gp->u.bigblue.car.lanes[car_idx].alpha = 1.0F;
+
+    {
+        s32 idx = line_idx;
+        HSD_JObjClearFlagsAll(gp->u.bigblue.car.collision_jobjs[idx],
+                              JOBJ_HIDDEN);
+
+        HSD_JObjSetTranslate(gp->u.bigblue.car.collision_jobjs[idx],
+                             &gp->u.bigblue.car.lanes[car_idx].pos);
+    }
+
+    gp->u.bigblue.car.ranks[line_idx] = 1;
 }
 
 void grBigBlue_801EC6C0(Ground_GObj* gobj)
 {
-    typedef struct grBb_StateBits {
-        u8 state : 6;
-        u8 pad0 : 2;
-    } grBb_StateBits;
-    typedef struct grBb_LaneBits {
-        u16 pad0 : 7;
-        u16 lane : 5;
-        u16 pad1 : 4;
-    } grBb_LaneBits;
+    s32 car_idx;
     Ground* gp = gobj->user_data;
     s32 i;
     s32 line_idx;
-    s32 idx;
-    s32 k;
-    u8* car;
-    grBb_YakumonoParam* params;
-    f32 scale;
-    f32 lerp;
-    s32 lo;
-    s32 hi;
-    HSD_JObj* jobj;
 
     for (i = 0; i < 30; i++) {
         u8 val;
@@ -3046,112 +3110,26 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
         gp->u.bigblue.car.ranks[i] = val;
     }
 
-    {
-        if (yakumono_param->x18 == 0) {
-            yakumono_param->x18 = 1;
-        }
+    if (yakumono_param->x18 == 0) {
+        yakumono_param->x18 = 1;
     }
 
-    car = (u8*) gp;
-    for (k = 0; k < 4; k++, car += 0x40) {
-        if (k < yakumono_param->x18) {
-            ((grBb_StateBits*) (car + 0xD4))->state = 4;
+    for (car_idx = 0; car_idx < 4; car_idx++) {
+        if (car_idx < yakumono_param->x18) {
+            gp->u.bigblue.car.lanes[car_idx].state = 4;
 
             do {
                 line_idx = HSD_Randi(30);
-                {
-                    u8* p = (u8*) gp;
-                    i = 0;
-                    {
-                        s32 ctr = k;
-                        while (ctr > 0) {
-                            if (((grBb_LaneBits*) (p + 0xD4))->lane ==
-                                line_idx)
-                            {
-                                break;
-                            }
-                            p += 0x40;
-                            i++;
-                            ctr--;
-                        }
+                for (i = 0; i < car_idx; i++) {
+                    if (gp->u.bigblue.car.lanes[i].collision_slot == line_idx) {
+                        break;
                     }
                 }
-            } while (i != k);
+            } while (i != car_idx);
 
-            ((grBb_LaneBits*) (car + 0xD4))->lane = line_idx;
-
-            idx = 0;
-            ((grBb_ByteBits*) (car + 0xD4))->b6 = idx;
-
-            *(f32*) (car + 0xE0) = grBigBlue_801EC6C0_inline2(k);
-
-            scale = Ground_801C0498();
-            params = yakumono_param;
-            lerp = params->x2C * scale;
-
-            scale = Ground_801C0498();
-            params = yakumono_param;
-            *(f32*) (car + 0xE4) = params->x0 * scale + lerp;
-
-            *(f32*) (car + 0xE8) = 0.0F;
-
-            *(f32*) (car + 0xD8) = grBigBlue_801EC6C0_inline(k);
-
-            *(f32*) (car + 0xDC) = 0.0F;
-
-            *(f32*) (car + 0xF4) = 0.0F;
-            *(f32*) (car + 0xF8) = 0.0F;
-            *(f32*) (car + 0xFC) = 0.0F;
-            *(f32*) (car + 0x100) = 0.0F;
-
-            *(f32*) (car + 0x104) = (f32) (2.0 * M_PI * HSD_Randf());
-
-            scale = Ground_801C0498();
-            params = yakumono_param;
-            *(f32*) (car + 0x108) = params->x34 * scale;
-
-            *(f32*) (car + 0x10C) = 0.0F;
-
-            params = yakumono_param;
-            hi = (s32) params->x60;
-            lo = (s32) params->x5C;
-            if (lo > hi) {
-                s32 diff = lo - hi;
-                s32 random;
-                if (diff != 0) {
-                    random = HSD_Randi(diff);
-                } else {
-                    random = idx;
-                }
-                lo = hi + random;
-            } else if (lo < hi) {
-                s32 diff = hi - lo;
-                s32 random;
-                if (diff != 0) {
-                    random = HSD_Randi(diff);
-                } else {
-                    random = idx;
-                }
-                lo = lo + random;
-            }
-            *(s32*) (car + 0xF0) = lo;
-
-            {
-                Ground_801C5440(gp, k, lbl_803E3010[HSD_Randi(4)]);
-            }
-
-            *(f32*) (car + 0xEC) = 1.0F;
-
-            HSD_JObjClearFlagsAll(gp->u.bigblue.car.collision_jobjs[line_idx],
-                                  JOBJ_HIDDEN);
-
-            jobj = gp->u.bigblue.car.collision_jobjs[line_idx];
-
-            HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
-
-            gp->u.bigblue.car.ranks[line_idx] = 1;
+            grBigBlue_801EC6C0_inline(gp, car_idx, line_idx);
         } else {
-            ((grBb_StateBits*) (car + 0xD4))->state = 1;
+            gp->u.bigblue.car.lanes[car_idx].state = 1;
         }
     }
 }
