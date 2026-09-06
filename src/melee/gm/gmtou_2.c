@@ -684,8 +684,8 @@ void fn_8019D1BC(void)
             gobj = fn_8019035C(0, lbl_804D6694->models[3], 0, 0x1A, 2, 1,
                                fn_8019CDBC, 0.0f);
             jobj = GET_JOBJ(gobj);
-            fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
-                        0.01f);
+            fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f,
+                        17.0f, 0.01f);
             (void) &tmd->x534[i];
 
             if (tmd->x37[i].x5 != 0) {
@@ -707,8 +707,8 @@ void fn_8019D1BC(void)
             }
             tmd->x534[i]->default_alignment = 1;
             HSD_SisLib_803A6B98(tmd->x534[i],
-                                10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-                                name_buf[i]);
+                                10.0f * ((5.999997f * (f32) i) - 21.5f),
+                                -172.0f, name_buf[i]);
             HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
         }
     }

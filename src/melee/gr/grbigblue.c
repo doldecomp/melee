@@ -1208,7 +1208,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         s32 range = yakumono_param->x8C;
                         gp->u.bigblue.data[i].x4 =
                             (yakumono_param->x88 +
-                             (range != 0 ? HSD_Randi(range) : 0)) / 2;
+                             (range != 0 ? HSD_Randi(range) : 0)) /
+                            2;
                     }
                     gp->u.bigblue.data[i].x1 = 1;
                 }
@@ -2998,7 +2999,7 @@ static inline void grBigBlue_801EC6C0_inline2(s32 range, s32* result)
 }
 
 static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
-                                           s32 line_idx)
+                                             s32 line_idx)
 {
     grBb_YakumonoParam* params;
     f32 scale;
@@ -3047,7 +3048,8 @@ static inline void grBigBlue_801EC6C0_inline(Ground* gp, s32 car_idx,
     gp->u.bigblue.car.lanes[car_idx].velocity = 0.0F;
     gp->u.bigblue.car.lanes[car_idx].accel = 0.0F;
 
-    gp->u.bigblue.car.lanes[car_idx].rotation = (f32) (2.0 * M_PI * HSD_Randf());
+    gp->u.bigblue.car.lanes[car_idx].rotation =
+        (f32) (2.0 * M_PI * HSD_Randf());
 
     scale = Ground_801C0498();
     params = yakumono_param;
@@ -3121,7 +3123,8 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             do {
                 line_idx = HSD_Randi(30);
                 for (i = 0; i < car_idx; i++) {
-                    if (gp->u.bigblue.car.lanes[i].collision_slot == line_idx) {
+                    if (gp->u.bigblue.car.lanes[i].collision_slot == line_idx)
+                    {
                         break;
                     }
                 }
@@ -3980,7 +3983,7 @@ typedef union grBb_CarGround {
 #pragma fp_contract on
 #endif
 static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
-                                            s32* result, Vec3* pos)
+                                             s32* result, Vec3* pos)
 {
     s32 slot;
 
@@ -4086,8 +4089,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                     HSD_JObjClearFlagsAll(
                         gp->u.bigblue.car.collision_jobjs[slot], JOBJ_HIDDEN);
                     jobj = gp->u.bigblue.car.collision_jobjs[slot];
-                    HSD_JObjSetTranslate(
-                        jobj, &gp->u.bigblue.car.lanes[arg1].pos);
+                    HSD_JObjSetTranslate(jobj,
+                                         &gp->u.bigblue.car.lanes[arg1].pos);
                 }
 
                 *result = 1;
@@ -4164,8 +4167,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                     HSD_JObjClearFlagsAll(
                         gp->u.bigblue.car.collision_jobjs[slot], JOBJ_HIDDEN);
                     jobj = gp->u.bigblue.car.collision_jobjs[slot];
-                    HSD_JObjSetTranslate(
-                        jobj, &gp->u.bigblue.car.lanes[arg1].pos);
+                    HSD_JObjSetTranslate(jobj,
+                                         &gp->u.bigblue.car.lanes[arg1].pos);
                 }
 
                 *result = 1;

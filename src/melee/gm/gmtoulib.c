@@ -212,8 +212,8 @@ void fn_8018A970(int arg0)
     }
 }
 
-static inline void fn_8018AA74_inline0(
-    BracketEntry* entry, s32* p38, s32* p40, s32* p48)
+static inline void fn_8018AA74_inline0(BracketEntry* entry, s32* p38, s32* p40,
+                                       s32* p48)
 {
     s32* pX10 = &entry->x10;
     s32* pX18 = &entry->x18;
@@ -496,8 +496,7 @@ static inline void fn_8018B090_inline3(BracketEntry* entry)
                 -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
 }
 
-static inline s32
-fn_8018B090_inline4(BracketEntry* entry)
+static inline s32 fn_8018B090_inline4(BracketEntry* entry)
 {
     s32 i;
     for (i = 0; i < 4; i++) {
@@ -508,8 +507,8 @@ fn_8018B090_inline4(BracketEntry* entry)
     return i;
 }
 
-static inline void fn_8018B090_inline5(BracketEntry* entries, BracketEntry* src,
-                                      s32 slot_idx)
+static inline void fn_8018B090_inline5(BracketEntry* entries,
+                                       BracketEntry* src, s32 slot_idx)
 {
     u8* next_entry;
     u8* next_slot;
@@ -527,8 +526,7 @@ static inline void fn_8018B090_inline5(BracketEntry* entries, BracketEntry* src,
     src->slots[slot_idx].x4E = 3;
 }
 
-static inline void
-fn_8018B090_inline6(BracketEntry* entry, s32 slot_idx)
+static inline void fn_8018B090_inline6(BracketEntry* entry, s32 slot_idx)
 {
     HSD_JObj* jobj = entry->slots[slot_idx].x2C->hsd_obj;
     HSD_JObjSetTranslateX(jobj, (f32) entry->slots[slot_idx].x44);
@@ -867,8 +865,7 @@ void fn_8018B090(HSD_GObj* arg0)
         s32 h = entry->x18;
         if (h != 0) {
             f32 d;
-            lbl_803D9DAC.current.x =
-                (f32) (entry->xC + (entry->x14 / 2));
+            lbl_803D9DAC.current.x = (f32) (entry->xC + (entry->x14 / 2));
             lbl_803D9DAC.current.y = -(f32) (entry->x10 + (h / 2));
             lbl_803D9DAC.current.z = -150.0f;
             lbl_803D9DAC.target.x = 320.0f;

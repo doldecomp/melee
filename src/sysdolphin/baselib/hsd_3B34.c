@@ -4,7 +4,6 @@
 
 #include <placeholder.h>
 
-#include <libc/stdlib.h>
 #include <setjmp.h>
 #include <string.h>
 #include <sysdolphin/baselib/hsd_3A94.h>
@@ -463,7 +462,8 @@ static inline void hsd_803B3CD8_write_byte(u8 byte, JpegWork* work)
     }
 }
 
-static inline void hsd_803B3CD8_write_bits(s32 value, s32 length, JpegWork* work)
+static inline void hsd_803B3CD8_write_bits(s32 value, s32 length,
+                                           JpegWork* work)
 {
     s32 bit;
 
@@ -505,8 +505,7 @@ void hsd_803B3CD8(s32 component)
     tables = (JpegEncodeTables*) lbl_80430C40;
     dc_code = component == 0 ? lbl_80431678 : lbl_8043169C;
     dc_length = component == 0 ? lbl_80431690 : lbl_804316B4;
-    ac_code =
-        component == 0 ? tables->ac_code_luma : tables->ac_code_chroma;
+    ac_code = component == 0 ? tables->ac_code_luma : tables->ac_code_chroma;
     ac_length =
         component == 0 ? tables->ac_length_luma : tables->ac_length_chroma;
 
@@ -527,10 +526,12 @@ void hsd_803B3CD8(s32 component)
 
         if (coefficient != 0) {
             length = hsd_803B3CD8_bit_length(run + 1);
-            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length], state.work);
+            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length],
+                                    state.work);
             hsd_803B3CD8_write_bits(run + 1, length, state.work);
             length = hsd_803B3CD8_bit_length(abs(ac_value));
-            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length], state.work);
+            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length],
+                                    state.work);
             if (ac_value < 0) {
                 ac_value--;
             }

@@ -815,8 +815,7 @@ void mnVibration_Think(HSD_GObj* gobj)
             } else {
                 HSD_JObj* toggle_jobj;
 
-                panel_jobj =
-                    data->jobjs[mnVibration_PortPanelJointIds[port]];
+                panel_jobj = data->jobjs[mnVibration_PortPanelJointIds[port]];
                 HSD_JObjClearFlagsAll(panel_jobj, JOBJ_HIDDEN);
                 data->x0[port + 2] = 0;
                 anim_state = data->x0[port + 2];

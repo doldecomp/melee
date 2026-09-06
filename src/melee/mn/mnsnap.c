@@ -969,7 +969,8 @@ static inline void mnSnap_UpdateSelectionCursor(mnSnap_State* snap_state)
 
     if (snap_state->cursor_idx / 4 == snap_state->cur_page) {
         jobj = snap_state->select_jobj;
-        translate = &snap_state->thumb_jobjs[snap_state->cursor_idx % 4]->translate;
+        translate =
+            &snap_state->thumb_jobjs[snap_state->cursor_idx % 4]->translate;
         HSD_JObjSetTranslate(jobj, translate);
         HSD_JObjClearFlagsAll(snap_state->select_jobj, JOBJ_HIDDEN);
     } else {
@@ -1805,7 +1806,7 @@ void fn_802545C4(void)
                 mnSnap_80253E90(other_slot);
             }
             result = mnSnap_CheckCopy(mnSnap_804A0A10.active_slot,
-                                     mnSnap_804A0A10.cursor_idx);
+                                      mnSnap_804A0A10.cursor_idx);
 
             if (result == 0) {
                 sfxForward();

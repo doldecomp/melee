@@ -697,8 +697,8 @@ inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* base, s32 hi)
         if (cur->pos[0].z < base->pos[0].z) {
             pivot += 1;
             if (pivot != n) {
-                p = (TyDspPos*) ((size_t) base +
-                                 pivot * sizeof(TyDspPos) + 0x97C);
+                p = (TyDspPos*) ((size_t) base + pivot * sizeof(TyDspPos) +
+                                 0x97C);
                 temps.tmp1 = *p;
                 *p = cur->pos[0];
                 cur->pos[0] = temps.tmp1;
@@ -717,7 +717,7 @@ inline void _tyDisplay_80318CB4_sort_pos(TyDspGrid* base, s32 hi)
 }
 
 static inline s32 _tyDisplay_80318CB4_is_near(const TyDspPos* a,
-                                             const TyDspPos* b, f32 limit)
+                                              const TyDspPos* b, f32 limit)
 {
     f32 dx = a->x - b->x;
     f32 dz = a->z - b->z;
@@ -781,8 +781,8 @@ void _tyDisplay_80318CB4(s32 arg0)
                                 grid->pos[i].z * grid->pos[i].z);
                 s32 collided;
                 s32 tries;
-                s32 start = i < 0x24 ? 0 :
-                    i - (prev_ring_size + (prev_ring_size - 6));
+                s32 start =
+                    i < 0x24 ? 0 : i - (prev_ring_size + (prev_ring_size - 6));
 
                 collided = 0;
                 while (collided == 0) {
