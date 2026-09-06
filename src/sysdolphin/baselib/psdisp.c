@@ -1559,12 +1559,12 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     if (abs_angle > 0.01) {
         f32 c = cosf(angle);
         f32 s = sinf(angle);
-        f32 old_ax = ax;
-        f32 old_bx = bx;
+        f32 old_x = ax;
         ax = c * ax - s * ay;
-        ay = s * old_ax + c * ay;
+        ay = s * old_x + c * ay;
+        old_x = bx;
         bx = c * bx - s * by;
-        by = s * old_bx + c * by;
+        by = s * old_x + c * by;
     }
     psSetCurrentMtx(GX_PNMTX1);
     /** @todo Later HSD shares this emission with the polygon path; Melee's
