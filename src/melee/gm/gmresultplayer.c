@@ -484,9 +484,6 @@ void fn_80177920(HSD_GObj* gobj)
 
     PAD_STACK(8);
 
-#ifdef MUST_MATCH
-    (void) -300.0f;
-#endif
     end = fn_80174274();
     human_controller_count = 0;
 

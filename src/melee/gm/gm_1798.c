@@ -61,6 +61,7 @@ static void sdata2_order(void)
     (void) 100.0f;
     (void) 10.0f;
     (void) S32_TO_F32;
+    (void) -300.0f;
 }
 #endif
 
