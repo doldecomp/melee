@@ -60,6 +60,7 @@ union {
 HSD_Archive* lbl_804D65B8;
 
 #include "gm_1601.h"
+#include "gm_1798.h"
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
 #include <dolphin/gx/GXStruct.h>

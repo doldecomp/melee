@@ -1,12 +1,7 @@
 #ifndef MELEE_GM_RESULTPLAYER_H
 #define MELEE_GM_RESULTPLAYER_H
 
-#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
-
-#include <placeholder.h>
-
-#include "gm_1798.h"
 
 struct ResultsMatchInfo;
 
@@ -22,6 +17,5 @@ struct ResultsMatchInfo;
 /* 179350 */ void fn_80179350(HSD_GObj*);
 /* 1795D4 */ int fn_801795D4(void);
 /* 1796F0 */ int fn_801796F0(int);
-
 
 #endif
