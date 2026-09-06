@@ -125,6 +125,11 @@ int ifStock_802F7EFC(int arg0, int arg1)
     return 0;
 }
 
+static inline struct IfStockUserData* ifStock_802F8298_get_data(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
 void ifStock_802F8298(HSD_GObj* gobj)
 {
     int palette_index;
@@ -136,10 +141,11 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObj* jobj_anim;
     int i;
     HSD_JObj* jobj2;
+    HSD_JObj* steal_jobj;
     Vec3 vecA, vecB, vecC, vecD;
     struct IfStockData* anim_data;
     struct IfStockDataOffset* anim_base;
-    user_data = gobj->user_data;
+    user_data = ifStock_802F8298_get_data(gobj);
     jobj = gobj->hsd_obj;
     stock = &ifStock_804A1378;
     jobj_anim = jobj;
@@ -158,16 +164,18 @@ void ifStock_802F8298(HSD_GObj* gobj)
             if (i < stock->player[user_data->player].stocks) {
                 HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
                 {
-                    unsigned char* data = stock->x204[user_data->player].x0;
-                    if ((stock->x204[user_data->player].x0[2]) != 0) {
+                    unsigned char* data =
+                        ((struct IfStockData*) stock)[user_data->player].x0;
+                    if ((data += sizeof(struct IfStockDataOffset))[2] != 0) {
                         data[i + 5] = 0;
                     } else {
                         data[i + 5] = 10;
                     }
                 }
             } else {
-                unsigned char* data = stock->x204[user_data->player].x0;
-                if (stock->x204[user_data->player].x0[2] == 0) {
+                unsigned char* data =
+                    ((struct IfStockData*) stock)[user_data->player].x0;
+                if ((data += sizeof(struct IfStockDataOffset))[2] == 0) {
                     data[i + 5] = 10;
                 }
                 if ((stock->x204)[user_data->player].x0[(int) (i + 5)] == 0) {
@@ -219,11 +227,11 @@ void ifStock_802F8298(HSD_GObj* gobj)
         }
     }
     for (i = 5; i <= 6; i++) {
-        jobj2 = stock->player[user_data->player].x4[i + 1];
+        steal_jobj = stock->player[user_data->player].x4[i + 1];
         if ((stock->x204)[user_data->player].x0[(int) (i + 5)] == 0) {
-            HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(steal_jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(steal_jobj, JOBJ_HIDDEN);
             if (stock->x204[user_data->player].x0[(int) (i + 5)] <= 10) {
                 {
                     struct IfStockData* data =
@@ -236,7 +244,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 vecC.x -= vecD.x;
                 vecC.y -= vecD.y;
                 vecC.z -= vecD.z;
-                HSD_JObjSetTranslate(jobj2, &vecC);
+                HSD_JObjSetTranslate(steal_jobj, &vecC);
                 anim_base =
                     (struct IfStockDataOffset*) ((struct IfStockData*) stock +
                                                  user_data->player);
@@ -277,9 +285,9 @@ void ifStock_802F8298(HSD_GObj* gobj)
                      2] = 1;
             }
         }
-        HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
+        HSD_TObjReqAnimAll(steal_jobj->u.dobj->mobj->tobj,
                            gm_80168BF8(user_data->player));
-        HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
+        HSD_AObjSetRate(steal_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
     }
     HSD_JObjAnimAll(jobj_anim);
 }
