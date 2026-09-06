@@ -939,6 +939,7 @@ static inline s32 mnSnap_CheckCopy(s32 source_slot, s32 cursor)
     s16* card_status;
 
     card_status = mnSnap_804A0A10.card_status;
+    (void) card_status;
     other_slot = source_slot ^ 1;
     result = card_status[other_slot];
     if (result == 0) {
