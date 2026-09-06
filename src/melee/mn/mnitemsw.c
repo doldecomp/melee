@@ -448,6 +448,7 @@ static inline u8 mnItemSw_UpdateConfirmed(MnItemSwData* user_data,
 
 void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
 {
+    f32 column_x;
     HSD_JObj* sp44;
     u32 cursor;
     HSD_JObj* cjobj;
@@ -516,7 +517,7 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
                     cjobj, y_spacing * (f32) cursor +
                                HSD_JObjGetTranslationY(data->jobjs[4]));
             } else {
-                x = HSD_JObjGetTranslationX(data->jobjs[6]);
+                x = (column_x = HSD_JObjGetTranslationX(data->jobjs[6]));
                 (void) x;
                 HSD_JObjSetTranslateX(cjobj, x);
                 HSD_JObjSetTranslateY(
