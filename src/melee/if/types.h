@@ -213,4 +213,80 @@ struct un_80304138_objalloc_t {
 };
 ASSERT_SIZE(struct un_80304138_objalloc_t, 0x20);
 
+struct IfStockUserData {
+    u8 player;
+    u8 mode;
+};
+
+struct ifStock_804A1378_per_player {
+    HSD_GObj* x0;
+    HSD_JObj* x4[8];
+    HSD_JObj* x24;
+    HSD_JObj* x28;
+    HSD_JObj* x2C;
+    HSD_JObj* x30;
+    HSD_JObj* x34;
+    HSD_JObj* x38;
+    HSD_JObj* x3C;
+    HSD_JObj* x40;
+    HSD_JObj* x44;
+    int coins;
+    int stocks;
+};
+
+struct IfStockStealAnim {
+    Vec3 start;
+    Vec3 mid;
+    Vec3 end;
+};
+
+/// @todo merge with IfStockUserData
+struct ifStock_804A1378_x204 {
+    u8 player;
+    u8 mode;
+    u8 flag;
+    u8 x3[2];
+    u8 anim[7];
+    struct IfStockStealAnim steal[2];
+};
+
+struct ifStock_804A1378 {
+    DynamicModelDesc** x0;
+    DynamicModelDesc* x4;
+    struct ifStock_804A1378_per_player player[6];
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    char pad1F0[0x1F4 - 0x1F0];
+    HSD_JObj* jobj_a;
+    HSD_JObj* jobj_b;
+    HSD_JObj* jobj_c;
+    HSD_JObj* jobj_d;
+    struct ifStock_804A1378_x204 x204[6];
+};
+
+struct ifStock_804A1774 {
+    char x0;
+    signed char x1[130];
+    signed char x83[133];
+    int x108;
+    HSD_GObj* x10C[131];
+};
+
+struct ifStock_804A1ACC {
+    char x0;
+    signed char x1[130];
+    signed char x83[133];
+    HSD_GObj* x108;
+    HSD_GObj* x10C[130];
+};
+
+struct IfStockData {
+    u8 x0[0xC];
+    struct IfStockStealAnim anim[2];
+};
+
+struct IfStockDataOffset {
+    u8 x0[0x204];
+};
+
 #endif
