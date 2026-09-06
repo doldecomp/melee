@@ -1,7 +1,6 @@
 #include "mnvibration.h"
 
 #include "dolphin/pad.h"
-
 #include <sysdolphin/baselib/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
@@ -20,7 +19,6 @@
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/types.h"
-
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>

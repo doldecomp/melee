@@ -1,8 +1,7 @@
-#include "hsd_3B34.h"
-
 #include <placeholder.h>
-
 #include <setjmp.h>
+
+#include "hsd_3B34.h"
 
 extern u8 hsd_804D2E70[2084];
 extern u8* hsd_804D79B8;

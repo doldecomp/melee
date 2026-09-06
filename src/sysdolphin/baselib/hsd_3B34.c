@@ -1,13 +1,12 @@
 #include "hsd_3B34.h"
 
-#include "hsd_3B33.h"
-
 #include <placeholder.h>
-
 #include <setjmp.h>
 #include <string.h>
-#include <sysdolphin/baselib/hsd_3A94.h>
+
+#include "hsd_3B33.h"
 #include <libc/stdlib.h> // IWYU pragma: keep
+#include <sysdolphin/baselib/hsd_3A94.h>
 
 #define HSD_804D2648_BUF ((u8*) &hsd_804D2648)
 

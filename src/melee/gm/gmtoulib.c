@@ -1,34 +1,27 @@
 #include "gmtoulib.h"
 
-#include "gm_1601.h"
-#include "gm_unsplit.h"
-#include "gmmain_lib.h"
+#include <sysdolphin/baselib/forward.h>
 
-#include "gmtoulib.static.h"
-
-#include "types.h"
-
+#include <m2c_macros.h>
 #include <placeholder.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "ft/forward.h"
 #include "gm/forward.h"
-
+#include "gm_1601.h"
+#include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "gmtoulib.static.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "mn/mnstagesel.h"
-
 #include "pl/forward.h"
-
 #include "pl/player.h"
 #include "sc/types.h"
-
-#include <sysdolphin/baselib/forward.h>
-
-#include <m2c_macros.h>
-#include <stdio.h>
-#include <string.h>
+#include "types.h"
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

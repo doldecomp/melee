@@ -1,29 +1,24 @@
 #include "if/ifstock.h"
 
-#include "if/ifstock.static.h"
 #include <placeholder.h>
 
 #include "ef/efsync.h"
-
 #include "gm/forward.h"
-
 #include "gm/gm_unsplit.h"
 #include "gm/gmregclear.h"
 #include "gm/types.h"
 #include "gr/ground.h"
 #include "if/ifall.h"
 #include "if/ifstatus.h"
+#include "if/ifstock.static.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
-
 #include "sc/forward.h"
-
 #include "sc/types.h"
-
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

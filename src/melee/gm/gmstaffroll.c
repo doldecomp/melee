@@ -1,13 +1,12 @@
 #include "gmstaffroll.h"
 
-#include "gm_unsplit.h"
+#include <math.h>
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-
 #include "ft/forward.h"
-
 #include "gm/gmmain_lib.h"
+#include "gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
@@ -16,8 +15,6 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-
-#include <math.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

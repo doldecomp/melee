@@ -1,18 +1,19 @@
 #include "grbigblue.h"
 
-#include "grbigblue.static.h"
+#include <platform.h>
 
+#include "grbigblue.static.h"
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
 #include "placeholder.h"
 
-#include <platform.h>
-
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
+
+#include <math.h>
 
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
@@ -27,8 +28,6 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-
-#include <math.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>

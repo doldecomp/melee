@@ -16,7 +16,6 @@
 #include "mn/mnname.h"
 #include "mn/types.h"
 #include "sc/types.h"
-
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
