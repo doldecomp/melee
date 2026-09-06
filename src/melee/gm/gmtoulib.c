@@ -1,5 +1,8 @@
 #include "gmtoulib.h"
 
+#include <melee/ft/forward.h>
+#include <melee/gm/forward.h>
+#include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <m2c_macros.h>
@@ -7,21 +10,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <melee/ft/forward.h>
-#include <melee/gm/forward.h>
 #include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmtoulib.static.h"
+#include "types.h"
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
 #include <melee/mn/mnstagesel.h>
-#include <melee/pl/forward.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-#include "types.h"
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
@@ -205,17 +205,49 @@ void fn_8018A970(int arg0)
     }
 }
 
-static inline void fn_8018AA74_inline0(BracketEntry* entry, s32* p38, s32* p40,
-                                       s32* p48)
+static inline void gmTournament_SetTripleRightCoords(BracketEntry* entry,
+                                                     s32* p3C, s32* p44,
+                                                     s32* p34, s32* p40,
+                                                     s32* p48, s32* p38)
 {
-    s32* pX10 = &entry->x10;
-    s32* pX18 = &entry->x18;
-    s32 val = *pX10 + *pX18;
+    s32 val1;
+    s32 val;
+    s32* pX10;
+    s32* pX18;
 
+    val1 = entry->xC + entry->x14;
+    pX10 = &entry->x10;
+    pX18 = &entry->x18;
+    *p3C = val1;
+    *p44 = val1;
+    *p34 = val1;
+    val = *pX10 + *pX18;
     *p40 = val;
     *p48 = val;
     *p38 = val;
     *p40 = *pX10 + *pX18 - *pX18 / 3;
+}
+
+static inline void gmTournament_SetRegularCoords(s32 entry_idx, s32 slot_idx,
+                                                 u8 x3, BracketData* bracket,
+                                                 s32* p3C, s32* p44, s32* p34,
+                                                 s32* p40, s32* p48, s32* p38)
+{
+    s32 val1;
+    s32 val2;
+
+    val1 = lbl_80473AB8[entry_idx].xC +
+           slot_idx * (lbl_80473AB8[entry_idx].x14 / (s32) x3);
+    *p3C = val1;
+    *p44 = val1;
+    *p34 = val1;
+    val2 = lbl_80473AB8[entry_idx].x10 + lbl_80473AB8[entry_idx].x18 -
+           lbl_80473AB8[entry_idx].x18 * bracket->entries[entry_idx].x2;
+    *p40 = val2;
+    *p48 = val2;
+    *p38 = val2;
+    *p40 = lbl_80473AB8[entry_idx].x10 +
+           lbl_80473AB8[entry_idx].x18 * bracket->entries[entry_idx].x2;
 }
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
@@ -264,6 +296,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 xC = entry->xC;
                 pX18 = &entry->x18;
                 pX10 = &entry->x10;
+                (void) pX18;
                 *p3C = xC;
                 *p44 = xC;
                 *p34 = xC;
@@ -357,12 +390,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 1: {
-                    xC = entry->xC;
-                    val1 = xC + entry->x14;
-                    *p3C = val1;
-                    *p44 = val1;
-                    *p34 = val1;
-                    fn_8018AA74_inline0(entry, p38, p40, p48);
+                    gmTournament_SetTripleRightCoords(entry, p3C, p44, p34,
+                                                      p40, p48, p38);
                     break;
                 }
                 case 2: {
@@ -399,22 +428,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 break;
             }
         } else {
-            xC = lbl_80473AB8[entry_idx].xC;
-            val1 = xC + slot_idx * (lbl_80473AB8[entry_idx].x14 / (s32) x3);
-            pX18 = &lbl_80473AB8[entry_idx].x18;
-            *p3C = val1;
-            *p44 = val1;
-            *p34 = val1;
-            {
-                x10 = lbl_80473AB8[entry_idx].x10;
-                val2 = x10 + *pX18 - *pX18 * bracket->entries[entry_idx].x2;
-                *p40 = val2;
-                *p48 = val2;
-                *p38 = val2;
-            }
-            *p40 = lbl_80473AB8[entry_idx].x10 +
-                   *pX18 * bracket->entries[entry_idx].x2;
-
+            gmTournament_SetRegularCoords(entry_idx, slot_idx, x3, bracket,
+                                          p3C, p44, p34, p40, p48, p38);
             if (*px3 == 1) {
                 tm_x2E = tm->x2E;
                 if (tm_x2E == 6) {

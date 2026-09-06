@@ -1,9 +1,11 @@
 #include "ifstock.h"
 
+#include <melee/gm/forward.h>
+#include <melee/sc/forward.h>
+
 #include <placeholder.h>
 
 #include <melee/ef/efsync.h>
-#include <melee/gm/forward.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmregclear.h>
 #include <melee/gm/types.h>
@@ -17,7 +19,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-#include <melee/sc/forward.h>
 #include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
