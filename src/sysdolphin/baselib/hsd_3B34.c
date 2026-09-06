@@ -227,8 +227,8 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
             s32 chroma_y;
 
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
-                s32 src_tile_row = (chroma_y & 2) * tile_stride;
-                s32 src_row = (chroma_y & 1) * 0x20 + src_tile_row;
+                s32 src_row = (chroma_y & 1) * 0x20 +
+                              (chroma_y & 2) * tile_stride;
                 s32 dst_row = (chroma_y & 1) * 4 + (chroma_y & 2) * 0x10;
 
                 dst_row += tile_y * 0x10 + tile_x * 2;
