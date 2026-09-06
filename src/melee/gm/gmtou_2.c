@@ -557,10 +557,10 @@ void fn_8019D1BC(void)
             HSD_JObj* first_c;
             HSD_JObj* first_jobj;
 
-            first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
-                                     1, fn_8019C048, (f32) i);
-            first_jobj = GET_JOBJ(first_gobj);
-            first_c = first_gobj->hsd_obj;
+            first_c = GET_JOBJ(first_gobj = fn_8019035C(
+                0, lbl_804D6694->models[12], 0, 0x1A, 2, 1, fn_8019C048,
+                (f32) i));
+            first_jobj = first_gobj->hsd_obj;
             HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
 
@@ -681,7 +681,6 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FDC4(jobj, (5.999997f * (f32) tmd->x37[i].xF) - 21.5f, 17.0f,
                     0.01f);
-        (void) &tmd->x534[i];
 
         if (tmd->x37[i].x5 != 0) {
             fn_8019044C(jobj, 201.0f);
