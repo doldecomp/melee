@@ -1573,7 +1573,7 @@ config.libs = [
             Object(Matching, "melee/ty/toy.c"),
             Object(Matching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
-            Object(Linkable, "melee/ty/tydisplay.c"),
+            Object(Matching, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(
