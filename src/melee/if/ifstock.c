@@ -124,8 +124,9 @@ int ifStock_802F7EFC(int arg0, int arg1)
 /// base with the x204 array offset applied afterwards.
 #define ifStock_802F8298_elem(p)                                              \
     ((struct IfStockDataOffset*) ((struct ifStock_804A1378_x204*) stock + (p)))
-#define ifStock_802F8298_data_at(p)                                           \
-    ((struct ifStock_804A1378_x204*) ((elem = ifStock_802F8298_elem(p)) + 1))
+#define ifStock_802F8298_data_in(e, p)                                        \
+    ((struct ifStock_804A1378_x204*) (((e) = ifStock_802F8298_elem(p)) + 1))
+#define ifStock_802F8298_data_at(p) ifStock_802F8298_data_in(elem, p)
 #define ifStock_802F8298_data ifStock_802F8298_data_at(user_data->player)
 /// The same element, with the array offset committed before the field
 /// accesses.
@@ -172,6 +173,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObj* steal_jobj;
     struct ifStock_804A1378_x204* data;
     struct IfStockDataOffset* elem;
+    struct IfStockDataOffset* other;
     Vec3 vecA, vecB, vecC, vecD;
 
     if (stock->player[user_data->player].stocks <= 5) {
@@ -264,7 +266,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 ifStock_802F8298_data->anim[i]++;
             } else {
                 *p = 0;
-                ifStock_802F8298_data_at(ifStock_802F8298_data->x3[i - 5])
+                ifStock_802F8298_data_in(other,
+                                         ifStock_802F8298_data->x3[i - 5])
                     ->flag = 1;
             }
         }
