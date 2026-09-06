@@ -781,7 +781,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     return arg0;
 }
 
-void mnNameNew_GlyphVariantInput(void)
+void mnNameNew_GlyphVariantInput(HSD_GObj* arg0)
 {
     NameNewEntry* data;
     u32 buttons;
@@ -793,7 +793,7 @@ void mnNameNew_GlyphVariantInput(void)
     s32 total;
     s8 null_ch;
 
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     data = mnNameNew_804D6C08->user_data;
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
@@ -877,6 +877,19 @@ void mnNameNew_GlyphVariantInput(void)
     }
 }
 
+static inline s32 CountGlyphVariants(GlyphRow* glyphs, u8 key)
+{
+    char** ptrs = glyphs[key];
+    s32 count = 0;
+    s8 null_char = (s8) *mnNameNew_NullCharacter;
+
+    while (null_char != (s8) *ptrs[0]) {
+        ptrs++;
+        count++;
+    }
+    return count;
+}
+
 static inline void copyName(char* name_text, char* name_buffer)
 {
     char ch;
@@ -928,7 +941,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
 
     if (data->variant_gobj != NULL) {
-        mnNameNew_GlyphVariantInput();
+        mnNameNew_GlyphVariantInput(arg0);
         return;
     }
 
@@ -939,8 +952,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         u16 sel = *(hovered = &mn_804A04F0.hovered_selection);
         if (sel < 0x32U) {
             if (data->mode != 2 && sel < 0x32U) {
+                char space_char;
                 key_char = layout->lower_glyphs[(u8) sel][0];
-                if ("　"[0] == (s8) key_char[0] &&
+                space_char = "　"[0];
+                if (space_char == (s8) key_char[0] &&
                     (s8) "　"[1] == (s8) key_char[1])
                 {
                     n = 1;
@@ -950,19 +965,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 if (n == 0) {
                     lbAudioAx_80024030(1);
                     mn_804A04F0.confirmed_selection = 0;
-                    n = 0;
-                    {
-                        u16 sel2 = *hovered;
-                        GlyphRow* glyphs = layout->lower_glyphs;
-                        char** ptrs = glyphs[(u8) sel2];
-                        null_char = (s8) *mnNameNew_NullCharacter;
-                        while (null_char != (s8) *ptrs[0]) {
-                            ptrs++;
-                            n++;
-                        }
-                    }
+                    n = CountGlyphVariants(layout->lower_glyphs, *hovered);
                     data->variant_gobj = mnNameNew_GlyphVariantSetup(
-                        data, (n * 2) & 0xFE, (u8) *hovered);
+                        data, (u8) (n * 2), *hovered & 0xFF);
                     return;
                 }
                 cursor = data->cursor_pos;
@@ -1062,16 +1067,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 null_char = (s8) * ((GlyphChar*) mnNameNew_NullCharacter);
                 {
                     char* p = mnNameNew_CurrentNameText;
-                    if (null_char != (s8) *p) {
-                        n = 1;
-                        if (null_char != (s8) * (p += 3)) {
-                            n = 2;
-                            if (null_char != (s8) * (p += 3)) {
-                                n = 3;
-                                if (null_char != (s8) * (p += 3)) {
-                                    n = 4;
-                                }
-                            }
+                    for (; n < 4; n++, p += 3) {
+                        if (null_char == (s8) *p) {
+                            break;
                         }
                     }
                 }
