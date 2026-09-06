@@ -18,7 +18,7 @@
 /* 2F95E8 */ void fn_802F95E8(HSD_GObj*, int);
 /* 2F9680 */ void fn_802F9680(HSD_GObj*, int);
 /* 2F96D0 */ HSD_GObj* ifStock_802F96D0(int, int, float, float);
-/* 2F98E8 */ void ifStock_802F98E8(unsigned char, int);
+/* 2F98E8 */ void ifStock_802F98E8(u8, u8);
 /* 2F9F48 */ HSD_GObj* ifStock_802F9F48(int);
 /* 2FA118 */ HSD_GObj* ifStock_802FA118(int);
 /* 2FA2D0 */ void ifStock_802FA2D0(int);
