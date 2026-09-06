@@ -490,6 +490,7 @@ static inline s32 jpeg_clamp(f32 value)
 static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
 {
     f32 red_value, green_value, blue_value;
+    u8 green;
     struct {
         u8 red, green, blue;
     } pixel;
@@ -499,7 +500,8 @@ static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
 
     green_value =
         ((f32) luminance - (0.3441f * (f32) cb)) - (0.7139f * (f32) cr);
-    pixel.green = jpeg_clamp(green_value);
+    green = jpeg_clamp(green_value);
+    pixel.green = green;
 
     blue_value = (f32) ((f64) ((1.7718f * (f32) cb) + (f32) luminance) -
                         (0.0012 * (f64) cr));
