@@ -834,6 +834,13 @@ bool fn_80177DD0(int slot)
 
 static s32 lbl_804D3FC8 = 1;
 
+static U32Pair lbl_804D3FD0 ATTRIBUTE_ALIGN(8) = { 0x00500050, 0x00460034 };
+static U32Pair lbl_804D3FD8 = { 0x006E0072, 0x0064004A };
+static U32Pair lbl_804D3FE0 = { 0x00340034, 0x00340034 };
+static U32Pair lbl_804D3FE8 = { 0x004A004A, 0x004A004A };
+static U32Pair lbl_804D3FF0 = { 0x000C0008, 0x00060000 };
+static U32Pair lbl_804D3FF8 = { 0x000E000E, 0x00060000 };
+
 void fn_80178050(HSD_GObj* arg0)
 {
     s32 k2;
@@ -1355,8 +1362,7 @@ bool fn_801791E4(void)
     return false;
 }
 
-int fn_80179350_inline(void);
-int fn_80179350_inline(void)
+static inline int fn_80179350_inline(void)
 {
     return fn_801791E4();
 }
@@ -2028,13 +2034,6 @@ void fn_8017A9B4(int slot)
     inline1(disp->player_img2, slot, disp->state.dim_w2 + lookup,
             disp->state.dim_h2 + lookup);
 }
-
-static U32Pair lbl_804D3FD0 = { 0x00500050, 0x00460034 };
-static U32Pair lbl_804D3FD8 = { 0x006E0072, 0x0064004A };
-static U32Pair lbl_804D3FE0 = { 0x00340034, 0x00340034 };
-static U32Pair lbl_804D3FE8 = { 0x004A004A, 0x004A004A };
-static U32Pair lbl_804D3FF0 = { 0x000C0008, 0x00060000 };
-static U32Pair lbl_804D3FF8 = { 0x000E000E, 0x00060000 };
 
 void fn_8017AA78(const u8* arg0)
 {
