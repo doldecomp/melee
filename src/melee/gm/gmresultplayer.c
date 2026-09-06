@@ -1,7 +1,5 @@
 #include "gmresultplayer.h"
 
-#include "gmresultplayer.static.h"
-
 #include <placeholder.h>
 
 #include "forward.h"
@@ -9,41 +7,25 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
+#include "gmresultplayer.static.h"
 #include "types.h"
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftdemo.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
 #include <melee/if/ifcoget.h>
-#include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
 extern ResultsData lbl_8046DBE8;
-
 
 /* 3D6A08 */ u32 gmResultPlayerColors[4] = {
     0x013C59FF,
@@ -399,7 +381,6 @@ extern ResultsData lbl_8046DBE8;
 /* 3D7994 */ char gmResultMissingJObjMessage[] =
     "Error : model jobj dont't find at gmResultSetViewPos\n";
 
-
 ResultsPlayerConfig const lbl_803B7B68 = {
     { 0.0F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, -100.0F },
     { 0.0F, 100.0F, 62.0F },
@@ -420,12 +401,6 @@ ResultsPlayerConfig const lbl_803B7B68 = {
     0.307F,
     0.0F,
 };
-
-
-ResultsDisplayData lbl_8046E1B0;
-HSD_GObj* lbl_8046E38C[4];
-HSD_JObj* lbl_8046E39C[4];
-lbl_8046E3AC_t lbl_8046E3AC;
 
 /// @todo .sdata2 order hack
 void gm_80177724(struct ResultsMatchInfo* arg0)
@@ -724,7 +699,6 @@ bool fn_80177DD0(int slot)
 }
 
 static s32 lbl_804D3FC8 = 1;
-
 
 void fn_80178050(HSD_GObj* arg0)
 {

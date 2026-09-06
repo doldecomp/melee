@@ -4,9 +4,10 @@
 
 #include "forward.h"
 #include "gm_1601.h"
-#include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
+#include "gmresultplayer.h"
+#include "gmresultplayer.static.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
@@ -14,15 +15,12 @@
 #include <melee/ft/ftdemo.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
-#include <melee/if/ifcoget.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmain.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
@@ -40,10 +38,12 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
-#include "gmresultplayer.h"
-#include "gmresultplayer.static.h"
-
 extern ResultsData lbl_8046DBE8;
+
+ResultsDisplayData lbl_8046E1B0;
+HSD_GObj* lbl_8046E38C[4];
+HSD_JObj* lbl_8046E39C[4];
+lbl_8046E3AC_t lbl_8046E3AC;
 
 static U32Pair lbl_804D3FD0 ATTRIBUTE_ALIGN(8) = { 0x00500050, 0x00460034 };
 static U32Pair lbl_804D3FD8 = { 0x006E0072, 0x0064004A };
@@ -63,7 +63,6 @@ static void sdata2_order(void)
     (void) S32_TO_F32;
 }
 #endif
-
 
 void fn_80179854(void)
 {
@@ -178,7 +177,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             }
 
             HSD_CObjEraseScreen(cobj, 1, 1, 1);
-            HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C, 1, 0);
+            HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C, 1,
+                                     0);
             HSD_CObjEndCurrent();
 
             if (!disp->state.x0_4) {
@@ -204,8 +204,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                                             disp->state.scissor_y + lookup);
 
                     HSD_CObjEraseScreen(cobj, 1, 1, 1);
-                    HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E, 0x7C, 1,
-                                             0);
+                    HSD_ImageDescCopyFromEFB(&lbl_8046E1B0.shared_img, 0x10E,
+                                             0x7C, 1, 0);
                     HSD_CObjEndCurrent();
 
                     disp->state.player_flags[arg2] = 1;
