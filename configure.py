@@ -1554,7 +1554,7 @@ config.libs = [
             Object(Matching, "melee/if/ifstatus.c"),
             Object(Matching, "melee/if/if_2F6E.c"),
             Object(Matching, "melee/if/if_2F72.c"),
-            Object(Linkable, "melee/if/ifstock.c"),
+            Object(Matching, "melee/if/ifstock.c"),
             Object(Matching, "melee/if/ifmagnify.c"),
             Object(Matching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
