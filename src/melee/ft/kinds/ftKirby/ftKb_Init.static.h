@@ -1,7 +1,7 @@
 #ifndef __GALE01_0EE528
 #define __GALE01_0EE528
 
-#include "ftkirby.h" // IWYU pragma: export
+#include <melee/ft/kinds/ftKirby/ftkirby.h> // IWYU pragma: export
 
 typedef struct ftKirby_CostumeArchive {
     /* +0 */ HSD_Joint* joint;

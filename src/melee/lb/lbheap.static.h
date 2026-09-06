@@ -1,7 +1,7 @@
 #ifndef __GALE01_0158D0
 #define __GALE01_0158D0
 
-#include "lbheap.h" // IWYU pragma: export
+#include <melee/lb/lbheap.h> // IWYU pragma: export
 #include <melee/lb/lbmemory.h>
 
 struct Heap {

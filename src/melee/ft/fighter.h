@@ -7,8 +7,8 @@
 
 #include <placeholder.h>
 
-#include "ft/inlines.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
+#include <melee/ft/inlines.h> // IWYU pragma: export
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/objalloc.h>
 

@@ -3,9 +3,9 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/ft/kinds/ftNess/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftNess/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <melee/lb/types.h>
 

@@ -3,10 +3,10 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/if/forward.h> // IWYU pragma: export
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "if/forward.h" // IWYU pragma: export
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/tobj.h>
 

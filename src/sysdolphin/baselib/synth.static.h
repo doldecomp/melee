@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_SYNTH_STATIC_H
 #define SYSDOLPHIN_BASELIB_SYNTH_STATIC_H
 
-#include "synth.h" // IWYU pragma: export
 #include <dolphin/ax.h>
 #include <dolphin/os.h>
+#include <sysdolphin/baselib/synth.h> // IWYU pragma: export
 
 OSHeapHandle HSD_Synth_804D6018 = -1; // audio heap
 

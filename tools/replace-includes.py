@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import logging
-from pathlib import Path
 import re
+from pathlib import Path
 
 IN_ROOTS = [
     Path.cwd().joinpath(s).resolve(strict=True)
@@ -27,7 +27,9 @@ OUT_ROOTS = [
     IN_ROOTS[7],  # build/GALE01/include
 ]
 
-INCLUDE_RE = re.compile(r'^#include [<"](?P<path>.*?)[>"]$', re.MULTILINE)
+INCLUDE_RE = re.compile(
+    r'^#include [<"](?P<path>.*?)[>"](?P<remaining>.*)$', re.MULTILINE
+)
 DEFAULT_FMT = "#include <{}>"
 
 
@@ -48,6 +50,7 @@ def main():
 
             def put(p: Path) -> str:
                 p = p.resolve()
+
                 def decide_fmt() -> tuple[Path, str]:
                     if p.suffix not in {".c", ".h", ".inc"}:
                         logging.warning("Deleting suspicious include `%s`", m[0])
@@ -68,7 +71,7 @@ def main():
                     return p, m[0]
 
                 p, fmt = decide_fmt()
-                s = fmt.format(p.as_posix())
+                s = fmt.format(p.as_posix()) + m["remaining"]
                 logging.info("Replaced `%s`", s)
                 return s
 

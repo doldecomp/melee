@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "perf.h"
-#include <sysdolphin/baselib/psstructs.h> // IWYU pragma: keep
+#include "psstructs.h" // IWYU pragma: keep
 
 // types
 

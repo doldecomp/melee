@@ -4,9 +4,9 @@
 #include <Runtime/platform.h>
 
 #include <melee/gm/forward.h>
+#include <melee/mn/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include "mn/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 
 #ifdef M2C

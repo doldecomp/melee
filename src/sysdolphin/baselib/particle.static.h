@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-#include "particle.h" // IWYU pragma: export
+#include <sysdolphin/baselib/particle.h> // IWYU pragma: export
 
 // .data
 

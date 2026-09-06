@@ -4,9 +4,9 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftPeach/forward.h> // IWYU pragma: export
 #include <melee/it/forward.h>
 
-#include "ftPeach/forward.h" // IWYU pragma: export
 #include <melee/lb/types.h>
 
 struct ftPeach_FighterVars {

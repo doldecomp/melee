@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_AXDRIVER_STATIC_H
 #define SYSDOLPHIN_BASELIB_AXDRIVER_STATIC_H
 
-#include "axdriver.h" // IWYU pragma: export
 #include <dolphin/axfx.h>
+#include <sysdolphin/baselib/axdriver.h> // IWYU pragma: export
 
 static HSD_SM AXDriver_804C45A0[0x60];
 static HSD_SM* AXDriver_804C5920[0x40];

@@ -3,9 +3,9 @@
 
 #include <Runtime/platform.h>
 
-#include "lbsnap.h" // IWYU pragma: export
 #include <melee/it/types.h>
 #include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbsnap.h> // IWYU pragma: export
 #include <melee/lb/types.h>
 
 struct Unk80433380_48 {

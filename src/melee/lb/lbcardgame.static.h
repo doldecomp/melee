@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-#include "lbcardgame.h" // IWYU pragma: export
+#include <melee/lb/lbcardgame.h> // IWYU pragma: export
 #include <melee/sc/types.h>
 
 struct lb_80433318_t {

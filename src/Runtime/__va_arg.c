@@ -1,5 +1,6 @@
-#include <platform.h> // IWYU pragma: keep
 #include <stdarg.h>
+
+#include "platform.h" // IWYU pragma: keep
 
 #ifdef MWERKS_GEKKO
 #define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) - 1)) & ~((size) - 1))

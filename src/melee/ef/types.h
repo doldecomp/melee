@@ -1,9 +1,9 @@
 #ifndef MELEE_EF_TYPES_H
 #define MELEE_EF_TYPES_H
 
+#include <melee/ef/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include "ef/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/sc/types.h>

@@ -1,9 +1,9 @@
 #ifndef MELEE_CM_TYPES_H
 #define MELEE_CM_TYPES_H
 
+#include <melee/cm/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include "cm/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 
 typedef struct CmSubjectExtents {

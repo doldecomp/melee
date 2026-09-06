@@ -3,9 +3,9 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/ft/kinds/ftGameWatch/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
-#include "ftGameWatch/forward.h" // IWYU pragma: export
 #include <dolphin/gx.h>
 #include <melee/lb/types.h>
 

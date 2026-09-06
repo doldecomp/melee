@@ -4,8 +4,8 @@
 #include <Runtime/platform.h>
 
 #include <melee/gr/forward.h>
+#include <melee/mp/forward.h> // IWYU pragma: export
 
-#include "mp/forward.h" // IWYU pragma: export
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 

@@ -6,7 +6,6 @@
 #include "gricemt.h"
 #include "ground.h"
 #include "grrcruise.h"
-#include "lb/types.h" // IWYU pragma: keep
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/inlines.h>
@@ -14,6 +13,7 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/types.h> // IWYU pragma: keep
 #include <melee/sc/types.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobjobject.h>

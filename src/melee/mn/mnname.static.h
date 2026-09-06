@@ -3,8 +3,8 @@
 
 #include <melee/mn/forward.h>
 
-#include "mnname.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
+#include <melee/mn/mnname.h> // IWYU pragma: export
 #include <melee/mn/types.h>
 
 /// Loaded section pointers for one of the name-entry menu archive models

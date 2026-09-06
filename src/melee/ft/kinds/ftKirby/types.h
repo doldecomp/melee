@@ -9,7 +9,7 @@
 
 #include <placeholder.h>
 
-#include "ft/dobjlist.h" // IWYU pragma: keep
+#include <melee/ft/dobjlist.h> // IWYU pragma: keep
 #include <melee/ft/kinds/ftGameWatch/types.h>
 #include <melee/ft/kinds/ftMars/types.h>
 #include <melee/ft/kinds/ftNess/types.h>

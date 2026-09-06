@@ -4,12 +4,12 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCommon/forward.h> // IWYU pragma: export
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
 #include <placeholder.h>
 
-#include "ftCommon/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/controller.h>
 

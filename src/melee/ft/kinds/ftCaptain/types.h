@@ -4,8 +4,8 @@
 #include <Runtime/platform.h>
 
 #include <melee/ft/forward.h>
+#include <melee/ft/kinds/ftCaptain/forward.h> // IWYU pragma: export
 
-#include "ftCaptain/forward.h" // IWYU pragma: export
 #include <dolphin/mtx.h>
 
 struct ftCaptain_FighterVars {

@@ -354,13 +354,8 @@ cflags_trk = [
 includes_base = [
     "src",
     "src/MSL",
-    "src/Runtime",
     "extern/dolphin/include",
     f"build/{config.version}/include",
-]
-
-cflags_melee = [
-    *cflags_base,
 ]
 
 
@@ -369,14 +364,11 @@ config.linker_version = "GC/1.3.2"
 # Native compiler flags
 
 clang_includes = [
-    "src/melee",
-    "src/melee/ft/kinds",
+    "src",
 ]
 
 clang_system_includes = [
-    "src",
     "src/MSL",
-    "src/Runtime",
     "extern/dolphin/include",
     "extern/dolphin/src",
     f"build/{config.version}/include",
@@ -501,10 +493,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
-        includes=[
-            *includes_base,
-            f"build/{config.version}/sysdolphin",
-        ],
         category="hsd",
     )
 
@@ -513,11 +501,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
-        includes=[
-            *includes_base,
-            "src/melee",
-            "src/melee/ft/kinds",
-        ],
         category="game",
     )
 
@@ -1088,11 +1071,16 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagapplaud.c"),
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagrockpaper.c"),
             Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandtagcancel.c"),
-            Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.c"),
             Object(
-                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.c"
+                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandcapturemasterhand.c"
             ),
-            Object(Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.c"),
+            Object(
+                Matching,
+                "melee/ft/kinds/ftMasterHand/ftmasterhandcapturedamagemasterhand.c",
+            ),
+            Object(
+                Matching, "melee/ft/kinds/ftMasterHand/ftmasterhandthrownmasterhand.c"
+            ),
             # Crazy Hand
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhand.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandwait10.c"),
@@ -1124,11 +1112,16 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandfingergun2.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandtaggrab.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandgrabunk1b174.c"),
-            Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.c"),
             Object(
-                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.c"
+                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturecrazyhand.c"
             ),
-            Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.c"),
+            Object(
+                Matching,
+                "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturedamagecrazyhand.c",
+            ),
+            Object(
+                Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandcapturewaitcrazyhand.c"
+            ),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandthrowncrazyhand.c"),
             Object(Matching, "melee/ft/kinds/ftCrazyHand/ftcrazyhandtagcancel.c"),
             # Main
