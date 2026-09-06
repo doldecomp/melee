@@ -1,10 +1,16 @@
+#include "lbsnap.h"
+
 #include <placeholder.h>
 #include <stdio.h>
 
 #include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
-#include "lbsnap.static.h"
+#include <melee/it/types.h>
+#include <melee/lb/types.h>
+#ifdef MUST_MATCH
+#include <MetroTRK/intrinsics.h>
+#endif
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 #include <melee/ft/ft_0877.h>
@@ -14,6 +20,58 @@
 #include <sysdolphin/baselib/hsd_3B34.h>
 
 #define _p(x) (lbSnap_80433380.x)
+
+struct Unk80433380_48 {
+    int card_result;
+    int num;
+    int free_blocks;
+    int free_files;
+    lbCardNew_SnapshotEntry entries[0x7F];
+};
+ASSERT_SIZE(struct Unk80433380_48, 0x408);
+
+struct Unk80433380_0 {
+    s32 x0;
+    u16 width;
+    u16 height;
+    u8 x8;
+    s32 xC;
+    u16 stkind;
+    struct it_8026C47C_arg0_t x14;
+    s32 x34;
+    char x38[4];
+};
+
+typedef union LbMcSnapMemSnapIconData {
+    u8* ptr;
+    int offset;
+    int size;
+} LbMcSnapMemSnapIconData;
+
+struct Unk80433380 {
+    /* 0x00 */ struct Unk80433380_0* snap;
+    /* 0x04 */ char filename[64];
+    /* 0x44 */ LbMcSnapMemSnapIconData* icon_data;
+    /* 0x48 */ struct Unk80433380_48* slot;
+    /* 0x4C */ int card_state[2];
+    /* 0x54 */ int state_changed[3];
+}; /* size = 0x60 */
+ASSERT_SIZE(struct Unk80433380, 0x60);
+
+// snapshot save descriptor
+struct Unk803BACC8 {
+    /* 0x00 */ u8 icon[0x14];
+    /* 0x14 */ struct CardEntry entries[2];
+};
+
+static struct Unk80433380 lbSnap_80433380;
+static struct Unk803BACC8 lbSnap_803BACC8 = {
+    { 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3 },
+    {
+        { 0, 3, NULL },
+        { -1, 0, NULL },
+    },
+};
 
 void lbSnap_8001D2BC(void)
 {
@@ -237,6 +295,7 @@ void lbSnap_8001DA5C(const u8* src)
                 offset_base + ((src_column_in_tile = pixel_column % 4) << 1);
             pixel_column = column + 16;
             rgb565 = *(u16*) &src[offset];
+            rgb5a3 = rgb565 & RGB5A3_MASK_B;
             offset_base = pixel_column / 4;
             offset = pixel_column % 4;
             src_column_accum += 448;
@@ -245,7 +304,12 @@ void lbSnap_8001DA5C(const u8* src)
             src_tile = pixel_column / 4;
             src_row_in_tile = src_row % 4;
             src_column_in_tile = pixel_column % 4;
-            rgb5a3 = RGB565_TO_RGB5A3(rgb565);
+#ifdef MUST_MATCH
+            rgb5a3 = __rlwimi(rgb5a3, rgb565, 31, 17, 26) | RGB5A3_MASK_A;
+#else
+            rgb5a3 |= ((rgb565 >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G)) |
+                      RGB5A3_MASK_A;
+#endif
             offset_base += dst_tile_row;
             src_tile += src_tile_row;
             offset = (offset_base << 5) + (offset << 1);
