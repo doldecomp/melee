@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/gobj.h>
 
 /* 245BA4 */ void mnDiagram3_PopulateRankings(HSD_GObj* gobj);
+/* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
 /* 246D40 */ void mnDiagram3_UpdateScrollArrows(HSD_GObj* gobj);
 /* 246E04 */ void mnDiagram3_OnAnimComplete(HSD_GObj* gobj);
 /* 246E64 */ void mnDiagram3_Think(HSD_GObj* gobj);

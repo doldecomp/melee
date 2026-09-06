@@ -62,24 +62,6 @@ int GetNameCount(void);
 #define mnDiagram_GetFighterByIndex_s(x) ((int) mnDiagram_GetFighterByIndex(x))
 #define mnDiagram_GetFighterByIndex_BBC(x) mnDiagram_GetFighterByIndex_s(x)
 
-/* Union for 64-bit sorting operations */
-typedef union {
-    struct {
-        u8 idx; ///< SelectableCharacterKind or a nametag slot id
-        char pad1[7];
-        s32 x8;
-        s32 xC;
-    };
-    struct {
-        f64 d0;
-        f64 d8;
-    };
-    struct {
-        char pad2[8];
-        u64 value;
-    };
-} mnDiagram2_SortEntry;
-
 /* Diagram2 struct is defined in mn/types.h */
 
 /// @brief Checks if stat type uses time format (H:MM:SS).
@@ -1204,10 +1186,10 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
 
 /// @brief Computes aggregated fighter ranking across all saved names for icon
 /// stats.
-/// @param out Output buffer (cast to SortEntry*) for result
 /// @param type Stat type (0x15=Most Played, 0x16=2nd Most, 0x17=Least Played)
 /// @param idx Rank index to retrieve
-void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
+void mnDiagram2_GetAggregatedFighterRank(mnDiagram2_SortEntry* out, u8 type,
+                                         u8 idx)
 {
     mnDiagram2_SortEntry entries[SELKIND_COUNT];
     mnDiagram2_SortEntry temp;
@@ -1285,10 +1267,10 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
 
     // Write result to output buffer
     if (entries[idx].value != 0) {
-        *(mnDiagram2_SortEntry*) out = entries[idx];
+        *out = entries[idx];
     } else {
         entries[idx].idx = SELKIND_COUNT;
-        *(mnDiagram2_SortEntry*) out = entries[idx];
+        *out = entries[idx];
     }
 }
 
