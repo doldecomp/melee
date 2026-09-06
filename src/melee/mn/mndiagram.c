@@ -32,9 +32,9 @@ void* mnDiagram_804A07F4[4];
 void* mnDiagram_804A0804[4];
 void* mnDiagram_804A0824[4];
 HSD_GObj* mnDiagram_804D6C10;
-mnDiagram_ArchiveData mnDiagram_804A0834;
-mnDiagram_ArchiveData mnDiagram_804A0844;
 mnDiagram_ArchiveData mnDiagram_804A0854;
+mnDiagram_ArchiveData mnDiagram_804A0844;
+mnDiagram_ArchiveData mnDiagram_804A0834;
 
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
@@ -357,8 +357,6 @@ static inline int mnDiagram_SumFighterKOs(u8 field_index)
     return total;
 }
 
-
-
 /// @brief Gets total falls (deaths) of a fighter against all other fighters.
 /// @details Iterates through all unlocked fighters and sums how many times
 ///          each fighter KO'd the target fighter. This is the column sum
@@ -386,8 +384,6 @@ int mnDiagram_GetFighterTotalFalls(u8 field_index)
 
 /// @brief Counts the number of unlocked fighters (inline-expanded form).
 /// @return Number of unlocked fighters.
-
-
 static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
 {
     int i;
@@ -1103,9 +1099,78 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
     return result;
 }
 
+static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
+                                                           int start, int rank,
+                                                           s32* index)
+{
+    u8 result;
+    u8* p;
+    u8* p2;
+    int remaining;
 
+    remaining = rank;
+    *index = start;
+    p = sorted + start;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[*index];
+            break;
+        }
+        p2 = p;
+    loop:
+        (*index)++;
+        p2++;
+        p++;
+        if (*index >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
 
+static inline u8 mnDiagram_GetVisibleFighterRowForInput(u8* sorted,
+                                                        Diagram* data,
+                                                        const u16* selection,
+                                                        s32* index)
+{
+    u16 selected_word;
+    u16 cursor_word;
+    u8 result;
+    u8* p;
+    u8* p2;
+    int remaining;
 
+    selected_word = *selection;
+    cursor_word = data->fighter_cursor_pos;
+    remaining = selected_word >> 8;
+    *index = cursor_word >> 8;
+    p = sorted + *index;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[*index];
+            break;
+        }
+        p2 = p;
+    loop:
+        (*index)++;
+        p2++;
+        p++;
+        if (*index >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
 
 static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
                                                         u8* p, int start,
@@ -1162,7 +1227,19 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_804D6C10->user_data;
 }
 
-
+static inline u8 mnDiagram_GetVisibleNameColumnForInput(int start, int rank)
+{
+    while (rank > 0) {
+        do {
+            start++;
+            if (start >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(mnDiagram_GetNameByIndex(start)) == NULL);
+        rank--;
+    }
+    return mnDiagram_GetNameByIndex(start);
+}
 
 static inline s32 mnDiagram_CountUnlockedFightersForInput(void)
 {
