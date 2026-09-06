@@ -199,7 +199,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
     start->rules = vs->start.rules;
     start->rules.match_kind = 0;
 
-    start->rules.x0_6 = vs->start.rules.x4_4 = false;
+    start->rules.timer_enabled = vs->start.rules.x4_4 = false;
 
     start->rules.x5_0 = true;
     start->rules.x1_2 = true;
