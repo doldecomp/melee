@@ -907,6 +907,19 @@ static inline void copyName(char* name_text, char* name_buffer)
     name_buffer[len] = null_char;
 }
 
+static inline s32 mnNameNew_CountVariants(GlyphRow* glyphs, u8 selected_key)
+{
+    s32 count = 0;
+    char** ptrs = glyphs[(u8) selected_key];
+    s8 terminator = (s8) *mnNameNew_NullCharacter;
+
+    while (terminator != (s8) *ptrs[0]) {
+        ptrs++;
+        count++;
+    }
+    return count;
+}
+
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     char space_lead;
@@ -952,17 +965,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 if (n == 0) {
                     lbAudioAx_80024030(1);
                     mn_804A04F0.confirmed_selection = 0;
-                    n = 0;
-                    {
-                        u16 sel2 = *hovered;
-                        GlyphRow* glyphs = layout->lower_glyphs;
-                        char** ptrs = glyphs[(u8) sel2];
-                        null_char = (s8) *mnNameNew_NullCharacter;
-                        while (null_char != (s8) *ptrs[0]) {
-                            ptrs++;
-                            n++;
-                        }
-                    }
+                    n = mnNameNew_CountVariants(layout->lower_glyphs,
+                                                (u8) *hovered);
                     {
                         s32 variant_count = (u8) (n * 2);
                         data->variant_gobj = mnNameNew_GlyphVariantSetup(
