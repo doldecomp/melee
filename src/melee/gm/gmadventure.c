@@ -1420,7 +1420,7 @@ void gm_801B4768(GameModeState* scene)
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
         if (data->players[i + 1].slot_type == Gm_PKind_Cpu) {
-            data->players[i + 1].x20 *= 0.5F;
+            data->players[i + 1].model_scale *= 0.5F;
         }
     }
 }
@@ -1616,7 +1616,7 @@ void gm_801B4F44(GameModeState* scene)
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
         if (data->players[i + 1].slot_type == Gm_PKind_Cpu) {
-            data->players[i + 1].x20 = 1.4F;
+            data->players[i + 1].model_scale = 1.4F;
         }
     }
     data->rules.x50 = gm_8017E7FC;

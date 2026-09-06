@@ -1,7 +1,6 @@
 #include "gmtoulib.h"
 
 #include <melee/ft/forward.h>
-#include <melee/gm/forward.h>
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -10,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "forward.h"
 #include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
@@ -492,6 +492,14 @@ static inline HSD_JObj* fn_8018B090_inline0(BracketEntry* bracket_entries,
         .x2C->hsd_obj;
 }
 
+static inline HSD_JObj* fn_8018B090_inline1(BracketEntry* bracket_entries,
+                                            s32 bracket_entry_index)
+{
+    return bracket_entries[bracket_entry_index]
+        .slots[lbl_804D6634]
+        .x2C->hsd_obj;
+}
+
 static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
                                                 s32 bracket_entry_index)
 {
@@ -502,6 +510,12 @@ static inline void fn_8018B090_inline3(BracketEntry* entry)
 {
     fn_80190520((f32) (entry->xC + (entry->x14 / 2)),
                 -(f32) (entry->x10 + (entry->x18 / 2)), -150.0f);
+}
+
+static inline void gmTournament_GetBracketCenterY(BracketEntry* entry,
+                                                  s32 height, f32* y)
+{
+    *y = -(f32) (entry->x10 + height / 2);
 }
 
 static inline s32 fn_8018B090_inline4(BracketEntry* entry)
@@ -2679,13 +2693,13 @@ void gm_801905F0(StartMeleeData* arg0)
     fn_801640B0(&arg0->rules.x20);
     arg0->rules.match_kind = rules->mode;
     if (rules->mode != 1) {
-        arg0->rules.x0_6 = true;
+        arg0->rules.timer_enabled = true;
     } else if (rules->stock_time_limit != 0) {
-        arg0->rules.x0_6 = true;
+        arg0->rules.timer_enabled = true;
     } else {
-        arg0->rules.x0_6 = false;
+        arg0->rules.timer_enabled = false;
     }
-    if (arg0->rules.x0_6) {
+    if (arg0->rules.timer_enabled) {
         if (rules->mode != 1) {
             if (rules->time_limit == 0) {
                 arg0->rules.time_limit = 99 * 60;
@@ -2740,7 +2754,7 @@ void gm_801905F0(StartMeleeData* arg0)
 
     for (i = 0; i < 4; i++) {
         if (i < tm->x30) {
-            arg0->players[i].x20 = 1.0f;
+            arg0->players[i].model_scale = 1.0f;
             arg0->players[i].nametag = (u8) MIN(tm->x4B8[i].x6, 0x78);
             if (tm->x4B8[i].x2 != 0) {
                 arg0->players[i].ckind = gm_801905F0_inline0(fn_8018F410());
@@ -2763,10 +2777,11 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
             if (gmMainLib_GetGameRules()->handicap != 0) {
-                arg0->players[i].x18 = fn_8016419C(tm->x4B8[i].x5);
-                arg0->players[i].x1C = fn_801641B4(tm->x4B8[i].x5);
+                arg0->players[i].attack_ratio = fn_8016419C(tm->x4B8[i].x5);
+                arg0->players[i].defense_ratio = fn_801641B4(tm->x4B8[i].x5);
             } else {
-                arg0->players[i].x18 = arg0->players[i].x1C = 1.0F;
+                arg0->players[i].attack_ratio =
+                    arg0->players[i].defense_ratio = 1.0F;
             }
         } else {
             arg0->players[i].slot_type = Gm_PKind_NA;
