@@ -1439,6 +1439,12 @@ static const Vec3 mnNameNew_803B8528 = { -0.5f, 0.7f, 0.0f };
 #pragma push
 #pragma inline_depth(2)
 #endif
+static inline void GlyphVariantCount(u16 count, s32* out)
+{
+    count &= 0xFF;
+    *out = count;
+}
+
 static inline void AnimateGlyphVariant(HSD_JObj* variant,
                                        GlyphVariantEntry* user_data, s32 i)
 {
@@ -1466,6 +1472,7 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
     HSD_JObj* key_jobj;
     HSD_JObj* ref_jobj;
     s32 i;
+    s32 variant_count;
     HSD_JObj* ref2;
     Vec3 position;
     Vec3 offset;
@@ -1527,8 +1534,9 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
         dy = HSD_JObjGetTranslationY(ref3) - HSD_JObjGetTranslationY(ref_jobj);
 
         variant_desc = mnNameNew_804A0720;
+        GlyphVariantCount(arg1, &variant_count);
         i = 0;
-        for (; i < (s32) (u8) arg1; i++) {
+        for (; i < variant_count; i++) {
             {
                 HSD_JObj* created;
                 CreateGlyphVariant(variant_desc, user_data, i, &created);
@@ -2016,11 +2024,6 @@ void mnNameNew_8023EA08(UNK_T arg0)
 {
     mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }
-
-StaticModelDesc mnNameNew_804A0720[2];
-StaticModelDesc mnNameNew_804A0710;
-StaticModelDesc mnNameNew_804A0700;
-StaticModelDesc mnNameNew_804A06F0;
 
 static u8 mnNameNew_804D4F98[8] ATTRIBUTE_ALIGN(8) = { 0 };
 
