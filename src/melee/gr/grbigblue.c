@@ -3979,24 +3979,23 @@ typedef union grBb_CarGround {
 #pragma push
 #pragma fp_contract on
 #endif
-static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
-                                             grBb_CarGround* gp, s32* result,
-                                             Vec3* pos)
+static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
+                                            s32* result, Vec3* pos)
 {
     s32 slot;
 
-    PAD_STACK(4);
-
     switch (arg2) {
     case 1: {
-        struct grBigBlue_CarLane* car = &gp->typed.cars[arg1];
+        struct grBigBlue_CarLane* car = &gp->u.bigblue.car.lanes[arg1];
 
-        HSD_JObjSetFlagsAll(gp->typed.jobjs[car->collision_slot], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(
+            gp->u.bigblue.car.collision_jobjs[car->collision_slot],
+            JOBJ_HIDDEN);
 
-        if (gp->typed.cars[arg1].pos.x > 0.0f) {
-            gp->typed.ranks[car->collision_slot] = 0;
+        if (gp->u.bigblue.car.lanes[arg1].pos.x > 0.0f) {
+            gp->u.bigblue.car.ranks[car->collision_slot] = 0;
         } else {
-            gp->typed.ranks[car->collision_slot] = 2;
+            gp->u.bigblue.car.ranks[car->collision_slot] = 2;
         }
         *result = 1;
         car->state = arg2;
@@ -4004,40 +4003,19 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
     }
 
     case 10: {
-        gp->typed.cars[arg1].threshold = 0x14;
+        gp->u.bigblue.car.lanes[arg1].threshold = 0x14;
         *result = 1;
-        gp->typed.cars[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = arg2;
         break;
     }
 
     case 2:
     case 3:
     case 4: {
-        s32 hi = (s32) yakumono_param->x60;
-        s32 lo = (s32) yakumono_param->x5C;
-
-        if (lo > hi) {
-            s32 diff = lo - hi;
-            s32 rand_val;
-            if (diff != 0) {
-                rand_val = HSD_Randi(diff);
-            } else {
-                rand_val = 0;
-            }
-            lo = hi + rand_val;
-        } else if (lo < hi) {
-            s32 diff = hi - lo;
-            s32 rand_val;
-            if (diff != 0) {
-                rand_val = HSD_Randi(diff);
-            } else {
-                rand_val = 0;
-            }
-            lo += rand_val;
-        }
-        gp->typed.cars[arg1].threshold = lo;
+        gp->u.bigblue.car.lanes[arg1].threshold =
+            rand_range(yakumono_param->x5C, yakumono_param->x60);
         *result = 1;
-        gp->typed.cars[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = arg2;
         break;
     }
 
@@ -4054,125 +4032,66 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
             s32 j;
 
             for (count = j = 0; j < 30; j++) {
-                if (gp->typed.ranks[j] == 0) {
+                if (gp->u.bigblue.car.ranks[j] == 0) {
                     count++;
                 }
             }
 
             if (count != 0) {
                 s32 pick;
-                s32 offset;
-                u8* car;
-                u8* car_d4;
-                Vec3* car_e0;
-                f32* car_ec;
 
                 slot = 0;
-                if (count != 0) {
-                    pick = HSD_Randi(count);
-                } else {
-                    pick = slot;
-                }
+                pick = ZRANDI(count);
 
                 for (; slot < 30; slot++) {
-                    if (gp->typed.ranks[slot] == 0) {
+                    if (gp->u.bigblue.car.ranks[slot] == 0) {
                         if (--pick < 0) {
                             break;
                         }
                     }
                 }
 
-                offset = arg1 << 6;
-                car = gp->bytes + offset;
+                gp->u.bigblue.car.lanes[arg1].collision_slot = slot;
+                gp->u.bigblue.car.lanes[arg1].direction = 0;
 
-                {
-                    typedef struct grBb_SlotBits {
-                        u16 pad0 : 7;
-                        u16 slot : 5;
-                        u16 pad1 : 4;
-                    } grBb_SlotBits;
-                    ((grBb_SlotBits*) (car + 0xD4))->slot = slot;
-                }
-
-                car_d4 = car + 0xD4;
-                car_e0 = (Vec3*) (car + 0xE0);
-
-                {
-                    typedef struct grBb_DirBits {
-                        u8 pad0 : 6;
-                        u8 dir : 1;
-                        u8 pad1 : 1;
-                    } grBb_DirBits;
-                    ((grBb_DirBits*) car_d4)->dir = 0;
-                }
-
-                *(f32*) (car + 0xE0) = pos->x;
-                *(f32*) (car + 0xE4) =
+                gp->u.bigblue.car.lanes[arg1].pos.x = pos->x;
+                gp->u.bigblue.car.lanes[arg1].pos.y =
                     (yakumono_param->x2C * Ground_801C0498()) + pos->y;
-                *(f32*) (car + 0xE8) = 0.0f;
-                *(f32*) (car + 0xD8) = pos->x;
-                *(f32*) (car + 0xDC) = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].pos.z = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].target = pos->x;
+                gp->u.bigblue.car.lanes[arg1].delta = 0.0f;
 
-                *(f32*) (car + 0xF4) = 0.0f;
-                *(f32*) (car + 0xF8) = 0.0f;
-                *(f32*) (car + 0xFC) = 0.0f;
-                *(f32*) (car + 0x100) = 0.0f;
-                *(f32*) (car + 0x104) = (f32) (M_TAU * HSD_Randf());
-                *(f32*) (car + 0x108) =
+                gp->u.bigblue.car.lanes[arg1].gravity = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].height = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].velocity = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].accel = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].rotation =
+                    (f32) (M_TAU * HSD_Randf());
+                gp->u.bigblue.car.lanes[arg1].amplitude =
                     yakumono_param->x34 * Ground_801C0498();
-                *(f32*) (car + 0x10C) = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].angular_velocity = 0.0f;
 
-                {
-                    s32 hi = (s32) yakumono_param->x60;
-                    s32 lo = (s32) yakumono_param->x5C;
-                    if (lo > hi) {
-                        s32 diff = lo - hi;
-                        s32 rand_val;
-                        if (diff != 0) {
-                            rand_val = HSD_Randi(diff);
-                        } else {
-                            rand_val = 0;
-                        }
-                        lo = hi + rand_val;
-                    } else if (lo < hi) {
-                        s32 diff = hi - lo;
-                        s32 rand_val;
-                        if (diff != 0) {
-                            rand_val = HSD_Randi(diff);
-                        } else {
-                            rand_val = 0;
-                        }
-                        lo += rand_val;
-                    }
-                    *(s32*) (gp->bytes + offset + 0xF0) = lo;
-                }
+                gp->u.bigblue.car.lanes[arg1].threshold =
+                    rand_range(yakumono_param->x5C, yakumono_param->x60);
 
-                car_ec = (f32*) (gp->bytes + offset + 0xEC);
-                gp->typed.ranks[slot] = 1;
-                *car_ec = 0.0f;
+                gp->u.bigblue.car.ranks[slot] = 1;
+                gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                {
-                    Ground_801C5440(&gp->ground, slot,
-                                    lbl_803E3010[HSD_Randi(4)]);
-                }
+                Ground_801C5440(gp, slot, lbl_803E3010[HSD_Randi(4)]);
 
-                Ground_801C5630(&gp->ground, arg1, *car_ec);
+                Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
 
                 {
                     HSD_JObj* jobj;
-                    HSD_JObjClearFlagsAll(gp->typed.jobjs[slot], JOBJ_HIDDEN);
-                    jobj = gp->typed.jobjs[slot];
-                    HSD_JObjSetTranslate(jobj, car_e0);
+                    HSD_JObjClearFlagsAll(
+                        gp->u.bigblue.car.collision_jobjs[slot], JOBJ_HIDDEN);
+                    jobj = gp->u.bigblue.car.collision_jobjs[slot];
+                    HSD_JObjSetTranslate(
+                        jobj, &gp->u.bigblue.car.lanes[arg1].pos);
                 }
 
-                {
-                    typedef struct grBb_StateBits {
-                        u8 state : 6;
-                        u8 pad0 : 2;
-                    } grBb_StateBits;
-                    *result = 1;
-                    ((grBb_StateBits*) car_d4)->state = arg2;
-                }
+                *result = 1;
+                gp->u.bigblue.car.lanes[arg1].state = arg2;
             }
         }
         break;
@@ -4191,126 +4110,66 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
             s32 j;
 
             for (j = 0, count = 0; j < 30; j++) {
-                if (gp->typed.ranks[j] == 0) {
+                if (gp->u.bigblue.car.ranks[j] == 0) {
                     count++;
                 }
             }
 
             if (count != 0) {
                 s32 pick;
-                s32 offset;
-                u8* car;
-                u8* car_d4;
-                Vec3* car_e0;
-                f32* car_ec;
 
                 slot = 0;
-
-                if (count != 0) {
-                    pick = HSD_Randi(count);
-                } else {
-                    pick = slot;
-                }
+                pick = ZRANDI(count);
 
                 for (; slot < 30; slot++) {
-                    if (gp->typed.ranks[slot] == 0) {
+                    if (gp->u.bigblue.car.ranks[slot] == 0) {
                         if (--pick < 0) {
                             break;
                         }
                     }
                 }
 
-                offset = arg1 << 6;
-                car = gp->bytes + offset;
+                gp->u.bigblue.car.lanes[arg1].collision_slot = slot;
+                gp->u.bigblue.car.lanes[arg1].direction = 0;
 
-                {
-                    typedef struct grBb_SlotBits {
-                        u16 pad0 : 7;
-                        u16 slot : 5;
-                        u16 pad1 : 4;
-                    } grBb_SlotBits;
-                    ((grBb_SlotBits*) (car + 0xD4))->slot = slot;
-                }
-
-                car_d4 = car + 0xD4;
-                car_e0 = (Vec3*) (car + 0xE0);
-
-                {
-                    typedef struct grBb_DirBits {
-                        u8 pad0 : 6;
-                        u8 dir : 1;
-                        u8 pad1 : 1;
-                    } grBb_DirBits;
-                    ((grBb_DirBits*) car_d4)->dir = 0;
-                }
-
-                *(f32*) (car + 0xE0) = pos->x;
-                *(f32*) (car + 0xE4) =
+                gp->u.bigblue.car.lanes[arg1].pos.x = pos->x;
+                gp->u.bigblue.car.lanes[arg1].pos.y =
                     (yakumono_param->x2C * Ground_801C0498()) + pos->y;
-                *(f32*) (car + 0xE8) = 0.0f;
-                *(f32*) (car + 0xD8) = pos->x;
-                *(f32*) (car + 0xDC) = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].pos.z = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].target = pos->x;
+                gp->u.bigblue.car.lanes[arg1].delta = 0.0f;
 
-                *(f32*) (car + 0xF4) = 0.0f;
-                *(f32*) (car + 0xF8) = 0.0f;
-                *(f32*) (car + 0xFC) = 0.0f;
-                *(f32*) (car + 0x100) = 0.0f;
-                *(f32*) (car + 0x104) = (f32) (M_TAU * HSD_Randf());
-                *(f32*) (car + 0x108) =
+                gp->u.bigblue.car.lanes[arg1].gravity = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].height = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].velocity = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].accel = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].rotation =
+                    (f32) (M_TAU * HSD_Randf());
+                gp->u.bigblue.car.lanes[arg1].amplitude =
                     yakumono_param->x34 * Ground_801C0498();
-                *(f32*) (car + 0x10C) = 0.0f;
+                gp->u.bigblue.car.lanes[arg1].angular_velocity = 0.0f;
 
-                {
-                    s32 hi = (s32) yakumono_param->x60;
-                    s32 lo = (s32) yakumono_param->x5C;
-                    if (lo > hi) {
-                        s32 diff = lo - hi;
-                        s32 rand_val;
-                        if (diff != 0) {
-                            rand_val = HSD_Randi(diff);
-                        } else {
-                            rand_val = 0;
-                        }
-                        lo = hi + rand_val;
-                    } else if (lo < hi) {
-                        s32 diff = hi - lo;
-                        s32 rand_val;
-                        if (diff != 0) {
-                            rand_val = HSD_Randi(diff);
-                        } else {
-                            rand_val = 0;
-                        }
-                        lo += rand_val;
-                    }
-                    *(s32*) (gp->bytes + offset + 0xF0) = lo;
-                }
+                gp->u.bigblue.car.lanes[arg1].threshold =
+                    rand_range(yakumono_param->x5C, yakumono_param->x60);
 
-                car_ec = (f32*) (gp->bytes + offset + 0xEC);
-                gp->typed.ranks[slot] = 1;
-                *car_ec = 0.0f;
+                gp->u.bigblue.car.ranks[slot] = 1;
+                gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                {
-                    Ground_801C5440(&gp->ground, slot,
-                                    lbl_803E3010[HSD_Randi(4)]);
-                }
+                Ground_801C5440(gp, slot, lbl_803E3010[HSD_Randi(4)]);
 
-                Ground_801C5630(&gp->ground, arg1, *car_ec);
+                Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
 
                 {
                     HSD_JObj* jobj;
-                    HSD_JObjClearFlagsAll(gp->typed.jobjs[slot], JOBJ_HIDDEN);
-                    jobj = gp->typed.jobjs[slot];
-                    HSD_JObjSetTranslate(jobj, car_e0);
+                    HSD_JObjClearFlagsAll(
+                        gp->u.bigblue.car.collision_jobjs[slot], JOBJ_HIDDEN);
+                    jobj = gp->u.bigblue.car.collision_jobjs[slot];
+                    HSD_JObjSetTranslate(
+                        jobj, &gp->u.bigblue.car.lanes[arg1].pos);
                 }
 
-                {
-                    typedef struct grBb_StateBits {
-                        u8 state : 6;
-                        u8 pad0 : 2;
-                    } grBb_StateBits;
-                    *result = 1;
-                    ((grBb_StateBits*) car_d4)->state = arg2;
-                }
+                *result = 1;
+                gp->u.bigblue.car.lanes[arg1].state = arg2;
             }
         }
         break;
@@ -4318,14 +4177,14 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
 
     case 7:
     case 8: {
-        gp->typed.cars[arg1].threshold = 0x3E8;
+        gp->u.bigblue.car.lanes[arg1].threshold = 0x3E8;
         *result = 1;
-        gp->typed.cars[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = arg2;
         break;
     }
 
     case 9: {
-        gp->typed.cars[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = arg2;
         break;
     }
     }
@@ -4334,10 +4193,11 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
 s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 {
     s32 result = 0;
-    grBb_CarGround* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     Vec3 pos;
+    PAD_STACK(4);
 
-    grBigBlue_801EE398_inline(arg2, arg1, gp, &result, &pos);
+    grBigBlue_801EE398_inline(gp, arg1, arg2, &result, &pos);
 
     return result;
 }
