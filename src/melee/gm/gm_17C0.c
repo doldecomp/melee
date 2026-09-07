@@ -116,7 +116,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
             tmp->x8 = 1;
-        } else if (ftBossLib_8015C270() == 0) {
+        } else if (ftBossLib_IsMasterHandEntry() == 0) {
             tmp->x0 = 2;
         }
         break;

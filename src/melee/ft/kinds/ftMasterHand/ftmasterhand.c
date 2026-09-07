@@ -616,7 +616,7 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
     {
         UNK_T* items = ftdata->x48_items;
         PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
-        ftBossLib_8015BDB4(gobj);
+        ftBossLib_ReportGObjSlotType(gobj);
         it_8026B3F8(items[0], It_Kind_MasterHand_Laser);
         it_8026B3F8(items[1], It_Kind_MasterHand_Bullet);
         fp->no_normal_motion = true;
