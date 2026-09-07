@@ -11,8 +11,8 @@
 bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.x668 & HSD_PAD_B) {
-        if (fp->input.lstick.y >= p_ftCommonData->x21C) {
+    if (fp->input.pressed_buttons & HSD_PAD_B) {
+        if (fp->input.lstick[0].y >= p_ftCommonData->x21C) {
             if (ftData_SpecialAirHi[fp->kind] == NULL) {
                 return false;
             }
@@ -20,7 +20,7 @@ bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
             fp->x2227_b5 = true;
             return true;
         }
-        if (fp->input.lstick.y <= -p_ftCommonData->x21C) {
+        if (fp->input.lstick[0].y <= -p_ftCommonData->x21C) {
             if (ftData_SpecialAirLw[fp->kind] == NULL) {
                 return false;
             }
@@ -28,11 +28,12 @@ bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
             fp->x2227_b5 = true;
             return true;
         }
-        if (ABS(fp->input.lstick.x) >= p_ftCommonData->x218) {
+        if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x218) {
             if (ftData_SpecialAirS[fp->kind] == NULL) {
                 return false;
             }
-            if (fp->input.lstick.x * fp->facing_dir < -p_ftCommonData->x220) {
+            if (fp->input.lstick[0].x * fp->facing_dir < -p_ftCommonData->x220)
+            {
                 ftCommon_UpdateFacing(fp);
             }
             ftData_SpecialAirS[fp->kind](gobj);

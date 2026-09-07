@@ -44,7 +44,7 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
     if (fp->x1968_jumpsUsed == 1) {
         if (ft_did_jump(fp, arg1)) {
             if (ft_800D2D0C(gobj)) {
-                vel.x = fp->input.lstick.x * x2d0->x8;
+                vel.x = fp->input.lstick[0].x * x2d0->x8;
                 vel.y = x2d0->x14[0];
                 vel.z = 0.0F;
                 ft_800D2E7C(gobj, &vel);
@@ -61,8 +61,8 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
             r29 = 0;
         }
         r4 = 1;
-        if (!(fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
-            !(fp->input.held_inputs & 0xC00))
+        if (!(fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold) &&
+            !(fp->input.held_buttons[0] & 0xC00))
         {
             r4 = 0;
         }
@@ -97,13 +97,13 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
         fp->x1968_jumpsUsed +
         (tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
     msid2 = --msid;
-    vel.x = fp->input.lstick.x * p->x8;
+    vel.x = fp->input.lstick[0].x * p->x8;
     tmp = fp->x2D0;
     tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
     vel.y = p->x14[msid - tmp->x2C];
     vel.z = 0.0F;
     ftCo_800CBAC4(gobj, msid2, &vel, false);
-    if ((fp->input.lstick.x * fp->facing_dir) < -p->x4) {
+    if ((fp->input.lstick[0].x * fp->facing_dir) < -p->x4) {
         *(s32*) &fp->mv.ca.specials.grav = p->x0;
     } else {
         *(s32*) &fp->mv.ca.specials.grav = 0;

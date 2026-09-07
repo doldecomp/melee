@@ -91,18 +91,19 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-    float abs_lstick_x = abs(fp->input.lstick.x);
+    float abs_lstick_x = abs(fp->input.lstick[0].x);
     if (fp->cmd_vars[0] == 0 && abs_lstick_x > da->x34) {
         float temp_f1 =
             da->x38 * ((abs_lstick_x - da->x34) / (1.0 /*d*/ - da->x34));
-        temp_f1 = (fp->input.lstick.x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1)
-                                              : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (fp->input.lstick[0].x > 0.0f)
+                      ? -(DEGREES_TO_RADIANS * temp_f1)
+                      : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->lstick_angle)) {
             fp->lstick_angle = temp_f1;
         }
     }
     if (ftCheckThrowB3(fp)) {
-        if (abs(fp->input.lstick.x) > da->x30) {
+        if (abs(fp->input.lstick[0].x) > da->x30) {
             ftCommon_UpdateFacing(fp);
             ftPartSetRotY(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
@@ -115,19 +116,20 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
-    float abs_lstick_x = abs(fp->input.lstick.x);
+    float abs_lstick_x = abs(fp->input.lstick[0].x);
     u8 _[16];
     if (fp->cmd_vars[0] == 0 && abs_lstick_x > da->x34) {
         float temp_f1 =
             da->x38 * ((abs_lstick_x - da->x34) / (1.0 /*d*/ - da->x34));
-        temp_f1 = (fp->input.lstick.x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1)
-                                              : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (fp->input.lstick[0].x > 0.0f)
+                      ? -(DEGREES_TO_RADIANS * temp_f1)
+                      : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->lstick_angle)) {
             fp->lstick_angle = temp_f1;
         }
     }
     if (ftCheckThrowB3(fp)) {
-        if (abs(fp->input.lstick.x) > da->x30) {
+        if (abs(fp->input.lstick[0].x) > da->x30) {
             ftCommon_UpdateFacing(fp);
             ftPartSetRotY(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }

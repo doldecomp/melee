@@ -379,8 +379,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
     collData = &fp->coll_data;
-    temp_f2 = fp->input.lstick.x;
-    temp_f1 = fp->input.lstick.y;
+    temp_f2 = fp->input.lstick[0].x;
+    temp_f1 = fp->input.lstick[0].y;
     temp_f2 = temp_f2 * temp_f2;
     temp_f1 = temp_f1 * temp_f1;
     temp_f5 = temp_f2 + temp_f1;
@@ -407,8 +407,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
 
     if (!(var_f31 < attributes->x50)) {
         groundVector = &collData->floor.normal;
-        inputVector.x = fp->input.lstick.x;
-        inputVector.y = fp->input.lstick.y;
+        inputVector.x = fp->input.lstick[0].x;
+        inputVector.y = fp->input.lstick[0].y;
         inputVector.z = 0;
 
         if (!(lbVector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
@@ -417,8 +417,8 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
             if (ftCo_8009A134(gobj) == 0) {
                 ftCommon_UpdateFacing(fp);
 
-                temp_f5 = atan2f(fp->input.lstick.y,
-                                 fp->input.lstick.x * fp->facing_dir);
+                temp_f5 = atan2f(fp->input.lstick[0].y,
+                                 fp->input.lstick[0].x * fp->facing_dir);
 
                 fp->mv.zd.specialhi.x4.x = inputVector.x;
                 fp->mv.zd.specialhi.x4.y = inputVector.y;
@@ -468,8 +468,8 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     f64 guess;
 
     fp = GET_FIGHTER(gobj);
-    temp_f2 = fp->input.lstick.x;
-    temp_f1 = fp->input.lstick.y;
+    temp_f2 = fp->input.lstick[0].x;
+    temp_f1 = fp->input.lstick[0].y;
     attributes = fp->dat_attrs;
     temp_f1 = temp_f1 * temp_f1;
     temp_f2 = temp_f2 * temp_f2;
@@ -496,17 +496,17 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
     }
 
     if (var_f31 > attributes->x50) {
-        temp_f1 = fp->input.lstick.x;
+        temp_f1 = fp->input.lstick[0].x;
         if (temp_f1 < 0) {
             temp_f1 = -temp_f1;
         }
         if (temp_f1 > 0.001f) {
             ftCommon_UpdateFacing(fp);
         }
-        var_f30 =
-            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
-        fp->mv.zd.specialhi.x4.x = fp->input.lstick.x;
-        fp->mv.zd.specialhi.x4.y = fp->input.lstick.y;
+        var_f30 = atan2f(fp->input.lstick[0].y,
+                         fp->input.lstick[0].x * fp->facing_dir);
+        fp->mv.zd.specialhi.x4.x = fp->input.lstick[0].x;
+        fp->mv.zd.specialhi.x4.y = fp->input.lstick[0].y;
     } else {
         ftCommon_8007DA24(fp);
         var_f30 = (float) M_PI_2;

@@ -304,8 +304,8 @@ void ftPp_SpecialS1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    if (ABS(fp->input.lstick.x) >= da->x40) {
-        fp->mv.pp.specials.x1C = fp->input.lstick.x * da->x30;
+    if (ABS(fp->input.lstick[0].x) >= da->x40) {
+        fp->mv.pp.specials.x1C = fp->input.lstick[0].x * da->x30;
     } else {
         fp->mv.pp.specials.x1C = 0.0F;
     }
@@ -320,8 +320,8 @@ void ftPp_SpecialAirS1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    if (ABS(fp->input.lstick.x) >= da->x40) {
-        fp->mv.pp.specials.x1C = fp->input.lstick.x * da->x34;
+    if (ABS(fp->input.lstick[0].x) >= da->x40) {
+        fp->mv.pp.specials.x1C = fp->input.lstick[0].x * da->x34;
     } else {
         fp->mv.pp.specials.x1C = 0.0F;
     }
@@ -367,7 +367,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     fp->mv.pp.specials.x14 += 1;
-    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
+    if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
     if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > temp_r30->x68)
@@ -425,7 +425,9 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     temp_r31->mv.pp.specials.x14 += 1;
-    if ((temp_r31->cmd_vars[2] != 0) && (temp_r31->input.x668 & HSD_PAD_B)) {
+    if ((temp_r31->cmd_vars[2] != 0) &&
+        (temp_r31->input.pressed_buttons & HSD_PAD_B))
+    {
         temp_r31->mv.pp.specials.x10 += 1;
     }
     if (temp_r31->mv.pp.specials.x10 != 0 &&
@@ -456,7 +458,7 @@ void ftPp_SpecialAirS1_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     fp->mv.pp.specials.x14 += 1;
-    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
+    if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
     if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > da->x68) {
@@ -485,7 +487,7 @@ void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     fp->mv.pp.specials.x14 += 1;
-    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
+    if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
     if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > da->x68) {

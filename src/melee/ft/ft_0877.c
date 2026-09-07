@@ -16,13 +16,13 @@
 bool ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->input.held_inputs & arg1);
+    return TEST(fp->input.held_buttons[0] & arg1);
 }
 
 bool ft_80087818(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->input.x668 & arg1);
+    return TEST(fp->input.pressed_buttons & arg1);
 }
 
 bool ft_80087838(HSD_GObj* gobj)

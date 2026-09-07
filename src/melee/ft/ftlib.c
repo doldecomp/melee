@@ -280,8 +280,8 @@ s32 ftLib_800865CC(HSD_GObj* gobj)
 void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *x = fp->input.lstick.x;
-    *y = fp->input.lstick.y;
+    *x = fp->input.lstick[0].x;
+    *y = fp->input.lstick[0].y;
 }
 
 HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)

@@ -116,7 +116,7 @@ void ftCommon_8007CA80(Fighter* fp, float accel, float target_vel,
 void ftCommon_8007CADC(Fighter* fp, float threshold, float accel_max,
                        float target_max)
 {
-    float lsx = fp->input.lstick.x;
+    float lsx = fp->input.lstick[0].x;
     float accel;
     float target_vel;
 
@@ -380,7 +380,7 @@ void ftCommon_8007D28C(Fighter* fp, float vel)
 {
     float accel_scaling;
     float accel_flat;
-    float lsx = fp->input.lstick.x;
+    float lsx = fp->input.lstick[0].x;
     ftCo_DatAttrs* attrs = &fp->co_attrs;
     accel_scaling = lsx * attrs->air_drift_stick_mul;
 
@@ -417,9 +417,9 @@ void ftCommon_8007D344(Fighter* fp, float threshold, float accel_max,
 {
     float accel, target;
 
-    if (ABS(fp->input.lstick.x) >= threshold) {
-        accel = fp->input.lstick.x * accel_max;
-        target = fp->input.lstick.x * target_max;
+    if (ABS(fp->input.lstick[0].x) >= threshold) {
+        accel = fp->input.lstick[0].x * accel_max;
+        target = fp->input.lstick[0].x * target_max;
     } else {
         target = 0;
         accel = 0;
@@ -433,9 +433,9 @@ void ftCommon_8007D3A8(Fighter* fp, float threshold, float accel_max,
     float accel;
     float target_vel;
 
-    if (ABS(fp->input.lstick.x) >= threshold) {
-        accel = fp->input.lstick.x * accel_max;
-        target_vel = fp->input.lstick.x * target_max;
+    if (ABS(fp->input.lstick[0].x) >= threshold) {
+        accel = fp->input.lstick[0].x * accel_max;
+        target_vel = fp->input.lstick[0].x * target_max;
     } else {
         target_vel = 0;
         accel = 0;
@@ -495,7 +495,7 @@ void ftCommon_Ascend(Fighter* fp, float accel, float max)
 bool ftCommon_CheckFallFast(Fighter* fp)
 {
     if (!fp->fall_fast && fp->self_vel.y < 0 &&
-        fp->input.lstick.y <= -p_ftCommonData->x88 &&
+        fp->input.lstick[0].y <= -p_ftCommonData->x88 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x8C)
     {
         fp->fall_fast = true;
@@ -605,23 +605,23 @@ void ftCommon_8007D92C(HSD_GObj* gobj)
 
 float ftCo_GetLStickAngle(Fighter* fp)
 {
-    return atan2f(fp->input.lstick.y, ABS(fp->input.lstick.x));
+    return atan2f(fp->input.lstick[0].y, ABS(fp->input.lstick[0].x));
 }
 
 float ftCo_GetCStickAngle(Fighter* fp)
 {
-    return atan2f(fp->input.cstick.y, ABS(fp->input.cstick.x));
+    return atan2f(fp->input.cstick[0].y, ABS(fp->input.cstick[0].x));
 }
 
 float ftCommon_8007D9D4(Fighter* fp)
 {
-    return atan2f(fp->input.lstick.y, fp->input.lstick.x);
+    return atan2f(fp->input.lstick[0].y, fp->input.lstick[0].x);
 }
 
 void ftCommon_UpdateFacing(Fighter* fp)
 {
     float dir;
-    if (fp->input.lstick.x >= 0) {
+    if (fp->input.lstick[0].x >= 0) {
         dir = +1;
     } else {
         dir = -1;
@@ -631,7 +631,8 @@ void ftCommon_UpdateFacing(Fighter* fp)
 
 void ftCommon_8007DA24(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) > p_ftCommonData->horizontal_stick_deadzone) {
+    if (ABS(fp->input.lstick[0].x) > p_ftCommonData->horizontal_stick_deadzone)
+    {
         ftCommon_UpdateFacing(fp);
     }
 }
@@ -681,23 +682,23 @@ void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
 bool ftCommon_GrabMash(Fighter* fp, float arg1)
 {
     bool result = false;
-    if (fp->input.x668 & (HSD_PAD_AB | HSD_PAD_XY | HSD_PAD_LR)) {
+    if (fp->input.pressed_buttons & (HSD_PAD_AB | HSD_PAD_XY | HSD_PAD_LR)) {
         fp->grab_timer -= arg1;
         result = true;
     }
     {
         s8 r5 = fp->x1A50;
         s8 r6 = fp->x1A51;
-        if (fp->input.lstick.x < -p_ftCommonData->x308) {
+        if (fp->input.lstick[0].x < -p_ftCommonData->x308) {
             fp->x1A50 = -1;
         }
-        if (fp->input.lstick.x > p_ftCommonData->x308) {
+        if (fp->input.lstick[0].x > p_ftCommonData->x308) {
             fp->x1A50 = 1;
         }
-        if (fp->input.lstick.y < -p_ftCommonData->x308) {
+        if (fp->input.lstick[0].y < -p_ftCommonData->x308) {
             fp->x1A51 = -1;
         }
-        if (fp->input.lstick.y > p_ftCommonData->x308) {
+        if (fp->input.lstick[0].y > p_ftCommonData->x308) {
             fp->x1A51 = 1;
         }
         if (r5 != fp->x1A50 || r6 != fp->x1A51) {
@@ -1637,22 +1638,22 @@ bool ftCommon_8007FFD8(Fighter* fp, float arg8)
     s32 phi_r31;
     s8 b0, b1;
     phi_r31 = false;
-    if (fp->input.x668 & (HSD_PAD_AB | HSD_PAD_XY | HSD_PAD_LR)) {
+    if (fp->input.pressed_buttons & (HSD_PAD_AB | HSD_PAD_XY | HSD_PAD_LR)) {
         fp->x2018 -= arg8;
         phi_r31 = true;
     }
     b0 = fp->x2020;
     b1 = fp->x2021;
-    if (fp->input.lstick.x < -p_ftCommonData->x308) {
+    if (fp->input.lstick[0].x < -p_ftCommonData->x308) {
         fp->x2020 = -1;
     }
-    if (fp->input.lstick.x > p_ftCommonData->x308) {
+    if (fp->input.lstick[0].x > p_ftCommonData->x308) {
         fp->x2020 = 1;
     }
-    if (fp->input.lstick.y < -p_ftCommonData->x308) {
+    if (fp->input.lstick[0].y < -p_ftCommonData->x308) {
         fp->x2021 = -1;
     }
-    if (fp->input.lstick.y > p_ftCommonData->x308) {
+    if (fp->input.lstick[0].y > p_ftCommonData->x308) {
         fp->x2021 = 1;
     }
     if (b0 != fp->x2020 || b1 != fp->x2021) {
@@ -1732,16 +1733,16 @@ void ftCommon_8008021C(HSD_GObj* gobj)
 void ftCommon_8008031C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((ABS(fp->input.lstick.x) >= p_ftCommonData->x7B8 &&
+    if ((ABS(fp->input.lstick[0].x) >= p_ftCommonData->x7B8 &&
          fp->x679_x < p_ftCommonData->x7C0) ||
-        (ABS(fp->input.lstick.y) >= p_ftCommonData->x7B8 &&
+        (ABS(fp->input.lstick[0].y) >= p_ftCommonData->x7B8 &&
          fp->x67A_y < p_ftCommonData->x7C0))
     {
         Player_UpdateJoystickCountByIndex((s32) fp->player_id, fp->x221F_b4);
         fp->x67A_y = 0xFE;
         fp->x679_x = 0xFE;
     }
-    if (ABS(fp->input.x650) >= p_ftCommonData->x7BC) {
+    if (ABS(fp->input.triggers[0]) >= p_ftCommonData->x7BC) {
         if (fp->x67B < p_ftCommonData->x7C0) {
             Player_UpdateJoystickCountByIndex((s32) fp->player_id,
                                               fp->x221F_b4);

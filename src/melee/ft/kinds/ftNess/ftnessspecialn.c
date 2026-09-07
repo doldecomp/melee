@@ -436,7 +436,7 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
             }
         }
 
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             return;
         }
     }
@@ -491,7 +491,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (fp->input.held_inputs & HSD_PAD_B) {
+    if (fp->input.held_buttons[0] & HSD_PAD_B) {
         return;
     }
 

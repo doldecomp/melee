@@ -192,7 +192,8 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
         ftCommon_ApplyGroundMovement(gobj);
-        if (fp0->cmd_vars[2] != 0 && (fp0->input.x668 & HSD_PAD_B)) {
+        if (fp0->cmd_vars[2] != 0 && (fp0->input.pressed_buttons & HSD_PAD_B))
+        {
             vel_y = fp0->self_vel.y;
             fp0->self_vel.y = vel_y + sa->speciallw.tap_y_vel_max;
             doPhys(gobj);
@@ -213,7 +214,8 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     sa = fp->dat_attrs;
 
     if (((s32) fp->u.mr.x2234_tornadoCharge == false) &&
-        (fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
+        (fp->cmd_vars[2] != 0U) &&
+        ((fp->input.pressed_buttons & HSD_PAD_B) != 0))
     {
         ftCommon_Ascend(fp, sa->speciallw.tap_y_vel_max,
                         sa->speciallw.tap_grav);

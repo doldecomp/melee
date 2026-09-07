@@ -51,8 +51,8 @@ typedef enum cmd_var_idx {
 
 static bool checkLStick(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        ABS(fp->input.lstick.x) >=
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        ABS(fp->input.lstick[0].x) >=
             p_ftCommonData->dash_smash_stick_threshold &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
@@ -66,10 +66,10 @@ bool ftCo_AttackS4_CheckInput(Fighter_GObj* gobj)
     float stick_x_sign, stick_angle;
     Fighter* fp = GET_FIGHTER(gobj);
     if (checkLStick(fp)) {
-        stick_x_sign = fp->input.lstick.x >= 0 ? (float) +1 : -1;
+        stick_x_sign = fp->input.lstick[0].x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetLStickAngle(fp);
     } else if (ftCo_800DF1C8(fp)) {
-        stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
+        stick_x_sign = fp->input.cstick[0].x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
         return false;
@@ -83,8 +83,8 @@ bool ftCo_AttackS4_CheckInput(Fighter_GObj* gobj)
 
 static bool checkFacingDir(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.x * fp->facing_dir >=
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.lstick[0].x * fp->facing_dir >=
             p_ftCommonData->dash_smash_stick_threshold)
     {
         return true;
@@ -102,7 +102,7 @@ bool ftCo_AttackS4_8008C114(Fighter_GObj* gobj)
         stick_x_sign = fp->facing_dir;
         stick_angle = ftCo_GetLStickAngle(fp);
     } else if (ftCo_800DF1C8(fp)) {
-        stick_x_sign = fp->input.cstick.x >= 0 ? (float) +1 : -1;
+        stick_x_sign = fp->input.cstick[0].x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
         return false;
@@ -118,7 +118,7 @@ static bool checkItemThrow(Fighter_GObj* gobj, float stick_x_sign)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
-        if (fp->input.held_inputs & HSD_PAD_LR ||
+        if (fp->input.held_buttons[0] & HSD_PAD_LR ||
             it_8026B30C(fp->item_gobj) == 0 ||
             (it_8026B30C(fp->item_gobj) == 3 && it_8026B594(fp->item_gobj)) ||
             ftCo_800DF21C(fp))

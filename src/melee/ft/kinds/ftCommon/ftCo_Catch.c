@@ -26,7 +26,9 @@ bool ftCo_Catch_CheckInput(Fighter_GObj* gobj)
     if (!fn_800D952C(gobj)) {
         return false;
     }
-    if ((fp->input.held_inputs & HSD_PAD_LR) && (fp->input.x668 & HSD_PAD_A)) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_LR) &&
+        (fp->input.pressed_buttons & HSD_PAD_A))
+    {
         ftCo_800D8C54(gobj, ftCo_MS_Catch);
         return true;
     }
@@ -46,7 +48,9 @@ bool ftCo_800D8A38(Fighter_GObj* gobj)
     if (!fn_800D952C(gobj)) {
         return false;
     }
-    if ((fp->input.held_inputs & HSD_PAD_LR) && (fp->input.x668 & HSD_PAD_A)) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_LR) &&
+        (fp->input.pressed_buttons & HSD_PAD_A))
+    {
         ftCo_800D8C54(gobj, ftCo_MS_CatchDash);
         return true;
     }
@@ -66,7 +70,7 @@ bool ftCo_800D8AE0(Fighter_GObj* gobj)
     if (!fn_800D952C(gobj)) {
         return false;
     }
-    if ((fp->input.held_inputs & HSD_PAD_LR) && fp->mv.co.common.x0 != 0) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_LR) && fp->mv.co.common.x0 != 0) {
         ftCo_800D8C54(gobj, ftCo_MS_CatchDash);
         return true;
     }
@@ -80,7 +84,7 @@ bool ftCo_800D8B9C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if ((fp->input.x668 & HSD_PAD_A) && fp->mv.co.guard.x24 != 0) {
+    if ((fp->input.pressed_buttons & HSD_PAD_A) && fp->mv.co.guard.x24 != 0) {
         ftCo_800D8C54(gobj, ftCo_MS_CatchDash);
         return true;
     }

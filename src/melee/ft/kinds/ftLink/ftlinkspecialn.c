@@ -419,7 +419,7 @@ void ftLk_SpecialNStart_IASA(Fighter_GObj* gobj)
             fp->mv.lk.specialn.x0.y = da->x0;
         }
         /// @todo Shared with #ftLk_SpecialNLoop_IASA
-        if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, mf, 0, 1, 0,
                                       NULL);
             setCallbacks(gobj);
@@ -432,7 +432,7 @@ static void doLoopIASA(Fighter_GObj* gobj, FtMotionId msid)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     fp->mv.lk.specialn.x0.y = da->x0;
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, msid, mf, 0, 1, 0, NULL);
         setCallbacks(gobj);
     }
@@ -456,7 +456,7 @@ void ftLk_SpecialAirNStart_IASA(Fighter_GObj* gobj)
         if (fp->mv.lk.specialn.x0.y > da->x0) {
             fp->mv.lk.specialn.x0.y = da->x0;
         }
-        if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, mf, 0, 1,
                                       0, NULL);
             setCallbacks(gobj);

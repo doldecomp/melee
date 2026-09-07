@@ -39,7 +39,7 @@
 
 static inline bool inlineA1(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&
+    if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x31C &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->x320)
     {
         return true;
@@ -52,9 +52,9 @@ bool ftCo_8009917C(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     float stick_x;
     if (inlineA1(fp)) {
-        stick_x = fp->input.lstick.x;
+        stick_x = fp->input.lstick[0].x;
     } else if (ftCo_800DF8B0(fp)) {
-        stick_x = fp->input.cstick.x;
+        stick_x = fp->input.cstick[0].x;
     } else {
         return false;
     }
@@ -69,7 +69,7 @@ bool ftCo_8009917C(Fighter_GObj* gobj)
 bool ftCo_80099264(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.held_inputs & HSD_PAD_LR) {
+    if (fp->input.held_buttons[0] & HSD_PAD_LR) {
         ftCo_800992A8(gobj, ftCo_MS_EscapeF, false);
         return true;
     }
@@ -197,7 +197,7 @@ void ftCo_80099754(Fighter_GObj* gobj)
 
 static inline bool inlineB0(Fighter* fp)
 {
-    if (fp->input.lstick.y <= p_ftCommonData->x314 &&
+    if (fp->input.lstick[0].y <= p_ftCommonData->x314 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x318)
     {
         return true;
@@ -208,7 +208,7 @@ static inline bool inlineB0(Fighter* fp)
 bool ftCo_80099794(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.held_inputs & HSD_PAD_LR && inlineB0(fp)) {
+    if (fp->input.held_buttons[0] & HSD_PAD_LR && inlineB0(fp)) {
         ftCo_80099894(gobj);
         return true;
     }
