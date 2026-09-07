@@ -478,13 +478,16 @@ void fn_803B61B4(s32* block)
 
 static inline s32 jpeg_clamp(f32 value)
 {
+    s32 result;
+
     if (value < 0.0f) {
         return 0;
     }
     if (255.0f < value) {
         return 255;
     }
-    return (u8) (s32) value;
+    result = (u8) (s32) value;
+    return result;
 }
 
 static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
@@ -542,7 +545,7 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     s32 group_chroma;
     s32 luma_groups;
     s32* luma_base;
-    PAD_STACK(8);
+
     base = hsd_804D2E70;
     luma_block = (u8*) ((JpegState*) base)->work.luma;
     for (bias_block = 0; bias_block < 4; bias_block++) {
