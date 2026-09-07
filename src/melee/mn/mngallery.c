@@ -239,8 +239,7 @@ static inline void fn_80258ED0_helper(void)
         HSD_GObj_Remove(data->gobj4);
     }
     if (data->gobj8 != NULL) {
-        HSD_GObj_Remove(
-            *(HSD_GObj* volatile*) &data->gobj8); /// @todo hacky
+        HSD_GObj_Remove(*(HSD_GObj* volatile*) &data->gobj8); /// @todo hacky
     }
     data->gobj4 = NULL;
     data->gobj8 = NULL;

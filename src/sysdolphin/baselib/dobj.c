@@ -244,8 +244,7 @@ void HSD_DObjSetDefaultClass(HSD_ClassInfo* info)
         if (!hsdIsDescendantOf(info, &hsdDObj)) {
             // The line number here is totally made up, this function is
             // removed in practice but the string isn't
-            __assert(__FILE__, __LINE__,
-                     "hsdIsDescendantOf(info, &hsdDObj)");
+            __assert(__FILE__, __LINE__, "hsdIsDescendantOf(info, &hsdDObj)");
         }
     }
     default_class = info;
@@ -284,12 +283,10 @@ void forceStringAllocation(
               // to end up in data by the compiler despite not being used
 {
     if (dobj->pobj == NULL) {
-        __assert(__FILE__, 700,
-                 "can not find specified pobj in link.\n");
+        __assert(__FILE__, 700, "can not find specified pobj in link.\n");
     }
     if (dobj->pobj == NULL) {
-        __assert(__FILE__, 702,
-                 "can not find specified pobj in link.");
+        __assert(__FILE__, 702, "can not find specified pobj in link.");
     }
     if (dobj->mobj != mobj) {
         __assert(__FILE__, 704, "dobj->mobj == mobj");

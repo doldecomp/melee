@@ -2520,8 +2520,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         if (!on_edge && c->cur_pos.y < c->prev_pos.y) {
             if (c->facing_dir == 1 || c->facing_dir == 0) {
                 if (mpColl_80044164(
-                        c,
-                        &c->ledge_id_left)) { // Physics_CheckForLeftLedge
+                        c, &c->ledge_id_left)) { // Physics_CheckForLeftLedge
                     on_edge = true;
                     c->env_flags |= Collide_LeftLedgeGrab;
                 } else {
@@ -2533,8 +2532,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             }
             if (c->facing_dir == -1 || c->facing_dir == 0) {
                 if (mpColl_800443C4(
-                        c,
-                        &c->ledge_id_right)) { // Physics_CheckForRightLedge
+                        c, &c->ledge_id_right)) { // Physics_CheckForRightLedge
                     on_edge = true;
                     c->env_flags |= Collide_RightLedgeGrab;
                 } else {

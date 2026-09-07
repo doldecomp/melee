@@ -87,8 +87,10 @@ void HSD_GObjProc_QueueProc(HSD_GObjProc* gproc)
     }
     gproc->child = proc_gobj->proc;
     proc_gobj->proc = gproc;
-    if (HSD_GObj_DelayedProcInfo.in_delayed_proc && gproc->prev == HSD_GObj_CurrentInvokedProc &&
-        gproc->next == HSD_GObj_NextInvokedProc && s_link == HSD_GObj_CurrentInvokedSLink)
+    if (HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gproc->prev == HSD_GObj_CurrentInvokedProc &&
+        gproc->next == HSD_GObj_NextInvokedProc &&
+        s_link == HSD_GObj_CurrentInvokedSLink)
     {
         HSD_GObj_NextInvokedProc = gproc;
     }
@@ -98,7 +100,9 @@ void HSD_GObjProc_UnqueueProc(HSD_GObjProc* gproc)
 {
     int p_link = gproc->gobj->p_link;
     int s_link = gproc->s_link;
-    if (HSD_GObj_DelayedProcInfo.in_delayed_proc && gproc == HSD_GObj_NextInvokedProc) {
+    if (HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gproc == HSD_GObj_NextInvokedProc)
+    {
         HSD_GObj_NextInvokedProc = gproc->next;
     }
     if (gproc ==
@@ -165,7 +169,9 @@ HSD_GObjProc* HSD_GObj_SetupProc(HSD_GObj* gobj, HSD_GObjEvent func, u8 pri)
 
 void HSD_GObjProc_RemoveProc(HSD_GObjProc* gproc)
 {
-    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc && gproc == HSD_GObj_CurrentInvokedProc) {
+    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gproc == HSD_GObj_CurrentInvokedProc)
+    {
         HSD_GObj_DelayedProcInfo.delay_remove_proc = true;
     } else {
         HSD_GObjProc_UnlinkProcFromGObj(gproc);

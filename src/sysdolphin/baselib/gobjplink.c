@@ -103,7 +103,9 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
 void HSD_GObj_Remove(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
-    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc && gobj == HSD_GObj_CurrentInvokedProcGObj) {
+    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gobj == HSD_GObj_CurrentInvokedProcGObj)
+    {
         HSD_GObj_DelayedProcInfo.delay_remove_gobj = 1;
         return;
     }
@@ -126,8 +128,8 @@ void HSD_GObj_Remove(HSD_GObj* gobj)
     HSD_ObjFree(&gobj_alloc_data, gobj);
 }
 
-void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
-                            HSD_GObj* position)
+void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
+                                     u8 priority, HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
     HSD_GObjProc* child;
@@ -138,7 +140,9 @@ void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 pri
     u8 _[8];
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
-    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc && gobj == HSD_GObj_CurrentInvokedProcGObj) {
+    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gobj == HSD_GObj_CurrentInvokedProcGObj)
+    {
         HSD_GObj_DelayedProcInfo.delay_change_gobj_pri = 1;
         HSD_GObj_DelayedProcInfo.type = arg0;
         HSD_GObj_DelayedProcInfo.p_link = p_link;

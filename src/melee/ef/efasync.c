@@ -1455,7 +1455,9 @@ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
         break;
     }
     va_end(vlist);
-    if ((HSD_GObj_CurrentInvokedProc != NULL) && (HSD_GObj_CurrentInvokedProc->s_link < 9U)) {
+    if ((HSD_GObj_CurrentInvokedProc != NULL) &&
+        (HSD_GObj_CurrentInvokedProc->s_link < 9U))
+    {
         queued->next = ((EF_QueuedEffect*) queue_head)->next;
         ((EF_QueuedEffect*) queue_head)->next = queued;
         return;

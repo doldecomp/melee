@@ -354,7 +354,9 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
         hitbox->x42_b1 = 1;
         hitbox->x42_b2 = 0;
         hitbox->x43_b2 = 0;
-        if ((HSD_GObj_CurrentInvokedProc != NULL) && (HSD_GObj_CurrentInvokedProc->s_link > 9)) {
+        if ((HSD_GObj_CurrentInvokedProc != NULL) &&
+            (HSD_GObj_CurrentInvokedProc->s_link > 9))
+        {
             ftColl_8007AD18(fp, hitbox);
         }
     }

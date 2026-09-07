@@ -45,18 +45,16 @@ static struct {
     f32 shininess;
 } matstate;
 
-HSD_Chan HSD_State_80405A38 = {
-    /* next       = */ NULL,
-    /* chan       = */ 1,
-    /* flags      = */ 1,
-    /* amb_color  = */ { 0 },
-    /* mat_color  = */ { 0xFF, 0xFF, 0xFF, 0xFF },
-    /* enable     = */ 1,
-    /* amb_src    = */ 0,
-    /* mat_src    = */ 0,
-    /* light_mask = */ 0,
-    /* diff_fn    = */ 2
-};
+HSD_Chan HSD_State_80405A38 = { /* next       = */ NULL,
+                                /* chan       = */ 1,
+                                /* flags      = */ 1,
+                                /* amb_color  = */ { 0 },
+                                /* mat_color  = */ { 0xFF, 0xFF, 0xFF, 0xFF },
+                                /* enable     = */ 1,
+                                /* amb_src    = */ 0,
+                                /* mat_src    = */ 0,
+                                /* light_mask = */ 0,
+                                /* diff_fn    = */ 2 };
 
 HSD_Chan HSD_State_80405A38_30 = {
     /* next       = */ NULL,

@@ -118,7 +118,8 @@ void HSD_GObj_80390CFC(void)
                         if (HSD_GObj_DelayedProcInfo.delay_remove_gobj) {
                             HSD_GObj_Remove(proc->gobj);
                         } else {
-                            if (HSD_GObj_DelayedProcInfo.delay_change_gobj_pri) {
+                            if (HSD_GObj_DelayedProcInfo.delay_change_gobj_pri)
+                            {
                                 HSD_GObjPLink_ChangeGObjPri_Unk(
                                     HSD_GObj_DelayedProcInfo.type, proc->gobj,
                                     HSD_GObj_DelayedProcInfo.p_link,

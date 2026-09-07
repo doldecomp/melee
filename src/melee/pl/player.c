@@ -40,7 +40,8 @@ struct Unk_Struct_w_Array {
 char str_PdPmdat_start_of_data[] = "PdPm.dat";
 char str_plLoadCommonData[] = "plLoadCommonData";
 
-ftMapping ftMapping_list[CHKIND_MAX] = { //////ftMapping_list
+ftMapping ftMapping_list[CHKIND_MAX] = {
+    //////ftMapping_list
     /* CKIND_CAPTAIN   */ { FTKIND_CAPTAIN, 0xFF },
     /* CKIND_DONKEY    */ { FTKIND_DONKEY, 0xFF },
     /* CKIND_FOX       */ { FTKIND_FOX, 0xFF },
@@ -331,8 +332,7 @@ void Player_80031EBC(int slot)
                 ftCo_800D4F24(player->player_entity[player->transformed[i]],
                               1);
             }
-            HSD_GObj_Remove(
-                player->player_entity[player->transformed[i]]);
+            HSD_GObj_Remove(player->player_entity[player->transformed[i]]);
         }
     }
 }

@@ -8,8 +8,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 void HSD_GObj_Remove(HSD_GObj*);
-void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
-                            HSD_GObj* position);
+void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
+                                     u8 priority, HSD_GObj* position);
 
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj);
 
