@@ -1,6 +1,8 @@
 #include "mnsnap.h"
 
+#include <m2c_macros.h>
 #include <placeholder.h>
+#include <stddef.h>
 
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
@@ -973,6 +975,33 @@ static inline void mnSnap_UpdateSelectionCursor(mnSnap_State* snap_state)
     }
 }
 
+static inline void mnSnap_RefreshSlotAnimations(int i, s32 byte_off,
+                                                const s32* active_slot)
+{
+    f32 t;
+    for (; i < 2; i++, byte_off += 8) {
+        if (mnSnap_804A0A10.card_status[i] != 0) {
+            if (*active_slot == i) {
+                t = 1.0F;
+            } else {
+                t = 0.0F;
+            }
+            HSD_JObjReqAnimAll(M2C_FIELD((u32) &mnSnap_804A0A10 + byte_off,
+                                         HSD_JObj**,
+                                         offsetof(mnSnap_State, slot_a_jobj)),
+                               t);
+        } else {
+            HSD_JObjReqAnimAll(M2C_FIELD((u32) &mnSnap_804A0A10 + byte_off,
+                                         HSD_JObj**,
+                                         offsetof(mnSnap_State, slot_a_jobj)),
+                               2.0F);
+        }
+        HSD_JObjAnimAll(M2C_FIELD((u32) &mnSnap_804A0A10 + byte_off,
+                                  HSD_JObj**,
+                                  offsetof(mnSnap_State, slot_a_jobj)));
+    }
+}
+
 static inline s32 mnSnap_ReadCardStatus(s32 slot)
 {
     return mnSnap_804A0A10.card_status[slot];
@@ -984,7 +1013,7 @@ static inline s32 mnSnap_ReadCardStatus(s32 slot)
 void fn_802545C4(void)
 {
     /* Matching WIP: the 3566-instruction stream and 0x1B8-byte frame agree.
-     * 32 instruction lines still differ in GPR operands. The shared scalar
+     * 26 instruction lines still differ in GPR operands. The shared scalar
      * wrapper and frame padding remain provisional matching constructs. */
     struct {
         int index;
@@ -1240,32 +1269,7 @@ void fn_802545C4(void)
             {
                 sfxMove();
                 *active_slot = 1;
-                byte_off = 4;
-                for (cursor.index = 0; cursor.index < 2;
-                     cursor.index++, byte_off += 8)
-                {
-                    if (mnSnap_804A0A10.card_status[cursor.index] != 0) {
-                        if (*active_slot == cursor.index) {
-                            t = 1.0F;
-                        } else {
-                            t = 0.0F;
-                        }
-                        HSD_JObjReqAnimAll(
-                            *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
-                                            0x98)),
-                            t);
-                    } else {
-                        HSD_JObjReqAnimAll(
-                            *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
-                                            0x98)),
-                            2.0F);
-                    }
-                    HSD_JObjAnimAll(*(
-                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
-                                      0x98)));
-                }
+                mnSnap_RefreshSlotAnimations(0, 4, active_slot);
 
             } else if (((1 == slot) && (*card_status != 0)) && (buttons & 4)) {
                 sfxMove();
