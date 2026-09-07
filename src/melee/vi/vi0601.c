@@ -170,7 +170,7 @@ void vi0601_Scene_OnEnter(UNUSED void* enter_data)
     Stage_8022524C();
     Stage_8022532C(St_Kind_Corneria, 0);
 
-    erase_colors_vi0601 = Camera_80030758();
+    erase_colors_vi0601 = Camera_GetBackgroundColor();
     un_8031E9B8();
 
     gobj2 = GObj_Create(0xB, 3, 0);

@@ -181,9 +181,9 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.transform_copy.target_position = *eye_pos;
     cm_80452C68.transform_copy.target_fov = cm_803BCB64.fov;
     cm_80452C68.transform_copy.fov = cm_803BCB64.fov;
-    cm_80452C68.background_b = 0;
-    cm_80452C68.background_g = 0;
-    cm_80452C68.background_r = 0;
+    cm_80452C68.background_color.b = 0;
+    cm_80452C68.background_color.g = 0;
+    cm_80452C68.background_color.r = 0;
     cm_80452C68.nearz = 0.1f;
     cm_80452C68.farz = 16384.0f;
     cm_80452C68.mode = CAMERA_STANDARD;
@@ -4007,9 +4007,9 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
     lbShadow_8000F38C(cm_80452C68.x399_b7);
     if (HSD_CObjSetCurrent(cobj) != 0) {
         if (!cm_80452C68.x398_b5) {
-            HSD_SetEraseColor(cm_80452C68.background_r,
-                              cm_80452C68.background_g,
-                              cm_80452C68.background_b, 0xFF);
+            HSD_SetEraseColor(cm_80452C68.background_color.r,
+                              cm_80452C68.background_color.g,
+                              cm_80452C68.background_color.b, 0xFF);
         } else {
             HSD_SetEraseColor(0, 0, 0, 0xFF);
         }
@@ -4066,8 +4066,9 @@ void Camera_800304E0(HSD_GObj* gobj)
 
     cobj = gobj->hsd_obj;
     if (HSD_CObjSetCurrent(cobj) != 0) {
-        HSD_SetEraseColor(cm_80452C68.background_r, cm_80452C68.background_g,
-                          cm_80452C68.background_b, 1);
+        HSD_SetEraseColor(cm_80452C68.background_color.r,
+                          cm_80452C68.background_color.g,
+                          cm_80452C68.background_color.b, 1);
         HSD_CObjEraseScreen(cobj, 1, 0, 0);
         Ground_801C4FAC(cobj);
         HSD_LObjDeleteCurrentAll(NULL);
@@ -4118,18 +4119,18 @@ void Camera_80030730(f32 arg8)
 
 void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
 {
-    cm_80452C68.background_r = r;
-    cm_80452C68.background_g = g;
-    cm_80452C68.background_b = b;
+    cm_80452C68.background_color.r = r;
+    cm_80452C68.background_color.g = g;
+    cm_80452C68.background_color.b = b;
 }
 
-GXColor Camera_80030758(void)
+GXColor Camera_GetBackgroundColor(void)
 {
     GXColor color;
 
-    color.r = cm_80452C68.background_r;
-    color.g = cm_80452C68.background_g;
-    color.b = cm_80452C68.background_b;
+    color.r = cm_80452C68.background_color.r;
+    color.g = cm_80452C68.background_color.g;
+    color.b = cm_80452C68.background_color.b;
     return color;
 }
 

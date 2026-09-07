@@ -4,6 +4,7 @@
 #include <melee/cm/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 typedef struct CmSubjectExtents {
@@ -84,10 +85,7 @@ struct CameraDebugMode {
 struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
     /* 0x004 */ CameraType mode;
-    /* 0x008 */ u8 background_r;
-    /* 0x009 */ u8 background_g;
-    /* 0x00A */ u8 background_b;
-    /* 0x00B */ s8 xB;
+    /* 0x008 */ GXColor background_color;
     /* 0x00C */ f32 nearz;
     /* 0x010 */ f32 farz;
     /* 0x014 */ CameraTransformState transform;
