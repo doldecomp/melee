@@ -2658,9 +2658,8 @@ void mnSnap_80257F24(void)
     lb_80011E24(jobj, (&snap->thumb_jobjs[0]), 8, 9, 0xA, 0xB, 0xC, 0xD, 6, 2,
                 1, -1);
 
-    slot_jobj_ptr = &snap->slot_a_jobj;
-    snap->blank_img =
-        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
+    jobj2 = *(slot_jobj_ptr = &snap->slot_a_jobj);
+    snap->blank_img = jobj2->u.dobj->mobj->tobj->imagedesc->image_ptr;
 
     if (snap->photo_count[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);
