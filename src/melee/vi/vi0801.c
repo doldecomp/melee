@@ -40,8 +40,8 @@ s32 un_80400128[23][2] = { { 1, 2 }, { 1, 3 }, { 1, 4 },  { 1, 5 },  { 1, 6 },
 static void vi0801_8031ED70(HSD_GObj* gobj, int unused)
 {
     GXColor* colors;
-    s32 zero;
-    s32 prio;
+
+    PAD_STACK(8);
 
     if (HSD_CObjSetCurrent(gobj->hsd_obj) != 0) {
         colors = &un_804D6FBC;

@@ -122,7 +122,7 @@ void fn_8031FAA8(HSD_GObj* gobj)
 }
 void fn_8031FB90(HSD_GObj* gobj)
 {
-    char pad[8];
+    PAD_STACK(8);
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
@@ -281,7 +281,7 @@ void vi1201v1_Scene_OnEnter(void* arg)
     HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
     HSD_GObj* light_gobj;
-    char pad[8];
+    PAD_STACK(8);
 
     un_804D6FFC = input[0];
     un_804D6FFD = input[1];

@@ -60,7 +60,7 @@ void un_8031F294(s32 arg0, s32 arg1)
 {
     HSD_JObj* jobj;
     VecMtxPtr pmtx;
-    char pad[16];
+    PAD_STACK(16);
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -127,7 +127,7 @@ void fn_8031F548(HSD_GObj* gobj)
 
 static void fn_8031F56C(HSD_GObj* gobj, int unused)
 {
-    char pad[8];
+    PAD_STACK(8);
 
     lbShadow_8000F38C(0);
     vi_RunCamera(gobj, (u8*) &un_804D5B08, 0x281);
