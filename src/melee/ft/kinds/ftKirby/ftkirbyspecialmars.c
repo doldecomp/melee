@@ -319,7 +319,7 @@ void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 void ftKb_MsSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->cmd_vars[0] = 0;
         ftKb_SpecialNPe_8010C148(gobj);
     }
@@ -328,7 +328,7 @@ void ftKb_MsSpecialNLoop_IASA(Fighter_GObj* gobj)
 void ftKb_MsSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->cmd_vars[0] = 0;
         ftKb_SpecialNPe_8010C1E8(gobj);
     }

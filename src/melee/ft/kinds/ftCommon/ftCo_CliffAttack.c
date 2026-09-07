@@ -20,7 +20,7 @@ void ftCo_8009AE14(Fighter_GObj* gobj)
 
 static inline bool inlineA0(Fighter* fp)
 {
-    if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
+    if (fp->input.pressed_buttons & (HSD_PAD_A | HSD_PAD_B)) {
         return true;
     }
     return false;
@@ -69,7 +69,7 @@ void ftCo_CliffAttack_Coll(Fighter_GObj* gobj)
 
 static inline bool inlineB0(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_LR) {
+    if (fp->input.pressed_buttons & HSD_PAD_LR) {
         return true;
     }
     return false;

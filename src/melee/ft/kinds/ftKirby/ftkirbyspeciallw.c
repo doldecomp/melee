@@ -60,7 +60,7 @@ static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
     } else if ((fp->mv.kb.speciallw.x0 <=
                 (s32) (dat_attr->speciallw_max_time_in_stone -
                        dat_attr->speciallw_min_time_in_stone)) &&
-               (fp->input.x668 & 0x200))
+               (fp->input.pressed_buttons & 0x200))
     {
         result = true;
     } else {

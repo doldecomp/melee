@@ -272,7 +272,7 @@ void ftPp_SpecialHiStart_0_IASA(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
-        if (ABS(fp->input.lstick.x) > da->x80) {
+        if (ABS(fp->input.lstick[0].x) > da->x80) {
             ftCommon_UpdateFacing(fp);
             ftPartSetRotY(fp, 0, (float) (M_PI_2 * fp->facing_dir));
         }
@@ -286,7 +286,7 @@ void ftPp_SpecialAirHiStart_0_IASA(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
-        if (ABS(fp->input.lstick.x) > da->x80) {
+        if (ABS(fp->input.lstick[0].x) > da->x80) {
             ftCommon_UpdateFacing(fp);
             ftPartSetRotY(fp, 0, (float) (M_PI_2 * fp->facing_dir));
         }
@@ -823,7 +823,7 @@ void ftPp_SpecialAirHiThrow2_Phys(Fighter_GObj* gobj)
     PAD_STACK(12);
 
     ftCommon_Fall(fp, da->x9C, da->xA0);
-    if (ABS(fp->input.lstick.x) > da->x80) {
+    if (ABS(fp->input.lstick[0].x) > da->x80) {
         ftCommon_8007D344(fp, 0.0f, co->air_drift_stick_mul * da->xB0,
                           co->air_drift_max * da->xB4);
     } else if (fp->self_vel.y < 0.0f) {

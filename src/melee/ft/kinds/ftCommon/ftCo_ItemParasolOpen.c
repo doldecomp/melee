@@ -26,7 +26,7 @@ bool ftCo_800CEE70(Fighter_GObj* gobj)
         return false;
     }
     if ((fp->x2221_b7 ||
-         fp->input.lstick.y >= p_ftCommonData->open_parasol_threshold) &&
+         fp->input.lstick[0].y >= p_ftCommonData->open_parasol_threshold) &&
         fp->self_vel.y <= 0.0f && (ftGetParasolStatus(gobj) == 6))
     {
         ft_800CEF08(gobj);
@@ -109,11 +109,11 @@ void ftCo_ItemParasolOpen_Phys(Fighter_GObj* gobj)
         ftCommon_Fall(fp, grav, terminal_vel);
         {
             float drift, target_vel;
-            if (ABS(fp->input.lstick.x) >= p_ftCommonData->x258) {
+            if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x258) {
                 drift = p_ftCommonData->x58C *
-                        (fp->input.lstick.x * ca->air_drift_stick_mul);
+                        (fp->input.lstick[0].x * ca->air_drift_stick_mul);
                 target_vel = p_ftCommonData->x58C *
-                             (fp->input.lstick.x * ca->air_drift_max);
+                             (fp->input.lstick[0].x * ca->air_drift_max);
             } else {
                 target_vel = 0.0F;
                 drift = 0.0F;

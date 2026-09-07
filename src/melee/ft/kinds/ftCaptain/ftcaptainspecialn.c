@@ -61,7 +61,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
     {
         /// @todo Join declarations and assignments somehow.
         float max;
-        float stick_y = stickGetDir(fp->input.lstick.y, 0);
+        float stick_y = stickGetDir(fp->input.lstick[0].y, 0);
         float min;
         max = da->specialn_stick_range_y_pos;
         if (stick_y > max) {
@@ -72,7 +72,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         if (stick_y < 0) {
             stick_y = 0;
         }
-        if (fp->input.lstick.y < 0) {
+        if (fp->input.lstick[0].y < 0) {
             stick_y = -stick_y;
         }
         {

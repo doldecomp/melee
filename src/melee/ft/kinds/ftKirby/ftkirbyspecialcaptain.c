@@ -85,7 +85,7 @@ void ftKb_CaSpecialAirN_IASA(Fighter_GObj* gobj)
         ftKb_DatAttrs* da2;
 
         fp->cmd_vars[0] = 0;
-        stick_y = fp->input.lstick.y;
+        stick_y = fp->input.lstick[0].y;
         da2 = fp->dat_attrs;
 
         if (stick_y < 0.0f) {
@@ -100,7 +100,7 @@ void ftKb_CaSpecialAirN_IASA(Fighter_GObj* gobj)
         if (range < 0.0f) {
             range = 0.0f;
         }
-        if (fp->input.lstick.y < 0.0f) {
+        if (fp->input.lstick[0].y < 0.0f) {
             range = -range;
         }
         angle = MTXDegToRad(

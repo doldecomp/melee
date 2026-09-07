@@ -298,7 +298,7 @@ void ftFx_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_PAD_B)) {
+    if ((fp->input.pressed_buttons & HSD_PAD_B)) {
         if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;
@@ -315,7 +315,7 @@ void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_PAD_B)) {
+    if ((fp->input.pressed_buttons & HSD_PAD_B)) {
         if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;

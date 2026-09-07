@@ -96,11 +96,11 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                 ((
                      // left wall & control stick right?
                      fp0->x2110_walljumpWallSide == -1 &&
-                     fp0->input.lstick.x >= p_ftCommonData->x76C) ||
+                     fp0->input.lstick[0].x >= p_ftCommonData->x76C) ||
                  (
                      // right wall & control stick left?
                      fp0->x2110_walljumpWallSide == +1 &&
-                     fp0->input.lstick.x <= -p_ftCommonData->x76C)) &&
+                     fp0->input.lstick[0].x <= -p_ftCommonData->x76C)) &&
                 // control stick didn't stay too long in the tilt area?
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {

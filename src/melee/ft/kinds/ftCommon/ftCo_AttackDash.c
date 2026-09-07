@@ -26,9 +26,9 @@
 bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
-            if (fp->input.held_inputs & HSD_PAD_LR ||
+            if (fp->input.held_buttons[0] & HSD_PAD_LR ||
                 it_8026B30C(fp->item_gobj) == 0)
             {
                 ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);

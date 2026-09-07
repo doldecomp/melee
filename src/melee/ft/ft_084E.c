@@ -20,9 +20,9 @@ void ft_80084E1C(Fighter_GObj* gobj, float threshold, float drift_max,
         ftCommon_Fall(fp, co_attrs->gravity, co_attrs->terminal_velocity);
     }
 
-    if (ABS(fp->input.lstick.x) >= threshold) {
-        drift = fp->input.lstick.x * drift_max;
-        target_vel = fp->input.lstick.x * target_max;
+    if (ABS(fp->input.lstick[0].x) >= threshold) {
+        drift = fp->input.lstick[0].x * drift_max;
+        target_vel = fp->input.lstick[0].x * target_max;
     } else {
         target_vel = 0.0F;
         drift = 0.0F;

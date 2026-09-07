@@ -23,8 +23,8 @@ bool ftCo_80098928(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (ftCo_800986B0(gobj)) {
-        if (ABS(fp->input.lstick.x) >= p_ftCommonData->x254) {
-            FtMotionId msid = fp->input.lstick.x * fp->facing_dir >= 0
+        if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x254) {
+            FtMotionId msid = fp->input.lstick[0].x * fp->facing_dir >= 0
                                   ? ftCo_MS_PassiveStandF
                                   : ftCo_MS_PassiveStandB;
             ftCo_800989D4(gobj, msid);

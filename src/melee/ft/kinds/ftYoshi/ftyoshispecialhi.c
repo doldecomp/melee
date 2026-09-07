@@ -56,7 +56,7 @@ void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
     ftYs_DatAttrs* da = fp->dat_attrs;
     float mag;
     {
-        float temp = ABS(fp->input.lstick.x) / da->xEC;
+        float temp = ABS(fp->input.lstick[0].x) / da->xEC;
         mag = temp;
         if (mag > 1.0f) {
             mag = 1.0f;
@@ -204,7 +204,7 @@ void ftYs_SpecialHi_Anim(Fighter_GObj* gobj)
 
     u8 _[8];
 
-    if (fp->input.held_inputs & HSD_PAD_B) {
+    if (fp->input.held_buttons[0] & HSD_PAD_B) {
         fp->mv.ys.specialhi.x4 += 1;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -218,7 +218,7 @@ void ftYs_SpecialAirHi_Anim(Fighter_GObj* gobj)
 
     u8 _[8];
 
-    if (fp->input.held_inputs & HSD_PAD_B) {
+    if (fp->input.held_buttons[0] & HSD_PAD_B) {
         fp->mv.ys.specialhi.x4 += 1;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {

@@ -1066,7 +1066,7 @@ static inline bool ft_80084280_inline(Fighter_GObj* gobj)
     bool temp;
     coll->last_pos = coll->cur_pos;
     coll->cur_pos = fp->cur_pos;
-    coll->lstick_x = fp->input.lstick.x;
+    coll->lstick_x = fp->input.lstick[0].x;
     mpCollSetFacingDir(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B4B0(coll);
     fp->cur_pos = coll->cur_pos;
@@ -1107,7 +1107,7 @@ static inline bool ft_800843FC_inline(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    fp->coll_data.lstick_x = fp->input.lstick.x;
+    fp->coll_data.lstick_x = fp->input.lstick[0].x;
     mpCollSetFacingDir(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B5C4(coll);
     fp->cur_pos = coll->cur_pos;

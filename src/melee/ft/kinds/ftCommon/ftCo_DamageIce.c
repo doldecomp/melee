@@ -483,7 +483,7 @@ void ftCo_80091854(HSD_GObj* gobj)
         efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 1091, jobj, &vec,
                       &sp24);
         fp->self_vel.x =
-            fp->input.lstick.x * fp->co_attrs.damageicejump_vel_x_mult;
+            fp->input.lstick[0].x * fp->co_attrs.damageicejump_vel_x_mult;
         fp->self_vel.y = fp->co_attrs.damageicejump_vel_y;
         fp->mv.co.damageicejump.escape_timer =
             p_ftCommonData->damageicejump_escape_time;

@@ -54,9 +54,9 @@ void ftCo_CargoWait2_Coll(Fighter_GObj* gobj)
 static inline FtMotionId inlineA0(Fighter* fp)
 {
     FtMotionId msid = fp->motion_id;
-    if (fp->input.x668 & HSD_PAD_AB) {
-        if (ABS(fp->input.lstick.x) >= p_ftCommonData->x98) {
-            if (fp->input.lstick.x * fp->facing_dir > 0) {
+    if (fp->input.pressed_buttons & HSD_PAD_AB) {
+        if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x98) {
+            if (fp->input.lstick[0].x * fp->facing_dir > 0) {
                 msid = fp->x2CC->x4_motion_state;
                 msid += 10;
             } else {
@@ -64,12 +64,12 @@ static inline FtMotionId inlineA0(Fighter* fp)
                 msid += 11;
             }
         } else {
-            if (fp->input.lstick.y >=
+            if (fp->input.lstick[0].y >=
                 p_ftCommonData->attackhi3_stick_threshold_y)
             {
                 msid = fp->x2CC->x4_motion_state;
                 msid += 12;
-            } else if (fp->input.lstick.y <= p_ftCommonData->xB0) {
+            } else if (fp->input.lstick[0].y <= p_ftCommonData->xB0) {
                 msid = fp->x2CC->x4_motion_state;
                 msid += 13;
             }

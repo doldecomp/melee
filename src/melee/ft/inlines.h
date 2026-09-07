@@ -113,7 +113,7 @@ static inline bool ftGetGroundAir(Fighter* fp)
 
 static inline int getStickDirX(Fighter* fp)
 {
-    if (fp->input.lstick.x < 0.0f) {
+    if (fp->input.lstick[0].x < 0.0f) {
         return -1;
     } else {
         return +1;
@@ -133,10 +133,10 @@ static inline void getAccelAndTarget(Fighter* fp, float* accel,
                                      float* target_vel)
 {
     ftCo_DatAttrs* co_attrs = &fp->co_attrs;
-    *accel = fp->input.lstick.x * fp->co_attrs.dash_accel_mul;
-    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_accel_base
-                                     : -co_attrs->dash_accel_base;
-    *target_vel = fp->input.lstick.x * co_attrs->dash_max_velocity;
+    *accel = fp->input.lstick[0].x * fp->co_attrs.dash_accel_mul;
+    *accel += fp->input.lstick[0].x > 0 ? +co_attrs->dash_accel_base
+                                        : -co_attrs->dash_accel_base;
+    *target_vel = fp->input.lstick[0].x * co_attrs->dash_max_velocity;
 }
 
 /// used for all fighters except Kirby and Purin

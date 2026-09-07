@@ -15,7 +15,7 @@
 static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.lstick.x * fp->facing_dir > -p_ftCommonData->x78
+    return fp->input.lstick[0].x * fp->facing_dir > -p_ftCommonData->x78
                ? ftPe_MS_FloatFallF
                : ftPe_MS_FloatFallB;
 }

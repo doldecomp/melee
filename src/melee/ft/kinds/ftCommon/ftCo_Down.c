@@ -17,7 +17,7 @@
 
 static inline bool inlineA0(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x248 &&
+    if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x248 &&
         ftCo_GetLStickAngle(fp) < p_ftCommonData->x20_radians)
     {
         return true;
@@ -31,9 +31,9 @@ bool ftCo_Down_CheckInput(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     float stick_x;
     if (ftCo_800DF678(fp)) {
-        stick_x = fp->input.cstick.x;
+        stick_x = fp->input.cstick[0].x;
     } else if (inlineA0(fp)) {
-        stick_x = fp->input.lstick.x;
+        stick_x = fp->input.lstick[0].x;
     } else {
         return false;
     }

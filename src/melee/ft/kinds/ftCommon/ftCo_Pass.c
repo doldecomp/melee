@@ -26,7 +26,7 @@
 bool ftCo_80099F1C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.lstick.y <= -p_ftCommonData->x464 &&
+    if (fp->input.lstick[0].y <= -p_ftCommonData->x464 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x468 &&
         mpColl_IsOnPlatform(&fp->coll_data))
     {
@@ -54,7 +54,7 @@ bool ftCo_8009A080(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
-    if (fp->input.held_inputs & HSD_PAD_LR && ftCo_80099F1C(gobj)) {
+    if (fp->input.held_buttons[0] & HSD_PAD_LR && ftCo_80099F1C(gobj)) {
         ftCo_8009A228(gobj);
         return true;
     }
