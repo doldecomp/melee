@@ -377,8 +377,6 @@ bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
     return false;
 }
 
-/// @todo Currently 98.29% match - register allocation only (extra mr through
-/// r0 for first loop jobj load and idx computation)
 void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -1060,8 +1058,6 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
     return desc->x8;
 }
 
-/// @todo Currently 97.73% match - needs register allocation fix (r27/r30 swap
-/// for arr/jobj)
 void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
 {
     HSD_JObj** arr;
