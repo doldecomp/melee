@@ -6,8 +6,8 @@
 #include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
+#include "types.h"
 #include <melee/it/types.h>
-#include <melee/lb/types.h>
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
 #endif
