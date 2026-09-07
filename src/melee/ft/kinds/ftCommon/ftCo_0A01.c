@@ -7313,13 +7313,13 @@ void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
     if (data->x448 == data->xFC + ARRAY_SIZE(data->xFC)) {
         data->x448 = data->xFC;
     }
-    data->x444->lstickX = inlineM0(fp0->input.lstick.x);
-    data->x444->lstickY = inlineM0(fp0->input.lstick.y);
-    data->x444->cstickX = inlineM0(fp0->input.cstick.x);
-    data->x444->cstickY = inlineM0(fp0->input.cstick.y);
-    data->x444->x4 = fp0->input.x650;
-    data->x444->x5 = fp0->input.x650;
-    data->x444->x0 = fp0->input.held_inputs;
+    data->x444->lstickX = inlineM0(fp0->input.lstick[0].x);
+    data->x444->lstickY = inlineM0(fp0->input.lstick[0].y);
+    data->x444->cstickX = inlineM0(fp0->input.cstick[0].x);
+    data->x444->cstickY = inlineM0(fp0->input.cstick[0].y);
+    data->x444->x4 = fp0->input.triggers[0];
+    data->x444->x5 = fp0->input.triggers[0];
+    data->x444->x0 = fp0->input.held_buttons[0];
     data->x444->cur_pos = fp0->cur_pos;
     data->x444->facing_dir = fp0->facing_dir;
 }

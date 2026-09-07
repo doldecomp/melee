@@ -313,7 +313,7 @@ void fn_800DC014(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.capturewait.x0 < p_ftCommonData->x3AC) {
-        if (fp->input.x668 & HSD_PAD_XY) {
+        if (fp->input.pressed_buttons & HSD_PAD_XY) {
             fp->mv.co.capturewait.xC = true;
         }
     }
@@ -322,7 +322,7 @@ void fn_800DC014(Fighter_GObj* gobj)
 bool fn_800DC044(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) {
+    if (fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold) {
         return true;
     }
     return false;

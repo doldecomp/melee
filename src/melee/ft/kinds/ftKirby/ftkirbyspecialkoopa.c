@@ -290,7 +290,7 @@ void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >=
         (s32) da->specialn_kp_b_button_check_frequency)
     {
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             if ((s32) fp->mv.kb.specialn_kp.x0[0] == 0) {
                 ftKb_SpecialNKp_800FA588(gobj);
             }
@@ -344,7 +344,7 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >=
         (s32) da->specialn_kp_b_button_check_frequency)
     {
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             if ((s32) fp->mv.kb.specialn_kp.x0[0] == 0) {
                 ftKb_SpecialNKp_800FA588(gobj);
             }

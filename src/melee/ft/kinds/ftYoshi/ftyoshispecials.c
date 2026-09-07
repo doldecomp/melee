@@ -356,7 +356,7 @@ void ftYs_SpecialS_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
     PAD_STACK(16);
-    fp->facing_dir = fp->input.lstick.x > 0.0F ? 1.0F : -1.0F;
+    fp->facing_dir = fp->input.lstick[0].x > 0.0F ? 1.0F : -1.0F;
     Fighter_ChangeMotionState(gobj, 0x168, 0U, 0.0F, 1.0F, 0.0F, NULL);
     for (i = 3; i >= 0; i--) {
         fp->cmd_vars[i] = 0;
@@ -376,7 +376,7 @@ void ftYs_SpecialAirS_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
     PAD_STACK(16);
-    fp->facing_dir = fp->input.lstick.x > 0.0F ? 1.0F : -1.0F;
+    fp->facing_dir = fp->input.lstick[0].x > 0.0F ? 1.0F : -1.0F;
     Fighter_ChangeMotionState(gobj, 0x168, 0U, 0.0F, 1.0F, 0.0F, NULL);
     for (i = 3; i >= 0; i--) {
         fp->cmd_vars[i] = 0;
@@ -748,7 +748,7 @@ void ftYs_SpecialAirSLoop_0_IASA(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     if (fp->mv.ys.specials.x30 != 0) {
-        if ((stick_x = fp->input.lstick.x) < 0.0F) {
+        if ((stick_x = fp->input.lstick[0].x) < 0.0F) {
             abs_x = -stick_x;
         } else {
             abs_x = stick_x;
@@ -790,7 +790,7 @@ void ftYs_SpecialAirSLoop_0_IASA(Fighter_GObj* gobj)
         }
     }
     if ((fp->mv.ys.specials.x0 < (attributes->x48 - attributes->x4C)) &&
-        (fp->input.x668 & HSD_PAD_B))
+        (fp->input.pressed_buttons & HSD_PAD_B))
     {
         fp->mv.ys.specials.x24 = 0.0F;
         ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, 0.0F);
@@ -806,7 +806,9 @@ void ftYs_SpecialAirSLoop_1_IASA(Fighter_GObj* gobj)
     s32 x4C = attributes->x4C;
     s32 difference = x48 - x4C;
 
-    if ((fp->mv.ys.specials.x0 < difference) && (fp->input.x668 & HSD_PAD_B)) {
+    if ((fp->mv.ys.specials.x0 < difference) &&
+        (fp->input.pressed_buttons & HSD_PAD_B))
+    {
         ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, 0.0F);
     }
 }
@@ -825,7 +827,7 @@ void ftYs_SpecialAirSLoop_2_IASA(Fighter_GObj* gobj)
 
     fp->mv.ys.specials.x30 = 0;
     if ((fp->mv.ys.specials.x0 < attributes->x48 - attributes->x4C) &&
-        (fp->input.x668 & HSD_PAD_B))
+        (fp->input.pressed_buttons & HSD_PAD_B))
     {
         ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0F);
     }
@@ -838,7 +840,7 @@ void ftYs_SpecialAirSLoop_3_IASA(Fighter_GObj* gobj)
     fp->mv.ys.specials.x30 = 0;
 
     if ((fp->mv.ys.specials.x0 < (attributes->x48 - attributes->x4C)) &&
-        (fp->input.x668 & HSD_PAD_B))
+        (fp->input.pressed_buttons & HSD_PAD_B))
     {
         ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0F);
     }
@@ -1023,7 +1025,7 @@ void ftYs_SpecialAirSLoop_2_Phys(Fighter_GObj* gobj)
     ftYoshiAttributes* attributes = fp->dat_attrs;
 
     fp->mv.ys.specials.x30 = 0;
-    temp = fp->input.lstick.x * attributes->xE0;
+    temp = fp->input.lstick[0].x * attributes->xE0;
     fp->self_vel.x += temp;
     var_f0 = fp->self_vel.x < 0.0F ? -fp->self_vel.x : fp->self_vel.x;
     var_f2 = attributes->x90;
@@ -1046,7 +1048,7 @@ void ftYs_SpecialAirSLoop_3_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
     fp->mv.ys.specials.x30 = 0;
-    temp = fp->input.lstick.x * attributes->xE0;
+    temp = fp->input.lstick[0].x * attributes->xE0;
     fp->self_vel.x += temp;
     var_f0 = fp->self_vel.x < 0.0F ? -fp->self_vel.x : fp->self_vel.x;
     var_f2 = attributes->x90;
@@ -1255,10 +1257,10 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
 
             fp->mv.ys.specials.x1C = ABS(fp->gr_vel = fp->self_vel.x);
 
-            if (ABS(fp->input.lstick.x) > attributes->x9C) {
-                fp->facing_dir = (fp->input.lstick.x > 0.0F) ? 1.0F : -1.0F;
+            if (ABS(fp->input.lstick[0].x) > attributes->x9C) {
+                fp->facing_dir = (fp->input.lstick[0].x > 0.0F) ? 1.0F : -1.0F;
                 fp->mv.ys.specials.x1C =
-                    attributes->xBC * ABS(fp->input.lstick.x);
+                    attributes->xBC * ABS(fp->input.lstick[0].x);
                 fp->self_vel.x = fp->gr_vel =
                     fp->mv.ys.specials.x1C * fp->facing_dir;
             }
@@ -1332,10 +1334,10 @@ void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj)
             ftYs_SpecialS_WrapAndSetRotX(gobj);
             ftCommon_8007EBAC(fp, 1, 0);
         } else {
-            if (ABS(fp->input.lstick.x) > attributes->x9C) {
-                fp->facing_dir = (fp->input.lstick.x > 0.0F) ? 1.0F : -1.0F;
+            if (ABS(fp->input.lstick[0].x) > attributes->x9C) {
+                fp->facing_dir = (fp->input.lstick[0].x > 0.0F) ? 1.0F : -1.0F;
                 fp->mv.ys.specials.x1C =
-                    attributes->xBC * ABS(fp->input.lstick.x);
+                    attributes->xBC * ABS(fp->input.lstick[0].x);
                 fp->self_vel.x = fp->gr_vel =
                     fp->mv.ys.specials.x1C * fp->facing_dir;
                 ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);

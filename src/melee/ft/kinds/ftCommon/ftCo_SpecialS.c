@@ -14,8 +14,8 @@
 /// Check @c SpecialS input without entering the state.
 bool ftCo_SpecialS_HasInput(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_B &&
-        ABS(fp->input.lstick.x) >= p_ftCommonData->x218)
+    if (fp->input.pressed_buttons & HSD_PAD_B &&
+        ABS(fp->input.lstick[0].x) >= p_ftCommonData->x218)
     {
         return true;
     }
@@ -29,7 +29,7 @@ bool ftCo_SpecialS_CheckInput(Fighter_GObj* gobj)
         return false;
     }
     if (fp->x688 == 0) {
-        if (fp->input.lstick.x * fp->facing_dir < -p_ftCommonData->x220) {
+        if (fp->input.lstick[0].x * fp->facing_dir < -p_ftCommonData->x220) {
             ftCommon_UpdateFacing(fp);
         }
         doEnter(gobj);

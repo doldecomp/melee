@@ -409,8 +409,8 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
     CollData* coll = &fp->coll_data;
     f32 stick_mag;
     f32 stick_y, stick_x;
-    stick_x = fp->input.lstick.x;
-    stick_y = fp->input.lstick.y;
+    stick_x = fp->input.lstick[0].x;
+    stick_y = fp->input.lstick[0].y;
     stick_x = stick_x * stick_x;
     stick_y = stick_y * stick_y;
 
@@ -424,15 +424,15 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
         Vec3* normal = &coll->floor.normal;
         {
             Vec3 lstick;
-            lstick.x = fp->input.lstick.x;
-            lstick.y = fp->input.lstick.y;
+            lstick.x = fp->input.lstick[0].x;
+            lstick.y = fp->input.lstick[0].y;
             lstick.z = 0.0f;
             if (!(lbVector_AngleXY(normal, &lstick) < (float) M_PI_2)) {
                 if (ftCo_8009A134(gobj) == 0) {
                     f32 temp_f1_5;
                     ftCommon_UpdateFacing(fp);
-                    temp_f1_5 = atan2f(fp->input.lstick.y,
-                                       fp->input.lstick.x * fp->facing_dir);
+                    temp_f1_5 = atan2f(fp->input.lstick[0].y,
+                                       fp->input.lstick[0].x * fp->facing_dir);
                     fp->mv.sk.specialhi.vel.x = lstick.x;
                     fp->mv.sk.specialhi.vel.y = lstick.y;
                     {
@@ -469,8 +469,8 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    stick_x = fp->input.lstick.x;
-    stick_y = fp->input.lstick.y;
+    stick_x = fp->input.lstick[0].x;
+    stick_y = fp->input.lstick[0].y;
     stick_x = stick_x * stick_x;
     stick_y_sq = stick_y * stick_y;
     stick_mag = my_sqrtf(stick_x + stick_y_sq);
@@ -480,17 +480,17 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
         var_f31 = 1.0f;
     }
     if (var_f31 > attributes->x40) {
-        var_f1 = fp->input.lstick.x;
+        var_f1 = fp->input.lstick[0].x;
         if (var_f1 < 0.0f) {
             var_f1 = -var_f1;
         }
         if (var_f1 > 0.001f) {
             ftCommon_UpdateFacing(fp);
         }
-        var_f30 =
-            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
-        fp->mv.sk.specialhi.vel.x = fp->input.lstick.x;
-        fp->mv.sk.specialhi.vel.y = fp->input.lstick.y;
+        var_f30 = atan2f(fp->input.lstick[0].y,
+                         fp->input.lstick[0].x * fp->facing_dir);
+        fp->mv.sk.specialhi.vel.x = fp->input.lstick[0].x;
+        fp->mv.sk.specialhi.vel.y = fp->input.lstick[0].y;
     } else {
         ftCommon_8007DA24(fp);
         var_f30 = M_PI / 2;

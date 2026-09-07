@@ -19,7 +19,7 @@
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float lsx_abs = fp->input.lstick.x;
+    float lsx_abs = fp->input.lstick[0].x;
     if (lsx_abs < 0.0F) {
         lsx_abs = -lsx_abs;
     }

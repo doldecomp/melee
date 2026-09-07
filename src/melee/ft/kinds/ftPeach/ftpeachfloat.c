@@ -19,15 +19,15 @@
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {
-    return fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold ||
-           fp->input.held_inputs & HSD_PAD_XY;
+    return fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold ||
+           fp->input.held_buttons[0] & HSD_PAD_XY;
 }
 
 static bool checkStartFloatInput(HSD_GObj* gobj)
 {
     Fighter* temp_r6 = GET_FIGHTER(gobj);
-    return temp_r6->input.lstick.y <= -p_ftCommonData->x88 &&
-           temp_r6->input.held_inputs & HSD_PAD_XY;
+    return temp_r6->input.lstick[0].y <= -p_ftCommonData->x88 &&
+           temp_r6->input.held_buttons[0] & HSD_PAD_XY;
 }
 
 bool ftPe_8011BA54(HSD_GObj* gobj)
@@ -96,8 +96,8 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
     if (!ftCo_SpecialAir_CheckInput(gobj) && !ftPe_8011BE80(gobj)) {
         /// @todo Call #checkContinueFloatInput
         bool float_input =
-            fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold ||
-            fp->input.held_inputs & HSD_PAD_XY;
+            fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold ||
+            fp->input.held_buttons[0] & HSD_PAD_XY;
         if (!float_input) {
             ftPe_UpdateFloatDir(gobj);
         }

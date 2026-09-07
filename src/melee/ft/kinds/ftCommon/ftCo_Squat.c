@@ -35,7 +35,7 @@
 bool ftCo_Squat_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.y < -p_ftCommonData->x90) {
+    if (fp->input.lstick[0].y < -p_ftCommonData->x90) {
         return true;
     }
 

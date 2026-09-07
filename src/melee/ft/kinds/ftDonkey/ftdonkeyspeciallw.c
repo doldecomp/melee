@@ -69,7 +69,7 @@ void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj)
 void ftDk_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & 512) {
+    if (fp->input.pressed_buttons & 512) {
         fp->mv.dk.speciallw.x0 = 1;
     }
 }

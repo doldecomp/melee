@@ -45,7 +45,7 @@ typedef enum cmd_var_idx {
 void on21EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ABS(fp->input.lstick.x) >=
+    if (ABS(fp->input.lstick[0].x) >=
             p_ftCommonData->dash_smash_stick_threshold &&
         fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
@@ -131,10 +131,10 @@ float calcAnglePos(HSD_GObj* gobj, Vec3* pos, float dist)
     Fighter* fp = GET_FIGHTER(gobj);
     float angle = 0;
     ftLk_DatAttrs* da = fp->dat_attrs;
-    float lstick_y = fp->input.lstick.y;
+    float lstick_y = fp->input.lstick[0].y;
     float da_x18_mul_x1C = da->x18 * da->x1C;
     if (ABS(lstick_y) > da->x14) {
-        float lstick_x = fp->input.lstick.x;
+        float lstick_x = fp->input.lstick[0].x;
         if (lstick_x < 0) {
             lstick_x = -lstick_x;
         }

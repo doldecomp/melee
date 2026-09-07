@@ -18,8 +18,8 @@ bool ft_8008A1FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.lstick.x * fp->facing_dir < 0.0F) ||
-        (ABS(fp->input.lstick.x) < p_ftCommonData->walk_stick_threshold))
+    if ((fp->input.lstick[0].x * fp->facing_dir < 0.0F) ||
+        (ABS(fp->input.lstick[0].x) < p_ftCommonData->walk_stick_threshold))
     {
         return true;
     }
@@ -31,7 +31,7 @@ static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
     Fighter* temp_r4 = GET_FIGHTER(gobj);
     f32 var_f2;
 
-    var_f2 = temp_r4->input.lstick.x;
+    var_f2 = temp_r4->input.lstick[0].x;
     if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
         (ABS(var_f2) < p_ftCommonData->walk_stick_threshold))
     {

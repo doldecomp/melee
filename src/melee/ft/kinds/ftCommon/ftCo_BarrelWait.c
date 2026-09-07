@@ -54,7 +54,7 @@ void ftCo_BarrelWait_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_BarrelWait_IASA(Fighter_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->input.x668 & HSD_PAD_AB) {
+    if (GET_FIGHTER(gobj)->input.pressed_buttons & HSD_PAD_AB) {
         Ground_801C4DD0();
     }
 }

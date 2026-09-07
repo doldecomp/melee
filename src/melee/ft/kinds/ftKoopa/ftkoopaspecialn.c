@@ -241,7 +241,7 @@ void ftKp_SpecialN_IASA(Fighter_GObj* gobj)
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(16);
     if (fp->mv.co.itemthrow.xC >= da->x4) {
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             if (!fp->mv.kp.specials.b_held) {
                 ftKp_SpecialLw_80134ACC(gobj);
             }
@@ -283,7 +283,7 @@ void ftKp_SpecialAirN_IASA(Fighter_GObj* gobj)
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(16);
     if (fp->mv.co.itemthrow.xC >= da->x4) {
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             if (!fp->mv.kp.specials.b_held) {
                 ftKp_SpecialLw_80134ACC(gobj);
             }

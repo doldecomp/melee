@@ -36,11 +36,11 @@ static void commonCall(Fighter* fp)
 {
     ftCommon_InitGrab(
         fp, 0,
-        (fp->dmg.x1830_percent * p_ftCommonData->x66C) +
+        (fp->dmg.x1830_percent * p_ftCommonData->released_inputs) +
             (p_ftCommonData->x65C *
                  (p_ftCommonData->x660 - Player_GetHandicap(fp->player_id)) +
              p_ftCommonData->x658 +
-             p_ftCommonData->x664 * (p_ftCommonData->x668 -
+             p_ftCommonData->x664 * (p_ftCommonData->pressed_inputs -
                                      (Player_80033BB8(fp->player_id) + 1))));
 }
 

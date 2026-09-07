@@ -570,15 +570,15 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_sdi &&
-        VEC2_SQ_LEN(fp->input.lstick) >=
+        VEC2_SQ_LEN(fp->input.lstick[0]) >=
             SQ(p_ftCommonData->sdi_min_stick_mag) &&
         (fp->x670_timer_lstick_tilt_x < p_ftCommonData->sdi_stick_window ||
          fp->x671_timer_lstick_tilt_y < p_ftCommonData->sdi_stick_window))
     {
         float scaled_lstick_x =
-            fp->input.lstick.x * p_ftCommonData->sdi_pos_scale;
+            fp->input.lstick[0].x * p_ftCommonData->sdi_pos_scale;
         float scaled_lstick_y =
-            fp->input.lstick.y * p_ftCommonData->sdi_pos_scale;
+            fp->input.lstick[0].y * p_ftCommonData->sdi_pos_scale;
         fp->cur_pos.x += scaled_lstick_x;
         fp->cur_pos.y += scaled_lstick_y;
         fp->x670_timer_lstick_tilt_x = 254;
@@ -590,18 +590,18 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 
 void ftCo_8008E5A4(Fighter* fp)
 {
-    if (fp->input.lstick.x || fp->input.lstick.y) {
+    if (fp->input.lstick[0].x || fp->input.lstick[0].y) {
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         float kb_vel_x_neg = -kb_x;
         float kb_mag = kb_vel_x_neg * kb_vel_x_neg + kb_y * kb_y;
         if (!(kb_mag < 0.00001f)) {
-            float f3 =
-                kb_y * fp->input.lstick.x + kb_vel_x_neg * fp->input.lstick.y;
+            float f3 = kb_y * fp->input.lstick[0].x +
+                       kb_vel_x_neg * fp->input.lstick[0].y;
             float f30 = f3 * f3 / kb_mag;
             Vec3 lstick_vec3, kb_vel_cross_lstick;
-            lstick_vec3.x = fp->input.lstick.x;
-            lstick_vec3.y = fp->input.lstick.y;
+            lstick_vec3.x = fp->input.lstick[0].x;
+            lstick_vec3.y = fp->input.lstick[0].y;
             lstick_vec3.z = 0;
             PSVECCrossProduct(&fp->x8c_kb_vel, &lstick_vec3,
                               &kb_vel_cross_lstick);
@@ -625,7 +625,8 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool isPointInCircle;
-    if (VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag))
+    if (VEC2_SQ_LEN(fp->input.lstick[0]) >=
+        SQ(p_ftCommonData->sdi_min_stick_mag))
     {
         isPointInCircle = true;
     } else {
@@ -635,12 +636,12 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
         float x, y;
         if (ftCo_800DF608(fp)) {
             float cd_x4BC = p_ftCommonData->x4BC;
-            x = fp->input.cstick.x * cd_x4BC;
-            y = fp->input.cstick.y * cd_x4BC;
+            x = fp->input.cstick[0].x * cd_x4BC;
+            y = fp->input.cstick[0].y * cd_x4BC;
         } else {
             float cd_x4BC = p_ftCommonData->x4BC;
-            x = fp->input.lstick.x * cd_x4BC;
-            y = fp->input.lstick.y * cd_x4BC;
+            x = fp->input.lstick[0].x * cd_x4BC;
+            y = fp->input.lstick[0].y * cd_x4BC;
         }
         fp->cur_pos.x += x;
         fp->cur_pos.y += y;
@@ -651,7 +652,7 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
         ftColl_8007B7A4(gobj, p_ftCommonData->x130);
     }
     ftCo_8008E5A4(fp);
-    if (fp->input.held_inputs & HSD_PAD_LR) {
+    if (fp->input.held_buttons[0] & HSD_PAD_LR) {
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         if (kb_x || kb_y) {
@@ -886,7 +887,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                             other_fp->x2219_b5 = true;
                         }
                     }
-                    fp->input.x668 = fp->input.x66C = 0;
+                    fp->input.pressed_buttons = fp->input.released_buttons = 0;
                     inlineB2(gobj);
                     goto ret_A8C;
                 }
@@ -986,7 +987,7 @@ static bool inlineC0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.damage.x14 && fp->mv.co.damage.x14 <= p_ftCommonData->x1D0) {
-        fp->input.x668 |= HSD_PAD_XY;
+        fp->input.pressed_buttons |= HSD_PAD_XY;
         return ftCo_800CB870(gobj);
     } else {
         return false;
@@ -1059,7 +1060,7 @@ void ftCo_Damage_IASA(Fighter_GObj* gobj)
             if (fp->mv.co.damage.x14 &&
                 fp->mv.co.damage.x14 <= p_ftCommonData->x1D0)
             {
-                fp->input.x668 |= HSD_PAD_XY;
+                fp->input.pressed_buttons |= HSD_PAD_XY;
             }
             if (fp->ground_or_air == GA_Air) {
                 ftCo_Fall_IASA_Inner(gobj);

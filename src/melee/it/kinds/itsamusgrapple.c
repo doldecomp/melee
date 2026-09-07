@@ -120,22 +120,22 @@ static inline void samus_grapple_state_sync(Fighter* fp)
 {
     switch (fp->u.ss.x2240) {
     case 0:
-        if (fp->input.held_inputs & 8) {
+        if (fp->input.held_buttons[0] & 8) {
             fp->u.ss.x2240++;
         }
         break;
     case 1:
-        if (fp->input.held_inputs & 4) {
+        if (fp->input.held_buttons[0] & 4) {
             fp->u.ss.x2240++;
         }
         break;
     case 2:
-        if (fp->input.held_inputs & 8) {
+        if (fp->input.held_buttons[0] & 8) {
             fp->u.ss.x2240++;
         }
         break;
     case 3:
-        if (fp->input.x668 & 0x100) {
+        if (fp->input.pressed_buttons & 0x100) {
             fp->u.ss.x2240++;
         }
         break;
@@ -833,7 +833,7 @@ void fn_802B895C(Item_GObj* gobj)
         it_802BAA58(gobj);
         return;
     }
-    if (fp2->input.x668 & 0x100) {
+    if (fp2->input.pressed_buttons & 0x100) {
         it_802BAB7C(gobj);
     }
 }
@@ -939,7 +939,7 @@ void fn_802B8D38(Item_GObj* gobj)
     it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
     if (ip->xDD4_itemVar.samusgrapple.x16 != 0 &&
-        (fp2->input.held_inputs & 0x40))
+        (fp2->input.held_buttons[0] & 0x40))
     {
         fp2->mv.ss.grapple.x4 += 1.0f;
     }
@@ -947,7 +947,7 @@ void fn_802B8D38(Item_GObj* gobj)
         it_802BAA58(gobj);
         return;
     }
-    if (fp2->input.x668 & 0x100) {
+    if (fp2->input.pressed_buttons & 0x100) {
         it_802BAB7C(gobj);
         return;
     }
@@ -1103,7 +1103,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     if (fp->ground_or_air == GA_Ground &&
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
-        if (fp->input.x668 & 0x100) {
+        if (fp->input.pressed_buttons & 0x100) {
             hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp->gobj);
             it_802B7160(fp->gobj, &hitbox_data);
@@ -1115,7 +1115,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
     next = link->next;
 
-    if ((fp->input.held_inputs & 0x40) &&
+    if ((fp->input.held_buttons[0] & 0x40) &&
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
         Fighter* target = ftCo_800A4A40(fp);
@@ -1194,7 +1194,7 @@ s32 it_802B99A0(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     if (fp->ground_or_air == GA_Ground &&
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
-        if (fp->input.x668 & 0x100) {
+        if (fp->input.pressed_buttons & 0x100) {
             hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp->gobj);
             it_802B7160(fp->gobj, &hitbox_data);
@@ -1276,7 +1276,7 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     if (fp2->ground_or_air == GA_Ground &&
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
-        if (fp2->input.x668 & 0x100) {
+        if (fp2->input.pressed_buttons & 0x100) {
             hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp2->gobj);
             it_802B7160(fp2->gobj, &hitbox_data);

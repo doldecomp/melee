@@ -420,7 +420,7 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_PAD_LR) && (fp->shield_health >= 0)) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_LR) && (fp->shield_health >= 0)) {
         ftCo_800928CC(gobj);
         return true;
     }
