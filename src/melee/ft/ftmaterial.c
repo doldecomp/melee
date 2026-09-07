@@ -43,10 +43,6 @@ static HSD_TECnst ftMaterial_803C6A44 = {
     HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF, 0, 0,
 };
 
-#ifdef MUST_MATCH
-#pragma force_active on
-#endif
-
 void ftMaterial_800BF260(void)
 {
     hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent,
