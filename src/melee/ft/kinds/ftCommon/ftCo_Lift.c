@@ -68,7 +68,7 @@ void ftCo_LiftWait_Coll(Fighter_GObj* gobj)
 bool ftCo_80096EF8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x228) {
+    if (fp->input.lstick[0].x * fp->facing_dir >= p_ftCommonData->x228) {
         ftCo_80096F48(gobj);
         return true;
     }
@@ -119,7 +119,7 @@ void ftCo_LiftWalk_Coll(Fighter_GObj* gobj)
 bool ftCo_800970E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.lstick.x * fp->facing_dir <= p_ftCommonData->x22C) {
+    if (fp->input.lstick[0].x * fp->facing_dir <= p_ftCommonData->x22C) {
         ftCo_80097130(gobj);
         return true;
     }

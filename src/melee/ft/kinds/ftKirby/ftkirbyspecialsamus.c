@@ -415,12 +415,12 @@ void ftKb_SsSpecialNHold_IASA(Fighter_GObj* gobj)
     if (ftCo_8009917C(gobj) != 0) {
         ftKb_ChargeShot_inline(gobj);
     } else {
-        if (fp->input.x668 & 0x200) {
+        if (fp->input.pressed_buttons & 0x200) {
             Fighter_ChangeMotionState(gobj, 0x19A, 0U, 0.0f, 1.0f, 0.0f, NULL);
             ftKb_SpecialN_set_cbs(gobj);
             return;
         }
-        if (fp->input.x668 & 0x80000000) {
+        if (fp->input.pressed_buttons & 0x80000000) {
             Fighter_ChangeMotionState(gobj, 0x199, 0U, 0.0f, 1.0f, 0.0f, NULL);
             ftKb_ChargeShot_inline(gobj);
             ftKb_SpecialN_set_cbs(gobj);

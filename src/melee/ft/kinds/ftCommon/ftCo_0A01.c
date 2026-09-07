@@ -260,8 +260,8 @@ static inline void ftCo_CpuFinishWithNeutralStick(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_Done);
 }
 
-static inline void
-ftCo_CpuReturnToPreviousBehavior(Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuReturnToPreviousBehavior(Fighter* fp,
+                                                    struct CpuFighter* data)
 {
     data->x18 = data->x1C;
     ftCo_800B463C(fp, CpuCmd_Done);
@@ -339,7 +339,7 @@ static inline void ftCo_CpuDoubleJumpAfterDelay(Fighter* fp)
 
 void ftCo_800A0148(Fighter* fp)
 {
-    struct Fighter_x1A88_t* x1A88 = &fp->x1A88;
+    struct CpuFighter* x1A88 = &fp->cpu;
 
     if (fp->cur_pos.y + x1A88->x558 > Stage_GetBlastZoneTopOffset()) {
         ftCo_CpuFinishWithNeutralStick(fp);
@@ -369,7 +369,7 @@ void ftCo_800A0148(Fighter* fp)
 
 void ftCo_800A0384(Fighter* fp)
 {
-    if (fp->cur_pos.y + fp->x1A88.x558 > Stage_GetBlastZoneTopOffset()) {
+    if (fp->cur_pos.y + fp->cpu.x558 > Stage_GetBlastZoneTopOffset()) {
         ftCo_CpuFinishWithNeutralStick(fp);
     } else if (ftCo_800A1CA8(fp)) {
         ftCo_CpuSetNeutralStick(fp);
@@ -404,7 +404,7 @@ void ftCo_800A0508(Fighter* fp)
 
 void ftCo_800A05F4(Fighter* fp)
 {
-    if (fp->cur_pos.y + fp->x1A88.x558 > Stage_GetBlastZoneTopOffset()) {
+    if (fp->cur_pos.y + fp->cpu.x558 > Stage_GetBlastZoneTopOffset()) {
         ftCo_CpuFinishWithNeutralStick(fp);
     } else if (ftCo_800A1CA8(fp)) {
         ftCo_CpuSetNeutralStick(fp);
@@ -466,7 +466,7 @@ void ftCo_800A08F0(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_Done);
         return;
     }
-    switch (fp->x1A88.level) {
+    switch (fp->cpu.level) {
     case 0:
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 45);
         break;
@@ -526,8 +526,8 @@ void ftCo_800A0C8C(Fighter* fp)
 
 void ftCo_800A0CB0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (fp->x1A88.x7C % 600 == 0) {
+    struct CpuFighter* data = &fp->cpu;
+    if (fp->cpu.x7C % 600 == 0) {
         float x = HSD_Randf();
         float rand;
         x = x * x * x;
@@ -554,7 +554,7 @@ void ftCo_800A0DA4(Fighter* fp)
 {
     int i;
     FighterHurtCapsule* hurt;
-    struct Fighter_x1A88_t* temp_r28;
+    struct CpuFighter* temp_r28;
 
     float scale;
     float dx;
@@ -563,7 +563,7 @@ void ftCo_800A0DA4(Fighter* fp)
     float var_f29;
     float dy;
 
-    temp_r28 = &fp->x1A88;
+    temp_r28 = &fp->cpu;
     var_f30 = var_f31 = var_f29 = 0.0F;
     for (i = 0; i < fp->hurt_capsules_len; i++) {
         hurt = &fp->hurt_capsules[i];
@@ -611,7 +611,7 @@ void ftCo_800A0DA4(Fighter* fp)
 bool ftCo_800A0F00(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (ft_80087A18(gobj)) {
         int result = ft_80087A80(gobj);
         if (result == 2) {
@@ -650,7 +650,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     Vec3 sp44;
 
     s32 var_r31;
-    struct Fighter_x1A88_t* temp_r30;
+    struct CpuFighter* temp_r30;
     Fighter* temp_r3_2;
     f32 temp_f0;
     f32 temp_f0_3;
@@ -665,7 +665,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
 
     PAD_STACK(0xC);
 
-    temp_r30 = &arg0->x1A88;
+    temp_r30 = &arg0->cpu;
     if (arg0->kind == FTKIND_NANA) {
         temp_r30->xF9_b2 = true;
         temp_r30->xC = 6;
@@ -744,7 +744,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30->xF8_b6 = false;
     temp_r30->xF8_b7 = false;
     temp_r30->xF9_b1 = false;
-    temp_r30->x0 = 0;
+    temp_r30->buttons = 0;
     temp_r30->lstickX = 0;
     temp_r30->lstickY = 0;
     temp_r30->cstickX = 0;
@@ -829,58 +829,47 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     }
 }
 
-float ftCo_800A17E4(Fighter* fp)
+static inline float convertStickAxis(s8 val)
 {
-    float result;
-    if (fp->x1A88.lstickX > 0) {
-        result = fp->x1A88.lstickX / 127.0F;
-    } else {
-        result = fp->x1A88.lstickX / 128.0F;
-    }
-    if (result > 1.0) {
-        return 1.0;
-    } else if (result < -1.0) {
-        return -1.0;
-    }
-    return result;
-}
-
-static inline float inlineB0(s8 val, float a, float b)
-{
-    float ret = val > 0 ? val / a : val / b;
+    float ret = val > 0 ? val / 127.0f : val / 128.0f;
     return ret > +1.0 ? +1.0F : ret < -1.0 ? -1.0F : ret;
 }
 
-float ftCo_800A1874(Fighter* fp)
+float ftCo_GetCpuLStickX(Fighter* fp)
 {
-    return inlineB0(fp->x1A88.lstickY, 127.0f, 128.0F);
+    return convertStickAxis(fp->cpu.lstickX);
 }
 
-float ftCo_800A1904(Fighter* fp)
+float ftCo_GetCpuLStickY(Fighter* fp)
 {
-    float ret = fp->x1A88.ltrigger / 255.0;
+    return convertStickAxis(fp->cpu.lstickY);
+}
+
+float ftCo_GetCpuLTrigger(Fighter* fp)
+{
+    float ret = fp->cpu.ltrigger / 255.0;
     return ret > 1.0 ? 1.0F : ret;
 }
 
-float ftCo_800A1948(Fighter* fp)
+float ftCo_GetCpuRTrigger(Fighter* fp)
 {
-    float ret = fp->x1A88.rtrigger / 255.0;
+    float ret = fp->cpu.rtrigger / 255.0;
     return ret > 1.0 ? 1.0F : ret;
 }
 
-HSD_Pad ftCo_800A198C(Fighter* fp)
+HSD_Pad ftCo_GetCpuButtons(Fighter* fp)
 {
-    return fp->x1A88.x0;
+    return fp->cpu.buttons;
 }
 
-float ftCo_800A1994(Fighter* fp)
+float ftCo_GetCpuCStickX(Fighter* fp)
 {
-    return inlineB0(fp->x1A88.cstickX, 127.0F, 128.0F);
+    return convertStickAxis(fp->cpu.cstickX);
 }
 
-float ftCo_800A1A24(Fighter* fp)
+float ftCo_GetCpuCStickY(Fighter* fp)
 {
-    return inlineB0(fp->x1A88.cstickY, 127.0F, 128.0F);
+    return convertStickAxis(fp->cpu.cstickY);
 }
 
 /// Compute 2D distance between two fighters
@@ -914,7 +903,7 @@ static inline bool ftCo_IsIgnoredFloor(int line_id)
 
 bool ftCo_800A1BA8(Fighter* fp)
 {
-    Fighter* other_fp = fp->x1A88.x44;
+    Fighter* other_fp = fp->cpu.x44;
     if (other_fp == NULL) {
         return false;
     }
@@ -977,21 +966,21 @@ static inline bool ftCo_800A1CC4_inline0(Fighter* fp, ftCo_803C6594_t* var_r29,
 
 static inline void ftCo_800A1CC4_inline1(Fighter* fp, float x, float y)
 {
-    fp->x1A88.x60 = 0x12C;
-    fp->x1A88.x64.x = fp->x1A88.x54.x;
-    fp->x1A88.x64.y = fp->x1A88.x54.y;
-    fp->x1A88.x54.x = x;
-    fp->x1A88.x54.y = y;
-    fp->x1A88.x38 = 5.0F;
+    fp->cpu.x60 = 0x12C;
+    fp->cpu.x64.x = fp->cpu.x54.x;
+    fp->cpu.x64.y = fp->cpu.x54.y;
+    fp->cpu.x54.x = x;
+    fp->cpu.x54.y = y;
+    fp->cpu.x38 = 5.0F;
 }
 
 static void ftCo_800A1CC4(Fighter* fp, ftCo_803C6594_t* var_r29)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
     PAD_STACK(0x10);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (var_r29 != NULL && data->x60 == 0 && data->xC != 0 &&
         fp->ground_or_air != GA_Air && !ftCo_800A21FC(fp))
     {
@@ -1043,7 +1032,7 @@ void ftCo_800A1F3C_noinline2(Fighter* fp, float arg1, float arg2, float arg3)
 
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (data->x60 == 0) {
         data->x54.x = arg1;
         data->x54.y = arg2;
@@ -1060,7 +1049,7 @@ static inline void ftCo_ApplyStageEntry(Fighter* fp, GrKind kind)
 static inline void ftCo_800A75DC_set_target(Fighter* fp, const int* x60,
                                             float arg1, float arg2, float arg3)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (*x60 == 0) {
         data->x54.x = arg1;
         data->x54.y = arg2;
@@ -1093,7 +1082,7 @@ bool ftCo_800A2040(Fighter* fp)
     if (Player_8003248C(fp->player_id, fp->x221F_b4) != Gm_PKind_Cpu) {
         return false;
     }
-    if (fp->x1A88.xC == 5) {
+    if (fp->cpu.xC == 5) {
         return false;
     }
     return true;
@@ -1101,10 +1090,10 @@ bool ftCo_800A2040(Fighter* fp)
 
 void ftCo_800A20A0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(2 * 4);
 
-    if (fp->x1A88.x44 != NULL && fp->ground_or_air == GA_Ground) {
+    if (fp->cpu.x44 != NULL && fp->ground_or_air == GA_Ground) {
         Fighter* other_fp = data->x44;
 
         if (ftCo_800A1AB4(fp, other_fp) <
@@ -1143,7 +1132,7 @@ bool ftCo_800A21FC(Fighter* fp)
 {
     Vec3 vec;
     mp_UnkStruct0* data0;
-    struct Fighter_x1A88_t* data1 = &fp->x1A88;
+    struct CpuFighter* data1 = &fp->cpu;
     PAD_STACK(9 * 4);
 
     if (fp->ground_or_air == GA_Air) {
@@ -1473,13 +1462,13 @@ float ftCo_800A2A70(Fighter* fp, bool arg1)
 
 bool ftCo_800A2BD4(Fighter* fp)
 {
-    return fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0 ? true
-                                                                     : false;
+    return fp->facing_dir * (fp->cpu.x54.x - fp->cur_pos.x) >= 0.0 ? true
+                                                                   : false;
 }
 
 bool ftCo_800A2C08(Fighter* fp)
 {
-    Fighter* other_fp = fp->x1A88.x44;
+    Fighter* other_fp = fp->cpu.x44;
     if (other_fp == NULL) {
         return true;
     }
@@ -1509,14 +1498,14 @@ static inline s32 ftCo_800A2C80_inline0(Fighter* fp)
 s32 ftCo_800A2C80(Fighter* fp)
 {
     s32 result;
-    struct Fighter_x1A88_t* temp_data;
+    struct CpuFighter* temp_data;
     s32 blocked;
     Vec3 floor_pos;
     Vec3 floor_normal;
     Vec3 dir;
     int line_id;
     int line;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     u32 flags;
     f32 ax;
     f32 ay;
@@ -1530,7 +1519,7 @@ s32 ftCo_800A2C80(Fighter* fp)
     s32 is_small;
     s32 oob;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (data->xFA_b6) {
         return 0;
     }
@@ -1605,10 +1594,10 @@ s32 ftCo_800A2C80(Fighter* fp)
             f32 floor_y;
 
             floor_y = floor_pos.y;
-            temp_data = &fp->x1A88;
+            temp_data = &fp->cpu;
             floor_x = floor_pos.x;
             if (floor_x <
-                    fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+                    fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
                 floor_x >
                     Stage_GetBlastZoneRightOffset() - temp_data->half_width ||
                 floor_y < temp_data->half_height +
@@ -1633,10 +1622,10 @@ s32 ftCo_800A2C80(Fighter* fp)
             f32 floor_y;
 
             floor_y = floor_pos.y;
-            temp_data = &fp->x1A88;
+            temp_data = &fp->cpu;
             floor_x = floor_pos.x;
             if (floor_x <
-                    fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+                    fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
                 floor_x >
                     Stage_GetBlastZoneRightOffset() - temp_data->half_width ||
                 floor_y < temp_data->half_height +
@@ -1661,10 +1650,10 @@ s32 ftCo_800A2C80(Fighter* fp)
             f32 floor_y;
 
             floor_y = floor_pos.y;
-            temp_data = &fp->x1A88;
+            temp_data = &fp->cpu;
             floor_x = floor_pos.x;
             if (floor_x <
-                    fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+                    fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
                 floor_x >
                     Stage_GetBlastZoneRightOffset() - temp_data->half_width ||
                 floor_y < temp_data->half_height +
@@ -1749,12 +1738,12 @@ bool ftCo_800A3234(Fighter* fp)
     Vec3 sp28;
 
     bool var_r0;
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
 
     PAD_STACK(0xC);
 
-    temp_r31 = &fp->x1A88;
-    if (fp->x1A88.xFA_b6) {
+    temp_r31 = &fp->cpu;
+    if (fp->cpu.xFA_b6) {
         if (fp->pos_delta.y < 0.1f) {
             return true;
         }
@@ -1827,8 +1816,8 @@ static inline bool inlineC0(Fighter* fp)
 
 bool ftCo_800A3498(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r4 = &fp->x1A88;
-    if (fp->x1A88.xFA_b5) {
+    struct CpuFighter* temp_r4 = &fp->cpu;
+    if (fp->cpu.xFA_b5) {
         return false;
     }
     if (fp->ground_or_air != GA_Air) {
@@ -1854,7 +1843,7 @@ bool ftCo_800A3498(Fighter* fp)
 
 bool ftCo_800A3554(Fighter* fp, float arg1)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (fp->ground_or_air == GA_Air) {
         return false;
     }
@@ -1901,7 +1890,7 @@ static inline bool ftCo_800A2170_it(Fighter* fp, Item* ip)
 
 bool ftCo_800A3710(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Item* ip = data->x4C;
     if (!data->xF9_b7) {
         return false;
@@ -1977,11 +1966,10 @@ static inline float sqrtf_store(float x, volatile float* y)
 #define sqrtf_store(x, y) sqrtf(x)
 #endif
 
-static inline bool ftCo_800A3908_inline0(Fighter* fp,
-                                         struct Fighter_x1A88_t* data, float x,
-                                         float y)
+static inline bool ftCo_800A3908_inline0(Fighter* fp, struct CpuFighter* data,
+                                         float x, float y)
 {
-    if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+    if (x < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
         x > Stage_GetBlastZoneRightOffset() - data->half_width ||
         y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
         y > Stage_GetBlastZoneTopOffset() - data->half_height)
@@ -2018,7 +2006,7 @@ static inline float ftCo_GetTerminalVelocity(Fighter* fp)
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     f32 dist;
     Vec3 island_pos;
     f32 ex;
@@ -2047,7 +2035,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        struct Fighter_x1A88_t* data2 = &fp->x1A88;
+        struct CpuFighter* data2 = &fp->cpu;
         island_pos = island->x14;
         ex = island_pos.x;
         {
@@ -2055,7 +2043,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             ey = y;
         }
         ez = island_pos.z;
-        if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        if (ex < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data2->half_width ||
             ey < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
             ey > Stage_GetBlastZoneTopOffset() - data2->half_height)
@@ -2113,7 +2101,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                        ftCo_800A75DC_set_target(fp, &fp->cpu.x60, px, ey,
                                                  5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
@@ -2141,7 +2129,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     PAD_STACK(8);
                     dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
-                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                        ftCo_800A75DC_set_target(fp, &fp->cpu.x60, px, ey,
                                                  5.0f);
                         ftCo_800A49B4(fp);
                     }
@@ -2152,11 +2140,10 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     return 0;
 }
 
-static inline bool ftCo_800A4038_inline0(Fighter* fp,
-                                         struct Fighter_x1A88_t* data, float x,
-                                         float y)
+static inline bool ftCo_800A4038_inline0(Fighter* fp, struct CpuFighter* data,
+                                         float x, float y)
 {
-    if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+    if (x < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
         x > Stage_GetBlastZoneRightOffset() - data->half_width ||
         y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
         y > Stage_GetBlastZoneTopOffset() - data->half_height)
@@ -2189,7 +2176,7 @@ static inline s32 ftCo_800A4038_inline1(float x, float y, Vec3* arg_floor_pos,
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     mp_UnkStruct0* island;
     Vec3 island_pos;
     f32 ex;
@@ -2218,7 +2205,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        struct Fighter_x1A88_t* data2 = &fp->x1A88;
+        struct CpuFighter* data2 = &fp->cpu;
         island_pos = island->x8;
         ex = island_pos.x;
         {
@@ -2226,7 +2213,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
             ey = y;
         }
         ez = island_pos.z;
-        if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        if (ex < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data2->half_width ||
             ey < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
             ey > Stage_GetBlastZoneTopOffset() - data2->half_height)
@@ -2281,7 +2268,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                        ftCo_800A75DC_set_target(fp, &fp->cpu.x60, px, ey,
                                                  5.0f);
                         ftCo_800A49B4(fp);
                         return 1;
@@ -2309,7 +2296,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     PAD_STACK(8);
                     dist = sqrtf_store(ex * ex + ddy * ddy, &sqrt_dist_store);
                     if (data->x5C > dist) {
-                        ftCo_800A75DC_set_target(fp, &fp->x1A88.x60, px, ey,
+                        ftCo_800A75DC_set_target(fp, &fp->cpu.x60, px, ey,
                                                  5.0f);
                         ftCo_800A49B4(fp);
                     }
@@ -2322,7 +2309,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
 
 static inline bool ftCo_800A4768_inline0(Fighter* fp, Vec3* p)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (p->x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
         p->x > Stage_GetBlastZoneRightOffset() - data->half_width ||
         p->y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
@@ -2385,7 +2372,7 @@ s32 ftCo_800A4768(Fighter* fp, Vec3* arg1)
 
 void ftCo_800A49B4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     f32 dx = fp->cur_pos.x - data->x54.x;
     f32 dy = fp->cur_pos.y - data->x54.y;
     data->x5C = sqrtf(dx * dx + dy * dy);
@@ -2394,7 +2381,7 @@ void ftCo_800A49B4(Fighter* fp)
 static inline bool inlineD0(Fighter* fp, Fighter* fp1)
 {
     float y, x;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     y = fp1->cur_pos.y;
     x = fp1->cur_pos.x;
@@ -2411,7 +2398,7 @@ static inline bool inlineD0(Fighter* fp, Fighter* fp1)
 static inline bool inlineD0_it(Fighter* fp, Item* it)
 {
     float y, x;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     y = it->pos.y;
     x = it->pos.x;
@@ -2482,7 +2469,7 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
     Fighter* cur_fp;
     Fighter* closest;
     HSD_GObj* cur;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     f32 best;
     f32 dx;
     f32 dy;
@@ -2655,7 +2642,7 @@ Fighter* ftCo_800A5294(Fighter* fp, int player_id)
 
 Fighter* ftCo_800A53DC(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
     HSD_GObj* var_r30;
     HSD_GObj* var_r30_2;
     Fighter* temp_r29;
@@ -2671,7 +2658,7 @@ Fighter* ftCo_800A53DC(Fighter* fp)
     f32 temp_f1_6;
     f32 var_f31;
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     if (fp == NULL) {
         return 0;
     }
@@ -2907,7 +2894,7 @@ bool ftCo_800A5A90(Fighter* fp)
 
 bool ftCo_800A5ACC(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (!data->xF9_b6) {
         return false;
     }
@@ -3030,12 +3017,12 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
     Item* cur_ip;
     Item* closest_ip;
     Item_GObj* cur;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
     f32 closest;
     f32 distance;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (fp == NULL) {
         return NULL;
     }
@@ -3091,11 +3078,11 @@ Item* ftCo_800A61D8(Fighter* fp)
     Item* ip;
     Item* closest;
     HSD_GObj* cur;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     f32 best;
     f32 dist;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (fp == NULL) {
         return NULL;
     }
@@ -3195,7 +3182,7 @@ int ftCo_800A648C(Fighter* fp)
 
 static inline bool ftCo_800A6700_inline0(Fighter* fp, f32 x, f32 y)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
         x > Stage_GetBlastZoneRightOffset() - data->half_width ||
         y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
@@ -3296,7 +3283,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     f32 fx;
     f32 dx;
     f32 dy;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     mp_UnkStruct0* island;
     f32 best;
 
@@ -3381,7 +3368,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     f32 fx;
     f32 dx;
     f32 dy;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     mp_UnkStruct0* island;
     f32 best;
 
@@ -3453,7 +3440,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
     Vec3 dir;
     mp_UnkStruct0* island;
     mp_UnkStruct0* cur_island;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     f32 px;
     f32 floor_y;
     f32 fx;
@@ -3474,7 +3461,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
     best = -1.0f;
     cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
     lbVector_Normalize(arg2);
-    data = &fp->x1A88;
+    data = &fp->cpu;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -3653,7 +3640,7 @@ static inline s32 ftCo_800A75DC_CheckFloor(f32 x0, f32 above, f32 x1,
 
 void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
 {
-    struct Fighter_x1A88_t* data = &fp0->x1A88;
+    struct CpuFighter* data = &fp0->cpu;
     Vec3 floor_pos;
     Vec3 floor_normal;
     int line_id;
@@ -3700,9 +3687,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             mp_UnkStruct0* island;
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
-                x60 = &fp0->x1A88.x60;
+                x60 = &fp0->cpu.x60;
                 ftCo_800A1F3C(fp0, floor_pos.x, floor_pos.y,
-                              data->x56C + fp1->x1A88.x564);
+                              data->x56C + fp1->cpu.x564);
                 if (island != NULL) {
                     d = island->x14.x - data->x54.x;
                     if (d < 0.0f) {
@@ -3711,20 +3698,20 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                     if (d < 5.0) {
                         ftCo_800A75DC_set_target(fp0, x60, island->x14.x - 5.0,
                                                  island->x14.y,
-                                                 data->x56C + fp1->x1A88.x564);
+                                                 data->x56C + fp1->cpu.x564);
                     } else {
                         d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
                             ftCo_800A1F3C(fp0, 5.0 + island->x8.x,
                                           island->x8.y,
-                                          data->x56C + fp1->x1A88.x564);
+                                          data->x56C + fp1->cpu.x564);
                         }
                     }
                 }
             }
         } else {
             ftCo_800A4768(fp1, &sp18);
-            ftCo_800A1F3C(fp0, sp18.x, sp18.y, data->x56C + fp1->x1A88.x564);
+            ftCo_800A1F3C(fp0, sp18.x, sp18.y, data->x56C + fp1->cpu.x564);
         }
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)
@@ -3734,9 +3721,9 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         mp_UnkStruct0* fp0_island;
         s32 same_island;
 
-        x60 = &fp0->x1A88.x60;
+        x60 = &fp0->cpu.x60;
         ftCo_800A1F3C(fp0, fp1->cur_pos.x, fp1->cur_pos.y,
-                      data->x56C + fp1->x1A88.x564);
+                      data->x56C + fp1->cpu.x564);
         if (fp0->ground_or_air == GA_Air) {
             same_island = 0;
         } else if (fp1->ground_or_air == GA_Air) {
@@ -3761,12 +3748,12 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                 if (fp0->cur_pos.x < island->x8.x) {
                     ftCo_800A75DC_set_target(fp0, x60, 5.0 + island->x8.x,
                                              island->x8.y,
-                                             data->x56C + fp1->x1A88.x564);
+                                             data->x56C + fp1->cpu.x564);
                 }
             } else {
                 if (fp0->cur_pos.x > island->x14.x) {
                     ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
-                                  data->x56C + fp1->x1A88.x564);
+                                  data->x56C + fp1->cpu.x564);
                 }
             }
         }
@@ -3776,7 +3763,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
 void ftCo_800A7AAC(Fighter* fp)
 {
     Fighter* partner;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 floor_pos;
     Vec3 floor_normal;
     int line_id;
@@ -3803,7 +3790,7 @@ void ftCo_800A7AAC(Fighter* fp)
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
                 ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y,
-                              data->x56C + partner->x1A88.x564);
+                              data->x56C + partner->cpu.x564);
                 if (island != NULL) {
                     d = island->x14.x - data->x54.x;
                     if (d < 0.0f) {
@@ -3811,12 +3798,12 @@ void ftCo_800A7AAC(Fighter* fp)
                     }
                     if (d < 5.0) {
                         ftCo_800A1F3C(fp, island->x14.x - 5.0, island->x14.y,
-                                      data->x56C + partner->x1A88.x564);
+                                      data->x56C + partner->cpu.x564);
                     } else {
                         d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
                             ftCo_800A1F3C(fp, 5.0 + island->x8.x, island->x8.y,
-                                          data->x56C + partner->x1A88.x564);
+                                          data->x56C + partner->cpu.x564);
                         }
                     }
                 }
@@ -3852,10 +3839,10 @@ void ftCo_800A7AAC(Fighter* fp)
         }
         if (result == 0) {
             ftCo_800A1F3C(fp, partner->cur_pos.x, partner->cur_pos.y,
-                          data->x56C + partner->x1A88.x564);
+                          data->x56C + partner->cpu.x564);
         } else {
             ftCo_800A1F3C(fp, partner_pos.x, partner_pos.y,
-                          data->x56C + partner->x1A88.x564);
+                          data->x56C + partner->cpu.x564);
         }
         if (fp->ground_or_air == GA_Air) {
             same_island = 0;
@@ -3892,11 +3879,11 @@ void ftCo_800A7AAC(Fighter* fp)
                     if (data->x54.x - fp->cur_pos.x > 0.0) {
                         if (fp->cur_pos.x < island->x8.x) {
                             ftCo_800A1F3C(fp, 5.0 + island->x8.x, island->x8.y,
-                                          data->x56C + partner->x1A88.x564);
+                                          data->x56C + partner->cpu.x564);
                         }
                     } else if (fp->cur_pos.x > island->x14.x) {
                         ftCo_800A1F3C(fp, island->x14.x - 5.0, island->x14.y,
-                                      data->x56C + partner->x1A88.x564);
+                                      data->x56C + partner->cpu.x564);
                     }
                 }
             }
@@ -3906,7 +3893,7 @@ void ftCo_800A7AAC(Fighter* fp)
 
 void ftCo_800A80E4(Fighter* fp)
 {
-    Fighter* other_fp = fp->x1A88.x44;
+    Fighter* other_fp = fp->cpu.x44;
     if (other_fp != NULL && fp->ground_or_air != GA_Air) {
         f32 dx = fp->cur_pos.x - other_fp->cur_pos.x;
         f32 dy = fp->cur_pos.y - other_fp->cur_pos.y;
@@ -3921,7 +3908,7 @@ void ftCo_800A80E4(Fighter* fp)
 
 static inline void ftCo_800A8210_inline0(Fighter* fp, Vec3* out)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     f32 y = out->y;
     f32 x = out->x;
     if (data->x60 == 0) {
@@ -4017,8 +4004,8 @@ bool ftCo_800A8210(Fighter* fp, Vec3* arg1)
 
 void ftCo_800A866C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    Item* item = fp->x1A88.x4C;
+    struct CpuFighter* data = &fp->cpu;
+    Item* item = fp->cpu.x4C;
     mp_UnkStruct0* island;
     mp_UnkStruct0* fp_island;
     Vec3 floor_pos;
@@ -4219,9 +4206,9 @@ void ftCo_800A8DE4_noinline(Fighter* fp)
 
 void ftCo_800A8DE4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(0x20);
-    if (!fp->x1A88.xFA_b2) {
+    if (!fp->cpu.xFA_b2) {
         data->xFA_b2 = true;
         data->x5C = 10000.0f;
         if (fp->facing_dir > 0.0) {
@@ -4266,8 +4253,8 @@ void ftCo_800A8EB0(Fighter* fp)
 {
     float angle;
 
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (fp->x1A88.level < 9) {
+    struct CpuFighter* data = &fp->cpu;
+    if (fp->cpu.level < 9) {
         ftCo_800B463C(fp, CpuCmd_Done);
         return;
     }
@@ -4305,7 +4292,7 @@ void ftCo_800A8EB0(Fighter* fp)
  */
 void ftCo_800A92CC(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (ABS(fp->cur_pos.x - data->x54.x) > 60.0) {
         // If we're far in the horizontal direction, up-B diagonally, then to
         // the side.
@@ -4352,7 +4339,7 @@ void ftCo_800A92CC(Fighter* fp)
  */
 static void ftCo_800A949C(Fighter* fp, bool unused)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (ABS(data->x54.x - fp->cur_pos.x) > 30.0) {
         // Wait a frame with the stick neutral?
         ftCo_CpuSetNeutralStick(fp);
@@ -4426,9 +4413,9 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
  */
 void ftCo_800A96B8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     float sum = fp->coll_data.cur_pos.y + fp->coll_data.ecb.bottom.y;
-    bool tmp = fp->x1A88.x54.y > sum ? true : false;
+    bool tmp = fp->cpu.x54.y > sum ? true : false;
 
     PAD_STACK(0x10);
 
@@ -4526,7 +4513,7 @@ void ftCo_800A9904(Fighter* fp)
     f32 terminal_time;
     f32 sqrt_time;
     f32 sqrt_terminal;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     if (ftCo_800A3498(fp) != 0) {
         if (fp->co_attrs.max_jumps > fp->x1968_jumpsUsed) {
@@ -4619,7 +4606,7 @@ static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
 
 static inline bool ftCo_800A9CB4_inline1(Fighter* fp, Vec3* stage_pos)
 {
-    if (fp->x1A88.xFA_b6) {
+    if (fp->cpu.xFA_b6) {
         return false;
     }
     if (fp->x34_scale.y < 1.0f) {
@@ -4637,7 +4624,7 @@ static inline bool ftCo_800A9CB4_inline1(Fighter* fp, Vec3* stage_pos)
 }
 
 static inline void ftCo_CpuUseAvailableJump(Fighter* fp,
-                                            struct Fighter_x1A88_t* data)
+                                            struct CpuFighter* data)
 {
     if (data->xFA_b6) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -4667,7 +4654,7 @@ void ftCo_800A9CB4(Fighter* fp)
     volatile f32 sqrt_x_time_store;
     volatile f32 sqrt_terminal_time_store;
     f32 sp38_b;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     f32* grav_p;
     f32 temp_f1;
@@ -4784,7 +4771,7 @@ void ftCo_800AA320(Fighter* fp, int* stick, int* clamp)
         *clamp = 0x7F;
         return;
     }
-    switch (fp->x1A88.level) {
+    switch (fp->cpu.level) {
     case 0:
         *stick = 1;
         *clamp = 0x43;
@@ -4892,7 +4879,7 @@ static inline int ftCo_800AA42C_inline0(float clamp, float dist, float near,
 
 void ftCo_800AA42C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     f32 near;
     f32 dist;
     bool facing_dest;
@@ -4903,13 +4890,13 @@ void ftCo_800AA42C(Fighter* fp)
 
     PAD_STACK(0x8);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     ftCo_800AA320(fp, &stick, &clamp);
     if (isInTeeter(fp)) {
         ftCo_CpuTurnAwayFromLedge(fp);
         return;
     }
-    if (fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0) {
+    if (fp->facing_dir * (fp->cpu.x54.x - fp->cur_pos.x) >= 0.0) {
         facing_dest = true;
     } else {
         facing_dest = false;
@@ -4959,7 +4946,7 @@ void ftCo_800AA42C(Fighter* fp)
 
 void ftCo_800AA844(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
     int sp38;
     int sp34;
@@ -4968,7 +4955,7 @@ void ftCo_800AA844(Fighter* fp)
     int sp18;
     u32 sp14;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (isInTeeter(fp)) {
         ftCo_CpuTurnAwayFromLedge(fp);
         return;
@@ -5033,7 +5020,7 @@ static inline void ftCo_800AABC8_dontinline(Fighter* fp)
 
 void ftCo_800AACD0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     mp_UnkStruct0* temp_r3_2;
 
     u8 _[8];
@@ -5077,7 +5064,7 @@ void ftCo_800AACD0(Fighter* fp)
 
 bool ftCo_800AAF48(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r29 = &fp->x1A88;
+    struct CpuFighter* temp_r29 = &fp->cpu;
     mp_UnkStruct0* cur;
 
     f32 dx;
@@ -5120,12 +5107,12 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 2.0F * temp_r29->x558 + temp_r29->x568 &&
                 dx < 5.0F * temp_r29->x564)
             {
-                fp->x1A88.x60 = 0x12C;
-                fp->x1A88.x64.x = fp->x1A88.x54.x;
-                fp->x1A88.x64.y = fp->x1A88.x54.y;
-                fp->x1A88.x54.x = sp44.x;
-                fp->x1A88.x54.y = sp44.y;
-                fp->x1A88.x38 = 5.0F;
+                fp->cpu.x60 = 0x12C;
+                fp->cpu.x64.x = fp->cpu.x54.x;
+                fp->cpu.x64.y = fp->cpu.x54.y;
+                fp->cpu.x54.x = sp44.x;
+                fp->cpu.x54.y = sp44.y;
+                fp->cpu.x38 = 5.0F;
                 return true;
             }
         }
@@ -5153,12 +5140,12 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 2.0F * temp_r29->x558 + temp_r29->x568 &&
                 dx < 5.0F * temp_r29->x564)
             {
-                fp->x1A88.x60 = 0x12C;
-                fp->x1A88.x64.x = fp->x1A88.x54.x;
-                fp->x1A88.x64.y = fp->x1A88.x54.y;
-                fp->x1A88.x54.x = spC.x;
-                fp->x1A88.x54.y = spC.y;
-                fp->x1A88.x38 = 5.0f;
+                fp->cpu.x60 = 0x12C;
+                fp->cpu.x64.x = fp->cpu.x54.x;
+                fp->cpu.x64.y = fp->cpu.x54.y;
+                fp->cpu.x54.x = spC.x;
+                fp->cpu.x54.y = spC.y;
+                fp->cpu.x38 = 5.0f;
                 return true;
             }
         }
@@ -5168,7 +5155,7 @@ bool ftCo_800AAF48(Fighter* fp)
 
 void ftCo_800AB224(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
 
     f32 temp_f1;
     f32 var_f1_3;
@@ -5177,7 +5164,7 @@ void ftCo_800AB224(Fighter* fp)
 
     Fighter* temp_r0;
     mp_UnkStruct0* temp_r29;
-    struct Fighter_x1A88_t* temp_r28;
+    struct CpuFighter* temp_r28;
     s32 var_r0_5;
     s32 var_r0_6;
 
@@ -5191,7 +5178,7 @@ void ftCo_800AB224(Fighter* fp)
 
     PAD_STACK(0x18);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     if (temp_r31->xFA_b6) {
         if (fp->facing_dir > 0.0) {
             ftCo_CpuTurnAround(fp);
@@ -5228,7 +5215,7 @@ void ftCo_800AB224(Fighter* fp)
         }
     } else {
     block_49:
-        temp_r28 = &fp->x1A88;
+        temp_r28 = &fp->cpu;
         if (fp->ground_or_air == GA_Air) {
             var_r0_5 = 0;
         } else {
@@ -5269,7 +5256,7 @@ void ftCo_800AB224(Fighter* fp)
         if (var_f31 > 0.6108652334660292) {
             if (mpCheckCeiling(fp->coll_data.cur_pos.x,
                                fp->coll_data.cur_pos.y,
-                               fp->coll_data.cur_pos.x, fp->x1A88.x54.y, &sp24,
+                               fp->coll_data.cur_pos.x, fp->cpu.x54.y, &sp24,
                                &sp3C, &sp40, &sp30, -1, -1))
             {
                 var_r0_6 = 1;
@@ -5309,7 +5296,7 @@ void ftCo_800AB224(Fighter* fp)
 
 void ftCo_800ABA34(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (data->xC == 11) {
         if (fp->item_gobj == NULL) {
             ftCo_800B4880(fp, 38);
@@ -5343,7 +5330,7 @@ void ftCo_800ABA34(Fighter* fp)
 
 static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(0x28);
 
     *target = data->x44;
@@ -5351,7 +5338,7 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
 
 void ftCo_800ABBA8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Fighter* target;
     Fighter* below;
     f32* grav_ptr;
@@ -5472,9 +5459,9 @@ void ftCo_800ABBA8(Fighter* fp)
     }
     if (below->cur_pos.y < fp->cur_pos.y) {
         dyy = ABS(below->cur_pos.y - fp->cur_pos.y);
-        if (dyy < below->x1A88.x568 + data->x568) {
+        if (dyy < below->cpu.x568 + data->x568) {
             dxx = ABS(below->cur_pos.x - fp->cur_pos.x);
-            if (dxx < 5.0 + (below->x1A88.x564 + data->x564)) {
+            if (dxx < 5.0 + (below->cpu.x564 + data->x564)) {
                 if (below->motion_id == 0x38 || below->motion_id == 0x3F) {
                     ok = 1;
                 } else {
@@ -5564,14 +5551,14 @@ void ftCo_800AC30C_noinline(Fighter* fp)
 
 void ftCo_800AC30C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(4 * 4);
     if (!inlineG0(fp)) {
         ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (data->x7C % 3 == 0 && !(data->level * 0.1F < HSD_Randf())) {
-        if (fp->x1A88.lstickX < 0) {
+        if (fp->cpu.lstickX < 0) {
             ftCo_800B46B8(fp, CpuCmd_SetLstickX, +0x7F);
         } else {
             ftCo_800B46B8(fp, CpuCmd_SetLstickX, -0x7F);
@@ -5591,7 +5578,7 @@ static inline enum_t inlineH0(Fighter* fp)
     return 0;
 }
 
-static inline void inlineH1(Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void inlineH1(Fighter* fp, struct CpuFighter* data)
 {
     if (data->x7C % ((10 - data->level) * 5) == 0 && HSD_Randf() < 0.5f) {
         ftCo_CpuTapA(fp);
@@ -5603,7 +5590,7 @@ static inline void inlineH1(Fighter* fp, struct Fighter_x1A88_t* data)
 
 void ftCo_800AC434(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 vec;
     float f;
     enum_t barrel_state = inlineH0(fp);
@@ -5630,12 +5617,12 @@ void ftCo_800AC434(Fighter* fp)
 
 void ftCo_800AC5A0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     bool var_r0;
     s8 stick_x;
     s8 stick_y;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (!fp->x221A_b3) {
         data->x18 = data->x1C;
         ftCo_800B463C(fp, CpuCmd_ReleaseR);
@@ -5684,7 +5671,7 @@ void ftCo_800AC5A0(Fighter* fp)
 
 void ftCo_800AC7D4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Fighter* temp_r3;
     int temp_r0_2;
     enum_t var_r0;
@@ -5734,7 +5721,7 @@ void ftCo_800AC7D4(Fighter* fp)
 
 void ftCo_800ACB44(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Fighter* temp_r3;
     f32 temp_f1;
     f32 temp_f1_2;
@@ -5774,7 +5761,7 @@ void ftCo_800ACB44(Fighter* fp)
 
 void ftCo_800ACD5C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     PAD_STACK(0x18);
 
@@ -5880,7 +5867,7 @@ void ftCo_800ACD5C(Fighter* fp)
 
 void ftCo_800AD42C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (!ftCo_800A3554(fp, 1.0F)) {
         ftCo_CpuReturnToPreviousBehavior(fp, data);
     } else if (fp->ground_or_air == GA_Air) {
@@ -5939,13 +5926,13 @@ static inline bool is_capsule_egg_ball(ItemKind kind)
 void ftCo_800AD7FC(Fighter* fp)
 {
     Fighter* enemy;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     Item* item;
     f32 angle;
 
     PAD_STACK(0x10);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (fp->item_gobj == NULL) {
         ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
@@ -6010,7 +5997,7 @@ void ftCo_800AD7FC(Fighter* fp)
 /// Handle charging neutral-B
 void ftCo_800ADC28(Fighter* fp)
 {
-    if (fp->x1A88.x18 == 0xA) {
+    if (fp->cpu.x18 == 0xA) {
         return;
     }
 
@@ -6055,22 +6042,22 @@ static inline f32 ftCo_800ADE48_inline0(f32 y)
     return y - 1000.0f;
 }
 
-static inline struct Fighter_x1A88_t* ftCo_800ADE48_inline1(Fighter* fp)
+static inline struct CpuFighter* ftCo_800ADE48_inline1(Fighter* fp)
 {
-    return &fp->x1A88;
+    return &fp->cpu;
 }
 
 static bool ftCo_800ADE48(Fighter* fp)
 {
     s32 switch_cmd;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     Item* ip;
     u32 flags;
     int line_id;
     Vec3 floor_normal;
     Vec3 floor_pos;
     Item_GObj* item_gobj;
-    struct Fighter_x1A88_t* data2;
+    struct CpuFighter* data2;
     ItemKind kind;
     s32 found;
     s32 result;
@@ -6086,7 +6073,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     f32 dy;
     PAD_STACK(8);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     found = 0;
     x = data->x54.x;
     x2 = x;
@@ -6105,10 +6092,10 @@ static bool ftCo_800ADE48(Fighter* fp)
             found = result;
         }
         if (found != 0) {
-            struct Fighter_x1A88_t* data2 = &fp->x1A88;
+            struct CpuFighter* data2 = &fp->cpu;
             y = data->x54.y;
             x = data->x54.x;
-            if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+            if (x < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
                 x > Stage_GetBlastZoneRightOffset() - data2->half_width ||
                 y < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
                 y > Stage_GetBlastZoneTopOffset() - data2->half_height)
@@ -6148,9 +6135,9 @@ static bool ftCo_800ADE48(Fighter* fp)
             data->x54.y = fp->cur_pos.y;
         }
     } while (0);
-    dy = fp->cur_pos.y - fp->x1A88.x54.y;
+    dy = fp->cur_pos.y - fp->cpu.x54.y;
     {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         f32 dx;
         f32 dist;
 
@@ -6297,7 +6284,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     }
     cur_cmd = data->x18;
     if (cur_cmd != 0xF) {
-        if (fp->x1A88.level < 5) {
+        if (fp->cpu.level < 5) {
             switch_cmd = 0;
         } else if (fp->motion_id == 0x26) {
             switch_cmd = 1;
@@ -6431,9 +6418,9 @@ static bool ftCo_800ADE48(Fighter* fp)
 
 static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         data->x4C = NULL;
     } else {
@@ -6447,10 +6434,10 @@ static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
 
 static inline void ftCo_CpuUpdateSpecialItemTarget(Fighter* fp)
 {
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    fp->cpu.x50 = ftCo_800A648C(fp);
 }
 
-static inline bool ftCo_CpuDataShouldAct(struct Fighter_x1A88_t* data)
+static inline bool ftCo_CpuDataShouldAct(struct CpuFighter* data)
 {
     if (data->x18 != data->x20 && data->x18 != data->x1C) {
         data->x60 = 0;
@@ -6465,9 +6452,9 @@ static inline bool ftCo_CpuDataShouldAct(struct Fighter_x1A88_t* data)
 
 void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
 {
-    struct Fighter_x1A88_t* data0 = &fp->x1A88;
-    struct Fighter_x1A88_t* data2;
-    struct Fighter_x1A88_t* data3;
+    struct CpuFighter* data0 = &fp->cpu;
+    struct CpuFighter* data2;
+    struct CpuFighter* data3;
     s32 do_act;
     u8 _[8];
     Vec3 dir;
@@ -6495,16 +6482,16 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
         data0->xF9_b4 = true;
         data0->xF9_b6 = true;
     }
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (arg2 >= 0) {
             ftCo_800A8210(fp, arg1);
         } else {
-            data3 = &fp->x1A88;
+            data3 = &fp->cpu;
             if (fp->ground_or_air != GA_Air) {
                 left = Stage_GetBlastZoneLeftOffset();
                 sum_x = Stage_GetBlastZoneRightOffset();
@@ -6532,8 +6519,8 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
 
 void ftCo_800AEA8C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    struct Fighter_x1A88_t* data2;
+    struct CpuFighter* data = &fp->cpu;
+    struct CpuFighter* data2;
     u32 flags[5];
     int line_id;
     Vec3 floor_normal;
@@ -6552,10 +6539,10 @@ void ftCo_800AEA8C(Fighter* fp)
     data->xF9_b6 = true;
     data->xF9_b7 = true;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     do_floor = ftCo_CpuDataShouldAct(data2);
     if (do_floor != 0) {
         s32 result;
@@ -6595,9 +6582,9 @@ void ftCo_800AEA8C(Fighter* fp)
 
 static inline bool ftCo_CpuShouldAct(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (data->x18 != data->x20 && data->x18 != data->x1C) {
         data->x60 = 0;
     }
@@ -6617,12 +6604,12 @@ static inline void ftCo_CpuTargetAct(Fighter* fp)
     }
 }
 
-static inline void ftCo_CpuSetTargetActive(struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuSetTargetActive(struct CpuFighter* data)
 {
     data->xF8_b0 = true;
 }
 
-static inline void ftCo_CpuClearTargetModes(struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuClearTargetModes(struct CpuFighter* data)
 {
     data->xF9_b2 = false;
     data->xF9_b4 = false;
@@ -6632,12 +6619,12 @@ static inline void ftCo_CpuClearTargetModes(struct Fighter_x1A88_t* data)
     data->xF9_b7 = false;
 }
 
-static inline void ftCo_CpuSetTargetReady(struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuSetTargetReady(struct CpuFighter* data)
 {
     data->xF9_b1 = true;
 }
 
-static inline void ftCo_CpuSetTargetFlags(struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuSetTargetFlags(struct CpuFighter* data)
 {
     ftCo_CpuSetTargetActive(data);
     ftCo_CpuClearTargetModes(data);
@@ -6646,8 +6633,8 @@ static inline void ftCo_CpuSetTargetFlags(struct Fighter_x1A88_t* data)
 
 void ftCo_800AECF0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data2;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data2;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -6676,10 +6663,10 @@ void ftCo_800AECF0(Fighter* fp)
     data->xF9_b6 = true;
     data->xF9_b7 = true;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     if ((data2->x18 != data2->x20) && (data2->x18 != (data2->x1C))) {
         data2->x60 = 0;
     }
@@ -6703,7 +6690,7 @@ void ftCo_800AECF0(Fighter* fp)
 /// them in another inline prevents MWCC from inlining the outer helper.
 static inline void ftCo_CpuInitNoTarget(Fighter* fp, bool fear_flag)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     s32 is_food;
 
     data->xF8_b0 = false;
@@ -6714,17 +6701,16 @@ static inline void ftCo_CpuInitNoTarget(Fighter* fp, bool fear_flag)
     data->xF9_b6 = fear_flag;
     data->xF9_b7 = true;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
 }
 
-static inline void ftCo_CpuActOnNoTarget(Fighter* fp,
-                                         struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuActOnNoTarget(Fighter* fp, struct CpuFighter* data)
 {
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
+    struct CpuFighter* data2 = &fp->cpu;
     Fighter* attack_target;
     s32 do_act;
 
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
     }
@@ -6750,7 +6736,7 @@ static inline void ftCo_CpuActOnNoTarget(Fighter* fp,
 
 void ftCo_800AEFB8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -6777,9 +6763,9 @@ void ftCo_800AEFB8(Fighter* fp)
 
 static inline void ftCo_CpuUpdateTargetDistance(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (ftCo_800A1C44(fp)) {
         data->xF8_b6 = false;
     } else {
@@ -6800,9 +6786,9 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
 {
     Item_GObj* item_gobj;
     ItemKind kind;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {
         kind = GET_ITEM(item_gobj)->kind;
@@ -6828,7 +6814,7 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
 }
 
 static inline void ftCo_CpuApproachFoodItemTarget(Fighter* fp,
-                                                  struct Fighter_x1A88_t* data,
+                                                  struct CpuFighter* data,
                                                   Fighter** target_slot,
                                                   Vec3* approach_pos)
 {
@@ -6867,10 +6853,10 @@ void ftCo_800AF290(Fighter* fp)
     s32 redirect;
     bool is_food;
     Fighter** target_slot;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     PAD_STACK(4);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     cmd = ftCo_800A229C(fp, &sp54);
     if (cmd != 0) {
         ftCo_800AE7AC(fp, &sp54, cmd);
@@ -6906,7 +6892,7 @@ void ftCo_800AF290(Fighter* fp)
     data->xF9_b1 = false;
 
     target = ftCo_800A4BEC(fp);
-    *(target_slot = &fp->x1A88.x44) = target;
+    *(target_slot = &fp->cpu.x44) = target;
     ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     ftCo_CpuUpdateTargetDistance(fp);
@@ -6931,12 +6917,12 @@ void ftCo_800AF78C(Fighter* fp)
     s32 cmd;
     s32 should_escape;
     Fighter** target_slot;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     bool is_food;
 
     PAD_STACK(4);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     cmd = ftCo_800A229C(fp, &sp4C);
     if (cmd != 0) {
         ftCo_800AE7AC(fp, &sp4C, cmd);
@@ -6970,7 +6956,7 @@ void ftCo_800AF78C(Fighter* fp)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
 
-    *(target_slot = &fp->x1A88.x44) = ftCo_800A4BEC(fp);
+    *(target_slot = &fp->cpu.x44) = ftCo_800A4BEC(fp);
 
     ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
@@ -6982,15 +6968,15 @@ void ftCo_800AF78C(Fighter* fp)
 
 void ftCo_800AFC40(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
 
     Fighter* temp_r3_3;
     s32 var_r0;
-    struct Fighter_x1A88_t* temp_r4;
+    struct CpuFighter* temp_r4;
 
     PAD_STACK(0x10);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     if (fp->x221D_b6) {
         var_r0 = 1;
     } else if (fp->x2168 != 0 && fp->x2338.x == 0) {
@@ -7010,10 +6996,10 @@ void ftCo_800AFC40(Fighter* fp)
     temp_r31->xF9_b6 = true;
     temp_r31->xF9_b7 = false;
     temp_r31->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    temp_r4 = &fp->x1A88;
+    temp_r4 = &fp->cpu;
     if (ftCo_CpuDataShouldAct(temp_r4)) {
         temp_r3_3 = ftCo_800A50D4(fp);
         if (temp_r3_3 != NULL) {
@@ -7025,8 +7011,8 @@ void ftCo_800AFC40(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-static inline void
-ftCo_CpuActOnPlayer(Fighter* fp, struct Fighter_x1A88_t* data, int player_id)
+static inline void ftCo_CpuActOnPlayer(Fighter* fp, struct CpuFighter* data,
+                                       int player_id)
 {
     Fighter* target = ftCo_800A5294(fp, player_id);
 
@@ -7039,7 +7025,7 @@ ftCo_CpuActOnPlayer(Fighter* fp, struct Fighter_x1A88_t* data, int player_id)
 
 void ftCo_800AFE3C(Fighter* fp, int arg1)
 {
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
 
     Vec3 sp2C;
 
@@ -7048,7 +7034,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
 
     PAD_STACK(0x14);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     temp_r3 = ftCo_800A229C(fp, &sp2C);
     if (temp_r3 != 0) {
         ftCo_800AE7AC(fp, &sp2C, temp_r3);
@@ -7070,7 +7056,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     temp_r31->xF9_b6 = true;
     temp_r31->xF9_b7 = true;
     temp_r31->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     if (ftCo_CpuShouldAct(fp)) {
@@ -7093,13 +7079,13 @@ void ftCo_800B00F8(Fighter* fp)
     int var_r0_7;
     int var_r0_8;
     int var_r0_9;
-    struct Fighter_x1A88_t* temp_r31;
-    struct Fighter_x1A88_t* temp_r4;
+    struct CpuFighter* temp_r31;
+    struct CpuFighter* temp_r4;
     int tmp;
 
     PAD_STACK(0x10);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     tmp = ftCo_800A229C(fp, &sp28);
     if (tmp) {
         ftCo_800AE7AC(fp, &sp28, tmp);
@@ -7113,7 +7099,7 @@ void ftCo_800B00F8(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r31->x4C = NULL;
     } else {
@@ -7124,9 +7110,9 @@ void ftCo_800B00F8(Fighter* fp)
         }
     }
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    temp_r4 = &fp->x1A88;
-    temp_r3_4 = fp->x1A88.x18;
-    if (temp_r3_4 != fp->x1A88.x20 && temp_r3_4 != temp_r4->x1C) {
+    temp_r4 = &fp->cpu;
+    temp_r3_4 = fp->cpu.x18;
+    if (temp_r3_4 != fp->cpu.x20 && temp_r3_4 != temp_r4->x1C) {
         temp_r4->x60 = 0;
     }
     if (temp_r4->x18 == 4) {
@@ -7193,7 +7179,7 @@ void ftCo_800B00F8(Fighter* fp)
 void ftCo_800B04DC(Fighter* fp)
 {
     Fighter** target_slot;
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     Item_GObj* item_gobj;
     ItemKind kind;
     Fighter* target;
@@ -7205,13 +7191,13 @@ void ftCo_800B04DC(Fighter* fp)
 
     PAD_STACK(0x8);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     data->xF8_b0 = (is_food = true);
     ftCo_CpuClearTargetModes(data);
     data->xF9_b1 = true;
 
     target = ftCo_800A4BEC(fp);
-    *(target_slot = &fp->x1A88.x44) = target;
+    *(target_slot = &fp->cpu.x44) = target;
 
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {
@@ -7257,7 +7243,7 @@ void ftCo_800B04DC(Fighter* fp)
 }
 
 static inline void ftCo_CpuInitEnemyTarget(Fighter* fp,
-                                           struct Fighter_x1A88_t* data)
+                                           struct CpuFighter* data)
 {
     data->xF8_b0 = false;
     data->xF9_b2 = true;
@@ -7267,12 +7253,12 @@ static inline void ftCo_CpuInitEnemyTarget(Fighter* fp,
     data->xF9_b6 = false;
     data->xF9_b7 = false;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
 }
 
-static inline void inlineI3(Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void inlineI3(Fighter* fp, struct CpuFighter* data)
 {
-    struct Fighter_x1A88_t* fp_data = &fp->x1A88;
+    struct CpuFighter* fp_data = &fp->cpu;
     if (ftCo_CpuDataShouldAct(fp_data)) {
         if (data->xFB_b0) {
             ftCo_800A8DE4(fp);
@@ -7284,7 +7270,7 @@ static inline void inlineI3(Fighter* fp, struct Fighter_x1A88_t* data)
 
 void ftCo_800B0760(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(4 * 4);
 
     data->xF8_b0 = true;
@@ -7296,7 +7282,7 @@ void ftCo_800B0760(Fighter* fp)
     data->xF9_b7 = false;
     data->xF9_b1 = false;
 
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
 
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
@@ -7316,9 +7302,9 @@ static inline u8 inlineM0(float x)
 
 void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
 
-    data = &fp1->x1A88;
+    data = &fp1->cpu;
     data->x444++;
     data->x448++;
     if (data->x444 == data->xFC + ARRAY_SIZE(data->xFC)) {
@@ -7327,13 +7313,13 @@ void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
     if (data->x448 == data->xFC + ARRAY_SIZE(data->xFC)) {
         data->x448 = data->xFC;
     }
-    data->x444->lstickX = inlineM0(fp0->input.lstick.x);
-    data->x444->lstickY = inlineM0(fp0->input.lstick.y);
-    data->x444->cstickX = inlineM0(fp0->input.cstick.x);
-    data->x444->cstickY = inlineM0(fp0->input.cstick.y);
-    data->x444->x4 = fp0->input.x650;
-    data->x444->x5 = fp0->input.x650;
-    data->x444->x0 = fp0->input.held_inputs;
+    data->x444->lstickX = inlineM0(fp0->input.lstick[0].x);
+    data->x444->lstickY = inlineM0(fp0->input.lstick[0].y);
+    data->x444->cstickX = inlineM0(fp0->input.cstick[0].x);
+    data->x444->cstickY = inlineM0(fp0->input.cstick[0].y);
+    data->x444->x4 = fp0->input.triggers[0];
+    data->x444->x5 = fp0->input.triggers[0];
+    data->x444->x0 = fp0->input.held_buttons[0];
     data->x444->cur_pos = fp0->cur_pos;
     data->x444->facing_dir = fp0->facing_dir;
 }
@@ -7356,7 +7342,7 @@ static inline bool inlineJ0(Fighter* fp, Fighter* nana_fp)
 
 void ftCo_800B0AF4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Fighter* nana_fp = ftCo_800A589C(fp);
     if (nana_fp != NULL && data->xFA_b7) {
         if (inlineJ0(fp, nana_fp)) {
@@ -7368,7 +7354,7 @@ void ftCo_800B0AF4(Fighter* fp)
         data->lstickY = data->x448->lstickY;
         data->cstickX = data->x448->cstickX;
         data->cstickY = data->x448->cstickY;
-        data->x0 = data->x448->x0;
+        data->buttons = data->x448->x0;
         data->ltrigger = data->x448->x4;
         data->rtrigger = data->x448->x5;
         if (fp->x2225_b3) {
@@ -7499,7 +7485,7 @@ bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
     s32 temp_r0;
 
     if (ftCo_800B0CA8(fp0, fp1) != 0) {
-        struct Fighter_x1A88_t* data = &fp0->x1A88;
+        struct CpuFighter* data = &fp0->cpu;
         if (fp1->ground_or_air == GA_Air) {
             return false;
         }
@@ -7543,7 +7529,7 @@ static inline bool isPopoUpB(Fighter* fp)
 
 static inline bool ftCo_800B101C_inline0(Fighter* fp, Fighter* other)
 {
-    struct Fighter_x1A88_t* temp_r4 = &fp->x1A88;
+    struct CpuFighter* temp_r4 = &fp->cpu;
     if (isPopoUpB(fp)) {
         temp_r4->xFB_b0 = true;
         return true;
@@ -7561,7 +7547,7 @@ static inline bool ftCo_800B101C_inline0(Fighter* fp, Fighter* other)
 }
 
 static inline void ftCo_CpuUpdateNanaFollow(Fighter* fp, Fighter* popo,
-                                            struct Fighter_x1A88_t* data)
+                                            struct CpuFighter* data)
 {
     ftCo_800B0760(fp);
     if (ftCo_800B0E98(fp, popo)) {
@@ -7581,12 +7567,12 @@ void ftCo_800B101C(Fighter* fp)
     s32 var_r0;
     s32 var_r0_2;
     s32 var_r3;
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
     Fighter* var_r29;
 
     PAD_STACK(8);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     temp_r31->xF9_b2 = true;
     temp_r31->xF9_b4 = true;
     var_r29 = ftCo_800A589C(fp);
@@ -7609,11 +7595,11 @@ void ftCo_800B101C(Fighter* fp)
         if (ftCo_800B101C_inline0(fp, var_r29)) {
             temp_r31->xFA_b7 = false;
             temp_r31->x18 = temp_r31->x1C;
-            fp->x1A88.lstickX = 0;
-            fp->x1A88.lstickY = 0;
-            fp->x1A88.x0 = 0;
-            fp->x1A88.ltrigger = 0;
-            fp->x1A88.rtrigger = 0;
+            fp->cpu.lstickX = 0;
+            fp->cpu.lstickY = 0;
+            fp->cpu.buttons = 0;
+            fp->cpu.ltrigger = 0;
+            fp->cpu.rtrigger = 0;
         }
     } else {
         ftCo_CpuUpdateNanaFollow(fp, var_r29, temp_r31);
@@ -7625,7 +7611,7 @@ void ftCo_800B101C(Fighter* fp)
 
 void ftCo_800B126C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     data->xF8_b0 = true;
     data->xF9_b2 = false;
@@ -7639,7 +7625,7 @@ void ftCo_800B126C(Fighter* fp)
 
     PAD_STACK(0x10);
 
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
 
@@ -7655,7 +7641,7 @@ void ftCo_800B126C(Fighter* fp)
 
 void ftCo_800B1478(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     Fighter** target_slot;
     Fighter* target;
     Fighter* attack_target;
@@ -7663,10 +7649,10 @@ void ftCo_800B1478(Fighter* fp)
 
     PAD_STACK(0x18);
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     target = ftCo_800A5CE0(fp);
 
-    *(target_slot = &fp->x1A88.x44) = target;
+    *(target_slot = &fp->cpu.x44) = target;
 
     if (target != NULL) {
         ftCo_CpuSetTargetFlags(data);
@@ -7706,8 +7692,8 @@ void ftCo_800B1478(Fighter* fp)
 
 void ftCo_800B17D0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data2 = &fp->cpu;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -7738,10 +7724,10 @@ void ftCo_800B17D0(Fighter* fp)
     data->xF9_b7 = true;
     data->x2C = is_food;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
@@ -7759,8 +7745,8 @@ void ftCo_800B17D0(Fighter* fp)
 
 void ftCo_800B1AB8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data2 = &fp->cpu;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -7791,10 +7777,10 @@ void ftCo_800B1AB8(Fighter* fp)
     data->xF9_b7 = true;
     data->x2C = is_food;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
@@ -7812,7 +7798,7 @@ void ftCo_800B1AB8(Fighter* fp)
 
 void ftCo_800B1DA0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     PAD_STACK(6 * 4);
     ftCo_CpuInitEnemyTarget(fp, data);
     if (ftCo_CpuDataShouldAct(data) && data->x7C % 60 * 5 == 0 &&
@@ -7835,7 +7821,7 @@ static inline void ftCo_800B1DA0_noinline2(Fighter* fp)
 
 void ftCo_800B1EF0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -7862,8 +7848,8 @@ void ftCo_800B1EF0(Fighter* fp)
 
 void ftCo_800B21C8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data2 = &fp->cpu;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp20;
     s32 cmd;
     Fighter* target;
@@ -7892,11 +7878,11 @@ void ftCo_800B21C8(Fighter* fp)
     data->xF9_b6 = true;
     data->xF9_b7 = false;
     data->xF9_b1 = false;
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->cpu.x44 = ftCo_800A4BEC(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     ftCo_CpuUpdateTargetDistance(fp);
 
-    data2 = &fp->x1A88;
+    data2 = &fp->cpu;
     do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         attack_target = ftCo_800A53DC(fp);
@@ -7910,7 +7896,7 @@ void ftCo_800B21C8(Fighter* fp)
 
 void ftCo_800B24B8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
@@ -7937,7 +7923,7 @@ void ftCo_800B24B8(Fighter* fp)
 
 void ftCo_800B2790(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     s32 cmd;
     s32 line_id;
     s32 on_ground;
@@ -8077,9 +8063,9 @@ void ftCo_800B2AFC(Fighter* fp)
 {
     UNUSED u8 pad_high[8];
 
-    switch (fp->x1A88.xC) {
+    switch (fp->cpu.xC) {
     case 0: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 result;
         s32 found;
         s32 do_act;
@@ -8088,7 +8074,7 @@ void ftCo_800B2AFC(Fighter* fp)
         data->xF8_b0 = false;
         ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
-        x18 = fp->x1A88.x18;
+        x18 = fp->cpu.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
         }
@@ -8135,7 +8121,7 @@ void ftCo_800B2AFC(Fighter* fp)
         return;
     }
     case 1: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
         s32 do_act;
@@ -8145,7 +8131,7 @@ void ftCo_800B2AFC(Fighter* fp)
         data->xF8_b0 = false;
         ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
-        x18 = fp->x1A88.x18;
+        x18 = fp->cpu.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
         }
@@ -8160,9 +8146,9 @@ void ftCo_800B2AFC(Fighter* fp)
             int line1;
             Vec3 floor_normal1;
             Vec3 floor_pos1;
-            f32 x = fp->x1A88.x98.x;
+            f32 x = fp->cpu.x98.x;
             f32 x2 = x;
-            f32 y = fp->x1A88.x98.y;
+            f32 y = fp->cpu.x98.y;
             f32 below;
             f32 above;
             found = 0;
@@ -8201,7 +8187,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800B04DC(fp);
         return;
     case 3: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
         s32 do_act;
@@ -8210,7 +8196,7 @@ void ftCo_800B2AFC(Fighter* fp)
         data->xF8_b0 = false;
         ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
-        x18 = fp->x1A88.x18;
+        x18 = fp->cpu.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
         }
@@ -8287,7 +8273,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800B1478(fp);
         return;
     case 15:
-        fp->x1A88.x18 = 0;
+        fp->cpu.x18 = 0;
         return;
     case 17:
         ftCo_800B17D0(fp);
@@ -8308,7 +8294,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800AFE3C(fp, 3);
         return;
     case 23: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 do_act;
         s32 x18;
 
@@ -8333,7 +8319,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800B1DA0_noinline2(fp);
         return;
     case 25: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 do_act;
         s32 x18;
 
@@ -8355,7 +8341,7 @@ void ftCo_800B2AFC(Fighter* fp)
         return;
     }
     case 26: {
-        struct Fighter_x1A88_t* data = &fp->x1A88;
+        struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
         s32 do_act;
@@ -8431,7 +8417,7 @@ static inline int ftCo_800B33B0_IsIgnoredFloor(int line1)
 }
 
 static inline void ftCo_CpuUpdateRecoveryScale(Fighter* fp,
-                                               struct Fighter_x1A88_t* data,
+                                               struct CpuFighter* data,
                                                const int* timer)
 {
     if (*timer % 30 == 0) {
@@ -8443,9 +8429,9 @@ static inline void ftCo_CpuUpdateRecoveryScale(Fighter* fp,
 
 void ftCo_800B33B0(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    struct Fighter_x1A88_t* temp_data;
-    struct Fighter_x1A88_t* temp_data2;
+    struct CpuFighter* data = &fp->cpu;
+    struct CpuFighter* temp_data;
+    struct CpuFighter* temp_data2;
     int* timer = &data->x7C;
     Vec3 floor_vel;
     Vec3 target_floor_pos;
@@ -8507,12 +8493,12 @@ void ftCo_800B33B0(Fighter* fp)
     if (found != 0) {
         f32 floor_x;
         f32 floor_y;
-        struct Fighter_x1A88_t* temp_data;
+        struct CpuFighter* temp_data;
         s32 oob;
         floor_y = floor_pos.y;
-        temp_data = &fp->x1A88;
+        temp_data = &fp->cpu;
         floor_x = floor_pos.x;
-        if (floor_x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        if (floor_x < fp->cpu.half_width + Stage_GetBlastZoneLeftOffset() ||
             floor_x >
                 Stage_GetBlastZoneRightOffset() - temp_data->half_width ||
             floor_y <
@@ -8595,11 +8581,11 @@ void ftCo_800B33B0(Fighter* fp)
         data->x54.x += floor_vel.x;
         data->x54.y += floor_vel.y;
     }
-    temp_data = &fp->x1A88;
+    temp_data = &fp->cpu;
     ftCo_CpuUpdateRecoveryScale(fp, temp_data, timer);
     {
-        temp_data2 = &fp->x1A88;
-        if (fp->x1A88.xFA_b6) {
+        temp_data2 = &fp->cpu;
+        if (fp->cpu.xFA_b6) {
             fx = fp->cur_pos.x;
             fy = fp->cur_pos.y;
             if (mpCheckCeiling(fx, fy, fx, 1000.0f + fy, &ceiling_pos, &line3,
@@ -8625,14 +8611,14 @@ void ftCo_800B3900(Fighter_GObj* gobj)
     ftCo_800B2790(fp);
     ftCo_800B3E04(fp);
     ftCo_800B0AF4(fp);
-    fp->x1A88.x7C += 1;
+    fp->cpu.x7C += 1;
 }
 
 bool ftCo_800B395C(Fighter_GObj* gobj, int arg1)
 {
     Fighter* fp;
     int temp_r0_2;
-    struct Fighter_x1A88_t* temp_r30;
+    struct CpuFighter* temp_r30;
 
     GXColor sp84;
     GXColor sp80;
@@ -8641,7 +8627,7 @@ bool ftCo_800B395C(Fighter_GObj* gobj, int arg1)
     Vec3 sp38;
 
     fp = GET_FIGHTER(gobj);
-    temp_r30 = &fp->x1A88;
+    temp_r30 = &fp->cpu;
     if (Player_8003248C(fp->player_id, fp->x221F_b4) == Gm_PKind_Cpu) {
         switch (temp_r30->x18) {
         case 2:

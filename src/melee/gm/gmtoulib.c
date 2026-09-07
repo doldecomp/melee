@@ -688,14 +688,14 @@ void fn_8018B090(HSD_GObj* arg0)
             fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
                         lbl_803D9DAC.current.z);
             if (entries[idx].x4 != 1) {
-                for (i = 0; i < 4; i++) {
-                    if (entries[idx].slots[i].x30 != 0) {
-                        mn_8022F470((int*) &entries[idx].slots[i].x48,
-                                    (int*) &entries[idx].slots[i].x40, amount);
+                for (k = 0; k < 4; k++) {
+                    if (entries[idx].slots[k].x30 != 0) {
+                        mn_8022F470((int*) &entries[idx].slots[k].x48,
+                                    (int*) &entries[idx].slots[k].x40, amount);
                         {
-                            f32 y = -(f32) entries[idx].slots[i].x48;
-                            HSD_JObjSetTranslateY(
-                                entries[idx].slots[i].x2C->hsd_obj, y);
+                            f32 y = -(f32) entries[idx].slots[k].x48;
+                            jobj2 = entries[idx].slots[k].x2C->hsd_obj;
+                            HSD_JObjSetTranslateY(jobj2, y);
                         }
                     }
                 }
@@ -828,11 +828,9 @@ void fn_8018B090(HSD_GObj* arg0)
                 }
             }
             if (var_r24 == 4) {
-                s32 slot_idx;
-                s32 ent;
-                entries[idx].slots[slot_idx = lbl_804D6634].x3C =
-                    lbl_803D9E1C[ent = tm->entrants][0];
-                entries[idx].slots[slot_idx].x40 =
+                lbl_80473AB8[idx].slots[lbl_804D6634].x3C =
+                    lbl_803D9E1C[tm->entrants][0];
+                lbl_80473AB8[idx].slots[lbl_804D6634].x40 =
                     lbl_803D9E1C[tm->entrants][1];
                 tm->cur_option = 0x22;
             }
@@ -1625,8 +1623,6 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         }
     }
 }
-
-/// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
 
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {

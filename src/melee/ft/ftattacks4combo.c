@@ -8,7 +8,7 @@
 bool ftCo_800CECE8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->cmd_vars[0] != 0 && (fp->input.x668 & HSD_PAD_A)) {
+    if (fp->cmd_vars[0] != 0 && (fp->input.pressed_buttons & HSD_PAD_A)) {
         ftCo_800CED30(gobj);
         return true;
     }

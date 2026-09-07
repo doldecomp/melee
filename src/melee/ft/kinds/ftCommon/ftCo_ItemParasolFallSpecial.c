@@ -32,7 +32,7 @@ void ftCo_ItemParasolFallSpecial_Anim(Fighter_GObj* gobj) {}
 void ftCo_ItemParasolFallSpecial_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.y <= p_ftCommonData->close_parasol_threshold &&
+    if (fp->input.lstick[0].y <= p_ftCommonData->close_parasol_threshold &&
         ft_80087988(gobj))
     {
         ftCo_800968C8(gobj);

@@ -34,7 +34,7 @@ void ftCo_800CD1BC(Fighter_GObj* gobj)
 void ftCo_800CD204(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.held_inputs & HSD_PAD_A) == 0) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_A) == 0) {
         fp->mv.co.swing.x0 = 0;
     }
     if (ftCheckThrowB3(fp) && fp->mv.co.swing.x0 != 0) {

@@ -785,7 +785,7 @@ void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
     if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
-        recentInput = fp->input.x668;
+        recentInput = fp->input.pressed_buttons;
         if ((recentInput & HSD_PAD_A) && (fp->mv.mt.SpecialN.releaseLag <= 0))
         {
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNEnd, 0, 0.0f, 1.0f,
@@ -821,7 +821,7 @@ void ftMt_SpecialNLoopFull_IASA(HSD_GObj* gobj)
     if (ftCo_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
-        recentInput = fp->input.x668;
+        recentInput = fp->input.pressed_buttons;
         if ((recentInput & HSD_PAD_A) != false) {
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNEnd, 0, 0.0f, 1.0f,
                                       0.0f, NULL);
@@ -869,7 +869,7 @@ void ftMt_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 
     u8 _[32];
 
-    recentInput = fp->input.x668;
+    recentInput = fp->input.pressed_buttons;
     if (((recentInput & HSD_PAD_A) != false) &&
         (fp->mv.mt.SpecialN.releaseLag <= 0))
     {
@@ -900,7 +900,7 @@ void ftMt_SpecialAirNLoopFull_IASA(HSD_GObj* gobj)
 
     u8 _[32];
 
-    recentInput = fp->input.x668;
+    recentInput = fp->input.pressed_buttons;
     if ((recentInput & HSD_PAD_A) != false) {
         Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirNEnd, 0, 0.0f, 1.0f,
                                   0.0f, NULL);

@@ -391,8 +391,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     float stick_x;
     float sqrt_stick;
 
-    stick_x = fp->input.lstick.x;
-    stick_y = fp->input.lstick.y;
+    stick_x = fp->input.lstick[0].x;
+    stick_y = fp->input.lstick[0].y;
 
     stick_x *= stick_x;
     stick_y *= stick_y;
@@ -413,8 +413,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     if (!(sqrt_stick < mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN)) {
         Vec3 stickVec;
 
-        stickVec.x = fp->input.lstick.x;
-        stickVec.y = fp->input.lstick.y;
+        stickVec.x = fp->input.lstick[0].x;
+        stickVec.y = fp->input.lstick[0].y;
         stickVec.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &stickVec) <
@@ -423,8 +423,8 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
         {
             ftCommon_UpdateFacing(fp);
 
-            vel = atan2f(fp->input.lstick.y,
-                         fp->input.lstick.x * fp->facing_dir);
+            vel = atan2f(fp->input.lstick[0].y,
+                         fp->input.lstick[0].x * fp->facing_dir);
 
             fp->mv.mt.SpecialHi.stickX = stickVec.x;
             fp->mv.mt.SpecialHi.stickY = stickVec.y;
@@ -463,8 +463,8 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     float sqrt_stick;
     float floatVar;
 
-    stick_x = fp->input.lstick.x;
-    stick_y = fp->input.lstick.y;
+    stick_x = fp->input.lstick[0].x;
+    stick_y = fp->input.lstick[0].y;
 
     stick_x *= stick_x;
     stick_y *= stick_y;
@@ -482,17 +482,17 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     }
 
     if (sqrt_stick > mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN) {
-        stick_x = stickGetDir(fp->input.lstick.x, 0);
+        stick_x = stickGetDir(fp->input.lstick[0].x, 0);
 
         /// @todo Express as a fraction or something.
         if (stick_x > stick_epsilon) {
             ftCommon_UpdateFacing(fp);
         }
 
-        floatVar =
-            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
-        fp->mv.mt.SpecialHi.stickX = fp->input.lstick.x;
-        fp->mv.mt.SpecialHi.stickY = fp->input.lstick.y;
+        floatVar = atan2f(fp->input.lstick[0].y,
+                          fp->input.lstick[0].x * fp->facing_dir);
+        fp->mv.mt.SpecialHi.stickX = fp->input.lstick[0].x;
+        fp->mv.mt.SpecialHi.stickY = fp->input.lstick[0].y;
     } else {
         ftCommon_8007DA24(fp);
         floatVar = M_PI_2;

@@ -126,7 +126,7 @@ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -147,7 +147,7 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -258,7 +258,7 @@ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -280,7 +280,7 @@ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -495,7 +495,7 @@ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
 
     u8 _[16];
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -516,7 +516,7 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
 
     u8 _[20];
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -701,7 +701,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 
@@ -727,7 +727,7 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 
     u8 _[8];
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.fx.SpecialLw.isRelease = true;
     }
 

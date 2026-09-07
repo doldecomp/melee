@@ -24,7 +24,7 @@ static itECB ecb_offset = { 14.0f, 0.0f, -3.0f, +3.0f };
 
 static inline bool inlineA0(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_AB) {
+    if (fp->input.pressed_buttons & HSD_PAD_AB) {
         return true;
     }
     return false;

@@ -89,7 +89,7 @@ void ftNs_SpecialLwStart_Anim(
 
     fighter_data2 = GET_FIGHTER(gobj);
 
-    if (!(fighter_data2->input.held_inputs & HSD_PAD_B)) {
+    if (!(fighter_data2->input.held_buttons[0] & HSD_PAD_B)) {
         fighter_data2->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -123,7 +123,7 @@ void ftNs_SpecialAirLwStart_Anim(
 
     fighter_data2 = fp = GET_FIGHTER(gobj);
 
-    if ((fighter_data2->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fighter_data2->input.held_buttons[0] & HSD_PAD_B) == false) {
         fighter_data2->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -241,7 +241,7 @@ void ftNs_SpecialLwHold_Anim(
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_B) == false) {
         fp->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -278,7 +278,7 @@ void ftNs_SpecialAirLwHold_Anim(
     u8 _[8];
 
     fp = GET_FIGHTER(gobj);
-    if ((fp->input.held_inputs & HSD_PAD_B) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_B) == false) {
         fp->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -478,7 +478,7 @@ void ftNs_SpecialLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp1->input.held_buttons[0] & HSD_PAD_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
         }
 
@@ -505,7 +505,7 @@ void ftNs_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp1->input.held_buttons[0] & HSD_PAD_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
         }
 
@@ -689,7 +689,7 @@ void ftNs_SpecialLwHit_Anim(
     ftNessAttributes* da;
 
     temp_r4 = arg0->user_data;
-    if (!(temp_r4->input.held_inputs & HSD_PAD_B)) {
+    if (!(temp_r4->input.held_buttons[0] & HSD_PAD_B)) {
         temp_r4->mv.ns.speciallw.isRelease = 1;
     }
 
@@ -751,7 +751,7 @@ void ftNs_SpecialAirLwHit_Anim(
 
     Fighter* fp = GET_FIGHTER(arg0);
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.ns.speciallw.isRelease = true;
     }
 

@@ -27,7 +27,7 @@
 bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    float lsx_abs = fp->input.lstick.x;
+    float lsx_abs = fp->input.lstick[0].x;
     if (lsx_abs < 0.0F) {
         lsx_abs = -lsx_abs;
     }
@@ -36,7 +36,7 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
         ((int) fp->x670_timer_lstick_tilt_x <
          p_ftCommonData->dash_smash_window))
     {
-        if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
+        if ((fp->input.lstick[0].x * fp->facing_dir) < 0.0F) {
             ftCo_Turn_Enter_Smash(gobj);
         } else {
             ftCo_Dash_Enter(gobj, 1);
@@ -107,7 +107,7 @@ void ftCo_Dash_IASA(Fighter_GObj* gobj)
                 ftCo_AttackDash_SetMv0(gobj);
                 return;
             }
-            if (!(fp->input.lstick.x * fp->facing_dir < 0.0F) ||
+            if (!(fp->input.lstick[0].x * fp->facing_dir < 0.0F) ||
                 !ftCo_Dash_CheckInput(gobj))
             {
                 if (ftCo_80091AD8(gobj, (s32) (p_ftCommonData->x4C -

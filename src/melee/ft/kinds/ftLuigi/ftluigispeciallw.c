@@ -210,7 +210,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 
     ftCommon_ApplyGroundMovement(gobj);
 
-    if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
+    if (fp->cmd_vars[2] != 0 && (fp->input.pressed_buttons & HSD_PAD_B)) {
         fp->self_vel.y += attrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
         ftLuigi_SpecialLw_GroundToAir(gobj);
     }
@@ -226,7 +226,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* attrs0 = fp->dat_attrs;
 
     if (!fp->u.lg.x222C_cycloneCharge && fp->cmd_vars[2] != 0 &&
-        (fp->input.x668 & HSD_PAD_B))
+        (fp->input.pressed_buttons & HSD_PAD_B))
     {
         ftCommon_Ascend(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
                         attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);

@@ -25,8 +25,8 @@
 
 static inline bool inlineA0(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x494 ||
-        ABS(fp->input.lstick.y) >= p_ftCommonData->x494)
+    if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x494 ||
+        ABS(fp->input.lstick[0].y) >= p_ftCommonData->x494)
     {
         return true;
     }
@@ -37,11 +37,11 @@ bool ftCo_8009AA0C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (inlineA0(fp)) {
-        return ftCo_8009AAFC(gobj, true, fp->input.lstick.x,
+        return ftCo_8009AAFC(gobj, true, fp->input.lstick[0].x,
                              ftCo_GetLStickAngle(fp));
     }
     if (ftCo_800DF79C(fp)) {
-        return ftCo_8009AAFC(gobj, false, fp->input.cstick.x,
+        return ftCo_8009AAFC(gobj, false, fp->input.cstick[0].x,
                              ftCo_GetCStickAngle(fp));
     }
     fp->mv.co.cliff.x8 = true;

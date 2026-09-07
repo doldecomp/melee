@@ -45,11 +45,11 @@ void ftCo_KneeBend_Check_ShortHop(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((!(fp->input.held_inputs & HSD_PAD_XY) &&
+    if ((!(fp->input.held_buttons[0] & HSD_PAD_XY) &&
          fp->mv.co.kneebend.jump_input == JumpInput_XY) ||
-        (fp->input.lstick.y < p_ftCommonData->tap_jump_release_threshold &&
+        (fp->input.lstick[0].y < p_ftCommonData->tap_jump_release_threshold &&
          fp->mv.co.kneebend.jump_input == JumpInput_LStick) ||
-        (fp->input.cstick.y < p_ftCommonData->tap_jump_release_threshold &&
+        (fp->input.cstick[0].y < p_ftCommonData->tap_jump_release_threshold &&
          fp->mv.co.kneebend.jump_input == JumpInput_CStick))
     {
         fp->mv.co.kneebend.is_short_hop = true;

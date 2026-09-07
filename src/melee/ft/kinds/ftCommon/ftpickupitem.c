@@ -94,7 +94,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     pickup = ftpickupitem_800942A0_inline(fp);
     offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
                                              : &pickup->air_light_offset;
-    if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
+    if (ftCo_800A2040(fp) && (signed) fp->cpu.xC == 28) {
         return NULL;
     }
     {

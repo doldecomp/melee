@@ -367,7 +367,7 @@ void ftZd_SpecialSLoop_IASA(HSD_GObj* gobj)
         var_r0 = 0;
     }
 
-    if ((var_r0 == 1) && !(fp->input.held_inputs & 512)) {
+    if ((var_r0 == 1) && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 345, 0, temp_f1, 1.0, temp_f1, NULL);
     }
@@ -395,7 +395,7 @@ void ftZd_SpecialAirSLoop_IASA(HSD_GObj* gobj)
         var_r0 = 0;
     }
 
-    if (var_r0 == 1 && !(fp->input.held_inputs & 512)) {
+    if (var_r0 == 1 && !(fp->input.held_buttons[0] & 512)) {
         temp_f1 = 0;
         Fighter_ChangeMotionState(gobj, 348, 0, temp_f1, 1.0, temp_f1, NULL);
     }

@@ -29,7 +29,7 @@
 static bool checkItemThrowInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
+    if (fp->input.pressed_buttons & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&
@@ -54,7 +54,7 @@ bool ftCo_AttackAir_CheckItemThrowInput(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
+    if (fp->input.pressed_buttons & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
                 1 &&
@@ -91,12 +91,12 @@ FtMotionId ftCo_AttackAir_GetMsidFromCStick(Fighter* fp)
 {
     float stick_angle, stick_x, stick_y;
     if (ftCo_800DF478(fp)) {
-        stick_x = fp->input.cstick.x;
-        stick_y = fp->input.cstick.y;
+        stick_x = fp->input.cstick[0].x;
+        stick_y = fp->input.cstick[0].y;
         stick_angle = ftCo_GetCStickAngle(fp);
     } else {
-        stick_x = fp->input.lstick.x;
-        stick_y = fp->input.lstick.y;
+        stick_x = fp->input.lstick[0].x;
+        stick_y = fp->input.lstick[0].y;
         stick_angle = ftCo_GetLStickAngle(fp);
     }
     if (ABS(stick_x) < p_ftCommonData->xDC &&

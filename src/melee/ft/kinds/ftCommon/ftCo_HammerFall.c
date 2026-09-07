@@ -16,7 +16,7 @@
 bool ftCo_800C5CD4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ftCo_800C5240(gobj) && fp->input.x668 & HSD_PAD_AB) {
+    if (ftCo_800C5240(gobj) && fp->input.pressed_buttons & HSD_PAD_AB) {
         ftCo_800C5D34(gobj);
         return true;
     }
@@ -56,8 +56,9 @@ static inline void inlineA0(Fighter_GObj* gobj)
 bool ftCo_800C5DDC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2338.y != 0 && fp->input.x668 & HSD_PAD_A &&
-        fp->input.held_inputs & HSD_PAD_LR && fp->x683 >= p_ftCommonData->x1C)
+    if (fp->x2338.y != 0 && fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.held_buttons[0] & HSD_PAD_LR &&
+        fp->x683 >= p_ftCommonData->x1C)
     {
         inlineA0(gobj);
         return true;
