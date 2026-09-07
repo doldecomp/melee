@@ -52,8 +52,8 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     s32 ftKind = fp->kind;
 
     if ((ftKind == FTKIND_FOX || ftKind == FTKIND_FALCO) &&
-        grCorneria_801E2CE8() && !(fp->input.held_inputs & HSD_PAD_DPADDOWN) &&
-        fp->x682 == 1)
+        grCorneria_801E2CE8() &&
+        !(fp->input.held_buttons[0] & HSD_PAD_DPADDOWN) && fp->x682 == 1)
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);

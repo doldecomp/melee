@@ -153,7 +153,7 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
-    if (fp->cmd_vars[1] && fp->input.lstick.y < da->x14) {
+    if (fp->cmd_vars[1] && fp->input.lstick[0].y < da->x14) {
         fp->cmd_vars[1] = 0;
         ftCo_800D638C(gobj);
         return;

@@ -157,7 +157,7 @@ void ftSs_SpecialLwBomb_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
-    if ((fp->cmd_vars[2]) && (fp->input.lstick.y < samus_attr->x80)) {
+    if ((fp->cmd_vars[2]) && (fp->input.lstick[0].y < samus_attr->x80)) {
         fp->cmd_vars[2] = 0;
         ftCo_800D638C(gobj);
     }

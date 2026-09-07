@@ -34,7 +34,7 @@
 
 bool ftCo_800DE9B8(Fighter_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->input.x668 & HSD_PAD_DPADUP) {
+    if (GET_FIGHTER(gobj)->input.pressed_buttons & HSD_PAD_DPADUP) {
         return true;
     }
     return false;

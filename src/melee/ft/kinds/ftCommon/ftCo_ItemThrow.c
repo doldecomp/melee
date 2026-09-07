@@ -45,8 +45,9 @@ typedef struct ftCo_ItemThrowCmd {
 
 bool ftCo_80094E54(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        (fp->input.held_inputs & HSD_PAD_LR || !it_8026B30C(fp->item_gobj)))
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        (fp->input.held_buttons[0] & HSD_PAD_LR ||
+         !it_8026B30C(fp->item_gobj)))
     {
         return true;
     }
@@ -69,18 +70,18 @@ bool ftCo_80094EA4(HSD_GObj* gobj)
     msid = fp->motion_id;
 
     if (fp->item_gobj != NULL) {
-        if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
-            stick_x = fp->input.lstick.x;
-            stick_y = fp->input.lstick.y;
+        if (fp->input.pressed_buttons & (HSD_PAD_A | HSD_PAD_B)) {
+            stick_x = fp->input.lstick[0].x;
+            stick_y = fp->input.lstick[0].y;
             var_f28 = fp->x673;
             var_f31 = fp->x674;
             stick_angle = ftCo_GetLStickAngle(fp);
             ret = true;
         } else {
             var_f28 = 0.0f;
-            stick_x = fp->input.cstick.x;
+            stick_x = fp->input.cstick[0].x;
             var_f31 = 0.0f;
-            stick_y = fp->input.cstick.y;
+            stick_y = fp->input.cstick[0].y;
             stick_angle = ftCo_GetCStickAngle(fp);
             ret = false;
         }
@@ -141,7 +142,7 @@ bool ftCo_80094EA4(HSD_GObj* gobj)
 bool ftCo_8009515C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->item_gobj != NULL && fp->input.x668 & HSD_PAD_A) {
+    if (fp->item_gobj != NULL && fp->input.pressed_buttons & HSD_PAD_A) {
         if (fp->mv.co.itemthrow.x20 != 0) {
             ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
         } else {
@@ -178,7 +179,7 @@ bool ftCo_80095254(Fighter_GObj* gobj)
 bool ftCo_800952DC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->item_gobj != NULL && fp->input.held_inputs & HSD_PAD_LR) {
+    if (fp->item_gobj != NULL && fp->input.held_buttons[0] & HSD_PAD_LR) {
         ftCo_800957F4(gobj, ftCo_MS_LightThrowDash);
         return true;
     }
@@ -198,14 +199,14 @@ bool ftCo_80095328(Fighter_GObj* gobj, bool* arg1)
 
     fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL && ftCo_800DF50C(fp)) {
-        var_f31 = fp->input.cstick.x;
-        var_f28 = fp->input.cstick.y;
+        var_f31 = fp->input.cstick[0].x;
+        var_f28 = fp->input.cstick[0].y;
         var_f29 = 0.0f;
         var_f30 = 0.0f;
         angle = ftCo_GetCStickAngle(fp);
     } else if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
-        var_f31 = fp->input.lstick.x;
-        var_f28 = fp->input.lstick.y;
+        var_f31 = fp->input.lstick[0].x;
+        var_f28 = fp->input.lstick[0].y;
         var_f30 = fp->x673;
         var_f29 = fp->x674;
         angle = ftCo_GetLStickAngle(fp);
@@ -217,7 +218,7 @@ bool ftCo_80095328(Fighter_GObj* gobj, bool* arg1)
         ABS(var_f28) < p_ftCommonData->xE0)
     {
         if (it_8026B30C(fp->item_gobj) == 0 &&
-            !(fp->input.held_inputs & HSD_PAD_LR))
+            !(fp->input.held_buttons[0] & HSD_PAD_LR))
         {
             ftCo_800957F4(gobj, 0x64);
             if (arg1 != NULL) {
@@ -386,31 +387,31 @@ void ftCo_80095A30(HSD_GObj* gobj)
 
     PAD_STACK(0x8);
 
-    var_f1 = fp->input.lstick.x;
+    var_f1 = fp->input.lstick[0].x;
     if (var_f1 < 0.0f) {
         var_f1 = -var_f1;
     }
     if (var_f1 >= p_ftCommonData->dash_smash_stick_threshold &&
         fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
-        if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
+        if (fp->input.lstick[0].x * fp->facing_dir >= 0.0f) {
             var_r0 = 0x6C;
         } else {
             var_r0 = 0x6D;
         }
         var_r29 = var_r0;
     } else {
-        if (fp->input.lstick.y >= p_ftCommonData->xCC &&
+        if (fp->input.lstick[0].y >= p_ftCommonData->xCC &&
             fp->x674 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
             var_r29 = 0x6E;
         } else {
-            if (fp->input.lstick.y <= p_ftCommonData->xD4 &&
+            if (fp->input.lstick[0].y <= p_ftCommonData->xD4 &&
                 fp->x674 < p_ftCommonData->xD8)
             {
                 var_r29 = 0x6F;
             } else {
-                var_f1_2 = fp->input.lstick.x;
+                var_f1_2 = fp->input.lstick[0].x;
                 if (var_f1_2 < 0.0f) {
                     var_f1_2 = -var_f1_2;
                 }
@@ -421,7 +422,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
                         var_f1_3 = ftCo_GetLStickAngle(fp);
                     }
                     if (var_f1_3 <= p_ftCommonData->x20_radians) {
-                        if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
+                        if (fp->input.lstick[0].x * fp->facing_dir >= 0.0f) {
                             var_r0_2 = 0x5E;
                         } else {
                             var_r0_2 = 0x5F;
@@ -432,13 +433,13 @@ void ftCo_80095A30(HSD_GObj* gobj)
                     }
                 } else {
                 block_25:
-                    if (fp->input.lstick.y >=
+                    if (fp->input.lstick[0].y >=
                             p_ftCommonData->attackhi3_stick_threshold_y &&
                         ftCo_GetLStickAngle(fp) > p_ftCommonData->x20_radians)
                     {
                         var_r29 = 0x60;
                     } else {
-                        if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
+                        if (fp->input.lstick[0].y <= p_ftCommonData->xB0 &&
                             ftCo_GetLStickAngle(fp) <
                                 -p_ftCommonData->x20_radians)
                         {

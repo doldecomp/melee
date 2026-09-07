@@ -994,6 +994,7 @@ void fn_802545C4(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Vec3* translate;
+    /* Preserve the original 0x1B8-byte frame while this remains unmatched. */
     PAD_STACK(312);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
@@ -2546,6 +2547,7 @@ mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
 {
+    void** main_load;
     mnSnap_State* snap = &mnSnap_804A0A10;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
@@ -2645,7 +2647,8 @@ void mnSnap_80257F24(void)
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
-    jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_joint);
+    main_load = &snap->main_joint;
+    jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_load);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *main_animjoint,
@@ -2655,9 +2658,8 @@ void mnSnap_80257F24(void)
     lb_80011E24(jobj, (&snap->thumb_jobjs[0]), 8, 9, 0xA, 0xB, 0xC, 0xD, 6, 2,
                 1, -1);
 
-    slot_jobj_ptr = &snap->slot_a_jobj;
-    snap->blank_img =
-        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
+    jobj2 = *(slot_jobj_ptr = &snap->slot_a_jobj);
+    snap->blank_img = jobj2->u.dobj->mobj->tobj->imagedesc->image_ptr;
 
     if (snap->photo_count[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);

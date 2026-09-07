@@ -240,7 +240,7 @@ void ftLg_SpecialAirSHold_Anim(HSD_GObj* gobj)
 void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         ftLg_SpecialSLaunch_Enter(gobj);
     }
 }
@@ -249,7 +249,7 @@ void ftLg_SpecialSHold_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirSHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         ftLg_SpecialAirSLaunch_Enter(gobj);
     }
 }

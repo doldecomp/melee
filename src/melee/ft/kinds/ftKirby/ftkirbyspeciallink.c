@@ -573,7 +573,7 @@ void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
         if (fp->mv.lk.specialn.x0.y > max) {
             fp->mv.lk.specialn.x0.y = max;
         }
-        if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
             s32 msid = ftKb_MS_LkSpecialNEnd;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_LINK:
@@ -606,7 +606,7 @@ void ftKb_LkSpecialNLoop_IASA(Fighter_GObj* gobj)
     default:
         break;
     }
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         s32 msid = ftKb_MS_LkSpecialNEnd;
         switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
         case FTKIND_LINK:
@@ -645,7 +645,7 @@ void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
         if (fp->mv.lk.specialn.x0.y > max) {
             fp->mv.lk.specialn.x0.y = max;
         }
-        if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
             s32 msid = ftKb_MS_LkSpecialAirNEnd;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_LINK:
@@ -678,7 +678,7 @@ void ftKb_LkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     default:
         break;
     }
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         s32 msid = ftKb_MS_LkSpecialAirNEnd;
         switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
         case FTKIND_LINK:

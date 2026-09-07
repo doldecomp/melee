@@ -664,7 +664,7 @@ void ftKb_MtSpecialNLoop_IASA(Fighter_GObj* gobj)
             }
         }
     } else {
-        u32 input = fp->input.x668;
+        u32 input = fp->input.pressed_buttons;
 
         if ((input & HSD_PAD_A) && fp->mv.kb.specialhi.xC <= 0) {
             Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
@@ -717,7 +717,7 @@ void ftKb_MtSpecialNLoopFull_IASA(Fighter_GObj* gobj)
             }
         }
     } else {
-        u32 input = fp->input.x668;
+        u32 input = fp->input.pressed_buttons;
 
         if (input & HSD_PAD_A) {
             Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0, 0.0f,
@@ -765,7 +765,7 @@ void ftKb_MtSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     fp2 = fp;
-    input = fp->input.x668;
+    input = fp->input.pressed_buttons;
 
     if ((input & HSD_PAD_A) && fp2->mv.kb.specialhi.xC <= 0) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNEnd, 0, 0.0f,
@@ -800,7 +800,7 @@ void ftKb_MtSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 void ftKb_MtSpecialAirNLoopFull_IASA(Fighter_GObj* gobj)
 {
-    u32 input = GET_FIGHTER(gobj)->input.x668;
+    u32 input = GET_FIGHTER(gobj)->input.pressed_buttons;
     PAD_STACK(16);
 
     if (input & HSD_PAD_A) {

@@ -156,13 +156,13 @@ void ftCo_WarpStarFall_Phys(Fighter_GObj* gobj)
     ftCommon_Fall(fp, p_ftCommonData->x694, p_ftCommonData->x698);
     {
         float accel_scaling =
-            fp->input.lstick.x * p_ftCommonData->warpstarfall_drift_scaling;
-        float accel_flat = fp->input.lstick.x > 0
+            fp->input.lstick[0].x * p_ftCommonData->warpstarfall_drift_scaling;
+        float accel_flat = fp->input.lstick[0].x > 0
                                ? p_ftCommonData->warpstarfall_drift_flat
                                : -p_ftCommonData->warpstarfall_drift_flat;
         float accel = accel_scaling + accel_flat;
         float target_vel =
-            fp->input.lstick.x * p_ftCommonData->warpstarfall_drift_max;
+            fp->input.lstick[0].x * p_ftCommonData->warpstarfall_drift_max;
         ftCommon_8007D174(fp, fp->self_vel.x, accel, target_vel,
                           p_ftCommonData->x6A8);
     }

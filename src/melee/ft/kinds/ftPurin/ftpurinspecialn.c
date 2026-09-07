@@ -705,7 +705,7 @@ void ftPr_SpecialNLoop_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & 0x200)) {
+    if (!(fp->input.held_buttons[0] & 0x200)) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         setupPurinCallbacks(gobj);
@@ -726,7 +726,7 @@ void ftPr_SpecialNFull_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & 0x200)) {
+    if (!(fp->input.held_buttons[0] & 0x200)) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         setupPurinCallbacks(gobj);
@@ -748,8 +748,8 @@ void ftPr_SpecialNRelease_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 dir;
-    if (ABS(fp->input.lstick.x) > da->x68) {
-        dir = SIGNF(fp->input.lstick.x);
+    if (ABS(fp->input.lstick[0].x) > da->x68) {
+        dir = SIGNF(fp->input.lstick[0].x);
         if (fp->mv.pr.specialn.x34.x != dir) {
             ftColl_8007AFF8(gobj);
             fp->mv.pr.specialn.facing_dir = dir;
@@ -780,7 +780,7 @@ void ftPr_SpecialAirNChargeLoop_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & 0x200)) {
+    if (!(fp->input.held_buttons[0] & 0x200)) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirNChargeRelease, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         setupPurinCallbacks(gobj);
@@ -801,7 +801,7 @@ void ftPr_SpecialAirNChargeFull_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & 0x200)) {
+    if (!(fp->input.held_buttons[0] & 0x200)) {
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirNChargeRelease, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         setupPurinCallbacks(gobj);
@@ -1377,8 +1377,8 @@ void ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj* gobj)
                          &land_angle);
             fp->mv.pr.specialn.x1C = da->x44;
         } else {
-            if (ABS(fp->input.lstick.x) > da->x68) {
-                f32 dir = SIGNF(fp->input.lstick.x);
+            if (ABS(fp->input.lstick[0].x) > da->x68) {
+                f32 dir = SIGNF(fp->input.lstick[0].x);
                 fp->mv.pr.specialn.x34.x = dir;
                 fp->self_vel.x = fp->gr_vel =
                     fp->mv.pr.specialn.x18 * fp->mv.pr.specialn.x34.x;
