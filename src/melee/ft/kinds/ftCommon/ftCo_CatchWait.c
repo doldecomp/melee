@@ -96,7 +96,7 @@ void fn_800DA4A0(Fighter_GObj* gobj)
 
 bool fn_800DA4C0(Fighter_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->input.x668 & 0x100) {
+    if (GET_FIGHTER(gobj)->input.pressed_buttons & 0x100) {
         fn_800DA4FC(gobj);
         return true;
     }

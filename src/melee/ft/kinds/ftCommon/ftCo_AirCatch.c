@@ -70,7 +70,9 @@ bool ftCo_800C3B10(Fighter_GObj* gobj)
     if (fp->item_gobj != NULL) {
         return false;
     }
-    if (fp->input.held_inputs & HSD_PAD_LR && fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.held_buttons[0] & HSD_PAD_LR &&
+        fp->input.pressed_buttons & HSD_PAD_A)
+    {
         ftCo_800C3BE8(gobj);
         fp->used_tether = true;
         return true;

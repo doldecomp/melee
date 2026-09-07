@@ -200,11 +200,11 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
     float stick_range_threshold;
 
     if (fp->cmd_vars[0] == 0) {
-        stick_x = stickGetDir(fp->input.lstick.x, 0.0f);
+        stick_x = stickGetDir(fp->input.lstick[0].x, 0.0f);
         if (stick_x > gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE) {
             stick_range_threshold =
                 stick_x - gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE;
-            if (fp->input.lstick.x > 0.0f) {
+            if (fp->input.lstick[0].x > 0.0f) {
                 facing_dir = 1.0f;
             } else {
                 facing_dir = -1.0f;

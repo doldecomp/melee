@@ -27,7 +27,7 @@ bool ftCliffCommon_80081298(Fighter_GObj* gobj)
     u8 _[8];
 
     Fighter* fp = gobj->user_data;
-    if (fp->input.lstick.y <= -p_ftCommonData->x480) {
+    if (fp->input.lstick[0].y <= -p_ftCommonData->x480) {
         return false;
     }
     if (fp->coll_data.env_flags & Collide_LedgeGrabMask &&

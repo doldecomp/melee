@@ -718,7 +718,7 @@ void it_802A3630(Item_GObj* arg0)
         it_802A77DC(arg0);
         return;
     }
-    if (fp2->input.x668 & HSD_PAD_A) {
+    if (fp2->input.pressed_buttons & HSD_PAD_A) {
         it_802A79A0(arg0);
     }
 }
@@ -852,7 +852,7 @@ void it_802A39FC(Item_GObj* gobj)
         it_802A77DC(gobj);
         return;
     }
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         it_802A79A0(gobj);
         return;
     }

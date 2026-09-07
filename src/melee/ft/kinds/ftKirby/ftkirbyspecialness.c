@@ -263,7 +263,7 @@ void ftKb_NsSpecialNHold_IASA(Fighter_GObj* gobj)
                 return;
             }
         }
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             return;
         }
     }
@@ -302,7 +302,7 @@ void ftKb_NsSpecialAirNHold_IASA(Fighter_GObj* gobj)
                 return;
             }
         }
-        if (fp->input.held_inputs & HSD_PAD_B) {
+        if (fp->input.held_buttons[0] & HSD_PAD_B) {
             return;
         }
     }

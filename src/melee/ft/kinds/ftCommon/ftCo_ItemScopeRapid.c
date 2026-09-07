@@ -141,7 +141,7 @@ void ftCo_ItemScopeAirRapid_Anim(Fighter_GObj* gobj)
 void ftCo_ItemScopeRapid_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         *(s32*) ((u8*) fp + 0x2340) = *(s32*) ((u8*) p_ftCommonData + 0x5BC);
     }
 }
@@ -150,7 +150,7 @@ void ftCo_ItemScopeAirRapid_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = *(Fighter**) ((u8*) gobj + 0x2C);
 
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         *(s32*) ((u8*) fp + 0x2340) = *(s32*) ((u8*) p_ftCommonData + 0x5BC);
     }
 }

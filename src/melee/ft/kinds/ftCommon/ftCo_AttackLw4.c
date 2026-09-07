@@ -21,8 +21,8 @@
 
 static bool checkLStick(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.y <= p_ftCommonData->xD4 &&
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.lstick[0].y <= p_ftCommonData->xD4 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->xD8)
     {
         return true;

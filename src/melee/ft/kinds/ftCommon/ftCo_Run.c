@@ -23,7 +23,7 @@ bool fn_800CA5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir >=
+    if (fp->input.lstick[0].x * fp->facing_dir >=
         p_ftCommonData->x58_someLStickXThreshold)
     {
         ftCo_Run_Enter(gobj, 0.0F);
@@ -36,7 +36,7 @@ bool fn_800CA644(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.lstick.x * fp->facing_dir) >=
+    if ((fp->input.lstick[0].x * fp->facing_dir) >=
         p_ftCommonData->x58_someLStickXThreshold)
     {
         ftCo_Run_Enter(gobj, p_ftCommonData->x430);
@@ -48,7 +48,7 @@ bool fn_800CA644(Fighter_GObj* gobj)
 bool fn_800CA698(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.x * fp->facing_dir >=
+    if (fp->input.lstick[0].x * fp->facing_dir >=
         p_ftCommonData->x58_someLStickXThreshold)
     {
         ftCo_Run_Enter_Full(gobj, 0.0F, fp->cur_anim_frame,

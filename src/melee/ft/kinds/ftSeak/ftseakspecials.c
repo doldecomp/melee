@@ -34,7 +34,8 @@ void ftSk_SpecialS_80110490(Fighter* fp)
 {
     float v2, v3, v5, v6, v8;
 
-    v2 = atan2f(fp->input.lstick.y, (fp->input.lstick.x * fp->facing_dir));
+    v2 = atan2f(fp->input.lstick[0].y,
+                (fp->input.lstick[0].x * fp->facing_dir));
 
     if (v2 < 0) {
         v2 += (float) M_TAU;
@@ -68,8 +69,8 @@ void ftSk_SpecialS_80110490(Fighter* fp)
 
     fp->mv.sk.specials.x18 = v6;
 
-    v8 = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
-               fp->input.lstick.y * fp->input.lstick.y);
+    v8 = sqrtf(fp->input.lstick[0].x * fp->input.lstick[0].x +
+               fp->input.lstick[0].y * fp->input.lstick[0].y);
 
     if (v8 > 1) {
         v8 = 1;
@@ -132,8 +133,8 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
 void ftSk_SpecialS_80110788(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->u.sk.lstick_delta.x = fp->input.lstick.x - fp->input.lstick1.x;
-    fp->u.sk.lstick_delta.y = fp->input.lstick.y - fp->input.lstick1.y;
+    fp->u.sk.lstick_delta.x = fp->input.lstick[0].x - fp->input.lstick[1].x;
+    fp->u.sk.lstick_delta.y = fp->input.lstick[0].y - fp->input.lstick[1].y;
 
     {
         s32 stateVar3 = fp->mv.sk.specials.x8;
@@ -166,9 +167,9 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
                                  (1 << 12) | (1 << 18);
 
             if ((fp->facing_dir == +1 && fp->u.sk.lstick_delta.x < -0.3F &&
-                 fp->input.lstick.x < 0) ||
+                 fp->input.lstick[0].x < 0) ||
                 (fp->facing_dir == -1 && fp->u.sk.lstick_delta.x > +0.3F &&
-                 fp->input.lstick.x > 0))
+                 fp->input.lstick[0].x > 0))
             {
                 ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.xC = 6;
@@ -184,7 +185,7 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
         }
 
         {
-            float left_stick_x = fp->input.lstick.x;
+            float left_stick_x = fp->input.lstick[0].x;
             Item* item_data = item_gobj->user_data;
             Article* article = item_data->xC4_article_data;
             itChainSegment* chainSegment = article->x4_specialAttributes;
@@ -194,9 +195,9 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             }
 
             if (left_stick_x < chainSegment->x48) {
-                float left_stick_y = fp->input.lstick.y;
+                float left_stick_y = fp->input.lstick[0].y;
 
-                if (fp->input.lstick.y < 0) {
+                if (fp->input.lstick[0].y < 0) {
                     left_stick_y = -left_stick_y;
                 }
 
@@ -441,13 +442,13 @@ void ftSk_SpecialS_ChainSomething(HSD_GObj* gobj)
 float ftSk_SpecialS_80110F58(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.lstick.x;
+    return fp->input.lstick[0].x;
 }
 
 float ftSk_SpecialS_80110F64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->input.lstick.y;
+    return fp->input.lstick[0].y;
 }
 
 void ftSk_SpecialS_80110F70(HSD_GObj* gobj)
@@ -752,7 +753,7 @@ void ftSk_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 
@@ -763,7 +764,7 @@ void ftSk_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.sk.specials.x4 = true;
     }
 

@@ -599,21 +599,21 @@ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->input.lstick.x = fp->input.lstick.y = fp->input.lstick1.x =
-        fp->input.lstick1.y = 0.0f;
+    fp->input.lstick[0].x = fp->input.lstick[0].y = fp->input.lstick[1].x =
+        fp->input.lstick[1].y = 0.0f;
 
-    fp->input.cstick1.y = 0.0f;
-    fp->input.cstick1.x = 0.0f;
-    fp->input.cstick.y = 0.0f;
-    fp->input.cstick.x = 0.0f;
+    fp->input.cstick[1].y = 0.0f;
+    fp->input.cstick[1].x = 0.0f;
+    fp->input.cstick[0].y = 0.0f;
+    fp->input.cstick[0].x = 0.0f;
 
-    fp->input.x654 = 0.0f;
-    fp->input.x650 = 0.0f;
+    fp->input.triggers[1] = 0.0f;
+    fp->input.triggers[0] = 0.0f;
 
-    fp->input.x660 = 0;
-    fp->input.x66C = 0;
-    fp->input.x668 = 0;
-    fp->input.held_inputs = 0;
+    fp->input.held_buttons[1] = 0;
+    fp->input.released_buttons = 0;
+    fp->input.pressed_buttons = 0;
+    fp->input.held_buttons[0] = 0;
 
     fp->trigger_analog_timer = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
@@ -656,15 +656,15 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->input.x650 = fp->input.x654 = fp->input.cstick.x = fp->input.cstick.y =
-        fp->input.cstick1.x = fp->input.cstick1.y = fp->input.lstick.x =
-            fp->input.lstick.y = fp->input.lstick1.x = fp->input.lstick1.y =
-                0.0f;
+    fp->input.triggers[0] = fp->input.triggers[1] = fp->input.cstick[0].x =
+        fp->input.cstick[0].y = fp->input.cstick[1].x = fp->input.cstick[1].y =
+            fp->input.lstick[0].x = fp->input.lstick[0].y =
+                fp->input.lstick[1].x = fp->input.lstick[1].y = 0.0f;
 
-    fp->input.x660 = 0;
-    fp->input.x66C = 0;
-    fp->input.x668 = 0;
-    fp->input.held_inputs = 0;
+    fp->input.held_buttons[1] = 0;
+    fp->input.released_buttons = 0;
+    fp->input.pressed_buttons = 0;
+    fp->input.held_buttons[0] = 0;
 
     fp->x679_x = fp->x67A_y = fp->x67B =
 
@@ -734,12 +734,12 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x24 = fp->ft_data->xC;
     fp->x28 = fp->ft_data->x10;
 
-    fp->input.x634 = 0.0f;
-    fp->input.x630 = 0.0f;
-    fp->input.x64C = 0.0f;
-    fp->input.x648 = 0.0f;
-    fp->input.x658 = 0.0f;
-    fp->input.x664 = 0;
+    fp->input.lstick[2].y = 0.0f;
+    fp->input.lstick[2].x = 0.0f;
+    fp->input.cstick[2].y = 0.0f;
+    fp->input.cstick[2].x = 0.0f;
+    fp->input.triggers[2] = 0.0f;
+    fp->input.held_buttons[2] = 0;
 
     Fighter_UnkInitLoad_80068914_Inner1(gobj);
 
@@ -1760,16 +1760,17 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
     s32 temp0_loc_1;
     s32 temp0_loc_0;
 
-    temp0_loc_0 =
-        (fp->input.held_inputs & (fp->input.x660 ^ fp->input.held_inputs));
-    temp0_loc_1 = (fp->input.x660 & (fp->input.x660 ^ fp->input.held_inputs));
+    temp0_loc_0 = (fp->input.held_buttons[0] &
+                   (fp->input.held_buttons[1] ^ fp->input.held_buttons[0]));
+    temp0_loc_1 = (fp->input.held_buttons[1] &
+                   (fp->input.held_buttons[1] ^ fp->input.held_buttons[0]));
 
     if (fp->x2219_b5) {
-        fp->input.x668 |= temp0_loc_0;
-        fp->input.x66C |= temp0_loc_1;
+        fp->input.pressed_buttons |= temp0_loc_0;
+        fp->input.released_buttons |= temp0_loc_1;
     } else {
-        fp->input.x668 = temp0_loc_0;
-        fp->input.x66C = temp0_loc_1;
+        fp->input.pressed_buttons = temp0_loc_0;
+        fp->input.released_buttons = temp0_loc_1;
     }
 }
 
@@ -1782,111 +1783,114 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
     if (!fp->x221F_b3) {
         if (!fp->x2224_b2) {
             if (!fp->x221D_b3) {
-                SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
-                           fp->input.x630, fp->input.x634);
-                SET_STICKS(fp->input.cstick1.x, fp->input.cstick1.y,
-                           fp->input.x648, fp->input.x64C);
-                fp->input.x654 = fp->input.x658;
-                fp->input.x660 = fp->input.x664;
+                SET_STICKS(fp->input.lstick[1].x, fp->input.lstick[1].y,
+                           fp->input.lstick[2].x, fp->input.lstick[2].y);
+                SET_STICKS(fp->input.cstick[1].x, fp->input.cstick[1].y,
+                           fp->input.cstick[2].x, fp->input.cstick[2].y);
+                fp->input.triggers[1] = fp->input.triggers[2];
+                fp->input.held_buttons[1] = fp->input.held_buttons[2];
                 fp->x221D_b3 = 1;
             } else {
-                SET_STICKS(fp->input.lstick1.x, fp->input.lstick1.y,
-                           fp->input.lstick.x, fp->input.lstick.y);
-                SET_STICKS(fp->input.cstick1.x, fp->input.cstick1.y,
-                           fp->input.cstick.x, fp->input.cstick.y);
-                fp->input.x654 = fp->input.x650;
-                fp->input.x660 = fp->input.held_inputs;
+                SET_STICKS(fp->input.lstick[1].x, fp->input.lstick[1].y,
+                           fp->input.lstick[0].x, fp->input.lstick[0].y);
+                SET_STICKS(fp->input.cstick[1].x, fp->input.cstick[1].y,
+                           fp->input.cstick[0].x, fp->input.cstick[0].y);
+                fp->input.triggers[1] = fp->input.triggers[0];
+                fp->input.held_buttons[1] = fp->input.held_buttons[0];
             }
 
             if (ftCo_800A2040(fp)) {
-                SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
+                SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
                            ftCo_GetCpuLStickX(fp), ftCo_GetCpuLStickY(fp));
                 if (DbLevel < DbLKind_DebugRom && !gm_8016B41C()) {
-                    SET_STICKS(fp->input.cstick.x, fp->input.cstick.y,
+                    SET_STICKS(fp->input.cstick[0].x, fp->input.cstick[0].y,
                                ftCo_GetCpuCStickX(fp), ftCo_GetCpuCStickY(fp));
                 } else {
-                    fp->input.cstick.x = 0;
-                    fp->input.cstick.y = 0;
+                    fp->input.cstick[0].x = 0;
+                    fp->input.cstick[0].y = 0;
                 }
 
                 tempf0 = ftCo_GetCpuLTrigger(fp);
                 tempf1 = ftCo_GetCpuRTrigger(fp);
 
-                fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
+                fp->input.triggers[0] = (tempf0 > tempf1) ? tempf0 : tempf1;
 
             } else {
-                SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
+                SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
                 if (DbLevel < DbLKind_DebugRom && gm_8016B41C() == 0) {
                     SET_STICKS(
-                        fp->input.cstick.x, fp->input.cstick.y,
+                        fp->input.cstick[0].x, fp->input.cstick[0].y,
                         HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,
                         HSD_PadGameStatus[fp->x618_player_id].nml_subStickY);
                 } else {
-                    fp->input.cstick.x = 0;
-                    fp->input.cstick.y = 0;
+                    fp->input.cstick[0].x = 0;
+                    fp->input.cstick[0].y = 0;
                 }
 
                 tempf1 = HSD_PadGameStatus[fp->x618_player_id].nml_analogR;
                 tempf0 = HSD_PadGameStatus[fp->x618_player_id].nml_analogL;
 
-                fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
+                fp->input.triggers[0] = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (ABS(fp->input.lstick.x) <=
+            if (ABS(fp->input.lstick[0].x) <=
                 p_ftCommonData->horizontal_stick_deadzone)
             {
-                fp->input.lstick.x = 0.0f;
+                fp->input.lstick[0].x = 0.0f;
             }
 
-            if (ABS(fp->input.lstick.y) <=
+            if (ABS(fp->input.lstick[0].y) <=
                 p_ftCommonData->vertical_stick_deadzone)
             {
-                fp->input.lstick.y = 0.0f;
+                fp->input.lstick[0].y = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.x) <=
+            if (ABS(fp->input.cstick[0].x) <=
                 p_ftCommonData->horizontal_stick_deadzone)
             {
-                fp->input.cstick.x = 0.0f;
+                fp->input.cstick[0].x = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.y) <=
+            if (ABS(fp->input.cstick[0].y) <=
                 p_ftCommonData->vertical_stick_deadzone)
             {
-                fp->input.cstick.y = 0.0f;
+                fp->input.cstick[0].y = 0.0f;
             }
 
-            if (fp->input.x650 <= p_ftCommonData->analog_shoulder_deadzone) {
-                fp->input.x650 = 0.0f;
+            if (fp->input.triggers[0] <=
+                p_ftCommonData->analog_shoulder_deadzone)
+            {
+                fp->input.triggers[0] = 0.0f;
             }
 
             if (ftCo_800A2040(fp)) {
-                fp->input.held_inputs = ftCo_GetCpuButtons(fp);
+                fp->input.held_buttons[0] = ftCo_GetCpuButtons(fp);
             } else {
-                fp->input.held_inputs =
+                fp->input.held_buttons[0] =
                     HSD_PadGameStatus[fp->x618_player_id].button;
             }
 
             if (gm_8016B0FC()) {
-                fp->input.x650 = 0.0f;
+                fp->input.triggers[0] = 0.0f;
                 if (ftCo_800A2040(fp)) {
-                    fp->input.held_inputs &= HSD_PAD_A | HSD_PAD_XY;
+                    fp->input.held_buttons[0] &= HSD_PAD_A | HSD_PAD_XY;
                 } else {
-                    fp->input.held_inputs &= HSD_PAD_A;
+                    fp->input.held_buttons[0] &= HSD_PAD_A;
                 }
             } else {
-                if (fp->input.held_inputs & (HSD_PAD_L | HSD_PAD_R)) {
-                    fp->input.held_inputs |= HSD_PAD_LR;
-                    fp->input.x650 = 1.0f;
-                } else if (fp->input.x650) {
-                    fp->input.held_inputs |= HSD_PAD_LR;
+                if (fp->input.held_buttons[0] & (HSD_PAD_L | HSD_PAD_R)) {
+                    fp->input.held_buttons[0] |= HSD_PAD_LR;
+                    fp->input.triggers[0] = 1.0f;
+                } else if (fp->input.triggers[0]) {
+                    fp->input.held_buttons[0] |= HSD_PAD_LR;
                 }
                 if (!gm_801A45E8(0)) {
-                    if (fp->input.held_inputs & HSD_PAD_Z) {
-                        fp->input.held_inputs |= HSD_PAD_LR | HSD_PAD_A;
-                        fp->input.x650 = p_ftCommonData->z_press_analog_value;
+                    if (fp->input.held_buttons[0] & HSD_PAD_Z) {
+                        fp->input.held_buttons[0] |= HSD_PAD_LR | HSD_PAD_A;
+                        fp->input.triggers[0] =
+                            p_ftCommonData->z_press_analog_value;
                     }
                 }
             }
@@ -1899,10 +1903,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x676_x = 0xFE;
             }
 
-            if (fp->input.lstick.x >=
+            if (fp->input.lstick[0].x >=
                 p_ftCommonData->horizontal_stick_smash_deadzone)
             {
-                if (fp->input.lstick1.x >=
+                if (fp->input.lstick[1].x >=
                     p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
@@ -1924,10 +1928,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x670_timer_lstick_tilt_x = 0;
                     fp->x2228_b7 = 1;
                 }
-            } else if (fp->input.lstick.x <=
+            } else if (fp->input.lstick[0].x <=
                        -p_ftCommonData->horizontal_stick_smash_deadzone)
             {
-                if (fp->input.lstick1.x <=
+                if (fp->input.lstick[1].x <=
                     -p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
@@ -1961,10 +1965,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x677_y = 0xFE;
             }
 
-            if (fp->input.lstick.y >=
+            if (fp->input.lstick[0].y >=
                 p_ftCommonData->vertical_stick_smash_deadzone)
             {
-                if (fp->input.lstick1.y >=
+                if (fp->input.lstick[1].y >=
                     p_ftCommonData->vertical_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
@@ -1986,10 +1990,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x671_timer_lstick_tilt_y = 0;
                     fp->x2229_b0 = 0;
                 }
-            } else if (fp->input.lstick.y <=
+            } else if (fp->input.lstick[0].y <=
                        -p_ftCommonData->vertical_stick_smash_deadzone)
             {
-                if (fp->input.lstick1.y <=
+                if (fp->input.lstick[1].y <=
                     -p_ftCommonData->vertical_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
@@ -2017,8 +2021,9 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x671_timer_lstick_tilt_y = 0xFE;
             }
 
-            if (lb_8000D148(fp->input.lstick1.x, fp->input.lstick1.y,
-                            fp->input.lstick.x, fp->input.lstick.y, 0.0f, 0.0f,
+            if (lb_8000D148(fp->input.lstick[1].x, fp->input.lstick[1].y,
+                            fp->input.lstick[0].x, fp->input.lstick[0].y, 0.0f,
+                            0.0f,
                             p_ftCommonData->horizontal_stick_smash_deadzone))
             {
                 fp->x67A_y = 0;
@@ -2031,8 +2036,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x678 = 0xFE;
             }
 
-            if (fp->input.x650 >= p_ftCommonData->shield_press_threshold) {
-                if (fp->input.x654 >= p_ftCommonData->shield_press_threshold) {
+            if (fp->input.triggers[0] >=
+                p_ftCommonData->shield_press_threshold)
+            {
+                if (fp->input.triggers[1] >=
+                    p_ftCommonData->shield_press_threshold)
+                {
                     // Fighter_ClampThreeValues
                     fp->trigger_analog_timer++;
                     if (fp->trigger_analog_timer > 0xFE) {
@@ -2058,44 +2067,44 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->trigger_analog_timer = 0xFE;
             }
 
-            if (fp->input.x668 & HSD_PAD_A) {
+            if (fp->input.pressed_buttons & HSD_PAD_A) {
                 fp->x683 = fp->x67C;
                 fp->x67C = 0;
             } else if (fp->x67C < 0xFF) {
                 fp->x67C++;
             }
 
-            if (fp->input.x668 & HSD_PAD_B) {
+            if (fp->input.pressed_buttons & HSD_PAD_B) {
                 fp->x67D = 0;
             } else if (fp->x67D < 0xFF) {
                 fp->x67D++;
             }
 
-            if (fp->input.x668 & HSD_PAD_XY) {
+            if (fp->input.pressed_buttons & HSD_PAD_XY) {
                 fp->x67E = 0;
             } else if (fp->x67E < 0xFF) {
                 fp->x67E++;
             }
 
-            if (fp->input.x668 & HSD_PAD_DPADUP) {
+            if (fp->input.pressed_buttons & HSD_PAD_DPADUP) {
                 fp->x681 = 0;
             } else if (fp->x681 < 0xFF) {
                 fp->x681++;
             }
 
-            if (fp->input.x668 & HSD_PAD_DPADDOWN) {
+            if (fp->input.pressed_buttons & HSD_PAD_DPADDOWN) {
                 fp->x682 = 0;
             } else if (fp->x682 < 0xFF) {
                 fp->x682++;
             }
 
-            if (fp->input.x668 & HSD_PAD_LR) {
+            if (fp->input.pressed_buttons & HSD_PAD_LR) {
                 fp->x67F = 0;
             } else if (fp->x67F < 0xFF) {
                 fp->x67F++;
             }
 
-            if (fp->input.x668 & (HSD_PAD_L | HSD_PAD_R)) {
+            if (fp->input.pressed_buttons & (HSD_PAD_L | HSD_PAD_R)) {
                 fp->x684 = fp->x680;
                 fp->x680 = 0;
             } else if (fp->x680 < 0xFF) {
@@ -2104,12 +2113,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
         }
 
         if (fp->x221D_b4 || fp->x2224_b2 || gm_801A45E8(2)) {
-            fp->input.x630 = fp->input.lstick.x;
-            fp->input.x634 = fp->input.lstick.y;
-            fp->input.x648 = fp->input.cstick.x;
-            fp->input.x64C = fp->input.cstick.y;
-            fp->input.x658 = fp->input.x650;
-            fp->input.x664 = fp->input.held_inputs;
+            fp->input.lstick[2].x = fp->input.lstick[0].x;
+            fp->input.lstick[2].y = fp->input.lstick[0].y;
+            fp->input.cstick[2].x = fp->input.cstick[0].x;
+            fp->input.cstick[2].y = fp->input.cstick[0].y;
+            fp->input.triggers[2] = fp->input.triggers[0];
+            fp->input.held_buttons[2] = fp->input.held_buttons[0];
             fp->x221D_b3 = 0;
 
             Fighter_UnkInitLoad_80068914_Inner1(gobj);

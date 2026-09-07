@@ -449,8 +449,8 @@ struct ftCommonData {
     /* +65C */ float x65C;
     /* +660 */ float x660;
     /* +664 */ float x664;
-    /* +668 */ float x668;
-    /* +66C */ float x66C;
+    /* +668 */ float pressed_inputs;
+    /* +66C */ float released_inputs;
     /* +670 */ float x670;
     /* +674 */ float x674;
     /* +678 */ float x678;
@@ -1245,22 +1245,13 @@ struct Fighter {
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
     /*  fp+620 */ struct {
-        /*  fp+620 */ Vec2 lstick;
-        /*  fp+628 */ Vec2 lstick1;
-        /*  fp+630 */ float x630;
-        /*  fp+634 */ float x634;
-        /*  fp+638 */ Vec2 cstick;
-        /*  fp+640 */ Vec2 cstick1;
-        /*  fp+648 */ float x648;
-        /*  fp+64C */ float x64C;
-        /*  fp+650 */ float x650;
-        /*  fp+654 */ float x654;
-        /*  fp+658 */ float x658;
-        /*  fp+65C */ HSD_Pad held_inputs;
-        /*  fp+660 */ HSD_Pad x660; ///< previous held inputs
-        /*  fp+664 */ HSD_Pad x664;
-        /*  fp+668 */ HSD_Pad x668; ///< pressed inputs
-        /*  fp+66C */ HSD_Pad x66C; ///< released inputs
+        /*  fp+620 */ Vec2 lstick[3];          ///< lstick buffer
+        /*  fp+638 */ Vec2 cstick[3];          ///< cstick buffer
+        /*  fp+650 */ float triggers[3];       ///< analog trigger buffer
+        /*  fp+65C */ HSD_Pad held_buttons[3]; ///< buttons buffer
+        /*  fp+668 */ HSD_Pad pressed_buttons; ///< buttons pressed this frame
+        /*  fp+66C */ HSD_Pad
+            released_buttons; ///< buttons released this frame
     } input;
     /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
     /*  fp+671 */ u8 x671_timer_lstick_tilt_y;

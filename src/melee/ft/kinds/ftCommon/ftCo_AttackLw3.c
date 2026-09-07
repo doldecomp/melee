@@ -42,8 +42,8 @@ typedef enum cmd_var_idx {
 bool ftCo_AttackLw3_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A) {
-        if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
+        if (fp->input.lstick[0].y <= p_ftCommonData->xB0 &&
             ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
         {
             if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
@@ -111,7 +111,7 @@ void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
 static bool checkPadA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         if (fp->cmd_vars[cmd_unk0_bool]) {
             decideFighter(gobj);
             return true;
@@ -124,8 +124,8 @@ static bool checkPadA(Fighter_GObj* gobj)
 static bool checkItemThrowInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.y <= p_ftCommonData->xB0 &&
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.lstick[0].y <= p_ftCommonData->xB0 &&
         ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
     {
         if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {

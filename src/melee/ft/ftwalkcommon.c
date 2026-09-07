@@ -59,7 +59,7 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir >=
+    if (fp->input.lstick[0].x * fp->facing_dir >=
         p_ftCommonData->walk_stick_threshold)
     {
         return true;
@@ -171,8 +171,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, float))
 
 static float getWalkAccel(Fighter* fp, float mul)
 {
-    return fp->input.lstick.x > 0 ? mul * +fp->co_attrs.walk_accel_base
-                                  : mul * -fp->co_attrs.walk_accel_base;
+    return fp->input.lstick[0].x > 0 ? mul * +fp->co_attrs.walk_accel_base
+                                     : mul * -fp->co_attrs.walk_accel_base;
 }
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
@@ -188,12 +188,12 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 
     {
         float accel =
-            fp->input.lstick.x * fp->co_attrs.walk_accel_mul * accel_mul;
+            fp->input.lstick[0].x * fp->co_attrs.walk_accel_mul * accel_mul;
         accel += getWalkAccel(fp, accel_mul);
 
         {
             float target_vel =
-                fp->input.lstick.x * fp->co_attrs.walk_max_vel * accel_mul;
+                fp->input.lstick[0].x * fp->co_attrs.walk_max_vel * accel_mul;
 
             if (target_vel) {
                 float mult = fp->gr_vel / target_vel;
