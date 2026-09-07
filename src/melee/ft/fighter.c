@@ -1800,17 +1800,17 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 
             if (ftCo_800A2040(fp)) {
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
-                           ftCo_800A17E4(fp), ftCo_800A1874(fp));
+                           ftCo_GetCpuLStickX(fp), ftCo_GetCpuLStickY(fp));
                 if (DbLevel < DbLKind_DebugRom && !gm_8016B41C()) {
                     SET_STICKS(fp->input.cstick.x, fp->input.cstick.y,
-                               ftCo_800A1994(fp), ftCo_800A1A24(fp));
+                               ftCo_GetCpuCStickX(fp), ftCo_GetCpuCStickY(fp));
                 } else {
                     fp->input.cstick.x = 0;
                     fp->input.cstick.y = 0;
                 }
 
-                tempf0 = ftCo_800A1904(fp);
-                tempf1 = ftCo_800A1948(fp);
+                tempf0 = ftCo_GetCpuLTrigger(fp);
+                tempf1 = ftCo_GetCpuRTrigger(fp);
 
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
 
@@ -1863,7 +1863,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             }
 
             if (ftCo_800A2040(fp)) {
-                fp->input.held_inputs = ftCo_800A198C(fp);
+                fp->input.held_inputs = ftCo_GetCpuButtons(fp);
             } else {
                 fp->input.held_inputs =
                     HSD_PadGameStatus[fp->x618_player_id].button;

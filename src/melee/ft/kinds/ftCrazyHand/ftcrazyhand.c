@@ -642,8 +642,8 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     fp->u.ch.x224C = 0;
     fp->u.ch.x2250 = ftMh_MS_Damage2;
     fp->u.ch.x2254 = 0;
-    fp->x1A88.level = 1;
-    ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C, fp->u.ch.x2238,
+    fp->cpu.level = 1;
+    ftBossLib_8015BD24(fp->cpu.level, &fp->u.mh.x223C, fp->u.ch.x2238,
                        ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
 
