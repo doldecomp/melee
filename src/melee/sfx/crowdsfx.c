@@ -70,7 +70,7 @@ void un_80321AF4(HSD_GObj* gobj)
     s32 old_x24 = data->x24;
     s32 flag = 0;
     Vec3 pos;
-    char pad[12];
+    PAD_STACK(12);
 
     data->x24 = 0;
     cur = HSD_GObj_Entities->fighters;
@@ -278,7 +278,7 @@ bool un_8032201C(u32 arg0, s32 cat)
 {
     CrowdSFX_UnkStruct* data = un_804D7050;
     HSD_GObj* gobj;
-    char pad[16];
+    PAD_STACK(16);
 
     switch (cat) {
     case 3:
@@ -320,7 +320,7 @@ bool un_8032201C(u32 arg0, s32 cat)
 void un_80322178(int arg)
 {
     CrowdSFX_UnkStruct* data;
-    char pad[8];
+    PAD_STACK(8);
 
     switch (arg) {
     case 0:
