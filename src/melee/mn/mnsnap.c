@@ -1034,7 +1034,7 @@ void fn_802545C4(void)
     HSD_JObj* jobj2;
     Vec3* translate;
     /* Preserve the original frame; the local stack layout remains unknown. */
-    PAD_STACK(304);
+    PAD_STACK(236);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
     jobj2 = mnSnap_804A0A10.move_jobj;
@@ -1161,10 +1161,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                 HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                 jobj = mnSnap_804A0A10.dlg_pos;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 0x3E1, "jobj");
-                }
-                mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                mnSnap_804A0A10.dlg_text->pos_x =
+                    HSD_JObjGetTranslationX(jobj) - 6.0F;
                 lbAudioAx_80024030(3);
             }
             mnSnap_AnimateCardSlots(active_slot);
@@ -1227,11 +1225,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                             HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                             jobj = mnSnap_804A0A10.dlg_pos;
-                            if (jobj == NULL) {
-                                __assert("jobj.h", 0x3E1, "jobj");
-                            }
                             mnSnap_804A0A10.dlg_text->pos_x =
-                                jobj->translate.x - 6.0F;
+                                HSD_JObjGetTranslationX(jobj) - 6.0F;
                             lbAudioAx_80024030(3);
                         }
                     }
@@ -1322,10 +1317,8 @@ void fn_802545C4(void)
                                     (f32) (9 - mnSnap_804A0A10.dlg_timer));
                     HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                     jobj = mnSnap_804A0A10.dlg_pos;
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x3E1, "jobj");
-                    }
-                    mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                    mnSnap_804A0A10.dlg_text->pos_x =
+                        HSD_JObjGetTranslationX(jobj) - 6.0F;
                 } else if (mnSnap_804A0A10.photo_count[slot] == 0) {
                     mnSnap_804A0A10.state = 3;
                     lbAudioAx_80024030(3);
@@ -1347,10 +1340,8 @@ void fn_802545C4(void)
                                     (f32) (9 - mnSnap_804A0A10.dlg_timer));
                     HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                     jobj = mnSnap_804A0A10.dlg_pos;
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x3E1, "jobj");
-                    }
-                    mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                    mnSnap_804A0A10.dlg_text->pos_x =
+                        HSD_JObjGetTranslationX(jobj) - 6.0F;
                     lbAudioAx_80024030(3);
                 } else {
                     sfxForward();
@@ -1416,10 +1407,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                 HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                 jobj = mnSnap_804A0A10.dlg_pos;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 0x3E1, "jobj");
-                }
-                mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                mnSnap_804A0A10.dlg_text->pos_x =
+                    HSD_JObjGetTranslationX(jobj) - 6.0F;
                 lbAudioAx_80024030(3);
             } else {
                 mnSnap_804A0A10.state = 6;
@@ -1646,10 +1635,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                 HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                 jobj = mnSnap_804A0A10.dlg_pos;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 0x3E1, "jobj");
-                }
-                mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                mnSnap_804A0A10.dlg_text->pos_x =
+                    HSD_JObjGetTranslationX(jobj) - 6.0F;
                 mnSnap_804A0A10.state = 0xC;
             } else if (mnSnap_804A0A10.menu_sel == 3) {
                 mnSnap_804A0A10.dlg_timer = 9;
@@ -1666,10 +1653,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                 HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                 jobj = mnSnap_804A0A10.dlg_pos;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 0x3E1, "jobj");
-                }
-                mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                mnSnap_804A0A10.dlg_text->pos_x =
+                    HSD_JObjGetTranslationX(jobj) - 6.0F;
                 lbAudioAx_80024030(7);
                 mnSnap_804A0A10.state = 0x14;
             } else if (mnSnap_804A0A10.menu_sel == 4) {
@@ -1692,10 +1677,8 @@ void fn_802545C4(void)
                                 (f32) (9 - mnSnap_804A0A10.dlg_timer));
                 HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
                 jobj = mnSnap_804A0A10.dlg_pos;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 0x3E1, "jobj");
-                }
-                mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
+                mnSnap_804A0A10.dlg_text->pos_x =
+                    HSD_JObjGetTranslationX(jobj) - 6.0F;
                 mnSnap_804A0A10.state = 0x15;
             }
         }
