@@ -308,14 +308,6 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, int arg1)
     }
 }
 
-typedef struct _Unk2 {
-    u8 x0_filler[0xC];
-    Mtx xC;
-    u8 x18_filler[0x38 - 0xC];
-    Mtx x38;
-    u8 x48_filler[0x68 - 0x3C];
-} Unk2;
-
 static inline void ftDrawCommon_80080E18_inline0(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
