@@ -1969,7 +1969,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                Linkable,
+                Matching,
                 "sysdolphin/baselib/hsd_3B5C.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),

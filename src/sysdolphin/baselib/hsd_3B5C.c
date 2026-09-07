@@ -479,6 +479,7 @@ void fn_803B61B4(s32* block)
 static inline s32 jpeg_clamp(f32 value)
 {
     s32 result;
+    u16 clamped;
 
     if (value < 0.0f) {
         return 0;
@@ -486,11 +487,16 @@ static inline s32 jpeg_clamp(f32 value)
     if (255.0f < value) {
         return 255;
     }
-    result = (u8) (s32) value;
+    result = (clamped = (u8) (s32) value);
     return result;
 }
 
-static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
+typedef struct {
+    u16* pixels;
+} JpegOutput;
+
+static inline void jpeg_store_rgb565(JpegOutput* out, s32 offset,
+                                     s32 luminance, s32 cb, s32 cr)
 {
     f32 red_value, green_value, blue_value;
     u8 green;
@@ -498,7 +504,7 @@ static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
         u8 red, green, blue;
     } pixel;
 
-    red_value = (f32) ((1.402 * (f64) cr) + (f64) luminance);
+    red_value = (f32) ((f64) luminance + (1.402 * (f64) cr));
     pixel.red = jpeg_clamp(red_value);
 
     green_value =
@@ -510,8 +516,8 @@ static inline void jpeg_store_rgb565(u16* out, s32 luminance, s32 cb, s32 cr)
                         (0.0012 * (f64) cr));
     pixel.blue = jpeg_clamp(blue_value);
 
-    *out = ((pixel.red << 8) & 0xF800) | ((pixel.green << 3) & 0x7E0) |
-           (pixel.blue >> 3U);
+    out->pixels[offset] = ((pixel.red << 8) & 0xF800) |
+                          ((pixel.green << 3) & 0x7E0) | (pixel.blue >> 3U);
 }
 
 static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
@@ -595,7 +601,12 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                         cb = ((JpegState*) chroma)->work.cb[0];
                         out_offset = ((block & 1) << 5) +
                                      (aligned_width * ((block & 2) << 2));
-                        jpeg_store_rgb565(out + out_offset, luminance, cb, cr);
+                        {
+                            JpegOutput pixel_out;
+                            pixel_out.pixels = out;
+                            jpeg_store_rgb565(&pixel_out, out_offset,
+                                              luminance, cb, cr);
+                        }
                     }
                     out += 1;
                     luma_offset += 4;
