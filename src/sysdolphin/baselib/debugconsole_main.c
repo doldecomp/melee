@@ -2842,7 +2842,7 @@ void* fn_80397814(void* arg)
         }
     }
 
-    OSPanic("debugconsole_main.c", 2228, "debug thread finished.");
+    OSPanic(__FILE__, 2228, "debug thread finished.");
 
     return NULL;
 }
