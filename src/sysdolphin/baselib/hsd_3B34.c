@@ -453,7 +453,9 @@ static inline s32 hsd_803B3CD8_bit_length(s32 value)
 
     for (bit = 0x1F; bit >= 0; bit--) {
         if (value & (1 << bit)) {
-            return bit + 1;
+            s32 result = bit + 1;
+
+            return result;
         }
     }
     return 0;
@@ -508,8 +510,6 @@ void hsd_803B3CD8(s32 component)
     s32 run;
     s32 index;
 
-    PAD_STACK(16);
-
     state.work = (JpegWork*) &hsd_804D2648;
     tables = (JpegEncodeTables*) lbl_80430C40;
     dc_code = component == 0 ? lbl_80431678 : lbl_8043169C;
@@ -530,7 +530,11 @@ void hsd_803B3CD8(s32 component)
         hsd_803B3CD8_write_bits(value, length, state.work);
     }
     for (index = 1; index < 64; index++) {
-        s32 coefficient = state.work->data.coef[lbl_80431638[index]];
+        JpegWork* indexed;
+        /* Apply the zigzag index before the coefficient array offset. */
+        s32 coefficient =
+            (indexed = (JpegWork*) ((s32*) state.work + lbl_80431638[index]))
+                ->data.coef[0];
         s32 ac_value = coefficient;
 
         if (coefficient != 0) {
