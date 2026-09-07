@@ -194,7 +194,7 @@ extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 static s32 lbl_804D6398 = 3;
 
-static inline void jpeg_luma_address(s32** dest, u8* work, u32 offset)
+static inline void jpegLumaAddress(s32** dest, u8* work, u32 offset)
 {
     work += 0x118;
     *dest = &((s32*) work)[offset / 4];
@@ -254,7 +254,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                 for (luma_x = 0; luma_x < 4; luma_x++) {
                     s32* luma_base;
 
-                    jpeg_luma_address(
+                    jpegLumaAddress(
                         &luma_base, HSD_804D2648_BUF,
                         (tile_x * 4 + ((tile_y * 4 + luma_y) * 8 + luma_x)) *
                             4);
