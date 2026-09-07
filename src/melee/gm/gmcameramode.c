@@ -212,9 +212,9 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
     start->rules.on_unpause_override = gm_80165268;
     start->rules.on_pause_override = gm_80165268;
     start->rules.check_for_pauser_override = gm_CameraModeVSGetPauser;
-    start->rules.x44 = gmCamera_801A31FC;
-    start->rules.x48 = gmCamera_801A3098;
-    start->rules.x4C = gmCamera_801A30E4;
+    start->rules.on_match_start = gmCamera_801A31FC;
+    start->rules.on_frame_start = gmCamera_801A3098;
+    start->rules.on_frame_end = gmCamera_801A30E4;
 
     start->rules.xD = 1;
     start->rules.disable_pausing = false;

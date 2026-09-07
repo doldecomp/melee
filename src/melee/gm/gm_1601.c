@@ -3282,7 +3282,7 @@ void fn_8016719C(s32 slot, s32 subchar)
     struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_16AE_GetUnkData_1();
-    stkind = gm_8016B004();
+    stkind = gm_GetStKind();
     if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
         Stage_80224E38(&respawn_pos, var_r30);
@@ -3338,7 +3338,7 @@ void gm_80167320(int slot, bool arg1)
         if ((gm_8016B094() || gm_8016B0E8()) && Player_GetStocks(slot) == 0) {
             gm_8016AC44(Player_GetPlayerCharacter(slot),
                         Player_GetCostumeId(slot));
-        } else if (Stage_80224DC8(gm_8016B004())) {
+        } else if (Stage_80224DC8(gm_GetStKind())) {
             fn_8016719C(slot, arg1);
         } else {
             fn_8016719C(slot, arg1);
