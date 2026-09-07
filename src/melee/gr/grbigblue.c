@@ -4009,9 +4009,14 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
 
             if (count != 0) {
                 s32 pick;
+                s32 avail;
+                u32 sfx;
+                s32 lane;
+                Ground* ground;
 
                 slot = 0;
-                pick = ZRANDI(count);
+                avail = count;
+                pick = ZRANDI(avail);
 
                 for (; slot < 30; slot++) {
                     if (gp->u.bigblue.car.ranks[slot] == 0) {
@@ -4047,9 +4052,15 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.car.ranks[slot] = 1;
                 gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                Ground_801C5440(gp, slot, lbl_803E3010[HSD_Randi(4)]);
+                sfx = lbl_803E3010[HSD_Randi(4)];
+                ground = gp;
+                Ground_801C5440(ground, slot, sfx);
 
-                Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
+                {
+                    f32 alpha = gp->u.bigblue.car.lanes[arg1].alpha;
+                    lane = arg1;
+                    Ground_801C5630(gp, lane, alpha);
+                }
 
                 {
                     HSD_JObj* jobj;
@@ -4089,9 +4100,14 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 s32 pick;
                 u32 sfx_id;
                 struct grBigBlue_CarLane* lanes;
+                s32 avail;
+                u32 sfx_val;
+                s32 lane;
+                Ground* ground;
 
                 slot = 0;
-                pick = ZRANDI(count);
+                avail = count;
+                pick = ZRANDI(avail);
 
                 for (; slot < 30; slot++) {
                     if (gp->u.bigblue.car.ranks[slot] == 0) {
@@ -4128,10 +4144,16 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.car.ranks[slot] = 1;
                 gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                sfx_id = lbl_803E3010[HSD_Randi(4)];
-                Ground_801C5440(gp, slot, sfx_id);
+                sfx_val = lbl_803E3010[HSD_Randi(4)];
+                sfx_id = sfx_val;
+                ground = gp;
+                Ground_801C5440(ground, slot, sfx_id);
 
-                Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
+                {
+                    f32 alpha = gp->u.bigblue.car.lanes[arg1].alpha;
+                    lane = arg1;
+                    Ground_801C5630(gp, lane, alpha);
+                }
 
                 {
                     HSD_JObj* jobj;
