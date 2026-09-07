@@ -189,8 +189,8 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
 
             u8 __[20];
 
-            ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C,
-                               fp->u.ch.x2238, da->x0, da->x8, da->x4);
+            ftBossLib_8015BD24(fp->cpu.level, &fp->u.mh.x223C, fp->u.ch.x2238,
+                               da->x0, da->x8, da->x4);
             {
                 s32 tmp;
                 s32 tmp2;

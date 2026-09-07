@@ -990,8 +990,8 @@ struct Fighter_x1A88_xFC_t {
 };
 ASSERT_SIZE(struct Fighter_x1A88_xFC_t, 0x1C);
 
-struct Fighter_x1A88_t {
-    /*   +0 */ HSD_Pad x0;
+struct CpuFighter {
+    /*   +0 */ HSD_Pad buttons;
     /*   +4 */ s8 lstickX;
     /*   +5 */ s8 lstickY;
     /*   +6 */ s8 cstickX;
@@ -1087,7 +1087,7 @@ struct Fighter_x1A88_t {
     /* +574 */ float half_width;
     /* +578 */ float half_height;
 };
-ASSERT_SIZE(struct Fighter_x1A88_t, 0x57C);
+ASSERT_SIZE(struct CpuFighter, 0x57C);
 
 struct Fighter_x59C_t {
     u8 x0[0x8000];
@@ -1476,7 +1476,7 @@ struct Fighter {
     /* fp+1A6C */ float x1A6C;
     /* fp+1A70 */ Vec3 x1A70;
     /* fp+1A7C */ Vec3 x1A7C;
-    /* fp+x1A88 */ struct Fighter_x1A88_t x1A88;
+    /* fp+x1A88 */ struct CpuFighter cpu;
     /* fp+2004 */ int x2004;
     /* fp+2008 */ s32 x2008;
     /* fp+200C */ s32 x200C;
