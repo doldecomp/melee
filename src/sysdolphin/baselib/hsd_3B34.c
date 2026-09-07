@@ -226,23 +226,20 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                 src_row = (chroma_y & 1) * 32 + (chroma_y & 2) * stride;
 
                 for (chroma_x = 0; chroma_x < 4; chroma_x++) {
-                    s32 chroma_index;
-                    JpegWork* chroma_dest;
+                    pixel = src[((chroma_x & 1) * 2 + (chroma_x & 2) * 4) +
+                                src_row];
 
-                    pixel = src[(chroma_x & 1) * 2 +
-                                (((chroma_x & 2) * 4) + src_row)];
-                    chroma_index = (chroma_x & 2) * 4;
-                    chroma_index = (chroma_x & 1) + chroma_index;
-                    chroma_index += dst_row;
-                    chroma_dest =
-                        (JpegWork*) (HSD_804D2648_BUF + chroma_index * 4);
-                    chroma_dest->data.x518[0] =
+                    ((JpegWork*) HSD_804D2648_BUF)
+                        ->data
+                        .x518[dst_row + (chroma_x & 1U) + (chroma_x & 2) * 4] =
                         (s32) ((0.5f * (f32) ((pixel * 8) & 0xF8)) +
                                ((-0.1687f * (f32) ((pixel >> 8U) & 0xF8)) -
                                 (0.3313f * (f32) ((pixel >> 3U) & 0xFC))));
-                    pixel = src[(chroma_x & 1) * 2 +
-                                (((chroma_x & 2) * 4) + src_row)];
-                    chroma_dest->data.x618[0] =
+                    pixel = src[((chroma_x & 1) * 2 + (chroma_x & 2) * 4) +
+                                src_row];
+                    ((JpegWork*) HSD_804D2648_BUF)
+                        ->data
+                        .x618[dst_row + (chroma_x & 1) + (chroma_x & 2) * 4] =
                         (s32) (((0.5f * (f32) ((pixel >> 8U) & 0xF8)) -
                                 (0.4187f * (f32) ((pixel >> 3U) & 0xFC))) -
                                (0.0813f * (f32) ((pixel * 8) & 0xF8)));
