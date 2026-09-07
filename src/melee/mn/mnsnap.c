@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <stddef.h>
 
+#include "inlines.h"
+#include "mnmain.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -11,8 +13,6 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbsnap.h>
-#include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
