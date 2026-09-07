@@ -1934,7 +1934,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                Linkable,
+                Matching,
                 "sysdolphin/baselib/psdisp.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
