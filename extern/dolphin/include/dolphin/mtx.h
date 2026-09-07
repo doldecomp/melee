@@ -16,10 +16,6 @@ typedef struct {
 } Vec, Vec3, *VecPtr, Point3d, *Point3dPtr;
 
 typedef struct {
-    s8 x, y;
-} S8Vec2, *S8Vec2Ptr;
-
-typedef struct {
     s8 x, y, z;
 } S8Vec3, S8Vec, *S8Vec3Ptr, *S8VecPtr;
 
