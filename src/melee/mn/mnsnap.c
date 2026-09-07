@@ -633,6 +633,14 @@ void mnSnap_80254014(void)
 #pragma pop
 #endif
 
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
+static void mnSnap_sdata2_order(void)
+{
+    (void) -6.9F;
+}
+#endif
+
 /// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(s32 dlg_type)
 {
@@ -859,7 +867,7 @@ static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
     }
 }
 
-static inline void mnSnap_InitDialogText(void)
+static void mnSnap_InitDialogText(void)
 {
     HSD_Text* t;
     if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -2482,6 +2490,11 @@ static inline void mnSnap_InitPageText(HSD_Text** text)
     (*text)->pos_z = 17.0F;
 }
 
+static inline void** mnSnap_GetMainJoint(mnSnap_State* snap)
+{
+    return &snap->main_joint;
+}
+
 static inline void** mnSnap_GetMainShapeAnim(mnSnap_State* snap)
 {
     return &snap->main_shapeanim;
@@ -2608,8 +2621,8 @@ void mnSnap_80257F24(void)
     main_joint = &snap->main_joint;
 
     lbArchive_LoadSections(
-        archive, main_joint, "MenMainConSn_Top_joint", main_animjoint,
-        "MenMainConSn_Top_animjoint", main_matanim,
+        archive, mnSnap_GetMainJoint(snap), "MenMainConSn_Top_joint",
+        main_animjoint, "MenMainConSn_Top_animjoint", main_matanim,
         "MenMainConSn_Top_matanim_joint", mnSnap_GetMainShapeAnim(snap),
         "MenMainConSn_Top_shapeanim_joint", csr_joint,
         "MenMainSubSn_Top_joint", csr_animjoint, "MenMainSubSn_Top_animjoint",
@@ -2631,7 +2644,7 @@ void mnSnap_80257F24(void)
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
-    main_load = &snap->main_joint;
+    main_load = main_joint;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_load);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
