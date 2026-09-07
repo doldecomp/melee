@@ -513,7 +513,8 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
         MtxPtr mtx = HSD_JObjGetMtxPtr(fp->parts[FtPart_LLegJA].joint);
         HSD_JObj* jobj = fp->u.pr.x223C;
         HSD_JObjCopyMtx(fp->u.pr.x223C, mtx);
-        jobj->flags |= (1 << 23) | (1 << 24) | (1 << 25);
+        jobj->flags |=
+            JOBJ_USER_DEF_MTX | JOBJ_MTX_INDEP_PARENT | JOBJ_MTX_INDEP_SRT;
         HSD_JObjSetMtxDirty(jobj);
 
         HSD_JObjDispAll(fp->u.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
