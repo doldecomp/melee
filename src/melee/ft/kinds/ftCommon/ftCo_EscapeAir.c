@@ -26,7 +26,7 @@ typedef enum cmd_var_idx {
 bool ftCo_80099A58(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L)) {
+    if (fp->input.pressed_buttons & (HSD_PAD_R | HSD_PAD_L)) {
         ftCo_80099A9C(gobj, p_ftCommonData->x334);
         return true;
     }
@@ -36,8 +36,9 @@ bool ftCo_80099A58(Fighter_GObj* gobj)
 static inline void inlineA0(Fighter* fp)
 {
     fp->mv.co.escapeair.self_vel = fp->self_vel;
-    if (ABS(fp->input.lstick.x) < p_ftCommonData->escapeair_deadzone.x) {
-        if (ABS(fp->input.lstick.y) < p_ftCommonData->escapeair_deadzone.y) {
+    if (ABS(fp->input.lstick[0].x) < p_ftCommonData->escapeair_deadzone.x) {
+        if (ABS(fp->input.lstick[0].y) < p_ftCommonData->escapeair_deadzone.y)
+        {
             fp->self_vel.y = 0;
             fp->self_vel.x = 0;
             return;

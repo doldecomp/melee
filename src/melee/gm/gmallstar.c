@@ -679,7 +679,7 @@ void gm_801B5ACC(GameModeState* arg0)
         gm_801B5ACC_inline1(&gm_803DEC4C[rest_round]);
 
         gm_801B5324(allstar, (s32) rest_round + 1);
-        data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
+        data->rules.on_match_end = (void (*)(u8))(Event) fn_801B5AA8;
     }
 }
 

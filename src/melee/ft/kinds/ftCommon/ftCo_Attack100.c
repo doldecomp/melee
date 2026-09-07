@@ -56,8 +56,8 @@ bool ftCo_800D6824(Fighter_GObj* gobj)
 
 bool ftCo_800D688C(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_B) {
-        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
+    if (fp->input.pressed_buttons & HSD_PAD_B) {
+        if (fp->input.lstick[0].y < -p_ftCommonData->x21C) {
             return true;
         }
     }
@@ -79,8 +79,8 @@ bool ftCo_800D68C0(Fighter_GObj* gobj)
 
 bool ftCo_800D6928(Fighter* fp)
 {
-    if (fp->input.x668 & 0x200) {
-        if (fp->input.lstick.y >= p_ftCommonData->x21C) {
+    if (fp->input.pressed_buttons & 0x200) {
+        if (fp->input.lstick[0].y >= p_ftCommonData->x21C) {
             return true;
         }
     }
@@ -118,7 +118,9 @@ bool ftCo_Attack_800D6A50(Fighter_GObj* gobj)
     ftCo_DatAttrs* co;
     Fighter* fp = GET_FIGHTER(gobj);
     co = &fp->co_attrs;
-    if ((fp->input.x668 & HSD_PAD_A) || (fp->input.x66C & HSD_PAD_A)) {
+    if ((fp->input.pressed_buttons & HSD_PAD_A) ||
+        (fp->input.released_buttons & HSD_PAD_A))
+    {
         fp->x1A54++;
     }
     if (fp->x1A54 >= co->rapid_jab_window && fp->x2218_b2) {
@@ -230,7 +232,9 @@ void ftCo_Attack100End_Anim(Fighter_GObj* gobj)
 void ftCo_Attack100Loop_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.x668 & HSD_PAD_A) || (fp->input.x66C & HSD_PAD_A)) {
+    if ((fp->input.pressed_buttons & HSD_PAD_A) ||
+        (fp->input.released_buttons & HSD_PAD_A))
+    {
         fp->mv.co.attack100.x4 = true;
     }
 }
@@ -293,8 +297,9 @@ void fn_800D6F58(Fighter_GObj* gobj, Item_GObj* item_gobj)
 bool ftCo_800D705C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    bool tmp = fp->item_gobj == NULL && (fp->input.held_inputs & HSD_PAD_LR) &&
-               (fp->input.x668 & HSD_PAD_A) && !fp->x2224_b1 &&
+    bool tmp = fp->item_gobj == NULL &&
+               (fp->input.held_buttons[0] & HSD_PAD_LR) &&
+               (fp->input.pressed_buttons & HSD_PAD_A) && !fp->x2224_b1 &&
                fp->x683 >= p_ftCommonData->x1C;
     if (tmp) {
         fp->x209C = p_ftCommonData->x414;
@@ -306,8 +311,9 @@ bool ftCo_800D705C(Fighter_GObj* gobj)
 bool ftCo_800D7100(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    bool tmp = fp->item_gobj == NULL && (fp->input.held_inputs & HSD_PAD_LR) &&
-               (fp->input.x668 & HSD_PAD_A) && !fp->x2224_b1 &&
+    bool tmp = fp->item_gobj == NULL &&
+               (fp->input.held_buttons[0] & HSD_PAD_LR) &&
+               (fp->input.pressed_buttons & HSD_PAD_A) && !fp->x2224_b1 &&
                fp->x683 >= p_ftCommonData->x1C;
     if (tmp) {
         Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, 1);

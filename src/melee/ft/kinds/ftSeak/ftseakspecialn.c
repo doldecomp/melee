@@ -251,12 +251,12 @@ static void doIasa(Fighter_GObj* gobj, ftSeak_MotionState end_msid,
                    ftSeak_MotionState cancel_msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->mv.sk.specialn.x0 = 0;
         Fighter_ChangeMotionState(gobj, end_msid, Ft_MF_None, 0, 1, 0, NULL);
         setDmgCallbacks(gobj);
         fp->accessory4_cb = shootNeedles;
-    } else if (fp->input.x668 & HSD_PAD_LR) {
+    } else if (fp->input.pressed_buttons & HSD_PAD_LR) {
         Fighter_ChangeMotionState(gobj, cancel_msid, Ft_MF_None, 0, 1, 0,
                                   NULL);
         setDmgCallbacks(gobj);

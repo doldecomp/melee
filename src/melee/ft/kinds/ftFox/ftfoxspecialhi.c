@@ -427,7 +427,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     float stick_y;
 
     fp = GET_FIGHTER(gobj);
-    stick_y = fp->input.lstick.y;
+    stick_y = fp->input.lstick[0].y;
 
     collData = getFtColl(fp);
     da = fp->dat_attrs;
@@ -435,13 +435,13 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     if (stick_y < 0.0f) {
         stick_y = -stick_y;
     }
-    temp_stick = fp->input.lstick.x;
-    stick_x = stickGetDir(fp->input.lstick.x, 0.0f);
+    temp_stick = fp->input.lstick[0].x;
+    stick_x = stickGetDir(fp->input.lstick[0].x, 0.0f);
 
     if (!((stick_x + stick_y) < da->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN))
     {
         sp20.x = temp_stick;
-        sp20.y = fp->input.lstick.y;
+        sp20.y = fp->input.lstick[0].y;
         sp20.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
@@ -493,9 +493,9 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     ca = &fp->co_attrs;
     da = fp->dat_attrs;
 
-    stick_y = stickGetDir(fp->input.lstick.y, 0.0f);
+    stick_y = stickGetDir(fp->input.lstick[0].y, 0.0f);
 
-    temp_stick = fp->input.lstick.x;
+    temp_stick = fp->input.lstick[0].x;
 
     stick_x = stickGetDir(temp_stick, 0.0f);
 
@@ -506,8 +506,8 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
         if (temp_stick > da->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
             ftCommon_UpdateFacing(fp);
         }
-        fp->mv.fx.SpecialHi.rotateModel =
-            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        fp->mv.fx.SpecialHi.rotateModel = atan2f(
+            fp->input.lstick[0].y, fp->input.lstick[0].x * fp->facing_dir);
     } else {
         fp->mv.fx.SpecialHi.rotateModel = HALF_PI32;
     }

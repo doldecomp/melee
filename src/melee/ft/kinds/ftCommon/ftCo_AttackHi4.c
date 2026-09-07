@@ -21,8 +21,8 @@
 
 static bool checkLStick(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.y >= p_ftCommonData->xCC &&
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.lstick[0].y >= p_ftCommonData->xCC &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->xD0)
     {
         return true;
@@ -55,8 +55,8 @@ bool ftCo_AttackHi4_CheckInput(Fighter_GObj* gobj)
 
 static bool checkLStickNoD0(Fighter* fp)
 {
-    if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.y >= p_ftCommonData->xCC)
+    if (fp->input.pressed_buttons & HSD_PAD_A &&
+        fp->input.lstick[0].y >= p_ftCommonData->xCC)
     {
         return true;
     } else {

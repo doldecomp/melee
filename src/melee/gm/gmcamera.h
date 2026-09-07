@@ -22,7 +22,7 @@ typedef struct _gmCameraUnkStruct {
     /*0x10*/ s32 x10;
     /*0x14*/ s32 x14;
     /*0x18*/ s32 x18;
-    /*0x1C*/ void* x1C;
+    /*0x1C*/ void* snap_image;
     /*0x20*/ int x20;
     /*0x24*/ gmCameraUnkStruct4 x24[2];
     /*0x44*/ s32 x44;

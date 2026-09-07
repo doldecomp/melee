@@ -41,13 +41,13 @@
 bool ftCo_Attack1_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
             if (it_8026B30C(fp->item_gobj) == 0) {
                 ftCo_800957F4(gobj, ftCo_MS_LightThrowF);
                 return true;
             }
-            if (fp->input.held_inputs & HSD_PAD_LR) {
+            if (fp->input.held_buttons[0] & HSD_PAD_LR) {
                 ftCo_800957F4(gobj, ftCo_MS_LightThrowDrop);
                 return true;
             }
@@ -214,7 +214,7 @@ bool checkAttack12(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
-        if (fp->input.x668 & HSD_PAD_A) {
+        if (fp->input.pressed_buttons & HSD_PAD_A) {
             fp->mv.co.attack1.x0 = true;
         }
     }
@@ -278,7 +278,7 @@ bool checkAttack13(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
-        if (fp->input.x668 & HSD_PAD_A) {
+        if (fp->input.pressed_buttons & HSD_PAD_A) {
             fp->mv.co.attack1.x0 = true;
         }
     }

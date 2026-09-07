@@ -7,8 +7,6 @@
 #include <dolphin/os.h>
 #include <dolphin/pad.h>
 
-extern PadLibData HSD_PadLibData;
-
 HSD_RumbleData HSD_Rumble_804C22E0[4];
 
 void HSD_PadRumbleOn(u8 no)

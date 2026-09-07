@@ -19,7 +19,7 @@
 bool fn_800C9CEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.x * fp->facing_dir <=
+    if (fp->input.lstick[0].x * fp->facing_dir <=
         p_ftCommonData->x38_someLStickXThreshold)
     {
         ftCo_TurnRun_Enter(gobj, fp->cur_anim_frame);
@@ -32,7 +32,7 @@ bool fn_800C9D40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir <=
+    if (fp->input.lstick[0].x * fp->facing_dir <=
         p_ftCommonData->x38_someLStickXThreshold)
     {
         ftCo_TurnRun_Enter(gobj, 0.0F);

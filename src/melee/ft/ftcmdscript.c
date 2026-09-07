@@ -9,7 +9,7 @@
 
 void ftCo_800B3E04(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
+    struct CpuFighter* data;
     s8* cur;
     int temp_r27;
     int magnitude;
@@ -23,7 +23,7 @@ void ftCo_800B3E04(Fighter* fp)
     int var_r24_2;
     int var_r3_2;
 
-    data = &fp->x1A88;
+    data = &fp->cpu;
     if (data->csP == NULL) {
         return;
     }
@@ -50,109 +50,109 @@ void ftCo_800B3E04(Fighter* fp)
     while (data->command_duration == 0) {
         switch ((u8) *cur++) {
         case CpuCmd_PressA:
-            data->x0 |= HSD_PAD_A;
+            data->buttons |= HSD_PAD_A;
             break;
         case CpuCmd_ReleaseA:
-            data->x0 &= ~HSD_PAD_A;
+            data->buttons &= ~HSD_PAD_A;
             break;
         case CpuCmd_PressB:
-            data->x0 |= HSD_PAD_B;
+            data->buttons |= HSD_PAD_B;
             break;
         case CpuCmd_ReleaseB:
-            data->x0 &= ~HSD_PAD_B;
+            data->buttons &= ~HSD_PAD_B;
             break;
         case CpuCmd_PressX:
-            data->x0 |= HSD_PAD_X;
+            data->buttons |= HSD_PAD_X;
             break;
         case CpuCmd_ReleaseX:
-            data->x0 &= ~HSD_PAD_X;
+            data->buttons &= ~HSD_PAD_X;
             break;
         case CpuCmd_PressY:
-            data->x0 |= HSD_PAD_Y;
+            data->buttons |= HSD_PAD_Y;
             break;
         case CpuCmd_ReleaseY:
-            data->x0 &= ~HSD_PAD_Y;
+            data->buttons &= ~HSD_PAD_Y;
             break;
         case CpuCmd_PressStart:
-            data->x0 |= HSD_PAD_START;
+            data->buttons |= HSD_PAD_START;
             break;
         case CpuCmd_ReleaseStart:
-            data->x0 &= ~HSD_PAD_START;
+            data->buttons &= ~HSD_PAD_START;
             break;
         case CpuCmd_PressR:
             data->rtrigger = 0xFF;
-            data->x0 |= HSD_PAD_R;
+            data->buttons |= HSD_PAD_R;
             break;
         case CpuCmd_ReleaseR:
             data->rtrigger = 0;
-            data->x0 &= ~HSD_PAD_R;
+            data->buttons &= ~HSD_PAD_R;
             break;
         case CpuCmd_PressL:
-            data->x0 |= HSD_PAD_L;
+            data->buttons |= HSD_PAD_L;
             break;
         case CpuCmd_ReleaseL:
-            data->x0 &= ~HSD_PAD_L;
+            data->buttons &= ~HSD_PAD_L;
             break;
         case CpuCmd_PressZ:
-            data->x0 |= HSD_PAD_Z;
+            data->buttons |= HSD_PAD_Z;
             break;
         case CpuCmd_ReleaseZ:
-            data->x0 &= ~HSD_PAD_Z;
+            data->buttons &= ~HSD_PAD_Z;
             break;
         case CpuCmd_PressUp:
-            data->x0 |= HSD_PAD_DPADUP;
+            data->buttons |= HSD_PAD_DPADUP;
             break;
         case CpuCmd_ReleaseUp:
-            data->x0 &= ~HSD_PAD_DPADUP;
+            data->buttons &= ~HSD_PAD_DPADUP;
             break;
         case CpuCmd_PressDown:
-            data->x0 |= HSD_PAD_DPADDOWN;
+            data->buttons |= HSD_PAD_DPADDOWN;
             break;
         case CpuCmd_ReleaseDown:
-            data->x0 &= ~HSD_PAD_DPADDOWN;
+            data->buttons &= ~HSD_PAD_DPADDOWN;
             break;
         case CpuCmd_PressRight:
-            data->x0 |= HSD_PAD_DPADRIGHT;
+            data->buttons |= HSD_PAD_DPADRIGHT;
             break;
         case CpuCmd_ReleaseRight:
-            data->x0 &= ~HSD_PAD_DPADRIGHT;
+            data->buttons &= ~HSD_PAD_DPADRIGHT;
             break;
         case CpuCmd_PressLeft:
-            data->x0 |= HSD_PAD_DPADLEFT;
+            data->buttons |= HSD_PAD_DPADLEFT;
             break;
         case CpuCmd_ReleaseLeft:
-            data->x0 &= ~HSD_PAD_DPADLEFT;
+            data->buttons &= ~HSD_PAD_DPADLEFT;
             break;
         case CpuCmd_PressAFor:
-            data->x0 |= HSD_PAD_A;
+            data->buttons |= HSD_PAD_A;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_ReleaseAFor:
-            data->x0 &= ~HSD_PAD_A;
+            data->buttons &= ~HSD_PAD_A;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_PressBFor:
-            data->x0 |= HSD_PAD_B;
+            data->buttons |= HSD_PAD_B;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_ReleaseBFor:
-            data->x0 &= ~HSD_PAD_B;
+            data->buttons &= ~HSD_PAD_B;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_PressXFor:
-            data->x0 |= HSD_PAD_X;
+            data->buttons |= HSD_PAD_X;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_ReleaseXFor:
-            data->x0 &= ~HSD_PAD_X;
+            data->buttons &= ~HSD_PAD_X;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_PressYFor:
-            data->x0 |= HSD_PAD_Y;
+            data->buttons |= HSD_PAD_Y;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_ReleaseYFor:
-            data->x0 &= ~HSD_PAD_Y;
+            data->buttons &= ~HSD_PAD_Y;
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_SetLstickX:
@@ -174,7 +174,7 @@ void ftCo_800B3E04(Fighter* fp)
             data->ltrigger = *cur++;
             break;
         case CpuCmd_ReleaseAll:
-            data->x0 = 0;
+            data->buttons = 0;
             break;
         case CpuCmd_WaitFor:
             data->command_duration = (u8) *cur++;
@@ -319,14 +319,14 @@ void ftCo_800B3E04(Fighter* fp)
 /// Resets the write position to the start of the script buffer area
 void ftCo_800B462C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     data->write_pos = data->buffer;
 }
 
 /// Writes a command to the current location in the script buffer area
 void ftCo_800B463C(Fighter* fp, u8 cmd)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
     if (data->write_pos >= data->buffer + sizeof(data->buffer)) {
         HSD_ASSERTREPORT(501, 0, "command script buffer over flow!\n");
     }
@@ -370,7 +370,7 @@ void ftCo_800B4880(Fighter* fp, int script_idx)
 
 void ftCo_800B49F4(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct CpuFighter* data = &fp->cpu;
 
     ftCo_800B463C(fp, CpuCmd_Done);
 
@@ -380,8 +380,8 @@ void ftCo_800B49F4(Fighter* fp)
 
 void ftCo_800B4A78(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    data->x0 = 0;
+    struct CpuFighter* data = &fp->cpu;
+    data->buttons = 0;
     data->lstickX = 0;
     data->lstickY = 0;
     data->cstickX = 0;

@@ -36,7 +36,7 @@ void ftCo_ItemParasolFall_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_800C3B10(gobj));
     RETURN_IF(ftCo_80099A58(gobj));
     RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
-    if (fp->input.lstick.y <= p_ftCommonData->close_parasol_threshold &&
+    if (fp->input.lstick[0].y <= p_ftCommonData->close_parasol_threshold &&
         ft_80087988(gobj))
     {
         ftCo_Fall_Enter(gobj);

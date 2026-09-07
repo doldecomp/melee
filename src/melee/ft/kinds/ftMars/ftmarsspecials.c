@@ -99,11 +99,13 @@ void ftMs_SpecialAirS1_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->cmd_vars[0] != 0) {
-        if (fp->cmd_vars[1] == 0 && (fp->input.x668 & HSD_PAD_AB) != 0) {
+        if (fp->cmd_vars[1] == 0 &&
+            (fp->input.pressed_buttons & HSD_PAD_AB) != 0)
+        {
             ftMs_SpecialS_80137A9C(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_PAD_AB) != 0) {
+        if ((fp->input.pressed_buttons & HSD_PAD_AB) != 0) {
             fp->cmd_vars[1] = 1;
         }
     }
@@ -187,11 +189,13 @@ void ftMs_SpecialS2_IASA(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->cmd_vars[0] != 0) {
-        if (fp->cmd_vars[1] == 0 && (fp->input.x668 & HSD_PAD_AB) != 0) {
+        if (fp->cmd_vars[1] == 0 &&
+            (fp->input.pressed_buttons & HSD_PAD_AB) != 0)
+        {
             ftMs_SpecialS_80137E0C(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_PAD_AB) != 0) {
+        if ((fp->input.pressed_buttons & HSD_PAD_AB) != 0) {
             fp->cmd_vars[1] = 1;
         }
     }
@@ -287,7 +291,7 @@ void ftMs_SpecialS_80137A9C(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->x21EC = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.lstick.y > p_ftCommonData->x21C) {
+    if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 350;
         } else {
@@ -324,11 +328,13 @@ void ftMs_SpecialS3_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->cmd_vars[0] != 0) {
-        if (fp->cmd_vars[1] == 0 && (fp->input.x668 & HSD_PAD_AB) != 0) {
+        if (fp->cmd_vars[1] == 0 &&
+            (fp->input.pressed_buttons & HSD_PAD_AB) != 0)
+        {
             ftMs_SpecialS_80138148(gobj);
         }
     } else {
-        if ((fp->input.x668 & HSD_PAD_AB) != 0) {
+        if ((fp->input.pressed_buttons & HSD_PAD_AB) != 0) {
             fp->cmd_vars[1] = 1;
         }
     }
@@ -425,14 +431,14 @@ void ftMs_SpecialS_80137E0C(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->x21EC = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.lstick.y > p_ftCommonData->x21C) {
+    if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 352;
         } else {
             msid = 361;
         }
     } else {
-        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
+        if (fp->input.lstick[0].y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
                 msid = 354;
             } else {
@@ -560,14 +566,14 @@ void ftMs_SpecialS_80138148(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->x21EC = &ftMs_SpecialS_80137A68;
 
-    if (fp->input.lstick.y > p_ftCommonData->x21C) {
+    if (fp->input.lstick[0].y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground) {
             msid = 355;
         } else {
             msid = 364;
         }
     } else {
-        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
+        if (fp->input.lstick[0].y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground) {
                 msid = 357;
             } else {

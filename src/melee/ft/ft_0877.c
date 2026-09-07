@@ -16,13 +16,13 @@
 bool ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->input.held_inputs & arg1);
+    return TEST(fp->input.held_buttons[0] & arg1);
 }
 
 bool ft_80087818(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return TEST(fp->input.x668 & arg1);
+    return TEST(fp->input.pressed_buttons & arg1);
 }
 
 bool ft_80087838(HSD_GObj* gobj)
@@ -231,16 +231,16 @@ void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
 void ft_80087BC0(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_800A101C(fp, arg1, fp->x1A88.level, fp->x1A88.x14);
+    ftCo_800A101C(fp, arg1, fp->cpu.level, fp->cpu.x14);
 }
 
 void ft_80087BEC(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_800A101C(fp, fp->x1A88.xC, arg1, fp->x1A88.x14);
+    ftCo_800A101C(fp, fp->cpu.xC, arg1, fp->cpu.x14);
 }
 
-s32 ft_80087C1C(void)
+s32 ft_GetFtKindMask(void)
 {
     HSD_GObj* gobj;
     s32 ftKind;

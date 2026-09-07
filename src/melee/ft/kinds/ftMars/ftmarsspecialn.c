@@ -172,7 +172,7 @@ void ftMs_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 static inline void doLoopIasa(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         fp->cmd_vars[0] = 0;
         cb(gobj);
     }

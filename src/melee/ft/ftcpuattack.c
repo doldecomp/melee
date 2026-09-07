@@ -151,8 +151,7 @@ static inline s32 ftCo_CpuAttackValue(s32 value, s32 arg1, s32 arg2, s32 arg3,
 #define ftCo_CpuAttackValue(value, ...) (value)
 #endif
 
-static inline int ftCo_CpuSelectAttack(Fighter* fp,
-                                       struct Fighter_x1A88_t* cpu,
+static inline int ftCo_CpuSelectAttack(Fighter* fp, struct CpuFighter* cpu,
                                        const ftCo_AttackEntry* entry)
 {
     cpu->x6C.x = fp->x34_scale.y * entry->x08;
@@ -164,7 +163,7 @@ static inline int ftCo_CpuSelectAttack(Fighter* fp,
 
 static inline void ftCo_CpuClearTargetAndFinish(Fighter* fp)
 {
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
 
     cpu->x44 = NULL;
     cpu->x18 = cpu->x1C;
@@ -177,7 +176,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x28..0x34 */
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel; /* layout/reg pressure; unused */
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     s32 count;
     s32 i;
     s32 j;
@@ -234,13 +233,13 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.gravity;
     if (target->facing_dir > 0.0) {
-        rangeF = target->x1A88.x55C;
-        rangeB = target->x1A88.x560;
+        rangeF = target->cpu.x55C;
+        rangeB = target->cpu.x560;
     } else {
-        rangeF = target->x1A88.x560;
-        rangeB = target->x1A88.x55C;
+        rangeF = target->cpu.x560;
+        rangeB = target->cpu.x55C;
     }
-    x568 = target->x1A88.x568;
+    x568 = target->cpu.x568;
     count = 0;
     while (list->cmd) {
         f32 dirx;
@@ -382,7 +381,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x2C..0x38 */
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     s32 count;
     s32 i;
     s32 j;
@@ -442,13 +441,13 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.gravity;
     if (target->facing_dir > 0.0) {
-        rangeF = target->x1A88.x55C;
-        rangeB = target->x1A88.x560;
+        rangeF = target->cpu.x55C;
+        rangeB = target->cpu.x560;
     } else {
-        rangeF = target->x1A88.x560;
-        rangeB = target->x1A88.x55C;
+        rangeF = target->cpu.x560;
+        rangeB = target->cpu.x55C;
     }
-    x568 = target->x1A88.x568;
+    x568 = target->cpu.x568;
     count = 0;
     while (list->cmd) {
         f32 dirx;
@@ -594,7 +593,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     Item* x50 = arg1;
     ftCo_AttackEntry sp34[32];
     ftCo_AttackEntry* list = arg2;
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     s32 count;
     s32 i;
     s32 j;
@@ -860,7 +859,7 @@ bool ftCo_800B630C(Fighter* fp)
 void ftCo_800B63D8(Fighter* fp)
 {
     f32 temp_f1 = HSD_Randf();
-    switch (fp->x1A88.level) {
+    switch (fp->cpu.level) {
     case 0:
         ftCo_800B46B8(fp, CpuCmd_WaitFor, (int) (40 * temp_f1) + 5);
         break;
@@ -901,8 +900,8 @@ static inline void ftCo_CpuTapRAndWaitFiveFrames(Fighter* fp)
 
 void ftCo_800B658C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
-    Fighter* temp_r0 = fp->x1A88.x44;
+    struct CpuFighter* temp_r31 = &fp->cpu;
+    Fighter* temp_r0 = fp->cpu.x44;
 
     if (temp_r0 == NULL) {
         ftCo_CpuClearTargetAndFinish(fp);
@@ -1012,7 +1011,7 @@ static inline void ftCo_CpuPressAWithLstickX(Fighter* fp, s8 stick_x)
 void ftCo_800B683C(Fighter* fp)
 {
     u8 _[0xC];
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
     bool var_r30;
 
     Vec3 sp78;
@@ -1189,10 +1188,10 @@ void ftCo_800B7180(Fighter* fp)
 {
     Fighter* temp_r30;
     s32 temp_r0;
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
 
-    temp_r31 = &fp->x1A88;
-    temp_r30 = fp->x1A88.x44;
+    temp_r31 = &fp->cpu;
+    temp_r30 = fp->cpu.x44;
     if (temp_r30 == NULL) {
         temp_r31->x18 = temp_r31->x1C;
         temp_r31->xF8_b34 = 0;
@@ -1243,8 +1242,8 @@ int ftCo_800B732C(Fighter* fp)
     f32 temp_f1;
     f32 temp_f31;
     f32 temp_f31_2;
-    struct Fighter_x1A88_t* temp_r29 = &fp->x1A88;
-    Fighter* temp_r0 = fp->x1A88.x44;
+    struct CpuFighter* temp_r29 = &fp->cpu;
+    Fighter* temp_r0 = fp->cpu.x44;
 
     if (temp_r0 == NULL) {
         return 0;
@@ -1337,7 +1336,7 @@ int ftCo_800B7638(Fighter* fp)
 
     PAD_STACK(4);
 
-    target = fp->x1A88.x44;
+    target = fp->cpu.x44;
     if (target == NULL) {
         return 0;
     }
@@ -1416,7 +1415,7 @@ static inline bool ftCo_CpuCanUseRangedAttack(Fighter* fp, Fighter* target,
 void ftCo_800B77E8(Fighter* fp)
 {
     u8 operand_pad[0x28];
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     ftCo_CollData c1;
     ftCo_CollData c2;
     ftCo_CollData c3;
@@ -1436,19 +1435,19 @@ void ftCo_800B77E8(Fighter* fp)
     f32 y;
 
     if (cpu->xC == 7 || ftCo_800A1C44(fp)) {
-        struct Fighter_x1A88_t* tmp = &fp->x1A88;
-        if (fp->x1A88.xEC < 8U) {
+        struct CpuFighter* tmp = &fp->cpu;
+        if (fp->cpu.xEC < 8U) {
             tmp->xCC_array[tmp->xEC] = 0x34;
             tmp->xEC++;
         }
     }
     switch (fp->kind) {
     case FTKIND_MARIO:
-        target = fp->x1A88.x44;
+        target = fp->cpu.x44;
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c1, 22.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x1F;
                 tmp->xEC++;
                 return;
@@ -1457,11 +1456,11 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_FOX:
     case FTKIND_FALCO:
-        target = fp->x1A88.x44;
+        target = fp->cpu.x44;
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c2, 62.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x1B;
                 tmp->xEC++;
                 return;
@@ -1470,11 +1469,11 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_CAPTAIN:
     case FTKIND_GANON:
-        target = *(target_pp = &fp->x1A88.x44);
+        target = *(target_pp = &fp->cpu.x44);
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c3, 102.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
             }
@@ -1482,21 +1481,21 @@ void ftCo_800B77E8(Fighter* fp)
         target = *target_pp;
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c4, 58.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            struct CpuFighter* tmp = &fp->cpu;
             u8* xec;
-            if (*(xec = &fp->x1A88.xEC) < 8U) {
+            if (*(xec = &fp->cpu.xEC) < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x1B;
                 tmp->xEC++;
             }
             {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x37;
                     tmp->xEC++;
                 }
             }
             {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x38;
                     tmp->xEC++;
@@ -1507,11 +1506,11 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
-        target = fp->x1A88.x44;
+        target = fp->cpu.x44;
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c5, 57.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x1B;
                 tmp->xEC++;
                 return;
@@ -1520,19 +1519,19 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_KOOPA:
         if (fp->ground_or_air == GA_Ground) {
-            target = fp->x1A88.x44;
+            target = fp->cpu.x44;
             can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c6, 27.0f);
             if (can_attack != 0) {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                struct CpuFighter* tmp = &fp->cpu;
+                if (fp->cpu.xEC < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x26;
                     tmp->xEC++;
                     return;
                 }
             }
         } else if (!cpu->xFA_b5) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
                 return;
@@ -1541,19 +1540,19 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_GKOOPS:
         if (fp->ground_or_air == GA_Ground) {
-            target = fp->x1A88.x44;
+            target = fp->cpu.x44;
             can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c7, 53.0f);
             if (can_attack != 0) {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                struct CpuFighter* tmp = &fp->cpu;
+                if (fp->cpu.xEC < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x26;
                     tmp->xEC++;
                     return;
                 }
             }
         } else if (!cpu->xFA_b5) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
                 return;
@@ -1562,19 +1561,19 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_YOSHI:
         if (fp->ground_or_air == GA_Ground) {
-            target = fp->x1A88.x44;
+            target = fp->cpu.x44;
             can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c8, 16.0f);
             if (can_attack != 0) {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                struct CpuFighter* tmp = &fp->cpu;
+                if (fp->cpu.xEC < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x26;
                     tmp->xEC++;
                     return;
                 }
             }
         } else if (!cpu->xFA_b5) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
                 return;
@@ -1582,11 +1581,11 @@ void ftCo_800B77E8(Fighter* fp)
         }
         break;
     case FTKIND_LUIGI:
-        target = fp->x1A88.x44;
+        target = fp->cpu.x44;
         can_attack = ftCo_CpuCanUseRangedAttack(fp, target, &c9, 60.0f);
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
                 return;
@@ -1595,7 +1594,7 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_PEACH:
         /// @todo Sharing this last case shifts every collision stack slot.
-        target = fp->x1A88.x44;
+        target = fp->cpu.x44;
         if (target != NULL && mpCheckAll(&c10.p, &c10.line, &c10.flags, &c10.n,
                                          -1, -1, fp->cur_pos.x, fp->cur_pos.y,
                                          target->cur_pos.x, target->cur_pos.y))
@@ -1629,8 +1628,8 @@ void ftCo_800B77E8(Fighter* fp)
             } while (0);
         }
         if (can_attack != 0) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
                 return;
@@ -1639,8 +1638,8 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_KIRBY:
         if (fp->ground_or_air == GA_Air && !cpu->xFA_b5) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            if (fp->x1A88.xEC < 8U) {
+            struct CpuFighter* tmp = &fp->cpu;
+            if (fp->cpu.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
                 tmp->xEC++;
             }
@@ -1648,22 +1647,22 @@ void ftCo_800B77E8(Fighter* fp)
         charge = fp->u.gw.x2238_panicCharge;
         if (charge == 3 || charge == 0xD || charge == 0x10) {
             {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                struct CpuFighter* tmp = &fp->cpu;
+                if (fp->cpu.xEC < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x11;
                     tmp->xEC++;
                     return;
                 }
             }
         } else {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            struct CpuFighter* tmp = &fp->cpu;
             u8* xec;
-            if (*(xec = &fp->x1A88.xEC) < 8U) {
+            if (*(xec = &fp->cpu.xEC) < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x12;
                 tmp->xEC++;
             }
             if (fp->x34_scale.y < cpu_target->x34_scale.y) {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x11;
                     tmp->xEC++;
@@ -1678,8 +1677,8 @@ void ftCo_800B77E8(Fighter* fp)
 
 bool ftCo_800B885C(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r4 = &fp->x1A88;
-    switch (fp->x1A88.level) {
+    struct CpuFighter* temp_r4 = &fp->cpu;
+    switch (fp->cpu.level) {
     case 0:
         if (temp_r4->x80 % 300 > 240) {
             return false;
@@ -1711,8 +1710,8 @@ bool ftCo_800B885C(Fighter* fp)
 
 bool ftCo_800B89CC(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
-    Fighter* tmp = fp->x1A88.x44;
+    struct CpuFighter* temp_r31 = &fp->cpu;
+    Fighter* tmp = fp->cpu.x44;
 
     PAD_STACK(8);
 
@@ -1745,7 +1744,7 @@ bool ftCo_800B8A9C(Fighter* fp)
     Vec3 sp1C;
     Fighter** target_pp;
     Fighter* target3;
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     Fighter* target;
     Item* item;
     float weapon_reach;
@@ -1766,38 +1765,38 @@ bool ftCo_800B8A9C(Fighter* fp)
         return false;
     }
     {
-        Fighter* target2 = *(target_pp = &fp->x1A88.x44);
+        Fighter* target2 = *(target_pp = &fp->cpu.x44);
         if (target2->motion_id >= ftCo_MS_Catch &&
             target2->motion_id <= ftCo_MS_EscapeAir)
         {
             u8* xec;
-            if (*(xec = &fp->x1A88.xEC) < 8U) {
+            if (*(xec = &fp->cpu.xEC) < 8U) {
                 cpu->xCC_array[cpu->xEC] = 0x28;
                 cpu->xEC++;
             }
             {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x29;
                     tmp->xEC++;
                 }
             }
         } else if (target2->x34_scale.y > fp->x34_scale.y) {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            struct CpuFighter* tmp = &fp->cpu;
             u8* xec;
-            if (*(xec = &fp->x1A88.xEC) < 8U) {
+            if (*(xec = &fp->cpu.xEC) < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x28;
                 tmp->xEC++;
             }
             {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x29;
                     tmp->xEC++;
                 }
             }
             if (fp->kind == FTKIND_KIRBY) {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                struct CpuFighter* tmp = &fp->cpu;
                 if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x11;
                     tmp->xEC++;
@@ -1818,14 +1817,14 @@ bool ftCo_800B8A9C(Fighter* fp)
         goto done;
     }
     if (ftCo_800A3134(target) != 0 || ftCo_800A3200(target)) {
-        struct Fighter_x1A88_t* tmp = &fp->x1A88;
+        struct CpuFighter* tmp = &fp->cpu;
         u8* xc8;
-        if (*(xc8 = &fp->x1A88.xC8) < 8U) {
+        if (*(xc8 = &fp->cpu.xC8) < 8U) {
             tmp->xA8_array[tmp->xC8] = 0xa;
             tmp->xC8++;
         }
         {
-            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            struct CpuFighter* tmp = &fp->cpu;
             if (*xc8 < 8U) {
                 tmp->xA8_array[tmp->xC8] = 0xe;
                 tmp->xC8++;
@@ -1929,10 +1928,10 @@ done:
 
 void ftCo_800B9020(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
     PAD_STACK(8);
 
-    if (fp->x1A88.x44 == NULL) {
+    if (fp->cpu.x44 == NULL) {
         ftCo_CpuClearTargetAndFinish(fp);
         return;
     }
@@ -1991,7 +1990,7 @@ void ftCo_800B9020(Fighter* fp)
 
 void ftCo_800B920C(Fighter* fp)
 {
-    Fighter* temp_r3 = fp->x1A88.x44;
+    Fighter* temp_r3 = fp->cpu.x44;
     PAD_STACK(0x10);
 
     if (temp_r3 == NULL) {
@@ -2009,7 +2008,7 @@ void ftCo_800B920C(Fighter* fp)
 void ftCo_800B92D4(Fighter* fp)
 {
     PAD_STACK(4 * 4);
-    if (fp->x1A88.x44 == NULL) {
+    if (fp->cpu.x44 == NULL) {
         ftCo_CpuClearTargetAndFinish(fp);
     } else {
         ftCo_800B46B8(fp, 0x94, 0x7F);
@@ -2019,8 +2018,8 @@ void ftCo_800B92D4(Fighter* fp)
 
 void ftCo_800B9340(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r30 = &fp->x1A88;
-    Fighter* temp_r29 = fp->x1A88.x44;
+    struct CpuFighter* temp_r30 = &fp->cpu;
+    Fighter* temp_r29 = fp->cpu.x44;
     mp_UnkStruct0* temp_r3 = mpIsland_8005AC14(&fp->cur_pos, -100.0F);
 
     if (temp_r3 == NULL || temp_r29 == NULL ||
@@ -2098,7 +2097,7 @@ void ftCo_800B9504(Fighter* fp)
 
 void ftCo_800B9704(Fighter* fp)
 {
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     float rand = HSD_Randf();
     cpu->x34 = (10 - cpu->level) * (rand * 15.0F + 15.0F) + 10.0F;
     if (cpu->xC == 7) {
@@ -2108,8 +2107,8 @@ void ftCo_800B9704(Fighter* fp)
 
 bool ftCo_800B9790(Fighter* fp, f32 arg1, f32 arg2)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
-    Fighter* temp_r30 = fp->x1A88.x44;
+    struct CpuFighter* temp_r31 = &fp->cpu;
+    Fighter* temp_r30 = fp->cpu.x44;
 
     if (fp->ground_or_air == GA_Air) {
         if (arg1 < -0.6981316953897476 && arg1 > -0.8726646192371845 &&
@@ -2139,8 +2138,8 @@ bool ftCo_800B9790(Fighter* fp, f32 arg1, f32 arg2)
 
 bool ftCo_800B98C8(Fighter* fp, f32 arg1, f32 arg2)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
-    Fighter* temp_r30 = fp->x1A88.x44;
+    struct CpuFighter* temp_r31 = &fp->cpu;
+    Fighter* temp_r30 = fp->cpu.x44;
 
     if (fp->ground_or_air == GA_Air) {
         return false;
@@ -2179,7 +2178,7 @@ bool ftCo_800B9A04(Fighter* fp, Item* arg1, f32 arg2, f32 arg3)
     f32 temp_f1;
     f32 temp_f1_2;
     bool var_r0;
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
 
     PAD_STACK(4);
 
@@ -2263,18 +2262,18 @@ bool ftCo_800B9A04(Fighter* fp, Item* arg1, f32 arg2, f32 arg3)
 
 bool ftCo_800B9CBC(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31;
+    struct CpuFighter* temp_r31;
     Fighter* temp_r29;
     f32 temp_f31;
     f32 temp_f30;
 
-    struct Fighter_x1A88_t* temp_r3;
+    struct CpuFighter* temp_r3;
     bool var_r3;
     f32 var_f2;
 
     PAD_STACK(8);
 
-    temp_r31 = &fp->x1A88;
+    temp_r31 = &fp->cpu;
     temp_r29 = temp_r31->x44;
     temp_r31->xA4 = 0;
     if (temp_r29 == NULL) {
@@ -2313,7 +2312,7 @@ bool ftCo_800B9CBC(Fighter* fp)
         var_r3 = ftCo_800B98C8(fp, temp_f31, temp_f30);
         break;
     case FTKIND_SAMUS:
-        temp_r3 = &fp->x1A88;
+        temp_r3 = &fp->cpu;
         if (fp->ground_or_air == GA_Ground) {
             var_r3 = false;
         } else if (temp_f31 < -0.7853981573134661) {
@@ -2353,7 +2352,7 @@ bool ftCo_800B9F6C(Fighter* fp)
 
 void ftCo_800B9F90(Fighter* fp)
 {
-    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    struct CpuFighter* cpu = &fp->cpu;
     int temp_r31;
 
     if (fp->motion_id == ftCo_MS_Guard) {
@@ -2531,7 +2530,7 @@ static inline bool ftCo_CpuIsSpotDodge(ftCommon_MotionState id)
 
 static inline void ftCo_CpuFireBlaster(Fighter* fp)
 {
-    int delay = 9 - fp->x1A88.level;
+    int delay = 9 - fp->cpu.level;
 
     ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
     ftCo_800B46B8(fp, CpuCmd_SetLstickY, -0x50);
@@ -2563,10 +2562,10 @@ void ftCo_800BA9A0(Fighter* fp)
     s32 temp_r30;
     s32 temp_r30_5;
     s32 temp_r3;
-    struct Fighter_x1A88_t* temp_r5;
+    struct CpuFighter* temp_r5;
     u32 temp_r4;
 
-    temp_r5 = &fp->x1A88;
+    temp_r5 = &fp->cpu;
     temp_r3 = fp->motion_id;
     if (ftCo_CpuIsRollOrAirDodge(temp_r3) || ftCo_CpuIsSpotDodge(temp_r3)) {
         ftCo_800A0C8C(fp);
@@ -2684,7 +2683,7 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     s32 count;
     HitCapsuleState state;
     bool result;
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
 
     PAD_STACK(8);
 
@@ -2708,8 +2707,8 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     }
 
     {
-        struct Fighter_x1A88_t* cpu = &fp->x1A88;
-        if (fp->x1A88.level < 3) {
+        struct CpuFighter* cpu = &fp->cpu;
+        if (fp->cpu.level < 3) {
             count = (s32) (20.0f * HSD_Randf()) + 10;
         } else if (cpu->level < 6) {
             count = (s32) (10.0f * HSD_Randf()) + 5;
@@ -2816,7 +2815,7 @@ bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
     f32 temp_f2;
     f32 temp_f3;
     f32 temp_f4;
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
 
     switch (arg1->kind) {
     case FTKIND_GKOOPS:
@@ -2831,7 +2830,7 @@ bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
                 return false;
             }
             temp_f2 = arg1->cur_pos.x;
-            temp_f1 = arg1->x1A88.x564;
+            temp_f1 = arg1->cpu.x564;
             temp_f3 = temp_r31->x564;
             temp_f4 = fp->cur_pos.x;
             if (temp_f2 + temp_f1 + temp_f3 > temp_f4 &&
@@ -2841,7 +2840,7 @@ bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
             }
         } else if (arg1->motion_id == ftCo_MS_AttackHi4) {
             temp_f2 = arg1->cur_pos.x;
-            temp_f1 = arg1->x1A88.x564;
+            temp_f1 = arg1->cpu.x564;
             temp_f3 = temp_r31->x564;
             temp_f4 = fp->cur_pos.x;
             if (temp_f2 + temp_f1 + temp_f3 > temp_f4 &&
@@ -2866,7 +2865,7 @@ bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
                 return false;
             }
             temp_f2 = arg1->cur_pos.x;
-            temp_f1 = arg1->x1A88.x564;
+            temp_f1 = arg1->cpu.x564;
             temp_f3 = temp_r31->x564;
             temp_f4 = fp->cur_pos.x;
             if (temp_f2 + temp_f1 + temp_f3 > temp_f4 &&
@@ -2893,7 +2892,7 @@ int ftCo_800BB9B4(Fighter* fp)
 {
     Vec3 sp24;
 
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    struct CpuFighter* temp_r31 = &fp->cpu;
     Fighter_GObj* var_r29;
     Item_GObj* var_r29_2;
     Item* temp_r28;

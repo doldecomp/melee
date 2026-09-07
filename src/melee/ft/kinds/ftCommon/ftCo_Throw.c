@@ -73,8 +73,8 @@ static inline bool ftCo_800DD1E4_inline1(Fighter* fp);
 static inline bool ftCo_800DD1E4_inline1(Fighter* fp)
 {
     float thresh = p_ftCommonData->x98;
-    if ((fp->input.lstick1.x < thresh && fp->input.lstick.x >= thresh) ||
-        (fp->input.lstick1.x > -thresh && fp->input.lstick.x <= -thresh))
+    if ((fp->input.lstick[1].x < thresh && fp->input.lstick[0].x >= thresh) ||
+        (fp->input.lstick[1].x > -thresh && fp->input.lstick[0].x <= -thresh))
     {
         return true;
     }
@@ -85,7 +85,7 @@ static inline bool ftCo_800DD1E4_inline2(Fighter* fp);
 static inline bool ftCo_800DD1E4_inline2(Fighter* fp)
 {
     float thresh = p_ftCommonData->attackhi3_stick_threshold_y;
-    if (fp->input.lstick1.y < thresh && fp->input.lstick.y >= thresh) {
+    if (fp->input.lstick[1].y < thresh && fp->input.lstick[0].y >= thresh) {
         return true;
     }
     return false;
@@ -95,7 +95,7 @@ static inline bool ftCo_800DD1E4_inline3(Fighter* fp);
 static inline bool ftCo_800DD1E4_inline3(Fighter* fp)
 {
     float thresh = p_ftCommonData->xB0;
-    if (fp->input.lstick1.y > thresh && fp->input.lstick.y <= thresh) {
+    if (fp->input.lstick[1].y > thresh && fp->input.lstick[0].y <= thresh) {
         return true;
     }
     return false;
@@ -106,13 +106,13 @@ bool ftCo_800DD1E4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = fp->motion_id;
     if (ftCo_800DD1E4_inline1(fp)) {
-        if (fp->input.lstick.x * fp->facing_dir > 0.0f) {
+        if (fp->input.lstick[0].x * fp->facing_dir > 0.0f) {
             msid = 219;
         } else {
             msid = 220;
         }
     } else if (ftCo_800DF7F4(fp)) {
-        if (fp->input.cstick.x * fp->facing_dir > 0.0f) {
+        if (fp->input.cstick[0].x * fp->facing_dir > 0.0f) {
             msid = 219;
         } else {
             msid = 220;

@@ -46,9 +46,9 @@ void ft_800CB6EC(Fighter* fp, s32 arg1)
 bool ft_did_jump(Fighter* fp, bool arg1)
 {
     if (fp->x1968_jumpsUsed < fp->co_attrs.max_jumps &&
-        ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
+        ((fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold &&
           fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window) ||
-         fp->input.x668 & HSD_PAD_XY) &&
+         fp->input.pressed_buttons & HSD_PAD_XY) &&
         !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
     {
         return true;
@@ -93,7 +93,7 @@ bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
         if (ft_800D2D0C(gobj)) {
             Vec3 v;
             PAD_STACK(8);
-            v.x = fp->input.lstick.x * co_attrs->air_jump_h_multiplier;
+            v.x = fp->input.lstick[0].x * co_attrs->air_jump_h_multiplier;
             v.y = co_attrs->jump_v_initial_velocity *
                   co_attrs->air_jump_v_multiplier;
             v.z = 0.0F;
@@ -166,10 +166,10 @@ void ftCo_JumpAerial_Enter_Basic(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     fp->cmd_vars[0] = 1;
-    msid = (fp->input.lstick.x * fp->facing_dir) > -p_ftCommonData->x78
+    msid = (fp->input.lstick[0].x * fp->facing_dir) > -p_ftCommonData->x78
                ? ftCo_MS_JumpAerialF
                : ftCo_MS_JumpAerialB;
-    vel.x = fp->input.lstick.x * co_attrs->air_jump_h_multiplier;
+    vel.x = fp->input.lstick[0].x * co_attrs->air_jump_h_multiplier;
     vel.y =
         co_attrs->jump_v_initial_velocity * co_attrs->air_jump_v_multiplier;
     vel.z = 0.0F;
@@ -187,14 +187,14 @@ void ftNs_JumpAerial_Enter(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     fp->cmd_vars[0] = 1;
-    msid = (fp->input.lstick.x * fp->facing_dir) > -p_ftCommonData->x78
+    msid = (fp->input.lstick[0].x * fp->facing_dir) > -p_ftCommonData->x78
                ? ftCo_MS_JumpAerialF
                : ftCo_MS_JumpAerialB;
 
     ftCo_800CBAC4(gobj, msid, &vel, true);
     fp->phys_cb = (HSD_GObjEvent) ftNs_JumpAerial_Phys_Cb;
     fp->mv.co.jumpaerial.init_h_vel =
-        fp->input.lstick.x * co_attrs_r31->air_jump_h_multiplier;
+        fp->input.lstick[0].x * co_attrs_r31->air_jump_h_multiplier;
 }
 
 void ftYs_JumpAerial_Enter(Fighter_GObj* gobj)
@@ -208,14 +208,14 @@ void ftYs_JumpAerial_Enter(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     fp->cmd_vars[0] = 1;
-    vel.x = fp->input.lstick.x * fp->co_attrs.air_jump_h_multiplier;
+    vel.x = fp->input.lstick[0].x * fp->co_attrs.air_jump_h_multiplier;
     vel.y = 0.0F;
     vel.z = 0.0F;
     ftCo_800CBAC4(gobj, ftCo_MS_JumpAerialF, &vel, true);
     fp->phys_cb = (HSD_GObjEvent) ftCo_JumpAerial_Phys_Cb;
     fp->anim_cb = (HSD_GObjEvent) ftYs_JumpAerial_Anim_Cb;
     fp->dmg.armor1 = ys_attrs->x8;
-    if ((fp->input.lstick.x * fp->facing_dir) < -ys_attrs->x4) {
+    if ((fp->input.lstick[0].x * fp->facing_dir) < -ys_attrs->x4) {
         fp->mv.co.jumpaerial.x0 = ys_attrs->x0;
     } else {
         fp->mv.co.jumpaerial.x0 = 0;
@@ -236,10 +236,11 @@ void ftPe_JumpAerial_Enter(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp_r31);
     fp_r31->cmd_vars[0] = 1;
-    msid = (fp_r31->input.lstick.x * fp_r31->facing_dir) > -p_ftCommonData->x78
-               ? ftCo_MS_JumpAerialF
-               : ftCo_MS_JumpAerialB;
-    vel.x = fp_r31->input.lstick.x * co_attrs->air_jump_h_multiplier;
+    msid =
+        (fp_r31->input.lstick[0].x * fp_r31->facing_dir) > -p_ftCommonData->x78
+            ? ftCo_MS_JumpAerialF
+            : ftCo_MS_JumpAerialB;
+    vel.x = fp_r31->input.lstick[0].x * co_attrs->air_jump_h_multiplier;
     vel.y = 0.0F;
     vel.z = 0.0F;
     ftCo_800CBAC4(gobj, msid, &vel, true);
@@ -257,10 +258,11 @@ void ftMt_JumpAerial_Enter(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp_r31);
     fp_r31->cmd_vars[0] = 1;
-    msid = (fp_r31->input.lstick.x * fp_r31->facing_dir) > -p_ftCommonData->x78
-               ? ftCo_MS_JumpAerialF
-               : ftCo_MS_JumpAerialB;
-    vel.x = fp_r31->input.lstick.x * co_attrs->air_jump_h_multiplier;
+    msid =
+        (fp_r31->input.lstick[0].x * fp_r31->facing_dir) > -p_ftCommonData->x78
+            ? ftCo_MS_JumpAerialF
+            : ftCo_MS_JumpAerialB;
+    vel.x = fp_r31->input.lstick[0].x * co_attrs->air_jump_h_multiplier;
     vel.y = 0.0F;
     vel.z = 0.0F;
     ftCo_800CBAC4(gobj, msid, &vel, true);

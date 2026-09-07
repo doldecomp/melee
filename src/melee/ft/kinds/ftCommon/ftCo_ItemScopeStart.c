@@ -165,13 +165,13 @@ void fn_800D79B4(HSD_GObj* gobj, void (*cb_ground)(HSD_GObj*),
 
     // Access 0x2344 (Flag) via overlay
     if (fp_ovl->flag == 0) {
-        if (fp->input.held_inputs & HSD_PAD_A) {
+        if (fp->input.held_buttons[0] & HSD_PAD_A) {
             // Access 0x2340 (Timer) via overlay
             fp_ovl->timer += 1.0F;
         }
     }
 
-    if (!(fp->input.held_inputs & HSD_PAD_A)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_A)) {
         fp_ovl->flag = 1;
     }
 

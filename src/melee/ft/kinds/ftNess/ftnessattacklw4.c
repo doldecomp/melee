@@ -60,7 +60,7 @@ void ftNs_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_PAD_A) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_A) == false) {
         fp->mv.ns.attacklw4.isChargeDisable = true;
     }
     if (fp->allow_interrupt != 0) {
@@ -118,7 +118,7 @@ void ftNs_AttackLw4Charge_IASA(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.held_inputs & HSD_PAD_A) == false) {
+    if ((fp->input.held_buttons[0] & HSD_PAD_A) == false) {
         ftNs_AttackLw4Release_Enter(gobj);
     }
 }

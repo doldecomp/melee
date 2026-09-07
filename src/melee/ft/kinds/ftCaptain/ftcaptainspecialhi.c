@@ -77,7 +77,7 @@ void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         fp->mv.ca.specialhi.x2_b1 = true;
         {
-            float lstick_x = fp->input.lstick.x;
+            float lstick_x = fp->input.lstick[0].x;
             if (lstick_x < 0) {
                 lstick_x = -lstick_x;
             }
@@ -167,7 +167,7 @@ static void doAirIASA(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.ca.specialhi.x2_b1 = true;
     {
-        float lstick_x = fp->input.lstick.x;
+        float lstick_x = fp->input.lstick[0].x;
         if (lstick_x < 0) {
             lstick_x = -lstick_x;
         }
