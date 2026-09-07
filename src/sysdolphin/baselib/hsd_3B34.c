@@ -194,6 +194,12 @@ extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 static s32 lbl_804D6398 = 3;
 
+static inline void jpeg_luma_address(s32** dest, u8* work, u32 offset)
+{
+    work += 0x118;
+    *dest = &((s32*) work)[offset / 4];
+}
+
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
     s32 chroma_x;
@@ -219,27 +225,25 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
                 s32 dst_row;
                 s32 src_row;
-                s32 row_part;
 
-                row_part = (chroma_y & 1) * 4;
-                dst_row = tile_offset + row_part + (chroma_y & 2) * 16;
+                dst_row =
+                    tile_offset + (chroma_y & 1) * 4 + (chroma_y & 2) * 16;
                 src_row = (chroma_y & 1) * 32 + (chroma_y & 2) * stride;
 
                 for (chroma_x = 0; chroma_x < 4; chroma_x++) {
+                    s32 chroma_index = (chroma_x & 1) + (chroma_x & 2) * 4;
                     pixel = src[((chroma_x & 1) * 2 + (chroma_x & 2) * 4) +
                                 src_row];
 
                     ((JpegWork*) HSD_804D2648_BUF)
-                        ->data
-                        .x518[dst_row + (chroma_x & 1U) + (chroma_x & 2) * 4] =
+                        ->data.x518[(u32) chroma_index + dst_row] =
                         (s32) ((0.5f * (f32) ((pixel * 8) & 0xF8)) +
                                ((-0.1687f * (f32) ((pixel >> 8U) & 0xF8)) -
                                 (0.3313f * (f32) ((pixel >> 3U) & 0xFC))));
                     pixel = src[((chroma_x & 1) * 2 + (chroma_x & 2) * 4) +
                                 src_row];
                     ((JpegWork*) HSD_804D2648_BUF)
-                        ->data
-                        .x618[dst_row + (chroma_x & 1) + (chroma_x & 2) * 4] =
+                        ->data.x618[chroma_index + dst_row] =
                         (s32) (((0.5f * (f32) ((pixel >> 8U) & 0xF8)) -
                                 (0.4187f * (f32) ((pixel >> 3U) & 0xFC))) -
                                (0.0813f * (f32) ((pixel * 8) & 0xF8)));
@@ -250,22 +254,13 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                 for (luma_x = 0; luma_x < 4; luma_x++) {
                     s32* luma_base;
 
-                    for (pixel_index = 0;
-                         luma_base =
-                             (s32*) (HSD_804D2648_BUF +
-                                     (tile_x * 4 +
-                                      ((tile_y * 4 + luma_y) * 8 + luma_x)) *
-                                         4 +
-                                     0x118),
-                        pixel_index != 4;
-                         pixel_index++)
-                    {
-                        s32 row_offset = (pixel_index & 2) * stride;
-
-                        {
-                            s32 column_offset = (pixel_index & 1) * 0x20;
-                            pixel = src[column_offset + row_offset];
-                        }
+                    jpeg_luma_address(
+                        &luma_base, HSD_804D2648_BUF,
+                        (tile_x * 4 + ((tile_y * 4 + luma_y) * 8 + luma_x)) *
+                            4);
+                    for (pixel_index = 0; pixel_index != 4; pixel_index++) {
+                        pixel = src[(pixel_index & 1) * 0x20 +
+                                    (pixel_index & 2) * stride];
                         luma_base[pixel_index * 64] =
                             (s32) ((s32) ((0.114f *
                                            (f32) ((pixel * 8) & 0xF8)) +
