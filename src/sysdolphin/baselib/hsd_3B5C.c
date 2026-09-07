@@ -582,8 +582,9 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                         luminance = luma_base[block * 64];
                         {
                             chroma_column = (block % 2) * 4;
-                            chroma = base + ((chroma_row + ((block / 2) << 5) +
-                                              chroma_column) *
+                            /* Preserve the add operand order. */
+                            chroma = base + (((chroma_row + chroma_column) -
+                                              (-((block / 2) << 5))) *
                                              4);
                         }
                         cr = ((JpegState*) chroma)->work.cr[0];
