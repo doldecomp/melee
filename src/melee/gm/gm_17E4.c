@@ -283,7 +283,7 @@ void gm_8017E7FC(u8 matchResult)
     bool cond;
 
     if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.x0.cpu_level >= 2 &&
-        r31->x0.xC.x20 + gm_8016AEDC() < 0xFD20U)
+        r31->x0.xC.x20 + gm_GetFrameCount() < 0xFD20U)
     {
         cond = true;
     } else {
@@ -326,7 +326,7 @@ void fn_8017E8A4(int arg0_int)
 
     if (gm->x24C8.x4_5) {
         main_data = gmMainLib_8015CDD4();
-        total_time = adv->x0.xC.x20 + gm_8016AEDC();
+        total_time = adv->x0.xC.x20 + gm_GetFrameCount();
         ((u8_bits*) &flags[0])->b6 = 1;
 
         if (adv->x0.x0.cpu_level == 4) {

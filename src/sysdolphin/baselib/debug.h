@@ -26,7 +26,7 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #define HSD_ASSERTMSG(line, cond, msg)                                        \
-    ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
+    ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, msg))
 #define HSD_ASSERTREPORT(line, cond, ...)                                     \
     ((cond) ? (void) 0                                                        \
             : (OSReport(__VA_ARGS__), __assert(__FILE__, __LINE__, #cond)))

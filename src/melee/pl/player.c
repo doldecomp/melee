@@ -1408,7 +1408,7 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
     player = &player_slots[slot];
 
     if ((condition == 0) && (player->match_frame_count + 0x10000) == 0xffff) {
-        player->match_frame_count = gm_8016AEDC();
+        player->match_frame_count = gm_GetFrameCount();
     }
 }
 
