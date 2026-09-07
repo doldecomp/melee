@@ -29,23 +29,23 @@ struct ft_MObjInfo {
 static HSD_TevDesc ftMaterial_803C69D0 = {
     NULL,
     TEVCONF_MODE,
-    0,
-    HSD_TE_UNDEF,
-    HSD_TE_UNDEF,
-    HSD_TE_UNDEF,
+    GX_TEVSTAGE0,
+    GX_TEXCOORD_NULL,
+    GX_TEXCOORD_NULL,
+    GX_COLOR_NULL,
     { {
-        0, 0, 15, 15,    15, 0, 0, true, 0, 0, 7, 7,
-        7, 0, 0,  false, 0,  0, 0, 0,    0, 0, 0,
+        GX_TEV_ADD,   GX_CC_CPREV,    GX_CC_ZERO,     GX_CC_ZERO,
+        GX_CC_ZERO,   GX_CS_SCALE_1,  GX_TB_ZERO,     GX_ENABLE,
+        GX_TEVPREV,   GX_TEV_ADD,     GX_CA_ZERO,     GX_CA_ZERO,
+        GX_CA_ZERO,   GX_CA_APREV,    GX_CS_SCALE_1,  GX_TB_ZERO,
+        GX_DISABLE,   GX_TEVPREV,     GX_TC_LINEAR,   GX_TEV_SWAP0,
+        GX_TEV_SWAP0, GX_TEV_KCSEL_1, GX_TEV_KASEL_1,
     } },
 };
 
 static HSD_TECnst ftMaterial_803C6A44 = {
     HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF, 0, 0,
 };
-
-#ifdef MUST_MATCH
-#pragma force_active on
-#endif
 
 void ftMaterial_800BF260(void)
 {
