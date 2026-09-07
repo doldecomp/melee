@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-import os
 import json
 from pathlib import Path
 from typing import Optional, Tuple
-
-script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-
 
 UNIT_KEYS_TO_DIFF = [
     "fuzzy_match_percent",
@@ -32,7 +27,6 @@ def format_float(value: float) -> str:
 
 
 def get_changes(changes_file: str) -> Tuple[list[Change], list[Change]]:
-    changes_file = os.path.relpath(changes_file, root_dir)
     with open(changes_file, "r") as f:
         changes_json = json.load(f)
 
