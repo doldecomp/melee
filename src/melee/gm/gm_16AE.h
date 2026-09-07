@@ -21,7 +21,7 @@
 /* 16AEFC */ u16 gm_8016AEFC(void);
 /* 16AF0C */ u16 gm_8016AF0C(void);
 /* 16AF88 */ bool GetMatchTimer(int*);
-/* 16B004 */ u16 gm_8016B004(void);
+/* 16B004 */ u16 gm_GetStKind(void);
 /* 16B014 */ bool gm_8016B014(void);
 /* 16B094 */ bool gm_8016B094(void);
 /* 16B0B4 */ bool gm_8016B0B4(void);

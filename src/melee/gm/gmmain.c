@@ -30,11 +30,9 @@
 #include <sysdolphin/baselib/hsd_392C.h>
 #include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
-
-extern PadLibData HSD_PadLibData;
-extern s32* seed_ptr;
 
 static u32 arena_size;
 static bool gmMain_804D6594;

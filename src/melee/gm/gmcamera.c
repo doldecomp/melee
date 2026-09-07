@@ -319,9 +319,9 @@ void gmCamera_801A28AC(void)
 {
     if (++gmCamera_VsCamUiState.x10 > 2) {
         void* snap_buf = cmSnap_80031618();
-        gmCamera_VsCamUiState.x1C = snap_buf;
+        gmCamera_VsCamUiState.snap_image = snap_buf;
         if (snap_buf) {
-            if (lbSnap_8001DC0C(gmCamera_VsCamUiState.x1C) != 0) {
+            if (lbSnap_8001DC0C(gmCamera_VsCamUiState.snap_image) != 0) {
                 gmCamera_VsCamUiState.x20 = lbSnap_8001DF20();
                 gmCamera_801A3048(2);
             } else {

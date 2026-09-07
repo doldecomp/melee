@@ -129,7 +129,7 @@ bool GetMatchTimer(int* arg0)
     return false;
 }
 
-u16 gm_8016B004(void)
+u16 gm_GetStKind(void)
 {
     return gm_GetRules()->stkind;
 }
@@ -1018,8 +1018,9 @@ void fn_8016C7F0(void)
     u8* temp_r29_2;
     UnkAllstarData* temp_r30;
 
-    if (lbl_8046B6A0.x24C8.x50 != NULL) {
-        lbl_8046B6A0.x24C8.x50((MatchOutcome) lbl_8046B6A0.match_result);
+    if (lbl_8046B6A0.x24C8.on_match_end != NULL) {
+        lbl_8046B6A0.x24C8.on_match_end(
+            (MatchOutcome) lbl_8046B6A0.match_result);
     }
     HSD_PadRumbleRemoveAll();
     for (var_r29 = 0; var_r29 < PAD_MAX_CONTROLLERS; var_r29++) {
@@ -1526,8 +1527,8 @@ void fn_8016D634(void)
 void gm_Scene_Vs_OnFrame(void)
 {
     PAD_STACK(8);
-    if (lbl_8046B6A0.x24C8.x48 != NULL) {
-        lbl_8046B6A0.x24C8.x48();
+    if (lbl_8046B6A0.x24C8.on_frame_start != NULL) {
+        lbl_8046B6A0.x24C8.on_frame_start();
     }
     switch (lbl_8046B6A0.unk_0) {
     case 0:
@@ -1545,8 +1546,8 @@ void gm_Scene_Vs_OnFrame(void)
         gm_801A4B60();
         break;
     }
-    if (lbl_8046B6A0.x24C8.x4C != NULL) {
-        lbl_8046B6A0.x24C8.x4C();
+    if (lbl_8046B6A0.x24C8.on_frame_end != NULL) {
+        lbl_8046B6A0.x24C8.on_frame_end();
     }
 }
 
@@ -2017,8 +2018,8 @@ void fn_8016E730(StartMeleeData* arg0)
     }
     ifAll_802F390C();
     lbBgFlash_80021A18(0xFF);
-    if (arg0->rules.x44 != NULL) {
-        arg0->rules.x44();
+    if (arg0->rules.on_match_start != NULL) {
+        arg0->rules.on_match_start();
     }
     temp_r30 = gm_801A4BC8();
     fn_80171AD4();

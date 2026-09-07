@@ -521,7 +521,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.xB = 2;
     arg0->rules.x2C = 0.5F;
     arg0->rules.x20 = 0xFFFFFFFFFFFBFCFF;
-    arg0->rules.x44 = gm_80182174;
+    arg0->rules.on_match_start = gm_80182174;
     arg0->rules.x3_3 = true;
     arg0->rules.x3_2 = true;
     arg0->rules.x0_3 = 6;

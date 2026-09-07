@@ -107,7 +107,7 @@ void gm_801B931C(GameModeState* state)
     start->rules.x2_5 = false;
     start->rules.timer_enabled = false;
     start->rules.match_kind = 1;
-    start->rules.x44 = fn_801B9850;
+    start->rules.on_match_start = fn_801B9850;
     start->rules.x3_0 = false;
     gm_SetupAllPlayerDefaults(start->players);
 

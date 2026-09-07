@@ -1268,7 +1268,7 @@ void gm_801B4064(GameModeState* arg0)
                 var_r29, temp_r31->x2, temp_r31->x6, gm_8017E48C(arg0), tmp);
     gm_LoadRumbleEnabled(temp_r28);
     if (temp_r31->x1 & 8) {
-        temp_r28->rules.x44 = gm_8017C838;
+        temp_r28->rules.on_match_start = gm_8017C838;
     }
 }
 
@@ -1433,7 +1433,7 @@ void gm_801B47FC(GameModeState* scene)
     temp_r30 = gm_GetGameModeStateEnterData(scene);
     temp_r31 = gm_GetAdventureData();
     gm_801B4064(scene);
-    temp_r30->rules.x50 = gm_8017E7A0;
+    temp_r30->rules.on_match_end = gm_8017E7A0;
     temp_r31->x0.x0.mode = 0x20;
 }
 
@@ -1619,7 +1619,7 @@ void gm_801B4F44(GameModeState* scene)
             data->players[i + 1].model_scale = 1.4F;
         }
     }
-    data->rules.x50 = gm_8017E7FC;
+    data->rules.on_match_end = gm_8017E7FC;
 }
 
 void gm_801B4FCC(GameModeState* scene)
