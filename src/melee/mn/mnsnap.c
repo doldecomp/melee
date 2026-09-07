@@ -109,7 +109,6 @@ typedef struct mnSnap_State {
 } mnSnap_State;
 
 static mnSnap_State mnSnap_804A0A10;
-static void* mnSnap_thumb_imgs[4];
 /* 4A0B90 */ struct mnSnap_804A0B90_t* mnSnap_804A0B90[4];
 
 /// Recursively loads snapshot thumbnails from memory card.
@@ -165,7 +164,7 @@ static inline s32* mnSnap_GetLoadIdx(mnSnap_State* snap)
 
 static inline void* mnSnap_GetThumbImage(const s32* load_idx)
 {
-    void* image = mnSnap_thumb_imgs[*load_idx % 4];
+    void* image = mnSnap_804A0B90[*load_idx % 4];
     return image;
 }
 
@@ -208,7 +207,7 @@ static void mnSnap_8025329C(void)
         void* img;
 
         p52 = mnSnap_GetLoadIdx(snap);
-        if (lbSnap_8001DE8C(mnSnap_thumb_imgs[snap->load_idx % 4]) == 1) {
+        if (lbSnap_8001DE8C(mnSnap_804A0B90[snap->load_idx % 4]) == 1) {
             img = mnSnap_GetThumbImage(p52);
             jobj = mnSnap_GetThumbJObj(p52, snap);
             HSD_ASSERT(193, jobj);
@@ -899,7 +898,7 @@ static inline s32 mnSnap_GetActivePhotoCount(void)
 
 static inline void* mnSnap_GetCurrentThumbImage(mnSnap_State* snap)
 {
-    return mnSnap_thumb_imgs[snap->cursor_idx % 4];
+    return mnSnap_804A0B90[snap->cursor_idx % 4];
 }
 
 static inline void mnSnap_AnimateCardSlots(const s32* active_slot)
@@ -2541,7 +2540,6 @@ mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
 void mnSnap_80257F24(void)
 {
     const char* page_name;
-    void** main_load;
     mnSnap_State* snap = &mnSnap_804A0A10;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
@@ -2552,6 +2550,7 @@ void mnSnap_80257F24(void)
     HSD_GObjProc* proc;
     HSD_Text* text;
     HSD_Archive* archive;
+    void** main_joint;
     void** main_shapeanim;
     void** main_matanim;
     void** csr_shapeanim;
@@ -2590,6 +2589,8 @@ void mnSnap_80257F24(void)
         s32* photo_count = snap->photo_count;
         photo_count[1] = zero;
     }
+    /* Preserve register allocation during archive setup. */
+    (void) mn_804D6BB8->public_info->offset;
     snap->card_status[0] = zero;
     {
         s16* card_status = mnSnap_GetCardStatus(snap);
@@ -2597,8 +2598,8 @@ void mnSnap_80257F24(void)
     }
     archive = mn_804D6BB8;
 
-    main_matanim = &snap->main_matanim;
     main_animjoint = &snap->main_animjoint;
+    main_matanim = &snap->main_matanim;
     main_shapeanim = &snap->main_shapeanim;
     csr_joint = &snap->csr_joint;
     csr_animjoint = &snap->csr_animjoint;
@@ -2617,6 +2618,8 @@ void mnSnap_80257F24(void)
     warn_animjoint = &snap->warn_animjoint;
     warn_matanim = &snap->warn_matanim;
     warn_shapeanim = &snap->warn_shapeanim;
+
+    main_joint = &snap->main_joint;
 
     lbArchive_LoadSections(
         archive, mnSnap_GetMainJoint(snap), "MenMainConSn_Top_joint",
@@ -2644,8 +2647,7 @@ void mnSnap_80257F24(void)
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
-    main_load = &snap->main_joint;
-    jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_load);
+    jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *main_animjoint,
@@ -2701,8 +2703,8 @@ void mnSnap_80257F24(void)
     thumb_root_ptr = &snap->thumb_root;
     lb_80011E24(jobj, thumb_root_ptr, 0, 1, 7, 8, -1);
 
-    mnSnap_CreateThumbnails(snap, thumb_root_ptr, photo_joint, sub_animjoint,
-                            sub_matanim, sub_shapeanim);
+    mnSnap_CreateThumbnails(&mnSnap_804A0A10, thumb_root_ptr, photo_joint,
+                            sub_animjoint, sub_matanim, sub_shapeanim);
 
     /* Load page indicator */
     mnSnap_LoadPageIndicator(page_joint, snap, thumb_root_ptr, &jobj2);
@@ -2710,7 +2712,7 @@ void mnSnap_80257F24(void)
 
     /* Create 4 SIS text objects for thumbnail labels */
     for (i = 0; i < 4; i++) {
-        snap->thumb_labels[i] = HSD_SisLib_803A6754(0, 0);
+        mnSnap_804A0A10.thumb_labels[i] = HSD_SisLib_803A6754(0, 0);
     }
 
     /* Set text positions for 4 thumbnail labels */
@@ -2748,7 +2750,7 @@ void mnSnap_80257F24(void)
 
     /* Create 2 SIS text objects for camera counts */
     for (i = 0; i < 2; i++) {
-        snap->count_texts[i] = HSD_SisLib_803A6754(0, 0);
+        mnSnap_804A0A10.count_texts[i] = HSD_SisLib_803A6754(0, 0);
     }
 
     text = snap->count_texts[0];
