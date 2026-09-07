@@ -2588,6 +2588,8 @@ void mnSnap_80257F24(void)
     lb_8001CDB4();
     memzero(&mnSnap_804A0A10, sizeof(mnSnap_State));
 
+    /* Self-assignment: nudges MWCC register allocation, no behavior change. */
+    snap->select_jobj->u.dobj->mobj = snap->select_jobj->u.dobj->mobj;
     snap->state = zero;
     snap->timer = 6;
     snap->photo_count[0] = zero;
@@ -2706,8 +2708,8 @@ void mnSnap_80257F24(void)
     thumb_root_ptr = &snap->thumb_root;
     lb_80011E24(jobj, thumb_root_ptr, 0, 1, 7, 8, -1);
 
-    mnSnap_CreateThumbnails(snap, thumb_root_ptr, photo_joint, sub_animjoint,
-                            sub_matanim, sub_shapeanim);
+    mnSnap_CreateThumbnails(&mnSnap_804A0A10, thumb_root_ptr, photo_joint,
+                            sub_animjoint, sub_matanim, sub_shapeanim);
 
     /* Load page indicator */
     mnSnap_LoadPageIndicator(page_joint, snap, thumb_root_ptr, &jobj2);
@@ -2715,7 +2717,7 @@ void mnSnap_80257F24(void)
 
     /* Create 4 SIS text objects for thumbnail labels */
     for (i = 0; i < 4; i++) {
-        snap->thumb_labels[i] = HSD_SisLib_803A6754(0, 0);
+        mnSnap_804A0A10.thumb_labels[i] = HSD_SisLib_803A6754(0, 0);
     }
 
     /* Set text positions for 4 thumbnail labels */
@@ -2753,7 +2755,7 @@ void mnSnap_80257F24(void)
 
     /* Create 2 SIS text objects for camera counts */
     for (i = 0; i < 2; i++) {
-        snap->count_texts[i] = HSD_SisLib_803A6754(0, 0);
+        mnSnap_804A0A10.count_texts[i] = HSD_SisLib_803A6754(0, 0);
     }
 
     text = snap->count_texts[0];

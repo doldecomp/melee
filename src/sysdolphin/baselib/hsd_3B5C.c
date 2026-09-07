@@ -590,12 +590,14 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
                                               (-((block / 2) << 5))) *
                                              4);
                         }
-                        (void) ((u8*) out != chroma);
-                        cr = ((JpegState*) chroma)->work.cr[0];
+                        (void) ((s64) ((u8*) out != chroma));
+                        cr = (cb = ((JpegState*) chroma)->work.cr[0]);
                         cb = ((JpegState*) chroma)->work.cb[0];
                         out_offset = ((block & 1) << 5) +
                                      (aligned_width * ((block & 2) << 2));
-                        jpeg_store_rgb565(out + out_offset, luminance, cb, cr);
+                        jpeg_store_rgb565(
+                            out + (out_offset & 0xFFFFFFFFFFFFFFFFu),
+                            luminance, cb, cr);
                     }
                     out += 1;
                     luma_offset += 4;
