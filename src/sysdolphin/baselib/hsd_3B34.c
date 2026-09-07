@@ -447,8 +447,10 @@ typedef struct JpegEncodeTables {
     u8 pad_44E[2];
 } JpegEncodeTables;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(8)
+#endif
 static inline s32 hsd_803B3CD8_bit_length(s32 value)
 {
     s32 bit;
@@ -590,7 +592,9 @@ static inline void jpeg_encode_component(s32 component, s32* ac_value_out,
     }
 }
 
+#ifdef MUST_MATCH
 #pragma auto_inline off
+#endif
 void hsd_803B3CD8(s32 component)
 {
     s32 value;
@@ -600,7 +604,9 @@ void hsd_803B3CD8(s32 component)
     jpeg_encode_component(component, &ac_value, &run, &value, &index);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static const s32 lbl_804DEB88[1] = { 0x4A464946 };
 static const u8 jpeg_jfif_terminator[1] = { 0 };
