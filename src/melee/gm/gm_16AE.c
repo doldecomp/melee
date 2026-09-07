@@ -90,7 +90,7 @@ bool gm_8016AEC8(void)
     return gm_GetRules()->xC;
 }
 
-u32 gm_8016AEDC(void)
+u32 gm_GetFrameCount(void)
 {
     return gm_16AE_GetUnkData_0()->frame_count;
 }

@@ -941,7 +941,7 @@ void fn_8003F294(int slot, int index)
     if (pl_8003906C(slot, -1, (unsigned int*) &table->xDCC, pl_804D6470->xB8,
                     new_var = pl_804D6470->xBC, table->xCF4, &table->xDC4))
     {
-        u32 v = gm_8016AEDC();
+        u32 v = gm_GetFrameCount();
         u32 xb8 = pl_804D6470->xB8;
         if (xb8 == v) {
             if (table->xD5C <= xb8) {
@@ -1115,10 +1115,11 @@ void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
     if (pl_Verify_gm_8016AEDC() && index == 0) {
         temp_r31 = ftLib_80087120(Player_GetEntityAtIndex(slot, index));
         temp_f30 =
-            temp_r30->x0_staleMoveTable.xC9C * (gm_8016AEDC() - 1) + temp_r31;
+            temp_r30->x0_staleMoveTable.xC9C * (gm_GetFrameCount() - 1) +
+            temp_r31;
 
         temp_r30->x0_staleMoveTable.xC9C =
-            pl_CalculateAverage(temp_f30, gm_8016AEDC());
+            pl_CalculateAverage(temp_f30, gm_GetFrameCount());
     }
 }
 
@@ -1451,7 +1452,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
     u8 temp_r0_2;
     int temp_r0;
 
-    if (gm_8016AEDC() <= pl_804D6470->xEC) {
+    if (gm_GetFrameCount() <= pl_804D6470->xEC) {
         pl_80038788(arg0, 0x5F, 1);
     }
 

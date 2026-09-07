@@ -673,7 +673,7 @@ void Ground_801C0C2C(HSD_GObj* arg0)
         }
     }
     if (gm_8016B238()) {
-        int current_frame = gm_8016AEDC();
+        int current_frame = gm_GetFrameCount();
         if (current_frame > 0x4B0 && current_frame - stage_info.x9C > 0x1E) {
             stage_info.x9C = current_frame;
             if (Ground_801C0A70(&sp2C)) {

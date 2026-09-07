@@ -21,7 +21,7 @@ static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
 
 static inline bool pl_Verify_gm_8016AEDC(void)
 {
-    if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
+    if ((gm_GetFrameCount() != 0U) && (gm_GetFrameCount() != -2U)) {
         return true;
     } else {
         return false;

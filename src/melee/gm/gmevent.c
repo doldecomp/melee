@@ -1208,7 +1208,7 @@ void gm_801BC4F4(HSD_GObj* gobj)
     temp_r29 = gmMainLib_8015CF5C(temp_r30);
     var_r25 = false;
     if (temp_r28->xB_6) {
-        var_r4 = gm_8016AEDC();
+        var_r4 = gm_GetFrameCount();
         var_r4 += temp_r28->x34;
         if (temp_r30 == 0x31) {
             var_r4 = temp_r28->x34;
@@ -1272,7 +1272,7 @@ void gm_801BC670(HSD_GObj* arg0)
     } else {
         temp_r31->x38 = 0x21;
     }
-    temp_r31->x34 += gm_8016AEDC();
+    temp_r31->x34 += gm_GetFrameCount();
     Player_80036844(0, 1);
     lbAudioAx_80028B90();
     gm_SetGameSpeed(1.0F);
@@ -2437,7 +2437,7 @@ void gm_801BE638(HSD_GObj* gobj)
             gm_801A4634(6);
             Player_80031790(0);
             Player_80036844(0, 1);
-            temp_r30->x34 = gm_8016AEDC();
+            temp_r30->x34 = gm_GetFrameCount();
             temp_r3 = gm_16AE_GetUnkData_0();
             temp_r3->x24C8.timer_enabled = false;
         }
