@@ -2494,18 +2494,16 @@ mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
                         void** sub_matanim, void** sub_shapeanim)
 {
     HSD_JObj* jobj2;
-    HSD_JObj* marker;
     f32 step_z;
     f32 step_y;
     f32 step_x;
     s32 i;
-    Vec3 start_pos;
     Vec3 end_pos;
+    Vec3 start_pos;
 
     /* Get thumbnail start/end positions */
     HSD_JObjGetTranslation(snap->thumb_start, &start_pos);
-    marker = snap->thumb_end;
-    HSD_JObjGetTranslation(marker, &end_pos);
+    HSD_JObjGetTranslation(snap->thumb_end, &end_pos);
     step_x = end_pos.x - start_pos.x;
     step_y = end_pos.y - start_pos.y;
     step_z = end_pos.z - start_pos.z;
@@ -2580,10 +2578,12 @@ void mnSnap_80257F24(void)
         photo_count[1] = zero;
     }
     snap->card_status[0] = zero;
-    mnSnap_GetCardStatus(snap)[1] = zero;
+    {
+        s16* card_status = mnSnap_GetCardStatus(snap);
+        card_status[1] = zero;
+    }
     archive = mn_804D6BB8;
 
-    main_joint = &snap->main_joint;
     main_animjoint = &snap->main_animjoint;
     main_matanim = &snap->main_matanim;
     main_shapeanim = &snap->main_shapeanim;
@@ -2604,6 +2604,8 @@ void mnSnap_80257F24(void)
     warn_animjoint = &snap->warn_animjoint;
     warn_matanim = &snap->warn_matanim;
     warn_shapeanim = &snap->warn_shapeanim;
+
+    main_joint = &snap->main_joint;
 
     lbArchive_LoadSections(
         archive, main_joint, "MenMainConSn_Top_joint", main_animjoint,
