@@ -3948,13 +3948,46 @@ typedef union grBb_CarGround {
 #ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
+#pragma inline_depth(3)
 #endif
+static inline s32 grBigBlue_801EE398_sfx(void)
+{
+    return HSD_Randi(4);
+}
+
+static inline void grBigBlue_801EE398_select(Ground* gp, s32 count,
+                                             s32* output)
+{
+    s32 slot = 0;
+    s32 pick;
+    s32 random0;
+    s32 random1;
+
+    pick = random0 = random1 = ZRANDI(count);
+
+    for (; slot < 30; slot++) {
+        if (gp->u.bigblue.car.ranks[slot] == 0) {
+            if (--pick < 0) {
+                break;
+            }
+        }
+    }
+    *output = slot;
+}
+
 static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                                              s32* result, Vec3* pos)
 {
+    s32 state_value0;
+    s32 state_value1;
+    s32 state_value2;
+    s32 state_value3;
+    s32 state_value4;
     s32 slot;
 
-    switch (arg2) {
+    switch (state_value0 = state_value1 = state_value2 = state_value3 =
+                state_value4 = arg2)
+    {
     case 1: {
         struct grBigBlue_CarLane* car = &gp->u.bigblue.car.lanes[arg1];
 
@@ -3968,14 +4001,15 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
             gp->u.bigblue.car.ranks[car->collision_slot] = 2;
         }
         *result = 1;
-        car->state = arg2;
+        car->state = state_value4;
+        (void) gp->u.bigblue.car.lanes[arg1].state;
         break;
     }
 
     case 10: {
         gp->u.bigblue.car.lanes[arg1].threshold = 0x14;
         *result = 1;
-        gp->u.bigblue.car.lanes[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = state_value3;
         break;
     }
 
@@ -3985,7 +4019,7 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
         gp->u.bigblue.car.lanes[arg1].threshold =
             rand_range(yakumono_param->x5C, yakumono_param->x60);
         *result = 1;
-        gp->u.bigblue.car.lanes[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = state_value2;
         break;
     }
 
@@ -4009,6 +4043,9 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
 
             if (count != 0) {
                 s32 pick;
+                s32 slot_arg;
+                Ground* sfx_gp;
+                u32 sfx_id;
 
                 slot = 0;
                 pick = ZRANDI(count);
@@ -4047,7 +4084,10 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.car.ranks[slot] = 1;
                 gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                Ground_801C5440(gp, slot, lbl_803E3010[HSD_Randi(4)]);
+                sfx_id = lbl_803E3010[grBigBlue_801EE398_sfx()];
+                sfx_gp = gp;
+                slot_arg = slot;
+                Ground_801C5440(sfx_gp, slot_arg, sfx_id);
 
                 Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
 
@@ -4061,7 +4101,8 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 }
 
                 *result = 1;
-                gp->u.bigblue.car.lanes[arg1].state = arg2;
+                gp->u.bigblue.car.lanes[arg1].state = state_value1;
+                (void) gp->u.bigblue.car.lanes[arg1];
             }
         }
         break;
@@ -4086,22 +4127,16 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
             }
 
             if (count != 0) {
-                s32 pick;
+                s32 slot_arg;
+                Ground* sfx_gp;
                 u32 sfx_id;
                 struct grBigBlue_CarLane* lanes;
+                struct grBigBlue_CarLane* car_d4;
 
-                slot = 0;
-                pick = ZRANDI(count);
-
-                for (; slot < 30; slot++) {
-                    if (gp->u.bigblue.car.ranks[slot] == 0) {
-                        if (--pick < 0) {
-                            break;
-                        }
-                    }
-                }
+                grBigBlue_801EE398_select(gp, count, &slot);
 
                 lanes = gp->u.bigblue.car.lanes;
+                car_d4 = &gp->u.bigblue.car.lanes[arg1];
                 lanes[arg1].collision_slot = slot;
                 gp->u.bigblue.car.lanes[arg1].direction = 0;
 
@@ -4128,22 +4163,29 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 gp->u.bigblue.car.ranks[slot] = 1;
                 gp->u.bigblue.car.lanes[arg1].alpha = 0.0f;
 
-                sfx_id = lbl_803E3010[HSD_Randi(4)];
-                Ground_801C5440(gp, slot, sfx_id);
+                sfx_id = lbl_803E3010[grBigBlue_801EE398_sfx()];
+                slot_arg = slot;
+                sfx_gp = gp;
+                Ground_801C5440(sfx_gp, slot_arg, sfx_id);
 
                 Ground_801C5630(gp, arg1, gp->u.bigblue.car.lanes[arg1].alpha);
 
                 {
                     HSD_JObj* jobj;
+                    u32 jobj_slot;
+
+                    jobj_slot = slot;
                     HSD_JObjClearFlagsAll(
-                        gp->u.bigblue.car.collision_jobjs[slot], JOBJ_HIDDEN);
-                    jobj = gp->u.bigblue.car.collision_jobjs[slot];
+                        gp->u.bigblue.car.collision_jobjs[jobj_slot],
+                        JOBJ_HIDDEN);
+                    jobj = gp->u.bigblue.car.collision_jobjs[jobj_slot];
                     HSD_JObjSetTranslate(jobj,
                                          &gp->u.bigblue.car.lanes[arg1].pos);
                 }
 
                 *result = 1;
-                gp->u.bigblue.car.lanes[arg1].state = arg2;
+                car_d4->state = state_value0;
+                (void) car_d4->state;
             }
         }
         break;
@@ -4153,12 +4195,12 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
     case 8: {
         gp->u.bigblue.car.lanes[arg1].threshold = 0x3E8;
         *result = 1;
-        gp->u.bigblue.car.lanes[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = state_value4;
         break;
     }
 
     case 9: {
-        gp->u.bigblue.car.lanes[arg1].state = arg2;
+        gp->u.bigblue.car.lanes[arg1].state = state_value3;
         break;
     }
     }
