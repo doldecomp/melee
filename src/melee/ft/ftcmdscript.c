@@ -156,16 +156,16 @@ void ftCo_800B3E04(Fighter* fp)
             data->command_duration = (u8) *cur++;
             break;
         case CpuCmd_SetLstickX:
-            data->lstickX = *cur++;
+            data->lstick.x = *cur++;
             break;
         case CpuCmd_SetLstickY:
-            data->lstickY = *cur++;
+            data->lstick.y = *cur++;
             break;
         case CpuCmd_SetCstickX:
-            data->cstickX = *cur++;
+            data->cstick.x = *cur++;
             break;
         case CpuCmd_SetCstickY:
-            data->cstickY = *cur++;
+            data->cstick.y = *cur++;
             break;
         case CpuCmd_SetRtrigger:
             data->rtrigger = *cur++;
@@ -184,14 +184,14 @@ void ftCo_800B3E04(Fighter* fp)
             cur++;
             angle = lb_8000D008(data->x54.y - fp->cur_pos.y,
                                 data->x54.x - fp->cur_pos.x);
-            data->lstickX = magnitude * cosf(angle);
-            data->lstickY = magnitude * sinf(angle);
+            data->lstick.x = magnitude * cosf(angle);
+            data->lstick.y = magnitude * sinf(angle);
             break;
         case CpuCmd_LstickXTowardDestination:
             if (data->x54.x > fp->cur_pos.x) {
-                data->lstickX = *cur;
+                data->lstick.x = *cur;
             } else {
-                data->lstickX = -*cur;
+                data->lstick.x = -*cur;
             }
             cur++;
             break;
@@ -203,8 +203,8 @@ void ftCo_800B3E04(Fighter* fp)
             if (target != NULL) {
                 angle = lb_8000D008(target->cur_pos.y - fp->cur_pos.y,
                                     target->cur_pos.x - fp->cur_pos.x);
-                data->lstickX = magnitude * cosf(angle);
-                data->lstickY = magnitude * sinf(angle);
+                data->lstick.x = magnitude * cosf(angle);
+                data->lstick.y = magnitude * sinf(angle);
             }
             break;
         }
@@ -216,16 +216,16 @@ void ftCo_800B3E04(Fighter* fp)
                     stick_x = -stick_x;
                 }
                 if (target != NULL) {
-                    data->lstickX = stick_x;
+                    data->lstick.x = stick_x;
                 }
             }
             break;
         }
         case CpuCmd_LstickXForward:
             if (fp->facing_dir >= 0.0) {
-                data->lstickX = *cur;
+                data->lstick.x = *cur;
             } else {
-                data->lstickX = -*cur;
+                data->lstick.x = -*cur;
             }
             cur++;
             break;
@@ -247,15 +247,15 @@ void ftCo_800B3E04(Fighter* fp)
             cur++;
             angle = lb_8000D008(data->x54.y - fp->cur_pos.y,
                                 data->x54.x - fp->cur_pos.x);
-            var_r24 = data->lstickX + (s8) (temp_r25 * cosf(angle));
+            var_r24 = data->lstick.x + (s8) (temp_r25 * cosf(angle));
             clamp_x = (s8) (temp_r27_3 * cosf(angle));
             if (var_r24 > clamp_x) {
                 var_r24 = clamp_x;
             } else if (var_r24 < -clamp_x) {
                 var_r24 = -clamp_x;
             }
-            data->lstickX = var_r24;
-            var_r24_2 = data->lstickY + (s8) (temp_r25 * sinf(angle));
+            data->lstick.x = var_r24;
+            var_r24_2 = data->lstick.y + (s8) (temp_r25 * sinf(angle));
             clamp_y = (s8) (temp_r27_3 * sinf(angle));
             if (var_r24_2 > clamp_y) {
                 var_r24_2 = clamp_y;
@@ -263,7 +263,7 @@ void ftCo_800B3E04(Fighter* fp)
             if (var_r24_2 < -clamp_y) {
                 var_r24_2 = -clamp_y;
             }
-            data->lstickY = var_r24_2;
+            data->lstick.y = var_r24_2;
             break;
         }
         case CpuCmd_LstickXTowardDestinationClamped: {
@@ -275,16 +275,16 @@ void ftCo_800B3E04(Fighter* fp)
             clamp_x = *cur;
             cur++;
             if (data->x54.x > fp->cur_pos.x) {
-                stick_x = data->lstickX + dx;
+                stick_x = data->lstick.x + dx;
             } else {
-                stick_x = data->lstickX - dx;
+                stick_x = data->lstick.x - dx;
             }
             if (stick_x > clamp_x) {
                 stick_x = clamp_x;
             } else if (stick_x < -clamp_x) {
                 stick_x = -clamp_x;
             }
-            data->lstickX = stick_x;
+            data->lstick.x = stick_x;
             break;
         }
         case CpuCmd_LstickForwardClamped: {
@@ -295,16 +295,16 @@ void ftCo_800B3E04(Fighter* fp)
             clamp_x = *cur;
             cur++;
             if (fp->facing_dir > 0.0) {
-                var_r3_2 = data->lstickX + dx;
+                var_r3_2 = data->lstick.x + dx;
             } else {
-                var_r3_2 = data->lstickX - dx;
+                var_r3_2 = data->lstick.x - dx;
             }
             if (var_r3_2 > clamp_x) {
                 var_r3_2 = clamp_x;
             } else if (var_r3_2 < -clamp_x) {
                 var_r3_2 = -clamp_x;
             }
-            data->lstickX = var_r3_2;
+            data->lstick.x = var_r3_2;
             break;
         }
         case CpuCmd_Done:
@@ -382,10 +382,10 @@ void ftCo_800B4A78(Fighter* fp)
 {
     struct CpuFighter* data = &fp->cpu;
     data->buttons = 0;
-    data->lstickX = 0;
-    data->lstickY = 0;
-    data->cstickX = 0;
-    data->cstickY = 0;
+    data->lstick.x = 0;
+    data->lstick.y = 0;
+    data->cstick.x = 0;
+    data->cstick.y = 0;
     data->rtrigger = 0;
     data->ltrigger = 0;
     data->csP = NULL;

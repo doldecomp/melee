@@ -1029,4 +1029,8 @@ struct LbShadow {
     HSD_Shadow* shadow;
 };
 
+typedef struct {
+    s8 x, y;
+} S8Vec2, *S8Vec2Ptr;
+
 #endif
