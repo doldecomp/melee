@@ -201,10 +201,10 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     GXColor sp168;
     u8 _padA[84];
     HSD_TECnst sp_cnst1;
-    u8 _padB[80];
-    GXColor unused;
+    u8 _padB[84];
     HSD_TECnst sp_cnst2;
     HSD_TevDesc sp_tevdesc;
+    GXColor color;
 
     s32 chk1;
     s32 var_r0;
@@ -237,7 +237,6 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 GXColor* color_hex = &overlay->x2C_hex;
                 s32 temp_r8;
                 s32 temp_r7;
-                s32 temp_r4;
 
                 temp_alpha =
                     ((0xFF - fp_color->a) * (0xFF - color_hex->a)) / 255;
@@ -248,8 +247,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                     temp_r8 = fp_color->r;
                     temp_r8 += (color_hex->a * (color_hex->r - temp_r8)) / 255;
                     temp_r7 = temp_r8 * 0xFF;
-                    temp_r4 = temp_r7 / inv_alpha;
-                    sp168.r = (u8) temp_r4;
+                    sp168.r = (u8) (temp_r7 / inv_alpha);
                     if (sp168.r != 0) {
                         sp168.a = temp_r7 / sp168.r;
                     } else {
@@ -319,16 +317,10 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 sp_cnst1.next = NULL;
             }
             sp_cnst1.reg = (u8) reg2;
-            {
-                // @todo Fix this stack pointer arithmetic
-                GXColor* color = (GXColor*) ((u8*) &sp_tevdesc - 4);
-                u8 alpha = sp168.a;
-
-                color->r = alpha;
-                color->g = alpha;
-                color->b = alpha;
-                sp_cnst1.val = color;
-            }
+            color.r = sp168.a;
+            color.g = sp168.a;
+            color.b = sp168.a;
+            sp_cnst1.val = &color;
             HSD_TExpSetReg((HSD_TExp*) &sp_cnst1);
             sp_tevdesc = info->tevdesc_tmpl;
             sp_tevdesc.stage = HSD_StateAssignTev();
