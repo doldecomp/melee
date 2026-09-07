@@ -2545,6 +2545,7 @@ mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
 {
+    const char* page_name;
     void** main_load;
     mnSnap_State* snap = &mnSnap_804A0A10;
     HSD_JObj* jobj;
@@ -2637,8 +2638,9 @@ void mnSnap_80257F24(void)
         "MenMainSubCsrSn_Top_animjoint", sub_matanim,
         "MenMainSubCsrSn_Top_matanim_joint", sub_shapeanim,
         "MenMainSubCsrSn_Top_shapeanim_joint", page_joint,
-        "MenMainPhotoSn_Top_joint", arrows_joint, "MenMainLoadSn_Top_joint",
-        arrows_animjoint, "MenMainLoadSn_Top_animjoint", arrows_matanim,
+        (page_name = "MenMainPhotoSn_Top_joint"), arrows_joint,
+        "MenMainLoadSn_Top_joint", arrows_animjoint,
+        "MenMainLoadSn_Top_animjoint", arrows_matanim,
         "MenMainLoadSn_Top_matanim_joint", arrows_shapeanim,
         "MenMainLoadSn_Top_shapeanim_joint", warn_joint,
         "MenMainWarCmn_Top_joint", mnSnap_GetWarnAnimJoint(snap),
@@ -2646,6 +2648,7 @@ void mnSnap_80257F24(void)
         "MenMainWarCmn_Top_matanim_joint", warn_shapeanim,
         "MenMainWarCmn_Top_shapeanim_joint\0\0\0\0\0\0", 0);
 
+    (void) ((const void*) page_name == (const void*) snap);
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
