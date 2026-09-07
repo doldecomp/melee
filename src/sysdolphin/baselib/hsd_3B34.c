@@ -214,13 +214,15 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
         src = (u16*) image + (image_offset + tile_y * stride);
         for (tile_x = 0; tile_x < 2; tile_x++) {
             s32 chroma_y;
+            s32 tile_offset = tile_y * 16 + tile_x * 2;
 
             for (chroma_y = 0; chroma_y < 4; chroma_y++) {
                 s32 dst_row;
                 s32 src_row;
+                s32 row_part;
 
-                dst_row = (chroma_y & 1) * 4 + (chroma_y & 2) * 16;
-                dst_row = (tile_y * 16 + tile_x * 2) + dst_row;
+                row_part = (chroma_y & 1) * 4;
+                dst_row = tile_offset + row_part + (chroma_y & 2) * 16;
                 src_row = (chroma_y & 1) * 32 + (chroma_y & 2) * stride;
 
                 for (chroma_x = 0; chroma_x < 4; chroma_x++) {
