@@ -2074,8 +2074,8 @@ def calculate_progress(config: ProjectConfig) -> None:
         total_data = measures.get("total_data", 0)
         if total_code == 0 or total_data == 0:
             return
-        code_frac = measures.get("complete_code", 0) / total_code
-        data_frac = measures.get("complete_data", 0) / total_data
+        code_frac = measures.get("matched_code", 0) / total_code
+        data_frac = measures.get("matched_data", 0) / total_data
 
         progress_print(
             "\nYou have {} out of {} {} and {} out of {} {}.".format(
