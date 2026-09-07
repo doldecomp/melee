@@ -2958,7 +2958,7 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     memzero(arg0->player_standings, sizeof(arg0->player_standings));
     memzero(arg0->team_standings, sizeof(arg0->team_standings));
     memzero(arg0->_x448, sizeof(arg0->_x448));
-    arg0->frame_count = gm_8016AEDC();
+    arg0->frame_count = gm_GetFrameCount();
     arg0->x7 = fn_8016B728();
     for (i = 0; i < 6; i++) {
         arg0->player_standings[i].slot_type = Player_GetPlayerSlotType(i);
@@ -2971,7 +2971,7 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             arg0->player_standings[i].x1C = Player_GetCoins(i);
             arg0->player_standings[i].x28 = Player_GetMatchFrameCount(i);
             if (arg0->player_standings[i].x28 == -1U) {
-                arg0->player_standings[i].x28 = gm_8016AEDC();
+                arg0->player_standings[i].x28 = gm_GetFrameCount();
             }
             arg0->player_standings[i].self_destructs =
                 Player_GetSuicideCount(i);

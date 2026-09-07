@@ -343,7 +343,7 @@ void fn_80181E18(void)
         switch (data->record[0].x8) {
         case 0x21:
         case 0x22:
-            data->record[0].x4 = gm_8016AEDC();
+            data->record[0].x4 = gm_GetFrameCount();
             break;
         }
 

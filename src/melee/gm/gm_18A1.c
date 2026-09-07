@@ -160,7 +160,7 @@ void fn_8018A364(int arg0_int)
 
     if (rules->x4_5) {
         main_data = gmMainLib_8015CDE0();
-        total_time = data->x0.xC.x20 + gm_8016AEDC();
+        total_time = data->x0.xC.x20 + gm_GetFrameCount();
         ((u8_bits*) &arg0->_x448[0])->b5 = 1;
 
         if (data->x0.x0.cpu_level == 4) {

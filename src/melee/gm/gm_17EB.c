@@ -180,7 +180,7 @@ void fn_8017EE40(int arg0_int)
 
     if (rules->x4_5) {
         main_data = gmMainLib_8015CDC8();
-        total_time = allstar->x0.xC.x20 + gm_8016AEDC();
+        total_time = allstar->x0.xC.x20 + gm_GetFrameCount();
         ((u8_bits*) &arg0->_x448[0])->b7 = 1;
 
         if (allstar->x0.x0.cpu_level == 4) {
