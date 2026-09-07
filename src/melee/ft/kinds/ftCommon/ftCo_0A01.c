@@ -745,10 +745,10 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30->xF8_b7 = false;
     temp_r30->xF9_b1 = false;
     temp_r30->buttons = 0;
-    temp_r30->lstickX = 0;
-    temp_r30->lstickY = 0;
-    temp_r30->cstickX = 0;
-    temp_r30->cstickY = 0;
+    temp_r30->lstick.x = 0;
+    temp_r30->lstick.y = 0;
+    temp_r30->cstick.x = 0;
+    temp_r30->cstick.y = 0;
     temp_r30->rtrigger = 0;
     temp_r30->ltrigger = 0;
     temp_r30->xF9_b2 = false;
@@ -775,8 +775,8 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
         temp_r3_2 = ftCo_800A589C(arg0);
         for (i = 0; i < 30; i++) {
             temp_r30->xFC[i].x0 = 0;
-            temp_r30->xFC[i].lstickX = 0;
-            temp_r30->xFC[i].lstickY = 0;
+            temp_r30->xFC[i].lstick.x = 0;
+            temp_r30->xFC[i].lstick.y = 0;
             temp_r30->xFC[i].x4 = 0;
             temp_r30->xFC[i].x5 = 0;
             temp_r30->xFC[i].cur_pos = temp_r3_2->cur_pos;
@@ -785,8 +785,8 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     } else {
         for (i = 0; i < 30; i++) {
             temp_r30->xFC[i].x0 = 0;
-            temp_r30->xFC[i].lstickX = 0;
-            temp_r30->xFC[i].lstickY = 0;
+            temp_r30->xFC[i].lstick.x = 0;
+            temp_r30->xFC[i].lstick.y = 0;
             temp_r30->xFC[i].x4 = 0;
             temp_r30->xFC[i].x5 = 0;
             temp_r30->xFC[i].cur_pos.x = 0.0F;
@@ -837,12 +837,12 @@ static inline float convertStickAxis(s8 val)
 
 float ftCo_GetCpuLStickX(Fighter* fp)
 {
-    return convertStickAxis(fp->cpu.lstickX);
+    return convertStickAxis(fp->cpu.lstick.x);
 }
 
 float ftCo_GetCpuLStickY(Fighter* fp)
 {
-    return convertStickAxis(fp->cpu.lstickY);
+    return convertStickAxis(fp->cpu.lstick.y);
 }
 
 float ftCo_GetCpuLTrigger(Fighter* fp)
@@ -864,12 +864,12 @@ HSD_Pad ftCo_GetCpuButtons(Fighter* fp)
 
 float ftCo_GetCpuCStickX(Fighter* fp)
 {
-    return convertStickAxis(fp->cpu.cstickX);
+    return convertStickAxis(fp->cpu.cstick.x);
 }
 
 float ftCo_GetCpuCStickY(Fighter* fp)
 {
-    return convertStickAxis(fp->cpu.cstickY);
+    return convertStickAxis(fp->cpu.cstick.y);
 }
 
 /// Compute 2D distance between two fighters
@@ -5558,7 +5558,7 @@ void ftCo_800AC30C(Fighter* fp)
         return;
     }
     if (data->x7C % 3 == 0 && !(data->level * 0.1F < HSD_Randf())) {
-        if (fp->cpu.lstickX < 0) {
+        if (fp->cpu.lstick.x < 0) {
             ftCo_800B46B8(fp, CpuCmd_SetLstickX, +0x7F);
         } else {
             ftCo_800B46B8(fp, CpuCmd_SetLstickX, -0x7F);
@@ -7313,10 +7313,10 @@ void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
     if (data->x448 == data->xFC + ARRAY_SIZE(data->xFC)) {
         data->x448 = data->xFC;
     }
-    data->x444->lstickX = inlineM0(fp0->input.lstick[0].x);
-    data->x444->lstickY = inlineM0(fp0->input.lstick[0].y);
-    data->x444->cstickX = inlineM0(fp0->input.cstick[0].x);
-    data->x444->cstickY = inlineM0(fp0->input.cstick[0].y);
+    data->x444->lstick.x = inlineM0(fp0->input.lstick[0].x);
+    data->x444->lstick.y = inlineM0(fp0->input.lstick[0].y);
+    data->x444->cstick.x = inlineM0(fp0->input.cstick[0].x);
+    data->x444->cstick.y = inlineM0(fp0->input.cstick[0].y);
     data->x444->x4 = fp0->input.triggers[0];
     data->x444->x5 = fp0->input.triggers[0];
     data->x444->x0 = fp0->input.held_buttons[0];
@@ -7350,10 +7350,10 @@ void ftCo_800B0AF4(Fighter* fp)
             ftPp_SpecialLw_Enter(fp->gobj);
             return;
         }
-        data->lstickX = data->x448->lstickX;
-        data->lstickY = data->x448->lstickY;
-        data->cstickX = data->x448->cstickX;
-        data->cstickY = data->x448->cstickY;
+        data->lstick.x = data->x448->lstick.x;
+        data->lstick.y = data->x448->lstick.y;
+        data->cstick.x = data->x448->cstick.x;
+        data->cstick.y = data->x448->cstick.y;
         data->buttons = data->x448->x0;
         data->ltrigger = data->x448->x4;
         data->rtrigger = data->x448->x5;
@@ -7595,8 +7595,8 @@ void ftCo_800B101C(Fighter* fp)
         if (ftCo_800B101C_inline0(fp, var_r29)) {
             temp_r31->xFA_b7 = false;
             temp_r31->x18 = temp_r31->x1C;
-            fp->cpu.lstickX = 0;
-            fp->cpu.lstickY = 0;
+            fp->cpu.lstick.x = 0;
+            fp->cpu.lstick.y = 0;
             fp->cpu.buttons = 0;
             fp->cpu.ltrigger = 0;
             fp->cpu.rtrigger = 0;

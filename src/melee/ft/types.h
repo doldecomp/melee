@@ -979,10 +979,8 @@ struct Fighter_x1A88_xFC_t {
     /*  +0 */ HSD_Pad x0;
     /*  +4 */ u8 x4;
     /*  +5 */ u8 x5;
-    /*  +6 */ u8 lstickX;
-    /*  +7 */ u8 lstickY;
-    /*  +8 */ u8 cstickX;
-    /*  +9 */ u8 cstickY;
+    /*  +6 */ S8Vec2 lstick;
+    /*  +8 */ S8Vec2 cstick;
     /*  +A */ u8 xA;
     /*  +B */ u8 xB;
     /*  +C */ Vec3 cur_pos;
@@ -992,10 +990,8 @@ ASSERT_SIZE(struct Fighter_x1A88_xFC_t, 0x1C);
 
 struct CpuFighter {
     /*   +0 */ HSD_Pad buttons;
-    /*   +4 */ s8 lstickX;
-    /*   +5 */ s8 lstickY;
-    /*   +6 */ s8 cstickX;
-    /*   +7 */ s8 cstickY;
+    /*   +4 */ S8Vec2 lstick;
+    /*   +6 */ S8Vec2 cstick;
     /*   +8 */ u8 ltrigger;
     /*   +9 */ u8 rtrigger; ///< R trigger analog value, 0 to 255
     /*   +C */ enum_t xC;
