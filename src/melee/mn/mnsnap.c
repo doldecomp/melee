@@ -2500,6 +2500,11 @@ static inline void** mnSnap_GetMainShapeAnim(mnSnap_State* snap)
     return &snap->main_shapeanim;
 }
 
+static inline void** mnSnap_GetWarnAnimJoint(mnSnap_State* snap)
+{
+    return &snap->warn_animjoint;
+}
+
 /// Creates five thumbnail joints using the spacing between two markers.
 static inline void
 mnSnap_CreateThumbnails(mnSnap_State* snap, HSD_JObj** thumb_root_ptr,
@@ -2597,8 +2602,8 @@ void mnSnap_80257F24(void)
     }
     archive = mn_804D6BB8;
 
-    main_animjoint = &snap->main_animjoint;
     main_matanim = &snap->main_matanim;
+    main_animjoint = &snap->main_animjoint;
     main_shapeanim = &snap->main_shapeanim;
     csr_joint = &snap->csr_joint;
     csr_animjoint = &snap->csr_animjoint;
@@ -2636,7 +2641,7 @@ void mnSnap_80257F24(void)
         arrows_animjoint, "MenMainLoadSn_Top_animjoint", arrows_matanim,
         "MenMainLoadSn_Top_matanim_joint", arrows_shapeanim,
         "MenMainLoadSn_Top_shapeanim_joint", warn_joint,
-        "MenMainWarCmn_Top_joint", warn_animjoint,
+        "MenMainWarCmn_Top_joint", mnSnap_GetWarnAnimJoint(snap),
         "MenMainWarCmn_Top_animjoint", warn_matanim,
         "MenMainWarCmn_Top_matanim_joint", warn_shapeanim,
         "MenMainWarCmn_Top_shapeanim_joint\0\0\0\0\0\0", 0);
