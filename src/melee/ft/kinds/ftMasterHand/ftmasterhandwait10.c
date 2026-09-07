@@ -219,7 +219,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 
             ftBossLib_8015BD24(fp->cpu.level, &fp->u.mh.x223C, fp->u.mh.x2238,
                                da->x18, da->x20, da->x1C);
-            if (ftBossLib_8015C44C(FTKIND_CREZYH) == ftMh_MS_TagRockPaper) {
+            if (ftBossLib_GetMotionId(FTKIND_CREZYH) == ftMh_MS_TagRockPaper) {
                 // Crazy Hand Combo Attack
                 switch (ftBossLib_8015C4C4()) {
                 case ftMh_MS_Squeezing1:
