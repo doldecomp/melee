@@ -1508,8 +1508,6 @@ void fn_803AC334(void)
     hsd_804D7998 = -1;
 }
 
-/// @todo Currently 99.50% match - return expression register allocation (add
-/// dest r6 vs r3)
 int hsd_803AC340(void* header)
 {
     u8* data = header;

@@ -153,7 +153,6 @@ static void usb_exit_init(void)
     }
 }
 
-// @TODO: Currently 92.84% match - needs minor register allocation fix
 int hsd_80392E80(void)
 {
     enum MCC_CONNECT status;

@@ -608,8 +608,6 @@ void hsd_80394314(void)
     sp->xC4 = 0;
 }
 
-// @TODO: Currently 94.99% match - obj file has extra addi for lis/addi
-/// pair resolution; linked code matches 100%
 void hsd_80394434(void* text)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -1672,7 +1670,6 @@ static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
 static char* lbl_804D62D4 = "+--------------------------------------------+";
 
-// @TODO: Currently 96.11% match - needs register allocation fix
 static inline void hsd_80396188_draw_rows(char* buf, s32 col, u32** addr,
                                           s32* i)
 {
@@ -2117,8 +2114,6 @@ static char* lbl_804D6304 = "| %d BL xxxxxxxxxxx  %c%c %c%c%c%c %s |";
 static char* lbl_804D6308 = "|   BEPI %08X BRPN %08X |";
 static char* lbl_804D630C = "+-------------------------------+";
 
-// @TODO: Currently 86.10% match - .bss.0 relocation affects register
-// allocation
 static inline void* hsd_80396E40_get_x50(void)
 {
     return hsd_804CF810.x50;
