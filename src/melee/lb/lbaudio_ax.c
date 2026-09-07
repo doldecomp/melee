@@ -1384,7 +1384,7 @@ static void fn_800262A0(HSD_GObj* gobj)
 
     if (ud->x10(gobj) == true) {
         if (gobj != NULL) {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
         return;
     }
@@ -1399,7 +1399,7 @@ static void fn_800262A0(HSD_GObj* gobj)
          ud->end_frame == (ud->voice_id * 0)))
     {
         if (gobj != NULL) {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
     } else {
         ud->current_frame += 1;
@@ -1440,7 +1440,7 @@ HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* owner, int arg2, int sfx_id,
         if (gobj != NULL) {
             userdata = HSD_ObjAlloc(&lbl_80433710);
             if (userdata == NULL) {
-                HSD_GObjPLink_80390228(gobj);
+                HSD_GObj_Remove(gobj);
                 gobj = NULL;
             } else {
                 GObj_InitUserData(gobj, HSD_GOBJ_CLASS_SOUND,
@@ -1491,7 +1491,7 @@ bool lbAudioAx_80026510(HSD_GObj* target)
                     AXDriverKeyOff(ud->voice_id);
                 }
                 if (cur != NULL) {
-                    HSD_GObjPLink_80390228(cur);
+                    HSD_GObj_Remove(cur);
                 }
                 count++;
             }
@@ -1517,7 +1517,7 @@ bool lbAudioAx_800265C4(HSD_GObj* target_obj, int voice)
         {
             AXDriverKeyOff(ud->voice_id);
             if (cur != NULL) {
-                HSD_GObjPLink_80390228(cur);
+                HSD_GObj_Remove(cur);
             }
             return true;
         }

@@ -1971,7 +1971,7 @@ void Toy_80306BB8(HSD_GObj* gobj)
                 HSD_JObjClearFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
             }
 
-            HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+            HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         }
     } else {
         if (!lb_8000B09C(jobj)) {
@@ -2049,8 +2049,8 @@ void Toy_80306D70(s32 arg0)
         data = (TyLightData*) Toy_sbss_804D6ED4;
 
         if (data->archive != NULL && data->gobj != NULL) {
-            HSD_GObjProc_8038FED4(data->gobj);
-            HSD_GObjPLink_80390228(data->gobj);
+            HSD_GObjProc_RemoveAllProcs(data->gobj);
+            HSD_GObj_Remove(data->gobj);
             data->gobj = NULL;
             idx = base->entries[arg0].idx;
             sym = base->symbols[idx].name;
@@ -2339,7 +2339,7 @@ void Toy_80307470(s32 arg0)
     }
 
     if (tg->x0 != NULL) {
-        HSD_GObjPLink_80390228(tg->x0);
+        HSD_GObj_Remove(tg->x0);
         tg->x0 = NULL;
     }
 
@@ -2394,8 +2394,8 @@ void _Toy_803075E8(s32 arg0)
     }
 
     if (td->gobj != NULL) {
-        HSD_GObjProc_8038FED4(td->gobj);
-        HSD_GObjPLink_80390228(td->gobj);
+        HSD_GObjProc_RemoveAllProcs(td->gobj);
+        HSD_GObj_Remove(td->gobj);
         td->gobj = NULL;
     }
 
@@ -2603,7 +2603,7 @@ void Toy_80307E84(HSD_GObj* gobj)
         state->x10 = 0;
         HSD_JObjRemoveAnimAll(jobj0);
         HSD_JObjRemoveAnimAll(jobj1);
-        HSD_GObjProc_8038FED4(gobj);
+        HSD_GObjProc_RemoveAllProcs(gobj);
     } else {
         state->x0F = state->x0F - 1;
         HSD_JObjAnimAll(jobj0);
@@ -2960,7 +2960,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     }
 
     if (anim->gobj != NULL) {
-        HSD_GObjPLink_80390228(anim->gobj);
+        HSD_GObj_Remove(anim->gobj);
         anim->gobj = NULL;
         anim->jobj[1] = NULL;
         anim->jobj[0] = NULL;
@@ -3433,7 +3433,7 @@ void _Toy_80309404(HSD_GObj* gobj)
 
     if (mn_8022F218() != 0) {
         sfxBack();
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         Toy_80310660(1);
         HSD_GObj_80390CD4(gobj);
         mn_8022F268();
@@ -5966,73 +5966,73 @@ void Toy_80310660(s32 arg0)
             arg = 0;
             ty30->x58 = (void*) arg;
             if (ty30->x0C != NULL) {
-                HSD_GObjPLink_80390228(ty30->x0C);
+                HSD_GObj_Remove(ty30->x0C);
                 ty30->x0C = (void*) arg;
             }
         }
 
         if (*(void**) ty27 != NULL) {
-            HSD_GObjPLink_80390228(*(void**) ty27);
+            HSD_GObj_Remove(*(void**) ty27);
             *(void**) ty27 = NULL;
             *(void**) (ty27 + 0x8) = NULL;
             *(void**) (ty27 + 0x4) = NULL;
         }
 
         if (*(void**) ty26 != NULL) {
-            HSD_GObjPLink_80390228(*(void**) ty26);
+            HSD_GObj_Remove(*(void**) ty26);
             *(void**) ty26 = NULL;
         }
 
         if (ty28->x0 != NULL) {
-            HSD_GObjPLink_80390228(ty28->x0);
+            HSD_GObj_Remove(ty28->x0);
             ty28->x0 = NULL;
             ty28->x10 = NULL;
         }
 
         if (ty28->x4 != NULL) {
-            HSD_GObjProc_8038FED4(ty28->x4);
-            HSD_GObjPLink_80390228(ty28->x4);
+            HSD_GObjProc_RemoveAllProcs(ty28->x4);
+            HSD_GObj_Remove(ty28->x4);
             ty28->x4 = NULL;
         }
 
         if (ty28->x8 != NULL) {
-            HSD_GObjPLink_80390228(ty28->x8);
+            HSD_GObj_Remove(ty28->x8);
             ty28->x8 = NULL;
             HSD_FogSet(NULL);
         }
 
         if (ty30->x0C != NULL) {
-            HSD_GObjPLink_80390228(ty30->x0C);
+            HSD_GObj_Remove(ty30->x0C);
             ty30->x0C = NULL;
         }
 
         if (ty31[0] != NULL) {
-            HSD_GObjPLink_80390228(ty31[0]);
+            HSD_GObj_Remove(ty31[0]);
             ty31[0] = NULL;
         }
 
         if (ty31[1] != NULL) {
-            HSD_GObjPLink_80390228(ty31[1]);
+            HSD_GObj_Remove(ty31[1]);
             ty31[1] = NULL;
         }
 
         if (ty31[2] != NULL) {
-            HSD_GObjPLink_80390228(ty31[2]);
+            HSD_GObj_Remove(ty31[2]);
             ty31[2] = NULL;
         }
 
         if (ty31[3] != NULL) {
-            HSD_GObjPLink_80390228(ty31[3]);
+            HSD_GObj_Remove(ty31[3]);
             ty31[3] = NULL;
         }
 
         if (ty31[4] != NULL) {
-            HSD_GObjPLink_80390228(ty31[4]);
+            HSD_GObj_Remove(ty31[4]);
             ty31[4] = NULL;
         }
 
         if (ty31[5] != NULL) {
-            HSD_GObjPLink_80390228(ty31[5]);
+            HSD_GObj_Remove(ty31[5]);
             ty31[5] = NULL;
         }
     }
@@ -6136,7 +6136,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
 
     if (buttons & HSD_PAD_B) {
         sfxBack();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         editor->gobj = NULL;
         ((TyModeState*) Toy_804A284C)->x4 = 1;
         return;
@@ -6173,7 +6173,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
         DevText_HideBackground(_Toy_sbss_804D6E98);
         DevText_HideText(_Toy_sbss_804D6E98);
         Toy_80310324();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         editor->gobj = NULL;
         return;
     }

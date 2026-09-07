@@ -154,9 +154,9 @@ void fn_802FE470(HSD_GObj* gobj)
             }
             break;
         case 3:
-            HSD_GObjPLink_80390228(un_803F9D48.x18);
-            HSD_GObjPLink_80390228(un_803F9D48.x1C);
-            HSD_GObjPLink_80390228(un_803F9D48.x14);
+            HSD_GObj_Remove(un_803F9D48.x18);
+            HSD_GObj_Remove(un_803F9D48.x1C);
+            HSD_GObj_Remove(un_803F9D48.x14);
             lbArchive_80016EFC(un_804D6D98);
             un_803F9D48.x1 = 4;
             un_803F9D48.x0a = 0;

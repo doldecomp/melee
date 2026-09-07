@@ -188,7 +188,7 @@ void fn_8023201C(HSD_GObj* gobj)
             mnRulePlus_SaveRules();
             mn_804D6BC8.cooldown = 5;
             mnStageSw_80237410();
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
     } else if (buttons & 0x100) {
         /// Start button: accept all rules and proceed
@@ -209,7 +209,7 @@ void fn_8023201C(HSD_GObj* gobj)
         mnRulePlus_SaveRules();
         mn_804D6BC8.cooldown = 5;
         mn_8023164C();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         return;
     } else if (buttons & 1) {
         /// D-Pad Up: move selection up (with wrap)
@@ -737,7 +737,7 @@ void fn_80232F44(HSD_GObj* gobj)
                 break;
             case 2:
             case 4:
-                HSD_GObjPLink_80390228(gobj);
+                HSD_GObj_Remove(gobj);
                 return;
             }
         }

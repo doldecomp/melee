@@ -248,7 +248,7 @@ void fn_80233E10(HSD_GObj* gobj)
         lbCardGame_UpdatePowerTime();
         mn_804D6BC8.cooldown = 5;
         mn_8023164C();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         return;
     }
 
@@ -682,7 +682,7 @@ void fn_80234C24(HSD_GObj* gobj)
                     return;
                 case 2:
                 case 4:
-                    HSD_GObjPLink_80390228(gobj);
+                    HSD_GObj_Remove(gobj);
                     HSD_SisLib_803A5CC4((HSD_Text*) data->jobjs[7]);
                     HSD_SisLib_803A5CC4((HSD_Text*) data->jobjs[8]);
                     return;

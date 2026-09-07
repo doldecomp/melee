@@ -634,7 +634,7 @@ static void mnCount_UpdateArrowIndicators_noinline(HSD_GObj* gobj)
 
 void fn_802514B8(HSD_GObj* gobj)
 {
-    HSD_GObjPLink_80390228(gobj);
+    HSD_GObj_Remove(gobj);
 }
 
 static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
@@ -643,7 +643,7 @@ static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         {
@@ -749,7 +749,7 @@ void fn_80251640(HSD_GObj* gobj)
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
         i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
@@ -764,7 +764,7 @@ void fn_80251640(HSD_GObj* gobj)
 
     fn_80251640_InitModel(gobj, userdata, 0);
     mnCount_UpdateArrowIndicators_noinline(gobj);
-    HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+    HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
     proc = HSD_GObj_SetupProc(gobj, fn_802514D8, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

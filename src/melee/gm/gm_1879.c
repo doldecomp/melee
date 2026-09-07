@@ -149,7 +149,7 @@ void fn_80187AB4(HSD_GObj* gobj)
     case 2:
         if (lb_8000B09C(jobj) == 0) {
             data->x36.done = 1;
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
         break;
     }
@@ -220,7 +220,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         break;
     case 3:
         if (lb_8000B09C(jobj) == 0) {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
         break;
     }

@@ -995,7 +995,7 @@ void Camera_8002A28C(CameraBounds* arg0)
 
     if ((test != -1) && (cm_80452C68.xA0 != NULL) && (cm_80452C68._8C[1] == 0))
     {
-        HSD_GObjPLink_80390228(cm_80452C68.xA0);
+        HSD_GObj_Remove(cm_80452C68.xA0);
         cm_80452C68.xA0 = 0;
     }
 }

@@ -98,7 +98,7 @@ void fn_8024C210(HSD_GObj* gobj)
         if (mn_8022EC18(jobj, &mnLanguage_803EF5AC, MOBJ_MASK) >=
             mnLanguage_803EF5AC.end_frame)
         {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
         }
     }
 }
@@ -110,7 +110,7 @@ void fn_8024C270(HSD_GObj* gobj)
     PAD_STACK(3 * 4);
 
     if (mn_804A04F0.cur_menu != 23) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         gobjproc = HSD_GObj_SetupProc(gobj, fn_8024C210, 0);
         gobjproc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(menu->text);
@@ -125,7 +125,7 @@ void fn_8024C2E8(HSD_GObj* gobj)
     f32 tmp;
 
     if (mn_804A04F0.cur_menu != 23) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         gobjproc = HSD_GObj_SetupProc(gobj, fn_8024C210, 0);
         gobjproc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(menu->text);
@@ -134,7 +134,7 @@ void fn_8024C2E8(HSD_GObj* gobj)
 
     tmp = mn_8022EC18(jobj, &mnLanguage_803EF5A0, MOBJ_MASK);
     if (tmp == mnLanguage_803EF5A0.end_frame) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         gobjproc = HSD_GObj_SetupProc(gobj, fn_8024C270, 0);
         gobjproc->flags_3 = HSD_GObj_804D783C;
         menu->unk2 = 1;

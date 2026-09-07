@@ -220,7 +220,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
         link_gobj = GObj_Create(HSD_GOBJ_CLASS_ITEMLINK, 0xAU, 0U);
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
-                HSD_GObjPLink_80390228(prev_link->gobj);
+                HSD_GObj_Remove(prev_link->gobj);
                 prev_link = prev_link->next;
             }
             return NULL;
@@ -301,7 +301,7 @@ void it_802A2B10(Item_GObj* arg0)
                     while (item_link != NULL) {
                         gobj = item_link->gobj;
                         item_link = item_link->next;
-                        HSD_GObjPLink_80390228(gobj);
+                        HSD_GObj_Remove(gobj);
                     }
                     Item_8026A8EC(arg0);
                 }

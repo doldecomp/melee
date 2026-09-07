@@ -332,7 +332,7 @@ void HSD_SisLib_803A5CC4(HSD_Text* text)
         HSD_Text* next = curr->next;
         if (curr == text) {
             if (curr->entity != NULL) {
-                HSD_GObjPLink_80390228(curr->entity);
+                HSD_GObj_Remove(curr->entity);
                 curr->entity = NULL;
             } else {
                 HSD_SisLib_803A5A2C(curr);
@@ -349,7 +349,7 @@ void HSD_SisLib_803A5D30(void)
     while (curr != NULL) {
         HSD_Text* next = curr->next;
         if (curr->entity != NULL) {
-            HSD_GObjPLink_80390228(curr->entity);
+            HSD_GObj_Remove(curr->entity);
             curr->entity = NULL;
         } else {
             HSD_SisLib_803A5A2C(curr);
@@ -365,7 +365,7 @@ static inline void HSD_SisLib_803A5DA0_inline0(s32 font_idx)
         HSD_Text* next = curr->next;
         if (curr->font_idx == font_idx) {
             if (curr->entity != NULL) {
-                HSD_GObjPLink_80390228(curr->entity);
+                HSD_GObj_Remove(curr->entity);
                 curr->entity = NULL;
             } else {
                 HSD_SisLib_803A5A2C(curr);
@@ -387,7 +387,7 @@ void HSD_SisLib_803A5DA0(s32 font_idx)
         sislib_UnkAlloc3* next = curr->x0;
         if (curr->xA == font_idx) {
             if (curr->x4 != 0U) {
-                HSD_GObjPLink_80390228(curr->x4);
+                HSD_GObj_Remove(curr->x4);
                 curr->x4 = 0;
             }
             if (last != NULL) {
@@ -414,7 +414,7 @@ void HSD_SisLib_803A5E70(void)
     while (curr != NULL) {
         sislib_UnkAlloc3* next = curr->x0;
         if (curr->x4 != 0) {
-            HSD_GObjPLink_80390228(curr->x4);
+            HSD_GObj_Remove(curr->x4);
             curr->x4 = 0;
         }
         HSD_SisLib_Free(curr);
@@ -538,7 +538,7 @@ int HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
                 entry->x4->gxlink_prios = (u64) 1 << gx_link;
                 GObj_InitUserData(entry->x4, class_id, fn_803A60EC, entry->x4);
             } else {
-                HSD_GObjPLink_80390228(entry->x4);
+                HSD_GObj_Remove(entry->x4);
                 entry->x4 = NULL;
             }
         }

@@ -190,7 +190,7 @@ static void ifAll_802F370C(SceneDesc* arg0)
         lb_80011E24(jobj, &spC, i + 11, -1);
         lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x84[i]);
     }
-    HSD_GObjPLink_80390228(gobj);
+    HSD_GObj_Remove(gobj);
 }
 
 void ifAll_802F390C(void)
@@ -256,11 +256,11 @@ void ifAll_802F3A64(void)
 
     data = &ifAll_804A0FD8;
     if (data->gobj != NULL) {
-        HSD_GObjPLink_80390228(data->gobj);
+        HSD_GObj_Remove(data->gobj);
     }
 
     if (data->gobj_2 != NULL) {
-        HSD_GObjPLink_80390228(data->gobj_2);
+        HSD_GObj_Remove(data->gobj_2);
     }
 
     un_802FD468();

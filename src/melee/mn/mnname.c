@@ -992,7 +992,7 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 
         if (mnName_FindAnimLoop(tableBase, result) == base + 5) {
             if (result >= mnName_80238C34_inline(&base[5])) {
-                HSD_GObjPLink_80390228(arg0);
+                HSD_GObj_Remove(arg0);
             }
         }
     }
@@ -1075,7 +1075,7 @@ void fn_80239574(HSD_GObj* arg0)
                     goto do_anim;
                 case 2:
                 case 4:
-                    HSD_GObjPLink_80390228(arg0);
+                    HSD_GObj_Remove(arg0);
                     return;
                 default:
                     goto do_anim;
@@ -1391,7 +1391,7 @@ void fn_8023A0BC(HSD_GObj* gobj)
     if ((sel = mn_804A04F0.x10) != 2) {
         HSD_SisLib_803A5CC4(mnName_804D6BFC);
         mnName_804D6BFC = NULL;
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         return;
     }
 

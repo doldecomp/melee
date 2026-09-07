@@ -182,7 +182,7 @@ static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
         data->unk1 = 0;
 
         if (data->gobj8 != NULL) {
-            HSD_GObjPLink_80390228(data->gobj8);
+            HSD_GObj_Remove(data->gobj8);
             data->gobj8 = NULL;
         }
     }
@@ -224,7 +224,7 @@ static void mnGallery_80258DBC(HSD_GObj* gobj,
             data->unk0 = 0;
             data->unk1 = 0;
             if (data->gobj8 != NULL) {
-                HSD_GObjPLink_80390228(data->gobj8);
+                HSD_GObj_Remove(data->gobj8);
                 data->gobj8 = NULL;
             }
         }
@@ -236,10 +236,10 @@ static inline void fn_80258ED0_helper(void)
     struct mnGallery_804D6C88_userdata* data =
         mnGallery_804D6C88->user_data; /// @todo GET_804D6C88 blows the stack
     if (data->gobj4 != NULL) {
-        HSD_GObjPLink_80390228(data->gobj4);
+        HSD_GObj_Remove(data->gobj4);
     }
     if (data->gobj8 != NULL) {
-        HSD_GObjPLink_80390228(
+        HSD_GObj_Remove(
             *(HSD_GObj* volatile*) &data->gobj8); /// @todo hacky
     }
     data->gobj4 = NULL;
@@ -307,9 +307,9 @@ static inline void fn_802590C4_inline(HSD_GObj* gobj)
     s32 i;
     struct mnGallery_804D6C88_userdata* tmp;
     tmp = HSD_GObjGetUserData(gobj); /// @todo GET_804D6C88 breaks these
-    HSD_GObjPLink_80390228(gobj);
+    HSD_GObj_Remove(gobj);
     for (i = 0; i < 2; i++) {
-        HSD_GObjPLink_80390228((tmp->gobjs)[i]);
+        HSD_GObj_Remove((tmp->gobjs)[i]);
         tmp->gobjs[i] = NULL;
     };
 }

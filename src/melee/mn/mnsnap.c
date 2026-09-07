@@ -2400,16 +2400,16 @@ void fn_80257D7C(void)
             mn_80229894(5, 0, 3);
 
             if (mnSnap_804A0A10.main_gobj != NULL) {
-                HSD_GObjPLink_80390228(mnSnap_804A0A10.main_gobj);
+                HSD_GObj_Remove(mnSnap_804A0A10.main_gobj);
             }
             if (mnSnap_804A0A10.sub_gobj != NULL) {
-                HSD_GObjPLink_80390228(mnSnap_804A0A10.sub_gobj);
+                HSD_GObj_Remove(mnSnap_804A0A10.sub_gobj);
             }
             if (snap->cursor_gobj != NULL) {
-                HSD_GObjPLink_80390228(snap->cursor_gobj);
+                HSD_GObj_Remove(snap->cursor_gobj);
             }
             if (mnSnap_804A0A10.warn_gobj != NULL) {
-                HSD_GObjPLink_80390228(mnSnap_804A0A10.warn_gobj);
+                HSD_GObj_Remove(mnSnap_804A0A10.warn_gobj);
             }
 
             {

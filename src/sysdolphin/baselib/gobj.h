@@ -89,34 +89,34 @@ extern struct _unk_gobj_struct {
     union {
         u32 flags;
         struct {
-            u32 b0 : 1;
-            u32 b1 : 1;
-            u32 b2 : 1;
-            u32 b3 : 1;
+            u32 in_delayed_proc : 1;
+            u32 delay_remove_gobj : 1;
+            u32 delay_remove_proc : 1;
+            u32 delay_change_gobj_pri : 1;
         };
     };
     u32 type;
     u8 p_link;
     u8 p_prio;
     HSD_GObj* gobj;
-} HSD_GObj_804CE3E4;
+} HSD_GObj_DelayedProcInfo;
 
 extern GObjFunc* HSD_GObj_804D7810;
 extern HSD_GObj* HSD_GObj_804D7814;
 extern HSD_GObj* HSD_GObj_804D7818;
-extern HSD_GObj* HSD_GObj_804D781C;
+extern HSD_GObj* HSD_GObj_CurrentInvokedProcGObj;
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObjGXLinkHead;
 extern HSD_GObj** plinklow_gobjs;
 /// @todo GObjList is a fake type, this is just a double pointer
 /// (pointer to array of HSD_GObj*, indexed by p_link)
 extern HSD_GObjList* HSD_GObj_Entities;
-extern HSD_GObjProc* HSD_GObj_804D7830;
-extern s32 HSD_GObj_804D7834;
-extern HSD_GObjProc* HSD_GObj_804D7838;
+extern HSD_GObjProc* HSD_GObj_NextInvokedProc;
+extern s32 HSD_GObj_CurrentInvokedSLink;
+extern HSD_GObjProc* HSD_GObj_CurrentInvokedProc;
 extern s32 HSD_GObj_804D783C;
-extern HSD_GObjProc** HSD_GObj_804D7840;
-extern HSD_GObjProc** HSD_GObj_804D7844;
+extern HSD_GObjProc** HSD_GObj_GObjProcHead;
+extern HSD_GObjProc** HSD_GObj_ProcList;
 extern s8 HSD_GObj_FogKind;
 extern u8 HSD_GObj_JObjKind;
 extern s8 HSD_GObj_LightKind;

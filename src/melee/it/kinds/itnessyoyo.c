@@ -78,7 +78,7 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
         link_gobj = GObj_Create(7, 0xA, 0);
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
-                HSD_GObjPLink_80390228(prev_link->gobj);
+                HSD_GObj_Remove(prev_link->gobj);
                 prev_link = prev_link->next;
             }
             return NULL;
@@ -155,7 +155,7 @@ static inline void it_802BE958_inline(Item_GObj* gobj)
             while (link != NULL) {
                 HSD_GObj* tmp = link->gobj;
                 link = link->next;
-                HSD_GObjPLink_80390228(tmp);
+                HSD_GObj_Remove(tmp);
             }
         }
     }

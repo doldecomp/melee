@@ -148,7 +148,7 @@ void fn_8031FC30(HSD_GObj* gobj)
 void fn_8031FCBC(HSD_GObj* gobj)
 {
     if ((f32) un_804D6FF8 >= 100.0F) {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
     } else {
         un_804D6FF8 = un_804D6FF8 + 1;
     }

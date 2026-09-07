@@ -322,7 +322,7 @@ static void fn_80235F80(HSD_GObj* gobj)
         lbCardGame_UpdatePowerTime();
         mn_804D6BC8.cooldown = 5;
         mn_802339FC();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         return;
     }
     if ((u8) mnStageSw_804D6BF4 == 0) {
@@ -615,7 +615,7 @@ static void fn_80236998(HSD_GObj* gobj)
             case 2:
             case 4:
                 mnStageSw_FreeTexts(data);
-                HSD_GObjPLink_80390228(gobj);
+                HSD_GObj_Remove(gobj);
                 return;
             }
         }

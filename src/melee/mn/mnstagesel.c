@@ -180,7 +180,7 @@ void fn_80259D84(HSD_GObj* gobj)
         break;
     case 2:
         if (++temp_r31->x4 > 0xAU) {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObj_Remove(gobj);
             temp_r31->x2++;
         }
         break;
@@ -772,7 +772,7 @@ void mnStageSel_Scene_OnFrame(void)
     if (sss_data->no_lras == 0 && mn_8022F218()) {
         sfxBack();
         lb_800145F4();
-        HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
+        HSD_GObj_Remove(mnStageSel_804D6C9C);
         mn_8022F268();
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();

@@ -69,7 +69,7 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
 
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
-                HSD_GObjPLink_80390228(prev_link->gobj);
+                HSD_GObj_Remove(prev_link->gobj);
                 prev_link = prev_link->next;
             }
             return NULL;
@@ -141,7 +141,7 @@ void it_802C2750(Item_GObj* gobj)
                 for (cur = ip->xDD4_itemVar.climbersstring.x4; cur != NULL;) {
                     HSD_GObj* cur_gobj = cur->gobj;
                     cur = cur->next;
-                    HSD_GObjPLink_80390228(cur_gobj);
+                    HSD_GObj_Remove(cur_gobj);
                 }
             }
         }
@@ -269,7 +269,7 @@ static inline void itClimbersstring_Cleanup(Item_GObj* gobj)
             for (cur = ip->xDD4_itemVar.climbersstring.x4; cur != NULL;) {
                 HSD_GObj* cur_gobj = cur->gobj;
                 cur = cur->next;
-                HSD_GObjPLink_80390228(cur_gobj);
+                HSD_GObj_Remove(cur_gobj);
             }
         }
     }

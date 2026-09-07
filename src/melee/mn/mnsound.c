@@ -246,7 +246,7 @@ void fn_80249A1C(HSD_GObj* gobj)
     u8 cursor_timer;
     PAD_STACK(8);
     if (mn_804A04F0.cur_menu != MENU_KIND_SETTINGS_SOUND) {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObj_Remove(gobj);
         HSD_SisLib_803A5CC4(menu->text);
         return;
     }
