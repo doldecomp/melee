@@ -33,13 +33,13 @@ static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* da = fp->dat_attrs;
     s32 facing_dir = 0;
-    if (fp->input.x668 & HSD_PAD_B) {
+    if (fp->input.pressed_buttons & HSD_PAD_B) {
         fp->mv.kp.specials.b_held = true;
     }
-    if (fp->input.lstick1.x > -da->x30 && fp->input.lstick.x < -da->x30) {
+    if (fp->input.lstick[1].x > -da->x30 && fp->input.lstick[0].x < -da->x30) {
         facing_dir = -1;
     }
-    if (fp->input.lstick1.x < da->x30 && fp->input.lstick.x > da->x30) {
+    if (fp->input.lstick[1].x < da->x30 && fp->input.lstick[0].x > da->x30) {
         facing_dir = +1;
     }
     fp->mv.kp.specials.facing_dir = fp->facing_dir * facing_dir;

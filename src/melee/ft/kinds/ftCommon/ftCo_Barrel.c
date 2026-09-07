@@ -78,7 +78,7 @@ void ftCo_Barrel_IASA(Fighter_GObj* gobj)
         fp->mv.co.barrel.x4 -= 1;
     }
 
-    if (fp->mv.co.barrel.x4 == 0 && fp->input.x668 & HSD_PAD_AB) {
+    if (fp->mv.co.barrel.x4 == 0 && fp->input.pressed_buttons & HSD_PAD_AB) {
         it_80295F38(fp->mv.co.barrel.x8);
     }
 }

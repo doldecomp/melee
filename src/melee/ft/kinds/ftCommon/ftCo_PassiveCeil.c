@@ -64,7 +64,8 @@ void ftCo_PassiveCeil_Anim(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB3(fp)) {
-        fp->self_vel.x = fp->input.lstick.x * fp->co_attrs.passiveceil_vel_x;
+        fp->self_vel.x =
+            fp->input.lstick[0].x * fp->co_attrs.passiveceil_vel_x;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_Fall_Enter(gobj);

@@ -185,7 +185,7 @@ void ftKb_SpecialHi1_IASA(Fighter_GObj* gobj)
     float new_var;
 
     if ((!fp->cmd_vars[3]) && (!fp->mv.kb.specialhi.x4)) {
-        if ((lstick_x = fp->input.lstick.x) < 0.0F) {
+        if ((lstick_x = fp->input.lstick[0].x) < 0.0F) {
             mag = -lstick_x;
         } else {
             mag = lstick_x;
@@ -219,7 +219,7 @@ void ftKb_SpecialAirHi1_IASA(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
 
     if ((!fp->cmd_vars[3]) && (!fp->mv.kb.specialhi.x4)) {
-        if ((lstick_x = fp->input.lstick.x) < 0.0f) {
+        if ((lstick_x = fp->input.lstick[0].x) < 0.0f) {
             mag = -lstick_x;
         } else {
             mag = lstick_x;

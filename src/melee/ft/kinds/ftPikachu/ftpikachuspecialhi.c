@@ -472,8 +472,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    float stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
-                            fp->input.lstick.y * fp->input.lstick.y);
+    float stick_mag = sqrtf(fp->input.lstick[0].x * fp->input.lstick[0].x +
+                            fp->input.lstick[0].y * fp->input.lstick[0].y);
 
     // cap stick magnitude to MAX_STICK_MAG
     if (stick_mag > MAX_STICK_MAG) {
@@ -483,8 +483,8 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     if (!(stick_mag < pika_attr->x8C)) {
         Vec3 lstick_direction;
 
-        lstick_direction.x = fp->input.lstick.x;
-        lstick_direction.y = fp->input.lstick.y;
+        lstick_direction.x = fp->input.lstick[0].x;
+        lstick_direction.y = fp->input.lstick[0].y;
         lstick_direction.z = 0.0f;
 
         if (!(lbVector_AngleXY(&collData->floor.normal, &lstick_direction) <
@@ -545,8 +545,9 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    float temp_stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
-                                 (fp->input.lstick.y * fp->input.lstick.y));
+    float temp_stick_mag =
+        sqrtf((fp->input.lstick[0].x * fp->input.lstick[0].x) +
+              (fp->input.lstick[0].y * fp->input.lstick[0].y));
 
     final_stick_mag = temp_stick_mag;
 
@@ -556,17 +557,17 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     }
 
     if ((final_stick_mag > pika_attr->x8C)) {
-        if (ABS(fp->input.lstick.x) > 0.001f) {
+        if (ABS(fp->input.lstick[0].x) > 0.001f) {
             ftCommon_UpdateFacing(fp);
         }
 
         // zip angle = atan2(stick_y, stick_x * facing_direction)
-        some_angle =
-            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        some_angle = atan2f(fp->input.lstick[0].y,
+                            fp->input.lstick[0].x * fp->facing_dir);
 
         // store stick angle to compare during zip2 check
-        fp->mv.pk.specialhi.x10.x = fp->input.lstick.x;
-        fp->mv.pk.specialhi.x10.y = fp->input.lstick.y;
+        fp->mv.pk.specialhi.x10.x = fp->input.lstick[0].x;
+        fp->mv.pk.specialhi.x10.y = fp->input.lstick[0].y;
     } else {
         // set facing direction if stick x meets a threshold
         ftCommon_8007DA24(fp);
@@ -629,8 +630,8 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     // distance formula
-    float stick_mag = sqrtf((fp->input.lstick.x * fp->input.lstick.x) +
-                            (fp->input.lstick.y * fp->input.lstick.y));
+    float stick_mag = sqrtf((fp->input.lstick[0].x * fp->input.lstick[0].x) +
+                            (fp->input.lstick[0].y * fp->input.lstick[0].y));
 
     // if stick_mag is less than the threshold, push the max stick magnitude
     // onto the stack and return 0
@@ -645,8 +646,8 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
         u8 _[4];
 
         // push current stick to temporary vector
-        vec1.x = fp->input.lstick.x;
-        vec1.y = fp->input.lstick.y;
+        vec1.x = fp->input.lstick[0].x;
+        vec1.y = fp->input.lstick[0].y;
         vec1.z = 0.0f;
 
         // push stick from zip1 to temporary vector

@@ -105,7 +105,7 @@ void ftCo_800DF0D0(Fighter_GObj* gobj)
 
     switch (fp->smash_attrs.state) {
     case SmashState_PreCharge:
-        if (fp->input.held_inputs & HSD_PAD_A) {
+        if (fp->input.held_buttons[0] & HSD_PAD_A) {
             attr->state = SmashState_Charging;
             attr->x2124_frameSpeedMul = fp->frame_speed_mul;
             attr->x212C = 0;
@@ -121,7 +121,7 @@ void ftCo_800DF0D0(Fighter_GObj* gobj)
         }
         break;
     case SmashState_Charging:
-        if (!(fp->input.held_inputs & HSD_PAD_A)) {
+        if (!(fp->input.held_buttons[0] & HSD_PAD_A)) {
             attr->state = SmashState_Release;
             ftAnim_SetAnimRate(gobj, attr->x2124_frameSpeedMul);
             ftCo_800C0200(fp, attr->x2128);

@@ -59,18 +59,18 @@
 bool ftCo_80091A2C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->input.held_inputs & HSD_PAD_LR ? true : false;
+    return fp->input.held_buttons[0] & HSD_PAD_LR ? true : false;
 }
 
 static inline bool inlineA0(Fighter* fp)
 {
-    return fp->input.held_inputs & HSD_PAD_LR ? true : false;
+    return fp->input.held_buttons[0] & HSD_PAD_LR ? true : false;
 }
 
 bool ftCo_80091A4C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
+    if (fp->input.pressed_buttons & (HSD_PAD_R | HSD_PAD_L) &&
         fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
@@ -89,14 +89,14 @@ bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
     bool ret0;
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
+    if (fp->input.pressed_buttons & (HSD_PAD_R | HSD_PAD_L) &&
         fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         ret0 = true;
     } else {
         bool ret1;
-        if (fp->input.held_inputs & HSD_PAD_LR) {
+        if (fp->input.held_buttons[0] & HSD_PAD_LR) {
             ret1 = true;
         } else {
             ret1 = false;
@@ -131,8 +131,8 @@ void ftCo_80091BC4(Fighter* fp)
 {
     float stick_rad, stick_deg, deg_delta, guard_deg, smoothed_deg, stick_mag;
 
-    stick_rad =
-        lb_8000D008(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+    stick_rad = lb_8000D008(fp->input.lstick[0].y,
+                            fp->input.lstick[0].x * fp->facing_dir);
     if (stick_rad < 0) {
         stick_rad += 2 * (float) M_PI;
     }
@@ -165,8 +165,8 @@ void ftCo_80091BC4(Fighter* fp)
     }
     fp->mv.co.guard.x8 = 10 + guard_deg;
 
-    stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
-                      fp->input.lstick.y * fp->input.lstick.y);
+    stick_mag = sqrtf(fp->input.lstick[0].x * fp->input.lstick[0].x +
+                      fp->input.lstick[0].y * fp->input.lstick[0].y);
     if (stick_mag > 1) {
         stick_mag = 1;
     }
@@ -317,7 +317,8 @@ void ftCo_800921DC(HSD_GObj* gobj)
     fp->mv.co.guard.x2C = 0;
     {
         float lightshield_amount =
-            (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+            (fp->input.triggers[0] -
+             p_ftCommonData->analog_shoulder_deadzone) /
             (1 - p_ftCommonData->analog_shoulder_deadzone);
         if (lightshield_amount < 0) {
             lightshield_amount = fp->mv.co.guard.x2C;
@@ -403,11 +404,12 @@ bool ftCo_800925A4(HSD_GObj* gobj)
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
-                (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+                (fp->input.triggers[0] -
+                 p_ftCommonData->analog_shoulder_deadzone) /
                             (1 - p_ftCommonData->analog_shoulder_deadzone) <
                         0
                     ? fp->mv.co.guard.x2C
-                    : (fp->input.x650 -
+                    : (fp->input.triggers[0] -
                        p_ftCommonData->analog_shoulder_deadzone) /
                           (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
@@ -560,7 +562,7 @@ void ftCo_Guard_Coll(Fighter_GObj* gobj)
 void ftCo_80092BCC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!(fp->input.held_inputs & HSD_PAD_LR)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_LR)) {
         fp->mv.co.guard.xC = true;
     }
 }
@@ -715,13 +717,13 @@ void ftCo_80093240(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->allow_sdi && fp->ground_or_air == GA_Ground) {
-        if ((fp->input.lstick.x < 0
-                 ? -fp->input.lstick.x
-                 : fp->input.lstick.x) >= p_ftCommonData->sdi_min_stick_mag &&
+        if ((fp->input.lstick[0].x < 0 ? -fp->input.lstick[0].x
+                                       : fp->input.lstick[0].x) >=
+                p_ftCommonData->sdi_min_stick_mag &&
             fp->x670_timer_lstick_tilt_x < p_ftCommonData->sdi_stick_window)
         {
-            float scl = p_ftCommonData->x4C0 *
-                        (fp->input.lstick.x * p_ftCommonData->sdi_pos_scale);
+            float scl = p_ftCommonData->x4C0 * (fp->input.lstick[0].x *
+                                                p_ftCommonData->sdi_pos_scale);
             fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
             fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
             fp->x670_timer_lstick_tilt_x = 254;
@@ -733,12 +735,12 @@ void ftCo_800932DC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
-        if ((fp->input.lstick.x < 0
-                 ? -fp->input.lstick.x
-                 : fp->input.lstick.x) >= p_ftCommonData->sdi_min_stick_mag)
+        if ((fp->input.lstick[0].x < 0
+                 ? -fp->input.lstick[0].x
+                 : fp->input.lstick[0].x) >= p_ftCommonData->sdi_min_stick_mag)
         {
             float scl = p_ftCommonData->x4C0 *
-                        (fp->input.lstick.x * p_ftCommonData->x4BC);
+                        (fp->input.lstick[0].x * p_ftCommonData->x4BC);
             fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
             fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
 
@@ -847,7 +849,7 @@ bool ftCo_80093694(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->mv.co.guard.x0 < p_ftCommonData->powershield_input_window &&
-        fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
+        fp->input.pressed_buttons & (HSD_PAD_R | HSD_PAD_L) &&
         fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_80093850(gobj);

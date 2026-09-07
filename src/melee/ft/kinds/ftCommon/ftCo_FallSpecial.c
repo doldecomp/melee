@@ -98,7 +98,7 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
         }
         {
-            lstick_x = fp->input.lstick.x;
+            lstick_x = fp->input.lstick[0].x;
             drift = lstick_x * ca->air_drift_stick_mul;
             drift +=
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
@@ -112,7 +112,7 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             ftCommon_Fall(fp, ca->gravity, ca->fast_fall_velocity);
         }
         {
-            lstick_x = fp->input.lstick.x;
+            lstick_x = fp->input.lstick[0].x;
             drift = lstick_x * ca->air_drift_stick_mul;
             drift +=
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
@@ -135,7 +135,7 @@ bool ftCo_80096CC8(Fighter_GObj* gobj, int line_id)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (line_id != -1 && (!(mpLineGetFlags(line_id) & LINE_FLAG_PLATFORM) ||
-                          fp->input.lstick.y > p_ftCommonData->x25C))
+                          fp->input.lstick[0].y > p_ftCommonData->x25C))
     {
         return true;
     }

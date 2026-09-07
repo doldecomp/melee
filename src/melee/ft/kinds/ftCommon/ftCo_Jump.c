@@ -30,13 +30,13 @@
 ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
+    if ((fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold) &&
         (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
     {
         return JumpInput_LStick;
     }
 
-    if (fp->input.x668 & HSD_PAD_XY) {
+    if (fp->input.pressed_buttons & HSD_PAD_XY) {
         return JumpInput_XY;
     }
 
@@ -67,14 +67,15 @@ bool fn_800CAF78(Fighter_GObj* gobj)
         return ftCo_800C5A50(gobj);
     }
 
-    if ((fp->input.lstick.y >= p_ftCommonData->relaxed_tap_jump_threshold) &&
+    if ((fp->input.lstick[0].y >=
+         p_ftCommonData->relaxed_tap_jump_threshold) &&
         (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
     {
         ftCo_KneeBend_Enter(gobj, JumpInput_LStick);
         return true;
     }
 
-    if (fp->input.x668 & HSD_PAD_XY) {
+    if (fp->input.pressed_buttons & HSD_PAD_XY) {
         ftCo_KneeBend_Enter(gobj, JumpInput_XY);
         return true;
     }
@@ -113,7 +114,7 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mul)
 
     {
         float h_init_v =
-            fp->input.lstick.x * fp->co_attrs.jump_h_initial_velocity;
+            fp->input.lstick[0].x * fp->co_attrs.jump_h_initial_velocity;
         float h_vel = fp->mv.co.jump.jump_mul * h_init_v;
         float h_max_vel;
         float v_init_v;
@@ -155,7 +156,7 @@ void ftCo_Jump_Enter(Fighter_GObj* gobj)
     FtMotionId msid;
 
     ftCommon_8007D5D4(fp);
-    msid = (fp->input.lstick.x * fp->facing_dir) > -p_ftCommonData->x78
+    msid = (fp->input.lstick[0].x * fp->facing_dir) > -p_ftCommonData->x78
                ? ftCo_MS_JumpF
                : ftCo_MS_JumpB;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);

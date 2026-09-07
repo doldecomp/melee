@@ -109,14 +109,14 @@ void ftCo_800CE650(HSD_GObj* gobj)
 
     temp_r3 = GET_FIGHTER(gobj);
     if (temp_r3->item_gobj != NULL) {
-        if (!(temp_r3->input.held_inputs & HSD_PAD_A)) {
+        if (!(temp_r3->input.held_buttons[0] & HSD_PAD_A)) {
             temp_r3->mv.co.itemthrow.xC = 1;
         }
         if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
             temp_r3->mv.co.itemthrow.x10 += 1.0F;
         }
         if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
-            (temp_r3->input.x668 & HSD_PAD_A))
+            (temp_r3->input.pressed_buttons & HSD_PAD_A))
         {
             temp_r3->mv.co.itemthrow.x10 = 0.0F;
         }

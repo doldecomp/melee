@@ -684,7 +684,7 @@ void ftKb_PrSpecialNLoop_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_PrSpecialN1, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         ftKb_PrSetCallbacks(gobj);
@@ -705,7 +705,7 @@ void ftKb_PrSpecialNFull_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_PrSpecialN1, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         ftKb_PrSetCallbacks(gobj);
@@ -723,8 +723,8 @@ void ftKb_PrSpecialN1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    if (ABS(fp->input.lstick.x) > da->specialn_pr_spinning_speed) {
-        f32 sign = SIGNF(fp->input.lstick.x);
+    if (ABS(fp->input.lstick[0].x) > da->specialn_pr_spinning_speed) {
+        f32 sign = SIGNF(fp->input.lstick[0].x);
         if (fp->mv.pr.specialn.x34.x != sign) {
             ftColl_8007AFF8(gobj);
             fp->mv.pr.specialn.facing_dir = sign;
@@ -755,7 +755,7 @@ void ftKb_PrSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_PrSpecialAirN, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         ftKb_PrSetCallbacks(gobj);
@@ -777,7 +777,7 @@ void ftKb_PrSpecialAirNFull_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_PrSpecialAirN, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
         ftKb_PrSetCallbacks(gobj);
@@ -1302,8 +1302,8 @@ void ftKb_PrSpecialAirN_Coll(Fighter_GObj* gobj)
                          &fp->mv.pr.specialn.x14);
             fp->mv.pr.specialn.x1C = da->specialn_pr_unk1;
         } else {
-            if (ABS(fp->input.lstick.x) > da->specialn_pr_spinning_speed) {
-                f32 dir = SIGNF(fp->input.lstick.x);
+            if (ABS(fp->input.lstick[0].x) > da->specialn_pr_spinning_speed) {
+                f32 dir = SIGNF(fp->input.lstick[0].x);
                 fp->mv.pr.specialn.x34.x = dir;
                 fp->self_vel.x = fp->gr_vel =
                     fp->mv.pr.specialn.x18 * fp->mv.pr.specialn.x34.x;

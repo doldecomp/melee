@@ -29,7 +29,7 @@ bool ftCo_800C97A8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir <= p_ftCommonData->x34) {
+    if (fp->input.lstick[0].x * fp->facing_dir <= p_ftCommonData->x34) {
         return true;
     }
     return false;
@@ -99,7 +99,7 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->mv.co.turn.just_turned) {
-        fp->input.x668 |= fp->mv.co.turn.x1C;
+        fp->input.pressed_buttons |= fp->mv.co.turn.x1C;
     }
     if (!fp->mv.co.turn.has_turned) {
         fp->facing_dir = -fp->facing_dir;
@@ -127,18 +127,18 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
 
     fn_800C9C2C(gobj);
     if (fp->mv.co.turn.just_turned && fp->mv.co.turn.x8) {
-        if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
+        if (fp->input.lstick[0].x * fp->mv.co.turn.facing_after >=
             p_ftCommonData->dash_smash_stick_threshold)
         {
             ftCo_Dash_Enter(gobj, 0);
         }
     }
 
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp->input.pressed_buttons & HSD_PAD_A) {
         fp->mv.co.turn.x1C |= HSD_PAD_A;
     }
 
-    if (fp->input.x668 & HSD_PAD_B) {
+    if (fp->input.pressed_buttons & HSD_PAD_B) {
         fp->mv.co.turn.x1C |= HSD_PAD_B;
     }
 
@@ -160,7 +160,7 @@ void ftCo_Turn_Coll(Fighter_GObj* gobj)
 bool fn_800C9C2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
+    if (fp->input.lstick[0].x * fp->mv.co.turn.facing_after >=
             p_ftCommonData->dash_smash_stick_threshold &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
