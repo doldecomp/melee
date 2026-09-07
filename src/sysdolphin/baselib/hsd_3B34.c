@@ -453,7 +453,9 @@ static inline s32 hsd_803B3CD8_bit_length(s32 value)
 
     for (bit = 0x1F; bit >= 0; bit--) {
         if (value & (1 << bit)) {
-            return bit + 1;
+            s32 result = bit + 1;
+
+            return result;
         }
     }
     return 0;
@@ -507,8 +509,6 @@ void hsd_803B3CD8(s32 component)
     s32 length;
     s32 run;
     s32 index;
-
-    PAD_STACK(16);
 
     state.work = (JpegWork*) &hsd_804D2648;
     tables = (JpegEncodeTables*) lbl_80430C40;
