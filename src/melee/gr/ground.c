@@ -3227,9 +3227,11 @@ s32 Ground_801C5840(void)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma global_optimizer off
+/// With propagation on, the single-use @c &stage_info is rematerialized at the
+/// store instead of being computed at the start of the branch and held in
+/// r31 across the two calls
+#pragma opt_propagation off
 #endif
-/// @todo Why is @c global_optimizer necessary?
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
