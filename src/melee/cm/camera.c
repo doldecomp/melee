@@ -994,7 +994,7 @@ void Camera_UpdateQuakes(CameraBounds* bounds)
     if ((quakes_remaining != -1) && (game_camera.quake_gobj != NULL) &&
         (game_camera.quake_frames_left[QuakeKind_Loop] == 0))
     {
-        HSD_GObjFree(cm_80452C68.xA0);
+        HSD_GObjFree(game_camera.quake_gobj);
         game_camera.quake_gobj = 0;
     }
 }

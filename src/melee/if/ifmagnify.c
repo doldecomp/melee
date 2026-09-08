@@ -551,8 +551,8 @@ void ifMagnify_802FC750(void)
     for (i = 0; i < 6; i++) {
         if (base->player[i].gobj != NULL) {
             HSD_GObjFree(*(HSD_GObj**) ((u32) base +
-                                           i * (s32) sizeof(ifMagnifyPlayer) +
-                                           (s32) offsetof(ifMagnify, player)));
+                                        i * (s32) sizeof(ifMagnifyPlayer) +
+                                        (s32) offsetof(ifMagnify, player)));
             *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
                            (s32) offsetof(ifMagnify, player)) = NULL;
         }
