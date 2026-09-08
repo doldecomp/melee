@@ -385,17 +385,12 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
     {
         Vec3 sp2C;
         ftFox_DatAttrs* da;
-        Fighter* fp;
         f64 launchAngle;
 
-        /// @todo Fake assignment.
-#ifdef MUST_MATCH
-        fp =
-#endif
-            fp = GET_FIGHTER(gobj);
-
+        fp = GET_FIGHTER(gobj);
         da = getFtSpecialAttrs(fp);
 
+        /// @todo Unused assignment.
         {
             Fighter* _ = GET_FIGHTER(gobj);
         }
@@ -480,14 +475,8 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     {
         Vec3 sp2C;
         ftFox_DatAttrs* da;
-        Fighter* fp;
 
-        /// @todo Fake assignment.
-#ifdef MUST_MATCH
-        fp =
-#endif
-            fp = GET_FIGHTER(gobj);
-
+        fp = GET_FIGHTER(gobj);
         da = getFtSpecialAttrs(fp);
 
         /// @todo Unused assignment.
