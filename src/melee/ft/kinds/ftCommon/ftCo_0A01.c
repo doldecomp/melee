@@ -3027,10 +3027,12 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
         return NULL;
     }
     closest_ip = NULL;
-    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-        /// @todo stupid stack padding hack
+    for (cur = HSD_GObj_Entities->items; cur != NULL;
+         cur = HSD_GObjGetNext(cur))
+    {
         cur_ip = GET_ITEM(cur);
-        cur_ip = GET_ITEM(cur);
+        /// The repeated accessor call emits no code but reserves the stack
+        /// slot the target has below the sqrtf temporaries.
         cur_ip = GET_ITEM(cur);
 
         if (!Item_IsGrabbable(cur)) {
@@ -7371,102 +7373,82 @@ void ftCo_800B0AF4(Fighter* fp)
     }
 }
 
+static inline bool isInCaptureWait(Fighter* fp)
+{
+    if (fp->motion_id == ftCo_MS_CaptureWaitHi) {
+        return true;
+    } else if (fp->motion_id == ftCo_MS_CaptureWaitLw) {
+        return true;
+    } else if (fp->motion_id >= ftCo_MS_ShoulderedWait &&
+               fp->motion_id <= ftCo_MS_ShoulderedTurn)
+    {
+        return true;
+    }
+    return false;
+}
+
 bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
 {
     Item_GObj* temp_r5_2;
     enum ItemKind temp_r0;
-    s32 temp_r0_2;
     s32 temp_r5;
-    s32 var_r0;
-    s32 var_r0_2;
-    s32 var_r0_3;
     s32 var_r0_4;
 
     temp_r5 = fp1->motion_id;
-    if (ftCo_800A3200(fp1) != 0) {
-        goto jmp_9c;
-    } else {
-        if (temp_r5 == ftCo_MS_CaptureWaitHi) {
-            var_r0_2 = 1;
-        } else if (temp_r5 == ftCo_MS_CaptureWaitLw) {
-            var_r0_2 = 1;
-        } else if (temp_r5 >= ftCo_MS_ShoulderedWait &&
-                   temp_r5 <= ftCo_MS_ShoulderedTurn)
-        {
-            var_r0_2 = 1;
-        } else {
-            var_r0_2 = 0;
+    if (ftCo_800A3200(fp1) || isInCaptureWait(fp1) || isInTeeter(fp1)) {
+        return false;
+    }
+    if (temp_r5 >= ftCo_MS_CaptureKirby && temp_r5 <= ftCo_MS_CaptureWaitKirby)
+    {
+        return false;
+    }
+    if (temp_r5 >= ftCo_MS_Rebirth && temp_r5 <= ftCo_MS_RebirthWait) {
+        return false;
+    }
+    if (temp_r5 >= ftCo_MS_WarpStarJump && temp_r5 <= ftCo_MS_WarpStarFall) {
+        return false;
+    }
+    if (temp_r5 >= ftCo_MS_ItemParasolFall &&
+        temp_r5 <= ftCo_MS_ItemParasolDamageFall)
+    {
+        return false;
+    }
+    temp_r5_2 = fp0->item_gobj;
+    if (temp_r5_2 != NULL) {
+        temp_r0 = GET_ITEM(temp_r5_2)->kind;
+        switch (temp_r0) {
+        case It_Kind_Box:
+        case It_Kind_Taru:
+        case It_Kind_Kusudama:
+        case It_Kind_TaruCann:
+            var_r0_4 = true;
+            break;
+        default:
+            var_r0_4 = false;
         }
-        if (var_r0_2 != 0) {
-            goto jmp_9c;
-        } else {
-            if (temp_r5 == ftCo_MS_Ottotto || temp_r5 == ftCo_MS_OttottoWait) {
-                var_r0_3 = 1;
-            } else {
-                var_r0_3 = 0;
-            }
-            if (var_r0_3 != 0) {
-                /// @todo fakematched control flow
-            jmp_9c:
-                return false;
-            }
-            if (temp_r5 >= ftCo_MS_CaptureKirby &&
-                temp_r5 <= ftCo_MS_CaptureWaitKirby)
-            {
-                return false;
-            }
-            if (temp_r5 >= ftCo_MS_Rebirth && temp_r5 <= ftCo_MS_RebirthWait) {
-                return false;
-            }
-            if (temp_r5 >= ftCo_MS_WarpStarJump &&
-                temp_r5 <= ftCo_MS_WarpStarFall)
-            {
-                return false;
-            }
-            if (temp_r5 >= ftCo_MS_ItemParasolFall &&
-                temp_r5 <= ftCo_MS_ItemParasolDamageFall)
-            {
-                return false;
-            }
-            temp_r5_2 = fp0->item_gobj;
-            if (temp_r5_2 != NULL) {
-                temp_r0 = GET_ITEM(temp_r5_2)->kind;
-                switch (temp_r0) {
-                case It_Kind_Box:
-                case It_Kind_Taru:
-                case It_Kind_Kusudama:
-                case It_Kind_TaruCann:
-                    var_r0_4 = true;
-                    break;
-                default:
-                    var_r0_4 = false;
-                }
-                if (var_r0_4 != 0) {
-                    return false;
-                }
-            }
-            if (fp1->ground_or_air == GA_Ground &&
-                fp0->ground_or_air == GA_Air &&
-                fp1->cur_pos.y > fp0->cur_pos.y && fp0->pos_delta.y < 0.0f)
-            {
-                return false;
-            }
-            if (fp0->x2225_b3) {
-                return true;
-            }
-            switch (fp0->motion_id) {
-            case ftCo_MS_Squat:
-            case ftCo_MS_SquatWait:
-            case ftCo_MS_Landing:
-            case ftCo_MS_LandingFallSpecial:
-            case ftCo_MS_LandingAirN:
-            case ftCo_MS_LandingAirF:
-            case ftCo_MS_LandingAirB:
-            case ftCo_MS_LandingAirHi:
-            case ftCo_MS_LandingAirLw:
-                return true;
-            }
+        if (var_r0_4 != 0) {
+            return false;
         }
+    }
+    if (fp1->ground_or_air == GA_Ground && fp0->ground_or_air == GA_Air &&
+        fp1->cur_pos.y > fp0->cur_pos.y && fp0->pos_delta.y < 0.0f)
+    {
+        return false;
+    }
+    if (fp0->x2225_b3) {
+        return true;
+    }
+    switch (fp0->motion_id) {
+    case ftCo_MS_Squat:
+    case ftCo_MS_SquatWait:
+    case ftCo_MS_Landing:
+    case ftCo_MS_LandingFallSpecial:
+    case ftCo_MS_LandingAirN:
+    case ftCo_MS_LandingAirF:
+    case ftCo_MS_LandingAirB:
+    case ftCo_MS_LandingAirHi:
+    case ftCo_MS_LandingAirLw:
+        return true;
     }
     return false;
 }

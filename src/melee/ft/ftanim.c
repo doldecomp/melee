@@ -1331,7 +1331,6 @@ void ftAnim_80070E74(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
     for (i = 0; i < (int) ARRAY_SIZE(fp->x8B0); i++) {
-        /// @todo inline #ftAnim_80070C48 here?
         struct Fighter_x8B0_t* r7 = &fp->x8B0[i];
         if (r7->x10 != -1) {
             ftAnim_ApplyPartAnim(gobj, i, r7->x10, 0.0F);
