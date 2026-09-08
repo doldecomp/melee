@@ -81,7 +81,6 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 
 void ftMh_Wait1_2_Anim(HSD_GObj* gobj)
 {
-    u8 _[4];
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->u.mh.x2258 = ftMh_MS_Wait1_2;
