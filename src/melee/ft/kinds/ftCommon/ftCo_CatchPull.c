@@ -127,9 +127,9 @@ void ftCo_CatchPull_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                         fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, p_ftCommonData->x64 *
+                                             fp->co_attrs.ground_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_CatchPull_Coll(Fighter_GObj* gobj)

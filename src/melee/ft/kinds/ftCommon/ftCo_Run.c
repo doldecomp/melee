@@ -140,10 +140,11 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
         }
     }
     fp->mv.co.run.x4 = target_vel * p_ftCommonData->x440;
-    ftCommon_8007C98C(fp, accel, target_vel,
-                      attrs->ground_friction *
-                          p_ftCommonData->run_dash_turn_friction_multiplier);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_DashRun(
+        fp, accel, target_vel,
+        attrs->ground_friction *
+            p_ftCommonData->run_dash_turn_friction_multiplier);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_Run_Coll(Fighter_GObj* gobj)

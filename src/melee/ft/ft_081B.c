@@ -1371,5 +1371,5 @@ void ft_80084DB0(Fighter_GObj* gobj)
     } else {
         ftCommon_Fall(fp, co_attrs->gravity, co_attrs->terminal_velocity);
     }
-    ftCommon_8007D268(fp);
+    ftCommon_CalcSelfAccel_Drift(fp);
 }

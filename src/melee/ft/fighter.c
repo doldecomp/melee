@@ -793,7 +793,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x60C = 0;
 
     fp->x2225_b3 = 0;
-    fp->x2228_b2 = 0;
+    fp->is_sandbag = 0;
 
     fp->x2226_b0 = 0;
     fp->x2226_b1 = 0;
@@ -834,7 +834,7 @@ static void Fighter_Create_Inline2(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->no_normal_motion) {
         fp->x2EC = lbAnim_8001E8F8(ftData_80085E50(fp, 0x23));
-        if (!fp->x2228_b2) {
+        if (!fp->is_sandbag) {
             fp->x2DC = lbAnim_8001E8F8(ftData_80085E50(fp, 7));
             fp->x2E0 = lbAnim_8001E8F8(ftData_80085E50(fp, 8));
             fp->x2E4 = lbAnim_8001E8F8(ftData_80085E50(fp, 9));
@@ -1363,7 +1363,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         if (animflags_bool) {
             if (!fp->x594_b0 && !fp->x594_b0) {
                 !fp;
-                ftCommon_ClampGrVel(fp, fp->co_attrs.dash_max_velocity);
+                ftCommon_ClampGroundVel(fp, fp->co_attrs.dash_max_velocity);
             }
         }
 
@@ -2186,13 +2186,11 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 kb_vel_x = p_kb_vel->x;
                 kb_vel_y = p_kb_vel->y;
 
-                if (fp->x2228_b2) {
-                    p_kb_vel->x =
-                        ftCommon_8007CD6C(p_kb_vel->x, ftCommon_8007CDA4(fp));
-                    ;
-                    p_kb_vel->y =
-                        ftCommon_8007CD6C(p_kb_vel->y, ftCommon_8007CDF8(fp));
-                    ;
+                if (fp->is_sandbag) {
+                    p_kb_vel->x = ftCommon_SandbagKnockbackDeaccel(
+                        p_kb_vel->x, ftCommon_SandbagGetKnockbackDeaccelX(fp));
+                    p_kb_vel->y = ftCommon_SandbagKnockbackDeaccel(
+                        p_kb_vel->y, ftCommon_SandbagGetKnockbackDeaccelY(fp));
                 } else {
                     float kb_angle = atan2f(kb_vel_y, kb_vel_x);
 
@@ -2220,7 +2218,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 }
 
                 pAttr = &fp->co_attrs;
-                ftCommon_8007CCA0(
+                ftCommon_ApplyGroundedKnockbackFriction(
                     fp,
                     /*effective friction - ground multiplier is
                        usually 1. last factor was 1 when I looked*/
@@ -2276,7 +2274,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
 
                 pAttr = &fp->co_attrs;
 
-                ftCommon_8007CE4C(
+                ftCommon_ApplyShieldKnockbackFriction(
                     fp,
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
@@ -2296,9 +2294,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
         fp->gr_vel += fp->xE4_ground_accel_1 + fp->xE8_ground_accel_2;
         fp->xE4_ground_accel_1 = fp->xE8_ground_accel_2 = 0;
 
-        // self_vel += anim_vel
-        PSVECAdd(&fp->self_vel, &fp->x74_anim_vel, &fp->self_vel);
-        VEC_CLEAR(fp->x74_anim_vel);
+        PSVECAdd(&fp->self_vel, &fp->x74_self_accel, &fp->self_vel);
+        VEC_CLEAR(fp->x74_self_accel);
 
         // copy selfVel into a stack storage variable
         selfVel = fp->self_vel; ///< @todo these double_lower_32bit variables

@@ -328,7 +328,7 @@ void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
         ftCommon_Fall(fp, co->gravity * p_ftCommonData->damageice_gravity_mult,
                       co->terminal_velocity);
     } else {

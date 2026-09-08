@@ -139,7 +139,7 @@ void ftSk_SpecialAirLw_Phys(Fighter_GObj* gobj)
     u8 _[4];
 
     ftCommon_Fall(fp, attributes->x68, attributes->x6C);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 void ftSk_SpecialLw_Coll(Fighter_GObj* gobj)
@@ -203,7 +203,7 @@ void ftSk_SpecialAirLw2_Phys(Fighter_GObj* gobj)
     u8 _[4];
 
     ftCommon_Fall(fp, attributes->x68, attributes->x6C);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 void ftSk_SpecialLw2_Coll(Fighter_GObj* gobj)

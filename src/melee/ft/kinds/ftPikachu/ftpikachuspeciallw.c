@@ -351,7 +351,7 @@ void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
     float pika_B8 = pika_attr->xB8;
     float terminal_velocity = fp->co_attrs.terminal_velocity;
     ftCommon_Fall(fp, pika_B8, terminal_velocity);
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 void ftPk_SpecialLwEnd_Phys(HSD_GObj* gobj)

@@ -178,7 +178,7 @@ void ftZd_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     vec.y = attributes->x44;
 
     ftCommon_Fall(fp, vec.x, vec.y);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 void ftZd_SpecialHiStart_0_Coll(HSD_GObj* gobj)
@@ -252,7 +252,7 @@ void ftZd_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 void ftZd_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftZd_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
@@ -585,7 +585,7 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.y = vel_y - vel_y / 10;
     }
 
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 void ftZd_SpecialHi_Coll(HSD_GObj* gobj)

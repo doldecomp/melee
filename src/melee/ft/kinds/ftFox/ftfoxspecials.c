@@ -190,7 +190,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     } else {
         ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_velocity);
     }
-    ftCommon_ApplyFrictionAir(fp, da->x2C_FOX_ILLUSION_UNK1);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x2C_FOX_ILLUSION_UNK1);
 }
 
 /// 0x800EA128
@@ -510,8 +510,8 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     }
-    ftCommon_ApplyFrictionGround(fp, da->x38_FOX_ILLUSION_GROUND_FRICTION);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, da->x38_FOX_ILLUSION_GROUND_FRICTION);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     ftFox_SpecialS_SetPhys(gobj);
 }
 
@@ -532,7 +532,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         ftCommon_Fall(fp, da->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
                       ca->terminal_velocity);
     }
-    ftCommon_ApplyFrictionAir(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);
 }
 

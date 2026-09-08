@@ -88,7 +88,7 @@ void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
     Fighter* fighter2;
     ftCommon_FallBasic(fp);
     fighter2 = fp;
-    ftCommon_ApplyFrictionAir(fighter2, samus_attr->x30);
+    ftCommon_CalcSelfAccel_Deaccel(fighter2, samus_attr->x30);
 }
 
 void ftSs_SpecialS_Coll(HSD_GObj* gobj)
@@ -144,7 +144,7 @@ void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
     samus_attr = getFtSpecialAttrs(fp);
     ftCommon_FallBasic(fp);
     samus_attr2 = samus_attr;
-    ftCommon_ApplyFrictionAir(fp, samus_attr2->x30);
+    ftCommon_CalcSelfAccel_Deaccel(fp, samus_attr2->x30);
 }
 
 void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)

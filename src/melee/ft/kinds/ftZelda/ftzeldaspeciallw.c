@@ -168,7 +168,7 @@ void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
     attributes = fp->dat_attrs;
 
     ftCommon_Fall(fp, attributes->x78, attributes->x7C);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 /// 8013B154 - 8013B190 (60 bytes)
@@ -254,7 +254,7 @@ void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
     attributes = fp->dat_attrs;
 
     ftCommon_Fall(fp, attributes->x78, attributes->x7C);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 /// 8013B388 - 8013B3C4 (60 bytes)

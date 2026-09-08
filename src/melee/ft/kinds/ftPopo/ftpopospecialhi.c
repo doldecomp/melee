@@ -327,7 +327,7 @@ void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     ftCommon_Fall(fp, da->x8C, da->x90);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 
     fp = GET_FIGHTER(gobj);
     sp.x = sp.y = sp.z = 0.0f;
@@ -504,7 +504,7 @@ static inline void doFallPhys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
     ftCommon_Fall(fp, da->x8C, da->x90);
-    ftCommon_8007CEF4(fp);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp);
 }
 
 void ftPp_SpecialAirHiThrow_0_Phys(Fighter_GObj* gobj)
@@ -614,7 +614,7 @@ void ftPp_SpecialAirHiStart_1_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
     ftCommon_Fall(fp, da->xA8, da->xAC);
     if (fp->self_vel.y < 0.0f) {
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 
@@ -698,7 +698,7 @@ void ftPp_SpecialAirHiThrow_1_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
     ftCommon_Fall(fp, da->xA8, da->xAC);
     if (fp->self_vel.y < 0.0f) {
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 
@@ -824,10 +824,11 @@ void ftPp_SpecialAirHiThrow2_Phys(Fighter_GObj* gobj)
 
     ftCommon_Fall(fp, da->x9C, da->xA0);
     if (ABS(fp->input.lstick[0].x) > da->x80) {
-        ftCommon_8007D344(fp, 0.0f, co->air_drift_stick_mul * da->xB0,
-                          co->air_drift_max * da->xB4);
+        ftCommon_CalcSelfAccel_DriftSimple(fp, 0.0f,
+                                           co->air_drift_stick_mul * da->xB0,
+                                           co->air_drift_max * da->xB4);
     } else if (fp->self_vel.y < 0.0f) {
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
     {
         fp = GET_FIGHTER(gobj);

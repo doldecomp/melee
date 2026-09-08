@@ -118,7 +118,8 @@ void ftCo_ItemParasolOpen_Phys(Fighter_GObj* gobj)
                 target_vel = 0.0F;
                 drift = 0.0F;
             }
-            ftCommon_8007D140(fp, drift, target_vel, ca->aerial_friction);
+            ftCommon_CalcSelfAccel_AccelToVelClamped(fp, drift, target_vel,
+                                                     ca->aerial_friction);
         }
     }
 }

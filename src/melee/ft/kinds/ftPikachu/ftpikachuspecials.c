@@ -82,8 +82,8 @@ void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = getFtSpecialAttrsD(fp);
-    ftCommon_ApplyFrictionGround(fp, sa->specials_start_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, sa->specials_start_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
@@ -97,7 +97,7 @@ void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
                       da->terminal_velocity);
     }
 
-    ftCommon_ApplyFrictionAir(fp, pika_attr->specials_start_friction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, pika_attr->specials_start_friction);
 }
 
 void ftPk_SpecialSStart_Coll(HSD_GObj* gobj)
@@ -386,7 +386,7 @@ void ftPk_SpecialAirS1_Phys(HSD_GObj* gobj)
     }
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_ApplyFrictionAir(fp, pika_attr->x54);
+        ftCommon_CalcSelfAccel_Deaccel(fp, pika_attr->x54);
     }
 }
 
@@ -457,8 +457,8 @@ void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
-    ftCommon_ApplyFrictionGround(fp, sa->x54);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, sa->x54);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
@@ -468,7 +468,7 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
     ftCommon_Fall(fp, sa->x58, fp->co_attrs.terminal_velocity);
-    ftCommon_ApplyFrictionAir(fp, sa->x54);
+    ftCommon_CalcSelfAccel_Deaccel(fp, sa->x54);
 }
 
 void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)

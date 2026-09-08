@@ -141,7 +141,7 @@ void ftCo_8009794C(Fighter_GObj* gobj)
         fp->x67C = 255;
         fp->x67D = 255;
         ftCommon_8007E2F4(fp, 511);
-        ftCommon_8007CCE8(fp);
+        ftCommon_SetGroundedKnockbackIfLanded(fp);
     }
 }
 
@@ -193,7 +193,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
             ((Fighter*) jobj)->x67C = 255;
             ((Fighter*) jobj)->x67D = 255;
             ftCommon_8007E2F4(((Fighter*) jobj), 511);
-            ftCommon_8007CCE8(((Fighter*) jobj));
+            ftCommon_SetGroundedKnockbackIfLanded(((Fighter*) jobj));
         }
     } else {
         ftCo_800978D4_inline(gobj, &param_e);
@@ -203,7 +203,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         } else {
             ftSb_Init_8014FBA4(gobj);
         }
-        ftCommon_8007CCE8(fp);
+        ftCommon_SetGroundedKnockbackIfLanded(fp);
     }
     (void) jobj;
 }
@@ -211,7 +211,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
 static void inlineA1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2228_b2) {
+    if (fp->is_sandbag) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);

@@ -90,10 +90,10 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(
+    ftCommon_CalcGroundAccel_Deaccel(
         fp, p_ftCommonData->run_dash_turn_friction_multiplier *
                 fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_RunBrake_Coll(Fighter_GObj* gobj)

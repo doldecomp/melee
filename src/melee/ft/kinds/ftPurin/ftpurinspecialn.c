@@ -109,7 +109,7 @@ void ftPr_SpecialS_8013D764(HSD_GObj* gobj)
         }
 
         fp->self_vel.y = da->specialn_vel.y;
-        fp->x74_anim_vel.x = fp->x74_anim_vel.y = 0;
+        fp->x74_self_accel.x = fp->x74_self_accel.y = 0;
         fp->xE4_ground_accel_1 = 0;
         fp->gr_vel = 0;
         fp->mv.pr.specialn.facing_dir = 0;
@@ -209,7 +209,7 @@ void ftPr_SpecialS_8013DA24(HSD_GObj* gobj, bool is_air, MotionFlags flags,
         }
         Fighter_ChangeMotionState(gobj, msid, flags, anim_start, 1, 0, NULL);
         fp->gr_vel *= da->x90;
-        fp->x74_anim_vel.y = 0;
+        fp->x74_self_accel.y = 0;
         fp->self_vel.y = 0;
     } else {
         int msid;
@@ -335,7 +335,7 @@ void ftPr_SpecialN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftPr_SpecialS_8013DC64(gobj);
-    fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.y = 0;
     fp->self_vel.y = 0;
     fp->mv.pr.specialn.x1C = da->x44;
 }
@@ -358,7 +358,7 @@ void ftPr_SpecialAirN_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftPr_SpecialS_8013DC64(gobj);
-    fp->x74_anim_vel.y = da->x3C;
+    fp->x74_self_accel.y = da->x3C;
     fp->mv.pr.specialn.x1C = da->x54;
 }
 
@@ -376,7 +376,7 @@ void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
         fp->cur_anim_frame = 0;
         ftAnim_SetAnimRate(gobj, 0);
         fp->gr_vel = fp->self_vel.x = fp->facing_dir * 0.0001f;
-        fp->xE4_ground_accel_1 = fp->x74_anim_vel.x = 0;
+        fp->xE4_ground_accel_1 = fp->x74_self_accel.x = 0;
         ftPartSetRotY(fp, 0, M_PI_2);
     }
 }
@@ -523,7 +523,7 @@ void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
         fp->cur_anim_frame = 0;
         ftAnim_SetAnimRate(gobj, 0);
         fp->self_vel.x = fp->facing_dir * 0.0001f;
-        fp->x74_anim_vel.x = 0;
+        fp->x74_self_accel.x = 0;
         ftPartSetRotY(fp, 0, M_PI_2);
     }
 }
@@ -829,8 +829,8 @@ void ftPr_SpecialNStart_Phys(Fighter_GObj* gobj)
     fp->gr_vel = 0;
     fp->self_vel.x = fp->facing_dir * 0.0001f;
     fp->self_vel.y = 0;
-    fp->x74_anim_vel.y = 0;
-    fp->x74_anim_vel.x = 0;
+    fp->x74_self_accel.y = 0;
+    fp->x74_self_accel.x = 0;
 }
 
 void ftPr_SpecialNLoop_Phys(Fighter_GObj* gobj)
@@ -884,9 +884,9 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
         }
     }
     fp->mv.pr.specialn.x18 = ABS(fp->gr_vel);
-    fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.y = 0;
     fp->self_vel.y = 0;
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     fp->mv.pr.specialn.x2C -= da->xB4;
     if (fp->mv.pr.specialn.x2C < da->xB8) {
         ftPr_SpecialS_8013DA24(gobj, false, 0x40012, 0);
@@ -927,9 +927,9 @@ void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
             fp->gr_vel += scale * (x1C - influence);
         }
     }
-    fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.y = 0;
     fp->self_vel.y = 0;
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     if (fp->mv.pr.specialn.x10 > 0.0f) {
         if (fp->gr_vel < 0.0f) {
             if (ABS(fp->gr_vel) >= ABS(fp->mv.pr.specialn.x10 * da->xD0)) {
@@ -960,8 +960,8 @@ void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
 void ftPr_SpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, fp->co_attrs.ground_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftPr_SpecialAirNStart_Phys(HSD_GObj* gobj)
@@ -1059,7 +1059,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
     PAD_STACK(4 * 2);
 
     if (fp->self_vel.y <= -da->x40) {
-        ftCommon_8007D268(fp);
+        ftCommon_CalcSelfAccel_Drift(fp);
     }
     ftCommon_Fall(fp, da->x3C, da->x40);
 }

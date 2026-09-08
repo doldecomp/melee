@@ -242,7 +242,7 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
         ftCommon_FallBasic(fp);
     }
 
-    ftCommon_ApplyFrictionAir(fp, sa->specials.vel.x);
+    ftCommon_CalcSelfAccel_Deaccel(fp, sa->specials.vel.x);
     reflect(gobj);
 }
 

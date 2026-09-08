@@ -211,8 +211,9 @@ void ftKb_MsSpecialNStart_Phys(Fighter_GObj* gobj)
     } else {
         ms_da = &da->fe;
     }
-    ftCommon_ApplyFrictionGround(fp, ms_da->air_horizontal_deceleration_rate);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp,
+                                     ms_da->air_horizontal_deceleration_rate);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
@@ -227,7 +228,8 @@ void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
         ms_da = &da->fe;
     }
     ftCommon_FallBasic(fp);
-    ftCommon_ApplyFrictionAir(fp, ms_da->air_horizontal_deceleration_rate);
+    ftCommon_CalcSelfAccel_Deaccel(fp,
+                                   ms_da->air_horizontal_deceleration_rate);
 }
 
 void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)

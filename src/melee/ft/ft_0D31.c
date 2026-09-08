@@ -32,7 +32,7 @@ bool ftCo_800D3158(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int* temp_r29 = &p_ftCommonData->x520;
 
-    if (fp->x222A_b1 || fp->x2228_b5 || fp->x2228_b2) {
+    if (fp->x222A_b1 || fp->x2228_b5 || fp->is_sandbag) {
         return false;
     }
     if (fp->x2219_b2) {

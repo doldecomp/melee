@@ -459,7 +459,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_ApplyFrictionAir(fp, aerialFriction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, aerialFriction);
 }
 
 /// 8013BFB0 - 8013C010 (96 bytes)
@@ -486,7 +486,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_ApplyFrictionAir(fp, aerialFriction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, aerialFriction);
 }
 
 /// 8013C010 - 8013C070 (96 bytes)
@@ -513,7 +513,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_ApplyFrictionAir(fp, aerialFriction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, aerialFriction);
 }
 
 /// 8013C070 - 8013C0DC (108 bytes)

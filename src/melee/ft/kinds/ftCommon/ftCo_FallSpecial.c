@@ -103,7 +103,8 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             drift +=
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
             target_vel = lstick_x * ca->air_drift_max;
-            ftCommon_8007D140(fp, drift, target_vel, ca->aerial_friction);
+            ftCommon_CalcSelfAccel_AccelToVelClamped(fp, drift, target_vel,
+                                                     ca->aerial_friction);
         }
     } else {
         if (fp->fall_fast) {
@@ -121,7 +122,8 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
                 target_vel = target_vel < 0 ? -fp->mv.co.fallspecial.mobility
                                             : fp->mv.co.fallspecial.mobility;
             }
-            ftCommon_8007D140(fp, drift, target_vel, ca->aerial_friction);
+            ftCommon_CalcSelfAccel_AccelToVelClamped(fp, drift, target_vel,
+                                                     ca->aerial_friction);
         }
     }
 }

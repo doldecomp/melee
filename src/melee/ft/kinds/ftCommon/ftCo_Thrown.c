@@ -122,7 +122,8 @@ void ftCo_ThrownHi_Cam(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim = GET_FIGHTER(fp->victim_gobj);
-    if (victim->kind == Ft_Kind_Kirby && victim->motion_id == ftCo_MS_ThrowHi) {
+    if (victim->kind == Ft_Kind_Kirby && victim->motion_id == ftCo_MS_ThrowHi)
+    {
         ftCamera_800762F4(gobj);
 
     } else {

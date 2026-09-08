@@ -86,7 +86,7 @@ void ftCo_800C3BE8(Fighter_GObj* gobj)
     Vec3 anim_vel = { 0 };
     if (fp->ground_or_air == GA_Air) {
         fp->mv.co.aircatch.x0 = 0;
-        fp->x74_anim_vel = anim_vel;
+        fp->x74_self_accel = anim_vel;
 
         if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_AirCatch, Ft_MF_None, 0, 1,
@@ -271,7 +271,7 @@ void ftCo_AirCatch_Phys(Fighter_GObj* gobj)
     } else {
         ftCommon_Fall(fp, co->gravity, co->terminal_velocity);
     }
-    ftCommon_8007D268(fp);
+    ftCommon_CalcSelfAccel_Drift(fp);
 }
 
 void ftCo_AirCatchHit_Phys(Fighter_GObj* gobj)

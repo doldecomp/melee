@@ -172,9 +172,10 @@ void ftSs_SpecialLwBomb_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007CADC(fp, 0.0f, ft_attr->walk_accel_mul * samus_attr->x64,
-                          ft_attr->walk_max_vel * samus_attr->x5C);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_AccelToLStickX(
+            fp, 0.0f, ft_attr->walk_accel_mul * samus_attr->x64,
+            ft_attr->walk_max_vel * samus_attr->x5C);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -188,8 +189,9 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
 
     u8 _[8];
     ftCommon_FallBasic(fp);
-    ftCommon_8007D3A8(fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
-                      ft_attr->air_drift_max * samus_attr->x60);
+    ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+        fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
+        ft_attr->air_drift_max * samus_attr->x60);
 }
 
 void ftSs_SpecialLwBomb_Coll(HSD_GObj* gobj)

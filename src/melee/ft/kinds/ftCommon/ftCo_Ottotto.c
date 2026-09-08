@@ -37,7 +37,7 @@
 bool ftCo_8009A3C8(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->coll_data.env_flags & Collide_Edge && !fp->x2228_b2) {
+    if (fp->coll_data.env_flags & Collide_Edge && !fp->is_sandbag) {
         ftCo_8009A410(gobj);
         return true;
     }

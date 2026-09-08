@@ -54,7 +54,7 @@ void ftSb_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSandbagAttributes);
 
-    fp->x2228_b2 = true;
+    fp->is_sandbag = true;
     fp->x2226_b0 = true;
 
     ftSb_Init_8014FA30(fp);

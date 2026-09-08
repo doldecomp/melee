@@ -268,7 +268,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->self_vel.z = fp->self_vel.z * da->x8C;
     } else {
         ftCommon_Fall(fp, da->x88, ca->terminal_velocity);
-        ftCommon_8007CF58(fp);
+        ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     }
 }
 

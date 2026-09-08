@@ -5315,7 +5315,8 @@ void ftCo_800ABA34(Fighter* fp)
         ftCo_800A05F4(fp);
         return;
     }
-    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) && data->xF8_b5)
+    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) &&
+        data->xF8_b5)
     {
         ftCo_800B4880(fp, 38);
         data->xF8_b5 = false;
@@ -5794,7 +5795,8 @@ void ftCo_800ACD5C(Fighter* fp)
         ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
-    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) && data->xF8_b5)
+    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) &&
+        data->xF8_b5)
     {
         ftCo_800B4880(fp, 0x26);
         data->xF8_b5 = false;
@@ -6019,7 +6021,8 @@ void ftCo_800ADC28(Fighter* fp)
         }
     } else if (fp->kind == Ft_Kind_Kirby) {
         FighterKind kind = fp->u.kb.hat.kind;
-        if (kind == Ft_Kind_Donkey && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
+        if (kind == Ft_Kind_Donkey && fp->motion_id == ftKb_MS_DkSpecialNLoop)
+        {
             ftCo_CpuTapRAndWait(fp);
         } else if (kind == Ft_Kind_Samus &&
                    fp->motion_id == ftKb_MS_SsSpecialNHold)

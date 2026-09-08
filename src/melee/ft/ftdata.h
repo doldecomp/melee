@@ -29,7 +29,8 @@
 /* 086060 */ Fighter* ftData_80086060(Fighter* arg0);
 /* 3C0EC0 */ extern struct UnkCostumeList
     CostumeListsForeachCharacter[Ft_Kind_Max];
-/* 3C0FC8 */ extern struct ftData_UnkCountStruct ftData_Table_Unk0[Ft_Kind_Max];
+/* 3C0FC8 */ extern struct ftData_UnkCountStruct
+    ftData_Table_Unk0[Ft_Kind_Max];
 /* 3C10D0 */ extern Event ftData_Table_Unk1[Ft_Kind_Max];
 /* 3C10D0 */ extern struct ftData_UnkCountStruct
     ftData_UnkIntPairs[Ft_Kind_Max];
@@ -51,7 +52,8 @@
 /* 3C20CC */ extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[Ft_Kind_Max];
 /* 3C2150 */ extern ftData_UnkModelStruct ftData_UnkIntBoolFunc0;
 /* 3C2468 */ extern Fighter_DemoStrings* ftData_803C2468[Ft_Kind_Max];
-/* 3C24EC */ extern Fighter_MotionFileStringGetter ftData_803C24EC[Ft_Kind_Max];
+/* 3C24EC */ extern Fighter_MotionFileStringGetter
+    ftData_803C24EC[Ft_Kind_Max];
 /* 3C2570 */ extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[Ft_Kind_Max];
 /* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[Ft_Kind_Max];
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];

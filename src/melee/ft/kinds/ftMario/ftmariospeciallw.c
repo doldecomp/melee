@@ -190,8 +190,9 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
 
     {
         Fighter* fp1 = fp0;
-        ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_AccelToLStickX(
+            fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
         if (fp0->cmd_vars[2] != 0 && (fp0->input.pressed_buttons & HSD_PAD_B))
         {
             vel_y = fp0->self_vel.y;
@@ -231,7 +232,8 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
             flt_var = 0;
         }
     }
-    ftCommon_8007D3A8(fp, 0, sa->speciallw.air_momentum_x_mul, flt_var);
+    ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+        fp, 0, sa->speciallw.air_momentum_x_mul, flt_var);
 }
 
 static void doColl(HSD_GObj* gobj)
@@ -289,7 +291,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     fp->u.mr.x2234_tornadoCharge = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialLw, transition_flags,
                               fp->cur_anim_frame, 1, 0, NULL);
-    ftCommon_ClampGrVel(ft_tmp = fp, sa->speciallw.momentum_x);
+    ftCommon_ClampGroundVel(ft_tmp = fp, sa->speciallw.momentum_x);
     fp->pre_hitlag_cb = &efLib_PauseAll;
     fp->post_hitlag_cb = &efLib_ResumeAll;
 }

@@ -251,11 +251,12 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
     PAD_STACK(4); ///< @todo Remove This
     ft_80084FA8(gobj);
-    ftCommon_8007CADC(fp, 0.0f,
-                      temp_r30->air_drift_stick_mul *
-                          dat_attr->specialhi_horizontal_momentum,
-                      temp_r30->air_drift_max);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_AccelToLStickX(
+        fp, 0.0f,
+        temp_r30->air_drift_stick_mul *
+            dat_attr->specialhi_horizontal_momentum,
+        temp_r30->air_drift_max);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
@@ -265,11 +266,12 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
     PAD_STACK(4); ///< @todo Remove This
     ft_80085134(gobj);
-    ftCommon_8007CADC(fp, 0.0f,
-                      temp_r30->air_drift_stick_mul *
-                          dat_attr->specialhi_horizontal_momentum,
-                      temp_r30->air_drift_max);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_AccelToLStickX(
+        fp, 0.0f,
+        temp_r30->air_drift_stick_mul *
+            dat_attr->specialhi_horizontal_momentum,
+        temp_r30->air_drift_max);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
@@ -278,11 +280,12 @@ void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
     new_var = dat_attr;
-    ftCommon_8007CADC(fp, 0.0f,
-                      fp->co_attrs.air_drift_stick_mul *
-                          new_var->specialhi_horizontal_momentum,
-                      (0, fp->co_attrs.air_drift_max));
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_AccelToLStickX(
+        fp, 0.0f,
+        fp->co_attrs.air_drift_stick_mul *
+            new_var->specialhi_horizontal_momentum,
+        (0, fp->co_attrs.air_drift_max));
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftKb_SpecialHi4_Phys(Fighter_GObj* gobj)
@@ -301,10 +304,11 @@ void ftKb_SpecialAirHi1_Phys(Fighter_GObj* gobj)
     if (fp->self_vel.y > 0.0f) {
         fp->self_vel.y *= dat_attr->specialhi_vertical_momentum;
     }
-    ftCommon_8007D3A8(fp, 0.0f,
-                      temp_r30->air_drift_stick_mul *
-                          dat_attr->specialhi_horizontal_momentum,
-                      temp_r30->air_drift_max);
+    ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+        fp, 0.0f,
+        temp_r30->air_drift_stick_mul *
+            dat_attr->specialhi_horizontal_momentum,
+        temp_r30->air_drift_max);
 }
 
 void ftKb_SpecialAirHi2_Phys(Fighter_GObj* gobj)
@@ -318,10 +322,11 @@ void ftKb_SpecialAirHi2_Phys(Fighter_GObj* gobj)
     if (fp->self_vel.y > 0.0f) {
         fp->self_vel.y *= dat_attr->specialhi_vertical_momentum;
     }
-    ftCommon_8007D3A8(fp, 0.0f,
-                      temp_r30->air_drift_stick_mul *
-                          dat_attr->specialhi_horizontal_momentum,
-                      temp_r30->air_drift_max);
+    ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+        fp, 0.0f,
+        temp_r30->air_drift_stick_mul *
+            dat_attr->specialhi_horizontal_momentum,
+        temp_r30->air_drift_max);
 }
 
 void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
@@ -330,10 +335,11 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
 
     /// FAKE MATCH: comma operator required for regalloc
-    ftCommon_8007D3A8(fp, 0.0f,
-                      (0, fp->co_attrs.air_drift_stick_mul) *
-                          (dat_attr->specialhi_horizontal_momentum),
-                      fp->co_attrs.air_drift_max);
+    ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+        fp, 0.0f,
+        (0, fp->co_attrs.air_drift_stick_mul) *
+            (dat_attr->specialhi_horizontal_momentum),
+        fp->co_attrs.air_drift_max);
 }
 
 void ftKb_SpecialAirHiEnd_Phys(Fighter_GObj* gobj)

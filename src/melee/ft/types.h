@@ -140,7 +140,7 @@ struct ftCommonData {
     /* +158 */ float x158;
     /* +15C */ float x15C;
     /* +160 */ float x160;
-    /* +164 */ float x164;
+    /* +164 */ float max_grounded_kb_on_landing;
     /* +168 */ float x168;
     /* +16C */ float x16C;
     /* +170 */ float x170;
@@ -178,7 +178,8 @@ struct ftCommonData {
     /* +1F0 */ float x1F0;
     /* +1F4 */ float x1F4;
     /* +1F8 */ float x1F8;
-    /* +1FC */ float x1FC;
+    /* +1FC */ float
+        aerial_friction_oob; // friction when velocity exceeds maximum
     /* +200 */ float x200;
     /* +204 */ float x204_knockbackFrameDecay;
     /* +208 */ float x208;
@@ -1140,7 +1141,7 @@ struct Fighter {
     /*   fp+34 */ Vec3 x34_scale;
     /*   fp+40 */ float x40;
     /*   fp+44 */ Mtx x44_mtx;
-    /*   fp+74 */ Vec3 x74_anim_vel;
+    /*   fp+74 */ Vec3 x74_self_accel;
     /*   fp+80 */ Vec3 self_vel;
     /*   fp+8C */ Vec3 x8c_kb_vel;
     /*   fp+98 */ Vec3 x98_atk_shield_kb;
@@ -1723,7 +1724,7 @@ struct Fighter {
 
     /* fp+2228:0 */ u8 x2228_b0 : 1;
     /* fp+2228:1 */ u8 x2228_b1 : 1;
-    /* fp+2228:2 */ u8 x2228_b2 : 1;
+    /* fp+2228:2 */ u8 is_sandbag : 1;
     /* fp+2228:3 */ u8 x2228_b3 : 2;
     /* fp+2228:5 */ u8 x2228_b5 : 1;
     /* fp+2228:6 */ u8 used_tether : 1;

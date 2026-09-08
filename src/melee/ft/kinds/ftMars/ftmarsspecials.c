@@ -124,7 +124,7 @@ void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_Fall(fp, da->x20, da->x24);
-        ftCommon_ApplyFrictionAir(fp, da->x18);
+        ftCommon_CalcSelfAccel_Deaccel(fp, da->x18);
     }
 }
 
@@ -214,7 +214,7 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_Fall(fp, da->x20, da->x24);
-        ftCommon_ApplyFrictionAir(fp, da->x18);
+        ftCommon_CalcSelfAccel_Deaccel(fp, da->x18);
     }
 }
 

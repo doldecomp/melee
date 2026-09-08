@@ -164,7 +164,8 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
                       ca->terminal_velocity);
     }
 
-    ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
+    ftCommon_CalcSelfAccel_Deaccel(
+        fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
 }
 
 void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
@@ -264,10 +265,11 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
     fp->mv.fx.SpecialHi.unk++;
 
     if (fp->mv.fx.SpecialHi.unk >= da->x70_FOX_FIREFOX_DURATION_END) {
-        ftCommon_ApplyFrictionGround(fp, da->x78_FOX_FIREFOX_REVERSE_ACCEL);
+        ftCommon_CalcGroundAccel_Deaccel(fp,
+                                         da->x78_FOX_FIREFOX_REVERSE_ACCEL);
     }
 
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
@@ -578,8 +580,9 @@ void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
-    ftCommon_ApplyFrictionGround(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp,
+                                     da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 /// 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
@@ -709,7 +712,7 @@ void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj)
 
     if (ground_or_air == GA_Air) {
         ft_800851C0(gobj);
-        ftCommon_8007CF58(fp);
+        ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
         return;
     }
     ft_80084F3C(gobj);

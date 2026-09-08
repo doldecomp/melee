@@ -176,7 +176,8 @@ void ftCo_800DD4B0(Fighter_GObj* gobj, FtMotionId msid)
         switch (fp->kind) {
         case Ft_Kind_GKoops:
         case Ft_Kind_Koopa:
-            if (victim->kind == Ft_Kind_Peach || victim->kind == Ft_Kind_Zelda) {
+            if (victim->kind == Ft_Kind_Peach || victim->kind == Ft_Kind_Zelda)
+            {
                 victim_msid = 243;
             }
         default:

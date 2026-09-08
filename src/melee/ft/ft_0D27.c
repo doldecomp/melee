@@ -165,7 +165,7 @@ void fn_800D2B30(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.common.x14 = fp->xE4_ground_accel_1;
     fp->mv.co.common.x18 = fp->xE8_ground_accel_2;
-    fp->mv.co.common.x28 = fp->x74_anim_vel;
+    fp->mv.co.common.x28 = fp->x74_self_accel;
     fp->mv.co.common.x1C = fp->gr_vel;
     fp->mv.co.common.x34 = fp->self_vel;
     fp->mv.co.common.x20 = fp->xF0_ground_kb_vel;
@@ -181,7 +181,7 @@ void fn_800D2BF8(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->xE4_ground_accel_1 = fp->mv.co.common.x14;
     fp->xE8_ground_accel_2 = fp->mv.co.common.x18;
-    fp->x74_anim_vel = fp->mv.co.common.x28;
+    fp->x74_self_accel = fp->mv.co.common.x28;
     fp->gr_vel = fp->mv.co.common.x1C;
     fp->self_vel = fp->mv.co.common.x34;
     fp->xF0_ground_kb_vel = fp->mv.co.common.x20;

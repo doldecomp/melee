@@ -173,7 +173,7 @@ void ftKb_ZdSpecialAirN_Phys(Fighter_GObj* gobj)
         }
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     ftColl_8007AEF8(gobj);
 }
 

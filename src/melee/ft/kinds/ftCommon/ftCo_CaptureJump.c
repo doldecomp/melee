@@ -55,7 +55,7 @@ void ftCo_CaptureJump_Phys(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
     ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
-    ftCommon_8007D268(fp);
+    ftCommon_CalcSelfAccel_Drift(fp);
 }
 
 void ftCo_CaptureJump_Coll(Fighter_GObj* gobj)

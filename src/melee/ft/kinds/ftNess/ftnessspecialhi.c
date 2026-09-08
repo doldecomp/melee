@@ -1162,7 +1162,7 @@ void ftNs_SpecialHi_Phys(HSD_GObj* gobj)
     }
 
     fp0->mv.ns.specialhi.unkVector1 = fp0->self_vel;
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 
     {
         Fighter* fp = gobj->user_data;
@@ -1191,7 +1191,7 @@ void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, friction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, friction);
     }
 }
 
@@ -1216,7 +1216,7 @@ void ftNs_SpecialAirHiHold_Phys(
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, friction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, friction);
     }
 }
 
@@ -1238,7 +1238,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, friction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, friction);
     }
 }
 
@@ -1310,7 +1310,7 @@ void ftNs_SpecialAirHiRebound_Phys(
     fighter_attr = &fp->co_attrs;
     fighter_attr == NULL;
     ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
-    ftCommon_ApplyFrictionAir(fp, fighter_attr->aerial_friction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, fighter_attr->aerial_friction);
 }
 
 /// 0x80119460

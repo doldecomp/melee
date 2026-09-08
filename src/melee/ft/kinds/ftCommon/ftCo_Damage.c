@@ -673,7 +673,7 @@ void ftCo_8008E908(Fighter_GObj* gobj, float facing_dir)
     }
     {
         u32 fp_x1860 = fp->dmg.x1860_element;
-        if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_b2) {
+        if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->is_sandbag) {
             ftCo_800C318C(gobj, fp_x1860 == 6 ? 0 : 1);
         } else {
             ftCo_8008DCE0(gobj, -1, facing_dir);

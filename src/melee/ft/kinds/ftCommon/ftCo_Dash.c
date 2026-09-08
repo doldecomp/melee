@@ -153,12 +153,12 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
         ftCo_DatAttrs* attrs = &fp->co_attrs;
         float accel, target_vel;
         getAccelAndTarget(fp, &accel, &target_vel);
-        ftCommon_8007C98C(
+        ftCommon_CalcGroundAccel_DashRun(
             fp, accel, target_vel,
             attrs->ground_friction *
                 p_ftCommonData->run_dash_turn_friction_multiplier);
     }
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_Dash_Coll(Fighter_GObj* gobj)

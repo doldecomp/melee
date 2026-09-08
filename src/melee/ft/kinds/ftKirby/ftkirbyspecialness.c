@@ -354,7 +354,7 @@ void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
                       fp->co_attrs.terminal_velocity);
     }
     airFriction = fp->co_attrs.aerial_friction;
-    ftCommon_ApplyFrictionAir(fp, airFriction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, airFriction);
 }
 
 void ftKb_NsSpecialAirNHold_Phys(Fighter_GObj* gobj)

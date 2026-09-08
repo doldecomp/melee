@@ -645,7 +645,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible || fp->x221E_b2 ||
-        Player_GetMoreFlagsBit4(fp->player_id) || fp->x2228_b2 ||
+        Player_GetMoreFlagsBit4(fp->player_id) || fp->is_sandbag ||
         fp->x2229_b3 || fp->x2220_b7)
     {
         return false;

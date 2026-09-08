@@ -131,7 +131,7 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
         }
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 void ftPk_SpecialHiStart0_Coll(HSD_GObj* gobj)
@@ -283,7 +283,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 
 void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 #ifdef MUST_MATCH
@@ -731,7 +731,7 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
         ftCommon_ClampSelfVelX(fp, sa->x9C * fp->co_attrs.air_drift_max);
     } else {
         fp->self_vel.y -= (fp->self_vel.y / 9.0f);
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 

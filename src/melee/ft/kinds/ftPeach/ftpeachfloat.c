@@ -106,7 +106,7 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
 
 void ftPe_Float_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007D268(GET_FIGHTER(gobj));
+    ftCommon_CalcSelfAccel_Drift(GET_FIGHTER(gobj));
 }
 
 void ftPe_Float_Coll(HSD_GObj* gobj)

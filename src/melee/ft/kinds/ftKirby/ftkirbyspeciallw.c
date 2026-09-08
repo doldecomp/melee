@@ -351,9 +351,9 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
         fp->xE4_ground_accel_1 =
             dat_attr->speciallw_slide_max_speed - fp->gr_vel;
     }
-    fp->x74_anim_vel.x = fp->mv.co.common.x58.x * fp->xE4_ground_accel_1;
-    fp->x74_anim_vel.y = -fp->mv.co.common.x4C.z * fp->xE4_ground_accel_1;
-    fp->x74_anim_vel.z = 0.0f;
+    fp->x74_self_accel.x = fp->mv.co.common.x58.x * fp->xE4_ground_accel_1;
+    fp->x74_self_accel.y = -fp->mv.co.common.x4C.z * fp->xE4_ground_accel_1;
+    fp->x74_self_accel.z = 0.0f;
     fp->self_vel.x = fp->mv.co.common.x58.x * fp->gr_vel;
     fp->self_vel.y = -fp->mv.co.common.x4C.z * fp->gr_vel;
     fp->self_vel.z = 0.0f;

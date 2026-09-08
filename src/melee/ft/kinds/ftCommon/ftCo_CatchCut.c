@@ -34,9 +34,9 @@ void ftCo_CatchCut_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                             fp->co_attrs.ground_friction);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_Deaccel(fp, p_ftCommonData->x64 *
+                                                 fp->co_attrs.ground_friction);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
         return;
     }
     ft_80084DB0(gobj);

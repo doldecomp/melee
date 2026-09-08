@@ -182,7 +182,7 @@ void ftNs_SpecialAirLwStart_Phys(HSD_GObj* gobj)
                       da->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 /// 0x8011A168
@@ -347,7 +347,7 @@ void ftNs_SpecialAirLwHold_Phys(HSD_GObj* gobj)
                           da->terminal_velocity);
         }
 
-        ftCommon_8007CF58(fp);
+        ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
         ftColl_8007AF10(gobj);
     }
 }
@@ -567,7 +567,7 @@ void ftNs_SpecialAirLwTurn_Phys(
                       da->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     ftColl_8007AF10(gobj);
 }
 
@@ -826,7 +826,7 @@ void ftNs_SpecialAirLwHit_Phys(
                       attributes->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     ftColl_8007AF10(arg0);
 }
 
@@ -1005,7 +1005,7 @@ void ftNs_SpecialAirLwEnd_Phys(
                       attributes->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 /// 0x8011B36C
