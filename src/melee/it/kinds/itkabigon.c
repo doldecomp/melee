@@ -45,7 +45,7 @@ void it_802C9DFC(Item_GObj* gobj) {}
 
 void itKabigon_Logic2_Destroyed(Item_GObj* gobj)
 {
-    Camera_80031044(2);
+    Camera_StopQuake(2);
 }
 
 void it_802C9E24(Item_GObj* gobj, Item_GObj* ref_gobj)
@@ -67,7 +67,7 @@ void it_802C9E8C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = (HSD_GObjEvent) it_802CA014;
-    Camera_80030E44(3, NULL);
+    Camera_RequestQuake(3, NULL);
 }
 
 bool itKabigon_UnkMotion0_Anim(Item_GObj* gobj)
@@ -170,7 +170,7 @@ bool itKabigon_UnkMotion1_Anim(Item_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             ip->pos.y = Stage_GetBlastZoneTopOffset();
             ip->x40_vel.y = ip->xDD4_itemVar.kabigon.x64;
-            Camera_80030E44(2, NULL);
+            Camera_RequestQuake(2, NULL);
         } else {
             ip->xDD4_itemVar.kabigon.x6C--;
         }

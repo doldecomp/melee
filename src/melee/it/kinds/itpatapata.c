@@ -512,7 +512,7 @@ void it_802E15B0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     lb_8000B1CC(jobj, NULL, &pos);
-    Camera_80030E44(2, &ip->pos);
+    Camera_RequestQuake(2, &ip->pos);
     new_gobj = it_802DD7F0(ip->xDD4_itemVar.patapata.x40, &pos, &ip->x40_vel,
                            (s32) ip->facing_dir);
     new_ip = GET_ITEM(new_gobj);

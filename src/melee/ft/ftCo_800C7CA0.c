@@ -72,7 +72,7 @@ void fn_800C7DC4(HSD_GObj* gobj, s32 motion_state, Vec3* normal, Vec3* offset)
     angle = atan2f(-normal->x, normal->y);
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 0x406, NULL, &spawn_pos,
                   &angle);
-    Camera_80030E44(2, &spawn_pos);
+    Camera_RequestQuake(2, &spawn_pos);
     mag = fp->xF0_ground_kb_vel;
     vel = *normal;
     vel.x *= mag;

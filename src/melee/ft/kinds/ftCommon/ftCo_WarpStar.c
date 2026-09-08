@@ -224,7 +224,7 @@ void ftCo_800C4C60(Fighter_GObj* gobj)
             efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 1030, NULL, &vec,
                           &param);
         }
-        Camera_80030E44(4, &vec);
+        Camera_RequestQuake(4, &vec);
     }
     ftCommon_8007EBAC(fp, 14, 0);
 }

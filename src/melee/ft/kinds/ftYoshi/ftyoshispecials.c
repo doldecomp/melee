@@ -68,7 +68,7 @@ static inline void ftYs_SpecialS_SpawnWallBounceEffect(Fighter_GObj* gobj,
     }
     pos.y += 0.5F * ABS(fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
     efSync_Spawn(0x406, gobj, &pos, &angle);
-    Camera_80030E44(3, &pos);
+    Camera_RequestQuake(3, &pos);
     ftCommon_8007EBAC(fp, 0xC, 0xA);
 }
 

@@ -65,7 +65,7 @@ struct Camera_x2D0 {
 
 struct CameraQuake {
     /* 0x0 */ Vec3 epicenter;
-    /* 0xC */ QuakeKind kind;
+    /* 0xC */ CmQuakeKind kind;
 };
 
 struct CameraDebugMode {

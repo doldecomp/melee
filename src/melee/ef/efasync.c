@@ -1364,7 +1364,7 @@ void efAsync_QueueProcessDeferred(HSD_GObj* gobj,
         break;
     case EF_SPAWN_CAMERA_SHAKE:
         lb_8000B1CC(jobj, &queued_effect->params, &sp10);
-        Camera_80030E44(gfx_id, &sp10);
+        Camera_RequestQuake(gfx_id, &sp10);
         break;
     default:
         HSD_ASSERTREPORT(0x7CU, 0, "[EfASync] unknown type %d\n", spawn_kind,

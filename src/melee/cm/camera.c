@@ -907,7 +907,7 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     transform->target_position.z = transform->target_interest.z + cam_dist;
 }
 
-void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
+void Camera_ApplyQuake(CameraBounds* bounds, CameraTransformState* state)
 {
     f32 viewport_x_scale;
     f32 viewport_y_scale;
@@ -965,13 +965,13 @@ void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
     game_camera.quake_offset.y = 0.0f;
 }
 
-void Camera_8002A278(f32 x, f32 y)
+void Camera_SetQuakeOffset(f32 x, f32 y)
 {
     game_camera.quake_offset.x = x;
     game_camera.quake_offset.y = y;
 }
 
-void Camera_8002A28C(CameraBounds* arg0)
+void Camera_UpdateQuakes(CameraBounds* bounds)
 {
     u8 _[16];
     s32 quakes_remaining;
@@ -984,15 +984,15 @@ void Camera_8002A28C(CameraBounds* arg0)
         game_camera.quakes[0][i].kind = 0;
     }
 
-    for (i = 0; i < 5; ++i) {
+    for (i = 0; i < QuakeKind_Count; i++) {
         if (game_camera.quake_frames_left[i] != 0) {
-            game_camera.quake_frames_left[i] -= 1;
+            game_camera.quake_frames_left[i]--;
             quakes_remaining = i;
         }
     }
 
     if ((quakes_remaining != -1) && (game_camera.quake_gobj != NULL) &&
-        (game_camera.quake_frames_left[1] == 0))
+        (game_camera.quake_frames_left[QuakeKind_Loop] == 0))
     {
         HSD_GObjPLink_80390228(game_camera.quake_gobj);
         game_camera.quake_gobj = 0;
@@ -1550,8 +1550,8 @@ static inline void update_bounds(CameraBounds* bounds,
                     Stage_GetCamTrackSmooth());
     Camera_80029C88(bounds_copy, &game_camera.transform_copy,
                     Stage_GetCamTrackSmooth());
-    Camera_8002A28C(bounds);
-    Camera_8002A0C0(bounds, &game_camera.transform);
+    Camera_UpdateQuakes(bounds);
+    Camera_ApplyQuake(bounds, &game_camera.transform);
 }
 
 /// update gameplay camera
@@ -2345,8 +2345,8 @@ void Camera_8002C908(void* arg0)
     delta = game_camera.transform.target_fov - game_camera.transform.fov;
     game_camera.transform.fov += delta * cm_803BCCA0.x88;
 
-    Camera_8002A28C(&bounds);
-    Camera_8002A0C0(&bounds, &game_camera.transform);
+    Camera_UpdateQuakes(&bounds);
+    Camera_ApplyQuake(&bounds, &game_camera.transform);
 }
 
 /// Camera_PauseThink
@@ -2840,8 +2840,8 @@ void Camera_8002DDC4(void* unused)
             dz * smooth + cam->transform_copy.position.z;
     }
     set_bounds_z(&bounds, target_interest, target_position);
-    Camera_8002A28C(&bounds);
-    Camera_8002A0C0(&bounds, &cam->transform);
+    Camera_UpdateQuakes(&bounds);
+    Camera_ApplyQuake(&bounds, &cam->transform);
 }
 
 s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest,
@@ -4392,46 +4392,48 @@ float Camera_80030E10(void)
     return game_camera.x2B0;
 }
 
-void Camera_80030E34(f32 arg8)
+void Camera_SetQuakeScale(f32 scale)
 {
-    game_camera.quake_scale = arg8;
+    game_camera.quake_scale = scale;
 }
 
-void Camera_80030E44(QuakeKind kind, Vec3* pos)
+void Camera_RequestQuake(CmQuakeKind kind, Vec3* pos)
 {
     HSD_GObj** pquake;
-    s32 result;
+    s32 quake_length;
 
     switch (kind) {
-    case QuakeKind_Small:
+    case QuakeKind_Loop:
         pquake = &game_camera.quake_gobj;
         if (game_camera.quake_gobj == NULL) {
             *pquake = grLib_801C9CEC(kind);
         }
-        result = 10;
+        quake_length = 10;
+        break;
+    case QuakeKind_Small:
+        grLib_801C9CEC(kind);
+        quake_length = 22;
         break;
     case QuakeKind_Medium:
         grLib_801C9CEC(kind);
-        result = 22;
+        quake_length = 22;
         break;
     case QuakeKind_Large:
         grLib_801C9CEC(kind);
-        result = 22;
-        break;
-    case QuakeKind_Loop:
-        grLib_801C9CEC(kind);
-        result = 22;
+        quake_length = 22;
         break;
     default:
         break;
     }
 
-    game_camera.quake_frames_left[kind] = result;
+    game_camera.quake_frames_left[kind] = quake_length;
 
     {
+        // Log this frames request for Camera_UpdateQuakes to snapshot. This is
+        // dead bookkeeping as nothing consumes the snapshot row.
         s32 i;
         for (i = 0; i < 16; i++) {
-            if (game_camera.quakes[0][i].kind == 0) {
+            if (game_camera.quakes[0][i].kind == QuakeKind_None) {
                 game_camera.quakes[0][i].kind = kind;
                 if (pos != NULL) {
                     game_camera.quakes[0][i].epicenter = *pos;
@@ -4440,14 +4442,15 @@ void Camera_80030E44(QuakeKind kind, Vec3* pos)
                     game_camera.quakes[0][i].epicenter.y = 0.0f;
                     game_camera.quakes[0][i].epicenter.x = 0.0f;
                 }
+                // No break here, so all slots are filled.
             }
         }
     }
 }
 
-void Camera_80031044(s32 arg0)
+void Camera_StopQuake(CmQuakeKind kind)
 {
-    game_camera.quake_frames_left[arg0] = 0;
+    game_camera.quake_frames_left[kind] = 0;
 }
 
 enum_t Camera_80031060(void)

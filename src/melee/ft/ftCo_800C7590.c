@@ -55,7 +55,7 @@ void ftCo_800C7590(Fighter_GObj* gobj)
     fp->x2220_b3 = true;
     it_802EAAEC(fp->mv.co.captureleadead.x0, gobj, 0, 0.0f);
     ftCommon_8007EBAC(fp, 0xC, 0);
-    Camera_80030E44(2, &fp->cur_pos);
+    Camera_RequestQuake(2, &fp->cur_pos);
 }
 
 void ftCo_CaptureLeadead_Anim(Fighter_GObj* gobj)

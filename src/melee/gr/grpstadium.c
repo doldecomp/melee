@@ -2167,7 +2167,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             }
         }
         grStadium_801D435C(gobj);
-        Camera_80030E44(1, NULL);
+        Camera_RequestQuake(1, NULL);
         return;
     case 5:
         temp_r31->u.stadium.xD8++;
@@ -2211,7 +2211,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             temp_r31->u.stadium.xE8 = NULL;
         }
         grStadium_801D435C(gobj);
-        Camera_80030E44(1, NULL);
+        Camera_RequestQuake(1, NULL);
         return;
     case 6: {
         Ground* temp_r3_9 = temp_r31->u.stadium.xE4->user_data;

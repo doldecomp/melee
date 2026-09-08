@@ -523,7 +523,7 @@ block_75:
     block_81:
         cam_enum = 2;
     block_82:
-        Camera_80030E44(cam_enum, &fp->cur_pos);
+        Camera_RequestQuake(cam_enum, &fp->cur_pos);
     }
 block_83:
     ftCommon_8007F824(gobj);

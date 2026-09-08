@@ -217,7 +217,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
     temp_r27_2->invisible = true;
     temp_r27_2->x221F_b1 = 1;
-    Camera_80030E44(4, &temp_r27_2->cur_pos);
+    Camera_RequestQuake(4, &temp_r27_2->cur_pos);
     ftCo_800D35FC(temp_r27_2);
     ftCo_800D34E0(gobj);
     ft_80088C5C(gobj);
@@ -323,7 +323,7 @@ void ftCo_800D3950(Fighter_GObj* gobj)
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
     temp_r27_2->invisible = true;
     temp_r27_2->x221F_b1 = 1;
-    Camera_80030E44(4, &temp_r27_2->cur_pos);
+    Camera_RequestQuake(4, &temp_r27_2->cur_pos);
     ftCo_800D35FC(temp_r27_2);
     ftCo_800D34E0(gobj);
     ft_80088C5C(gobj);
@@ -422,7 +422,7 @@ void ftCo_800D3BC8(Fighter_GObj* gobj)
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
     temp_r27_2->invisible = true;
     temp_r27_2->x221F_b1 = 1;
-    Camera_80030E44(4, &temp_r27_2->cur_pos);
+    Camera_RequestQuake(4, &temp_r27_2->cur_pos);
     ftCo_800D35FC(temp_r27_2);
     ftCo_800D34E0(gobj);
     ft_80088C5C(gobj);
@@ -521,7 +521,7 @@ void ftCo_800D3E40(Fighter_GObj* gobj)
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
     temp_r27_2->invisible = true;
     temp_r27_2->x221F_b1 = 1;
-    Camera_80030E44(4, &temp_r27_2->cur_pos);
+    Camera_RequestQuake(4, &temp_r27_2->cur_pos);
     ftCo_800D35FC(temp_r27_2);
     ftCo_800D34E0(gobj);
     ft_80088C5C(gobj);
@@ -803,7 +803,7 @@ void ftCo_800D481C(Fighter_GObj* gobj, s32 arg1)
         }
     }
 
-    Camera_80030E44(4, &fp->cur_pos);
+    Camera_RequestQuake(4, &fp->cur_pos);
     ft_800889F4(fp, fp->ft_data->x4C_sfx->x20);
     ftCo_800D4E50(fp, &fp->cur_pos, 0, 1.5707964f);
     fp->accessory4_cb = fn_800D4DD4;
@@ -869,7 +869,7 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
             ft_PlaySFX(fp, 0x61, 0x7F, 0x40);
             ft_8008805C(fp, 0x61);
             ftCommon_8007EBAC(fp, 0xD, 0);
-            Camera_80030E44(4, &fp->cur_pos);
+            Camera_RequestQuake(4, &fp->cur_pos);
             fp->mv.co.unk_deadup.x40 = data[5];
             fp->mv.co.unk_deadup.x44 = 4;
             return;

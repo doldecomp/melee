@@ -425,7 +425,7 @@ void it_80286BA0(Item_GObj* gobj)
     PAD_STACK(8);
 
     Item_8026AE84(ip, 0xF6, 0x7F, 0x40);
-    Camera_80030E44(2, &ip->pos);
+    Camera_RequestQuake(2, &ip->pos);
     it_80286248(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
                 attr->spawn_weight_2, attr->special_spawn_weight);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);

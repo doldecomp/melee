@@ -1092,7 +1092,7 @@ void gm_801BC00C(void)
     if (idx == 0x24) {
         lbBgFlash_80021A10(0.2f);
     }
-    Camera_80030E34(ev->x1C);
+    Camera_SetQuakeScale(ev->x1C);
     HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), event_info[idx]->x0, 0x15);
 }
 
@@ -2459,7 +2459,7 @@ void gm_801BE638(HSD_GObj* gobj)
         if ((temp_r30->x10 % 30) == 0) {
             gm_80167858((s32) temp_r30->x6, Player_GetNametagSlotID(0), 2,
                         0x1E);
-            Camera_80030E44(3, NULL);
+            Camera_RequestQuake(3, NULL);
         }
         temp_r3_2 = temp_r30->x10;
         if (temp_r3_2 <= temp_r28_2) {

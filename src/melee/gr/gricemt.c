@@ -1302,7 +1302,7 @@ void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
     it_8026B294(gobj, &pos);
     efSync_Spawn(0x445, gobj, &pos);
     Ground_801C53EC(310);
-    Camera_80030E44(2, &pos);
+    Camera_RequestQuake(2, &pos);
 }
 
 /// @brief Creates material items and attaches them to Entity05 platform JObjs.

@@ -845,7 +845,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     efSync_Spawn(0x442, gp->u.inishie1.block[index].item_gobj, &effect_pos);
 
     Ground_801C5414(0x136, 0xBA);
-    Camera_80030E44(2, &effect_pos);
+    Camera_RequestQuake(2, &effect_pos);
 }
 
 static inline s32 get_block_id(s32 block_id)

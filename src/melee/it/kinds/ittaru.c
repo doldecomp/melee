@@ -564,7 +564,7 @@ void it_802886C4(Item_GObj* gobj)
     HSD_JObj* jobj = (0, (HSD_JObj*) HSD_GObjGetHSDObj(gobj));
 
     Item_8026AE84(ip, 0xFB, 0x7F, 0x40);
-    Camera_80030E44(2, &ip->pos);
+    Camera_RequestQuake(2, &ip->pos);
     it_802886C4_inline(gobj, &zero);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_802756D0(gobj);

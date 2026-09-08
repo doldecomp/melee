@@ -208,7 +208,7 @@ static void grLib_801C9BC8(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObjAnimAll(jobj);
-    Camera_8002A278(HSD_JObjGetTranslationX(jobj),
+    Camera_SetQuakeOffset(HSD_JObjGetTranslationX(jobj),
                     HSD_JObjGetTranslationY(jobj));
 }
 
@@ -218,7 +218,7 @@ static void grLib_801C9C40(HSD_GObj* gobj)
     HSD_AObj* aobj = jobj->aobj;
 
     HSD_JObjAnimAll(jobj);
-    Camera_8002A278(HSD_JObjGetTranslationX(jobj),
+    Camera_SetQuakeOffset(HSD_JObjGetTranslationX(jobj),
                     HSD_JObjGetTranslationY(jobj));
 
     if (aobj == NULL || aobj->flags & 0x40000000) {

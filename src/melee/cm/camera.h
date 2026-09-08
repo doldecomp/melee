@@ -22,9 +22,9 @@
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
 /* 029C88 */ void Camera_80029C88(CameraBounds*, CameraTransformState*, f32);
 /* 029CF8 */ void Camera_80029CF8(CameraBounds*, CameraTransformState*);
-/* 02A0C0 */ void Camera_8002A0C0(CameraBounds*, CameraTransformState*);
-/* 02A278 */ void Camera_8002A278(float x, float y);
-/* 02A28C */ void Camera_8002A28C(CameraBounds*);
+/* 02A0C0 */ void Camera_ApplyQuake(CameraBounds*, CameraTransformState*);
+/* 02A278 */ void Camera_SetQuakeOffset(float x, float y);
+/* 02A28C */ void Camera_UpdateQuakes(CameraBounds*);
 /* 02A4AC */ void Camera_8002A4AC(HSD_GObj*);
 /* 02A768 */ void Camera_8002A768(CameraTransformState*, s32);
 /* 02AF68 */ void Camera_8002AF68(HSD_CObj*, CameraTransformState*);
@@ -114,9 +114,9 @@
 /* 030DE4 */ void Camera_80030DE4(f32, f32);
 /* 030DF8 */ void Camera_80030DF8(void);
 /* 030E10 */ float Camera_80030E10(void);
-/* 030E34 */ void Camera_80030E34(f32);
-/* 030E44 */ void Camera_80030E44(QuakeKind, Vec*);
-/* 031044 */ void Camera_80031044(s32);
+/* 030E34 */ void Camera_SetQuakeScale(f32);
+/* 030E44 */ void Camera_RequestQuake(CmQuakeKind, Vec*);
+/* 031044 */ void Camera_StopQuake(CmQuakeKind);
 /* 031060 */ enum_t Camera_80031060(void);
 /* 031074 */ void Camera_80031074(u8);
 /* 03108C */ enum_t Camera_8003108C(void);
