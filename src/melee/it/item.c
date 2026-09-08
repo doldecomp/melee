@@ -1467,7 +1467,7 @@ static void Item_80269BE4(HSD_GObj* gobj)
 
 static void Item_80269C5C(HSD_GObj* gobj)
 {
-    u8 _[8];
+    PAD_STACK(8);
 
     it_8026F9A0();
     it_802703E8(gobj);
