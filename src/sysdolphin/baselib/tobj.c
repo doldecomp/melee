@@ -369,18 +369,8 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     Vec3 trans;
     Quaternion rot;
 
-    bool no_assert = false;
-
     PAD_STACK(8);
-
-    if (tobj->repeat_s && tobj->repeat_t) {
-        no_assert = true;
-    }
-
-    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
-    if (!no_assert) {
-        __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
-    }
+    HSD_ASSERT(589, tobj->repeat_s && tobj->repeat_t);
 
     scale.x = fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F
@@ -399,7 +389,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
                                    : 0.0F));
     trans.z = tobj->translate.z;
 
-    PSMTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
+    MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
     HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
@@ -446,10 +436,10 @@ static void TObjSetupMtx(HSD_TObj* tobj)
             HSD_ASSERT(0x2A8, cobj);
             vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
             HSD_LObjGetLightVector(lobj, &ldir);
-            PSMTXMultVecSR(vmtx, &ldir, &ldir);
+            MTXMultVecSR(vmtx, &ldir, &ldir);
             ldir.z += -1.0F;
 
-            PSVECNormalize(&ldir, &half);
+            VECNormalize(&ldir, &half);
 
             half.x *= -0.5;
             half.y *= -0.5;
@@ -478,7 +468,7 @@ static void TObjSetupMtx(HSD_TObj* tobj)
         HSD_CObj* cobj = HSD_CObjGetCurrent();
         Mtx mtx;
 
-        PSMTXConcat(tobj->mtx, HSD_CObjGetInvViewingMtxPtrDirect(cobj), mtx);
+        MTXConcat(tobj->mtx, HSD_CObjGetInvViewingMtxPtrDirect(cobj), mtx);
         GXLoadTexMtxImm(mtx, tobj->mtxid, GX_MTX3x4);
     } break;
 
