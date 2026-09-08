@@ -95,7 +95,8 @@ struct Camera {
     /* 0x084 */ Vec2 translation;
     /* 0x08C */ s32 quake_frames_left[5];
     /* 0x0A0 */ HSD_GObj* quake_gobj;
-    /* 0x0A4 */ Vec2 quake_offset; ///< offset from the quake model, before scaling
+    /* 0x0A4 */ Vec2
+        quake_offset; ///< offset from the quake model, before scaling
     /* 0x0AC */ f32 quake_scale;
     /* 0x0B0 */ struct CameraQuake quakes[2][16];
     /* 0x2B0 */ float x2B0;
