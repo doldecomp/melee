@@ -503,7 +503,7 @@ struct lbl_8046B6A0_FighterMatchInfoFlags {
     u8 x4_b7 : 1;
 };
 
-struct lbl_8046B6A0_FighterMatchInfo {
+struct VsSceneFighter {
     u8 x0; ///< CharacterKind
     u8 x1;
     u8 slot_type;
@@ -530,7 +530,7 @@ struct lbl_8046B6A0_FighterMatchInfo {
     u16 xC;
 };
 
-struct lbl_8046B6A0_t {
+struct VsSceneController {
     /* 0x0000 */ u8 unk_0; ///< 0 During a match
                            ///< 1 While GAME! or "TIMEOUT!" is displayed/match
                            ///< is frozen on final frame 2 While in 1p and
@@ -546,7 +546,7 @@ struct lbl_8046B6A0_t {
         unpause_timer; ///< Frames remaining before pause input is accepted
                        ///< after unpausing. Set to @c 0xA on unpause and
                        ///< decremented each frame while unpaused. Mirrors
-                       ///< #lbl_8046B6A0_t::pause_timer semantics.
+                       ///< #VsSceneController::pause_timer semantics.
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;
@@ -571,12 +571,12 @@ struct lbl_8046B6A0_t {
     /* 0x002E */ u16 unk_2E;
     /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
-    /* 0x0038 */ struct lbl_8046B6A0_FighterMatchInfo FighterMatchInfo[6];
+    /* 0x0038 */ struct VsSceneFighter fighters[GM_MAX_PLAYERS];
     /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
     /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
-    /* 0x24C8 */ struct StartMeleeRules x24C8;
+    /* 0x24C8 */ struct StartMeleeRules start;
 }; /* size = 0x2528 */
-ASSERT_SIZE(struct lbl_8046B6A0_t, 0x2528);
+ASSERT_SIZE(struct VsSceneController, 0x2528);
 
 struct datetime {
     u16 year;

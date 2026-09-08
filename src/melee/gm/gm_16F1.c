@@ -1,10 +1,10 @@
 #include "gm_16F1.h"
 
 #include "gm_1601.h"
-#include "gm_16AE.h"
 #include "gm_16F1.static.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+#include "gmvs.h"
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
@@ -1116,7 +1116,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 int fn_80171A88(void)
 {
     int result = 0;
-    if (gm_8016B41C()) {
+    if (gm_IsCurrently1PMode_inline()) {
         result = fn_8017E0E4();
         if (result == -1) {
             result = 1;
@@ -1276,7 +1276,7 @@ bool gm_801720B4(void)
     if (gm_8016B3D8()) {
         return fn_8017E160();
     }
-    return gm_GetRules()->is_teams == true;
+    return gm_GetStartMeleeRules()->is_teams == true;
 }
 
 bool gm_801720F8(void)
@@ -1284,7 +1284,7 @@ bool gm_801720F8(void)
     if (gm_8016B3D8()) {
         return true;
     }
-    return gm_GetRules()->match_kind == 1;
+    return gm_GetStartMeleeRules()->match_kind == 1;
 }
 
 int gm_80172140(void)

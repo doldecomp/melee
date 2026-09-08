@@ -1531,7 +1531,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     }
 
     gp2->win_dynamic_p->default_fitting = 0;
-    rules = gm_GetRules();
+    rules = gm_GetStartMeleeRules();
     temp_r4 = gp2->win_dynamic_p;
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;

@@ -1,7 +1,7 @@
 #ifndef MELEE_PL_INLINES_H
 #define MELEE_PL_INLINES_H
 
-#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gmvs.h>
 #include <melee/pl/player.h>
 
 static inline bool pl_CheckIfSameTeam(int slotA, int slotB)

@@ -217,8 +217,8 @@ struct StartMeleeRules {
     u8 is_teams;
     u8 x9;
     u8 xA;
-    s8 xB; // item frequency
-    s8 xC; // SD penalty
+    s8 item_freq;
+    s8 sd_penalty;
     u8 xD;
     u16 stkind;
 

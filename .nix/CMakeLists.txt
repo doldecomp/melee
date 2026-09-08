@@ -504,7 +504,7 @@ set(SOURCES
     src/melee/ft/ftwalkcommon.c
     src/melee/ft/ftwalljump.c
     src/melee/gm/gm_1601.c
-    src/melee/gm/gm_16AE.c
+    src/melee/gm/gmvs.c
     src/melee/gm/gm_16F1.c
     src/melee/gm/gm_1736.c
     src/melee/gm/gm_17AD.c

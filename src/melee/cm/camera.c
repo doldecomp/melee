@@ -929,7 +929,7 @@ void Camera_ApplyQuake(CameraBounds* bounds, CameraTransformState* state)
     input_x *= 10.0f;
     input_y *= 10.0f;
 
-    if (gm_8016B41C() != 0) {
+    if (gm_IsCurrently1PMode_inline() != 0) {
         input_x *= cm_803BCCA0.xE8;
         input_y *= cm_803BCCA0.xE8;
     }
@@ -1391,7 +1391,7 @@ void Camera_8002B0E0(void)
     f32 var_f2;
     PAD_STACK(8);
 
-    if ((gm_8016B41C() != 0) && (game_camera.x2C0 > 0.0f)) {
+    if ((gm_IsCurrently1PMode_inline() != 0) && (game_camera.x2C0 > 0.0f)) {
         {
             s32 idx = Player_GetPlayerId(0) & 0xFF;
             var_f1 = HSD_PadCopyStatus[idx].nml_subStickY;

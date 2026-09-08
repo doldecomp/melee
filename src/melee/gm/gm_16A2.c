@@ -521,7 +521,7 @@ void fn_8016A09C(void)
     PAD_STACK(4);
     var_r29 = 0;
 
-    gm_16AE_GetUnkData_1();
+    gmVs_GetController_1();
     lbl_8046B488.unk_10_b1 = 1;
     lbl_8046B488.unk_10_b0 = 0;
 
@@ -548,7 +548,7 @@ void gm_8016A164(void)
 {
     int i;
     struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
-    lbl_8046B6A0_t* match_info = gm_16AE_GetUnkData_1();
+    VsSceneController* match_info = gmVs_GetController_1();
     PAD_STACK(4);
     if (gp == 0) {
         if (match_info == 0) {
@@ -707,7 +707,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(int arg0)
 {
-    if (gm_16AE_GetUnkData_1()->hud_enabled == true) {
+    if (gmVs_GetController_1()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }
@@ -905,7 +905,7 @@ void gm_8016A92C(StartMeleeRules* arg0)
 
 bool gm_8016A944(void)
 {
-    if (gm_GetRules()->x58 != NULL) {
+    if (gm_GetStartMeleeRules()->x58 != NULL) {
         return true;
     }
     return false;
@@ -966,7 +966,7 @@ bool gm_8016AC44(s8 ckind, s8 costume_id)
     s32 idx;
     s32 i;
 
-    if ((gm_GetRules()->x58 != NULL ? 1 : 0) == 1) {
+    if ((gm_GetStartMeleeRules()->x58 != NULL ? 1 : 0) == 1) {
         struct lbl_8046B668_t* ptr = &lbl_8046B668;
         idx = -1;
         for (i = 0; i < 27; i++) {

@@ -884,7 +884,7 @@ void gm_80189CDC(StartMeleeData* arg0)
 
     arg0->rules.match_kind = 0;
     arg0->rules.is_teams = 1;
-    arg0->rules.xB = -1;
+    arg0->rules.item_freq = -1;
     arg0->rules.x20 = 0xFFFFFFFFFFFFFFFFULL;
     arg0->rules.x5_0 = 1;
 
