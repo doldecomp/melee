@@ -171,7 +171,7 @@ void fn_8017EE40(int arg0_int)
     u32 total_time;
     int i;
 
-    rules = gm_GetRules();
+    rules = gm_GetStartMeleeRules();
     allstar = (UnkAllstarData*) lbl_80472CB0;
 
     if (fn_8017E318() > 0) {

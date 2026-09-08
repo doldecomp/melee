@@ -7,9 +7,9 @@
 #include <placeholder.h>
 
 #include "gm_1601.h"
-#include "gm_16AE.h"
 #include "gm_1A45.h"
 #include "gmpause.h"
+#include "gmvs.h"
 #include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/cmsnap.h>
@@ -260,10 +260,10 @@ static inline void gmCamera_FreeTextsWithZero(HSD_Text* zero)
 
 void gmCamera_801A26C0(void)
 {
-    lbl_8046B6A0_t* hud;
+    VsSceneController* hud;
     PAD_STACK(4);
 
-    hud = gm_16AE_GetUnkData_0();
+    hud = gmVs_GetController_0();
     if (gm_801A45E8(3)) {
         gm_801A4674(3);
         if (gm_801A45E8(1)) {
@@ -296,9 +296,9 @@ void gmCamera_801A2798(void)
 void gmCamera_801A2800(void)
 {
     HSD_JObj* jobj;
-    lbl_8046B6A0_t* temp_r3;
+    VsSceneController* temp_r3;
 
-    temp_r3 = gm_16AE_GetUnkData_0();
+    temp_r3 = gmVs_GetController_0();
     gmCamera_VsCamUiState.x10 = 0;
     lb_80011E24(gmCamera_VsCamUiState.x8, &jobj, 2, -1);
     HSD_JObjReqAnimAll(jobj, 0.0f);

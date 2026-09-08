@@ -560,9 +560,9 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
 }
 
 static inline struct lbl_8046B6A0_FighterMatchInfoFlags*
-ifStock_802F98E8_get_match_info(lbl_8046B6A0_t* data, int player)
+ifStock_802F98E8_get_match_info(VsSceneController* data, int player)
 {
-    return &data->FighterMatchInfo[player].flags;
+    return &data->fighters[player].flags;
 }
 
 /// Per-player data, formed from the byte offset so the array offset is
@@ -583,7 +583,7 @@ void ifStock_802F98E8(u8 player, u8 b)
     HSD_JObj* jobj;
     int* stocks;
     int i;
-    lbl_8046B6A0_t* ae44;
+    VsSceneController* ae44;
     HSD_JObj* icon_jobj;
     GXColor c2;
     GXColor c1;
@@ -722,7 +722,7 @@ void ifStock_802F98E8(u8 player, u8 b)
                     break;
                 }
                 HSD_JObjAnimAll(jobj);
-                ae44 = gm_16AE_GetUnkData_1();
+                ae44 = gmVs_GetController_1();
                 {
                     struct lbl_8046B6A0_FighterMatchInfoFlags* match_info =
                         ifStock_802F98E8_get_match_info(ae44, player);

@@ -17,11 +17,11 @@
 #include <dolphin/os.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
 #include <melee/gm/gm_16F1.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmvs.h>
 #include <melee/if/textdraw.h>
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>

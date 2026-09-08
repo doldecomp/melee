@@ -5,12 +5,10 @@
 #include <melee/it/forward.h>
 #include <melee/mn/forward.h>
 
-#include <placeholder.h>
-
-/* 16AE38 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void);
-/* 16AE44 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_1(void);
-/* 16AE50 */ struct StartMeleeRules* gm_GetRules(void);
-/* 16AE60 */ UNK_T fn_8016AE60(void);
+/* 16AE38 */ VsSceneController* gmVs_GetController_0(void);
+/* 16AE44 */ VsSceneController* gmVs_GetController_1(void);
+/* 16AE50 */ struct StartMeleeRules* gm_GetStartMeleeRules(void);
+/* 16AE60 */ struct lbl_8046B488_t* fn_8016AE60(void);
 /* 16AE80 */ bool gm_8016AE80(void);
 /* 16AE94 */ f32 gm_8016AE94(void);
 /* 16AEA4 */ u64 gm_8016AEA4(void);
@@ -52,7 +50,7 @@
 /* 16B388 */ void fn_8016B388(int arg0, int arg1);
 /* 16B3A0 */ bool gm_8016B3A0(void);
 /* 16B3D8 */ bool gm_8016B3D8(void);
-/* 16B41C */ bool gm_8016B41C(void);
+/* 16B41C */ bool gm_IsCurrently1PMode_inline(void);
 /* 16B498 */ bool gm_IsCurrently1PMode(void);
 /* 16B4BC */ bool fn_8016B4BC(void);
 /* 16B510 */ bool fn_8016B510(void);
@@ -85,9 +83,9 @@
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);
-/* 16CA68 */ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t*, int);
-/* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
-/* 16CD98 */ void fn_8016CD98(lbl_8046B6A0_t*);
+/* 16CA68 */ void gm_DoPauseChecksAndRoutine(VsSceneController*, int);
+/* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(VsSceneController*, int);
+/* 16CD98 */ void fn_8016CD98(VsSceneController*);
 /* 16CF4C */ void fn_8016CF4C(int, MatchOutcome);
 /* 16CFE0 */ void fn_8016CFE0(void);
 /* 16D32C */ void gm_Scene_Training_OnFrame(void);

@@ -291,7 +291,7 @@ void gm_8017E7FC(u8 matchResult)
     }
 
     if (!cond) {
-        struct StartMeleeRules* rules = gm_GetRules();
+        struct StartMeleeRules* rules = gm_GetStartMeleeRules();
         rules->x4_5 = 1;
         r31->x77 = 0;
         gm_SetNextGameModeStateId(0x5A);
@@ -312,7 +312,7 @@ typedef struct {
 void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
-    lbl_8046B6A0_t* gm = gm_16AE_GetUnkData_0();
+    VsSceneController* gm = gmVs_GetController_0();
     struct gm_803DE650_t* stage = gm_8017E4C4(gm_GetCurrentSceneIndex());
     UnkAdventureData* adv = &lbl_80472C30;
     u8* flags = arg0->_x448;
@@ -324,7 +324,7 @@ void fn_8017E8A4(int arg0_int)
         ((u8_bits*) &flags[2])->b3 = 1;
     }
 
-    if (gm->x24C8.x4_5) {
+    if (gm->start.x4_5) {
         main_data = gmMainLib_8015CDD4();
         total_time = adv->x0.xC.x20 + gm_GetFrameCount();
         ((u8_bits*) &flags[0])->b6 = 1;

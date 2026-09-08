@@ -1802,7 +1802,9 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             if (ftCo_800A2040(fp)) {
                 SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
                            ftCo_GetCpuLStickX(fp), ftCo_GetCpuLStickY(fp));
-                if (DbLevel < DbLKind_DebugRom && !gm_8016B41C()) {
+                if (DbLevel < DbLKind_DebugRom &&
+                    !gm_IsCurrently1PMode_inline())
+                {
                     SET_STICKS(fp->input.cstick[0].x, fp->input.cstick[0].y,
                                ftCo_GetCpuCStickX(fp), ftCo_GetCpuCStickY(fp));
                 } else {
@@ -1819,7 +1821,9 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
-                if (DbLevel < DbLKind_DebugRom && gm_8016B41C() == 0) {
+                if (DbLevel < DbLKind_DebugRom &&
+                    gm_IsCurrently1PMode_inline() == 0)
+                {
                     SET_STICKS(
                         fp->input.cstick[0].x, fp->input.cstick[0].y,
                         HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,

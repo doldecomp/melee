@@ -8,7 +8,7 @@
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gmvs.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
@@ -70,7 +70,7 @@ static u8 ifMagnify_803F984C[16][4] = {
 
 static inline bool ifMagnify_IsHUDVisible(void)
 {
-    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gmVs_GetController_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         return false;

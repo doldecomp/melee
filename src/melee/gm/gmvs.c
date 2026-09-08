@@ -1,15 +1,17 @@
-#include "gm_16AE.h"
+#include "gmvs.h"
+
+#include <Runtime/platform.h>
 
 #include <string.h>
 
 #include "forward.h"
-#include "gm_16AE.static.h"
 #include "gm_1884.h"
 #include "gm_18A1.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmmultiman.h"
 #include "gmpause.h"
+#include "types.h"
 #include <dolphin/pad.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
@@ -45,69 +47,82 @@
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void)
+static u32 lbl_803D5620[] = {
+    0x7C859,
+    0x7C85A,
+    0x7C85B,
+    0x7C85C,
+};
+
+static u32 lbl_803D5630[] = {
+    U32_MAX, 0x7C858, 0x7C862, 0x7C85F, 0x7C854, 0x7C853,
+};
+
+/* 46B6A0 */ static VsSceneController controller;
+
+VsSceneController* gmVs_GetController_0(void)
 {
-    return &lbl_8046B6A0;
+    return &controller;
 }
 
-lbl_8046B6A0_t* gm_16AE_GetUnkData_1(void)
+VsSceneController* gmVs_GetController_1(void)
 {
-    return &lbl_8046B6A0;
+    return &controller;
 }
 
-struct StartMeleeRules* gm_GetRules(void)
+struct StartMeleeRules* gm_GetStartMeleeRules(void)
 {
-    return &lbl_8046B6A0.x24C8;
+    return &controller.start;
 }
 
-UNK_T fn_8016AE60(void)
+struct lbl_8046B488_t* fn_8016AE60(void)
 {
     return gm_1601_GetUnkData();
 }
 
 bool gm_8016AE80(void)
 {
-    return gm_GetRules()->xB;
+    return gm_GetStartMeleeRules()->item_freq;
 }
 
 f32 gm_8016AE94(void)
 {
-    return gm_16AE_GetUnkData_0()->unk_34;
+    return gmVs_GetController_0()->unk_34;
 }
 
 u64 gm_8016AEA4(void)
 {
-    return gm_GetRules()->x20;
+    return gm_GetStartMeleeRules()->x20;
 }
 
 s32 gm_8016AEB8(void)
 {
-    return gm_GetRules()->x28;
+    return gm_GetStartMeleeRules()->x28;
 }
 
 bool gm_8016AEC8(void)
 {
-    return gm_GetRules()->xC;
+    return gm_GetStartMeleeRules()->sd_penalty;
 }
 
 u32 gm_GetFrameCount(void)
 {
-    return gm_16AE_GetUnkData_0()->frame_count;
+    return gmVs_GetController_0()->frame_count;
 }
 
 u32 gm_8016AEEC(void)
 {
-    return gm_16AE_GetUnkData_0()->timer_seconds;
+    return gmVs_GetController_0()->timer_seconds;
 }
 
 u16 gm_8016AEFC(void)
 {
-    return gm_16AE_GetUnkData_0()->unk_2C;
+    return gmVs_GetController_0()->unk_2C;
 }
 
 u16 gm_8016AF0C(void)
 {
-    int tmp = 99.0F * gm_16AE_GetUnkData_0()->unk_2C / 59.0F;
+    int tmp = 99.0F * gmVs_GetController_0()->unk_2C / 59.0F;
     u16 var_r31 = tmp;
     if (!gm_8016B110()) {
         var_r31 = 0x63 - var_r31;
@@ -117,10 +132,10 @@ u16 gm_8016AF0C(void)
 
 bool GetMatchTimer(int* arg0)
 {
-    lbl_8046B6A0_t* data = gm_16AE_GetUnkData_0();
-    if (arg0 != NULL && data->x24C8.timer_enabled) {
+    VsSceneController* data = gmVs_GetController_0();
+    if (arg0 != NULL && data->start.timer_enabled) {
         if (gm_8016B110()) {
-            *arg0 = data->x24C8.time_limit - data->timer_seconds;
+            *arg0 = data->start.time_limit - data->timer_seconds;
         } else {
             *arg0 = data->timer_seconds;
         }
@@ -131,7 +146,7 @@ bool GetMatchTimer(int* arg0)
 
 u16 gm_GetStKind(void)
 {
-    return gm_GetRules()->stkind;
+    return gm_GetStartMeleeRules()->stkind;
 }
 
 bool gm_8016B014(void)
@@ -139,7 +154,7 @@ bool gm_8016B014(void)
     int i;
     PAD_STACK(4);
 
-    if (gm_GetRules()->x4_2 && !gm_8016A1F8()) {
+    if (gm_GetStartMeleeRules()->x4_2 && !gm_8016A1F8()) {
         for (i = 1; i < 6; i++) {
             if (Player_GetPlayerState(i) != 0) {
                 i = -1;
@@ -155,57 +170,57 @@ bool gm_8016B014(void)
 
 bool gm_8016B094(void)
 {
-    return gm_GetRules()->match_kind == 1;
+    return gm_GetStartMeleeRules()->match_kind == 1;
 }
 
 bool gm_8016B0B4(void)
 {
-    return gm_GetRules()->match_kind == 2;
+    return gm_GetStartMeleeRules()->match_kind == 2;
 }
 
 bool gm_8016B0D4(void)
 {
-    return gm_GetRules()->friendly_fire;
+    return gm_GetStartMeleeRules()->friendly_fire;
 }
 
 bool gm_8016B0E8(void)
 {
-    return gm_GetRules()->x4_2;
+    return gm_GetStartMeleeRules()->x4_2;
 }
 
 bool gm_8016B0FC(void)
 {
-    return gm_GetRules()->single_button;
+    return gm_GetStartMeleeRules()->single_button;
 }
 
 bool gm_8016B110(void)
 {
-    return gm_GetRules()->timer_counts_up;
+    return gm_GetStartMeleeRules()->timer_counts_up;
 }
 
 bool gm_8016B124(void)
 {
-    return gm_GetRules()->x2_1;
+    return gm_GetStartMeleeRules()->x2_1;
 }
 
 void fn_8016B138(void)
 {
-    gm_GetRules()->is_teams = false;
+    gm_GetStartMeleeRules()->is_teams = false;
 }
 
 bool gm_8016B14C(void)
 {
-    return gm_GetRules()->is_teams == false;
+    return gm_GetStartMeleeRules()->is_teams == false;
 }
 
 bool gm_8016B168(void)
 {
-    return gm_GetRules()->is_teams == true;
+    return gm_GetStartMeleeRules()->is_teams == true;
 }
 
 bool gm_8016B184(void)
 {
-    if (gm_16AE_GetUnkData_0()->is_singleplayer == true) {
+    if (gmVs_GetController_0()->is_singleplayer == true) {
         return true;
     }
     return false;
@@ -213,27 +228,27 @@ bool gm_8016B184(void)
 
 bool gm_8016B1A8(void)
 {
-    return gm_GetRules()->x9 == 1;
+    return gm_GetStartMeleeRules()->x9 == 1;
 }
 
 bool gm_8016B1C4(void)
 {
-    return gm_GetRules()->x5_2;
+    return gm_GetStartMeleeRules()->x5_2;
 }
 
 bool gm_8016B1D8(void)
 {
-    return gm_GetRules()->x5_3;
+    return gm_GetStartMeleeRules()->x5_3;
 }
 
 bool gm_8016B1EC(void)
 {
-    return gm_16AE_GetUnkData_0()->unk_0 == 0;
+    return gmVs_GetController_0()->unk_0 == 0;
 }
 
 bool gm_8016B204(void)
 {
-    StartMeleeRules* rules = gm_GetRules();
+    StartMeleeRules* rules = gm_GetStartMeleeRules();
     if (rules->time_limit == 0 || !rules->timer_enabled) {
         return true;
     }
@@ -242,17 +257,17 @@ bool gm_8016B204(void)
 
 bool gm_8016B238(void)
 {
-    return gm_GetRules()->x6;
+    return gm_GetStartMeleeRules()->x6;
 }
 
 f32 gm_8016B248(void)
 {
-    return gm_GetRules()->x30;
+    return gm_GetStartMeleeRules()->x30;
 }
 
 bool gm_8016B258(int arg0)
 {
-    return gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x4_b3;
+    return gmVs_GetController_0()->fighters[arg0].x4_b3;
 }
 
 void gm_SetGameSpeed(float speed)
@@ -262,37 +277,37 @@ void gm_SetGameSpeed(float speed)
 
 void gm_ResetGameSpeed(void)
 {
-    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.game_speed));
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / controller.start.game_speed));
 }
 
 void gm_8016B328(void)
 {
-    gm_16AE_GetUnkData_0()->terminate_match = 1;
+    gmVs_GetController_0()->terminate_match = 1;
 }
 
 void gm_8016B33C(int arg0)
 {
-    gm_16AE_GetUnkData_0()->unk_B = arg0 + 1;
+    gmVs_GetController_0()->unk_B = arg0 + 1;
 }
 
 void gm_8016B350(int arg0)
 {
-    gm_16AE_GetUnkData_0()->unk_10 = arg0 + 1;
+    gmVs_GetController_0()->unk_10 = arg0 + 1;
 }
 
 void gm_8016B364(int arg0)
 {
-    gm_16AE_GetUnkData_0()->unk_14 = arg0 + 1;
+    gmVs_GetController_0()->unk_14 = arg0 + 1;
 }
 
 void gm_8016B378(s8 arg0)
 {
-    gm_16AE_GetUnkData_0()->unk_18 = arg0;
+    gmVs_GetController_0()->unk_18 = arg0;
 }
 
 void fn_8016B388(int arg0, int arg1)
 {
-    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x6 = arg1;
+    gmVs_GetController_0()->fighters[arg0].x6 = arg1;
 }
 
 bool gm_8016B3A0(void)
@@ -315,7 +330,7 @@ bool gm_8016B3D8(void)
     }
 }
 
-bool gm_8016B41C(void)
+bool gm_IsCurrently1PMode_inline(void)
 {
     switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC:
@@ -339,7 +354,7 @@ bool gm_8016B41C(void)
 
 static float get_unk_float(void)
 {
-    if (gm_8016B41C() != 0) {
+    if (gm_IsCurrently1PMode_inline()) {
         return 1.0F;
     } else {
         switch (gm_8016B558()) {
@@ -379,7 +394,7 @@ bool fn_8016B4BC(void)
 
 bool fn_8016B510(void)
 {
-    if (gm_GetRules()->x9 == 2 && Ground_801C1D98()) {
+    if (gm_GetStartMeleeRules()->x9 == 2 && Ground_801C1D98()) {
         return true;
     }
     return false;
@@ -407,14 +422,14 @@ int gm_8016B558(void)
 
 float fn_8016B5B0(void)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     int count;
     int i;
     PAD_STACK(4);
 
-    if (gm_8016B41C()) {
+    if (gm_IsCurrently1PMode_inline()) {
         float var_f1 = 3.0F;
-        if (lbl_8046B6A0.unk_0 != 0) {
+        if (controller.unk_0 != 0) {
             if (tmp->match_result == OUTCOME_TIMEOUT ||
                 tmp->match_result == OUTCOME_1P_GAME_OVER)
             {
@@ -445,7 +460,7 @@ float fn_8016B5B0(void)
 
 void gm_8016B6E8(int arg0, int arg1)
 {
-    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
+    VsSceneController* tmp = gmVs_GetController_0();
     if (arg0 == 0) {
         tmp->unk_2E = lbTime_8000AF24(tmp->unk_2E, arg1);
     }
@@ -453,23 +468,23 @@ void gm_8016B6E8(int arg0, int arg1)
 
 u8 fn_8016B728(void)
 {
-    return gm_16AE_GetUnkData_0()->unk_C;
+    return gmVs_GetController_0()->unk_C;
 }
 
 void fn_8016B738(int arg0)
 {
-    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
+    VsSceneController* tmp = gmVs_GetController_0();
     tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
 }
 
 struct lbl_8046B6A0_24C_t* gm_8016B774(void)
 {
-    return &lbl_8046B6A0.x24C;
+    return &controller.x24C;
 }
 
 void fn_8016B784(void)
 {
-    gm_16AE_GetUnkData_0()->hud_enabled = 1;
+    gmVs_GetController_0()->hud_enabled = 1;
     grStadium_801D4150();
 }
 
@@ -486,13 +501,13 @@ void fn_8016B7B4(int arg0)
 
 void fn_8016B7F8(void)
 {
-    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
+    VsSceneController* tmp = gmVs_GetController_0();
     PAD_STACK(4);
 
     ftLib_800868A4();
-    Stage_802252E4(tmp->x24C8.stkind, NULL);
+    Stage_802252E4(tmp->start.stkind, NULL);
     grStadium_801D4040();
-    if (!tmp->x24C8.x1_3) {
+    if (!tmp->start.x1_3) {
         ifStatus_802F6EA4(4, -1, -1, 0, NULL, fn_8016B784);
     } else {
         ifStatus_802F6EA4(8, -1, -1, 0, NULL, fn_8016B784);
@@ -506,13 +521,13 @@ void fn_8016B88C(int arg0)
     if (arg0 == 0) {
         grStadium_801D40C8();
     }
-    gm_16AE_GetUnkData_0()->hud_enabled = 0;
+    gmVs_GetController_0()->hud_enabled = 0;
 }
 
 void gm_8016B8D4(s32 arg0, u8 slot_type)
 {
-    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x1 = 0x82;
-    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].slot_type = slot_type;
+    gmVs_GetController_0()->fighters[arg0].x1 = 0x82;
+    gmVs_GetController_0()->fighters[arg0].slot_type = slot_type;
     grStadium_801D3B4C(arg0, slot_type);
 }
 
@@ -543,7 +558,7 @@ void fn_8016B918(void)
     StartMeleeRules* rules;
     PAD_STACK(0x10);
 
-    rules = gm_GetRules();
+    rules = gm_GetStartMeleeRules();
     if (!rules->is_vs) {
         return;
     }
@@ -624,7 +639,8 @@ int gm_DefaultVSGetPauser(void)
     int spPlayerId;
     PAD_STACK(0x18);
 
-    if (gm_8016B41C() || gm_GetCurrentGameMode() == GM_CHALLENGER_APPROACH ||
+    if (gm_IsCurrently1PMode_inline() ||
+        gm_GetCurrentGameMode() == GM_CHALLENGER_APPROACH ||
         (gm_GetCurrentGameMode() == GM_VS &&
          gm_GetCurrentSceneIndex() == 0x81))
     {
@@ -723,13 +739,13 @@ MatchOutcome gm_GetFFAOutcome(void)
     bool isSingleplayer;
     int var_r0_2;
     bool notSingleplayer;
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     PAD_STACK(0x8);
 
-    if (lbl_8046B6A0.x24C8.x4_2 && Player_GetP1Stock() == 0) {
+    if (controller.start.x4_2 && Player_GetP1Stock() == 0) {
         return OUTCOME_1P_GAME_OVER;
     }
-    if (lbl_8046B6A0.is_singleplayer == 1) {
+    if (controller.is_singleplayer == 1) {
         isSingleplayer = true;
     } else {
         isSingleplayer = false;
@@ -742,13 +758,13 @@ MatchOutcome gm_GetFFAOutcome(void)
     if (var_r0_2 != 0) {
         return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
     }
-    if (lbl_8046B6A0.is_singleplayer == 0) {
+    if (controller.is_singleplayer == 0) {
         notSingleplayer = 1;
     } else {
         notSingleplayer = 0;
     }
-    if (notSingleplayer != 0 && !lbl_8046B6A0.x24C8.x5_1 &&
-        (lbl_8046B6A0.x24C8.match_kind == 1 || tmp->x24C8.x4_2))
+    if (notSingleplayer != 0 && !controller.start.x5_1 &&
+        (controller.start.match_kind == 1 || tmp->start.x4_2))
     {
         int i;
         int eliminatedPlayers = 0;
@@ -786,13 +802,13 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
     s16 teamStocks[5];
     PAD_STACK(0xC);
 
-    if (lbl_8046B6A0.x24C8.x4_2) {
+    if (controller.start.x4_2) {
         enemyStocksCount = 0;
         enemyCharacterCount = 0;
         if (Player_GetP1Stock() == 0) {
             return OUTCOME_1P_GAME_OVER;
         }
-        if (lbl_8046B6A0.is_singleplayer == 1) {
+        if (controller.is_singleplayer == 1) {
             isSingleplayer = true;
         } else {
             isSingleplayer = false;
@@ -805,12 +821,12 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
         if (var_r0_2 != 0) {
             return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
         }
-        if (lbl_8046B6A0.is_singleplayer == 0) {
+        if (controller.is_singleplayer == 0) {
             notSinglePlayer = true;
         } else {
             notSinglePlayer = false;
         }
-        if (notSinglePlayer && !lbl_8046B6A0.x24C8.x5_1) {
+        if (notSinglePlayer && !controller.start.x5_1) {
             for (slot = 0; slot < 6; slot++) {
                 if (Player_GetFlagsBit1(slot) == 0 &&
                     Player_GetPlayerSlotType(slot) != Gm_PKind_NA &&
@@ -827,12 +843,12 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
             }
         }
     }
-    if (lbl_8046B6A0.is_singleplayer == 0) {
+    if (controller.is_singleplayer == 0) {
         notSinglePlayer_2 = true;
     } else {
         notSinglePlayer_2 = false;
     }
-    if (notSinglePlayer_2 && lbl_8046B6A0.x24C8.match_kind == 1) {
+    if (notSinglePlayer_2 && controller.start.match_kind == 1) {
         teamCount = 0;
         eliminatedTeamCount = 0;
         memset(teamStocks, -1, sizeof(teamStocks));
@@ -864,44 +880,43 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
 
 MatchOutcome gm_GetMatchOutcome(void)
 {
-    MatchOutcome teamBattleOutcome;
-    MatchOutcome ffaOutcome;
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    MatchOutcome team_battle_outcome;
+    MatchOutcome ffa_outcome;
+    VsSceneController* tmp = &controller;
     PAD_STACK(0x8);
 
-    if (lbl_8046B6A0.match_result != OUTCOME_NONE) {
-        return lbl_8046B6A0.match_result;
+    if (controller.match_result != OUTCOME_NONE) {
+        return controller.match_result;
     }
-    if (lbl_8046B6A0.terminate_match == 1) {
+    if (controller.terminate_match == 1) {
         return OUTCOME_TERMINATED;
     }
-    if (lbl_8046B6A0.x24C8.x5_0) {
+    if (controller.start.x5_0) {
         return OUTCOME_NONE;
     }
-    if (tmp->x24C8.timer_enabled) {
-        if (tmp->x24C8.timer_counts_up) {
-            if (lbl_8046B6A0.timer_seconds == lbl_8046B6A0.x24C8.time_limit &&
-                lbl_8046B6A0.unk_2C == 0)
+    if (tmp->start.timer_enabled) {
+        if (tmp->start.timer_counts_up) {
+            if (controller.timer_seconds == controller.start.time_limit &&
+                controller.unk_2C == 0)
             {
                 return OUTCOME_TIMEOUT;
             }
         } else {
-            if (lbl_8046B6A0.timer_seconds == 0 && lbl_8046B6A0.unk_2C == 0x3B)
-            {
+            if (controller.timer_seconds == 0 && controller.unk_2C == 0x3B) {
                 return OUTCOME_TIMEOUT;
             }
         }
     }
-    if (!lbl_8046B6A0.x24C8.is_teams) {
-        ffaOutcome = gm_GetFFAOutcome();
-        if (ffaOutcome != OUTCOME_NONE) {
-            return ffaOutcome;
+    if (!controller.start.is_teams) {
+        ffa_outcome = gm_GetFFAOutcome();
+        if (ffa_outcome != OUTCOME_NONE) {
+            return ffa_outcome;
         }
     }
-    if (lbl_8046B6A0.x24C8.is_teams == true) {
-        teamBattleOutcome = gm_GetTeamBattleOutcome();
-        if (teamBattleOutcome != 0) {
-            return teamBattleOutcome;
+    if (controller.start.is_teams == true) {
+        team_battle_outcome = gm_GetTeamBattleOutcome();
+        if (team_battle_outcome != 0) {
+            return team_battle_outcome;
         }
     }
     if (Ground_801C1D84() != 0) {
@@ -912,7 +927,7 @@ MatchOutcome gm_GetMatchOutcome(void)
 
 void fn_8016C46C(int arg0)
 {
-    if (gm_16AE_GetUnkData_0()->unk_9 != 0) {
+    if (gmVs_GetController_0()->unk_9 != 0) {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
             fn_8017EE40(arg0);
@@ -962,7 +977,7 @@ int gm_8016C5C0(int pl_slot)
         tmp->x0 = (UNK_T) gm_801A4BA8();
         gm_80166378(tmp);
     }
-    if (!gm_GetRules()->is_teams) {
+    if (!gm_GetStartMeleeRules()->is_teams) {
         return tmp->x58[pl_slot].x5;
     }
     return tmp->x24[tmp->x58[pl_slot].x7].x0;
@@ -1018,30 +1033,28 @@ void fn_8016C7F0(void)
     u8* temp_r29_2;
     UnkAllstarData* temp_r30;
 
-    if (lbl_8046B6A0.x24C8.on_match_end != NULL) {
-        lbl_8046B6A0.x24C8.on_match_end(
-            (MatchOutcome) lbl_8046B6A0.match_result);
+    if (controller.start.on_match_end != NULL) {
+        controller.start.on_match_end((MatchOutcome) controller.match_result);
     }
     HSD_PadRumbleRemoveAll();
     for (var_r29 = 0; var_r29 < PAD_MAX_CONTROLLERS; var_r29++) {
         HSD_PadRumbleOn(var_r29);
     }
-    if (!lbl_8046B6A0.x24C8.x1_5) {
+    if (!controller.start.x1_5) {
         lbAudioAx_800236DC();
     }
     lbAudioAx_80023694();
     lbAudioAx_80024C84();
     ifTime_FreeCountdown();
-    if (lbl_8046B6A0.match_result == OUTCOME_1P_GAME_OVER &&
-        lbl_8046B6A0.x24C8.x4_3)
+    if (controller.match_result == OUTCOME_1P_GAME_OVER &&
+        controller.start.x4_3)
     {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_RequestQuake(QuakeKind_Large, NULL);
     }
     if (gm_GetCurrentGameMode() == GM_TARGET_TEST ||
         (gm_GetCurrentGameMode() == GM_CLASSIC &&
-         lbl_8046B6A0.x24C8.stkind >= 0x21 &&
-         lbl_8046B6A0.x24C8.stkind <= 0x3A))
+         controller.start.stkind >= 0x21 && controller.start.stkind <= 0x3A))
     {
         temp_r29_2 = (u8*) gm_801B6320();
         temp_r30 = gm_GetAllStarData();
@@ -1058,20 +1071,20 @@ void fn_8016C7F0(void)
             if (sp24 == 0) {
                 var_r28 = 1;
             }
-        } else if (sp24 == 0 && *temp_r30_2 > lbl_8046B6A0.frame_count) {
+        } else if (sp24 == 0 && *temp_r30_2 > controller.frame_count) {
             var_r28 = 1;
         }
         if (var_r28 != 0) {
-            lbl_8046B6A0.unk_10 = 0x9C41;
-            lbl_8046B6A0.unk_14 = 0x145;
+            controller.unk_10 = 0x9C41;
+            controller.unk_14 = 0x145;
             gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD,
                         0x5A);
         } else if (sp24 > 0) {
-            lbl_8046B6A0.unk_14 = 0x149;
-            lbl_8046B6A0.unk_18 = 0x28;
+            controller.unk_14 = 0x149;
+            controller.unk_18 = 0x28;
         }
     }
-    if (gm_GetCurrentGameMode() == GM_EVENT && lbl_8046B6A0.unk_10 == 0x9C41) {
+    if (gm_GetCurrentGameMode() == GM_EVENT && controller.unk_10 == 0x9C41) {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD,
                     0x5A);
     }
@@ -1099,17 +1112,17 @@ static inline s8 gm_GetSlotByPlayerId(int pauserId)
     return -1;
 }
 
-void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
+void gm_DoPauseChecksAndRoutine(VsSceneController* arg0, int arg1)
 {
     int pauser;
     s8 pauserSlot;
     u8 var_r4;
 
     if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 &&
-        !arg0->x24C8.disable_pausing)
+        !arg0->start.disable_pausing)
     {
-        if (arg0->x24C8.check_for_pauser_override != NULL) {
-            pauser = arg0->x24C8.check_for_pauser_override();
+        if (arg0->start.check_for_pauser_override != NULL) {
+            pauser = arg0->start.check_for_pauser_override();
         } else {
             pauser = gm_DefaultVSGetPauser();
         }
@@ -1117,27 +1130,27 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
             lbAudioAx_80024E84(1);
             lbAudioAx_80024030(5);
             ifAll_802F3394();
-            if (arg0->x24C8.x3_7) {
+            if (arg0->start.x3_7) {
                 ifTime_ShowTimers();
             }
-            if (!arg0->x24C8.x3_6) {
+            if (!arg0->start.x3_6) {
                 var_r4 = 0;
-                if (arg0->x24C8.x3_5) {
+                if (arg0->start.x3_5) {
                     var_r4 |= 1;
                 }
-                if (arg0->x24C8.x3_3) {
+                if (arg0->start.x3_3) {
                     var_r4 |= 2;
                 }
-                if (arg0->x24C8.x3_1) {
+                if (arg0->start.x3_1) {
                     var_r4 |= 4;
                 }
                 gm_801A0FEC(pauser, var_r4);
             }
             gm_801A4634((s64) arg1);
-            if (arg0->x24C8.x4_0) {
+            if (arg0->start.x4_0) {
                 pauserSlot = gm_GetSlotByPlayerId(pauser);
-                if (arg0->x24C8.on_pause_override != NULL) {
-                    arg0->x24C8.on_pause_override(pauserSlot);
+                if (arg0->start.on_pause_override != NULL) {
+                    arg0->start.on_pause_override(pauserSlot);
                 } else {
                     gm_EnablePlayerPauseCamera(pauserSlot, pauser);
                 }
@@ -1183,7 +1196,7 @@ static inline int gm_GetPlayerPressingUnpause(void)
     return -1;
 }
 
-void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
+void gm_DoUnpauseChecksAndRoutine(VsSceneController* arg0, int arg1)
 {
     int i;
     PAD_STACK(0x14);
@@ -1194,7 +1207,7 @@ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     if (arg0->hud_enabled == 0) {
         return;
     }
-    if (arg0->x24C8.disable_pausing) {
+    if (arg0->start.disable_pausing) {
         return;
     }
 
@@ -1206,9 +1219,9 @@ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
         ifAll_802F33CC();
         gm_801A10FC(i);
         HSD_PadRumbleUnpauseAll();
-        if (arg0->x24C8.x4_0) {
-            if (arg0->x24C8.on_unpause_override != NULL) {
-                arg0->x24C8.on_unpause_override(i);
+        if (arg0->start.x4_0) {
+            if (arg0->start.on_unpause_override != NULL) {
+                arg0->start.on_unpause_override(i);
             } else {
                 Ground_EnableMatchCamera();
             }
@@ -1217,7 +1230,7 @@ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     }
 }
 
-void fn_8016CD98(lbl_8046B6A0_t* arg0)
+void fn_8016CD98(VsSceneController* arg0)
 {
     s32 temp_r3_4;
     s32 var_r3;
@@ -1230,14 +1243,14 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
         return;
     }
 
-    if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || arg0->x24C8.x3_7 == 1) {
+    if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || arg0->start.x3_7 == 1) {
         if (arg0->frame_count < -1) {
             arg0->frame_count++;
         }
-        if (arg0->x24C8.timer_enabled) {
+        if (arg0->start.timer_enabled) {
             if (++arg0->unk_2C >= 60) {
                 arg0->unk_2C = 0;
-                if (arg0->x24C8.timer_counts_up) {
+                if (arg0->start.timer_counts_up) {
                     if (arg0->timer_seconds < -1) {
                         arg0->timer_seconds++;
                     }
@@ -1246,8 +1259,7 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
                         if (arg0->timer_seconds < 6 &&
                             ifTime_IsTimerHidden() == 0)
                         {
-                            temp_r3_4 =
-                                lbl_8046B6A0.unk_1C[arg0->timer_seconds];
+                            temp_r3_4 = controller.unk_1C[arg0->timer_seconds];
                             if (temp_r3_4 >= 0) {
                                 lbAudioAx_800237A8(temp_r3_4, 0x7FU, 0x40U);
                             }
@@ -1258,12 +1270,11 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
             }
         }
         for (i = 0; i < 4; i++) {
-            if (arg0->FighterMatchInfo[i].x1 != 0) {
-                arg0->FighterMatchInfo[i].x1--;
-                temp_r0_2 = arg0->FighterMatchInfo[i].x1;
+            if (arg0->fighters[i].x1 != 0) {
+                arg0->fighters[i].x1--;
+                temp_r0_2 = arg0->fighters[i].x1;
                 if (temp_r0_2 == 0x50) {
-                    if (arg0->FighterMatchInfo[i].slot_type == Gm_PKind_Human)
-                    {
+                    if (arg0->fighters[i].slot_type == Gm_PKind_Human) {
                         var_r3 = arg0->unk_20[i];
                     } else {
                         var_r3 = 0x7C865;
@@ -1280,16 +1291,16 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
 void fn_8016CF4C(int slot, MatchOutcome matchResult)
 {
     gm_801A10FC(slot);
-    lbl_8046B6A0.match_result = matchResult;
+    controller.match_result = matchResult;
     if (matchResult != OUTCOME_RETRY && DbLevel >= DbLKind_DebugRom) {
         gm_801A4674(1);
-        if (lbl_8046B6A0.x24C8.xD > 1) {
-            lbl_8046B6A0.unk_30 = lbl_8046B6A0.x24C8.xD - 1;
+        if (controller.start.xD > 1) {
+            controller.unk_30 = controller.start.xD - 1;
         }
         fn_8016C7F0();
         lbAudioAx_80024D50();
         gm_801A4634(4);
-        lbl_8046B6A0.unk_0 = 1;
+        controller.unk_0 = 1;
         return;
     }
     fn_8016C7F0();
@@ -1304,7 +1315,7 @@ static inline void fn_8016CF4C_dontinline(int slot, MatchOutcome matchResult)
 static inline void fn_8016CFE0_inline(void)
 {
     int i;
-    lbl_8046B6A0_t* tmp;
+    VsSceneController* tmp;
 
     if (DbLevel >= DbLKind_DebugRom && gm_801A46B8(0) != 0 &&
         (HSD_PadCopyStatus->button &
@@ -1315,11 +1326,11 @@ static inline void fn_8016CFE0_inline(void)
         gm_801A4B60();
     }
 
-    tmp = &lbl_8046B6A0;
+    tmp = &controller;
     for (i = 0; i < 6; i++) {
-        if (tmp->FighterMatchInfo[i].respawn_timer != 0) {
-            if (--tmp->FighterMatchInfo[i].respawn_timer == 0) {
-                fn_8016719C(i, tmp->FighterMatchInfo[i].xB);
+        if (tmp->fighters[i].respawn_timer != 0) {
+            if (--tmp->fighters[i].respawn_timer == 0) {
+                fn_8016719C(i, tmp->fighters[i].xB);
             }
         }
     }
@@ -1327,7 +1338,7 @@ static inline void fn_8016CFE0_inline(void)
 
 void fn_8016CFE0(void)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     int tmp_btns;
     s64 no_contest_buttons;
     int unpauser_slot;
@@ -1346,7 +1357,7 @@ void fn_8016CFE0(void)
                        PAD_BUTTON_START;
         }
         no_contest_buttons = tmp_btns;
-        if (tmp->x24C8.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
+        if (tmp->start.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
             u64 buttons = gm_GetButtonsTriggered(tmp->pauser);
             if ((no_contest_buttons & buttons) != 0) {
                 buttons = gm_GetButtonsPressed(tmp->pauser);
@@ -1360,7 +1371,7 @@ void fn_8016CFE0(void)
                 }
             }
         }
-        if (tmp->x24C8.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
+        if (tmp->start.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
             if ((gm_GetButtonsTriggered(tmp->pauser) & PAD_TRIGGER_Z) != 0) {
                 fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_RETRY);
                 return;
@@ -1427,7 +1438,7 @@ static inline int fn_8016CBE8_inline(void)
 void gm_Scene_Training_OnFrame(void)
 {
     int i;
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     PAD_STACK(0x28);
 
     fn_8016CFE0_inline();
@@ -1464,7 +1475,7 @@ bool fn_8016D538(void)
         } else {
             if (gm_8016B184() && fn_801693A8() != 0) {
                 result = false;
-            } else if (lbl_8046B6A0.x24C8.x5_1) {
+            } else if (controller.start.x5_1) {
                 result = false;
             }
         }
@@ -1477,33 +1488,32 @@ bool fn_8016D538(void)
 
 void fn_8016D634(void)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     struct lbl_8046B6A0_24C_t* dst;
     struct lbl_8046B6A0_24C_t* copied_dst;
 
     PAD_STACK(8);
 
-    if (lbl_8046B6A0.unk_30++ <= lbl_8046B6A0.x24C8.xD) {
+    if (controller.unk_30++ <= controller.start.xD) {
         return;
     }
     if (gm_8016B3D8()) {
-        pl_80040688(0, lbl_8046B6A0.unk_D, fn_8016D538());
+        pl_80040688(0, controller.unk_D, fn_8016D538());
     }
     gm_801A4B1C();
-    if (lbl_8046B6A0.x24C8.x4_4 &&
-        lbl_8046B6A0.match_result != OUTCOME_TIMEOUT &&
-        (lbl_8046B6A0.x24C8.x9 == 1 || Player_GetStocks(0) > 0))
+    if (controller.start.x4_4 && controller.match_result != OUTCOME_TIMEOUT &&
+        (controller.start.x9 == 1 || Player_GetStocks(0) > 0))
     {
         un_802FD668();
         ifAll_802F3A64();
         gm_801A4674(4);
         gm_801A4634(5);
-        lbl_8046B6A0.unk_9 = 1;
+        controller.unk_9 = 1;
         dst = &tmp->x24C;
         copied_dst = dst;
-        if (lbl_8046B6A0.match_over == 0) {
+        if (controller.match_over == 0) {
             *copied_dst = tmp->x24C;
-            copied_dst->is_teams = lbl_8046B6A0.x24C8.is_teams;
+            copied_dst->is_teams = controller.start.is_teams;
             copied_dst->x4 = tmp->match_result;
             gm_80166378(copied_dst);
             fn_8016C46C_dontinline((int) copied_dst);
@@ -1516,21 +1526,21 @@ void fn_8016D634(void)
         } else {
             *copied_dst = tmp->x24C;
         }
-        fn_80180630(tmp->x24C8.x18, 0, tmp->x24C8.x9, tmp->x24C8.x4_5,
+        fn_80180630(tmp->start.x18, 0, tmp->start.x9, tmp->start.x4_5,
                     copied_dst);
-        lbl_8046B6A0.unk_0 = 2;
+        controller.unk_0 = 2;
     } else {
-        lbl_8046B6A0.unk_0 = 3;
+        controller.unk_0 = 3;
     }
 }
 
 void gm_Scene_Vs_OnFrame(void)
 {
     PAD_STACK(8);
-    if (lbl_8046B6A0.x24C8.on_frame_start != NULL) {
-        lbl_8046B6A0.x24C8.on_frame_start();
+    if (controller.start.on_frame_start != NULL) {
+        controller.start.on_frame_start();
     }
-    switch (lbl_8046B6A0.unk_0) {
+    switch (controller.unk_0) {
     case 0:
         fn_8016CFE0();
         break;
@@ -1539,27 +1549,27 @@ void gm_Scene_Vs_OnFrame(void)
         break;
     case 2:
         if (fn_80180AC0() != 0) {
-            lbl_8046B6A0.unk_0 = 3;
+            controller.unk_0 = 3;
         }
         break;
     case 3:
         gm_801A4B60();
         break;
     }
-    if (lbl_8046B6A0.x24C8.on_frame_end != NULL) {
-        lbl_8046B6A0.x24C8.on_frame_end();
+    if (controller.start.on_frame_end != NULL) {
+        controller.start.on_frame_end();
     }
 }
 
 void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 {
-    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
+    VsSceneController* tmp = gmVs_GetController_0();
     PAD_STACK(4);
 
     Player_SetSlottype(arg0, arg1->slot_type);
     Player_SetPlayerCharacter(arg0, arg1->ckind);
 
-    tmp->FighterMatchInfo[arg0].x0 = arg1->ckind;
+    tmp->fighters[arg0].x0 = arg1->ckind;
 
     Player_SetStocks(arg0, arg1->stocks);
     Player_SetCostumeId(arg0, arg1->color);
@@ -1580,10 +1590,10 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         } else {
             Player_SetPlayerCharacter(arg0, CKIND_ZELDA);
         }
-        tmp->FighterMatchInfo[arg0].x4_b4 = true;
+        tmp->fighters[arg0].x4_b4 = true;
     }
 
-    tmp->FighterMatchInfo[arg0].spawn_point = arg1->spawn_pos;
+    tmp->fighters[arg0].spawn_point = arg1->spawn_pos;
 
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
@@ -1602,7 +1612,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetHUDDamage(arg0, arg1->damage1);
     }
 
-    tmp->FighterMatchInfo[arg0].x6 = arg1->damage1;
+    tmp->fighters[arg0].x6 = arg1->damage1;
 
     if (arg1->xC_b7) {
         Player_SetMoreFlagsBit2(arg0, 1);
@@ -1619,14 +1629,14 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetMoreFlagsBit1(arg0, 0);
     }
 
-    tmp->FighterMatchInfo[arg0].x4_b1 = arg1->xC_b3;
-    tmp->FighterMatchInfo[arg0].x4_b0 = arg1->vs_metal;
+    tmp->fighters[arg0].x4_b1 = arg1->xC_b3;
+    tmp->fighters[arg0].x4_b0 = arg1->vs_metal;
     if (arg1->vs_metal) {
         Player_SetFlagsBit5(arg0, true);
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->FighterMatchInfo[arg0].x4_b2 = arg1->vs_invisible;
+    tmp->fighters[arg0].x4_b2 = arg1->vs_invisible;
     if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
@@ -1650,70 +1660,70 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetMoreFlagsBit5(arg0, 0);
     }
-    tmp->FighterMatchInfo[arg0].x4_b3 = arg1->xD_b1;
+    tmp->fighters[arg0].x4_b3 = arg1->xD_b1;
     Player_SetMoreFlagsBit6(arg0, arg1->xB);
     Player_SetFacingDirection(arg0, arg1->spawn_dir);
-    tmp->FighterMatchInfo[arg0].x4_b5 = arg1->xD_b0;
+    tmp->fighters[arg0].x4_b5 = arg1->xD_b0;
 }
 
 void fn_8016DCC0(StartMeleeData* arg0)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     int i;
 
-    memzero(&lbl_8046B6A0, 0x24C8);
-    lbl_8046B6A0.unk_D = 6;
-    lbl_8046B6A0.unk_1C = (void*) &lbl_803D5630;
-    lbl_8046B6A0.unk_20 = (void*) &lbl_803D5620;
-    lbl_8046B6A0.unk_0 = 0;
+    memzero(&controller, 0x24C8);
+    controller.unk_D = 6;
+    controller.unk_1C = (void*) &lbl_803D5630;
+    controller.unk_20 = (void*) &lbl_803D5620;
+    controller.unk_0 = 0;
 
-    lbl_8046B6A0.x24C8 = arg0->rules;
+    controller.start = arg0->rules;
 
-    lbl_8046B6A0.x24C.x5 = arg0->rules.match_kind;
-    lbl_8046B6A0.x24C.is_teams = arg0->rules.is_teams;
+    controller.x24C.x5 = arg0->rules.match_kind;
+    controller.x24C.is_teams = arg0->rules.is_teams;
     if (arg0->rules.x7 != 0) {
-        lbl_8046B6A0.unk_B = arg0->rules.x7;
+        controller.unk_B = arg0->rules.x7;
     }
-    lbl_8046B6A0.x24C.xC = arg0->rules.xC;
+    controller.x24C.xC = arg0->rules.sd_penalty;
     Camera_SetQuakeScale(arg0->rules.x2C);
 
-    if (tmp->x24C8.timer_enabled) {
-        if (tmp->x24C8.timer_counts_up) {
+    if (tmp->start.timer_enabled) {
+        if (tmp->start.timer_counts_up) {
             if (arg0->rules.x14 != 0) {
-                lbl_8046B6A0.unk_2C = arg0->rules.x14 - 1;
+                controller.unk_2C = arg0->rules.x14 - 1;
             } else {
-                lbl_8046B6A0.unk_2C = 0;
+                controller.unk_2C = 0;
             }
-            lbl_8046B6A0.x24C8.time_limit = -1;
-            lbl_8046B6A0.timer_seconds = arg0->rules.time_limit;
+            controller.start.time_limit = -1;
+            controller.timer_seconds = arg0->rules.time_limit;
         } else {
             if (arg0->rules.time_limit == 0) {
-                lbl_8046B6A0.timer_seconds = -1;
+                controller.timer_seconds = -1;
             } else {
-                lbl_8046B6A0.timer_seconds = arg0->rules.time_limit;
+                controller.timer_seconds = arg0->rules.time_limit;
             }
             if (arg0->rules.x14 != 0) {
-                lbl_8046B6A0.unk_2C = arg0->rules.x14 - 1;
+                controller.unk_2C = arg0->rules.x14 - 1;
             } else {
-                lbl_8046B6A0.unk_2C = 0x3B;
+                controller.unk_2C = 0x3B;
             }
         }
-    } else if (lbl_8046B6A0.x24C8.x1_0) {
-        lbl_8046B6A0.timer_seconds = arg0->rules.time_limit;
+    } else if (controller.start.x1_0) {
+        controller.timer_seconds = arg0->rules.time_limit;
         if (arg0->rules.x14 != 0) {
-            lbl_8046B6A0.unk_2C = arg0->rules.x14;
+            controller.unk_2C = arg0->rules.x14;
         } else {
-            lbl_8046B6A0.unk_2C = 0;
+            controller.unk_2C = 0;
         }
     }
     if (arg0->rules.x54 != NULL) {
-        lbl_8046B6A0.is_singleplayer = 1;
+        controller.is_singleplayer = 1;
     } else {
-        lbl_8046B6A0.is_singleplayer = 0;
+        controller.is_singleplayer = 0;
     }
     Player_InitAllPlayers();
 
-    switch (lbl_8046B6A0.is_singleplayer) {
+    switch (controller.is_singleplayer) {
     case 0:
     case 2:
     case 3:
@@ -1743,17 +1753,17 @@ static float direction(float x)
 
 static inline void getSpawnPoint(int i, Vec3* v)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    if (tmp->FighterMatchInfo[i].spawn_point == -1) {
+    VsSceneController* tmp = &controller;
+    if (tmp->fighters[i].spawn_point == -1) {
         Stage_80224E64(i, v);
     } else {
-        Stage_80224E64(tmp->FighterMatchInfo[i].spawn_point, v);
+        Stage_80224E64(tmp->fighters[i].spawn_point, v);
     }
 }
 
 static inline void setPlayerUnk45(int i)
 {
-    bool is_teams = lbl_8046B6A0.x24C8.is_teams == true;
+    bool is_teams = controller.start.is_teams == true;
     Player_SetUnk45(
         i, fn_80160840(gm_80160854(Player_GetPlayerId(i), Player_GetTeam(i),
                                    is_teams, Player_GetPlayerSlotType(i))));
@@ -1761,8 +1771,8 @@ static inline void setPlayerUnk45(int i)
 
 void fn_8016DEEC(void)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    lbl_8046B6A0_t* tmp2 = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
+    VsSceneController* tmp2 = &controller;
     float sp18[6];
     Vec3 spC;
     float temp_f0;
@@ -1788,7 +1798,7 @@ void fn_8016DEEC(void)
 
             for (j = 0; j < 6; j++) {
                 if (j != i && Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
-                    (tmp->x24C8.is_teams != true ||
+                    (tmp->start.is_teams != true ||
                      Player_GetTeam(i) != Player_GetTeam(j)))
                 {
                     if (var_r23 == -1 ||
@@ -1882,11 +1892,11 @@ void fn_8016E2BC(void)
     int i;
     bool single_is_teams;
     bool is_teams;
-    lbl_8046B6A0_t* tmp;
+    VsSceneController* tmp;
     PAD_STACK(0xC);
 
     Player_80036DA4();
-    if (lbl_8046B6A0.is_singleplayer == 1) {
+    if (controller.is_singleplayer == 1) {
         var_r0 = true;
     } else {
         var_r0 = false;
@@ -1894,19 +1904,19 @@ void fn_8016E2BC(void)
     if (var_r0) {
         getSpawnPoint(0, &sp24);
         if (Player_GetFacingDirection(0) == 0.0F) {
-            if (Stage_80224DC8(lbl_8046B6A0.x24C8.stkind) != 0) {
+            if (Stage_80224DC8(controller.start.stkind) != 0) {
                 Player_SetFacingDirection(0, 1.0F);
             } else {
                 Player_SetFacingDirection(0, direction(sp24.x));
             }
         }
         Player_80032768(0, &sp24);
-        single_is_teams = lbl_8046B6A0.x24C8.is_teams == true;
+        single_is_teams = controller.start.is_teams == true;
         Player_SetUnk45(0, fn_80160840(gm_80160854(
                                Player_GetPlayerId(0), Player_GetTeam(0),
                                single_is_teams, Player_GetPlayerSlotType(0))));
         Player_80031AD0(0);
-        if (lbl_8046B6A0.FighterMatchInfo[0].x4_b4) {
+        if (controller.fighters[0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_80169C54(Player_GetPlayerCharacter(0), Player_GetCostumeId(0));
@@ -1916,9 +1926,9 @@ void fn_8016E2BC(void)
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
                 getSpawnPoint(i, &sp18);
-                tmp = &lbl_8046B6A0;
+                tmp = &controller;
                 if (Player_GetFacingDirection(i) == 0.0F) {
-                    if (Stage_80224DC8(lbl_8046B6A0.x24C8.stkind) != 0) {
+                    if (Stage_80224DC8(controller.start.stkind) != 0) {
                         Player_SetFacingDirection(i, 1.0F);
                     } else {
                         if (sp18.x >= 0.0F) {
@@ -1930,13 +1940,13 @@ void fn_8016E2BC(void)
                     }
                 }
                 Player_80032768(i, &sp18);
-                is_teams = lbl_8046B6A0.x24C8.is_teams == true;
+                is_teams = controller.start.is_teams == true;
                 Player_SetUnk45(
                     i, fn_80160840(gm_80160854(Player_GetPlayerId(i),
                                                Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
-                if (tmp->FighterMatchInfo[i].x4_b4) {
+                if (tmp->fighters[i].x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }
@@ -1976,7 +1986,7 @@ bool fn_8016E5C0(StartMeleeData* arg0)
 void fn_8016E730(StartMeleeData* arg0)
 {
     HSD_GObj* temp_r30;
-    lbl_8046B6A0_t* r30;
+    VsSceneController* r30;
 
     db_Setup();
     gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
@@ -1997,7 +2007,7 @@ void fn_8016E730(StartMeleeData* arg0)
     Ground_801C0378(0x40);
     Stage_802251E8(arg0->rules.stkind, NULL);
 
-    r30 = &lbl_8046B6A0;
+    r30 = &controller;
 
     r30->unk_34 = get_unk_float();
     Item_80266F70();
@@ -2012,8 +2022,8 @@ void fn_8016E730(StartMeleeData* arg0)
     Camera_8002F3AC();
     fn_801A1134();
     un_80321900();
-    if (lbl_8046B6A0.x24C8.on_unpause_override != NULL) {
-        lbl_8046B6A0.x24C8.on_unpause_override(0);
+    if (controller.start.on_unpause_override != NULL) {
+        controller.start.on_unpause_override(0);
         Camera_8002F3AC();
     }
     ifAll_802F390C();
@@ -2072,13 +2082,13 @@ static inline bool gm_8016E9C8_inline(void)
 void gm_Scene_Vs_OnExit(void* user_data)
 {
     struct EndMeleeData* data = user_data;
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     int i;
 
-    if (lbl_8046B6A0.match_over == 0) {
-        data->xC = lbl_8046B6A0.x24C;
-        data->xC.is_teams = lbl_8046B6A0.x24C8.is_teams;
-        data->xC.x4 = lbl_8046B6A0.match_result;
+    if (controller.match_over == 0) {
+        data->xC = controller.x24C;
+        data->xC.is_teams = controller.start.is_teams;
+        data->xC.x4 = controller.match_result;
         gm_80166378(&data->xC);
         fn_8016C46C_dontinline((int) &data->xC);
         if (tmp->match_result != OUTCOME_NO_CONTEST &&
@@ -2088,21 +2098,21 @@ void gm_Scene_Vs_OnExit(void* user_data)
         }
         tmp->match_over = 1;
     } else {
-        data->xC = lbl_8046B6A0.x24C;
+        data->xC = controller.x24C;
     }
-    if (lbl_8046B6A0.x24C8.x4_4) {
+    if (controller.start.x4_4) {
         data->x0 = fn_8017F294();
     } else {
-        data->x0 = lbl_8046B6A0.x24C8.x18;
+        data->x0 = controller.start.x18;
     }
-    data->x4 = lbl_8046B6A0.timer_seconds;
+    data->x4 = controller.timer_seconds;
     data->x8 = Ground_801C5ABC();
 
     if (gm_8016B3D8() || gm_8016E9C8_inline() ||
         gm_GetCurrentGameMode() == GM_VS)
     {
-        if (lbl_8046B6A0.match_result != OUTCOME_NO_CONTEST &&
-            lbl_8046B6A0.match_result != OUTCOME_RETRY)
+        if (controller.match_result != OUTCOME_NO_CONTEST &&
+            controller.match_result != OUTCOME_RETRY)
         {
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == Gm_PKind_Human) {
@@ -2127,17 +2137,17 @@ void gm_Scene_SuddenDeath_OnEnter(void* user_data)
 void gm_Scene_Training_OnEnter(void* user_data)
 {
     StartMeleeData* data = user_data;
-    struct lbl_8046B6A0_t* tmp2;
+    struct VsSceneController* tmp2;
 
     fn_8016E730(data);
     Ground_801C1154();
     grStadium_801D410C();
     un_802FD404();
-    tmp2 = &lbl_8046B6A0;
+    tmp2 = &controller;
     ftLib_800868A4();
-    Stage_802252E4(tmp2->x24C8.stkind, NULL);
+    Stage_802252E4(tmp2->start.stkind, NULL);
     grStadium_801D4040();
-    if (!lbl_8046B6A0.x24C8.x1_3) {
+    if (!controller.start.x1_3) {
         ifStatus_802F6EA4(4, -1, -1, 0, 0, fn_8016B784);
     } else {
         ifStatus_802F6EA4(8, -1, -1, 0, 0, fn_8016B784);
@@ -2171,12 +2181,12 @@ float gm_8016ECE8(void)
 
 bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
 {
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    VsSceneController* tmp = &controller;
     Vec3 sp18;
     float var_f1;
     PAD_STACK(8);
 
-    if (lbl_8046B6A0.is_singleplayer == 0 &&
+    if (controller.is_singleplayer == 0 &&
         Player_GetPlayerSlotType(arg0) == Gm_PKind_NA &&
         Player_GetEntity(arg0) == NULL)
     {
@@ -2186,7 +2196,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         getSpawnPoint(arg0, &sp18);
 
         if (Player_GetFacingDirection(arg0) == 0.0F) {
-            if (Stage_80224DC8(lbl_8046B6A0.x24C8.stkind) != 0) {
+            if (Stage_80224DC8(controller.start.stkind) != 0) {
                 Player_SetFacingDirection(arg0, 1.0F);
             } else {
                 if (sp18.x >= 0.0F) {
@@ -2200,7 +2210,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         Player_80032768(arg0, &sp18);
         setPlayerUnk45(arg0);
         Player_80031AD0(arg0);
-        if (lbl_8046B6A0.FighterMatchInfo[arg0].x4_b4) {
+        if (controller.fighters[arg0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_8016E124();
@@ -2214,7 +2224,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
 
 bool fn_8016EF98(int arg0)
 {
-    if (lbl_8046B6A0.is_singleplayer == 0 && Player_GetEntity(arg0) != NULL) {
+    if (controller.is_singleplayer == 0 && Player_GetEntity(arg0) != NULL) {
         ifStatus_802F6788(arg0);
         Player_80031EBC(arg0);
         Player_SetSlottype(arg0, Gm_PKind_NA);
