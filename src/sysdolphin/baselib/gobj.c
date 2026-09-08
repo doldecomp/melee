@@ -116,7 +116,7 @@ void HSD_GObj_80390CFC(void)
                     if (HSD_GObj_DelayedProcInfo.flags != 0) {
                         HSD_GObj_DelayedProcInfo.in_delayed_proc = 1;
                         if (HSD_GObj_DelayedProcInfo.delay_remove_gobj) {
-                            HSD_GObj_Remove(proc->gobj);
+                            HSD_GObjFree(proc->gobj);
                         } else {
                             if (HSD_GObj_DelayedProcInfo.delay_change_gobj_pri)
                             {

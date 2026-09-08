@@ -859,7 +859,7 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
         proc = HSD_GObj_SetupProc(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_GObj_Remove(data->popup_gobj);
+        HSD_GObjFree(data->popup_gobj);
         data->popup_gobj = NULL;
     }
 }
@@ -1354,7 +1354,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
             gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
             gmMainLib_GetGameRules()->xD = d->is_name_mode;
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
             if (input & MenuInput_LTrigger) {
                 mnDiagram3_Init(0L);
                 return;
@@ -2199,7 +2199,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     jobj = data->jobj;
     table = mnDiagram_PopupExitAnimFrames;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -2238,7 +2238,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         if (mn_804A04F0.cur_menu == 0x1E) {
             mnDiagram_ClearGrid(gobj);
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
             return;
         }
         HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
@@ -2752,7 +2752,7 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     PAD_STACK(8);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
 

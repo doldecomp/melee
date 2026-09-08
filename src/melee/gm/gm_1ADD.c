@@ -273,7 +273,7 @@ void gm_801AE848(int arg0)
                 temp_r29 = var_r30;
                 var_r30 = var_r30->next;
                 if (temp_r29->unk20 != NULL) {
-                    HSD_GObj_Remove(temp_r29->unk20);
+                    HSD_GObjFree(temp_r29->unk20);
                 }
                 if (temp_r29->unk24 != NULL) {
                     HSD_SisLib_803A5CC4(temp_r29->unk24);
@@ -289,7 +289,7 @@ void gm_801AE848(int arg0)
             temp_r30 = var_r31;
             var_r31 = var_r31->next;
             if (temp_r30->unk1C != NULL) {
-                HSD_GObj_Remove(temp_r30->unk1C);
+                HSD_GObjFree(temp_r30->unk1C);
             }
             if (temp_r30->unk20 != NULL) {
                 HSD_SisLib_803A5CC4(temp_r30->unk20);

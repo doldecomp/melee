@@ -86,7 +86,7 @@ found:
                 entry->x1C(idx);
             }
             entry->x0 = NULL;
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
     }
 }
@@ -143,7 +143,7 @@ void fn_802F75D4(HSD_GObj* gobj)
             }
         }
     done:
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     } else {
         HSD_JObjAnimAll(jobj);
     }
@@ -166,7 +166,7 @@ void fn_802F7670(HSD_GObj* gobj)
             }
         }
     done:
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     } else {
         HSD_JObjAnimAll(jobj);
     }
@@ -233,7 +233,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
     }
 
     if (gobj != NULL) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 
     gobj = GObj_Create(14, 15, 0);
@@ -250,7 +250,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
             pos = ifAll_GetPlayerHUDPosition(slot);
             HSD_JObjSetTranslate(jobj, pos);
         } else {
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
             gobj = NULL;
         }
     }
@@ -325,7 +325,7 @@ void fn_802F7994(HSD_GObj* gobj)
         }
         if (lb_8000B09C(jobj) == 0) {
             base[slot * 2 + 1] = NULL;
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         } else {
             HSD_JObjAnimAll(jobj);
         }
@@ -458,10 +458,10 @@ void if_802F7E7C(void)
 
     for (i = 0; i < 6; i++) {
         if (base[i * 2 + 1] != NULL) {
-            HSD_GObj_Remove(base[i * 2 + 1]);
+            HSD_GObjFree(base[i * 2 + 1]);
         }
         if (base[i * 2 + 2] != NULL) {
-            HSD_GObj_Remove(base[i * 2 + 2]);
+            HSD_GObjFree(base[i * 2 + 2]);
         }
     }
 

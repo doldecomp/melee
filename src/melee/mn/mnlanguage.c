@@ -98,7 +98,7 @@ void fn_8024C210(HSD_GObj* gobj)
         if (mn_8022EC18(jobj, &mnLanguage_803EF5AC, MOBJ_MASK) >=
             mnLanguage_803EF5AC.end_frame)
         {
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
     }
 }

@@ -1050,7 +1050,7 @@ void _tyList_803148E4(s32 arg0)
 
     if (state->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObj_Remove(state->gobj);
+            HSD_GObjFree(state->gobj);
         }
         state->gobj = NULL;
     }
@@ -1061,23 +1061,23 @@ void _tyList_803148E4(s32 arg0)
 
     if (archive->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObj_Remove(archive->gobj);
+            HSD_GObjFree(archive->gobj);
         }
         archive->gobj = NULL;
     }
 
     if (*gobj_2C4 != NULL && arg0 != 0) {
-        HSD_GObj_Remove(*gobj_2C4);
+        HSD_GObjFree(*gobj_2C4);
     }
 
     if (entry->x0 != NULL) {
         HSD_GObjProc_RemoveAllProcs(entry->x0);
         if (arg0 != 0) {
-            HSD_GObj_Remove(entry->x0);
+            HSD_GObjFree(entry->x0);
         }
     }
 
     if (entry->x4 != NULL && arg0 != 0) {
-        HSD_GObj_Remove(entry->x4);
+        HSD_GObjFree(entry->x4);
     }
 }

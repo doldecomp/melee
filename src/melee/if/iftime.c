@@ -183,7 +183,7 @@ void ifTime_FreeCountdown(void)
 {
     struct ifTime_data* x = &ifTime_data;
     if (x->countdown_timer != NULL) {
-        HSD_GObj_Remove(x->countdown_timer);
+        HSD_GObjFree(x->countdown_timer);
         x->countdown_timer = NULL;
     }
 }
@@ -218,7 +218,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
         HSD_JObjSetTranslate(jobj2, ifAll_GetTimerPosition());
         HSD_GObj_SetupProc(x->countdown_timer, ifTime_UpdateCountdown, 17);
         if (x->match_timer) {
-            HSD_GObj_Remove(x->match_timer);
+            HSD_GObjFree(x->match_timer);
             x->match_timer = NULL;
         }
     }
@@ -282,11 +282,11 @@ void ifTime_FreeTimers(void)
 {
     struct ifTime_data* x = &ifTime_data;
     if (x->match_timer != NULL) {
-        HSD_GObj_Remove(x->match_timer);
+        HSD_GObjFree(x->match_timer);
         x->match_timer = NULL;
     }
     if (x->countdown_timer != NULL) {
-        HSD_GObj_Remove(x->countdown_timer);
+        HSD_GObjFree(x->countdown_timer);
         x->countdown_timer = NULL;
     }
 }

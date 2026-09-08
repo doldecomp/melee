@@ -661,7 +661,7 @@ void fn_8024B7E4(mnSoundTest_GObj* arg0)
     mn_8022EFD8(sp1C, &vec_1);
     mn_8022EFD8(sp18, &vec_1);
     if (temp_f31 == vec_1.end_frame) {
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 

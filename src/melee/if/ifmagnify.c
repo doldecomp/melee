@@ -459,7 +459,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
     player = &ifMagnify_804A1DE0.player[slot];
     if (player->gobj != NULL) {
-        HSD_GObj_Remove(player->gobj);
+        HSD_GObjFree(player->gobj);
     }
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
@@ -550,7 +550,7 @@ void ifMagnify_802FC750(void)
     /// @todo Member accesses in the body fold into the condition's address.
     for (i = 0; i < 6; i++) {
         if (base->player[i].gobj != NULL) {
-            HSD_GObj_Remove(*(HSD_GObj**) ((u32) base +
+            HSD_GObjFree(*(HSD_GObj**) ((u32) base +
                                            i * (s32) sizeof(ifMagnifyPlayer) +
                                            (s32) offsetof(ifMagnify, player)));
             *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +

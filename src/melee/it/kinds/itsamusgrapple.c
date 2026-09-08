@@ -372,7 +372,7 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
         link_gobj = gobj_tmp;
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
-                HSD_GObj_Remove(prev_link->gobj);
+                HSD_GObjFree(prev_link->gobj);
                 prev_link = prev_link->next;
             }
             return NULL;
@@ -433,7 +433,7 @@ void it_802B7B84(Item_GObj* gobj)
                         while (cur != NULL) {
                             HSD_GObj* link_gobj = cur->gobj;
                             cur = cur->next;
-                            HSD_GObj_Remove(link_gobj);
+                            HSD_GObjFree(link_gobj);
                         }
                         Item_8026A8EC(gobj);
                     }

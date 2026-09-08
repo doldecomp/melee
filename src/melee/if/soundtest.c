@@ -2027,7 +2027,7 @@ bool un_80301964(enum soundtest_callback_arg0 arg0)
             HSD_SObj* sobj;
 
             if (un_804D6E08 != NULL) {
-                HSD_GObj_Remove(un_804D6E08);
+                HSD_GObjFree(un_804D6E08);
             }
 
             gobj = GObj_Create(0xE, 0xF, 0);

@@ -122,7 +122,7 @@ void mnHyaku_8024C9F0(HSD_GObj* gobj)
     HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
     f32 ret = mn_8022EC18(jobj, &mnHyaku_803EF674, 0x80);
     if (ret >= mnHyaku_803EF674.end_frame) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

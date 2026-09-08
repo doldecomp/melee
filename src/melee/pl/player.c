@@ -332,7 +332,7 @@ void Player_80031EBC(int slot)
                 ftCo_800D4F24(player->player_entity[player->transformed[i]],
                               1);
             }
-            HSD_GObj_Remove(player->player_entity[player->transformed[i]]);
+            HSD_GObjFree(player->player_entity[player->transformed[i]]);
         }
     }
 }

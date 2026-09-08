@@ -927,11 +927,11 @@ void ifStatus_802F6788(u8 player_idx)
     s8 p_idx = player_idx;
     player_hud = &ifStatus_GetHUDInfo()->players[p_idx & 0xFF];
     if (player_hud->HUD_parent_entity != NULL) {
-        HSD_GObj_Remove(player_hud->HUD_parent_entity);
+        HSD_GObjFree(player_hud->HUD_parent_entity);
         player_hud->HUD_parent_entity = NULL;
     }
     if (player_hud->next != NULL) {
-        HSD_GObj_Remove(player_hud->next);
+        HSD_GObjFree(player_hud->next);
         player_hud->next = NULL;
     }
     ifStock_802FB650(player_idx & 0xFF);
@@ -946,11 +946,11 @@ void ifStatus_802F6804(void)
     do {
         v = &ifStatus_GetHUDInfo()->players[i & 0xFF];
         if (v->HUD_parent_entity != NULL) {
-            HSD_GObj_Remove(v->HUD_parent_entity);
+            HSD_GObjFree(v->HUD_parent_entity);
             v->HUD_parent_entity = NULL;
         }
         if (v->next != NULL) {
-            HSD_GObj_Remove(v->next);
+            HSD_GObjFree(v->next);
             v->next = NULL;
         }
         ifStock_802FB650((s8) i & 0xFF);

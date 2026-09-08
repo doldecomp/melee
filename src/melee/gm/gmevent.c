@@ -1250,7 +1250,7 @@ void gm_801BC4F4(HSD_GObj* gobj)
         gm_8016B364(0x145);
     }
     gm_8016B328();
-    HSD_GObj_Remove(gobj);
+    HSD_GObjFree(gobj);
 }
 
 void gm_801BC670(HSD_GObj* arg0)
@@ -1322,7 +1322,7 @@ void gm_801BC754(HSD_GObj* gobj)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
             return;
         }
         temp_r28_2 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1344,7 +1344,7 @@ void gm_801BC754(HSD_GObj* gobj)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
         break;
     case 0:
@@ -1372,7 +1372,7 @@ void gm_801BC754(HSD_GObj* gobj)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
         break;
     }
@@ -1411,7 +1411,7 @@ void gm_801BC9E8(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1460,7 +1460,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1482,7 +1482,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1505,7 +1505,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         ev->x10 -= 1;
         if (ev->x10 < 0) {
             lbBgFlash_8002063C(x4->x4);
-            HSD_GObj_Remove(arg0);
+            HSD_GObjFree(arg0);
         }
         return;
     }
@@ -1535,7 +1535,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(arg0);
+            HSD_GObjFree(arg0);
             return;
         }
         gm_801BC670(arg0);
@@ -1549,7 +1549,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
         return;
     }
     {
@@ -1573,7 +1573,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 
@@ -1597,7 +1597,7 @@ void gm_801BCF40(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1642,7 +1642,7 @@ void gm_801BD028(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
         return;
     }
     ev = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1681,7 +1681,7 @@ void gm_801BD164(HSD_GObj* gobj)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
     }
     if (Player_GetP1Stock() <= 0) {
@@ -1692,7 +1692,7 @@ void gm_801BD164(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r30_2 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1714,7 +1714,7 @@ void gm_801BD164(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1733,7 +1733,7 @@ void gm_801BD30C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     if (Player_GetP1Stock() <= 0) {
@@ -1744,7 +1744,7 @@ void gm_801BD30C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1802,7 +1802,7 @@ void gm_801BD46C(HSD_GObj* gobj)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
             return;
         }
     }
@@ -1814,7 +1814,7 @@ void gm_801BD46C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1836,7 +1836,7 @@ void gm_801BD46C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1875,7 +1875,7 @@ void gm_801BD658(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r28_2 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1897,7 +1897,7 @@ void gm_801BD658(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1920,7 +1920,7 @@ void gm_801BD7FC(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1942,7 +1942,7 @@ void gm_801BD7FC(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -1965,7 +1965,7 @@ void gm_801BD93C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     if (Player_GetP1Stock() <= 0) {
@@ -1976,7 +1976,7 @@ void gm_801BD93C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1998,7 +1998,7 @@ void gm_801BD93C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -2041,7 +2041,7 @@ void gm_801BDAF4(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 
@@ -2064,7 +2064,7 @@ void gm_801BDC08(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -2086,7 +2086,7 @@ void gm_801BDC08(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 
@@ -2109,7 +2109,7 @@ void gm_801BDD44(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -2131,7 +2131,7 @@ void gm_801BDD44(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 
@@ -2176,7 +2176,7 @@ void gm_801BDE94(HSD_GObj* arg0)
         ev->x10 -= 1;
         if (ev->x10 < 0) {
             lbBgFlash_8002063C(x4->x4);
-            HSD_GObj_Remove(arg0);
+            HSD_GObjFree(arg0);
         }
         return;
     } else if (ev->x20 == 0) {
@@ -2216,7 +2216,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                     gm_8016B364(0x148);
                     gm_8016B378(0x28);
                     gm_8016B328();
-                    HSD_GObj_Remove(arg0);
+                    HSD_GObjFree(arg0);
                     return;
                 }
                 gm_801BC670(arg0);
@@ -2261,7 +2261,7 @@ void gm_801BDE94(HSD_GObj* arg0)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
         return;
     }
     {
@@ -2285,7 +2285,7 @@ void gm_801BDE94(HSD_GObj* arg0)
             gm_8016B364(0x148);
             gm_8016B378(0x28);
             gm_8016B328();
-            HSD_GObj_Remove(arg0);
+            HSD_GObjFree(arg0);
         }
     }
 }
@@ -2337,7 +2337,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     if (Player_GetP1Stock() <= 0) {
@@ -2348,7 +2348,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     if (temp_r31->x10 == 0 && gm_8016AEEC() >= temp_r30->x0) {
@@ -2376,7 +2376,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -2499,7 +2499,7 @@ void gm_801BE638(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         return;
     }
     temp_r28_4 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -2521,7 +2521,7 @@ void gm_801BE638(HSD_GObj* gobj)
         gm_8016B364(0x148);
         gm_8016B378(0x28);
         gm_8016B328();
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

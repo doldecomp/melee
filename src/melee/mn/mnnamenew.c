@@ -800,7 +800,7 @@ void mnNameNew_GlyphVariantInput(HSD_GObj* gobj)
     mn_804A04F0.buttons = buttons;
     count = 0;
     if (buttons & 0x200) {
-        HSD_GObj_Remove(data->variant_gobj);
+        HSD_GObjFree(data->variant_gobj);
         data->variant_gobj = NULL;
         AddCharacterToName(&mnNameNew_CurrentNameText[data->cursor_pos * 3],
                            mn_804A04F0.hovered_selection,
@@ -830,7 +830,7 @@ void mnNameNew_GlyphVariantInput(HSD_GObj* gobj)
         }
     } else {
         if (buttons & 0x20) {
-            HSD_GObj_Remove(data->variant_gobj);
+            HSD_GObjFree(data->variant_gobj);
             data->variant_gobj = NULL;
             mnNameNew_8023CE4C();
             return;
@@ -1620,7 +1620,7 @@ void fn_8023DAEC(HSD_GObj* arg0)
         all_anims_done = 0;
     }
     if (all_anims_done != 0 || mn_804A04F0.x10 == 1) {
-        HSD_GObj_Remove(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 

@@ -233,7 +233,7 @@ void _tyFigupon_80314C5C(HSD_GObj* gobj)
         } else {
             lbAudioAx_800237A8(146, 127, 64);
             tp1->x8 = 0;
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
     } else {
         Toy* tp = HSD_MemAlloc(0x58);
@@ -554,7 +554,7 @@ void _tyFigupon_803155C8(void)
                 ((HSD_Archive**) _tyFigupon_804D6EF8)[5] = NULL;
             }
             if (aa8->gobj != NULL) {
-                HSD_GObj_Remove(aa8->gobj);
+                HSD_GObjFree(aa8->gobj);
                 aa8->gobj = NULL;
                 aa8->jobj[1] = NULL;
                 aa8->jobj[0] = NULL;
@@ -1256,7 +1256,7 @@ void _tyFigupon_8031753C(void)
         OSPanic(__FILE__, 1372, "");
     }
     if (ef4->x00 != 0) {
-        HSD_GObj_Remove((HSD_GObj*) ef4->x00);
+        HSD_GObjFree((HSD_GObj*) ef4->x00);
         ef4->x00 = 0;
     }
     panel.joint = HSD_ArchiveGetPublicAddress(ef4->archive,
@@ -1663,7 +1663,7 @@ s32 _tyFigupon_803181BC(void)
         temp_r31->x4 = 0;
     }
     if (temp_r31->x8 != NULL) {
-        HSD_GObj_Remove(temp_r31->x8);
+        HSD_GObjFree(temp_r31->x8);
         temp_r31->x8 = NULL;
     }
     return lbAudioAx_800236DC();

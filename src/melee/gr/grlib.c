@@ -222,7 +222,7 @@ static void grLib_801C9C40(HSD_GObj* gobj)
                           HSD_JObjGetTranslationY(jobj));
 
     if (aobj == NULL || aobj->flags & 0x40000000) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

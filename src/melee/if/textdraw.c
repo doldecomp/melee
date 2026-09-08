@@ -290,7 +290,7 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
             GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, gx_priority);
             gobj->gxlink_prios = 1LL << gx_link;
         } else {
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         }
     }
 }

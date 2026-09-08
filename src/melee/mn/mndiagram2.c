@@ -315,7 +315,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         sfxForward();
         saveDiagramSelection();
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         if (result & 0x40) {
             mnDiagram_Init(0, 0);
             return;
@@ -803,7 +803,7 @@ void mnDiagram2_OnAnimComplete(HSD_GObj* gobj)
     jobj = data->xC;
     table = mnDiagram2_803EEB60;
     if (mn_8022ED6C(jobj, table) >= table->end_frame) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 /// @brief Updates navigation arrow visibility based on scroll/selection state.
@@ -897,7 +897,7 @@ void mnDiagram2_Think(HSD_GObj* gobj)
     mode = src[0];
     if (mode != 0x1E || src[0x10] != 1) {
         if (mode == 0x1E) {
-            HSD_GObj_Remove(gobj);
+            HSD_GObjFree(gobj);
         } else {
             HSD_GObjProc* proc;
 

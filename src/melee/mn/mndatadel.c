@@ -255,7 +255,7 @@ static inline void mnDataDel_AnimateWarning(HSD_JObj* root, HSD_GObj* gobj,
     } else {
         HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
         mnDataDel_804D6C6C = NULL;
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -694,7 +694,7 @@ void fn_8024FBA4(HSD_GObj* gobj)
             &data->xC, (enum _HSD_TypeMask) 0x480);
     }
     if (frame >= data->xC.end_frame) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

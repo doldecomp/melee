@@ -100,7 +100,7 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }
 
-void HSD_GObj_Remove(HSD_GObj* gobj)
+void HSD_GObjFree(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
     if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&

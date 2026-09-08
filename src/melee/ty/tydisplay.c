@@ -1535,7 +1535,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
             _tyDisplay_8031BA78(cfg->x7C, 2, HSD_JObjGetTranslationZ(trophy));
         }
         if (Toy_80305B88() & 0x20) {
-            HSD_GObj_Remove(cfg->x78);
+            HSD_GObjFree(cfg->x78);
             cfg->x78 = NULL;
             while (cfg->x78 == NULL) {
                 cfg->x7C = cfg->x7C + 1;
@@ -1547,7 +1547,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
             return;
         }
         if (Toy_80305B88() & 0x40) {
-            HSD_GObj_Remove(cfg->x78);
+            HSD_GObjFree(cfg->x78);
             cfg->x78 = NULL;
             while (cfg->x78 == NULL) {
                 cfg->x7C = cfg->x7C - 1;
@@ -1655,13 +1655,13 @@ void _tyDisplay_8031B1FC(void)
     if ((ptr->gobj4 && ptr->gobj4) && gobj4) {
     }
     if (gobj != NULL) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         ptr->gobj0 = NULL;
     }
 
     gobj = ptr->gobj4;
     if (gobj != NULL) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
         ptr->gobj4 = NULL;
     }
 
@@ -1982,7 +1982,7 @@ void _tyDisplay_8031B850(void)
             lbArchive_80016EFC(_tyDisplay_804A2DD0.archive);
             _tyDisplay_804A2DD0.archive = NULL;
         }
-        HSD_GObj_Remove(_tyDisplay_804D6F2C);
+        HSD_GObjFree(_tyDisplay_804D6F2C);
         _tyDisplay_804D6F2C = NULL;
     }
 

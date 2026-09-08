@@ -78,7 +78,7 @@ void mnDeflicker_8024A2E8(HSD_GObj* gobj)
     int x[2];
     float f = mn_8022EC18(GET_JOBJ(gobj), &mnDeflicker_803EEFE4, 0x400);
     if (f == mnDeflicker_803EEFE4.end_frame) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

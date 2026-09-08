@@ -224,7 +224,7 @@ void un_802FE390(void)
     PAD_STACK(8);
     for (i = 0; i < 4; i++) {
         if (un_804A1F10.x4[i] != 0) {
-            HSD_GObj_Remove(un_804A1F10.x4[i]);
+            HSD_GObjFree(un_804A1F10.x4[i]);
             un_804A1F10.x4[i] = 0;
         }
     }

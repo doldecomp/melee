@@ -86,7 +86,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
 
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
-                HSD_GObj_Remove(prev_link->gobj);
+                HSD_GObjFree(prev_link->gobj);
                 prev_link = prev_link->next;
             }
             return 0;
@@ -159,7 +159,7 @@ static void inlineA0(Item_GObj* gobj)
             for (cur = ip->xDD4_itemVar.seakchain.x0; cur != NULL;) {
                 HSD_GObj* cur_gobj = cur->gobj;
                 cur = cur->next;
-                HSD_GObj_Remove(cur_gobj);
+                HSD_GObjFree(cur_gobj);
             }
         }
     }

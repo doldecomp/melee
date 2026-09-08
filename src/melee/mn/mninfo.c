@@ -412,7 +412,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
 
 void fn_802523B8(HSD_GObj* gobj)
 {
-    HSD_GObj_Remove(gobj);
+    HSD_GObjFree(gobj);
 }
 
 static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)

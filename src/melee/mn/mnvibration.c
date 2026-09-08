@@ -407,7 +407,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         if (exit_data->title_text != NULL) {
             HSD_SisLib_803A5CC4(exit_data->title_text);
         }
-        HSD_GObj_Remove(mnVibration_804D6C28);
+        HSD_GObjFree(mnVibration_804D6C28);
         HSD_PadRumbleRemoveAll();
         lbCardGame_UpdatePowerTime();
         return;
@@ -625,7 +625,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
 void mnVibration_CursorThink(HSD_GObj* gobj)
 {
     if (mn_804A04F0.cur_menu != 0x13) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -802,7 +802,7 @@ void mnVibration_OnAnimComplete(HSD_GObj* gobj)
     pad = 0;
     frame = mn_8022ED6C(jobj, table);
     if (frame >= table->end_frame) {
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

@@ -698,7 +698,7 @@ void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
     mn_804A04F0.cur_menu = arg0;
     mn_804A04F0.hovered_selection = arg1;
     HSD_GObj_80390CD4(mn_8022B3A0(arg2));
-    HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+    HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
     temp_r0 = mn_803EB6B0[arg0].think;
     if (temp_r0 != NULL) {
         temp_r3 = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r0, 0);
@@ -1179,7 +1179,7 @@ void fn_8022AF10(HSD_GObj* gp)
         switch (data->state) {
         case MENU_STATE_EXIT_FROM:
         case MENU_STATE_ENTER_FROM:
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             return;
         }
     }
@@ -1278,7 +1278,7 @@ void fn_8022AFEC(HSD_GObj* gp)
                 break;
             case MENU_STATE_EXIT_FROM:
             case MENU_STATE_ENTER_FROM:
-                HSD_GObj_Remove(gp);
+                HSD_GObjFree(gp);
                 return;
             }
         }
@@ -1980,7 +1980,7 @@ void mn_8022C4F4(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_VS;
         mn_804A04F0.hovered_selection = SEL_VS_SPECIAL;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28 = mn_803EB6B0[MENU_KIND_VS].think)) {
             gobj = GObj_Create(0, 1, 0x80);
             temp_r3_2 = HSD_GObj_SetupProc(gobj, temp_r28, 0);
@@ -2041,7 +2041,7 @@ void mn_8022C7CC(HSD_GObj* gp)
         case SEL_STADIUM_MULTIMAN:
             sfxForward();
             mnHyaku_8024CD64(0);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             return;
         }
     } else if (buttons & MenuInput_Back) {
@@ -2052,7 +2052,7 @@ void mn_8022C7CC(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_1P;
         mn_804A04F0.hovered_selection = SEL_1P_STADIUM;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28 = mn_803EB6B0[1].think)) {
             HSD_GObj* gobj = GObj_Create(0, 1, 0x80);
             think = HSD_GObj_SetupProc(gobj, temp_r28, 0);
@@ -2084,17 +2084,17 @@ void mn_8022CA54(HSD_GObj* gp)
         case SEL_RECORDS_VS:
             sfxForward();
             mnDiagram_Init(1, 1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             return;
         case SEL_RECORDS_BONUS:
             sfxForward();
             mnInfoBonus_80252F8C();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             return;
         case SEL_RECORDS_MISC:
             sfxForward();
             mnCount_Create();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             return;
         }
     } else if (buttons & MenuInput_Back) {
@@ -2105,7 +2105,7 @@ void mn_8022CA54(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_DATA;
         mn_804A04F0.hovered_selection = (DataMenuSelection) SEL_DATA_RECORDS;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r30 = mn_803EB6B0[MENU_KIND_DATA].think)) {
             think = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r30, 0);
             think->flags_3 = HSD_GObj_804D783C;
@@ -2177,7 +2177,7 @@ void mn_8022CC28(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_1P;
         mn_804A04F0.hovered_selection = (OnePlayerMenuSelection) SEL_1P_REG;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28 = mn_803EB6B0[MENU_KIND_1P].think)) {
             think = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r28, 0);
             think->flags_3 = HSD_GObj_804D783C;
@@ -2229,18 +2229,18 @@ void mn_8022CE6C(HSD_GObj* gp)
         case SEL_DATA_SNAP:
             sfxForward();
             mnSnap_80257F24();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_DATA_ARCHIVES:
             sfxForward();
             mnGallery_80259868();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_DATA_SOUND:
             lbAudioAx_80023694();
             lbAudioAx_800236DC();
             mnSoundTest_8024BEE0(1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_DATA_RECORDS:
             sfxForward();
@@ -2249,7 +2249,7 @@ void mn_8022CE6C(HSD_GObj* gp)
             mn_804A04F0.cur_menu = MENU_KIND_RECORDS;
             mn_804A04F0.hovered_selection = 0;
             HSD_GObj_80390CD4(mn_8022B3A0(1));
-            HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+            HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
             if ((temp_r29 = mn_803EB6B0[28].think)) {
                 think =
                     HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r29, 0);
@@ -2259,7 +2259,7 @@ void mn_8022CE6C(HSD_GObj* gp)
         case SEL_DATA_SPECIAL:
             sfxForward();
             mnInfo_80252758();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
@@ -2270,7 +2270,7 @@ void mn_8022CE6C(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_MAIN;
         mn_804A04F0.hovered_selection = (MainMenuSelection) SEL_MAIN_DATA;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r29_2 = mn_803EB6B0[MENU_KIND_MAIN].think)) {
             think2 =
                 HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r29_2, 0);
@@ -2323,27 +2323,27 @@ void mn_8022D104(HSD_GObj* gp)
         case SEL_SETTINGS_RUMBLE:
             sfxForward();
             mnVibration_Init(1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_SETTINGS_SOUND:
             sfxForward();
             mnSound_8024A09C(1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_SETTINGS_DISPLAY:
             sfxForward();
             mnDeflicker_8024A6C4(1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_SETTINGS_LANG:
             sfxForward();
             mnLanguage_8024C5C0((HSD_GObj*) 1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_SETTINGS_ERASE:
             sfxForward();
             mnDataDel_80250170();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
@@ -2354,7 +2354,7 @@ void mn_8022D104(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_MAIN;
         mn_804A04F0.hovered_selection = (MainMenuSelection) SEL_MAIN_SETTINGS;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28 = mn_803EB6B0[MENU_KIND_MAIN].think)) {
             temp_r3_2 =
                 HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r28, 0);
@@ -2427,7 +2427,7 @@ void mn_8022D34C(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_MAIN;
         mn_804A04F0.hovered_selection = (MainMenuSelection) SEL_MAIN_TOY;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28 = mn_803EB6B0[MENU_KIND_MAIN].think)) {
             think = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r28, 0);
             think->flags_3 = HSD_GObj_804D783C;
@@ -2496,7 +2496,7 @@ void mn_8022D594(HSD_GObj* gp)
             mn_804A04F0.hovered_selection =
                 (SpecialVsMenuSelection) SEL_SPECIAL_VS_CAMERA;
             HSD_GObj_80390CD4(mn_8022B3A0(1));
-            HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+            HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
             if ((temp_r28 = mn_803EB6B0[MENU_KIND_SPECIAL].think)) {
                 think =
                     HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r28, 0);
@@ -2506,12 +2506,12 @@ void mn_8022D594(HSD_GObj* gp)
         case SEL_VS_RULES:
             sfxForward();
             mn_80231714();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_VS_NAME:
             sfxForward();
             mnName_8023AC40();
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
@@ -2522,7 +2522,7 @@ void mn_8022D594(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_MAIN;
         mn_804A04F0.hovered_selection = (MainMenuSelection) SEL_MAIN_VS;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r28_2 = mn_803EB6B0[MENU_KIND_MAIN].think)) {
             think2 =
                 HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r28_2, 0);
@@ -2573,7 +2573,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             mn_804A04F0.hovered_selection =
                 (RegMatchMenuSelection) SEL_REG_CLASSIC;
             HSD_GObj_80390CD4(mn_8022B3A0(1));
-            HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+            HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
             if ((temp_r27 = mn_803EB6B0[MENU_KIND_REG].think)) {
                 temp_r3_2 =
                     HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r27, 0);
@@ -2588,7 +2588,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             mn_804A04F0.hovered_selection =
                 (StadiumMenuSelection) SEL_STADIUM_TARGET;
             HSD_GObj_80390CD4(mn_8022B3A0(1));
-            HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+            HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
             if ((temp_r27 = mn_803EB6B0[MENU_KIND_STADIUM].think)) {
                 temp_r3_3 =
                     HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r27, 0);
@@ -2598,7 +2598,7 @@ void mn_8022D7F4(HSD_GObj* gp)
         case SEL_1P_EVENT:
             sfxForward();
             mnEvent_8024E838(0, 1);
-            HSD_GObj_Remove(gp);
+            HSD_GObjFree(gp);
             break;
         case SEL_1P_TRAINING:
             sfxForward();
@@ -2615,7 +2615,7 @@ void mn_8022D7F4(HSD_GObj* gp)
         mn_804A04F0.cur_menu = MENU_KIND_MAIN;
         mn_804A04F0.hovered_selection = (MainMenuSelection) SEL_MAIN_1P;
         HSD_GObj_80390CD4(mn_8022B3A0(3));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         if ((temp_r27 = mn_803EB6B0[MENU_KIND_MAIN].think)) {
             temp_r3_4 =
                 HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), temp_r27, 0);
@@ -2697,7 +2697,7 @@ void mn_8022DB10(HSD_GObj* gp)
         mf->cur_menu = menu_kind;
         *selection_ptr = hovered_selection;
         HSD_GObj_80390CD4(mn_8022B3A0(1));
-        HSD_GObj_Remove(HSD_GObj_CurrentInvokedProcGObj);
+        HSD_GObjFree(HSD_GObj_CurrentInvokedProcGObj);
         /// @todo casting u64 here makes it match, but i dont know why
         if ((temp_r28 = mn_803EB6B0[(u64) menu_kind].think)) {
             temp_r3_2 =

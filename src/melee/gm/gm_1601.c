@@ -2616,7 +2616,7 @@ HSD_GObj* gm_80165388(u16 arg0, u8 arg1, u8 arg2, s32 arg3)
 /// frees the develop mode stress test
 void gm_801653C8(HSD_GObj* gobj)
 {
-    HSD_GObj_Remove(gobj);
+    HSD_GObjFree(gobj);
 }
 
 f32 fn_801653E8(u8 arg0)

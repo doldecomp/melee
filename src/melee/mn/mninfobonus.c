@@ -189,7 +189,7 @@ void fn_80252C50(HSD_GObj* gobj)
             HSD_SisLib_803A5CC4(o->x18[i]);
         }
         HSD_SisLib_803A5CC4(o->x40);
-        HSD_GObj_Remove(o->x4C);
+        HSD_GObjFree(o->x4C);
         o->x4C = NULL;
         return;
     } ///< @todo inline button getter

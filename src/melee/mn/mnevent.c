@@ -252,7 +252,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
         if (data->gobjs[idx] != NULL) {
             HSD_GObj** gobjs = data->gobjs;
             HSD_GObj* old_gobj = gobjs[idx];
-            HSD_GObj_Remove(old_gobj);
+            HSD_GObjFree(old_gobj);
             data->gobjs[idx] = NULL;
         }
 
@@ -600,7 +600,7 @@ void fn_8024E1B4(HSD_GObj* gobj)
         iter = data;
         for (i = 0; i < 9; i++) {
             if (iter->gobjs[0] != NULL) {
-                HSD_GObj_Remove(tmp->gobjs[i]);
+                HSD_GObjFree(tmp->gobjs[i]);
                 iter->gobjs[0] = NULL;
             }
             if (iter->texts[0] != NULL) {
@@ -613,7 +613,7 @@ void fn_8024E1B4(HSD_GObj* gobj)
             }
             iter = (MnEventData*) ((u8*) iter + 4);
         }
-        HSD_GObj_Remove(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

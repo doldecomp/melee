@@ -634,7 +634,7 @@ static void mnCount_UpdateArrowIndicators_noinline(HSD_GObj* gobj)
 
 void fn_802514B8(HSD_GObj* gobj)
 {
-    HSD_GObj_Remove(gobj);
+    HSD_GObjFree(gobj);
 }
 
 static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
