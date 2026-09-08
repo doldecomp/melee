@@ -181,8 +181,7 @@ void ftCa_SpecialN_Phys(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Fake double assignment.
-    ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
+    ftCaptain_DatAttrs* da = (ftCaptain_DatAttrs*) getFtSpecialAttrs(fp);
     doPhys(gobj);
     switch (fp->cmd_vars[1]) {
     case 0: {
