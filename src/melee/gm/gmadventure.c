@@ -1590,7 +1590,7 @@ void gm_801B4E58(GameModeState* scene)
     data = gm_GetGameModeStateEnterData(scene);
     gm_801B4064(scene);
     data->rules.x20 = 1 << 7; ///< enabling an item, which one?
-    data->rules.xB = 4;
+    data->rules.item_freq = 4;
 }
 
 void gm_801B4EB8(GameModeState* scene)

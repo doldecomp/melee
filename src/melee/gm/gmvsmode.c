@@ -165,8 +165,8 @@ void onEnterDebugVs(GameModeState* state)
 
     gm_SetupRulesDefaults(&start->rules);
     start->rules.stkind = St_Kind_Last;
-    start->rules.xB = -1;
-    start->rules.xC = -1;
+    start->rules.item_freq = -1;
+    start->rules.sd_penalty = -1;
     start->rules.match_kind = MatchKind_Time;
 
     for (i = 0; i < Gm_Player_NumMax; i++) {

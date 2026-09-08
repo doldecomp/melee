@@ -292,12 +292,12 @@ void gm_801B6428(GameModeState* arg0)
     temp_r3->rules.x3_1 = false;
     temp_r3->rules.x3_3 = true;
     temp_r3->rules.x3_2 = true;
-    temp_r3->rules.xC = -1;
+    temp_r3->rules.sd_penalty = -1;
     temp_r3->rules.x18 = 0;
     temp_r3->rules.x20 = 0;
     temp_r3->rules.x3_7 = true;
     temp_r3->rules.x9 = 1;
-    temp_r3->rules.xB = -1;
+    temp_r3->rules.item_freq = -1;
     temp_r3->rules.on_pause_override = gm_80165290;
     gm_SetupAllPlayerDefaults(temp_r3->players);
     if (temp_r31->unk_584 == 0xE) {
@@ -518,7 +518,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.is_teams = true;
     arg0->rules.stkind = 0x11D;
     arg0->rules.x18 = 0;
-    arg0->rules.xB = 2;
+    arg0->rules.item_freq = 2;
     arg0->rules.x2C = 0.5F;
     arg0->rules.x20 = 0xFFFFFFFFFFFBFCFF;
     arg0->rules.on_match_start = gm_80182174;
@@ -1040,7 +1040,7 @@ void gm_801B874C(GameModeState* scene)
 
     temp_r3->rules = temp_r29->start.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.xB = -1;
+    temp_r3->rules.item_freq = -1;
     gmMultiman_InitScoreRules(temp_r3);
     gm_SetupAllPlayerDefaults(temp_r3->players);
 

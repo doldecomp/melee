@@ -65,7 +65,7 @@ static inline void ifTime_SetDigit(HSD_JObj* jobj, unsigned int frame)
 
 void ifTime_SetTime(HSD_JObj* jobj, int seconds, int centiseconds)
 {
-    StartMeleeRules* rules = gm_GetRules();
+    StartMeleeRules* rules = gm_GetStartMeleeRules();
     int hours;
 
     // minutes
@@ -197,7 +197,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
     u8 tmp;
     PAD_STACK(8);
 
-    gm_GetRules();
+    gm_GetStartMeleeRules();
     seconds = gm_8016AEEC();
     centiseconds = gm_8016AF0C();
     ifTime_SetTime(jobj, seconds, centiseconds);
@@ -227,7 +227,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
 
 void ifTime_CreateTimers(void)
 {
-    StartMeleeRules* rules = gm_GetRules();
+    StartMeleeRules* rules = gm_GetStartMeleeRules();
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* digit;

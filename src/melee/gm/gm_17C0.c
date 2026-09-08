@@ -99,8 +99,8 @@ void fn_8017C1A4(HSD_GObj* unused)
     int temp_r31;
     int temp_r3;
     int temp_r3_3;
-    lbl_8046B6A0_t* temp_r3_2;
-    lbl_8046B6A0_t* temp_r3_4;
+    VsSceneController* temp_r3_2;
+    VsSceneController* temp_r3_4;
     PAD_STACK(8);
 
     temp_r31 = ftBossLib_8015C74C();
@@ -110,8 +110,8 @@ void fn_8017C1A4(HSD_GObj* unused)
     switch (tmp->x0) {
     case 0:
         if (tmp->x8 == 0) {
-            temp_r3_2 = gm_16AE_GetUnkData_0();
-            temp_r3_2->x24C8.disable_pausing = false;
+            temp_r3_2 = gmVs_GetController_0();
+            temp_r3_2->start.disable_pausing = false;
             temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
@@ -122,7 +122,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         break;
     case 1:
         if (tmp->x8 == 0) {
-            gm_16AE_GetUnkData_0();
+            gmVs_GetController_0();
             lbAudioAx_800236DC();
             ftBossLib_8015CA6C(0x1D9);
             Player_SetMoreFlagsBit4(0, 1);
@@ -137,7 +137,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             fn_8017C0C8();
             tmp->x8 = 2;
         } else if (ftBossLib_8015C2A8() == 0) {
-            gm_16AE_GetUnkData_0();
+            gmVs_GetController_0();
             Stage_80225074(0);
             ftBossLib_8015CB7C();
             Player_SetMoreFlagsBit4(0, 0);
@@ -149,7 +149,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         }
         break;
     case 2:
-        temp_r3_4 = gm_16AE_GetUnkData_0();
+        temp_r3_4 = gmVs_GetController_0();
         temp_r3_4->hud_enabled = 1;
         Stage_80225074(0);
         ftLib_800868A4();
@@ -213,7 +213,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         temp_r28 = temp_r31 + temp_r27;
         temp_r29_2 = temp_r3 + temp_r28;
         if (tmp->x8 == 0) {
-            temp_r3_4 = gm_16AE_GetUnkData_0();
+            temp_r3_4 = gmVs_GetController_0();
             temp_r3_4->hud_enabled = 0;
             if (tmp->x4 == 2) {
                 tmp->x4 = 1;
@@ -224,8 +224,8 @@ void fn_8017C1A4(HSD_GObj* unused)
             gm_801A4634(6);
             Player_80031790(0);
             Player_80036844(0, 1);
-            temp_r3_4 = gm_16AE_GetUnkData_0();
-            temp_r3_4->x24C8.timer_enabled = false;
+            temp_r3_4 = gmVs_GetController_0();
+            temp_r3_4->start.timer_enabled = false;
         } else if (tmp->x8 == temp_r31) {
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
@@ -280,11 +280,11 @@ void fn_8017C7A0(void)
 
 void fn_8017C7EC(void)
 {
-    lbl_8046B6A0_t* temp_r31;
+    VsSceneController* temp_r31;
     Unk1PData* temp_r30;
 
     temp_r30 = fn_8017DF28();
-    temp_r31 = gm_16AE_GetUnkData_1();
+    temp_r31 = gmVs_GetController_1();
     temp_r31->timer_seconds = grPushOn_80219230(temp_r30->x0.ckind);
 }
 
@@ -292,7 +292,7 @@ void gm_8017C838(void)
 {
     s8 sp10[3];
 
-    lbl_8046B6A0_t* temp_r3;
+    VsSceneController* temp_r3;
     int i;
     s8 var_r3;
     s8* var_r31;
@@ -301,12 +301,12 @@ void gm_8017C838(void)
     PAD_STACK(8);
 
     temp_r30 = gm_GetAdventureData();
-    temp_r3 = gm_16AE_GetUnkData_0();
+    temp_r3 = gmVs_GetController_0();
     var_r31 = sp10;
     sp10[0] = FTKIND_NONE;
     sp10[1] = FTKIND_NONE;
     sp10[2] = FTKIND_NONE;
-    switch (temp_r3->x24C8.stkind) {
+    switch (temp_r3->start.stkind) {
     case 0x3B:
         sp10[0] = FTKIND_YOSHI;
         break;
@@ -594,7 +594,7 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
 
     arg0->rules.x18 = (u32) arg1->xC.x18;
     arg0->rules.stkind = (u16) arg7;
-    arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
+    arg0->rules.item_freq = arg1->x48((u8) count, arg1->x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
 

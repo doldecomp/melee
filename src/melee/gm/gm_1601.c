@@ -3276,12 +3276,12 @@ void fn_8016719C(s32 slot, s32 subchar)
 {
     Vec3 respawn_pos;
     Vec3 offset;
-    lbl_8046B6A0_t* match_info;
+    VsSceneController* match_info;
     s32 var_r30;
     StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
-    match_info = gm_16AE_GetUnkData_1();
+    match_info = gmVs_GetController_1();
     stkind = gm_GetStKind();
     if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
@@ -3307,13 +3307,11 @@ void fn_8016719C(s32 slot, s32 subchar)
     respawn_pos.y = Stage_GetCamBoundsTopOffset();
     Player_80032768(slot, &respawn_pos);
     Player_SetFacingDirection(slot, respawn_pos.x >= 0.0f ? -1.0f : 1.0f);
-    Player_SetHPByIndex(slot, subchar, match_info->FighterMatchInfo[slot].x6);
+    Player_SetHPByIndex(slot, subchar, match_info->fighters[slot].x6);
     Player_80032070(slot, subchar);
     if (subchar != 1) {
         ifStatus_802F6508(slot);
-        temp_r4 =
-            (struct fn_8016719C_xC_bits*) &match_info->FighterMatchInfo[slot]
-                .xC;
+        temp_r4 = (struct fn_8016719C_xC_bits*) &match_info->fighters[slot].xC;
         if (temp_r4->b0) {
             temp_r4->b0 = true;
             Camera_800310E8();
@@ -3390,22 +3388,22 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 
 void fn_8016758C(void)
 {
-    lbl_8046B6A0_t* mi = gm_16AE_GetUnkData_1();
+    VsSceneController* mi = gmVs_GetController_1();
     int i;
 
-    for (i = 0; i < ARRAY_SIZE(mi->FighterMatchInfo); i++) {
-        if (mi->FighterMatchInfo[i].x8 != 0) {
-            mi->FighterMatchInfo[i].x8--;
+    for (i = 0; i < ARRAY_SIZE(mi->fighters); i++) {
+        if (mi->fighters[i].x8 != 0) {
+            mi->fighters[i].x8--;
         }
     }
 }
 
 static inline int get_idx(void)
 {
-    lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
+    VsSceneController* info = gmVs_GetController_1();
     int i;
-    for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
-        if (info->FighterMatchInfo[i].x8 == 0) {
+    for (i = 0; i < ARRAY_SIZE(info->fighters); i++) {
+        if (info->fighters[i].x8 == 0) {
             return i;
         }
     }
@@ -3436,10 +3434,10 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             arg2->y = 0.0f;
         }
         {
-            lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
+            VsSceneController* info = gmVs_GetController_1();
             PAD_STACK(8);
-            info->FighterMatchInfo[idx].x8 = 0x90;
-            info->FighterMatchInfo[idx].x9 = chr;
+            info->fighters[idx].x8 = 0x90;
+            info->fighters[idx].x9 = chr;
         }
     }
     return tmp;
@@ -3528,8 +3526,8 @@ void gm_SetupRulesDefaults(struct StartMeleeRules* rules)
     memzero(rules, sizeof(*rules));
     rules->x0_3 = 4;
 
-    rules->xC = 0;
-    rules->xB = 2;
+    rules->sd_penalty = 0;
+    rules->item_freq = 2;
 
     rules->x20 = -1;
     rules->x28 = 0;
@@ -3641,7 +3639,7 @@ void gm_80167BC8(VsModeData* vs_data)
 
     vs_data->start.rules.friendly_fire = (rules->friendly_fire & 1);
     vs_data->start.rules.x30 = 0.1f * rules->damage_ratio;
-    vs_data->start.rules.xB = (s8) prefs->item_freq;
+    vs_data->start.rules.item_freq = (s8) prefs->item_freq;
     prefs = gmMainLib_8015CC58();
     i = 0;
     do {
@@ -3658,13 +3656,13 @@ void gm_80167BC8(VsModeData* vs_data)
 
     switch (gmMainLib_8015ED30()) {
     case 1:
-        vs_data->start.rules.xC = 0;
+        vs_data->start.rules.sd_penalty = 0;
         break;
     case 0:
-        vs_data->start.rules.xC = -1;
+        vs_data->start.rules.sd_penalty = -1;
         break;
     case 2:
-        vs_data->start.rules.xC = -2;
+        vs_data->start.rules.sd_penalty = -2;
         break;
     }
 

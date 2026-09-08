@@ -5,7 +5,7 @@
 #include "ifstatus.h"
 #include "types.h"
 #include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gmvs.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

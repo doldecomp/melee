@@ -15,7 +15,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gmvs.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itdrop.h>
 #include <melee/it/ithitbox.h>

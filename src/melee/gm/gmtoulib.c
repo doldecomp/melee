@@ -2702,7 +2702,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.timer_counts_up = false;
     arg0->rules.x4_2 = false;
     arg0->rules.x4_4 = false;
-    arg0->rules.xB = gmMainLib_8015CC58()->item_freq;
+    arg0->rules.item_freq = gmMainLib_8015CC58()->item_freq;
     arg0->rules.x2_2 = false;
     arg0->rules.x18 = 0;
     arg0->rules.game_speed = 1.0f;
@@ -2713,13 +2713,13 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.x3_3 = false;
     switch (gmMainLib_8015ED30()) {
     case 1:
-        arg0->rules.xC = 0;
+        arg0->rules.sd_penalty = 0;
         break;
     case 0:
-        arg0->rules.xC = -1;
+        arg0->rules.sd_penalty = -1;
         break;
     case 2:
-        arg0->rules.xC = -2;
+        arg0->rules.sd_penalty = -2;
         break;
     }
     if (rules->pause != 0) {

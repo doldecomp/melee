@@ -141,12 +141,12 @@ int fn_8017F008(void)
 s32 fn_8017F09C(void)
 {
     struct lbl_80472D28_t* data = &lbl_80472D28;
-    lbl_8046B6A0_t* p = gm_16AE_GetUnkData_0();
-    if (p->x24C8.x4_6) {
-        lbl_8046B6A0_t* p2 = gm_16AE_GetUnkData_0();
+    VsSceneController* p = gmVs_GetController_0();
+    if (p->start.x4_6) {
+        VsSceneController* p2 = gmVs_GetController_0();
         int flag;
         if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
-            p2->x24C8.timer_counts_up)
+            p2->start.timer_counts_up)
         {
             flag = 0;
         } else {
@@ -176,7 +176,7 @@ s32 fn_8017F14C(void* arg0)
 {
     fn_8017F14C_arg* p = arg0;
     struct lbl_80472D28_t* data = &lbl_80472D28;
-    if (gm_16AE_GetUnkData_0()->x24C8.x4_7) {
+    if (gmVs_GetController_0()->start.x4_7) {
         s32 val = p->x98;
         s32 ret = val;
         if (val > 9999) {
@@ -377,7 +377,7 @@ void fn_8017F608(void* arg0)
     Vec3 sp4C;
     Vec3 sp40;
     HSD_Text* text;
-    lbl_8046B6A0_t* gm;
+    VsSceneController* gm;
     s32 show;
 
     sp40 = lbl_803B7C18;
@@ -407,9 +407,9 @@ void fn_8017F608(void* arg0)
             struct lbl_80472D28_t* state = &lbl_80472D28;
             p->x74->pos_z = -10.0f;
             p->x74->default_alignment = 2;
-            gm = gm_16AE_GetUnkData_0();
+            gm = gmVs_GetController_0();
             if (state->x118 != 0 || (state->x11A != 0 && state->x11B == 0) ||
-                gm->x24C8.timer_counts_up)
+                gm->start.timer_counts_up)
             {
                 show = 0;
             } else {
@@ -942,7 +942,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     u16 coins;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
-    lbl_8046B6A0_t* temp;
+    VsSceneController* temp;
     s32 total;
     s32 var_r4;
     union {
@@ -985,7 +985,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         break;
     }
     case 3:
-        temp = gm_16AE_GetUnkData_0();
+        temp = gmVs_GetController_0();
         state->x118 = 1;
         if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), &special_score_value,
@@ -1083,7 +1083,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
-    if (gm_GetRules()->x1_1 && coins != 0) {
+    if (gm_GetStartMeleeRules()->x1_1 && coins != 0) {
         if (fn_80180630_GetX118(state) == 0U) {
             un_802FF128(0x5A, 0x1AE, (s32) coins, 5);
         } else {
