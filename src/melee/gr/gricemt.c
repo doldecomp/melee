@@ -624,47 +624,27 @@ Ground_GObj* setupStageCallbacks(int gobj_id)
 void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj;
     grAnime_801C8138(gobj, gp->map_id, 0);
-
-    { /// @todo Unrolled loop?
-        HSD_JObj* jobj;
-        Vec3 v[4];
-        {
-            int const i = 0;
-            int const ix = (ARRAY_SIZE(v) - 1) - i;
-            jobj = Ground_801C3FA4(gobj, i + 18);
-            if (jobj != NULL) {
-                v[ix] = grIm_803B8220[i + 1];
-                HSD_JObjSetTranslate(jobj, &v[ix]);
-            }
-        }
-        {
-            int const i = 1;
-            int const ix = (ARRAY_SIZE(v) - 1) - i;
-            jobj = Ground_801C3FA4(gobj, i + 18);
-            if (jobj != NULL) {
-                v[ix] = grIm_803B8220[i + 1];
-                HSD_JObjSetTranslate(jobj, &v[ix]);
-            }
-        }
-        {
-            int const i = 2;
-            int const ix = (ARRAY_SIZE(v) - 1) - i;
-            jobj = Ground_801C3FA4(gobj, i + 18);
-            if (jobj != NULL) {
-                v[ix] = grIm_803B8220[i + 1];
-                HSD_JObjSetTranslate(jobj, &v[ix]);
-            }
-        }
-        {
-            int const i = 3;
-            int const ix = (ARRAY_SIZE(v) - 1) - i;
-            jobj = Ground_801C3FA4(gobj, i + 18);
-            if (jobj != NULL) {
-                v[ix] = grIm_803B8220[i + 1];
-                HSD_JObjSetTranslate(jobj, &v[ix]);
-            }
-        }
+    jobj = Ground_801C3FA4(gobj, 18);
+    if (jobj != NULL) {
+        Vec3 pos = grIm_803B8220[1];
+        HSD_JObjSetTranslate(jobj, &pos);
+    }
+    jobj = Ground_801C3FA4(gobj, 19);
+    if (jobj != NULL) {
+        Vec3 pos = grIm_803B8220[2];
+        HSD_JObjSetTranslate(jobj, &pos);
+    }
+    jobj = Ground_801C3FA4(gobj, 20);
+    if (jobj != NULL) {
+        Vec3 pos = grIm_803B8220[3];
+        HSD_JObjSetTranslate(jobj, &pos);
+    }
+    jobj = Ground_801C3FA4(gobj, 21);
+    if (jobj != NULL) {
+        Vec3 pos = grIm_803B8220[4];
+        HSD_JObjSetTranslate(jobj, &pos);
     }
     Ground_801C39C0();
     Ground_801C3BB4();

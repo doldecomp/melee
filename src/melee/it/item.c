@@ -450,9 +450,8 @@ static void Item_802676F4(HSD_GObj* gobj)
     }
 }
 
-static /// @remarks #Item_8026862C loads two integers into this,
-       ///          but the second one goes _?
-    bool Item_8026784C(enum_t dropItem, int _)
+/// @remarks #Item_8026862C loads two integers
+static bool Item_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -747,113 +746,77 @@ void Item_802680CC(HSD_GObj* gobj)
 
 static void Item_8026814C(HSD_GObj* gobj)
 {
-    u8 _[8];
-    HSD_MObj* temp_r0;
-    HSD_DObj* var_r0;
-    HSD_JObj* var_r0_2;
-    HSD_JObj* var_r30;
-    HSD_DObj* var_r29;
-    HSD_JObj* var_r3;
-
-    var_r30 = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
-    while (var_r30 != NULL) {
-        var_r29 = HSD_JObjGetDObj(var_r30);
-    loop_2:
-        if (var_r29 != NULL) {
-            temp_r0 = var_r29->mobj;
-            if (temp_r0 != NULL) {
-                hsdChangeClass(temp_r0, &it_mobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    PAD_STACK(16);
+    while (jobj != NULL) {
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);
+        while (1) {
+            HSD_MObj* mobj;
+            if (dobj == NULL) {
+                break;
             }
-            var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
-            goto loop_2;
+            mobj = dobj->mobj;
+            if (mobj != NULL) {
+                hsdChangeClass(mobj, &it_mobj);
+            }
+            dobj = dobj != NULL ? dobj->next : NULL;
         }
-        if (var_r30 == NULL) {
-            var_r0_2 = NULL;
+        if (HSD_JObjGetChild(jobj) != NULL) {
+            jobj = HSD_JObjGetChild(jobj);
+        } else if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
         } else {
-            var_r0_2 = var_r30->child;
-        }
-        if (var_r0_2 != NULL) {
-            var_r30 = var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->child;
-        } else {
-            var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->next;
-            if (var_r0_2 != NULL) {
-                var_r30 = var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->next;
-            } else {
-            loop_25:
-                var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->parent;
-                if (var_r0_2 == NULL) {
-                    var_r30 = NULL;
-                } else {
-                    var_r3 = (var_r30 == NULL) ? NULL : var_r30->parent;
-                    var_r0_2 = (var_r3 == NULL) ? NULL : var_r3->next;
-                    if (var_r0_2 != NULL) {
-                        var_r3 = (var_r30 == NULL) ? NULL : var_r30->parent;
-                        var_r30 = var_r0_2 =
-                            (var_r3 == NULL) ? NULL : var_r3->next;
-                    } else {
-                        var_r30 = var_r0_2 =
-                            (var_r30 == NULL) ? NULL : var_r30->parent;
-                        goto loop_25;
-                    }
+            while (1) {
+                if (HSD_JObjGetParent(jobj) == NULL) {
+                    jobj = NULL;
+                    break;
                 }
+                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                    break;
+                }
+                jobj = HSD_JObjGetParent(jobj);
             }
         }
     }
 }
 
-static /// @todo Needs some serious cleaning.
-    bool Item_802682F0(HSD_GObj* gobj)
+static bool Item_802682F0(HSD_GObj* gobj)
 {
-    s32 var_r4;
-    Item* item_data;
-    HSD_JObj* var_r0;
-    HSD_JObj* var_r3;
-    HSD_JObj* var_r3_2;
-    HSD_JObj* var_r5;
-
-    item_data = (Item*) HSD_GObjGetUserData(gobj);
-    if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
-        item_data->xBBC_dynamicBoneTable =
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
+        HSD_JObj* jobj;
+        int i;
+        ip->xBBC_dynamicBoneTable =
             HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
-        if (item_data->xBBC_dynamicBoneTable == NULL) {
+        if (ip->xBBC_dynamicBoneTable == NULL) {
             return false;
         }
-        var_r5 = gobj->hsd_obj;
-        var_r4 = 0;
-        while (var_r5 != NULL) {
-            (item_data->xBBC_dynamicBoneTable->bones[var_r4]) = var_r5;
-            var_r4++;
-            var_r0 = (var_r5 == NULL) ? NULL : var_r5->child;
-            if (var_r0 != NULL) {
-                var_r5 = var_r0 = (var_r5 == NULL) ? NULL : var_r5->child;
+        jobj = GET_JOBJ(gobj);
+        i = 0;
+        while (jobj != NULL) {
+            ip->xBBC_dynamicBoneTable->bones[i] = jobj;
+            i++;
+            if (HSD_JObjGetChild(jobj) != NULL) {
+                jobj = HSD_JObjGetChild(jobj);
+            } else if (HSD_JObjGetNext(jobj) != NULL) {
+                jobj = HSD_JObjGetNext(jobj);
             } else {
-                var_r0 = (var_r5 == NULL) ? NULL : var_r5->next;
-                if (var_r0 != NULL) {
-                    var_r5 = var_r0 = (var_r5 == NULL) ? NULL : var_r5->next;
-                } else {
-                loop_20:
-                    var_r0 = (var_r5 == NULL) ? NULL : var_r5->parent;
-                    if (var_r0 == NULL) {
-                        var_r5 = NULL;
-                    } else {
-                        var_r3 = (var_r5 == NULL) ? NULL : var_r5->parent;
-                        var_r0 = (var_r3 == NULL) ? NULL : var_r3->next;
-                        if (var_r0 != NULL) {
-                            var_r3_2 =
-                                (var_r5 == NULL) ? NULL : var_r5->parent;
-                            var_r5 = var_r0 =
-                                (var_r3_2 == NULL) ? NULL : var_r3_2->next;
-                        } else {
-                            var_r5 = var_r0 =
-                                (var_r5 == NULL) ? NULL : var_r5->parent;
-                            goto loop_20;
-                        }
+                while (1) {
+                    if (HSD_JObjGetParent(jobj) == NULL) {
+                        jobj = NULL;
+                        break;
                     }
+                    if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                        jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                        break;
+                    }
+                    jobj = HSD_JObjGetParent(jobj);
                 }
             }
         }
     } else {
-        item_data->xBBC_dynamicBoneTable = NULL;
+        ip->xBBC_dynamicBoneTable = NULL;
     }
     return true;
 }
@@ -1487,10 +1450,9 @@ static void Item_80269B60(HSD_GObj* gobj)
     it_8027146C(gobj);
 }
 
-static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
-       /// Beam,
-    ///          rather items such as the Barrel Cannon.
-    void Item_80269BE4(HSD_GObj* gobj)
+/// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
+/// Beam, rather items such as the Barrel Cannon.
+static void Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.b5) {
@@ -1505,7 +1467,7 @@ static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
 
 static void Item_80269C5C(HSD_GObj* gobj)
 {
-    u8 _[8];
+    PAD_STACK(8);
 
     it_8026F9A0();
     it_802703E8(gobj);

@@ -237,7 +237,6 @@ void Player_80031AD0(int slot)
     first_struct.has_transformation = false;
     first_struct.x5 = -1;
 
-    /// @todo Eliminate cast.
     player->player_entity[0] = Fighter_Create(&first_struct);
     player->player_state = 2;
 
@@ -256,7 +255,6 @@ void Player_80031AD0(int slot)
         second_struct.has_transformation = has_transformation;
         second_struct.x5 = -1;
 
-        /// @todo Eliminate cast.
         player->player_entity[1] = Fighter_Create(&second_struct);
 
         if (player->player_state != 1) {
