@@ -181,7 +181,7 @@ void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     param = atan2f(-normal->x, normal->y);
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5,
                   (1 << 1) | (1 << 2) | (1 << 10), NULL, &vec0, &param);
-    Camera_RequestQuake(2, &vec0);
+    Camera_RequestQuake(QuakeKind_Small, &vec0);
     vec1 = fp->self_vel;
     lbVector_Add_xy(&vec1, &fp->x8c_kb_vel);
     lbVector_Mirror(&vec1, normal);

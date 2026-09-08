@@ -245,7 +245,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
         } else {
             fVar3 = fVar3 * (3.14159265f / 180);
             HSD_JObjAddRotationZ(jobj, fVar3);
-            Camera_RequestQuake(1, &pos);
+            Camera_RequestQuake(QuakeKind_Loop, &pos);
         }
         break;
     }
@@ -289,7 +289,7 @@ void grKraid_801FE6D8(HSD_JObj* hand, float param2)
         map->u.kraid.x8 = map->u.kraid.x8 * map->u.kraid.x4;
         map->u.kraid.xC = map->u.kraid.x8 / yakumono_param->map_time_acl;
         Ground_801C53EC(420005);
-        Camera_RequestQuake(3, &handpos);
+        Camera_RequestQuake(QuakeKind_Medium, &handpos);
     }
 }
 

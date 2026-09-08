@@ -209,7 +209,7 @@ static void grLib_801C9BC8(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObjAnimAll(jobj);
     Camera_SetQuakeOffset(HSD_JObjGetTranslationX(jobj),
-                    HSD_JObjGetTranslationY(jobj));
+                          HSD_JObjGetTranslationY(jobj));
 }
 
 static void grLib_801C9C40(HSD_GObj* gobj)
@@ -219,28 +219,28 @@ static void grLib_801C9C40(HSD_GObj* gobj)
 
     HSD_JObjAnimAll(jobj);
     Camera_SetQuakeOffset(HSD_JObjGetTranslationX(jobj),
-                    HSD_JObjGetTranslationY(jobj));
+                          HSD_JObjGetTranslationY(jobj));
 
     if (aobj == NULL || aobj->flags & 0x40000000) {
         HSD_GObjPLink_80390228(gobj);
     }
 }
 
-HSD_GObj* grLib_801C9CEC(s32 idx1)
+HSD_GObj* grLib_801C9CEC(CmQuakeKind kind)
 {
     u8 tmp;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    s32 idx0;
+    s32 quake_idx;
 
-    if (idx1 == 1) {
-        idx0 = 0;
-    } else if (idx1 == 2) {
-        idx0 = 1;
-    } else if (idx1 == 3) {
-        idx0 = 2;
-    } else if (idx1 == 4) {
-        idx0 = 3;
+    if (kind == QuakeKind_Loop) {
+        quake_idx = 0;
+    } else if (kind == QuakeKind_Small) {
+        quake_idx = 1;
+    } else if (kind == QuakeKind_Medium) {
+        quake_idx = 2;
+    } else if (kind == QuakeKind_Large) {
+        quake_idx = 3;
     } else {
         return NULL;
     }
@@ -248,21 +248,21 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
     if (stage_info.quake_model_set == NULL) {
         return NULL;
     }
-    tmp = idx1;
+    tmp = kind;
     gobj = GObj_Create(HSD_GOBJ_CLASS_STAGE, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.quake_model_set->joint);
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    if (idx1 == 1) {
+    if (kind == QuakeKind_Loop) {
         HSD_GObj_SetupProc(gobj, grLib_801C9BC8, 1);
     } else {
         HSD_GObj_SetupProc(gobj, grLib_801C9C40, 1);
     }
 
-    HSD_JObjAddAnimAll(jobj, stage_info.quake_model_set->anims[idx0], NULL,
-                       NULL);
+    HSD_JObjAddAnimAll(jobj, stage_info.quake_model_set->anims[quake_idx],
+                       NULL, NULL);
     HSD_JObjReqAnimAll(jobj, 0);
-    if (idx1 == 1) {
+    if (kind == QuakeKind_Loop) {
         HSD_ForeachAnim(jobj, 6, 0x20, HSD_AObjSetFlags, AOBJ_ARG_AU,
                         AOBJ_LOOP);
     }

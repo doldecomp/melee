@@ -198,7 +198,7 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
     if (timer > 0) {
         gp->u.zebes2.xC4 = timer - 1;
     } else {
-        Camera_RequestQuake(1, NULL);
+        Camera_RequestQuake(QuakeKind_Loop, NULL);
     }
 
     lb_800115F4();

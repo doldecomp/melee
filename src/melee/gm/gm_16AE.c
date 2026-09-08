@@ -1036,7 +1036,7 @@ void fn_8016C7F0(void)
         lbl_8046B6A0.x24C8.x4_3)
     {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
-        Camera_RequestQuake(4, NULL);
+        Camera_RequestQuake(QuakeKind_Large, NULL);
     }
     if (gm_GetCurrentGameMode() == GM_TARGET_TEST ||
         (gm_GetCurrentGameMode() == GM_CLASSIC &&

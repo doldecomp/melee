@@ -109,7 +109,7 @@ bool it_802E4B00(Item_GObj* gobj)
         it_802756D0(gobj);
         it_80275474(gobj);
         it_8027CE44(gobj);
-        Camera_RequestQuake(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         if (HSD_Randf() < it_804D6D40->x8) {
             it_802E58A0(gobj);
         } else {

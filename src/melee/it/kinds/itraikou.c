@@ -49,7 +49,7 @@ void it_802CF8A4(Item_GObj* gobj)
     Item* it = GET_ITEM((HSD_GObj*) gobj);
     PAD_STACK(8);
 
-    Camera_RequestQuake(4, NULL);
+    Camera_RequestQuake(QuakeKind_Large, NULL);
     Item_8026AE84(it, 0x9, 0x7F, 0x40);
     it_80273454(gobj);
     it_802CF908(gobj);

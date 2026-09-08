@@ -583,7 +583,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
 
     lb_8000B1CC(gp->jobj, NULL, &sp_vec);
     efSync_Spawn(0x442, gobj, &sp_vec);
-    Camera_RequestQuake(2, NULL);
+    Camera_RequestQuake(QuakeKind_Small, NULL);
     Ground_801C5414(0x136, 0xBA);
     grMaterial_801C8CDC(gobj);
     PAD_STACK(20);

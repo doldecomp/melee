@@ -1733,7 +1733,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     -200.0f < car_pos.y && car_pos.y < 200.0f &&
                     -1350.0f < car_pos.z && car_pos.z < 50.0f)
                 {
-                    Camera_RequestQuake(1, NULL);
+                    Camera_RequestQuake(QuakeKind_Loop, NULL);
                     if (!grMc_8049F4B8[car_idx].x22_flags.b1) {
                         if (gp->u.mutecity.xD0_flags.b1) {
                             switch (HSD_Randi(3)) {

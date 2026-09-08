@@ -49,7 +49,7 @@ bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 void ftPk_SpecialLw_80127608(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Camera_RequestQuake(2, &fp->cur_pos);
+    Camera_RequestQuake(QuakeKind_Small, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 11, 0);
 }
 

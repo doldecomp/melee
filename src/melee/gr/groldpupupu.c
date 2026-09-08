@@ -709,7 +709,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 }
                 if (gp->u.oldpupupu.xD0 > 0x2D && gp->u.oldpupupu.xD0 < 0x140)
                 {
-                    Camera_RequestQuake(1, NULL);
+                    Camera_RequestQuake(QuakeKind_Loop, NULL);
                     gp->u.oldpupupu.xDC = gp->u.oldpupupu.xD8 + 1;
                     if ((gp->u.oldpupupu.xD0 % 10) == 0) {
                         gp = gobj->user_data;

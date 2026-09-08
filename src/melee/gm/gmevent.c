@@ -2459,7 +2459,7 @@ void gm_801BE638(HSD_GObj* gobj)
         if ((temp_r30->x10 % 30) == 0) {
             gm_80167858((s32) temp_r30->x6, Player_GetNametagSlotID(0), 2,
                         0x1E);
-            Camera_RequestQuake(3, NULL);
+            Camera_RequestQuake(QuakeKind_Medium, NULL);
         }
         temp_r3_2 = temp_r30->x10;
         if (temp_r3_2 <= temp_r28_2) {

@@ -426,7 +426,7 @@ void ftCo_DamageIce_Collide(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)
 
     ftCo_SpawnEffect_x406(gobj, &next_pos, atan2f(-normal->x, normal->y));
 
-    Camera_RequestQuake(2, &next_pos);
+    Camera_RequestQuake(QuakeKind_Small, &next_pos);
 
     ftCommon_8007EBAC(fp, 7, 0);
     ft_PlaySFX(fp, 0x123, SFX_VOLUME_MAX, SFX_PAN_MID);
