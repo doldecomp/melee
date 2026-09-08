@@ -227,7 +227,7 @@ void onExitVs(GameModeState* state)
                      gmVsMode_State_SuddenDeath);
     mei = gm_GetGameModeStateExitData(state);
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {
+        if (mei->match_end.player_standings[i].pkind != Gm_PKind_NA) {
             gm_80162A98(mei->match_end.player_standings[i].x20);
             gm_RecordSelfDestructs(
                 mei->match_end.player_standings[i].self_destructs);

@@ -1,6 +1,6 @@
 #include "ftmasterhandwalk.h"
 
-#include <Runtime/platform.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftmasterhandslap.h"
@@ -77,19 +77,21 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    u8 _[4] = { 0 };
-
-    volatile float y;
-    if (x > 0) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
+    FORCE_PAD_STACK_4;
+    {
+        volatile float y;
+        if (x > 0) {
+            double guess =
+                __frsqrte((double) x); // returns an approximation to
+            guess = _half * guess *
+                    (_three - guess * guess * x); // now have 12 sig bits
+            guess = _half * guess *
+                    (_three - guess * guess * x); // now have 24 sig bits
+            guess = _half * guess *
+                    (_three - guess * guess * x); // now have 32 sig bits
+            y = (float) (x * guess);
+            return y;
+        }
     }
     return x;
 }
@@ -108,7 +110,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
-    u8 _[4];
+    PAD_STACK(4);
 
     ftLib_800866DC(ftBossLib_8015C244(gobj, &fp->cur_pos), &pos);
     lbVector_Diff(&pos, &fp->cur_pos, &vel);
@@ -139,10 +141,8 @@ void ftMh_WalkLoop_IASA(HSD_GObj* gobj)
 
 void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
-    Fighter* fp = gobj->user_data;
-    ftData* data = fp->ft_data;
-    ftMasterHand_SpecialAttrs* da = data->ext_attr;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     ft_80085134(gobj);
     fp->self_vel.x = da->x40_pos.z;
 }

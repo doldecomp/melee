@@ -87,7 +87,7 @@ void fn_80179854(void)
                     .is_big_loser;
         }
 
-        if (match_end->player_standings[i].slot_type != 3 && lookup != 0) {
+        if (match_end->player_standings[i].pkind != 3 && lookup != 0) {
             HSD_JObjSetTranslateX(GET_JOBJ(gobjs[i]), -300.0f);
             disp->state.x0_6 = 1;
         }
@@ -110,10 +110,10 @@ static inline void fn_80179990_set_erase_color(MatchEnd* match_end, int slot)
 {
     GXColor color;
 
-    color = gm_80160968(
-        gm_80160854((u8) slot, match_end->player_standings[slot].team,
-                    (u8) (match_end->is_teams == 1),
-                    match_end->player_standings[slot].slot_type));
+    color = gm_80160968(gm_80160854((u8) slot,
+                                    match_end->player_standings[slot].team,
+                                    (u8) (match_end->is_teams == 1),
+                                    match_end->player_standings[slot].pkind));
     HSD_SetEraseColor(color.r, color.g, color.b, color.a);
 }
 

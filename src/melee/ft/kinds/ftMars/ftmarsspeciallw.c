@@ -195,94 +195,41 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
     }
 }
 
-#define SOLUTION 1
+static inline void ftMars_SpecialLwHit_ApplyDamage(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.ms.speciallw.x0 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
+        int i;
+        for (i = 0; i < 4; i++) {
+            if (fp->x914[i].state == HitCapsule_Enabled) {
+                ftColl_8007ABD0(&fp->x914[i], fp->mv.ms.speciallw.x0, gobj);
+            }
+        }
+    }
+}
+
 void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
-    ssize_t idx;
-
-    s32 hb;
     u8 _[8];
 
-    Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->mv.ms.speciallw.x0;
-
-    /// @todo required for some reason
-    fp->mv.ms.speciallw.x0;
-
-    if (sv1 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
-/// @todo register swap:
-#if SOLUTION == 0
-        for (idx = 0; idx < 4; idx++) {
-            if (fp->x914[idx].state == HitCapsule_Enabled) {
-                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
-            }
-        }
-
-/// matches but gross:
-#elif SOLUTION == 1
-        idx = 0;
-        hb = (s32) fp;
-        while (idx < 4) {
-            if (*(s32*) (hb + 2324) == HitCapsule_Enabled) {
-                ftColl_8007ABD0((HitCapsule*) (hb + 2324),
-                                fp->mv.ms.speciallw.x0, gobj);
-            }
-            idx++;
-            hb += 312;
-        }
-#endif
-    }
+    ftMars_SpecialLwHit_ApplyDamage(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
-#undef SOLUTION
 
-#define SOLUTION 1
-/// https://decomp.me/scratch/Jx7Ov
 void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
-    ssize_t idx;
-
-    s32 hb;
     u8 _[8];
 
-    Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->mv.ms.speciallw.x0;
-
-    /// @todo required for some reason
-    fp->mv.ms.speciallw.x0;
-
-    if (sv1 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
-/// @todo register swap:
-#if SOLUTION == 0
-        for (idx = 0; idx < 4; idx++) {
-            if (fp->x914[idx].state == HitCapsule_Enabled) {
-                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
-            }
-        }
-
-/// matches but gross:
-#elif SOLUTION == 1
-        idx = 0;
-        hb = (s32) fp;
-        while (idx < 4) {
-            if (*(s32*) (hb + 2324) == HitCapsule_Enabled) {
-                ftColl_8007ABD0((HitCapsule*) (hb + 2324),
-                                fp->mv.ms.speciallw.x0, gobj);
-            }
-            idx++;
-            hb += 312;
-        }
-#endif
-    }
+    ftMars_SpecialLwHit_ApplyDamage(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_Fall_Enter(gobj);
     }
 }
-#undef SOLUTION
 
 /// 80138FC0 00135BA0
 void ftMs_SpecialLwHit_IASA(HSD_GObj* gobj) {}

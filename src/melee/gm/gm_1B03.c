@@ -53,7 +53,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
         }
         arg0->players[i].ckind = var_r6;
         arg0->players[i].stocks = 1;
-        arg0->players[i].x12 = 300;
+        arg0->players[i].damage1 = 300;
     } else {
         arg0->players[i].slot_type = Gm_PKind_NA;
     }

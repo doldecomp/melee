@@ -130,7 +130,7 @@ void gm_801B8C30(GameModeState* scene)
 
 void fn_801B8C5C(PlayerInitData* arg0, PlayerInitData* unused)
 {
-    arg0->x12 = 0x12C;
+    arg0->damage1 = 0x12C;
 }
 
 void gm_801B8C68(GameModeState* scene)

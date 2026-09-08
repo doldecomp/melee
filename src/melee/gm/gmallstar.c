@@ -566,7 +566,7 @@ void gm_801B5624(GameModeState* arg0)
         gm_8016A21C(&data->rules);
     }
 
-    data->players[0].x10 = allstar->x74;
+    data->players[0].damage = allstar->x74;
     gm_LoadRumbleEnabled(data);
     allstar->x0.x0.mode = arg0->id;
 }
@@ -642,7 +642,7 @@ void gm_801B5ACC(GameModeState* arg0)
     data->rules.time_limit = (s32) gm_80473A18.x9C / GM_FPS;
     data->rules.x14 = (s32) gm_80473A18.x9C % GM_FPS;
     data->rules.xD = GM_NAMETAG_NONE;
-    data->players[0].x10 = gm_80473A18.x74;
+    data->players[0].damage = gm_80473A18.x74;
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
     rest_round = gm_8017BE84(arg0->id);

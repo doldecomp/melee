@@ -3,6 +3,5 @@ members = [
     "tools/flags",
     "tools/replace-symbols",
     "tools/rust-utils",
-    "tools/scratch-tracker",
 ]
 resolver = "2"

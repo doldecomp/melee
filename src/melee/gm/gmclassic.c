@@ -888,7 +888,7 @@ void gmClassic_801B3500(GameModeState* arg0)
         s8 achar = ad->x0.xC.x24[i].ckind;
         if (achar != 0x21) {
             gc->entries[count].char_id = achar;
-            gc->entries[count].color = ad->x0.xC.x24[i].x1;
+            gc->entries[count].color = ad->x0.xC.x24[i].color;
             count++;
         }
     }

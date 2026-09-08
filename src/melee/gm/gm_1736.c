@@ -298,7 +298,7 @@ void gm_80173DE4(MatchEnd* arg0)
     var_r29_2 = 0;
 
     for (i = 0; i < 6; i++) {
-        if (arg0->player_standings[i].slot_type == 0) {
+        if (arg0->player_standings[i].pkind == 0) {
             var_r29_2 =
                 lbTime_8000AEC8(var_r29_2, arg0->player_standings[i].x50);
         }

@@ -777,7 +777,7 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
                 arg0->players[player_idx].xB = 0;
             }
             if (arg1->x8 & 4) {
-                arg0->players[player_idx].xC_b2 = 1;
+                arg0->players[player_idx].vs_metal = 1;
                 arg0->players[player_idx].cpu_kind = 0x1B;
             }
             if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
@@ -1095,11 +1095,11 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].slot_type = 1;
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
-            arg0[index].color = arg1[i].x1;
-            arg0[index].cpu_kind = arg1[i].x3;
-            arg0[index].cpu_level = arg1[i].x2;
-            arg0[index].attack_ratio = arg1[i].x4;
-            arg0[index].defense_ratio = arg1[i].x8;
+            arg0[index].color = arg1[i].color;
+            arg0[index].cpu_kind = arg1[i].cpu_kind;
+            arg0[index].cpu_level = arg1[i].cpu_level;
+            arg0[index].attack_ratio = arg1[i].attack_ratio;
+            arg0[index].defense_ratio = arg1[i].defense_ratio;
             arg0[index].xD_b1 = 1;
             if (arg0[index].ckind == CKIND_GKOOPS) {
                 arg0[index].xC_b1 = 0;

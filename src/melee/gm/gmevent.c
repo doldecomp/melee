@@ -280,7 +280,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->stocks = src->stocks;
     arg0->color = src->color;
     arg0->slot = 0;
-    arg0->x5 = src->x5;
+    arg0->spawn_pos = src->x5;
     arg0->sub_color = src->sub_color;
     arg0->handicap = 9;
     arg0->team = src->team;
@@ -288,7 +288,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->xB = src->xB;
     arg0->rumble_enabled = 0;
     arg0->xC_b1 = (src->flags & 0x80) >> 7;
-    arg0->xC_b2 = (src->flags & 0x40) >> 6;
+    arg0->vs_metal = (src->flags & 0x40) >> 6;
     arg0->xC_b3 = (src->flags & 0x20) >> 5;
     arg0->vs_invisible = (src->flags & 0x10) >> 4;
     arg0->xC_b6 = (src->flags & 0x08) >> 3;
@@ -298,8 +298,8 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
     arg0->xD_b4 = 0;
     arg0->cpu_kind = src->xE;
     arg0->cpu_level = src->cpu_level;
-    arg0->x10 = 0;
-    arg0->x12 = src->x12;
+    arg0->damage = 0;
+    arg0->damage1 = src->x12;
     arg0->hp = src->hp;
     arg0->attack_ratio = src->x18;
     arg0->defense_ratio = src->x1C;
@@ -513,7 +513,7 @@ void onEnterVs(GameModeState* arg0)
         if (ev->x20 > 0) {
             s8 c;
             md->players[0].stocks = (s8) ev->x24;
-            md->players[0].x10 = ev->x28;
+            md->players[0].damage = ev->x28;
             md->players[0].xC_b1 = 0;
             c = ev->x38;
             if (c != 0x21) {
