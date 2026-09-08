@@ -97,9 +97,8 @@ struct Camera {
     /* 0x0A0 */ HSD_GObj* quake_gobj;
     /* 0x0A4 */ f32 xA4;
     /* 0x0A8 */ f32 xA8;
-    /* 0x0AC */ f32 xAC; /* inferred */
-    /* 0x0B0 */ struct CameraQuake _B0[2][8];
-    /* 0x1B0 */ struct CameraQuake _1B0[2][8];
+    /* 0x0AC */ f32 xAC;
+    /* 0x0B0 */ struct CameraQuake quakes[2][16];
     /* 0x2B0 */ float x2B0;
     /* 0x2B4 */ float x2B4;
     /* 0x2B8 */ s16 x2B8;

@@ -50,7 +50,8 @@
                                          f32 speed);
 /* 0301D0 */ static void fn_800301D0(HSD_GObj*, int);
 
-/* 452C68 */ static Camera game_camera; ///< The main camera used in game scenes.
+/// The main camera used in game scenes.
+/* 452C68 */ static Camera game_camera;
 /* 453004 */ CameraDebugMode cm_80453004;
 
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = {
@@ -973,27 +974,25 @@ void Camera_8002A278(f32 x, f32 y)
 void Camera_8002A28C(CameraBounds* arg0)
 {
     u8 _[16];
-    s32 test;
+    s32 quakes_remaining;
     int i;
-    int j;
 
-    test = -1;
+    quakes_remaining = -1;
 
-    for (i = 0; i < 2; ++i) {
-        for (j = 0; j < 8; ++j) {
-            game_camera._1B0[i][j] = game_camera._B0[i][j];
-            game_camera._B0[i][j].kind = 0;
-        }
+    for (i = 0; i < 16; ++i) {
+        game_camera.quakes[1][i] = game_camera.quakes[0][i];
+        game_camera.quakes[0][i].kind = 0;
     }
 
     for (i = 0; i < 5; ++i) {
         if (game_camera.quake_frames_left[i] != 0) {
             game_camera.quake_frames_left[i] -= 1;
-            test = i;
+            quakes_remaining = i;
         }
     }
 
-    if ((test != -1) && (game_camera.quake_gobj != NULL) && (game_camera.quake_frames_left[1] == 0))
+    if ((quakes_remaining != -1) && (game_camera.quake_gobj != NULL) &&
+        (game_camera.quake_frames_left[1] == 0))
     {
         HSD_GObjPLink_80390228(game_camera.quake_gobj);
         game_camera.quake_gobj = 0;
@@ -4432,14 +4431,14 @@ void Camera_80030E44(QuakeKind kind, Vec3* pos)
     {
         s32 i;
         for (i = 0; i < 16; i++) {
-            if (game_camera._B0[0][i].kind == 0) {
-                game_camera._B0[0][i].kind = kind;
+            if (game_camera.quakes[0][i].kind == 0) {
+                game_camera.quakes[0][i].kind = kind;
                 if (pos != NULL) {
-                    game_camera._B0[0][i].epicenter = *pos;
+                    game_camera.quakes[0][i].epicenter = *pos;
                 } else {
-                    game_camera._B0[0][i].epicenter.z = 0.0f;
-                    game_camera._B0[0][i].epicenter.y = 0.0f;
-                    game_camera._B0[0][i].epicenter.x = 0.0f;
+                    game_camera.quakes[0][i].epicenter.z = 0.0f;
+                    game_camera.quakes[0][i].epicenter.y = 0.0f;
+                    game_camera.quakes[0][i].epicenter.x = 0.0f;
                 }
             }
         }
