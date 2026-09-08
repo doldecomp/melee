@@ -222,27 +222,9 @@ void ftYs_GuardHold_Coll(HSD_GObj* arg0)
 
 void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 {
+    PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 343, 0, 0, 1.0F, 0, NULL);
-
-    {
-        Fighter* fp0 = GET_FIGHTER(gobj);
-        ftParts_80074B0C(gobj, 0, 0);
-        ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
-
-        {
-            u8 _[8];
-
-            ftCo_DatAttrs_xBC_t* co_xBC = &fp0->co_attrs.xBC;
-
-            ssize_t bone_idx = ftParts_GetBoneIndex(fp0, 4);
-            Fighter* fp1 = GET_FIGHTER(gobj);
-
-            /// @todo Why is this still using @c fp0?
-            HSD_JObj* jobj = fp0->parts[bone_idx].joint;
-
-            efAsync_Spawn(gobj, &fp1->x60C, 4U, 1231, jobj, co_xBC);
-        }
-    }
+    ftYs_Init_8012BE3C(gobj);
 }
 
 void ftYs_GuardOff_Anim(HSD_GObj* gobj)
