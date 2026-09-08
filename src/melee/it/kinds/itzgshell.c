@@ -152,7 +152,7 @@ void it_802DDD38(Item_GObj* gobj)
     }
 
     if (ip->msid == 0xB) {
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         it_802DF9F8(gobj);
     } else {
         it_8027236C(gobj);
@@ -216,7 +216,7 @@ void it_802DDEB4(Item_GObj* gobj)
     }
 
     if (ip->msid == 0xB) {
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         it_802DF9F8(gobj);
     } else {
         it_802756D0(gobj);

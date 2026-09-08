@@ -895,7 +895,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
     case 1: {
         gp->u.zebes5.xC6 = (s16) (gp->u.zebes5.xC6 - 1);
         if (gp->u.zebes5.xC6 < 0x78) {
-            Camera_80030E44(1, NULL);
+            Camera_RequestQuake(QuakeKind_Loop, NULL);
         }
         if (gp->u.zebes5.xC6 < 0) {
             f32 diff;
@@ -954,7 +954,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 
         gp->u.zebes5.xC6 = (s16) (gp->u.zebes5.xC6 + 1);
         if (gp->u.zebes5.xC6 < 60) {
-            Camera_80030E44(1, NULL);
+            Camera_RequestQuake(QuakeKind_Loop, NULL);
         }
 
         vel = gp->u.zebes5.xD0;

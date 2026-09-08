@@ -188,7 +188,7 @@ static void ftKp_SpecialN_Anim_inline_2(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* da = fp->dat_attrs;
     if (fp->mv.kp.specials.x18 == 0) {
-        Camera_80030E44(2, &fp->cur_pos);
+        Camera_RequestQuake(QuakeKind_Small, &fp->cur_pos);
     }
     fp->mv.kp.specials.x18 += 1;
     fp->mv.kp.specials.x18 %= da->x20;

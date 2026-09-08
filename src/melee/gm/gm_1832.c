@@ -1119,7 +1119,7 @@ void fn_80186634(void* arg0)
     PAD_STACK(12);
 
     lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604, "gmIntroEasyTable", 0);
-    Camera_80028B9C(0xC);
+    Camera_Init(0xC);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

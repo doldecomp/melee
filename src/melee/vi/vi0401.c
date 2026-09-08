@@ -53,7 +53,7 @@ void un_8031D030(CharacterKind char_kind, int costume)
 {
     Vec3 pos;
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

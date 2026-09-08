@@ -214,7 +214,7 @@ void ftKb_KpSpecialN_Anim(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
         if (fp->mv.kb.specialn_kp.x18 == 0) {
-            Camera_80030E44(2, &fp->cur_pos);
+            Camera_RequestQuake(QuakeKind_Small, &fp->cur_pos);
         }
         fp->mv.kb.specialn_kp.x18 += 1;
         fp->mv.kb.specialn_kp.x18 %= da->specialn_kp_screen_shake_frequency;
@@ -265,7 +265,7 @@ void ftKb_KpSpecialAirN_Anim(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
         if (fp->mv.kb.specialn_kp.x18 == 0) {
-            Camera_80030E44(2, &fp->cur_pos);
+            Camera_RequestQuake(QuakeKind_Small, &fp->cur_pos);
         }
         fp->mv.kb.specialn_kp.x18 += 1;
         fp->mv.kb.specialn_kp.x18 %= da->specialn_kp_screen_shake_frequency;

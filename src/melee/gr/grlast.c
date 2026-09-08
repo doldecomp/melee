@@ -639,10 +639,10 @@ static void grLast_8021B2E8(Ground_GObj* gobj)
         if (temp_gp->u.last.xDC < 0) {
             temp_gp->u.last.xDC = 0;
         }
-        Camera_80030E44(1, 0);
+        Camera_RequestQuake(QuakeKind_Loop, NULL);
         break;
     case 11:
-        Camera_80030E44(1, 0);
+        Camera_RequestQuake(QuakeKind_Loop, NULL);
         break;
     case 15:
         if (gp->u.map.xC4_b27) {

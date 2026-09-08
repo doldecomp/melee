@@ -776,7 +776,7 @@ void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ftCo_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
-    Camera_80030E44(2, &fp->cur_pos);
+    Camera_RequestQuake(QuakeKind_Small, &fp->cur_pos);
     ft_PlaySFX(fp, 0x121, 0x7F, 0x40);
 }
 

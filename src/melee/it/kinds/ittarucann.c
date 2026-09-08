@@ -648,7 +648,7 @@ bool itTarucann_UnkMotion9_Anim(Item_GObj* gobj)
     case 1:
         efSync_Spawn(0x427, gobj, &ip->pos);
         Item_8026AE84(ip, 0xFB, 0x7F, 0x40);
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         it_8026B3A8(gobj);
         ip->xDD4_itemVar.tarucann.x4 = 0x28;

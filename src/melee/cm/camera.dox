@@ -12,7 +12,7 @@ struct _CameraBox;
 
 struct _CameraBox* Camera_80029020(void);
 void Camera_800290D4(struct _CameraBox*);
-void Camera_8002A278(f32 x, f32 y);
+void Camera_SetQuakeOffset(f32 x, f32 y);
 void Camera_8002E6FC(int);
 void Camera_8002E948(bool (*)(Vec3*));
 void Camera_8002EB5C(f32);
@@ -29,7 +29,7 @@ bool Camera_80030CFC(struct _CameraBox*, f32);
 void Camera_80031074(u8);
 void Camera_800310A0(u8);
 f32 Camera_80031144(void);
-void Camera_80030E44(enum_t, Vec3*);
+void Camera_RequestQuake(enum_t, Vec3*);
 void Camera_8002A4AC(HSD_GObj*);
 void Camera_8002EA64(Vec3*);
 void Camera_8002E818(Vec3*);

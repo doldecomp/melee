@@ -34,7 +34,7 @@ typedef enum EF_SpawnKind {
         7, // (jobj, &vec)           -> efSync(gfx_id, gobj, jobj, &vec)
     EF_SPAWN_CAMERA_SHAKE =
         8, // (jobj, &ofs)           -> worldpos(jobj, &ofs)             ->
-           // Camera_80030E44(gfx_id, &pos)
+           // Camera_RequestQuake(gfx_id, &pos)
 } EF_SpawnKind;
 
 // 0 = async load (default)

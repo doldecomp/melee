@@ -1017,7 +1017,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                         ((UnkFlagStruct*) &gp->u.bigblue.x0)->b0 = 1;
                     }
                 } else {
-                    Camera_80030E44(1, NULL);
+                    Camera_RequestQuake(QuakeKind_Loop, NULL);
                     if (!RE_ENTRY->flags.b6) {
                         RE_ENTRY->flags.b6 = 1;
                         if (HSD_Randi(100) < 40) {

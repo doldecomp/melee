@@ -77,7 +77,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
 
     PAD_STACK(8);
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

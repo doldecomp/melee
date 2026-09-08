@@ -186,7 +186,7 @@ bool it_802E8CD8(Item_GObj* gobj)
         it_8027C9D8(ip);
         it_802756D0(gobj);
         it_8027CE44(gobj);
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         if (HSD_Randf() < it_804D6D40->x8) {
             it_802EA334(gobj);
         } else if (ip->msid == 8) {

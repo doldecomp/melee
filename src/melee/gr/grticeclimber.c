@@ -177,7 +177,7 @@ void grTIceClimber_80221208(Item_GObj* gobj, Ground* u1, Vec3* u2,
     HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, JOBJ_HIDDEN);
     lb_8000B1CC(it->xDD4_itemVar.mato.x4, NULL, &pos);
     efSync_Spawn(0x445, gobj, &pos);
-    Camera_80030E44(2, 0);
+    Camera_RequestQuake(QuakeKind_Small, NULL);
     Ground_801C53EC(310);
     grMaterial_801C8CDC(gobj);
 }

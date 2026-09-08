@@ -247,7 +247,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         if (tmp->x8 <= temp_r28 && tmp->x8 % 30 == 0) {
             gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 2,
                         0x1E);
-            Camera_80030E44(3, NULL);
+            Camera_RequestQuake(QuakeKind_Medium, NULL);
         }
         if (tmp->x8 <= temp_r29_2) {
             tmp->x8++;
@@ -348,7 +348,7 @@ void gm_8017C838(void)
         }
         var_r31++;
     }
-    Camera_80030E34(0.2f);
+    Camera_SetQuakeScale(0.2f);
 }
 
 void gm_8017C984(UNK_T arg0)

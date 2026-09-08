@@ -2215,7 +2215,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         sp40.x = grCn_803E1FAC[1].x;
         sp40.y = grCn_803E1FAC[1].y;
         sp40.z = grCn_803E1FAC[1].z;
-        Camera_80030E44(4, &sp40);
+        Camera_RequestQuake(QuakeKind_Large, &sp40);
         Ground_801C53EC(0x76);
         HSD_JObjSetFlags(Ground_801C3FA4(gobj, 6), JOBJ_HIDDEN);
         HSD_JObjClearFlags(Ground_801C3FA4(gobj, 5), JOBJ_HIDDEN);
