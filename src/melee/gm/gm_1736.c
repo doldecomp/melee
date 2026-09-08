@@ -41,7 +41,7 @@ bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
         memzero(&challenger_data, sizeof(challenger_data));
-        challenger_data.human_ckind = CHKIND_NONE;
+        challenger_data.human_ckind = ChKind_None;
         challenger_data.human_slot = arg1;
         challenger_data.curr_mode = gameMode;
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
@@ -62,7 +62,7 @@ u8 gm_801737D8(void)
 void gm_Mode_ChallengerApproach_OnLoad(void)
 {
     challenger_data.prev_mode = gm_GetPreviousGameMode();
-    if (challenger_data.human_ckind == CHKIND_NONE) {
+    if (challenger_data.human_ckind == ChKind_None) {
         gm_SetGameModeStateId(2);
     } else {
         gm_SetGameModeStateId(0);
@@ -78,15 +78,15 @@ void fn_80173834(u8 ckind, u8 major, bool arg2)
         gmMainLib_8015DA68(temp_r30);
     }
     fn_80172C78(temp_r30);
-    if (ckind == CKIND_ZELDA) {
-        temp_r31 = gm_80160474(CKIND_SEAK, major);
+    if (ckind == CKind_Zelda) {
+        temp_r31 = gm_80160474(CKind_Seak, major);
         if (arg2) {
             gmMainLib_8015DA68(temp_r31);
         }
         fn_80172C78(temp_r31);
     }
-    if (ckind == CKIND_SEAK) {
-        temp_r31 = gm_80160474(CKIND_ZELDA, major);
+    if (ckind == CKind_Seak) {
+        temp_r31 = gm_80160474(CKind_Zelda, major);
         if (arg2) {
             gmMainLib_8015DA68(temp_r31);
         }
@@ -324,31 +324,31 @@ void gm_80173EEC(void)
         if (*temp_r29 >= 100) {
             ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_CLASSIC));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_CLASSIC));
+            if (ckind == CKind_Zelda) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Seak, GM_CLASSIC));
             }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_CLASSIC));
+            if (ckind == CKind_Seak) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Zelda, GM_CLASSIC));
             }
         }
         if (*temp_r29 >= 200) {
             ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ADVENTURE));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ADVENTURE));
+            if (ckind == CKind_Zelda) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Seak, GM_ADVENTURE));
             }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ADVENTURE));
+            if (ckind == CKind_Seak) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Zelda, GM_ADVENTURE));
             }
         }
         if (*temp_r29 >= 300) {
             ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ALLSTAR));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ALLSTAR));
+            if (ckind == CKind_Zelda) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Seak, GM_ALLSTAR));
             }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ALLSTAR));
+            if (ckind == CKind_Seak) {
+                fn_80172C78(gm_80173EEC_inline(CKind_Zelda, GM_ALLSTAR));
             }
         }
     }

@@ -449,7 +449,7 @@ void gm_80182174(void)
 
     gm_SetupPlayerDefaults(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKIND_BOY;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKind_Boy;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;

@@ -1379,7 +1379,7 @@ static bool Ground_801C24F8(StKind stkind, u32 arg1, s32* arg2)
                     }
                     break;
                 case 3:
-                    if (gm_IsCKindUnlocked(CKIND_MARS) &&
+                    if (gm_IsCKindUnlocked(CKind_Mars) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1388,7 +1388,7 @@ static bool Ground_801C24F8(StKind stkind, u32 arg1, s32* arg2)
                     }
                     break;
                 case 4:
-                    if (gm_IsCKindUnlocked(CKIND_CLINK) &&
+                    if (gm_IsCKindUnlocked(CKind_CLink) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;

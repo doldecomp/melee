@@ -1683,7 +1683,7 @@ static bool fn_80026E58(int arg0)
 
 u64 lbAudioAx_80026E84(CharacterKind ckind)
 {
-    if (ckind < 0 || ckind >= CHKIND_MAX) {
+    if (ckind < 0 || ckind >= ChKind_Max) {
         return 0;
     }
     return lbl_803BB3C0[ckind].x8;
@@ -1859,7 +1859,7 @@ void lbAudioAx_8002785C(void)
     if (gm_8016B184()) {
         result = lbAudioAx_80026E84(Player_GetPlayerCharacter(0));
         for (i = 0; i < 3; i++) {
-            if (gm_80169370(i) != CHKIND_MAX) {
+            if (gm_80169370(i) != ChKind_Max) {
                 int opp = gm_80169370(i);
                 result |= lbAudioAx_80026E84(opp);
                 if (opp == 4) {

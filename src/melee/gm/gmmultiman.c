@@ -392,7 +392,7 @@ void gm_801B65D4(GameModeState* arg0)
         gm_80173AA4();
         gm_80173EEC();
         gm_80172898(0x80);
-        if (temp_r25_2 != CHKIND_NONE) {
+        if (temp_r25_2 != ChKind_None) {
             gm_InitChallengerData(temp_r28->unk_584, temp_r28->unk_585,
                                   gm_804D68E8, temp_r28->unk_586, temp_r25_2,
                                   0xF);
@@ -493,9 +493,9 @@ static void gm_801B6AD8_inline(GameModeState* scene, int x)
                 temp_r31->start.players[0].nametag, 0, gm_804D68F0);
     temp_r31_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_SetupVsPreloadCache();
-    temp_r31_2->entries[1].char_id = CKIND_BOY;
+    temp_r31_2->entries[1].char_id = CKind_Boy;
     temp_r31_2->entries[1].color = 0;
-    temp_r31_2->entries[2].char_id = CKIND_GIRL;
+    temp_r31_2->entries[2].char_id = CKind_Girl;
     temp_r31_2->entries[2].color = 0;
     temp_r31_2->stkind = 0x11D;
     lbDvd_80018254();

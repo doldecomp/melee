@@ -1582,13 +1582,13 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     if (arg1->slot_type == Gm_PKind_Human &&
         (HSD_PadCopyStatus[(u8) Player_GetPlayerId(arg0)].button &
          HSD_PAD_A) &&
-        (Player_GetPlayerCharacter(arg0) == CKIND_ZELDA ||
-         Player_GetPlayerCharacter(arg0) == CKIND_SEAK))
+        (Player_GetPlayerCharacter(arg0) == CKind_Zelda ||
+         Player_GetPlayerCharacter(arg0) == CKind_Seak))
     {
-        if (Player_GetPlayerCharacter(arg0) == CKIND_ZELDA) {
-            Player_SetPlayerCharacter(arg0, CKIND_SEAK);
+        if (Player_GetPlayerCharacter(arg0) == CKind_Zelda) {
+            Player_SetPlayerCharacter(arg0, CKind_Seak);
         } else {
-            Player_SetPlayerCharacter(arg0, CKIND_ZELDA);
+            Player_SetPlayerCharacter(arg0, CKind_Zelda);
         }
         tmp->fighters[arg0].x4_b4 = true;
     }
@@ -1845,7 +1845,7 @@ void fn_8016E124(void)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != 3 &&
-            Player_GetPlayerCharacter(i) == CKIND_KIRBY)
+            Player_GetPlayerCharacter(i) == CKind_Kirby)
         {
             s8 temp_r3 = Player_GetCostumeId(i);
             bool var_r5 = false;
@@ -2167,7 +2167,7 @@ float gm_8016ECE8(void)
     var_f29 = 0.0F;
     for (i = 0; i < 6; i++) {
         CharacterKind kind = Player_GetPlayerCharacter(i);
-        if (kind == CKIND_MASTERH || kind == CKIND_CREZYH) {
+        if (kind == CKind_MasterH || kind == CKind_CrezyH) {
             var_f29 +=
                 (float) Player_GetRemainingHP(i) / Player_GetOtherStamina(i);
             count++;

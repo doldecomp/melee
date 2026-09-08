@@ -40,41 +40,41 @@ struct Unk_Struct_w_Array {
 char str_PdPmdat_start_of_data[] = "PdPm.dat";
 char str_plLoadCommonData[] = "plLoadCommonData";
 
-ftMapping ftMapping_list[CHKIND_MAX] = {
+ftMapping ftMapping_list[ChKind_Max] = {
     //////ftMapping_list
-    /* CKIND_CAPTAIN   */ { Ft_Kind_Captain, 0xFF },
-    /* CKIND_DONKEY    */ { Ft_Kind_Donkey, 0xFF },
-    /* CKIND_FOX       */ { Ft_Kind_Fox, 0xFF },
-    /* CKIND_GAMEWATCH */ { Ft_Kind_GameWatch, 0xFF },
-    /* CKIND_KIRBY     */ { Ft_Kind_Kirby, 0xFF },
-    /* CKIND_KOOPA     */ { Ft_Kind_Koopa, 0xFF },
-    /* CKIND_LINK      */ { Ft_Kind_Link, 0xFF },
-    /* CKIND_LUIGI     */ { Ft_Kind_Luigi, 0xFF },
-    /* CKIND_MARIO     */ { Ft_Kind_Mario, 0xFF },
-    /* CKIND_MARS      */ { Ft_Kind_Mars, 0xFF },
-    /* CKIND_MEWTWO    */ { Ft_Kind_Mewtwo, 0xFF },
-    /* CKIND_NESS      */ { Ft_Kind_Ness, 0xFF },
-    /* CKIND_PEACH     */ { Ft_Kind_Peach, 0xFF },
-    /* CKIND_PIKACHU   */ { Ft_Kind_Pikachu, 0xFF },
-    /* CKIND_POPONANA  */ { Ft_Kind_Popo, Ft_Kind_Nana },
-    /* CKIND_PURIN     */ { Ft_Kind_Purin, 0xFF },
-    /* CKIND_SAMUS     */ { Ft_Kind_Samus, 0xFF },
-    /* CKIND_YOSHI     */ { Ft_Kind_Yoshi, 0xFF },
-    /* CKIND_ZELDA     */ { Ft_Kind_Zelda, Ft_Kind_Seak, true },
-    /* CKIND_SEAK      */ { Ft_Kind_Seak, Ft_Kind_Zelda, true },
-    /* CKIND_FALCO     */ { Ft_Kind_Falco, 0xFF },
-    /* CKIND_CLINK     */ { Ft_Kind_CLink, 0xFF },
-    /* CKIND_DRMARIO   */ { Ft_Kind_DrMario, 0xFF },
-    /* CKIND_EMBLEM    */ { Ft_Kind_Emblem, 0xFF },
-    /* CKIND_PICHU     */ { Ft_Kind_Pichu, 0xFF },
-    /* CKIND_GANON     */ { Ft_Kind_Ganon, 0xFF },
-    /* CKIND_MASTERH   */ { Ft_Kind_MasterH, 0xFF },
-    /* CKIND_BOY       */ { Ft_Kind_Boy, 0xFF },
-    /* CKIND_GIRL      */ { Ft_Kind_Girl, 0xFF },
-    /* CKIND_GKOOPS    */ { Ft_Kind_GKoops, 0xFF },
-    /* CKIND_CREZYH    */ { Ft_Kind_CrezyH, 0xFF },
-    /* CHKIND_SANDBAG  */ { Ft_Kind_Sandbag, 0xFF },
-    /* CHKIND_POPO     */ { Ft_Kind_Popo, 0xFF }
+    /* CKind_Captain   */ { Ft_Kind_Captain, 0xFF },
+    /* CKind_Donkey    */ { Ft_Kind_Donkey, 0xFF },
+    /* CKind_Fox       */ { Ft_Kind_Fox, 0xFF },
+    /* CKind_GameWatch */ { Ft_Kind_GameWatch, 0xFF },
+    /* CKind_Kirby     */ { Ft_Kind_Kirby, 0xFF },
+    /* CKind_Koopa     */ { Ft_Kind_Koopa, 0xFF },
+    /* CKind_Link      */ { Ft_Kind_Link, 0xFF },
+    /* CKind_Luigi     */ { Ft_Kind_Luigi, 0xFF },
+    /* CKind_Mario     */ { Ft_Kind_Mario, 0xFF },
+    /* CKind_Mars      */ { Ft_Kind_Mars, 0xFF },
+    /* CKind_Mewtwo    */ { Ft_Kind_Mewtwo, 0xFF },
+    /* CKind_Ness      */ { Ft_Kind_Ness, 0xFF },
+    /* CKind_Peach     */ { Ft_Kind_Peach, 0xFF },
+    /* CKind_Pikachu   */ { Ft_Kind_Pikachu, 0xFF },
+    /* CKind_PopoNana  */ { Ft_Kind_Popo, Ft_Kind_Nana },
+    /* CKind_Purin     */ { Ft_Kind_Purin, 0xFF },
+    /* CKind_Samus     */ { Ft_Kind_Samus, 0xFF },
+    /* CKind_Yoshi     */ { Ft_Kind_Yoshi, 0xFF },
+    /* CKind_Zelda     */ { Ft_Kind_Zelda, Ft_Kind_Seak, true },
+    /* CKind_Seak      */ { Ft_Kind_Seak, Ft_Kind_Zelda, true },
+    /* CKind_Falco     */ { Ft_Kind_Falco, 0xFF },
+    /* CKind_CLink     */ { Ft_Kind_CLink, 0xFF },
+    /* CKind_DrMario   */ { Ft_Kind_DrMario, 0xFF },
+    /* CKind_Emblem    */ { Ft_Kind_Emblem, 0xFF },
+    /* CKind_Pichu     */ { Ft_Kind_Pichu, 0xFF },
+    /* CKind_Ganon     */ { Ft_Kind_Ganon, 0xFF },
+    /* CKind_MasterH   */ { Ft_Kind_MasterH, 0xFF },
+    /* CKind_Boy       */ { Ft_Kind_Boy, 0xFF },
+    /* CKind_Girl      */ { Ft_Kind_Girl, 0xFF },
+    /* CKind_GKoops    */ { Ft_Kind_GKoops, 0xFF },
+    /* CKind_CrezyH    */ { Ft_Kind_CrezyH, 0xFF },
+    /* ChKind_Sandbag  */ { Ft_Kind_Sandbag, 0xFF },
+    /* ChKind_Popo     */ { Ft_Kind_Popo, 0xFF }
 };
 
 ////.bss
@@ -1912,7 +1912,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player = &player_slots[slot];
 
     player->player_state = 0;
-    player->player_character = CKIND_MARIO;
+    player->player_character = CKind_Mario;
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 

@@ -124,7 +124,7 @@ static void gmTitle_801A1630(HSD_GObj* gobj)
 /// @todo similar to ::gm_801AA688
 static bool isEmblemUnlocked(void)
 {
-    if (gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM)) {
+    if (gm_IsCKindUnlocked(CKind_Mars) || gm_IsCKindUnlocked(CKind_Emblem)) {
         return true;
     }
     return false;

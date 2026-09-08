@@ -802,7 +802,7 @@ ASSERT_SIZE(struct UnkAdventureData, 0x80);
 struct UnkAllstarData {
     /*  +0 */ struct Unk1PData x0;
     /* +74*/ u16 x74;                      ///< current percent
-    /* +76*/ u8 x76[CKIND_PLAYABLE_COUNT]; ///< character id array
+    /* +76*/ u8 x76[CKind_Playable_Count]; ///< character id array
     /* +90*/ u8 x90[4];
     /* +94*/ u8 _94[2];
     /* +94*/ u8 x96[6];

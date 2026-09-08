@@ -369,8 +369,8 @@ GameModeState gm_Mode_AllStar_States[] = {
     },
 };
 
-/// @todo Should be length ::CKIND_PLAYABLE_COUNT
-static AllStarOpponent gm_803DEBE8[CKIND_PLAYABLE_COUNT - 1] = {
+/// @todo Should be length ::CKind_Playable_Count
+static AllStarOpponent gm_803DEBE8[CKind_Playable_Count - 1] = {
     { { 0xB1, 0xB1 }, 0, 8 },    { { 0xB2, 0xB2 }, 0, 1 },
     { { 0xB3, 0xB3 }, 0, 6 },    { { 0xB4, 0xB4 }, 0, 0x10 },
     { { 0xB5, 0xB5 }, 0, 0x11 }, { { 0xB6, 0xB6 }, 0, 4 },
@@ -391,7 +391,7 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
     { 10, 2 }, { 12, 3 }, { 15, 3 }, { 18, 3 }, { 21, 3 }, { 24, 1 },
 };
 
-static u8 gm_80490940[CKIND_PLAYABLE_COUNT - 1];
+static u8 gm_80490940[CKind_Playable_Count - 1];
 
 static inline void gm_801B5324_inline(s8* char_ids, AllStarOpponent* opp_data,
                                       s32 round)
@@ -399,7 +399,7 @@ static inline void gm_801B5324_inline(s8* char_ids, AllStarOpponent* opp_data,
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        char_ids[i] = CHKIND_NONE;
+        char_ids[i] = ChKind_None;
     }
     for (i = 0; i < gm_803DEC4C[round].count; i++) {
         char_ids[i] = opp_data[i].character;
@@ -437,12 +437,12 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 
     chars_ptr = chars;
     if (arg1 == 0xC) {
-        chars_ptr[0] = CKIND_GAMEWATCH;
+        chars_ptr[0] = CKind_GameWatch;
         colors[0] = 0;
         is_last_round = 1;
-        chars_ptr[1] = CKIND_GAMEWATCH;
+        chars_ptr[1] = CKind_GameWatch;
         colors[1] = 0;
-        chars_ptr[2] = CKIND_GAMEWATCH;
+        chars_ptr[2] = CKind_GameWatch;
         colors[2] = 0;
     }
 
@@ -457,7 +457,7 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
     lbDvd_80017700(4);
 
     for (i = 0; i < 3; i++) {
-        if (chars[i] != CHKIND_NONE) {
+        if (chars[i] != ChKind_None) {
             gc->entries[slot_idx].char_id = chars[i];
             if (is_last_round != 0) {
                 gc->entries[slot_idx].color = 0xFF;
@@ -491,7 +491,7 @@ static inline void gm_801B5624_inline(s8* char_ids, AllStarOpponent* opp_data,
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        char_ids[i] = CHKIND_NONE;
+        char_ids[i] = ChKind_None;
     }
     for (i = 0; i < gm_803DEC4C[round].count; i++) {
         char_ids[i] = opp_data[i].character;
@@ -557,7 +557,7 @@ void gm_801B5624(GameModeState* arg0)
         f31 = gm_8018A188(0xC, *cpu_level);
         opp_count = gm_8018A228(0xC, *cpu_level, 0);
 
-        gm_8016A22C(CKIND_GAMEWATCH, CHKIND_NONE, CHKIND_NONE, 0, 0, 0, 1, 0,
+        gm_8016A22C(CKind_GameWatch, ChKind_None, ChKind_None, 0, 0, 0, 1, 0,
                     0, (u8) data->players[0].ckind, data->players[0].color,
                     (s32) opp_count, 0x19, 5, 1, 0, 1, f31, f30);
 
@@ -621,9 +621,9 @@ void gm_801B5ACC(GameModeState* arg0)
     s32 i;
     PAD_STACK(7 * 4);
 
-    chars[0] = CHKIND_NONE;
-    chars[1] = CHKIND_NONE;
-    chars[2] = CHKIND_NONE;
+    chars[0] = ChKind_None;
+    chars[1] = ChKind_None;
+    chars[2] = ChKind_None;
     data = gm_GetGameModeStateEnterData(arg0);
     gm_80473A18.x0.x8 |= (1 << 7);
 
@@ -656,9 +656,9 @@ void gm_801B5ACC(GameModeState* arg0)
             s32 slot;
             UnkAllstarData* p;
             do {
-                slot = HSD_Randi(CKIND_PLAYABLE_COUNT);
+                slot = HSD_Randi(CKind_Playable_Count);
                 slot_ptr = (p = (UnkAllstarData*) ((u8*) allstar + slot))->x76;
-            } while ((s32) *slot_ptr != CHKIND_NONE);
+            } while ((s32) *slot_ptr != ChKind_None);
             *slot_ptr = gm_803DEBE8[i + ri->start].character;
         }
 
@@ -794,8 +794,8 @@ void gm_Mode_AllStar_OnLoad(void)
     data->x9C = 0;
     {
         int i;
-        for (i = 0; i < CKIND_PLAYABLE_COUNT; i++) {
-            gm_80473A18.x76[i] = CHKIND_NONE;
+        for (i = 0; i < CKind_Playable_Count; i++) {
+            gm_80473A18.x76[i] = ChKind_None;
         }
     }
 
@@ -815,7 +815,7 @@ void gm_Mode_AllStar_OnLoad(void)
 void gm_Mode_AllStar_OnInit(void)
 {
     struct gmm_x0_528_t* settings = gmMainLib_8015CDE0();
-    settings->c_kind = CHKIND_NONE;
+    settings->c_kind = ChKind_None;
     settings->color = 0;
     settings->stocks = 1;
     settings->cpu_level = 0;

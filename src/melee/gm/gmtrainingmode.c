@@ -282,7 +282,7 @@ void gm_Mode_Training_OnInit(void)
         temp_r31->start.players[i].color = i;
         temp_r31->start.players[i].cpu_kind = 0;
         if (i != 0) {
-            temp_r31->start.players[1].ckind = CHKIND_NONE;
+            temp_r31->start.players[1].ckind = ChKind_None;
         }
         gm_80473814.saved_players[i] = temp_r31->start.players[i];
     }

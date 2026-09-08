@@ -2355,10 +2355,10 @@ void fn_8018F888(void)
 
 static inline int fn_8018FA24_inline0(int char_kind)
 {
-    if (char_kind < CKIND_SEAK) {
+    if (char_kind < CKind_Seak) {
         return char_kind;
     }
-    if (char_kind == CKIND_GKOOPS) {
+    if (char_kind == CKind_GKoops) {
         return 5;
     }
     return char_kind + 1;
@@ -2651,11 +2651,11 @@ void fn_80190520(f32 x, f32 y, f32 z)
 
 static inline int gm_801905F0_inline0(int c_kind)
 {
-    if (c_kind < CKIND_SEAK) {
+    if (c_kind < CKind_Seak) {
         return c_kind;
     }
-    if (c_kind == CKIND_GKOOPS) {
-        return CKIND_KOOPA;
+    if (c_kind == CKind_GKoops) {
+        return CKind_Koopa;
     }
     return c_kind + 1;
 }

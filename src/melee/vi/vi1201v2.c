@@ -113,8 +113,8 @@ void un_803205F4(void)
     HSD_JObjReqAnimAll(jobj, 251.0f);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
 
-    Player_80036E20(CKIND_GKOOPS, un_804D701C, 8);
-    Player_SetPlayerCharacter(1, CKIND_GKOOPS);
+    Player_80036E20(CKind_GKoops, un_804D701C, 8);
+    Player_SetPlayerCharacter(1, CKind_GKoops);
     Player_SetCostumeId(1, 0);
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, 2);

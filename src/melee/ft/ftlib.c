@@ -964,7 +964,7 @@ void ftLib_80087610(u8 arg0)
     for (i = 0; i <= SELKIND_COUNT; i++) {
         if (gm_IsCKindUnlocked(i)) {
             ftKb_SpecialN_800EED50(Player_800325C8(i, 0), arg0);
-            if (i == CKIND_ZELDA || i == CKIND_SEAK) {
+            if (i == CKind_Zelda || i == CKind_Seak) {
                 ftKb_SpecialN_800EED50(Player_800325C8(i, 1), arg0);
             }
         }

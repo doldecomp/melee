@@ -193,24 +193,24 @@ void lbDvd_80017960(void)
     }
 
     for (i = 0; i < 8; i++) {
-        if (game_cache->entries[i].char_id != CHKIND_NONE) {
+        if (game_cache->entries[i].char_id != ChKind_None) {
             Player_80031CB0(game_cache->entries[i].char_id,
                             game_cache->entries[i].color);
         }
-        if (game_cache->entries[i].char_id == CKIND_KIRBY) {
+        if (game_cache->entries[i].char_id == CKind_Kirby) {
             if (game_cache->entries[i].x5 == 0) {
                 CharacterKind kind;
-                for (kind = 0; kind < CHKIND_MAX; kind++) {
+                for (kind = 0; kind < ChKind_Max; kind++) {
                     Player_80031D2C(kind, game_cache->entries[i].color);
                 }
             } else {
                 for (j = 0; j < 8; j++) {
-                    if (game_cache->entries[j].char_id != CHKIND_NONE) {
-                        if (game_cache->entries[j].char_id == CKIND_KIRBY &&
+                    if (game_cache->entries[j].char_id != ChKind_None) {
+                        if (game_cache->entries[j].char_id == CKind_Kirby &&
                             game_cache->entries[j].x5 == 0)
                         {
                             CharacterKind kind;
-                            for (kind = 0; kind < CHKIND_MAX; kind++) {
+                            for (kind = 0; kind < ChKind_Max; kind++) {
                                 Player_80031D2C(kind,
                                                 game_cache->entries[i].color);
                             }

@@ -819,8 +819,8 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->unk26C,
                 (HSD_MatAnimJoint**) hud->unk270,
                 (HSD_ShapeAnimJoint**) hud->unk274);
-    if (chara == CKIND_MASTERH || (u32) (chara - CKIND_GKOOPS) <= 1) {
-        chara = CKIND_BOY;
+    if (chara == CKind_MasterH || (u32) (chara - CKind_GKoops) <= 1) {
+        chara = CKind_Boy;
     }
     HSD_TObjReqAnimAll(tobj, 0.5f + gm_80168B34(chara, 0, 0));
     HSD_AObjSetRate(tobj->aobj, 0.1f);

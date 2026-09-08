@@ -156,109 +156,109 @@ static CSSIcon icons[25 + 1] = {
     // -------- Icons Top Row --------
 
     { // Dr. Mario -                      0x803F0B24
-      ICONHUD_DRMARIO, CKIND_DRMARIO, ICONSTATE_UNLOCKED, 0x00,
+      ICONHUD_DRMARIO, CKind_DrMario, ICONSTATE_UNLOCKED, 0x00,
       ICONJOINT_DRMARIO, ICONJOINT_DRMARIO, 0x000000C5, ICONBNDS_COL0_L,
       ICONBNDS_COL1_L, ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Mario -                          0x803F0B40
-      ICONHUD_MARIO, CKIND_MARIO, ICONSTATE_TEMP, 0x00, ICONJOINT_MARIO,
+      ICONHUD_MARIO, CKind_Mario, ICONSTATE_TEMP, 0x00, ICONJOINT_MARIO,
       ICONJOINT_MARIO, 0x000000CD, ICONBNDS_COL1_L, ICONBNDS_COL2_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Luigi -                          0x803F0B5C
-      ICONHUD_LUIGI, CKIND_LUIGI, ICONSTATE_TEMP, 0x00, ICONJOINT_LUIGI,
+      ICONHUD_LUIGI, CKind_Luigi, ICONSTATE_TEMP, 0x00, ICONJOINT_LUIGI,
       ICONJOINT_LUIGI, 0x000000CC, ICONBNDS_COL2_L, ICONBNDS_COL3_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Bowser -                         0x803F0B78
-      ICONHUD_KOOPA, CKIND_KOOPA, ICONSTATE_TEMP, 0x00, ICONJOINT_KOOPA,
+      ICONHUD_KOOPA, CKind_Koopa, ICONSTATE_TEMP, 0x00, ICONJOINT_KOOPA,
       ICONJOINT_KOOPA, 0x000000CA, ICONBNDS_COL3_L, ICONBNDS_COL4_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Peach -                          0x803F0B94
-      ICONHUD_PEACH, CKIND_PEACH, ICONSTATE_TEMP, 0x00, ICONJOINT_PEACH,
+      ICONHUD_PEACH, CKind_Peach, ICONSTATE_TEMP, 0x00, ICONJOINT_PEACH,
       ICONJOINT_PEACH, 0x000000D1, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Yoshi -                          0x803F0BB0
-      ICONHUD_YOSHI, CKIND_YOSHI, ICONSTATE_TEMP, 0x00, ICONJOINT_YOSHI,
+      ICONHUD_YOSHI, CKind_Yoshi, ICONSTATE_TEMP, 0x00, ICONJOINT_YOSHI,
       ICONJOINT_YOSHI, 0x000000D7, ICONBNDS_COL5_L, ICONBNDS_COL6_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // DK -                             0x803F0BCC
-      ICONHUD_DONKEY, CKIND_DONKEY, ICONSTATE_TEMP, 0x00, ICONJOINT_DONKEY,
+      ICONHUD_DONKEY, CKind_Donkey, ICONSTATE_TEMP, 0x00, ICONJOINT_DONKEY,
       ICONJOINT_DONKEY, 0x000000C4, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Captain Falcon -                 0x803F0BE8
-      ICONHUD_CAPTAIN, CKIND_CAPTAIN, ICONSTATE_TEMP, 0x00, ICONJOINT_CAPTAIN,
+      ICONHUD_CAPTAIN, CKind_Captain, ICONSTATE_TEMP, 0x00, ICONJOINT_CAPTAIN,
       ICONJOINT_CAPTAIN, 0x000000C2, ICONBNDS_COL7_L, ICONBNDS_COL8_L,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
     { // Ganondorf -                      0x803F0C04
-      ICONHUD_GANON, CKIND_GANON, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_GANON,
+      ICONHUD_GANON, CKind_Ganon, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_GANON,
       ICONJOINT_GANON, 0x000000D9, ICONBNDS_COL8_L, ICONBNDS_COL8_R,
       ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
 
     // -------- Icons Middle Row --------
 
     { // Falco -                          0x803F0C20
-      ICONHUD_FALCO, CKIND_FALCO, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_FALCO,
+      ICONHUD_FALCO, CKind_Falco, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_FALCO,
       ICONJOINT_FALCO, 0x000000C6, ICONBNDS_COL0_L, ICONBNDS_COL1_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Fox -                            0x803F0C3C
-      ICONHUD_FOX, CKIND_FOX, ICONSTATE_TEMP, 0x00, ICONJOINT_FOX,
+      ICONHUD_FOX, CKind_Fox, ICONSTATE_TEMP, 0x00, ICONJOINT_FOX,
       ICONJOINT_FOX, 0x000000C7, ICONBNDS_COL1_L, ICONBNDS_COL2_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Ness -                           0x803F0C58
-      ICONHUD_NESS, CKIND_NESS, ICONSTATE_TEMP, 0x00, ICONJOINT_NESS,
+      ICONHUD_NESS, CKind_Ness, ICONSTATE_TEMP, 0x00, ICONJOINT_NESS,
       ICONJOINT_NESS, 0x000000D0, ICONBNDS_COL2_L, ICONBNDS_COL3_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // ICs -                            0x803F0C74
-      ICONHUD_POPONANA, CKIND_POPONANA, ICONSTATE_TEMP, 0x00,
+      ICONHUD_POPONANA, CKind_PopoNana, ICONSTATE_TEMP, 0x00,
       ICONJOINT_POPONANA, ICONJOINT_POPONANA, 0x000000C8, ICONBNDS_COL3_L,
       ICONBNDS_COL4_L, ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Kirby -                          0x803F0C90
-      ICONHUD_KIRBY, CKIND_KIRBY, ICONSTATE_TEMP, 0x00, ICONJOINT_KIRBY,
+      ICONHUD_KIRBY, CKind_Kirby, ICONSTATE_TEMP, 0x00, ICONJOINT_KIRBY,
       ICONJOINT_KIRBY, 0x000000C9, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Samus -                          0x803F0CAC
-      ICONHUD_SAMUS, CKIND_SAMUS, ICONSTATE_TEMP, 0x00, ICONJOINT_SAMUS,
+      ICONHUD_SAMUS, CKind_Samus, ICONSTATE_TEMP, 0x00, ICONJOINT_SAMUS,
       ICONJOINT_SAMUS, 0x000000D5, ICONBNDS_COL5_L, ICONBNDS_COL6_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Zelda -                          0x803F0CC8
-      ICONHUD_ZELDA, CKIND_ZELDA, ICONSTATE_TEMP, 0x00, ICONJOINT_ZELDA,
+      ICONHUD_ZELDA, CKind_Zelda, ICONSTATE_TEMP, 0x00, ICONJOINT_ZELDA,
       ICONJOINT_ZELDA, 0x000000D6, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Link -                           0x803F0CE4
-      ICONHUD_LINK, CKIND_LINK, ICONSTATE_TEMP, 0x00, ICONJOINT_LINK,
+      ICONHUD_LINK, CKind_Link, ICONSTATE_TEMP, 0x00, ICONJOINT_LINK,
       ICONJOINT_LINK, 0x000000CB, ICONBNDS_COL7_L, ICONBNDS_COL8_L,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
     { // Young Link -                     0x803F0D00
-      ICONHUD_CLINK, CKIND_CLINK, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_CLINK,
+      ICONHUD_CLINK, CKind_CLink, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_CLINK,
       ICONJOINT_CLINK, 0x000000C3, ICONBNDS_COL8_L, ICONBNDS_COL8_R,
       ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
 
     // -------- Icons Bottom Row --------
 
     { // Pichu -                          0x803F0D1C
-      ICONHUD_PICHU, CKIND_PICHU, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_PICHU,
+      ICONHUD_PICHU, CKind_Pichu, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_PICHU,
       ICONJOINT_PICHU, 0x000000D2, -23.4, ICONBNDS_COL2_L, ICONROWHT_BTM_TOP,
       ICONROWHT_BTM_BTM },
     { // Pikachu -                        0x803F0D38
-      ICONHUD_PIKACHU, CKIND_PIKACHU, ICONSTATE_TEMP, 0x00, ICONJOINT_PIKACHU,
+      ICONHUD_PIKACHU, CKind_Pikachu, ICONSTATE_TEMP, 0x00, ICONJOINT_PIKACHU,
       ICONJOINT_PIKACHU, 0x000000D3, ICONBNDS_COL2_L, ICONBNDS_COL3_L,
       ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
     { // Jigglypuff -                     0x803F0D54
-      ICONHUD_PURIN, CKIND_PURIN, ICONSTATE_TEMP, 0x00, ICONJOINT_PURIN,
+      ICONHUD_PURIN, CKind_Purin, ICONSTATE_TEMP, 0x00, ICONJOINT_PURIN,
       ICONJOINT_PURIN, 0x000000D4, ICONBNDS_COL3_L, ICONBNDS_COL4_L,
       ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
     { // Mewtwo -                         0x803F0D70
-      ICONHUD_MEWTWO, CKIND_MEWTWO, ICONSTATE_TEMP, 0x00, ICONJOINT_MEWTWO,
+      ICONHUD_MEWTWO, CKind_Mewtwo, ICONSTATE_TEMP, 0x00, ICONJOINT_MEWTWO,
       ICONJOINT_MEWTWO, 0x000000CF, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
       ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
     { // Mr. Game & Watch -               0x803F0D8C
-      ICONHUD_GAMEWATCH, CKIND_GAMEWATCH, ICONSTATE_TEMP, 0x00,
+      ICONHUD_GAMEWATCH, CKind_GameWatch, ICONSTATE_TEMP, 0x00,
       ICONJOINT_GAMEWATCH, ICONJOINT_GAMEWATCH, 0x000000D8, ICONBNDS_COL5_L,
       ICONBNDS_COL6_L, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
     { // Marth -                          0x803F0DA8
-      ICONHUD_MARS, CKIND_MARS, ICONSTATE_TEMP, 0x00, ICONJOINT_MARS,
+      ICONHUD_MARS, CKind_Mars, ICONSTATE_TEMP, 0x00, ICONJOINT_MARS,
       ICONJOINT_MARS, 0x000000CE, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
       ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
     { // Roy -                            0x803F0DC4
-      ICONHUD_EMBLEM, CKIND_EMBLEM, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_EMBLEM,
+      ICONHUD_EMBLEM, CKind_Emblem, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_EMBLEM,
       ICONJOINT_EMBLEM, 0x000000DA, ICONBNDS_COL7_L, 23.6, ICONROWHT_BTM_TOP,
       ICONROWHT_BTM_BTM }
 };
@@ -2112,7 +2112,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     css = mnCharSel_804D6CB0;
     c_kind = css->vs.start.players[player].ckind;
 
-    if (c_kind < CKIND_PLAYABLE_COUNT) {
+    if (c_kind < CKind_Playable_Count) {
         if (c_kind !=
             all_data->icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
         {
@@ -2595,7 +2595,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     }
                                     mnCharSel_804D6CB0->vs.start
                                         .players[player_idx]
-                                        .ckind = CHKIND_NONE;
+                                        .ckind = ChKind_None;
                                 }
                             }
                             mnCharSel_8025DB34(door);
@@ -4349,7 +4349,7 @@ s32 mnCharSel_802640A0(void)
     HSD_ForeachAnim(mnCharSel_804D6CC0, JOBJ_TYPE, ALL_TYPE_MASK,
                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
 
-    if (gm_IsCKindUnlocked(CKIND_LUIGI) == 0) {
+    if (gm_IsCKindUnlocked(CKind_Luigi) == 0) {
         row_a = 2;
         row_b = 0x13;
     } else {
@@ -4445,7 +4445,7 @@ s32 mnCharSel_802640A0(void)
         HSD_ForeachAnim(mnCharSel_804D6CC4, JOBJ_TYPE, ALL_TYPE_MASK,
                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
         ck = mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1].ckind;
-        if ((s8) ck >= CKIND_PLAYABLE_COUNT || gm_IsCKindUnlocked(ck) == 0) {
+        if ((s8) ck >= CKind_Playable_Count || gm_IsCKindUnlocked(ck) == 0) {
             u8* char_kinds;
             s32 icon_off;
             do {
@@ -4546,7 +4546,7 @@ s32 mnCharSel_802640A0(void)
                 if (found >= 0x19) {
                     u8* slot_type;
                     mnCharSel_804D6CB0->vs.start.players[player].ckind =
-                        CKIND_PLAYABLE_COUNT;
+                        CKind_Playable_Count;
                     slot_type = &mnCharSel_804D6CB0->vs.start.players[player]
                                      .slot_type;
                     if (*slot_type == 1) {
@@ -5378,7 +5378,7 @@ void mnCharSel_Scene_OnFrame(void)
                     mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF0]
                         .color;
             } else {
-                cache->entries[0].char_id = CHKIND_NONE;
+                cache->entries[0].char_id = ChKind_None;
             }
             slot_type =
                 mnCharSel_804D6CB0->vs.start.players[mnCharSel_804D6CF1]
@@ -5393,7 +5393,7 @@ void mnCharSel_Scene_OnFrame(void)
                                                   .players[mnCharSel_804D6CF1]
                                                   .color;
                 } else {
-                    cache->entries[1].char_id = CHKIND_NONE;
+                    cache->entries[1].char_id = ChKind_None;
                 }
             }
         } else {
@@ -5413,7 +5413,7 @@ void mnCharSel_Scene_OnFrame(void)
                     cache->entries[i].color =
                         mnCharSel_804D6CB0->vs.start.players[i].color;
                 } else {
-                    cache->entries[i].char_id = CHKIND_NONE;
+                    cache->entries[i].char_id = ChKind_None;
                 }
             }
         }

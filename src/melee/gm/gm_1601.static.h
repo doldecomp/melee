@@ -70,16 +70,16 @@ static const u8 lbl_803B7844[] = {
     { 0x4D, 0x66, 0x4D, 0xFF },
 };
 /* 3B7888 */ static const u8 selkind_to_ckind_map[0x1C] = {
-    CKIND_CAPTAIN, CKIND_DONKEY,  CKIND_FOX,      CKIND_GAMEWATCH,
-    CKIND_KIRBY,   CKIND_KOOPA,   CKIND_LINK,     CKIND_LUIGI,
-    CKIND_MARIO,   CKIND_MARS,    CKIND_MEWTWO,   CKIND_NESS,
-    CKIND_PEACH,   CKIND_PIKACHU, CKIND_POPONANA, CKIND_PURIN,
-    CKIND_SAMUS,   CKIND_YOSHI,   CKIND_ZELDA,    CKIND_FALCO,
-    CKIND_CLINK,   CKIND_DRMARIO, CKIND_EMBLEM,   CKIND_PICHU,
-    CKIND_GANON,
+    CKind_Captain, CKind_Donkey,  CKind_Fox,      CKind_GameWatch,
+    CKind_Kirby,   CKind_Koopa,   CKind_Link,     CKind_Luigi,
+    CKind_Mario,   CKind_Mars,    CKind_Mewtwo,   CKind_Ness,
+    CKind_Peach,   CKind_Pikachu, CKind_PopoNana, CKind_Purin,
+    CKind_Samus,   CKind_Yoshi,   CKind_Zelda,    CKind_Falco,
+    CKind_CLink,   CKind_DrMario, CKind_Emblem,   CKind_Pichu,
+    CKind_Ganon,
 };
 
-/* 3B78A4 */ static const u8 ckind_to_selkind_map[CHKIND_MAX] = {
+/* 3B78A4 */ static const u8 ckind_to_selkind_map[ChKind_Max] = {
     /* 00 */ SELKIND_CAPTAIN,
     /* 01 */ SELKIND_DONKEY,
     /* 02 */ SELKIND_FOX,
