@@ -1,11 +1,10 @@
 #include "ftmasterhandwalk.h"
 
-#include <Runtime/platform.h>
+#include <placeholder.h>
 
 #include "forward.h"
 #include "ftmasterhandslap.h"
 #include "ftmasterhandwait12.h"
-#include "placeholder.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_084E.h>
