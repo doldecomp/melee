@@ -100,27 +100,27 @@ typedef enum {
 } CpuKind;
 
 struct PlayerInitData {
-    /*0x00*/ s8 ckind;     ///< ::CharacterKind
-    /*0x01*/ u8 slot_type; ///< ::Gm_PKind
-    /*0x02*/ s8 stocks;    // stocks
-    /*0x03*/ u8 color;     // color
-    /*0x04*/ u8 slot;      // port
-    /*0x05*/ s8 x5;        // spawnpos32
-    /*0x06*/ s8 spawn_dir; // spawn direction
-    /*0x07*/ u8 sub_color; // subcolor
-    /*0x08*/ s8 handicap;  // handicap
-    /*0x09*/ u8 team;      // team
-    /*0x0A*/ u8 nametag;   // nametag
-    /*0x0B*/ u8 xB;
-    /*0x0C*/ u8 rumble_enabled : 1; ///< rumble enabled
+    s8 ckind;     ///< ::CharacterKind
+    u8 slot_type; ///< ::Gm_PKind
+    s8 stocks;
+    u8 color;
+    u8 slot;
+    s8 spawn_pos;
+    s8 spawn_dir;
+    u8 sub_color;
+    s8 handicap;
+    u8 team;
+    u8 nametag;
+    u8 xB; ///< ::enum_t
+    u8 rumble_enabled : 1;
     u8 xC_b1 : 1;
-    u8 xC_b2 : 1; ///< metal
+    u8 vs_metal : 1;
     u8 xC_b3 : 1;
     u8 vs_invisible : 1;
     u8 xC_b5 : 1;
     u8 xC_b6 : 1;
     u8 xC_b7 : 1;
-    /*0x0D*/ u8 xD_b0 : 1;
+    u8 xD_b0 : 1;
     u8 xD_b1 : 1;
     u8 xD_b2 : 1;
     u8 xD_b3 : 1;
@@ -128,14 +128,14 @@ struct PlayerInitData {
     u8 xD_b5 : 1;
     u8 xD_b6 : 1;
     u8 xD_b7 : 1;
-    /*0x0E*/ u8 cpu_kind;  ///< CPU type
-    /*0x0F*/ u8 cpu_level; ///< CPU level
-    /*0x10*/ u16 x10;      ///< some damage value
-    /*0x12*/ u16 x12;      ///< some damage value
-    /*0x14*/ u16 hp;       ///< hit points, for stamina mode
-    /*0x18*/ float attack_ratio;
-    /*0x1C*/ float defense_ratio;
-    /*0x20*/ float model_scale;
+    u8 cpu_kind;  ///< CPU type
+    u8 cpu_level; ///< CPU level
+    u16 damage;   ///< some damage value
+    u16 damage1;  ///< some damage value
+    u16 hp;       ///< hit points, for stamina mode
+    float attack_ratio;
+    float defense_ratio;
+    float model_scale;
 };
 
 struct lbl_8046B668_t {

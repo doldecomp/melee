@@ -41,7 +41,7 @@ static inline const char* fn_8017BB94_inline(int arg0, int target)
 
     if (arg0 == target) {
         var_r3 = -1;
-    } else if (temp_r3_2->player_standings[target].slot_type != Gm_PKind_NA) {
+    } else if (temp_r3_2->player_standings[target].pkind != Gm_PKind_NA) {
         var_r3 = fn_8017AD04(temp_r3_2->player_standings[arg0].kills[target],
                              999999);
     } else {

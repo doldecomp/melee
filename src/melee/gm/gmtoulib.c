@@ -2757,7 +2757,7 @@ void gm_801905F0(StartMeleeData* arg0)
             }
             arg0->players[i].cpu_kind = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
-            arg0->players[i].x12 = 0;
+            arg0->players[i].damage1 = 0;
             if (gmMainLib_GetGameRules()->handicap != 0) {
                 arg0->players[i].attack_ratio = fn_8016419C(tm->x4B8[i].x5);
                 arg0->players[i].defense_ratio = fn_801641B4(tm->x4B8[i].x5);

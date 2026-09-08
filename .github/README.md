@@ -1,8 +1,6 @@
 Super Smash Bros Melee \
 [![Build Status]][actions]
 [![Discord Badge]][discord]
-[![Fuzzy Progress]][progress]
-[![Perfect Progress]][progress]
 [![Linked Progress]][progress]
 =============
 
@@ -13,8 +11,6 @@ Super Smash Bros Melee \
 [progress]: https://decomp.dev/doldecomp/melee
 
 [Build Status]: https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg
-[Fuzzy Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=fuzzy_match_percent&label=fuzzy&category=all
-[Perfect Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=code&label=perfect&category=all
 [Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=linked&category=all
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 

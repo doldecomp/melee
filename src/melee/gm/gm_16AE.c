@@ -1583,7 +1583,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         tmp->FighterMatchInfo[arg0].x4_b4 = true;
     }
 
-    tmp->FighterMatchInfo[arg0].spawn_point = arg1->x5;
+    tmp->FighterMatchInfo[arg0].spawn_point = arg1->spawn_pos;
 
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
@@ -1596,13 +1596,13 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     }
     Player_SetPlayerAndEntityCpuType(arg0, arg1->cpu_kind);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->cpu_level);
-    if (arg1->x10 != 0) {
-        Player_SetHUDDamage(arg0, arg1->x10);
+    if (arg1->damage != 0) {
+        Player_SetHUDDamage(arg0, arg1->damage);
     } else {
-        Player_SetHUDDamage(arg0, arg1->x12);
+        Player_SetHUDDamage(arg0, arg1->damage1);
     }
 
-    tmp->FighterMatchInfo[arg0].x6 = arg1->x12;
+    tmp->FighterMatchInfo[arg0].x6 = arg1->damage1;
 
     if (arg1->xC_b7) {
         Player_SetMoreFlagsBit2(arg0, 1);
@@ -1620,8 +1620,8 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     }
 
     tmp->FighterMatchInfo[arg0].x4_b1 = arg1->xC_b3;
-    tmp->FighterMatchInfo[arg0].x4_b0 = arg1->xC_b2;
-    if (arg1->xC_b2) {
+    tmp->FighterMatchInfo[arg0].x4_b0 = arg1->vs_metal;
+    if (arg1->vs_metal) {
         Player_SetFlagsBit5(arg0, true);
     } else {
         Player_SetFlagsBit5(arg0, false);

@@ -42,7 +42,7 @@ void gmVsMelee_UpdateKOCounts(u8* ko_counts, MatchEnd* end)
 {
     ssize_t i;
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (end->player_standings[i].slot_type == Gm_PKind_Human) {
+        if (end->player_standings[i].pkind == Gm_PKind_Human) {
             ko_counts[i] =
                 lbTime_8000AF74(ko_counts[i], end->player_standings[i].x20);
         }
@@ -53,7 +53,7 @@ bool gmVsMelee_WasAnyPlayerHuman(MatchEnd* end)
 {
     ssize_t i;
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (end->player_standings[i].slot_type == Gm_PKind_Human) {
+        if (end->player_standings[i].pkind == Gm_PKind_Human) {
             return true;
         }
     }
@@ -82,7 +82,7 @@ u8 findSmallestLoser(MatchEnd* end)
     }
 
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (end->player_standings[i].slot_type == Gm_PKind_Human &&
+        if (end->player_standings[i].pkind == Gm_PKind_Human &&
             losers[i] < loser)
         {
             loser = losers[i];
@@ -212,7 +212,7 @@ void gmVsMelee_ExitVs(GameModeState* state, u8 id0, u8 id1)
     ssize_t i;
 
     for (i = 0; i < GM_MAX_PLAYERS; i++) {
-        if (exit->match_end.player_standings[i].slot_type == Gm_PKind_Human) {
+        if (exit->match_end.player_standings[i].pkind == Gm_PKind_Human) {
             gm_80162574(exit->match_end.player_standings[i].ckind,
                         exit->match_end.outcome);
         }
