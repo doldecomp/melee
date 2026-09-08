@@ -115,7 +115,7 @@
 /* 030DF8 */ void Camera_80030DF8(void);
 /* 030E10 */ float Camera_80030E10(void);
 /* 030E34 */ void Camera_80030E34(f32);
-/* 030E44 */ void Camera_80030E44(enum_t, Vec*);
+/* 030E44 */ void Camera_80030E44(QuakeKind, Vec*);
 /* 031044 */ void Camera_80031044(s32);
 /* 031060 */ enum_t Camera_80031060(void);
 /* 031074 */ void Camera_80031074(u8);

@@ -54,4 +54,12 @@ typedef enum CmSubjectState {
                                    ///< Arwing, etc)
 } CmSubjectState;
 
+typedef enum CmQuakeKind {
+    /* 0x0 */ QuakeKind_None,
+    /* 0x1 */ QuakeKind_Small = 1,
+    /* 0x2 */ QuakeKind_Medium = 2,
+    /* 0x3 */ QuakeKind_Large = 3,
+    /* 0x4 */ QuakeKind_Loop = 4
+} QuakeKind;
+
 #endif

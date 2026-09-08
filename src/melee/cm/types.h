@@ -64,8 +64,8 @@ struct Camera_x2D0 {
 };
 
 struct CameraQuake {
-    /* 0x0 */ Vec3 x0;
-    /* 0xC */ int type;
+    /* 0x0 */ Vec3 epicenter;
+    /* 0xC */ QuakeKind kind;
 };
 
 struct CameraDebugMode {
@@ -93,8 +93,8 @@ struct Camera {
         transform_copy; // this runs the same tween logic, but isnt used for
                         // anything?
     /* 0x084 */ Vec2 translation;
-    /* 0x08C */ s32 _8C[5]; /* maybe part of translation[4]? */
-    /* 0x0A0 */ HSD_GObj* xA0;
+    /* 0x08C */ s32 quake_frames_left[5];
+    /* 0x0A0 */ HSD_GObj* quake_gobj;
     /* 0x0A4 */ f32 xA4;
     /* 0x0A8 */ f32 xA8;
     /* 0x0AC */ f32 xAC; /* inferred */

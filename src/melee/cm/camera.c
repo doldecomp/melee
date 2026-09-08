@@ -187,7 +187,7 @@ void Camera_Init(int n_subjects)
     game_camera.nearz = 0.1f;
     game_camera.farz = 16384.0f;
     game_camera.mode = CAMERA_STANDARD;
-    memzero(game_camera._8C, 0x224);
+    memzero(game_camera.quake_frames_left, 0x224);
     game_camera.xAC = 1.0f;
     game_camera.x2BC = 1.0f;
     game_camera.x2C0 = -1.0f;
@@ -982,21 +982,21 @@ void Camera_8002A28C(CameraBounds* arg0)
     for (i = 0; i < 2; ++i) {
         for (j = 0; j < 8; ++j) {
             game_camera._1B0[i][j] = game_camera._B0[i][j];
-            game_camera._B0[i][j].type = 0;
+            game_camera._B0[i][j].kind = 0;
         }
     }
 
     for (i = 0; i < 5; ++i) {
-        if (game_camera._8C[i] != 0) {
-            game_camera._8C[i] -= 1;
+        if (game_camera.quake_frames_left[i] != 0) {
+            game_camera.quake_frames_left[i] -= 1;
             test = i;
         }
     }
 
-    if ((test != -1) && (game_camera.xA0 != NULL) && (game_camera._8C[1] == 0))
+    if ((test != -1) && (game_camera.quake_gobj != NULL) && (game_camera.quake_frames_left[1] == 0))
     {
-        HSD_GObjPLink_80390228(game_camera.xA0);
-        game_camera.xA0 = 0;
+        HSD_GObjPLink_80390228(game_camera.quake_gobj);
+        game_camera.quake_gobj = 0;
     }
 }
 
@@ -4398,46 +4398,48 @@ void Camera_80030E34(f32 arg8)
     game_camera.xAC = arg8;
 }
 
-void Camera_80030E44(enum_t arg0, Vec3* arg1)
+void Camera_80030E44(QuakeKind kind, Vec3* pos)
 {
-    HSD_GObj** pgobj;
+    HSD_GObj** pquake;
     s32 result;
 
-    switch (arg0) {
-    case 1:
-        pgobj = &game_camera.xA0;
-        if (game_camera.xA0 == NULL) {
-            *pgobj = grLib_801C9CEC(arg0);
+    switch (kind) {
+    case QuakeKind_Small:
+        pquake = &game_camera.quake_gobj;
+        if (game_camera.quake_gobj == NULL) {
+            *pquake = grLib_801C9CEC(kind);
         }
         result = 10;
         break;
-    case 2:
-        grLib_801C9CEC(arg0);
+    case QuakeKind_Medium:
+        grLib_801C9CEC(kind);
         result = 22;
         break;
-    case 3:
-        grLib_801C9CEC(arg0);
+    case QuakeKind_Large:
+        grLib_801C9CEC(kind);
         result = 22;
         break;
-    case 4:
-        grLib_801C9CEC(arg0);
+    case QuakeKind_Loop:
+        grLib_801C9CEC(kind);
         result = 22;
+        break;
+    default:
         break;
     }
 
-    game_camera._8C[arg0] = result;
+    game_camera.quake_frames_left[kind] = result;
 
     {
         s32 i;
         for (i = 0; i < 16; i++) {
-            if (game_camera._B0[0][i].type == 0) {
-                game_camera._B0[0][i].type = arg0;
-                if (arg1 != NULL) {
-                    game_camera._B0[0][i].x0 = *arg1;
+            if (game_camera._B0[0][i].kind == 0) {
+                game_camera._B0[0][i].kind = kind;
+                if (pos != NULL) {
+                    game_camera._B0[0][i].epicenter = *pos;
                 } else {
-                    game_camera._B0[0][i].x0.z = 0.0f;
-                    game_camera._B0[0][i].x0.y = 0.0f;
-                    game_camera._B0[0][i].x0.x = 0.0f;
+                    game_camera._B0[0][i].epicenter.z = 0.0f;
+                    game_camera._B0[0][i].epicenter.y = 0.0f;
+                    game_camera._B0[0][i].epicenter.x = 0.0f;
                 }
             }
         }
@@ -4446,7 +4448,7 @@ void Camera_80030E44(enum_t arg0, Vec3* arg1)
 
 void Camera_80031044(s32 arg0)
 {
-    game_camera._8C[arg0] = 0;
+    game_camera.quake_frames_left[arg0] = 0;
 }
 
 enum_t Camera_80031060(void)
