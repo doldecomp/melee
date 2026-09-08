@@ -93,7 +93,7 @@ struct Camera {
         transform_copy; // this runs the same tween logic, but isnt used for
                         // anything?
     /* 0x084 */ Vec2 translation;
-    /* 0x08C */ s32 quake_frames_left[5];
+    /* 0x08C */ s32 quake_frames_left[QuakeKind_Count];
     /* 0x0A0 */ HSD_GObj* quake_gobj;
     /* 0x0A4 */ Vec2
         quake_offset; ///< offset from the quake model, before scaling
