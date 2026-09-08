@@ -199,7 +199,7 @@ void fn_801874FC(void)
 #endif
 void fn_80187714(void)
 {
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(64);

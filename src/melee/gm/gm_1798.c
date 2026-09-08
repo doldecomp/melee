@@ -599,7 +599,7 @@ void fn_8017AA78(const u8* arg0)
 
     memzero(lbl_8046E1B0.pad_000, sizeof(lbl_8046E1B0.pad_000));
     lbBgFlash_800208EC(6);
-    Camera_80028B9C(8);
+    Camera_Init(8);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

@@ -173,7 +173,7 @@ static inline void un_8031FD18_SetupScene(void)
         lb_80011E24(jobj, &un_804D6FF0, 3, -1);
     }
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

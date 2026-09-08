@@ -62,7 +62,7 @@ void un_8031F294(s32 arg0, s32 arg1)
     VecMtxPtr pmtx;
     PAD_STACK(16);
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

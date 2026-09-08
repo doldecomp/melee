@@ -10,7 +10,7 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 
-/* 028B9C */ void Camera_80028B9C(int);
+/* 028B9C */ void Camera_Init(int);
 /* 028F5C */ void Camera_80028F5C(CmSubject*, CmSubjectState);
 /* 029020 */ CmSubject* Camera_80029020(void);
 /* 029044 */ CmSubject* Camera_80029044(int);
@@ -85,7 +85,7 @@
 /* 030178 */ bool Camera_80030178(void);
 /* 03019C */ Vec3* Camera_8003019C(void);
 /* 0304E0 */ void Camera_800304E0(HSD_GObj*);
-/* 030688 */ void Camera_80030688(void);
+/* 030688 */ void Camera_Create(void);
 /* 030730 */ void Camera_80030730(f32);
 /* 030740 */ void Camera_SetBackgroundColor(u8, u8, u8);
 /* 030758 */ GXColor Camera_GetBackgroundColor(void);

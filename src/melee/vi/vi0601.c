@@ -160,7 +160,7 @@ void vi0601_Scene_OnEnter(UNUSED void* enter_data)
     HSD_CObjAnim(cobj);
     HSD_GObj_SetupProc(gobj, vi0601_RunFrame, 0);
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
