@@ -365,9 +365,6 @@ static inline void ftFox_SpecialN_FinishEndTransition(Fighter* fp)
     it_802ADDD0(blaster_gobj, 1);
 }
 
-/// 0x800E6368
-/// https://decomp.me/scratch/J7zwX // Fox & Falco's grounded Blaster Loop
-/// Animation callback
 void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
