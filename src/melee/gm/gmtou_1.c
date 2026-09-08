@@ -875,7 +875,6 @@ void fn_80197D4C(HSD_GObj* gobj)
     }
 }
 
-/// @todo Currently 69.71% match - needs register allocation fix
 /// Updates player HUD element visibility and position.
 void fn_80197E18(HSD_GObj* gobj)
 {
@@ -911,7 +910,6 @@ void fn_80197E18(HSD_GObj* gobj)
     fn_8018FDC4(jobj, x_pos, 666.0f, 666.0f);
 }
 
-/// @todo Currently 70.24% match - needs register allocation fix
 /// Updates JObj visibility based on menu option and player state.
 void fn_80197FD8(HSD_GObj* gobj)
 {
@@ -1209,8 +1207,6 @@ void fn_80198BA0(void)
 #pragma pop
 #endif
 
-/// @todo Currently 99.63% match - permuter couldn't improve (instruction
-/// scheduling)
 /// Initializes tournament mode text displays.
 #ifdef MUST_MATCH
 #pragma push
@@ -2210,7 +2206,6 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-/// @todo Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
 void gm_Scene_TouBracket_OnFrame(void)
 {

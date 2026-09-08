@@ -169,10 +169,10 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
     GXColor sp168;
     u8 _padA[84];
     HSD_TECnst spFC;
-    u8 _padB[80];
-    GXColor unused;
+    u8 _padB[84];
     HSD_TECnst sp90;
     HSD_TevDesc sp1C;
+    GXColor color;
     bool chk1;
     s32 var_r0;
     s32 reg1;
@@ -202,7 +202,6 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
             GXColor* color_hex = &overlay->x2C_hex;
             s32 temp_r8;
             s32 temp_r7;
-            s32 temp_r4;
 
             temp_alpha =
                 ((0xFF - item_color->a) * (0xFF - color_hex->a)) / 255;
@@ -213,8 +212,7 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
                 temp_r8 = item_color->r;
                 temp_r8 += (color_hex->a * (color_hex->r - temp_r8)) / 255;
                 temp_r7 = temp_r8 * 0xFF;
-                temp_r4 = temp_r7 / inv_alpha;
-                sp168.r = temp_r4;
+                sp168.r = temp_r7 / inv_alpha;
                 if (sp168.r != 0) {
                     sp168.a = temp_r7 / sp168.r;
                 } else {
@@ -283,15 +281,10 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
             spFC.next = NULL;
         }
         spFC.reg = reg2;
-        {
-            GXColor* color = (GXColor*) ((u8*) &sp1C - 4);
-            u8 alpha = sp168.a;
-
-            color->r = alpha;
-            color->g = alpha;
-            color->b = alpha;
-            spFC.val = color;
-        }
+        color.r = sp168.a;
+        color.g = sp168.a;
+        color.b = sp168.a;
+        spFC.val = &color;
         HSD_TExpSetReg((HSD_TExp*) &spFC);
         sp1C = info->tevdesc_tmpl;
         sp1C.stage = HSD_StateAssignTev();

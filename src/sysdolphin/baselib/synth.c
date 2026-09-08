@@ -461,8 +461,6 @@ void HSD_SynthSFXStopNode(struct HSD_SynthSFXNode* node)
     }
 }
 
-/// @todo Currently ~90% match - second loop uses pointer arithmetic instead of
-/// indexed store (stwx). Stack frame is 8 bytes too large.
 void dropcallback(void* dropped)
 {
     AXVPB* voice = dropped;

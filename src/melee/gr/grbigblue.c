@@ -2202,8 +2202,6 @@ bool grBigBlue_801EAB50(Vec3* pos, s32 flag, f32 rangeX, f32 rangeY)
     return result;
 }
 
-/// @todo Currently 98.17% match - car section generates fnmsubs instead of
-/// fmuls+fsubs; compiler fuses multiply-subtract differently than target
 s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
                        f32 half_range_x, f32 half_range_y)
 {
@@ -3500,7 +3498,6 @@ typedef union grBigBlue_CarPhysics {
     } data;
 } grBigBlue_CarPhysics;
 
-/// @todo Currently partial match - complex car physics simulation
 #ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
@@ -4423,7 +4420,6 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 #pragma pop
 #endif
 
-/// @todo Currently 99.88% match - instructions match but relocations differ
 void grBigBlue_801EF424(Ground_GObj* gobj)
 {
     u8* car_j;
