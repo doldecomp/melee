@@ -135,8 +135,7 @@ static void ftCh_Init_80156310(HSD_GObj* gobj)
 
 static inline void doAnim0(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
         fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
@@ -153,8 +152,7 @@ static inline void doAnim0(HSD_GObj* gobj)
 
 static inline void doAnim1(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     if (fp->u.mh.x2258 == 0x185) {
         ftCh_Init_801560D8(gobj);
@@ -167,8 +165,9 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCh_Init_803D4878_t* data = &ftCh_Init_803D4878;
-    u8 _[4];
     s32 slot_type = Player_GetPlayerSlotType(fp->player_id);
+    PAD_STACK(4);
+
     if (fp->cmd_vars[1] != 0) {
         ftBossLib_8015C5F8(gobj);
         fp->cmd_vars[1] = 0;
@@ -186,8 +185,7 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
         if (--fp->u.mh.x223C < 0) {
             ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
             Vec3 vec;
-
-            u8 __[20];
+            PAD_STACK(4);
 
             ftBossLib_8015BD24(fp->cpu.level, &fp->u.mh.x223C, fp->u.ch.x2238,
                                da->x0, da->x8, da->x4);
