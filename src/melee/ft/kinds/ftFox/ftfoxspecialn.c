@@ -55,9 +55,6 @@ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     ftFox_SpecialN_GetHoldJoint(gobj, pos, 0.013600001111626625f);
 }
 
-/// 0x800E5D90
-/// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster
-/// OnMotionStateChange function
 void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
     PAD_STACK(8);
@@ -66,9 +63,6 @@ void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
     ft_80089824(gobj);
 }
 
-/// 0x800E5DC4
-/// https://decomp.me/scratch/A0n4M // Check if Fox/Falco has a Blaster GOBj
-/// pointer
 bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->u.fx.x222C_blasterGObj == NULL) {
@@ -77,9 +71,6 @@ bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
     return false;
 }
 
-/// 0x800E5DE4 - shoutouts to Olifre for figuring this one out!
-/// https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that
-/// require the Blaster item
 s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
 {
     s32 msid = 9;
@@ -108,9 +99,6 @@ s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
     return msid;
 }
 
-/// 0x800E5E38
-/// https://decomp.me/scratch/f6oIX // Check if Fox/Falco is performing a move
-/// that requires the Blaster item
 bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -142,8 +130,6 @@ static inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
     fp->death2_cb = NULL;
 }
 
-/// 0x800E5E90
-/// https://decomp.me/scratch/4v8j4 // Clear Blaster GObj pointer and callbacks
 void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -154,8 +140,6 @@ void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
     ftFox_SpecialN_SetNULL(gobj);
 }
 
-/// 0x800E5EBC
-/// https://decomp.me/scratch/WglAb // Remove Blaster item
 void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -207,8 +191,6 @@ static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
     }
 }
 
-/// 0x800E5F28
-/// https://decomp.me/scratch/iPgDc // Create Blaster Shot Item
 void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 {
     Vec3 sp2C;
@@ -270,9 +252,6 @@ static inline void ftFox_SpecialN_InitializeState(HSD_GObj* gobj, Fighter* fp)
     ftAnim_8006EBA4(gobj);
 }
 
-/// 0x800E608C
-/// https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action
-/// State handler
 void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -292,10 +271,7 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
     ftFox_SpecialN_SpawnBlaster(gobj, fp, da, 305);
 }
 
-/// 0x800E61A8
-/// https://decomp.me/scratch/TUDhU
-void ftFx_SpecialAirN_Enter(
-    HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
+void ftFx_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = fp->dat_attrs;
@@ -332,9 +308,6 @@ static inline void ftFox_SpecialN_StartAnimation(HSD_GObj* gobj,
     }
 }
 
-/// 0x800E62A4
-/// https://decomp.me/scratch/ZOB3l // Fox & Falco's grounded Blaster Start
-/// Animation callback
 void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     ftFox_SpecialN_StartAnimation(gobj, ftFx_MS_SpecialNLoop);
@@ -428,9 +401,6 @@ static inline bool ftFox_SpecialN_UpdateEndAnimation(HSD_GObj* gobj,
     return ftAnim_IsFramesRemaining(gobj);
 }
 
-/// 0x800E65BC
-/// https://decomp.me/scratch/aIEIA // Fox & Falco's grounded Blaster End
-/// Animation callback
 void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -441,17 +411,11 @@ void ftFx_SpecialNEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E667C
-/// https://decomp.me/scratch/Os6Ik // Fox & Falco's aerial Blaster Start
-/// Animation callback
 void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     ftFox_SpecialN_StartAnimation(gobj, ftFx_MS_SpecialAirNLoop);
 }
 
-/// 0x800E6740
-/// https://decomp.me/scratch/FyW7c // Fox & Falco's aerial Blaster Loop
-/// Animation callback
 void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -495,9 +459,6 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E69BC
-/// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End
-/// Animation callback
 void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -513,125 +474,96 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     }
 }
 
-/// 0x800E6AB4
-/// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Start
-/// IASA callback
 void ftFx_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
-/// 0x800E6ADC
-/// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Loop IASA
-/// callback
 void ftFx_SpecialNLoop_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
-/// 0x800E6B04 - Fox & Falco's grounded Blaster End IASA callback
 void ftFx_SpecialNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E6B08
-/// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Start IASA
-/// callback
 void ftFx_SpecialAirNStart_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
-/// 0x800E6B30
-/// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Loop IASA
-/// callback
 void ftFx_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 {
     ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
-/// 0x800E6B58 - Fox & Falco's aerial Blaster End IASA callback
 void ftFx_SpecialAirNEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-/// 0x800E6B5C - Fox & Falco's grounded Blaster Start Physics callback
 void ftFx_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-/// 0x800E6B7C - Fox & Falco's grounded Blaster Loop Physics callback
 void ftFx_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-/// 0x800E6B9C - Fox & Falco's grounded Blaster End Physics callback
 void ftFx_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-/// 0x800E6BBC - Fox & Falco's aerial Blaster Start Physics callback
 void ftFx_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-/// 0x800E6BDC - Fox & Falco's aerial Blaster Loop Physics callback
 void ftFx_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-/// 0x800E6BFC - Fox & Falco's aerial Blaster End Physics callback
 void ftFx_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-/// 0x800E6C1C - Fox & Falco's grounded Blaster Start Collision callback
 void ftFx_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
-/// 0x800E6C3C - Fox & Falco's grounded Blaster Loop Collision callback
 void ftFx_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
-/// 0x800E6C1C - Fox & Falco's grounded Blaster End Collision callback
 void ftFx_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     ft_80083F88(gobj);
 }
 
-/// 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback
 void ftFx_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
-/// 0x800E6C9C - Fox & Falco's aerial Blaster Loop Collision callback
 void ftFx_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
-/// 0x800E6CBC - Fox & Falco's aerial Blaster End Collision callback
 void ftFx_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
     ftCo_AirCatchHit_Coll(gobj);
 }
 
-/// 0x800E6CDC
-/// https://decomp.me/scratch/G1jsj // Fox & Falco's Throw Animation callback -
-/// spawn Blaster
 void ftFx_Throw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
