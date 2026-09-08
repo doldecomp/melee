@@ -104,7 +104,7 @@ s32 fn_80174284(u8 slot)
     PAD_STACK(8);
 
     count = 0;
-    if (lbl_8046DBE8.x94->player_standings[slot].slot_type == Gm_PKind_Human) {
+    if (lbl_8046DBE8.x94->player_standings[slot].pkind == Gm_PKind_Human) {
         do_call = true;
     } else {
         do_call = false;
@@ -652,8 +652,7 @@ GXColor fn_8017507C(s32 slot)
     GXColor color;
 
     if (lbl_8046DBE8.x94->is_teams == 1) {
-        if (lbl_8046DBE8.x94->player_standings[slot].slot_type == Gm_PKind_NA)
-        {
+        if (lbl_8046DBE8.x94->player_standings[slot].pkind == Gm_PKind_NA) {
             color = gm_80160968(4);
         } else {
             switch (lbl_8046DBE8.x94->player_standings[slot].team) {
@@ -738,7 +737,7 @@ void fn_80175240(s32 slot)
         ko_count->pos_z = pos_z;
         lbl_8046DBE8.player_data[slot].ko_count->default_alignment = 1;
         lbl_8046DBE8.player_data[slot].ko_count->default_kerning = 1;
-        if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
+        if (me->player_standings[slot].pkind != Gm_PKind_NA) {
             first_value = fn_8017AE0C(slot);
             if (first_value > 0x3E7) {
                 first_value = 0x3E7;
@@ -826,7 +825,7 @@ void fn_8017556C(s32 slot)
     if (me && me) {
     }
     sp10 = fn_8017507C(slot);
-    if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
+    if (me->player_standings[slot].pkind != Gm_PKind_NA) {
         var_r6 = fn_8017AD28(me->player_standings[slot].score);
         if (var_r6 < 0) {
             if (var_r6 < 0) {
@@ -873,7 +872,7 @@ void fn_801756E0(s32 slot)
     if (me && me) {
     }
     sp10 = fn_8017507C(slot);
-    if (me->player_standings[slot].slot_type == Gm_PKind_NA) {
+    if (me->player_standings[slot].pkind == Gm_PKind_NA) {
         goto grey_out;
     }
     if (me->outcome == OUTCOME_NO_CONTEST || me->outcome == OUTCOME_RETRY) {
@@ -930,7 +929,7 @@ void fn_80175880(s32 slot)
 
     me = lbl_8046DBE8.x94;
     color = fn_8017507C(slot);
-    if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
+    if (me->player_standings[slot].pkind != Gm_PKind_NA) {
         if (lbl_8046DBE8.x6 == slot ||
             (me->is_teams == 1 &&
              me->team_standings[me->player_standings[slot].team]
@@ -1017,7 +1016,7 @@ void fn_80175A94(s32 slot, Vec3* position)
         PAD_STACK(4);
         me = fn_80175A94_get_match_end();
         sp14 = fn_8017507C(player);
-        if (me->player_standings[player].slot_type != 3) {
+        if (me->player_standings[player].pkind != 3) {
             slot = HSD_SisLib_803A6B98(new_var->player_data[player].ko_time,
                                        0.0F, -30.0F, "%d",
                                        fn_8017AD78(fn_8017ADA8(player)));
@@ -1569,7 +1568,7 @@ void fn_80176D3C(Vec3* positions)
 
     i = 0;
     do {
-        if (me_iter->player_standings[0].slot_type == Gm_PKind_NA) {
+        if (me_iter->player_standings[0].pkind == Gm_PKind_NA) {
             goto loop_end;
         }
 
@@ -1642,7 +1641,7 @@ void fn_80176F60(void)
     aobj = data->x20->u.dobj->mobj->aobj;
     tmp = gm_80160854(data->x6, Player_GetTeam(data->x6),
                       temp_r30->is_teams == 1,
-                      temp_r30->player_standings[data->x4].slot_type);
+                      temp_r30->player_standings[data->x4].pkind);
     new_var = aobj;
     HSD_AObjSetCurrentFrame(new_var, 1.0F + tmp);
     HSD_AObjSetRate(aobj, 0.0F);
@@ -1683,12 +1682,12 @@ void fn_801771C0(ResultsData* data)
 
     if (me->is_teams == 1) {
         for (i = 0; i < 4; i++) {
-            if (me->player_standings[i].slot_type != Gm_PKind_NA &&
+            if (me->player_standings[i].pkind != Gm_PKind_NA &&
                 me->player_standings[i].team == data->x5)
             {
                 result = i;
                 for (j = 0; j < 4; j++) {
-                    if (me->player_standings[j].slot_type != Gm_PKind_NA &&
+                    if (me->player_standings[j].pkind != Gm_PKind_NA &&
                         me->player_standings[j].team == data->x5 && i != j &&
                         me->player_standings[i].is_small_loser >
                             me->player_standings[j].is_small_loser)
@@ -1788,7 +1787,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
         }
     }
     fn_801771C0(&lbl_8046DBE8);
-    if (match_end->player_standings[data->x6].slot_type == Gm_PKind_Human) {
+    if (match_end->player_standings[data->x6].pkind == Gm_PKind_Human) {
         if (!gm_WasMatchCanceled(match_end->outcome) &&
             match_end->player_standings[data->x6].x3_6)
         {
@@ -1825,7 +1824,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     me_iter = match_end;
     data_iter = data;
     for (i = 0; i < 4; i++) {
-        if (me_iter->player_standings[0].slot_type != Gm_PKind_NA) {
+        if (me_iter->player_standings[0].pkind != Gm_PKind_NA) {
             fn_8017A9B4(i);
             data_iter->player_data[0].fighter_gobj =
                 fn_8017A67C(me_iter->player_standings[0].ckind,

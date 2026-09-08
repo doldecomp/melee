@@ -636,7 +636,7 @@ struct MatchTeamData {
 ASSERT_SIZE(struct MatchTeamData, 0xC);
 
 struct MatchPlayerData {
-    u8 slot_type;
+    u8 pkind;  ///< ::Gm_PKind
     s8 ckind;  ///< ::CharacterKind
     s8 ftkind; ///< ::FighterKind
     u8 x3 : 6;
@@ -766,12 +766,12 @@ struct Unk1PData {
         /* 20 */ u32 x20;
         struct Unk1PData_x24 {
             /* 24 */ s8 ckind;
-            /* 25 */ u8 x1;
-            /* 26 */ u8 x2;
-            /* 27 */ u8 x3;
-            /* 28 */ f32 x4;
-            /* 2C */ f32 x8;
-        } x24[3]; ///< @todo ::gmPlayerData?
+            /* 25 */ u8 color;
+            /* 26 */ u8 cpu_level;
+            /* 27 */ u8 cpu_kind;
+            /* 28 */ float attack_ratio;
+            /* 2C */ float defense_ratio;
+        } x24[3];
     } xC;
     /* 48 */ u8 (*x48)(u8, u8);
     /* 4C */ u8 (*x4C)(u8, u8, u8);

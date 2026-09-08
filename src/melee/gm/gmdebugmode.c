@@ -435,7 +435,7 @@ void onEnterResults1(GameModeState* arg0)
                 un_803FA258[0x59] - 1);
 
     for (i = 0; i < 4; i++) {
-        if (match_end->player_standings[i].slot_type != 3 &&
+        if (match_end->player_standings[i].pkind != 3 &&
             match_end->player_standings[i].is_big_loser == 0)
         {
             sfx_result |=

@@ -1037,7 +1037,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         arg0->players[i].sub_color = sp->x48[i];
         arg0->players[i].team = sp->x58[i];
         arg0->players[i].rumble_enabled = sp->xDC[i];
-        arg0->players[i].x12 = sp->x68[i];
+        arg0->players[i].damage1 = sp->x68[i];
         arg0->players[i].attack_ratio = sp->x78[i];
         arg0->players[i].defense_ratio = sp->x88[i];
         arg0->players[i].cpu_kind = sp->xA8[i];
