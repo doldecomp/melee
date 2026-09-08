@@ -57,8 +57,8 @@ bool ftCo_800C3B10(Fighter_GObj* gobj)
     if (fp->used_tether) {
         return false;
     }
-    if (fp->kind != FTKIND_LINK && fp->kind != FTKIND_CLINK &&
-        fp->kind != FTKIND_SAMUS)
+    if (fp->kind != Ft_Kind_Link && fp->kind != Ft_Kind_CLink &&
+        fp->kind != Ft_Kind_Samus)
     {
         return false;
     }
@@ -88,10 +88,10 @@ void ftCo_800C3BE8(Fighter_GObj* gobj)
         fp->mv.co.aircatch.x0 = 0;
         fp->x74_anim_vel = anim_vel;
 
-        if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+        if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_AirCatch, Ft_MF_None, 0, 1,
                                       0, NULL);
-        } else if (fp->kind == FTKIND_SAMUS) {
+        } else if (fp->kind == Ft_Kind_Samus) {
             Fighter_ChangeMotionState(gobj, ftSs_MS_AirCatch, Ft_MF_None, 0, 1,
                                       0, NULL);
         }
@@ -103,7 +103,7 @@ void ftCo_800C3CC0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 drift;
-    if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+    if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_AirCatchHit,
                                   Ft_MF_KeepFastFall, 0, 1, 0, NULL);
     } else {
@@ -123,7 +123,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+    if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
         ftLk_DatAttrs* da = fp->dat_attrs;
         fp->mv.co.aircatch.x0 += 1.0;
         if (fp->mv.co.aircatch.x0 == da->xA4) {
@@ -155,7 +155,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                     {
                         float var_f3;
 
-                        if (fp->kind == FTKIND_LINK) {
+                        if (fp->kind == Ft_Kind_Link) {
                             var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
                                      jobj->mtx[0][3];
                         } else {
@@ -175,14 +175,14 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                     pos.x *= fp->facing_dir;
                     pos.x += fp->pos_delta.x;
                     it_802A78B8(tether_gobj, &pos);
-                    if (fp->kind == FTKIND_CLINK) {
+                    if (fp->kind == Ft_Kind_CLink) {
                         ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                     } else {
                         ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 == da->xAC) {
                     it_802A77DC(tether_gobj);
-                    if (fp->kind == FTKIND_CLINK) {
+                    if (fp->kind == Ft_Kind_CLink) {
                         ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                     } else {
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
@@ -192,7 +192,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                 }
             }
         }
-    } else if (fp->kind == FTKIND_SAMUS) {
+    } else if (fp->kind == Ft_Kind_Samus) {
         ftSs_DatAttrs* da = fp->dat_attrs;
         PAD_STACK(3 * 4);
         fp->mv.co.aircatch.x0 += 1.0;

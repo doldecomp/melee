@@ -47,7 +47,7 @@ bool ftLib_IsMasterHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_GetKind(cur) == FTKIND_MASTERH) {
+        if (ftLib_GetKind(cur) == Ft_Kind_MasterH) {
             return true;
         }
     }
@@ -61,7 +61,7 @@ bool ftLib_IsCrazyHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_GetKind(cur) == FTKIND_CREZYH) {
+        if (ftLib_GetKind(cur) == Ft_Kind_CrezyH) {
             return true;
         }
     }
@@ -1000,7 +1000,7 @@ s32 ftLib_80087700(HSD_GObj* gobj)
 
 void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A7F4(gobj, dst);
     } else {
         ftKb_Init_800EEB00(gobj, dst);
@@ -1009,7 +1009,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 
 void ftLib_80087744(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A814(gobj, dst);
     } else {
         ftKb_Init_800EEB1C(gobj, dst);

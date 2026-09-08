@@ -1234,7 +1234,7 @@ bool ft_80084A18(Fighter_GObj* gobj)
 
 float ft_GetGroundFrictionMultiplier(Fighter* fp)
 {
-    if (fp->kind == FTKIND_POPO || fp->kind == FTKIND_NANA) {
+    if (fp->kind == Ft_Kind_Popo || fp->kind == Ft_Kind_Nana) {
         return 1.0F;
     }
     return mpColl_8004CA6C(&fp->coll_data);

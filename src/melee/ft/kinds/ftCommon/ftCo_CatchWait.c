@@ -47,15 +47,15 @@ void ftCo_CatchWait_IASA(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fn_800DA4C0(gobj)) {
-        if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+        if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
             it_802A7AAC(gobj);
-        } else if (fp->kind == FTKIND_SAMUS) {
+        } else if (fp->kind == Ft_Kind_Samus) {
             it_802BAC3C(gobj);
         }
     } else if (ftCo_800DD1E4(gobj)) {
-        if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+        if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
             it_802A7AAC(gobj);
-        } else if (fp->kind == FTKIND_SAMUS) {
+        } else if (fp->kind == Ft_Kind_Samus) {
             it_802BAC3C(gobj);
         }
     }

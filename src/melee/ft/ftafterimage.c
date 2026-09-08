@@ -40,32 +40,32 @@ static inline itSword_UnkBytes* ftCo_800C2600_get_params(Fighter* fp)
         }
     } else {
         switch (fp->kind) {
-        case FTKIND_SEAK:
-        case FTKIND_NESS:
-        case FTKIND_PEACH:
-        case FTKIND_POPO:
-        case FTKIND_NANA:
-        case FTKIND_PIKACHU:
-        case FTKIND_SAMUS:
-        case FTKIND_YOSHI:
-        case FTKIND_PURIN:
-        case FTKIND_MEWTWO:
-        case FTKIND_LUIGI:
-        case FTKIND_ZELDA:
-        case FTKIND_DRMARIO:
-        case FTKIND_FALCO:
-        case FTKIND_PICHU:
-        case FTKIND_GAMEWATCH:
-        case FTKIND_GANON:
+        case Ft_Kind_Seak:
+        case Ft_Kind_Ness:
+        case Ft_Kind_Peach:
+        case Ft_Kind_Popo:
+        case Ft_Kind_Nana:
+        case Ft_Kind_Pikachu:
+        case Ft_Kind_Samus:
+        case Ft_Kind_Yoshi:
+        case Ft_Kind_Purin:
+        case Ft_Kind_Mewtwo:
+        case Ft_Kind_Luigi:
+        case Ft_Kind_Zelda:
+        case Ft_Kind_DrMario:
+        case Ft_Kind_Falco:
+        case Ft_Kind_Pichu:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Ganon:
             break;
-        case FTKIND_LINK:
-        case FTKIND_CLINK: {
+        case Ft_Kind_Link:
+        case Ft_Kind_CLink: {
             ftLk_DatAttrs* da = fp->dat_attrs;
             params = (itSword_UnkBytes*) &da->x64;
             break;
         }
-        case FTKIND_MARS:
-        case FTKIND_EMBLEM: {
+        case Ft_Kind_Mars:
+        case Ft_Kind_Emblem: {
             MarsAttributes* da = fp->dat_attrs;
             params = (itSword_UnkBytes*) &da->x78;
             break;
@@ -406,33 +406,33 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
         jobj = it_80285314(fp->item_gobj);
     } else {
         switch (fp->kind) {
-        case FTKIND_SEAK:
-        case FTKIND_NESS:
-        case FTKIND_PEACH:
-        case FTKIND_POPO:
-        case FTKIND_NANA:
-        case FTKIND_PIKACHU:
-        case FTKIND_SAMUS:
-        case FTKIND_YOSHI:
-        case FTKIND_PURIN:
-        case FTKIND_MEWTWO:
-        case FTKIND_LUIGI:
-        case FTKIND_ZELDA:
-        case FTKIND_DRMARIO:
-        case FTKIND_FALCO:
-        case FTKIND_PICHU:
-        case FTKIND_GAMEWATCH:
-        case FTKIND_GANON:
+        case Ft_Kind_Seak:
+        case Ft_Kind_Ness:
+        case Ft_Kind_Peach:
+        case Ft_Kind_Popo:
+        case Ft_Kind_Nana:
+        case Ft_Kind_Pikachu:
+        case Ft_Kind_Samus:
+        case Ft_Kind_Yoshi:
+        case Ft_Kind_Purin:
+        case Ft_Kind_Mewtwo:
+        case Ft_Kind_Luigi:
+        case Ft_Kind_Zelda:
+        case Ft_Kind_DrMario:
+        case Ft_Kind_Falco:
+        case Ft_Kind_Pichu:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Ganon:
             /// @bug Undefined behavior if the fighter doesn't have a sword!
             break;
-        case FTKIND_LINK:
-        case FTKIND_CLINK: {
+        case Ft_Kind_Link:
+        case Ft_Kind_CLink: {
             ftLk_DatAttrs* da = fp->dat_attrs;
             attrs = &da->x64;
             break;
         }
-        case FTKIND_MARS:
-        case FTKIND_EMBLEM: {
+        case Ft_Kind_Mars:
+        case Ft_Kind_Emblem: {
             MarsAttributes* da = fp->dat_attrs;
             attrs = &da->x78;
             break;

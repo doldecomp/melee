@@ -1036,7 +1036,7 @@ void ftAnim_80070308(Fighter_GObj* fighter_gobj)
 extern struct {
     HSD_GObjEvent x0;
     void (*x4)(Fighter_GObj*, int, float frame);
-} ftData_UnkCallbackPairs0[FTKIND_MAX];
+} ftData_UnkCallbackPairs0[Ft_Kind_Max];
 
 static inline void tobjAnim(HSD_TObj** temp_r30, f32 frame)
 {

@@ -265,7 +265,7 @@ void fn_8017C71C(void)
     tmp->x8 = 0;
     tmp->xC = ftBossLib_8015C530(gm_8017E068());
     Player_SetOtherStamina(2, tmp->xC);
-    ftLib_80087508(FTKIND_CREZYH, 0);
+    ftLib_80087508(Ft_Kind_CrezyH, 0);
 }
 
 void fn_8017C7A0(void)
@@ -303,18 +303,18 @@ void gm_8017C838(void)
     temp_r30 = gm_GetAdventureData();
     temp_r3 = gmVs_GetController_0();
     var_r31 = sp10;
-    sp10[0] = FTKIND_NONE;
-    sp10[1] = FTKIND_NONE;
-    sp10[2] = FTKIND_NONE;
+    sp10[0] = Ft_Kind_None;
+    sp10[1] = Ft_Kind_None;
+    sp10[2] = Ft_Kind_None;
     switch (temp_r3->start.stkind) {
     case 0x3B:
-        sp10[0] = FTKIND_YOSHI;
+        sp10[0] = Ft_Kind_Yoshi;
         break;
     case 0x3F:
-        sp10[0] = FTKIND_LINK;
+        sp10[0] = Ft_Kind_Link;
         break;
     case 0x44:
-        sp10[0] = FTKIND_KIRBY;
+        sp10[0] = Ft_Kind_Kirby;
         if (temp_r30->x0.x0.ckind == CKIND_KIRBY && temp_r30->x0.x0.color == 0)
         {
             var_r3 = 1;
@@ -326,24 +326,24 @@ void gm_8017C838(void)
     case 0x48:
         sp10[0] = 0xC;
         if (gm_IsCKindUnlocked(CKIND_PICHU) != 0) {
-            sp10[1] = FTKIND_PICHU;
+            sp10[1] = Ft_Kind_Pichu;
         }
         if (gm_IsCKindUnlocked(CKIND_PURIN) != 0) {
-            sp10[2] = FTKIND_PURIN;
+            sp10[2] = Ft_Kind_Purin;
         }
         break;
     case 0x4C:
-        sp10[0] = FTKIND_POPO;
-        sp10[1] = FTKIND_NANA;
+        sp10[0] = Ft_Kind_Popo;
+        sp10[1] = Ft_Kind_Nana;
         break;
     case 0x4E:
-        sp10[0] = FTKIND_BOY;
-        sp10[1] = FTKIND_GIRL;
+        sp10[0] = Ft_Kind_Boy;
+        sp10[1] = Ft_Kind_Girl;
         break;
     }
 
     for (i = 0; i < 3; i++) {
-        if (*var_r31 != FTKIND_MAX) {
+        if (*var_r31 != Ft_Kind_Max) {
             ftLib_80087574(*var_r31);
         }
         var_r31++;

@@ -135,9 +135,9 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
     s32 msid = ftKb_MS_KpSpecialNStart;
     PAD_STACK(8);
     switch ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind) {
-    case FTKIND_KOOPA:
+    case Ft_Kind_Koopa:
         break;
-    case FTKIND_GKOOPS:
+    case Ft_Kind_GKoops:
         msid = ftKb_MS_GkSpecialNStart;
         break;
     }
@@ -159,9 +159,9 @@ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
     int new_var;
     s32 msid = ftKb_MS_KpSpecialAirNStart;
     switch ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind) {
-    case FTKIND_KOOPA:
+    case Ft_Kind_Koopa:
         break;
-    case FTKIND_GKOOPS:
+    case Ft_Kind_GKoops:
         msid = ftKb_MS_GkSpecialAirNStart;
         break;
     }
@@ -185,10 +185,10 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftKirby_MotionState msid = ftKb_MS_KpSpecialN;
         switch (fp->u.kb.hat.kind) {
-        case FTKIND_GKOOPS:
+        case Ft_Kind_GKoops:
             msid = ftKb_MS_GkSpecialN;
             break;
-        case FTKIND_KOOPA:
+        case Ft_Kind_Koopa:
         default:
             break;
         }
@@ -236,10 +236,10 @@ void ftKb_KpSpecialAirNStart_Anim(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftKirby_MotionState msid = ftKb_MS_KpSpecialAirN;
         switch (fp->u.kb.hat.kind) {
-        case FTKIND_GKOOPS:
+        case Ft_Kind_GKoops:
             msid = ftKb_MS_GkSpecialAirN;
             break;
-        case FTKIND_KOOPA:
+        case Ft_Kind_Koopa:
         default:
             break;
         }
@@ -301,9 +301,9 @@ void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
         } else {
             s32 msid = ftKb_MS_KpSpecialNEnd;
             switch ((s32) fp->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialNEnd;
                 break;
             }
@@ -355,9 +355,9 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
         } else {
             s32 msid = ftKb_MS_KpSpecialAirNEnd;
             switch ((s32) fp->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialAirNEnd;
                 break;
             }
@@ -427,9 +427,9 @@ void ftKb_KpSpecialNStart_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialAirNStart;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialAirNStart;
                 break;
             default:
@@ -450,9 +450,9 @@ void ftKb_KpSpecialN_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialAirN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialAirN;
                 break;
             default:
@@ -473,9 +473,9 @@ void ftKb_KpSpecialNEnd_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialAirNEnd;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialAirNEnd;
                 break;
             default:
@@ -496,9 +496,9 @@ void ftKb_KpSpecialAirNStart_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialN;
                 break;
             default:
@@ -519,9 +519,9 @@ void ftKb_KpSpecialAirN_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialN;
                 break;
             default:
@@ -542,9 +542,9 @@ void ftKb_KpSpecialAirNEnd_Coll(Fighter_GObj* gobj)
             s32 msid = ftKb_MS_KpSpecialNEnd;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_KOOPA:
+            case Ft_Kind_Koopa:
                 break;
-            case FTKIND_GKOOPS:
+            case Ft_Kind_GKoops:
                 msid = ftKb_MS_GkSpecialNEnd;
                 break;
             default:

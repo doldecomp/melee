@@ -181,7 +181,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.specialhi.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec);
@@ -191,7 +191,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             float tempf;
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
@@ -220,7 +220,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.specialhi.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec);
@@ -230,7 +230,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             float tempf;
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,

@@ -30,7 +30,7 @@ void fn_800DB5D8(Fighter_GObj* gobj)
     ftHurtboxInit sp18;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim_fp = GET_FIGHTER(fp->victim_gobj);
-    if (victim_fp->kind == FTKIND_YOSHI) {
+    if (victim_fp->kind == Ft_Kind_Yoshi) {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
         ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
@@ -58,16 +58,16 @@ void fn_800DB6C8(Fighter_GObj* gobj)
     }
 
     switch (victim_fp->kind) {
-    case FTKIND_YOSHI:
+    case Ft_Kind_Yoshi:
         ftCo_800DB368(victim_fp, fp);
         break;
-    case FTKIND_LINK:
-    case FTKIND_CLINK:
+    case Ft_Kind_Link:
+    case Ft_Kind_CLink:
         if (victim_fp->u.lk.xC != NULL) {
             it_802A7840((HSD_GObj*) victim_fp->u.lk.xC);
         }
         break;
-    case FTKIND_SAMUS:
+    case Ft_Kind_Samus:
         if (victim_fp->u.ss.x223C != NULL) {
             it_802BAA94(victim_fp->u.ss.x223C);
         }
@@ -89,7 +89,7 @@ void fn_800DB790(Fighter_GObj* gobj)
                               NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
-            ->kind == FTKIND_YOSHI)
+            ->kind == Ft_Kind_Yoshi)
     {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
@@ -187,7 +187,7 @@ void fn_800DBAE4(Fighter_GObj* gobj)
                               NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
-            ->kind == FTKIND_YOSHI)
+            ->kind == Ft_Kind_Yoshi)
     {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
@@ -224,7 +224,7 @@ static void fn_800DBBF8(Fighter_GObj* gobj)
                               fp_before->cur_anim_frame, 1.0F, 0.0F, NULL);
 
     if ((victim_fp = GET_FIGHTER((fp = GET_FIGHTER(gobj))->victim_gobj))
-            ->kind == FTKIND_YOSHI)
+            ->kind == Ft_Kind_Yoshi)
     {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;

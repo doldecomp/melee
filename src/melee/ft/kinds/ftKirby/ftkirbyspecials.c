@@ -198,7 +198,7 @@ void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
 
 void ftKb_SpecialN_800F5874(Vec2* arg0)
 {
-    ftCommonData* cd = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftCommonData* cd = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     arg0->x = cd->x9C_radians;
     arg0->y = cd->xA0_radians;
 }

@@ -70,7 +70,7 @@ bool fn_800D2818(Fighter* fp)
 void fn_800D2890(Fighter_GObj* gobj, int ms_id)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == FTKIND_PEACH && ms_id == 0x172) {
+    if (fp->kind == Ft_Kind_Peach && ms_id == 0x172) {
         fp->mv.co.unk_800D2890.x0 = ftCo_800968C8;
         return;
     }

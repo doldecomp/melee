@@ -67,7 +67,7 @@ void callUnk(HSD_GObj* gobj)
 void decideFighter(HSD_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_AttackLw3_Enter(gobj);
         return;
     default:

@@ -89,7 +89,7 @@ static void onPkPc21EC(Fighter_GObj* gobj)
 static void decideAttack11(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_Attack11_Enter(gobj);
         return;
     default:
@@ -101,8 +101,8 @@ static void decideAttack11(Fighter_GObj* gobj)
 static MotionFlags getMotionFlags(Fighter* fp)
 {
     switch (fp->kind) {
-    case FTKIND_PICHU:
-    case FTKIND_PIKACHU:
+    case Ft_Kind_Pichu:
+    case Ft_Kind_Pikachu:
         fp->x21EC = onPkPc21EC;
         return Ft_MF_SkipAttackCount;
     default:
@@ -172,7 +172,7 @@ static void doAttack12Rapid(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_Attack11_Enter(gobj);
         return;
     default:
@@ -198,8 +198,8 @@ static void doAttack12Normal(Fighter_GObj* gobj)
 static void doAttack12(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
-    case FTKIND_PIKACHU:
-    case FTKIND_PICHU:
+    case Ft_Kind_Pikachu:
+    case Ft_Kind_Pichu:
         doAttack12Rapid(gobj);
         return;
     default:
@@ -259,7 +259,7 @@ static void doAttack13(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
-    case FTKIND_MARS:
+    case Ft_Kind_Mars:
         doAttack12Rapid(gobj);
         return;
     default:

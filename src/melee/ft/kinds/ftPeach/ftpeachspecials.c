@@ -81,15 +81,15 @@ static void doAirEnd0(HSD_GObj* gobj)
         Fighter* other_fp = GET_FIGHTER(fp->unk_gobj);
         if (other_fp != NULL) {
             switch (other_fp->kind) {
-            case FTKIND_MARS:
-            case FTKIND_EMBLEM: {
+            case Ft_Kind_Mars:
+            case Ft_Kind_Emblem: {
                 FtMotionId msid = other_fp->motion_id;
                 if (msid != 369 && msid != 371) {
                     return;
                 }
                 break;
             }
-            case FTKIND_PEACH: {
+            case Ft_Kind_Peach: {
                 FtMotionId msid = other_fp->motion_id;
                 if (msid != 365 && msid != 367) {
                     return;

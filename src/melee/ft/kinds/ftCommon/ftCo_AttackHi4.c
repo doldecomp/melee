@@ -41,7 +41,7 @@ bool ftCo_AttackHi4_CheckInput(Fighter_GObj* gobj)
             return true;
         }
         switch (fp->kind) {
-        case FTKIND_NESS:
+        case Ft_Kind_Ness:
             ftNs_AttackHi4_Enter(gobj);
             break;
         default:
@@ -74,7 +74,7 @@ bool ftCo_AttackHi4_CheckInputNoD0(HSD_GObj* gobj)
             return true;
         }
         switch (fp->kind) {
-        case FTKIND_NESS:
+        case Ft_Kind_Ness:
             ftNs_AttackHi4_Enter(gobj);
             break;
         default:

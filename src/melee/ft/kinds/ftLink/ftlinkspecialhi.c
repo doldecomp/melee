@@ -28,7 +28,7 @@ static void onAccessory4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj0 = fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint;
     HSD_JObj* jobj1;
-    if (fp->kind == FTKIND_LINK) {
+    if (fp->kind == Ft_Kind_Link) {
         jobj1 = fp->parts[FtPart_L2ndNa].joint;
     } else {
         jobj1 = fp->parts[FtPart_L3rdNa].joint;

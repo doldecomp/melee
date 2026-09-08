@@ -40,7 +40,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
     UNUSED u32 unused3;
     UNUSED u32 unused4;
 
-    if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+    if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
         grav = fp->mv.ca.specials.grav;
@@ -66,7 +66,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                     jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)]
                                .joint;
                     HSD_JObjSetupMatrix(jobj);
-                    if (fp->kind == FTKIND_LINK) {
+                    if (fp->kind == Ft_Kind_Link) {
                         var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
                                  jobj->mtx[0][3];
                     } else {
@@ -86,14 +86,14 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                     vel.y = 0.0f;
                     vel.z = 0.0f;
                     it_802A78B8((HSD_GObj*) item, &vel);
-                    if (fp->kind == FTKIND_CLINK) {
+                    if (fp->kind == Ft_Kind_CLink) {
                         ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                     } else {
                         ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                     }
                 } else if (grav == (f32) attrs->x8C) {
                     it_802A77DC(item);
-                    if (fp->kind == FTKIND_CLINK) {
+                    if (fp->kind == Ft_Kind_CLink) {
                         ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                     } else {
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
@@ -111,7 +111,7 @@ bool fn_800D9228(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->kind == FTKIND_LINK) || (fp->kind == FTKIND_CLINK)) {
+    if ((fp->kind == Ft_Kind_Link) || (fp->kind == Ft_Kind_CLink)) {
         ftCo_LinkCatchAttrs* da = fp->dat_attrs;
 
         fp->mv.co.catch.x0 += 1.0;
@@ -145,14 +145,14 @@ bool fn_800D9228(Fighter_GObj* gobj)
                 pos.y = 0.0F;
                 pos.z = 0.0F;
                 it_802A78B8(tether_gobj, &pos);
-                if (fp->kind == FTKIND_CLINK) {
+                if (fp->kind == Ft_Kind_CLink) {
                     ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                 } else {
                     ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                 }
             } else if (fp->mv.co.catch.x0 == (f32) da->x9C) {
                 it_802A77DC(tether_gobj);
-                if (fp->kind == FTKIND_CLINK) {
+                if (fp->kind == Ft_Kind_CLink) {
                     ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                 } else {
                     ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
@@ -170,7 +170,7 @@ void fn_800D949C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
+    if (fp->kind == Ft_Kind_Link || fp->kind == Ft_Kind_CLink) {
         it_802A2B10(fp->u.lk.xC);
     }
 }
@@ -189,7 +189,7 @@ void ftCo_800D94D8(Fighter_GObj* gobj)
 bool fn_800D952C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->kind == FTKIND_SAMUS) && (fp->u.ss.x223C != NULL)) {
+    if ((fp->kind == Ft_Kind_Samus) && (fp->u.ss.x223C != NULL)) {
         return false;
     }
     return true;

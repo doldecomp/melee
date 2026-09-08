@@ -48,12 +48,12 @@ void ftCo_Fall_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftLib_GetKind(gobj) == FTKIND_MASTERH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_MasterH) {
         ftMh_MS_389_80151018(gobj);
         return;
     }
 
-    if (ftLib_GetKind(gobj) == FTKIND_CREZYH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_CrezyH) {
         ftCh_GrabUnk1_8015BC88(gobj);
         return;
     }

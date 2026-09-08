@@ -1821,8 +1821,8 @@ struct UnkFloat6_Camera {
 };
 
 typedef struct ftData_UnkModelStruct {
-    Fighter_ModelEvent model_events[FTKIND_MAX];
-    HSD_JObj* (*getter[FTKIND_MAX])(HSD_GObj*);
+    Fighter_ModelEvent model_events[Ft_Kind_Max];
+    HSD_JObj* (*getter[Ft_Kind_Max])(HSD_GObj*);
 } ftData_UnkModelStruct;
 
 struct ftData_80085FD4_ret {
@@ -1868,7 +1868,7 @@ typedef struct Kirby_Unk {
 
 struct ft_80459B88_t {
     /* +0 */ Kirby_Unk* x0;
-    /* +4 */ KirbyHatStruct* hats[FTKIND_MAX];
+    /* +4 */ KirbyHatStruct* hats[Ft_Kind_Max];
 };
 ASSERT_SIZE(struct ft_80459B88_t, 0x88);
 

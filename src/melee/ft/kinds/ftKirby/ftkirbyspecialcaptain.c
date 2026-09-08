@@ -30,7 +30,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
     fp = GET_FIGHTER(gobj);
-    if (fp->u.kb.hat.kind != FTKIND_CAPTAIN) {
+    if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialN;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
@@ -47,7 +47,7 @@ void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
     fp = GET_FIGHTER(gobj);
-    if (fp->u.kb.hat.kind != FTKIND_CAPTAIN) {
+    if (fp->u.kb.hat.kind != Ft_Kind_Captain) {
         msid = ftKb_MS_GnSpecialAirN;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
@@ -126,11 +126,11 @@ void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
     if (throw_b1) {
         if (!fp->x2219_b0) {
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_CAPTAIN:
+            case Ft_Kind_Captain:
                 efSync_Spawn(1195, gobj, fp->parts[0].joint,
                              fp->parts[44].joint);
                 break;
-            case FTKIND_GANON:
+            case Ft_Kind_Ganon:
                 efSync_Spawn(1203, gobj, fp->parts[0].joint,
                              fp->parts[44].joint);
                 break;
@@ -160,11 +160,11 @@ void ftKb_CaSpecialAirN_Phys(Fighter_GObj* gobj)
     if (throw_b1) {
         if (!fp->x2219_b0) {
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_CAPTAIN:
+            case Ft_Kind_Captain:
                 efSync_Spawn(1195, gobj, fp->parts[0].joint,
                              fp->parts[44].joint);
                 break;
-            case FTKIND_GANON:
+            case Ft_Kind_Ganon:
                 efSync_Spawn(1203, gobj, fp->parts[0].joint,
                              fp->parts[44].joint);
                 break;
@@ -209,7 +209,7 @@ void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj)
         msid = ftKb_MS_CaSpecialAirN;
         {
             f32 anim_frame = fp->cur_anim_frame;
-            if (fp2->u.kb.hat.kind != FTKIND_CAPTAIN) {
+            if (fp2->u.kb.hat.kind != Ft_Kind_Captain) {
                 msid = ftKb_MS_GnSpecialAirN;
             }
             Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,
@@ -234,7 +234,7 @@ void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj)
         msid = ftKb_MS_CaSpecialN;
         {
             f32 anim_frame = fp->cur_anim_frame;
-            if (fp2->u.kb.hat.kind != FTKIND_CAPTAIN) {
+            if (fp2->u.kb.hat.kind != Ft_Kind_Captain) {
                 msid = ftKb_MS_GnSpecialN;
             }
             Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,

@@ -56,7 +56,7 @@ static inline FtMotionId ftCo_ItemParasolGetFallMotionId(
     Fighter_GObj* gobj, ftPeach_MotionState pe_msid, FtMotionId co_msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == FTKIND_PEACH && fp->u.pe.parasol_gobj_0 != NULL) {
+    if (fp->kind == Ft_Kind_Peach && fp->u.pe.parasol_gobj_0 != NULL) {
         return pe_msid;
     } else {
         return co_msid;

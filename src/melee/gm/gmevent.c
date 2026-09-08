@@ -1268,7 +1268,7 @@ void gm_801BC670(HSD_GObj* arg0)
         temp_r31->x2C = temp_r30->x0;
         temp_r31->x30 = 0;
     }
-    if (Player_80036394(0) == FTKIND_SEAK) {
+    if (Player_80036394(0) == Ft_Kind_Seak) {
         temp_r31->x38 = 0x13;
     } else {
         temp_r31->x38 = 0x21;
@@ -1433,7 +1433,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         if ((Player_GetStocks(var_r30) <= 0) &&
             (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
         {
-            if (ftLib_GetKind(temp_r3) == FTKIND_SEAK) {
+            if (ftLib_GetKind(temp_r3) == Ft_Kind_Seak) {
                 var_r0 = 1;
             } else {
                 Player_SetStocks(var_r30, 1);

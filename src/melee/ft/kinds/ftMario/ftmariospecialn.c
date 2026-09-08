@@ -116,7 +116,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     if (flag_res != 0) {
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_L1stNb)].joint,
                     NULL, &coords);
-        if (fp->kind == FTKIND_MARIO) {
+        if (fp->kind == Ft_Kind_Mario) {
             it_8029B6F8(gobj, &coords, It_Kind_Mario_Fire, fp->facing_dir);
             efSync_Spawn(
                 1146, gobj,

@@ -53,9 +53,9 @@ bool ft_8008A244(Fighter_GObj* gobj)
 /// Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
 {
-    if (ftLib_GetKind(gobj) == FTKIND_MASTERH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_MasterH) {
         ftMh_MS_389_80151018(gobj);
-    } else if (ftLib_GetKind(gobj) == FTKIND_CREZYH) {
+    } else if (ftLib_GetKind(gobj) == Ft_Kind_CrezyH) {
         ftCh_GrabUnk1_8015BC88(gobj);
     } else {
         ft_8008A348(gobj, 0);
@@ -82,7 +82,7 @@ void ft_8008A348(Fighter_GObj* gobj, float anim_blend)
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
-    if (fp->kind == FTKIND_PEACH) {
+    if (fp->kind == Ft_Kind_Peach) {
         if (fp->item_gobj != NULL &&
             itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol)
         {
@@ -97,10 +97,10 @@ void ft_8008A348(Fighter_GObj* gobj, float anim_blend)
     }
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
     switch (fp->kind) {
-    case FTKIND_LINK:
+    case Ft_Kind_Link:
         ftLk_AttackAir_800EB3BC(gobj);
         return;
-    case FTKIND_CLINK:
+    case Ft_Kind_CLink:
         ftCl_Init_8014919C(gobj);
         return;
     default:

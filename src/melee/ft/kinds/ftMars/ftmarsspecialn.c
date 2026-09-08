@@ -60,7 +60,7 @@ static inline void doStartAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
         cb(gobj);
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->kind == FTKIND_MARS) {
+            if (fp->kind == Ft_Kind_Mars) {
                 ftCo_800BFFD0(fp, 99, 0);
             } else {
                 ftCo_800BFFD0(fp, 100, 0);

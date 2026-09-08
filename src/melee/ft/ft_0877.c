@@ -248,7 +248,7 @@ s32 ft_GetFtKindMask(void)
 
     for (gobj = HSD_GObj_Entities->fighters; gobj != 0; gobj = gobj->next) {
         ftKind = (GET_FIGHTER(gobj))->kind;
-        if (ftKind < FTKIND_MASTERH) {
+        if (ftKind < Ft_Kind_MasterH) {
             result = result | 1 << ftKind;
         }
     }
@@ -359,8 +359,8 @@ s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
         break;
     case 13: {
         switch (fighter->kind) {
-        case FTKIND_POPO:
-        case FTKIND_NANA:
+        case Ft_Kind_Popo:
+        case Ft_Kind_Nana:
             if (0x1FBFD <= sfx && sfx <= 0x1FC62 &&
                 ftCommon_80080144(fighter) == true)
             {

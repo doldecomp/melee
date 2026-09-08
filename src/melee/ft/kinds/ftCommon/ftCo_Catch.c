@@ -182,7 +182,7 @@ bool fn_800D8E94(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->kind;
-    if (((kind == FTKIND_LINK) || (kind == FTKIND_CLINK)) &&
+    if (((kind == Ft_Kind_Link) || (kind == Ft_Kind_CLink)) &&
         (fp->u.lk.xC != NULL))
     {
         return false;

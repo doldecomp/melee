@@ -290,13 +290,13 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
         switch (ftLib_GetKind(gobj)) {
-        case FTKIND_MARS:
+        case Ft_Kind_Mars:
             efSync_Spawn(
                 1265, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
             break;
-        case FTKIND_EMBLEM:
+        case Ft_Kind_Emblem:
             efSync_Spawn(
                 1296, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,

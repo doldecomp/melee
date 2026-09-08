@@ -40,7 +40,7 @@ bool ftCo_AttackLw4_CheckInput(Fighter_GObj* gobj)
             return true;
         }
         switch (fp->kind) {
-        case FTKIND_NESS:
+        case Ft_Kind_Ness:
             ftNs_AttackLw4_Enter(gobj);
             break;
         default:

@@ -98,8 +98,8 @@ void fn_800C8E74(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->kind == FTKIND_MASTERH || fp->kind == FTKIND_CREZYH) {
-        if (fp->kind == FTKIND_MASTERH) {
+    if (fp->kind == Ft_Kind_MasterH || fp->kind == Ft_Kind_CrezyH) {
+        if (fp->kind == Ft_Kind_MasterH) {
             ftMh_MS_343_80151484(gobj);
         } else {
             ftCh_GrabUnk1_8015ADD0(gobj);

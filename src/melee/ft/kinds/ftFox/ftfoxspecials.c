@@ -251,7 +251,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 
     if (fp->cmd_vars[2] == 1) {
         fp->cmd_vars[2] = 0;
-        if (fp->kind == FTKIND_FOX) {
+        if (fp->kind == Ft_Kind_Fox) {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, It_Kind_Fox_Illusion,
                                     fp->facing_dir);
         } else {

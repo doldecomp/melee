@@ -141,7 +141,7 @@ float ftKb_SpecialN_800F5A60(Fighter_GObj* gobj)
 
 float ftKb_SpecialN_800F5A70(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_gravity_of_inhaled;
 }
 
@@ -153,7 +153,7 @@ f32 ftKb_SpecialN_800F5A88(Fighter_GObj* gobj)
 
 f32 ftKb_SpecialN_800F5A98(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_spit_spin;
 }
 
@@ -165,13 +165,13 @@ f32 ftKb_SpecialN_800F5AB0(Fighter_GObj* gobj)
 
 f32 ftKb_SpecialN_800F5AC0(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_star_duration_divisor;
 }
 
 f32 ftKb_SpecialN_800F5AD8(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_star_deceleration_rate;
 }
 
@@ -230,8 +230,8 @@ void ftKb_SpecialN_800F5B5C(Fighter_GObj* gobj, Vec3* output)
 void ftKb_SpecialN_800F5BA4(Fighter* fp)
 {
     ftKb_DatAttrs* da = fp->dat_attrs;
-    if ((s32) fp->kind == FTKIND_KIRBY &&
-        (s32) fp->u.kb.hat.kind != FTKIND_KIRBY && !fp->u.kb.hat.x8_b0 &&
+    if ((s32) fp->kind == Ft_Kind_Kirby &&
+        (s32) fp->u.kb.hat.kind != Ft_Kind_Kirby && !fp->u.kb.hat.x8_b0 &&
         (u32) fp->victim_gobj == 0U &&
         fp->dmg.x1860_element != HitElement_Cape &&
         HSD_Randi((s32) da->specialn_odds_lose_ability_on_hit) == 0)
@@ -243,8 +243,8 @@ void ftKb_SpecialN_800F5BA4(Fighter* fp)
 void ftKb_SpecialN_800F5C34(Fighter* fp)
 {
     ftKb_DatAttrs* da = fp->dat_attrs;
-    if ((s32) fp->kind == FTKIND_KIRBY &&
-        (s32) fp->u.kb.hat.kind != FTKIND_KIRBY && !fp->u.kb.hat.x8_b0 &&
+    if ((s32) fp->kind == Ft_Kind_Kirby &&
+        (s32) fp->u.kb.hat.kind != Ft_Kind_Kirby && !fp->u.kb.hat.x8_b0 &&
         (u32) fp->victim_gobj == 0U &&
         HSD_Randi((s32) da->specialn_odds_lose_ability_on_hit) == 0)
     {
@@ -275,7 +275,7 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     ftKb_SpecialN_800F190C(gobj, fp->u.kb.hat.kind);
     ftKb_SpecialN_800EEEC4(gobj, fp->u.kb.hat.kind);
     new_var = fp;
-    if ((s32) fp->u.kb.hat.kind != FTKIND_KIRBY && arg1 == 1) {
+    if ((s32) fp->u.kb.hat.kind != Ft_Kind_Kirby && arg1 == 1) {
         Fighter* fp2 = GET_FIGHTER(gobj);
         da = fp2->dat_attrs;
         pos.x = fp2->cur_pos.x;
@@ -287,7 +287,7 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
         it_802ADA1C(&pos, &vel, fp2->facing_dir);
         ft_PlaySFX(fp, 0x22305, 0x7F, 0x40);
     }
-    new_var->u.kb.hat.kind = FTKIND_KIRBY;
+    new_var->u.kb.hat.kind = Ft_Kind_Kirby;
 }
 
 void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
@@ -1771,8 +1771,8 @@ void ftKb_SpecialN_800F9070(HSD_GObj* gobj)
 void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->target_item_gobj != NULL && fp->kind == FTKIND_KIRBY &&
-        fp->u.kb.hat.kind == FTKIND_KIRBY)
+    if (fp->target_item_gobj != NULL && fp->kind == Ft_Kind_Kirby &&
+        fp->u.kb.hat.kind == Ft_Kind_Kirby)
     {
         bool capturing = false;
         if (fp->motion_id == ftKb_MS_SpecialNCapture1 ||

@@ -66,10 +66,10 @@ void ftPk_SpecialN_Anim(Fighter_GObj* gobj)
             itPikachuThunderJolt_Spawn(gobj, &pos, fp->facing_dir,
                                        pika_attr->specialn_itkind);
             switch (ftLib_GetKind(gobj)) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             default:
@@ -107,10 +107,10 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
                                        pika_attr->specialn_itkind);
             switch (ftLib_GetKind(gobj)) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             default:

@@ -92,7 +92,7 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/random.h>
 
-extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
+extern MotionState* ftData_CharacterStateTables[Ft_Kind_Max];
 
 /// ==== fighter.c variables ====
 /// =============================
@@ -163,7 +163,7 @@ void Fighter_800679B0(void)
 
     g_spawnNumCounter = 1;
 
-    for (i = 0; i < FTKIND_MAX; i++) {
+    for (i = 0; i < Ft_Kind_Max; i++) {
         if (ftData_Table_Unk1[i]) {
             ftData_Table_Unk1[i]();
         }
@@ -911,9 +911,9 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     HSD_GObj_SetupProc(gobj, &Fighter_8006DA4C, 0x16);
     Fighter_UnkProcessDeath_80068354(gobj);
 
-    if (fp->kind == FTKIND_MASTERH) {
+    if (fp->kind == Ft_Kind_MasterH) {
         ftMh_MS_341_8014FE10(gobj);
-    } else if (fp->kind == FTKIND_CREZYH) {
+    } else if (fp->kind == Ft_Kind_CrezyH) {
         ftCh_Init_80155FCC(gobj);
     } else if (input->has_transformation) {
         ftCo_800BFD04(gobj);
@@ -1118,7 +1118,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     }
 
     if (fp->ground_or_air == GA_Ground) {
-        if (fp->kind == FTKIND_PEACH) {
+        if (fp->kind == Ft_Kind_Peach) {
             fp->u.pe.has_float = true;
         }
         fp->x2221_b5 = false;
@@ -2896,10 +2896,10 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
 
             } else {
                 switch (fp->kind) {
-                case FTKIND_MASTERH:
+                case Ft_Kind_MasterH:
                     ftMh_MS_341_8014FE58(gobj);
                     break;
-                case FTKIND_CREZYH:
+                case Ft_Kind_CrezyH:
                     ftCh_Init_80156014(gobj);
                     break;
                 default:

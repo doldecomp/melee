@@ -457,7 +457,7 @@ void ftCo_800A08F0(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_Done);
         return;
     }
-    if (fp->kind == FTKIND_NANA) {
+    if (fp->kind == Ft_Kind_Nana) {
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, -0x7F);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 5);
@@ -533,14 +533,14 @@ void ftCo_800A0CB0(Fighter* fp)
         x = x * x * x;
         rand = 1.0F - x;
         switch (fp->kind) {
-        case FTKIND_DONKEY:
-        case FTKIND_KOOPA:
+        case Ft_Kind_Donkey:
+        case Ft_Kind_Koopa:
             data->x56C = 9.0 * rand;
             return;
-        case FTKIND_GKOOPS:
+        case Ft_Kind_GKoops:
             data->x56C = 18.0 * rand;
             return;
-        case FTKIND_NANA:
+        case Ft_Kind_Nana:
             data->x56C = 1.0 * rand;
             return;
         default:
@@ -666,7 +666,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     PAD_STACK(0xC);
 
     temp_r30 = &arg0->cpu;
-    if (arg0->kind == FTKIND_NANA) {
+    if (arg0->kind == Ft_Kind_Nana) {
         temp_r30->xF9_b2 = true;
         temp_r30->xC = 6;
         temp_r30->x3C = 15.0f;
@@ -771,7 +771,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30->x568 = 2.0f;
     temp_r30->x444 = &temp_r30->xFC[5];
     temp_r30->x448 = temp_r30->xFC;
-    if (arg0->kind == FTKIND_NANA) {
+    if (arg0->kind == Ft_Kind_Nana) {
         temp_r3_2 = ftCo_800A589C(arg0);
         for (i = 0; i < 30; i++) {
             temp_r30->xFC[i].x0 = 0;
@@ -813,14 +813,14 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30->x570 = 1.0f;
     ftCo_800B9704(arg0);
     switch (arg0->kind) {
-    case FTKIND_DONKEY:
-    case FTKIND_KOOPA:
+    case Ft_Kind_Donkey:
+    case Ft_Kind_Koopa:
         temp_r30->x56C = 8.5f;
         break;
-    case FTKIND_GKOOPS:
+    case Ft_Kind_GKoops:
         temp_r30->x56C = 17.0f;
         break;
-    case FTKIND_NANA:
+    case Ft_Kind_Nana:
         temp_r30->x56C = 1.0f;
         break;
     default:
@@ -1698,19 +1698,19 @@ bool ftCo_IsGrabbing(Fighter* fp)
     if (fp->motion_id == ftCo_MS_CatchWait) {
         return true;
     }
-    if (fp->kind == FTKIND_DONKEY) {
+    if (fp->kind == Ft_Kind_Donkey) {
         if (fp->motion_id >= ftDk_MS_ThrowFWait0 &&
             fp->motion_id <= ftDk_MS_ThrowFKneebend)
         {
             return true;
         }
     }
-    if (fp->kind == FTKIND_KOOPA || fp->kind == FTKIND_GKOOPS) {
+    if (fp->kind == Ft_Kind_Koopa || fp->kind == Ft_Kind_GKoops) {
         if (fp->motion_id == ftKp_MS_SpecialSHit0_1) {
             return true;
         }
     }
-    if (fp->kind == FTKIND_KIRBY) {
+    if (fp->kind == Ft_Kind_Kirby) {
         if (fp->motion_id >= ftKb_MS_SpecialNCapture0 &&
             fp->motion_id <= ftKb_MS_EatTurnAir)
         {
@@ -1758,7 +1758,7 @@ bool ftCo_800A3234(Fighter* fp)
     if (fp->motion_id == 0xF4) {
         return false;
     }
-    if (fp->kind == FTKIND_YOSHI && fp->x34_scale.y > 1.0F &&
+    if (fp->kind == Ft_Kind_Yoshi && fp->x34_scale.y > 1.0F &&
         temp_r31->x7C < 0x384)
     {
         return false;
@@ -1829,7 +1829,7 @@ bool ftCo_800A3498(Fighter* fp)
     if (inlineC0(fp)) {
         return true;
     }
-    if (fp->kind == FTKIND_LUIGI) {
+    if (fp->kind == Ft_Kind_Luigi) {
         if (fp->pos_delta.y < 0.0) {
             return true;
         }
@@ -4422,15 +4422,15 @@ void ftCo_800A96B8(Fighter* fp)
     PAD_STACK(0x10);
 
     switch (fp->kind) {
-    case FTKIND_MARIO:
+    case Ft_Kind_Mario:
         ftCo_CpuRecoverDiagonally(fp);
         break;
-    case FTKIND_PIKACHU:
-    case FTKIND_PICHU:
+    case Ft_Kind_Pikachu:
+    case Ft_Kind_Pichu:
         ftCo_800A92CC(fp);
         break;
-    case FTKIND_FOX:
-    case FTKIND_FALCO:
+    case Ft_Kind_Fox:
+    case Ft_Kind_Falco:
         // Diagonally up-B toward the stage
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x58);
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x58);
@@ -4439,11 +4439,11 @@ void ftCo_800A96B8(Fighter* fp)
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 40);
         ftCo_800B463C(fp, CpuCmd_Done);
         break;
-    case FTKIND_YOSHI:
+    case Ft_Kind_Yoshi:
         // Yoshi's up-B isn't a recovery move, so don't try it
         ftCo_800B463C(fp, CpuCmd_Done);
         break;
-    case FTKIND_NESS:
+    case Ft_Kind_Ness:
         // Don't try to up-B until Ness is under the stage
         if (fp->cur_pos.y > data->x54.y - 10.0) {
             ftCo_800B463C(fp, CpuCmd_Done);
@@ -4451,7 +4451,7 @@ void ftCo_800A96B8(Fighter* fp)
             ftCo_800A8EB0(fp);
         }
         break;
-    case FTKIND_LUIGI:
+    case Ft_Kind_Luigi:
         // Side-B toward the stage
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
@@ -4460,10 +4460,10 @@ void ftCo_800A96B8(Fighter* fp)
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 40);
         ftCo_800B463C(fp, CpuCmd_Done);
         break;
-    case FTKIND_ZELDA:
+    case Ft_Kind_Zelda:
         ftCo_800A949C(fp, tmp);
         break;
-    case FTKIND_SAMUS:
+    case Ft_Kind_Samus:
         ftCo_800A963C(fp, tmp);
         break;
     default:
@@ -4635,7 +4635,7 @@ static inline void ftCo_CpuUseAvailableJump(Fighter* fp,
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (fp->kind == FTKIND_YOSHI && fp->x34_scale.y < 1.0 &&
+    } else if (fp->kind == Ft_Kind_Yoshi && fp->x34_scale.y < 1.0 &&
                ABS(data->x54.x - fp->cur_pos.x) < 20.0f)
     {
         ftCo_800A0508(fp);
@@ -4768,7 +4768,7 @@ void ftCo_800AA320(Fighter* fp, int* stick, int* clamp)
 {
     // Nana moves the stick more aggressively so she can follow more
     // effectively
-    if (fp->kind == FTKIND_NANA) {
+    if (fp->kind == Ft_Kind_Nana) {
         *stick = 0x40;
         *clamp = 0x7F;
         return;
@@ -5315,7 +5315,7 @@ void ftCo_800ABA34(Fighter* fp)
         ftCo_800A05F4(fp);
         return;
     }
-    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
+    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) && data->xF8_b5)
     {
         ftCo_800B4880(fp, 38);
         data->xF8_b5 = false;
@@ -5794,7 +5794,7 @@ void ftCo_800ACD5C(Fighter* fp)
         ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
-    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
+    if ((fp->kind == Ft_Kind_Zelda || fp->kind == Ft_Kind_Seak) && data->xF8_b5)
     {
         ftCo_800B4880(fp, 0x26);
         data->xF8_b5 = false;
@@ -5808,17 +5808,17 @@ void ftCo_800ACD5C(Fighter* fp)
         ftCo_CpuFinishWithNeutralStick(fp);
         return;
     }
-    if (fp->kind == FTKIND_DONKEY) {
+    if (fp->kind == Ft_Kind_Donkey) {
         if (fp->motion_id != ftDk_MS_SpecialNLoop && fp->u.dk.x222C == 0) {
             ftCo_CpuStartCharging(fp);
             return;
         }
-    } else if (fp->kind == FTKIND_SAMUS) {
+    } else if (fp->kind == Ft_Kind_Samus) {
         if (fp->motion_id != ftSs_MS_SpecialNHold && fp->u.ss.x2230 == 0) {
             ftCo_CpuStartCharging(fp);
             return;
         }
-    } else if (fp->kind == FTKIND_MEWTWO) {
+    } else if (fp->kind == Ft_Kind_Mewtwo) {
         ftMewtwoAttributes* da = fp->dat_attrs;
         if (fp->u.mt.x2234_shadowBallCharge ==
             da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
@@ -5836,18 +5836,18 @@ void ftCo_800ACD5C(Fighter* fp)
             ftCo_CpuStartCharging(fp);
             return;
         }
-    } else if (fp->kind == FTKIND_KIRBY) {
-        if (fp->u.kb.hat.kind == FTKIND_DONKEY) {
+    } else if (fp->kind == Ft_Kind_Kirby) {
+        if (fp->u.kb.hat.kind == Ft_Kind_Donkey) {
             if (fp->motion_id != ftKb_MS_DkSpecialNLoop && fp->u.kb.xBC == 0) {
                 ftCo_CpuStartCharging(fp);
                 return;
             }
-        } else if (fp->u.kb.hat.kind == FTKIND_SAMUS) {
+        } else if (fp->u.kb.hat.kind == Ft_Kind_Samus) {
             if (fp->motion_id != ftKb_MS_SsSpecialNHold && fp->u.kb.xA8 == 0) {
                 ftCo_CpuStartCharging(fp);
                 return;
             }
-        } else if (fp->u.kb.hat.kind == FTKIND_MEWTWO) {
+        } else if (fp->u.kb.hat.kind == Ft_Kind_Mewtwo) {
             struct ftKb_DatAttrs* da = fp->dat_attrs;
             if (fp->u.kb.x9C == da->specialn_mt_charge_time) {
                 if (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
@@ -6003,29 +6003,29 @@ void ftCo_800ADC28(Fighter* fp)
         return;
     }
 
-    if (fp->kind == FTKIND_DONKEY) {
+    if (fp->kind == Ft_Kind_Donkey) {
         if (fp->motion_id == ftDk_MS_SpecialNLoop) {
             ftCo_CpuTapR(fp);
         }
-    } else if (fp->kind == FTKIND_SAMUS) {
+    } else if (fp->kind == Ft_Kind_Samus) {
         if (fp->motion_id == ftSs_MS_SpecialNHold) {
             ftCo_CpuTapRAndWait(fp);
         }
-    } else if (fp->kind == FTKIND_MEWTWO) {
+    } else if (fp->kind == Ft_Kind_Mewtwo) {
         if (fp->motion_id == ftMt_MS_SpecialNLoop ||
             fp->motion_id == ftMt_MS_SpecialNLoopFull)
         {
             ftCo_CpuTapRAndWait(fp);
         }
-    } else if (fp->kind == FTKIND_KIRBY) {
+    } else if (fp->kind == Ft_Kind_Kirby) {
         FighterKind kind = fp->u.kb.hat.kind;
-        if (kind == FTKIND_DONKEY && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
+        if (kind == Ft_Kind_Donkey && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
             ftCo_CpuTapRAndWait(fp);
-        } else if (kind == FTKIND_SAMUS &&
+        } else if (kind == Ft_Kind_Samus &&
                    fp->motion_id == ftKb_MS_SsSpecialNHold)
         {
             ftCo_CpuTapRAndWait(fp);
-        } else if (kind == FTKIND_MEWTWO &&
+        } else if (kind == Ft_Kind_Mewtwo &&
                    (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
                     fp->motion_id == ftKb_MS_MtSpecialNLoopFull))
         {
@@ -6174,7 +6174,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     }
     if (data->x18 != 0x12) {
         data2 = ftCo_800ADE48_inline1(fp);
-        if (fp->kind == FTKIND_GKOOPS) {
+        if (fp->kind == Ft_Kind_GKoops) {
             switch_cmd = 0;
         } else if (data2->xC == 0xF || data2->xC == 0) {
             switch_cmd = 0;

@@ -80,10 +80,10 @@ void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid, bool arg2)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->kind) {
-    case FTKIND_SAMUS:
+    case Ft_Kind_Samus:
         ftCo_80099390(gobj, msid, arg2);
         break;
-    case FTKIND_YOSHI:
+    case Ft_Kind_Yoshi:
         ftCo_80099438(gobj, msid, arg2);
         break;
     default:
@@ -229,7 +229,7 @@ void ftCo_80099894(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->kind) {
-    case FTKIND_YOSHI:
+    case Ft_Kind_Yoshi:
         ftCo_80099954(gobj);
         break;
     default:

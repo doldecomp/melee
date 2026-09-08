@@ -11,6 +11,6 @@
 /* 0BEC08 */ char* ftDemo_GetMotionFileString(int arg0, int arg1);
 /* 0BEC74 */ void ftDemo_SetFacingDirection(Fighter_GObj* gobj,
                                             float facing_dir);
-/* 3C1364 */ extern MotionState* ftData_UnkMotionStates0[FTKIND_MAX];
+/* 3C1364 */ extern MotionState* ftData_UnkMotionStates0[Ft_Kind_Max];
 
 #endif

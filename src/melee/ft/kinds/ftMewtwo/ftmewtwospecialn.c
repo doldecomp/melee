@@ -1140,7 +1140,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (ftGetKind(fp) == FTKIND_MEWTWO) {
+    if (ftGetKind(fp) == Ft_Kind_Mewtwo) {
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
         if (fp->cmd_vars[3] == 1U) {
             fp->cmd_vars[3] = 0;

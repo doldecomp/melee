@@ -23,14 +23,14 @@ void ftCo_800CED30(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->kind;
 
-    if (kind == FTKIND_CLINK) {
+    if (kind == Ft_Kind_CLink) {
         goto first;
     } else {
-        if (kind < FTKIND_CLINK) {
-            if (kind != FTKIND_LINK) {
+        if (kind < Ft_Kind_CLink) {
+            if (kind != Ft_Kind_Link) {
                 goto second;
             first:
-                if (kind != FTKIND_LINK) {
+                if (kind != Ft_Kind_Link) {
                     goto third;
                 }
             }

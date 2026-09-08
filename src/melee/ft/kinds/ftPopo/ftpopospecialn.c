@@ -173,7 +173,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         if (fp->u.pp.x222C != NULL) {
             it_802C16F8(fp->u.pp.x222C);
             fp->cmd_vars[0] = 0;
-            if (fp->kind == FTKIND_POPO) {
+            if (fp->kind == Ft_Kind_Popo) {
                 ft_800881D8(fp, 130141, 127, 64);
             } else {
                 ft_800881D8(fp, 130090, 127, 64);

@@ -64,11 +64,11 @@ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
                 var_r29 = ftParts_GetBoneIndex(fp, FtPart_LFootJA);
             }
             switch (ftLib_GetKind(gobj)) {
-            case FTKIND_CAPTAIN:
+            case Ft_Kind_Captain:
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x490U,
                               fp->parts[var_r29].joint, &sp1C);
                 break;
-            case FTKIND_GANON:
+            case Ft_Kind_Ganon:
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x50CU,
                               fp->parts[var_r29].joint, &sp1C);
                 break;

@@ -26,7 +26,7 @@ void ftCo_80098B20(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp->self_vel.x = 0;
     fp->self_vel.y = fp->co_attrs.shield_break_initial_velocity;
-    if (fp->kind == FTKIND_PURIN) {
+    if (fp->kind == Ft_Kind_Purin) {
         fp->x2222_b3 = true;
     }
     ftCo_SpawnEf(gobj, fp->parts[fp->ft_data->x8->x11].joint, 0, 1051);

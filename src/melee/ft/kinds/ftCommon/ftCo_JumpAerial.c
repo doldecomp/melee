@@ -101,16 +101,16 @@ bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
             return true;
         }
         switch (fp->kind) {
-        case FTKIND_NESS:
+        case Ft_Kind_Ness:
             ftNs_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_YOSHI:
+        case Ft_Kind_Yoshi:
             ftYs_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_PEACH:
+        case Ft_Kind_Peach:
             ftPe_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_MEWTWO:
+        case Ft_Kind_Mewtwo:
             ftMt_JumpAerial_Enter(gobj);
             break;
         default:
@@ -131,7 +131,7 @@ static inline void ft_SetVec(Vec3* dst, Vec3* src)
 
 static inline void ft_JumpAerial_Sound(Fighter* fp, FighterKind ftkind)
 {
-    if (ftkind != FTKIND_MEWTWO && (ftkind >= 0x10 || ftkind != FTKIND_NESS) &&
+    if (ftkind != Ft_Kind_Mewtwo && (ftkind >= 0x10 || ftkind != Ft_Kind_Ness) &&
         fp->x197C != NULL)
     {
         ft_PlaySFX(fp, 0x11B, SFX_VOLUME_MAX, SFX_PAN_MID);

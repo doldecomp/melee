@@ -1667,7 +1667,7 @@ bool ftCommon_8007FFD8(Fighter* fp, float arg8)
 bool ftCommon_80080144(Fighter* fp)
 {
     int kind = fp->kind;
-    if ((kind == FTKIND_POPO || kind == FTKIND_NANA) &&
+    if ((kind == Ft_Kind_Popo || kind == Ft_Kind_Nana) &&
         fp->x619_costume_id >= 2)
     {
         return true;

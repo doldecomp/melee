@@ -736,7 +736,7 @@ const char* gm_80160A60(int arg0)
     if (Player_GetPlayerSlotType(arg0) != Gm_PKind_NA) {
         ckind = Player_GetPlayerCharacter(arg0);
         if (ckind == CKIND_ZELDA || ckind == CKIND_SEAK) {
-            if (Player_80036394(arg0) == FTKIND_SEAK) {
+            if (Player_80036394(arg0) == Ft_Kind_Seak) {
                 if (lbLang_IsSavedLanguageUS()) {
                     return lbl_803D4FDC[CKIND_SEAK];
                 } else {
@@ -3138,7 +3138,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
         if (arg0->player_standings[i].ckind == CKIND_SEAK) {
             arg0->player_standings[i].ckind = CKIND_ZELDA;
-            arg0->player_standings[i].ftkind = FTKIND_SEAK;
+            arg0->player_standings[i].ftkind = Ft_Kind_Seak;
         }
     }
 
