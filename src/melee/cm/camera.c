@@ -189,7 +189,7 @@ void Camera_Init(int n_subjects)
     game_camera.farz = 16384.0f;
     game_camera.mode = CAMERA_STANDARD;
     memzero(game_camera.quake_frames_left, 0x224);
-    game_camera.xAC = 1.0f;
+    game_camera.quake_scale = 1.0f;
     game_camera.x2BC = 1.0f;
     game_camera.x2C0 = -1.0f;
     game_camera.x398_b0 = 0;
@@ -924,8 +924,8 @@ void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
         HSD_CameraDescPerspective desc;
     }* data = (struct CameraStaticData*) &cm_803BCB18;
 
-    input_x = game_camera.xA4 * game_camera.xAC;
-    input_y = game_camera.xA8 * game_camera.xAC;
+    input_x = game_camera.quake_offset.x * game_camera.quake_scale;
+    input_y = game_camera.quake_offset.y * game_camera.quake_scale;
     input_x *= 10.0f;
     input_y *= 10.0f;
 
@@ -961,14 +961,14 @@ void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
         (depth_ratio * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x58;
     Camera_80030DE4(depth_factor_x * (input_x * viewport_x_scale),
                     depth_factor_y * (input_y * viewport_y_scale));
-    game_camera.xA4 = 0.0f;
-    game_camera.xA8 = 0.0f;
+    game_camera.quake_offset.x = 0.0f;
+    game_camera.quake_offset.y = 0.0f;
 }
 
 void Camera_8002A278(f32 x, f32 y)
 {
-    game_camera.xA4 = x;
-    game_camera.xA8 = y;
+    game_camera.quake_offset.x = x;
+    game_camera.quake_offset.y = y;
 }
 
 void Camera_8002A28C(CameraBounds* arg0)
@@ -4394,7 +4394,7 @@ float Camera_80030E10(void)
 
 void Camera_80030E34(f32 arg8)
 {
-    game_camera.xAC = arg8;
+    game_camera.quake_scale = arg8;
 }
 
 void Camera_80030E44(QuakeKind kind, Vec3* pos)
