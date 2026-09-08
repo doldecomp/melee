@@ -452,7 +452,8 @@ static void Item_802676F4(HSD_GObj* gobj)
 
 static /// @remarks #Item_8026862C loads two integers into this,
        ///          but the second one goes _?
-    bool Item_8026784C(enum_t dropItem, int _)
+    bool
+    Item_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -788,7 +789,8 @@ static bool Item_802682F0(HSD_GObj* gobj)
     if (ip->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
         HSD_JObj* jobj;
         int i;
-        ip->xBBC_dynamicBoneTable = HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
+        ip->xBBC_dynamicBoneTable =
+            HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
         if (ip->xBBC_dynamicBoneTable == NULL) {
             return false;
         }
@@ -1453,7 +1455,8 @@ static void Item_80269B60(HSD_GObj* gobj)
 static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
        /// Beam,
     ///          rather items such as the Barrel Cannon.
-    void Item_80269BE4(HSD_GObj* gobj)
+    void
+    Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.b5) {
