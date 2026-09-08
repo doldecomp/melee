@@ -74,25 +74,15 @@ static void ftMh_MS_347_80151AC8(HSD_GObj* gobj);
 void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        /// @todo #GET_FIGHTER
-        Fighter* fp = gobj->user_data;
+        Fighter* fp = GET_FIGHTER(gobj);
         Vec3 pos;
 
-        u8 _[8];
         mpFloorGetLeft(0, &pos);
         if (fp->cur_pos.x < pos.x) {
             ftMh_MS_347_80151AC8(gobj);
             return;
         }
-        {
-            Fighter* fp = gobj->user_data;
-            ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-            fp->mv.mh.unk0.xC.x = fp->cur_pos.x - da->x3C;
-            fp->mv.mh.unk0.xC.y = da->x38;
-            fp->mv.mh.unk0.xC.z = 0;
-        }
-        Fighter_ChangeMotionState(gobj, ftMh_MS_SweepLoop, 0, 0, 1, 0, 0);
-        ftAnim_8006EBA4(gobj);
+        ftMh_MS_346_80151918(gobj);
     }
 }
 
