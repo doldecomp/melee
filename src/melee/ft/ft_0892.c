@@ -191,11 +191,8 @@ void ft_80089768(Vec2* ptr)
 void ft_80089824(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Weird volatile noop
-#ifdef MUST_MATCH
-    volatile int temp = fp->x2070.x2070_int;
-    fp->x2070.x2070_int = temp;
-#endif
+    union Struct2070 val = fp->x2070;
+    fp->x2070.x2070_int = val.x2070_int;
     ft_80089460(fp);
     fp->x2074.x2088 = plAttack_80037B08();
     pl_80037C60(gobj, 0);
