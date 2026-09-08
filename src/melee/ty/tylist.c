@@ -691,7 +691,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
 
     if (mn_8022F218() != 0) {
         sfxBack();
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         Toy_80310660(0);
         _tyList_803148E4(0);
         mn_8022F268();
@@ -701,7 +701,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
 
     if (Toy_80305B88() & 0x200) {
         sfxBack();
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         Toy_80310660(0);
         _tyList_803148E4(0);
         ((TyModeState*) Toy_804A284C)->x4 = 1;
@@ -714,7 +714,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
 
     if (Toy_80305B88() & 0x1100) {
         sfxForward();
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         Toy_80310660(0);
         _tyList_803148E4(1);
         Toy_80310324();
@@ -881,7 +881,7 @@ void _tyList_8031438C(HSD_GObj* gobj)
         return;
     }
 
-    HSD_GObjProc_8038FED4(gobj);
+    HSD_GObjProc_RemoveAllProcs(gobj);
     HSD_GObj_SetupProc(entry->x0, _tyList_80313BD8, 0);
     HSD_GObj_80390CD4(entry->x0);
 }
@@ -1050,7 +1050,7 @@ void _tyList_803148E4(s32 arg0)
 
     if (state->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(state->gobj);
+            HSD_GObjFree(state->gobj);
         }
         state->gobj = NULL;
     }
@@ -1061,23 +1061,23 @@ void _tyList_803148E4(s32 arg0)
 
     if (archive->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(archive->gobj);
+            HSD_GObjFree(archive->gobj);
         }
         archive->gobj = NULL;
     }
 
     if (*gobj_2C4 != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(*gobj_2C4);
+        HSD_GObjFree(*gobj_2C4);
     }
 
     if (entry->x0 != NULL) {
-        HSD_GObjProc_8038FED4(entry->x0);
+        HSD_GObjProc_RemoveAllProcs(entry->x0);
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(entry->x0);
+            HSD_GObjFree(entry->x0);
         }
     }
 
     if (entry->x4 != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(entry->x4);
+        HSD_GObjFree(entry->x4);
     }
 }

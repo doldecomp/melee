@@ -64,7 +64,7 @@ void lbBgFlash_80021A18(int arg0)
             HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80021B04, 1);
             return;
         }
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

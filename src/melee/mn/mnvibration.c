@@ -407,7 +407,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         if (exit_data->title_text != NULL) {
             HSD_SisLib_803A5CC4(exit_data->title_text);
         }
-        HSD_GObjPLink_80390228(mnVibration_804D6C28);
+        HSD_GObjFree(mnVibration_804D6C28);
         HSD_PadRumbleRemoveAll();
         lbCardGame_UpdatePowerTime();
         return;
@@ -625,7 +625,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
 void mnVibration_CursorThink(HSD_GObj* gobj)
 {
     if (mn_804A04F0.cur_menu != 0x13) {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -802,7 +802,7 @@ void mnVibration_OnAnimComplete(HSD_GObj* gobj)
     pad = 0;
     frame = mn_8022ED6C(jobj, table);
     if (frame >= table->end_frame) {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 
@@ -840,7 +840,7 @@ void mnVibration_Think(HSD_GObj* gobj)
 
     if ((u8) mn_804A04F0.cur_menu != 0x13) {
         HSD_GObjProc* proc;
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, mnVibration_OnAnimComplete, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         return;
@@ -1067,7 +1067,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
 
     if (frame >= (&mnVibration_803EECE0)->end_frame) {
         HSD_GObjProc* proc;
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(arg0, mnVibration_Think, 0);
         proc->flags_3 = HSD_GObj_804D783C;
     }

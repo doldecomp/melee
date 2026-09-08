@@ -186,11 +186,11 @@ void fn_8022F538(HSD_GObj* arg0)
             switch (mn_804A04F0.hovered_selection) {
             case 5:
                 mnItemSw_802358C0();
-                HSD_GObjPLink_80390228(arg0);
+                HSD_GObjFree(arg0);
                 break;
             case 6:
                 mn_802339FC();
-                HSD_GObjPLink_80390228(arg0);
+                HSD_GObjFree(arg0);
                 break;
             }
             data = HSD_GObjGetUserData(mn_804D6BD0);
@@ -955,7 +955,7 @@ void fn_802309F0(HSD_GObj* arg0)
                 break;
             case 2:
             case 4:
-                HSD_GObjPLink_80390228(arg0);
+                HSD_GObjFree(arg0);
                 return;
             }
         }

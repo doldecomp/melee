@@ -176,7 +176,7 @@ void mn_8022F0F0(int arg0)
     PAD_STACK(8);
     while (curr != NULL) {
         HSD_GObj* next = curr->next;
-        HSD_GObjPLink_80390228(curr);
+        HSD_GObjFree(curr);
         curr = next;
     }
 }

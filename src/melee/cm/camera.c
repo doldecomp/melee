@@ -9,6 +9,7 @@
 #include <placeholder.h>
 
 #include "forward.h"
+#include "sysdolphin/baselib/gobjplink.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <dolphin/pad.h>
@@ -38,7 +39,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
@@ -994,7 +994,7 @@ void Camera_UpdateQuakes(CameraBounds* bounds)
     if ((quakes_remaining != -1) && (game_camera.quake_gobj != NULL) &&
         (game_camera.quake_frames_left[QuakeKind_Loop] == 0))
     {
-        HSD_GObjPLink_80390228(game_camera.quake_gobj);
+        HSD_GObjFree(game_camera.quake_gobj);
         game_camera.quake_gobj = 0;
     }
 }

@@ -100,16 +100,18 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }
 
-void HSD_GObjPLink_80390228(HSD_GObj* gobj)
+void HSD_GObjFree(HSD_GObj* gobj)
 {
     HSD_ASSERT(0x171, gobj);
-    if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {
-        HSD_GObj_804CE3E4.b1 = 1;
+    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gobj == HSD_GObj_CurrentInvokedProcGObj)
+    {
+        HSD_GObj_DelayedProcInfo.delay_remove_gobj = 1;
         return;
     }
     GObj_RemoveUserData(gobj);
     HSD_GObjObject_80390B0C(gobj);
-    HSD_GObjProc_8038FED4(gobj);
+    HSD_GObjProc_RemoveAllProcs(gobj);
     if (gobj->gx_link != HSD_GOBJ_GXLINK_NONE) {
         HSD_GObjGXLink_8039084C(gobj);
     }
@@ -126,8 +128,8 @@ void HSD_GObjPLink_80390228(HSD_GObj* gobj)
     HSD_ObjFree(&gobj_alloc_data, gobj);
 }
 
-void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
-                            HSD_GObj* position)
+void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
+                                     u8 priority, HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
     HSD_GObjProc* child;
@@ -138,18 +140,20 @@ void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     u8 _[8];
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
-    if (!HSD_GObj_804CE3E4.b0 && gobj == HSD_GObj_804D781C) {
-        HSD_GObj_804CE3E4.b3 = 1;
-        HSD_GObj_804CE3E4.type = arg0;
-        HSD_GObj_804CE3E4.p_link = p_link;
-        HSD_GObj_804CE3E4.p_prio = priority;
-        HSD_GObj_804CE3E4.gobj = position;
+    if (!HSD_GObj_DelayedProcInfo.in_delayed_proc &&
+        gobj == HSD_GObj_CurrentInvokedProcGObj)
+    {
+        HSD_GObj_DelayedProcInfo.delay_change_gobj_pri = 1;
+        HSD_GObj_DelayedProcInfo.type = arg0;
+        HSD_GObj_DelayedProcInfo.p_link = p_link;
+        HSD_GObj_DelayedProcInfo.p_prio = priority;
+        HSD_GObj_DelayedProcInfo.gobj = position;
         return;
     }
     cur = gobj->proc;
     proc_cur = NULL;
     while (cur != NULL) {
-        HSD_GObjProc_8038FC18(cur);
+        HSD_GObjProc_UnqueueProc(cur);
         child = cur->child;
         cur->child = proc_cur;
         proc_cur = cur;
@@ -187,7 +191,7 @@ void HSD_GObjPLink_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     cur = proc_cur;
     while (cur != NULL) {
         child = cur->child;
-        HSD_GObjProc_8038FAA8(cur);
+        HSD_GObjProc_QueueProc(cur);
         if (cur->flags_3 == flags_cur) {
             cur->flags_3 = flags_new;
         }

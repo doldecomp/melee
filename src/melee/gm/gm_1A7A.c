@@ -37,11 +37,11 @@ void fn_801A7A8C(HSD_GObj* gobj)
     HSD_CObj* cobj = GET_COBJ(gobj);
     HSD_CObjAnim(cobj);
     if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
-        HSD_GObjPLink_80390228(gm_804D67B0);
-        HSD_GObjPLink_80390228(gm_804D67B4);
+        HSD_GObjFree(gm_804D67B0);
+        HSD_GObjFree(gm_804D67B4);
         mn_8022F0F0(3);
         gm_801A9630();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

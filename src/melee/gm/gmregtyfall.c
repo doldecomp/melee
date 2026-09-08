@@ -281,18 +281,18 @@ void fn_801A6B6C(HSD_GObj* gobj)
     aobj = cobj->aobj;
     if (aobj->curr_frame == aobj->end_frame) {
         Player_80031EBC(0);
-        HSD_GObjPLink_80390228(gm_804D6768);
-        HSD_GObjPLink_80390228(gm_804D6778);
-        HSD_GObjPLink_80390228(gm_804D6754);
-        HSD_GObjPLink_80390228(gm_804D676C);
-        HSD_GObjPLink_80390228(gm_804D677C);
+        HSD_GObjFree(gm_804D6768);
+        HSD_GObjFree(gm_804D6778);
+        HSD_GObjFree(gm_804D6754);
+        HSD_GObjFree(gm_804D676C);
+        HSD_GObjFree(gm_804D677C);
         mn_8022F0F0(3);
         HSD_Free(gm_80480964.x0[0][0].image_ptr);
         HSD_Free(gm_80480964.x0[0][1].image_ptr);
         HSD_Free(gm_80480964.x0[1][0].image_ptr);
         HSD_Free(gm_80480964.x0[1][1].image_ptr);
         gm_801A7B00();
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
     }
 }
 

@@ -54,7 +54,7 @@ void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
         e->x24 = arg2;
         e->x11 = arg3;
         if (e->x0 != NULL) {
-            HSD_GObjPLink_80390228(e->x0);
+            HSD_GObjFree(e->x0);
         }
         gobj = GObj_Create(0xE, 0xE, 0);
         jobj = HSD_JObjLoadJoint(e->x14->joint);
@@ -150,7 +150,7 @@ void ifStatus_802F7220(void)
     s32 i;
     for (i = 0; i < 8; i++) {
         if (ifStatus_803F9628[i].x0 != NULL) {
-            HSD_GObjPLink_80390228(ifStatus_803F9628[i].x0);
+            HSD_GObjFree(ifStatus_803F9628[i].x0);
             ifStatus_803F9628[i].x0 = NULL;
         }
     }

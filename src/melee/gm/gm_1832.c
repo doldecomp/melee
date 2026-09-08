@@ -742,7 +742,7 @@ void fn_801857C4(HSD_GObj* arg0)
     s32 i;
 
     if (lbl_804735E8.xE1 != 0) {
-        HSD_GObjPLink_80390228(lbl_804D65F0);
+        HSD_GObjFree(lbl_804D65F0);
         img_idx = (u8*) lbl_804735E8.x40;
         i = 0;
         delay = 1;
@@ -769,7 +769,7 @@ void fn_801857C4(HSD_GObj* arg0)
             delay += 8;
             sobj->x40 |= 9;
         }
-        HSD_GObjPLink_80390228(arg0);
+        HSD_GObjFree(arg0);
     }
 }
 

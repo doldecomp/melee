@@ -412,7 +412,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
 
 void fn_802523B8(HSD_GObj* gobj)
 {
-    HSD_GObjPLink_80390228(gobj);
+    HSD_GObjFree(gobj);
 }
 
 static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
@@ -421,7 +421,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         {
@@ -480,7 +480,7 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
     s32 i;
     PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         {
@@ -528,7 +528,7 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
         }
         HSD_JObjReqAnimAll(jobj, 0.0f);
         mnInfo_802522B8(gobj);
-        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
         proc = HSD_GObj_SetupProc(gobj, fn_802523D8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
     }

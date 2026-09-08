@@ -151,7 +151,9 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     ++cmd->u;
 
     hit->x43_b2 = 0;
-    if (HSD_GObj_804D7838 != NULL && HSD_GObj_804D7838->s_link > 11) {
+    if (HSD_GObj_CurrentInvokedProc != NULL &&
+        HSD_GObj_CurrentInvokedProc->s_link > 11)
+    {
         it_8027129C(item_gobj, hitbox_idx);
     }
 }

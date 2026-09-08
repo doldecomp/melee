@@ -940,7 +940,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
     }
     user_data = HSD_ObjAlloc(&item_alloc_data);
     if (user_data == NULL) {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
         return NULL;
     }
     GObj_InitUserData(gobj, 6, Item_OnUserDataRemove, user_data);
@@ -968,7 +968,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         foobar2(gobj);
         foobar3(gobj);
     } else {
-        HSD_GObjPLink_80390228(gobj);
+        HSD_GObjFree(gobj);
         return NULL;
     }
     return gobj;
@@ -1976,7 +1976,7 @@ void Item_8026A8EC(Item_GObj* gobj)
 
     Item_8026B0B4(gobj);
     efAsync_QueueClear((struct EF_QueuedEffect*) &ip->xBC0);
-    HSD_GObjPLink_80390228(gobj);
+    HSD_GObjFree(gobj);
 }
 
 /// Pick up item

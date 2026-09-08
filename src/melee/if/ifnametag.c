@@ -349,10 +349,10 @@ void un_802FD468(void)
     int i;
     for (i = 0; i < Gm_Player_NumMax; i++) {
         if (un_804A1EE0[i]) {
-            HSD_GObjPLink_80390228(un_804A1EE0[i]);
+            HSD_GObjFree(un_804A1EE0[i]);
         }
     }
-    HSD_GObjPLink_80390228(un_804D6D68);
+    HSD_GObjFree(un_804D6D68);
 }
 
 static inline HSD_GObj* un_802FD4C8_inline(int arg0)
