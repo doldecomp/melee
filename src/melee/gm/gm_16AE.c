@@ -1036,7 +1036,7 @@ void fn_8016C7F0(void)
         lbl_8046B6A0.x24C8.x4_3)
     {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
-        Camera_80030E44(4, NULL);
+        Camera_RequestQuake(QuakeKind_Large, NULL);
     }
     if (gm_GetCurrentGameMode() == GM_TARGET_TEST ||
         (gm_GetCurrentGameMode() == GM_CLASSIC &&
@@ -1675,7 +1675,7 @@ void fn_8016DCC0(StartMeleeData* arg0)
         lbl_8046B6A0.unk_B = arg0->rules.x7;
     }
     lbl_8046B6A0.x24C.xC = arg0->rules.xC;
-    Camera_80030E34(arg0->rules.x2C);
+    Camera_SetQuakeScale(arg0->rules.x2C);
 
     if (tmp->x24C8.timer_enabled) {
         if (tmp->x24C8.timer_counts_up) {
@@ -1983,8 +1983,8 @@ void fn_8016E730(StartMeleeData* arg0)
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
     lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.game_speed));
-    Camera_80028B9C(0x46);
-    Camera_80030688();
+    Camera_Init(70);
+    Camera_Create();
     fn_8016DCC0(arg0);
     lbRefract_800222A4();
     lb_8000FCDC();

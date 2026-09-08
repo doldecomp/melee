@@ -84,10 +84,10 @@ void it_802AFA70(Item_GObj* gobj)
     ratio = ip->xDD4_itemVar.pkflushexplode.xDD4 /
             attr->x0_FLASH_EXPL_HITBOX_SIZE_MUL;
     if (ratio > 0.84999996f) {
-        Camera_80030E44(3, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Medium, &ip->pos);
         it_80273598(gobj, 0xE, 0x14);
     } else if (ratio > 0.65f) {
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         it_80273598(gobj, 0xD, 0xF);
     } else if (ratio > 0.45f) {
         it_80273598(gobj, 0xC, 0xA);

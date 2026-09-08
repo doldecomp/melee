@@ -203,7 +203,7 @@ void gm_801A68D8(void)
     PAD_STACK(0x18);
 
     gm_GetCurrentSceneEnterData();
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

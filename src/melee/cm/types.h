@@ -4,6 +4,7 @@
 #include <melee/cm/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 typedef struct CmSubjectExtents {
@@ -63,8 +64,8 @@ struct Camera_x2D0 {
 };
 
 struct CameraQuake {
-    /* 0x0 */ Vec3 x0;
-    /* 0xC */ int type;
+    /* 0x0 */ Vec3 epicenter;
+    /* 0xC */ CmQuakeKind kind;
 };
 
 struct CameraDebugMode {
@@ -84,10 +85,7 @@ struct CameraDebugMode {
 struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
     /* 0x004 */ CameraType mode;
-    /* 0x008 */ u8 background_r;
-    /* 0x009 */ u8 background_g;
-    /* 0x00A */ u8 background_b;
-    /* 0x00B */ s8 xB;
+    /* 0x008 */ GXColor background_color;
     /* 0x00C */ f32 nearz;
     /* 0x010 */ f32 farz;
     /* 0x014 */ CameraTransformState transform;
@@ -95,13 +93,12 @@ struct Camera {
         transform_copy; // this runs the same tween logic, but isnt used for
                         // anything?
     /* 0x084 */ Vec2 translation;
-    /* 0x08C */ s32 _8C[5]; /* maybe part of translation[4]? */
-    /* 0x0A0 */ HSD_GObj* xA0;
-    /* 0x0A4 */ f32 xA4;
-    /* 0x0A8 */ f32 xA8;
-    /* 0x0AC */ f32 xAC; /* inferred */
-    /* 0x0B0 */ struct CameraQuake _B0[2][8];
-    /* 0x1B0 */ struct CameraQuake _1B0[2][8];
+    /* 0x08C */ s32 quake_frames_left[QuakeKind_Count];
+    /* 0x0A0 */ HSD_GObj* quake_gobj;
+    /* 0x0A4 */ Vec2
+        quake_offset; ///< offset from the quake model, before scaling
+    /* 0x0AC */ f32 quake_scale;
+    /* 0x0B0 */ struct CameraQuake quakes[2][16];
     /* 0x2B0 */ float x2B0;
     /* 0x2B4 */ float x2B4;
     /* 0x2B8 */ s16 x2B8;

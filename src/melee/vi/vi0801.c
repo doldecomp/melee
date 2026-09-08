@@ -143,7 +143,7 @@ void vi0801_Scene_OnEnter(void* unused)
 
     vi0801_8031EE84();
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);

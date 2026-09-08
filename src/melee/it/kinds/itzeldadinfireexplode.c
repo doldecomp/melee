@@ -89,10 +89,10 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
         it_80273598(gobj, 0xC, 0xA);
     } else if (temp_f1 < 0.8125f) {
         it_80273598(gobj, 0xD, 0xF);
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
     } else {
         it_80273598(gobj, 0xE, 0x14);
-        Camera_80030E44(3, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Medium, &ip->pos);
     }
     db_80225DD8(gobj, ip->owner);
 }

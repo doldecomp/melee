@@ -598,7 +598,7 @@ void grGreens_80213C10(Ground_GObj* gobj)
             break;
 
         case 4:
-            Camera_80030E44(1, NULL);
+            Camera_RequestQuake(QuakeKind_Loop, NULL);
             gp->u.greens2.x18 = gp->u.greens2.x14 + 1;
             if (grAnime_801C84A4(gobj, 0, 7) != 0) {
                 int wind_dir;
@@ -1109,7 +1109,7 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
         } else {
             f = 0.0f;
             gp->u.greens.x8_blocks[j][i].x1_3 = 1;
-            Camera_80030E44(2, NULL);
+            Camera_RequestQuake(QuakeKind_Small, NULL);
             HSD_JObjGetTranslation(gobj->hsd_obj, &vec);
             vec.y += 5.0f * Ground_801C0498();
             efSync_Spawn(1032, gobj, &vec, &f);

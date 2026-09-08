@@ -414,7 +414,7 @@ bool it_2725_Logic0_DmgReceived(Item_GObj* gobj)
         it_802756D0(gobj);
         it_80275474(gobj);
         it_8027CE44(gobj);
-        Camera_80030E44(2, &ip->pos);
+        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
         if (HSD_Randf() < it_804D6D40->x8) {
             it_802D839C(gobj);
         } else {
@@ -433,7 +433,7 @@ bool it_802D8098(Item_GObj* gobj)
     it_80274C88(gobj);
     it_80275474(gobj);
     it_8027CE44(gobj);
-    Camera_80030E44(2, &ip->pos);
+    Camera_RequestQuake(QuakeKind_Small, &ip->pos);
     if (ip->ground_or_air == GA_Air) {
         it_802D81FC(gobj);
     } else {

@@ -96,7 +96,7 @@ void ftCo_800976A4(Fighter_GObj* gobj)
     if (arg2 != 0) {
         ftCo_80097630(fp, common_sfx_ids, dist);
     }
-    Camera_80030E44(4, &fp->cur_pos);
+    Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 9, 0);
 }
 
@@ -197,7 +197,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         }
     } else {
         ftCo_800978D4_inline(gobj, &param_e);
-        Camera_80030E44(4, &fp->cur_pos);
+        Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
         if (fp->facing_dir * rot0 > 0) {
             ft_8008A2BC(gobj);
         } else {

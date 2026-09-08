@@ -69,7 +69,7 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObj* jobj2;
     VecMtxPtr pmtx;
 
-    Camera_80028B9C(6);
+    Camera_Init(6);
     PAD_STACK(32);
     lb_8000FCDC();
     mpColl_80041C78();

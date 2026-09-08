@@ -1141,7 +1141,7 @@ static inline void wallBounceEffect(HSD_GObj* gobj, Fighter* fp, f32 dir,
     pos->y +=
         0.5f * ABS(fp2->coll_data.ecb.top.y + fp2->coll_data.ecb.bottom.y);
     efSync_Spawn(0x406, gobj, pos, angle);
-    Camera_80030E44(3, pos);
+    Camera_RequestQuake(QuakeKind_Medium, pos);
     ftCommon_8007EBAC(fp2, 0xC, 0xA);
     ft_PlaySFX(fp2, 250070, 127, 64);
 }

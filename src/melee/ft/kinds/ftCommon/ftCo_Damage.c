@@ -512,18 +512,18 @@ block_75:
         goto block_79;
     }
     {
-        enum_t cam_enum = 4;
+        CmQuakeKind quake_kind = QuakeKind_Large;
         goto block_82;
     block_79:
         if (!(scaled_kb_154 >= p_ftCommonData->x170)) {
             goto block_81;
         }
-        cam_enum = 3;
+        quake_kind = QuakeKind_Medium;
         goto block_82;
     block_81:
-        cam_enum = 2;
+        quake_kind = QuakeKind_Small;
     block_82:
-        Camera_80030E44(cam_enum, &fp->cur_pos);
+        Camera_RequestQuake(quake_kind, &fp->cur_pos);
     }
 block_83:
     ftCommon_8007F824(gobj);
