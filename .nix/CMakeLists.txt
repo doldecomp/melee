@@ -15,7 +15,6 @@ add_compile_definitions(bool=int)
 list(FILTER SOURCES EXCLUDE REGEX "dberror.c") # OSContext register usage
 list(FILTER SOURCES EXCLUDE REGEX "debug.c") # PPC register usage
 list(FILTER SOURCES EXCLUDE REGEX "debugconsole_main.c") # PPC register usage
-list(FILTER SOURCES EXCLUDE REGEX "efalt.c") # nonstandard va_args usage
 list(FILTER SOURCES EXCLUDE REGEX "fog.c") # GXInitFogAdjTable
 list(FILTER SOURCES EXCLUDE REGEX "gmmain.c") # CARDInit
 list(FILTER SOURCES EXCLUDE REGEX "hsd_3915.c") # requires debug font from dol
