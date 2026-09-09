@@ -29,8 +29,8 @@ double floor(double x);
 
 extern inline float sqrtf(float x)
 {
-    const double _half = .5;
-    const double _three = 3.0;
+    static const double _half = .5;
+    static const double _three = 3.0;
     volatile float y;
     if (x > 0.0f)
     {
@@ -52,8 +52,8 @@ extern inline float sqrtf(float x)
 // TODO: this isn't correct! It's just to generate sdata2 in GXDraw.o
 extern inline float sqrt(float x)
 {
-    const double _half = .5;
-    const double _three = 3.0;
+    static const double _half = .5;
+    static const double _three = 3.0;
     volatile float y;
     if (x > 0.0f)
     {

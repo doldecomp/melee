@@ -122,8 +122,8 @@ parser.add_argument(
     "--reloc-diffs",
     type=str,
     choices=["none", "name_address", "data_value", "all"],
-    default="all",
-    help="how relocation targets will be diffed in the report (default 'all')",
+    default="data_value",
+    help="how relocation targets will be diffed in the report (default 'data_value')",
 )
 parser.add_argument(
     "--sjiswrap",
@@ -2008,7 +2008,7 @@ config.progress_each_module = args.verbose
 
 # Optional extra arguments to `objdiff-cli report generate`
 config.progress_report_args = [
-    # Compare relocation target names or addresses, and data values.
+    # Marks relocations as mismatching if the target value is different
     f"--config functionRelocDiffs={args.reloc_diffs}",
 ]
 

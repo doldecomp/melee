@@ -42,6 +42,7 @@ void __OSExceptionVector(void);
 void __DBVECTOR(void);
 void __OSDBINTSTART(void);
 void __OSDBINTEND(void);
+void __OSDBJUMPSTART(void);
 void __OSDBJUMPEND(void);
 
 #define NOP 0x60000000
@@ -56,7 +57,6 @@ static void (* * OSExceptionTable)(unsigned char, struct OSContext *);
 
 // functions
 static asm void __OSInitFPRs(void);
-static asm void __OSDBJump(void);
 static void OSExceptionInit(void);
 static void OSDefaultExceptionHandler(unsigned char exception /* r3 */, struct OSContext * context /* r4 */);
 
@@ -312,13 +312,13 @@ static void OSExceptionInit(void) {
         // Modify opcodes at __DBVECTOR if necessary
         if (__DBIsExceptionMarked(exception)) {
             DBPrintf(">>> OSINIT: exception %d vectored to debugger\n", exception);
-            memcpy((void*)__DBVECTOR, (void*)__OSDBJump, (u32)__OSDBJUMPEND - (u32)__OSDBJump);
+            memcpy((void*)__DBVECTOR, (void*)__OSDBJUMPSTART, (u32)__OSDBJUMPEND - (u32)__OSDBJUMPSTART);
         } else {
             // make sure the opcodes are still nop
             u32* ops = (u32*)__DBVECTOR;
             int cb;
             
-            for (cb = 0; cb < (u32)__OSDBJUMPEND - (u32)__OSDBJump; cb += sizeof(u32)) {
+            for (cb = 0; cb < (u32)__OSDBJUMPEND - (u32)__OSDBJUMPSTART; cb += sizeof(u32)) {
                 *ops++ = NOP;
             }
         }
@@ -366,6 +366,7 @@ static asm void __OSDBJump(void){
     /* clang-format off */
 
     nofralloc
+entry __OSDBJUMPSTART
     bla     OS_DBJUMPPOINT_ADDR
 entry __OSDBJUMPEND
     /* clang-format on */

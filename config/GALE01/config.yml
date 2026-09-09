@@ -6,15 +6,6 @@ mw_comment_version: 8
 quick_analysis: true
 globalize_symbols: false
 
-add_relocations:
-# The jump stub starts at the same address as __OSDBINTEND.
-- source: .text:0x803433A4
-  type: ha
-  target: __OSDBJump
-- source: .text:0x803433AC
-  type: l
-  target: __OSDBJump
-
 block_relocations:
 # GXColors in dbitem
 - source: 0x803EAE08

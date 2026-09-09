@@ -74,6 +74,21 @@ asm void PSVECScale(register Vec* src, register Vec* dst, register f32 mult)
     // clang-format on
 }
 
+void C_VECNormalize(Vec* src, Vec* unit)
+{
+    f32 mag;
+
+    ASSERTMSGLINE(0x127, src, "VECNormalize():  NULL VecPtr 'src' ");
+    ASSERTMSGLINE(0x128, unit, "VECNormalize():  NULL VecPtr 'unit' ");
+    mag = (src->z * src->z) + ((src->x * src->x) + (src->y * src->y));
+    ASSERTMSGLINE(0x12D, 0.0f != mag,
+                  "VECNormalize():  zero magnitude vector ");
+    mag = 1.0f / sqrtf(mag);
+    unit->x = src->x * mag;
+    unit->y = src->y * mag;
+    unit->z = src->z * mag;
+}
+
 void PSVECNormalize(register Vec* vec1, register Vec* dst)
 {
     register float c_half = 0.5f;
@@ -146,21 +161,6 @@ asm float PSVECMag(register Vec* v)
 	fsel    f0, f0, f0, f1
 	fmuls   f1, f1, f0
 #endif // clang-format on
-}
-
-void C_VECNormalize(Vec* src, Vec* unit)
-{
-    f32 mag;
-
-    ASSERTMSGLINE(0x127, src, "VECNormalize():  NULL VecPtr 'src' ");
-    ASSERTMSGLINE(0x128, unit, "VECNormalize():  NULL VecPtr 'unit' ");
-    mag = (src->z * src->z) + ((src->x * src->x) + (src->y * src->y));
-    ASSERTMSGLINE(0x12D, 0.0f != mag,
-                  "VECNormalize():  zero magnitude vector ");
-    mag = 1.0f / sqrtf(mag);
-    unit->x = src->x * mag;
-    unit->y = src->y * mag;
-    unit->z = src->z * mag;
 }
 
 f32 C_VECMag(Vec* v)
