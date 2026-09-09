@@ -43,7 +43,7 @@ void ftCo_800C23FC(Fighter_GObj* gobj)
     {
         float pos_y_offset = fp->cur_pos.y + ef_offset.y;
         Vec3 ef_pos;
-        u8 _[4] = { 0 };
+        u8 _[4];
         ef_pos.x = fp->cur_pos.x;
         ef_pos.y = pos_y_offset;
         ef_pos.z = fp->cur_pos.z;

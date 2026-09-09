@@ -10,7 +10,7 @@
 
 void ftCo_800C5B88(Fighter_GObj* gobj, enum_t arg1)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     /// @todo Cannot move below @c fp, which suggests an inline
     u32 flags;
     Fighter* fp = GET_FIGHTER(gobj);

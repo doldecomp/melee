@@ -59,7 +59,7 @@ bool ftCo_AttackLw3_CheckInput(Fighter_GObj* gobj)
 
 void callUnk(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     ft_800892A0(gobj);
     ft_80089824(gobj);
 }

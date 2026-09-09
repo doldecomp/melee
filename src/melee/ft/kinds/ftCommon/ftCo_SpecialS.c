@@ -40,7 +40,7 @@ bool ftCo_SpecialS_CheckInput(Fighter_GObj* gobj)
 
 static void doEnter(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     fp->gr_vel +=
         -(fp->gr_vel * (1 - fp->co_attrs.specials_ground_speed_retention)) *

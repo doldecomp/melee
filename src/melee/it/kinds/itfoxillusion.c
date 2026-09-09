@@ -92,7 +92,7 @@ bool itFoxIllusion_Logic14_DmgDealt(Item_GObj* item_gobj)
 
 void itFoxIllusion_Logic14_Destroyed(Item_GObj* item_gobj)
 {
-    u8 _[4] = { 0 };
+    u8 _[4];
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.foxillusion.xDDC != NULL) {
         HSD_JObjRemoveAll(item->xDD4_itemVar.foxillusion.xDDC);
@@ -105,7 +105,7 @@ void itFoxIllusion_Logic14_Destroyed(Item_GObj* item_gobj)
 void it_8029CFF0(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    u8 _[4] = { 0 };
+    u8 _[4];
 
     item->xD44_lifeTimer =
         *(f32*) item->xC4_article_data->x4_specialAttributes;

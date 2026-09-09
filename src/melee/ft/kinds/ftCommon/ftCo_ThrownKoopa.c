@@ -13,7 +13,7 @@
 
 void ftCo_800BCDE0(Fighter_GObj* gobj, FtMotionId msid)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     ftCo_Thrown_Enter(gobj, msid, Ft_MF_None, 0);
     ftAnim_8006EBA4(gobj);
 }

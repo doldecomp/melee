@@ -97,7 +97,7 @@ void it_8027CF30(Item_GObj* gobj)
 
 void it_8027CFE8(Item_GObj* item_gobj)
 {
-    u8 _[4] = { 0 };
+    u8 _[4];
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
     Item* it = GET_ITEM(item_gobj);
     Vec3 sp14;

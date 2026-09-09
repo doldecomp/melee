@@ -418,7 +418,7 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
             }
             case 4: {
                 if (fobj->fterm <= fobj->time) {
-                    u8 _[8] = { 0 };
+                    u8 _[8];
                     state =
 #ifdef MUST_MATCH
                         state =

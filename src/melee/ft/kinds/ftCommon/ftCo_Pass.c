@@ -37,7 +37,7 @@ bool ftCo_80099F1C(Fighter_GObj* gobj)
 
 bool ftCo_80099F9C(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     if (ftCo_800C5240(gobj)) {
         return ftCo_800C60C8(gobj);
@@ -52,7 +52,7 @@ bool ftCo_80099F9C(Fighter_GObj* gobj)
 
 bool ftCo_8009A080(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     if (fp->input.held_buttons[0] & HSD_PAD_LR && ftCo_80099F1C(gobj)) {
         ftCo_8009A228(gobj);
@@ -63,7 +63,7 @@ bool ftCo_8009A080(Fighter_GObj* gobj)
 
 bool ftCo_8009A134(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
     if (mpColl_IsOnPlatform(coll)) {
@@ -76,7 +76,7 @@ bool ftCo_8009A134(Fighter_GObj* gobj)
 void ftCo_8009A184(Fighter_GObj* gobj, FtMotionId msid, MotionFlags mf,
                    float anim_start)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     ftCommon_ClampAirDrift(fp);

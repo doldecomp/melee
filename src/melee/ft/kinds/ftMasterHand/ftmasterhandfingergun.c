@@ -100,7 +100,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    u8 _[4] = { 0 };
+    u32 _ = 0;
 
     volatile float y;
     if (x > 0) {

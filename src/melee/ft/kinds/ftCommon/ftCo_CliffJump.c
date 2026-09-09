@@ -20,7 +20,7 @@
 
 bool ftCo_8009B170(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     if (ftCo_Jump_GetInput(gobj)) {
         ftCo_8009B1B8(gobj);
         return true;

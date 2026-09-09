@@ -259,10 +259,6 @@ void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir)
     PSVECNormalize(dir, dir);
 }
 
-f32 const lbl_804DE450 = 0.5F;
-f32 const lbl_804DE454 = 0.0F;
-f32 const lbl_804DE458 = 1.0F;
-
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
 {
     f32 k0 = shininess;
