@@ -31,7 +31,7 @@ struct lbl_804D65A8_t;
 /* 1701A0 */ UNK_RET gm_801701A0(UNK_PARAMS);
 /* 1701AC */ UNK_RET fn_801701AC(UNK_PARAMS);
 /* 1701B8 */ int fn_801701B8(void);
-/* 1701C0 */ int fn_801701C0(void*, int, int);
+/* 1701C0 */ int fn_801701C0(struct lbl_8046B6A0_24C_t*, int, int);
 /* 171A88 */ int fn_80171A88(void);
 /* 171AD4 */ UNK_RET fn_80171AD4(UNK_PARAMS);
 /* 171B00 */ bool fn_80171B00(int);

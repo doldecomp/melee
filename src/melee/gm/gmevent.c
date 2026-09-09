@@ -636,7 +636,6 @@ void onExitVs(GameModeState* arg0)
     struct EventData* ev = &gmMainLib_804D3EE0->vs.unk_530;
     MatchExitInfo* exit = gm_GetGameModeStateExitData(arg0);
     u8 stage = ev->unk_535;
-    u8 b;
     u8 kind;
     s32 t;
 
@@ -677,8 +676,7 @@ void onExitVs(GameModeState* arg0)
     }
     ev->x3C += gm_80168940(&vs_exit_data[0].match_end);
     ev->x40 += (s32) exit->match_end.frame_count;
-    b = ((u8*) ev)[0xB];
-    if (((b >> 3) & 1) && ((b >> 5) & 1)) {
+    if (ev->xB_4 && ev->xB_2) {
         ev->x24 = vs_exit_data[0].match_end.player_standings[0].stocks;
         ev->x28 = vs_exit_data[0].match_end.player_standings[0].percent;
         ev->xB_2 = 0;
@@ -1558,7 +1556,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         mi = gmVs_GetController_0();
         if (ev3->xB_0) {
             var_r0 = 0;
-        } else if (((*(u8*) &mi->start >> 1U) & 1) && gm_8016AEEC() == 0 &&
+        } else if (mi->start.timer_enabled && gm_8016AEEC() == 0 &&
                    gm_8016AEFC() == 0x3B)
         {
             var_r0 = 1;
@@ -2605,7 +2603,6 @@ u8 gm_801BEBF8(u8 arg0)
     u8 i;
     struct gm_804D6900_t** array = gm_804D6900[0];
     struct gm_804D6900_t* entry;
-    u8* ptr;
 
     for (i = 0; i < 0x33; i++) {
         if (arg0 == table[i]) {
@@ -2618,8 +2615,7 @@ u8 gm_801BEBF8(u8 arg0)
         return ChKind_None;
     }
 
-    ptr = *(u8**) ((u8*) entry + 0x14);
-    return *ptr;
+    return entry->player_init[0]->c_kind;
 }
 
 UNK_T gm_801BEC54(void)

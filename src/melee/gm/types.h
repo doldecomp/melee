@@ -424,7 +424,7 @@ struct lbl_8046B6A0_24C_t {
     u8 is_teams;
     u8 x7;
     u32 x8;
-    u8 xC;
+    s8 xC;
     u8 xD;
     u8 xE;
     u8 padF[0x16 - 0xF];
