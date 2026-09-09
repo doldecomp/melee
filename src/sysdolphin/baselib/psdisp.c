@@ -1980,7 +1980,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         psSetCurrentMtx(GX_PNMTX0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSetArray(GX_VA_TEX0, HSD_PSDisp_8040C340, 2U);
+                        GXSETARRAY(GX_VA_TEX0, HSD_PSDisp_8040C340,
+                                   sizeof(HSD_PSDisp_8040C340), 2, true);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
