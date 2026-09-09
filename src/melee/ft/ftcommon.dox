@@ -12,11 +12,14 @@
 #include <dolphin/mtx.h>
 
 void ftCommon_CalcGroundAccel_Deaccel(Fighter*, float);
-void ftCommon_CalcGroundAccel_DashRun(Fighter*, float vel, float, float gr_friction);
-void ftCommon_CalcGroundAccel_AccelToVel(Fighter* fp, float result, float, float);
+void ftCommon_CalcGroundAccel_DashRun(Fighter*, float vel, float,
+                                      float gr_friction);
+void ftCommon_CalcGroundAccel_AccelToVel(Fighter* fp, float result, float,
+                                         float);
 void ftCommon_CalcGroundAccel_AccelToLStickX(Fighter*, float, float, float);
 void ftCommon_SetSelfMovementFromGroundedMovement(Fighter_GObj*);
-Fighter_GObj* ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
+Fighter_GObj*
+ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
 void ftCommon_ClampGroundVel(Fighter*, float);
 void ftCommon_ApplyGroundedKnockbackFriction(Fighter*, float);
 void ftCommon_SetGroundedKnockbackIfLanded(Fighter*);
@@ -29,12 +32,14 @@ void ftCommon_CalcSelfAccel_DeaccelAir(Fighter*);
 bool ftCommon_CalcSelfAccel_DeaccelQuickAir(Fighter*);
 bool ftCommon_CalcSelfAccel_DeaccelQuick(Fighter*, float);
 void ftCommon_CalcSelfAccel_AccelToVelClamped(Fighter*, float, float, float);
-void ftCommon_CalcSelfAccel_AccelToVelClampedFrom(Fighter*, float, float, float, float);
+void ftCommon_CalcSelfAccel_AccelToVelClampedFrom(Fighter*, float, float,
+                                                  float, float);
 void ftCommon_CalcSelfAccel_Drift(Fighter*);
 void ftCommon_CalcSelfAccel_DriftFrom(Fighter*, float);
 void ftCommon_CalcSelfAccel_AccelToVel(Fighter*, float, float);
 void ftCommon_CalcSelfAccel_DriftSimple(Fighter*, float, float, float);
-void ftCommon_CalcSelfAccel_DriftSimple_NoFriction(Fighter*, float, float, float);
+void ftCommon_CalcSelfAccel_DriftSimple_NoFriction(Fighter*, float, float,
+                                                   float);
 void ftCommon_ClampSelfVelX(Fighter*, float);
 void ftCommon_ClampAirDrift(Fighter*);
 void ftCommon_Fall(Fighter*, float, float);
