@@ -1229,7 +1229,7 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
     PAD_STACK(8);
 
     if ((u32) data->x8 == 0 && data->x0_4) {
-        gm_801A4634(0);
+        gm_SetDbPauseFlag(0);
     }
 
     if ((u32) data->x8 == 0xA2) {

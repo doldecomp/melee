@@ -2438,7 +2438,7 @@ void gm_801BE638(HSD_GObj* gobj)
                 temp_r30->x18 = 1;
             }
             ftBossLib_8015CB9C(temp_r30->x18);
-            gm_801A4634(6);
+            gm_SetDbPauseFlag(6);
             Player_80031790(0);
             Player_80036844(0, 1);
             temp_r30->x34 = gm_GetFrameCount();
@@ -2448,7 +2448,7 @@ void gm_801BE638(HSD_GObj* gobj)
         if (temp_r30->x10 == temp_r31) {
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
-            gm_801A4674(6);
+            gm_ClearDbPauseFlag(6);
             gm_SetGameSpeed(0.5F);
             lbBgFlash_80020688(temp_r29);
         }
@@ -2479,12 +2479,12 @@ void gm_801BE638(HSD_GObj* gobj)
         temp_r28_3 = temp_r31 + temp_r28;
         if ((s32) temp_r30->x10 == 0) {
             ftBossLib_8015CB9C(temp_r30->x18);
-            gm_801A4634(6);
+            gm_SetDbPauseFlag(6);
         }
         if ((s32) temp_r30->x10 == temp_r31) {
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
-            gm_801A4674(6);
+            gm_ClearDbPauseFlag(6);
             gm_SetGameSpeed(0.5F);
         }
         if ((s32) temp_r30->x10 == temp_r28_3) {

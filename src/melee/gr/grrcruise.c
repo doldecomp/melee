@@ -1176,7 +1176,7 @@ void grRCruise_80201B60(HSD_JObj* jobj, bool clear)
 
 void fn_80201BE0(HSD_GObj* gobj, int pass)
 {
-    if (gm_801A45E8(1) || gm_801A45E8(2) || Camera_8003010C()) {
+    if (gm_GetDbPauseFlag(1) || gm_GetDbPauseFlag(2) || Camera_8003010C()) {
         return;
     }
     grDisplay_801C5DB0(gobj, pass);

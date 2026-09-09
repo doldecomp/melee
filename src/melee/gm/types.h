@@ -920,16 +920,20 @@ struct TmVsData {
     u32 color[4];
 };
 
+struct gm_DbPauseInputHandlers {
+    /*  +0 */ Predicate check_pause;
+    /*  +4 */ Predicate check_framestep;
+};
+
 struct gm_801677C0_s {
-    /*  +1 */ u8 x0;
-    /*  +2 */ u8 x1;
-    /*  +3 */ u8 x2;
-    /*  +4 */ u8 x3;
-    /*  +4 */ bool (*x4[2])(void);
-    /*  +C */ UNK_T xC;
+    /*  +0 */ u8 x0;
+    /*  +1 */ u8 x1;
+    /*  +2 */ u8 x2;
+    /*  +3 */ u8 x3;
+    /*  +4 */ struct gm_DbPauseInputHandlers db_input;
     /* +20 */ u64 unk_20;
     /* +28 */ u64 unk_28;
-    /* +30 */ void (*unk_30)(void);
+    /* +30 */ void (*pre_gobj_proc)(void);
     /* +34 */ int unk_34;
     /* +38 */ u8 unk_38_0 : 1;
     /* +38 */ u8 unk_38_1 : 1;

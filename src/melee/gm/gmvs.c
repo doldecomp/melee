@@ -1146,7 +1146,7 @@ void gm_DoPauseChecksAndRoutine(VsSceneController* arg0, int arg1)
                 }
                 gm_801A0FEC(pauser, var_r4);
             }
-            gm_801A4634((s64) arg1);
+            gm_SetDbPauseFlag((s64) arg1);
             if (arg0->start.x4_0) {
                 pauserSlot = gm_GetSlotByPlayerId(pauser);
                 if (arg0->start.on_pause_override != NULL) {
@@ -1215,7 +1215,7 @@ void gm_DoUnpauseChecksAndRoutine(VsSceneController* arg0, int arg1)
 
     if (i != -1 && i == arg0->pauser) {
         lbAudioAx_80024E84(0);
-        gm_801A4674(arg1);
+        gm_ClearDbPauseFlag(arg1);
         ifAll_802F33CC();
         gm_801A10FC(i);
         HSD_PadRumbleUnpauseAll();
@@ -1293,13 +1293,13 @@ void fn_8016CF4C(int slot, MatchOutcome matchResult)
     gm_801A10FC(slot);
     controller.match_result = matchResult;
     if (matchResult != OUTCOME_RETRY && DbLevel >= DbLKind_DebugRom) {
-        gm_801A4674(1);
+        gm_ClearDbPauseFlag(1);
         if (controller.start.xD > 1) {
             controller.unk_30 = controller.start.xD - 1;
         }
         fn_8016C7F0();
         lbAudioAx_80024D50();
-        gm_801A4634(4);
+        gm_SetDbPauseFlag(4);
         controller.unk_0 = 1;
         return;
     }
@@ -1348,7 +1348,7 @@ void fn_8016CFE0(void)
 
     fn_8016A4C8();
     fn_8016758C();
-    if (gm_801A45E8(1) != 0) {
+    if (gm_GetDbPauseFlag(1) != 0) {
         unpauser_slot = gm_GetPlayerPressingUnpause();
         if (DbLevel >= DbLKind_DebugRom) {
             tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A;
@@ -1401,7 +1401,7 @@ void fn_8016CFE0(void)
         fn_8016C7F0();
         ifStatus_802F7034(fn_8016B88C);
         lbAudioAx_80024D50();
-        gm_801A4634(4);
+        gm_SetDbPauseFlag(4);
         tmp->unk_0 = 1;
     } else {
         fn_8016CD98(tmp);
@@ -1444,7 +1444,7 @@ void gm_Scene_Training_OnFrame(void)
     fn_8016CFE0_inline();
 
     fn_8016758C();
-    if (gm_801A45E8(2) != 0) {
+    if (gm_GetDbPauseFlag(2) != 0) {
         fn_8016CBE8_inline();
         gm_DoUnpauseChecksAndRoutine(tmp, 2);
         if (tmp->pause_timer != 0) {
@@ -1506,8 +1506,8 @@ void fn_8016D634(void)
     {
         un_802FD668();
         ifAll_802F3A64();
-        gm_801A4674(4);
-        gm_801A4634(5);
+        gm_ClearDbPauseFlag(4);
+        gm_SetDbPauseFlag(5);
         controller.unk_9 = 1;
         dst = &tmp->x24C;
         copied_dst = dst;
@@ -1989,10 +1989,11 @@ void fn_8016E730(StartMeleeData* arg0)
     VsSceneController* r30;
 
     db_Setup();
-    gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
-    gm_801A4B40(db_RunEveryFrame);
+    gm_SetDbPauseInputHandlers(gm_AnyControllerPressedStart,
+                               gm_AnyControllerPressedZ);
+    gm_SetPreGObjProcCallback(db_RunEveryFrame);
     gm_801A4B50(1);
-    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.game_speed));
+    lb_80019880(OSSecondsToTicks(1.0F / GM_FPS / arg0->rules.game_speed));
     Camera_Init(70);
     Camera_Create();
     fn_8016DCC0(arg0);

@@ -1890,7 +1890,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 } else if (fp->input.triggers[0]) {
                     fp->input.held_buttons[0] |= HSD_PAD_LR;
                 }
-                if (!gm_801A45E8(0)) {
+                if (!gm_GetDbPauseFlag(0)) {
                     if (fp->input.held_buttons[0] & HSD_PAD_Z) {
                         fp->input.held_buttons[0] |= HSD_PAD_LR | HSD_PAD_A;
                         fp->input.triggers[0] =
@@ -2116,7 +2116,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x221D_b4 || fp->x2224_b2 || gm_801A45E8(2)) {
+        if (fp->x221D_b4 || fp->x2224_b2 || gm_GetDbPauseFlag(2)) {
             fp->input.lstick[2].x = fp->input.lstick[0].x;
             fp->input.lstick[2].y = fp->input.lstick[0].y;
             fp->input.cstick[2].x = fp->input.cstick[0].x;
