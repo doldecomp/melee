@@ -4,6 +4,9 @@
 #include <string.h>
 
 #include "hsd_3A94.h"
+#include "hsd_3B34.h"
+
+extern JpegWork hsd_804D2648;
 
 void hsd_803B3344(u8 byte)
 {
@@ -16,7 +19,7 @@ void hsd_803B3344(u8 byte)
         return;
     }
 
-    longjmp(&hsd_804D2648, true);
+    longjmp(hsd_804D2648.buf, true);
 }
 
 void hsd_803B3398(void* src, size_t size)
@@ -29,5 +32,5 @@ void hsd_803B3398(void* src, size_t size)
         return;
     }
 
-    longjmp(&hsd_804D2648, true);
+    longjmp(hsd_804D2648.buf, true);
 }

@@ -3,6 +3,17 @@
 
 #include <Runtime/platform.h>
 
+#include <setjmp.h>
+
+typedef struct JpegWork {
+    jmp_buf buf;
+    s32 x118[0x100];
+    s32 x518[0x40];
+    s32 x618[0x40];
+    s32 coef[0x40];
+    s32 prev_dc[3];
+} JpegWork;
+
 /* 3B3408 */ void hsd_803B3408(u8*, s32, s32, s32, s32);
 /* 3B3CD8 */ void hsd_803B3CD8(s32);
 /* 3B46D4 */ void hsd_803B46D4(void);

@@ -5896,7 +5896,7 @@ sysdolphin/baselib/sislib.c:
 	.sdata2     start:0x804DEAA8 end:0x804DEAB8
 
 sysdolphin/baselib/hsd_4D11.c:
-	.bss        start:0x804D1138 end:0x804D3694
+	.bss        start:0x804D1138 end:0x804D2648
 	.sbss       start:0x804D7980 end:0x804D79A0
 
 sysdolphin/baselib/hsd_3A64.c:
@@ -5938,6 +5938,7 @@ sysdolphin/baselib/hsd_3B34.c:
 	.text       start:0x803B3408 end:0x803B5C4C
 	.rodata     start:0x803B9670 end:0x803B9826
 	.data       start:0x80430C40 end:0x80431090
+	.bss        start:0x804D2648 end:0x804D2E70
 	.sdata      start:0x804D6398 end:0x804D639C
 	.sdata2     start:0x804DEB10 end:0x804DEB90
 
@@ -5946,4 +5947,5 @@ sysdolphin/baselib/hsd_3B5C.c:
 	extabindex  start:0x800058E8 end:0x80005918
 	.text       start:0x803B5C4C end:0x803B7230
 	.data       start:0x80431090 end:0x804316C0
+	.bss        start:0x804D2E70 end:0x804D3694
 	.sdata2     start:0x804DEB90 end:0x804DEC00

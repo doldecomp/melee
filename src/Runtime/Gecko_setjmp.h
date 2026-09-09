@@ -1,7 +1,7 @@
 #ifndef RUNTIME_GECKO_SETJMP_H
 #define RUNTIME_GECKO_SETJMP_H
 
-typedef struct __jmp_buf {
+typedef struct jmp_buf {
     unsigned long pc;       /*	0: saved PC			*/
     unsigned long cr;       /*	4: saved CR			*/
     unsigned long sp;       /*  8: saved SP			*/
@@ -27,9 +27,13 @@ typedef struct __jmp_buf {
     double fp30;
     double fp31;
     double fpscr; /* 240: saved FPSCR		*/
-} __jmp_buf;
+    int pad[8];
+} jmp_buf;
 
-int __setjmp(register __jmp_buf*);
-void longjmp(register __jmp_buf* env, register int val);
+void __longjmp(register jmp_buf* env, int val);
+int __setjmp(register jmp_buf* env);
+
+#define setjmp(env) __setjmp(&(env))
+#define longjmp(env, val) __longjmp(&(env), val)
 
 #endif
