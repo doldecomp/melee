@@ -5301,7 +5301,6 @@ s32 mnCharSel_802640A0(void)
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-
 void mnCharSel_Scene_OnEnter(void* arg0)
 {
     PAD_STACK(8);
