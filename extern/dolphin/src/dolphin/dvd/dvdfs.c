@@ -199,44 +199,6 @@ BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo)
     return TRUE;
 }
 
-#ifndef MUST_MATCH
-BOOL DVDOpen(char* fileName, DVDFileInfo* fileInfo)
-{
-    s32 entry;
-    char currentDir[128];
-
-    ASSERTMSGLINE(0x1D3, fileName,
-                  "DVDOpen(): null pointer is specified to file name  ");
-    ASSERTMSGLINE(
-        0x1D4, fileInfo,
-        "DVDOpen(): null pointer is specified to file info address  ");
-
-    entry = DVDConvertPathToEntrynum(fileName);
-
-    if (0 > entry) {
-        DVDGetCurrentDir(currentDir, 128);
-        OSReport("Warning: DVDOpen(): file '%s' was not found under %s.\n",
-                 fileName, currentDir);
-        return FALSE;
-    }
-
-    if (entryIsDir(entry)) {
-        ASSERTMSG1LINE(
-            0x1E2, !entryIsDir(entry),
-            "DVDOpen(): directory '%s' is specified as a filename  ",
-            fileName);
-        return FALSE;
-    }
-
-    fileInfo->startAddr = filePosition(entry);
-    fileInfo->length = fileLength(entry);
-    fileInfo->callback = (DVDCallback) NULL;
-    fileInfo->cb.state = DVD_STATE_END;
-
-    return TRUE;
-}
-#endif
-
 BOOL DVDClose(DVDFileInfo* fileInfo)
 {
     ASSERTMSGLINE(
@@ -401,6 +363,42 @@ static void cbForReadAsync(s32 result, DVDCommandBlock* block)
     if (fileInfo->callback) {
         (fileInfo->callback)(result, fileInfo);
     }
+}
+
+BOOL DVDOpen(char* fileName, DVDFileInfo* fileInfo)
+{
+    s32 entry;
+    char currentDir[128];
+
+    ASSERTMSGLINE(0x1D3, fileName,
+                  "DVDOpen(): null pointer is specified to file name  ");
+    ASSERTMSGLINE(
+        0x1D4, fileInfo,
+        "DVDOpen(): null pointer is specified to file info address  ");
+
+    entry = DVDConvertPathToEntrynum(fileName);
+
+    if (0 > entry) {
+        DVDGetCurrentDir(currentDir, 128);
+        OSReport("Warning: DVDOpen(): file '%s' was not found under %s.\n",
+                 fileName, currentDir);
+        return FALSE;
+    }
+
+    if (entryIsDir(entry)) {
+        ASSERTMSG1LINE(
+            0x1E2, !entryIsDir(entry),
+            "DVDOpen(): directory '%s' is specified as a filename  ",
+            fileName);
+        return FALSE;
+    }
+
+    fileInfo->startAddr = filePosition(entry);
+    fileInfo->length = fileLength(entry);
+    fileInfo->callback = (DVDCallback) NULL;
+    fileInfo->cb.state = DVD_STATE_END;
+
+    return TRUE;
 }
 
 long DVDReadPrio(struct DVDFileInfo* fileInfo, void* addr, long length,

@@ -116,7 +116,9 @@ Select an object from the left sidebar to begin diffing. Changes to the project 
 ![](assets/objdiff.png)
 
 > [!TIP]
-> Set `Function relocation diffs` to `Name or address, data value` under `Diff Options` to use the same checks as the progress report.
+> It's recommended that you enable the `Relax relocation diffs` option under `Diff Options`.
+
+![](assets/relax.png)
 
 # Contributing
 
