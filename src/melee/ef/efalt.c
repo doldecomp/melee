@@ -5,6 +5,7 @@
 
 #include "eflib.h"
 #include "types.h"
+#include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -209,8 +210,7 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist_arg)
         break;
     }
     case 0x494: {
-        void* user_data;
-        HSD_JObj** jobj_ptr;
+        Fighter* fp;
         HSD_JObj* jobj;
         HSD_JObj* jobj_2;
         EF_Effect* effect_1;
@@ -219,10 +219,9 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist_arg)
         u16 effect_flags;
 
         effect_flags = 0x41;
-        user_data = gobj->user_data;
-        jobj_ptr = *(HSD_JObj***) ((u8*) user_data + 0x5E8);
-        jobj = jobj_ptr[0xB0];
-        jobj_2 = jobj_ptr[4];
+        fp = gobj->user_data;
+        jobj = fp->parts[FtPart_R3rdNa].joint;
+        jobj_2 = fp->parts[FtPart_TransN].joint;
         ret_obj = efLib_Create_AttachChild(0x1388U, gobj, jobj);
         if (ret_obj != NULL) {
             effect_1 = ret_obj;
@@ -235,14 +234,14 @@ void* efAlt_Spawn(s32 gfx_id, HSD_GObj* gobj, va_list vlist_arg)
                 effect_2 = (void*) effect_1->next;
                 effect_2->update = efLib_Cb_SetRotYAndTransition;
                 effect_2->lifetime = effect_flags;
-                effect_2->user_data = user_data;
+                effect_2->user_data = fp;
                 next_eff = (void*) efLib_Create_Attach(0x138AU, gobj, jobj_2);
                 effect_2->next = next_eff;
                 if (next_eff != NULL) {
                     effect_1 = (void*) effect_2->next;
                     effect_1->update = efLib_Cb_SetRotYAndTransition;
                     effect_1->lifetime = effect_flags;
-                    effect_1->user_data = user_data;
+                    effect_1->user_data = fp;
                 }
             }
         }
