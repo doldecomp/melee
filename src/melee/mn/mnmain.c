@@ -1656,15 +1656,14 @@ HSD_GObj* mn_8022BE34(void)
     return gobj;
 }
 
-static inline HSD_GObj* mn_8022BE34_OnEnter(void)
+static inline HSD_GObj* mn_8022BE34_OnEnter(Vec3* pos)
 {
-    Vec3 pos;
     HSD_GObj* gobj = GObj_Create(2, 3, 0x80);
     HSD_CObj* cobj;
 
     mn_804D6BAC = gobj;
     cobj = HSD_CObjLoadDesc(MenMain_cam);
-    HSD_CObjGetEyePosition(cobj, (Vec3*) ((u8*) &pos + 0x14));
+    HSD_CObjGetEyePosition(cobj, pos);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_8022BDB4, 0);
     gobj->gxlink_prios = 0x7F;
@@ -2757,6 +2756,7 @@ static inline void mn_8022DDA8_inline(const u16* sp2B4)
 
 void mnMain_Scene_OnEnter(void* user_data)
 {
+    Vec3 pos;
     u16* hovered_selection;
     HSD_GObj* temp_r3_8;
     u8 menu_kind;
@@ -2938,7 +2938,7 @@ void mnMain_Scene_OnEnter(void* user_data)
 
     mn_8022DDA8_inline(hovered_selection);
     mn_8022BCF8();
-    mn_8022BEDC(mn_8022BE34_OnEnter());
+    mn_8022BEDC(mn_8022BE34_OnEnter(&pos));
     mn_80229B2C();
     mn_80229DC0();
 
