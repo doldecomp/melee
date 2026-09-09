@@ -353,7 +353,7 @@ void grZakoGenerator_801CAF08(void)
     PAD_STACK(8);
 
     lbl_8049F030.xA_b0 = false;
-    cur = HSD_GObj_Entities->items;
+    cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 
     while (cur != NULL) {
         next = cur->next;

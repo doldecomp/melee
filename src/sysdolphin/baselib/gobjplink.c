@@ -16,8 +16,8 @@ void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
         gobj->next = hiprio_gobj->next;
         hiprio_gobj->next = gobj;
     } else {
-        gobj->next = ((HSD_GObj**) HSD_GObj_Entities)[link];
-        ((HSD_GObj**) HSD_GObj_Entities)[link] = gobj;
+        gobj->next = HSD_GObjPLinkHead[link];
+        HSD_GObjPLinkHead[link] = gobj;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj;
@@ -44,7 +44,7 @@ static inline void gobj_first_lower_prio(HSD_GObj* gobj)
 
 static inline void gobj_first_higher_prio(HSD_GObj* gobj)
 {
-    HSD_GObj* var_r4 = ((HSD_GObj**) HSD_GObj_Entities)[gobj->p_link];
+    HSD_GObj* var_r4 = HSD_GObjPLinkHead[gobj->p_link];
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
@@ -118,7 +118,7 @@ void HSD_GObjFree(HSD_GObj* gobj)
     if (gobj->prev != NULL) {
         gobj->prev->next = gobj->next;
     } else {
-        ((HSD_GObj**) HSD_GObj_Entities)[gobj->p_link] = gobj->next;
+        HSD_GObjPLinkHead[gobj->p_link] = gobj->next;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj->prev;
@@ -163,7 +163,7 @@ void HSD_GObjPLink_ChangeGObjPri_Unk(u32 arg0, HSD_GObj* gobj, u8 p_link,
     if (gobj->prev != NULL) {
         gobj->prev->next = gobj->next;
     } else {
-        ((HSD_GObj**) HSD_GObj_Entities)[gobj->p_link] = gobj->next;
+        HSD_GObjPLinkHead[gobj->p_link] = gobj->next;
     }
     if (gobj->next != NULL) {
         gobj->next->prev = gobj->prev;

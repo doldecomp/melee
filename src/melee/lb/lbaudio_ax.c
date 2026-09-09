@@ -1480,7 +1480,7 @@ bool lbAudioAx_80026510(HSD_GObj* target)
     PAD_STACK(8);
 
     if (target != NULL) {
-        cur = ((HSD_GObj**) HSD_GObj_Entities)[GOBJ_TYPE_AUDIO_AX];
+        cur = HSD_GObjPLinkHead[GOBJ_TYPE_AUDIO_AX];
 
         while (cur != NULL) {
             lbAudioAx_UserData* ud = GET_SOUND(cur);
@@ -1508,7 +1508,7 @@ bool lbAudioAx_800265C4(HSD_GObj* target_obj, int voice)
 
     PAD_STACK(8);
 
-    cur = ((HSD_GObj**) HSD_GObj_Entities)[GOBJ_TYPE_AUDIO_AX];
+    cur = HSD_GObjPLinkHead[GOBJ_TYPE_AUDIO_AX];
 
     while (cur != NULL) {
         lbAudioAx_UserData* ud = GET_SOUND(cur);

@@ -149,7 +149,9 @@ static void fn_802270C4(int arg0)
     Fighter* ft;
     int stack;
 
-    for (gobj = HSD_GObj_Entities->fighters; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != NULL;
+         gobj = gobj->next)
+    {
         ft = GET_FIGHTER(gobj);
         if (ft != NULL && ft->x20A4.shadow != NULL) {
             ft->x20A4.x0_b5 = !arg0;
@@ -163,7 +165,9 @@ static void fn_8022713C(int arg0)
     HSD_GObj* gobj;
     Ground* ground;
 
-    for (gobj = HSD_GObj_Entities->x14; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_GROUND]; gobj != NULL;
+         gobj = gobj->next)
+    {
         ground = gobj->user_data;
         if (ground != NULL) {
             ground->x10_flags.b7 = arg0;

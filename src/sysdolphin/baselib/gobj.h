@@ -8,23 +8,6 @@
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
 
-#define HSD_GOBJ_CLASS_STAGE 0x3
-#define HSD_GOBJ_CLASS_FIGHTER 0x4
-#define HSD_GOBJ_CLASS_ITEM 0x6
-
-/// Used by chain-type items in-game to link multiple parts together
-#define HSD_GOBJ_CLASS_ITEMLINK 0x7
-
-#define HSD_GOBJ_CLASS_EFFECT 0x8
-#define HSD_GOBJ_CLASS_SISLIB_UNK 0x9
-#define HSD_GOBJ_CLASS_FOG 0xA
-#define HSD_GOBJ_CLASS_LIGHT 0xB
-#define HSD_GOBJ_CLASS_GROUND 0xD
-#define HSD_GOBJ_CLASS_UI 0xE
-#define HSD_GOBJ_CLASS_TEXT 0x11
-#define HSD_GOBJ_CLASS_CAMERA 0x13
-#define HSD_GOBJ_CLASS_SOUND 0x17
-
 typedef struct HSD_GObj {
     /*  +0 */ u16 classifier;
     /*  +2 */ u8 p_link;
@@ -62,29 +45,6 @@ typedef struct _HSD_GObjLibInitDataType {
     u64* unk_2;       // 804CE388
 } HSD_GObjLibInitDataType;
 
-/// @todo Belongs in `melee/` somewhere
-typedef struct HSD_GObjList {
-    /*  +0 */ HSD_GObj* x0;
-    /*  +4 */ HSD_GObj* x4;
-    /*  +8 */ HSD_GObj* x8;
-    /*  +C */ HSD_GObj* xC;
-    /* +10 */ HSD_GObj* x10;
-    /* +14 */ HSD_GObj* x14;
-    /* +18 */ HSD_GObj* x18;
-    /* +1C */ HSD_GObj* x1C;
-    /* +20 */ HSD_GObj* fighters;
-    /* +24 */ HSD_GObj* items;
-    /* +28 */ HSD_GObj* x28;
-    /* +2C */ HSD_GObj* x2C; // Effects? (See efLib_SetFlags)
-    /* +30 */ HSD_GObj* x30; // Effects? (See efLib_SetFlags)
-    /* +34 */ HSD_GObj* x34;
-    /* +38 */ HSD_GObj* x38;
-    /* +3C */ HSD_GObj* x3C;
-    /* +40 */ HSD_GObj* x40;
-    /* +44 */ HSD_GObj* x44;
-    /* +48 */ HSD_GObj* x48;
-} HSD_GObjList;
-
 extern struct _unk_gobj_struct {
     union {
         u32 flags;
@@ -108,9 +68,7 @@ extern HSD_GObj* HSD_GObj_CurrentInvokedProcGObj;
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObjGXLinkHead;
 extern HSD_GObj** plinklow_gobjs;
-/// @todo GObjList is a fake type, this is just a double pointer
-/// (pointer to array of HSD_GObj*, indexed by p_link)
-extern HSD_GObjList* HSD_GObj_Entities;
+extern HSD_GObj** HSD_GObjPLinkHead;
 extern HSD_GObjProc* HSD_GObj_NextInvokedProc;
 extern s32 HSD_GObj_CurrentInvokedSLink;
 extern HSD_GObjProc* HSD_GObj_CurrentInvokedProc;

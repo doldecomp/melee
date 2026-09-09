@@ -73,7 +73,7 @@ void un_80321AF4(HSD_GObj* gobj)
     PAD_STACK(12);
 
     data->x24 = 0;
-    cur = HSD_GObj_Entities->fighters;
+    cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
 
     while (cur != NULL) {
         if (ftLib_8008732C(cur) == 0) {

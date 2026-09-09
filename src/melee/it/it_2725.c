@@ -153,7 +153,8 @@ Fighter* it_80272818(Item* item)
         ->fighter;
 }
 
-/// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
+/// Returns Item_GObj of the specified kind if part of
+/// HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
@@ -161,7 +162,7 @@ Item_GObj* it_80272828(ItemKind kind)
     Item_GObj* item_gobj_check;
     void* new_var;
     item_gobj_return = NULL;
-    item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
+    item_gobj_check = (Item_GObj*) HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj_check != NULL) {
         new_var2 = (Item*) (new_var = item_gobj_check->user_data);
         if (new_var2->kind == kind) {

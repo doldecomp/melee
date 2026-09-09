@@ -160,7 +160,7 @@ void ft_8007C4BC(Fighter_GObj* gobj)
             Fighter* fp1;
             HitCapsule* throw_hitbox = &fp->x1064_thrownHitbox;
 
-            for (cur = HSD_GObj_Entities->fighters; cur != NULL;
+            for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
                  cur = cur->next)
             {
                 if (gobj == cur) {

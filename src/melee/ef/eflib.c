@@ -193,7 +193,7 @@ void efLib_SetFlags(HSD_GObj* gobj, s32 expire_flags)
     EF_Effect* effect_1;
     EF_Effect* effect_2;
 
-    gobj_1 = HSD_GObj_Entities->x2C;
+    gobj_1 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj_1 != NULL) {
         effect_1 = GET_EFFECT(gobj_1);
         if ((effect_1 != NULL) && (effect_1->parent_gobj == gobj)) {
@@ -201,7 +201,7 @@ void efLib_SetFlags(HSD_GObj* gobj, s32 expire_flags)
         }
         gobj_1 = gobj_1->next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
+    gobj_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK1];
     while (gobj_2 != NULL) {
         effect_2 = GET_EFFECT(gobj_2);
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
@@ -246,7 +246,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
             efLib_ParamTable[i].gobj = NULL;
         }
     }
-    gobj_1 = HSD_GObj_Entities->x2C;
+    gobj_1 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj_1 != NULL) {
         HSD_GObj* gobj_2;
         EF_Effect* effect_1;
@@ -262,7 +262,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         }
         gobj_1 = gobj_2;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
+    gobj_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK1];
     while (gobj_2 != NULL) {
         HSD_GObj* gobj_3;
         EF_Effect* effect_2;
@@ -289,7 +289,7 @@ void efLib_PauseAll(HSD_GObj* gobj)
     EF_Effect* effect_1;
     EF_Effect* effect_2;
 
-    gobj_1 = HSD_GObj_Entities->x2C;
+    gobj_1 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj_1 != NULL) {
         effect_1 = GET_EFFECT(gobj_1);
         if ((effect_1 != NULL) && (effect_1->parent_gobj == gobj)) {
@@ -298,7 +298,7 @@ void efLib_PauseAll(HSD_GObj* gobj)
         }
         gobj_1 = gobj_1->next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
+    gobj_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK1];
     while (gobj_2 != NULL) {
         effect_2 = GET_EFFECT(gobj_2);
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
@@ -316,7 +316,7 @@ void efLib_ResumeAll(HSD_GObj* gobj)
     EF_Effect* effect_1;
     EF_Effect* effect_2;
 
-    gobj_1 = HSD_GObj_Entities->x2C;
+    gobj_1 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj_1 != NULL) {
         effect_1 = GET_EFFECT(gobj_1);
         if ((effect_1 != NULL) && (effect_1->parent_gobj == gobj)) {
@@ -324,7 +324,7 @@ void efLib_ResumeAll(HSD_GObj* gobj)
         }
         gobj_1 = gobj_1->next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
+    gobj_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK1];
     while (gobj_2 != NULL) {
         effect_2 = GET_EFFECT(gobj_2);
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
@@ -355,7 +355,7 @@ void efLib_RemoveLast(void)
     HSD_GObj* gobj;
     HSD_GObj* next;
 
-    gobj = HSD_GObj_Entities->x2C;
+    gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK0];
     while (gobj != NULL) {
         next = gobj->next;
         efLib_Destroy(gobj);
@@ -368,7 +368,7 @@ void efLib_RemoveLast(void)
         gobj = next;
     }
 
-    gobj = HSD_GObj_Entities->x30;
+    gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_EFFECT_UNK1];
     while (gobj != NULL) {
         next = gobj->next;
         efLib_Destroy(gobj);

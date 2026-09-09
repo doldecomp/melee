@@ -99,7 +99,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     }
     {
         float min_dist_sq = 30000;
-        Item_GObj* cur = HSD_GObj_Entities->items;
+        Item_GObj* cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
         Item_GObj* result = NULL;
         while (cur != NULL) {
             if (Item_IsGrabbable(cur)) {

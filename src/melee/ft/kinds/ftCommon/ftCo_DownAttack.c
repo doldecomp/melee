@@ -71,8 +71,8 @@ void ftCo_80098634(Item_FtTrack* track)
 {
     Fighter_GObj* cur_gobj;
     int i;
-    for (cur_gobj = HSD_GObj_Entities->fighters, i = 0; cur_gobj != NULL;
-         cur_gobj = cur_gobj->next, i++)
+    for (cur_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER], i = 0;
+         cur_gobj != NULL; cur_gobj = cur_gobj->next, i++)
     {
         Fighter* fp = cur_gobj->user_data;
         track->ecb_offset_arr[i].top = ecb_offset.top;

@@ -1,6 +1,9 @@
 #ifndef MELEE_IF_FORWARD_H
 #define MELEE_IF_FORWARD_H
 
+#define HSD_GOBJ_CLASS_UI 14
+#define HSD_GOBJ_CLASS_TEXT 17
+
 typedef struct DevText DevText;
 typedef struct Element_803F9628 Element_803F9628;
 typedef struct Element_803F9628_Obj_14 Element_803F9628_Obj_14;

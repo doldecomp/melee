@@ -1497,7 +1497,7 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
             s32 random_idx = HSD_Randi(11);
             idx = random_idx;
         }
-        entity = HSD_GObj_Entities->x14;
+        entity = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_GROUND];
         {
             s32 want = targets.e[idx].map_id;
             for (; entity != NULL; entity = entity->next) {

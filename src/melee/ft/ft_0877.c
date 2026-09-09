@@ -246,7 +246,9 @@ s32 ft_GetFtKindMask(void)
     s32 ftKind;
     u32 result = 0;
 
-    for (gobj = HSD_GObj_Entities->fighters; gobj != 0; gobj = gobj->next) {
+    for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != 0;
+         gobj = gobj->next)
+    {
         ftKind = (GET_FIGHTER(gobj))->kind;
         if (ftKind < Ft_Kind_MasterH) {
             result = result | 1 << ftKind;

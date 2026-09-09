@@ -166,7 +166,7 @@ void ftCo_800D35FC(Fighter* fp)
     HSD_GObj* cur_gobj;
 
     ftCommon_8007EBAC(fp, 5, p_ftCommonData->x4F8);
-    cur_gobj = HSD_GObj_Entities->fighters;
+    cur_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (cur_gobj != NULL) {
         Fighter* cur_fp = GET_FIGHTER(cur_gobj);
         if (cur_fp != fp && !cur_fp->x221F_b3) {
@@ -793,7 +793,9 @@ void ftCo_800D481C(Fighter_GObj* gobj, s32 arg1)
 
     {
         HSD_GObj* cur;
-        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+             cur = cur->next)
+        {
             Fighter* other = GET_FIGHTER(cur);
             if (((!fp) && (!fp)) && (!fp)) {
             };

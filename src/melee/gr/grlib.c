@@ -346,7 +346,7 @@ bool grLib_801C9EE8(Vec3* point, float offset)
     Item_GObj* cur_item;
     Item_GObj* items;
 
-    fighters = HSD_GObj_Entities->fighters;
+    fighters = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     for (cur_fighter = fighters; cur_fighter != NULL;
          cur_fighter = cur_fighter->next)
     {
@@ -356,7 +356,7 @@ bool grLib_801C9EE8(Vec3* point, float offset)
         }
     }
 
-    items = HSD_GObj_Entities->items;
+    items = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     for (cur_item = items; cur_item != NULL; cur_item = cur_item->next) {
         if (itGetKind(cur_item) != It_PKind_Random) {
             ip = GET_ITEM(cur_item);

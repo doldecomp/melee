@@ -1,6 +1,10 @@
 #ifndef MELEE_EF_FORWARD_H
 #define MELEE_EF_FORWARD_H
 
+#define HSD_GOBJ_CLASS_EFFECT 8
+#define HSD_GOBJ_PLINK_EFFECT_UNK0 11
+#define HSD_GOBJ_PLINK_EFFECT_UNK1 12
+
 typedef struct EF_Effect EF_Effect;
 typedef struct EF_QueuedEffect EF_QueuedEffect;
 typedef struct EF_EffectDesc EF_EffectDesc;

@@ -1334,7 +1334,9 @@ bool grKongo_801D7F78(HSD_GObj* gobj)
         return false;
     }
 
-    for (cur = HSD_GObj_Entities->x14; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_GROUND]; cur != NULL;
+         cur = cur->next)
+    {
         if (cur == gobj) {
             continue;
         }
@@ -1371,7 +1373,9 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
     HSD_GObj* cur;
     Ground_801C4DA0(&pos, &unk);
 
-    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
+         cur = cur->next)
+    {
         if (itGetKind(cur) == It_Kind_Klap) {
             f32 dx, dy, dz, dx2, dy2, dz2, r;
 
