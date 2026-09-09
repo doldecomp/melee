@@ -51,12 +51,7 @@
 /* 4D6958 */ static float grAnime_804D6958;
 /* 4D695C */ static float grAnime_804D695C;
 
-struct padded_jmp_buf {
-    __jmp_buf buf;
-    u8 pad[0x118 - 0xF8];
-};
-
-/* 49EE40 */ struct padded_jmp_buf grAnime_8049EE40;
+/* 49EE40 */ jmp_buf grAnime_8049EE40;
 
 /// @todo .sdata order hack
 #ifdef MUST_MATCH
@@ -1050,7 +1045,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
 void fn_801C82E8(int arg0, int* arg1)
 {
     *arg1 = arg0;
-    longjmp(&grAnime_8049EE40.buf, 1);
+    longjmp(grAnime_8049EE40, 1);
 }
 
 HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
@@ -1071,7 +1066,7 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
     if (arg2 & 4) {
         var_r30 |= 0x100;
     }
-    if (__setjmp(&grAnime_8049EE40.buf) == 0) {
+    if (setjmp(grAnime_8049EE40) == 0) {
         HSD_ForeachAnim(jobj, JOBJ_TYPE, var_r30, fn_801C82E8, AOBJ_ARG_AV,
                         &sp14);
     }

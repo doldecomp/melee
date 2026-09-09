@@ -3,7 +3,9 @@
 
 #include "hsd_3B34.h"
 
-extern u8 hsd_804D2E70[2084];
+jmp_buf hsd_804D2E70;
+u8 hsd_804D2F68[0x70C];
+
 extern u8* hsd_804D79B8;
 extern u8* hsd_804D79BC;
 extern s32 hsd_804D79C0;
@@ -19,8 +21,7 @@ typedef struct JpegWorkData {
 } JpegWorkData;
 
 typedef struct JpegState {
-    __jmp_buf jmp;
-    u8 unk_f8[0x20];
+    jmp_buf jmp;
     JpegWorkData work;
 } JpegState;
 
@@ -160,24 +161,23 @@ extern u8 lbl_804316B4[0xC];
 
 static inline s32 hsd_803B5C4C_read(s32 bits, s32 bit_count)
 {
-    __jmp_buf* jmp_buf = (__jmp_buf*) hsd_804D2E70;
     u8* next_byte;
 
     do {
         if (hsd_804D79C4 == 0) {
             hsd_804D79C4 = 8;
             if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
-                longjmp(jmp_buf, 1);
+                longjmp(hsd_804D2E70, 1);
             }
             next_byte = hsd_804D79B8;
             hsd_804D79B8 = next_byte + 1;
             hsd_804D79C8 = *next_byte;
             if (hsd_804D79C8 == 0xFF) {
                 if ((*hsd_804D79B8) != 0) {
-                    longjmp(jmp_buf, 1);
+                    longjmp(hsd_804D2E70, 1);
                 } else {
                     if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
-                        longjmp(jmp_buf, 1);
+                        longjmp(hsd_804D2E70, 1);
                     }
                     hsd_804D79B8 += 1;
                 }
@@ -294,7 +294,7 @@ void hsd_803B5EA0(s32 component)
     u8 zigzag_index;
     s32 value_bits;
 
-    base = hsd_804D2E70;
+    base = (u8*) &hsd_804D2E70;
     value_bits = hsd_803B5D70(0, component);
     if (value_bits > 0) {
         dc = hsd_803B5C4C(value_bits);
@@ -552,7 +552,7 @@ static void fn_803B6820(u8* dst, s32 x, s32 y, s32 width, s32 unused_height)
     s32 luma_groups;
     s32* luma_base;
 
-    base = hsd_804D2E70;
+    base = (u8*) &hsd_804D2E70;
     luma_block = (u8*) ((JpegState*) base)->work.luma;
     for (bias_block = 0; bias_block < 4; bias_block++) {
         luma = (s32*) luma_block;
@@ -657,7 +657,7 @@ static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
         s32 height;
     } state;
 
-    state.base = hsd_804D2E70;
+    state.base = (u8*) &hsd_804D2E70;
     state.work = (JpegState*) state.base;
     hsd_804D79C0 = size;
     state.quant_table = (JpegQuantTables*) lbl_80431090;
@@ -666,7 +666,7 @@ static inline s32 hsd_803B6BE4_inline(char* src, s32 size, void* dst)
     state.work->work.prev_dc[0] = state.work->work.prev_dc[1] =
         state.work->work.prev_dc[2] = 0;
     hsd_804D79C4 = 0;
-    if (__setjmp(&state.work->jmp) != 0) {
+    if (setjmp(state.work->jmp) != 0) {
         return 0;
     }
     src_byte0 = &hsd_804D79BC[hsd_804D79C0];
@@ -707,7 +707,7 @@ find_luma_quant:
         }
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(&state.work->jmp, 1);
+            longjmp(state.work->jmp, 1);
         } else {
             goto find_luma_quant;
         }
@@ -767,7 +767,7 @@ find_chroma_quant:
         }
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(&state.work->jmp, 1);
+            longjmp(state.work->jmp, 1);
         } else {
             goto find_chroma_quant;
         }
@@ -782,7 +782,7 @@ find_frame:
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(&state.work->jmp, 1);
+            longjmp(state.work->jmp, 1);
         } else {
             goto find_frame;
         }
@@ -794,7 +794,7 @@ find_scan:
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(&state.work->jmp, 1);
+            longjmp(state.work->jmp, 1);
         } else {
             goto find_scan;
         }
