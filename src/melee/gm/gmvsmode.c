@@ -175,10 +175,10 @@ void onEnterDebugVs(GameModeState* state)
         start->players[i].cpu_kind = 4;
     }
 
-    start->players[0].ckind = CKIND_LINK;
-    start->players[1].ckind = CKIND_MARIO;
-    start->players[2].ckind = CKIND_LINK;
-    start->players[3].ckind = CKIND_LINK;
+    start->players[0].ckind = CKind_Link;
+    start->players[1].ckind = CKind_Mario;
+    start->players[2].ckind = CKind_Link;
+    start->players[3].ckind = CKind_Link;
 
     start->players[0].slot_type = Gm_PKind_Human;
     start->players[1].slot_type = Gm_PKind_Human;

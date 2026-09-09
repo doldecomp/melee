@@ -643,9 +643,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003B,
         0x04,
         0x00,
-        CKIND_YOSHI,
-        CKIND_YOSHI,
-        CKIND_YOSHI,
+        CKind_Yoshi,
+        CKind_Yoshi,
+        CKind_Yoshi,
     },
     {
         0x01,
@@ -655,9 +655,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003B,
         0x04,
         0x00,
-        CKIND_YOSHI,
-        CKIND_YOSHI,
-        CKIND_YOSHI,
+        CKind_Yoshi,
+        CKind_Yoshi,
+        CKind_Yoshi,
     },
     {
         0x02,
@@ -667,9 +667,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003B,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x03,
@@ -679,9 +679,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003C,
         0x03,
         0x00,
-        CKIND_MARIO,
-        CKIND_PEACH,
-        CHKIND_NONE,
+        CKind_Mario,
+        CKind_Peach,
+        ChKind_None,
     },
     {
         0x08,
@@ -691,9 +691,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003D,
         0x04,
         0x00,
-        CKIND_DONKEY,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Donkey,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x09,
@@ -703,9 +703,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003D,
         0x03,
         0x00,
-        CKIND_DONKEY,
-        CKIND_DONKEY,
-        CHKIND_NONE,
+        CKind_Donkey,
+        CKind_Donkey,
+        ChKind_None,
     },
     {
         0x0A,
@@ -715,9 +715,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003E,
         0x02,
         0x00,
-        CKIND_DONKEY,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Donkey,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x10,
@@ -727,9 +727,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003F,
         0x04,
         0x00,
-        CKIND_LINK,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Link,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x11,
@@ -739,9 +739,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x003F,
         0x04,
         0x00,
-        CKIND_LINK,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Link,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x12,
@@ -751,9 +751,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0040,
         0x02,
         0x00,
-        CKIND_ZELDA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Zelda,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x18,
@@ -763,9 +763,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0041,
         0x04,
         0x00,
-        CKIND_SAMUS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Samus,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x19,
@@ -775,9 +775,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0041,
         0x02,
         0x00,
-        CKIND_SAMUS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Samus,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x1A,
@@ -787,9 +787,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0042,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x1B,
@@ -799,9 +799,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0042,
         0x04,
         0xFF,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x1C,
@@ -811,9 +811,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0042,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x20,
@@ -823,9 +823,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0043,
         0x04,
         0x00,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
+        CKind_Kirby,
+        CKind_Kirby,
+        CKind_Kirby,
     },
     {
         0x21,
@@ -835,9 +835,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0043,
         0x02,
         0x00,
-        CKIND_KIRBY,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Kirby,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x22,
@@ -847,9 +847,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0044,
         0x04,
         0x00,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
+        CKind_Kirby,
+        CKind_Kirby,
+        CKind_Kirby,
     },
     {
         0x23,
@@ -859,9 +859,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0044,
         0x04,
         0x00,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
-        CKIND_KIRBY,
+        CKind_Kirby,
+        CKind_Kirby,
+        CKind_Kirby,
     },
     {
         0x24,
@@ -871,9 +871,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0045,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x25,
@@ -883,9 +883,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0045,
         0x02,
         0x00,
-        CKIND_KIRBY,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Kirby,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x28,
@@ -895,9 +895,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0046,
         0x04,
         0x00,
-        CKIND_FOX,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Fox,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x29,
@@ -907,9 +907,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0046,
         0x02,
         0x00,
-        CKIND_FOX,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Fox,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x2A,
@@ -919,9 +919,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0047,
         0x04,
         0x00,
-        CKIND_FOX,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Fox,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x2B,
@@ -931,9 +931,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0047,
         0x02,
         0x00,
-        CKIND_FOX,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Fox,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x30,
@@ -943,9 +943,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0048,
         0x04,
         0x00,
-        CKIND_PIKACHU,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Pikachu,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x31,
@@ -955,9 +955,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0048,
         0x04,
         0x00,
-        CKIND_PIKACHU,
-        CKIND_PICHU,
-        CKIND_PURIN,
+        CKind_Pikachu,
+        CKind_Pichu,
+        CKind_Purin,
     },
     {
         0x38,
@@ -967,9 +967,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0049,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x39,
@@ -979,9 +979,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0049,
         0x04,
         0x00,
-        CKIND_CAPTAIN,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Captain,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x3A,
@@ -991,9 +991,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0049,
         0x04,
         0x00,
-        CHKIND_NONE,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        ChKind_None,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x3B,
@@ -1003,9 +1003,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004A,
         0x02,
         0x00,
-        CKIND_CAPTAIN,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Captain,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x40,
@@ -1015,9 +1015,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004B,
         0x04,
         0x00,
-        CKIND_NESS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Ness,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x41,
@@ -1042,9 +1042,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004C,
         0x04,
         0x00,
-        CKIND_POPONANA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_PopoNana,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x49,
@@ -1054,9 +1054,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004C,
         0x04,
         0x00,
-        CKIND_POPONANA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_PopoNana,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x50,
@@ -1066,9 +1066,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004E,
         0x04,
         0x00,
-        CKIND_BOY,
-        CKIND_GIRL,
-        CHKIND_NONE,
+        CKind_Boy,
+        CKind_Girl,
+        ChKind_None,
     },
     {
         0x51,
@@ -1078,9 +1078,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004E,
         0x06,
         0x00,
-        CKIND_BOY,
-        CKIND_GIRL,
-        CHKIND_NONE,
+        CKind_Boy,
+        CKind_Girl,
+        ChKind_None,
     },
     {
         0x52,
@@ -1090,9 +1090,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004F,
         0x04,
         0x00,
-        CKIND_MARIO,
-        CKIND_LUIGI,
-        CHKIND_NONE,
+        CKind_Mario,
+        CKind_Luigi,
+        ChKind_None,
     },
     {
         0x53,
@@ -1102,9 +1102,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x004F,
         0x03,
         0x00,
-        CKIND_MARIO,
-        CKIND_LUIGI,
-        CHKIND_NONE,
+        CKind_Mario,
+        CKind_Luigi,
+        ChKind_None,
     },
     {
         0x58,
@@ -1114,9 +1114,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0050,
         0x04,
         0x00,
-        CKIND_KOOPA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Koopa,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x59,
@@ -1126,9 +1126,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0050,
         0x02,
         0x00,
-        CKIND_KOOPA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Koopa,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x5A,
@@ -1138,9 +1138,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0050,
         0x04,
         0x00,
-        CKIND_KOOPA,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_Koopa,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x5B,
@@ -1150,9 +1150,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0051,
         0x04,
         0x00,
-        CKIND_GKOOPS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_GKoops,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x5C,
@@ -1162,9 +1162,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0051,
         0x02,
         0x00,
-        CKIND_GKOOPS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_GKoops,
+        ChKind_None,
+        ChKind_None,
     },
     {
         0x5D,
@@ -1174,9 +1174,9 @@ struct gm_803DE650_t gm_803DE650[] = {
         0x0051,
         0x02,
         0x00,
-        CKIND_GKOOPS,
-        CHKIND_NONE,
-        CHKIND_NONE,
+        CKind_GKoops,
+        ChKind_None,
+        ChKind_None,
     },
     { 0xFF },
 };
@@ -1219,14 +1219,14 @@ void gm_801B3F40(GameModeState* arg0)
     temp_ret |= lbAudioAx_80026E84(temp_r3->x0.x0.ckind);
     for (i = 0; i < 3; i++) {
         s8 ckind = temp_r3->x0.xC.x24[i].ckind;
-        if (ckind != CHKIND_NONE) {
+        if (ckind != ChKind_None) {
             temp_ret |= lbAudioAx_80026E84(ckind);
         }
     }
     for (i = 0; i < 3; i++) {
-        if (temp_r31->xA[i] != CHKIND_NONE) {
+        if (temp_r31->xA[i] != ChKind_None) {
             temp_ret |= lbAudioAx_80026E84(temp_r31->xA[i]);
-            if (temp_r31->xA[i] == CKIND_KIRBY) {
+            if (temp_r31->xA[i] == CKind_Kirby) {
                 temp_ret |= 0x200004000;
             }
         }
@@ -1339,8 +1339,8 @@ void gm_801B4430(GameModeState* scene)
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
     u8 var_r0;
 
-    if (temp_r3->x0.x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
-        var_r0 = CKIND_SEAK;
+    if (temp_r3->x0.x0.ckind == CKind_Zelda && temp_r3->x0.xC.x12 != 0) {
+        var_r0 = CKind_Seak;
     } else {
         var_r0 = temp_r3->x0.x0.ckind;
     }
@@ -1374,7 +1374,7 @@ void gm_801B45A4(GameModeState* scene)
     CutsceneData* temp_r31 = gm_GetGameModeStateEnterData(scene);
     UnkAdventureData* temp_r7 = gm_GetAdventureData();
     u8 colors[3] = { 0 };
-    s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
+    s8 ckinds[3] = { CKind_Mario, CKind_Luigi, ChKind_None };
 
     gmRegSetupEnemyColorTable(temp_r7->x0.x0.ckind, temp_r7->x0.x0.color,
                               ckinds, colors);
@@ -1390,7 +1390,7 @@ void gm_801B461C(GameModeState* scene)
     if (gm_GetPreviousSceneIndex() == ADVENTURE_LUIGI_CUTSCENE) {
         StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
         UnkAdventureData* adventure = gm_GetAdventureData();
-        data->players[1].ckind = CKIND_LUIGI;
+        data->players[1].ckind = CKind_Luigi;
         data->players[1].color = gm_804D68D8.x3;
         adventure->x74 = 1;
     }
@@ -1502,8 +1502,8 @@ void gm_801B4974(GameModeState* arg0)
     temp_r24 = gmMainLib_8015CDD4();
     temp_r3 = gm_GetAdventureData();
     var_r4 = temp_r3->x0.x0.ckind;
-    if (var_r4 == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
-        var_r4 = CKIND_SEAK;
+    if (var_r4 == CKind_Zelda && temp_r3->x0.xC.x12 != 0) {
+        var_r4 = CKind_Seak;
     }
     temp_r25->x0 = var_r4;
     temp_r25->x1 = temp_r24->color;
@@ -1560,8 +1560,8 @@ void gm_801B4D34(GameModeState* scene)
      * If Falco is unlocked,
      * the player will fight him instead about 1/3 of the time.
      */
-    if (gm_IsCKindUnlocked(CKIND_FALCO) && HSD_Randi(100) <= 33) {
-        temp_r30->x7C = CKIND_FALCO;
+    if (gm_IsCKindUnlocked(CKind_Falco) && HSD_Randi(100) <= 33) {
+        temp_r30->x7C = CKind_Falco;
     } else {
         temp_r30->x7C = temp_r31->xA[0];
     }
@@ -1572,13 +1572,13 @@ void gm_801B4DAC(GameModeState* scene)
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
     StartMeleeData* data = gm_GetGameModeStateEnterData(scene);
     gm_801B4064(scene);
-    if (temp_r30->x7C == CKIND_FALCO) {
-        s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
+    if (temp_r30->x7C == CKind_Falco) {
+        s8 ckinds[3] = { CKind_Falco, ChKind_None, ChKind_None };
         u8 colors[3] = { 0 };
         colors[0] = data->players[1].color;
         gmRegSetupEnemyColorTable(temp_r30->x0.x0.ckind, temp_r30->x0.x0.color,
                                   ckinds, colors);
-        data->players[1].ckind = CKIND_FALCO;
+        data->players[1].ckind = CKind_Falco;
         data->players[1].color = colors[0];
     }
 }
@@ -1600,9 +1600,9 @@ void gm_801B4EB8(GameModeState* scene)
     gm_801B4064(scene);
 
     /// If Luigi isn't unlocked, don't spawn him for this match.
-    if (!gm_IsCKindUnlocked(CKIND_LUIGI)) {
+    if (!gm_IsCKindUnlocked(CKind_Luigi)) {
         for (i = 0; i < 3; i++) {
-            if (data->players[i + 1].ckind == CKIND_LUIGI) {
+            if (data->players[i + 1].ckind == CKind_Luigi) {
                 data->players[i + 1].slot_type = Gm_PKind_NA;
             }
         }
@@ -1666,7 +1666,7 @@ void gm_Mode_Adventure_OnInit(void)
     struct gmm_x0_528_t* temp_r3;
 
     temp_r3 = gmMainLib_8015CDD4();
-    temp_r3->c_kind = CHKIND_NONE;
+    temp_r3->c_kind = ChKind_None;
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;

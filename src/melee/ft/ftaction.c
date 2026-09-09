@@ -912,8 +912,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
             break;
         }
         switch (fp->kind) {
-        case FTKIND_GAMEWATCH:
-        case FTKIND_SAMUS:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Samus:
             sp8 = fp->player_id + fp->x221F_b4;
             fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
@@ -957,8 +957,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         }
 
         switch (fp->kind) {
-        case FTKIND_GAMEWATCH:
-        case FTKIND_SAMUS:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Samus:
             sp8 = fp->player_id + fp->x221F_b4;
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,

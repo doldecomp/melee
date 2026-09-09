@@ -608,7 +608,7 @@ void ftSk_SpecialAirSStart_Phys(HSD_GObj* gobj)
                       fighter_attr->terminal_velocity);
     }
 
-    ftCommon_ApplyFrictionAir(fp, fighter_attr->aerial_friction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, fighter_attr->aerial_friction);
 }
 
 void ftSk_SpecialSStart_Coll(HSD_GObj* gobj)

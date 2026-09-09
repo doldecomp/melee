@@ -157,7 +157,7 @@ void ftMt_SpecialAirHiStart_Phys(HSD_GObj* gobj)
                       mewtwoAttrs->x4C_MEWTWO_TELEPORT_TERMINAL_VELOCITY);
     }
 
-    ftCommon_8007CEF4(fp0);
+    ftCommon_CalcSelfAccel_DeaccelAir(fp0);
 }
 
 /// Mewtwo's grounded Teleport Start Collision callback
@@ -245,7 +245,7 @@ void ftMt_SpecialAirHiLost_IASA(HSD_GObj* gobj) {}
 /// Mewtwo's grounded Teleport Zoom Physics callback
 void ftMt_SpecialHiLost_Phys(HSD_GObj* gobj)
 {
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 /// Mewtwo's aerial Teleport Zoom Physics callback
@@ -566,7 +566,7 @@ void ftMt_SpecialAirHi_Phys(HSD_GObj* gobj)
     } else {
         float velY = fp->self_vel.y;
         fp->self_vel.y = velY - velY / 10;
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 

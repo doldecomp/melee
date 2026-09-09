@@ -120,16 +120,16 @@ s32 mnEvent_8024CE74(
         }
         return 0x29;
     }
-    if (gm_IsCKindUnlocked(CKIND_FALCO) && gm_IsCKindUnlocked(CKIND_LUIGI) &&
-        gm_IsCKindUnlocked(CKIND_PURIN) && gm_IsCKindUnlocked(CKIND_CLINK))
+    if (gm_IsCKindUnlocked(CKind_Falco) && gm_IsCKindUnlocked(CKind_Luigi) &&
+        gm_IsCKindUnlocked(CKind_Purin) && gm_IsCKindUnlocked(CKind_CLink))
     {
-        if (gm_IsCKindUnlocked(CKIND_MEWTWO) &&
-            gm_IsCKindUnlocked(CKIND_MARS) &&
-            gm_IsCKindUnlocked(CKIND_GAMEWATCH) &&
-            gm_IsCKindUnlocked(CKIND_PICHU) &&
-            gm_IsCKindUnlocked(CKIND_GANON) &&
-            gm_IsCKindUnlocked(CKIND_DRMARIO) &&
-            gm_IsCKindUnlocked(CKIND_EMBLEM))
+        if (gm_IsCKindUnlocked(CKind_Mewtwo) &&
+            gm_IsCKindUnlocked(CKind_Mars) &&
+            gm_IsCKindUnlocked(CKind_GameWatch) &&
+            gm_IsCKindUnlocked(CKind_Pichu) &&
+            gm_IsCKindUnlocked(CKind_Ganon) &&
+            gm_IsCKindUnlocked(CKind_DrMario) &&
+            gm_IsCKindUnlocked(CKind_Emblem))
         {
             return 0x29;
         }
@@ -167,7 +167,7 @@ void mnEvent_8024D0CC(HSD_GObj* gobj, s32 ckind)
     f32 frame;
     FORCE_PAD_STACK_4;
 
-    if (ckind == CHKIND_NONE) {
+    if (ckind == ChKind_None) {
         frame = 25.0f;
     } else {
         frame = gm_CKindToSelKind(ckind);

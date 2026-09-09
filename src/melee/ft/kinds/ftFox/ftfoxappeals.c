@@ -51,7 +51,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind = fp->kind;
 
-    if ((ftKind == FTKIND_FOX || ftKind == FTKIND_FALCO) &&
+    if ((ftKind == Ft_Kind_Fox || ftKind == Ft_Kind_Falco) &&
         grCorneria_801E2CE8() &&
         !(fp->input.held_buttons[0] & HSD_PAD_DPADDOWN) && fp->x682 == 1)
     {
@@ -114,14 +114,14 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
 
     if (ftCheckThrowB3(fp)) {
         switch (fp->kind) {
-        case FTKIND_FOX:
+        case Ft_Kind_Fox:
             if (grCorneria_801E2B80()) {
                 fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
 
-        case FTKIND_FALCO:
+        case Ft_Kind_Falco:
             if (grCorneria_801E2C34()) {
                 fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }

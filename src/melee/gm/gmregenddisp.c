@@ -225,7 +225,7 @@ void gm_801A8D54(s32* arg0)
         if ((u32) (i - 0x12) <= 1U) {
             gm_GetCurrentGameMode();
             if ((Toy_803048C0(gm_801A659C(i)) ? true : false) &&
-                gm_801BEFB0() != CKIND_ZELDA && gm_801BEFB0() != CKIND_SEAK)
+                gm_801BEFB0() != CKind_Zelda && gm_801BEFB0() != CKind_Seak)
             {
                 sp84[count] = i;
                 count++;

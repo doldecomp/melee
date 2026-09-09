@@ -101,16 +101,16 @@ bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
             return true;
         }
         switch (fp->kind) {
-        case FTKIND_NESS:
+        case Ft_Kind_Ness:
             ftNs_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_YOSHI:
+        case Ft_Kind_Yoshi:
             ftYs_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_PEACH:
+        case Ft_Kind_Peach:
             ftPe_JumpAerial_Enter(gobj);
             break;
-        case FTKIND_MEWTWO:
+        case Ft_Kind_Mewtwo:
             ftMt_JumpAerial_Enter(gobj);
             break;
         default:
@@ -131,8 +131,8 @@ static inline void ft_SetVec(Vec3* dst, Vec3* src)
 
 static inline void ft_JumpAerial_Sound(Fighter* fp, FighterKind ftkind)
 {
-    if (ftkind != FTKIND_MEWTWO && (ftkind >= 0x10 || ftkind != FTKIND_NESS) &&
-        fp->x197C != NULL)
+    if (ftkind != Ft_Kind_Mewtwo &&
+        (ftkind >= 0x10 || ftkind != Ft_Kind_Ness) && fp->x197C != NULL)
     {
         ft_PlaySFX(fp, 0x11B, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
@@ -310,9 +310,9 @@ void ftCo_JumpAerial_Phys(Fighter_GObj* gobj)
 void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D28C(fp, fp->mv.co.jumpaerial.init_h_vel);
-    fp->mv.co.jumpaerial.init_h_vel += fp->x74_anim_vel.x;
-    fp->x74_anim_vel.x = 0.0F;
+    ftCommon_CalcSelfAccel_DriftFrom(fp, fp->mv.co.jumpaerial.init_h_vel);
+    fp->mv.co.jumpaerial.init_h_vel += fp->x74_self_accel.x;
+    fp->x74_self_accel.x = 0.0F;
     fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir +
                      fp->mv.co.jumpaerial.init_h_vel;
     ft_800851D0(gobj);
@@ -321,7 +321,7 @@ void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
 void ftCo_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D268(fp);
+    ftCommon_CalcSelfAccel_Drift(fp);
     ft_800851D0(gobj);
 }
 

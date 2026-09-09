@@ -48,12 +48,12 @@ void ftCo_Fall_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftLib_GetKind(gobj) == FTKIND_MASTERH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_MasterH) {
         ftMh_MS_389_80151018(gobj);
         return;
     }
 
-    if (ftLib_GetKind(gobj) == FTKIND_CREZYH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_CrezyH) {
         ftCh_GrabUnk1_8015BC88(gobj);
         return;
     }
@@ -104,7 +104,7 @@ void ftCo_800CC988(Fighter_GObj* gobj, f32 arg1)
 void ftCo_Fall_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2228_b2) {
+    if (!fp->is_sandbag) {
         ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fall.x4, ftCo_SM_Fall,
                              ftCo_SM_FallF, ftCo_SM_FallB);
         ftCo_800CC988(gobj, fp->mv.co.fall.x4);

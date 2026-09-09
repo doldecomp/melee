@@ -10,16 +10,16 @@
 #include "ft/types.h"
 
 typedef struct ftData_UnkModelStruct {
-    Fighter_ModelEvent model_events[FTKIND_MAX];
-    UNK_T (*getter[FTKIND_MAX])(HSD_GObj*);
+    Fighter_ModelEvent model_events[Ft_Kind_Max];
+    UNK_T (*getter[Ft_Kind_Max])(HSD_GObj*);
 } ftData_UnkModelStruct;
 
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 /* 3C52A0 */ extern MotionState ftData_803C52A0[14];
-extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[FTKIND_MAX];
+extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[Ft_Kind_Max];
 extern ftData_UnkModelStruct ftData_UnkIntBoolFunc0;
-extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[FTKIND_MAX];
-extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
+extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[Ft_Kind_Max];
+extern s8 ftData_UnkBytePerCharacter[Ft_Kind_Max];
 
 /* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
 /* 08572C */ void ftData_8008572C(s32);
@@ -46,27 +46,27 @@ extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 void ftData_80085560(s32, bool);
 
 /// One load  callback for every character.
-extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
+extern HSD_GObjEvent ftData_OnLoad[Ft_Kind_Max];
 
 /// One death callback for every character.-
-extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
+extern HSD_GObjEvent ftData_OnDeath[Ft_Kind_Max];
 
-extern HSD_GObjEvent ftData_OnAbsorb[FTKIND_MAX];
+extern HSD_GObjEvent ftData_OnAbsorb[Ft_Kind_Max];
 
 /// probably ft_OnSomething
-extern HSD_GObjEvent ftData_UnkMotionStates3[FTKIND_MAX];
+extern HSD_GObjEvent ftData_UnkMotionStates3[Ft_Kind_Max];
 
-extern HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX];
-extern Event ftData_Table_Unk1[FTKIND_MAX];
-extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialS[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
-extern ftData_UnkCountStruct ftData_UnkIntPairs[FTKIND_MAX];
-extern Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX];
-extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
-extern HSD_GObjEvent ftData_UnkMotionStates4[FTKIND_MAX];
+extern HSD_GObjEvent ftData_OnUserDataRemove[Ft_Kind_Max];
+extern Event ftData_Table_Unk1[Ft_Kind_Max];
+extern Fighter_ItemEvent ftData_OnItemPickupExt[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_SpecialS[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_SpecialAirHi[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_SpecialAirLw[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_SpecialAirS[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_SpecialAirN[Ft_Kind_Max];
+extern ftData_UnkCountStruct ftData_UnkIntPairs[Ft_Kind_Max];
+extern Fighter_DemoStrings* ftData_803C2468[Ft_Kind_Max];
+extern Fighter_MotionFileStringGetter ftData_803C24EC[Ft_Kind_Max];
+extern HSD_GObjEvent ftData_UnkMotionStates4[Ft_Kind_Max];
 
 #endif

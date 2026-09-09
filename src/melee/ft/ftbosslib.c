@@ -157,7 +157,7 @@ HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 
 bool ftBossLib_IsMasterHandEntry(void)
 {
-    if (ftBossLib_GetMotionId(FTKIND_MASTERH) == ftMh_MS_Entry) {
+    if (ftBossLib_GetMotionId(Ft_Kind_MasterH) == ftMh_MS_Entry) {
         return 1;
     }
 
@@ -167,7 +167,7 @@ bool ftBossLib_IsMasterHandEntry(void)
 bool ftBossLib_8015C2A8(void)
 {
     /// @todo Get msid
-    if (ftBossLib_GetMotionId(FTKIND_CREZYH) == 0x183) {
+    if (ftBossLib_GetMotionId(Ft_Kind_CrezyH) == 0x183) {
         return true;
     }
 
@@ -177,7 +177,7 @@ bool ftBossLib_8015C2A8(void)
 bool ftBossLib_8015C2E0(void)
 {
     /// @todo Get ASIDs
-    enum_t msid = ftBossLib_GetMotionId(FTKIND_MASTERH);
+    enum_t msid = ftBossLib_GetMotionId(Ft_Kind_MasterH);
     if (msid == 0x158 || msid == 0x159) {
         return true;
     }
@@ -188,7 +188,7 @@ bool ftBossLib_8015C2E0(void)
 bool ftBossLib_8015C31C(void)
 {
     /// @todo Get ASIDs
-    enum_t msid = ftBossLib_GetMotionId(FTKIND_CREZYH);
+    enum_t msid = ftBossLib_GetMotionId(Ft_Kind_CrezyH);
     if (msid == 0x181 || msid == 0x182) {
         return true;
     }
@@ -198,7 +198,7 @@ bool ftBossLib_8015C31C(void)
 
 bool ftBossLib_8015C358(void)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
     if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
@@ -208,7 +208,7 @@ bool ftBossLib_8015C358(void)
 
 bool ftBossLib_8015C3A0(void)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
     if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
         return true;
     }
@@ -246,7 +246,7 @@ enum_t ftBossLib_GetMotionId(FighterKind kind)
 
 enum_t ftBossLib_8015C4C4(void)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
 
     u8 _[24];
 
@@ -259,7 +259,7 @@ enum_t ftBossLib_8015C4C4(void)
 
 s32 ftBossLib_8015C530(int cpu_level)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
 
     u8 _[16];
 
@@ -310,7 +310,7 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
     u8 _[16];
 
     {
-        HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+        HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
         if (gobj == NULL) {
             return NULL;
         }
@@ -397,7 +397,7 @@ s32 ftBossLib_8015C9CC(void)
 
 static void func_8015CA6C_inline(s32 arg0)
 {
-    HSD_GObj* ch_gobj = ftBossLib_GetFighterGObj(FTKIND_CREZYH);
+    HSD_GObj* ch_gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
     if (ch_gobj) {
         ftLib_80086A4C(ch_gobj, arg0);
     }
@@ -410,7 +410,7 @@ void ftBossLib_8015CA6C(s32 arg0)
     Player_80036790(0, arg0);
 
     {
-        HSD_GObj* mh_gobj = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+        HSD_GObj* mh_gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
         if (mh_gobj) {
             ftLib_80086A4C(mh_gobj, arg0);
         }

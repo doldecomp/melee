@@ -28,34 +28,36 @@
                                                          FtMotionId msid);
 /* 086060 */ Fighter* ftData_80086060(Fighter* arg0);
 /* 3C0EC0 */ extern struct UnkCostumeList
-    CostumeListsForeachCharacter[FTKIND_MAX];
-/* 3C0FC8 */ extern struct ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX];
-/* 3C10D0 */ extern Event ftData_Table_Unk1[FTKIND_MAX];
+    CostumeListsForeachCharacter[Ft_Kind_Max];
+/* 3C0FC8 */ extern struct ftData_UnkCountStruct
+    ftData_Table_Unk0[Ft_Kind_Max];
+/* 3C10D0 */ extern Event ftData_Table_Unk1[Ft_Kind_Max];
 /* 3C10D0 */ extern struct ftData_UnkCountStruct
-    ftData_UnkIntPairs[FTKIND_MAX];
-/* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
-/* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
-/* 3C125C */ extern HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX];
-/* 3C13E8 */ extern HSD_GObjEvent ftData_SpecialS[FTKIND_MAX];
-/* 3C146C */ extern HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX];
-/* 3C14F0 */ extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
-/* 3C1574 */ extern HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX];
-/* 3C15F8 */ extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
-/* 3C167C */ extern HSD_GObjEvent ftData_SpecialN[FTKIND_MAX];
-/* 3C1700 */ extern HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX];
-/* 3C1784 */ extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
-/* 3C1808 */ extern HSD_GObjEvent ftData_OnAbsorb[FTKIND_MAX];
-/* 3C188C */ extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
-/* 3C1DB4 */ extern HSD_GObjEvent ftData_UnkMotionStates3[FTKIND_MAX];
-/* 3C1E38 */ extern HSD_GObjEvent ftData_UnkMotionStates4[FTKIND_MAX];
-/* 3C20CC */ extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[FTKIND_MAX];
+    ftData_UnkIntPairs[Ft_Kind_Max];
+/* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[Ft_Kind_Max];
+/* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[Ft_Kind_Max];
+/* 3C125C */ extern HSD_GObjEvent ftData_OnUserDataRemove[Ft_Kind_Max];
+/* 3C13E8 */ extern HSD_GObjEvent ftData_SpecialS[Ft_Kind_Max];
+/* 3C146C */ extern HSD_GObjEvent ftData_SpecialAirHi[Ft_Kind_Max];
+/* 3C14F0 */ extern HSD_GObjEvent ftData_SpecialAirLw[Ft_Kind_Max];
+/* 3C1574 */ extern HSD_GObjEvent ftData_SpecialAirS[Ft_Kind_Max];
+/* 3C15F8 */ extern HSD_GObjEvent ftData_SpecialAirN[Ft_Kind_Max];
+/* 3C167C */ extern HSD_GObjEvent ftData_SpecialN[Ft_Kind_Max];
+/* 3C1700 */ extern HSD_GObjEvent ftData_SpecialLw[Ft_Kind_Max];
+/* 3C1784 */ extern HSD_GObjEvent ftData_SpecialHi[Ft_Kind_Max];
+/* 3C1808 */ extern HSD_GObjEvent ftData_OnAbsorb[Ft_Kind_Max];
+/* 3C188C */ extern Fighter_ItemEvent ftData_OnItemPickupExt[Ft_Kind_Max];
+/* 3C1DB4 */ extern HSD_GObjEvent ftData_UnkMotionStates3[Ft_Kind_Max];
+/* 3C1E38 */ extern HSD_GObjEvent ftData_UnkMotionStates4[Ft_Kind_Max];
+/* 3C20CC */ extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[Ft_Kind_Max];
 /* 3C2150 */ extern ftData_UnkModelStruct ftData_UnkIntBoolFunc0;
-/* 3C2468 */ extern Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX];
-/* 3C24EC */ extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
-/* 3C2570 */ extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[FTKIND_MAX];
-/* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[FTKIND_MAX];
+/* 3C2468 */ extern Fighter_DemoStrings* ftData_803C2468[Ft_Kind_Max];
+/* 3C24EC */ extern Fighter_MotionFileStringGetter
+    ftData_803C24EC[Ft_Kind_Max];
+/* 3C2570 */ extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[Ft_Kind_Max];
+/* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[Ft_Kind_Max];
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 /* 3C52A0 */ extern MotionState ftData_803C52A0[14];
-/* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
+/* 4598B8 */ extern ftData* gFtDataList[Ft_Kind_Max];
 
 #endif

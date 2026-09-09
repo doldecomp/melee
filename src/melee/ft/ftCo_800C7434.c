@@ -28,7 +28,7 @@ void ftCo_800C7434(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_MotionState ms;
-    if (fp->kind == FTKIND_GKOOPS) {
+    if (fp->kind == Ft_Kind_GKoops) {
         ms = 0xE;
     } else {
         inlineB2(gobj);

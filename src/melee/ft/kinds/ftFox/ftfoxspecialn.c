@@ -178,11 +178,11 @@ static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
     it_802AE1D0(fp->u.fx.x222C_blasterGObj);
 
     switch (ftLib_GetKind(gobj)) {
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         ft_PlaySFX(fp, foxSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
                    SFX_PAN_MID);
         return;
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         ft_PlaySFX(fp, falcoSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
                    SFX_PAN_MID);
         return;
@@ -570,7 +570,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
     ftFox_DatAttrs* da = fp->dat_attrs;
     s32 ftKind = ftGetKind(fp);
 
-    if (ftKind == FTKIND_FOX || ftKind == FTKIND_FALCO) {
+    if (ftKind == Ft_Kind_Fox || ftKind == Ft_Kind_Falco) {
         if (!ftAnim_IsFramesRemaining(gobj)) {
             fp->u.fx.x222C_blasterGObj = NULL;
             ftFox_SpecialN_SetNULL(gobj);
@@ -634,11 +634,11 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     case ftCo_MS_ThrowHi:
                     case ftCo_MS_ThrowLw: {
                         switch (ftLib_GetKind(gobj)) {
-                        case FTKIND_FOX:
+                        case Ft_Kind_Fox:
                             ft_PlaySFX(fp, 110109, SFX_VOLUME_MAX,
                                        SFX_PAN_MID);
                             return;
-                        case FTKIND_FALCO:
+                        case Ft_Kind_Falco:
                             ft_PlaySFX(fp, 100105, SFX_VOLUME_MAX,
                                        SFX_PAN_MID);
                             return;
@@ -650,12 +650,12 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     }
                     case ftCo_MS_ThrowB:
                         switch (ftLib_GetKind(gobj)) {
-                        case FTKIND_FOX:
+                        case Ft_Kind_Fox:
                             ft_PlaySFX(fp, foxSFX[1 == fp->facing_dir],
                                        SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
 
-                        case FTKIND_FALCO:
+                        case Ft_Kind_Falco:
                             ft_PlaySFX(fp, falcoSFX[1 == fp->facing_dir],
                                        SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
@@ -673,10 +673,10 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 fp->u.fx.x222C_blasterGObj = NULL;
                 ftFox_SpecialN_SetNULL(gobj);
                 switch (ftLib_GetKind(gobj)) {
-                case FTKIND_FOX:
+                case Ft_Kind_Fox:
                     ft_PlaySFX(fp, 110100, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
-                case FTKIND_FALCO:
+                case Ft_Kind_Falco:
                     ft_PlaySFX(fp, 100096, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
                 default:

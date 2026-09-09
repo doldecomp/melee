@@ -13,8 +13,8 @@ void gm_Mode_ClassicGOver_OnLoad(void)
 
     temp_r3 = gm_GetAllStarData();
     var_r0 = temp_r3->x0.x0.ckind;
-    if (temp_r3->x0.x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
-        var_r0 = CKIND_SEAK;
+    if (temp_r3->x0.x0.ckind == CKind_Zelda && temp_r3->x0.xC.x12 != 0) {
+        var_r0 = CKind_Seak;
     } else {
         var_r0 = temp_r3->x0.x0.ckind;
     }
@@ -32,8 +32,8 @@ void gm_Mode_AdventureGOver_OnLoad(void)
 
     temp_r3 = gm_GetAdventureData();
     var_r0 = temp_r3->x0.x0.ckind;
-    if (temp_r3->x0.x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
-        var_r0 = CKIND_SEAK;
+    if (temp_r3->x0.x0.ckind == CKind_Zelda && temp_r3->x0.xC.x12 != 0) {
+        var_r0 = CKind_Seak;
     } else {
         var_r0 = temp_r3->x0.x0.ckind;
     }
@@ -49,8 +49,8 @@ void gm_Mode_AllstarGOver_OnLoad(void)
     UnkAllstarData* tmp = &gm_80473A18;
     u8 var_r0;
 
-    if (tmp->x0.x0.ckind == CKIND_ZELDA && tmp->x0.xC.x12 != 0) {
-        var_r0 = CKIND_SEAK;
+    if (tmp->x0.x0.ckind == CKind_Zelda && tmp->x0.xC.x12 != 0) {
+        var_r0 = CKind_Seak;
     } else {
         var_r0 = tmp->x0.x0.ckind;
     }

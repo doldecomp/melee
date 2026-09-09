@@ -233,7 +233,7 @@ void ftPe_SpecialAirN_Phys(HSD_GObj* gobj)
     } else {
         ftCommon_FallBasic(fp);
     }
-    ftCommon_ApplyFrictionAir(fp, da->x98);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x98);
     ftColl_8007AEE0(gobj);
 }
 
@@ -330,7 +330,7 @@ void ftPe_SpecialAirNHit_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     ftCommon_Fall(fp, da->xA0, da->xA4);
-    ftCommon_ApplyFrictionAir(fp, da->x98);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x98);
 }
 
 void ftPe_SpecialNHit_Coll(HSD_GObj* gobj)

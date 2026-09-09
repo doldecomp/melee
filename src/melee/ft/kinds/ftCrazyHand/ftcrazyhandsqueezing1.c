@@ -15,7 +15,7 @@
 void ftCh_Init_8015A2B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A5C = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+    fp->x1A5C = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
     Fighter_ChangeMotionState(gobj, 0x179, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }

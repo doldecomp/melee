@@ -143,7 +143,7 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     ftCommon_Fall(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
                   mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    ftCommon_ApplyFrictionAir(fp, ca->aerial_friction);
+    ftCommon_CalcSelfAccel_Deaccel(fp, ca->aerial_friction);
 }
 
 static inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)

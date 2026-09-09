@@ -25,9 +25,9 @@ void ftCo_800C7178(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_MotionState ms;
-    if (fp->kind == FTKIND_MARIO) {
+    if (fp->kind == Ft_Kind_Mario) {
         ms = ftCo_MS_WalkSlow;
-    } else if (fp->kind == FTKIND_LUIGI) {
+    } else if (fp->kind == Ft_Kind_Luigi) {
         ms = ftCo_MS_WalkSlow;
     } else {
         inlineB2(gobj);

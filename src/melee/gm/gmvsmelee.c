@@ -298,21 +298,21 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
             unk_bool = false;
             idx = findSmallestLoser(match_end);
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
-            if (unk != CHKIND_NONE) {
+            if (unk != ChKind_None) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
                                       (match_end->player_standings[idx].x3),
                                       idx, match_end->player_standings[idx].x4,
                                       unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Approach);
                 unk_bool = true;
-            } else if ((unk = gm_80172D78()) != CHKIND_NONE) {
+            } else if ((unk = gm_80172D78()) != ChKind_None) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
                                       (match_end->player_standings[idx].x3),
                                       idx, match_end->player_standings[idx].x4,
                                       unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Approach);
                 unk_bool = true;
-            } else if ((unk = gm_80172E74()) != CHKIND_NONE) {
+            } else if ((unk = gm_80172E74()) != ChKind_None) {
                 gm_InitChallengerData(match_end->player_standings[idx].ckind,
                                       (match_end->player_standings[idx].x3),
                                       idx, match_end->player_standings[idx].x4,
@@ -328,7 +328,7 @@ void gmVsMelee_ExitResults(GameModeState* state, VsModeData* vs, u8 state_id)
             gm_80172898(1);
             gm_80173EEC();
             if (!unk_bool && gm_801721EC()) {
-                gm_InitChallengerData(CHKIND_NONE, 0, idx, 120, unk, 0);
+                gm_InitChallengerData(ChKind_None, 0, idx, 120, unk, 0);
                 gm_SetNextGameModeStateId(gmVsMode_State_Prize);
                 unk_bool = true;
             }

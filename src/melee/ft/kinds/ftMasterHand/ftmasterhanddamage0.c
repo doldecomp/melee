@@ -17,7 +17,7 @@
 
 bool ftMh_MS_343_80151428(Vec3* vec)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         lb_8000B1CC(fp->parts[FtPart_WaistN].joint, 0, vec);

@@ -131,7 +131,7 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
         }
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 void ftPk_SpecialHiStart0_Coll(HSD_GObj* gobj)
@@ -181,7 +181,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.specialhi.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec);
@@ -191,7 +191,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             float tempf;
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
@@ -220,7 +220,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
     if (fp->mv.pk.specialhi.x4 <= 0) {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
                 &vec);
@@ -230,7 +230,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         }
     } else {
         fp = GET_FIGHTER(gobj);
-        if (fp->kind != FTKIND_PICHU) {
+        if (fp->kind != Ft_Kind_Pichu) {
             float tempf;
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
@@ -283,7 +283,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 
 void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 #ifdef MUST_MATCH
@@ -731,7 +731,7 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
         ftCommon_ClampSelfVelX(fp, sa->x9C * fp->co_attrs.air_drift_max);
     } else {
         fp->self_vel.y -= (fp->self_vel.y / 9.0f);
-        ftCommon_8007CEF4(fp);
+        ftCommon_CalcSelfAccel_DeaccelAir(fp);
     }
 }
 

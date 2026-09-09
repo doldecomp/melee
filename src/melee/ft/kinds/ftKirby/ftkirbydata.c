@@ -45,7 +45,7 @@ Fighter_CostumeStrings ftKb_Init_CostumeStrings[] = {
     { ftKb_Init_803CA494, ftKb_Init_803CA4A0, ftKb_Init_803CA4BC },
 };
 
-ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
+ftKirby_CopyName ftKb_Init_803CA9D0[Ft_Kind_Max] = {
     { "PlKbCpMr.dat", "ftDataKirbyCopyMario" },
     { "PlKbCpFx.dat", "ftDataKirbyCopyFox" },
     { "PlKbCpCa.dat", "ftDataKirbyCopyCaptain" },
@@ -242,7 +242,7 @@ Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
     NULL,
 };
 
-u8 ftKb_Init_803CB46C[FTKIND_MAX] = {
+u8 ftKb_Init_803CB46C[Ft_Kind_Max] = {
     32, 33, 38, 39, -1, 41, 35, 21, 42, 45, 46, 46, 36, 34, 40, 43, 44,
     37, 20, 21, 35, 32, 33, 36, -1, 47, 48, -1, -1, -1, -1, -1, -1,
 };

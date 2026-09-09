@@ -26,8 +26,8 @@ void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
         }
     } else {
         switch (fp->kind) {
-        case FTKIND_GAMEWATCH:
-        case FTKIND_SAMUS:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Samus:
             if (sfx_id != 0x83D60) {
                 if (sfx_id != 0x83D61) {
                     sfx_id = ft_80087D0C(fp, sfx_id);
@@ -66,8 +66,8 @@ void ft_80088328(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
         }
     } else {
         switch (fp->kind) {
-        case FTKIND_GAMEWATCH:
-        case FTKIND_SAMUS:
+        case Ft_Kind_GameWatch:
+        case Ft_Kind_Samus:
             if (sfx_id != 0x83D60) {
                 if (sfx_id != 0x83D61) {
                     temp_r30 = ft_80087D0C(fp, sfx_id);

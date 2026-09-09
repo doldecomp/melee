@@ -136,7 +136,7 @@ void ftNn_Init_80123B3C(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 359, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
-    fp->x74_anim_vel.y = 0.0f;
+    fp->x74_self_accel.y = 0.0f;
     fp->self_vel.y = 0.0f;
 }
 
@@ -149,7 +149,7 @@ void ftNn_Init_80123BF0(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 360, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
     ftAnim_8006EBA4(gobj);
-    fp->x74_anim_vel.y = 0.0f;
+    fp->x74_self_accel.y = 0.0f;
     fp->self_vel.y = 0.0f;
 }
 
@@ -215,7 +215,7 @@ void ftPp_SpecialS_0_Phys(Fighter_GObj* nana_gobj)
         GET_FIGHTER(Player_GetEntityAtIndex(nana_fp->player_id, 0));
     PAD_STACK(8);
     nana_fp->self_vel = popo_fp->self_vel;
-    nana_fp->x74_anim_vel = popo_fp->x74_anim_vel;
+    nana_fp->x74_self_accel = popo_fp->x74_self_accel;
     nana_fp->gr_vel = popo_fp->gr_vel;
     nana_fp->xE4_ground_accel_1 = popo_fp->xE4_ground_accel_1;
     nana_fp->facing_dir = popo_fp->facing_dir;
@@ -229,7 +229,7 @@ void ftPp_SpecialS_1_Phys(Fighter_GObj* nana_gobj)
         GET_FIGHTER(Player_GetEntityAtIndex(nana_fp->player_id, 0));
     PAD_STACK(8);
     nana_fp->self_vel = popo_fp->self_vel;
-    nana_fp->x74_anim_vel = popo_fp->x74_anim_vel;
+    nana_fp->x74_self_accel = popo_fp->x74_self_accel;
     nana_fp->gr_vel = popo_fp->gr_vel;
     nana_fp->xE4_ground_accel_1 = popo_fp->xE4_ground_accel_1;
     nana_fp->facing_dir = popo_fp->facing_dir;

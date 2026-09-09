@@ -51,7 +51,7 @@ int get_anim_id(Fighter* fp, int swing_type, int arg1)
         return lbl_803C6D70[swing_type][arg1];
     } else {
         switch (fp->kind) {
-        case FTKIND_CAPTAIN:
+        case Ft_Kind_Captain:
             return swing_type + 341;
         default:
             OSReport("don't have swing42 motion!!!\n");

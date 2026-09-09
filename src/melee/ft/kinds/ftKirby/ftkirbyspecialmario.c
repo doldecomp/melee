@@ -35,7 +35,7 @@ void ftKb_SpecialN_800F9110(Fighter_GObj* gobj)
     fp->throw_flags = 0;
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->u.kb.hat.kind != FTKIND_MARIO) {
+        if (fp->u.kb.hat.kind != Ft_Kind_Mario) {
             msid = (new_var = 0x200);
         }
     }
@@ -108,12 +108,12 @@ void fn_800F9260(HSD_GObj* gobj)
     s32 pick;
     HSD_JObj* joint;
 
-    if (fp->u.kb.hat.kind != FTKIND_KIRBY) {
+    if (fp->u.kb.hat.kind != Ft_Kind_Kirby) {
         if (ftCheckThrowB0(fp)) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint, NULL,
                 &sp44);
-            if (fp->u.kb.hat.kind == FTKIND_MARIO) {
+            if (fp->u.kb.hat.kind == Ft_Kind_Mario) {
                 it_8029B6F8((Item_GObj*) gobj, &sp44, It_Kind_Kirby_MarioFire,
                             fp->facing_dir);
                 bone = fn_800F9260_GetLHandBone(fp);
@@ -136,7 +136,7 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
     s32 msid = ftKb_MS_MrSpecialAirN;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    if (GET_FIGHTER(gobj)->u.kb.hat.kind != FTKIND_MARIO) {
+    if (GET_FIGHTER(gobj)->u.kb.hat.kind != Ft_Kind_Mario) {
         msid = ftKb_MS_DrSpecialAirN;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);

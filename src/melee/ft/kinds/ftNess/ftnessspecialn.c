@@ -564,7 +564,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, airFriction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, airFriction);
     }
 }
 
@@ -585,7 +585,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, airFriction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, airFriction);
     }
 }
 
@@ -606,7 +606,7 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_ApplyFrictionAir(fp, airFriction);
+        ftCommon_CalcSelfAccel_Deaccel(fp, airFriction);
     }
 }
 

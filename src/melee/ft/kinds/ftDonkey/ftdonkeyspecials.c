@@ -77,7 +77,7 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
         ftCommon_Fall(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
                       ca->terminal_velocity);
     }
-    ftCommon_ApplyFrictionAir(
+    ftCommon_CalcSelfAccel_Deaccel(
         fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->cmd_vars[0] != 0) {
         /// @todo Fix control flow.

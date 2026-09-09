@@ -147,17 +147,17 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = stick_x_sign;
     switch (fp->kind) {
-    case FTKIND_NESS:
+    case Ft_Kind_Ness:
         ftNs_AttackS4_Enter(gobj);
         return;
-    case FTKIND_PEACH:
+    case Ft_Kind_Peach:
         ftPe_AttackS4_Enter(gobj);
         return;
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_AttackS4_Enter(gobj);
         return;
-    case FTKIND_PIKACHU:
-    case FTKIND_PICHU:
+    case Ft_Kind_Pikachu:
+    case Ft_Kind_Pichu:
         doEnter(gobj, stick_angle);
         Fighter_SetEffectHitlagCallbacks(fp);
         return;

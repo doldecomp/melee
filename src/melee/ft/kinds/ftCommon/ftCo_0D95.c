@@ -25,7 +25,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
     f32 my;
     f32 r;
     PAD_STACK(0x18);
-    if (fp->kind == FTKIND_SAMUS) {
+    if (fp->kind == Ft_Kind_Samus) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
         grav = fp->mv.ca.specials.grav;
@@ -114,7 +114,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
     f32 r;
     PAD_STACK(12);
 
-    if (fp->kind == FTKIND_SAMUS) {
+    if (fp->kind == Ft_Kind_Samus) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
         grav = fp->mv.ca.specials.grav;
@@ -173,7 +173,7 @@ void fn_800D9C64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->kind == FTKIND_SAMUS) {
+    if (fp->kind == Ft_Kind_Samus) {
         it_802B7B84(fp->u.ss.x223C);
     }
 }

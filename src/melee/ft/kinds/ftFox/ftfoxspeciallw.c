@@ -219,7 +219,7 @@ void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj)
                       ca->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 void ftFx_SpecialLwStart_Coll(HSD_GObj* gobj)
@@ -366,7 +366,7 @@ static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
                       ca->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 void ftFx_SpecialAirLwLoop_Phys(HSD_GObj* gobj)
@@ -568,7 +568,7 @@ void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
                       ca->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     ftColl_8007AEF8(gobj);
 }
 
@@ -781,7 +781,7 @@ void ftFx_SpecialAirLwHit_Phys(HSD_GObj* gobj)
                       ca->terminal_velocity);
     }
 
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     ftColl_8007AEF8(gobj);
 }
 
@@ -920,7 +920,7 @@ void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
         ftCommon_Fall(fp, da->xAC_FOX_REFLECTOR_FALL_ACCEL,
                       ca->terminal_velocity);
     }
-    ftCommon_8007CF58(fp);
+    ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
 }
 
 /// 0x800E9C50

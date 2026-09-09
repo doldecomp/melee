@@ -53,13 +53,13 @@ void ftCo_800DEA28(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
-    case FTKIND_CLINK:
+    case Ft_Kind_CLink:
         ftCl_Init_80149318(gobj);
         break;
-    case FTKIND_DRMARIO:
+    case Ft_Kind_DrMario:
         ftDr_Init_80149910(gobj);
         break;
-    case FTKIND_GANON: {
+    case Ft_Kind_Ganon: {
         Vec3 pos;
         lb_8000B1CC(fp->parts->joint, NULL, &pos);
         lb_800119DC(&pos, 80, 1.0f, 0.003f, 1.0471976f);
@@ -90,14 +90,14 @@ void ftCo_800DEBD0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (DbLevel >= DbLKind_DebugRom) {
-        if (fp->kind == FTKIND_PEACH) {
+        if (fp->kind == Ft_Kind_Peach) {
             ftPe_Init_8011B93C(gobj);
         }
-        if (fp->kind == FTKIND_ZELDA) {
+        if (fp->kind == Ft_Kind_Zelda) {
             ftZd_Init_801395C8(gobj);
         }
     }
-    if (fp->kind == FTKIND_KIRBY) {
+    if (fp->kind == Ft_Kind_Kirby) {
         ftKb_SpecialN_800F5D04(gobj, true);
     }
     ftCo_800DEAE8(gobj, ftCo_MS_AppealSR, ftCo_MS_AppealSL);

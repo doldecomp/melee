@@ -87,82 +87,82 @@ typedef void (*FtCmd2)(Fighter_GObj*, CommandInfo*, int);
 typedef bool (*ftDevice_Callback0)(Ground_GObj*, Fighter_GObj*, Vec3*);
 
 typedef enum FighterKind {
-    /* 00 */ FTKIND_MARIO,
-    /* 01 */ FTKIND_FOX,
-    /* 02 */ FTKIND_CAPTAIN,
-    /* 03 */ FTKIND_DONKEY,
-    /* 04 */ FTKIND_KIRBY,
-    /* 05 */ FTKIND_KOOPA,
-    /* 06 */ FTKIND_LINK,
-    /* 07 */ FTKIND_SEAK,
-    /* 08 */ FTKIND_NESS,
-    /* 09 */ FTKIND_PEACH,
-    /* 0A */ FTKIND_POPO,
-    /* 0B */ FTKIND_NANA,
-    /* 0C */ FTKIND_PIKACHU,
-    /* 0D */ FTKIND_SAMUS,
-    /* 0E */ FTKIND_YOSHI,
-    /* 0F */ FTKIND_PURIN,
-    /* 10 */ FTKIND_MEWTWO,
-    /* 11 */ FTKIND_LUIGI,
-    /* 12 */ FTKIND_MARS,
-    /* 13 */ FTKIND_ZELDA,
-    /* 14 */ FTKIND_CLINK,
-    /* 15 */ FTKIND_DRMARIO,
-    /* 16 */ FTKIND_FALCO,
-    /* 17 */ FTKIND_PICHU,
-    /* 18 */ FTKIND_GAMEWATCH,
-    /* 19 */ FTKIND_GANON,
-    /* 1A */ FTKIND_EMBLEM,
-    /* 1B */ FTKIND_MASTERH,
-    /* 1C */ FTKIND_CREZYH,
-    /* 1D */ FTKIND_BOY,
-    /* 1E */ FTKIND_GIRL,
-    /* 1F */ FTKIND_GKOOPS,
-    /* 20 */ FTKIND_SANDBAG,
-    /* 21 */ FTKIND_NONE,
-    /* 21 */ FTKIND_MAX = FTKIND_NONE
+    /* 00 */ Ft_Kind_Mario,
+    /* 01 */ Ft_Kind_Fox,
+    /* 02 */ Ft_Kind_Captain,
+    /* 03 */ Ft_Kind_Donkey,
+    /* 04 */ Ft_Kind_Kirby,
+    /* 05 */ Ft_Kind_Koopa,
+    /* 06 */ Ft_Kind_Link,
+    /* 07 */ Ft_Kind_Seak,
+    /* 08 */ Ft_Kind_Ness,
+    /* 09 */ Ft_Kind_Peach,
+    /* 0A */ Ft_Kind_Popo,
+    /* 0B */ Ft_Kind_Nana,
+    /* 0C */ Ft_Kind_Pikachu,
+    /* 0D */ Ft_Kind_Samus,
+    /* 0E */ Ft_Kind_Yoshi,
+    /* 0F */ Ft_Kind_Purin,
+    /* 10 */ Ft_Kind_Mewtwo,
+    /* 11 */ Ft_Kind_Luigi,
+    /* 12 */ Ft_Kind_Mars,
+    /* 13 */ Ft_Kind_Zelda,
+    /* 14 */ Ft_Kind_CLink,
+    /* 15 */ Ft_Kind_DrMario,
+    /* 16 */ Ft_Kind_Falco,
+    /* 17 */ Ft_Kind_Pichu,
+    /* 18 */ Ft_Kind_GameWatch,
+    /* 19 */ Ft_Kind_Ganon,
+    /* 1A */ Ft_Kind_Emblem,
+    /* 1B */ Ft_Kind_MasterH,
+    /* 1C */ Ft_Kind_CrezyH,
+    /* 1D */ Ft_Kind_Boy,
+    /* 1E */ Ft_Kind_Girl,
+    /* 1F */ Ft_Kind_GKoops,
+    /* 20 */ Ft_Kind_Sandbag,
+    /* 21 */ Ft_Kind_None,
+    /* 21 */ Ft_Kind_Max = Ft_Kind_None
 } FighterKind;
 
 typedef enum CharacterKind {
-    /* 00 */ CKIND_CAPTAIN,   // Captain Falcon (Captain)
-    /* 01 */ CKIND_DONKEY,    // Donkey Kong (Donkey)
-    /* 02 */ CKIND_FOX,       // Fox
-    /* 03 */ CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch)
-    /* 04 */ CKIND_KIRBY,     // Kirby
-    /* 05 */ CKIND_KOOPA,     // Bowser (Koopa)
-    /* 06 */ CKIND_LINK,      // Link
-    /* 07 */ CKIND_LUIGI,     // Luigi
-    /* 08 */ CKIND_MARIO,     // Mario
-    /* 09 */ CKIND_MARS,      // Marth (Mars)
-    /* 0A */ CKIND_MEWTWO,    // Mewtwo
-    /* 0B */ CKIND_NESS,      // Ness
-    /* 0C */ CKIND_PEACH,     // Peach
-    /* 0D */ CKIND_PIKACHU,   // Pikachu
-    /* 0E */ CKIND_POPONANA,  // Ice Climbers (Popo & Nana)
-    /* 0F */ CKIND_PURIN,     // Jigglypuff (Purin)
-    /* 10 */ CKIND_SAMUS,     // Samus
-    /* 11 */ CKIND_YOSHI,     // Yoshi
-    /* 12 */ CKIND_ZELDA,     // Zelda (ZE->SE)
-    /* 13 */ CKIND_SEAK,      // Sheik (SE->ZE)
-    /* 14 */ CKIND_FALCO,     // Falco
-    /* 15 */ CKIND_CLINK,     // Young Link (CLink)
-    /* 16 */ CKIND_DRMARIO,   // Dr. Mario
-    /* 17 */ CKIND_EMBLEM,    // Roy (Emblem)
-    /* 18 */ CKIND_PICHU,     // Pichu
-    /* 19 */ CKIND_GANON,     // Ganondorf (Ganon)
+    /* 00 */ CKind_Captain,   // Captain Falcon (Captain)
+    /* 01 */ CKind_Donkey,    // Donkey Kong (Donkey)
+    /* 02 */ CKind_Fox,       // Fox
+    /* 03 */ CKind_GameWatch, // Mr. Game & Watch (GameWatch)
+    /* 04 */ CKind_Kirby,     // Kirby
+    /* 05 */ CKind_Koopa,     // Bowser (Koopa)
+    /* 06 */ CKind_Link,      // Link
+    /* 07 */ CKind_Luigi,     // Luigi
+    /* 08 */ CKind_Mario,     // Mario
+    /* 09 */ CKind_Mars,      // Marth (Mars)
+    /* 0A */ CKind_Mewtwo,    // Mewtwo
+    /* 0B */ CKind_Ness,      // Ness
+    /* 0C */ CKind_Peach,     // Peach
+    /* 0D */ CKind_Pikachu,   // Pikachu
+    /* 0E */ CKind_PopoNana,  // Ice Climbers (Popo & Nana)
+    /* 0F */ CKind_Purin,     // Jigglypuff (Purin)
+    /* 10 */ CKind_Samus,     // Samus
+    /* 11 */ CKind_Yoshi,     // Yoshi
+    /* 12 */ CKind_Zelda,     // Zelda (ZE->SE)
+    /* 13 */ CKind_Seak,      // Sheik (SE->ZE)
+    /* 14 */ CKind_Falco,     // Falco
+    /* 15 */ CKind_CLink,     // Young Link (CLink)
+    /* 16 */ CKind_DrMario,   // Dr. Mario
+    /* 17 */ CKind_Emblem,    // Roy (Emblem)
+    /* 18 */ CKind_Pichu,     // Pichu
+    /* 19 */ CKind_Ganon,     // Ganondorf (Ganon)
 
-    /* 1A */ CKIND_PLAYABLE_COUNT,
+    /* 1A */ CKind_Playable_Count,
 
-    /* 1A */ CKIND_MASTERH = CKIND_PLAYABLE_COUNT, // Master Hand (MasterH)
-    /* 1B */ CKIND_BOY,                            // Male Wireframe (Boy)
-    /* 1C */ CKIND_GIRL,                           // Female Wireframe (Girl)
-    /* 1D */ CKIND_GKOOPS,                         // Giga Bowser (GKoops)
-    /* 1E */ CKIND_CREZYH,                         // Crazy Hand (CrezyH)
-    /* 1F */ CHKIND_SANDBAG,                       // Sandbag
-    /* 20 */ CHKIND_POPO,                          // Popo
-    /* 21 */ CHKIND_NONE,                          // None
-    /* 21 */ CHKIND_MAX = CHKIND_NONE
+    /* 1A */ CKind_MasterH = CKind_Playable_Count, // Master Hand (MasterH)
+    /* 1B */ CKind_Boy,                            // Male Wireframe (Boy)
+    /* 1C */ CKind_Girl,                           // Female Wireframe (Girl)
+    /* 1D */ CKind_GKoops,                         // Giga Bowser (GKoops)
+    /* 1E */ CKind_CrezyH,                         // Crazy Hand (CrezyH)
+    /* 1F */ ChKind_Sandbag,                       // Sandbag
+    /* 20 */ ChKind_Popo,                          // Popo
+    /* 21 */ ChKind_None,                          // None
+    /* 21 */ ChKind_Max = ChKind_None
 } CharacterKind;
 
 static MotionFlags const Ft_MF_None = 0;

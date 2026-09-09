@@ -388,7 +388,7 @@ bool gm_801AA664(s16 ckind)
 bool gm_801AA688(s16 arg0)
 {
     PAD_STACK(4);
-    return gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM);
+    return gm_IsCKindUnlocked(CKind_Mars) || gm_IsCKindUnlocked(CKind_Emblem);
 }
 
 bool gm_801AA6D8(s16 arg0)
@@ -1019,8 +1019,8 @@ void fn_801AB200(HSD_GObj* gobj)
                     if (sel == 0x4B && text_idx == 2) {
                         HSD_SisLib_803A6368(
                             *text_arr,
-                            0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) +
-                                gm_IsCKindUnlocked(CKIND_DRMARIO) * 2);
+                            0xBEC + gm_IsCKindUnlocked(CKind_Luigi) +
+                                gm_IsCKindUnlocked(CKind_DrMario) * 2);
                     } else if (text_idx == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(*text_arr,

@@ -74,11 +74,11 @@ bool ftCo_AttackAir_CheckItemThrowInput(Fighter_GObj* gobj)
 static void decideFighter(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
-    case FTKIND_LINK:
-    case FTKIND_CLINK:
+    case Ft_Kind_Link:
+    case Ft_Kind_CLink:
         ftLk_AttackAir_Enter(gobj);
         return;
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_AttackAirN_DecideAction(gobj);
         return;
     default:

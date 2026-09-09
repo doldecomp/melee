@@ -163,8 +163,8 @@ void ftCo_WarpStarFall_Phys(Fighter_GObj* gobj)
         float accel = accel_scaling + accel_flat;
         float target_vel =
             fp->input.lstick[0].x * p_ftCommonData->warpstarfall_drift_max;
-        ftCommon_8007D174(fp, fp->self_vel.x, accel, target_vel,
-                          p_ftCommonData->x6A8);
+        ftCommon_CalcSelfAccel_AccelToVelClampedFrom(
+            fp, fp->self_vel.x, accel, target_vel, p_ftCommonData->x6A8);
     }
 }
 

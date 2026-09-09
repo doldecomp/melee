@@ -1441,7 +1441,7 @@ void Camera_8002B1F8(CameraTransformState* transform)
           (Camera_8002928C(subject) != 0) &&
           (Camera_80029124(&subject->bone_pos, 0) == CAM_BOUNDS_INSIDE) &&
           !ftLib_8008732C(temp_r3)) ||
-         ((Player_GetPlayerCharacter(1) == CHKIND_SANDBAG) &&
+         ((Player_GetPlayerCharacter(1) == ChKind_Sandbag) &&
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (subject = ftLib_80086B74(temp_r3_2), ((subject == NULL) == 0)) &&
           (Camera_8002928C(subject) != 0) &&

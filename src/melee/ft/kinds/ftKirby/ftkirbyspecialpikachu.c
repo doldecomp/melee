@@ -26,9 +26,9 @@ static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
     Fighter* fp = GET_FIGHTER(gobj);
     ftKirby_MotionState msid = pk_msid;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_PIKACHU:
+    case Ft_Kind_Pikachu:
         break;
-    case FTKIND_PICHU:
+    case Ft_Kind_Pichu:
         msid = pc_msid;
         break;
     default:
@@ -66,7 +66,7 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
         if (!fp->cmd_vars[ftPk_SpecialN_Cmd1]) {
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 it_pos.x = (fp->x34_scale.y * (da->specialn_pk_spawn_offset.x *
                                                fp->facing_dir)) +
                            fp->cur_pos.x;
@@ -77,7 +77,7 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
                                            da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 it_pos.x = (fp->x34_scale.y * (da->specialn_pc_spawn_offset.x *
                                                fp->facing_dir)) +
                            fp->cur_pos.x;
@@ -112,7 +112,7 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
         if (!fp->cmd_vars[ftPk_SpecialN_Cmd1]) {
             fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 it_pos.x =
                     (fp->x34_scale.y *
                      (da->specialairn_pk_spawn_offset.x * fp->facing_dir)) +
@@ -125,7 +125,7 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
                                            da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 it_pos.x =
                     (fp->x34_scale.y *
                      (da->specialairn_pc_spawn_offset.x * fp->facing_dir)) +
@@ -145,10 +145,10 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
     }
 
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_PIKACHU:
+    case Ft_Kind_Pikachu:
         landing_lag = da->specialairn_pk_landing_lag;
         break;
-    case FTKIND_PICHU:
+    case Ft_Kind_Pichu:
         landing_lag = da->specialairn_pc_landing_lag;
         break;
     default:
@@ -192,9 +192,9 @@ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
             ftKirby_MotionState msid = ftKb_MS_PkSpecialAirN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 msid = ftKb_MS_PcSpecialAirN;
                 break;
             default:
@@ -216,9 +216,9 @@ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
             ftKirby_MotionState msid = ftKb_MS_PkSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
-            case FTKIND_PIKACHU:
+            case Ft_Kind_Pikachu:
                 break;
-            case FTKIND_PICHU:
+            case Ft_Kind_Pichu:
                 msid = ftKb_MS_PcSpecialN;
                 break;
             default:

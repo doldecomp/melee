@@ -89,7 +89,7 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
     getAccelAndTarget(fp, &accel, &target_vel);
 
     if (!target_vel) {
-        ftCommon_ApplyFrictionGround(
+        ftCommon_CalcGroundAccel_Deaccel(
             fp, co_attrs->ground_friction *
                     p_ftCommonData->run_dash_turn_friction_multiplier);
     } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
@@ -112,11 +112,11 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
         }
         fp->xE4_ground_accel_1 = accel;
     } else {
-        ftCommon_ApplyFrictionGround(
+        ftCommon_CalcGroundAccel_Deaccel(
             fp, co_attrs->ground_friction *
                     p_ftCommonData->run_dash_turn_friction_multiplier);
     }
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_TurnRun_Coll(Fighter_GObj* gobj)

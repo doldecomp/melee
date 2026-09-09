@@ -64,10 +64,10 @@ static inline void ftCo_SquatWait_Enter_inline(Fighter_GObj* gobj,
     }
 
     switch (GET_FIGHTER(gobj)->kind) { /* irregular */
-    case FTKIND_LINK:
+    case Ft_Kind_Link:
         ftLk_AttackAir_800EB3BC(gobj);
         return;
-    case FTKIND_CLINK:
+    case Ft_Kind_CLink:
         ftCl_Init_8014919C(gobj);
         return;
     default:

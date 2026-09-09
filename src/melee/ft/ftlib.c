@@ -47,7 +47,7 @@ bool ftLib_IsMasterHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_GetKind(cur) == FTKIND_MASTERH) {
+        if (ftLib_GetKind(cur) == Ft_Kind_MasterH) {
             return true;
         }
     }
@@ -61,7 +61,7 @@ bool ftLib_IsCrazyHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_GetKind(cur) == FTKIND_CREZYH) {
+        if (ftLib_GetKind(cur) == Ft_Kind_CrezyH) {
             return true;
         }
     }
@@ -645,7 +645,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible || fp->x221E_b2 ||
-        Player_GetMoreFlagsBit4(fp->player_id) || fp->x2228_b2 ||
+        Player_GetMoreFlagsBit4(fp->player_id) || fp->is_sandbag ||
         fp->x2229_b3 || fp->x2220_b7)
     {
         return false;
@@ -964,7 +964,7 @@ void ftLib_80087610(u8 arg0)
     for (i = 0; i <= SELKIND_COUNT; i++) {
         if (gm_IsCKindUnlocked(i)) {
             ftKb_SpecialN_800EED50(Player_800325C8(i, 0), arg0);
-            if (i == CKIND_ZELDA || i == CKIND_SEAK) {
+            if (i == CKind_Zelda || i == CKind_Seak) {
                 ftKb_SpecialN_800EED50(Player_800325C8(i, 1), arg0);
             }
         }
@@ -1000,7 +1000,7 @@ s32 ftLib_80087700(HSD_GObj* gobj)
 
 void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A7F4(gobj, dst);
     } else {
         ftKb_Init_800EEB00(gobj, dst);
@@ -1009,7 +1009,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 
 void ftLib_80087744(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A814(gobj, dst);
     } else {
         ftKb_Init_800EEB1C(gobj, dst);

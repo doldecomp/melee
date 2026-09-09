@@ -77,7 +77,7 @@ void fn_8017C0C8(void)
     sp8.attack_ratio = Player_GetAttackRatio(2);
     sp8.defense_ratio = Player_GetUnk50(2);
     sp8.color = 0;
-    sp8.ckind = CKIND_CREZYH;
+    sp8.ckind = CKind_CrezyH;
     sp8.team = 4;
     sp8.xC_b7 = true;
     sp8.hp = lbl_804706C0.xC;
@@ -265,7 +265,7 @@ void fn_8017C71C(void)
     tmp->x8 = 0;
     tmp->xC = ftBossLib_8015C530(gm_8017E068());
     Player_SetOtherStamina(2, tmp->xC);
-    ftLib_80087508(FTKIND_CREZYH, 0);
+    ftLib_80087508(Ft_Kind_CrezyH, 0);
 }
 
 void fn_8017C7A0(void)
@@ -303,19 +303,19 @@ void gm_8017C838(void)
     temp_r30 = gm_GetAdventureData();
     temp_r3 = gmVs_GetController_0();
     var_r31 = sp10;
-    sp10[0] = FTKIND_NONE;
-    sp10[1] = FTKIND_NONE;
-    sp10[2] = FTKIND_NONE;
+    sp10[0] = Ft_Kind_None;
+    sp10[1] = Ft_Kind_None;
+    sp10[2] = Ft_Kind_None;
     switch (temp_r3->start.stkind) {
     case 0x3B:
-        sp10[0] = FTKIND_YOSHI;
+        sp10[0] = Ft_Kind_Yoshi;
         break;
     case 0x3F:
-        sp10[0] = FTKIND_LINK;
+        sp10[0] = Ft_Kind_Link;
         break;
     case 0x44:
-        sp10[0] = FTKIND_KIRBY;
-        if (temp_r30->x0.x0.ckind == CKIND_KIRBY && temp_r30->x0.x0.color == 0)
+        sp10[0] = Ft_Kind_Kirby;
+        if (temp_r30->x0.x0.ckind == CKind_Kirby && temp_r30->x0.x0.color == 0)
         {
             var_r3 = 1;
         } else {
@@ -325,25 +325,25 @@ void gm_8017C838(void)
         break;
     case 0x48:
         sp10[0] = 0xC;
-        if (gm_IsCKindUnlocked(CKIND_PICHU) != 0) {
-            sp10[1] = FTKIND_PICHU;
+        if (gm_IsCKindUnlocked(CKind_Pichu) != 0) {
+            sp10[1] = Ft_Kind_Pichu;
         }
-        if (gm_IsCKindUnlocked(CKIND_PURIN) != 0) {
-            sp10[2] = FTKIND_PURIN;
+        if (gm_IsCKindUnlocked(CKind_Purin) != 0) {
+            sp10[2] = Ft_Kind_Purin;
         }
         break;
     case 0x4C:
-        sp10[0] = FTKIND_POPO;
-        sp10[1] = FTKIND_NANA;
+        sp10[0] = Ft_Kind_Popo;
+        sp10[1] = Ft_Kind_Nana;
         break;
     case 0x4E:
-        sp10[0] = FTKIND_BOY;
-        sp10[1] = FTKIND_GIRL;
+        sp10[0] = Ft_Kind_Boy;
+        sp10[1] = Ft_Kind_Girl;
         break;
     }
 
     for (i = 0; i < 3; i++) {
-        if (*var_r31 != FTKIND_MAX) {
+        if (*var_r31 != Ft_Kind_Max) {
             ftLib_80087574(*var_r31);
         }
         var_r31++;
@@ -398,7 +398,7 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         gm_8017390C(fn_8017DF90(), 0);
         gm_80173EEC();
         gm_80172898(0x40);
-        if (temp_r31 == CHKIND_NONE) {
+        if (temp_r31 == ChKind_None) {
             if (gm_80173754(1, arg1->x0.slot) == 0) {
                 gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
@@ -637,12 +637,12 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
         player_stocks = arg1->x0.stocks;
     }
 
-    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->xC.x12 != 0)) {
-        player_ckind = CKIND_SEAK;
+    if ((arg1->x0.ckind == CKind_Zelda) && (arg1->xC.x12 != 0)) {
+        player_ckind = CKind_Seak;
     } else if (((arg1->x8 & 0x80) != 0) && (arg1->x9 == 1) &&
-               (arg1->x0.ckind == CKIND_POPONANA))
+               (arg1->x0.ckind == CKind_PopoNana))
     {
-        player_ckind = CHKIND_POPO;
+        player_ckind = ChKind_Popo;
     } else {
         player_ckind = (u8) arg1->x0.ckind;
     }
@@ -780,12 +780,12 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
                 arg0->players[player_idx].vs_metal = 1;
                 arg0->players[player_idx].cpu_kind = 0x1B;
             }
-            if ((s32) arg0->players[player_idx].ckind == CKIND_GKOOPS) {
+            if ((s32) arg0->players[player_idx].ckind == CKind_GKoops) {
                 arg0->players[player_idx].xC_b1 = 0;
             }
             enemy_ckind = (u8) arg0->players[player_idx].ckind;
-            if (((s8) enemy_ckind == CKIND_MASTERH) ||
-                ((s8) enemy_ckind == CKIND_CREZYH))
+            if (((s8) enemy_ckind == CKind_MasterH) ||
+                ((s8) enemy_ckind == CKind_CrezyH))
             {
                 arg0->players[player_idx].xC_b7 = 1;
                 arg0->players[player_idx].hp = 0x12C;
@@ -793,7 +793,7 @@ void gm_8017CE34(StartMeleeData* arg0, Unk1PData* arg1, s8* arg2, u8 arg3,
                 arg0->players[player_idx].xD_b0 = 1;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].spawn_dir = -1;
-                if ((s32) arg0->players[player_idx].ckind == CKIND_CREZYH) {
+                if ((s32) arg0->players[player_idx].ckind == CKind_CrezyH) {
                     arg0->players[player_idx].slot_type = 3;
                 }
                 boss_count += 1;
@@ -944,7 +944,7 @@ static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
     base = arr;
     scan.cursor = base;
     scan.count = 0;
-    while ((s32) *scan.cursor != CHKIND_NONE) {
+    while ((s32) *scan.cursor != ChKind_None) {
         scan.cursor++;
         scan.count++;
     }
@@ -982,7 +982,7 @@ static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
         w2++;
     }
 
-    return CHKIND_NONE;
+    return ChKind_None;
 }
 
 s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
@@ -998,7 +998,7 @@ void gm_8017DB58(struct Unk1PData_x24* arg0)
 {
     int i;
     for (i = 0; i < 3; i++) {
-        arg0[i].ckind = CHKIND_NONE;
+        arg0[i].ckind = ChKind_None;
     }
 }
 
@@ -1089,7 +1089,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
     s32 index = 1;
     int i;
     for (i = 0; i < 3; i++) {
-        if (arg1[i].ckind != CHKIND_NONE) {
+        if (arg1[i].ckind != ChKind_None) {
             gm_SetupPlayerDefaults(&arg0[index]);
             arg0[index].ckind = arg1[i].ckind;
             arg0[index].slot_type = 1;
@@ -1101,7 +1101,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].attack_ratio = arg1[i].attack_ratio;
             arg0[index].defense_ratio = arg1[i].defense_ratio;
             arg0[index].xD_b1 = 1;
-            if (arg0[index].ckind == CKIND_GKOOPS) {
+            if (arg0[index].ckind == CKind_GKoops) {
                 arg0[index].xC_b1 = 0;
             }
             index++;
@@ -1215,7 +1215,7 @@ bool fn_8017E160(void)
     if (var_r3 != NULL) {
         int i;
         for (i = 0; i < 3; i++) {
-            if (var_r3->xC.x24[i].ckind != CHKIND_NONE) {
+            if (var_r3->xC.x24[i].ckind != ChKind_None) {
                 return true;
             }
         }

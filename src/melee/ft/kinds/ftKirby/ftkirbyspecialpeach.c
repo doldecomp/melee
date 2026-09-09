@@ -202,7 +202,7 @@ void ftKb_PeSpecialAirLw_Phys(HSD_GObj* gobj)
     } else {
         ftCommon_FallBasic(fp);
     }
-    ftCommon_ApplyFrictionAir(
+    ftCommon_CalcSelfAccel_Deaccel(
         fp, da->specialn_pe_air_horizontal_momentum_preservation);
     ftColl_8007AEE0(gobj);
 }
@@ -323,7 +323,7 @@ void ftKb_PeSpecialAirLwHit_Phys(HSD_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(4 * 2);
     ftCommon_Fall(fp, da->specialn_pe_fall_acceleration, da->specialn_pe_unk2);
-    ftCommon_ApplyFrictionAir(
+    ftCommon_CalcSelfAccel_Deaccel(
         fp, da->specialn_pe_air_horizontal_momentum_preservation);
 }
 

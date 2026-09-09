@@ -195,7 +195,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
         fp->u.pp.x2230_b0 = true;
         ftPp_set_cbs(gobj);
         fp->cmd_vars[0] = 0;
-        if (fp->kind == FTKIND_POPO) {
+        if (fp->kind == Ft_Kind_Popo) {
             ft_800881D8(fp, 0x1FC42, 0x7F, 0x40);
             ft_80088510(fp, 0x1FBEB, 0x7F, 0x40);
         } else {

@@ -40,41 +40,41 @@ struct Unk_Struct_w_Array {
 char str_PdPmdat_start_of_data[] = "PdPm.dat";
 char str_plLoadCommonData[] = "plLoadCommonData";
 
-ftMapping ftMapping_list[CHKIND_MAX] = {
+ftMapping ftMapping_list[ChKind_Max] = {
     //////ftMapping_list
-    /* CKIND_CAPTAIN   */ { FTKIND_CAPTAIN, 0xFF },
-    /* CKIND_DONKEY    */ { FTKIND_DONKEY, 0xFF },
-    /* CKIND_FOX       */ { FTKIND_FOX, 0xFF },
-    /* CKIND_GAMEWATCH */ { FTKIND_GAMEWATCH, 0xFF },
-    /* CKIND_KIRBY     */ { FTKIND_KIRBY, 0xFF },
-    /* CKIND_KOOPA     */ { FTKIND_KOOPA, 0xFF },
-    /* CKIND_LINK      */ { FTKIND_LINK, 0xFF },
-    /* CKIND_LUIGI     */ { FTKIND_LUIGI, 0xFF },
-    /* CKIND_MARIO     */ { FTKIND_MARIO, 0xFF },
-    /* CKIND_MARS      */ { FTKIND_MARS, 0xFF },
-    /* CKIND_MEWTWO    */ { FTKIND_MEWTWO, 0xFF },
-    /* CKIND_NESS      */ { FTKIND_NESS, 0xFF },
-    /* CKIND_PEACH     */ { FTKIND_PEACH, 0xFF },
-    /* CKIND_PIKACHU   */ { FTKIND_PIKACHU, 0xFF },
-    /* CKIND_POPONANA  */ { FTKIND_POPO, FTKIND_NANA },
-    /* CKIND_PURIN     */ { FTKIND_PURIN, 0xFF },
-    /* CKIND_SAMUS     */ { FTKIND_SAMUS, 0xFF },
-    /* CKIND_YOSHI     */ { FTKIND_YOSHI, 0xFF },
-    /* CKIND_ZELDA     */ { FTKIND_ZELDA, FTKIND_SEAK, true },
-    /* CKIND_SEAK      */ { FTKIND_SEAK, FTKIND_ZELDA, true },
-    /* CKIND_FALCO     */ { FTKIND_FALCO, 0xFF },
-    /* CKIND_CLINK     */ { FTKIND_CLINK, 0xFF },
-    /* CKIND_DRMARIO   */ { FTKIND_DRMARIO, 0xFF },
-    /* CKIND_EMBLEM    */ { FTKIND_EMBLEM, 0xFF },
-    /* CKIND_PICHU     */ { FTKIND_PICHU, 0xFF },
-    /* CKIND_GANON     */ { FTKIND_GANON, 0xFF },
-    /* CKIND_MASTERH   */ { FTKIND_MASTERH, 0xFF },
-    /* CKIND_BOY       */ { FTKIND_BOY, 0xFF },
-    /* CKIND_GIRL      */ { FTKIND_GIRL, 0xFF },
-    /* CKIND_GKOOPS    */ { FTKIND_GKOOPS, 0xFF },
-    /* CKIND_CREZYH    */ { FTKIND_CREZYH, 0xFF },
-    /* CHKIND_SANDBAG  */ { FTKIND_SANDBAG, 0xFF },
-    /* CHKIND_POPO     */ { FTKIND_POPO, 0xFF }
+    /* CKind_Captain   */ { Ft_Kind_Captain, 0xFF },
+    /* CKind_Donkey    */ { Ft_Kind_Donkey, 0xFF },
+    /* CKind_Fox       */ { Ft_Kind_Fox, 0xFF },
+    /* CKind_GameWatch */ { Ft_Kind_GameWatch, 0xFF },
+    /* CKind_Kirby     */ { Ft_Kind_Kirby, 0xFF },
+    /* CKind_Koopa     */ { Ft_Kind_Koopa, 0xFF },
+    /* CKind_Link      */ { Ft_Kind_Link, 0xFF },
+    /* CKind_Luigi     */ { Ft_Kind_Luigi, 0xFF },
+    /* CKind_Mario     */ { Ft_Kind_Mario, 0xFF },
+    /* CKind_Mars      */ { Ft_Kind_Mars, 0xFF },
+    /* CKind_Mewtwo    */ { Ft_Kind_Mewtwo, 0xFF },
+    /* CKind_Ness      */ { Ft_Kind_Ness, 0xFF },
+    /* CKind_Peach     */ { Ft_Kind_Peach, 0xFF },
+    /* CKind_Pikachu   */ { Ft_Kind_Pikachu, 0xFF },
+    /* CKind_PopoNana  */ { Ft_Kind_Popo, Ft_Kind_Nana },
+    /* CKind_Purin     */ { Ft_Kind_Purin, 0xFF },
+    /* CKind_Samus     */ { Ft_Kind_Samus, 0xFF },
+    /* CKind_Yoshi     */ { Ft_Kind_Yoshi, 0xFF },
+    /* CKind_Zelda     */ { Ft_Kind_Zelda, Ft_Kind_Seak, true },
+    /* CKind_Seak      */ { Ft_Kind_Seak, Ft_Kind_Zelda, true },
+    /* CKind_Falco     */ { Ft_Kind_Falco, 0xFF },
+    /* CKind_CLink     */ { Ft_Kind_CLink, 0xFF },
+    /* CKind_DrMario   */ { Ft_Kind_DrMario, 0xFF },
+    /* CKind_Emblem    */ { Ft_Kind_Emblem, 0xFF },
+    /* CKind_Pichu     */ { Ft_Kind_Pichu, 0xFF },
+    /* CKind_Ganon     */ { Ft_Kind_Ganon, 0xFF },
+    /* CKind_MasterH   */ { Ft_Kind_MasterH, 0xFF },
+    /* CKind_Boy       */ { Ft_Kind_Boy, 0xFF },
+    /* CKind_Girl      */ { Ft_Kind_Girl, 0xFF },
+    /* CKind_GKoops    */ { Ft_Kind_GKoops, 0xFF },
+    /* CKind_CrezyH    */ { Ft_Kind_CrezyH, 0xFF },
+    /* ChKind_Sandbag  */ { Ft_Kind_Sandbag, 0xFF },
+    /* ChKind_Popo     */ { Ft_Kind_Popo, 0xFF }
 };
 
 ////.bss
@@ -1912,7 +1912,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player = &player_slots[slot];
 
     player->player_state = 0;
-    player->player_character = CKIND_MARIO;
+    player->player_character = CKind_Mario;
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 

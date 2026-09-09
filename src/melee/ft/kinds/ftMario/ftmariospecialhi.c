@@ -122,7 +122,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
         ftCommon_Fall(fp, sa->specialhi.grav, attrs->terminal_velocity);
-        ftCommon_8007CF58(fp);
+        ftCommon_CalcSelfAccel_DeaccelQuickAir(fp);
     }
 }
 

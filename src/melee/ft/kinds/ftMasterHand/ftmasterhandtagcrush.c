@@ -43,7 +43,7 @@ void ftMh_MS_382_801552F8(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->cmd_vars[1] = 0;
     {
-        HSD_GObj* gobj_2 = ftBossLib_GetFighterGObj(FTKIND_CREZYH);
+        HSD_GObj* gobj_2 = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
         if (!ftBossLib_8015C31C()) {
             ftCh_Init_8015A3F4(gobj_2);
         }

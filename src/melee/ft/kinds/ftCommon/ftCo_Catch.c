@@ -107,9 +107,9 @@ void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->x74_anim_vel.z = 0.0F;
-    fp->x74_anim_vel.y = 0.0F;
-    fp->x74_anim_vel.x = 0.0F;
+    fp->x74_self_accel.z = 0.0F;
+    fp->x74_self_accel.y = 0.0F;
+    fp->x74_self_accel.x = 0.0F;
     fp->mv.co.catch.x0 = 0.0F;
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftCommon_8007E2D0(fp, 1, fn_800D9CE8, fn_800D8BFC, fn_800DAADC);
@@ -148,9 +148,9 @@ void ftCo_Catch_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                         fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, p_ftCommonData->x64 *
+                                             fp->co_attrs.ground_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_CatchDash_Phys(Fighter_GObj* gobj)
@@ -182,7 +182,7 @@ bool fn_800D8E94(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->kind;
-    if (((kind == FTKIND_LINK) || (kind == FTKIND_CLINK)) &&
+    if (((kind == Ft_Kind_Link) || (kind == Ft_Kind_CLink)) &&
         (fp->u.lk.xC != NULL))
     {
         return false;

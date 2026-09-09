@@ -50,9 +50,9 @@ void ftCo_CaptureCut_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x36C *
-                                             fp->co_attrs.ground_friction);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_Deaccel(fp, p_ftCommonData->x36C *
+                                                 fp->co_attrs.ground_friction);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
         return;
     }
 
@@ -113,7 +113,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
     var_r31->x221B_b5 = false;
     var_r31->x221B_b7 = false;
     if (var_r30->x2226_b2) {
-        if (var_r31->kind == FTKIND_KIRBY &&
+        if (var_r31->kind == Ft_Kind_Kirby &&
             (var_r31->motion_id == ftKb_MS_SpecialNCapture0 ||
              var_r31->motion_id == ftKb_MS_SpecialAirNCapture0))
         {

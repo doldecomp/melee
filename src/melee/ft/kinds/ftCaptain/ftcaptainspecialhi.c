@@ -98,16 +98,18 @@ void ftCa_SpecialHi_Phys(HSD_GObj* gobj)
     fp->self_vel.x = fp->mv.ca.specialhi.vel.x;
     fp->self_vel.y = fp->mv.ca.specialhi.vel.y;
     fp->self_vel.z = 0;
-    if (!ftCommon_8007D050(fp, da->specialhi_horz_vel * ca->air_drift_max)) {
-        ftCommon_8007D3A8(fp, p_ftCommonData->x258,
-                          ca->air_drift_stick_mul *
-                              da->specialhi_air_friction_mul,
-                          ca->air_drift_max * da->specialhi_horz_vel);
+    if (!ftCommon_CalcSelfAccel_DeaccelQuick(fp, da->specialhi_horz_vel *
+                                                     ca->air_drift_max))
+    {
+        ftCommon_CalcSelfAccel_DriftSimple_NoFriction(
+            fp, p_ftCommonData->x258,
+            ca->air_drift_stick_mul * da->specialhi_air_friction_mul,
+            ca->air_drift_max * da->specialhi_horz_vel);
     }
-    fp->mv.ca.specialhi.vel.x = fp->x74_anim_vel.x + fp->self_vel.x;
-    fp->mv.ca.specialhi.vel.y = fp->x74_anim_vel.y + fp->self_vel.y;
+    fp->mv.ca.specialhi.vel.x = fp->x74_self_accel.x + fp->self_vel.x;
+    fp->mv.ca.specialhi.vel.y = fp->x74_self_accel.y + fp->self_vel.y;
     ft_80085134(gobj);
-    fp->x74_anim_vel.x = fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.x = fp->x74_self_accel.y = 0;
     fp->self_vel.x = fp->self_vel.x + fp->mv.ca.specialhi.vel.x;
     fp->self_vel.y = fp->self_vel.y + fp->mv.ca.specialhi.vel.y;
 }

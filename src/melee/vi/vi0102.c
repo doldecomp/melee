@@ -56,8 +56,8 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     Player_InitAllPlayers();
 
     // Setup Mario
-    Player_80036E20(CKIND_MARIO, un_804D6F38, 4);
-    Player_SetPlayerCharacter(0, CKIND_MARIO);
+    Player_80036E20(CKind_Mario, un_804D6F38, 4);
+    Player_SetPlayerCharacter(0, CKind_Mario);
     Player_SetCostumeId(0, mario_costume);
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
@@ -66,8 +66,8 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     Player_80036F34(0, 9);
 
     // Setup Luigi
-    Player_80036E20(CKIND_LUIGI, un_804D6F38, 4);
-    Player_SetPlayerCharacter(1, CKIND_LUIGI);
+    Player_80036E20(CKind_Luigi, un_804D6F38, 4);
+    Player_SetPlayerCharacter(1, CKind_Luigi);
     Player_SetCostumeId(1, luigi_costume);
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, Gm_PKind_Demo);

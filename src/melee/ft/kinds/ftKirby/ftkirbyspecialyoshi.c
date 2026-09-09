@@ -76,37 +76,37 @@ f32 ftKb_SpecialNYs_801092CC(Fighter_GObj* gobj)
 
 f32 ftKb_SpecialNYs_801092DC(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_ys_egg_breakout_resistance;
 }
 
 f32 ftKb_SpecialNYs_801092F4(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_ys_frames_reduced_per_input;
 }
 
 f32 ftKb_SpecialNYs_8010930C(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_ys_unk1;
 }
 
 f32 ftKb_SpecialNYs_80109324(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_ys_unk2;
 }
 
 int ftKb_SpecialNYs_8010933C(void)
 {
-    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return ea->specialn_ys_iframes_on_release;
 }
 
 void ftKb_SpecialNYs_80109354(Vec3* v)
 {
-    ftKb_DatAttrs* cd = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* cd = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     v->x = cd->specialn_ys_horizontal_velocity_on_breakout;
     v->y = cd->specialn_ys_vertical_velocity_on_breakout;
     v->z = 0.0f;
@@ -114,13 +114,13 @@ void ftKb_SpecialNYs_80109354(Vec3* v)
 
 float ftKb_SpecialNYs_80109380(void)
 {
-    ftKb_DatAttrs* cd = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    ftKb_DatAttrs* cd = gFtDataList[Ft_Kind_Kirby]->ext_attr;
     return cd->specialn_ys_unk3 / cd->specialn_ys_damage_multiplier;
 }
 
 ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
-    return ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[0];
+    return ft_80459B88.hats[Ft_Kind_Samus]->hat_dynamics[0];
 }
 
 void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
@@ -128,7 +128,7 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObjAddAnimAll(
         fp->u.kb.hat.jobj,
-        (HSD_AnimJoint*) ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[1], 0,
+        (HSD_AnimJoint*) ft_80459B88.hats[Ft_Kind_Samus]->hat_dynamics[1], 0,
         0);
     HSD_JObjReqAnimAll(fp->u.kb.hat.jobj, 0.0F);
     HSD_JObjAnimAll(fp->u.kb.hat.jobj);
@@ -138,7 +138,7 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    KirbyHatStruct* ys_hat = ft_80459B88.hats[FTKIND_SAMUS];
+    KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
     fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
@@ -159,7 +159,7 @@ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
 void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    KirbyHatStruct* ys_hat = ft_80459B88.hats[FTKIND_SAMUS];
+    KirbyHatStruct* ys_hat = ft_80459B88.hats[Ft_Kind_Samus];
     fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, 0, 0.0F,
                               1.0F, 0.0F, NULL);
@@ -544,7 +544,7 @@ void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
             item_attrs.x24 = da->specialn_ys_damage_multiplier;
         }
         {
-            ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+            ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
             item_attrs.float3 =
                 ea->specialn_ys_unk3 / ea->specialn_ys_damage_multiplier;
         }
@@ -621,7 +621,7 @@ void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
             item_attrs.x24 = da->specialn_ys_damage_multiplier;
         }
         {
-            ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+            ftKb_DatAttrs* ea = gFtDataList[Ft_Kind_Kirby]->ext_attr;
             item_attrs.float3 =
                 ea->specialn_ys_unk3 / ea->specialn_ys_damage_multiplier;
         }

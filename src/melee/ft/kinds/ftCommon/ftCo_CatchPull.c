@@ -28,7 +28,7 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     startFrame = frame;
     if (fp->motion_id == 0xD4) {
         nextMotion = 0xD5;
-        if (fp->kind == FTKIND_YOSHI) {
+        if (fp->kind == Ft_Kind_Yoshi) {
             yattrs = fp->dat_attrs;
             if (frame >= yattrs->x124 && frame < yattrs->x128) {
                 rate = frame - yattrs->x124;
@@ -42,14 +42,14 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     }
 
     switch (fp->kind) {
-    case FTKIND_CLINK:
-    case FTKIND_LINK:
+    case Ft_Kind_CLink:
+    case Ft_Kind_Link:
         item = fp->u.lk.xC;
         it = GET_ITEM(item);
         it_802A7840((HSD_GObj*) item);
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.linkhookshot.xC;
         break;
-    case FTKIND_SAMUS:
+    case Ft_Kind_Samus:
         item = fp->u.ss.x223C;
         it = GET_ITEM(item);
         it_802BAA94(item);
@@ -74,8 +74,8 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     switch (fp->kind) {
-    case FTKIND_LINK:
-    case FTKIND_CLINK: {
+    case Ft_Kind_Link:
+    case Ft_Kind_CLink: {
         Item_GObj* item_gobj = fp->u.lk.xC;
         if (item_gobj == NULL) {
             should_transition = true;
@@ -87,7 +87,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
         }
         break;
     }
-    case FTKIND_SAMUS: {
+    case Ft_Kind_Samus: {
         Item_GObj* item_gobj = fp->u.ss.x223C;
         if (item_gobj == NULL) {
             should_transition = true;
@@ -127,9 +127,9 @@ void ftCo_CatchPull_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                         fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, p_ftCommonData->x64 *
+                                             fp->co_attrs.ground_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftCo_CatchPull_Coll(Fighter_GObj* gobj)

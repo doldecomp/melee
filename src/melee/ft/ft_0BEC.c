@@ -32,7 +32,7 @@ void ftCo_800BECB0(Fighter_GObj* gobj)
                               0.f, NULL);
     setupInitialState(fp);
     switch (fp->kind) {
-    case FTKIND_FOX: {
+    case Ft_Kind_Fox: {
         ftFox_DatAttrs* da = fp->dat_attrs;
         fp->item_gobj =
             it_802AE994(gobj, ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
@@ -81,11 +81,11 @@ void ftCo_800BED88(Fighter_GObj* gobj)
     setupInitialState(fp);
 
     switch (fp->kind) {
-    case FTKIND_FOX: {
+    case Ft_Kind_Fox: {
         FoxHelper(gobj, fp);
         break;
     }
-    case FTKIND_DRMARIO: {
+    case Ft_Kind_DrMario: {
         DocHelper(gobj, fp);
         break;
     }
@@ -103,7 +103,7 @@ void ftCo_800BEF04(Fighter_GObj* gobj)
                               1.f, 0.f, NULL);
     setupInitialState(fp);
     switch (fp->kind) {
-    case FTKIND_NESS: {
+    case Ft_Kind_Ness: {
         fp->item_gobj =
             it_802AD590(gobj, ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
         it_8026BAE8(fp->item_gobj,

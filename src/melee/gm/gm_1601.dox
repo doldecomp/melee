@@ -106,7 +106,7 @@ struct lbl_8046B488_t;
  * @brief Convert a #SelectableCharacterKind into its #CharacterKind.
  *
  * Indexes #selkind_to_ckind_map with @p selkind. #SELKIND_ZELDA_SEAK resolves
- * to #CharacterKind::CKIND_ZELDA; the Sheik half is dropped because
+ * to #CharacterKind::CKind_Zelda; the Sheik half is dropped because
  * #SelectableCharacterKind collapses Zelda/Sheik into a single slot.
  *
  * @param[in] selkind A #SelectableCharacterKind (e.g. the CSS slot index).
@@ -120,7 +120,7 @@ struct lbl_8046B488_t;
  * @brief Convert a #CharacterKind into its #SelectableCharacterKind.
  *
  * Indexes #ckind_to_selkind_map with @p ckind. Both
- * #CharacterKind::CKIND_ZELDA and #CharacterKind::CKIND_SEAK collapse onto
+ * #CharacterKind::CKind_Zelda and #CharacterKind::CKind_Seak collapse onto
  * #SELKIND_ZELDA_SEAK, so this direction is lossy with respect to the
  * Zelda/Sheik split, not to mention all the non-playable characters.
  *

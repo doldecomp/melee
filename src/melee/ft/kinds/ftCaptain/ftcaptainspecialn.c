@@ -38,9 +38,9 @@ static inline void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
     FighterKind kind = ftLib_GetKind(gobj);
 
     switch (kind) {
-    case FTKIND_CAPTAIN:
+    case Ft_Kind_Captain:
         return;
-    case FTKIND_GANON:
+    case Ft_Kind_Ganon:
         if (cur_frame & 1) {
             if (cur_frame >= 16 && cur_frame <= 50) {
                 lb_800119DC(&fp->cur_pos, 2, 2, 2, 0);
@@ -153,11 +153,11 @@ static inline void doPhys(HSD_GObj* gobj)
         if (!fp->x2219_b0) {
             FighterKind kind = ftLib_GetKind(gobj);
             switch (kind) {
-            case FTKIND_CAPTAIN:
+            case Ft_Kind_Captain:
                 efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].joint,
                              fp->parts[57].joint);
                 break;
-            case FTKIND_GANON:
+            case Ft_Kind_Ganon:
                 efSync_Spawn(1291, gobj, fp->parts[FtPart_TopN].joint,
                              fp->parts[78].joint);
                 break;

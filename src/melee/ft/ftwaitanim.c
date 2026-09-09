@@ -64,8 +64,8 @@ void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (arg1 == NULL ||
-            (fp->item_gobj != NULL && fp->kind != FTKIND_MEWTWO &&
-             fp->kind != FTKIND_FOX))
+            (fp->item_gobj != NULL && fp->kind != Ft_Kind_Mewtwo &&
+             fp->kind != Ft_Kind_Fox))
         {
             enum_t temp;
             temp = fp->anim_id;

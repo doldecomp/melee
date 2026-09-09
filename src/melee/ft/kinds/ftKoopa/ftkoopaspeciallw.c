@@ -100,7 +100,7 @@ void ftKp_SpecialAirLw_Phys(Fighter_GObj* gobj)
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(16);
     ftCommon_Fall(fp, da->x8C, da->x90);
-    ftCommon_ApplyFrictionAir(fp, da->x88);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x88);
     if ((fp->self_vel.y < da->x94) || (fp->cmd_vars[1] != 0)) {
         fp->self_vel.y = da->x94;
     }

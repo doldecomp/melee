@@ -867,17 +867,17 @@ void fn_80185D64(void)
 
     for (i = 0; i < lbl_8047368C.xEF; i++) {
         chr = lbl_8047368C.xF1[i];
-        if (chr != CHKIND_MAX) {
+        if (chr != ChKind_Max) {
             Player_80036E20(chr, lbl_804D65F4, 1);
         }
     }
 
     for (i = 0; i < lbl_8047368C.xF0; i++) {
-        if (lbl_8047368C.xF4[i] == CKIND_GKOOPS) {
-            lbl_8047368C.xF4[i] = CKIND_KOOPA;
+        if (lbl_8047368C.xF4[i] == CKind_GKoops) {
+            lbl_8047368C.xF4[i] = CKind_Koopa;
         }
         chr = lbl_8047368C.xF4[i];
-        if (chr != CHKIND_MAX) {
+        if (chr != ChKind_Max) {
             Player_80036E20(chr, lbl_804D65F4, 1);
         }
     }

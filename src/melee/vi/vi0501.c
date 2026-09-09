@@ -102,11 +102,11 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     counts = (u8*) spawn_count;
     pos = grLib_801C9A10();
     for (i = 1; i < 4; i++) {
-        Player_80036E20(CKIND_KIRBY, un_804D6F74, 6);
+        Player_80036E20(CKind_Kirby, un_804D6F74, 6);
         count = counts[i - 1];
         Player_80031DA8(count, spawn_mode);
         Player_SetFlagsBit1(i);
-        Player_SetPlayerCharacter(i, CKIND_KIRBY);
+        Player_SetPlayerCharacter(i, CKind_Kirby);
         Player_SetCostumeId(i, spawn_mode);
         Player_SetPlayerId(i, 0);
         Player_SetSlottype(i, Gm_PKind_Demo);

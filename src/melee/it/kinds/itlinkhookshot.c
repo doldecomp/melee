@@ -359,7 +359,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
         Item_8026AB54(gobj, arg0, ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
         it_802A2428(gobj);
     }
-    if ((enum FighterKind) fp->kind == FTKIND_CLINK) {
+    if ((enum FighterKind) fp->kind == Ft_Kind_CLink) {
         it_804D6D48 = 6.0f;
     } else {
         it_804D6D48 = 6.0f;
@@ -973,7 +973,7 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
         coll->cur_pos.y += arg8;
     }
     if (item_link->x2C_b1 && !flag && !item_link->x2C_b2) {
-        if (arg1 == FTKIND_CLINK) {
+        if (arg1 == Ft_Kind_CLink) {
             lbAudioAx_800237A8(0x111BF, 0x7FU, 0x40U);
         } else {
             lbAudioAx_800237A8(0x2714F, 0x7FU, 0x40U);
@@ -1998,7 +1998,7 @@ void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8)
     PAD_STACK(4);
 
     fp = GET_FIGHTER(arg0->owner);
-    if (fp->kind == FTKIND_LINK) {
+    if (fp->kind == Ft_Kind_Link) {
         item_link = arg0->xDD4_itemVar.linkhookshot.x4;
     } else {
         item_link = arg0->xDD4_itemVar.linkhookshot.x4;

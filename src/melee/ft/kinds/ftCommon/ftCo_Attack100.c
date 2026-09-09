@@ -134,7 +134,7 @@ void fn_800D6AC4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
-    case FTKIND_GAMEWATCH:
+    case Ft_Kind_GameWatch:
         ftGw_Attack100Start_Enter(gobj);
         break;
     default:
@@ -343,7 +343,7 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 
 s32 ftCo_800D7268(Fighter* fp)
 {
-    if (fp->kind == FTKIND_KIRBY) {
+    if (fp->kind == Ft_Kind_Kirby) {
         return ftKb_SpecialN_800F1CD8(fp->gobj);
     }
     return 0;

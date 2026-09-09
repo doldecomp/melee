@@ -190,7 +190,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     } else {
         ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_velocity);
     }
-    ftCommon_ApplyFrictionAir(fp, da->x2C_FOX_ILLUSION_UNK1);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x2C_FOX_ILLUSION_UNK1);
 }
 
 /// 0x800EA128
@@ -251,7 +251,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
 
     if (fp->cmd_vars[2] == 1) {
         fp->cmd_vars[2] = 0;
-        if (fp->kind == FTKIND_FOX) {
+        if (fp->kind == Ft_Kind_Fox) {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, It_Kind_Fox_Illusion,
                                     fp->facing_dir);
         } else {
@@ -510,8 +510,8 @@ void ftFx_SpecialSEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     }
-    ftCommon_ApplyFrictionGround(fp, da->x38_FOX_ILLUSION_GROUND_FRICTION);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, da->x38_FOX_ILLUSION_GROUND_FRICTION);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     ftFox_SpecialS_SetPhys(gobj);
 }
 
@@ -532,7 +532,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         ftCommon_Fall(fp, da->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
                       ca->terminal_velocity);
     }
-    ftCommon_ApplyFrictionAir(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);
 }
 

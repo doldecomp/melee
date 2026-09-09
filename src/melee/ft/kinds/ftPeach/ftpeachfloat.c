@@ -34,7 +34,7 @@ bool ftPe_8011BA54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool float_input = checkStartFloatInput(gobj);
-    if (fp->kind == FTKIND_PEACH && fp->u.pe.has_float && float_input) {
+    if (fp->kind == Ft_Kind_Peach && fp->u.pe.has_float && float_input) {
         ftPe_8011BB6C(gobj, true);
         return true;
     }
@@ -44,7 +44,7 @@ bool ftPe_8011BA54(HSD_GObj* gobj)
 bool ftPe_8011BAD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == FTKIND_PEACH) {
+    if (fp->kind == Ft_Kind_Peach) {
         if (fp->self_vel.y <= 0 && fp->u.pe.has_float) {
             if (ftPe_Float_CheckContinueInput(fp)) {
                 ftPe_8011BB6C(gobj, true);
@@ -106,7 +106,7 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
 
 void ftPe_Float_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007D268(GET_FIGHTER(gobj));
+    ftCommon_CalcSelfAccel_Drift(GET_FIGHTER(gobj));
 }
 
 void ftPe_Float_Coll(HSD_GObj* gobj)

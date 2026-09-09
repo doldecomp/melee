@@ -205,10 +205,10 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
             }
 
             fp->mv.co.walk.x0 = target_vel * p_ftCommonData->x440;
-            ftCommon_8007C98C(fp, accel, target_vel,
-                              fp->co_attrs.ground_friction);
+            ftCommon_CalcGroundAccel_DashRun(fp, accel, target_vel,
+                                             fp->co_attrs.ground_friction);
         }
 
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     }
 }

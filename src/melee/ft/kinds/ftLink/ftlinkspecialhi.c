@@ -28,7 +28,7 @@ static void onAccessory4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj0 = fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint;
     HSD_JObj* jobj1;
-    if (fp->kind == FTKIND_LINK) {
+    if (fp->kind == Ft_Kind_Link) {
         jobj1 = fp->parts[FtPart_L2ndNa].joint;
     } else {
         jobj1 = fp->parts[FtPart_L3rdNa].joint;
@@ -98,7 +98,7 @@ void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftLk_DatAttrs* da = fp->dat_attrs;
     ftCommon_Fall(fp, ca->gravity * da->specialhi_grav_mul,
                   ca->terminal_velocity);
-    ftCommon_8007D344(
+    ftCommon_CalcSelfAccel_DriftSimple(
         fp, 0, ca->air_drift_stick_mul * da->specialairhi_drift_stick_mul,
         ca->air_drift_max * da->specialairhi_drift_max_mul);
 }

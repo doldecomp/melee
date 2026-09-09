@@ -24,7 +24,7 @@ static inline void inlineB2(Fighter_GObj* gobj)
 void ftCo_800C7220(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind != FTKIND_KIRBY) {
+    if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, ftCo_MS_Wait, 0, 0, 1, 0, NULL);
@@ -36,7 +36,7 @@ void ftCo_800C7220(Fighter_GObj* gobj)
 void ftCo_800C7294(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind != FTKIND_KIRBY) {
+    if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, ftCo_MS_WalkSlow, 0, 0, 1, 0, NULL);
@@ -48,7 +48,7 @@ void ftCo_800C7294(Fighter_GObj* gobj)
 void ftCo_800C7308(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind != FTKIND_KIRBY) {
+    if (fp->kind != Ft_Kind_Kirby) {
         inlineB2(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, ftCo_MS_WalkMiddle, 0, 0, 1, 0, NULL);

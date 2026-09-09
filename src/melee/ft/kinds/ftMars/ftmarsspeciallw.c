@@ -130,7 +130,7 @@ void ftMs_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = getFtSpecialAttrsD(fp);
     ftCommon_Fall(fp, da->x54, da->x58);
-    ftCommon_ApplyFrictionAir(fp, da->x50);
+    ftCommon_CalcSelfAccel_Deaccel(fp, da->x50);
     ftColl_8007AEE0(gobj);
 }
 
@@ -199,7 +199,7 @@ static inline void ftMars_SpecialLwHit_ApplyDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->mv.ms.speciallw.x0 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
+    if (fp->mv.ms.speciallw.x0 > 0 && ftLib_GetKind(gobj) == Ft_Kind_Emblem) {
         int i;
         for (i = 0; i < 4; i++) {
             if (fp->x914[i].state == HitCapsule_Enabled) {
@@ -290,13 +290,13 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
         switch (ftLib_GetKind(gobj)) {
-        case FTKIND_MARS:
+        case Ft_Kind_Mars:
             efSync_Spawn(
                 1265, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
             break;
-        case FTKIND_EMBLEM:
+        case Ft_Kind_Emblem:
             efSync_Spawn(
                 1296, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,

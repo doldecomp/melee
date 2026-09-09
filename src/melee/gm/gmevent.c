@@ -216,7 +216,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 
     for (i = lo; i < hi; i++) {
         char_id = arg0->x4C[i];
-        if (char_id != CHKIND_NONE) {
+        if (char_id != ChKind_None) {
             cache->entries[i].char_id = char_id;
             cache->entries[i].color = arg0->x50[i];
             if (arg0->x45 != 0 && i > 0 && arg0->x4C[i] == 4) {
@@ -231,7 +231,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     lbDvd_80018254();
     mask = 0;
     for (i = lo; i < hi; i++) {
-        if (arg0->x4C[i] != CHKIND_NONE) {
+        if (arg0->x4C[i] != ChKind_None) {
             mask |= lbAudioAx_80026E84(arg0->x4C[i]);
         }
     }
@@ -309,7 +309,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
 s32 gm_801BAC9C(GameModeState* arg0, s32 arg1)
 {
     UNUSED u8 _[8];
-    u8 chars[CHKIND_MAX];
+    u8 chars[ChKind_Max];
     struct EventData* ev = &gmMainLib_804D3EE0->vs.unk_530;
     StartMeleeData* data = gm_GetGameModeStateEnterData(arg0);
     s32 i;
@@ -320,10 +320,10 @@ s32 gm_801BAC9C(GameModeState* arg0, s32 arg1)
         (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
-    for (i = 0; i < CHKIND_MAX; i++) {
+    for (i = 0; i < ChKind_Max; i++) {
         u8* ptr = &src->c_kind[i];
         u8 c = *ptr;
-        if ((s32) c == CHKIND_MAX) {
+        if ((s32) c == ChKind_Max) {
             break;
         }
         found = 0;
@@ -456,7 +456,7 @@ void onEnterVs(GameModeState* arg0)
             u8 c;
             gm_801B05F4(md->players, ev->x6);
             ev->x7 = md->players[0].team;
-            if (md->players[0].ckind == CHKIND_NONE) {
+            if (md->players[0].ckind == ChKind_None) {
                 md->players[0].ckind = ev->x2;
                 md->players[0].color = ev->x3;
                 md->players[0].nametag = ev->nametag;
@@ -475,7 +475,7 @@ void onEnterVs(GameModeState* arg0)
                 md->players[player_idx].team = md->players[0].team;
                 md->players[player_idx].xD_b1 = 1;
             }
-            if (levels[level]->player_init[player_idx]->c_kind == CHKIND_NONE)
+            if (levels[level]->player_init[player_idx]->c_kind == ChKind_None)
             {
                 s8* t = &ev->x8 + player_idx - 1;
                 s8 v = *t;
@@ -494,8 +494,8 @@ void onEnterVs(GameModeState* arg0)
                     md->players[player_idx].color = gm_GetNextColor(c);
                 }
             }
-            if (md->players[0].ckind == CKIND_SEAK &&
-                md->players[player_idx].ckind == CKIND_ZELDA)
+            if (md->players[0].ckind == CKind_Seak &&
+                md->players[player_idx].ckind == CKind_Zelda)
             {
                 u8 c = md->players[player_idx].color;
                 if (c == md->players[0].color) {
@@ -530,8 +530,8 @@ void onEnterVs(GameModeState* arg0)
                 md->players[1].color = gm_GetNextColor(c);
             }
         }
-        if (md->players[0].ckind == CKIND_SEAK &&
-            md->players[1].ckind == CKIND_ZELDA)
+        if (md->players[0].ckind == CKind_Seak &&
+            md->players[1].ckind == CKind_Zelda)
         {
             u8 c = md->players[1].color;
             if (c == md->players[0].color) {
@@ -712,7 +712,7 @@ void onExitVs(GameModeState* arg0)
     if (ev->xB_1) {
         kind = gm_801732D8(ev->unk_535);
     } else {
-        kind = CHKIND_MAX;
+        kind = ChKind_Max;
     }
     if (ev->unk_535 == gm_801BEBC0(0x32) &&
         exit->match_end.player_standings[0].stocks == 3)
@@ -730,7 +730,7 @@ void onExitVs(GameModeState* arg0)
     }
     gm_80173EEC();
     gm_80172898(0x10);
-    if (kind != CHKIND_MAX) {
+    if (kind != ChKind_Max) {
         gm_InitChallengerData(ev->x0, ev->x1, ev->x6, ev->nametag, kind,
                               GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
@@ -793,7 +793,7 @@ static inline void gm_801BBB64_inline(struct EventData* ev)
 {
     struct gm_804D6900_t** tbl = gm_804D6900[0];
     u8 idx = ev->unk_535;
-    if ((*tbl[idx]->player_init)->c_kind != CHKIND_NONE) {
+    if ((*tbl[idx]->player_init)->c_kind != ChKind_None) {
         ev->x44 = 0;
     } else {
         ev->x44 = 1;
@@ -822,7 +822,7 @@ void gm_801BBB64(void)
             ev->x4C[i] = player_init->c_kind;
             ev->x50[i] = (*pp)->player_init[i]->color;
         } else {
-            ev->x4C[i] = CHKIND_NONE;
+            ev->x4C[i] = ChKind_None;
             ev->x50[i] = 0;
         }
     }
@@ -1268,7 +1268,7 @@ void gm_801BC670(HSD_GObj* arg0)
         temp_r31->x2C = temp_r30->x0;
         temp_r31->x30 = 0;
     }
-    if (Player_80036394(0) == FTKIND_SEAK) {
+    if (Player_80036394(0) == Ft_Kind_Seak) {
         temp_r31->x38 = 0x13;
     } else {
         temp_r31->x38 = 0x21;
@@ -1433,7 +1433,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         if ((Player_GetStocks(var_r30) <= 0) &&
             (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
         {
-            if (ftLib_GetKind(temp_r3) == FTKIND_SEAK) {
+            if (ftLib_GetKind(temp_r3) == Ft_Kind_Seak) {
                 var_r0 = 1;
             } else {
                 Player_SetStocks(var_r30, 1);
@@ -2615,7 +2615,7 @@ u8 gm_801BEBF8(u8 arg0)
 
     entry = array[i];
     if (entry == NULL) {
-        return CHKIND_NONE;
+        return ChKind_None;
     }
 
     ptr = *(u8**) ((u8*) entry + 0x14);

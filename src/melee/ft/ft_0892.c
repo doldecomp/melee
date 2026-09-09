@@ -133,7 +133,7 @@ void ft_800895E0(Fighter* fp, int arg1)
     if (val.x2073 == 0 || val.x2073 != fp->x2070.x2073) {
         fp->x2074.x2088 = plAttack_80037B08();
     }
-    if (fp->kind == FTKIND_LUIGI && val.x2073 == 0x71) {
+    if (fp->kind == Ft_Kind_Luigi && val.x2073 == 0x71) {
         sp18.x2070_int = 0x240063;
         val = sp18;
     }
@@ -243,19 +243,19 @@ s32 ft_80089914(HSD_GObj* gobj, int msid)
         return false;
     }
 
-    if (fp->kind == FTKIND_FOX) {
+    if (fp->kind == Ft_Kind_Fox) {
         if ((u32) (msid - ftCo_MS_AttackS3LwS) <= 2) {
             return false;
         }
     }
 
-    if (fp->kind == FTKIND_FALCO) {
+    if (fp->kind == Ft_Kind_Falco) {
         if ((u32) (msid - ftCo_MS_AttackS3LwS) <= 2) {
             return false;
         }
     }
 
-    if (fp->kind == FTKIND_MEWTWO) {
+    if (fp->kind == Ft_Kind_Mewtwo) {
         if (msid == ftCo_MS_AttackS3S) {
             return false;
         }

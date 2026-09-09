@@ -49,7 +49,7 @@ bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
 static void decideFighter(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
-    case FTKIND_KIRBY:
+    case Ft_Kind_Kirby:
         ftKb_SpecialN_800F1F68(gobj);
         return;
     default:

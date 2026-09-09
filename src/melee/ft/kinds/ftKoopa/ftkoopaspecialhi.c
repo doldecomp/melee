@@ -55,7 +55,7 @@ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    ftCommon_ClampGrVel(fp, da->x60);
+    ftCommon_ClampGroundVel(fp, da->x60);
     fp->self_vel.y = da->x54;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->mv.co.capturekoopa.xC = 0.0f;
@@ -118,8 +118,8 @@ void ftKp_SpecialHi_Phys(Fighter_GObj* gobj)
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
     if (fp->cmd_vars[0] == 0) {
-        ftCommon_8007CADC(fp, 0.0f, da->x68, da->x60);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_AccelToLStickX(fp, 0.0f, da->x68, da->x60);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -132,7 +132,7 @@ void ftKp_SpecialAirHi_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
     if (fp->cmd_vars[0] == 0) {
         ftCommon_Fall(fp, da->x58, da->x5C);
-        ftCommon_8007D344(fp, 0.0f, da->x6C, da->x64);
+        ftCommon_CalcSelfAccel_DriftSimple(fp, 0.0f, da->x6C, da->x64);
     } else {
         ft_80084DB0(gobj);
     }
@@ -188,7 +188,7 @@ static inline void ftKp_SpecialAirHi_Coll_inline(Fighter_GObj* gobj,
                                   1.0f, 0.0f, NULL);
         ftKp_SpecialHi_Enter_inline(gobj);
     }
-    ftCommon_ClampGrVel(fp, da->x60);
+    ftCommon_ClampGroundVel(fp, da->x60);
 }
 
 static inline void ftKp_SpecialAirHi_Coll_inline_2(Fighter_GObj* gobj)

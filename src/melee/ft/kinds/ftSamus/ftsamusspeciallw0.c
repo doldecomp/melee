@@ -189,9 +189,10 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         float samus_attr_xC = samus_attr->xC;
-        ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_accel_mul * samus_attr_xC,
-                          ftAttr->walk_max_vel * samus_attr_xC);
-        ftCommon_ApplyGroundMovement(gobj);
+        ftCommon_CalcGroundAccel_AccelToLStickX(
+            fp, 0.0f, ftAttr->walk_accel_mul * samus_attr_xC,
+            ftAttr->walk_max_vel * samus_attr_xC);
+        ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -206,10 +207,10 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
     u8 _[8];
 
     ftCommon_FallBasic(fp);
-    ftCommon_8007D344(fp, 0.0f,
-                      ftAttr->ground_to_air_jump_momentum_multiplier *
-                          samus_attr->x10,
-                      ftAttr->jump_h_max_velocity * samus_attr->x10);
+    ftCommon_CalcSelfAccel_DriftSimple(
+        fp, 0.0f,
+        ftAttr->ground_to_air_jump_momentum_multiplier * samus_attr->x10,
+        ftAttr->jump_h_max_velocity * samus_attr->x10);
 }
 
 void ftSs_SpecialLw_Coll(HSD_GObj* gobj)

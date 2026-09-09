@@ -542,7 +542,7 @@ loop:
     for (j = 0; j < 3; j++) {
         int cur_char = entry->x02[j];
 
-        if (cur_char == CHKIND_NONE) {
+        if (cur_char == ChKind_None) {
             continue;
         }
         if (gm_80164430(entry->x00) == 0) {
@@ -749,7 +749,7 @@ void gm_Mode_Classic_OnLoad(void)
 void gm_Mode_Classic_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3->c_kind = CHKIND_NONE;
+    temp_r3->c_kind = ChKind_None;
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
@@ -836,8 +836,8 @@ void gmClassic_801B3500(GameModeState* arg0)
 
     ally_count = 1;
     ckind = ad->x0.x0.ckind;
-    if (ckind == CKIND_ZELDA && ad->x0.xC.x12 != 0) {
-        sd->x0D[0] = CKIND_SEAK;
+    if (ckind == CKind_Zelda && ad->x0.xC.x12 != 0) {
+        sd->x0D[0] = CKind_Seak;
     } else {
         sd->x0D[0] = ckind;
     }

@@ -161,7 +161,7 @@ void fn_8015B2C0(HSD_GObj* gobj)
 
 bool fn_8015B4EC(Vec3* vec)
 {
-    HSD_GObj* gobj = ftBossLib_GetFighterGObj(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         lb_8000B1CC(fp->parts[FtPart_WaistN].joint, 0, vec);

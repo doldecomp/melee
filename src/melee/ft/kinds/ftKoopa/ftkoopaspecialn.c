@@ -76,18 +76,18 @@ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj)
     if ((fp->mv.kp.specials.x14 % 3) == 0) {
         f32 f = (fp->u.kp.x2230 - da->x1C) / (da->x18 - da->x1C);
         if (f < 0.3333f) {
-            if (fp->kind == FTKIND_KOOPA) {
+            if (fp->kind == Ft_Kind_Koopa) {
                 ft_PlaySFX(fp, 0x24A2B, 0x7F, 0x40);
             } else {
                 ft_PlaySFX(fp, 0x1D4F3, 0x7F, 0x40);
             }
         } else if (f < 0.6666f) {
-            if (fp->kind == FTKIND_KOOPA) {
+            if (fp->kind == Ft_Kind_Koopa) {
                 ft_PlaySFX(fp, 0x24A28, 0x7F, 0x40);
             } else {
                 ft_PlaySFX(fp, 0x1D4F0, 0x7F, 0x40);
             }
-        } else if (fp->kind == FTKIND_KOOPA) {
+        } else if (fp->kind == Ft_Kind_Koopa) {
             ft_PlaySFX(fp, 0x24A25, 0x7F, 0x40);
         } else {
             ft_PlaySFX(fp, 0x1D4ED, 0x7F, 0x40);

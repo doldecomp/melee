@@ -101,13 +101,13 @@ void gm_801BEE9C(GameModeState* arg0)
 
     game_mode = arg0->info.exit_data;
     ckind = gm_80173224(gm_801BF030(), 1);
-    if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
+    if (gm_801BEFB0() == CKind_GameWatch && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
     }
     gm_8017390C(gm_801BF030(), 1);
     gm_80173EEC();
     gm_80172898(0x40);
-    if (ckind == CHKIND_NONE) {
+    if (ckind == ChKind_None) {
         if (!gm_80173754(1, gm_801BEFD0())) {
             gm_SetPendingGameMode(*game_mode);
         }

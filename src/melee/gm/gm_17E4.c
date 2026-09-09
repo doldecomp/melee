@@ -363,7 +363,7 @@ void fn_8017E8A4(int arg0_int)
     if (stage->x0 == 3) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Cpu &&
-                Player_GetPlayerCharacter(i) == CKIND_LUIGI)
+                Player_GetPlayerCharacter(i) == CKind_Luigi)
             {
                 ((u8_bits*) &flags[1])->b7 = 1;
                 return;
@@ -384,7 +384,7 @@ void fn_8017E8A4(int arg0_int)
     } else if (stage->x0 == 0x53) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Cpu &&
-                Player_GetPlayerCharacter(i) == CKIND_LUIGI)
+                Player_GetPlayerCharacter(i) == CKind_Luigi)
             {
                 ((u8_bits*) &flags[1])->b4 = 1;
                 return;

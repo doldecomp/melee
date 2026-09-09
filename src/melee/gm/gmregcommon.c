@@ -20,7 +20,7 @@ int gm_8017BE8C(const s8* opps)
     int opp_count = 0;
     int i;
     for (i = 0; i < NUM_OPPONENTS; i++) {
-        if (opps[i] != CHKIND_NONE) {
+        if (opps[i] != ChKind_None) {
             opp_count++;
         }
     }
@@ -37,7 +37,7 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,
     bool result;
 
     for (i = 0; i < NUM_OPPONENTS; i++) {
-        if (ckinds[i] != CHKIND_NONE && ckind == ckinds[i] &&
+        if (ckinds[i] != ChKind_None && ckind == ckinds[i] &&
             color == colors[i])
         {
             colors[i] = 0xFF;
@@ -45,7 +45,7 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,
     }
 
     for (i = 0; i < NUM_OPPONENTS; i++) {
-        if (ckinds[i] == CHKIND_NONE) {
+        if (ckinds[i] == ChKind_None) {
             continue;
         }
         if (colors[i] != 0xFF) {
@@ -57,7 +57,7 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,
             }
             for (k = 0; k < NUM_OPPONENTS; k++) {
                 result = true;
-                if ((i == k) || ((ckinds[k] & 0xFF) == CHKIND_NONE)) {
+                if ((i == k) || ((ckinds[k] & 0xFF) == ChKind_None)) {
                     continue;
                 }
                 if (j == colors[k]) {

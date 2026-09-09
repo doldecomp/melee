@@ -93,7 +93,7 @@ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_FOX: {
+            case Ft_Kind_Fox: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
                 case ftKb_MS_FxSpecialNStart:
@@ -112,7 +112,7 @@ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
                 }
                 break;
             }
-            case FTKIND_FALCO: {
+            case Ft_Kind_Falco: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
                 case ftKb_MS_FcSpecialNStart:
@@ -145,7 +145,7 @@ bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
             switch (fp->u.kb.hat.kind) {
-            case FTKIND_FOX: {
+            case Ft_Kind_Fox: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
                 case ftKb_MS_FxSpecialNStart:
@@ -164,7 +164,7 @@ bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj)
                 }
                 break;
             }
-            case FTKIND_FALCO: {
+            case Ft_Kind_Falco: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
                 case ftKb_MS_FcSpecialNStart:
@@ -238,7 +238,7 @@ void ftKb_SpecialNFx_800FDF30(Fighter_GObj* gobj)
         sp2C.z = 0;
 
         switch (fp->u.kb.hat.kind) {
-        case FTKIND_FOX:
+        case Ft_Kind_Fox:
             if (1 == fp->facing_dir) {
                 launchAngle = da->specialn_fx_launch_angle;
             } else {
@@ -251,7 +251,7 @@ void ftKb_SpecialNFx_800FDF30(Fighter_GObj* gobj)
                        0x40);
             return;
 
-        case FTKIND_FALCO:
+        case Ft_Kind_Falco:
             if (1 == fp->facing_dir) {
                 launchAngle = da->specialn_fc_launch_angle;
             } else {
@@ -279,10 +279,10 @@ static inline FtMotionId ftKbGetStartMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNStart;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialNStart;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialNStart;
         break;
     default:
@@ -318,10 +318,10 @@ void ftKb_SpecialNFx_800FE100(HSD_GObj* gobj)
     fp->mv.fx.SpecialN.isBlasterLoop = false;
 
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         blaster_id = da->specialn_fx_blaster_item_id;
         break;
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         blaster_id = da->specialn_fc_blaster_item_id;
         break;
     default:
@@ -346,10 +346,10 @@ static inline FtMotionId ftKbGetAirStartMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNStart;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialAirNStart;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialAirNStart;
         break;
     default:
@@ -378,10 +378,10 @@ void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
     fp->mv.fx.SpecialN.isBlasterLoop = false;
 
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         blaster_id = da->specialn_fx_blaster_item_id;
         break;
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         blaster_id = da->specialn_fc_blaster_item_id;
         break;
     default:
@@ -406,10 +406,10 @@ static inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNLoop;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialNLoop;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialNLoop;
         break;
     default:
@@ -442,10 +442,10 @@ static inline FtMotionId ftKbGetEndMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNEnd;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialNEnd;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialNEnd;
         break;
     default:
@@ -514,10 +514,10 @@ static inline FtMotionId ftKbGetAirLoopMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNLoop;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialAirNLoop;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialAirNLoop;
         break;
     default:
@@ -550,10 +550,10 @@ static inline FtMotionId ftKbGetAirEndMotionId(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNEnd;
     switch (fp->u.kb.hat.kind) {
-    case FTKIND_FALCO:
+    case Ft_Kind_Falco:
         msid = ftKb_MS_FcSpecialAirNEnd;
         break;
-    case FTKIND_FOX:
+    case Ft_Kind_Fox:
         msid = ftKb_MS_FxSpecialAirNEnd;
         break;
     default:
@@ -622,12 +622,12 @@ void ftKb_FxSpecialAirNEnd_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftKb_SpecialNFx_800FDEB4(gobj);
         switch (fp->u.kb.hat.kind) {
-        case FTKIND_FOX:
+        case Ft_Kind_Fox:
             do {
             } while (0);
             landing_lag = da->specialn_fx_freefall_toggle;
             break;
-        case FTKIND_FALCO:
+        case Ft_Kind_Falco:
             landing_lag = da->specialn_fc_freefall_toggle;
             break;
         default:

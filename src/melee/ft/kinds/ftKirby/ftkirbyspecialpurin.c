@@ -106,8 +106,8 @@ void fn_80100E0C(Fighter_GObj* gobj)
                 da->specialn_pr_horizontal_bounce_momentum_on_hit;
         }
         fp->self_vel.y = da->specialn_pr_vertical_bounce_momentum_on_hit;
-        fp->x74_anim_vel.y = 0;
-        fp->x74_anim_vel.x = 0;
+        fp->x74_self_accel.y = 0;
+        fp->x74_self_accel.x = 0;
         fp->xE4_ground_accel_1 = 0;
         fp->gr_vel = 0;
         fp->mv.pr.specialn.facing_dir = 0;
@@ -168,7 +168,7 @@ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj, bool unk, MotionFlags flags,
         }
         Fighter_ChangeMotionState(gobj, msid, flags, anim_start, 1, 0, NULL);
         fp->gr_vel *= da->specialn_pr_forward_momentum_from_stick;
-        fp->x74_anim_vel.y = 0;
+        fp->x74_self_accel.y = 0;
         fp->self_vel.y = 0;
     } else {
         FtMotionId msid;
@@ -282,7 +282,7 @@ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);
-    fp->x74_anim_vel.y = 0.0f;
+    fp->x74_self_accel.y = 0.0f;
     fp->self_vel.y = 0.0f;
     fp->mv.pr.specialn.x1C = da->specialn_pr_unk1;
 }
@@ -303,7 +303,7 @@ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);
-    fp->x74_anim_vel.y = da->specialn_pr_air_height_offset_at_start;
+    fp->x74_self_accel.y = da->specialn_pr_air_height_offset_at_start;
     fp->mv.pr.specialn.x1C = da->specialn_pr_unk2;
 }
 
@@ -320,7 +320,7 @@ void ftKb_PrSpecialNStart_Anim(Fighter_GObj* gobj)
         fp->cur_anim_frame = 0;
         ftAnim_SetAnimRate(gobj, 0);
         fp->gr_vel = fp->self_vel.x = fp->facing_dir * 0.0001f;
-        fp->xE4_ground_accel_1 = fp->x74_anim_vel.x = 0;
+        fp->xE4_ground_accel_1 = fp->x74_self_accel.x = 0;
         ftPartSetRotY(fp, 0, M_PI_2);
     }
 }
@@ -498,7 +498,7 @@ void ftKb_PrSpecialAirNStart_Anim(Fighter_GObj* gobj)
         fp->cur_anim_frame = 0;
         ftAnim_SetAnimRate(gobj, 0);
         fp->self_vel.x = fp->facing_dir * 0.0001f;
-        fp->x74_anim_vel.x = 0;
+        fp->x74_self_accel.x = 0;
         ftPartSetRotY(fp, 0, M_PI_2);
     }
 }
@@ -807,8 +807,8 @@ void ftKb_PrSpecialNStart_Phys(Fighter_GObj* gobj)
     ft->gr_vel = 0.0f;
     ft->self_vel.x = 0.0001f * ft->facing_dir;
     ft->self_vel.y = 0.0f;
-    ft->x74_anim_vel.y = 0.0f;
-    ft->x74_anim_vel.x = 0.0f;
+    ft->x74_self_accel.y = 0.0f;
+    ft->x74_self_accel.x = 0.0f;
 }
 
 void ftKb_PrSpecialNLoop_Phys(Fighter_GObj* gobj)
@@ -863,9 +863,9 @@ void ftKb_PrSpecialN1_Phys(Fighter_GObj* gobj)
         }
     }
     fp->mv.pr.specialn.x18 = ABS(fp->gr_vel);
-    fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.y = 0;
     fp->self_vel.y = 0;
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     fp->mv.pr.specialn.x2C -= da->specialn_pr_unk8;
     if (fp->mv.pr.specialn.x2C < da->specialn_pr_some_speed_var) {
         ftKb_SpecialNPr_801010D4(gobj, false, 0x40012, 0.0f);
@@ -906,9 +906,9 @@ void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
             fp->gr_vel += scale * (x1C - influence);
         }
     }
-    fp->x74_anim_vel.y = 0;
+    fp->x74_self_accel.y = 0;
     fp->self_vel.y = 0;
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
     if (fp->mv.pr.specialn.x10 > 0.0f) {
         if (fp->gr_vel < 0.0f) {
             if (ABS(fp->gr_vel) >=
@@ -941,8 +941,8 @@ void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
 void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.ground_friction);
-    ftCommon_ApplyGroundMovement(gobj);
+    ftCommon_CalcGroundAccel_Deaccel(fp, fp->co_attrs.ground_friction);
+    ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
 void ftKb_PrSpecialAirNStart_Phys(Fighter_GObj* gobj)
@@ -1056,7 +1056,7 @@ void ftKb_PrSpecialNHit_Phys(Fighter_GObj* gobj)
     u8 _[8];
 
     if (fp->self_vel.y <= -da->specialn_pr_bounciness) {
-        ftCommon_8007D268(fp);
+        ftCommon_CalcSelfAccel_Drift(fp);
     }
     ftCommon_Fall(fp, da->specialn_pr_air_height_offset_at_start,
                   da->specialn_pr_bounciness);
