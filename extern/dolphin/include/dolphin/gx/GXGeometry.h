@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+#define GXSETARRAY(attr, data, size, stride, le) GXSetArray((attr), (data), (stride))
+
 void GXSetVtxDesc(GXAttr attr, GXAttrType type);
 void GXSetVtxDescv(const GXVtxDescList *attrPtr);
 void GXClearVtxDesc(void);

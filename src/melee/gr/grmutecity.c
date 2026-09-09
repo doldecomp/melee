@@ -1910,7 +1910,11 @@ s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
         if ((appsrt = gen->appsrt) == NULL) {
             appsrt = psAddGeneratorAppSRT_begin(gen, 0);
             if (appsrt == NULL) {
+#ifdef MUST_MATCH
                 return;
+#else
+                return 0;
+#endif
             }
         }
         appsrt->xA2 = 0;
@@ -1920,6 +1924,9 @@ s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
         gen->type |= PSAPPSRT_UNK_B11;
         appsrt->gp = gen;
     }
+#ifndef MUST_MATCH
+    return 0;
+#endif
 }
 
 /// @copydoc mpLib_JointCollisionCallback
