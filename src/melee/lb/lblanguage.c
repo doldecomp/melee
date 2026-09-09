@@ -29,22 +29,22 @@ bool lbLang_IsSettingUS(void)
 
 enum_t lbLang_GetSavedLanguage(void)
 {
-    return gmMainLib_8015CC58()->saved_language;
+    return gmMainLib_GetGamePrefs()->saved_language;
 }
 
 void lbLang_SetSavedLanguage(enum_t language)
 {
     if (language >= 0 && language < LANG_COUNT) {
-        gmMainLib_8015CC58()->saved_language = language;
+        gmMainLib_GetGamePrefs()->saved_language = language;
     }
 }
 
 bool lbLang_IsSavedLanguageJP(void)
 {
-    return gmMainLib_8015CC58()->saved_language == LANG_JP ? true : false;
+    return gmMainLib_GetGamePrefs()->saved_language == LANG_JP ? true : false;
 }
 
 bool lbLang_IsSavedLanguageUS(void)
 {
-    return gmMainLib_8015CC58()->saved_language == LANG_US ? true : false;
+    return gmMainLib_GetGamePrefs()->saved_language == LANG_US ? true : false;
 }

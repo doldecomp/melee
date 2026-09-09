@@ -682,7 +682,7 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     user_data->x1F = state;
     for (i = 0; (u8) i < NUM_STAGES; i++) {
         if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
-            user_data->x2[(u8) i] = gm_80164250(mnStageSw_803ED4C4[i]);
+            user_data->x2[(u8) i] = gm_IsStageUnlocked(mnStageSw_803ED4C4[i]);
         } else {
             user_data->x2[(u8) i] = 0;
         }

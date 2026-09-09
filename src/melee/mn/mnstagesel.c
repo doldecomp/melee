@@ -528,7 +528,7 @@ void mnStageSel_Scene_OnEnter(void* arg0)
 
         for (i = 0; i < 0x1D; i++) {
             mnStageSel_803F06D0[i].x8 =
-                gm_80164430(mnStageSel_803F06D0[i].xB) ? 2 : 1;
+                gm_80164430(mnStageSel_803F06D0[i].stkind) ? 2 : 1;
         }
 
         for (i = 0; i <= 0xA; i++) {
@@ -827,7 +827,7 @@ void mnStageSel_Scene_OnFrame(void)
     }
     if (mnStageSel_804D6CAF == 2) {
         sss_data->vs.start.rules.stkind =
-            mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
+            mnStageSel_803F06D0[mnStageSel_804D6CAE].stkind;
         gm_801A4B60();
     }
 }
@@ -849,12 +849,12 @@ void mnStageSel_Scene_OnExit(UNUSED void* exit_data)
     }
 }
 
-int mnStageSel_8025BBD4(void)
+int mnSelStageRandom(void)
 {
-    return mnStageSel_803F06D0[mnStageSel_802599EC()].xB;
+    return mnStageSel_803F06D0[mnStageSel_802599EC()].stkind;
 }
 
 int mnStageSel_8025BC08(int idx)
 {
-    return mnStageSel_803F06D0[idx].xB;
+    return mnStageSel_803F06D0[idx].stkind;
 }

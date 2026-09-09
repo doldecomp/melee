@@ -10,7 +10,7 @@
 struct stagelistinfo {
     HSD_JObj* x0;
     int x4;
-    u8 x8, x9, xA, xB;
+    u8 x8, x9, xA, stkind;
     f32 xC, x10, x14, x18;
 } mnStageSel_803F06D0[30] = {
     { 0, 0, 0x2, 0x00, 0x00, 0x04, 3.1F, 2.7F, 1.0F, 1.0F },

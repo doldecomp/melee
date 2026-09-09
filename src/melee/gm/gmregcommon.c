@@ -30,7 +30,7 @@ int gm_8017BE8C(const s8* opps)
 void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,
                                u8* colors)
 {
-    u8 ncolors = gm_80169238(ckind);
+    u8 ncolors = gm_GetNumCostumesForCKind(ckind);
     int k;
     int j;
     int i;

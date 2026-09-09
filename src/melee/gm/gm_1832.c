@@ -848,7 +848,7 @@ s32 fn_80185A0C(void)
     proc = HSD_GObj_SetupProc(gobj2, fn_801859C8, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 
-    count = gm_80169238(lbl_8047368C.xF4[0]);
+    count = gm_GetNumCostumesForCKind(lbl_8047368C.xF4[0]);
     lbl_804735E8.xE0 = (s32) count > 3 ? 3 : count;
 
     img_idx = lbl_804735E8.xD0 - 0x90;

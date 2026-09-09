@@ -10,7 +10,7 @@
 /* 15CC34 */ GameRules* gmMainLib_GetGameRules(void);
 /* 15CC40 */ struct gmm_x1868* gmMainLib_GetSaveData(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
-/* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
+/* 15CC58 */ struct GamePrefs* gmMainLib_GetGamePrefs(void);
 /* 15CC64 */ struct FighterData*
     GetPersistentFighterData(SelectableCharacterKind);
 /* 15CC78 */ void* gmMainLib_GetTrophyFlags(void);
@@ -127,7 +127,7 @@
 /* 15ED5C */ s32 gmMainLib_8015ED5C(void);
 /* 15ED68 */ void gmMainLib_8015ED68(ssize_t port);
 /* 15ED74 */ u8 gmMainLib_8015ED74(void);
-/* 15ED80 */ void gmMainLib_8015ED80(u8);
+/* 15ED80 */ void gmMainLib_8015ED80(s8);
 /* 15ED8C */ u16* gmMainLib_GetUnlockedCharactersBitmaskPtr(void);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
 /* 15EDA4 */ u16* gmMainLib_8015EDA4(void);
