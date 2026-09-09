@@ -291,12 +291,8 @@ static bool setupNormalCamera(HSD_CObj* cobj)
 
 static bool setupTopHalfCamera(HSD_CObj* cobj)
 {
-    int unused[3];
     GXProjectionType projection_type;
-    /// @todo Should be an `Mtx44` like the other three: `makeProjectionMtx`
-    /// writes 4 rows. Changing it here does not match, so the extra row
-    /// currently lands in `unused` above.
-    Mtx p;
+    Mtx44 p;
 
     f32 h_scale;
     f32 t;
