@@ -948,8 +948,9 @@ void gm_Scene_TouAlt_OnFrame(void)
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
-                                (s32) (gm_80169238((u8) fn_8018F6FC(
-                                           (CSSIconHud) tmd->x4B8[i].x1)) -
+                                (s32) (gm_GetNumCostumesForCKind(
+                                           (u8) fn_8018F6FC(
+                                               (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {
                                 tmd->x4B8[i].x3 += 1;

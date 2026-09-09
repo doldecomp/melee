@@ -88,7 +88,7 @@ void mnDataDel_8024E940(void)
     var_r30 = (i = 0);
     for (i = 0; i < 0x1D; i++) {
         if ((gm_80164430(gm_801641CC(i)) != 0) &&
-            ((gm_80164250((u16) i) & (0xFFFF & 0xFF)) != 0))
+            ((gm_IsStageUnlocked((u16) i) & (0xFFFF & 0xFF)) != 0))
         {
             var_r30 = 1;
             break;

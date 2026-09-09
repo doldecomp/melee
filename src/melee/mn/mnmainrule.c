@@ -199,7 +199,7 @@ void fn_8022F538(HSD_GObj* arg0)
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
             rules->damage_ratio = data->fields.x5;
-            rules->unk_x7 = data->fields.x6;
+            rules->stage_sel = data->fields.x6;
             rules->stock_count = data->fields.x9;
             return;
         }
@@ -213,7 +213,7 @@ void fn_8022F538(HSD_GObj* arg0)
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
             rules->damage_ratio = data->fields.x5;
-            rules->unk_x7 = data->fields.x6;
+            rules->stage_sel = data->fields.x6;
             rules->stock_count = data->fields.x9;
             mn_80229860(GM_VS);
             return;
@@ -224,7 +224,7 @@ void fn_8022F538(HSD_GObj* arg0)
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
             rules->damage_ratio = data->fields.x5;
-            rules->unk_x7 = data->fields.x6;
+            rules->stage_sel = data->fields.x6;
             rules->stock_count = data->fields.x9;
             if (gm_GetCurrentGameMode() == GM_TOURNAMENT) {
                 HSD_SisLib_803A5E70();
@@ -251,7 +251,7 @@ void fn_8022F538(HSD_GObj* arg0)
         rules->time_limit = data->fields.x3;
         rules->handicap = data->fields.x4;
         rules->damage_ratio = data->fields.x5;
-        rules->unk_x7 = data->fields.x6;
+        rules->stage_sel = data->fields.x6;
         rules->stock_count = data->fields.x9;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT) {
             HSD_SisLib_803A5E70();
@@ -1000,7 +1000,7 @@ void fn_802309F0(HSD_GObj* arg0)
         rules->time_limit = data->x3;
         rules->handicap = data->x4;
         rules->damage_ratio = data->x5;
-        rules->unk_x7 = data->x6;
+        rules->stage_sel = data->x6;
         rules->stock_count = data->x9;
     }
 }
@@ -1021,7 +1021,7 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, int arg2)
     }
 
     arg0->x5 = gmMainLib_GetGameRules()->damage_ratio;
-    arg0->x6 = gmMainLib_GetGameRules()->unk_x7;
+    arg0->x6 = gmMainLib_GetGameRules()->stage_sel;
     arg0->x2 = gmMainLib_GetGameRules()->mode;
     arg0->x9 = gmMainLib_GetGameRules()->stock_count;
     arg0->x3 = gmMainLib_GetGameRules()->time_limit;

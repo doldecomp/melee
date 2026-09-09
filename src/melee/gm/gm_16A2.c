@@ -144,7 +144,7 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, s8* arg4)
     u8 ncolors;
     s8 colors[6];
 
-    ncolors = gm_80169238(arg0);
+    ncolors = gm_GetNumCostumesForCKind(arg0);
     if ((s8) arg0 != 0x21) {
         ncolors_s32 = ncolors;
         for (i = 0; i < ncolors; i++) {
@@ -188,7 +188,7 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, s8* arg4)
 void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
                  s8* buf)
 {
-    u8 ncolors = gm_80169238(character);
+    u8 ncolors = gm_GetNumCostumesForCKind(character);
     int i;
 
     if (character == 0x21) {
@@ -392,7 +392,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
     for (i = 0; i < 3; i++) {
         if ((s32) *scan == 4) {
             if (st->xB == 0) {
-                count = gm_80169238(4U);
+                count = gm_GetNumCostumesForCKind(4U);
                 for (costume_idx = 0; costume_idx < count; costume_idx++) {
                     costumes[costume_idx] = costume_idx;
                     ncostumes++;

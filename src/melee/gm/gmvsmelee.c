@@ -188,12 +188,12 @@ void gmVsMelee_EnterVs(GameModeState* state, VsModeData* vs,
 
     {
         ssize_t i;
-        for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        for (i = 0; i < Gm_Player_NumMax; i++) {
             start->players[i] = vs->start.players[i];
         }
 
         if (player_cb != NULL) {
-            for (i = 0; i < GM_MAX_PLAYERS; i++) {
+            for (i = 0; i < Gm_Player_NumMax; i++) {
                 player_cb(&start->players[i], &vs->start.players[i]);
             }
         }

@@ -1234,8 +1234,8 @@ void fn_80192938(void)
         }
 
         tm->x37[i].x3 = fn_8018F410();
-        tm->x37[i].x7 = HSD_Randi(
-            (s32) gm_80169238(fn_8018F6FC((enum CSSIconHud) tm->x37[i].x3)));
+        tm->x37[i].x7 = HSD_Randi((s32) gm_GetNumCostumesForCKind(
+            fn_8018F6FC((enum CSSIconHud) tm->x37[i].x3)));
 
         if (i < (s32) tm->x2E) {
             ((u8*) &tm->x37[i])[-1] = 1;
@@ -2616,7 +2616,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         *state_ptr -= 1;
     } else if (trigger & PAD_BUTTON_X) {
         if ((s32) tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x7 <
-            (s32) gm_80169238((u8) fn_8018F6FC(
+            (s32) gm_GetNumCostumesForCKind((u8) fn_8018F6FC(
                 tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) -
                 1)
         {

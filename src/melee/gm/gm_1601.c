@@ -2141,7 +2141,7 @@ u8 gm_CKindToSelKind(u8 ckind)
 
 bool gm_8016403C(u8 item)
 {
-    u64 item_mask = gmMainLib_8015CC58()->item_mask;
+    u64 item_mask = gmMainLib_GetGamePrefs()->item_mask;
     if ((1LL << item) & item_mask) {
         return true;
     }
@@ -2151,7 +2151,7 @@ bool gm_8016403C(u8 item)
 void fn_801640B0(u64* item_mask)
 {
     int i;
-    struct gmm_x1CB0* temp_r30 = gmMainLib_8015CC58();
+    struct GamePrefs* temp_r30 = gmMainLib_GetGamePrefs();
 
     for (i = 0; i < 0x20; i++) {
         int shift;
@@ -2183,19 +2183,18 @@ u16 gm_801641CC(u8 arg0)
 void gm_801641E4(u8 stage, u8 enable)
 {
     if (enable) {
-        gmMainLib_8015CC58()->stage_mask |= 1 << stage;
+        gmMainLib_GetGamePrefs()->stage_mask |= 1 << stage;
     } else {
-        gmMainLib_8015CC58()->stage_mask &= ~(1 << stage);
+        gmMainLib_GetGamePrefs()->stage_mask &= ~(1 << stage);
     }
 }
 
-s32 gm_80164250(u16 mask)
+bool gm_IsStageUnlocked(u16 stkind)
 {
-    bool tmp = (1 << mask) & gmMainLib_8015CC58()->stage_mask;
-    if (tmp) {
-        return 1;
+    if ((1 << stkind) & gmMainLib_GetGamePrefs()->stage_mask) {
+        return true;
     }
-    return 0;
+    return false;
 }
 
 bool fn_801642A0(void)
@@ -2207,7 +2206,7 @@ bool fn_801642A0(void)
     var_r30 = 0;
     var_r29 = 0;
     do {
-        if ((1 << (u16) var_r29) & gmMainLib_8015CC58()->stage_mask) {
+        if ((1 << (u16) var_r29) & gmMainLib_GetGamePrefs()->stage_mask) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -2241,7 +2240,7 @@ bool gm_80164330(s32 arg0)
     total_stages_on = 0;
     i = 0;
     for (i = 0; i < 0x1D; i++) {
-        if ((1 << (u16) i) & gmMainLib_8015CC58()->stage_mask) {
+        if ((1 << (u16) i) & gmMainLib_GetGamePrefs()->stage_mask) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -2253,8 +2252,8 @@ bool gm_80164330(s32 arg0)
     if (total_stages_on == 0) {
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-    return ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) ? true
-                                                                  : false;
+    return ((1 << (u16) arg0) & gmMainLib_GetGamePrefs()->stage_mask) ? true
+                                                                      : false;
 }
 
 bool gm_80164430(u16 arg0)
@@ -3563,13 +3562,13 @@ void gm_InitVsMode(VsModeData* vs)
 void gm_80167BC8(VsModeData* vs_data)
 {
     GameRules* rules;
-    struct gmm_x1CB0* prefs;
+    struct GamePrefs* prefs;
     s32 i;
     s8* handicap;
     PAD_STACK(72);
 
     rules = gmMainLib_GetGameRules();
-    prefs = gmMainLib_8015CC58();
+    prefs = gmMainLib_GetGamePrefs();
     vs_data->start.rules.timer_enabled = 0;
 
     switch (rules->mode) {
@@ -3639,7 +3638,7 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->start.rules.friendly_fire = (rules->friendly_fire & 1);
     vs_data->start.rules.x30 = 0.1f * rules->damage_ratio;
     vs_data->start.rules.item_freq = (s8) prefs->item_freq;
-    prefs = gmMainLib_8015CC58();
+    prefs = gmMainLib_GetGamePrefs();
     i = 0;
     do {
         u8 item = lbl_803B7844[(u8) i];
@@ -3710,25 +3709,25 @@ void gm_80167FC4(SSSData* arg0)
     int i;
 
     u16* temp_r25;
-    s32 temp_r28;
+    StKind temp_r28;
     u8 temp_r3_2;
 
     PAD_STACK(8);
 
     temp_r3 = gmMainLib_GetGameRules();
-    if (temp_r3->unk_x7 == 1) {
-        arg0->force_stage_id = mnStageSel_8025BBD4();
+    if (temp_r3->stage_sel == 1) {
+        arg0->force_stage_id = mnSelStageRandom();
         return;
     }
     arg0->force_stage_id = -1;
-    switch (temp_r3->unk_x7) {
+    switch (temp_r3->stage_sel) {
     case 0:
         arg0->unk_stage = 0;
         return;
     case 2:
-        for (i = 0; i < 0x1D; i++) {
+        for (i = 0; i < St_Kind_OldYoshi; i++) {
             temp_r28 = arg0->vs.ordered_stage_index + i;
-            temp_r28 = (temp_r28 + 1) % 29;
+            temp_r28 = (temp_r28 + 1) % St_Kind_OldYoshi;
             temp_r30 = mnStageSel_8025BC08(temp_r28);
             temp_r25 = gmMainLib_8015EDA4();
 
@@ -4144,7 +4143,8 @@ void fn_80169000(MatchEnd* arg0, u8* arg1)
     }
 }
 
-u8 gm_80169238(u8 ckind)
+/// @param ckind ::CharacterKind
+u8 gm_GetNumCostumesForCKind(u8 ckind)
 {
     /// @todo Matching tactic: pad the pre-inline statement count so MWCC
     /// keeps direct calls to this accessor instead of auto-inlining them.

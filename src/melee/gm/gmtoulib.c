@@ -2103,7 +2103,7 @@ int fn_8018F410(void)
 #endif
 int fn_8018F4A0(void)
 {
-    int temp_r3 = mnStageSel_8025BBD4();
+    int temp_r3 = mnSelStageRandom();
     if (!gm_80164430(temp_r3)) {
         printf("This is impossible stage num from mnSelStageRandom() -> stage "
                "%d \n",
@@ -2702,7 +2702,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.timer_counts_up = false;
     arg0->rules.x4_2 = false;
     arg0->rules.x4_4 = false;
-    arg0->rules.item_freq = gmMainLib_8015CC58()->item_freq;
+    arg0->rules.item_freq = gmMainLib_GetGamePrefs()->item_freq;
     arg0->rules.x2_2 = false;
     arg0->rules.x18 = 0;
     arg0->rules.game_speed = 1.0f;
@@ -2740,8 +2740,8 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].nametag = (u8) MIN(tm->x4B8[i].x6, 0x78);
             if (tm->x4B8[i].x2 != 0) {
                 arg0->players[i].ckind = gm_801905F0_inline0(fn_8018F410());
-                arg0->players[i].color =
-                    HSD_Randi(gm_80169238(arg0->players[i].ckind));
+                arg0->players[i].color = HSD_Randi(
+                    gm_GetNumCostumesForCKind(arg0->players[i].ckind));
             } else {
                 arg0->players[i].ckind = gm_801905F0_inline0(tm->x4B8[i].x1);
                 arg0->players[i].color = tm->x4B8[i].x3;

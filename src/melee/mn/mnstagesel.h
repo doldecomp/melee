@@ -17,7 +17,7 @@
 /* 25A998 */ void mnStageSel_Scene_OnEnter(UNK_T);
 /* 25B850 */ void mnStageSel_Scene_OnFrame(void);
 /* 25BB5C */ void mnStageSel_Scene_OnExit(UNK_T);
-/* 25BBD4 */ int mnStageSel_8025BBD4(void);
+/* 25BBD4 */ int mnSelStageRandom(void);
 /* 25BC08 */ int mnStageSel_8025BC08(int);
 
 #endif

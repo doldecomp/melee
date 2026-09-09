@@ -132,12 +132,13 @@ void gm_801B1C24(GameModeState* arg0)
     vs->start.players[1].cpu_kind = 0;
     for (; i < 4; i++, j++) {
         vs->start.players[i] = vs->start.players[1];
-        vs->start.players[i].color = (vs->start.players[i - 1].color + 1) %
-                                     gm_80169238(vs->start.players[j].ckind);
+        vs->start.players[i].color =
+            (vs->start.players[i - 1].color + 1) %
+            gm_GetNumCostumesForCKind(vs->start.players[j].ckind);
         if (vs->start.players[i].color == vs->start.players[0].color) {
             vs->start.players[i].color =
                 (vs->start.players[i].color + 1) %
-                gm_80169238(vs->start.players[j].ckind);
+                gm_GetNumCostumesForCKind(vs->start.players[j].ckind);
         }
         vs->start.players[i].slot_type = 3;
     }
