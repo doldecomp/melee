@@ -1,5 +1,8 @@
 #include "ifcoget.h"
 
+#include <melee/cm/forward.h>
+
+#include "forward.h"
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>

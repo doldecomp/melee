@@ -2753,7 +2753,9 @@ light_selected:
 HSD_GObj* Ground_801C498C(void)
 {
     HSD_GObj* gobj;
-    for (gobj = HSD_GObj_Entities->xC; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_LIGHT]; gobj != NULL;
+         gobj = gobj->next)
+    {
         if (gobj->classifier == HSD_GOBJ_CLASS_GROUND) {
             break;
         }

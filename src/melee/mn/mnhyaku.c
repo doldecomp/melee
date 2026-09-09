@@ -1,6 +1,7 @@
 #include "mnhyaku.h"
 
 #include <melee/gm/forward.h>
+#include <melee/it/forward.h>
 #include <melee/sc/forward.h>
 
 #include "inlines.h"

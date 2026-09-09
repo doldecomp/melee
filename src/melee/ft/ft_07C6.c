@@ -85,7 +85,7 @@ void ft_8007C77C(Fighter_GObj* gobj)
     if (ftColl_8007B868(gobj) == 2) {
         return;
     }
-    for (cur_gobj = HSD_GObj_Entities->items; cur_gobj != NULL;
+    for (cur_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur_gobj != NULL;
          cur_gobj = next)
     {
         next = HSD_GObjGetNext(cur_gobj);

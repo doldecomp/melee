@@ -181,7 +181,7 @@ void lbShadow_8000EFEC(void)
 
     count = 0;
 
-    for (var_r30 = HSD_GObj_Entities->fighters; var_r30 != NULL;
+    for (var_r30 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; var_r30 != NULL;
          var_r30 = var_r30->next)
     {
         lbshadow = ftLib_800872B0(var_r30);
@@ -190,7 +190,9 @@ void lbShadow_8000EFEC(void)
         }
     }
 
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         lbshadow = ftLib_800872B0(cur);
         if (lbshadow != NULL) {
             bool var_r5 = lbshadow->x0_b0 || lbshadow->x0_b1 ||
@@ -340,7 +342,7 @@ void lbShadow_8000F38C(s32 arg0)
 #ifdef MUST_MATCH
         gobj =
 #endif
-            gobj = HSD_GObj_Entities->fighters;
+            gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
         gobj != NULL; gobj = gobj->next)
     {
         LbShadow* lbs = ftLib_800872B0(gobj);
@@ -441,7 +443,7 @@ void lbShadow_8000F38C(s32 arg0)
 
         ftDrawCommon_80081200();
 
-        for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
+        for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != NULL;
              gobj = gobj->next)
         {
             Fighter* fp = gobj->user_data;

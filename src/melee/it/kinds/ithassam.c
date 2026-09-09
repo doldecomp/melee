@@ -148,8 +148,8 @@ Item_GObj* itHassam_802CDE1C(Vec3* vec, Item_GObj* gobj)
     }
 
     closest_fgobj = NULL;
-    for (cur_fgobj = HSD_GObj_Entities->fighters; cur_fgobj != NULL;
-         cur_fgobj = cur_fgobj->next)
+    for (cur_fgobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+         cur_fgobj != NULL; cur_fgobj = cur_fgobj->next)
     {
         if (ftLib_80086FD4(gobj, cur_fgobj) == false) {
             cur_fp = GET_FIGHTER(cur_fgobj);

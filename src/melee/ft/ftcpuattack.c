@@ -2917,7 +2917,7 @@ int ftCo_800BB9B4(Fighter* fp)
     sp24.y = fp->cur_pos.y + temp_f31;
     sp24.z = fp->cur_pos.z;
 
-    for (var_r29 = HSD_GObj_Entities->fighters; var_r29 != NULL;
+    for (var_r29 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; var_r29 != NULL;
          var_r29 = var_r29->next)
     {
         if (fp->gobj == var_r29) {
@@ -2942,7 +2942,7 @@ int ftCo_800BB9B4(Fighter* fp)
         }
     }
 
-    var_r29_2 = HSD_GObj_Entities->items;
+    var_r29_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (var_r29_2 != NULL) {
         temp_r28 = GET_ITEM(var_r29_2);
         if (it_8026C1B4(var_r29_2)) {

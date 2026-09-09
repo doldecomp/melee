@@ -50,7 +50,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Item_GObj* cur;
-    for (cur = HSD_GObj_Entities->items; cur != NULL;
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
          cur = HSD_GObjGetNext(cur))
     {
         if (it_8026BC68(cur)) {

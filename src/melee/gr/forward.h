@@ -6,6 +6,10 @@
 
 #include <dolphin/mtx.h>
 
+#define HSD_GOBJ_CLASS_STAGE 3
+#define HSD_GOBJ_CLASS_GROUND 13
+#define HSD_GOBJ_PLINK_GROUND 5
+
 struct grCorneria_GroundVars;
 typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
 typedef struct GrJoint GrJoint;

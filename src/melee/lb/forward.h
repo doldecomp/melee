@@ -3,6 +3,14 @@
 
 #include <Runtime/platform.h>
 
+#define HSD_GOBJ_CLASS_SISLIB_UNK 9
+#define HSD_GOBJ_CLASS_FOG 10
+
+#define HSD_GOBJ_CLASS_LIGHT 11
+#define HSD_GOBJ_PLINK_LIGHT 3
+
+#define HSD_GOBJ_CLASS_SOUND 23
+
 struct lb_80011A50_t;
 
 typedef struct AbsorbDesc AbsorbDesc;

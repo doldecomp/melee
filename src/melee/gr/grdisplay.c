@@ -44,8 +44,8 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
             }
         } else {
             if (jobj->flags & (flags << 18)) {
-                for (cur = HSD_GObj_Entities->fighters; cur != NULL;
-                     cur = cur->next)
+                for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+                     cur != NULL; cur = cur->next)
                 {
                     LbShadow* shadow = ftLib_800872B0(cur);
                     ftLib_80086644(cur, &fighter_pos);
@@ -117,8 +117,8 @@ void grDisplay_801C5DB0(HSD_GObj* gobj, int code)
                 HSD_JObj* jobj = GET_JOBJ(gobj);
                 grDisplay_801C5B90(jobj, NULL, HSD_GObj_80390EB8(code), 0);
             } else {
-                for (fighter = HSD_GObj_Entities->fighters; fighter != NULL;
-                     fighter = fighter->next)
+                for (fighter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+                     fighter != NULL; fighter = fighter->next)
                 {
                     LbShadow* shadow = ftLib_800872B0(fighter);
                     shadow->x0_b4 = 0;

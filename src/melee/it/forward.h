@@ -4,6 +4,13 @@
 #include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#define HSD_GOBJ_CLASS_ITEM 6
+#define HSD_GOBJ_PLINK_ITEM 9
+
+/// @def HSD_GOBJ_CLASS_ITEMLINK
+/// Used by chain-type items in-game to link multiple parts together
+#define HSD_GOBJ_CLASS_ITEMLINK 7
+
 typedef struct Article Article;
 typedef struct BobOmbRain BobOmbRain;
 typedef struct BoneDynamicsDesc BoneDynamicsDesc;

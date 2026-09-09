@@ -141,7 +141,7 @@ void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
     PAD_STACK(4);
 
     if (arg_item0->xAC4_ignoreItemID != 0) {
-        item_gobj = HSD_GObj_Entities->items;
+        item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
         while (item_gobj != NULL) {
             item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item0->xAC4_ignoreItemID) {
@@ -171,7 +171,7 @@ void it_8026FC00(Item* arg_item, HitCapsule* arg_hit, s32 arg2, Fighter* arg3)
     PAD_STACK(8);
 
     if (arg_item->xAC4_ignoreItemID != 0) {
-        HSD_GObj* item_gobj = HSD_GObj_Entities->items;
+        HSD_GObj* item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
         if (item_gobj->next) {
         }
         while (item_gobj != NULL) {
@@ -195,7 +195,7 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     PAD_STACK(8);
 
     if (arg_item->xAC4_ignoreItemID != 0U) {
-        item_gobj = HSD_GObj_Entities->items;
+        item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
         while (item_gobj != NULL) {
             item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
@@ -340,7 +340,7 @@ void it_802701BC(Item_GObj* gobj)
 
     ip->grab_victim = 0;
     ip->xD10 = 3.4028235e38f;
-    fighter_gobj = HSD_GObj_Entities->fighters;
+    fighter_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (fighter_gobj != NULL) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         if ((!ftLib_80086FD4(fighter_gobj, ip->owner) || ip->xDCD_flag.b5) &&
@@ -411,8 +411,8 @@ void it_802703E8(Item_GObj* arg_item_gobj)
     if (arg_item->xAC8_hurtboxNum == 0) {
         return;
     }
-    for (fighter_gobj = HSD_GObj_Entities->fighters; fighter_gobj != NULL;
-         fighter_gobj = fighter_gobj->next)
+    for (fighter_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+         fighter_gobj != NULL; fighter_gobj = fighter_gobj->next)
     {
         if (((arg_item->owner == fighter_gobj) && !arg_item->xDCE_flag.b0)) {
             continue;
@@ -545,7 +545,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
 
     chk = false;
     arg_item = GET_ITEM(arg_item_gobj);
-    for (item_gobj = HSD_GObj_Entities->items; item_gobj != NULL;
+    for (item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; item_gobj != NULL;
          item_gobj = item_gobj->next)
     {
         item = item_gobj->user_data;
@@ -1200,7 +1200,7 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
     PAD_STACK(4);
 
     HSD_JObjGetTranslation(arg_item_jobj, &sp34);
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 
     while (item_gobj != NULL) {
         item_jobj = GET_JOBJ(item_gobj);
@@ -1256,7 +1256,7 @@ void it_80271F78(Item_GObj* gobj)
     PAD_STACK(4);
 
     HSD_JObjGetTranslation(jobj, &sp34);
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 
     while (item_gobj != NULL) {
         item_jobj = GET_JOBJ(item_gobj);
@@ -1341,7 +1341,7 @@ void it_80272298(Item_GObj* item_gobj)
 
 void it_802722B0(Item_GObj* item_gobj)
 {
-    if (item_gobj == HSD_GObj_Entities->items) {
+    if (item_gobj == HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]) {
         ftCo_80098634(&Item_804A0CCC);
         Item_804A0CCC.x154.b0 = 0;
     }

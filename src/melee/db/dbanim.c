@@ -50,7 +50,7 @@ void fn_ToggleMiscFighterVisuals(void)
     } else {
         db_804D6B48.MiscFighterVisualsStatus = 1;
     }
-    for (fighter = HSD_GObj_Entities->fighters; fighter != NULL;
+    for (fighter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; fighter != NULL;
          fighter = fighter->next)
     {
         Fighter* ft = GET_FIGHTER(fighter);
@@ -99,7 +99,7 @@ void fn_UpdateAnimationInfo(void)
         print_newline = 0;
         DevText_Erase(text);
         DevText_SetCursorXY(text, 0, 0);
-        for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
+        for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != NULL;
              gobj = gobj->next)
         {
             ft = gobj->user_data;
@@ -159,8 +159,8 @@ void fn_CheckAnimationInfo(int player)
             if (db_804D6B48.ShowFighterCollisionBubbles > 3) {
                 db_804D6B48.ShowFighterCollisionBubbles = 1;
             }
-            for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
-                 gobj = gobj->next)
+            for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+                 gobj != NULL; gobj = gobj->next)
             {
                 GET_FIGHTER(gobj)->x21FC_flag.u8 =
                     db_804D6B48.ShowFighterCollisionBubbles;

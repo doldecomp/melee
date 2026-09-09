@@ -402,7 +402,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
 
 void ftDrawCommon_80081118(void)
 {
-    HSD_GObj* gobj = HSD_GObj_Entities->fighters;
+    HSD_GObj* gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (gobj != NULL) {
         gobj->render_cb = &ftDrawCommon_80080E18;
         gobj = gobj->next;
@@ -411,7 +411,7 @@ void ftDrawCommon_80081118(void)
 
 void ftDrawCommon_80081140(void)
 {
-    HSD_GObj* gobj = HSD_GObj_Entities->fighters;
+    HSD_GObj* gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (gobj != NULL) {
         gobj->render_cb = ftDrawCommon_80080C28;
         gobj = gobj->next;
@@ -421,7 +421,9 @@ void ftDrawCommon_80081140(void)
 void ftDrawCommon_80081168(void)
 {
     Fighter_GObj* cur;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         Fighter* fighter = GET_FIGHTER(cur);
         PAD_STACK(4 * 2);
         if (fighter->x5AC.xC[1] != NULL) {
@@ -436,7 +438,9 @@ void ftDrawCommon_80081168(void)
 void ftDrawCommon_80081200(void)
 {
     Fighter_GObj* cur;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         Fighter* fighter = GET_FIGHTER(cur);
         PAD_STACK(4 * 2);
         if (fighter->x5AC.xC[1] != NULL) {

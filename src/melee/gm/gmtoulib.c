@@ -1687,10 +1687,10 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 
     cam = lbl_803B7CA8;
 
-    while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
+    while ((tmp = M2C_FIELD(HSD_GObjPLinkHead, HSD_GObj**, 0x6C)) != NULL) {
         HSD_GObjFree(tmp);
     }
-    while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x50)) != NULL) {
+    while ((tmp = M2C_FIELD(HSD_GObjPLinkHead, HSD_GObj**, 0x50)) != NULL) {
         HSD_GObjFree(tmp);
     }
 

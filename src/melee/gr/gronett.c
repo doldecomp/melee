@@ -588,13 +588,13 @@ void grOnett_801E43E0(Ground_GObj* gobj)
         case 2:
             if (gp->u.onettcar.x108 != 0) {
                 int fighter_count = 0;
-                iter = HSD_GObj_Entities->fighters;
+                iter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                 while (iter != NULL) {
                     iter = iter->next;
                     fighter_count++;
                 }
                 gp->u.onettcar.x108 -= 1;
-                iter = HSD_GObj_Entities->fighters;
+                iter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                 while (iter != NULL) {
                     ftLib_80086644(iter, &pos);
                     if (pos.y <= 1.0f) {
@@ -663,7 +663,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 if (HSD_JObjGetTranslationX(car_jobj) <=
                     cam_z + yakumono_param->x64)
                 {
-                    iter = HSD_GObj_Entities->fighters;
+                    iter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                     while (iter != NULL) {
                         ftLib_80086644(iter, &pos);
                         if (pos.y <= 1.0f) {

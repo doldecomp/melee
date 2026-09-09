@@ -228,7 +228,7 @@ void grFigureGet_80219898(Ground_GObj* gobj)
     int* var_r29;
     u32 pad;
 
-    for (var_r28 = HSD_GObj_Entities->fighters; var_r28 != NULL;
+    for (var_r28 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; var_r28 != NULL;
          var_r28 = var_r28->next)
     {
         ftLib_80086984(var_r28)->joint_id_skip = 0;

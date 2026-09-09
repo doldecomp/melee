@@ -1643,7 +1643,9 @@ void ftData_800859A8(Fighter* fp)
     if (temp_r6 == -1) {
         return;
     }
-    for (gobj = HSD_GObj_Entities->fighters; gobj != NULL; gobj = gobj->next) {
+    for (gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; gobj != NULL;
+         gobj = gobj->next)
+    {
         Fighter* cur_fp = GET_FIGHTER(gobj);
         if (fp != cur_fp && temp_r6 == cur_fp->x61C) {
             return;

@@ -1,6 +1,8 @@
 #ifndef MELEE_CM_FORWARD_H
 #define MELEE_CM_FORWARD_H
 
+#define HSD_GOBJ_CLASS_CAMERA 19
+
 typedef enum CameraType {
     CAMERA_STANDARD = 0,      ///< mode used during normal gameplay
     CAMERA_PAUSE = 1,         ///< mode used during pause menu

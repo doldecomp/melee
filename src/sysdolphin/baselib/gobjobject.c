@@ -6,9 +6,7 @@
 HSD_GObj* HSD_GObjObject_80390A3C(u16 id, u8 arg1)
 {
     HSD_GObj* cur;
-    for (cur = ((HSD_GObj**) HSD_GObj_Entities)[arg1]; cur != NULL;
-         cur = cur->next)
-    {
+    for (cur = HSD_GObjPLinkHead[arg1]; cur != NULL; cur = cur->next) {
         if (cur->classifier == id) {
             break;
         }

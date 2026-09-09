@@ -1291,7 +1291,9 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
 
         PAD_STACK(6 * 4);
 
-        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
+             cur = cur->next)
+        {
             cur_ip = cur->user_data;
             if (it_8026C1B4(cur) == 0) {
                 continue;
@@ -2438,7 +2440,9 @@ Fighter* ftCo_800A4A40(Fighter* fp)
         return NULL;
     }
     cur_fp = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         if (fp->gobj == cur) {
             continue;
         }
@@ -2479,7 +2483,9 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
         return NULL;
     }
     closest = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         if (fp->gobj != cur) {
             cur_fp = GET_FIGHTER(cur);
             if (!inlineD0(fp, cur_fp) && !ftCo_IsAlly_dontinline(fp, cur_fp)) {
@@ -2533,7 +2539,9 @@ Fighter* ftCo_800A4E8C(Fighter* fp, Vec3* arg1)
         return NULL;
     }
     closest_fp = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         if (fp->gobj != cur) {
             cur_fp = GET_FIGHTER(cur);
             if (!inlineD0(fp, cur_fp) && !ftCo_IsAlly_dontinline(fp, cur_fp)) {
@@ -2581,7 +2589,9 @@ Fighter* ftCo_800A50D4(Fighter* fp)
         return NULL;
     }
     closest_fp = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         // Ignore self
         if (fp->gobj == cur) {
             continue;
@@ -2626,7 +2636,9 @@ Fighter* ftCo_800A5294(Fighter* fp, int player_id)
     {
         Fighter* cur_fp;
         HSD_GObj* cur;
-        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+             cur = cur->next)
+        {
             if (fp->gobj != cur) {
                 cur_fp = GET_FIGHTER(cur);
                 if (!inlineD0(fp, cur_fp)) {
@@ -2664,8 +2676,8 @@ Fighter* ftCo_800A53DC(Fighter* fp)
     }
     var_r28 = NULL;
     if (temp_r31->xFA_b34) {
-        for (var_r30 = HSD_GObj_Entities->fighters; var_r30 != NULL;
-             var_r30 = var_r30->next)
+        for (var_r30 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+             var_r30 != NULL; var_r30 = var_r30->next)
         {
             if (fp->gobj == var_r30) {
                 continue;
@@ -2711,8 +2723,8 @@ Fighter* ftCo_800A53DC(Fighter* fp)
             return var_r28;
         }
     }
-    for (var_r30_2 = HSD_GObj_Entities->fighters; var_r30_2 != NULL;
-         var_r30_2 = var_r30_2->next)
+    for (var_r30_2 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
+         var_r30_2 != NULL; var_r30_2 = var_r30_2->next)
     {
         if (fp->gobj == var_r30_2) {
             continue;
@@ -2760,7 +2772,9 @@ Fighter* ftCo_800A589C(Fighter* fp)
     }
     {
         Fighter_GObj* cur;
-        for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+             cur = cur->next)
+        {
             if (fp->gobj != cur) {
                 Fighter* cur_fp = GET_FIGHTER(cur);
                 if (fp->player_id == cur_fp->player_id) {
@@ -2962,7 +2976,9 @@ Fighter* ftCo_800A5CE0(Fighter* fp)
         return NULL;
     }
     closest_enemy = NULL;
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         if (fp->gobj == cur) {
             continue;
         }
@@ -3027,7 +3043,7 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
         return NULL;
     }
     closest_ip = NULL;
-    for (cur = HSD_GObj_Entities->items; cur != NULL;
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
          cur = HSD_GObjGetNext(cur))
     {
         cur_ip = GET_ITEM(cur);
@@ -3089,7 +3105,9 @@ Item* ftCo_800A61D8(Fighter* fp)
         return NULL;
     }
     closest = NULL;
-    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
+         cur = cur->next)
+    {
         ip = GET_ITEM(cur);
         ip = GET_ITEM(cur);
         ip = GET_ITEM(cur);
@@ -3140,7 +3158,7 @@ static inline bool ftCo_800A648C_inline1(Item* ip)
 
 static inline HSD_GObj* ftCo_800A648C_inline2(void)
 {
-    return HSD_GObj_Entities->items;
+    return HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
 }
 
 static inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)

@@ -1,5 +1,6 @@
 #include "if_2FD9.h"
 
+#include "forward.h"
 #include "ifall.h"
 #include <melee/gm/gm_unsplit.h>
 #include <melee/lb/lbarchive.h>

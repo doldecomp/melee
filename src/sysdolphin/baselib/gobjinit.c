@@ -29,11 +29,11 @@ void HSD_GObj_80391304(HSD_GObjLibInitDataType* arg0)
 
     HSD_GObjLibInitData = *arg0;
 
-    HSD_GObj_Entities =
+    HSD_GObjPLinkHead =
         HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->p_link_max + 1));
     plinklow_gobjs = HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->p_link_max + 1));
     for (i = 0; i < arg0->p_link_max + 1; i++) {
-        ((HSD_GObj**) HSD_GObj_Entities)[i] = plinklow_gobjs[i] = NULL;
+        HSD_GObjPLinkHead[i] = plinklow_gobjs[i] = NULL;
     }
 
     HSD_GObjGXLinkHead =

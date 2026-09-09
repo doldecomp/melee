@@ -6292,7 +6292,7 @@ void mpLib_DrawSnapping(void)
     bool var_r31;
 
     var_r31 = false;
-    ft_r27 = HSD_GObj_Entities->fighters;
+    ft_r27 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     if (ft_r27 != NULL) {
         Mtx spDC;
         PAD_STACK(0x30);
@@ -6359,7 +6359,7 @@ void mpLib_DrawSnapping(void)
         }
     }
 
-    if ((item_r28 = HSD_GObj_Entities->items) != NULL) {
+    if ((item_r28 = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]) != NULL) {
         if (!var_r31) {
             Mtx sp7C;
             PAD_STACK(0x34);

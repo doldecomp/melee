@@ -593,7 +593,9 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
     HSD_GObj* cur;
     u8 _[8];
 
-    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
+         cur = cur->next)
+    {
         if (cur != gobj) {
             Fighter* cur_fp = GET_FIGHTER(cur);
             if (cur_fp->x221D_b7) {

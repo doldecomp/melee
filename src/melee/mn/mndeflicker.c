@@ -1,5 +1,6 @@
 #include <Runtime/platform.h>
 
+#include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include "inlines.h"

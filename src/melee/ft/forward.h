@@ -10,6 +10,9 @@
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 
+#define HSD_GOBJ_CLASS_FIGHTER 4
+#define HSD_GOBJ_PLINK_FIGHTER 8
+
 #define FIGHTERVARS_SIZE 0xF8
 
 typedef enum_t FtMotionId;

@@ -173,7 +173,7 @@ void ftColl_80076528(Fighter_GObj* gobj)
 /// Clear victim pointer from attacker upon freeing memory?
 void ftColl_800765AC(Fighter_GObj* victim)
 {
-    Fighter_GObj* cur = HSD_GObj_Entities->fighters;
+    Fighter_GObj* cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (cur != NULL) {
         Fighter* fp = GET_FIGHTER(cur);
         if (victim == fp->x2094) {
@@ -1575,7 +1575,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
     this_fp = this_gobj->user_data;
     this_fp->victim_gobj = NULL;
     this_fp->unk_grab_val = F32_MAX;
-    victim_gobj = HSD_GObj_Entities->fighters;
+    victim_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (victim_gobj != NULL) {
         if (!ftLib_80086FD4(this_gobj, victim_gobj)) {
             victim_fp = victim_gobj->user_data;
@@ -1656,7 +1656,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     this_fp = this_gobj->user_data;
 
     if (gm_8016B1C4() == 0) {
-        victim_gobj = HSD_GObj_Entities->fighters;
+        victim_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
         is_same_gobj = false;
         while (victim_gobj != NULL) {
             if (this_gobj == victim_gobj) {
@@ -2015,7 +2015,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 
     fp = gobj->user_data;
 
-    for (entity = HSD_GObj_Entities->items; entity != NULL;
+    for (entity = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; entity != NULL;
          entity = entity->next)
     {
         item = entity->user_data;
@@ -3399,7 +3399,9 @@ void ftColl_8007B8CC(Fighter* fp, Fighter_GObj* grabber_gobj)
 void ftColl_8007B8E8(Fighter_GObj* gobj)
 {
     Fighter_GObj* curr;
-    for (curr = HSD_GObj_Entities->fighters; curr != NULL; curr = curr->next) {
+    for (curr = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; curr != NULL;
+         curr = curr->next)
+    {
         if (gobj != curr) {
             Fighter* fp = GET_FIGHTER(curr);
             if (fp->x1064_thrownHitbox.owner == gobj) {
@@ -3552,7 +3554,9 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     fp->target_item_gobj = 0;
     fp->unk_grab_val = F32_MAX;
 
-    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+    for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM]; cur != NULL;
+         cur = cur->next)
+    {
         Item* ip = cur->user_data;
 
         if (ip->xD0C != 0) {

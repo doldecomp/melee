@@ -70,7 +70,7 @@ void fn_EnableShowCoinPickupRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->kind == It_Kind_Unk4) {
@@ -86,7 +86,7 @@ void fn_DisableShowCoinPickupRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->kind == It_Kind_Unk4) {
@@ -102,7 +102,7 @@ void fn_EnableShowEnemyStompRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->xDD0_flag.b0) {
@@ -118,7 +118,7 @@ void fn_DisableShowEnemyStompRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
         it->xDAA_flag.b3 = 0;
@@ -132,7 +132,7 @@ void fn_EnableShowItemPickupRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
         it->xDAA_flag.b4 = 1;
@@ -146,7 +146,7 @@ void fn_DisableShowItemPickupRange(void)
     HSD_GObj* item_gobj;
     Item* it;
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
         it->xDAA_flag.b4 = 0;
@@ -195,7 +195,7 @@ void fn_ToggleItemCollisionBubbles(void)
     if (db_ShowItemCollisionBubbles > 3) {
         db_ShowItemCollisionBubbles = 1;
     }
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = item_gobj->user_data;
         it->xDAA_byte &= 0xFC;
@@ -230,7 +230,7 @@ void fn_80225E6C(Fighter_GObj* owner, Fighter* fp)
     Item* it;
     int stack[2];
 
-    item_gobj = HSD_GObj_Entities->items;
+    item_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_ITEM];
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         if (it->owner == owner) {
