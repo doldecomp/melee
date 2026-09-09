@@ -449,13 +449,16 @@ void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
                    GX_LO_CLEAR);
 }
 
-/// @todo Fake function to consume a stack temporary.
-static inline void consume_color(GXColor color) {}
-
-/// @todo Fake function to consume stack temporaries.
-static inline void consume_blur_colors(GXColor color0, GXColor color1,
-                                       GXColor color2, GXColor color3)
+static inline void setTevAlpha(u8 alpha)
 {
+    GXColor color;
+
+    color.a = alpha;
+    GXSetTevColor(GX_TEVREG0, color);
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
+                    GX_CA_ZERO);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                    GX_TEVPREV);
 }
 
 void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
@@ -472,201 +475,75 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     lb_800122F0(img, &tex, color_factor);
     PAD_STACK(8);
 
-    ((GXColor*) &tex)[-4].a = alpha;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-4]);
-    consume_color(((GXColor*) &tex)[-4]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(alpha);
     lb_8001271C(&tex, x, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-6].a = 0x7F;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-6]);
-    consume_color(((GXColor*) &tex)[-6]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0x7F);
     x_p1 = x + off1;
     lb_8001271C(&tex, x_p1, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-8].a = 0xA9;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-8]);
-    consume_color(((GXColor*) &tex)[-8]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xA9);
     x_m1 = x - off1;
     lb_8001271C(&tex, x_m1, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-10].a = 0xBF;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-10]);
-    consume_color(((GXColor*) &tex)[-10]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xBF);
     y_p1 = y + off1;
     lb_8001271C(&tex, x, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-12].a = 0xCC;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-12]);
-    consume_color(((GXColor*) &tex)[-12]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xCC);
     y_m1 = y - off1;
     lb_8001271C(&tex, x, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-14].a = 0xD4;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-14]);
-    consume_color(((GXColor*) &tex)[-14]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xD4);
     lb_8001271C(&tex, x_p1, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-16].a = 0xDA;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-16]);
-    consume_color(((GXColor*) &tex)[-16]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xDA);
     lb_8001271C(&tex, x_m1, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-18].a = 0xDF;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-18]);
-    consume_color(((GXColor*) &tex)[-18]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xDF);
     lb_8001271C(&tex, x_p1, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-20].a = 0xE2;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-20]);
-    consume_color(((GXColor*) &tex)[-20]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xE2);
     lb_8001271C(&tex, x_m1, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-22].a = 0xE5;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-22]);
-    consume_color(((GXColor*) &tex)[-22]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xE5);
     x_p2 = x + off2;
     lb_8001271C(&tex, x_p2, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-24].a = 0xE7;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-24]);
-    consume_color(((GXColor*) &tex)[-24]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xE7);
     x_m2 = x - off2;
     lb_8001271C(&tex, x_m2, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-26].a = 0xE9;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-26]);
-    consume_color(((GXColor*) &tex)[-26]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xE9);
     lb_8001271C(&tex, x_p2, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-28].a = 0xEB;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-28]);
-    consume_color(((GXColor*) &tex)[-28]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xEB);
     lb_8001271C(&tex, x_m2, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-30].a = 0xEC;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-30]);
-    consume_color(((GXColor*) &tex)[-30]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xEC);
     lb_8001271C(&tex, x_p2, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-32].a = 0xEE;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-32]);
-    consume_color(((GXColor*) &tex)[-32]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xEE);
     lb_8001271C(&tex, x_m2, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-34].a = 0xEF;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-34]);
-    consume_color(((GXColor*) &tex)[-34]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xEF);
     y_p2 = y + off2;
     lb_8001271C(&tex, x, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-36].a = 0xF0;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-36]);
-    consume_color(((GXColor*) &tex)[-36]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xF0);
     y_m2 = y - off2;
     lb_8001271C(&tex, x, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-38].a = 0xF0;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-38]);
-    consume_color(((GXColor*) &tex)[-38]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xF0);
     lb_8001271C(&tex, x_p1, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-40].a = 0xF1;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-40]);
-    consume_color(((GXColor*) &tex)[-40]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xF1);
     lb_8001271C(&tex, x_p1, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-42].a = 0xF2;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-42]);
-    consume_color(((GXColor*) &tex)[-42]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xF2);
     lb_8001271C(&tex, x_m1, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    ((GXColor*) &tex)[-44].a = 0xF2;
-    GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex)[-44]);
-    consume_color(((GXColor*) &tex)[-44]);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                    GX_CA_ZERO);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                    GX_TEVPREV);
+    setTevAlpha(0xF2);
     lb_8001271C(&tex, x_m1, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
     HSD_StateInvalidate(2);
@@ -702,7 +579,8 @@ static HSD_Chan chan1 = {
 
 void fn_80013614(HSD_GObj* gobj)
 {
-    struct CameraBlurData* data = gobj->user_data;
+    struct CameraBlurData* data =
+        (struct CameraBlurData*) HSD_GObjGetUserData(gobj);
     u8 pad8[8];
     Mtx view_mtx;
     Mtx view_mtx2;
@@ -713,7 +591,7 @@ void fn_80013614(HSD_GObj* gobj)
     }
 
     if (data->mode == 1) {
-        HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
+        HSD_CObj* cobj = GET_COBJ(gobj);
         HSD_ImageDesc* efb_copy;
         float pos_x;
         float pos_y;
@@ -750,7 +628,7 @@ void fn_80013614(HSD_GObj* gobj)
         lb_80012994(efb_copy, base_alpha, blur_size, pos_x, pos_y, scale_x,
                     scale_y, tint_factor);
     } else {
-        HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
+        HSD_CObj* cobj = GET_COBJ(gobj);
         HSD_ImageDesc* efb_copy;
         float pos_x;
         float pos_y;
@@ -782,19 +660,9 @@ void fn_80013614(HSD_GObj* gobj)
         height = efb_copy->height;
         lb_8001285C(efb_copy, &tex_obj);
 
-        {
-            ((GXColor*) &tex_obj)[-2].a = base_alpha;
-            GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex_obj)[-2]);
-            consume_blur_colors(
-                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2],
-                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2]);
-            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                            GX_CA_ZERO);
-            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
-                            GX_CS_SCALE_1, 1, GX_TEVPREV);
-            lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
-                        scale_x, scale_y);
-        }
+        setTevAlpha(base_alpha);
+        lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
+                    scale_x, scale_y);
         HSD_StateInvalidate(2);
     }
 }
