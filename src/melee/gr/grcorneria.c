@@ -2467,7 +2467,7 @@ void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
 
-    if (gm_801A45E8(1) || gm_801A45E8(2) || Camera_8003010C()) {
+    if (gm_GetDbPauseFlag(1) || gm_GetDbPauseFlag(2) || Camera_8003010C()) {
         if (gp->u.smashtaunt.text == NULL) {
             return;
         }

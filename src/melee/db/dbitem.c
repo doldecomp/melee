@@ -432,7 +432,7 @@ void fn_CheckItemAndPokemonMenu(int player)
         }
     }
     fn_UpdateItemAndPokemonMenu(player);
-    if (gm_801A45E8(1) == 0 && gm_801A45E8(0) == 0) {
+    if (gm_GetDbPauseFlag(1) == 0 && gm_GetDbPauseFlag(0) == 0) {
         db_CheckAndSpawnItem(player);
     }
     if (db_ButtonsDown(player) & HSD_PAD_R &&

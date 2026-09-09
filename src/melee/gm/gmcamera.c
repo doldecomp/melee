@@ -264,9 +264,9 @@ void gmCamera_801A26C0(void)
     PAD_STACK(4);
 
     hud = gmVs_GetController_0();
-    if (gm_801A45E8(3)) {
-        gm_801A4674(3);
-        if (gm_801A45E8(1)) {
+    if (gm_GetDbPauseFlag(3)) {
+        gm_ClearDbPauseFlag(3);
+        if (gm_GetDbPauseFlag(1)) {
             gm_801A0FEC(hud->pauser, 1);
         } else {
             lbAudioAx_80024E84(0);
@@ -302,8 +302,8 @@ void gmCamera_801A2800(void)
     gmCamera_VsCamUiState.x10 = 0;
     lb_80011E24(gmCamera_VsCamUiState.x8, &jobj, 2, -1);
     HSD_JObjReqAnimAll(jobj, 0.0f);
-    gm_801A4634(3);
-    if (gm_801A45E8(1) != 0) {
+    gm_SetDbPauseFlag(3);
+    if (gm_GetDbPauseFlag(1) != 0) {
         gm_801A10FC(temp_r3->pauser);
     } else {
         lbAudioAx_80024E84(1);
@@ -561,7 +561,7 @@ void gmCamera_801A30E4(void)
     HSD_JObj** px8;
     s32 i;
     if ((gmCamera_VsCamStateTable[*pxc].flags.x0 != 0) && (gcus->x14 != 0) &&
-        (gm_801A45E8(1) == 0))
+        (gm_GetDbPauseFlag(1) == 0))
     {
         HSD_JObjClearFlagsAll(gcus->x4, JOBJ_HIDDEN);
     } else {

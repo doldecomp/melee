@@ -66,7 +66,7 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
     HSD_JObj* jobj = GET_JOBJ(gobj)->child;
 
     if (ip->xDD4_itemVar.coin.x4 != 0) {
-        if (((gm_801A45E8(1) != false) &&
+        if (((gm_GetDbPauseFlag(1) != false) &&
              (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)) ||
             ((Camera_80031144() < attr->x48) &&
              (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)))
@@ -77,7 +77,7 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
             HSD_JObjSetFlagsAll(jobj->next, JOBJ_HIDDEN);
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
-    } else if (((gm_801A45E8(1) != 0) && (Ground_801C1D84() == 0)) ||
+    } else if (((gm_GetDbPauseFlag(1) != 0) && (Ground_801C1D84() == 0)) ||
                (Camera_80031144() < attr->x48))
     {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);

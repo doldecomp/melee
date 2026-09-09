@@ -1,26 +1,26 @@
 #ifndef MELEE_GM_1A45_H
 #define MELEE_GM_1A45_H
 
-#include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
+#include <melee/gm/types.h>
 
-/* 1A45E8 */ bool gm_801A45E8(int bit);
+/* 1A45E8 */ bool gm_GetDbPauseFlag(int bit);
 /* 1A4624 */ int gm_801A4624(void);
-/* 1A4634 */ void gm_801A4634(int bit);
-/* 1A4674 */ void gm_801A4674(int bit);
+/* 1A4634 */ void gm_SetDbPauseFlag(int bit);
+/* 1A4674 */ void gm_ClearDbPauseFlag(int bit);
 /* 1A46B8 */ bool gm_801A46B8(int bit);
 /* 1A46F4 */ bool fn_801A46F4(void);
 /* 1A47E4 */ bool fn_801A47E4(void);
 /* 1A48A4 */ u64 gm_801A48A4(u8);
-/* 1A4970 */ void gm_801A4970(bool (**arg0)(void));
-/* 1A4B08 */ void gm_801A4B08(bool (*arg0)(void), bool (*arg1)(void));
-/* 1A4B1C */ UNK_RET gm_801A4B1C(UNK_PARAMS);
-/* 1A4B40 */ void gm_801A4B40(UNK_T);
+/* 1A4970 */ void gm_801A4970(struct gm_DbPauseInputHandlers* db_input);
+/* 1A4B08 */ void gm_SetDbPauseInputHandlers(bool (*arg0)(void),
+                                             bool (*arg1)(void));
+/* 1A4B1C */ void gm_801A4B1C(void);
+/* 1A4B40 */ void gm_SetPreGObjProcCallback(Event cb);
 /* 1A4B50 */ void gm_801A4B50(int);
 /* 1A4B60 */ void gm_801A4B60(void);
-/* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
+/* 1A4B74 */ void gm_801A4B74(void);
 /* 1A4B88 */ void gm_801A4B88(struct GameSceneInfo*);
 /* 1A4B90 */ void* gm_GetCurrentSceneEnterData(void);
 /* 1A4B9C */ void* gm_GetCurrentSceneExitData(void);

@@ -29,7 +29,7 @@ static u64 gm_803DA888[8] = {
 
 u64 gm_803DA8C8[2] = { -1, -1 };
 
-bool gm_801A45E8(int bit)
+int gm_GetDbPauseFlag(int bit)
 {
     return gm_80479D58.unk_10.x0 & (1ULL << bit);
 }
@@ -39,12 +39,12 @@ int gm_801A4624(void)
     return gm_80479D58.unk_10.x0;
 }
 
-void gm_801A4634(int bit)
+void gm_SetDbPauseFlag(int bit)
 {
     gm_80479D58.unk_10.x0 |= 1ULL << bit;
 }
 
-void gm_801A4674(int bit)
+void gm_ClearDbPauseFlag(int bit)
 {
     gm_80479D58.unk_10.x0 &= ~(1ULL << bit);
 }
@@ -95,7 +95,7 @@ u64 gm_801A48A4(u8 arg0)
     return result;
 }
 
-void gm_801A4970(bool (**arg0)(void))
+void gm_801A4970(struct gm_DbPauseInputHandlers* db_input)
 {
     HSD_PadStatus* temp_r3;
     s8 var_r26;
@@ -132,34 +132,35 @@ void gm_801A4970(bool (**arg0)(void))
         }
     }
 
-    if (arg0[0] != NULL && arg0[0]()) {
-        if (gm_801A45E8(0)) {
+    if (db_input->check_pause != NULL && db_input->check_pause()) {
+        if (gm_GetDbPauseFlag(0)) {
             gm_80479D58.unk_10.x0 &= ~1;
         } else {
             gm_80479D58.unk_10.x0 |= 1;
         }
     }
-    if (gm_801A45E8(0)) {
-        if (arg0[1] != NULL && arg0[1]()) {
+    if (gm_GetDbPauseFlag(0)) {
+        if (db_input->check_framestep != NULL && db_input->check_framestep()) {
             gm_80479D58.unk_10.x2 |= 1;
         }
     }
 }
 
-void gm_801A4B08(bool (*arg0)(void), bool (*arg1)(void))
+void gm_SetDbPauseInputHandlers(Predicate check_db_pause,
+                                Predicate check_db_framestep)
 {
-    gm_80479D58.unk_10.x4[0] = arg0;
-    gm_80479D58.unk_10.x4[1] = arg1;
+    gm_80479D58.unk_10.db_input.check_pause = check_db_pause;
+    gm_80479D58.unk_10.db_input.check_framestep = check_db_framestep;
 }
 
 void gm_801A4B1C(void)
 {
-    gm_801A4B08(fn_801A46F4, fn_801A47E4);
+    gm_SetDbPauseInputHandlers(fn_801A46F4, fn_801A47E4);
 }
 
-void gm_801A4B40(UNK_T arg0)
+void gm_SetPreGObjProcCallback(Event cb)
 {
-    gm_80479D58.unk_10.unk_30 = arg0;
+    gm_80479D58.unk_10.pre_gobj_proc = cb;
 }
 
 void gm_801A4B50(int arg0)
@@ -215,11 +216,11 @@ void gm_801A4BD4(void)
 {
     PAD_STACK(0x18);
 
-    gm_801A4B08(fn_801A46F4, fn_801A47E4);
-    gm_801A4B40(0);
+    gm_SetDbPauseInputHandlers(fn_801A46F4, fn_801A47E4);
+    gm_SetPreGObjProcCallback(NULL);
     gm_801A4B50(0);
 
-    lb_80019880(OSSecondsToTicks(1.0F / 60));
+    lb_80019880(OSSecondsToTicks(1.0F / GM_FPS));
     HSD_GObj_803912E0(&gm_80479D48.initdata);
     gm_80479D48.initdata.gproc_pri_max = 0x18;
     HSD_SObjLib_804D7960 =
@@ -296,9 +297,9 @@ void gm_801A4D34(void (*on_frame)(void), UNUSED GameSceneInfo* info)
             HSD_PerfSetStartTime();
             lb_800198E0();
             if (DbLevel >= DbLKind_DebugRom) {
-                gm_801A4970(temp_r25->unk_10.x4);
+                gm_801A4970(&temp_r25->unk_10.db_input);
             }
-            if (gm_801A46B8(0) || !gm_801A45E8(0)) {
+            if (gm_801A46B8(0) || !gm_GetDbPauseFlag(0)) {
                 temp_r25->unk_10.unk_38_0 = true;
             } else {
                 temp_r25->unk_10.unk_38_0 = false;
@@ -334,8 +335,8 @@ void gm_801A4D34(void (*on_frame)(void), UNUSED GameSceneInfo* info)
                 db_CheckScreenshot();
             }
             lbAudioAx_80027DF8();
-            if (temp_r25->unk_10.unk_30 != NULL) {
-                temp_r25->unk_10.unk_30();
+            if (temp_r25->unk_10.pre_gobj_proc != NULL) {
+                temp_r25->unk_10.pre_gobj_proc();
             }
             HSD_GObj_80390CFC();
             if (temp_r25->unk_0 != -2) {

@@ -17,7 +17,7 @@
  * #StartMeleeRules::on_pause_override or #gm_EnablePlayerPauseCamera.
  *
  * @param[in] arg0 Match state (#VsSceneController).
- * @param[in] arg1 Pause context id passed to #gm_801A4634.
+ * @param[in] arg1 Pause context id passed to #gm_SetDbPauseFlag.
  */
 /* 16CA68 */ void gm_DoPauseChecksAndRoutine(VsSceneController*, int);
 
@@ -31,7 +31,7 @@
  * #StartMeleeRules::on_unpause_override or #Ground_EnableMatchCamera.
  *
  * @param[in] arg0 Match state (#VsSceneController).
- * @param[in] arg1 Unpause context id passed to #gm_801A4674.
+ * @param[in] arg1 Unpause context id passed to #gm_ClearDbPauseFlag.
  */
 /* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(VsSceneController*, int);
 

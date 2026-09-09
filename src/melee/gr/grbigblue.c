@@ -4574,7 +4574,9 @@ bool grBigBlue_801EF844(enum_t line_id)
 
 void fn_801EFB9C(HSD_GObj* gobj, int pass)
 {
-    if (gm_801A45E8(1) != 0 || gm_801A45E8(2) != 0 || Camera_8003010C() != 0) {
+    if (gm_GetDbPauseFlag(1) != 0 || gm_GetDbPauseFlag(2) != 0 ||
+        Camera_8003010C() != 0)
+    {
         return;
     }
     grDisplay_801C5DB0(gobj, pass);
