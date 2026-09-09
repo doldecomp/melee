@@ -5,7 +5,7 @@
 
 #include "eflib.h"
 #include "types.h"
-#include <melee/ft/fighter.h>
+#include <melee/ft/types.h>
 #include <sysdolphin/baselib/generator.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
