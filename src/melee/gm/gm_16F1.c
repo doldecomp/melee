@@ -446,9 +446,9 @@ int fn_801701B8(void)
     return lbl_804D65A0.x0;
 }
 
-int fn_801701C0(void* arg0, int arg1, int arg2)
+int fn_801701C0(struct lbl_8046B6A0_24C_t* rules, int arg1, int arg2)
 {
-    struct lbl_8046B6A0_24C_t* rules = arg0;
+    u8* tmp;
     const struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
@@ -471,8 +471,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         for (k = 0; k < 6; k++) {
             if (x58[k].x0 != 3) {
                 u16 xA = x58[k].xA;
-                scores[k] =
-                    (x58[k].x20 - (x58[k].x24 - xA)) + *(s8*) &rules->xC * xA;
+                scores[k] = (x58[k].x20 - (x58[k].x24 - xA)) + rules->xC * xA;
             }
         }
 
@@ -500,7 +499,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     switch (arg2) {
     case 0xD7:
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xD9) != 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xD9) != 0) {
             return 0;
         }
         {
@@ -517,7 +516,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
 
     case 0xD8:
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xDA) != 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xDA) != 0) {
             return 0;
         }
         {
@@ -594,7 +593,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xDC: {
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xDB) == 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xDB) == 0) {
             {
                 int i;
                 for (i = 0; i < 4; i++) {
@@ -644,7 +643,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xDE: {
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xDD) == 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xDD) == 0) {
             {
                 int i;
                 for (i = 0; i < 4; i++) {
@@ -697,7 +696,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xE0: {
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xDF) == 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xDF) == 0) {
             {
                 int i;
                 for (i = 0; i < 4; i++) {
@@ -748,7 +747,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xE2: {
-        if ((unsigned) fn_801701C0(arg0, arg1, 0xE1) == 0) {
+        if ((unsigned) fn_801701C0(rules, arg1, 0xE1) == 0) {
             {
                 int i;
                 for (i = 0; i < 4; i++) {
@@ -972,9 +971,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
             }
-            if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                rankings[arg1] == 0 && x58[arg1].x20 == 0)
-            {
+            tmp = &x58[arg1].x3;
+            if (!(*tmp & 1) && rankings[arg1] == 0 && x58[arg1].x20 == 0) {
                 return 1;
             }
         } else {
@@ -993,15 +991,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         }
                     }
                 }
-                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                    x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
-                {
+                tmp = &x58[arg1].x3;
+                if (!(*tmp & 1) && x58[arg1].x5 == 0 && x58[arg1].x20 == 0) {
                     return 1;
                 }
             } else {
-                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                    x58[arg1].x20 == 0)
-                {
+                tmp = &x58[arg1].x3;
+                if (!(*tmp & 1) && x58[arg1].x20 == 0) {
                     return 1;
                 }
             }
