@@ -449,12 +449,6 @@ void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
                    GX_LO_CLEAR);
 }
 
-/// @todo Fake function to consume stack temporaries.
-static inline void consume_blur_colors(GXColor color0, GXColor color1,
-                                       GXColor color2, GXColor color3)
-{
-}
-
 static inline void setTevAlpha(u8 alpha)
 {
     GXColor color;
@@ -585,7 +579,8 @@ static HSD_Chan chan1 = {
 
 void fn_80013614(HSD_GObj* gobj)
 {
-    struct CameraBlurData* data = gobj->user_data;
+    struct CameraBlurData* data =
+        (struct CameraBlurData*) HSD_GObjGetUserData(gobj);
     u8 pad8[8];
     Mtx view_mtx;
     Mtx view_mtx2;
@@ -596,7 +591,7 @@ void fn_80013614(HSD_GObj* gobj)
     }
 
     if (data->mode == 1) {
-        HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
+        HSD_CObj* cobj = GET_COBJ(gobj);
         HSD_ImageDesc* efb_copy;
         float pos_x;
         float pos_y;
@@ -633,7 +628,7 @@ void fn_80013614(HSD_GObj* gobj)
         lb_80012994(efb_copy, base_alpha, blur_size, pos_x, pos_y, scale_x,
                     scale_y, tint_factor);
     } else {
-        HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
+        HSD_CObj* cobj = GET_COBJ(gobj);
         HSD_ImageDesc* efb_copy;
         float pos_x;
         float pos_y;
@@ -665,19 +660,9 @@ void fn_80013614(HSD_GObj* gobj)
         height = efb_copy->height;
         lb_8001285C(efb_copy, &tex_obj);
 
-        {
-            ((GXColor*) &tex_obj)[-2].a = base_alpha;
-            GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex_obj)[-2]);
-            consume_blur_colors(
-                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2],
-                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2]);
-            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                            GX_CA_ZERO);
-            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
-                            GX_CS_SCALE_1, 1, GX_TEVPREV);
-            lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
-                        scale_x, scale_y);
-        }
+        setTevAlpha(base_alpha);
+        lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
+                    scale_x, scale_y);
         HSD_StateInvalidate(2);
     }
 }
