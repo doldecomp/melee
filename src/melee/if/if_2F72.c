@@ -19,7 +19,6 @@
 
 /// Orphaned data strings from original ROM
 static char lbl_803F9780[] = "ScInfStc_scene_models";
-static char lbl_803F9798[] = "translate";
 
 static void* lbl_804A1340[13];
 

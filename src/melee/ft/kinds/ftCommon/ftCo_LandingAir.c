@@ -59,7 +59,7 @@ void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
 void ftCo_LandingAir_EnterWithMsidLag(Fighter_GObj* gobj, FtMotionId msid,
                                       float lag)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, (ftAnim_8006F484(gobj) + 0.1f) / lag);

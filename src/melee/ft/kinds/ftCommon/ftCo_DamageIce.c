@@ -59,11 +59,11 @@ void ftCo_80090984(Fighter_GObj* gobj)
 
 void ftCo_800909D0(Fighter* fp)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Vec3 offset;
     Vec3 pos;
     {
-        u8 _[4] = { 0 };
+        u8 _[4];
         float radius = fp->x34_scale.y * fp->co_attrs.damageice_ice_size;
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &pos);
         lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint,
@@ -324,7 +324,7 @@ void ftCo_DamageIce_IASA(Fighter_GObj* gobj) {}
 
 void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {

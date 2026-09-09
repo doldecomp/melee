@@ -22,15 +22,15 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
     Vec3 vec0;
     Vec3 vec1;
 
-    u8 _[4] = { 0 };
+    u8 _[4];
 
     {
         ftGameWatchChef chefStruct;
-        u8 _[4] = { 0 };
+        u8 _[4];
         int i;
         int* pSausage;
         {
-            u8 _[8] = { 0 };
+            u8 _[8];
 
             Fighter* fp1;
             {

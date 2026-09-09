@@ -96,6 +96,7 @@ void GXSetVtxDesc(GXAttr attr, GXAttrType type)
     gx->dirtyState |= 8;
 }
 
+#ifndef MUST_MATCH
 void GXSetVtxDescv(const GXVtxDescList *attrPtr)
 {
     CHECK_GXBEGIN(0xF5, "GXSetVtxDescv");
@@ -113,6 +114,7 @@ void GXSetVtxDescv(const GXVtxDescList *attrPtr)
     }
     gx->dirtyState |= 8;
 }
+#endif
 
 void __GXSetVCD(void)
 {
@@ -156,6 +158,7 @@ void __GXSetVCD(void)
     }
 }
 
+#ifndef MUST_MATCH
 void GXGetVtxDesc(GXAttr attr, GXAttrType *type)
 {
     u32 cpType;
@@ -190,6 +193,7 @@ void GXGetVtxDesc(GXAttr attr, GXAttrType *type)
     }
     *type = cpType;
 }
+#endif
 
 void GXGetVtxDescv(GXVtxDescList *vcd)
 {
@@ -303,6 +307,7 @@ void GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttr attr, GXCompCnt cnt, GXCompType typ
     gx->dirtyVAT |= (u8)(1 << (u8)vtxfmt);
 }
 
+#ifndef MUST_MATCH
 void GXSetVtxAttrFmtv(GXVtxFmt vtxfmt, const GXVtxAttrFmtList *list)
 {
     u32 *va;
@@ -324,6 +329,7 @@ void GXSetVtxAttrFmtv(GXVtxFmt vtxfmt, const GXVtxAttrFmtList *list)
     gx->dirtyState |= 0x10;
     gx->dirtyVAT |= (u8)(1 << (u8)vtxfmt);
 }
+#endif
 
 void __GXSetVAT(void)
 {
@@ -339,6 +345,7 @@ void __GXSetVAT(void)
     gx->dirtyVAT = 0;
 }
 
+#ifndef MUST_MATCH
 void GXGetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt *cnt, GXCompType *type, u8 *frac)
 {
     u32 *va;
@@ -422,6 +429,7 @@ void GXGetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt *cnt, GXCompType *type
         return;
     }
 }
+#endif
 
 void GXGetVtxAttrFmtv(GXVtxFmt fmt, GXVtxAttrFmtList *vat)
 {

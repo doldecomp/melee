@@ -199,6 +199,7 @@ BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo)
     return TRUE;
 }
 
+#ifndef MUST_MATCH
 BOOL DVDOpen(char* fileName, DVDFileInfo* fileInfo)
 {
     s32 entry;
@@ -234,6 +235,7 @@ BOOL DVDOpen(char* fileName, DVDFileInfo* fileInfo)
 
     return TRUE;
 }
+#endif
 
 BOOL DVDClose(DVDFileInfo* fileInfo)
 {

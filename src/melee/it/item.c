@@ -181,7 +181,7 @@ static void ItUnkHoldKind(HSD_GObj* gobj)
     }
 }
 
-static void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
+static inline void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
 {
     scl->x = scl->y = scl->z = it->scl;
     HSD_JObjSetScale(jobj, scl);

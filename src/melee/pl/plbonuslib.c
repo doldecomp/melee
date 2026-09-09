@@ -25,7 +25,7 @@
 #ifdef MUST_MATCH
 static inline float my_sqrtf(float x)
 {
-    u8 _[4] = { 0 };
+    u32 _ = 0;
     volatile float y;
     const double half = 0.5;
     const double three = 3.0;

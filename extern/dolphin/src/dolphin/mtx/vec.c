@@ -74,6 +74,7 @@ asm void PSVECScale(register Vec* src, register Vec* dst, register f32 mult)
     // clang-format on
 }
 
+#ifndef MUST_MATCH
 void C_VECNormalize(Vec* src, Vec* unit)
 {
     f32 mag;
@@ -88,6 +89,7 @@ void C_VECNormalize(Vec* src, Vec* unit)
     unit->y = src->y * mag;
     unit->z = src->z * mag;
 }
+#endif
 
 void PSVECNormalize(register Vec* vec1, register Vec* dst)
 {

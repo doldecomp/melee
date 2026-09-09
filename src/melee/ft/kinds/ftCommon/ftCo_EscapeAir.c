@@ -53,7 +53,7 @@ static inline void inlineA0(Fighter* fp)
 
 void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     ftCo_800D705C(gobj);
     inlineA0(fp);
@@ -67,7 +67,7 @@ void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
 
 void ftCo_EscapeAir_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 1, 1, false, p_ftCommonData->x340,
                       p_ftCommonData->x344);
@@ -80,7 +80,7 @@ void ftCo_EscapeAir_IASA(Fighter_GObj* gobj)
     if (fp->mv.co.escapeair.timer != 0) {
         bool b;
         Vec3 self_vel = fp->mv.co.escapeair.self_vel;
-        u8 _[4] = { 0 };
+        u8 _[4];
         if (ftCo_80095328(gobj, &b)) {
             if (b) {
                 fp->self_vel = self_vel;

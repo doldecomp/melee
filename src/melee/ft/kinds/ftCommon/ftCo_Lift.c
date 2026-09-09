@@ -47,11 +47,11 @@ void ftCo_LiftWait_Phys(Fighter_GObj* gobj)
 
 void ftCo_80096E68(Fighter_GObj* gobj)
 {
-    u8 _[4] = { 0 };
+    u8 _[4];
     Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         Vec3 vec;
-        u8 _[4] = { 0 };
+        u8 _[4];
         vec.x = vec.y = vec.z = 0.0f;
         Item_8026ABD8(fp->item_gobj, &vec, 0.0f);
         ftCo_80090780(gobj);
@@ -92,7 +92,7 @@ void ftCo_80096F48(HSD_GObj* gobj)
 
 void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     if (!ftAnim_IsFramesRemaining(gobj) && !ftCo_80096EF8(gobj)) {
         Fighter* fp = gobj->user_data;
         Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, 0, 1, 0,
@@ -140,7 +140,7 @@ void ftCo_80097130(HSD_GObj* gobj)
 
 void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_TransN);
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;

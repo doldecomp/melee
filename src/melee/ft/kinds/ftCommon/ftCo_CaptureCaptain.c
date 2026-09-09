@@ -13,7 +13,7 @@
 
 void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {
-    u8 _[8] = { 0 };
+    u8 _[8];
     Fighter* fp = gobj->user_data;
     Fighter* vic_fp = vic_gobj->user_data;
     ftCommon_8007DB58(gobj);
