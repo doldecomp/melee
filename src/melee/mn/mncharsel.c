@@ -48,22 +48,28 @@ static u8 mnCharSel_804D50D0[8] = { 2, 0, 1, 0, 5, 3, 4, 0 };
 static u8 mnCharSel_804D50D8[8] = { 2, 0, 8, 1, 7, 7, 7, 7 };
 static u8 mnCharSel_804D50E0[3] = { 0, 1, 3 };
 
-typedef struct CSSSceneModels {
+typedef struct MnSelectChrModels {
+    /* 0x0 */ StaticModelDesc background;
+    /* 0x10 */ StaticModelDesc hand;
+    /* 0x20 */ StaticModelDesc token;
+    /* 0x30 */ StaticModelDesc menu;
+    /* 0x40 */ StaticModelDesc press_start;
+    /* 0x50 */ StaticModelDesc debug_camera;
+    /* 0x60 */ StaticModelDesc regend_menu;
+    /* 0x70 */ StaticModelDesc regend_options;
+    /* 0x80 */ StaticModelDesc door;
+} MnSelectChrModels;
+
+typedef struct MnSelectChrDataTable {
     /* 0x00 */ HSD_CObjDesc* cam;
     /* 0x04 */ HSD_LightDesc* light0;
     /* 0x08 */ HSD_LightDesc* light1;
     /* 0x0C */ HSD_FogDesc* fog;
-} CSSSceneModels;
-
-typedef struct CSSAnimSet {
-    /* 0x00 */ HSD_Joint* joint;
-    /* 0x04 */ HSD_AnimJoint* anim;
-    /* 0x08 */ HSD_MatAnimJoint* matanim;
-    /* 0x0C */ HSD_ShapeAnimJoint* shapeanim;
-} CSSAnimSet;
+    /* 0x10 */ MnSelectChrModels models;
+} MnSelectChrDataTable;
 
 static CSSData* mnCharSel_804D6CB0;
-static void* mnCharSel_804D6CB4;
+static MnSelectChrDataTable* css_data_table;
 static HSD_GObj* mnCharSel_804D6CB8;
 static HSD_GObj* mnCharSel_804D6CBC;
 static HSD_JObj* mnCharSel_804D6CC0;
@@ -72,7 +78,7 @@ static HSD_JObj* mnCharSel_804D6CC8;
 static HSD_JObj* mnCharSel_804D6CCC;
 static HSD_Archive* mnCharSel_804D6CD0;
 static HSD_Archive* mnCharSel_804D6CD4;
-static void* mnCharSel_804D6CD8;
+static MnSelectChrModels* css_models;
 static HSD_Text* mnCharSel_804D6CDC;
 static HSD_Text* mnCharSel_804D6CE0;
 static HSD_Text* mnCharSel_804D6CE4;
@@ -1665,7 +1671,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     int i;
     u8 timer;
     s32 val;
-    int anim;
+    int css_models;
     float fval;
 
     if ((mnCharSel_804D6CEC % 10) != 0) {
@@ -1728,13 +1734,13 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         if (doors->p_kind == 1) {
                             rules = gmMainLib_GetGameRules();
                             if (rules->handicap == 1) {
-                                anim = 0x5A;
+                                css_models = 0x5A;
                             } else {
-                                anim = 0x1E;
+                                css_models = 0x1E;
                             }
                             {
                                 u8 slidername_joint = doors->slidername_joint;
-                                fval = (f32) anim;
+                                fval = (f32) css_models;
                                 lb_80011E24(mnCharSel_804D6CC0, &sp44,
                                             slidername_joint, -1);
                             }
@@ -1751,13 +1757,13 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         } else {
                             rules = gmMainLib_GetGameRules();
                             if (rules->handicap == 1) {
-                                anim = 0x50;
+                                css_models = 0x50;
                             } else {
-                                anim = 0x14;
+                                css_models = 0x14;
                             }
                             {
                                 u8 slidername_joint = doors->slidername_joint;
-                                fval = (f32) anim;
+                                fval = (f32) css_models;
                                 lb_80011E24(mnCharSel_804D6CC0, &sp40,
                                             slidername_joint, -1);
                             }
@@ -4179,9 +4185,6 @@ static const GXColor mnCharSel_804DC58C = { 160, 160, 0, 255 };
 static const GXColor mnCharSel_804DC590 = { 180, 80, 0, 255 };
 static const GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
 
-#define MODELS ((CSSSceneModels*) mnCharSel_804D6CB4)
-#define ANIM ((CSSAnimSet*) mnCharSel_804D6CD8)
-
 s32 mnCharSel_802640A0(void)
 {
     HSD_JObj* sp108;
@@ -4276,7 +4279,7 @@ s32 mnCharSel_802640A0(void)
     gobj = mnCharSel_804D6CB8 = GObj_Create(2, 3, 0x80);
     {
         HSD_CObj* cobj;
-        cobj = HSD_CObjLoadDesc(MenMain_cam = MODELS->cam);
+        cobj = HSD_CObjLoadDesc(MenMain_cam = css_data_table->cam);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
@@ -4286,8 +4289,8 @@ s32 mnCharSel_802640A0(void)
 
     gobj = GObj_Create(3, 4, 0x80);
     {
-        HSD_LObj* lobj0 = HSD_LObjLoadDesc(MODELS->light0);
-        HSD_LObj* lobj1 = HSD_LObjLoadDesc(MODELS->light1);
+        HSD_LObj* lobj0 = HSD_LObjLoadDesc(css_data_table->light0);
+        HSD_LObj* lobj1 = HSD_LObjLoadDesc(css_data_table->light1);
         HSD_LObjSetNext(lobj0, lobj1);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj0);
     }
@@ -4295,14 +4298,16 @@ s32 mnCharSel_802640A0(void)
 
     gobj = GObj_Create(0xE, 2, 0);
     {
-        HSD_Fog* fog = HSD_FogLoadDesc(MODELS->fog);
+        HSD_Fog* fog = HSD_FogLoadDesc(css_data_table->fog);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     }
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) (Event) fn_8026407C, 0, 0x80);
 
     gobj = GObj_Create(4, 5, 0x80);
-    jobj = HSD_JObjLoadJoint(ANIM[0].joint);
-    HSD_JObjAddAnimAll(jobj, ANIM[0].anim, ANIM[0].matanim, ANIM[0].shapeanim);
+    jobj = HSD_JObjLoadJoint(css_models->background.joint);
+    HSD_JObjAddAnimAll(jobj, css_models->background.animjoint,
+                       css_models->background.matanim_joint,
+                       css_models->background.shapeanim_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80263354, 4);
@@ -4311,13 +4316,16 @@ s32 mnCharSel_802640A0(void)
 
     mnCharSel_804D6CBC = GObj_Create(4, 5, 0x80);
     if (mnCharSel_804D6CF5 == 1) {
-        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(ANIM[6].joint);
-        HSD_JObjAddAnimAll(mnCharSel_804D6CC0, ANIM[6].anim, ANIM[6].matanim,
-                           ANIM[6].shapeanim);
+        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(css_models->regend_menu.joint);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC0,
+                           css_models->regend_menu.animjoint,
+                           css_models->regend_menu.matanim_joint,
+                           css_models->regend_menu.shapeanim_joint);
     } else {
-        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(ANIM[3].joint);
-        HSD_JObjAddAnimAll(mnCharSel_804D6CC0, ANIM[3].anim, ANIM[3].matanim,
-                           ANIM[3].shapeanim);
+        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(css_models->menu.joint);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC0, css_models->menu.animjoint,
+                           css_models->menu.matanim_joint,
+                           css_models->menu.shapeanim_joint);
     }
     {
         u8 obj_kind = HSD_GObj_JObjKind;
@@ -4401,13 +4409,16 @@ s32 mnCharSel_802640A0(void)
         u8 mt = mnCharSel_804D6CB0->match_type;
         if (mt >= 0xFU && mt <= 0x16U) {
             gobj = GObj_Create(4, 5, 0x80);
-            mnCharSel_804D6CC8 = HSD_JObjLoadJoint(ANIM[7].joint);
+            mnCharSel_804D6CC8 =
+                HSD_JObjLoadJoint(css_models->regend_options.joint);
             HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind,
                                     mnCharSel_804D6CC8);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
             HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
-            HSD_JObjAddAnimAll(mnCharSel_804D6CC8, ANIM[7].anim,
-                               ANIM[7].matanim, ANIM[7].shapeanim);
+            HSD_JObjAddAnimAll(mnCharSel_804D6CC8,
+                               css_models->regend_options.animjoint,
+                               css_models->regend_options.matanim_joint,
+                               css_models->regend_options.shapeanim_joint);
             HSD_JObjReqAnimAll(mnCharSel_804D6CC8, 0.0f);
             HSD_ForeachAnim(mnCharSel_804D6CC8, JOBJ_TYPE, ALL_TYPE_MASK,
                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -4417,12 +4428,13 @@ s32 mnCharSel_802640A0(void)
     if (mnCharSel_804D6CB0->match_type == 0x17) {
         u8 ck;
         gobj = GObj_Create(4, 5, 0x80);
-        mnCharSel_804D6CC4 = HSD_JObjLoadJoint(ANIM[8].joint);
+        mnCharSel_804D6CC4 = HSD_JObjLoadJoint(css_models->door.joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, mnCharSel_804D6CC4);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
         HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
-        HSD_JObjAddAnimAll(mnCharSel_804D6CC4, ANIM[8].anim, ANIM[8].matanim,
-                           ANIM[8].shapeanim);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC4, css_models->door.animjoint,
+                           css_models->door.matanim_joint,
+                           css_models->door.shapeanim_joint);
         HSD_JObjReqAnimAll(mnCharSel_804D6CC4, 0.0f);
         HSD_ForeachAnim(mnCharSel_804D6CC4, JOBJ_TYPE, ALL_TYPE_MASK,
                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -4445,12 +4457,14 @@ s32 mnCharSel_802640A0(void)
 
     if (mnCharSel_804D6CB0->match_type == 1) {
         gobj = GObj_Create(4, 5, 0x80);
-        mnCharSel_804D6CCC = HSD_JObjLoadJoint(ANIM[5].joint);
+        mnCharSel_804D6CCC = HSD_JObjLoadJoint(css_models->debug_camera.joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, mnCharSel_804D6CCC);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_GObj_SetupProc(gobj, fn_8025FAC0, 4);
-        HSD_JObjAddAnimAll(mnCharSel_804D6CCC, ANIM[5].anim, ANIM[5].matanim,
-                           ANIM[5].shapeanim);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CCC,
+                           css_models->debug_camera.animjoint,
+                           css_models->debug_camera.matanim_joint,
+                           css_models->debug_camera.shapeanim_joint);
         HSD_JObjReqAnimAll(mnCharSel_804D6CCC, 0.0f);
     }
 
@@ -4458,14 +4472,15 @@ s32 mnCharSel_802640A0(void)
         HSD_GObj* cursor_gobj;
         struct CSSCursorData* cursor;
         cursor_gobj = GObj_Create(4, 5, 0x80);
-        jobj = HSD_JObjLoadJoint(ANIM[1].joint);
+        jobj = HSD_JObjLoadJoint(css_models->hand.joint);
         cursor = HSD_MemAlloc(sizeof(*cursor));
         HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 3, 0x80);
         HSD_GObj_SetupProc(cursor_gobj, mnCharSel_CursorThink, 1);
         GObj_InitUserData(cursor_gobj, 4, HSD_Free, cursor);
-        HSD_JObjAddAnimAll(jobj, ANIM[1].anim, ANIM[1].matanim,
-                           ANIM[1].shapeanim);
+        HSD_JObjAddAnimAll(jobj, css_models->hand.animjoint,
+                           css_models->hand.matanim_joint,
+                           css_models->hand.shapeanim_joint);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
@@ -4485,7 +4500,7 @@ s32 mnCharSel_802640A0(void)
     for (i = 0, slot = 0; i < num_players; i++, slot++) {
         {
             HSD_GObj* model_gobj = GObj_Create(4, 5, 0x80);
-            jobj = HSD_JObjLoadJoint(ANIM[2].joint);
+            jobj = HSD_JObjLoadJoint(css_models->token.joint);
             {
                 int player;
                 struct CSSCharModel* model = HSD_MemAlloc(sizeof(*model));
@@ -4493,8 +4508,9 @@ s32 mnCharSel_802640A0(void)
                 GObj_InitUserData(model_gobj, 4, HSD_Free, model);
                 GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 2, 0x80);
                 HSD_GObj_SetupProc(model_gobj, fn_80262648, 2);
-                HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
-                                   ANIM[2].shapeanim);
+                HSD_JObjAddAnimAll(jobj, css_models->token.animjoint,
+                                   css_models->token.matanim_joint,
+                                   css_models->token.shapeanim_joint);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 {
                     HSD_JObj* anim_jobj = jobj;
@@ -5187,11 +5203,13 @@ s32 mnCharSel_802640A0(void)
     (void) ((u8*) text)[num_players];
     (void) icons[num_players];
     gobj = GObj_Create(4, 5, 0x80);
-    jobj = HSD_JObjLoadJoint(ANIM[4].joint);
+    jobj = HSD_JObjLoadJoint(css_models->press_start.joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80262F44, 3);
-    HSD_JObjAddAnimAll(jobj, ANIM[4].anim, ANIM[4].matanim, ANIM[4].shapeanim);
+    HSD_JObjAddAnimAll(jobj, css_models->press_start.animjoint,
+                       css_models->press_start.matanim_joint,
+                       css_models->press_start.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
                     AOBJ_ARG_AOV, 0, 0);
@@ -5283,8 +5301,6 @@ s32 mnCharSel_802640A0(void)
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-#undef MODELS
-#undef ANIM
 
 void mnCharSel_Scene_OnEnter(void* arg0)
 {
@@ -5323,9 +5339,9 @@ void mnCharSel_Scene_OnEnter(void* arg0)
         mnCharSel_804D6CD0 = lbArchive_LoadArchive("MnSlChr.usd");
         mnCharSel_804D6CD4 = lbArchive_LoadArchive("MnExtAll.usd");
     }
-    mnCharSel_804D6CB4 = HSD_ArchiveGetPublicAddress(mnCharSel_804D6CD0,
-                                                     "MnSelectChrDataTable");
-    mnCharSel_804D6CD8 = (u8*) mnCharSel_804D6CB4 + 0x10;
+    css_data_table = HSD_ArchiveGetPublicAddress(mnCharSel_804D6CD0,
+                                                 "MnSelectChrDataTable");
+    css_models = &css_data_table->models;
     if (lbLang_IsSavedLanguageJP() != 0) {
         HSD_SisLib_803A62A0(0, "SdSlChr.dat", "SIS_SelCharData");
     } else {
