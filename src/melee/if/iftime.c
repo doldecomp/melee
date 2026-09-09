@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
 #include "ifall.h"
 #include <dolphin/os.h>
 #include <melee/gm/gm_unsplit.h>

@@ -1,5 +1,6 @@
 #include "ifnametag.h"
 
+#include "forward.h"
 #include "ifall.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>

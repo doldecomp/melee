@@ -1,5 +1,7 @@
 #include "mnsound.h"
 
+#include <melee/it/forward.h>
+
 #include "inlines.h"
 #include "mnmain.h"
 #include "types.h"
