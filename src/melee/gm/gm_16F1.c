@@ -333,8 +333,7 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     for (i = 0; i < 6; i++) {
         if (x58[i].x0 != 3) {
             u16 sd = x58[i].xA;
-            scores[i] =
-                x58[i].x20 - (x58[i].x24 - sd) + rules->xC * sd;
+            scores[i] = x58[i].x20 - (x58[i].x24 - sd) + rules->xC * sd;
         }
     }
 
