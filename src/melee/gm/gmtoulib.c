@@ -4,7 +4,6 @@
 #include <melee/pl/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <m2c_macros.h>
 #include <placeholder.h>
 #include <stdio.h>
 #include <string.h>
@@ -1687,10 +1686,10 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 
     cam = lbl_803B7CA8;
 
-    while ((tmp = M2C_FIELD(HSD_GObjPLinkHead, HSD_GObj**, 0x6C)) != NULL) {
+    while ((tmp = HSD_GObjPLinkHead[27]) != NULL) {
         HSD_GObjFree(tmp);
     }
-    while ((tmp = M2C_FIELD(HSD_GObjPLinkHead, HSD_GObj**, 0x50)) != NULL) {
+    while ((tmp = HSD_GObjPLinkHead[20]) != NULL) {
         HSD_GObjFree(tmp);
     }
 
