@@ -1657,14 +1657,15 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
             float x1_sp40;
             float y1_sp3C;
             float dist2;
-            int line_offset;
+            ssize_t line_offset;
         block_8:
             if (cb != NULL && !cb(gobj, line_r26 - groundCollLine)) {
                 continue;
             }
 
-            if (line_id_skip ==
-                (line_offset = (s32) line_r26 - (s32) groundCollLine) / 8)
+            if (line_id_skip == (line_offset = (intptr_t) line_r26 -
+                                               (intptr_t) groundCollLine) /
+                                    (s32) sizeof(CollLine))
             {
                 continue;
             }
@@ -1676,8 +1677,8 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                 continue;
             }
 
-            mpLib_8004ED5C(line_offset / 8, &x0_sp48, &y0_sp44, &x1_sp40,
-                           &y1_sp3C);
+            mpLib_8004ED5C(line_offset / (s32) sizeof(CollLine), &x0_sp48,
+                           &y0_sp44, &x1_sp40, &y1_sp3C);
             y0_sp44 += y_offset;
             y1_sp3C += y_offset;
             if (ABS(y0_sp44 - y1_sp3C) > 0.0001) {
