@@ -2022,7 +2022,7 @@ void fn_8016E730(StartMeleeData* arg0)
     Ground_EnableMatchCamera();
     Camera_8002F3AC();
     fn_801A1134();
-    un_80321900();
+    sfx_setupCrowdSFX();
     if (controller.start.on_unpause_override != NULL) {
         controller.start.on_unpause_override(0);
         Camera_8002F3AC();

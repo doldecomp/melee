@@ -2,15 +2,15 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-void un_80321900(void)
+void sfx_setupCrowdSFX(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObj_SetupProc(gobj, fn_803219AC, 0x13);
-    un_804D7050 = &un_804A2F08;
-    un_80321950(un_804D7050);
+    crowdsfx_ptr = &crowdsfx;
+    sfx_initCrowdSFX(crowdsfx_ptr);
 }
 
-void un_80321950(CrowdSFX_UnkStruct* s)
+void sfx_initCrowdSFX(CrowdSFX_UnkStruct* s)
 {
     s->x0 = 0;
     s->x4 = 0x10000;
