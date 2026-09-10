@@ -22,7 +22,7 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/objalloc.h>
 
-HSD_ObjAllocData lbl_804336A0;
+HSD_ObjAllocData bgflash_alloc_data;
 
 typedef struct BgFlashUserData {
     u8 x0;
@@ -36,7 +36,7 @@ f32 flash_scale;
 
 void lbBgFlash_Free(void* arg0)
 {
-    HSD_ObjFree(&lbl_804336A0, arg0);
+    HSD_ObjFree(&bgflash_alloc_data, arg0);
 }
 
 void lbBgFlash_SetFlashScale(f32 arg8)
@@ -49,10 +49,10 @@ void lbBgFlash_Init(int arg0)
     HSD_GObj* gobj;
     BgFlashUserData* user_data;
 
-    HSD_ObjAllocInit(&lbl_804336A0, sizeof(BgFlashUserData), 4);
+    HSD_ObjAllocInit(&bgflash_alloc_data, sizeof(BgFlashUserData), 4);
     gobj = GObj_Create(0xE, 0xE, 0);
     if (gobj != NULL) {
-        user_data = (BgFlashUserData*) HSD_ObjAlloc(&lbl_804336A0);
+        user_data = (BgFlashUserData*) HSD_ObjAlloc(&bgflash_alloc_data);
         if (user_data != NULL) {
             GObj_InitUserData(gobj, 0xE, lbBgFlash_Free, user_data);
             flash_gobj = gobj;
