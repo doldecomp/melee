@@ -1089,7 +1089,7 @@ void gm_801BC00C(void)
     }
 
     if (idx == 0x24) {
-        lbBgFlash_80021A10(0.2f);
+        lbBgFlash_SetFlashScale(0.2f);
     }
     Camera_SetQuakeScale(ev->x1C);
     HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), event_info[idx]->x0, 0x15);

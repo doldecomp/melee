@@ -2028,7 +2028,7 @@ void fn_8016E730(StartMeleeData* arg0)
         Camera_8002F3AC();
     }
     ifAll_802F390C();
-    lbBgFlash_80021A18(0xFF);
+    lbBgFlash_Init(0xFF);
     if (arg0->rules.on_match_start != NULL) {
         arg0->rules.on_match_start();
     }

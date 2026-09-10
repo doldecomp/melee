@@ -24,39 +24,40 @@
 
 HSD_ObjAllocData lbl_804336A0;
 
-void fn_800219E4(void* arg0)
+typedef struct BgFlashUserData {
+    u8 x0;
+    u8 pad_01[3];
+    ColorOverlay x4;
+} BgFlashUserData;
+
+HSD_GObj* flash_gobj;
+struct Fighter_804D653C_t* lbl_804D63DC;
+f32 flash_scale;
+
+void lbBgFlash_Free(void* arg0)
 {
     HSD_ObjFree(&lbl_804336A0, arg0);
 }
 
-typedef struct {
-    char pad[0x2C];
-    void* x2C;
-} BgFlashGlobal;
-
-BgFlashGlobal* lbl_804D63E0;
-struct Fighter_804D653C_t* lbl_804D63DC;
-f32 lbl_804D63D8;
-
-void lbBgFlash_80021A10(f32 arg8)
+void lbBgFlash_SetFlashScale(f32 arg8)
 {
-    lbl_804D63D8 = arg8;
+    flash_scale = arg8;
 }
 
-void lbBgFlash_80021A18(int arg0)
+void lbBgFlash_Init(int arg0)
 {
     HSD_GObj* gobj;
-    u8* user_data;
+    BgFlashUserData* user_data;
 
-    HSD_ObjAllocInit(&lbl_804336A0, 0x84, 4);
+    HSD_ObjAllocInit(&lbl_804336A0, sizeof(BgFlashUserData), 4);
     gobj = GObj_Create(0xE, 0xE, 0);
     if (gobj != NULL) {
-        user_data = HSD_ObjAlloc(&lbl_804336A0);
+        user_data = (BgFlashUserData*) HSD_ObjAlloc(&lbl_804336A0);
         if (user_data != NULL) {
-            GObj_InitUserData(gobj, 0xE, fn_800219E4, user_data);
-            lbl_804D63E0 = (BgFlashGlobal*) gobj;
-            lbl_804D63D8 = 1.0f;
-            *user_data = (u8) arg0;
+            GObj_InitUserData(gobj, 0xE, lbBgFlash_Free, user_data);
+            flash_gobj = gobj;
+            flash_scale = 1.0f;
+            user_data->x0 = (u8) arg0;
             lbArchive_LoadSymbols("LbBf.dat", &lbl_804D63DC,
                                   "lbBgFlashColAnimData", NULL);
             lbBgFlash_800208EC(6);
@@ -68,19 +69,13 @@ void lbBgFlash_80021A18(int arg0)
     }
 }
 
-typedef struct BgFlashUserData {
-    u8 x0;
-    u8 pad_01[3];
-    ColorOverlay x4;
-} BgFlashUserData;
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 #endif
 void fn_80021B04(HSD_GObj* gobj)
 {
-    BgFlashUserData* data = gobj->user_data;
+    BgFlashUserData* data = (BgFlashUserData*) gobj->user_data;
     int was_active = data->x4.x7C_color_enable;
     GXColor color;
     f32 scale;
@@ -90,7 +85,7 @@ void fn_80021B04(HSD_GObj* gobj)
     fn_80021C80(gobj);
     if (data->x4.x7C_color_enable) {
         u8* bytes = (u8*) &color;
-        scale = lbl_804D63D8;
+        scale = flash_scale;
         bytes[0] = (u8) ((f32) data->x4.x2C_hex.r * scale);
         // This is bytes[1] to bytes[3]
         ((u8*) (&color))[1] = (u8) (((f32) data->x4.x2C_hex.g) * scale);
@@ -111,26 +106,20 @@ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
 void fn_80021C1C(void)
 {
-    HSD_GObj* gobj = (HSD_GObj*) lbl_804D63E0;
-    u8* user_data = gobj->user_data;
-    lb_80014498((ColorOverlay*) (user_data + 4));
+    HSD_GObj* gobj = flash_gobj;
+    BgFlashUserData* user_data = (BgFlashUserData*) gobj->user_data;
+    lb_80014498(&user_data->x4);
 }
 
 void lbBgFlash_80021C48(u32 arg0, u32 arg1)
 {
-    struct {
-        u8 unk0[4];
-        ColorOverlay x4;
-    }* data = lbl_804D63E0->x2C;
+    BgFlashUserData* data = (BgFlashUserData*) flash_gobj->user_data;
     lb_800144C8(&data->x4, lbl_804D63DC, arg0, arg1);
 }
 
 void fn_80021C80(HSD_GObj* gobj)
 {
-    struct {
-        u8 unk0[4];
-        ColorOverlay x4;
-    }* user_data = gobj->user_data;
+    BgFlashUserData* user_data = (BgFlashUserData*) gobj->user_data;
 
     while (lb_80014258(gobj, &user_data->x4, fn_80021C18)) {
         lb_80014498(&user_data->x4);
