@@ -13,7 +13,7 @@
 /* 0219E4 */ void lbBgFlash_Free(void*);
 /* 021A10 */ void lbBgFlash_SetFlashScale(f32);
 /* 021A18 */ void lbBgFlash_Init(int);
-/* 021B04 */ void fn_80021B04(HSD_GObj*);
+/* 021B04 */ void lbBgFlash_Proc(HSD_GObj*);
 /* 021C1C */ void fn_80021C1C(void);
 /* 021C48 */ void lbBgFlash_80021C48(u32, u32);
 /* 021C80 */ void fn_80021C80(HSD_GObj* gobj);

@@ -62,18 +62,14 @@ void lbBgFlash_Init(int arg0)
                                   "lbBgFlashColAnimData", NULL);
             lbBgFlash_800208EC(6);
             fn_80021C1C();
-            HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80021B04, 1);
+            HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) lbBgFlash_Proc, 1);
             return;
         }
         HSD_GObjFree(gobj);
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void fn_80021B04(HSD_GObj* gobj)
+void lbBgFlash_Proc(HSD_GObj* gobj)
 {
     BgFlashUserData* data = (BgFlashUserData*) gobj->user_data;
     int was_active = data->x4.x7C_color_enable;
@@ -98,9 +94,6 @@ void fn_80021B04(HSD_GObj* gobj)
         fn_800208B0(0);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
