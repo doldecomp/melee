@@ -140,7 +140,7 @@ void ft_8007C4BC(Fighter_GObj* gobj)
     if (ftColl_8007B868(gobj) == 2) {
         return;
     }
-    if (fp->x221F_b4) {
+    if (fp->is_sub_fighter) {
         return;
     }
 
@@ -172,7 +172,7 @@ void ft_8007C4BC(Fighter_GObj* gobj)
                     fp1 = GET_FIGHTER(cur);
 
                     if (fp1->x2219_b1 || !fp1->x2227_b2 ||
-                        ftColl_8007B868(cur) == 2 || fp1->x221F_b4 ||
+                        ftColl_8007B868(cur) == 2 || fp1->is_sub_fighter ||
                         (fp1->x221C_b6 && fp1->dmg.x1868_source == gobj))
                     {
                         continue;

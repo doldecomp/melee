@@ -668,15 +668,15 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     temp_r30 = &arg0->cpu;
     if (arg0->kind == Ft_Kind_Nana) {
         temp_r30->xF9_b2 = true;
-        temp_r30->xC = 6;
+        temp_r30->kind = 6;
         temp_r30->x3C = 15.0f;
     } else {
-        temp_r30->xC = arg1;
+        temp_r30->kind = arg1;
         temp_r30->x3C = 40.0f;
     }
     temp_r30->level = arg2;
     temp_r30->x14 = arg3;
-    switch (temp_r30->xC) {
+    switch (temp_r30->kind) {
     case 1:
     case 25:
         temp_r30->x18 = 0xC;
@@ -981,7 +981,7 @@ static void ftCo_800A1CC4(Fighter* fp, ftCo_803C6594_t* var_r29)
     PAD_STACK(0x10);
 
     data = &fp->cpu;
-    if (var_r29 != NULL && data->x60 == 0 && data->xC != 0 &&
+    if (var_r29 != NULL && data->x60 == 0 && data->kind != 0 &&
         fp->ground_or_air != GA_Air && !ftCo_800A21FC(fp))
     {
         mp_UnkStruct0* temp_r3 = mpIsland_8005AB54(fp->coll_data.floor.index);
@@ -1077,12 +1077,12 @@ bool ftCo_800A1F98(int x, float y)
     return false;
 }
 
-bool ftCo_800A2040(Fighter* fp)
+bool ftCo_IsCpuControlled(Fighter* fp)
 {
-    if (Player_8003248C(fp->player_id, fp->x221F_b4) != Gm_PKind_Cpu) {
+    if (Player_8003248C(fp->player_id, fp->is_sub_fighter) != Gm_PKind_Cpu) {
         return false;
     }
-    if (fp->cpu.xC == 5) {
+    if (fp->cpu.kind == 5) {
         return false;
     }
     return true;
@@ -2696,7 +2696,7 @@ Fighter* ftCo_800A53DC(Fighter* fp)
             if (inlineD1(temp_r29)) {
                 continue;
             }
-            if (ftCo_800A2040(temp_r29)) {
+            if (ftCo_IsCpuControlled(temp_r29)) {
                 continue;
             }
 
@@ -5317,17 +5317,17 @@ void ftCo_800AB224(Fighter* fp)
 void ftCo_800ABA34(Fighter* fp)
 {
     struct CpuFighter* data = &fp->cpu;
-    if (data->xC == 11) {
+    if (data->kind == 11) {
         if (fp->item_gobj == NULL) {
             ftCo_800B4880(fp, 38);
             return;
         }
-    } else if (data->xC == 12) {
+    } else if (data->kind == 12) {
         if (data->x7C % 30 == 0) {
             ftCo_800B4880(fp, 38);
             return;
         }
-    } else if (data->xC == 16 && fp->ground_or_air == GA_Ground &&
+    } else if (data->kind == 16 && fp->ground_or_air == GA_Ground &&
                data->x7C % 300 == 0)
     {
         ftCo_800A05F4(fp);
@@ -5708,7 +5708,7 @@ void ftCo_800AC7D4(Fighter* fp)
         ftCo_CpuFinishWithNeutralStick(fp);
         return;
     }
-    temp_r0_2 = data->xC;
+    temp_r0_2 = data->kind;
     if ((temp_r0_2 == 0xF) || (temp_r0_2 == 0)) {
         ftCo_CpuHoldUpForOneFrame(fp);
         return;
@@ -5759,7 +5759,7 @@ void ftCo_800ACB44(Fighter* fp)
         ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
-    if (data->xC == 0xF || data->xC == 0) {
+    if (data->kind == 0xF || data->kind == 0) {
         ftCo_800A0AF4(fp);
         return;
     }
@@ -5805,7 +5805,7 @@ void ftCo_800ACD5C(Fighter* fp)
         data->x8C = gm_8016C75C(fp->gobj);
         return;
     }
-    if (data->xC == 0xB && fp->item_gobj == NULL) {
+    if (data->kind == 0xB && fp->item_gobj == NULL) {
         ftCo_800B4880(fp, 0x26);
         return;
     }
@@ -5962,7 +5962,7 @@ void ftCo_800AD7FC(Fighter* fp)
 
     enemy = data->x44;
     item = GET_ITEM(fp->item_gobj);
-    if (enemy != NULL && data->xC == 0x1D) {
+    if (enemy != NULL && data->kind == 0x1D) {
         if (!ftCo_800A2C08(fp)) {
             ftCo_CpuTurnAround(fp);
         } else {
@@ -6175,7 +6175,7 @@ static bool ftCo_800ADE48(Fighter* fp)
         data->x88 = 0x12C;
         data->x8C = gm_8016C75C(fp->gobj);
     }
-    if (data->xC == 0xE) {
+    if (data->kind == 0xE) {
         if (data->x7C % 120 == 0) {
             if (HSD_Randf() > 0.5) {
                 data->xF8_b5 = true;
@@ -6197,7 +6197,7 @@ static bool ftCo_800ADE48(Fighter* fp)
         data2 = ftCo_800ADE48_inline1(fp);
         if (fp->kind == Ft_Kind_GKoops) {
             switch_cmd = 0;
-        } else if (data2->xC == 0xF || data2->xC == 0) {
+        } else if (data2->kind == 0xF || data2->kind == 0) {
             switch_cmd = 0;
         } else if (!fp->x221A_b3) {
             switch_cmd = 0;
@@ -6395,7 +6395,7 @@ static bool ftCo_800ADE48(Fighter* fp)
             found = 0;
         } else {
             ip = GET_ITEM(item_gobj);
-            if (data2->xC == 0x1D) {
+            if (data2->kind == 0x1D) {
                 found = 1;
             } else {
                 kind = ip->kind;
@@ -8064,10 +8064,10 @@ static inline bool ftCo_800B2AFC_IsIgnoredFloor(int line)
 
 void ftCo_800B2AFC(Fighter* fp)
 {
-    UNUSED u8 pad_high[8];
+    PAD_STACK(8);
 
-    switch (fp->cpu.xC) {
-    case 0: {
+    switch (fp->cpu.kind) {
+    case CpuKind_0: {
         struct CpuFighter* data = &fp->cpu;
         s32 result;
         s32 found;
@@ -8123,7 +8123,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 1: {
+    case CpuKind_1: {
         struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
@@ -8186,10 +8186,10 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 2:
+    case CpuKind_2:
         ftCo_800B04DC(fp);
         return;
-    case 3: {
+    case CpuKind_3: {
         struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
@@ -8245,58 +8245,58 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 6:
+    case CpuKind_Nana:
         ftCo_800B101C(fp);
         return;
-    case 4:
+    case CpuKind_4:
         ftCo_800B24B8(fp);
         return;
-    case 7:
+    case CpuKind_7:
         ftCo_800AF290(fp);
         return;
-    case 8:
+    case CpuKind_8:
         ftCo_800AECF0(fp);
         return;
-    case 9:
+    case CpuKind_9:
         ftCo_800B00F8(fp);
         return;
-    case 10:
+    case CpuKind_10:
         ftCo_800AFC40(fp);
         return;
-    case 11:
+    case CpuKind_11:
         ftCo_800B24B8(fp);
         return;
-    case 12:
+    case CpuKind_12:
         ftCo_800B24B8(fp);
         return;
-    case 13:
+    case CpuKind_13:
         ftCo_800B126C(fp);
         return;
-    case 14:
+    case CpuKind_14:
         ftCo_800B1478(fp);
         return;
-    case 15:
+    case CpuKind_15:
         fp->cpu.x18 = 0;
         return;
-    case 17:
+    case CpuKind_17:
         ftCo_800B17D0(fp);
         return;
-    case 18:
+    case CpuKind_18:
         ftCo_800AF78C(fp);
         return;
-    case 19:
+    case CpuKind_19:
         ftCo_800AFE3C(fp, 0);
         return;
-    case 20:
+    case CpuKind_20:
         ftCo_800AFE3C(fp, 1);
         return;
-    case 21:
+    case CpuKind_21:
         ftCo_800AFE3C(fp, 2);
         return;
-    case 22:
+    case CpuKind_22:
         ftCo_800AFE3C(fp, 3);
         return;
-    case 23: {
+    case CpuKind_23: {
         struct CpuFighter* data = &fp->cpu;
         s32 do_act;
         s32 x18;
@@ -8318,10 +8318,10 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 24:
+    case CpuKind_24:
         ftCo_800B1DA0_noinline2(fp);
         return;
-    case 25: {
+    case CpuKind_25: {
         struct CpuFighter* data = &fp->cpu;
         s32 do_act;
         s32 x18;
@@ -8343,7 +8343,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 26: {
+    case CpuKind_26: {
         struct CpuFighter* data = &fp->cpu;
         s32 found;
         s32 result;
@@ -8399,18 +8399,18 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    case 27:
+    case CpuKind_27:
         ftCo_800B1EF0(fp);
         return;
-    case 28:
+    case CpuKind_28:
         ftCo_800B21C8(fp);
         return;
-    case 29:
+    case CpuKind_29:
         ftCo_800B1AB8(fp);
         return;
     default:
         ftCo_800B24B8(fp);
-        break;
+        return;
     }
 }
 
@@ -8631,7 +8631,7 @@ bool ftCo_800B395C(Fighter_GObj* gobj, int arg1)
 
     fp = GET_FIGHTER(gobj);
     temp_r30 = &fp->cpu;
-    if (Player_8003248C(fp->player_id, fp->x221F_b4) == Gm_PKind_Cpu) {
+    if (Player_8003248C(fp->player_id, fp->is_sub_fighter) == Gm_PKind_Cpu) {
         switch (temp_r30->x18) {
         case 2:
         case 3:

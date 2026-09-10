@@ -56,7 +56,7 @@ void ftCo_800BFD9C(Fighter_GObj* gobj)
             ftCo_800D4F24(pl_gobj, 1);
         }
     }
-    gm_80167320(fp->player_id, fp->x221F_b4);
+    gm_80167320(fp->player_id, fp->is_sub_fighter);
 }
 
 void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}

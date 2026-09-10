@@ -271,7 +271,7 @@ void fn_80181C80(s32 arg0)
     if (data->x54[arg0].x4 > count && data->x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {
             Player_SetFalls(sp38, 0);
-            Player_SetSuicideCount(sp38, 0);
+            Player_SetSelfDestructs(sp38, 0);
             fn_8016EF98(sp38);
         }
         data->x54[arg0].x0 = -2;

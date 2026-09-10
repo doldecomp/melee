@@ -237,7 +237,7 @@ void ft_80087BC0(HSD_GObj* gobj, int arg1)
 void ft_80087BEC(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_800A101C(fp, fp->cpu.xC, arg1, fp->cpu.x14);
+    ftCo_800A101C(fp, fp->cpu.kind, arg1, fp->cpu.x14);
 }
 
 s32 ft_GetFtKindMask(void)

@@ -19,8 +19,8 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_16F1.h>
 #include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmscene.h>
 #include <melee/gm/gmvs.h>
 #include <melee/if/textdraw.h>
 #include <melee/if/textlib.h>

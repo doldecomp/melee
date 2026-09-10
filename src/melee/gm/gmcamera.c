@@ -7,8 +7,8 @@
 #include <placeholder.h>
 
 #include "gm_1601.h"
-#include "gm_1A45.h"
 #include "gmpause.h"
+#include "gmscene.h"
 #include "gmvs.h"
 #include "types.h"
 #include <dolphin/pad.h>

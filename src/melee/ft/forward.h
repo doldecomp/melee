@@ -447,4 +447,38 @@ typedef enum GroundOrAir {
     GA_Air,
 } GroundOrAir;
 
+/// @todo ::ftCo_800B2AFC
+typedef enum CpuKind {
+    CpuKind_0,
+    CpuKind_1,
+    CpuKind_2,
+    CpuKind_3,
+    CpuKind_4,
+    CpuKind_5,
+    CpuKind_Nana,
+    CpuKind_7,
+    CpuKind_8,
+    CpuKind_9,
+    CpuKind_10,
+    CpuKind_11,
+    CpuKind_12,
+    CpuKind_13,
+    CpuKind_14,
+    CpuKind_15,
+    CpuKind_16,
+    CpuKind_17,
+    CpuKind_18,
+    CpuKind_19,
+    CpuKind_20,
+    CpuKind_21,
+    CpuKind_22,
+    CpuKind_23,
+    CpuKind_24,
+    CpuKind_25,
+    CpuKind_26,
+    CpuKind_27,
+    CpuKind_28,
+    CpuKind_29,
+} CpuKind;
+
 #endif

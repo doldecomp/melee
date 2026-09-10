@@ -153,7 +153,7 @@ void ftCo_800C5284(Fighter_GObj* gobj)
     fp->x2338.x = 0;
     fp->x2338.y = 0;
     if (fp->x2330.y != 0) {
-        pl_800403C0(fp->player_id, fp->x221F_b4);
+        pl_800403C0(fp->player_id, fp->is_sub_fighter);
     }
     ft_800880AC(fp);
 }

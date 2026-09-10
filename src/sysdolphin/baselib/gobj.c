@@ -85,7 +85,7 @@ void HSD_GObj_80390CD4(HSD_GObj* gobj)
 }
 
 /// GObj_RunProcs
-void HSD_GObj_80390CFC(void)
+void HSD_GObj_RunProcs(void)
 {
     s32 i;
     HSD_GObjProc* proc;

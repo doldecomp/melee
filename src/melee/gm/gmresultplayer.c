@@ -5,10 +5,10 @@
 #include "forward.h"
 #include "gm_1601.h"
 #include "gm_1798.h"
-#include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
 #include "gmresultplayer.static.h"
+#include "gmscene.h"
 #include "types.h"
 #include <melee/if/ifcoget.h>
 #include <melee/lb/lb_00B0.h>

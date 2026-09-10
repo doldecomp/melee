@@ -13,16 +13,12 @@
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct _StaticPlayer {
-    /// @at{0} @sz{4}
     /// @todo 0x02 In-Game (includes dead). 0x00 Otherwise.
     enum_t player_state;
 
-    /// @at{4} @sz{4}
-    /// @todo External ID.
-    CharacterKind player_character;
+    CharacterKind ckind;
 
-    /// @at{8} @sz{4}
-    Gm_PKind slot_type;
+    Gm_PKind pkind;
 
     /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed
                                 // (Probably Zelda/Sheik only)
@@ -42,14 +38,16 @@ typedef struct _StaticPlayer {
 
     /*0x40*/ f32 facing_direction;
 
-    /*0x44*/ u8 costume_id; // 00 = normal, 01 = red, 02 = blue, 03 = green
-                            // (reflected in icon immediately)
+    /*0x44*/ u8 costume_id; ///< ::CostumeId; max value depends on
+                            ///< ::CostumeListsForeachCharacter and
+                            ///< ::gm_GetNumCostumesForCKind
     /*0x45*/ u8 unk45;
-    /*0x46*/ s8 controller_index;
-    /*0x47*/ u8 team; /// 00 = red, 01 = blue, 02 = green
-    /*0x48*/ u8 player_id;
-    /*0x49*/ u8 cpu_level;
-    /*0x4A*/ u8 cpu_type;
+    /*0x46*/ s8 controller_index; ///< Physical controller port up to
+                                  ///< ::PAD_MAX_CONTROLLERS
+    /*0x47*/ u8 team;             ///< ::TeamColor
+    /*0x48*/ u8 player_id;        ///< Player "slot" up to ::GM_MAX_PLAYERS
+    /*0x49*/ u8 cpu_level;        ///< 1 to 9
+    /*0x4A*/ u8 cpu_type;         ///< ::CpuKind
     /*0x4B*/ u8 handicap;
 
     /*0x4C*/ s8 unk4C;
@@ -82,7 +80,7 @@ typedef struct _StaticPlayer {
     /// @remarks If -1 in zz_0035184, then it's set to MatchInfo->frame_count
     u32 match_frame_count;
 
-    /*0x8C*/ u16 suicide_count;
+    /*0x8C*/ u16 self_destructs;
 
     /*0x8E*/ s8 stocks;
     /*0x8F*/ s8 unk8F;
@@ -247,9 +245,9 @@ s32 Player_GetKOsByPlayerIndex(int slot, int idx);
 void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot);
 u32 Player_GetMatchFrameCount(int slot);
 void Player_UpdateMatchFrameCount(int slot, bool condition);
-u32 Player_GetSuicideCount(int slot);
-void Player_SetSuicideCount(s32 slot, u32 suicide_count);
-void Player_IncSuicideCount(s32 slot, s32 condition);
+u32 Player_GetSelfDestructs(int slot);
+void Player_SetSelfDestructs(s32 slot, u32 self_destructs);
+void Player_IncSelfDestructs(s32 slot, s32 condition);
 bool Player_800353BC(s32 slot);
 bool Player_8003544C(s32 slot, bool condition);
 void Player_SetFlagsBit0(int slot, bool bit0);

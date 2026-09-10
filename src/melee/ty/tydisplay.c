@@ -13,7 +13,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/db/db.h>
-#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmscene.h>
 #include <melee/if/textdraw.h>
 #include <melee/if/textlib.h>
 #include <melee/if/types.h>

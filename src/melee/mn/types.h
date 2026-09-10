@@ -94,11 +94,6 @@ struct Menu_GObj {
 typedef struct HSD_GObj Menu_GObj;
 #endif
 
-/// @todo Might be defined elsewhere
-typedef enum {
-    CpuKind_4 = 4
-} CpuKind;
-
 struct PlayerInitData {
     s8 ckind;     ///< ::CharacterKind
     u8 slot_type; ///< ::Gm_PKind

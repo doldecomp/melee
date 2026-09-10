@@ -34,7 +34,7 @@ void ftCo_800DE3FC(Fighter_GObj* gobj, FtMotionId msid, float anim_speed)
         ftColl_8007B62C(gobj, 2);
     }
     if (thrower_fp->kind != Ft_Kind_Kirby || msid - ftCo_MS_ThrownF > 1U) {
-        pl_80040614(thrower_fp->player_id, thrower_fp->x221F_b4,
+        pl_80040614(thrower_fp->player_id, thrower_fp->is_sub_fighter,
                     fp->grab_timer);
         fp->grab_timer = 0.0f;
     }

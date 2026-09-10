@@ -1,7 +1,6 @@
-#include "gm_1A45.h"
+#include "gmscene.h"
 
 #include "gm_1A36.h"
-#include "gm_1A45.static.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmscdata.h"
@@ -22,6 +21,13 @@
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/sobjlib.h>
+
+/* 479D30 */ static HSD_GObjLibInitDataType gobj_init_data;
+/* 479D58 */ static struct gm_80479D58_t gm_80479D58;
+/* 4D672C */ HSD_GObj* gm_804D672C;
+/* 4D6728 */ UNK_T gm_804D6728;
+/* 4D6724 */ void (*gm_804D6724)(void);
+/* 4D6720 */ struct GameSceneInfo* gm_804D6720;
 
 static u64 gm_803DA888[8] = {
     0, 0x82FFFA, 0, 0x8EFFFA, 0x800FFA, 0x808FFA, 0x800FFA, 0,
@@ -221,13 +227,13 @@ void gm_801A4BD4(void)
     gm_801A4B50(0);
 
     lb_80019880(OSSecondsToTicks(1.0F / GM_FPS));
-    HSD_GObj_803912E0(&gm_80479D48.initdata);
-    gm_80479D48.initdata.gproc_pri_max = 0x18;
+    HSD_GObjSetInitDefaults(&gobj_init_data);
+    gobj_init_data.gproc_pri_max = 0x18;
     HSD_SObjLib_804D7960 =
-        HSD_GObj_803912A8(&gm_80479D48.initdata, &HSD_SObjLib_8040C3A4);
+        HSD_GObj_803912A8(&gobj_init_data, &HSD_SObjLib_8040C3A4);
     HSD_SObjLib_803A44A4();
-    gm_80479D48.initdata.unk_2 = &gm_80479D58.unk_10.unk_28;
-    HSD_GObj_80391304(&gm_80479D48.initdata);
+    gobj_init_data.unk_2 = &gm_80479D58.unk_10.unk_28;
+    HSD_GObjInit(&gobj_init_data);
     hsd_80392474();
     un_802FF78C();
     gm_804D672C = GObj_Create(14, 0, 0);
@@ -338,7 +344,7 @@ void gm_801A4D34(void (*on_frame)(void), UNUSED GameSceneInfo* info)
             if (temp_r25->unk_10.pre_gobj_proc != NULL) {
                 temp_r25->unk_10.pre_gobj_proc();
             }
-            HSD_GObj_80390CFC();
+            HSD_GObj_RunProcs();
             if (temp_r25->unk_0 != -2) {
                 temp_r25->unk_0++;
             }

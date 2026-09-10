@@ -3,8 +3,8 @@
 #include "gm_1601.h"
 #include "gm_1A36.h"
 #include "gm_1A3F.h"
-#include "gm_1A45.h"
 #include "gm_unsplit.h"
+#include "gmscene.h"
 #include <dolphin/pad.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

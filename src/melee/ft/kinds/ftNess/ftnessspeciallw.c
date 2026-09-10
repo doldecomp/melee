@@ -915,9 +915,9 @@ void ftNs_AbsorbThink_DecideAction(
             }
         }
 
-        Player_SetHPByIndex(fp->player_id, fp->x221F_b4,
+        Player_SetHPByIndex(fp->player_id, fp->is_sub_fighter,
                             fp->dmg.x1830_percent);
-        pl_80040B8C(fp->player_id, fp->x221F_b4, heal_amount);
+        pl_80040B8C(fp->player_id, fp->is_sub_fighter, heal_amount);
     }
 
     fp->facing_dir = fp->AbsorbAttr.x1A40_absorbHitDirection;

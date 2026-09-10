@@ -4,8 +4,8 @@
 
 #include "gm_1601.h"
 #include "gm_1A36.h"
-#include "gm_1A45.h"
 #include "gm_unsplit.h"
+#include "gmscene.h"
 #include "types.h"
 #include <dolphin/pad.h>
 #include <melee/gr/stage.h>

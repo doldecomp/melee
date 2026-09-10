@@ -1,9 +1,9 @@
 #include "gm_1A3F.h"
 
 #include "gm_1A36.h"
-#include "gm_1A45.h"
 #include "gmmain_lib.h"
 #include "gmscdata.h"
+#include "gmscene.h"
 #include "types.h"
 #include <dolphin/vi.h>
 #include <melee/db/db.h>

@@ -21,7 +21,7 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmscene.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/types.h>

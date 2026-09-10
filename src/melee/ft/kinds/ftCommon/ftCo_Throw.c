@@ -271,7 +271,7 @@ void ftCo_800DD724(Fighter_GObj* gobj)
         Fighter_GObj* victim = fp->victim_gobj;
         ftCommon_8007E2F4(fp, 0);
         if (victim != NULL) {
-            pl_80040614(fp->player_id, fp->x221F_b4,
+            pl_80040614(fp->player_id, fp->is_sub_fighter,
                         GET_FIGHTER(victim)->grab_timer);
             ftCo_800DE2A8(gobj, victim);
             ftCo_800DE7C0(victim, gobj, fp->motion_id == 222);

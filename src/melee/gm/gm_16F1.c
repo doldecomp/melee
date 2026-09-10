@@ -1158,7 +1158,7 @@ int fn_80171BA4(void* arg0)
     int j;
     int ko_count;
     int falls;
-    u32 suicides;
+    u32 self_destructs;
     int team;
     int result;
     u8* rules;
@@ -1174,7 +1174,7 @@ int fn_80171BA4(void* arg0)
         if (Player_GetPlayerSlotType(player) != Gm_PKind_NA) {
             ko_count = 0;
             falls = Player_GetFalls(player);
-            suicides = Player_GetSuicideCount(player);
+            self_destructs = Player_GetSelfDestructs(player);
             if (rules[6] == 1) {
                 team = Player_GetTeam(player);
                 j = 0;
@@ -1186,7 +1186,8 @@ int fn_80171BA4(void* arg0)
                                     Player_GetKOsByPlayerIndex(player, j);
                             }
                         } else {
-                            suicides += Player_GetKOsByPlayerIndex(player, j);
+                            self_destructs +=
+                                Player_GetKOsByPlayerIndex(player, j);
                             falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
@@ -1199,15 +1200,16 @@ int fn_80171BA4(void* arg0)
                         if (player != j) {
                             ko_count += Player_GetKOsByPlayerIndex(player, j);
                         } else {
-                            suicides += Player_GetKOsByPlayerIndex(player, j);
+                            self_destructs +=
+                                Player_GetKOsByPlayerIndex(player, j);
                             falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
                     j++;
                 } while (j < 6);
             }
-            scores[player] = (ko_count - (falls -= (int) suicides)) +
-                             ((int) suicides * (s8) rules[0xC]);
+            scores[player] = (ko_count - (falls -= (int) self_destructs)) +
+                             ((int) self_destructs * (s8) rules[0xC]);
         }
         player++;
     } while (player < 6);
