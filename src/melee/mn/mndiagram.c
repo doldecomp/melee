@@ -135,23 +135,14 @@ u8 mnDiagram_GetNameByIndex(int idx)
     return mnDiagram_NameDisplayOrder[idx];
 }
 
-/// @brief Checks if a distance stat exceeds 1 mile (display cap).
-/// @details Distance stats are stored in internal game units and converted
-///          for display by dividing by ~30.5 to get feet. When the distance
-///          exceeds these thresholds (~1 mile), the display caps at "1 mi."
-///          instead of showing larger values.
-/// @param distance The distance value in internal game units.
-/// @return true if distance >= 1 mile, false otherwise.
 bool mnDiagram_IsDistanceOverflow(u32 distance)
 {
     if (lbLang_IsSavedLanguageUS() != 0) {
-        /// 160,934 internal units / 30.5 = ~5,276 ft = 1 mile
         if (distance >= 0x274A6) {
             return true;
         }
         return false;
     } else {
-        /// 100,000 internal units / 30.5 = ~3,278 meters
         if (distance >= 0x186A0) {
             return true;
         }
@@ -159,11 +150,6 @@ bool mnDiagram_IsDistanceOverflow(u32 distance)
     }
 }
 
-/// @brief Converts internal distance units to display units.
-/// @details For US locale: Returns feet (or miles if >= 1 mile).
-///          For other locales: Returns centimeters (or km if >= 1km).
-/// @param distance Distance in internal game units.
-/// @return Distance in display units (feet/cm or miles/km).
 u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
 {
     if (lbLang_IsSavedLanguageUS() != 0) {
@@ -381,11 +367,6 @@ static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
     return count;
 }
 
-/// @brief Formats a number with optional decimal places.
-/// @param buf Output buffer for the string.
-/// @param val The value to format (treat last decimal_places digits as
-/// decimal).
-/// @param decimal_places Number of decimal places (0 = integer only).
 void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int decimal_places)
 {
     int i;
@@ -409,9 +390,6 @@ void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int decimal_places)
     buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
-/// @brief Formats seconds as MM:SS string.
-/// @param buf Output buffer for the string.
-/// @param seconds Time in seconds.
 void mnDiagram_FormatTime(char* buf, s32 seconds)
 {
     int i;
@@ -431,9 +409,6 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
     buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
-/// @brief Converts a number to a null-terminated string.
-/// @param buf Output buffer for the string.
-/// @param val The number to convert.
 void mnDiagram_IntToStr(char* buf, u32 val)
 {
     int i;

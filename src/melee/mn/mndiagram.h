@@ -8,8 +8,31 @@
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);
+
+/**
+ * @brief Tests whether a distance is at or above the large-unit threshold.
+ *
+ * The threshold is 160934 when #lbLang_IsSavedLanguageUS is true and 100000
+ * otherwise. Callers use a true result to select SIS entry @c 0x7F instead of
+ * their per-stat unit entry. Despite the name, this is not an arithmetic
+ * overflow check.
+ *
+ * @param[in] distance Accumulated distance, before conversion.
+ */
 /* 23EA54 */ bool mnDiagram_IsDistanceOverflow(u32 distance);
+
+/**
+ * @brief Scales a distance for display with a language-dependent divisor.
+ *
+ * US: @c distance/30.4788 (f64, truncated) below 160934, else
+ * @c distance/160934. Otherwise: @c distance/100 below 100000, else
+ * @c distance/100000. The result is not capped at the threshold: 160933 gives
+ * 5280, 160934 gives 1, and 321868 gives 2. The unit is chosen by the caller.
+ *
+ * @param[in] distance Accumulated distance, before conversion.
+ */
 /* 23EAC4 */ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance);
+
 /* 23EB84 */ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index);
 /* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index);
 /* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode,
@@ -18,9 +41,44 @@
 /* 23EFE4 */ int mnDiagram_GetNameTotalFalls(u8 field_index);
 /* 23F068 */ int mnDiagram_GetFighterTotalKOs(u8 field_index);
 /* 23F0DC */ int mnDiagram_GetFighterTotalFalls(u8 field_index);
-/* 23F14C */ void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int mode);
+
+/**
+ * @brief Writes @p val as NUL-terminated decimal text with its low
+ * @p decimal_places digits after a decimal point.
+ *
+ * Callers pass 0 or 2. With 2, 5 gives "0.05" and 12345 gives "123.45"; with
+ * 0, no decimal point is written. No thousands separators.
+ *
+ * @param[out] buf Must hold the whole result and its NUL.
+ * @param[in] val Value scaled by 10^@p decimal_places.
+ * @param[in] decimal_places Digits after the decimal point.
+ */
+/* 23F14C */ void mnDiagram_FormatDecimalNumber(char* buf, u32 val,
+                                                int decimal_places);
+
+/**
+ * @brief Writes nonnegative @p seconds as "M:SS" with unpadded minutes.
+ *
+ * 59 gives "0:59", 60 gives "1:00", and 600000 gives "10000:00"; minutes are
+ * neither capped nor split into hours. Callers apply their own limits.
+ *
+ * @param[out] buf Must hold the whole result and its NUL.
+ * @param[in] seconds Nonnegative elapsed seconds.
+ */
 /* 23F238 */ void mnDiagram_FormatTime(char* buf, s32 seconds);
+
+/**
+ * @brief Writes @p val as NUL-terminated decimal digits.
+ *
+ * No padding or separators; 0 gives "0". Both callers cap @p val first. This
+ * and #mnDiagram_FormatDecimalNumber use the signed #mn_GetDigitCount and
+ * #mn_GetDigitAt, so the full @c u32 range is not established.
+ *
+ * @param[out] buf Must hold the whole result and its NUL.
+ * @param[in] val Value to format.
+ */
 /* 23F334 */ void mnDiagram_IntToStr(char* buf, u32 val);
+
 /* 23F3A8 */ u8 mnDiagram_GetPrevNameIndex(s32 idx);
 /* 23F400 */ u8 mnDiagram_GetNextNameIndex(s32 idx);
 /* 23F45C */ u8 mnDiagram_GetPrevFighterIndex(s32 idx);
