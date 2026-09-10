@@ -26,8 +26,6 @@ void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
     }
 }
 
-extern HSD_ObjAllocData gobj_alloc_data;
-
 static inline HSD_GObj* gobj_allocate(void)
 {
     return HSD_ObjAlloc(&gobj_alloc_data);

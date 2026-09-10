@@ -4,8 +4,6 @@
 #include "gobj.h"
 #include "objalloc.h"
 
-extern HSD_ObjAllocData gobjproc_alloc_data;
-
 /**
  * Inserts a new GObjProc
  */
