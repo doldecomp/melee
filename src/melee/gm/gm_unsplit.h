@@ -22,7 +22,6 @@
 #include <melee/gm/gm_19EF.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A36.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A3F.h>    // IWYU pragma: export
-#include <melee/gm/gm_1A45.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A7A.h>    // IWYU pragma: export
 #include <melee/gm/gm_1ADD.h>    // IWYU pragma: export
 #include <melee/gm/gm_1AED.h>    // IWYU pragma: export
@@ -30,6 +29,7 @@
 #include <melee/gm/gm_1BFA.h>    // IWYU pragma: export
 #include <melee/gm/gmevent.h>    // IWYU pragma: export
 #include <melee/gm/gmregclear.h> // IWYU pragma: export
+#include <melee/gm/gmscene.h>    // IWYU pragma: export
 #include <melee/gm/gmtoulib.h>   // IWYU pragma: export
 #include <melee/gm/gmvs.h>       // IWYU pragma: export
 

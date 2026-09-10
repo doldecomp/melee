@@ -91,7 +91,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
         lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
         ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], (HitCapsule*) &hit);
     }
-    pl_8003EC30(fp->player_id, fp->x221F_b4, arg3, f);
+    pl_8003EC30(fp->player_id, fp->is_sub_fighter, arg3, f);
 }
 
 void ftCo_800C09B4(Fighter_GObj* gobj)
@@ -201,7 +201,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
 
                 ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], &hit);
             }
-            pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
+            pl_8003EC30(fp->player_id, fp->is_sub_fighter, 1, f);
         }
     }
 }

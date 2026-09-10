@@ -10,9 +10,9 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>
 #include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A45.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmregclear.h>
+#include <melee/gm/gmscene.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>

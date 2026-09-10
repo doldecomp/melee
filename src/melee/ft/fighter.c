@@ -688,7 +688,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->kind = argdata->internal_id;
     fp->player_id = argdata->slot;
 
-    fp->x221F_b4 = argdata->b0;
+    fp->is_sub_fighter = argdata->b0;
 
     fp->x34_scale.x = Player_GetModelScale(fp->player_id);
     fp->x61C = argdata->x5;
@@ -1129,11 +1129,11 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         fp->x213C = -1;
 
         if (fp->x2227_b4 != 0U) {
-            pl_8003FE1C(fp->player_id, fp->x221F_b4);
+            pl_8003FE1C(fp->player_id, fp->is_sub_fighter);
             fp->x2227_b4 = false;
         }
         fp->x2227_b5 = false;
-        pl_80040330(fp->player_id, fp->x221F_b4, fp->x2140);
+        pl_80040330(fp->player_id, fp->is_sub_fighter, fp->x2140);
         fp->x2140 = 0;
         fp->used_tether = false;
         fp->x2180 = 6;
@@ -1592,7 +1592,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (!fp->x221F_b4 && Camera_80031144() == 1.0f) {
+        if (!fp->is_sub_fighter && Camera_80031144() == 1.0f) {
             if (fp->dmg.x1830_percent < p_ftCommonData->x7B0) {
                 if (ifMagnify_802FC998(fp->player_id) &&
                     (Player_GetMoreFlagsBit3(fp->player_id) != 0))
@@ -1615,9 +1615,9 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             if (fp->dmg.x1830_percent > 0.0f) {
                 fp->dmg.x1830_percent--;
                 ft_80088640(fp, 0x7D, 0x7F, 0x40);
-                Player_SetHPByIndex(fp->player_id, fp->x221F_b4,
+                Player_SetHPByIndex(fp->player_id, fp->is_sub_fighter,
                                     fp->dmg.x1830_percent);
-                pl_80040B8C(fp->player_id, fp->x221F_b4, 1);
+                pl_80040B8C(fp->player_id, fp->is_sub_fighter, 1);
             }
 
             if (fp->dmg.x1830_percent <= 0.0f) {
@@ -1686,7 +1686,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             ftColl_800764DC(gobj);
 
             if (!fp->x221C_b6) {
-                pl_800411C4(fp->player_id, fp->x221F_b4);
+                pl_800411C4(fp->player_id, fp->is_sub_fighter);
             }
             ftCo_800DEF38(gobj);
 
@@ -1703,7 +1703,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
 void Fighter_8006ABA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_b3 && ftCo_800A2040(fp)) {
+    if (!fp->x221F_b3 && ftCo_IsCpuControlled(fp)) {
         ftCo_800B3900(gobj);
     }
 }
@@ -1799,7 +1799,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.held_buttons[1] = fp->input.held_buttons[0];
             }
 
-            if (ftCo_800A2040(fp)) {
+            if (ftCo_IsCpuControlled(fp)) {
                 SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
                            ftCo_GetCpuLStickX(fp), ftCo_GetCpuLStickY(fp));
                 if (DbLevel < DbLKind_DebugRom &&
@@ -1869,7 +1869,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.triggers[0] = 0.0f;
             }
 
-            if (ftCo_800A2040(fp)) {
+            if (ftCo_IsCpuControlled(fp)) {
                 fp->input.held_buttons[0] = ftCo_GetCpuButtons(fp);
             } else {
                 fp->input.held_buttons[0] =
@@ -1878,7 +1878,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 
             if (gm_8016B0FC()) {
                 fp->input.triggers[0] = 0.0f;
-                if (ftCo_800A2040(fp)) {
+                if (ftCo_IsCpuControlled(fp)) {
                     fp->input.held_buttons[0] &= HSD_PAD_A | HSD_PAD_XY;
                 } else {
                     fp->input.held_buttons[0] &= HSD_PAD_A;
@@ -2496,7 +2496,7 @@ void Fighter_procMap(Fighter_GObj* gobj)
         }
 
         if (fp->ground_or_air == GA_Ground) {
-            pl_80041280(fp->player_id, fp->x221F_b4);
+            pl_80041280(fp->player_id, fp->is_sub_fighter);
         }
 
         if (DbLevel >= DbLKind_DebugRom) {
@@ -2661,9 +2661,9 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
         if (fp->dmg.x1830_percent > 999.0f) {
             fp->dmg.x1830_percent = 999.0f;
         }
-        Player_SetHPByIndex(fp->player_id, fp->x221F_b4,
+        Player_SetHPByIndex(fp->player_id, fp->is_sub_fighter,
                             fp->dmg.x1830_percent);
-        pl_8003EC9C(fp->player_id, fp->x221F_b4, fp->dmg.x1830_percent,
+        pl_8003EC9C(fp->player_id, fp->is_sub_fighter, fp->dmg.x1830_percent,
                     damage_amount);
         ftCo_800C8C84(fp->gobj);
     }
@@ -2838,7 +2838,7 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
                 fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
                 /// this function is called when shield is broken
                 pl_8003E058(fp->x19BC_shieldDamageTaken3, fp->x221F_b6,
-                            fp->player_id, fp->x221F_b4);
+                            fp->player_id, fp->is_sub_fighter);
             }
         }
 
@@ -3076,10 +3076,11 @@ void Fighter_8006DA4C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_b3) {
-        Player_80032828(fp->player_id, fp->x221F_b4, &fp->cur_pos);
-        Player_SetFacingDirectionConditional(fp->player_id, fp->x221F_b4,
+        Player_80032828(fp->player_id, fp->is_sub_fighter, &fp->cur_pos);
+        Player_SetFacingDirectionConditional(fp->player_id, fp->is_sub_fighter,
                                              fp->facing_dir);
-        pl_8003FAA8(fp->player_id, fp->x221F_b4, &fp->cur_pos, &fp->prev_pos);
+        pl_8003FAA8(fp->player_id, fp->is_sub_fighter, &fp->cur_pos,
+                    &fp->prev_pos);
     }
 }
 
@@ -3111,7 +3112,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_JObjUnref(fp->x2184);
     ftData_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
-    Player_80031FB0(fp->player_id, fp->x221F_b4);
+    Player_80031FB0(fp->player_id, fp->is_sub_fighter);
 
     HSD_ObjFree(&fighter_x59C_alloc_data, fp->x59C);
     HSD_ObjFree(&fighter_x59C_alloc_data, fp->x5A0);

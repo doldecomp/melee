@@ -284,7 +284,7 @@ void fn_800D6F58(Fighter_GObj* gobj, Item_GObj* item_gobj)
     } else {
         part = fp->ft_data->x8->x10;
     }
-    pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
+    pl_8003E854(fp->player_id, fp->is_sub_fighter, item_gobj);
     Item_8026AB54(item_gobj, gobj, part);
     ftpickupitem_8009447C(gobj, item_gobj);
     {

@@ -14,7 +14,7 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmscene.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>

@@ -897,7 +897,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         break;
 
     case 1:
-        sp8 = fp->player_id + fp->x221F_b4;
+        sp8 = fp->player_id + fp->is_sub_fighter;
         fp->x214C = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
             sfx_param2, sp8 + 0x36, -1));
@@ -905,7 +905,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 
     case 2:
         if (!fp->x2225_b6) {
-            sp8 = fp->player_id + fp->x221F_b4;
+            sp8 = fp->player_id + fp->is_sub_fighter;
             fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x1E, -1));
@@ -914,7 +914,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         switch (fp->kind) {
         case Ft_Kind_GameWatch:
         case Ft_Kind_Samus:
-            sp8 = fp->player_id + fp->x221F_b4;
+            sp8 = fp->player_id + fp->is_sub_fighter;
             fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x1E, -1));
@@ -925,21 +925,21 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         break;
 
     case 3:
-        sp8 = fp->player_id + fp->x221F_b4;
+        sp8 = fp->player_id + fp->is_sub_fighter;
         fp->x2150 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
             sfx_param2, sp8 + 0x42, -1));
         break;
 
     case 4:
-        sp8 = fp->player_id + fp->x221F_b4;
+        sp8 = fp->player_id + fp->is_sub_fighter;
         fp->x2154 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
             sfx_param2, sp8 + 0x4E, -1));
         break;
 
     case 5:
-        sp8 = fp->player_id + fp->x221F_b4;
+        sp8 = fp->player_id + fp->is_sub_fighter;
         fp->x2158 = lbAudioAx_800264E4(lbAudioAx_800263E8(
             direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
             sfx_param2, sp8 + 0x5A, -1));
@@ -947,7 +947,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 
     case 6:
         if (!fp->x2225_b6) {
-            sp8 = fp->player_id + fp->x221F_b4;
+            sp8 = fp->player_id + fp->is_sub_fighter;
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));
@@ -959,7 +959,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         switch (fp->kind) {
         case Ft_Kind_GameWatch:
         case Ft_Kind_Samus:
-            sp8 = fp->player_id + fp->x221F_b4;
+            sp8 = fp->player_id + fp->is_sub_fighter;
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));

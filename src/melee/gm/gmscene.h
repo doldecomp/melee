@@ -4,6 +4,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/gm/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 1A45E8 */ bool gm_GetDbPauseFlag(int bit);
 /* 1A4624 */ int gm_801A4624(void);

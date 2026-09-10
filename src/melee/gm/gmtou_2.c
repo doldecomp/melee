@@ -7,8 +7,8 @@
 
 #include "gm_1601.h"
 #include "gm_1A3F.h"
-#include "gm_1A45.h"
 #include "gmmain_lib.h"
+#include "gmscene.h"
 #include "gmtoulib.h"
 #include "types.h"
 #include <dolphin/os.h>

@@ -171,4 +171,19 @@ typedef enum Pl_ItemLog {
     /* 0x27 */ Pl_ItemLog_Terminate = 39,
 } Pl_ItemLog;
 
+typedef enum {
+    TeamColor_Red,
+    TeamColor_Blue,
+    TeamColor_Green,
+} TeamColor;
+
+typedef enum {
+    CostumeId_Normal,
+    CostumeId_Red,
+    CostumeId_Blue,
+    CostumeId_Green,
+    CostumeId_Extra1,
+    CostumeId_Extra2,
+} CostumeId;
+
 #endif

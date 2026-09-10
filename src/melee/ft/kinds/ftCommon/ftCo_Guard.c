@@ -421,7 +421,7 @@ bool ftCo_800925A4(HSD_GObj* gobj)
             fp->shield_health = 0;
             fp->x221A_b7 = false;
             fp->x221B_b0 = false;
-            pl_8003E0E8(fp->player_id, fp->x221F_b4);
+            pl_8003E0E8(fp->player_id, fp->is_sub_fighter);
             ftCo_80098B20(gobj);
             ft_PlaySFX(fp, 129, 127, 64);
             return true;
@@ -570,7 +570,7 @@ void ftCo_80092BCC(Fighter_GObj* gobj)
 void ftCo_80092BE8(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    pl_8003E114(fp->player_id, fp->x221F_b4, fp->shield_health);
+    pl_8003E114(fp->player_id, fp->is_sub_fighter, fp->shield_health);
     switch (fp->kind) {
     case Ft_Kind_Yoshi:
         ftYs_Shield_8012C49C(gobj);
@@ -767,7 +767,7 @@ static inline void ftCo_80092C54_inline(Fighter_GObj* gobj)
 static inline void ftCo_80092BE8_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    pl_8003E114(fp->player_id, fp->x221F_b4, fp->shield_health);
+    pl_8003E114(fp->player_id, fp->is_sub_fighter, fp->shield_health);
     switch (fp->kind) {
     case Ft_Kind_Yoshi:
         ftYs_Shield_8012C49C(gobj);

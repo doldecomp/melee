@@ -94,7 +94,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     pickup = ftpickupitem_800942A0_inline(fp);
     offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
                                              : &pickup->air_light_offset;
-    if (ftCo_800A2040(fp) && (signed) fp->cpu.xC == 28) {
+    if (ftCo_IsCpuControlled(fp) && (signed) fp->cpu.kind == 28) {
         return NULL;
     }
     {
@@ -257,12 +257,12 @@ void ftpickupitem_80094818(Fighter_GObj* gobj, bool arg1)
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
     if (fp->x1978 != NULL) {
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
+        pl_8003E17C(fp->player_id, fp->is_sub_fighter, fp->x1978);
     } else if (fp->item_gobj != NULL) {
         if (ftData_OnItemPickupExt[fp->kind] != NULL) {
             ftData_OnItemPickupExt[fp->kind](gobj, arg1);
         }
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
+        pl_8003E17C(fp->player_id, fp->is_sub_fighter, fp->item_gobj);
     }
 }
 
@@ -287,7 +287,7 @@ void ftpickupitem_800948A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
         } else {
             ret_part = fp->ft_data->x8->x11;
         }
-        pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
+        pl_8003E854(fp->player_id, fp->is_sub_fighter, item_gobj);
         Item_8026AB54(item_gobj, gobj, ret_part);
         if (itIsHeavy(item_gobj) == 1) {
             ft_800881D8(fp, fp->ft_data->x4C_sfx->x2C, 127, 64);

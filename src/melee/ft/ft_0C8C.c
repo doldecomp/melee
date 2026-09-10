@@ -27,7 +27,7 @@ bool ftCo_800C8C84(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x2224_b2 && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
-        Player_GetRemainingHPByIndex(fp->player_id, fp->x221F_b4) == 0)
+        Player_GetRemainingHPByIndex(fp->player_id, fp->is_sub_fighter) == 0)
     {
         fn_800C8E74(gobj);
         return true;
@@ -46,7 +46,7 @@ static inline void fn_800C8_inline(Fighter_GObj* gobj)
     fn_800C8E40(fp, ft_sfx);
     fp->x2225_b6 = true;
     lbBgFlash_80021C48(0xEU, 0U);
-    gm_80167470(fp->player_id, fp->x221F_b4);
+    gm_80167470(fp->player_id, fp->is_sub_fighter);
 }
 
 void ftCo_800C8D00(Fighter_GObj* gobj)
@@ -104,7 +104,7 @@ void fn_800C8E74(Fighter_GObj* gobj)
         } else {
             ftCh_GrabUnk1_8015ADD0(gobj);
         }
-        gm_80167470(fp->player_id, fp->x221F_b4);
+        gm_80167470(fp->player_id, fp->is_sub_fighter);
         return;
     }
 

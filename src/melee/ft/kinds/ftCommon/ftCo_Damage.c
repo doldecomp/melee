@@ -288,7 +288,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     PAD_STACK(0x28);
     Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp);
     fp->dmg.x18d8.kb_applied1 = kb_applied;
-    pl_80040270(fp->player_id, fp->x221F_b4, kb_applied);
+    pl_80040270(fp->player_id, fp->is_sub_fighter, kb_applied);
     scaled_kb_154 = kb_applied * p_ftCommonData->x154;
     fp->mv.co.damage.x0 = (int) scaled_kb_154;
     if (!fp->mv.co.damage.x0) {
@@ -583,7 +583,7 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
         fp->cur_pos.y += scaled_lstick_y;
         fp->x670_timer_lstick_tilt_x = 254;
         fp->x671_timer_lstick_tilt_y = 254;
-        pl_800401F0(fp->player_id, fp->x221F_b4, scaled_lstick_x,
+        pl_800401F0(fp->player_id, fp->is_sub_fighter, scaled_lstick_x,
                     scaled_lstick_y);
     }
 }
@@ -645,7 +645,7 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
         }
         fp->cur_pos.x += x;
         fp->cur_pos.y += y;
-        pl_800401F0(fp->player_id, fp->x221F_b4, x, y);
+        pl_800401F0(fp->player_id, fp->is_sub_fighter, x, y);
     }
     if (fp->mv.co.damage.x4) {
         fp->mv.co.damage.x4 = false;

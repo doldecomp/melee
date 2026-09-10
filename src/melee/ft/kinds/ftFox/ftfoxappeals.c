@@ -57,7 +57,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);
-            pl_80040120(fp->player_id, fp->x221F_b4);
+            pl_80040120(fp->player_id, fp->is_sub_fighter);
             return true;
         }
     }

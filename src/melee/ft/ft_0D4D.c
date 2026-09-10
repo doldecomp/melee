@@ -54,7 +54,7 @@ void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj)
 
 void ftCo_800D4E50(Fighter* fp, Vec3* arg1, int arg2, float arg8)
 {
-    if (gm_8016B0B4() && !fp->x221F_b4) {
+    if (gm_8016B0B4() && !fp->is_sub_fighter) {
         int coins = Player_GetCoins(fp->player_id);
         int var_r31 = coins / 2;
         Player_SetCoins(fp->player_id, coins - var_r31);
@@ -134,7 +134,7 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     fp->x221D_b5 = 1;
     ftCo_800BFFD0(fp, 0xA, 0);
 
-    if (!fp->x221F_b4) {
+    if (!fp->is_sub_fighter) {
         ftCommon_SetAccessory(fp, ((void**) Fighter_804D6534)[0]);
         {
             f32 s = fp->x34_scale.y * fp->co_attrs.respawn_platform_scale;
@@ -179,7 +179,7 @@ void ftCo_Rebirth_Phys(Fighter_GObj* gobj)
     Vec3 stage_pos;
     Fighter* fp = gobj->user_data;
     new_var = fp;
-    if (!new_var->x221F_b4) {
+    if (!new_var->is_sub_fighter) {
         if (new_var->smash_attrs.x2135 != -1) {
             Stage_80224E38(&stage_pos, new_var->smash_attrs.x2135);
             Player_GetSomePos(new_var->player_id, &player_pos);
@@ -262,7 +262,7 @@ void ftCo_800D5600(Fighter_GObj* gobj)
     fp->x2219_b1 = 1;
     fp->x221E_b1 = 1;
     fp->x221D_b5 = 1;
-    if (!fp->x221F_b4) {
+    if (!fp->is_sub_fighter) {
         fp->accessory1_cb = fn_800D54A4;
     } else {
         fp->accessory1_cb = fn_800D55B4;
@@ -289,7 +289,7 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
     s32 var_r30 = 0;
     Fighter* fp = gobj->user_data;
 
-    if (!fp->x221F_b4) {
+    if (!fp->is_sub_fighter) {
         HSD_GObj* companion = Player_GetEntityAtIndex(fp->player_id, 1);
         if (companion != NULL &&
             !((Fighter*) companion->user_data)->x221F_b3 &&
@@ -320,7 +320,7 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
     }
 
     ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
-    pl_80040374(fp->player_id, fp->x221F_b4);
+    pl_80040374(fp->player_id, fp->is_sub_fighter);
 }
 
 void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
@@ -333,7 +333,7 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     new_var = fp;
 
-    if (!new_var->x221F_b4) {
+    if (!new_var->is_sub_fighter) {
         if (new_var->smash_attrs.x2135 != -1) {
             Stage_80224E38(&sp18, new_var->smash_attrs.x2135);
             Player_GetSomePos(new_var->player_id, &sp24);

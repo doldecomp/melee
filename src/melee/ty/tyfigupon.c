@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmscene.h>
 #include <melee/if/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>

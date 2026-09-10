@@ -50,7 +50,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     Item_8026ABD8(fp->item_gobj, &pos, 1);
     ftCo_Fall_Enter(gobj);
     ftCo_800C544C(fp);
-    pl_8003FDF4(fp->player_id, fp->x221F_b4);
+    pl_8003FDF4(fp->player_id, fp->is_sub_fighter);
 }
 
 bool ftCo_800C5DDC(Fighter_GObj* gobj)
