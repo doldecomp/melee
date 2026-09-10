@@ -10,12 +10,12 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-/* 4A2F08 */ CrowdSFX_UnkStruct un_804A2F08;
-/* 4D7050 */ CrowdSFX_UnkStruct* un_804D7050;
+/* 4A2F08 */ CrowdSFX_UnkStruct crowdsfx;
+/* 4D7050 */ CrowdSFX_UnkStruct* crowdsfx_ptr;
 
 void fn_803219AC(HSD_GObj* gobj)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     if (data->x4 < 0x10000) {
         data->x4 = data->x4 + 1;
     }
@@ -26,7 +26,7 @@ void fn_803219AC(HSD_GObj* gobj)
 void un_80321A00(HSD_GObj* gobj)
 {
     s32 zero;
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     CrowdConfig* vdata = gCrowdConfig;
 
     if (data->x18 >= vdata->max_gasp_count) {
@@ -66,7 +66,7 @@ void un_80321AF4(HSD_GObj* gobj)
 {
     mpCollisionBox* box = mpLib_80458868;
     HSD_GObj* cur;
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     s32 old_x24 = data->x24;
     s32 flag = 0;
     Vec3 pos;
@@ -105,13 +105,13 @@ void un_80321AF4(HSD_GObj* gobj)
 
 void un_80321BF8(int arg0)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     data->x2C = lbAudioAx_800240B4(arg0);
 }
 
 void un_80321C28(void)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     if (lbAudioAx_80023710(data->x2C) != 0) {
         lbAudioAx_800236B8(data->x2C);
     }
@@ -122,7 +122,7 @@ static void un_80321C70_inline(void)
 {
     CrowdSFX_UnkStruct* data;
 
-    data = un_804D7050;
+    data = crowdsfx_ptr;
 
     if (data->x18 >= gCrowdConfig->max_gasp_count ||
         data->x18 < gCrowdConfig->x24)
@@ -140,7 +140,7 @@ void un_80321C70(void)
 {
     CrowdSFX_UnkStruct* data;
 
-    data = un_804D7050;
+    data = crowdsfx_ptr;
 
     if (data->x18 >= gCrowdConfig->max_gasp_count ||
         data->x18 < gCrowdConfig->x24)
@@ -152,7 +152,7 @@ void un_80321C70(void)
 
 void un_80321CA4(s32 arg)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     un_80321CE8();
     data->x28 = lbAudioAx_8002411C(arg);
 }
@@ -162,7 +162,7 @@ void un_80321CA4(s32 arg)
 
 void un_80321CE8(void)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     if (lbAudioAx_80023710(data->x28) != 0) {
         lbAudioAx_800236B8(data->x28);
     }
@@ -171,7 +171,7 @@ void un_80321CE8(void)
 
 static void un_80321CE8_caller(u32 arg0)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     if (lbAudioAx_80023710(data->x28) != 0) {
         lbAudioAx_800236B8(data->x28);
     }
@@ -184,7 +184,7 @@ void un_80321D30(u32 arg0, f32 arg1)
     s32 cat;
     CrowdSFX_UnkStruct* data;
 
-    data = un_804D7050;
+    data = crowdsfx_ptr;
     cat = un_80322298(arg1);
     if (cat >= 2) {
         if (un_80321EBC(arg0, arg1) != 0) {
@@ -222,7 +222,7 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     HSD_GObj* gobj;
     u32 arg0_copy = arg0;
 
-    data = un_804D7050;
+    data = crowdsfx_ptr;
     gobj = ftLib_8008741C(arg0_copy);
     if (gobj == NULL) {
         goto skip;
@@ -250,7 +250,7 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     }
 
     {
-        CrowdSFX_UnkStruct* data2 = un_804D7050;
+        CrowdSFX_UnkStruct* data2 = crowdsfx_ptr;
         s32 sfx;
         if (lbAudioAx_80023710(data2->x2C) != 0) {
             lbAudioAx_800236B8(data2->x2C);
@@ -261,7 +261,7 @@ bool un_80321EBC(u32 arg0, f32 arg1)
         } else {
             sfx = 0x141;
         }
-        data2 = un_804D7050;
+        data2 = crowdsfx_ptr;
         data2->x2C = lbAudioAx_800240B4(sfx);
     }
 
@@ -276,7 +276,7 @@ bool un_80321EBC(u32 arg0, f32 arg1)
 
 bool un_8032201C(u32 arg0, s32 cat)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     HSD_GObj* gobj;
     PAD_STACK(16);
 
@@ -326,7 +326,7 @@ void un_80322178(int arg)
     case 0:
         break;
     case 3:
-        data = un_804D7050;
+        data = crowdsfx_ptr;
         if (lbAudioAx_80023710(data->x28) != 0) {
             lbAudioAx_800236B8(data->x28);
         }
@@ -334,7 +334,7 @@ void un_80322178(int arg)
         data->x28 = lbAudioAx_8002411C(0x13d);
         break;
     case 2:
-        data = un_804D7050;
+        data = crowdsfx_ptr;
         if (lbAudioAx_80023710(data->x28) != 0) {
             lbAudioAx_800236B8(data->x28);
         }
@@ -342,7 +342,7 @@ void un_80322178(int arg)
         data->x28 = lbAudioAx_8002411C(0x13e);
         break;
     case 1:
-        data = un_804D7050;
+        data = crowdsfx_ptr;
         if (lbAudioAx_80023710(data->x28) != 0) {
             lbAudioAx_800236B8(data->x28);
         }
@@ -397,7 +397,7 @@ f32 un_803222EC(f32 arg1, f32 arg2)
 
 void un_80322314(void)
 {
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     CrowdConfig* vdata = gCrowdConfig;
     if (data->x18 >= vdata->max_gasp_count) {
         return;
@@ -409,7 +409,7 @@ void un_80322314(void)
 void un_8032233C(u32 arg0, u32 arg1)
 {
     s32 cat;
-    CrowdSFX_UnkStruct* data = un_804D7050;
+    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
     HSD_GObj* gobj;
     f32 kb_mag;
     PAD_STACK(8);
