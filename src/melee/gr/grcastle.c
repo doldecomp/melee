@@ -152,7 +152,7 @@ struct grCastle_YakumonoParam {
     /* 0x05A */ u8 pad_x5A[2];
     /* 0x05C */ grCastleParams_Entry entries[9];
     /* 0x110 */ f32 x110;
-    /* 0x114 */ s32 x114;
+    /* 0x114 */ void* x114;
     /* 0x118 */ f32 x118;
     /* 0x11C */ f32 x11C;
     /* 0x120 */ f32 x120;

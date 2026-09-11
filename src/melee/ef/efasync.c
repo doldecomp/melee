@@ -1122,8 +1122,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     while (efLib_AnimCount != 0) {
         count = efLib_AnimCount - 1;
         efLib_AnimCount = count;
-        HSD_JObjAnimAll(
-            ((EF_ParamEntry*) (((u32*) efLib_AnimQueue) + count))->gobj);
+        HSD_JObjAnimAll(((HSD_JObj**) efLib_AnimQueue)[count]);
     }
 #if 1
 #else

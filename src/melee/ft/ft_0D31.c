@@ -30,7 +30,7 @@ const Quaternion lbl_803B7500 = { 0, 3.1415927f, 0, 0 };
 bool ftCo_800D3158(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int* temp_r29 = &p_ftCommonData->x520;
+    FallCommon* temp_r29 = &p_ftCommonData->fall_common;
 
     if (fp->x222A_b1 || fp->x2228_b5 || fp->is_sandbag) {
         return false;
@@ -57,7 +57,7 @@ bool ftCo_800D3158(Fighter_GObj* gobj)
             ftCo_800D3E40(gobj);
         } else {
             int temp_r28 = HSD_Randi(100) + 1;
-            if (!Camera_8003010C() && *temp_r29 >= temp_r28) {
+            if (!Camera_8003010C() && temp_r29->x520 >= temp_r28) {
                 if (fp->motion_id == ftCo_MS_DamageIce) {
                     ftCo_800D47B8(gobj);
                 } else {
@@ -706,19 +706,19 @@ void ftCo_800D4580(Fighter_GObj* gobj, int arg1)
     u8 _[20];
     Fighter* fp;
     Fighter_GObj* new_var;
-    int* datattrs;
+    FallCommon* datattrs;
     HSD_JObj* jobj;
     Fighter* fp2;
 
     new_var = gobj;
     fp = new_var->user_data;
-    datattrs = &p_ftCommonData->x520;
+    datattrs = &p_ftCommonData->fall_common;
 
     ftCo_800D331C(gobj);
 
-    fp->mv.co.unk_deadup.x40 = datattrs[1];
+    fp->mv.co.unk_deadup.x40 = datattrs->x524;
     fp->mv.co.unk_deadup.x44 = 0;
-    fp->mv.co.unk_deadup.x50 = *(Vec3*) &datattrs[6];
+    fp->mv.co.unk_deadup.x50 = datattrs->x538;
     fp->mv.co.common.x24 = 0.0f;
     fp->mv.co.common.x20 = 0.0f;
     fp->mv.co.common.x1C = 0.0f;
@@ -814,14 +814,14 @@ void ftCo_800D481C(Fighter_GObj* gobj, s32 arg1)
 void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32* data = (s32*) &p_ftCommonData->x520;
+    FallCommon* data = &p_ftCommonData->fall_common;
     u8 _[8];
 
     switch (fp->mv.co.unk_deadup.x44) {
     case 1:
         fp->mv.co.walk.middle_anim_frame += fp->mv.co.walk.slow_anim_frame;
         if (fp->mv.co.unk_deadup.x68 != 0) {
-            f32 rot_speed = *(f32*) (data + 16);
+            f32 rot_speed = data->x560_radians;
             HSD_JObj* jobj =
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
             HSD_JObjAddRotationX(jobj, rot_speed);
@@ -835,9 +835,9 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
     if (fp->mv.co.unk_deadup.x40 == 0) {
         switch (fp->mv.co.unk_deadup.x44) {
         case 0:
-            fp->mv.co.walk.slow_anim_frame = 1.0f / (f32) data[2];
+            fp->mv.co.walk.slow_anim_frame = 1.0f / (f32) data->x528;
             fp->mv.co.walk.middle_anim_frame = fp->mv.co.walk.slow_anim_frame;
-            fp->mv.co.unk_deadup.x40 = data[2];
+            fp->mv.co.unk_deadup.x40 = data->x528;
             fp->mv.co.unk_deadup.x44 = 1;
             return;
         case 1:
@@ -850,13 +850,13 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
             } else {
                 ftCo_800D481C(gobj, 7);
             }
-            fp->mv.co.unk_deadup.x40 = data[3];
+            fp->mv.co.unk_deadup.x40 = data->x52C;
             fp->mv.co.unk_deadup.x44 = 2;
             return;
         case 2:
-            fp->self_vel.y = *(f32*) (data + 12);
-            fp->self_vel.z = *(f32*) (data + 15);
-            fp->mv.co.unk_deadup.x40 = data[4];
+            fp->self_vel.y = data->x550;
+            fp->self_vel.z = data->x55C;
+            fp->mv.co.unk_deadup.x40 = data->x530;
             fp->mv.co.unk_deadup.x44 = 3;
             return;
         case 3:
@@ -872,7 +872,7 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
             ft_8008805C(fp, 0x61);
             ftCommon_8007EBAC(fp, 0xD, 0);
             Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
-            fp->mv.co.unk_deadup.x40 = data[5];
+            fp->mv.co.unk_deadup.x40 = data->x534;
             fp->mv.co.unk_deadup.x44 = 4;
             return;
         case 4:
@@ -885,7 +885,7 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
 void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u8* ca = (u8*) p_ftCommonData + 0x520;
+    FallCommon* ca = &p_ftCommonData->fall_common;
 
     switch (fp->mv.co.unk_deadup.x44) {
     case 1:
@@ -894,11 +894,11 @@ void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
                 break;
             }
         }
-        lbVector_Lerp((Vec3*) (ca + 0x18), (Vec3*) (ca + 0x24),
-                      &fp->mv.co.unk_deadup.x50, fp->mv.co.unk_deadup.x4C);
+        lbVector_Lerp(&ca->x538, &ca->x544, &fp->mv.co.unk_deadup.x50,
+                      fp->mv.co.unk_deadup.x4C);
         break;
     case 3:
-        ftCommon_Fall(fp, *(float*) (ca + 0x34), *(float*) (ca + 0x38));
+        ftCommon_Fall(fp, ca->x554, ca->x558);
         lbVector_Add(&fp->mv.co.unk_deadup.x5C, &fp->self_vel);
         if (fp->x2222_b6) {
             if (!ftAnim_80070FD0(fp)) {

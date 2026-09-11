@@ -98,7 +98,7 @@
 /* 17FE54 */ void fn_8017FE54(HSD_GObj* gobj);
 /* 17FF1C */ void fn_8017FF1C(HSD_GObj* gobj);
 /* 1803FC */ s32 fn_801803FC(void* arg0);
-/* 180630 */ void fn_80180630(int, int, int, bool, lbl_8046B6A0_24C_t*);
+/* 180630 */ void fn_80180630(int, int, int, bool, MatchEnd*);
 /* 180AC0 */ int fn_80180AC0(void);
 /* 180AE4 */ s32 gm_80180AE4(void);
 /* 180AF4 */ Fighter_GObj* gm_80180AF4(void);

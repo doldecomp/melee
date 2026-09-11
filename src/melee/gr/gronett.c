@@ -954,7 +954,7 @@ DynamicModelDesc* grOnett_801E56FC(void)
     HSD_ASSERT(1319, archive);
     dat = archive->unk4;
     if (dat != NULL) {
-        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x34);
+        return (DynamicModelDesc*) &dat->unk8[1];
     }
     return NULL;
 }

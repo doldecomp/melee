@@ -145,13 +145,13 @@
 /* 1654A0 */ s32 fn_801654A0(MatchEnd*);
 /* 165548 */ s32 fn_80165548(MatchEnd*, s32, s32);
 /* 1656A8 */ u32 fn_801656A8(MatchEnd*, u32);
-/* 16588C */ s32 fn_8016588C(lbl_8046B6A0_24C_t*, s32);
+/* 16588C */ s32 fn_8016588C(MatchEnd*, s32);
 /* 165AC0 */ s32 fn_80165AC0(MatchEnd*);
 /* 165D60 */ MatchEnd* fn_80165D60(MatchEnd*);
 /* 165E7C */ void fn_80165E7C(MatchEnd*);
 /* 165FA4 */ s32 fn_80165FA4(MatchEnd*);
 /* 1661E0 */ s32 fn_801661E0(MatchEnd*);
-/* 166378 */ void gm_80166378(struct lbl_8046B6A0_24C_t*);
+/* 166378 */ void gm_80166378(MatchEnd*);
 /* 166A98 */ s32 gm_80166A98(MatchEnd*, u8, s8, u8, s8, u8, s8, u8, u8, u8);
 /* 166CBC */ u32 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);

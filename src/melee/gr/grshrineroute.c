@@ -29,10 +29,10 @@
 #include <sysdolphin/baselib/random.h>
 
 struct grShrineRoute_YakumonoParam {
-    int x0;
-    int x4;
-    int x8;
-    int xC;
+    void* x0;
+    void* x4;
+    void* x8;
+    void* xC;
     int x10;
     f32 x14;
     f32 x18;

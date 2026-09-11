@@ -1176,15 +1176,15 @@ gm_803DF94C_t* gm_803DF94C[] = {
 
 int gm_801BC488(void)
 {
-    lbl_8046B6A0_24C_t* tmp = gm_8016B774();
-    lbl_8046B6A0_24C_t spC;
+    MatchEnd* tmp = gm_8016B774();
+    MatchEnd spC;
     PAD_STACK(4);
 
     spC = *tmp;
 
     gm_80166378(&spC);
-    if (spC.xE == 1) {
-        return spC.x16;
+    if (spC.n_team_winners == 1) {
+        return spC.team_winners[0];
     }
     return 4;
 }

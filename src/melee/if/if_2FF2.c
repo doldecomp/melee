@@ -125,7 +125,7 @@ void fn_802FF218(HSD_GObj* arg0)
             int s;
             int tmp;
             gm_8016B774();
-            s = gm_8016C658(y);
+            s = gm_GetMatchEndPlayerScore(y);
             if (s > 9999) {
                 s = 9999;
             }
@@ -163,7 +163,7 @@ void un_802FF364(int slot)
     thing->x4->default_alignment = 1;
     thing->x4->default_kerning = 1;
     gm_8016B774();
-    s = gm_8016C658(slot);
+    s = gm_GetMatchEndPlayerScore(slot);
     if (s > 9999) {
         s = 9999;
     }

@@ -49,6 +49,23 @@ struct FighterPartsTable {
     u32 parts_num;
 };
 
+typedef struct FallCommon {
+    /* +520 */ int x520;
+    /* +524 */ int x524;
+    /* +528 */ int x528;
+    /* +52C */ int x52C;
+    /* +530 */ int x530;
+    /* +534 */ int x534;
+    /* +538 */ Vec3 x538;
+    /* +544 */ Vec3 x544;
+    /* +550 */ float x550;
+    /* +554 */ float x554;
+    /* +558 */ float x558;
+    /* +55C */ float x55C;
+    /* +560 */ float x560_radians;
+    /* +564 */ float x564;
+} FallCommon;
+
 /// @todo Determine size and add remaining members.
 struct ftCommonData {
     /*   +0 */ float horizontal_stick_deadzone;
@@ -170,7 +187,7 @@ struct ftCommonData {
     /* +1D0 */ float x1D0;
     /* +1D4 */ float x1D4;
     /* +1D8 */ float x1D8;
-    /* +1DC */ UNK_T x1DC;
+    /* +1DC */ int x1DC;
     /* +1E0 */ float x1E0;
     /* +1E4 */ float x1E4;
     /* +1E8 */ float x1E8_radians;
@@ -195,7 +212,7 @@ struct ftCommonData {
     /* +230 */ float x230;
     /* +234 */ float x234_radians;
     /* +238 */ float x238_radians;
-    /* +23C */ UNK_T x23C;
+    /* +23C */ int x23C;
     /* +240 */ float x240;
     /* +244 */ float x244;
     /* +248 */ float x248;
@@ -209,7 +226,7 @@ struct ftCommonData {
     /* +268 */ float x268;
     /* +26C */ float x26C;
     /* +270 */ float x270;
-    /* +274 */ UNK_T x274;
+    /* +274 */ int x274;
     /* +278 */ float x278;
     /* +27C */ float x27C;
     /* +280 */ float x280_unkShieldHealth;
@@ -296,8 +313,8 @@ struct ftCommonData {
     /* +3E8 */ float x3E8_shieldKnockbackFrameDecay;
     /* +3EC */ float x3EC_shieldGroundFrictionMultiplier;
     /* +3F0 */ float x3F0;
-    /* +3F4 */ UNK_T x3F4;
-    /* +3F8 */ UNK_T x3F8;
+    /* +3F4 */ int x3F4;
+    /* +3F8 */ int x3F8;
     /* +3FC */ int x3FC;
     /* +400 */ float x400;
     /* +404 */ float x404;
@@ -360,32 +377,15 @@ struct ftCommonData {
     /* +4F4 */ float x4F4;
     /* +4F8 */ u32 x4F8;
     /* +4FC */ u32 x4FC;
-    /* +500 */ UNK_T x500;
+    /* +500 */ int x500;
     /* +504 */ int x504;
-    /* +508 */ UNK_T x508;
-    /* +50C */ UNK_T x50C;
+    /* +508 */ int x508;
+    /* +50C */ int x50C;
     /* +510 */ float x510;
     /* +514 */ float x514;
-    /* +518 */ UNK_T x518;
+    /* +518 */ int x518;
     /* +51C */ float x51C_radians;
-    /* +520 */ int x520;
-    /* +524 */ UNK_T x524;
-    /* +528 */ UNK_T x528;
-    /* +52C */ UNK_T x52C;
-    /* +530 */ UNK_T x530;
-    /* +534 */ UNK_T x534;
-    /* +538 */ UNK_T x538;
-    /* +53C */ float x53C;
-    /* +540 */ float x540;
-    /* +544 */ UNK_T x544;
-    /* +548 */ float x548;
-    /* +54C */ float x54C;
-    /* +550 */ float x550;
-    /* +554 */ float x554;
-    /* +558 */ float x558;
-    /* +55C */ float x55C;
-    /* +560 */ float x560_radians;
-    /* +564 */ float x564;
+    /* +520 */ FallCommon fall_common;
     /* +568 */ float x568;
     /* +56C */ float x56C;
     /* +570 */ float x570;
@@ -407,19 +407,19 @@ struct ftCommonData {
     /* +5B0 */ float x5B0;
     /* +5B4 */ int x5B4;
     /* +5B8 */ float x5B8;
-    /* +5BC */ UNK_T x5BC;
+    /* +5BC */ int x5BC;
     /* +5C0 */ float x5C0;
-    /* +5C4 */ UNK_T x5C4;
+    /* +5C4 */ int x5C4;
     /* +5C8 */ int x5C8;
     /* +5CC */ float x5CC;
-    /* +5D0 */ UNK_T x5D0;
-    /* +5D4 */ UNK_T x5D4;
+    /* +5D0 */ int rebirth_countdown;
+    /* +5D4 */ int rebirth_wait;
     /* +5D8 */ int x5D8;
     /* +5DC */ u32 bury_timer_unk1;
     /* +5E0 */ u32 bury_timer_unk2;
     /* +5E4 */ u32 bury_timer_unk3;
     /* +5E8 */ float x5E8;
-    /* +5EC */ UNK_T x5EC;
+    /* +5EC */ int x5EC;
     /* +5F0 */ u32 x5F0;
     /* +5F4 */ int x5F4;
     /* +5F8 */ float x5F8;

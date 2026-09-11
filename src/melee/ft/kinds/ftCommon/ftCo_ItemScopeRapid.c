@@ -23,7 +23,7 @@ void fn_800D7BDC(Fighter_GObj* gobj)
     temp_gobj = gobj;
     Fighter_ChangeMotionState(temp_gobj, msid, 0x02000000, zero, 1.0F, zero,
                               NULL);
-    fp->mv.co.common.x0 = (int) p_ftCommonData->x5BC;
+    fp->mv.co.common.x0 = p_ftCommonData->x5BC;
     fp->accessory4_cb = fn_800D80F4;
     fp->take_dmg_cb = fn_800D8378;
 }
@@ -42,7 +42,7 @@ void fn_800D7C60(Fighter_GObj* gobj)
                                   zero, NULL);
     }
     ftCommon_ClampAirDrift(fp);
-    fp->mv.co.common.x0 = (int) p_ftCommonData->x5BC;
+    fp->mv.co.common.x0 = p_ftCommonData->x5BC;
     fp->accessory4_cb = fn_800D80F4;
     fp->take_dmg_cb = fn_800D8378;
 }
