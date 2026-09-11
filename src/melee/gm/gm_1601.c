@@ -3276,12 +3276,12 @@ void fn_8016719C(s32 slot, s32 subchar)
 {
     Vec3 respawn_pos;
     Vec3 offset;
-    VsSceneController* match_info;
+    VsSceneState* scene_state;
     s32 var_r30;
     StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
-    match_info = gmVs_GetController_1();
+    scene_state = gmVs_GetSceneState();
     stkind = gm_GetStKind();
     if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
@@ -3307,11 +3307,12 @@ void fn_8016719C(s32 slot, s32 subchar)
     respawn_pos.y = Stage_GetCamBoundsTopOffset();
     Player_80032768(slot, &respawn_pos);
     Player_SetFacingDirection(slot, respawn_pos.x >= 0.0f ? -1.0f : 1.0f);
-    Player_SetHPByIndex(slot, subchar, match_info->fighters[slot].x6);
+    Player_SetHPByIndex(slot, subchar, scene_state->fighters[slot].x6);
     Player_80032070(slot, subchar);
     if (subchar != 1) {
         ifStatus_802F6508(slot);
-        temp_r4 = (struct fn_8016719C_xC_bits*) &match_info->fighters[slot].xC;
+        temp_r4 =
+            (struct fn_8016719C_xC_bits*) &scene_state->fighters[slot].xC;
         if (temp_r4->b0) {
             temp_r4->b0 = true;
             Camera_800310E8();
@@ -3388,22 +3389,22 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 
 void fn_8016758C(void)
 {
-    VsSceneController* mi = gmVs_GetController_1();
+    VsSceneState* scene_state = gmVs_GetSceneState();
     int i;
 
-    for (i = 0; i < ARRAY_SIZE(mi->fighters); i++) {
-        if (mi->fighters[i].x8 != 0) {
-            mi->fighters[i].x8--;
+    for (i = 0; i < ARRAY_SIZE(scene_state->fighters); i++) {
+        if (scene_state->fighters[i].x8 != 0) {
+            scene_state->fighters[i].x8--;
         }
     }
 }
 
 static inline int get_idx(void)
 {
-    VsSceneController* info = gmVs_GetController_1();
+    VsSceneState* scene_state = gmVs_GetSceneState();
     int i;
-    for (i = 0; i < ARRAY_SIZE(info->fighters); i++) {
-        if (info->fighters[i].x8 == 0) {
+    for (i = 0; i < ARRAY_SIZE(scene_state->fighters); i++) {
+        if (scene_state->fighters[i].x8 == 0) {
             return i;
         }
     }
@@ -3434,10 +3435,10 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             arg2->y = 0.0f;
         }
         {
-            VsSceneController* info = gmVs_GetController_1();
+            VsSceneState* scene_state = gmVs_GetSceneState();
             PAD_STACK(8);
-            info->fighters[idx].x8 = 0x90;
-            info->fighters[idx].x9 = chr;
+            scene_state->fighters[idx].x8 = 0x90;
+            scene_state->fighters[idx].x9 = chr;
         }
     }
     return tmp;

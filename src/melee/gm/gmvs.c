@@ -60,14 +60,14 @@ static u32 lbl_803D5630[] = {
 
 /* 46B6A0 */ static VsSceneController controller;
 
-VsSceneController* gmVs_GetController_0(void)
+VsSceneController* gmVs_GetSceneController(void)
 {
     return &controller;
 }
 
-VsSceneController* gmVs_GetController_1(void)
+VsSceneState* gmVs_GetSceneState(void)
 {
-    return &controller;
+    return &controller.state;
 }
 
 struct StartMeleeRules* gm_GetStartMeleeRules(void)
@@ -87,7 +87,7 @@ bool gm_8016AE80(void)
 
 f32 gm_8016AE94(void)
 {
-    return gmVs_GetController_0()->unk_34;
+    return gmVs_GetSceneController()->state.unk_34;
 }
 
 u64 gm_8016AEA4(void)
@@ -107,22 +107,22 @@ bool gm_8016AEC8(void)
 
 u32 gm_GetFrameCount(void)
 {
-    return gmVs_GetController_0()->frame_count;
+    return gmVs_GetSceneController()->state.frame_count;
 }
 
 u32 gm_8016AEEC(void)
 {
-    return gmVs_GetController_0()->timer_seconds;
+    return gmVs_GetSceneController()->state.timer_seconds;
 }
 
 u16 gm_8016AEFC(void)
 {
-    return gmVs_GetController_0()->unk_2C;
+    return gmVs_GetSceneController()->state.unk_2C;
 }
 
 u16 gm_8016AF0C(void)
 {
-    int tmp = 99.0F * gmVs_GetController_0()->unk_2C / 59.0F;
+    int tmp = 99.0F * gmVs_GetSceneController()->state.unk_2C / 59.0F;
     u16 var_r31 = tmp;
     if (!gm_8016B110()) {
         var_r31 = 0x63 - var_r31;
@@ -132,12 +132,12 @@ u16 gm_8016AF0C(void)
 
 bool GetMatchTimer(int* arg0)
 {
-    VsSceneController* data = gmVs_GetController_0();
+    VsSceneController* data = gmVs_GetSceneController();
     if (arg0 != NULL && data->start.timer_enabled) {
         if (gm_8016B110()) {
-            *arg0 = data->start.time_limit - data->timer_seconds;
+            *arg0 = data->start.time_limit - data->state.timer_seconds;
         } else {
-            *arg0 = data->timer_seconds;
+            *arg0 = data->state.timer_seconds;
         }
         return true;
     }
@@ -220,7 +220,7 @@ bool gm_8016B168(void)
 
 bool gm_8016B184(void)
 {
-    if (gmVs_GetController_0()->is_singleplayer == true) {
+    if (gmVs_GetSceneController()->state.is_singleplayer == true) {
         return true;
     }
     return false;
@@ -243,7 +243,7 @@ bool gm_8016B1D8(void)
 
 bool gm_8016B1EC(void)
 {
-    return gmVs_GetController_0()->unk_0 == 0;
+    return gmVs_GetSceneController()->state.unk_0 == 0;
 }
 
 bool gm_8016B204(void)
@@ -267,7 +267,7 @@ f32 gm_8016B248(void)
 
 bool gm_8016B258(int arg0)
 {
-    return gmVs_GetController_0()->fighters[arg0].x4_b3;
+    return gmVs_GetSceneController()->state.fighters[arg0].x4_b3;
 }
 
 void gm_SetGameSpeed(float speed)
@@ -282,32 +282,32 @@ void gm_ResetGameSpeed(void)
 
 void gm_8016B328(void)
 {
-    gmVs_GetController_0()->terminate_match = 1;
+    gmVs_GetSceneController()->state.terminate_match = 1;
 }
 
 void gm_8016B33C(int arg0)
 {
-    gmVs_GetController_0()->unk_B = arg0 + 1;
+    gmVs_GetSceneController()->state.unk_B = arg0 + 1;
 }
 
 void gm_8016B350(int arg0)
 {
-    gmVs_GetController_0()->unk_10 = arg0 + 1;
+    gmVs_GetSceneController()->state.unk_10 = arg0 + 1;
 }
 
 void gm_8016B364(int arg0)
 {
-    gmVs_GetController_0()->unk_14 = arg0 + 1;
+    gmVs_GetSceneController()->state.unk_14 = arg0 + 1;
 }
 
 void gm_8016B378(s8 arg0)
 {
-    gmVs_GetController_0()->unk_18 = arg0;
+    gmVs_GetSceneController()->state.unk_18 = arg0;
 }
 
 void fn_8016B388(int arg0, int arg1)
 {
-    gmVs_GetController_0()->fighters[arg0].x6 = arg1;
+    gmVs_GetSceneController()->state.fighters[arg0].x6 = arg1;
 }
 
 bool gm_8016B3A0(void)
@@ -422,16 +422,16 @@ int gm_8016B558(void)
 
 float fn_8016B5B0(void)
 {
-    VsSceneController* tmp = &controller;
+    VsSceneController* vsscene = &controller;
     int count;
     int i;
     PAD_STACK(4);
 
     if (gm_IsCurrently1PMode_inline()) {
         float var_f1 = 3.0F;
-        if (controller.unk_0 != 0) {
-            if (tmp->match_result == OUTCOME_TIMEOUT ||
-                tmp->match_result == OUTCOME_1P_GAME_OVER)
+        if (controller.state.unk_0 != 0) {
+            if (vsscene->state.match_result == OUTCOME_TIMEOUT ||
+                vsscene->state.match_result == OUTCOME_1P_GAME_OVER)
             {
                 var_f1 *= 1.1F;
             }
@@ -460,31 +460,31 @@ float fn_8016B5B0(void)
 
 void gm_8016B6E8(int arg0, int arg1)
 {
-    VsSceneController* tmp = gmVs_GetController_0();
+    VsSceneController* tmp = gmVs_GetSceneController();
     if (arg0 == 0) {
-        tmp->unk_2E = lbTime_8000AF24(tmp->unk_2E, arg1);
+        tmp->state.unk_2E = lbTime_8000AF24(tmp->state.unk_2E, arg1);
     }
 }
 
 u8 fn_8016B728(void)
 {
-    return gmVs_GetController_0()->unk_C;
+    return gmVs_GetSceneController()->state.unk_C;
 }
 
 void fn_8016B738(int arg0)
 {
-    VsSceneController* tmp = gmVs_GetController_0();
-    tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
+    VsSceneController* tmp = gmVs_GetSceneController();
+    tmp->state.unk_C = lbTime_8000AF74(tmp->state.unk_C, arg0);
 }
 
 MatchEnd* gm_8016B774(void)
 {
-    return &controller.x24C;
+    return &controller.state.x24C;
 }
 
 void fn_8016B784(void)
 {
-    gmVs_GetController_0()->hud_enabled = 1;
+    gmVs_GetSceneController()->state.hud_enabled = 1;
     grStadium_801D4150();
 }
 
@@ -501,7 +501,7 @@ void fn_8016B7B4(int arg0)
 
 void fn_8016B7F8(void)
 {
-    VsSceneController* tmp = gmVs_GetController_0();
+    VsSceneController* tmp = gmVs_GetSceneController();
     PAD_STACK(4);
 
     ftLib_800868A4();
@@ -521,13 +521,13 @@ void fn_8016B88C(int arg0)
     if (arg0 == 0) {
         grStadium_801D40C8();
     }
-    gmVs_GetController_0()->hud_enabled = 0;
+    gmVs_GetSceneController()->state.hud_enabled = 0;
 }
 
 void gm_8016B8D4(s32 arg0, u8 slot_type)
 {
-    gmVs_GetController_0()->fighters[arg0].x1 = 0x82;
-    gmVs_GetController_0()->fighters[arg0].slot_type = slot_type;
+    gmVs_GetSceneController()->state.fighters[arg0].x1 = 0x82;
+    gmVs_GetSceneController()->state.fighters[arg0].slot_type = slot_type;
     grStadium_801D3B4C(arg0, slot_type);
 }
 
@@ -745,7 +745,7 @@ MatchOutcome gm_GetFFAOutcome(void)
     if (controller.start.x4_2 && Player_GetP1Stock() == 0) {
         return OUTCOME_1P_GAME_OVER;
     }
-    if (controller.is_singleplayer == 1) {
+    if (controller.state.is_singleplayer == 1) {
         isSingleplayer = true;
     } else {
         isSingleplayer = false;
@@ -758,7 +758,7 @@ MatchOutcome gm_GetFFAOutcome(void)
     if (var_r0_2 != 0) {
         return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
     }
-    if (controller.is_singleplayer == 0) {
+    if (controller.state.is_singleplayer == 0) {
         notSingleplayer = 1;
     } else {
         notSingleplayer = 0;
@@ -808,7 +808,7 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
         if (Player_GetP1Stock() == 0) {
             return OUTCOME_1P_GAME_OVER;
         }
-        if (controller.is_singleplayer == 1) {
+        if (controller.state.is_singleplayer == 1) {
             isSingleplayer = true;
         } else {
             isSingleplayer = false;
@@ -821,7 +821,7 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
         if (var_r0_2 != 0) {
             return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
         }
-        if (controller.is_singleplayer == 0) {
+        if (controller.state.is_singleplayer == 0) {
             notSinglePlayer = true;
         } else {
             notSinglePlayer = false;
@@ -843,7 +843,7 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
             }
         }
     }
-    if (controller.is_singleplayer == 0) {
+    if (controller.state.is_singleplayer == 0) {
         notSinglePlayer_2 = true;
     } else {
         notSinglePlayer_2 = false;
@@ -885,10 +885,10 @@ MatchOutcome gm_GetMatchOutcome(void)
     VsSceneController* tmp = &controller;
     PAD_STACK(0x8);
 
-    if (controller.match_result != OUTCOME_NONE) {
-        return controller.match_result;
+    if (controller.state.match_result != OUTCOME_NONE) {
+        return controller.state.match_result;
     }
-    if (controller.terminate_match == 1) {
+    if (controller.state.terminate_match == 1) {
         return OUTCOME_TERMINATED;
     }
     if (controller.start.x5_0) {
@@ -896,13 +896,16 @@ MatchOutcome gm_GetMatchOutcome(void)
     }
     if (tmp->start.timer_enabled) {
         if (tmp->start.timer_counts_up) {
-            if (controller.timer_seconds == controller.start.time_limit &&
-                controller.unk_2C == 0)
+            if (controller.state.timer_seconds ==
+                    controller.start.time_limit &&
+                controller.state.unk_2C == 0)
             {
                 return OUTCOME_TIMEOUT;
             }
         } else {
-            if (controller.timer_seconds == 0 && controller.unk_2C == 0x3B) {
+            if (controller.state.timer_seconds == 0 &&
+                controller.state.unk_2C == 0x3B)
+            {
                 return OUTCOME_TIMEOUT;
             }
         }
@@ -927,7 +930,7 @@ MatchOutcome gm_GetMatchOutcome(void)
 
 void fn_8016C46C(int arg0)
 {
-    if (gmVs_GetController_0()->unk_9 != 0) {
+    if (gmVs_GetSceneController()->state.unk_9 != 0) {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
             fn_8017EE40(arg0);
@@ -1035,7 +1038,8 @@ void fn_8016C7F0(void)
     UnkAllstarData* temp_r30;
 
     if (controller.start.on_match_end != NULL) {
-        controller.start.on_match_end((MatchOutcome) controller.match_result);
+        controller.start.on_match_end(
+            (MatchOutcome) controller.state.match_result);
     }
     HSD_PadRumbleRemoveAll();
     for (var_r29 = 0; var_r29 < PAD_MAX_CONTROLLERS; var_r29++) {
@@ -1047,7 +1051,7 @@ void fn_8016C7F0(void)
     lbAudioAx_80023694();
     lbAudioAx_80024C84();
     ifTime_FreeCountdown();
-    if (controller.match_result == OUTCOME_1P_GAME_OVER &&
+    if (controller.state.match_result == OUTCOME_1P_GAME_OVER &&
         controller.start.x4_3)
     {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
@@ -1072,20 +1076,22 @@ void fn_8016C7F0(void)
             if (sp24 == 0) {
                 var_r28 = 1;
             }
-        } else if (sp24 == 0 && *temp_r30_2 > controller.frame_count) {
+        } else if (sp24 == 0 && *temp_r30_2 > controller.state.frame_count) {
             var_r28 = 1;
         }
         if (var_r28 != 0) {
-            controller.unk_10 = 0x9C41;
-            controller.unk_14 = 0x145;
+            controller.state.unk_10 = 0x9C41;
+            controller.state.unk_14 = 0x145;
             gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD,
                         0x5A);
         } else if (sp24 > 0) {
-            controller.unk_14 = 0x149;
-            controller.unk_18 = 0x28;
+            controller.state.unk_14 = 0x149;
+            controller.state.unk_18 = 0x28;
         }
     }
-    if (gm_GetCurrentGameMode() == GM_EVENT && controller.unk_10 == 0x9C41) {
+    if (gm_GetCurrentGameMode() == GM_EVENT &&
+        controller.state.unk_10 == 0x9C41)
+    {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD,
                     0x5A);
     }
@@ -1119,7 +1125,7 @@ void gm_DoPauseChecksAndRoutine(VsSceneController* arg0, int arg1)
     s8 pauserSlot;
     u8 var_r4;
 
-    if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 &&
+    if (arg0->state.unpause_timer == 0 && arg0->state.hud_enabled != 0 &&
         !arg0->start.disable_pausing)
     {
         if (arg0->start.check_for_pauser_override != NULL) {
@@ -1157,8 +1163,8 @@ void gm_DoPauseChecksAndRoutine(VsSceneController* arg0, int arg1)
                 }
             }
             HSD_PadRumblePauseAll();
-            arg0->pauser = pauser;
-            arg0->pause_timer = 0xA;
+            arg0->state.pauser = pauser;
+            arg0->state.pause_timer = 0xA;
         }
     }
 }
@@ -1202,10 +1208,10 @@ void gm_DoUnpauseChecksAndRoutine(VsSceneController* arg0, int arg1)
     int i;
     PAD_STACK(0x14);
 
-    if (arg0->pause_timer != 0) {
+    if (arg0->state.pause_timer != 0) {
         return;
     }
-    if (arg0->hud_enabled == 0) {
+    if (arg0->state.hud_enabled == 0) {
         return;
     }
     if (arg0->start.disable_pausing) {
@@ -1214,7 +1220,7 @@ void gm_DoUnpauseChecksAndRoutine(VsSceneController* arg0, int arg1)
 
     i = gm_GetPlayerPressingUnpause();
 
-    if (i != -1 && i == arg0->pauser) {
+    if (i != -1 && i == arg0->state.pauser) {
         lbAudioAx_80024E84(0);
         gm_ClearDbPauseFlag(arg1);
         ifAll_802F33CC();
@@ -1227,11 +1233,11 @@ void gm_DoUnpauseChecksAndRoutine(VsSceneController* arg0, int arg1)
                 Ground_EnableMatchCamera();
             }
         }
-        arg0->unpause_timer = 0xA;
+        arg0->state.unpause_timer = 0xA;
     }
 }
 
-void fn_8016CD98(VsSceneController* arg0)
+void fn_8016CD98(VsSceneController* scene)
 {
     s32 temp_r3_4;
     s32 var_r3;
@@ -1240,43 +1246,45 @@ void fn_8016CD98(VsSceneController* arg0)
     int i;
     PAD_STACK(4);
 
-    if (arg0->hud_enabled == 0) {
+    if (scene->state.hud_enabled == 0) {
         return;
     }
 
-    if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || arg0->start.x3_7 == 1) {
-        if (arg0->frame_count < -1) {
-            arg0->frame_count++;
+    if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || scene->start.x3_7 == 1) {
+        if (scene->state.frame_count < -1) {
+            scene->state.frame_count++;
         }
-        if (arg0->start.timer_enabled) {
-            if (++arg0->unk_2C >= 60) {
-                arg0->unk_2C = 0;
-                if (arg0->start.timer_counts_up) {
-                    if (arg0->timer_seconds < -1) {
-                        arg0->timer_seconds++;
+        if (scene->start.timer_enabled) {
+            if (++scene->state.unk_2C >= 60) {
+                scene->state.unk_2C = 0;
+                if (scene->start.timer_counts_up) {
+                    if (scene->state.timer_seconds < -1) {
+                        scene->state.timer_seconds++;
                     }
                 } else {
-                    if (arg0->timer_seconds != 0) {
-                        if (arg0->timer_seconds < 6 &&
+                    if (scene->state.timer_seconds != 0) {
+                        if (scene->state.timer_seconds < 6 &&
                             ifTime_IsTimerHidden() == 0)
                         {
-                            temp_r3_4 = controller.unk_1C[arg0->timer_seconds];
+                            temp_r3_4 =
+                                controller.state
+                                    .unk_1C[scene->state.timer_seconds];
                             if (temp_r3_4 >= 0) {
                                 lbAudioAx_800237A8(temp_r3_4, 0x7FU, 0x40U);
                             }
                         }
-                        arg0->timer_seconds -= 1;
+                        scene->state.timer_seconds -= 1;
                     }
                 }
             }
         }
         for (i = 0; i < 4; i++) {
-            if (arg0->fighters[i].x1 != 0) {
-                arg0->fighters[i].x1--;
-                temp_r0_2 = arg0->fighters[i].x1;
+            if (scene->state.fighters[i].x1 != 0) {
+                scene->state.fighters[i].x1--;
+                temp_r0_2 = scene->state.fighters[i].x1;
                 if (temp_r0_2 == 0x50) {
-                    if (arg0->fighters[i].slot_type == Gm_PKind_Human) {
-                        var_r3 = arg0->unk_20[i];
+                    if (scene->state.fighters[i].slot_type == Gm_PKind_Human) {
+                        var_r3 = scene->state.unk_20[i];
                     } else {
                         var_r3 = 0x7C865;
                     }
@@ -1292,16 +1300,16 @@ void fn_8016CD98(VsSceneController* arg0)
 void fn_8016CF4C(int slot, MatchOutcome matchResult)
 {
     gm_801A10FC(slot);
-    controller.match_result = matchResult;
+    controller.state.match_result = matchResult;
     if (matchResult != OUTCOME_RETRY && DbLevel >= DbLKind_DebugRom) {
         gm_ClearDbPauseFlag(1);
         if (controller.start.xD > 1) {
-            controller.unk_30 = controller.start.xD - 1;
+            controller.state.unk_30 = controller.start.xD - 1;
         }
         fn_8016C7F0();
         lbAudioAx_80024D50();
         gm_SetDbPauseFlag(4);
-        controller.unk_0 = 1;
+        controller.state.unk_0 = 1;
         return;
     }
     fn_8016C7F0();
@@ -1329,9 +1337,9 @@ static inline void fn_8016CFE0_inline(void)
 
     tmp = &controller;
     for (i = 0; i < 6; i++) {
-        if (tmp->fighters[i].respawn_timer != 0) {
-            if (--tmp->fighters[i].respawn_timer == 0) {
-                fn_8016719C(i, tmp->fighters[i].xB);
+        if (tmp->state.fighters[i].respawn_timer != 0) {
+            if (--tmp->state.fighters[i].respawn_timer == 0) {
+                fn_8016719C(i, tmp->state.fighters[i].xB);
             }
         }
     }
@@ -1358,10 +1366,12 @@ void fn_8016CFE0(void)
                        PAD_BUTTON_START;
         }
         no_contest_buttons = tmp_btns;
-        if (tmp->start.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            u64 buttons = gm_GetButtonsTriggered(tmp->pauser);
+        if (tmp->start.x3_4 && tmp->state.pause_timer == 0 &&
+            tmp->state.unk_3 == 0)
+        {
+            u64 buttons = gm_GetButtonsTriggered(tmp->state.pauser);
             if ((no_contest_buttons & buttons) != 0) {
-                buttons = gm_GetButtonsPressed(tmp->pauser);
+                buttons = gm_GetButtonsPressed(tmp->state.pauser);
                 {
                     u64 masked_buttons = no_contest_buttons & buttons;
                     if (masked_buttons == no_contest_buttons) {
@@ -1372,38 +1382,42 @@ void fn_8016CFE0(void)
                 }
             }
         }
-        if (tmp->start.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            if ((gm_GetButtonsTriggered(tmp->pauser) & PAD_TRIGGER_Z) != 0) {
+        if (tmp->start.x3_2 && tmp->state.pause_timer == 0 &&
+            tmp->state.unk_3 == 0)
+        {
+            if ((gm_GetButtonsTriggered(tmp->state.pauser) & PAD_TRIGGER_Z) !=
+                0)
+            {
                 fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_RETRY);
                 return;
             }
         }
         gm_DoUnpauseChecksAndRoutine(tmp, 1);
-        if (tmp->pause_timer != 0) {
-            tmp->pause_timer--;
+        if (tmp->state.pause_timer != 0) {
+            tmp->state.pause_timer--;
         }
         goto block_50;
     } else {
-        tmp->match_result = gm_GetMatchOutcome();
-        if (tmp->match_result == OUTCOME_NONE) {
+        tmp->state.match_result = gm_GetMatchOutcome();
+        if (tmp->state.match_result == OUTCOME_NONE) {
             gm_DoPauseChecksAndRoutine(tmp, 1);
-            if (tmp->unpause_timer != 0) {
-                tmp->unpause_timer--;
+            if (tmp->state.unpause_timer != 0) {
+                tmp->state.unpause_timer--;
             }
         } else {
             goto block_51;
         }
     block_50:
         fn_8016B918();
-        tmp->match_result = gm_GetMatchOutcome();
+        tmp->state.match_result = gm_GetMatchOutcome();
     }
-    if (tmp->match_result != OUTCOME_NONE) {
+    if (tmp->state.match_result != OUTCOME_NONE) {
     block_51:
         fn_8016C7F0();
         ifStatus_802F7034(fn_8016B88C);
         lbAudioAx_80024D50();
         gm_SetDbPauseFlag(4);
-        tmp->unk_0 = 1;
+        tmp->state.unk_0 = 1;
     } else {
         fn_8016CD98(tmp);
     }
@@ -1448,18 +1462,18 @@ void gm_Scene_Training_OnFrame(void)
     if (gm_GetDbPauseFlag(2) != 0) {
         fn_8016CBE8_inline();
         gm_DoUnpauseChecksAndRoutine(tmp, 2);
-        if (tmp->pause_timer != 0) {
-            tmp->pause_timer--;
+        if (tmp->state.pause_timer != 0) {
+            tmp->state.pause_timer--;
         }
     } else {
         gm_DoPauseChecksAndRoutine(tmp, 2);
-        if (tmp->unpause_timer != 0) {
-            tmp->unpause_timer--;
+        if (tmp->state.unpause_timer != 0) {
+            tmp->state.unpause_timer--;
         }
     }
     fn_8016CD98(tmp);
-    tmp->match_result = gm_GetMatchOutcome();
-    if (tmp->match_result != OUTCOME_NONE) {
+    tmp->state.match_result = gm_GetMatchOutcome();
+    if (tmp->state.match_result != OUTCOME_NONE) {
         fn_8016C7F0();
         gm_801A4B60();
     }
@@ -1495,43 +1509,44 @@ void fn_8016D634(void)
 
     PAD_STACK(8);
 
-    if (controller.unk_30++ <= controller.start.xD) {
+    if (controller.state.unk_30++ <= controller.start.xD) {
         return;
     }
     if (gm_8016B3D8()) {
-        pl_80040688(0, controller.unk_D, fn_8016D538());
+        pl_80040688(0, controller.state.unk_D, fn_8016D538());
     }
     gm_801A4B1C();
-    if (controller.start.x4_4 && controller.match_result != OUTCOME_TIMEOUT &&
+    if (controller.start.x4_4 &&
+        controller.state.match_result != OUTCOME_TIMEOUT &&
         (controller.start.x9 == 1 || Player_GetStocks(0) > 0))
     {
         un_802FD668();
         ifAll_802F3A64();
         gm_ClearDbPauseFlag(4);
         gm_SetDbPauseFlag(5);
-        controller.unk_9 = 1;
-        dst = &tmp->x24C;
+        controller.state.unk_9 = 1;
+        dst = &tmp->state.x24C;
         copied_dst = dst;
-        if (controller.match_over == 0) {
-            *copied_dst = tmp->x24C;
+        if (controller.state.match_over == 0) {
+            *copied_dst = tmp->state.x24C;
             copied_dst->is_teams = controller.start.is_teams;
-            copied_dst->outcome = tmp->match_result;
+            copied_dst->outcome = tmp->state.match_result;
             gm_80166378(copied_dst);
             fn_8016C46C_dontinline((int) copied_dst);
-            if (tmp->match_result != OUTCOME_NO_CONTEST &&
-                tmp->match_result != OUTCOME_RETRY)
+            if (tmp->state.match_result != OUTCOME_NO_CONTEST &&
+                tmp->state.match_result != OUTCOME_RETRY)
             {
                 fn_8016C4F4(copied_dst);
             }
-            tmp->match_over = 1;
+            tmp->state.match_over = 1;
         } else {
-            *copied_dst = tmp->x24C;
+            *copied_dst = tmp->state.x24C;
         }
         fn_80180630(tmp->start.x18, 0, tmp->start.x9, tmp->start.x4_5,
                     copied_dst);
-        controller.unk_0 = 2;
+        controller.state.unk_0 = 2;
     } else {
-        controller.unk_0 = 3;
+        controller.state.unk_0 = 3;
     }
 }
 
@@ -1541,7 +1556,7 @@ void gm_Scene_Vs_OnFrame(void)
     if (controller.start.on_frame_start != NULL) {
         controller.start.on_frame_start();
     }
-    switch (controller.unk_0) {
+    switch (controller.state.unk_0) {
     case 0:
         fn_8016CFE0();
         break;
@@ -1550,7 +1565,7 @@ void gm_Scene_Vs_OnFrame(void)
         break;
     case 2:
         if (fn_80180AC0() != 0) {
-            controller.unk_0 = 3;
+            controller.state.unk_0 = 3;
         }
         break;
     case 3:
@@ -1564,13 +1579,13 @@ void gm_Scene_Vs_OnFrame(void)
 
 void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 {
-    VsSceneController* tmp = gmVs_GetController_0();
+    VsSceneController* tmp = gmVs_GetSceneController();
     PAD_STACK(4);
 
     Player_SetSlottype(arg0, arg1->slot_type);
     Player_SetPlayerCharacter(arg0, arg1->ckind);
 
-    tmp->fighters[arg0].x0 = arg1->ckind;
+    tmp->state.fighters[arg0].x0 = arg1->ckind;
 
     Player_SetStocks(arg0, arg1->stocks);
     Player_SetCostumeId(arg0, arg1->color);
@@ -1591,19 +1606,19 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         } else {
             Player_SetPlayerCharacter(arg0, CKind_Zelda);
         }
-        tmp->fighters[arg0].x4_b4 = true;
+        tmp->state.fighters[arg0].x4_b4 = true;
     }
 
-    tmp->fighters[arg0].spawn_point = arg1->spawn_pos;
+    tmp->state.fighters[arg0].spawn_point = arg1->spawn_pos;
 
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
     Player_SetFlagsBit0(arg0, arg1->rumble_enabled);
     Player_SetNametagSlotID(arg0, arg1->nametag);
     if (arg1->xC_b1) {
-        tmp->unk_A += 5;
+        tmp->state.unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);
-        Player_SetUnk4C(arg0, tmp->unk_A);
+        Player_SetUnk4C(arg0, tmp->state.unk_A);
     }
     Player_SetPlayerAndEntityCpuType(arg0, arg1->cpu_kind);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->cpu_level);
@@ -1613,7 +1628,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetHUDDamage(arg0, arg1->damage1);
     }
 
-    tmp->fighters[arg0].x6 = arg1->damage1;
+    tmp->state.fighters[arg0].x6 = arg1->damage1;
 
     if (arg1->xC_b7) {
         Player_SetMoreFlagsBit2(arg0, 1);
@@ -1630,14 +1645,14 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetMoreFlagsBit1(arg0, 0);
     }
 
-    tmp->fighters[arg0].x4_b1 = arg1->xC_b3;
-    tmp->fighters[arg0].x4_b0 = arg1->vs_metal;
+    tmp->state.fighters[arg0].x4_b1 = arg1->xC_b3;
+    tmp->state.fighters[arg0].x4_b0 = arg1->vs_metal;
     if (arg1->vs_metal) {
         Player_SetFlagsBit5(arg0, true);
     } else {
         Player_SetFlagsBit5(arg0, false);
     }
-    tmp->fighters[arg0].x4_b2 = arg1->vs_invisible;
+    tmp->state.fighters[arg0].x4_b2 = arg1->vs_invisible;
     if (arg1->vs_invisible) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
@@ -1661,10 +1676,10 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetMoreFlagsBit5(arg0, 0);
     }
-    tmp->fighters[arg0].x4_b3 = arg1->xD_b1;
+    tmp->state.fighters[arg0].x4_b3 = arg1->xD_b1;
     Player_SetMoreFlagsBit6(arg0, arg1->xB);
     Player_SetFacingDirection(arg0, arg1->spawn_dir);
-    tmp->fighters[arg0].x4_b5 = arg1->xD_b0;
+    tmp->state.fighters[arg0].x4_b5 = arg1->xD_b0;
 }
 
 void fn_8016DCC0(StartMeleeData* arg0)
@@ -1672,59 +1687,59 @@ void fn_8016DCC0(StartMeleeData* arg0)
     VsSceneController* tmp = &controller;
     int i;
 
-    memzero(&controller, offsetof(VsSceneController, start));
-    controller.unk_D = 6;
-    controller.unk_1C = (void*) &lbl_803D5630;
-    controller.unk_20 = (void*) &lbl_803D5620;
-    controller.unk_0 = 0;
+    memzero(&controller, sizeof(VsSceneState));
+    controller.state.unk_D = 6;
+    controller.state.unk_1C = (void*) &lbl_803D5630;
+    controller.state.unk_20 = (void*) &lbl_803D5620;
+    controller.state.unk_0 = 0;
 
     controller.start = arg0->rules;
 
-    controller.x24C.match_kind = arg0->rules.match_kind;
-    controller.x24C.is_teams = arg0->rules.is_teams;
+    controller.state.x24C.match_kind = arg0->rules.match_kind;
+    controller.state.x24C.is_teams = arg0->rules.is_teams;
     if (arg0->rules.x7 != 0) {
-        controller.unk_B = arg0->rules.x7;
+        controller.state.unk_B = arg0->rules.x7;
     }
-    controller.x24C.sd_penalty = arg0->rules.sd_penalty;
+    controller.state.x24C.sd_penalty = arg0->rules.sd_penalty;
     Camera_SetQuakeScale(arg0->rules.x2C);
 
     if (tmp->start.timer_enabled) {
         if (tmp->start.timer_counts_up) {
             if (arg0->rules.x14 != 0) {
-                controller.unk_2C = arg0->rules.x14 - 1;
+                controller.state.unk_2C = arg0->rules.x14 - 1;
             } else {
-                controller.unk_2C = 0;
+                controller.state.unk_2C = 0;
             }
             controller.start.time_limit = -1;
-            controller.timer_seconds = arg0->rules.time_limit;
+            controller.state.timer_seconds = arg0->rules.time_limit;
         } else {
             if (arg0->rules.time_limit == 0) {
-                controller.timer_seconds = -1;
+                controller.state.timer_seconds = -1;
             } else {
-                controller.timer_seconds = arg0->rules.time_limit;
+                controller.state.timer_seconds = arg0->rules.time_limit;
             }
             if (arg0->rules.x14 != 0) {
-                controller.unk_2C = arg0->rules.x14 - 1;
+                controller.state.unk_2C = arg0->rules.x14 - 1;
             } else {
-                controller.unk_2C = 0x3B;
+                controller.state.unk_2C = 0x3B;
             }
         }
     } else if (controller.start.x1_0) {
-        controller.timer_seconds = arg0->rules.time_limit;
+        controller.state.timer_seconds = arg0->rules.time_limit;
         if (arg0->rules.x14 != 0) {
-            controller.unk_2C = arg0->rules.x14;
+            controller.state.unk_2C = arg0->rules.x14;
         } else {
-            controller.unk_2C = 0;
+            controller.state.unk_2C = 0;
         }
     }
     if (arg0->rules.x54 != NULL) {
-        controller.is_singleplayer = 1;
+        controller.state.is_singleplayer = 1;
     } else {
-        controller.is_singleplayer = 0;
+        controller.state.is_singleplayer = 0;
     }
     Player_InitAllPlayers();
 
-    switch (controller.is_singleplayer) {
+    switch (controller.state.is_singleplayer) {
     case 0:
     case 2:
     case 3:
@@ -1755,10 +1770,10 @@ static float direction(float x)
 static inline void getSpawnPoint(int i, Vec3* v)
 {
     VsSceneController* tmp = &controller;
-    if (tmp->fighters[i].spawn_point == -1) {
+    if (tmp->state.fighters[i].spawn_point == -1) {
         Stage_80224E64(i, v);
     } else {
-        Stage_80224E64(tmp->fighters[i].spawn_point, v);
+        Stage_80224E64(tmp->state.fighters[i].spawn_point, v);
     }
 }
 
@@ -1897,7 +1912,7 @@ void fn_8016E2BC(void)
     PAD_STACK(0xC);
 
     Player_80036DA4();
-    if (controller.is_singleplayer == 1) {
+    if (controller.state.is_singleplayer == 1) {
         var_r0 = true;
     } else {
         var_r0 = false;
@@ -1917,7 +1932,7 @@ void fn_8016E2BC(void)
                                Player_GetPlayerId(0), Player_GetTeam(0),
                                single_is_teams, Player_GetPlayerSlotType(0))));
         Player_80031AD0(0);
-        if (controller.fighters[0].x4_b4) {
+        if (controller.state.fighters[0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_80169C54(Player_GetPlayerCharacter(0), Player_GetCostumeId(0));
@@ -1947,7 +1962,7 @@ void fn_8016E2BC(void)
                                                Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
-                if (tmp->fighters[i].x4_b4) {
+                if (tmp->state.fighters[i].x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }
@@ -2011,7 +2026,7 @@ void fn_8016E730(StartMeleeData* arg0)
 
     r30 = &controller;
 
-    r30->unk_34 = get_unk_float();
+    r30->state.unk_34 = get_unk_float();
     Item_80266F70();
     Item_80266FCC();
     it_8026D018();
@@ -2087,34 +2102,34 @@ void gm_Scene_Vs_OnExit(void* user_data)
     VsSceneController* tmp = &controller;
     int i;
 
-    if (controller.match_over == 0) {
-        data->xC = controller.x24C;
+    if (controller.state.match_over == 0) {
+        data->xC = controller.state.x24C;
         data->xC.is_teams = controller.start.is_teams;
-        data->xC.outcome = controller.match_result;
+        data->xC.outcome = controller.state.match_result;
         gm_80166378(&data->xC);
         fn_8016C46C_dontinline((int) &data->xC);
-        if (tmp->match_result != OUTCOME_NO_CONTEST &&
-            tmp->match_result != OUTCOME_RETRY)
+        if (tmp->state.match_result != OUTCOME_NO_CONTEST &&
+            tmp->state.match_result != OUTCOME_RETRY)
         {
             fn_8016C4F4(&data->xC);
         }
-        tmp->match_over = 1;
+        tmp->state.match_over = 1;
     } else {
-        data->xC = controller.x24C;
+        data->xC = controller.state.x24C;
     }
     if (controller.start.x4_4) {
         data->x0 = fn_8017F294();
     } else {
         data->x0 = controller.start.x18;
     }
-    data->x4 = controller.timer_seconds;
+    data->x4 = controller.state.timer_seconds;
     data->x8 = Ground_801C5ABC();
 
     if (gm_8016B3D8() || gm_8016E9C8_inline() ||
         gm_GetCurrentGameMode() == GM_VS)
     {
-        if (controller.match_result != OUTCOME_NO_CONTEST &&
-            controller.match_result != OUTCOME_RETRY)
+        if (controller.state.match_result != OUTCOME_NO_CONTEST &&
+            controller.state.match_result != OUTCOME_RETRY)
         {
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == Gm_PKind_Human) {
@@ -2188,7 +2203,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
     float var_f1;
     PAD_STACK(8);
 
-    if (controller.is_singleplayer == 0 &&
+    if (controller.state.is_singleplayer == 0 &&
         Player_GetPlayerSlotType(arg0) == Gm_PKind_NA &&
         Player_GetEntity(arg0) == NULL)
     {
@@ -2212,7 +2227,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         Player_80032768(arg0, &sp18);
         setPlayerUnk45(arg0);
         Player_80031AD0(arg0);
-        if (controller.fighters[arg0].x4_b4) {
+        if (controller.state.fighters[arg0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
         }
         fn_8016E124();
@@ -2226,7 +2241,9 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
 
 bool fn_8016EF98(int arg0)
 {
-    if (controller.is_singleplayer == 0 && Player_GetEntity(arg0) != NULL) {
+    if (controller.state.is_singleplayer == 0 &&
+        Player_GetEntity(arg0) != NULL)
+    {
         ifStatus_802F6788(arg0);
         Player_80031EBC(arg0);
         Player_SetSlottype(arg0, Gm_PKind_NA);
