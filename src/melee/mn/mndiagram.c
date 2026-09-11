@@ -766,8 +766,9 @@ void mnDiagram_SortNamesByKOs(void)
     int max_idx;
     u8* dst_iter;
     int i;
-    u8* base = mnDiagram_FighterDisplayOrder;
-    u8* dst = base + sizeof(mnDiagram_FighterDisplayOrder);
+    mnDiagram_Assets* assets =
+        (mnDiagram_Assets*) &mnDiagram_FighterDisplayOrder;
+    u8* dst = assets->sorted_names;
     u32* tp;
     u8* candidate;
     int n;
@@ -797,7 +798,7 @@ void mnDiagram_SortNamesByKOs(void)
             }
         }
         if (max_idx != i) {
-            u8* p = base + max_idx;
+            u8* p = &assets->sorted_fighters[max_idx];
             u8 temp = *(p += sizeof(mnDiagram_FighterDisplayOrder));
             while (max_idx > i) {
                 *p = *(p - 1);
