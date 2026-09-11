@@ -188,7 +188,8 @@ void Camera_Init(int n_subjects)
     game_camera.nearz = 0.1f;
     game_camera.farz = 16384.0f;
     game_camera.mode = CAMERA_STANDARD;
-    memzero(game_camera.quake_frames_left, 0x224);
+    memzero(game_camera.quake_frames_left,
+            offsetof(Camera, x2B0) - offsetof(Camera, quake_frames_left));
     game_camera.quake_scale = 1.0f;
     game_camera.x2BC = 1.0f;
     game_camera.x2C0 = -1.0f;
@@ -3149,7 +3150,7 @@ void Camera_8002E948(bool (*cb)(Vec*))
     }
 
     game_camera.x341_b1_b2 = 3;
-    game_camera.x344.cb = (s32 (*)(Vec3*)) cb;
+    game_camera.x344.cb = (s32(*)(Vec3*)) cb;
 
     switch (game_camera.x341_b1_b2) {
     case 1: {
