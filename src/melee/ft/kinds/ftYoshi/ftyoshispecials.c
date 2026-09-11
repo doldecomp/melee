@@ -817,7 +817,8 @@ void ftYs_SpecialAirSEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftYs_SpecialAirSStart_1_IASA(Fighter_GObj* gobj)
 {
-    M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.ys.specials.x30 = 0;
 }
 
 void ftYs_SpecialAirSLoop_2_IASA(Fighter_GObj* gobj)

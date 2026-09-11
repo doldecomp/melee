@@ -98,7 +98,7 @@ void ftKb_SpecialN_800F5954(Fighter_GObj* gobj)
 
 bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj)
 {
-    return M2C_FIELD(GET_FIGHTER(gobj), s32*, 0x840) & 0x100;
+    return GET_FIGHTER(gobj)->coll_data.floor.flags & 0x100;
 }
 
 void ftKb_SpecialN_800F598C(Fighter_GObj* gobj, int arg1)
