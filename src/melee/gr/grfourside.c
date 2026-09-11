@@ -2,7 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <m2c_macros.h>
 #include <placeholder.h>
 
 #include "forward.h"
