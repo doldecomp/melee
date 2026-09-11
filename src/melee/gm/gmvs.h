@@ -59,7 +59,7 @@
 /* 16B6E8 */ void gm_8016B6E8(int, int);
 /* 16B728 */ u8 fn_8016B728(void);
 /* 16B738 */ void fn_8016B738(int);
-/* 16B774 */ struct lbl_8046B6A0_24C_t* gm_8016B774(void);
+/* 16B774 */ MatchEnd* gm_8016B774(void);
 /* 16B784 */ void fn_8016B784(void);
 /* 16B7B4 */ void fn_8016B7B4(int);
 /* 16B7F8 */ void fn_8016B7F8(void);
@@ -74,9 +74,9 @@
 /* 16C0C8 */ MatchOutcome gm_GetTeamBattleOutcome(void);
 /* 16C35C */ MatchOutcome gm_GetMatchOutcome(void);
 /* 16C46C */ void fn_8016C46C(int);
-/* 16C4F4 */ void fn_8016C4F4(struct lbl_8046B6A0_24C_t*);
+/* 16C4F4 */ void fn_8016C4F4(MatchEnd*);
 /* 16C5C0 */ int gm_8016C5C0(int pl_slot);
-/* 16C658 */ int gm_8016C658(int);
+/* 16C658 */ int gm_GetMatchEndPlayerScore(int);
 
 /// @todo should take Fighter_GObj*? See ftCo_800A53DC
 /* 16C6C0 */ /* static */ s32 gm_8016C6C0(Item_GObj*);

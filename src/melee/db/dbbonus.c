@@ -74,10 +74,10 @@ static void fn_80228E54(int arg0, int arg1, int arg2)
     DevText_Erase(text);
     DevText_SetCursorXY(text, 0, 0);
     if (arg1 == 0) {
-        DevText_Printf(text, "1P %7d 2P %7d\n", gm_8016C658(0),
-                       gm_8016C658(1));
-        DevText_Printf(text, "3P %7d 4P %7d\n", gm_8016C658(2),
-                       gm_8016C658(3));
+        DevText_Printf(text, "1P %7d 2P %7d\n", gm_GetMatchEndPlayerScore(0),
+                       gm_GetMatchEndPlayerScore(1));
+        DevText_Printf(text, "3P %7d 4P %7d\n", gm_GetMatchEndPlayerScore(2),
+                       gm_GetMatchEndPlayerScore(3));
         DevText_Printf(text, "%dP screen %d", arg0 + 1, arg1);
         y_pos = 3;
     }

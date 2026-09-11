@@ -477,7 +477,7 @@ void fn_8016B738(int arg0)
     tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
 }
 
-struct lbl_8046B6A0_24C_t* gm_8016B774(void)
+MatchEnd* gm_8016B774(void)
 {
     return &controller.x24C;
 }
@@ -597,7 +597,7 @@ void fn_8016B918(void)
             if (var_r28 != 6 && ifStock_802F7EFC(i, var_r28) == 0) {
                 Player_LoseStock(var_r28);
                 Player_SetStocks(i, Player_GetStocks(i) + 1);
-                gm_8016C658(i);
+                gm_GetMatchEndPlayerScore(i);
                 fn_8016719C(i, 0);
             }
         }
@@ -947,14 +947,14 @@ static inline void fn_8016C46C_dontinline(int arg0)
     fn_8016C46C(arg0);
 }
 
-void fn_8016C4F4(struct lbl_8046B6A0_24C_t* arg0)
+void fn_8016C4F4(MatchEnd* arg0)
 {
-    struct lbl_8046B6A0_24C_44C_t* x44C = arg0->x44C;
+    struct UnkResultPlayerData* x44C = arg0->x44C;
     int i;
     int j;
 
     for (i = 0; i < 6; i++) {
-        if (arg0->x58[i].x0 != 3) {
+        if (arg0->player_standings[i].pkind != 3) {
             pl_80039450(i);
             for (j = 0; j < 0x101; j++) {
                 x44C[i].x0[j] = fn_80170110(arg0, j, 2, i);
@@ -970,30 +970,31 @@ void fn_8016C4F4(struct lbl_8046B6A0_24C_t* arg0)
 
 int gm_8016C5C0(int pl_slot)
 {
-    struct lbl_8046B6A0_24C_t* tmp = gm_8016B774();
+    MatchEnd* tmp = gm_8016B774();
     PAD_STACK(8);
 
-    if (tmp->x0 != (UNK_T) gm_801A4BA8()) {
-        tmp->x0 = (UNK_T) gm_801A4BA8();
+    if (tmp->x0 != gm_801A4BA8()) {
+        tmp->x0 = gm_801A4BA8();
         gm_80166378(tmp);
     }
     if (!gm_GetStartMeleeRules()->is_teams) {
-        return tmp->x58[pl_slot].x5;
+        return tmp->player_standings[pl_slot].is_big_loser;
     }
-    return tmp->x24[tmp->x58[pl_slot].x7].x0;
+    return tmp->team_standings[tmp->player_standings[pl_slot].team]
+        .is_big_loser;
 }
 
-int gm_8016C658(int arg0)
+int gm_GetMatchEndPlayerScore(int pl_slot)
 {
-    struct lbl_8046B6A0_24C_t* temp_r31;
+    MatchEnd* match_end;
     PAD_STACK(8);
 
-    temp_r31 = gm_8016B774();
-    if (temp_r31->x0 != (UNK_T) gm_801A4BA8()) {
-        temp_r31->x0 = (UNK_T) gm_801A4BA8();
-        gm_80166378(temp_r31);
+    match_end = gm_8016B774();
+    if (match_end->x0 != gm_801A4BA8()) {
+        match_end->x0 = gm_801A4BA8();
+        gm_80166378(match_end);
     }
-    return temp_r31->x58[arg0].x2C;
+    return match_end->player_standings[pl_slot].score;
 }
 
 s32 gm_8016C6C0(HSD_GObj* arg0)
@@ -1002,17 +1003,17 @@ s32 gm_8016C6C0(HSD_GObj* arg0)
     return gm_8016C5C0(ftLib_80086BE0(arg0));
 }
 
-int gm_8016C75C(HSD_GObj* arg0)
+int gm_8016C75C(HSD_GObj* player)
 {
-    struct lbl_8046B6A0_24C_t* tmp;
+    MatchEnd* match_end;
     PAD_STACK(8);
 
-    tmp = gm_8016B774();
-    if (tmp->x0 != (UNK_T) gm_801A4BA8()) {
-        tmp->x0 = (UNK_T) gm_801A4BA8();
-        gm_80166378(tmp);
+    match_end = gm_8016B774();
+    if (match_end->x0 != gm_801A4BA8()) {
+        match_end->x0 = gm_801A4BA8();
+        gm_80166378(match_end);
     }
-    return tmp->x58[ftLib_80086BE0(arg0)].x20;
+    return match_end->player_standings[ftLib_80086BE0(player)].x20;
 }
 
 void fn_8016C7D0(HSD_GObj* gobj)
@@ -1489,8 +1490,8 @@ bool fn_8016D538(void)
 void fn_8016D634(void)
 {
     VsSceneController* tmp = &controller;
-    struct lbl_8046B6A0_24C_t* dst;
-    struct lbl_8046B6A0_24C_t* copied_dst;
+    MatchEnd* dst;
+    MatchEnd* copied_dst;
 
     PAD_STACK(8);
 
@@ -1514,7 +1515,7 @@ void fn_8016D634(void)
         if (controller.match_over == 0) {
             *copied_dst = tmp->x24C;
             copied_dst->is_teams = controller.start.is_teams;
-            copied_dst->x4 = tmp->match_result;
+            copied_dst->outcome = tmp->match_result;
             gm_80166378(copied_dst);
             fn_8016C46C_dontinline((int) copied_dst);
             if (tmp->match_result != OUTCOME_NO_CONTEST &&
@@ -1679,12 +1680,12 @@ void fn_8016DCC0(StartMeleeData* arg0)
 
     controller.start = arg0->rules;
 
-    controller.x24C.x5 = arg0->rules.match_kind;
+    controller.x24C.match_kind = arg0->rules.match_kind;
     controller.x24C.is_teams = arg0->rules.is_teams;
     if (arg0->rules.x7 != 0) {
         controller.unk_B = arg0->rules.x7;
     }
-    controller.x24C.xC = arg0->rules.sd_penalty;
+    controller.x24C.sd_penalty = arg0->rules.sd_penalty;
     Camera_SetQuakeScale(arg0->rules.x2C);
 
     if (tmp->start.timer_enabled) {
@@ -2059,7 +2060,7 @@ struct EndMeleeData {
     /* 00 */ u32 x0;
     /* 04 */ u32 x4;
     /* 08 */ u32 x8;
-    /* 0C */ struct lbl_8046B6A0_24C_t xC;
+    /* 0C */ MatchEnd xC;
 };
 
 static inline bool gm_8016E9C8_inline(void)
@@ -2089,7 +2090,7 @@ void gm_Scene_Vs_OnExit(void* user_data)
     if (controller.match_over == 0) {
         data->xC = controller.x24C;
         data->xC.is_teams = controller.start.is_teams;
-        data->xC.x4 = controller.match_result;
+        data->xC.outcome = controller.match_result;
         gm_80166378(&data->xC);
         fn_8016C46C_dontinline((int) &data->xC);
         if (tmp->match_result != OUTCOME_NO_CONTEST &&
