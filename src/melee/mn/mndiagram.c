@@ -25,16 +25,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 
-/// @todo Split-derived data; types are inferred.
-void* mnDiagram_804A0814[4];
-void* mnDiagram_804A07E4[4];
-void* mnDiagram_804A07F4[4];
-void* mnDiagram_804A0804[4];
-void* mnDiagram_804A0824[4];
+StaticModelDesc MenMainCursorB1_Top;
+StaticModelDesc MenMainSubB1_Top;
+StaticModelDesc MenMainNmB_Top;
+StaticModelDesc MenMainFaceB_Top;
+StaticModelDesc MenMainConB1_Top;
 HSD_GObj* mnDiagram_804D6C10;
-mnDiagram_ArchiveData mnDiagram_804A0854;
-mnDiagram_ArchiveData mnDiagram_804A0844;
-mnDiagram_ArchiveData mnDiagram_804A0834;
+StaticModelDesc MenMainCursorB3_Top;
+StaticModelDesc MenMainConB3_Top;
+StaticModelDesc MenMainConB2_Top;
 
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
@@ -1924,22 +1923,23 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
 {
     int i;
     mnDiagram_AnimTable* tbl;
-    void** joint_data;
+    StaticModelDesc* model;
     Diagram* data;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     mnDiagram_PopupData* user_data;
 
     tbl = GET_DIAGRAM_ANIM_TABLE();
-    joint_data = mnDiagram_804A07E4;
+    model = &MenMainSubB1_Top;
     data = GET_DIAGRAM(mnDiagram_804D6C10);
 
     gobj = GObj_Create(6, 7, 0x80);
     data->popup_gobj = gobj;
-    jobj = HSD_JObjLoadJoint(joint_data[0]);
+    jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
-    HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
@@ -2326,7 +2326,7 @@ void mnDiagram_DrawCellValue(void* arg0, u8 arg1, u8 arg2, int arg3)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Diagram* data;
-    void** joint_data;
+    StaticModelDesc* model;
     s32 digit_count;
     s32 digit;
     s32 i;
@@ -2367,11 +2367,12 @@ void mnDiagram_DrawCellValue(void* arg0, u8 arg1, u8 arg2, int arg3)
     (void) col_offset;
     row_offset_adj = row_offset - 0.4f;
 
-    joint_data = mnDiagram_804A07F4;
+    model = &MenMainNmB_Top;
     for (i = 0; i < digit_count; i++) {
         digit = mn_GetDigitAt(arg3, i);
-        jobj = HSD_JObjLoadJoint(joint_data[0]);
-        HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
+        jobj = HSD_JObjLoadJoint(model->joint);
+        HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                           model->shapeanim_joint);
         base = (f32) digit;
         HSD_JObjReqAnimAll(jobj, base);
         HSD_JObjAnimAll(jobj);
@@ -2587,12 +2588,13 @@ void mnDiagram_DrawNameHeaders(void* arg0, s32 arg1, s32 arg2)
 HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
 {
     HSD_JObj* sp10;
-    void** joint_data = mnDiagram_804A0804;
+    StaticModelDesc* model = &MenMainFaceB_Top;
     HSD_JObj* temp_r3;
     f32 var_f1;
 
-    temp_r3 = HSD_JObjLoadJoint(joint_data[0]);
-    HSD_JObjAddAnimAll(temp_r3, joint_data[1], joint_data[2], joint_data[3]);
+    temp_r3 = HSD_JObjLoadJoint(model->joint);
+    HSD_JObjAddAnimAll(temp_r3, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     if (arg1 != 0) {
         var_f1 = 1.0f;
     } else {
@@ -2778,14 +2780,14 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
 
 void mnDiagram_CreateCursor(void)
 {
-    void** joint_data;
+    StaticModelDesc* model;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     PAD_STACK(40);
 
-    joint_data = mnDiagram_804A0814;
+    model = &MenMainCursorB1_Top;
     gobj = GObj_Create(6, 7, 0x80);
-    jobj = HSD_JObjLoadJoint(*joint_data);
+    jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, mnDiagram_CursorProc, 0);
@@ -2805,20 +2807,21 @@ void mnDiagram_CreateScreen(u8 arg0)
     Diagram* user_data;
     Diagram* data2;
     int count;
-    void** joint_data;
+    StaticModelDesc* model;
     mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     int i;
     u16 indices;
     u8 stack_obj[8];
 
     (void) &stack_obj;
-    joint_data = (void**) &mnDiagram_804A0824;
+    model = &MenMainConB1_Top;
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram_804D6C10 = gobj;
-    jobj = HSD_JObjLoadJoint(joint_data[0]);
+    jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
-    HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
     user_data = HSD_MemAlloc(sizeof(Diagram));
