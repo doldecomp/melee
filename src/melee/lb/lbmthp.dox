@@ -1,8 +1,0 @@
-#ifndef MELEE_LB_LBMTHP_H
-#define MELEE_LB_LBMTHP_H
-
-#include <platform.h>
-
-/* 01F87C */ void lbMthp_8001F87C(void);
-
-#endif

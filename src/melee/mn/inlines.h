@@ -37,6 +37,7 @@ static inline void Menu_DecrementAnimTimer(void)
 
 static inline u64 Menu_GetAllInputs(void)
 {
+    /// Return a MenuEvent bitfield of controller input.
     return mn_804A04F0.buttons = mn_80229624(4);
 }
 

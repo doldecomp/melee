@@ -76,7 +76,6 @@ typedef struct _StaticPlayer {
 
     /*0x70-0x84*/ u32 kos_by_player[6];
 
-    /// @at{88} @sz{4}
     /// @remarks If -1 in zz_0035184, then it's set to MatchInfo->frame_count
     u32 match_frame_count;
 

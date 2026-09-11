@@ -27,6 +27,10 @@
 /* 15C358 */ bool ftBossLib_8015C358(void);
 /* 15C3A0 */ bool ftBossLib_8015C3A0(void);
 /* 15C3E8 */ HSD_GObj* ftBossLib_GetFighterGObj(FighterKind arg0);
+/**
+ * Fighter_GetState(FighterKind)
+ * @returns A fighter action state ID.
+ */
 /* 15C44C */ enum_t ftBossLib_GetMotionId(FighterKind kind);
 /* 15C4C4 */ enum_t ftBossLib_8015C4C4(void);
 /* 15C530 */ s32 ftBossLib_8015C530(int cpu_level);

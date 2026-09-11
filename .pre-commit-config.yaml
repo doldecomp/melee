@@ -24,7 +24,7 @@ repos:
     - id: clang-format
       args: [--version=22.1.8]
       types_or: [file]
-      files: \.(c|h|dox)$
+      files: \.(c|h)$
       require_serial: true
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: 3.11.1

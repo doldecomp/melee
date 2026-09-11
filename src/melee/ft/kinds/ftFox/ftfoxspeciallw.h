@@ -3,32 +3,54 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+/// Create Reflector Loop GFX
 /* 0E83E0 */ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj);
 /* 0E845C */ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj);
+/// Create Reflector Deflect GFX
 /* 0E84D8 */ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Start Motion State handler
 /* 0E8560 */ void ftFx_SpecialLw_Enter(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Start Motion State handler
 /* 0E85EC */ void ftFx_SpecialAirLw_Enter(HSD_GObj* gobj);
 /* 0E8694 */ void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj);
 /* 0E8720 */ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj);
 /* 0E87AC */ void ftFx_SpecialLwStart_IASA(HSD_GObj* gobj);
 /* 0E87D0 */ void ftFx_SpecialAirLwStart_IASA(HSD_GObj* gobj);
+/// Check for drop-through platform while in @c SpecialLwStart
 /* 0E87D4 */ bool ftFx_SpecialLwStart_CheckPass(HSD_GObj* gobj);
+/// Fox & Falco's Reflector Start Platform Drop Motion State handler
 /* 0E881C */ void ftFx_SpecialLwStart_Pass(HSD_GObj* gobj);
+/// Fox & Falco's Reflector Start Physics callback
 /* 0E8864 */ void ftFx_SpecialLwStart_Phys(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Start Physics callback
 /* 0E8884 */ void ftFx_SpecialAirLwStart_Phys(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Start Collision callback
 /* 0E88E4 */ void ftFx_SpecialLwStart_Coll(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Start Collision callback
 /* 0E8920 */ void ftFx_SpecialAirLwStart_Coll(HSD_GObj* gobj);
+/// Fox & Falco's ground -> air Reflector Start Motion State handler
 /* 0E895C */ void ftFx_SpecialLwStart_GroundToAir(HSD_GObj* gobj);
+/// Fox & Falco's air -> ground Reflector Start Motion State handler
 /* 0E89BC */ void ftFx_SpecialAirLwStart_AirToGround(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Loop Animation callback
 /* 0E8A24 */ void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Loop Animation callback
 /* 0E8A9C */ void ftFx_SpecialAirLwLoop_Anim(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Loop IASA callback
 /* 0E8B14 */ void ftFx_SpecialLwLoop_IASA(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Loop IASA callback
 /* 0E8B64 */ void ftFx_SpecialAirLwLoop_IASA(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Loop Physics callback
 /* 0E8C34 */ void ftFx_SpecialLwLoop_Phys(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Loop Physics callback
 /* 0E8C68 */ void ftFx_SpecialAirLwLoop_Phys(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Loop Collision callback
 /* 0E8CDC */ void ftFx_SpecialLwLoop_Coll(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Loop Collision callback
 /* 0E8D18 */ void ftFx_SpecialAirLwLoop_Coll(HSD_GObj* gobj);
+/// Fox & Falco's grounded Reflector Turn Animation callback
 /* 0E8FDC */ void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj);
+/// Fox & Falco's aerial Reflector Turn Animation callback
 /* 0E90EC */ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj);
 /* 0E91FC */ void ftFx_SpecialLwTurn_IASA(HSD_GObj* gobj);
 /* 0E9200 */ void ftFx_SpecialAirLwTurn_IASA(HSD_GObj* gobj);

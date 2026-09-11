@@ -41,6 +41,7 @@
 /* 18F6A8 */ u32 fn_8018F6A8(int);
 /* 18F6DC */ int fn_8018F6DC(int);
 /* 18F6FC */ CharacterKind fn_8018F6FC(CSSIconHud);
+/// @returns the frame for the tou css icon?
 /* 18F71C */ float fn_8018F71C(int, int);
 /* 18F74C */ int fn_8018F74C(void);
 /* 18F808 */ int fn_8018F808(void);
@@ -149,6 +150,7 @@
 /* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
 /* 19C048 */ void fn_8019C048(HSD_GObj*);
 /* 19C3EC */ void fn_8019C3EC(HSD_GObj*);
+/// updates visibility of char icons on the "press start" screen
 /* 19C570 */ void fn_8019C570(HSD_GObj*);
 /* 19C6AC */ void fn_8019C6AC(HSD_GObj*);
 /* 19C744 */ void fn_8019C744(HSD_GObj*);

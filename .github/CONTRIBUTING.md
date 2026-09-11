@@ -267,7 +267,7 @@ Melee sometimes packs bits in to an unsigned integer type as bitflags and someti
 - `types.h` for each module contains relevant types primary to that module. It's difficult to discern where a type truly belongs, so we're not very strict about that. Types should be only `struct X` and/or `union X` definitions, not `typedef`s.
 - One `forward.h` corresponds to each `types.h` and is responsible for providing a `typedef` for each struct and union, and typedefs of function pointers. It is also the place to define `enum`s, global `const` simple types like integers that don't get emitted as symbols, and `#define` constants. The purpose of this separation is to avoid circular inclusions.
 - If an `inline` function is shared by multiple TUs but its function body isn't a real symbol, it goes in `inlines.h` for the most relevant module. An exception is made if that inline function contains an assert which proves its source file.
-- Documentation belongs in `*.dox` and should be kept out of the C and H files with minimal exceptions. `@todo` comments are allowed anywhere.
+- Documentation lives at the declaration: put Doxygen comments above the prototype in the header, above the `static` forward declaration in the C file, and on struct fields (`///<` for one-liners). Longer prose belongs in `docs/*.md`. Do not add `*.dox` files. `@todo` comments are allowed anywhere.
 
 # <a name="compiler-notes"></a>Compiler Notes
 

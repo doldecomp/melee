@@ -1,6 +1,5 @@
 #ifndef MELEE_MP_FORWARD_H
 #define MELEE_MP_FORWARD_H
-
 #include <Runtime/platform.h>
 
 #include <melee/lb/forward.h>
@@ -47,6 +46,14 @@ typedef enum mpLib_GroundEnum {
     mpLib_GroundEnum_Unk2,
 } mpLib_GroundEnum;
 
+/**
+ * @brief Joint collision callback for ground surfaces.
+ * @param user_data Saved untyped data attached to the callback.
+ * @param coll_x50 %Unknown, sourced from #CollData::x50.
+ *                 `dist` according to #fn_801FC9AC?
+ * @param delta_y Relative y-offset since the collision started, equal to
+ *                `coll->cur_pos.y - coll->last_pos.y`
+ */
 typedef void (*mpLib_JointCollisionCallback)(void* user_data, int joint_id,
                                              CollData* coll, int coll_x50,
                                              mpLib_GroundEnum ground_kind,

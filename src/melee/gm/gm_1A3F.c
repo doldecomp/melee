@@ -42,7 +42,34 @@ struct stateMachine {
 ASSERT_SIZE(struct stateMachine, 0x14);
 
 /* 1A3F48 */ static void preloadState(GameModeState*);
+/**
+ * @brief Runs one game-mode scene transition and invokes the run loop for a
+ * given scene
+ *
+ * Finds the current #GameModeState in @p mode, runs its @c Prep handler, loads
+ * the scene via #gm_FindGameSceneHandler / #gm_801A4D34, then advances
+ * #GameRouting::curr_scene_idx when the scene loop exits.
+ */
 /* 1A4014 */ static void gm_801A4014(GameMode*);
+/**
+ * @brief Loads a game mode, runs it to completion, then unloads it.
+ *
+ * Loads the data associated with the given #GameModeKind (asset preload and
+ * #GameMode::Load), then executes its scene graph via #gm_801A4014 until
+ * #GameState::pending is set. When the loop finishes, unloads the mode
+ * (#GameMode::Unload) unless the game is resetting, then returns
+ * #GameRouting::pending_mode, the next pending #GameModeKind.
+ *
+ * If #GameState::game_mode_override is defined and returns a mode < #GM_COUNT,
+ * a single scene from that game mode will be executed after the current scene
+ * exits, skipping typical game mode load/preload routines for the resulting
+ * gamemode.  #GameState::pending takes precedence over the override behavior.
+ *
+ * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetPendingGameMode,
+ * ::gm_SetNewGameModePending
+ *
+ * @returns The next pending #GameModeKind (#GameRouting::pending_mode).
+ */
 /* 1A43A0 */ static u8 runGameMode(u8 mode);
 /* 479D30 */ static struct stateMachine state_machine;
 

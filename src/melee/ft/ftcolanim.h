@@ -8,6 +8,7 @@
 /* 0BFE6C */ void ftCo_Sleep_Anim(Fighter_GObj* gobj);
 /* 0BFE70 */ void ftCo_Sleep_IASA(Fighter_GObj* gobj);
 /* 0BFFAC */ void ftCo_800BFFAC(Fighter* fp);
+/// Fighter Apply Color Animation
 /* 0BFFD0 */ bool ftCo_800BFFD0(Fighter*, enum_t, bool);
 /* 0C0074 */ void ftCo_800C0074(Fighter* fp);
 /* 0C0098 */ void ft_800C0098(Fighter* fp);

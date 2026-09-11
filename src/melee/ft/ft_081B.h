@@ -19,6 +19,7 @@
 /* 081F2C */ bool ft_80081F2C(Fighter_GObj* gobj);
 /* 082084 */ bool ft_80082084(Fighter_GObj* gobj);
 /* 0821DC */ bool ft_800821DC(Fighter_GObj* gobj);
+/// @todo Name does not follow our conventions.
 /* 0822A4 */ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int direction);
 /* 08239C */ bool ft_8008239C(Fighter_GObj* gobj, int facing_direction,
                               ftCollisionBox* height_attributes);
@@ -64,6 +65,7 @@
                               HSD_GObjEvent cb);
 /* 083F88 */ void ft_80083F88(Fighter_GObj* gobj);
 /* 08403C */ void ft_8008403C(Fighter_GObj*, HSD_GObjEvent);
+/// CollisionCheck_StopLedge
 /* 084104 */ void ft_80084104(Fighter_GObj* gobj);
 /* 0841B8 */ void ft_800841B8(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 084280 */ void ft_80084280(Fighter_GObj*);

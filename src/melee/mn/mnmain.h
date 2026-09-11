@@ -46,6 +46,8 @@ typedef struct _MenuInputState {
     s32 x4;
 } MenuInputState;
 
+/// Test for some sort of analogue movement and return the port that inputted
+/// it.
 /* 2295AC */ u8 mn_802295AC(void);
 /* 229624 */ u32 mn_80229624(u32);
 /* 229860 */ void mn_80229860(s8);
@@ -87,13 +89,16 @@ typedef struct _MenuInputState {
 /* 22DD38 */ void mnMain_Scene_OnFrame(void);
 /* 22DDA8 */ void mnMain_Scene_OnEnter(void*);
 /* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
+/// Fill arg0 with the string representation of arg1.
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);
 /* 22EA78 */ void mn_8022EA78(char* buf, int buf_end, u32 num);
 /* 22EAE0 */ void mn_8022EAE0(HSD_GObj*);
 /* 22EB04 */ void mn_8022EB04(void* user_data);
+/// Shift arg0 left in base 10 by arg1 digits and return the ones digit.
 /* 22EB24 */ s32 mn_GetDigitAt(s32, s32);
+/// Return how many digits are in a number.
 /* 22EB78 */ s32 mn_GetDigitCount(s32);
 /* 22EBDC */ void mn_8022EBDC(void);
 /* 22EC18 */ float mn_8022EC18(HSD_JObj*, AnimLoopSettings*, HSD_TypeMask);

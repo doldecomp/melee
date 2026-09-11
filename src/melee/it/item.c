@@ -194,6 +194,7 @@ static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
     }
 }
 
+/// Initialize item coordinates?
 static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -279,6 +280,7 @@ void Item_80267454(HSD_GObj* gobj)
     }
 }
 
+/// Set Item Hold kind
 static void Item_802674AC(SpawnItem* spawnItem)
 {
     ItemKind kind = spawnItem->kind;
@@ -559,6 +561,7 @@ void Item_80267978(HSD_GObj* gobj)
     item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
 }
 
+/// Initialize item variables
 static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
     ItemAttr* item_attr;
@@ -744,6 +747,7 @@ void Item_802680CC(HSD_GObj* gobj)
     }
 }
 
+/// Set up item render objects?
 static void Item_8026814C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -781,6 +785,7 @@ static void Item_8026814C(HSD_GObj* gobj)
     }
 }
 
+/// Initialize item bones
 static bool Item_802682F0(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -832,6 +837,7 @@ void Item_8026849C(HSD_GObj* gobj)
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
+/// Set up item dynamic bones
 static void Item_80268560(HSD_GObj* gobj)
 {
     int i;
@@ -909,6 +915,7 @@ static void foobar3(HSD_GObj* gobj)
     }
 }
 
+/// Create Item
 static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 {
     HSD_GObj* gobj;
@@ -1001,6 +1008,7 @@ void Item_80268B9C(SpawnItem* spawnItem)
     Item_8026862C(spawnItem);
 }
 
+/// Adds #HSD_AObj instances to item model
 static void Item_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                           HSD_MatAnimJoint* matanim_joint,
                           HSD_ShapeAnimJoint* shapeanim_joint, Item* item_data)
@@ -1277,6 +1285,7 @@ void Item_802694CC(HSD_GObj* gobj)
     it_802799E4(gobj);
 }
 
+/// Item Think - Animation
 static void Item_80269528(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -1318,6 +1327,7 @@ static void Item_80269528(HSD_GObj* gobj)
     it_80279BE0(gobj);
 }
 
+/// Item Think - Check for Blast Zones
 static bool Item_802696CC(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1436,6 +1446,7 @@ static void Item_80269A9C(HSD_GObj* gobj)
     it_802722B0(gobj);
 }
 
+/// Item Think - Yellow Bar Collision (cb_JumpedOn)
 static void Item_80269B60(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1465,6 +1476,7 @@ static void Item_80269BE4(HSD_GObj* gobj)
     }
 }
 
+/// Item Think - Hit Collision Logic
 static void Item_80269C5C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
@@ -1485,6 +1497,7 @@ void Item_80269CA0(Item* item_data, s32 damage)
     }
 }
 
+/// Set damage struct
 static void Item_80269CC4(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
@@ -1532,6 +1545,7 @@ static void Item_80269CC4(HSD_GObj* gobj)
     temp_item->xDCE_flag.b6 = false;
 }
 
+/// Item Think - Shield Collision
 static bool Item_80269DC8(HSD_GObj* gobj)
 {
     HSD_GObjPredicate shield_bounced;
@@ -1573,6 +1587,7 @@ static bool Item_80269DC8(HSD_GObj* gobj)
     return false;
 }
 
+/// Item Think - On Reflect
 static bool Item_80269F14(HSD_GObj* gobj)
 {
     f32 temp_f30;
@@ -1624,6 +1639,7 @@ static bool Item_80269F14(HSD_GObj* gobj)
     return false;
 }
 
+/// Item Think - Exit Hitlag Check
 static void Item_8026A0A0(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1637,6 +1653,7 @@ static void Item_8026A0A0(HSD_GObj* gobj)
     }
 }
 
+/// Item Think - Exit Hitlag Check 2
 static void Item_8026A0FC(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1657,6 +1674,7 @@ static void func_8026A158_helper(HSD_GObj* atkCollGObj)
     Item_8026A158(atkCollGObj);
 }
 
+/// Item Think - Enter Hitlag
 static void Item_8026A158(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1684,6 +1702,7 @@ static void func_8026A1E8_inline(HSD_GObj* atkCollGObj)
     }
 }
 
+/// Item Think - Exit Hitlag
 static void Item_8026A1E8(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1765,6 +1784,7 @@ static void checkHitLag(f32 min_value, Item* item_data)
     item_data->xDC8_word.flags.xA = 1;
 }
 
+/// Item Think - Hit Collision
 static void Item_8026A294(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -1824,6 +1844,7 @@ static void Item_8026A294(HSD_GObj* gobj)
     Item_80269CC4(gobj);
 }
 
+/// Item Think - Process Dynamic Bones
 static void Item_8026A788(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
@@ -1838,6 +1859,7 @@ static void Item_8026A788(HSD_GObj* gobj)
     }
 }
 
+/// Item Think - Spawn
 static void Item_8026A810(HSD_GObj* gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
@@ -2128,6 +2150,7 @@ void Item_8026B074(Item* item_data)
     item_data->sfx_unk2 = SFX_NONE;
 }
 
+/// Stop All Item SFX
 static void Item_8026B0B4(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);

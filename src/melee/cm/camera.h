@@ -65,7 +65,29 @@
 /* 02F3AC */ void Camera_8002F3AC(void);
 /* 02F474 */ void Camera_SetModeToStandard(void);
 /* 02F488 */ s32 Camera_SetBounds(Vec4*);
+/**
+ * @brief Switches the camera to pause-camera mode.
+ *
+ * Configures pause-camera bounds, eye offset, and zoom from stage data for the
+ * given pauser. Called when a match is paused (e.g. via
+ * #gm_EnablePlayerPauseCamera or #Camera_8002F760).
+ *
+ * @param[in] pauserSlot Player slot to center the pause camera on, or a
+ * special slot id. Valid player slots are 0-5; slots @c 0xA and @c 0xB
+ * are also accepted (@c 0xB is used when no valid slot is available).
+ * Out-of-range values default to @c 0.
+ *
+ * @param[in] pauserId   Controller port / player id of the pauser. Valid ids
+ * are 0-3; ids 4-5 are also accepted. Out-of-range values default to @c 4.
+ * @param[in] arg2       Initial zoom preset: @c 0 uses the stage's default
+ * pause distance; @c 1 uses the current minimum zoom.
+ */
 /* 02F4D4 */ void Camera_SetUpPauseCamera(s8, s8, s32);
+/**
+ * @brief Switches the camera to pause-camera mode with default stage zoom.
+ *
+ * Wrapper around #Camera_SetUpPauseCamera with @p arg2 set to @c 0.
+ */
 /* 02F73C */ void Camera_SetUpPauseCameraWithDefaultZoom(s8, s8);
 /* 02F760 */ void Camera_8002F760(s8, s8);
 /* 02F784 */ void Camera_8002F784(s8, s8);
@@ -87,7 +109,10 @@
 /* 0304E0 */ void Camera_800304E0(HSD_GObj*);
 /* 030688 */ void Camera_Create(void);
 /* 030730 */ void Camera_80030730(f32);
-/* 030740 */ void Camera_SetBackgroundColor(u8, u8, u8);
+/// @param r The red component.
+/// @param g The green component.
+/// @param b The blue component.
+/* 030740 */ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b);
 /* 030758 */ GXColor Camera_GetBackgroundColor(void);
 /* 030788 */ void Camera_GetTransformPosition(Vec*);
 /* 0307AC */ void Camera_GetTransformInterest(Vec*);

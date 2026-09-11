@@ -9,16 +9,29 @@
 #include <dolphin/mtx.h>
 
 struct ftCaptain_FighterVars {
+    /**
+     * @c true during the Raptor Boost startup state. Used to keep track of the
+     * GFX. Cleared when the state ends and on death.
+     */
     /* 0x222C */ u32 during_specials_start;
+    /**
+     * @c true during the Raptor Boost lunge state. Used to keep track of the
+     * GFX. Cleared when the state ends and on death.
+     */
     /* 0x2230 */ u32 during_specials;
     u8 _[FIGHTERVARS_SIZE - 8];
 };
 
 struct ftCaptain_DatAttrs {
+    /// Minimum control stick range required for downward angle (Negative Y).
     /* +0 */ float specialn_stick_range_y_neg;
+    /// Minimum control stick range required for upward angle (Positive Y).
     /* +4 */ float specialn_stick_range_y_pos;
+    /// Maximum angle change from control stick input.
     /* +8 */ float specialn_angle_diff;
+    /// Momentum gained from aerial Falcon/Warlock Punch.
     /* +C */ float specialn_vel_x;
+    /// Additional momentum from angled Falcon/Warlock Punch.
     /* +10 */ float specialn_vel_mul;
     /* +14 */ float specials_gr_vel_x;
     /* +18 */ float specials_grav;
@@ -28,6 +41,7 @@ struct ftCaptain_DatAttrs {
     /* +28 */ float specials_unk2;
     /* +2C */ float specials_unk3;
     /* +30 */ float specials_unk4;
+    /// @remarks All of these Unk variables are unused.
     /* +34 */ float specials_unk5;
     /* +38 */ float specials_miss_landing_lag;
     /* +3C */ float specials_hit_landing_lag;
@@ -40,8 +54,8 @@ struct ftCaptain_DatAttrs {
     /* +58 */ float specialhi_input_var;
     /* +5C */ float specialhi_unk2;
     /* +60 */ float specialhi_catch_grav;
-    /* +64 */ s32 specialhi_air_var;
-    /* +68 */ float x68;
+    /* +64 */ s32 specialhi_air_var; ///< Gravity of aerial Raptor Boost.
+    /* +68 */ float x68;             ///< Completely unknown.
     /* +6C */ u32 speciallw_unk1;
     /* +70 */ float speciallw_flame_particle_angle;
     /* +74 */ float speciallw_on_hit_spd_modifier;

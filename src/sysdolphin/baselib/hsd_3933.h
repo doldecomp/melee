@@ -8,6 +8,7 @@
 /* 393440 */ void hsd_80393440(void*, void*);
 /* 393840 */ void hsd_80393840(void);
 /* 393844 */ void hsd_80393844(void);
+/// Checks whether USB server is set up.
 /* 393A04 */ bool hsd_80393A04(void);
 /* 393A54 */ void hsd_80393A54(int);
 /* 393A5C */ int hsd_80393A5C(char*, int, int);

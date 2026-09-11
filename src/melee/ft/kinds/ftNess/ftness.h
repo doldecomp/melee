@@ -1,5 +1,9 @@
 #ifndef GALE01_1147C0
 #define GALE01_1147C0
+/**
+ * @file
+ * @todo Fix formatting
+ */
 
 #include <melee/ft/kinds/ftNess/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -16,7 +20,9 @@
 /* 114A90 */ void ftNs_Init_OnItemVisible(HSD_GObj* gobj);
 /* 114AD8 */ void ftNs_Init_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag);
 /* 114B2C */ void ftNs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+/// Change model's MatAnim frames to hurt textures
 /* 114B6C */ void ftNs_Init_OnKnockbackEnter(HSD_GObj* gobj);
+/// Change model's MatAnim frames to normal textures
 /* 114BB0 */ void ftNs_Init_OnKnockbackExit(HSD_GObj* gobj);
 /* 3CC650 */ extern MotionState ftNs_Init_MotionStateTable[ftNs_MS_SelfCount];
 /* 3CCAD0 */ extern char ftNs_Init_DatFilename[];

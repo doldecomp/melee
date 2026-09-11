@@ -25,6 +25,8 @@ struct plAllocInfo {
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
+/// @todo Probably the same struct as #plAllocInfo, figure out how to make them
+///       work as one.
 struct plAllocInfo2 {
     FighterKind internal_id;
     u8 slot;

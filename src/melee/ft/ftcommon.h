@@ -51,6 +51,7 @@ ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
 /* 07D508 */ void ftCommon_Ascend(Fighter*, float, float);
 /* 07D528 */ bool ftCommon_CheckFallFast(Fighter*);
 /* 07D5BC */ void ftCommon_UnlockECB(Fighter*);
+/// Air_StoreBool_LoseGroundJump_NoECBfor10Frames
 /* 07D5D4 */ void ftCommon_8007D5D4(Fighter*);
 /* 07D60C */ void ftCommon_8007D60C(Fighter*);
 /* 07D698 */ void ftCommon_UseAllJumps(Fighter*);
@@ -77,6 +78,7 @@ ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
                                     HSD_GObjEvent unk_cb,
                                     void (*grabbed_cb)(HSD_GObj*, HSD_GObj*));
 /* 07E2F4 */ void ftCommon_8007E2F4(Fighter*, s16 val);
+/// Fighter_KillAllVelocity
 /* 07E2FC */ void ftCommon_8007E2FC(Fighter_GObj*);
 /* 07E358 */ void ftCommon_8007E358(Fighter_GObj*);
 /* 07E3EC */ void ftCommon_8007E3EC(Fighter_GObj*);
@@ -117,6 +119,7 @@ ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
 /* 07FA58 */ void ftCommon_8007FA58(Fighter_GObj*, Item_GObj*);
 /* 07FC7C */ void ftCommon_8007FC7C(Fighter_GObj*, float);
 /* 07FDA0 */ void ftCommon_8007FDA0(Fighter_GObj*);
+/// @todo static
 /* 07FE84 */ void ftCommon_8007FE84(Fighter_GObj*, Fighter_GObj*, s32, float);
 /* 07FF74 */ void ftCommon_8007FF74(Fighter_GObj*);
 /* 07FFD8 */ bool ftCommon_8007FFD8(Fighter*, float);
@@ -128,6 +131,10 @@ ftCommon_SetSelfMovementFromGroundedMovement_NoFriction(Fighter_GObj*);
 /* 080474 */ void ftCommon_80080474(Fighter*);
 /* 080484 */ void ftCommon_80080484(Fighter*);
 /* 0804A0 */ void ftCommon_800804A0(Fighter*, float);
+/**
+ * @todo @c DataOffset_PlayerScale_MultiplyBySomething
+ * @returns <tt>fp->x40*fp->x34</tt>
+ */
 /* 0804EC */ float ftCommon_800804EC(Fighter*);
 /* 0804FC */ void ftCommon_800804FC(Fighter*);
 

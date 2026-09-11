@@ -23,6 +23,7 @@
 /* 085B10 */ void ftData_80085B10(Fighter*);
 /* 085B98 */ void ftData_80085B98(Fighter*, int, int);
 /* 085CD8 */ void ftData_80085CD8(Fighter*, Fighter*, enum_t msid);
+/// Animation_GetAddress
 /* 085E50 */ FigaTree* ftData_80085E50(Fighter*, enum_t msid);
 /* 085FD4 */ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp,
                                                          FtMotionId msid);
@@ -34,7 +35,9 @@
 /* 3C10D0 */ extern Event ftData_Table_Unk1[Ft_Kind_Max];
 /* 3C10D0 */ extern struct ftData_UnkCountStruct
     ftData_UnkIntPairs[Ft_Kind_Max];
+/// One load  callback for every character.
 /* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[Ft_Kind_Max];
+/// One death callback for every character.-
 /* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[Ft_Kind_Max];
 /* 3C125C */ extern HSD_GObjEvent ftData_OnUserDataRemove[Ft_Kind_Max];
 /* 3C13E8 */ extern HSD_GObjEvent ftData_SpecialS[Ft_Kind_Max];
@@ -47,6 +50,7 @@
 /* 3C1784 */ extern HSD_GObjEvent ftData_SpecialHi[Ft_Kind_Max];
 /* 3C1808 */ extern HSD_GObjEvent ftData_OnAbsorb[Ft_Kind_Max];
 /* 3C188C */ extern Fighter_ItemEvent ftData_OnItemPickupExt[Ft_Kind_Max];
+/// probably ft_OnSomething
 /* 3C1DB4 */ extern HSD_GObjEvent ftData_UnkMotionStates3[Ft_Kind_Max];
 /* 3C1E38 */ extern HSD_GObjEvent ftData_UnkMotionStates4[Ft_Kind_Max];
 /* 3C20CC */ extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[Ft_Kind_Max];

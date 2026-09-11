@@ -30,7 +30,23 @@
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
-/* 1A4CE0 */ GameScene* gm_FindGameSceneHandler(u8 id);
+/**
+ * @brief Finds the #GameScene for a given scene kind.
+ *
+ * Walks the global #GameScene table (from #gm_GetAllGameScenes)
+ * comparing each entry's #GameScene::class_id against @p kind until a
+ * match is found or the @c GS_COUNT value is reached.
+ *
+ * @param kind The #GameSceneKind (passed as a @c u8) to look up.
+ * @returns The #GameScene whose #GameScene::class_id equals
+ */
+/* 1A4CE0 */ GameScene* gm_FindGameSceneHandler(u8 kind);
+/**
+ * @brief Main per-scene loop invoked from @c gm_801A4014.
+ *
+ * Runs until #gm_80479D58_t::unk_C becomes non-zero, calling @p on_frame each
+ * frame after pad/input processing.
+ */
 /* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo*);
 
 /* 4D6724 */ extern void (*gm_804D6724)(void);
