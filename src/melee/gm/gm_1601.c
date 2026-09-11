@@ -962,8 +962,8 @@ s32 fn_80161154(MatchEnd* arg0)
         if (spC[i]) {
             if (idx == 4) {
                 idx = i;
-            } else if ((u32) arg0->player_standings[idx].x20 >
-                       (u32) arg0->player_standings[i].x20)
+            } else if (arg0->player_standings[idx].x20 >
+                       arg0->player_standings[i].x20)
             {
                 idx = i;
             }
@@ -974,7 +974,7 @@ s32 fn_80161154(MatchEnd* arg0)
     for (i = 0; i < 4; i++) {
         if (spC[i] && idx != i) {
             player = &arg0->player_standings[i];
-            if ((u32) player->x20 == (u32) best_player->x20) {
+            if (player->x20 == best_player->x20) {
                 cnt += 1;
             } else {
                 spC[i] = 0;
@@ -2697,8 +2697,8 @@ u32 fn_801656A8(MatchEnd* arg0, u32 arg1)
         s32 j;
         for (j = 0; j < 6; j++) {
             if (arg0->player_standings[j].pkind != 3 &&
-                (u32) arg0->player_standings[arg1].x20 >
-                    (u32) arg0->player_standings[j].x20)
+                arg0->player_standings[arg1].x20 >
+                    arg0->player_standings[j].x20)
             {
                 cnt_gt += 1;
             }
@@ -2754,8 +2754,8 @@ s32 fn_8016588C(MatchEnd* match_end, s32 player_slot)
     } else if (match_end->match_kind == 2) {
         return fn_8016588C_clamp(match_end->player_standings[player_slot].x1C);
     } else if (match_end->match_kind == 1) {
-        if ((s8) match_end->player_standings[player_slot].stocks != 0) {
-            v = (s8) match_end->player_standings[player_slot].stocks;
+        if (match_end->player_standings[player_slot].stocks != 0) {
+            v = match_end->player_standings[player_slot].stocks;
         } else {
             v = match_end->player_standings[player_slot].x28 / 60 + 0xFF000001;
         }

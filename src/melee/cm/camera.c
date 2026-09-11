@@ -3150,7 +3150,7 @@ void Camera_8002E948(bool (*cb)(Vec*))
     }
 
     game_camera.x341_b1_b2 = 3;
-    game_camera.x344.cb = (s32(*)(Vec3*)) cb;
+    game_camera.x344.cb = (s32 (*)(Vec3*)) cb;
 
     switch (game_camera.x341_b1_b2) {
     case 1: {

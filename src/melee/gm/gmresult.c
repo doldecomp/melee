@@ -446,9 +446,9 @@ static StatsEntry lbl_803D6558[] = {
     { 0x32, { 0 }, NULL, NULL, NULL },
     { 0x33, { 0 }, fn_8017B9F4, NULL, NULL },
     { 0x34, { 0 }, NULL, NULL, NULL },
-    { 0x35, { 0 }, (s32(*)(s32)) fn_8017BACC, NULL, NULL },
+    { 0x35, { 0 }, (s32 (*)(s32)) fn_8017BACC, NULL, NULL },
     { 0x36, { 0 }, NULL, NULL, NULL },
-    { 0x37, { 0 }, (s32(*)(s32)) fn_8017BB30, NULL, NULL },
+    { 0x37, { 0 }, (s32 (*)(s32)) fn_8017BB30, NULL, NULL },
     { 0x36, { 0 }, NULL, NULL, NULL },
 };
 
