@@ -246,7 +246,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
             p = &ifStock_802F8298_data->anim[i];
             if (*p <= 10) {
                 data = ifStock_802F8298_data;
-                lbVector_8000DE38((float(*)[4]) & data->steal[i - 5], &vecC,
+                lbVector_8000DE38((float (*)[4]) & data->steal[i - 5], &vecC,
                                   0.1f * data->anim[i]);
                 HSD_JObjGetTranslation2(stock->player[user_data->player].x4[0],
                                         &vecD);
