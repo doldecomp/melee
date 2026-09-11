@@ -559,13 +559,6 @@ struct MenuKindData {
     void (*think)(HSD_GObj*);
 };
 
-struct mnDiagram_ArchiveData {
-    /* 0x00 */ HSD_Joint* x0;
-    /* 0x04 */ HSD_AnimJoint* x4;
-    /* 0x08 */ HSD_MatAnimJoint* x8;
-    /* 0x0C */ HSD_ShapeAnimJoint* xC;
-};
-
 struct MnDiagram2RowLayout {
     /* 0x00 */ Vec3 header_pos;
     /* 0x0C */ Vec3 label_pos;

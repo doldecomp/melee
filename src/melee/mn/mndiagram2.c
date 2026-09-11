@@ -959,7 +959,7 @@ void mnDiagram2_Create(int arg0)
     Diagram2* new_var;
     int j;
     int threshold;
-    mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
+    StaticModelDesc* archive = &MenMainConB2_Top;
     int scroll;
     int i;
     u32 is_name;
@@ -970,10 +970,11 @@ void mnDiagram2_Create(int arg0)
 
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
-    jobj = HSD_JObjLoadJoint(archive->x0);
+    jobj = HSD_JObjLoadJoint(archive->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
-    HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
+    HSD_JObjAddAnimAll(jobj, archive->animjoint, archive->matanim_joint,
+                       archive->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
     user_data = (Diagram2*) HSD_MemAlloc(sizeof(Diagram2));

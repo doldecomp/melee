@@ -4,6 +4,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/mn/types.h>
+#include <melee/sc/types.h>
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);
@@ -58,8 +59,8 @@ mnDiagram_GetNamePlayTimeByFighter(int name_idx,
 /* 243434 */ void mnDiagram_CreateScreen(u8 arg0);
 /* 2437E8 */ void mnDiagram_Init(u8 arg0, u8 arg1);
 
-/* 4A0834 */ extern mnDiagram_ArchiveData mnDiagram_804A0834;
-/* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
-/* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
+/* 4A0834 */ extern StaticModelDesc MenMainConB2_Top;
+/* 4A0844 */ extern StaticModelDesc MenMainConB3_Top;
+/* 4A0854 */ extern StaticModelDesc MenMainCursorB3_Top;
 
 #endif
