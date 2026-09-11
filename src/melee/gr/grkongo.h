@@ -6,6 +6,81 @@
 #include <melee/gr/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <melee/gr/types.h>
+
+extern GrJoint grKg_803E16E0[6];
+extern StageCallbacks grKg_StageCallbacks[12];
+
+/// A dat file index and the index of a spline within that file's
+/// spline table, as taken by #Ground_801C247C.
+typedef struct grKg_SplineChoice {
+    s32 file;
+    s32 spline;
+} grKg_SplineChoice;
+
+typedef struct grKg_SplineChoiceList {
+    grKg_SplineChoice pairs[3];
+    s32 terminator;
+} grKg_SplineChoiceList;
+
+struct grKongo_YakumonoParam {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    f32 unk24;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    f32 unk40;
+    s16 unk44;
+    s16 unk46;
+    s16 unk48;
+    s16 unk4A;
+    s16 unk4C;
+    s16 unk4E;
+    s16 unk50;
+    s16 unk52;
+    f32 unk54;
+    f32 unk58;
+    f32 unk5C;
+    f32 unk60;
+    s32 unk64;
+    s32 unk68;
+    f32 unk6C;
+    f32 unk70;
+    f32 unk74;
+    f32 unk78;
+    f32 unk7C;
+    f32 unk80;
+    void* unk84;
+    f32 unk88;
+    f32 unk8C;
+    f32 unk90;
+    f32 unk94;
+    f32 unk98;
+    f32 unk9C;
+    f32 unkA0;
+    f32 unkA4;
+    f32 unkA8;
+    f32 unkAC;
+    f32 unkB0;
+    f32 unkB4;
+    f32 unkB8;
+};
+
+extern const grKg_SplineChoiceList grKg_803B7FD4;
+
+static struct grKongo_YakumonoParam* yakumono_param;
+
 /* 1D5238 */ void grKongo_801D5238(bool);
 /* 1D523C */ void grKongo_801D523C(void);
 /* 1D52F8 */ void grKongo_801D52F8(void);

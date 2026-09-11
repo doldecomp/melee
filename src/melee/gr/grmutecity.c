@@ -339,7 +339,7 @@ StageData grMc_StageData = {
 };
 
 struct grMc_YakumonoParam {
-    int x0;
+    void* x0;
     void* x4;
     DynamicsDesc* x8;
     DynamicsDesc* xC;
@@ -923,7 +923,7 @@ void grMuteCity_801F04B8(Ground_GObj* gobj)
             HSD_GObj* bg_gobj = Ground_GetMapGObj(0x1D);
             if (bg_gobj != NULL) {
                 if (param != 0) {
-                    grMaterial_801C9604(bg_gobj, (s32) yakumono_param->x4, 0);
+                    grMaterial_801C9604(bg_gobj, yakumono_param->x4, 0);
                     if (gp->u.mutecity.x110 != NULL) {
                         HSD_LObjClearFlags(gp->u.mutecity.x110, LOBJ_HIDDEN);
                     }
@@ -1818,7 +1818,7 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
     HSD_ASSERT(2135, archive);
     dat = archive->unk4;
     if (dat != NULL) {
-        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x7B8);
+        return (DynamicModelDesc*) &dat->unk8[38];
     }
     return NULL;
 }

@@ -24,8 +24,8 @@
  * @copydoc ::grBattle_YakumonoParam::bg_curr_color_overlay
  */
 struct grBattle_YakumonoParam {
-    int bg_curr_color_overlay;
-    int bg_prev_color_overlay;
+    void* bg_curr_color_overlay;
+    void* bg_prev_color_overlay;
 };
 
 /* 219C98 */ static void grBattle_OnDemoInit(int);

@@ -45,7 +45,7 @@ struct grVenom_YakumonoParam {
     f32 x2C;
     char x30[0x34 - 0x30];
     f32 x34;
-    s32 x38;
+    void* x38;
 };
 
 static grVe_Data grVe_803E5348 = {
