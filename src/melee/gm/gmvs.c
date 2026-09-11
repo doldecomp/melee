@@ -1672,7 +1672,7 @@ void fn_8016DCC0(StartMeleeData* arg0)
     VsSceneController* tmp = &controller;
     int i;
 
-    memzero(&controller, 0x24C8);
+    memzero(&controller, offsetof(VsSceneController, start));
     controller.unk_D = 6;
     controller.unk_1C = (void*) &lbl_803D5630;
     controller.unk_20 = (void*) &lbl_803D5620;
