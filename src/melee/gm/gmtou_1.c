@@ -1,4 +1,3 @@
-#include "gmtou_1.h"
 
 #include <placeholder.h>
 

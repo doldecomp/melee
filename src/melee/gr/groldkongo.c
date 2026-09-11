@@ -56,7 +56,7 @@ struct grOldKongo_YakumonoParam {
     s32 rrfix_barrel_attack;
     s32 rradd_barrel_attack;
     s32 x68;
-    s32 x6C;
+    void* x6C;
 };
 
 /* 20F468 */ static void grOldKongo_8020F468(bool);

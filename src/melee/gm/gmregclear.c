@@ -932,8 +932,7 @@ inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
     return state->x118;
 }
 
-void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
-                 lbl_8046B6A0_24C_t* arg4)
+void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
 {
     s32 sp64;
     s32 sp60;
@@ -956,7 +955,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     u8 var_r0;
 
     special_score = 0;
-    coins = arg4->x58[0].xE;
+    coins = arg4->player_standings[0].xE;
     state = (data.state = &lbl_80472D28);
     memzero(state, sizeof(*state));
     state->xD4 = -1;
@@ -1002,7 +1001,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     }
 
     {
-        struct lbl_8046B6A0_24C_t* tmp = gm_8016B774();
+        MatchEnd* tmp = gm_8016B774();
         fn_8016F344(tmp);
     }
 
@@ -1091,7 +1090,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         }
     }
 
-    arg4->x58[0].xE = coins;
+    arg4->player_standings[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
     PAD_STACK(0x18);
 }

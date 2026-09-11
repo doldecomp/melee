@@ -575,12 +575,12 @@ static inline Ground* grMaterial_801C9604_inline(HSD_GObj* arg0)
     return arg0->user_data;
 }
 
-void grMaterial_801C9604(HSD_GObj* gobj, int arg1, bool arg2)
+void grMaterial_801C9604(HSD_GObj* gobj, void* script, bool arg2)
 {
     Ground* gp = grMaterial_801C9604_inline(gobj);
     ColorOverlay* co = grMaterial_GetOverlay(gp);
     co->x4_pri = arg2;
-    co->x8_ptr1 = (union ColorOverlay_x8_t*) arg1;
+    co->x8_ptr1 = (union ColorOverlay_x8_t*) script;
     co->x0_timer = 0;
     co->xC_loop = 0;
     co->x7C_color_enable = co->x7C_flag2 = 0;

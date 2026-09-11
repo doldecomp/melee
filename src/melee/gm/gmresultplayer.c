@@ -922,7 +922,9 @@ void fn_801785B0(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* child;
     HSD_JObj* node;
-    MatchEnd* match_end = fn_80174274();
+    MatchEnd* match_end =
+        fn_80174274(); /// @remark This type seems suspicious because the use
+                       /// of sd_penalty as a frame value
     u8 mode = match_end->match_kind;
     int frame_val;
     f32 fv;
@@ -937,7 +939,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0xC, -1);
         node = child;
         {
-            s8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->sd_penalty;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -962,7 +964,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x11, -1);
         node = child;
         {
-            s8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->sd_penalty;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -987,7 +989,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x10, -1);
         node = child;
         {
-            s8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->sd_penalty;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -1012,7 +1014,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x15, -1);
         node = child;
         {
-            s8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->sd_penalty;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -1100,12 +1102,10 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
 
                 if (match_end->match_kind != 3) {
                     f32 taunt_frame = gm_80168B34(
-                        (CharacterKind) (s8) (u8) match_end
-                            ->player_standings[(*i)]
+                        (CharacterKind) match_end->player_standings[(*i)]
                             .ckind,
-                        (int) (s8) (u8) match_end->player_standings[(*i)]
-                            .ftkind,
-                        match_end->player_standings[(*i)].x3);
+                        match_end->player_standings[(*i)].ftkind,
+                        match_end->player_standings[(*i)].x3_b0);
                     HSD_JObj* taunt_jobj = data->player_data[(*i)].jobjs[7];
                     HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);

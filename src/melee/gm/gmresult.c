@@ -232,8 +232,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     } else {
         /// Mode 2: special handling for pairs
         if ((entry_idx & 1) == 1 && entry_idx < list->count) {
-            struct lbl_8046B6A0_24C_44C_t* tmp =
-                (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
+            struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
             loop_n = entry_idx / 2;
             loop_i = 0;
             loop_n++;
@@ -262,8 +261,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         } else if ((entry_idx & 1) == 0) {
             s32 pair_idx = (entry_idx / 2) - 1;
             if (0 <= pair_idx) {
-                struct lbl_8046B6A0_24C_44C_t* tmp =
-                    (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
+                struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
                 s32 i = gmResultFindNth(tmp[(u8) slot].x0, pair_idx + 1);
                 stat_value = tmp[(u8) slot].x104[i];
                 if (stat_value < 0) {
@@ -1789,7 +1787,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
     fn_801771C0(&lbl_8046DBE8);
     if (match_end->player_standings[data->x6].pkind == Gm_PKind_Human) {
         if (!gm_WasMatchCanceled(match_end->outcome) &&
-            match_end->player_standings[data->x6].x3_6)
+            match_end->player_standings[data->x6].x3_b6)
         {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
@@ -1828,7 +1826,7 @@ void gm_Scene_Results_OnEnter(void* arg0_)
             fn_8017A9B4(i);
             data_iter->player_data[0].fighter_gobj =
                 fn_8017A67C(me_iter->player_standings[0].ckind,
-                            me_iter->player_standings[0].x3, i);
+                            me_iter->player_standings[0].x3_b0, i);
             data_iter->player_data[0].camera = fn_8017A318(i);
         }
         me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);
