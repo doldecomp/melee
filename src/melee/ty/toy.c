@@ -2309,13 +2309,6 @@ static inline void Toy_AddPanelAnims(HSD_JObj* jobj,
     HSD_JObjAddAnimAll(jobj, anim, matanim, shapanim);
 }
 
-static inline HSD_MatAnimJoint*
-Toy_GetPanelMatAnim(s32 arg0, ToyPanelLabelData* data, ToyGlobalsS_* tg)
-{
-    return HSD_ArchiveGetPublicAddress(tg->x50,
-                                       (&data->ptrs[arg0 * 3])[0x228 / 4]);
-}
-
 void Toy_80307470(s32 arg0)
 {
     ToyGlobalsS_* tg;
