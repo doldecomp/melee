@@ -6,8 +6,18 @@
   runCommand,
   wibo,
   mwcc,
+  # Shown on the cleanup index page; the flake passes its own metadata since
+  # the source tree here has no .git to ask.
+  rev ? "unknown",
+  lastModifiedDate ? "",
 }:
 let
+  generated =
+    if lastModifiedDate == "" then
+      ""
+    else
+      "${builtins.substring 0 4 lastModifiedDate}-${builtins.substring 4 2 lastModifiedDate}-${builtins.substring 6 2 lastModifiedDate}";
+
   mwcc_args = [
     "-nowraplines"
     "-msgstyle" "gcc"
@@ -46,6 +56,8 @@ stdenvNoCC.mkDerivation {
       ../docs
       ../extern
       ../src
+      ../tools/cleanup-index-template.html
+      ../tools/cleanup_index.py
       ../tools/ctx_template.html
       ../tools/doxygen-awesome-css
       ../tools/m2ctx/m2ctx.py
@@ -71,6 +83,13 @@ stdenvNoCC.mkDerivation {
 
     mkdir $out/progress
     cp tools/progress-redirect.html $out/progress/index.html
+
+    # Cleanup index
+
+    python tools/cleanup_index.py \
+      --out $out/cleanup-index \
+      --revision ${lib.escapeShellArg rev} \
+      --generated ${lib.escapeShellArg generated}
 
     runHook postBuild
   '';
