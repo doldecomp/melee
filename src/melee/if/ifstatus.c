@@ -154,8 +154,7 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     {
         HSD_JObj* jobj_r30 = value->x54_jobj[i];
         ASSERT_NOT_NULL(jobj_r30, 993);
-        if (fabsf_bitwise(jobj_r30->translate.x) <
-            100.0f) { // 100.0f @ lbl_804DDA6C
+        if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f) {
             float f = (&value->x34_vec.x)[i];
             jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);
@@ -912,7 +911,7 @@ void ifStatus_802F66A4(void)
         if (reset != 0) {
 #endif
             ifStatus_804D6D60 = 0;
-            memzero(hud, 0x258);
+            memzero(hud, sizeof(hud->players));
 #ifdef MUST_MATCH
         }
     }
