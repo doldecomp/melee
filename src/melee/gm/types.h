@@ -1249,7 +1249,7 @@ typedef struct gm_8019ECAC_OnEnter_t {
     u32 x14;
 } gm_8019ECAC_OnEnter_t;
 
-struct VsSceneController {
+struct VsSceneState {
     /* 0x0000 */ u8 unk_0; ///< 0 During a match
                            ///< 1 While GAME! or "TIMEOUT!" is displayed/match
                            ///< is frozen on final frame 2 While in 1p and
@@ -1293,6 +1293,10 @@ struct VsSceneController {
     /* 0x0038 */ struct VsSceneFighter fighters[GM_MAX_PLAYERS];
     /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
     /* 0x024C */ MatchEnd x24C;
+};
+
+struct VsSceneController {
+    /* 0x0000 */ struct VsSceneState state;
     /* 0x24C8 */ struct StartMeleeRules start;
 }; /* size = 0x2528 */
 ASSERT_SIZE(struct VsSceneController, 0x2528);

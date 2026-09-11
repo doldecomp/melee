@@ -521,7 +521,7 @@ void fn_8016A09C(void)
     PAD_STACK(4);
     var_r29 = 0;
 
-    gmVs_GetController_1();
+    gmVs_GetSceneState();
     lbl_8046B488.unk_10_b1 = 1;
     lbl_8046B488.unk_10_b0 = 0;
 
@@ -548,14 +548,14 @@ void gm_8016A164(void)
 {
     int i;
     struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
-    VsSceneController* match_info = gmVs_GetController_1();
+    VsSceneState* scene_state = gmVs_GetSceneState();
     PAD_STACK(4);
     if (gp == 0) {
-        if (match_info == 0) {
+        if (scene_state == 0) {
         }
     }
 
-    match_info->is_singleplayer = false;
+    scene_state->is_singleplayer = false;
     gp->x8 = 0;
     gp->x7 = 0;
     gp->unk_10_b1 = false;
@@ -707,7 +707,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(int arg0)
 {
-    if (gmVs_GetController_1()->hud_enabled == true) {
+    if (gmVs_GetSceneState()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }

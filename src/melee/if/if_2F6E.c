@@ -85,29 +85,29 @@ void ifStatus_802F7034(UNK_T arg0)
     u8 unkB;
     u8 mr;
 
-    big_thing = gmVs_GetController_0();
-    if (big_thing->unk_10 != 0) {
-        a = big_thing->unk_10 - 1;
+    big_thing = gmVs_GetSceneController();
+    if (big_thing->state.unk_10 != 0) {
+        a = big_thing->state.unk_10 - 1;
     } else {
         a = -1;
     }
-    if (big_thing->unk_14 != 0) {
-        b = big_thing->unk_14 - 1;
+    if (big_thing->state.unk_14 != 0) {
+        b = big_thing->state.unk_14 - 1;
     } else {
         b = -1;
     }
-    if (big_thing->unk_18 != 0) {
-        c = big_thing->unk_18;
+    if (big_thing->state.unk_18 != 0) {
+        c = big_thing->state.unk_18;
     } else {
         c = 0;
     }
 
-    unkB = big_thing->unk_B;
+    unkB = big_thing->state.unk_B;
     if (unkB != 0) {
         ifStatus_802F6EA4(unkB - 1, a, b, c, arg0, NULL);
         return;
     }
-    mr = big_thing->match_result;
+    mr = big_thing->state.match_result;
     if (mr == OUTCOME_TIMEOUT) {
         ifStatus_802F6EA4(0, a, b, c, arg0, NULL);
         return;

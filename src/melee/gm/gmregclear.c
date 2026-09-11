@@ -141,9 +141,9 @@ int fn_8017F008(void)
 s32 fn_8017F09C(void)
 {
     struct lbl_80472D28_t* data = &lbl_80472D28;
-    VsSceneController* p = gmVs_GetController_0();
+    VsSceneController* p = gmVs_GetSceneController();
     if (p->start.x4_6) {
-        VsSceneController* p2 = gmVs_GetController_0();
+        VsSceneController* p2 = gmVs_GetSceneController();
         int flag;
         if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
             p2->start.timer_counts_up)
@@ -153,7 +153,7 @@ s32 fn_8017F09C(void)
             flag = 1;
         }
         if (flag != 0) {
-            s32 product = p->timer_seconds * data->x108;
+            s32 product = p->state.timer_seconds * data->x108;
             s32 ret = product;
             if (product < 0) {
                 ret = 0;
@@ -176,7 +176,7 @@ s32 fn_8017F14C(void* arg0)
 {
     fn_8017F14C_arg* p = arg0;
     struct lbl_80472D28_t* data = &lbl_80472D28;
-    if (gmVs_GetController_0()->start.x4_7) {
+    if (gmVs_GetSceneController()->start.x4_7) {
         s32 val = p->x98;
         s32 ret = val;
         if (val > 9999) {
@@ -407,7 +407,7 @@ void fn_8017F608(void* arg0)
             struct lbl_80472D28_t* state = &lbl_80472D28;
             p->x74->pos_z = -10.0f;
             p->x74->default_alignment = 2;
-            gm = gmVs_GetController_0();
+            gm = gmVs_GetSceneController();
             if (state->x118 != 0 || (state->x11A != 0 && state->x11B == 0) ||
                 gm->start.timer_counts_up)
             {
@@ -984,9 +984,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
         break;
     }
     case 3:
-        temp = gmVs_GetController_0();
+        temp = gmVs_GetSceneController();
         state->x118 = 1;
-        if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
+        if (temp->state.match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), &special_score_value,
                               &coin_count);
             special_score = special_score_value;

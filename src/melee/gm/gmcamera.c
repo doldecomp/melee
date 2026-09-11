@@ -263,18 +263,18 @@ void gmCamera_801A26C0(void)
     VsSceneController* hud;
     PAD_STACK(4);
 
-    hud = gmVs_GetController_0();
+    hud = gmVs_GetSceneController();
     if (gm_GetDbPauseFlag(3)) {
         gm_ClearDbPauseFlag(3);
         if (gm_GetDbPauseFlag(1)) {
-            gm_801A0FEC(hud->pauser, 1);
+            gm_801A0FEC(hud->state.pauser, 1);
         } else {
             lbAudioAx_80024E84(0);
             ifAll_802F33CC();
             HSD_PadRumbleUnpauseAll();
         }
-        hud->hud_enabled = 1;
-        hud->unk_3 = 0;
+        hud->state.hud_enabled = 1;
+        hud->state.unk_3 = 0;
     }
     gmCamera_801A26C0_FreeTexts(&gmCamera_VsCamUiState);
 }
@@ -298,20 +298,20 @@ void gmCamera_801A2800(void)
     HSD_JObj* jobj;
     VsSceneController* temp_r3;
 
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     gmCamera_VsCamUiState.x10 = 0;
     lb_80011E24(gmCamera_VsCamUiState.x8, &jobj, 2, -1);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     gm_SetDbPauseFlag(3);
     if (gm_GetDbPauseFlag(1) != 0) {
-        gm_801A10FC(temp_r3->pauser);
+        gm_801A10FC(temp_r3->state.pauser);
     } else {
         lbAudioAx_80024E84(1);
         ifAll_802F3394();
         HSD_PadRumblePauseAll();
     }
-    temp_r3->hud_enabled = 0;
-    temp_r3->unk_3 = 1;
+    temp_r3->state.hud_enabled = 0;
+    temp_r3->state.unk_3 = 1;
     cmSnap_800315C8();
 }
 
