@@ -124,7 +124,7 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     }
 
     ftCommon_8007D5D4(fp);
-    fp->mv.co.unk_deadup.x40 = (int) p_ftCommonData->x5D0;
+    fp->mv.co.unk_deadup.x40 = (int) p_ftCommonData->rebirth_countdown;
     Fighter_ChangeMotionState(gobj, 0xC, 0x1002, 0.0f, 1.0f, -1.0f, NULL);
 
     fp->x221E_b2 = 1;
@@ -253,7 +253,7 @@ void ftCo_800D5600(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     mpColl_80043680(&fp->coll_data, &fp->cur_pos);
     fp->self_vel.y = 0;
-    fp->mv.co.common.x0 = (int) p_ftCommonData->x5D4;
+    fp->mv.co.common.x0 = (int) p_ftCommonData->rebirth_wait;
     Fighter_ChangeMotionState(gobj, ftCo_MS_RebirthWait,
                               Ft_MF_KeepGfx | Ft_MF_SkipColAnim |
                                   Ft_MF_KeepAccessory | Ft_MF_SkipNametagVis,

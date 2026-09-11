@@ -209,7 +209,7 @@ block_70:
         HSD_JObj* joint = fp->parts[part].joint;
         ftCommonData* data = p_ftCommonData;
         efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
-                      &data->x564);
+                      &data->fall_common.x564);
         return;
     }
     case 0x3E9:
