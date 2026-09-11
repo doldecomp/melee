@@ -10,7 +10,6 @@ typedef struct PosArrayFull PosArrayFull;
 typedef struct SisFontData SisFontData;
 typedef struct Toy Toy;
 typedef struct Toy26B8 Toy26B8;
-typedef struct Toy26B8_2 Toy26B8_2;
 typedef struct Toy6E68 Toy6E68;
 typedef struct ToyAnimState ToyAnimState;
 typedef struct ToyCameraControl ToyCameraControl;
