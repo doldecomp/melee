@@ -1873,19 +1873,18 @@ void Toy_80306930(HSD_GObj* gobj, int unused)
 void Toy_80306954(HSD_GObj* gobj, int unused)
 {
     void* state;
-    char* tbl;
-    char* entry;
+    s32 light_idx;
 
-    tbl = _Toy_str_TyLight_dat;
     state = Toy_sbss_804D6ED4;
-    if (HSD_CObjSetCurrent((HSD_CObj*) gobj->hsd_obj)) {
+    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
         if (_Toy_sbss_804D6E50 == 0) {
-            entry = tbl + M2C_FIELD(state, s32*, 0x10) * 0xC;
-            if (*(s32*) (entry + 0x104) != 0) {
-                HSD_SetEraseColor(
-                    *(u8*) (entry + 0x100), *(u8*) (entry + 0x101),
-                    *(u8*) (entry + 0x102), *(u8*) (entry + 0x103));
-                HSD_CObjEraseScreen((HSD_CObj*) gobj->hsd_obj, 1, 0, 0);
+            light_idx = ((ToyCameraControl*) state)->x10;
+            if (_Toy_803FDDE4.values[light_idx].flag) {
+                HSD_SetEraseColor(_Toy_803FDDE4.values[light_idx].color.r,
+                                  _Toy_803FDDE4.values[light_idx].color.g,
+                                  _Toy_803FDDE4.values[light_idx].color.b,
+                                  _Toy_803FDDE4.values[light_idx].color.a);
+                HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 0);
             }
         }
         HSD_GObj_80390ED0(gobj, 7);
