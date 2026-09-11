@@ -254,7 +254,7 @@ void grFourside_801F30A0(void* user_data, int joint_id, CollData* coll,
     PAD_STACK(3 * 4);
 
     gobj = Ground_GetMapGObj(5);
-    val = M2C_FIELD(coll, u8*, 0x34);
+    val = (s32) coll->x34_flags.b1234 << 3;
     gp1 = GET_GROUND(gobj);
     val = ((val >> 3) & 0xF);
     if (val == 1) {
