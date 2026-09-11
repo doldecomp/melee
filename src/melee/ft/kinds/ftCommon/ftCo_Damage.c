@@ -484,7 +484,7 @@ block_67:
     if (!(scaled_kb.v >= p_ftCommonData->x5E8)) {
         goto block_70;
     }
-    ftCommon_8007EFC0(fp, (u32) p_ftCommonData->x5EC);
+    ftCommon_8007EFC0(fp, p_ftCommonData->x5EC);
 block_70:
     if (var_r27 == 0) {
         goto block_75;
