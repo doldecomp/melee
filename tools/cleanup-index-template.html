@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melee Cleanup Index</title>
+<meta name="description" content="Every pointer cast, byte-offset walk, m2c field macro, MUST_MATCH region and compiler pragma in the Super Smash Bros. Melee decompilation, by file.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ------------------------------------------------------------------ */
+/* Tokens. Three site families, three hues: rust for sites that move   */
+/* a pointer, teal for sites that only retype one, indigo for match    */
+/* hacks. Hex literals in source share the rust hue.                    */
+/* ------------------------------------------------------------------ */
+:root {
+    color-scheme: light dark;
+
+    --ground: #F3F3F6;
+    --surface: #FFFFFF;
+    --sunken: #E9EAF0;
+    --ink: #14151B;
+    --ink-2: #3D4150;
+    --muted: #6A6F82;
+    --rule: #D4D6E0;
+    --rule-soft: #E6E7EE;
+
+    --accent: #4B3F8F;
+    --accent-soft: #E6E2F6;
+
+    --move: #9E4A16;
+    --move-soft: #F7E9DE;
+    --retype: #2A5F72;
+    --retype-soft: #DFEBF0;
+    --hack: #4B3F8F;
+    --hack-soft: #E6E2F6;
+
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --display: Archivo, ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ground: #0F1016;
+        --surface: #161821;
+        --sunken: #0A0B10;
+        --ink: #E8E9F0;
+        --ink-2: #C2C5D4;
+        --muted: #8F95AB;
+        --rule: #2B2E3C;
+        --rule-soft: #22242E;
+
+        --accent: #9C8DEA;
+        --accent-soft: #26224A;
+
+        --move: #E39A5C;
+        --move-soft: #33251A;
+        --retype: #7FBBD1;
+        --retype-soft: #17303A;
+        --hack: #9C8DEA;
+        --hack-soft: #26224A;
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 14px/1.5 var(--sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+code { font-family: var(--mono); }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.mono { font-family: var(--mono); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Page frame: masthead across the top, sidebar and results below. */
+.page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Masthead                                                             */
+/* ------------------------------------------------------------------ */
+.mast {
+    padding: 26px 0 18px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 40px;
+    align-items: end;
+}
+
+.eyebrow {
+    grid-column: 1 / -1;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(26px, 3.4vw, 34px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+}
+
+/* Right-hand column: totals, then provenance. */
+.totals {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.7;
+    white-space: nowrap;
+}
+
+.totals b {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.totals a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+}
+
+.totals a:hover { border-bottom-color: var(--accent); }
+
+/* ------------------------------------------------------------------ */
+/* Workbench: sticky facet sidebar beside the results.                  */
+/* ------------------------------------------------------------------ */
+.bench {
+    display: grid;
+    grid-template-columns: 292px minmax(0, 1fr);
+    gap: 0 36px;
+}
+
+.side {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 18px 12px 24px 0;
+    border-right: 1px solid var(--rule);
+    scrollbar-width: thin;
+}
+
+.main {
+    min-width: 0;
+    padding-top: 18px;
+}
+
+/* Search ----------------------------------------------------------- */
+.search {
+    position: relative;
+    display: flex;
+    margin-bottom: 18px;
+}
+
+.search input {
+    width: 100%;
+    padding: 8px 28px 8px 10px;
+    font: 400 13px/1.2 var(--mono);
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+}
+
+.search input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: transparent;
+}
+
+.search kbd {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    padding: 1px 5px;
+    font: 500 11px/1.4 var(--mono);
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+.search input:not(:placeholder-shown) + kbd { display: none; }
+
+/* Facets ----------------------------------------------------------- */
+.facet { margin-bottom: 18px; }
+
+.facet h2 {
+    margin: 0 0 6px;
+    padding-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule-soft);
+}
+
+.facet h2 button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: 500 11px/1 var(--sans);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+/* One row per value. The tinted bar behind it is the count as a share
+    of the largest value in the facet, so each facet reads as a histogram. */
+.frow {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    margin: 0;
+    padding: 3px 6px;
+    display: grid;
+    grid-template-columns: 9px minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 8px;
+    border: 0;
+    border-radius: 3px;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.frow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: var(--w, 0%);
+    border-radius: 3px;
+    background: var(--tint, var(--accent));
+    opacity: .1;
+}
+
+.frow:hover { background: var(--sunken); }
+
+.frow[aria-pressed="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.frow[aria-pressed="true"] .fc { color: inherit; }
+
+.frow.dim { opacity: .45; }
+
+.frow .sw {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    transform: translateY(1px);
+}
+
+.frow .fn {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.frow .fn small {
+    margin-left: 6px;
+    color: var(--muted);
+    font-size: 11.5px;
+}
+
+.frow .fc {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.frow.nosw { grid-template-columns: minmax(0, 1fr) auto; }
+
+/* Offsets are chips, not rows: there are many and the value is short. */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.chip-off {
+    padding: 2px 7px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--move);
+    background: var(--move-soft);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.chip-off:hover { border-color: var(--move); }
+.chip-off[aria-pressed="true"] { border-color: var(--move); font-weight: 600; }
+
+.chip-off b {
+    margin-left: 5px;
+    font-weight: 500;
+    opacity: .6;
+}
+
+/* Results toolbar -------------------------------------------------- */
+.tools {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    margin: -18px 0 0;
+    padding: 18px 0 10px;
+    background: var(--ground);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+}
+
+.summary {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.summary b {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+/* Active filters shown as removable tokens. */
+.active {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tok {
+    padding: 2px 4px 2px 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tok:hover { text-decoration: line-through; }
+
+.tok i {
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1;
+    opacity: .7;
+}
+
+.spacer { flex: 1; }
+
+/* Segmented control for view and sort. */
+.seg {
+    display: inline-flex;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.seg button {
+    padding: 5px 10px;
+    border: 0;
+    border-right: 1px solid var(--rule);
+    background: var(--surface);
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.seg button:last-child { border-right: 0; }
+.seg button:hover { color: var(--ink); }
+
+.seg button[aria-pressed="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.linkish {
+    padding: 5px 2px;
+    border: 0;
+    background: none;
+    font-size: 12px;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.linkish:disabled {
+    color: var(--muted);
+    cursor: default;
+}
+
+/* File list -------------------------------------------------------- */
+.file { border-bottom: 1px solid var(--rule-soft); }
+
+.file-head {
+    width: 100%;
+    padding: 8px 6px 8px 2px;
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr) 180px 52px;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.file-head:hover { background: var(--surface); }
+.file[open] > .file-head { background: var(--surface); }
+
+.chev {
+    font-size: 10px;
+    color: var(--muted);
+    transition: transform .12s;
+}
+
+.file[open] .chev { transform: rotate(90deg); }
+
+.path {
+    font-family: var(--mono);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.path span { color: var(--muted); }
+
+/* Category mix inside a file, in category order. */
+.mix {
+    display: flex;
+    height: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--sunken);
+}
+
+.mix i { display: block; height: 100%; }
+
+.n {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Sites inside an expanded file. */
+.sites {
+    padding: 2px 0 8px 16px;
+    background: var(--surface);
+}
+
+.site {
+    display: grid;
+    grid-template-columns: 52px 118px 132px 108px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 12px;
+    padding: 4px 8px 4px 0;
+    font-size: 12.5px;
+    border-bottom: 1px solid var(--rule-soft);
+}
+
+.site:last-child { border-bottom: 0; }
+
+.site.wide { grid-template-columns: minmax(200px, 1fr) 118px 132px 108px minmax(0, 2fr); }
+
+.ln {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.site.wide .ln {
+    text-align: left;
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.site.wide .ln b {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+a.ln:hover { color: var(--accent); }
+
+.chip {
+    display: inline-block;
+    padding: 1px 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.chip-move { color: var(--move); background: var(--move-soft); }
+.chip-retype { color: var(--retype); background: var(--retype-soft); }
+.chip-hack { color: var(--hack); background: var(--hack-soft); }
+
+.ty {
+    font-family: var(--mono);
+    color: var(--retype);
+    overflow-wrap: anywhere;
+}
+
+.dt {
+    font-family: var(--mono);
+    color: var(--move);
+    overflow-wrap: anywhere;
+}
+
+.src {
+    font-family: var(--mono);
+    color: var(--ink-2);
+    white-space: pre;
+    overflow-x: auto;
+    padding-bottom: 1px;
+}
+
+.src::-webkit-scrollbar { height: 4px; }
+.src::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.src .c { color: var(--retype); font-weight: 500; }
+.src .h { color: var(--move); font-weight: 500; }
+.src .m { color: var(--hack); font-weight: 500; }
+
+.more {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+}
+
+.more button {
+    padding: 7px 14px;
+    font-size: 12.5px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.more button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.empty {
+    padding: 40px 0;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* Method ----------------------------------------------------------- */
+.method {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 12.5px;
+    columns: 2;
+    column-gap: 40px;
+}
+
+.method p {
+    margin: 0 0 10px;
+    break-inside: avoid;
+}
+
+.method code {
+    color: var(--ink-2);
+    font-size: 12px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Narrow screens: sidebar stacks above, facets collapse.               */
+/* ------------------------------------------------------------------ */
+@media (max-width: 900px) {
+    .mast { grid-template-columns: 1fr; }
+    .totals { text-align: left; white-space: normal; }
+
+    .bench { grid-template-columns: 1fr; }
+
+    .side {
+        position: static;
+        max-height: none;
+        padding-right: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+    }
+
+    .facets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 0 24px;
+    }
+
+    .tools { margin-top: 0; padding-top: 12px; }
+
+    .file-head { grid-template-columns: 14px minmax(0, 1fr) 52px; }
+    .file-head .mix { display: none; }
+
+    .sites { padding-left: 4px; }
+
+    .site, .site.wide {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+            "ln chip"
+            "ty dt"
+            "src src";
+        gap: 3px 10px;
+        padding: 8px 0;
+    }
+
+    .site > :nth-child(1) { grid-area: ln; text-align: left; }
+    .site > :nth-child(2) { grid-area: chip; }
+    .site > :nth-child(3) { grid-area: ty; }
+    .site > :nth-child(4) { grid-area: dt; }
+    .site > :nth-child(5) { grid-area: src; }
+
+    .method { columns: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+    <!-- Masthead ---------------------------------------------------- -->
+    <header class="mast">
+        <div class="eyebrow">ssbm decompilation &middot; src/</div>
+        <h1>Melee Cleanup Index</h1>
+        <div class="totals" id="totals"></div>
+    </header>
+
+    <div class="bench">
+
+        <!-- Facets ------------------------------------------------ -->
+        <aside class="side">
+            <label class="search">
+                <input id="q" type="search" spellcheck="false" autocomplete="off"
+                        aria-label="Search files, types, details and source"
+                        placeholder="search source, type, path&hellip;">
+                <kbd>/</kbd>
+            </label>
+
+            <div class="facets">
+                <section class="facet">
+                    <h2>Family</h2>
+                    <div id="f-fam"></div>
+                </section>
+                <section class="facet">
+                    <h2>Category</h2>
+                    <div id="f-cat"></div>
+                </section>
+                <section class="facet">
+                    <h2>Directory <button type="button" id="dir-more" hidden></button></h2>
+                    <div id="f-dir"></div>
+                </section>
+                <section class="facet">
+                    <h2>Offset</h2>
+                    <div class="chips" id="f-off"></div>
+                </section>
+            </div>
+        </aside>
+
+        <!-- Results ----------------------------------------------- -->
+        <main class="main">
+            <div class="tools">
+                <span class="summary" id="summary"></span>
+                <span class="active" id="active"></span>
+                <span class="spacer"></span>
+                <span class="seg" role="group" aria-label="View">
+                    <button type="button" data-view="files" aria-pressed="true">by file</button>
+                    <button type="button" data-view="list" aria-pressed="false">flat list</button>
+                </span>
+                <span class="seg" role="group" aria-label="Sort" id="sortseg">
+                    <button type="button" data-sort="count" aria-pressed="true">most sites</button>
+                    <button type="button" data-sort="path" aria-pressed="false">by path</button>
+                </span>
+                <button class="linkish" type="button" id="expand">expand all</button>
+                <button class="linkish" type="button" id="collapse">collapse</button>
+            </div>
+
+            <div id="results"></div>
+
+            <footer class="method">
+                <p>
+                    <b>Method.</b> Comments and string literals are blanked, then each site
+                    is classified once by its outermost form: <code>*(f32*)((u8*)p + 0xE0)</code>
+                    is one cast+offset, not three casts. <code>M2C_FIELD(p, T*, off)</code>
+                    is the same shape behind a macro.
+                </p>
+                <p>
+                    <b>Match hacks.</b> Every <code>#pragma</code> other than push/pop
+                    plumbing is one site, guarded by <code>MUST_MATCH</code> or not. Each
+                    <code>#ifdef MUST_MATCH</code> region holding real code is one site,
+                    labelled by what it contains; a region holding only pragmas is counted
+                    under those pragmas.
+                </p>
+                <p>
+                    <b>Precision.</b> ptr-to-int and raw-offset are heuristic: an identifier
+                    counts as a pointer when it is declared with a <code>*</code> in the same
+                    function or at file scope, and narrow casts (<code>u8</code>,
+                    <code>s16</code>) are excluded. Every other category is syntactic.
+                </p>
+                <p>
+                    <b>Freshness.</b> Regenerated by <code>tools/cleanup_index.py</code> on
+                    every push. Line links point at the revision that built this page.
+                    Filters live in the URL, so a filtered view is a shareable link.
+                </p>
+            </footer>
+        </main>
+
+    </div>
+</div>
+
+<script id="meta" type="application/json">__META__</script>
+<script id="data" type="application/json">__PAYLOAD__</script>
+
+<script>
+(() => {
+    'use strict';
+
+    // ---------------------------------------------------------------
+    // Data. A row is [category, file, line, type, detail, source].
+    // Category definitions ship with the data from tools/cleanup_index.py.
+    // ---------------------------------------------------------------
+    const META = JSON.parse(document.getElementById('meta').textContent);
+    const ROWS = JSON.parse(document.getElementById('data').textContent);
+
+    const CATEGORIES = META.categories.map(([name, shape, family]) => ({ name, shape, family }));
+    const FAMILY = Object.fromEntries(CATEGORIES.map(c => [c.name, c.family]));
+    const FAMILIES = [
+        { key: 'move', label: 'move a pointer' },
+        { key: 'retype', label: 'retype a pointer' },
+        { key: 'hack', label: 'match hack' },
+    ];
+    // Opacity step for a category within its family, so a mix bar still
+    // distinguishes siblings that share a hue.
+    const CAT_RANK = {};
+    for (const f of FAMILIES) {
+        CATEGORIES.filter(c => c.family === f.key).forEach((c, i) => { CAT_RANK[c.name] = i; });
+    }
+
+    // Mirrors directory_of() in tools/cleanup_index.py: the directory, at
+    // most three levels deep, never the file itself.
+    const dirOf = file => file.split('/').slice(0, -1).slice(0, 3).join('/');
+    const hexOffset = detail => {
+        const m = /([-+])\s*0[xX]([0-9a-fA-F]+)/.exec(detail || '');
+        return m ? `${m[1]}0x${m[2].toUpperCase()}` : '';
+    };
+
+    const sites = ROWS.map(([category, file, line, type, detail, source]) => ({
+        category, file, line, type, detail, source,
+        dir: dirOf(file),
+        family: FAMILY[category],
+        offset: FAMILY[category] === 'move' ? hexOffset(detail) : '',
+        text: `${file} ${type} ${detail} ${source}`.toLowerCase(),
+    }));
+
+    const SHA = /^[0-9a-f]{40}$/.test(META.revision || '') ? META.revision : '';
+    const lineUrl = s => META.repo && SHA ? `${META.repo}/blob/${SHA}/${s.file}#L${s.line}` : '';
+
+    // ---------------------------------------------------------------
+    // Helpers.
+    // ---------------------------------------------------------------
+    const $ = id => document.getElementById(id);
+    const fmt = n => n.toLocaleString('en-US');
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
+
+    const count = (items, key) => {
+        const out = new Map();
+        for (const it of items) {
+            const k = key(it);
+            if (k) out.set(k, (out.get(k) || 0) + 1);
+        }
+        return out;
+    };
+    const byCount = map => [...map.entries()].sort((a, b) => b[1] - a[1]);
+
+    // Tokens worth colouring in a source line. Applied to escaped text,
+    // so none of the patterns may span an HTML entity.
+    const CAST_RE = /\((?:const |volatile |struct |union )*[A-Za-z_]\w*(?: (?:int|char|long|short))? ?\*+ ?\)|\bM2C_FIELD\b/g;
+    const HEX_RE = /\b0[xX][0-9a-fA-F]+\b/g;
+    const HACK_RE = /#pragma\b|\bMUST_MATCH\b|\bPAD_STACK\b|\basm\b/g;
+    const highlight = source => esc(source)
+        .replace(CAST_RE, m => `<span class="c">${m}</span>`)
+        .replace(HEX_RE, m => `<span class="h">${m}</span>`)
+        .replace(HACK_RE, m => `<span class="m">${m}</span>`);
+
+    // ---------------------------------------------------------------
+    // State, mirrored into the URL hash so a filtered view is a link.
+    // ---------------------------------------------------------------
+    const state = { fam: '', cat: '', dir: '', off: '', q: '', view: 'files', sort: 'count' };
+    const expanded = new Set();
+    let listShown = 200;
+    let dirsAll = false;
+
+    const readHash = () => {
+        const p = new URLSearchParams(location.hash.slice(1));
+        for (const k of Object.keys(state)) if (p.has(k)) state[k] = p.get(k);
+        if (!['files', 'list'].includes(state.view)) state.view = 'files';
+        if (!['count', 'path'].includes(state.sort)) state.sort = 'count';
+    };
+    const writeHash = () => {
+        const p = new URLSearchParams();
+        for (const [k, v] of Object.entries(state)) {
+            if (v && !(k === 'view' && v === 'files') && !(k === 'sort' && v === 'count')) p.set(k, v);
+        }
+        const h = p.toString();
+        history.replaceState(null, '', h ? `#${h}` : location.pathname + location.search);
+    };
+
+    // A site passes when it satisfies every facet except the one named in
+    // `skip`, which is how each facet counts what selecting it would yield.
+    const passes = (s, skip) =>
+        (skip === 'fam' || !state.fam || s.family === state.fam) &&
+        (skip === 'cat' || !state.cat || s.category === state.cat) &&
+        (skip === 'dir' || !state.dir || s.dir === state.dir) &&
+        (skip === 'off' || !state.off || s.offset === state.off) &&
+        (skip === 'q' || !state.q || s.text.includes(state.q.toLowerCase()));
+
+    // ---------------------------------------------------------------
+    // Sidebar facets.
+    // ---------------------------------------------------------------
+    const facetRow = ({ key, label, sub, n, max, tint, pressed, swatch, dim }) => `
+        <button class="frow${swatch ? '' : ' nosw'}${dim ? ' dim' : ''}" type="button"
+                data-key="${esc(key)}" aria-pressed="${pressed}"
+                style="--w:${max ? (n / max * 100).toFixed(1) : 0}%;--tint:var(--${tint})">
+            ${swatch ? `<span class="sw" style="background:var(--${tint})"></span>` : ''}
+            <span class="fn">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ''}</span>
+            <span class="fc">${fmt(n)}</span>
+        </button>`;
+
+    const renderFacets = () => {
+        const famN = count(sites.filter(s => passes(s, 'fam')), s => s.family);
+        const catN = count(sites.filter(s => passes(s, 'cat')), s => s.category);
+        const dirN = count(sites.filter(s => passes(s, 'dir')), s => s.dir);
+        const offN = count(sites.filter(s => passes(s, 'off')), s => s.offset);
+
+        const famMax = Math.max(1, ...famN.values());
+        $('f-fam').innerHTML = FAMILIES.map(f => facetRow({
+            key: f.key, label: f.label, n: famN.get(f.key) || 0, max: famMax,
+            tint: f.key, pressed: state.fam === f.key, swatch: true, dim: !famN.get(f.key),
+        })).join('');
+
+        const catMax = Math.max(1, ...catN.values());
+        $('f-cat').innerHTML = CATEGORIES.map(c => facetRow({
+            key: c.name, label: c.name, sub: c.shape, n: catN.get(c.name) || 0, max: catMax,
+            tint: c.family, pressed: state.cat === c.name, swatch: true, dim: !catN.get(c.name),
+        })).join('');
+
+        const dirs = byCount(dirN);
+        const LIMIT = 12;
+        const shown = dirsAll || dirs.length <= LIMIT ? dirs : dirs.slice(0, LIMIT);
+        const dirMax = Math.max(1, ...dirN.values());
+        $('f-dir').innerHTML = shown.map(([d, n]) => facetRow({
+            key: d, label: d.replace(/^src\//, ''), n, max: dirMax,
+            tint: 'accent', pressed: state.dir === d, swatch: false,
+        })).join('');
+        const more = $('dir-more');
+        more.hidden = dirs.length <= LIMIT;
+        more.textContent = dirsAll ? 'fewer' : `all ${dirs.length}`;
+
+        $('f-off').innerHTML = byCount(offN).slice(0, 24).map(([k, n]) =>
+            `<button class="chip-off" type="button" data-key="${esc(k)}" aria-pressed="${state.off === k}">${esc(k)}<b>${n}</b></button>`
+        ).join('');
+    };
+
+    // ---------------------------------------------------------------
+    // Results.
+    // ---------------------------------------------------------------
+    const mixBar = fileSites => {
+        const n = count(fileSites, s => s.category);
+        return CATEGORIES.filter(c => n.get(c.name)).map(c =>
+            `<i title="${c.name} ${n.get(c.name)}" style="width:${(n.get(c.name) / fileSites.length * 100).toFixed(2)}%;` +
+            `background:var(--${c.family});opacity:${(1 - CAT_RANK[c.name] * 0.15).toFixed(2)}"></i>`
+        ).join('');
+    };
+
+    const siteRow = (s, wide) => {
+        const url = lineUrl(s);
+        const where = wide
+            ? `<b>${esc(s.file.replace(/^src\//, ''))}</b>:${s.line}`
+            : String(s.line);
+        const ln = url
+            ? `<a class="ln" href="${esc(url)}" target="_blank" rel="noopener" title="open at ${SHA.slice(0, 9)}">${where}</a>`
+            : `<span class="ln">${where}</span>`;
+        return `
+        <div class="site${wide ? ' wide' : ''}">
+            ${ln}
+            <span><span class="chip chip-${s.family}">${s.category}</span></span>
+            <span class="ty">${esc(s.type)}</span>
+            <span class="dt">${esc(s.detail.replace(/\s+/g, ' '))}</span>
+            <span class="src">${highlight(s.source)}</span>
+        </div>`;
+    };
+
+    const fileBlock = (file, fileSites) => {
+        const open = expanded.has(file);
+        const [head, ...rest] = file.replace(/^src\//, '').split('/').reverse();
+        const label = rest.length ? `<span>${esc(rest.reverse().join('/'))}/</span>${esc(head)}` : esc(head);
+        return `
+        <div class="file" data-file="${esc(file)}"${open ? ' open' : ''}>
+            <button class="file-head" type="button" aria-expanded="${open}">
+                <span class="chev">&#9654;</span>
+                <span class="path">${label}</span>
+                <span class="mix">${mixBar(fileSites)}</span>
+                <span class="n">${fmt(fileSites.length)}</span>
+            </button>
+            ${open ? `<div class="sites">${fileSites.map(s => siteRow(s, false)).join('')}</div>` : ''}
+        </div>`;
+    };
+
+    const activeTokens = () => {
+        const toks = [];
+        if (state.fam) toks.push(['fam', FAMILIES.find(f => f.key === state.fam).label]);
+        if (state.cat) toks.push(['cat', state.cat]);
+        if (state.dir) toks.push(['dir', state.dir.replace(/^src\//, '')]);
+        if (state.off) toks.push(['off', state.off]);
+        if (state.q) toks.push(['q', `“${state.q}”`]);
+        return toks.map(([k, label]) =>
+            `<button class="tok" type="button" data-clear="${k}" title="remove">${esc(label)}<i>&times;</i></button>`).join('');
+    };
+
+    const renderResults = () => {
+        const hits = sites.filter(s => passes(s));
+        const files = new Map();
+        for (const s of hits) {
+            if (!files.has(s.file)) files.set(s.file, []);
+            files.get(s.file).push(s);
+        }
+        const fileList = [...files.entries()];
+        if (state.sort === 'count') fileList.sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+        else fileList.sort((a, b) => a[0].localeCompare(b[0]));
+
+        $('summary').innerHTML = `<b>${fmt(hits.length)}</b> ${hits.length === 1 ? 'site' : 'sites'} in <b>${plural(files.size, 'file', 'files')}</b>`;
+        $('active').innerHTML = activeTokens();
+        $('sortseg').hidden = state.view !== 'files';
+        $('expand').hidden = $('collapse').hidden = state.view !== 'files';
+        $('expand').disabled = hits.length > 2500;
+        $('expand').title = hits.length > 2500 ? 'narrow the filter to expand everything at once' : '';
+
+        const out = $('results');
+        if (!hits.length) {
+            out.innerHTML = '<div class="empty">Nothing matches. Remove a filter above.</div>';
+            return;
+        }
+
+        if (state.view === 'list') {
+            out.innerHTML = hits.slice(0, listShown).map(s => siteRow(s, true)).join('') +
+                (hits.length > listShown
+                    ? `<div class="more"><button type="button" id="more">Show ${fmt(Math.min(200, hits.length - listShown))} more of ${fmt(hits.length - listShown)}</button></div>`
+                    : '');
+            return;
+        }
+
+        // A small result set is more useful open than closed.
+        if (hits.length <= 80) fileList.forEach(([f]) => expanded.add(f));
+        out.innerHTML = fileList.map(([f, fs]) => fileBlock(f, fs)).join('');
+    };
+
+    const render = () => {
+        renderFacets();
+        renderResults();
+        writeHash();
+    };
+
+    const setAll = () => {
+        $('q').value = state.q;
+        document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
+        document.querySelectorAll('[data-sort]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === state.sort)));
+        render();
+    };
+
+    // ---------------------------------------------------------------
+    // Events.
+    // ---------------------------------------------------------------
+    const toggleFacet = (key, value) => {
+        state[key] = state[key] === value ? '' : value;
+        listShown = 200;
+        render();
+    };
+
+    $('f-fam').addEventListener('click', e => { const b = e.target.closest('.frow'); if (b) toggleFacet('fam', b.dataset.key); });
+    $('f-cat').addEventListener('click', e => { const b = e.target.closest('.frow'); if (b) toggleFacet('cat', b.dataset.key); });
+    $('f-dir').addEventListener('click', e => { const b = e.target.closest('.frow'); if (b) toggleFacet('dir', b.dataset.key); });
+    $('f-off').addEventListener('click', e => { const b = e.target.closest('.chip-off'); if (b) toggleFacet('off', b.dataset.key); });
+    $('dir-more').addEventListener('click', () => { dirsAll = !dirsAll; renderFacets(); });
+
+    $('active').addEventListener('click', e => {
+        const b = e.target.closest('.tok');
+        if (!b) return;
+        state[b.dataset.clear] = '';
+        setAll();
+    });
+
+    document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => {
+        state.view = b.dataset.view;
+        listShown = 200;
+        setAll();
+    }));
+    document.querySelectorAll('[data-sort]').forEach(b => b.addEventListener('click', () => {
+        state.sort = b.dataset.sort;
+        setAll();
+    }));
+
+    $('expand').addEventListener('click', () => {
+        sites.filter(s => passes(s)).forEach(s => expanded.add(s.file));
+        renderResults();
+    });
+    $('collapse').addEventListener('click', () => {
+        expanded.clear();
+        renderResults();
+    });
+
+    $('results').addEventListener('click', e => {
+        const more = e.target.closest('#more');
+        if (more) { listShown += 200; renderResults(); return; }
+        const head = e.target.closest('.file-head');
+        if (!head) return;
+        const file = head.parentElement.dataset.file;
+        if (expanded.has(file)) expanded.delete(file); else expanded.add(file);
+        renderResults();
+    });
+
+    let debounce;
+    $('q').addEventListener('input', e => {
+        clearTimeout(debounce);
+        const value = e.target.value;
+        debounce = setTimeout(() => { state.q = value.trim(); listShown = 200; render(); }, 140);
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+            e.preventDefault();
+            $('q').focus();
+        }
+    });
+    window.addEventListener('hashchange', () => { readHash(); setAll(); });
+
+    // ---------------------------------------------------------------
+    // Boot.
+    // ---------------------------------------------------------------
+    const fam = count(sites, s => s.family);
+    $('totals').innerHTML =
+        `<b>${fmt(sites.length)}</b> sites in <b>${fmt(new Set(sites.map(s => s.file)).size)}</b> files<br>` +
+        `<b>${fmt(fam.get('move') || 0)}</b> move a pointer &middot; <b>${fmt(fam.get('retype') || 0)}</b> retype &middot; <b>${fmt(fam.get('hack') || 0)}</b> match hacks<br>` +
+        `rebuilt ${esc(META.generated || 'on push')}${SHA ? ` at ${SHA.slice(0, 9)}` : ''} &middot; ` +
+        '<a href="cleanup_index.tsv" download>cleanup_index.tsv</a>';
+
+    readHash();
+    setAll();
+})();
+</script>
+</body>
+</html>
