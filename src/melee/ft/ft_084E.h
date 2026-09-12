@@ -5,7 +5,10 @@
 
 /* 084E1C */ void ft_80084E1C(Fighter_GObj* gobj, float, float, float);
 /* 084EEC */ void ft_80084EEC(Fighter_GObj* gobj);
+
+/// Fighter_PhysGround_ApplyFriction
 /* 084F3C */ void ft_80084F3C(Fighter_GObj* gobj);
+
 /* 084FA8 */ void ft_80084FA8(Fighter_GObj* gobj);
 /* 085004 */ void ft_80085004(Fighter_GObj* gobj);
 /* 085030 */ void ft_80085030(Fighter_GObj*, float gr_friction,

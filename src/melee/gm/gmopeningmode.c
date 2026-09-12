@@ -527,6 +527,7 @@ void gm_801BF684(s32 arg0)
     gm_8049E548.unk_C = arg0;
 }
 
+/// @returns ::GrKind
 u8 gm_801BF694(void)
 {
     return gm_8049E548.unk_C;
