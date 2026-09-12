@@ -37,23 +37,25 @@ mnDiagram_GetNamePlayTimeByFighter(int name_idx,
 /* 23FE30 */ void mnDiagram_PopupInputProc(HSD_GObj*);
 /* 23FED4 */ void mnDiagram_InputProc(HSD_GObj*);
 /* 240B18 */ void mnDiagram_PopupCleanup(void* arg0);
-/* 240B98 */ void mnDiagram_PopupAnimProc(void* arg0);
-/* 240D94 */ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2,
-                                             s32 arg3);
+/* 240B98 */ void mnDiagram_PopupAnimProc(HSD_GObj* arg0);
+/* 240D94 */ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 arg1,
+                                             s32 arg2, s32 arg3);
 /* 241310 */ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 arg2);
-/* 241668 */ void mnDiagram_ClearGrid(void* arg0);
+/* 241668 */ void mnDiagram_ClearGrid(HSD_GObj* arg0);
 /* 241730 */ void mnDiagram_RefreshGrid(HSD_GObj* arg0, int arg1, int arg2);
 /* 2417D0 */ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj);
 /* 241AE8 */ void mnDiagram_ExitAnimProc(HSD_GObj* gobj);
 /* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count);
 /* 241BF8 */ void mnDiagram_OnFrame(HSD_GObj* gobj);
-/* 241E78 */ void mnDiagram_DrawCellValue(void* arg0, u8 arg1, u8 arg2,
+/* 241E78 */ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2,
                                           int arg3);
-/* 24227C */ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2,
+/* 24227C */ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 arg1, s32 arg2,
                                            u8 arg3);
-/* 2427B4 */ void mnDiagram_DrawNameHeaders(void* arg0, s32 arg1, s32 arg2);
+/* 2427B4 */ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1,
+                                            s32 arg2);
 /* 242B38 */ HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1);
-/* 242C0C */ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2);
+/* 242C0C */ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1,
+                                               int arg2);
 /* 243038 */ void mnDiagram_CursorProc(HSD_GObj* gobj);
 /* 2433AC */ void mnDiagram_CreateCursor(void);
 /* 243434 */ void mnDiagram_CreateScreen(u8 arg0);
