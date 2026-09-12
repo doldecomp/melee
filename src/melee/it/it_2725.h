@@ -33,8 +33,13 @@ struct lb_80014638_arg1_t;
 /* 272C6C */ bool it_80272C6C(Item_GObj*);
 /* 272C90 */ HSD_JObj* it_80272C90(Item_GObj*);
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
+
+/// Check if GObj is Item class
 /* 272D1C */ bool it_80272D1C(Item_GObj*);
+
+/// Check GObj entity class
 /* 272D40 */ s32 it_80272D40(Item_GObj*);
+
 /* 272DB0 */ void itColl_BounceOffVictim(Item_GObj*);
 /* 272DE4 */ void it_80272DE4(HSD_JObj*, f32);
 /* 272F7C */ void it_80272F7C(HSD_JObj*, f32);
@@ -87,7 +92,10 @@ struct lb_80014638_arg1_t;
 /* 274ECC */ void it_80274ECC(Item_GObj*, bool);
 /* 274ED8 */ void it_80274ED8(void);
 /* 274EE8 */ void it_80274EE8(void);
+
+/// Toggle flag in 0xDC8 off
 /* 274EF8 */ void it_80274EF8(Item_GObj*);
+
 /* 274F10 */ void it_80274F10(Item_GObj*);
 /* 274F28 */ void it_80274F28(Item*, s8, HSD_GObjEvent, HSD_GObjInteraction);
 /* 274F48 */ void it_80274F48(Item_GObj*, s32, HSD_GObj*, Fighter_Part);
@@ -95,7 +103,10 @@ struct lb_80014638_arg1_t;
 /* 275070 */ void it_80275070(Item_GObj*, s32);
 /* 2750E8 */ bool it_802750E8(Item_GObj*, s32);
 /* 2750F8 */ void it_802750F8(Item_GObj*);
+
+/// Set item lifetime
 /* 275158 */ void it_80275158(Item_GObj*, f32);
+
 /* 275174 */ void it_80275174(Item_GObj*, f32);
 /* 27518C */ void it_8027518C(Item_GObj*);
 /* 2751D8 */ bool it_802751D8(Item_GObj*);

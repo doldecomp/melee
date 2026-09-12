@@ -110,9 +110,9 @@ void fn_8017C1A4(HSD_GObj* unused)
     switch (tmp->x0) {
     case 0:
         if (tmp->x8 == 0) {
-            temp_r3_2 = gmVs_GetController_0();
+            temp_r3_2 = gmVs_GetSceneController();
             temp_r3_2->start.disable_pausing = false;
-            temp_r3_2->hud_enabled = 0;
+            temp_r3_2->state.hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
             tmp->x8 = 1;
@@ -122,7 +122,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         break;
     case 1:
         if (tmp->x8 == 0) {
-            gmVs_GetController_0();
+            gmVs_GetSceneController();
             lbAudioAx_800236DC();
             ftBossLib_8015CA6C(0x1D9);
             Player_SetMoreFlagsBit4(0, 1);
@@ -137,7 +137,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             fn_8017C0C8();
             tmp->x8 = 2;
         } else if (ftBossLib_8015C2A8() == 0) {
-            gmVs_GetController_0();
+            gmVs_GetSceneController();
             Stage_80225074(0);
             ftBossLib_8015CB7C();
             Player_SetMoreFlagsBit4(0, 0);
@@ -149,8 +149,8 @@ void fn_8017C1A4(HSD_GObj* unused)
         }
         break;
     case 2:
-        temp_r3_4 = gmVs_GetController_0();
-        temp_r3_4->hud_enabled = 1;
+        temp_r3_4 = gmVs_GetSceneController();
+        temp_r3_4->state.hud_enabled = 1;
         Stage_80225074(0);
         ftLib_800868A4();
         ftBossLib_8015CC14();
@@ -213,8 +213,8 @@ void fn_8017C1A4(HSD_GObj* unused)
         temp_r28 = temp_r31 + temp_r27;
         temp_r29_2 = temp_r3 + temp_r28;
         if (tmp->x8 == 0) {
-            temp_r3_4 = gmVs_GetController_0();
-            temp_r3_4->hud_enabled = 0;
+            temp_r3_4 = gmVs_GetSceneController();
+            temp_r3_4->state.hud_enabled = 0;
             if (tmp->x4 == 2) {
                 tmp->x4 = 1;
             } else {
@@ -224,7 +224,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             gm_SetDbPauseFlag(6);
             Player_80031790(0);
             Player_80036844(0, 1);
-            temp_r3_4 = gmVs_GetController_0();
+            temp_r3_4 = gmVs_GetSceneController();
             temp_r3_4->start.timer_enabled = false;
         } else if (tmp->x8 == temp_r31) {
             lbAudioAx_8002438C(0x4E200);
@@ -280,12 +280,12 @@ void fn_8017C7A0(void)
 
 void fn_8017C7EC(void)
 {
-    VsSceneController* temp_r31;
+    VsSceneState* scene_state;
     Unk1PData* temp_r30;
 
     temp_r30 = fn_8017DF28();
-    temp_r31 = gmVs_GetController_1();
-    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->x0.ckind);
+    scene_state = gmVs_GetSceneState();
+    scene_state->timer_seconds = grPushOn_80219230(temp_r30->x0.ckind);
 }
 
 void gm_8017C838(void)
@@ -301,7 +301,7 @@ void gm_8017C838(void)
     PAD_STACK(8);
 
     temp_r30 = gm_GetAdventureData();
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     var_r31 = sp10;
     sp10[0] = Ft_Kind_None;
     sp10[1] = Ft_Kind_None;

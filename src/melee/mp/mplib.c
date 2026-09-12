@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @copydoc melee/mp/mplib.h
+ */
+
 #include "mplib.h"
 
 #include <Runtime/platform.h>

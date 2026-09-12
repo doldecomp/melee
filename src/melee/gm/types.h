@@ -60,7 +60,24 @@ typedef struct un_804A1F48_t {
 } un_804A1F48_t;
 ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
+/**
+ * @note Colloquially known as "Minor Scene"
+ *
+ * A single entry in a #GameMode's scene graph. Each scene is looked up by
+ * its #GameModeState::id during scene graph traversal. The scene graph is
+ * walked comparing each entry's @c idx against #GameRouting::curr_scene_idx,
+ * and #nextScene advances to the next scene whose @c idx is greater than the
+ * current one. An @c idx value of @c 0xFF terminates a collection of
+ * GameModeState.
+ */
 struct GameModeState {
+    /**
+     * Scene graph index searched against #GameRouting::curr_scene_idx during
+     * scene graph traversal. This is the value matched when the scene graph is
+     * walked to find the current scene. Not to be confused with
+     * @c GameModeState::info.scene_kind, which is the scene's
+     * #GameSceneKind.
+     */
     /* +0 */ u8 id;      ///< locally defined by game mode
     /* +1 */ u8 preload; ///< ::lbDvdPreloadKind
     /* +2 */ u16 flags;
@@ -69,6 +86,14 @@ struct GameModeState {
     /* +8 */ void (*on_exit)(GameModeState*);
 
     struct GameSceneInfo {
+        /**
+         * The #GameSceneKind associated with this scene. This is the value
+         * matched by #gm_FindGameSceneHandler to look up the corresponding
+         * #GameScene supplying the #GameScene::on_enter, #GameScene::on_exit,
+         * and #GameScene::on_frame callbacks invoked for this scene. Not to be
+         * confused with #GameModeState::id, which is the scene graph
+         * traversal index.
+         */
         /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
         /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
         /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
@@ -90,7 +115,10 @@ struct GameMode {
 /// @note Colloquially known as "Minor Scene"
 struct GameScene {
     u8 kind; ///< ::GameSceneKind
+
+    /// Referenced from @c gm_801A4014 when passed to #gm_801A4D34.
     void (*on_frame)(void);
+
     void (*on_enter)(void*);
     void (*on_exit)(void*);
     UNUSED UNK_T unused;
@@ -259,6 +287,7 @@ struct gmm_x1868 {
     /* 0x0002 */ u16 x186A;         ///< unlocked stages bitmask
     /* 0x0004 */ u8 x186C;          ///< unlocked features bitmask - score
                                     ///< display/random stage etc...
+
     /// @remarks this would make sense to be apart of x186C, but seems unused.
     // perhaps features got removed from the unlock system? item switch comes
     // to mind as plausible
@@ -1249,7 +1278,7 @@ typedef struct gm_8019ECAC_OnEnter_t {
     u32 x14;
 } gm_8019ECAC_OnEnter_t;
 
-struct VsSceneController {
+struct VsSceneState {
     /* 0x0000 */ u8 unk_0; ///< 0 During a match
                            ///< 1 While GAME! or "TIMEOUT!" is displayed/match
                            ///< is frozen on final frame 2 While in 1p and
@@ -1293,6 +1322,10 @@ struct VsSceneController {
     /* 0x0038 */ struct VsSceneFighter fighters[GM_MAX_PLAYERS];
     /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
     /* 0x024C */ MatchEnd x24C;
+};
+
+struct VsSceneController {
+    /* 0x0000 */ struct VsSceneState state;
     /* 0x24C8 */ struct StartMeleeRules start;
 }; /* size = 0x2528 */
 ASSERT_SIZE(struct VsSceneController, 0x2528);

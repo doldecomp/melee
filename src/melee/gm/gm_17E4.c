@@ -312,7 +312,7 @@ typedef struct {
 void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
-    VsSceneController* gm = gmVs_GetController_0();
+    VsSceneController* gm = gmVs_GetSceneController();
     struct gm_803DE650_t* stage = gm_8017E4C4(gm_GetCurrentSceneIndex());
     UnkAdventureData* adv = &lbl_80472C30;
     u8* flags = arg0->_x448;
@@ -372,7 +372,7 @@ void fn_8017E8A4(int arg0_int)
     }
 
     if (stage->x0 == 0x11) {
-        if (gm->unk_C >= 5) {
+        if (gm->state.unk_C >= 5) {
             ((u8_bits*) &flags[1])->b6 = 1;
             return;
         }

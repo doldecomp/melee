@@ -985,7 +985,7 @@ void gm_801BC00C(void)
     gm_801BAB40_src* event_entry;
     u8 ckind;
     u8 costume;
-    VsSceneController* mi;
+    VsSceneState* mi;
     s32 i;
     s8 chr;
     PAD_STACK(0x38);
@@ -1052,7 +1052,7 @@ void gm_801BC00C(void)
     case 39:
     case 48:
         if (ev->x20 > 0) {
-            mi = gmVs_GetController_1();
+            mi = gmVs_GetSceneState();
             mi->timer_seconds = ev->x2C;
             mi->unk_2C = ev->x30;
         }
@@ -1295,7 +1295,7 @@ void gm_801BC754(HSD_GObj* gobj)
     PAD_STACK(0x48);
 
     temp_r29 = &gmMainLib_804D3EE0->vs.unk_530;
-    switch (gmVs_GetController_0()->start.match_kind) {
+    switch (gmVs_GetSceneController()->start.match_kind) {
     case 1:
         count = 0;
         temp_r28 = &gmMainLib_804D3EE0->vs.unk_530;
@@ -1325,7 +1325,7 @@ void gm_801BC754(HSD_GObj* gobj)
             return;
         }
         temp_r28_2 = &gmMainLib_804D3EE0->vs.unk_530;
-        temp_r3 = gmVs_GetController_0();
+        temp_r3 = gmVs_GetSceneController();
         if (temp_r28_2->xB_0) {
             var_r0 = false;
         } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1349,7 +1349,7 @@ void gm_801BC754(HSD_GObj* gobj)
     case 0:
     case 2:
         temp_r28_3 = &gmMainLib_804D3EE0->vs.unk_530;
-        temp_r3_2 = gmVs_GetController_0();
+        temp_r3_2 = gmVs_GetSceneController();
         if (temp_r28_3->xB_0) {
             var_r0_2 = false;
         } else if (temp_r3_2->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1392,7 +1392,7 @@ void gm_801BC9E8(HSD_GObj* gobj)
         return;
     }
     temp_r30_2 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r30_2->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1463,7 +1463,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         return;
     }
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3_2 = gmVs_GetController_0();
+    temp_r3_2 = gmVs_GetSceneController();
     if (temp_r30->xB_0) {
         var_r0_2 = 0;
     } else if (temp_r3_2->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1553,7 +1553,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
     }
     {
         struct EventData* ev3 = gm_GetEventData();
-        mi = gmVs_GetController_0();
+        mi = gmVs_GetSceneController();
         if (ev3->xB_0) {
             var_r0 = 0;
         } else if (mi->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1600,7 +1600,7 @@ void gm_801BCF40(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1645,7 +1645,7 @@ void gm_801BD028(HSD_GObj* arg0)
         return;
     }
     ev = &gmMainLib_804D3EE0->vs.unk_530;
-    rules = gmVs_GetController_0();
+    rules = gmVs_GetSceneController();
     if (ev->xB_0) {
         cond = 0;
     } else if (rules->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1695,7 +1695,7 @@ void gm_801BD164(HSD_GObj* gobj)
         return;
     }
     temp_r30_2 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r30_2->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1747,7 +1747,7 @@ void gm_801BD30C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1817,7 +1817,7 @@ void gm_801BD46C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1878,7 +1878,7 @@ void gm_801BD658(HSD_GObj* gobj)
         return;
     }
     temp_r28_2 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r28_2->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1923,7 +1923,7 @@ void gm_801BD7FC(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -1979,7 +1979,7 @@ void gm_801BD93C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -2016,7 +2016,7 @@ void gm_801BDAF4(HSD_GObj* arg0)
     PAD_STACK(0x10);
 
     temp_r30 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r30->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -2067,7 +2067,7 @@ void gm_801BDC08(HSD_GObj* arg0)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -2112,7 +2112,7 @@ void gm_801BDD44(HSD_GObj* arg0)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3 = gmVs_GetController_0();
+    temp_r3 = gmVs_GetSceneController();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -2270,7 +2270,7 @@ void gm_801BDE94(HSD_GObj* arg0)
     }
     {
         struct EventData* ev2 = gm_GetEventData();
-        VsSceneController* info = gmVs_GetController_0();
+        VsSceneController* info = gmVs_GetSceneController();
         int do_end;
         if (ev2->xB_0) {
             do_end = 0;
@@ -2362,7 +2362,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         gm_8016EDDC(2, &sp40);
     }
     temp_r27_5 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3_2 = gmVs_GetController_0();
+    temp_r3_2 = gmVs_GetSceneController();
     if (temp_r27_5->xB_0) {
         var_r0 = false;
     } else if (temp_r3_2->start.timer_enabled && gm_8016AEEC() == 0 &&
@@ -2430,8 +2430,8 @@ void gm_801BE638(HSD_GObj* gobj)
     if (Player_GetRemainingHP(1) <= 0 && Player_GetRemainingHP(2) <= 0) {
         temp_r28_2 = temp_r31 + temp_r29;
         if (temp_r30->x10 == 0) {
-            VsSceneController* tmp = gmVs_GetController_0();
-            tmp->hud_enabled = 0;
+            VsSceneController* tmp = gmVs_GetSceneController();
+            tmp->state.hud_enabled = 0;
             if (temp_r30->x18 == 1) {
                 temp_r30->x18 = 2;
             } else {
@@ -2442,7 +2442,7 @@ void gm_801BE638(HSD_GObj* gobj)
             Player_80031790(0);
             Player_80036844(0, 1);
             temp_r30->x34 = gm_GetFrameCount();
-            temp_r3 = gmVs_GetController_0();
+            temp_r3 = gmVs_GetSceneController();
             temp_r3->start.timer_enabled = false;
         }
         if (temp_r30->x10 == temp_r31) {
@@ -2507,7 +2507,7 @@ void gm_801BE638(HSD_GObj* gobj)
         return;
     }
     temp_r28_4 = &gmMainLib_804D3EE0->vs.unk_530;
-    temp_r3_4 = gmVs_GetController_0();
+    temp_r3_4 = gmVs_GetSceneController();
     if (temp_r28_4->xB_0) {
         var_r0 = 0;
     } else if (temp_r3_4->start.timer_enabled && gm_8016AEEC() == 0 &&

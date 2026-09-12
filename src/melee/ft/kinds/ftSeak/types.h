@@ -17,7 +17,6 @@ struct ftSeak_FighterVars {
     /* fp+2298 */ Vec3 lstick_delta;
 };
 
-/// @sz{74}
 typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     float x0;
     float x4;

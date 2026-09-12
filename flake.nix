@@ -6,7 +6,7 @@
   };
 
   outputs =
-    { nixpkgs, treefmt-nix, ... }:
+    { self, nixpkgs, treefmt-nix, ... }:
 
     let
       inherit (nixpkgs) lib;
@@ -25,6 +25,13 @@
         };
 
         packages.default = legacyPackages.melee;
+
+        # The docs carry the revision they were built from; a dirty tree has
+        # no rev, so fall back rather than fail.
+        packages.melee-docs = legacyPackages.melee-docs.override {
+          rev = self.rev or self.dirtyRev or "unknown";
+          lastModifiedDate = self.lastModifiedDate or "";
+        };
 
         formatter =
           (treefmt-nix.lib.evalModule legacyPackages {

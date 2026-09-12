@@ -596,7 +596,7 @@ void ifStatus_802F5B48(HSD_GObj* gobj)
             p->flags.unk10 = 0;
         }
         if (p->old_damage == 0) {
-            if (gmVs_GetController_1()->fighters[(s8) p->player_slot].x4_b5) {
+            if (gmVs_GetSceneState()->fighters[(s8) p->player_slot].x4_b5) {
                 ifStatus_802F6948((s8) p->player_slot);
             }
         }
@@ -1001,8 +1001,8 @@ static inline void ifStatus_TriggerStockLoss(s32 player_idx,
     struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
-    big_thing = gmVs_GetController_0();
-    big_thing->unk_D = player_idx;
+    big_thing = gmVs_GetSceneController();
+    big_thing->state.unk_D = player_idx;
     small_thing = gm_GetStartMeleeRules();
     hud_player = &ifStatus_GetHUDInfo()->players[player_idx];
     hud_player_flags = &hud_player->flags;
@@ -1032,7 +1032,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 {
     VsSceneController* big_thing;
 
-    big_thing = gmVs_GetController_0();
+    big_thing = gmVs_GetSceneController();
     if (big_thing->start.match_kind != 1 && big_thing->start.x2_5 != 0) {
         if_802F7C30(arg1);
     }

@@ -23,6 +23,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
+/// @note Field names originate from SSBU param files.
 struct grOldKongo_YakumonoParam {
     s16 rframe_bird_wait_a;
     s16 rframe_bird_wait_b;

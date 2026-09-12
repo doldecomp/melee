@@ -101,11 +101,13 @@ static void lbRefract_80021CE8(lbRefract_CallbackData* cb, s32 arg1)
     DCFlushRange(cb->buffer, cb->buffer_size);
 }
 
+/// @brief Write IA4 texture coordinate to refraction buffer.
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, u32 row,
                                        u32 col, u32 arg3, u8 arg4,
                                        u8 intensity, u8 alpha)
 {
     u32 r_ = row >> 2;
+
     u32 c_ = col >> 2;
     u8(*base)[2] =
         (void*) ((u8*) data->buffer + c_ * data->row_stride + r_ * 32);
@@ -217,11 +219,13 @@ static void fn_8002206C(lbRefract_CallbackData* data, s32 row, u32 col,
     }
 }
 
+/// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, u32 row,
                                         u32 col, u32* out_r, u32* out_g,
                                         u32* out_b, u32* out_a)
 {
     int offset;
+
     u8* base;
 
     {
@@ -248,6 +252,7 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, u32 row,
 }
 
 /// @brief Initialize refraction callback data for a texture buffer.
+/// @brief Initialize refraction callback data for a texture buffer.
 /// @param data Callback data to initialize.
 /// @param buffer Base address of texture buffer.
 /// @param format Texture format (3=IA4, 4=IA8, 6=RGBA8).
@@ -258,6 +263,7 @@ static int lbRefract_8002219C(lbRefract_CallbackData* data, void* buffer,
                               s32 format, u32 width, u32 height)
 {
     data->buffer = buffer;
+
     data->format = format;
     data->width = width;
     data->height = height;
@@ -449,10 +455,12 @@ void lbRefract_800225D4(void)
     HSD_StateInvalidate(-1);
 }
 
+/// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
 static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
                                     u32 rendermode)
 {
     hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
+
     GXSetTevDirect(0);
     GXSetNumIndStages(0);
     HSD_StateInvalidate(HSD_STATE_ALL);
