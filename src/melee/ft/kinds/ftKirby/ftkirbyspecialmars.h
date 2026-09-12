@@ -27,8 +27,10 @@
 /* 10BB50 */ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj);
 /* 10BBC8 */ void ftKb_SpecialNMs_8010BBC8(Fighter_GObj* gobj);
 /* 10BC40 */ void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj);
+
 /// Unknown, assumed Enter Hold of some kind
 /* 10BC90 */ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj);
+
 /* 10BCE0 */ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj);
 /* 10BDD8 */ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj);
 /* 10BED0 */ void ftKb_MsSpecialNEnd_IASA(Fighter_GObj* gobj);

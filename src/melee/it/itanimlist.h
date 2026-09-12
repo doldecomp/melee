@@ -22,8 +22,10 @@
 /* 27990C */ void it_8027990C(Item_GObj*, CommandInfo*);
 /* 279958 */ void it_80279958(Item_GObj*, CommandInfo*);
 /* 2799A8 */ void it_802799A8(Item_GObj*, CommandInfo*);
+
 /// Advance Item Script
 /* 2799E4 */ void it_802799E4(Item_GObj*);
+
 /* 279AF0 */ void it_80279AF0(Item_GObj*, CommandInfo*);
 /* 279B10 */ void it_80279B10(Item_GObj*, CommandInfo*);
 /* 279B30 */ void fn_80279B30(Item_GObj*, CommandInfo*, int arg2);

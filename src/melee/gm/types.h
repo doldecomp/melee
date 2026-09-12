@@ -118,6 +118,7 @@ struct GameScene {
 
     /// Referenced from @c gm_801A4014 when passed to #gm_801A4D34.
     void (*on_frame)(void);
+
     void (*on_enter)(void*);
     void (*on_exit)(void*);
     UNUSED UNK_T unused;

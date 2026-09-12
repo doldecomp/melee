@@ -12,13 +12,17 @@
 /* 275414 */ void it_80275414(Item_GObj*);
 /* 27542C */ void it_8027542C(Item_GObj*);
 /* 275444 */ void it_80275444(Item_GObj*);
+
 /// Toggle several flags in 0xDCD off
 /* 275474 */ void it_80275474(Item_GObj*);
+
 /* 2754A4 */ void it_802754A4(Item_GObj*);
 /* 2754BC */ void it_802754BC(Item_GObj*);
 /* 2754D4 */ void it_802754D4(Item_GObj*);
+
 /// Toggle several flags in 0xDCE off
 /* 275504 */ void it_80275504(Item_GObj*);
+
 /* 275534 */ void it_80275534(Item_GObj*, f32);
 /* 275594 */ void it_80275594(Item_GObj*, s32, f32);
 /* 2755C0 */ void it_802755C0(Item_GObj*, f32);

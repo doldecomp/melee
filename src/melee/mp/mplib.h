@@ -1,9 +1,10 @@
-#ifndef GALE01_04D164
-#define GALE01_04D164
 /**
  * @file
  * @brief Map library.
  */
+
+#ifndef GALE01_04D164
+#define GALE01_04D164
 
 #include <Runtime/platform.h>
 
@@ -21,11 +22,15 @@
 /* 04D17C */ CollJoint* mpGetGroundCollJoint(void);
 /* 04D184 */ void mpPruneEmptyLines(MapCollData* coll_data);
 /* 04D288 */ void mpLibLoad(MapCollData* coll_data);
+
 /// @returns A ground index.
 /* 04DB78 */ int mpLineGetNext(int line_id);
+
 /* 04DBB4 */ bool mpLib_8004DBB4(int index, Vec3* out);
+
 /// @returns A ground index.
 /* 04DC04 */ int mpLineGetPrev(int line_id);
+
 /* 04DD90 */ int mpLib_8004DD90_Floor(int line_id, Vec3*, float* y_out,
                                       u32* flags_out, Vec3* normal_out);
 /* 04E090 */ int mpLib_8004E090_Ceiling(int line_id, Vec3*, float* y_out,
@@ -154,12 +159,14 @@
                                float y1);
 /* 056758 */ void mpLib_80056758(int line_id, float x0, float y0, float x1,
                                  float y1);
+
 /**
  * @param line_id
  * @param pos
  * @param[out] speed
  */
 /* 0567C0 */ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed);
+
 /* 0569EC */ float mpLib_800569EC(u32);
 /* 056A1C */ int* mpLib_80056A1C(int, int*);
 /* 056A54 */ int mpLib_80056A54(int, int*);

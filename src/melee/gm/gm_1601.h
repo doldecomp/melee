@@ -18,34 +18,45 @@
 /* 160244 */ int gm_80160244(s8);
 /* 1602C0 */ void gm_801602C0(s8);
 /* 1603B0 */ void gm_801603B0(void);
+
 /// gets character victory theme id
 /* 160400 */ u32 fn_80160400(CharacterKind);
+
 /// gets character result anim path
 /* 160438 */ char* gm_80160438(s32);
+
 /* 160474 */ bool gm_80160474(CharacterKind, GameModeKind);
+
 /// gets characters trophy model
 /* 1604DC */ char* gm_801604DC(CharacterKind, GameModeKind);
+
 /* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
+
 /**
  * @brief Returns the index used in the bitmask to represent whether or not the
  * provided character is unlocked.
  */
 /* 1605EC */ u8 gm_SelKindToUnlockIndex(SelectableCharacterKind);
+
 /**
  * @brief Returns the index used in the bitmask to represent whether or not the
  * provided character is unlocked.
  */
 /* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
+
 /* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
 /* 160710 */ u8 fn_80160710(int);
 /* 16075C */ StKind gm_GetChallengerStKind(SelectableCharacterKind);
 /* 1607A8 */ u8 fn_801607A8(int);
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
+
 /// gets the player hud color index
 /* 160854 */ u32 gm_80160854(u8, u8, u8, u8);
+
 /// gets the player hud color
 /* 160968 */ GXColor gm_80160968(u32);
+
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
@@ -118,6 +129,7 @@
 /* 163F2C */ int gm_GetCruelHighscore(u8);
 /* 163F50 */ int gm_GetCruelTotalHighscore(void);
 /* 163FA4 */ int fn_80163FA4(u8);
+
 /**
  * @brief Convert a #SelectableCharacterKind into its #CharacterKind.
  *
@@ -131,6 +143,7 @@
  * @see #selkind_to_ckind_map
  */
 /* 16400C */ u8 gm_SelKindToCKind(u8 selkind);
+
 /**
  * @brief Convert a #CharacterKind into its #SelectableCharacterKind.
  *
@@ -145,6 +158,7 @@
  * @see #ckind_to_selkind_map
  */
 /* 164024 */ u8 gm_CKindToSelKind(u8 ckind);
+
 /* 16403C */ bool gm_8016403C(u8 item);
 /* 1640B0 */ void fn_801640B0(u64* item_mask);
 /* 16419C */ float fn_8016419C(u8);
@@ -160,8 +174,10 @@
 /* 16468C */ UNK_RET gm_8016468C(UNK_PARAMS);
 /* 1647D0 */ void gm_801647D0(void);
 /* 1647F8 */ int gm_801647F8(u8);
+
 /// character unlocked check
 /* 164840 */ bool gm_IsCKindUnlocked(u8 ckind);
+
 /* 164910 */ void gm_UnlockCKind(CharacterKind);
 /* 164A0C */ void gm_80164A0C(u8);
 /* 164ABC */ bool gm_80164ABC(void);
@@ -170,6 +186,7 @@
 /* 16505C */ void gm_8016505C(void);
 /* 165084 */ bool gm_80165084(void);
 /* 1650E8 */ void fn_801650E8(void);
+
 /**
  * @brief Enables the pause camera for the given player.
  *
@@ -181,6 +198,7 @@
  * @param[in] playerId   Controller port / player id of the pauser.
  */
 /* 165108 */ void gm_EnablePlayerPauseCamera(int, int);
+
 /* 165190 */ void fn_80165190(s32, s32);
 /* 1651FC */ void fn_801651FC(s32, s32);
 /* 165268 */ void gm_80165268(int);

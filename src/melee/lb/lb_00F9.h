@@ -25,8 +25,10 @@
 /* 0115F4 */ void lb_800115F4(void);
 /* 011710 */ void lb_80011710(DynamicsDesc*, DynamicsDesc*);
 /* 0117F4 */ bool lb_800117F4(DynamicsDesc*, GXColor*, GXColor*, int, u32);
+
 /// AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
 /* 0119DC */ void lb_800119DC(Vec3*, int, float, float, float);
+
 /* 011A50 */ struct lb_80011A50_t* lb_80011A50(Vec3*, int, float, float, float,
                                                float, float, float, float);
 /* 011ABC */ enum_t lb_80011ABC(void);

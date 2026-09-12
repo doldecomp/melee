@@ -25,29 +25,36 @@ struct CmSubject {
     /* +00 */ CmSubject* next;
     /* +04 */ CmSubject* prev;
     /* +08 */ CmSubjectState state;
+
     /// Set while the owning fighter is in a Cliff motion state. Never read.
     /* +0C:0 */ u8 on_ledge : 1;
+
     /**
      * Excludes the subject from framing regardless of #CmSubject::state. Set
      * only by Home-Run Contest, cleared only by #Camera_80028F5C.
      */
     /* +0C:1 */ u8 force_inactive : 1;
+
     /**
      * Set while the subject is framed. #CmSubjectState_Auto uses it as an edge
      * detector: cleared when the subject leaves the bounds, arming
      * #CmSubject::state_timer.
      */
     /* +0C:2 */ u8 was_framed : 1;
+
     /**
      * #CmSubjectState_Auto lockout. Armed to @c 600 when the subject leaves
      * the bounds; while non-zero it counts down once per framing check and the
      * subject is not framed.
      */
     /* +0E */ s16 state_timer;
+
     /// Anchor point of the subject's framing box. Only x/y are read.
     /* +10 */ Vec3 pos;
+
     /// Position of the owning fighter's camera bone (#ftLib_800866DC).
     /* +1C */ Vec3 bone_pos;
+
     /* +28 */ float facing_dir; ///< Facing direction of the subject (±1).
 
     /**
@@ -55,8 +62,10 @@ struct CmSubject {
      * frame in #Camera_800293E0.
      */
     /* +2C */ CmSubjectExtents ext;
+
     /// Target framing extents, set by the subject's owner.
     /* +40 */ CmSubjectExtents target_ext;
+
     /* +54 */ Vec3 x54; ///< Zeroed but unused.
     /* +60 */ Vec3 x60; ///< Zeroed but unused.
 };

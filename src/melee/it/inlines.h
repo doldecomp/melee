@@ -16,6 +16,7 @@
 static inline Item* GetItemData(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
+
     return item_data;
 }
 

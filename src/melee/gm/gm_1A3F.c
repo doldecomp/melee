@@ -42,6 +42,7 @@ struct stateMachine {
 ASSERT_SIZE(struct stateMachine, 0x14);
 
 /* 1A3F48 */ static void preloadState(GameModeState*);
+
 /**
  * @brief Runs one game-mode scene transition and invokes the run loop for a
  * given scene
@@ -51,6 +52,7 @@ ASSERT_SIZE(struct stateMachine, 0x14);
  * #GameRouting::curr_scene_idx when the scene loop exits.
  */
 /* 1A4014 */ static void gm_801A4014(GameMode*);
+
 /**
  * @brief Loads a game mode, runs it to completion, then unloads it.
  *
@@ -71,6 +73,7 @@ ASSERT_SIZE(struct stateMachine, 0x14);
  * @returns The next pending #GameModeKind (#GameRouting::pending_mode).
  */
 /* 1A43A0 */ static u8 runGameMode(u8 mode);
+
 /* 479D30 */ static struct stateMachine state_machine;
 
 void preloadState(GameModeState* state)

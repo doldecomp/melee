@@ -419,19 +419,23 @@ typedef struct itFlipper_ItemVars {
      * @alias{xDD4}
      */
     s32 xDD4_flightTimer; // frames until settling (when thrown)
-                          /**
-                           * 0 while the flipper is an airborne projectile, 1 once it has settled
-                           * into a                       stationary hazard.<sup>[\ref fp_e1 "E1"],
-                           * [\ref fp_e2 "E2"]</sup>
-                           * @alias{xDD8}
-                           */
+
+    /**
+     * 0 while the flipper is an airborne projectile, 1 once it has settled
+     * into a                       stationary hazard.<sup>[\ref fp_e1 "E1"],
+     * [\ref fp_e2 "E2"]</sup>
+     * @alias{xDD8}
+     */
+
     bool xDD8_isSettled;
+
     /**
      * Countdown that refreshes the active flipper's hitboxes when it reaches
      * 0; set from @c x14_hitboxInterval on a hit.<sup>[\ref fp_e3 "E3"]</sup>
      * @alias{xDDC}
      */
     s32 xDDC_hitboxTimer;
+
     /**
      * Accumulated paddle rotation; each frame @c xDE4_spinVel is added in and
      * the result is passed to @c HSD_JObjSetRotationX.<sup>[\ref fp_e3
@@ -439,6 +443,7 @@ typedef struct itFlipper_ItemVars {
      * @alias{xDE0}
      */
     f32 xDE0_spinAngle;
+
     /**
      * Paddle angular velocity; kicked on contact, decays by @c x20_spinDecay,
      * and saturates at +/- @c x24_maxSpinVel.<sup>[\ref fp_e3 "E3"], [\ref
@@ -446,6 +451,7 @@ typedef struct itFlipper_ItemVars {
      * @alias{xDE4}
      */
     f32 xDE4_spinVel;
+
     /**
      * Set when the flipper is anchored to a stage joint (Break-the-Targets)
      * rather than free-spawned; only ever set by itFlipper_Spawn().<sup>[\ref
@@ -453,6 +459,7 @@ typedef struct itFlipper_ItemVars {
      * @alias{xDE8}
      */
     bool xDE8_isStageFixed;
+
     /**
      * The stage @c HSD_JObj a stage-fixed flipper is pinned to; the flipper's
      * @c pos tracks this joint each frame.<sup>[\ref fp_e6 "E6"]</sup>
@@ -478,13 +485,16 @@ typedef struct itFlipper_DatAttrs {
      * @alias{x0}
      */
     /* +0  */ s32 x0_throwDuration; // # airborne frames when thrown
-                                    /**
-                                     * Frames airborne when smash-thrown (25); loaded into @c xDD4_flightTimer
-                                     * on                                 a strong throw.<sup>[\ref fp_e0
-                                     * "E0"], [\ref fp_e2 "E2"]</sup>
-                                     * @alias{x4}
-                                     */
+
+    /**
+     * Frames airborne when smash-thrown (25); loaded into @c xDD4_flightTimer
+     * on                                 a strong throw.<sup>[\ref fp_e0
+     * "E0"], [\ref fp_e2 "E2"]</sup>
+     * @alias{x4}
+     */
+
     /* +4  */ s32 x4_smashThrowDuration;
+
     /**
      * Lifetime (frames) granted once the flipper settles (500); written to
      * @c xD44_lifeTimer at the settle.<sup>[\ref fp_e0 "E0"], [\ref fp_e2
@@ -492,24 +502,28 @@ typedef struct itFlipper_DatAttrs {
      * @alias{x8}
      */
     /* +8  */ s32 x8_lifetime;
+
     /**
      * Wall/ceiling restitution (0.8); flips and scales @c vel.x on a wall
      * hit.<sup>[\ref fp_e0 "E0"], [\ref fp_e5 "E5"]</sup>
      * @alias{xC}
      */
     /* +C  */ f32 xC_wallBounce;
+
     /**
      * Floor restitution (0.5); scales @c vel.x on a floor
      * hit.<sup>[\ref fp_e0 "E0"], [\ref fp_e5 "E5"]</sup>
      * @alias{x10}
      */
     /* +10 */ f32 x10_floorBounce;
+
     /**
      * Value the hitbox-refresh countdown @c xDDC_hitboxTimer is set to on a
      * hit (10).<sup>[\ref fp_e0 "E0"], [\ref fp_e3 "E3"]</sup>
      * @alias{x14}
      */
     /* +14 */ s32 x14_hitboxInterval;
+
     /**
      * Scales the striking fighter's speed into spin (11.5); its split from
      * @c x1C_baseSpinOnHit was not isolated, so this name is
@@ -517,6 +531,7 @@ typedef struct itFlipper_DatAttrs {
      * @alias{x18}
      */
     /* +18 */ f32 x18_spinMultiplier;
+
     /**
      * Base spin added on every hit before the fighter-speed term (0.131 rad);
      * its split from @c x18_spinMultiplier was not isolated, so this name is
@@ -524,12 +539,14 @@ typedef struct itFlipper_DatAttrs {
      * @alias{x1C}
      */
     /* +1C */ f32 x1C_baseSpinOnHit;
+
     /**
      * Per-frame decay subtracted from |@c xDE4_spinVel|
      * (0.000872).<sup>[\ref fp_e0 "E0"], [\ref fp_e3 "E3"]</sup>
      * @alias{x20}
      */
     /* +20 */ f32 x20_spinDecay;
+
     /**
      * Maximum |spin velocity|; @c xDE4_spinVel saturates here (0.873
      * rad).<sup>[\ref fp_e0 "E0"], [\ref fp_e4 "E4"]</sup>

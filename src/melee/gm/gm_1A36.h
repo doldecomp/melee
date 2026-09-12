@@ -10,6 +10,7 @@
 /* 1A36C0 */ u64 gm_801A36C0(u8);
 /* 1A36E0 */ void gm_801A36E0(s32, s32);
 /* 1A3714 */ void gm_801A3714(s32, u64, u64);
+
 /**
  * @brief Evaluates all controller inputs, updating #controller_map for each
  * controller.
@@ -19,6 +20,7 @@
  * is set to contain a union of all inputs from all controllers.
  */
 /* 1A3A74 */ UNK_RET gm_EvaluateAllControllerInputs(UNK_PARAMS);
+
 /* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
 /* 1A3EF4 */ void gm_801A3EF4(void);
 

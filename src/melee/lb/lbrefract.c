@@ -107,6 +107,7 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, u32 row,
                                        u8 intensity, u8 alpha)
 {
     u32 r_ = row >> 2;
+
     u32 c_ = col >> 2;
     u8(*base)[2] =
         (void*) ((u8*) data->buffer + c_ * data->row_stride + r_ * 32);
@@ -224,6 +225,7 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, u32 row,
                                         u32* out_b, u32* out_a)
 {
     int offset;
+
     u8* base;
 
     {
@@ -261,6 +263,7 @@ static int lbRefract_8002219C(lbRefract_CallbackData* data, void* buffer,
                               s32 format, u32 width, u32 height)
 {
     data->buffer = buffer;
+
     data->format = format;
     data->width = width;
     data->height = height;
@@ -457,6 +460,7 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
                                     u32 rendermode)
 {
     hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
+
     GXSetTevDirect(0);
     GXSetNumIndStages(0);
     HSD_StateInvalidate(HSD_STATE_ALL);

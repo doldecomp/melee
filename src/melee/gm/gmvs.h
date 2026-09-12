@@ -83,6 +83,7 @@
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);
+
 /**
  * @brief Checks for pause input and runs the pause routine when unpaused.
  *
@@ -96,6 +97,7 @@
  * @param[in] arg1 Pause context id passed to #gm_SetDbPauseFlag.
  */
 /* 16CA68 */ void gm_DoPauseChecksAndRoutine(VsSceneController*, int);
+
 /**
  * @brief Checks for unpause input and runs the unpause routine when paused.
  *
@@ -109,6 +111,7 @@
  * @param[in] arg1 Unpause context id passed to #gm_ClearDbPauseFlag.
  */
 /* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(VsSceneController*, int);
+
 /* 16CD98 */ void fn_8016CD98(VsSceneController*);
 /* 16CF4C */ void fn_8016CF4C(int, MatchOutcome);
 /* 16CFE0 */ void fn_8016CFE0(void);

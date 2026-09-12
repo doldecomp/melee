@@ -30,6 +30,7 @@
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
+
 /**
  * @brief Finds the #GameScene for a given scene kind.
  *
@@ -41,6 +42,7 @@
  * @returns The #GameScene whose #GameScene::class_id equals
  */
 /* 1A4CE0 */ GameScene* gm_FindGameSceneHandler(u8 kind);
+
 /**
  * @brief Main per-scene loop invoked from @c gm_801A4014.
  *

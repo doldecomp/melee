@@ -1895,12 +1895,14 @@ struct Ground {
         struct grInishie2_GroundVars inishie2;
         struct grInishie2_GroundVars2 inishie22;
         struct grInishie2_GroundVars3 inishie23;
+
         /**
          * Japanese for "barrel," from #grKongo_801D828C and
          * #grOldKongo_802105C8 asserts.
          * @alias{oldkongo}
          */
         struct grOldKongo_GroundVars taru;
+
         struct grOldPupupu_GroundVars oldpupupu;
         struct grOldPupupu_GroundVars2 oldpupupu2;
         struct grOldYoshi_Cloud_GroundVars oldyoshicloud;

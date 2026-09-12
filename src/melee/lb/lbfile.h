@@ -1,5 +1,3 @@
-#ifndef MELEE_LB_FILE_H
-#define MELEE_LB_FILE_H
 /**
  * @file
  * @brief Utilities for reading files from the DVD drive
@@ -10,27 +8,36 @@
  * .usd or .dat extension.
  */
 
+#ifndef MELEE_LB_FILE_H
+#define MELEE_LB_FILE_H
+
 #include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
 void lbFile_800161C4(int file, uintptr_t src, uintptr_t dest, size_t size,
                      int type, int pri);
+
 /// @returns The proper filename + extension of an extensionless "base name".
 char* lbFileGetFullName(const char* basename);
+
 size_t lbFile_8001634C(int fileno);
+
 /// @returns The size in bytes of a specified file
 size_t lbFileGetSize(const char* basename);
+
 void lbFile_800164A4(int file, uintptr_t dest, size_t* size, int pri,
                      HSD_DevComCallback callback, void* args);
 void lbFile_80016580(const char* basename, void* dst, size_t* size,
                      HSD_DevComCallback callback, void* args);
 void lbFile_8001668C(const char* basename, void* dst, size_t* size);
+
 /**
  * @brief Same as lbFile_800168A0, but with an implicit heap_id=0 and no
  * preload cache.
  */
 void lbFile_80016760(const char* basename, void** dst, size_t* size);
+
 /**
  * @param heap_id The heap ID to use for the allocation (if needed)
  * @param basename Base (extensionless) file name to read

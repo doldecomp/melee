@@ -640,9 +640,11 @@ struct SpawnItem {
     /*  +0 */ HSD_GObj* x0_parent_gobj;
     /*  +4 */ HSD_GObj* x4_parent_gobj2;
     /*  +8 */ ItemKind kind;
+
     /// @brief Defines the behavior of the item, such as thrown and pickup.
     /// @todo 0 = capsule.
     /*  +C */ enum_t hold_kind;
+
     /* +10 */ s32 x10;
     /* +14 */ Vec3 pos;
     /* +20 */ Vec3 prev_pos;

@@ -44,8 +44,10 @@ struct Fighter_804D6540_x0_t;
 /* 074CA0 */ void ftParts_80074CA0(FtPartsVis*, int, DObjList*);
 /* 074D7C */ void ftParts_80074D7C(FtPartsVis*, int, DObjList*);
 /* 074E58 */ void ftParts_80074E58(Fighter*);
+
 /// Fighter_BonePersonalToCommon
 /* 07500C */ Fighter_Part ftParts_GetBoneIndex(Fighter*, Fighter_Part);
+
 /* 075028 */ int ftPartsRemap(size_t to_table_idx, size_t from_table_idx,
                               size_t joint_idx);
 /// Upper bound on FighterPartsTable::parts_num; sizes fp->parts.
@@ -64,8 +66,10 @@ ftParts_80075240(DObjList*, int n); ///< finds the n-th TObj in a DObjList
 /* 07592C */ void ftPartSetRotX(Fighter*, int part_idx, f32 rotate_x);
 /* 075AF0 */ void ftPartSetRotY(Fighter*, int part_idx, f32 rotate_y);
 /* 075CB4 */ void ftPartSetRotZ(Fighter*, int part_idx, f32 rotate_z);
+
 /// @returns Blend frames.
 /* 075E78 */ float ftPartGetRotX(Fighter*, int part_idx);
+
 /* 075F48 */ float ftPartGetRotZ(Fighter*, int part_idx);
 
 #endif

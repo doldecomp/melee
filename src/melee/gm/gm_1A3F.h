@@ -5,6 +5,7 @@
 
 /* 1A427C */ void* gm_GetGameModeStateEnterData(GameModeState*);
 /* 1A4284 */ void* gm_GetGameModeStateExitData(GameModeState*);
+
 /**
  * @brief Sets the scene index for both the current and previous scene.
  *
@@ -17,6 +18,7 @@
  * class_id, which is defined as a GameSceneKind.
  */
 /* 1A428C */ void gm_SetGameModeStateId(u8 idx);
+
 /**
  * @brief Sets the scene index for the pending scene
  *
@@ -29,8 +31,10 @@
  * class_id, which is defined as a #GameSceneKind.
  */
 /* 1A42A0 */ void gm_SetNextGameModeStateId(u8 pending_scene);
+
 /* 1A42B4 */ u8 gm_GetPreviousSceneIndex(void);
 /* 1A42C4 */ u8 gm_GetCurrentSceneIndex(void);
+
 /**
  * @brief Sets #state_machine's #GameState::pending value to @c true (1).
  * Signaling that the game mode should change after the current scene exits.
@@ -39,6 +43,7 @@
  * ::runGameMode
  */
 /* 1A42D4 */ void gm_SetNewGameModePending(void);
+
 /**
  * @brief Sets #GameRouting::pending_mode on #state_machine to @c pending_mode
  * for use after the current mode exits.
@@ -59,6 +64,7 @@
  * @param pending_mode The next game mode to use
  */
 /* 1A42E8 */ void gm_SetPendingGameMode(u8 pending_mode);
+
 /**
  * @brief Sets #GameRouting::pending_mode and #GameState::pending on
  * #state_machine to @c pending_mode and @c true (1) for use after the current
@@ -84,6 +90,7 @@
  * @param pending_mode The next game mode to use
  */
 /* 1A42F8 */ void gm_ChangeGameModeAfterCurrentScene(int pending_mode);
+
 /* 1A4310 */ u8 gm_GetCurrentGameMode(void);
 /* 1A4320 */ u8 gm_GetPreviousGameMode(void);
 /* 1A4330 */ void gm_SetGameModeOverride(u8 (*)(void));
