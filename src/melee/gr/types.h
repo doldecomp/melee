@@ -1991,27 +1991,30 @@ struct StageParam {
  * The stage archive's @c grGroundParam public symbol, reached through
  * #StageInfo::param; see #grDatFiles_801C6038.
  *
- * @todo Most fields are still unidentified.
+ * @todo Some fields are still unknown
  */
 struct GroundParam {
-    float y;
-    s16 x4;
+    float stage_scale;
+    s16 shadow_alpha;
     u8 x6_pad[2];
-    s16 x8;
+    s16 camera_fov;
     s16 xA;
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    f32 x18;
-    f32 x1C, x20, x24, x28;
+    s32 cam_dist_min;
+    s32 cam_dist_max;
+    s32 tilt_scale;
+    f32 rotation_vert;
+    f32 rotation_horiz;
+    f32 fixedness;
+    f32 bubble_multiplier;
+    f32 cam_speed_smoothness;
     u8 x2C_pad[0x2E - 0x2C];
     s16 x2E;
-    s32 x30;
-    s32 x34;
-    s32 x38;
-    f32 x3C, x40, x44, x48;
-    bool x4C_fixed_cam;
-    f32 x50, x54, x58, x5C, x60, x64;
+    s32 pause_min_z;
+    s32 pause_init_z;
+    s32 pause_max_z;
+    f32 pause_max_angle_up, pause_max_angle_down, pause_max_angle_left, pause_max_angle_right;
+    bool fixed_cam; // unknown, somewhat
+    f32 fixed_cam_x, fixed_cam_y, fixed_cam_z, fixed_fov, fixed_angle_vert, fixed_angle_horiz;
     s16 x68;
     /// Read as `((s16*) param)[0x35 + j]` by Ground_801C28CC, i.e. this is an
     /// array of s16, not padding. Same 70 bytes either way.
@@ -2022,15 +2025,15 @@ struct GroundParam {
      */
     StageParam* stage_params;
     s32 stage_param_count;
-    GXColor xB8;
-    GXColor xBC;
-    GXColor xC0;
-    GXColor xC4;
-    GXColor xC8;
-    GXColor xCC;
-    GXColor xD0;
-    GXColor xD4;
-    GXColor xD8;
+    GXColor bubblecolor_top_left;
+    GXColor bubblecolor_top;
+    GXColor bubblecolor_top_rught;
+    GXColor bubblecolor_side_top;
+    GXColor bubblecolor_side_middle;
+    GXColor bubblecolor_side_bottom;
+    GXColor bubblecolor_bottom_left;
+    GXColor bubblecolor_bottom_middle;
+    GXColor bubblecolor_bottom_right;
 };
 
 struct UnkStageDatInternal {
