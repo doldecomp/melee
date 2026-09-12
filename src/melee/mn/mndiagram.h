@@ -45,7 +45,8 @@ mnDiagram_GetNamePlayTimeByFighter(int name_idx,
 /* 241730 */ void mnDiagram_RefreshGrid(HSD_GObj* arg0, int arg1, int arg2);
 /* 2417D0 */ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj);
 /* 241AE8 */ void mnDiagram_ExitAnimProc(HSD_GObj* gobj);
-/* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count);
+/* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj,
+                                                        int count);
 /* 241BF8 */ void mnDiagram_OnFrame(HSD_GObj* gobj);
 /* 241E78 */ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2,
                                           int arg3);
