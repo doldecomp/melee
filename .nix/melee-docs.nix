@@ -87,7 +87,7 @@ stdenvNoCC.mkDerivation {
     # Cleanup index
 
     python tools/cleanup_index.py \
-      --out $out/cleanup-index \
+      --out $out/cleanup \
       --revision ${lib.escapeShellArg rev} \
       --generated ${lib.escapeShellArg generated}
 
