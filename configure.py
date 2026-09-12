@@ -84,6 +84,11 @@ parser.add_argument(
     help="build with debug info (implies --non-matching)",
 )
 parser.add_argument(
+    "--no-optimize",
+    action="store_true",
+    help="use -O0 where possible for debugging (implies --non-matching)",
+)
+parser.add_argument(
     "--asm",
     action="store_true",
     help="override src files with asm equivalents (implies --non-matching)",
@@ -211,7 +216,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-if any({args.debug, args.asm, args.linkable}) or args.sym == "on":
+if any({args.debug, args.no_optimize, args.asm, args.linkable}) or args.sym == "on":
     args.non_matching = True
 
 
@@ -291,11 +296,11 @@ cflags_base = [
     "-align powerpc",
     "-nosyspath",
     "-fp_contract on",
-    "-O4,p",
+    "-O0" if args.no_optimize else "-O4,p",
     "-multibyte",
     "-enum int",
     "-nodefaults",
-    "-inline auto",
+    "-inline off" if args.no_optimize else "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
     "-RTTI off",
@@ -323,6 +328,26 @@ cflags_base.append(f"-warn {args.warn}")
 if args.require_protos:
     cflags_base.append("-requireprotos")
 
+
+def optimized_flags(cflags: list[str]) -> list[str]:
+    return [
+        {"-O0": "-O4,p", "-inline off": "-inline auto"}.get(flag, flag)
+        for flag in cflags
+    ]
+
+
+# Objects that must retain their normal optimization in --no-optimize builds.
+NO_OPTIMIZE_CONTROL_OBJECTS = {
+    # MWCC fails register allocation for these first two at -O0. vi.c retains
+    # an otherwise dead reference to the unlinked __VIInitPhilips.
+    "dolphin/thp/THPDec.c",
+    "dolphin/mtx/mtx.c",
+    "dolphin/vi/vi.c",
+    # -O0 spills PSVECNormalize's paired-single temporaries through scalar FPR
+    # helpers, losing PS1 state and corrupting PSMTXRotAxisRad matrices.
+    "dolphin/mtx/vec.c",
+}
+
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -337,8 +362,9 @@ cflags_libc = [
     "-use_lmw_stmw on",
     "-str pool,readonly",
     "-common off",
-    "-inline deferred",
 ]
+if not args.no_optimize:
+    cflags_libc.append("-inline deferred")
 
 # MetroTRK flags
 cflags_trk = [
@@ -347,9 +373,10 @@ cflags_trk = [
     "-pool off",
     "-sdata 0",
     "-sdata2 0",
-    "-inline on,noauto",
     "-rostr",
 ]
+if not args.no_optimize:
+    cflags_trk.append("-inline on,noauto")
 
 includes_base = [
     "src",
@@ -447,10 +474,7 @@ def Lib(
     lib = {
         "lib": lib_name,
         "mw_version": f"GC/1.2.5{'n' if fix_epilogue else ''}",
-        "cflags": [
-            *cflags,
-            *make_includes(includes),
-        ],
+        "cflags": [*cflags, *make_includes(includes)],
         "host": False,
         "progress_category": category,
         "objects": objects,
@@ -1611,6 +1635,11 @@ config.libs = [
             Object(Matching, "Runtime/Gecko_setjmp.c"),
             Object(Matching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
+            *(
+                [Object(Equivalent, "Runtime/eabi_save_restore.s")]
+                if args.no_optimize
+                else []
+            ),
         ],
     ),
     Libc(
@@ -1978,6 +2007,15 @@ config.libs = [
 ]
 
 
+if args.no_optimize:
+    for lib in config.libs:
+        for obj in lib["objects"]:
+            if obj.name in NO_OPTIMIZE_CONTROL_OBJECTS:
+                obj.options["cflags"] = optimized_flags(
+                    cast(list[str], lib["cflags"])
+                )
+
+
 # Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
 # This is called once per module, with the module ID and the current link order.
 #
@@ -1994,6 +2032,19 @@ def link_order_callback(module_id: int, objects: list[str]) -> list[str]:
 
 # Uncomment to enable the link order callback.
 # config.link_order_callback = link_order_callback
+
+
+# Unoptimized MWCC code calls EABI save/restore thunks that the retail link does not need.
+def no_optimize_link_order_callback(
+    module_id: int, objects: list[str]
+) -> list[str]:
+    if module_id == 0:  # DOL
+        return objects + ["Runtime/eabi_save_restore.s"]
+    return objects
+
+
+if args.no_optimize:
+    config.link_order_callback = no_optimize_link_order_callback
 
 
 # Extra categories for progress tracking
