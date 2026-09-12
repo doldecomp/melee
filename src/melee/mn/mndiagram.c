@@ -2194,23 +2194,23 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
 ///          Hides horizontal arrows if count <= 10 (fits in visible columns).
 /// @param gobj The diagram GObj containing arrow JObjs in user_data.
 /// @param count Number of entries (fighters or names) to display.
-void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count)
+void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
 {
-    void* data = ((HSD_GObj*) gobj)->user_data;
+    Diagram* data = gobj->user_data;
     PAD_STACK(8);
     if (count <= 7) {
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[7], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[8], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[5], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[6], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[7], JOBJ_HIDDEN);
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[8], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->jobjs[5], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->jobjs[6], JOBJ_HIDDEN);
     }
     if (count <= 10) {
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[6], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[5], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[4], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[3], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[6], JOBJ_HIDDEN);
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[5], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->jobjs[4], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->jobjs[3], JOBJ_HIDDEN);
     }
 }
 
@@ -2285,18 +2285,18 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             }
             data2 = gobj->user_data;
             if (count <= 7) {
-                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[7], JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[8], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
             } else {
-                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[7], JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[8], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
             }
             if (count <= 10) {
-                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[6], JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[5], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
             } else {
-                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[6], JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[5], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
             }
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
