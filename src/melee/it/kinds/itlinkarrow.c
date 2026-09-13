@@ -17,6 +17,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -185,15 +186,8 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
 
     arg2->z = 0.0f;
     spawn.kind = (ItemKind) arg4;
-    spawn.prev_pos = *arg2;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = arg1;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, arg2, false);
+    Item_InitSpawnCommonFields(&spawn, arg1, facing_dir, true);
     gobj = Item_80268B18(&spawn);
 
     if (gobj != NULL) {

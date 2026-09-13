@@ -49,7 +49,8 @@ Item_GObj* it_802841B4(Fighter_GObj* parent_gobj, Vec3* pos, s32 arg2)
 
     if (parent_gobj != NULL) {
         spawn.kind = It_Kind_Tomato;
-        Item_InitSpawnOnPlane(&spawn, NULL, pos, -1.0F);
+        Item_InitSpawnPosition(&spawn, pos, true);
+        Item_InitSpawnCommonFields(&spawn, NULL, -1.0F, true);
         gobj = Item_80268B18(&spawn);
     }
     if (gobj != NULL) {

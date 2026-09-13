@@ -88,7 +88,7 @@ void itDrMarioPill_Spawn(Item_GObj* parent_gobj, Vec3* pos, s32 arg2,
 
     spawn.kind = kind;
     Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
-    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         itDrMarioPill_802C0B5C(gobj);
@@ -123,7 +123,7 @@ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj* parent_gobj, Vec3* pos,
 
     spawn.kind = kind;
     Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
-    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
@@ -160,7 +160,7 @@ Item_GObj* itDrMarioPill_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos,
 
     spawn.kind = kind;
     Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
-    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);

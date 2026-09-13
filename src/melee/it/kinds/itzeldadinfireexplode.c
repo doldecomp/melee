@@ -12,6 +12,7 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/itcoll.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -29,9 +30,7 @@ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Vec3* pos,
     PAD_STACK(4);
 
     spawn.kind = It_Kind_Zelda_DinFire_Explode;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, true);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

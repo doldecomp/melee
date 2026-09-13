@@ -113,9 +113,7 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
     float min;
     PAD_STACK(4);
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, parent, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

@@ -13,6 +13,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/itcoll.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 2AFD44 */ static bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj);
@@ -29,9 +30,7 @@ Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
     PAD_STACK(4);
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, true);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

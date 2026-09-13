@@ -177,7 +177,8 @@ HSD_GObj* it_802BE9D8(HSD_GObj* owner, f32 facing_dir, Vec3* pos, s32 action)
     PAD_STACK(0x14);
 
     spawn.kind = It_Kind_Ness_Yoyo;
-    Item_InitSpawn(&spawn, owner, pos, facing_dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, owner, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);

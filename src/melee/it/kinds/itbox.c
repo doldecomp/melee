@@ -17,6 +17,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
@@ -54,8 +55,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         lb_8000B1CC(GET_JOBJ(parent_gobj), NULL, &pos);
 
         spawn.kind = It_Kind_Box;
-        spawn.prev_pos = pos;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, &pos, false);
         spawn.facing_dir = 1.0F;
         spawn.x3C_damage = 0;
         spawn.vel.z = 0.0F;

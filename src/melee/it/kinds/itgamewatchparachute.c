@@ -30,7 +30,8 @@ HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Parachute;
-    Item_InitSpawn(&spawn, parent, pos, facing_dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent, facing_dir, true);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);

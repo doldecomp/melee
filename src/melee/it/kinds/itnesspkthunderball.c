@@ -13,6 +13,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
@@ -114,9 +115,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_Ness_PKThunder;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, owner, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

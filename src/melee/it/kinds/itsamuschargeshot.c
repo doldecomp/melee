@@ -11,6 +11,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/mtx.h>
 
@@ -64,16 +65,8 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
     HSD_GObj* n;
 
     si.kind = arg3;
-    si.prev_pos = *pos;
-    si.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &si.pos);
-    si.facing_dir = facing_dir;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = true;
-    si.x40 = 0;
+    Item_InitSpawnPositionFromParent(&si, gobj, pos);
+    Item_InitSpawnCommonFields(&si, gobj, facing_dir, true);
     n = Item_80268B18(&si);
     if (n != NULL) {
         Item* ip = GET_ITEM(n);

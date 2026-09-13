@@ -12,6 +12,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -56,9 +57,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     int i;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, true);
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = (cur_delay = 0);

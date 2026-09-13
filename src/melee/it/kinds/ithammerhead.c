@@ -52,7 +52,7 @@ void it_80299C48(Item_GObj* parent_gobj, Vec3* pos, Vec3* velocity,
 
     spawn.kind = It_Kind_Hammer_Head;
     Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
-    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         it = GET_ITEM(gobj);

@@ -7,6 +7,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 
 /* 29AA1C */ static void it_8029AA1C(HSD_GObj*);
 /* 29AA6C */ static bool itFflowerflame_UnkMotion0_Anim(Item_GObj*);
@@ -41,16 +42,8 @@ HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, Fighter_Part arg2, f32 arg3)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_F_Flower_Flame;
-    spawn.prev_pos = *arg1;
-    spawn.prev_pos.z = 0.0F;
-    it_8026BB68(arg0, &spawn.pos);
-    spawn.facing_dir = arg3;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
-    spawn.x0_parent_gobj = arg0;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, arg0, arg1);
+    Item_InitSpawnCommonFields(&spawn, arg0, arg3, true);
 
     {
         Item_GObj* gobj = Item_80268B18(&spawn);

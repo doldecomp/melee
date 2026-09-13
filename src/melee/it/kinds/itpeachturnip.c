@@ -111,7 +111,8 @@ Item_GObj* it_802BD4AC(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
     itPeachTurnipAttributes* attr;
 
     spawn.kind = kind;
-    Item_InitSpawn(&spawn, item_gobj, pos, fdir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, item_gobj, fdir, true);
 
     spawn_gobj = Item_80268B18(&spawn);
     if (spawn_gobj != NULL) {

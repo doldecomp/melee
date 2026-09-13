@@ -107,9 +107,7 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
     PAD_STACK(4);
 
     spawn.kind = It_Kind_L_Gun_Beam;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner_gobj, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, owner_gobj, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

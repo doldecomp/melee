@@ -13,6 +13,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -32,16 +33,8 @@ Item_GObj* it_802B4AC8(Fighter_GObj* parent_gobj, Vec3* pos, f32 facing_dir)
     Item_GObj* gobj;
     SpawnItem si;
     si.kind = It_Kind_Samus_Bomb;
-    si.prev_pos = *pos;
-    si.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &si.pos);
-    si.facing_dir = facing_dir;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = parent_gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = true;
-    si.x40 = 0;
+    Item_InitSpawnPositionFromParent(&si, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&si, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&si);
     if (gobj != NULL) {
         it_802B4BA0(gobj);

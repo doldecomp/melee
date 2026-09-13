@@ -462,8 +462,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
     }
 
     spawn.kind = It_Kind_Samus_GBeam;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, false);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;

@@ -185,7 +185,8 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
-    Item_InitSpawn(&spawn, parent_gobj, arg1, facing_dir);
+    Item_InitSpawnPosition(&spawn, arg1, false);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);

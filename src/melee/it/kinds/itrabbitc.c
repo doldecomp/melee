@@ -49,7 +49,8 @@ HSD_GObj* it_80294DC0(Vec3* pos)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_RabbitC;
-    Item_InitSpawn(&spawn, NULL, pos, -1.0f);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     item_gobj = Item_80268B5C(&spawn);
     if (item_gobj != NULL) {
         it_80295138(item_gobj);

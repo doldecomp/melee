@@ -16,6 +16,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
@@ -75,16 +76,8 @@ Item_GObj* it_802C3BAC(Item_GObj* gobj, Vec* vec, float facing_dir, float arg3)
     SpawnItem si;
     Item_GObj* n;
     si.kind = It_Kind_Zelda_DinFire;
-    si.prev_pos = *vec;
-    si.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &si.pos);
-    si.facing_dir = facing_dir;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = 1;
-    si.x40 = 0;
+    Item_InitSpawnPositionFromParent(&si, gobj, vec);
+    Item_InitSpawnCommonFields(&si, gobj, facing_dir, true);
     n = Item_80268B18(&si);
     if (n != NULL) {
         Item* i = GET_ITEM(n);

@@ -72,7 +72,8 @@ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind, f32 dir)
     Item_GObj* item_gobj;
 
     spawn.kind = kind;
-    Item_InitSpawn(&spawn, parent, pos, dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent, dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         it_8029CFF0(item_gobj);

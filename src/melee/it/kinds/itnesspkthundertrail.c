@@ -13,6 +13,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6C08[] = {
@@ -38,9 +39,7 @@ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
     }
 
     spawn.kind = it_803F6C18[trail_idx];
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0F;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, true);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;

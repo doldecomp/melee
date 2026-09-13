@@ -13,6 +13,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -28,9 +29,7 @@ void it_802AA054(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing_dir,
     PAD_STACK(8);
 
     spawn.kind = It_Kind_Ness_PKFire;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, gobj, pos);
     spawn.vel = *vel;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;

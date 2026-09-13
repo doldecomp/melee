@@ -55,7 +55,8 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     if (!(angle < M_PI / 2) && !(angle > M_PI * 3 / 2)) {
         right_facing = false;
     }
-    Item_InitSpawnCommonFields(&spawn, parent, right_facing ? +1.0F : -1.0F);
+    Item_InitSpawnCommonFields(&spawn, parent, right_facing ? +1.0F : -1.0F,
+                               true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* item = GET_ITEM(item_gobj);

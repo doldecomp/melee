@@ -57,20 +57,6 @@ static inline void Item_RetractChain(ItemLink* link, Vec3* pos,
     *remaining_out = remaining;
 }
 
-static inline void Item_InitSpawn(SpawnItem* spawn, HSD_GObj* parent,
-                                  Vec3* pos, f32 dir)
-{
-    spawn->prev_pos = *pos;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
-    spawn->x40 = 0;
-}
-
 static inline Item_GObj*
 Item_AttachToParent(Item_GObj* item_gobj, HSD_GObj* parent, Fighter_Part part)
 {
@@ -202,15 +188,26 @@ static inline void Item_ResetRayAfterReflection(Item* ip, HSD_JObj* jobj)
     }
 }
 
+static inline void Item_InitSpawnPosition(SpawnItem* spawn, Vec3* pos,
+                                          bool on_plane)
+{
+    spawn->prev_pos = *pos;
+    if (on_plane) {
+        spawn->prev_pos.z = 0.0F;
+    }
+    spawn->pos = spawn->prev_pos;
+}
+
 static inline void Item_InitSpawnCommonFields(SpawnItem* spawn,
-                                              HSD_GObj* parent, f32 facing_dir)
+                                              HSD_GObj* parent, f32 facing_dir,
+                                              bool initial_collision)
 {
     spawn->facing_dir = facing_dir;
     spawn->x3C_damage = 0;
     spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
     spawn->x0_parent_gobj = parent;
     spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
+    spawn->x44_flag.b0 = initial_collision;
     spawn->x40 = 0;
 }
 
@@ -248,37 +245,6 @@ static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
     it_80273030(gobj);
     HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
     return false;
-}
-
-static inline void Item_InitSpawnOnPlane(SpawnItem* spawn, HSD_GObj* parent,
-                                         Vec3* pos, f32 dir)
-{
-    spawn->prev_pos = *pos;
-    spawn->prev_pos.z = 0.0F;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
-    spawn->x40 = 0;
-}
-
-static inline void Item_InitSpawnOnPlaneNoInitialCollision(SpawnItem* spawn,
-                                                           HSD_GObj* parent,
-                                                           Vec3* pos, f32 dir)
-{
-    spawn->prev_pos = *pos;
-    spawn->prev_pos.z = 0.0F;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = false;
-    spawn->x40 = 0;
 }
 
 #endif

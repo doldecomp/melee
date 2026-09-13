@@ -39,7 +39,8 @@ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     Item_GObj* item_gobj;
 
     spawn.kind = It_Kind_Peach_Parasol;
-    Item_InitSpawn(&spawn, parent, pos, dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent, dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         return Item_AttachToParent(item_gobj, parent, arg2);

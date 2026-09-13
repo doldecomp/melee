@@ -8,6 +8,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F93A8[] = {
@@ -27,13 +28,7 @@ void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos, ItemKind kind,
     spawnitem.kind = kind;
     spawnitem.prev_pos = *prev_pos;
     spawnitem.pos = *pos;
-    spawnitem.facing_dir = facing_dir;
-    spawnitem.x3C_damage = 0;
-    spawnitem.vel.x = spawnitem.vel.y = spawnitem.vel.z = 0.0F;
-    spawnitem.x0_parent_gobj = owner;
-    spawnitem.x4_parent_gobj2 = spawnitem.x0_parent_gobj;
-    spawnitem.x44_flag.b0 = true;
-    spawnitem.x40 = 0;
+    Item_InitSpawnCommonFields(&spawnitem, owner, facing_dir, true);
     gobj = Item_80268B18(&spawnitem);
     it_802F10F8(gobj);
     db_80225DD8(gobj, owner);

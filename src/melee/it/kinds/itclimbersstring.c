@@ -157,15 +157,8 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
     PAD_STACK(20);
 
     spawn.kind = It_Kind_IceClimber_GumStrings;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = false;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, owner, dir, false);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);

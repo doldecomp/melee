@@ -54,7 +54,8 @@ HSD_GObj* it_802AD478(Item_GObj* gobj, Vec3* pos, Fighter_Part part,
 
     if (gobj != NULL) {
         spawn.kind = It_Kind_Ness_Bat;
-        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, gobj, pos, facing_dir);
+        Item_InitSpawnPosition(&spawn, pos, true);
+        Item_InitSpawnCommonFields(&spawn, gobj, facing_dir, false);
 
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {
@@ -84,16 +85,8 @@ Item_GObj* it_802AD590(Fighter_GObj* gobj, Fighter_Part part)
     if (gobj != NULL) {
         spawn.kind = It_Kind_Ness_Bat;
         ftLib_80086644(gobj, &pos);
-        spawn.prev_pos = pos;
-        spawn.prev_pos.z = 0.0f;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = ftLib_800865C0(gobj);
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-        spawn.x0_parent_gobj = gobj;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnPosition(&spawn, &pos, true);
+        Item_InitSpawnCommonFields(&spawn, gobj, ftLib_800865C0(gobj), false);
 
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {
