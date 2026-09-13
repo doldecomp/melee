@@ -5,6 +5,7 @@
 #include <wchar.h>
 
 #define RAND_MAX 32767
+#define INT_MAX 0x7FFFFFFF
 
 void srand(unsigned int seed);
 int rand(void);
