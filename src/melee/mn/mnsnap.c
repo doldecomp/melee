@@ -1112,9 +1112,6 @@ void fn_802545C4(void)
             }
         } else {
             s32* active_slot = &mnSnap_804A0A10.active_slot;
-#ifdef MUST_MATCH
-            active_slot = active_slot;
-#endif
 
             mnSnap_804A0A10.state = 2;
             mnSnap_804A0A10.timer = 0xB;
