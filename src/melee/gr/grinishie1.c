@@ -1184,7 +1184,7 @@ void grInishie1_801FCB10(HSD_GObj* gobj)
 
 DynamicsDesc* grInishie1_801FCBB0(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grInishie1_801FCBB8(Vec3* arg, int arg0, HSD_JObj* jobj)

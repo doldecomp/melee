@@ -270,16 +270,18 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
+struct GameCache {
+    u8 mode_kind; ///< ::GameModeKind
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    StKind stkind;
+    PreloadCacheSceneEntry entries[8];
+};
+
 struct PreloadedGameModeState {
     bool is_heap_persistent[2];
-    struct GameCache {
-        u8 mode_kind; ///< ::GameModeKind
-        u8 x1;
-        u8 x2;
-        u8 x3;
-        StKind stkind;
-        PreloadCacheSceneEntry entries[8];
-    } game_cache;
+    struct GameCache game_cache;
     s32 mode_scene_changes;
 };
 

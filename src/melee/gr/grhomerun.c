@@ -962,7 +962,7 @@ void grHomeRun_8021EDD4(void)
 
 DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grHomeRun_8021EEBC(Vec3* a, int b, HSD_JObj* jobj)

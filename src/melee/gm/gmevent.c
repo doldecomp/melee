@@ -113,14 +113,16 @@ struct gm_evbonus {
     /* 0x17 */ u8 x17;
 };
 
+/* 0x04 */ struct gm_804D6900_x4_t {
+    int x0;
+    intptr_t x4;
+};
+
 struct gm_804D6900_t {
     /* 0x00 */ u8 kind;
     /* 0x01 */ u8 flags; ///< top 3 bits: player count
     /* 0x02 */ u8 pad2[2];
-    /* 0x04 */ struct gm_804D6900_x4_t {
-        int x0;
-        intptr_t x4;
-    }* x4;
+    /* 0x04 */ struct gm_804D6900_x4_t* x4;
     /* 0x08 */ struct gm_evinit* evinit;
     /* 0x0C */ struct gm_evbonus* evbonus;
     /* 0x10 */ struct gm_evstage_table* evstage_table;

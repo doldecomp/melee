@@ -1560,7 +1560,7 @@ void fn_80216DE4(void* user_data, int joint_id, CollData* coll, int coll_x50,
 
 DynamicsDesc* grGreens_80216E64(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grGreens_80216E6C(Vec3* arg, int arg0, HSD_JObj* jobj)

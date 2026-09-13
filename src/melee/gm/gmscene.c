@@ -35,7 +35,7 @@ static u64 gm_803DA888[8] = {
 
 u64 gm_803DA8C8[2] = { -1, -1 };
 
-int gm_GetDbPauseFlag(int bit)
+bool gm_GetDbPauseFlag(int bit)
 {
     return gm_80479D58.unk_10.x0 & (1ULL << bit);
 }

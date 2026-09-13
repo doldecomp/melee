@@ -1153,8 +1153,6 @@ void gmMainLib_8015F4F4(u8 arg0)
     gmMainLib_GetSaveData()->x1CB0.deflicker = arg0;
 }
 
-struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
-
 void gmMainLib_8015F500(void)
 {
     GXRenderModeObj* var_r0;

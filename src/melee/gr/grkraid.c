@@ -570,7 +570,7 @@ void grKraid_801FF150(Ground_GObj* gobj) {}
 
 DynamicsDesc* grKraid_OnTouchLine(enum_t unused)
 {
-    return false;
+    return NULL;
 }
 
 bool grKraid_OnCheckShadowRender(Vec3* a, int _, HSD_JObj* joint)

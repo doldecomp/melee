@@ -60,6 +60,20 @@ typedef struct un_804A1F48_t {
 } un_804A1F48_t;
 ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
+struct GameSceneInfo {
+    /**
+     * The #GameSceneKind associated with this scene. This is the value
+     * matched by #gm_FindGameSceneHandler to look up the corresponding
+     * #GameScene supplying the #GameScene::on_enter, #GameScene::on_exit,
+     * and #GameScene::on_frame callbacks invoked for this scene. Not to be
+     * confused with #GameModeState::id, which is the scene graph
+     * traversal index.
+     */
+    /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
+    /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
+    /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
+} info;
+
 /**
  * @note Colloquially known as "Minor Scene"
  *
@@ -85,19 +99,7 @@ struct GameModeState {
     /* +4 */ void (*on_enter)(GameModeState*);
     /* +8 */ void (*on_exit)(GameModeState*);
 
-    struct GameSceneInfo {
-        /**
-         * The #GameSceneKind associated with this scene. This is the value
-         * matched by #gm_FindGameSceneHandler to look up the corresponding
-         * #GameScene supplying the #GameScene::on_enter, #GameScene::on_exit,
-         * and #GameScene::on_frame callbacks invoked for this scene. Not to be
-         * confused with #GameModeState::id, which is the scene graph
-         * traversal index.
-         */
-        /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
-        /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
-        /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
-    } info;
+    GameSceneInfo info;
 };
 
 /// @note Colloquially known as "Major Scene"
@@ -281,6 +283,13 @@ struct gmm_retval_EDBC {
     int x114[SELKIND_COUNT];
 };
 
+struct gmm_x1868_1A8_t {
+    /* 0x01A8 +0 */ u32 x0;
+    /* 0x01AC +4 */ u8 x4; ///< true/false
+    /* 0x01AD +5 */ u8 x5;
+    /* 0x01AE +6 */ u8 x6;
+} unk_1A8;
+
 struct gmm_x1868 {
     /* 0x0000 */ u16
         unlocked_characers_bitmask; ///< unlocked characters bitmask
@@ -295,12 +304,7 @@ struct gmm_x1868 {
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
     /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
     /* 0x0030 */ struct gmm_retval_EDBC unk_30;
-    struct gmm_x1868_1A8_t {
-        /* 0x01A8 +0 */ u32 x0;
-        /* 0x01AC +4 */ u8 x4; ///< true/false
-        /* 0x01AD +5 */ u8 x5;
-        /* 0x01AE +6 */ u8 x6;
-    } unk_1A8;
+    gmm_x1868_1A8_t unk_1A8;
     /* 0x01B0 */ u32 time_matches;
     /* 0x01B4 */ u32 stock_matches;
     /* 0x01B8 */ u32 coin_matches;
@@ -343,6 +347,90 @@ struct gmm_x1868 {
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */
 
+struct gmm_x0_528_t {
+    /* 0x051C */ s8 c_kind;
+    /* 0x051D */ u8 stocks;
+    /* 0x051E */ u8 color;
+    /* 0x051F */ u8 cpu_level;
+    /* 0x0520 */ u8 nametag;
+    /* 0x0521 */ u8 x5;
+};
+
+struct gmm_x0_584_t {
+    /* 0x0584 */ s8 unk_584;
+    /* 0x0585 */ u8 unk_585;
+    /* 0x0586 */ u8 unk_586;
+    /* 0x0587 */ s8 unk_587;
+} unk_584;
+
+struct EventData {
+    /* 0x0530 */ u8 x0;
+    /* 0x0531 */ u8 x1;
+    /* 0x0532 */ s8 x2;
+    /* 0x0533 */ u8 x3;
+    /* 0x0534 */ u8 nametag;
+    /* 0x0535 */ u8 unk_535;
+    /* 0x0536 */ u8 x6;
+    /* 0x0537 */ u8 x7;
+    /* 0x0538 */ s8 x8;
+    /* 0x0539 */ s8 x9;
+    /* 0x053A */ s8 xA;
+    /* 0x053B */ u8 xB_0 : 1;
+    /* 0x053B */ u8 xB_1 : 1;
+    /* 0x053B */ u8 xB_2 : 1;
+    /* 0x053B */ u8 xB_3 : 1;
+    /* 0x053B */ u8 xB_4 : 1;
+    /* 0x053B */ u8 xB_5 : 1;
+    /* 0x053B */ u8 xB_6 : 1;
+    /* 0x053B */ u8 xB_7 : 1;
+    /* 0x053C */ int xC;
+    /* 0x0540 */ int x10;
+    /* 0x0544 */ int x14;
+    /* 0x0548 */ int x18;
+    /* 0x054C */ float x1C;
+    /* 0x0550 */ int x20;
+    /* 0x0554 */ int x24;
+    /* 0x0558 */ int x28;
+    /* 0x055C */ int x2C; // timer seconds
+    /* 0x0560 */ int x30;
+    /* 0x0564 */ int x34;
+    /* 0x0568 */ u8 x38;
+    /* 0x056C */ int x3C;
+    /* 0x0570 */ int x40;
+    /* 0x0574 */ s8 x44;
+    /* 0x0575 */ u8 x45;
+    /* 0x0578 */ StKind x48;
+    /* 0x057C */ s8 x4C[4]; ///< CharacterKind
+    /* 0x0580 */ u8 x50[4]; ///< character color
+    struct gmm_x0_584_t unk_584;
+} unk_530;
+
+struct gmm_x0_vsdata {
+    gmm_x0_528_t unk_51C, unk_522, unk_528;
+    struct EventData unk_530;
+};
+
+struct gmm_x0_vsmodes {
+    /* 0x0588 */ s8 nametags[PAD_MAX_CONTROLLERS];
+    /// @todo Maybe array of ::VsModeData with kind-index
+    /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
+    /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
+    /* 0x0950 */ VsModeData vs_camera;
+    /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
+    /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
+    /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490;        ///< multiman, 3/15 min, endless,
+                                             ///< cruel
+    /* 0x15D0 */ VsModeData unk_15D0;        ///< unused?
+    /* 0x1710 */ VsModeData unk_1710;        ///< opening movie?
+};
+
 struct gmm_x0 {
     /* 0x0000 */ u8 language;
     /* 0x0001 */ u8 unk_1;
@@ -356,84 +444,10 @@ struct gmm_x0 {
     /** @remarks `gmMainLib_8015CDC8` hands out a pointer to the start of this
      * block and its callers read on into `unk_530`, so the three slots and the
      * event data form one object. */
-    struct gmm_x0_vsdata {
-        struct gmm_x0_528_t {
-            /* 0x051C */ s8 c_kind;
-            /* 0x051D */ u8 stocks;
-            /* 0x051E */ u8 color;
-            /* 0x051F */ u8 cpu_level;
-            /* 0x0520 */ u8 nametag;
-            /* 0x0521 */ u8 x5;
-        } unk_51C, unk_522, unk_528;
-        struct EventData {
-            /* 0x0530 */ u8 x0;
-            /* 0x0531 */ u8 x1;
-            /* 0x0532 */ s8 x2;
-            /* 0x0533 */ u8 x3;
-            /* 0x0534 */ u8 nametag;
-            /* 0x0535 */ u8 unk_535;
-            /* 0x0536 */ u8 x6;
-            /* 0x0537 */ u8 x7;
-            /* 0x0538 */ s8 x8;
-            /* 0x0539 */ s8 x9;
-            /* 0x053A */ s8 xA;
-            /* 0x053B */ u8 xB_0 : 1;
-            /* 0x053B */ u8 xB_1 : 1;
-            /* 0x053B */ u8 xB_2 : 1;
-            /* 0x053B */ u8 xB_3 : 1;
-            /* 0x053B */ u8 xB_4 : 1;
-            /* 0x053B */ u8 xB_5 : 1;
-            /* 0x053B */ u8 xB_6 : 1;
-            /* 0x053B */ u8 xB_7 : 1;
-            /* 0x053C */ int xC;
-            /* 0x0540 */ int x10;
-            /* 0x0544 */ int x14;
-            /* 0x0548 */ int x18;
-            /* 0x054C */ float x1C;
-            /* 0x0550 */ int x20;
-            /* 0x0554 */ int x24;
-            /* 0x0558 */ int x28;
-            /* 0x055C */ int x2C; // timer seconds
-            /* 0x0560 */ int x30;
-            /* 0x0564 */ int x34;
-            /* 0x0568 */ u8 x38;
-            /* 0x056C */ int x3C;
-            /* 0x0570 */ int x40;
-            /* 0x0574 */ s8 x44;
-            /* 0x0575 */ u8 x45;
-            /* 0x0578 */ StKind x48;
-            /* 0x057C */ s8 x4C[4]; ///< CharacterKind
-            /* 0x0580 */ u8 x50[4]; ///< character color
-            struct gmm_x0_584_t {
-                /* 0x0584 */ s8 unk_584;
-                /* 0x0585 */ u8 unk_585;
-                /* 0x0586 */ u8 unk_586;
-                /* 0x0587 */ s8 unk_587;
-            } unk_584;
-        } unk_530;
-    } vs;
+    struct gmm_x0_vsdata vs;
     /** @remarks Directly follows #gmm_x0_vsdata; `gmMainLib_8015DBF4` and
      * `gmMainLib_8015EA80` walk the table from a pointer to that block. */
-    struct gmm_x0_vsmodes {
-        /* 0x0588 */ s8 nametags[PAD_MAX_CONTROLLERS];
-        /// @todo Maybe array of ::VsModeData with kind-index
-        /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
-        /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
-        /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
-        /* 0x0950 */ VsModeData vs_camera;
-        /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
-        /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
-        /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
-        /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
-        /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
-        /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
-        /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
-        /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
-        /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless,
-                                          ///< cruel
-        /* 0x15D0 */ VsModeData unk_15D0; ///< unused?
-        /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
-    } modes;
+    struct gmm_x0_vsmodes modes;
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
     /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
@@ -679,34 +693,38 @@ typedef struct gmPlayerData {
     /* 07 */ u8 mode; ///< @todo Actually ::GameModeState::id
 } gmPlayerData;
 
+typedef struct Unk1PData_x24 {
+    /* 24 */ s8 ckind;
+    /* 25 */ u8 color;
+    /* 26 */ u8 cpu_level;
+    /* 27 */ u8 cpu_kind;
+    /* 28 */ float attack_ratio;
+    /* 2C */ float defense_ratio;
+} Unk1PData_x24;
+
+typedef struct Unk1PData_xC {
+    /* 0C */ u8 xC;
+    /* 0D */ u8 xD;
+    /* 0E */ u8 xE;
+    /* 0F */ u8 xF;
+    /* 10 */ u8 x10;
+    /* 11 */ u8 x11;
+    /* 12 */ u8 x12;
+    /* 13 */ u8 x13;
+    /* 14 */ u16 x14;
+    /* 18 */ int x18;
+    /* 1C */ int x1C;
+    /* 20 */ u32 x20;
+    Unk1PData_x24 x24[3];
+} Unk1PData_xC;
+
 struct Unk1PData {
     struct gmPlayerData x0;
     /* 08 */ u8 x8;
     /* 09 */ u8 x9;
     /* 0A */ u8 xA;
     /* 0B */ u8 xB;
-    /* 0C */ struct Unk1PData_xC {
-        /* 0C */ u8 xC;
-        /* 0D */ u8 xD;
-        /* 0E */ u8 xE;
-        /* 0F */ u8 xF;
-        /* 10 */ u8 x10;
-        /* 11 */ u8 x11;
-        /* 12 */ u8 x12;
-        /* 13 */ u8 x13;
-        /* 14 */ u16 x14;
-        /* 18 */ int x18;
-        /* 1C */ int x1C;
-        /* 20 */ u32 x20;
-        struct Unk1PData_x24 {
-            /* 24 */ s8 ckind;
-            /* 25 */ u8 color;
-            /* 26 */ u8 cpu_level;
-            /* 27 */ u8 cpu_kind;
-            /* 28 */ float attack_ratio;
-            /* 2C */ float defense_ratio;
-        } x24[3];
-    } xC;
+    /* 0C */ Unk1PData_xC xC;
     /* 48 */ u8 (*x48)(u8, u8);
     /* 4C */ u8 (*x4C)(u8, u8, u8);
     /* 50 */ u8 (*x50)(u8, u8, u8);
