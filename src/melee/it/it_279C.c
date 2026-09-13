@@ -1431,6 +1431,14 @@ static inline s32 it_8027AB64_SelectKind(Item* item)
 }
 #endif
 
+static inline s32 selectPokemonFromList(Item* item, ItemKind* kinds)
+{
+    if (kinds == NULL) {
+        return It_PKind_Sonans;
+    }
+    return it_8027A780(item, kinds);
+}
+
 bool it_8027AB64(Item_GObj* item_gobj)
 {
     u8 _pad[8];
@@ -1449,11 +1457,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
             spawn.kind = temp_r3 - It_PKind_Start;
         }
     } else if (gm_8018841C()) {
-        spawn.kind =
-#ifdef MUST_MATCH
-            (&common_pokemon == NULL) ? It_PKind_Sonans :
-#endif
-                                      it_8027A780(item, &common_pokemon);
+        spawn.kind = selectPokemonFromList(item, common_pokemon);
 
     } else if (gm_GetCurrentGameMode() == GM_OPENING_MV) {
         spawn.kind = it_8027AB64_SelectKind(item);
