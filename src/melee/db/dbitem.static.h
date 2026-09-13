@@ -15,7 +15,7 @@ static struct {
     unsigned int DisplayFadeTimer;
     int ItemSpawnsEnabled;
     int Player;
-    ItemKind CurrentlySelectedItem;
+    int CurrentlySelectedItem;
     int CurrentlySelectedPokemon;
     ItemKind LastSelectedItem;
     int LastSelectedPokemon;

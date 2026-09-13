@@ -711,9 +711,9 @@ int ftPartsRemap(size_t to_table_idx, size_t from_table_idx, size_t joint_idx)
 
 u32 ftParts_8007506C(enum FighterKind ftkind, int part)
 {
-    struct Fighter_804D6540_x0_t* var_r3;
+    Fighter_804D6540_x0_t* var_r3;
     int i;
-    struct Fighter_804D6540_t* temp_r3;
+    Fighter_804D6540_t* temp_r3;
 
     temp_r3 = Fighter_804D6540[ftkind];
     if (temp_r3 != NULL && temp_r3->x4 != 0) {

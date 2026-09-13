@@ -14,6 +14,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmvs.h>
+#include <melee/gm/types.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>

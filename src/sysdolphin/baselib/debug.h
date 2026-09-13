@@ -8,10 +8,10 @@
 typedef void (*ReportCallback)(const unsigned char*, size_t);
 typedef void (*PanicCallback)(OSContext*, ...);
 
-ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
+ATTRIBUTE_NORETURN void __assert(const char*, u32, const char*);
 
 void HSD_LogInit(void);
-ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
+ATTRIBUTE_NORETURN void HSD_Panic(const char*, u32, const char*);
 
 /// @todo Take @c file as another arg, ignore it if not `MUST_MATCH`.
 #ifdef MUST_MATCH

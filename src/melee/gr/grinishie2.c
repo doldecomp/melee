@@ -780,7 +780,7 @@ void grInishie2_801FDFE4(Ground_GObj* gobj) {}
 
 DynamicsDesc* grInishie2_801FDFE8(enum_t arg)
 {
-    return 0;
+    return NULL;
 }
 
 bool grInishie2_801FDFF0(Vec3* arg, int arg0, HSD_JObj* jobj)

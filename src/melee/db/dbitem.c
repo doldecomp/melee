@@ -253,7 +253,7 @@ void db_HandleItemPokemonMenuInput(int player)
         } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x2F) {
             db_ItemAndPokemonMenu.CurrentlySelectedItem++;
             if (db_ItemAndPokemonMenu.CurrentlySelectedItem == 0x2F) {
-                db_ItemAndPokemonMenu.CurrentlySelectedItem = 0xD0;
+                db_ItemAndPokemonMenu.CurrentlySelectedItem = It_Kind_Old_Kuri;
             }
         } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0xE9) {
             db_ItemAndPokemonMenu.CurrentlySelectedItem++;
@@ -409,7 +409,7 @@ void db_CheckAndSpawnItem(int player)
             {
                 HSD_GObj* gobj = Item_80268B18(&spawnItem);
                 if (gobj != NULL) {
-                    GET_ITEM(gobj)->xDAA_flag.u8 |=
+                    GET_ITEM(gobj)->xDAA_flag.byte |=
                         db_ShowItemCollisionBubbles;
                     efSync_Spawn(0x420, gobj, &spawnItem.prev_pos);
                 }

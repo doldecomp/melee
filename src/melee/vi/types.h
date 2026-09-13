@@ -14,9 +14,4 @@ struct ViCharaDesc {
     /* 0x8 */ int unk;
 };
 
-struct un_804D7004_t {
-    char pad_0[0xC];
-}; /* size = 0xC */
-ASSERT_SIZE(struct un_804D7004_t, 0xC);
-
 #endif

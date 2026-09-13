@@ -166,7 +166,7 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ UNK_T x0;
         /* fp+2344 */ int x4;
-        /* fp+2348 */ float x8;
+        /* fp+2348 */ int x8;
         /* fp+234C */ HSD_GObj* victim;
         /* fp+2350 */ float self_vel_y;
         /* fp+2354 */ float self_vel_x;
@@ -210,7 +210,7 @@ union ftCommon_MotionVars {
     } downspot;
     struct {
         /* fp+2340 */ float x0;
-    } catch;
+    } catch_;
     struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ bool x4;
@@ -358,7 +358,7 @@ union ftCommon_MotionVars {
         /* fp+2358 */ HSD_JObj* x18;
     } capturedamage;
     struct {
-        /* fp+2340 */ bool timer;
+        /* fp+2340 */ int timer;
         /* fp+2344 */ float x4;
         /* fp+2348 */ Vec3 x8;
         /* fp+2354 */ Vec3 x14;
@@ -432,7 +432,7 @@ union ftCommon_MotionVars {
         /* fp+2344 */ int x4;
         /* fp+2348 */ int x8;
         /* fp+234C */ Vec xC;
-    } throw;
+    } throw_;
     struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ float x4;

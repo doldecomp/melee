@@ -152,6 +152,7 @@ typedef struct GameSceneInfo GameSceneInfo;
 typedef struct gm_8016A92C_arg0_t gm_8016A92C_arg0_t;
 typedef struct gm_8017DB6C_arg0_t gm_8017DB6C_arg0_t;
 typedef struct gmm_x0_528_t gmm_x0_528_t;
+typedef struct gmm_x1868_1A8_t gmm_x1868_1A8_t;
 typedef struct VsSceneState VsSceneState;
 typedef struct VsSceneController VsSceneController;
 typedef struct ChallengerData ChallengerData;

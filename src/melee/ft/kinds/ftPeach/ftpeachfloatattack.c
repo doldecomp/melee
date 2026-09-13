@@ -72,7 +72,7 @@ void ftPe_FloatAttackAir_IASA(HSD_GObj* gobj)
     if (!ftPe_Float_CheckContinueInput(fp)) {
         fp->mv.pe.floatattack.x0 = true;
     }
-    if (fp->allow_interrupt && !ftCo_80095328(gobj, false)) {
+    if (fp->allow_interrupt && !ftCo_80095328(gobj, NULL)) {
         if (!ftPe_8011BE80(gobj)) {
             if (ftCo_800CB870(gobj)) {
                 return;

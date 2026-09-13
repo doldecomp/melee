@@ -7,9 +7,19 @@
 #include "fighter.h"
 #include "forward.h"
 #include "ftcommon.h"
-#include "inlines.h"
 #include "types.h"
 #include <melee/gm/gm_unsplit.h>
+
+static inline bool canUseCstick(Fighter* fp)
+{
+    /// Returns true if single-button mode is off,
+    /// and the held item allows using the C-stick.
+    if (!gm_8016B0FC() || it_8026B30C(fp->item_gobj) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 bool ftCo_800DF1C8(Fighter* fp)
 {

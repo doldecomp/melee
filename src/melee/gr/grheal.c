@@ -441,7 +441,7 @@ void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)
 
 DynamicsDesc* grHeal_8021F830(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 bool grHeal_8021F838(Vec3* arg0, int arg1, HSD_JObj* jobj)

@@ -7,6 +7,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/inlines.h>
+#include <melee/gm/gmvs.h>
 #include <melee/if/ifmagnify.h>
 #include <sysdolphin/baselib/debug.h>
 

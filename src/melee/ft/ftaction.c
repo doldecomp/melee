@@ -20,7 +20,6 @@
 #include "ftcommon.h"
 #include "ftdynamics.h"
 #include "ftparts.h"
-#include "inlines.h"
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "types.h"
 #include <dolphin/mtx.h>
@@ -1316,6 +1315,9 @@ void ftAction_8007320C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 4);
 }
+
+/// @todo Fix naming.
+#define gmScriptEventCast(p_event, type) ((type*) (p_event))
 
 void ftAction_80073240(Fighter_GObj* fighter_gobj)
 {

@@ -1521,7 +1521,7 @@ f32 grKongo_801D8314(void)
 
 DynamicsDesc* grKongo_801D8444(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grKongo_801D844C(Vec3* a, int b, HSD_JObj* jobj)

@@ -647,7 +647,7 @@ void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
 
 DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grKinokoRoute_8020875C(Vec3* a, int b, HSD_JObj* jobj)

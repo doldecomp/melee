@@ -20,21 +20,25 @@ struct DynamicModelDesc {
     HSD_ShapeAnimJoint** shapeanims;
 };
 
+typedef struct SceneCameraDesc {
+    HSD_CObjDesc* desc;
+    HSD_CameraAnim** anims;
+} SceneCameraDesc;
+typedef struct LightList {
+    HSD_LightDesc* desc;
+    HSD_LightAnim** anims;
+} LightList;
+typedef struct SceneFogDesc {
+    HSD_FogDesc* desc;
+    HSD_CameraAnim** anims;
+} SceneFogDesc;
+
 /// The basis of a rendered scene, like a stage, menu, or HUD overlay
 struct SceneDesc {
     DynamicModelDesc** models;
-    struct SceneCameraDesc {
-        HSD_CObjDesc* desc;
-        HSD_CameraAnim** anims;
-    }* cameras;
-    struct LightList {
-        HSD_LightDesc* desc;
-        HSD_LightAnim** anims;
-    }** lights;
-    struct SceneFogDesc {
-        HSD_FogDesc* desc;
-        HSD_CameraAnim** anims;
-    }* fogs;
+    SceneCameraDesc* cameras;
+    LightList** lights;
+    SceneFogDesc* fogs;
 };
 
 #endif

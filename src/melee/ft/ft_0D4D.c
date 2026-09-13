@@ -23,6 +23,7 @@
 #include "kinds/ftCommon/ftCo_Squat.h"
 #include "kinds/ftCommon/ftCo_Turn.h"
 #include <melee/ef/efsync.h>
+#include <melee/gm/gmvs.h>
 #include <melee/gr/stage.h>
 #include <melee/it/kinds/it_2E5A.h>
 #include <melee/mp/mpcoll.h>

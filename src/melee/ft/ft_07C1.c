@@ -36,7 +36,7 @@ void ft_8007C17C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HitCapsule* hit = &fp->x1064_thrownHitbox;
-    struct ftData_x34* x34 = fp->ft_data->x34;
+    ftData_x34* x34 = fp->ft_data->x34;
     fp->x1064_thrownHitbox.x4 = 0;
     fp->x1064_thrownHitbox.state = HitCapsule_Enabled;
     lbColl_80008440(hit);

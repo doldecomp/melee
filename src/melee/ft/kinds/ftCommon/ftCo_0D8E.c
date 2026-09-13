@@ -114,8 +114,8 @@ bool fn_800D9228(Fighter_GObj* gobj)
     if ((fp->kind == Ft_Kind_Link) || (fp->kind == Ft_Kind_CLink)) {
         ftCo_LinkCatchAttrs* da = fp->dat_attrs;
 
-        fp->mv.co.catch.x0 += 1.0;
-        if (fp->mv.co.catch.x0 == (f32) da->x94) {
+        fp->mv.co.catch_.x0 += 1.0;
+        if (fp->mv.co.catch_.x0 == (f32) da->x94) {
             Vec3 pos;
 
             lb_8000B1CC(
@@ -129,15 +129,15 @@ bool fn_800D9228(Fighter_GObj* gobj)
             fp->accessory2_cb = it_802A7AF0;
             fp->death1_cb = it_802A7AAC;
             fp->accessory3_cb = it_802A7B34;
-        } else if (fp->mv.co.catch.x0 > (f32) da->x94 &&
-                   fp->mv.co.catch.x0 <= (f32) da->xA0)
+        } else if (fp->mv.co.catch_.x0 > (f32) da->x94 &&
+                   fp->mv.co.catch_.x0 <= (f32) da->xA0)
         {
             Item_GObj* tether_gobj = fp->u.lk.xC;
             Item* tether_ip = tether_gobj->user_data;
             struct TetherAttributes* tether_data =
                 tether_ip->xC4_article_data->x4_specialAttributes;
 
-            if (fp->mv.co.catch.x0 == (f32) da->x98) {
+            if (fp->mv.co.catch_.x0 == (f32) da->x98) {
                 Vec3 pos;
                 PAD_STACK(8);
 
@@ -150,14 +150,14 @@ bool fn_800D9228(Fighter_GObj* gobj)
                 } else {
                     ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                 }
-            } else if (fp->mv.co.catch.x0 == (f32) da->x9C) {
+            } else if (fp->mv.co.catch_.x0 == (f32) da->x9C) {
                 it_802A77DC(tether_gobj);
                 if (fp->kind == Ft_Kind_CLink) {
                     ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                 } else {
                     ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                 }
-            } else if (fp->mv.co.catch.x0 == (f32) da->xA0) {
+            } else if (fp->mv.co.catch_.x0 == (f32) da->xA0) {
                 it_802A2B10(tether_gobj);
             }
         }
