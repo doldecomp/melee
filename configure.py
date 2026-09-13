@@ -173,10 +173,10 @@ parser.add_argument(
     help="do not treat clang warnings as errors",
 )
 parser.add_argument(
-    "--require-protos",
+    "--no-require-protos",
     dest="require_protos",
-    action="store_true",
-    help="require function prototypes",
+    action="store_false",
+    help="do not require function prototypes",
 )
 parser.add_argument(
     "--allow-auto-splits",
@@ -307,8 +307,12 @@ cflags_base = [
 
 if args.sym in {"on", "off"}:
     cflags_base.append(f"-sym {args.sym}")
-if not args.non_matching:
+
+if args.non_matching:
+    args.always_apply = False
+else:
     cflags_base.append("-DMUST_MATCH")
+
 if args.verbose:
     cflags_base.append("-verbose")
 
@@ -472,7 +476,6 @@ def Lib(
 
 def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> Library:
     cflags = cflags_base + [
-        "-requireprotos",
         "-fp_contract off",
         "-ir extern/dolphin/src",
     ]
@@ -677,7 +680,11 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_LandingAir.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_Damage.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_DamageFall.c"),
-            Object(Matching, "melee/ft/kinds/ftCommon/ftCo_DamageIce.c"),
+            Object(
+                Matching,
+                "melee/ft/kinds/ftCommon/ftCo_DamageIce.c",
+                force_optimization=True,
+            ),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_Guard.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftpickupitem.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_ItemThrow.c"),
@@ -1893,7 +1900,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/controller.c"),
             Object(Matching, "sysdolphin/baselib/rumble.c"),
             Object(Matching, "sysdolphin/baselib/spline.c"),
-            Object(Matching, "sysdolphin/baselib/mtx.c"),
+            Object(Matching, "sysdolphin/baselib/mtx.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/util.c"),
             Object(Matching, "sysdolphin/baselib/objalloc.c"),
             Object(Matching, "sysdolphin/baselib/robj.c"),
