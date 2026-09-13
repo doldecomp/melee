@@ -56,8 +56,9 @@ void fn_ToggleMiscFighterVisuals(void)
         Fighter* ft = GET_FIGHTER(fighter);
         // ft->x21FC_flag.grouped_bits.b0_to_5 =
         // db_804D6B48.MiscFighterVisualsStatus;
-        ft->x21FC_flag.byte = (ft->x21FC_flag.byte & 3) |
-                            ((db_804D6B48.MiscFighterVisualsStatus << 2) & ~3);
+        ft->x21FC_flag.byte =
+            (ft->x21FC_flag.byte & 3) |
+            ((db_804D6B48.MiscFighterVisualsStatus << 2) & ~3);
     }
     if ((db_804D6B48.MiscFighterVisualsStatus & 0x02) != 0) {
         fn_EnableShowEnemyStompRange();

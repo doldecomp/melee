@@ -124,12 +124,10 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int flash_timer_min = fp->mv.ns.specialn.frames_to_loop_charge_ground;
     if (flash_timer_min != 0) {
-        fp->mv.ns.specialn.frames_to_loop_charge_ground =
-            flash_timer_min - 1;
+        fp->mv.ns.specialn.frames_to_loop_charge_ground = flash_timer_min - 1;
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
-        int flash_timer_delay =
-            fp->mv.ns.specialn.frames_to_loop_charge_air;
+        int flash_timer_delay = fp->mv.ns.specialn.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
             fp->mv.ns.specialn.frames_to_loop_charge_air =
                 flash_timer_delay - 1;
@@ -190,12 +188,10 @@ void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int flash_timer_min = fp->mv.ns.specialn.frames_to_loop_charge_ground;
     if (flash_timer_min != 0) {
-        fp->mv.ns.specialn.frames_to_loop_charge_ground =
-            flash_timer_min - 1;
+        fp->mv.ns.specialn.frames_to_loop_charge_ground = flash_timer_min - 1;
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
-        int flash_timer_delay =
-            fp->mv.ns.specialn.frames_to_loop_charge_air;
+        int flash_timer_delay = fp->mv.ns.specialn.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
             fp->mv.ns.specialn.frames_to_loop_charge_air =
                 flash_timer_delay - 1;

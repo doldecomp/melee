@@ -1,6 +1,5 @@
 #include "fighter.h"
 
-#include <melee/lb/types.h>
 #include <math.h>
 #include <placeholder.h>
 
@@ -73,6 +72,7 @@
 #include <melee/lb/lbanim.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbshadow.h>
+#include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/pl_040D.h>

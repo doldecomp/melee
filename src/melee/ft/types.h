@@ -704,8 +704,8 @@ typedef struct ftData_x20 {
 } ftData_x20;
 
 typedef struct ftData_x34 {
-/* +0 */ Fighter_Part x0;
-/* +4 */ float scale;
+    /* +0 */ Fighter_Part x0;
+    /* +4 */ float scale;
 } ftData_x34;
 
 typedef struct ftData_x38 {
@@ -1339,7 +1339,7 @@ struct Fighter {
     /*  fp+294 */ itPickup x294_itPickup;
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
-    /*  fp+2D0 */ Fighter_x2D0_t* x2D0;          ///< multi jump stats
+    /*  fp+2D0 */ Fighter_x2D0_t* x2D0; ///< multi jump stats
     /*  fp+2D4 */ void* dat_attrs;
     /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;

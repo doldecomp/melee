@@ -234,8 +234,7 @@ void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (fp->cmd_vars[1] != 0 && (fp->input.pressed_buttons & HSD_PAD_B) &&
-        fp->mv.gw.SpecialN.maxSausage <
-            da->specialn_gw_max_sausages_per_use)
+        fp->mv.gw.SpecialN.maxSausage < da->specialn_gw_max_sausages_per_use)
     {
         ftKb_SpecialNGw_8010D660(gobj, da->specialn_gw_frame_on_repeat);
     }
@@ -250,8 +249,7 @@ void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (fp->cmd_vars[1] != 0 && (fp->input.pressed_buttons & HSD_PAD_B) &&
-        fp->mv.gw.SpecialN.maxSausage <
-            da->specialn_gw_max_sausages_per_use)
+        fp->mv.gw.SpecialN.maxSausage < da->specialn_gw_max_sausages_per_use)
     {
         ftKb_SpecialNGw_8010D6D0(gobj, da->specialn_gw_frame_on_repeat);
     }

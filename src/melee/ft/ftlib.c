@@ -1,6 +1,5 @@
 #include "ftlib.h"
 
-#include <melee/cm/types.h>
 #include <melee/it/forward.h>
 
 #include "fighter.h"
@@ -18,6 +17,7 @@
 #include "kinds/ftGameWatch/ftgamewatch.h"
 #include "kinds/ftKirby/ftkirby.h"
 #include <melee/cm/camera.h>
+#include <melee/cm/types.h>
 #include <melee/ef/efasync.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/it/it_26B1.h>
