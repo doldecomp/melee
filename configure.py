@@ -16,7 +16,6 @@ import argparse
 import json
 import os
 import sys
-from collections.abc import Iterator
 from pathlib import Path
 from typing import cast
 
@@ -81,12 +80,7 @@ parser.add_argument(
 parser.add_argument(
     "--debug",
     action="store_true",
-    help="build with debug info (implies --non-matching)",
-)
-parser.add_argument(
-    "--no-optimize",
-    action="store_true",
-    help="use -O0 where possible for debugging (implies --non-matching)",
+    help="build with debug info (implies --non-matching and --sym on)",
 )
 parser.add_argument(
     "--asm",
@@ -216,7 +210,10 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-if any({args.debug, args.no_optimize, args.asm, args.linkable}) or args.sym == "on":
+if args.debug and args.sym == "auto":
+    args.sym = "on"
+
+if any({args.debug, args.asm, args.linkable}) or args.sym == "on":
     args.non_matching = True
 
 
@@ -296,11 +293,9 @@ cflags_base = [
     "-align powerpc",
     "-nosyspath",
     "-fp_contract on",
-    "-O0" if args.no_optimize else "-O4,p",
     "-multibyte",
     "-enum int",
     "-nodefaults",
-    "-inline off" if args.no_optimize else "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
     "-RTTI off",
@@ -328,25 +323,8 @@ cflags_base.append(f"-warn {args.warn}")
 if args.require_protos:
     cflags_base.append("-requireprotos")
 
-
-def optimized_flags(cflags: list[str]) -> list[str]:
-    return [
-        {"-O0": "-O4,p", "-inline off": "-inline auto"}.get(flag, flag)
-        for flag in cflags
-    ]
-
-
-# Objects that must retain their normal optimization in --no-optimize builds.
-NO_OPTIMIZE_CONTROL_OBJECTS = {
-    # MWCC fails register allocation for these first two at -O0. vi.c retains
-    # an otherwise dead reference to the unlinked __VIInitPhilips.
-    "dolphin/thp/THPDec.c",
-    "dolphin/mtx/mtx.c",
-    "dolphin/vi/vi.c",
-    # -O0 spills PSVECNormalize's paired-single temporaries through scalar FPR
-    # helpers, losing PS1 state and corrupting PSMTXRotAxisRad matrices.
-    "dolphin/mtx/vec.c",
-}
+cflags_debug = ["-O0", "-DDEBUG=1", "-inline off"]
+cflags_optimized = ["-O4,p", "-DNDEBUG=1"]
 
 # Metrowerks library flags
 cflags_runtime = [
@@ -363,8 +341,6 @@ cflags_libc = [
     "-str pool,readonly",
     "-common off",
 ]
-if not args.no_optimize:
-    cflags_libc.append("-inline deferred")
 
 # MetroTRK flags
 cflags_trk = [
@@ -375,8 +351,6 @@ cflags_trk = [
     "-sdata2 0",
     "-rostr",
 ]
-if not args.no_optimize:
-    cflags_trk.append("-inline on,noauto")
 
 includes_base = [
     "src",
@@ -390,9 +364,7 @@ config.linker_version = "GC/1.3.2"
 
 # Native compiler flags
 
-clang_includes = [
-    "src",
-]
+clang_includes = ["src"]
 
 clang_system_includes = [
     "src/MSL",
@@ -451,6 +423,7 @@ config.extra_clang_flags.extend(clang_flags_base)
 
 
 Objects = list[Object]
+all_objects = list[str]()
 
 
 def Lib(
@@ -462,19 +435,27 @@ def Lib(
     includes: list[str] = includes_base,
     src_dir: str | None = None,
     category: str | None = None,
+    inline: str | None = None,
 ) -> Library:
-    def make_includes(includes: list[str]) -> Iterator[str]:
-        return map(lambda s: f"-i {s}", includes)
+    for obj in objects:
+        if obj.completed:
+            all_objects.append(obj.name)
 
-    if args.sym == "auto":
-        for obj in objects:
-            extra_cflags = cast(list[str], obj.options["extra_cflags"])
+        extra_cflags = cast(list[str], obj.options["extra_cflags"])
+        if args.debug and not bool(obj.options.get("force_optimization")):
+            extra_cflags.extend(cflags_debug)
+        else:
+            extra_cflags.extend(cflags_optimized)
+            extra_cflags.append(
+                "-inline auto" if inline is None else f"-inline {inline}"
+            )
+        if args.sym == "auto":
             extra_cflags.append(f"-sym {'off' if obj.completed else 'on'}")
 
     lib = {
         "lib": lib_name,
         "mw_version": f"GC/1.2.5{'n' if fix_epilogue else ''}",
-        "cflags": [*cflags, *make_includes(includes)],
+        "cflags": [*cflags, *map(lambda s: f"-i {s}", includes)],
         "host": False,
         "progress_category": category,
         "objects": objects,
@@ -544,6 +525,7 @@ def Libc(lib_name: str, objects: Objects) -> Library:
         lib_name,
         objects,
         cflags=cflags_libc,
+        inline="deferred,auto",
         fix_epilogue=False,
         category="runtime",
     )
@@ -554,18 +536,18 @@ def TRKLib(lib_name: str, objects: Objects) -> Library:
         lib_name,
         objects,
         cflags=cflags_trk,
+        inline="on,noauto",
         fix_epilogue=False,
         fix_trk=True,
         category="runtime",
     )
 
 
-Matching = True  # Object matches and should be linked
-NonMatching = False  # Object does not match and should not be linked
-Equivalent = (
-    config.non_matching
-)  # Object should be linked when configured with --non-matching
-Linkable = bool(args.linkable)  # Object is linkable but non-matching
+Matching = True
+NonMatching = False
+Equivalent = config.non_matching
+Linkable = bool(args.linkable)
+Debug = bool(args.debug)
 
 
 # Object is only matching for specific versions
@@ -576,22 +558,23 @@ def MatchingFor(*versions):
 config.warn_missing_config = True
 config.warn_missing_source = True
 
+
 config.libs = [
     MeleeLib(
         "lb (Library)",
         [
             Object(Matching, "melee/lb/lbcommand.c"),
-            Object(Matching, "melee/lb/lbcollision.c"),
+            Object(Matching, "melee/lb/lbcollision.c", force_optimization=True),
             Object(Matching, "melee/lb/lblanguage.c"),
             Object(Matching, "melee/lb/lbtime.c"),
             Object(Matching, "melee/lb/lb_00B0.c"),
             Object(Matching, "melee/lb/lb_00CE.c"),
             Object(Matching, "melee/lb/lbvector.c"),
-            Object(Matching, "melee/lb/lbshadow.c"),
-            Object(Matching, "melee/lb/lb_00F9.c"),
-            Object(Matching, "melee/lb/lbspdisplay.c"),
+            Object(Matching, "melee/lb/lbshadow.c", force_optimization=True),
+            Object(Matching, "melee/lb/lb_00F9.c", force_optimization=True),
+            Object(Matching, "melee/lb/lbspdisplay.c", force_optimization=True),
             Object(Matching, "melee/lb/lb_013B.c"),
-            Object(Matching, "melee/lb/lb_0146.c"),
+            Object(Matching, "melee/lb/lb_0146.c", force_optimization=True),
             Object(Matching, "melee/lb/lbarq.c"),
             Object(Matching, "melee/lb/lbmemory.c"),
             Object(Matching, "melee/lb/lbheap.c"),
@@ -603,11 +586,11 @@ config.libs = [
             Object(Matching, "melee/lb/lbcardnew.c"),
             Object(Matching, "melee/lb/lbcardgame.c"),
             Object(Matching, "melee/lb/lbsnap.c"),
-            Object(Matching, "melee/lb/lbgx.c"),
+            Object(Matching, "melee/lb/lbgx.c", force_optimization=True),
             Object(Matching, "melee/lb/lbanim.c"),
             Object(Matching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
-            Object(Matching, "melee/lb/lbbgflash.c"),
+            Object(Matching, "melee/lb/lbbgflash.c", force_optimization=True),
             Object(Matching, "melee/lb/lb_020A.c"),
             Object(Matching, "melee/lb/lb_0219.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
@@ -638,7 +621,7 @@ config.libs = [
         "mp (Map)",
         [
             Object(Matching, "melee/mp/mpcoll.c"),
-            Object(Matching, "melee/mp/mplib.c"),
+            Object(Matching, "melee/mp/mplib.c", force_optimization=True),
             Object(Matching, "melee/mp/mpisland.c"),
         ],
     ),
@@ -771,7 +754,7 @@ config.libs = [
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_FlyReflect.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_PassiveCeil.c"),
-            Object(Matching, "melee/ft/ftafterimage.c"),
+            Object(Matching, "melee/ft/ftafterimage.c", force_optimization=True),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_DamageSong.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_0C35.c"),
             Object(Matching, "melee/ft/kinds/ftCommon/ftCo_AirCatch.c"),
@@ -1595,7 +1578,7 @@ config.libs = [
     MeleeLib(
         "ty (Toy, trophies)",
         [
-            Object(Matching, "melee/ty/toy.c"),
+            Object(Matching, "melee/ty/toy.c", force_optimization=True),
             Object(Matching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
             Object(Matching, "melee/ty/tydisplay.c"),
@@ -1635,7 +1618,7 @@ config.libs = [
             Object(Matching, "Runtime/Gecko_setjmp.c"),
             Object(Matching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
-            Object(Equivalent and args.no_optimize, "Runtime/eabi_save_restore.s"),
+            Object(Debug, "Runtime/eabi_save_restore.s"),
         ],
     ),
     Libc(
@@ -1721,7 +1704,7 @@ config.libs = [
     DolphinLib(
         "thp",
         [
-            Object(Matching, "dolphin/thp/THPDec.c"),
+            Object(Matching, "dolphin/thp/THPDec.c", force_optimization=True),
         ],
     ),
     DolphinLib(
@@ -1733,7 +1716,7 @@ config.libs = [
     DolphinLib(
         "db",
         [
-            Object(Matching, "dolphin/db/db.c"),
+            Object(Matching, "dolphin/db/db.c", force_optimization=True),
         ],
     ),
     DolphinLib(
@@ -1748,66 +1731,69 @@ config.libs = [
         "dvd",
         [
             Object(Matching, "dolphin/dvd/dvdlow.c"),
-            Object(Matching, "dolphin/dvd/dvdfs.c"),
-            Object(Matching, "dolphin/dvd/dvd.c"),
+            Object(Matching, "dolphin/dvd/dvdfs.c", force_optimization=True),
+            Object(Matching, "dolphin/dvd/dvd.c", force_optimization=True),
             Object(Matching, "dolphin/dvd/dvdqueue.c"),
             Object(Matching, "dolphin/dvd/dvderror.c"),
-            Object(Matching, "dolphin/dvd/fstload.c"),
+            Object(Matching, "dolphin/dvd/fstload.c", force_optimization=True),
         ],
     ),
     DolphinLib(
         "gx",
         [
-            Object(Matching, "dolphin/gx/GXInit.c"),
+            Object(Matching, "dolphin/gx/GXInit.c", force_optimization=True),
             Object(Matching, "dolphin/gx/GXFifo.c"),
-            Object(Matching, "dolphin/gx/GXAttr.c"),
-            Object(Matching, "dolphin/gx/GXMisc.c"),
-            Object(Matching, "dolphin/gx/GXGeometry.c"),
-            Object(Matching, "dolphin/gx/GXFrameBuf.c"),
-            Object(Matching, "dolphin/gx/GXLight.c"),
-            Object(Matching, "dolphin/gx/GXTexture.c"),
-            Object(Matching, "dolphin/gx/GXBump.c"),
-            Object(Matching, "dolphin/gx/GXTev.c"),
-            Object(Matching, "dolphin/gx/GXPixel.c"),
+            Object(Matching, "dolphin/gx/GXAttr.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXMisc.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXGeometry.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXFrameBuf.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXLight.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXTexture.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXBump.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXTev.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXPixel.c", force_optimization=True),
             Object(Matching, "dolphin/gx/GXStubs.c"),
-            Object(Matching, "dolphin/gx/GXDisplayList.c"),
-            Object(Matching, "dolphin/gx/GXTransform.c"),
-            Object(Matching, "dolphin/gx/GXPerf.c"),
+            Object(Matching, "dolphin/gx/GXDisplayList.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXTransform.c", force_optimization=True),
+            Object(Matching, "dolphin/gx/GXPerf.c", force_optimization=True),
+            Object(Debug, "dolphin/gx/GXVerify.c"),
+            Object(Debug, "dolphin/gx/GXVerifRAS.c"),
+            Object(Debug, "dolphin/gx/GXSave.c", force_optimization=True),
         ],
     ),
     DolphinLib(
         "mtx",
         [
-            Object(Matching, "dolphin/mtx/mtx.c"),
+            Object(Matching, "dolphin/mtx/mtx.c", force_optimization=True),
             Object(Matching, "dolphin/mtx/mtxvec.c"),
             Object(Matching, "dolphin/mtx/mtx44.c"),
-            Object(Matching, "dolphin/mtx/vec.c"),
+            Object(Matching, "dolphin/mtx/vec.c", force_optimization=True),
         ],
         fix_epilogue=True,
     ),
     DolphinLib(
         "os",
         [
-            Object(Matching, "dolphin/os/OS.c"),
+            Object(Matching, "dolphin/os/OS.c", force_optimization=True),
             Object(Matching, "dolphin/os/OSAlarm.c"),
             Object(Matching, "dolphin/os/OSAlloc.c"),
             Object(Matching, "dolphin/os/OSArena.c"),
             Object(Matching, "dolphin/os/OSAudioSystem.c"),
             Object(Matching, "dolphin/os/OSCache.c"),
             Object(Matching, "dolphin/os/OSContext.c"),
-            Object(Matching, "dolphin/os/OSError.c"),
+            Object(Matching, "dolphin/os/OSError.c", force_optimization=True),
             Object(Matching, "dolphin/os/OSExi.c"),
-            Object(Matching, "dolphin/os/OSFont.c"),
-            Object(Matching, "dolphin/os/OSInterrupt.c"),
+            Object(Matching, "dolphin/os/OSFont.c", force_optimization=True),
+            Object(Matching, "dolphin/os/OSInterrupt.c", force_optimization=True),
             Object(Matching, "dolphin/os/OSLink.c"),
-            Object(Matching, "dolphin/os/OSMemory.c"),
+            Object(Matching, "dolphin/os/OSMemory.c", force_optimization=True),
             Object(Matching, "dolphin/os/OSMutex.c"),
             Object(Matching, "dolphin/os/OSReboot.c"),
             Object(Matching, "dolphin/os/OSReset.c"),
             Object(Matching, "dolphin/os/OSResetSW.c"),
             Object(Matching, "dolphin/os/OSRtc.c"),
             Object(Matching, "dolphin/os/OSSerial.c"),
-            Object(Matching, "dolphin/os/OSSync.c"),
+            Object(Matching, "dolphin/os/OSSync.c", force_optimization=True),
             Object(Matching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(Matching, "dolphin/os/OSUartExi.c"),
@@ -1826,7 +1812,7 @@ config.libs = [
     DolphinLib(
         "vi",
         [
-            Object(Matching, "dolphin/vi/vi.c"),
+            Object(Matching, "dolphin/vi/vi.c", force_optimization=True),
         ],
     ),
     DolphinLib(
@@ -1838,15 +1824,15 @@ config.libs = [
     DolphinLib(
         "ar",
         [
-            Object(Matching, "dolphin/ar/ar.c"),
+            Object(Matching, "dolphin/ar/ar.c", force_optimization=True),
             Object(Matching, "dolphin/ar/arq.c"),
         ],
     ),
     DolphinLib(
         "card",
         [
-            Object(Matching, "dolphin/card/CARDBios.c"),
-            Object(Matching, "dolphin/card/CARDUnlock.c"),
+            Object(Matching, "dolphin/card/CARDBios.c", force_optimization=True),
+            Object(Matching, "dolphin/card/CARDUnlock.c", force_optimization=True),
             Object(Matching, "dolphin/card/CARDRdwr.c"),
             Object(Matching, "dolphin/card/CARDBlock.c"),
             Object(Matching, "dolphin/card/CARDDir.c"),
@@ -1891,7 +1877,7 @@ config.libs = [
         "sysdolphin (HAL base library)",
         [
             Object(Matching, "sysdolphin/baselib/dobj.c"),
-            Object(Matching, "sysdolphin/baselib/tobj.c"),
+            Object(Matching, "sysdolphin/baselib/tobj.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/state.c"),
             Object(Matching, "sysdolphin/baselib/tev.c"),
             Object(Matching, "sysdolphin/baselib/mobj.c"),
@@ -1899,9 +1885,11 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/lobj.c"),
             Object(Matching, "sysdolphin/baselib/cobj.c"),
             Object(Matching, "sysdolphin/baselib/fobj.c"),
-            Object(Matching, "sysdolphin/baselib/pobj.c"),
+            Object(Matching, "sysdolphin/baselib/pobj.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/jobj.c"),
-            Object(Matching, "sysdolphin/baselib/displayfunc.c"),
+            Object(
+                Matching, "sysdolphin/baselib/displayfunc.c", force_optimization=True
+            ),
             Object(Matching, "sysdolphin/baselib/initialize.c"),
             Object(Matching, "sysdolphin/baselib/video.c"),
             Object(Matching, "sysdolphin/baselib/controller.c"),
@@ -1919,7 +1907,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/object.c"),
             Object(Matching, "sysdolphin/baselib/quatlib.c"),
             Object(Matching, "sysdolphin/baselib/memory.c"),
-            Object(Matching, "sysdolphin/baselib/shadow.c"),
+            Object(Matching, "sysdolphin/baselib/shadow.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/archive.c"),
             Object(Matching, "sysdolphin/baselib/random.c"),
             Object(Matching, "sysdolphin/baselib/bytecode.c"),
@@ -1939,7 +1927,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(Matching, "sysdolphin/baselib/gobj.c"),
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3915.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3915.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/hsd_3924.c"),
             Object(Matching, "sysdolphin/baselib/hsd_392A.c"),
             Object(Matching, "sysdolphin/baselib/hsd_392C.c"),
@@ -1962,6 +1950,7 @@ config.libs = [
                 Matching,
                 "sysdolphin/baselib/psdisp.c",
                 extra_cflags=["-Cpp_exceptions on"],
+                force_optimization=True,
             ),
             Object(
                 Matching,
@@ -1973,10 +1962,10 @@ config.libs = [
                 "sysdolphin/baselib/psappsrt.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(Matching, "sysdolphin/baselib/sobjlib.c"),
+            Object(Matching, "sysdolphin/baselib/sobjlib.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/sislib.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3A64.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3A76.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3A76.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/sislib_font.c"),
             Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3A94.c"),
@@ -2003,40 +1992,7 @@ config.libs = [
 ]
 
 
-if args.no_optimize:
-    for lib in config.libs:
-        for obj in lib["objects"]:
-            if obj.name in NO_OPTIMIZE_CONTROL_OBJECTS:
-                obj.options["cflags"] = optimized_flags(cast(list[str], lib["cflags"]))
-
-
-# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
-# This is called once per module, with the module ID and the current link order.
-#
-# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
-# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
-def link_order_callback(module_id: int, objects: list[str]) -> list[str]:
-    # Don't modify the link order for matching builds
-    if not config.non_matching:
-        return objects
-    if module_id == 0:  # DOL
-        return objects + ["dummy.c"]
-    return objects
-
-
-# Uncomment to enable the link order callback.
-# config.link_order_callback = link_order_callback
-
-
-# Unoptimized MWCC code calls EABI save/restore thunks that the retail link does not need.
-def no_optimize_link_order_callback(module_id: int, objects: list[str]) -> list[str]:
-    if module_id == 0:  # DOL
-        return [*objects, "Runtime/eabi_save_restore.s"]
-    return objects
-
-
-if args.no_optimize:
-    config.link_order_callback = no_optimize_link_order_callback
+config.link_order_callback = lambda _, o: all_objects if config.non_matching else o
 
 
 # Extra categories for progress tracking
