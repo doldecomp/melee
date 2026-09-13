@@ -20,7 +20,7 @@
 
 /// @deprecated Replace with inline bitfields
 typedef union UnkFlagStruct {
-    u8 u8;
+    u8 byte;
     struct {
         u8 b0 : 1;
         u8 b1 : 1;

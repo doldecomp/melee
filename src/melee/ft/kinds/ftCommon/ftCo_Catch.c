@@ -110,7 +110,7 @@ void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)
     fp->x74_self_accel.z = 0.0F;
     fp->x74_self_accel.y = 0.0F;
     fp->x74_self_accel.x = 0.0F;
-    fp->mv.co.catch.x0 = 0.0F;
+    fp->mv.co.catch_.x0 = 0.0F;
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
     ftCommon_8007E2D0(fp, 1, fn_800D9CE8, fn_800D8BFC, fn_800DAADC);
 }

@@ -10,9 +10,6 @@
 #include <placeholder.h>
 
 #include <melee/ft/dobjlist.h> // IWYU pragma: keep
-#include <melee/ft/kinds/ftGameWatch/types.h>
-#include <melee/ft/kinds/ftMars/types.h>
-#include <melee/ft/kinds/ftNess/types.h>
 #include <melee/lb/types.h>
 
 struct ftKb_FighterVars {
@@ -380,9 +377,6 @@ struct ftKb_DatAttrs {
 ASSERT_SIZE(struct ftKb_DatAttrs, 0x424);
 
 union ftKb_MotionVars {
-    struct ftGameWatch_SpecialNVars specialn_gw;
-    struct ftMars_SpecialNVars specialn_ms;
-    struct ftNess_SpecialNVars specialn_ns;
     struct ftKb_SpecialNPe_Vars {
         /* fp+2340 */ int facing_dir;
     } specialn_pe;

@@ -53,14 +53,14 @@ void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 4);
         da = fp->dat_attrs;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
+        fp->mv.ns.specialn.frames_to_loop_charge_ground =
             da->specialn_ns_frames_to_loop_charge_ground;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
+        fp->mv.ns.specialn.frames_to_loop_charge_air =
             da->specialn_ns_frames_to_loop_charge_air;
-        fp->mv.kb.specialn_ns.falling_acceleration_delay =
+        fp->mv.ns.specialn.falling_acceleration_delay =
             da->specialn_ns_falling_acceleration_delay;
         fp->u.kb.ns_flash_gobj = NULL;
-        fp->mv.kb.specialn_ns.charge_release_delay =
+        fp->mv.ns.specialn.charge_release_delay =
             da->specialn_ns_charge_release_delay;
         ftAnim_8006EBA4(gobj);
     }
@@ -70,14 +70,14 @@ static inline void ftKb_SetNsFlashAttr(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
+    fp->mv.ns.specialn.frames_to_loop_charge_ground =
         da->specialn_ns_frames_to_loop_charge_ground;
-    fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
+    fp->mv.ns.specialn.frames_to_loop_charge_air =
         da->specialn_ns_frames_to_loop_charge_air;
-    fp->mv.kb.specialn_ns.falling_acceleration_delay =
+    fp->mv.ns.specialn.falling_acceleration_delay =
         da->specialn_ns_falling_acceleration_delay;
     fp->u.kb.ns_flash_gobj = NULL;
-    fp->mv.kb.specialn_ns.charge_release_delay =
+    fp->mv.ns.specialn.charge_release_delay =
         da->specialn_ns_charge_release_delay;
 }
 
@@ -94,14 +94,14 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 4);
         da = fp->dat_attrs;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
+        fp->mv.ns.specialn.frames_to_loop_charge_ground =
             da->specialn_ns_frames_to_loop_charge_ground;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
+        fp->mv.ns.specialn.frames_to_loop_charge_air =
             da->specialn_ns_frames_to_loop_charge_air;
-        fp->mv.kb.specialn_ns.falling_acceleration_delay =
+        fp->mv.ns.specialn.falling_acceleration_delay =
             da->specialn_ns_falling_acceleration_delay;
         fp->u.kb.ns_flash_gobj = NULL;
-        fp->mv.kb.specialn_ns.charge_release_delay =
+        fp->mv.ns.specialn.charge_release_delay =
             da->specialn_ns_charge_release_delay;
         ftAnim_8006EBA4(gobj);
     }
@@ -122,22 +122,22 @@ void ftKb_NsSpecialNStart_Anim(HSD_GObj* gobj)
 void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int flash_timer_min = fp->mv.kb.specialn_ns.frames_to_loop_charge_ground;
+    int flash_timer_min = fp->mv.ns.specialn.frames_to_loop_charge_ground;
     if (flash_timer_min != 0) {
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
+        fp->mv.ns.specialn.frames_to_loop_charge_ground =
             flash_timer_min - 1;
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
         int flash_timer_delay =
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air;
+            fp->mv.ns.specialn.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
+            fp->mv.ns.specialn.frames_to_loop_charge_air =
                 flash_timer_delay - 1;
         }
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
-        if (fp->mv.kb.specialn_ns.frames_to_loop_charge_ground <= 0 &&
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air <= 0)
+        if (fp->mv.ns.specialn.frames_to_loop_charge_ground <= 0 &&
+            fp->mv.ns.specialn.frames_to_loop_charge_air <= 0)
         {
             Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNEnd, 0, 0, 1, 0,
                                       NULL);
@@ -188,22 +188,22 @@ void ftKb_NsSpecialAirNStart_Anim(Fighter_GObj* gobj)
 void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int flash_timer_min = fp->mv.kb.specialn_ns.frames_to_loop_charge_ground;
+    int flash_timer_min = fp->mv.ns.specialn.frames_to_loop_charge_ground;
     if (flash_timer_min != 0) {
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
+        fp->mv.ns.specialn.frames_to_loop_charge_ground =
             flash_timer_min - 1;
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
         int flash_timer_delay =
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air;
+            fp->mv.ns.specialn.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
+            fp->mv.ns.specialn.frames_to_loop_charge_air =
                 flash_timer_delay - 1;
         }
     }
     if (fp->u.kb.ns_flash_gobj == NULL) {
-        if (fp->mv.kb.specialn_ns.frames_to_loop_charge_ground <= 0 &&
-            fp->mv.kb.specialn_ns.frames_to_loop_charge_air <= 0)
+        if (fp->mv.ns.specialn.frames_to_loop_charge_ground <= 0 &&
+            fp->mv.ns.specialn.frames_to_loop_charge_air <= 0)
         {
             Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialAirNEnd, 0, 0, 1,
                                       0, NULL);
@@ -250,11 +250,11 @@ void ftKb_NsSpecialNHold_IASA(Fighter_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->mv.kb.specialn_ns.charge_release_delay--;
+        fp->mv.ns.specialn.charge_release_delay--;
         {
             bool result;
-            if (fp->mv.kb.specialn_ns.charge_release_delay <= 0) {
-                fp->mv.kb.specialn_ns.charge_release_delay = 0;
+            if (fp->mv.ns.specialn.charge_release_delay <= 0) {
+                fp->mv.ns.specialn.charge_release_delay = 0;
                 result = true;
             } else {
                 result = false;
@@ -289,11 +289,11 @@ void ftKb_NsSpecialAirNHold_IASA(Fighter_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->mv.kb.specialn_ns.charge_release_delay--;
+        fp->mv.ns.specialn.charge_release_delay--;
         {
             bool result;
-            if (fp->mv.kb.specialn_ns.charge_release_delay <= 0) {
-                fp->mv.kb.specialn_ns.charge_release_delay = 0;
+            if (fp->mv.ns.specialn.charge_release_delay <= 0) {
+                fp->mv.ns.specialn.charge_release_delay = 0;
                 result = true;
             } else {
                 result = false;
@@ -325,8 +325,8 @@ void ftKb_NsSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
 void ftKb_NsSpecialNStart_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.kb.specialn_ns.falling_acceleration_delay != 0) {
-        fp->mv.kb.specialn_ns.falling_acceleration_delay--;
+    if (fp->mv.ns.specialn.falling_acceleration_delay != 0) {
+        fp->mv.ns.specialn.falling_acceleration_delay--;
     }
     ft_80084F3C(gobj);
 }
@@ -347,8 +347,8 @@ void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     f32 airFriction;
     PAD_STACK(4);
-    if (fp->mv.kb.specialn_ns.falling_acceleration_delay != 0) {
-        fp->mv.kb.specialn_ns.falling_acceleration_delay--;
+    if (fp->mv.ns.specialn.falling_acceleration_delay != 0) {
+        fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
         ftCommon_Fall(fp, da->specialn_ns_gravity,
                       fp->co_attrs.terminal_velocity);

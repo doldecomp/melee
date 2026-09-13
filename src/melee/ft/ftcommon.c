@@ -1322,7 +1322,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->dmg.x18D0 = src->dmg.x18D0;
     dst->dmg.x18d4 = src->dmg.x18d4;
     dst->dmg.x18ec_instancehitby = src->dmg.x18ec_instancehitby;
-    dst->x21FC_flag.u8 = src->x21FC_flag.u8;
+    dst->x21FC_flag = src->x21FC_flag;
     dst->x2221_b7 = src->x2221_b7;
     dst->x2221_b6 = src->x2221_b6;
     dst->x2221_b4 = src->x2221_b4;

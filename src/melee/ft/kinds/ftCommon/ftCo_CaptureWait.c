@@ -230,7 +230,7 @@ static void fn_800DBBF8(Fighter_GObj* gobj)
         fp->accessory1_cb = ftCo_800DB464;
         ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
-        hurt.height = true;
+        hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = false;
         hurt.a_offset.x = hurt.a_offset.y = hurt.a_offset.z = 0.0F;
         hurt.b_offset.x = hurt.b_offset.y = hurt.b_offset.z = 0.0F;

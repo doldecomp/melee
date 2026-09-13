@@ -49,10 +49,10 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                         int var_r28;
                         fp2->cmd_vars[0] = var_r28 = 0;
 
-                        if ((float) fp2->mv.kb.specialn_gw.maxSausage <
+                        if ((float) fp2->mv.gw.SpecialN.maxSausage <
                             da->specialn_gw_max_sausages_per_use)
                         {
-                            fp2->mv.kb.specialn_gw.maxSausage++;
+                            fp2->mv.gw.SpecialN.maxSausage++;
 
                             vec1.x = 2.5f;
                             vec1.y = 6.5f;
@@ -163,8 +163,8 @@ static inline void setGwVars(HSD_GObj* fighter_gobj)
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
-    fp->mv.kb.specialn_gw.isChefLoopDisable = false;
-    fp->mv.kb.specialn_gw.maxSausage = 0;
+    fp->mv.gw.SpecialN.isChefLoopDisable = false;
+    fp->mv.gw.SpecialN.maxSausage = 0;
     fp->accessory4_cb = fn_8010CFB0;
 }
 
@@ -194,9 +194,9 @@ void ftKb_GwSpecialN_Anim(Fighter_GObj* gobj)
     PAD_STACK(0x20);
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
-        if (fp->mv.kb.specialn_gw.maxSausage <
+        if (fp->mv.gw.SpecialN.maxSausage <
                 da->specialn_gw_max_sausages_per_use &&
-            !fp->mv.kb.specialn_gw.isChefLoopDisable)
+            !fp->mv.gw.SpecialN.isChefLoopDisable)
         {
             ftKb_SpecialNGw_8010D660(gobj, da->specialn_gw_frame_on_repeat);
         }
@@ -213,8 +213,8 @@ void ftKb_GwSpecialAirN_Anim(Fighter_GObj* gobj)
     PAD_STACK(0x20);
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
-        if (!fp->mv.kb.specialn_gw.isChefLoopDisable &&
-            fp->mv.kb.specialn_gw.maxSausage <
+        if (!fp->mv.gw.SpecialN.isChefLoopDisable &&
+            fp->mv.gw.SpecialN.maxSausage <
                 da->specialn_gw_max_sausages_per_use)
         {
             ftKb_SpecialNGw_8010D6D0(gobj, da->specialn_gw_frame_on_repeat);
@@ -231,10 +231,10 @@ void ftKb_GwSpecialN_IASA(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(0x8);
     if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.kb.specialn_gw.isChefLoopDisable = true;
+        fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (fp->cmd_vars[1] != 0 && (fp->input.pressed_buttons & HSD_PAD_B) &&
-        fp->mv.kb.specialn_gw.maxSausage <
+        fp->mv.gw.SpecialN.maxSausage <
             da->specialn_gw_max_sausages_per_use)
     {
         ftKb_SpecialNGw_8010D660(gobj, da->specialn_gw_frame_on_repeat);
@@ -247,10 +247,10 @@ void ftKb_GwSpecialAirN_IASA(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(0x8);
     if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.kb.specialn_gw.isChefLoopDisable = true;
+        fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (fp->cmd_vars[1] != 0 && (fp->input.pressed_buttons & HSD_PAD_B) &&
-        fp->mv.kb.specialn_gw.maxSausage <
+        fp->mv.gw.SpecialN.maxSausage <
             da->specialn_gw_max_sausages_per_use)
     {
         ftKb_SpecialNGw_8010D6D0(gobj, da->specialn_gw_frame_on_repeat);
@@ -306,7 +306,7 @@ static inline void inline1(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
-    fp->mv.kb.specialn_gw.isChefLoopDisable = false;
+    fp->mv.gw.SpecialN.isChefLoopDisable = false;
     fp->accessory4_cb = fn_8010CE5C;
 }
 

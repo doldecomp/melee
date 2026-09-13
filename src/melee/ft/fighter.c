@@ -1,5 +1,6 @@
 #include "fighter.h"
 
+#include <melee/lb/types.h>
 #include <math.h>
 #include <placeholder.h>
 
@@ -72,7 +73,6 @@
 #include <melee/lb/lbanim.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbshadow.h>
-#include <melee/lb/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/pl_040D.h>
@@ -744,7 +744,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     Fighter_UnkInitLoad_80068914_Inner1(gobj);
 
     fp->x594_s32 = 0;
-    fp->x21FC_flag.u8 = 1;
+    fp->x21FC_flag.byte = 1;
 
     fp->invisible = false;
     fp->x221E_b1 = 0;
@@ -1472,7 +1472,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x1994) {
+        if (fp->x1994 != 0) {
             fp->x1994--;
             if (fp->x1994 == 0) {
                 fp->x198C = (fp->x2221_b0 || fp->x1990 != 0) ? 2 : 0;

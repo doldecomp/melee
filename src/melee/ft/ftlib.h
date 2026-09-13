@@ -4,7 +4,9 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <melee/ft/types.h>
+#include <melee/cm/forward.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
 
 /* 0860C4 */ s32 ftLib_800860C4(void);
 /* 0860E8 */ bool ftLib_IsMasterHandPresent(void);

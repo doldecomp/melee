@@ -1,5 +1,6 @@
 #include "ftlib.h"
 
+#include <melee/cm/types.h>
 #include <melee/it/forward.h>
 
 #include "fighter.h"

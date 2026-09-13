@@ -3246,7 +3246,7 @@ void ftColl_8007B320(Fighter_GObj* gobj)
     fp->x166C = dyn->x4;
     for (i = 0; i < (u32) dyn->x4; i++) {
         Fighter_x1670_t* dst = &fp->x1670[i];
-        struct ftData_x38* init = &dyn->x8[i];
+        ftData_x38* init = &dyn->x8[i];
         dst->x24 = init->x0;
         dst->jobj = fp->parts[init->x0].joint;
         dst->v1 = init->x4;
