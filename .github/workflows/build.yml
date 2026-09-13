@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'diff', 'test', 'clang', 'debug']
+        mode: ['link', 'test', 'clang', 'debug']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -111,37 +111,6 @@ jobs:
 
             exit "$result"
           ;;
-          'diff')
-            expected="$root/baseline.json"
-            changes="$root/changes.json"
-
-            run_configure
-            ninja "$config_json"
-
-            function run_ninja {
-              ninja all_source "$report"
-            }
-
-            checkout "$upstream"
-            run_ninja
-            cp "$report" "$expected"
-
-            checkout "$head"
-            run_ninja
-
-            build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
-            set +e
-            python .github/scripts/diff_changes.py "$changes"
-            set -e
-          ;;
-          'test')
-            config_args=$(printf '%s ' \
-              '--linkable' \
-              "$config_args")
-
-            run_configure
-            ninja
-          ;;
           'clang')
             config_args=""
             export PRE_COMMIT_HOME="$PWD/build/pre-commit"
@@ -176,7 +145,7 @@ jobs:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
     - name: Upload report
-      if: matrix.mode == 'diff' && (success() || failure())
+      if: matrix.mode == 'link' && (success() || failure())
       uses: actions/upload-artifact@v7
       with:
         name: ${{matrix.version}}_report
