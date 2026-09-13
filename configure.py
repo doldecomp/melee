@@ -1635,11 +1635,7 @@ config.libs = [
             Object(Matching, "Runtime/Gecko_setjmp.c"),
             Object(Matching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
-            *(
-                [Object(Equivalent, "Runtime/eabi_save_restore.s")]
-                if args.no_optimize
-                else []
-            ),
+            Object(Equivalent and args.no_optimize, "Runtime/eabi_save_restore.s"),
         ],
     ),
     Libc(
@@ -2011,9 +2007,7 @@ if args.no_optimize:
     for lib in config.libs:
         for obj in lib["objects"]:
             if obj.name in NO_OPTIMIZE_CONTROL_OBJECTS:
-                obj.options["cflags"] = optimized_flags(
-                    cast(list[str], lib["cflags"])
-                )
+                obj.options["cflags"] = optimized_flags(cast(list[str], lib["cflags"]))
 
 
 # Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
@@ -2035,9 +2029,7 @@ def link_order_callback(module_id: int, objects: list[str]) -> list[str]:
 
 
 # Unoptimized MWCC code calls EABI save/restore thunks that the retail link does not need.
-def no_optimize_link_order_callback(
-    module_id: int, objects: list[str]
-) -> list[str]:
+def no_optimize_link_order_callback(module_id: int, objects: list[str]) -> list[str]:
     if module_id == 0:  # DOL
         return [*objects, "Runtime/eabi_save_restore.s"]
     return objects
