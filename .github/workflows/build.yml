@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'diff', 'test', 'clang']
+        mode: ['link', 'test', 'clang', 'debug']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -67,9 +67,7 @@ jobs:
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
           '--max-errors 0' \
-          '--version ${{matrix.version}}' \
-          '--no-always-apply' \
-          '--sym off')
+          '--version ${{matrix.version}}')
 
         function run_configure {
           echo "$config_args" | xargs python configure.py
@@ -84,7 +82,6 @@ jobs:
           'link')
             config_args=$(printf '%s ' \
               '--map' \
-              '--require-protos' \
               '--reloc-diffs none' \
               "$config_args")
 
@@ -104,35 +101,15 @@ jobs:
             done < <(ninja diff)
 
             if [ "$result" -eq 0 ]; then
-                set +e
                 python .github/scripts/check_complete.py "$report"
                 set -e
             fi
 
-            exit "$result"
-          ;;
-          'diff')
-            expected="$root/baseline.json"
-            changes="$root/changes.json"
-
-            run_configure
-            ninja "$config_json"
-
-            function run_ninja {
-              ninja all_source "$report"
-            }
-
-            checkout "$upstream"
-            run_ninja
-            cp "$report" "$expected"
-
-            checkout "$head"
-            run_ninja
-
-            build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
-            set +e
-            python .github/scripts/diff_changes.py "$changes"
             set -e
+            ninja apply
+            git diff --exit-code
+
+            exit "$result"
           ;;
           'test')
             config_args=$(printf '%s ' \
@@ -158,6 +135,15 @@ jobs:
               clang-tidy \
               --all-files
           ;;
+          'debug')
+            config_args=$(printf '%s ' \
+              '--debug' \
+              '--map' \
+              "$config_args")
+
+            run_configure
+            ninja
+          ;;
           *) exit 1 ;;
         esac
     - name: Upload map
@@ -167,7 +153,7 @@ jobs:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
     - name: Upload report
-      if: matrix.mode == 'diff' && (success() || failure())
+      if: matrix.mode == 'link' && (success() || failure())
       uses: actions/upload-artifact@v7
       with:
         name: ${{matrix.version}}_report
