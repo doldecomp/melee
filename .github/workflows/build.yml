@@ -67,9 +67,7 @@ jobs:
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
           '--max-errors 0' \
-          '--version ${{matrix.version}}' \
-          '--no-always-apply' \
-          '--sym off')
+          '--version ${{matrix.version}}')
 
         function run_configure {
           echo "$config_args" | xargs python configure.py
@@ -84,7 +82,6 @@ jobs:
           'link')
             config_args=$(printf '%s ' \
               '--map' \
-              '--require-protos' \
               '--reloc-diffs none' \
               "$config_args")
 
