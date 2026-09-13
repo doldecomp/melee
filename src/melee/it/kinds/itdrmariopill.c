@@ -24,6 +24,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -86,16 +87,8 @@ void itDrMarioPill_Spawn(Item_GObj* parent_gobj, Vec3* pos, s32 arg2,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         itDrMarioPill_802C0B5C(gobj);
@@ -129,16 +122,8 @@ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj* parent_gobj, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
@@ -174,16 +159,8 @@ Item_GObj* itDrMarioPill_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);

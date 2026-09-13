@@ -202,8 +202,8 @@ static inline void Item_ResetRayAfterReflection(Item* ip, HSD_JObj* jobj)
     }
 }
 
-static inline void Item_InitRaySpawnFields(SpawnItem* spawn, HSD_GObj* parent,
-                                           f32 facing_dir)
+static inline void Item_InitSpawnCommonFields(SpawnItem* spawn,
+                                              HSD_GObj* parent, f32 facing_dir)
 {
     spawn->facing_dir = facing_dir;
     spawn->x3C_damage = 0;
@@ -214,8 +214,8 @@ static inline void Item_InitRaySpawnFields(SpawnItem* spawn, HSD_GObj* parent,
     spawn->x40 = 0;
 }
 
-static inline void Item_InitRaySpawnPosition(SpawnItem* spawn,
-                                             HSD_GObj* parent, Vec3* pos)
+static inline void
+Item_InitSpawnPositionFromParent(SpawnItem* spawn, HSD_GObj* parent, Vec3* pos)
 {
     spawn->prev_pos = *pos;
     spawn->prev_pos.z = 0.0F;
