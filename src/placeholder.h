@@ -51,14 +51,8 @@ typedef jmp_t jtbl_t[];
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
-/// Return type of a retail function that reaches its closing brace without
-/// ever returning a value, leaving the result register indeterminate.
-///
-/// The non-void type is load-bearing rather than cosmetic: it reserves @c r3
-/// for the return value, so the allocator avoids it throughout the body.
-/// Declaring such a function @c void frees @c r3 and shifts register
-/// assignment across the whole function. Non-matching builds use @c void so
-/// that the absent return is not a diagnostic.
+/// Matching placeholder for functions with an indeterminate, unused return.
+/// @todo Recover void signatures without changing register allocation.
 #ifdef MUST_MATCH
 #define UNINITIALIZED_RETURN(type) type
 #else

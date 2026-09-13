@@ -2638,12 +2638,10 @@ bool mpColl_80046F78(CollData* coll, u32 _)
             return false;
         } else {
             HSD_ASSERT(3685, 0);
-#ifdef MUST_MATCH
-            return;
-#endif
         }
+    } else {
+        return false;
     }
-    return false;
 }
 
 static inline bool inline0(CollData* coll, int i, bool j)
