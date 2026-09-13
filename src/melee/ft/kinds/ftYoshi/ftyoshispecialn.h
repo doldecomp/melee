@@ -10,8 +10,13 @@
 
 /* 12CC6C */ Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj);
 /* 12CC94 */ void ftYs_SpecialN_SetupItemVel(Fighter_GObj* gobj, Vec3* out);
+
+/// @returns #Fighter::facing_dir
 /* 12CCC4 */ float ftYs_SpecialN_GetFacingDir(Fighter_GObj* gobj);
+
+/// @returns #Fighter::dmg.x182c_behavior
 /* 12CCD0 */ float ftYs_SpecialN_GetDatAttr18(Fighter_GObj* gobj);
+
 /* 12CCE0 */ float ftYs_SpecialN_GetDatAttr1C(Fighter_GObj* gobj);
 /* 12CCF0 */ float ftYs_SpecialN_GetDatAttr20(Fighter_GObj* gobj);
 /* 12CD00 */ float ftYs_SpecialN_GetDatAttr24(Fighter_GObj* gobj);

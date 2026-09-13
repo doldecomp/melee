@@ -5,8 +5,15 @@
 
 #include <dolphin/mtx.h>
 
+/// Get Fox/Falco's Item Hold Bone Position for Blaster GFX
 /* 0E5CB0 */ void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
+
+/**
+ * Get Fox/Falco's Item Hold Bone Position for Blaster GFX again?
+ * @remarks Used in Blaster's item code.
+ */
 /* 0E5D20 */ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
+
 /* 0E5D90 */ void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj);
 /* 0E5DC4 */ bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj);
 /* 0E5DE4 */ s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj);

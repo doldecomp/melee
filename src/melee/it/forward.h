@@ -66,20 +66,36 @@ typedef void (*ItCmd)(Item_GObj* gobj, CommandInfo* cmd);
 
 typedef enum Item_StateChangeFlags {
     ITEM_UNK_0x1 = (1 << 0),
+
+    /**
+     * Updates item model with target Item State's AnimJoint, MatAnimJoint and
+     * extra HSD archive node if available
+     */
     ITEM_ANIM_UPDATE = (1 << 1),
+
+    /// Copies #Item::xC44 to #Item::xC40 if enabled.
     ITEM_DROP_UPDATE = (1 << 2),
-    ITEM_MODEL_UPDATE = (1 << 3),
-    ITEM_HIT_PRESERVE = (1 << 4),
-    ITEM_SFX_PRESERVE = (1 << 5),
-    ITEM_COLANIM_PRESERVE = (1 << 6),
+    ITEM_MODEL_UPDATE = (1 << 3),     ///< Runs some #HSD_JObj function
+    ITEM_HIT_PRESERVE = (1 << 4),     ///< Keep current hitboxes
+    ITEM_SFX_PRESERVE = (1 << 5),     ///< Keep current SFX
+    ITEM_COLANIM_PRESERVE = (1 << 6), ///< Keep current color overlay
+
     ITEM_UNK_UPDATE = (1 << 7),
+
+    /// Run item's Subaction Events up to its current animation frame
+
     ITEM_CMD_UPDATE = (1 << 8),
 } Item_StateChangeFlags;
 
+/**
+ * @todo Doxygen can't seem to find enums by name...
+ * These are used in #it_8026C258 to determine whether Samus' Homing Missile
+ * should lock on its target.
+ */
 typedef enum Item_UnkKinds {
-    ITEM_UNK_MATO = 4,
+    ITEM_UNK_MATO = 4, ///< Item type: Target (Mato)
     ITEM_UNK_LOCKON,
-    ITEM_UNK_ENEMY,
+    ITEM_UNK_ENEMY, ///< Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
     ITEM_UNK_7
 } Item_UnkKinds;
 

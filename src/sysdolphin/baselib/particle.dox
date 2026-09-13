@@ -1,2 +1,0 @@
-/// Checks whether USB server is set up.
-bool hsd_80393A04(void);

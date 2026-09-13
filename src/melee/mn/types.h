@@ -352,6 +352,22 @@ typedef enum CSSIconJointId {
     ICONJOINT_MARS = 0x22
 } CSSIconJointId;
 
+/**
+ * @brief Identifier for a single selectable character as seen in high-scores
+ * or on the CSS.
+ *
+ * #SelectableCharacterKind mirrors the first @c 0x19 entries of
+ * #CharacterKind (i.e. up to and including #CKind_Ganon),
+ * but with #CKind_Seak (Sheik) removed and collapsed into
+ * #CKind_Zelda under the single #SELKIND_ZELDA_SEAK value.
+ * Index @c 0x12 (#SELKIND_ZELDA_SEAK) therefore
+ * represents both Zelda and Sheik as a single selectable character.
+ *
+ * @see #gm_SelKindToCKind
+ * @see #gm_CKindToSelKind
+ * @see #selkind_to_ckind_map
+ * @see #ckind_to_selkind_map
+ */
 typedef enum SelectableCharacterKind {
     /* 00 */ SELKIND_CAPTAIN,    // Captain Falcon (Captain)
     /* 01 */ SELKIND_DONKEY,     // Donkey Kong (Donkey)

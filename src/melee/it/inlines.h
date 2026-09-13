@@ -12,9 +12,11 @@
 
 #define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
 
+/// @deprecated Use #GET_ITEM instead.
 static inline Item* GetItemData(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
+
     return item_data;
 }
 

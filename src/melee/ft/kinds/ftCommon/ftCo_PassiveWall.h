@@ -5,8 +5,11 @@
 
 /* 0C1D38 */ bool ftCo_800C1D38(Fighter_GObj* gobj);
 /* 0C1E0C */ bool ftCo_800C1E0C(Fighter* fp);
+
+/// @todo UnclePunch Map file: AS_203_PassiveWalljump_Walljump
 /* 0C1E64 */ void ftCo_800C1E64(Fighter_GObj* gobj, int msid, int timer,
                                 int vel_y_exponent, float facing_dir);
+
 /* 0C2028 */ void ftCo_PassiveWall_Anim(Fighter_GObj* gobj);
 /* 0C2180 */ void ftCo_PassiveWall_IASA(Fighter_GObj* gobj);
 /* 0C22C0 */ void ftCo_PassiveWall_Phys(Fighter_GObj* gobj);
