@@ -3,6 +3,9 @@
 
 #include <Runtime/platform.h>
 
+#define HSD_GOBJ_PLINK_20 20
+#define HSD_GOBJ_PLINK_27 27
+
 /// @todo Put in proper places. ::GM_MAX_PLAYERS is ::Gm_Player_NumMax but
 /// needs to be used for array size declarations.
 /// @{

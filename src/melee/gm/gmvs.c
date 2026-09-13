@@ -1251,14 +1251,14 @@ void fn_8016CD98(VsSceneController* scene)
     }
 
     if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || scene->start.x3_7 == 1) {
-        if (scene->state.frame_count < -1) {
+        if (scene->state.frame_count < U32_MAX) {
             scene->state.frame_count++;
         }
         if (scene->start.timer_enabled) {
             if (++scene->state.unk_2C >= 60) {
                 scene->state.unk_2C = 0;
                 if (scene->start.timer_counts_up) {
-                    if (scene->state.timer_seconds < -1) {
+                    if (scene->state.timer_seconds < U32_MAX) {
                         scene->state.timer_seconds++;
                     }
                 } else {

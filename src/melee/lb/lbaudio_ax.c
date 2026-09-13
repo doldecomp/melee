@@ -29,8 +29,6 @@
 
 #define GET_SOUND(x) ((lbAudioAx_UserData*) HSD_GObjGetUserData(x))
 
-#define GOBJ_TYPE_AUDIO_AX 0x3E
-
 #define VOL_MAX 0x7F
 #define PAN_MID 0x40
 
@@ -1436,7 +1434,7 @@ HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* owner, int arg2, int sfx_id,
         params.x24 = arg9;
         params.voice = voice;
 
-        gobj = GObj_Create(HSD_GOBJ_CLASS_SOUND, GOBJ_TYPE_AUDIO_AX, 0);
+        gobj = GObj_Create(HSD_GOBJ_CLASS_SOUND, HSD_GOBJ_PLINK_AUDIO_AX, 0);
         if (gobj != NULL) {
             userdata = HSD_ObjAlloc(&lbl_80433710);
             if (userdata == NULL) {
@@ -1480,7 +1478,7 @@ bool lbAudioAx_80026510(HSD_GObj* target)
     PAD_STACK(8);
 
     if (target != NULL) {
-        cur = HSD_GObjPLinkHead[GOBJ_TYPE_AUDIO_AX];
+        cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_AUDIO_AX];
 
         while (cur != NULL) {
             lbAudioAx_UserData* ud = GET_SOUND(cur);
@@ -1508,7 +1506,7 @@ bool lbAudioAx_800265C4(HSD_GObj* target_obj, int voice)
 
     PAD_STACK(8);
 
-    cur = HSD_GObjPLinkHead[GOBJ_TYPE_AUDIO_AX];
+    cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_AUDIO_AX];
 
     while (cur != NULL) {
         lbAudioAx_UserData* ud = GET_SOUND(cur);
