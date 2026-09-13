@@ -2039,7 +2039,7 @@ def no_optimize_link_order_callback(
     module_id: int, objects: list[str]
 ) -> list[str]:
     if module_id == 0:  # DOL
-        return objects + ["Runtime/eabi_save_restore.s"]
+        return [*objects, "Runtime/eabi_save_restore.s"]
     return objects
 
 
