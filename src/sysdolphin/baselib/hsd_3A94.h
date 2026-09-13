@@ -45,32 +45,35 @@ typedef struct CardState {
 /* 3AC2E0 */ void fn_803AC2E0(void);
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
 /* 3AC340 */ int hsd_803AC340(void* header);
-/* 3AC3E0 */ void hsd_803AC3E0(struct CardState* file_desc, int file_idx,
-                               int file_size, int file_flags, u8* data);
-/* 3AC3F8 */ void fn_803AC3F8(void*, u8*, s32);
-/* 3AC558 */ void hsd_803AC558(struct CardState*, u8*);
-/* 3AC634 */ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx);
-/* 3AC6B8 */ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count);
+/* 3AC3E0 */ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
+                               int file_flags, u8* data);
+/* 3AC3F8 */ void fn_803AC3F8(void* card_state, u8* data, s32 file_idx);
+/* 3AC558 */ void hsd_803AC558(CardState* state, u8* data);
+/* 3AC634 */ u32 fn_803AC634(CardState* state, s32 file_idx);
+/* 3AC6B8 */ s32 fn_803AC6B8(CardState* state, s32 file_idx);
 /* 3AC7DC */ s32 fn_803AC7DC(CardState*);
 /* 3ACBE8 */ s32 fn_803ACBE8(CardState* state, s32 block_idx);
-/* 3ACC0C */ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id,
+/* 3ACC0C */ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id,
                              s32 seq_num, void* expected_data, s32 data_size);
 /* 3ACD58 */ s32 fn_803ACD58(CardState* state, void* icon_data,
                              void* file_data);
 /* 3ACF30 */ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num,
                              s32 version);
-/* 3ACFC0 */ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id,
+/* 3ACFC0 */ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 block_id,
                              s32 seq_num, void* payload, s32 payload_size,
-                             s32 version);
+                             s32 file_idx);
 /* 3AD16C */ s32 fn_803AD16C(CardState* state);
 /* 3ADE4C */ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback);
-/* 3ADF90 */ s32 fn_803ADF90(struct CardState*, s32, u8*, s32,
-                             void (*)(s32, s32));
-/* 3AE7F8 */ s32 fn_803AE7F8(struct CardState*, s32, s32, s32, s32);
-/* 3AF3F0 */ s32 fn_803AF3F0(CardState* state, s32, s32, s32, s32);
-/* 3B0120 */ s32 fn_803B0120(CardState* state, s32, s32, s32, s32);
+/* 3ADF90 */ s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf,
+                             s32 async, void (*callback)(s32, s32));
+/* 3AE7F8 */ s32 fn_803AE7F8(CardState* state, s32 file_idx, s32 buf,
+                             s32 async, s32 callback);
+/* 3AF3F0 */ s32 fn_803AF3F0(CardState* state, s32 file_idx, s32 buf,
+                             s32 async, s32 callback);
+/* 3B0120 */ s32 fn_803B0120(CardState* state, s32 file_idx, s32 buf,
+                             s32 async, s32 callback);
 /* 3B0E9C */ s32 fn_803B0E9C(struct CardState*, s32, s32, s32, s32);
-/* 3B1338 */ s32 fn_803B1338(CardState* state, s32);
+/* 3B1338 */ s32 fn_803B1338(CardState* state, s32 async);
 /* 3B1F78 */ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id,
                              s32 seq_num, s32 callback);
 /* 3B21E8 */ s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num,
