@@ -96,12 +96,12 @@ static inline float inlineB1(Fighter_GObj* gobj)
     return GET_FIGHTER(gobj)->co_attrs.kirby_b_star_damage;
 }
 
-static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
-                            Vec3* scale, ftCommon_MotionState msid,
+static inline void inlineB2(Fighter_GObj* gobj, Fighter* fp,
+                            Fighter_GObj* thrower_gobj, Vec3* scale,
+                            ftCommon_MotionState msid,
                             KirbyVelocityFunc vel_func, GetFloatFunc get_float,
                             bool x18_b0)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     fp->facing_dir = -GET_FIGHTER(thrower_gobj)->facing_dir;
     fp->mv.co.thrownkirby.thrower_gobj = thrower_gobj;
@@ -109,18 +109,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     fp->mv.co.thrownkirby.x4 =
         vel_func(thrower_gobj, &fp->self_vel, fp->facing_dir);
     Fighter_UpdateModelScale(gobj);
-/// @todo inline this to ::HSD_JObjGetScale someway
-#ifdef MUST_MATCH
-    if (jobj == NULL) {
-        __assert("jobj.h", 823, "jobj");
-    }
-    if (&fp->mv.co.thrownkirby.scale == NULL) {
-        __assert("jobj.h", 824, "scale");
-    }
-    fp->mv.co.thrownkirby.scale = jobj->scale;
-#else
     HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
-#endif
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
                               0.0f, thrower_gobj);
     fp->take_dmg_2_cb = ftCo_800BE7C0;
@@ -146,7 +135,7 @@ void ftCo_800BDB58(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 scale;
     PAD_STACK(36);
-    inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownKirbyStar,
+    inlineB2(gobj, fp, thrower_gobj, &scale, ftCo_MS_ThrownKirbyStar,
              ftKb_SpecialN_800F58AC, ftKb_SpecialN_800F5A88, false);
 
     /// @todo Possibly another callback in #inlineB2
@@ -216,7 +205,7 @@ void ftCo_800BE000(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
     u32 unused2;
     Vec3 scale;
     PAD_STACK(12);
-    inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownCopyStar,
+    inlineB2(gobj, fp, thrower_gobj, &scale, ftCo_MS_ThrownCopyStar,
              ftKb_SpecialN_800F58D8, ftKb_SpecialN_800F5AB0, true);
 
     /// @todo Possibly another callback in #inlineB2
