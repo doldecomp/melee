@@ -72,7 +72,7 @@ struct GameSceneInfo {
     /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
     /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
     /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
-} info;
+};
 
 /**
  * @note Colloquially known as "Minor Scene"
@@ -288,7 +288,7 @@ struct gmm_x1868_1A8_t {
     /* 0x01AC +4 */ u8 x4; ///< true/false
     /* 0x01AD +5 */ u8 x5;
     /* 0x01AE +6 */ u8 x6;
-} unk_1A8;
+};
 
 struct gmm_x1868 {
     /* 0x0000 */ u16
@@ -361,7 +361,7 @@ struct gmm_x0_584_t {
     /* 0x0585 */ u8 unk_585;
     /* 0x0586 */ u8 unk_586;
     /* 0x0587 */ s8 unk_587;
-} unk_584;
+};
 
 struct EventData {
     /* 0x0530 */ u8 x0;
@@ -403,7 +403,7 @@ struct EventData {
     /* 0x057C */ s8 x4C[4]; ///< CharacterKind
     /* 0x0580 */ u8 x50[4]; ///< character color
     struct gmm_x0_584_t unk_584;
-} unk_530;
+};
 
 struct gmm_x0_vsdata {
     gmm_x0_528_t unk_51C, unk_522, unk_528;

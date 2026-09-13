@@ -10,7 +10,6 @@
 
 #include "forward.h"
 #include "mplib.h"
-#include <melee/cm/types.h>
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>

@@ -10,7 +10,6 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/types.h>
-#include <melee/gm/gmvs.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/archive.h>
