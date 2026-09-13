@@ -8,28 +8,36 @@
 #include <dolphin/os.h>
 
 typedef struct {
-    u8 x0[0x80 * 0x24];
-} __baselib_UnkType002;
-
-typedef struct {
     u8 x0[0x300];
 } __baselib_UnkType003;
 
+/// hsd_804D1138 viewed at CardCmd stride: entry 0 overlays the CardContext
+/// header, and entry i's x10 is CardContext::cmds[i].type.
 typedef struct CardBufEntry {
     s32 x0, x4, x8, xC;
     s32 x10;
     s32 x14, x18, x1C, x20;
 } CardBufEntry;
 
-typedef struct CardBlock {
-    /* 0x00 */ u8 pad_00[0x10];
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 x12;
-    /* 0x13 */ u8 pad_13[0x0D];
-    /* 0x20 */ u8 x20[1];
-} CardBlock;
+/// 0x20-byte header at the start of every data block on the card.
+typedef struct CardBlockHeader {
+    /* 0x00 */ u8 digest[0x10];
+    /* 0x10 */ u8 id_hi;
+    /* 0x11 */ u8 id_lo;
+    /* 0x12 */ u8 seq;
+    /* 0x13 */ u8 file_table[0x0C];
+    /* 0x1F */ u8 pad_1F[1];
+    /* 0x20 */ u8 data[1];
+} CardBlockHeader;
 
+/**
+ * One entry of the command ring processed by hsd_803AAA48.
+ *
+ * x8/xC/x10/x14 depend on type: block commands (1, 2, 5, 13, 15, 16) carry
+ * file index, physical block, block id and sequence number; header commands
+ * (7, 9, 10, 11, 12) carry filename/size, header block index, and the
+ * comment/banner/icons buffers.
+ */
 typedef struct CardCmd {
     /* 0x00 */ s32 type;
     /* 0x04 */ CardState* state;
@@ -37,9 +45,9 @@ typedef struct CardCmd {
     /* 0x0C */ s32 xC;
     /* 0x10 */ s32 x10;
     /* 0x14 */ s32 x14;
-    /* 0x18 */ void* x18;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ s32 x20;
+    /* 0x18 */ void* data;
+    /* 0x1C */ s32 offset;
+    /* 0x20 */ s32 size;
 } CardCmd;
 
 /// Stack staging slot for one queued command.
@@ -48,39 +56,33 @@ typedef union CardCmdBuf {
     s32 words[10];
 } CardCmdBuf;
 
-typedef struct HsdCmdEntry {
-    s32 type;
-    s32 f1;
-    s32 f2;
-    s32 f3;
-    s32 f4;
-    s32 f5;
-} HsdCmdEntry;
-
-typedef struct CardContext {
-    /* 0x0000 */ s32 x0;
-    /* 0x0004 */ CardState* x4;
-    /* 0x0008 */ void (*x8)(s32, s32);
-    /* 0x000C */ s32 xC;
-    /* 0x0010 */ CardCmd x10[128];
-    /* 0x1210 */ HsdCmdEntry x1210[32];
-} CardContext;
-
-typedef struct CardQueueEntry {
-    /* 0x00 */ s32 x0;
-    /* 0x04 */ s32 x4;
+/// One entry of the request queue drained by fn_803AA790; x8/xC/x10 are
+/// the request's arguments and depend on type.
+typedef struct CardRequest {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ s32 state;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
     /* 0x10 */ s32 x10;
-    /* 0x14 */ void (*x14)(s32, s32);
-} CardQueueEntry;
+    /* 0x14 */ void (*callback)(s32, s32);
+} CardRequest;
+
+/// Layout of hsd_804D1138 .. hsd_804D2348: the request being completed,
+/// the command ring and the request queue.
+typedef struct CardContext {
+    /* 0x0000 */ s32 req_type;
+    /* 0x0004 */ CardState* state;
+    /* 0x0008 */ void (*callback)(s32, s32);
+    /* 0x000C */ s32 callback_arg;
+    /* 0x0010 */ CardCmd cmds[128];
+    /* 0x1210 */ CardRequest requests[32];
+} CardContext;
 
 #define CMD_S32(off)                                                          \
     (((CardBufEntry*) ((unsigned char*) op + (off)))[hsd_804D7980].x0)
 #define CMD_STATE ((CardState*) CMD_S32(0x14))
 #define CMD_PTR(off) ((void*) CMD_S32(off))
 #define CMD_TYPE (op[hsd_804D7980].x10)
-#define CARD_QUEUE_CMD(cmd) fn_803AC168((cmd))
 #define CARD_WRITE_BLOCK(state, block_idx, file_id, seq_num, payload,         \
                          payload_len, file_idx)                               \
     fn_803ACFC0((state), (block_idx), (file_id), (seq_num), (payload),        \
@@ -263,8 +265,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 hsd_804D7988 = result;
                 break;
             }
-            result = (((CardBlock*) state->sector_buf)->x10 << 8) |
-                     ((CardBlock*) state->sector_buf)->x11;
+            result = (((CardBlockHeader*) state->sector_buf)->id_hi << 8) |
+                     ((CardBlockHeader*) state->sector_buf)->id_lo;
             block = state->sector_buf;
             if (result != CMD_S32(0x20)) {
                 hsd_804D7988 = 2;
@@ -595,93 +597,93 @@ void hsd_803A949C(s32 chan, s32 arg1)
     hsd_804D7980 = (hsd_804D7980 + 1) % 128;
 }
 
-#define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
+#define CMD_QUEUE(base) ((CardRequest*) ((base) + 0x1210))
 
 s32 fn_803AA790(void)
 {
-    CardQueueEntry* entry;
+    CardRequest* entry;
     s32 result;
     s32 arg0;
 
-    entry = &((CardQueueEntry*) &hsd_804D2348)[hsd_804D7990];
-    arg0 = entry->x4;
+    entry = &((CardRequest*) &hsd_804D2348)[hsd_804D7990];
+    arg0 = entry->state;
     hsd_804D7990 = (hsd_804D7990 + 1) % 32;
 
-    switch (entry->x0) {
+    switch (entry->type) {
     case 1:
-        result = fn_803ADF90((struct CardState*) entry->x4, entry->x8,
-                             (u8*) entry->xC, 1, entry->x14);
+        result = fn_803ADF90((struct CardState*) entry->state, entry->x8,
+                             (u8*) entry->xC, 1, entry->callback);
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(entry->x8, result);
+            if (entry->callback != NULL) {
+                entry->callback(entry->x8, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     case 2:
         switch (((s32*) (arg0 + 0x28))[entry->x8]) {
         case 0:
-            result = fn_803AE7F8((struct CardState*) entry->x4, entry->x8,
-                                 entry->xC, 1, (s32) entry->x14);
+            result = fn_803AE7F8((struct CardState*) entry->state, entry->x8,
+                                 entry->xC, 1, (s32) entry->callback);
             break;
         case 1:
         case 2:
-            result = fn_803AF3F0((CardState*) entry->x4, entry->x8, entry->xC,
-                                 1, (s32) entry->x14);
+            result = fn_803AF3F0((CardState*) entry->state, entry->x8,
+                                 entry->xC, 1, (s32) entry->callback);
             break;
         case 3:
-            result = fn_803B0120((CardState*) entry->x4, entry->x8, entry->xC,
-                                 1, (s32) entry->x14);
+            result = fn_803B0120((CardState*) entry->state, entry->x8,
+                                 entry->xC, 1, (s32) entry->callback);
             break;
         default:
             result = -0x101;
             break;
         }
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(entry->x8, result);
+            if (entry->callback != NULL) {
+                entry->callback(entry->x8, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     case 3:
-        result = fn_803B1F78((CardState*) entry->x4, entry->x8, entry->xC,
-                             entry->x10, (s32) entry->x14);
+        result = fn_803B1F78((CardState*) entry->state, entry->x8, entry->xC,
+                             entry->x10, (s32) entry->callback);
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(0, result);
+            if (entry->callback != NULL) {
+                entry->callback(0, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     case 4:
-        result =
-            fn_803B21E8(entry->x4, entry->xC, entry->x10, (s32) entry->x14);
+        result = fn_803B21E8(entry->state, entry->xC, entry->x10,
+                             (s32) entry->callback);
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(0, result);
+            if (entry->callback != NULL) {
+                entry->callback(0, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     case 5:
-        result = fn_803ADE4C(arg0, entry->x8, (s32) entry->x14);
+        result = fn_803ADE4C(arg0, entry->x8, (s32) entry->callback);
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(0, result);
+            if (entry->callback != NULL) {
+                entry->callback(0, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     case 6:
         result = fn_803B26CC((CardState*) arg0, entry->x8, entry->xC,
-                             entry->x10, entry->x14);
+                             entry->x10, entry->callback);
         if (result < 0) {
-            if (entry->x14 != NULL) {
-                entry->x14(0, result);
+            if (entry->callback != NULL) {
+                entry->callback(0, result);
             }
         }
-        entry->x0 = 0;
+        entry->type = 0;
         return result;
     default:
         return -0x101;
@@ -864,7 +866,7 @@ static inline void rollbackCardCommands(CardContext* context, s32 snap)
     s32 saved = snap;
 
     while (saved != hsd_804D7984) {
-        ((CardBufEntry*) &context->x4)[saved].xC = 0;
+        ((CardBufEntry*) &context->state)[saved].xC = 0;
         saved = (saved + 1) % 128;
     }
     hsd_804D7984 = snap;
@@ -912,7 +914,7 @@ void hsd_803AAA48(void)
     s32 chan;
     while (1) {
         CardContext* ctx = (CardContext*) hsd_804D1138;
-        CardState** state = &ctx->x4;
+        CardState** state = &ctx->state;
         s32* cmd;
         s32 type;
         BOOL intr = OSDisableInterrupts();
@@ -940,9 +942,9 @@ void hsd_803AAA48(void)
 
         switch ((u32) type) {
         case 0:
-            if (ctx->x0 != 0) {
-                if (ctx->x0 == 3) {
-                    s32 file = ctx->xC;
+            if (ctx->req_type != 0) {
+                if (ctx->req_type == 3) {
+                    s32 file = ctx->callback_arg;
                     s32 blocks_before = fn_803AC6B8(*state, file);
                     s32 file_blocks = fn_803AC634(*state, file);
                     s32 total = fn_803AC7DC(*state);
@@ -972,10 +974,10 @@ void hsd_803AAA48(void)
                         }
                     }
                 }
-                if (ctx->x8 != 0) {
-                    ctx->x8(ctx->xC, hsd_804D7988);
+                if (ctx->callback != 0) {
+                    ctx->callback(ctx->callback_arg, hsd_804D7988);
                 }
-                ctx->x0 = 0;
+                ctx->req_type = 0;
             }
             hsd_804D7988 = 0;
             hsd_804D799C = 2;
@@ -1501,9 +1503,9 @@ s32 fn_803AC258(CardState* card_state, s32 block_idx)
     buf.state = card_state;
     buf.x10 = block_idx;
     buf.x14 = 0;
-    buf.x18 = NULL;
-    buf.x20 = 0;
-    buf.x1C = fn_803ACBE8(card_state, block_idx);
+    buf.data = NULL;
+    buf.size = 0;
+    buf.offset = fn_803ACBE8(card_state, block_idx);
     return fn_803AC168((s32*) &buf);
 }
 
@@ -2613,9 +2615,9 @@ static inline s32 queueCardReadCommand(CardState* state, s32 block, void* data,
     command.state = state;
     command.x10 = block;
     command.x14 = 0;
-    command.x18 = data;
-    command.x20 = length;
-    command.x1C = offset;
+    command.data = data;
+    command.size = length;
+    command.offset = offset;
     return fn_803AC168((s32*) &command);
 }
 
@@ -2694,9 +2696,9 @@ static inline s32 queueCardClearCommand(CardState* state, u8* dst, s32 size)
     command.state = state;
     command.x10 = 0;
     command.x14 = 0;
-    command.x18 = dst;
-    command.x20 = size;
-    command.x1C = 0;
+    command.data = dst;
+    command.size = size;
+    command.offset = 0;
     command.x8 = 0;
     return fn_803AC168((s32*) &command);
 }
@@ -3173,9 +3175,9 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 cmd.state = arg0;
                                 cmd.x10 = blocks_before + i;
                                 cmd.x14 = current_seq;
-                                cmd.x18 = data;
-                                cmd.x20 = chunk;
-                                cmd.x1C = ofs;
+                                cmd.data = data;
+                                cmd.size = chunk;
+                                cmd.offset = ofs;
                                 cmd_result = fn_803AC168((s32*) &cmd);
                             }
                             if (cmd_result < 0) {
@@ -3215,9 +3217,9 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 cmd.state = arg0;
                                 cmd.x10 = blocks_before + i;
                                 cmd.x14 = current_seq;
-                                cmd.x18 = data;
-                                cmd.x20 = remaining;
-                                cmd.x1C = ofs;
+                                cmd.data = data;
+                                cmd.size = remaining;
+                                cmd.offset = ofs;
                                 cmd_result = fn_803AC168((s32*) &cmd);
                             }
                             if (cmd_result < 0) {
@@ -3305,9 +3307,9 @@ after_verify:
                                 init_cmd.state = arg0;
                                 init_cmd.x10 = zero;
                                 init_cmd.x14 = zero;
-                                init_cmd.x18 = (void*) zero;
-                                init_cmd.x20 = zero;
-                                init_cmd.x1C = ofs;
+                                init_cmd.data = (void*) zero;
+                                init_cmd.size = zero;
+                                init_cmd.offset = ofs;
                                 fn_803AC168((s32*) &init_cmd);
                             }
                             cmd.type = 1;
@@ -3315,9 +3317,9 @@ after_verify:
                             cmd.xC = phys;
                             cmd.x10 = blocks_before + i;
                             cmd.x14 = current_seq;
-                            cmd.x18 = data;
-                            cmd.x20 = chunk;
-                            cmd.x1C = ofs;
+                            cmd.data = data;
+                            cmd.size = chunk;
+                            cmd.offset = ofs;
                             cmd.x8 = arg1;
                             cmd_result = fn_803AC168((s32*) &cmd);
                         repair_full_queued:
@@ -3363,9 +3365,9 @@ after_verify:
                                 init_cmd.state = arg0;
                                 init_cmd.x10 = zero;
                                 init_cmd.x14 = zero;
-                                init_cmd.x18 = (void*) zero;
-                                init_cmd.x20 = zero;
-                                init_cmd.x1C = ofs;
+                                init_cmd.data = (void*) zero;
+                                init_cmd.size = zero;
+                                init_cmd.offset = ofs;
                                 fn_803AC168((s32*) &init_cmd);
                             }
                             cmd.type = 1;
@@ -3373,9 +3375,9 @@ after_verify:
                             cmd.xC = phys;
                             cmd.x10 = blocks_before + i;
                             cmd.x14 = current_seq;
-                            cmd.x18 = data;
-                            cmd.x20 = remaining;
-                            cmd.x1C = ofs;
+                            cmd.data = data;
+                            cmd.size = remaining;
+                            cmd.offset = ofs;
                             cmd.x8 = arg1;
                             cmd_result = fn_803AC168((s32*) &cmd);
                         repair_tail_queued:
@@ -3448,9 +3450,9 @@ static inline s32 fn_803AF3F0_queue_verify_first(CardState* state, s32 block,
         cmd.state = state;
         cmd.x10 = logical;
         cmd.x14 = seq;
-        cmd.x18 = data;
-        cmd.x20 = size;
-        cmd.x1C = ofs;
+        cmd.data = data;
+        cmd.size = size;
+        cmd.offset = ofs;
         return fn_803AC168((s32*) &cmd);
     }
 }
@@ -3471,9 +3473,9 @@ static inline s32 fn_803AF3F0_queue_verify_final(CardState* state, s32 block,
         cmd.state = state;
         cmd.x10 = logical;
         cmd.x14 = seq;
-        cmd.x18 = data;
-        cmd.x20 = size;
-        cmd.x1C = ofs;
+        cmd.data = data;
+        cmd.size = size;
+        cmd.offset = ofs;
         result = fn_803AC168((s32*) &cmd);
     }
     return result;
@@ -3498,9 +3500,9 @@ static inline s32 fn_803AF3F0_queue_write_first(CardState* state, s32 block,
         init_cmd.state = state;
         init_cmd.x10 = zero;
         init_cmd.x14 = zero;
-        init_cmd.x18 = (void*) zero;
-        init_cmd.x20 = zero;
-        init_cmd.x1C = ofs;
+        init_cmd.data = (void*) zero;
+        init_cmd.size = zero;
+        init_cmd.offset = ofs;
         fn_803AC168((s32*) &init_cmd);
     }
     cmd.type = 1;
@@ -3508,9 +3510,9 @@ static inline s32 fn_803AF3F0_queue_write_first(CardState* state, s32 block,
     cmd.xC = block;
     cmd.x10 = logical;
     cmd.x14 = seq;
-    cmd.x18 = data;
-    cmd.x20 = size;
-    cmd.x1C = ofs;
+    cmd.data = data;
+    cmd.size = size;
+    cmd.offset = ofs;
     cmd.x8 = file_id;
     return fn_803AC168((s32*) &cmd);
 }
@@ -3535,9 +3537,9 @@ static inline s32 fn_803AF3F0_queue_write_final(CardState* state, s32 block,
         init_cmd.state = state;
         init_cmd.x10 = zero;
         init_cmd.x14 = zero;
-        init_cmd.x18 = (void*) zero;
-        init_cmd.x20 = zero;
-        init_cmd.x1C = ofs;
+        init_cmd.data = (void*) zero;
+        init_cmd.size = zero;
+        init_cmd.offset = ofs;
         fn_803AC168((s32*) &init_cmd);
     }
     cmd.type = 1;
@@ -3545,9 +3547,9 @@ static inline s32 fn_803AF3F0_queue_write_final(CardState* state, s32 block,
     cmd.xC = block;
     cmd.x10 = logical;
     cmd.x14 = seq;
-    cmd.x18 = data;
-    cmd.x20 = size;
-    cmd.x1C = ofs;
+    cmd.data = data;
+    cmd.size = size;
+    cmd.offset = ofs;
     cmd.x8 = file_id;
     result = fn_803AC168((s32*) &cmd);
     return result;
@@ -4033,9 +4035,9 @@ static inline s32 fn_803B0120_queue_verify(CardState* state, s32 block,
         cmd.state = state;
         cmd.x10 = logical;
         cmd.x14 = seq;
-        cmd.x18 = data;
-        cmd.x20 = size;
-        cmd.x1C = ofs;
+        cmd.data = data;
+        cmd.size = size;
+        cmd.offset = ofs;
         result = fn_803AC168((s32*) &cmd);
     }
     return result;
@@ -4060,9 +4062,9 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 block,
         init_cmd.state = state;
         init_cmd.x10 = zero;
         init_cmd.x14 = zero;
-        init_cmd.x18 = (void*) zero;
-        init_cmd.x20 = zero;
-        init_cmd.x1C = ofs;
+        init_cmd.data = (void*) zero;
+        init_cmd.size = zero;
+        init_cmd.offset = ofs;
         fn_803AC168((s32*) &init_cmd);
     }
     cmd.type = 1;
@@ -4070,9 +4072,9 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 block,
     cmd.xC = block;
     cmd.x10 = logical;
     cmd.x14 = seq;
-    cmd.x18 = data;
-    cmd.x20 = size;
-    cmd.x1C = ofs;
+    cmd.data = data;
+    cmd.size = size;
+    cmd.offset = ofs;
     cmd.x8 = file_id;
     result = fn_803AC168((s32*) &cmd);
     return result;
@@ -4547,9 +4549,9 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     cmd_clear.state = arg0;
                     cmd_clear.x10 = zero;
                     cmd_clear.x14 = zero;
-                    cmd_clear.x18 = clear_buf;
-                    cmd_clear.x20 = sector_size;
-                    cmd_clear.x1C = zero;
+                    cmd_clear.data = clear_buf;
+                    cmd_clear.size = sector_size;
+                    cmd_clear.offset = zero;
                     cmd_clear.x8 = zero;
                     result = fn_803AC168((s32*) &cmd_clear);
                 } else {
@@ -4562,9 +4564,9 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     cmd_patch.state = arg0;
                     cmd_patch.x10 = -1;
                     cmd_patch.x14 = 0;
-                    cmd_patch.x18 = NULL;
-                    cmd_patch.x20 = has_blocks;
-                    cmd_patch.x1C = arg4 * sector_size;
+                    cmd_patch.data = NULL;
+                    cmd_patch.size = has_blocks;
+                    cmd_patch.offset = arg4 * sector_size;
                     result = fn_803AC168((s32*) &cmd_patch);
                 }
                 if (result < 0) {
@@ -4698,9 +4700,9 @@ static inline s32 fn_803B1338_queue_write(CardState* state, s32 logical,
         init_buf->cmd.state = state;
         init_buf->cmd.x10 = 0;
         init_buf->cmd.x14 = 0;
-        init_buf->cmd.x18 = NULL;
-        init_buf->cmd.x20 = 0;
-        init_buf->cmd.x1C = ofs;
+        init_buf->cmd.data = NULL;
+        init_buf->cmd.size = 0;
+        init_buf->cmd.offset = ofs;
         fn_803AC168(init_buf->words);
     }
     buf->cmd.type = 1;
@@ -4708,9 +4710,9 @@ static inline s32 fn_803B1338_queue_write(CardState* state, s32 logical,
     buf->cmd.xC = logical;
     buf->cmd.x10 = phys;
     buf->cmd.x14 = 0;
-    buf->cmd.x18 = data;
-    buf->cmd.x20 = size;
-    buf->cmd.x1C = ofs;
+    buf->cmd.data = data;
+    buf->cmd.size = size;
+    buf->cmd.offset = ofs;
     buf->cmd.x8 = file_id;
     result = fn_803AC168(buf->words);
     return result;
@@ -4745,9 +4747,9 @@ static inline s32 fn_803B1338_queue_write_data(CardState* state, s32 logical,
         init_buf->cmd.state = state;
         init_buf->cmd.x10 = 0;
         init_buf->cmd.x14 = 0;
-        init_buf->cmd.x18 = NULL;
-        init_buf->cmd.x20 = 0;
-        init_buf->cmd.x1C = ofs;
+        init_buf->cmd.data = NULL;
+        init_buf->cmd.size = 0;
+        init_buf->cmd.offset = ofs;
         fn_803AC168(init_buf->words);
     }
     buf->cmd.type = 1;
@@ -4755,9 +4757,9 @@ static inline s32 fn_803B1338_queue_write_data(CardState* state, s32 logical,
     buf->cmd.xC = logical;
     buf->cmd.x10 = phys;
     buf->cmd.x14 = 0;
-    buf->cmd.x18 = data;
-    buf->cmd.x20 = size;
-    buf->cmd.x1C = ofs;
+    buf->cmd.data = data;
+    buf->cmd.size = size;
+    buf->cmd.offset = ofs;
     buf->cmd.x8 = file_id;
     result = fn_803AC168(buf->words);
     return result;
@@ -4819,18 +4821,18 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     cmd0.cmd.state = state;
                     cmd0.cmd.x10 = 0;
                     cmd0.cmd.x14 = 0;
-                    cmd0.cmd.x18 = NULL;
-                    cmd0.cmd.x20 = 0;
-                    cmd0.cmd.x1C = ofs0;
+                    cmd0.cmd.data = NULL;
+                    cmd0.cmd.size = 0;
+                    cmd0.cmd.offset = ofs0;
                     fn_803AC168(cmd0.words);
                     cmd1.cmd.type = 1;
                     cmd1.cmd.state = state;
                     cmd1.cmd.xC = 0;
                     cmd1.cmd.x10 = 0;
                     cmd1.cmd.x14 = 0;
-                    cmd1.cmd.x18 = NULL;
-                    cmd1.cmd.x20 = 0;
-                    cmd1.cmd.x1C = ofs0;
+                    cmd1.cmd.data = NULL;
+                    cmd1.cmd.size = 0;
+                    cmd1.cmd.offset = ofs0;
                     cmd1.cmd.x8 = 0;
                     result = fn_803AC168(cmd1.words);
                 } else {
@@ -4841,18 +4843,18 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     cmd2.cmd.state = state;
                     cmd2.cmd.x10 = 0;
                     cmd2.cmd.x14 = 0;
-                    cmd2.cmd.x18 = NULL;
-                    cmd2.cmd.x20 = 0;
-                    cmd2.cmd.x1C = ofs0;
+                    cmd2.cmd.data = NULL;
+                    cmd2.cmd.size = 0;
+                    cmd2.cmd.offset = ofs0;
                     fn_803AC168(cmd2.words);
                     cmd3.cmd.type = 1;
                     cmd3.cmd.state = state;
                     cmd3.cmd.xC = 0;
                     cmd3.cmd.x10 = 0;
                     cmd3.cmd.x14 = 0;
-                    cmd3.cmd.x18 = fdata;
-                    cmd3.cmd.x20 = sector_size - hdr_offset - 0x20;
-                    cmd3.cmd.x1C = ofs0;
+                    cmd3.cmd.data = fdata;
+                    cmd3.cmd.size = sector_size - hdr_offset - 0x20;
+                    cmd3.cmd.offset = ofs0;
                     cmd3.cmd.x8 = 0;
                     result = fn_803AC168(cmd3.words);
                     offset = state->sector_size - hdr_offset - 0x20;
@@ -5278,9 +5280,9 @@ void hsd_803B24E4(s32* ctx, int chan, int sector_size, void* work_buf)
     ((CardState*) ctx)->sector_buf = work_buf;
 }
 
-static inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)
+static inline CardRequest* hsd_803B2550_inline(u8* arg0, s32 arg1)
 {
-    return &((HsdCmdEntry*) (arg0 + 0x1210))[arg1];
+    return &((CardRequest*) (arg0 + 0x1210))[arg1];
 }
 
 int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
@@ -5340,12 +5342,12 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
     }
 
     {
-        HsdCmdEntry* entry = hsd_803B2550_inline(base, retries);
+        CardRequest* entry = hsd_803B2550_inline(base, retries);
         s32 next = retries + 1;
         entry->type = 5;
-        entry->f1 = (s32) arg0;
-        entry->f2 = write_idx;
-        entry->f5 = (s32) arg2;
+        entry->state = (s32) arg0;
+        entry->x8 = write_idx;
+        entry->callback = (void (*)(s32, s32)) arg2;
         hsd_804D7994 = next % 32;
     }
 
@@ -5384,10 +5386,10 @@ s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
         return result;
     }
 
-    context->x0 = 5;
-    context->x4 = state;
-    context->x8 = callback;
-    context->xC = 0;
+    context->req_type = 5;
+    context->state = state;
+    context->callback = callback;
+    context->callback_arg = 0;
     hsd_804D7998 = -1;
     return 0;
 }
