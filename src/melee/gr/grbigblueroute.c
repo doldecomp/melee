@@ -13,6 +13,7 @@
 #include <dolphin/os.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
+#include <melee/ft/types.h>
 #include <melee/gm/gmvs.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>

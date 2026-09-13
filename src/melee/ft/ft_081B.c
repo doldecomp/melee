@@ -15,7 +15,6 @@
 #include "ftcliffcommon.h"
 #include "ftcommon.h"
 #include "ftwalljump.h"
-#include "inlines.h"
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Fall.h"
 #include "kinds/ftCommon/ftCo_Landing.h"
@@ -621,6 +620,11 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
         }
     }
     return NULL;
+}
+
+static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
+{
+    return ftGetFacingDirInt(GET_FIGHTER(gobj));
 }
 
 void ft_80082F28(Fighter_GObj* gobj)

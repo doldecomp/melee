@@ -12,6 +12,8 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
+typedef union CmdUnion CmdUnion;
+
 struct HitResult {
     HSD_JObj* bone;
 
@@ -268,16 +270,18 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
+struct GameCache {
+    u8 mode_kind; ///< ::GameModeKind
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    StKind stkind;
+    PreloadCacheSceneEntry entries[8];
+};
+
 struct PreloadedGameModeState {
     bool is_heap_persistent[2];
-    struct GameCache {
-        u8 mode_kind; ///< ::GameModeKind
-        u8 x1;
-        u8 x2;
-        u8 x3;
-        StKind stkind;
-        PreloadCacheSceneEntry entries[8];
-    } game_cache;
+    struct GameCache game_cache;
     s32 mode_scene_changes;
 };
 
@@ -535,10 +539,10 @@ struct Command_04 {
     u32 x;
 };
 struct Command_05 {
-    union CmdUnion* ptr;
+    CmdUnion* ptr;
 };
 struct Command_07 {
-    union CmdUnion* ptr;
+    CmdUnion* ptr;
 };
 struct Command_09 {
     u32 id : 6;
@@ -917,6 +921,87 @@ struct wind_fx_3 {
     s16 decay : 16;
 };
 
+union CmdUnion {
+    struct Command_00 Command_00;
+    struct Command_02 Command_02;
+    struct Command_03 Command_03;
+    struct Command_04 Command_04;
+    struct Command_05 Command_05;
+    struct Command_07 Command_07;
+    struct Command_09 Command_09;
+    struct unk0 unk0;
+    struct unk1 unk1;
+    struct set_throw_flags set_throw_flags;
+    struct unk3 unk3;
+    struct unk4 unk4;
+    struct unk5 unk5;
+    struct unk6 unk6;
+    struct set_airborne_state set_airborne_state; ///< #ftAction_80071998
+    struct unk8 unk8;
+    struct part_anim part_anim;
+    struct unk9 unk9;
+    struct unk10 unk10;
+    struct unk11 unk11;
+    struct unk12 unk12;
+    struct unk13 unk13;
+    struct unk14 unk14;
+    struct unk15 unk15;                           ///< #ftAction_80072B14
+    struct unk16 unk16;                           ///< #ftAction_80072B3C
+    struct unk17 unk17;                           ///< #ftAction_80072B94
+    struct unk18 unk18;                           ///< #ftAction_80072BF4
+    struct unk19 unk19;                           ///< #ftAction_80072C6C
+    struct unk20 unk20;                           ///< #ftAction_80072CB0
+    struct unk21 unk21;                           ///< #ftAction_800730B8
+    struct set_hitbox_damage set_hitbox_damage;   ///< #ftAction_8007162C
+    struct set_hitbox_scale set_hitbox_scale;     ///< #ftAction_8007169C
+    struct set_hitbox_x42_b57 set_hitbox_x42_b57; ///< #ftAction_80071708
+    struct set_cmd_var set_cmd_var;               ///< #ftAction_80071708
+    struct set_hurt_state set_hurt_state;         ///< #ftAction_80071A9C
+    struct set_jab_combo set_jab_combo;           ///< #ftAction_80071AE8
+    struct set_jab_rapid set_jab_rapid;           ///< #ftAction_80071B28
+    struct set_dobj_flags set_dobj_flags;         ///< #ftAction_80071D40
+    struct set_throw_hitbox_0 set_throw_hitbox_0; ///< #ftAction_80071E04
+    struct set_throw_hitbox_1 set_throw_hitbox_1; ///< #ftAction_80071E04
+    struct set_throw_hitbox_2 set_throw_hitbox_2; ///< #ftAction_80071E04
+    struct unk27 unk27;                           ///< #ftAction_80071F34
+    struct set_article_vis set_article_vis;       ///< #ftAction_80071F78
+    struct set_fighter_vis set_fighter_vis;       ///< #ftAction_80071FA0
+    struct set_tex_anim set_tex_anim;             ///< #ftAction_800726F4
+    struct unk31 unk31;                           ///< #ftAction_80073008
+    struct unk32 unk32;                           ///< #ftAction_80073008
+    struct unk33 unk33;                           ///< #it_8027990C
+    struct spawn_gfx_0 spawn_gfx_0;               ///< ftAction_80071028
+    struct spawn_gfx_1 spawn_gfx_1;
+    struct spawn_gfx_2 spawn_gfx_2;
+    struct spawn_gfx_3 spawn_gfx_3;
+    struct spawn_gfx_4 spawn_gfx_4;
+    struct spawn_hitbox_0 create_hitbox_0; ///< ftAction_8007121C
+    struct spawn_hitbox_1 create_hitbox_1;
+    struct spawn_hitbox_2 create_hitbox_2;
+    struct spawn_hitbox_3 create_hitbox_3;
+    struct spawn_hitbox_4 create_hitbox_4;
+    struct spawn_hitbox_5 create_hitbox_5;
+    struct it_create_hitbox_0 it_create_hitbox_0;
+    struct it_create_hitbox_4 it_create_hitbox_4;
+    struct sound_effect_0 sound_effect_0;
+    struct sound_effect_1 sound_effect_1;
+    struct sound_effect_2 sound_effect_2;
+    struct pseudo_random_sfx_0 pseudo_random_sfx_0;
+    struct pseudo_random_sfx_1 pseudo_random_sfx_1;
+    struct stage_sfx_0 stage_sfx_0;
+    struct stage_sfx_1 stage_sfx_1;
+    struct stage_sfx_2 stage_sfx_2;
+    struct stage_sfx_3 stage_sfx_3;
+    struct footstep_fx_0 footstep_fx_0;
+    struct unk_fx_0 unk_fx_0;
+    struct smash_charge_0 smash_charge_0;
+    struct smash_charge_1 smash_charge_1;
+    struct wind_fx_0 wind_fx_0;
+    struct wind_fx_1 wind_fx_1;
+    struct wind_fx_2 wind_fx_2;
+    struct wind_fx_3 wind_fx_3;
+};
+
 struct CommandInfo {
     f32 timer;       // 0x00
     f32 frame_count; // 0x04
@@ -924,91 +1009,7 @@ struct CommandInfo {
         u32* ptr[1]; ///< @todo Hack to match #Command_04
         /// @todo eventually clean this up, probably have each struct as its
         /// own union?
-        union CmdUnion {
-            struct Command_00 Command_00;
-            struct Command_02 Command_02;
-            struct Command_03 Command_03;
-            struct Command_04 Command_04;
-            struct Command_05 Command_05;
-            struct Command_07 Command_07;
-            struct Command_09 Command_09;
-            struct unk0 unk0;
-            struct unk1 unk1;
-            struct set_throw_flags set_throw_flags;
-            struct unk3 unk3;
-            struct unk4 unk4;
-            struct unk5 unk5;
-            struct unk6 unk6;
-            struct set_airborne_state
-                set_airborne_state; ///< #ftAction_80071998
-            struct unk8 unk8;
-            struct part_anim part_anim;
-            struct unk9 unk9;
-            struct unk10 unk10;
-            struct unk11 unk11;
-            struct unk12 unk12;
-            struct unk13 unk13;
-            struct unk14 unk14;
-            struct unk15 unk15;                         ///< #ftAction_80072B14
-            struct unk16 unk16;                         ///< #ftAction_80072B3C
-            struct unk17 unk17;                         ///< #ftAction_80072B94
-            struct unk18 unk18;                         ///< #ftAction_80072BF4
-            struct unk19 unk19;                         ///< #ftAction_80072C6C
-            struct unk20 unk20;                         ///< #ftAction_80072CB0
-            struct unk21 unk21;                         ///< #ftAction_800730B8
-            struct set_hitbox_damage set_hitbox_damage; ///< #ftAction_8007162C
-            struct set_hitbox_scale set_hitbox_scale;   ///< #ftAction_8007169C
-            struct set_hitbox_x42_b57
-                set_hitbox_x42_b57;               ///< #ftAction_80071708
-            struct set_cmd_var set_cmd_var;       ///< #ftAction_80071708
-            struct set_hurt_state set_hurt_state; ///< #ftAction_80071A9C
-            struct set_jab_combo set_jab_combo;   ///< #ftAction_80071AE8
-            struct set_jab_rapid set_jab_rapid;   ///< #ftAction_80071B28
-            struct set_dobj_flags set_dobj_flags; ///< #ftAction_80071D40
-            struct set_throw_hitbox_0
-                set_throw_hitbox_0; ///< #ftAction_80071E04
-            struct set_throw_hitbox_1
-                set_throw_hitbox_1; ///< #ftAction_80071E04
-            struct set_throw_hitbox_2
-                set_throw_hitbox_2;                 ///< #ftAction_80071E04
-            struct unk27 unk27;                     ///< #ftAction_80071F34
-            struct set_article_vis set_article_vis; ///< #ftAction_80071F78
-            struct set_fighter_vis set_fighter_vis; ///< #ftAction_80071FA0
-            struct set_tex_anim set_tex_anim;       ///< #ftAction_800726F4
-            struct unk31 unk31;                     ///< #ftAction_80073008
-            struct unk32 unk32;                     ///< #ftAction_80073008
-            struct unk33 unk33;                     ///< #it_8027990C
-            struct spawn_gfx_0 spawn_gfx_0;         ///< ftAction_80071028
-            struct spawn_gfx_1 spawn_gfx_1;
-            struct spawn_gfx_2 spawn_gfx_2;
-            struct spawn_gfx_3 spawn_gfx_3;
-            struct spawn_gfx_4 spawn_gfx_4;
-            struct spawn_hitbox_0 create_hitbox_0; ///< ftAction_8007121C
-            struct spawn_hitbox_1 create_hitbox_1;
-            struct spawn_hitbox_2 create_hitbox_2;
-            struct spawn_hitbox_3 create_hitbox_3;
-            struct spawn_hitbox_4 create_hitbox_4;
-            struct spawn_hitbox_5 create_hitbox_5;
-            struct it_create_hitbox_0 it_create_hitbox_0;
-            struct it_create_hitbox_4 it_create_hitbox_4;
-            struct sound_effect_0 sound_effect_0;
-            struct sound_effect_1 sound_effect_1;
-            struct sound_effect_2 sound_effect_2;
-            struct pseudo_random_sfx_0 pseudo_random_sfx_0;
-            struct pseudo_random_sfx_1 pseudo_random_sfx_1;
-            struct stage_sfx_0 stage_sfx_0;
-            struct stage_sfx_1 stage_sfx_1;
-            struct stage_sfx_2 stage_sfx_2;
-            struct stage_sfx_3 stage_sfx_3;
-            struct footstep_fx_0 footstep_fx_0;
-            struct unk_fx_0 unk_fx_0;
-            struct smash_charge_0 smash_charge_0;
-            struct smash_charge_1 smash_charge_1;
-            struct wind_fx_0 wind_fx_0;
-            struct wind_fx_1 wind_fx_1;
-            struct wind_fx_2 wind_fx_2;
-            struct wind_fx_3 wind_fx_3;
-        }* u;
+        CmdUnion* u;
     };
     u32 loop_count; // 0x0C
     union CmdUnion*

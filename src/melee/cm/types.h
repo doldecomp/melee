@@ -170,7 +170,7 @@ struct Camera {
     /* 0x341:7 */ u8 x341_b7 : 1;
     /* 0x342 */ char x342_pad[2];
     /* 0x344 */ union {
-        s32 s32;
+        s32 slot;
         Vec3 vec;
         s32 (*cb)(Vec3*);
     } x344;
@@ -189,13 +189,13 @@ struct Camera {
     /* 0x368 */ Vec3 x368;
     /* 0x374 */ f32 x374;
     /* 0x378 */ union {
-        f32 f32;
-        s32 s32;
+        f32 f32_v;
+        s32 s32_v;
     } x378;
     // /* 0x378 */ f32 x378;
     /* 0x37C */ union {
-        s32 s32;
-        f32 f32;
+        s32 s32_v;
+        f32 f32_v;
     } x37C;
     /* 0x380 */ u8 x380[0x18];
     /* 0x398:0 */ u8 x398_b0 : 1;

@@ -286,30 +286,4 @@ static inline int ftGetFacingDirInt(Fighter* fp)
     }
 }
 
-static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
-{
-    return ftGetFacingDirInt(GET_FIGHTER(gobj));
-}
-
-/// @todo Fix naming.
-#define gmScriptEventCast(p_event, type) ((type*) p_event)
-#define gmScriptEventUpdatePtr(event, type)                                   \
-    (event = (void*) ((uintptr_t) event + 4))
-
-static inline CommandInfo* getCmdScript(Fighter* fp)
-{
-    return &fp->x3E4_fighterCmdScript;
-}
-
-static inline bool canUseCstick(Fighter* fp)
-{
-    /// Returns true if single-button mode is off,
-    /// and the held item allows using the C-stick.
-    if (!gm_8016B0FC() || it_8026B30C(fp->item_gobj) == 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 #endif

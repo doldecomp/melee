@@ -52,7 +52,7 @@ void fn_8010B2E8(Fighter_GObj* gobj)
 {
     ftKb_Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
-    fp->mv.kb.specialn_ms.cur_frame = 0;
+    fp->mv.ms.specialn.cur_frame = 0;
 }
 
 static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
@@ -294,8 +294,8 @@ void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
     } else {
         charge = (s32*) &da->fe.charge_iterations;
     }
-    fp->mv.kb.specialn_ms.cur_frame++;
-    if (fp->mv.kb.specialn_ms.cur_frame > (*charge * 30)) {
+    fp->mv.ms.specialn.cur_frame++;
+    if (fp->mv.ms.specialn.cur_frame > (*charge * 30)) {
         fp->cmd_vars[0] = 1;
         ftKb_SpecialNPe_8010C148(gobj);
     }
@@ -311,8 +311,8 @@ void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     } else {
         charge = &da->fe.charge_iterations;
     }
-    fp->mv.kb.specialn_ms.cur_frame++;
-    if (fp->mv.kb.specialn_ms.cur_frame > (s32) (*charge * 30)) {
+    fp->mv.ms.specialn.cur_frame++;
+    if (fp->mv.ms.specialn.cur_frame > (s32) (*charge * 30)) {
         fp->cmd_vars[0] = 1;
         ftKb_SpecialNPe_8010C1E8(gobj);
     }
@@ -437,7 +437,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
             if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
-                                       (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                       (fp->mv.ms.specialn.cur_frame / 30) *
                                            ms_da
                                                ->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, dmg, gobj);
@@ -472,7 +472,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
             if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
-                                       (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                       (fp->mv.ms.specialn.cur_frame / 30) *
                                            ms_da
                                                ->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, dmg, gobj);

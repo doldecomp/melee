@@ -97,6 +97,40 @@ struct plActionStats {
     /* +5BC */ u8 x5BC_b3 : 1;
 };
 
+struct pl_x8C0_t {
+    int x0;
+    struct {
+        u16 x0;
+        u8 x2;
+        u8 x3_b0 : 1;
+    } x4[5];
+};
+
+struct pl_x8D8_t {
+    int x0;
+    struct {
+        u32 x0;
+        u8 x4_b0 : 1;
+        u8 x4_b1 : 1;
+    } x4[5];
+};
+
+struct pl_x5EC_t {
+    u8 x0; ///< player slot
+    f32 x4;
+    u32 x8;
+    u32 xC;
+    struct {
+        float x0; ///< combo damage?
+        s16 x4;
+        u16 x6;
+        s16 x8;
+        int xC;
+        s16 x10;
+        u16 x12_b0 : 1;
+    } x10[6];
+};
+
 struct StaleMoveTable {
     /*   +0 */ int current_index;
     /*   +4 */ struct {
@@ -104,41 +138,13 @@ struct StaleMoveTable {
         u16 attack_instance;
     } StaleMoves[10];
     /*  +2C */ plActionStats total_attack_count_struct;
-    /* +5EC */ struct pl_x5EC_t {
-        u8 x0; ///< player slot
-        f32 x4;
-        u32 x8;
-        u32 xC;
-        struct {
-            float x0; ///< combo damage?
-            s16 x4;
-            u16 x6;
-            s16 x8;
-            int xC;
-            s16 x10;
-            u16 x12_b0 : 1;
-        } x10[6];
-    } x5EC;
+    /* +5EC */ struct pl_x5EC_t x5EC;
     /* +674 */ u32 x674[Pl_ItemLog_Terminate];
     /* +710 */ int x710[Pl_ItemLog_Terminate];
     /* +7AC */ int x7AC[Pl_ItemLog_Terminate];
     /* +848 */ int x848[30];
-    /* +8C0 */ struct pl_x8C0_t {
-        int x0;
-        struct {
-            u16 x0;
-            u8 x2;
-            u8 x3_b0 : 1;
-        } x4[5];
-    } x8C0;
-    /* +8D8 */ struct pl_x8D8_t {
-        int x0;
-        struct {
-            u32 x0;
-            u8 x4_b0 : 1;
-            u8 x4_b1 : 1;
-        } x4[5];
-    } x8D8;
+    /* +8C0 */ struct pl_x8C0_t x8C0;
+    /* +8D8 */ struct pl_x8D8_t x8D8;
     /* +904 */ unsigned int x904[215];
     /* +C60 */ float xC60;
     /* +C64 */ float xC64;

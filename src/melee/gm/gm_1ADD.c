@@ -17,20 +17,22 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 
+struct unkd4d0_8 {
+    struct unkd4d0_8* next;
+    struct unkd4d0_8* unk4;
+    int unk8;
+    int unkC;
+    float unk10;
+    float unk14;
+    u8 pad18[0x8];
+    HSD_GObj* unk20;
+    HSD_Text* unk24;
+};
+
 static struct unkd4d0 {
     struct unkd4d0* next;
     struct unkd4d0* unk4;
-    struct unkd4d0_8 {
-        struct unkd4d0_8* next;
-        struct unkd4d0_8* unk4;
-        int unk8;
-        int unkC;
-        float unk10;
-        float unk14;
-        u8 pad18[0x8];
-        HSD_GObj* unk20;
-        HSD_Text* unk24;
-    }* unk8;
+    struct unkd4d0_8* unk8;
     int unkC;
     int unk10;
     float unk14;

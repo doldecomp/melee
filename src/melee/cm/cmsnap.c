@@ -42,7 +42,7 @@ void cmSnap_80031640(HSD_GObj* arg0, int code)
     case CmSnapStatus_Unk2:
     case CmSnapStatus_Unk3:
     case CmSnapStatus_Unk4:
-        _p(status) += 1;
+        _p(status) = (int) _p(status) + 1;
         break;
     default:
         break;
