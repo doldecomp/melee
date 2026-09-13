@@ -1,18 +1,18 @@
 #include "random.h"
 
-u32 seed = 1;
-u32* seed_ptr = &seed;
+static u32 seed = 1;
+u32* HSD_RandSeedPtr = &seed;
 
 s32 HSD_Rand(void)
 {
-    *seed_ptr = *seed_ptr * 214013 + 2531011;
-    return *seed_ptr >> 0x10;
+    *HSD_RandSeedPtr = *HSD_RandSeedPtr * 214013 + 2531011;
+    return *HSD_RandSeedPtr >> 0x10;
 }
 
 f32 HSD_Randf(void)
 {
-    *seed_ptr = *seed_ptr * 214013 + 2531011;
-    return (f32) (*seed_ptr >> 0x10) / (1 << 16);
+    *HSD_RandSeedPtr = *HSD_RandSeedPtr * 214013 + 2531011;
+    return (f32) (*HSD_RandSeedPtr >> 0x10) / (1 << 16);
 }
 
 s32 HSD_Randi(s32 max_val)
@@ -22,8 +22,8 @@ s32 HSD_Randi(s32 max_val)
 
 void _HSD_RandForgetMemory(void* low, void* high)
 {
-    if (low <= (void*) seed_ptr && (void*) seed_ptr < high) {
-        seed_ptr = &seed;
+    if (low <= (void*) HSD_RandSeedPtr && (void*) HSD_RandSeedPtr < high) {
+        HSD_RandSeedPtr = &seed;
     }
     return;
 }

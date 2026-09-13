@@ -1,11 +1,12 @@
+#include <Runtime/platform.h>
+
 #include "gobj.h"
 #include "gobjproc.h"
 #include "memory.h"
 #include "objalloc.h"
-#include "Runtime/platform.h"
 
 static HSD_GObjLibInitDataType init_defaults = {
-    0x3F, 0x3F, 2, NULL, NULL,
+    HSD_GOBJ_PLINK_MAX, HSD_GOBJ_GX_LINK_MAX, HSD_GOBJPROC_PRI_MAX, NULL, NULL,
 };
 
 void HSD_GObjSetInitDefaults(HSD_GObjLibInitDataType* arg0)

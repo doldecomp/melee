@@ -353,7 +353,7 @@ void DevText_AddToList(DevText** list, DevText* text)
     }
 }
 
-void DevText_Show(HSD_GObj* gobj, DevText* text)
+void DevText_Show(UNUSED HSD_GObj* gobj, DevText* text)
 {
     DevText_AddToList(&devtext_drawlist, text);
 }
