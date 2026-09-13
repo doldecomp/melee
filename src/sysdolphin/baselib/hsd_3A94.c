@@ -92,11 +92,16 @@ typedef struct CardContext {
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 4D1148 */ extern u32 hsd_804D1148[0x80][0x9];
 /* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
+/// Command ring head (next command to run) and tail (next free slot).
 /* 4D7980 */ extern volatile s32 hsd_804D7980;
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
+/// Result of the request in progress: negative = CARD error, 1 = data
+/// verified so the queued writes are skipped, 2 = verify mismatch.
 /* 4D7988 */ extern s32 hsd_804D7988;
 /* 4D798C */ extern s32 hsd_804D798C;
+/// Ring tail saved before queueing a request; -1 when nothing to roll back.
 /* 4D7998 */ extern s32 hsd_804D7998;
+/// 0 = running commands, 1 = async CARD call in flight, 2 = idle.
 /* 4D799C */ extern s32 hsd_804D799C;
 /// .sbss globals emit in reverse declaration order.
 /* 4D79C8 */ u8 hsd_804D79C8;
@@ -947,9 +952,9 @@ void hsd_803AAA48(void)
         case 0:
             if (ctx->req_type != 0) {
                 if (ctx->req_type == 3) {
-                    s32 file = ctx->callback_arg;
-                    s32 blocks_before = fn_803AC6B8(*state_ptr, file);
-                    s32 file_blocks = fn_803AC634(*state_ptr, file);
+                    s32 file_idx = ctx->callback_arg;
+                    s32 blocks_before = fn_803AC6B8(*state_ptr, file_idx);
+                    s32 file_blocks = fn_803AC634(*state_ptr, file_idx);
                     s32 total = fn_803AC7DC(*state_ptr);
                     s32 map[64];
                     s32 j;
@@ -5283,9 +5288,9 @@ void hsd_803B24E4(s32* ctx, int chan, int sector_size, void* work_buf)
     ((CardState*) ctx)->sector_buf = work_buf;
 }
 
-static inline CardRequest* hsd_803B2550_inline(u8* arg0, s32 arg1)
+static inline CardRequest* hsd_803B2550_inline(u8* base, s32 idx)
 {
-    return &((CardRequest*) (arg0 + 0x1210))[arg1];
+    return &((CardRequest*) (base + 0x1210))[idx];
 }
 
 int hsd_803B2550(s32* state, const char* filename, void (*callback)(int, int))
