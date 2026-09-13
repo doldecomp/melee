@@ -628,6 +628,13 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     return 0;
 }
 
+static inline void psEnableTexture(HSD_Particle* pp, u8* const* textures)
+{
+    if (textures != NULL && textures[pp->poseNum] != NULL) {
+        pp->kind |= DispTexture;
+    }
+}
+
 static inline void psReadFloat(u8** stream)
 {
     u8* p = *stream;
@@ -802,15 +809,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 
                     tga = psTexGroupArray[bank];
                     texGrp = tga[tgIdx];
-                    if (texGrp != NULL
-#ifdef MUST_MATCH
-                        && texGrp->texTable != NULL
-#endif
-                    )
-                    {
-                        if (texGrp->texTable[pp->poseNum] != NULL) {
-                            pp->kind |= DispTexture;
-                        }
+                    if (texGrp != NULL) {
+                        psEnableTexture(pp, texGrp->texTable);
                     }
                 }
                 break;
@@ -1975,15 +1975,8 @@ void* hsd_8039930C(HSD_Particle* pp, HSD_Particle* prev)
 
                         tga = psTexGroupArray[bank];
                         texGrp = tga[tgIdx];
-                        if (texGrp != NULL
-#ifdef MUST_MATCH
-                            && texGrp->texTable != NULL
-#endif
-                        )
-                        {
-                            if (texGrp->texTable[pp->poseNum] != NULL) {
-                                pp->kind |= DispTexture;
-                            }
+                        if (texGrp != NULL) {
+                            psEnableTexture(pp, texGrp->texTable);
                         }
                     }
                 }
