@@ -1,13 +1,9 @@
 #include "hsd_3A94.h"
 
-#include "hsd_3B2B.h"
-#include "hsd_3B2E.h"
-
-#ifdef MUST_MATCH
-#include <stddef.h>
-#endif
 #include <string.h>
 
+#include "hsd_3B2B.h"
+#include "hsd_3B2E.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
@@ -51,16 +47,6 @@ typedef union CardCmdBuf {
     CardCmd cmd;
     s32 words[10];
 } CardCmdBuf;
-
-#ifdef MUST_MATCH
-typedef union CardCmdStorage {
-    CardCmd command;
-    s32 words[9];
-} CardCmdStorage;
-
-#define MATCH_CARD_CMD_FIELD(storage, member, adjustment)                     \
-    storage.words[(offsetof(CardCmd, member) - adjustment) / sizeof(s32)]
-#endif
 
 typedef struct HsdCmdEntry {
     s32 type;
@@ -2556,8 +2542,8 @@ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
     return 0;
 }
 
-static inline s32 queueCardCommand2First(CardState* state, s32 block,
-                                         void* data, s32 length, s32 offset)
+static inline s32 queueCardReadCommand(CardState* state, s32 block, void* data,
+                                       s32 length, s32 offset)
 {
     CardCmd command;
 
@@ -2569,38 +2555,6 @@ static inline s32 queueCardCommand2First(CardState* state, s32 block,
     command.x20 = length;
     command.x1C = offset;
     return fn_803AC168((s32*) &command);
-}
-
-static inline s32 queueCardCommand2Final(CardState* state, s32 block,
-                                         void* data, s32 length, s32 offset)
-{
-#ifdef MUST_MATCH
-    CardCmdStorage storage;
-
-    /// @todo MWCC colors @c storage at 0x60(r1), but the original command is
-    /// at 0x44(r1). A normal local @c CardCmd matches every instruction except
-    /// these stack displacements. This still addresses before the C object;
-    /// reproduce that stack coloring and remove the matching-only adjustment.
-    MATCH_CARD_CMD_FIELD(storage, type, 0x1C) = 2;
-    MATCH_CARD_CMD_FIELD(storage, state, 0x1C) = (s32) state;
-    MATCH_CARD_CMD_FIELD(storage, x10, 0x1C) = block;
-    MATCH_CARD_CMD_FIELD(storage, x14, 0x1C) = 0;
-    MATCH_CARD_CMD_FIELD(storage, x18, 0x1C) = (s32) data;
-    MATCH_CARD_CMD_FIELD(storage, x20, 0x1C) = length;
-    MATCH_CARD_CMD_FIELD(storage, x1C, 0x1C) = offset;
-    return fn_803AC168((s32*) ((u8*) storage.words - 0x1C));
-#else
-    CardCmd command;
-
-    command.type = 2;
-    command.state = state;
-    command.x10 = block;
-    command.x14 = 0;
-    command.x18 = data;
-    command.x20 = length;
-    command.x1C = offset;
-    return fn_803AC168((s32*) &command);
-#endif
 }
 
 static inline s32 calculateDataBlockSize(CardState* state, s32 file_idx,
@@ -2637,12 +2591,13 @@ static inline s32 calculateFileBlockCount(CardState* state, s32 file_idx)
     }
 }
 
-static inline s32 retryCardRead(CARDFileInfo* info, s32 retries, void* buffer,
-                                s32 length, s32 offset)
+static inline s32 retryCardRead(CARDFileInfo* info, void* buffer, s32 length,
+                                s32 offset)
 {
     s32 result;
+    s32 retries;
 
-    for (; retries < 10; retries++) {
+    for (retries = 0; retries < 10; retries++) {
         result = CARDRead(info, buffer, length, offset);
         if (result != -1) {
             break;
@@ -2668,81 +2623,60 @@ static inline void cancelQueuedCardCommands(CardBufEntry* entries)
     }
 }
 
-static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
-                                      s32 size)
+static inline s32 queueCardClearCommand(CardState* state, u8* dst, s32 size)
 {
-#ifdef MUST_MATCH
-    CardCmdStorage storage;
-
-    /// @todo MWCC colors @c storage at 0xC4(r1), but the original command is
-    /// at 0x68(r1). A normal local @c CardCmd matches every instruction except
-    /// these stack displacements. This still addresses before the C object;
-    /// reproduce that stack coloring and remove the matching-only adjustment.
-    MATCH_CARD_CMD_FIELD(storage, type, 0x5C) = 4;
-    MATCH_CARD_CMD_FIELD(storage, state, 0x5C) = (s32) state;
-    MATCH_CARD_CMD_FIELD(storage, x10, 0x5C) = 0;
-    MATCH_CARD_CMD_FIELD(storage, x14, 0x5C) = 0;
-    MATCH_CARD_CMD_FIELD(storage, x18, 0x5C) = (s32) dst;
-    MATCH_CARD_CMD_FIELD(storage, x20, 0x5C) = size;
-    MATCH_CARD_CMD_FIELD(storage, x1C, 0x5C) = 0;
-    MATCH_CARD_CMD_FIELD(storage, x8, 0x5C) = 0;
-    return fn_803AC168((s32*) ((u8*) storage.words - 0x5C));
-#else
     CardCmd command;
 
     command.type = 4;
     command.state = state;
     command.x10 = 0;
     command.x14 = 0;
-    command.x18 = (void*) dst;
+    command.x18 = dst;
     command.x20 = size;
     command.x1C = 0;
     command.x8 = 0;
     return fn_803AC168((s32*) &command);
-#endif
 }
 
-static inline s32 queueDataBlockFirst(CardState* state, s32 block_idx, u8* dst,
-                                      s32 size)
+static inline s32 queueClearDataBlock(CardState* state, u8* dst, s32 size)
 {
-    return queueCardCommand2First(state, block_idx, dst, size,
-                                  fn_803ACBE8(state, block_idx));
+    return size == 0 ? 0 : queueCardClearCommand(state, dst, size);
 }
 
-static inline s32 queueDataBlockFinal(CardState* state, s32 block_idx, u8* dst,
-                                      s32 size)
-{
-    return queueCardCommand2Final(state, block_idx, dst, size,
-                                  fn_803ACBE8(state, block_idx));
-}
-
-static inline s32 cardDataBlockOffset(CardState* state, u32 sector_size,
+static inline s32 cardDataBlockOffset(const CardState* state, u32 sector_size,
                                       s32 data_block)
 {
+    u32 temp = state->x24 + sector_size;
+    u32 idx;
+    temp = (temp + 0x2F) / sector_size;
+    idx = temp - 1;
+    idx = data_block + idx;
+    return sector_size * idx;
+}
+
+static inline int queueReadDataBlock(CardState* state, s32 block_idx, u8* dst,
+                                     s32 size)
+{
+    u32 sector_size = state->x8;
     u32 temp = state->x24 + sector_size;
     u32 num = temp + 0x2F;
     u32 idx;
 
     temp = num / sector_size;
     idx = temp - 1;
-    idx = data_block + idx;
-    return sector_size * idx;
+    idx = block_idx + idx;
+    return queueCardReadCommand(state, block_idx, dst, size,
+                                sector_size * idx);
 }
 
 static inline s32 readCardDataBlockFirst(CardState* state, u32 sector_size,
                                          s32 data_block, u8* dst, s32 length)
 {
-    s32 offset;
-    u8* buf;
-    s32 retries;
+    s32 offset = cardDataBlockOffset(state, sector_size, data_block);
+    u8* buf = state->x0;
     s32 read_ofs;
-    int result;
+    int result = retryCardRead(&state->file_info, buf, sector_size, offset);
 
-    offset = cardDataBlockOffset(state, sector_size, data_block);
-    buf = state->x0;
-    retries = 0;
-    result =
-        retryCardRead(&state->file_info, retries, buf, sector_size, offset);
     if (result < 0) {
         return result;
     }
@@ -2798,11 +2732,6 @@ static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
     return 0;
 }
 
-static inline s32 loadCardDataBlock(s32 data_block)
-{
-    return data_block;
-}
-
 #ifdef __MWERKS__
 #pragma opt_loop_invariants off
 #endif
@@ -2824,7 +2753,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
     s32 file_size;
     s32 callback_seq;
 
-    PAD_STACK(8);
+    PAD_STACK(44);
 
     callback_seq = 0;
     if (arg3 == 0) {
@@ -2903,13 +2832,11 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
         chunk = calculateDataBlockSize(arg0, arg1, i);
 
         if (remaining > chunk) {
+            s32 data_block = block_map[i];
             u32 sector_size;
-            s32 data_block;
-            data_block = loadCardDataBlock(block_map[i]);
             if (data_block >= 0) {
                 if (arg3 != 0) {
-                    result = blocks_before =
-                        queueDataBlockFirst(arg0, data_block, dst, chunk);
+                    result = queueReadDataBlock(arg0, data_block, dst, chunk);
                     if (result < 0) {
                         cancelQueuedCardCommands(entries);
                         return result;
@@ -2927,11 +2854,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
                     }
                 }
             } else if (arg3 != 0) {
-                if (chunk == 0) {
-                    result = 0;
-                } else {
-                    result = queueClearDataBlock(arg0, dst, chunk);
-                }
+                result = queueClearDataBlock(arg0, dst, chunk);
                 if (result < 0) {
                     cancelQueuedCardCommands(entries);
                     return result;
@@ -2943,12 +2866,12 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
             remaining -= chunk;
             dst += chunk;
         } else {
+            s32 data_block = block_map[i];
             u32 sector_size;
-            s32 data_block = loadCardDataBlock(block_map[i]);
             if (data_block >= 0) {
                 if (arg3 != 0) {
                     result =
-                        queueDataBlockFinal(arg0, data_block, dst, remaining);
+                        queueReadDataBlock(arg0, data_block, dst, remaining);
                     if (result < 0) {
                         cancelQueuedCardCommands(entries);
                         return result;
