@@ -7,6 +7,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 
 ItemStateTable it_803F6C98[] = {
     { 0, NULL, NULL, NULL },
@@ -57,13 +58,7 @@ Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, Fighter_Part sfx, u32 vars,
     spawn.kind = It_Kind_Kirby_Hammer;
     spawn.prev_pos = *pos;
     it_8026BB68((Item_GObj*) parent, &spawn.pos);
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnCommonFields(&spawn, parent, dir, true);
 
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {

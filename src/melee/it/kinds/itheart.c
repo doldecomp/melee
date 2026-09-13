@@ -45,7 +45,8 @@ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
     item_gobj = NULL;
     if (gobj != NULL) {
         spawn.kind = It_Kind_Heart;
-        Item_InitSpawnOnPlane(&spawn, NULL, pos, -1.0F);
+        Item_InitSpawnPosition(&spawn, pos, true);
+        Item_InitSpawnCommonFields(&spawn, NULL, -1.0F, true);
         item_gobj = Item_80268B18(&spawn);
     }
     if (item_gobj != NULL) {

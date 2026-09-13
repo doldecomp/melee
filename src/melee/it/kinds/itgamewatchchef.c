@@ -27,9 +27,7 @@ HSD_GObj* it_802C837C(Item_GObj* parent, Vec3* pos, enum_t kind, u32 arg3,
     PAD_STACK(4);
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, parent, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;

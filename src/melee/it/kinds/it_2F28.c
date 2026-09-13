@@ -14,6 +14,7 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itzako.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
@@ -55,9 +56,7 @@ float it_802F295C(HSD_GObj* owner_gobj, itUnk2_DatAttrs* attr)
 
     var_f31 = 0.0f;
     spawn.kind = It_Kind_Unk2;
-    spawn.prev_pos = attr->pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, &attr->pos, true);
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;
     spawn.vel = attr->vel;

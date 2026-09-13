@@ -11,6 +11,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -30,9 +31,7 @@ void it_802F2F34(HSD_GObj* gobj, itYoshiEggLay_DatAttrs* attr)
     SpawnItem spawn;
 
     spawn.kind = attr->kind;
-    spawn.prev_pos = attr->pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, &attr->pos, true);
     spawn.facing_dir = attr->float2;
     spawn.x3C_damage = 0;
     spawn.vel = attr->vel;

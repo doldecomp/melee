@@ -36,7 +36,8 @@ HSD_GObj* it_80291BE0(Vec3* arg0)
     Item_GObj* gobj;
 
     spawn.kind = It_Kind_S_Scope;
-    Item_InitSpawn(&spawn, NULL, arg0, -1.0f);
+    Item_InitSpawnPosition(&spawn, arg0, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     gobj = Item_80268B5C(&spawn);
     if (gobj != NULL) {
         it_80292030(gobj);

@@ -34,7 +34,8 @@ Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
 
     if (parent != NULL) {
         spawn.kind = It_Kind_GameWatch_Rescue;
-        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, parent, arg1, farg0);
+        Item_InitSpawnPosition(&spawn, arg1, true);
+        Item_InitSpawnCommonFields(&spawn, parent, farg0, false);
         result = Item_80268B18(&spawn);
         if (result != NULL) {
             temp_r6 = result->user_data;

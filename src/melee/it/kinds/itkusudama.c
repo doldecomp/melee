@@ -20,6 +20,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F59F8[] = {
@@ -48,15 +49,8 @@ HSD_GObj* it_802896CC(Vec3* arg0)
     Item_GObj* gobj;
 
     spawn.kind = It_Kind_Kusudama;
-    spawn.prev_pos = *arg0;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, arg0, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     gobj = Item_80268B5C(&spawn);
     if (gobj != NULL) {
         it_8028A190(gobj);

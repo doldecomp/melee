@@ -11,6 +11,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -63,9 +64,7 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
         ip = GET_ITEM(gobj);
 
         spawn.kind = It_Kind_Egg;
-        spawn.prev_pos = *pos;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, pos, true);
         spawn.facing_dir = dir;
         spawn.x3C_damage = 0;
         spawn.vel = *vel;

@@ -57,7 +57,8 @@ Item_GObj* itSword_Spawn(Vec3* pos)
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_Sword;
-    Item_InitSpawnOnPlane(&spawn, NULL, pos, -1.0f);
+    Item_InitSpawnPosition(&spawn, pos, true);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     {
         Item_GObj* gobj = Item_80268B5C(&spawn);
         if (gobj != NULL) {

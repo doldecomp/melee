@@ -30,7 +30,8 @@ Item_GObj* it_80284854(Vec3* pos)
 
     pos->z = 0.0F;
     spawn.kind = It_Kind_Bat;
-    Item_InitSpawn(&spawn, NULL, pos, -1.0F);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0F, true);
     item_gobj = Item_80268B5C(&spawn);
 
     if (item_gobj != NULL) {

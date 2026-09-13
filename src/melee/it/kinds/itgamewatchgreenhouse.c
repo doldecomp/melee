@@ -25,7 +25,8 @@ HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj* parent, Vec3* pos,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Greenhouse;
-    Item_InitSpawn(&spawn, parent, pos, dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent, dir, true);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);

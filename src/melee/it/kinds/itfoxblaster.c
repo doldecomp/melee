@@ -491,8 +491,9 @@ Item_GObj* it_802AE8A8(f32 facing_dir, Fighter_GObj* fighter_gobj, Vec3* arg2,
 
     if (fighter_gobj != NULL) {
         spawn.kind = it_kind;
-        Item_InitSpawnOnPlaneNoInitialCollision(
-            &spawn, (HSD_GObj*) fighter_gobj, arg2, facing_dir);
+        Item_InitSpawnPosition(&spawn, arg2, true);
+        Item_InitSpawnCommonFields(&spawn, (HSD_GObj*) fighter_gobj,
+                                   facing_dir, false);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets
@@ -528,17 +529,10 @@ Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
         spawn.kind = it_kind;
 
         ftLib_80086644(owner_gobj, &sp18);
-        spawn.prev_pos = sp18;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, &sp18, true);
 
-        spawn.facing_dir = ftLib_800865C0(owner_gobj);
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-        spawn.x0_parent_gobj = owner_gobj;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnCommonFields(&spawn, owner_gobj,
+                                   ftLib_800865C0(owner_gobj), false);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets

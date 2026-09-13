@@ -64,7 +64,8 @@ Item_GObj* it_802B19AC(Fighter_GObj* parent_gobj, Vec3* cur_pos,
     SpawnItem spawn;
 
     spawn.kind = kind;
-    Item_InitSpawnOnPlane(&spawn, parent_gobj, cur_pos, facing_dir);
+    Item_InitSpawnPosition(&spawn, cur_pos, true);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
 
     {
         Item_GObj* gobj = Item_80268B18(&spawn);

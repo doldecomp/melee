@@ -22,7 +22,8 @@ Item_GObj* it_802B1C60(HSD_GObj* parent, Vec3* pos, f32 dir)
     Item_GObj* item_gobj;
 
     spawn.kind = It_Kind_Seak_Vanish;
-    Item_InitSpawn(&spawn, parent, pos, dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent, dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         it_802B1D40(item_gobj, parent);

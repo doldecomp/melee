@@ -13,6 +13,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -66,16 +67,8 @@ Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
     Item_GObj* item_gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, owner, pos);
+    Item_InitSpawnCommonFields(&spawn, owner, facing_dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);

@@ -16,6 +16,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -43,13 +44,7 @@ void itEvYoshiEgg_Spawn(Vec3* pos)
     spawn.kind = It_Kind_EvYoshiEgg;
     spawn.prev_pos = *pos;
     spawn.pos = *pos;
-    spawn.facing_dir = 1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnCommonFields(&spawn, NULL, 1.0f, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         it = GET_ITEM(gobj);

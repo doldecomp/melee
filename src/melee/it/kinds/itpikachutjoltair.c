@@ -90,7 +90,8 @@ Item_GObj* it_802B4224(HSD_GObj* owner, Item_GObj* gobj, Vec3* pos, s32 kind,
     PAD_STACK(8);
 
     spawn.kind = kind;
-    Item_InitSpawnOnPlane(&spawn, owner, pos, facing_dir);
+    Item_InitSpawnPosition(&spawn, pos, true);
+    Item_InitSpawnCommonFields(&spawn, owner, facing_dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);

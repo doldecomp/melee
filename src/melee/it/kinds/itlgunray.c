@@ -30,8 +30,8 @@ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_L_Gun_Ray;
-    Item_InitRaySpawnPosition(&spawn, owner_gobj, pos);
-    Item_InitRaySpawnFields(&spawn, owner_gobj, facing_dir);
+    Item_InitSpawnPositionFromParent(&spawn, owner_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, owner_gobj, facing_dir, true);
     {
         Item_GObj* gobj = Item_80268B18(&spawn);
         if (gobj != NULL) {
