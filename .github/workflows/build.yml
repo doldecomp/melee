@@ -104,12 +104,23 @@ jobs:
             done < <(ninja diff)
 
             if [ "$result" -eq 0 ]; then
-                set +e
                 python .github/scripts/check_complete.py "$report"
                 set -e
             fi
 
+            set -e
+            ninja apply
+            git diff --exit-code
+
             exit "$result"
+          ;;
+          'test')
+            config_args=$(printf '%s ' \
+              '--linkable' \
+              "$config_args")
+
+            run_configure
+            ninja
           ;;
           'clang')
             config_args=""
