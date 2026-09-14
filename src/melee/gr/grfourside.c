@@ -15,6 +15,7 @@
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/cm/types.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
@@ -177,8 +178,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
 
 void grFourside_801F2EBC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFourside_801F2EE8(Ground_GObj* arg)
@@ -192,8 +192,7 @@ void grFourside_801F2EF4(Ground_GObj* arg) {}
 
 void grFourside_801F2EF8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFourside_801F2F24(Ground_GObj* arg)

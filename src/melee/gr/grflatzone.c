@@ -7,6 +7,7 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/kinds/ittools.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00F9.h>
@@ -173,8 +174,7 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 
 void grFlatzone_80217030(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFlatzone_8021705C(Ground_GObj* gobj)

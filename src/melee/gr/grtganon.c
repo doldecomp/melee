@@ -7,7 +7,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <melee/gr/inlines.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -120,8 +119,7 @@ bool grTGanon_802248F8(Ground_GObj* gobj)
 
 void grTGanon_80224900(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTGanon_80224934(Ground_GObj* gobj)

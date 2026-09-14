@@ -33,6 +33,18 @@ static inline void Ground_JObjInline1(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
+static inline void Ground_AnimateMap(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
+
+static inline void Ground_ProcTargetStage(Ground_GObj* gobj)
+{
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
+}
+
 /// @todo Call sites have a lot of duplicate code
 static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
                                               StageCallbacks* callbacks)

@@ -15,6 +15,7 @@
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/kinds/itkyasarin.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -260,8 +261,7 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
 
 void grInishie2_801FCDC8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grInishie2_801FCDF4(Ground_GObj* gobj)

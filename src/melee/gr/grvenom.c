@@ -9,6 +9,7 @@
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
+#include <melee/gr/inlines.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/kinds/itarwinglaser.h>
@@ -596,8 +597,7 @@ static int grVe_803E5530[53] = {
 
 void grVenom_80203F98(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grVenom_80203FC4(Ground_GObj* arg)

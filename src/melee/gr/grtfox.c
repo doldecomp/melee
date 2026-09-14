@@ -1,13 +1,11 @@
 #include "grtfox.h"
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/gr/inlines.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -101,8 +99,7 @@ HSD_GObj* grTFox_80220C2C(int arg0)
 
 void grTFox_80220D14(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTFox_80220D40(Ground_GObj* gobj)
@@ -126,8 +123,7 @@ bool grTFox_80220DA0(Ground_GObj* gobj)
 
 void grTFox_80220DA8(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTFox_80220DDC(Ground_GObj* gobj) {}

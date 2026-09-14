@@ -17,6 +17,7 @@
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
@@ -313,8 +314,7 @@ void grGreens_8021390C(Ground_GObj* arg) {}
 
 void grGreens_80213910(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grGreens_8021393C(Ground_GObj* arg)
@@ -328,8 +328,7 @@ void grGreens_80213948(Ground_GObj* arg) {}
 
 void grGreens_8021394C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grGreens_80213978(Ground_GObj* arg)

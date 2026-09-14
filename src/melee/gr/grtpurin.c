@@ -6,7 +6,6 @@
 #include "types.h"
 #include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -139,8 +138,7 @@ void grTPurin_80223388(Ground_GObj* gobj)
             }
         }
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTPurin_80223478(Ground_GObj* gobj)

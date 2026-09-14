@@ -9,9 +9,9 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include <melee/ft/ftlib.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -122,8 +122,7 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
 
 void grYorster_80202124(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grYorster_80202150(Ground_GObj* gobj)
@@ -174,8 +173,7 @@ void grYorster_80202254(Ground_GObj* gobj)
     if (gp->u.yorster.xC4 == 0) {
         grYorster_8020266C(gobj);
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grYorster_802022A0(HSD_GObj* gobj) {}

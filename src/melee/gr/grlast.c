@@ -12,6 +12,7 @@
 #include "stage.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
@@ -288,8 +289,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
 
 static void grLast_8021A8E0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grLast_8021A90C(Ground_GObj* gobj)
@@ -319,8 +319,7 @@ static void grLast_8021A96C(Ground_GObj* gobj) {}
 
 static void grLast_8021A970(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grLast_8021A99C(Ground_GObj* gobj)

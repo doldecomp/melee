@@ -1517,8 +1517,7 @@ void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
 void grCorneria_801DFBF0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grCorneria_801DFC1C(Ground_GObj* arg)

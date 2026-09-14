@@ -16,6 +16,7 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/debug.h>
@@ -188,8 +189,7 @@ Ground_GObj* setupStageCallbacks(int gobj_id)
 
 void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool stageGObj0_Callback1(Ground_GObj* gobj)

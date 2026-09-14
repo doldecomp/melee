@@ -5,14 +5,12 @@
 #include <melee/lb/forward.h>
 #include <melee/mp/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/gr/inlines.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -135,8 +133,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
 
 void grTMewtwo_8022236C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTMewtwo_80222398(Ground_GObj* gobj)
@@ -160,8 +157,7 @@ bool grTMewtwo_802223F8(Ground_GObj* gobj)
 
 void grTMewtwo_80222400(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTMewtwo_80222434(Ground_GObj* gobj) {}

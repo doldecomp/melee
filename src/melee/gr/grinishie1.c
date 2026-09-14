@@ -12,11 +12,11 @@
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itdrop.h>
 #include <melee/it/itspawn.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
@@ -291,8 +291,7 @@ struct block_table_struct grI1_803E49B8[BLOCK_COUNT] = {
 
 void grInishie1_801FAAA0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grInishie1_801FAACC(Ground_GObj* gobj)
@@ -325,8 +324,7 @@ void grInishie1_801FAB68(Ground_GObj* gobj)
     grInishie1_801FB3F0(gobj);
     grInishie1_801FC664(gobj);
     grInishie1_801FCB10(gobj);
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grInishie1_801FABB0(Ground_GObj* gobj) {}

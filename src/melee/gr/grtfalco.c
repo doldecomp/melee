@@ -10,7 +10,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <melee/gr/inlines.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -149,8 +148,7 @@ bool stageGObj2_Callback1(Ground_GObj* arg0)
 
 void stageGObj2_GObjProc(Ground_GObj* arg0)
 {
-    lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_ProcTargetStage(arg0);
 }
 
 void stageGObj2_Callback3(Ground_GObj* arg0) {}

@@ -16,7 +16,6 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbfile.h>
 #include <melee/lb/lblanguage.h>
@@ -341,8 +340,7 @@ void grStadium_801D1520(Ground_GObj* gobj)
     if (!gp->u.stadium.xC4_b0) {
         grStadium_801D4548(gobj);
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grStadium_801D156C(Ground_GObj* gobj) {}
@@ -599,8 +597,7 @@ void grStadium_801D1D84(Ground_GObj* gobj)
 
 void grStadium_801D1DE4(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grStadium_801D1E10(Ground_GObj* gobj)
