@@ -8,6 +8,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -15,7 +16,6 @@
 #include <melee/it/itcoll.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/jobj.h>
 

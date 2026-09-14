@@ -8,9 +8,9 @@
 #include "gmscene.h"
 #include "gmtou_0.h"
 #include "gmtoulib.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/pad.h>
-#include <melee/gm/inlines.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>

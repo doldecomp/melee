@@ -1,6 +1,14 @@
 repos:
 - repo: local
   hooks:
+    - id: replace-includes
+      name: replace-includes
+      entry: python tools/replace-includes.py
+      language: system
+      types_or: [c]
+      files: ^src/
+      pass_filenames: true
+      require_serial: false
     - id: style-check
       name: style-check
       entry: python tools/check/main.py
@@ -8,7 +16,7 @@ repos:
       language: system
       types_or: [c]
       pass_filenames: true
-      require_serial: true
+      require_serial: false
 - repo: https://github.com/cpp-linter/cpp-linter-hooks
   rev: v1.6.0
   hooks:
@@ -23,9 +31,8 @@ repos:
       require_serial: true
     - id: clang-format
       args: [--version=22.1.8]
-      types_or: [file]
-      files: \.(c|h)$
-      require_serial: true
+      types_or: [c]
+      require_serial: false
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: 3.11.1
   hooks:

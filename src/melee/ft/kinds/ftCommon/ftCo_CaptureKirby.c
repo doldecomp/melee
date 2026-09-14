@@ -2,11 +2,11 @@
 
 #include <melee/ft/forward.h>
 
+#include "inlines.h"
 #include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>

@@ -15,6 +15,7 @@
 
 #include "forward.h"
 #include "ftpickupitem.h"
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
@@ -24,7 +25,6 @@
 #include <melee/ft/ftcpuattack.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftPopo/ftpopospeciallw.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>

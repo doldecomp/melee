@@ -12,7 +12,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itdrop.h>
 #include <melee/it/itspawn.h>

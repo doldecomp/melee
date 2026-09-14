@@ -7,13 +7,13 @@
 #include "ftcrazyhandbackairplane2.h"
 #include "ftcrazyhandbackairplane3.h"
 #include "ftcrazyhandcapturedamagecrazyhand.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCrazyHand/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>

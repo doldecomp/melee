@@ -9,7 +9,6 @@
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>

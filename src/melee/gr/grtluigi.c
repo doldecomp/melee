@@ -4,7 +4,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {

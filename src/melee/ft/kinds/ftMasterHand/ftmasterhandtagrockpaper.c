@@ -6,6 +6,7 @@
 
 #include "ftmasterhandthrownmasterhand.h"
 #include "ftmasterhandwait12.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -15,7 +16,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
-#include <melee/ft/kinds/ftMasterHand/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/pl/player.h>
 

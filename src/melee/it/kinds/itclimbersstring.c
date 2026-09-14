@@ -8,7 +8,6 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

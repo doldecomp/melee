@@ -16,7 +16,6 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
-#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/debug.h>

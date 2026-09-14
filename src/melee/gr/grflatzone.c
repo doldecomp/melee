@@ -7,7 +7,6 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/kinds/ittools.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00F9.h>

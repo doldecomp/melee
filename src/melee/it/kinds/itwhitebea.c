@@ -3,6 +3,7 @@
 #include <math.h> // IWYU pragma: keep
 #include <placeholder.h>
 
+#include "inlines.h"
 #include "itfreeze.h"
 #include <melee/gr/gricemt.h>
 #include <melee/gr/stage.h>
@@ -15,7 +16,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/random.h>

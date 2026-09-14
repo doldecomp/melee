@@ -5,11 +5,11 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftcrazyhandwait10.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCrazyHand/inlines.h>
 #include <melee/ft/kinds/ftMasterHand/types.h>
 #include <melee/ft/types.h>
 

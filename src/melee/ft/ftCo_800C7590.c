@@ -5,13 +5,13 @@
 #include "ftCo_800C7434.h"
 #include "ftCo_800C78B0.h"
 #include "ftcommon.h"
+#include "inlines.h"
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Damage.h"
 #include "kinds/ftCommon/ftCo_DamageFall.h"
+#include "kinds/ftCommon/inlines.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itleadead.h>
 #include <melee/pl/player.h>
 

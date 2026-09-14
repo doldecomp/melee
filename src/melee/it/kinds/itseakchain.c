@@ -19,7 +19,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>

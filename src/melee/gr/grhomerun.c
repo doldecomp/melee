@@ -14,7 +14,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>

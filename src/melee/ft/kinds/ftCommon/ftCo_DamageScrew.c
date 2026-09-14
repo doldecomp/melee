@@ -8,11 +8,11 @@
 
 #include "forward.h"
 #include "ftCo_FallSpecial.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 bool ftCo_800D2FA4(Fighter_GObj* gobj)

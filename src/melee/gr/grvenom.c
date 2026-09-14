@@ -9,7 +9,6 @@
 #include "inlines.h"
 #include "stage.h"
 #include "types.h"
-#include <melee/gr/inlines.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/kinds/itarwinglaser.h>

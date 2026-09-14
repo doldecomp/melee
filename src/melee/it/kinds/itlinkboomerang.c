@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecials.h>
@@ -13,7 +14,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/mtx.h>

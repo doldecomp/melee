@@ -21,6 +21,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_JumpAerial.h"
 #include "ftCo_SpecialAir.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -31,7 +32,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lb_00B0.h>

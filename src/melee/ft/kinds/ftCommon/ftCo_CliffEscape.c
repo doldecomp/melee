@@ -3,9 +3,9 @@
 #include <Runtime/platform.h>
 
 #include "ftCo_CliffClimb.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 /// @todo Shared code with #ftCo_8009AEA4.
