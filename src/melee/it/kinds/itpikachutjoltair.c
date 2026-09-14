@@ -96,10 +96,7 @@ Item_GObj* it_802B4224(HSD_GObj* owner, Item_GObj* gobj, Vec3* pos, s32 kind,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         HSD_JObj* jobj = item_gobj->hsd_obj;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDD4_itemVar.pikachujoltair.xDD8 = gobj;
         ip->xDD4_itemVar.pikachujoltair.xDF4 = 0;
         HSD_JObjSetRotationY(jobj, (M_PI_2 * ip->facing_dir));

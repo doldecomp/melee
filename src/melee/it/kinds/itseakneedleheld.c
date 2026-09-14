@@ -72,8 +72,7 @@ Item_GObj* it_802B19AC(Fighter_GObj* parent_gobj, Vec3* cur_pos,
         if (gobj != NULL) {
             Item* ip = GET_ITEM(gobj);
             PAD_STACK(2 * 4);
-            ip->xDAC_itcmd_var0 = ip->xDB0_itcmd_var1 = ip->xDB4_itcmd_var2 =
-                ip->xDB8_itcmd_var3 = 0;
+            Item_ClearCmdVars(ip);
             ip->xDCC_flag.b3 = false;
             ip->xDD4_itemVar.seakneedleheld.owner = parent_gobj;
             Item_8026AB54(gobj, parent_gobj, part);

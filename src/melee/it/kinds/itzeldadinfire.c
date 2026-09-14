@@ -83,8 +83,7 @@ Item_GObj* it_802C3BAC(Item_GObj* gobj, Vec* vec, float facing_dir, float arg3)
         Item* i = GET_ITEM(n);
         ItZeldaDinFire_ItemVars* attrs =
             i->xC4_article_data->x4_specialAttributes;
-        i->xDAC_itcmd_var0 = i->xDB0_itcmd_var1 = i->xDB4_itcmd_var2 =
-            i->xDB8_itcmd_var3 = 0;
+        Item_ClearCmdVars(i);
         it_80275158(n, attrs->x0);
         i->xDD4_itemVar.zeldadinfire.xDD8 = 0.0f;
         i->xDD4_itemVar.zeldadinfire.xDDC = 0;

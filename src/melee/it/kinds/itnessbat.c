@@ -60,10 +60,7 @@ HSD_GObj* it_802AD478(Item_GObj* gobj, Vec3* pos, Fighter_Part part,
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {
             Item* ip = GET_ITEM(bat);
-            ip->xDB8_itcmd_var3 = 0;
-            ip->xDB4_itcmd_var2 = 0;
-            ip->xDB0_itcmd_var1 = 0;
-            ip->xDAC_itcmd_var0 = 0;
+            Item_ClearCmdVars(ip);
             ip->xDCC_flag.b3 = false;
             ip->xDD4_itemVar.nessbat.x0 = gobj;
             it_80275158(bat, 1200.0f);

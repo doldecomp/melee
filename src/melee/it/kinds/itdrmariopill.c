@@ -131,10 +131,7 @@ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj* parent_gobj, Vec3* pos,
         it_80273670(gobj, 1, (f32) arg2);
         it_8026B3A8(gobj);
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDC8_word.flags.x19 = 0;
         ip->on_accessory = itDrMarioPill_802C061C;
         ip->xDC8_word.flags.x13 = 1;
@@ -169,10 +166,7 @@ Item_GObj* itDrMarioPill_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos,
         it_802756D0(gobj);
         it_8026B3A8(gobj);
         Item_80268E5C(gobj, msid + 4, ITEM_ANIM_UPDATE);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDC8_word.flags.x19 = 0;
         ip->on_accessory = itDrMarioPill_802C061C;
         ip->xDC8_word.flags.x13 = 1;

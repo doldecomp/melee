@@ -79,10 +79,7 @@ Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
         {
             ip->pos = spawn.pos;
         }
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.pikachujoltground.xDDC = NULL;
         ip->xDD4_itemVar.pikachujoltground.xDE4 = 0;

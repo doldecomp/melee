@@ -97,10 +97,7 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
     if (flash != NULL) {
         Item* ip = GET_ITEM(flash);
         itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
         ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
         ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;

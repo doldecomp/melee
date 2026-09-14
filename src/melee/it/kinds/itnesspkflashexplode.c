@@ -42,10 +42,7 @@ Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
     explode = Item_80268B18(&spawn);
     if (explode != NULL) {
         Item* ip = GET_ITEM(explode);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDD4_itemVar.pkflushexplode.xDD4 = charge;
         ip->xDD4_itemVar.pkflushexplode.xDDC = owner;
         it_802AFA70(explode);

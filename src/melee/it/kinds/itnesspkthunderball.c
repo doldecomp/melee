@@ -130,10 +130,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
         itPKThunderAttributes* attr =
             ip->xC4_article_data->x4_specialAttributes;
 
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(ball, attr->x0_PKTHUNDER_LIFETIME);
         ip->xDD4_itemVar.pkthunder.xEF4 = NULL;
         for (i = 0; i < 16; i++) {

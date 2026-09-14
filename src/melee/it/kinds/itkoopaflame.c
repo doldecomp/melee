@@ -126,8 +126,7 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
         Item* it = gobj->user_data;
         itKoopaFlame_Attributes* attrs =
             it->xC4_article_data->x4_specialAttributes;
-        it->xDAC_itcmd_var0 = it->xDB0_itcmd_var1 = it->xDB4_itcmd_var2 =
-            it->xDB8_itcmd_var3 = 0;
+        Item_ClearCmdVars(it);
         it_80275158(gobj, (it->xDD4_itemVar.koopaflame.x2C_lifetime =
                                attrs->x0_lifetime));
         it->xDD4_itemVar.koopaflame.x0_pos = *pos;

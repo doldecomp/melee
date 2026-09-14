@@ -122,8 +122,7 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
             Item* item = GET_ITEM(gobj);
             ItLGunBeamAttr* item_spec_attr =
                 item->xC4_article_data->x4_specialAttributes;
-            item->xDAC_itcmd_var0 = item->xDB0_itcmd_var1 =
-                item->xDB4_itcmd_var2 = item->xDB8_itcmd_var3 = 0;
+            Item_ClearCmdVars(item);
             it_80275158(gobj, item->xDD4_itemVar.lgunbeam.lifetime =
                                   item_spec_attr->lifetime);
             item->xDD4_itemVar.lgunbeam.position0 = *pos;

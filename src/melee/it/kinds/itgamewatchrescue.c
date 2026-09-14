@@ -40,10 +40,7 @@ Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
         if (result != NULL) {
             temp_r6 = result->user_data;
             tmp = temp_r6->xC4_article_data->x4_specialAttributes;
-            temp_r6->xDB8_itcmd_var3 = 0;
-            temp_r6->xDB4_itcmd_var2 = 0;
-            temp_r6->xDB0_itcmd_var1 = 0;
-            temp_r6->xDAC_itcmd_var0 = 0;
+            Item_ClearCmdVars(temp_r6);
             temp_r6->xDCC_flag.b3 = false;
             temp_r6->xDD4_itemVar.gamewatchrescue.xDD8 = parent;
             it_8027CE64(result, parent, *tmp);
