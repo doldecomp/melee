@@ -25,17 +25,17 @@
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 
+static inline void Ground_AnimateMap(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
+
 static inline void Ground_JObjInline1(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
-}
-
-static inline void Ground_AnimateMap(Ground_GObj* gobj)
-{
-    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -64,12 +64,17 @@ static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
     }
 }
 
-static inline void Stage_InitScene(StKind stkind, s32* arg1)
+static inline void Ground_InitScene(void)
 {
     Camera_Init(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
+}
+
+static inline void Stage_InitScene(StKind stkind, s32* arg1)
+{
+    Ground_InitScene();
     Stage_802251E8(stkind, arg1);
 }
 
