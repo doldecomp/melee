@@ -104,4 +104,13 @@ static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
     ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
 }
 
+static inline void ftCo_Cliff_EnterState(Fighter_GObj* gobj, Fighter* fp,
+                                         FtMotionId msid)
+{
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftCommon_8007E2F4(fp, 32);
+    fp->x221D_b7 = true;
+}
+
 #endif
