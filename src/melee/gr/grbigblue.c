@@ -9,6 +9,7 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
+#include <melee/gr/inlines.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
@@ -1851,14 +1852,6 @@ bool grBigBlue_801EA054(Ground_GObj* arg)
     return false;
 }
 
-static inline int randi(int max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
-}
-
 void grBigBlue_801EA05C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -1922,7 +1915,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
             left_y = grBigBlue_801EC58C(&half_bot, NULL, 500.0f);
 
             gp->u.bigblue.platform.height_offset = yakumono_param->xF4;
-            r = randi(ABS(yakumono_param->xF8 - yakumono_param->xF4));
+            r = zrandi(ABS(yakumono_param->xF8 - yakumono_param->xF4));
             gp->u.bigblue.platform.height_offset += (f32) r;
 
             pos.y = right_y + gp->u.bigblue.platform.height_offset;
@@ -2084,12 +2077,12 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 if (timer_range < 0) {
                     timer_range = -timer_range;
                 }
-                gp->u.bigblue.platform.xCC_timer = randi(timer_range);
+                gp->u.bigblue.platform.xCC_timer = zrandi(timer_range);
                 gp->u.bigblue.platform.xCC_timer += yakumono_param->x10C;
 
                 speed_range =
                     (yakumono_param->x100 - yakumono_param->xFC) / 0.1f;
-                speed = (f32) randi(speed_range);
+                speed = (f32) zrandi(speed_range);
                 speed *= 0.1f;
                 if (speed == 0.0f) {
                     speed = yakumono_param->xFC;
@@ -2111,12 +2104,12 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 if (timer_range < 0) {
                     timer_range = -timer_range;
                 }
-                gp->u.bigblue.platform.xD0_timer = randi(timer_range);
+                gp->u.bigblue.platform.xD0_timer = zrandi(timer_range);
                 gp->u.bigblue.platform.xD0_timer += yakumono_param->x10C;
 
                 speed_range =
                     (yakumono_param->x108 - yakumono_param->x104) / 0.1f;
-                speed = (f32) randi(speed_range);
+                speed = (f32) zrandi(speed_range);
                 speed *= 0.1f;
                 if (speed == 0.0f) {
                     speed = yakumono_param->x104;

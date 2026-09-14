@@ -19,6 +19,7 @@
 #include <melee/gm/gm_1879.h>
 #include <melee/gm/gmregclear.h>
 #include <melee/gm/gmscene.h>
+#include <melee/gr/inlines.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/item.h>
@@ -1140,14 +1141,6 @@ s32 grCorneria_801DEC94(Vec3* pos)
 
 static int grCn_803E21B0[] = { 1, 1, 1, 1, 1 };
 
-static inline int randi(int max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
-}
-
 static inline int get_grp_off(Ground_GObj* gobj)
 {
     s32 grp_off = -1;
@@ -1311,7 +1304,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
                 if (!grCn_804D69B0) {
                     if (gp->u.corneria2.xF0 % yakumono_param->x74 == 0 &&
-                        randi(yakumono_param->x78) == 0)
+                        zrandi(yakumono_param->x78) == 0)
                     {
                         gp->u.corneria2.xFC = 1;
                     } else {
@@ -1319,7 +1312,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     }
                 } else {
                     if (gp->u.corneria2.xF0 % yakumono_param->x7C == 0 &&
-                        randi(yakumono_param->x80) == 0)
+                        zrandi(yakumono_param->x80) == 0)
                     {
                         gp->u.corneria2.xFC = 1;
                     } else {
@@ -1361,7 +1354,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         case 13: {
             if (!grCn_804D69B0) {
                 if (gp->u.corneria2.xF0 % yakumono_param->x74 == 0 &&
-                    randi(yakumono_param->x78) == 0)
+                    zrandi(yakumono_param->x78) == 0)
                 {
                     gp->u.corneria2.xFC = 1;
                 } else {
@@ -1369,7 +1362,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
             } else {
                 if (gp->u.corneria2.xF0 % yakumono_param->x7C == 0 &&
-                    randi(yakumono_param->x80) == 0)
+                    zrandi(yakumono_param->x80) == 0)
                 {
                     gp->u.corneria2.xFC = 1;
                 } else {

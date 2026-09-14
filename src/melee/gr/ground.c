@@ -82,6 +82,7 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_3F14.h>
 #include <melee/it/itzako.h>
@@ -3263,14 +3264,6 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
     return result;
 }
 
-static inline s32 randi(s32 max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
-}
-
 int Ground_801C5940(void)
 {
     struct {
@@ -3304,7 +3297,7 @@ int Ground_801C5940(void)
     if (out_idx == 0) {
         return -1;
     }
-    return vals[randi(out_idx)];
+    return vals[ZRANDI(out_idx)];
 }
 
 void Ground_801C5A28(void)

@@ -14,6 +14,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbdvd.h>
@@ -289,16 +290,6 @@ void fn_801D13C8(Ground_GObj* gobj)
     gp->u.stadium.xC4_b0 = false;
 }
 
-/// @todo this is a commonly used inline; it should be moved to random.h
-static inline int randi(int i)
-{
-    if (i != 0) {
-        return HSD_Randi(i);
-    } else {
-        return 0;
-    }
-}
-
 void grStadium_801D13E0(Ground_GObj* gobj)
 {
     HSD_MObj* mobj;
@@ -327,9 +318,9 @@ void grStadium_801D13E0(Ground_GObj* gobj)
     var_r27 = yakumono_param->x4;
     temp_r28 = yakumono_param->x0;
     if (var_r27 > yakumono_param->x0) {
-        var_r27 = temp_r28 + randi(var_r27 - temp_r28);
+        var_r27 = temp_r28 + zrandi(var_r27 - temp_r28);
     } else if (var_r27 < temp_r28) {
-        var_r27 += randi(temp_r28 - var_r27);
+        var_r27 += zrandi(temp_r28 - var_r27);
     }
     gr->u.stadium.xD8 = var_r27;
     gr->x11_flags.b012 = 1;
@@ -925,9 +916,9 @@ static inline int randi_between_2(int a, int b)
 {
     int result = b;
     if (b > a) {
-        result = a + randi(b - a);
+        result = a + zrandi(b - a);
     } else if (b < a) {
-        result = b + randi(a - b);
+        result = b + zrandi(a - b);
     }
     return result;
 }
@@ -935,9 +926,9 @@ static inline int randi_between_2(int a, int b)
 static inline int randi_between(int a, int b)
 {
     if (b > a) {
-        return a + randi(b - a);
+        return a + zrandi(b - a);
     } else if (b < a) {
-        return b + randi(a - b);
+        return b + zrandi(a - b);
     }
     return b;
 }
@@ -1304,30 +1295,6 @@ void grStadium_801D3084(HSD_GObj* gobj, int unused)
 
 /// @todo these are commonly used inlines; they should be moved to jobj.h
 
-static inline HSD_JObj* jobj_next(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
-}
-
-static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->parent;
-}
-
-static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
-}
-
 HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
                              HSD_MObj** arg2)
 {
@@ -1355,24 +1322,24 @@ HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
             }
         }
 
-        if (!(jobj->flags & JOBJ_INSTANCE) && jobj_child(jobj) != NULL) {
-            jobj = jobj_child(jobj);
+        if (!(jobj->flags & JOBJ_INSTANCE) && HSD_JObjGetChild(jobj) != NULL) {
+            jobj = HSD_JObjGetChild(jobj);
             continue;
         }
-        if (jobj_next(jobj) != NULL) {
-            jobj = jobj_next(jobj);
+        if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
             continue;
         }
         while (true) {
-            if (jobj_parent(jobj) == NULL) {
+            if (HSD_JObjGetParent(jobj) == NULL) {
                 jobj = NULL;
                 break;
             }
-            if (jobj_next(jobj_parent(jobj)) != NULL) {
-                jobj = jobj_next(jobj_parent(jobj));
+            if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
                 break;
             }
-            jobj = jobj_parent(jobj);
+            jobj = HSD_JObjGetParent(jobj);
         }
     }
     return NULL;
