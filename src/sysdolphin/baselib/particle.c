@@ -498,10 +498,6 @@ HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
     return pp;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, s32 cmdList,
                   s32 life, s32 zero, s32 gen, f32 pos_x, f32 pos_y, f32 pos_z,
                   f32 vel_x, f32 vel_y, f32 vel_z, f32 fric, f32 rate,
@@ -511,9 +507,6 @@ void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, s32 cmdList,
                         zero, pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric,
                         rate, angle3, (HSD_Generator*) gen, 1);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void hsd_80398F8C(HSD_Particle* pp, f32 angle)
 {

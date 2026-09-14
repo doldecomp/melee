@@ -296,10 +296,6 @@ HSD_JObj* it_80272C90(Item_GObj* item_gobj)
                        ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
 }
 
-#ifdef MUST_MATCH
-#pragma auto_inline off
-#endif
-
 HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -316,10 +312,6 @@ HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
     return jobj;
 }
 
-#ifdef MUST_MATCH
-#pragma auto_inline on
-#endif
-
 bool it_80272D1C(Item_GObj* item_gobj)
 {
     if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
@@ -328,11 +320,6 @@ bool it_80272D1C(Item_GObj* item_gobj)
     }
     return false;
 }
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 
 s32 it_80272D40(Item_GObj* item_gobj)
 {
@@ -352,10 +339,6 @@ s32 it_80272D40(Item_GObj* item_gobj)
     }
     return 2;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itColl_BounceOffVictim(Item_GObj* gobj)
 {

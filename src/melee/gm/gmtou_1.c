@@ -388,10 +388,6 @@ void fn_801967E0(s32 arg0)
     return;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
@@ -417,9 +413,6 @@ s32 fn_80196CF8(void)
 
     return result;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// Cycles animation frame counter and updates JObj animation.
 void fn_80196DBC(HSD_GObj* gobj)

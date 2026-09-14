@@ -2080,9 +2080,6 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma auto_inline off
-#endif
 s32 mnCharSel_8025FDEC(u8 door)
 {
     CSSData* css;
@@ -2168,9 +2165,6 @@ s32 mnCharSel_8025FDEC(u8 door)
     }
     return 1;
 }
-#ifdef MUST_MATCH
-#pragma auto_inline on
-#endif
 
 void mnCharSel_CostumeChange(int door, u32 input)
 {

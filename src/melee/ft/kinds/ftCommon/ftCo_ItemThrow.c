@@ -587,15 +587,11 @@ void ftCo_ItemThrow_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma global_optimizer off
-#endif
 void ftCo_LightThrowDash_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommonData* cd = p_ftCommonData;
-    if (fp->cur_anim_frame <= cd->x408) {
+    ftCommonData* cd;
+    if (fp->cur_anim_frame <= (cd = p_ftCommonData)->x408) {
         if (cd != NULL) {
             // Needed for matching register allocation.
         }
@@ -606,9 +602,6 @@ void ftCo_LightThrowDash_Phys(Fighter_GObj* gobj)
                     fp->facing_dir);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_LightThrowAir_Phys(Fighter_GObj* gobj)
 {
