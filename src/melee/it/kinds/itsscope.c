@@ -14,6 +14,7 @@
 #include <melee/it/itCommonItems.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
@@ -157,9 +158,7 @@ void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
 void it_80292030(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)

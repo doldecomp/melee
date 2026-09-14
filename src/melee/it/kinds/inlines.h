@@ -74,6 +74,13 @@ static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
     it_8027CE64(item_gobj, parent, attributes[0]);
 }
 
+static inline void Item_StopAndEnterState(Item_GObj* gobj, Item* ip, s32 msid)
+{
+    itResetVelocity(ip);
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
+}
+
 static inline void Item_EnterAirStateWithHitlag(Item_GObj* gobj, enum_t msid)
 {
     Item* item = GET_ITEM(gobj);

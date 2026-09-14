@@ -13,6 +13,7 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
@@ -91,9 +92,7 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
 void it_8029455C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
