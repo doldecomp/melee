@@ -14,7 +14,7 @@
 
 /// Result of the request in progress: negative = CARD error, 1 = data
 /// verified so the queued writes are skipped, 2 = verify mismatch.
-/* 4D7988 */ s32 hsd_804D7988;
+/* 4D7988 */ s32 _card_error;
 
 /* 4D7984 */ volatile s32 hsd_804D7984;
 /* 4D7980 */ volatile s32 hsd_804D7980;

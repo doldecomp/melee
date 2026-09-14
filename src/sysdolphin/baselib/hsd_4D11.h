@@ -21,7 +21,7 @@ typedef struct {
 /* 4D7980 */ extern volatile s32 hsd_804D7980;
 
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
-/* 4D7988 */ extern s32 hsd_804D7988;
+/* 4D7988 */ extern s32 _card_error;
 /* 4D798C */ extern s32 hsd_804D798C;
 /* 4D7990 */ extern s32 hsd_804D7990;
 /* 4D7994 */ extern s32 hsd_804D7994;
