@@ -590,7 +590,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
     hsd_804D7980 = (hsd_804D7980 + 1) % 128;
 }
 
-s32 fn_803AA790(void)
+int fn_803AA790(void)
 {
     CardRequest* entry;
     s32 result;
@@ -1462,7 +1462,7 @@ void hsd_803AAA48(void)
     }
 }
 
-s32 fn_803AC168(const CardCmd* cmd)
+int fn_803AC168(const CardCmd* cmd)
 {
     BOOL intr;
     s32 mode;
@@ -2549,7 +2549,7 @@ s32 fn_803AD16C(CardState* state)
     return result;
 }
 
-s32 fn_803ADE4C(CardState* state, s32 file_no, CardCallback callback)
+int fn_803ADE4C(CardState* state, int file_no, CardCallback callback)
 {
     CardCmd cmd_open;
     CardCmd cmd_mount;
@@ -2800,7 +2800,7 @@ static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
     return 0;
 }
 
-s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
+int fn_803ADF90(CardState* state, s32 file_idx, u8* buf, int async,
                 CardCallback callback)
 {
     CardContext* ctx = (CardContext*) &hsd_804D1138;
@@ -3002,7 +3002,7 @@ static inline void fn_803AE7F8_close(CardState* state)
     }
 }
 
-s32 fn_803AE7F8(CardState* state, s32 file_idx, u8* buf, s32 async,
+int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf, int async,
                 CardCallback callback)
 {
     CardState* st = state;
@@ -3631,7 +3631,7 @@ static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
     *total_blocks = fn_803AC7DC(state);
 }
 
-s32 fn_803AF3F0(CardState* state, s32 file_idx, u8* buf, s32 async,
+int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf, int async,
                 CardCallback callback)
 {
     CardContext* ctx = (CardContext*) &hsd_804D1138;
@@ -4071,7 +4071,7 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 phys,
     return result;
 }
 
-s32 fn_803B0120(CardState* state, s32 file_idx, u8* buf, s32 async,
+int fn_803B0120(CardState* state, s32 file_idx, u8* buf, int async,
                 CardCallback callback)
 {
     CardContext* ctx = (CardContext*) &hsd_804D1138;
@@ -4476,8 +4476,8 @@ static inline s32 fn_803B0E9C_read_first(CardState* state, u32 sector_size)
     return result;
 }
 
-s32 fn_803B0E9C(CardState* state, void* banner, u8* icons, s32 is_new,
-                s32 async)
+int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
+                int async)
 {
     u8 digest[0x30];
     CardCmd cmd_done;
@@ -4758,7 +4758,7 @@ static inline s32 fn_803B1338_queue_write_data(CardState* state, s32 phys,
     return result;
 }
 
-s32 fn_803B1338(CardState* state, s32 async)
+int fn_803B1338(CardState* state, int async)
 {
     PAD_STACK(72);
     {
@@ -5076,7 +5076,7 @@ s32 fn_803B1338(CardState* state, s32 async)
     }
 }
 
-s32 fn_803B1F78(CardState* state, const char* filename, void* banner,
+int fn_803B1F78(CardState* state, const char* filename, void* banner,
                 void* icons, CardCallback callback)
 {
     CardCmd cmd_create;
@@ -5181,7 +5181,7 @@ s32 fn_803B1F78(CardState* state, const char* filename, void* banner,
     return 0;
 }
 
-s32 fn_803B21E8(CardState* state, void* banner, void* icons,
+int fn_803B21E8(CardState* state, void* banner, void* icons,
                 CardCallback callback)
 {
     CardCmd cmd_set_status;
@@ -5346,7 +5346,7 @@ int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
     return 0;
 }
 
-s32 hsd_803B2674(CardState* state)
+int hsd_803B2674(CardState* state)
 {
     s32 blocks;
 
@@ -5359,7 +5359,7 @@ s32 hsd_803B2674(CardState* state)
     return blocks;
 }
 
-s32 fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
+int fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
                 CardCallback callback)
 {
     s32 result;
