@@ -103,7 +103,7 @@ s32 CARDFastOpen(s32 chan, s32 fileNo, CARDFileInfo *fileInfo) {
     return __CARDPutControlBlock(card, result);
 }
 
-s32 CARDOpen(s32 chan, char *fileName, CARDFileInfo *fileInfo) {
+s32 CARDOpen(s32 chan, const char *fileName, CARDFileInfo *fileInfo) {
     CARDControl *card;
     s32 result;
     CARDDir *dir;
