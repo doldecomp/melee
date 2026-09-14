@@ -3933,7 +3933,7 @@ float gm_80168BF8(int arg0)
 {
     CharacterKind ckind = Player_GetPlayerCharacter(arg0);
     u32 costume = Player_GetCostumeId(arg0);
-    gm_80168B34(ckind, Player_80036394(arg0), costume);
+    return gm_80168B34(ckind, Player_80036394(arg0), costume);
 }
 
 void gm_80168C5C(u32 arg0)
