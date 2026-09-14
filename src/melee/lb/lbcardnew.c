@@ -223,8 +223,8 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     _p(free_files) = NULL;
     _p(saved_error) = 16;
 
-    for (i = 0; i < 9; i++) {
-        _p(unk_38)[i].card_error = 0x10;
+    for (i = 0; i < ARRAY_SIZE(_p(unk_38)); i++) {
+        _p(unk_38)[i].card_error = 16;
         _p(unk_38)[i].unk_4 = -1;
     }
 
