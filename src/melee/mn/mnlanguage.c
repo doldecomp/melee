@@ -21,11 +21,6 @@
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/sislib.h>
 
-struct mnUserData {
-    u8 x0, x1, x2, x3;
-    u32 x4;
-};
-
 static HSD_GObj* mn_gobj;
 static StaticModelDesc model_desc;
 static f32 lang_jobj_frames[LANG_COUNT] = { 1.0f, 0.0f };
@@ -37,7 +32,7 @@ void mnLanguage_8024BFE0(HSD_GObj* unused)
     u64 temp_r3;
     u8 lang;
     {
-        struct mnUserData* user_data = HSD_GObjGetUserData(mn_gobj);
+        Menu* user_data = HSD_GObjGetUserData(mn_gobj);
         if (mn_804D6BC8.cooldown != 0) {
             mn_804D6BC8.cooldown -= 1;
             mn_804D6BC8.x2 = 0;
@@ -53,8 +48,8 @@ void mnLanguage_8024BFE0(HSD_GObj* unused)
         }
         if (temp_r3 & MenuInput_AButton) {
             user_data = HSD_GObjGetUserData(mn_gobj);
-            if (user_data->x1 != user_data->x0) {
-                lbLang_SetSavedLanguage(user_data->x0);
+            if (user_data->unk1 != user_data->cursor) {
+                lbLang_SetSavedLanguage(user_data->cursor);
                 lbCardGame_UpdatePowerTime();
                 lbAudioAx_80027AB0(0xAD);
                 mn_80229860(GM_MENU);
@@ -62,11 +57,11 @@ void mnLanguage_8024BFE0(HSD_GObj* unused)
                 mn_804A04F0.cur_menu = 4;
                 mn_804A04F0.hovered_selection = 4;
             }
-        } else if (user_data->x2 != 0) {
+        } else if (user_data->unk2 != 0) {
             if (temp_r3 & (1 << 2)) {
                 sfxMove();
-                user_data->x0 = user_data->x0 == 0 ? 1 : 0;
-                lang = user_data->x0;
+                user_data->cursor = user_data->cursor == 0 ? 1 : 0;
+                lang = user_data->cursor;
                 {
                     HSD_JObj* result;
                     PAD_STACK(4);
@@ -77,8 +72,8 @@ void mnLanguage_8024BFE0(HSD_GObj* unused)
                 }
             } else if (temp_r3 & (1 << 3)) {
                 sfxMove();
-                user_data->x0 = user_data->x0 == 0 ? 1 : 0;
-                lang = user_data->x0;
+                user_data->cursor = user_data->cursor == 0 ? 1 : 0;
+                lang = user_data->cursor;
                 {
                     HSD_JObj* result;
                     lb_80011E24(GET_JOBJ(mn_gobj), &result, 1, -1);
@@ -160,7 +155,7 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0)
     HSD_GObjProc* gobjproc;
     HSD_JObj* jobj;
     HSD_Text* text;
-    struct mnUserData* user_data;
+    Menu* user_data;
     Menu* menu;
     u8 lang;
     PAD_STACK(2 * 4);
@@ -174,17 +169,17 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0)
                        model_desc.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    user_data = HSD_MemAlloc(sizeof(*user_data));
+    user_data = HSD_MemAlloc(sizeof(Menu));
     HSD_ASSERTREPORT(355, user_data, "Can't get user_data.\n");
     lang = lbLang_GetSavedLanguage();
-    user_data->x0 = lang;
-    user_data->x1 = lang;
-    user_data->x4 = 0;
-    user_data->x2 = 0;
+    user_data->cursor = lang;
+    user_data->unk1 = lang;
+    user_data->text = NULL;
+    user_data->unk2 = 0;
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     gobjproc = HSD_GObj_SetupProc(gobj, fn_8024C2E8, 0);
     gobjproc->flags_3 = HSD_GObj_804D783C;
-    lang = user_data->x0;
+    lang = user_data->cursor;
     {
         HSD_JObj* sp1C;
         PAD_STACK(2 * 4);
