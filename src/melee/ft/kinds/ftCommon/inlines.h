@@ -12,6 +12,8 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemParasolOpen.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/types.h>
@@ -23,6 +25,13 @@ static inline void ftCo_SpawnEf(Fighter_GObj* gobj, HSD_JObj* joint, u32 arg2,
     Fighter* fp = gobj->user_data;
     FORCE_PAD_STACK_8;
     efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
+}
+
+static inline void ftCo_ReleaseItemAndVictim(Fighter_GObj* gobj)
+{
+    ftCommon_8007DB58(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
 }
 
 static inline void ftCo_Thrown_Enter(Fighter_GObj* gobj, FtMotionId msid,

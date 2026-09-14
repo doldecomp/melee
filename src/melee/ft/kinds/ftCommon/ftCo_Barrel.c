@@ -4,8 +4,6 @@
 
 #include "forward.h"
 #include "ftCo_Damage.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
 #include "inlines.h"
 #include "types.h"
 #include <melee/ft/fighter.h>
@@ -13,6 +11,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/ittarucann.h>
 #include <melee/lb/lbcollision.h>
@@ -29,9 +28,7 @@ void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Barrel, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     ftAnim_8006EBA4(gobj);

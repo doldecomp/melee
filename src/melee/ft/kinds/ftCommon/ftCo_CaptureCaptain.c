@@ -3,12 +3,11 @@
 #include <Runtime/platform.h>
 
 #include "ftCo_Attack100.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
@@ -16,9 +15,7 @@ void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
     u8 _[8];
     Fighter* fp = gobj->user_data;
     Fighter* vic_fp = vic_gobj->user_data;
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->victim_gobj = fp->x1A5C = vic_gobj;
     fp->x221B_b5 = false;
     fp->facing_dir = -vic_fp->facing_dir;

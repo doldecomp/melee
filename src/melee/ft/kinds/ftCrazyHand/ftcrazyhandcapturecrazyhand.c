@@ -8,17 +8,14 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Attack100.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
-#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* fp2 = GET_FIGHTER(gobj2);
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = gobj2;
     fp->victim_gobj = gobj2;
     fp->x221B_b5 = false;
