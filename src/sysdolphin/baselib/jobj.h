@@ -120,7 +120,7 @@ typedef struct HSD_JObj {
     /* +78 */ MtxPtr envelopemtx;
     /* +7C */ HSD_AObj* aobj;
     /* +80 */ HSD_RObj* robj;
-    /* +84 */ u32 id;
+    /* +84 */ HSD_IDKey id;
 } HSD_JObj;
 ASSERT_SIZE(struct HSD_JObj, 0x88);
 

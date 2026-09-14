@@ -51,7 +51,7 @@ struct HSD_AObjDesc {
     u32 flags;
     f32 end_frame;
     HSD_FObjDesc* fobjdesc;
-    u32 obj_id;
+    HSD_IDKey obj_id;
 };
 
 struct HSD_AnimJoint {

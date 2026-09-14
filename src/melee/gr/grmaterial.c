@@ -166,7 +166,7 @@ void grMaterial_801C8B68(HSD_JObj* jobj, int arg1)
             }
         }
         if (var_r3) {
-            HSD_IDInsertToTable(NULL, (u32) jobj, jobj);
+            HSD_IDInsertToTable(NULL, (HSD_IDKey) jobj, jobj);
         }
         if (!(jobj->flags & 0x1000)) {
             jobj = HSD_JObjGetChild(jobj);
@@ -187,7 +187,8 @@ void grMaterial_801C8B68(HSD_JObj* jobj, int arg1)
                         }
                     }
                     if (var_r3) {
-                        HSD_IDInsertToTable(NULL, (u32) var_r30, var_r30);
+                        HSD_IDInsertToTable(NULL, (HSD_IDKey) var_r30,
+                                            var_r30);
                     }
                     if (!(jobj->flags & 0x1000)) {
                         var_r30 = HSD_JObjGetChild(jobj);
