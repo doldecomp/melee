@@ -62,7 +62,7 @@ struct lb_80432A68_t {
         int x0;
         int x4;
         void* file_entries;
-        char* xC;
+        char* filename_ptr;
         char filename[32];
         u8 x18;
         char x19[7];
@@ -155,7 +155,7 @@ again:
                 result = lb_8001A3A4();
                 break;
             case 2:
-                result = lb_8001A594(task->xC, task->file_entries);
+                result = lb_8001A594(task->filename_ptr, task->file_entries);
                 break;
             case 3:
                 result = lb_8001A860();
@@ -362,10 +362,10 @@ void lb_8001A4CC(const char* filename, void* file_entries)
     task->x0 = 2;
     task->x4 = 1;
     if (filename != NULL) {
-        strncpy(task->xC = task->filename, filename,
+        strncpy(task->filename_ptr = task->filename, filename,
                 ARRAY_SIZE(task->filename));
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
     task->file_entries = file_entries;
 }
@@ -1078,10 +1078,10 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task->x0 = 2;
     task->x4 = 1;
     if (name_b != NULL) {
-        task->xC = task->filename;
+        task->filename_ptr = task->filename;
         strncpy(task->filename, name_b, 0x20);
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
     task->file_entries = 0;
     task = lb_80019C38_noinline();
@@ -1096,10 +1096,10 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task->x0 = 2;
     task->x4 = 1;
     if (name_c != NULL) {
-        task->xC = task->filename;
+        task->filename_ptr = task->filename;
         strncpy(task->filename, name_c, 0x20);
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
     task->file_entries = 0;
     task = lb_80019C38_noinline();
