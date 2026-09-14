@@ -21,7 +21,8 @@ Item_GObj* it_802B2560(Fighter_GObj* parent_gobj, float facing_dir, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    Item_InitSpawn(&spawn, parent_gobj, pos, facing_dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {

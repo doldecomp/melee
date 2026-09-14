@@ -19,6 +19,7 @@
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
 #include "ftCo_Throw.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
@@ -237,9 +238,7 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x2227_b6 = true;
 
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce,

@@ -3263,14 +3263,6 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
     return result;
 }
 
-static inline s32 randi(s32 max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
-}
-
 int Ground_801C5940(void)
 {
     struct {

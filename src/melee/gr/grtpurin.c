@@ -5,7 +5,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -50,16 +49,7 @@ void grTPurin_80223160(bool unused)
 void grTPurin_80223164(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTPurin_8022320C(0);
-    grTPurin_8022320C(1);
-    grTPurin_8022320C(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTPurin_8022320C);
 }
 
 void grTpurin_UnkStage0_OnLoad(void)
@@ -147,8 +137,7 @@ void grTPurin_80223388(Ground_GObj* gobj)
             }
         }
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTPurin_80223478(Ground_GObj* gobj)

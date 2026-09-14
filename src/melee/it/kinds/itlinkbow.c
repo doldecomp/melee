@@ -46,15 +46,14 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
     f32 pad[1];
 
     spawn.kind = arg4;
-    Item_InitSpawnOnPlane(&spawn, (HSD_GObj*) owner_gobj, vec, facing_dir);
+    Item_InitSpawnPosition(&spawn, vec, true);
+    Item_InitSpawnCommonFields(&spawn, (HSD_GObj*) owner_gobj, facing_dir,
+                               true);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         item = GET_ITEM((HSD_GObj*) gobj);
-        item->xDB8_itcmd_var3 = 0;
-        item->xDB4_itcmd_var2 = 0;
-        item->xDB0_itcmd_var1 = 0;
-        item->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(item);
         item->xDCC_flag.b3 = false;
         item->xDD4_itemVar.linkbow.x0 = ftLib_800869D4(item->owner);
         item->xDD4_itemVar.linkbow.x4 = owner_gobj;

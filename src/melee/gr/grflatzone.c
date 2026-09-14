@@ -1,6 +1,5 @@
 #include "grflatzone.h"
 
-#include "grdisplay.h"
 #include "grdynamicattr.h"
 #include "grmaterial.h"
 #include "ground.h"
@@ -12,7 +11,6 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
@@ -165,19 +163,7 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
     StageCallbacks* callbacks = &grFz_StageCallbacks[gobj_id];
     HSD_GObj* gobj = grFlatzone_80216F48_inline(gobj_id);
     if (gobj != NULL) {
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->on_init != NULL) {
-            callbacks->on_init(gobj);
-        }
-        if (callbacks->gobj_proc != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grflatzone.c", 0xE8,
                  gobj_id);
@@ -187,8 +173,7 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 
 void grFlatzone_80217030(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFlatzone_8021705C(Ground_GObj* gobj)

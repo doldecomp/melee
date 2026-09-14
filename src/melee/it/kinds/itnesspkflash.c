@@ -7,6 +7,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include "itnesspkflashexplode.h"
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
@@ -89,25 +90,14 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
     PAD_STACK(4);
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0F;
-    it_8026BB68(gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, gobj, facing_dir, true);
 
     flash = Item_80268B18(&spawn);
     if (flash != NULL) {
         Item* ip = GET_ITEM(flash);
         itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
         ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
         ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;
@@ -164,10 +154,7 @@ void it_802AAA80(Item_GObj* gobj)
     f32 angle;
     PAD_STACK(8);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attr->x0_FLASH_LIFETIMER);
     ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0f;
     ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;

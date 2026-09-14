@@ -5,7 +5,6 @@
 #include <placeholder.h>
 
 #include "grdatfiles.h"
-#include "grdisplay.h"
 #include "grlib.h"
 #include "grmaterial.h"
 #include "grzakogenerator.h"
@@ -19,11 +18,9 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 1E40E4 */ static void grOnett_801E40E4(void* user_data, int joint_id,
@@ -156,19 +153,7 @@ HSD_GObj* grOnett_801E37F4(int gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->on_init != NULL) {
-            callbacks->on_init(gobj);
-        }
-        if (callbacks->gobj_proc != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 235, gobj_id);
     }
@@ -278,8 +263,7 @@ void grOnett_801E3C60(Ground_GObj* gobj)
             gp->u.onett.subject->state = CmSubjectState_Inactive;
         }
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}

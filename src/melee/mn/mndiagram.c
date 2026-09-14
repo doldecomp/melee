@@ -1968,30 +1968,22 @@ static inline void* mnDiagram_GetUserData(HSD_GObj* gobj)
     return gobj->user_data;
 }
 
-static inline HSD_JObj* mnDiagram_GetJObjChild(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
-}
-
 void mnDiagram_ClearGrid(HSD_GObj* arg0)
 {
     mnDiagram_MainOverlay* data = mnDiagram_GetUserData(arg0);
     HSD_JObj* child;
 
-    child = mnDiagram_GetJObjChild(data->jobjs[9]);
+    child = HSD_JObjGetChild(data->jobjs[9]);
     if (child) {
         HSD_JObjRemoveAll(child);
     }
 
-    child = mnDiagram_GetJObjChild(data->jobjs[11]);
+    child = HSD_JObjGetChild(data->jobjs[11]);
     if (child) {
         HSD_JObjRemoveAll(child);
     }
 
-    child = mnDiagram_GetJObjChild(data->jobjs[13]);
+    child = HSD_JObjGetChild(data->jobjs[13]);
     if (child) {
         HSD_JObjRemoveAll(child);
     }

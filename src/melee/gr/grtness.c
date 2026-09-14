@@ -2,13 +2,11 @@
 
 #include <melee/lb/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -113,8 +111,7 @@ static HSD_GObj* grTNess_80222674(int id)
 
 static void grTNess_8022275C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grTNess_80222788(Ground_GObj* gobj)
@@ -144,8 +141,7 @@ static bool grTNess_802227E8(Ground_GObj* gobj)
 
 static void grTNess_802227F0(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 static void grTNess_80222824(Ground_GObj* gobj)

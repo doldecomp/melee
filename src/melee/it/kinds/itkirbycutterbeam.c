@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftKirby/ftkirbyattackdash.h>
 #include <melee/it/inlines.h>
@@ -28,13 +29,7 @@ void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir)
     spawn.kind = It_Kind_Kirby_CBeam;
     spawn.prev_pos = *pos;
     it_8026BB68(gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnCommonFields(&spawn, gobj, facing_dir, true);
 
     spawned_gobj = Item_80268B18(&spawn);
     if (spawned_gobj != NULL) {

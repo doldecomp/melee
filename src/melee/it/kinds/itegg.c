@@ -2,6 +2,7 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+#include "inlines.h"
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -63,9 +64,7 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
         ip = GET_ITEM(gobj);
 
         spawn.kind = It_Kind_Egg;
-        spawn.prev_pos = *pos;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, pos, true);
         spawn.facing_dir = dir;
         spawn.x3C_damage = 0;
         spawn.vel = *vel;

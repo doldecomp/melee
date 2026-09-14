@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -185,24 +186,14 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
 
     arg2->z = 0.0f;
     spawn.kind = (ItemKind) arg4;
-    spawn.prev_pos = *arg2;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = arg1;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, arg2, false);
+    Item_InitSpawnCommonFields(&spawn, arg1, facing_dir, true);
     gobj = Item_80268B18(&spawn);
 
     if (gobj != NULL) {
         item = GET_ITEM(gobj);
         attr = item->xC4_article_data->x4_specialAttributes;
-        item->xDB8_itcmd_var3 = 0;
-        item->xDB4_itcmd_var2 = 0;
-        item->xDB0_itcmd_var1 = 0;
-        item->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(item);
         it_80275158(gobj, attr->x0);
         item->xDD4_itemVar.linkarrow.xA0 = 0;
         item->xDD4_itemVar.linkarrow.xB0 = 0;

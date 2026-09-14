@@ -4,8 +4,7 @@
 
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureDamageKoopa.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -66,9 +65,7 @@ static inline void inlineA0(Fighter_GObj* gobj, Fighter_GObj* vic_gobj,
 {
     Fighter* vic_fp = GET_FIGHTER(vic_gobj);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = vic_gobj;
     fp->victim_gobj = vic_gobj;
     fp->x221B_b5 = false;

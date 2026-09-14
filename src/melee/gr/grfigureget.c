@@ -138,8 +138,7 @@ HSD_GObj* grFigureGet_802195CC(int gobj_id)
 
 void grFigureGet_802196B4(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFigureGet_802196E0(Ground_GObj* gobj)

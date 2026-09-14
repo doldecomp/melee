@@ -21,7 +21,6 @@
 #include <melee/it/kinds/itbox.h>
 #include <melee/it/kinds/itklap.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -263,8 +262,7 @@ void grKongo_801D557C(Ground_GObj* arg0)
     grKongo_801D7134(arg0, 0);
     grKongo_801D77E0(arg0, 0);
     grKongo_801D7BBC(arg0);
-    lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_ProcTargetStage(arg0);
     mpLib_8005667C(4);
 }
 

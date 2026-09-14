@@ -5,6 +5,7 @@
 #include <melee/it/forward.h>
 
 #include "forward.h"
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -50,16 +51,8 @@ void it_80299C48(Item_GObj* parent_gobj, Vec3* pos, Vec3* velocity,
     itHammerheadAttributes* attrs;
 
     spawn.kind = It_Kind_Hammer_Head;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         it = GET_ITEM(gobj);

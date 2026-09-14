@@ -28,7 +28,8 @@ HSD_GObj* it_802C7774(float facing_dir, HSD_GObj* parent_gobj, Vec3* pos,
     PAD_STACK(4);
 
     si.kind = It_Kind_GameWatch_Judge;
-    Item_InitSpawn(&si, parent_gobj, pos, facing_dir);
+    Item_InitSpawnPosition(&si, pos, false);
+    Item_InitSpawnCommonFields(&si, parent_gobj, facing_dir, true);
 
     new_gobj = Item_80268B18(&si);
     if (new_gobj != NULL) {

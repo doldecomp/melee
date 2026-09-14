@@ -348,7 +348,7 @@ void ftKp_Init_OnLoad(HSD_GObj* gobj)
     fp->x2226_b1 = true;
 }
 
-void ftKp_Init_80132B38(void) {}
+void ftKp_Init_80132B38(HSD_GObj* gobj) {}
 
 void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {

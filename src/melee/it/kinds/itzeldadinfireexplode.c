@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
@@ -29,9 +30,7 @@ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Vec3* pos,
     PAD_STACK(4);
 
     spawn.kind = It_Kind_Zelda_DinFire_Explode;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, true);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
@@ -42,10 +41,7 @@ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Vec3* pos,
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDD4_itemVar.zeldadinfireexplode.xDD4 = scale;
         ip->xDD4_itemVar.zeldadinfireexplode.xDDC = parent_gobj;
         it_802C46C4(gobj, ip);
@@ -72,10 +68,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     ip = GET_ITEM(gobj);
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, 60.0f);
     ip->xDD4_itemVar.zeldadinfireexplode.xDD8 = 0.0f;
     efSync_Spawn(0x4FA, gobj, jobj);

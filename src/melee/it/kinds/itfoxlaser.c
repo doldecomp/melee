@@ -31,16 +31,6 @@ bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
                        0);
 }
 
-static inline void normalizeAngle(f32* angle)
-{
-    while (*angle < 0.0F) {
-        *angle += M_TAU;
-    }
-    while (*angle > M_TAU) {
-        *angle -= M_TAU;
-    }
-}
-
 void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
                  f32 speed)
 {
@@ -48,14 +38,15 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     Item_GObj* item_gobj;
     bool right_facing;
 
-    normalizeAngle(&angle);
+    Item_NormalizeAngle(&angle);
     spawn.kind = kind;
-    Item_InitRaySpawnPosition(&spawn, parent, pos);
+    Item_InitSpawnPositionFromParent(&spawn, parent, pos);
     right_facing = true;
     if (!(angle < M_PI / 2) && !(angle > M_PI * 3 / 2)) {
         right_facing = false;
     }
-    Item_InitRaySpawnFields(&spawn, parent, right_facing ? +1.0F : -1.0F);
+    Item_InitSpawnCommonFields(&spawn, parent, right_facing ? +1.0F : -1.0F,
+                               true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* item = GET_ITEM(item_gobj);

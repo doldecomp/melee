@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include "itbombhei.static.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -88,13 +89,7 @@ Item_GObj* it_8027D670(Vec3* pos)
 
     data.kind = It_Kind_BombHei;
     data.pos = data.prev_pos = *pos;
-    data.facing_dir = it_8026B684(&data.prev_pos);
-    data.x3C_damage = 0;
-    data.vel.x = data.vel.y = data.vel.z = 0.0f;
-    data.x0_parent_gobj = NULL;
-    data.x4_parent_gobj2 = data.x0_parent_gobj;
-    data.x44_flag.b0 = true;
-    data.x40 = 0;
+    Item_InitSpawnCommonFields(&data, NULL, it_8026B684(&data.prev_pos), true);
     igp = Item_80268B18(&data);
 
     if (igp != NULL) {

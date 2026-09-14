@@ -12,14 +12,21 @@ jobs:
     strategy:
       matrix:
         hook:
+          - replace-includes
+          - style-check
           - clang-format
           - editorconfig-checker
-          - style-check
     steps:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-
+    - name: Create dummy build includes
+      if: matrix.hook == 'replace-includes'
+      run: |
+        mkdir -p build/GALE01/include
+        touch build/GALE01/include/debug_font.inc \
+              build/GALE01/include/sislib_font.inc \
+              build/GALE01/macros.inc
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: ${{ matrix.hook }} --all-files

@@ -112,8 +112,7 @@ HSD_GObj* grOldYoshi_8020E854(int gobj_id)
 
 void grOldYoshi_8020E93C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grOldYoshi_8020E968(Ground_GObj* arg)

@@ -313,8 +313,7 @@ void grGreens_8021390C(Ground_GObj* arg) {}
 
 void grGreens_80213910(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grGreens_8021393C(Ground_GObj* arg)
@@ -328,8 +327,7 @@ void grGreens_80213948(Ground_GObj* arg) {}
 
 void grGreens_8021394C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grGreens_80213978(Ground_GObj* arg)

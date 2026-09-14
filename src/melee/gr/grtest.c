@@ -5,7 +5,6 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include "forward.h"
-#include "granime.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
@@ -99,8 +98,7 @@ HSD_GObj* grTest_80207044(int gobj_id)
 
 void grTest_80207130(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTest_8020715C(Ground_GObj* gobj)
@@ -179,8 +177,7 @@ void grTest_802073B0(HSD_GObj* gobj)
 
 void grTest_802073D0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTest_802073FC(Ground_GObj* gobj)

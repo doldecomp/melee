@@ -4,6 +4,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/grkongo.h>
@@ -54,8 +55,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         lb_8000B1CC(GET_JOBJ(parent_gobj), NULL, &pos);
 
         spawn.kind = It_Kind_Box;
-        spawn.prev_pos = pos;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, &pos, false);
         spawn.facing_dir = 1.0F;
         spawn.x3C_damage = 0;
         spawn.vel.z = 0.0F;

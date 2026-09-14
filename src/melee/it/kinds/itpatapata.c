@@ -6,6 +6,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include "itnokonoko.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
@@ -54,11 +55,7 @@ void it_802E05A0(Item_GObj* gobj)
     }
     mpCollSetFacingDir(&ip->x378_itemColl, facing);
     it_8027C56C(gobj, ip->facing_dir);
-    ip->xD5C = 0;
-    ip->xDC8_word.flags.x15 = 0;
-    it_8027542C(gobj);
-    it_80275270(gobj);
-    ip->xDC8_word.flags.x19 = 1;
+    Item_InitZakoCollision(gobj, ip);
     ip->xDD4_itemVar.patapata.x28 = 0xA;
     ip->xDD4_itemVar.patapata.x24 = 0;
     ip->xDD4_itemVar.patapata.x20 = 0;

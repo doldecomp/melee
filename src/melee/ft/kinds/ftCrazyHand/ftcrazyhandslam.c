@@ -8,6 +8,7 @@
 
 #include "ftcrazyhandcapturewaitcrazyhand.h"
 #include "ftcrazyhandtagcancel.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -125,9 +126,7 @@ void ftCh_TagApplaud_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
-    ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->mv.ch.unk0.xC, &fp->mv.ch.unk0.x18, da->x14,
-                       da->x10);
+    ftCh_UpdateBossMotion(gobj, fp, da);
 }
 
 void ftCh_TagApplaud_Coll(HSD_GObj* gobj)

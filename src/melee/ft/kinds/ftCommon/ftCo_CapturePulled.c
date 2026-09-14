@@ -1,6 +1,4 @@
 #include "ftCo_Attack100.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
 #include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -42,9 +40,7 @@ void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
     f32 v;
     float* cd2;
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
     fp->x221B_b5 = 0;

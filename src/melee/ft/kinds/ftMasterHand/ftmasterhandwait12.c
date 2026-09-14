@@ -5,11 +5,10 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include "ftmasterhandwait10.h"
+#include "inlines.h"
 #include "types.h"
 #include <melee/ft/fighter.h>
-#include <melee/ft/ft_084E.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/types.h>
 
 #ifdef MUST_MATCH
@@ -93,9 +92,7 @@ void ftMh_Wait1_2_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, da->x2C,
-                       da->x28);
+    ftMh_UpdateBossMotion(gobj, fp, da);
 }
 
 void ftMh_Wait1_2_Coll(HSD_GObj* gobj)

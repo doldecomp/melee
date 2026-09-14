@@ -7,6 +7,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -48,15 +49,8 @@ HSD_GObj* it_802896CC(Vec3* arg0)
     Item_GObj* gobj;
 
     spawn.kind = It_Kind_Kusudama;
-    spawn.prev_pos = *arg0;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, arg0, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     gobj = Item_80268B5C(&spawn);
     if (gobj != NULL) {
         it_8028A190(gobj);
@@ -351,9 +345,7 @@ void it_8028A190(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
     it_8028A190_inline(gobj);
 }
 
@@ -559,9 +551,7 @@ static inline void itKusudama_UnkMotion6_Coll_inline2(Item_GObj* gobj)
 static inline void itKusudama_UnkMotion6_Coll_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
     itKusudama_UnkMotion6_Coll_inline2(gobj);
 }
 

@@ -8,6 +8,7 @@
 #include "inlines.h"
 #include "kinds/ftCommon/ftCo_09F7.h"
 #include "kinds/ftCommon/ftCo_0A01.h"
+#include "kinds/ftCommon/inlines.h"
 #include "kinds/ftDonkey/forward.h"
 #include "kinds/ftKirby/forward.h"
 #include "kinds/ftKoopa/forward.h"
@@ -972,12 +973,6 @@ void ftCo_800B658C(Fighter* fp)
     ftCo_800B63D8(fp);
     ftCo_800B4880(fp, temp_r31->xA4);
     temp_r31->xA4 = 0;
-}
-
-static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
-{
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
 }
 
 static inline void ftCo_CpuFlickLstickX(Fighter* fp, s8 half, s8 full)

@@ -735,8 +735,7 @@ void grZebes_801D93D8(Ground_GObj* arg) {}
 
 void grZebes_801D93DC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grZebes_801D9408(Ground_GObj* arg)

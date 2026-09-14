@@ -3,6 +3,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>
@@ -325,15 +326,8 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
     }
 
     spawn_item.kind = arg3;
-    spawn_item.prev_pos = *arg1;
-    spawn_item.pos = spawn_item.prev_pos;
-    spawn_item.facing_dir = arg2;
-    spawn_item.x3C_damage = 0;
-    spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0f;
-    spawn_item.x0_parent_gobj = arg0;
-    spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.b0 = true;
-    spawn_item.x40 = 0;
+    Item_InitSpawnPosition(&spawn_item, arg1, false);
+    Item_InitSpawnCommonFields(&spawn_item, arg0, arg2, true);
 
     gobj = Item_80268B18(&spawn_item);
     if (gobj != NULL) {

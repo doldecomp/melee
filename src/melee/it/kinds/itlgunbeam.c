@@ -107,9 +107,7 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
     PAD_STACK(4);
 
     spawn.kind = It_Kind_L_Gun_Beam;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner_gobj, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, owner_gobj, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
@@ -124,8 +122,7 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
             Item* item = GET_ITEM(gobj);
             ItLGunBeamAttr* item_spec_attr =
                 item->xC4_article_data->x4_specialAttributes;
-            item->xDAC_itcmd_var0 = item->xDB0_itcmd_var1 =
-                item->xDB4_itcmd_var2 = item->xDB8_itcmd_var3 = 0;
+            Item_ClearCmdVars(item);
             it_80275158(gobj, item->xDD4_itemVar.lgunbeam.lifetime =
                                   item_spec_attr->lifetime);
             item->xDD4_itemVar.lgunbeam.position0 = *pos;
@@ -176,10 +173,7 @@ void it_802998A0(Item_GObj* gobj, HSD_GObj* fighter_gobj, s32 arg2)
         Vec3 pos;
         f32 sp2C = 1.0f;
         PAD_STACK(0x10);
-        it_8026B3A8(gobj);
-        ip->xDC8_word.flags.x13 = 0;
-        it_80272940(gobj);
-        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+        Item_ClearFlagsAndEnterState(gobj, ip, 0);
         pos = ip->pos;
         Item_802694CC(gobj);
         itLgunbeam_UnkMotion0_Phys(gobj);

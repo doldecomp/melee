@@ -2,6 +2,7 @@
 
 #include <melee/it/forward.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grfigureget.h>
@@ -381,8 +382,7 @@ Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
     void* var_r29;
 
     spawn.kind = It_Kind_Coin;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
+    Item_InitSpawnPosition(&spawn, pos, false);
     spawn.facing_dir = 0.0F;
     spawn.vel.z = 0.0F;
     spawn.vel.y = 0.0F;

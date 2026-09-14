@@ -9,7 +9,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -90,15 +89,7 @@ void grTFalco_802207F0(bool arg0) {}
 void grTFalco_802207F4(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    setupStageCallbacks(0);
-    setupStageCallbacks(1);
-    setupStageCallbacks(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(setupStageCallbacks);
 }
 
 void grTfalco_UnkStage0_OnLoad(void) {}
@@ -156,8 +147,7 @@ bool stageGObj2_Callback1(Ground_GObj* arg0)
 
 void stageGObj2_GObjProc(Ground_GObj* arg0)
 {
-    lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_ProcTargetStage(arg0);
 }
 
 void stageGObj2_Callback3(Ground_GObj* arg0) {}

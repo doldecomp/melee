@@ -9,6 +9,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/db/db.h>
@@ -86,16 +87,8 @@ void itDrMarioPill_Spawn(Item_GObj* parent_gobj, Vec3* pos, s32 arg2,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         itDrMarioPill_802C0B5C(gobj);
@@ -129,16 +122,8 @@ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj* parent_gobj, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
@@ -146,10 +131,7 @@ Item_GObj* itDrMarioPill_Appeal_Spawn(Item_GObj* parent_gobj, Vec3* pos,
         it_80273670(gobj, 1, (f32) arg2);
         it_8026B3A8(gobj);
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDC8_word.flags.x19 = 0;
         ip->on_accessory = itDrMarioPill_802C061C;
         ip->xDC8_word.flags.x13 = 1;
@@ -174,16 +156,8 @@ Item_GObj* itDrMarioPill_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent_gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
@@ -192,10 +166,7 @@ Item_GObj* itDrMarioPill_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos,
         it_802756D0(gobj);
         it_8026B3A8(gobj);
         Item_80268E5C(gobj, msid + 4, ITEM_ANIM_UPDATE);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDC8_word.flags.x19 = 0;
         ip->on_accessory = itDrMarioPill_802C061C;
         ip->xDC8_word.flags.x13 = 1;
@@ -399,12 +370,6 @@ void itDrMarioPill_PickedUp(Item_GObj* gobj)
     it_8026B3A8(gobj);
 }
 
-static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
-{
-    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
-    HSD_JObjSetScale(dst, scale);
-}
-
 static bool itDrMarioPill_Motion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -413,8 +378,8 @@ static bool itDrMarioPill_Motion6_Anim(Item_GObj* gobj)
     gobj = ip->xDD4_itemVar.drmariopill.x4;
     if ((gobj != NULL) && (ftCo_800BF228(gobj) == true)) {
         Vec3 scale;
-        copy_jobj_scale(GET_JOBJ(orig),
-                        GET_JOBJ(ip->xDD4_itemVar.drmariopill.x4), &scale);
+        Item_CopyJObjScale(GET_JOBJ(orig),
+                           GET_JOBJ(ip->xDD4_itemVar.drmariopill.x4), &scale);
     }
     return false;
 }

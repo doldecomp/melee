@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecialhi.h>
 #include <melee/ft/kinds/ftLink/ftlinkspecials.h>
@@ -152,13 +153,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
     spawn.kind = kind;
     spawn.prev_pos = *pos;
     it_8026BB68(owner_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawnCommonFields(&spawn, owner_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = gobj->user_data;

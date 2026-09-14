@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -69,15 +70,8 @@ HSD_GObj* itFlipper_Spawn(HSD_JObj* jobj)
     if (jobj != NULL) {
         lb_8000B1CC(jobj, NULL, &pos);
         spawn.kind = It_Kind_Flipper;
-        spawn.prev_pos = pos;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = 1.0f;
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-        spawn.x0_parent_gobj = NULL;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = 0;
-        spawn.x40 = 0;
+        Item_InitSpawnPosition(&spawn, &pos, false);
+        Item_InitSpawnCommonFields(&spawn, NULL, 1.0f, false);
         gobj = Item_80268B18(&spawn);
         if (gobj != NULL) {
             Item* ip = GET_ITEM(gobj);
@@ -239,9 +233,7 @@ void itFlipper_Repel(Item_GObj* gobj, s32 kind, Vec3* pos)
 void itFlipper_EnterResting(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, FLIPPER_MS_RESTING, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, FLIPPER_MS_RESTING);
 }
 
 bool itFlipper_Resting_Anim(Item_GObj* gobj)

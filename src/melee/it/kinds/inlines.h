@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+#include <dolphin/mtx.h>
+#include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
@@ -10,6 +12,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/it/kinds/itlinkhookshot.h>
@@ -57,20 +60,6 @@ static inline void Item_RetractChain(ItemLink* link, Vec3* pos,
     *remaining_out = remaining;
 }
 
-static inline void Item_InitSpawn(SpawnItem* spawn, HSD_GObj* parent,
-                                  Vec3* pos, f32 dir)
-{
-    spawn->prev_pos = *pos;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
-    spawn->x40 = 0;
-}
-
 static inline Item_GObj*
 Item_AttachToParent(Item_GObj* item_gobj, HSD_GObj* parent, Fighter_Part part)
 {
@@ -86,6 +75,13 @@ static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
 {
     Item_AttachToParent(item_gobj, parent, part);
     it_8027CE64(item_gobj, parent, attributes[0]);
+}
+
+static inline void Item_StopAndEnterState(Item_GObj* gobj, Item* ip, s32 msid)
+{
+    itResetVelocity(ip);
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
 }
 
 static inline void Item_EnterAirStateWithHitlag(Item_GObj* gobj, enum_t msid)
@@ -202,20 +198,31 @@ static inline void Item_ResetRayAfterReflection(Item* ip, HSD_JObj* jobj)
     }
 }
 
-static inline void Item_InitRaySpawnFields(SpawnItem* spawn, HSD_GObj* parent,
-                                           f32 facing_dir)
+static inline void Item_InitSpawnPosition(SpawnItem* spawn, Vec3* pos,
+                                          bool on_plane)
+{
+    spawn->prev_pos = *pos;
+    if (on_plane) {
+        spawn->prev_pos.z = 0.0F;
+    }
+    spawn->pos = spawn->prev_pos;
+}
+
+static inline void Item_InitSpawnCommonFields(SpawnItem* spawn,
+                                              HSD_GObj* parent, f32 facing_dir,
+                                              bool initial_collision)
 {
     spawn->facing_dir = facing_dir;
     spawn->x3C_damage = 0;
     spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
     spawn->x0_parent_gobj = parent;
     spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
+    spawn->x44_flag.b0 = initial_collision;
     spawn->x40 = 0;
 }
 
-static inline void Item_InitRaySpawnPosition(SpawnItem* spawn,
-                                             HSD_GObj* parent, Vec3* pos)
+static inline void
+Item_InitSpawnPositionFromParent(SpawnItem* spawn, HSD_GObj* parent, Vec3* pos)
 {
     spawn->prev_pos = *pos;
     spawn->prev_pos.z = 0.0F;
@@ -250,35 +257,63 @@ static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
     return false;
 }
 
-static inline void Item_InitSpawnOnPlane(SpawnItem* spawn, HSD_GObj* parent,
-                                         Vec3* pos, f32 dir)
+static inline void Item_CopyJObjScale(HSD_JObj* dst, HSD_JObj* src,
+                                      Vec3* scale)
 {
-    spawn->prev_pos = *pos;
-    spawn->prev_pos.z = 0.0F;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
-    spawn->x40 = 0;
+    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
+    HSD_JObjSetScale(dst, scale);
 }
 
-static inline void Item_InitSpawnOnPlaneNoInitialCollision(SpawnItem* spawn,
-                                                           HSD_GObj* parent,
-                                                           Vec3* pos, f32 dir)
+static inline void Item_NormalizeAngle(f32* angle)
 {
-    spawn->prev_pos = *pos;
-    spawn->prev_pos.z = 0.0F;
-    spawn->pos = spawn->prev_pos;
-    spawn->facing_dir = dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-    spawn->x0_parent_gobj = parent;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = false;
-    spawn->x40 = 0;
+    while (*angle < 0.0F) {
+        *angle += M_TAU;
+    }
+    while (*angle > M_TAU) {
+        *angle -= M_TAU;
+    }
+}
+
+static inline void Item_ClearFlagsAndEnterState(Item_GObj* gobj, Item* ip,
+                                                s32 msid)
+{
+    it_8026B3A8(gobj);
+    ip->xDC8_word.flags.x13 = 0;
+    it_80272940(gobj);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
+}
+
+static inline void Item_UpdateZakoVelocity(Item_GObj* gobj, Item* ip)
+{
+    it_802762BC(ip);
+    it_8027BA54(gobj, &ip->x40_vel);
+    it_802762BC(ip);
+}
+
+static inline void Item_ZakoDefeat(Item_GObj* gobj, Item* ip)
+{
+    it_8027C9D8(ip);
+    it_802756D0(gobj);
+    it_80275474(gobj);
+    it_8027CE44(gobj);
+    Camera_RequestQuake(QuakeKind_Small, &ip->pos);
+}
+
+static inline void Item_InitLinkMtx(Mtx m, f32 z)
+{
+    PSMTXIdentity(m);
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = z;
+}
+
+static inline void Item_InitZakoCollision(Item_GObj* gobj, Item* ip)
+{
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDC8_word.flags.x19 = 1;
 }
 
 #endif

@@ -6,13 +6,13 @@
 #include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Jump.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 
 /* 09B1B8 */ static void ftCo_8009B1B8(Fighter_GObj* gobj);
@@ -34,10 +34,7 @@ void ftCo_8009B1B8(Fighter_GObj* gobj)
     FtMotionId msid = fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffJumpQuick1
                           : ftCo_MS_CliffJumpSlow1;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ftAnim_8006EBA4(gobj);
-    ftCommon_8007E2F4(fp, 32);
-    fp->x221D_b7 = true;
+    ftCo_Cliff_EnterState(gobj, fp, msid);
     ftCo_CliffCatch_Phys(gobj);
 }
 

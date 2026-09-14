@@ -6,7 +6,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -52,16 +51,7 @@ void grTGanon_802246D8(bool unused)
 void grTGanon_802246DC(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTGanon_80224784(0);
-    grTGanon_80224784(1);
-    grTGanon_80224784(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTGanon_80224784);
 }
 
 void grTganon_UnkStage0_OnLoad(void)
@@ -128,8 +118,7 @@ bool grTGanon_802248F8(Ground_GObj* gobj)
 
 void grTGanon_80224900(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTGanon_80224934(Ground_GObj* gobj)

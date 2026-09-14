@@ -8,6 +8,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/inlines.h>
@@ -60,13 +61,7 @@ Item_GObj* it_802F0340(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
     spawn.kind = kind;
     spawn.prev_pos = *prev_pos;
     spawn.pos = *pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
-    spawn.x0_parent_gobj = gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnCommonFields(&spawn, gobj, facing_dir, true);
     spawned = Item_80268B18(&spawn);
     it_802F0484(spawned);
     db_80225DD8(spawned, gobj);

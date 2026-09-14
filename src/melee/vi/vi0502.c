@@ -5,22 +5,20 @@
 #include "types.h"
 #include "vi.h"
 #include <dolphin/gx.h>
-#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grlib.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_013B.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -69,12 +67,8 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     HSD_JObj* jobj2;
     VecMtxPtr pmtx;
 
-    Camera_Init(6);
     PAD_STACK(32);
-    lb_8000FCDC();
-    mpColl_80041C78();
-    Ground_801C0378(0x40);
-    Stage_802251E8(St_Kind_Greens, 0);
+    Stage_InitScene(St_Kind_Greens, 0);
     Item_80266FA8();
     Item_80266FCC();
     Ground_SetParamY(0.7f);

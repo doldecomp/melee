@@ -157,15 +157,8 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
     PAD_STACK(20);
 
     spawn.kind = It_Kind_IceClimber_GumStrings;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = false;
-    spawn.x40 = 0;
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, owner, dir, false);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
@@ -192,10 +185,7 @@ static void fn_802C28DC(Item_GObj* gobj)
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
 
     link->x2C_b0 = true;
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -216,10 +206,7 @@ static void fn_802C29E8(Item_GObj* gobj)
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
 
     link->x2C_b0 = true;
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -238,10 +225,7 @@ static void fn_802C2AF4(HSD_GObj* gobj)
         ip->xC4_article_data->x4_specialAttributes;
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x8;
 
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -585,10 +569,7 @@ void it_802C3864(Item_GObj* gobj)
     Mtx mtx;
     PAD_STACK(8);
 
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.0f;
+    Item_InitLinkMtx(mtx, 0.0f);
 
     {
         Item* ip2 = ip;
@@ -610,10 +591,7 @@ void it_802C3950(Item_GObj* gobj)
     Mtx mtx;
     PAD_STACK(8);
 
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.0f;
+    Item_InitLinkMtx(mtx, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     result.x = mtx[0][3];

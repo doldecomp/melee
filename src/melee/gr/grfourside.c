@@ -177,8 +177,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
 
 void grFourside_801F2EBC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFourside_801F2EE8(Ground_GObj* arg)
@@ -192,8 +191,7 @@ void grFourside_801F2EF4(Ground_GObj* arg) {}
 
 void grFourside_801F2EF8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFourside_801F2F24(Ground_GObj* arg)

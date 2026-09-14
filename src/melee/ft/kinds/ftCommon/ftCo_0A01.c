@@ -15,6 +15,7 @@
 
 #include "forward.h"
 #include "ftpickupitem.h"
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/fighter.h>
@@ -241,12 +242,6 @@ int ftCo_803C5A68[] = {
 };
 
 /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
-
-static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
-{
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-}
 
 static inline void ftCo_CpuFinishWithNeutralY(Fighter* fp)
 {

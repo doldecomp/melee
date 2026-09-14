@@ -2,8 +2,7 @@
 
 #include <melee/ft/forward.h>
 
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
+#include "inlines.h"
 #include "types.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -43,9 +42,7 @@ void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim_fp = GET_FIGHTER(victim_gobj);
     PAD_STACK(4);
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
     fp->x221B_b5 = false;

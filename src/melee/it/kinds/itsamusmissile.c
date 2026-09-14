@@ -1,5 +1,6 @@
 #include "itsamusmissile.h"
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
@@ -27,16 +28,8 @@ Item_GObj* it_802B62D0(Item_GObj* gobj, Vec3* pos, bool is_smash_missile,
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_Samus_Missile;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, gobj, pos);
+    Item_InitSpawnCommonFields(&spawn, gobj, facing_dir, true);
 
     {
         Item_GObj* new_gobj = Item_80268B18(&spawn);

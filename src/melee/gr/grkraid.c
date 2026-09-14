@@ -6,7 +6,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -109,8 +108,7 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
 
 void grKraid_801FE1B0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grKraid_801FE1DC(Ground_GObj* gobj)
@@ -253,8 +251,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
         grAnime_801C7FF8(gobj, 18, 7, 0, 0.0f, 1.0f);
         gp->u.kraid.x1 = 0;
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
     grKraid_801FF150(gobj);
 }
 

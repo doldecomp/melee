@@ -15,6 +15,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
@@ -114,10 +115,7 @@ void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart, 0, 0, 1, 0,
                                   NULL);
 
-        fp0->cmd_vars[3] = 0;
-        fp0->cmd_vars[2] = 0;
-        fp0->cmd_vars[1] = 0;
-        fp0->cmd_vars[0] = 0;
+        Fighter_ClearCmdVars(fp0);
     }
 
     {
@@ -151,10 +149,7 @@ void ftNs_SpecialAirNStart_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart, 0, 0, 1, 0,
                               NULL);
 
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0;
 
     {

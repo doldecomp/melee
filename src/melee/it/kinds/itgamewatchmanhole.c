@@ -22,7 +22,8 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Manhole;
-    Item_InitSpawn(&spawn, gobj, vec, arg3);
+    Item_InitSpawnPosition(&spawn, vec, false);
+    Item_InitSpawnCommonFields(&spawn, gobj, arg3, true);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);

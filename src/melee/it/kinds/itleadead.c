@@ -5,6 +5,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftCo_800C7590.h>
 #include <melee/ft/ftlib.h>
@@ -150,11 +151,7 @@ void it_802E8BCC(Item_GObj* gobj)
         facing = 1;
     }
     mpCollSetFacingDir(&ip->x378_itemColl, facing);
-    ip->xD5C = 0;
-    ip->xDC8_word.flags.x15 = 0;
-    it_8027542C(gobj);
-    it_80275270(gobj);
-    ip->xDC8_word.flags.x19 = 1;
+    Item_InitZakoCollision(gobj, ip);
     ip->xDD4_itemVar.leadead.x48 = 0;
     ip->xDD4_itemVar.leadead.x50 = 0;
     ip->xDD4_itemVar.leadead.x4C = attr->x1C;
@@ -808,9 +805,7 @@ bool itLeadead_UnkMotion15_Coll(Item_GObj* gobj)
 void it_802EA334(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    it_8027BA54(gobj, &ip->x40_vel);
-    it_802762BC(ip);
+    Item_UpdateZakoVelocity(gobj, ip);
     Item_80268E5C(gobj, 0x10, 3);
 }
 

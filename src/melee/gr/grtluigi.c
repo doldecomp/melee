@@ -1,11 +1,9 @@
 #include "grtluigi.h"
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks grTLg_803E8DF0[4] = {
@@ -83,8 +81,7 @@ HSD_GObj* grTLuigi_80221CB4(int arg0)
 
 void grTLuigi_80221D9C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTLuigi_80221DC8(Ground_GObj* arg0)
@@ -108,8 +105,7 @@ bool grTLuigi_80221E28(Ground_GObj* arg0)
 
 void grTLuigi_80221E30(Ground_GObj* arg0)
 {
-    lb_800115F4();
-    Ground_801C2FE0(arg0);
+    Ground_ProcTargetStage(arg0);
 }
 
 void grTLuigi_80221E64(Ground_GObj* arg0) {}

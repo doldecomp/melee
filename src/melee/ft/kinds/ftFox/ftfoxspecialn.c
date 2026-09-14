@@ -19,6 +19,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
@@ -123,13 +124,6 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
     return true;
 }
 
-static inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
-{
-    Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = NULL;
-    fp->death2_cb = NULL;
-}
-
 void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -137,7 +131,7 @@ void ftFx_SpecialN_ClearBlaster(HSD_GObj* gobj)
     if (fp->u.fx.x222C_blasterGObj != NULL) {
         fp->u.fx.x222C_blasterGObj = NULL;
     }
-    ftFox_SpecialN_SetNULL(gobj);
+    Fighter_SetDamageCallback(gobj, NULL);
 }
 
 void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
@@ -149,7 +143,7 @@ void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
         fp->u.fx.x222C_blasterGObj = NULL;
     }
     if (ftFx_Init_800E5534(gobj) == false) {
-        ftFox_SpecialN_SetNULL(gobj);
+        Fighter_SetDamageCallback(gobj, NULL);
     }
 }
 
@@ -216,13 +210,6 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     }
 }
 
-static inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
-{
-    Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = ftFx_Init_800E5588;
-    fp->death2_cb = ftFx_Init_800E5588;
-}
-
 static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
                                                ftFox_DatAttrs* da,
                                                int assert_line)
@@ -235,7 +222,7 @@ static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
 
     if (blaster_gobj != NULL) {
         it_8026BAE8(fp->u.fx.x222C_blasterGObj, 0.85);
-        ftFox_SpecialN_SetCall(gobj);
+        Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
         return;
     }
 
@@ -245,10 +232,7 @@ static inline void ftFox_SpecialN_SpawnBlaster(HSD_GObj* gobj, Fighter* fp,
 
 static inline void ftFox_SpecialN_InitializeState(HSD_GObj* gobj, Fighter* fp)
 {
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -302,7 +286,7 @@ static inline void ftFox_SpecialN_StartAnimation(HSD_GObj* gobj,
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(
             gobj, loop_msid, (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0, NULL);
-        ftFox_SpecialN_SetCall(gobj);
+        Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
         fp->accessory4_cb = ftFx_SpecialN_CreateBlasterShot;
         it_802ADDD0(fp->u.fx.x222C_blasterGObj, 1);
     }
@@ -353,7 +337,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
                                       0, NULL);
             ftFox_SpecialN_FinishEndTransition(fp);
         }
-        ftFox_SpecialN_SetCall(gobj);
+        Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
     }
     {
         Vec3 sp2C;
@@ -384,7 +368,7 @@ static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* gobj)
     if (fp->u.fx.x222C_blasterGObj != NULL) {
         fp->u.fx.x222C_blasterGObj = NULL;
     }
-    ftFox_SpecialN_SetNULL(gobj);
+    Fighter_SetDamageCallback(gobj, NULL);
 }
 
 static inline bool ftFox_SpecialN_UpdateEndAnimation(HSD_GObj* gobj,
@@ -425,16 +409,16 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         if (fp->mv.fx.SpecialN.isBlasterLoop == true) {
             ftFox_SpecialN_BeginLoopTransition(gobj, fp,
                                                ftFx_MS_SpecialAirNLoop);
-            ftFox_SpecialN_SetCall(gobj);
+            Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
             ftFox_SpecialN_FinishLoopTransition(fp);
         } else {
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNEnd,
                                       (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
                                       0, NULL);
-            ftFox_SpecialN_SetCall(gobj);
+            Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
             ftFox_SpecialN_FinishEndTransition(fp);
         }
-        ftFox_SpecialN_SetCall(gobj);
+        Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
     }
     {
         Vec3 sp2C;
@@ -573,7 +557,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
     if (ftKind == Ft_Kind_Fox || ftKind == Ft_Kind_Falco) {
         if (!ftAnim_IsFramesRemaining(gobj)) {
             fp->u.fx.x222C_blasterGObj = NULL;
-            ftFox_SpecialN_SetNULL(gobj);
+            Fighter_SetDamageCallback(gobj, NULL);
             return;
         }
         switch (fp->cmd_vars[1]) {
@@ -589,7 +573,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     it_8026BAE8(fp->u.fx.x222C_blasterGObj,
                                 (0.85f * (fp->x34_scale.y *
                                           fp->co_attrs.model_scaling)));
-                    ftFox_SpecialN_SetCall(gobj);
+                    Fighter_SetDamageCallback(gobj, ftFx_Init_800E5588);
                 }
                 return;
             } else {
@@ -671,7 +655,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
         case 2:
             if (fp->u.fx.x222C_blasterGObj != NULL) {
                 fp->u.fx.x222C_blasterGObj = NULL;
-                ftFox_SpecialN_SetNULL(gobj);
+                Fighter_SetDamageCallback(gobj, NULL);
                 switch (ftLib_GetKind(gobj)) {
                 case Ft_Kind_Fox:
                     ft_PlaySFX(fp, 110100, SFX_VOLUME_MAX, SFX_PAN_MID);
@@ -686,7 +670,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
             break;
         case 0:
             fp->u.fx.x222C_blasterGObj = NULL;
-            ftFox_SpecialN_SetNULL(gobj);
+            Fighter_SetDamageCallback(gobj, NULL);
             ftpickupitem_80094818(gobj, 0);
             break;
         }

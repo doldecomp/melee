@@ -10,7 +10,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -144,8 +143,7 @@ bool grTPeach_80222ACC(Ground_GObj* gobj)
 
 void grTPeach_80222AD4(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTPeach_80222B08(Ground_GObj* gobj) {}

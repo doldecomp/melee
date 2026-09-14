@@ -134,8 +134,7 @@ Ground_GObj* grZebesRoute_8020B260(int gobj_id)
 
 void grZebesRoute_8020B348(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grZebesRoute_8020B374(Ground_GObj* arg)
@@ -149,8 +148,7 @@ void grZebesRoute_8020B380(Ground_GObj* arg) {}
 
 void grZebesRoute_8020B384(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grZebesRoute_8020B3B0(Ground_GObj* arg)

@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -266,9 +267,7 @@ bool itTaru_UnkMotion1_Coll(Item_GObj* gobj)
         }
         if (var_f1 < attr->x34) {
             ip = GET_ITEM(gobj);
-            itResetVelocity(ip);
-            it_8026B390(gobj);
-            Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+            Item_StopAndEnterState(gobj, ip, 0);
         } else {
             it_802762BC(ip);
             ip->x40_vel.y *= -attrs->x58;

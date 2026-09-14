@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
@@ -91,9 +92,7 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
 void it_8029455C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)

@@ -3,13 +3,11 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 223864 */ static void grTSeak_OnDemoInit(bool);
@@ -109,8 +107,7 @@ HSD_GObj* grTSeak_80223908(int arg0)
 
 void grTSeak_802239F0(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTSeak_80223A1C(Ground_GObj* gobj)
@@ -134,8 +131,7 @@ bool grTSeak_80223A7C(Ground_GObj* gobj)
 
 void grTSeak_80223A84(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTSeak_80223AB8(Ground_GObj* gobj) {}

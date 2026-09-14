@@ -4,7 +4,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -112,8 +111,7 @@ bool grTCLink_8022015C(Ground_GObj* gobj)
 
 void grTCLink_80220164(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTCLink_80220198(Ground_GObj* gobj) {}

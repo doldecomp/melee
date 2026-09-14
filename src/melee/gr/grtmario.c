@@ -2,7 +2,6 @@
 
 #include <melee/lb/forward.h>
 
-#include "granime.h"
 #include "grlib.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -11,7 +10,6 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/psstructs.h>
@@ -118,8 +116,7 @@ HSD_GObj* grTMario_8021F8E4(int arg0)
 
 void grTMario_8021F9CC(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTMario_8021F9F8(Ground_GObj* gobj)
@@ -149,8 +146,7 @@ bool grTMario_8021FA94(Ground_GObj* gobj)
 
 void grTMario_8021FA9C(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTMario_8021FAD0(Ground_GObj* gobj) {}

@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
@@ -26,16 +27,8 @@ void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
 
     SpawnItem spawn_item;
     spawn_item.kind = kind;
-    spawn_item.prev_pos = *pos;
-    spawn_item.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &spawn_item.pos);
-    spawn_item.facing_dir = facing_dir;
-    spawn_item.x3C_damage = 0;
-    spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0f;
-    spawn_item.x0_parent_gobj = gobj;
-    spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.b0 = true;
-    spawn_item.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn_item, gobj, pos);
+    Item_InitSpawnCommonFields(&spawn_item, gobj, facing_dir, true);
 
     spawned_gobj = Item_80268B18(&spawn_item);
     it_8029B7C0(spawned_gobj);

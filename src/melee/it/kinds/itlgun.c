@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 
+#include "inlines.h"
 #include "itlgunray.h"
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -71,9 +72,7 @@ void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
 void it_8028E7D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itLgun_UnkMotion0_Anim(Item_GObj* gobj)

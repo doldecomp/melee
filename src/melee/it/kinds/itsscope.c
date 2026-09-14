@@ -36,7 +36,8 @@ HSD_GObj* it_80291BE0(Vec3* arg0)
     Item_GObj* gobj;
 
     spawn.kind = It_Kind_S_Scope;
-    Item_InitSpawn(&spawn, NULL, arg0, -1.0f);
+    Item_InitSpawnPosition(&spawn, arg0, false);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0f, true);
     gobj = Item_80268B5C(&spawn);
     if (gobj != NULL) {
         it_80292030(gobj);
@@ -156,9 +157,7 @@ void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
 void it_80292030(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)

@@ -6,8 +6,7 @@
 #include "ftcommon.h"
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Damage.h"
-#include "kinds/ftCommon/ftCo_Lift.h"
-#include "kinds/ftCommon/ftCo_Throw.h"
+#include "kinds/ftCommon/inlines.h"
 #include "types.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itlikelike.h>
@@ -29,9 +28,7 @@ void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
     ftCommonData* cd;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureLikelike, 0x1080, 0.0f,
                               1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);

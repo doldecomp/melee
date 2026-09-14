@@ -69,7 +69,8 @@ Item_GObj* it_80292D48(Vec3* vec)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_F_Flower;
-    Item_InitSpawnOnPlane(&spawn, NULL, vec, -1.0F);
+    Item_InitSpawnPosition(&spawn, vec, true);
+    Item_InitSpawnCommonFields(&spawn, NULL, -1.0F, true);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
@@ -152,9 +153,7 @@ void it_80292FF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itFflower_UnkMotion0_Anim(Item_GObj* gobj)

@@ -185,7 +185,8 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
-    Item_InitSpawn(&spawn, parent_gobj, arg1, facing_dir);
+    Item_InitSpawnPosition(&spawn, arg1, false);
+    Item_InitSpawnCommonFields(&spawn, parent_gobj, facing_dir, true);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
@@ -220,10 +221,7 @@ void fn_802BB44C(Item_GObj* gobj)
     temp_r30 = GET_ITEM(gobj);
     link = temp_r30->xDD4_itemVar.seakchain.x0;
     sa = temp_r30->xC4_article_data->x4_specialAttributes;
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.1f;
+    Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     vec.x = mtx[0][3];
@@ -249,10 +247,7 @@ void fn_802BB574(Item_GObj* gobj)
     Mtx mtx;
     ItemLink* link = ip->xDD4_itemVar.seakchain.x0;
 
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.1f;
+    Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     vec.x = mtx[0][3];
@@ -276,10 +271,7 @@ void fn_802BB694(Item_GObj* gobj)
     Mtx mtx;
     Item* ip = GET_ITEM(gobj);
     ItemLink* link = ip->xDD4_itemVar.seakchain.x4;
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.1f;
+    Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     vec.x = mtx[0][3];
@@ -300,10 +292,7 @@ void fn_802BB784(Item_GObj* gobj)
     ip = GET_ITEM(gobj);
     link = ip->xDD4_itemVar.seakchain.x4;
     sa = ip->xC4_article_data->x4_specialAttributes;
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.1f;
+    Item_InitLinkMtx(mtx, 0.1f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     vec.x = mtx[0][3];
@@ -912,10 +901,7 @@ void it_802BCFC4(Item_GObj* gobj, Vec3* vel)
         {
             Mtx mtx;
             PAD_STACK(2 * 4);
-            PSMTXIdentity(mtx);
-            mtx[0][3] = 0.0f;
-            mtx[1][3] = 0.0f;
-            mtx[2][3] = 0.1f;
+            Item_InitLinkMtx(mtx, 0.1f);
             HSD_JObjSetupMatrix(link->jobj);
             PSMTXConcat(link->jobj->mtx, mtx, mtx);
             {

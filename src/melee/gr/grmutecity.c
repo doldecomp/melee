@@ -589,8 +589,7 @@ void grMuteCity_801F040C(Ground_GObj* arg) {}
 
 void grMuteCity_801F0410(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grMuteCity_801F043C(Ground_GObj* arg)

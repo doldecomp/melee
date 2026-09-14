@@ -4,7 +4,6 @@
 
 #include <melee/lb/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
@@ -107,8 +106,7 @@ static HSD_GObj* grFigure1_8020E080(int gobj_id)
 
 static void grFigure1_8020E168(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grFigure1_8020E194(Ground_GObj* arg0)

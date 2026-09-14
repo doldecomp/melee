@@ -5,6 +5,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
@@ -67,24 +68,13 @@ Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
     Item_GObj* item_gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(parent, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnPositionFromParent(&spawn, parent, pos);
+    Item_InitSpawnCommonFields(&spawn, parent, facing_dir, true);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.seakneedlethrown.xDF4 = -1;
         ip->xDD4_itemVar.seakneedlethrown.xDFC = 0.0f;

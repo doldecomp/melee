@@ -49,10 +49,7 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
     }
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.dk.specialn.x0 = 0;
     fp->mv.dk.specialn.x4 = 0;
     fp->mv.dk.specialn.x14 = -1;
@@ -85,10 +82,7 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
     }
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.dk.specialn.x0 = 0;
     fp->mv.dk.specialn.x4 = 0;
     fp->mv.dk.specialn.x14 = -1;

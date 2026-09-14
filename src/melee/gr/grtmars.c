@@ -1,12 +1,10 @@
 #include "grtmars.h"
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
@@ -105,8 +103,7 @@ static Ground_GObj* setupStageCallbacks(int gobj_id)
 
 static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool stageGObj0_Callback1(Ground_GObj* arg0)
@@ -130,8 +127,7 @@ static bool stageGObj2_Callback1(Ground_GObj* arg0)
 
 static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 static void stageGObj2_Callback3(Ground_GObj* arg0) {}

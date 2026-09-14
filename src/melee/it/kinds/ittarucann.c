@@ -4,6 +4,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -353,9 +354,7 @@ bool itTarucann_UnkMotion1_Coll(Item_GObj* gobj)
         }
         if (y < da->x20) {
             Item* ip2 = GET_ITEM(gobj);
-            itResetVelocity(ip2);
-            it_8026B390(gobj);
-            Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+            Item_StopAndEnterState(gobj, ip2, 0);
         } else {
             it_802762BC(ip);
             ip->x40_vel.y *= -attrs->x58;

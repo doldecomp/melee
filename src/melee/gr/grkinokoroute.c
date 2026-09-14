@@ -18,7 +18,6 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
@@ -500,8 +499,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         gp->u.kinokoroute2.cam_timer -= 1;
     }
 
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
     if (gp->u.kinokoroute2.flags_0) {
         mpLib_80058560();
         gp->u.kinokoroute2.flags_0 = false;

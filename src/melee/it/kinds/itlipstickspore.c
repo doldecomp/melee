@@ -8,6 +8,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/it/inlines.h>
@@ -43,9 +44,7 @@ void it_8029A114(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, s32 arg4)
     PAD_STACK(8);
 
     spawn.kind = It_Kind_LipStick_Spore;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, gobj, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
@@ -69,9 +68,7 @@ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir, s32 arg4)
     Item_GObj* item_gobj;
 
     spawn.kind = It_Kind_LipStick_Spore;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner, &spawn.pos);
+    Item_InitSpawnPositionFromParent(&spawn, owner, pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;

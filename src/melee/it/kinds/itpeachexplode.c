@@ -29,7 +29,8 @@ Item_GObj* it_802BD158(Item_GObj* gobj, Vec3* pos, bool arg2, float dir)
     Item_GObj* result;
 
     spawn.kind = It_Kind_Peach_Explode;
-    Item_InitSpawn(&spawn, gobj, pos, dir);
+    Item_InitSpawnPosition(&spawn, pos, false);
+    Item_InitSpawnCommonFields(&spawn, gobj, dir, true);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         it_802BD248(result, gobj, arg2);

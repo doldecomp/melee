@@ -21,15 +21,12 @@ HSD_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone, float facing_dir)
     PAD_STACK(4);
     if (parent != NULL) {
         spawn.kind = It_Kind_CLink_Milk;
-        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, parent, pos,
-                                                facing_dir);
+        Item_InitSpawnPosition(&spawn, pos, true);
+        Item_InitSpawnCommonFields(&spawn, parent, facing_dir, false);
         item_gobj = Item_80268B18(&spawn);
         if (item_gobj != NULL) {
             Item* ip = GET_ITEM(item_gobj);
-            ip->xDB8_itcmd_var3 = 0;
-            ip->xDB4_itcmd_var2 = 0;
-            ip->xDB0_itcmd_var1 = 0;
-            ip->xDAC_itcmd_var0 = 0;
+            Item_ClearCmdVars(ip);
             ip->xDCC_flag.b3 = false;
             ip->xDD4_itemVar.clinkmilk.x0 = parent;
             Item_8026AB54(item_gobj, parent, bone);

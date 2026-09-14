@@ -2,7 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include "granime.h"
 #include "grfigure1.h"
 #include "ground.h"
 #include "grzakogenerator.h"
@@ -101,8 +100,7 @@ static HSD_GObj* grFigure2_8020E314(int gobj_id)
 }
 static void grFigure2_8020E3FC(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grFigure2_8020E428(Ground_GObj* arg0)

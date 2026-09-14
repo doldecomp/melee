@@ -20,9 +20,8 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_JumpAerial.h"
-#include "ftCo_Lift.h"
 #include "ftCo_SpecialAir.h"
-#include "ftCo_Throw.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
@@ -235,9 +234,7 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
     Vec3 joint_pos;
     Vec3 hip_pos;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     ftCo_8008DCE0(gobj, -1, 0);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Bury,

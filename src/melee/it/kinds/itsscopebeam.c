@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -39,16 +40,8 @@ void it_80298DEC(Fighter_GObj* gobj, Vec* vec, int arg2, float arg3)
     HSD_GObj* n;
     SpawnItem si;
     si.kind = It_Kind_S_Scope_Beam;
-    si.prev_pos = *vec;
-    si.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &si.pos);
-    si.facing_dir = arg3;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = 1;
-    si.x40 = 0;
+    Item_InitSpawnPositionFromParent(&si, gobj, vec);
+    Item_InitSpawnCommonFields(&si, gobj, arg3, true);
     n = Item_80268B18(&si);
     if (n != NULL) {
         Item* ip = GET_ITEM(n);

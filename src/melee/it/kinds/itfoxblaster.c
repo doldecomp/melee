@@ -65,14 +65,6 @@ f32 it_803F6D90[14] = { 0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
 f32 it_803F6DC8[14] = { 0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
                         0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F };
 
-static inline HSD_JObj* jobj_child(HSD_JObj* node)
-{
-    if (node == NULL) {
-        return NULL;
-    }
-    return node->child;
-}
-
 static inline void itFoxBlaster_PlaySFX(Item* item, u32 fox_sfx, u32 falco_sfx)
 {
     switch (item->kind) {
@@ -112,7 +104,7 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
     }
 
     item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
-    child_jobj = jobj_child(item_jobj);
+    child_jobj = HSD_JObjGetChild(item_jobj);
     if (item->xDD4_itemVar.foxblaster.set_sfx_var2 != visibility) {
         item->xDD4_itemVar.foxblaster.set_sfx_var2 = visibility;
         if (visibility == 2) {
@@ -491,8 +483,9 @@ Item_GObj* it_802AE8A8(f32 facing_dir, Fighter_GObj* fighter_gobj, Vec3* arg2,
 
     if (fighter_gobj != NULL) {
         spawn.kind = it_kind;
-        Item_InitSpawnOnPlaneNoInitialCollision(
-            &spawn, (HSD_GObj*) fighter_gobj, arg2, facing_dir);
+        Item_InitSpawnPosition(&spawn, arg2, true);
+        Item_InitSpawnCommonFields(&spawn, (HSD_GObj*) fighter_gobj,
+                                   facing_dir, false);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets
@@ -528,17 +521,10 @@ Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
         spawn.kind = it_kind;
 
         ftLib_80086644(owner_gobj, &sp18);
-        spawn.prev_pos = sp18;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
+        Item_InitSpawnPosition(&spawn, &sp18, true);
 
-        spawn.facing_dir = ftLib_800865C0(owner_gobj);
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-        spawn.x0_parent_gobj = owner_gobj;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnCommonFields(&spawn, owner_gobj,
+                                   ftLib_800865C0(owner_gobj), false);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets
@@ -840,12 +826,6 @@ bool itFoxblaster_UnkMotion9_Coll(HSD_GObj* item_gobj)
     return true;
 }
 
-static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
-{
-    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
-    HSD_JObjSetScale(dst, scale);
-}
-
 /// @brief If blaster item exists and ? (ftCo_800BF228), set the item scale to
 /// match the owner's
 /// @param item_gobj
@@ -858,7 +838,8 @@ bool itFoxblaster_UnkMotion10_Anim(HSD_GObj* item_gobj)
             if (ftCo_800BF228(it->xDD4_itemVar.foxblaster.owner) == 1) {
                 Vec3 scale;
                 HSD_GObj* owner = it->xDD4_itemVar.foxblaster.owner;
-                copy_jobj_scale(GET_JOBJ(item_gobj), GET_JOBJ(owner), &scale);
+                Item_CopyJObjScale(GET_JOBJ(item_gobj), GET_JOBJ(owner),
+                                   &scale);
             }
         }
     }

@@ -141,10 +141,7 @@ void ftSs_SpecialN_Enter(HSD_GObj* gobj)
     u8 _[8];
 
     Fighter_ChangeMotionState(gobj, 343, 0, 0, 1, 0, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftCommon_8007D7FC(fp);
     self_vel = &fp->self_vel;
     self_vel->y = 0;
@@ -162,10 +159,7 @@ void ftSs_SpecialAirN_Enter(HSD_GObj* gobj)
     u8 _[8];
 
     Fighter_ChangeMotionState(gobj, 347, 0, 0, 1, 0, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->mv.ss.unk3.x0 = 1;
     fp->mv.ss.unk3.x4 = 0;

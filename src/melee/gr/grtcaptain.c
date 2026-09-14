@@ -5,13 +5,11 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -113,8 +111,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
 
 static void grTCaptain_8021FDEC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grTCaptain_8021FE18(Ground_GObj* arg0)
@@ -138,8 +135,7 @@ static bool grTCaptain_8021FE78(Ground_GObj* arg0)
 
 static void grTCaptain_8021FE80(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
