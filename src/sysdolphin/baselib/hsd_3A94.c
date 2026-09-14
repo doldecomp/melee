@@ -8,6 +8,7 @@
 #include "hsd_4D11.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
+#include <dolphin/types.h>
 
 #define BANNER_SMALL 0xE00
 #define BANNER_LARGE 0x1800
@@ -893,7 +894,9 @@ static inline void unpackCardStat(const s32* cmd, CARDStat* stat)
     s32 k;
 
     CMD_STATE->icon_info.banner_format = stat->bannerFormat & 3;
-    for (k = 0; k < 8; k++) {
+    for (k = 0; k < (ssize_t) ARRAY_SIZE(CMD_STATE->icon_info.icon_format);
+         k++)
+    {
         CMD_STATE->icon_info.icon_format[k] =
             (stat->iconFormat >> (2 * k)) & CARD_STAT_ICON_MASK;
         CMD_STATE->icon_info.icon_speed[k] =

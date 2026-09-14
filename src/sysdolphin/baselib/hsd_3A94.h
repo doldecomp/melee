@@ -6,10 +6,10 @@
 #include <dolphin/card.h>
 
 typedef struct {
-    /* 0x3B0 */ u8 banner_format;
-    /* 0x3B1 */ u8 pad_3B1[1];
-    /* 0x3B2 */ u8 icon_format[8];
-    /* 0x3BA */ u8 icon_speed[8];
+    u8 banner_format;
+    u8 unused;
+    u8 icon_format[8];
+    u8 icon_speed[8];
 } CardIconInfo;
 
 typedef struct CardState {
