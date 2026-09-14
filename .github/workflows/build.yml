@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'test', 'clang', 'debug']
+        mode: ['link', 'test', 'debug']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -119,22 +119,6 @@ jobs:
             run_configure
             ninja
           ;;
-          'clang')
-            config_args=""
-            export PRE_COMMIT_HOME="$PWD/build/pre-commit"
-
-            # TODO: Migrate to nix and install to environment
-            apk add --update --no-cache clang-extra-tools pre-commit
-
-            run_configure
-            ninja 'build/${{matrix.version}}/config.json'
-
-            pre-commit run \
-              --show-diff-on-failure \
-              --color=always \
-              clang-tidy \
-              --all-files
-          ;;
           'debug')
             config_args=$(printf '%s ' \
               '--debug' \
@@ -202,6 +186,7 @@ jobs:
         uses: actions/deploy-pages@v5
 
   native-build:
+    name: Build for x86 with gcc
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
@@ -214,7 +199,7 @@ jobs:
     - run: nix build .#melee-gcc-native -L
 
   build-nix:
-    name: Nix
+    name: Build matching DOL with nix
     runs-on: ubuntu-latest
     if: github.repository == 'doldecomp/melee'
     env:
@@ -242,9 +227,42 @@ jobs:
       with:
         name: doldecomp-melee
     - run: |
-        CACHIX_AUTH_TOKEN=${{secrets.CACHIX_AUTH_TOKEN}} cachix watch-exec doldecomp-melee -- nix develop
+        CACHIX_AUTH_TOKEN=${{secrets.CACHIX_AUTH_TOKEN}} \
+        cachix watch-exec doldecomp-melee -- \
+        nix develop
     - run: nix flake check
     - run: nix develop --command ninja
+
+  lint:
+    name: Run pre-commit hooks
+    runs-on: ubuntu-latest
+    if: github.repository == 'doldecomp/melee'
+    env:
+      REGISTRY: ghcr.io
+      IMAGE: doldecomp/melee-build:main
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 1
+    - name: Log into container registry
+      uses: docker/login-action@v4
+      with:
+        registry: ${{env.REGISTRY}}
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+    - uses: cachix/install-nix-action@v31
+    - name: Grab Melee DOL
+      run: |
+        image="$REGISTRY/$IMAGE"
+        docker pull "$image"
+        container_id=$(docker create "$image")
+        docker cp "$container_id":/orig .
+        nix-store --add-fixed sha256 orig/GALE01/sys/main.dol
+    - uses: cachix/cachix-action@v17
+      with:
+        name: doldecomp-melee
+    - run: nix develop --command ninja build/GALE01/config.json
+    - run: nix develop --command pre-commit run --color=always --show-diff-on-failure --all-files
 
   update-wiki:
     name: Update wiki TU list
