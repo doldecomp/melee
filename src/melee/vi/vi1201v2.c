@@ -3,24 +3,21 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include "vi.h"
-#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/ground.h>
+#include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_013B.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmain.h>
-#include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
@@ -77,11 +74,7 @@ void un_80320508(CharacterKind char_kind, int costume)
 {
     PAD_STACK(16);
 
-    Camera_Init(6);
-    lb_8000FCDC();
-    mpColl_80041C78();
-    Ground_801C0378(0x40);
-    Stage_802251E8(St_Kind_Last, 0);
+    Stage_InitScene(St_Kind_Last, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();

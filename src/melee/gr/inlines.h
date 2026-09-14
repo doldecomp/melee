@@ -5,14 +5,18 @@
 
 #include <math.h>
 
+#include <melee/cm/camera.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
 #include <melee/gr/types.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -46,6 +50,15 @@ static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
     if (callbacks->gobj_proc != NULL) {
         HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
     }
+}
+
+static inline void Stage_InitScene(StKind stkind, s32* arg1)
+{
+    Camera_Init(6);
+    lb_8000FCDC();
+    mpColl_80041C78();
+    Ground_801C0378(0x40);
+    Stage_802251E8(stkind, arg1);
 }
 
 static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
