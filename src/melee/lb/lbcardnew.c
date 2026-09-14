@@ -113,7 +113,7 @@ struct CardTask* lb_80019C38(void)
 
     for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         result = &_p(task_array)[i];
-        if (result->x0 == 0xE) {
+        if (result->x0 == result_14) {
             break;
         }
     }
@@ -192,16 +192,16 @@ again:
                 break;
             }
             task->x0 = 14;
-            if (result != 11) {
+            if (result != result_pending_ops) {
                 goto again;
             }
         }
     }
-    if (result != 11 && _p(x50C) != NULL) {
+    if (result != result_pending_ops && _p(x50C) != NULL) {
         _p(x50C)(result);
         _p(x50C) = NULL;
     }
-    if (result != 11 && _p(unk_80) != 0) {
+    if (result != result_pending_ops && _p(unk_80) != 0) {
         CARDUnmount(_p(chan));
         _p(unk_80) = 0;
     }
@@ -221,10 +221,10 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     _p(snapshot_entries) = NULL;
     _p(free_blocks) = NULL;
     _p(free_files) = NULL;
-    _p(saved_error) = 0x10;
+    _p(saved_error) = 16;
 
-    for (i = 0; i < 9; i++) {
-        _p(unk_38)[i].card_error = 0x10;
+    for (i = 0; i < ARRAY_SIZE(_p(unk_38)); i++) {
+        _p(unk_38)[i].card_error = 16;
         _p(unk_38)[i].unk_4 = -1;
     }
 
@@ -316,7 +316,7 @@ int lb_8001A184(void)
 
         _p(saved_error) = lb_80019BB8(mount_result);
         if (mount_result == 0 || mount_result == -6 || mount_result == -0xD) {
-            _p(unk_80) = 1;
+            _p(unk_80) = true;
         }
         if (_p(saved_error) == 0) {
             _p(pending_ops) += 1;
@@ -344,7 +344,7 @@ int lb_8001A3A4(void)
     enabled = OSDisableInterrupts();
     check_result = CARDCheckAsync(_p(chan), onCardAttach);
     _p(saved_error) = lb_80019BB8(check_result);
-    if (_p(saved_error) == 0) {
+    if (_p(saved_error) == error_ok) {
         _p(pending_ops) += 1;
     }
     pending_ops = _p(pending_ops);
