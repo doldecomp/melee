@@ -77,7 +77,7 @@ typedef struct CardRequest {
 
 /// Layout of hsd_804D1138 .. hsd_804D2348: the request being completed,
 /// the command ring and the request queue.
-typedef struct CardContext {
+typedef struct {
     /* 0x0000 */ s32 req_type;
     /* 0x0004 */ CardState* state;
     /* 0x0008 */ void (*callback)(s32, s32);

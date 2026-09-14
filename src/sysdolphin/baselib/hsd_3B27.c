@@ -80,11 +80,11 @@ int hsd_803B27F4(const CardState* arg0, const char* arg1, int arg2, int arg3,
 }
 
 int hsd_803B286C(CardState* state, const char* filename, const char* comment,
-                 int arg3, int arg4, void (*arg5)(int, int))
+                 int arg3, int arg4, void (*cb)(int, int))
 {
     u8* base = hsd_804D1138;
 
-    memcpy(state->comment, comment, sizeof(state->comment));
+    memcpy(((CardState*) state)->comment, comment, 64);
 
     {
         s32 write_idx;
@@ -101,7 +101,7 @@ int hsd_803B286C(CardState* state, const char* filename, const char* comment,
         CMD_QUEUE(base)[write_idx].c3.f2 = (s32) filename;
         CMD_QUEUE(base)[write_idx].c3.f3 = arg3;
         CMD_QUEUE(base)[write_idx].c3.f4 = arg4;
-        CMD_QUEUE(base)[write_idx].c3.f5 = (s32) arg5;
+        CMD_QUEUE(base)[write_idx].c3.f5 = (s32) cb;
         hsd_804D7994 = (write_idx + 1) % 32;
     }
 
