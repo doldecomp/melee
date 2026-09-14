@@ -17,6 +17,6 @@
 /* 3B29D8 */ int hsd_803B29D8(const CardState* ctx, int channel,
                               const u8* data, UNK_T callback);
 /* 3B2A4C */ int hsd_803B2A4C(const s32*, int, const u8*, void (*)(int, int));
-/* 3B2ADC */ int hsd_803B2ADC(CardState* ctx, UNK_T data);
+/* 3B2ADC */ int hsd_SetCardIconInfo(CardState* ctx, CardIconInfo* icon_info);
 
 #endif

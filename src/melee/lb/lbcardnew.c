@@ -382,7 +382,7 @@ static inline void setupCardEntries(void* ctx, void* icon,
 {
     int i;
 
-    hsd_803B2ADC(ctx, icon);
+    hsd_SetCardIconInfo(ctx, icon);
     i = 0;
     while (entry->file_size != -1) {
         if (entry->file_size != 0) {
@@ -1157,7 +1157,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
     entry = file_entries;
     ctx = (CardState*) &_p(unk_A8);
     hsd_803B24E4(ctx, 0, 0x2000, _p(lib_area));
-    hsd_803B2ADC(ctx, icon);
+    hsd_SetCardIconInfo(ctx, icon);
     {
         int i;
 

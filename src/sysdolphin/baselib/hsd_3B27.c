@@ -199,9 +199,9 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
     return 0;
 }
 
-int hsd_803B2ADC(CardState* ctx, UNK_T data)
+int hsd_SetCardIconInfo(CardState* ctx, CardIconInfo* icon_info)
 {
-    memcpy(&ctx->icon_info.banner_format, data, 18);
-    ctx->header_size = hsd_803AC340(&ctx->icon_info.banner_format);
+    memcpy(&ctx->icon_info, icon_info, 18);
+    ctx->header_size = hsd_803AC340(&ctx->icon_info);
     return 0;
 }
