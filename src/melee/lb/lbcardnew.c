@@ -52,7 +52,7 @@ struct lb_80432A68_t {
     /* 0x510 */ struct CardTask {
         int x0;
         int x4;
-        UNK_T x8;
+        void* file_entries;
         char* xC;
         char filename[32];
         u8 x18;
@@ -146,7 +146,7 @@ again:
                 result = lb_8001A3A4();
                 break;
             case 2:
-                result = lb_8001A594(task->xC, task->x8);
+                result = lb_8001A594(task->xC, task->file_entries);
                 break;
             case 3:
                 result = lb_8001A860();
@@ -164,10 +164,10 @@ again:
                 result = lb_8001AC04(&task->filename);
                 break;
             case 8:
-                result = lb_8001ACEC(task->x8);
+                result = lb_8001ACEC(task->file_entries);
                 break;
             case 9:
-                result = lb_8001AE38(task->x8);
+                result = lb_8001AE38(task->file_entries);
                 break;
             case 10:
                 result = lb_8001AF84();
@@ -347,7 +347,7 @@ int lb_8001A3A4(void)
     return saved_error;
 }
 
-void lb_8001A4CC(const char* filename, UNK_T file_entries)
+void lb_8001A4CC(const char* filename, void* file_entries)
 {
     struct CardTask* task = lb_80019C38();
     task->x0 = 2;
@@ -358,7 +358,7 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     } else {
         task->xC = NULL;
     }
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
 }
 
 struct SnapshotNode {
@@ -945,7 +945,7 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
-    setup_task(8, 3)->x8 = file_entries;
+    setup_task(8, 3)->file_entries = file_entries;
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
@@ -985,7 +985,7 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     task = lb_80019C38();
     task->x0 = 9;
     task->x4 = 3;
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
     return lb_80019CB0(0x10);
 }
 #ifdef MUST_MATCH
@@ -1017,7 +1017,7 @@ int lb_8001BF04(int chan, char* filename, void* file_entries,
     task = lb_80019C38_noinline();
     task->x0 = 8;
     task->x4 = 3;
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
     return lb_80019CB0(0x10);
 }
 
@@ -1074,7 +1074,7 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     } else {
         task->xC = NULL;
     }
-    task->x8 = 0;
+    task->file_entries = 0;
     task = lb_80019C38_noinline();
     task->x0 = 3;
     task->x4 = -1;
@@ -1092,7 +1092,7 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     } else {
         task->xC = NULL;
     }
-    task->x8 = 0;
+    task->file_entries = 0;
     task = lb_80019C38_noinline();
     task->x0 = 3;
     task->x4 = -1;
