@@ -434,10 +434,10 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     if (var_r27 != 0) {
         if (scaled_kb_154 >= p_ftCommonData->x20C) {
             fp->dmg.x1908 = 0x4F;
-            fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x20;
+            fp->dmg.x190C = fp->ft_data->x4C_sfx->x20;
         } else if (scaled_kb_154 >= p_ftCommonData->x208) {
             fp->dmg.x1908 = 0x50;
-            fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x1C;
+            fp->dmg.x190C = fp->ft_data->x4C_sfx->x1C;
         }
     }
     if (kb_level == 3) {

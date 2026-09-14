@@ -72,7 +72,7 @@ block_2:
         goto block_5;
     }
 
-    part = ((int*) fp->ft_data->x54)[fp->x2220_b0];
+    part = fp->ft_data->x54[fp->x2220_b0];
 
     fp->x2220_b0++;
     if (fp->x2220_b0 < 5) {
