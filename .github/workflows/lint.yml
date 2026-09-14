@@ -12,9 +12,10 @@ jobs:
     strategy:
       matrix:
         hook:
+          - replace-includes
+          - style-check
           - clang-format
           - editorconfig-checker
-          - style-check
     steps:
     - uses: actions/checkout@v6
       with:
