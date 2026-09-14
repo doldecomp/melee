@@ -21,7 +21,7 @@ typedef struct CardState {
     /// -0x7FFF = free.
     /* 0x170 */ s32 block_ids[64];
     /* 0x270 */ s32 block_seqs[64];
-    /* 0x370 */ u8 comment[0x40];
+    /* 0x370 */ char comment[64];
     /* 0x3B0 */ u8 banner_format;
     /* 0x3B1 */ u8 pad_3B1[1];
     /* 0x3B2 */ u8 icon_format[8];
