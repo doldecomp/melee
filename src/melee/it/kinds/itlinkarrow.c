@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -17,7 +18,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>

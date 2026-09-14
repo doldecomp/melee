@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include "forward.h"
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftPikachu/ftpikachuspeciallw.h>
 #include <melee/it/inlines.h>
@@ -12,7 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

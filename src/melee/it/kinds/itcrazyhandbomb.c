@@ -1,5 +1,6 @@
 #include "itcrazyhandbomb.h"
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -8,7 +9,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F93A8[] = {

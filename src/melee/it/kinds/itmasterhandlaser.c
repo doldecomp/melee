@@ -8,6 +8,7 @@
 
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/inlines.h>
@@ -16,7 +17,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/ithitbox.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mplib.h>

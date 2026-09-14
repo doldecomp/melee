@@ -1,5 +1,6 @@
 #include "itkirbyhammer.h"
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
@@ -7,7 +8,6 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-#include <melee/it/kinds/inlines.h>
 
 ItemStateTable it_803F6C98[] = {
     { 0, NULL, NULL, NULL },

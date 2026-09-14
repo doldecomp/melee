@@ -2,6 +2,7 @@
 
 #include <melee/it/forward.h>
 
+#include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grfigureget.h>
@@ -17,7 +18,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>

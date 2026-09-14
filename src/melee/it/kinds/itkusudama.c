@@ -7,6 +7,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
@@ -20,7 +21,6 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itspawn.h>
-#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F59F8[] = {
