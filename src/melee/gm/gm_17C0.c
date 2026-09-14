@@ -920,9 +920,6 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-#ifdef MUST_MATCH
-#pragma opt_propagation off
-#endif
 static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
                                     const u8* preset_ckinds)
 {
@@ -941,8 +938,7 @@ static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
     u8* w;
     u8* w2;
 
-    base = arr;
-    scan.cursor = base;
+    scan.cursor = (base = arr);
     scan.count = 0;
     while ((s32) *scan.cursor != ChKind_None) {
         scan.cursor++;
@@ -990,7 +986,6 @@ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
     return pick_random_ckind(lbl_803D79F0, used_ckinds, preset_ckinds);
 }
 #ifdef MUST_MATCH
-#pragma opt_propagation reset
 #pragma dont_inline on
 #endif
 
