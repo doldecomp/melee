@@ -154,10 +154,7 @@ void it_802AAA80(Item_GObj* gobj)
     f32 angle;
     PAD_STACK(8);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attr->x0_FLASH_LIFETIMER);
     ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0f;
     ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;

@@ -18,6 +18,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
@@ -808,9 +809,7 @@ bool itLeadead_UnkMotion15_Coll(Item_GObj* gobj)
 void it_802EA334(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    it_8027BA54(gobj, &ip->x40_vel);
-    it_802762BC(ip);
+    Item_UpdateZakoVelocity(gobj, ip);
     Item_80268E5C(gobj, 0x10, 3);
 }
 

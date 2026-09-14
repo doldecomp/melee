@@ -19,6 +19,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -179,10 +180,7 @@ void itKoopaFlame_Setup(Item_GObj* gobj_i, Fighter_GObj* gobj_f, int unk)
     char pad_stack[0x19C]; // PAD_STACK doesn't work here
     Vec vec;
     char pad_stack_2[0x14];
-    it_8026B3A8(gobj_i);
-    it->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj_i);
-    Item_80268E5C(gobj_i, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj_i, it, 0);
     vec = it->pos;
     Item_802694CC(gobj_i);
     itKoopaFlame_UnkMotion0_Phys(gobj_i);

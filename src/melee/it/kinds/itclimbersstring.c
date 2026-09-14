@@ -8,6 +8,7 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -185,10 +186,7 @@ static void fn_802C28DC(Item_GObj* gobj)
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
 
     link->x2C_b0 = true;
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -209,10 +207,7 @@ static void fn_802C29E8(Item_GObj* gobj)
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
 
     link->x2C_b0 = true;
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -231,10 +226,7 @@ static void fn_802C2AF4(HSD_GObj* gobj)
         ip->xC4_article_data->x4_specialAttributes;
     ItemLink* link = ip->xDD4_itemVar.climbersstring.x8;
 
-    PSMTXIdentity(m);
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    Item_InitLinkMtx(m, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -578,10 +570,7 @@ void it_802C3864(Item_GObj* gobj)
     Mtx mtx;
     PAD_STACK(8);
 
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.0f;
+    Item_InitLinkMtx(mtx, 0.0f);
 
     {
         Item* ip2 = ip;
@@ -603,10 +592,7 @@ void it_802C3950(Item_GObj* gobj)
     Mtx mtx;
     PAD_STACK(8);
 
-    PSMTXIdentity(mtx);
-    mtx[0][3] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][3] = 0.0f;
+    Item_InitLinkMtx(mtx, 0.0f);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
     result.x = mtx[0][3];

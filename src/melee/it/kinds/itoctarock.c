@@ -4,7 +4,6 @@
 
 #include "inlines.h"
 #include "itoctarockstone.h"
-#include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -15,6 +14,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/random.h>
@@ -105,11 +105,7 @@ bool it_802E4B00(Item_GObj* gobj)
     ip->init_facing_dir = ip->facing_dir;
     ip->xC9C += it_8027CBFC(gobj);
     if (ip->xC9C > *attr->x0 || ip->msid == 6) {
-        it_8027C9D8(ip);
-        it_802756D0(gobj);
-        it_80275474(gobj);
-        it_8027CE44(gobj);
-        Camera_RequestQuake(QuakeKind_Small, &ip->pos);
+        Item_ZakoDefeat(gobj, ip);
         if (HSD_Randf() < it_804D6D40->x8) {
             it_802E58A0(gobj);
         } else {
@@ -460,9 +456,7 @@ bool itOctarock_UnkMotion7_Coll(Item_GObj* gobj)
 void it_802E58A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    it_8027BA54(gobj, &ip->x40_vel);
-    it_802762BC(ip);
+    Item_UpdateZakoVelocity(gobj, ip);
     Item_80268E5C(gobj, 8, 3);
 }
 

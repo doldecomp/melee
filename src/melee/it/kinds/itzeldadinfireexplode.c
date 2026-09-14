@@ -68,10 +68,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     ip = GET_ITEM(gobj);
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, 60.0f);
     ip->xDD4_itemVar.zeldadinfireexplode.xDD8 = 0.0f;
     efSync_Spawn(0x4FA, gobj, jobj);

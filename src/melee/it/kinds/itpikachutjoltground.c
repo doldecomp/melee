@@ -119,10 +119,7 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     f64 angle;
     PAD_STACK(4);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
 
     if (ip->facing_dir == 1.0f) {
         angle = attr->x4;

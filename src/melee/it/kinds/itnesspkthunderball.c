@@ -196,10 +196,7 @@ void it_802ABA4C(Item_GObj* gobj)
     itPKThunderAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     int i;
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attr->x0_PKTHUNDER_LIFETIME);
     for (i = 0; i < 16; i++) {
         ip->xDD4_itemVar.pkthunder.angles[i] =

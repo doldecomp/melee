@@ -15,6 +15,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/random.h>
 
 typedef struct itOldkuriAttributes {
@@ -524,9 +525,7 @@ bool itOldkuri_UnkMotion10_Coll(Item_GObj* gobj)
 void it_802D839C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    it_8027BA54(gobj, &ip->x40_vel);
-    it_802762BC(ip);
+    Item_UpdateZakoVelocity(gobj, ip);
     it_8027C56C(gobj, 0.0f);
     Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
 }
