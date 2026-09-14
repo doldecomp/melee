@@ -430,7 +430,8 @@ if args.lint not in {"unused", "all"}:
     clang_disabled_warnings.extend(clang_warnings_unused)
 if args.lint not in {"misc", "all"}:
     clang_disabled_warnings.extend(clang_warnings_misc)
-clang_disabled_warnings = [f"-Wno-{s}" for s in clang_disabled_warnings]
+clang_flags_base.extend([f"-Wno-{s}" for s in clang_disabled_warnings])
+
 
 config.extra_clang_flags.extend(clang_flags_base)
 
