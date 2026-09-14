@@ -9,6 +9,9 @@
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
+#define BANNER_SMALL 0xE00
+#define BANNER_LARGE 0x1800
+
 /// hsd_804D1138 viewed at CardCmd stride: entry 0 overlays the CardContext
 /// header, and entry i's x10 is CardContext::cmds[i].type.
 typedef struct CardBufEntry {
@@ -330,10 +333,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
 
         switch (state->banner_format) {
         case 2:
-            banner_size = 0x1800;
+            banner_size = BANNER_LARGE;
             break;
         case 1:
-            banner_size = 0xE00;
+            banner_size = BANNER_SMALL;
             break;
         default:
             banner_size = 0;
@@ -424,10 +427,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
 
         switch (state->banner_format) {
         case 2:
-            banner_size11 = 0x1800;
+            banner_size11 = BANNER_LARGE;
             break;
         case 1:
-            banner_size11 = 0xE00;
+            banner_size11 = BANNER_SMALL;
             break;
         default:
             banner_size11 = 0;
