@@ -3143,7 +3143,7 @@ int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf, int async,
         for (; pass < 2; pass++, map += 64) {
             s32 remaining = file_size;
 
-            data = (u8*) buf;
+            data = buf;
             for (i = 0; i < file_blocks && remaining > 0; i++) {
                 s32 phys;
                 s32 chunk = st->sector_size;
@@ -3269,7 +3269,7 @@ after_verify:
         for (pass = 0; pass < 2; pass++, map += 64) {
             s32 remaining = file_size;
 
-            data = (u8*) buf;
+            data = buf;
             for (i = 0; i < file_blocks && remaining > 0; i++) {
                 s32 phys;
                 s32 chunk;
@@ -3723,7 +3723,7 @@ int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf, int async,
 
     if (needs_rewrite == 0) {
         remaining = file_size;
-        data = (u8*) buf;
+        data = buf;
         for (i = 0; i < file_blocks && remaining > 0; i++) {
             if ((u32) remaining > (u32) fn_803AF3F0_chunk_size(state)) {
                 if (async != 0) {
@@ -3848,7 +3848,7 @@ after_verify:
     {
         s32 next = current_seq + 1;
         remaining = file_size;
-        data = (u8*) buf;
+        data = buf;
         current_seq = next & 0xFF;
     }
     for (i = 0; i < file_blocks && remaining > 0; i++) {
@@ -4207,7 +4207,7 @@ int fn_803B0120(CardState* state, s32 file_idx, u8* buf, int async,
 
     if (needs_rewrite == 0) {
         remaining = file_size;
-        data = (u8*) buf;
+        data = buf;
         for (i = 0; i < file_blocks && remaining > 0; i++) {
             s32 block_id = blocks_before + i;
             s32 chunk;
@@ -4318,7 +4318,7 @@ int fn_803B0120(CardState* state, s32 file_idx, u8* buf, int async,
     {
         s32 next = current_seq + 1;
         remaining = file_size;
-        data = (u8*) buf;
+        data = buf;
         seq = next & 0xFF;
     }
     for (i = 0; i < file_blocks && remaining > 0; i++) {
