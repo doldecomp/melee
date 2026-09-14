@@ -25,7 +25,7 @@ typedef enum {
 
 typedef enum {
     result_14 = 14,
-    result_sentinel = 11,
+    result_pending_ops = 11,
 } cardResult;
 
 struct lb_80432A68_t {
@@ -328,7 +328,7 @@ int lb_8001A184(void)
         OSRestoreInterrupts(enabled);
     }
     if (pending_ops) {
-        return result_sentinel;
+        return result_pending_ops;
     }
     return saved_error;
 }
@@ -351,7 +351,7 @@ int lb_8001A3A4(void)
     saved_error = _p(unk_34);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
-        return result_sentinel;
+        return result_pending_ops;
     }
     return saved_error;
 }
