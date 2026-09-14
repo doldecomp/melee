@@ -331,7 +331,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
             break;
         }
 
-        switch (state->banner_format) {
+        switch (state->icon_info.banner_format) {
         case 2:
             banner_size = BANNER_LARGE;
             break;
@@ -425,7 +425,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
             break;
         }
 
-        switch (state->banner_format) {
+        switch (state->icon_info.banner_format) {
         case 2:
             banner_size11 = BANNER_LARGE;
             break;
@@ -871,13 +871,13 @@ static inline int setupCardIcons(const s32* cmd)
     s32 k;
 
     k = (bit = 0);
-    for (; k < 8 && CMD_STATE->icon_speed[(int) k] != 0;) {
+    for (; k < 8 && CMD_STATE->icon_info.icon_speed[(int) k] != 0;) {
         CMD_STATE->stat.iconFormat =
             (CMD_STATE->stat.iconFormat & ~(CARD_STAT_ICON_MASK << bit)) |
-            (CMD_STATE->icon_format[(int) k] << bit);
+            (CMD_STATE->icon_info.icon_format[(int) k] << bit);
         CMD_STATE->stat.iconSpeed =
             (CMD_STATE->stat.iconSpeed & ~(CARD_STAT_SPEED_MASK << bit)) |
-            (CMD_STATE->icon_speed[k++] << bit);
+            (CMD_STATE->icon_info.icon_speed[k++] << bit);
         bit += 2;
     }
     return k;
@@ -886,14 +886,14 @@ static inline void unpackCardStat(const s32* cmd, CARDStat* stat)
 {
     s32 k;
 
-    CMD_STATE->banner_format = stat->bannerFormat & 3;
+    CMD_STATE->icon_info.banner_format = stat->bannerFormat & 3;
     for (k = 0; k < 8; k++) {
-        CMD_STATE->icon_format[k] =
+        CMD_STATE->icon_info.icon_format[k] =
             (stat->iconFormat >> (2 * k)) & CARD_STAT_ICON_MASK;
-        CMD_STATE->icon_speed[k] =
+        CMD_STATE->icon_info.icon_speed[k] =
             (stat->iconSpeed >> (2 * k)) & CARD_STAT_SPEED_MASK;
     }
-    CMD_STATE->header_size = hsd_803AC340(&CMD_STATE->banner_format);
+    CMD_STATE->header_size = hsd_803AC340(&CMD_STATE->icon_info.banner_format);
     {
         u32 used = CMD_STATE->header_size + CMD_STATE->sector_size;
         used += 0x2F;
@@ -1296,7 +1296,7 @@ void hsd_803AAA48(void)
                 CMD_STATE->stat.iconAddr = 0x40;
                 CMD_STATE->stat.bannerFormat =
                     (CMD_STATE->stat.bannerFormat & ~3) |
-                    CMD_STATE->banner_format;
+                    CMD_STATE->icon_info.banner_format;
                 k = setupCardIcons(cmd);
                 for (; k < 8; k++) {
                     CMD_STATE->stat.iconFormat =
@@ -1332,7 +1332,7 @@ void hsd_803AAA48(void)
                     _card_result = result;
                     continue;
                 }
-                switch (CMD_STATE->banner_format) {
+                switch (CMD_STATE->icon_info.banner_format) {
                 case 2:
                     banner_size = 0x1800;
                     break;
@@ -2002,7 +2002,7 @@ s32 fn_803ACD58(CardState* state, void* banner, void* icons)
     s32 i;
     s32 icons_start;
 
-    switch (state->banner_format) {
+    switch (state->icon_info.banner_format) {
     case 2:
         banner_size = 0x1800;
         break;
@@ -4547,7 +4547,7 @@ s32 fn_803B0E9C(CardState* state, s32 banner, s32 icons, s32 is_new, s32 async)
     s32 has_blocks;
     u32 sector_size;
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
 
     if (is_new == 0) {
         if (async != 0) {
@@ -4646,7 +4646,7 @@ s32 fn_803B0E9C(CardState* state, s32 banner, s32 icons, s32 is_new, s32 async)
 
     memcpy(state->sector_buf, state->comment, 0x40);
     payload_pos = 0x40;
-    switch (state->banner_format) {
+    switch (state->icon_info.banner_format) {
     case 2: {
         void* dst = state->sector_buf + 0x40;
         memcpy(dst, (UNK_T) banner, 0x1800);
@@ -5401,7 +5401,7 @@ s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
 
     blocks =
         (0x2F + state->header_size + state->sector_size) / state->sector_size;
@@ -5417,7 +5417,7 @@ s32 fn_803B26CC(CardState* state, s32 comment, s32 banner, s32 icons,
     CardContext* context = (CardContext*) hsd_804D1138;
     PAD_STACK(8);
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
     hsd_804D7998 = hsd_804D7984;
 
     result = queueHeaderBlocks(state, comment, banner, icons);

@@ -79,12 +79,12 @@ int hsd_803B27F4(const CardState* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B286C(const CardState* arg0, const char* arg1, const char* arg2,
+int hsd_803B286C(CardState* state, const char* filename, const char* comment,
                  int arg3, int arg4, void (*arg5)(int, int))
 {
     u8* base = hsd_804D1138;
 
-    memcpy(((CardState*) arg0)->comment, arg2, 64);
+    memcpy(state->comment, comment, sizeof(state->comment));
 
     {
         s32 write_idx;
@@ -97,8 +97,8 @@ int hsd_803B286C(const CardState* arg0, const char* arg1, const char* arg2,
         }
 
         CMD_QUEUE(base)[write_idx].type = cmd_type_3;
-        CMD_QUEUE(base)[write_idx].c3.f1 = (s32) arg0;
-        CMD_QUEUE(base)[write_idx].c3.f2 = (s32) arg1;
+        CMD_QUEUE(base)[write_idx].c3.f1 = (s32) state;
+        CMD_QUEUE(base)[write_idx].c3.f2 = (s32) filename;
         CMD_QUEUE(base)[write_idx].c3.f3 = arg3;
         CMD_QUEUE(base)[write_idx].c3.f4 = arg4;
         CMD_QUEUE(base)[write_idx].c3.f5 = (s32) arg5;
@@ -201,7 +201,7 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
 
 int hsd_803B2ADC(CardState* ctx, UNK_T data)
 {
-    memcpy(&ctx->banner_format, data, 18);
-    ctx->header_size = hsd_803AC340(&ctx->banner_format);
+    memcpy(&ctx->icon_info.banner_format, data, 18);
+    ctx->header_size = hsd_803AC340(&ctx->icon_info.banner_format);
     return 0;
 }

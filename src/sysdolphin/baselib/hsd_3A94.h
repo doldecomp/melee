@@ -5,6 +5,13 @@
 
 #include <dolphin/card.h>
 
+typedef struct {
+    /* 0x3B0 */ u8 banner_format;
+    /* 0x3B1 */ u8 pad_3B1[1];
+    /* 0x3B2 */ u8 icon_format[8];
+    /* 0x3BA */ u8 icon_speed[8];
+} CardIconInfo;
+
 typedef struct CardState {
     /* 0x00 */ u8* sector_buf;
     /* 0x04 */ s32 chan;
@@ -22,11 +29,7 @@ typedef struct CardState {
     /* 0x170 */ s32 block_ids[64];
     /* 0x270 */ s32 block_seqs[64];
     /* 0x370 */ char comment[64];
-    /* 0x3B0 */ u8 banner_format;
-    /* 0x3B1 */ u8 pad_3B1[1];
-    /* 0x3B2 */ u8 icon_format[8];
-    /* 0x3BA */ u8 icon_speed[8];
-    /* 0x3C2 */ u8 pad_3C2[2];
+    /* 0x3B0 */ CardIconInfo icon_info;
     /* 0x3C4 */ CARDStat stat;
     /* 0x430 */ u8 digest[0x30];
     /// Physical blocks 1..num_blocks each fill a sector; block 0 shares the
@@ -35,7 +38,7 @@ typedef struct CardState {
 } CardState;
 
 /* 3AAA48 */ void hsd_803AAA48(void);
-/* 3AC340 */ int hsd_803AC340(void* header);
+/* 3AC340 */ int hsd_803AC340(void* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(struct CardState* file_desc, int file_idx,
                                int file_size, int file_flags, u8* data);
 /* 3AC340 */

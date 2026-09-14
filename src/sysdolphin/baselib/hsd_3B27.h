@@ -9,8 +9,9 @@
 
 /* 3B27F4 */ int hsd_803B27F4(const CardState*, const char*, int, int,
                               void (*)(int, int));
-/* 3B286C */ int hsd_803B286C(const CardState*, const char*, const char*, int,
-                              int, void (*)(int, int));
+/* 3B286C */ int hsd_803B286C(CardState*, const char* filename,
+                              const char* comment, int, int,
+                              void (*)(int, int));
 /* 3B2928 */ int hsd_803B2928(const CardState*, const char*, int, int,
                               void (*)(int, int));
 /* 3B29D8 */ int hsd_803B29D8(const CardState* ctx, int channel,
