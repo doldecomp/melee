@@ -178,7 +178,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
 
 void grFourside_801F2EBC(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grFourside_801F2EE8(Ground_GObj* arg)
@@ -192,7 +192,7 @@ void grFourside_801F2EF4(Ground_GObj* arg) {}
 
 void grFourside_801F2EF8(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grFourside_801F2F24(Ground_GObj* arg)
@@ -209,7 +209,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
     HSD_GObj* pHVar1;
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C4E70(Ground_801C3FA4(gobj, 7), Ground_801C3FA4(gobj, 4),
                     Ground_801C3FA4(gobj, 6), Ground_801C3FA4(gobj, 5),
@@ -235,7 +235,7 @@ bool grFourside_801F3070(Ground_GObj* arg)
 
 void grFourside_801F3078(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     lb_800115F4();
 }
 
@@ -285,7 +285,7 @@ void grFourside_801F3154(Ground_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
     PAD_STACK(8);
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
     gp->u.foursideCrane.x1.b0 = 0;
     gp->u.foursideCrane.x4 = yakumono_param->crane_wait +
@@ -312,7 +312,7 @@ static inline void grFourside_UpdateCrane(Ground* gp, HSD_GObj* hsd_gobj)
     s32 rand_max;
     float temp_fVar1;
     PAD_STACK(0x14);
-    // Ground_801C2ED0(jobj,gp->map_id);
+    // Ground_InitMapColl(jobj,gp->map_id);
     // grAnime_801C7FF8(gobj,0,7,0,0.0f,0.0f);
     switch (gp->u.foursideCrane.x0) {
     case 0:
@@ -480,7 +480,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
 
     grFourside_UpdateCrane(gp, hsd_gobj);
     HSD_JObjSetTranslateY(crane_iron, grFourside_GetCraneY(gp));
-    Ground_801C2FE0(hsd_gobj);
+    Ground_UpdateMapColl(hsd_gobj);
 }
 
 void grFourside_801F37F8(Ground_GObj* arg) {}
@@ -490,7 +490,7 @@ void grFourside_801F37FC(Ground_GObj* gobj)
     int new_var;
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     new_var = yakumono_param->ufo_wait;
     gp->u.foursideCrane.x4 = new_var;
     gp->u.foursideUfo.x0 = 0;
@@ -605,7 +605,7 @@ static inline void grFourside_801F3894_inline(Ground_GObj* gobj, Ground* gp,
         break;
     }
     }
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     gp->u.foursideUfo.x8 = 0;
 }
 

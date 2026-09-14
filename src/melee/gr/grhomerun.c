@@ -203,7 +203,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     jobj = GET_JOBJ(gobj);
     jobj2 = jobj;
-    Ground_801C2ED0(jobj2, gp->map_id);
+    Ground_InitMapColl(jobj2, gp->map_id);
 
     gp->u.homerun.parts =
         HSD_MemAlloc(sizeof(*gp->u.homerun.parts) * Gr_Homerun_Parts_Max);
@@ -444,7 +444,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
 
     HSD_JObjSetTranslateX(jobj, x + 1.5F * (2150.99F * Ground_801C0498()));
 
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
     mpLib_80056758(3, 0.0F, 0.0F, 20000.0F, 0.0F);
     mpJointUpdateBounding(0);
     PAD_STACK(8);

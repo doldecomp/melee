@@ -107,7 +107,7 @@ void grTPurin_8022332C(Ground_GObj* gobj)
 
 void grTPurin_80223330(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPurin_80223380(Ground_GObj* gobj)
@@ -138,7 +138,7 @@ void grTPurin_80223388(Ground_GObj* gobj)
             }
         }
     }
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTPurin_80223478(Ground_GObj* gobj)
@@ -148,7 +148,7 @@ void grTPurin_80223478(Ground_GObj* gobj)
 
 void grTPurin_8022347C(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPurin_802234CC(Ground_GObj* gobj)
@@ -158,7 +158,7 @@ bool grTPurin_802234CC(Ground_GObj* gobj)
 
 void grTPurin_802234D4(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTPurin_802234F4(Ground_GObj* gobj)

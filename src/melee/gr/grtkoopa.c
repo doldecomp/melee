@@ -111,7 +111,7 @@ static HSD_GObj* grTKoopa_802216EC(int gobj_id)
 
 static void grTKoopa_802217D4(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTKoopa_80221800(Ground_GObj* arg0)
@@ -124,7 +124,7 @@ static void grTKoopa_8022180C(Ground_GObj* arg0) {}
 
 static void grTKoopa_80221810(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTKoopa_80221860(Ground_GObj* arg0)
@@ -134,14 +134,14 @@ static bool grTKoopa_80221860(Ground_GObj* arg0)
 
 static void grTKoopa_80221868(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTKoopa_8022189C(Ground_GObj* arg0) {}
 
 static void grTKoopa_802218A0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTKoopa_802218F0(Ground_GObj* arg0)
@@ -151,7 +151,7 @@ static bool grTKoopa_802218F0(Ground_GObj* arg0)
 
 static void grTKoopa_802218F8(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTKoopa_80221918(Ground_GObj* arg0) {}

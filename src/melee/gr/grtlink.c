@@ -111,7 +111,7 @@ HSD_GObj* grTLink_802219D0(int arg0)
 
 void grTLink_80221AB8(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTLink_80221AE4(Ground_GObj* gobj)
@@ -125,7 +125,7 @@ void grTLink_80221AF0(Ground_GObj* gobj) {}
 
 void grTLink_80221AF4(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTLink_80221B44(Ground_GObj* gobj)
@@ -135,14 +135,14 @@ bool grTLink_80221B44(Ground_GObj* gobj)
 
 void grTLink_80221B4C(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTLink_80221B80(Ground_GObj* gobj) {}
 
 void grTLink_80221B84(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTLink_80221BD4(Ground_GObj* gobj)
@@ -152,7 +152,7 @@ bool grTLink_80221BD4(Ground_GObj* gobj)
 
 void grTLink_80221BDC(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTLink_80221BFC(Ground_GObj* gobj) {}

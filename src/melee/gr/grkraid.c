@@ -109,7 +109,7 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
 
 void grKraid_801FE1B0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grKraid_801FE1DC(Ground_GObj* gobj)
@@ -188,7 +188,7 @@ void grKraid_801FE3B4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     gp->u.kraid.x0 = 0;
     gp->u.kraid.x4 = 0.0f;
     gp->u.kraid.x8 = 0.0f;
@@ -252,7 +252,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
         grAnime_801C7FF8(gobj, 18, 7, 0, 0.0f, 1.0f);
         gp->u.kraid.x1 = 0;
     }
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
     grKraid_801FF150(gobj);
 }
 

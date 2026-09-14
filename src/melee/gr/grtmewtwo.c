@@ -133,7 +133,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
 
 void grTMewtwo_8022236C(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTMewtwo_80222398(Ground_GObj* gobj)
@@ -147,7 +147,7 @@ void grTMewtwo_802223A4(Ground_GObj* gobj) {}
 
 void grTMewtwo_802223A8(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTMewtwo_802223F8(Ground_GObj* gobj)
@@ -157,14 +157,14 @@ bool grTMewtwo_802223F8(Ground_GObj* gobj)
 
 void grTMewtwo_80222400(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTMewtwo_80222434(Ground_GObj* gobj) {}
 
 void grTMewtwo_80222438(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTMewtwo_80222488(Ground_GObj* gobj)
@@ -174,7 +174,7 @@ bool grTMewtwo_80222488(Ground_GObj* gobj)
 
 void grTMewtwo_80222490(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTMewtwo_802224B0(Ground_GObj* gobj) {}

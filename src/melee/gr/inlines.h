@@ -25,24 +25,30 @@
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 
-static inline void Ground_AnimateMap(Ground_GObj* gobj)
+/// Resets the map's model to its base pose and starts its animation set 0
+/// from frame 0.
+static inline void Ground_StartMapAnim(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static inline void Ground_JObjInline1(Ground_GObj* gobj)
+/// Binds the map's collision joints to its model, then starts animation set
+/// 0 from frame 0.
+static inline void Ground_InitMapCollAndAnim(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static inline void Ground_ProcTargetStage(Ground_GObj* gobj)
+/// Advances the dynamics wind/force list, then re-syncs the map's collision
+/// joints to its animated model.
+static inline void Ground_UpdateWindAndMapColl(Ground_GObj* gobj)
 {
     lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 /// @todo Call sites have a lot of duplicate code

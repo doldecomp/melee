@@ -113,7 +113,7 @@ HSD_GObj* grOldYoshi_8020E854(int gobj_id)
 
 void grOldYoshi_8020E93C(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grOldYoshi_8020E968(Ground_GObj* arg)
@@ -149,7 +149,7 @@ void grOldYoshi_8020E9F0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
 }
@@ -161,7 +161,7 @@ bool grOldYoshi_8020EA5C(Ground_GObj* arg)
 
 void grOldYoshi_8020EA64(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
     lb_800115F4();
 }
 
@@ -171,7 +171,7 @@ void grOldYoshi_8020EA8C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     gp->x11_flags.b012 = 1;
 }
 
@@ -191,7 +191,7 @@ void grOldYoshi_8020EAFC(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     int i;
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     for (i = 0; i < 3; i++) {
         gp->u.oldyoshicloud.cloud[i].xC4_0123 = 0;
@@ -300,7 +300,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
                                   gp->u.oldyoshicloud.cloud[i].xD0);
         gp->u.oldyoshicloud.cloud[i].xC4_4 = 0;
     }
-    Ground_801C2FE0(arg);
+    Ground_UpdateMapColl(arg);
     return;
 }
 

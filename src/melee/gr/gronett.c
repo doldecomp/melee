@@ -206,7 +206,7 @@ void grOnett_801E3A34(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x10_flags.b5 = 1;
 
@@ -242,7 +242,7 @@ void grOnett_801E3A34(Ground_GObj* gobj)
                     Ground_801C3FA4(gobj, 18), Ground_801C3FA4(gobj, 21));
 
     Ground_801C10B8(gobj, grOnett_801E3930);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 bool grOnett_801E3C58(Ground_GObj* gobj)
@@ -264,7 +264,7 @@ void grOnett_801E3C60(Ground_GObj* gobj)
             gp->u.onett.subject->state = CmSubjectState_Inactive;
         }
     }
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}
@@ -274,7 +274,7 @@ void grOnett_801E3CE4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
 
-    Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
+    Ground_InitMapColl(GET_JOBJ(gobj), gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
 
     gp->u.onett_building.state = -1;
@@ -393,7 +393,7 @@ void grOnett_801E3DA0(Ground_GObj* gobj)
         gp->u.onett_building.frame = 0;
     }
 
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grOnett_801E40E0(Ground_GObj* gobj) {}

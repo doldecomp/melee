@@ -644,7 +644,7 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     u32 unused;
 
     Ground* gr = GET_GROUND(ground_gobj);
-    Ground_801C2ED0(ground_gobj->hsd_obj, gr->map_id);
+    Ground_InitMapColl(ground_gobj->hsd_obj, gr->map_id);
     gr->u.corneria.xC4.flags.b0 = 1;
     gr->u.corneria.xC4.flags.b1 = 0;
     gr->u.corneria.base_x = 0.0f;
@@ -734,7 +734,7 @@ void grCorneria_801DD9A8(Ground_GObj* gobj)
         lb_8000B1CC(jobj, &grCn_803E1F70[i], &grCn_803E1FAC[i]);
     }
 
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     grCorneria_801E1878(gobj);
     grCorneria_801E2110();
     lb_800115F4();
@@ -999,7 +999,7 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     int group;
     int joint_id;
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     gp->u.arwing.xC8 = grCn_804D69A4;
     gp->u.arwing.xD0 = 0;
     gp->u.arwing.xDC = 0.0f;
@@ -1010,7 +1010,7 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     joint_id = grCn_803E2190[group];
     mpJointListAdd(joint_id);
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
 }
 
 bool grCorneria_801DE560(Ground_GObj* arg)
@@ -1040,7 +1040,7 @@ void grCorneria_801DE568(Ground_GObj* gobj)
                 HSD_JObjSetScaleZ(jobj, s);
             }
         }
-        Ground_801C2FE0(gobj);
+        Ground_UpdateMapColl(gobj);
     } else {
         mpLib_80057BC0(grCn_803E2190[arwing_groups[gp->u.arwing.xC8]]);
         Ground_801C4A08(gobj);
@@ -1517,7 +1517,7 @@ void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
 void grCorneria_801DFBF0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grCorneria_801DFC1C(Ground_GObj* arg)

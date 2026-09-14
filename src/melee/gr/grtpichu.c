@@ -110,7 +110,7 @@ static HSD_GObj* grTPichu_80222C3C(int gobj_id)
 
 static void grTPichu_80222D24(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTPichu_80222D50(Ground_GObj* arg0)
@@ -124,7 +124,7 @@ static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
 static void grTPichu_80222D60(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTPichu_80222DB0(Ground_GObj* arg0)
@@ -134,14 +134,14 @@ static bool grTPichu_80222DB0(Ground_GObj* arg0)
 
 static void grTPichu_80222DB8(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
 static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTPichu_80222E40(Ground_GObj* arg0)
@@ -151,7 +151,7 @@ static bool grTPichu_80222E40(Ground_GObj* arg0)
 
 static void grTPichu_80222E48(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTPichu_80222E68(Ground_GObj* arg0) {}

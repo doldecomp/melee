@@ -97,7 +97,7 @@ void grTPikachu_80223040(Ground_GObj* gobj)
 
 void grTPikachu_80223044(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPikachu_80223094(Ground_GObj* gobj)
@@ -107,7 +107,7 @@ bool grTPikachu_80223094(Ground_GObj* gobj)
 
 void grTPikachu_8022309C(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTPikachu_802230D0(Ground_GObj* gobj)
@@ -117,7 +117,7 @@ void grTPikachu_802230D0(Ground_GObj* gobj)
 
 void grTPikachu_802230D4(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPikachu_80223124(Ground_GObj* gobj)
@@ -127,7 +127,7 @@ bool grTPikachu_80223124(Ground_GObj* gobj)
 
 void grTPikachu_8022312C(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTPikachu_8022314C(Ground_GObj* gobj)

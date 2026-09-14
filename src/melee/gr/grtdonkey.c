@@ -106,7 +106,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
 }
 static void grTDonkey_802203B4(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTDonkey_802203E0(Ground_GObj* arg0)
@@ -120,7 +120,7 @@ static void grTDonkey_802203EC(Ground_GObj* arg0) {}
 
 static void grTDonkey_802203F0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTDonkey_80220440(Ground_GObj* arg0)
@@ -130,14 +130,14 @@ static bool grTDonkey_80220440(Ground_GObj* arg0)
 
 static void grTDonkey_80220448(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTDonkey_8022047C(Ground_GObj* arg0) {}
 
 static void grTDonkey_80220480(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTDonkey_802204D0(Ground_GObj* arg0)
@@ -147,7 +147,7 @@ static bool grTDonkey_802204D0(Ground_GObj* arg0)
 
 static void grTDonkey_802204D8(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTDonkey_802204F8(Ground_GObj* arg0) {}

@@ -124,7 +124,7 @@ HSD_GObj* grGarden_80202C78(int gobj_id)
 
 void grGarden_80202D60(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grGarden_80202D8C(Ground_GObj* arg)

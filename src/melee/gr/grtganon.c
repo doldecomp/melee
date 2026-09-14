@@ -109,7 +109,7 @@ void grTGanon_802248A4(Ground_GObj* gobj)
 
 void grTGanon_802248A8(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGanon_802248F8(Ground_GObj* gobj)
@@ -119,7 +119,7 @@ bool grTGanon_802248F8(Ground_GObj* gobj)
 
 void grTGanon_80224900(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTGanon_80224934(Ground_GObj* gobj)
@@ -129,7 +129,7 @@ void grTGanon_80224934(Ground_GObj* gobj)
 
 void grTGanon_80224938(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGanon_80224988(Ground_GObj* gobj)
@@ -139,7 +139,7 @@ bool grTGanon_80224988(Ground_GObj* gobj)
 
 void grTGanon_80224990(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTGanon_802249B0(Ground_GObj* gobj)

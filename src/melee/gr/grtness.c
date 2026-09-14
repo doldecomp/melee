@@ -112,7 +112,7 @@ static HSD_GObj* grTNess_80222674(int id)
 
 static void grTNess_8022275C(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTNess_80222788(Ground_GObj* gobj)
@@ -132,7 +132,7 @@ static void grTNess_80222794(Ground_GObj* gobj)
 
 static void grTNess_80222798(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTNess_802227E8(Ground_GObj* gobj)
@@ -142,7 +142,7 @@ static bool grTNess_802227E8(Ground_GObj* gobj)
 
 static void grTNess_802227F0(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTNess_80222824(Ground_GObj* gobj)
@@ -152,7 +152,7 @@ static void grTNess_80222824(Ground_GObj* gobj)
 
 static void grTNess_80222828(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTNess_80222878(Ground_GObj* gobj)
@@ -162,7 +162,7 @@ static bool grTNess_80222878(Ground_GObj* gobj)
 
 static void grTNess_80222880(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 static void grTNess_802228A0(Ground_GObj* gobj)

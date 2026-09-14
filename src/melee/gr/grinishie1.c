@@ -291,7 +291,7 @@ struct block_table_struct grI1_803E49B8[BLOCK_COUNT] = {
 
 void grInishie1_801FAAA0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grInishie1_801FAACC(Ground_GObj* gobj)
@@ -307,7 +307,7 @@ void grInishie1_801FAADC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     grInishie1_801FAD84(gobj);
     grInishie1_801FC018(gobj);
     gp->u.map.xC4_b0 = false;
@@ -324,7 +324,7 @@ void grInishie1_801FAB68(Ground_GObj* gobj)
     grInishie1_801FB3F0(gobj);
     grInishie1_801FC664(gobj);
     grInishie1_801FCB10(gobj);
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grInishie1_801FABB0(Ground_GObj* gobj) {}

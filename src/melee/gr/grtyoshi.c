@@ -111,7 +111,7 @@ static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
 
 static void grTYoshi_80223CD4(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTYoshi_80223D00(Ground_GObj* arg0)
@@ -125,7 +125,7 @@ static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTYoshi_80223D60(Ground_GObj* arg0)
@@ -135,14 +135,14 @@ static bool grTYoshi_80223D60(Ground_GObj* arg0)
 
 static void grTYoshi_80223D68(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTYoshi_80223DF0(Ground_GObj* arg0)
@@ -152,7 +152,7 @@ static bool grTYoshi_80223DF0(Ground_GObj* arg0)
 
 static void grTYoshi_80223DF8(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTYoshi_80223E18(Ground_GObj* arg0) {}

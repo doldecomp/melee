@@ -122,7 +122,7 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
 
 void grYorster_80202124(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grYorster_80202150(Ground_GObj* gobj)
@@ -144,7 +144,7 @@ void grYorster_80202160(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grYorster_802022A4(gobj);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     mpLib_80058560();
     gp->u.yorster.xC4 = 0;
 }
@@ -154,7 +154,7 @@ void grYorster_802021AC(Ground_GObj* gobj)
     int _[2];
 
     Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
+    Ground_InitMapColl(GET_JOBJ(gobj), gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 4);
     grAnime_801C7FF8(gobj, 23, 7, 3, 0.0f, 1.0f);
     grAnime_801C7FF8(gobj, 26, 7, 3, 0.0f, 1.0f);
@@ -173,7 +173,7 @@ void grYorster_80202254(Ground_GObj* gobj)
     if (gp->u.yorster.xC4 == 0) {
         grYorster_8020266C(gobj);
     }
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grYorster_802022A0(HSD_GObj* gobj) {}

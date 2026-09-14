@@ -117,7 +117,7 @@ HSD_GObj* grTMario_8021F8E4(int arg0)
 
 void grTMario_8021F9CC(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTMario_8021F9F8(Ground_GObj* gobj)
@@ -136,7 +136,7 @@ void lbl_8021FA08(HSD_GObj* gobj)
 
 void grTMario_8021FA34(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
@@ -147,14 +147,14 @@ bool grTMario_8021FA94(Ground_GObj* gobj)
 
 void grTMario_8021FA9C(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTMario_8021FAD0(Ground_GObj* gobj) {}
 
 void grTMario_8021FAD4(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTMario_8021FB24(Ground_GObj* gobj)
@@ -164,7 +164,7 @@ bool grTMario_8021FB24(Ground_GObj* gobj)
 
 void grTMario_8021FB2C(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTMario_8021FB4C(Ground_GObj* gobj) {}

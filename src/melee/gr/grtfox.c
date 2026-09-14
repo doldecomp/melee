@@ -99,7 +99,7 @@ HSD_GObj* grTFox_80220C2C(int arg0)
 
 void grTFox_80220D14(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTFox_80220D40(Ground_GObj* gobj)
@@ -113,7 +113,7 @@ void grTFox_80220D4C(Ground_GObj* gobj) {}
 
 void grTFox_80220D50(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTFox_80220DA0(Ground_GObj* gobj)
@@ -123,14 +123,14 @@ bool grTFox_80220DA0(Ground_GObj* gobj)
 
 void grTFox_80220DA8(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTFox_80220DDC(Ground_GObj* gobj) {}
 
 void grTFox_80220DE0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTFox_80220E30(Ground_GObj* gobj)
@@ -140,7 +140,7 @@ bool grTFox_80220E30(Ground_GObj* gobj)
 
 void grTFox_80220E38(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTFox_80220E58(Ground_GObj* gobj) {}

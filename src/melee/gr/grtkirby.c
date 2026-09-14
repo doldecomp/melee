@@ -111,7 +111,7 @@ HSD_GObj* grTKirby_80221408(int arg0)
 
 void grTKirby_802214F0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTKirby_8022151C(Ground_GObj* gobj)
@@ -125,7 +125,7 @@ void grTKirby_80221528(Ground_GObj* gobj) {}
 
 void grTKirby_8022152C(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTKirby_8022157C(Ground_GObj* gobj)
@@ -135,14 +135,14 @@ bool grTKirby_8022157C(Ground_GObj* gobj)
 
 void grTKirby_80221584(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTKirby_802215B8(Ground_GObj* gobj) {}
 
 void grTKirby_802215BC(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTKirby_8022160C(Ground_GObj* gobj)
@@ -152,7 +152,7 @@ bool grTKirby_8022160C(Ground_GObj* gobj)
 
 void grTKirby_80221614(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTKirby_80221634(Ground_GObj* gobj) {}

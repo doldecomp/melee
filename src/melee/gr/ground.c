@@ -1640,7 +1640,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
     return false;
 }
 
-bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
+bool Ground_InitMapColl(HSD_JObj* jobj, s32 arg1)
 {
     u8 _[4];
     bool result = false;
@@ -1674,7 +1674,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 
 static s16 Ground_804D6954;
 
-bool Ground_801C2FE0(Ground_GObj* arg0)
+bool Ground_UpdateMapColl(Ground_GObj* arg0)
 {
     StageData* stagedata;
     UnkArchiveStruct* archive;

@@ -112,7 +112,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
 
 static void grTCaptain_8021FDEC(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTCaptain_8021FE18(Ground_GObj* arg0)
@@ -126,7 +126,7 @@ static void grTCaptain_8021FE24(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FE28(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTCaptain_8021FE78(Ground_GObj* arg0)
@@ -136,14 +136,14 @@ static bool grTCaptain_8021FE78(Ground_GObj* arg0)
 
 static void grTCaptain_8021FE80(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FEB8(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTCaptain_8021FF08(Ground_GObj* arg0)
@@ -153,7 +153,7 @@ static bool grTCaptain_8021FF08(Ground_GObj* arg0)
 
 static void grTCaptain_8021FF10(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTCaptain_8021FF30(Ground_GObj* argo) {}

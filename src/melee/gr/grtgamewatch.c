@@ -98,7 +98,7 @@ void grTGameWatch_802242D4(Ground_GObj* gobj)
 
 void grTGameWatch_802242D8(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGameWatch_80224328(Ground_GObj* gobj)
@@ -108,7 +108,7 @@ bool grTGameWatch_80224328(Ground_GObj* gobj)
 
 void grTGameWatch_80224330(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTGameWatch_80224364(Ground_GObj* gobj)
@@ -118,7 +118,7 @@ void grTGameWatch_80224364(Ground_GObj* gobj)
 
 void grTGameWatch_80224368(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGameWatch_802243B8(Ground_GObj* gobj)
@@ -128,7 +128,7 @@ bool grTGameWatch_802243B8(Ground_GObj* gobj)
 
 void grTGameWatch_802243C0(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTGameWatch_802243E0(Ground_GObj* gobj)

@@ -108,7 +108,7 @@ HSD_GObj* grTSeak_80223908(int arg0)
 
 void grTSeak_802239F0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTSeak_80223A1C(Ground_GObj* gobj)
@@ -122,7 +122,7 @@ void grTSeak_80223A28(Ground_GObj* gobj) {}
 
 void grTSeak_80223A2C(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTSeak_80223A7C(Ground_GObj* gobj)
@@ -132,14 +132,14 @@ bool grTSeak_80223A7C(Ground_GObj* gobj)
 
 void grTSeak_80223A84(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTSeak_80223AB8(Ground_GObj* gobj) {}
 
 void grTSeak_80223ABC(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTSeak_80223B0C(Ground_GObj* gobj)
@@ -149,7 +149,7 @@ bool grTSeak_80223B0C(Ground_GObj* gobj)
 
 void grTSeak_80223B14(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTSeak_80223B34(Ground_GObj* gobj) {}

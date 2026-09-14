@@ -139,7 +139,7 @@ HSD_GObj* grFigureGet_802195CC(int gobj_id)
 
 void grFigureGet_802196B4(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grFigureGet_802196E0(Ground_GObj* gobj)

@@ -110,7 +110,7 @@ HSD_GObj* grtDrMario_802205B0(int arg0)
 
 void grtDrMario_80220698(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grtDrMario_802206C4(Ground_GObj* gobj)
@@ -124,7 +124,7 @@ void grtDrMario_802206D0(Ground_GObj* gobj) {}
 
 void grtDrMario_802206D4(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grtDrMario_80220724(Ground_GObj* gobj)
@@ -134,14 +134,14 @@ bool grtDrMario_80220724(Ground_GObj* gobj)
 
 void grtDrMario_8022072C(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grtDrMario_80220760(Ground_GObj* gobj) {}
 
 void grtDrMario_80220764(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grtDrMario_802207B4(Ground_GObj* gobj)
@@ -151,7 +151,7 @@ bool grtDrMario_802207B4(Ground_GObj* gobj)
 
 void grtDrMario_802207BC(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grtDrMario_802207DC(Ground_GObj* gobj) {}

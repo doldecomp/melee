@@ -261,7 +261,7 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
 
 void grGreatBay_801F4404(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grGreatBay_801F4430(Ground_GObj* gobj)
@@ -334,7 +334,7 @@ void grGreatBay_801F454C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     gp->x8_callback = NULL;
     gp->x11_flags.b012 = 1;
     gp->xC_callback = NULL;
@@ -356,7 +356,7 @@ bool grGreatBay_801F4650(Ground_GObj* gobj)
 void grGreatBay_801F4658(Ground_GObj* gobj)
 {
     grGreatBay_801F5E28(gobj);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     lb_800115F4();
 }
 
@@ -373,7 +373,7 @@ void grGreatBay_801F4694(Ground_GObj* gobj)
     s16 max_val, min_val;
     f32 factor;
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 
     HSD_JObjGetScale(jobj, &scale);
@@ -579,7 +579,7 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
         break;
     }
 
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     grGreatBay_801F660C(gobj);
     mpLib_80055E24(2);
 
@@ -597,7 +597,7 @@ static inline void grGreatBay_801F5460_inline(Ground_GObj* gobj,
                                               HSD_JObj* jobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     gp->xC_callback = NULL;
     mpJointSetCb1(5, gp, grGreatBay_801F5914);
     mpJointListAdd(5);
@@ -611,7 +611,7 @@ void grGreatBay_801F5460(Ground_GObj* gobj)
     grGreatBay_801F5460_inline(gobj, jobj);
     HSD_JObjSetTranslateX(jobj, 1000.0f);
     HSD_JObjSetTranslateY(jobj, 1000.0f);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     mpLib_80057424(5);
     gp->u.greatbay4.xF0 = it_802ECA70(gobj);
     gp->u.greatbay4.xC4 = 0;
@@ -653,7 +653,7 @@ void grGreatBay_801F5600(Ground_GObj* gobj)
     switch (gp->u.greatbay4.xC4) {
     case 1:
         mpJointListAdd(5);
-        Ground_801C2FE0(gobj);
+        Ground_UpdateMapColl(gobj);
         break;
     case 2:
     case 5:
@@ -704,11 +704,11 @@ void grGreatBay_801F5600(Ground_GObj* gobj)
     }
     gp->u.greatbay4.xC8 = gp->u.greatbay4.xC4;
     HSD_JObjSetTranslate(jobj, &gp->u.greatbay4.xE4);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     gp->u.greatbay4.xDC = gp->u.greatbay4.xD8;
     gp->u.greatbay4.xD8 = 0;
     gp->u.greatbay4.xE0 = 0.0f;
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 /// @copydoc mpLib_JointCollisionCallback

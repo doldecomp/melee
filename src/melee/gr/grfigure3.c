@@ -104,7 +104,7 @@ static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
 
 static void grFigure3_8020E690(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grFigure3_8020E6BC(Ground_GObj* arg0)
@@ -119,7 +119,7 @@ static void grFigure3_8020E6C8(Ground_GObj* arg0) {}
 static void grFigure3_8020E6CC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
 }
 
 static bool grFigure3_8020E6F8(Ground_GObj* arg0)
@@ -129,7 +129,7 @@ static bool grFigure3_8020E6F8(Ground_GObj* arg0)
 
 static void grFigure3_8020E700(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     lb_800115F4();
 }
 
@@ -137,7 +137,7 @@ static void grFigure3_8020E724(Ground_GObj* arg0) {}
 
 static void grFigure3_8020E728(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grFigure3_8020E778(Ground_GObj* arg0)

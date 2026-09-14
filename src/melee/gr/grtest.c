@@ -99,7 +99,7 @@ HSD_GObj* grTest_80207044(int gobj_id)
 
 void grTest_80207130(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTest_8020715C(Ground_GObj* gobj)
@@ -113,7 +113,7 @@ void grTest_80207168(Ground_GObj* gobj) {}
 
 void grTest_8020716C(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTest_802071BC(Ground_GObj* gobj)
@@ -173,12 +173,12 @@ void grTest_802073AC(Ground_GObj* gobj) {}
 
 void grTest_802073B0(HSD_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTest_802073D0(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTest_802073FC(Ground_GObj* gobj)

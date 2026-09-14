@@ -133,7 +133,7 @@ void stageGObj0_Callback3(Ground_GObj* gobj) {}
 
 void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     grAnime_801C7FF8(gobj, 69, 2, 1, 0.0F, 1.0F);
     grTIceClimber_80221288(gobj);
 }
@@ -145,14 +145,14 @@ bool stageGObj2_Callback1(Ground_GObj* gobj)
 
 void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void stageGObj2_Callback3(Ground_GObj* gobj) {}
 
 void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool stageGObj1_Callback1(Ground_GObj* gobj)
@@ -162,7 +162,7 @@ bool stageGObj1_Callback1(Ground_GObj* gobj)
 
 void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void stageGObj1_Callback3(Ground_GObj* gobj) {}
