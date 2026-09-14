@@ -113,7 +113,7 @@ struct CardTask* lb_80019C38(void)
 
     for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         result = &_p(task_array)[i];
-        if (result->x0 == 0xE) {
+        if (result->x0 == result_14) {
             break;
         }
     }
@@ -192,7 +192,7 @@ again:
                 break;
             }
             task->x0 = 14;
-            if (result != 11) {
+            if (result != result_pending_ops) {
                 goto again;
             }
         }
@@ -221,7 +221,7 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     _p(snapshot_entries) = NULL;
     _p(free_blocks) = NULL;
     _p(free_files) = NULL;
-    _p(saved_error) = 0x10;
+    _p(saved_error) = 16;
 
     for (i = 0; i < 9; i++) {
         _p(unk_38)[i].card_error = 0x10;
@@ -316,7 +316,7 @@ int lb_8001A184(void)
 
         _p(saved_error) = lb_80019BB8(mount_result);
         if (mount_result == 0 || mount_result == -6 || mount_result == -0xD) {
-            _p(unk_80) = 1;
+            _p(unk_80) = true;
         }
         if (_p(saved_error) == 0) {
             _p(pending_ops) += 1;
