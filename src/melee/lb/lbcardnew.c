@@ -197,7 +197,7 @@ again:
             }
         }
     }
-    if (result != 11 && _p(x50C) != NULL) {
+    if (result != result_pending_ops && _p(x50C) != NULL) {
         _p(x50C)(result);
         _p(x50C) = NULL;
     }
