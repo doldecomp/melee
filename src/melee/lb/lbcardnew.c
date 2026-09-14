@@ -215,7 +215,7 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     _p(unk_34) = 0x10;
 
     for (i = 0; i < 9; i++) {
-        _p(unk_38)[i].unk_0 = 0x10;
+        _p(unk_38)[i].card_error = 0x10;
         _p(unk_38)[i].unk_4 = -1;
     }
 
@@ -273,7 +273,7 @@ void fn_8001A0B0(int file_idx, int hsd_error)
 
     error = convert_hsdcard_error(hsd_error);
 
-    _p(unk_38)[file_idx].unk_0 = error;
+    _p(unk_38)[file_idx].card_error = error;
     _p(unk_38)[file_idx].unk_4 = hsd_error;
     if (error != 0) {
         _p(unk_34) = error;
@@ -581,9 +581,9 @@ int lb_8001ACEC(UNK_T file_entries)
         if (_p(xF4)[i] != 0) {
             hsd_result = hsd_803B29D8((CardState*) &_p(unk_A8), i,
                                       entries[i].data, fn_8001A0B0);
-            _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
+            _p(unk_38)[i].card_error = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
-            file_error = _p(unk_38)[i].unk_0;
+            file_error = _p(unk_38)[i].card_error;
             if (file_error == 0) {
                 _p(pending_ops) += 1;
             } else {
@@ -615,9 +615,9 @@ int lb_8001AE38(UNK_T file_entries)
         if (_p(xF4)[i] != 0) {
             hsd_result =
                 hsd_803B2A4C(&_p(unk_A8), i, entries[i].data, fn_8001A0B0);
-            _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
+            _p(unk_38)[i].card_error = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
-            file_error = _p(unk_38)[i].unk_0;
+            file_error = _p(unk_38)[i].card_error;
             if (file_error == 0) {
                 _p(pending_ops) += 1;
             } else {
@@ -753,7 +753,7 @@ loop_1:
 
 s32 lb_8001B6E0(s32 file_idx)
 {
-    return _p(unk_38)[file_idx].unk_0;
+    return _p(unk_38)[file_idx].card_error;
 }
 
 int lb_8001B6F8(void)
