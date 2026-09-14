@@ -41,7 +41,7 @@ typedef struct CardState {
 /* 3AC340 */
 /* 3AC3E0 */
 /* 3B2374 */ void hsd_803B2374(void);
-/* 3B24E4 */ void hsd_803B24E4(s32* ctx, int chan, int sector_size,
+/* 3B24E4 */ void hsd_803B24E4(CardState* ctx, int chan, int sector_size,
                                void* work_buf);
 /* 3B2550 */ int hsd_803B2550(s32* state, const char* filename,
                               void (*callback)(int, int));

@@ -164,11 +164,9 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
     return 0;
 }
 
-int hsd_803B2ADC(s32* ctx, UNK_T data)
+int hsd_803B2ADC(CardState* ctx, UNK_T data)
 {
-    CardState* state = (CardState*) ctx;
-
-    memcpy(&state->banner_format, data, 18);
-    state->header_size = hsd_803AC340(&state->banner_format);
+    memcpy(&ctx->banner_format, data, 18);
+    ctx->header_size = hsd_803AC340(&ctx->banner_format);
     return 0;
 }
