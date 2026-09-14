@@ -44,11 +44,14 @@
 
         devShells.default = legacyPackages.mkShellNoCC {
           shellHook = packages.default.postPatch + ''
+            export PRE_COMMIT_HOME="$PWD/build/pre-commit"
+            mkdir -p "$PRE_COMMIT_HOME"
             ./configure.py ${toString packages.default.configureFlags}
           '';
           packages = packages.default.nativeBuildInputs ++ [
             legacyPackages.clang-tools-minimal
             legacyPackages.clang.cc.python
+            legacyPackages.pre-commit
             (legacyPackages.python3.withPackages (ps: with ps; [ m2c pcpp pyelftools ]))
           ];
         };

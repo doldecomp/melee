@@ -14,8 +14,8 @@ final: prev: {
 
   clang-tools-minimal = final.runCommand "clang-tools-minimal" { } ''
     mkdir -p $out/bin/
-    cp ${final.clang.cc}/bin/clang-format $out/bin/
-    cp ${final.clang.cc}/bin/clang-tidy $out/bin/
+    cp ${final.llvmPackages_22.clang.cc}/bin/clang-format $out/bin/
+    cp ${final.llvmPackages_22.clang.cc}/bin/clang-tidy $out/bin/
   '';
 
   main-dol = final.requireFile {
