@@ -1349,14 +1349,5 @@ void fn_80105978(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
-    fp->self_vel.x = -fp->self_vel.x;
-    fp->gr_vel = -fp->gr_vel;
-    fp->xE4_ground_accel_1 = -fp->xE4_ground_accel_1;
-    fp->mv.pr.specialn.x10 = -fp->mv.pr.specialn.x10;
-    fp->mv.pr.specialn.x14 = -fp->mv.pr.specialn.x14;
-    fp->mv.pr.specialn.x18 = -fp->mv.pr.specialn.x18;
-    fp->mv.pr.specialn.x1C = -fp->mv.pr.specialn.x1C;
-    fp->mv.pr.specialn.facing_dir = -fp->mv.pr.specialn.facing_dir;
-    fp->mv.pr.specialn.x34.x = -fp->mv.pr.specialn.x34.x;
-    fp->mv.pr.specialn.x34.y = -fp->mv.pr.specialn.x34.y;
+    ftPr_MirrorSpecialN(fp);
 }
