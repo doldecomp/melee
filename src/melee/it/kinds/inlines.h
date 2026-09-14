@@ -264,7 +264,7 @@ static inline void Item_CopyJObjScale(HSD_JObj* dst, HSD_JObj* src,
     HSD_JObjSetScale(dst, scale);
 }
 
-static inline void Item_WrapAngle(f32* angle)
+static inline void Item_NormalizeAngle(f32* angle)
 {
     while (*angle < 0.0F) {
         *angle += M_TAU;

@@ -387,7 +387,7 @@ bool it_802AC098(Item_GObj* gobj)
 
     ip->xDD4_itemVar.pkthunder.xF00 = 1;
     ip->xDD4_itemVar.pkthunder.angles[0] += M_PI;
-    Item_WrapAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_NormalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
 
     for (i = 0; i < 6; i++) {
         if (ip->xDD4_itemVar.pkthunder.xDD4[i] != NULL) {
@@ -428,7 +428,7 @@ bool it_802AC35C(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     ip->xDD4_itemVar.pkthunder.angles[0] =
         atan2f(ip->x40_vel.y, ip->x40_vel.x);
-    Item_WrapAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_NormalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
     return false;
 }
 

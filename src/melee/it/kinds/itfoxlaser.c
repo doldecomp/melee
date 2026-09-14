@@ -39,7 +39,7 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     Item_GObj* item_gobj;
     bool right_facing;
 
-    Item_WrapAngle(&angle);
+    Item_NormalizeAngle(&angle);
     spawn.kind = kind;
     Item_InitSpawnPositionFromParent(&spawn, parent, pos);
     right_facing = true;
