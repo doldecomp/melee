@@ -19,7 +19,6 @@
 #include <melee/gm/gm_1879.h>
 #include <melee/gm/gmregclear.h>
 #include <melee/gm/gmscene.h>
-#include <melee/gr/inlines.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifstatus.h>
 #include <melee/it/item.h>

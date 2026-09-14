@@ -21,6 +21,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: create dummy build includes
+      if: matrix.hook == 'replace-includes'
       run: |
         mkdir -p build/GALE01/include
         touch build/GALE01/include/debug_font.inc \

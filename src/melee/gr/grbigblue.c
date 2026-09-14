@@ -9,7 +9,7 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
-#include <melee/gr/inlines.h>
+#include "inlines.h"
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
@@ -18,7 +18,6 @@
 #include <math.h>
 
 #include "grzakogenerator.h"
-#include "inlines.h"
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>

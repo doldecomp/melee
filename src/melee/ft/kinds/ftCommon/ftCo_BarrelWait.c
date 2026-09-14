@@ -14,7 +14,6 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbcollision.h>

@@ -14,7 +14,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/gobj.h>

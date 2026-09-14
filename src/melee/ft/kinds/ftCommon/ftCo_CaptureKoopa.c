@@ -4,6 +4,7 @@
 
 #include "ftCo_Attack100.h"
 #include "ftCo_CaptureDamageKoopa.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -11,7 +12,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/kinds/ftCaptain/types.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftKoopa/ftkoopaspecials.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/jobj.h>

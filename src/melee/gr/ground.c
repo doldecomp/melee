@@ -82,7 +82,6 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_3F14.h>
 #include <melee/it/itzako.h>

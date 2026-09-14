@@ -5,7 +5,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/gr/inlines.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobjproc.h>
 

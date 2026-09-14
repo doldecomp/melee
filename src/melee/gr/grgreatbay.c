@@ -15,7 +15,6 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/item.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/kinds/ittincle.h>

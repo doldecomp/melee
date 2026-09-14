@@ -13,7 +13,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/random.h>

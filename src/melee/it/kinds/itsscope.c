@@ -14,7 +14,6 @@
 #include <melee/it/itCommonItems.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <melee/it/kinds/inlines.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)

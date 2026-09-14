@@ -4,7 +4,6 @@
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/player.h>
 

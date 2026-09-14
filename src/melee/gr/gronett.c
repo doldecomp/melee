@@ -14,7 +14,6 @@
 #include <melee/cm/types.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmvs.h>
-#include <melee/gr/inlines.h>
 #include <melee/if/ifhazard.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>

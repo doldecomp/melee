@@ -6,8 +6,8 @@
 #include "ftcommon.h"
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Damage.h"
+#include "kinds/ftCommon/inlines.h"
 #include "types.h"
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itlikelike.h>
 #include <melee/lb/lbcollision.h>

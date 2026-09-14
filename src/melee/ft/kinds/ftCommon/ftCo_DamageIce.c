@@ -19,6 +19,7 @@
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
 #include "ftCo_Throw.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
@@ -33,7 +34,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>

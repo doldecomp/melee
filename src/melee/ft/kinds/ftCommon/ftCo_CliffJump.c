@@ -6,13 +6,13 @@
 #include "ftCo_Fall.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Jump.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 /* 09B1B8 */ static void ftCo_8009B1B8(Fighter_GObj* gobj);

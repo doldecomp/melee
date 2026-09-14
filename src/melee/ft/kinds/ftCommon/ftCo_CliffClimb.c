@@ -7,6 +7,7 @@
 #include "ftCo_CliffAttack.h"
 #include "ftCo_Fall.h"
 #include "ftCo_StopCeil.h"
+#include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -16,7 +17,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 
