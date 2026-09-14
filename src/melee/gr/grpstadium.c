@@ -317,9 +317,9 @@ void grStadium_801D13E0(Ground_GObj* gobj)
     var_r27 = yakumono_param->x4;
     temp_r28 = yakumono_param->x0;
     if (var_r27 > yakumono_param->x0) {
-        var_r27 = temp_r28 + zrandi(var_r27 - temp_r28);
+        var_r27 = temp_r28 + randi(var_r27 - temp_r28);
     } else if (var_r27 < temp_r28) {
-        var_r27 += zrandi(temp_r28 - var_r27);
+        var_r27 += randi(temp_r28 - var_r27);
     }
     gr->u.stadium.xD8 = var_r27;
     gr->x11_flags.b012 = 1;
@@ -913,9 +913,9 @@ static inline int randi_between_2(int a, int b)
 {
     int result = b;
     if (b > a) {
-        result = a + zrandi(b - a);
+        result = a + randi(b - a);
     } else if (b < a) {
-        result = b + zrandi(a - b);
+        result = b + randi(a - b);
     }
     return result;
 }
@@ -923,9 +923,9 @@ static inline int randi_between_2(int a, int b)
 static inline int randi_between(int a, int b)
 {
     if (b > a) {
-        return a + zrandi(b - a);
+        return a + randi(b - a);
     } else if (b < a) {
-        return b + zrandi(a - b);
+        return b + randi(a - b);
     }
     return b;
 }

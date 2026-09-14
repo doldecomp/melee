@@ -7,6 +7,7 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/kinds/itheiho.h>
 #include <melee/lb/lb_00B0.h>
@@ -131,11 +132,6 @@ void grStory_801E322C(Ground_GObj* gobj) {}
 
 void grStory_801E3230(Ground_GObj* gobj) {}
 
-static inline int randi(int max)
-{
-    return max ? HSD_Randi(max) : 0;
-}
-
 static inline void reset_shyguy_timer(Ground* gp)
 {
     // Reset the timer
@@ -168,6 +164,7 @@ static inline void set_shyguy_spawn_count(Ground* gp, int rarity)
 void grStory_801E3234(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 5, 7, 1, 0.0F, 1.0F);
@@ -254,6 +251,7 @@ void grStory_801E3418(Ground_GObj* gobj)
     // Pick a random spawn pattern,
     // which must be different from the previous one
     do {
+        PAD_STACK(12);
         spawn_pattern = randi(ARRAY_SIZE(yakumono_param->vpos));
     } while (gp->u.shyguys.pattern == spawn_pattern);
     gp->u.shyguys.pattern = spawn_pattern;

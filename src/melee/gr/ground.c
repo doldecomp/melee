@@ -3297,7 +3297,7 @@ int Ground_801C5940(void)
     if (out_idx == 0) {
         return -1;
     }
-    return vals[ZRANDI(out_idx)];
+    return vals[randi(out_idx)];
 }
 
 void Ground_801C5A28(void)

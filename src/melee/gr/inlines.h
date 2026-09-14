@@ -231,12 +231,4 @@ static inline int rand_range(int a, int b)
     }
 }
 
-static inline int zrandi(int max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
-}
-
 #endif

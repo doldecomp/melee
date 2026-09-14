@@ -1304,7 +1304,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
                 if (!grCn_804D69B0) {
                     if (gp->u.corneria2.xF0 % yakumono_param->x74 == 0 &&
-                        zrandi(yakumono_param->x78) == 0)
+                        randi(yakumono_param->x78) == 0)
                     {
                         gp->u.corneria2.xFC = 1;
                     } else {
@@ -1312,7 +1312,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     }
                 } else {
                     if (gp->u.corneria2.xF0 % yakumono_param->x7C == 0 &&
-                        zrandi(yakumono_param->x80) == 0)
+                        randi(yakumono_param->x80) == 0)
                     {
                         gp->u.corneria2.xFC = 1;
                     } else {
@@ -1354,7 +1354,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         case 13: {
             if (!grCn_804D69B0) {
                 if (gp->u.corneria2.xF0 % yakumono_param->x74 == 0 &&
-                    zrandi(yakumono_param->x78) == 0)
+                    randi(yakumono_param->x78) == 0)
                 {
                     gp->u.corneria2.xFC = 1;
                 } else {
@@ -1362,7 +1362,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
             } else {
                 if (gp->u.corneria2.xF0 % yakumono_param->x7C == 0 &&
-                    zrandi(yakumono_param->x80) == 0)
+                    randi(yakumono_param->x80) == 0)
                 {
                     gp->u.corneria2.xFC = 1;
                 } else {
