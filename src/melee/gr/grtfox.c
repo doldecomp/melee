@@ -6,6 +6,7 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -22,7 +23,7 @@ static void grTFox_80220B84(void);
 static void grTFox_UnkStage0_OnLoad(void);
 static void grTFox_UnkStage0_OnStart(void);
 static bool grTFox_80220C24(void);
-static HSD_GObj* grTFox_80220C2C(s32);
+static HSD_GObj* grTFox_80220C2C(int);
 static void grTFox_80220D14(Ground_GObj*);
 static bool grTFox_80220D40(Ground_GObj*);
 static void grTFox_80220D48(Ground_GObj*);
@@ -67,16 +68,7 @@ void grTFox_80220B80(bool unk) {}
 void grTFox_80220B84(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTFox_80220C2C(0);
-    grTFox_80220C2C(1);
-    grTFox_80220C2C(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTFox_80220C2C);
 }
 
 void grTFox_UnkStage0_OnLoad(void) {}
@@ -91,7 +83,7 @@ bool grTFox_80220C24(void)
     return false;
 }
 
-HSD_GObj* grTFox_80220C2C(s32 arg0)
+HSD_GObj* grTFox_80220C2C(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTFx_StageCallbacks[arg0];

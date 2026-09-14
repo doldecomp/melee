@@ -11,6 +11,7 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -101,15 +102,7 @@ void grTMewtwo_802221D8(bool arg0) {}
 void grTMewtwo_802221DC(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTMewtwo_80222284(0);
-    grTMewtwo_80222284(1);
-    grTMewtwo_80222284(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTMewtwo_80222284);
 }
 
 void grTmewtwo_UnkStage0_OnLoad(void) {}
