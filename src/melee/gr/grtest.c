@@ -21,10 +21,17 @@ GrJoint grTe_803E56B8[] = {
     { 10, 2, 11 }, { 12, 2, 16 }, { 13, 2, 17 },
 };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+static void stageGObj2_X8Callback(HSD_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grTe_StageCallbacks[] = {
-    { grTest_80207130, grTest_8020715C, grTest_80207164, grTest_80207168, 0 },
-    { grTest_802073D0, grTest_802073FC, grTest_80207404, grTest_80207408, 0 },
-    { grTest_8020716C, grTest_802071BC, grTest_802071C4, grTest_802073AC,
+    { stageGObj0_OnInit, grTest_8020715C, grTest_80207164, grTest_80207168,
+      0 },
+    { stageGObj1_OnInit, grTest_802073FC, grTest_80207404, grTest_80207408,
+      0 },
+    { stageGObj2_OnInit, grTest_802071BC, grTest_802071C4, grTest_802073AC,
       0xC0000000 },
     { 0, 0, 0, 0, 0 }
 };
@@ -59,7 +66,7 @@ void grTest_80206E30(void)
     stage_info.unk8C.b5 = 1;
     grTest_80207044(0);
     gobj = grTest_80207044(2);
-    GET_GROUND(gobj)->x8_callback = grTest_802073B0;
+    GET_GROUND(gobj)->x8_callback = stageGObj2_X8Callback;
     gobj = grTest_80207044(1);
     jobj = GET_JOBJ(gobj);
     HSD_JObjSetScaleX(jobj, 80.0);
@@ -97,7 +104,7 @@ HSD_GObj* grTest_80207044(int gobj_id)
     return gobj;
 }
 
-void grTest_80207130(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -111,7 +118,7 @@ void grTest_80207164(Ground_GObj* gobj) {}
 
 void grTest_80207168(Ground_GObj* gobj) {}
 
-void grTest_8020716C(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -171,12 +178,12 @@ void grTest_802071C4(Ground_GObj* gobj)
 
 void grTest_802073AC(Ground_GObj* gobj) {}
 
-void grTest_802073B0(HSD_GObj* gobj)
+static void stageGObj2_X8Callback(HSD_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }
 
-void grTest_802073D0(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

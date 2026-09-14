@@ -21,8 +21,10 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grOy_StageCallbacks[] = {
-    { grOldYoshi_8020E93C, grOldYoshi_8020E968, grOldYoshi_8020E970,
+    { stageGObj0_OnInit, grOldYoshi_8020E968, grOldYoshi_8020E970,
       grOldYoshi_8020E974, 0 },
     { grOldYoshi_8020E978, grOldYoshi_8020E9E0, grOldYoshi_8020E9E8,
       grOldYoshi_8020E9EC, 0 },
@@ -111,7 +113,7 @@ HSD_GObj* grOldYoshi_8020E854(int gobj_id)
     return gobj;
 }
 
-void grOldYoshi_8020E93C(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

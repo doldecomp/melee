@@ -17,40 +17,40 @@
 /* 2235F8 */ static void grTSamus_OnStart(void);
 /* 22361C */ static bool grTSamus_8022361C(void);
 /* 223624 */ static HSD_GObj* grTSamus_80223624(int);
-/* 22370C */ static void grTSamus_8022370C(Ground_GObj*);
+/* 22370C */ static void stageGObj0_OnInit(Ground_GObj*);
 /* 223738 */ static bool grTSamus_80223738(Ground_GObj*);
 /* 223740 */ static void grTSamus_80223740(Ground_GObj*);
 /* 223744 */ static void grTSamus_80223744(Ground_GObj*);
-/* 223748 */ static void grTSamus_80223748(Ground_GObj*);
+/* 223748 */ static void stageGObj2_OnInit(Ground_GObj*);
 /* 223798 */ static bool grTSamus_80223798(Ground_GObj*);
-/* 2237A0 */ static void grTSamus_802237A0(Ground_GObj*);
+/* 2237A0 */ static void stageGObj2_GObjProc(Ground_GObj*);
 /* 2237D4 */ static void grTSamus_802237D4(Ground_GObj*);
-/* 2237D8 */ static void grTSamus_802237D8(Ground_GObj*);
+/* 2237D8 */ static void stageGObj1_OnInit(Ground_GObj*);
 /* 223828 */ static bool grTSamus_80223828(Ground_GObj*);
-/* 223830 */ static void grTSamus_80223830(Ground_GObj*);
+/* 223830 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 223850 */ static void grTSamus_80223850(Ground_GObj*);
 /* 223854 */ static DynamicsDesc* grTSamus_OnTouchLine(enum_t);
 /* 22385C */ static bool grTSamus_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTSs_StageCallbacks[] = {
     {
-        grTSamus_8022370C,
+        stageGObj0_OnInit,
         grTSamus_80223738,
         grTSamus_80223740,
         grTSamus_80223744,
         0,
     },
     {
-        grTSamus_802237D8,
+        stageGObj1_OnInit,
         grTSamus_80223828,
-        grTSamus_80223830,
+        stageGObj1_GObjProc,
         grTSamus_80223850,
         0,
     },
     {
-        grTSamus_80223748,
+        stageGObj2_OnInit,
         grTSamus_80223798,
-        grTSamus_802237A0,
+        stageGObj2_GObjProc,
         grTSamus_802237D4,
         (1 << 31) | (1 << 30),
     },
@@ -106,7 +106,7 @@ HSD_GObj* grTSamus_80223624(int arg0)
     return gobj;
 }
 
-void grTSamus_8022370C(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -120,7 +120,7 @@ void grTSamus_80223740(Ground_GObj* gobj) {}
 
 void grTSamus_80223744(Ground_GObj* gobj) {}
 
-void grTSamus_80223748(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -130,14 +130,14 @@ bool grTSamus_80223798(Ground_GObj* gobj)
     return false;
 }
 
-void grTSamus_802237A0(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTSamus_802237D4(Ground_GObj* gobj) {}
 
-void grTSamus_802237D8(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -147,7 +147,7 @@ bool grTSamus_80223828(Ground_GObj* gobj)
     return false;
 }
 
-void grTSamus_80223830(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }

@@ -35,9 +35,11 @@ struct grFlatzone_YakumonoParam {
     s32 unk3C;
 };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 static StageCallbacks grFz_StageCallbacks[] = {
     {
-        grFlatzone_80217030,
+        stageGObj0_OnInit,
         grFlatzone_8021705C,
         grFlatzone_80217064,
         grFlatzone_80217068,
@@ -172,7 +174,7 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
     return gobj;
 }
 
-void grFlatzone_80217030(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

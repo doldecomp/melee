@@ -23,7 +23,6 @@
 /* 1F0288 */ bool grMuteCity_801F0288(Ground_GObj*);
 /* 1F0290 */ void grMuteCity_801F0290(Ground_GObj*);
 /* 1F040C */ void grMuteCity_801F040C(Ground_GObj*);
-/* 1F0410 */ void grMuteCity_801F0410(Ground_GObj*);
 /* 1F043C */ bool grMuteCity_801F043C(Ground_GObj*);
 /* 1F0444 */ void grMuteCity_801F0444(Ground_GObj*);
 /* 1F0448 */ void grMuteCity_801F0448(Ground_GObj*);

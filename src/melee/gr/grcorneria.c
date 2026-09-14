@@ -89,6 +89,7 @@ struct grCorneria_YakumonoParam {
 /* 1E0F30 */ static void grCorneria_801E0F30(Ground_GObj*);
 /* 1E1054 */ static void grCorneria_801E1054(Ground_GObj*);
 /* 1E12CC */ static void grCorneria_801E12CC(Ground_GObj*);
+static void stageGObj6_OnInit(Ground_GObj* gobj);
 
 static struct grCorneria_YakumonoParam* yakumono_param;
 static u32 grCn_804D69A4;
@@ -149,7 +150,7 @@ StageCallbacks grCn_StageCallbacks[] = {
         0x20000000,
     },
     {
-        grCorneria_801DFBF0,
+        stageGObj6_OnInit,
         grCorneria_801DFC1C,
         grCorneria_801DFC24,
         grCorneria_801DFC28,
@@ -1515,7 +1516,7 @@ void grCorneria_801DFBCC(Ground_GObj* arg)
 
 void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
-void grCorneria_801DFBF0(Ground_GObj* gobj)
+static void stageGObj6_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

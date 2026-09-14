@@ -13,45 +13,45 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 22192C */ static void grTLink_8022192C(bool);
-/* 221930 */ static void grTLink_80221930(void);
+/* 221930 */ static void grTLink_OnInit(void);
 /* 2219A0 */ static void grTlink_UnkStage0_OnLoad(void);
 /* 2219A4 */ static void grTlink_UnkStage0_OnStart(void);
 /* 2219C8 */ static bool grTLink_802219C8(void);
 /* 2219D0 */ static HSD_GObj* grTLink_802219D0(int arg0);
-/* 221AB8 */ static void grTLink_80221AB8(Ground_GObj*);
+/* 221AB8 */ static void stageGObj0_OnInit(Ground_GObj*);
 /* 221AE4 */ static bool grTLink_80221AE4(Ground_GObj*);
 /* 221AEC */ static void grTLink_80221AEC(Ground_GObj*);
 /* 221AF0 */ static void grTLink_80221AF0(Ground_GObj*);
-/* 221AF4 */ static void grTLink_80221AF4(Ground_GObj*);
+/* 221AF4 */ static void stageGObj2_OnInit(Ground_GObj*);
 /* 221B44 */ static bool grTLink_80221B44(Ground_GObj*);
-/* 221B4C */ static void grTLink_80221B4C(Ground_GObj*);
+/* 221B4C */ static void stageGObj2_GObjProc(Ground_GObj*);
 /* 221B80 */ static void grTLink_80221B80(Ground_GObj*);
-/* 221B84 */ static void grTLink_80221B84(Ground_GObj*);
+/* 221B84 */ static void stageGObj1_OnInit(Ground_GObj*);
 /* 221BD4 */ static bool grTLink_80221BD4(Ground_GObj*);
-/* 221BDC */ static void grTLink_80221BDC(Ground_GObj*);
+/* 221BDC */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 221BFC */ static void grTLink_80221BFC(Ground_GObj*);
 /* 221C00 */ static DynamicsDesc* grTLink_80221C00(enum_t);
 /* 221C08 */ static bool grTLink_80221C08(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTLk_StageCallbacks[] = {
     {
-        grTLink_80221AB8,
+        stageGObj0_OnInit,
         grTLink_80221AE4,
         grTLink_80221AEC,
         grTLink_80221AF0,
         0,
     },
     {
-        grTLink_80221B84,
+        stageGObj1_OnInit,
         grTLink_80221BD4,
-        grTLink_80221BDC,
+        stageGObj1_GObjProc,
         grTLink_80221BFC,
         0,
     },
     {
-        grTLink_80221AF4,
+        stageGObj2_OnInit,
         grTLink_80221B44,
-        grTLink_80221B4C,
+        stageGObj2_GObjProc,
         grTLink_80221B80,
         (1 << 31) | (1 << 30),
     },
@@ -62,7 +62,7 @@ StageData grTLk_StageData = {
     Gr_Kind_TLink,
     grTLk_StageCallbacks,
     "/GrTLk.dat",
-    grTLink_80221930,
+    grTLink_OnInit,
     grTLink_8022192C,
     grTlink_UnkStage0_OnLoad,
     grTlink_UnkStage0_OnStart,
@@ -76,7 +76,7 @@ StageData grTLk_StageData = {
 
 void grTLink_8022192C(bool unk0) {}
 
-void grTLink_80221930(void)
+static void grTLink_OnInit(void)
 {
     Ground_InitTargetStage(grTLink_802219D0);
 }
@@ -109,7 +109,7 @@ HSD_GObj* grTLink_802219D0(int arg0)
     return gobj;
 }
 
-void grTLink_80221AB8(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -123,7 +123,7 @@ void grTLink_80221AEC(Ground_GObj* gobj) {}
 
 void grTLink_80221AF0(Ground_GObj* gobj) {}
 
-void grTLink_80221AF4(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -133,14 +133,14 @@ bool grTLink_80221B44(Ground_GObj* gobj)
     return false;
 }
 
-void grTLink_80221B4C(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTLink_80221B80(Ground_GObj* gobj) {}
 
-void grTLink_80221B84(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -150,7 +150,7 @@ bool grTLink_80221BD4(Ground_GObj* gobj)
     return false;
 }
 
-void grTLink_80221BDC(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }

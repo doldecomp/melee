@@ -32,17 +32,17 @@ typedef struct grTMewtwo_UnkStruct {
 /* 222258 */ static void grTmewtwo_UnkStage0_OnStart(void);
 /* 22227C */ static bool grTMewtwo_8022227C(void);
 /* 222284 */ static Ground_GObj* grTMewtwo_80222284(int index);
-/* 22236C */ static void grTMewtwo_8022236C(Ground_GObj* gobj);
+/* 22236C */ static void stageGObj0_OnInit(Ground_GObj* gobj);
 /* 222398 */ static bool grTMewtwo_80222398(Ground_GObj* gobj);
 /* 2223A0 */ static void grTMewtwo_802223A0(Ground_GObj* gobj);
 /* 2223A4 */ static void grTMewtwo_802223A4(Ground_GObj* gobj);
-/* 2223A8 */ static void grTMewtwo_802223A8(Ground_GObj* gobj);
+/* 2223A8 */ static void stageGObj2_OnInit(Ground_GObj* gobj);
 /* 2223F8 */ static bool grTMewtwo_802223F8(Ground_GObj* gobj);
-/* 222400 */ static void grTMewtwo_80222400(Ground_GObj* gobj);
+/* 222400 */ static void stageGObj2_GObjProc(Ground_GObj* gobj);
 /* 222434 */ static void grTMewtwo_80222434(Ground_GObj* gobj);
-/* 222438 */ static void grTMewtwo_80222438(Ground_GObj* gobj);
+/* 222438 */ static void stageGObj1_OnInit(Ground_GObj* gobj);
 /* 222488 */ static bool grTMewtwo_80222488(Ground_GObj* gobj);
-/* 222490 */ static void grTMewtwo_80222490(Ground_GObj* gobj);
+/* 222490 */ static void stageGObj1_GObjProc(Ground_GObj* gobj);
 /* 2224B0 */ static void grTMewtwo_802224B0(Ground_GObj* gobj);
 /* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(enum_t arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
@@ -51,23 +51,23 @@ typedef struct grTMewtwo_UnkStruct {
 
 static StageCallbacks grTMewtwo_StageCallbacks[4] = {
     {
-        grTMewtwo_8022236C,
+        stageGObj0_OnInit,
         grTMewtwo_80222398,
         grTMewtwo_802223A0,
         grTMewtwo_802223A4,
         0,
     },
     {
-        grTMewtwo_80222438,
+        stageGObj1_OnInit,
         grTMewtwo_80222488,
-        grTMewtwo_80222490,
+        stageGObj1_GObjProc,
         grTMewtwo_802224B0,
         0,
     },
     {
-        grTMewtwo_802223A8,
+        stageGObj2_OnInit,
         grTMewtwo_802223F8,
-        grTMewtwo_80222400,
+        stageGObj2_GObjProc,
         grTMewtwo_80222434,
         (1 << 30) | (1 << 31),
     },
@@ -131,7 +131,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
     return gobj;
 }
 
-void grTMewtwo_8022236C(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -145,7 +145,7 @@ void grTMewtwo_802223A0(Ground_GObj* gobj) {}
 
 void grTMewtwo_802223A4(Ground_GObj* gobj) {}
 
-void grTMewtwo_802223A8(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -155,14 +155,14 @@ bool grTMewtwo_802223F8(Ground_GObj* gobj)
     return false;
 }
 
-void grTMewtwo_80222400(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTMewtwo_80222434(Ground_GObj* gobj) {}
 
-void grTMewtwo_80222438(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -172,7 +172,7 @@ bool grTMewtwo_80222488(Ground_GObj* gobj)
     return false;
 }
 
-void grTMewtwo_80222490(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }

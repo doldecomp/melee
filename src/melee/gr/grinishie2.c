@@ -31,9 +31,11 @@ GrJoint grI2_803E4A60[] = {
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },
     { 9, 11, 0 }, { 10, 12, 0 }, { 11, 13, 0 }, { 2, 14, 0 },
 };
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grI2_StageCallbacks[] = {
     {
-        grInishie2_801FCDC8,
+        stageGObj0_OnInit,
         grInishie2_801FCDF4,
         grInishie2_801FCDFC,
         grInishie2_801FCE00,
@@ -259,7 +261,7 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
     return gobj;
 }
 
-void grInishie2_801FCDC8(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

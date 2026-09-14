@@ -69,6 +69,12 @@ GrJoint grPs_803E1248[] = {
     { 4, 5, 0 }, { 5, 6, 0 }, { 7, 9, 0 },
 };
 
+static void stageGObj5_GObjProc(Ground_GObj* gobj);
+static void stageGObj4_GObjProc(Ground_GObj* gobj);
+static void stageGObj6_GObjProc(Ground_GObj* gobj);
+static void stageGObj3_GObjProc(Ground_GObj* gobj);
+static void stageGObj7_8_OnInit(Ground_GObj* gobj);
+
 static StageCallbacks grPs_StageCallbacks[] = {
     {
         NULL,
@@ -94,40 +100,40 @@ static StageCallbacks grPs_StageCallbacks[] = {
     {
         grStadium_801D1840,
         grStadium_801D19D0,
-        grStadium_801D19D8,
+        stageGObj3_GObjProc,
         grStadium_801D19F8,
         0,
     },
     {
         grStadium_801D1648,
         grStadium_801D16D4,
-        grStadium_801D16DC,
+        stageGObj4_GObjProc,
         grStadium_801D16FC,
         0,
     },
     {
         grStadium_801D1570,
         grStadium_801D15FC,
-        grStadium_801D1604,
+        stageGObj5_GObjProc,
         grStadium_801D1624,
         0,
     },
     {
         grStadium_801D1720,
         grStadium_801D17E0,
-        grStadium_801D17E8,
+        stageGObj6_GObjProc,
         grStadium_801D1808,
         0,
     },
     {
-        grStadium_801D1DE4,
+        stageGObj7_8_OnInit,
         grStadium_801D1E10,
         grStadium_801D1E18,
         grStadium_801D1E1C,
         0,
     },
     {
-        grStadium_801D1DE4,
+        stageGObj7_8_OnInit,
         grStadium_801D1E10,
         grStadium_801D1E18,
         grStadium_801D1E1C,
@@ -363,7 +369,7 @@ bool grStadium_801D15FC(Ground_GObj* gobj)
     return false;
 }
 
-void grStadium_801D1604(Ground_GObj* gobj)
+static void stageGObj5_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }
@@ -391,7 +397,7 @@ bool grStadium_801D16D4(Ground_GObj* gobj)
     return false;
 }
 
-void grStadium_801D16DC(Ground_GObj* gobj)
+static void stageGObj4_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }
@@ -425,7 +431,7 @@ bool grStadium_801D17E0(Ground_GObj* gobj)
     return false;
 }
 
-void grStadium_801D17E8(Ground_GObj* gobj)
+static void stageGObj6_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }
@@ -496,7 +502,7 @@ bool grStadium_801D19D0(Ground_GObj* gobj)
     return false;
 }
 
-void grStadium_801D19D8(Ground_GObj* gobj)
+static void stageGObj3_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }
@@ -595,7 +601,7 @@ void grStadium_801D1D84(Ground_GObj* gobj)
     mpLib_80057BC0(7);
 }
 
-void grStadium_801D1DE4(Ground_GObj* gobj)
+static void stageGObj7_8_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

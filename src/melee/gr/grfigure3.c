@@ -18,7 +18,7 @@ static void grFigure3_OnLoad(void);
 static void grFigure3_OnStart(void);
 static bool grFigure3_8020E5A0(void);
 static HSD_GObj* grFigure3_8020E5A8(int gobj_id);
-static void grFigure3_8020E690(Ground_GObj* gobj);
+static void stageGObj0_OnInit(Ground_GObj* gobj);
 static bool grFigure3_8020E6BC(Ground_GObj*);
 static void grFigure3_8020E6C4(Ground_GObj* gobj);
 static void grFigure3_8020E6C8(Ground_GObj*);
@@ -26,7 +26,7 @@ static void grFigure3_8020E6CC(Ground_GObj* gobj);
 static bool grFigure3_8020E6F8(Ground_GObj*);
 static void grFigure3_8020E700(Ground_GObj* gobj);
 static void grFigure3_8020E724(Ground_GObj*);
-static void grFigure3_8020E728(Ground_GObj* gobj);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
 static bool grFigure3_8020E778(Ground_GObj*);
 static void grFigure3_8020E780(Ground_GObj* gobj);
 static void grFigure3_8020E784(Ground_GObj*);
@@ -34,11 +34,11 @@ static DynamicsDesc* grFigure3_8020E788(enum_t);
 static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
 static StageCallbacks grEF2_StageCallbacks[3] = {
-    { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
+    { stageGObj0_OnInit, grFigure3_8020E6BC, grFigure3_8020E6C4,
       grFigure3_8020E6C8, 0UL },
     { grFigure3_8020E6CC, grFigure3_8020E6F8, grFigure3_8020E700,
       grFigure3_8020E724, 0xC0000000 },
-    { grFigure3_8020E728, grFigure3_8020E778, grFigure3_8020E780,
+    { stageGObj2_OnInit, grFigure3_8020E778, grFigure3_8020E780,
       grFigure3_8020E784, 0UL }
 };
 
@@ -102,7 +102,7 @@ static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
     return gobj;
 }
 
-static void grFigure3_8020E690(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -135,7 +135,7 @@ static void grFigure3_8020E700(Ground_GObj* gobj)
 
 static void grFigure3_8020E724(Ground_GObj* arg0) {}
 
-static void grFigure3_8020E728(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }

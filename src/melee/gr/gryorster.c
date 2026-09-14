@@ -22,9 +22,11 @@
                                             mpLib_GroundEnum ground_kind,
                                             float delta_y);
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grYt_StageCallbacks[] = {
     {
-        grYorster_80202124,
+        stageGObj0_OnInit,
         grYorster_80202150,
         grYorster_80202158,
         grYorster_8020215C,
@@ -120,7 +122,7 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
     return gobj;
 }
 
-void grYorster_80202124(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

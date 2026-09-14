@@ -12,12 +12,16 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj1_GObjProc(Ground_GObj* gobj);
+
 StageCallbacks grTPr_StageCallbacks[] = {
     { grTPurin_802232F4, grTPurin_80223320, grTPurin_80223328,
       grTPurin_8022332C, 0 },
-    { grTPurin_8022347C, grTPurin_802234CC, grTPurin_802234D4,
+    { stageGObj1_OnInit, grTPurin_802234CC, stageGObj1_GObjProc,
       grTPurin_802234F4, 0 },
-    { grTPurin_80223330, grTPurin_80223380, grTPurin_80223388,
+    { stageGObj2_OnInit, grTPurin_80223380, grTPurin_80223388,
       grTPurin_80223478, 0xC0000000 },
     { NULL, NULL, NULL, NULL, 0 }
 };
@@ -105,7 +109,7 @@ void grTPurin_8022332C(Ground_GObj* gobj)
     return;
 }
 
-void grTPurin_80223330(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -146,7 +150,7 @@ void grTPurin_80223478(Ground_GObj* gobj)
     return;
 }
 
-void grTPurin_8022347C(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_InitMapCollAndAnim(gobj);
 }
@@ -156,7 +160,7 @@ bool grTPurin_802234CC(Ground_GObj* gobj)
     return false;
 }
 
-void grTPurin_802234D4(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
     Ground_UpdateMapColl(gobj);
 }

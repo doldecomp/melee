@@ -43,9 +43,11 @@
 GrJoint grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grGb_StageCallbacks[11] = {
     {
-        grGreatBay_801F4404,
+        stageGObj0_OnInit,
         grGreatBay_801F4430,
         grGreatBay_801F4438,
         grGreatBay_801F443C,
@@ -259,7 +261,7 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
     return gobj;
 }
 
-void grGreatBay_801F4404(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

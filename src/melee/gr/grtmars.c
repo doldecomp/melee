@@ -9,7 +9,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
-/* 221EF8 */ static void grTMars_80221EF8(void);
+/* 221EF8 */ static void grTMars_OnInit(void);
 /* 221F68 */ static void grTmars_UnkStage0_OnLoad(void);
 /* 221F6C */ static void grTmars_UnkStage0_OnStart(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
@@ -56,7 +56,7 @@ StageData grTMs_StageData = {
     Gr_Kind_TMars,
     stage_callbacks,
     "/GrTMs.dat",
-    grTMars_80221EF8,
+    grTMars_OnInit,
     grTMars_80221EF4,
     grTmars_UnkStage0_OnLoad,
     grTmars_UnkStage0_OnStart,
@@ -70,7 +70,7 @@ StageData grTMs_StageData = {
 
 static void grTMars_80221EF4(bool arg0) {}
 
-static void grTMars_80221EF8(void)
+static void grTMars_OnInit(void)
 {
     Ground_InitTargetStage(setupStageCallbacks);
 }

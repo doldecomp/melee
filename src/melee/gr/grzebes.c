@@ -34,7 +34,7 @@
 /* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
 /* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
 /* 1D93D8 */ static void grZebes_801D93D8(Ground_GObj* arg);
-/* 1D93DC */ void grZebes_801D93DC(Ground_GObj* gobj);
+/* 1D93DC */ static void stageGObj5_OnInit(Ground_GObj* gobj);
 /* 1D9408 */ static bool grZebes_801D9408(Ground_GObj* arg);
 /* 1D9410 */ static void grZebes_801D9410(Ground_GObj* arg);
 /* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
@@ -199,7 +199,7 @@ StageCallbacks grZe_callbacks[] = {
         0,
     },
     {
-        grZebes_801D93DC,
+        stageGObj5_OnInit,
         grZebes_801D9408,
         grZebes_801D9410,
         grZebes_801D94EC,
@@ -734,7 +734,7 @@ void grZebes_801D925C(HSD_GObj* gobj)
 
 void grZebes_801D93D8(Ground_GObj* arg) {}
 
-void grZebes_801D93DC(Ground_GObj* gobj)
+static void stageGObj5_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

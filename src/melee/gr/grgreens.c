@@ -89,6 +89,9 @@ static struct grGreens_YakumonoParam* yakumono_param;
 static u8 grGr_804D6AAC;
 static u8 grGr_804D6AAD;
 
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj3_OnInit(Ground_GObj* gobj);
+
 static StageCallbacks grGr_callbacks[] = {
     {
         grGreens_8021360C,
@@ -98,7 +101,7 @@ static StageCallbacks grGr_callbacks[] = {
         0,
     },
     {
-        grGreens_80213910,
+        stageGObj1_OnInit,
         grGreens_8021393C,
         grGreens_80213944,
         grGreens_80213948,
@@ -112,7 +115,7 @@ static StageCallbacks grGr_callbacks[] = {
         0,
     },
     {
-        grGreens_8021394C,
+        stageGObj3_OnInit,
         grGreens_80213978,
         grGreens_80213980,
         grGreens_80213984,
@@ -312,7 +315,7 @@ void grGreens_80213908(Ground_GObj* arg) {}
 
 void grGreens_8021390C(Ground_GObj* arg) {}
 
-void grGreens_80213910(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -326,7 +329,7 @@ void grGreens_80213944(Ground_GObj* arg) {}
 
 void grGreens_80213948(Ground_GObj* arg) {}
 
-void grGreens_8021394C(Ground_GObj* gobj)
+static void stageGObj3_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

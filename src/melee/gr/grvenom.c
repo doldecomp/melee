@@ -61,9 +61,12 @@ static grVe_Data grVe_803E5348 = {
 
 static int grVe_803E5380[3] = { 0 };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+static void stageGObj9_GObjProc(Ground_GObj* arg);
+
 StageCallbacks grVe_StageCallbacks[16] = {
     {
-        grVenom_80203F98,
+        stageGObj0_OnInit,
         grVenom_80203FC4,
         grVenom_80203FCC,
         grVenom_80203FD0,
@@ -128,7 +131,7 @@ StageCallbacks grVe_StageCallbacks[16] = {
     {
         grVenom_80204DD4,
         grVenom_80204EF4,
-        grVenom_80204EFC,
+        stageGObj9_GObjProc,
         grVenom_80204F1C,
         0,
     },
@@ -595,7 +598,7 @@ static int grVe_803E5530[53] = {
     0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  3, 3, 3, 3, 6,
 };
 
-void grVenom_80203F98(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -1016,7 +1019,7 @@ bool grVenom_80204EF4(Ground_GObj* arg)
     return false;
 }
 
-void grVenom_80204EFC(Ground_GObj* arg)
+static void stageGObj9_GObjProc(Ground_GObj* arg)
 {
     Ground_UpdateMapColl(arg);
 }

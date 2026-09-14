@@ -13,11 +13,9 @@
 /* 1F2DA4 */ void grFourside_801F2DA4(void);
 /* 1F2DC8 */ bool grFourside_801F2DC8(void);
 /* 1F2DD0 */ HSD_GObj* grFourside_801F2DD0(int);
-/* 1F2EBC */ void grFourside_801F2EBC(Ground_GObj*);
 /* 1F2EE8 */ bool grFourside_801F2EE8(Ground_GObj*);
 /* 1F2EF0 */ void grFourside_801F2EF0(Ground_GObj*);
 /* 1F2EF4 */ void grFourside_801F2EF4(Ground_GObj*);
-/* 1F2EF8 */ void grFourside_801F2EF8(Ground_GObj*);
 /* 1F2F24 */ bool grFourside_801F2F24(Ground_GObj*);
 /* 1F2F2C */ void grFourside_801F2F2C(Ground_GObj*);
 /* 1F2F30 */ void grFourside_801F2F30(Ground_GObj*);

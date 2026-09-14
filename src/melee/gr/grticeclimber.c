@@ -17,7 +17,7 @@
 #include <sysdolphin/baselib/jobj.h>
 
 /* 220F10 */ static void grTIceClimber_80220F10(bool);
-/* 220F14 */ static void grTIceClimber_80220F14(void);
+/* 220F14 */ static void grTIceClimber_OnInit(void);
 /* 220F84 */ static void grTiceclimber_UnkStage0_OnLoad(void);
 /* 220F88 */ static void grTiceclimber_UnkStage0_OnStart(void);
 /* 220FAC */ static bool grTIceClimber_80220FAC(void);
@@ -69,7 +69,7 @@ StageData grTIc_StageData = {
     Gr_Kind_TIceclimber,
     stage_callbacks,
     "/GrTIc.dat",
-    grTIceClimber_80220F14,
+    grTIceClimber_OnInit,
     grTIceClimber_80220F10,
     grTiceclimber_UnkStage0_OnLoad,
     grTiceclimber_UnkStage0_OnStart,
@@ -83,7 +83,7 @@ StageData grTIc_StageData = {
 
 void grTIceClimber_80220F10(bool unused) {}
 
-void grTIceClimber_80220F14(void)
+static void grTIceClimber_OnInit(void)
 {
     Ground_InitTargetStage(setupStageCallbacks);
 }

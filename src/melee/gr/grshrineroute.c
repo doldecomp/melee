@@ -61,7 +61,7 @@ struct grSh_Route_LightConfig {
 /* 208850 */ static void grShrineRoute_OnStart(void);
 /* 2088B8 */ static bool grShrineRoute_802088B8(void);
 /* 2088C0 */ static HSD_GObj* grShrineRoute_802088C0(int);
-/* 2089AC */ static void grShrineRoute_802089AC(Ground_GObj*);
+/* 2089AC */ static void stageGObj0_OnInit(Ground_GObj*);
 /* 2089D8 */ static bool grShrineRoute_802089D8(Ground_GObj*);
 /* 2089E0 */ static void grShrineRoute_802089E0(Ground_GObj*);
 /* 2089E4 */ static void grShrineRoute_802089E4(Ground_GObj*);
@@ -83,7 +83,7 @@ struct grSh_Route_LightConfig {
 /* 20A214 */ static bool grShrineRoute_8020A214(Ground_GObj*);
 /* 20A21C */ static void grShrineRoute_8020A21C(Ground_GObj*);
 /* 20A864 */ static void grShrineRoute_8020A864(Ground_GObj*);
-/* 20A868 */ static void grShrineRoute_8020A868(Ground_GObj*);
+/* 20A868 */ static void stageGObj1_3_OnInit(Ground_GObj*);
 /* 20A894 */ static bool grShrineRoute_8020A894(Ground_GObj*);
 /* 20A89C */ static void grShrineRoute_8020A89C(Ground_GObj*);
 /* 20A8A0 */ static void grShrineRoute_8020A8A0(Ground_GObj*);
@@ -109,14 +109,14 @@ static s16 grSh_Route_803E58E0[] = { 51, 79, 101, 102, 115, 116, 131, 0 };
 
 static StageCallbacks stage_callbacks[] = {
     {
-        grShrineRoute_802089AC,
+        stageGObj0_OnInit,
         grShrineRoute_802089D8,
         grShrineRoute_802089E0,
         grShrineRoute_802089E4,
         0,
     },
     {
-        grShrineRoute_8020A868,
+        stageGObj1_3_OnInit,
         grShrineRoute_8020A894,
         grShrineRoute_8020A89C,
         grShrineRoute_8020A8A0,
@@ -130,7 +130,7 @@ static StageCallbacks stage_callbacks[] = {
         0,
     },
     {
-        grShrineRoute_8020A868,
+        stageGObj1_3_OnInit,
         grShrineRoute_8020A894,
         grShrineRoute_8020A89C,
         grShrineRoute_8020A8A0,
@@ -245,7 +245,7 @@ HSD_GObj* grShrineRoute_802088C0(int gobj_id)
     return gobj;
 }
 
-void grShrineRoute_802089AC(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -1113,7 +1113,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
 
 void grShrineRoute_8020A864(Ground_GObj* arg) {}
 
-void grShrineRoute_8020A868(Ground_GObj* gobj)
+static void stageGObj1_3_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

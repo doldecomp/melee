@@ -61,9 +61,12 @@ GrJoint grFs_803E3CE8[] = {
     { 0, 6, 10 },
 };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grFs_StageCallbacks[] = {
     {
-        grFourside_801F2EBC,
+        stageGObj0_OnInit,
         grFourside_801F2EE8,
         grFourside_801F2EF0,
         grFourside_801F2EF4,
@@ -77,7 +80,7 @@ StageCallbacks grFs_StageCallbacks[] = {
         0,
     },
     {
-        grFourside_801F2EF8,
+        stageGObj2_OnInit,
         grFourside_801F2F24,
         grFourside_801F2F2C,
         grFourside_801F2F30,
@@ -176,7 +179,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
     return gobj;
 }
 
-void grFourside_801F2EBC(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
@@ -190,7 +193,7 @@ void grFourside_801F2EF0(Ground_GObj* arg) {}
 
 void grFourside_801F2EF4(Ground_GObj* arg) {}
 
-void grFourside_801F2EF8(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }

@@ -47,6 +47,8 @@ GrJoint grMc_803E30B0[] = {
     { 8, 29, 9 },
 };
 
+static void stageGObj36_37_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grMc_StageCallbacks[39] = {
     {
         NULL,
@@ -301,14 +303,14 @@ StageCallbacks grMc_StageCallbacks[39] = {
         0,
     },
     {
-        grMuteCity_801F0410,
+        stageGObj36_37_OnInit,
         grMuteCity_801F043C,
         grMuteCity_801F0444,
         grMuteCity_801F0448,
         0,
     },
     {
-        grMuteCity_801F0410,
+        stageGObj36_37_OnInit,
         grMuteCity_801F043C,
         grMuteCity_801F0444,
         grMuteCity_801F0448,
@@ -588,7 +590,7 @@ void grMuteCity_801F0290(Ground_GObj* gobj)
 
 void grMuteCity_801F040C(Ground_GObj* arg) {}
 
-void grMuteCity_801F0410(Ground_GObj* gobj)
+static void stageGObj36_37_OnInit(Ground_GObj* gobj)
 {
     Ground_StartMapAnim(gobj);
 }
