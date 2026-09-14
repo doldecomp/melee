@@ -424,8 +424,8 @@ int lb_8001A594(char* filename, void* file_entries)
                 hsd_803B24E4((CardState*) &_p(unk_A8), _p(chan), 0x2000,
                              _p(lib_area));
                 if (open_result == 0) {
-                    hsd_result =
-                        hsd_803B2550(&_p(unk_A8), filename, fn_8001A0B0);
+                    hsd_result = hsd_803B2550((CardState*) &_p(unk_A8),
+                                              filename, fn_8001A0B0);
 
                     _p(unk_34) = convert_hsdcard_error(hsd_result);
                     if (_p(unk_34) == 0) {

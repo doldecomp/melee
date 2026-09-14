@@ -5327,11 +5327,12 @@ static inline CardRequest* hsd_803B2550_inline(u8* base, s32 idx)
     return &((CardRequest*) (base + 0x1210))[idx];
 }
 
-int hsd_803B2550(s32* state, const char* filename, void (*callback)(int, int))
+int hsd_803B2550(CardState* state, const char* filename,
+                 void (*callback)(int, int))
 {
     s32 new_var;
     u8* base = hsd_804D1138;
-    s32 chan = state[1];
+    s32 chan = state->chan;
     s32 new_var3;
     s32 new_var2;
     s32 retries;
@@ -5339,8 +5340,7 @@ int hsd_803B2550(s32* state, const char* filename, void (*callback)(int, int))
     s32 file_no;
     new_var2 = chan;
     for (retries = 0; retries < 10; retries++) {
-        result =
-            CARDOpen(new_var2, (char*) filename, (CARDFileInfo*) (state + 3));
+        result = CARDOpen(new_var2, (char*) filename, &state->file_info);
         if (result != -1) {
             break;
         }
@@ -5352,15 +5352,15 @@ int hsd_803B2550(s32* state, const char* filename, void (*callback)(int, int))
 
     result = 0;
     {
-        s32 tmp = state[4];
+        s32 tmp = M2C_FIELD(state, s32*, 0x10);
         do {
             if (tmp != -1) {
                 break;
             }
             result++;
         } while (result < 10);
-        file_no = state[4];
-        retries = (new_var = (new_var3 = state[4]));
+        file_no = M2C_FIELD(state, s32*, 0x10);
+        retries = (new_var = (new_var3 = M2C_FIELD(state, s32*, 0x10)));
         file_no = retries;
         if (tmp < 0) {
             return new_var;
@@ -5368,7 +5368,7 @@ int hsd_803B2550(s32* state, const char* filename, void (*callback)(int, int))
     }
 
     for (chan = 0; chan < 10; chan++) {
-        if (CARDClose((CARDFileInfo*) (state + 3)) != -1) {
+        if (CARDClose(&state->file_info) != -1) {
             break;
         }
     }
