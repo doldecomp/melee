@@ -14,7 +14,6 @@ struct CardEntry {
 };
 
 /* 019BB8 */ int lb_80019BB8(int card_result);
-/* 019C38 */ struct CardTask* lb_80019C38(void);
 /* 019CB0 */ int lb_80019CB0(int result);
 /* 019EF0 */ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out,
                               UNK_T callback);

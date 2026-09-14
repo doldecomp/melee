@@ -72,6 +72,7 @@ struct lb_80432A68_t {
 }; /* size = 0x8B0 */
 ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
 
+/* 019C38 */ static struct CardTask* lb_80019C38(void);
 /* 432A68 */ static struct lb_80432A68_t lb_80432A68;
 
 #define _p(x) (lb_80432A68.x)
@@ -100,8 +101,7 @@ int lb_80019BB8(int card_result)
     }
 }
 
-struct CardTask* lb_80019C38_noinline(void);
-struct CardTask* lb_80019C38_noinline(void)
+static struct CardTask* lb_80019C38_noinline(void)
 {
     return lb_80019C38();
 }
