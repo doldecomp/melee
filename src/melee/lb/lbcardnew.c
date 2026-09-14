@@ -1,15 +1,69 @@
 #include "lbcardnew.h"
 
+#include <Runtime/platform.h>
+
 #include <ctype.h>
+#include <placeholder.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "lbcardnew.static.h"
+#include "sysdolphin/baselib/hsd_3A94.h"
 #include <dolphin/card.h>
+#include <melee/lb/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
+
+typedef enum {
+    result_sentinel = 11,
+} cardResult;
+
+struct lb_80432A68_t {
+    /* 0x000 */ UNK_T work_area;
+    /* 0x004 */ CardState* lib_area;
+    /* 0x008 */ int chan;
+    /* 0x00C */ UNK_T unk_C;
+    /* 0x010 */ int* status;
+    /* 0x014 */ const char* unk_14;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s32 unk_1C;
+    /* 0x020 */ lbCardNew_SnapshotEntry* snapshot_entries;
+    /* 0x024 */ int* free_blocks;
+    /* 0x028 */ int* free_files;
+    /* 0x02C */ char x2C[2];
+    /* 0x02C */ char x2E;
+    /* 0x02C */ char x2F[4];
+    /* 0x034 */ s32 unk_34;
+    /* 0x038 */ struct lb_80432A68_38_t unk_38[9];
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ s32 memsize;
+    /* 0x088 */ s32 sectorsize;
+    /* 0x08C */ s32 unused_bytes;
+    /* 0x090 */ s32 unused_files;
+    /* 0x094 */ CARDFileInfo file_info;
+    /* 0x0A8 */ s32 unk_A8;
+    /* 0x098 */ u8 pad_AC[0xD0 - 0xAC]; /* maybe part of unk_80[0x123]? */
+    /* 0x0A8 */ int xD0[9];
+    /* 0x0A8 */ volatile int xF4[9];
+    /* 0x098 */ u8
+        pad_500[0x50C - 0xF4 - 9 * 4]; /* maybe part of unk_80[0x123]? */
+    /* 0x50C */ void (*x50C)(int);
+    /* 0x510 */ struct CardTask {
+        int x0;
+        int x4;
+        UNK_T x8;
+        char* xC;
+        char filename[32];
+        u8 x18;
+        char x19[7];
+        u8 unk20[0x1C];
+    } task_array[LbCardNewTaskArray_Max];
+    /* 0x8AC */ bool pending_ops;
+}; /* size = 0x8B0 */
+ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
+
+/* 432A68 */ static struct lb_80432A68_t lb_80432A68;
 
 #define _p(x) (lb_80432A68.x)
 
@@ -54,7 +108,7 @@ struct CardTask* lb_80019C38(void)
             break;
         }
     }
-    HSD_ASSERT(0x154, i != LbCardNewTaskArray_Max);
+    HSD_ASSERT(340, i != LbCardNewTaskArray_Max);
     return result;
 }
 
@@ -101,13 +155,13 @@ again:
                 result = lb_8001A8A4();
                 break;
             case 5:
-                result = lb_8001A9CC(task->x10);
+                result = lb_8001A9CC(task->filename);
                 break;
             case 6:
-                result = lb_8001AAE4(task->x10, task->x19);
+                result = lb_8001AAE4(task->filename, task->x19);
                 break;
             case 7:
-                result = lb_8001AC04(&task->x10);
+                result = lb_8001AC04(&task->filename);
                 break;
             case 8:
                 result = lb_8001ACEC(task->x8);
@@ -125,10 +179,10 @@ again:
                 result = lb_8001B14C();
                 break;
             case 13:
-                result = lb_8001B614(task->x10);
+                result = lb_8001B614(task->filename);
                 break;
             }
-            task->x0 = 0xE;
+            task->x0 = 14;
             if (result != 11) {
                 goto again;
             }
@@ -151,7 +205,7 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
 
     _p(chan) = chan;
     _p(unk_C) = save_data;
-    _p(unk_10) = status_out;
+    _p(status) = status_out;
     _p(unk_14) = NULL;
     _p(unk_18) = 0;
     _p(unk_1C) = 0;
@@ -171,16 +225,14 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     reset_task_array();
 }
 
-void fn_8001A008(s32 unused, s32 card_result)
+static void onCardAttach(UNUSED s32 chan, s32 result)
 {
-    s32 error;
-
-    error = lb_80019BB8(card_result);
+    s32 error = lb_80019BB8(result);
 
     if (error != 0) {
         _p(unk_34) = error;
     }
-    _p(x8AC) -= 1;
+    _p(pending_ops) -= 1;
 }
 
 static int convert_hsdcard_error(int hsd_error)
@@ -226,51 +278,48 @@ void fn_8001A0B0(int file_idx, int hsd_error)
     if (error != 0) {
         _p(unk_34) = error;
     }
-    _p(x8AC) -= 1;
+    _p(pending_ops) -= 1;
 }
 
 int lb_8001A184(void)
 {
-    s32 pending_ops;
-    s32 saved_error;
-    s32 probe_result;
-    s32 mount_result;
-    s32 unused;
-    s32 enabled;
-    s32 did_disable;
-    s32 result;
-    u8 _[8];
+    int pending_ops;
+    int saved_error;
+    int probe_result;
+    int mount_result;
+    bool enabled;
+    int did_disable;
+    PAD_STACK(3 * 4);
 
-    result = 0;
     did_disable = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = false;
     probe_result = CARDProbeEx(_p(chan), &_p(memsize), &_p(sectorsize));
     _p(unk_34) = lb_80019BB8(probe_result);
     if (_p(unk_34) == 0) {
-        if (_p(unk_10) != NULL) {
-            *(s32*) _p(unk_10) = 0;
+        if (_p(status) != NULL) {
+            *_p(status) = 0;
         }
-        HSD_ASSERT(0x23F, _p(work_area));
+        HSD_ASSERT(575, _p(work_area));
         enabled = OSDisableInterrupts();
-        did_disable = 1;
+        did_disable = true;
         mount_result =
-            CARDMountAsync(_p(chan), _p(work_area), NULL, fn_8001A008);
+            CARDMountAsync(_p(chan), _p(work_area), NULL, onCardAttach);
 
         _p(unk_34) = lb_80019BB8(mount_result);
         if (mount_result == 0 || mount_result == -6 || mount_result == -0xD) {
             _p(unk_80) = 1;
         }
         if (_p(unk_34) == 0) {
-            _p(x8AC) += 1;
+            _p(pending_ops) += 1;
         }
     }
-    pending_ops = _p(x8AC);
+    pending_ops = _p(pending_ops);
     saved_error = _p(unk_34);
-    if (did_disable != 0) {
+    if (did_disable) {
         OSRestoreInterrupts(enabled);
     }
-    if (pending_ops != 0) {
-        return 0xB;
+    if (pending_ops) {
+        return result_sentinel;
     }
     return saved_error;
 }
@@ -279,24 +328,21 @@ int lb_8001A3A4(void)
 {
     int pending_ops;
     int saved_error;
-    int unused;
     int enabled;
     int check_result;
-    u8 _[8];
-
-    unused = 0;
-    _p(x8AC) = 0;
+    PAD_STACK(4 * 4);
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    check_result = CARDCheckAsync(_p(chan), fn_8001A008);
+    check_result = CARDCheckAsync(_p(chan), onCardAttach);
     _p(unk_34) = lb_80019BB8(check_result);
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
+    pending_ops = _p(pending_ops);
     saved_error = _p(unk_34);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
-        return 0xB;
+        return result_sentinel;
     }
     return saved_error;
 }
@@ -307,7 +353,8 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     task->x0 = 2;
     task->x4 = 1;
     if (filename != NULL) {
-        strncpy(task->xC = task->x10, filename, ARRAY_SIZE(task->x10));
+        strncpy(task->xC = task->filename, filename,
+                ARRAY_SIZE(task->filename));
     } else {
         task->xC = NULL;
     }
@@ -321,8 +368,8 @@ struct SnapshotNode {
     u16 blocks;
 };
 
-static inline void setup_card_entries(void* ctx, void* icon,
-                                      struct CardEntry* entry)
+static inline void setupCardEntries(void* ctx, void* icon,
+                                    struct CardEntry* entry)
 {
     int i;
 
@@ -350,7 +397,7 @@ int lb_8001A594(char* filename, void* file_entries)
     u8 _[8];
 
     unused_2 = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     if (_p(sectorsize) != 0x2000) {
         _p(unk_34) = 0xC;
     } else {
@@ -373,14 +420,14 @@ int lb_8001A594(char* filename, void* file_entries)
 
                     _p(unk_34) = convert_hsdcard_error(hsd_result);
                     if (_p(unk_34) == 0) {
-                        _p(x8AC) += 1;
+                        _p(pending_ops) += 1;
                     }
                 } else if (file_entries == NULL) {
                     _p(unk_34) = 4;
                 } else if (_p(unused_files) == 0) {
                     _p(unk_34) = 6;
                 } else {
-                    setup_card_entries(&_p(unk_A8), _p(unk_C), file_entries);
+                    setupCardEntries(&_p(unk_A8), _p(unk_C), file_entries);
                     if (_p(unused_bytes) <
                         (hsd_803B2674((void*) &_p(unk_A8)) << 0xD))
                     {
@@ -392,7 +439,7 @@ int lb_8001A594(char* filename, void* file_entries)
             }
         }
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -400,7 +447,7 @@ int lb_8001A594(char* filename, void* file_entries)
 
 int lb_8001A860(void)
 {
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     switch (_p(unk_34)) {
     case 1:
         break;
@@ -423,18 +470,18 @@ int lb_8001A8A4(void)
 
     unused = 0;
     did_disable = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     if (_p(unk_80) != 0) {
         enabled = OSDisableInterrupts();
         did_disable = 1;
-        format_result = CARDFormatAsync(_p(chan), fn_8001A008);
+        format_result = CARDFormatAsync(_p(chan), onCardAttach);
 
         _p(unk_34) = lb_80019BB8(format_result);
         if (_p(unk_34) == 0) {
-            _p(x8AC) += 1;
+            _p(pending_ops) += 1;
         }
     }
-    pending_ops = _p(x8AC);
+    pending_ops = _p(pending_ops);
     saved_error = _p(unk_34);
     if (did_disable != 0) {
         OSRestoreInterrupts(enabled);
@@ -455,15 +502,15 @@ int lb_8001A9CC(char* filename)
     u8 _[8];
 
     unused = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    delete_result = CARDDeleteAsync(_p(chan), filename, fn_8001A008);
+    delete_result = CARDDeleteAsync(_p(chan), filename, onCardAttach);
 
     _p(unk_34) = lb_80019BB8(delete_result);
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
+    pending_ops = _p(pending_ops);
     saved_error = _p(unk_34);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
@@ -482,14 +529,15 @@ int lb_8001AAE4(const char* old_name, const char* new_name)
     u8 _[8];
 
     unused = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    rename_result = CARDRenameAsync(_p(chan), old_name, new_name, fn_8001A008);
+    rename_result =
+        CARDRenameAsync(_p(chan), old_name, new_name, onCardAttach);
     _p(unk_34) = lb_80019BB8(rename_result);
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
+    pending_ops = _p(pending_ops);
     saved_error = _p(unk_34);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
@@ -507,9 +555,9 @@ int lb_8001AC04(UNK_T filename)
                               _p(unk_1C), fn_8001A0B0);
     _p(unk_34) = convert_hsdcard_error(hsd_result);
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -537,13 +585,13 @@ int lb_8001ACEC(UNK_T file_entries)
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
             if (file_error == 0) {
-                _p(x8AC) += 1;
+                _p(pending_ops) += 1;
             } else {
                 _p(unk_34) = file_error;
             }
         }
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -571,13 +619,13 @@ int lb_8001AE38(UNK_T file_entries)
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
             if (file_error == 0) {
-                _p(x8AC) += 1;
+                _p(pending_ops) += 1;
             } else {
                 _p(unk_34) = file_error;
             }
         }
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -591,9 +639,9 @@ int lb_8001AF84(void)
     _p(unk_34) = convert_hsdcard_error(hsd_result);
 
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -607,9 +655,9 @@ int lb_8001B068(void)
     _p(unk_34) = convert_hsdcard_error(hsd_result);
 
     if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         return 0xB;
     }
     return _p(unk_34);
@@ -632,7 +680,7 @@ int lb_8001B14C(void)
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     if (_p(free_blocks) != NULL) {
         *_p(free_blocks) = _p(unused_bytes) / 0x2000;
     }
@@ -684,7 +732,7 @@ int lb_8001B614(const char* filename)
     int fileno;
 
     fileno = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
 loop_1:
     if (CARDGetStatus(_p(chan), fileno, &card_stat) == 0 &&
         strncmp((const char*) card_stat.company, _p(x2C), 2) == 0 &&
@@ -715,7 +763,7 @@ int lb_8001B6F8(void)
 
     hsd_803AAA48();
     enabled = OSDisableInterrupts();
-    if (_p(x8AC) != 0) {
+    if (_p(pending_ops) != 0) {
         result = 0xB;
     } else {
         result = _p(unk_34);
@@ -801,7 +849,7 @@ int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
     new_var = 0x10;
-    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
+    strncpy(setup_task(5, 0xE)->filename, filename, 0x20);
     return lb_80019CB0(new_var);
 }
 
@@ -815,7 +863,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
-    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
+    strncpy(setup_task(5, 0xE)->filename, filename, 0x20);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
@@ -847,7 +895,7 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     task = lb_80019C38_noinline();
     task->x0 = 7;
     task->x4 = 0x10;
-    memcpy(task->x10, filename, new_var);
+    memcpy(task->filename, filename, new_var);
     _p(unk_14) = write_buf;
     _p(unk_18) = write_offset;
     _p(unk_1C) = write_len;
@@ -869,7 +917,7 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->x10, filename, new_var);
+    memcpy(setup_task(7, 0x10)->filename, filename, new_var);
     _p(unk_14) = write_buf;
     _p(unk_18) = write_offset;
     _p(unk_1C) = write_len;
@@ -1015,14 +1063,14 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_a, 0x20);
+    strncpy(task->filename, name_a, 0x20);
     strncpy(task->x19, name_c, 0x20);
     task = lb_80019C38_noinline();
     task->x0 = 2;
     task->x4 = 1;
     if (name_b != NULL) {
-        task->xC = task->x10;
-        strncpy(task->x10, name_b, 0x20);
+        task->xC = task->filename;
+        strncpy(task->filename, name_b, 0x20);
     } else {
         task->xC = NULL;
     }
@@ -1033,14 +1081,14 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_b, 0x20);
+    strncpy(task->filename, name_b, 0x20);
     strncpy(task->x19, name_a, 0x20);
     task = lb_80019C38_noinline();
     task->x0 = 2;
     task->x4 = 1;
     if (name_c != NULL) {
-        task->xC = task->x10;
-        strncpy(task->x10, name_c, 0x20);
+        task->xC = task->filename;
+        strncpy(task->filename, name_c, 0x20);
     } else {
         task->xC = NULL;
     }
@@ -1051,7 +1099,7 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_c, 0x20);
+    strncpy(task->filename, name_c, 0x20);
     strncpy(task->x19, name_b, 0x20);
     return lb_80019CB0(0x10);
 }
@@ -1075,7 +1123,7 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     task = setup_task(0xD, 0x80);
     strncpy(_p(x2C), company, 2U);
     strncpy(_p(x2F), game_name, 4U);
-    strncpy(task->x10, filename, 0x20U);
+    strncpy(task->filename, filename, 0x20U);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
@@ -1107,14 +1155,14 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
         i = 0;
         while (entry->file_size != -1) {
             if (entry->file_size != 0) {
-                hsd_803AC3E0((struct CardState*) ctx, i, entry->file_size,
-                             entry->file_flags, entry->data);
+                hsd_803AC3E0(ctx, i, entry->file_size, entry->file_flags,
+                             entry->data);
             }
             i++;
             entry++;
         }
     }
-    return hsd_803B2674((CardState*) ctx);
+    return hsd_803B2674(ctx);
 }
 
 void lbCardNew_AllocWorkArea(void)
@@ -1134,5 +1182,5 @@ void lb_8001C5BC(void)
 {
     hsd_803B2374();
     lb_80019EF0(0, NULL, NULL, NULL);
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
 }
