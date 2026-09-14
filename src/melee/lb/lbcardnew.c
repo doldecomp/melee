@@ -24,8 +24,8 @@ typedef enum {
 } cardError;
 
 typedef enum {
-    result_14 = 14,
     result_pending_ops = 11,
+    result_14 = 14,
 } cardResult;
 
 struct lb_80432A68_t {
@@ -68,7 +68,7 @@ struct lb_80432A68_t {
         char x19[7];
         u8 unk20[0x1C];
     } task_array[LbCardNewTaskArray_Max];
-    /* 0x8AC */ bool pending_ops;
+    /* 0x8AC */ int pending_ops;
 }; /* size = 0x8B0 */
 ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
 
