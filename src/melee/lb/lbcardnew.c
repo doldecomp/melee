@@ -154,9 +154,9 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     _p(chan) = chan;
     _p(unk_C) = save_data;
     _p(unk_10) = status_out;
-    _p(unk_14) = NULL;
-    _p(unk_18) = 0;
-    _p(unk_1C) = 0;
+    _p(comment) = NULL;
+    _p(banner) = NULL;
+    _p(icons) = NULL;
     _p(snapshot_entries) = NULL;
     _p(free_blocks) = NULL;
     _p(free_files) = NULL;
@@ -502,9 +502,8 @@ int lb_8001AC04(UNK_T filename)
     int hsd_result;
     int unused;
 
-    hsd_result =
-        hsd_803B286C(CARD_STATE, filename, _p(unk_14), (void*) _p(unk_18),
-                     (void*) _p(unk_1C), fn_8001A0B0);
+    hsd_result = hsd_803B286C(CARD_STATE, filename, _p(comment), _p(banner),
+                              _p(icons), fn_8001A0B0);
     _p(unk_34) = convert_hsdcard_error(hsd_result);
     if (_p(unk_34) == 0) {
         _p(x8AC) += 1;
@@ -585,8 +584,8 @@ int lb_8001AE38(UNK_T file_entries)
 
 int lb_8001AF84(void)
 {
-    int hsd_result = hsd_803B2928(CARD_STATE, _p(unk_14), (void*) _p(unk_18),
-                                  (void*) _p(unk_1C), fn_8001A0B0);
+    int hsd_result = hsd_803B2928(CARD_STATE, _p(comment), _p(banner),
+                                  _p(icons), fn_8001A0B0);
 
     _p(unk_34) = convert_hsdcard_error(hsd_result);
 
@@ -601,8 +600,8 @@ int lb_8001AF84(void)
 
 int lb_8001B068(void)
 {
-    int hsd_result = hsd_803B27F4(CARD_STATE, _p(unk_14), (void*) _p(unk_18),
-                                  (void*) _p(unk_1C), fn_8001A0B0);
+    int hsd_result = hsd_803B27F4(CARD_STATE, _p(comment), _p(banner),
+                                  _p(icons), fn_8001A0B0);
 
     _p(unk_34) = convert_hsdcard_error(hsd_result);
 
@@ -825,7 +824,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
 }
 
 int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
-                const char* write_buf, int write_offset, int write_len,
+                const char* comment, void* banner, void* icons,
                 UNK_T status_out)
 {
     int new_var;
@@ -848,14 +847,14 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     task->x0 = 7;
     task->x4 = 0x10;
     memcpy(task->x10, filename, new_var);
-    _p(unk_14) = write_buf;
-    _p(unk_18) = write_offset;
-    _p(unk_1C) = write_len;
+    _p(comment) = comment;
+    _p(banner) = banner;
+    _p(icons) = icons;
     return lb_80019CB0(0x10);
 }
 
 int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
-                const char* write_buf, int write_offset, int write_len,
+                const char* comment, void* banner, void* icons,
                 UNK_T status_out)
 {
     int new_var;
@@ -870,9 +869,9 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
     lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
     memcpy(setup_task(7, 0x10)->x10, filename, new_var);
-    _p(unk_14) = write_buf;
-    _p(unk_18) = write_offset;
-    _p(unk_1C) = write_len;
+    _p(comment) = comment;
+    _p(banner) = banner;
+    _p(icons) = icons;
     result = lb_80019CB0(0x10);
 
     if (result == 0xB) {
@@ -912,7 +911,7 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
 #pragma dont_inline on
 #endif
 int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
-                const char* read_buf, int read_offset, int read_len,
+                const char* comment, void* banner, void* icons,
                 UNK_T status_out, UNK_T callback)
 {
     struct CardTask* task;
@@ -931,9 +930,9 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     task = lb_80019C38();
     task->x0 = 10;
     task->x4 = 2;
-    _p(unk_14) = read_buf;
-    _p(unk_18) = read_offset;
-    _p(unk_1C) = read_len;
+    _p(comment) = comment;
+    _p(banner) = banner;
+    _p(icons) = icons;
     task = lb_80019C38();
     task->x0 = 9;
     task->x4 = 3;
@@ -945,7 +944,7 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
 #endif
 
 int lb_8001BF04(int chan, char* filename, void* file_entries,
-                const char* write_buf, int write_offset, int write_len,
+                const char* comment, void* banner, void* icons,
                 UNK_T status_out)
 {
     struct CardTask* task;
@@ -963,9 +962,9 @@ int lb_8001BF04(int chan, char* filename, void* file_entries,
     task = lb_80019C38_noinline();
     task->x0 = 11;
     task->x4 = 2;
-    _p(unk_14) = write_buf;
-    _p(unk_18) = write_offset;
-    _p(unk_1C) = write_len;
+    _p(comment) = comment;
+    _p(banner) = banner;
+    _p(icons) = icons;
     task = lb_80019C38_noinline();
     task->x0 = 8;
     task->x4 = 3;
