@@ -23,11 +23,9 @@
 /* 213900 */ bool grGreens_80213900(Ground_GObj*);
 /* 213908 */ void grGreens_80213908(Ground_GObj*);
 /* 21390C */ void grGreens_8021390C(Ground_GObj*);
-/* 213910 */ void grGreens_80213910(Ground_GObj*);
 /* 21393C */ bool grGreens_8021393C(Ground_GObj*);
 /* 213944 */ void grGreens_80213944(Ground_GObj*);
 /* 213948 */ void grGreens_80213948(Ground_GObj*);
-/* 21394C */ void grGreens_8021394C(Ground_GObj*);
 /* 213978 */ bool grGreens_80213978(Ground_GObj*);
 /* 213980 */ void grGreens_80213980(Ground_GObj*);
 /* 213984 */ void grGreens_80213984(Ground_GObj*);

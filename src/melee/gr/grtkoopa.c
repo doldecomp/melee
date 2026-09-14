@@ -13,45 +13,45 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 221648 */ static void grTKoopa_80221648(bool);
-/* 22164C */ static void grTKoopa_8022164C(void);
+/* 22164C */ static void grTKoopa_OnInit(void);
 /* 2216BC */ static void grTkoopa_UnkStage0_OnLoad(void);
 /* 2216C0 */ static void grTkoopa_UnkStage0_OnStart(void);
 /* 2216E4 */ static bool grTKoopa_802216E4(void);
 /* 2216EC */ static HSD_GObj* grTKoopa_802216EC(int gobj_id);
-/* 2217D4 */ static void grTKoopa_802217D4(Ground_GObj* gobj);
+/* 2217D4 */ static void stageGObj0_OnInit(Ground_GObj* gobj);
 /* 221800 */ static bool grTKoopa_80221800(Ground_GObj*);
 /* 221808 */ static void grTKoopa_80221808(Ground_GObj*);
 /* 22180C */ static void grTKoopa_8022180C(Ground_GObj*);
-/* 221810 */ static void grTKoopa_80221810(Ground_GObj* gobj);
+/* 221810 */ static void stageGObj2_OnInit(Ground_GObj* gobj);
 /* 221860 */ static bool grTKoopa_80221860(Ground_GObj*);
-/* 221868 */ static void grTKoopa_80221868(Ground_GObj* gobj);
+/* 221868 */ static void stageGObj2_GObjProc(Ground_GObj* gobj);
 /* 22189C */ static void grTKoopa_8022189C(Ground_GObj*);
-/* 2218A0 */ static void grTKoopa_802218A0(Ground_GObj* gobj);
+/* 2218A0 */ static void stageGObj1_OnInit(Ground_GObj* gobj);
 /* 2218F0 */ static bool grTKoopa_802218F0(Ground_GObj*);
-/* 2218F8 */ static void grTKoopa_802218F8(Ground_GObj*);
+/* 2218F8 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 221918 */ static void grTKoopa_80221918(Ground_GObj*);
 /* 22191C */ static DynamicsDesc* grTKoopa_8022191C(enum_t);
 /* 221924 */ static bool grTKoopa_80221924(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTKp_StageCallbacks[] = {
     {
-        grTKoopa_802217D4,
+        stageGObj0_OnInit,
         grTKoopa_80221800,
         grTKoopa_80221808,
         grTKoopa_8022180C,
         0,
     },
     {
-        grTKoopa_802218A0,
+        stageGObj1_OnInit,
         grTKoopa_802218F0,
-        grTKoopa_802218F8,
+        stageGObj1_GObjProc,
         grTKoopa_80221918,
         0,
     },
     {
-        grTKoopa_80221810,
+        stageGObj2_OnInit,
         grTKoopa_80221860,
-        grTKoopa_80221868,
+        stageGObj2_GObjProc,
         grTKoopa_8022189C,
         (1 << 30) | (1 << 31),
     },
@@ -62,7 +62,7 @@ StageData grTKp_StageData = {
     Gr_Kind_TKoopa,
     grTKp_StageCallbacks,
     "/GrTKp.dat",
-    grTKoopa_8022164C,
+    grTKoopa_OnInit,
     grTKoopa_80221648,
     grTkoopa_UnkStage0_OnLoad,
     grTkoopa_UnkStage0_OnStart,
@@ -76,7 +76,7 @@ StageData grTKp_StageData = {
 
 static void grTKoopa_80221648(bool arg0) {}
 
-static void grTKoopa_8022164C(void)
+static void grTKoopa_OnInit(void)
 {
     Ground_InitTargetStage(grTKoopa_802216EC);
 }
@@ -108,9 +108,9 @@ static HSD_GObj* grTKoopa_802216EC(int gobj_id)
     return gobj;
 }
 
-static void grTKoopa_802217D4(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTKoopa_80221800(Ground_GObj* arg0)
@@ -121,9 +121,9 @@ static bool grTKoopa_80221800(Ground_GObj* arg0)
 static void grTKoopa_80221808(Ground_GObj* arg0) {}
 static void grTKoopa_8022180C(Ground_GObj* arg0) {}
 
-static void grTKoopa_80221810(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTKoopa_80221860(Ground_GObj* arg0)
@@ -131,16 +131,16 @@ static bool grTKoopa_80221860(Ground_GObj* arg0)
     return false;
 }
 
-static void grTKoopa_80221868(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTKoopa_8022189C(Ground_GObj* arg0) {}
 
-static void grTKoopa_802218A0(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTKoopa_802218F0(Ground_GObj* arg0)
@@ -148,9 +148,9 @@ static bool grTKoopa_802218F0(Ground_GObj* arg0)
     return false;
 }
 
-static void grTKoopa_802218F8(Ground_GObj* arg0)
+static void stageGObj1_GObjProc(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTKoopa_80221918(Ground_GObj* arg0) {}

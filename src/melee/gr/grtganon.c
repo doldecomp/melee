@@ -11,12 +11,17 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+static void stageGObj2_GObjProc(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj1_GObjProc(Ground_GObj* gobj);
+
 StageCallbacks grTGn_StageCallbacks[] = {
     { grTGanon_8022486C, grTGanon_80224898, grTGanon_802248A0,
       grTGanon_802248A4, 0 },
-    { grTGanon_80224938, grTGanon_80224988, grTGanon_80224990,
+    { stageGObj1_OnInit, grTGanon_80224988, stageGObj1_GObjProc,
       grTGanon_802249B0, 0 },
-    { grTGanon_802248A8, grTGanon_802248F8, grTGanon_80224900,
+    { stageGObj2_OnInit, grTGanon_802248F8, stageGObj2_GObjProc,
       grTGanon_80224934, 0xC0000000 },
     { NULL, NULL, NULL, NULL, 0 }
 };
@@ -106,9 +111,9 @@ void grTGanon_802248A4(Ground_GObj* gobj)
     return;
 }
 
-void grTGanon_802248A8(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGanon_802248F8(Ground_GObj* gobj)
@@ -116,9 +121,9 @@ bool grTGanon_802248F8(Ground_GObj* gobj)
     return false;
 }
 
-void grTGanon_80224900(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTGanon_80224934(Ground_GObj* gobj)
@@ -126,9 +131,9 @@ void grTGanon_80224934(Ground_GObj* gobj)
     return;
 }
 
-void grTGanon_80224938(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGanon_80224988(Ground_GObj* gobj)
@@ -136,9 +141,9 @@ bool grTGanon_80224988(Ground_GObj* gobj)
     return false;
 }
 
-void grTGanon_80224990(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTGanon_802249B0(Ground_GObj* gobj)

@@ -164,7 +164,7 @@ void grStory_801E3234(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 5, 7, 1, 0.0F, 1.0F);
 
@@ -180,7 +180,7 @@ bool grStory_801E332C(Ground_GObj* gobj)
 void grStory_801E3334(Ground_GObj* gobj)
 {
     grStory_801E3418(gobj);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     lb_800115F4();
 }
 
@@ -195,7 +195,7 @@ void grStory_801E3370(Ground_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     PAD_STACK(4);
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.randall.timer = 0;
     gp->u.randall.jobj = Ground_801C3FA4(gobj, 1);
@@ -209,7 +209,7 @@ bool grStory_801E33D8(Ground_GObj* gobj)
 void grStory_801E33E0(Ground_GObj* gobj)
 {
     // Update Randall's moving collision box
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     // Check to spawn Randall puff effect
     grStory_801E366C(gobj);
 }

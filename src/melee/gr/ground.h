@@ -78,8 +78,15 @@
 /* 1C2CF4 */ HSD_JObj* Ground_801C2CF4(s32);
 /* 1C2D0C */ void Ground_801C2D0C(s32 i, HSD_JObj* jobj);
 /* 1C2D24 */ bool Ground_801C2D24(enum_t, Vec3*);
-/* 1C2ED0 */ bool Ground_801C2ED0(HSD_JObj*, s32);
-/* 1C2FE0 */ bool Ground_801C2FE0(Ground_GObj*);
+/// Binds each collision joint of map @p map_id to a joint of @p jobj, syncs
+/// it to the model, and re-enables the map's collision if it was removed.
+/// @returns whether the map has any collision joints.
+/* 1C2ED0 */ bool Ground_InitMapColl(HSD_JObj* jobj, s32 map_id);
+/// Re-syncs the collision joints of the map to its animated model. Runs
+/// at most once per frame per joint and only while the map's collision is
+/// enabled.
+/// @returns whether any joint was updated.
+/* 1C2FE0 */ bool Ground_UpdateMapColl(Ground_GObj*);
 /* 1C3128 */ bool Ground_801C3128(int gobj_id, void (*)(int));
 /* 1C3214 */ bool Ground_801C3214(int gobj_id);
 /* 1C3260 */ bool Ground_801C3260(s32);

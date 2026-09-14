@@ -8,6 +8,12 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
+static void grTCLink_OnInit(void);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+static void stageGObj2_GObjProc(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj1_GObjProc(Ground_GObj* gobj);
+
 static StageCallbacks grTCLink_StageCallbacks[] = {
     {
         grTCLink_802200D0,
@@ -17,16 +23,16 @@ static StageCallbacks grTCLink_StageCallbacks[] = {
         0,
     },
     {
-        grTCLink_8022019C,
+        stageGObj1_OnInit,
         grTCLink_802201EC,
-        grTCLink_802201F4,
+        stageGObj1_GObjProc,
         grTCLink_80220214,
         0,
     },
     {
-        grTCLink_8022010C,
+        stageGObj2_OnInit,
         grTCLink_8022015C,
-        grTCLink_80220164,
+        stageGObj2_GObjProc,
         grTCLink_80220198,
         (1 << 30) | (1 << 31),
     },
@@ -37,7 +43,7 @@ StageData grTCLink_StageData = {
     Gr_Kind_TClink,
     grTCLink_StageCallbacks,
     "/GrTCl.dat",
-    grTCLink_8021FF48,
+    grTCLink_OnInit,
     grTCLink_8021FF44,
     grTclink_UnkStage0_OnLoad,
     grTclink_UnkStage0_OnStart,
@@ -51,7 +57,7 @@ StageData grTCLink_StageData = {
 
 void grTCLink_8021FF44(bool unused) {}
 
-void grTCLink_8021FF48(void)
+static void grTCLink_OnInit(void)
 {
     Ground_InitTargetStage(grTCLink_8021FFE8);
 }
@@ -99,9 +105,9 @@ void grTCLink_80220104(Ground_GObj* gobj) {}
 
 void grTCLink_80220108(Ground_GObj* gobj) {}
 
-void grTCLink_8022010C(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTCLink_8022015C(Ground_GObj* gobj)
@@ -109,16 +115,16 @@ bool grTCLink_8022015C(Ground_GObj* gobj)
     return false;
 }
 
-void grTCLink_80220164(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTCLink_80220198(Ground_GObj* gobj) {}
 
-void grTCLink_8022019C(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTCLink_802201EC(Ground_GObj* gobj)
@@ -126,9 +132,9 @@ bool grTCLink_802201EC(Ground_GObj* gobj)
     return false;
 }
 
-void grTCLink_802201F4(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTCLink_80220214(Ground_GObj* gobj) {}

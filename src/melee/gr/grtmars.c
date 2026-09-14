@@ -8,7 +8,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
-/* 221EF8 */ static void grTMars_80221EF8(void);
+/* 221EF8 */ static void grTMars_OnInit(void);
 /* 221F68 */ static void grTmars_UnkStage0_OnLoad(void);
 /* 221F6C */ static void grTmars_UnkStage0_OnStart(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
@@ -55,7 +55,7 @@ StageData grTMs_StageData = {
     Gr_Kind_TMars,
     stage_callbacks,
     "/GrTMs.dat",
-    grTMars_80221EF8,
+    grTMars_OnInit,
     grTMars_80221EF4,
     grTmars_UnkStage0_OnLoad,
     grTmars_UnkStage0_OnStart,
@@ -69,7 +69,7 @@ StageData grTMs_StageData = {
 
 static void grTMars_80221EF4(bool arg0) {}
 
-static void grTMars_80221EF8(void)
+static void grTMars_OnInit(void)
 {
     Ground_InitTargetStage(setupStageCallbacks);
 }
@@ -103,7 +103,7 @@ static Ground_GObj* setupStageCallbacks(int gobj_id)
 
 static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool stageGObj0_Callback1(Ground_GObj* arg0)
@@ -117,7 +117,7 @@ static void stageGObj0_Callback3(Ground_GObj* arg0) {}
 
 static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool stageGObj2_Callback1(Ground_GObj* arg0)
@@ -127,14 +127,14 @@ static bool stageGObj2_Callback1(Ground_GObj* arg0)
 
 static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void stageGObj2_Callback3(Ground_GObj* arg0) {}
 
 static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool stageGObj1_Callback1(Ground_GObj* arg0)
@@ -144,7 +144,7 @@ static bool stageGObj1_Callback1(Ground_GObj* arg0)
 
 static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 static void stageGObj1_Callback3(Ground_GObj* arg0) {}

@@ -13,7 +13,6 @@
 /* 216F3C */ void grFlatzone_UnkStage0_OnStart(void);
 /* 216F40 */ bool grFlatzone_80216F40(void);
 /* 216F48 */ HSD_GObj* grFlatzone_80216F48(s32);
-/* 217030 */ void grFlatzone_80217030(Ground_GObj*);
 /* 21705C */ bool grFlatzone_8021705C(Ground_GObj*);
 /* 217064 */ void grFlatzone_80217064(Ground_GObj*);
 /* 217068 */ void grFlatzone_80217068(Ground_GObj*);

@@ -137,7 +137,7 @@ void stageGObj0_Callback3(Ground_GObj* arg0) {}
 
 void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool stageGObj2_Callback1(Ground_GObj* arg0)
@@ -147,14 +147,14 @@ bool stageGObj2_Callback1(Ground_GObj* arg0)
 
 void stageGObj2_GObjProc(Ground_GObj* arg0)
 {
-    Ground_ProcTargetStage(arg0);
+    Ground_UpdateWindAndMapColl(arg0);
 }
 
 void stageGObj2_Callback3(Ground_GObj* arg0) {}
 
 void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool stageGObj1_Callback1(Ground_GObj* arg0)
@@ -164,7 +164,7 @@ bool stageGObj1_Callback1(Ground_GObj* arg0)
 
 void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void stageGObj1_Callback3(Ground_GObj* arg0) {}

@@ -19,40 +19,40 @@ static void grTCaptain_OnLoad(void);
 static void grTCaptain_OnStart(void);
 static bool grTCaptain_8021FCFC(void);
 static HSD_GObj* grTCaptain_8021FD04(int gobj_id);
-static void grTCaptain_8021FDEC(Ground_GObj* gobj);
+static void stageGObj0_OnInit(Ground_GObj* gobj);
 static bool grTCaptain_8021FE18(Ground_GObj*);
 static void grTCaptain_8021FE20(Ground_GObj*);
 static void grTCaptain_8021FE24(Ground_GObj*);
-static void grTCaptain_8021FE28(Ground_GObj* gobj);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
 static bool grTCaptain_8021FE78(Ground_GObj*);
-static void grTCaptain_8021FE80(Ground_GObj* gobj);
+static void stageGObj2_GObjProc(Ground_GObj* gobj);
 static void grTCaptain_8021FEB4(Ground_GObj*);
-static void grTCaptain_8021FEB8(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
 static bool grTCaptain_8021FF08(Ground_GObj*);
-static void grTCaptain_8021FF10(Ground_GObj*);
+static void stageGObj1_GObjProc(Ground_GObj*);
 static void grTCaptain_8021FF30(Ground_GObj*);
 static DynamicsDesc* grTCaptain_OnTouchLine(enum_t);
 static bool grTCaptain_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTCa_StageCallbacks[] = {
     {
-        grTCaptain_8021FDEC,
+        stageGObj0_OnInit,
         grTCaptain_8021FE18,
         grTCaptain_8021FE20,
         grTCaptain_8021FE24,
         0,
     },
     {
-        grTCaptain_8021FEB8,
+        stageGObj1_OnInit,
         grTCaptain_8021FF08,
-        grTCaptain_8021FF10,
+        stageGObj1_GObjProc,
         grTCaptain_8021FF30,
         0,
     },
     {
-        grTCaptain_8021FE28,
+        stageGObj2_OnInit,
         grTCaptain_8021FE78,
-        grTCaptain_8021FE80,
+        stageGObj2_GObjProc,
         grTCaptain_8021FEB4,
         (1 << 30) | (1 << 31),
     },
@@ -109,9 +109,9 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
     return gobj;
 }
 
-static void grTCaptain_8021FDEC(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTCaptain_8021FE18(Ground_GObj* arg0)
@@ -123,9 +123,9 @@ static void grTCaptain_8021FE20(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FE24(Ground_GObj* arg0) {}
 
-static void grTCaptain_8021FE28(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTCaptain_8021FE78(Ground_GObj* arg0)
@@ -133,16 +133,16 @@ static bool grTCaptain_8021FE78(Ground_GObj* arg0)
     return false;
 }
 
-static void grTCaptain_8021FE80(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
 
-static void grTCaptain_8021FEB8(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTCaptain_8021FF08(Ground_GObj* arg0)
@@ -150,9 +150,9 @@ static bool grTCaptain_8021FF08(Ground_GObj* arg0)
     return false;
 }
 
-static void grTCaptain_8021FF10(Ground_GObj* arg0)
+static void stageGObj1_GObjProc(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
 }
 
 static void grTCaptain_8021FF30(Ground_GObj* argo) {}

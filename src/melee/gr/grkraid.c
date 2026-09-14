@@ -23,8 +23,10 @@ struct grKraid_YakumonoParam {
 GrJoint grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grKr_StageCallbacks[5] = {
-    { grKraid_801FE1B0, grKraid_801FE1DC, grKraid_801FE1E4, grKraid_801FE1E8,
+    { stageGObj0_OnInit, grKraid_801FE1DC, grKraid_801FE1E4, grKraid_801FE1E8,
       0 },
     { grKraid_801FE1EC, grKraid_801FE2C8, grKraid_801FE2D0, grKraid_801FE35C,
       0 },
@@ -106,9 +108,9 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
     return gobj;
 }
 
-void grKraid_801FE1B0(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grKraid_801FE1DC(Ground_GObj* gobj)
@@ -187,7 +189,7 @@ void grKraid_801FE3B4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     gp->u.kraid.x0 = 0;
     gp->u.kraid.x4 = 0.0f;
     gp->u.kraid.x8 = 0.0f;
@@ -251,7 +253,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
         grAnime_801C7FF8(gobj, 18, 7, 0, 0.0f, 1.0f);
         gp->u.kraid.x1 = 0;
     }
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
     grKraid_801FF150(gobj);
 }
 

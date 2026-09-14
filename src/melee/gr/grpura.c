@@ -399,7 +399,7 @@ void stageGObj27_Callback3(Ground_GObj* arg0) {}
 
 void stageGObj4_OnInit(Ground_GObj* arg0)
 {
-    Ground_JObjInline1(arg0);
+    Ground_InitMapCollAndAnim(arg0);
     grPura_80212CD4(arg0);
     grPura_802125F0(arg0);
     grPura_80212FC0(arg0);
@@ -413,7 +413,7 @@ bool stageGObj4_Callback1(Ground_GObj* arg0)
 void stageGObj4_GObjProc(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
     grPura_80213030(arg0);
     mpLib_80055E24(0x18);
     lb_800115F4();

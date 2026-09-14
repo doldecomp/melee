@@ -21,17 +21,17 @@ static void grTFox_UnkStage0_OnLoad(void);
 static void grTFox_UnkStage0_OnStart(void);
 static bool grTFox_80220C24(void);
 static HSD_GObj* grTFox_80220C2C(int);
-static void grTFox_80220D14(Ground_GObj*);
+static void stageGObj0_OnInit(Ground_GObj*);
 static bool grTFox_80220D40(Ground_GObj*);
 static void grTFox_80220D48(Ground_GObj*);
 static void grTFox_80220D4C(Ground_GObj*);
-static void grTFox_80220D50(Ground_GObj*);
+static void stageGObj2_OnInit(Ground_GObj*);
 static bool grTFox_80220DA0(Ground_GObj*);
-static void grTFox_80220DA8(Ground_GObj*);
+static void stageGObj2_GObjProc(Ground_GObj*);
 static void grTFox_80220DDC(Ground_GObj*);
-static void grTFox_80220DE0(Ground_GObj*);
+static void stageGObj1_OnInit(Ground_GObj*);
 static bool grTFox_80220E30(Ground_GObj*);
-static void grTFox_80220E38(Ground_GObj*);
+static void stageGObj1_GObjProc(Ground_GObj*);
 static void grTFox_80220E58(Ground_GObj*);
 static DynamicsDesc* grTFox_80220E5C(enum_t);
 static bool grTFox_80220F08(Vec3*, int, HSD_JObj*);
@@ -39,9 +39,11 @@ static bool grTFox_80220F08(Vec3*, int, HSD_JObj*);
 static struct grTFox_YakumonoParam* yakumono_param;
 
 static StageCallbacks grTFx_StageCallbacks[4] = {
-    { grTFox_80220D14, grTFox_80220D40, grTFox_80220D48, grTFox_80220D4C, 0 },
-    { grTFox_80220DE0, grTFox_80220E30, grTFox_80220E38, grTFox_80220E58, 0 },
-    { grTFox_80220D50, grTFox_80220DA0, grTFox_80220DA8, grTFox_80220DDC,
+    { stageGObj0_OnInit, grTFox_80220D40, grTFox_80220D48, grTFox_80220D4C,
+      0 },
+    { stageGObj1_OnInit, grTFox_80220E30, stageGObj1_GObjProc, grTFox_80220E58,
+      0 },
+    { stageGObj2_OnInit, grTFox_80220DA0, stageGObj2_GObjProc, grTFox_80220DDC,
       (1 << 31) | (1 << 30) },
     { NULL, NULL, NULL, NULL, 0 }
 };
@@ -96,9 +98,9 @@ HSD_GObj* grTFox_80220C2C(int arg0)
     return gobj;
 }
 
-void grTFox_80220D14(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTFox_80220D40(Ground_GObj* gobj)
@@ -110,9 +112,9 @@ void grTFox_80220D48(Ground_GObj* gobj) {}
 
 void grTFox_80220D4C(Ground_GObj* gobj) {}
 
-void grTFox_80220D50(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTFox_80220DA0(Ground_GObj* gobj)
@@ -120,16 +122,16 @@ bool grTFox_80220DA0(Ground_GObj* gobj)
     return false;
 }
 
-void grTFox_80220DA8(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTFox_80220DDC(Ground_GObj* gobj) {}
 
-void grTFox_80220DE0(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTFox_80220E30(Ground_GObj* gobj)
@@ -137,9 +139,9 @@ bool grTFox_80220E30(Ground_GObj* gobj)
     return false;
 }
 
-void grTFox_80220E38(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTFox_80220E58(Ground_GObj* gobj) {}

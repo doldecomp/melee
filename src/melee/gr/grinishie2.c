@@ -30,9 +30,11 @@ GrJoint grI2_803E4A60[] = {
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },
     { 9, 11, 0 }, { 10, 12, 0 }, { 11, 13, 0 }, { 2, 14, 0 },
 };
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grI2_StageCallbacks[] = {
     {
-        grInishie2_801FCDC8,
+        stageGObj0_OnInit,
         grInishie2_801FCDF4,
         grInishie2_801FCDFC,
         grInishie2_801FCE00,
@@ -258,9 +260,9 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
     return gobj;
 }
 
-void grInishie2_801FCDC8(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grInishie2_801FCDF4(Ground_GObj* gobj)
@@ -389,7 +391,7 @@ void grInishie2_801FD198(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 
     gp->u.inishie2.xC4_flags.b0 = 0;
 
@@ -421,7 +423,7 @@ void grInishie2_801FD224(Ground_GObj* gobj)
         }
     }
 
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 
     gp = GET_GROUND(gobj);
     if (grAnime_801C83D0(gobj, 0, 1)) { ///< @todo union irregularity
@@ -529,7 +531,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     vec.z = yakumono_param->unk14[spawn_side].z;
     HSD_JObjSetTranslate(temp_r29, &vec);
     gp->u.inishie22.xC4 = it_802ECD3C(gobj, &vec, sign_inline(spawn_side));
-    Ground_801C2ED0(temp_r30, gp->map_id);
+    Ground_InitMapColl(temp_r30, gp->map_id);
 }
 
 bool grInishie2_801FD64C(Ground_GObj* gobj)
@@ -551,7 +553,7 @@ void grInishie2_801FD654(Ground_GObj* gobj)
         vec.y += yakumono_param->unk2C;
         HSD_JObjSetTranslate(jobj, &vec);
     }
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grInishie2_801FD740(Ground_GObj* gobj) {}
@@ -722,7 +724,7 @@ void grInishie2_801FDE8C(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     grInishie2_801FD824(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
 }
 
 bool grInishie2_801FDED0(Ground_GObj* gobj)
@@ -761,7 +763,7 @@ static inline void grInishie2_801FDED8_inline(HSD_GObj* gobj)
 
 void grInishie2_801FDED8(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     grInishie2_801FD9EC(gobj);
 
     grInishie2_801FDED8_inline(gobj);

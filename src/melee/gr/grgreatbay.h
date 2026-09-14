@@ -15,7 +15,6 @@
 /* 1F42D4 */ void grGreatBay_801F42D4(void);
 /* 1F42F8 */ bool grGreatBay_801F42F8(void);
 /* 1F4300 */ HSD_GObj* grGreatBay_801F4300(int);
-/* 1F4404 */ void grGreatBay_801F4404(Ground_GObj*);
 /* 1F4430 */ bool grGreatBay_801F4430(Ground_GObj*);
 /* 1F4438 */ void grGreatBay_801F4438(Ground_GObj*);
 /* 1F443C */ void grGreatBay_801F443C(Ground_GObj*);

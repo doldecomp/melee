@@ -12,33 +12,33 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-void grTZelda_OnDemoInit(bool);                           /* static */
-void grTZelda_OnInit(void);                               /* static */
-void grTZelda_OnLoad(void);                               /* static */
-void grTZelda_OnStart(void);                              /* static */
-bool grTZelda_80223EC8(void);                             /* static */
-HSD_GObj* grTZelda_80223ED0(int);                         /* static */
-void grTZelda_80223FB8(Ground_GObj*);                     /* static */
-bool grTZelda_80223FE4(Ground_GObj*);                     /* static */
-void grTZelda_80223FEC(Ground_GObj*);                     /* static */
-void grTZelda_80223FF0(Ground_GObj*);                     /* static */
-void grTZelda_80223FF4(Ground_GObj*);                     /* static */
-bool grTZelda_80224044(Ground_GObj*);                     /* static */
-void grTZelda_8022404C(Ground_GObj*);                     /* static */
-void grTZelda_80224080(Ground_GObj*);                     /* static */
-void grTZelda_80224084(Ground_GObj*);                     /* static */
-bool grTZelda_802240D4(Ground_GObj*);                     /* static */
-void grTZelda_802240DC(Ground_GObj*);                     /* static */
+void grTZelda_OnDemoInit(bool);   /* static */
+void grTZelda_OnInit(void);       /* static */
+void grTZelda_OnLoad(void);       /* static */
+void grTZelda_OnStart(void);      /* static */
+bool grTZelda_80223EC8(void);     /* static */
+HSD_GObj* grTZelda_80223ED0(int); /* static */
+static void stageGObj0_OnInit(Ground_GObj*);
+bool grTZelda_80223FE4(Ground_GObj*); /* static */
+void grTZelda_80223FEC(Ground_GObj*); /* static */
+void grTZelda_80223FF0(Ground_GObj*); /* static */
+static void stageGObj2_OnInit(Ground_GObj*);
+bool grTZelda_80224044(Ground_GObj*); /* static */
+static void stageGObj2_GObjProc(Ground_GObj*);
+void grTZelda_80224080(Ground_GObj*); /* static */
+static void stageGObj1_OnInit(Ground_GObj*);
+bool grTZelda_802240D4(Ground_GObj*); /* static */
+static void stageGObj1_GObjProc(Ground_GObj*);
 void grTZelda_802240FC(Ground_GObj*);                     /* static */
 DynamicsDesc* grTZelda_OnTouchLine(enum_t);               /* static */
 bool grTZelda_OnCheckShadowRender(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTZd_StageCallbacks[4] = {
-    { grTZelda_80223FB8, grTZelda_80223FE4, grTZelda_80223FEC,
+    { stageGObj0_OnInit, grTZelda_80223FE4, grTZelda_80223FEC,
       grTZelda_80223FF0, 0 },
-    { grTZelda_80224084, grTZelda_802240D4, grTZelda_802240DC,
+    { stageGObj1_OnInit, grTZelda_802240D4, stageGObj1_GObjProc,
       grTZelda_802240FC, 0 },
-    { grTZelda_80223FF4, grTZelda_80224044, grTZelda_8022404C,
+    { stageGObj2_OnInit, grTZelda_80224044, stageGObj2_GObjProc,
       grTZelda_80224080, (1 << 31) | (1 << 30) },
     { NULL, NULL, NULL, NULL, 0 }
 };
@@ -92,9 +92,9 @@ HSD_GObj* grTZelda_80223ED0(int arg0)
     return gobj;
 }
 
-void grTZelda_80223FB8(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTZelda_80223FE4(Ground_GObj* gobj)
@@ -106,9 +106,9 @@ void grTZelda_80223FEC(Ground_GObj* gobj) {}
 
 void grTZelda_80223FF0(Ground_GObj* gobj) {}
 
-void grTZelda_80223FF4(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTZelda_80224044(Ground_GObj* gobj)
@@ -116,16 +116,16 @@ bool grTZelda_80224044(Ground_GObj* gobj)
     return false;
 }
 
-void grTZelda_8022404C(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTZelda_80224080(Ground_GObj* gobj) {}
 
-void grTZelda_80224084(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTZelda_802240D4(Ground_GObj* gobj)
@@ -133,9 +133,9 @@ bool grTZelda_802240D4(Ground_GObj* gobj)
     return false;
 }
 
-void grTZelda_802240DC(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTZelda_802240FC(Ground_GObj* gobj) {}

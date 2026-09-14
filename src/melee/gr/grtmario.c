@@ -15,23 +15,23 @@
 #include <sysdolphin/baselib/psstructs.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
-/* 21F844 */ static void grTMario_8021F844(void);
+/* 21F844 */ static void grTMario_OnInit(void);
 /* 21F8B4 */ static void grTmario_UnkStage0_OnLoad(void);
 /* 21F8B8 */ static void grTmario_UnkStage0_OnStart(void);
 /* 21F8DC */ static bool grTMario_8021F8DC(void);
 /* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(int);
-/* 21F9CC */ static void grTMario_8021F9CC(Ground_GObj*);
+/* 21F9CC */ static void stageGObj0_OnInit(Ground_GObj*);
 /* 21F9F8 */ static bool grTMario_8021F9F8(Ground_GObj*);
 /* 21FA00 */ static void grTMario_8021FA00(Ground_GObj*);
 /* 21FA04 */ static void grTMario_8021FA04(Ground_GObj*);
 /* 21FA08 */ static void lbl_8021FA08(HSD_GObj*);
 /* 21FA34 */ static void grTMario_8021FA34(Ground_GObj*);
 /* 21FA94 */ static bool grTMario_8021FA94(Ground_GObj*);
-/* 21FA9C */ static void grTMario_8021FA9C(Ground_GObj*);
+/* 21FA9C */ static void stageGObj2_GObjProc(Ground_GObj*);
 /* 21FAD0 */ static void grTMario_8021FAD0(Ground_GObj*);
-/* 21FAD4 */ static void grTMario_8021FAD4(Ground_GObj*);
+/* 21FAD4 */ static void stageGObj1_OnInit(Ground_GObj*);
 /* 21FB24 */ static bool grTMario_8021FB24(Ground_GObj*);
-/* 21FB2C */ static void grTMario_8021FB2C(Ground_GObj*);
+/* 21FB2C */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 21FB4C */ static void grTMario_8021FB4C(Ground_GObj*);
 /* 21FB50 */ static int lbl_8021FB50(s32, HSD_GObj*);
 /* 21FBE8 */ static void grTMario_8021FBE8(Vec3*, f32);
@@ -40,23 +40,23 @@
 
 StageCallbacks grTMr_StageCallbacks[] = {
     {
-        grTMario_8021F9CC,
+        stageGObj0_OnInit,
         grTMario_8021F9F8,
         grTMario_8021FA00,
         grTMario_8021FA04,
         0,
     },
     {
-        grTMario_8021FAD4,
+        stageGObj1_OnInit,
         grTMario_8021FB24,
-        grTMario_8021FB2C,
+        stageGObj1_GObjProc,
         grTMario_8021FB4C,
         0,
     },
     {
         grTMario_8021FA34,
         grTMario_8021FA94,
-        grTMario_8021FA9C,
+        stageGObj2_GObjProc,
         grTMario_8021FAD0,
         (1 << 30) | (1 << 31),
     },
@@ -67,7 +67,7 @@ StageData grTMr_StageData = {
     Gr_Kind_TMario,
     grTMr_StageCallbacks,
     "/GrTMr.dat",
-    grTMario_8021F844,
+    grTMario_OnInit,
     grTMario_8021F840,
     grTmario_UnkStage0_OnLoad,
     grTmario_UnkStage0_OnStart,
@@ -81,7 +81,7 @@ StageData grTMr_StageData = {
 
 void grTMario_8021F840(bool unk) {}
 
-void grTMario_8021F844(void)
+static void grTMario_OnInit(void)
 {
     Ground_InitTargetStage(grTMario_8021F8E4);
 }
@@ -114,9 +114,9 @@ HSD_GObj* grTMario_8021F8E4(int arg0)
     return gobj;
 }
 
-void grTMario_8021F9CC(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTMario_8021F9F8(Ground_GObj* gobj)
@@ -135,7 +135,7 @@ void lbl_8021FA08(HSD_GObj* gobj)
 
 void grTMario_8021FA34(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
@@ -144,16 +144,16 @@ bool grTMario_8021FA94(Ground_GObj* gobj)
     return 0;
 }
 
-void grTMario_8021FA9C(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTMario_8021FAD0(Ground_GObj* gobj) {}
 
-void grTMario_8021FAD4(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTMario_8021FB24(Ground_GObj* gobj)
@@ -161,9 +161,9 @@ bool grTMario_8021FB24(Ground_GObj* gobj)
     return false;
 }
 
-void grTMario_8021FB2C(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTMario_8021FB4C(Ground_GObj* gobj) {}
