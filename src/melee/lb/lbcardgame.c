@@ -46,7 +46,7 @@ void lb_8001C600(void)
     }
 }
 
-static const char* lb_8001C658(void)
+static char* lb_8001C658(void)
 {
     OSCalendarTime time;
     const char* gamedata_str;

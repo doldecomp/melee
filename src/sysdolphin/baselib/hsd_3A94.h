@@ -3,8 +3,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
-
 #include <dolphin/card.h>
 
 typedef struct CardState {
@@ -56,9 +54,11 @@ typedef enum CardCmdType {
     /* 0x0A */ CARD_CMD_VERIFY_HEADER,
     /* 0x0B */ CARD_CMD_READ_HEADER,
     /* 0x0C */ CARD_CMD_GET_STATUS,
-    /// Reads one block's header into block_ids/block_seqs.
+    /// Reads one block's header into block_ids/block_seqs and merges its
+    /// file table into file_flags/file_sizes.
     /* 0x0D */ CARD_CMD_SCAN_BLOCK,
-    /// fn_803AD16C: drop stale copies and re-home duplicated blocks.
+    /// fn_803AD16C: mark stale copies negative; for file_flags 0 files also
+    /// clear surplus copies and rebuild a missing or stale mirror.
     /* 0x0E */ CARD_CMD_REPAIR,
     /* 0x0F */ CARD_CMD_READ_SECTOR,
     /* 0x10 */ CARD_CMD_WRITE_SECTOR,
@@ -79,7 +79,8 @@ typedef struct CardWriteArgs {
 } CardWriteArgs;
 
 /// CARD_CMD_READ_BLOCK, CARD_CMD_SCAN_BLOCK: phys 0 shares the last header
-/// sector; a negative phys only checks the sector.
+/// sector. A negative phys only loads the sector into sector_buf (no
+/// checksum, no copy) so that the WRITE_HEADER after it keeps block 0's data.
 typedef struct CardReadArgs {
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
@@ -169,7 +170,8 @@ typedef struct CardCmd {
 } CardCmd;
 
 /// The 0x20-byte prefix of a CardCmd that fn_803AD16C builds its sector
-/// commands in.
+/// commands in; fn_803AC168 still copies a whole CardCmd, so the last word
+/// comes from whatever follows on the stack, as in retail.
 typedef struct CardSectorCmd {
     /* 0x00 */ s32 type;
     /* 0x04 */ CardState* state;
@@ -182,6 +184,8 @@ typedef enum CardRequestType {
     /* 0x01 */ CARD_REQ_READ_FILE,
     /* 0x02 */ CARD_REQ_WRITE_FILE,
     /* 0x03 */ CARD_REQ_CREATE_FILE,
+    /// Rewrites the comment/banner/icons header if it changed, then
+    /// CARDSetStatus.
     /* 0x04 */ CARD_REQ_SET_STATUS,
     /* 0x05 */ CARD_REQ_OPEN_FILE,
     /// Reads the header sectors back into the caller's buffers.
@@ -215,7 +219,7 @@ typedef struct CardOpenReqArgs {
 
 /// CARD_REQ_READ_HEADER: destination buffers, any of which may be NULL.
 typedef struct CardHeaderReqArgs {
-    /* 0x08 */ const char* comment;
+    /* 0x08 */ void* comment;
     /* 0x0C */ void* banner;
     /* 0x10 */ void* icons;
 } CardHeaderReqArgs;
@@ -240,7 +244,7 @@ typedef enum CardActiveType {
     /* 0x00 */ CARD_ACTIVE_NONE,
     /* 0x01 */ CARD_ACTIVE_READ_FILE,
     /* 0x02 */ CARD_ACTIVE_WRITE_FILE,
-    /// Writes of file_flags 1/2 files rebuild block_ids on completion.
+    /// On completion the older of two copies of each block is marked stale.
     /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1,
     /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3,
     /// Also what fn_803B26CC's header read completes as.

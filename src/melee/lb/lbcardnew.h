@@ -45,19 +45,18 @@ struct CardEntry {
 /* 01BA44 */ bool lb_8001BA44(int chan, const char* filename,
                               UNK_T status_out);
 /* 01BB48 */ int lb_8001BB48(int chan, char* filename, void* file_entries,
-                             void* save_data, const char* comment,
-                             void* banner, void* icons, UNK_T status_out);
+                             void* save_data, char* comment, void* banner,
+                             void* icons, UNK_T status_out);
 /* 01BC18 */ int lb_8001BC18(int chan, char* filename, void** file_entries,
-                             void* save_data, const char* comment,
-                             void* banner, void* icons, UNK_T status_out);
+                             void* save_data, char* comment, void* banner,
+                             void* icons, UNK_T status_out);
 /* 01BD34 */ enum_t lb_8001BD34(int chan, const char* filename,
                                 UNK_T file_entries, UNK_T status_out);
 /* 01BE30 */ int lb_8001BE30(int chan, const char* filename,
-                             UNK_T file_entries, const char* comment,
-                             void* banner, void* icons, UNK_T status_out,
-                             UNK_T callback);
+                             UNK_T file_entries, char* comment, void* banner,
+                             void* icons, UNK_T status_out, UNK_T callback);
 /* 01BF04 */ int lb_8001BF04(int chan, char* filename, void* file_entries,
-                             const char* comment, void* banner, void* icons,
+                             char* comment, void* banner, void* icons,
                              UNK_T status_out);
 /* 01BFD8 */ int lb_8001BFD8(int chan,
                              lbCardNew_SnapshotEntry* snapshot_entries,

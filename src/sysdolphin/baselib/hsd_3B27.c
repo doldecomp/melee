@@ -1,6 +1,5 @@
 #include "hsd_3B27.h"
 
-#include <stddef.h>
 #include <string.h>
 
 #include "hsd_3A94.h"
@@ -9,8 +8,8 @@
 /// the load/store displacement, as retail does.
 #define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->requests)
 
-int hsd_803B27F4(CardState* state, const char* comment, void* banner,
-                 void* icons, CardCallback callback)
+int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
+                 CardCallback callback)
 {
     s32 read_idx = hsd_804D7990;
     CardContext* ctx = (CardContext*) &hsd_804D1138;

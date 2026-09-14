@@ -1,5 +1,6 @@
 #include "hsd_3A94.h"
 
+#include <placeholder.h>
 #include <stddef.h>
 #include <string.h>
 
@@ -1295,20 +1296,18 @@ void hsd_803AAA48(void)
                     pos = 0x40;
                     if (banner_size > 0) {
                         memcpy(cmd->state->sector_buf + 0x40,
-                               (void*) cmd->header.banner, banner_size);
+                               cmd->header.banner, banner_size);
                         pos = banner_size + 0x40;
                     }
                     memset(cmd->state->digest, 0, 0x30);
                     if (cmd->state->header_size > cmd->state->sector_size) {
-                        memcpy(&cmd->state->sector_buf[pos],
-                               (void*) cmd->header.icons,
+                        memcpy(&cmd->state->sector_buf[pos], cmd->header.icons,
                                cmd->state->sector_size - pos);
                         hsd_803B2B20(
                             cmd->state->sector_buf, cmd->state->sector_size,
                             &cmd->state->digest[cmd->header.index * 0x10]);
                     } else {
-                        memcpy(&cmd->state->sector_buf[pos],
-                               (void*) cmd->header.icons,
+                        memcpy(&cmd->state->sector_buf[pos], cmd->header.icons,
                                cmd->state->header_size - pos);
                         hsd_803B2B20(
                             cmd->state->sector_buf, cmd->state->header_size,

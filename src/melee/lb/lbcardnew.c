@@ -824,8 +824,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
 }
 
 int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
-                const char* comment, void* banner, void* icons,
-                UNK_T status_out)
+                char* comment, void* banner, void* icons, UNK_T status_out)
 {
     int new_var;
     struct CardTask* task;
@@ -854,8 +853,7 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
 }
 
 int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
-                const char* comment, void* banner, void* icons,
-                UNK_T status_out)
+                char* comment, void* banner, void* icons, UNK_T status_out)
 {
     int new_var;
     s32 result;
@@ -911,8 +909,8 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
 #pragma dont_inline on
 #endif
 int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
-                const char* comment, void* banner, void* icons,
-                UNK_T status_out, UNK_T callback)
+                char* comment, void* banner, void* icons, UNK_T status_out,
+                UNK_T callback)
 {
     struct CardTask* task;
     lb_80019EF0(chan, 0, status_out, callback);
@@ -943,9 +941,8 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
 #pragma pop
 #endif
 
-int lb_8001BF04(int chan, char* filename, void* file_entries,
-                const char* comment, void* banner, void* icons,
-                UNK_T status_out)
+int lb_8001BF04(int chan, char* filename, void* file_entries, char* comment,
+                void* banner, void* icons, UNK_T status_out)
 {
     struct CardTask* task;
     lb_80019EF0(chan, 0, status_out, 0);

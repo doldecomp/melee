@@ -14,7 +14,7 @@ struct lb_80432A68_t {
     /* 0x008 */ int chan;
     /* 0x00C */ UNK_T unk_C;
     /* 0x010 */ const char* unk_10;
-    /* 0x014 */ const char* comment;
+    /* 0x014 */ char* comment;
     /* 0x018 */ void* banner;
     /* 0x01C */ void* icons;
     /* 0x020 */ lbCardNew_SnapshotEntry* snapshot_entries;

@@ -7,9 +7,8 @@
 
 #include <sysdolphin/baselib/hsd_3A94.h>
 
-/* 3B27F4 */ int hsd_803B27F4(CardState* state, const char* comment,
-                              void* banner, void* icons,
-                              CardCallback callback);
+/* 3B27F4 */ int hsd_803B27F4(CardState* state, void* comment, void* banner,
+                              void* icons, CardCallback callback);
 /* 3B286C */ int hsd_803B286C(CardState* state, const char* filename,
                               const char* comment, void* banner, void* icons,
                               CardCallback callback);
