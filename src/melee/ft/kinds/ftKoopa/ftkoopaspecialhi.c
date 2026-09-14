@@ -22,7 +22,7 @@ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x167, 0, 0.0f, 1.0f, 0.0f, NULL);
-    Fighter_SetDamageCallback(gobj, (void (*)(HSD_GObj*)) ftKp_Init_80132B38);
+    Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0f;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
@@ -40,7 +40,7 @@ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x168, 0, 0.0f, 1.0f, 0.0f, NULL);
-    Fighter_SetDamageCallback(gobj, (void (*)(HSD_GObj*)) ftKp_Init_80132B38);
+    Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     Fighter_ClearCmdVars(fp);
     ftCommon_ClampGroundVel(fp, da->x60);
     fp->self_vel.y = da->x54;
@@ -146,8 +146,7 @@ void ftKp_SpecialHi_Coll(Fighter_GObj* gobj)
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, 0x168, 0x0C4C5292, fp->cur_anim_frame,
                                   1.0f, 0.0f, NULL);
-        Fighter_SetDamageCallback(gobj,
-                                  (void (*)(HSD_GObj*)) ftKp_Init_80132B38);
+        Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
         ftCommon_ClampSelfVelX(fp, da->x64);
         Fighter_SetEffectHitlagCallbacks(fp);
         fp->mv.kp.specials.x10 = 0;
@@ -170,13 +169,11 @@ static inline void ftKp_SpecialAirHi_Coll_inline(Fighter_GObj* gobj,
         Fighter_ChangeMotionState(gobj, 0x167, 0x0C4C5292,
                                   fp->cur_anim_frame - da->x78, 1.0f, 0.0f,
                                   NULL);
-        Fighter_SetDamageCallback(gobj,
-                                  (void (*)(HSD_GObj*)) ftKp_Init_80132B38);
+        Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     } else {
         Fighter_ChangeMotionState(gobj, 0x167, 0x0C4C5292, fp->cur_anim_frame,
                                   1.0f, 0.0f, NULL);
-        Fighter_SetDamageCallback(gobj,
-                                  (void (*)(HSD_GObj*)) ftKp_Init_80132B38);
+        Fighter_SetDamageCallback(gobj, ftKp_Init_80132B38);
     }
     ftCommon_ClampGroundVel(fp, da->x60);
 }
