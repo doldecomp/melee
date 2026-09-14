@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTCRAZYHAND_INLINES_H
 #define MELEE_FT_CHARA_FTCRAZYHAND_INLINES_H
 
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/ft_084E.h>
+#include <melee/ft/ftbosslib.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <melee/ft/types.h>
