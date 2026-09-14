@@ -307,4 +307,13 @@ static inline void Item_InitLinkMtx(Mtx m, f32 z)
     m[2][3] = z;
 }
 
+static inline void Item_InitZakoCollision(Item_GObj* gobj, Item* ip)
+{
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDC8_word.flags.x19 = 1;
+}
+
 #endif

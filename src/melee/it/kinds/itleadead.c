@@ -151,11 +151,7 @@ void it_802E8BCC(Item_GObj* gobj)
         facing = 1;
     }
     mpCollSetFacingDir(&ip->x378_itemColl, facing);
-    ip->xD5C = 0;
-    ip->xDC8_word.flags.x15 = 0;
-    it_8027542C(gobj);
-    it_80275270(gobj);
-    ip->xDC8_word.flags.x19 = 1;
+    Item_InitZakoCollision(gobj, ip);
     ip->xDD4_itemVar.leadead.x48 = 0;
     ip->xDD4_itemVar.leadead.x50 = 0;
     ip->xDD4_itemVar.leadead.x4C = attr->x1C;
