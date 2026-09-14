@@ -24,39 +24,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-extern f32 it_804DC73C;
-
-#define it_2725_JObjSetTranslate(jobj, vec)                                   \
-    {                                                                         \
-        ((jobj) ? ((void) 0) : __assert("jobj.h", 916, "jobj"));              \
-        ((vec) ? ((void) 0) : __assert("jobj.h", 917, "translate"));          \
-        ((HSD_JObj*) (jobj))->translate = *(vec);                             \
-        if (!(((HSD_JObj*) (jobj))->flags & JOBJ_MTX_INDEP_SRT)) {            \
-            HSD_JObjSetMtxDirty(jobj);                                        \
-        }                                                                     \
-    }
-
-#define it_2725_JObjGetTranslation(jobj, vec)                                 \
-    {                                                                         \
-        ((jobj) ? ((void) 0) : __assert("jobj.h", 979, "jobj"));              \
-        ((vec) ? ((void) 0) : __assert("jobj.h", 980, "translate"));          \
-        *(vec) = ((HSD_JObj*) (jobj))->translate;                             \
-    }
-
-static inline void it_2725_JObjSetTranslateInline(HSD_JObj* jobj, Vec3* vec)
-{
-    if (jobj == NULL) {
-        __assert("jobj.h", 916, "jobj");
-    }
-    if (vec == NULL) {
-        __assert("jobj.h", 917, "translate");
-    }
-    jobj->translate = *vec;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
 static inline void it_8027129C_by_4(Item_GObj* item_gobj)
 {
     u32 cnt;
@@ -182,11 +149,8 @@ void it_80272860(Item_GObj* item_gobj, f32 arg1, f32 arg2)
     s32 var_r3;
 
     item = item_gobj->user_data;
-    // if these aren't ternaries it allocates registers differently .-.
     var_r0 = arg1 < 0.0f ? -1 : 1;
-
     var_f3 = item->x40_vel.y;
-
     var_r3 = var_f3 < 0.0f ? -1 : 1;
 
     if (var_r3 != var_r0) {
@@ -526,7 +490,7 @@ void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint)
     HSD_GObjObject_80390B0C(item_gobj);
     Item_802680CC(item_gobj);
     Item_8026849C(item_gobj);
-    it_2725_JObjSetTranslateInline(item_gobj->hsd_obj, &item->pos);
+    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item->pos);
 }
 
 void it_80273408(Item_GObj* item_gobj)
@@ -716,7 +680,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         (item->hold_kind == 8))
     {
         jobj2 = it_80272C90(item_gobj);
-        it_2725_JObjGetTranslation(jobj2, &sp3C);
+        HSD_JObjGetTranslation(jobj2, &sp3C);
         sp3C.x = -sp3C.x;
         sp3C.y = -sp3C.y;
         sp3C.z = -sp3C.z;
@@ -733,7 +697,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
     item->pos.x = pos->x + sp3C.x;
     item->pos.y = pos->y + sp3C.y;
     item->pos.z = 0.0f;
-    it_2725_JObjSetTranslate(jobj, &item->pos);
+    HSD_JObjSetTranslate(jobj, &item->pos);
 }
 
 static inline void getOwnerJointPosition(Item* item, HSD_GObj* owner_gobj,
@@ -823,7 +787,7 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         (item->hold_kind == 8))
     {
         jobj = it_80272C90(item_gobj);
-        it_2725_JObjGetTranslation(jobj, &sp40);
+        HSD_JObjGetTranslation(jobj, &sp40);
         sp40.x = -sp40.x;
         sp40.y = -sp40.y;
         sp40.z = -sp40.z;
@@ -838,7 +802,7 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         item3->pos.x = sp34.x;
         item3->pos.y = sp34.y;
         item3->pos.z = 0.0f;
-        it_2725_JObjSetTranslate(item_jobj3, pos);
+        HSD_JObjSetTranslate(item_jobj3, pos);
     }
 }
 
@@ -877,7 +841,7 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
     mpCollSetFacingDir(&item->x378_itemColl, int_dir);
     Item_8026B074(item);
     it_802762BC(item);
-    it_2725_JObjSetTranslate(item_jobj, &item->pos);
+    HSD_JObjSetTranslate(item_jobj, &item->pos);
 
     it_8027B4A4(arg_gobj2, item_gobj);
     it_8027B378(arg_gobj2, item_gobj, it_802758D4(item_gobj));

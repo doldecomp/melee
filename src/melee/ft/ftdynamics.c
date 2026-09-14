@@ -324,7 +324,7 @@ void ftCo_8009DC54(Fighter* fp)
         ssize_t dyn_idx = 0;
         i = 0;
         do {
-            HSD_JObj* cur = fp->u.kb.hat.jobj;
+            HSD_JObj* cur = fp->u.pr.x223C;
             ftDynamics* dynamics = data->x2C;
             ArticleDynamicBones* bones = dynamics->ftDynamicBones;
             ssize_t j;
