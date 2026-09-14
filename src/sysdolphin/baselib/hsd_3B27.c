@@ -50,7 +50,7 @@ int hsd_803B286C(const s32* arg0, UNK_T arg1, const char* arg2, int arg3,
 {
     u8* base = hsd_804D1138;
 
-    memcpy(((CardState*) arg0)->x370, arg2, 64);
+    memcpy(((CardState*) arg0)->comment, arg2, 64);
 
     {
         s32 write_idx;
@@ -79,7 +79,7 @@ int hsd_803B2928(const s32* arg0, const char* arg1, int arg2, int arg3,
 {
     u8* base = hsd_804D1138;
 
-    memcpy(((CardState*) arg0)->x370, arg1, 64);
+    memcpy(((CardState*) arg0)->comment, arg1, 64);
 
     {
         s32 write_idx;
@@ -137,7 +137,7 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
     s32 write_idx;
     HsdCmdEntry* entry;
 
-    if (arg0[arg1 + offsetof(CardState, x4C) / sizeof(s32)] <= 0) {
+    if (arg0[arg1 + offsetof(CardState, file_sizes) / sizeof(s32)] <= 0) {
         return -257;
     }
 
@@ -168,7 +168,7 @@ int hsd_803B2ADC(s32* ctx, UNK_T data)
 {
     CardState* state = (CardState*) ctx;
 
-    memcpy(&state->x3B0, data, 18);
-    state->x24 = hsd_803AC340(&state->x3B0);
+    memcpy(&state->banner_format, data, 18);
+    state->header_size = hsd_803AC340(&state->banner_format);
     return 0;
 }
