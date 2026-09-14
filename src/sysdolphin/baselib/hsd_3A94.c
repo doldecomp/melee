@@ -663,7 +663,7 @@ int fn_803AA790(void)
         }
         entry->type = 0;
         return result;
-    case CARD_REQ_WRITE_HEADER:
+    case CARD_REQ_READ_HEADER:
         result =
             fn_803B26CC(state, entry->header.comment, entry->header.banner,
                         entry->header.icons, entry->callback);

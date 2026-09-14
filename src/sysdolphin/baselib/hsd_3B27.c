@@ -26,7 +26,7 @@ int hsd_803B27F4(CardState* state, const char* comment, void* banner,
     entry = &CARD_REQUESTS(ctx)[write_idx];
     {
         s32 next = write_idx + 1;
-        entry->type = CARD_REQ_WRITE_HEADER;
+        entry->type = CARD_REQ_READ_HEADER;
         entry->state = state;
         entry->header.comment = comment;
         entry->header.banner = banner;

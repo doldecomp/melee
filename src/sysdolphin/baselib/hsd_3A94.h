@@ -184,7 +184,8 @@ typedef enum CardRequestType {
     /* 0x03 */ CARD_REQ_CREATE_FILE,
     /* 0x04 */ CARD_REQ_SET_STATUS,
     /* 0x05 */ CARD_REQ_OPEN_FILE,
-    /* 0x06 */ CARD_REQ_WRITE_HEADER,
+    /// Reads the header sectors back into the caller's buffers.
+    /* 0x06 */ CARD_REQ_READ_HEADER,
 } CardRequestType;
 
 /// CARD_REQ_READ_FILE, CARD_REQ_WRITE_FILE
@@ -212,7 +213,7 @@ typedef struct CardOpenReqArgs {
     /* 0x08 */ s32 file_no;
 } CardOpenReqArgs;
 
-/// CARD_REQ_WRITE_HEADER
+/// CARD_REQ_READ_HEADER: destination buffers, any of which may be NULL.
 typedef struct CardHeaderReqArgs {
     /* 0x08 */ const char* comment;
     /* 0x0C */ void* banner;
@@ -242,6 +243,7 @@ typedef enum CardActiveType {
     /// Writes of file_flags 1/2 files rebuild block_ids on completion.
     /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1,
     /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3,
+    /// Also what fn_803B26CC's header read completes as.
     /* 0x05 */ CARD_ACTIVE_OPEN_FILE,
     /* 0x06 */ CARD_ACTIVE_CREATE_FILE,
     /* 0x07 */ CARD_ACTIVE_SET_STATUS,
