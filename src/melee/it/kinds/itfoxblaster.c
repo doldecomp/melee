@@ -13,6 +13,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -65,14 +66,6 @@ f32 it_803F6D90[14] = { 0.5F, 0.5F, 1.75F, 3.0F, 2.375F, 1.75F, 1.125F,
 f32 it_803F6DC8[14] = { 0.0F, -42.0F, -20.0F, 0.0F, 0.0F, 0.0F, 0.0F,
                         0.0F, 0.0F,   0.0F,   0.0F, 0.0F, 0.0F, 0.0F };
 
-static inline HSD_JObj* jobj_child(HSD_JObj* node)
-{
-    if (node == NULL) {
-        return NULL;
-    }
-    return node->child;
-}
-
 static inline void itFoxBlaster_PlaySFX(Item* item, u32 fox_sfx, u32 falco_sfx)
 {
     switch (item->kind) {
@@ -112,7 +105,7 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
     }
 
     item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
-    child_jobj = jobj_child(item_jobj);
+    child_jobj = HSD_JObjGetChild(item_jobj);
     if (item->xDD4_itemVar.foxblaster.set_sfx_var2 != visibility) {
         item->xDD4_itemVar.foxblaster.set_sfx_var2 = visibility;
         if (visibility == 2) {
@@ -834,12 +827,6 @@ bool itFoxblaster_UnkMotion9_Coll(HSD_GObj* item_gobj)
     return true;
 }
 
-static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
-{
-    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
-    HSD_JObjSetScale(dst, scale);
-}
-
 /// @brief If blaster item exists and ? (ftCo_800BF228), set the item scale to
 /// match the owner's
 /// @param item_gobj
@@ -852,7 +839,8 @@ bool itFoxblaster_UnkMotion10_Anim(HSD_GObj* item_gobj)
             if (ftCo_800BF228(it->xDD4_itemVar.foxblaster.owner) == 1) {
                 Vec3 scale;
                 HSD_GObj* owner = it->xDD4_itemVar.foxblaster.owner;
-                copy_jobj_scale(GET_JOBJ(item_gobj), GET_JOBJ(owner), &scale);
+                Item_CopyJObjScale(GET_JOBJ(item_gobj), GET_JOBJ(owner),
+                                   &scale);
             }
         }
     }

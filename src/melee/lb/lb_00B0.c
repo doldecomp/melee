@@ -94,14 +94,6 @@ bool lb_8000B134(HSD_JObj* jobj)
     return false;
 }
 
-static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->parent;
-}
-
 void lb_8000B1CC(HSD_JObj* arg0, Vec3* pos0, Vec3* pos1)
 {
     Quaternion r;
@@ -111,7 +103,7 @@ void lb_8000B1CC(HSD_JObj* arg0, Vec3* pos0, Vec3* pos1)
         *pos1 = *pos0;
         return;
     }
-    if (jobj_parent(arg0) != NULL) {
+    if (HSD_JObjGetParent(arg0) != NULL) {
         HSD_JObjSetupMatrix(arg0);
         if (pos0 == NULL || (!pos0->x && !pos0->y && !pos0->z)) {
             pos1->x = arg0->mtx[0][3];
@@ -740,14 +732,6 @@ s32 lb_8000CDA8(s32 i)
     return lb_803BA020[i];
 }
 
-static inline HSD_LObj* lobj_next(HSD_LObj* lobj)
-{
-    if (lobj == NULL) {
-        return NULL;
-    }
-    return lobj->next;
-}
-
 HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
@@ -756,7 +740,7 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         {
             return cur;
         }
-        cur = lobj_next(cur);
+        cur = HSD_LObjGetNext(cur);
     }
 }
 
