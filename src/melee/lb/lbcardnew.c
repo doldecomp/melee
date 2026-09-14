@@ -170,7 +170,7 @@ again:
                 result = lb_8001AAE4(task->filename, task->x19);
                 break;
             case 7:
-                result = lb_8001AC04(&task->filename);
+                result = lb_8001AC04((char*) &task->filename);
                 break;
             case 8:
                 result = lb_8001ACEC(task->file_entries);
@@ -555,7 +555,7 @@ int lb_8001AAE4(const char* old_name, const char* new_name)
     return saved_error;
 }
 
-int lb_8001AC04(UNK_T filename)
+int lb_8001AC04(const char* filename)
 {
     int hsd_result;
     int unused;

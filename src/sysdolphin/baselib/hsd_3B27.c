@@ -79,8 +79,8 @@ int hsd_803B27F4(const CardState* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B286C(const CardState* arg0, UNK_T arg1, const char* arg2, int arg3,
-                 int arg4, void (*arg5)(int, int))
+int hsd_803B286C(const CardState* arg0, const char* arg1, const char* arg2,
+                 int arg3, int arg4, void (*arg5)(int, int))
 {
     u8* base = hsd_804D1138;
 
