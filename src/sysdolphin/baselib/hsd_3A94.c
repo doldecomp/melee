@@ -47,6 +47,7 @@ typedef struct CardBlockHeader {
  * (7, 9, 10, 11, 12) carry filename/size, header block index, and the
  * comment/banner/icons buffers.
  */
+/// @todo ::CardRequest
 typedef struct CardCmd {
     /* 0x00 */ s32 type;
     /* 0x04 */ CardState* state;
@@ -65,6 +66,8 @@ typedef union CardCmdBuf {
     s32 words[10];
 } CardCmdBuf;
 
+typedef void (*CardRequestFunc)(int, int);
+
 /// One entry of the request queue drained by fn_803AA790; x8/xC/x10 are
 /// the request's arguments and depend on type.
 typedef struct CardRequest {
@@ -73,15 +76,15 @@ typedef struct CardRequest {
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
     /* 0x10 */ s32 x10;
-    /* 0x14 */ void (*callback)(s32, s32);
+    /* 0x14 */ CardRequestFunc callback;
 } CardRequest;
 
 /// Layout of hsd_804D1138 .. hsd_804D2348: the request being completed,
 /// the command ring and the request queue.
 typedef struct {
     /* 0x0000 */ s32 req_type;
-    /* 0x0004 */ CardState* state;
-    /* 0x0008 */ void (*callback)(s32, s32);
+    /* 0x0004 */ CardState* state; ///< @todo ::CardRequest
+    /* 0x0008 */ CardRequestFunc callback;
     /* 0x000C */ s32 callback_arg;
     /* 0x0010 */ CardCmd cmds[128];
     /* 0x1210 */ CardRequest requests[32];
@@ -135,8 +138,8 @@ typedef struct {
                                     s32 seq_num, s32 callback);
 /* 3B21E8 */ static s32 fn_803B21E8(CardState* state, s32 file_id, s32 seq_num,
                                     s32 callback);
-/* 3B26CC */ static s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num,
-                                    s32 version, void (*callback)(s32, s32));
+/* 3B26CC */ static int fn_803B26CC(CardState* state, int file_id, int seq_num,
+                                    int version, CardRequestFunc cb);
 /* 3A949C */ static void hsd_803A949C(s32 chan, s32 arg1);
 /* 3A949C */
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
@@ -660,8 +663,8 @@ s32 fn_803AA790(void)
 
     switch (entry->type) {
     case 1:
-        result = fn_803ADF90((CardState*) entry->state, entry->x8,
-                             (u8*) entry->xC, 1, entry->callback);
+        result = fn_803ADF90(entry->state, entry->x8, (u8*) entry->xC, 1,
+                             entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
                 entry->callback(entry->x8, result);
@@ -672,17 +675,17 @@ s32 fn_803AA790(void)
     case 2:
         switch (state->file_flags[entry->x8]) {
         case 0:
-            result = fn_803AE7F8((CardState*) entry->state, entry->x8,
-                                 entry->xC, 1, (s32) entry->callback);
+            result = fn_803AE7F8(entry->state, entry->x8, entry->xC, 1,
+                                 (s32) entry->callback);
             break;
         case 1:
         case 2:
-            result = fn_803AF3F0((CardState*) entry->state, entry->x8,
-                                 entry->xC, 1, (s32) entry->callback);
+            result = fn_803AF3F0(entry->state, entry->x8, entry->xC, 1,
+                                 (s32) entry->callback);
             break;
         case 3:
-            result = fn_803B0120((CardState*) entry->state, entry->x8,
-                                 entry->xC, 1, (s32) entry->callback);
+            result = fn_803B0120(entry->state, entry->x8, entry->xC, 1,
+                                 (s32) entry->callback);
             break;
         default:
             result = -0x101;
@@ -5424,10 +5427,10 @@ s32 hsd_803B2674(CardState* state)
     return blocks;
 }
 
-s32 fn_803B26CC(CardState* state, s32 comment, s32 banner, s32 icons,
-                void (*callback)(s32, s32))
+int fn_803B26CC(CardState* state, int comment, int banner, int icons,
+                CardRequestFunc callback)
 {
-    s32 result;
+    int result;
     CardContext* context = (CardContext*) hsd_804D1138;
     PAD_STACK(8);
 
