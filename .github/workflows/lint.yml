@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-    - name: create dummy build includes
+    - name: Create dummy build includes
       if: matrix.hook == 'replace-includes'
       run: |
         mkdir -p build/GALE01/include
