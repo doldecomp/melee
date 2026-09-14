@@ -2812,9 +2812,6 @@ static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
     return 0;
 }
 
-#ifdef __MWERKS__
-#pragma opt_loop_invariants off
-#endif
 s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
                 void (*callback)(s32, s32))
 {
@@ -2988,9 +2985,6 @@ s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
 
     return status;
 }
-#ifdef __MWERKS__
-#pragma opt_loop_invariants on
-#endif
 
 static inline void fn_803AE7F8_rewind(CardBufEntry* entries)
 {
