@@ -8,7 +8,6 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
-#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>

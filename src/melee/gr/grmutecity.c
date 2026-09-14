@@ -12,7 +12,6 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
-#include <melee/gr/inlines.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>

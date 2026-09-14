@@ -9,6 +9,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/db/db.h>
@@ -24,7 +25,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>

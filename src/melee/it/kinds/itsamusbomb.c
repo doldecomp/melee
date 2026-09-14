@@ -6,6 +6,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include <melee/db/db.h>
 #include <melee/ft/kinds/ftSamus/ftsamus.h>
 #include <melee/it/inlines.h>
@@ -13,7 +14,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/mtx.h>

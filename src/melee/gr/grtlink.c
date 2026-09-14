@@ -9,7 +9,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 22192C */ static void grTLink_8022192C(bool);

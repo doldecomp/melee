@@ -7,6 +7,7 @@
 
 #include "forward.h"
 #include "ftpurin.h"
+#include "inlines.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -24,7 +25,6 @@
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
-#include <melee/ft/kinds/ftPurin/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/archive.h>

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <placeholder.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>
@@ -18,7 +19,6 @@
 #include <melee/it/inlines.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>

@@ -2,6 +2,7 @@
 
 #include <Runtime/platform.h>
 
+#include "inlines.h"
 #include <dolphin/mtx.h>
 #include <melee/db/db.h>
 #include <melee/ef/efasync.h>
@@ -12,7 +13,6 @@
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/mtx.h>
 

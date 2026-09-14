@@ -155,16 +155,17 @@ parser.add_argument(
 )
 parser.add_argument(
     "--warn",
-    dest="warn",
     type=str,
     choices=["all", "off", "error"],
     default="off",
     help="warning level (default 'off')",
 )
 parser.add_argument(
-    "--lint-all",
-    action="store_true",
-    help="do not disable any clang warnings",
+    "--lint",
+    type=str,
+    choices=["none", "misc", "unused", "all"],
+    default="none",
+    help="which category of clang warnings to emit",
 )
 parser.add_argument(
     "--no-lint-error",
@@ -391,7 +392,7 @@ clang_warnings = [
 if args.lint_error:
     clang_warnings.append("error")
 
-clang_disabled_warnings = [
+clang_warnings_misc = [
     "bitfield-constant-conversion",
     "integer-overflow",
     "missing-braces",
@@ -399,11 +400,14 @@ clang_disabled_warnings = [
     "return-type",
     "sign-compare",
     "sometimes-uninitialized",
+    "typedef-redefinition",  # TODO: enable
+]
+
+clang_warnings_unused = [
     "unused-but-set-variable",  # TODO: enable
     "unused-parameter",  # TODO: enable
     "unused-value",  # TODO: enable
     "unused-variable",  # TODO: enable
-    "typedef-redefinition",  # TODO: enable
 ]
 
 
@@ -420,8 +424,14 @@ clang_flags_base = [
     *[f"-W{s}" for s in clang_warnings],
 ]
 
-if not args.lint_all:
-    clang_flags_base.extend(f"-Wno-{s}" for s in clang_disabled_warnings),
+# args.lint is the warnings we want but we send clang the ones we don't want
+clang_disabled_warnings = []
+if args.lint not in {"unused", "all"}:
+    clang_disabled_warnings.extend(clang_warnings_unused)
+if args.lint not in {"misc", "all"}:
+    clang_disabled_warnings.extend(clang_warnings_misc)
+clang_flags_base.extend([f"-Wno-{s}" for s in clang_disabled_warnings])
+
 
 config.extra_clang_flags.extend(clang_flags_base)
 

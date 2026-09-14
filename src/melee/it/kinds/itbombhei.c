@@ -2,6 +2,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include "itbombhei.static.h"
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
@@ -9,7 +10,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00F9.h>
 
 #define GET_ATTRS(ip)                                                         \

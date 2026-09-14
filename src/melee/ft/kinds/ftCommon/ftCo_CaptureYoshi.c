@@ -3,10 +3,10 @@
 #include <Runtime/platform.h>
 
 #include "ftCo_Attack100.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 void ftCo_800BBB8C(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)

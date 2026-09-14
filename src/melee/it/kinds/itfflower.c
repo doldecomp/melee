@@ -9,7 +9,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
-#include <melee/it/kinds/inlines.h>
 
 /* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
 /* 293040 */ static bool itFflower_UnkMotion0_Anim(Item_GObj* gobj);

@@ -16,7 +16,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/kinds/ftCommon/ftCo_BarrelWait.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/kinds/itbox.h>

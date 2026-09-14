@@ -5,7 +5,6 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);

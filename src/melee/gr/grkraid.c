@@ -5,7 +5,6 @@
 #include "inlines.h"
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>

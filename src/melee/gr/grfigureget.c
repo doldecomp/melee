@@ -15,7 +15,6 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/inlines.h>
 #include <melee/it/kinds/itcoin.h>
 #include <melee/it/types.h>

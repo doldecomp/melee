@@ -4,6 +4,7 @@
 
 #include <math.h>
 
+#include "inlines.h"
 #include "types.h"
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -18,7 +19,6 @@
 #include <melee/it/itgroundcoll.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
-#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/jobj.h>

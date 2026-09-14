@@ -17,7 +17,6 @@
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gr/inlines.h>
 #include <melee/it/ithitbox.h>
 #include <melee/it/kinds/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>

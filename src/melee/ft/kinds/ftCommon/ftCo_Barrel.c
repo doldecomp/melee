@@ -11,7 +11,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/it/kinds/ittarucann.h>
 #include <melee/lb/lbcollision.h>
