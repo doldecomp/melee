@@ -20,7 +20,12 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-
+    - name: create dummy build includes
+      run: |
+        mkdir -p build/GALE01/include
+        touch build/GALE01/include/debug_font.inc \
+              build/GALE01/include/sislib_font.inc \
+              build/GALE01/macros.inc
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: ${{ matrix.hook }} --all-files
