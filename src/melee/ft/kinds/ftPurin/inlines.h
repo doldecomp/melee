@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTPURIN_INLINES_H
 #define MELEE_FT_CHARA_FTPURIN_INLINES_H
 
-#include <Runtime/platform.h>
-
 #include <math.h>
 
 #include <melee/ft/ftparts.h>

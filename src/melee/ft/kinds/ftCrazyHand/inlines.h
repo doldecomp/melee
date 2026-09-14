@@ -3,7 +3,6 @@
 
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ftbosslib.h>
-#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCrazyHand/types.h>
 #include <melee/ft/types.h>
 
