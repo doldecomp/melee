@@ -15,7 +15,16 @@
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
 
+#define SECTOR_SIZE 0x2000
+
 typedef enum {
+    error_ok = 0,
+    error_null_filename = 7,
+    error_bad_sector_size = 12,
+} cardError;
+
+typedef enum {
+    result_14 = 14,
     result_sentinel = 11,
 } cardResult;
 
