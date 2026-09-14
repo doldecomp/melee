@@ -209,6 +209,13 @@ static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
 }
 
+static inline void Fighter_UnsetDamageCallbacks(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->take_dmg_cb = NULL;
+    fp->death2_cb = NULL;
+}
+
 static inline void Fighter_ClearCmdVars(Fighter* fp)
 {
     fp->cmd_vars[3] = 0;

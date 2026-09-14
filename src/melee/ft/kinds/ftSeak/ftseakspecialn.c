@@ -352,20 +352,13 @@ void ftSk_SpecialNLoop_Coll(Fighter_GObj* gobj)
     }
 }
 
-static inline void clearDmgCallbacks(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = NULL;
-    fp->death2_cb = NULL;
-}
-
 void ftSk_SpecialNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* da = fp->dat_attrs;
     PAD_STACK(4 * 2);
     if (ft_80082708(gobj) == GA_Ground) {
-        clearDmgCallbacks(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
         if (da->x10 == 0) {
             ftCo_Fall_Enter(gobj);
         } else {
@@ -379,7 +372,7 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* da = fp->dat_attrs;
     if (ft_80082708(gobj) == GA_Ground) {
-        clearDmgCallbacks(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
         fp->u.sk.x0 = 0;
         fp->mv.sk.specialn.x4 = false;
         if (da->x10 == 0) {
@@ -417,7 +410,7 @@ void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* gobj)
     PAD_STACK(4 * 2);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCo_Landing_Enter_Basic(gobj);
-        clearDmgCallbacks(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
     }
 }
 
@@ -425,7 +418,7 @@ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        clearDmgCallbacks(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
         fp->u.sk.x0 = 0;
         fp->mv.sk.specialn.x4 = false;
         ftCo_Landing_Enter_Basic(gobj);

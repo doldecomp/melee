@@ -9,6 +9,7 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcmdscript.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemParasolOpen.h>
@@ -95,6 +96,12 @@ static inline void ftCommon_AirToGroundStateChange(Fighter_GObj* gobj,
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, msid, flags, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
+}
+
+static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
 }
 
 #endif

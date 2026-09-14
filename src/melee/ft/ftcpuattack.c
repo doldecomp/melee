@@ -14,6 +14,7 @@
 #include "kinds/ftSamus/forward.h"
 #include "kinds/ftYoshi/forward.h"
 #include "kinds/ftZelda/forward.h"
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/gr/ground.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
@@ -972,12 +973,6 @@ void ftCo_800B658C(Fighter* fp)
     ftCo_800B63D8(fp);
     ftCo_800B4880(fp, temp_r31->xA4);
     temp_r31->xA4 = 0;
-}
-
-static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
-{
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
 }
 
 static inline void ftCo_CpuFlickLstickX(Fighter* fp, s8 half, s8 full)

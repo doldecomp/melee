@@ -14,6 +14,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/types.h>
@@ -120,20 +121,13 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp2);
 }
 
-static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = NULL;
-    fp->death2_cb = NULL;
-}
-
 /// Luigi's grounded Cyclone Animation callback
 void ftLg_SpecialLw_Anim(HSD_GObj* gobj)
 {
     u8 _[4];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftLuigi_SpecialLw_SetNULL(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
         ft_8008A2BC(gobj);
     }
 }
@@ -150,7 +144,7 @@ void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftLuigi_SpecialLw_SetNULL(gobj);
+        Fighter_UnsetDamageCallbacks(gobj);
         {
             int landing_lag = attrs->x94_LUIGI_CYCLONE_LANDING_LAG;
 

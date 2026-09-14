@@ -24,6 +24,7 @@
 #include <melee/ft/ftcpuattack.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftPopo/ftpopospeciallw.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
@@ -241,12 +242,6 @@ int ftCo_803C5A68[] = {
 };
 
 /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
-
-static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
-{
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-}
 
 static inline void ftCo_CpuFinishWithNeutralY(Fighter* fp)
 {
