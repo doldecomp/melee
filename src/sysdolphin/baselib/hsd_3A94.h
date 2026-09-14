@@ -38,7 +38,7 @@ typedef struct CardState {
 } CardState;
 
 /* 3AAA48 */ void hsd_803AAA48(void);
-/* 3AC340 */ int hsd_803AC340(void* icon_info);
+/* 3AC340 */ int hsd_803AC340(CardIconInfo* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(struct CardState* file_desc, int file_idx,
                                int file_size, int file_flags, u8* data);
 /* 3AC340 */

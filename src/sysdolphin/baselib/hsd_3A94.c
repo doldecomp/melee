@@ -12,6 +12,12 @@
 #define BANNER_SMALL 0xE00
 #define BANNER_LARGE 0x1800
 
+typedef enum {
+    CardBanner_None,
+    CardBanner_Small,
+    CardBanner_Large,
+} CardBannerFormat;
+
 /// hsd_804D1138 viewed at CardCmd stride: entry 0 overlays the CardContext
 /// header, and entry i's x10 is CardContext::cmds[i].type.
 typedef struct CardBufEntry {
@@ -332,10 +338,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
         }
 
         switch (state->icon_info.banner_format) {
-        case 2:
+        case CardBanner_Large:
             banner_size = BANNER_LARGE;
             break;
-        case 1:
+        case CardBanner_Small:
             banner_size = BANNER_SMALL;
             break;
         default:
@@ -426,10 +432,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
         }
 
         switch (state->icon_info.banner_format) {
-        case 2:
+        case CardBanner_Large:
             banner_size11 = BANNER_LARGE;
             break;
-        case 1:
+        case CardBanner_Small:
             banner_size11 = BANNER_SMALL;
             break;
         default:
@@ -893,7 +899,7 @@ static inline void unpackCardStat(const s32* cmd, CARDStat* stat)
         CMD_STATE->icon_info.icon_speed[k] =
             (stat->iconSpeed >> (2 * k)) & CARD_STAT_SPEED_MASK;
     }
-    CMD_STATE->header_size = hsd_803AC340(&CMD_STATE->icon_info.banner_format);
+    CMD_STATE->header_size = hsd_803AC340(&CMD_STATE->icon_info);
     {
         u32 used = CMD_STATE->header_size + CMD_STATE->sector_size;
         used += 0x2F;
@@ -1333,11 +1339,11 @@ void hsd_803AAA48(void)
                     continue;
                 }
                 switch (CMD_STATE->icon_info.banner_format) {
-                case 2:
-                    banner_size = 0x1800;
+                case CardBanner_Large:
+                    banner_size = BANNER_LARGE;
                     break;
-                case 1:
-                    banner_size = 0xE00;
+                case CardBanner_Small:
+                    banner_size = BANNER_SMALL;
                     break;
                 default:
                     banner_size = 0;
@@ -1587,9 +1593,9 @@ void fn_803AC334(void)
     hsd_804D7998 = -1;
 }
 
-int hsd_803AC340(void* icon_info)
+int hsd_803AC340(CardIconInfo* icon_info)
 {
-    u8* data = icon_info;
+    u8* data = (void*) icon_info;
     int banner_size;
     int icon_size;
     int has_c8;
@@ -2003,11 +2009,11 @@ s32 fn_803ACD58(CardState* state, void* banner, void* icons)
     s32 icons_start;
 
     switch (state->icon_info.banner_format) {
-    case 2:
-        banner_size = 0x1800;
+    case CardBanner_Large:
+        banner_size = BANNER_LARGE;
         break;
-    case 1:
-        banner_size = 0xE00;
+    case CardBanner_Small:
+        banner_size = BANNER_SMALL;
         break;
     default:
         banner_size = 0;
@@ -4547,7 +4553,7 @@ s32 fn_803B0E9C(CardState* state, s32 banner, s32 icons, s32 is_new, s32 async)
     s32 has_blocks;
     u32 sector_size;
 
-    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
 
     if (is_new == 0) {
         if (async != 0) {
@@ -4644,21 +4650,24 @@ s32 fn_803B0E9C(CardState* state, s32 banner, s32 icons, s32 is_new, s32 async)
         }
     }
 
-    memcpy(state->sector_buf, state->comment, 0x40);
-    payload_pos = 0x40;
-    switch (state->icon_info.banner_format) {
-    case 2: {
-        void* dst = state->sector_buf + 0x40;
-        memcpy(dst, (UNK_T) banner, 0x1800);
-    }
-        payload_pos = 0x1840;
-        break;
-    case 1: {
-        void* dst = state->sector_buf + 0x40;
-        memcpy(dst, (UNK_T) banner, 0xE00);
-    }
-        payload_pos = 0xE40;
-        break;
+    {
+        const size_t comment_size = sizeof(state->comment);
+        memcpy(state->sector_buf, state->comment, comment_size);
+        payload_pos = comment_size;
+        switch (state->icon_info.banner_format) {
+        case CardBanner_Large: {
+            void* dst = state->sector_buf + comment_size;
+            memcpy(dst, (UNK_T) banner, BANNER_LARGE);
+        }
+            payload_pos = BANNER_LARGE + comment_size;
+            break;
+        case CardBanner_Small: {
+            void* dst = state->sector_buf + comment_size;
+            memcpy(dst, (UNK_T) banner, BANNER_SMALL);
+        }
+            payload_pos = BANNER_SMALL + comment_size;
+            break;
+        }
     }
 
     memset(digest, 0, sizeof(digest));
@@ -5401,7 +5410,7 @@ s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;
 
-    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
 
     blocks =
         (0x2F + state->header_size + state->sector_size) / state->sector_size;
@@ -5417,7 +5426,7 @@ s32 fn_803B26CC(CardState* state, s32 comment, s32 banner, s32 icons,
     CardContext* context = (CardContext*) hsd_804D1138;
     PAD_STACK(8);
 
-    state->header_size = hsd_803AC340(&state->icon_info.banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
     hsd_804D7998 = hsd_804D7984;
 
     result = queueHeaderBlocks(state, comment, banner, icons);
