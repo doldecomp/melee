@@ -7,6 +7,7 @@
 #include <melee/ft/ft_084E.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftpickupitem.h>
@@ -267,10 +268,7 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x0.y = 0.0F;
     fp->mv.lk.specialn.x0.x = 0.0F;
     fp->mv.lk.specialn.unk_timer = 0;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftCommon_8007D7FC(fp);
     msid = ftKb_MS_LkSpecialNStart;
     fp->self_vel.y = 0.0F;
@@ -314,10 +312,7 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x0.y = 0.0F;
     fp->mv.lk.specialn.x0.x = 0.0F;
     fp->mv.lk.specialn.unk_timer = 0;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
     case Ft_Kind_Link:
         break;

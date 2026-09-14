@@ -30,10 +30,7 @@ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x167, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftKp_SpecialHi_Enter_inline(gobj);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0f;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
     fp->mv.co.capturekoopa.xC = 0.0f;
@@ -51,10 +48,7 @@ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x168, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftKp_SpecialHi_Enter_inline(gobj);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftCommon_ClampGroundVel(fp, da->x60);
     fp->self_vel.y = da->x54;
     fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;

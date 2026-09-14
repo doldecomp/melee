@@ -14,6 +14,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
@@ -237,10 +238,7 @@ void ftKb_SpecialNSs_800FCF74(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialNStart, 0, 0.0F, 1.0F,
                               0.0F, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftCommon_8007D7FC(fp);
     fp->self_vel.y = 0.0F;
     ftKb_SpecialN_set_cbs(gobj);
@@ -256,10 +254,7 @@ void ftKb_SpecialNSs_800FD020(Fighter_GObj* gobj)
     PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialAirNStart, 0, 0.0F, 1.0F,
                               0.0F, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     ftKb_SpecialN_set_cbs(gobj);
     fp->mv.kb.specialhi.x0 = 1;
     fp->mv.kb.specialhi.x4 = 0;

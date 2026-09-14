@@ -368,10 +368,7 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(0x18);
 
     temp_r28 = fp->parts[FtPart_YRotN].joint;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
     fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;
@@ -401,10 +398,7 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(0x18);
 
     temp_r28 = fp->parts[FtPart_YRotN].joint;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
     fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;

@@ -84,7 +84,7 @@ static inline void doEnter(Fighter_GObj* gobj, ftSeak_MotionState msid)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     fp->throw_flags_b0 = false;
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.sk.specialn.x0 = 0;
     if (fp->u.sk.x0 == 0) {
         fp->u.sk.x0 = 1;

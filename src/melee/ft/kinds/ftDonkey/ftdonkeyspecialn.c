@@ -19,6 +19,7 @@
 #include <melee/ft/ftcolanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Escape.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
@@ -60,7 +61,7 @@ void ftDk_SpecialN_Enter(HSD_GObj* gobj)
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
     }
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.dk.specialn.x0 = 0;
     fp->mv.dk.specialn.x4 = 0;
     fp->mv.dk.specialn.x14 = -1;
@@ -88,7 +89,7 @@ void ftDk_SpecialAirN_Enter(HSD_GObj* gobj)
         fp->mv.dk.specialn.x8 = 0;
         fp->mv.dk.specialn.xC = 0;
     }
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.dk.specialn.x0 = 0;
     fp->mv.dk.specialn.x4 = 0;
     fp->mv.dk.specialn.x14 = -1;

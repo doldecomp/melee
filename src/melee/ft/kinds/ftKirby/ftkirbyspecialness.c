@@ -46,7 +46,7 @@ void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNStart, Ft_MF_None, 0.0f,
                               1.0f, 0.0f, NULL);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     {
         /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
@@ -86,7 +86,7 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialAirNStart, Ft_MF_None,
                               0.0f, 1.0f, 0.0f, NULL);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0f;
     {
         /// @todo @c da can't move below @c fp

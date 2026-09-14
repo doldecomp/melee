@@ -332,7 +332,7 @@ void ftPr_SpecialN_Enter(HSD_GObj* gobj)
         }
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     }
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
     ftPr_SpecialS_8013DC64(gobj);
     fp->x74_self_accel.y = 0;
@@ -355,7 +355,7 @@ void ftPr_SpecialAirN_Enter(HSD_GObj* gobj)
         }
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     }
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     ftAnim_8006EBA4(gobj);
     ftPr_SpecialS_8013DC64(gobj);
     fp->x74_self_accel.y = da->x3C;

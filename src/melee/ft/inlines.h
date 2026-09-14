@@ -209,6 +209,14 @@ static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
 }
 
+static inline void Fighter_ClearCmdVars(Fighter* fp)
+{
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+}
+
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
     return &fp->coll_data;
