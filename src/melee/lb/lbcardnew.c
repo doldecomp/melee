@@ -201,7 +201,7 @@ again:
         _p(x50C)(result);
         _p(x50C) = NULL;
     }
-    if (result != 11 && _p(unk_80) != 0) {
+    if (result != result_pending_ops && _p(unk_80) != 0) {
         CARDUnmount(_p(chan));
         _p(unk_80) = 0;
     }
@@ -344,7 +344,7 @@ int lb_8001A3A4(void)
     enabled = OSDisableInterrupts();
     check_result = CARDCheckAsync(_p(chan), onCardAttach);
     _p(saved_error) = lb_80019BB8(check_result);
-    if (_p(saved_error) == 0) {
+    if (_p(saved_error) == error_ok) {
         _p(pending_ops) += 1;
     }
     pending_ops = _p(pending_ops);
