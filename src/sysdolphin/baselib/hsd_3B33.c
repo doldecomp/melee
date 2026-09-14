@@ -19,7 +19,7 @@ void hsd_803B3344(u8 byte)
         return;
     }
 
-    longjmp(hsd_804D2648.buf, true);
+    __longjmp(&hsd_804D2648.buf, true);
 }
 
 void hsd_803B3398(void* src, size_t size)
@@ -32,5 +32,5 @@ void hsd_803B3398(void* src, size_t size)
         return;
     }
 
-    longjmp(hsd_804D2648.buf, true);
+    __longjmp(&hsd_804D2648.buf, true);
 }

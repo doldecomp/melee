@@ -86,7 +86,6 @@ typedef struct CardState {
 /* 3B26CC */ s32 fn_803B26CC(CardState* state, s32 comment, s32 banner,
                              s32 icons, void (*callback)(s32, s32));
 /* 4D1138 */ extern u8 hsd_804D1138[0x10];
-/* 4D2E70 */ extern u8 hsd_804D2E70[2084];
 /* 4D7990 */ extern s32 hsd_804D7990;
 /* 4D7994 */ extern s32 hsd_804D7994;
 /* 4D79A0 */ extern u8* hsd_804D79A0;

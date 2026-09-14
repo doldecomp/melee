@@ -34,6 +34,5 @@ void __longjmp(register jmp_buf* env, int val);
 int __setjmp(register jmp_buf* env);
 
 #define setjmp(env) __setjmp(&(env))
-#define longjmp(env, val) __longjmp(&(env), val)
 
 #endif
