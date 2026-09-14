@@ -2095,10 +2095,6 @@ s32 fn_8018F508(s32* out_index)
     return count;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 char* fn_8018F5F0(void)
 {
     if (lbLang_IsSavedLanguageUS()) {
@@ -2107,39 +2103,20 @@ char* fn_8018F5F0(void)
         return "SdTou.dat";
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// ???
 /// tournament uses the user data as just an int
 /// it controls various menu jobj states ie animation state, visibility, etc
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 u32 fn_8018F62C(HSD_GObj* gobj)
 {
     return (u32) gobj->user_data;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 TmData* gm_GetTournamentData(void)
 {
     return &gm_804771C4;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 u32 fn_8018F640(int arg0)
 {
     if (arg0 >= 4) {
@@ -2155,9 +2132,6 @@ u32 fn_8018F674(int arg0)
     }
     return gm_801A36C0(arg0);
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 u32 fn_8018F6A8(int arg0)
 {
@@ -2424,17 +2398,11 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
     return gobj;
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void fn_8019044C(HSD_JObj* jobj, float arg1)
 {
     HSD_JObjReqAnimAll(jobj, arg1);
     HSD_JObjAnimAll(jobj);
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 void fn_80190480(float arg8)
 {

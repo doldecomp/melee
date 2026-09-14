@@ -1340,10 +1340,6 @@ void hsd_803957C0(void* input)
     hsd_804CF810.x50 = saved;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 hsd_80395970(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -1380,10 +1376,6 @@ s32 hsd_80395970(void)
     hsd_80393E68(saved_x, saved_y);
     return result;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 extern struct lbl_8040BA5C_t {
     void* x0;

@@ -259,10 +259,6 @@ void fn_80190ABC(int mode)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void gm_80190EA4(void)
 {
     int i;
@@ -299,9 +295,6 @@ void gm_80190EA4(void)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// Initializes the time menu state when entering the time selection screen.
 void gm_80190FE4(int arg0)
@@ -1097,10 +1090,6 @@ void fn_8019249C(HSD_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_80192690(HSD_GObj* gobj)
 {
     TmData* tmdata = gm_GetTournamentData();
@@ -1118,9 +1107,6 @@ void fn_80192690(HSD_GObj* gobj)
     fn_8018FDC4(jobj, 666.0f, 666.0f, 0.3f);
     fn_8019044C(jobj, tmdata->cur_option - 0x11);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline HSD_JObj* fn_80192758_get_jobj(HSD_GObj* gobj,
                                              struct Lbl804799B8_t* data)
@@ -1380,10 +1366,6 @@ void fn_80192E6C(void)
     fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1, fn_80192690, 0.0f);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_80193230(void)
 {
     HSD_GObj* gobj;
@@ -1399,9 +1381,6 @@ void fn_80193230(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// @todo Fix ::GXColor casts
 void fn_80193308(void)
@@ -1500,10 +1479,6 @@ void fn_80193308(void)
     PAD_STACK(0x28);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_801935B8(void)
 {
     TmData* tm;
@@ -1549,9 +1524,6 @@ void fn_801935B8(void)
         lbl_803D9D20.x72[i] = gm_IsCKindUnlocked((u8) fn_8018F6FC(i));
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// Step the selected setting down, wrapping to its maximum.
 static inline void tmSettings_StepDown(s32* menu, TmSettingTable* table,

@@ -357,11 +357,6 @@ bool it_80272D1C(Item_GObj* item_gobj)
     return false;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 s32 it_80272D40(Item_GObj* item_gobj)
 {
     bool chk;
@@ -380,10 +375,6 @@ s32 it_80272D40(Item_GObj* item_gobj)
     }
     return 2;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itColl_BounceOffVictim(Item_GObj* gobj)
 {

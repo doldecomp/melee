@@ -150,10 +150,6 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
     css_data->vs.start.players[0].stocks = stocks;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
                  u8* nametag, u8* level)
 {
@@ -176,9 +172,6 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
         *nametag = css_data->vs.start.players[slot].nametag;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4,
                  u8 level, u8 arg6)
