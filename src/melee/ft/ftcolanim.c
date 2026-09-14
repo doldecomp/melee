@@ -135,7 +135,6 @@ void ftCo_800C0074(Fighter* fp)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma auto_inline off
 #pragma global_optimizer off
 #endif
 void ft_800C0098(Fighter* fp)
@@ -162,7 +161,6 @@ void ft_800C0098(Fighter* fp)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma auto_inline off
 #pragma global_optimizer off
 #endif
 void ftCo_800C0134(Fighter* fp)
