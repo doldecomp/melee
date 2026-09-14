@@ -4,12 +4,9 @@
 
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
+#include "hsd_4D11.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-
-typedef struct {
-    u8 x0[0x300];
-} __baselib_UnkType003;
 
 /// hsd_804D1138 viewed at CardCmd stride: entry 0 overlays the CardContext
 /// header, and entry i's x10 is CardContext::cmds[i].type.
@@ -91,7 +88,6 @@ typedef struct CardContext {
 /* 3A949C */ static void hsd_803A949C(s32 chan, s32 card_result);
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 4D1148 */ extern u32 hsd_804D1148[0x80][0x9];
-/* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
 /// Command ring head (next command to run) and tail (next free slot).
 /* 4D7980 */ extern volatile s32 hsd_804D7980;
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
@@ -920,7 +916,7 @@ void hsd_803AAA48(void)
 {
     s32 result;
     s32 chan;
-    while (1) {
+    while (true) {
         CardContext* ctx = (CardContext*) hsd_804D1138;
         CardState** state_ptr = &ctx->state;
         s32* cmd;
@@ -1375,33 +1371,35 @@ void hsd_803AAA48(void)
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 12: {
-            s32 retries;
-            CARDStat stat;
-            s32 i;
-            s32 file_no;
-            CMD_STATE->file_no = CMD_X8;
-            file_no = CMD_STATE->file_no;
-            chan = CMD_STATE->chan;
-            for (i = 0; i < 10; i++) {
-                result = CARDGetStatus(chan, file_no, &stat);
-                if (result != -1) {
-                    break;
+            PAD_STACK(4);
+            {
+                CARDStat stat;
+                s32 i;
+                s32 file_no;
+                CMD_STATE->file_no = CMD_X8;
+                file_no = CMD_STATE->file_no;
+                chan = CMD_STATE->chan;
+                for (i = 0; i < 10; i++) {
+                    result = CARDGetStatus(chan, file_no, &stat);
+                    if (result != -1) {
+                        break;
+                    }
                 }
-            }
-            if (result < 0) {
-                hsd_804D7988 = result;
-                hsd_804D799C = 0;
-            } else {
-                unpackCardStat(cmd, &stat);
-                if (stat.iconAddr != 0x40) {
-                    hsd_804D7988 = -0x106;
+                if (result < 0) {
+                    hsd_804D7988 = result;
                     hsd_804D799C = 0;
                 } else {
-                    CMD_TYPE = 0;
-                    hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                    unpackCardStat(cmd, &stat);
+                    if (stat.iconAddr != 0x40) {
+                        hsd_804D7988 = -0x106;
+                        hsd_804D799C = 0;
+                    } else {
+                        CMD_TYPE = 0;
+                        hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                    }
                 }
+                continue;
             }
-            continue;
         }
         case 13:
             result = retryCardFastOpen(CMD_STATE->chan, CMD_STATE->file_no,
@@ -1498,7 +1496,7 @@ s32 fn_803AC168(s32* cmd_buf)
     {
         s32 idx = hsd_804D7984;
         hsd_804D7984 = (hsd_804D7984 + 1) % 128;
-        memcpy((u8*) hsd_804D1148[idx], cmd_buf, sizeof(CardCmd));
+        memcpy(hsd_804D1148[idx], cmd_buf, sizeof(CardCmd));
     }
 
     if (mode == 2) {
@@ -5279,13 +5277,13 @@ void hsd_803B2374(void)
     hsd_804D7988 = 0;
 }
 
-void hsd_803B24E4(s32* ctx, int chan, int sector_size, void* work_buf)
+void hsd_803B24E4(CardState* ctx, int chan, int sector_size, void* work_buf)
 {
-    memset((CardState*) ctx, 0, sizeof(CardState));
-    ((CardState*) ctx)->file_no = -1;
-    ((CardState*) ctx)->chan = chan;
-    ((CardState*) ctx)->sector_size = sector_size;
-    ((CardState*) ctx)->sector_buf = work_buf;
+    memset(ctx, 0, sizeof(*ctx));
+    (ctx)->file_no = -1;
+    (ctx)->chan = chan;
+    (ctx)->sector_size = sector_size;
+    (ctx)->sector_buf = work_buf;
 }
 
 static inline CardRequest* hsd_803B2550_inline(u8* base, s32 idx)

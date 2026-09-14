@@ -365,7 +365,8 @@ int lb_8001A594(char* filename, void* file_entries)
                 open_result = CARDOpen(_p(chan), filename, &_p(file_info));
                 CARDClose(&_p(file_info));
                 HSD_ASSERT(0x2C8, _p(lib_area));
-                hsd_803B24E4(&_p(unk_A8), _p(chan), 0x2000, _p(lib_area));
+                hsd_803B24E4((CardState*) &_p(unk_A8), _p(chan), 0x2000,
+                             _p(lib_area));
                 if (open_result == 0) {
                     hsd_result =
                         hsd_803B2550(&_p(unk_A8), filename, fn_8001A0B0);
@@ -1098,7 +1099,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
 
     entry = file_entries;
     ctx = &_p(unk_A8);
-    hsd_803B24E4(ctx, 0, 0x2000, _p(lib_area));
+    hsd_803B24E4((CardState*) ctx, 0, 0x2000, _p(lib_area));
     hsd_803B2ADC(ctx, icon);
     {
         int i;
