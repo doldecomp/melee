@@ -5,12 +5,9 @@
 
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
+#include "hsd_4D11.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-
-typedef struct {
-    u8 x0[0x300];
-} __baselib_UnkType003;
 
 /// hsd_804D1138 viewed at CardCmd stride: entry 0 overlays the CardContext
 /// header, and entry i's x10 is CardContext::cmds[i].type.
@@ -132,16 +129,7 @@ typedef struct CardContext {
 /* 3A949C */
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 4D1148 */ extern u32 hsd_804D1148[0x80][0x9];
-/* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
-/// Command ring head (next command to run) and tail (next free slot).
-/* 4D7980 */ extern volatile s32 hsd_804D7980;
-/* 4D7984 */ extern volatile s32 hsd_804D7984;
-/// Result of the request in progress: negative = CARD error, 1 = data
-/// verified so the queued writes are skipped, 2 = verify mismatch.
-/* 4D7988 */ extern s32 hsd_804D7988;
-/* 4D798C */ extern s32 hsd_804D798C;
-/// Ring tail saved before queueing a request; -1 when nothing to roll back.
-/* 4D7998 */ extern s32 hsd_804D7998;
+
 /// 0 = running commands, 1 = async CARD call in flight, 2 = idle.
 /* 4D799C */ extern s32 hsd_804D799C;
 /// .sbss globals emit in reverse declaration order.
@@ -155,7 +143,6 @@ typedef struct CardContext {
 /* 4D79A8 */ s32 hsd_804D79A8;
 /* 4D79A4 */ u8* hsd_804D79A4;
 /* 4D79A0 */ u8* hsd_804D79A0;
-/* 4D2E70 */ static u8 hsd_804D2E70[2084];
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
