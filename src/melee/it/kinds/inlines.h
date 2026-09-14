@@ -254,4 +254,21 @@ static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
     return false;
 }
 
+static inline void Item_CopyJObjScale(HSD_JObj* dst, HSD_JObj* src,
+                                      Vec3* scale)
+{
+    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
+    HSD_JObjSetScale(dst, scale);
+}
+
+static inline void Item_WrapAngle(f32* angle)
+{
+    while (*angle < 0.0F) {
+        *angle += M_TAU;
+    }
+    while (*angle > M_TAU) {
+        *angle -= M_TAU;
+    }
+}
+
 #endif

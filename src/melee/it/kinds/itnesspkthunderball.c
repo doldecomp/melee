@@ -22,16 +22,6 @@ ItemStateTable it_803F6BC8[] = { { 0, itNesspkthunderball_UnkMotion0_Anim,
                                    itNesspkthunderball_UnkMotion0_Phys,
                                    itNesspkthunderball_UnkMotion0_Coll } };
 
-static inline void normalizeAngle(f32* angle)
-{
-    while (*angle < 0.0F) {
-        *angle += M_TAU;
-    }
-    while (*angle > M_TAU) {
-        *angle -= M_TAU;
-    }
-}
-
 void it_802AB3F0(Item_GObj* gobj, Vec3* out, s32 idx)
 {
     if (gobj != NULL) {
@@ -400,7 +390,7 @@ bool it_802AC098(Item_GObj* gobj)
 
     ip->xDD4_itemVar.pkthunder.xF00 = 1;
     ip->xDD4_itemVar.pkthunder.angles[0] += M_PI;
-    normalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_WrapAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
 
     for (i = 0; i < 6; i++) {
         if (ip->xDD4_itemVar.pkthunder.xDD4[i] != NULL) {
@@ -441,7 +431,7 @@ bool it_802AC35C(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     ip->xDD4_itemVar.pkthunder.angles[0] =
         atan2f(ip->x40_vel.y, ip->x40_vel.x);
-    normalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_WrapAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
     return false;
 }
 

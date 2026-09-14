@@ -13,6 +13,7 @@
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/it/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -31,16 +32,6 @@ bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
                        0);
 }
 
-static inline void normalizeAngle(f32* angle)
-{
-    while (*angle < 0.0F) {
-        *angle += M_TAU;
-    }
-    while (*angle > M_TAU) {
-        *angle -= M_TAU;
-    }
-}
-
 void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
                  f32 speed)
 {
@@ -48,7 +39,7 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     Item_GObj* item_gobj;
     bool right_facing;
 
-    normalizeAngle(&angle);
+    Item_WrapAngle(&angle);
     spawn.kind = kind;
     Item_InitSpawnPositionFromParent(&spawn, parent, pos);
     right_facing = true;

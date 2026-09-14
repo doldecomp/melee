@@ -370,12 +370,6 @@ void itDrMarioPill_PickedUp(Item_GObj* gobj)
     it_8026B3A8(gobj);
 }
 
-static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
-{
-    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
-    HSD_JObjSetScale(dst, scale);
-}
-
 static bool itDrMarioPill_Motion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -384,8 +378,8 @@ static bool itDrMarioPill_Motion6_Anim(Item_GObj* gobj)
     gobj = ip->xDD4_itemVar.drmariopill.x4;
     if ((gobj != NULL) && (ftCo_800BF228(gobj) == true)) {
         Vec3 scale;
-        copy_jobj_scale(GET_JOBJ(orig),
-                        GET_JOBJ(ip->xDD4_itemVar.drmariopill.x4), &scale);
+        Item_CopyJObjScale(GET_JOBJ(orig),
+                           GET_JOBJ(ip->xDD4_itemVar.drmariopill.x4), &scale);
     }
     return false;
 }
