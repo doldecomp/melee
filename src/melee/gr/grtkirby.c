@@ -11,46 +11,46 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-void grTKirby_80221364(bool);                  /* static */
-void grTKirby_80221368(void);                  /* static */
-void grTkirby_UnkStage0_OnLoad(void);          /* static */
-void grTkirby_UnkStage0_OnStart(void);         /* static */
-bool grTKirby_80221400(void);                  /* static */
-HSD_GObj* grTKirby_80221408(int);              /* static */
-void grTKirby_802214F0(Ground_GObj*);          /* static */
-bool grTKirby_8022151C(Ground_GObj*);          /* static */
-void grTKirby_80221524(Ground_GObj*);          /* static */
-void grTKirby_80221528(Ground_GObj*);          /* static */
-void grTKirby_8022152C(Ground_GObj*);          /* static */
-bool grTKirby_8022157C(Ground_GObj*);          /* static */
-void grTKirby_80221584(Ground_GObj*);          /* static */
-void grTKirby_802215B8(Ground_GObj*);          /* static */
-void grTKirby_802215BC(Ground_GObj*);          /* static */
-bool grTKirby_8022160C(Ground_GObj*);          /* static */
-void grTKirby_80221614(Ground_GObj*);          /* static */
+void grTKirby_80221364(bool); /* static */
+static void grTKirby_OnInit(void);
+void grTkirby_UnkStage0_OnLoad(void);  /* static */
+void grTkirby_UnkStage0_OnStart(void); /* static */
+bool grTKirby_80221400(void);          /* static */
+HSD_GObj* grTKirby_80221408(int);      /* static */
+static void stageGObj0_OnInit(Ground_GObj*);
+bool grTKirby_8022151C(Ground_GObj*); /* static */
+void grTKirby_80221524(Ground_GObj*); /* static */
+void grTKirby_80221528(Ground_GObj*); /* static */
+static void stageGObj2_OnInit(Ground_GObj*);
+bool grTKirby_8022157C(Ground_GObj*); /* static */
+static void stageGObj2_GObjProc(Ground_GObj*);
+void grTKirby_802215B8(Ground_GObj*); /* static */
+static void stageGObj1_OnInit(Ground_GObj*);
+bool grTKirby_8022160C(Ground_GObj*); /* static */
+static void stageGObj1_GObjProc(Ground_GObj*);
 void grTKirby_80221634(Ground_GObj*);          /* static */
 DynamicsDesc* grTKirby_80221638(enum_t);       /* static */
 bool grTKirby_80221640(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTKb_StageCallbacks[] = {
     {
-        grTKirby_802214F0,
+        stageGObj0_OnInit,
         grTKirby_8022151C,
         grTKirby_80221524,
         grTKirby_80221528,
         0,
     },
     {
-        grTKirby_802215BC,
+        stageGObj1_OnInit,
         grTKirby_8022160C,
-        grTKirby_80221614,
+        stageGObj1_GObjProc,
         grTKirby_80221634,
         0,
     },
     {
-        grTKirby_8022152C,
+        stageGObj2_OnInit,
         grTKirby_8022157C,
-        grTKirby_80221584,
+        stageGObj2_GObjProc,
         grTKirby_802215B8,
         (1 << 31) | (1 << 30),
     },
@@ -61,7 +61,7 @@ StageData grTKb_StageData = {
     Gr_Kind_TKirby,
     grTKb_StageCallbacks,
     "/GrTKb.dat",
-    grTKirby_80221368,
+    grTKirby_OnInit,
     grTKirby_80221364,
     grTkirby_UnkStage0_OnLoad,
     grTkirby_UnkStage0_OnStart,
@@ -75,7 +75,7 @@ StageData grTKb_StageData = {
 
 void grTKirby_80221364(bool unk) {}
 
-void grTKirby_80221368(void)
+static void grTKirby_OnInit(void)
 {
     Ground_InitTargetStage(grTKirby_80221408);
 }
@@ -108,9 +108,9 @@ HSD_GObj* grTKirby_80221408(int arg0)
     return gobj;
 }
 
-void grTKirby_802214F0(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTKirby_8022151C(Ground_GObj* gobj)
@@ -122,9 +122,9 @@ void grTKirby_80221524(Ground_GObj* gobj) {}
 
 void grTKirby_80221528(Ground_GObj* gobj) {}
 
-void grTKirby_8022152C(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTKirby_8022157C(Ground_GObj* gobj)
@@ -132,16 +132,16 @@ bool grTKirby_8022157C(Ground_GObj* gobj)
     return false;
 }
 
-void grTKirby_80221584(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTKirby_802215B8(Ground_GObj* gobj) {}
 
-void grTKirby_802215BC(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTKirby_8022160C(Ground_GObj* gobj)
@@ -149,9 +149,9 @@ bool grTKirby_8022160C(Ground_GObj* gobj)
     return false;
 }
 
-void grTKirby_80221614(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTKirby_80221634(Ground_GObj* gobj) {}

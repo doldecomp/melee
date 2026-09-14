@@ -88,6 +88,9 @@ static struct grGreens_YakumonoParam* yakumono_param;
 static u8 grGr_804D6AAC;
 static u8 grGr_804D6AAD;
 
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj3_OnInit(Ground_GObj* gobj);
+
 static StageCallbacks grGr_callbacks[] = {
     {
         grGreens_8021360C,
@@ -97,7 +100,7 @@ static StageCallbacks grGr_callbacks[] = {
         0,
     },
     {
-        grGreens_80213910,
+        stageGObj1_OnInit,
         grGreens_8021393C,
         grGreens_80213944,
         grGreens_80213948,
@@ -111,7 +114,7 @@ static StageCallbacks grGr_callbacks[] = {
         0,
     },
     {
-        grGreens_8021394C,
+        stageGObj3_OnInit,
         grGreens_80213978,
         grGreens_80213980,
         grGreens_80213984,
@@ -311,9 +314,9 @@ void grGreens_80213908(Ground_GObj* arg) {}
 
 void grGreens_8021390C(Ground_GObj* arg) {}
 
-void grGreens_80213910(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grGreens_8021393C(Ground_GObj* arg)
@@ -325,9 +328,9 @@ void grGreens_80213944(Ground_GObj* arg) {}
 
 void grGreens_80213948(Ground_GObj* arg) {}
 
-void grGreens_8021394C(Ground_GObj* gobj)
+static void stageGObj3_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grGreens_80213978(Ground_GObj* arg)
@@ -730,7 +733,7 @@ void grGreens_80214674(Ground_GObj* gobj)
     Ground_GObj* new_var;
     Ground* gp = GET_GROUND(gobj);
     new_var = gobj;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
     gp->u.greens.x4 = HSD_MemAlloc(5 * 6 * sizeof(*gp->u.greens.x4));
     memzero(gp->u.greens.x4, 5 * 6 * sizeof(*gp->u.greens.x4));
     gp->u.greens.x8_blocks = HSD_MemAlloc(5 * sizeof(*gp->u.greens.x8_blocks));
@@ -760,7 +763,7 @@ void grGreens_8021479C(Ground_GObj* gobj)
     if (!gp->u.greens.x0_flags.b0) {
         grGreens_802166C4(gobj);
     }
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     if (!gp->u.greens.x0_flags.b0) {
         grGreens_80216C20(gobj);
     }

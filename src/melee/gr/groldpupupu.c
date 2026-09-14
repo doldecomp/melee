@@ -53,9 +53,11 @@ typedef struct grOldPupupuSpawnDesc {
     s16 x2;
 } grOldPupupuSpawnDesc;
 
+static void stageGObj0_OnInit(Ground_GObj* gobj);
+
 StageCallbacks grOp_StageCallbacks[] = {
     {
-        grOldPupupu_8021099C,
+        stageGObj0_OnInit,
         grOldPupupu_802109C8,
         grOldPupupu_802109D0,
         grOldPupupu_802109D4,
@@ -206,9 +208,9 @@ static grOldPupupuSpawnDesc grOp_803E67B0[10] = {
 static int grOp_803E67D8[3] = { 0, 1, 2 };
 static Vec3 grOp_803E67E4[2] = { { -1.0F, 0.0F, 0.0F }, { 1.0F, 0.0F, 0.0F } };
 
-void grOldPupupu_8021099C(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grOldPupupu_802109C8(Ground_GObj* gobj)
@@ -283,7 +285,7 @@ void grOldPupupu_80210B58(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     gp->x11_flags.b012 = 1;
 }
 

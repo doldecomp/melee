@@ -13,7 +13,6 @@
 /* 1FCCB0 */ void grInishie2_801FCCB0(void);
 /* 1FCCD4 */ bool grInishie2_801FCCD4(void);
 /* 1FCCDC */ HSD_GObj* grInishie2_801FCCDC(int);
-/* 1FCDC8 */ void grInishie2_801FCDC8(Ground_GObj*);
 /* 1FCDF4 */ bool grInishie2_801FCDF4(Ground_GObj*);
 /* 1FCDFC */ void grInishie2_801FCDFC(Ground_GObj*);
 /* 1FCE00 */ void grInishie2_801FCE00(Ground_GObj*);

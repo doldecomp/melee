@@ -238,7 +238,7 @@ void grBattle_GObj0_Callback3(Ground_GObj* arg0) {}
 
 void grBattle_GObj6_Callback0(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grBattle_GObj6_Callback1(Ground_GObj* arg0)
@@ -248,7 +248,7 @@ bool grBattle_GObj6_Callback1(Ground_GObj* arg0)
 
 void grBattle_GObj6_Callback2(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     lb_800115F4();
 }
 
@@ -257,7 +257,7 @@ void grBattle_GObj6_Callback3(Ground_GObj* arg0) {}
 void grBattle_GObj5_Callback0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
     gp->x11_flags.b012 = 2;
 }
 

@@ -21,7 +21,7 @@ static void grShrine_UnkStage0_OnLoad(void);
 static void grShrine_UnkStage0_OnStart(void);
 static bool grShrine_80201D18(void);
 static HSD_GObj* grShrine_80201D20(s32);
-static void grShrine_80201E08(Ground_GObj*);
+static void stageGObj0_OnInit(Ground_GObj*);
 static bool grShrine_80201E34(Ground_GObj*);
 static void grShrine_80201E3C(Ground_GObj*);
 static void grShrine_80201E40(Ground_GObj*);
@@ -40,7 +40,7 @@ static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 static void* yakumono_param;
 
 static StageCallbacks grSh_StageCallbacks[3] = {
-    { grShrine_80201E08, grShrine_80201E34, grShrine_80201E3C,
+    { stageGObj0_OnInit, grShrine_80201E34, grShrine_80201E3C,
       grShrine_80201E40, 0 },
     { grShrine_80201E44, grShrine_80201E88, grShrine_80201E90,
       grShrine_80201E94, 0 },
@@ -115,9 +115,9 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     return gobj;
 }
 
-static void grShrine_80201E08(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grShrine_80201E34(Ground_GObj* arg0)
@@ -152,10 +152,10 @@ static void grShrine_80201E9C(Ground_GObj* gobj)
     u8 _[8];
 
     Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C10B8(gobj, grShrine_80201E98);
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
     gp->x10_flags.b5 = true;
 }
 
@@ -166,7 +166,7 @@ static bool grShrine_80201F14(Ground_GObj* arg0)
 
 static void grShrine_80201F1C(Ground_GObj* arg0)
 {
-    Ground_801C2FE0(arg0);
+    Ground_UpdateMapColl(arg0);
     lb_800115F4();
 }
 

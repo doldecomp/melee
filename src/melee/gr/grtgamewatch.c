@@ -9,12 +9,18 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
+static void grTGameWatch_OnInit(void);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
+static void stageGObj2_GObjProc(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
+static void stageGObj1_GObjProc(Ground_GObj* gobj);
+
 StageCallbacks grTGw_StageCallbacks[] = {
     { grTGameWatch_8022429C, grTGameWatch_802242C8, grTGameWatch_802242D0,
       grTGameWatch_802242D4, 0 },
-    { grTGameWatch_80224368, grTGameWatch_802243B8, grTGameWatch_802243C0,
+    { stageGObj1_OnInit, grTGameWatch_802243B8, stageGObj1_GObjProc,
       grTGameWatch_802243E0, 0 },
-    { grTGameWatch_802242D8, grTGameWatch_80224328, grTGameWatch_80224330,
+    { stageGObj2_OnInit, grTGameWatch_80224328, stageGObj2_GObjProc,
       grTGameWatch_80224364, 0xC0000000 },
     { NULL, NULL, NULL, NULL, 0 }
 };
@@ -23,7 +29,7 @@ StageData grTGw_StageData = {
     Gr_Kind_TGamewatch,
     grTGw_StageCallbacks,
     "/GrTGw.dat",
-    grTGameWatch_80224114,
+    grTGameWatch_OnInit,
     grTGameWatch_80224110,
     grTgamewatch_UnkStage0_OnLoad,
     grTgamewatch_UnkStage0_OnStart,
@@ -38,7 +44,7 @@ void grTGameWatch_80224110(bool unused)
     return;
 }
 
-void grTGameWatch_80224114(void)
+static void grTGameWatch_OnInit(void)
 {
     Ground_InitTargetStage(grTGameWatch_802241B4);
 }
@@ -95,9 +101,9 @@ void grTGameWatch_802242D4(Ground_GObj* gobj)
     return;
 }
 
-void grTGameWatch_802242D8(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGameWatch_80224328(Ground_GObj* gobj)
@@ -105,9 +111,9 @@ bool grTGameWatch_80224328(Ground_GObj* gobj)
     return false;
 }
 
-void grTGameWatch_80224330(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTGameWatch_80224364(Ground_GObj* gobj)
@@ -115,9 +121,9 @@ void grTGameWatch_80224364(Ground_GObj* gobj)
     return;
 }
 
-void grTGameWatch_80224368(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTGameWatch_802243B8(Ground_GObj* gobj)
@@ -125,9 +131,9 @@ bool grTGameWatch_802243B8(Ground_GObj* gobj)
     return false;
 }
 
-void grTGameWatch_802243C0(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTGameWatch_802243E0(Ground_GObj* gobj)

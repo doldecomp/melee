@@ -16,40 +16,40 @@
 /* 2238DC */ static void grTseak_OnStart(void);
 /* 223900 */ static bool grTSeak_80223900(void);
 /* 223908 */ static HSD_GObj* grTSeak_80223908(int);
-/* 2239F0 */ static void grTSeak_802239F0(Ground_GObj*);
+/* 2239F0 */ static void stageGObj0_OnInit(Ground_GObj*);
 /* 223A1C */ static bool grTSeak_80223A1C(Ground_GObj*);
 /* 223A24 */ static void grTSeak_80223A24(Ground_GObj*);
 /* 223A28 */ static void grTSeak_80223A28(Ground_GObj*);
-/* 223A2C */ static void grTSeak_80223A2C(Ground_GObj*);
+/* 223A2C */ static void stageGObj2_OnInit(Ground_GObj*);
 /* 223A7C */ static bool grTSeak_80223A7C(Ground_GObj*);
-/* 223A84 */ static void grTSeak_80223A84(Ground_GObj*);
+/* 223A84 */ static void stageGObj2_GObjProc(Ground_GObj*);
 /* 223AB8 */ static void grTSeak_80223AB8(Ground_GObj*);
-/* 223ABC */ static void grTSeak_80223ABC(Ground_GObj*);
+/* 223ABC */ static void stageGObj1_OnInit(Ground_GObj*);
 /* 223B0C */ static bool grTSeak_80223B0C(Ground_GObj*);
-/* 223B14 */ static void grTSeak_80223B14(Ground_GObj*);
+/* 223B14 */ static void stageGObj1_GObjProc(Ground_GObj*);
 /* 223B34 */ static void grTSeak_80223B34(Ground_GObj*);
 /* 223B38 */ static DynamicsDesc* grTSeak_OnTouchLine(enum_t);
 /* 223B40 */ static bool grTSeak_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTSk_StageCallbacks[] = {
     {
-        grTSeak_802239F0,
+        stageGObj0_OnInit,
         grTSeak_80223A1C,
         grTSeak_80223A24,
         grTSeak_80223A28,
         0,
     },
     {
-        grTSeak_80223ABC,
+        stageGObj1_OnInit,
         grTSeak_80223B0C,
-        grTSeak_80223B14,
+        stageGObj1_GObjProc,
         grTSeak_80223B34,
         0,
     },
     {
-        grTSeak_80223A2C,
+        stageGObj2_OnInit,
         grTSeak_80223A7C,
-        grTSeak_80223A84,
+        stageGObj2_GObjProc,
         grTSeak_80223AB8,
         (1 << 31) | (1 << 30),
     },
@@ -105,9 +105,9 @@ HSD_GObj* grTSeak_80223908(int arg0)
     return gobj;
 }
 
-void grTSeak_802239F0(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 bool grTSeak_80223A1C(Ground_GObj* gobj)
@@ -119,9 +119,9 @@ void grTSeak_80223A24(Ground_GObj* gobj) {}
 
 void grTSeak_80223A28(Ground_GObj* gobj) {}
 
-void grTSeak_80223A2C(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTSeak_80223A7C(Ground_GObj* gobj)
@@ -129,16 +129,16 @@ bool grTSeak_80223A7C(Ground_GObj* gobj)
     return false;
 }
 
-void grTSeak_80223A84(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTSeak_80223AB8(Ground_GObj* gobj) {}
 
-void grTSeak_80223ABC(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTSeak_80223B0C(Ground_GObj* gobj)
@@ -146,9 +146,9 @@ bool grTSeak_80223B0C(Ground_GObj* gobj)
     return false;
 }
 
-void grTSeak_80223B14(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTSeak_80223B34(Ground_GObj* gobj) {}

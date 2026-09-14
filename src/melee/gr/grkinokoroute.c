@@ -323,7 +323,7 @@ void grKinokoRoute_80207B5C(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* reb0_jobj;
 
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_InitMapColl(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
@@ -499,7 +499,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         gp->u.kinokoroute2.cam_timer -= 1;
     }
 
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
     if (gp->u.kinokoroute2.flags_0) {
         mpLib_80058560();
         gp->u.kinokoroute2.flags_0 = false;

@@ -42,7 +42,6 @@
 /* 1DF8D0 */ void grCorneria_801DF8D0(Ground_GObj*);
 /* 1DFBC4 */ bool grCorneria_801DFBC4(Ground_GObj*);
 /* 1DFBCC */ void grCorneria_801DFBCC(Ground_GObj*);
-/* 1DFBF0 */ void grCorneria_801DFBF0(Ground_GObj*);
 /* 1DFC1C */ bool grCorneria_801DFC1C(Ground_GObj*);
 /* 1DFC2C */ void grCorneria_801DFC2C(Ground_GObj*);
 /* 1DFC90 */ bool grCorneria_801DFC90(Ground_GObj*);

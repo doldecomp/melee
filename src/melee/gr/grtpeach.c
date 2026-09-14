@@ -14,7 +14,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 2228B4 */ static void grTPeach_802228B4(bool arg0);
-/* 2228B8 */ static void grTPeach_802228B8(void);
+/* 2228B8 */ static void grTPeach_OnInit(void);
 /* 222928 */ static void grTpeach_UnkStage0_OnLoad(void);
 /* 22292C */ static void grTpeach_UnkStage0_OnStart(void);
 /* 222950 */ static bool grTPeach_80222950(void);
@@ -23,13 +23,13 @@
 /* 222A6C */ static bool grTPeach_80222A6C(Ground_GObj* gobj);
 /* 222A74 */ static void grTPeach_80222A74(Ground_GObj* gobj);
 /* 222A78 */ static void grTPeach_80222A78(Ground_GObj* gobj);
-/* 222A7C */ static void grTPeach_80222A7C(Ground_GObj* gobj);
+/* 222A7C */ static void stageGObj2_OnInit(Ground_GObj* gobj);
 /* 222ACC */ static bool grTPeach_80222ACC(Ground_GObj* gobj);
-/* 222AD4 */ static void grTPeach_80222AD4(Ground_GObj* gobj);
+/* 222AD4 */ static void stageGObj2_GObjProc(Ground_GObj* gobj);
 /* 222B08 */ static void grTPeach_80222B08(Ground_GObj* gobj);
-/* 222B0C */ static void grTPeach_80222B0C(Ground_GObj* gobj);
+/* 222B0C */ static void stageGObj1_OnInit(Ground_GObj* gobj);
 /* 222B5C */ static bool grTPeach_80222B5C(Ground_GObj* gobj);
-/* 222B64 */ static void grTPeach_80222B64(Ground_GObj* gobj);
+/* 222B64 */ static void stageGObj1_GObjProc(Ground_GObj* gobj);
 /* 222B84 */ static void grTPeach_80222B84(Ground_GObj* gobj);
 /* 222B88 */ static DynamicsDesc* grTPeach_80222B88(enum_t arg0);
 /* 222B90 */ static bool grTPeach_80222B90(Vec3* arg0, int arg1,
@@ -44,16 +44,16 @@ StageCallbacks grTPe_StageCallbacks[4] = {
         0,
     },
     {
-        grTPeach_80222B0C,
+        stageGObj1_OnInit,
         grTPeach_80222B5C,
-        grTPeach_80222B64,
+        stageGObj1_GObjProc,
         grTPeach_80222B84,
         0,
     },
     {
-        grTPeach_80222A7C,
+        stageGObj2_OnInit,
         grTPeach_80222ACC,
-        grTPeach_80222AD4,
+        stageGObj2_GObjProc,
         grTPeach_80222B08,
         (1 << 30) | (1 << 31),
     },
@@ -70,7 +70,7 @@ StageData grTPe_StageData = {
     Gr_Kind_TPeach,
     grTPe_StageCallbacks,
     "/GrTPe.dat",
-    grTPeach_802228B8,
+    grTPeach_OnInit,
     grTPeach_802228B4,
     grTpeach_UnkStage0_OnLoad,
     grTpeach_UnkStage0_OnStart,
@@ -84,7 +84,7 @@ StageData grTPe_StageData = {
 
 void grTPeach_802228B4(bool arg0) {}
 
-void grTPeach_802228B8(void)
+static void grTPeach_OnInit(void)
 {
     Ground_InitTargetStage(grTPeach_80222958);
 }
@@ -131,9 +131,9 @@ void grTPeach_80222A74(Ground_GObj* gobj) {}
 
 void grTPeach_80222A78(Ground_GObj* gobj) {}
 
-void grTPeach_80222A7C(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPeach_80222ACC(Ground_GObj* gobj)
@@ -141,16 +141,16 @@ bool grTPeach_80222ACC(Ground_GObj* gobj)
     return false;
 }
 
-void grTPeach_80222AD4(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 void grTPeach_80222B08(Ground_GObj* gobj) {}
 
-void grTPeach_80222B0C(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 bool grTPeach_80222B5C(Ground_GObj* gobj)
@@ -158,9 +158,9 @@ bool grTPeach_80222B5C(Ground_GObj* gobj)
     return false;
 }
 
-void grTPeach_80222B64(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 void grTPeach_80222B84(Ground_GObj* gobj) {}

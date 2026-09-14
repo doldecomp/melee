@@ -13,7 +13,6 @@
 /* 1FE098 */ void grKraid_OnStart(void);
 /* 1FE0BC */ bool grKraid_801FE0BC(void);
 /* 1FE0C4 */ HSD_GObj* grKraid_801FE0C4(int);
-/* 1FE1B0 */ void grKraid_801FE1B0(Ground_GObj*);
 /* 1FE1DC */ bool grKraid_801FE1DC(Ground_GObj*);
 /* 1FE1E4 */ void grKraid_801FE1E4(Ground_GObj*);
 /* 1FE1E8 */ void grKraid_801FE1E8(Ground_GObj*);

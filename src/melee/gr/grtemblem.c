@@ -13,45 +13,45 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 static void grTRoy_802243F4(bool);
-static void grTRoy_802243F8(void);
+static void grTRoy_OnInit(void);
 static void grTemblem_UnkStage0_OnLoad(void);
 static void grTemblem_UnkStage0_OnStart(void);
 static bool grTRoy_80224490(void);
 static HSD_GObj* grTRoy_80224498(int gobj_id);
-static void grTRoy_80224580(Ground_GObj* gobj);
+static void stageGObj0_OnInit(Ground_GObj* gobj);
 static bool grTRoy_802245AC(Ground_GObj*);
 static void grTRoy_802245B4(Ground_GObj*);
 static void grTRoy_802245B8(Ground_GObj*);
-static void grTRoy_802245BC(Ground_GObj* gobj);
+static void stageGObj2_OnInit(Ground_GObj* gobj);
 static bool grTRoy_8022460C(Ground_GObj*);
-static void grTRoy_80224614(Ground_GObj* gobj);
+static void stageGObj2_GObjProc(Ground_GObj* gobj);
 static void grTRoy_80224648(Ground_GObj*);
-static void grTRoy_8022464C(Ground_GObj* gobj);
+static void stageGObj1_OnInit(Ground_GObj* gobj);
 static bool grTRoy_8022469C(Ground_GObj*);
-static void grTRoy_802246A4(Ground_GObj*);
+static void stageGObj1_GObjProc(Ground_GObj*);
 static void grTRoy_802246C4(Ground_GObj*);
 static DynamicsDesc* grTRoy_802246C8(enum_t);
 static bool grTRoy_802246D0(Vec3*, int, HSD_JObj*);
 
 StageCallbacks grTFe_StageCallbacks[4] = {
     {
-        grTRoy_80224580,
+        stageGObj0_OnInit,
         grTRoy_802245AC,
         grTRoy_802245B4,
         grTRoy_802245B8,
         0,
     },
     {
-        grTRoy_8022464C,
+        stageGObj1_OnInit,
         grTRoy_8022469C,
-        grTRoy_802246A4,
+        stageGObj1_GObjProc,
         grTRoy_802246C4,
         0,
     },
     {
-        grTRoy_802245BC,
+        stageGObj2_OnInit,
         grTRoy_8022460C,
-        grTRoy_80224614,
+        stageGObj2_GObjProc,
         grTRoy_80224648,
         (1 << 30) | (1 << 31),
     },
@@ -61,7 +61,7 @@ StageData grTFe_StageData = {
     Gr_Kind_TEmblem,
     grTFe_StageCallbacks,
     "/GrTFe.dat",
-    grTRoy_802243F8,
+    grTRoy_OnInit,
     grTRoy_802243F4,
     grTemblem_UnkStage0_OnLoad,
     grTemblem_UnkStage0_OnStart,
@@ -73,7 +73,7 @@ StageData grTFe_StageData = {
 
 static void grTRoy_802243F4(bool arg0) {}
 
-static void grTRoy_802243F8(void)
+static void grTRoy_OnInit(void)
 {
     Ground_InitTargetStage(grTRoy_80224498);
 }
@@ -106,9 +106,9 @@ static HSD_GObj* grTRoy_80224498(int gobj_id)
     return gobj;
 }
 
-static void grTRoy_80224580(Ground_GObj* gobj)
+static void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground_AnimateMap(gobj);
+    Ground_StartMapAnim(gobj);
 }
 
 static bool grTRoy_802245AC(Ground_GObj* gobj)
@@ -120,9 +120,9 @@ static void grTRoy_802245B4(Ground_GObj* gobj) {}
 
 static void grTRoy_802245B8(Ground_GObj* gobj) {}
 
-static void grTRoy_802245BC(Ground_GObj* gobj)
+static void stageGObj2_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTRoy_8022460C(Ground_GObj* gobj)
@@ -130,16 +130,16 @@ static bool grTRoy_8022460C(Ground_GObj* gobj)
     return false;
 }
 
-static void grTRoy_80224614(Ground_GObj* gobj)
+static void stageGObj2_GObjProc(Ground_GObj* gobj)
 {
-    Ground_ProcTargetStage(gobj);
+    Ground_UpdateWindAndMapColl(gobj);
 }
 
 static void grTRoy_80224648(Ground_GObj* gobj) {}
 
-static void grTRoy_8022464C(Ground_GObj* gobj)
+static void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    Ground_JObjInline1(gobj);
+    Ground_InitMapCollAndAnim(gobj);
 }
 
 static bool grTRoy_8022469C(Ground_GObj* gobj)
@@ -147,9 +147,9 @@ static bool grTRoy_8022469C(Ground_GObj* gobj)
     return false;
 }
 
-static void grTRoy_802246A4(Ground_GObj* gobj)
+static void stageGObj1_GObjProc(Ground_GObj* gobj)
 {
-    Ground_801C2FE0(gobj);
+    Ground_UpdateMapColl(gobj);
 }
 
 static void grTRoy_802246C4(Ground_GObj* gobj) {}

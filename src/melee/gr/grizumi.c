@@ -304,7 +304,7 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
     HSD_TObj* tobj;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
+    Ground_InitMapColl(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
