@@ -10,6 +10,7 @@
 #include "gmtoulib.h"
 #include "types.h"
 #include <dolphin/pad.h>
+#include <melee/gm/inlines.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
@@ -631,28 +632,6 @@ void fn_80196FFC(HSD_GObj* gobj)
     }
 
     fn_8019044C(jobj, (f32) lbl_804799D8.x2A[pnum].cur);
-}
-
-static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
-{
-    if ((s32) player_count == 4) {
-        return (13.0f * (f32) player) + -19.5f;
-    }
-    if ((s32) player_count == 3) {
-        return 6.5f + ((13.0f * (f32) player) - 19.5f);
-    }
-    return 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
-}
-
-static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
-{
-    if ((s32) player_count == 4) {
-        *x = (13.0f * (f32) player) + -19.5f;
-    } else if ((s32) player_count == 3) {
-        *x = 6.5f + ((13.0f * (f32) player) - 19.5f);
-    } else {
-        *x = 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
-    }
 }
 
 /// Updates visibility and position of a tournament menu JObj.

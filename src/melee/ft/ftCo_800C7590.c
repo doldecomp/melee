@@ -8,10 +8,10 @@
 #include "kinds/ftCommon/forward.h"
 #include "kinds/ftCommon/ftCo_Damage.h"
 #include "kinds/ftCommon/ftCo_DamageFall.h"
-#include "kinds/ftCommon/ftCo_Lift.h"
-#include "kinds/ftCommon/ftCo_Throw.h"
 #include "types.h"
 #include <melee/cm/camera.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/it/kinds/itleadead.h>
 #include <melee/pl/player.h>
 
@@ -30,15 +30,12 @@ void ftCo_800C7590(Fighter_GObj* gobj)
     f32 temp_f31;
     Fighter* fp = gobj->user_data;
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     ftCo_8008DCE0(gobj, -1, 0.0f);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureLeadead, 0x1080, 0.0f, 1.0f,
                               0.0f, NULL);
-    fp->take_dmg_cb = fn_800C74CC;
-    fp->death2_cb = fn_800C7568;
+    Fighter_SetDamageCallbacks(fp, fn_800C74CC, fn_800C7568);
     fp->mv.co.captureleadead.x0 = (Item_GObj*) fp->dmg.x1868_source;
     ftCommon_8007E2FC(gobj);
     cd = p_ftCommonData;

@@ -16,6 +16,7 @@
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
@@ -59,8 +60,7 @@ void ftCo_800C4724(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_WarpStarJump, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftColl_8007B6A0(gobj);
-    fp->take_dmg_cb = ftCo_800C4858;
-    fp->death2_cb = ftCo_800C48AC;
+    Fighter_SetDamageCallbacks(fp, ftCo_800C4858, ftCo_800C48AC);
     fp->x2219_b2 = true;
     fp->x2222_b7 = true;
     fp->x221E_b2 = true;
@@ -130,8 +130,7 @@ void ftCo_800C4A38(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_WarpStarFall, Ft_MF_None, 0, 1, 0,
                               NULL);
     fp->x2222_b7 = true;
-    fp->take_dmg_cb = ftCo_800C4858;
-    fp->death2_cb = ftCo_800C48AC;
+    Fighter_SetDamageCallbacks(fp, ftCo_800C4858, ftCo_800C48AC);
     fp->x221E_b2 = true;
     ftCommon_8007E2FC(gobj);
     fp->cur_pos.x = fp->mv.co.warpstar.cur_pos.x;

@@ -193,10 +193,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
     if (gobj != NULL) {
         item = GET_ITEM(gobj);
         attr = item->xC4_article_data->x4_specialAttributes;
-        item->xDB8_itcmd_var3 = 0;
-        item->xDB4_itcmd_var2 = 0;
-        item->xDB0_itcmd_var1 = 0;
-        item->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(item);
         it_80275158(gobj, attr->x0);
         item->xDD4_itemVar.linkarrow.xA0 = 0;
         item->xDD4_itemVar.linkarrow.xB0 = 0;

@@ -1,12 +1,11 @@
 #include "grtdonkey.h"
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
+#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 220228 */ static void grTDonkey_80220228(bool);
@@ -107,8 +106,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
 }
 static void grTDonkey_802203B4(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grTDonkey_802203E0(Ground_GObj* arg0)
@@ -132,8 +130,7 @@ static bool grTDonkey_80220440(Ground_GObj* arg0)
 
 static void grTDonkey_80220448(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 static void grTDonkey_8022047C(Ground_GObj* arg0) {}

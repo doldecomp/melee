@@ -7,8 +7,6 @@
 #include <placeholder.h>
 
 #include "ftCo_Damage.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
 #include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
@@ -16,6 +14,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbcollision.h>
@@ -34,9 +33,7 @@ void ftCo_8009EB18(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4);
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_BarrelWait, Ft_MF_None, 0.0f, 1.0f,
                               0.0f, NULL);
     ftAnim_8006EBA4(gobj);

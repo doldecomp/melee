@@ -8,6 +8,7 @@
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
@@ -112,8 +113,7 @@ HSD_GObj* grOldYoshi_8020E854(int gobj_id)
 
 void grOldYoshi_8020E93C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grOldYoshi_8020E968(Ground_GObj* arg)

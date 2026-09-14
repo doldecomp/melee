@@ -216,22 +216,6 @@ void fn_80252C50(HSD_GObj* gobj)
     }
 }
 
-static inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
-}
-
-static inline HSD_JObj* fn_80252E4C_inline_GetJObjChild(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
-}
-
 void fn_80252E4C(HSD_GObj* arg0)
 {
     HSD_JObj* temp_r30 = GET_JOBJ(arg0);
@@ -243,39 +227,19 @@ void fn_80252E4C(HSD_GObj* arg0)
         o->x48 = 0;
     }
     if (o->x0 > 0) {
-        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjNext(
-                               fn_80252E4C_inline_GetJObjChild(temp_r30)),
+        HSD_JObjClearFlags(HSD_JObjGetNext(HSD_JObjGetChild(temp_r30)),
                            JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjNext(
-                             fn_80252E4C_inline_GetJObjChild(temp_r30)),
+        HSD_JObjSetFlags(HSD_JObjGetNext(HSD_JObjGetChild(temp_r30)),
                          JOBJ_HIDDEN);
     }
     if (mnInfoBonus_802528F8_wrapper() > 5) {
-        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjChild(temp_r30),
-                           JOBJ_HIDDEN);
+        HSD_JObjClearFlags(HSD_JObjGetChild(temp_r30), JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjChild(temp_r30),
-                         JOBJ_HIDDEN);
+        HSD_JObjSetFlags(HSD_JObjGetChild(temp_r30), JOBJ_HIDDEN);
     }
     HSD_JObjReqAnimAll(temp_r30, (f32) o->x48);
     HSD_JObjAnimAll(temp_r30);
-}
-
-static inline HSD_JObj* mnInfoBonus_inline_GetJObjNext(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
-}
-
-static inline HSD_JObj* mnInfoBonus_inline_GetJObjChild(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
 }
 
 static inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
@@ -302,10 +266,8 @@ mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
     HSD_JObjReqAnimAll(jobj, 0.F);
     HSD_JObjAnimAll(jobj);
 
-    HSD_JObjSetFlags(
-        mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(jobj)),
-        JOBJ_HIDDEN);
-    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), JOBJ_HIDDEN);
+    HSD_JObjSetFlags(HSD_JObjGetNext(HSD_JObjGetChild(jobj)), JOBJ_HIDDEN);
+    HSD_JObjSetFlags(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
     mnInfoBonus_inline_SetGObjFlag(HSD_GObj_SetupProc(gobj, fn_80252E4C, 0));
 }
 

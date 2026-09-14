@@ -14,8 +14,8 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbfile.h>
 #include <melee/lb/lblanguage.h>
@@ -289,16 +289,6 @@ void fn_801D13C8(Ground_GObj* gobj)
     gp->u.stadium.xC4_b0 = false;
 }
 
-/// @todo this is a commonly used inline; it should be moved to random.h
-static inline int randi(int i)
-{
-    if (i != 0) {
-        return HSD_Randi(i);
-    } else {
-        return 0;
-    }
-}
-
 void grStadium_801D13E0(Ground_GObj* gobj)
 {
     HSD_MObj* mobj;
@@ -350,8 +340,7 @@ void grStadium_801D1520(Ground_GObj* gobj)
     if (!gp->u.stadium.xC4_b0) {
         grStadium_801D4548(gobj);
     }
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grStadium_801D156C(Ground_GObj* gobj) {}
@@ -608,8 +597,7 @@ void grStadium_801D1D84(Ground_GObj* gobj)
 
 void grStadium_801D1DE4(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grStadium_801D1E10(Ground_GObj* gobj)
@@ -1304,30 +1292,6 @@ void grStadium_801D3084(HSD_GObj* gobj, int unused)
 
 /// @todo these are commonly used inlines; they should be moved to jobj.h
 
-static inline HSD_JObj* jobj_next(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
-}
-
-static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->parent;
-}
-
-static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
-}
-
 HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
                              HSD_MObj** arg2)
 {
@@ -1355,24 +1319,24 @@ HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
             }
         }
 
-        if (!(jobj->flags & JOBJ_INSTANCE) && jobj_child(jobj) != NULL) {
-            jobj = jobj_child(jobj);
+        if (!(jobj->flags & JOBJ_INSTANCE) && HSD_JObjGetChild(jobj) != NULL) {
+            jobj = HSD_JObjGetChild(jobj);
             continue;
         }
-        if (jobj_next(jobj) != NULL) {
-            jobj = jobj_next(jobj);
+        if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
             continue;
         }
         while (true) {
-            if (jobj_parent(jobj) == NULL) {
+            if (HSD_JObjGetParent(jobj) == NULL) {
                 jobj = NULL;
                 break;
             }
-            if (jobj_next(jobj_parent(jobj)) != NULL) {
-                jobj = jobj_next(jobj_parent(jobj));
+            if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
                 break;
             }
-            jobj = jobj_parent(jobj);
+            jobj = HSD_JObjGetParent(jobj);
         }
     }
     return NULL;

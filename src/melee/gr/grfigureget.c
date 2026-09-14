@@ -15,6 +15,7 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmregclear.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/inlines.h>
 #include <melee/it/kinds/itcoin.h>
 #include <melee/it/types.h>
@@ -138,8 +139,7 @@ HSD_GObj* grFigureGet_802195CC(int gobj_id)
 
 void grFigureGet_802196B4(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grFigureGet_802196E0(Ground_GObj* gobj)

@@ -9,6 +9,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/itgroundcoll.h>
+#include <melee/it/kinds/inlines.h>
 
 /* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
 /* 293040 */ static bool itFflower_UnkMotion0_Anim(Item_GObj* gobj);
@@ -153,9 +154,7 @@ void it_80292FF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
 }
 
 bool itFflower_UnkMotion0_Anim(Item_GObj* gobj)

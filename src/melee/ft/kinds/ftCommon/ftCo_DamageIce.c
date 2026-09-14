@@ -33,6 +33,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdynamics.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/kinds/ftKirby/ftkirby.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -237,9 +238,7 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x2227_b6 = true;
 
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce,

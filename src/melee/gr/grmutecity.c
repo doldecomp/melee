@@ -12,6 +12,7 @@
 #include "stage.h"
 #include "types.h"
 #include <melee/cm/camera.h>
+#include <melee/gr/inlines.h>
 #include <melee/if/ifhazard.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -589,8 +590,7 @@ void grMuteCity_801F040C(Ground_GObj* arg) {}
 
 void grMuteCity_801F0410(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grMuteCity_801F043C(Ground_GObj* arg)

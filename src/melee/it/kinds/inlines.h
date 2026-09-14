@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+#include <dolphin/mtx.h>
+#include <melee/cm/camera.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/it/inlines.h>
@@ -10,6 +12,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/itCharItems.h>
 #include <melee/it/item.h>
+#include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
 #include <melee/it/kinds/itlinkhookshot.h>
@@ -72,6 +75,13 @@ static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
 {
     Item_AttachToParent(item_gobj, parent, part);
     it_8027CE64(item_gobj, parent, attributes[0]);
+}
+
+static inline void Item_StopAndEnterState(Item_GObj* gobj, Item* ip, s32 msid)
+{
+    itResetVelocity(ip);
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
 }
 
 static inline void Item_EnterAirStateWithHitlag(Item_GObj* gobj, enum_t msid)
@@ -245,6 +255,65 @@ static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
     it_80273030(gobj);
     HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
     return false;
+}
+
+static inline void Item_CopyJObjScale(HSD_JObj* dst, HSD_JObj* src,
+                                      Vec3* scale)
+{
+    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
+    HSD_JObjSetScale(dst, scale);
+}
+
+static inline void Item_NormalizeAngle(f32* angle)
+{
+    while (*angle < 0.0F) {
+        *angle += M_TAU;
+    }
+    while (*angle > M_TAU) {
+        *angle -= M_TAU;
+    }
+}
+
+static inline void Item_ClearFlagsAndEnterState(Item_GObj* gobj, Item* ip,
+                                                s32 msid)
+{
+    it_8026B3A8(gobj);
+    ip->xDC8_word.flags.x13 = 0;
+    it_80272940(gobj);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
+}
+
+static inline void Item_UpdateZakoVelocity(Item_GObj* gobj, Item* ip)
+{
+    it_802762BC(ip);
+    it_8027BA54(gobj, &ip->x40_vel);
+    it_802762BC(ip);
+}
+
+static inline void Item_ZakoDefeat(Item_GObj* gobj, Item* ip)
+{
+    it_8027C9D8(ip);
+    it_802756D0(gobj);
+    it_80275474(gobj);
+    it_8027CE44(gobj);
+    Camera_RequestQuake(QuakeKind_Small, &ip->pos);
+}
+
+static inline void Item_InitLinkMtx(Mtx m, f32 z)
+{
+    PSMTXIdentity(m);
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = z;
+}
+
+static inline void Item_InitZakoCollision(Item_GObj* gobj, Item* ip)
+{
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDC8_word.flags.x19 = 1;
 }
 
 #endif

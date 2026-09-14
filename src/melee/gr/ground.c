@@ -82,6 +82,7 @@
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_3F14.h>
 #include <melee/it/itzako.h>
@@ -3261,14 +3262,6 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
     result = it_802F2094(0, &sp10, tmp, 0);
     Toy_80304A58(tmp);
     return result;
-}
-
-static inline s32 randi(s32 max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
 }
 
 int Ground_801C5940(void)

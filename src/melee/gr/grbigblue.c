@@ -9,6 +9,7 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
+#include <melee/gr/inlines.h>
 
 #ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
@@ -409,8 +410,7 @@ void grBigBlue_801E61C4(Ground_GObj* gobj)
 {
     PAD_STACK(16);
     grBigBlue_801EBAF8(gobj);
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grBigBlue_801E61FC(Ground_GObj* arg) {}
@@ -1849,14 +1849,6 @@ void grBigBlue_801E9F3C(Ground_GObj* gobj)
 bool grBigBlue_801EA054(Ground_GObj* arg)
 {
     return false;
-}
-
-static inline int randi(int max)
-{
-    if (max != 0) {
-        return HSD_Randi(max);
-    }
-    return 0;
 }
 
 void grBigBlue_801EA05C(Ground_GObj* gobj)

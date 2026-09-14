@@ -18,6 +18,7 @@
 #include <melee/it/ithitbox.h>
 #include <melee/it/itmaplib.h>
 #include <melee/it/itzako.h>
+#include <melee/it/kinds/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/mp/mpcoll.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -54,11 +55,7 @@ void it_802E05A0(Item_GObj* gobj)
     }
     mpCollSetFacingDir(&ip->x378_itemColl, facing);
     it_8027C56C(gobj, ip->facing_dir);
-    ip->xD5C = 0;
-    ip->xDC8_word.flags.x15 = 0;
-    it_8027542C(gobj);
-    it_80275270(gobj);
-    ip->xDC8_word.flags.x19 = 1;
+    Item_InitZakoCollision(gobj, ip);
     ip->xDD4_itemVar.patapata.x28 = 0xA;
     ip->xDD4_itemVar.patapata.x24 = 0;
     ip->xDD4_itemVar.patapata.x20 = 0;

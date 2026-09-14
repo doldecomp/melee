@@ -42,10 +42,7 @@ Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
     explode = Item_80268B18(&spawn);
     if (explode != NULL) {
         Item* ip = GET_ITEM(explode);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDD4_itemVar.pkflushexplode.xDD4 = charge;
         ip->xDD4_itemVar.pkflushexplode.xDDC = owner;
         it_802AFA70(explode);
@@ -71,10 +68,7 @@ void it_802AFA70(Item_GObj* gobj)
     f32 ratio;
     PAD_STACK(8);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, 1024.0f);
     ip->xDD4_itemVar.pkflushexplode.xDD8 = 0.0f;
     Item_802694CC(gobj);

@@ -97,10 +97,7 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
     if (flash != NULL) {
         Item* ip = GET_ITEM(flash);
         itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
         ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
         ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;
@@ -157,10 +154,7 @@ void it_802AAA80(Item_GObj* gobj)
     f32 angle;
     PAD_STACK(8);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attr->x0_FLASH_LIFETIMER);
     ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0f;
     ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;

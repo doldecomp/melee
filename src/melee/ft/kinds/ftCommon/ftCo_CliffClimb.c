@@ -16,6 +16,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/mp/mplib.h>
 
@@ -76,10 +77,7 @@ void ftCo_8009AB9C(Fighter_GObj* gobj)
     FtMotionId msid = fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffClimbQuick
                           : ftCo_MS_CliffClimbSlow;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ftAnim_8006EBA4(gobj);
-    ftCommon_8007E2F4(fp, 32);
-    fp->x221D_b7 = true;
+    ftCo_Cliff_EnterState(gobj, fp, msid);
     fp->x221D_b5 = true;
     ftCo_CliffCatch_Phys(gobj);
 }

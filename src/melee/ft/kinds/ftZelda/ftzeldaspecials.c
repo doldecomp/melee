@@ -15,6 +15,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
@@ -39,10 +40,7 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 343, 0, temp_f1, 1.0, temp_f1, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
     fighter2->mv.zd.specials.x0 = attributes->x10;
@@ -69,10 +67,7 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 346, 0, temp_f1, 1.0, temp_f1, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->self_vel.y = 0.0F;
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;

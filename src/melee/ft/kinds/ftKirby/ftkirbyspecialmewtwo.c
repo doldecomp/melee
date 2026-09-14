@@ -319,10 +319,7 @@ void ftKb_SpecialNMt_80107568(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNStart, 0, 0.0F, 1.0F,
                               0.0F, NULL);
 
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
 
     ftCommon_8007D7FC(fp);
 
@@ -346,10 +343,7 @@ void ftKb_SpecialNMt_80107638(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialAirNStart, 0, 0.0F, 1.0F,
                               0.0F, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
 
     ftKb_SpecialN_set_cbs(gobj);
     fp->mv.kb.specialhi.x0 = 0;

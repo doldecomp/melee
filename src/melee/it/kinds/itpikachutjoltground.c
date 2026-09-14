@@ -79,10 +79,7 @@ Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
         {
             ip->pos = spawn.pos;
         }
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.pikachujoltground.xDDC = NULL;
         ip->xDD4_itemVar.pikachujoltground.xDE4 = 0;
@@ -122,10 +119,7 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     f64 angle;
     PAD_STACK(4);
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
 
     if (ip->facing_dir == 1.0f) {
         angle = attr->x4;

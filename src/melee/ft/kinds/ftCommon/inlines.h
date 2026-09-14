@@ -9,9 +9,12 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcmdscript.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/kinds/ftCommon/ftCo_ItemParasolOpen.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Lift.h>
+#include <melee/ft/kinds/ftCommon/ftCo_Throw.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/kinds/ftCommon/types.h>
 #include <melee/ft/types.h>
@@ -23,6 +26,13 @@ static inline void ftCo_SpawnEf(Fighter_GObj* gobj, HSD_JObj* joint, u32 arg2,
     Fighter* fp = gobj->user_data;
     FORCE_PAD_STACK_8;
     efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
+}
+
+static inline void ftCo_ReleaseItemAndVictim(Fighter_GObj* gobj)
+{
+    ftCommon_8007DB58(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
 }
 
 static inline void ftCo_Thrown_Enter(Fighter_GObj* gobj, FtMotionId msid,
@@ -86,6 +96,21 @@ static inline void ftCommon_AirToGroundStateChange(Fighter_GObj* gobj,
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, msid, flags, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
+}
+
+static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+}
+
+static inline void ftCo_Cliff_EnterState(Fighter_GObj* gobj, Fighter* fp,
+                                         FtMotionId msid)
+{
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftCommon_8007E2F4(fp, 32);
+    fp->x221D_b7 = true;
 }
 
 #endif

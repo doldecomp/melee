@@ -4,12 +4,11 @@
 
 #include "forward.h"
 #include "ftCo_Attack100.h"
-#include "ftCo_Lift.h"
-#include "ftCo_Throw.h"
 #include "ftCo_ThrownMewtwo.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
@@ -17,9 +16,7 @@ static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
 {
     Fighter* victim_fp = GET_FIGHTER(victim_gobj);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007DB58(gobj);
-    ftCo_8009750C(gobj);
-    ftCo_800DD168(gobj);
+    ftCo_ReleaseItemAndVictim(gobj);
     fp->x1A5C = victim_gobj;
     fp->victim_gobj = victim_gobj;
     fp->x221B_b5 = false;

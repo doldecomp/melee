@@ -22,16 +22,6 @@ ItemStateTable it_803F6BC8[] = { { 0, itNesspkthunderball_UnkMotion0_Anim,
                                    itNesspkthunderball_UnkMotion0_Phys,
                                    itNesspkthunderball_UnkMotion0_Coll } };
 
-static inline void normalizeAngle(f32* angle)
-{
-    while (*angle < 0.0F) {
-        *angle += M_TAU;
-    }
-    while (*angle > M_TAU) {
-        *angle -= M_TAU;
-    }
-}
-
 void it_802AB3F0(Item_GObj* gobj, Vec3* out, s32 idx)
 {
     if (gobj != NULL) {
@@ -130,10 +120,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
         itPKThunderAttributes* attr =
             ip->xC4_article_data->x4_specialAttributes;
 
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(ball, attr->x0_PKTHUNDER_LIFETIME);
         ip->xDD4_itemVar.pkthunder.xEF4 = NULL;
         for (i = 0; i < 16; i++) {
@@ -209,10 +196,7 @@ void it_802ABA4C(Item_GObj* gobj)
     itPKThunderAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     int i;
 
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attr->x0_PKTHUNDER_LIFETIME);
     for (i = 0; i < 16; i++) {
         ip->xDD4_itemVar.pkthunder.angles[i] =
@@ -403,7 +387,7 @@ bool it_802AC098(Item_GObj* gobj)
 
     ip->xDD4_itemVar.pkthunder.xF00 = 1;
     ip->xDD4_itemVar.pkthunder.angles[0] += M_PI;
-    normalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_NormalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
 
     for (i = 0; i < 6; i++) {
         if (ip->xDD4_itemVar.pkthunder.xDD4[i] != NULL) {
@@ -444,7 +428,7 @@ bool it_802AC35C(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     ip->xDD4_itemVar.pkthunder.angles[0] =
         atan2f(ip->x40_vel.y, ip->x40_vel.x);
-    normalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
+    Item_NormalizeAngle(&ip->xDD4_itemVar.pkthunder.angles[0]);
     return false;
 }
 
