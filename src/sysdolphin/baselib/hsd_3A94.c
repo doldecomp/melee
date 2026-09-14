@@ -670,7 +670,7 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 2:
-        switch (((s32*) (state + 0x28))[entry->x8]) {
+        switch (state->file_flags[entry->x8]) {
         case 0:
             result = fn_803AE7F8((CardState*) entry->state, entry->x8,
                                  entry->xC, 1, (s32) entry->callback);

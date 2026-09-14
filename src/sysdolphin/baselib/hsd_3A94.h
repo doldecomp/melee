@@ -20,7 +20,7 @@ typedef struct CardState {
     /* 0x20 */ s32 file_no;
     /// Bytes of comment + banner + icons; the 0x30-byte digest follows.
     /* 0x24 */ u32 header_size;
-    /* 0x28 */ int file_flags[9];
+    /* 0x28 */ int file_flags[9]; ///< @todo enum, not flags
     /* 0x4C */ int file_sizes[9];
     /* 0x70 */ u8* file_data[9];
     /* 0x94 */ u8 pad_94[0xDC];
