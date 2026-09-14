@@ -19,6 +19,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
 
@@ -106,22 +107,6 @@ void grLib_801C98A0(HSD_JObj* jobj)
     }
 }
 
-static inline HSD_JObj* jobj_child(HSD_JObj* node)
-{
-    if (node == NULL) {
-        return NULL;
-    }
-    return node->child;
-}
-
-static inline HSD_JObj* jobj_next(HSD_JObj* node)
-{
-    if (node == NULL) {
-        return NULL;
-    }
-    return node->next;
-}
-
 void grLib_801C9908(HSD_JObj* jobj)
 {
     HSD_Generator* cur;
@@ -143,7 +128,9 @@ void grLib_801C9908(HSD_JObj* jobj)
         return;
     }
 
-    for (jobj = jobj_child(jobj); jobj != NULL; jobj = jobj_next(jobj)) {
+    for (jobj = HSD_JObjGetChild(jobj); jobj != NULL;
+         jobj = HSD_JObjGetNext(jobj))
+    {
         grLib_801C9908(jobj);
     }
 }

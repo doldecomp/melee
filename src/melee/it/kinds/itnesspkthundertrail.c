@@ -51,10 +51,7 @@ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
     trail = Item_80268B18(&spawn);
     if (trail != NULL) {
         Item* ip = GET_ITEM(trail);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         ip->xDD4_itemVar.nesspkthundertrail.x0 = ball;
         ip->xDD4_itemVar.nesspkthundertrail.x4 = trail_idx;
         ip->xDD4_itemVar.nesspkthundertrail.x8 = 0;

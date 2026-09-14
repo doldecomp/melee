@@ -10,6 +10,7 @@
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -117,8 +118,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
 
 static void grShrine_80201E08(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 static bool grShrine_80201E34(Ground_GObj* arg0)

@@ -12,6 +12,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/kinds/inlines.h>
 #include <sysdolphin/baselib/jobj.h>
 
 ItemStateTable it_803F6C68[] = {
@@ -60,10 +61,7 @@ HSD_GObj* it_802AD478(Item_GObj* gobj, Vec3* pos, Fighter_Part part,
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {
             Item* ip = GET_ITEM(bat);
-            ip->xDB8_itcmd_var3 = 0;
-            ip->xDB4_itcmd_var2 = 0;
-            ip->xDB0_itcmd_var1 = 0;
-            ip->xDAC_itcmd_var0 = 0;
+            Item_ClearCmdVars(ip);
             ip->xDCC_flag.b3 = false;
             ip->xDD4_itemVar.nessbat.x0 = gobj;
             it_80275158(bat, 1200.0f);
@@ -166,12 +164,6 @@ bool itNessbat_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
-{
-    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
-    HSD_JObjSetScale(dst, scale);
-}
-
 bool itNessbat_UnkMotion1_Anim(Item_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -181,7 +173,8 @@ bool itNessbat_UnkMotion1_Anim(Item_GObj* gobj)
                 if (ftCo_800BF228(ip->xDD4_itemVar.nessbat.x0) == true) {
                     Vec3 scale;
                     HSD_GObj* owner = ip->xDD4_itemVar.nessbat.x0;
-                    copy_jobj_scale(GET_JOBJ(gobj), GET_JOBJ(owner), &scale);
+                    Item_CopyJObjScale(GET_JOBJ(gobj), GET_JOBJ(owner),
+                                       &scale);
                 }
             }
         }

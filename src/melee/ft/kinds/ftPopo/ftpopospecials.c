@@ -8,6 +8,7 @@
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/inlines.h>
@@ -122,7 +123,7 @@ static inline void inlineA2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.pp.specials.x0 = 0;
     fp->mv.pp.specials.x4 = 10;
     fp->mv.pp.specials.xC = 0;
@@ -152,7 +153,7 @@ static inline void inlineA2(Fighter_GObj* gobj)
 
 void ftPp_SpecialS_Enter(Fighter_GObj* gobj)
 {
-    PAD_STACK(4 * 4);
+    PAD_STACK(4 * 2);
     inlineA2(gobj);
     inlineA0(gobj);
     ftAnim_8006EBA4(gobj);
@@ -165,7 +166,7 @@ static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.pp.specials.x0 = 0;
     fp->mv.pp.specials.x4 = 10;
     fp->mv.pp.specials.xC = 0;
@@ -192,7 +193,7 @@ static inline void inlineB0(Fighter_GObj* gobj)
 
 void ftPp_SpecialAirS_Enter(Fighter_GObj* gobj)
 {
-    PAD_STACK(4 * 4);
+    PAD_STACK(4 * 2);
     inlineB0(gobj);
     inlineA0(gobj);
     ftAnim_8006EBA4(gobj);

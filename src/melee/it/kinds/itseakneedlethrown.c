@@ -74,10 +74,7 @@ Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.seakneedlethrown.xDF4 = -1;
         ip->xDD4_itemVar.seakneedlethrown.xDFC = 0.0f;

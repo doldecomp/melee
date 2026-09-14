@@ -148,10 +148,7 @@ HSD_GObj* it_802C5000(Item_GObj* parent, Vec3* pos, s32 bone, s32 kind,
         Item* ip = GET_ITEM(item_gobj);
         itMewtwoShadowball_DatAttrs* attr =
             ip->xC4_article_data->x4_specialAttributes;
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.mewtwoshadowball.x14 = 0;
         ip->xDD4_itemVar.mewtwoshadowball.x4.z = 0.0f;
@@ -195,10 +192,7 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
         f32 timer;
 
         Item_80268E5C(item_gobj, 9, ITEM_ANIM_UPDATE);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
+        Item_ClearCmdVars(ip);
         timer = attr->x0;
         ip->xDD4_itemVar.mewtwoshadowball.x0 = timer;
         it_80275158(item_gobj, timer);

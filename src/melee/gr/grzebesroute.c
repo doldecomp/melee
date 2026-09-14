@@ -9,6 +9,7 @@
 #include <dolphin/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gr/inlines.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mplib.h>
 #include <sysdolphin/baselib/debug.h>
@@ -134,8 +135,7 @@ Ground_GObj* grZebesRoute_8020B260(int gobj_id)
 
 void grZebesRoute_8020B348(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grZebesRoute_8020B374(Ground_GObj* arg)
@@ -149,8 +149,7 @@ void grZebesRoute_8020B380(Ground_GObj* arg) {}
 
 void grZebesRoute_8020B384(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grZebesRoute_8020B3B0(Ground_GObj* arg)

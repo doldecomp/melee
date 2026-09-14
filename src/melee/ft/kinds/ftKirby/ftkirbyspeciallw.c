@@ -368,10 +368,7 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(0x18);
 
     temp_r28 = fp->parts[FtPart_YRotN].joint;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
     fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;
@@ -401,10 +398,7 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj)
     PAD_STACK(0x18);
 
     temp_r28 = fp->parts[FtPart_YRotN].joint;
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
     fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;
@@ -629,8 +623,8 @@ void ftKb_SpecialLw1_Coll(Fighter_GObj* gobj)
                                   1.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         fp3 = GET_FIGHTER(gobj);
-        fp3->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp3->death2_cb = ftKb_Init_800EE74C;
+        Fighter_SetDamageCallbacks(fp3, ftKb_Init_800EE7B8,
+                                   ftKb_Init_800EE74C);
         ftPartSetRotX(fp, 0, 0.0f);
     } else {
         ftKb_SpecialHi_800F3570(gobj);
@@ -676,8 +670,8 @@ void ftKb_SpecialLw_Coll(Fighter_GObj* gobj)
         fp->x221C_b4 = temp;
         ftAnim_SetAnimRate(gobj, 0.0f);
         fp3 = GET_FIGHTER(gobj);
-        fp3->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp3->death2_cb = ftKb_Init_800EE74C;
+        Fighter_SetDamageCallbacks(fp3, ftKb_Init_800EE7B8,
+                                   ftKb_Init_800EE74C);
         ftPartSetRotX(fp, 0, 0.0f);
     } else {
         ftKb_SpecialHi_800F3570(gobj);
@@ -775,8 +769,8 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
                                   1.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         fp2 = GET_FIGHTER(gobj);
-        fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->death2_cb = ftKb_Init_800EE74C;
+        Fighter_SetDamageCallbacks(fp2, ftKb_Init_800EE7B8,
+                                   ftKb_Init_800EE74C);
         ft_PlaySFX(fp, 0x222E7, 0x7F, 0x40);
         Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);
@@ -826,8 +820,8 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
         fp->x221C_b4 = temp;
         ftAnim_SetAnimRate(gobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);
-        fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->death2_cb = ftKb_Init_800EE74C;
+        Fighter_SetDamageCallbacks(fp2, ftKb_Init_800EE7B8,
+                                   ftKb_Init_800EE74C);
         ft_PlaySFX(fp, 0x222E7, 0x7F, 0x40);
         Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);

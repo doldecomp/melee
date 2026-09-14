@@ -1499,28 +1499,14 @@ void gm_801BCC9C(HSD_GObj* arg0)
             return;
         }
         if (Player_GetP1Stock() <= 0) {
-            gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-            lbAudioAx_80028B90();
-            gm_SetGameSpeed(1.0f);
-            gm_8016B33C(6);
-            gm_8016B364(0x148);
-            gm_8016B378(0x28);
-            gm_8016B328();
-            HSD_GObjFree(arg0);
+            failEvent(arg0);
             return;
         }
         gm_801BC670(arg0);
         return;
     }
     if (Player_GetP1Stock() <= 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(arg0);
+        failEvent(arg0);
         return;
     }
     {
@@ -1537,14 +1523,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         }
     }
     if (var_r0 != 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(arg0);
+        failEvent(arg0);
     }
 }
 
@@ -1599,14 +1578,7 @@ void gm_801BD028(HSD_GObj* arg0)
         ev->x10 += 1;
     }
     if (ev->x18 != 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = 0;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(arg0);
+        failEvent(arg0);
         return;
     }
     ev = &gmMainLib_804D3EE0->vs.unk_530;
@@ -2038,14 +2010,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                 }
                 gm_8016AC44(sp->c_kind, color);
                 if (Player_GetP1Stock() <= 0) {
-                    gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-                    lbAudioAx_80028B90();
-                    gm_SetGameSpeed(1.0f);
-                    gm_8016B33C(6);
-                    gm_8016B364(0x148);
-                    gm_8016B378(0x28);
-                    gm_8016B328();
-                    HSD_GObjFree(arg0);
+                    failEvent(arg0);
                     return;
                 }
                 gm_801BC670(arg0);
@@ -2083,14 +2048,7 @@ void gm_801BDE94(HSD_GObj* arg0)
     }
 
     if (Player_GetP1Stock() <= 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(arg0);
+        failEvent(arg0);
         return;
     }
     {
@@ -2107,14 +2065,7 @@ void gm_801BDE94(HSD_GObj* arg0)
             do_end = 0;
         }
         if (do_end != 0) {
-            gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-            lbAudioAx_80028B90();
-            gm_SetGameSpeed(1.0f);
-            gm_8016B33C(6);
-            gm_8016B364(0x148);
-            gm_8016B378(0x28);
-            gm_8016B328();
-            HSD_GObjFree(arg0);
+            failEvent(arg0);
         }
     }
 }
@@ -2159,25 +2110,11 @@ void gm_801BE39C(HSD_GObj* gobj)
         return;
     }
     if (Player_GetStocks(1) <= 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(gobj);
+        failEvent(gobj);
         return;
     }
     if (Player_GetP1Stock() <= 0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(gobj);
+        failEvent(gobj);
         return;
     }
     if (temp_r31->x10 == 0 && gm_8016AEEC() >= temp_r30->x0) {
@@ -2198,14 +2135,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         var_r0 = false;
     }
     if (var_r0) {
-        gmMainLib_804D3EE0->vs.unk_530.xB_1 = false;
-        lbAudioAx_80028B90();
-        gm_SetGameSpeed(1.0f);
-        gm_8016B33C(6);
-        gm_8016B364(0x148);
-        gm_8016B378(0x28);
-        gm_8016B328();
-        HSD_GObjFree(gobj);
+        failEvent(gobj);
     }
 }
 

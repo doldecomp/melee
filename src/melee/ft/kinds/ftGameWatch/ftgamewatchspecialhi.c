@@ -17,6 +17,7 @@
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Fall.h>
 #include <melee/ft/kinds/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/kinds/ftCommon/ftCo_Landing.h>
@@ -113,10 +114,7 @@ static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj)
 static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->accessory4_cb = ftGw_SpecialHi_ItemRescueSetup;
 }
 

@@ -3,13 +3,12 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
+#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* 223580 */ static void grTSamus_OnDemoInit(int);
@@ -109,8 +108,7 @@ HSD_GObj* grTSamus_80223624(int arg0)
 
 void grTSamus_8022370C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTSamus_80223738(Ground_GObj* gobj)
@@ -134,8 +132,7 @@ bool grTSamus_80223798(Ground_GObj* gobj)
 
 void grTSamus_802237A0(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTSamus_802237D4(Ground_GObj* gobj) {}

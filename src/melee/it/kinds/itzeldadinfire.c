@@ -83,8 +83,7 @@ Item_GObj* it_802C3BAC(Item_GObj* gobj, Vec* vec, float facing_dir, float arg3)
         Item* i = GET_ITEM(n);
         ItZeldaDinFire_ItemVars* attrs =
             i->xC4_article_data->x4_specialAttributes;
-        i->xDAC_itcmd_var0 = i->xDB0_itcmd_var1 = i->xDB4_itcmd_var2 =
-            i->xDB8_itcmd_var3 = 0;
+        Item_ClearCmdVars(i);
         it_80275158(n, attrs->x0);
         i->xDD4_itemVar.zeldadinfire.xDD8 = 0.0f;
         i->xDD4_itemVar.zeldadinfire.xDDC = 0;
@@ -131,10 +130,7 @@ void it_802C3D74(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     double rot;
     attrs = ip->xC4_article_data->x4_specialAttributes;
-    it_8026B3A8(gobj);
-    ip->xDC8_word.flags.x13 = 0;
-    it_80272940(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_ClearFlagsAndEnterState(gobj, ip, 0);
     it_80275158(gobj, attrs->x0);
     ip->xDD4_itemVar.zeldadinfire.xDD8 = 0.0f;
     ip->xDD4_itemVar.zeldadinfire.xDDC = 0;

@@ -233,9 +233,7 @@ void itFlipper_Repel(Item_GObj* gobj, s32 kind, Vec3* pos)
 void itFlipper_EnterResting(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, FLIPPER_MS_RESTING, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, FLIPPER_MS_RESTING);
 }
 
 bool itFlipper_Resting_Anim(Item_GObj* gobj)

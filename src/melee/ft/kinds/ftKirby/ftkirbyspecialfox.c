@@ -303,10 +303,7 @@ void ftKb_SpecialNFx_800FE100(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKbGetStartMotionId(gobj), 0.0f, 0.0f,
                               1.0f, 0.0f, NULL);
 
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
 
     ftAnim_8006EBA4(gobj);
 
@@ -368,10 +365,7 @@ void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKbGetAirStartMotionId(gobj), 0.0f, 0.0f,
                               1.0f, 0.0f, NULL);
 
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
 
     ftAnim_8006EBA4(gobj);
 

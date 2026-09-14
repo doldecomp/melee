@@ -11,6 +11,7 @@
 #include "gmtoulib.h"
 #include "types.h"
 #include <dolphin/os.h>
+#include <melee/gm/inlines.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
@@ -110,28 +111,6 @@ const TmAnimFrameTable lbl_803B7D18 = {
 };
 
 /* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };
-
-static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
-{
-    if ((s32) player_count == 4) {
-        return (13.0f * (f32) player) + -19.5f;
-    }
-    if ((s32) player_count == 3) {
-        return 6.5f + ((13.0f * (f32) player) - 19.5f);
-    }
-    return 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
-}
-
-static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
-{
-    if ((s32) player_count == 4) {
-        *x = (13.0f * (f32) player) + -19.5f;
-    } else if ((s32) player_count == 3) {
-        *x = 6.5f + ((13.0f * (f32) player) - 19.5f);
-    } else {
-        *x = 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
-    }
-}
 
 void fn_8019BA08(u8 idx, HSD_JObj* jobj)
 {

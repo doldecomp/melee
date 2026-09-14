@@ -209,6 +209,30 @@ static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
 }
 
+static inline void Fighter_SetDamageCallback(Fighter_GObj* gobj,
+                                             HSD_GObjEvent cb)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->take_dmg_cb = cb;
+    fp->death2_cb = cb;
+}
+
+static inline void Fighter_SetDamageCallbacks(Fighter* fp,
+                                              HSD_GObjEvent take_dmg_cb,
+                                              HSD_GObjEvent death2_cb)
+{
+    fp->take_dmg_cb = take_dmg_cb;
+    fp->death2_cb = death2_cb;
+}
+
+static inline void Fighter_ClearCmdVars(Fighter* fp)
+{
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+}
+
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
     return &fp->coll_data;

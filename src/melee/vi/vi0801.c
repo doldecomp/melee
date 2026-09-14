@@ -6,15 +6,13 @@
 #include <melee/ef/eflib.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/grbigblueroute.h>
-#include <melee/gr/ground.h>
+#include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_013B.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
-#include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -143,11 +141,7 @@ void vi0801_Scene_OnEnter(void* unused)
 
     vi0801_8031EE84();
 
-    Camera_Init(6);
-    lb_8000FCDC();
-    mpColl_80041C78();
-    Ground_801C0378(0x40);
-    Stage_802251E8(St_Kind_BigBlueRoute, 0);
+    Stage_InitScene(St_Kind_BigBlueRoute, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();

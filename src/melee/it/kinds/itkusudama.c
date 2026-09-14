@@ -345,9 +345,7 @@ void it_8028A190(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
     it_8028A190_inline(gobj);
 }
 
@@ -553,9 +551,7 @@ static inline void itKusudama_UnkMotion6_Coll_inline2(Item_GObj* gobj)
 static inline void itKusudama_UnkMotion6_Coll_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itResetVelocity(ip);
-    it_8026B390(gobj);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    Item_StopAndEnterState(gobj, ip, 0);
     itKusudama_UnkMotion6_Coll_inline2(gobj);
 }
 

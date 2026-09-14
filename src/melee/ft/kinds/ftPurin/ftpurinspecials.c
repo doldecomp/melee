@@ -37,8 +37,7 @@ void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
     Fighter_ChangeMotionState(fighter_gobj, 0x16B, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] =
-        fighter->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fighter);
 }
 
 void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
@@ -47,8 +46,7 @@ void ftPr_SpecialAirS_Enter(Fighter_GObj* fighter_gobj)
 
     Fighter_ChangeMotionState(fighter_gobj, 0x16C, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    fighter->cmd_vars[0] = fighter->cmd_vars[1] = fighter->cmd_vars[2] =
-        fighter->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fighter);
 }
 
 void ftPr_SpecialS_Anim(Fighter_GObj* gobj)

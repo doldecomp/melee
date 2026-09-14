@@ -63,10 +63,7 @@ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
 void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.specialhi.x0 = 0;
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.i = 0;
@@ -83,7 +80,7 @@ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
 void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    Fighter_ClearCmdVars(fp);
     fp->mv.kb.specialhi.x0 = 0;
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.i = 0;

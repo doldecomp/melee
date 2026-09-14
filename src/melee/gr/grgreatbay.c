@@ -15,6 +15,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gr/inlines.h>
 #include <melee/it/item.h>
 #include <melee/it/itspawn.h>
 #include <melee/it/kinds/ittincle.h>
@@ -260,8 +261,7 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
 
 void grGreatBay_801F4404(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grGreatBay_801F4430(Ground_GObj* gobj)

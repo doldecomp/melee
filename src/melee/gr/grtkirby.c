@@ -4,13 +4,12 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include "granime.h"
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 #include <dolphin/mtx.h>
-#include <melee/lb/lb_00F9.h>
+#include <melee/gr/inlines.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 void grTKirby_80221364(bool);                  /* static */
@@ -112,8 +111,7 @@ HSD_GObj* grTKirby_80221408(int arg0)
 
 void grTKirby_802214F0(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_AnimateMap(gobj);
 }
 
 bool grTKirby_8022151C(Ground_GObj* gobj)
@@ -137,8 +135,7 @@ bool grTKirby_8022157C(Ground_GObj* gobj)
 
 void grTKirby_80221584(Ground_GObj* gobj)
 {
-    lb_800115F4();
-    Ground_801C2FE0(gobj);
+    Ground_ProcTargetStage(gobj);
 }
 
 void grTKirby_802215B8(Ground_GObj* gobj) {}
