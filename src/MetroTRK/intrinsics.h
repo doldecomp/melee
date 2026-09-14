@@ -1,6 +1,8 @@
 #ifndef METROTRK_INTRINSICS_H
 #define METROTRK_INTRINSICS_H
 
+#include <stddef.h>
+
 void __sync(void);
 void __isync(void);
 int __cntlzw(unsigned int);
@@ -12,6 +14,6 @@ double __frsqrte(double);
 int __rlwinm(int, int, int, int);
 int __rlwimi(int, int, int, int, int);
 
-void* __memcpy(void* dst, const void* src, unsigned long n);
+void* __memcpy(void* dst, const void* src, size_t n);
 
 #endif

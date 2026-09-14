@@ -8,6 +8,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "wchar.h"
+#include <dolphin/types.h>
 
 enum justification_options {
     left_justification,
@@ -271,9 +272,9 @@ static const char* parse_format(const char* format_string, va_list* arg,
     return (s + 1);
 }
 
-static char* long2str(signed long num, char* buff, print_format* format)
+static char* long2str(s32 num, char* buff, print_format* format)
 {
-    unsigned long unsigned_num, base;
+    u32 unsigned_num, base;
     char* p;
     int n, digits;
     int minus = 0;
@@ -380,10 +381,9 @@ static char* long2str(signed long num, char* buff, print_format* format)
     return p;
 }
 
-static char* longlong2str(signed long long num, char* pBuf,
-                          print_format* format)
+static char* longlong2str(s64 num, char* pBuf, print_format* format)
 {
-    unsigned long long unsigned_num, base;
+    u64 unsigned_num, base;
     char* p;
     int n, digits;
     int minus = 0;
@@ -765,8 +765,8 @@ static int __pformatter(void* (*WriteProc)(void*, const char*, size_t),
     const char* format_ptr;
     const char* curr_format;
     print_format format;
-    signed long long_num;
-    signed long long long_long_num;
+    s32 long_num;
+    s64 long_long_num;
     char buff[512];
     char* buff_ptr;
     char* string_end;

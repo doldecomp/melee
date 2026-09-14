@@ -1,6 +1,6 @@
 #include "mem_TRK.h"
 
-void* TRK_memcpy(void* dst, const void* src, unsigned long n)
+void* TRK_memcpy(void* dst, const void* src, size_t n)
 {
     const unsigned char* s = (const unsigned char*) src - 1;
     unsigned char* d = (unsigned char*) dst - 1;

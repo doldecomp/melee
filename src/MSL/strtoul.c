@@ -5,6 +5,7 @@
 #include "limits.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include <dolphin/types.h>
 
 enum scan_states {
     start = 0x01,
@@ -28,8 +29,8 @@ unsigned long __strtoul(int base, int max_width,
 {
     int scan_state = start;
     int count = 0;
-    unsigned long value = 0;
-    unsigned long value_max = 0;
+    u32 value = 0;
+    u32 value_max = 0;
     int c;
 
     *negative = *overflow = 0;
@@ -154,7 +155,7 @@ unsigned long __strtoul(int base, int max_width,
 
 unsigned long strtoul(const char* str, char** end, int base)
 {
-    unsigned long value;
+    u32 value;
     int count, negative, overflow;
 
     __InStrCtrl isc;
@@ -180,8 +181,8 @@ unsigned long strtoul(const char* str, char** end, int base)
 
 long strtol(const char* str, char** end, int base)
 {
-    unsigned long uvalue;
-    long svalue;
+    u32 uvalue;
+    s32 svalue;
     int count, negative, overflow;
 
     __InStrCtrl isc;

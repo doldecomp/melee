@@ -8,14 +8,14 @@ s32 ReadUARTN(u8*, u32);
 
 bool MSL_ConsoleIo_804D7080;
 
-int __read_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
+int __read_console(__file_handle arg0, u8* buf, size_t* n, __idle_proc unused)
 {
     u8 _[8];
 
     s32 init_status = 0;
     s32 read_status;
     u8 return_status;
-    u32 bytes_to_read;
+    size_t bytes_to_read;
 
     if (MSL_ConsoleIo_804D7080 == false) {
         init_status = InitializeUART(0xE100);
@@ -45,7 +45,7 @@ int __read_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
     return return_status;
 }
 
-int __write_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
+int __write_console(__file_handle arg0, u8* buf, size_t* n, __idle_proc unused)
 {
     u8 _[8];
     s32 uart_status = 0;
@@ -65,7 +65,7 @@ int __write_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
     return 0;
 }
 
-int __close_console(u32 unused)
+int __close_console(__file_handle unused)
 {
     return 0;
 }

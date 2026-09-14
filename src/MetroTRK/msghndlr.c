@@ -621,7 +621,7 @@ DSError TRKDoContinue(MessageBuffer* b)
 DSError TRKDoStep(MessageBuffer* b)
 {
     DSError error;
-    size_t sp10;
+    u32 sp10;
     u32 spC;
     u8 spA;
     u8 sp9;
