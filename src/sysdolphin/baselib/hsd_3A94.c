@@ -6,6 +6,7 @@
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 #include "hsd_4D11.h"
+#include "m2c_macros.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 #include <dolphin/types.h>
@@ -68,7 +69,7 @@ typedef union CardCmdBuf {
 /// the request's arguments and depend on type.
 typedef struct CardRequest {
     /* 0x00 */ s32 type;
-    /* 0x04 */ s32 state;
+    /* 0x04 */ CardState* state;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
     /* 0x10 */ s32 x10;
@@ -121,7 +122,8 @@ typedef struct {
                                     s32 file_id, s32 seq_num, void* payload,
                                     s32 payload_size, s32 version);
 /* 3AD16C */ static s32 fn_803AD16C(CardState* state);
-/* 3ADE4C */ static s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback);
+/* 3ADE4C */ static s32 fn_803ADE4C(CardState* card_state, s32 channel,
+                                    s32 callback);
 /* 3ADF90 */ static s32 fn_803ADF90(struct CardState*, s32, u8*, s32,
                                     void (*)(s32, s32));
 /* 3AE7F8 */ static s32 fn_803AE7F8(struct CardState*, s32, s32, s32, s32);
@@ -131,7 +133,7 @@ typedef struct {
 /* 3B1338 */ static s32 fn_803B1338(CardState* state, s32);
 /* 3B1F78 */ static s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id,
                                     s32 seq_num, s32 callback);
-/* 3B21E8 */ static s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num,
+/* 3B21E8 */ static s32 fn_803B21E8(CardState* state, s32 file_id, s32 seq_num,
                                     s32 callback);
 /* 3B26CC */ static s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num,
                                     s32 version, void (*callback)(s32, s32));
@@ -650,7 +652,7 @@ s32 fn_803AA790(void)
 {
     CardRequest* entry;
     s32 result;
-    s32 state;
+    CardState* state;
 
     entry = &((CardRequest*) &hsd_804D2348)[hsd_804D7990];
     state = entry->state;
@@ -2604,7 +2606,7 @@ s32 fn_803AD16C(CardState* state)
     return result;
 }
 
-s32 fn_803ADE4C(s32 state, s32 file_no, s32 callback)
+s32 fn_803ADE4C(CardState* state, s32 file_no, s32 callback)
 {
     CardCmd cmd_open;
     CardCmd cmd_mount;
@@ -2651,7 +2653,7 @@ s32 fn_803ADE4C(s32 state, s32 file_no, s32 callback)
     }
 
     entries[0].x0 = 5;
-    entries[0].x4 = state;
+    entries[0].x4 = M2C_BITWISE(s32, state);
     entries[0].x8 = callback;
     entries[0].xC = 0;
     hsd_804D7998 = -1;
@@ -5244,7 +5246,7 @@ s32 fn_803B1F78(CardState* state, s32 filename, s32 banner, s32 icons,
     return 0;
 }
 
-s32 fn_803B21E8(s32 state, s32 banner, s32 icons, s32 callback)
+s32 fn_803B21E8(CardState* state, s32 banner, s32 icons, s32 callback)
 {
     CardCmd cmd_set_status;
     s32 result;
@@ -5289,7 +5291,7 @@ s32 fn_803B21E8(s32 state, s32 banner, s32 icons, s32 callback)
     }
 
     entries[0].x0 = 7;
-    entries[0].x4 = state;
+    entries[0].x4 = M2C_BITWISE(s32, state);
     entries[0].x8 = callback;
     result = 0;
     entries[0].xC = result;
@@ -5400,7 +5402,7 @@ int hsd_803B2550(CardState* state, const char* filename,
         CardRequest* entry = hsd_803B2550_inline(base, retries);
         s32 next = retries + 1;
         entry->type = 5;
-        entry->state = (s32) state;
+        entry->state = state;
         entry->x8 = file_no;
         entry->callback = (void (*)(s32, s32)) callback;
         hsd_804D7994 = next % 32;
