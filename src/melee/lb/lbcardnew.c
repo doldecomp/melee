@@ -1095,11 +1095,11 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
 {
     void* icon = icon_data;
     struct CardEntry* entry;
-    s32* ctx;
+    CardState* ctx;
 
     entry = file_entries;
-    ctx = &_p(unk_A8);
-    hsd_803B24E4((CardState*) ctx, 0, 0x2000, _p(lib_area));
+    ctx = (CardState*) &_p(unk_A8);
+    hsd_803B24E4(ctx, 0, 0x2000, _p(lib_area));
     hsd_803B2ADC(ctx, icon);
     {
         int i;

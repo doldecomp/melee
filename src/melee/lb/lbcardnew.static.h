@@ -5,12 +5,13 @@
 
 #include <placeholder.h>
 
+#include "sysdolphin/baselib/hsd_3A94.h"
 #include <dolphin/card.h>
 #include <melee/lb/types.h>
 
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;
-    /* 0x004 */ UNK_T lib_area;
+    /* 0x004 */ CardState* lib_area;
     /* 0x008 */ int chan;
     /* 0x00C */ UNK_T unk_C;
     /* 0x010 */ const char* unk_10;
