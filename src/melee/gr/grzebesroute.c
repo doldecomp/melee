@@ -301,7 +301,7 @@ void grZebesRoute_8020B548(void)
 
 DynamicsDesc* grZebesRoute_8020B854(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grZebesRoute_8020B85C(Vec3* arg, int arg0, HSD_JObj* jobj)

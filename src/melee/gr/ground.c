@@ -3227,30 +3227,24 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
-#ifdef MUST_MATCH
-#pragma push
-/// With propagation on, the single-use @c &stage_info is rematerialized at the
-/// store instead of being computed at the start of the branch and held in
-/// r31 across the two calls
-#pragma opt_propagation off
-#endif
+static inline void initSinglePlayerDisplay(StageInfo* stageinfo)
+{
+    int display_id = tyDisplay_8031C2EC();
+    tyDisplay_8031C454(display_id);
+    stageinfo->x6E4[0] = display_id;
+}
+
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
     if (gm_IsCurrently1PMode() != 0) {
-        StageInfo* stageinfo = &stage_info;
-        int display_id;
-        display_id = tyDisplay_8031C2EC();
-        tyDisplay_8031C454(display_id);
-        stageinfo->x6E4[0] = display_id;
+        StageInfo* stageinfo;
+        initSinglePlayerDisplay(stageinfo = &stage_info);
     } else {
         stage_info.x6E4[0] = -1;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {

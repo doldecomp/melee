@@ -1,143 +1,136 @@
 #include "hsd_3B27.h"
 
-#include <stddef.h>
 #include <string.h>
 
 #include "hsd_3A94.h"
 
-typedef struct {
-    s32 type;
-    s32 f1;
-    s32 f2;
-    s32 f3;
-    s32 f4;
-    s32 f5;
-} HsdCmdEntry;
+/// The request queue as a pointer value: MWCC then keeps the array offset in
+/// the load/store displacement, as retail does.
+#define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->requests)
 
-#define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
-
-int hsd_803B27F4(const s32* arg0, const char* arg1, int arg2, int arg3,
-                 void (*arg4)(int, int))
+int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
+                 CardCallback callback)
 {
     s32 read_idx = hsd_804D7990;
-    u8* base = hsd_804D1138;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
     s32 write_idx = hsd_804D7994;
-    HsdCmdEntry* entry;
+    CardRequest* entry;
 
     if (read_idx == write_idx) {
-        if (CMD_QUEUE(base)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }
 
-    entry = &CMD_QUEUE(base)[write_idx];
+    entry = &CARD_REQUESTS(ctx)[write_idx];
     {
         s32 next = write_idx + 1;
-        entry->type = 6;
-        entry->f1 = (s32) arg0;
-        entry->f2 = (s32) arg1;
-        entry->f3 = arg2;
-        entry->f4 = arg3;
-        entry->f5 = (s32) arg4;
+        entry->type = CARD_REQ_READ_HEADER;
+        entry->state = state;
+        entry->header.comment = comment;
+        entry->header.banner = banner;
+        entry->header.icons = icons;
+        entry->callback = callback;
         hsd_804D7994 = next % 32;
     }
 
     return 0;
 }
 
-int hsd_803B286C(const s32* arg0, UNK_T arg1, const char* arg2, int arg3,
-                 int arg4, void (*arg5)(int, int))
+int hsd_803B286C(CardState* state, const char* filename, const char* comment,
+                 void* banner, void* icons, CardCallback callback)
 {
-    u8* base = hsd_804D1138;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
 
-    memcpy(((CardState*) arg0)->comment, arg2, 64);
+    memcpy(state->comment, comment, 64);
 
     {
         s32 write_idx;
         s32 read_idx = hsd_804D7990;
 
         if (read_idx == (write_idx = hsd_804D7994)) {
-            if (CMD_QUEUE(base)[read_idx].type != 0) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
                 return -265;
             }
         }
 
-        CMD_QUEUE(base)[write_idx].type = 3;
-        CMD_QUEUE(base)[write_idx].f1 = (s32) arg0;
-        CMD_QUEUE(base)[write_idx].f2 = (s32) arg1;
-        CMD_QUEUE(base)[write_idx].f3 = arg3;
-        CMD_QUEUE(base)[write_idx].f4 = arg4;
-        CMD_QUEUE(base)[write_idx].f5 = (s32) arg5;
+        CARD_REQUESTS(ctx)[write_idx].type = CARD_REQ_CREATE_FILE;
+        CARD_REQUESTS(ctx)[write_idx].state = state;
+        CARD_REQUESTS(ctx)[write_idx].create.filename = filename;
+        CARD_REQUESTS(ctx)[write_idx].create.banner = banner;
+        CARD_REQUESTS(ctx)[write_idx].create.icons = icons;
+        CARD_REQUESTS(ctx)[write_idx].callback = callback;
         hsd_804D7994 = (write_idx + 1) % 32;
     }
 
     return 0;
 }
 
-int hsd_803B2928(const s32* arg0, const char* arg1, int arg2, int arg3,
-                 void (*arg4)(int, int))
+int hsd_803B2928(CardState* state, const char* comment, void* banner,
+                 void* icons, CardCallback callback)
 {
-    u8* base = hsd_804D1138;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
 
-    memcpy(((CardState*) arg0)->comment, arg1, 64);
+    memcpy(state->comment, comment, 64);
 
     {
         s32 write_idx;
         s32 read_idx = hsd_804D7990;
 
         if (read_idx == (write_idx = hsd_804D7994)) {
-            if (CMD_QUEUE(base)[read_idx].type != 0) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
                 return -265;
             }
         }
 
-        CMD_QUEUE(base)[write_idx].type = 4;
-        CMD_QUEUE(base)[write_idx].f1 = (s32) arg0;
-        CMD_QUEUE(base)[write_idx].f3 = arg2;
-        CMD_QUEUE(base)[write_idx].f4 = arg3;
-        CMD_QUEUE(base)[write_idx].f5 = (s32) arg4;
+        CARD_REQUESTS(ctx)[write_idx].type = CARD_REQ_SET_STATUS;
+        CARD_REQUESTS(ctx)[write_idx].state = state;
+        CARD_REQUESTS(ctx)[write_idx].status.banner = banner;
+        CARD_REQUESTS(ctx)[write_idx].status.icons = icons;
+        CARD_REQUESTS(ctx)[write_idx].callback = callback;
         hsd_804D7994 = (write_idx + 1) % 32;
     }
 
     return 0;
 }
 
-int hsd_803B29D8(const s32* ctx, int channel, const u8* data, UNK_T callback)
+int hsd_803B29D8(CardState* state, int file_idx, u8* buf,
+                 CardCallback callback)
 {
     s32 read_idx = hsd_804D7990;
-    u8* base = hsd_804D1138;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
     s32 write_idx = hsd_804D7994;
-    HsdCmdEntry* entry;
+    CardRequest* entry;
 
     if (read_idx == write_idx) {
-        if (CMD_QUEUE(base)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }
 
-    entry = &CMD_QUEUE(base)[write_idx];
+    entry = &CARD_REQUESTS(ctx)[write_idx];
     {
         s32 next = write_idx + 1;
-        entry->type = 1;
-        entry->f1 = (s32) ctx;
-        entry->f2 = channel;
-        entry->f3 = (s32) data;
-        entry->f5 = (s32) callback;
+        entry->type = CARD_REQ_READ_FILE;
+        entry->state = state;
+        entry->file.file_idx = file_idx;
+        entry->file.buf = buf;
+        entry->callback = callback;
         hsd_804D7994 = next % 32;
     }
 
     return 0;
 }
 
-int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
-                 void (*arg3)(int, int))
+int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
+                 CardCallback callback)
 {
-    u8* base = hsd_804D1138;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
     s32 read_idx;
     s32 write_idx;
-    HsdCmdEntry* entry;
+    CardRequest* entry;
 
-    if (arg0[arg1 + offsetof(CardState, file_sizes) / sizeof(s32)] <= 0) {
+    if (state->file_sizes[file_idx] <= 0) {
         return -257;
     }
 
@@ -145,30 +138,28 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
     write_idx = hsd_804D7994;
 
     if (read_idx == write_idx) {
-        if (CMD_QUEUE(base)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }
 
-    entry = &CMD_QUEUE(base)[write_idx];
+    entry = &CARD_REQUESTS(ctx)[write_idx];
     {
         s32 next = write_idx + 1;
-        entry->type = 2;
-        entry->f1 = (s32) arg0;
-        entry->f2 = arg1;
-        entry->f3 = (s32) arg2;
-        entry->f5 = (s32) arg3;
+        entry->type = CARD_REQ_WRITE_FILE;
+        entry->state = state;
+        entry->file.file_idx = file_idx;
+        entry->file.buf = buf;
+        entry->callback = callback;
         hsd_804D7994 = next % 32;
     }
 
     return 0;
 }
 
-int hsd_803B2ADC(s32* ctx, UNK_T data)
+int hsd_SetCardIconInfo(CardState* state, CardIconInfo* icon_info)
 {
-    CardState* state = (CardState*) ctx;
-
-    memcpy(&state->banner_format, data, 18);
-    state->header_size = hsd_803AC340(&state->banner_format);
+    memcpy(&state->icon_info, icon_info, sizeof(state->icon_info));
+    state->header_size = hsd_803AC340(&state->icon_info);
     return 0;
 }

@@ -1563,7 +1563,7 @@ void grShrineRoute_8020B0AC(void)
 
 DynamicsDesc* grShrineRoute_OnTouchLine(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grShrineRoute_OnCheckShadowRender(Vec3* a, int b, HSD_JObj* jobj)

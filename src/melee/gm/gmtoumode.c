@@ -178,10 +178,6 @@ void gm_801B1834(GameModeState* state)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void gm_801B18D4(GameModeState* arg0)
 {
     StartMeleeData* smd;
@@ -197,9 +193,6 @@ void gm_801B18D4(GameModeState* arg0)
     /// @todo :: figure out how to call this not inlined
     gm_SetupSuddenDeath(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_801B1A2C(GameModeState* arg0)
 {

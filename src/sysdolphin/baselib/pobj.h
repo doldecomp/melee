@@ -14,11 +14,6 @@
 #define HSD_MTX_RIGID 1
 #define HSD_MTX_ENVELOPE 2
 
-struct _unk_struct_pobj {
-    u32 data[8];
-    HSD_AObj* aobj;
-};
-
 struct HSD_PObj {
     HSD_Class parent;
     HSD_PObj* next;
@@ -31,7 +26,6 @@ struct HSD_PObj {
         HSD_JObj* jobj;
         HSD_ShapeSet* shape_set;
         HSD_SList* envelope_list;
-        struct _unk_struct_pobj* unk;
     } u;
 };
 

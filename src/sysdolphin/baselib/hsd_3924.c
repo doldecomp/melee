@@ -25,10 +25,11 @@ HSD_SList* fn_80392480(Event event, int priority)
 {
     HSD_SList* prev = NULL;
     HSD_SList* cur = hsd_804D7850;
+    HSD_SList* ret;
 
     goto loop_5;
 block_1: {
-    HSD_SList* ret = cur->data;
+    ret = cur->data;
     if (event != (Event) ret->next) {
         if (((struct EventPriority*) ret)->priority <= priority) {
             prev = cur;
@@ -54,17 +55,10 @@ block_1: {
 }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void hsd_80392528(Event event)
 {
     fn_80392480(event, 0x80);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 typedef struct {
     s32 count;

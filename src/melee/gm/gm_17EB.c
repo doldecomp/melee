@@ -158,10 +158,6 @@ bool fn_8017EDDC(void)
     return false;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_8017EE40(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
@@ -224,6 +220,3 @@ void fn_8017EE40(int arg0_int)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif

@@ -559,7 +559,7 @@ typedef struct itPeachTurnipAttributes {
     struct {
         s32 x0_odds;
         s32 x4_damage;
-    } x8 UNK_SIZE_ARRAY;
+    } x8[8];
 } itPeachTurnipAttributes;
 
 typedef struct itPeachTurnip_ItemVars {

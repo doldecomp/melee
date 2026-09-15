@@ -1,5 +1,6 @@
 #include "debugconsole_main.h"
 
+#include <placeholder.h>
 #include <string.h>
 
 #include "hsd_3915.h"
@@ -681,10 +682,6 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma global_optimizer off
-#endif
 void hsd_80394668(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -697,11 +694,10 @@ void hsd_80394668(void)
         u32 size;
         struct ParticleScreenBuffer* src;
 
-        src = (struct ParticleScreenBuffer*) sp->x2C;
-        if ((u32) src != 0) {
+        if ((u32) (src = (struct ParticleScreenBuffer*) sp->x2C) != 0) {
             /* Copy XFB data with brightness adjustment */
-            dst_base = (s32*) sp + sp->x34;
-            dst = (struct ParticleScreenBuffer*) dst_base[9];
+            dst = (struct ParticleScreenBuffer*) (dst_base =
+                                                      (s32*) sp + sp->x34)[9];
             size = sp->x48;
 
             for (pos = 0; pos < size; pos += 2) {
@@ -760,9 +756,6 @@ void hsd_80394668(void)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void hsd_80394950(OSContext* ctx)
 {
@@ -1340,10 +1333,6 @@ void hsd_803957C0(void* input)
     hsd_804CF810.x50 = saved;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 hsd_80395970(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -1380,10 +1369,6 @@ s32 hsd_80395970(void)
     hsd_80393E68(saved_x, saved_y);
     return result;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 extern struct lbl_8040BA5C_t {
     void* x0;

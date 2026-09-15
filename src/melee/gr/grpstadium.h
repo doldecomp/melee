@@ -5,8 +5,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 
 /* 1D1018 */ void grStadium_OnDemoInit(int);
@@ -67,11 +65,11 @@
 /* 1D3B4C */ void grStadium_801D3B4C(int, int);
 /* 1D3BBC */ void grStadium_801D3BBC(Ground_GObj*);
 /* 1D3F40 */ void grStadium_801D3F40(Ground_GObj*, int);
-/* 1D4040 */ UNK_RET grStadium_801D4040(UNK_PARAMS);
-/* 1D4084 */ UNK_RET grStadium_801D4084(UNK_PARAMS);
-/* 1D40C8 */ UNK_RET grStadium_801D40C8(UNK_PARAMS);
-/* 1D410C */ UNK_RET grStadium_801D410C(UNK_PARAMS);
-/* 1D4150 */ UNK_RET grStadium_801D4150(UNK_PARAMS);
+/* 1D4040 */ void grStadium_801D4040(void);
+/* 1D4084 */ void grStadium_801D4084(void);
+/* 1D40C8 */ void grStadium_801D40C8(void);
+/* 1D410C */ void grStadium_801D410C(void);
+/* 1D4150 */ void grStadium_801D4150(void);
 /* 1D4194 */ void grStadium_801D4194(Ground_GObj*);
 /* 1D42B8 */ bool grStadium_801D42B8(void);
 /* 1D4354 */ Ground* grStadium_801D4354(Ground_GObj*);

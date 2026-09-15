@@ -28,9 +28,29 @@ TEMPLATE = Path(__file__).resolve().parent / "cleanup-index-template.html"
 
 # Types that never name a struct, used to split plain casts into two buckets.
 PRIMITIVES = {
-    "u8", "s8", "u16", "s16", "u32", "s32", "u64", "s64", "f32", "f64",
-    "char", "short", "int", "long", "void", "unsigned", "signed",
-    "float", "double", "uintptr_t", "intptr_t", "size_t", "bool",
+    "u8",
+    "s8",
+    "u16",
+    "s16",
+    "u32",
+    "s32",
+    "u64",
+    "s64",
+    "f32",
+    "f64",
+    "char",
+    "short",
+    "int",
+    "long",
+    "void",
+    "unsigned",
+    "signed",
+    "float",
+    "double",
+    "uintptr_t",
+    "intptr_t",
+    "size_t",
+    "bool",
 }
 
 # A type name as it appears inside a cast, e.g. `const struct Foo`, `unsigned long`.
@@ -41,13 +61,15 @@ TYPE = (
 
 CAST = re.compile(r"\(\s*(" + TYPE + r")\s*(\*+)\s*\)\s*(?=[A-Za-z_&(*])")
 OFFSET = re.compile(
-    r"\(\s*(" + TYPE + r")\s*(\*+)\s*\)\s*"          # the cast
+    r"\(\s*(" + TYPE + r")\s*(\*+)\s*\)\s*"  # the cast
     r"\(?\s*&?[A-Za-z_][\w.\[\]]*(?:\s*->\s*\w+)*\s*\)?"  # the operand
-    r"\s*([-+])\s*(0[xX][0-9a-fA-F]+|\d+)\b"         # the constant
+    r"\s*([-+])\s*(0[xX][0-9a-fA-F]+|\d+)\b"  # the constant
 )
 DEREF = re.compile(r"(?<![\w\)\]])\*\s*\(\s*(" + TYPE + r")\s*(\*+)\s*\)")
 INDEX = re.compile(r"\(\s*\(\s*(" + TYPE + r")\s*(\*+)\s*\)[^()]{1,40}\)\s*\[")
-ABSOLUTE = re.compile(r"\(\s*(" + TYPE + r"\s*\*+)\s*\)\s*\(?\s*(0[xX][0-9a-fA-F]{6,8})\b")
+ABSOLUTE = re.compile(
+    r"\(\s*(" + TYPE + r"\s*\*+)\s*\)\s*\(?\s*(0[xX][0-9a-fA-F]{6,8})\b"
+)
 # Narrow casts are excluded: a pointer is never truncated to u8 or s16.
 TO_INT = re.compile(
     r"\(\s*(u32|s32|int|long|unsigned int|unsigned long|uintptr_t|size_t)\s*\)"
@@ -64,6 +86,9 @@ ORDER_FN = re.compile(r"\bstatic\s+\w+\s+(order_\w+|\w+_order\w*)\s*\(")
 HELPER_FN = re.compile(r"\bstatic\s+(?:inline\s+)?[\w* ]+?\b(\w+)\s*\(")
 STACK_PAD = re.compile(r"\bPAD_STACK\s*\(([^)]*)\)")
 DEFINE = re.compile(r"^#\s*define\s+(\w+)", re.M)
+GOTO = re.compile(r"\bgoto\s+([A-Za-z_]\w*)")
+LONGJMP = re.compile(r"\b(?:__)?longjmp\s*\(")
+
 
 # (name, shape, family). The family drives the colour on the page: `move` sites
 # walk a pointer by a constant, `retype` sites only change its type, and `hack`
@@ -80,6 +105,8 @@ CATEGORIES = [
     ("ptr-to-int", "(u32)p", "retype"),
     ("must-match", "#ifdef MUST_MATCH", "hack"),
     ("pragma", "#pragma, not push/pop", "hack"),
+    ("goto", "goto instead of control flow", "hack"),
+    ("longjmp", "explicit __longjmp", "hack"),
 ]
 FAMILY = {name: family for name, _, family in CATEGORIES}
 
@@ -159,7 +186,9 @@ def pointer_names(text: str):
     bodies: list[tuple[int, int, set[str]]] = []
     prev = 0
     for a, b in spans:
-        head_start = max(prev, text.rfind(";", prev, a) + 1, text.rfind("}", prev, a) + 1)
+        head_start = max(
+            prev, text.rfind(";", prev, a) + 1, text.rfind("}", prev, a) + 1
+        )
         names = {m[1] for m in DECL.finditer(text[head_start:a])}
         names |= {m[1] for m in DECL.finditer(text[a:b])}
         bodies.append((a, b, names))
@@ -307,9 +336,16 @@ def scan_file(path: Path, rel: str) -> Iterator[Site]:
             return
         claimed[start] = rank
         line = bisect.bisect_right(offsets, start)
-        found.append(Site(
-            category, rel, line, re.sub(r"\s+", " ", ty).strip(),
-            detail, source_at(line)))
+        found.append(
+            Site(
+                category,
+                rel,
+                line,
+                re.sub(r"\s+", " ", ty).strip(),
+                detail,
+                source_at(line),
+            )
+        )
 
     # An outer form claims its position and swallows the plain cast nested in it.
     offset_spans, wrapper_spans = [], []
@@ -326,15 +362,23 @@ def scan_file(path: Path, rel: str) -> Iterator[Site]:
         wrapper_spans.append((m.start(), m.end()))
         emit("abs-address", m.start(), m[1], m[2], 6)
     for m in CAST.finditer(text):
-        if SIZEOF.search(text[max(0, m.start() - 10):m.start()]):
+        if SIZEOF.search(text[max(0, m.start() - 10) : m.start()]):
             continue
         if any(a <= m.start() < b for a, b in wrapper_spans):
             continue
         emit(classify(m[1]), m.start(), m[1] + m[2], "", 1)
+    for m in GOTO.finditer(text):
+        emit("goto", m.start(), "", m[1], 1)
+    for m in LONGJMP.finditer(text):
+        prefix = text[text.rfind("\n", 0, m.start()) + 1 : m.start()]
+        if re.match(r"(?:#define|void|ASM)\b", prefix):
+            continue
+        args = macro_args(text, m.end() - 1)
+        emit("longjmp", m.start(), "", args[0], 1)
 
     # M2C_FIELD(expr, T*, offset) is a cast+offset that m2c left behind.
     for m in M2C_FIELD.finditer(text):
-        prefix = text[text.rfind("\n", 0, m.start()) + 1:m.start()]
+        prefix = text[text.rfind("\n", 0, m.start()) + 1 : m.start()]
         if re.match(r"\s*#\s*define\s*$", prefix):
             continue
         args = macro_args(text, m.end() - 1)
@@ -368,8 +412,8 @@ def scan_file(path: Path, rel: str) -> Iterator[Site]:
         if directive == "ifndef":
             detail = f"#ifndef {detail}".strip()
         meaningful = (
-            j for j, l in enumerate(body)
-            if l.strip() and l.strip() != "#pragma push")
+            j for j, l in enumerate(body) if l.strip() and l.strip() != "#pragma push"
+        )
         first = next(meaningful, None)
         source = source_at(i + 2 + first) if first is not None else source_at(i + 1)
         found.append(Site("must-match", rel, i + 1, kind, detail, source))
@@ -399,20 +443,29 @@ def directory_of(rel: str) -> str:
 def write_tsv(sites: list[Site], out) -> None:
     out.write("category\tfile\tline\ttype\tdetail\tsource\n")
     for s in sites:
-        out.write(f"{s.category}\t{s.file}\t{s.line}\t{s.type}\t{s.detail}\t{s.source}\n")
+        out.write(
+            f"{s.category}\t{s.file}\t{s.line}\t{s.type}\t{s.detail}\t{s.source}\n"
+        )
 
 
 def write_html(
-    sites: list[Site], path: Path, revision: str, generated: str, repo: str,
+    sites: list[Site],
+    path: Path,
+    revision: str,
+    generated: str,
+    repo: str,
 ) -> None:
     payload = json.dumps([list(s) for s in sites], separators=(",", ":"))
-    meta = json.dumps({
-        "revision": revision,
-        "generated": generated,
-        "repo": repo.rstrip("/"),
-        "files": len({s.file for s in sites}),
-        "categories": CATEGORIES,
-    }, separators=(",", ":"))
+    meta = json.dumps(
+        {
+            "revision": revision,
+            "generated": generated,
+            "repo": repo.rstrip("/"),
+            "files": len({s.file for s in sites}),
+            "categories": CATEGORIES,
+        },
+        separators=(",", ":"),
+    )
     html = TEMPLATE.read_text(encoding="utf-8")
     html = html.replace("__PAYLOAD__", payload.replace("</", "<\\/"))
     html = html.replace("__META__", meta.replace("</", "<\\/"))
@@ -425,15 +478,20 @@ def summarize(sites: list[Site]) -> None:
     print(
         f"{len(sites)} sites in {len({s.file for s in sites})} files: "
         f"{by_family['move']} move a pointer, {by_family['retype']} retype one, "
-        f"{by_family['hack']} match hacks\n")
+        f"{by_family['hack']} match hacks\n"
+    )
     for name, shape, family in CATEGORIES:
         if by_category[name]:
             print(f"  {by_category[name]:5d}  {name:<17} {family:<7} {shape}")
     print("\n  MUST_MATCH regions by kind")
-    for kind, n in Counter(s.type for s in sites if s.category == "must-match").most_common():
+    for kind, n in Counter(
+        s.type for s in sites if s.category == "must-match"
+    ).most_common():
         print(f"  {n:5d}  {kind}")
     print("\n  pragmas")
-    for kind, n in Counter(s.type for s in sites if s.category == "pragma").most_common(8):
+    for kind, n in Counter(s.type for s in sites if s.category == "pragma").most_common(
+        8
+    ):
         print(f"  {n:5d}  {kind}")
     print("\n  top directories")
     for d, n in Counter(directory_of(s.file) for s in sites).most_common(8):
@@ -445,20 +503,28 @@ def summarize(sites: list[Site]) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--src", type=Path, default=ROOT / "src",
-                    help="tree to scan (default: src)")
-    ap.add_argument("--out", type=Path,
-                    help="directory to write index.html and cleanup_index.tsv into")
-    ap.add_argument("--tsv", type=Path,
-                    help="write the TSV here instead ('-' for stdout)")
-    ap.add_argument("--revision", default="working tree",
-                    help="revision label shown on the page")
-    ap.add_argument("--generated", default="",
-                    help="build date shown on the page")
-    ap.add_argument("--repo", default="https://github.com/doldecomp/melee",
-                    help="repository URL that line links on the page point into")
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    ap.add_argument(
+        "--src", type=Path, default=ROOT / "src", help="tree to scan (default: src)"
+    )
+    ap.add_argument(
+        "--out",
+        type=Path,
+        help="directory to write index.html and cleanup_index.tsv into",
+    )
+    ap.add_argument(
+        "--tsv", type=Path, help="write the TSV here instead ('-' for stdout)"
+    )
+    ap.add_argument(
+        "--revision", default="working tree", help="revision label shown on the page"
+    )
+    ap.add_argument("--generated", default="", help="build date shown on the page")
+    ap.add_argument(
+        "--repo",
+        default="https://github.com/doldecomp/melee",
+        help="repository URL that line links on the page point into",
+    )
     args = ap.parse_args()
 
     sites = scan_tree(args.src)
@@ -472,12 +538,14 @@ def main() -> int:
     if args.out:
         args.out.mkdir(parents=True, exist_ok=True)
         write_html(
-            sites, args.out / "index.html", args.revision, args.generated, args.repo)
+            sites, args.out / "index.html", args.revision, args.generated, args.repo
+        )
         with (args.out / "cleanup_index.tsv").open("w", encoding="utf-8") as fh:
             write_tsv(sites, fh)
         print(
             f"wrote {args.out}/index.html and {args.out}/cleanup_index.tsv "
-            f"({len(sites)} sites)")
+            f"({len(sites)} sites)"
+        )
     if not args.tsv and not args.out:
         summarize(sites)
     return 0

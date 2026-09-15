@@ -2407,7 +2407,7 @@ bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
 
 DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)

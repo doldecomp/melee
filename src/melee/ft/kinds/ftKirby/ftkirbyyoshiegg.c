@@ -107,10 +107,6 @@ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
     fp->accessory4_cb = fn_8010AA64;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
 {
     f32 temp_ret;
@@ -144,9 +140,6 @@ void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
         ftAnim_SetAnimRate(gobj, ftKb_SpecialNYs_80109324());
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj) {}
 
