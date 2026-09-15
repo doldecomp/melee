@@ -518,8 +518,7 @@ void lbShadow_8000F38C(s32 arg0)
                                         0);
 
                     {
-                        i = 0;
-                        do {
+                        for (i = 0; i < 0x14; i++) {
                             f32 scale = cm->target_ext.v.z;
                             f32 top = 1.2f * scale;
                             f32 bot = 1.2f * -scale;
@@ -528,8 +527,7 @@ void lbShadow_8000F38C(s32 arg0)
                             if (HSD_ViewingRectCheck(&rect) != 0) {
                                 break;
                             }
-                            i++;
-                        } while (i < 0x14);
+                        }
 
                         if (i < 0x14) {
                             HSD_ShadowSetViewingRect(fp->x20A4.shadow,

@@ -430,8 +430,7 @@ void _tyDisplay_80318B1C(s32 arg0)
             i++;
         }
     } else {
-        i = 0;
-        do {
+        for (i = 0; i < TY_TROPHY_COUNT; i++) {
             if (Toy_803048C0(i) != 0) {
                 tyDisplay_8031B9DC(i);
                 grid->sort[start].key = i;
@@ -441,8 +440,7 @@ void _tyDisplay_80318B1C(s32 arg0)
                     start = 0;
                 }
             }
-            i++;
-        } while (i < TY_TROPHY_COUNT);
+        }
     }
 }
 

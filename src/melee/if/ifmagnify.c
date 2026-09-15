@@ -602,11 +602,9 @@ void ifMagnify_802FC870(void)
     archive = ifAll_GetArchive();
     lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0,
                            ifMagnify_804D57E8, 0);
-    i = 0;
-    do {
+    for (i = 0; i < 6; i++) {
         ifMagnify_802FC3C0(i);
-        i++;
-    } while (i < 6);
+    }
     ifMagnify_802FC618();
 }
 

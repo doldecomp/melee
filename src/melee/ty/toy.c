@@ -1766,8 +1766,7 @@ void _Toy_8030663C(void)
         int var2_r30;
 
         var2_r29 = _Toy_sbss_804D6E64;
-        var2_r30 = 0;
-        do {
+        for (var2_r30 = 0; var2_r30 < TY_TROPHY_COUNT; var2_r30++) {
             var2_r28 = _Toy_sbss_804D6E64;
             var2_r27 = 0;
             goto loop_13_check;
@@ -1783,8 +1782,7 @@ void _Toy_8030663C(void)
                     goto loop_13_body;
                 }
             }
-            var2_r30 += 1;
-        } while (var2_r30 < TY_TROPHY_COUNT);
+        }
     }
     {
         TySortRow* var3_r27;
@@ -1794,8 +1792,7 @@ void _Toy_8030663C(void)
         TySortRow* new_var;
 
         var3_r29 = _Toy_sbss_804D6E64;
-        var3_r30 = 0;
-        do {
+        for (var3_r30 = 0; var3_r30 < TY_TROPHY_COUNT; var3_r30++) {
             var3_r27 = _Toy_sbss_804D6E64;
             var3_r28 = 0;
             goto loop_23_check;
@@ -1822,8 +1819,7 @@ void _Toy_8030663C(void)
                     }
                 }
             }
-            var3_r30 += 1;
-        } while (var3_r30 < TY_TROPHY_COUNT);
+        }
     }
 }
 
@@ -2507,9 +2503,7 @@ void _Toy_803078E4(void)
         data->x0C = GObj_Create(5, 6, 0);
         GObj_SetupGXLink(data->x0C, HSD_SObjLib_803A49E0, 0x38, 0);
 
-        i = 0;
-
-        do {
+        for (i = 0; i < 7; i++) {
             sobj = HSD_SObjLib_803A477C(data->x0C, syms[i], 0, 0, 0x80, 0);
             if (sobj != NULL) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
@@ -2520,8 +2514,7 @@ void _Toy_803078E4(void)
                     sobj->x14 = (f32) pos_en.a[i].xy[1];
                 }
             }
-            i += 1;
-        } while (i < 7);
+        }
     }
 }
 
@@ -6144,8 +6137,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
         {
             s32 slot;
 
-            slot = 0;
-            do {
+            for (slot = 0; slot < 9; slot++) {
                 if (editor->values[slot] != 0) {
                     Toy_80305918(slot, 0, 0);
                     buttons = Toy_80305B88();
@@ -6157,8 +6149,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
                 } else if (slot == 2) {
                     Toy_80305918(slot, 0, 0);
                 }
-                slot += 1;
-            } while (slot < 9);
+            }
         }
         Toy_80305918(0, 1, 0);
         Toy_80305918(1, 1, 0);
@@ -6235,15 +6226,13 @@ skip_decrement:
     if (changed != 0) {
         DevText_Erase(_Toy_sbss_804D6E98);
         DevText_SetCursorXY(_Toy_sbss_804D6E98, 0, 0);
-        i = 0;
-        do {
+        for (i = 0; i < 9; i++) {
             if (i == (s8) editor->selected_slot) {
                 _Toy_803109A0(i, (s32) editor->values[i], 1);
             } else {
                 _Toy_803109A0(i, (s32) editor->values[i], 0);
             }
-            i += 1;
-        } while (i < 9);
+        }
     }
 }
 
@@ -6277,15 +6266,13 @@ void _Toy_803114E8(void)
         DevText_StoreColorIndex(_Toy_sbss_804D6E98, 1);
         DevText_SetTextColor(_Toy_sbss_804D6E98, *(&_Toy_color_FF8020FF));
 
-        i = 0;
-        do {
+        for (i = 0; i < 9; i++) {
             if (i == 0) {
                 _Toy_803109A0(i, 0, 1);
             } else {
                 _Toy_803109A0(i, 0, 0);
             }
-            i++;
-        } while (i < 9);
+        }
 
         memzero(data, 0x18);
         *data = GObj_Create(0, 0, 0);

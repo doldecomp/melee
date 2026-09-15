@@ -1011,8 +1011,7 @@ void mnDiagram2_Create(int arg0)
         threshold = 0x15;
     }
 
-    j = 0;
-    do {
+    for (j = 0; j < 10; j++) {
         if (scroll >= threshold) {
             offset = scroll - threshold;
         } else {
@@ -1020,8 +1019,7 @@ void mnDiagram2_Create(int arg0)
         }
         mnDiagram2_CreateStatRow(gobj, is_name, offset, j, entity_val);
         scroll++;
-        j++;
-    } while (j < 10);
+    }
 
     {
         u32 mode = user_data->is_name_mode;

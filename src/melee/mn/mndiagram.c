@@ -200,11 +200,9 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 
     if (is_name_mode != 0) {
         total_play_time = 0.0f;
-        i = 0;
-        do {
+        for (i = 0; i < 0x78; i++) {
             total_play_time += GetPersistentNameData(i)->play_time;
-            i += 1;
-        } while (i < 0x78);
+        }
         if (total_play_time != zero) {
             return (s32) (100.0f *
                           (100.0f *
@@ -214,11 +212,9 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
         return 0;
     }
     total_play_time = 0.0f;
-    i = 0;
-    do {
+    for (i = 0; i < 0x19; i++) {
         total_play_time += GetPersistentFighterData(i)->play_time;
-        i += 1;
-    } while (i < 0x19);
+    }
     if (total_play_time != zero) {
         return (s32) (100.0f *
                       (100.0f *
@@ -2376,8 +2372,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
     row = 0;
     do {
         if (row == 0xA) {
-            bottom_col = 0;
-            do {
+            for (bottom_col = 0; bottom_col < 7; bottom_col++) {
                 if (is_name_mode != 0) {
                     entry_count = GetNameCount();
                     if (entry_count > bottom_col) {
@@ -2398,8 +2393,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                                     col_start, bottom_col)));
                     }
                 }
-                bottom_col += 1;
-            } while (bottom_col < 7);
+            }
         } else if (is_name_mode != 0) {
             entry_count = GetNameCount();
             if (entry_count > row) {

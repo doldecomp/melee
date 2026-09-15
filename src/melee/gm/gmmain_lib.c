@@ -1241,9 +1241,8 @@ void gmMainLib_8015F600(int arg0, int arg1)
         }
     } else {
         s32 bank_offset = (arg0 - 2) * 19;
-        s32 j = 0;
-
-        do {
+        s32 j;
+        for (j = 0; j < 19; j++) {
             struct NameTagData* data;
             struct NameTagDataBank* bank;
             s32 idx;
@@ -1273,8 +1272,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                 }
             }
             data->rumble_enabled = true;
-            j++;
-        } while (j < 19);
+        }
     }
 }
 
