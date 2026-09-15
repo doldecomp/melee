@@ -4,8 +4,6 @@ Super Smash Bros Melee \
 [![Linked Progress]][progress]
 =============
 
-[<img src="https://decomp.dev/doldecomp/melee.svg?w=512&h=256" width="512" height="256">][Progress]
-
 [actions]: https://github.com/doldecomp/melee/actions/workflows/build.yml
 [discord]: https://discord.gg/hKx3FJJgrV
 [progress]: https://decomp.dev/doldecomp/melee
@@ -14,7 +12,7 @@ Super Smash Bros Melee \
 [Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=linked&category=all
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 
-This repo contains a WIP decompilation of Super Smash Bros Melee (US).
+This repo contains a matching decompilation of Super Smash Bros Melee (US).
 
 > [!TIP]
 > The DOL this repository builds can be shifted! Meaning you are able to now add and remove code as you see fit, for modding or research purposes.
@@ -100,10 +98,27 @@ We use Python for our command line tooling. It is recommended that you use a [vi
     ```
 
 # Modding
-Coming soon.
+1. Dump the full game disc to a folder as described under [Building](#building), not just the system files.
+1. After cloning the repository, you can freely add new source files/folders under `/src`.
+1. Enable the non-matching build by running:
+   ```
+   python configure.py --non-matching
+   ```
+1. Add each of your source files to `configure.py`. The order determines when your files are linked, but in most cases does not matter. You can create a new `MeleeLib` definition, but you don't have to. Make sure any newly created files are marked `Equivalent`.
+   ```py
+       MeleeLib(
+           "My Custom Library",
+           [
+               Object(Equivalent, "my-cool-mod/helloworld.c"),
+           ],
+       ),
+    ```
+1. Run `ninja` to build the game.
+1. Move the build DOL from `build/GALE01/main.dol` to the `sys` folder of the game directory you created.
+1. Make sure your game directory is configured under Paths in Dolphin, then launch your `main.dol` from the Games list.
 
 # Containers
-Coming soon.
+We use [nix](https://nixos.org/) for [most of our tontinuous integration](https://github.com/doldecomp/melee/blob/1ddf751b718f86933ca93a022f93f23f823a6744/.github/workflows/build.yml#L146-L265), which can be containerized under [nixos/nix](https://hub.docker.com/r/nixos/nix/) or [nix-toolbox](https://thrix.github.io/nix-toolbox/). We plan on fully migrating our CI to nix; see [issue #1368](https://github.com/doldecomp/melee/issues/1368).
 
 # Diffing
 
@@ -115,14 +130,11 @@ Select an object from the left sidebar to begin diffing. Changes to the project 
 
 ![](assets/objdiff.png)
 
-> [!TIP]
-> It's recommended that you enable the `Relax relocation diffs` option under `Diff Options`.
-
-![](assets/relax.png)
-
 # Contributing
 
 Contributions are welcome! If you're new to decomp, check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html). Before [opening a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request), please read our [contributing guidelines](CONTRIBUTING.md). If you're new to Git and don't know how to create a pull request, we encourage you to [create an issue](https://github.com/doldecomp/melee/issues/new) with your decomp.me link and a maintainer will add your code to the repository.
+
+Most of our efforts now are directed to naming and cleanup. See our [todo list](https://doldecomp.github.io/melee/todo.html) and [cleanup index](https://doldecomp.github.io/melee/cleanup/).
 
 We're also happy to answer any questions in the `#smash-bros-melee` channel on Discord.
 
@@ -154,7 +166,7 @@ Short|Full|Notes
 `ty`|Toy|Trophies.
 `vi`|Visual|Cutscenes, etc.
 
-#### `melee/ft/chara`
+#### `melee/ft/kinds`
 
 HAL also used two-letter abbreviations for each fighter.
 
@@ -232,18 +244,6 @@ The Metrowerks Standard Library.
 
 The Gekko hardware runtime.
 
-## What can be done after decompiling Melee?
+## What can be done now that the game is fully decompiled?
 
-Note that this project's purpose is to only match the ASM with C code. This is entirely for research and archival purposes. After this is created, you essentially have a C project that can be compiled into Melee, but it won't be portable (aka you can't compile it to run on a normal computer).
-
-So creating mods would be a lot easier as C code is much easier to consume than ASM. However, there are additional projects that could be undertaken once this is complete, but those technical endeavours are out-of-scope for this repo.
-
-## Do we know how the compiler works?
-
-- Kind of. We don’t have its source though.
-
-### How do we get the compiler to pick a certain register allocation?
-
-Considering we don't have the source for the compiler, this is kind of "anything goes" territory. Unfortunately [register allocation is an NP-hard problem](https://en.wikipedia.org/wiki/Register_allocation?oldformat=true) which means there are all types of heuristics you can use to select registers, some of which can be confused by things as silly as variable names.
-
-One option is to attempt to automatically [permute the source code](https://github.com/simonlindholm/decomp-permuter) to get the correct register allocation.
+See our [FAQ](https://github.com/doldecomp/melee/wiki/FAQ).
