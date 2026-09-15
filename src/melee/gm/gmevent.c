@@ -1411,9 +1411,8 @@ void gm_801BCAF0(HSD_GObj* gobj)
     s32 var_r29;
     PAD_STACK(0x28);
 
-    var_r30 = 1;
     var_r29 = 0;
-    do {
+    for (var_r30 = 1; var_r30 < 3; var_r30 += 1) {
         if ((Player_GetStocks(var_r30) <= 0) &&
             (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
         {
@@ -1431,8 +1430,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         if (var_r0 != 0) {
             var_r29 += 1;
         }
-        var_r30 += 1;
-    } while (var_r30 < 3);
+    }
     if (var_r29 == 2) {
         gm_801BC4F4(gobj);
         return;

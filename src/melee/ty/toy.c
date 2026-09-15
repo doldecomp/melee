@@ -826,10 +826,10 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     new_count = 0;
     obtained_count = 0;
     total = 0;
-    trophy = 0;
-    byte_off = 0;
 
-    do {
+    for (trophy = 0, byte_off = 0; trophy < TY_TROPHY_COUNT;
+         trophy++, byte_off += 2)
+    {
         skip_list = _Toy_sbss_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
             s16 val;
@@ -923,9 +923,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 total++;
             }
         }
-        trophy++;
-        byte_off += 2;
-    } while (trophy < TY_TROPHY_COUNT);
+    }
 
     if (total != 0) {
         s32 use_new;
@@ -5925,17 +5923,15 @@ void Toy_80310660(s32 arg0)
         }
 
         if (idx != 0) {
-            loopPtr = (Ty25Entry*) ty25;
-            count = 0;
             arg = 0;
-            do {
+            for (loopPtr = (Ty25Entry*) ty25, count = 0; count < 0xD;
+                 count += 1, loopPtr += 1)
+            {
                 if (loopPtr->x14 != NULL) {
                     lbArchive_80016EFC(loopPtr->x14);
                     loopPtr->x14 = (void*) arg;
                 }
-                count += 1;
-                loopPtr += 1;
-            } while (count < 0xD);
+            }
         }
 
         if (Toy_sbss_804D6EC8 != NULL) {
@@ -6758,16 +6754,13 @@ void Toy_8031263C(void)
             NULL);
     }
 
-    i = 0;
-    do {
+    for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
         if (_Toy_80304CC8_noinline(i) != 0) {
             if ((s32) Toy_803060BC(i, 6) == 2) {
                 *table1 |= 0x4000;
             }
         }
-        i++;
-        table1++;
-    } while (i < TY_TROPHY_COUNT);
+    }
 
     *table2 |= 4;
     Toy_804A284C[3] |= 4;

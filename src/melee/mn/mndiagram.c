@@ -2369,8 +2369,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
     // Preserve the original gap before the saved registers.
     PAD_STACK(16);
 
-    row = 0;
-    do {
+    for (row = 0; row <= 0xA; row += 1) {
         if (row == 0xA) {
             for (bottom_col = 0; bottom_col < 7; bottom_col++) {
                 if (is_name_mode != 0) {
@@ -2397,8 +2396,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
         } else if (is_name_mode != 0) {
             entry_count = GetNameCount();
             if (entry_count > row) {
-                name_col = 0;
-                do {
+                for (name_col = 0; name_col <= 7; name_col += 1) {
                     if ((name_col == 7) || (entry_count = GetNameCount(),
                                             (entry_count > name_col)))
                     {
@@ -2418,14 +2416,12 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                                                     (u8) row, ko_count);
                         }
                     }
-                    name_col += 1;
-                } while (name_col <= 7);
+                }
             }
         } else {
             unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
             if (unlocked_count > row) {
-                fighter_col = 0;
-                do {
+                for (fighter_col = 0; fighter_col <= 7; fighter_col += 1) {
                     if ((fighter_col == 7) ||
                         (col_unlocked_count =
                              mnDiagram_CountUnlockedFightersForHeaders(),
@@ -2450,12 +2446,10 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                                                             col_fighter));
                         }
                     }
-                    fighter_col += 1;
-                } while (fighter_col <= 7);
+                }
             }
         }
-        row += 1;
-    } while (row <= 0xA);
+    }
 }
 
 static inline void mnDiagram_TextSetPos(HSD_Text* text, f32 x, f32 y, f32 z)
