@@ -120,20 +120,6 @@ eflib_generator_add_appsrt(HSD_Generator* generator, s32 status)
     return generator;
 }
 
-/* ---------------------------------------------------- */
-/*                       MACROS                         */
-/* ---------------------------------------------------- */
-
-/*
- * --------------------------------------------------------------------
- * TODO: Figure out how to make this an inline that keeps match at 100%
- * --------------------------------------------------------------------
- */
-#define WALK_TO_ROOT(_jobj)                                                   \
-    while (HSD_JObjGetParent(_jobj) != NULL) {                                \
-        (_jobj) = HSD_JObjGetParent(_jobj);                                   \
-    }
-
 void efLib_Init(void)
 {
     HSD_GObj* gobj;
@@ -855,7 +841,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
         // attach, inherit root rot.y
         eflib_create_generator_add_appsrt(&generator, gfx_id, jobj);
         if (generator != NULL) {
-            WALK_TO_ROOT(root);
+            while (HSD_JObjGetParent(root) != NULL) {
+                root = HSD_JObjGetParent(root);
+            }
             generator->appsrt->rot.y = HSD_JObjGetRotationY(root);
         }
         return;
@@ -874,7 +862,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
         // attach, inherit root rot.y + scale
         eflib_create_generator_add_appsrt(&generator, gfx_id, jobj);
         if (generator != NULL) {
-            WALK_TO_ROOT(root);
+            while (HSD_JObjGetParent(root) != NULL) {
+                root = HSD_JObjGetParent(root);
+            }
             generator->appsrt->rot.y = HSD_JObjGetRotationY(root);
             HSD_JObjGetScale(root, &generator->appsrt->scale);
         }
@@ -892,7 +882,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
         // attach, inherit root scale
         eflib_create_generator_add_appsrt(&generator, gfx_id, jobj);
         if (generator != NULL) {
-            WALK_TO_ROOT(root);
+            while (HSD_JObjGetParent(root) != NULL) {
+                root = HSD_JObjGetParent(root);
+            }
             HSD_JObjGetScale(root, &generator->appsrt->scale);
         }
         return;
@@ -906,7 +898,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
         if ((generator = eflib_generator_add_appsrt(
                  hsd_8039F05C(0, (gfx_id / 1000), gfx_id), 1)) != NULL)
         {
-            WALK_TO_ROOT(root);
+            while (HSD_JObjGetParent(root) != NULL) {
+                root = HSD_JObjGetParent(root);
+            }
             generator->appsrt->rot.y = HSD_JObjGetRotationY(root);
             HSD_JObjGetTranslation(root, &generator->appsrt->translate);
         }
@@ -920,7 +914,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
                 psAppSRT = psAddGeneratorAppSRT_begin(generator, 1);
             }
             if (psAppSRT != NULL) {
-                WALK_TO_ROOT(root);
+                while (HSD_JObjGetParent(root) != NULL) {
+                    root = HSD_JObjGetParent(root);
+                }
                 psAppSRT->rot.z = HSD_JObjGetRotationZ(root);
                 HSD_JObjGetTranslation(root, &psAppSRT->translate);
                 HSD_JObjGetScale(root, &psAppSRT->scale);
@@ -939,7 +935,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
                 psAppSRT = psAddGeneratorAppSRT_begin(generator, 1);
             }
             if (psAppSRT != NULL) {
-                WALK_TO_ROOT(root);
+                while (HSD_JObjGetParent(root) != NULL) {
+                    root = HSD_JObjGetParent(root);
+                }
                 psAppSRT->rot.z = HSD_JObjGetRotationZ(root);
                 HSD_JObjGetTranslation(root, &psAppSRT->translate);
                 return;
@@ -954,7 +952,9 @@ void efLib_SpawnParticleEffect(int bank, s32 gfx_id, HSD_JObj* jobj, bool flag)
                  hsd_8039F05C(0, (gfx_id / 1000), gfx_id), 1)) != NULL)
         {
             lb_8000B1CC(jobj, NULL, &generator->appsrt->translate);
-            WALK_TO_ROOT(root);
+            while (HSD_JObjGetParent(root) != NULL) {
+                root = HSD_JObjGetParent(root);
+            }
             HSD_JObjGetScale(root, &generator->appsrt->scale);
         }
         return;

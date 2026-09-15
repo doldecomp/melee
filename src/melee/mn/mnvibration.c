@@ -684,7 +684,6 @@ void mnVibration_CreatePortPanels(HSD_GObj* arg0)
     base_x = HSD_JObjGetTranslationX(jobj0);
     jobj1 = data->jobjs[24];
     spacing = HSD_JObjGetTranslationX(jobj1) - base_x;
-     i;
     for (i = 0; i < 4; i++) {
         new_jobj = HSD_JObjLoadJoint(assets->joint);
         HSD_JObjAddAnimAll(new_jobj, assets->animjoint, assets->matanim,
@@ -837,7 +836,6 @@ void mnVibration_Think(HSD_GObj* gobj)
         proc->flags_3 = HSD_GObj_804D783C;
         return;
     }
-     port;
     for (port = 0; port < 4; port++) {
         port_child = mnVibration_GetPortChildAt(gobj, port);
         lb_80011E24(port_child, &port_anim_jobj, 1, -1);
@@ -849,7 +847,6 @@ void mnVibration_Think(HSD_GObj* gobj)
             HSD_JObjAnimAll(port_anim_jobj);
         }
     }
-     port;
     for (port = 0; port < 4; port++) {
         pad_idx = mnVibration_GetPadIndex(port);
         pad_err = HSD_PadCopyStatus[pad_idx].err;
