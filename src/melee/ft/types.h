@@ -666,7 +666,7 @@ struct FtSFX {
     int x10;
     int x14;
     int x18;
-    int x1C;
+    FtSFXArr* x1C;
     FtSFXArr* x20;
     int x24;
     int x28;
@@ -899,7 +899,7 @@ struct ftData {
                                 ///< ftPr_Init_8013C360
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
-    /* +54 */ int x54;
+    /* +54 */ int* x54;
     /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
