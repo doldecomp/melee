@@ -1045,7 +1045,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
 void fn_801C82E8(int arg0, int* arg1)
 {
     *arg1 = arg0;
-    __longjmp(&grAnime_8049EE40, 1);
+    longjmp(grAnime_8049EE40, 1);
 }
 
 HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
