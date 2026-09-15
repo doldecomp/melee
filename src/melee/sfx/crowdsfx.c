@@ -356,15 +356,11 @@ bool un_80322258(float arg)
 {
     f32 val2c = gCrowdConfig->horiz_margin;
 
-    if (arg < val2c + mpLib_80458868[1].left) {
-        goto ret_true;
+    if (arg < val2c + mpLib_80458868[1].left ||
+        arg > mpLib_80458868[1].right - val2c)
+    {
+        return 1;
     }
-    if (!(arg > mpLib_80458868[1].right - val2c)) {
-        goto ret_false;
-    }
-ret_true:
-    return 1;
-ret_false:
     return 0;
 }
 
@@ -431,36 +427,27 @@ void un_8032233C(u32 arg0, u32 arg1)
         return;
     }
 
-    if (gobj != NULL) {
-        if (ftLib_80087454(gobj) >= 3.0f) {
-            un_80321D30(arg0, kb_mag);
-            goto end;
+    if (gobj != NULL && ftLib_80087454(gobj) >= 3.0f) {
+        un_80321D30(arg0, kb_mag);
+    } else if (data->x0 == arg0 && (f32) data->x4 < gCrowdConfig->x18) {
+        un_80321D30(arg0, kb_mag > data->x8 ? kb_mag : data->x8);
+    } else {
+        switch (cat) {
+        case 3:
+            un_80321CA4(0x144);
+            break;
+        case 2:
+            un_80321CA4(0x145);
+            break;
+        case 1:
+            un_80321CA4(0x146);
+            break;
+        }
+
+        if (cat == 3 || (cat == 2 && data->xC == arg1)) {
+            un_80321C70();
         }
     }
-
-    if (data->x0 == arg0) {
-        if ((f32) data->x4 < gCrowdConfig->x18) {
-            un_80321D30(arg0, kb_mag > data->x8 ? kb_mag : data->x8);
-            goto end;
-        }
-    }
-
-    switch (cat) {
-    case 3:
-        un_80321CA4(0x144);
-        break;
-    case 2:
-        un_80321CA4(0x145);
-        break;
-    case 1:
-        un_80321CA4(0x146);
-        break;
-    }
-
-    if (cat == 3 || (cat == 2 && data->xC == arg1)) {
-        un_80321C70();
-    }
-end:
     data->x4 = 0;
     data->x0 = arg0;
     data->x8 = kb_mag;
@@ -490,20 +477,12 @@ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
 
         cat = tmp_cat;
 
-        if (pos_x < val2c + val18) {
-            goto oob;
+        if (pos_x < val2c + val18 || pos_x > mpLib_80458868[1].right - val2c) {
+            out_of_bounds = 1;
+        } else {
+            out_of_bounds = 0;
         }
-        val1c = mpLib_80458868[1].right;
-        if (!(pos_x > val1c - val2c)) {
-            goto inb;
-        }
-    oob:
-        out_of_bounds = 1;
-        goto check;
-    inb:
-        out_of_bounds = 0;
     }
-check:
     if (out_of_bounds != 0) {
         un_8032201C(spawn_id, cat);
     } else {
@@ -516,14 +495,10 @@ int un_80322598(int arg0, float arg1)
     f32 val14 = mpLib_80458868[1].bottom;
     s32 cat;
     CrowdConfig* vdata;
-    if (arg1 >= val14) {
-        goto ret_zero;
-    }
-    vdata = gCrowdConfig;
-    if (arg1 < vdata->recovery_y_low + val14) {
-    ret_zero:
+    if (arg1 >= val14 || arg1 < gCrowdConfig->recovery_y_low + val14) {
         return 0;
     }
+    vdata = gCrowdConfig;
     if (arg1 > vdata->recovery_y_high + val14) {
         cat = 3;
     } else if (arg1 > vdata->recovery_y_mid + val14) {

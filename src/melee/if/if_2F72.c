@@ -138,10 +138,9 @@ void fn_802F75D4(HSD_GObj* gobj)
         for (i = 0; i < 6; data += 2, i++) {
             if (data[1] == gobj) {
                 base[i * 2 + 1] = NULL;
-                goto done;
+                break;
             }
         }
-    done:
         HSD_GObjFree(gobj);
     } else {
         HSD_JObjAnimAll(jobj);
@@ -161,10 +160,9 @@ void fn_802F7670(HSD_GObj* gobj)
         for (i = 0; i < 6; data += 2, i++) {
             if (data[2] == gobj) {
                 base[i * 2 + 2] = NULL;
-                goto done;
+                break;
             }
         }
-    done:
         HSD_GObjFree(gobj);
     } else {
         HSD_JObjAnimAll(jobj);

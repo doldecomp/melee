@@ -1615,14 +1615,12 @@ u8 gm_80162D6C(void)
     s32 i;
     u8 min;
 
-    i = 0;
     min = 4;
-    do {
+    for (i = 0; i < 0x19; i++) {
         if (min > (*gmMainLib_8015D194((u8) i))) {
             min = *gmMainLib_8015D194((u8) i);
         }
-        i += 1;
-    } while (i < 0x19);
+    }
 
     return min;
 }
@@ -1692,14 +1690,12 @@ u8 gm_80162F68(void)
     s32 i;
     u8 min;
 
-    i = 0;
     min = 4;
-    do {
+    for (i = 0; i < 0x19; i++) {
         if (min > (*gmMainLib_8015D2BC((u8) i))) {
             min = *gmMainLib_8015D2BC((u8) i);
         }
-        i += 1;
-    } while (i < 0x19);
+    }
 
     return min;
 }
@@ -1766,14 +1762,12 @@ u8 gm_80163164(void)
     s32 i;
     u8 min;
 
-    i = 0;
     min = 4;
-    do {
+    for (i = 0; i < 0x19; i++) {
         if (min > (*gmMainLib_8015D3E4((u8) i))) {
             min = *gmMainLib_8015D3E4((u8) i);
         }
-        i += 1;
-    } while (i < 0x19);
+    }
 
     return min;
 }
@@ -2199,25 +2193,23 @@ bool gm_IsStageUnlocked(u16 stkind)
 
 bool fn_801642A0(void)
 {
-    s32 var_r30;
-    s32 var_r29;
-    u8 var_r0;
+    s32 enabled_count;
+    s32 i;
+    u8 enabled;
 
-    var_r30 = 0;
-    var_r29 = 0;
-    do {
-        if ((1 << (u16) var_r29) & gmMainLib_GetGamePrefs()->stage_mask) {
-            var_r0 = 1;
+    enabled_count = 0;
+    for (i = 0; i < 0x1D; i++) {
+        if ((1 << (u16) i) & gmMainLib_GetGamePrefs()->stage_mask) {
+            enabled = 1;
         } else {
-            var_r0 = 0;
+            enabled = 0;
         }
-        if (var_r0 != 0) {
-            var_r30 += 1;
+        if (enabled != 0) {
+            enabled_count += 1;
         }
-        var_r29 += 1;
-    } while (var_r29 < 0x1D);
+    }
 
-    if (var_r30 > 1) {
+    if (enabled_count > 1) {
         return false;
     }
     return true;
@@ -2256,27 +2248,40 @@ bool gm_80164330(s32 arg0)
                                                                       : false;
 }
 
+static inline u8 getStageUnlockIndex(u8 grkind)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if ((s32) grkind == (s32) lbl_803B790C[i][1]) {
+            return lbl_803B790C[i][0];
+        }
+    }
+    return NUM_UNLOCKABLE_STAGES;
+}
+
+static inline u8 getStageUnlockNotifyId(u8 unlock_idx)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if ((s32) unlock_idx == (s32) lbl_803B790C[i][0]) {
+            return lbl_803B790C[i][2];
+        }
+    }
+    return 0x42;
+}
+
 bool gm_80164430(u16 arg0)
 {
-    u16* temp_r31;
-    s32 i;
+    u16* stage_unlock_mask;
     u8 stage_idx;
     u8 unlock_bit;
 
-    temp_r31 = gmMainLib_8015EDA4();
+    stage_unlock_mask = gmMainLib_8015EDA4();
     stage_idx = Stage_8022519C(arg0);
+    unlock_bit = getStageUnlockIndex(stage_idx);
 
-    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-        if ((s32) stage_idx == (s32) lbl_803B790C[i][1]) {
-            unlock_bit = lbl_803B790C[i][0];
-            goto found;
-        }
-    }
-    unlock_bit = NUM_UNLOCKABLE_STAGES;
-
-found:
     if (unlock_bit == NUM_UNLOCKABLE_STAGES ||
-        (*temp_r31 & (1LL << unlock_bit)))
+        (*stage_unlock_mask & (1LL << unlock_bit)))
     {
         return true;
     }
@@ -2286,33 +2291,16 @@ found:
 void gm_80164504(u16 stkind)
 {
     u16* stage_unlock_mask;
-    s32 i;
     u8 grkind;
     u8 unlock_idx;
     u8 notify_val;
 
     stage_unlock_mask = gmMainLib_8015EDA4();
     grkind = Stage_8022519C(stkind);
+    unlock_idx = getStageUnlockIndex(grkind);
 
-    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-        if ((s32) grkind == (s32) lbl_803B790C[i][1]) {
-            unlock_idx = lbl_803B790C[i][0];
-            goto found_stage;
-        }
-    }
-    unlock_idx = NUM_UNLOCKABLE_STAGES;
-
-found_stage:
     if (unlock_idx != NUM_UNLOCKABLE_STAGES) {
-        for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-            if ((s32) unlock_idx == (s32) lbl_803B790C[i][0]) {
-                notify_val = lbl_803B790C[i][2];
-                goto found_notify;
-            }
-        }
-        notify_val = 0x42;
-
-    found_notify:
+        notify_val = getStageUnlockNotifyId(unlock_idx);
         gmMainLib_8015D818(notify_val);
         *stage_unlock_mask |= (1LL << (s32) unlock_idx);
     }
@@ -3642,8 +3630,7 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->start.rules.x30 = 0.1f * rules->damage_ratio;
     vs_data->start.rules.item_freq = (s8) prefs->item_freq;
     prefs = gmMainLib_GetGamePrefs();
-    i = 0;
-    do {
+    for (i = 0; i < 0x20; i++) {
         u8 item = lbl_803B7844[(u8) i];
         if ((s32) item != 0x23) {
             if (prefs->item_mask & (1LL << i)) {
@@ -3652,8 +3639,7 @@ void gm_80167BC8(VsModeData* vs_data)
                 vs_data->start.rules.x20 &= ~(1LL << item);
             }
         }
-        i++;
-    } while (i < 0x20);
+    }
 
     switch (gmMainLib_8015ED30()) {
     case 1:
