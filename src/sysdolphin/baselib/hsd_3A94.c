@@ -33,17 +33,6 @@ ASSERT_SIZE(CardCmdBuf, 0x28);
 
 /* 3A949C */ static void hsd_803A949C(s32 chan, s32 card_result);
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
-/// Command ring head (next command to run) and tail (next free slot).
-/* 4D7980 */ extern volatile s32 hsd_804D7980;
-/* 4D7984 */ extern volatile s32 hsd_804D7984;
-/// Result of the request in progress: negative = CARD error, 1 = data
-/// verified so the queued writes are skipped, 2 = verify mismatch.
-/* 4D7988 */ extern s32 hsd_804D7988;
-/* 4D798C */ extern s32 hsd_804D798C;
-/// Ring tail saved before queueing a request; -1 when nothing to roll back.
-/* 4D7998 */ extern s32 hsd_804D7998;
-/// 0 = running commands, 1 = async CARD call in flight, 2 = idle.
-/* 4D799C */ extern s32 hsd_804D799C;
 /// .sbss globals emit in reverse declaration order.
 /* 4D79C8 */ u8 hsd_804D79C8;
 /* 4D79C4 */ s32 hsd_804D79C4;
@@ -55,6 +44,20 @@ ASSERT_SIZE(CardCmdBuf, 0x28);
 /* 4D79A8 */ s32 hsd_804D79A8;
 /* 4D79A4 */ u8* hsd_804D79A4;
 /* 4D79A0 */ u8* hsd_804D79A0;
+/// 0 = running commands, 1 = async CARD call in flight, 2 = idle.
+/* 4D799C */ s32 hsd_804D799C;
+/// Ring tail saved before queueing a request; -1 when nothing to roll back.
+/* 4D7998 */ s32 hsd_804D7998;
+/* 4D7994 */ s32 hsd_804D7994;
+/* 4D7990 */ s32 hsd_804D7990;
+/* 4D798C */ s32 hsd_804D798C;
+/// Result of the request in progress: negative = CARD error, 1 = data
+/// verified so the queued writes are skipped, 2 = verify mismatch.
+/* 4D7988 */ s32 hsd_804D7988;
+/// Command ring tail (next free slot).
+/* 4D7984 */ volatile s32 hsd_804D7984;
+/// Command ring head (next command to run).
+/* 4D7980 */ volatile s32 hsd_804D7980;
 
 /// .bss globals emit in reverse declaration order. Keeping the storage in
 /// this TU lets MWCC pool the callback's command-field addresses directly.
