@@ -5908,7 +5908,7 @@ sysdolphin/baselib/hsd_3A76.c:
 sysdolphin/baselib/sislib_font.c:
 	.data       start:0x8040CD40 end:0x80430B40
 
-sysdolphin/baselib/hsd_3A94.c:
+sysdolphin/baselib/card.c:
 	.text       start:0x803A949C end:0x803B3344
 	.data       start:0x80430B40 end:0x80430C40
 	.bss        start:0x804D1138 end:0x804D2648

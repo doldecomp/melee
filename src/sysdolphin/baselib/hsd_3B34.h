@@ -25,5 +25,15 @@ typedef struct JpegWork {
 /* 3B5D70 */ s32 hsd_803B5D70(s32, s32);
 /* 3B5EA0 */ void hsd_803B5EA0(s32);
 /* 3B6BE4 */ s32 hsd_803B6BE4(char*, s32, void*);
+/* 4D79A0 */ extern u8* hsd_804D79A0;
+/* 4D79A4 */ extern u8* hsd_804D79A4;
+/* 4D79A8 */ extern s32 hsd_804D79A8;
+/* 4D79AC */ extern s32 hsd_804D79AC;
+/* 4D79B0 */ extern u8 hsd_804D79B0[8];
+/* 4D79B8 */ extern u8* hsd_804D79B8;
+/* 4D79BC */ extern u8* hsd_804D79BC;
+/* 4D79C0 */ extern s32 hsd_804D79C0;
+/* 4D79C4 */ extern s32 hsd_804D79C4;
+/* 4D79C8 */ extern u8 hsd_804D79C8;
 
 #endif
