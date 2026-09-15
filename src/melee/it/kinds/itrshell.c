@@ -744,22 +744,12 @@ bool itRShell_Logic15_Clanked(Item_GObj* gobj)
 bool it_3F14_Logic15_HitShield(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    s32 kind = ip->msid;
-    if (kind == 3) {
-        goto bounce;
-    }
-    if (kind != 4) {
-        goto check_other;
-    }
-bounce:
-    itColl_BounceOffVictim(gobj);
-    goto out;
-check_other:
-    if ((u32) (kind - 5) <= 1U) {
+    if (ip->msid == 3 || ip->msid == 4) {
+        itColl_BounceOffVictim(gobj);
+    } else if (ip->msid == 5 || ip->msid == 6) {
         it_8028D3B8(gobj);
         return ip->xDD4_itemVar.rshell.xDF0;
     }
-out:
     return false;
 }
 

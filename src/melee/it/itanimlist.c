@@ -128,15 +128,15 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     hit->x40_b3 = cmd->u->it_create_hitbox_4.x40_b3;
     ++cmd->u;
 
-    hit->x40_b4 = ((u8*) cmd->u)[0];
-    hit->x41_b4 = (((u8*) cmd->u)[1] >> 7) & 1;
-    hit->x41_b5 = (((u8*) cmd->u)[1] >> 6) & 1;
-    hit->x41_b6 = (((u8*) cmd->u)[1] >> 5) & 1;
-    hit->x41_b7 = (((u8*) cmd->u)[1] >> 4) & 1;
-    hit->x42_b0 = (((u8*) cmd->u)[1] >> 3) & 1;
-    hit->x42_b1 = (((u8*) cmd->u)[1] >> 2) & 1;
-    hit->x42_b2 = (((u8*) cmd->u)[1] >> 1) & 1;
-    hit->x42_b3 = ((u8*) cmd->u)[1] & 1;
+    hit->x40_b4 = cmd->u->create_hitbox_5.x0;
+    hit->x41_b4 = cmd->u->create_hitbox_5.x1_b0;
+    hit->x41_b5 = cmd->u->create_hitbox_5.x1_b1;
+    hit->x41_b6 = cmd->u->create_hitbox_5.x1_b2;
+    hit->x41_b7 = cmd->u->create_hitbox_5.x1_b3;
+    hit->x42_b0 = cmd->u->create_hitbox_5.x1_b4;
+    hit->x42_b1 = cmd->u->create_hitbox_5.x1_b5;
+    hit->x42_b2 = cmd->u->create_hitbox_5.x1_b6;
+    hit->x42_b3 = cmd->u->create_hitbox_5.x1_b7;
     hit->x42_b4 = (((u8*) cmd->u)[2] >> 7) & 1;
     hit->x42_b5 = (((u8*) cmd->u)[2] >> 6) & 1;
     hit->x42_b6 = (((u8*) cmd->u)[2] >> 5) & 1;
@@ -225,50 +225,39 @@ void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
     u8 arg3;
     PAD_STACK(8);
     cmd->u = (union CmdUnion*) (ptr + 1);
-    if (opcode < 10) {
-        if (opcode < 3) {
-            if (opcode >= 0) {
-                goto low_opcode;
-            }
-        }
-        goto done;
-    } else {
-        if (opcode >= 12) {
-            goto done;
-        }
-        goto high_opcode;
-    }
-
-low_opcode:
-    arg1 = *(u32*) cmd->u;
-    ++cmd->u;
-    arg2 = ((u8*) cmd->u)[2];
-    arg3 = ((u8*) cmd->u)[3];
     switch (opcode) {
     case 0:
-        Item_8026AE84(item, arg1, arg2, arg3);
-        break;
     case 1:
-        Item_8026AF0C(item, arg1, arg2, arg3);
-        break;
     case 2:
-        Item_8026AFA0(item, arg1, arg2, arg3);
+        arg1 = *(u32*) cmd->u;
+        ++cmd->u;
+        arg2 = ((u8*) cmd->u)[2];
+        arg3 = ((u8*) cmd->u)[3];
+        switch (opcode) {
+        case 0:
+            Item_8026AE84(item, arg1, arg2, arg3);
+            break;
+        case 1:
+            Item_8026AF0C(item, arg1, arg2, arg3);
+            break;
+        case 2:
+            Item_8026AFA0(item, arg1, arg2, arg3);
+            break;
+        }
         break;
-    }
-    goto done;
-
-high_opcode: {
-    ++cmd->u;
-    switch (opcode) {
     case 10:
-        Item_8026B034(item);
-        break;
     case 11:
-        Item_8026B074(item);
+        ++cmd->u;
+        switch (opcode) {
+        case 10:
+            Item_8026B034(item);
+            break;
+        case 11:
+            Item_8026B074(item);
+            break;
+        }
         break;
     }
-}
-done:
     ++cmd->u;
 }
 
@@ -323,26 +312,25 @@ void it_802799E4(Item_GObj* item_gobj)
         cmd->timer -= item->x5D0_animFrameSpeed;
     }
 
-loop:
-    if (cmd->u == NULL) {
-        return;
-    }
-    if (cmd->timer == F32_MAX) {
-        if (cmd->frame_count >= item->x5D0_animFrameSpeed) {
+    while (true) {
+        if (cmd->u == NULL) {
             return;
         }
-        cmd->timer = -cmd->frame_count;
-    } else if (cmd->timer > 0.0f) {
-        return;
-    }
+        if (cmd->timer == F32_MAX) {
+            if (cmd->frame_count >= item->x5D0_animFrameSpeed) {
+                return;
+            }
+            cmd->timer = -cmd->frame_count;
+        } else if (cmd->timer > 0.0f) {
+            return;
+        }
 
-    opcode = cmd->u->unk0.opcode;
-    if (Command_Execute(cmd, opcode) != 0) {
-        goto loop;
+        opcode = cmd->u->unk0.opcode;
+        if (Command_Execute(cmd, opcode) == 0) {
+            opcode -= 10;
+            it_803F22A8[opcode](item_gobj, cmd);
+        }
     }
-    opcode -= 10;
-    it_803F22A8[opcode](item_gobj, cmd);
-    goto loop;
 }
 
 void it_80279AF0(Item_GObj* item_gobj, CommandInfo* cmd)
