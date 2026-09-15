@@ -920,7 +920,7 @@ void hsd_803AAA48(void)
         switch ((u32) type) {
         case CARD_CMD_NONE:
             if (ctx->active.type != CARD_ACTIVE_NONE) {
-                if (ctx->active.type == CARD_ACTIVE_WRITE_FILE_1) {
+                if (ctx->active.type == CARD_ACTIVE_WRITE_FILE_1_2) {
                     s32 file_idx = ctx->active.callback_arg;
                     s32 blocks_before = fn_803AC6B8(*state_ptr, file_idx);
                     s32 file_blocks = fn_803AC634(*state_ptr, file_idx);
@@ -1584,9 +1584,8 @@ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
     state->file_data[file_idx] = data;
 }
 
-void fn_803AC3F8(void* card_state, u8* data, s32 file_idx)
+void fn_803AC3F8(CardState* state, u8* data, s32 file_idx)
 {
-    CardState* state = card_state;
     s32 start;
     s32 i;
 
@@ -2062,11 +2061,9 @@ s32 fn_803ACF30(CardState* state, void* comment, void* banner, void* icons)
     return 0;
 }
 
-typedef u8* CardSectorPtr;
-
 static inline u8* fn_803ACFC0_header(CardState* state, s32 hdr_offset)
 {
-    return (CardSectorPtr) (hdr_offset + (s32) state->sector_buf);
+    return (u8*) (hdr_offset + (s32) state->sector_buf);
 }
 
 static inline u8* fn_803ACFC0_checksum_start(s32 hdr_offset, CardState* state)
@@ -2125,7 +2122,7 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
         if (remaining != 0) {
             s32 off = payload_size + 0x20;
             s32 addr = (s32) state->sector_buf;
-            memset((CardSectorPtr) (hdr_offset + off + addr), 0, remaining);
+            memset((u8*) (hdr_offset + off + addr), 0, remaining);
         }
     }
 
@@ -2554,7 +2551,7 @@ int fn_803ADE4C(CardState* state, int file_no, CardCallback callback)
         return result;
     }
 
-    ctx->active.type = CARD_ACTIVE_OPEN_FILE;
+    ctx->active.type = CARD_ACTIVE_OPEN_OR_READ_HEADER;
     ctx->active.state = state;
     ctx->active.callback = callback;
     ctx->active.callback_arg = 0;
@@ -3890,7 +3887,7 @@ after_verify:
     } else {
         CardActiveRequest* active = &ctx->active;
 
-        active->type = CARD_ACTIVE_WRITE_FILE_1;
+        active->type = CARD_ACTIVE_WRITE_FILE_1_2;
         active->state = state;
         active->callback = callback;
         active->callback_arg = file_idx;
@@ -4356,8 +4353,8 @@ int fn_803B0120(CardState* state, s32 file_idx, u8* buf, int async,
     return 0;
 }
 
-static inline s32 fn_803B0E9C_read_icons(CardState* state, CardCmd* cmd,
-                                         void* banner, void* icons)
+static inline s32 queueVerifyCardHeader(CardState* state, CardCmd* cmd,
+                                        void* banner, void* icons)
 {
     u32 block_idx;
     s32 result;
@@ -4440,10 +4437,10 @@ int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
     UNUSED u8 pad_cmd_clear[4];
     CardCmd cmd_patch;
     UNUSED u8 pad_cmd_patch[8];
-    CardCmd cmd_write_icon;
-    UNUSED u8 pad_cmd_write_icon[16];
-    CardCmd cmd_read_icon;
-    UNUSED u8 pad_cmd_read_icon[8];
+    CardCmd cmd_write_header;
+    UNUSED u8 pad_cmd_write_header[16];
+    CardCmd cmd_verify_header;
+    UNUSED u8 pad_cmd_verify_header[8];
     s32 remaining;
     s32 payload_pos;
     s32 block_idx;
@@ -4455,8 +4452,8 @@ int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
 
     if (is_new == 0) {
         if (async != 0) {
-            result =
-                fn_803B0E9C_read_icons(state, &cmd_read_icon, banner, icons);
+            result = queueVerifyCardHeader(state, &cmd_verify_header, banner,
+                                           icons);
             if (result < 0) {
                 return result;
             }
@@ -4522,12 +4519,12 @@ int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
             }
 
             {
-                cmd_write_icon.type = CARD_CMD_WRITE_HEADER;
-                cmd_write_icon.state = state;
-                cmd_write_icon.header.index = async;
-                cmd_write_icon.header.banner = banner;
-                cmd_write_icon.header.icons = icons;
-                result = fn_803AC168(&cmd_write_icon);
+                cmd_write_header.type = CARD_CMD_WRITE_HEADER;
+                cmd_write_header.state = state;
+                cmd_write_header.header.index = async;
+                cmd_write_header.header.banner = banner;
+                cmd_write_header.header.icons = icons;
+                result = fn_803AC168(&cmd_write_header);
                 if (result < 0) {
                     return result;
                 }
@@ -5333,7 +5330,7 @@ int fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
         return result;
     }
 
-    context->active.type = CARD_ACTIVE_OPEN_FILE;
+    context->active.type = CARD_ACTIVE_OPEN_OR_READ_HEADER;
     context->active.state = state;
     context->active.callback = callback;
     context->active.callback_arg = 0;

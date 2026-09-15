@@ -5,6 +5,9 @@
 
 #include <dolphin/card.h>
 
+/// One CARD file containing up to nine logical files. file_idx selects a
+/// logical file; file_no is the SDK directory-entry number. Block positions
+/// (phys) are relative to this CARD file, not hardware sector addresses.
 typedef struct CardState {
     /* 0x00 */ u8* sector_buf;
     /* 0x04 */ s32 chan;
@@ -39,12 +42,13 @@ ASSERT_SIZE(CardState, 0x464);
 typedef void (*CardCallback)(int, int);
 
 /// Ring commands run by hsd_803AAA48; asynchronous CARD operations are
-/// completed by hsd_803A949C.
+/// completed by hsd_803A949C. Names describe the observed operations; they
+/// are not recovered original identifiers.
 typedef enum CardCmdType {
     /* 0x00 */ CARD_CMD_NONE,
     /* 0x01 */ CARD_CMD_WRITE_BLOCK,
     /* 0x02 */ CARD_CMD_READ_BLOCK,
-    /* 0x03 */ CARD_CMD_3,
+    /* 0x03 */ CARD_CMD_3, ///< No producer or handler identified.
     /* 0x04 */ CARD_CMD_CLEAR_BUF,
     /* 0x05 */ CARD_CMD_VERIFY_BLOCK,
     /// Turns a verify mismatch into "keep going" and a match into "skip the
@@ -235,17 +239,17 @@ typedef struct CardRequest {
 ASSERT_SIZE(CardRequest, 0x18);
 
 /// What the queued commands complete; its callback runs when the ring
-/// drains.
+/// drains. Write suffixes refer to file_flags modes, not these tag values.
 typedef enum CardActiveType {
     /* 0x00 */ CARD_ACTIVE_NONE,
     /* 0x01 */ CARD_ACTIVE_READ_FILE,
-    /* 0x02 */ CARD_ACTIVE_WRITE_FILE,
+    /* 0x02 */ CARD_ACTIVE_WRITE_FILE, ///< file_flags 0
     /// Writes files with file_flags 1 or 2. On completion the older of two
     /// copies of each block is marked stale.
-    /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1,
-    /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3,
-    /// Also what fn_803B26CC's header read completes as.
-    /* 0x05 */ CARD_ACTIVE_OPEN_FILE,
+    /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1_2,
+    /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3, ///< file_flags 3
+    /// Shared by fn_803ADE4C and fn_803B26CC.
+    /* 0x05 */ CARD_ACTIVE_OPEN_OR_READ_HEADER,
     /* 0x06 */ CARD_ACTIVE_CREATE_FILE,
     /* 0x07 */ CARD_ACTIVE_SET_STATUS,
 } CardActiveType;
@@ -281,7 +285,7 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
 /* 3AC340 */ int hsd_803AC340(void* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
                                int file_flags, u8* data);
-/* 3AC3F8 */ void fn_803AC3F8(void* card_state, u8* data, s32 file_idx);
+/* 3AC3F8 */ void fn_803AC3F8(CardState* state, u8* data, s32 file_idx);
 /* 3AC558 */ void hsd_803AC558(CardState* state, u8* data);
 /* 3AC634 */ u32 fn_803AC634(CardState* state, s32 file_idx);
 /* 3AC6B8 */ s32 fn_803AC6B8(CardState* state, s32 file_idx);
