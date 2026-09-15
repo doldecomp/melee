@@ -23,7 +23,6 @@
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-#include <Runtime/runtime.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -780,9 +779,8 @@ void fn_801891F4(void)
             {
                 f32 selected_speed =
                     speed_stack.speeds.values[sub->menu_values[0]];
-                lb_80019880(
-                    __cvt_dbl_usll((f64) (0.016666668f / selected_speed *
-                                          (f32) gm_801891F4_GetTickRate())));
+                lb_80019880(1 / 60.0F / selected_speed *
+                            gm_801891F4_GetTickRate());
             }
 
             fn_80188550(sub->menu_values[2] + 1);
