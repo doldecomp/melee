@@ -36,9 +36,8 @@ ASSERT_SIZE(CardCmdBuf, 0x28);
  * @remarks Field @p field (of type @p T) of ring command @p i, for
  * hsd_803A949C. Retail re-reads the ring head on every access and keeps one
  * pooled base per field column (ring base + field offset) that it indexes
- * by the head, which only this byte-offset form reproduces: every struct
- * spelling of the same address folds the field offset into the load
- * displacement instead.
+ * by the head. Direct struct indexing folds the field offset into the load
+ * displacement instead, changing the matching instruction sequence.
  */
 #define CMD_FIELD(T, field, i)                                                \
     (((T*) ((u8*) ctx + offsetof(CardContext, cmds) +                         \
@@ -2159,11 +2158,6 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
     return result;
 }
 
-static inline int fn_803AD16C_file_type_nonzero(CardState* state, s32 file_idx)
-{
-    return state->file_flags[file_idx] != 0;
-}
-
 static inline s32 fn_803AD16C_total_blocks(CardState* state)
 {
     return state->num_blocks;
@@ -2179,24 +2173,9 @@ static inline s32 fn_803AD16C_file_size(CardState* state, s32 file_idx)
     return state->file_sizes[file_idx];
 }
 
-static inline s32 fn_803AD16C_seq_at(s32* seq, s32 phys)
-{
-    return seq[phys];
-}
-
 static inline int fn_803AD16C_nonnegative(s32 logical)
 {
     return logical >= 0;
-}
-
-static inline s32 fn_803AD16C_queue_cmd(const CardCmd* cmd)
-{
-    return fn_803AC168(cmd);
-}
-
-static inline int fn_803AD16C_same(s32 lhs, s32 rhs)
-{
-    return lhs == rhs;
 }
 
 static inline void fn_803AD16C_own(void* value)
@@ -2218,7 +2197,7 @@ static inline s32 fn_803AD16C_queue_clear(CardState* state, s32 phys,
     cmd.write.size = 0;
     cmd.write.offset = offset;
     cmd.write.file_idx = file_idx;
-    return fn_803AD16C_queue_cmd(&cmd);
+    return fn_803AC168(&cmd);
 }
 
 static inline s32 fn_803AD16C_queue_read(CardState* state, s32 phys)
@@ -2336,8 +2315,7 @@ s32 fn_803AD16C(CardState* state)
                     s32 logical = ids[phys] - blocks_before;
                     if (logical >= 0 && logical < file_blocks) {
                         if (cur_seq == -1 ||
-                            fn_803ACB74(cur_seq,
-                                        fn_803AD16C_seq_at(seq, phys)) > 0)
+                            fn_803ACB74(cur_seq, seq[phys]) > 0)
                         {
                             cur_seq = seq[phys];
                         }
@@ -2425,7 +2403,7 @@ s32 fn_803AD16C(CardState* state)
 
     for (file_idx = 0; file_idx < 9; file_idx++) {
         if (state->file_sizes[file_idx] <= 0 ||
-            fn_803AD16C_file_type_nonzero(state, file_idx))
+            state->file_flags[file_idx] != 0)
         {
             continue;
         }
@@ -2439,10 +2417,6 @@ s32 fn_803AD16C(CardState* state)
             s32 dup;
             s32 target_seq;
             s32 ret;
-
-            if (fn_803AD16C_same(file_idx, file_idx)) {
-                (void) block_id;
-            }
 
             if (newmap[block_id] < 0) {
                 continue;
