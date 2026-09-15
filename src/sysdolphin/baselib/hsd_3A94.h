@@ -48,11 +48,11 @@ typedef enum CardCmdType {
     /* 0x00 */ CARD_CMD_NONE,
     /* 0x01 */ CARD_CMD_WRITE_BLOCK,
     /* 0x02 */ CARD_CMD_READ_BLOCK,
-    /* 0x03 */ CARD_CMD_3, ///< No producer or handler identified.
+    /* 0x03 */ CARD_CMD_UNK_0x03, ///< No producer or handler identified.
     /* 0x04 */ CARD_CMD_CLEAR_BUF,
     /* 0x05 */ CARD_CMD_VERIFY_BLOCK,
-    /// Turns a verify mismatch into "keep going" and a match into "skip the
-    /// queued writes".
+    /// After queued verification, changes result 2 to 0 and otherwise sets
+    /// result 1. Subsequent write commands skip their work when result is 1.
     /* 0x06 */ CARD_CMD_CHECK_VERIFIED,
     /* 0x07 */ CARD_CMD_CREATE_FILE,
     /* 0x08 */ CARD_CMD_SET_STATUS,
@@ -68,7 +68,8 @@ typedef enum CardCmdType {
     /* 0x0E */ CARD_CMD_REPAIR,
     /* 0x0F */ CARD_CMD_READ_SECTOR,
     /* 0x10 */ CARD_CMD_WRITE_SECTOR,
-    /// Queue header validation, a scan of every block, and repair.
+    /// Queues header validation and CARD_CMD_SCAN_BLOCK for each block,
+    /// followed by CARD_CMD_REPAIR.
     /* 0x11 */ CARD_CMD_SCAN_FILE,
 } CardCmdType;
 
@@ -248,7 +249,7 @@ typedef enum CardActiveType {
     /// copies of each block is marked stale.
     /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1_2,
     /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3, ///< file_flags 3
-    /// Shared by fn_803ADE4C and fn_803B26CC.
+    /// Set by fn_803ADE4C (open file) and fn_803B26CC (read header).
     /* 0x05 */ CARD_ACTIVE_OPEN_OR_READ_HEADER,
     /* 0x06 */ CARD_ACTIVE_CREATE_FILE,
     /* 0x07 */ CARD_ACTIVE_SET_STATUS,
