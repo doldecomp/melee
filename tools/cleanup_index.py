@@ -56,14 +56,14 @@ PRIMITIVES = {
 # A type name as it appears inside a cast, e.g. `const struct Foo`, `unsigned long`.
 TYPE = (
     r"(?:const\s+|volatile\s+|struct\s+|union\s+|unsigned\s+|signed\s+)*"
-    r"[A-Za-z_]\w*(?:\s+(?:int|char|long|short))?"
+    + r"[A-Za-z_]\w*(?:\s+(?:int|char|long|short))?"
 )
 
 CAST = re.compile(r"\(\s*(" + TYPE + r")\s*(\*+)\s*\)\s*(?=[A-Za-z_&(*])")
 OFFSET = re.compile(
     r"\(\s*(" + TYPE + r")\s*(\*+)\s*\)\s*"  # the cast
-    r"\(?\s*&?[A-Za-z_][\w.\[\]]*(?:\s*->\s*\w+)*\s*\)?"  # the operand
-    r"\s*([-+])\s*(0[xX][0-9a-fA-F]+|\d+)\b"  # the constant
+    + r"\(?\s*&?[A-Za-z_][\w.\[\]]*(?:\s*->\s*\w+)*\s*\)?"  # the operand
+    + r"\s*([-+])\s*(0[xX][0-9a-fA-F]+|\d+)\b"  # the constant
 )
 DEREF = re.compile(r"(?<![\w\)\]])\*\s*\(\s*(" + TYPE + r")\s*(\*+)\s*\)")
 INDEX = re.compile(r"\(\s*\(\s*(" + TYPE + r")\s*(\*+)\s*\)[^()]{1,40}\)\s*\[")
@@ -73,7 +73,7 @@ ABSOLUTE = re.compile(
 # Narrow casts are excluded: a pointer is never truncated to u8 or s16.
 TO_INT = re.compile(
     r"\(\s*(u32|s32|int|long|unsigned int|unsigned long|uintptr_t|size_t)\s*\)"
-    r"\s*(&?)\s*([A-Za-z_]\w*)\s*(?![\w.\[]|->)"
+    + r"\s*(&?)\s*([A-Za-z_]\w*)\s*(?![\w.\[]|->)"
 )
 BARE_OFFSET = re.compile(r"(?<![\w.>])([A-Za-z_]\w*)\s*([-+])\s*(0[xX][0-9a-fA-F]+)\b")
 DECL = re.compile(r"\b[A-Za-z_]\w*\s*\*+\s*(?:const\s+)?([A-Za-z_]\w*)\s*(?=[,;)=\[])")
@@ -103,9 +103,10 @@ CATEGORIES = [
     ("prim-ptr-cast", "(u8*)p, (void*)p", "retype"),
     ("deref-cast", "*(T*)p", "retype"),
     ("ptr-to-int", "(u32)p", "retype"),
+    ("pad-stack", "PAD_STACK(n)", "hack"),
     ("must-match", "#ifdef MUST_MATCH", "hack"),
     ("pragma", "#pragma, not push/pop", "hack"),
-    ("goto", "goto instead of control flow", "hack"),
+    ("goto", "explicit goto", "hack"),
     ("longjmp", "explicit __longjmp", "hack"),
 ]
 FAMILY = {name: family for name, _, family in CATEGORIES}
@@ -371,10 +372,17 @@ def scan_file(path: Path, rel: str) -> Iterator[Site]:
         emit("goto", m.start(), "", m[1], 1)
     for m in LONGJMP.finditer(text):
         prefix = text[text.rfind("\n", 0, m.start()) + 1 : m.start()]
-        if re.match(r"(?:#define|void|ASM)\b", prefix):
+        if re.match(r"(?:#\s*define|void|ASM)\b", prefix):
             continue
         args = macro_args(text, m.end() - 1)
         emit("longjmp", m.start(), "", args[0], 1)
+
+    # TODO: Refactor to one function regex + helper emitter
+    for m in STACK_PAD.finditer(text):
+        prefix = text[text.rfind("\n", 0, m.start()) + 1 : m.start()]
+        if re.match(r"\s*#\s*define\s*$", prefix):
+            continue
+        emit("pad-stack", m.start(), "", m[1], 7)
 
     # M2C_FIELD(expr, T*, offset) is a cast+offset that m2c left behind.
     for m in M2C_FIELD.finditer(text):
