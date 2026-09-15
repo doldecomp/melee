@@ -139,8 +139,8 @@ struct gm_804D6900_t {
 /* 1BBB64 */ static void gm_801BBB64(void);
 /* 1BBFE8 */ static void fn_801BBFE8(void);
 /* 1BC00C */ static void gm_801BC00C(void);
-/* 1BC488 */ static int gm_801BC488(UNK_PARAMS);
-/* 1BC4F4 */ static UNK_RET gm_801BC4F4(HSD_GObj*);
+/* 1BC488 */ static int gm_801BC488(void);
+/* 1BC4F4 */ static void gm_801BC4F4(HSD_GObj*);
 /* 1BC670 */ static void gm_801BC670(HSD_GObj*);
 /* 1BC754 */ static void gm_801BC754(HSD_GObj*);
 /* 1BC9E8 */ static void gm_801BC9E8(HSD_GObj*);

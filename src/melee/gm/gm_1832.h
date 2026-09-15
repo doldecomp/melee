@@ -3,8 +3,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 /* 1849E0 */ void fn_801849E0(HSD_GObj*);
 /* 184A04 */ void fn_80184A04(HSD_GObj*);
 /* 184A28 */ void fn_80184A28(HSD_GObj*);
@@ -27,8 +25,8 @@
 /* 185E34 */ s32 fn_80185E34(void);
 /* 185F5C */ void fn_80185F5C(s32);
 /* 186080 */ void fn_80186080(void);
-/* 1861B8 */ UNK_RET fn_801861B8(UNK_PARAMS);
-/* 186400 */ UNK_RET fn_80186400(UNK_PARAMS);
+/* 1861B8 */ void fn_801861B8(void);
+/* 186400 */ void fn_80186400(void);
 /* 186634 */ void fn_80186634(void*);
 /* 186DFC */ void gm_Scene_IntroEasy_OnFrame(void);
 /* 186E30 */ void gm_Scene_IntroEasy_OnEnter(void*);

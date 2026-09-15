@@ -21,9 +21,9 @@
 /* 17C838 */ void gm_8017C838(void);
 /* 17C984 */ void gm_8017C984(UNK_T);
 /* 17C9A8 */ void gm_8017C9A8(DebugGameOverData*, Unk1PData*, u8);
-/* 17CA38 */ UNK_RET gm_8017CA38(DebugGameOverData*, Unk1PData*,
-                                 struct gmm_x0_528_t*, u8);
-/* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
+/* 17CA38 */ void gm_8017CA38(DebugGameOverData*, Unk1PData*,
+                              struct gmm_x0_528_t*, u8);
+/* 17CBAC */ void gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
 /* 17CD94 */ u8 gm_8017CD94(UnkAdventureData*, int, int, int);
 /* 17CE34 */ void gm_8017CE34(StartMeleeData*, Unk1PData*, s8*, u8, u8, u8,
                               s32, StKind, s32 count, s32);
@@ -118,15 +118,15 @@
 /* 181B64 */ void gm_80181B64(int c_kind, int, s32);
 /* 181BFC */ int fn_80181BFC(int*);
 /* 181C80 */ void fn_80181C80(s32 arg0);
-/* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
-/* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
+/* 181E18 */ void fn_80181E18(void);
+/* 182174 */ void gm_80182174(void);
 /* 182510 */ bool gm_IsMultimanSmashMode(void);
 /* 182554 */ void gm_80182554(int, int);
 /* 182578 */ void gm_80182578(void);
-/* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
+/* 182B5C */ void fn_80182B5C(void);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);
-/* 183218 */ UNK_RET gm_80183218(UNK_PARAMS);
+/* 183218 */ void gm_80183218(void);
 /* 18325C */ void fn_8018325C(HSD_GObj*, int);
 /* 184138 */ void fn_80184138(HSD_GObj*, int);
 

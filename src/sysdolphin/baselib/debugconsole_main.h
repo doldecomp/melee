@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_DEBCONSOLE_MAIN_H
 #define SYSDOLPHIN_DEBCONSOLE_MAIN_H
 
-#include <placeholder.h>
+#include <stdbool.h>
 
 #include <dolphin/os/OSContext.h>
 
@@ -21,7 +21,7 @@
 /* 396188 */ void hsd_80396188(void);
 /* 3962A8 */ s32 hsd_803962A8(void*);
 /* 3966A0 */ s32 hsd_803966A0(void*);
-/* 396868 */ UNK_RET hsd_80396868(UNK_PARAMS);
+/* 396868 */ void hsd_80396868(void);
 /* 396884 */ void hsd_80396884(void);
 /* 396A20 */ s32 hsd_80396A20(void*);
 /* 396C78 */ s32 hsd_80396C78(void*);

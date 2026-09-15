@@ -63,16 +63,16 @@ struct GrPuVtxMapEntry {
 /* 212314 */ static bool stageGObj2_Callback1(Ground_GObj*);
 /* 21231C */ static void stageGObj2_GObjProc(Ground_GObj*);
 /* 2125EC */ static void stageGObj2_Callback3(Ground_GObj*);
-/* 2125F0 */ static UNK_RET grPura_802125F0(HSD_GObj*);
+/* 2125F0 */ static void grPura_802125F0(HSD_GObj*);
 /* 212CD4 */ static void grPura_80212CD4(HSD_GObj*);
 /* 212EF4 */ static void grPura_80212EF4(HSD_GObj*);
 /* 212FC0 */ static void grPura_80212FC0(HSD_GObj*);
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 /* 2130C0 */ static DynamicsDesc* grPura_802130C0(enum_t);
 /* 2130C8 */ static bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
-/* 2130D0 */ static UNK_RET fn_802130D0(HSD_GObj*, int);
+/* 2130D0 */ static void fn_802130D0(HSD_GObj*, int);
 /* 213128 */ static void grPura_80213128(HSD_DObj*);
-/* 213224 */ static UNK_RET grPura_80213224(HSD_DObj*);
+/* 213224 */ static void grPura_80213224(HSD_DObj*);
 /* 213250 */ static void grPura_80213250(HSD_JObj*);
 
 static StageCallbacks stage_callbacks[] = {
@@ -874,7 +874,7 @@ void grPura_80213030(Ground_GObj* arg0)
 
 DynamicsDesc* grPura_802130C0(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 bool grPura_802130C8(Vec3* a, int num, HSD_JObj* joint)

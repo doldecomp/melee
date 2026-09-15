@@ -25,10 +25,11 @@ HSD_SList* fn_80392480(Event event, int priority)
 {
     HSD_SList* prev = NULL;
     HSD_SList* cur = hsd_804D7850;
+    HSD_SList* ret;
 
     goto loop_5;
 block_1: {
-    HSD_SList* ret = cur->data;
+    ret = cur->data;
     if (event != (Event) ret->next) {
         if (((struct EventPriority*) ret)->priority <= priority) {
             prev = cur;

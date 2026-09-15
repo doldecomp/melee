@@ -5,8 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/texp.h>
 
 typedef struct HSD_TExpDag {
@@ -28,7 +26,7 @@ typedef struct HSD_TExpDag {
                                int num, int depth);
 /* 385C60 */ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list);
 /* 386100 */ void make_full_dependancy_mtx(int num, const u32* dep, u32* full);
-/* 386230 */ UNK_RET fn_80386230(UNK_PARAMS);
+/* 386230 */ void fn_80386230(void);
 /* 386234 */ void HSD_TExpSchedule(int num, HSD_TExpDag* list,
                                    HSD_TExp** result, HSD_TExpRes* resource);
 /* 386470 */ int SimplifySrc(HSD_TExp*);

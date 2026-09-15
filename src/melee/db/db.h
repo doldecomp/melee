@@ -4,8 +4,6 @@
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/controller.h>
 
 typedef enum DbLKind {
@@ -63,7 +61,7 @@ typedef enum DbLKind {
                                      int buttons_pressed, f32 cstick_x,
                                      f32 cstick_y);
 /* 22873C */ void fn_CheckMiscVisualEffects(int player);
-/* 2287C4 */ void fn_Setup5xSpeed(UNK_PARAMS);
+/* 2287C4 */ void fn_Setup5xSpeed(void);
 /* 2287D8 */ void fn_Check5xSpeed(int player);
 /* 228820 */ void fn_Toggle5xSpeed(void);
 /* 22886C */ void db_InitScreenshot(void);

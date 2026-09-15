@@ -945,7 +945,7 @@ DynamicModelDesc* grOnett_801E56FC(void)
 
 DynamicsDesc* grOnett_801E5760(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grOnett_801E5768(Vec3* a, int b, HSD_JObj* jobj)

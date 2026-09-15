@@ -1,12 +1,13 @@
 #include "texpdag.h"
 
+#include <placeholder.h>
 #include <string.h>
 
 #include "debug.h"
 #include "texp.h"
 #include "tobj.h"
 
-int assign_reg(int num, u32* unused, HSD_TExpDag* list, const int* order)
+int assign_reg(int num, UNUSED u32* arg1, HSD_TExpDag* list, const int* order)
 {
     u8 color_refs[4] = { 0 };
     u8 alpha_refs[4] = { 0 };

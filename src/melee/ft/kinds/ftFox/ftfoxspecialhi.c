@@ -353,9 +353,9 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
      * @todo This match is definitely fake.
      */
     if (ftCliffCommon_80081298(gobj) == false) {
-        s32 envFlags = collData->env_flags;
-        float var;
         do {
+            s32 envFlags = collData->env_flags;
+            float var;
             if (envFlags & Collide_CeilingMask) {
                 var =
                     lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
