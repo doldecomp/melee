@@ -102,7 +102,7 @@ typedef union HSD_ObjData HSD_ObjData;
 typedef union HSD_Rumble HSD_Rumble;
 typedef union HSD_TExp HSD_TExp;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 typedef u32 HSD_IDKey;
 #else
 typedef uintptr_t HSD_IDKey;
