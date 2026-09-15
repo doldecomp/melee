@@ -3,8 +3,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/hsd_3A94.h>
 
 /// Queues a header read into the non-NULL destination buffers. Returns 0
