@@ -765,7 +765,7 @@ void grOldPupupu_80211C9C(Ground_GObj* arg) {}
 
 DynamicsDesc* grOldPupupu_80211CA0(enum_t gobj)
 {
-    return false;
+    return NULL;
 }
 
 bool grOldPupupu_80211CA8(Vec3* a, int arg, HSD_JObj* joint)
