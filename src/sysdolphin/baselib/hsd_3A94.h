@@ -3,8 +3,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
-
 #include <dolphin/card.h>
 
 typedef struct CardState {
@@ -41,9 +39,9 @@ typedef struct CardState {
 /* 3AC168 */ s32 fn_803AC168(s32* cmd_buf);
 /* 3AC258 */ s32 fn_803AC258(CardState* state, s32 block_idx);
 /* 3AC2A4 */ s32 fn_803AC2A4(CardState* state);
-/* 3AC2D4 */ UNK_RET fn_803AC2D4(UNK_PARAMS);
+/* 3AC2D4 */ void fn_803AC2D4(void);
 /* 3AC2E0 */ void fn_803AC2E0(void);
-/* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
+/* 3AC334 */ void fn_803AC334(void);
 /* 3AC340 */ int hsd_803AC340(void* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
                                int file_flags, u8* data);

@@ -1,5 +1,6 @@
 #include "debugconsole_main.h"
 
+#include <placeholder.h>
 #include <string.h>
 
 #include "hsd_3915.h"

@@ -5,8 +5,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <placeholder.h>
-
 #include <melee/ft/types.h>
 
 struct _m2c_stack_ftCo_800A3554 {
@@ -58,6 +56,6 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A5A5C */ bool ftCo_800A5A5C(Item* ip);
 /* 0A5A90 */ bool ftCo_800A5A90(Fighter* fp);
 /* 0B07FC */ void ftCo_800B3900(Fighter_GObj* gobj);
-/* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);
+/* 0B0858 */ void ftCo_800B3958(void);
 
 #endif

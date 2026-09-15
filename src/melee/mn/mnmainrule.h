@@ -3,8 +3,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 struct mn_802307F8_t {
     /* 0x000 */ u8 x0;
     /* 0x001 */ u8 x1;
@@ -47,7 +45,7 @@ struct mn_80231634_t {
 /* 230E38 */ HSD_GObj* mn_80230E38(int);
 /* 231634 */ int mn_80231634(struct mn_80231634_t*);
 /* 23164C */ void mn_8023164C(void);
-/* 231714 */ UNK_RET mn_80231714(UNK_PARAMS);
+/* 231714 */ void mn_80231714(void);
 /* 2317E4 */ void mn_802317E4(HSD_Archive*, int);
 /* 231804 */ void mn_80231804(HSD_Archive*, int);
 /* 231F80 */ bool mn_80231F80(u8);

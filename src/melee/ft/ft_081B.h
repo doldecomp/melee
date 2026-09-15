@@ -6,8 +6,6 @@
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <melee/ft/types.h>
 
 // TODO transitive include hack, should be included directly by dependers
@@ -56,7 +54,7 @@
                               HSD_GObjEvent);
 /* 08370C */ void ft_8008370C(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083844 */ void ft_80083844(Fighter_GObj* gobj, HSD_GObjEvent cb);
-/* 083910 */ UNK_RET ft_80083910(Fighter_GObj* gobj, HSD_GObjEvent cb);
+/* 083910 */ void ft_80083910(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083A48 */ void ft_80083A48(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083B68 */ void ft_80083B68(Fighter_GObj* gobj);
 /* 083C00 */ void ft_80083C00(Fighter_GObj* gobj, HSD_GObjEvent cb);

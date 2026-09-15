@@ -5,8 +5,6 @@
 
 #include <melee/it/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/mtx.h>
 #include <melee/it/kinds/types.h>
 
@@ -14,7 +12,7 @@
 /* 2DDBE8 */ void it_802DDBE8(Item_GObj*);
 /* 2DDC8C */ void fn_802DDC8C(Item_GObj*);
 /* 2DDD38 */ void it_802DDD38(Item_GObj*);
-/* 2DDEB4 */ UNK_RET it_802DDEB4(Item_GObj*);
+/* 2DDEB4 */ void it_802DDEB4(Item_GObj*);
 /* 2DE040 */ void it_802DE040(Item_GObj*);
 /* 2DE0F0 */ void it_802DE0F0(Item_GObj*);
 /* 2DE190 */ bool itZrshell_UnkMotion0_Anim(Item_GObj*);

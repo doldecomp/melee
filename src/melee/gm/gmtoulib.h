@@ -22,8 +22,8 @@
 /* 18E46C */ void fn_8018E46C(HSD_GObj*, int);
 /* 18E618 */ void fn_8018E618(int, float, int);
 /* 18E85C */ void fn_8018E85C(DynamicModelDesc*, s32);
-/* 18EC48 */ UNK_RET fn_8018EC48(UNK_PARAMS);
-/* 18EC7C */ UNK_RET fn_8018EC7C(UNK_PARAMS);
+/* 18EC48 */ void fn_8018EC48(void);
+/* 18EC7C */ void fn_8018EC7C(void);
 /* 18ECA8 */ void fn_8018ECA8(s32, s32, s32, f32, f32, s32);
 /* 18F00C */ void fn_8018F00C(char*, s32);
 /* 18F1B0 */ s32 gm_8018F1B0(MatchEnd* me);
@@ -61,7 +61,7 @@
                                    bool, void (*)(HSD_GObj*), float);
 /* 19044C */ void fn_8019044C(HSD_JObj*, float);
 /* 190480 */ void fn_80190480(float);
-/* 1904D0 */ UNK_RET fn_801904D0(UNK_PARAMS);
+/* 1904D0 */ void fn_801904D0(void);
 /* 190520 */ void fn_80190520(float x, float y, float z);
 /* 1905F0 */ void gm_801905F0(StartMeleeData*);
 /* 190ABC */ void fn_80190ABC(int);
@@ -87,9 +87,9 @@
 /* 192938 */ void fn_80192938(void);
 /* 192BB0 */ void fn_80192BB0(void);
 /* 192E6C */ void fn_80192E6C(void);
-/* 193230 */ UNK_RET fn_80193230(UNK_PARAMS);
+/* 193230 */ void fn_80193230(void);
 /* 193308 */ void fn_80193308(void);
-/* 1935B8 */ UNK_RET fn_801935B8(UNK_PARAMS);
+/* 1935B8 */ void fn_801935B8(void);
 /* 1937C4 */ void fn_801937C4(s32* arg, u32 arg0, u32 arg01);
 /* 193B58 */ void fn_80193B58(s32* arg, u32 arg0, u32 arg01);
 /* 193FCC */ void fn_80193FCC(s32* arg, u32 arg0, u32 arg01);
@@ -133,7 +133,7 @@
 /* 198BA0 */ void fn_80198BA0(void);
 /* 198C60 */ void fn_80198C60(void);
 /* 198D18 */ void fn_80198D18(void);
-/* 198EBC */ UNK_RET fn_80198EBC(UNK_PARAMS);
+/* 198EBC */ void fn_80198EBC(void);
 /* 199AF0 */ void fn_80199AF0(void);
 /* 19A158 */ void fn_8019A158(void);
 /* 19A71C */ void fn_8019A71C(s32* arg0, u32 arg1, u32 arg2);
