@@ -874,7 +874,7 @@ void grPura_80213030(Ground_GObj* arg0)
 
 DynamicsDesc* grPura_802130C0(enum_t arg0)
 {
-    return false;
+    return NULL;
 }
 
 bool grPura_802130C8(Vec3* a, int num, HSD_JObj* joint)

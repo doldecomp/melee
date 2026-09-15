@@ -1818,7 +1818,7 @@ s32 grVenom_80206D10(s32 arg0)
 
 DynamicsDesc* grVenom_80206D74(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)

@@ -198,7 +198,7 @@ void grTest_80207408(Ground_GObj* gobj) {}
 
 struct DynamicsDesc* grTest_8020740C(enum_t unused)
 {
-    return false;
+    return NULL;
 }
 
 bool grTest_80207414(Vec3* a, int id, HSD_JObj* jobj)
