@@ -35,8 +35,6 @@ StaticModelDesc MenMainCursorB3_Top;
 StaticModelDesc MenMainConB3_Top;
 StaticModelDesc MenMainConB2_Top;
 
-#define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
-
 /// Archive asset pointers struct (for mnDiagram_Init)
 /// Cast from &mnDiagram_FighterDisplayOrder to access asset arrays
 typedef struct mnDiagram_Assets {
@@ -118,7 +116,7 @@ typedef struct mnDiagram_AnimTable {
 #define GET_DIAGRAM_ANIM_TABLE()                                              \
     ((mnDiagram_AnimTable*) &mnDiagram_PopupTextOffsets)
 
-static s32 mnDiagram_PopupTextColor = 0xFF;
+static GXColor mnDiagram_PopupTextColor = { 0, 0, 0, 0xFF };
 char mnDiagram_StringTerminator[1] = "";
 
 /// @brief Gets the fighter ID at the given sorted index.
@@ -1735,7 +1733,7 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         text->pos_z = z;
     }
     text->default_alignment = 0;
-    *(s32*) &text->text_color = mnDiagram_PopupTextColor;
+    text->text_color = mnDiagram_PopupTextColor;
 
     if (use_nametag != 0) {
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
