@@ -11,9 +11,37 @@
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
 
+/// Operations dispatched by lb_80019CB0. Values describe observed behavior;
+/// they are separate from task result codes and the HSD request/command tags.
+typedef enum CardTaskType {
+    CARD_TASK_MOUNT_CARD = 0x00,
+    CARD_TASK_CHECK_CARD = 0x01,
+    /// Checks free space and initializes the HSD state; opens/scans the
+    /// named file when it exists.
+    CARD_TASK_OPEN_FILE = 0x02,
+    /// lb_8001A860 maps stored results 0 and 2 to 1. The intended meaning
+    /// of this result-normalization step is not established.
+    CARD_TASK_UNK_0x03 = 0x03,
+    CARD_TASK_FORMAT_CARD = 0x04,
+    CARD_TASK_DELETE_FILE = 0x05,
+    CARD_TASK_RENAME_FILE = 0x06,
+    CARD_TASK_CREATE_FILE = 0x07,
+    /// Reads/writes the configured logical files using the entry buffers.
+    CARD_TASK_READ_FILES = 0x08,
+    CARD_TASK_WRITE_FILES = 0x09,
+    /// Updates the comment/banner/icons header and CARD status.
+    CARD_TASK_SET_STATUS = 0x0A,
+    CARD_TASK_READ_HEADER = 0x0B,
+    CARD_TASK_LIST_SNAPSHOTS = 0x0C,
+    CARD_TASK_FIND_FILE = 0x0D,
+    /// Unused task slot; zero is the mount task.
+    CARD_TASK_NONE = 0x0E,
+} CardTaskType;
+
 struct CardTask {
-    /* 0x00 */ int x0;
-    /* 0x04 */ int x4;
+    /* 0x00 */ CardTaskType type;
+    /// Bit i permits this task to run after result i.
+    /* 0x04 */ int result_mask;
     /* 0x08 */ UNK_T x8;
     /* 0x0C */ char* xC;
     /// Copies are limited to CARD_FILENAME_MAX; the extra bytes stay zero
@@ -99,7 +127,7 @@ struct CardTask* lb_80019C38(void)
 
     for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         result = &_p(task_array)[i];
-        if (result->x0 == 0xE) {
+        if (result->type == CARD_TASK_NONE) {
             break;
         }
     }
@@ -111,7 +139,7 @@ static void reset_task_array(void)
 {
     int i;
     for (i = 0; i < LbCardNewTaskArray_Max; i++) {
-        _p(task_array)[i].x0 = 0xE;
+        _p(task_array)[i].type = CARD_TASK_NONE;
     }
 }
 
@@ -123,59 +151,61 @@ int lb_80019CB0(int result)
     for (;;) {
         for (i = 0; i < LbCardNewTaskArray_Max; i++) {
             task = &_p(task_array)[i];
-            if (_p(task_array)[i].x0 != 0xE) {
+            if (_p(task_array)[i].type != CARD_TASK_NONE) {
                 break;
             }
         }
         if (i != LbCardNewTaskArray_Max) {
-            if (!(task->x4 & (1 << result))) {
+            if (!(task->result_mask & (1 << result))) {
                 reset_task_array();
             } else {
-                switch (task->x0) {
-                case 0:
+                switch (task->type) {
+                case CARD_TASK_MOUNT_CARD:
                     result = lb_8001A184();
                     break;
-                case 1:
+                case CARD_TASK_CHECK_CARD:
                     result = lb_8001A3A4();
                     break;
-                case 2:
+                case CARD_TASK_OPEN_FILE:
                     result = lb_8001A594(task->xC, task->x8);
                     break;
-                case 3:
+                case CARD_TASK_UNK_0x03:
                     result = lb_8001A860();
                     break;
-                case 4:
+                case CARD_TASK_FORMAT_CARD:
                     result = lb_8001A8A4();
                     break;
-                case 5:
+                case CARD_TASK_DELETE_FILE:
                     result = lb_8001A9CC(task->filename);
                     break;
-                case 6:
+                case CARD_TASK_RENAME_FILE:
                     result = lb_8001AAE4(task->filename, task->new_filename);
                     break;
-                case 7:
+                case CARD_TASK_CREATE_FILE:
                     result = lb_8001AC04(task->filename);
                     break;
-                case 8:
+                case CARD_TASK_READ_FILES:
                     result = lb_8001ACEC(task->x8);
                     break;
-                case 9:
+                case CARD_TASK_WRITE_FILES:
                     result = lb_8001AE38(task->x8);
                     break;
-                case 10:
+                case CARD_TASK_SET_STATUS:
                     result = lb_8001AF84();
                     break;
-                case 11:
+                case CARD_TASK_READ_HEADER:
                     result = lb_8001B068();
                     break;
-                case 12:
+                case CARD_TASK_LIST_SNAPSHOTS:
                     result = lb_8001B14C();
                     break;
-                case 13:
+                case CARD_TASK_FIND_FILE:
                     result = lb_8001B614(task->filename);
                     break;
+                default:
+                    break;
                 }
-                task->x0 = 0xE;
+                task->type = CARD_TASK_NONE;
                 if (result != 11) {
                     continue;
                 }
@@ -353,8 +383,8 @@ int lb_8001A3A4(void)
 void lb_8001A4CC(const char* filename, UNK_T file_entries)
 {
     struct CardTask* task = lb_80019C38();
-    task->x0 = 2;
-    task->x4 = 1;
+    task->type = CARD_TASK_OPEN_FILE;
+    task->result_mask = 1;
     if (filename != NULL) {
         strncpy(task->xC = task->filename, filename, CARD_FILENAME_MAX);
     } else {
@@ -792,11 +822,11 @@ int lb_8001B760(int result)
     return result;
 }
 
-static inline struct CardTask* setup_task(int a, int b)
+static inline struct CardTask* setup_task(CardTaskType type, int result_mask)
 {
     struct CardTask* task = lb_80019C38();
-    task->x0 = a;
-    task->x4 = b;
+    task->type = type;
+    task->result_mask = result_mask;
     return task;
 }
 
@@ -815,10 +845,10 @@ u32 lb_8001B7E0(int chan, char* filename, void* file_entries, void* save_data,
     u8 _[0x10];
 
     lb_80019EF0(chan, save_data, status_out, NULL);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, file_entries);
-    setup_task(3, -1);
+    setup_task(CARD_TASK_UNK_0x03, -1);
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
@@ -836,9 +866,9 @@ int lb_8001B8C8(int chan)
     u8 _[0x18];
 
     lb_80019EF0(chan, 0, 0, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
-    setup_task(4, -1);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
+    setup_task(CARD_TASK_FORMAT_CARD, -1);
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
@@ -852,12 +882,13 @@ int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
 {
     int new_var;
     lb_80019EF0(chan, 0, status_out, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
-    setup_task(3, -1);
+    setup_task(CARD_TASK_UNK_0x03, -1);
     new_var = 0x10;
-    strncpy(setup_task(5, 0xE)->filename, filename, CARD_FILENAME_MAX);
+    strncpy(setup_task(CARD_TASK_DELETE_FILE, 0xE)->filename, filename,
+            CARD_FILENAME_MAX);
     return lb_80019CB0(new_var);
 }
 
@@ -867,11 +898,12 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     u8 _[0x10];
 
     lb_80019EF0(chan, 0, status_out, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
-    setup_task(3, -1);
-    strncpy(setup_task(5, 0xE)->filename, filename, CARD_FILENAME_MAX);
+    setup_task(CARD_TASK_UNK_0x03, -1);
+    strncpy(setup_task(CARD_TASK_DELETE_FILE, 0xE)->filename, filename,
+            CARD_FILENAME_MAX);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         while ((result = lb_8001B6F8()) == 11) {
@@ -888,20 +920,20 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     lb_80019EF0(chan, save_data, status_out, 0);
 
     task = lb_80019C38_noinline();
-    task->x0 = 0;
-    task->x4 = 0x10000;
+    task->type = CARD_TASK_MOUNT_CARD;
+    task->result_mask = 0x10000;
     new_var = 0x20;
     task = lb_80019C38_noinline();
-    task->x0 = 1;
-    task->x4 = 0x201;
+    task->type = CARD_TASK_CHECK_CARD;
+    task->result_mask = 0x201;
     lb_8001A4CC_dontinline(filename, file_entries);
     task = lb_80019C38_noinline();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
 
     task = lb_80019C38_noinline();
-    task->x0 = 7;
-    task->x4 = 0x10;
+    task->type = CARD_TASK_CREATE_FILE;
+    task->result_mask = 0x10;
     memcpy(task->filename, filename, new_var);
     _p(comment) = comment;
     _p(banner) = banner;
@@ -918,12 +950,13 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
 
     lb_80019EF0(chan, save_data, status_out, 0);
 
-    setup_task(0, 0x10000);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
     new_var = 0x20;
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, file_entries);
-    setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->filename, filename, new_var);
+    setup_task(CARD_TASK_UNK_0x03, -1);
+    memcpy(setup_task(CARD_TASK_CREATE_FILE, 0x10)->filename, filename,
+           new_var);
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
@@ -947,11 +980,11 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
 
     lb_80019EF0(chan, NULL, status_out, NULL);
 
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
-    setup_task(3, -1);
-    setup_task(8, 3)->x8 = file_entries;
+    setup_task(CARD_TASK_UNK_0x03, -1);
+    setup_task(CARD_TASK_READ_FILES, 3)->x8 = file_entries;
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
@@ -973,24 +1006,24 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     lb_80019EF0(chan, 0, status_out, callback);
 
     task = lb_80019C38();
-    task->x0 = 0;
-    task->x4 = 0x10000;
+    task->type = CARD_TASK_MOUNT_CARD;
+    task->result_mask = 0x10000;
     task = lb_80019C38();
-    task->x0 = 1;
-    task->x4 = 0x201;
+    task->type = CARD_TASK_CHECK_CARD;
+    task->result_mask = 0x201;
     lb_8001A4CC(filename, 0);
     task = lb_80019C38();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
     task = lb_80019C38();
-    task->x0 = 10;
-    task->x4 = 2;
+    task->type = CARD_TASK_SET_STATUS;
+    task->result_mask = 2;
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
     task = lb_80019C38();
-    task->x0 = 9;
-    task->x4 = 3;
+    task->type = CARD_TASK_WRITE_FILES;
+    task->result_mask = 3;
     task->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
@@ -1004,24 +1037,24 @@ int lb_8001BF04(int chan, char* filename, void* file_entries, char* comment,
     struct CardTask* task;
     lb_80019EF0(chan, 0, status_out, 0);
     task = lb_80019C38_noinline();
-    task->x0 = 0;
-    task->x4 = 0x10000;
+    task->type = CARD_TASK_MOUNT_CARD;
+    task->result_mask = 0x10000;
     task = lb_80019C38_noinline();
-    task->x0 = 1;
-    task->x4 = 0x201;
+    task->type = CARD_TASK_CHECK_CARD;
+    task->result_mask = 0x201;
     lb_8001A4CC_dontinline(filename, 0);
     task = lb_80019C38_noinline();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
     task = lb_80019C38_noinline();
-    task->x0 = 11;
-    task->x4 = 2;
+    task->type = CARD_TASK_READ_HEADER;
+    task->result_mask = 2;
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
     task = lb_80019C38_noinline();
-    task->x0 = 8;
-    task->x4 = 3;
+    task->type = CARD_TASK_READ_FILES;
+    task->result_mask = 3;
     task->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
@@ -1033,11 +1066,11 @@ int lb_8001BFD8(int chan, lbCardNew_SnapshotEntry* snapshot_entries,
     u8 _[0x18];
 
     lb_80019EF0(chan, 0, 0, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(NULL, 0);
-    setup_task(3, -1);
-    setup_task(12, 0x80);
+    setup_task(CARD_TASK_UNK_0x03, -1);
+    setup_task(CARD_TASK_LIST_SNAPSHOTS, 0x80);
     _p(snapshot_entries) = snapshot_entries;
     _p(free_blocks) = free_blocks;
     _p(free_files) = free_files;
@@ -1056,23 +1089,23 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
 
     lb_80019EF0(chan, 0, status_out, 0);
     task = lb_80019C38_noinline();
-    task->x0 = 0;
-    task->x4 = 0x10000;
+    task->type = CARD_TASK_MOUNT_CARD;
+    task->result_mask = 0x10000;
     task = lb_80019C38_noinline();
-    task->x0 = 1;
-    task->x4 = 0x201;
+    task->type = CARD_TASK_CHECK_CARD;
+    task->result_mask = 0x201;
     lb_8001A4CC_dontinline(name_a, 0);
     task = lb_80019C38_noinline();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
     task = lb_80019C38_noinline();
-    task->x0 = 6;
-    task->x4 = 14;
+    task->type = CARD_TASK_RENAME_FILE;
+    task->result_mask = 14;
     strncpy(task->filename, name_a, CARD_FILENAME_MAX);
     strncpy(task->new_filename, name_c, CARD_FILENAME_MAX);
     task = lb_80019C38_noinline();
-    task->x0 = 2;
-    task->x4 = 1;
+    task->type = CARD_TASK_OPEN_FILE;
+    task->result_mask = 1;
     if (name_b != NULL) {
         task->xC = task->filename;
         strncpy(task->filename, name_b, CARD_FILENAME_MAX);
@@ -1081,16 +1114,16 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     }
     task->x8 = 0;
     task = lb_80019C38_noinline();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
     task = lb_80019C38_noinline();
-    task->x0 = 6;
-    task->x4 = 14;
+    task->type = CARD_TASK_RENAME_FILE;
+    task->result_mask = 14;
     strncpy(task->filename, name_b, CARD_FILENAME_MAX);
     strncpy(task->new_filename, name_a, CARD_FILENAME_MAX);
     task = lb_80019C38_noinline();
-    task->x0 = 2;
-    task->x4 = 1;
+    task->type = CARD_TASK_OPEN_FILE;
+    task->result_mask = 1;
     if (name_c != NULL) {
         task->xC = task->filename;
         strncpy(task->filename, name_c, CARD_FILENAME_MAX);
@@ -1099,11 +1132,11 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     }
     task->x8 = 0;
     task = lb_80019C38_noinline();
-    task->x0 = 3;
-    task->x4 = -1;
+    task->type = CARD_TASK_UNK_0x03;
+    task->result_mask = -1;
     task = lb_80019C38_noinline();
-    task->x0 = 6;
-    task->x4 = 14;
+    task->type = CARD_TASK_RENAME_FILE;
+    task->result_mask = 14;
     strncpy(task->filename, name_c, CARD_FILENAME_MAX);
     strncpy(task->new_filename, name_b, CARD_FILENAME_MAX);
     return lb_80019CB0(0x10);
@@ -1121,11 +1154,11 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     struct CardTask* unused_3;
 
     lb_80019EF0(chan, 0, 0, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    setup_task(CARD_TASK_MOUNT_CARD, 0x10000);
+    setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(NULL, 0);
-    setup_task(3, -1);
-    task = setup_task(0xD, 0x80);
+    setup_task(CARD_TASK_UNK_0x03, -1);
+    task = setup_task(CARD_TASK_FIND_FILE, 0x80);
     strncpy(_p(x2C), company, 2U);
     strncpy(_p(x2F), game_name, 4U);
     strncpy(task->filename, filename, CARD_FILENAME_MAX);
