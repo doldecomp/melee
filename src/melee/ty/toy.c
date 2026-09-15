@@ -57,18 +57,6 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
-typedef struct ToyDisplayList {
-    /* 0x000 */ ToyListEntry entries[13];
-    /* 0x138 */ ToyListEntry* first_entry;
-    /* 0x13C */ ToyListEntry* last_entry;
-    /* 0x140 */ ToyListEntry* selected_entry;
-    /* 0x144 */ u8 pad_144[0x154 - 0x144];
-    /* 0x154 */ s16 selectedIdx;
-    /* 0x156 */ u8 pad_156;
-    /* 0x157 */ s8 visible_count;
-} ToyDisplayList;
-ASSERT_SIZE(ToyDisplayList, 0x158);
-
 typedef struct ToyUnkJObjData {
     /* 0x00 */ u8 pad_00[0x10];
     /* 0x10 */ HSD_JObj* jobj;
@@ -95,7 +83,7 @@ typedef struct ToyUnkJObjData {
 /* 30B530 */ static void _Toy_8030B530(HSD_GObj*);
 /* 30E110 */ static void _Toy_8030E110(HSD_GObj*);
 /* 30FA50 */ static void _Toy_8030FA50(void);
-/* 30FE48 */ static void _Toy_8030FE48(ToyDisplayList*, s32);
+/* 30FE48 */ static void _Toy_8030FE48(TyDisplayData*, s32);
 /* 3102C4 */ static void _Toy_803102C4(s8 arg0);
 /* 3109A0 */ static void _Toy_803109A0(s32, s32, s32);
 /* 310B48 */ static void _Toy_80310B48(HSD_GObj*);
@@ -293,7 +281,7 @@ typedef struct TySortRow {
 /* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
 /* 4D6E64 */ TySortRow* _Toy_sbss_804D6E64;
 /* 4D6E60 */ s32 _Toy_sbss_804D6E60;
-/* 4D6E5C */ void** _Toy_sbss_804D6E5C;
+/* 4D6E5C */ ToyParamEditor* _Toy_sbss_804D6E5C;
 /* 4D6E58 */ s32 _Toy_sbss_804D6E58;
 /* 4D6E54 */ s32 _Toy_sbss_804D6E54;
 /* 4D6E50 */ s8 _Toy_sbss_804D6E50;
@@ -424,7 +412,8 @@ STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E6C) == 0x8);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED8) == 0x5C);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6EDC) == 0x24A);
-// STATIC_ASSERT(sizeof(*Toy_sbss_804D6EE0) == 0x158);
+STATIC_ASSERT(sizeof(*Toy_sbss_804D6EE0) == 0x158);
+STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E5C) == 0x18);
 
 /// @todo .sdata order hack
 #ifdef MUST_MATCH
@@ -5440,7 +5429,7 @@ static inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry,
     entry->trophy_id = trophy_idx;
 }
 
-static inline void _Toy_8030FE48_link_entries(ToyDisplayList* data,
+static inline void _Toy_8030FE48_link_entries(TyDisplayData* data,
                                               s32 entry_count)
 {
     s32 i;
@@ -5466,7 +5455,7 @@ static inline void _Toy_8030FE48_link_entries(ToyDisplayList* data,
     }
 }
 
-void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
+void _Toy_8030FE48(TyDisplayData* data, s32 arg1)
 {
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
     s16* sel = &toy->selectedIdx;
@@ -5656,11 +5645,11 @@ static inline void toy_toggle_flag(Toy26B8* toy)
 
 static inline void toy_make_gobj(void)
 {
-    ToyGlobalsS_* tg3;
+    TyViewData* tg3;
 
-    tg3 = (ToyGlobalsS_*) _Toy_sbss_804D6E6C;
-    tg3->x0 = GObj_Create(6, 7, 0);
-    GObj_SetupGXLink(tg3->x0, _Toy_80312050, 0x39, 0);
+    tg3 = _Toy_sbss_804D6E6C;
+    tg3->gobj = GObj_Create(6, 7, 0);
+    GObj_SetupGXLink(tg3->gobj, _Toy_80312050, 0x39, 0);
     tg3->x4 = 1;
 }
 
@@ -5744,7 +5733,7 @@ void Toy_80310324(void)
 
     if (var_r0 != 0) {
         memzero(&toy->anim, sizeof(toy->anim));
-        _Toy_8030FE48((ToyDisplayList*) Toy_sbss_804D6EE0, 0);
+        _Toy_8030FE48(Toy_sbss_804D6EE0, 0);
         tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
         Toy_803087F4(tg6->x140);
 
@@ -5997,7 +5986,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
     PAD_STACK(88);
 
     changed = 0;
-    editor = (ToyParamEditor*) _Toy_sbss_804D6E5C;
+    editor = _Toy_sbss_804D6E5C;
 
     for (i = 0; i < 4; i++) {
         if ((stickX = HSD_PadCopyStatus[(u8) i].nml_stickX) < 0.0F) {
@@ -6150,12 +6139,12 @@ void _Toy_803114E8(void)
 {
     GXColor color;
     s32 pad[0x20]; /* Force larger stack frame */
-    void** data;
+    ToyParamEditor* data;
     s32 i;
 
     (void) pad;
 
-    _Toy_sbss_804D6E5C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E5C) * 6);
+    _Toy_sbss_804D6E5C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E5C));
     data = _Toy_sbss_804D6E5C;
 
     _Toy_sbss_804D6E98 =
@@ -6184,10 +6173,10 @@ void _Toy_803114E8(void)
             }
         }
 
-        memzero(data, 0x18);
-        *data = GObj_Create(0, 0, 0);
-        HSD_GObj_SetupProc(*data, (void (*)(HSD_GObj*)) _Toy_80310B48, 0);
-        HSD_GObj_80390CD4(*data);
+        memzero(data, sizeof(*data));
+        data->gobj = GObj_Create(0, 0, 0);
+        HSD_GObj_SetupProc(data->gobj, _Toy_80310B48, 0);
+        HSD_GObj_80390CD4(data->gobj);
     } else {
         OSReport("*** Couldn't Open Debug Window2!\n");
     }
@@ -6414,17 +6403,17 @@ void Toy_Scene_OnEnter(void* arg0)
 
 void _Toy_80311F5C(void)
 {
-    void** p1 = (void**) Toy_sbss_804D6ED8;
-    void** p2 = (void**) _Toy_sbss_804D6E68;
+    ToyED8Data* p1 = Toy_sbss_804D6ED8;
+    Toy6E68* p2 = _Toy_sbss_804D6E68;
 
-    if (p1[0x14] != NULL) {
-        p1[0x14] = NULL;
+    if (p1->archive != NULL) {
+        p1->archive = NULL;
     }
-    if (p1[0] != NULL) {
-        p1[0] = NULL;
+    if (p1->x0 != NULL) {
+        p1->x0 = NULL;
     }
-    if (p2[0] != NULL) {
-        p2[0] = NULL;
+    if (p2->x0 != NULL) {
+        p2->x0 = NULL;
     }
     if (_Toy_sbss_804D6EA2 != 0 && _Toy_sbss_804D6E9C != NULL) {
         DevText_Remove(&_Toy_sbss_804D6E9C);

@@ -140,17 +140,6 @@ struct TyFiguponED4 {
     /* 0x0C */ u32 xC;
 };
 
-struct TyDisplayData {
-    /* 0x000 */ u8 pad_000[0x138];
-    /* 0x138 */ ToyListEntry* first_entry;
-    /* 0x13C */ ToyListEntry* last_entry;
-    /* 0x140 */ ToyListEntry* selected_entry;
-    /* 0x144 */ u8 pad_144[0x154 - 0x144];
-    /* 0x154 */ s16 selectedIdx;
-    /* 0x156 */ u8 pad_156;
-    /* 0x157 */ s8 visible_count;
-};
-
 struct ToyModelFile {
     /* 0x00 */ s32 trophy_id;
     /* 0x04 */ char archive_name[0x20];
@@ -165,6 +154,17 @@ struct ToyListEntry {
     /* 0x10 */ s16 trophy_id;
     /* 0x12 */ u8 pad_12[2];
     /* 0x14 */ HSD_Archive* archive;
+};
+
+struct TyDisplayData {
+    /* 0x000 */ ToyListEntry entries[13];
+    /* 0x138 */ ToyListEntry* first_entry;
+    /* 0x13C */ ToyListEntry* last_entry;
+    /* 0x140 */ ToyListEntry* selected_entry;
+    /* 0x144 */ u8 pad_144[0x154 - 0x144];
+    /* 0x154 */ s16 selectedIdx;
+    /* 0x156 */ u8 pad_156;
+    /* 0x157 */ s8 visible_count;
 };
 
 struct Toy26B8 {
@@ -196,7 +196,7 @@ struct _Toy_804A26B8_t {
 ASSERT_SIZE(struct _Toy_804A26B8_t, 0xC);
 
 struct TyViewData {
-    char pad_0[0x4];
+    HSD_GObj* gobj;
     s8 x4;
     char pad_5[0x3];
 };
