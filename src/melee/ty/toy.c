@@ -755,13 +755,11 @@ int _Toy_80304D30(void)
     memzero(sp14, sizeof(sp14));
     count = 0;
     for (i = 0; i < TY_TROPHY_COUNT; i++) {
-        if (Toy_80304CC8(i)) {
-            if (Toy_80304D30_48C0(i)) {
-                x = Toy_803060BC(i, 6);
-                sp14[x]++;
-                if (x != 8 && x != 1) {
-                    count++;
-                }
+        if (Toy_80304CC8(i) && Toy_80304D30_48C0(i)) {
+            x = Toy_803060BC(i, 6);
+            sp14[x]++;
+            if (x != 8 && x != 1) {
+                count++;
             }
         }
     }
@@ -1199,11 +1197,6 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
     }
 }
 
-/** @note The inner loop with load_value/loop_top/check_skip labels is
- * logically: skip = !lbLang_IsSettingUS() || !IsInSkipList(var_r25,
- * _Toy_sbss_804D6EB4); Refactoring to an inline function breaks the match due
- * to control flow changes.
- */
 void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
 {
     s16* var_r22;
@@ -1227,20 +1220,14 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
         s32 skip;
         s16 temp_r0;
 
-        /* Check if var_r25 is in skip list (only when US locale) */
         var_r22 = _Toy_sbss_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
-            goto load_value;
-        loop_top:
-            if (temp_r0 == var_r25) {
-                skip = 0;
-                goto check_skip;
-            }
-            var_r22++;
-        load_value:
-            temp_r0 = *var_r22;
-            if (temp_r0 != -1) {
-                goto loop_top;
+            while ((temp_r0 = *var_r22) != -1) {
+                if (temp_r0 == var_r25) {
+                    skip = 0;
+                    goto check_skip;
+                }
+                var_r22++;
             }
         }
         skip = 1;
@@ -1454,23 +1441,11 @@ float Toy_803060BC(int trophyId, int field)
         jp_ptr++;
     }
 
-    // Check language settings
-    if (lbLang_IsSettingJP()) {
-        if (lbLang_IsSavedLanguageUS()) {
-            goto set_lang_flag;
-        }
+    if ((lbLang_IsSettingJP() && lbLang_IsSavedLanguageUS()) ||
+        (lbLang_IsSettingUS() && lbLang_IsSavedLanguageJP()))
+    {
+        lang_flag = 1;
     }
-    if (lbLang_IsSettingUS()) {
-        if (lbLang_IsSavedLanguageJP()) {
-            goto set_lang_flag;
-        }
-    }
-    goto after_lang_flag;
-
-set_lang_flag:
-    lang_flag = 1;
-
-after_lang_flag:
 
     // Search US table
     us_ptr = _Toy_sbss_804D6EC4;
@@ -1734,7 +1709,7 @@ void _Toy_8030663C(void)
     count = 0;
     offset = 0;
     dst = _Toy_sbss_804D6E64;
-    do {
+    for (; i < TY_TROPHY_COUNT; i++, offset += 2) {
         u16* src;
         if (gm_IsCurrently1PMode() != 0 ||
             gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
@@ -1748,9 +1723,7 @@ void _Toy_8030663C(void)
             count += 1;
             dst++;
         }
-        i += 1;
-        offset += 2;
-    } while (i < TY_TROPHY_COUNT);
+    }
     {
         s32 k;
         TySortRow* src;
@@ -1760,18 +1733,11 @@ void _Toy_8030663C(void)
         dst = _Toy_sbss_804D6E64;
         for (j = 0; j < TY_TROPHY_COUNT; j++) {
             src = _Toy_sbss_804D6E64;
-            k = 0;
-            goto loop_13_check;
-        loop_13_body:
-            if (src->key[0] == _Toy_803064B8(j, 1)) {
-                dst->key[1] = src->key[0];
-                dst++;
-            } else {
-                src++;
-                k += 1;
-            loop_13_check:
-                if (k < count) {
-                    goto loop_13_body;
+            for (k = 0; k < count; src++, k++) {
+                if (src->key[0] == _Toy_803064B8(j, 1)) {
+                    dst->key[1] = src->key[0];
+                    dst++;
+                    break;
                 }
             }
         }
@@ -1786,28 +1752,19 @@ void _Toy_8030663C(void)
         dst = _Toy_sbss_804D6E64;
         for (j = 0; j < TY_TROPHY_COUNT; j++) {
             src = _Toy_sbss_804D6E64;
-            k = 0;
-            goto loop_23_check;
-        loop_23_body:
-            if (lbLang_IsSavedLanguageJP() != 0) {
-                if (src->key[0] == _Toy_803064B8(j, 2)) {
-                    dst->key[2] = src->key[0];
-                    dst++;
+            for (k = 0; k < count; src++, k++) {
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    if (src->key[0] == _Toy_803064B8(j, 2)) {
+                        dst->key[2] = src->key[0];
+                        dst++;
+                        break;
+                    }
                 } else {
-                    goto block_22;
-                }
-            } else {
-                tmp = src;
-                if (tmp->key[0] == _Toy_803064B8(j, 3)) {
-                    dst->key[2] = tmp->key[0];
-                    dst++;
-                } else {
-                block_22:
-                    src++;
-                    k += 1;
-                loop_23_check:
-                    if (k < count) {
-                        goto loop_23_body;
+                    tmp = src;
+                    if (tmp->key[0] == _Toy_803064B8(j, 3)) {
+                        dst->key[2] = tmp->key[0];
+                        dst++;
+                        break;
                     }
                 }
             }
@@ -5714,16 +5671,14 @@ static inline void toy_sobj_loop(ToyGlobalsS_* tg2, UNK_T* syms)
     s32 one;
     f32 two;
 
-    i = 0;
     two = 2.0f;
     one = 1;
-    do {
+    for (i = 0; i < 3; i++) {
         sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i], 0, 0, 0x80, 0);
         sobj->x1C = two;
-        i += 1;
         sobj->x20 = two;
         sobj->x40 = one;
-    } while (i < 3);
+    }
 }
 
 void Toy_80310324(void)
@@ -6134,51 +6089,35 @@ void _Toy_80310B48(HSD_GObj* gobj)
         return;
     }
 
-    if (!(dirX > 0.0f)) {
-        buttons = Toy_80305C44();
-        if (!(buttons & HSD_PAD_Y)) {
-            buttons = Toy_80305B88();
-            if (!(buttons & HSD_PAD_DPADLEFT)) {
-                goto skip_increment;
-            }
-        }
-    }
-
-    sfxMove();
-    editor->values[(s8) editor->selected_slot] =
-        (s16) (editor->values[(s8) editor->selected_slot] + 1);
-    if (editor->values[(s8) editor->selected_slot] >
-        Toy_80304B94((s32) (s8) editor->selected_slot))
+    if (dirX > 0.0f || (Toy_80305C44() & HSD_PAD_Y) ||
+        (Toy_80305B88() & HSD_PAD_DPADLEFT))
     {
-        u8 selected_slot = editor->selected_slot;
+        sfxMove();
         editor->values[(s8) editor->selected_slot] =
-            (s16) Toy_80304B94((s32) (s8) selected_slot);
-    }
-    editor->repeat_delay = 4;
-    changed = 1;
-
-skip_increment:
-
-    if (!(dirX < 0.0f)) {
-        buttons = Toy_80305C44();
-        if (!(buttons & HSD_PAD_X)) {
-            buttons = Toy_80305B88();
-            if (!(buttons & HSD_PAD_DPADRIGHT)) {
-                goto skip_decrement;
-            }
+            (s16) (editor->values[(s8) editor->selected_slot] + 1);
+        if (editor->values[(s8) editor->selected_slot] >
+            Toy_80304B94((s32) (s8) editor->selected_slot))
+        {
+            u8 selected_slot = editor->selected_slot;
+            editor->values[(s8) editor->selected_slot] =
+                (s16) Toy_80304B94((s32) (s8) selected_slot);
         }
+        editor->repeat_delay = 4;
+        changed = 1;
     }
 
-    sfxMove();
-    editor->values[(s8) editor->selected_slot] =
-        (s16) (editor->values[(s8) editor->selected_slot] - 1);
-    if (editor->values[(s8) editor->selected_slot] < 0) {
-        editor->values[(s8) editor->selected_slot] = 0;
+    if (dirX < 0.0f || (Toy_80305C44() & HSD_PAD_X) ||
+        (Toy_80305B88() & HSD_PAD_DPADRIGHT))
+    {
+        sfxMove();
+        editor->values[(s8) editor->selected_slot] =
+            (s16) (editor->values[(s8) editor->selected_slot] - 1);
+        if (editor->values[(s8) editor->selected_slot] < 0) {
+            editor->values[(s8) editor->selected_slot] = 0;
+        }
+        editor->repeat_delay = 4;
+        changed = 1;
     }
-    editor->repeat_delay = 4;
-    changed = 1;
-
-skip_decrement:
 
     if (!dirX && dirY) {
         sfxMove();
@@ -6269,8 +6208,7 @@ void Toy_80311680(void)
     var_r29 = gmMainLib_GetTrophyFlags();
     temp_r31 = gmMainLib_GetTrophyCategoryFlags();
     Toy_80311960();
-    var_r28 = 0;
-    do {
+    for (var_r28 = 0; var_r28 < TY_TROPHY_COUNT; var_r28++, var_r29++) {
         var_r30 = _Toy_sbss_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
             while ((temp_r0 = *var_r30) != -1) {
@@ -6294,9 +6232,7 @@ void Toy_80311680(void)
                 *var_r29 |= 0x4000;
             }
         }
-        var_r28++;
-        var_r29++;
-    } while (var_r28 < TY_TROPHY_COUNT);
+    }
     *temp_r31 = 0xF4;
     _Toy_sbss_804D6EA1 = 1;
 }
@@ -6678,31 +6614,25 @@ void Toy_803124BC(void)
             NULL);
     }
 
-    i = 0;
-loop: {
-    s32 skip;
-    s16 val;
+    for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
+        s32 skip;
+        s16 val;
 
-    list = _Toy_sbss_804D6EB4;
-    if (lbLang_IsSettingUS()) {
-        while ((val = *list) != -1) {
-            if (val == i) {
-                skip = 0;
-                goto check;
+        list = _Toy_sbss_804D6EB4;
+        if (lbLang_IsSettingUS()) {
+            while ((val = *list) != -1) {
+                if (val == i) {
+                    skip = 0;
+                    goto check;
+                }
+                list++;
             }
-            list++;
         }
-    }
-    skip = 1;
-check:
-    if (skip != 0 && (s32) Toy_803060BC(i, 6) == 2) {
-        *table1 |= 0x4000;
-    }
-}
-    i++;
-    table1++;
-    if (i < TY_TROPHY_COUNT) {
-        goto loop;
+        skip = 1;
+    check:
+        if (skip != 0 && (s32) Toy_803060BC(i, 6) == 2) {
+            *table1 |= 0x4000;
+        }
     }
 
     *table2 |= 4;
@@ -6730,10 +6660,8 @@ void Toy_8031263C(void)
     }
 
     for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
-        if (_Toy_80304CC8_noinline(i) != 0) {
-            if ((s32) Toy_803060BC(i, 6) == 2) {
-                *table1 |= 0x4000;
-            }
+        if (_Toy_80304CC8_noinline(i) != 0 && (s32) Toy_803060BC(i, 6) == 2) {
+            *table1 |= 0x4000;
         }
     }
 
