@@ -224,7 +224,8 @@ typedef struct CardHeaderReqArgs {
     /* 0x08 */ void* icons;
 } CardHeaderReqArgs;
 
-/// One entry of the request queue hsd_804D2348.
+/// One entry of the request queue hsd_804D2348. The state and buffers are
+/// borrowed; they must remain valid while the request is pending or active.
 typedef struct CardRequest {
     /* 0x00 */ CardRequestType type;
     /* 0x04 */ CardState* state;
@@ -276,7 +277,14 @@ ASSERT_OFFSET(CardContext, cmds, 0x10);
 ASSERT_OFFSET(CardContext, requests, 0x1210);
 
 /* 3AA790 */ int fn_803AA790(void);
+/// Drives queued requests and commands until idle or waiting for CARD I/O.
+/// Async CARD calls start with interrupts disabled; the busy flag is set
+/// after the call returns, before interrupts are restored. CARD completion
+/// callbacks must therefore not run inline from those calls.
 /* 3AAA48 */ void hsd_803AAA48(void);
+/// Copies the command into the ring; pointed-to state and buffers are not
+/// copied and must remain valid until execution completes. Returns 0 when
+/// queued, or -265 when the ring is full.
 /* 3AC168 */ int fn_803AC168(const CardCmd* cmd);
 /* 3AC258 */ s32 fn_803AC258(CardState* state, s32 block_idx);
 /* 3AC2A4 */ s32 fn_803AC2A4(CardState* state);
