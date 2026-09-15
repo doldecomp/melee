@@ -64,6 +64,7 @@ ORDER_FN = re.compile(r"\bstatic\s+\w+\s+(order_\w+|\w+_order\w*)\s*\(")
 HELPER_FN = re.compile(r"\bstatic\s+(?:inline\s+)?[\w* ]+?\b(\w+)\s*\(")
 STACK_PAD = re.compile(r"\bPAD_STACK\s*\(([^)]*)\)")
 DEFINE = re.compile(r"^#\s*define\s+(\w+)", re.M)
+GOTO = re.compile(r"\bgoto\s+([A-Za-z_]\w*)")
 
 # (name, shape, family). The family drives the colour on the page: `move` sites
 # walk a pointer by a constant, `retype` sites only change its type, and `hack`
@@ -80,6 +81,7 @@ CATEGORIES = [
     ("ptr-to-int", "(u32)p", "retype"),
     ("must-match", "#ifdef MUST_MATCH", "hack"),
     ("pragma", "#pragma, not push/pop", "hack"),
+    ("goto", "goto instead of control flow", "hack"),
 ]
 FAMILY = {name: family for name, _, family in CATEGORIES}
 
@@ -331,6 +333,8 @@ def scan_file(path: Path, rel: str) -> Iterator[Site]:
         if any(a <= m.start() < b for a, b in wrapper_spans):
             continue
         emit(classify(m[1]), m.start(), m[1] + m[2], "", 1)
+    for m in GOTO.finditer(text):
+        emit("goto", m.start(), "", m[1], 1)
 
     # M2C_FIELD(expr, T*, offset) is a cast+offset that m2c left behind.
     for m in M2C_FIELD.finditer(text):
