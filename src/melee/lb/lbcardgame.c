@@ -1,7 +1,6 @@
 #include "lbcardgame.h"
 
 #include "lbarchive.h"
-#include "lbcardgame.static.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
 #include <dolphin/card.h>
@@ -9,12 +8,30 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/if/textlib.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+struct lb_80433318_t {
+    /* +0  */ int x0;
+    /* +4  */ int x4;
+    /* +8  */ int x8;
+    /* +C  */ bool xC;
+    /* +10 */ int x10;
+    /* +14 */ int x14;
+    /* +18 */ bool enable;
+    /* +1C */ char _1C[0x40];
+    /* +5C */ void** x5C;
+    /* +60 */ int x60;
+    /* +64 */ SceneDesc* x64;
+};
+ASSERT_SIZE(struct lb_80433318_t, 0x68);
+
+/* 433318 */ static struct lb_80433318_t lb_80433318;
 
 #define _p(x) (lb_80433318.x)
 
