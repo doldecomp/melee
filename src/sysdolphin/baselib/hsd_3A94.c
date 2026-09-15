@@ -75,14 +75,12 @@ static inline s32 hsd_803A949C_Close(CardState* state)
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDClose(&state->file_info);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -603,10 +601,8 @@ int fn_803AA790(void)
     case CARD_REQ_READ_FILE:
         result = fn_803ADF90(entry->state, entry->file.file_idx,
                              entry->file.buf, 1, entry->callback);
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(entry->file.file_idx, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(entry->file.file_idx, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
@@ -629,10 +625,8 @@ int fn_803AA790(void)
             result = -0x101;
             break;
         }
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(entry->file.file_idx, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(entry->file.file_idx, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
@@ -640,29 +634,23 @@ int fn_803AA790(void)
         result = fn_803B1F78(entry->state, entry->create.filename,
                              entry->create.banner, entry->create.icons,
                              entry->callback);
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(0, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(0, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
     case CARD_REQ_SET_STATUS:
         result = fn_803B21E8(entry->state, entry->status.banner,
                              entry->status.icons, entry->callback);
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(0, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(0, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
     case CARD_REQ_OPEN_FILE:
         result = fn_803ADE4C(state, entry->open.file_no, entry->callback);
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(0, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(0, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
@@ -670,10 +658,8 @@ int fn_803AA790(void)
         result =
             fn_803B26CC(state, entry->header.comment, entry->header.banner,
                         entry->header.icons, entry->callback);
-        if (result < 0) {
-            if (entry->callback != NULL) {
-                entry->callback(0, result);
-            }
+        if (result < 0 && entry->callback != NULL) {
+            entry->callback(0, result);
         }
         entry->type = CARD_REQ_NONE;
         return result;
@@ -688,14 +674,12 @@ static inline s32 retryCardFastOpen(s32 chan, s32 file_no,
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDFastOpen(chan, file_no, file_info);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -706,14 +690,12 @@ static inline s32 retryCardReadAsync(CARDFileInfo* file_info, void* buffer,
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDReadAsync(file_info, buffer, length, offset, callback);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -724,14 +706,12 @@ static inline s32 retryCardWriteAsync(CARDFileInfo* file_info, void* buffer,
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDWriteAsync(file_info, buffer, length, offset, callback);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -740,14 +720,12 @@ static inline s32 retryCardClose(CARDFileInfo* file_info)
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDClose(file_info);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -758,14 +736,12 @@ static inline s32 retryCardCreateAsync(s32 chan, const char* filename,
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDCreateAsync(chan, filename, size, file_info, callback);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -774,14 +750,12 @@ static inline s32 retryCardGetStatus(s32 chan, s32 file_no, CARDStat* stat)
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDGetStatus(chan, file_no, stat);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -792,14 +766,12 @@ static inline s32 retryCardSetStatusAsync(s32 chan, s32 file_no,
     s32 i;
     s32 result;
 
-    i = 0;
-    do {
+    for (i = 0; i < 10; i++) {
         result = CARDSetStatusAsync(chan, file_no, stat, callback);
         if (result != -1) {
             break;
         }
-        i++;
-    } while (i < 10);
+    }
 
     return result;
 }
@@ -809,10 +781,10 @@ static inline int setupCardIcons(const CardCmd* cmd)
     s32 k;
 
     k = (bit = 0);
-    for (; k < 8 && cmd->state->icon_speed[(int) k] != 0;) {
+    while (k < 8 && cmd->state->icon_speed[k] != 0) {
         cmd->state->stat.iconFormat =
             (cmd->state->stat.iconFormat & ~(CARD_STAT_ICON_MASK << bit)) |
-            (cmd->state->icon_format[(int) k] << bit);
+            (cmd->state->icon_format[k] << bit);
         cmd->state->stat.iconSpeed =
             (cmd->state->stat.iconSpeed & ~(CARD_STAT_SPEED_MASK << bit)) |
             (cmd->state->icon_speed[k++] << bit);
@@ -1554,8 +1526,7 @@ int hsd_803AC340(void* icon_info)
 
     has_c8 = 0;
     icon_size = 0;
-    i = 0;
-    while (i < 8 && data[i + 0xA] != 0) {
+    for (i = 0; i < 8 && data[i + 0xA] != 0; i++) {
         switch (data[i + 0x2]) {
         case 2:
             icon_size += 0x800;
@@ -1565,7 +1536,6 @@ int hsd_803AC340(void* icon_info)
             icon_size += 0x400;
             break;
         }
-        i++;
     }
 
     if (has_c8 != 0) {
@@ -1736,7 +1706,7 @@ s32 fn_803AC6B8(CardState* state, s32 file_idx)
 
 static inline s32 fn_803AC6B8_blocks_before(CardState* state, s32 file_idx)
 {
-    u8* total;
+    s32 total;
     s32 i;
 
     if (file_idx >= 9) {
@@ -1746,17 +1716,16 @@ static inline s32 fn_803AC6B8_blocks_before(CardState* state, s32 file_idx)
         return 0;
     }
 
-    total = (u8*) 1;
+    total = 1;
     if (state->file_sizes[0] > 0) {
-        total = (u8*) &((CardState*) fn_803AC634(state, 0))->sector_size;
-        total -= 8;
+        total += fn_803AC634(state, 0) - 1;
     }
 
     for (i = 1; i < file_idx; i++) {
         total += fn_803AC634(state, i);
     }
 
-    return (s32) total;
+    return total;
 }
 
 static inline s32 fn_803AC7DC_block_count(CardState* state, s32 file_idx)

@@ -114,68 +114,68 @@ int lb_80019CB0(int result)
     struct CardTask* task;
     int i;
 
-again:
-
-    i = 0;
-    for (i = 0; i < LbCardNewTaskArray_Max; i++) {
-        task = &_p(task_array)[i];
-        if (_p(task_array)[i].x0 != 0xE) {
-            break;
-        }
-    }
-    if (i != LbCardNewTaskArray_Max) {
-        if (!(task->x4 & (1 << result))) {
-            reset_task_array();
-        } else {
-            switch (task->x0) {
-            case 0:
-                result = lb_8001A184();
-                break;
-            case 1:
-                result = lb_8001A3A4();
-                break;
-            case 2:
-                result = lb_8001A594(task->xC, task->x8);
-                break;
-            case 3:
-                result = lb_8001A860();
-                break;
-            case 4:
-                result = lb_8001A8A4();
-                break;
-            case 5:
-                result = lb_8001A9CC(task->x10);
-                break;
-            case 6:
-                result = lb_8001AAE4(task->x10, task->x19);
-                break;
-            case 7:
-                result = lb_8001AC04(&task->x10);
-                break;
-            case 8:
-                result = lb_8001ACEC(task->x8);
-                break;
-            case 9:
-                result = lb_8001AE38(task->x8);
-                break;
-            case 10:
-                result = lb_8001AF84();
-                break;
-            case 11:
-                result = lb_8001B068();
-                break;
-            case 12:
-                result = lb_8001B14C();
-                break;
-            case 13:
-                result = lb_8001B614(task->x10);
+    for (;;) {
+        for (i = 0; i < LbCardNewTaskArray_Max; i++) {
+            task = &_p(task_array)[i];
+            if (_p(task_array)[i].x0 != 0xE) {
                 break;
             }
-            task->x0 = 0xE;
-            if (result != 11) {
-                goto again;
+        }
+        if (i != LbCardNewTaskArray_Max) {
+            if (!(task->x4 & (1 << result))) {
+                reset_task_array();
+            } else {
+                switch (task->x0) {
+                case 0:
+                    result = lb_8001A184();
+                    break;
+                case 1:
+                    result = lb_8001A3A4();
+                    break;
+                case 2:
+                    result = lb_8001A594(task->xC, task->x8);
+                    break;
+                case 3:
+                    result = lb_8001A860();
+                    break;
+                case 4:
+                    result = lb_8001A8A4();
+                    break;
+                case 5:
+                    result = lb_8001A9CC(task->x10);
+                    break;
+                case 6:
+                    result = lb_8001AAE4(task->x10, task->x19);
+                    break;
+                case 7:
+                    result = lb_8001AC04(&task->x10);
+                    break;
+                case 8:
+                    result = lb_8001ACEC(task->x8);
+                    break;
+                case 9:
+                    result = lb_8001AE38(task->x8);
+                    break;
+                case 10:
+                    result = lb_8001AF84();
+                    break;
+                case 11:
+                    result = lb_8001B068();
+                    break;
+                case 12:
+                    result = lb_8001B14C();
+                    break;
+                case 13:
+                    result = lb_8001B614(task->x10);
+                    break;
+                }
+                task->x0 = 0xE;
+                if (result != 11) {
+                    continue;
+                }
             }
         }
+        break;
     }
     if (result != 11 && _p(x50C) != NULL) {
         _p(x50C)(result);
@@ -734,19 +734,20 @@ int lb_8001B614(const char* filename)
 
     fileno = 0;
     _p(x8AC) = 0;
-loop_1:
-    if (CARDGetStatus(_p(chan), fileno, &card_stat) == 0 &&
-        strncmp((const char*) card_stat.company, _p(x2C), 2) == 0 &&
-        strncmp((const char*) card_stat.gameName, _p(x2F), 4) == 0 &&
-        strcmp(card_stat.fileName, filename) == 0)
-    {
-        _p(unk_34) = 0;
-    } else {
-        fileno += 1;
-        if (fileno >= 0x7F) {
-            _p(unk_34) = 0xD;
+    for (;;) {
+        if (CARDGetStatus(_p(chan), fileno, &card_stat) == 0 &&
+            strncmp((const char*) card_stat.company, _p(x2C), 2) == 0 &&
+            strncmp((const char*) card_stat.gameName, _p(x2F), 4) == 0 &&
+            strcmp(card_stat.fileName, filename) == 0)
+        {
+            _p(unk_34) = 0;
+            break;
         } else {
-            goto loop_1;
+            fileno += 1;
+            if (fileno >= 0x7F) {
+                _p(unk_34) = 0xD;
+                break;
+            }
         }
     }
     return _p(unk_34);
@@ -779,8 +780,8 @@ int lb_8001B6F8(void)
 int lb_8001B760(int result)
 {
     if (result == 11) {
-        do {
-        } while ((result = lb_8001B6F8()) == 11);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -815,8 +816,8 @@ u32 lb_8001B7E0(int chan, char* filename, void* file_entries, void* save_data,
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -835,8 +836,8 @@ int lb_8001B8C8(int chan)
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -867,8 +868,8 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -923,8 +924,8 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
     result = lb_80019CB0(0x10);
 
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -948,8 +949,8 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
 
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -1036,8 +1037,8 @@ int lb_8001BFD8(int chan, lbCardNew_SnapshotEntry* snapshot_entries,
     _p(free_files) = free_files;
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
@@ -1124,8 +1125,8 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     strncpy(task->x10, filename, 0x20U);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
-        do {
-        } while ((result = lb_8001B6F8()) == 0xB);
+        while ((result = lb_8001B6F8()) == 11) {
+        }
     }
     return result;
 }
