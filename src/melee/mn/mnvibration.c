@@ -258,10 +258,6 @@ static inline void mnVibration_FreeNameTexts(MnVibrationData* data)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 HSD_JObj* mnVibration_GetNameRowJObj(s32 count)
 {
     HSD_JObj* temp_r4;
@@ -284,9 +280,6 @@ HSD_JObj* mnVibration_GetNameRowJObj(s32 count)
     }
     return var_r4;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
 {

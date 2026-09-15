@@ -80,7 +80,7 @@ void grAnime_801C65B0(UnkArchiveStruct* arg0)
 
 void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1)
 {
-    struct _unk_struct_pobj* unk;
+    HSD_ShapeSet* shapeset;
     HSD_PObj* pobj;
     HSD_ShapeAnim* shape_anim;
 
@@ -94,12 +94,12 @@ void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1)
             HSD_ASSERT(38, pobj_type(pobj) == POBJ_SHAPEANIM &&
                                 pobj->u.shape_set);
             if (shape_anim != NULL) {
-                unk = pobj->u.unk;
+                shapeset = pobj->u.shape_set;
                 if (shape_anim->aobjdesc != NULL) {
-                    if (unk->aobj != NULL) {
-                        HSD_AObjRemove(unk->aobj);
+                    if (shapeset->aobj != NULL) {
+                        HSD_AObjRemove(shapeset->aobj);
                     }
-                    unk->aobj = HSD_AObjLoadDesc(shape_anim->aobjdesc);
+                    shapeset->aobj = HSD_AObjLoadDesc(shape_anim->aobjdesc);
                 }
             }
         }
@@ -570,11 +570,11 @@ static inline void grAnime_PObjForeachAnim(HSD_PObj* pobj, int flags,
                                            void* func, u32 type, void* param)
 {
     if ((flags & CALL_ON_POBJ) && pobj != NULL &&
-        pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.unk != NULL &&
-        pobj->u.unk->aobj != NULL)
+        pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.shape_set != NULL &&
+        pobj->u.shape_set->aobj != NULL)
     {
-        grAnime_801C6F50(pobj->u.unk->aobj, pobj, ARG_TYPE_POBJ, func, type,
-                         param);
+        grAnime_801C6F50(pobj->u.shape_set->aobj, pobj, ARG_TYPE_POBJ, func,
+                         type, param);
     }
 }
 

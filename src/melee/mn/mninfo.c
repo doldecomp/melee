@@ -376,10 +376,6 @@ void fn_80251FE4(void)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma auto_inline off
-#endif
 void mnInfo_802522B8(HSD_GObj* gobj)
 {
     s32 count;
@@ -406,9 +402,6 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     }
     mn_8022ED6C(jobj, mnInfo_803EFC08);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_802523B8(HSD_GObj* gobj)
 {

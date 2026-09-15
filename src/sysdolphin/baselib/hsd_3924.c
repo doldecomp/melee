@@ -54,17 +54,10 @@ block_1: {
 }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void hsd_80392528(Event event)
 {
     fn_80392480(event, 0x80);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 typedef struct {
     s32 count;

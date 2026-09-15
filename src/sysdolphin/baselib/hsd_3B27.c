@@ -84,7 +84,7 @@ int hsd_803B286C(CardState* state, const char* filename, const char* comment,
 {
     u8* base = hsd_804D1138;
 
-    memcpy(((CardState*) state)->comment, comment, 64);
+    memcpy(state->comment, comment, 64);
 
     {
         s32 write_idx;

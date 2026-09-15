@@ -7,11 +7,6 @@
 jmp_buf hsd_804D2E70;
 u8 hsd_804D2F68[0x70C];
 
-extern u8* hsd_804D79BC;
-extern s32 hsd_804D79C0;
-extern s32 hsd_804D79C4;
-extern u8 hsd_804D79C8;
-
 typedef struct JpegWorkData {
     s32 luma[0x100];
     s32 cb[0x40];

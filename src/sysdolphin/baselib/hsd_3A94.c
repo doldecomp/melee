@@ -1,12 +1,12 @@
 #include "hsd_3A94.h"
 
+#include <m2c_macros.h>
 #include <placeholder.h>
 #include <string.h>
 
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 #include "hsd_4D11.h"
-#include "m2c_macros.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 #include <dolphin/types.h>
@@ -699,8 +699,8 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 3:
-        result = fn_803B1F78((CardState*) entry->state, entry->x8, entry->xC,
-                             entry->x10, (s32) entry->callback);
+        result = fn_803B1F78(entry->state, entry->x8, entry->xC, entry->x10,
+                             (s32) entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
                 entry->callback(0, result);
@@ -728,8 +728,8 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 6:
-        result = fn_803B26CC((CardState*) state, entry->x8, entry->xC,
-                             entry->x10, entry->callback);
+        result = fn_803B26CC(state, entry->x8, entry->xC, entry->x10,
+                             entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
                 entry->callback(0, result);
@@ -2623,7 +2623,7 @@ s32 fn_803ADE4C(CardState* state, s32 file_no, s32 callback)
 
     hsd_804D7998 = hsd_804D7984;
     cmd_open.type = 12;
-    cmd_open.state = (CardState*) state;
+    cmd_open.state = state;
     cmd_open.x8 = file_no;
     result = fn_803AC168((s32*) &cmd_open);
     if (result < 0) {
@@ -2640,7 +2640,7 @@ s32 fn_803ADE4C(CardState* state, s32 file_no, s32 callback)
     }
 
     cmd_mount.type = 17;
-    cmd_mount.state = (CardState*) state;
+    cmd_mount.state = state;
     result = fn_803AC168((s32*) &cmd_mount);
     if (result < 0) {
         snap = hsd_804D7998;
@@ -2860,11 +2860,8 @@ static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
     return 0;
 }
 
-#ifdef __MWERKS__
-#pragma opt_loop_invariants off
-#endif
 s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
-                void (*callback)(s32, s32))
+                CardRequestFunc callback)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
     u8* dst;
@@ -3036,9 +3033,6 @@ s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
 
     return status;
 }
-#ifdef __MWERKS__
-#pragma opt_loop_invariants on
-#endif
 
 static inline void fn_803AE7F8_rewind(CardBufEntry* entries)
 {
@@ -5263,7 +5257,7 @@ s32 fn_803B21E8(CardState* state, s32 banner, s32 icons, s32 callback)
     PAD_STACK(8);
 
     hsd_804D7998 = hsd_804D7984;
-    result = fn_803B0E9C((CardState*) state, banner, icons, 0, 1);
+    result = fn_803B0E9C(state, banner, icons, 0, 1);
     if (result < 0) {
         snap1 = hsd_804D7998;
         if (snap1 >= 0) {
@@ -5278,7 +5272,7 @@ s32 fn_803B21E8(CardState* state, s32 banner, s32 icons, s32 callback)
     }
 
     cmd_set_status.type = 8;
-    cmd_set_status.state = (CardState*) state;
+    cmd_set_status.state = state;
     result = fn_803AC168((s32*) &cmd_set_status);
     if (result < 0) {
         snap2 = hsd_804D7998;
