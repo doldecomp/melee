@@ -440,14 +440,14 @@ Fighter_CostumeStrings ftFx_Init_CostumeStrings[] = {
 
 bool ftFx_Init_800E5534(HSD_GObj* gobj)
 {
-    Fighter* fp = (Fighter*) gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     return fp->u.fx.x222C_blasterGObj ? true : false;
 }
 
 void ftFx_Init_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = (Fighter*) gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->u.fx.x222C_blasterGObj = 0;
     ftParts_80074A4C(gobj, 0, 0);
