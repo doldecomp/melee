@@ -1,7 +1,7 @@
-#include "__dsp.h"
-
 #include <dolphin.h>
 #include <stddef.h>
+
+#include "__dsp.h"
 #include <dolphin/hw_regs.h>
 
 #define BUILD_DATE "Sep  8 2001"

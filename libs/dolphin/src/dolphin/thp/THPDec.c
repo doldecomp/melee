@@ -1,4 +1,5 @@
 #include <dolphin.h>
+
 #include <dolphin/thp/thp.h>
 
 #ifdef __MWERKS__
@@ -42,18 +43,12 @@ struct THPQuantizationPtr {
     u32 padding;
 };
 
-static THP_SDATA struct THPAlignedHuffmanTabPtr Ydchuff
-    ATTRIBUTE_ALIGN(32);
-static THP_SDATA struct THPAlignedHuffmanTabPtr Udchuff
-    ATTRIBUTE_ALIGN(32);
-static THP_SDATA struct THPAlignedHuffmanTabPtr Vdchuff
-    ATTRIBUTE_ALIGN(32);
-static THP_SDATA struct THPAlignedHuffmanTabPtr Yachuff
-    ATTRIBUTE_ALIGN(32);
-static THP_SDATA struct THPAlignedHuffmanTabPtr Uachuff
-    ATTRIBUTE_ALIGN(32);
-static THP_SDATA struct THPAlignedHuffmanTabPtr Vachuff
-    ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Ydchuff ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Udchuff ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Vdchuff ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Yachuff ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Uachuff ATTRIBUTE_ALIGN(32);
+static THP_SDATA struct THPAlignedHuffmanTabPtr Vachuff ATTRIBUTE_ALIGN(32);
 static f32 __THPIDCTWorkspace[64] ATTRIBUTE_ALIGN(32);
 static THP_SDATA struct THPAlignedSamplePtr Gbase ATTRIBUTE_ALIGN(32);
 static THP_SDATA struct THPAlignedWidth Gwid ATTRIBUTE_ALIGN(32);
@@ -194,9 +189,7 @@ s32 THPDec_8032F8D4(u8* data, THPDec_8032FD40_Data* out)
                 quantizationSelector[i] = *data++;
             }
 
-            if (hSample[0] / hSample[1] == 2 &&
-                hSample[0] / hSample[2] == 2)
-            {
+            if (hSample[0] / hSample[1] == 2 && hSample[0] / hSample[2] == 2) {
                 if (vSample[0] / vSample[1] == 2 &&
                     vSample[0] / vSample[2] == 2)
                 {
@@ -206,12 +199,8 @@ s32 THPDec_8032F8D4(u8* data, THPDec_8032FD40_Data* out)
                 {
                     out->val2 = 2;
                 }
-            } else if (hSample[0] == hSample[1] &&
-                       hSample[0] == hSample[2])
-            {
-                if (vSample[0] == vSample[1] &&
-                    vSample[0] == vSample[2])
-                {
+            } else if (hSample[0] == hSample[1] && hSample[0] == hSample[2]) {
+                if (vSample[0] == vSample[1] && vSample[0] == vSample[2]) {
                     out->val2 = 1;
                 }
             } else {
@@ -343,7 +332,8 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
 
         if (status <= 0xD7) {
             if (status == 0xC4) {
-                status = __THPReadHuffmanTableSpecification((THPFileInfo*) info);
+                status =
+                    __THPReadHuffmanTableSpecification((THPFileInfo*) info);
                 if (status != 0) {
                     goto _err_bad_status;
                 }
@@ -620,20 +610,23 @@ static u8 __THPReadFrameHeader(THPFileInfo* info)
 
     for (i = 0, compBase = frame; i < frame->nComponents;
          compBase = (THPFrameHeaderInfo*) ((u8*) compBase +
-                                           sizeof(THPFrameHeaderComp)), i++) {
+                                           sizeof(THPFrameHeaderComp)),
+        i++)
+    {
         compBase->components[0].componentID = (*(frame->file)++);
         utmp8 = (*(frame->file)++);
         compBase->components[0].samplingH = (u8) (utmp8 >> 4);
         compBase->components[0].samplingV = (u8) (utmp8 & 0xF);
-        compBase->components[0].quantizationTableSelector =
-            (*(frame->file)++);
+        compBase->components[0].quantizationTableSelector = (*(frame->file)++);
     }
 
     frame->samplingHMax = 1;
     frame->samplingVMax = 1;
     for (j = 0, compBase2 = frame; j < frame->nComponents;
          compBase2 = (THPFrameHeaderInfo*) ((u8*) compBase2 +
-                                            sizeof(THPFrameHeaderComp)), j++) {
+                                            sizeof(THPFrameHeaderComp)),
+        j++)
+    {
         comp = &compBase2->components[0];
         frame->samplingHMax = frame->samplingHMax > comp->samplingH
                                   ? frame->samplingHMax
@@ -644,8 +637,8 @@ static u8 __THPReadFrameHeader(THPFileInfo* info)
     }
 
     ySize = frame->yPixelSize;
-    frame->x8D4 = (u16) THPROUNDUP(
-        ySize, THPROUNDUP(ySize, frame->samplingVMax * 8));
+    frame->x8D4 =
+        (u16) THPROUNDUP(ySize, THPROUNDUP(ySize, frame->samplingVMax * 8));
     for (k = 0; k < frame->nComponents; k++) {
         frame->components[k].x08 =
             THPROUNDUP(frame->xPixelSize * frame->components[k].samplingH,
@@ -817,7 +810,8 @@ typedef struct THPFileInfoHuffmanSizeView {
     u8* x904;
 } THPFileInfoHuffmanSizeView;
 
-static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 tab_index, int huffmanBits)
+static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 tab_index,
+                                     int huffmanBits)
 {
     THPFileInfoHuffmanSizeView* huff;
     u8* bits;
@@ -1888,8 +1882,8 @@ static void __THPDecompressiMCURow640x480(THPFileInfo* info)
 
     LCQueueWait(3);
 
-    for (cl_num = 0; cl_num < ((THPMCURowFields*) info)->MCUsPerRow;
-         cl_num++) {
+    for (cl_num = 0; cl_num < ((THPMCURowFields*) info)->MCUsPerRow; cl_num++)
+    {
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[0]);
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[1]);
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[2]);
@@ -1899,7 +1893,8 @@ static void __THPDecompressiMCURow640x480(THPFileInfo* info)
 
         Gbase.value = __THPLCWork672[0];
         Gwid.value = 640;
-        Gq.value = info->quantTabs[info->components[0].quantizationTableSelector];
+        Gq.value =
+            info->quantTabs[info->components[0].quantizationTableSelector];
         x_pos = (u32) (cl_num * 16);
         __THPInverseDCTNoYPos(info->mcuBuffer[0], x_pos);
         __THPInverseDCTNoYPos(info->mcuBuffer[1], x_pos + 8);
@@ -1954,8 +1949,8 @@ static void __THPDecompressiMCURowNxN(THPFileInfo* info, u32 x)
 
     LCQueueWait(3);
 
-    for (cl_num = 0; cl_num < ((THPMCURowFields*) info)->MCUsPerRow;
-         cl_num++) {
+    for (cl_num = 0; cl_num < ((THPMCURowFields*) info)->MCUsPerRow; cl_num++)
+    {
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[0]);
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[1]);
         __THPHuffDecodeDCTCompY(info, info->mcuBuffer[2]);
@@ -2406,8 +2401,8 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info,
 
     register s32 v; // r0
 
-    register s16 cnt;   // r7
-    register s32 tmp;   // r9
+    register s16 cnt; // r7
+    register s32 tmp; // r9
     register s32 nbits;
     register u32 cnt1;  // r10
     register u32 cnt33; // r8
@@ -2538,8 +2533,8 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info,
 
     register s32 v; // r0
 
-    register s16 cnt;   // r7
-    register s32 tmp;   // r9
+    register s16 cnt; // r7
+    register s32 tmp; // r9
     register s32 nbits;
     register u32 cnt1;  // r10
     register u32 cnt33; // r8
@@ -2686,23 +2681,12 @@ struct THPInitWork {
 };
 
 static struct THPLCSizeEntry __THPLCSizeTableA[5] = {
-    { 0, 0x1000 },
-    { 1, 0x400 },
-    { 2, 0x400 },
-    { 3, 0x400 },
-    { 4, 0x400 },
+    { 0, 0x1000 }, { 1, 0x400 }, { 2, 0x400 }, { 3, 0x400 }, { 4, 0x400 },
 };
 
 static struct THPLCSizeEntry __THPLCSizeTableB[9] = {
-    { 0, 0x1000 },
-    { 1, 0x200 },
-    { 2, 0x200 },
-    { 3, 0x200 },
-    { 4, 0x200 },
-    { 5, 0x200 },
-    { 6, 0x200 },
-    { 7, 0x200 },
-    { 8, 0x200 },
+    { 0, 0x1000 }, { 1, 0x200 }, { 2, 0x200 }, { 3, 0x200 }, { 4, 0x200 },
+    { 5, 0x200 },  { 6, 0x200 }, { 7, 0x200 }, { 8, 0x200 },
 };
 
 // clang-format off
@@ -2762,14 +2746,14 @@ void THPInit(void)
         }
     }
 
-    base             = (u8*) 0xE0000000;
+    base = (u8*) 0xE0000000;
     work->cache.work512[0] = base;
     base += 0x2000;
     work->cache.work512[1] = base;
     base += 0x800;
     work->cache.work512[2] = base;
 
-    base             = (u8*) 0xE0000000;
+    base = (u8*) 0xE0000000;
     work->work672[0] = base;
     base += 0x2800;
     work->work672[1] = base;

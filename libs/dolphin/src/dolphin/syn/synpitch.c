@@ -1,8 +1,7 @@
-#include "__syn.h"
-
 #include <dolphin.h>
-#include <dolphin/syn.h>
 
+#include "__syn.h"
+#include <dolphin/syn.h>
 
 static float __SYNCentsTable[100] = {
     1.000000f, 1.000578f, 1.001156f, 1.001734f, 1.002313f, 1.002892f,

@@ -22,9 +22,9 @@ typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSAlloc.h>
 #include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSDC.h>
 #include <dolphin/os/OSError.h>
-#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSIC.h>
@@ -175,7 +175,8 @@ void OSSetSoundMode(u32 mode);
 #endif
 
 void OSReport(char*, ...);
-DOLPHIN_ATTRIBUTE_NORETURN void OSPanic(const char* file, int line, const char* msg, ...);
+DOLPHIN_ATTRIBUTE_NORETURN void OSPanic(const char* file, int line,
+                                        const char* msg, ...);
 
 #define OSRoundUp32B(x) (((u32) (x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32) (x)) & ~(32 - 1))

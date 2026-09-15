@@ -1,6 +1,6 @@
-#include "__os.h"
-
 #include <dolphin.h>
+
+#include "__os.h"
 #include <dolphin/os.h>
 
 static asm void ExternalInterruptHandler(register __OSException exception,

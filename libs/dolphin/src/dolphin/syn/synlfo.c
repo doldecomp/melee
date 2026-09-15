@@ -1,9 +1,8 @@
-#include "__syn.h"
-
 #include <dolphin.h>
+
+#include "__syn.h"
 #include <dolphin/ax.h>
 #include <dolphin/syn.h>
-
 
 static f32 __SYNLfo[64] = {
     0.000000f,  0.098020f,  0.195090f,  0.290280f,  0.382680f,  0.471400f,

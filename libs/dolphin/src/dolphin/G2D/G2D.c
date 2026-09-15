@@ -1,7 +1,7 @@
 #include <dolphin.h>
+
 #include <dolphin/G2D.h>
 #include <dolphin/gx.h>
-
 
 static G2DGlob glob;
 

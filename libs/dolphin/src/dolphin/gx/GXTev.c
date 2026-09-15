@@ -1,6 +1,6 @@
-#include "__gx.h"
-
 #include <macros.h>
+
+#include "__gx.h"
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 

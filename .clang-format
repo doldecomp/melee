@@ -26,6 +26,8 @@ SortIncludes: CaseInsensitive
 WhitespaceSensitiveMacros:
   - 'HSD_ASSERT'
   - 'HSD_ASSERTREPORT'
+  - 'ASSERTLINE'
+  - 'ASSERTREPORT'
 IncludeBlocks: Regroup
 IncludeCategories:
   # TODO: Required for weird interactions with dolphin headers

@@ -1,6 +1,6 @@
-#include "__ax.h"
-
 #include <dolphin.h>
+
+#include "__ax.h"
 #include <dolphin/ax.h>
 
 static long __AXBufferAuxA[3][480] ATTRIBUTE_ALIGN(32);

@@ -1,8 +1,7 @@
-#include "__ar.h"
-
 #include <dolphin.h>
-#include <dolphin/ar.h>
 
+#include "__ar.h"
+#include <dolphin/ar.h>
 
 static void (*__AR_Callback)();
 static u32 __AR_Size;
@@ -173,8 +172,7 @@ static void __ARHandler(short exception, struct OSContext* context)
 
 static void __ARWaitForDMA(void)
 {
-    while (__DSPRegs[5] & 0x200)
-        ;
+    while (__DSPRegs[5] & 0x200);
 }
 
 static void __ARWriteDMA(u32 mmem_addr, u32 aram_addr, u32 length)

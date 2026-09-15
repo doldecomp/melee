@@ -42,11 +42,12 @@ typedef struct {
     /* 0x08 */ TEXDescriptorPtr descriptorArray;
 } TEXPalette, *TEXPalettePtr;
 
-void TEXGetPalette(TEXPalettePtr *pal, char *name);
+void TEXGetPalette(TEXPalettePtr* pal, char* name);
 TEXDescriptorPtr TEXGet(TEXPalettePtr pal, u32 id);
-void TEXReleasePalette(TEXPalettePtr *pal);
-void TEXGetGXTexObjFromPalette(TEXPalettePtr pal, GXTexObj *to, u32 id);
-void TEXGetGXTexObjFromPaletteCI(TEXPalettePtr pal, GXTexObj *to, GXTlutObj *tlo, GXTlut tluts, u32 id);
+void TEXReleasePalette(TEXPalettePtr* pal);
+void TEXGetGXTexObjFromPalette(TEXPalettePtr pal, GXTexObj* to, u32 id);
+void TEXGetGXTexObjFromPaletteCI(TEXPalettePtr pal, GXTexObj* to,
+                                 GXTlutObj* tlo, GXTlut tluts, u32 id);
 
 #ifdef __cplusplus
 }

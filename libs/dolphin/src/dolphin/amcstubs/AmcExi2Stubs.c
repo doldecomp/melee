@@ -1,4 +1,5 @@
 #include <dolphin.h>
+
 #include <dolphin/amc/AmcExi2Comm.h>
 
 void EXI2_Init(volatile unsigned char** inputPendingPtrRef,

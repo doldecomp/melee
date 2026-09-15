@@ -7,14 +7,12 @@
 extern "C" {
 #endif
 
-typedef struct
-{
+typedef struct {
     Ptr Prev;
     Ptr Next;
 } DSLink, *DSLinkPtr;
 
-typedef struct
-{
+typedef struct {
     u32 Offset;
     Ptr Head;
     Ptr Tail;
@@ -24,7 +22,7 @@ void DSInitList(DSListPtr list, Ptr obj, DSLinkPtr link);
 void DSInsertListObject(DSListPtr list, Ptr cursor, Ptr obj);
 void DSRemoveListObject(DSListPtr list, Ptr obj);
 void DSAttachList(DSListPtr baseList, DSListPtr attachList);
-void *DSNextListObj(DSListPtr list, Ptr obj);
+void* DSNextListObj(DSListPtr list, Ptr obj);
 
 #ifdef __cplusplus
 }

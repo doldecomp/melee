@@ -5,9 +5,9 @@
 
 void __ARQPopTaskQueueHi(void);
 void __ARQServiceQueueLo(void);
-void __ARQCallbackHack(struct ARQRequest *);
+void __ARQCallbackHack(struct ARQRequest*);
 void __ARQInterruptServiceRoutine(void);
 void __ARQInitTempQueue(void);
-void __ARQPushTempQueue(struct ARQRequest * task);
+void __ARQPushTempQueue(struct ARQRequest* task);
 
 #endif // _DOLPHIN_AR_INTERNAL_H_

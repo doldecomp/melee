@@ -1,6 +1,6 @@
-#include "__dvd.h"
-
 #include <dolphin.h>
+
+#include "__dvd.h"
 #include <dolphin/dvd.h>
 
 struct FSTEntry {
@@ -138,8 +138,7 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr)
                         origPathPtr);
             }
         } else {
-            for (ptr = pathPtr; (*ptr != '\0') && (*ptr != '/'); ptr++)
-                ;
+            for (ptr = pathPtr; (*ptr != '\0') && (*ptr != '/'); ptr++);
         }
 
         isDir = (*ptr == '\0') ? FALSE : TRUE;

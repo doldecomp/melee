@@ -1,11 +1,9 @@
-#include "__perf.h"
+#include <dolphin.h>
 
 #include "../gx/__gx.h"
-
-#include <dolphin.h>
+#include "__perf.h"
 #include <dolphin/gx.h>
 #include <dolphin/perf.h>
-
 
 #define TOKEN_MAX 0xFFFF
 

@@ -1,6 +1,6 @@
-#include "__os.h"
-
 #include <dolphin.h>
+
+#include "__os.h"
 #include <dolphin/os.h>
 
 static u8 DSPInitCode[128] = {
@@ -38,11 +38,9 @@ void __OSInitAudioSystem(void)
                   "__OSInitAudioSystem(): DSP already working");
     __DSPRegs[5] = 0x8AC;
     __DSPRegs[5] |= 1;
-    while (__DSPRegs[5] & 1)
-        ;
+    while (__DSPRegs[5] & 1);
     __DSPRegs[0] = 0;
-    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000)
-        ;
+    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000);
     *(u32*) &__DSPRegs[16] = 0x1000000;
     *(u32*) &__DSPRegs[18] = 0;
     *(u32*) &__DSPRegs[20] = 0x20;
@@ -54,8 +52,7 @@ void __OSInitAudioSystem(void)
     __DSPRegs[5] = reg16;
 
     start_tick = OSGetTick();
-    while ((s32) (OSGetTick() - start_tick) < 0x892)
-        ;
+    while ((s32) (OSGetTick() - start_tick) < 0x892);
 
     *(u32*) &__DSPRegs[16] = 0x1000000;
     *(u32*) &__DSPRegs[18] = 0;
@@ -68,8 +65,7 @@ void __OSInitAudioSystem(void)
     __DSPRegs[5] = reg16;
 
     __DSPRegs[5] &= ~0x800;
-    while ((__DSPRegs[5]) & 0x400)
-        ;
+    while ((__DSPRegs[5]) & 0x400);
     __DSPRegs[5] &= ~4;
     errFlag = 0;
 
@@ -89,8 +85,7 @@ void __OSInitAudioSystem(void)
     __DSPRegs[5] |= 4;
     __DSPRegs[5] = 0x8AC;
     __DSPRegs[5] |= 1;
-    while (__DSPRegs[5] & 1)
-        ;
+    while (__DSPRegs[5] & 1);
 
     memcpy(__DSPWorkBuffer, (void*) ((u32) OSGetArenaHi() - 0x80),
            sizeof(DSPInitCode));
@@ -115,11 +110,9 @@ void __OSStopAudioSystem(void)
     __DSPRegs[5] = 0x8ac;
     __DSPRegs[0] = 0;
 
-    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000)
-        ;
+    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000);
     start_tick = OSGetTick();
-    while ((s32) (OSGetTick() - start_tick) < 0x2c)
-        ;
+    while ((s32) (OSGetTick() - start_tick) < 0x2c);
     reg16 = __DSPRegs[5];
     __DSPRegs[5] = reg16 | 1;
     waitUntil(__DSPRegs[5], 0x001);

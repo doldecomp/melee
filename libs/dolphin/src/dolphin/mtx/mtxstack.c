@@ -1,4 +1,5 @@
 #include <dolphin.h>
+
 #include <dolphin/mtx.h>
 
 // TODO: A bunch of pointless void casts because of Mtx type-ness.

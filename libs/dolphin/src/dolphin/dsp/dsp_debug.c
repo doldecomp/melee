@@ -1,5 +1,4 @@
 #include "__dsp.h"
-
 #include <dolphin/dsp.h>
 
 extern DSPTaskInfo* __DSP_curr_task;
