@@ -1,7 +1,6 @@
 #include "lbcardgame.h"
 
 #include "lbarchive.h"
-#include "lbcardgame.static.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
 #include <dolphin/card.h>
@@ -9,12 +8,30 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/if/textlib.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+
+struct lb_80433318_t {
+    /* +0  */ int x0;
+    /* +4  */ int x4;
+    /* +8  */ int x8;
+    /* +C  */ bool xC;
+    /* +10 */ int x10;
+    /* +14 */ int x14;
+    /* +18 */ bool enable;
+    /* +1C */ char _1C[0x40];
+    /* +5C */ void** x5C;
+    /* +60 */ int x60;
+    /* +64 */ SceneDesc* x64;
+};
+ASSERT_SIZE(struct lb_80433318_t, 0x68);
+
+/* 433318 */ static struct lb_80433318_t lb_80433318;
 
 #define _p(x) (lb_80433318.x)
 
@@ -46,7 +63,7 @@ void lb_8001C600(void)
     }
 }
 
-static const char* lb_8001C658(void)
+static char* lb_8001C658(void)
 {
     OSCalendarTime time;
     const char* gamedata_str;
@@ -68,7 +85,7 @@ static const char* lb_8001C658(void)
     return _p(_1C);
 }
 
-static int lb_8001C820(void)
+static void* lb_8001C820(void)
 {
     int var_r0;
 
@@ -161,7 +178,7 @@ int lb_8001CC4C(void)
 
 static int dont_inline_helper(void)
 {
-    int temp_r24;
+    void* temp_r24;
 
     if (lb_8001CAF4() != 0) {
         return 0xD;

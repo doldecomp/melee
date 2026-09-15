@@ -187,7 +187,7 @@ static inline void jpegLumaAddress(s32** dest, u8* work, u32 offset)
 
 extern JpegWork hsd_804D2648;
 
-void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
+void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, UNUSED s32 height)
 {
     s32 chroma_x;
     s32 luma_y;

@@ -422,7 +422,7 @@ int lbSnap_8001DF6C(int chan)
         desc->entries[0].file_size = lbSnap_GetSaveDataOffset(_p(snap));
         desc->entries[0].data = (u8*) _p(snap);
         ret = lb_8001BB48(chan, text, desc->entries, desc, _p(filename),
-                          _p(icon_data)[0].offset, _p(icon_data)[1].size, 0);
+                          _p(icon_data)[0].ptr, _p(icon_data)[1].ptr, 0);
     }
     return ret;
 }
@@ -442,7 +442,7 @@ int lbSnap_8001E058(int chan, int index)
         lbSnap_FormatTime(chan, index, text);
         lbSnap_803BACC8.entries[0].data = (u8*) _p(snap);
         ret = lb_8001BF04(chan, text, lbSnap_803BACC8.entries, _p(filename),
-                          _p(icon_data)[0].offset, _p(icon_data)[1].size, 0);
+                          _p(icon_data)[0].ptr, _p(icon_data)[1].ptr, 0);
     }
     return ret;
 }
