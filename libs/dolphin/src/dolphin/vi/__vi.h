@@ -11,7 +11,7 @@ int __VIGetSDA(void);
 
 /* i2c.c */
 
-int __VISendI2CData(u8 slaveAddr, u8 *pData, int nBytes);
+int __VISendI2CData(u8 slaveAddr, u8* pData, int nBytes);
 
 /* initphilips.c */
 
@@ -21,6 +21,6 @@ void __VIInitPhilips(void);
 
 void __VIInit(VITVMode mode);
 void __VISetAdjustingValues(s16 x, s16 y);
-void __VIGetAdjustingValues(s16 *x, s16 *y);
+void __VIGetAdjustingValues(s16* x, s16* y);
 
 #endif

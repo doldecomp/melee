@@ -37,11 +37,11 @@ typedef int BOOL;
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 #endif
 
-#include "cmath.h"
-
 #include <ctype.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "cmath.h"
 
 #endif

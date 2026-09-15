@@ -1,7 +1,7 @@
-#include "__os.h"
-
 #include <dolphin.h>
 #include <stdlib.h>
+
+#include "__os.h"
 #include <dolphin/os.h>
 
 __declspec(section

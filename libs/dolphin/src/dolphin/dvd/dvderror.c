@@ -1,5 +1,4 @@
 #include "__os.h"
-
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/types.h>
 

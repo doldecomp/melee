@@ -12,7 +12,7 @@ typedef void (*GXDrawDoneCallback)(void);
 
 // Init
 BOOL IsWriteGatherBufferEmpty(void);
-GXFifoObj *GXInit(void *base, u32 size);
+GXFifoObj* GXInit(void* base, u32 size);
 
 // Misc
 void GXSetMisc(GXMiscToken token, u32 val);

@@ -1,7 +1,7 @@
-#include "__os.h"
-
-#include <stdlib.h>
 #include <macros.h>
+#include <stdlib.h>
+
+#include "__os.h"
 #include <dolphin/exi.h>
 #include <dolphin/os.h>
 

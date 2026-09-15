@@ -1,6 +1,6 @@
-#include "__ax.h"
-
 #include <dolphin.h>
+
+#include "__ax.h"
 #include <dolphin/ax.h>
 
 static AXVPB* __AXStackHead[AX_PRIORITY_STACKS];

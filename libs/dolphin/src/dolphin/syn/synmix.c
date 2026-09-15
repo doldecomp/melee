@@ -1,10 +1,9 @@
-#include "__syn.h"
-
 #include <dolphin.h>
+
+#include "__syn.h"
 #include <dolphin/ax.h>
 #include <dolphin/mix.h>
 #include <dolphin/syn.h>
-
 
 // .data
 long __SYNVolumeAttenuation[128] = {

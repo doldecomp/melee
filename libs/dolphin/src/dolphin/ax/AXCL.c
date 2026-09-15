@@ -1,6 +1,6 @@
-#include "__ax.h"
-
 #include <dolphin.h>
+
+#include "__ax.h"
 #include <dolphin/ax.h>
 
 static u16 __AXHRTFHistory[128];

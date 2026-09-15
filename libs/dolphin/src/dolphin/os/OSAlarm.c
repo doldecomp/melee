@@ -1,9 +1,9 @@
 #include <dolphin.h>
+
 #include <dolphin/os.h>
 
 // internal header
 #include "__os.h"
-
 #include "dolphin/os/OSContext.h"
 
 struct OSAlarmQueue {

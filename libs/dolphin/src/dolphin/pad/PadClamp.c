@@ -1,4 +1,5 @@
 #include <dolphin.h>
+
 #include <dolphin/pad.h>
 
 // functions

@@ -1,12 +1,14 @@
 #include <dolphin.h>
-#include <dolphin/os.h>
 
 #include "__os.h"
+#include <dolphin/os.h>
 
 void __OSSystemCallVectorStart();
 void __OSSystemCallVectorEnd();
 
-static asm void SystemCallVector(void) {
+static asm void SystemCallVector(void)
+{
+    // clang-format off
 entry __OSSystemCallVectorStart
     nofralloc
     mfspr r9, HID0
@@ -18,12 +20,15 @@ entry __OSSystemCallVectorStart
     rfi
 entry __OSSystemCallVectorEnd
     nop
+    // clang-format on
 }
 
-void __OSInitSystemCall(void) {
-    void *addr = (void*)OSPhysicalToCached(0xC00);
+void __OSInitSystemCall(void)
+{
+    void* addr = (void*) OSPhysicalToCached(0xC00);
 
-    memcpy(addr, __OSSystemCallVectorStart, (u32)&__OSSystemCallVectorEnd - (u32)&__OSSystemCallVectorStart);
+    memcpy(addr, __OSSystemCallVectorStart,
+           (u32) &__OSSystemCallVectorEnd - (u32) &__OSSystemCallVectorStart);
     DCFlushRangeNoSync(addr, 0x100);
     __sync();
     ICInvalidateRange(addr, 0x100);

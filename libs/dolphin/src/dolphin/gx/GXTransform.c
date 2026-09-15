@@ -1,6 +1,6 @@
-#include "__gx.h"
-
 #include <macros.h>
+
+#include "__gx.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -169,8 +169,7 @@ static asm void WriteMTXPS3x3(register f32 mtx[3][3],
 }
 
 static asm void WriteMTXPS4x2(register f32 mtx[2][4],
-                              register volatile f32* dest)
-{
+                              register volatile f32* dest){
     // clang-format off
     psq_l f0, 0x00(mtx), 0, qr0
     psq_l f1, 0x08(mtx), 0, qr0

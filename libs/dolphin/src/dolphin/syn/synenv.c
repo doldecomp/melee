@@ -1,10 +1,9 @@
+#include <dolphin.h>
+
 #include "__syn.h"
 #include "cmath.h"
-
-#include <dolphin.h>
 #include <dolphin/ax.h>
 #include <dolphin/syn.h>
-
 
 s32 __SYNGetEnvelopeTime(s32 scale, s32 mod, u8 key)
 {

@@ -1,9 +1,8 @@
-#include "__card.h"
-
 #include <dolphin.h>
+
+#include "__card.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-
 
 // functions
 static void ReadCallback(s32 chan, s32 result);

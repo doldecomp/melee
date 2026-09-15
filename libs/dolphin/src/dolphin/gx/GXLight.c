@@ -1,7 +1,7 @@
-#include "__gx.h"
-
 #include <macros.h>
 #include <math.h>
+
+#include "__gx.h"
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 

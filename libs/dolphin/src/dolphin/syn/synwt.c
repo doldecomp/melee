@@ -1,8 +1,7 @@
-#include "__syn.h"
-
 #include <dolphin.h>
-#include <dolphin/syn.h>
 
+#include "__syn.h"
+#include <dolphin/syn.h>
 
 int __SYNGetWavetableData(struct SYNVOICE* voice)
 {

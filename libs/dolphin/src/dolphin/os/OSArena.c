@@ -1,4 +1,5 @@
 #include <dolphin.h>
+
 #include <dolphin/os.h>
 
 static void* __OSArenaHi;

@@ -1,8 +1,7 @@
-#include "fake_tgmath.h"
-
 #include <dolphin.h>
-#include <dolphin/mtx.h>
 
+#include "fake_tgmath.h"
+#include <dolphin/mtx.h>
 
 #define qr0 0
 #define qr1 1

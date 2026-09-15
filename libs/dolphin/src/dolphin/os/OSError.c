@@ -1,10 +1,10 @@
 #include <dolphin.h>
 #include <stdio.h>
+
 #include <dolphin/os.h>
 
 // internal include
 #include "__os.h"
-
 #include "dolphin/os/OSThread.h"
 
 OSErrorHandler OSErrorTable[15];

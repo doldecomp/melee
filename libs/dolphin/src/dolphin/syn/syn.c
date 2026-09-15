@@ -1,11 +1,10 @@
-#include "__syn.h"
-
 #include <dolphin.h>
+
+#include "__syn.h"
 #include <dolphin/ax.h>
 #include <dolphin/mix.h>
 #include <dolphin/os.h>
 #include <dolphin/syn.h>
-
 
 // .sbss
 struct SYNSYNTH* __SYNSynthList;
