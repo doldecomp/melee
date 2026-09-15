@@ -26747,6 +26747,7 @@ HSD_SisLib_804D1110 = .bss:0x804D1110; // type:object size:0x14 scope:global dat
 ...bss.0 = .bss:0x804D1110; // type:label scope:local
 HSD_SisLib_804D1124 = .bss:0x804D1124; // type:object size:0x14 scope:global data:4byte
 hsd_804D1138 = .bss:0x804D1138; // type:object size:0x10 scope:global data:4byte
+...bss.0 = .bss:0x804D1138; // type:label scope:local
 hsd_804D1148 = .bss:0x804D1148; // type:object size:0x1200 scope:global data:4byte
 hsd_804D2348 = .bss:0x804D2348; // type:object size:0x300 scope:global
 hsd_804D2648 = .bss:0x804D2648; // type:object size:0x828 scope:global
