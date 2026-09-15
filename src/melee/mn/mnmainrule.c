@@ -407,25 +407,21 @@ void mn_8022FB88(u8 arg0, void* arg1)
 
     if (arg0 == 0) {
         HSD_JObj* disabled_clock;
-        hide_count = 0;
-        hide_digit = digit_indices;
-        do {
+        for (hide_count = 0, hide_digit = digit_indices; hide_count < 4;
+             hide_count++, hide_digit++)
+        {
             HSD_JObjSetFlagsAll(data->x34[1].joints[*hide_digit], JOBJ_HIDDEN);
-            hide_count += 1;
-            hide_digit += 1;
-        } while (hide_count < 4);
+        }
         disabled_clock = data->x34[1].joints[4];
         HSD_JObjReqAnimAll(disabled_clock, mn_804D4B90);
         HSD_JObjAnimAll(disabled_clock);
         return;
     }
-    show_count = 0;
-    show_digit = digit_indices;
-    do {
+    for (show_count = 0, show_digit = digit_indices; show_count < 4;
+         show_count++, show_digit++)
+    {
         HSD_JObjClearFlagsAll(data->x34[1].joints[*show_digit], JOBJ_HIDDEN);
-        show_count += 1;
-        show_digit += 1;
-    } while (show_count < 4);
+    }
     enabled_clock = data->x34[1].joints[4];
     HSD_JObjReqAnimAll(enabled_clock, mn_804D6BD8);
     HSD_JObjAnimAll(enabled_clock);
@@ -469,37 +465,21 @@ void mn_8022FD18(u8 arg0)
     stock_digits = mn_804DBE04;
     time_indices = mn_804DBE08;
     if (arg0 != 0) {
-        i = 0;
-        ptr0 = stock_digits.idx;
-        do {
+        for (i = 0, ptr0 = stock_digits.idx; i < 2; i++, ptr0++) {
             HSD_JObjSetFlagsAll(data->x34[1].joints[*ptr0], JOBJ_HIDDEN);
-            i += 1;
-            ptr0 += 1;
-        } while (i < 2);
-        i = 0;
-        ptr1 = time_indices.idx;
-        do {
+        }
+        for (i = 0, ptr1 = time_indices.idx; i < 5; i++, ptr1++) {
             HSD_JObjClearFlagsAll(data->x34[1].joints[*ptr1], JOBJ_HIDDEN);
-            i += 1;
-            ptr1 += 1;
-        } while (i < 5);
+        }
         mn_8022FB88(data2->x3, data2);
         return;
     }
-    i = 0;
-    ptr2 = stock_digits.idx;
-    do {
+    for (i = 0, ptr2 = stock_digits.idx; i < 2; i++, ptr2++) {
         HSD_JObjClearFlagsAll(data->x34[1].joints[*ptr2], JOBJ_HIDDEN);
-        i += 1;
-        ptr2 += 1;
-    } while (i < 2);
-    i = 0;
-    ptr3 = time_indices.idx;
-    do {
+    }
+    for (i = 0, ptr3 = time_indices.idx; i < 5; i++, ptr3++) {
         HSD_JObjSetFlagsAll(data->x34[1].joints[*ptr3], JOBJ_HIDDEN);
-        i += 1;
-        ptr3 += 1;
-    } while (i < 5);
+    }
     val = data->x9;
     jobjs = data->x34[1].joints;
     jobj = jobjs[7];
