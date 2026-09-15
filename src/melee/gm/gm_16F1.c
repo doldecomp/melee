@@ -537,15 +537,14 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
         return 0;
 
     case 0xD9: {
-        int k = 0;
-        do {
+        int k;
+        for (k = 0; k < 4; k++) {
             if (x58[k].pkind != Gm_PKind_NA && k != arg1 &&
                 fn_80171B00(k) != 0)
             {
                 return 0;
             }
-            k++;
-        } while (k < 4);
+        }
         if (fn_80171B00(arg1) != 0) {
             return 1;
         }
@@ -553,15 +552,14 @@ int fn_801701C0(MatchEnd* rules, int arg1, int arg2)
     }
 
     case 0xDA: {
-        int k = 0;
-        do {
+        int k;
+        for (k = 0; k < 4; k++) {
             if (x58[k].pkind != Gm_PKind_NA && k != arg1 &&
                 fn_80171B2C(k) != 0)
             {
                 return 0;
             }
-            k++;
-        } while (k < 4);
+        }
         if (fn_80171B2C(arg1) != 0) {
             return 1;
         }
@@ -1186,16 +1184,14 @@ int fn_80171BA4(void* arg0)
     memzero(lbl_804D65A8, sizeof(lbl_804D65A8));
     lbl_804D65B0 = Gm_PKind_Human;
 
-    player = 0;
-    do {
+    for (player = 0; player < 6; player++) {
         if (Player_GetPlayerSlotType(player) != Gm_PKind_NA) {
             ko_count = 0;
             falls = Player_GetFalls(player);
             self_destructs = Player_GetSelfDestructs(player);
             if (rules[6] == 1) {
                 team = Player_GetTeam(player);
-                j = 0;
-                do {
+                for (j = 0; j < 6; j++) {
                     if (Player_GetPlayerSlotType(j) != Gm_PKind_NA) {
                         if (team != Player_GetTeam(j)) {
                             if (player != j) {
@@ -1208,11 +1204,9 @@ int fn_80171BA4(void* arg0)
                             falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
-                    j++;
-                } while (j < 6);
+                }
             } else {
-                j = 0;
-                do {
+                for (j = 0; j < 6; j++) {
                     if (Player_GetPlayerSlotType(j) != Gm_PKind_NA) {
                         if (player != j) {
                             ko_count += Player_GetKOsByPlayerIndex(player, j);
@@ -1222,14 +1216,12 @@ int fn_80171BA4(void* arg0)
                             falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
-                    j++;
-                } while (j < 6);
+                }
             }
             scores[player] = (ko_count - (falls -= (int) self_destructs)) +
                              ((int) self_destructs * (s8) rules[0xC]);
         }
-        player++;
-    } while (player < 6);
+    }
 
     for (player = 0; player < 6; player++) {
         result = Player_GetPlayerSlotType(player);

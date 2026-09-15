@@ -2013,20 +2013,18 @@ void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
     }
     i = 0;
     entry = stage_dat->unk0;
-entry_loop:
-    if (i < entry_count) {
-        if (entry->joint == joint) {
-            goto entry_found;
+    while (true) {
+        if (i < entry_count) {
+            if (entry->joint == joint) {
+                break;
+            }
+        } else {
+            return;
         }
-        goto entry_next;
+        entry++;
+        i++;
     }
-    return;
-entry_next:
-    entry++;
-    i++;
-    goto entry_loop;
 
-entry_found:
     for (i = 0; i < 0x57 * 3; i++) {
         jobj = stage_info.x280[i];
         (void) jobj;

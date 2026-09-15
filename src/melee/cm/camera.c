@@ -268,7 +268,7 @@ CmSubject* Camera_80029044(int arg0)
     if (cm_804D6458 == NULL) {
         OSReport("couldn't get CmSubject struct.\n", arg0);
         while (true) {
-        };
+        }
     }
 
     cm_804D6458 = subject->prev;
@@ -2213,29 +2213,18 @@ static inline void camera_cddc_select(s8* slot_ptr)
 {
     Vec3* pos_ptr;
     bool valid;
+    HSD_GObj* gobj;
 
     if (*slot_ptr == 11) {
         return;
     }
     pos_ptr = &game_camera.x308;
-    goto loop_check;
-
-loop_next:
-    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
-
-loop_check:
-    if (*slot_ptr == 10) {
-        goto loop_next;
-    }
-    get_subject_pos_out(pos_ptr, slot_ptr, &valid);
-    if (!valid) {
-        goto loop_next;
-    }
+    while (*slot_ptr == 10 ||
+           (get_subject_pos_out(pos_ptr, slot_ptr, &valid), !valid) ||
+           (gobj = Player_GetEntity(*slot_ptr)) == NULL ||
+           ftLib_8008701C(gobj))
     {
-        HSD_GObj* gobj = Player_GetEntity(*slot_ptr);
-        if (gobj == NULL || ftLib_8008701C(gobj)) {
-            goto loop_next;
-        }
+        *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
     }
 }
 

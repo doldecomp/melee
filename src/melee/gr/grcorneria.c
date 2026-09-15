@@ -936,23 +936,22 @@ void grCorneria_801DE024(Ground_GObj* gobj)
                 }
                 return;
             }
-            {
-                s32 idx = arwing_types[gp->u.arwing.xC8];
-                if (idx < 10) {
-                    if (idx >= 1) {
-                        goto arwing_near_type;
-                    }
-                    goto arwing_type_done;
-                } else {
-                    if (idx >= 14) {
-                        goto arwing_type_done;
-                    }
-                    goto arwing_far_type;
-                }
-            arwing_near_type:
+            switch (arwing_types[gp->u.arwing.xC8]) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
                 grCorneria_801DDE88(gobj);
-                goto arwing_type_done;
-            arwing_far_type: {
+                break;
+            case 10:
+            case 11:
+            case 12:
+            case 13:
                 HSD_JObjSetRotationY(jobj, -1.5707964f);
                 grCorneria_801DE024_inline(gobj);
                 {
@@ -969,8 +968,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
                     translate.y = ABS(vf);
                     HSD_JObjSetTranslate(j0, &translate);
                 }
-            }
-            arwing_type_done:;
+                break;
             }
             if (grAnime_801C83D0(gobj, 0, 7)) {
                 arwing_gobjs[gp->u.arwing.xC8] = 0;

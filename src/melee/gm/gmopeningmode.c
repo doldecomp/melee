@@ -342,14 +342,12 @@ void gm_SetupTitleDemo(void)
     u8 cur_id;
 
     count = 0;
-    c = 0;
-    do {
+    for (c = 0; c < CKind_Playable_Count; c++) {
         if (gm_IsCKindUnlocked(c) != 0) {
             character_pool[count] = c;
             count += 1;
         }
-        c += 1;
-    } while (c < CKind_Playable_Count);
+    }
     character_pool[count] = CKind_Playable_Count;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {

@@ -460,13 +460,14 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
     }
 
     if (gm_8016AE80() != -1 && gm_8016B238() == 0) {
-        int item_kind = It_Common_Start;
-        do {
+        int item_kind;
+        for (item_kind = It_Common_Start; item_kind < It_Common_End;
+             item_kind++)
+        {
             if (it_8026D324(item_kind) != 0) {
                 break;
             }
-            item_kind++;
-        } while (item_kind < It_Common_End);
+        }
 
         if (item_kind != It_Common_End) {
             s32 index1 = HSD_Randi(BLOCK_COUNT);

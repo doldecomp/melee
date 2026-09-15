@@ -222,8 +222,7 @@ void fn_80188644(void)
     Player_800328D4(0, &sp10);
     ifStatus_802F6508(0);
 
-    i = 0;
-    do {
+    for (i = 0; i < 4; i++) {
         if (i != 0 && i <= saved_count) {
             fn_8016EF98(i);
             if (i == 1) {
@@ -235,8 +234,7 @@ void fn_80188644(void)
                 gm_8016EDDC(i, &lbl_80473700.players[i]);
             }
         }
-        i++;
-    } while (i < 4);
+    }
 
     gm_80473814.menu_values[0] = 0;
     gm_80473814.menu_values[1] = 0;

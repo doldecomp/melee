@@ -320,10 +320,11 @@ void ftCo_8009DC54(Fighter* fp)
     HSD_ASSERTREPORT(490, fp->dynamics_num < Ft_Dynamics_NumMax,
                      "fighter dynamics num over!\n");
     {
-        ssize_t bone_idx = idx * 2 + 1;
-        ssize_t dyn_idx = 0;
-        i = 0;
-        do {
+        ssize_t bone_idx;
+        ssize_t dyn_idx;
+        for (bone_idx = idx * 2 + 1, dyn_idx = 0, i = 0; i < 2;
+             i++, bone_idx++, dyn_idx++)
+        {
             HSD_JObj* cur = fp->u.pr.x223C;
             ftDynamics* dynamics = data->x2C;
             ArticleDynamicBones* bones = dynamics->ftDynamicBones;
@@ -350,10 +351,7 @@ void ftCo_8009DC54(Fighter* fp)
                     &data->x2C->ftDynamicBones->array[bone_idx].dyn_desc,
                     desc);
             }
-            i++;
-            bone_idx++;
-            dyn_idx++;
-        } while (i < 2);
+        }
     }
 }
 

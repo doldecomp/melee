@@ -992,61 +992,47 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         f32 delta = gp->u.zebes5.xD4 - gp->u.zebes5.xD8;
         gp->u.zebes5.xD0 = gp->u.zebes5.xD0 - yakumono_param->x9C;
 
-        if (gp->u.zebes5.xD0 < 0.0f) {
-            goto state4_done;
-        } else {
-            f32 abs_delta;
-            if (delta < 0.0f) {
-                abs_delta = -delta;
-            } else {
-                abs_delta = delta;
-            }
-            if (abs_delta < gp->u.zebes5.xD0) {
-                goto state4_done;
-            }
-        }
+        if (gp->u.zebes5.xD0 < 0.0f || ABS(delta) < gp->u.zebes5.xD0) {
+            gp->u.zebes5.xC8 = 1;
+            gp->u.zebes5.xD0 = 0.0f;
 
-        goto state4_update_pos;
-
-    state4_done:
-        gp->u.zebes5.xC8 = 1;
-        gp->u.zebes5.xD0 = 0.0f;
-
-        gp->u.zebes5.xC4 = (s16) (gp->u.zebes5.xC4 + 1);
-        {
-            s16 idx = gp->u.zebes5.xC4;
-            if (idx == 0x1E ||
-                (yakumono_param->xA0_entries[idx].x0_base == 0 &&
-                 yakumono_param->xA0_entries[idx].x2_delay_min == 0 &&
-                 yakumono_param->xA0_entries[idx].x4_delay_max == 0 &&
-                 yakumono_param->xA0_entries[idx].x6_level == 0))
+            gp->u.zebes5.xC4 = (s16) (gp->u.zebes5.xC4 + 1);
             {
-                gp->u.zebes5.xC4 = 0;
+                s16 idx = gp->u.zebes5.xC4;
+                if (idx == 0x1E ||
+                    (yakumono_param->xA0_entries[idx].x0_base == 0 &&
+                     yakumono_param->xA0_entries[idx].x2_delay_min == 0 &&
+                     yakumono_param->xA0_entries[idx].x4_delay_max == 0 &&
+                     yakumono_param->xA0_entries[idx].x6_level == 0))
+                {
+                    gp->u.zebes5.xC4 = 0;
+                }
+            }
+
+            {
+                s32 delay_min, delay_max;
+
+                delay_max =
+                    yakumono_param->xA0_entries[gp->u.zebes5.xC4].x4_delay_max;
+                (void) delay_max;
+                delay_min =
+                    yakumono_param->xA0_entries[gp->u.zebes5.xC4].x2_delay_min;
+                if (delay_max > delay_min) {
+                    s32 diff = delay_max - delay_min;
+                    delay_max =
+                        delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
+                } else if (delay_max < delay_min) {
+                    s32 diff = delay_min - delay_max;
+                    delay_max += (diff != 0) ? HSD_Randi(diff) : 0;
+                }
+
+                gp->u.zebes5.xC6 =
+                    (s16) (yakumono_param->xA0_entries[gp->u.zebes5.xC4]
+                               .x0_base +
+                           delay_max);
             }
         }
 
-        {
-            s32 delay_min, delay_max;
-
-            delay_max =
-                yakumono_param->xA0_entries[gp->u.zebes5.xC4].x4_delay_max;
-            (void) delay_max;
-            delay_min =
-                yakumono_param->xA0_entries[gp->u.zebes5.xC4].x2_delay_min;
-            if (delay_max > delay_min) {
-                s32 diff = delay_max - delay_min;
-                delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
-            } else if (delay_max < delay_min) {
-                s32 diff = delay_min - delay_max;
-                delay_max += (diff != 0) ? HSD_Randi(diff) : 0;
-            }
-
-            gp->u.zebes5.xC6 =
-                (s16) (yakumono_param->xA0_entries[gp->u.zebes5.xC4].x0_base +
-                       delay_max);
-        }
-
-    state4_update_pos:
         if (gp->u.zebes5.xD4 > gp->u.zebes5.xD8) {
             gp->u.zebes5.xD8 += gp->u.zebes5.xD0;
         } else {

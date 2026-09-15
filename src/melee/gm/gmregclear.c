@@ -280,10 +280,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
     mask = fn_8017F008();
     fn_8016F39C(arg0 + 1, gm_8016B774(), 7, arg1, mask, 0);
 
-    i = 0;
-    p = (s32*) arg0;
-
-    do {
+    for (i = 0, p = (s32*) arg0; i < 7; p++, i++) {
         mask = fn_8017F008();
         idx = fn_8016F548(gm_8016B774(), entry, mask, 0);
         mask = fn_8017F008();
@@ -304,9 +301,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 
         prev_idx = idx;
         entry = idx + 1;
-        p++;
-        i++;
-    } while (i < 7);
+    }
 
     mask = fn_8017F008();
     val = fn_8016FFD4(gm_8016B774(), (s32) mask, 0);

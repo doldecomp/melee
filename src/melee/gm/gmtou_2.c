@@ -832,76 +832,77 @@ void gm_Scene_TouAlt_OnFrame(void)
                         gm_801A4B60();
                         return;
                     }
-                    goto check_confirm;
+                } else {
+                    lbl_80479A58.x18[i] = 0;
                 }
-                lbl_80479A58.x18[i] = 0;
 
-            check_confirm: {
-                u8 status = lbl_80479A58.x1D[i].x0;
-                if (status != 2 && status != 1) {
-                    if ((fn_8018F6A8(i) & PAD_TRIGGER_L) &&
-                        (fn_8018F6A8(i) & PAD_TRIGGER_R))
-                    {
-                        j = get_match_player_index(i);
-                        tmd->x37[j].x5 = 1;
-                        tmd->x4B8[i].x2 = 1;
-                    }
+                {
+                    u8 status = lbl_80479A58.x1D[i].x0;
+                    if (status != 2 && status != 1) {
+                        if ((fn_8018F6A8(i) & PAD_TRIGGER_L) &&
+                            (fn_8018F6A8(i) & PAD_TRIGGER_R))
+                        {
+                            j = get_match_player_index(i);
+                            tmd->x37[j].x5 = 1;
+                            tmd->x4B8[i].x2 = 1;
+                        }
 
-                    if (pressed & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
-                        u8 chr;
-                        sfxMove();
+                        if (pressed & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
+                            u8 chr;
+                            sfxMove();
 
-                        j = get_match_player_index(i);
-                        tmd->x37[j].x5 = 0;
-                        tmd->x4B8[i].x2 = 0;
+                            j = get_match_player_index(i);
+                            tmd->x37[j].x5 = 0;
+                            tmd->x4B8[i].x2 = 0;
 
-                        chr = tmd->x4B8[i].x1;
-                        do {
-                            if (chr != 0) {
-                                chr -= 1;
-                            } else {
-                                chr = fn_8018F6DC(0x19);
-                            }
-                        } while (gm_IsCKindUnlocked(
-                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
-                        tmd->x4B8[i].x1 = chr;
+                            chr = tmd->x4B8[i].x1;
+                            do {
+                                if (chr != 0) {
+                                    chr -= 1;
+                                } else {
+                                    chr = fn_8018F6DC(0x19);
+                                }
+                            } while (gm_IsCKindUnlocked((u8) fn_8018F6FC(
+                                         (CSSIconHud) chr)) == 0);
+                            tmd->x4B8[i].x1 = chr;
 
-                        j = get_match_player_index(i);
-                        tmd->x37[j].x3 = tmd->x4B8[i].x1;
+                            j = get_match_player_index(i);
+                            tmd->x37[j].x3 = tmd->x4B8[i].x1;
 
-                        j = get_match_player_index(i);
-                        tmd->x4B8[i].x3 = 0;
-                        tmd->x37[j].x7 = 0;
+                            j = get_match_player_index(i);
+                            tmd->x4B8[i].x3 = 0;
+                            tmd->x37[j].x7 = 0;
 
-                    } else if (pressed & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT))
-                    {
-                        u8 chr;
-                        sfxMove();
+                        } else if (pressed &
+                                   (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT))
+                        {
+                            u8 chr;
+                            sfxMove();
 
-                        j = get_match_player_index(i);
-                        tmd->x37[j].x5 = 0;
-                        tmd->x4B8[i].x2 = 0;
+                            j = get_match_player_index(i);
+                            tmd->x37[j].x5 = 0;
+                            tmd->x4B8[i].x2 = 0;
 
-                        chr = tmd->x4B8[i].x1;
-                        do {
-                            if ((s32) chr < fn_8018F6DC(0x19)) {
-                                chr += 1;
-                            } else {
-                                chr = fn_8018F6DC(0);
-                            }
-                        } while (gm_IsCKindUnlocked(
-                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
-                        tmd->x4B8[i].x1 = chr;
+                            chr = tmd->x4B8[i].x1;
+                            do {
+                                if ((s32) chr < fn_8018F6DC(0x19)) {
+                                    chr += 1;
+                                } else {
+                                    chr = fn_8018F6DC(0);
+                                }
+                            } while (gm_IsCKindUnlocked((u8) fn_8018F6FC(
+                                         (CSSIconHud) chr)) == 0);
+                            tmd->x4B8[i].x1 = chr;
 
-                        j = get_match_player_index(i);
-                        tmd->x37[j].x3 = tmd->x4B8[i].x1;
+                            j = get_match_player_index(i);
+                            tmd->x37[j].x3 = tmd->x4B8[i].x1;
 
-                        j = get_match_player_index(i);
-                        tmd->x4B8[i].x3 = 0;
-                        tmd->x37[j].x7 = 0;
+                            j = get_match_player_index(i);
+                            tmd->x4B8[i].x3 = 0;
+                            tmd->x37[j].x7 = 0;
+                        }
                     }
                 }
-            }
 
                 if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                     if (lbl_80479A58.x1D[i].x0 != 2) {

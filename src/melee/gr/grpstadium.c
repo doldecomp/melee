@@ -1675,8 +1675,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     gp2 = text_gobj->user_data;
     HSD_ASSERT(0x884, gp2->win_static_p);
     HSD_ASSERT(0x885, gp2->win_dynamic_p);
-    player_index = 0;
-    do {
+    for (player_index = 0; player_index < 6; player_index++) {
         if ((Player_GetPlayerSlotType(player_index) != Gm_PKind_NA) &&
             (Player_8003219C(player_index) == 0))
         {
@@ -1685,8 +1684,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 player_num += 1;
             }
         }
-        player_index += 1;
-    } while (player_index < 6);
+    }
     HSD_SisLib_803A7664(gp2->win_dynamic_p);
 
     if (player_num == 1) {
@@ -1718,8 +1716,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     colors.s.presets = grPs_803B7F8C;
     vertical_offset = colors.entries[player_num].packed;
     text_offset = 0;
-    player_num = 0;
-    do {
+    for (player_num = 0; player_num < 6; player_num++) {
         if (Player_GetPlayerSlotType(player_num) != Gm_PKind_NA &&
             Player_8003219C(player_num) == 0)
         {
@@ -1747,8 +1744,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 text_offset += 0x20;
             }
         }
-        player_num += 1;
-    } while (player_num < 6);
+    }
 }
 
 const StadiumAlphaPresets grPs_803B7F8C = { {

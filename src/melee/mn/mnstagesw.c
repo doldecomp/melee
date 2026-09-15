@@ -347,17 +347,15 @@ static void fn_80235F80(HSD_GObj* gobj)
                     *confirmed = 1;
                 }
                 user_data = mnStageSw_804D6BF0->user_data;
-                stage_ids = mnStageSw_803ED4C4;
-                i = 0;
-                do {
+                for (stage_ids = mnStageSw_803ED4C4, i = 0; i < NUM_STAGES;
+                     i++, stage_ids++)
+                {
                     if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) !=
                         0)
                     {
                         gm_801641E4(*stage_ids, user_data[i + 2]);
                     }
-                    i++;
-                    stage_ids++;
-                } while (i < NUM_STAGES);
+                }
                 return;
             }
             goto check_dpad;

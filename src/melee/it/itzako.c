@@ -289,16 +289,14 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
     if (!arg_chk) {
         if (coll->env_flags & Collide_FloorMask) {
             sp68 = coll->floor.normal;
-            goto block_7;
+        } else {
+            return;
         }
-        return;
     } else if (coll->env_flags & Collide_CeilingMask) {
         sp68 = coll->ceiling.normal;
-        goto block_7;
+    } else {
+        return;
     }
-    return;
-
-block_7:
 
     sp74.x = HSD_JObjGetRotationX(item_jobj);
     sp74.y = HSD_JObjGetRotationY(item_jobj);

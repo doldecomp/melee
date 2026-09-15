@@ -634,15 +634,13 @@ void fn_8019175C(HSD_GObj* gobj)
         if (*counter >= 0x14U) {
             *counter = 0;
         }
-        i = 0;
-        do {
+        for (i = 0; i <= 2; i++) {
             if (i != tm->cur_option - 6) {
                 fn_8019044C(jobjs[i], 0.0F);
             } else {
                 fn_8019044C(jobjs[i], (f32) *counter);
             }
-            i += 1;
-        } while (i <= 2);
+        }
         *counter = *counter + 1;
         return;
     }
@@ -737,11 +735,11 @@ void fn_80191A54(HSD_GObj* gobj)
 /// Updates button highlight animation based on current menu option.
 void fn_80191B5C(void* gobj)
 {
-    u8* timers;
+    struct Lbl804799B8_t* timers;
     TmData* tm;
     HSD_JObj* jobj;
 
-    timers = (u8*) &lbl_804799B8;
+    timers = &lbl_804799B8;
     tm = gm_GetTournamentData();
     jobj = (HSD_JObj*) ((HSD_GObj*) gobj)->hsd_obj;
 
@@ -751,13 +749,13 @@ void fn_80191B5C(void* gobj)
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         switch (tm->cur_option) {
         case 10:
-            fn_8019044C(jobj, (f32) timers[0xA]);
+            fn_8019044C(jobj, (f32) timers->xA);
             break;
         case 11:
             fn_8019044C(jobj, 5.0F);
             break;
         case 12:
-            fn_8019044C(jobj, (f32) (s32) (timers[0xA] + 0x14));
+            fn_8019044C(jobj, (f32) (s32) (timers->xA + 0x14));
             break;
         case 13:
         case 14:
@@ -765,7 +763,7 @@ void fn_80191B5C(void* gobj)
             fn_8019044C(jobj, 25.0F);
             break;
         case 16:
-            fn_8019044C(jobj, (f32) (s32) (timers[0xA] + 0x28));
+            fn_8019044C(jobj, (f32) (s32) (timers->xA + 0x28));
             break;
         }
     }
@@ -1440,8 +1438,6 @@ void fn_80193308(void)
 
     count = 0;
     idx = 1;
-    if ((!tm) && (!tm)) {
-    }
     color_word = (s32*) &color;
     do {
         created_text = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
@@ -1471,7 +1467,6 @@ void fn_80193308(void)
         (*ptr)->default_alignment = 1;
         if (count) {
             *((s32*) (text_color = &(*ptr)->text_color)) = *color_word;
-            ;
         }
         count += 1;
         idx = 4;
@@ -1811,10 +1806,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
         } else {
             tmSettings_StepDown(arg0, table, state, mt);
         }
-        if (*mt != 0) {
-            goto post_clamp;
-        }
-        {
+        if (*mt == 0) {
             u8 x30 = ((TmData*) arg0)->x30;
             switch (x30) {
             case 2:
@@ -1849,14 +1841,14 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                     arg0[idx + 1] = arg0[idx + 1] + 1;
                     sfxMove();
                     state->x8 = 5;
-                    goto after_right;
-                }
-                arg0[idx + 1] = (s32) table->min[idx][!!*mt];
-                idx = arg0[0];
-                val = arg0[idx + 1];
-                if (val != clamp_val) {
-                    sfxMove();
-                    state->x8 = 5;
+                } else {
+                    arg0[idx + 1] = (s32) table->min[idx][!!*mt];
+                    idx = arg0[0];
+                    val = arg0[idx + 1];
+                    if (val != clamp_val) {
+                        sfxMove();
+                        state->x8 = 5;
+                    }
                 }
             } else {
                 arg0[idx + 1] = (s32) table->min[idx][!!*mt];
@@ -1877,21 +1869,17 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 if (*mt != 0) {
                     if (val == arg0[2] - 1) {
                         *ptr = (s32) table->min[idx][!!*mt];
-                        goto after_right;
+                    } else {
+                        *ptr = val + 1;
                     }
+                } else {
                     *ptr = val + 1;
-                    goto after_right;
                 }
-                *ptr = val + 1;
             } else {
                 *ptr = (s32) table->min[idx][!!*mt];
             }
         }
-    after_right:
-        if (*mt != 0) {
-            goto post_clamp;
-        }
-        {
+        if (*mt == 0) {
             u8 x30 = ((TmData*) arg0)->x30;
             switch (x30) {
             case 2:
@@ -1918,7 +1906,6 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
         }
     }
 
-post_clamp:
     if (*mt != 0) {
         if (arg0[3] > arg0[2] - 1) {
             arg0[3] = arg0[2] - 1;
@@ -2004,22 +1991,14 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
     val = fn_80194658_get_value(ptr);
     ptr = arg0 + idx + 1;
 
-    if (0 == dir) {
-        if (lbl_804D665C < 2) {
-            if (arg1 & 0x40001) {
-                *ptr = (val != 0) ? 0 : 1;
-                goto end;
-            }
-            if (arg1 & 0x80002) {
-                changed = 1;
-                *ptr = (val != 0) ? 0 : 1;
-                goto end;
-            }
-            goto end;
+    if (0 == dir && lbl_804D665C < 2) {
+        if (arg1 & 0x40001) {
+            *ptr = (val != 0) ? 0 : 1;
+        } else if (arg1 & 0x80002) {
+            changed = 1;
+            *ptr = (val != 0) ? 0 : 1;
         }
-    }
-
-    if (arg1 & 0x40001) {
+    } else if (arg1 & 0x40001) {
         if (val > (s32) table->min[idx][!!dir]) {
             *ptr = *ptr - 1;
         } else if (dir == 0) {
@@ -2042,7 +2021,6 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
             *ptr = 1;
         }
     }
-end:
     if (gm_804771C4.match_type == 0) {
         if (arg0[4] > (s32) lbl_803D9D20.x0[arg0[3]]) {
             arg0[arg0[0] + 1] = 0;
