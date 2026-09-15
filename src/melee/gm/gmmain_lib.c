@@ -765,7 +765,7 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
     }
 }
 
-inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
+static inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
         *tag_ptr = GM_NAMETAG_NONE;
@@ -776,7 +776,7 @@ inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 
 /// As #gmMainLib_AdjustNameTag, but clears the slot instead of marking it
 /// unassigned.
-inline void gmMainLib_ClearNameTag(u8* tag_ptr, u8 tag)
+static inline void gmMainLib_ClearNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
         *tag_ptr = 0;

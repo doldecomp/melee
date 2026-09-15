@@ -277,7 +277,7 @@ static inline s32 mnInfo_CountUnlocked(void)
     return count;
 }
 
-inline void mnInfo_CreateEntries(u32 id)
+static inline void mnInfo_CreateEntries(u32 id)
 {
     u8* trophy;
     s32 i;

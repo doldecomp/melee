@@ -927,7 +927,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     *cam_gobj = fn_80180630_CreateCameraGObj();
 }
 
-inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
+static inline u8 fn_80180630_GetX118(const struct lbl_80472D28_t* state)
 {
     return state->x118;
 }

@@ -73,8 +73,8 @@ void itNesspkfirepillar_802AA55C(Item_GObj* item_gobj)
     it_80275158(item_gobj, attrs->x0);
 }
 
-bool inline itNesspkfirepillar_INLINE_Anim_SetScale(Item_GObj* item_gobj,
-                                                    f32 scale)
+static inline bool
+itNesspkfirepillar_INLINE_Anim_SetScale(Item_GObj* item_gobj, f32 scale)
 {
     Vec3 scaling;
     HSD_JObj* jobj = GET_JOBJ(item_gobj);

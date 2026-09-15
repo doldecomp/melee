@@ -61,8 +61,9 @@ void efLib_render_callback(HSD_GObj*, int);
 /*                       INLINES                        */
 /* ---------------------------------------------------- */
 
-void inline eflib_create_generator_add_appsrt(HSD_Generator** generator,
-                                              s32 gfx_id, HSD_JObj* jobj)
+static inline void eflib_create_generator_add_appsrt(HSD_Generator** generator,
+                                                     s32 gfx_id,
+                                                     HSD_JObj* jobj)
 {
     *generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
     if (*generator != NULL) {

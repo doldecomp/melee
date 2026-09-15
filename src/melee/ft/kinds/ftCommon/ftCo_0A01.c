@@ -1976,9 +1976,9 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp, struct CpuFighter* data,
     return false;
 }
 
-inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
-                                 Vec3* out_normal, int* out_line,
-                                 u32* out_flags)
+static inline s32 ftCo_800A3908_inline1(float x, float y, Vec3* out_pos,
+                                        Vec3* out_normal, int* out_line,
+                                        u32* out_flags)
 {
     s32 result;
     s32 valid;
