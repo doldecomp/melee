@@ -20,6 +20,7 @@ typedef struct ToyEntry ToyEntry;
 typedef struct ToyGlobalsS_ ToyGlobalsS_;
 typedef struct ToyJObjNode ToyJObjNode;
 typedef struct ToyListEntry ToyListEntry;
+typedef struct ToyModelFile ToyModelFile;
 typedef struct ToyNameData ToyNameData;
 typedef struct ToyParamEditor ToyParamEditor;
 typedef struct ToySubStructS_ ToySubStructS_;

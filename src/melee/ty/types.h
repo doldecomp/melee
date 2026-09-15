@@ -151,6 +151,12 @@ struct TyDisplayData {
     /* 0x157 */ s8 visible_count;
 };
 
+struct ToyModelFile {
+    /* 0x00 */ s32 trophy_id;
+    /* 0x04 */ char archive_name[0x20];
+    /* 0x24 */ char symbol_name[0x30];
+};
+
 struct ToyListEntry {
     /* 0x00 */ struct ToyListEntry* prev;
     /* 0x04 */ struct ToyListEntry* next;
