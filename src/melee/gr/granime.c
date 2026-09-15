@@ -1045,7 +1045,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
 void fn_801C82E8(int arg0, int* arg1)
 {
     *arg1 = arg0;
-    longjmp(grAnime_8049EE40, 1);
+    __longjmp(&grAnime_8049EE40, 1);
 }
 
 HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
@@ -1123,22 +1123,23 @@ static inline HSD_Joint* grAnime_801C8578_noinline(HSD_Joint* joint,
 
 void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
 {
-    s32 sp2;
-    s32 sp3;
-    s32 sp;
-    s32 sp4;
-    HSD_Joint* joint;
-    UnkArchiveStruct* archive;
-
-    Ground_801C3FA4(arg1, arg2);
-    archive = grDatFiles_801C6330(arg0);
-    HSD_ASSERT(0x602, archive);
+    PAD_STACK(2 * 4);
     {
-        HSD_Joint* root = archive->unk4->unk8[arg0].unk0;
-        sp = arg2;
-        joint = grAnime_801C8578_noinline(root, &sp);
+        s32 sp;
+        HSD_Joint* joint;
+        UnkArchiveStruct* archive;
+        PAD_STACK(4);
+
+        Ground_801C3FA4(arg1, arg2);
+        archive = grDatFiles_801C6330(arg0);
+        HSD_ASSERT(1538, archive);
+        {
+            HSD_Joint* root = archive->unk4->unk8[arg0].unk0;
+            sp = arg2;
+            joint = grAnime_801C8578_noinline(root, &sp);
+        }
+        HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
     }
-    HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
 }
 
 void grAnime_801C8780(HSD_GObj* gobj, u32 arg1, u32 arg2, f32 arg3, f32 arg4)

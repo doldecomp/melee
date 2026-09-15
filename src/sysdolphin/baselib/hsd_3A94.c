@@ -8,6 +8,15 @@
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
+#define BANNER_SMALL 0xE00
+#define BANNER_LARGE 0x1800
+
+typedef enum {
+    CardBanner_None,
+    CardBanner_Small, ///< Indexed color, including its palette.
+    CardBanner_Large, ///< RGB5A3 color.
+} CardBannerFormat;
+
 /// 0x20-byte header at the start of every data block on the card.
 typedef struct CardBlockHeader {
     /* 0x00 */ u8 digest[0x10];
@@ -31,6 +40,55 @@ typedef struct CardCmdBuf {
 } CardCmdBuf;
 ASSERT_SIZE(CardCmdBuf, 0x28);
 
+/* 3AA790 */ static int fn_803AA790(void);
+/// Copies the command into the ring; pointed-to state and buffers are not
+/// copied and must remain valid until execution completes. Returns 0 when
+/// queued, or -265 when the ring is full.
+/* 3AC168 */ static int fn_803AC168(const CardCmd* cmd);
+/* 3AC258 */ static s32 fn_803AC258(CardState* state, s32 block_idx);
+/* 3AC2A4 */ static s32 fn_803AC2A4(CardState* state);
+/* 3AC2D4 */ static void fn_803AC2D4(void);
+/* 3AC2E0 */ static void fn_803AC2E0(void);
+/* 3AC334 */ static void fn_803AC334(void);
+/* 3AC3F8 */ static void fn_803AC3F8(CardState* state, u8* data, s32 file_idx);
+/* 3AC558 */ static void hsd_803AC558(CardState* state, u8* data);
+/* 3AC634 */ static u32 fn_803AC634(CardState* state, s32 file_idx);
+/* 3AC6B8 */ static s32 fn_803AC6B8(CardState* state, s32 file_idx);
+/* 3AC7DC */ static s32 fn_803AC7DC(CardState*);
+/* 3ACBE8 */ static s32 fn_803ACBE8(CardState* state, s32 block_idx);
+/* 3ACC0C */ static s32 fn_803ACC0C(CardState* state, s32 block_idx,
+                                    s32 block_id, s32 seq_num,
+                                    void* expected_data, s32 data_size);
+/* 3ACD58 */ static s32 fn_803ACD58(CardState* state, void* banner,
+                                    void* icons);
+/* 3ACF30 */ static s32 fn_803ACF30(CardState* state, void* comment,
+                                    void* banner, void* icons);
+/* 3ACFC0 */ static s32 fn_803ACFC0(CardState* state, s32 block_idx,
+                                    s32 block_id, s32 seq_num, void* payload,
+                                    s32 payload_size, s32 file_idx);
+/* 3AD16C */ static s32 fn_803AD16C(CardState* state);
+/* 3ADE4C */ static int fn_803ADE4C(CardState* state, int file_no,
+                                    CardCallback callback);
+/* 3ADF90 */ static int fn_803ADF90(CardState* state, s32 file_idx, u8* buf,
+                                    int async, CardCallback callback);
+/* 3AE7F8 */ static int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf,
+                                    bool async, CardCallback callback);
+/* 3AF3F0 */ static int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf,
+                                    bool async, CardCallback callback);
+/* 3B0120 */ static int fn_803B0120(CardState* state, s32 file_idx, u8* buf,
+                                    bool async, CardCallback callback);
+/* 3B0E9C */ static int fn_803B0E9C(CardState* state, void* banner, u8* icons,
+                                    int is_new, int async);
+/* 3B1338 */ static int fn_803B1338(CardState* state, int async);
+/* 3B1F78 */ static int fn_803B1F78(CardState* state, const char* filename,
+                                    void* banner, void* icons,
+                                    CardCallback callback);
+/* 3B21E8 */ static int fn_803B21E8(CardState* state, void* banner,
+                                    void* icons, CardCallback callback);
+/* 3B26CC */ static int fn_803B26CC(CardState* state, void* comment,
+                                    void* banner, void* icons,
+                                    CardCallback callback);
+
 /* 3A949C */ static void hsd_803A949C(s32 chan, s32 card_result);
 /* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /// .sbss globals emit in reverse declaration order.
@@ -53,7 +111,7 @@ ASSERT_SIZE(CardCmdBuf, 0x28);
 /* 4D798C */ s32 hsd_804D798C;
 /// Result of the request in progress: negative = CARD error, 1 = data
 /// verified so the queued writes are skipped, 2 = verify mismatch.
-/* 4D7988 */ s32 hsd_804D7988;
+/* 4D7988 */ s32 _card_result;
 /// Command ring tail (next free slot).
 /* 4D7984 */ volatile s32 hsd_804D7984;
 /// Command ring head (next command to run).
@@ -106,13 +164,13 @@ void hsd_803A949C(s32 chan, s32 card_result)
     case CARD_CMD_READ_BLOCK:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
 
         if (hsd_804D1148[hsd_804D7980].read.phys < 0) {
             if (hsd_803A949C_Close(state) < 0) {
-                hsd_804D7988 = card_result;
+                _card_result = card_result;
             }
             break;
         }
@@ -124,7 +182,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                                  state->sector_size - hdr_offset) < 0)
                 {
                     hsd_803A949C_Close(state);
-                    hsd_804D7988 = -0x105;
+                    _card_result = -0x105;
                     break;
                 }
                 if (hsd_804D1148[hsd_804D7980].read.data != NULL) {
@@ -137,7 +195,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
         } else {
             if (hsd_803B31CC(state->sector_buf, state->sector_size) < 0) {
                 hsd_803A949C_Close(state);
-                hsd_804D7988 = -0x105;
+                _card_result = -0x105;
                 break;
             }
             if (hsd_804D1148[hsd_804D7980].read.size > 0 &&
@@ -150,21 +208,21 @@ void hsd_803A949C(s32 chan, s32 card_result)
             result = hsd_803A949C_Close(state);
         }
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
         }
         break;
 
     case CARD_CMD_READ_SECTOR:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
         } else if (hsd_803B31CC(state->sector_buf, state->sector_size) < 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = -0x105;
+            _card_result = -0x105;
         } else {
             result = hsd_803A949C_Close(state);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
             }
         }
         break;
@@ -172,7 +230,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
     case CARD_CMD_VERIFY_BLOCK:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
 
@@ -180,7 +238,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
             if (hsd_804D1148[hsd_804D7980].verify.size <= 0) {
                 result = hsd_803A949C_Close(state);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                 }
                 break;
             }
@@ -190,56 +248,56 @@ void hsd_803A949C(s32 chan, s32 card_result)
                              state->sector_size - hdr_offset) < 0)
             {
                 hsd_803A949C_Close(state);
-                hsd_804D7988 = 2;
+                _card_result = 2;
                 break;
             }
             result = hsd_803A949C_Close(state);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 break;
             }
             result = hsd_804D7980;
             block = state->sector_buf + hdr_offset;
             result = hsd_804D1148[result].verify.block_id;
             if (((block[0x10] << 8) | block[0x11]) != result) {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else if ((s32) block[0x12] !=
                        hsd_804D1148[hsd_804D7980].verify.seq)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else if (hsd_804D1148[hsd_804D7980].verify.size > 0 &&
                        memcmp(hsd_804D1148[hsd_804D7980].verify.data,
                               (block += 0x20),
                               hsd_804D1148[hsd_804D7980].verify.size) != 0)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             }
         } else {
             if (hsd_803B31CC(state->sector_buf, state->sector_size) < 0) {
                 hsd_803A949C_Close(state);
-                hsd_804D7988 = 2;
+                _card_result = 2;
                 break;
             }
             result = hsd_803A949C_Close(state);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 break;
             }
             result = (((CardBlockHeader*) state->sector_buf)->id_hi << 8) |
                      ((CardBlockHeader*) state->sector_buf)->id_lo;
             block = state->sector_buf;
             if (result != hsd_804D1148[hsd_804D7980].verify.block_id) {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else if ((s32) block[0x12] !=
                        hsd_804D1148[hsd_804D7980].verify.seq)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else if (hsd_804D1148[hsd_804D7980].verify.size > 0 &&
                        memcmp(hsd_804D1148[hsd_804D7980].verify.data,
                               block + 0x20,
                               hsd_804D1148[hsd_804D7980].verify.size) != 0)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             }
         }
         break;
@@ -247,22 +305,22 @@ void hsd_803A949C(s32 chan, s32 card_result)
     case CARD_CMD_VERIFY_HEADER:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
 
         result = hsd_803A949C_Close(state);
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
             break;
         }
 
-        switch (state->banner_format) {
-        case 2:
-            banner_size = 0x1800;
+        switch (state->icon_info.banner_format) {
+        case CardBanner_Large:
+            banner_size = BANNER_LARGE;
             break;
-        case 1:
-            banner_size = 0xE00;
+        case CardBanner_Small:
+            banner_size = BANNER_SMALL;
             break;
         default:
             banner_size = 0;
@@ -271,7 +329,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
 
         if (hsd_804D1148[hsd_804D7980].header.index == 0) {
             if (memcmp(state->sector_buf, state->comment, 0x40) != 0) {
-                hsd_804D7988 = 2;
+                _card_result = 2;
                 break;
             }
             if (banner_size > 0 &&
@@ -279,7 +337,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                        hsd_804D1148[hsd_804D7980].header.banner,
                        banner_size) != 0)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
                 break;
             }
             icons_start = banner_size + 0x40;
@@ -288,7 +346,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                            hsd_804D1148[hsd_804D7980].header.icons,
                            state->sector_size - icons_start) != 0)
                 {
-                    hsd_804D7988 = 2;
+                    _card_result = 2;
                     break;
                 }
                 hsd_803B2B20(
@@ -300,7 +358,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                               hsd_804D1148[hsd_804D7980].header.icons,
                               state->header_size - icons_start) != 0)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else {
                 hsd_803B2B20(
                     hsd_804D1148[hsd_804D7980].state->sector_buf,
@@ -311,7 +369,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                            hsd_804D1148[hsd_804D7980].state->digest,
                            0x30) != 0)
                 {
-                    hsd_804D7988 = 2;
+                    _card_result = 2;
                 }
             }
         } else {
@@ -327,7 +385,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                                icons_offset,
                            state->sector_size) != 0)
                 {
-                    hsd_804D7988 = 2;
+                    _card_result = 2;
                     break;
                 }
                 hsd_803B2B20(
@@ -340,7 +398,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                                   icons_offset,
                               remaining) != 0)
             {
-                hsd_804D7988 = 2;
+                _card_result = 2;
             } else {
                 hsd_803B2B20(
                     hsd_804D1148[hsd_804D7980].state->sector_buf, remaining,
@@ -350,7 +408,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                            hsd_804D1148[hsd_804D7980].state->digest,
                            0x30) != 0)
                 {
-                    hsd_804D7988 = 2;
+                    _card_result = 2;
                 }
             }
         }
@@ -359,22 +417,22 @@ void hsd_803A949C(s32 chan, s32 card_result)
     case CARD_CMD_READ_HEADER:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
 
         result = hsd_803A949C_Close(state);
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
             break;
         }
 
-        switch (state->banner_format) {
-        case 2:
-            banner_size11 = 0x1800;
+        switch (state->icon_info.banner_format) {
+        case CardBanner_Large:
+            banner_size11 = BANNER_LARGE;
             break;
-        case 1:
-            banner_size11 = 0xE00;
+        case CardBanner_Small:
+            banner_size11 = BANNER_SMALL;
             break;
         default:
             banner_size11 = 0;
@@ -421,7 +479,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                            hsd_804D1148[hsd_804D7980].state->digest,
                            0x30) != 0)
                 {
-                    hsd_804D7988 = -0x107;
+                    _card_result = -0x107;
                 }
             }
         } else {
@@ -458,7 +516,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                            hsd_804D1148[hsd_804D7980].state->digest,
                            0x30) != 0)
                 {
-                    hsd_804D7988 = -0x107;
+                    _card_result = -0x107;
                 }
             }
         }
@@ -469,7 +527,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
             state->block_ids[hsd_804D1148[hsd_804D7980].write.phys] = -0x7FFF;
             state->block_seqs[hsd_804D1148[hsd_804D7980].write.phys] = 0;
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
         if (hsd_804D1148[hsd_804D7980].write.block_id != 0xFFFF) {
@@ -483,7 +541,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
         }
         result = hsd_803A949C_Close(state);
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
         }
         break;
 
@@ -492,7 +550,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
             state->block_ids[hsd_804D1148[hsd_804D7980].sector.phys] = -0x7FFF;
             state->block_seqs[hsd_804D1148[hsd_804D7980].sector.phys] = 0;
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
         if (hsd_804D1148[hsd_804D7980].sector.block_id != 0xFFFF) {
@@ -506,14 +564,14 @@ void hsd_803A949C(s32 chan, s32 card_result)
         }
         result = hsd_803A949C_Close(state);
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
         }
         break;
 
     case CARD_CMD_CREATE_FILE:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
             break;
         }
         i = 0;
@@ -526,28 +584,28 @@ void hsd_803A949C(s32 chan, s32 card_result)
         } while (i < 10);
         state->file_no = result;
         if (state->file_no < 0) {
-            hsd_804D7988 = state->file_no;
+            _card_result = state->file_no;
         }
         result = hsd_803A949C_Close(state);
         if (result < 0) {
-            hsd_804D7988 = result;
+            _card_result = result;
         }
         break;
 
     case CARD_CMD_SET_STATUS:
         if (card_result != 0) {
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
         }
         break;
 
     case CARD_CMD_WRITE_HEADER:
         if (card_result != 0) {
             hsd_803A949C_Close(state);
-            hsd_804D7988 = card_result;
+            _card_result = card_result;
         } else {
             result = hsd_803A949C_Close(state);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
             }
         }
         break;
@@ -806,13 +864,13 @@ static inline int setupCardIcons(const CardCmd* cmd)
     s32 k;
 
     k = (bit = 0);
-    while (k < 8 && cmd->state->icon_speed[k] != 0) {
+    while (k < 8 && cmd->state->icon_info.icon_speed[k] != 0) {
         cmd->state->stat.iconFormat =
             (cmd->state->stat.iconFormat & ~(CARD_STAT_ICON_MASK << bit)) |
-            (cmd->state->icon_format[k] << bit);
+            (cmd->state->icon_info.icon_format[k] << bit);
         cmd->state->stat.iconSpeed =
             (cmd->state->stat.iconSpeed & ~(CARD_STAT_SPEED_MASK << bit)) |
-            (cmd->state->icon_speed[k++] << bit);
+            (cmd->state->icon_info.icon_speed[k++] << bit);
         bit += 2;
     }
     return k;
@@ -821,14 +879,14 @@ static inline void unpackCardStat(const CardCmd* cmd, CARDStat* stat)
 {
     s32 k;
 
-    cmd->state->banner_format = stat->bannerFormat & 3;
+    cmd->state->icon_info.banner_format = stat->bannerFormat & 3;
     for (k = 0; k < 8; k++) {
-        cmd->state->icon_format[k] =
+        cmd->state->icon_info.icon_format[k] =
             (stat->iconFormat >> (2 * k)) & CARD_STAT_ICON_MASK;
-        cmd->state->icon_speed[k] =
+        cmd->state->icon_info.icon_speed[k] =
             (stat->iconSpeed >> (2 * k)) & CARD_STAT_SPEED_MASK;
     }
-    cmd->state->header_size = hsd_803AC340(&cmd->state->banner_format);
+    cmd->state->header_size = hsd_803AC340(&cmd->state->icon_info);
     {
         u32 used = cmd->state->header_size + cmd->state->sector_size;
         used += 0x2F;
@@ -887,7 +945,7 @@ void hsd_803AAA48(void)
 {
     s32 result;
     s32 chan;
-    while (1) {
+    while (true) {
         CardContext* ctx = (CardContext*) &hsd_804D1138;
         CardState** state_ptr = &ctx->active.state;
         CardCmd* cmd;
@@ -905,7 +963,7 @@ void hsd_803AAA48(void)
             return;
         }
 
-        if (hsd_804D7988 < 0) {
+        if (_card_result < 0) {
             while (CARD_RING(ctx)[hsd_804D7980].type != CARD_CMD_NONE) {
                 CARD_RING(ctx)[hsd_804D7980].type = CARD_CMD_NONE;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
@@ -952,11 +1010,11 @@ void hsd_803AAA48(void)
                 }
                 if (ctx->active.callback != NULL) {
                     ctx->active.callback(ctx->active.callback_arg,
-                                         hsd_804D7988);
+                                         _card_result);
                 }
                 ctx->active.type = CARD_ACTIVE_NONE;
             }
-            hsd_804D7988 = 0;
+            _card_result = 0;
             hsd_804D799C = 2;
             if (hsd_804D7990 == hsd_804D7994 &&
                 CARD_REQUESTS(ctx)[hsd_804D7990].type == CARD_REQ_NONE)
@@ -969,7 +1027,7 @@ void hsd_803AAA48(void)
             hsd_804D799C = 0;
             continue;
         case CARD_CMD_VERIFY_BLOCK:
-            if (hsd_804D7988 == 2) {
+            if (_card_result == 2) {
                 cmd->type = CARD_CMD_NONE;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
                 continue;
@@ -977,7 +1035,7 @@ void hsd_803AAA48(void)
             result = retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                        &cmd->state->file_info);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 continue;
             }
             hsd_804D798C = CARDGetXferredBytes(cmd->state->chan);
@@ -988,7 +1046,7 @@ void hsd_803AAA48(void)
             hsd_804D799C = 1;
             OSRestoreInterrupts(intr2);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 retryCardClose(&cmd->state->file_info);
                 continue;
@@ -998,7 +1056,7 @@ void hsd_803AAA48(void)
             result = retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                        &cmd->state->file_info);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 continue;
             }
             hsd_804D798C = CARDGetXferredBytes(cmd->state->chan);
@@ -1014,14 +1072,14 @@ void hsd_803AAA48(void)
             hsd_804D799C = 1;
             OSRestoreInterrupts(intr2);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 retryCardClose(&cmd->state->file_info);
                 continue;
             }
             return;
         case CARD_CMD_VERIFY_HEADER:
-            if (hsd_804D7988 == 2) {
+            if (_card_result == 2) {
                 cmd->type = CARD_CMD_NONE;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
                 continue;
@@ -1029,7 +1087,7 @@ void hsd_803AAA48(void)
             result = retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                        &cmd->state->file_info);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 continue;
             }
             hsd_804D798C = CARDGetXferredBytes(cmd->state->chan);
@@ -1044,31 +1102,31 @@ void hsd_803AAA48(void)
             hsd_804D799C = 1;
             OSRestoreInterrupts(intr2);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 retryCardClose(&cmd->state->file_info);
                 continue;
             }
             return;
         case CARD_CMD_CHECK_VERIFIED:
-            if (hsd_804D7988 == 2) {
-                hsd_804D7988 = 0;
+            if (_card_result == 2) {
+                _card_result = 0;
                 cmd->type = CARD_CMD_NONE;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
                 continue;
             } else {
-                hsd_804D7988 = 1;
+                _card_result = 1;
                 cmd->type = CARD_CMD_NONE;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
                 continue;
             }
         case CARD_CMD_READ_BLOCK:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 result =
                     retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                       &cmd->state->file_info);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 hsd_804D798C = CARDGetXferredBytes(cmd->state->chan);
@@ -1079,7 +1137,7 @@ void hsd_803AAA48(void)
                 hsd_804D799C = 1;
                 OSRestoreInterrupts(intr2);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     retryCardClose(&cmd->state->file_info);
                     continue;
@@ -1090,12 +1148,12 @@ void hsd_803AAA48(void)
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case CARD_CMD_READ_SECTOR:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 result =
                     retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                       &cmd->state->file_info);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 hsd_804D798C = CARDGetXferredBytes(cmd->state->chan);
@@ -1106,7 +1164,7 @@ void hsd_803AAA48(void)
                 hsd_804D799C = 1;
                 OSRestoreInterrupts(intr2);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     retryCardClose(&cmd->state->file_info);
                     continue;
@@ -1117,14 +1175,14 @@ void hsd_803AAA48(void)
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case CARD_CMD_CLEAR_BUF:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 memset(cmd->clear.data, 0, cmd->clear.size);
             }
             cmd->type = CARD_CMD_NONE;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case CARD_CMD_WRITE_BLOCK:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 s32 hdr_offset;
                 s32 rem;
                 signed int size;
@@ -1132,7 +1190,7 @@ void hsd_803AAA48(void)
                     retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                       &cmd->state->file_info);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 if (cmd->write.block_id > 0) {
@@ -1171,7 +1229,7 @@ void hsd_803AAA48(void)
                 hsd_804D799C = 1;
                 OSRestoreInterrupts(intr2);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     retryCardClose(&cmd->state->file_info);
                     continue;
@@ -1182,12 +1240,12 @@ void hsd_803AAA48(void)
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case CARD_CMD_WRITE_SECTOR:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 result =
                     retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                       &cmd->state->file_info);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 hsd_803B2FA0(cmd->state->sector_buf, cmd->state->sector_size);
@@ -1199,7 +1257,7 @@ void hsd_803AAA48(void)
                 hsd_804D799C = 1;
                 OSRestoreInterrupts(intr2);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     retryCardClose(&cmd->state->file_info);
                     continue;
@@ -1217,25 +1275,25 @@ void hsd_803AAA48(void)
             hsd_804D799C = 1;
             OSRestoreInterrupts(intr2);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 continue;
             }
             return;
         case CARD_CMD_SET_STATUS:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 int k;
                 result = retryCardGetStatus(
                     cmd->state->chan, cmd->state->file_no, &cmd->state->stat);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 cmd->state->stat.commentAddr = 0;
                 cmd->state->stat.iconAddr = 0x40;
                 cmd->state->stat.bannerFormat =
                     (cmd->state->stat.bannerFormat & ~3) |
-                    cmd->state->banner_format;
+                    cmd->state->icon_info.banner_format;
                 k = setupCardIcons(cmd);
                 for (; k < 8; k++) {
                     cmd->state->stat.iconFormat =
@@ -1252,7 +1310,7 @@ void hsd_803AAA48(void)
                 hsd_804D799C = 1;
                 OSRestoreInterrupts(intr2);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     continue;
                 }
@@ -1262,22 +1320,22 @@ void hsd_803AAA48(void)
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case CARD_CMD_WRITE_HEADER:
-            if (hsd_804D7988 != 1) {
+            if (_card_result != 1) {
                 s32 banner_size;
                 s32 pos;
                 result =
                     retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                       &cmd->state->file_info);
                 if (result < 0) {
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
-                switch (cmd->state->banner_format) {
-                case 2:
-                    banner_size = 0x1800;
+                switch (cmd->state->icon_info.banner_format) {
+                case CardBanner_Large:
+                    banner_size = BANNER_LARGE;
                     break;
-                case 1:
-                    banner_size = 0xE00;
+                case CardBanner_Small:
+                    banner_size = BANNER_SMALL;
                     break;
                 default:
                     banner_size = 0;
@@ -1343,7 +1401,7 @@ void hsd_803AAA48(void)
                 if (result < 0) {
                     hsd_804D799C = 0;
                     retryCardClose(&cmd->state->file_info);
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     continue;
                 }
                 return;
@@ -1366,12 +1424,12 @@ void hsd_803AAA48(void)
                 }
             }
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
             } else {
                 unpackCardStat(cmd, &stat);
                 if (stat.iconAddr != 0x40) {
-                    hsd_804D7988 = -0x106;
+                    _card_result = -0x106;
                     hsd_804D799C = 0;
                 } else {
                     cmd->type = CARD_CMD_NONE;
@@ -1384,7 +1442,7 @@ void hsd_803AAA48(void)
             result = retryCardFastOpen(cmd->state->chan, cmd->state->file_no,
                                        &cmd->state->file_info);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 continue;
             }
             intr2 = OSDisableInterrupts();
@@ -1394,7 +1452,7 @@ void hsd_803AAA48(void)
             hsd_804D799C = 1;
             OSRestoreInterrupts(intr2);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 retryCardClose(&cmd->state->file_info);
                 continue;
@@ -1403,7 +1461,7 @@ void hsd_803AAA48(void)
         case CARD_CMD_REPAIR:
             result = fn_803AD16C(cmd->state);
             if (result < 0) {
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
             } else {
                 cmd->type = CARD_CMD_NONE;
@@ -1417,7 +1475,7 @@ void hsd_803AAA48(void)
             result = fn_803ACF30(cmd->state, 0, 0, 0);
             if (result < 0) {
                 fn_803AC2E0();
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 continue;
             }
@@ -1425,7 +1483,7 @@ void hsd_803AAA48(void)
                 result = fn_803AC258(cmd->state, blk);
                 if (result < 0) {
                     fn_803AC2E0();
-                    hsd_804D7988 = result;
+                    _card_result = result;
                     hsd_804D799C = 0;
                     goto next;
                 }
@@ -1433,7 +1491,7 @@ void hsd_803AAA48(void)
             result = fn_803AC2A4(cmd->state);
             if (result < 0) {
                 fn_803AC2E0();
-                hsd_804D7988 = result;
+                _card_result = result;
                 hsd_804D799C = 0;
                 continue;
             }
@@ -1529,9 +1587,9 @@ void fn_803AC334(void)
     hsd_804D7998 = -1;
 }
 
-int hsd_803AC340(void* icon_info)
+int hsd_803AC340(CardIconInfo* icon_info)
 {
-    u8* data = icon_info;
+    u8* data = (void*) icon_info;
     int banner_size;
     int icon_size;
     int has_c8;
@@ -1939,12 +1997,12 @@ s32 fn_803ACD58(CardState* state, void* banner, void* icons)
     s32 i;
     s32 icons_start;
 
-    switch (state->banner_format) {
-    case 2:
-        banner_size = 0x1800;
+    switch (state->icon_info.banner_format) {
+    case CardBanner_Large:
+        banner_size = BANNER_LARGE;
         break;
-    case 1:
-        banner_size = 0xE00;
+    case CardBanner_Small:
+        banner_size = BANNER_SMALL;
         break;
     default:
         banner_size = 0;
@@ -2952,7 +3010,7 @@ static inline void fn_803AE7F8_close(CardState* state)
     }
 }
 
-int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf, int async,
+int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf, bool async,
                 CardCallback callback)
 {
     CardState* st = state;
@@ -3577,7 +3635,7 @@ static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
     *total_blocks = fn_803AC7DC(state);
 }
 
-int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf, int async,
+int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf, bool async,
                 CardCallback callback)
 {
     CardContext* ctx = (CardContext*) &hsd_804D1138;
@@ -4017,7 +4075,7 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 phys,
     return result;
 }
 
-int fn_803B0120(CardState* state, s32 file_idx, u8* buf, int async,
+int fn_803B0120(CardState* state, s32 file_idx, u8* buf, bool async,
                 CardCallback callback)
 {
     CardContext* ctx = (CardContext*) &hsd_804D1138;
@@ -4442,7 +4500,7 @@ int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
     s32 has_blocks;
     u32 sector_size;
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
 
     if (is_new == 0) {
         if (async != 0) {
@@ -4539,20 +4597,20 @@ int fn_803B0E9C(CardState* state, void* banner, u8* icons, int is_new,
         }
     }
 
-    memcpy(state->sector_buf, state->comment, 0x40);
+    memcpy(state->sector_buf, state->comment, sizeof(state->comment));
     payload_pos = 0x40;
-    switch (state->banner_format) {
-    case 2: {
+    switch (state->icon_info.banner_format) {
+    case CardBanner_Large: {
         void* dst = state->sector_buf + 0x40;
-        memcpy(dst, banner, 0x1800);
+        memcpy(dst, banner, BANNER_LARGE);
     }
-        payload_pos = 0x1840;
+        payload_pos = BANNER_LARGE + sizeof(state->comment);
         break;
-    case 1: {
+    case CardBanner_Small: {
         void* dst = state->sector_buf + 0x40;
-        memcpy(dst, banner, 0xE00);
+        memcpy(dst, banner, BANNER_SMALL);
     }
-        payload_pos = 0xE40;
+        payload_pos = BANNER_SMALL + sizeof(state->comment);
         break;
     }
 
@@ -5206,12 +5264,12 @@ void hsd_803B2374(void)
     for (i = 0; i < 128; i++) {
         hsd_804D1148[i].type = CARD_CMD_NONE;
     }
-    hsd_804D7988 = 0;
+    _card_result = 0;
 }
 
 void hsd_803B24E4(CardState* state, int chan, int sector_size, void* work_buf)
 {
-    memset(state, 0, sizeof(CardState));
+    memset(state, 0, sizeof(*state));
     state->file_no = -1;
     state->chan = chan;
     state->sector_size = sector_size;
@@ -5296,7 +5354,7 @@ int hsd_803B2674(CardState* state)
 {
     s32 blocks;
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
 
     blocks =
         (0x2F + state->header_size + state->sector_size) / state->sector_size;
@@ -5312,7 +5370,7 @@ int fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
     CardContext* context = (CardContext*) &hsd_804D1138;
     PAD_STACK(8);
 
-    state->header_size = hsd_803AC340(&state->banner_format);
+    state->header_size = hsd_803AC340(&state->icon_info);
     hsd_804D7998 = hsd_804D7984;
 
     result = queueHeaderBlocks(state, comment, banner, icons);

@@ -1,6 +1,9 @@
 #include "lbcardnew.h"
 
+#include <Runtime/platform.h>
+
 #include <ctype.h>
+#include <placeholder.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,6 +13,18 @@
 #include <sysdolphin/baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
+
+#define SECTOR_SIZE 0x2000
+
+typedef enum {
+    error_ok = 0,
+    error_null_filename = 7,
+    error_bad_sector_size = 12,
+} cardError;
+
+typedef enum {
+    result_pending_ops = 11,
+} cardResult;
 
 /// Operations dispatched by lb_80019CB0. Values describe observed behavior;
 /// they are separate from task result codes and the HSD request/command tags.
@@ -42,8 +57,8 @@ struct CardTask {
     /* 0x00 */ CardTaskType type;
     /// Bit i permits this task to run after result i.
     /* 0x04 */ int result_mask;
-    /* 0x08 */ UNK_T x8;
-    /* 0x0C */ char* xC;
+    /* 0x08 */ void* file_entries;
+    /* 0x0C */ char* filename_ptr;
     /// Copies are limited to CARD_FILENAME_MAX; the extra bytes stay zero
     /// in the static task storage to terminate full-length filenames.
     /* 0x10 */ char filename[CARD_FILENAME_MAX + 1];
@@ -59,7 +74,7 @@ struct lb_80432A68_t {
     /* 0x004 */ UNK_T lib_area;
     /* 0x008 */ int chan;
     /* 0x00C */ UNK_T unk_C;
-    /* 0x010 */ const char* unk_10;
+    /* 0x010 */ int* status;
     /* 0x014 */ char* comment;
     /* 0x018 */ void* banner;
     /* 0x01C */ void* icons;
@@ -69,7 +84,7 @@ struct lb_80432A68_t {
     /* 0x02C */ char x2C[2];
     /* 0x02E */ char x2E;
     /* 0x02F */ char x2F[4];
-    /* 0x034 */ s32 unk_34;
+    /* 0x034 */ s32 saved_error;
     /* 0x038 */ struct lb_80432A68_38_t unk_38[9];
     /* 0x080 */ s32 unk_80;
     /* 0x084 */ s32 memsize;
@@ -80,11 +95,13 @@ struct lb_80432A68_t {
     /* 0x0A8 */ CardState card_state;
     /* 0x50C */ void (*x50C)(int);
     /* 0x510 */ struct CardTask task_array[LbCardNewTaskArray_Max];
-    /* 0x8AC */ int x8AC;
+    /* 0x8AC */ int pending_ops;
 }; /* size = 0x8B0 */
 ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
 ASSERT_OFFSET(struct lb_80432A68_t, card_state, 0xA8);
 ASSERT_OFFSET(struct lb_80432A68_t, x50C, 0x50C);
+
+/* 019C38 */ static struct CardTask* lb_80019C38(void);
 
 /* 432A68 */ static struct lb_80432A68_t lb_80432A68;
 
@@ -114,8 +131,7 @@ int lb_80019BB8(int card_result)
     }
 }
 
-struct CardTask* lb_80019C38_noinline(void);
-struct CardTask* lb_80019C38_noinline(void)
+static struct CardTask* lb_80019C38_noinline(void)
 {
     return lb_80019C38();
 }
@@ -131,7 +147,7 @@ struct CardTask* lb_80019C38(void)
             break;
         }
     }
-    HSD_ASSERT(0x154, i != LbCardNewTaskArray_Max);
+    HSD_ASSERT(340, i != LbCardNewTaskArray_Max);
     return result;
 }
 
@@ -167,7 +183,8 @@ int lb_80019CB0(int result)
                     result = lb_8001A3A4();
                     break;
                 case CARD_TASK_OPEN_FILE:
-                    result = lb_8001A594(task->xC, task->x8);
+                    result =
+                        lb_8001A594(task->filename_ptr, task->file_entries);
                     break;
                 case CARD_TASK_UNK_0x03:
                     result = lb_8001A860();
@@ -185,10 +202,10 @@ int lb_80019CB0(int result)
                     result = lb_8001AC04(task->filename);
                     break;
                 case CARD_TASK_READ_FILES:
-                    result = lb_8001ACEC(task->x8);
+                    result = lb_8001ACEC(task->file_entries);
                     break;
                 case CARD_TASK_WRITE_FILES:
-                    result = lb_8001AE38(task->x8);
+                    result = lb_8001AE38(task->file_entries);
                     break;
                 case CARD_TASK_SET_STATUS:
                     result = lb_8001AF84();
@@ -206,18 +223,18 @@ int lb_80019CB0(int result)
                     break;
                 }
                 task->type = CARD_TASK_NONE;
-                if (result != 11) {
+                if (result != result_pending_ops) {
                     continue;
                 }
             }
         }
         break;
     }
-    if (result != 11 && _p(x50C) != NULL) {
+    if (result != result_pending_ops && _p(x50C) != NULL) {
         _p(x50C)(result);
         _p(x50C) = NULL;
     }
-    if (result != 11 && _p(unk_80) != 0) {
+    if (result != result_pending_ops && _p(unk_80) != 0) {
         CARDUnmount(_p(chan));
         _p(unk_80) = 0;
     }
@@ -230,17 +247,17 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
 
     _p(chan) = chan;
     _p(unk_C) = save_data;
-    _p(unk_10) = status_out;
+    _p(status) = status_out;
     _p(comment) = NULL;
     _p(banner) = NULL;
     _p(icons) = NULL;
     _p(snapshot_entries) = NULL;
     _p(free_blocks) = NULL;
     _p(free_files) = NULL;
-    _p(unk_34) = 0x10;
+    _p(saved_error) = 16;
 
-    for (i = 0; i < 9; i++) {
-        _p(unk_38)[i].unk_0 = 0x10;
+    for (i = 0; i < (ssize_t) ARRAY_SIZE(_p(unk_38)); i++) {
+        _p(unk_38)[i].card_error = 16;
         _p(unk_38)[i].unk_4 = -1;
     }
 
@@ -250,16 +267,14 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     reset_task_array();
 }
 
-void fn_8001A008(s32 unused, s32 card_result)
+static void onCardComplete(UNUSED s32 chan, s32 result)
 {
-    s32 error;
-
-    error = lb_80019BB8(card_result);
+    s32 error = lb_80019BB8(result);
 
     if (error != 0) {
-        _p(unk_34) = error;
+        _p(saved_error) = error;
     }
-    _p(x8AC) -= 1;
+    _p(pending_ops) -= 1;
 }
 
 static int convert_hsdcard_error(int hsd_error)
@@ -300,56 +315,53 @@ void fn_8001A0B0(int file_idx, int hsd_error)
 
     error = convert_hsdcard_error(hsd_error);
 
-    _p(unk_38)[file_idx].unk_0 = error;
+    _p(unk_38)[file_idx].card_error = error;
     _p(unk_38)[file_idx].unk_4 = hsd_error;
     if (error != 0) {
-        _p(unk_34) = error;
+        _p(saved_error) = error;
     }
-    _p(x8AC) -= 1;
+    _p(pending_ops) -= 1;
 }
 
 int lb_8001A184(void)
 {
-    s32 pending_ops;
-    s32 saved_error;
-    s32 probe_result;
-    s32 mount_result;
-    s32 unused;
-    s32 enabled;
-    s32 did_disable;
-    s32 result;
-    u8 _[8];
+    int pending_ops;
+    int saved_error;
+    int probe_result;
+    int mount_result;
+    bool enabled;
+    int did_disable;
+    PAD_STACK(3 * 4);
 
-    result = 0;
     did_disable = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     probe_result = CARDProbeEx(_p(chan), &_p(memsize), &_p(sectorsize));
-    _p(unk_34) = lb_80019BB8(probe_result);
-    if (_p(unk_34) == 0) {
-        if (_p(unk_10) != NULL) {
-            *(s32*) _p(unk_10) = 0;
+    _p(saved_error) = lb_80019BB8(probe_result);
+    if (_p(saved_error) == 0) {
+        if (_p(status) != NULL) {
+            *_p(status) = 0;
         }
-        HSD_ASSERT(0x23F, _p(work_area));
+        HSD_ASSERT(575, _p(work_area));
         enabled = OSDisableInterrupts();
-        did_disable = 1;
+        did_disable = true;
         mount_result =
-            CARDMountAsync(_p(chan), _p(work_area), NULL, fn_8001A008);
+            CARDMountAsync(_p(chan), _p(work_area), NULL, onCardComplete);
 
-        _p(unk_34) = lb_80019BB8(mount_result);
+        _p(saved_error) = lb_80019BB8(mount_result);
         if (mount_result == 0 || mount_result == -6 || mount_result == -0xD) {
-            _p(unk_80) = 1;
+            _p(unk_80) = true;
         }
-        if (_p(unk_34) == 0) {
-            _p(x8AC) += 1;
+        if (_p(saved_error) == 0) {
+            _p(pending_ops) += 1;
         }
     }
-    pending_ops = _p(x8AC);
-    saved_error = _p(unk_34);
-    if (did_disable != 0) {
+    pending_ops = _p(pending_ops);
+    saved_error = _p(saved_error);
+    if (did_disable) {
         OSRestoreInterrupts(enabled);
     }
-    if (pending_ops != 0) {
-        return 0xB;
+    if (pending_ops) {
+        return result_pending_ops;
     }
     return saved_error;
 }
@@ -358,39 +370,37 @@ int lb_8001A3A4(void)
 {
     int pending_ops;
     int saved_error;
-    int unused;
     int enabled;
     int check_result;
-    u8 _[8];
-
-    unused = 0;
-    _p(x8AC) = 0;
+    PAD_STACK(4 * 4);
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    check_result = CARDCheckAsync(_p(chan), fn_8001A008);
-    _p(unk_34) = lb_80019BB8(check_result);
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    check_result = CARDCheckAsync(_p(chan), onCardComplete);
+    _p(saved_error) = lb_80019BB8(check_result);
+    if (_p(saved_error) == error_ok) {
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
-    saved_error = _p(unk_34);
+    pending_ops = _p(pending_ops);
+    saved_error = _p(saved_error);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
-        return 0xB;
+        return result_pending_ops;
     }
     return saved_error;
 }
 
-void lb_8001A4CC(const char* filename, UNK_T file_entries)
+void lb_8001A4CC(const char* filename, void* file_entries)
 {
     struct CardTask* task = lb_80019C38();
     task->type = CARD_TASK_OPEN_FILE;
     task->result_mask = 1;
     if (filename != NULL) {
-        strncpy(task->xC = task->filename, filename, CARD_FILENAME_MAX);
+        strncpy(task->filename_ptr = task->filename, filename,
+                CARD_FILENAME_MAX);
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
 }
 
 struct SnapshotNode {
@@ -400,12 +410,12 @@ struct SnapshotNode {
     u16 blocks;
 };
 
-static inline void setup_card_entries(CardState* ctx, void* icon,
-                                      struct CardEntry* entry)
+static inline void setupCardEntries(CardState* ctx, void* icon,
+                                    struct CardEntry* entry)
 {
     int i;
 
-    hsd_803B2ADC(ctx, icon);
+    hsd_SetCardIconInfo(ctx, icon);
     i = 0;
     while (entry->file_size != -1) {
         if (entry->file_size != 0) {
@@ -429,17 +439,17 @@ int lb_8001A594(char* filename, void* file_entries)
     u8 _[8];
 
     unused_2 = 0;
-    _p(x8AC) = 0;
-    if (_p(sectorsize) != 0x2000) {
-        _p(unk_34) = 0xC;
+    _p(pending_ops) = 0;
+    if (_p(sectorsize) != SECTOR_SIZE) {
+        _p(saved_error) = error_bad_sector_size;
     } else {
         free_result =
             CARDFreeBlocks(_p(chan), &_p(unused_bytes), &_p(unused_files));
 
-        _p(unk_34) = lb_80019BB8(free_result);
-        if (_p(unk_34) == 0) {
+        _p(saved_error) = lb_80019BB8(free_result);
+        if (_p(saved_error) == 0) {
             if (filename == NULL) {
-                _p(unk_34) = 7;
+                _p(saved_error) = error_null_filename;
             } else {
                 open_result = CARDOpen(_p(chan), filename, &_p(file_info));
                 CARDClose(&_p(file_info));
@@ -449,46 +459,45 @@ int lb_8001A594(char* filename, void* file_entries)
                     hsd_result =
                         hsd_803B2550(&_p(card_state), filename, fn_8001A0B0);
 
-                    _p(unk_34) = convert_hsdcard_error(hsd_result);
-                    if (_p(unk_34) == 0) {
-                        _p(x8AC) += 1;
+                    _p(saved_error) = convert_hsdcard_error(hsd_result);
+                    if (_p(saved_error) == 0) {
+                        _p(pending_ops) += 1;
                     }
                 } else if (file_entries == NULL) {
-                    _p(unk_34) = 4;
+                    _p(saved_error) = 4;
                 } else if (_p(unused_files) == 0) {
-                    _p(unk_34) = 6;
+                    _p(saved_error) = 6;
                 } else {
-                    setup_card_entries(&_p(card_state), _p(unk_C),
-                                       file_entries);
+                    setupCardEntries(&_p(card_state), _p(unk_C), file_entries);
                     if (_p(unused_bytes) <
                         (hsd_803B2674(&_p(card_state)) << 0xD))
                     {
-                        _p(unk_34) = 5;
+                        _p(saved_error) = 5;
                     } else {
-                        _p(unk_34) = 4;
+                        _p(saved_error) = 4;
                     }
                 }
             }
         }
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001A860(void)
 {
-    _p(x8AC) = 0;
-    switch (_p(unk_34)) {
+    _p(pending_ops) = 0;
+    switch (_p(saved_error)) {
     case 1:
         break;
     case 0:
     case 2:
-        _p(unk_34) = 1;
+        _p(saved_error) = 1;
         break;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001A8A4(void)
@@ -502,24 +511,24 @@ int lb_8001A8A4(void)
 
     unused = 0;
     did_disable = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     if (_p(unk_80) != 0) {
         enabled = OSDisableInterrupts();
         did_disable = 1;
-        format_result = CARDFormatAsync(_p(chan), fn_8001A008);
+        format_result = CARDFormatAsync(_p(chan), onCardComplete);
 
-        _p(unk_34) = lb_80019BB8(format_result);
-        if (_p(unk_34) == 0) {
-            _p(x8AC) += 1;
+        _p(saved_error) = lb_80019BB8(format_result);
+        if (_p(saved_error) == 0) {
+            _p(pending_ops) += 1;
         }
     }
-    pending_ops = _p(x8AC);
-    saved_error = _p(unk_34);
+    pending_ops = _p(pending_ops);
+    saved_error = _p(saved_error);
     if (did_disable != 0) {
         OSRestoreInterrupts(enabled);
     }
     if (pending_ops != 0) {
-        return 0xB;
+        return result_pending_ops;
     }
     return saved_error;
 }
@@ -534,19 +543,19 @@ int lb_8001A9CC(char* filename)
     u8 _[8];
 
     unused = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    delete_result = CARDDeleteAsync(_p(chan), filename, fn_8001A008);
+    delete_result = CARDDeleteAsync(_p(chan), filename, onCardComplete);
 
-    _p(unk_34) = lb_80019BB8(delete_result);
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    _p(saved_error) = lb_80019BB8(delete_result);
+    if (_p(saved_error) == 0) {
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
-    saved_error = _p(unk_34);
+    pending_ops = _p(pending_ops);
+    saved_error = _p(saved_error);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
-        return 0xB;
+        return result_pending_ops;
     }
     return saved_error;
 }
@@ -561,18 +570,19 @@ int lb_8001AAE4(const char* old_name, const char* new_name)
     u8 _[8];
 
     unused = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     enabled = OSDisableInterrupts();
-    rename_result = CARDRenameAsync(_p(chan), old_name, new_name, fn_8001A008);
-    _p(unk_34) = lb_80019BB8(rename_result);
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    rename_result =
+        CARDRenameAsync(_p(chan), old_name, new_name, onCardComplete);
+    _p(saved_error) = lb_80019BB8(rename_result);
+    if (_p(saved_error) == 0) {
+        _p(pending_ops) += 1;
     }
-    pending_ops = _p(x8AC);
-    saved_error = _p(unk_34);
+    pending_ops = _p(pending_ops);
+    saved_error = _p(saved_error);
     OSRestoreInterrupts(enabled);
     if (pending_ops != 0) {
-        return 0xB;
+        return result_pending_ops;
     }
     return saved_error;
 }
@@ -584,14 +594,14 @@ int lb_8001AC04(const char* filename)
 
     hsd_result = hsd_803B286C(&_p(card_state), filename, _p(comment),
                               _p(banner), _p(icons), fn_8001A0B0);
-    _p(unk_34) = convert_hsdcard_error(hsd_result);
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    _p(saved_error) = convert_hsdcard_error(hsd_result);
+    if (_p(saved_error) == 0) {
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 /// Preserve the volatile file-size reads in the request builders.
@@ -611,27 +621,27 @@ int lb_8001ACEC(UNK_T file_entries)
     volatile int pad_stack;
     volatile int cached_data;
 
-    _p(unk_34) = 0;
+    _p(saved_error) = 0;
     for (i = 0; i < 9; i++) {
         cached_flag = readCardFileSize(&_p(card_state).file_sizes[i]);
         cached_data = _p(card_state).file_flags[i];
         if (readCardFileSize(&_p(card_state).file_sizes[i]) != 0) {
             hsd_result =
                 hsd_803B29D8(&_p(card_state), i, entries[i].data, fn_8001A0B0);
-            _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
+            _p(unk_38)[i].card_error = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
-            file_error = _p(unk_38)[i].unk_0;
+            file_error = _p(unk_38)[i].card_error;
             if (file_error == 0) {
-                _p(x8AC) += 1;
+                _p(pending_ops) += 1;
             } else {
-                _p(unk_34) = file_error;
+                _p(saved_error) = file_error;
             }
         }
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001AE38(UNK_T file_entries)
@@ -645,27 +655,27 @@ int lb_8001AE38(UNK_T file_entries)
     volatile int pad_stack;
     volatile int cached_data;
 
-    _p(unk_34) = 0;
+    _p(saved_error) = 0;
     for (i = 0; i < 9; i++) {
         cached_flag = readCardFileSize(&_p(card_state).file_sizes[i]);
         cached_data = _p(card_state).file_flags[i];
         if (readCardFileSize(&_p(card_state).file_sizes[i]) != 0) {
             hsd_result =
                 hsd_803B2A4C(&_p(card_state), i, entries[i].data, fn_8001A0B0);
-            _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
+            _p(unk_38)[i].card_error = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
-            file_error = _p(unk_38)[i].unk_0;
+            file_error = _p(unk_38)[i].card_error;
             if (file_error == 0) {
-                _p(x8AC) += 1;
+                _p(pending_ops) += 1;
             } else {
-                _p(unk_34) = file_error;
+                _p(saved_error) = file_error;
             }
         }
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001AF84(void)
@@ -673,15 +683,15 @@ int lb_8001AF84(void)
     int hsd_result = hsd_803B2928(&_p(card_state), _p(comment), _p(banner),
                                   _p(icons), fn_8001A0B0);
 
-    _p(unk_34) = convert_hsdcard_error(hsd_result);
+    _p(saved_error) = convert_hsdcard_error(hsd_result);
 
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    if (_p(saved_error) == 0) {
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001B068(void)
@@ -689,15 +699,15 @@ int lb_8001B068(void)
     int hsd_result = hsd_803B27F4(&_p(card_state), _p(comment), _p(banner),
                                   _p(icons), fn_8001A0B0);
 
-    _p(unk_34) = convert_hsdcard_error(hsd_result);
+    _p(saved_error) = convert_hsdcard_error(hsd_result);
 
-    if (_p(unk_34) == 0) {
-        _p(x8AC) += 1;
+    if (_p(saved_error) == 0) {
+        _p(pending_ops) += 1;
     }
-    if (_p(x8AC) != 0) {
-        return 0xB;
+    if (_p(pending_ops) != 0) {
+        return result_pending_ops;
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 int lb_8001B14C(void)
@@ -717,7 +727,7 @@ int lb_8001B14C(void)
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     if (_p(free_blocks) != NULL) {
         *_p(free_blocks) = _p(unused_bytes) / 0x2000;
     }
@@ -759,8 +769,8 @@ int lb_8001B14C(void)
         _p(snapshot_entries)[i].file_no = -1;
     }
     HSD_Free(nodes);
-    _p(unk_34) = 0;
-    return _p(unk_34);
+    _p(saved_error) = 0;
+    return _p(saved_error);
 }
 
 int lb_8001B614(const char* filename)
@@ -769,29 +779,29 @@ int lb_8001B614(const char* filename)
     int fileno;
 
     fileno = 0;
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
     for (;;) {
         if (CARDGetStatus(_p(chan), fileno, &card_stat) == 0 &&
             strncmp((const char*) card_stat.company, _p(x2C), 2) == 0 &&
             strncmp((const char*) card_stat.gameName, _p(x2F), 4) == 0 &&
             strcmp(card_stat.fileName, filename) == 0)
         {
-            _p(unk_34) = 0;
+            _p(saved_error) = 0;
             break;
         } else {
             fileno += 1;
             if (fileno >= 0x7F) {
-                _p(unk_34) = 0xD;
+                _p(saved_error) = 0xD;
                 break;
             }
         }
     }
-    return _p(unk_34);
+    return _p(saved_error);
 }
 
 s32 lb_8001B6E0(s32 file_idx)
 {
-    return _p(unk_38)[file_idx].unk_0;
+    return _p(unk_38)[file_idx].card_error;
 }
 
 int lb_8001B6F8(void)
@@ -801,13 +811,13 @@ int lb_8001B6F8(void)
 
     hsd_803AAA48();
     enabled = OSDisableInterrupts();
-    if (_p(x8AC) != 0) {
-        result = 0xB;
+    if (_p(pending_ops) != 0) {
+        result = result_pending_ops;
     } else {
-        result = _p(unk_34);
+        result = _p(saved_error);
     }
     OSRestoreInterrupts(enabled);
-    if (result != 0xB) {
+    if (result != result_pending_ops) {
         result = lb_80019CB0(result);
     }
     return result;
@@ -851,7 +861,7 @@ u32 lb_8001B7E0(int chan, char* filename, void* file_entries, void* save_data,
     setup_task(CARD_TASK_UNK_0x03, -1);
 
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -871,7 +881,7 @@ int lb_8001B8C8(int chan)
     setup_task(CARD_TASK_FORMAT_CARD, -1);
 
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -905,7 +915,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     strncpy(setup_task(CARD_TASK_DELETE_FILE, 0xE)->filename, filename,
             CARD_FILENAME_MAX);
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -962,7 +972,7 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
     _p(icons) = icons;
     result = lb_80019CB0(0x10);
 
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -984,10 +994,10 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     setup_task(CARD_TASK_CHECK_CARD, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(CARD_TASK_UNK_0x03, -1);
-    setup_task(CARD_TASK_READ_FILES, 3)->x8 = file_entries;
+    setup_task(CARD_TASK_READ_FILES, 3)->file_entries = file_entries;
 
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -1024,7 +1034,7 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     task = lb_80019C38();
     task->type = CARD_TASK_WRITE_FILES;
     task->result_mask = 3;
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
     return lb_80019CB0(0x10);
 }
 #ifdef MUST_MATCH
@@ -1055,7 +1065,7 @@ int lb_8001BF04(int chan, char* filename, void* file_entries, char* comment,
     task = lb_80019C38_noinline();
     task->type = CARD_TASK_READ_FILES;
     task->result_mask = 3;
-    task->x8 = file_entries;
+    task->file_entries = file_entries;
     return lb_80019CB0(0x10);
 }
 
@@ -1075,7 +1085,7 @@ int lb_8001BFD8(int chan, lbCardNew_SnapshotEntry* snapshot_entries,
     _p(free_blocks) = free_blocks;
     _p(free_files) = free_files;
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -1107,12 +1117,12 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task->type = CARD_TASK_OPEN_FILE;
     task->result_mask = 1;
     if (name_b != NULL) {
-        task->xC = task->filename;
+        task->filename_ptr = task->filename;
         strncpy(task->filename, name_b, CARD_FILENAME_MAX);
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
-    task->x8 = 0;
+    task->file_entries = 0;
     task = lb_80019C38_noinline();
     task->type = CARD_TASK_UNK_0x03;
     task->result_mask = -1;
@@ -1125,12 +1135,12 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task->type = CARD_TASK_OPEN_FILE;
     task->result_mask = 1;
     if (name_c != NULL) {
-        task->xC = task->filename;
+        task->filename_ptr = task->filename;
         strncpy(task->filename, name_c, CARD_FILENAME_MAX);
     } else {
-        task->xC = NULL;
+        task->filename_ptr = NULL;
     }
-    task->x8 = 0;
+    task->file_entries = 0;
     task = lb_80019C38_noinline();
     task->type = CARD_TASK_UNK_0x03;
     task->result_mask = -1;
@@ -1163,7 +1173,7 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     strncpy(_p(x2F), game_name, 4U);
     strncpy(task->filename, filename, CARD_FILENAME_MAX);
     result = lb_80019CB0(0x10);
-    if (result == 0xB) {
+    if (result == result_pending_ops) {
         while ((result = lb_8001B6F8()) == 11) {
         }
     }
@@ -1186,7 +1196,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
     entry = file_entries;
     ctx = &_p(card_state);
     hsd_803B24E4(ctx, 0, 0x2000, _p(lib_area));
-    hsd_803B2ADC(ctx, icon);
+    hsd_SetCardIconInfo(ctx, icon);
     {
         int i;
 
@@ -1220,5 +1230,5 @@ void lb_8001C5BC(void)
 {
     hsd_803B2374();
     lb_80019EF0(0, NULL, NULL, NULL);
-    _p(x8AC) = 0;
+    _p(pending_ops) = 0;
 }

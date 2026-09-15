@@ -29,6 +29,7 @@
 /// Queues a logical-file write from the borrowed source buffer.
 /* 3B2A4C */ int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
                               CardCallback callback);
-/* 3B2ADC */ int hsd_803B2ADC(CardState* state, UNK_T data);
+/* 3B2ADC */ int hsd_SetCardIconInfo(CardState* state,
+                                     CardIconInfo* icon_info);
 
 #endif

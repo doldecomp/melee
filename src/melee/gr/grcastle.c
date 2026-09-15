@@ -1318,7 +1318,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
         gp->u.castle.xC8 = -1;
         gp->u.castle11.xCA = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        grAnime_801C86D4(gp->map_id, (HSD_GObj*) gobj, 0);
+        grAnime_801C86D4(gp->map_id, gobj, 0);
         gp->u.castle5.xC4 = 2;
         /* fallthrough */
     case 2: {

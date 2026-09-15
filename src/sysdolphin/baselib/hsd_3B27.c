@@ -157,9 +157,9 @@ int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
     return 0;
 }
 
-int hsd_803B2ADC(CardState* state, UNK_T data)
+int hsd_SetCardIconInfo(CardState* state, CardIconInfo* icon_info)
 {
-    memcpy(&state->banner_format, data, 18);
-    state->header_size = hsd_803AC340(&state->banner_format);
+    memcpy(&state->icon_info, icon_info, sizeof(state->icon_info));
+    state->header_size = hsd_803AC340(&state->icon_info);
     return 0;
 }

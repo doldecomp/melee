@@ -14,11 +14,9 @@ struct CardEntry {
 };
 
 /* 019BB8 */ int lb_80019BB8(int card_result);
-/* 019C38 */ struct CardTask* lb_80019C38(void);
 /* 019CB0 */ int lb_80019CB0(int result);
 /* 019EF0 */ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out,
                               UNK_T callback);
-/* 01A008 */ void fn_8001A008(s32 unused, s32 card_result);
 /* 01A0B0 */ void fn_8001A0B0(int file_idx, int hsd_error);
 /* 01A184 */ int lb_8001A184(void);
 /* 01A3A4 */ int lb_8001A3A4(void);

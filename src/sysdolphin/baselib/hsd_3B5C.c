@@ -2,15 +2,10 @@
 #include <setjmp.h>
 
 #include "hsd_3B34.h"
+#include "hsd_3A94.h"
 
 jmp_buf hsd_804D2E70;
 u8 hsd_804D2F68[0x70C];
-
-extern u8* hsd_804D79B8;
-extern u8* hsd_804D79BC;
-extern s32 hsd_804D79C0;
-extern s32 hsd_804D79C4;
-extern u8 hsd_804D79C8;
 
 typedef struct JpegWorkData {
     s32 luma[0x100];
@@ -167,17 +162,17 @@ static inline s32 hsd_803B5C4C_read(s32 bits, s32 bit_count)
         if (hsd_804D79C4 == 0) {
             hsd_804D79C4 = 8;
             if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
-                longjmp(hsd_804D2E70, 1);
+                __longjmp(&hsd_804D2E70, 1);
             }
             next_byte = hsd_804D79B8;
             hsd_804D79B8 = next_byte + 1;
             hsd_804D79C8 = *next_byte;
             if (hsd_804D79C8 == 0xFF) {
                 if ((*hsd_804D79B8) != 0) {
-                    longjmp(hsd_804D2E70, 1);
+                    __longjmp(&hsd_804D2E70, 1);
                 } else {
                     if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
-                        longjmp(hsd_804D2E70, 1);
+                        __longjmp(&hsd_804D2E70, 1);
                     }
                     hsd_804D79B8 += 1;
                 }
@@ -707,7 +702,7 @@ find_luma_quant:
         }
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
+            __longjmp(&state.work->jmp, 1);
         } else {
             goto find_luma_quant;
         }
@@ -767,7 +762,7 @@ find_chroma_quant:
         }
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
+            __longjmp(&state.work->jmp, 1);
         } else {
             goto find_chroma_quant;
         }
@@ -782,7 +777,7 @@ find_frame:
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
+            __longjmp(&state.work->jmp, 1);
         } else {
             goto find_frame;
         }
@@ -794,7 +789,7 @@ find_scan:
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= src_byte0) {
-            longjmp(state.work->jmp, 1);
+            __longjmp(&state.work->jmp, 1);
         } else {
             goto find_scan;
         }

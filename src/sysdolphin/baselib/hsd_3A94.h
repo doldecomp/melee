@@ -5,6 +5,14 @@
 
 #include <dolphin/card.h>
 
+typedef struct {
+    u8 banner_format;
+    u8 unused;
+    u8 icon_format[8];
+    u8 icon_speed[8];
+} CardIconInfo;
+ASSERT_SIZE(CardIconInfo, 0x12);
+
 /// One CARD file containing up to nine logical files. file_idx selects a
 /// logical file; file_no is the SDK directory-entry number. Block positions
 /// (phys) are relative to this CARD file, not hardware sector addresses.
@@ -16,7 +24,7 @@ typedef struct CardState {
     /* 0x20 */ s32 file_no;
     /// Bytes of comment + banner + icons; the 0x30-byte digest follows.
     /* 0x24 */ u32 header_size;
-    /* 0x28 */ int file_flags[9];
+    /* 0x28 */ int file_flags[9]; ///< @todo enum, not flags
     /* 0x4C */ int file_sizes[9];
     /* 0x70 */ u8* file_data[9];
     /* 0x94 */ u8 pad_94[0xDC];
@@ -24,12 +32,8 @@ typedef struct CardState {
     /// -0x7FFF = free.
     /* 0x170 */ s32 block_ids[64];
     /* 0x270 */ s32 block_seqs[64];
-    /* 0x370 */ u8 comment[0x40];
-    /* 0x3B0 */ u8 banner_format;
-    /* 0x3B1 */ u8 pad_3B1[1];
-    /* 0x3B2 */ u8 icon_format[8];
-    /* 0x3BA */ u8 icon_speed[8];
-    /* 0x3C2 */ u8 pad_3C2[2];
+    /* 0x370 */ char comment[64];
+    /* 0x3B0 */ CardIconInfo icon_info;
     /* 0x3C4 */ CARDStat stat;
     /* 0x430 */ u8 digest[0x30];
     /// Physical blocks 1..num_blocks each fill a sector; block 0 shares the
@@ -276,68 +280,23 @@ ASSERT_SIZE(CardContext, 0x1510);
 ASSERT_OFFSET(CardContext, cmds, 0x10);
 ASSERT_OFFSET(CardContext, requests, 0x1210);
 
-/* 3AA790 */ int fn_803AA790(void);
 /// Drives queued requests and commands until idle or waiting for CARD I/O.
 /// Async CARD calls start with interrupts disabled; the busy flag is set
 /// after the call returns, before interrupts are restored. CARD completion
 /// callbacks must therefore not run inline from those calls.
 /* 3AAA48 */ void hsd_803AAA48(void);
-/// Copies the command into the ring; pointed-to state and buffers are not
-/// copied and must remain valid until execution completes. Returns 0 when
-/// queued, or -265 when the ring is full.
-/* 3AC168 */ int fn_803AC168(const CardCmd* cmd);
-/* 3AC258 */ s32 fn_803AC258(CardState* state, s32 block_idx);
-/* 3AC2A4 */ s32 fn_803AC2A4(CardState* state);
-/* 3AC2D4 */ void fn_803AC2D4(void);
-/* 3AC2E0 */ void fn_803AC2E0(void);
-/* 3AC334 */ void fn_803AC334(void);
-/* 3AC340 */ int hsd_803AC340(void* icon_info);
+/* 3AC340 */ int hsd_803AC340(CardIconInfo* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
                                int file_flags, u8* data);
-/* 3AC3F8 */ void fn_803AC3F8(CardState* state, u8* data, s32 file_idx);
-/* 3AC558 */ void hsd_803AC558(CardState* state, u8* data);
-/* 3AC634 */ u32 fn_803AC634(CardState* state, s32 file_idx);
-/* 3AC6B8 */ s32 fn_803AC6B8(CardState* state, s32 file_idx);
-/* 3AC7DC */ s32 fn_803AC7DC(CardState*);
-/* 3ACBE8 */ s32 fn_803ACBE8(CardState* state, s32 block_idx);
-/* 3ACC0C */ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id,
-                             s32 seq_num, void* expected_data, s32 data_size);
-/* 3ACD58 */ s32 fn_803ACD58(CardState* state, void* banner, void* icons);
-/* 3ACF30 */ s32 fn_803ACF30(CardState* state, void* comment, void* banner,
-                             void* icons);
-/* 3ACFC0 */ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 block_id,
-                             s32 seq_num, void* payload, s32 payload_size,
-                             s32 file_idx);
-/* 3AD16C */ s32 fn_803AD16C(CardState* state);
-/* 3ADE4C */ int fn_803ADE4C(CardState* state, int file_no,
-                             CardCallback callback);
-/* 3ADF90 */ int fn_803ADF90(CardState* state, s32 file_idx, u8* buf,
-                             int async, CardCallback callback);
-/* 3AE7F8 */ int fn_803AE7F8(CardState* state, s32 file_idx, u8* buf,
-                             int async, CardCallback callback);
-/* 3AF3F0 */ int fn_803AF3F0(CardState* state, s32 file_idx, u8* buf,
-                             int async, CardCallback callback);
-/* 3B0120 */ int fn_803B0120(CardState* state, s32 file_idx, u8* buf,
-                             int async, CardCallback callback);
-/* 3B0E9C */ int fn_803B0E9C(CardState* state, void* banner, u8* icons,
-                             int is_new, int async);
-/* 3B1338 */ int fn_803B1338(CardState* state, int async);
-/* 3B1F78 */ int fn_803B1F78(CardState* state, const char* filename,
-                             void* banner, void* icons, CardCallback callback);
-/* 3B21E8 */ int fn_803B21E8(CardState* state, void* banner, void* icons,
-                             CardCallback callback);
 /* 3B2374 */ void hsd_803B2374(void);
 /* 3B24E4 */ void hsd_803B24E4(CardState* state, int chan, int sector_size,
                                void* work_buf);
 /* 3B2550 */ int hsd_803B2550(CardState* state, const char* filename,
                               CardCallback callback);
 /* 3B2674 */ int hsd_803B2674(CardState* state);
-/* 3B26CC */ int fn_803B26CC(CardState* state, void* comment, void* banner,
-                             void* icons, CardCallback callback);
 /* 4D1138 */ extern CardActiveRequest hsd_804D1138;
 /* 4D1148 */ extern CardCmd hsd_804D1148[128];
 /* 4D2348 */ extern CardRequest hsd_804D2348[32];
-/* 4D2E70 */ extern u8 hsd_804D2E70[2084];
 /* 4D7990 */ extern s32 hsd_804D7990;
 /* 4D7994 */ extern s32 hsd_804D7994;
 /* 4D79A0 */ extern u8* hsd_804D79A0;
