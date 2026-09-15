@@ -1,8 +1,6 @@
 #ifndef GALE01_13C2F8
 #define GALE01_13C2F8
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftPurin/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -17,7 +15,7 @@
 /* 13C494 */ void ftPr_Init_8013C494(HSD_GObj* gobj);
 /* 13C4F0 */ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx);
 /* 13C614 */ void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2);
-/* 13C664 */ HSD_JObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj);
+/* 13C664 */ HSD_GObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj);
 /* 13C67C */ void ftPr_Init_OnLoad(HSD_GObj* gobj);
 /* 13C6EC */ void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool flag);
 /* 13C798 */ void ftPr_Init_OnItemInvisible(HSD_GObj* gobj);

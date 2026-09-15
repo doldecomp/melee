@@ -1958,7 +1958,7 @@ struct UnkFloat6_Camera {
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[Ft_Kind_Max];
-    HSD_JObj* (*getter[Ft_Kind_Max])(HSD_GObj*);
+    HSD_GObj* (*getter[Ft_Kind_Max])(HSD_GObj*);
 } ftData_UnkModelStruct;
 
 struct ftData_80085FD4_ret {

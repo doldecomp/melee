@@ -1,8 +1,6 @@
 #ifndef GALE01_0EE528
 #define GALE01_0EE528
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/kinds/ftCommon/forward.h>
 #include <melee/ft/kinds/ftFox/forward.h>
 #include <melee/ft/kinds/ftKirby/forward.h>
@@ -41,7 +39,7 @@ typedef struct ftKirby_CopyName {
 /* 0EEEC4 */ void ftKb_SpecialN_800EEEC4(Fighter_GObj* gobj,
                                          FighterKind victim_kind);
 /* 0EEF04 */ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int, Mtx);
-/* 0EF028 */ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj);
+/* 0EF028 */ HSD_GObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj);
 /* 0EF040 */ void ftKb_SpecialN_800EF040(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF0E4 */ void ftKb_SpecialN_800EF0E4(Fighter_GObj*, int, u8*);
 /* 0EF35C */ void ftKb_SpecialN_800EF35C(Fighter_GObj*, int, u8*);

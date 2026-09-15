@@ -36,7 +36,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/id.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 459C10 */ UnkCostumeStruct ftKb_CostumeList[6];
 /* 459B88 */ struct ft_80459B88_t ft_80459B88;
@@ -2834,7 +2833,7 @@ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int arg1, Mtx mtx)
     PAD_STACK(8);
 }
 
-HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
+HSD_GObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2842,8 +2841,7 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
         return fp->u.kb.hat.jobj;
     }
 
-    /// @todo What???
-    return (HSD_JObj*) gobj;
+    return gobj;
 }
 
 void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
@@ -2991,7 +2989,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     ftKb_SpecialN_800EF0E4_finish(fp, total_dobjs);
 }
 
-void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
+void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, const u8* arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKirby_CostumeArchive* costume_data = ftKb_Init_803C9FC8[arg1];
