@@ -5909,20 +5909,10 @@ sysdolphin/baselib/sislib_font.c:
 	.data       start:0x8040CD40 end:0x80430B40
 
 sysdolphin/baselib/hsd_3A94.c:
-	.text       start:0x803A949C end:0x803B27F4
-	.data       start:0x80430B40 end:0x80430BCC
+	.text       start:0x803A949C end:0x803B3344
+	.data       start:0x80430B40 end:0x80430C40
 	.bss        start:0x804D1138 end:0x804D2648
 	.sbss       start:0x804D7980 end:0x804D79C9
-
-sysdolphin/baselib/hsd_3B27.c:
-	.text       start:0x803B27F4 end:0x803B2B20
-
-sysdolphin/baselib/hsd_3B2B.c:
-	.text       start:0x803B2B20 end:0x803B2E04
-
-sysdolphin/baselib/hsd_3B2E.c:
-	.text       start:0x803B2E04 end:0x803B3344
-	.data       start:0x80430BD0 end:0x80430C40
 
 sysdolphin/baselib/hsd_3B33.c:
 	extab       start:0x80005658 end:0x80005668

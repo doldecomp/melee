@@ -11,7 +11,6 @@
 #include <dolphin/card.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3A94.h>
-#include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
 
 #define SECTOR_SIZE 0x2000

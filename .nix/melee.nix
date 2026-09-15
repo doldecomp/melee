@@ -25,7 +25,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     fileset = lib.fileset.unions [
       ../config
       ../configure.py
-      ../extern
+      ../libs
       ../orig/GALE01/sys/.gitkeep
       ../src
       ../tools/ninja_syntax.py

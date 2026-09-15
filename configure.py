@@ -360,7 +360,7 @@ cflags_trk = [
 includes_base = [
     "src",
     "src/MSL",
-    "extern/dolphin/include",
+    "libs/dolphin/include",
     f"build/{config.version}/include",
 ]
 
@@ -373,8 +373,8 @@ clang_includes = ["src"]
 
 clang_system_includes = [
     "src/MSL",
-    "extern/dolphin/include",
-    "extern/dolphin/src",
+    "libs/dolphin/include",
+    "libs/dolphin/src",
     f"build/{config.version}/include",
 ]
 
@@ -487,12 +487,12 @@ def Lib(
 def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> Library:
     cflags = cflags_base + [
         "-fp_contract off",
-        "-ir extern/dolphin/src",
+        "-ir libs/dolphin/src",
     ]
-    src_dir = "extern/dolphin/src"
+    src_dir = "libs/dolphin/src"
     includes = [
-        "extern/dolphin/include",
-        "extern/dolphin/include/libc",
+        "libs/dolphin/include",
+        "libs/dolphin/include/libc",
         "src/MSL",
     ]
 
@@ -1983,9 +1983,6 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_3A76.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/sislib_font.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3A94.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B2E.c"),
             Object(
                 Matching,
                 "sysdolphin/baselib/hsd_3B33.c",

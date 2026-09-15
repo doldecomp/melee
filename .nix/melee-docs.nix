@@ -54,7 +54,7 @@ stdenvNoCC.mkDerivation {
     fileset = lib.fileset.unions [
       ../Doxyfile
       ../docs
-      ../extern
+      ../libs
       ../src
       ../tools/cleanup-index-template.html
       ../tools/cleanup_index.py
