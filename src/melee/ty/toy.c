@@ -417,7 +417,7 @@ static void order_sdata2_154(void)
 }
 #endif
 
-// STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
+STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
 STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT == 0x6DE);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E68) == 0x64);
@@ -1970,35 +1970,20 @@ void Toy_80306BB8(HSD_GObj* gobj)
 
 void _Toy_80306C5C(HSD_GObj* arg0)
 {
-    s32 idx;
-    s32 offset;
-    TyLightData* base;
-    HSD_GObj* data;
-    u8* table;
-    unsigned char new_var;
-    HSD_LObj* lobj;
+    ToyCameraControl* data = Toy_sbss_804D6ED4;
+    HSD_GObj* gobj = data->x04;
+    HSD_LObj* lobj = gobj->hsd_obj;
     HSD_LObj* next;
+    int i = 0;
 
     PAD_STACK(16);
 
-    idx = 0;
-    offset = (new_var = idx) * 0xC;
-    base = (TyLightData*) Toy_sbss_804D6ED4;
-    data = base->gobj;
-    table = (u8*) base + offset;
-    lobj = data->hsd_obj;
-
     while (lobj != NULL) {
-        HSD_LObjSetPosition(lobj, (Vec3*) (table + 0x1C));
-        HSD_LObjSetInterest(lobj, (Vec3*) (table + 0x7C));
-        table += 0xC;
-        if (lobj == NULL) {
-            next = NULL;
-        } else {
-            next = lobj->next;
-        }
+        HSD_LObjSetPosition(lobj, &data->positions[i]);
+        HSD_LObjSetInterest(lobj, &data->interests[i]);
+        i++;
+        next = HSD_LObjGetNext(lobj);
         lobj = next;
-        data = base->gobj;
     }
 
     HSD_LObjAnimAll(arg0->hsd_obj);
@@ -2027,18 +2012,18 @@ void Toy_80306D70(s32 arg0)
     {
         LightList** sp14;
         TyLightFile* base;
-        TyLightData* data;
+        ToyCameraControl* data;
         char* sym;
         s32 idx;
         u8 kind;
 
         base = (TyLightFile*) _Toy_str_TyLight_dat;
-        data = (TyLightData*) Toy_sbss_804D6ED4;
+        data = Toy_sbss_804D6ED4;
 
-        if (data->archive != NULL && data->gobj != NULL) {
-            HSD_GObjProc_RemoveAllProcs(data->gobj);
-            HSD_GObjFree(data->gobj);
-            data->gobj = NULL;
+        if (data->archive != NULL && data->x04 != NULL) {
+            HSD_GObjProc_RemoveAllProcs(data->x04);
+            HSD_GObjFree(data->x04);
+            data->x04 = NULL;
             idx = base->entries[arg0].idx;
             sym = base->symbols[idx].name;
             sp14 = HSD_ArchiveGetPublicAddress(data->archive, sym);
@@ -2053,14 +2038,14 @@ void Toy_80306D70(s32 arg0)
             s32 spC;
             HSD_LObj* lobj;
 
-            data->gobj = GObj_Create(2, 1, 0);
+            data->x04 = GObj_Create(2, 1, 0);
             lobj = Toy_LoadLObjList(sp14, &spC);
             kind = HSD_GObj_LightKind;
-            HSD_GObjObject_80390A70(data->gobj, kind, lobj);
-            GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
+            HSD_GObjObject_80390A70(data->x04, kind, lobj);
+            GObj_SetupGXLink(data->x04, HSD_GObj_LObjCallback, 0x37, 0);
             if (spC != 0) {
-                HSD_GObj_SetupProc(data->gobj, _Toy_80306C5C, 0);
-                HSD_GObj_80390CD4(data->gobj);
+                HSD_GObj_SetupProc(data->x04, _Toy_80306C5C, 0);
+                HSD_GObj_80390CD4(data->x04);
             }
         } else {
             idx = base->entries[arg0].idx;
@@ -2073,18 +2058,18 @@ void Toy_80306D70(s32 arg0)
 
 HSD_LObj* Toy_LoadLObjList(LightList** list, s32* hasAnim)
 {
-    u8* base;
+    ToyCameraControl* base;
     HSD_LObj* lobj;
     HSD_LObj* prev;
     HSD_LObj* first;
     HSD_LightAnim** anims;
     s32 idx;
-    u8* animFlag;
+    s8* animFlag;
 
     PAD_STACK(4);
 
     prev = NULL;
-    base = (u8*) Toy_sbss_804D6ED4;
+    base = Toy_sbss_804D6ED4;
     idx = 0;
 
     if (hasAnim != NULL) {
@@ -2094,7 +2079,7 @@ HSD_LObj* Toy_LoadLObjList(LightList** list, s32* hasAnim)
     while (*list != NULL) {
         lobj = HSD_LObjLoadDesc((*list)->desc);
         if (lobj != NULL) {
-            animFlag = base + idx + 0xDC;
+            animFlag = &base->has_position_anim[idx];
             anims = (*list)->anims;
             *animFlag = 0;
             if (anims != NULL && *anims != NULL) {
@@ -2107,15 +2092,12 @@ HSD_LObj* Toy_LoadLObjList(LightList** list, s32* hasAnim)
                     *animFlag = 1;
                 }
             }
-            HSD_LObjGetPosition(lobj, (Vec3*) (base + idx * 0xC + 0x1C));
-            HSD_LObjGetInterest(lobj, (Vec3*) (base + idx * 0xC + 0x7C));
+            HSD_LObjGetPosition(lobj, &base->positions[idx]);
+            HSD_LObjGetInterest(lobj, &base->interests[idx]);
             idx += 1;
         }
         if (prev != NULL) {
-            if (prev == NULL) {
-                __assert("lobj.h", 0x136U, "lobj");
-            }
-            prev->next = lobj;
+            HSD_LObjSetNext(prev, lobj);
         } else {
             first = lobj;
         }
@@ -2193,8 +2175,7 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
     Vec3 left_vec;
     Vec3 angles;
     TyCameraData_* data;
-    TyLightArray_* cur;
-    TyLightArray_* data2;
+    ToyCameraControl* data2;
     HSD_LObj* lobj;
     s32 i;
     s8* flag_ptr;
@@ -2202,7 +2183,7 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
     PAD_STACK(36);
 
     data = (void*) _Toy_sbss_804D6E68;
-    data2 = (TyLightArray_*) Toy_sbss_804D6ED4;
+    data2 = Toy_sbss_804D6ED4;
     (void) data2;
     cobj = data->x8->x28;
 
@@ -2239,12 +2220,11 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
 
     HSD_CObjSetEyePosition(cobj, &euler);
 
-    cur = data2;
     i = 0;
-    lobj = data2->x4->x28;
+    lobj = (HSD_LObj*) data2->x04->hsd_obj;
 
     while (lobj != NULL) {
-        flag_ptr = &data2->xDC[i];
+        flag_ptr = &data2->has_position_anim[i];
 
         angles.x = 0.017453292F * data2->x14;
         angles.y = 0.017453292F * -data2->x18;
@@ -2253,11 +2233,11 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
         if (*flag_ptr != 0) {
             HSD_LObjGetPosition(lobj, &light_pos);
         } else {
-            light_pos = *(Vec3*) &cur->x1C;
+            light_pos = data2->positions[i];
         }
 
         if (*flag_ptr != 0) {
-            *(Vec3*) &cur->x1C = light_pos;
+            data2->positions[i] = light_pos;
         }
 
         lbVector_ApplyEulerRotation(&light_pos, &angles);
@@ -2265,15 +2245,14 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
 
         if (HSD_LObjGetInterest(lobj, &light_pos) != 0) {
             if (*flag_ptr != 0) {
-                *(Vec3*) &cur->x7C = light_pos;
+                data2->interests[i] = light_pos;
             } else {
-                light_pos = *(Vec3*) &cur->x7C;
+                light_pos = data2->interests[i];
             }
             lbVector_ApplyEulerRotation(&light_pos, &angles);
             HSD_LObjSetInterest(lobj, &light_pos);
         }
 
-        cur = (TyLightArray_*) ((u8*) cur + 0xC);
         i += 1;
 
         lobj = HSD_LObjGetNext(lobj);
@@ -2436,12 +2415,12 @@ void _Toy_80307828(int arg0)
 {
     Vec3 interest;
     TyCameraData_* data;
-    TyLightArray_* data2;
+    ToyCameraControl* data2;
     HSD_CObj* cobj;
 
     data = (void*) _Toy_sbss_804D6E68;
     cobj = data->x8->x28;
-    data2 = (TyLightArray_*) Toy_sbss_804D6ED4;
+    data2 = Toy_sbss_804D6ED4;
     interest = _Toy_803B8858;
 
     if (arg0 == 0) {
@@ -5775,7 +5754,7 @@ void Toy_80310324(void)
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     _Toy_8030FA50();
-    memzero(Toy_sbss_804D6ED4, 0xE4);
+    memzero(Toy_sbss_804D6ED4, sizeof(*Toy_sbss_804D6ED4));
     Toy_80306D70(0);
     _Toy_80307018();
 
@@ -6437,7 +6416,7 @@ void Toy_Scene_OnEnter(void* arg0)
 
     _Toy_sbss_804D6E68 = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E68));
     Toy_sbss_804D6ED8 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED8));
-    Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(TyLightArray_));
+    Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED4));
     Toy_sbss_804D6EDC =
         HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
     _Toy_sbss_804D6E64 =
@@ -6447,7 +6426,7 @@ void Toy_Scene_OnEnter(void* arg0)
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
-    memzero(Toy_sbss_804D6ED4, sizeof(TyLightArray_));
+    memzero(Toy_sbss_804D6ED4, sizeof(*Toy_sbss_804D6ED4));
     memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
     memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));

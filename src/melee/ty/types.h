@@ -334,13 +334,6 @@ struct DigitInit {
     s32 x0, x4, x8, xC;
 };
 
-struct TyLightData {
-    /* 0x00 */ u8 pad[4];
-    /* 0x04 */ HSD_GObj* gobj;
-    /* 0x08 */ u8 pad8[4];
-    /* 0x0C */ HSD_Archive* archive;
-};
-
 struct ToyNameData {
     s16 x0;
     s16 x2;
@@ -400,28 +393,6 @@ struct TyCameraData_ {
     s32 x58;
 };
 
-struct TyLightGObj_ {
-    u8 pad[0x28];
-    HSD_LObj* x28;
-};
-
-struct TyLightArray_ {
-    void* x0;
-    TyLightGObj_* x4;
-    u8 pad08[0x14 - 0x08];
-    f32 x14;
-    f32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    u8 pad28[0x7C - 0x28];
-    s32 x7C;
-    s32 x80;
-    s32 x84;
-    u8 pad88[0xDC - 0x88];
-    s8 xDC[8];
-};
-
 struct ToyDataJObj {
     /* 0x00 */ void* x0;
     /* 0x04 */ struct ToyDataJObj* x4;
@@ -465,12 +436,15 @@ struct ToyCameraControl {
     /*  +0 */ HSD_GObj* x00;
     /*  +4 */ HSD_GObj* x04;
     /*  +8 */ HSD_GObj* x08;
-    /*  +C */ u8 pad[0x4];
+    /*  +C */ HSD_Archive* archive;
     /* +10 */ s32 x10;
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
+    /* +1C */ Vec3 positions[8];
+    /* +7C */ Vec3 interests[8];
+    /* +DC */ s8 has_position_anim[8];
 };
-ASSERT_SIZE(ToyCameraControl, 0x1C);
+ASSERT_SIZE(ToyCameraControl, 0xE4);
 
 struct ToyTransitionObj {
     u8 pad[0x20];
