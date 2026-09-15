@@ -413,17 +413,12 @@ f32 gm_801883C0(void)
     HSD_AObj* aobj;
 
     gobj = lbl_804736C0.x8;
-    if (gobj == NULL) {
-        goto return_default;
+    if (gobj != NULL) {
+        cobj = gobj->hsd_obj;
+    } else {
+        return 0.0f;
     }
 
-    cobj = gobj->hsd_obj;
-    goto check_cobj;
-
-return_default:
-    return 0.0f;
-
-check_cobj:
     aobj = cobj->eyepos->aobj;
     if (aobj != NULL) {
         return aobj->curr_frame;

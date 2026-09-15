@@ -92,20 +92,14 @@ s32 powi(s32 base, s32 exponent)
     if (base == 0) {
         return 0;
     }
-    if (exponent < 0) {
-        goto return_zero;
+    if (exponent >= 0) {
+        i = 0;
+        result = 1;
+        for (; i < exponent; i++) {
+            result *= base;
+        }
+        return result;
     }
-
-    i = 0;
-    result = 1;
-
-    for (; i < exponent; i++) {
-        result *= base;
-    }
-
-    return result;
-
-return_zero:
     return 0;
 }
 
