@@ -10,7 +10,7 @@
 /* 2AC8A8 */ void itKoopaFlame_Update_Direction(Item_GObj* gobj, int flags);
 /* 2AC9F8 */ void itKoopaFlame_Update_Angle(Item_GObj* gobj, int flags);
 /* 2ACBA0 */ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec3* pos,
-                                           f32 facing_dir, bool unk, s32 gfx,
+                                           f32 facing_dir, u32 unk, s32 gfx,
                                            s32 base_speed, s32 scale,
                                            s32 kind);
 /* 2ACEBC */ void itKoopaFlame_Setup(Item_GObj* gobj_i, Fighter_GObj* gobj_f,
