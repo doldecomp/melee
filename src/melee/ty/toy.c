@@ -811,7 +811,6 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     s32 obtained_arr[TY_TROPHY_COUNT];
     s32 new_arr[TY_TROPHY_COUNT];
     s32 total;
-    s32 byte_off;
     u16* default_flags;
     s32 trophy;
     s32 obtained_count;
@@ -827,9 +826,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     obtained_count = 0;
     total = 0;
 
-    for (trophy = 0, byte_off = 0; trophy < TY_TROPHY_COUNT;
-         trophy++, byte_off += 2)
-    {
+    for (trophy = 0; trophy < TY_TROPHY_COUNT; trophy++) {
         skip_list = _Toy_sbss_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
             s16 val;
@@ -853,7 +850,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 } else {
                     flags = gmMainLib_GetTrophyFlags();
                 }
-                if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
+                if (!(flags[trophy] & 0x4000)) {
                     if (arg1 == 0x63) {
                         if (arg2 != 0) {
                             (void) arg2;
@@ -867,7 +864,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                             } else {
                                 flags = gmMainLib_GetTrophyFlags();
                             }
-                            if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
+                            if (flags[trophy] & 0x4000) {
                                 goto add_obtained;
                             }
                         } else {
@@ -887,7 +884,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                         } else {
                             flags = gmMainLib_GetTrophyFlags();
                         }
-                        if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
+                        if (flags[trophy] & 0x4000) {
                             goto add_obtained;
                         }
                     } else {
@@ -902,7 +899,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 } else {
                     flags = gmMainLib_GetTrophyFlags();
                 }
-                if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
+                if (flags[trophy] & 0x4000) {
                     goto add_obtained;
                 }
                 (void) arg2;
@@ -915,7 +912,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 } else {
                     flags = gmMainLib_GetTrophyFlags();
                 }
-                if ((u8) * (u16*) ((u8*) flags + byte_off) != 0) {
+                if ((u8) flags[trophy] != 0) {
                     obtained_arr[obtained_count++] = trophy;
                 } else {
                     new_arr[new_count++] = trophy;
@@ -1210,14 +1207,13 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
 void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
 {
     s16* var_r22;
-    s32 var_r27;
-    u8* temp_r26;
+    u16* temp_r26;
     s32 var_r25;
     u16* base;
     s32 mask;
     u16* ptr;
-    u8* var_r22_2;
-    u8* var_r3;
+    u16* var_r22_2;
+    u16* var_r3;
     u16 temp_val;
 
     base = (u16*) &_Toy_804A26B8.x0;
@@ -1225,11 +1221,9 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
         return;
     }
 
-    temp_r26 = (u8*) base + 0x19E;
+    temp_r26 = ((Toy26B8*) base)->trophy_flags;
 
-    for (var_r25 = 0, var_r27 = 0; var_r25 < TY_TROPHY_COUNT;
-         var_r25++, var_r27 += 2)
-    {
+    for (var_r25 = 0; var_r25 < TY_TROPHY_COUNT; var_r25++) {
         s32 skip;
         s16 temp_r0;
 
@@ -1275,10 +1269,10 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             } else {
                 var_r3 = gmMainLib_GetTrophyFlags();
             }
-            if (*(u16*) (var_r3 + var_r27) & 0x4000) {
+            if (var_r3[var_r25] & 0x4000) {
                 u16* temp_ptr;
                 u16 val;
-                temp_ptr = (u16*) (var_r22_2 + var_r27);
+                temp_ptr = &var_r22_2[var_r25];
                 val = *temp_ptr;
                 *temp_ptr = val ^ 0x4000;
             }
@@ -1290,7 +1284,7 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             } else {
                 var_r3 = gmMainLib_GetTrophyFlags();
             }
-            *(u16*) (var_r3 + var_r27) |= 0x4000;
+            var_r3[var_r25] |= 0x4000;
         }
     }
 
