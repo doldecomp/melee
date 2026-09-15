@@ -27,7 +27,7 @@ jobs:
         fetch-depth: 2
         sparse-checkout: |
           src/
-          extern/
+          libs/
           tools/
           config/
           .github/scripts/
