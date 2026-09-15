@@ -88,7 +88,7 @@ void __sinit_trigf_c(void);
 
 static inline float fmodf(float a, float b)
 {
-    long long quotient;
+    s64 quotient;
 
     if (fabsf(b) > fabsf(a)) {
         return a;

@@ -57,7 +57,7 @@ ASM static void TRKLoadContext(OSContext* ctx, register u32 val)
     #endif // clang-format on
 }
 
-static void TRKEXICallBack(short r3, OSContext* ctx)
+static void TRKEXICallBack(__OSInterrupt interrupt, OSContext* ctx)
 {
     OSEnableScheduler();
     TRKLoadContext(ctx, 0x500);

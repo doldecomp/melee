@@ -315,7 +315,7 @@ int __OSReadROMAsync(void* buffer, long length, long offset,
     return !err;
 }
 
-unsigned long OSGetSoundMode()
+u32 OSGetSoundMode()
 {
     struct OSSram* sram = __OSLockSram();
     unsigned long mode = (sram->flags & 4) ? 1 : 0;
@@ -324,7 +324,7 @@ unsigned long OSGetSoundMode()
     return mode;
 }
 
-void OSSetSoundMode(unsigned long mode)
+void OSSetSoundMode(u32 mode)
 {
     struct OSSram* sram;
     int unused;
@@ -385,7 +385,7 @@ u16 OSGetWirelessID(s32 arg0)
     return id;
 }
 
-unsigned long OSGetVideoMode()
+u32 OSGetVideoMode()
 {
     struct OSSram* sram = __OSLockSram();
     unsigned long mode = sram->flags & 3;
@@ -394,7 +394,7 @@ unsigned long OSGetVideoMode()
     return mode;
 }
 
-void OSSetVideoMode(unsigned long mode)
+void OSSetVideoMode(u32 mode)
 {
     struct OSSram* sram;
     int unused;

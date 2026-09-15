@@ -15,7 +15,7 @@ extern "C" {
 
 struct SramControl {
     unsigned char sram[64];
-    unsigned long offset;
+    u32 offset;
     int enabled;
     int locked;
     int sync;
@@ -25,9 +25,9 @@ struct SramControl {
 typedef struct OSSram {
     unsigned short checkSum;
     unsigned short checkSumInv;
-    unsigned long ead0;
-    unsigned long ead1;
-    unsigned long counterBias;
+    u32 ead0;
+    u32 ead1;
+    u32 counterBias;
     signed char displayOffsetH;
     unsigned char ntd;
     unsigned char language;
@@ -36,7 +36,7 @@ typedef struct OSSram {
 
 typedef struct OSSramEx {
     unsigned char flashID[2][12];
-    unsigned long wirelessKeyboardID;
+    u32 wirelessKeyboardID;
     unsigned short wirelessPadID[4];
     unsigned char dvdErrorCode;
     unsigned char _padding0;
@@ -44,13 +44,13 @@ typedef struct OSSramEx {
     unsigned char _padding1[4];
 } OSSramEx;
 
-unsigned long OSGetSoundMode();
-void OSSetSoundMode(unsigned long mode);
-unsigned long OSGetVideoMode();
-void OSSetVideoMode(unsigned long mode);
+u32 OSGetSoundMode();
+void OSSetSoundMode(u32 mode);
+u32 OSGetVideoMode();
+void OSSetVideoMode(u32 mode);
 unsigned char OSGetLanguage();
 void OSSetLanguage(unsigned char language);
-unsigned long OSGetProgressiveMode(void);
+u32 OSGetProgressiveMode(void);
 void OSSetProgressiveMode(u32 mode);
 u16 OSGetWirelessID(s32);
 

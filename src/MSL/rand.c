@@ -1,6 +1,7 @@
 #include "stdlib.h"
+#include <dolphin/types.h>
 
-static unsigned long int next = 1;
+static u32 next = 1;
 
 int rand(void)
 {

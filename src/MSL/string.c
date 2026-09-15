@@ -10,9 +10,9 @@
 static unsigned int K1 = 0x80808080L; // = K1
 static unsigned int K2 = 0xfefefeffL; // = K2
 
-unsigned long(strlen)(const char* s)
+size_t(strlen)(const char* s)
 {
-    unsigned long k = -1;
+    size_t k = -1;
     unsigned char* p = (unsigned char*) s - 1;
     do {
         k++;
@@ -42,7 +42,7 @@ char* strcpy(char* dst, const char* src)
      *	aligned on the same boundary, we do a byte copy.
      *	Otherwise we align them to a word boundary.
      */
-    if ((align = ((unsigned int) fromb & 3u)) != ((unsigned int) destb & 3u)) {
+    if ((align = ((uintptr_t) fromb & 3u)) != ((uintptr_t) destb & 3u)) {
         goto bytecopy;
     }
 
@@ -135,7 +135,7 @@ bytecopy:
     }
 }
 
-char* strncpy(char* dst, const char* src, unsigned long n)
+char* strncpy(char* dst, const char* src, size_t n)
 {
     const unsigned char* p = (const unsigned char*) src - 1;
     unsigned char* q = (unsigned char*) dst - 1;
@@ -178,7 +178,7 @@ int strcmp(const char* str1, const char* str2)
      *	aligned on the same boundary, we do a byte copy.
      *	Otherwise we align them to a word boundary.
      */
-    if ((align = ((unsigned int) left & 3u)) != ((unsigned int) right & 3u)) {
+    if ((align = ((uintptr_t) left & 3u)) != ((uintptr_t) right & 3u)) {
         goto bytecopy;
     }
     if (align) {
@@ -256,11 +256,11 @@ bytecopy:
     }
 }
 
-int strncmp(const char* str1, const char* str2, unsigned long n)
+int strncmp(const char* str1, const char* str2, size_t n)
 {
     const unsigned char* p1 = (unsigned char*) str1 - 1;
     const unsigned char* p2 = (unsigned char*) str2 - 1;
-    unsigned long c1, c2;
+    unsigned int c1, c2;
 
     n++;
     while (--n) {
@@ -278,8 +278,8 @@ int strncmp(const char* str1, const char* str2, unsigned long n)
 char* strchr(const char* str, int chr)
 {
     const unsigned char* p = (unsigned char*) str - 1;
-    unsigned long int c = ((unsigned long int) chr & 0xffu);
-    unsigned long int ch;
+    unsigned int c = ((unsigned int) chr & 0xFFU);
+    unsigned int ch;
     while ((ch = *++p)) {
         if (ch == c) {
             return ((char*) p);
