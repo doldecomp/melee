@@ -13,8 +13,8 @@ IN_ROOTS = [
         "src/MSL",
         "src/melee",
         "src/melee/ft/kinds",
-        "extern/dolphin/include",
-        "extern/dolphin/src",
+        "libs/dolphin/include",
+        "libs/dolphin/src",
         "build/GALE01/include",
     ]
 ]
@@ -22,7 +22,7 @@ IN_ROOTS = [
 OUT_ROOTS = [
     IN_ROOTS[2],  # src/MSL
     IN_ROOTS[0],  # src
-    IN_ROOTS[5],  # extern/dolphin/include
+    IN_ROOTS[5],  # libs/dolphin/include
     IN_ROOTS[7],  # build/GALE01/include
 ]
 

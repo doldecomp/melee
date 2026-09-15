@@ -39,7 +39,7 @@ MWCC_FLAGS = [
     "-i",
     "src/MSL",
     "-i",
-    "extern/dolphin/include",
+    "libs/dolphin/include",
     "-DM2CTX",
 ]
 
@@ -66,7 +66,7 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
             includes = [
                 "src",
                 "src/MSL",
-                "extern/dolphin/include",
+                "libs/dolphin/include",
             ]
             defines = [
                 "__MWERKS__",
