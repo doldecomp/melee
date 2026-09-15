@@ -3,7 +3,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
 #include <stdbool.h>
 
 #include <sysdolphin/baselib/gobj.h>
@@ -28,7 +27,7 @@ typedef struct MnName_GObj {
 /* 237A68 */ void mnName_SortNames(HSD_GObj*);
 /* 237D94 */ u8 mnName_80237D94(s32, u8);
 /* 237F78 */ void mnName_ConfirmNameDeleteInput(HSD_GObj*);
-/* 23817C */ UNK_RET mnName_MainInput(HSD_GObj*);
+/* 23817C */ void mnName_MainInput(HSD_GObj*);
 /* 238540 */ void fn_80238540(HSD_GObj* gobj);
 /* 2385A0 */ void mnName_802385A0(HSD_GObj* gobj);
 /* 2385D4 */ s32 mnName_GetPageCount(void);

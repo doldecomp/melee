@@ -4,8 +4,6 @@
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 typedef enum Gm_DecType {
     Gm_DecType_Flag,  ///< true/false boolean player bonus
     Gm_DecType_Point, ///< integer-valued player bonus
@@ -28,12 +26,12 @@ struct lbl_804D65A8_t;
 /* 16FAD4 */ int fn_8016FAD4(MatchEnd*, int, int, u8);
 /* 16FFD4 */ int fn_8016FFD4(MatchEnd*, int, u8);
 /* 170110 */ int fn_80170110(void*, int, int, u8);
-/* 1701A0 */ UNK_RET gm_801701A0(UNK_PARAMS);
-/* 1701AC */ UNK_RET fn_801701AC(UNK_PARAMS);
+/* 1701A0 */ void gm_801701A0(void);
+/* 1701AC */ void fn_801701AC(void);
 /* 1701B8 */ int fn_801701B8(void);
 /* 1701C0 */ int fn_801701C0(MatchEnd*, int, int);
 /* 171A88 */ int fn_80171A88(void);
-/* 171AD4 */ UNK_RET fn_80171AD4(UNK_PARAMS);
+/* 171AD4 */ void fn_80171AD4(void);
 /* 171B00 */ bool fn_80171B00(int);
 /* 171B2C */ bool fn_80171B2C(int);
 /* 171B64 */ void fn_80171B64(struct lbl_804D65A8_t*);
@@ -41,8 +39,8 @@ struct lbl_804D65A8_t;
 /* 171DC4 */ void fn_80171DC4(void);
 /* 1720B4 */ bool gm_801720B4(void);
 /* 1720F8 */ bool gm_801720F8(void);
-/* 172140 */ int gm_80172140(UNK_PARAMS);
-/* 172174 */ UNK_RET gm_80172174(UNK_PARAMS);
+/* 172140 */ int gm_80172140(void);
+/* 172174 */ void gm_80172174(void);
 /* 17219C */ bool gm_8017219C(u32);
 /* 1721EC */ bool gm_801721EC(void);
 /* 1722BC */ bool fn_801722BC(void);
@@ -69,11 +67,11 @@ struct lbl_804D65A8_t;
 /* 17279C */ bool fn_8017279C(int, u16);
 /* 17280C */ void fn_8017280C(void);
 /* 172898 */ int gm_80172898(u16);
-/* 17297C */ UNK_RET gm_8017297C(UNK_PARAMS);
-/* 1729EC */ UNK_RET gm_801729EC(UNK_PARAMS);
+/* 17297C */ void gm_8017297C(void);
+/* 1729EC */ void gm_801729EC(void);
 /* 172BC4 */ bool gm_80172BC4(void);
 /* 172C04 */ bool gm_80172C04(void);
-/* 172C44 */ UNK_RET gm_80172C44(u32);
+/* 172C44 */ void gm_80172C44(u32);
 /* 172C78 */ bool fn_80172C78(int);
 /* 172CC0 */ u8 gm_DecideChallengerCpuLevel(u8 cpu_ckind, u8 human_nametag);
 /* 172D78 */ u8 gm_80172D78(void);
@@ -88,7 +86,7 @@ struct lbl_804D65A8_t;
 /* 1733D8 */ u8 gm_801733D8(void);
 /* 17341C */ u16 gm_8017341C(void);
 /* 173460 */ u8 gm_80173460(s8);
-/* 173498 */ u16 gm_80173498(UNK_PARAMS);
+/* 173498 */ u16 gm_80173498(void);
 /* 1734D0 */ u16 gm_801734D0(u32);
 /* 173510 */ bool fn_80173510(void);
 /* 1735F0 */ bool fn_801735F0(void);
@@ -101,17 +99,17 @@ struct lbl_804D65A8_t;
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
 /* 1737E8 */ void gm_Mode_ChallengerApproach_OnLoad(void);
-/* 173834 */ UNK_RET fn_80173834(u8 ckind, u8 major, bool);
-/* 17390C */ UNK_RET gm_8017390C(int, int);
-/* 173AA4 */ UNK_RET gm_80173AA4(UNK_PARAMS);
-/* 173B30 */ UNK_RET gm_80173B30(u32);
-/* 173BC4 */ UNK_RET gm_80173BC4(s8);
-/* 173C70 */ UNK_RET gm_80173C70(s8 c_kind, u32, u32, int);
-/* 173D3C */ UNK_RET gm_80173D3C(int);
-/* 173DE4 */ UNK_RET gm_80173DE4(MatchEnd*);
-/* 173EEC */ UNK_RET gm_80173EEC(UNK_PARAMS);
-/* 174180 */ UNK_RET gm_80174180(UNK_PARAMS);
-/* 1741FC */ UNK_RET gm_801741FC(UNK_PARAMS);
-/* 174238 */ UNK_RET gm_80174238(UNK_PARAMS);
+/* 173834 */ void fn_80173834(u8 ckind, u8 major, bool);
+/* 17390C */ void gm_8017390C(int, int);
+/* 173AA4 */ void gm_80173AA4(void);
+/* 173B30 */ void gm_80173B30(u32);
+/* 173BC4 */ void gm_80173BC4(s8);
+/* 173C70 */ void gm_80173C70(s8 c_kind, u32, u32, int);
+/* 173D3C */ void gm_80173D3C(int);
+/* 173DE4 */ void gm_80173DE4(MatchEnd*);
+/* 173EEC */ void gm_80173EEC(void);
+/* 174180 */ void gm_80174180(void);
+/* 1741FC */ void gm_801741FC(void);
+/* 174238 */ void gm_80174238(void);
 
 #endif

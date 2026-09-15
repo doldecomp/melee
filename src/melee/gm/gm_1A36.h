@@ -3,8 +3,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
-
 /* 1A3680 */ u64 gm_GetButtonsPressed(u8);
 /* 1A36A0 */ u64 gm_GetButtonsTriggered(u8);
 /* 1A36C0 */ u64 gm_801A36C0(u8);
@@ -19,9 +17,9 @@
  * #HSD_PadCopyStatus into #controller_map. Index 4 (#PAD_MAX_CONTROLLERS)
  * is set to contain a union of all inputs from all controllers.
  */
-/* 1A3A74 */ UNK_RET gm_EvaluateAllControllerInputs(UNK_PARAMS);
+/* 1A3A74 */ void gm_EvaluateAllControllerInputs(void);
 
-/* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
+/* 1A3E88 */ void gm_801A3E88(void);
 /* 1A3EF4 */ void gm_801A3EF4(void);
 
 #endif
