@@ -27,6 +27,14 @@ typedef jmp_t jtbl_t[];
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
+/// Matching placeholder for functions with an indeterminate, unused return.
+/// @todo Recover void signatures without changing register allocation.
+#ifdef MUST_MATCH
+#define UNINITIALIZED_RETURN(type) type
+#else
+#define UNINITIALIZED_RETURN(type) void
+#endif
+
 #define PAD_STACK(bytes)                                                      \
     do {                                                                      \
         UNUSED unsigned char _[(bytes)];                                      \

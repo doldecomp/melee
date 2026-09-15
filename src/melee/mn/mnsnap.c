@@ -809,14 +809,6 @@ void mnSnap_80254298(void)
     mnSnap_RefreshSlotSelection(&mnSnap_804A0A10, p50, p51);
 }
 
-// A function using returns with no value,
-// but needing a non-void return type to match
-#ifdef MUST_MATCH
-#define UNINITIALIZED_RETURN(x) x
-#else
-#define UNINITIALIZED_RETURN(x) void
-#endif
-
 /// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
 /// result.
 static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
@@ -828,10 +820,7 @@ static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
 
     if (buttons & 0x20) {
         *result = 2;
-        return;
-    }
-
-    if (buttons & 0x200) {
+    } else if (buttons & 0x200) {
         if (mnSnap_804A0A10.dlg_type == 0) {
             *result = 2;
         } else if ((&mnSnap_804A0A10.left_btn)[mnSnap_804A0A10.btn_idx] ==
@@ -841,22 +830,16 @@ static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
         } else {
             *result = 1;
         }
-        return;
-    }
-
-    if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x8) &&
-        mnSnap_804A0A10.btn_idx == 0)
+    } else if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x8) &&
+               mnSnap_804A0A10.btn_idx == 0)
     {
         sfxMove();
         HSD_JObjReqAnimAll(mnSnap_804A0A10.left_btn, 0.0F);
         mnSnap_804A0A10.btn_idx = 1;
         HSD_JObjAnimAll(mnSnap_804A0A10.left_btn);
         HSD_JObjAnimAll(mnSnap_804A0A10.right_btn);
-        return;
-    }
-
-    if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x4) &&
-        mnSnap_804A0A10.btn_idx == 1)
+    } else if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x4) &&
+               mnSnap_804A0A10.btn_idx == 1)
     {
         sfxMove();
         HSD_JObjReqAnimAll(mnSnap_804A0A10.right_btn, 0.0F);
@@ -1129,9 +1112,6 @@ void fn_802545C4(void)
             }
         } else {
             s32* active_slot = &mnSnap_804A0A10.active_slot;
-#ifdef MUST_MATCH
-            active_slot = active_slot;
-#endif
 
             mnSnap_804A0A10.state = 2;
             mnSnap_804A0A10.timer = 0xB;

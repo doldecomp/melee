@@ -1908,22 +1908,16 @@ s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
 
     gen = grLib_801C9808(arg0, arg0 / 1000, arg1);
     if (gen != NULL) {
-        if ((appsrt = gen->appsrt) == NULL) {
-            appsrt = psAddGeneratorAppSRT_begin(gen, 0);
-            if (appsrt == NULL) {
-#ifdef MUST_MATCH
-                return;
-#else
-                return 0;
-#endif
-            }
+        if ((appsrt = gen->appsrt) != NULL ||
+            (appsrt = psAddGeneratorAppSRT_begin(gen, 0)) != NULL)
+        {
+            appsrt->xA2 = 0;
+            appsrt->scale.x = appsrt->scale.y = appsrt->scale.z =
+                Ground_801C0498();
+            gen->type &= ~(PSAPPSRT_UNK_B09 | PSAPPSRT_UNK_B10);
+            gen->type |= PSAPPSRT_UNK_B11;
+            appsrt->gp = gen;
         }
-        appsrt->xA2 = 0;
-        appsrt->scale.x = appsrt->scale.y = appsrt->scale.z =
-            Ground_801C0498();
-        gen->type &= ~(PSAPPSRT_UNK_B09 | PSAPPSRT_UNK_B10);
-        gen->type |= PSAPPSRT_UNK_B11;
-        appsrt->gp = gen;
     }
 #ifndef MUST_MATCH
     return 0;

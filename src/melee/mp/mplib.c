@@ -6369,13 +6369,7 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-#ifdef MUST_MATCH
-#define UNINITIALIZED(x) x
-#else
-#define UNINITIALIZED(x) void
-#endif
-
-static UNINITIALIZED(int)
+static UNINITIALIZED_RETURN(int)
     mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
     CollLine* line_r31;
@@ -6397,36 +6391,34 @@ static UNINITIALIZED(int)
         line_r6 += 1;
     }
 
-    if (count_r28 == 0) {
-        return;
-    }
-
-    line_r31 = groundCollLine;
-    mpLib_SetupDraw(*color);
-    GXBegin(GX_QUADS, GX_VTXFMT0, count_r28 * 4);
-    for (i = 0; i < total_r27; i++) {
-        if (line_r31->flags & LINE_FLAG_ENABLED &&
-            !(line_r31->flags & LINE_FLAG_HIDDEN))
-        {
-            if (value == (line_r31->x0->lo_flags & flag)) {
-                PAD_STACK(8);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               -25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               -25.0F);
+    if (count_r28 != 0) {
+        line_r31 = groundCollLine;
+        mpLib_SetupDraw(*color);
+        GXBegin(GX_QUADS, GX_VTXFMT0, count_r28 * 4);
+        for (i = 0; i < total_r27; i++) {
+            if (line_r31->flags & LINE_FLAG_ENABLED &&
+                !(line_r31->flags & LINE_FLAG_HIDDEN))
+            {
+                if (value == (line_r31->x0->lo_flags & flag)) {
+                    PAD_STACK(8);
+                    GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
+                                   groundCollVtx[line_r31->x0->v0_idx].pos.y,
+                                   25.0F);
+                    GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
+                                   groundCollVtx[line_r31->x0->v1_idx].pos.y,
+                                   25.0F);
+                    GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
+                                   groundCollVtx[line_r31->x0->v1_idx].pos.y,
+                                   -25.0F);
+                    GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
+                                   groundCollVtx[line_r31->x0->v0_idx].pos.y,
+                                   -25.0F);
+                }
             }
+            line_r31 += 1;
         }
-        line_r31 += 1;
+        GXEnd();
     }
-    GXEnd();
 }
 
 static const GXColor mpLib_804D80F0 = { 0xFF, 0x40, 0x40, 0xFF };
