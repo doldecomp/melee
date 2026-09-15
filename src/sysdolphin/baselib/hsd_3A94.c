@@ -4,7 +4,6 @@
 #include <string.h>
 
 #include "hsd_3B2B.h"
-#include "hsd_3B2E.h"
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
@@ -119,9 +118,9 @@ ASSERT_SIZE(CardCmdBuf, 0x28);
 
 /// .bss globals emit in reverse declaration order. Keeping the storage in
 /// this TU lets MWCC pool the callback's command-field addresses directly.
-/* 4D2348 */ CardRequest hsd_804D2348[32];
-/* 4D1148 */ CardCmd hsd_804D1148[128];
 /* 4D1138 */ CardActiveRequest hsd_804D1138;
+/* 4D1148 */ CardCmd hsd_804D1148[128];
+/* 4D2348 */ CardRequest hsd_804D2348[32];
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
@@ -5387,5 +5386,375 @@ int fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
     context->active.callback = callback;
     context->active.callback_arg = 0;
     hsd_804D7998 = -1;
+    return 0;
+}
+
+/// The request queue as a pointer value: MWCC then keeps the array offset in
+/// the load/store displacement, as retail does.
+#define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->requests)
+
+int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
+                 CardCallback callback)
+{
+    s32 read_idx = hsd_804D7990;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
+    s32 write_idx = hsd_804D7994;
+    CardRequest* entry;
+
+    if (read_idx == write_idx) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
+            return -265;
+        }
+    }
+
+    entry = &CARD_REQUESTS(ctx)[write_idx];
+    {
+        s32 next = write_idx + 1;
+        entry->type = CARD_REQ_READ_HEADER;
+        entry->state = state;
+        entry->header.comment = comment;
+        entry->header.banner = banner;
+        entry->header.icons = icons;
+        entry->callback = callback;
+        hsd_804D7994 = next % 32;
+    }
+
+    return 0;
+}
+
+int hsd_803B286C(CardState* state, const char* filename, const char* comment,
+                 void* banner, void* icons, CardCallback callback)
+{
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
+
+    memcpy(state->comment, comment, 64);
+
+    {
+        s32 write_idx;
+        s32 read_idx = hsd_804D7990;
+
+        if (read_idx == (write_idx = hsd_804D7994)) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
+                return -265;
+            }
+        }
+
+        CARD_REQUESTS(ctx)[write_idx].type = CARD_REQ_CREATE_FILE;
+        CARD_REQUESTS(ctx)[write_idx].state = state;
+        CARD_REQUESTS(ctx)[write_idx].create.filename = filename;
+        CARD_REQUESTS(ctx)[write_idx].create.banner = banner;
+        CARD_REQUESTS(ctx)[write_idx].create.icons = icons;
+        CARD_REQUESTS(ctx)[write_idx].callback = callback;
+        hsd_804D7994 = (write_idx + 1) % 32;
+    }
+
+    return 0;
+}
+
+int hsd_803B2928(CardState* state, const char* comment, void* banner,
+                 void* icons, CardCallback callback)
+{
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
+
+    memcpy(state->comment, comment, 64);
+
+    {
+        s32 write_idx;
+        s32 read_idx = hsd_804D7990;
+
+        if (read_idx == (write_idx = hsd_804D7994)) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
+                return -265;
+            }
+        }
+
+        CARD_REQUESTS(ctx)[write_idx].type = CARD_REQ_SET_STATUS;
+        CARD_REQUESTS(ctx)[write_idx].state = state;
+        CARD_REQUESTS(ctx)[write_idx].status.banner = banner;
+        CARD_REQUESTS(ctx)[write_idx].status.icons = icons;
+        CARD_REQUESTS(ctx)[write_idx].callback = callback;
+        hsd_804D7994 = (write_idx + 1) % 32;
+    }
+
+    return 0;
+}
+
+int hsd_803B29D8(CardState* state, int file_idx, u8* buf,
+                 CardCallback callback)
+{
+    s32 read_idx = hsd_804D7990;
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
+    s32 write_idx = hsd_804D7994;
+    CardRequest* entry;
+
+    if (read_idx == write_idx) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
+            return -265;
+        }
+    }
+
+    entry = &CARD_REQUESTS(ctx)[write_idx];
+    {
+        s32 next = write_idx + 1;
+        entry->type = CARD_REQ_READ_FILE;
+        entry->state = state;
+        entry->file.file_idx = file_idx;
+        entry->file.buf = buf;
+        entry->callback = callback;
+        hsd_804D7994 = next % 32;
+    }
+
+    return 0;
+}
+
+int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
+                 CardCallback callback)
+{
+    CardContext* ctx = (CardContext*) &hsd_804D1138;
+    s32 read_idx;
+    s32 write_idx;
+    CardRequest* entry;
+
+    if (state->file_sizes[file_idx] <= 0) {
+        return -257;
+    }
+
+    read_idx = hsd_804D7990;
+    write_idx = hsd_804D7994;
+
+    if (read_idx == write_idx) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
+            return -265;
+        }
+    }
+
+    entry = &CARD_REQUESTS(ctx)[write_idx];
+    {
+        s32 next = write_idx + 1;
+        entry->type = CARD_REQ_WRITE_FILE;
+        entry->state = state;
+        entry->file.file_idx = file_idx;
+        entry->file.buf = buf;
+        entry->callback = callback;
+        hsd_804D7994 = next % 32;
+    }
+
+    return 0;
+}
+
+int hsd_SetCardIconInfo(CardState* state, CardIconInfo* icon_info)
+{
+    memcpy(&state->icon_info, icon_info, sizeof(state->icon_info));
+    state->header_size = hsd_803AC340(&state->icon_info);
+    return 0;
+}
+
+void hsd_803B2B20(u8* src, int len, void* dest)
+{
+    int i;
+    const int spCount = 16;
+    u8 sp[spCount];
+    sp[0x0] = 0x01;
+    sp[0x1] = 0x23;
+    sp[0x2] = 0x45;
+    sp[0x3] = 0x67;
+    sp[0x4] = 0x89;
+    sp[0x5] = 0xab;
+    sp[0x6] = 0xcd;
+    sp[0x7] = 0xef;
+    sp[0x8] = 0xfe;
+    sp[0x9] = 0xdc;
+    sp[0xa] = 0xba;
+    sp[0xb] = 0x98;
+    sp[0xc] = 0x76;
+    sp[0xd] = 0x54;
+    sp[0xe] = 0x32;
+    sp[0xf] = 0x10;
+
+    for (i = 0; i < len; i++) {
+        sp[i % spCount] += *src++;
+    }
+
+    for (i = 1; i < spCount; i++) {
+        if (sp[i - 1] == sp[i]) {
+            sp[i] = sp[i] ^ 0xff;
+        }
+    }
+
+    memcpy(dest, sp, sizeof(sp));
+}
+
+/// @todo There could be a split here but the following functions are only used
+/// in hsd_3A94
+static s32 lbl_80430BD0[13] ATTRIBUTE_ALIGN(8) = {
+    0x26, 0xFF, 0xE8, 0xEF, 0x42, 0xD6, 0x01,
+    0x54, 0x14, 0xA3, 0x80, 0xFD, 0x6E,
+};
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
+static int fn_803B2E04(u8 prev, s32 cur)
+{
+    u32 mod7;
+    u32 val;
+    u32 key;
+
+    key = lbl_80430BD0[prev % 13];
+    val = prev ^ cur;
+    val ^= key;
+    mod7 = prev % 7;
+
+    switch (mod7) {
+    case 0:
+        return (u8) ((val & 1) | ((val << 3) & 0x10) | ((val >> 1U) & 2) |
+                     ((val << 2) & 0x20) | ((val >> 2U) & 4) |
+                     ((val << 1) & 0x40) | ((val >> 3U) & 8) | (val & 0x80));
+    case 1:
+        return (u8) (((val << 3) & 8) | ((val >> 1U) & 1) | (val & 4) |
+                     ((val << 3) & 0x40) | ((val << 1) & 0x20) |
+                     ((val >> 1U) & 0x10) | ((val << 1) & 0x80) |
+                     ((val >> 6U) & 2));
+    case 2:
+        return (u8) (((val << 6) & 0x40) | ((val << 4) & 0x20) |
+                     ((val >> 2U) & 1) | ((val >> 2U) & 2) |
+                     ((val >> 1U) & 8) | ((val << 2) & 0x80) |
+                     ((val >> 4U) & 4) | ((val >> 3U) & 0x10));
+    case 3:
+        return (u8) (((val << 1) & 2) | ((val << 2) & 8) |
+                     ((val << 5) & 0x80) | ((val << 1) & 0x10) |
+                     ((val >> 4U) & 1) | ((val >> 3U) & 4) |
+                     ((val >> 1U) & 0x20) | ((val >> 1U) & 0x40));
+    case 4:
+        return (u8) (((val << 7) & 0x80) | ((val << 1) & 4) |
+                     ((val << 3) & 0x20) | ((val >> 3U) & 1) |
+                     ((val << 2) & 0x40) | ((val >> 4U) & 2) |
+                     ((val >> 2U) & 0x10) | ((val >> 4U) & 8));
+    case 5:
+        return (u8) (((val & 1) << 5) | ((val << 5) & 0x40) |
+                     ((val << 2) & 0x10) | (val & 8) | ((val << 3) & 0x80) |
+                     ((val >> 5U) & 1) | ((val >> 5U) & 2) |
+                     ((val >> 5U) & 4));
+    case 6:
+        return (u8) (((val << 2) & 4) | (val & 2) | ((val & 4) << 4) |
+                     ((val << 4) & 0x80) | (val & 0x10) | ((val >> 2U) & 8) |
+                     ((val >> 6U) & 1) | ((val >> 2U) & 0x20));
+    }
+    return val;
+}
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+int hsd_803B2FA0(u8* data, int len)
+{
+    u8* ptr;
+    int i;
+
+    if (data == NULL) {
+        return -1;
+    }
+
+    hsd_803B2B20(data + 16, len - 16, data);
+
+    for (i = 16; i < len; i++) {
+        ptr = data + i;
+        *ptr = fn_803B2E04(ptr[-1], *ptr);
+    }
+
+    return 0;
+}
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
+static int fn_803B302C(u32 prev, u32 cur)
+{
+    u32 mod7;
+
+    mod7 = (u8) prev % 7;
+
+    switch (mod7) {
+    case 0:
+        cur = (u8) ((cur & 1) | ((cur << 1) & 4) | ((cur << 2) & 0x10) |
+                    ((cur << 3) & 0x40) | ((cur >> 3U) & 2) |
+                    ((cur >> 2U) & 8) | ((cur >> 1U) & 0x20) | (cur & 0x80));
+        break;
+    case 1:
+        cur = (u8) (((cur << 1) & 2) | ((cur << 6) & 0x80) | (cur & 4) |
+                    ((cur >> 3U) & 1) | ((cur << 1) & 0x20) |
+                    ((cur >> 1U) & 0x10) | ((cur >> 3U) & 8) |
+                    ((cur >> 1U) & 0x40));
+        break;
+    case 2:
+        cur = (u8) (((cur & 1) << 2) | ((cur << 2) & 8) | ((cur << 4) & 0x40) |
+                    ((cur << 1) & 0x10) | ((cur << 3) & 0x80) |
+                    ((cur >> 4U) & 2) | ((cur >> 6U) & 1) |
+                    ((cur >> 2U) & 0x20));
+        break;
+    case 3:
+        cur = (u8) (((cur << 4) & 0x10) | ((cur >> 1U) & 1) |
+                    ((cur << 3) & 0x20) | ((cur >> 2U) & 2) |
+                    ((cur >> 1U) & 8) | ((cur << 1) & 0x40) |
+                    ((cur << 1) & 0x80) | ((cur >> 5U) & 4));
+        break;
+    case 4:
+        cur = (u8) (((cur << 3) & 8) | ((cur << 4) & 0x20) |
+                    ((cur >> 1U) & 2) | ((cur << 4) & 0x80) |
+                    ((cur << 2) & 0x40) | ((cur >> 3U) & 4) |
+                    ((cur >> 2U) & 0x10) | ((cur >> 7U) & 1));
+        break;
+    case 5:
+        cur = (u8) (((cur & 1) << 5) | ((cur << 5) & 0x40) | ((cur & 4) << 5) |
+                    (cur & 8) | ((cur >> 2U) & 4) | ((cur >> 5U) & 1) |
+                    ((cur >> 5U) & 2) | ((cur >> 3U) & 0x10));
+        break;
+    case 6:
+        cur = (u8) (((cur << 6) & 0x40) | (cur & 2) | ((cur >> 2U) & 1) |
+                    ((cur << 2) & 0x20) | (cur & 0x10) | ((cur << 2) & 0x80) |
+                    ((cur >> 4U) & 4) | ((cur >> 4U) & 8));
+        break;
+    }
+
+    cur ^= lbl_80430BD0[(u8) prev % 13];
+    cur ^= prev;
+    return cur;
+}
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+int hsd_803B31CC(u8* data, int len)
+{
+    u32 prev;
+    u8* ptr;
+    int i;
+    u32 cur;
+    u8 check[16];
+    int k;
+
+    if (data == NULL) {
+        return -1;
+    }
+
+    prev = data[15];
+
+    for (i = 16; i < len; i++) {
+        ptr = data + i;
+        cur = *ptr;
+        *ptr = fn_803B302C(prev, *ptr);
+        prev = cur;
+    }
+
+    hsd_803B2B20(data + 16, len - 16, check);
+
+    for (k = 0; k < 16; k++) {
+        if (check[k] != data[k]) {
+            return -1;
+        }
+    }
+
     return 0;
 }
