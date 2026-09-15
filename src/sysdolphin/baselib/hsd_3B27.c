@@ -17,7 +17,7 @@ int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
     CardRequest* entry;
 
     if (read_idx == write_idx) {
-        if (CARD_REQUESTS(ctx)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }
@@ -49,7 +49,7 @@ int hsd_803B286C(CardState* state, const char* filename, const char* comment,
         s32 read_idx = hsd_804D7990;
 
         if (read_idx == (write_idx = hsd_804D7994)) {
-            if (CARD_REQUESTS(ctx)[read_idx].type != 0) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
                 return -265;
             }
         }
@@ -78,7 +78,7 @@ int hsd_803B2928(CardState* state, const char* comment, void* banner,
         s32 read_idx = hsd_804D7990;
 
         if (read_idx == (write_idx = hsd_804D7994)) {
-            if (CARD_REQUESTS(ctx)[read_idx].type != 0) {
+            if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
                 return -265;
             }
         }
@@ -103,7 +103,7 @@ int hsd_803B29D8(CardState* state, int file_idx, u8* buf,
     CardRequest* entry;
 
     if (read_idx == write_idx) {
-        if (CARD_REQUESTS(ctx)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }
@@ -138,7 +138,7 @@ int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
     write_idx = hsd_804D7994;
 
     if (read_idx == write_idx) {
-        if (CARD_REQUESTS(ctx)[read_idx].type != 0) {
+        if (CARD_REQUESTS(ctx)[read_idx].type != CARD_REQ_NONE) {
             return -265;
         }
     }

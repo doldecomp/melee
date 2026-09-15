@@ -33,11 +33,13 @@ typedef struct CardState {
     /// last header sector.
     /* 0x460 */ s32 num_blocks;
 } CardState;
+ASSERT_SIZE(CardState, 0x464);
 
 /// Completion callback: (file index or 0, result).
 typedef void (*CardCallback)(int, int);
 
-/// Ring commands run by hsd_803AAA48 and completed by hsd_803A949C.
+/// Ring commands run by hsd_803AAA48; asynchronous CARD operations are
+/// completed by hsd_803A949C.
 typedef enum CardCmdType {
     /* 0x00 */ CARD_CMD_NONE,
     /* 0x01 */ CARD_CMD_WRITE_BLOCK,
@@ -62,99 +64,100 @@ typedef enum CardCmdType {
     /* 0x0E */ CARD_CMD_REPAIR,
     /* 0x0F */ CARD_CMD_READ_SECTOR,
     /* 0x10 */ CARD_CMD_WRITE_SECTOR,
-    /// Read the header blocks, scan every block, then repair.
-    /* 0x11 */ CARD_CMD_MOUNT,
+    /// Queue header validation, a scan of every block, and repair.
+    /* 0x11 */ CARD_CMD_SCAN_FILE,
 } CardCmdType;
 
-/// CARD_CMD_WRITE_BLOCK: sector = 0x20-byte block header + size bytes of
-/// data.
+/// CARD_CMD_WRITE_BLOCK: 0x20-byte block header followed by size bytes of
+/// data; the remaining bytes in the block are cleared.
 typedef struct CardWriteArgs {
-    /* 0x08 */ s32 file_idx;
-    /* 0x0C */ s32 phys;
-    /* 0x10 */ s32 block_id;
-    /* 0x14 */ s32 seq;
-    /* 0x18 */ void* data;
-    /* 0x1C */ s32 offset;
-    /* 0x20 */ s32 size;
+    /* 0x00 */ s32 file_idx;
+    /* 0x04 */ s32 phys;
+    /* 0x08 */ s32 block_id;
+    /* 0x0C */ s32 seq;
+    /* 0x10 */ void* data;
+    /* 0x14 */ s32 offset;
+    /* 0x18 */ s32 size;
 } CardWriteArgs;
 
 /// CARD_CMD_READ_BLOCK, CARD_CMD_SCAN_BLOCK: phys 0 shares the last header
-/// sector. A negative phys only loads the sector into sector_buf (no
+/// sector. For READ_BLOCK, a negative phys only loads sector_buf (no
 /// checksum, no copy) so that the WRITE_HEADER after it keeps block 0's data.
 typedef struct CardReadArgs {
-    /* 0x08 */ s32 x8;
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 phys;
     /* 0x0C */ s32 xC;
-    /* 0x10 */ s32 phys;
-    /* 0x14 */ s32 x14;
-    /* 0x18 */ void* data;
-    /* 0x1C */ s32 offset;
-    /* 0x20 */ s32 size;
+    /* 0x10 */ void* data;
+    /* 0x14 */ s32 offset;
+    /* 0x18 */ s32 size;
 } CardReadArgs;
 
 /// CARD_CMD_VERIFY_BLOCK: compare the block header and data against
 /// block_id/seq/data.
 typedef struct CardVerifyArgs {
-    /* 0x08 */ s32 x8;
-    /* 0x0C */ s32 xC;
-    /* 0x10 */ s32 block_id;
-    /* 0x14 */ s32 seq;
-    /* 0x18 */ void* data;
-    /* 0x1C */ s32 offset;
-    /* 0x20 */ s32 size;
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 block_id;
+    /* 0x0C */ s32 seq;
+    /* 0x10 */ void* data;
+    /* 0x14 */ s32 offset;
+    /* 0x18 */ s32 size;
 } CardVerifyArgs;
 
-/// CARD_CMD_READ_SECTOR, CARD_CMD_WRITE_SECTOR: raw sector copy through
-/// sector_buf; the write records block_id/seq for phys.
+/// CARD_CMD_READ_SECTOR, CARD_CMD_WRITE_SECTOR: transfer through sector_buf.
+/// Reads verify the checksum; writes regenerate it and record block_id/seq
+/// for phys.
 typedef struct CardSectorArgs {
-    /* 0x08 */ s32 x8;
-    /* 0x0C */ s32 phys;
-    /* 0x10 */ s32 block_id;
-    /* 0x14 */ s32 seq;
-    /* 0x18 */ void* x18;
-    /* 0x1C */ s32 offset;
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 phys;
+    /* 0x08 */ s32 block_id;
+    /* 0x0C */ s32 seq;
+    /* 0x10 */ void* x10;
+    /* 0x14 */ s32 offset;
 } CardSectorArgs;
 
 /// CARD_CMD_CLEAR_BUF: memset(data, 0, size).
 typedef struct CardClearArgs {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
-    /* 0x10 */ s32 x10;
+    /* 0x10 */ void* data;
     /* 0x14 */ s32 x14;
-    /* 0x18 */ void* data;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ s32 size;
+    /* 0x18 */ s32 size;
 } CardClearArgs;
 
 /// CARD_CMD_CREATE_FILE
 typedef struct CardCreateArgs {
-    /* 0x08 */ const char* filename;
-    /* 0x0C */ s32 size;
+    /* 0x00 */ const char* filename;
+    /* 0x04 */ s32 size;
 } CardCreateArgs;
 
 /// CARD_CMD_WRITE_HEADER, CARD_CMD_VERIFY_HEADER: header sector index and
 /// the banner/icons buffers (the comment comes from CardState).
 typedef struct CardHeaderArgs {
-    /* 0x08 */ s32 index;
-    /* 0x0C */ void* banner;
-    /* 0x10 */ void* icons;
+    /* 0x00 */ s32 index;
+    /* 0x04 */ void* banner;
+    /* 0x08 */ void* icons;
 } CardHeaderArgs;
 
 /// CARD_CMD_READ_HEADER: destination buffers, any of which may be NULL.
 typedef struct CardReadHeaderArgs {
-    /* 0x08 */ s32 index;
-    /* 0x0C */ void* comment;
-    /* 0x10 */ void* banner;
-    /* 0x14 */ void* icons;
+    /* 0x00 */ s32 index;
+    /* 0x04 */ void* comment;
+    /* 0x08 */ void* banner;
+    /* 0x0C */ void* icons;
 } CardReadHeaderArgs;
 
 /// CARD_CMD_GET_STATUS
 typedef struct CardGetStatusArgs {
-    /* 0x08 */ s32 file_no;
+    /* 0x00 */ s32 file_no;
 } CardGetStatusArgs;
 
 /// One entry of the command ring hsd_804D1148.
 typedef struct CardCmd {
-    /* 0x00 */ s32 type; ///< CardCmdType
+    /* 0x00 */ CardCmdType type;
     /* 0x04 */ CardState* state;
     union {
         /* 0x08 */ CardWriteArgs write;
@@ -168,6 +171,7 @@ typedef struct CardCmd {
         /* 0x08 */ CardGetStatusArgs get_status;
     };
 } CardCmd;
+ASSERT_SIZE(CardCmd, 0x24);
 
 /// Requests queued by hsd_3B27.c and started by fn_803AA790.
 typedef enum CardRequestType {
@@ -185,39 +189,39 @@ typedef enum CardRequestType {
 
 /// CARD_REQ_READ_FILE, CARD_REQ_WRITE_FILE
 typedef struct CardFileReqArgs {
-    /* 0x08 */ s32 file_idx;
-    /* 0x0C */ u8* buf;
+    /* 0x00 */ s32 file_idx;
+    /* 0x04 */ u8* buf;
 } CardFileReqArgs;
 
 /// CARD_REQ_CREATE_FILE
 typedef struct CardCreateReqArgs {
-    /* 0x08 */ const char* filename;
-    /* 0x0C */ void* banner;
-    /* 0x10 */ void* icons;
+    /* 0x00 */ const char* filename;
+    /* 0x04 */ void* banner;
+    /* 0x08 */ void* icons;
 } CardCreateReqArgs;
 
 /// CARD_REQ_SET_STATUS
 typedef struct CardStatusReqArgs {
-    /* 0x08 */ s32 x8;
-    /* 0x0C */ void* banner;
-    /* 0x10 */ void* icons;
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ void* banner;
+    /* 0x08 */ void* icons;
 } CardStatusReqArgs;
 
 /// CARD_REQ_OPEN_FILE
 typedef struct CardOpenReqArgs {
-    /* 0x08 */ s32 file_no;
+    /* 0x00 */ s32 file_no;
 } CardOpenReqArgs;
 
 /// CARD_REQ_READ_HEADER: destination buffers, any of which may be NULL.
 typedef struct CardHeaderReqArgs {
-    /* 0x08 */ void* comment;
-    /* 0x0C */ void* banner;
-    /* 0x10 */ void* icons;
+    /* 0x00 */ void* comment;
+    /* 0x04 */ void* banner;
+    /* 0x08 */ void* icons;
 } CardHeaderReqArgs;
 
 /// One entry of the request queue hsd_804D2348.
 typedef struct CardRequest {
-    /* 0x00 */ s32 type; ///< CardRequestType
+    /* 0x00 */ CardRequestType type;
     /* 0x04 */ CardState* state;
     union {
         /* 0x08 */ CardFileReqArgs file;
@@ -228,6 +232,7 @@ typedef struct CardRequest {
     };
     /* 0x14 */ CardCallback callback;
 } CardRequest;
+ASSERT_SIZE(CardRequest, 0x18);
 
 /// What the queued commands complete; its callback runs when the ring
 /// drains.
@@ -235,7 +240,8 @@ typedef enum CardActiveType {
     /* 0x00 */ CARD_ACTIVE_NONE,
     /* 0x01 */ CARD_ACTIVE_READ_FILE,
     /* 0x02 */ CARD_ACTIVE_WRITE_FILE,
-    /// On completion the older of two copies of each block is marked stale.
+    /// Writes files with file_flags 1 or 2. On completion the older of two
+    /// copies of each block is marked stale.
     /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1,
     /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3,
     /// Also what fn_803B26CC's header read completes as.
@@ -246,11 +252,12 @@ typedef enum CardActiveType {
 
 /// hsd_804D1138: the request the ring is currently completing.
 typedef struct CardActiveRequest {
-    /* 0x00 */ s32 type; ///< CardActiveType
+    /* 0x00 */ CardActiveType type;
     /* 0x04 */ CardState* state;
     /* 0x08 */ CardCallback callback;
     /* 0x0C */ s32 callback_arg;
 } CardActiveRequest;
+ASSERT_SIZE(CardActiveRequest, 0x10);
 
 /// hsd_804D1138, hsd_804D1148 and hsd_804D2348 are contiguous; the ring
 /// runner and the request builders address all three from hsd_804D1138.
@@ -259,6 +266,9 @@ typedef struct CardContext {
     /* 0x0010 */ CardCmd cmds[128];
     /* 0x1210 */ CardRequest requests[32];
 } CardContext;
+ASSERT_SIZE(CardContext, 0x1510);
+ASSERT_OFFSET(CardContext, cmds, 0x10);
+ASSERT_OFFSET(CardContext, requests, 0x1210);
 
 /* 3AA790 */ int fn_803AA790(void);
 /* 3AAA48 */ void hsd_803AAA48(void);
