@@ -2200,11 +2200,11 @@ bool fn_801642A0(void)
     enabled_count = 0;
     for (i = 0; i < 0x1D; i++) {
         if ((1 << (u16) i) & gmMainLib_GetGamePrefs()->stage_mask) {
-            enabled = 1;
+            enabled = true;
         } else {
-            enabled = 0;
+            enabled = false;
         }
-        if (enabled != 0) {
+        if (enabled) {
             enabled_count += 1;
         }
     }

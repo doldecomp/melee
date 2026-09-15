@@ -1647,10 +1647,10 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     u32 j;
     int var_r0_2;
     int var_r22;
-    int hits_clashed;
+    bool hits_clashed;
     HitCapsule* clank_hit;
     HitCapsule* this_hit;
-    int thrown_by_other_player;
+    bool thrown_by_other_player;
     int var_r3;
     u8 var_r0;
 
@@ -1673,7 +1673,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                         continue;
                     }
                 }
-                if ((thrown_by_other_player != 0) ||
+                if (thrown_by_other_player ||
                     (this_fp->player_id != victim_fp->player_id))
                 {
                     if (!gm_8016B168() || gm_8016B0D4() ||
@@ -1751,8 +1751,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                         ((u8) victim_hit->x43_b2 != false)
                                             ? true
                                             : false;
-                                    if ((is_same_gobj != false) &&
-                                        (var_r0_2 == false) &&
+                                    if (is_same_gobj && (var_r0_2 == false) &&
                                         (this_gobj !=
                                          victim_fp->victim_gobj) &&
                                         ((int) this_fp->ground_or_air ==
@@ -1766,7 +1765,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                          true) &&
                                         (hit_count != 0))
                                     {
-                                        hits_clashed = 0;
+                                        hits_clashed = false;
                                         for (m = 0;
                                              m < (sizeof(this_fp->x914) /
                                                   sizeof(HitCapsule));
@@ -1795,7 +1794,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                 }
                                             }
                                         }
-                                        if (hits_clashed == false) {
+                                        if (!hits_clashed) {
                                             goto block_66;
                                         }
                                     } else {
@@ -2004,7 +2003,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
     int hit_count;
     HitCapsule* this_hit;
     Item* item;
-    int hits_clashed;
+    bool hits_clashed;
     HitCapsule* hurt;
     int var_r22;
     HitCapsule* temp_hit;
@@ -2169,7 +2168,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
             if (!(u8) fp->x221B_b5 && var_r22 == 0 &&
                 hit_count != 0)
             {
-                hits_clashed = 0;
+                hits_clashed = false;
                 for (m = 0; m < (sizeof(fp->x914) / sizeof(HitCapsule)); m++) {
                     if ((u8) ftColl_804D6560[m] == 0) {
                         continue;
@@ -2189,7 +2188,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                                 item->scl, fp->x34_scale.y))
                         {
                             item->xDCE_flag.b6 = true;
-                            hits_clashed = 1;
+                            hits_clashed = true;
                             item->toucher = gobj;
                             break;
                         }
@@ -2204,12 +2203,12 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                                 item->scl, fp->x34_scale.y))
                         {
                             ftColl_80077970(item, hurt, fp, temp_hit);
-                            hits_clashed = 1;
+                            hits_clashed = true;
                             break;
                         }
                     }
                 }
-                if (hits_clashed != 0) {
+                if (hits_clashed) {
                     continue;
                 }
             }
