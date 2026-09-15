@@ -420,7 +420,7 @@ void ftPp_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (item_gobj != fp->u.nn.x222C) {
         return;
@@ -433,7 +433,7 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
 
 static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->u.nn.x222C == 0) {
         return;
