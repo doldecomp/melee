@@ -169,15 +169,6 @@ typedef struct CardCmd {
     };
 } CardCmd;
 
-/// The 0x20-byte prefix of a CardCmd that fn_803AD16C builds its sector
-/// commands in; fn_803AC168 still copies a whole CardCmd, so the last word
-/// comes from whatever follows on the stack, as in retail.
-typedef struct CardSectorCmd {
-    /* 0x00 */ s32 type;
-    /* 0x04 */ CardState* state;
-    /* 0x08 */ CardSectorArgs sector;
-} CardSectorCmd;
-
 /// Requests queued by hsd_3B27.c and started by fn_803AA790.
 typedef enum CardRequestType {
     /* 0x00 */ CARD_REQ_NONE,

@@ -2230,73 +2230,67 @@ static inline s32 fn_803AD16C_queue_clear(CardState* state, s32 phys,
 
 static inline s32 fn_803AD16C_queue_read(CardState* state, s32 phys)
 {
-    CardSectorCmd cmd;
+    CardCmd cmd;
     u32 size = state->sector_size;
     u32 temp = state->header_size + size;
     u32 num = temp + 0x2F;
     u32 idx;
-    s32 offset;
 
     temp = num / size;
     idx = temp - 1;
     idx = phys + idx;
-    offset = size * idx;
 
     cmd.type = CARD_CMD_READ_SECTOR;
     cmd.state = state;
     cmd.sector.phys = phys;
-    cmd.sector.offset = offset;
-    return fn_803AC168((const CardCmd*) &cmd);
+    cmd.sector.offset = size * idx;
+    return fn_803AC168(&cmd);
 }
 
 static inline s32 fn_803AD16C_queue_write(CardState* state, s32 phys,
                                           s32 block_id, s32 seq)
 {
-    CardSectorCmd cmd;
+    CardCmd cmd;
     u32 size = state->sector_size;
     u32 temp = state->header_size + size;
     u32 num = temp + 0x2F;
     u32 idx;
-    s32 offset;
 
     temp = num / size;
     idx = temp - 1;
     idx = phys + idx;
-    offset = size * idx;
 
     cmd.type = CARD_CMD_WRITE_SECTOR;
     cmd.state = state;
     cmd.sector.phys = phys;
     cmd.sector.block_id = block_id;
     cmd.sector.seq = seq;
-    cmd.sector.offset = offset;
-    return fn_803AC168((const CardCmd*) &cmd);
+    cmd.sector.offset = size * idx;
+    return fn_803AC168(&cmd);
 }
 
 static inline s32 fn_803AD16C_queue_write_last(CardState* state, s32 phys,
                                                s32 block_id, s32 seq)
 {
     s32 tail[2];
-    CardSectorCmd cmd;
+    CardCmd cmd;
     u32 size = state->sector_size;
     u32 temp = state->header_size + size;
     u32 num = temp + 0x2F;
     u32 idx;
-    s32 offset;
 
     temp = num / size;
     idx = temp - 1;
     idx = phys + idx;
-    offset = size * idx;
 
     cmd.type = CARD_CMD_WRITE_SECTOR;
     cmd.state = state;
     cmd.sector.phys = phys;
     cmd.sector.block_id = block_id;
     cmd.sector.seq = seq;
-    cmd.sector.offset = offset;
+    cmd.sector.offset = size * idx;
     fn_803AD16C_own(tail);
-    return fn_803AC168((const CardCmd*) &cmd);
+    return fn_803AC168(&cmd);
 }
 
 s32 fn_803AD16C(CardState* state)
