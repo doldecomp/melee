@@ -140,15 +140,10 @@ struct TyFiguponED4 {
     /* 0x0C */ u32 xC;
 };
 
-struct TyDisplayData {
-    /* 0x000 */ u8 pad_000[0x138];
-    /* 0x138 */ ToyListEntry* first_entry;
-    /* 0x13C */ ToyListEntry* last_entry;
-    /* 0x140 */ ToyListEntry* selected_entry;
-    /* 0x144 */ u8 pad_144[0x154 - 0x144];
-    /* 0x154 */ s16 selectedIdx;
-    /* 0x156 */ u8 pad_156;
-    /* 0x157 */ s8 visible_count;
+struct ToyModelFile {
+    /* 0x00 */ s32 trophy_id;
+    /* 0x04 */ char archive_name[0x20];
+    /* 0x24 */ char symbol_name[0x30];
 };
 
 struct ToyListEntry {
@@ -159,6 +154,17 @@ struct ToyListEntry {
     /* 0x10 */ s16 trophy_id;
     /* 0x12 */ u8 pad_12[2];
     /* 0x14 */ HSD_Archive* archive;
+};
+
+struct TyDisplayData {
+    /* 0x000 */ ToyListEntry entries[13];
+    /* 0x138 */ ToyListEntry* first_entry;
+    /* 0x13C */ ToyListEntry* last_entry;
+    /* 0x140 */ ToyListEntry* selected_entry;
+    /* 0x144 */ u8 pad_144[0x154 - 0x144];
+    /* 0x154 */ s16 selectedIdx;
+    /* 0x156 */ u8 pad_156;
+    /* 0x157 */ s8 visible_count;
 };
 
 struct Toy26B8 {
@@ -190,7 +196,7 @@ struct _Toy_804A26B8_t {
 ASSERT_SIZE(struct _Toy_804A26B8_t, 0xC);
 
 struct TyViewData {
-    char pad_0[0x4];
+    HSD_GObj* gobj;
     s8 x4;
     char pad_5[0x3];
 };
@@ -328,13 +334,6 @@ struct DigitInit {
     s32 x0, x4, x8, xC;
 };
 
-struct TyLightData {
-    /* 0x00 */ u8 pad[4];
-    /* 0x04 */ HSD_GObj* gobj;
-    /* 0x08 */ u8 pad8[4];
-    /* 0x0C */ HSD_Archive* archive;
-};
-
 struct ToyNameData {
     s16 x0;
     s16 x2;
@@ -394,28 +393,6 @@ struct TyCameraData_ {
     s32 x58;
 };
 
-struct TyLightGObj_ {
-    u8 pad[0x28];
-    HSD_LObj* x28;
-};
-
-struct TyLightArray_ {
-    void* x0;
-    TyLightGObj_* x4;
-    u8 pad08[0x14 - 0x08];
-    f32 x14;
-    f32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    u8 pad28[0x7C - 0x28];
-    s32 x7C;
-    s32 x80;
-    s32 x84;
-    u8 pad88[0xDC - 0x88];
-    s8 xDC[8];
-};
-
 struct ToyDataJObj {
     /* 0x00 */ void* x0;
     /* 0x04 */ struct ToyDataJObj* x4;
@@ -459,12 +436,15 @@ struct ToyCameraControl {
     /*  +0 */ HSD_GObj* x00;
     /*  +4 */ HSD_GObj* x04;
     /*  +8 */ HSD_GObj* x08;
-    /*  +C */ u8 pad[0x4];
+    /*  +C */ HSD_Archive* archive;
     /* +10 */ s32 x10;
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
+    /* +1C */ Vec3 positions[8];
+    /* +7C */ Vec3 interests[8];
+    /* +DC */ s8 has_position_anim[8];
 };
-ASSERT_SIZE(ToyCameraControl, 0x1C);
+ASSERT_SIZE(ToyCameraControl, 0xE4);
 
 struct ToyTransitionObj {
     u8 pad[0x20];
