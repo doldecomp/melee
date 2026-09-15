@@ -2842,7 +2842,8 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
         return fp->u.kb.hat.jobj;
     }
 
-    /// @todo What???
+    /// @remark This is actually a correctness hack. If no return was here,
+    /// MWCC emits the same code.
     return (HSD_JObj*) gobj;
 }
 

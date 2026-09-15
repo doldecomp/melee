@@ -540,7 +540,8 @@ HSD_JObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
         return fp->u.pr.x223C;
     }
 
-    /// @todo What???
+    /// @remark This is actually a correctness hack. If no return was here,
+    /// MWCC emits the same code.
     return (HSD_JObj*) gobj;
 }
 
