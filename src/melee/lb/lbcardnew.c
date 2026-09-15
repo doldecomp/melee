@@ -11,6 +11,21 @@
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
 
+struct CardTask {
+    /* 0x00 */ int x0;
+    /* 0x04 */ int x4;
+    /* 0x08 */ UNK_T x8;
+    /* 0x0C */ char* xC;
+    /// Copies are limited to CARD_FILENAME_MAX; the extra bytes stay zero
+    /// in the static task storage to terminate full-length filenames.
+    /* 0x10 */ char filename[CARD_FILENAME_MAX + 1];
+    /* 0x31 */ char new_filename[CARD_FILENAME_MAX + 1];
+    /* 0x52 */ char pad_52[2];
+};
+ASSERT_SIZE(struct CardTask, 0x54);
+ASSERT_OFFSET(struct CardTask, filename, 0x10);
+ASSERT_OFFSET(struct CardTask, new_filename, 0x31);
+
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;
     /* 0x004 */ UNK_T lib_area;
@@ -24,8 +39,8 @@ struct lb_80432A68_t {
     /* 0x024 */ int* free_blocks;
     /* 0x028 */ int* free_files;
     /* 0x02C */ char x2C[2];
-    /* 0x02C */ char x2E;
-    /* 0x02C */ char x2F[4];
+    /* 0x02E */ char x2E;
+    /* 0x02F */ char x2F[4];
     /* 0x034 */ s32 unk_34;
     /* 0x038 */ struct lb_80432A68_38_t unk_38[9];
     /* 0x080 */ s32 unk_80;
@@ -36,16 +51,7 @@ struct lb_80432A68_t {
     /* 0x094 */ CARDFileInfo file_info;
     /* 0x0A8 */ CardState card_state;
     /* 0x50C */ void (*x50C)(int);
-    /* 0x510 */ struct CardTask {
-        int x0;
-        int x4;
-        UNK_T x8;
-        char* xC;
-        char x10[0x20];
-        u8 x18;
-        char x19[7];
-        u8 unk20[0x1C];
-    } task_array[LbCardNewTaskArray_Max];
+    /* 0x510 */ struct CardTask task_array[LbCardNewTaskArray_Max];
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
@@ -142,13 +148,13 @@ int lb_80019CB0(int result)
                     result = lb_8001A8A4();
                     break;
                 case 5:
-                    result = lb_8001A9CC(task->x10);
+                    result = lb_8001A9CC(task->filename);
                     break;
                 case 6:
-                    result = lb_8001AAE4(task->x10, task->x19);
+                    result = lb_8001AAE4(task->filename, task->new_filename);
                     break;
                 case 7:
-                    result = lb_8001AC04(&task->x10);
+                    result = lb_8001AC04(task->filename);
                     break;
                 case 8:
                     result = lb_8001ACEC(task->x8);
@@ -166,7 +172,7 @@ int lb_80019CB0(int result)
                     result = lb_8001B14C();
                     break;
                 case 13:
-                    result = lb_8001B614(task->x10);
+                    result = lb_8001B614(task->filename);
                     break;
                 }
                 task->x0 = 0xE;
@@ -350,7 +356,7 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     task->x0 = 2;
     task->x4 = 1;
     if (filename != NULL) {
-        strncpy(task->xC = task->x10, filename, ARRAY_SIZE(task->x10));
+        strncpy(task->xC = task->filename, filename, CARD_FILENAME_MAX);
     } else {
         task->xC = NULL;
     }
@@ -541,7 +547,7 @@ int lb_8001AAE4(const char* old_name, const char* new_name)
     return saved_error;
 }
 
-int lb_8001AC04(UNK_T filename)
+int lb_8001AC04(const char* filename)
 {
     int hsd_result;
     int unused;
@@ -851,7 +857,7 @@ int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
     new_var = 0x10;
-    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
+    strncpy(setup_task(5, 0xE)->filename, filename, CARD_FILENAME_MAX);
     return lb_80019CB0(new_var);
 }
 
@@ -865,7 +871,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
-    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
+    strncpy(setup_task(5, 0xE)->filename, filename, CARD_FILENAME_MAX);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         while ((result = lb_8001B6F8()) == 11) {
@@ -896,7 +902,7 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     task = lb_80019C38_noinline();
     task->x0 = 7;
     task->x4 = 0x10;
-    memcpy(task->x10, filename, new_var);
+    memcpy(task->filename, filename, new_var);
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
@@ -917,7 +923,7 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->x10, filename, new_var);
+    memcpy(setup_task(7, 0x10)->filename, filename, new_var);
     _p(comment) = comment;
     _p(banner) = banner;
     _p(icons) = icons;
@@ -1062,14 +1068,14 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_a, 0x20);
-    strncpy(task->x19, name_c, 0x20);
+    strncpy(task->filename, name_a, CARD_FILENAME_MAX);
+    strncpy(task->new_filename, name_c, CARD_FILENAME_MAX);
     task = lb_80019C38_noinline();
     task->x0 = 2;
     task->x4 = 1;
     if (name_b != NULL) {
-        task->xC = task->x10;
-        strncpy(task->x10, name_b, 0x20);
+        task->xC = task->filename;
+        strncpy(task->filename, name_b, CARD_FILENAME_MAX);
     } else {
         task->xC = NULL;
     }
@@ -1080,14 +1086,14 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_b, 0x20);
-    strncpy(task->x19, name_a, 0x20);
+    strncpy(task->filename, name_b, CARD_FILENAME_MAX);
+    strncpy(task->new_filename, name_a, CARD_FILENAME_MAX);
     task = lb_80019C38_noinline();
     task->x0 = 2;
     task->x4 = 1;
     if (name_c != NULL) {
-        task->xC = task->x10;
-        strncpy(task->x10, name_c, 0x20);
+        task->xC = task->filename;
+        strncpy(task->filename, name_c, CARD_FILENAME_MAX);
     } else {
         task->xC = NULL;
     }
@@ -1098,8 +1104,8 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     task = lb_80019C38_noinline();
     task->x0 = 6;
     task->x4 = 14;
-    strncpy(task->x10, name_c, 0x20);
-    strncpy(task->x19, name_b, 0x20);
+    strncpy(task->filename, name_c, CARD_FILENAME_MAX);
+    strncpy(task->new_filename, name_b, CARD_FILENAME_MAX);
     return lb_80019CB0(0x10);
 }
 
@@ -1122,7 +1128,7 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     task = setup_task(0xD, 0x80);
     strncpy(_p(x2C), company, 2U);
     strncpy(_p(x2F), game_name, 4U);
-    strncpy(task->x10, filename, 0x20U);
+    strncpy(task->filename, filename, CARD_FILENAME_MAX);
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         while ((result = lb_8001B6F8()) == 11) {

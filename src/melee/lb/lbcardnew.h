@@ -28,7 +28,7 @@ struct CardEntry {
 /* 01A8A4 */ int lb_8001A8A4(void);
 /* 01A9CC */ int lb_8001A9CC(char* filename);
 /* 01AAE4 */ int lb_8001AAE4(const char* old_name, const char* new_name);
-/* 01AC04 */ int lb_8001AC04(UNK_T filename);
+/* 01AC04 */ int lb_8001AC04(const char* filename);
 /* 01ACEC */ int lb_8001ACEC(UNK_T file_entries);
 /* 01AE38 */ int lb_8001AE38(UNK_T file_entries);
 /* 01AF84 */ int lb_8001AF84(void);
