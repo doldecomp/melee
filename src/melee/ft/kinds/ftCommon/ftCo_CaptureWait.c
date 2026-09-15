@@ -10,18 +10,6 @@
 #include <melee/it/kinds/itlinkhookshot.h>
 #include <melee/it/kinds/itsamusgrapple.h>
 
-typedef struct {
-    u8 pad_1A4C[0x1A4C];
-    f32 x1A4C; // 0x1A4C
-    u8 pad_1A58[0x1A58 - 0x1A50];
-    void* x1A58; // 0x1A58
-    u8 pad_2340[0x2340 - 0x1A5C];
-    f32 x2340; // 0x2340
-    f32 x2344; // 0x2344
-    s32 x2348; // 0x2348
-    u8 x234C;  // 0x234C
-} FighterOverlay;
-
 bool fn_800DAD18(Fighter_GObj*);
 static void fn_800DBBF8(Fighter_GObj*);
 
@@ -118,18 +106,15 @@ void fn_800DB8A4(Fighter_GObj* gobj)
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp;
-    FighterOverlay* fp_ovl;
     f32 dec;
     f32 zero;
     fp = GET_FIGHTER(gobj);
-    fp_ovl = (FighterOverlay*) fp;
-    fp_ovl->x2340 += 1.0;
-    fp_ovl->x1A4C -= p_ftCommonData->grab_timer_decrement;
-    fp_ovl->x2348 =
-        ftCommon_GrabMash(fp, *(f32*) ((u8*) p_ftCommonData + 0x3A8));
-    if (fp_ovl->x1A4C <= 0.0F) {
-        ftCo_800DA698(fp_ovl->x1A58, 0);
-        if (fp_ovl->x234C != 0 || fn_800DC044(gobj)) {
+    fp->mv.co.capturewait.x0 += 1.0;
+    fp->grab_timer -= p_ftCommonData->grab_timer_decrement;
+    fp->mv.co.capturewait.x8 = ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
+    if (fp->grab_timer <= 0.0F) {
+        ftCo_800DA698(fp->victim_gobj, 0);
+        if (fp->mv.co.capturewait.xC != 0 || fn_800DC044(gobj)) {
             fn_800DC070(gobj);
             return;
         }
@@ -139,18 +124,21 @@ void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
     }
 
     zero = 0.0F;
-    if (fp_ovl->x2344 != zero) {
+    if (fp->mv.co.capturewait.x4 != zero) {
         dec = 1.0F;
-        fp_ovl->x2344 -= dec;
-        if (fp_ovl->x2344 <= zero && fp_ovl->x2348 == 0) {
+        fp->mv.co.capturewait.x4 -= dec;
+        if (fp->mv.co.capturewait.x4 <= zero && fp->mv.co.capturewait.x8 == 0)
+        {
             ftAnim_SetAnimRate(gobj, dec);
-            fp_ovl->x2344 = 0.0F;
+            fp->mv.co.capturewait.x4 = 0.0F;
         }
     }
 
-    if (*(volatile f32*) &fp_ovl->x2344 <= 0.0F && fp_ovl->x2348 != 0) {
-        fp_ovl->x2344 = *(f32*) ((u8*) p_ftCommonData + 0x3B0);
-        ftAnim_SetAnimRate(gobj, *(f32*) ((u8*) p_ftCommonData + 0x3B4));
+    if (*(volatile f32*) &fp->mv.co.capturewait.x4 <= 0.0F &&
+        fp->mv.co.capturewait.x8 != 0)
+    {
+        fp->mv.co.capturewait.x4 = p_ftCommonData->x3B0;
+        ftAnim_SetAnimRate(gobj, p_ftCommonData->shouldered_anim_rate);
     }
 }
 
