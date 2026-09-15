@@ -73,7 +73,7 @@ typedef struct CardRequest {
     /* 0x00 */ s32 type;
     /* 0x04 */ CardState* state;
     /* 0x08 */ s32 x8;
-    /* 0x0C */ s32 xC;
+    /* 0x0C */ u8* buf;
     /* 0x10 */ s32 x10;
     /* 0x14 */ CardRequestFunc callback;
 } CardRequest;
@@ -126,12 +126,16 @@ typedef struct {
 /* 3AD16C */ static s32 fn_803AD16C(CardState* state);
 /* 3ADE4C */ static s32 fn_803ADE4C(CardState* card_state, s32 channel,
                                     s32 callback);
-/* 3ADF90 */ static s32 fn_803ADF90(struct CardState*, s32, u8*, s32,
-                                    void (*)(s32, s32));
-/* 3AE7F8 */ static s32 fn_803AE7F8(struct CardState*, s32, s32, s32, s32);
-/* 3AF3F0 */ static s32 fn_803AF3F0(CardState* state, s32, s32, s32, s32);
+/* 3ADF90 */ static int fn_803ADF90(CardState*, s32, u8*, s32,
+                                    CardRequestFunc cb);
+/* 3AE7F8 */ static int fn_803AE7F8(CardState* state, int file_idx, u8* buf,
+                                    bool async, CardRequestFunc cb);
+/* 3AF3F0 */ static int fn_803AE7F8(CardState* state, int file_idx, u8* buf,
+                                    bool async, CardRequestFunc cb);
+/* 3AF3F0 */ static int fn_803AF3F0(CardState* state, int file_idx, u8* buf,
+                                    bool async, CardRequestFunc cb);
 /* 3B0120 */ static s32 fn_803B0120(CardState* state, s32, s32, s32, s32);
-/* 3B0E9C */ static s32 fn_803B0E9C(struct CardState*, s32, s32, s32, s32);
+/* 3B0E9C */ static s32 fn_803B0E9C(CardState*, s32, s32, s32, s32);
 /* 3B1338 */ static s32 fn_803B1338(CardState* state, s32);
 /* 3B1F78 */ static s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id,
                                     s32 seq_num, s32 callback);
@@ -662,7 +666,7 @@ s32 fn_803AA790(void)
 
     switch (entry->type) {
     case 1:
-        result = fn_803ADF90(entry->state, entry->x8, (u8*) entry->xC, 1,
+        result = fn_803ADF90(entry->state, entry->x8, entry->buf, 1,
                              entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
@@ -674,16 +678,16 @@ s32 fn_803AA790(void)
     case 2:
         switch (state->file_flags[entry->x8]) {
         case 0:
-            result = fn_803AE7F8(entry->state, entry->x8, entry->xC, 1,
-                                 (s32) entry->callback);
+            result = fn_803AE7F8(entry->state, entry->x8, entry->buf, true,
+                                 entry->callback);
             break;
         case 1:
         case 2:
-            result = fn_803AF3F0(entry->state, entry->x8, entry->xC, 1,
-                                 (s32) entry->callback);
+            result = fn_803AF3F0(entry->state, entry->x8, entry->buf, true,
+                                 entry->callback);
             break;
         case 3:
-            result = fn_803B0120(entry->state, entry->x8, entry->xC, 1,
+            result = fn_803B0120(entry->state, entry->x8, entry->buf, 1,
                                  (s32) entry->callback);
             break;
         default:
@@ -698,7 +702,7 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 3:
-        result = fn_803B1F78(entry->state, entry->x8, entry->xC, entry->x10,
+        result = fn_803B1F78(entry->state, entry->x8, entry->buf, entry->x10,
                              (s32) entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
@@ -708,7 +712,7 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 4:
-        result = fn_803B21E8(entry->state, entry->xC, entry->x10,
+        result = fn_803B21E8(entry->state, entry->buf, entry->x10,
                              (s32) entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
@@ -727,7 +731,7 @@ s32 fn_803AA790(void)
         entry->type = 0;
         return result;
     case 6:
-        result = fn_803B26CC(state, entry->x8, entry->xC, entry->x10,
+        result = fn_803B26CC(state, entry->x8, entry->buf, entry->x10,
                              entry->callback);
         if (result < 0) {
             if (entry->callback != NULL) {
@@ -2859,7 +2863,7 @@ static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
     return 0;
 }
 
-s32 fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
+int fn_803ADF90(CardState* state, s32 file_idx, u8* buf, s32 async,
                 CardRequestFunc callback)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
@@ -3061,8 +3065,8 @@ static inline void fn_803AE7F8_close(CardState* state)
     }
 }
 
-s32 fn_803AE7F8(CardState* state, s32 file_idx, s32 buf, s32 async,
-                s32 callback)
+int fn_803AE7F8(CardState* state, int file_idx, u8* buf, bool async,
+                CardRequestFunc cb)
 {
     CardState* st = state;
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
@@ -3472,7 +3476,7 @@ after_verify:
 
         entry->x0 = 2;
         entry->x4 = (s32) state;
-        entry->x8 = callback;
+        entry->x8 = cb;
         entry->xC = file_idx;
         hsd_804D7998 = -1;
     }
@@ -3690,8 +3694,8 @@ static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
     *total_blocks = fn_803AC7DC(state);
 }
 
-s32 fn_803AF3F0(CardState* state, s32 file_idx, s32 buf, s32 async,
-                s32 callback)
+int fn_803AF3F0(CardState* state, int file_idx, u8* buf, bool async,
+                CardRequestFunc cb)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
     s32 block_map[3][64];
@@ -3996,7 +4000,7 @@ after_verify:
 
         entry->x0 = 3;
         entry->x4 = (s32) state;
-        entry->x8 = callback;
+        entry->x8 = cb;
         entry->xC = file_idx;
         hsd_804D7998 = -1;
     }
@@ -4130,8 +4134,8 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 phys,
     return result;
 }
 
-s32 fn_803B0120(CardState* state, s32 file_idx, s32 buf, s32 async,
-                s32 callback)
+int fn_803B0120(CardState* state, s32 file_idx, u8* buf, bool async,
+                CardRequestFunc callback)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
     s32 block_map[3][64];
@@ -5400,7 +5404,7 @@ int hsd_803B2550(CardState* state, const char* filename,
         entry->type = 5;
         entry->state = state;
         entry->x8 = file_no;
-        entry->callback = (void (*)(s32, s32)) callback;
+        entry->callback = callback;
         hsd_804D7994 = next % 32;
     }
 
