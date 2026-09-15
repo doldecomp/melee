@@ -5719,10 +5719,10 @@ static inline void toy_sobj_loop(ToyGlobalsS_* tg2, UNK_T* syms)
     one = 1;
     do {
         sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i], 0, 0, 0x80, 0);
-        *(f32*) ((char*) sobj + 0x1C) = two;
+        sobj->x1C = two;
         i += 1;
-        *(f32*) ((char*) sobj + 0x20) = two;
-        *(s32*) ((char*) sobj + 0x40) = one;
+        sobj->x20 = two;
+        sobj->x40 = one;
     } while (i < 3);
 }
 
@@ -5738,7 +5738,7 @@ void Toy_80310324(void)
     UNK_T syms[3];
     UNK_T sym[1];
     s32 var_r0;
-    HSD_GObj* gobj;
+    HSD_SObj* sobj;
 
     toy = (void*) &_Toy_804A26B8;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -5773,11 +5773,10 @@ void Toy_80310324(void)
     Toy_80307470(0);
     _Toy_803078E4();
 
-    gobj = ((ToyGlobalsS_*) Toy_sbss_804D6ED8)->xC;
-    gobj = *(HSD_GObj**) ((char*) gobj + 0x28);
-    while (gobj != NULL) {
-        *(s32*) ((char*) gobj + 0x40) = 9;
-        gobj = *(HSD_GObj**) ((char*) gobj + 0x4);
+    sobj = Toy_sbss_804D6ED8->gobj2->hsd_obj;
+    while (sobj != NULL) {
+        sobj->x40 = 9;
+        sobj = sobj->next;
     }
 
     if (gm_IsCurrently1PMode() != 0 ||
