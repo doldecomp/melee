@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "types.h"
 #include <dolphin/card.h>
-#include <melee/lb/types.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
