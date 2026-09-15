@@ -553,7 +553,7 @@ static inline s32 _Toy_GetTrophyTotal(Toy26B8* toy)
     return *gmMainLib_GetTrophyCount();
 }
 
-static inline u16* idk(void)
+static inline u16* getTrophyFlags(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
@@ -564,28 +564,28 @@ static inline u16* idk(void)
 
 s32 Toy_803048C0(int arg0)
 {
-    return idk()[arg0] & 0xFF;
+    return getTrophyFlags()[arg0] & 0xFF;
 }
 
 bool Toy_80304924(int arg0)
 {
-    return idk()[arg0] & 0x8000;
+    return getTrophyFlags()[arg0] & 0x8000;
 }
 
 void Toy_80304988(int arg0)
 {
-    u16* v = idk();
+    u16* v = getTrophyFlags();
     v[arg0] = v[arg0] ^ 0x8000;
 }
 
 bool Toy_803049F4(int arg0)
 {
-    return idk()[arg0] & 0x4000;
+    return getTrophyFlags()[arg0] & 0x4000;
 }
 
 void Toy_80304A58(int arg0)
 {
-    u16* v = idk();
+    u16* v = getTrophyFlags();
     if (Toy_803049F4(arg0)) {
         v[arg0] = v[arg0] ^ 0x4000;
     }
@@ -697,37 +697,6 @@ bool _Toy_80304CC8_noinline(int arg0)
     return Toy_80304CC8(arg0);
 }
 
-static inline u16* Toy_80304D30_idk(void)
-{
-    if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
-        return &Toy_804A284C[5];
-    } else {
-        return gmMainLib_GetTrophyFlags();
-    }
-}
-
-static inline int Toy_80304D30_48C0(int arg0)
-{
-    return Toy_80304D30_idk()[arg0] & 0xFF;
-}
-
-static inline bool Toy_80304D30_4B0C(int arg0)
-{
-    u16* v;
-    u16 s;
-    if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
-        s = Toy_804A284C[3] | Toy_804A284C[4];
-        v = &s;
-    } else {
-        v = gmMainLib_GetTrophyCategoryFlags();
-    }
-    if (*v & (1 << arg0)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
 int _Toy_80304D30(void)
 {
     int i;
@@ -744,7 +713,7 @@ int _Toy_80304D30(void)
     memzero(sp14, sizeof(sp14));
     count = 0;
     for (i = 0; i < TY_TROPHY_COUNT; i++) {
-        if (Toy_80304CC8(i) && Toy_80304D30_48C0(i)) {
+        if (Toy_80304CC8(i) && Toy_803048C0(i)) {
             x = Toy_803060BC(i, 6);
             sp14[x]++;
             if (x != 8 && x != 1) {
@@ -759,7 +728,7 @@ int _Toy_80304D30(void)
         if (idk > (unsigned int) 2 && *qwe != 0 && *qwe == Toy_80304B94(idk)) {
             for (i = 0; i < idk; i++) {
                 if (1 < (unsigned int) i && i != 3) {
-                    if (!Toy_80304D30_4B0C(i)) {
+                    if (!Toy_80304B0C(i)) {
                         *(unsigned char*) Toy_804A284C = 2;
                         Toy_80305918(i, 0, 0);
                     }
@@ -770,7 +739,7 @@ int _Toy_80304D30(void)
                 i++;
             }
             if (4 <= i && i <= 6) {
-                if (!Toy_80304D30_4B0C(i)) {
+                if (!Toy_80304B0C(i)) {
                     *(unsigned char*) Toy_804A284C = 2;
                     Toy_80305918(i, 0, 0);
                     break;
@@ -785,7 +754,7 @@ int _Toy_80304D30(void)
     count2 = 0;
     for (i = 0; i < 8; i++) {
         if (x != 8 && x != 1) {
-            if (Toy_80304D30_4B0C(i)) {
+            if (Toy_80304B0C(i)) {
                 count2 += Toy_80304B94(i);
             }
         }
