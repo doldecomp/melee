@@ -12,20 +12,25 @@ add_compile_definitions(TARGET_PC)
 
 add_compile_definitions(bool=int)
 
-list(FILTER SOURCES EXCLUDE REGEX "dberror.c") # OSContext register usage
-list(FILTER SOURCES EXCLUDE REGEX "debug.c") # PPC register usage
-list(FILTER SOURCES EXCLUDE REGEX "debugconsole_main.c") # PPC register usage
-list(FILTER SOURCES EXCLUDE REGEX "fog.c") # GXInitFogAdjTable
-list(FILTER SOURCES EXCLUDE REGEX "gmmain.c") # CARDInit
-list(FILTER SOURCES EXCLUDE REGEX "hsd_3915.c") # requires debug font from dol
-list(FILTER SOURCES EXCLUDE REGEX "lb_0195.c") # PADSetSamplingRate
-list(FILTER SOURCES EXCLUDE REGEX "lb_01F8.c") # needs dolphin/thp
-list(FILTER SOURCES EXCLUDE REGEX "lbcardnew.c") # CARD ASync
-list(FILTER SOURCES EXCLUDE REGEX "lbmthp.c") # needs dolphin/thp
-list(FILTER SOURCES EXCLUDE REGEX "pobj.c") # nontrivial GXSetArray usage
-list(FILTER SOURCES EXCLUDE REGEX "sislib_font.c") # requires font from dol
-list(FILTER SOURCES EXCLUDE REGEX "video.c") # needs VIPadFrameBufferWidth
+set(EXCLUSIONS
+    "melee/db/dberror.c" # OSContext register usage
+    "melee/gm/gmmain.c" # CARDInit
+    "melee/lb/lb_0195.c" # PADSetSamplingRate
+    "melee/lb/lb_01F8.c" # needs dolphin/thp
+    "melee/lb/lbcardnew.c" # CARD ASync
+    "melee/lb/lbmthp.c" # needs dolphin/thp
+    "sysdolphin/baselib/debug.c" # PPC register usage
+    "sysdolphin/baselib/debugconsole_main.c" # PPC register usage
+    "sysdolphin/baselib/fog.c" # GXInitFogAdjTable
+    "sysdolphin/baselib/hsd_3915.c" # requires debug font from dol
+    "sysdolphin/baselib/pobj.c" # nontrivial GXSetArray usage
+    "sysdolphin/baselib/sislib_font.c" # requires font from dol
+    "sysdolphin/baselib/video.c" # needs VIPadFrameBufferWidth
+)
 
+foreach(_exclusion IN LISTS EXCLUSIONS)
+    list(REMOVE_ITEM SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/${_exclusion}")
+endforeach()
 
 add_library(melee STATIC ${SOURCES})
 

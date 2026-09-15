@@ -22,20 +22,25 @@ typedef struct CardState {
     /* 0x08 */ u32 sector_size;
     /* 0x0C */ CARDFileInfo file_info;
     /* 0x20 */ s32 file_no;
+
     /// Bytes of comment + banner + icons; the 0x30-byte digest follows.
     /* 0x24 */ u32 header_size;
+
     /* 0x28 */ int file_flags[9]; ///< @todo enum, not flags
     /* 0x4C */ int file_sizes[9];
     /* 0x70 */ u8* file_data[9];
     /* 0x94 */ u8 pad_94[0xDC];
+
     /// Block id stored in each physical block; negated = stale copy,
     /// -0x7FFF = free.
     /* 0x170 */ s32 block_ids[64];
+
     /* 0x270 */ s32 block_seqs[64];
     /* 0x370 */ char comment[64];
     /* 0x3B0 */ CardIconInfo icon_info;
     /* 0x3C4 */ CARDStat stat;
     /* 0x430 */ u8 digest[0x30];
+
     /// Physical blocks 1..num_blocks each fill a sector; block 0 shares the
     /// last header sector.
     /* 0x460 */ s32 num_blocks;
@@ -43,7 +48,7 @@ typedef struct CardState {
 ASSERT_SIZE(CardState, 0x464);
 
 /// Completion callback: (file index or 0, result).
-typedef void (*CardCallback)(int, int);
+typedef void (*CardCallback)(int file_idx, int result);
 
 /// Ring commands run by hsd_803AAA48; asynchronous CARD operations are
 /// completed by hsd_803A949C. Names describe the observed operations; they
@@ -250,12 +255,16 @@ typedef enum CardActiveType {
     /* 0x00 */ CARD_ACTIVE_NONE,
     /* 0x01 */ CARD_ACTIVE_READ_FILE,
     /* 0x02 */ CARD_ACTIVE_WRITE_FILE, ///< file_flags 0
+
     /// Writes files with file_flags 1 or 2. On completion the older of two
     /// copies of each block is marked stale.
     /* 0x03 */ CARD_ACTIVE_WRITE_FILE_1_2,
+
     /* 0x04 */ CARD_ACTIVE_WRITE_FILE_3, ///< file_flags 3
+
     /// Set by fn_803ADE4C (open file) and fn_803B26CC (read header).
     /* 0x05 */ CARD_ACTIVE_OPEN_OR_READ_HEADER,
+
     /* 0x06 */ CARD_ACTIVE_CREATE_FILE,
     /* 0x07 */ CARD_ACTIVE_SET_STATUS,
 } CardActiveType;
@@ -285,6 +294,7 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
 /// after the call returns, before interrupts are restored. CARD completion
 /// callbacks must therefore not run inline from those calls.
 /* 3AAA48 */ void hsd_803AAA48(void);
+
 /* 3AC340 */ int hsd_803AC340(CardIconInfo* icon_info);
 /* 3AC3E0 */ void hsd_803AC3E0(CardState* state, int file_idx, int file_size,
                                int file_flags, u8* data);
@@ -294,6 +304,34 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
 /* 3B2550 */ int hsd_803B2550(CardState* state, const char* filename,
                               CardCallback callback);
 /* 3B2674 */ int hsd_803B2674(CardState* state);
+
+/// Queues a header read into the non-NULL destination buffers. Returns 0
+/// when queued, not when complete; a negative return does not queue a
+/// request or invoke the callback. The same return contract applies to
+/// the create, status, read and write request functions below.
+/* 3B27F4 */ int hsd_803B27F4(CardState* state, void* comment, void* banner,
+                              void* icons, CardCallback callback);
+/// Queues file creation. Copies 0x40 bytes from comment into state even if
+/// the queue is full; filename, banner and icons are borrowed.
+/* 3B286C */ int hsd_803B286C(CardState* state, const char* filename,
+                              const char* comment, void* banner, void* icons,
+                              CardCallback callback);
+/// Queues a header/status update. Copies 0x40 bytes from comment into state
+/// even if the queue is full; banner and icons are borrowed.
+/* 3B2928 */ int hsd_803B2928(CardState* state, const char* comment,
+                              void* banner, void* icons,
+                              CardCallback callback);
+/// Queues a logical-file read into the borrowed destination buffer.
+/* 3B29D8 */ int hsd_803B29D8(CardState* state, int file_idx, u8* buf,
+                              CardCallback callback);
+/// Queues a logical-file write from the borrowed source buffer.
+/* 3B2A4C */ int hsd_803B2A4C(CardState* state, int file_idx, u8* buf,
+                              CardCallback callback);
+/* 3B2ADC */ int hsd_SetCardIconInfo(CardState* state,
+                                     CardIconInfo* icon_info);
+/* 3B2FA0 */ int hsd_803B2FA0(u8* data, int len);
+/* 3B31CC */ int hsd_803B31CC(u8* data, int len);
+
 /* 4D1138 */ extern CardActiveRequest hsd_804D1138;
 /* 4D1148 */ extern CardCmd hsd_804D1148[128];
 /* 4D2348 */ extern CardRequest hsd_804D2348[32];
