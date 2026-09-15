@@ -5972,6 +5972,13 @@ void _Toy_80310B48(HSD_GObj* gobj)
     }
 }
 
+static inline void showDevText(HSD_GObj* gobj, DevText** text)
+{
+    DevText_Show(gobj, *text);
+    DevText_HideCursor(*text);
+    DevText_80302AC0(*text);
+}
+
 void _Toy_803114E8(void)
 {
     GXColor color;
@@ -5990,9 +5997,7 @@ void _Toy_803114E8(void)
     if (_Toy_sbss_804D6E98 != NULL) {
         HSD_GObj* gobj = DevText_GetGObj();
         color = _Toy_color_4080D060_0;
-        DevText_Show(gobj, _Toy_sbss_804D6E98);
-        DevText_HideCursor(_Toy_sbss_804D6E98);
-        DevText_80302AC0(_Toy_sbss_804D6E98);
+        showDevText(gobj, &_Toy_sbss_804D6E98);
         DevText_SetBGColor(_Toy_sbss_804D6E98, *(&color));
         DevText_SetScale(_Toy_sbss_804D6E98, 12.0f, 18.0f);
         DevText_Erase(_Toy_sbss_804D6E98);
@@ -6075,9 +6080,7 @@ void _Toy_80311788(void)
     if (_Toy_sbss_804D6E9C != NULL) {
         HSD_GObj* gobj = DevText_GetGObj();
         color = _Toy_color_40B0D060_1;
-        DevText_Show(gobj, _Toy_sbss_804D6E9C);
-        DevText_HideCursor(_Toy_sbss_804D6E9C);
-        DevText_80302AC0(_Toy_sbss_804D6E9C);
+        showDevText(gobj, &_Toy_sbss_804D6E9C);
         DevText_SetBGColor(_Toy_sbss_804D6E9C, *(&color));
         DevText_SetScale(_Toy_sbss_804D6E9C, 12.0f, 18.0f);
         DevText_Erase(_Toy_sbss_804D6E9C);
@@ -6420,6 +6423,19 @@ void Toy_8031234C(s32 arg0)
     }
 }
 
+static inline void loadTrophyMetadata(void)
+{
+    if (_Toy_sbss_804D6ED0 == NULL) {
+        _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(
+            getDataiDatFilename(), &_Toy_sbss_804D6EC4, "tyInitModelTbl",
+            &_Toy_sbss_804D6EC0, "tyInitModelDTbl", &_Toy_sbss_804D6EBC,
+            "tyModelSortTbl", &_Toy_sbss_804D6EB8, "tyExpDifferentTbl",
+            &_Toy_sbss_804D6EB4, "tyNoGetUsTbl", &Toy_sbss_804D6EB0,
+            "tyDisplayModelTbl", &Toy_sbss_804D6EAC, "tyDisplayModelUsTbl",
+            NULL);
+    }
+}
+
 void Toy_803124BC(void)
 {
     u16* table1;
@@ -6430,15 +6446,7 @@ void Toy_803124BC(void)
     table1 = gmMainLib_GetTrophyFlags();
     table2 = gmMainLib_GetTrophyCategoryFlags();
 
-    if (_Toy_sbss_804D6ED0 == NULL) {
-        _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(
-            getDataiDatFilename(), &_Toy_sbss_804D6EC4, "tyInitModelTbl",
-            &_Toy_sbss_804D6EC0, "tyInitModelDTbl", &_Toy_sbss_804D6EBC,
-            "tyModelSortTbl", &_Toy_sbss_804D6EB8, "tyExpDifferentTbl",
-            &_Toy_sbss_804D6EB4, "tyNoGetUsTbl", &Toy_sbss_804D6EB0,
-            "tyDisplayModelTbl", &Toy_sbss_804D6EAC, "tyDisplayModelUsTbl",
-            NULL);
-    }
+    loadTrophyMetadata();
 
     for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
         s32 skip;
@@ -6475,15 +6483,7 @@ void Toy_8031263C(void)
     table1 = gmMainLib_GetTrophyFlags();
     table2 = gmMainLib_GetTrophyCategoryFlags();
 
-    if (_Toy_sbss_804D6ED0 == NULL) {
-        _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(
-            getDataiDatFilename(), &_Toy_sbss_804D6EC4, "tyInitModelTbl",
-            &_Toy_sbss_804D6EC0, "tyInitModelDTbl", &_Toy_sbss_804D6EBC,
-            "tyModelSortTbl", &_Toy_sbss_804D6EB8, "tyExpDifferentTbl",
-            &_Toy_sbss_804D6EB4, "tyNoGetUsTbl", &Toy_sbss_804D6EB0,
-            "tyDisplayModelTbl", &Toy_sbss_804D6EAC, "tyDisplayModelUsTbl",
-            NULL);
-    }
+    loadTrophyMetadata();
 
     for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
         if (_Toy_80304CC8_noinline(i) != 0 && (s32) Toy_803060BC(i, 6) == 2) {
