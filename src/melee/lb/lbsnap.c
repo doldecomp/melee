@@ -273,9 +273,7 @@ void lbSnap_8001DA5C(const u8* src)
     PAD_STACK(24);
 
     banner = lbSnap_GetMemSnapIconData();
-    row = 0;
-    src_row_accum = 0;
-    do {
+    for (row = 0, src_row_accum = 0; row < 32; row++, src_row_accum += 204) {
         src_row_base = src_row_accum / 32;
         dst_row = banner + ((row % 4) * 8);
         dst_tile_row = (row / 4);
@@ -328,10 +326,7 @@ void lbSnap_8001DA5C(const u8* src)
             src_column_accum += 448;
             column += 2;
         }
-
-        row++;
-        src_row_accum += 204;
-    } while (row < 32);
+    }
 }
 #ifdef MUST_MATCH
 #pragma pop

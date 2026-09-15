@@ -130,19 +130,15 @@ void it_802B64FC(Item_GObj* gobj)
     ip = GET_ITEM(gobj);
     sa = ip->xC4_article_data->x4_specialAttributes;
     vec3.x = vec3.y = vec3.z = 0.0f;
-    if (it_8026B634(&ip->pos, &vec3, ip->owner, ip->facing_dir) != NULL) {
-        goto block_4;
+    if (it_8026B634(&ip->pos, &vec3, ip->owner, ip->facing_dir) == NULL) {
+        temp_ret = it_8026C258(&ip->pos, ip->facing_dir);
+        temp_r3 = temp_ret;
+        if (temp_r3 != NULL) {
+            it_8026BB88(temp_r3, &vec3);
+        } else {
+            return;
+        }
     }
-    temp_ret = it_8026C258(&ip->pos, ip->facing_dir);
-    temp_r3 = temp_ret;
-    if (temp_r3 == NULL) {
-        goto block_17;
-    }
-    it_8026BB88(temp_r3, &vec3);
-    goto block_4;
-block_17:
-    return;
-block_4:
     var_f1 = 0.0f;
     if ((vec3.x == 0.0f) && (vec3.y == 0.0f)) {
         return;
@@ -161,15 +157,11 @@ block_4:
     }
     vec0 = vec1;
     lbVector_Sub(&vec0, &vec2);
-    if ((vec0.y > 0.001f)) {
+    if (vec0.y > 0.001f) {
         ip->xDD4_itemVar.samusmissile.x8 -= sa->x18;
-        goto block_11;
+    } else if (vec0.y < 0.001f) {
+        ip->xDD4_itemVar.samusmissile.x8 += sa->x18;
     }
-    if (!(vec0.y < 0.001f)) {
-        goto block_11;
-    }
-    ip->xDD4_itemVar.samusmissile.x8 += sa->x18;
-block_11:
     itSamusMissile_ClampTurn(ip, sa);
 }
 

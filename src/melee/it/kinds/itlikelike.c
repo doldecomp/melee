@@ -336,17 +336,17 @@ void itLikelike_UnkMotion1_Phys(Item_GObj* gobj)
     if (temp_r3 == 0) {
         if (HSD_Randi(attr->x3C) != 0) {
             ip->xDD4_itemVar.likelike.x44 = 0x3c;
-            goto block_5;
+        } else {
+            ip2 = GET_ITEM(gobj);
+            attr2 = GET_ATTRS(ip2);
+            it_80273454(gobj);
+            ip2->xDD4_itemVar.likelike.x4C = attr2->x18;
+            Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+            return;
         }
-        ip2 = GET_ITEM(gobj);
-        attr2 = GET_ATTRS(ip2);
-        it_80273454(gobj);
-        ip2->xDD4_itemVar.likelike.x4C = attr2->x18;
-        Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
-        return;
+    } else {
+        ip->xDD4_itemVar.likelike.x44 = temp_r3 - 1;
     }
-    ip->xDD4_itemVar.likelike.x44 = temp_r3 - 1;
-block_5:
     temp_r3_2 = ip->xDD4_itemVar.likelike.x4C;
     if (temp_r3_2 == 0) {
         if (it_802D9A2C(gobj) != 0) {
@@ -355,13 +355,13 @@ block_5:
         }
         if (HSD_Randi(3) != 0) {
             ip->xDD4_itemVar.likelike.x4C = attr->x18;
-            goto block_12;
+        } else {
+            it_802DAE6C(gobj);
+            return;
         }
-        it_802DAE6C(gobj);
-        return;
+    } else {
+        ip->xDD4_itemVar.likelike.x4C = temp_r3_2 - 1;
     }
-    ip->xDD4_itemVar.likelike.x4C = temp_r3_2 - 1;
-block_12:
     temp_f2 = ip->facing_dir;
     if (((temp_f2 > 0.0f) && (ip->x70_nudge.x < 0.0f)) ||
         ((temp_f2 < 0.0f) && (ip->x70_nudge.x > 0.0f)))
@@ -469,13 +469,13 @@ void itLikelike_UnkMotion2_Phys(Item_GObj* gobj)
         }
         if (HSD_Randi(3) != 0) {
             ip->xDD4_itemVar.likelike.x4C = attr->x18;
-            goto block_15;
+        } else {
+            it_802DAE6C(gobj);
+            return;
         }
-        it_802DAE6C(gobj);
-        return;
+    } else {
+        ip->xDD4_itemVar.likelike.x4C--;
     }
-    ip->xDD4_itemVar.likelike.x4C = ip->xDD4_itemVar.likelike.x4C - 1;
-block_15:
     ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
     temp_f2 = ip->facing_dir;
     if (((temp_f2 > 0.0f) && (ip->x70_nudge.x < 0.0f)) ||

@@ -826,10 +826,10 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
     new_count = 0;
     obtained_count = 0;
     total = 0;
-    trophy = 0;
-    byte_off = 0;
 
-    do {
+    for (trophy = 0, byte_off = 0; trophy < TY_TROPHY_COUNT;
+         trophy++, byte_off += 2)
+    {
         skip_list = _Toy_sbss_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
             s16 val;
@@ -923,9 +923,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 total++;
             }
         }
-        trophy++;
-        byte_off += 2;
-    } while (trophy < TY_TROPHY_COUNT);
+    }
 
     if (total != 0) {
         s32 use_new;
@@ -1731,99 +1729,95 @@ s16 _Toy_803064B8(s16 arg0, s8 arg1)
 
 void _Toy_8030663C(void)
 {
-    s32 var_r31;
-    s32 var_r30;
-    u16* var_r29;
-    TySortRow* var_r28;
-    int var_r27;
+    s32 count;
+    s32 offset;
+    u16* ptr;
+    TySortRow* dst;
+    int i;
 
-    var_r29 = (u16*) ((u8*) Toy_804A284C + 0xA);
-    var_r27 = 0;
-    var_r31 = 0;
-    var_r30 = 0;
-    var_r28 = _Toy_sbss_804D6E64;
+    ptr = (u16*) ((u8*) Toy_804A284C + 0xA);
+    i = 0;
+    count = 0;
+    offset = 0;
+    dst = _Toy_sbss_804D6E64;
     do {
         u16* src;
         if (gm_IsCurrently1PMode() != 0 ||
             gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
         {
-            src = var_r29;
+            src = ptr;
         } else {
             src = gmMainLib_GetTrophyFlags();
         }
-        if ((u8) * (u16*) ((u8*) src + var_r30) != 0) {
-            var_r28->key[0] = _Toy_803064B8(var_r27, 0);
-            var_r31 += 1;
-            var_r28++;
+        if ((u8) * (u16*) ((u8*) src + offset) != 0) {
+            dst->key[0] = _Toy_803064B8(i, 0);
+            count += 1;
+            dst++;
         }
-        var_r27 += 1;
-        var_r30 += 2;
-    } while (var_r27 < TY_TROPHY_COUNT);
+        i += 1;
+        offset += 2;
+    } while (i < TY_TROPHY_COUNT);
     {
-        s32 var2_r27;
-        TySortRow* var2_r28;
-        TySortRow* var2_r29;
-        int var2_r30;
+        s32 k;
+        TySortRow* src;
+        TySortRow* dst;
+        int j;
 
-        var2_r29 = _Toy_sbss_804D6E64;
-        var2_r30 = 0;
-        do {
-            var2_r28 = _Toy_sbss_804D6E64;
-            var2_r27 = 0;
+        dst = _Toy_sbss_804D6E64;
+        for (j = 0; j < TY_TROPHY_COUNT; j++) {
+            src = _Toy_sbss_804D6E64;
+            k = 0;
             goto loop_13_check;
         loop_13_body:
-            if (var2_r28->key[0] == _Toy_803064B8(var2_r30, 1)) {
-                var2_r29->key[1] = var2_r28->key[0];
-                var2_r29++;
+            if (src->key[0] == _Toy_803064B8(j, 1)) {
+                dst->key[1] = src->key[0];
+                dst++;
             } else {
-                var2_r28++;
-                var2_r27 += 1;
+                src++;
+                k += 1;
             loop_13_check:
-                if (var2_r27 < var_r31) {
+                if (k < count) {
                     goto loop_13_body;
                 }
             }
-            var2_r30 += 1;
-        } while (var2_r30 < TY_TROPHY_COUNT);
+        }
     }
     {
-        TySortRow* var3_r27;
-        s32 var3_r28;
-        TySortRow* var3_r29;
-        int var3_r30;
-        TySortRow* new_var;
+        TySortRow* src;
+        s32 k;
+        TySortRow* dst;
+        int j;
+        TySortRow* tmp;
 
-        var3_r29 = _Toy_sbss_804D6E64;
-        var3_r30 = 0;
-        do {
-            var3_r27 = _Toy_sbss_804D6E64;
-            var3_r28 = 0;
+        dst = _Toy_sbss_804D6E64;
+        for (j = 0; j < TY_TROPHY_COUNT; j++) {
+            src = _Toy_sbss_804D6E64;
+            k = 0;
             goto loop_23_check;
         loop_23_body:
             if (lbLang_IsSavedLanguageJP() != 0) {
-                if (var3_r27->key[0] == _Toy_803064B8(var3_r30, 2)) {
-                    var3_r29->key[2] = var3_r27->key[0];
-                    var3_r29++;
+                if (src->key[0] == _Toy_803064B8(j, 2)) {
+                    dst->key[2] = src->key[0];
+                    dst++;
                 } else {
                     goto block_22;
                 }
             } else {
-                new_var = var3_r27;
-                if (new_var->key[0] == _Toy_803064B8(var3_r30, 3)) {
-                    var3_r29->key[2] = new_var->key[0];
-                    var3_r29++;
+                tmp = src;
+                if (tmp->key[0] == _Toy_803064B8(j, 3)) {
+                    dst->key[2] = tmp->key[0];
+                    dst++;
                 } else {
                 block_22:
-                    var3_r27++;
-                    var3_r28 += 1;
+                    src++;
+                    k += 1;
                 loop_23_check:
-                    if (var3_r28 < var_r31) {
+                    if (k < count) {
                         goto loop_23_body;
                     }
                 }
             }
-            var3_r30 += 1;
-        } while (var3_r30 < TY_TROPHY_COUNT);
+        }
     }
 }
 
@@ -2507,9 +2501,7 @@ void _Toy_803078E4(void)
         data->x0C = GObj_Create(5, 6, 0);
         GObj_SetupGXLink(data->x0C, HSD_SObjLib_803A49E0, 0x38, 0);
 
-        i = 0;
-
-        do {
+        for (i = 0; i < 7; i++) {
             sobj = HSD_SObjLib_803A477C(data->x0C, syms[i], 0, 0, 0x80, 0);
             if (sobj != NULL) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
@@ -2520,8 +2512,7 @@ void _Toy_803078E4(void)
                     sobj->x14 = (f32) pos_en.a[i].xy[1];
                 }
             }
-            i += 1;
-        } while (i < 7);
+        }
     }
 }
 
@@ -5932,17 +5923,15 @@ void Toy_80310660(s32 arg0)
         }
 
         if (idx != 0) {
-            loopPtr = (Ty25Entry*) ty25;
-            count = 0;
             arg = 0;
-            do {
+            for (loopPtr = (Ty25Entry*) ty25, count = 0; count < 0xD;
+                 count += 1, loopPtr += 1)
+            {
                 if (loopPtr->x14 != NULL) {
                     lbArchive_80016EFC(loopPtr->x14);
                     loopPtr->x14 = (void*) arg;
                 }
-                count += 1;
-                loopPtr += 1;
-            } while (count < 0xD);
+            }
         }
 
         if (Toy_sbss_804D6EC8 != NULL) {
@@ -6144,8 +6133,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
         {
             s32 slot;
 
-            slot = 0;
-            do {
+            for (slot = 0; slot < 9; slot++) {
                 if (editor->values[slot] != 0) {
                     Toy_80305918(slot, 0, 0);
                     buttons = Toy_80305B88();
@@ -6157,8 +6145,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
                 } else if (slot == 2) {
                     Toy_80305918(slot, 0, 0);
                 }
-                slot += 1;
-            } while (slot < 9);
+            }
         }
         Toy_80305918(0, 1, 0);
         Toy_80305918(1, 1, 0);
@@ -6235,15 +6222,13 @@ skip_decrement:
     if (changed != 0) {
         DevText_Erase(_Toy_sbss_804D6E98);
         DevText_SetCursorXY(_Toy_sbss_804D6E98, 0, 0);
-        i = 0;
-        do {
+        for (i = 0; i < 9; i++) {
             if (i == (s8) editor->selected_slot) {
                 _Toy_803109A0(i, (s32) editor->values[i], 1);
             } else {
                 _Toy_803109A0(i, (s32) editor->values[i], 0);
             }
-            i += 1;
-        } while (i < 9);
+        }
     }
 }
 
@@ -6277,15 +6262,13 @@ void _Toy_803114E8(void)
         DevText_StoreColorIndex(_Toy_sbss_804D6E98, 1);
         DevText_SetTextColor(_Toy_sbss_804D6E98, *(&_Toy_color_FF8020FF));
 
-        i = 0;
-        do {
+        for (i = 0; i < 9; i++) {
             if (i == 0) {
                 _Toy_803109A0(i, 0, 1);
             } else {
                 _Toy_803109A0(i, 0, 0);
             }
-            i++;
-        } while (i < 9);
+        }
 
         memzero(data, 0x18);
         *data = GObj_Create(0, 0, 0);
@@ -6771,16 +6754,13 @@ void Toy_8031263C(void)
             NULL);
     }
 
-    i = 0;
-    do {
+    for (i = 0; i < TY_TROPHY_COUNT; i++, table1++) {
         if (_Toy_80304CC8_noinline(i) != 0) {
             if ((s32) Toy_803060BC(i, 6) == 2) {
                 *table1 |= 0x4000;
             }
         }
-        i++;
-        table1++;
-    } while (i < TY_TROPHY_COUNT);
+    }
 
     *table2 |= 4;
     Toy_804A284C[3] |= 4;

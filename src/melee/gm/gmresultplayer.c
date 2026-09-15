@@ -740,8 +740,8 @@ void fn_80178050(HSD_GObj* arg0)
             if (phase == 1) {
                 data->x0_23 = 2;
                 {
-                    s32 k = 0;
-                    do {
+                    s32 k;
+                    for (k = 0; k < 4; k++) {
                         switch ((s32) match_end->player_standings[k].pkind) {
                         case 2:
                             break;
@@ -756,14 +756,12 @@ void fn_80178050(HSD_GObj* arg0)
                             data->player_data[k].x0_0 = 1;
                             break;
                         }
-                        k++;
-                    } while (k < 4);
+                    }
                 }
             }
 
             {
-                k2 = 0;
-                do {
+                for (k2 = 0; k2 < 4; k2++) {
                     u8 slot = match_end->player_standings[k2].pkind;
                     if (slot == 0) {
                         if (!data->player_data[k2].x0_0) {
@@ -856,13 +854,12 @@ void fn_80178050(HSD_GObj* arg0)
                             var_r24 = 1;
                         }
                     }
-                    k2++;
-                } while (k2 < 4);
+                }
             }
 
             {
-                s32 k3 = 0;
-                do {
+                s32 k3;
+                for (k3 = 0; k3 < 4; k3++) {
                     if (match_end->player_standings[k3].pkind != 3) {
                         if (!data->player_data[k3].x0_1) {
                             HSD_JObjSetFlagsAll(data->player_data[k3].jobjs[8],
@@ -893,8 +890,7 @@ void fn_80178050(HSD_GObj* arg0)
                                 data->player_data[k3].jobjs[0xB], JOBJ_HIDDEN);
                         }
                     }
-                    k3++;
-                } while (k3 < 4);
+                }
             }
 
             {

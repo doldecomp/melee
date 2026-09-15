@@ -772,9 +772,7 @@ void mnDiagram2_PopulateStatRows(HSD_GObj* gobj, u8 scroll_offset,
         limit = 0x15;
     }
 
-    i = 0;
-    idx = scroll_offset;
-    do {
+    for (i = 0, idx = scroll_offset; i < 10; i++, idx++) {
         int val;
         if (idx >= limit) {
             val = idx - limit;
@@ -782,9 +780,7 @@ void mnDiagram2_PopulateStatRows(HSD_GObj* gobj, u8 scroll_offset,
             val = idx;
         }
         mnDiagram2_CreateStatRow(gobj, is_name_mode, val, i, (u8) var_r28);
-        i++;
-        idx++;
-    } while (i < 10);
+    }
 }
 
 typedef struct MnDiagram2DataLayout {
@@ -1011,8 +1007,7 @@ void mnDiagram2_Create(int arg0)
         threshold = 0x15;
     }
 
-    j = 0;
-    do {
+    for (j = 0; j < 10; j++) {
         if (scroll >= threshold) {
             offset = scroll - threshold;
         } else {
@@ -1020,8 +1015,7 @@ void mnDiagram2_Create(int arg0)
         }
         mnDiagram2_CreateStatRow(gobj, is_name, offset, j, entity_val);
         scroll++;
-        j++;
-    } while (j < 10);
+    }
 
     {
         u32 mode = user_data->is_name_mode;

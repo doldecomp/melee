@@ -170,18 +170,13 @@ bool fn_801743C4(s32 slot, StatsEntry* entry)
             return false;
         }
     }
-    if (entry->get == NULL) {
-        goto null_get;
-    }
-    if (entry->get(slot) == 0) {
+    if (entry->get != NULL) {
+        if (entry->get(slot) == 0) {
+            return false;
+        }
+    } else {
         return false;
     }
-    goto return_true;
-
-null_get:
-    return false;
-
-return_true:
     return true;
 }
 
@@ -312,11 +307,9 @@ void* fn_801748EC(void* list_, s32 mode, s32 idx)
     ResultsStatsInfo* list = list_;
 
     if (mode != 2) {
-        goto loop_start;
-        do {
+        while (list->x0 != mode) {
             list++;
-        loop_start:;
-        } while (list->x0 != mode);
+        }
         return list;
     }
     return &lbl_8046E190[idx];
@@ -856,62 +849,60 @@ void fn_8017556C(s32 slot)
                         new_var);
 }
 
+static inline bool matchWasSkipped(MatchEnd* me)
+{
+    if (me->outcome == OUTCOME_NO_CONTEST || me->outcome == OUTCOME_RETRY) {
+        return true;
+    }
+    return false;
+}
+
 void fn_801756E0(s32 slot)
 {
     MatchEnd* me;
-    s32 var_r28;
-    s32 var_r6;
-    GXColor* new_var;
-    s32 skip;
-    GXColor sp10; /* compiler-managed */
-    GXColor spC;
+    s32 line_num;
+    s32 score;
+    GXColor* color_p;
+    GXColor color; /* compiler-managed */
+    GXColor color_copy;
 
     me = lbl_8046DBE8.x94;
     if (me && me) {
     }
-    sp10 = fn_8017507C(slot);
-    if (me->player_standings[slot].pkind == Gm_PKind_NA) {
-        goto grey_out;
-    }
-    if (me->outcome == OUTCOME_NO_CONTEST || me->outcome == OUTCOME_RETRY) {
-        skip = 1;
-    } else {
-        skip = 0;
-    }
-    if (skip != 0) {
-        goto grey_out;
-    }
-    var_r6 = fn_8017AD48(me->player_standings[slot].score);
-    if (var_r6 < 0) {
-        if (var_r6 < 0) {
-            var_r6 = -var_r6;
+    color = fn_8017507C(slot);
+    if (me->player_standings[slot].pkind != Gm_PKind_NA &&
+        !matchWasSkipped(me))
+    {
+        score = fn_8017AD48(me->player_standings[slot].score);
+        if (score < 0) {
+            if (score < 0) {
+                score = -score;
+            }
+            line_num = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
+                &lbl_804D3FA0, score);
+        } else if (0 < score) {
+            line_num = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
+                &lbl_804D3FA4, score);
+        } else {
+            line_num =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                    0.0F, -30.0F, "%d", score);
         }
-        var_r28 =
-            HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                -30.0F, "%s%d", &lbl_804D3FA0, var_r6);
-    } else if (0 < var_r6) {
-        var_r28 =
-            HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                -30.0F, "%s%d", &lbl_804D3FA4, var_r6);
     } else {
-        var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
-                                      0.0F, -30.0F, "%d", var_r6);
+        color.r = 0xA0;
+        color.g = 0xA0;
+        color.b = 0xA0;
+        line_num = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                       0.0F, -30.0F, "%s", &lbl_804D3FA0);
     }
-    goto end_common;
-
-grey_out:
-    sp10.r = 0xA0;
-    sp10.g = 0xA0;
-    sp10.b = 0xA0;
-    var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, "%s", &lbl_804D3FA0);
-end_common:
-    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r28, 0.08F,
-                        0.08F);
-    spC = sp10;
-    new_var = &spC;
-    HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r28,
-                        new_var);
+    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, line_num,
+                        0.08F, 0.08F);
+    color_copy = color;
+    color_p = &color_copy;
+    HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, line_num,
+                        color_p);
 }
 
 void fn_80175880(s32 slot)
@@ -1564,10 +1555,11 @@ void fn_80176D3C(Vec3* positions)
     models[1] = data->flmsce->models[2];
     models[2] = data->flmsce->models[1];
 
-    i = 0;
-    do {
+    for (i = 0; i < 4;
+         i++, me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1), pos++)
+    {
         if (me_iter->player_standings[0].pkind == Gm_PKind_NA) {
-            goto loop_end;
+            continue;
         }
 
         if (me->is_teams == 0) {
@@ -1584,7 +1576,7 @@ void fn_80176D3C(Vec3* positions)
         if (me->outcome == OUTCOME_NO_CONTEST) {
             winner = 1;
         } else if (winner == 0) {
-            goto loop_end;
+            continue;
         }
 
         {
@@ -1604,12 +1596,7 @@ void fn_80176D3C(Vec3* positions)
             HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
             fn_80179F6C(i, gobj);
         }
-
-    loop_end:
-        i++;
-        me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);
-        pos++;
-    } while (i < 4);
+    }
 }
 
 void fn_80176F60(void)

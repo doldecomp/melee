@@ -220,13 +220,9 @@ void un_802FE6A8(void)
 
 void un_802FE8CC(void)
 {
-    if (un_803F9D48.x0a) {
-        if (un_803F9D48.x0b) {
-            goto execute;
-        }
+    if (!un_803F9D48.x0a || !un_803F9D48.x0b) {
+        return;
     }
-    return;
-execute:
     un_803F9D48.x1 = 2;
     HSD_SisLib_803A5F50(2);
 }

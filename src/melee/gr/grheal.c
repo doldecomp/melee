@@ -312,9 +312,7 @@ void onJointCollision(void* user_data, int joint_id, CollData* coll,
                       float delta_y)
 {
     Ground* gp = user_data;
-    if ((((*(u8*) ((u8*) coll + 0x34) >> 3U) & 0xF) == 1) &&
-        ((ground_kind - 1) <= 1U))
-    {
+    if ((s32) coll->x34_flags.b1234 == 1 && (ground_kind - 1) <= 1U) {
         gp->u.unk.xC4 = 1;
     }
 }
@@ -392,7 +390,7 @@ void stageGObj4_GObjProc(Ground_GObj* gobj) {}
 
 void stageGObj4_Callback3(Ground_GObj* gobj) {}
 
-/// @todo Eliminate gotos, use enum members
+/// @todo Use enum members
 int grHeal_8021F70C(enum_t character_id)
 {
     int frame = 0;
@@ -400,25 +398,17 @@ int grHeal_8021F70C(enum_t character_id)
     if (character_id == 19) {
         character_id = 18;
     }
-    goto loop_start;
-
-loop_compare:
-    if (character_id != frame_to_character_id[frame]) {
-        frame++;
-    loop_check:
-        if (frame_to_character_id[frame] != -1) {
-            goto loop_compare;
+    while (frame_to_character_id[frame] != -1) {
+        if (character_id == frame_to_character_id[frame]) {
+            break;
         }
+        frame++;
     }
-
     if (frame_to_character_id[frame] == -1) {
         OSReport("*** Not found Next Player!(%d)\n", character_id);
         frame = 0;
     }
     return frame;
-
-loop_start:
-    goto loop_check;
 }
 
 void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)

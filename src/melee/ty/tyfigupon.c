@@ -1223,13 +1223,11 @@ static inline void tyFigupon_CountAvailable(s32* result)
     s32 i;
     s32 count = 0;
 
-    i = count;
-    do {
+    for (i = count; i < 9; i++) {
         if (i != 8 && (u32) i > 1U && Toy_80304B0C(i) != 0) {
             count += Toy_80304B94(i);
         }
-        i += 1;
-    } while (i < 9);
+    }
     *result = count;
 }
 
@@ -1510,13 +1508,11 @@ static inline void tyFigupon_UpdateRemainingCount(struct un_804D6EF4_t* ef4)
 
     total_b54 = _tyFigupon_80314B54();
     count = 0;
-    i = 0;
-    do {
+    for (i = 0; i < 9; i++) {
         if (i != 8 && (u32) i > 1U && Toy_80304B0C(i) != 0) {
             count += Toy_80304B94(i);
         }
-        i += 1;
-    } while (i < 9);
+    }
     ef4->x54 = count - total_b54;
 }
 
