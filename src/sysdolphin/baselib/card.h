@@ -5,6 +5,23 @@
 
 #include <dolphin/card.h>
 
+typedef enum {
+    HSD_CardResult_Ok,
+    HSD_CardResult_UnkN1,
+    HSD_CardResult_UnkN2,
+    HSD_CardResult_UnkN3,
+    HSD_CardResult_UnkN4,
+    HSD_CardResult_UnkN261,
+} HSD_CardResult;
+
+typedef enum {
+    CardBanner_None,
+    CardBanner_Small, ///< Indexed color, including its palette.
+    CardBanner_Large, ///< RGB5A3 color.
+} CardBannerFormat;
+
+#define HSD_CARD_MAX_FILES 9
+
 typedef struct {
     u8 banner_format;
     u8 unused;
@@ -26,9 +43,9 @@ typedef struct CardState {
     /// Bytes of comment + banner + icons; the 0x30-byte digest follows.
     /* 0x24 */ u32 header_size;
 
-    /* 0x28 */ int file_flags[9]; ///< @todo enum, not flags
-    /* 0x4C */ int file_sizes[9];
-    /* 0x70 */ u8* file_data[9];
+    /* 0x28 */ int file_flags[HSD_CARD_MAX_FILES]; ///< @todo enum, not flags
+    /* 0x4C */ int file_sizes[HSD_CARD_MAX_FILES];
+    /* 0x70 */ u8* file_data[HSD_CARD_MAX_FILES];
     /* 0x94 */ u8 pad_94[0xDC];
 
     /// Block id stored in each physical block; negated = stale copy,
@@ -269,26 +286,6 @@ typedef enum CardActiveType {
     /* 0x07 */ CARD_ACTIVE_SET_STATUS,
 } CardActiveType;
 
-/// hsd_804D1138: the request the ring is currently completing.
-typedef struct CardActiveRequest {
-    /* 0x00 */ CardActiveType type;
-    /* 0x04 */ CardState* state;
-    /* 0x08 */ CardCallback callback;
-    /* 0x0C */ s32 callback_arg;
-} CardActiveRequest;
-ASSERT_SIZE(CardActiveRequest, 0x10);
-
-/// hsd_804D1138, hsd_804D1148 and hsd_804D2348 are contiguous; the ring
-/// runner and the request builders address all three from hsd_804D1138.
-typedef struct CardContext {
-    /* 0x0000 */ CardActiveRequest active;
-    /* 0x0010 */ CardCmd cmds[128];
-    /* 0x1210 */ CardRequest requests[32];
-} CardContext;
-ASSERT_SIZE(CardContext, 0x1510);
-ASSERT_OFFSET(CardContext, cmds, 0x10);
-ASSERT_OFFSET(CardContext, requests, 0x1210);
-
 /// Drives queued requests and commands until idle or waiting for CARD I/O.
 /// Async CARD calls start with interrupts disabled; the busy flag is set
 /// after the call returns, before interrupts are restored. CARD completion
@@ -311,6 +308,7 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
 /// the create, status, read and write request functions below.
 /* 3B27F4 */ int hsd_803B27F4(CardState* state, void* comment, void* banner,
                               void* icons, CardCallback callback);
+
 /// Queues file creation. Copies 0x40 bytes from comment into state even if
 /// the queue is full; filename, banner and icons are borrowed.
 /* 3B286C */ int hsd_803B286C(CardState* state, const char* filename,
@@ -331,21 +329,5 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
                                      CardIconInfo* icon_info);
 /* 3B2FA0 */ int hsd_803B2FA0(u8* data, int len);
 /* 3B31CC */ int hsd_803B31CC(u8* data, int len);
-
-/* 4D1138 */ extern CardActiveRequest hsd_804D1138;
-/* 4D1148 */ extern CardCmd hsd_804D1148[128];
-/* 4D2348 */ extern CardRequest hsd_804D2348[32];
-/* 4D7990 */ extern s32 hsd_804D7990;
-/* 4D7994 */ extern s32 hsd_804D7994;
-/* 4D79A0 */ extern u8* hsd_804D79A0;
-/* 4D79A4 */ extern u8* hsd_804D79A4;
-/* 4D79A8 */ extern s32 hsd_804D79A8;
-/* 4D79AC */ extern s32 hsd_804D79AC;
-/* 4D79B0 */ extern u8 hsd_804D79B0[8];
-/* 4D79B8 */ extern u8* hsd_804D79B8;
-/* 4D79BC */ extern u8* hsd_804D79BC;
-/* 4D79C0 */ extern s32 hsd_804D79C0;
-/* 4D79C4 */ extern s32 hsd_804D79C4;
-/* 4D79C8 */ extern u8 hsd_804D79C8;
 
 #endif
