@@ -6,7 +6,7 @@
 #include <melee/it/kinds/types.h>
 
 /* 2D1438 */ void it_2725_Logic17_Spawned(Item_GObj*);
-/* 2D14D0 */ UNK_RET it_802D14D0(UNK_PARAMS);
+/* 2D14D0 */ void it_802D14D0(void);
 /* 2D14D4 */ void itLugia_Logic17_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D14F4 */ bool itLugia_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2D1558 */ void itLugia_UnkMotion1_Phys(Item_GObj* gobj);

@@ -4,8 +4,6 @@
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <placeholder.h>
-
 #include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
@@ -43,9 +41,9 @@ struct StatsList;
 /* 176BCC */ void fn_80176BCC(HSD_GObj*);
 /* 176BF0 */ HSD_JObj* fn_80176BF0(HSD_JObj*, u8, int);
 /* 176D18 */ void fn_80176D18(HSD_GObj*);
-/* 176D3C */ UNK_RET fn_80176D3C(Vec3*);
-/* 176F60 */ UNK_RET fn_80176F60(UNK_PARAMS);
-/* 1771C0 */ UNK_RET fn_801771C0(ResultsData*);
+/* 176D3C */ void fn_80176D3C(Vec3*);
+/* 176F60 */ void fn_80176F60(void);
+/* 1771C0 */ void fn_801771C0(ResultsData*);
 /* 177368 */ void gm_Scene_Results_OnEnter(void*);
 /* 177704 */ void gm_Scene_Results_OnExit(void*);
 

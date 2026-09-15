@@ -2,6 +2,7 @@
 
 #include <Runtime/platform.h>
 
+#include <placeholder.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>

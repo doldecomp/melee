@@ -120,16 +120,9 @@ void ftCo_Damage_CalcKnockback(Fighter* fp)
     if (!fp->dmg.kb_applied) {
         return;
     }
-    /// @todo Probably a @c switch.
-    if (fp->motion_id == ftCo_MS_Squat) {
-        goto squat;
+    if (fp->motion_id == ftCo_MS_Squat || fp->motion_id == ftCo_MS_SquatWait) {
+        fp->dmg.kb_applied *= p_ftCommonData->kb_squat_mul;
     }
-    if (fp->motion_id != ftCo_MS_SquatWait) {
-        goto not_squatwait;
-    }
-squat:
-    fp->dmg.kb_applied *= p_ftCommonData->kb_squat_mul;
-not_squatwait:
     if (fp->motion_id == ftCo_MS_DamageIce) {
         fp->dmg.kb_applied *= p_ftCommonData->kb_ice_mul;
     }
@@ -298,167 +291,126 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         Vec3* normal;
         if (scaled_kb_154 < p_ftCommonData->x158) {
             kb_level_base = 0;
-            goto block_9;
         } else {
-            if (!(scaled_kb_154 < p_ftCommonData->x15C)) {
-                goto block_6;
+            if (scaled_kb_154 < p_ftCommonData->x15C) {
+                kb_level_base = 1;
+            } else {
+                if (scaled_kb_154 < p_ftCommonData->x160) {
+                    kb_level_base = 2;
+                } else {
+                    kb_level_base = 3;
+                }
             }
-            kb_level_base = 1;
-            goto block_9;
         }
-    block_6:
-        if (!(scaled_kb_154 < p_ftCommonData->x160)) {
-            goto block_8;
-        }
-        kb_level_base = 2;
-        goto block_9;
-    block_8:
-        kb_level_base = 3;
-    block_9:
         kb_level = kb_level_base;
-        if (arg1 == -1) {
-            goto block_11;
+        if (arg1 != -1) {
+            kb_level = 3;
         }
-        kb_level = 3;
-    block_11:
         scaled_kb.v = kb_applied * p_ftCommonData->x100;
         fp->mv.co.damage.x1A = 0;
         fp->mv.co.damage.x14 = 0;
         kb_angle = ftCo_Damage_CalcAngle(fp, kb_applied);
-        if (kb_level_base < 2) {
-            goto block_17;
+        if (kb_level_base >= 2 && fp->dmg.x1860_element == HitElement_Ice) {
+            kb_angle = calcAngle(kb_angle);
         }
-        if (fp->dmg.x1860_element != HitElement_Ice) {
-            goto block_17;
-        }
-        kb_angle = calcAngle(kb_angle);
-    block_17:
         x = scaled_kb.v * cosf(kb_angle);
         y = scaled_kb.v * sinf(kb_angle);
         fp->facing_dir = fp->dmg.facing_dir_1;
-        if (fp->ground_or_air != GA_Air) {
-            goto block_21;
+        if (fp->ground_or_air == GA_Air) {
+            msid = ftCo_803C5520[1][kb_level][fp->dmg.x184c_damaged_hurtbox];
+            if (ftCo_Damage_CheckAirMotion(fp)) {
+                scaled_kb.v = scaled_kb.v * p_ftCommonData->x190;
+                x = scaled_kb.v * cosf(kb_angle);
+                y = scaled_kb.v * sinf(kb_angle);
+            }
+            ftCo_Damage_CalcVel(fp, -x * fp->facing_dir, y);
+            fp->xF0_ground_kb_vel = 0;
+        } else {
+            normal = &fp->coll_data.floor.normal;
+            pos.x = -x * fp->facing_dir;
+            pos.y = y;
+            pos.z = 0;
+            floor_angle = lbVector_Angle(normal, &pos);
+            if (floor_angle < M_PI_2_F) {
+                msid =
+                    ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
+                ftCommon_8007D5D4(fp);
+                ftCo_Damage_CalcVel(fp, pos.x, pos.y);
+                fp->xF0_ground_kb_vel = 0;
+            } else {
+                if (kb_level == 3) {
+                    ftCommon_8007D5D4(fp);
+                    msid = ftCo_803C5520[0][kb_level]
+                                        [fp->dmg.x184c_damaged_hurtbox];
+                    if (floor_angle >
+                        (M_PI_2 + (double) p_ftCommonData->x1E8_radians))
+                    {
+                        ftCo_Damage_CalcVel(fp, pos.x,
+                                            -pos.y * p_ftCommonData->x1EC);
+                        var_r27 = 0;
+                        fp->xF0_ground_kb_vel = 0;
+                        temp_f1_3 = atan2f(-normal->x, normal->y);
+                        sp40 = temp_f1_3;
+                        inlineA0(gobj, fp, &sp40);
+                    } else {
+                        ftCo_Damage_CalcVel(fp, pos.x, pos.y);
+                        fp->xF0_ground_kb_vel = 0;
+                    }
+                } else {
+                    msid = ftCo_803C5520[0][kb_level]
+                                        [fp->dmg.x184c_damaged_hurtbox];
+                    fp->xF0_ground_kb_vel = pos.x;
+                    temp_f2 = fp->xF0_ground_kb_vel;
+                    ftCo_Damage_CalcVel(fp, normal->y * temp_f2,
+                                        -normal->x * temp_f2);
+                }
+            }
         }
-        msid = ftCo_803C5520[1][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        if (!ftCo_Damage_CheckAirMotion(fp)) {
-            goto block_20;
-        }
-        scaled_kb.v = scaled_kb.v * p_ftCommonData->x190;
-        x = scaled_kb.v * cosf(kb_angle);
-        y = scaled_kb.v * sinf(kb_angle);
-    block_20:
-        ftCo_Damage_CalcVel(fp, -x * fp->facing_dir, y);
-        fp->xF0_ground_kb_vel = 0;
-        goto block_28;
-    block_21:
-        normal = &fp->coll_data.floor.normal;
-        pos.x = -x * fp->facing_dir;
-        pos.y = y;
-        pos.z = 0;
-        floor_angle = lbVector_Angle(normal, &pos);
-        if (!(floor_angle < M_PI_2_F)) {
-            goto block_23;
-        }
-        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        ftCommon_8007D5D4(fp);
-        ftCo_Damage_CalcVel(fp, pos.x, pos.y);
-        fp->xF0_ground_kb_vel = 0;
-        goto block_28;
-    block_23:
-        if (kb_level != 3) {
-            goto block_27;
-        }
-        ftCommon_8007D5D4(fp);
-        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        if (!(floor_angle > (M_PI_2 + (double) p_ftCommonData->x1E8_radians)))
-        {
-            goto block_26;
-        }
-        ftCo_Damage_CalcVel(fp, pos.x, -pos.y * p_ftCommonData->x1EC);
-        var_r27 = 0;
-        fp->xF0_ground_kb_vel = 0;
-        temp_f1_3 = atan2f(-normal->x, normal->y);
-        sp40 = temp_f1_3;
-        inlineA0(gobj, fp, &sp40);
-        goto block_28;
-    block_26:
-        ftCo_Damage_CalcVel(fp, pos.x, pos.y);
-        fp->xF0_ground_kb_vel = 0;
-        goto block_28;
-    block_27:
-        msid = ftCo_803C5520[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        fp->xF0_ground_kb_vel = pos.x;
-        temp_f2 = fp->xF0_ground_kb_vel;
-        ftCo_Damage_CalcVel(fp, normal->y * temp_f2, -normal->x * temp_f2);
-    block_28:
         fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
         fp->gr_vel = 0;
-        if (kb_level != 3) {
-            goto block_36;
+        if (kb_level == 3) {
+            if (fp->ground_or_air == GA_Air) {
+                if (kb_angle > p_ftCommonData->x234_radians &&
+                    kb_angle < p_ftCommonData->x238_radians)
+                {
+                    msid = 0x5A;
+                } else {
+                    if (fp->dmg.x1830_percent >= p_ftCommonData->x23C &&
+                        HSD_Randf() < p_ftCommonData->x240)
+                    {
+                        msid = 0x5B;
+                    }
+                }
+            }
         }
-        if (fp->ground_or_air != GA_Air) {
-            goto block_36;
+        if (arg1 != -1) {
+            msid = arg1;
         }
-        if (!(kb_angle > p_ftCommonData->x234_radians)) {
-            goto block_33;
+        if (msid != 0x145 && kb_level_base >= 2 &&
+            fp->dmg.x1860_element == HitElement_Ice)
+        {
+            msid = 0x5A;
         }
-        if (!(kb_angle < p_ftCommonData->x238_radians)) {
-            goto block_33;
-        }
-        msid = 0x5A;
-        goto block_36;
-    block_33:
-        if (!(fp->dmg.x1830_percent >= (float) (s32) p_ftCommonData->x23C)) {
-            goto block_36;
-        }
-        if (!(HSD_Randf() < p_ftCommonData->x240)) {
-            goto block_36;
-        }
-        msid = 0x5B;
-    block_36:
-        if (arg1 == -1) {
-            goto block_38;
-        }
-        msid = arg1;
-    block_38:
-        if (msid == 0x145) {
-            goto block_42;
-        }
-        if (kb_level_base < 2) {
-            goto block_42;
-        }
-        if (fp->dmg.x1860_element != HitElement_Ice) {
-            goto block_42;
-        }
-        msid = 0x5A;
-    block_42:
         fp->dmg.x18A4_knockbackMagnitude = un_803222EC(kb_applied, kb_angle);
         un_8032233C(fp->dmg.x18C0, fp->x8_spawnNum);
-        if (!facing_dir) {
-            goto block_44;
+        if (facing_dir) {
+            fp->facing_dir = facing_dir;
         }
-        fp->facing_dir = facing_dir;
     }
-block_44:
 
     ftCo_8008DA4C(gobj, fp->dmg.x1860_element, kb_level);
     ftCo_8008DB10(gobj, (s32) fp->dmg.x1860_element, kb_applied);
     Fighter_ChangeMotionState(gobj, msid, 0x40U, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
-    if (!gm_8016B014()) {
-        goto block_60;
+    if (gm_8016B014()) {
+        ftColl_8007B6A0(gobj);
+        fp->x2221_b1 = true;
     }
-    ftColl_8007B6A0(gobj);
-    fp->x2221_b1 = true;
-block_60:
-    if (!(kb_applied > p_ftCommonData->x12C)) {
-        goto block_62;
+    if (kb_applied > p_ftCommonData->x12C) {
+        should_collide = 1;
+    } else {
+        should_collide = 0;
     }
-    should_collide = 1;
-    goto block_63;
-block_62:
-    should_collide = 0;
-block_63:
     fp->mv.co.damage.x4 = should_collide;
     fp->mv.co.damage.x19 = 0;
     fp->hitlag_cb = ftCo_Damage_OnEveryHitlag;
@@ -473,59 +425,36 @@ block_63:
     }
     fp->x67F = 0xFF;
     ftCo_Damage_SetMv8FromKbThreshold(fp);
-    if (fp->mv.co.damage.x8 == 0) {
-        goto block_67;
+    if (fp->mv.co.damage.x8 != 0) {
+        fp->mv.co.damage.x8 = 1;
     }
-    fp->mv.co.damage.x8 = 1;
-block_67:
-    if (kb_level != 3) {
-        goto block_70;
+    if (kb_level == 3 && (scaled_kb.v >= p_ftCommonData->x5E8)) {
+        ftCommon_8007EFC0(fp, p_ftCommonData->x5EC);
     }
-    if (!(scaled_kb.v >= p_ftCommonData->x5E8)) {
-        goto block_70;
-    }
-    ftCommon_8007EFC0(fp, p_ftCommonData->x5EC);
-block_70:
-    if (var_r27 == 0) {
-        goto block_75;
-    }
-    if (!(scaled_kb_154 >= p_ftCommonData->x20C)) {
-        goto block_73;
-    }
-    fp->dmg.x1908 = 0x4F;
-    fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x20;
-    goto block_75;
-block_73:
-    if (!(scaled_kb_154 >= p_ftCommonData->x208)) {
-        goto block_75;
-    }
-    fp->dmg.x1908 = 0x50;
-    fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x1C;
-block_75:
-    if (kb_level != 3) {
-        goto block_83;
-    }
-    if (fp->ground_or_air != GA_Air) {
-        goto block_83;
-    }
-    if (!(scaled_kb_154 >= p_ftCommonData->x174)) {
-        goto block_79;
-    }
-    {
-        CmQuakeKind quake_kind = QuakeKind_Large;
-        goto block_82;
-    block_79:
-        if (!(scaled_kb_154 >= p_ftCommonData->x170)) {
-            goto block_81;
+    if (var_r27 != 0) {
+        if (scaled_kb_154 >= p_ftCommonData->x20C) {
+            fp->dmg.x1908 = 0x4F;
+            fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x20;
+        } else if (scaled_kb_154 >= p_ftCommonData->x208) {
+            fp->dmg.x1908 = 0x50;
+            fp->dmg.x190C = (UNK_T) fp->ft_data->x4C_sfx->x1C;
         }
-        quake_kind = QuakeKind_Medium;
-        goto block_82;
-    block_81:
-        quake_kind = QuakeKind_Small;
-    block_82:
-        Camera_RequestQuake(quake_kind, &fp->cur_pos);
     }
-block_83:
+    if (kb_level == 3) {
+        CmQuakeKind quake_kind;
+        if (fp->ground_or_air == GA_Air) {
+            if (scaled_kb_154 >= p_ftCommonData->x174) {
+                quake_kind = QuakeKind_Large;
+            } else {
+                if (scaled_kb_154 >= p_ftCommonData->x170) {
+                    quake_kind = QuakeKind_Medium;
+                } else {
+                    quake_kind = QuakeKind_Small;
+                }
+            }
+            Camera_RequestQuake(quake_kind, &fp->cur_pos);
+        }
+    }
     ftCommon_8007F824(gobj);
     if (fp->motion_id == 0x145) {
         return;
@@ -1024,20 +953,15 @@ bool doIasa(Fighter_GObj* gobj)
     if (!(!fp->mv.co.damage.x1B)) {
         goto ret_inline;
     }
-    if (!(fp->ground_or_air == GA_Air)) {
-        goto ret_inline;
+    if (fp->ground_or_air == GA_Air && fp->x8c_kb_vel.y < 0 &&
+        (ftCo_800D69C4(gobj) || ftCo_800CB8E0(gobj)))
+    {
+        fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
+        ftCommon_8007EBAC(fp, 12, 0);
+        ftCo_800BFFD0(fp, 121, 0);
+        fp->x2227_b4 = true;
+        return true;
     }
-    if (!(fp->x8c_kb_vel.y < 0)) {
-        goto ret_inline;
-    }
-    if (!(ftCo_800D69C4(gobj) || ftCo_800CB8E0(gobj))) {
-        goto ret_inline;
-    }
-    fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
-    ftCommon_8007EBAC(fp, 12, 0);
-    ftCo_800BFFD0(fp, 121, 0);
-    fp->x2227_b4 = true;
-    return true;
 ret_inline:
     if (ftCo_Jump_GetInput(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;

@@ -1,6 +1,5 @@
 #include "hsd_3A94.h"
 
-#include <m2c_macros.h>
 #include <placeholder.h>
 #include <string.h>
 

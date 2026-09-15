@@ -9,15 +9,14 @@
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>
 
+struct UnkArrElem {
+    /* 0x00 */ s64 x0;
+    /* 0x08 */ s64 x8;
+    /* 0x10 */ int x10;
+};
+
 struct lb_804329F0_t {
-    union {
-        struct UnkArrElem {
-            /* 0x00 */ s64 x0;
-            /* 0x08 */ s64 x8;
-            /* 0x10 */ int x10;
-        } x0[2];
-        /* 0x00 */ u32 x0_words[12];
-    };
+    struct UnkArrElem x0[2];
     u32 x4;
     u64 x38;
     OSTime x40;
@@ -62,16 +61,16 @@ void lb_80019628(void)
     int i;
     OSTime period;
     OSTime new_val = lb_804329F0.x38;
+    struct UnkArrElem* tmp = &lb_804329F0.x0[0];
 
-    if (new_val == lb_804329F0.x0[0].x0) {
+    if (new_val == tmp->x0) {
         return;
     }
 
-    lb_804329F0.x0[0].x0 = new_val;
+    tmp->x0 = new_val;
 
-    if (lb_804329F0.x0[0].x8 >= lb_804329F0.x0[0].x0) {
-        lb_804329F0.x0_words[3] = 0;
-        lb_804329F0.x0_words[2] = 0;
+    if (tmp->x8 >= tmp->x0) {
+        tmp->x8 = 0;
     }
 
     period = (f32) OSSecondsToTicks(1);

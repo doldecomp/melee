@@ -629,7 +629,7 @@ f32 grOldKongo_80210650(void)
 
 DynamicsDesc* grOldKongo_80210780(enum_t gobj)
 {
-    return false;
+    return NULL;
 }
 
 bool grOldKongo_80210788(Vec3* a, int arg, HSD_JObj* joint)
