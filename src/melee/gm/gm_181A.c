@@ -663,8 +663,8 @@ static inline int gm_80182578_GetIndexFromPointer(const int* idx_ptr)
     return *idx_ptr;
 }
 
-inline void gm_80182578_SetTime(RecordBlock* blocks, int idx, int mode,
-                                u16 value)
+static inline void gm_80182578_SetTime(RecordBlock* blocks, int idx, int mode,
+                                       u16 value)
 {
     switch (mode) {
     case 33:

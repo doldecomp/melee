@@ -505,7 +505,7 @@ static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
-inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
+static inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 pivot;
     s32 n2;
@@ -559,7 +559,7 @@ inline void _tyDisplay_80319994_sort(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
-inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
+static inline void _tyDisplay_80318CB4_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
     _tyDisplay_80318B1C(cfg->x08);

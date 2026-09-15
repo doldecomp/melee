@@ -142,7 +142,7 @@ bool itCoin_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void inline itCoin_ResetRotation(Item_GObj* gobj)
+static inline void itCoin_ResetRotation(Item_GObj* gobj)
 {
     HSD_JObj* jobj;
     jobj = GET_JOBJ(gobj);
