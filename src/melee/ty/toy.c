@@ -1729,90 +1729,90 @@ s16 _Toy_803064B8(s16 arg0, s8 arg1)
 
 void _Toy_8030663C(void)
 {
-    s32 var_r31;
-    s32 var_r30;
-    u16* var_r29;
-    TySortRow* var_r28;
-    int var_r27;
+    s32 count;
+    s32 offset;
+    u16* ptr;
+    TySortRow* dst;
+    int i;
 
-    var_r29 = (u16*) ((u8*) Toy_804A284C + 0xA);
-    var_r27 = 0;
-    var_r31 = 0;
-    var_r30 = 0;
-    var_r28 = _Toy_sbss_804D6E64;
+    ptr = (u16*) ((u8*) Toy_804A284C + 0xA);
+    i = 0;
+    count = 0;
+    offset = 0;
+    dst = _Toy_sbss_804D6E64;
     do {
         u16* src;
         if (gm_IsCurrently1PMode() != 0 ||
             gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
         {
-            src = var_r29;
+            src = ptr;
         } else {
             src = gmMainLib_GetTrophyFlags();
         }
-        if ((u8) * (u16*) ((u8*) src + var_r30) != 0) {
-            var_r28->key[0] = _Toy_803064B8(var_r27, 0);
-            var_r31 += 1;
-            var_r28++;
+        if ((u8) * (u16*) ((u8*) src + offset) != 0) {
+            dst->key[0] = _Toy_803064B8(i, 0);
+            count += 1;
+            dst++;
         }
-        var_r27 += 1;
-        var_r30 += 2;
-    } while (var_r27 < TY_TROPHY_COUNT);
+        i += 1;
+        offset += 2;
+    } while (i < TY_TROPHY_COUNT);
     {
-        s32 var2_r27;
-        TySortRow* var2_r28;
-        TySortRow* var2_r29;
-        int var2_r30;
+        s32 k;
+        TySortRow* src;
+        TySortRow* dst;
+        int j;
 
-        var2_r29 = _Toy_sbss_804D6E64;
-        for (var2_r30 = 0; var2_r30 < TY_TROPHY_COUNT; var2_r30++) {
-            var2_r28 = _Toy_sbss_804D6E64;
-            var2_r27 = 0;
+        dst = _Toy_sbss_804D6E64;
+        for (j = 0; j < TY_TROPHY_COUNT; j++) {
+            src = _Toy_sbss_804D6E64;
+            k = 0;
             goto loop_13_check;
         loop_13_body:
-            if (var2_r28->key[0] == _Toy_803064B8(var2_r30, 1)) {
-                var2_r29->key[1] = var2_r28->key[0];
-                var2_r29++;
+            if (src->key[0] == _Toy_803064B8(j, 1)) {
+                dst->key[1] = src->key[0];
+                dst++;
             } else {
-                var2_r28++;
-                var2_r27 += 1;
+                src++;
+                k += 1;
             loop_13_check:
-                if (var2_r27 < var_r31) {
+                if (k < count) {
                     goto loop_13_body;
                 }
             }
         }
     }
     {
-        TySortRow* var3_r27;
-        s32 var3_r28;
-        TySortRow* var3_r29;
-        int var3_r30;
-        TySortRow* new_var;
+        TySortRow* src;
+        s32 k;
+        TySortRow* dst;
+        int j;
+        TySortRow* tmp;
 
-        var3_r29 = _Toy_sbss_804D6E64;
-        for (var3_r30 = 0; var3_r30 < TY_TROPHY_COUNT; var3_r30++) {
-            var3_r27 = _Toy_sbss_804D6E64;
-            var3_r28 = 0;
+        dst = _Toy_sbss_804D6E64;
+        for (j = 0; j < TY_TROPHY_COUNT; j++) {
+            src = _Toy_sbss_804D6E64;
+            k = 0;
             goto loop_23_check;
         loop_23_body:
             if (lbLang_IsSavedLanguageJP() != 0) {
-                if (var3_r27->key[0] == _Toy_803064B8(var3_r30, 2)) {
-                    var3_r29->key[2] = var3_r27->key[0];
-                    var3_r29++;
+                if (src->key[0] == _Toy_803064B8(j, 2)) {
+                    dst->key[2] = src->key[0];
+                    dst++;
                 } else {
                     goto block_22;
                 }
             } else {
-                new_var = var3_r27;
-                if (new_var->key[0] == _Toy_803064B8(var3_r30, 3)) {
-                    var3_r29->key[2] = new_var->key[0];
-                    var3_r29++;
+                tmp = src;
+                if (tmp->key[0] == _Toy_803064B8(j, 3)) {
+                    dst->key[2] = tmp->key[0];
+                    dst++;
                 } else {
                 block_22:
-                    var3_r27++;
-                    var3_r28 += 1;
+                    src++;
+                    k += 1;
                 loop_23_check:
-                    if (var3_r28 < var_r31) {
+                    if (k < count) {
                         goto loop_23_body;
                     }
                 }

@@ -1407,20 +1407,20 @@ void gm_801BCAF0(HSD_GObj* gobj)
     s32 var_r0;
     s32 var_r0_2;
     struct EventData* temp_r30;
-    s32 var_r30;
-    s32 var_r29;
+    s32 i;
+    s32 count;
     PAD_STACK(0x28);
 
-    var_r29 = 0;
-    for (var_r30 = 1; var_r30 < 3; var_r30 += 1) {
-        if ((Player_GetStocks(var_r30) <= 0) &&
-            (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
+    count = 0;
+    for (i = 1; i < 3; i += 1) {
+        if ((Player_GetStocks(i) <= 0) &&
+            (temp_r3 = Player_GetEntity(i), ((temp_r3 == NULL) == 0)))
         {
             if (ftLib_GetKind(temp_r3) == Ft_Kind_Seak) {
                 var_r0 = 1;
             } else {
-                Player_SetStocks(var_r30, 1);
-                gm_8016F00C(var_r30);
+                Player_SetStocks(i, 1);
+                gm_8016F00C(i);
                 goto block_6;
             }
         } else {
@@ -1428,10 +1428,10 @@ void gm_801BCAF0(HSD_GObj* gobj)
             var_r0 = 0;
         }
         if (var_r0 != 0) {
-            var_r29 += 1;
+            count += 1;
         }
     }
-    if (var_r29 == 2) {
+    if (count == 2) {
         gm_801BC4F4(gobj);
         return;
     }
