@@ -451,7 +451,7 @@ void if_802F7E24(void)
 void if_802F7E7C(void)
 {
     s32 i;
-    HSD_GObj** base = (HSD_GObj**) lbl_804A1340;
+    void** base = lbl_804A1340;
 
     for (i = 0; i < 6; i++) {
         if (base[i * 2 + 1] != NULL) {

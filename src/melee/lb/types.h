@@ -354,17 +354,35 @@ union ColorOverlay_x8_t {
 };
 ASSERT_SIZE(union ColorOverlay_x8_t, 0x4);
 
+struct CommandInfo {
+    f32 timer;       // 0x00
+    f32 frame_count; // 0x04
+    CmdUnion* u;
+    u32 loop_count; // 0x0C
+    union {
+        CmdUnion* command;
+        s32 count;
+    } event_return[3];  // 0x10
+    u32 loop_count_dup; // 0x1C
+    u32 unk_x18;        // 0x20
+};
+
 struct ColorOverlay {
-    s32 x0_timer; // 0x0
-    s32 x4_pri;   // 0x4  this colanims priority, lower = will persist
-    union ColorOverlay_x8_t* x8_ptr1; // 0x8
-    s32 xC_loop;                      // 0xc
-    s32* x10_ptr2;                    // 0x10
-    s32 x14;                          // 0x14
-    s32* x18_alloc;                   // 0x18
-    s32 x1c;                          // 0x1c
-    s32 x20;                          // 0x20
-    s32 x24;                          // 0x24
+    union {
+        CommandInfo command;
+        struct {
+            s32 x0_timer; // 0x0
+            s32 x4_pri;   // 0x4  this colanims priority, lower = will persist
+            union ColorOverlay_x8_t* x8_ptr1; // 0x8
+            s32 xC_loop;                      // 0xc
+            s32* x10_ptr2;                    // 0x10
+            s32 x14;                          // 0x14
+            s32* x18_alloc;                   // 0x18
+            s32 x1c;                          // 0x1c
+            s32 x20;                          // 0x20
+        };
+    };
+    s32 x24; // 0x24
     union {
         enum_t i;
         struct ColorOverlay_UnkInner* ptr;
@@ -1000,22 +1018,6 @@ union CmdUnion {
     struct wind_fx_1 wind_fx_1;
     struct wind_fx_2 wind_fx_2;
     struct wind_fx_3 wind_fx_3;
-};
-
-struct CommandInfo {
-    f32 timer;       // 0x00
-    f32 frame_count; // 0x04
-    union {
-        u32* ptr[1]; ///< @todo Hack to match #Command_04
-        /// @todo eventually clean this up, probably have each struct as its
-        /// own union?
-        CmdUnion* u;
-    };
-    u32 loop_count; // 0x0C
-    union CmdUnion*
-        event_return[3]; // 0x10 - Array Size is purely made-up for now
-    u32 loop_count_dup;  // 0x14
-    u32 unk_x18;         // 0x18
 };
 
 struct LbShadow {

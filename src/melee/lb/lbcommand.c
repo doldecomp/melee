@@ -33,20 +33,18 @@ void Command_02(CommandInfo* info)
 /// SetLoop
 void Command_03(CommandInfo* info)
 {
-    info->event_return[info->loop_count++] = info->u + 1;
-    info->event_return[info->loop_count++] =
-        (union CmdUnion*) info->u->Command_03.value;
+    info->event_return[info->loop_count++].command = info->u + 1;
+    info->event_return[info->loop_count++].count = info->u->Command_03.value;
     NEXT_CMD(info);
 }
 
 /// Execute Loop
 void Command_04(CommandInfo* info)
 {
-    u32* ptr = (u32*) info;
-    ptr[info->loop_count + 3] -= 1;
+    info->event_return[info->loop_count - 1].count -= 1;
 
-    if ((s32) info->event_return[info->loop_count - 1]) {
-        info->ptr[0] = &info->ptr[info->loop_count][0];
+    if (info->event_return[info->loop_count - 1].count) {
+        info->u = info->event_return[info->loop_count - 2].command;
         return;
     }
     NEXT_CMD(info);
@@ -57,14 +55,14 @@ void Command_04(CommandInfo* info)
 void Command_05(CommandInfo* info)
 {
     NEXT_CMD(info);
-    info->event_return[info->loop_count++] = info->u + 1;
+    info->event_return[info->loop_count++].command = info->u + 1;
     info->u = info->u->Command_05.ptr;
 }
 
 /// Return
 void Command_06(CommandInfo* info)
 {
-    info->u = info->event_return[info->loop_count -= 1];
+    info->u = info->event_return[info->loop_count -= 1].command;
 }
 
 /// Goto

@@ -169,14 +169,14 @@ bool lb_80014258(Fighter_GObj* gobj, void* arg1, FtCmd2 cmd)
 
     while (co->x8_ptr1 != NULL && co->x0_timer == 0) {
         u32 opcode = co->x8_ptr1->unk.unk;
-        if (!Command_Execute((CommandInfo*) co, opcode)) {
+        if (!Command_Execute(&co->command, opcode)) {
             if (opcode < 0x15U) {
                 u32 idx = opcode - 0xA;
                 if (lb_803BA248[idx](co)) {
                     return true;
                 }
             } else {
-                cmd(gobj, (CommandInfo*) co, (int) opcode);
+                cmd(gobj, &co->command, (int) opcode);
             }
         }
     }

@@ -122,9 +122,9 @@ struct HSD_CameraDescPerspective {
 };
 
 union HSD_CObjDesc {
+    HSD_CameraDescFrustum frustum;
     char* class_name;
     HSD_CameraDescCommon common;
-    HSD_CameraDescFrustum frustum;
     HSD_CameraDescFrustum ortho;
     HSD_CameraDescPerspective perspective;
 };
