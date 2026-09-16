@@ -23,12 +23,12 @@ static u32 LatencyTable[8] = {
 static s32 DoMount(s32 chan);
 static void DoUnmount(s32 chan, s32 result);
 
-int CARDProbe(long chan)
+BOOL CARDProbe(long chan)
 {
     if (GameChoice & 0x80) {
-        return 0;
+        return FALSE;
     }
-    EXIProbe(chan);
+    return EXIProbe(chan);
 }
 
 s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)

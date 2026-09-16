@@ -30,7 +30,7 @@ void lb_8001955C(void)
 {
     if (HSD_PadGetResetSwitch()) {
         lbAudioAx_80027DBC();
-        while (lb_8001B6F8() == 11);
+        while (lbCardNew_CompleteNextTask() == 11);
         VISetPostRetraceCallback(0);
         VISetPreRetraceCallback(0);
         VISetBlack(1);
@@ -39,7 +39,7 @@ void lb_8001955C(void)
         VIWaitForRetrace();
         OSResetSystem(0, 0, 0);
     }
-    lb_8001B6F8();
+    lbCardNew_CompleteNextTask();
     lb_8001CC84();
 }
 

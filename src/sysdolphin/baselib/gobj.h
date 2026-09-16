@@ -9,8 +9,8 @@
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
-#define HSD_GOBJ_PLINK_MAX 0x3F
-#define HSD_GOBJ_GX_LINK_MAX 0x3F
+#define HSD_GOBJ_PLINK_MAX 63
+#define HSD_GOBJ_GX_LINK_MAX 63
 #define HSD_GOBJPROC_PRI_MAX 2
 
 typedef struct HSD_GObj {

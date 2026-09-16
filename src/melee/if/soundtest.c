@@ -1951,7 +1951,7 @@ bool un_8030178C(enum soundtest_callback_arg0 arg0)
         s32 result = lb_8001C8BC();
         OSReport(un_803FD230, result);
         if (result == 0) {
-            lb_8001CBAC(0);
+            lbCardGame_SetCardStatus(0);
         }
     }
     return 0;
@@ -1977,7 +1977,7 @@ bool un_80301840(enum soundtest_callback_arg0 arg0)
         s32 result = lb_8001CBBC();
         gmMainLib_8015FA34(result);
         if (result == 0 || result == 2) {
-            lb_8001CBAC(0);
+            lbCardGame_SetCardStatus(0);
         }
         OSReport(un_803FD230, result);
     }
@@ -1994,7 +1994,7 @@ bool un_803018BC(enum soundtest_callback_arg0 arg0)
         s32 result = lb_8001CC4C();
         OSReport(un_803FD230, result);
     }
-    lb_8001CBAC(4);
+    lbCardGame_SetCardStatus(4);
     return 0;
 }
 
@@ -2019,7 +2019,7 @@ bool un_80301964(enum soundtest_callback_arg0 arg0)
     if (lbSnap_8001E058(0, un_804D6E0C) == 0xB) {
         s32 result;
         do {
-            result = lb_8001B6F8();
+            result = lbCardNew_CompleteNextTask();
         } while (result == 0xB);
 
         if (result == 0 && lbSnap_8001DE8C(un_804D6E04) != 0) {
@@ -2056,7 +2056,7 @@ bool un_80301A64(enum soundtest_callback_arg0 arg0)
     result = lbSnap_8001D5FC(0, un_804D6E10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
+            result = lbCardNew_CompleteNextTask();
         } while (result == 0xB);
 
         if (result == 0) {
@@ -2078,7 +2078,7 @@ bool un_80301AD4(enum soundtest_callback_arg0 arg0)
     result = lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
+            result = lbCardNew_CompleteNextTask();
         } while (result == 0xB);
 
         if (result == 0) {

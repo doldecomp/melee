@@ -102,7 +102,7 @@ void preloadState(GameModeState* state)
     }
     lbDvd_80018254();
     lb_8001C5A4();
-    lb_8001D1F4();
+    lbCardGame_Reset();
     lbSnap_8001E27C();
     Toy_803127D4();
     tyDisplay_8031C8B8();
@@ -198,12 +198,12 @@ void gm_801A4014(GameMode* mode)
         }
     }
     lb_8001CDB4();
-    lb_8001B760(11);
+    lbCardNew_CompleteAllTasks(11);
     lbMthp_8001F800();
     if (gmMainLib_8046B0F0.resetting) {
         lbAudioAx_80027DBC();
         HSD_PadReset();
-        while (lb_8001B6F8() == 11);
+        while (lbCardNew_CompleteNextTask() == 11);
         if (DVDCheckDisk() == 0) {
             OSResetSystem(1, 0, 0);
         }

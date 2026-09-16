@@ -290,12 +290,11 @@ struct gmm_x1868_1A8_t {
     /* 0x01AE +6 */ u8 x6;
 };
 
-struct gmm_x1868 {
-    /* 0x0000 */ u16
-        unlocked_characers_bitmask; ///< unlocked characters bitmask
-    /* 0x0002 */ u16 x186A;         ///< unlocked stages bitmask
-    /* 0x0004 */ u8 x186C;          ///< unlocked features bitmask - score
-                                    ///< display/random stage etc...
+typedef struct {
+    /* 0x0000 */ u16 unlocked_characters; ///< unlocked characters bitmask
+    /* 0x0002 */ u16 x186A;               ///< unlocked stages bitmask
+    /* 0x0004 */ u8 x186C; ///< unlocked features bitmask - score
+                           ///< display/random stage etc...
 
     /// @remarks this would make sense to be apart of x186C, but seems unused.
     // perhaps features got removed from the unlock system? item switch comes
@@ -344,8 +343,13 @@ struct gmm_x1868 {
     /* 0x046C */ u16 trophy_flags[TY_TROPHY_COUNT];
     /* 0x06B6 */ u8 padding_trophy_flags[0xE];
     /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
-    /* 0x1760 */ struct NameTagDataBank x2FF8[2];
-}; /* size = 0x55E8 */
+} GmSaveData;
+ASSERT_SIZE(GmSaveData, 0x1790);
+
+struct GmCardData {
+    /*    +0 */ GmSaveData save_data;
+    /* +1760 */ struct NameTagDataBank nametag_banks[2];
+};
 
 struct gmm_x0_528_t {
     /* 0x051C */ s8 c_kind;
@@ -449,7 +453,7 @@ struct gmm_x0 {
      * `gmMainLib_8015EA80` walk the table from a pointer to that block. */
     struct gmm_x0_vsmodes modes;
     /* 0x1850 */ GameRules x1850;
-    /* 0x1898 */ struct gmm_x1868 thing;
+    /* 0x1898 */ struct GmCardData thing;
     /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
 ASSERT_SIZE(struct EventData, 0x588 - 0x530);

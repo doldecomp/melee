@@ -193,7 +193,7 @@ static void mnSnap_8025329C(void)
     s32* flags;
     s32 result;
 
-    result = lb_8001B6F8();
+    result = lbCardNew_CompleteNextTask();
     if (result == 11) {
         return;
     }
@@ -1007,7 +1007,7 @@ void fn_802545C4(void)
                     (mnSnap_804A0A10.state == 16))
                 {
                     do {
-                    } while (lb_8001B6F8() == 0xB);
+                    } while (lbCardNew_CompleteNextTask() == 0xB);
                 }
                 mnSnap_804A0A10.timer = 0xB;
                 mnSnap_804A0A10.active_slot = 0;
@@ -1416,7 +1416,7 @@ void fn_802545C4(void)
                 result = 1;
             } else {
                 do {
-                    poll_result = lb_8001B6F8();
+                    poll_result = lbCardNew_CompleteNextTask();
                 } while (poll_result == 0xB);
                 if (poll_result != 0) {
                     mnSnap_80254298();
@@ -1659,7 +1659,7 @@ void fn_802545C4(void)
                 }
                 if (result != 8) {
                     do {
-                    } while (lb_8001B6F8() == 0xB);
+                    } while (lbCardNew_CompleteNextTask() == 0xB);
                     mnSnap_80253E90(mnSnap_804A0A10.active_slot);
                 }
                 mnSnap_804A0A10.cur_page = -1;
@@ -1899,9 +1899,9 @@ void fn_802545C4(void)
         break;
 
     case 15:
-        result = lb_8001B6F8();
+        result = lbCardNew_CompleteNextTask();
         if (result != 0xB) {
-            if (lb_8001B6F8() != 0) {
+            if (lbCardNew_CompleteNextTask() != 0) {
                 mnSnap_804A0A10.timer = 0xB;
                 mnSnap_804A0A10.active_slot = 0;
                 HSD_JObjReqAnim(mnSnap_804A0A10.slot_jobjs[0], 0.0F);
@@ -1971,9 +1971,9 @@ void fn_802545C4(void)
                 HSD_JObjSetTranslateX(p_jobj, t);
             }
         }
-        result = lb_8001B6F8();
+        result = lbCardNew_CompleteNextTask();
         if (result != 0xB) {
-            if (lb_8001B6F8() != 0) {
+            if (lbCardNew_CompleteNextTask() != 0) {
                 mnSnap_804A0A10.timer = 0xB;
                 mnSnap_804A0A10.active_slot = 0;
                 HSD_JObjReqAnim(mnSnap_804A0A10.slot_jobjs[0], 0.0F);
@@ -2033,7 +2033,7 @@ void fn_802545C4(void)
                 do_delete = 1;
             } else {
                 do {
-                    poll_result = lb_8001B6F8();
+                    poll_result = lbCardNew_CompleteNextTask();
                 } while (poll_result == 0xB);
                 if (poll_result != 0) {
                     mnSnap_80254298();
