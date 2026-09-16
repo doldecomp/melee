@@ -1348,15 +1348,13 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     }
 }
 
-static inline s32 it_8027AB64_SelectKind(Item* item)
+static inline s32 selectPokemonForOpening(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
         item->xC4_article_data->x4_specialAttributes;
     s32 rand_int = HSD_Randi(it_8027A364(item));
     s32 index;
-    s32 total;
-
-    total = 0;
+    s32 total = 0;
     for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
         if (Item_804A0E24.x != index && Item_804A0E24.y != index) {
             total += attr->pokemon_spawn_weights[index - It_PKind_Start];
@@ -1399,7 +1397,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
         spawn.kind = selectPokemonFromList(item, common_pokemon);
 
     } else if (gm_GetCurrentGameMode() == GM_OPENING_MV) {
-        spawn.kind = it_8027AB64_SelectKind(item);
+        spawn.kind = selectPokemonForOpening(item);
     } else {
         spawn.kind = db_GetCurrentlySelectedPokemon();
         if (spawn.kind == (enum ItemKind) Pokemon_ID_Tosakinto) {

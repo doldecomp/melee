@@ -227,7 +227,8 @@ void hsd_803A949C(s32 chan, s32 card_result)
             if (commands[curr_head].read.size > 0 &&
                 commands[curr_head].read.data != NULL)
             {
-                memcpy(commands[curr_head].read.data, state->sector_buf + 0x20,
+                memcpy(commands[curr_head].read.data,
+                       ((CardBlockHeader*) state->sector_buf)->data,
                        commands[curr_head].read.size);
             }
             result = checkOpen(state);
@@ -1966,7 +1967,6 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
     }
 
     sector_size = state->sector_size;
-    retries = 0;
     buf = state->sector_buf;
     {
         u32 temp = state->header_size + sector_size;
@@ -1980,7 +1980,7 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
         }
     }
 
-    for (; retries < 10; retries++) {
+    for (retries = 0; retries < 10; retries++) {
         {
             s32 tmp =
                 CARDRead(&state->file_info, buf, sector_size, read_offset);

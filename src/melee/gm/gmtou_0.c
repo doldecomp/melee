@@ -345,29 +345,28 @@ void fn_80191154(HSD_GObj* gobj)
     u8* counter;
     TmData* tm;
     HSD_JObj* jobj;
-    u8* xE_ptr;
-    u8 val;
+    u8* frame;
 
     state = &lbl_804799B8;
     tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option < 9) {
-        if ((*(xE_ptr = &state->xE)) > 0x27U) {
-            *xE_ptr = 0xA;
+        if (*(frame = &state->xE) > 0x27U) {
+            *frame = 0xA;
         }
     } else {
-        if ((*(xE_ptr = &state->xE)) == 0x31) {
+        if (*(frame = &state->xE) == 0x31) {
             fn_80190ABC(6);
             fn_80190ABC(5);
             tm->cur_option = 0xA;
         }
-        if (*xE_ptr > 0x4EU) {
-            *xE_ptr = 0x32;
+        if (*frame > 0x4EU) {
+            *frame = 0x32;
         }
     }
-    val = *(counter = &state->xE);
-    fn_8019044C(jobj, (f32) val);
+    counter = &state->xE;
+    fn_8019044C(jobj, *counter);
     (*counter)++;
 }
 

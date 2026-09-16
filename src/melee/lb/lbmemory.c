@@ -344,7 +344,7 @@ void lbMemory_8001564C(void)
         (void*) ((ARGetSize() > 0x01000000U) ? 0x01000000U : ARGetSize());
 
     _p(free_mem) = (Handle*) &_p(x8_mem)[0];
-    for (i = 0; i < 0x82; i++) {
+    for (i = 0; i < (int) ARRAY_SIZE(_p(x8_mem)) - 1; i++) {
         _p(x8_mem)[i].x0_next = &_p(x8_mem)[i + 1];
     }
     _p(x8_mem)[i].x0_next = NULL;
@@ -352,7 +352,7 @@ void lbMemory_8001564C(void)
     _p(x634_max_num_allocs) = 0;
     _p(x630_num_allocs) = 0;
     _p(free_heap) = &_p(x638_heap)[0];
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < (int) ARRAY_SIZE(_p(x638_heap)) - 1; i++) {
         _p(x638_heap)[i].x0_next = &_p(x638_heap)[i + 1];
     }
     _p(x638_heap)[i].x0_next = NULL;
@@ -362,7 +362,7 @@ void lbMemory_8001564C(void)
         void* lo = _p(a_arenaLo);
         _p(x69C) = lbMemory_80014E24(lo, hi);
     }
-    _p(x6A0_mgr).size = 0; // base + 0x6D0 on PowerPC
+    _p(x6A0_mgr).size = 0;
 }
 #ifdef MUST_MATCH
 #pragma pop

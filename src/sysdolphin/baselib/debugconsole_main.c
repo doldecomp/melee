@@ -823,9 +823,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
     OSReport(" Address:  Back Chain  LR Save\n");
 
     sp = (u32*) ctx->gpr[1];
-    i = 0;
-
-    while (sp != NULL && sp != (u32*) -1 && i < (u32) max_depth) {
+    for (i = 0; sp != NULL && sp != (u32*) -1 && i < (u32) max_depth; i++) {
         if ((u32) sp < 0x80000000u) {
             break;
         }
@@ -834,7 +832,6 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
         }
         OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
         sp = (u32*) sp[0];
-        i++;
     }
 }
 
