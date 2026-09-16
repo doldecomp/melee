@@ -885,7 +885,7 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D99E0(HSD_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     s32 state = gp->u.zebes5.xC8;
 
     switch (state) {

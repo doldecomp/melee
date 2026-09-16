@@ -116,7 +116,7 @@ Item_GObj* it_802E0488(s32 arg0, Vec3* arg1, s32 arg2)
         it_8027C56C(it_gp, it->facing_dir);
         it->xDD4_itemVar.zrshell.xE10 = arg0;
         Item_80268E5C(it_gp, 0xC, ITEM_ANIM_UPDATE);
-        HSD_JObjAnimAll((HSD_JObj*) it_gp->hsd_obj);
+        HSD_JObjAnimAll(GET_JOBJ(it_gp));
         if (it_802DDA84(it_gp) != false) {
             it_802762B0(it);
             if (it_80277040(it_gp) == false) {

@@ -579,7 +579,7 @@ void grKongo_801D6198(Ground_GObj* arg0)
     switch (temp_r3->u.kongo3.xC4) {
     case 0:
         if (grAnime_801C83D0(arg0, 0, 1) != 0) {
-            Ground_InitMapColl((HSD_JObj*) arg0->hsd_obj, temp_r3->map_id);
+            Ground_InitMapColl(GET_JOBJ(arg0), temp_r3->map_id);
             Ground_UpdateMapColl(arg0);
             if ((enum GrKind) temp_r3->map_id == Gr_Kind_Test) {
                 mpJointListAdd(0);

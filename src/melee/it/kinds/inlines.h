@@ -250,7 +250,7 @@ static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
 {
     const f32 PI_2 = M_PI / 2;
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
     it_80273030(gobj);
     HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);

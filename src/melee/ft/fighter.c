@@ -2480,7 +2480,7 @@ static inline float Fighter_GetPosY(Fighter* fp)
 
 void Fighter_procMap(Fighter_GObj* gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_b3) {
         if (fp->ecb_lock) {

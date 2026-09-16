@@ -120,7 +120,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
 
 void mnHyaku_8024C9F0(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 ret = mn_8022EC18(jobj, &mnHyaku_803EF674, 0x80);
     if (ret >= mnHyaku_803EF674.end_frame) {
         HSD_GObjFree(gobj);
@@ -147,7 +147,7 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
     f32 res;
     PAD_STACK(12);
 
-    jobj = (HSD_JObj*) gobj->hsd_obj;
+    jobj = GET_JOBJ(gobj);
     menu = GET_MENU(gobj);
     if (mn_804A04F0.cur_menu != 0x21) {
         HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);

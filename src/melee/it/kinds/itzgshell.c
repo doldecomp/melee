@@ -825,7 +825,7 @@ bool itZrshell_UnkMotion10_Anim(Item_GObj* gobj)
     PAD_STACK(8);
     if (!it_80272C6C(gobj) && ip->ground_or_air == GA_Ground) {
         if (!it_80277040(gobj)) {
-            ip = (0, (Item*) HSD_GObjGetUserData(gobj)); // permuterslop
+            ip = (0, GET_ITEM(gobj)); // permuterslop
             it_8026B390(gobj);
             it_80275444(gobj);
             it_802754D4(gobj);

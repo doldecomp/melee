@@ -595,7 +595,7 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
 {
     u8 _[8];
     int* temp_r31 = (0, &p_ftCommonData->x504);
-    Fighter* fp = (0, (Fighter*) HSD_GObjGetUserData(gobj));
+    Fighter* fp = (0, GET_FIGHTER(gobj));
     Fighter* new_var;
     ftCo_800D331C(gobj);
     fp->mv.co.unk_deadup.x40 = *temp_r31;
@@ -617,7 +617,7 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
     fp->x2227_b6 = 1;
     {
         int* temp_r31 = (0, &p_ftCommonData->x504);
-        Fighter* fp2 = (0, (Fighter*) HSD_GObjGetUserData(gobj));
+        Fighter* fp2 = (0, GET_FIGHTER(gobj));
         ftCo_800D331C(gobj);
         fp2->mv.co.unk_deadup.x40 = *temp_r31;
         fp2->mv.co.unk_deadup.x44 = 0;

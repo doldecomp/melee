@@ -82,7 +82,7 @@ HSD_GObj* grTGameWatch_802241B4(int id)
 
 void grTGameWatch_8022429C(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 

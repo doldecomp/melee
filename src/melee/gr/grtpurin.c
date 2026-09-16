@@ -89,7 +89,7 @@ HSD_GObj* grTPurin_8022320C(int id)
 
 void grTPurin_802232F4(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 

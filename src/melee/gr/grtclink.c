@@ -92,7 +92,7 @@ HSD_GObj* grTCLink_8021FFE8(int id)
 
 void grTCLink_802200D0(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
