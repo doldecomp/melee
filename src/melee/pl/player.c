@@ -29,13 +29,6 @@ typedef struct _ftMapping {
     s8 has_transformation;
 } ftMapping;
 
-/// @todo delete after fixing functions that use this
-struct Unk_Struct_w_Array {
-    char some_str[8 + 4]; //"PdPm.dat"
-    char another_str[16 + 4];
-    S8Vec3 vec_arr[30]; /// ftMapping_list
-};
-
 //// .data
 char str_PdPmdat_start_of_data[] = "PdPm.dat";
 char str_plLoadCommonData[] = "plLoadCommonData";
@@ -343,15 +336,14 @@ void Player_80031FB0(int slot, s32 entity_index)
 void Player_80032070(int slot, bool bool_arg)
 {
     StaticPlayer* player;
-    struct Unk_Struct_w_Array* unkStruct =
-        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
     if (bool_arg == 0) {
         ftCo_800D4FF4(player->player_entity[player->transformed[0]]);
 
-        if (player->flags.b2 && unkStruct->vec_arr[player->ckind].z == 0 &&
+        if (player->flags.b2 &&
+            !ftMapping_list[player->ckind].has_transformation &&
             ftLib_8008701C(player->player_entity[player->transformed[1]]))
         {
             ftCo_800D4FF4(player->player_entity[player->transformed[1]]);
@@ -431,8 +423,6 @@ Gm_PKind Player_GetPlayerSlotType(s32 slot)
 Gm_PKind Player_8003248C(s32 slot, bool arg1)
 {
     Gm_PKind slot_type;
-    struct Unk_Struct_w_Array* unk_struct =
-        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
@@ -440,7 +430,7 @@ Gm_PKind Player_8003248C(s32 slot, bool arg1)
     player = &player_slots[slot];
 
     if (arg1 == 1) {
-        if (unk_struct->vec_arr[player->ckind].z == 0) {
+        if (!ftMapping_list[player->ckind].has_transformation) {
             if (player->pkind == Gm_PKind_Human ||
                 player->pkind == Gm_PKind_Cpu)
             {
@@ -475,8 +465,6 @@ s8 Player_800325C8(CharacterKind kind, bool b)
 s8 Player_80032610(s32 slot, bool arg1)
 { //// decomp.me/scratch/pHTx2
 
-    struct Unk_Struct_w_Array* some_struct =
-        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
     s32 error_value = -1;
 
@@ -484,10 +472,10 @@ s8 Player_80032610(s32 slot, bool arg1)
     player = &player_slots[slot];
 
     if (arg1 == 0) {
-        return some_struct->vec_arr[player->ckind].x;
+        return ftMapping_list[player->ckind].internal_id;
     }
     if (arg1 == 1) {
-        return some_struct->vec_arr[player->ckind].y;
+        return ftMapping_list[player->ckind].extra_internal_id;
     }
 
     return error_value;
@@ -1281,13 +1269,11 @@ s32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 s32 Player_GetFalls(s32 slot)
 { /// decomp.me/scratch/8ijor
     StaticPlayer* player;
-    struct Unk_Struct_w_Array* unkStruct =
-        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if (unkStruct->vec_arr[player->ckind].y != -1 &&
-        unkStruct->vec_arr[player->ckind].z != 0)
+    if (ftMapping_list[player->ckind].extra_internal_id != -1 &&
+        ftMapping_list[player->ckind].has_transformation)
     {
         return player->falls[player->transformed[0]] +
                player->falls[player->transformed[1]];
@@ -2038,13 +2024,12 @@ void Player_80036DD8(void)
 
 void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2)
 {
-    struct Unk_Struct_w_Array* unkStruct =
-        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
-    ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].x, archive, arg2);
-    if ((unkStruct->vec_arr[ckind].y != -1) &&
-        (unkStruct->vec_arr[ckind].z == 0))
+    ftDemo_SetArchiveData(ftMapping_list[ckind].internal_id, archive, arg2);
+    if (ftMapping_list[ckind].extra_internal_id != -1 &&
+        !ftMapping_list[ckind].has_transformation)
     {
-        ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].y, archive, arg2);
+        ftDemo_SetArchiveData(ftMapping_list[ckind].extra_internal_id, archive,
+                              arg2);
     }
 }
 
