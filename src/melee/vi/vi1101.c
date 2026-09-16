@@ -169,20 +169,20 @@ void vi1101_Scene_OnEnter(void* arg)
     HSD_JObj* jobj;
     HSD_GObj* model_gobj;
     s32 i;
-    u8 ckind = 0;
+    u8 index = 0;
     const u8* input = arg;
     const Vi1101Data* data = &un_80400200;
     lbAudioAx_800236DC();
     efLib_Init();
-    efAsync_LoadSync(ckind);
+    efAsync_LoadSync(index);
     lbAudioAx_80023F28(0x55);
     lbAudioAx_80024E50(1);
 
-    ckind = input[0];
+    index = input[0];
     un_804D6FCC = lbArchive_LoadSymbols(data->vi1101_dat, &un_804D6FC0,
                                         data->visual1101_scene, &un_804D6FC4,
                                         data->visual1101_cam2_scene, NULL);
-    un_804D6FC8 = lbArchive_LoadSymbols(viGetCharAnimByIndex(ckind), NULL);
+    un_804D6FC8 = lbArchive_LoadSymbols(viGetCharAnimByIndex(index), NULL);
 
     light_gobj = GObj_Create(0xB, 3, 0);
     HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind & 0xFFFF,
@@ -203,7 +203,7 @@ void vi1101_Scene_OnEnter(void* arg)
     for (i = 0; un_804D6FC0->models[i] != NULL; i++) {
         HSD_Joint* joint;
         u8 jobj_kind;
-        HSD_JObj* anim_jobj;
+        HSD_JObj* jobj_copy;
 
         model_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(joint = un_804D6FC0->models[i]->joint);
@@ -212,8 +212,8 @@ void vi1101_Scene_OnEnter(void* arg)
         GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(jobj, un_804D6FC0->models[i], 0);
         HSD_JObjReqAnimAll(jobj, un_804DE0DC);
-        anim_jobj = jobj;
-        HSD_JObjAnimAll(anim_jobj);
+        jobj_copy = jobj;
+        HSD_JObjAnimAll(jobj_copy);
         HSD_GObj_SetupProc(model_gobj, fn_8031F548, 0x17);
     }
 
