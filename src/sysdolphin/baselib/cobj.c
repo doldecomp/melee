@@ -1247,8 +1247,8 @@ void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
 
 HSD_CObj* HSD_CObjAlloc(void)
 {
-    HSD_CObj* cobj = HSD_COBJ(hsdNew(
-        default_class ? default_class : &hsdCObj.parent.parent));
+    HSD_CObj* cobj = HSD_COBJ(
+        hsdNew(default_class ? default_class : &hsdCObj.parent.parent));
     HSD_ASSERT(1954, cobj);
     return cobj;
 }
