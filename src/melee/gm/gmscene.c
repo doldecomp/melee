@@ -283,7 +283,7 @@ void gm_801A4D34(void (*on_frame)(void), UNUSED GameSceneInfo* info)
     gm_80479D58.unk_8 = 0;
     gm_80479D58.unk_C = 0;
     HSD_PadFlushQueue(HSD_PAD_FLUSH_QUEUE_LEAVE1);
-    lb_8001CF18();
+    lbCardGame_InitScene();
 
     while (temp_r25->unk_C == 0) {
         hsd_80392E80();

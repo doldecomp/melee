@@ -923,7 +923,7 @@ static inline void unpackCardStat(const CardCmd* cmd, CARDStat* stat)
     }
 }
 
-static inline void rollbackCardCommands(CardContext* context, s32 snap)
+static void rollbackCardCommands(CardContext* context, s32 snap)
 {
     s32 saved = snap;
 
