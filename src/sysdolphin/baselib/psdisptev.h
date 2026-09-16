@@ -3,8 +3,10 @@
 
 #include <Runtime/platform.h>
 
+#include <sysdolphin/baselib/forward.h>
+
 void psSetupTevCommon(void);
 void psSetupTevInvalidState(void);
-void psSetupTev(u32*);
+void psSetupTev(HSD_Particle* pp);
 
 #endif
