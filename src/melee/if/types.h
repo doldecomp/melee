@@ -44,15 +44,14 @@ struct IfDamageState {
 
 struct HudIndex {
     IfDamageState players[6];
-    /* +258 */ HSD_Joint* unk258;
-    /* +25C */ void* jobj_desc_parent;
-    /* +260 */ HSD_AnimJoint* janim_selection_joints;
-    /* +264 */ void* janim_selection_textures;
-    /* +268 */ void* unk268;
-    /* +26C */ void* unk26C;
-    /* +270 */ void* unk270;
-    /* +274 */ void* unk274;
-    // 8 elements of size 0x28, what is this?
+    /* +258 */ HSD_Joint* damage_joint;
+    /* +25C */ HSD_AnimJoint** damage_anims;
+    /* +260 */ HSD_MatAnimJoint** damage_matanims;
+    /* +264 */ HSD_ShapeAnimJoint** damage_shapeanims;
+    /* +268 */ HSD_Joint* mark_joint;
+    /* +26C */ HSD_AnimJoint** mark_anims;
+    /* +270 */ HSD_MatAnimJoint** mark_matanims;
+    /* +274 */ HSD_ShapeAnimJoint** mark_shapeanims;
 };
 
 struct Element_803F9628_Obj_14 {
