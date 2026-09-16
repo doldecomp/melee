@@ -19,6 +19,13 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/lb/types.h>
 
+/// Recent Pokemon selections and the shared Mew/Celebi spawn limit.
+struct PokemonSelectionState {
+    /* 0x0 */ s32 last_kind;     ///< ItemKind, or -1 before any selection.
+    /* 0x4 */ s32 previous_kind; ///< ItemKind, or -1 before two selections.
+    /* 0x8 */ bool rare_spawned;
+};
+
 struct CameraBoxFlags {
     struct {
         u8 b01 : 2;
