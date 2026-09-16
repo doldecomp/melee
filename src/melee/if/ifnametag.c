@@ -88,27 +88,29 @@
 /* 3F9940 */ static HSD_WObjDesc nametag_interest = { NULL,
                                                       { 0.0f, 0.0f, 0.0f },
                                                       NULL };
-/* 3F9954 */ static HSD_CObjDesc nametag_CObjDesc = { { NULL,
-                                                        0,
-                                                        3,
-                                                        0,
-                                                        640,
-                                                        0,
-                                                        480,
-                                                        0,
-                                                        640,
-                                                        0,
-                                                        480,
-                                                        &nametag_eyepos,
-                                                        &nametag_interest,
-                                                        0.0f,
-                                                        NULL,
-                                                        0.1f,
-                                                        32768.0f,
-                                                        0.0f,
-                                                        -480.0f,
-                                                        0.0f,
-                                                        640.0f } };
+/* 3F9954 */ static HSD_CameraDescFrustum nametag_CObjDesc = {
+    NULL,
+    0,
+    3,
+    0,
+    640,
+    0,
+    480,
+    0,
+    640,
+    0,
+    480,
+    &nametag_eyepos,
+    &nametag_interest,
+    0.0f,
+    NULL,
+    0.1f,
+    32768.0f,
+    0.0f,
+    -480.0f,
+    0.0f,
+    640.0f
+};
 
 /// .bss
 /* 4A1ED0 */ static StaticModelDesc un_804A1ED0;
@@ -372,7 +374,7 @@ void un_802FD4C8(void)
     un_804D6D6C = 0;
     memzero(un_804D6D70, i = sizeof(un_804D6D70));
     un_804D6D68 = (gobj = un_802FD4C8_inline(15));
-    new_var = lb_80013B14(&nametag_CObjDesc.perspective);
+    new_var = lb_80013B14((HSD_CameraDescPerspective*) (&nametag_CObjDesc));
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, new_var);
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
