@@ -146,8 +146,8 @@ void Item_80266FCC(void)
     Item_804A0CCC.x154.b0 = true;
     Item_804A0CCC.count = 1;
 
-    Item_804A0E24.last_kind = -1;
-    Item_804A0E24.previous_kind = -1;
+    Item_804A0E24.last_kind = It_Kind_Unselected;
+    Item_804A0E24.previous_kind = It_Kind_Unselected;
     Item_804A0E24.rare_spawned = false;
 
     it_804D6D00 = -1;

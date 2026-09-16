@@ -1186,13 +1186,16 @@ s32 it_8027A364(Item* item)
     itPokemonSpawn_DatAttrs* attr =
         item->xC4_article_data->x4_specialAttributes;
     int ret_val = 1;
-    int i;
+    int index;
     int start = It_PKind_Start;
     int end = It_PKind_Terminate;
 
-    for (i = start; i < end; i++) {
-        if (Item_804A0E24.last_kind != i && Item_804A0E24.previous_kind != i) {
-            ret_val += attr->pokemon_spawn_weights[i - It_PKind_Start];
+    for (index = start; index < end; index++) {
+        ItemKind kind = index;
+        if (Item_804A0E24.last_kind != kind &&
+            Item_804A0E24.previous_kind != kind)
+        {
+            ret_val += attr->pokemon_spawn_weights[index - It_PKind_Start];
         }
     }
 
@@ -1202,7 +1205,7 @@ s32 it_8027A364(Item* item)
 s32 it_8027A4D4(Item* item)
 {
     int rand_int;
-    int i;
+    int index;
     int var_r3;
 
     itPokemonSpawn_DatAttrs* attr =
@@ -1220,15 +1223,16 @@ s32 it_8027A4D4(Item* item)
     }
     rand_int = HSD_Randi(it_8027A364(item));
     var_r3 = 0;
-    for (i = It_PKind_Start; i < It_PKind_Terminate; i++) {
-        int previous_kind = Item_804A0E24.previous_kind;
-        int last_kind = Item_804A0E24.last_kind;
-        if (last_kind != i && previous_kind != i) {
-            var_r3 += attr->pokemon_spawn_weights[i - It_PKind_Start];
+    for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
+        ItemKind kind = index;
+        ItemKind previous_kind = Item_804A0E24.previous_kind;
+        ItemKind last_kind = Item_804A0E24.last_kind;
+        if (last_kind != kind && previous_kind != kind) {
+            var_r3 += attr->pokemon_spawn_weights[index - It_PKind_Start];
             if (var_r3 >= rand_int) {
                 Item_804A0E24.previous_kind = last_kind;
-                Item_804A0E24.last_kind = i;
-                return i - It_PKind_Start;
+                Item_804A0E24.last_kind = kind;
+                return index - It_PKind_Start;
             }
         }
     }
@@ -1239,19 +1243,19 @@ s32 it_8027A780(Item* item, void* arg1)
 {
     u8 _pad[8];
     struct PokemonSpawnWeight {
-        s32 kind;
+        ItemKind kind;
         s32 weight;
     } weights[30];
     struct PokemonSpawnWeight* base;
     struct PokemonSpawnWeight* buf;
-    s32 last_kind;
-    s32 previous_kind;
+    ItemKind last_kind;
+    ItemKind previous_kind;
     itPokemonSpawn_DatAttrs* attr;
     s32 total;
     s32 cnt;
     s32 rand_int;
     s32 idx;
-    s32 result;
+    ItemKind result;
     s32 accum;
     int i;
 
@@ -1363,13 +1367,14 @@ static inline s32 selectPokemonForOpening(Item* item)
     s32 index;
     s32 total = 0;
     for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
-        if (Item_804A0E24.last_kind != index &&
-            Item_804A0E24.previous_kind != index)
-        {
+        ItemKind previous_kind = Item_804A0E24.previous_kind;
+        ItemKind last_kind = Item_804A0E24.last_kind;
+        ItemKind kind = index;
+        if (last_kind != index && previous_kind != index) {
             total += attr->pokemon_spawn_weights[index - It_PKind_Start];
             if (total >= rand_int) {
-                Item_804A0E24.previous_kind = Item_804A0E24.last_kind;
-                Item_804A0E24.last_kind = index;
+                Item_804A0E24.previous_kind = last_kind;
+                Item_804A0E24.last_kind = kind;
                 return index - It_PKind_Start;
             }
         }

@@ -412,6 +412,7 @@ typedef enum ItemKind {
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
     /// @}
 
+    It_Kind_Unselected = -1,
     It_Kind_None = -999,
 } ItemKind;
 
