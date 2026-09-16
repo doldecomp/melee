@@ -642,9 +642,9 @@ static inline f32 vec_get_x(Vec3* v)
     return v->x;
 }
 
-static inline f64 cobj_fabsf_p(f32* v)
+static inline f64 vec_get_abs_y(Vec3* v)
 {
-    return fabsf(*v);
+    return fabsf(v->y);
 }
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
@@ -659,7 +659,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     if (res != 0) {
         return res;
     }
-    if (1.0 - cobj_fabsf_p(&eye.y) < 0.0001) {
+    if (1.0 - vec_get_abs_y(&eye) < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-vec_get_x(&eye) / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
