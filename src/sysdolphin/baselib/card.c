@@ -24,7 +24,7 @@ typedef struct CardBlockHeader {
 /// The ring and the request queue as pointer values: MWCC then keeps the
 /// array offset in the load/store displacement, as retail does.
 #define CARD_RING(ctx) ((CardCmd*) (ctx)->cmds)
-#define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->requests)
+#define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->request_queue)
 
 /// fn_803B1338 stages its commands in 0x28-byte stack slots.
 typedef struct CardCmdBuf {
@@ -47,11 +47,11 @@ ASSERT_SIZE(CardActiveRequest, 0x10);
 typedef struct CardContext {
     /* 0x0000 */ CardActiveRequest active;
     /* 0x0010 */ CardCmd cmds[128];
-    /* 0x1210 */ CardRequest requests[32];
+    /* 0x1210 */ CardRequest request_queue[32];
 } CardContext;
 ASSERT_SIZE(CardContext, 0x1510);
 ASSERT_OFFSET(CardContext, cmds, 0x10);
-ASSERT_OFFSET(CardContext, requests, 0x1210);
+ASSERT_OFFSET(CardContext, request_queue, 0x1210);
 
 /* 3AA790 */ static int fn_803AA790(void);
 /// Copies the command into the ring; pointed-to state and buffers are not
@@ -143,9 +143,20 @@ ASSERT_OFFSET(CardContext, requests, 0x1210);
     idle,
 } hsd_804D799C;
 
+#ifdef MUST_MATCH
+/* These are distinct retail symbols, so the matching build retains the
+ * original cross-object overlay. */
 /* 4D1138 */ static CardActiveRequest active_requests;
 /* 4D1148 */ static CardCmd commands[128];
 /* 4D2348 */ static CardRequest requests[32];
+#else
+/* Native builds use one real aggregate rather than reading across separately
+ * declared C objects. */
+/* 4D1138 */ static CardContext card_context;
+#define active_requests card_context.active
+#define commands card_context.cmds
+#define requests card_context.request_queue
+#endif
 
 static int checkOpen(CardState* state)
 {
@@ -5421,10 +5432,6 @@ int fn_803B26CC(CardState* state, void* comment, void* banner, void* icons,
     hsd_804D7998 = -1;
     return 0;
 }
-
-/// The request queue as a pointer value: MWCC then keeps the array offset in
-/// the load/store displacement, as retail does.
-#define CARD_REQUESTS(ctx) ((CardRequest*) (ctx)->requests)
 
 int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
                  CardCallback callback)
