@@ -47,9 +47,9 @@
 /* 307E84 */ void Toy_80307E84(HSD_GObj* gobj);
 
 /// @todo :: fill out the struct that this uses/returns
-/* 30813C */ char* Toy_8030813C(int trophy_id);
+/* 30813C */ ToyModelFile* Toy_8030813C(int trophy_id);
 
-/* 308250 */ void Toy_80308250(u8* arg0, s16 arg1, s32 arg2);
+/* 308250 */ void Toy_80308250(ToyListEntry* arg0, s16 arg1, s32 arg2);
 /* 3082F8 */ s32 Toy_803082F8(s16 idx);
 /* 308328 */ s32 Toy_80308328(s32 idx);
 /* 308354 */ s32 Toy_80308354(s16 idx);

@@ -32,6 +32,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
+#include <melee/ty/types.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/hsd_3924.h>
@@ -536,7 +537,7 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind mode)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3) + 4;
+    return Toy_8030813C(var_r3)->archive_name;
 }
 
 char* gm_80160564(CharacterKind ckind, GameModeKind mode)
@@ -556,7 +557,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind mode)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3) + 0x24;
+    return Toy_8030813C(var_r3)->symbol_name;
 }
 
 u8 gm_SelKindToUnlockIndex(SelectableCharacterKind selkind)
