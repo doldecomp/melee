@@ -4,7 +4,6 @@
 
 #include <melee/if/forward.h>
 
-#include <m2c_macros.h>
 #include <math.h>
 #include <placeholder.h>
 #include <stddef.h>
@@ -2454,19 +2453,17 @@ HSD_JObj* _Toy_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
 
 void Toy_80307E84(HSD_GObj* gobj)
 {
-    s32* base;
     ToyAnimState* state;
     s8 idx;
     s8 x0F_val;
     HSD_JObj* jobj0;
     HSD_JObj* jobj1;
 
-    base = (s32*) &_Toy_804A26B8;
-    state = (ToyAnimState*) ((u8*) base + 0x3F0);
-    idx = M2C_FIELD(base, s8*, 0x3FE);
-    x0F_val = M2C_FIELD(base, s8*, 0x3FF);
-    jobj0 = (HSD_JObj*) base[idx + (0x3F4 / 4)];
-    jobj1 = (HSD_JObj*) base[(idx ^ 1) + (0x3F4 / 4)];
+    state = &Toy_804A2AA8;
+    idx = state->x0E;
+    x0F_val = state->x0F;
+    jobj0 = state->jobj[idx];
+    jobj1 = state->jobj[idx ^ 1];
 
     if (x0F_val <= 0) {
         if (state->x10 == 1) {
