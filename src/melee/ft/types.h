@@ -1295,6 +1295,11 @@ typedef struct Fighter_x1670_t {
     /* +24 */ int x24;
 } Fighter_x1670_t; ///< @todo figure out proper size
 
+typedef struct FtInputTimers {
+    /* +00 */ U8Vec2 lstick;
+    /* +02 */ u8 trigger;
+} FtInputTimers;
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1409,20 +1414,14 @@ struct Fighter {
         /*  fp+66C */ HSD_Pad
             released_buttons; ///< buttons released this frame
     } input;
-    /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
-    /*  fp+671 */ u8 x671_timer_lstick_tilt_y;
-    // How much time has passed since the analog trigger became non 0
-    // used at the very least for powershield detection
-    /*  fp+672 */ u8 trigger_analog_timer;
-    /*  fp+673 */ u8 x673;
-    /*  fp+674 */ u8 x674;
-    /*  fp+674 */ u8 x675;
-    /*  fp+676 */ u8 x676_x;
-    /*  fp+677 */ u8 x677_y;
-    /*  fp+678 */ u8 x678;
-    /*  fp+679 */ u8 x679_x;
-    /*  fp+67A */ u8 x67A_y;
-    /*  fp+67B */ u8 x67B;
+    /**
+     * Frames since each analog input last crossed its threshold: the stick
+     * smash deadzones, #shield_press_threshold for the trigger.
+     */
+    /*  fp+670 */ FtInputTimers active_timer;    ///< consumers stamp 254
+    /*  fp+673 */ FtInputTimers active_sticky;   ///< no consumer resets it
+    /*  fp+676 */ FtInputTimers active_duration; ///< survives the input ending
+    /*  fp+679 */ FtInputTimers activity_timer;  ///< input-count stat only
     /*  fp+67C */ u8 x67C;
     /*  fp+67D */ u8 x67D;
     /*  fp+67E */ u8 x67E;

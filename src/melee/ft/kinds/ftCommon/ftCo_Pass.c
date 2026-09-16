@@ -27,7 +27,7 @@ bool ftCo_80099F1C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->input.lstick[0].y <= -p_ftCommonData->x464 &&
-        fp->x671_timer_lstick_tilt_y < p_ftCommonData->x468 &&
+        fp->active_timer.lstick.y < p_ftCommonData->x468 &&
         mpColl_IsOnPlatform(&fp->coll_data))
     {
         return true;
@@ -83,7 +83,7 @@ void ftCo_8009A184(Fighter_GObj* gobj, FtMotionId msid, MotionFlags mf,
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0, NULL);
     mpUpdateFloorSkip(&fp->coll_data);
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->active_timer.lstick.y = 0xFE;
 }
 
 void ftCo_8009A228(Fighter_GObj* gobj)
@@ -95,7 +95,7 @@ void ftCo_8009A228(Fighter_GObj* gobj)
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Pass, Ft_MF_None, 0, 1, 0, NULL);
     mpUpdateFloorSkip(&fp->coll_data);
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->active_timer.lstick.y = 0xFE;
 }
 
 void ftCo_Pass_Anim(Fighter_GObj* gobj)
