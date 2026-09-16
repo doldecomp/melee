@@ -1247,8 +1247,8 @@ void HSD_CObjSetDefaultClass(HSD_ClassInfo* info)
 
 HSD_CObj* HSD_CObjAlloc(void)
 {
-    HSD_CObj* cobj = (HSD_CObj*) hsdNew(
-        default_class ? default_class : &hsdCObj.parent.parent);
+    HSD_CObj* cobj = HSD_COBJ(hsdNew(
+        default_class ? default_class : &hsdCObj.parent.parent));
     HSD_ASSERT(1954, cobj);
     return cobj;
 }
@@ -1336,7 +1336,7 @@ static int CObjInit(HSD_Class* o)
     if (status < 0) {
         return status;
     }
-    cobj = (HSD_CObj*) o;
+    cobj = HSD_COBJ(o);
     if (cobj != NULL) {
         HSD_CObjSetMtxDirty(cobj);
     }
