@@ -9,16 +9,14 @@ typedef struct grMc_CarEntry {
     /* 0x08 */ f32 x8;
     /* 0x0C */ f32 xC;
     /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
-    /* 0x18 */ f32 x18;
-    /* 0x1C */ f32 x1C;
+    /* 0x14 */ Vec3 pos;
     /* 0x20 */ u16 x20;
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
     } x22_flags;
     /* 0x23 */ u8 x23;
-    /* 0x24 */ s32 x24;
+    /* 0x24 */ Item_GObj* x24;
     /* 0x28 */ HSD_Generator* gen;
 } grMc_CarEntry;
 
