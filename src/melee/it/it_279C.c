@@ -1348,70 +1348,27 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     }
 }
 
-#if 0
-static inline s32 it_8027AB64_SpawnWeight(itPokemonSpawn_DatAttrs* attr,
-                                          s32 index)
-{
-    return attr->pokemon_spawn_weights[index - It_PKind_Start];
-}
-
 static inline s32 it_8027AB64_SelectKind(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
         item->xC4_article_data->x4_specialAttributes;
     s32 rand_int = HSD_Randi(it_8027A364(item));
-    s32 recent_y_val = Item_804A0E24.y;
-    s32 recent_x_val = Item_804A0E24.x;
     s32 index;
-    s32 var_r4;
-    s32 var_ctr;
+    s32 total;
 
-    var_r4 = 0;
-    index = It_PKind_Start;
-    for (var_ctr = 30; var_ctr != 0; var_ctr--) {
-        if (recent_x_val != index && recent_y_val != index) {
-            var_r4 += it_8027AB64_SpawnWeight(attr, index);
-            if (var_r4 >= rand_int) {
-                Item_804A0E24.y = recent_x_val;
+    total = 0;
+    for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
+        if (Item_804A0E24.x != index && Item_804A0E24.y != index) {
+            total += attr->pokemon_spawn_weights[index - It_PKind_Start];
+            if (total >= rand_int) {
+                Item_804A0E24.y = Item_804A0E24.x;
                 Item_804A0E24.x = index;
                 return index - It_PKind_Start;
             }
         }
-        index++;
     }
     return 0;
 }
-#else
-static inline s32 it_8027AB64_SelectKind(Item* item)
-{
-    itPokemonSpawn_DatAttrs* attr =
-        item->xC4_article_data->x4_specialAttributes;
-    s32 rand_int = HSD_Randi(it_8027A364(item));
-    s32 recent_x_val = Item_804A0E24.x;
-    s32 recent_y_val = Item_804A0E24.y;
-    s32* spawn_weights =
-        (s32*) ((u8*) attr + 0x284); // fake, but we'll fix it in post
-    s32 index;
-    s32 var_r4;
-    s32 var_ctr;
-
-    var_r4 = 0;
-    index = It_PKind_Start;
-    for (var_ctr = 30; var_ctr != 0; var_ctr--) {
-        if (recent_x_val != index && recent_y_val != index) {
-            var_r4 += *(spawn_weights - 0x92);
-            if (var_r4 >= rand_int) {
-                Item_804A0E24.y = recent_x_val;
-                Item_804A0E24.x = index;
-                return index - It_PKind_Start;
-            }
-        }
-        spawn_weights++;
-        index++;
-    }
-    return 0;
-}
-#endif
 
 static inline s32 selectPokemonFromList(Item* item, ItemKind* kinds)
 {
