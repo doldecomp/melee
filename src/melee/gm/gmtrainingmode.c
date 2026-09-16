@@ -83,7 +83,7 @@ void gm_801B1B74(GameModeState* arg0)
     if (gm_804D68C1 != 0) {
         lbCardNew_AllocWorkArea();
         lbCardGame_LoadArchive(0);
-        lbCardGame_UpdatePowerTime();
+        lbCardGame_SaveChanges();
     }
     gm_801B06B0(css, 0x17U, vs_data->start.players[0].ckind, 1,
                 vs_data->start.players[0].color,

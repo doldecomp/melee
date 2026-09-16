@@ -98,7 +98,7 @@ void mnDataDel_8024E940(void)
         gm_801641E4(0U, 1U);
     }
     gm_801729EC();
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SaveChanges();
 }
 
 static inline void mnDataDel_8024EA6C_inline(HSD_JObj** jobj, f32 frame,
@@ -153,7 +153,7 @@ void mnDataDel_8024EA6C(void)
     gm_801603B0();
     gmMainLib_8015F588((u8) gmMainLib_8015F4E8());
     gm_801729EC();
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SaveChanges();
 }
 
 void mnDataDel_8024EBC8(HSD_JObj* root, u8 unused, u8 a, u8 b)
@@ -460,7 +460,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 gm_8016505C();
                 gmMainLib_8015F464();
                 gm_801729EC();
-                lbCardGame_UpdatePowerTime();
+                lbCardGame_SaveChanges();
                 gmMainLib_8015DB80();
                 break;
             }
@@ -483,7 +483,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 case_user_data->x3[2] = 1;
                 gmMainLib_8015EEC8();
                 gm_801729EC();
-                lbCardGame_UpdatePowerTime();
+                lbCardGame_SaveChanges();
                 break;
             }
             case 3: {
@@ -503,7 +503,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 gmMainLib_8015F150();
                 gmMainLib_8015F260();
                 gm_801729EC();
-                lbCardGame_UpdatePowerTime();
+                lbCardGame_SaveChanges();
                 break;
             }
             case 4: {
@@ -524,7 +524,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 gmMainLib_8015F4BC();
                 gm_80174238();
                 gm_801729EC();
-                lbCardGame_UpdatePowerTime();
+                lbCardGame_SaveChanges();
                 break;
             }
             }

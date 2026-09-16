@@ -243,7 +243,7 @@ void gm_801B632C(GameModeState* arg0)
     if (gm_804D68E9 != 0) {
         lbCardNew_AllocWorkArea();
         lbCardGame_LoadArchive(0);
-        lbCardGame_UpdatePowerTime();
+        lbCardGame_SaveChanges();
     }
     gm_SetupRulesDefaults(&temp_r30->vs.start.rules);
     gm_801B06B0(temp_r30, 0xF, temp_r31->unk_584, 1, temp_r31->unk_585,
@@ -447,7 +447,7 @@ bool gm_801B688C(bool arg0)
     temp_r29 = &gmMainLib_804D3EE0->modes.unk_1490;
     lbCardNew_AllocWorkArea();
     lbCardGame_LoadArchive(0);
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SaveChanges();
     if ((gm_80181A14() != 0) && (gm_GetCurrentGameMode() == GM_15MIN_VS) &&
         ((tmp = gm_80173498()) != 0x148))
     {

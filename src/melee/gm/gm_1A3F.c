@@ -101,7 +101,7 @@ void preloadState(GameModeState* state)
         preloaded_state->is_heap_persistent[1] = true;
     }
     lbDvd_80018254();
-    lb_8001C5A4();
+    lbCardNew_ForgetMemory();
     lbCardGame_Reset();
     lbSnap_8001E27C();
     Toy_803127D4();

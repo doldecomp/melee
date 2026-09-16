@@ -1963,7 +1963,7 @@ bool un_80301800(enum soundtest_callback_arg0 arg0)
         return 0;
     }
     OSReport(un_804D5980);
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SaveChanges();
     return 0;
 }
 
