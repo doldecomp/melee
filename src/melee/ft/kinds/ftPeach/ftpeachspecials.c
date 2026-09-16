@@ -42,7 +42,7 @@ static void reset(HSD_GObj* gobj)
     Fighter_ClearCmdVars(fp);
     fp->self_vel.x = 0;
     fp->x6A4_transNOffset.x = 0;
-    if (fp->active_sticky.lstick_x < da->x30) {
+    if (fp->active_sticky.lstick.x < da->x30) {
         fp->x2070.count_thrown_items = true;
         fp->mv.pe.specials.x0 = true;
     } else {

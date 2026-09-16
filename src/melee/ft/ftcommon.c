@@ -514,10 +514,10 @@ bool ftCommon_CheckFallFast(Fighter* fp)
 {
     if (!fp->fall_fast && fp->self_vel.y < 0 &&
         fp->input.lstick[0].y <= -p_ftCommonData->x88 &&
-        fp->active_timer.lstick_y < p_ftCommonData->x8C)
+        fp->active_timer.lstick.y < p_ftCommonData->x8C)
     {
         fp->fall_fast = true;
-        fp->active_timer.lstick_y = 0xFE;
+        fp->active_timer.lstick.y = 0xFE;
         ft_PlaySFX(fp, 0x96, 0x7F, 0x40);
         return true;
     }
@@ -1290,14 +1290,14 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->xF8_playerNudgeVel.x = src->xF8_playerNudgeVel.x;
     dst->xF8_playerNudgeVel.y = src->xF8_playerNudgeVel.y;
     dst->input = src->input;
-    dst->active_timer.lstick_x = src->active_timer.lstick_x;
-    dst->active_timer.lstick_y = src->active_timer.lstick_y;
+    dst->active_timer.lstick.x = src->active_timer.lstick.x;
+    dst->active_timer.lstick.y = src->active_timer.lstick.y;
     dst->active_timer.trigger = src->active_timer.trigger;
-    dst->active_sticky.lstick_x = src->active_sticky.lstick_x;
-    dst->active_sticky.lstick_y = src->active_sticky.lstick_y;
+    dst->active_sticky.lstick.x = src->active_sticky.lstick.x;
+    dst->active_sticky.lstick.y = src->active_sticky.lstick.y;
     dst->active_sticky.trigger = src->active_sticky.trigger;
-    dst->activity_timer.lstick_x = src->activity_timer.lstick_x;
-    dst->activity_timer.lstick_y = src->activity_timer.lstick_y;
+    dst->activity_timer.lstick.x = src->activity_timer.lstick.x;
+    dst->activity_timer.lstick.y = src->activity_timer.lstick.y;
     dst->activity_timer.trigger = src->activity_timer.trigger;
     dst->x685 = src->x685;
     dst->x686 = src->x686;
@@ -1756,14 +1756,14 @@ void ftCommon_8008031C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((ABS(fp->input.lstick[0].x) >= p_ftCommonData->x7B8 &&
-         fp->activity_timer.lstick_x < p_ftCommonData->x7C0) ||
+         fp->activity_timer.lstick.x < p_ftCommonData->x7C0) ||
         (ABS(fp->input.lstick[0].y) >= p_ftCommonData->x7B8 &&
-         fp->activity_timer.lstick_y < p_ftCommonData->x7C0))
+         fp->activity_timer.lstick.y < p_ftCommonData->x7C0))
     {
         Player_UpdateJoystickCountByIndex((s32) fp->player_id,
                                           fp->is_sub_fighter);
-        fp->activity_timer.lstick_y = 0xFE;
-        fp->activity_timer.lstick_x = 0xFE;
+        fp->activity_timer.lstick.y = 0xFE;
+        fp->activity_timer.lstick.x = 0xFE;
     }
     if (ABS(fp->input.triggers[0]) >= p_ftCommonData->x7BC) {
         if (fp->activity_timer.trigger < p_ftCommonData->x7C0) {

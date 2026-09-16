@@ -616,20 +616,20 @@ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
     fp->input.held_buttons[0] = 0;
 
     fp->active_timer.trigger = 254;
-    fp->active_timer.lstick_y = 254;
-    fp->active_timer.lstick_x = 254;
+    fp->active_timer.lstick.y = 254;
+    fp->active_timer.lstick.x = 254;
 
     fp->active_sticky.trigger = 254;
-    fp->active_sticky.lstick_y = 254;
-    fp->active_sticky.lstick_x = 254;
+    fp->active_sticky.lstick.y = 254;
+    fp->active_sticky.lstick.x = 254;
 
     fp->active_duration.trigger = 254;
-    fp->active_duration.lstick_y = 254;
-    fp->active_duration.lstick_x = 254;
+    fp->active_duration.lstick.y = 254;
+    fp->active_duration.lstick.x = 254;
 
     fp->activity_timer.trigger = 254;
-    fp->activity_timer.lstick_y = 254;
-    fp->activity_timer.lstick_x = 254;
+    fp->activity_timer.lstick.y = 254;
+    fp->activity_timer.lstick.x = 254;
 
     fp->x68B = 255;
     fp->x68A = 255;
@@ -666,17 +666,17 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
     fp->input.pressed_buttons = 0;
     fp->input.held_buttons[0] = 0;
 
-    fp->activity_timer.lstick_x = fp->activity_timer.lstick_y =
+    fp->activity_timer.lstick.x = fp->activity_timer.lstick.y =
         fp->activity_timer.trigger =
 
-            fp->active_duration.lstick_x = fp->active_duration.lstick_y =
+            fp->active_duration.lstick.x = fp->active_duration.lstick.y =
                 fp->active_duration.trigger =
 
-                    fp->active_sticky.lstick_x = fp->active_sticky.lstick_y =
+                    fp->active_sticky.lstick.x = fp->active_sticky.lstick.y =
                         fp->active_sticky.trigger =
 
-                            fp->active_timer.lstick_x =
-                                fp->active_timer.lstick_y =
+                            fp->active_timer.lstick.x =
+                                fp->active_timer.lstick.y =
                                     fp->active_timer.trigger = 254;
 
     fp->x67C = fp->x67D = fp->x67E = fp->x681 = fp->x682 = fp->x67F =
@@ -1906,9 +1906,9 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             Fighter_Spaghetti_8006AD10_Inner1(fp);
 
             // Fighter_ClampSpecificValue
-            fp->active_duration.lstick_x++;
-            if (fp->active_duration.lstick_x > 254) {
-                fp->active_duration.lstick_x = 254;
+            fp->active_duration.lstick.x++;
+            if (fp->active_duration.lstick.x > 254) {
+                fp->active_duration.lstick.x = 254;
             }
 
             if (fp->input.lstick[0].x >=
@@ -1918,22 +1918,22 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
-                    fp->active_timer.lstick_x++;
-                    if (fp->active_timer.lstick_x > 254) {
-                        fp->active_timer.lstick_x = 254;
+                    fp->active_timer.lstick.x++;
+                    if (fp->active_timer.lstick.x > 254) {
+                        fp->active_timer.lstick.x = 254;
                     }
-                    fp->active_sticky.lstick_x++;
-                    if (fp->active_sticky.lstick_x > 254) {
-                        fp->active_sticky.lstick_x = 254;
+                    fp->active_sticky.lstick.x++;
+                    if (fp->active_sticky.lstick.x > 254) {
+                        fp->active_sticky.lstick.x = 254;
                     }
-                    fp->activity_timer.lstick_x++;
-                    if (fp->activity_timer.lstick_x > 254) {
-                        fp->activity_timer.lstick_x = 254;
+                    fp->activity_timer.lstick.x++;
+                    if (fp->activity_timer.lstick.x > 254) {
+                        fp->activity_timer.lstick.x = 254;
                     }
                 } else {
-                    fp->active_duration.lstick_x = 0;
-                    fp->active_sticky.lstick_x = 0;
-                    fp->active_timer.lstick_x = 0;
+                    fp->active_duration.lstick.x = 0;
+                    fp->active_sticky.lstick.x = 0;
+                    fp->active_timer.lstick.x = 0;
                     fp->x2228_b7 = 1;
                 }
             } else if (fp->input.lstick[0].x <=
@@ -1943,34 +1943,34 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     -p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
-                    fp->active_timer.lstick_x++;
-                    if (fp->active_timer.lstick_x > 254) {
-                        fp->active_timer.lstick_x = 254;
+                    fp->active_timer.lstick.x++;
+                    if (fp->active_timer.lstick.x > 254) {
+                        fp->active_timer.lstick.x = 254;
                     }
-                    fp->active_sticky.lstick_x++;
-                    if (fp->active_sticky.lstick_x > 254) {
-                        fp->active_sticky.lstick_x = 254;
+                    fp->active_sticky.lstick.x++;
+                    if (fp->active_sticky.lstick.x > 254) {
+                        fp->active_sticky.lstick.x = 254;
                     }
-                    fp->activity_timer.lstick_x++;
-                    if (fp->activity_timer.lstick_x > 254) {
-                        fp->activity_timer.lstick_x = 254;
+                    fp->activity_timer.lstick.x++;
+                    if (fp->activity_timer.lstick.x > 254) {
+                        fp->activity_timer.lstick.x = 254;
                     }
                 } else {
-                    fp->active_duration.lstick_x = 0;
-                    fp->active_sticky.lstick_x = 0;
-                    fp->active_timer.lstick_x = 0;
+                    fp->active_duration.lstick.x = 0;
+                    fp->active_sticky.lstick.x = 0;
+                    fp->active_timer.lstick.x = 0;
                     fp->x2228_b7 = 0;
                 }
             } else {
-                fp->activity_timer.lstick_x = 254;
-                fp->active_sticky.lstick_x = 254;
-                fp->active_timer.lstick_x = 254;
+                fp->activity_timer.lstick.x = 254;
+                fp->active_sticky.lstick.x = 254;
+                fp->active_timer.lstick.x = 254;
             }
 
             // Fighter_ClampSpecificValue
-            fp->active_duration.lstick_y++;
-            if (fp->active_duration.lstick_y > 254) {
-                fp->active_duration.lstick_y = 254;
+            fp->active_duration.lstick.y++;
+            if (fp->active_duration.lstick.y > 254) {
+                fp->active_duration.lstick.y = 254;
             }
 
             if (fp->input.lstick[0].y >=
@@ -1980,22 +1980,22 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     p_ftCommonData->vertical_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
-                    fp->active_timer.lstick_y++;
-                    if (fp->active_timer.lstick_y > 254) {
-                        fp->active_timer.lstick_y = 254;
+                    fp->active_timer.lstick.y++;
+                    if (fp->active_timer.lstick.y > 254) {
+                        fp->active_timer.lstick.y = 254;
                     }
-                    fp->active_sticky.lstick_y++;
-                    if (fp->active_sticky.lstick_y > 254) {
-                        fp->active_sticky.lstick_y = 254;
+                    fp->active_sticky.lstick.y++;
+                    if (fp->active_sticky.lstick.y > 254) {
+                        fp->active_sticky.lstick.y = 254;
                     }
-                    fp->activity_timer.lstick_y++;
-                    if (fp->activity_timer.lstick_y > 254) {
-                        fp->activity_timer.lstick_y = 254;
+                    fp->activity_timer.lstick.y++;
+                    if (fp->activity_timer.lstick.y > 254) {
+                        fp->activity_timer.lstick.y = 254;
                     }
                 } else {
-                    fp->active_duration.lstick_y = 0;
-                    fp->active_sticky.lstick_y = 0;
-                    fp->active_timer.lstick_y = 0;
+                    fp->active_duration.lstick.y = 0;
+                    fp->active_sticky.lstick.y = 0;
+                    fp->active_timer.lstick.y = 0;
                     fp->x2229_b0 = 0;
                 }
             } else if (fp->input.lstick[0].y <=
@@ -2005,28 +2005,28 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     -p_ftCommonData->vertical_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
-                    fp->active_timer.lstick_y++;
-                    if (fp->active_timer.lstick_y > 254) {
-                        fp->active_timer.lstick_y = 254;
+                    fp->active_timer.lstick.y++;
+                    if (fp->active_timer.lstick.y > 254) {
+                        fp->active_timer.lstick.y = 254;
                     }
-                    fp->active_sticky.lstick_y++;
-                    if (fp->active_sticky.lstick_y > 254) {
-                        fp->active_sticky.lstick_y = 254;
+                    fp->active_sticky.lstick.y++;
+                    if (fp->active_sticky.lstick.y > 254) {
+                        fp->active_sticky.lstick.y = 254;
                     }
-                    fp->activity_timer.lstick_y++;
-                    if (fp->activity_timer.lstick_y > 254) {
-                        fp->activity_timer.lstick_y = 254;
+                    fp->activity_timer.lstick.y++;
+                    if (fp->activity_timer.lstick.y > 254) {
+                        fp->activity_timer.lstick.y = 254;
                     }
                 } else {
-                    fp->active_duration.lstick_y = 0;
-                    fp->active_sticky.lstick_y = 0;
-                    fp->active_timer.lstick_y = 0;
+                    fp->active_duration.lstick.y = 0;
+                    fp->active_sticky.lstick.y = 0;
+                    fp->active_timer.lstick.y = 0;
                     fp->x2229_b0 = 1;
                 }
             } else {
-                fp->activity_timer.lstick_y = 254;
-                fp->active_sticky.lstick_y = 254;
-                fp->active_timer.lstick_y = 254;
+                fp->activity_timer.lstick.y = 254;
+                fp->active_sticky.lstick.y = 254;
+                fp->active_timer.lstick.y = 254;
             }
 
             if (lb_8000D148(fp->input.lstick[1].x, fp->input.lstick[1].y,
@@ -2034,8 +2034,8 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                             0.0f,
                             p_ftCommonData->horizontal_stick_smash_deadzone))
             {
-                fp->activity_timer.lstick_y = 0;
-                fp->activity_timer.lstick_x = 0;
+                fp->activity_timer.lstick.y = 0;
+                fp->activity_timer.lstick.x = 0;
             }
 
             // Fighter_ClampSpecificValue

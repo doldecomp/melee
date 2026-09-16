@@ -209,7 +209,7 @@ void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
     float pika_attr_1C;
 
     fp->cmd_vars[ftPk_SpecialN_Cmd0] = 0;
-    fp_x673 = fp->active_sticky.lstick_x;
+    fp_x673 = fp->active_sticky.lstick.x;
 
     pika_attr_1C = pika_attr->x1C;
     if (fp_x673 < pika_attr_1C) {

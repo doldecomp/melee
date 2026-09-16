@@ -1296,9 +1296,8 @@ typedef struct Fighter_x1670_t {
 } Fighter_x1670_t; ///< @todo figure out proper size
 
 typedef struct FtInputTimers {
-    /* +0 */ u8 lstick_x;
-    /* +1 */ u8 lstick_y;
-    /* +2 */ u8 trigger;
+    /* +00 */ U8Vec2 lstick;
+    /* +02 */ u8 trigger;
 } FtInputTimers;
 
 struct Fighter {

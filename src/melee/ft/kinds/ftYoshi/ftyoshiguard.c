@@ -263,7 +263,7 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 
     Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F, 1.0F, 0.0F, NULL);
     fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
-    fp->active_timer.lstick_x = 0xFE;
+    fp->active_timer.lstick.x = 0xFE;
     fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
     if (fp->x221C_b2 == 0) {
         ftParts_80074B0C(gobj, 0, 1);

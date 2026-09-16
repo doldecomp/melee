@@ -668,7 +668,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
                               NULL);
     PAD_STACK(12);
     fp->hitlag_cb = ftCo_80093240;
-    fp->active_timer.lstick_x = -2;
+    fp->active_timer.lstick.x = -2;
     fp->post_hitlag_cb = ftCo_800932DC;
     if (!fp->x221C_b2) {
         ftCo_80092158_inline(gobj, 1049,
@@ -720,13 +720,13 @@ void ftCo_80093240(Fighter_GObj* gobj)
         if ((fp->input.lstick[0].x < 0 ? -fp->input.lstick[0].x
                                        : fp->input.lstick[0].x) >=
                 p_ftCommonData->sdi_min_stick_mag &&
-            fp->active_timer.lstick_x < p_ftCommonData->sdi_stick_window)
+            fp->active_timer.lstick.x < p_ftCommonData->sdi_stick_window)
         {
             float scl = p_ftCommonData->x4C0 * (fp->input.lstick[0].x *
                                                 p_ftCommonData->sdi_pos_scale);
             fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
             fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
-            fp->active_timer.lstick_x = 254;
+            fp->active_timer.lstick.x = 254;
         }
     }
 }
