@@ -91,6 +91,7 @@ typedef struct ToyUnkJObjData {
 /* 311F5C */ static void _Toy_80311F5C(void);
 /* 312050 */ static void _Toy_80312050(HSD_GObj* gobj, int code);
 
+/// All trophies unlocked?
 bool un_80304470(void)
 {
     int i;

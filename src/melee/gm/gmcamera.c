@@ -528,7 +528,7 @@ void gmCamera_801A2FBC(void)
 
 void gmCamera_801A2FFC(void)
 {
-    s32 i = lb_8001B6F8();
+    s32 i = lbCardNew_CompleteNextTask();
     if (i != 0xB) {
         if (i == 0) {
             gmCamera_801A3048(0);

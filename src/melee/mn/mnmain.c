@@ -2727,7 +2727,7 @@ void mnMain_Scene_OnFrame(void)
         sfxBack();
         mn_8022F268();
         gm_801603B0();
-        lb_8001B760(0xB);
+        lbCardNew_CompleteAllTasks(LbCardResult_Busy);
         lbMthp_8001F800();
         mn_8022EBDC();
         HSD_SisLib_803A5E70();

@@ -85,7 +85,7 @@ void gm_801AEE6C(int arg0, int arg1, int arg2)
 
 static inline bool gm_801AF0D4_inline(void)
 {
-    if (lb_8001C404(gm_80480DA8.unk0.unk4)) {
+    if (lbCardNew_ProbeEx(gm_80480DA8.unk0.unk4)) {
         if (gm_80480DA8.unk18 == 1) {
             gm_80480DA8.unk18 = 0;
             gm_80480DA8.unk14 = 1;
@@ -287,11 +287,11 @@ void gm_Scene_MemCard_OnFrame(void)
             if (gm_80480DA8.unk1C == 0) {
                 if (gm_80480DA8.unk0.unk0 == 0) {
                     gm_80480DA8.unk14 = 0;
-                    lb_8001CBAC(0);
+                    lbCardGame_SetCardStatus(0);
                 } else {
                     gm_80480DA8.unk8.unk0 = 1;
                     gm_80480DA8.unk14 = 0x14;
-                    lb_8001CBAC(0);
+                    lbCardGame_SetCardStatus(0);
                     lbCardGame_UpdatePowerTime();
                 }
             } else {
@@ -345,7 +345,7 @@ void gm_Scene_MemCard_OnFrame(void)
         if (!gm_801AF0D4() && gm_801AEDC8_flag_check()) {
             gm_80480DA8.unk8.unk0 = 1;
             gm_80480DA8.unk14 = 0x14;
-            lb_8001CBAC(0);
+            lbCardGame_SetCardStatus(0);
         }
         break;
     case 8:
@@ -413,7 +413,7 @@ void gm_Scene_MemCard_OnFrame(void)
             if (gm_80480DA8.unk1C == 0) {
                 gm_80480DA8.unk8.unk0 = 0;
                 gm_80480DA8.unk14 = 0x14;
-                lb_8001CBAC(4);
+                lbCardGame_SetCardStatus(4);
             } else {
                 gm_80480DA8.unk14 = 1;
             }
@@ -424,7 +424,7 @@ void gm_Scene_MemCard_OnFrame(void)
             if (gm_80480DA8.unk1C == 0) {
                 gm_80480DA8.unk8.unk0 = 0;
                 gm_80480DA8.unk14 = 0x14;
-                lb_8001CBAC(4);
+                lbCardGame_SetCardStatus(4);
             } else {
                 gm_80480DA8.unk14 = 1;
             }
