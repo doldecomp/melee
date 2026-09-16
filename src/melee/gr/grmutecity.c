@@ -1121,7 +1121,7 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         grMc_8049F4B8[i].x22_flags.b0 = 0;
         grMc_8049F4B8[i].x22_flags.b1 = 0;
         grMc_8049F4B8[i].x24 = 0;
-        grMc_8049F4B8[i].x28 = 0;
+        grMc_8049F4B8[i].gen = NULL;
         src++;
         grMc_8049F440[i] = i;
     }
@@ -1692,7 +1692,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             if (age > yakumono_param->x30) {
                 if (!grMc_8049F4B8[car_idx].x22_flags.b0) {
                     grLib_801C98A0(jobj);
-                    grMc_8049F4B8[car_idx].x28 = 0;
+                    grMc_8049F4B8[car_idx].gen = NULL;
                     grLib_801C96F8(0xE3, 0, &car_pos);
                     HSD_JObjUnref(HSD_JObjGetChild(jobj));
                     {
@@ -1714,9 +1714,9 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     grMc_8049F4B8[car_idx].x22_flags.b0 = 1;
                 }
             } else if (age > yakumono_param->x2C &&
-                       (u32) grMc_8049F4B8[car_idx].x28 == 0)
+                       grMc_8049F4B8[car_idx].gen == NULL)
             {
-                grMc_8049F4B8[car_idx].x28 = grMuteCity_801F2AB0(0x116, jobj);
+                grMc_8049F4B8[car_idx].gen = grMuteCity_801F2AB0(0x116, jobj);
             }
         }
 
@@ -1798,12 +1798,12 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             if (car_pos.z > spE8.z || car_pos.z > 5000.0f ||
                 car_pos.z < -1500.0f)
             {
-                if ((u32) grMc_8049F4B8[car_idx].x28 != 0) {
+                if (grMc_8049F4B8[car_idx].gen != NULL) {
                     grLib_801C98A0(jobj);
-                    grMc_8049F4B8[car_idx].x28 = 0;
+                    grMc_8049F4B8[car_idx].gen = NULL;
                 }
-            } else if ((u32) grMc_8049F4B8[car_idx].x28 == 0) {
-                grMc_8049F4B8[car_idx].x28 = grMuteCity_801F2AB0(0x119, jobj);
+            } else if (grMc_8049F4B8[car_idx].gen == NULL) {
+                grMc_8049F4B8[car_idx].gen = grMuteCity_801F2AB0(0x119, jobj);
             }
         }
 
@@ -1901,32 +1901,30 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
     grMc_StackPad(*(grMc_StackPadArg*) gp->u.mutecity2.saved_colors);
 }
 
-s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
+/**
+ * @returns The generator attached to @p jobj, or NULL on failure.
+ * @remarks Retail never sets the return value.
+ */
+HSD_Generator* grMuteCity_801F2AB0(s32 arg0, HSD_JObj* jobj)
 {
-    HSD_Generator* gen;
+    HSD_Generator* gen = grLib_801C9808(arg0, arg0 / 1000, jobj);
     HSD_psAppSRT* appsrt;
 
-    gen = grLib_801C9808(arg0, arg0 / 1000, arg1);
-    if (gen != NULL) {
-        if ((appsrt = gen->appsrt) == NULL) {
-            appsrt = psAddGeneratorAppSRT_begin(gen, 0);
-            if (appsrt == NULL) {
-#ifdef MUST_MATCH
-                return;
-#else
-                return 0;
-#endif
-            }
-        }
+    if (gen != NULL && ((appsrt = gen->appsrt) != NULL ||
+                        (appsrt = psAddGeneratorAppSRT_begin(gen, 0)) != NULL))
+    {
         appsrt->xA2 = 0;
         appsrt->scale.x = appsrt->scale.y = appsrt->scale.z =
             Ground_801C0498();
         gen->type &= ~(PSAPPSRT_UNK_B09 | PSAPPSRT_UNK_B10);
         gen->type |= PSAPPSRT_UNK_B11;
         appsrt->gp = gen;
+#ifndef MUST_MATCH
+        return gen;
+#endif
     }
 #ifndef MUST_MATCH
-    return 0;
+    return NULL;
 #endif
 }
 

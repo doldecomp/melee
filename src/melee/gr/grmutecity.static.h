@@ -19,7 +19,7 @@ typedef struct grMc_CarEntry {
     } x22_flags;
     /* 0x23 */ u8 x23;
     /* 0x24 */ s32 x24;
-    /* 0x28 */ s32 x28;
+    /* 0x28 */ HSD_Generator* gen;
 } grMc_CarEntry;
 
 ASSERT_SIZE(grMc_CarEntry, 0x2C);
