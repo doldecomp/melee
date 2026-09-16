@@ -1,7 +1,7 @@
 #include "psdisptev.h"
 
+#include "psstructs.h"
 #include <dolphin/gx.h>
-#include <sysdolphin/baselib/psstructs.h>
 
 static u32 prevTev[2];
 
