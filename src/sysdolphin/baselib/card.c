@@ -296,6 +296,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                 curr_result = 2;
             }
         } else {
+            CardBlockHeader* header;
             if (hsd_803B31CC(state->sector_buf, state->sector_size) < 0) {
                 checkOpen(state);
                 curr_result = 2;
@@ -308,14 +309,13 @@ void hsd_803A949C(s32 chan, s32 card_result)
             }
             result = (((CardBlockHeader*) state->sector_buf)->id_hi << 8) |
                      ((CardBlockHeader*) state->sector_buf)->id_lo;
-            block = state->sector_buf;
+            header = (CardBlockHeader*) state->sector_buf;
             if (result != commands[curr_head].verify.block_id) {
                 curr_result = 2;
-            } else if ((s32) block[0x12] != commands[curr_head].verify.seq) {
+            } else if ((s32) header->seq != commands[curr_head].verify.seq) {
                 curr_result = 2;
             } else if (commands[curr_head].verify.size > 0 &&
-                       memcmp(commands[curr_head].verify.data,
-                              ((CardBlockHeader*) block)->data,
+                       memcmp(commands[curr_head].verify.data, header->data,
                               commands[curr_head].verify.size) != 0)
             {
                 curr_result = 2;
