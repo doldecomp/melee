@@ -60,7 +60,7 @@ ASSERT_SIZE(lbMemory_804318B0, 0x6F0);
         *list = handle->x0_next;                                              \
     } while (0)
 
-static inline Handle* new_handle(void* arenaLo, void* arenaHi)
+Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
 {
     Handle* h;
     HSD_ASSERT(0x7B, _p(free_heap));
@@ -75,11 +75,6 @@ static inline Handle* new_handle(void* arenaLo, void* arenaHi)
     h->x8_hi = arenaHi;
     h->xC_prev = NULL;
     return h;
-}
-
-Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
-{
-    return new_handle(arenaLo, arenaHi);
 }
 
 void lbMemory_80014EEC(Handle* handle)
@@ -306,7 +301,7 @@ void lbMemory_800154BC(uintptr_t* arenaLo, uintptr_t* arenaHi)
 
 Handle* lbMemory_800154D4(void* arenaLo, void* arenaHi)
 {
-    _p(x69C) = new_handle(arenaLo, arenaHi);
+    _p(x69C) = lbMemory_80014E24(arenaLo, arenaHi);
     return _p(x69C);
 }
 
@@ -329,10 +324,6 @@ void lbMemory_800155A4(void)
     _p(x69C) = NULL;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void lbMemory_8001564C(void)
 {
     u32 freed_size;
@@ -360,10 +351,7 @@ void lbMemory_8001564C(void)
     {
         void* hi = _p(a_arenaHi);
         void* lo = _p(a_arenaLo);
-        _p(x69C) = lbMemory_80014E24(lo, hi);
+        lbMemory_800154D4(lo, hi);
     }
     _p(x6A0_mgr).size = 0;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
