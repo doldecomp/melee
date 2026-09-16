@@ -825,8 +825,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
     sp = (u32*) ctx->gpr[1];
     i = 0;
 
-    while (sp != NULL && (u32) (sp + 0x4000) != 0xFFFF && i < (u32) max_depth)
-    {
+    while (sp != NULL && sp != (u32*) -1 && i < (u32) max_depth) {
         if ((u32) sp < 0x80000000u) {
             break;
         }
