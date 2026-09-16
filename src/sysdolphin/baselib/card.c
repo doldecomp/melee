@@ -18,7 +18,7 @@ typedef struct CardBlockHeader {
     /* 0x12 */ u8 seq;
     /* 0x13 */ u8 file_table[0x0C];
     /* 0x1F */ u8 pad_1F[1];
-    /* 0x20 */ u8 data[1];
+    /* 0x20 */ u8 data[];
 } CardBlockHeader;
 
 /// The ring and the request queue as pointer values: MWCC then keeps the
@@ -210,8 +210,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
                     break;
                 }
                 if (commands[curr_head].read.data != NULL) {
-                    u8* src = (u8*) (hdr_offset + (u32) state->sector_buf);
-                    memcpy(commands[curr_head].read.data, src + 0x20,
+                    CardBlockHeader* src =
+                        (CardBlockHeader*) (hdr_offset +
+                                            (u32) state->sector_buf);
+                    memcpy(commands[curr_head].read.data, src->data,
                            commands[curr_head].read.size);
                 }
             }
@@ -225,7 +227,8 @@ void hsd_803A949C(s32 chan, s32 card_result)
             if (commands[curr_head].read.size > 0 &&
                 commands[curr_head].read.data != NULL)
             {
-                memcpy(commands[curr_head].read.data, state->sector_buf + 0x20,
+                memcpy(commands[curr_head].read.data,
+                       ((CardBlockHeader*) state->sector_buf)->data,
                        commands[curr_head].read.size);
             }
             result = checkOpen(state);
@@ -293,6 +296,7 @@ void hsd_803A949C(s32 chan, s32 card_result)
                 curr_result = 2;
             }
         } else {
+            CardBlockHeader* header;
             if (hsd_803B31CC(state->sector_buf, state->sector_size) < 0) {
                 checkOpen(state);
                 curr_result = 2;
@@ -305,13 +309,13 @@ void hsd_803A949C(s32 chan, s32 card_result)
             }
             result = (((CardBlockHeader*) state->sector_buf)->id_hi << 8) |
                      ((CardBlockHeader*) state->sector_buf)->id_lo;
-            block = state->sector_buf;
+            header = (CardBlockHeader*) state->sector_buf;
             if (result != commands[curr_head].verify.block_id) {
                 curr_result = 2;
-            } else if ((s32) block[0x12] != commands[curr_head].verify.seq) {
+            } else if ((s32) header->seq != commands[curr_head].verify.seq) {
                 curr_result = 2;
             } else if (commands[curr_head].verify.size > 0 &&
-                       memcmp(commands[curr_head].verify.data, block + 0x20,
+                       memcmp(commands[curr_head].verify.data, header->data,
                               commands[curr_head].verify.size) != 0)
             {
                 curr_result = 2;
@@ -652,8 +656,10 @@ void hsd_803A949C(s32 chan, s32 card_result)
                 state->block_seqs[phys] =
                     state->sector_buf[hdr_offset13 + 0x12];
                 {
-                    u8* src13 = (u8*) (hdr_offset13 + (u32) state->sector_buf);
-                    hsd_803AC558(state, src13 + 0x13);
+                    CardBlockHeader* src13 =
+                        (CardBlockHeader*) (hdr_offset13 +
+                                            (u32) state->sector_buf);
+                    hsd_803AC558(state, src13->file_table);
                 }
             }
         } else {
@@ -1951,7 +1957,7 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
     s32 retries;
     u8* buf;
     u32 sector_size;
-    u8* hdr;
+    CardBlockHeader* hdr;
     u32 read_offset;
     s32 hdr_offset;
     PAD_STACK(4);
@@ -1961,7 +1967,6 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
     }
 
     sector_size = state->sector_size;
-    retries = 0;
     buf = state->sector_buf;
     {
         u32 temp = state->header_size + sector_size;
@@ -1975,7 +1980,7 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
         }
     }
 
-    for (; retries < 10; retries++) {
+    for (retries = 0; retries < 10; retries++) {
         {
             s32 tmp =
                 CARDRead(&state->file_info, buf, sector_size, read_offset);
@@ -2002,16 +2007,16 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 block_id, s32 seq_num,
         return 1;
     }
 
-    hdr = state->sector_buf + hdr_offset;
-    if (block_id != ((hdr[0x10] << 8) | hdr[0x11])) {
+    hdr = (CardBlockHeader*) (state->sector_buf + hdr_offset);
+    if (block_id != ((hdr->id_hi << 8) | hdr->id_lo)) {
         return 1;
     }
 
-    if (seq_num != hdr[0x12]) {
+    if (seq_num != hdr->seq) {
         return 1;
     }
 
-    if (memcmp(expected_data, hdr + 0x20, data_size) != 0) {
+    if (memcmp(expected_data, hdr->data, data_size) != 0) {
         return 1;
     }
 

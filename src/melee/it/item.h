@@ -126,6 +126,6 @@ struct ItemStateDesc;
 /* 4A0C38 */ extern HSD_ObjAllocData item_link_alloc_data;
 /* 4A0C64 */ extern HSD_ObjAllocUnk Item_804A0C64;
 /* 4A0CCC */ extern Item_FtTrack Item_804A0CCC;
-/* 4A0E24 */ extern S32Vec3 Item_804A0E24;
+/* 4A0E24 */ extern PokemonSelectionState Item_804A0E24;
 
 #endif

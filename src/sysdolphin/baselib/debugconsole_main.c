@@ -15,6 +15,11 @@
 #include <MetroTRK/ppc_reg.h>
 #endif
 
+typedef struct StackFrame {
+    struct StackFrame* back_chain;
+    u32 saved_lr;
+} StackFrame;
+
 typedef struct _ExcptNode {
     /* 0x1 */ struct _ExcptNode* next;
     /* 0x4 */ void (*callback)(struct _ExcptNode*);
@@ -817,25 +822,25 @@ static void unused(OSContext* ctx)
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
     u32 i;
-    u32* sp;
+    StackFrame* frame;
 
     OSReport("- STACK ---------------------------------------------\n");
     OSReport(" Address:  Back Chain  LR Save\n");
 
-    sp = (u32*) ctx->gpr[1];
-    i = 0;
-
-    while (sp != NULL && (u32) (sp + 0x4000) != 0xFFFF && i < (u32) max_depth)
+    frame = (StackFrame*) ctx->gpr[1];
+    for (i = 0;
+         frame != NULL && (u32) frame != 0xFFFFFFFF && i < (u32) max_depth;
+         i++)
     {
-        if ((u32) sp < 0x80000000u) {
+        if ((u32) frame < 0x80000000u) {
             break;
         }
-        if ((s64) (u32) sp >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
+        if ((s64) (u32) frame >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
             break;
         }
-        OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
-        sp = (u32*) sp[0];
-        i++;
+        OSReport("%08X:   %08X   %08X\n", frame, frame->back_chain,
+                 frame->saved_lr);
+        frame = frame->back_chain;
     }
 }
 
