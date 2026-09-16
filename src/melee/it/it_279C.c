@@ -1186,16 +1186,13 @@ s32 it_8027A364(Item* item)
     itPokemonSpawn_DatAttrs* attr =
         item->xC4_article_data->x4_specialAttributes;
     int ret_val = 1;
-    int index;
+    int i;
     int start = It_PKind_Start;
     int end = It_PKind_Terminate;
 
-    for (index = start; index < end; index++) {
-        ItemKind kind = index;
-        if (Item_804A0E24.last_kind != kind &&
-            Item_804A0E24.previous_kind != kind)
-        {
-            ret_val += attr->pokemon_spawn_weights[index - It_PKind_Start];
+    for (i = start; i < end; i++) {
+        if (Item_804A0E24.last_kind != i && Item_804A0E24.previous_kind != i) {
+            ret_val += attr->pokemon_spawn_weights[i - It_PKind_Start];
         }
     }
 
@@ -1205,7 +1202,7 @@ s32 it_8027A364(Item* item)
 s32 it_8027A4D4(Item* item)
 {
     int rand_int;
-    int index;
+    int i;
     int var_r3;
 
     itPokemonSpawn_DatAttrs* attr =
@@ -1223,16 +1220,15 @@ s32 it_8027A4D4(Item* item)
     }
     rand_int = HSD_Randi(it_8027A364(item));
     var_r3 = 0;
-    for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
-        ItemKind kind = index;
+    for (i = It_PKind_Start; i < It_PKind_Terminate; i++) {
         ItemKind previous_kind = Item_804A0E24.previous_kind;
         ItemKind last_kind = Item_804A0E24.last_kind;
-        if (last_kind != kind && previous_kind != kind) {
-            var_r3 += attr->pokemon_spawn_weights[index - It_PKind_Start];
+        if (last_kind != i && previous_kind != i) {
+            var_r3 += attr->pokemon_spawn_weights[i - It_PKind_Start];
             if (var_r3 >= rand_int) {
                 Item_804A0E24.previous_kind = last_kind;
-                Item_804A0E24.last_kind = kind;
-                return index - It_PKind_Start;
+                Item_804A0E24.last_kind = i;
+                return i - It_PKind_Start;
             }
         }
     }
@@ -1369,12 +1365,11 @@ static inline s32 selectPokemonForOpening(Item* item)
     for (index = It_PKind_Start; index < It_PKind_Terminate; index++) {
         ItemKind previous_kind = Item_804A0E24.previous_kind;
         ItemKind last_kind = Item_804A0E24.last_kind;
-        ItemKind kind = index;
         if (last_kind != index && previous_kind != index) {
             total += attr->pokemon_spawn_weights[index - It_PKind_Start];
             if (total >= rand_int) {
                 Item_804A0E24.previous_kind = last_kind;
-                Item_804A0E24.last_kind = kind;
+                Item_804A0E24.last_kind = index;
                 return index - It_PKind_Start;
             }
         }
