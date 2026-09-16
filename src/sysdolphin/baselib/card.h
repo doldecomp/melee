@@ -11,7 +11,7 @@ typedef enum {
     HSD_CardResult_UnkN2,
     HSD_CardResult_UnkN3,
     HSD_CardResult_UnkN4,
-    HSD_CardResult_UnkN261,
+    HSD_CardResult_UnkN261 = -261,
 } HSD_CardResult;
 
 typedef enum {

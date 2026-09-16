@@ -269,7 +269,7 @@ void mnNameNew_8023B224(u8 arg0)
     data = mnNameNew_804D6C08->user_data;
     name_index = data->name_index;
     if (arg0 != 0) {
-        lbCardGame_UpdatePowerTime();
+        lbCardGame_SaveChanges();
     }
     if (gm_GetCurrentGameMode() == GM_TOURNAMENT) {
         HSD_SisLib_803A5E70();
