@@ -30,7 +30,8 @@ struct Fighter_x1614_t;
 /* 0077A0 */ void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*,
                                   float* angle, float, float);
 /* 007AFC */ bool lbColl_80007AFC(HitCapsule*, HitCapsule*, float, float);
-/* 007B78 */ bool lbColl_80007B78(Mtx, struct Fighter_x1614_t*, float, float);
+/* 007B78 */ bool lbColl_80007B78(struct Fighter_x1614_t*,
+                                  struct Fighter_x1614_t*, float, float);
 /* 007BCC */ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, UNK_T,
                                   s32, float, float, float);
 /* 007D68 */ void lbColl_JObjSetupMatrix(HSD_JObj*);
