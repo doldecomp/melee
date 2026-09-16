@@ -17,6 +17,10 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=";
   };
 
+  patches = [
+    ./wibo-no-case-insensitive.patch
+  ];
+
   nativeBuildInputs = [
     cmake
   ];
