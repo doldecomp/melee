@@ -335,11 +335,12 @@ void lbMemory_800155A4(void)
 #endif
 void lbMemory_8001564C(void)
 {
-    u32 size;
+    u32 freed_size;
     int i;
 
     _p(a_arenaLo) = (void*) ARAlloc(0x20);
-    ARFree(&size);
+    // Undo the probe allocation; ARFree writes its size to the output argument.
+    ARFree(&freed_size);
     _p(a_arenaHi) =
         (void*) ((ARGetSize() > 0x01000000U) ? 0x01000000U : ARGetSize());
 
