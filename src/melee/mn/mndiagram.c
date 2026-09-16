@@ -833,16 +833,14 @@ static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
     p = p + 0x1C;
     while (remaining > 0) {
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x78) {
-            return 0x78;
-        }
-        if (GetNameText(*p2) == NULL) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(*p2) == NULL);
         remaining--;
     }
     p = sorted;
@@ -865,16 +863,14 @@ static inline u8 mnDiagram_GetVisibleNameRowForInput(u8* sorted, int start,
     p = p + 0x1C;
     while (remaining > 0) {
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x78) {
-            return 0x78;
-        }
-        if (GetNameText(*p2) == NULL) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(*p2) == NULL);
         remaining--;
     }
     p = sorted;
@@ -896,16 +892,14 @@ static inline u8 mnDiagram_GetVisibleNameFrom2(u8* sorted, int start, int rank)
     p = p + 0x1C;
     while (remaining > 0) {
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x78) {
-            return 0x78;
-        }
-        if (GetNameText(*p2) == NULL) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x78) {
+                return 0x78;
+            }
+        } while (GetNameText(*p2) == NULL);
         remaining--;
     }
     p = sorted;
@@ -2075,17 +2069,15 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
         ptr = ptr + 0x1C;
         while (name_count > 0) {
             ptr2 = ptr;
-        dn_name_loop:
-            i++;
-            ptr2++;
-            ptr++;
-            if (i >= 0x78) {
-                result = 0x78;
-                goto dn_name_done;
-            }
-            if (GetNameText(*ptr2) == NULL) {
-                goto dn_name_loop;
-            }
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x78) {
+                    result = 0x78;
+                    goto dn_name_done;
+                }
+            } while (GetNameText(*ptr2) == NULL);
             name_count--;
         }
         ptr = sorted;
@@ -2594,20 +2586,18 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
             while (col_remaining >= 0) {
                 if (col_remaining == 0) {
                     col_fighter = sorted[col_idx];
-                    goto col_found;
+                    break;
                 }
                 col_next = col_cursor;
-            col_inner:
-                col_idx++;
-                col_next++;
-                col_cursor++;
-                if (col_idx >= SELKIND_COUNT) {
-                    col_fighter = SELKIND_COUNT;
-                    goto col_found;
-                }
-                if (mn_IsFighterUnlocked(*col_next) == 0) {
-                    goto col_inner;
-                }
+                do {
+                    col_idx++;
+                    col_next++;
+                    col_cursor++;
+                    if (col_idx >= SELKIND_COUNT) {
+                        col_fighter = SELKIND_COUNT;
+                        goto col_found;
+                    }
+                } while (mn_IsFighterUnlocked(*col_next) == 0);
                 col_remaining--;
             }
         col_found:
@@ -2637,20 +2627,18 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
             while (row_remaining >= 0) {
                 if (row_remaining == 0) {
                     row_fighter = sorted[row_idx];
-                    goto row_found;
+                    break;
                 }
                 row_next = row_cursor;
-            row_inner:
-                row_idx++;
-                row_next++;
-                row_cursor++;
-                if (row_idx >= SELKIND_COUNT) {
-                    row_fighter = SELKIND_COUNT;
-                    goto row_found;
-                }
-                if (mn_IsFighterUnlocked(*row_next) == 0) {
-                    goto row_inner;
-                }
+                do {
+                    row_idx++;
+                    row_next++;
+                    row_cursor++;
+                    if (row_idx >= SELKIND_COUNT) {
+                        row_fighter = SELKIND_COUNT;
+                        goto row_found;
+                    }
+                } while (mn_IsFighterUnlocked(*row_next) == 0);
                 row_remaining--;
             }
         row_found:
