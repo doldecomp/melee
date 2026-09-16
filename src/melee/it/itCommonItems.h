@@ -1221,6 +1221,11 @@ typedef struct itLuckyAttributes {
     s32 x18;
 } itLuckyAttributes;
 
+typedef struct itLuckyEggAttributes {
+    /* 0x0 */ f32 x0;
+    /* 0x4 */ s32 x4;
+} itLuckyEggAttributes;
+
 typedef struct itLucky_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ enum_t x60;

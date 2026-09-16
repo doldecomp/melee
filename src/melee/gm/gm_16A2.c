@@ -909,7 +909,7 @@ bool gm_8016A944(void)
 
 UNK_T gm_8016A97C(void)
 {
-    return &M2C_FIELD(&lbl_8046B668, UNK_T*, 0x1C);
+    return lbl_8046B668.arr2;
 }
 
 struct lbl_8046B668_t* gm_8016A98C(void)
