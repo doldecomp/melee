@@ -122,7 +122,7 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
         RETURN_IF(ftCo_800D705C(gobj));
         RETURN_IF(ftCo_800CB870(gobj));
         if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x210 &&
-            fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
+            fp->active_timer.lstick.x < p_ftCommonData->x214)
         {
             ftCo_Fall_Enter(gobj);
             return;

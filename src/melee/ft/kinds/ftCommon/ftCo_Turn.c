@@ -162,7 +162,7 @@ bool fn_800C9C2C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick[0].x * fp->mv.co.turn.facing_after >=
             p_ftCommonData->dash_smash_stick_threshold &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
+        fp->active_timer.lstick.x < p_ftCommonData->dash_smash_window)
     {
         fp->mv.co.turn.x8 = fp->mv.co.turn.facing_after;
         return true;

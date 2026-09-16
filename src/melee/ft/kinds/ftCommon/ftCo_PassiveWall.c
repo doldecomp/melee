@@ -83,8 +83,8 @@ void ftCo_800C1E64(Fighter_GObj* gobj, int msid, int timer, int vel_y_exponent,
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F,
                               timer != 0 ? 0.0F : 1.0F, 0.0F, NULL);
-    fp->x670_timer_lstick_tilt_x = 0xFE;
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->active_timer.lstick.x = 0xFE;
+    fp->active_timer.lstick.y = 0xFE;
     fp->mv.co.passivewall.timer = timer;
     fp->mv.co.passivewall.x4 = 0;
     fp->mv.co.passivewall.x8 = false;
@@ -117,7 +117,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_PassiveWallJump, Ft_MF_None,
                               fp->cur_anim_frame, 1, 0, NULL);
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->active_timer.lstick.y = 0xFE;
     fp->mv.co.passivewall.timer = 0;
 }
 

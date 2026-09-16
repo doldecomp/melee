@@ -2,6 +2,7 @@
 #define GALE01_1EFC68
 
 #include <melee/gr/forward.h>
+#include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -37,41 +38,71 @@
 /* 1F0F4C */ void grMuteCity_801F0F4C(Ground_GObj*);
 /* 1F106C */ void grMuteCity_801F106C(s32);
 /* 1F1328 */ void grMuteCity_801F1328(void);
-/* 1F173C */ void grMuteCity_801F173C(float);
-/* 1F1754 */ void grMuteCity_801F1754(float);
-/* 1F176C */ void grMuteCity_801F176C(float);
-/* 1F1784 */ void grMuteCity_801F1784(float);
-/* 1F179C */ void grMuteCity_801F179C(float);
-/* 1F17B4 */ void grMuteCity_801F17B4(float);
-/* 1F17CC */ void grMuteCity_801F17CC(float);
-/* 1F17E4 */ void grMuteCity_801F17E4(float);
-/* 1F17FC */ void grMuteCity_801F17FC(float);
-/* 1F1814 */ void grMuteCity_801F1814(float);
-/* 1F182C */ void grMuteCity_801F182C(float);
-/* 1F1844 */ void grMuteCity_801F1844(float);
-/* 1F185C */ void grMuteCity_801F185C(float);
-/* 1F1874 */ void grMuteCity_801F1874(float);
-/* 1F188C */ void grMuteCity_801F188C(float);
-/* 1F18A4 */ void grMuteCity_801F18A4(float);
-/* 1F18BC */ void grMuteCity_801F18BC(float);
-/* 1F18D4 */ void grMuteCity_801F18D4(float);
-/* 1F18EC */ void grMuteCity_801F18EC(float);
-/* 1F1904 */ void grMuteCity_801F1904(float);
-/* 1F191C */ void grMuteCity_801F191C(float);
-/* 1F1934 */ void grMuteCity_801F1934(float);
-/* 1F194C */ void grMuteCity_801F194C(float);
-/* 1F1964 */ void grMuteCity_801F1964(float);
-/* 1F197C */ void grMuteCity_801F197C(float);
-/* 1F1994 */ void grMuteCity_801F1994(float);
-/* 1F19AC */ void grMuteCity_801F19AC(float);
-/* 1F19C4 */ void grMuteCity_801F19C4(float);
-/* 1F19DC */ void grMuteCity_801F19DC(float);
-/* 1F19F4 */ void grMuteCity_801F19F4(float);
+/* 1F173C */ void grMuteCity_801F173C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1754 */ void grMuteCity_801F1754(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F176C */ void grMuteCity_801F176C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1784 */ void grMuteCity_801F1784(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F179C */ void grMuteCity_801F179C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F17B4 */ void grMuteCity_801F17B4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F17CC */ void grMuteCity_801F17CC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F17E4 */ void grMuteCity_801F17E4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F17FC */ void grMuteCity_801F17FC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1814 */ void grMuteCity_801F1814(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F182C */ void grMuteCity_801F182C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1844 */ void grMuteCity_801F1844(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F185C */ void grMuteCity_801F185C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1874 */ void grMuteCity_801F1874(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F188C */ void grMuteCity_801F188C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F18A4 */ void grMuteCity_801F18A4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F18BC */ void grMuteCity_801F18BC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F18D4 */ void grMuteCity_801F18D4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F18EC */ void grMuteCity_801F18EC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1904 */ void grMuteCity_801F1904(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F191C */ void grMuteCity_801F191C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1934 */ void grMuteCity_801F1934(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F194C */ void grMuteCity_801F194C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1964 */ void grMuteCity_801F1964(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F197C */ void grMuteCity_801F197C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F1994 */ void grMuteCity_801F1994(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F19AC */ void grMuteCity_801F19AC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F19C4 */ void grMuteCity_801F19C4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F19DC */ void grMuteCity_801F19DC(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
+/* 1F19F4 */ void grMuteCity_801F19F4(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                      f32);
 /* 1F1A0C */ void grMuteCity_801F1A0C(HSD_GObj*, Ground*);
 /* 1F1A34 */ void grMuteCity_801F1A34(HSD_GObj*, Ground_GObj*);
 /* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ void grMuteCity_801F290C(Ground_GObj*);
-/* 1F2AB0 */ s32 grMuteCity_801F2AB0(s32, HSD_JObj*);
+/* 1F2AB0 */ HSD_Generator* grMuteCity_801F2AB0(s32, HSD_JObj*);
 /* 1F2BBC */ DynamicsDesc* grMuteCity_801F2BBC(enum_t);
 /* 1F2C10 */ bool grMuteCity_801F2C10(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E33DC */ extern StageData grMc_StageData;

@@ -141,45 +141,45 @@ void gm_801BEFC0(int arg0)
 
 int gm_801BEFD0(void)
 {
-    return M2C_FIELD(&gm_8049C178, u8*, 1);
+    return gm_8049C178[1];
 }
 
 void gm_801BEFE0(s8 arg0)
 {
-    M2C_FIELD(&gm_8049C178, s8*, 0xA) = arg0;
+    gm_8049C178[0xA] = arg0;
 }
 
 int gm_801BEFF0(void)
 {
-    return M2C_FIELD(&gm_8049C178, u8*, 0xA);
+    return gm_8049C178[0xA];
 }
 
 void gm_801BF000(s8 arg0)
 {
-    M2C_FIELD(&gm_8049C178, s8*, 9) = arg0;
+    gm_8049C178[9] = arg0;
 }
 
 int gm_801BF010(void)
 {
-    return M2C_FIELD(&gm_8049C178, u8*, 9);
+    return gm_8049C178[9];
 }
 
 void gm_801BF020(s8 arg0)
 {
-    M2C_FIELD(&gm_8049C178, s8*, 8) = arg0;
+    gm_8049C178[8] = arg0;
 }
 
 int gm_801BF030(void)
 {
-    return M2C_FIELD(&gm_8049C178, u8*, 8);
+    return gm_8049C178[8];
 }
 
 void gm_801BF040(s8 arg0)
 {
-    M2C_FIELD(&gm_8049C178, s8*, 2) = arg0;
+    gm_8049C178[2] = arg0;
 }
 
 int gm_801BF050(void)
 {
-    return M2C_FIELD(&gm_8049C178, u8*, 2);
+    return gm_8049C178[2];
 }

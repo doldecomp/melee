@@ -23,8 +23,8 @@
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 /* 46B0F0 */ struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
-/* 45A6C0 */ struct gmm_x0 gmMainLib_8045A6C0[2];
-/* 4D3EE0 */ struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
+/* 45A6C0 */ struct gmm_x0 gmMainLib_8045A6C0;
+/* 4D3EE0 */ struct gmm_x0* gmMainLib_804D3EE0 = &gmMainLib_8045A6C0;
 
 GameRules gmMainLib_DefaultGameRules = {
     0,
@@ -96,45 +96,45 @@ GameRules* gmMainLib_GetGameRules(void)
     return &gmMainLib_804D3EE0->x1850;
 }
 
-struct gmm_x1868* gmMainLib_GetSaveData(void)
+struct GmCardData* gmMainLib_GetCardData(void)
 {
     return &gmMainLib_804D3EE0->thing;
 }
 
-void* gmMainLib_8015CC4C(void)
+struct NameTagDataBank* gmMainLib_GetNameTagDataBanks(void)
 {
-    return &gmMainLib_GetSaveData()->x2FF8;
+    return gmMainLib_GetCardData()->nametag_banks;
 }
 
 struct GamePrefs* gmMainLib_GetGamePrefs(void)
 {
-    return &gmMainLib_GetSaveData()->x1CB0;
+    return &gmMainLib_GetCardData()->save_data.x1CB0;
 }
 
 struct FighterData* GetPersistentFighterData(SelectableCharacterKind selkind)
 {
-    struct FighterData* base = gmMainLib_GetSaveData()->x1F2C;
+    struct FighterData* base = gmMainLib_GetCardData()->save_data.x1F2C;
     return &base[selkind];
 }
 
 void* gmMainLib_GetTrophyFlags(void)
 {
-    return gmMainLib_GetSaveData()->trophy_flags;
+    return gmMainLib_GetCardData()->save_data.trophy_flags;
 }
 
 void* gmMainLib_GetTrophyCategoryFlags(void)
 {
-    return &gmMainLib_GetSaveData()->trophy_category_flags;
+    return &gmMainLib_GetCardData()->save_data.trophy_category_flags;
 }
 
 s16* gmMainLib_GetTrophyCount(void)
 {
-    return &gmMainLib_GetSaveData()->trophy_count;
+    return &gmMainLib_GetCardData()->save_data.trophy_count;
 }
 
 struct NameTagData* GetPersistentNameData(s32 arg0)
 {
-    struct NameTagDataBank* base = &gmMainLib_GetSaveData()->x2FF8[0];
+    struct NameTagDataBank* base = &gmMainLib_GetCardData()->nametag_banks[0];
     struct NameTagData* inner = base[arg0 / 19].inner;
     return &inner[arg0 % 19];
 }
@@ -146,92 +146,92 @@ void* gmMainLib_8015CCE4(void)
 
 u32* gmMainLib_8015CCF0(void)
 {
-    return &gmMainLib_GetSaveData()->x1A48;
+    return &gmMainLib_GetCardData()->save_data.x1A48;
 }
 
 void* gmMainLib_8015CCFC(void)
 {
-    return &gmMainLib_GetSaveData()->x1A4C;
+    return &gmMainLib_GetCardData()->save_data.x1A4C;
 }
 
 void* gmMainLib_GetVsPlayContestants(void)
 {
-    return &gmMainLib_GetSaveData()->x1A30;
+    return &gmMainLib_GetCardData()->save_data.x1A30;
 }
 
 void* gmMainLib_GetVsPlayTime(void)
 {
-    return &gmMainLib_GetSaveData()->x1A34;
+    return &gmMainLib_GetCardData()->save_data.x1A34;
 }
 
 void* gmMainLib_GetCombinedVSPlayTime(void)
 {
-    return &gmMainLib_GetSaveData()->x1A38;
+    return &gmMainLib_GetCardData()->save_data.x1A38;
 }
 
 u32* gmMainLib_GetTimeMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->time_matches;
+    return &gmMainLib_GetCardData()->save_data.time_matches;
 }
 
 u32* gmMainLib_GetStockMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->stock_matches;
+    return &gmMainLib_GetCardData()->save_data.stock_matches;
 }
 
 u32* gmMainLib_GetCoinMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->coin_matches;
+    return &gmMainLib_GetCardData()->save_data.coin_matches;
 }
 
 u32* gmMainLib_GetBonusMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->bonus_matches;
+    return &gmMainLib_GetCardData()->save_data.bonus_matches;
 }
 
 u32* gmMainLib_GetStaminaMatchTotal(void)
 {
-    return &gmMainLib_GetSaveData()->stamina_matches;
+    return &gmMainLib_GetCardData()->save_data.stamina_matches;
 }
 
 u32* gmMainLib_GetMatchResetCounter(void)
 {
-    return &gmMainLib_GetSaveData()->match_resets;
+    return &gmMainLib_GetCardData()->save_data.match_resets;
 }
 
 void* gmMainLib_GetSingleplayerTime(void)
 {
-    return &gmMainLib_GetSaveData()->x1A3C;
+    return &gmMainLib_GetCardData()->save_data.x1A3C;
 }
 
 void* gmMainLib_8015CD80(void)
 {
-    return &gmMainLib_GetSaveData()->x1A44;
+    return &gmMainLib_GetCardData()->save_data.x1A44;
 }
 
 void* gmMainLib_GetPowerCount(void)
 {
-    return &gmMainLib_GetSaveData()->x1A50;
+    return &gmMainLib_GetCardData()->save_data.x1A50;
 }
 
 int* gm_GetPowerTime(void)
 {
-    return &gmMainLib_GetSaveData()->x1A54;
+    return &gmMainLib_GetCardData()->save_data.x1A54;
 }
 
 void* gmMainLib_GetTotalDamage(void)
 {
-    return &gmMainLib_GetSaveData()->x1A58;
+    return &gmMainLib_GetCardData()->save_data.x1A58;
 }
 
 s32* gmMainLib_GetKOTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A5C;
+    return &gmMainLib_GetCardData()->save_data.x1A5C;
 }
 
 void* gmMainLib_GetSelfDestructTotal(void)
 {
-    return &gmMainLib_GetSaveData()->x1A60;
+    return &gmMainLib_GetCardData()->save_data.x1A60;
 }
 
 struct gmm_x0_528_t* gmMainLib_8015CDC8(void)
@@ -268,7 +268,8 @@ s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
         }
         return 0;
     } else {
-        struct NameTagDataBank* base = &gmMainLib_GetSaveData()->x2FF8[0];
+        struct NameTagDataBank* base =
+            &gmMainLib_GetCardData()->nametag_banks[0];
         struct NameTagData* inner = &base[arg1 / 19].inner[0];
         return &inner[arg1 % 19].x1A2;
     }
@@ -276,12 +277,12 @@ s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 
 void gmMainLib_8015CEB4(s32 arg0)
 {
-    gmMainLib_GetSaveData()->x1A68 |= (1LL << arg0);
+    gmMainLib_GetCardData()->save_data.x1A68 |= (1LL << arg0);
 }
 
 bool gmMainLib_8015CEFC(int arg0)
 {
-    if (gmMainLib_804D3EE0->thing.x1A68 & (1LL << arg0)) {
+    if (gmMainLib_804D3EE0->thing.save_data.x1A68 & (1LL << arg0)) {
         return true;
     } else {
         return false;
@@ -290,22 +291,22 @@ bool gmMainLib_8015CEFC(int arg0)
 
 s32 gmMainLib_8015CF5C(s32 arg0)
 {
-    return gmMainLib_GetSaveData()->x1A70[arg0];
+    return gmMainLib_GetCardData()->save_data.x1A70[arg0];
 }
 
 void gmMainLib_8015CF70(s32 arg0, s32 arg1)
 {
-    gmMainLib_GetSaveData()->x1A70[arg0] = arg1;
+    gmMainLib_GetCardData()->save_data.x1A70[arg0] = arg1;
 }
 
 void gmMainLib_8015CF84(void)
 {
-    gmMainLib_GetSaveData()->x1B3C = 1;
+    gmMainLib_GetCardData()->save_data.x1B3C = 1;
 }
 
 bool gmMainLib_8015CF94(void)
 {
-    if (gmMainLib_GetSaveData()->x1B3C) {
+    if (gmMainLib_GetCardData()->save_data.x1B3C) {
         return true;
     }
     return false;
@@ -325,7 +326,7 @@ void gmMainLib_8015D00C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
     base[arg0].x7A.b0 = true;
     gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
@@ -360,7 +361,7 @@ void gmMainLib_8015D134(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
     base[arg0].x7C.b4 = true;
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
@@ -400,7 +401,7 @@ void gmMainLib_8015D25C(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
     base[arg0].x7C.b5 = true;
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
@@ -440,7 +441,7 @@ void gmMainLib_8015D384(u8 arg0)
 {
     u8 _[12];
 
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
     base[arg0].x7C.b6 = true;
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
@@ -488,10 +489,10 @@ void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
 
 bool gmMainLib_8015D508(void)
 {
-    struct gmm_x1868* base = gmMainLib_GetSaveData();
+    struct GmCardData* base = gmMainLib_GetCardData();
     s32 i;
     for (i = 0; i < 25; ++i) {
-        struct FighterData* _x1F2C = base->x1F2C;
+        struct FighterData* _x1F2C = base->save_data.x1F2C;
         if (!_x1F2C[(u8) i].x7C.b0) {
             return false;
         }
@@ -592,8 +593,8 @@ u16* gmMainLib_8015D7EC(u8 arg0)
 
 u32* gmMainLib_8015D804(s32 arg0)
 {
-    struct gmm_x1868* thing = gmMainLib_GetSaveData();
-    return &thing->x1B80[arg0];
+    struct GmCardData* thing = gmMainLib_GetCardData();
+    return &thing->save_data.x1B80[arg0];
 }
 
 s32 gmMainLib_8015D818(u32 arg0)
@@ -601,8 +602,8 @@ s32 gmMainLib_8015D818(u32 arg0)
     u8 _[40];
 
     if (gmMainLib_8015D94C(arg0) == 0) {
-        struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
-        u32* q = &base->x1B80[arg0];
+        struct GmCardData* base = &gmMainLib_804D3EE0->thing;
+        u32* q = &base->save_data.x1B80[arg0];
         *q = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
         gmMainLib_8015D8FC(arg0);
@@ -613,37 +614,37 @@ s32 gmMainLib_8015D818(u32 arg0)
 
 void gmMainLib_8015D888(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B40[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
     thing[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015D8B0(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B40[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
 s32 gmMainLib_8015D8D8(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B40[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
     return thing[arg0 / 32] & (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015D8FC(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B4C[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
     thing[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015D924(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B4C[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
 int gmMainLib_8015D94C(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetSaveData()->x1B4C[0];
+    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
     u32 flag = thing[arg0 / 32];
     return flag & (1 << (arg0 % 32));
 }
@@ -687,32 +688,32 @@ s32 gmMainLib_8015DA1C(u32 arg0)
 
 void gmMainLib_8015DA40(u32 arg0)
 {
-    u32* base = &gmMainLib_GetSaveData()->x1B58[0];
+    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015DA68(u32 arg0)
 {
-    u32* base = &gmMainLib_GetSaveData()->x1B58[0];
+    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
     base[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
 int gmMainLib_8015DA90(u32 arg0)
 {
-    u32* base = &gmMainLib_GetSaveData()->x1B58[0];
+    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
     u32* qwe = &base[arg0 / 32];
     return *qwe & (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015DAB4(u32 arg0)
 {
-    u32* base = &gmMainLib_GetSaveData()->x1C88[0];
+    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
 bool gmMainLib_8015DADC(u32 arg0)
 {
-    u32* base = &gmMainLib_GetSaveData()->x1C88[0];
+    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
     return (1 << (arg0 % 32)) & base[arg0 / 32];
 }
 
@@ -886,7 +887,7 @@ int gmMainLib_8015ED30(void)
 
 int GetRumbleSettingOfPort(ssize_t port)
 {
-    return gmMainLib_GetSaveData()->x1CB0.rumble_enabled[port];
+    return gmMainLib_GetCardData()->save_data.x1CB0.rumble_enabled[port];
 }
 
 void gmMainLib_SetRumbleEnabled(ssize_t port, bool enabled)
@@ -916,94 +917,94 @@ void gmMainLib_8015ED80(s8 arg0)
 
 u16* gmMainLib_GetUnlockedCharactersBitmaskPtr(void)
 {
-    return &gmMainLib_GetSaveData()->unlocked_characers_bitmask;
+    return &gmMainLib_GetCardData()->save_data.unlocked_characters;
 }
 
 struct gmm_retval_ED98* gmMainLib_8015ED98(void)
 {
-    return &gmMainLib_GetSaveData()->unk_8;
+    return &gmMainLib_GetCardData()->save_data.unk_8;
 }
 
 u16* gmMainLib_8015EDA4(void)
 {
-    return &gmMainLib_GetSaveData()->x186A;
+    return &gmMainLib_GetCardData()->save_data.x186A;
 }
 
 struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
 {
-    return &gmMainLib_GetSaveData()->unk_28;
+    return &gmMainLib_GetCardData()->save_data.unk_28;
 }
 
 struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
 {
-    return &gmMainLib_GetSaveData()->unk_30;
+    return &gmMainLib_GetCardData()->save_data.unk_30;
 }
 
 struct gmm_x1868_1A8_t* gmMainLib_8015EDC8(void)
 {
-    return &gmMainLib_GetSaveData()->unk_1A8;
+    return &gmMainLib_GetCardData()->save_data.unk_1A8;
 }
 
 s32 gmMainLib_8015EDD4(void)
 {
-    return gmMainLib_GetSaveData()->x186C & 4;
+    return gmMainLib_GetCardData()->save_data.x186C & 4;
 }
 
 void gmMainLib_8015EDE4(void)
 {
-    gmMainLib_GetSaveData()->x186C |= 4;
+    gmMainLib_GetCardData()->save_data.x186C |= 4;
 }
 
 void gmMainLib_8015EDF8(void)
 {
-    gmMainLib_GetSaveData()->x186C &= 0xFFFFFFFB;
+    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFB;
 }
 
 s32 gmMainLib_8015EE0C(void)
 {
-    return gmMainLib_GetSaveData()->x186C & 1;
+    return gmMainLib_GetCardData()->save_data.x186C & 1;
 }
 
 void gmMainLib_8015EE1C(void)
 {
-    gmMainLib_GetSaveData()->x186C |= 1;
+    gmMainLib_GetCardData()->save_data.x186C |= 1;
 }
 
 void gmMainLib_8015EE30(void)
 {
-    gmMainLib_GetSaveData()->x186C &= 0xFFFFFFFE;
+    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFE;
 }
 
 s32 gmMainLib_8015EE44(void)
 {
-    return gmMainLib_GetSaveData()->x186C & 2;
+    return gmMainLib_GetCardData()->save_data.x186C & 2;
 }
 
 void gmMainLib_8015EE54(void)
 {
-    gmMainLib_GetSaveData()->x186C |= 2;
+    gmMainLib_GetCardData()->save_data.x186C |= 2;
 }
 
 void gmMainLib_8015EE68(void)
 {
-    gmMainLib_GetSaveData()->x186C &= 0xFFFFFFFD;
+    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFD;
     gmMainLib_GetGamePrefs()->stage_mask =
         gmMainLib_DefaultGamePrefs.stage_mask;
 }
 
 s32 gmMainLib_8015EE90(void)
 {
-    return gmMainLib_GetSaveData()->x186C & 8;
+    return gmMainLib_GetCardData()->save_data.x186C & 8;
 }
 
 void gmMainLib_8015EEA0(void)
 {
-    gmMainLib_GetSaveData()->x186C |= 8;
+    gmMainLib_GetCardData()->save_data.x186C |= 8;
 }
 
 void gmMainLib_8015EEB4(void)
 {
-    gmMainLib_GetSaveData()->x186C &= 0xFFFFFFF7;
+    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFF7;
 }
 
 void gmMainLib_8015EEC8(void)
@@ -1015,7 +1016,7 @@ void gmMainLib_8015EEC8(void)
         struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }
-    memzero(&gmMainLib_GetSaveData()->x1A68, 0xD8);
+    memzero(&gmMainLib_GetCardData()->save_data.x1A68, 0xD8);
 }
 
 void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
@@ -1049,22 +1050,22 @@ void InitializePersistentNameData(s32 arg0)
 
     PAD_STACK(16);
 
-    bank = gmMainLib_804D3EE0->thing.x2FF8;
+    bank = gmMainLib_804D3EE0->thing.nametag_banks;
     data = &bank[(u8) arg0 / 19].inner[(u8) arg0 % 19];
     for (i = 0; i < 120; i++) {
         data->vs_kos[i] = 0;
     }
     gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         data->play_time_by_fighter[i] = 0;
     }
     data->x1A2 = 5;
 }
 
 static inline struct FighterData*
-GetPersistentFighterDataBase(struct gmm_x1868* data)
+GetPersistentFighterDataBase(struct GmCardData* data)
 {
-    return data->x1F2C;
+    return data->save_data.x1F2C;
 }
 
 static inline void ResetAllPersistentFighterData(void)
@@ -1114,7 +1115,7 @@ void gmMainLib_8015F260(void)
         struct NameTagDataBank* bank;
 
         int j;
-        bank = gmMainLib_804D3EE0->thing.x2FF8;
+        bank = gmMainLib_804D3EE0->thing.nametag_banks;
         data = &bank[(u8) i / 19].inner[(u8) i % 19];
 
         for (j = 0; j < 120; j++) {
@@ -1150,7 +1151,7 @@ u32 gmMainLib_8015F4E8(void)
 
 void gmMainLib_8015F4F4(u8 arg0)
 {
-    gmMainLib_GetSaveData()->x1CB0.deflicker = arg0;
+    gmMainLib_GetCardData()->save_data.x1CB0.deflicker = arg0;
 }
 
 void gmMainLib_8015F500(void)
@@ -1209,7 +1210,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
 
-        memzero(&gmMainLib_804D3EE0->thing.trophy_count, 0x25C);
+        memzero(&gmMainLib_804D3EE0->thing.save_data.trophy_count, 0x25C);
         Toy_80311960();
 
         if (arg1 == 0) {
@@ -1218,7 +1219,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                                1);
         }
 
-        gmMainLib_804D3EE0->thing.x1CB0 = gmMainLib_DefaultGamePrefs;
+        gmMainLib_804D3EE0->thing.save_data.x1CB0 = gmMainLib_DefaultGamePrefs;
 
         {
             switch (lbLang_GetLanguageSetting()) {
@@ -1250,7 +1251,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
 
             InitializePersistentNameData(idx);
 
-            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            bank = gmMainLib_804D3EE0->thing.nametag_banks;
             {
                 struct NameTagData* tmp =
                     &bank[(u8) idx / 19].inner[(u8) idx % 19];
@@ -1295,7 +1296,7 @@ void gmMainLib_8015FA34(s32 arg0)
         }
     }
     if (DbLevel > DbLKind_DebugDevelop && db_804D6B20 != 0) {
-        gmMainLib_804D3EE0->thing.x186C = 0xFF;
+        gmMainLib_804D3EE0->thing.save_data.x186C = 0xFF;
         gm_80164F18();
         gm_8016468C();
         gm_8017297C();
@@ -1309,7 +1310,7 @@ void gmMainLib_8015FA34(s32 arg0)
 #endif
 void gmMainLib_8015FB68(void)
 {
-    gmMainLib_804D3EE0->thing.x186C = 0;
+    gmMainLib_804D3EE0->thing.save_data.x186C = 0;
     gm_8016505C();
     gm_801647D0();
     gm_801729EC();
@@ -1334,7 +1335,7 @@ void gmMainLib_8015FBA4(void)
         lbLang_SetSavedLanguage(0);
     }
 
-    gmMainLib_8045A6C0[0].x1850 = gmMainLib_DefaultGameRules;
+    gmMainLib_8045A6C0.x1850 = gmMainLib_DefaultGameRules;
     for (i = 1; i < 9; i++) {
         gmMainLib_8015F600(i, 1);
     }

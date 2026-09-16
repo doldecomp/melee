@@ -1203,8 +1203,7 @@ void fn_8022AFEC(HSD_GObj* gp)
     MainMenuSelection hovered_selection;
     u8 state;
     u8 option_count;
-    u8 pad[0x20];
-    HSD_JObj* sp20[4];
+    HSD_JObj* sp20[12];
     PAD_STACK(18);
 
     var_r26 = 0;
@@ -2727,7 +2726,7 @@ void mnMain_Scene_OnFrame(void)
         sfxBack();
         mn_8022F268();
         gm_801603B0();
-        lb_8001B760(0xB);
+        lbCardNew_CompleteAllTasks(LbCardResult_Busy);
         lbMthp_8001F800();
         mn_8022EBDC();
         HSD_SisLib_803A5E70();
