@@ -918,15 +918,13 @@ static inline s32 mnDiagram_FindPrevFighter(u8* sorted,
 {
     u8* p = sorted + cur;
     SelectableCharacterKind found = cur;
-loop:
-    found--;
-    p--;
-    if (found < 0) {
-        return cur;
-    }
-    if (mn_IsFighterUnlocked(*p) == 0) {
-        goto loop;
-    }
+    do {
+        found--;
+        p--;
+        if (found < 0) {
+            return cur;
+        }
+    } while (mn_IsFighterUnlocked(*p) == 0);
     return (u8) found;
 }
 
@@ -951,28 +949,24 @@ static inline u8 mnDiagram_FindNextFighter(u8* sorted,
 static inline s32 mnDiagram_FindPrevName(s32 cur)
 {
     s32 found = cur;
-loop:
-    found--;
-    if (found < 0) {
-        return cur;
-    }
-    if (GetNameText(found & 0xFF) == NULL) {
-        goto loop;
-    }
+    do {
+        found--;
+        if (found < 0) {
+            return cur;
+        }
+    } while (GetNameText(found & 0xFF) == NULL);
     return (u8) found;
 }
 
 static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
 {
     s32 found = cur;
-loop:
-    found--;
-    if (found < 0) {
-        return (u8) cur;
-    }
-    if (GetNameText(found & 0xFF) == NULL) {
-        goto loop;
-    }
+    do {
+        found--;
+        if (found < 0) {
+            return (u8) cur;
+        }
+    } while (GetNameText(found & 0xFF) == NULL);
     return (u8) found;
 }
 
@@ -980,29 +974,25 @@ static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
 {
     u8* p = sorted + cur;
     s32 found = cur;
-loop:
-    found--;
-    p--;
-    if (found < 0) {
-        return (u8) cur;
-    }
-    if (mn_IsFighterUnlocked(*p) == 0) {
-        goto loop;
-    }
+    do {
+        found--;
+        p--;
+        if (found < 0) {
+            return (u8) cur;
+        }
+    } while (mn_IsFighterUnlocked(*p) == 0);
     return (u8) found;
 }
 
 static inline int mnDiagram_FindNextName(s32 cur)
 {
     s32 found = cur;
-loop:
-    found++;
-    if (found >= 0x78) {
-        return (u8) cur;
-    }
-    if (GetNameText(found & 0xFF) == NULL) {
-        goto loop;
-    }
+    do {
+        found++;
+        if (found >= 0x78) {
+            return (u8) cur;
+        }
+    } while (GetNameText(found & 0xFF) == NULL);
     return (u8) found;
 }
 
