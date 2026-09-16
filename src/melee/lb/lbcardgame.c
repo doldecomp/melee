@@ -340,10 +340,9 @@ void lbCardGame_Init(void)
     _p(unk_status) = false;
     _p(card_status) = LbCardStatus_0;
     lbCardGame_Reset();
-    manifest[1].data = gmMainLib_GetSaveData();
+    manifest[1].data = &gmMainLib_GetCardData()->save_data;
 
-    /// @remarks Reads beyond the length of ::GmCardData::nametag_banks
-    for (i = 0; i < 7; i++) {
-        manifest[2 + i].data = &gmMainLib_8015CC4C()[i];
+    for (i = 0; i < GM_NAMETAG_BANK_COUNT; i++) {
+        manifest[2 + i].data = &gmMainLib_GetNameTagDataBanks()[i];
     }
 }
