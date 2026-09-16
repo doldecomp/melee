@@ -36,7 +36,26 @@ const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
 
 static s32 grMc_8049F440[30];
 
-#include "grmutecity.static.h"
+typedef struct grMc_CarEntry {
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ Vec3 pos;
+    /* 0x20 */ u16 x20;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+    } x22_flags;
+    /* 0x23 */ u8 x23;
+    /* 0x24 */ Item_GObj* x24;
+    /* 0x28 */ HSD_Generator* gen;
+} grMc_CarEntry;
+
+ASSERT_SIZE(grMc_CarEntry, 0x2C);
+
+static grMc_CarEntry grMc_8049F4B8[30];
 
 GrJoint grMc_803E30B0[] = {
     { 6, 29, 6 },
@@ -421,8 +440,7 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
     HSD_LObj* lobj;
-    HSD_LObj* next_lobj;
-    PAD_STACK(12);
+    PAD_STACK(8);
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     grAnime_801C775C(gobj, 0, 7, 0.0f, 3600.0f);
@@ -476,20 +494,13 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     mpJointSetCb1(4, gp, fn_801F2B58);
     lgobj = Ground_801C498C();
     gp->u.mutecity.x110 = NULL;
-    if (lgobj != NULL) {
-        if ((lobj = (HSD_LObj*) lgobj->hsd_obj) != NULL) {
-            while (lobj != NULL) {
-                if ((u32) (lobj->flags & 3) == LOBJ_POINT) {
-                    gp->u.mutecity.x110 = lobj;
-                    HSD_LObjSetFlags(gp->u.mutecity.x110, LOBJ_HIDDEN);
-                }
-                if (lobj == NULL) {
-                    next_lobj = NULL;
-                } else {
-                    next_lobj = lobj->next;
-                }
-                lobj = next_lobj;
+    if (lgobj != NULL && (lobj = GET_LOBJ(lgobj)) != NULL) {
+        while (lobj != NULL) {
+            if ((u32) (lobj->flags & 3) == LOBJ_POINT) {
+                gp->u.mutecity.x110 = lobj;
+                HSD_LObjSetFlags(gp->u.mutecity.x110, LOBJ_HIDDEN);
             }
+            lobj = HSD_LObjGetNext(lobj);
         }
     }
 }
@@ -1126,11 +1137,10 @@ grMc_TrackInitData grMc_803E3B7C[30] = {
 void grMuteCity_801F0F4C(Ground_GObj* gobj)
 {
     f32 pos;
-    grMc_TrackInitData* src = grMc_803E3B7C;
     int i;
 
     for (i = 0; i < 30; i++) {
-        pos = src->pos;
+        pos = grMc_803E3B7C[i].pos;
         if (pos > 1.0) {
             pos--;
         } else if (pos < 0.0) {
@@ -1138,7 +1148,7 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         }
         grMc_8049F4B8[i].x0 = pos;
         grMc_8049F4B8[i].x4 = pos;
-        grMc_8049F4B8[i].xC = src->speed;
+        grMc_8049F4B8[i].xC = grMc_803E3B7C[i].speed;
         grMc_8049F4B8[i].x8 = 0.0f;
         grMc_8049F4B8[i].x10 = 0.0f;
         grMc_8049F4B8[i].x20 = 0;
@@ -1146,7 +1156,6 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         grMc_8049F4B8[i].x22_flags.b1 = 0;
         grMc_8049F4B8[i].x24 = NULL;
         grMc_8049F4B8[i].gen = NULL;
-        src++;
         grMc_8049F440[i] = i;
     }
 }
