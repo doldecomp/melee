@@ -826,7 +826,7 @@ s32 fn_801803FC(void* arg0)
     gobj = GObj_Create(0xEU, 0xEU, 0U);
     p->x0 = gobj;
     if (gobj == NULL) {
-        HSD_JObjAnimAll((HSD_JObj*) gobj->hsd_obj);
+        HSD_JObjAnimAll(GET_JOBJ(gobj));
         OSReport("Error : gobj don\'t get (gmRegClearAddModel)\n");
         OSPanic(__FILE__, 0x42C, "");
     }

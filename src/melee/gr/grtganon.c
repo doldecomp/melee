@@ -92,7 +92,7 @@ HSD_GObj* grTGanon_80224784(int id)
 
 void grTGanon_8022486C(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 

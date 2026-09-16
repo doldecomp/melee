@@ -490,7 +490,7 @@ void grFourside_801F37F8(Ground_GObj* arg) {}
 void grFourside_801F37FC(Ground_GObj* gobj)
 {
     int new_var;
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     Ground_InitMapColl(jobj, gp->map_id);
     new_var = yakumono_param->ufo_wait;

@@ -1255,11 +1255,11 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
             fn_80178BB4(arg0);
         }
     } else {
-        HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
+        HSD_JObjAnimAll(GET_JOBJ(arg0));
         switch (data->x1) {
         case 1: {
             ResultsData* d = &lbl_8046DBE8;
-            HSD_JObj* jobj = (HSD_JObj*) arg0->hsd_obj;
+            HSD_JObj* jobj = GET_JOBJ(arg0);
             float frame = lbGetJObjCurrFrame(jobj);
             if (frame >= 10.0f && !d->x0_1) {
                 fn_80177748();

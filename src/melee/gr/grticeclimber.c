@@ -117,7 +117,7 @@ Ground_GObj* setupStageCallbacks(int id)
 
 void stageGObj0_OnInit(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
