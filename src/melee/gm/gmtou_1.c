@@ -431,29 +431,30 @@ void fn_80196DBC(HSD_GObj* gobj)
 /// Updates the tournament UI animation frame counter.
 void fn_80196E30(HSD_GObj* gobj)
 {
-    u8* base_ptr;
+    struct Lbl804799D8_t* state;
+    u8* counter;
     s32 cur_option;
     HSD_JObj* jobj;
     u8* x1A_ptr;
     u8 val;
 
-    base_ptr = (u8*) &lbl_804799D8;
+    state = &lbl_804799D8;
     cur_option = gm_GetTournamentData()->cur_option;
     jobj = gobj->hsd_obj;
 
     if (cur_option <= 0x1A || cur_option >= 0x1F) {
-        if ((*(x1A_ptr = base_ptr + 0x1A)) > 0x77U) {
+        if ((*(x1A_ptr = &state->x1A)) > 0x77U) {
             *x1A_ptr = 0x5A;
         }
     } else if (cur_option <= 0x1E) {
-        if ((*(x1A_ptr = base_ptr + 0x1A)) > 0x9FU) {
+        if ((*(x1A_ptr = &state->x1A)) > 0x9FU) {
             *x1A_ptr = 0x82;
         }
     }
 
-    val = *(base_ptr += 0x1A);
+    val = *(counter = &state->x1A);
     fn_8019044C(jobj, (f32) val);
-    *base_ptr = *base_ptr + 1;
+    (*counter)++;
 }
 
 /// Tournament mode JObj visibility/animation callback.

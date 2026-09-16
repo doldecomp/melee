@@ -341,22 +341,23 @@ void fn_801910E0(HSD_GObj* gobj)
 
 void fn_80191154(HSD_GObj* gobj)
 {
-    u8* base_ptr;
+    struct Lbl804799B8_t* state;
+    u8* counter;
     TmData* tm;
     HSD_JObj* jobj;
     u8* xE_ptr;
     u8 val;
 
-    base_ptr = &lbl_804799B8.x0;
+    state = &lbl_804799B8;
     tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option < 9) {
-        if ((*(xE_ptr = base_ptr + 0xE)) > 0x27U) {
+        if ((*(xE_ptr = &state->xE)) > 0x27U) {
             *xE_ptr = 0xA;
         }
     } else {
-        if ((*(xE_ptr = base_ptr + 0xE)) == 0x31) {
+        if ((*(xE_ptr = &state->xE)) == 0x31) {
             fn_80190ABC(6);
             fn_80190ABC(5);
             tm->cur_option = 0xA;
@@ -365,9 +366,9 @@ void fn_80191154(HSD_GObj* gobj)
             *xE_ptr = 0x32;
         }
     }
-    val = *(base_ptr += 0xE);
+    val = *(counter = &state->xE);
     fn_8019044C(jobj, (f32) val);
-    *base_ptr = *base_ptr + 1;
+    (*counter)++;
 }
 
 static inline u8 fn_80191240_dec_flash_timer(void)

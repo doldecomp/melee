@@ -173,7 +173,7 @@ void vi1101_Scene_OnEnter(void* arg)
     s32 var_r31;
     u8 temp_r29;
     u8* input = arg;
-    char* data = (char*) &un_80400200;
+    Vi1101Data* data = &un_80400200;
     HSD_JObj* new_var;
     lbAudioAx_800236DC();
     efLib_Init();
@@ -183,8 +183,9 @@ void vi1101_Scene_OnEnter(void* arg)
     lbAudioAx_80024E50(1);
 
     temp_r29 = input[0];
-    un_804D6FCC = lbArchive_LoadSymbols(data + 0x24, &un_804D6FC0, data + 0x30,
-                                        &un_804D6FC4, data + 0x40, NULL);
+    un_804D6FCC = lbArchive_LoadSymbols(data->vi1101_dat, &un_804D6FC0,
+                                        data->visual1101_scene, &un_804D6FC4,
+                                        data->visual1101_cam2_scene, NULL);
     un_804D6FC8 = lbArchive_LoadSymbols(viGetCharAnimByIndex(temp_r29), NULL);
 
     temp_r28 = GObj_Create(0xB, 3, 0);
