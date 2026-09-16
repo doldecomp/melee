@@ -47,7 +47,7 @@ bool ft_did_jump(Fighter* fp, bool arg1)
 {
     if (fp->x1968_jumpsUsed < fp->co_attrs.max_jumps &&
         ((fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold &&
-          fp->lstick_y_active_timer < p_ftCommonData->tap_jump_window) ||
+          fp->active_timer.lstick_y < p_ftCommonData->tap_jump_window) ||
          fp->input.pressed_buttons & HSD_PAD_XY) &&
         !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
     {
@@ -147,7 +147,7 @@ void ftCo_800CBAC4(Fighter_GObj* gobj, FtMotionId msid, Vec3* vel, bool arg3)
     fp->x2221_b7 = true;
     ft_SetVec(&fp->self_vel, vel);
     if (arg3) {
-        fp->lstick_y_active_timer = 0xFE;
+        fp->active_timer.lstick_y = 0xFE;
     }
     fp->x1968_jumpsUsed += 1;
     ft_80088770(fp);

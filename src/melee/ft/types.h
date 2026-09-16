@@ -1295,6 +1295,12 @@ typedef struct Fighter_x1670_t {
     /* +24 */ int x24;
 } Fighter_x1670_t; ///< @todo figure out proper size
 
+typedef struct FtInputTimers {
+    /* +0 */ u8 lstick_x;
+    /* +1 */ u8 lstick_y;
+    /* +2 */ u8 trigger;
+} FtInputTimers;
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1409,19 +1415,14 @@ struct Fighter {
         /*  fp+66C */ HSD_Pad
             released_buttons; ///< buttons released this frame
     } input;
-    // input timers for crossing the "smash" thresholds/deadzones
-    /*  fp+670 */ u8 lstick_x_active_timer;
-    /*  fp+671 */ u8 lstick_y_active_timer;
-    /*  fp+672 */ u8 trigger_active_timer;
-    /*  fp+673 */ u8 lstick_x_active_sticky;
-    /*  fp+674 */ u8 lstick_y_active_sticky;
-    /*  fp+675 */ u8 trigger_active_sticky;
-    /*  fp+676 */ u8 lstick_x_active_duration;
-    /*  fp+677 */ u8 lstick_y_active_duration;
-    /*  fp+678 */ u8 trigger_active_duration;
-    /*  fp+679 */ u8 lstick_x_activity_timer;
-    /*  fp+67A */ u8 lstick_y_activity_timer;
-    /*  fp+67B */ u8 trigger_activity_timer;
+    /**
+     * Frames since each analog input last crossed its threshold: the stick
+     * smash deadzones, #shield_press_threshold for the trigger.
+     */
+    /*  fp+670 */ FtInputTimers active_timer;    ///< consumers stamp 254
+    /*  fp+673 */ FtInputTimers active_sticky;   ///< no consumer resets it
+    /*  fp+676 */ FtInputTimers active_duration; ///< survives the input ending
+    /*  fp+679 */ FtInputTimers activity_timer;  ///< input-count stat only
     /*  fp+67C */ u8 x67C;
     /*  fp+67D */ u8 x67D;
     /*  fp+67E */ u8 x67E;

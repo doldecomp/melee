@@ -23,7 +23,7 @@ static bool checkLStick(Fighter* fp)
 {
     if (fp->input.pressed_buttons & HSD_PAD_A &&
         fp->input.lstick[0].y >= p_ftCommonData->xCC &&
-        fp->lstick_y_active_timer < p_ftCommonData->xD0)
+        fp->active_timer.lstick_y < p_ftCommonData->xD0)
     {
         return true;
     } else {

@@ -40,7 +40,7 @@
 static inline bool inlineA1(Fighter* fp)
 {
     if (ABS(fp->input.lstick[0].x) >= p_ftCommonData->x31C &&
-        fp->lstick_x_active_timer < p_ftCommonData->x320)
+        fp->active_timer.lstick_x < p_ftCommonData->x320)
     {
         return true;
     }
@@ -198,7 +198,7 @@ void ftCo_80099754(Fighter_GObj* gobj)
 static inline bool inlineB0(Fighter* fp)
 {
     if (fp->input.lstick[0].y <= p_ftCommonData->x314 &&
-        fp->lstick_y_active_timer < p_ftCommonData->x318)
+        fp->active_timer.lstick_y < p_ftCommonData->x318)
     {
         return true;
     }

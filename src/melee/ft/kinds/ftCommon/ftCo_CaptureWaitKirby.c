@@ -29,7 +29,7 @@ void ftCo_800BD620(Fighter_GObj* gobj)
 
 static inline void inlineA0(Fighter* fp, int arg1)
 {
-    fp->lstick_y_active_timer = 254;
+    fp->active_timer.lstick_y = 254;
     ftKb_SpecialN_800F598C(fp->victim_gobj, arg1);
 }
 
@@ -48,13 +48,13 @@ void ftCo_800BD6EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold &&
-        fp->lstick_y_active_timer < p_ftCommonData->tap_jump_window)
+        fp->active_timer.lstick_y < p_ftCommonData->tap_jump_window)
     {
         inlineA0(fp, +1);
         return;
     }
     if (fp->input.lstick[0].y <= p_ftCommonData->x464 &&
-        fp->lstick_y_active_timer < p_ftCommonData->x468 &&
+        fp->active_timer.lstick_y < p_ftCommonData->x468 &&
         ftKb_SpecialN_800F597C(fp->victim_gobj))
     {
         inlineA0(fp, -1);
@@ -74,10 +74,10 @@ static inline void inlineB0(Fighter_GObj* gobj)
         lstick_x = -lstick_x;
     }
     if (lstick_x >= p_ftCommonData->dash_smash_stick_threshold &&
-        fp->lstick_x_active_timer <
+        fp->active_timer.lstick_x <
             p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
-        fp->lstick_x_active_timer = 254;
+        fp->active_timer.lstick_x = 254;
         if (fp->input.lstick[0].x < 0.0f) {
             value = -1;
         } else {

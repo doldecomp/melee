@@ -33,8 +33,7 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
     }
 
     if ((lsx_abs >= p_ftCommonData->dash_smash_stick_threshold) &&
-        ((int) fp->lstick_x_active_timer <
-         p_ftCommonData->dash_smash_window))
+        ((int) fp->active_timer.lstick_x < p_ftCommonData->dash_smash_window))
     {
         if ((fp->input.lstick[0].x * fp->facing_dir) < 0.0F) {
             ftCo_Turn_Enter_Smash(gobj);
@@ -57,7 +56,7 @@ void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1)
     Fighter_ChangeMotionState(gobj, ftCo_MS_Dash, Ft_MF_None, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->lstick_x_active_timer = 0xFE;
+    fp->active_timer.lstick_x = 0xFE;
     init_vel = fp->facing_dir * fp->co_attrs.dash_initial_velocity;
     if ((fp->gr_vel * fp->facing_dir) < 0.0F) {
         fp->mv.co.dash.x0 = init_vel;

@@ -263,7 +263,7 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 
     Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F, 1.0F, 0.0F, NULL);
     fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
-    fp->lstick_x_active_timer = 0xFE;
+    fp->active_timer.lstick_x = 0xFE;
     fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
     if (fp->x221C_b2 == 0) {
         ftParts_80074B0C(gobj, 0, 1);
@@ -316,7 +316,7 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 16, fp->cur_anim_frame,
                               1, 0, NULL);
-    fp->trigger_active_timer = 254;
+    fp->active_timer.trigger = 254;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
@@ -353,7 +353,7 @@ void ftYs_Shield_8012C914(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->trigger_active_timer = 254;
+    fp->active_timer.trigger = 254;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;

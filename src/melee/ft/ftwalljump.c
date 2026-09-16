@@ -102,7 +102,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                      fp0->x2110_walljumpWallSide == +1 &&
                      fp0->input.lstick[0].x <= -p_ftCommonData->x76C)) &&
                 // control stick didn't stay too long in the tilt area?
-                fp0->lstick_x_active_timer < p_ftCommonData->x770)
+                fp0->active_timer.lstick_x < p_ftCommonData->x770)
             {
                 // do a walljump!
                 ftCo_800C1E64(gobj, ftCo_MS_PassiveWallJump,
