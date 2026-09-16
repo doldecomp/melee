@@ -852,9 +852,9 @@ void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
             use_alt_name = true;
         }
         if (use_alt_name) {
-            temp = lbl_803B75F8[tmp_ckind + 0x63];
+            temp = lbl_803B7784[tmp_ckind];
         } else {
-            temp = lbl_803B75F8[tmp_ckind + 0x21];
+            temp = lbl_803B767C[tmp_ckind];
         }
         size = temp;
     } else {
@@ -864,7 +864,7 @@ void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
             use_alt_name = true;
         }
         if (use_alt_name) {
-            temp = lbl_803B75F8[tmp_ckind + 0x42];
+            temp = lbl_803B7700[tmp_ckind];
         } else {
             temp = lbl_803B75F8[tmp_ckind];
         }
