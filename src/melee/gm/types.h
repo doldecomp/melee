@@ -18,6 +18,8 @@
 #include <dolphin/types.h>
 #include <melee/mn/types.h>
 
+#define GM_NAMETAG_BANK_COUNT 7
+
 /// @deprecated Replace with inline bitfields
 typedef union UnkFlagStruct {
     u8 byte;
@@ -348,7 +350,7 @@ ASSERT_SIZE(GmSaveData, 0x1790);
 
 struct GmCardData {
     /*    +0 */ GmSaveData save_data;
-    /* +1760 */ struct NameTagDataBank nametag_banks[2];
+    /* +1760 */ struct NameTagDataBank nametag_banks[GM_NAMETAG_BANK_COUNT];
 };
 
 struct gmm_x0_528_t {
@@ -454,12 +456,11 @@ struct gmm_x0 {
     struct gmm_x0_vsmodes modes;
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct GmCardData thing;
-    /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
 ASSERT_SIZE(struct EventData, 0x588 - 0x530);
 ASSERT_SIZE(struct gmm_x0_vsdata, 0x588 - 0x51C);
 ASSERT_SIZE(struct gmm_x0_vsmodes, 0x1850 - 0x588);
-ASSERT_SIZE(struct gmm_x0, 0x8518);
+ASSERT_SIZE(struct gmm_x0, 0x10A30);
 
 struct Placeholder_8016AE38_flags_2 {
     /* +0:0 */ u8 x0_b0_b2 : 3;

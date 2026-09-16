@@ -1034,4 +1034,8 @@ typedef struct {
     s8 x, y;
 } S8Vec2, *S8Vec2Ptr;
 
+typedef struct {
+    u8 x, y;
+} U8Vec2;
+
 #endif

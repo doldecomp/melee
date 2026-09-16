@@ -20,6 +20,7 @@ typedef struct flag32 flag32;
 typedef struct HSD_ObjAllocUnk HSD_ObjAllocUnk;
 typedef struct Item_FtTrack Item_FtTrack;
 typedef struct RandomItemSpawner RandomItemSpawner;
+typedef struct PokemonSelectionState PokemonSelectionState;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct ItemPickTable ItemPickTable;
 typedef struct itUnk2_DatAttrs itUnk2_DatAttrs;
@@ -411,6 +412,7 @@ typedef enum ItemKind {
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
     /// @}
 
+    It_Kind_Unselected = -1,
     It_Kind_None = -999,
 } ItemKind;
 
