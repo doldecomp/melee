@@ -281,7 +281,7 @@ static bool setupNormalCamera(HSD_CObj* cobj)
     bottom = cobj->scissor.bottom * y_scale;
     width = right - left;
     height = bottom - top;
-    GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
+    GXSetScissor(left, top, width, height);
 
     projection_type = makeProjectionMtx(cobj, p);
     GXSetProjection(p, projection_type);
@@ -323,7 +323,7 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
     bottom = bottom < rmode->efbHeight ? bottom : rmode->efbHeight;
     width = right - left;
     height = bottom - top;
-    GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
+    GXSetScissor(left, top, width, height);
     top = cobj->viewport.ymin;
     bottom = cobj->viewport.ymax;
     left = cobj->viewport.xmin;
@@ -401,7 +401,7 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
     bottom = cobj->scissor.bottom - screen_top;
     width = right - left;
     height = bottom - top;
-    GXSetScissor((u32) left, (u32) top, (u32) width, (u32) height);
+    GXSetScissor(left, top, width, height);
 
     top = cobj->viewport.ymin;                   // lfs f4,0x14(r30)
     left = cobj->viewport.xmin;                  // lfs f1,0xc(r30)
@@ -642,12 +642,10 @@ static inline f32 vec_get_x(Vec3* v)
     return v->x;
 }
 
-#ifdef MUST_MATCH
 static inline f64 cobj_fabsf_p(f32* v)
 {
     return fabsf(*v);
 }
-#endif
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
@@ -661,11 +659,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     if (res != 0) {
         return res;
     }
-#ifdef MUST_MATCH
     if (1.0 - cobj_fabsf_p(&eye.y) < 0.0001) {
-#else
-    if (1.0 - fabsf(eye.y) < 0.0001) {
-#endif
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-vec_get_x(&eye) / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
@@ -1355,23 +1349,13 @@ void CObjRelease(HSD_Class* o)
 {
     HSD_WObj* eyepos;
     HSD_WObj* interest;
-    HSD_CObj* cobj = (HSD_CObj*) o;
+    HSD_CObj* cobj = HSD_COBJ(o);
 
     HSD_AObjRemove(cobj->aobj);
     eyepos = HSD_CObjGetEyePositionWObj(cobj);
-    if (eyepos != NULL) {
-        if (ref_DEC(eyepos) && eyepos != NULL) {
-            HSD_CLASS_METHOD(eyepos)->release((HSD_Class*) eyepos);
-            HSD_CLASS_METHOD(eyepos)->destroy((HSD_Class*) eyepos);
-        }
-    }
+    HSD_WObjUnref(eyepos);
     interest = HSD_CObjGetInterestWObj(cobj);
-    if (interest != NULL) {
-        if (ref_DEC(interest) && interest != NULL) {
-            HSD_CLASS_METHOD(interest)->release((HSD_Class*) interest);
-            HSD_CLASS_METHOD(interest)->destroy((HSD_Class*) interest);
-        }
-    }
+    HSD_WObjUnref(interest);
     if (cobj->proj_mtx != NULL) {
         HSD_MtxFree(cobj->proj_mtx);
     }
