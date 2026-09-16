@@ -639,7 +639,11 @@ struct grGreatBay_GroundVars3 {
 
 struct grGreatBay_GroundVars4 {
     s32 xC4;
-    s32 xC8;
+    /// Align this view with grGreatBay_GroundVars::xC8 on native hosts.
+    union {
+        HSD_Generator* pad_gen;
+        s32 xC8;
+    };
     s32 xCC;
     s32 xD0;
     s32 xD4;
@@ -649,6 +653,13 @@ struct grGreatBay_GroundVars4 {
     Vec3 xE4;
     Item_GObj* xF0;
 };
+
+STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xD4) ==
+              offsetof(struct grGreatBay_GroundVars, xD4));
+STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xD8) ==
+              offsetof(struct grGreatBay_GroundVars, xD8));
+STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xE0) ==
+              offsetof(struct grGreatBay_GroundVars, xE0));
 
 struct grGarden_GroundVars { // Cranky Kong
     s32 xc4;
@@ -969,10 +980,9 @@ struct grYorster_GroundVars {
 
 struct grZebes_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
-    /*  +4 gp+C8 */ u32 x4;
+    /*  +4 gp+C8 */ HSD_JObj* stored_jobj;
     /*  +8 gp+CC */ s16 x8;
     /*  +A gp+CE */ s16 xA;
-    /*  +C gp+D0 */ Vec3 xC;
 };
 
 struct grZebes_GroundVars2 {
@@ -1486,12 +1496,19 @@ struct grBigBlueRoute_Track {
 };
 
 struct grBigBlueRoute_GroundVars2 {
-    /* +00 gp+C4 */ u8 pad_C4[0xC8 - 0xC4];
-    /* +04 gp+C8 */ s16 xC8;
-    /* +06 gp+CA */ u8 pad_CA[0xCC - 0xCA];
-    /* +08 gp+CC */ Vec3 xCC;
-    /* +14 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
+    /// Shared with grBigBlueRoute_GroundVars::xC4.
+    /* +00 gp+C4 */ HSD_GObj* xC4;
+    /* +08 gp+C8 */ s16 xC8;
+    /* +0A gp+CA */ u8 pad_CA[0xCC - 0xCA];
+    /* +0C gp+CC */ Vec3 xCC;
+    /* +18 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
 };
+
+STATIC_ASSERT(offsetof(struct grBigBlueRoute_GroundVars2, xC4) ==
+              offsetof(struct grBigBlueRoute_GroundVars, xC4));
+STATIC_ASSERT(offsetof(struct grBigBlueRoute_GroundVars2, xC8) ==
+              offsetof(struct grBigBlueRoute_GroundVars2, xC4) +
+                  sizeof(HSD_GObj*));
 
 struct grCastle_GroundVars {
     /*  +0 gp+C4 */ u32 xC4;
@@ -1501,16 +1518,18 @@ struct grCastle_GroundVars {
 };
 
 struct grCastle_GroundVars3 {
-    /* +00 gp+C4 */ u8 pad_0[0x1C];
-    /* +1C gp+E0 */ DynamicsDesc x1C[12];
+    /* +00 gp+C4 */ HSD_GObj* pad_gobj[3];
+    /* +18 gp+D0 */ u8 pad_D0[0xE0 - 0xD0];
+    /* +28 gp+E0 */ DynamicsDesc x1C[12];
 };
 
 struct grCastle_GroundVars4 {
-    /* +00 gp+C4 */ u8 pad_0[0x12];
-    /* +12 gp+D6 */ s16 xD6;
-    /* +14 gp+D8 */ s16 xD8;
-    /* +16 gp+DA */ s16 xDA;
-    /* +18 gp+DC */ s16 xDC;
+    /* +00 gp+C4 */ HSD_GObj* pad_gobj[3];
+    /* +18 gp+D0 */ u8 pad_D0[0xD6 - 0xD0];
+    /* +1E gp+D6 */ s16 xD6;
+    /* +20 gp+D8 */ s16 xD8;
+    /* +22 gp+DA */ s16 xDA;
+    /* +24 gp+DC */ s16 xDC;
 };
 
 struct grCastle_GroundVars2 {
@@ -1557,18 +1576,18 @@ struct grCastle_GroundVars8 {
 };
 
 struct grCastle_GroundVars9 {
-    /* +00   gp+C4 */ u32 xC4;
-    /* +04   gp+C8 */ u32 xC8;
-    /* +08   gp+CC */ u32 xCC;
-    /* +0C   gp+D0 */ u8 pad_xD0[4];
-    /* +10   gp+D4 */ s16 xD4;
-    /* +12   gp+D6 */ s16 xD6;
-    /* +14   gp+D8 */ s16 xD8;
-    /* +16   gp+DA */ s16 xDA;
-    /* +18   gp+DC */ s16 xDC;
-    /* +1A:0 gp+DE:0 */ u8 xDE_b0 : 1;
-    /* +1B   gp+DF */ u8 pad_xDF[1];
-    /* +1C   gp+E0 */ DynamicsDesc dynamics[12];
+    /* +00 gp+C4 */ HSD_GObj* xC4;
+    /* +08 gp+C8 */ HSD_GObj* xC8;
+    /* +10 gp+CC */ HSD_GObj* xCC;
+    /* +18 gp+D0 */ u8 pad_xD0[4];
+    /* +1C gp+D4 */ s16 xD4;
+    /* +1E gp+D6 */ s16 xD6;
+    /* +20 gp+D8 */ s16 xD8;
+    /* +22 gp+DA */ s16 xDA;
+    /* +24 gp+DC */ s16 xDC;
+    /* +26:0 gp+DE:0 */ u8 xDE_b0 : 1;
+    /* +27 gp+DF */ u8 pad_xDF[1];
+    /* +28 gp+E0 */ DynamicsDesc dynamics[12];
 };
 
 struct grCastle_GroundVars10 {
@@ -1608,10 +1627,34 @@ struct grCastle_GroundVars11 {
 };
 
 struct grCastle_GroundVars12 {
-    /* +00 gp+C4 */ u32 xC4[3];
-    /* +0C gp+D0 */ s16 xD0;
-    /* +0E gp+D2 */ s16 xD2;
+    /* +00 gp+C4 */ HSD_GObj* xC4[3];
+    /* +18 gp+D0 */ s16 xD0;
+    /* +1A gp+D2 */ s16 xD2;
 };
+
+/// Fields shared by the main Castle ground must agree across every view.
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC4) ==
+              offsetof(struct grCastle_GroundVars12, xC4));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC4) ==
+              offsetof(struct grCastle_GroundVars9, xC4));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC8) ==
+              offsetof(struct grCastle_GroundVars9, xC8));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xCC) ==
+              offsetof(struct grCastle_GroundVars9, xCC));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xD0) ==
+              offsetof(struct grCastle_GroundVars12, xD0));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xD2) ==
+              offsetof(struct grCastle_GroundVars12, xD2));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xD6) ==
+              offsetof(struct grCastle_GroundVars9, xD6));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xD8) ==
+              offsetof(struct grCastle_GroundVars9, xD8));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xDA) ==
+              offsetof(struct grCastle_GroundVars9, xDA));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xDC) ==
+              offsetof(struct grCastle_GroundVars9, xDC));
+STATIC_ASSERT(offsetof(struct grCastle_GroundVars3, x1C) ==
+              offsetof(struct grCastle_GroundVars9, dynamics));
 
 struct grPura_GroundVars {
     /*  +0 gp+C4:0 */ s16 xC4;
