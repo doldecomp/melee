@@ -659,8 +659,8 @@ s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
         jobj->envelopemtx = HSD_MtxAlloc();
         memcpy(jobj->envelopemtx, joint->mtx, sizeof(Mtx));
     }
-    HSD_IDInsertToTable(NULL, (u32) joint, jobj);
-    jobj->id = (u32) joint;
+    HSD_IDInsertToTable(NULL, (HSD_IDKey) joint, jobj);
+    jobj->id = (HSD_IDKey) joint;
     return 0;
 }
 
@@ -690,7 +690,8 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
     HSD_RObjResolveRefsAll(jobj->robj, joint->robjdesc);
     if (!!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObjUnref(jobj->child);
-        jobj->child = HSD_IDGetDataFromTable(NULL, (u32) joint->child, NULL);
+        jobj->child =
+            HSD_IDGetDataFromTable(NULL, (HSD_IDKey) joint->child, NULL);
         HSD_ASSERT(1108, jobj->child);
         HSD_JObjRef(jobj->child);
     }
@@ -1514,7 +1515,7 @@ void JObjRelease(HSD_Class* o)
     HSD_JOBJ_METHOD(jobj)->release_child(jobj);
 
     if (HSD_IDGetDataFromTable(NULL, jobj->id, NULL) == jobj) {
-        u32 id = jobj->id;
+        HSD_IDKey id = jobj->id;
         HSD_IDRemoveByIDFromTable(NULL, id);
     }
     if (jobj->scl != NULL) {

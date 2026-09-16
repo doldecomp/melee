@@ -1163,7 +1163,7 @@ struct grGreens_BlockVars {
     Item_GObj* x10;
     HSD_JObj* x14;
     int x18;
-    int x1C;
+    HSD_GObj* x1C;
 };
 ASSERT_SIZE(struct grGreens_BlockVars, 0x20);
 

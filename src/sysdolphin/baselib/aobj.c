@@ -184,7 +184,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     u8 _[4];
 
     HSD_FObj* fobj;
-    u32 id;
+    HSD_IDKey id;
     HSD_Obj* phi_r30;
 
     if (aobjdesc != NULL) {

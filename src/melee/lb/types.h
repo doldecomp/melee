@@ -310,8 +310,8 @@ struct CameraBlurData {
 };
 
 struct lb_80432A68_38_t {
-    /* 0x0 */ s32 card_error;
-    /* 0x4 */ s32 unk_4;
+    /* 0x0 */ s32 lb_error;
+    /* 0x4 */ s32 hsd_result;
 };
 ASSERT_SIZE(struct lb_80432A68_38_t, 0x8);
 

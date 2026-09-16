@@ -102,6 +102,12 @@ typedef union HSD_ObjData HSD_ObjData;
 typedef union HSD_Rumble HSD_Rumble;
 typedef union HSD_TExp HSD_TExp;
 
+#ifdef MUST_MATCH
+typedef u32 HSD_IDKey;
+#else
+typedef uintptr_t HSD_IDKey;
+#endif
+
 typedef void (*GObj_RenderFunc)(HSD_GObj* gobj, int code);
 typedef void (*HSD_ObjUpdateFunc)(void* obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, void*, bool cancelflag);

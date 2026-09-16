@@ -13,22 +13,19 @@ struct CardEntry {
     u8* data;
 };
 
-/* 019BB8 */ int lb_80019BB8(int card_result);
-/* 019CB0 */ int lb_80019CB0(int result);
 /* 019EF0 */ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out,
                               UNK_T callback);
 /* 01A0B0 */ void fn_8001A0B0(int file_idx, int hsd_error);
 /* 01A184 */ int lb_8001A184(void);
 /* 01A3A4 */ int lb_8001A3A4(void);
 /* 01A4CC */ void lb_8001A4CC(const char* filename, UNK_T file_entries);
-/* 01A594 */ int lb_8001A594(char* filename, void* file_entries);
 /* 01A860 */ int lb_8001A860(void);
 /* 01A8A4 */ int lb_8001A8A4(void);
 /* 01A9CC */ int lb_8001A9CC(char* filename);
 /* 01AAE4 */ int lb_8001AAE4(const char* old_name, const char* new_name);
 /* 01AC04 */ int lb_8001AC04(const char* filename);
-/* 01ACEC */ int lb_8001ACEC(UNK_T file_entries);
-/* 01AE38 */ int lb_8001AE38(UNK_T file_entries);
+/* 01ACEC */ int lb_8001ACEC(struct CardEntry* file_entries);
+/* 01AE38 */ int lb_8001AE38(struct CardEntry* file_entries);
 /* 01AF84 */ int lb_8001AF84(void);
 /* 01B068 */ int lb_8001B068(void);
 /* 01B14C */ int lb_8001B14C(void);

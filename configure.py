@@ -1982,7 +1982,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_3A64.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3A76.c", force_optimization=True),
             Object(Matching, "sysdolphin/baselib/sislib_font.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3A94.c"),
+            Object(Matching, "sysdolphin/baselib/card.c"),
             Object(
                 Matching,
                 "sysdolphin/baselib/hsd_3B33.c",
