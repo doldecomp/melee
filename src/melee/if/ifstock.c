@@ -30,8 +30,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/tobj.h>
 
-#define GET_IFSTOCK(gobj) ((struct IfStockUserData*) HSD_GObjGetUserData(gobj))
-
 static struct ifStock_804A1378 ifStock_804A1378;
 static struct ifStock_804A1774 ifStock_804A1774;
 static HSD_GObj* ifStock_804A1A8C[16];
@@ -281,7 +279,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
 
 static inline struct IfStockUserData* ifStock_802F89F8_get_data(HSD_GObj* gobj)
 {
-    struct IfStockUserData* user_data = GET_IFSTOCK(gobj);
+    struct IfStockUserData* user_data = HSD_GObjGetUserData(gobj);
 
     return user_data;
 }
@@ -477,7 +475,7 @@ static inline void fn_802F9410_inline(HSD_GObj* gobj,
 
 void fn_802F9410(HSD_GObj* gobj)
 {
-    struct IfStockUserData* p = GET_IFSTOCK(gobj);
+    struct IfStockUserData* p = HSD_GObjGetUserData(gobj);
     PAD_STACK(0x10);
     switch (p->mode) {
     case 0:
@@ -494,7 +492,7 @@ void fn_802F9410(HSD_GObj* gobj)
 
 void fn_802F94E0(HSD_GObj* gobj, int renderpass)
 {
-    struct IfStockUserData* p = GET_IFSTOCK(gobj);
+    struct IfStockUserData* p = HSD_GObjGetUserData(gobj);
     struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[p->player].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, renderpass);
