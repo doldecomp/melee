@@ -73,8 +73,8 @@ bool ftCo_80094EA4(HSD_GObj* gobj)
         if (fp->input.pressed_buttons & (HSD_PAD_A | HSD_PAD_B)) {
             stick_x = fp->input.lstick[0].x;
             stick_y = fp->input.lstick[0].y;
-            var_f28 = fp->x673;
-            var_f31 = fp->x674;
+            var_f28 = fp->lstick_x_active_sticky;
+            var_f31 = fp->lstick_y_active_sticky;
             stick_angle = ftCo_GetLStickAngle(fp);
             ret = true;
         } else {
@@ -207,8 +207,8 @@ bool ftCo_80095328(Fighter_GObj* gobj, bool* arg1)
     } else if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
         var_f31 = fp->input.lstick[0].x;
         var_f28 = fp->input.lstick[0].y;
-        var_f30 = fp->x673;
-        var_f29 = fp->x674;
+        var_f30 = fp->lstick_x_active_sticky;
+        var_f29 = fp->lstick_y_active_sticky;
         angle = ftCo_GetLStickAngle(fp);
     } else {
         return false;
@@ -392,7 +392,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
         var_f1 = -var_f1;
     }
     if (var_f1 >= p_ftCommonData->dash_smash_stick_threshold &&
-        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
+        fp->lstick_x_active_sticky < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         if (fp->input.lstick[0].x * fp->facing_dir >= 0.0f) {
             var_r0 = 0x6C;
@@ -402,12 +402,12 @@ void ftCo_80095A30(HSD_GObj* gobj)
         var_r29 = var_r0;
     } else {
         if (fp->input.lstick[0].y >= p_ftCommonData->xCC &&
-            fp->x674 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
+            fp->lstick_y_active_sticky < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
             var_r29 = 0x6E;
         } else {
             if (fp->input.lstick[0].y <= p_ftCommonData->xD4 &&
-                fp->x674 < p_ftCommonData->xD8)
+                fp->lstick_y_active_sticky < p_ftCommonData->xD8)
             {
                 var_r29 = 0x6F;
             } else {

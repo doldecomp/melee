@@ -177,10 +177,10 @@ static inline s32 ftYs_SpecialS_CheckButtonPressure(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attrs = fp->dat_attrs;
     s32 result = 0;
-    if (fp->x673 < attrs->x98) {
+    if (fp->lstick_x_active_sticky < attrs->x98) {
         result = 1;
     }
-    fp->x673 = 0;
+    fp->lstick_x_active_sticky = 0;
     return result;
 }
 
@@ -327,10 +327,10 @@ void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
         s32 var_r5 = 0;
         Fighter* fp2 = GET_FIGHTER(gobj);
         ftYoshiAttributes* attrs2 = fp2->dat_attrs;
-        if (fp2->x673 < attrs2->x98) {
+        if (fp2->lstick_x_active_sticky < attrs2->x98) {
             var_r5 = 1;
         }
-        fp2->x673 = 0;
+        fp2->lstick_x_active_sticky = 0;
         if (var_r5 == 1) {
             fp->mv.ys.specials.x1C *= attributes->x68;
         }

@@ -414,8 +414,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     fp->mv.co.damage.x4 = should_collide;
     fp->mv.co.damage.x19 = 0;
     fp->hitlag_cb = ftCo_Damage_OnEveryHitlag;
-    fp->x670_timer_lstick_tilt_x = 0xFE;
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->lstick_x_active_timer = 0xFE;
+    fp->lstick_y_active_timer = 0xFE;
     fp->post_hitlag_cb = ftCo_Damage_OnExitHitlag;
     fp->dmg.x18A8 = fp->dmg.kb_applied;
     fp->x221C_b6 = true;
@@ -501,8 +501,8 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
     if (fp->allow_sdi &&
         VEC2_SQ_LEN(fp->input.lstick[0]) >=
             SQ(p_ftCommonData->sdi_min_stick_mag) &&
-        (fp->x670_timer_lstick_tilt_x < p_ftCommonData->sdi_stick_window ||
-         fp->x671_timer_lstick_tilt_y < p_ftCommonData->sdi_stick_window))
+        (fp->lstick_x_active_timer < p_ftCommonData->sdi_stick_window ||
+         fp->lstick_y_active_timer < p_ftCommonData->sdi_stick_window))
     {
         float scaled_lstick_x =
             fp->input.lstick[0].x * p_ftCommonData->sdi_pos_scale;
@@ -510,8 +510,8 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
             fp->input.lstick[0].y * p_ftCommonData->sdi_pos_scale;
         fp->cur_pos.x += scaled_lstick_x;
         fp->cur_pos.y += scaled_lstick_y;
-        fp->x670_timer_lstick_tilt_x = 254;
-        fp->x671_timer_lstick_tilt_y = 254;
+        fp->lstick_x_active_timer = 254;
+        fp->lstick_y_active_timer = 254;
         pl_800401F0(fp->player_id, fp->is_sub_fighter, scaled_lstick_x,
                     scaled_lstick_y);
     }

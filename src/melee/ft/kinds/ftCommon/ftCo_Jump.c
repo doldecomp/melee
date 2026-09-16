@@ -31,7 +31,7 @@ ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->input.lstick[0].y >= p_ftCommonData->tap_jump_threshold) &&
-        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
+        (fp->lstick_y_active_timer < p_ftCommonData->tap_jump_window))
     {
         return JumpInput_LStick;
     }
@@ -69,7 +69,7 @@ bool fn_800CAF78(Fighter_GObj* gobj)
 
     if ((fp->input.lstick[0].y >=
          p_ftCommonData->relaxed_tap_jump_threshold) &&
-        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
+        (fp->lstick_y_active_timer < p_ftCommonData->tap_jump_window))
     {
         ftCo_KneeBend_Enter(gobj, JumpInput_LStick);
         return true;
@@ -140,7 +140,7 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mul)
         fp->self_vel.x = h_vel;
     }
 
-    fp->x671_timer_lstick_tilt_y = 0xFE;
+    fp->lstick_y_active_timer = 0xFE;
     if (arg1) {
         ft_800881D8(fp, fp->ft_data->x4C_sfx->x10, SFX_VOLUME_MAX,
                     SFX_PAN_MID);

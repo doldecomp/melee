@@ -54,7 +54,7 @@ static bool checkLStick(Fighter* fp)
     if (fp->input.pressed_buttons & HSD_PAD_A &&
         ABS(fp->input.lstick[0].x) >=
             p_ftCommonData->dash_smash_stick_threshold &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
+        fp->lstick_x_active_timer < p_ftCommonData->dash_smash_window)
     {
         return true;
     }

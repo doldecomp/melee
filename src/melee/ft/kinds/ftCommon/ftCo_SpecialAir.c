@@ -43,7 +43,7 @@ bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
         if (ftData_SpecialAirN[fp->kind] == NULL) {
             return false;
         }
-        if (fp->x676_x < p_ftCommonData->x224 &&
+        if (fp->lstick_x_active_duration < p_ftCommonData->x224 &&
             ((fp->facing_dir == -1 && fp->x2228_b7 == 1) ||
              (fp->facing_dir == +1 && fp->x2228_b7 == 0)))
         {

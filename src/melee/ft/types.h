@@ -1409,20 +1409,19 @@ struct Fighter {
         /*  fp+66C */ HSD_Pad
             released_buttons; ///< buttons released this frame
     } input;
-    /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
-    /*  fp+671 */ u8 x671_timer_lstick_tilt_y;
-    // How much time has passed since the analog trigger became non 0
-    // used at the very least for powershield detection
-    /*  fp+672 */ u8 trigger_analog_timer;
-    /*  fp+673 */ u8 x673;
-    /*  fp+674 */ u8 x674;
-    /*  fp+674 */ u8 x675;
-    /*  fp+676 */ u8 x676_x;
-    /*  fp+677 */ u8 x677_y;
-    /*  fp+678 */ u8 x678;
-    /*  fp+679 */ u8 x679_x;
-    /*  fp+67A */ u8 x67A_y;
-    /*  fp+67B */ u8 x67B;
+    // input timers for crossing the "smash" thresholds/deadzones
+    /*  fp+670 */ u8 lstick_x_active_timer;
+    /*  fp+671 */ u8 lstick_y_active_timer;
+    /*  fp+672 */ u8 trigger_active_timer;
+    /*  fp+673 */ u8 lstick_x_active_sticky;
+    /*  fp+674 */ u8 lstick_y_active_sticky;
+    /*  fp+675 */ u8 trigger_active_sticky;
+    /*  fp+676 */ u8 lstick_x_active_duration;
+    /*  fp+677 */ u8 lstick_y_active_duration;
+    /*  fp+678 */ u8 trigger_active_duration;
+    /*  fp+679 */ u8 lstick_x_activity_timer;
+    /*  fp+67A */ u8 lstick_y_activity_timer;
+    /*  fp+67B */ u8 trigger_activity_timer;
     /*  fp+67C */ u8 x67C;
     /*  fp+67D */ u8 x67D;
     /*  fp+67E */ u8 x67E;
