@@ -483,7 +483,7 @@ u32* gmMainLib_8015D438(u8 arg0)
 
 s32* gmMainLib_8015D450(u8 arg0)
 {
-    return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
+    return &gmMainLib_8015EDBC()->x4C[arg0];
 }
 
 bool gmMainLib_8015D48C(u8 arg0)
@@ -614,12 +614,10 @@ u32* gmMainLib_8015D804(s32 arg0)
 
 s32 gmMainLib_8015D818(u32 arg0)
 {
-    u8 _[40];
+    u8 _[32];
 
     if (gmMainLib_8015D94C(arg0) == 0) {
-        struct GmCardData* base = &gmMainLib_804D3EE0->thing;
-        u32* q = &base->save_data.x1B80[arg0];
-        *q = lbTime_GetTimeInSeconds();
+        *gmMainLib_8015D804(arg0) = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
         gmMainLib_8015D8FC(arg0);
         return 1;
@@ -665,7 +663,6 @@ u32* gmMainLib_8015D970(ssize_t idx)
     return &trophies->times[idx];
 }
 
-/// https://decomp.me/scratch/CJy8X
 bool gmMainLib_8015D984(u32 arg0)
 {
     PAD_STACK(8);
@@ -1013,7 +1010,8 @@ void gmMainLib_8015EEC8(void)
         struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }
-    memzero(&gmMainLib_GetCardData()->save_data.x1A68, 0xD8);
+    memzero(&gmMainLib_GetCardData()->save_data.x1A68,
+            offsetof(GmSaveData, x1B40) - offsetof(GmSaveData, x1A68));
 }
 
 void gmMainLib_8015EF30(struct gm_stats* stats)
@@ -1108,21 +1106,7 @@ void gmMainLib_8015F260(void)
     PAD_STACK(16);
 
     for (i = 0; i < 120; i++) {
-        struct NameTagData* data;
-        struct NameTagDataBank* bank;
-
-        int j;
-        bank = gmMainLib_804D3EE0->thing.nametag_banks;
-        data = &bank[(u8) i / 19].inner[(u8) i % 19];
-
-        for (j = 0; j < 120; j++) {
-            data->vs_kos[j] = 0;
-        }
-        gmMainLib_8015EF30(&data->stats);
-        for (j = 0; j < 25; j++) {
-            data->play_time_by_fighter[j] = 0;
-        }
-        data->x1A2 = 5;
+        InitializePersistentNameData(i);
     }
 }
 
@@ -1143,7 +1127,7 @@ void gmMainLib_8015F4BC(void)
 
 u32 gmMainLib_8015F4E8(void)
 {
-    return GetRumbleSettingOfPort(5);
+    return gmMainLib_GetGamePrefs()->deflicker;
 }
 
 void gmMainLib_8015F4F4(u8 arg0)
@@ -1153,48 +1137,26 @@ void gmMainLib_8015F4F4(u8 arg0)
 
 void gmMainLib_8015F500(void)
 {
-    GXRenderModeObj* var_r0;
-    GXRenderModeObj* var_r3;
+    GXRenderModeObj* mode;
 
     if (gmMainLib_8046B0F0.progressive) {
-        if (gmMainLib_8015F4E8() != 0) {
-            var_r0 = &gmMainLib_803D4A80;
-        } else {
-            var_r0 = &GXNtsc480Prog;
-        }
-        var_r3 = var_r0;
+        mode = gmMainLib_8015F4E8() ? &gmMainLib_803D4A80 : &GXNtsc480Prog;
     } else {
-        if (gmMainLib_8015F4E8() != 0) {
-            var_r0 = &GXNtsc480IntDf;
-        } else {
-            var_r0 = &GXNtsc480Int;
-        }
-        var_r3 = var_r0;
+        mode = gmMainLib_8015F4E8() ? &GXNtsc480IntDf : &GXNtsc480Int;
     }
-    HSD_VISetConfigure(var_r3);
+    HSD_VISetConfigure(mode);
 }
 
-void gmMainLib_8015F588(bool arg0)
+void gmMainLib_8015F588(bool deflicker)
 {
-    GXRenderModeObj* var_r0;
-    GXRenderModeObj* var_r3;
+    GXRenderModeObj* mode;
 
     if (gmMainLib_8046B0F0.progressive) {
-        if (arg0) {
-            var_r0 = &gmMainLib_803D4A80;
-        } else {
-            var_r0 = &GXNtsc480Prog;
-        }
-        var_r3 = var_r0;
+        mode = deflicker ? &gmMainLib_803D4A80 : &GXNtsc480Prog;
     } else {
-        if (arg0) {
-            var_r0 = &GXNtsc480IntDf;
-        } else {
-            var_r0 = &GXNtsc480Int;
-        }
-        var_r3 = var_r0;
+        mode = deflicker ? &GXNtsc480IntDf : &GXNtsc480Int;
     }
-    HSD_VISetConfigure(var_r3);
+    HSD_VISetConfigure(mode);
 }
 
 static s8 gmMainLib_804D3EE4[] = { 0 };
@@ -1207,7 +1169,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
 
-        memzero(&gmMainLib_804D3EE0->thing.save_data.trophy_count, 0x25C);
+        memzero(&gmMainLib_804D3EE0->thing.save_data.trophy_count,
+                offsetof(GmSaveData, x1F2C) -
+                    offsetof(GmSaveData, trophy_count));
         Toy_80311960();
 
         if (arg1 == 0) {
@@ -1230,7 +1194,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             lbLang_SetSavedLanguage(lang);
         }
 
-        memzero(&gmMainLib_804D3EE0->thing, 0x448);
+        memzero(&gmMainLib_804D3EE0->thing, offsetof(GmSaveData, x1CB0));
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
@@ -1323,7 +1287,7 @@ void gmMainLib_8015FBA4(void)
 {
     int i;
 
-    memzero(gmMainLib_804D3EE0, 0x10A30);
+    memzero(gmMainLib_804D3EE0, sizeof(*gmMainLib_804D3EE0));
     if (DVDConvertPathToEntrynum("/usa.ini") != -1) {
         lbLang_SetLanguageSetting(1);
         lbLang_SetSavedLanguage(1);

@@ -47,7 +47,6 @@
 /* 15CF70 */ void gmMainLib_8015CF70(s32, s32);
 /* 15CF84 */ void gmMainLib_8015CF84(void);
 /* 15CF94 */ bool gmMainLib_8015CF94(void);
-/* 15CFAC */ s32 func_8015CFAC(void);
 /* 15CFB4 */ s8* gmMainLib_8015CFB4(u8);
 /* 15CFCC */ s32 gmMainLib_8015CFCC(u8);
 /* 15D00C */ void gmMainLib_8015D00C(u8);

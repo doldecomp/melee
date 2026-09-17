@@ -6,6 +6,7 @@
 #include "inlines.h"
 #include "mnmain.h"
 #include "types.h"
+#include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
@@ -27,9 +28,6 @@ void mnDeflicker_8024A3E8(HSD_GObj* gobj);
 void mnDeflicker_8024A4BC(HSD_GObj* arg0);
 void mnDeflicker_8024A6C4(HSD_GObj* arg0);
 
-void gmMainLib_8015F4F4(u8);
-void gmMainLib_8015F588(u8);
-u8 gmMainLib_8015F4E8(void);
 void lbCardGame_SaveChanges(void);
 
 unsigned char mnDeflicker_804D6C3C;
@@ -59,7 +57,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 2, 3);
     } else if (mnDeflicker_804D6C3C && (events & MenuInput_AButton)) {
-        unsigned char x;
+        u32 x;
         PAD_STACK(4);
         sfxMove();
         menu->cursor = (menu->cursor == 0);
