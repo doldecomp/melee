@@ -21,19 +21,19 @@
 /// Orphaned data strings from original ROM
 static char lbl_803F9780[] = "ScInfStc_scene_models";
 
-/// Stock-loss effect models: the primary model spawned when a player loses a
-/// stock, and the secondary one it spawns once its animation passes frame 12.
-struct StockLossSlot {
-    HSD_GObj* primary;
-    HSD_GObj* secondary;
+/// The GObjs one player slot has spawned from ScInfStc_scene_models.
+struct ScInfStcSlot {
+    HSD_GObj* gobj;  ///< spawned when a KO is recorded
+    HSD_GObj* gobj2; ///< spawned by gobj's proc once it passes frame 12
 };
 
-struct StockLossModels {
-    DynamicModelDesc** scene_models; ///< ScInfStc_scene_models
-    struct StockLossSlot slots[6];
+/// ScInfStc_scene_models, plus the GObjs spawned from it per player slot.
+struct ScInfStcModels {
+    DynamicModelDesc** scene_models;
+    struct ScInfStcSlot slots[6];
 };
 
-static struct StockLossModels stock_loss_models;
+static struct ScInfStcModels scinfstc_models;
 
 s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 {
@@ -141,14 +141,14 @@ found:
 void fn_802F75D4(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    struct StockLossModels* models;
+    struct ScInfStcModels* models;
     s32 i;
 
     if (lb_8000B09C(jobj) == 0) {
-        models = &stock_loss_models;
+        models = &scinfstc_models;
         for (i = 0; i < 6; i++) {
-            if (models->slots[i].primary == gobj) {
-                models->slots[i].primary = NULL;
+            if (models->slots[i].gobj == gobj) {
+                models->slots[i].gobj = NULL;
                 break;
             }
         }
@@ -161,14 +161,14 @@ void fn_802F75D4(HSD_GObj* gobj)
 void fn_802F7670(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    struct StockLossModels* models;
+    struct ScInfStcModels* models;
     s32 i;
 
     if (lb_8000B09C(jobj) == 0) {
-        models = &stock_loss_models;
+        models = &scinfstc_models;
         for (i = 0; i < 6; i++) {
-            if (models->slots[i].secondary == gobj) {
-                models->slots[i].secondary = NULL;
+            if (models->slots[i].gobj2 == gobj) {
+                models->slots[i].gobj2 = NULL;
                 break;
             }
         }
@@ -178,13 +178,13 @@ void fn_802F7670(HSD_GObj* gobj)
     }
 }
 
-/// Slot whose primary model is @p gobj, or -1.
-static inline s32 GetPrimarySlot(HSD_GObj* gobj)
+/// Slot whose first GObj is @p gobj, or -1.
+static inline s32 GetSlot(HSD_GObj* gobj)
 {
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        if (stock_loss_models.slots[i].primary == gobj) {
+        if (scinfstc_models.slots[i].gobj == gobj) {
             return i;
         }
     }
@@ -194,7 +194,7 @@ static inline s32 GetPrimarySlot(HSD_GObj* gobj)
 void fn_802F770C(HSD_GObj* gobj, int callback)
 {
     HudIndex* status = ifStatus_GetHUDInfo();
-    s32 slot = GetPrimarySlot(gobj);
+    s32 slot = GetSlot(gobj);
 
     if (!status->players[slot].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, callback);
@@ -203,7 +203,7 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
 
 HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 {
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     HSD_JObj* jobj;
     Vec3* pos;
     HSD_JObj* j;
@@ -243,7 +243,7 @@ void fn_802F7994(HSD_GObj* gobj)
     s32 slot;
     HSD_GObj** gobjp;
     HSD_JObj* jobj;
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 idx;
     f32 frame;
 
@@ -251,20 +251,20 @@ void fn_802F7994(HSD_GObj* gobj)
 
     jobj = gobj->hsd_obj;
     frame = lbGetJObjCurrFrame(jobj);
-    slot = GetPrimarySlot(gobj);
+    slot = GetSlot(gobj);
 
     if (slot >= 0) {
-        if (frame > 12.0f && models->slots[slot].secondary == NULL) {
+        if (frame > 12.0f && models->slots[slot].gobj2 == NULL) {
             idx = (u8) slot;
-            gobjp = &models->slots[(u8) slot].primary - 1;
-            models->slots[idx].secondary =
+            gobjp = &models->slots[(u8) slot].gobj - 1;
+            models->slots[idx].gobj2 =
                 fn_802F77F8(*(gobjp += 2), (u8) slot, 1);
-            if (models->slots[idx].secondary != NULL) {
+            if (models->slots[idx].gobj2 != NULL) {
                 HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7670, 0x11);
             }
         }
         if (lb_8000B09C(jobj) == 0) {
-            models->slots[slot].primary = NULL;
+            models->slots[slot].gobj = NULL;
             HSD_GObjFree(gobj);
         } else {
             HSD_JObjAnimAll(jobj);
@@ -272,120 +272,120 @@ void fn_802F7994(HSD_GObj* gobj)
     }
 }
 
-/// (Re)spawns the primary model of @p slot with animation @p anim.
-/// @todo The spawn sites point one entry before the slot's model and
+/// (Re)spawns the first GObj of @p slot with animation @p anim.
+/// @todo The spawn sites point one entry before the slot's GObj and
 /// pre-increment onto it; a direct pointer allocates differently.
-static inline void SpawnPrimary(s32 slot, u16 anim, HSD_GObjEvent proc)
+static inline void SpawnGObj(s32 slot, u16 anim, HSD_GObjEvent proc)
 {
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     u8 idx = slot;
-    HSD_GObj** gobjp = &models->slots[idx].primary - 1;
+    HSD_GObj** gobjp = &models->slots[idx].gobj - 1;
 
-    models->slots[idx].primary = fn_802F77F8(*++gobjp, idx, anim);
-    if (models->slots[idx].primary != NULL) {
+    models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, anim);
+    if (models->slots[idx].gobj != NULL) {
         HSD_GObj_SetupProc(*gobjp, proc, 0x11);
     }
 }
 
 void if_802F7AF8(s32 slot)
 {
-    struct StockLossModels* models = &stock_loss_models;
-    struct StockLossSlot* slots;
+    struct ScInfStcModels* models = &scinfstc_models;
+    struct ScInfStcSlot* slots;
     s32 slot2 = Player_80036428(slot);
     s32 idx;
     HSD_GObj* result;
 
     idx = (u8) slot;
-    result = fn_802F77F8(models->slots[idx].primary, (u8) slot, 1);
+    result = fn_802F77F8(models->slots[idx].gobj, (u8) slot, 1);
     slots = models->slots;
-    slots[idx].primary = result;
-    if (slots[idx].primary != NULL) {
-        HSD_GObj_SetupProc(models->slots[idx].primary,
+    slots[idx].gobj = result;
+    if (slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(models->slots[idx].gobj,
                            (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
     idx = (u8) slot2;
-    result = fn_802F77F8(models->slots[idx].primary, (u8) slot2, 2);
-    slots[idx].primary = result;
-    if (slots[idx].primary != NULL) {
-        HSD_GObj_SetupProc(models->slots[idx].primary,
+    result = fn_802F77F8(models->slots[idx].gobj, (u8) slot2, 2);
+    slots[idx].gobj = result;
+    if (slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(models->slots[idx].gobj,
                            (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
 void if_802F7BB4(s32 player_idx)
 {
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     u8 idx = player_idx;
-    HSD_GObj** gobjp = &models->slots[idx].primary - 1;
+    HSD_GObj** gobjp = &models->slots[idx].gobj - 1;
 
-    models->slots[idx].primary = fn_802F77F8(*++gobjp, idx, 1);
-    if (models->slots[idx].primary != NULL) {
+    models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 1);
+    if (models->slots[idx].gobj != NULL) {
         HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
 void if_802F7C30(s32 slot)
 {
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 ret = gm_8016AEC8();
     u8 idx;
     HSD_GObj** gobjp;
 
     if (ret == -2) {
         idx = slot;
-        gobjp = &models->slots[idx].primary - 1;
-        models->slots[idx].primary = fn_802F77F8(*++gobjp, idx, 0);
-        if (models->slots[idx].primary != NULL) {
+        gobjp = &models->slots[idx].gobj - 1;
+        models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
+        if (models->slots[idx].gobj != NULL) {
             HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     } else if (ret == -1) {
-        SpawnPrimary(slot, 1, (HSD_GObjEvent) fn_802F75D4);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
     }
 }
 
 void if_802F7D08(s32 slot)
 {
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 ret = gm_8016AEC8();
     u8 idx;
     HSD_GObj** gobjp;
 
     if (ret == -2) {
         idx = slot;
-        gobjp = &models->slots[idx].primary - 1;
-        models->slots[idx].primary = fn_802F77F8(*++gobjp, idx, 0);
-        if (models->slots[idx].primary != NULL) {
+        gobjp = &models->slots[idx].gobj - 1;
+        models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
+        if (models->slots[idx].gobj != NULL) {
             HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else if (ret == -1) {
-        SpawnPrimary(slot, 1, (HSD_GObjEvent) fn_802F7994);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F7994);
     } else {
-        SpawnPrimary(slot, 1, (HSD_GObjEvent) fn_802F75D4);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
     }
 }
 
 void if_802F7E24(void)
 {
-    memzero(&stock_loss_models, sizeof(stock_loss_models));
+    memzero(&scinfstc_models, sizeof(scinfstc_models));
     lbArchive_LoadSections(*ifAll_GetArchive(),
-                           (void**) &stock_loss_models.scene_models,
+                           (void**) &scinfstc_models.scene_models,
                            lbl_803F9780, 0);
 }
 
 void if_802F7E7C(void)
 {
     s32 i;
-    struct StockLossModels* models = &stock_loss_models;
+    struct ScInfStcModels* models = &scinfstc_models;
 
     for (i = 0; i < 6; i++) {
-        if (models->slots[i].primary != NULL) {
-            HSD_GObjFree(models->slots[i].primary);
+        if (models->slots[i].gobj != NULL) {
+            HSD_GObjFree(models->slots[i].gobj);
         }
-        if (models->slots[i].secondary != NULL) {
-            HSD_GObjFree(models->slots[i].secondary);
+        if (models->slots[i].gobj2 != NULL) {
+            HSD_GObjFree(models->slots[i].gobj2);
         }
     }
 
-    memzero(models, sizeof(stock_loss_models));
+    memzero(models, sizeof(scinfstc_models));
 }
