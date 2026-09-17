@@ -5677,7 +5677,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     j0_r9 = &groundCollJoint[joint_id0];
     j1_r10 = &groundCollJoint[joint_id1];
     line_base = groundCollLine;
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < MapLineGroup_Count; i++) {
         struct MapLineRange* pair; /* r4 */
         int count;                 /* r0 */
         int temp;                  /* r0 */
@@ -5754,7 +5754,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
             }
 
             // find every line with the first vert
-            for (var_r25 = 0; var_r25 < 5; var_r25++) {
+            for (var_r25 = 0; var_r25 < MapLineGroup_Count; var_r25++) {
                 int lstart_r24;
                 int i_r23;
                 int lcount_r22;
@@ -5768,7 +5768,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                         s16 lcount_r17;
                         // if the first vert is that line's v0
                         // find every line with the second vert as v1
-                        for (j = 0; j < 5; j++) {
+                        for (j = 0; j < MapLineGroup_Count; j++) {
                             int k;
                             lcount_r17 = j1_r10->inner->lines[j].count;
                             (void)
@@ -5791,7 +5791,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                         s16 lcount_r17;
                         // else if the first vert is that line's v1
                         // find every line with the second vert as v0
-                        for (j = 0; j < 5; j++) {
+                        for (j = 0; j < MapLineGroup_Count; j++) {
                             int k;
                             lcount_r17 = j1_r10->inner->lines[j].count;
                             (void)

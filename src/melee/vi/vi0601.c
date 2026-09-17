@@ -99,8 +99,8 @@ void un_8031E9B8(void)
             if ((gobj = grCorneria_801E1BF0())->hsd_obj == NULL) {
                 child = NULL;
             } else {
-                child = gobj->hsd_obj;
-                child = child->child;
+                jobj = gobj->hsd_obj;
+                child = jobj->child;
             }
             HSD_GObj_SetupProc(gobj, fn_8031E800, 2);
             gm_8016895C(child, un_804D6FB0->models[i], 0);
