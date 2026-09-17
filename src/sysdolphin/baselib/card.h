@@ -327,7 +327,5 @@ typedef enum CardActiveType {
                               CardCallback callback);
 /* 3B2ADC */ int hsd_SetCardIconInfo(CardState* state,
                                      CardIconInfo* icon_info);
-/* 3B2FA0 */ int hsd_803B2FA0(u8* data, int len);
-/* 3B31CC */ int hsd_803B31CC(u8* data, int len);
 
 #endif
