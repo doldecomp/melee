@@ -416,25 +416,31 @@ struct gmm_x0_vsdata {
     struct EventData unk_530;
 };
 
+#define GM_VSMODE_COUNT 15
+
 struct gmm_x0_vsmodes {
     /* 0x0588 */ s8 nametags[PAD_MAX_CONTROLLERS];
-    /// @todo Maybe array of ::VsModeData with kind-index
-    /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
-    /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
-    /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
-    /* 0x0950 */ VsModeData vs_camera;
-    /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
-    /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
-    /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
-    /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490;        ///< multiman, 3/15 min, endless,
-                                             ///< cruel
-    /* 0x15D0 */ VsModeData unk_15D0;        ///< unused?
-    /* 0x1710 */ VsModeData unk_1710;        ///< opening movie?
+    union {
+        struct {
+            /* 0x0590 */ VsModeData vs_melee;     ///< VS melee
+            /* 0x06D0 */ VsModeData unk_6D0;      ///< super sudden death
+            /* 0x0810 */ VsModeData vs_invisible; ///< invisible melee
+            /* 0x0950 */ VsModeData vs_camera;
+            /* 0x0A90 */ VsModeData vs_fixed_camera; ///< fixed camera mode
+            /* 0x0BD0 */ VsModeData unk_BD0;         ///< single button melee
+            /* 0x0D10 */ VsModeData unk_D10;         ///< training mode
+            /* 0x0E50 */ VsModeData unk_E50;         ///< tiny melee
+            /* 0x0F90 */ VsModeData unk_F90;         ///< giant melee
+            /* 0x10D0 */ VsModeData vs_stamina;      ///< stamina melee
+            /* 0x1210 */ VsModeData unk_1210;        ///< slowmo melee
+            /* 0x1350 */ VsModeData vs_lightning;    ///< lightning melee
+            /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless,
+                                              ///< cruel
+            /* 0x15D0 */ VsModeData unk_15D0; ///< unused?
+            /* 0x1710 */ VsModeData unk_1710; ///< opening movie?
+        };
+        /* 0x0590 */ VsModeData table[GM_VSMODE_COUNT];
+    };
 };
 
 struct gmm_x0 {

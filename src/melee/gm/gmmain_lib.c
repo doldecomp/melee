@@ -836,11 +836,7 @@ SetPlayerHandicaps(struct PlayerInitData* p0, struct PlayerInitData* p1,
 
 void gmMainLib_8015EA80(void)
 {
-    struct gmMainLib_8015EA80_modes {
-        u8 pad[8];
-        VsModeData modes[13];
-    }* data =
-        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->modes.nametags;
+    struct gmm_x0_vsmodes* modes = &gmMainLib_804D3EE0->modes;
     struct PlayerInitData* players;
     s32 i;
 
@@ -848,12 +844,12 @@ void gmMainLib_8015EA80(void)
 
     gmMainLib_8015CDEC();
     for (i = 0; i < 6; i++) {
-        players = data->modes[i].start.players;
+        players = modes->table[i].start.players;
         SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
                            &players[4], &players[5]);
     }
     for (i = 7; i < 13; i++) {
-        players = data->modes[i].start.players;
+        players = modes->table[i].start.players;
         SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
                            &players[4], &players[5]);
     }
