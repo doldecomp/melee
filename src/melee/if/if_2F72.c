@@ -35,9 +35,6 @@ struct StockLossModels {
 
 static struct StockLossModels stock_loss_models;
 
-/// @todo The spawn sites point one entry before the slot's model and
-/// pre-increment onto it; a direct pointer allocates differently.
-
 s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -276,6 +273,8 @@ void fn_802F7994(HSD_GObj* gobj)
 }
 
 /// (Re)spawns the primary model of @p slot with animation @p anim.
+/// @todo The spawn sites point one entry before the slot's model and
+/// pre-increment onto it; a direct pointer allocates differently.
 static inline void SpawnPrimary(s32 slot, u16 anim, HSD_GObjEvent proc)
 {
     struct StockLossModels* models = &stock_loss_models;
