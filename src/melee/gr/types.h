@@ -1493,19 +1493,19 @@ struct grBigBlueRoute_GroundVars2 {
     /* +14 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
 };
 
-/// Ground vars of the object at #grCs_StageCallbacks slot 2.
+/// Ground vars of the object at grCs_StageCallbacks slot 2.
 struct grCastle_GroundVars {
     /* +00 gp+C4 */ u32 xC4;
     /* +04 gp+C8 */ s16 xC8;
 };
 
-/// Ground vars of the object at #grCs_StageCallbacks slot 1.
+/// Ground vars of the object at grCs_StageCallbacks slot 1.
 struct grCastle_GroundVars2 {
     /* +00 gp+C4 */ Item_GObj* xC4;
     /* +04 gp+C8 */ CmSubject* xC8;
 };
 
-/// Ground vars of the objects at #grCs_StageCallbacks slots 18..20.
+/// Ground vars of the objects at grCs_StageCallbacks slots 18..20.
 struct grCastle_GroundVars7 {
     /* +00 gp+C4 */ s16 xC4;
     /* +02 gp+C6 */ u8 pad_xC6[2];
@@ -1530,7 +1530,7 @@ struct grCastle_GroundVars8 {
     /* +00 gp+C4 */ struct grCastle_Platform plat[2];
 };
 
-/// Ground vars of the object at #grCs_StageCallbacks slot 3, which tracks the
+/// Ground vars of the object at grCs_StageCallbacks slot 3, which tracks the
 /// three slot-18..20 gobjs and the flag dynamics.
 struct grCastle_GroundVars9 {
     /* +00   gp+C4 */ HSD_GObj* xC4[3];
@@ -1544,7 +1544,7 @@ struct grCastle_GroundVars9 {
     /* +1C   gp+E0 */ DynamicsDesc dynamics[12];
 };
 
-/// Ground vars of the objects at #grCs_StageCallbacks slots 5, 7 and 17.
+/// Ground vars of the objects at grCs_StageCallbacks slots 5, 7 and 17.
 struct grCastle_GroundVars10 {
     /* +00 gp+C4 */ s16 xC4;
     /* +02 gp+C6 */ u8 pad_C6[2];
@@ -1562,7 +1562,7 @@ struct grCastle_GroundVars10 {
     /* +7C gp+140 */ f32 baseY[5];
 };
 
-/// Ground vars of the objects at #grCs_StageCallbacks slots 8..16.
+/// Ground vars of the objects at grCs_StageCallbacks slots 8..16.
 struct grCastle_GroundVars11 {
     /* +00 gp+C4 */ struct {
         u8 b0 : 1;
