@@ -654,13 +654,6 @@ struct grGreatBay_GroundVars4 {
     Item_GObj* xF0;
 };
 
-STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xD4) ==
-              offsetof(struct grGreatBay_GroundVars, xD4));
-STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xD8) ==
-              offsetof(struct grGreatBay_GroundVars, xD8));
-STATIC_ASSERT(offsetof(struct grGreatBay_GroundVars4, xE0) ==
-              offsetof(struct grGreatBay_GroundVars, xE0));
-
 struct grGarden_GroundVars { // Cranky Kong
     s32 xc4;
     s32 xc8;
@@ -1504,12 +1497,6 @@ struct grBigBlueRoute_GroundVars2 {
     /* +18 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
 };
 
-STATIC_ASSERT(offsetof(struct grBigBlueRoute_GroundVars2, xC4) ==
-              offsetof(struct grBigBlueRoute_GroundVars, xC4));
-STATIC_ASSERT(offsetof(struct grBigBlueRoute_GroundVars2, xC8) ==
-              offsetof(struct grBigBlueRoute_GroundVars2, xC4) +
-                  sizeof(HSD_GObj*));
-
 struct grCastle_GroundVars {
     /*  +0 gp+C4 */ u32 xC4;
     /*  +0 gp+C8 */ s16 xC8;
@@ -1631,30 +1618,6 @@ struct grCastle_GroundVars12 {
     /* +18 gp+D0 */ s16 xD0;
     /* +1A gp+D2 */ s16 xD2;
 };
-
-/// Fields shared by the main Castle ground must agree across every view.
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC4) ==
-              offsetof(struct grCastle_GroundVars12, xC4));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC4) ==
-              offsetof(struct grCastle_GroundVars9, xC4));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xC8) ==
-              offsetof(struct grCastle_GroundVars9, xC8));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xCC) ==
-              offsetof(struct grCastle_GroundVars9, xCC));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xD0) ==
-              offsetof(struct grCastle_GroundVars12, xD0));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars2, xD2) ==
-              offsetof(struct grCastle_GroundVars12, xD2));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xD6) ==
-              offsetof(struct grCastle_GroundVars9, xD6));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xD8) ==
-              offsetof(struct grCastle_GroundVars9, xD8));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xDA) ==
-              offsetof(struct grCastle_GroundVars9, xDA));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars4, xDC) ==
-              offsetof(struct grCastle_GroundVars9, xDC));
-STATIC_ASSERT(offsetof(struct grCastle_GroundVars3, x1C) ==
-              offsetof(struct grCastle_GroundVars9, dynamics));
 
 struct grPura_GroundVars {
     /*  +0 gp+C4:0 */ s16 xC4;

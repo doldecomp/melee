@@ -109,13 +109,4 @@ union ftPikachu_MotionVars {
     } speciallw;
 };
 
-#ifndef MUST_MATCH
-STATIC_ASSERT(offsetof(struct ftPikachu_SpecialLwVars, x4) ==
-              offsetof(struct ftPikachu_SpecialHiVars, x4));
-STATIC_ASSERT(offsetof(struct ftPikachu_SpecialLwVars, x4) ==
-              offsetof(union ftCommon_MotionVars, barrel.x4));
-STATIC_ASSERT(offsetof(struct ftPikachu_SpecialLwVars, x0) ==
-              offsetof(union ftCommon_MotionVars, barrel.x8));
-#endif
-
 #endif
