@@ -754,6 +754,22 @@ int fn_803AA790(void)
     }
 }
 
+static inline s32 retryCardOpen(s32 chan, const char* filename,
+                                CARDFileInfo* file_info)
+{
+    s32 i;
+    s32 result;
+
+    for (i = 0; i < 10; i++) {
+        result = CARDOpen(chan, (char*) filename, file_info);
+        if (result != -1) {
+            break;
+        }
+    }
+
+    return result;
+}
+
 static inline s32 retryCardFastOpen(s32 chan, s32 file_no,
                                     CARDFileInfo* file_info)
 {
@@ -1024,7 +1040,7 @@ void hsd_803AAA48(void)
                 }
                 if (active_requests.callback != NULL) {
                     active_requests.callback(active_requests.callback_arg,
-                                         curr_result);
+                                             curr_result);
                 }
                 active_requests.type = CARD_ACTIVE_NONE;
             }
@@ -5283,33 +5299,16 @@ void hsd_803B24E4(CardState* state, int chan, int sector_size, void* work_buf)
     state->sector_buf = work_buf;
 }
 
-static inline s32 openWithRetry(s32 chan, const char* filename,
-                               CardState* state)
-{
-    s32 i;
-    s32 result;
-
-    for (i = 0; i < 10; i++) {
-        result = CARDOpen(chan, (char*) filename, &state->file_info);
-        if (result != -1) {
-            break;
-        }
-    }
-
-    return result;
-}
-
 int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
 {
-    s32 new_var;
+    s32 file_no_copy;
     s32 chan = state->chan;
-    s32 new_var3;
-    s32 new_var2;
-    s32 retries;
+    s32 i;
+    s32 file_no_copy2;
+    s32 write_idx;
     s32 result;
     s32 file_no;
-    new_var2 = chan;
-    result = openWithRetry(new_var2, filename, state);
+    result = retryCardOpen(chan, filename, &state->file_info);
 
     if (result < 0) {
         return result;
@@ -5324,15 +5323,13 @@ int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
             }
             result++;
         } while (result < 10);
-        file_no = state->file_info.fileNo;
-        retries = (new_var = (new_var3 = state->file_info.fileNo));
-        file_no = retries;
+        file_no = file_no_copy = file_no_copy2 = state->file_info.fileNo;
         if (tmp < 0) {
-            return new_var;
+            return file_no_copy;
         }
     }
 
-    for (chan = 0; chan < 10; chan++) {
+    for (i = 0; i < 10; i++) {
         if (CARDClose(&state->file_info) != -1) {
             break;
         }
@@ -5340,9 +5337,9 @@ int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
 
     {
         s32 read_idx = hsd_804D7990;
-        retries = hsd_804D7994;
+        write_idx = hsd_804D7994;
 
-        if (read_idx == retries) {
+        if (read_idx == write_idx) {
             if (requests[read_idx].type != CARD_REQ_NONE) {
                 return -265;
             }
@@ -5350,11 +5347,11 @@ int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
     }
 
     {
-        s32 next = retries + 1;
-        requests[retries].type = CARD_REQ_OPEN_FILE;
-        requests[retries].state = state;
-        requests[retries].open.file_no = file_no;
-        requests[retries].callback = callback;
+        s32 next = write_idx + 1;
+        requests[write_idx].type = CARD_REQ_OPEN_FILE;
+        requests[write_idx].state = state;
+        requests[write_idx].open.file_no = file_no;
+        requests[write_idx].callback = callback;
         hsd_804D7994 = next % 32;
     }
 
@@ -5429,7 +5426,6 @@ int hsd_803B27F4(CardState* state, void* comment, void* banner, void* icons,
 int hsd_803B286C(CardState* state, const char* filename, const char* comment,
                  void* banner, void* icons, CardCallback callback)
 {
-
     memcpy(state->comment, comment, 64);
 
     {
@@ -5457,7 +5453,6 @@ int hsd_803B286C(CardState* state, const char* filename, const char* comment,
 int hsd_803B2928(CardState* state, const char* comment, void* banner,
                  void* icons, CardCallback callback)
 {
-
     memcpy(state->comment, comment, 64);
 
     {
