@@ -32,13 +32,6 @@
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
 
-struct unkCastle {
-    /* 0x000 */ u8 _pad[0x10C];
-    /* 0x10C */ HSD_GObj* x10C[5];
-    /* 0x120 */ u8 _pad2[0x134 - 0x120];
-    /* 0x134 */ u8 x134[5];
-};
-
 /* 1CF750 */ static void grCastle_801CF750(void* user_data, int joint_id,
                                            CollData* coll, int coll_x50,
                                            mpLib_GroundEnum ground_kind,
@@ -1632,9 +1625,9 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                                     0, 2, gp, target, NULL,
                                     (void (*)(Item_GObj*, Ground*, Vec3*,
                                               HSD_GObj*,
-                                              f32))(Event) cb1.callbacks[i],
-                                    (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
-                                        Event) cb2.callbacks[i]);
+                                              f32)) cb1.callbacks[i],
+                                    (void (*)(Item_GObj*, Ground*,
+                                              HSD_GObj*)) cb2.callbacks[i]);
                                 grMaterial_801C8DE0(gp->u.castle10.x10C[i],
                                                     0.0f, 0.0f, 0.0f, 0.0f,
                                                     0.0f, 0.0f, 8.0f);
@@ -1739,77 +1732,77 @@ void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
     }
 }
 
-static inline void grCastle_801D0550_sub(unkCastle* arg0, s32 i)
+static inline void grCastle_801D0550_sub(Ground* gp, s32 i)
 {
-    arg0->x134[i] = 1;
-    grMaterial_801C8CDC(arg0->x10C[i]);
-    arg0->x10C[i] = NULL;
+    gp->u.castle10.state[i] = 1;
+    grMaterial_801C8CDC(gp->u.castle10.x10C[i]);
+    gp->u.castle10.x10C[i] = NULL;
     Ground_801C53EC(0x53020U);
 }
 
-void grCastle_801D0550(void* arg0, unkCastle* arg1)
+void grCastle_801D0550(Item_GObj* item, Ground* gp)
 {
     PAD_STACK(16);
-    grCastle_801D0550_sub(arg1, 0);
+    grCastle_801D0550_sub(gp, 0);
 }
 
-void grCastle_801D059C(void* arg0, unkCastle* arg1)
+void grCastle_801D059C(Item_GObj* item, Ground* gp)
 {
     PAD_STACK(16);
-    grCastle_801D0550_sub(arg1, 1);
+    grCastle_801D0550_sub(gp, 1);
 }
 
-void grCastle_801D05E8(void* arg0, unkCastle* arg1)
+void grCastle_801D05E8(Item_GObj* item, Ground* gp)
 {
     PAD_STACK(16);
-    grCastle_801D0550_sub(arg1, 2);
+    grCastle_801D0550_sub(gp, 2);
 }
 
-void grCastle_801D0634(void* arg0, unkCastle* arg1)
+void grCastle_801D0634(Item_GObj* item, Ground* gp)
 {
     PAD_STACK(16);
-    grCastle_801D0550_sub(arg1, 3);
+    grCastle_801D0550_sub(gp, 3);
 }
 
-void grCastle_801D0680(void* arg0, unkCastle* arg1)
+void grCastle_801D0680(Item_GObj* item, Ground* gp)
 {
     PAD_STACK(16);
-    grCastle_801D0550_sub(arg1, 4);
+    grCastle_801D0550_sub(gp, 4);
 }
 
-static void grCastle_801D06CC_sub(unkCastle* arg0, Ground_GObj* gobj, s32 i)
+static void grCastle_801D06CC_sub(Ground* gp, Ground_GObj* gobj, s32 i)
 {
     if (ftLib_80086960(gobj) || itGetKind(gobj) != It_PKind_Random) {
-        arg0->x134[i] = 1;
-        grMaterial_801C8CDC(arg0->x10C[i]);
-        arg0->x10C[i] = NULL;
+        gp->u.castle10.state[i] = 1;
+        grMaterial_801C8CDC(gp->u.castle10.x10C[i]);
+        gp->u.castle10.x10C[i] = NULL;
         Ground_801C53EC(0x53020U);
     }
 }
 
-void grCastle_801D06CC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
+void grCastle_801D06CC(Item_GObj* item, Ground* gp, Ground_GObj* gobj)
 {
-    grCastle_801D06CC_sub(arg1, gobj, 0);
+    grCastle_801D06CC_sub(gp, gobj, 0);
 }
 
-void grCastle_801D0744(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
+void grCastle_801D0744(Item_GObj* item, Ground* gp, Ground_GObj* gobj)
 {
-    grCastle_801D06CC_sub(arg1, gobj, 1);
+    grCastle_801D06CC_sub(gp, gobj, 1);
 }
 
-void grCastle_801D07BC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
+void grCastle_801D07BC(Item_GObj* item, Ground* gp, Ground_GObj* gobj)
 {
-    grCastle_801D06CC_sub(arg1, gobj, 2);
+    grCastle_801D06CC_sub(gp, gobj, 2);
 }
 
-void grCastle_801D0834(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
+void grCastle_801D0834(Item_GObj* item, Ground* gp, Ground_GObj* gobj)
 {
-    grCastle_801D06CC_sub(arg1, gobj, 3);
+    grCastle_801D06CC_sub(gp, gobj, 3);
 }
 
-void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
+void grCastle_801D08AC(Item_GObj* item, Ground* gp, Ground_GObj* gobj)
 {
-    grCastle_801D06CC_sub(arg1, gobj, 4);
+    grCastle_801D06CC_sub(gp, gobj, 4);
 }
 
 void fn_801D0924(HSD_GObj* gobj, int renderpass)
