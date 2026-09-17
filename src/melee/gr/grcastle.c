@@ -907,8 +907,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
 
                 {
                     Ground* parent =
-                        (Ground*) (parent_data =
-                                       gp3->u.castle11.xD4->user_data);
+                        (parent_data = gp3->u.castle11.xD4->user_data);
 
                     s32 rand;
                     s32 range;
@@ -1263,9 +1262,9 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 
 void grCastle_801CF308(Ground_GObj* gobj)
 {
+    Ground* user_data;
+    Ground* gp = (user_data = gobj->user_data);
     s32 var_r6 = 0;
-    Ground* user_data = gobj->user_data;
-    Ground* gp = (Ground*) gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     grCastle_BlinkTable tbl = grCs_803B7EC8;
     Ground* parent;
@@ -1404,7 +1403,8 @@ static inline void grCastle_ResetSatelliteTimer(Ground* gp)
 /// random map joint.
 static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
 {
-    u8 pad[52];
+    u8 pad[48];
+    Ground* entity_gp;
     grCastle_TargetTable targets;
     s32 total;
     s32 slot;
@@ -1443,7 +1443,8 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
         {
             s32 want = targets.e[idx].map_id;
             for (; entity != NULL; entity = entity->next) {
-                if ((s32) ((Ground*) entity->user_data)->map_id == want) {
+                entity_gp = entity->user_data;
+                if ((s32) entity_gp->map_id == want) {
                     break;
                 }
             }
@@ -1459,15 +1460,15 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
 void grCastle_801CF868(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
+    Ground* cur_gp;
     s32* wp;
 
     if ((gp->u.castle9.xC4[0] != NULL || gp->u.castle9.xC4[1] != NULL ||
          gp->u.castle9.xC4[2] != NULL) &&
         (gp->u.castle9.xD0 == -1 ||
          (gp->u.castle9.xC4[gp->u.castle9.xD0] != NULL &&
-          gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data != NULL &&
-          ((Ground*) gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data)
-                  ->u.castle7.xC4 == 0)))
+          (cur_gp = gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data) != NULL &&
+          cur_gp->u.castle7.xC4 == 0)))
     {
         gp->u.castle9.xD2 = gp->u.castle9.xD2 - 1;
         if (gp->u.castle9.xD2 < 0) {
