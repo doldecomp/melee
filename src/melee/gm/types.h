@@ -139,29 +139,35 @@ struct GamePrefs {
     /* +18 */ u32 stage_mask;
 };
 
+/// Match statistics shared by #FighterData and #NameTagData.
+struct gm_stats {
+    /* 0x00 */ u16 sd_count;
+    /* 0x02 */ u8 pad_2[2];
+    /* 0x04 */ u32 attacks_hit;
+    /* 0x08 */ u32 attacks_total;
+    /* 0x0C */ s32 damage_dealt;
+    /* 0x10 */ s32 damage_taken;
+    /* 0x14 */ s32 damage_recovered;
+    /* 0x18 */ u16 peak_damage;
+    /* 0x1A */ u16 match_count;
+    /* 0x1C */ u16 victories;
+    /* 0x1E */ u16 losses;
+    /* 0x20 */ u32 play_time;
+    /* 0x24 */ u32 total_player_count;
+    /* 0x28 */ s32 walk_distance;
+    /* 0x2C */ s32 run_distance;
+    /* 0x30 */ s32 fall_distance;
+    /* 0x34 */ s32 peak_height;
+    /* 0x38 */ s32 coins_collected;
+    /* 0x3C */ s32 coins_swiped;
+    /* 0x40 */ s32 coins_lost;
+};
+ASSERT_SIZE(struct gm_stats, 0x44);
+
 struct FighterData {
     /* 0x00 */ u16 fighter_kos[SELKIND_COUNT];
     /* 0x32 */ u8 padding_0x32[2];
-    /* 0x34 */ u16 sd_count;
-    /* 0x36 */ u8 padding_0x36[2];
-    /* 0x38 */ u32 attacks_hit;
-    /* 0x3C */ u32 attacks_total;
-    /* 0x40 */ s32 damage_dealt;
-    /* 0x44 */ s32 damage_taken;
-    /* 0x48 */ s32 damage_recovered;
-    /* 0x4C */ u16 peak_damage;
-    /* 0x4E */ u16 match_count;
-    /* 0x50 */ u16 victories;
-    /* 0x52 */ u16 losses;
-    /* 0x54 */ u32 play_time;
-    /* 0x58 */ u32 total_player_count;
-    /* 0x5C */ s32 walk_distance;
-    /* 0x60 */ s32 run_distance;
-    /* 0x64 */ s32 fall_distance;
-    /* 0x68 */ s32 peak_height;
-    /* 0x6C */ s32 coins_collected;
-    /* 0x70 */ s32 coins_swiped;
-    /* 0x74 */ s32 coins_lost;
+    /* 0x34 */ struct gm_stats stats;
     /* 0x78 */ s8 x78;
     /* 0x79 */ s8 x79;
     /* 0x7A */ UnkFlagStruct x7A;
@@ -198,26 +204,7 @@ struct FighterData {
 
 struct NameTagData {
     /* 0x000 */ u16 vs_kos[120];
-    /* 0x0F0 */ u16 sd_count;
-    /* 0x0F2 */ u8 padding_0xF2[2];
-    /* 0x0F4 */ u32 attacks_hit;
-    /* 0x0F8 */ u32 attacks_total;
-    /* 0x0FC */ s32 damage_dealt;
-    /* 0x100 */ s32 damage_taken;
-    /* 0x104 */ s32 damage_recovered;
-    /* 0x108 */ u16 peak_damage;
-    /* 0x10A */ u16 match_count;
-    /* 0x10C */ u16 victories;
-    /* 0x10E */ u16 losses;
-    /* 0x110 */ u32 play_time;
-    /* 0x114 */ u32 total_player_count;
-    /* 0x118 */ s32 walk_distance;
-    /* 0x11C */ s32 run_distance;
-    /* 0x120 */ s32 fall_distance;
-    /* 0x124 */ s32 peak_height;
-    /* 0x128 */ s32 coins_collected;
-    /* 0x12C */ s32 coins_swiped;
-    /* 0x130 */ s32 coins_lost;
+    /* 0x0F0 */ struct gm_stats stats;
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
@@ -539,29 +526,6 @@ struct VsSceneFighter {
 struct datetime {
     u16 year;
     u8 month, day, hour, minute, second;
-};
-
-struct gmMainLib_8015EF30_s {
-    /*  +0 */ s16 x0;
-    /*  +2 */ s16 x2;
-    /*  +4 */ s32 x4;
-    /*  +8 */ s32 x8;
-    /*  +C */ s32 xC;
-    /*  +10 */ s32 x10;
-    /*  +14 */ s32 x14;
-    /*  +18 */ s16 x18;
-    /*  +1A */ s16 x1A;
-    /*  +1C */ s16 x1C;
-    /*  +1E */ s16 x1E;
-    /*  +20 */ s32 x20;
-    /*  +24 */ s32 x24;
-    /*  +28 */ s32 x28;
-    /*  +2C */ s32 x2C;
-    /*  +30 */ s32 x30;
-    /*  +34 */ s32 x34;
-    /*  +38 */ s32 x38;
-    /*  +3C */ s32 x3C;
-    /*  +40 */ s32 x40;
 };
 
 struct gm_8017DB6C_arg0_t {

@@ -1080,29 +1080,6 @@ s32 fn_80161154(MatchEnd* arg0)
     }
 }
 
-struct gm_stats {
-    /* 0x00 */ u16 unk0;
-    /* 0x02 */ u8 pad2[2];
-    /* 0x04 */ u32 unk4;
-    /* 0x08 */ u32 unk8;
-    /* 0x0C */ u32 unkC;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u16 unk18;
-    /* 0x1A */ u16 unk1A;
-    /* 0x1C */ u16 unk1C;
-    /* 0x1E */ u16 unk1E;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u32 unk28;
-    /* 0x2C */ u32 unk2C;
-    /* 0x30 */ u32 unk30;
-    /* 0x34 */ u32 unk34;
-    /* 0x38 */ u32 unk38;
-    /* 0x3C */ u32 unk3C;
-    /* 0x40 */ u32 unk40;
-};
-
 static inline u32 fn_80161C90_count_players(MatchEnd* match_end)
 {
     u32 count = 0;
@@ -1116,31 +1093,36 @@ static inline u32 fn_80161C90_count_players(MatchEnd* match_end)
     return count;
 }
 
-void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
+void fn_80161C90(MatchEnd* arg0, int arg1, struct gm_stats* s)
 {
     MatchPlayerData* p = &arg0->player_standings[arg1];
-    struct gm_stats* s = (struct gm_stats*) arg2;
     u32 count;
     s32 flag;
     s32 i;
 
-    s->unk0 = (s->unk0 + p->self_destructs > 0xFFFF)
-                  ? 0xFFFF
-                  : s->unk0 + p->self_destructs;
-    s->unk4 =
-        (s->unk4 + p->x38 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk4 + p->x38;
-    s->unk8 =
-        (s->unk8 + p->x3C > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk8 + p->x3C;
-    s->unkC =
-        (s->unkC + p->x40 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unkC + p->x40;
-    s->unk10 =
-        (s->unk10 + p->x44 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk10 + p->x44;
-    s->unk14 =
-        (s->unk14 + p->x48 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk14 + p->x48;
-    if (s->unk18 < p->x4C) {
-        s->unk18 = p->x4C;
+    s->sd_count = (s->sd_count + p->self_destructs > 0xFFFF)
+                      ? 0xFFFF
+                      : s->sd_count + p->self_destructs;
+    s->attacks_hit = (s->attacks_hit + p->x38 > 0xFFFFFFFFU)
+                         ? 0xFFFFFFFFU
+                         : s->attacks_hit + p->x38;
+    s->attacks_total = (s->attacks_total + p->x3C > 0xFFFFFFFFU)
+                           ? 0xFFFFFFFFU
+                           : s->attacks_total + p->x3C;
+    s->damage_dealt = (s->damage_dealt + p->x40 > 0xFFFFFFFFU)
+                          ? 0xFFFFFFFFU
+                          : s->damage_dealt + p->x40;
+    s->damage_taken = (s->damage_taken + p->x44 > 0xFFFFFFFFU)
+                          ? 0xFFFFFFFFU
+                          : s->damage_taken + p->x44;
+    s->damage_recovered = (s->damage_recovered + p->x48 > 0xFFFFFFFFU)
+                              ? 0xFFFFFFFFU
+                              : s->damage_recovered + p->x48;
+    if (s->peak_damage < p->x4C) {
+        s->peak_damage = p->x4C;
     }
-    s->unk1A = (s->unk1A + 1 > 0xFFFF) ? 0xFFFF : s->unk1A + 1;
+    s->match_count =
+        (s->match_count + 1 > 0xFFFF) ? 0xFFFF : s->match_count + 1;
     {
         if (arg1 == fn_80165548(arg0, fn_80165418(arg0), fn_801654A0(arg0))) {
             flag = 1;
@@ -1148,7 +1130,8 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
             flag = 0;
         }
         if (flag != 0) {
-            s->unk1C = (s->unk1C + 1 > 0xFFFF) ? 0xFFFF : s->unk1C + 1;
+            s->victories =
+                (s->victories + 1 > 0xFFFF) ? 0xFFFF : s->victories + 1;
         }
     }
     if (arg1 == fn_80161154(arg0)) {
@@ -1157,36 +1140,43 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
         flag = 0;
     }
     if (flag != 0) {
-        s->unk1E = (s->unk1E + 1 > 0xFFFF) ? 0xFFFF : s->unk1E + 1;
+        s->losses = (s->losses + 1 > 0xFFFF) ? 0xFFFF : s->losses + 1;
     }
-    s->unk20 = (s->unk20 + arg0->frame_count / 60 > 0xFFFFFFFFU)
-                   ? 0xFFFFFFFFU
-                   : s->unk20 + arg0->frame_count / 60;
+    s->play_time = (s->play_time + arg0->frame_count / 60 > 0xFFFFFFFFU)
+                       ? 0xFFFFFFFFU
+                       : s->play_time + arg0->frame_count / 60;
     count = fn_80161C90_count_players(arg0);
-    count = s->unk24 + count;
+    count = s->total_player_count + count;
     if (count > 0xFFFF) {
         count = 0xFFFF;
     }
-    s->unk24 = count;
-    s->unk28 =
-        (s->unk28 + p->x50 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk28 + p->x50;
+    s->total_player_count = count;
+    s->walk_distance = (s->walk_distance + p->x50 > 0xFFFFFFFFU)
+                           ? 0xFFFFFFFFU
+                           : s->walk_distance + p->x50;
     gmMainLib_8015EDBC()->x10 =
         (p->x50 + gmMainLib_8015EDBC()->x10 > 0xFFFFFFFFU)
             ? 0xFFFFFFFFU
             : p->x50 + gmMainLib_8015EDBC()->x10;
-    s->unk2C =
-        (s->unk2C + p->x54 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk2C + p->x54;
-    s->unk30 =
-        (s->unk30 + p->x58 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk30 + p->x58;
-    s->unk34 =
-        (s->unk34 + p->x5C > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk34 + p->x5C;
+    s->run_distance = (s->run_distance + p->x54 > 0xFFFFFFFFU)
+                          ? 0xFFFFFFFFU
+                          : s->run_distance + p->x54;
+    s->fall_distance = (s->fall_distance + p->x58 > 0xFFFFFFFFU)
+                           ? 0xFFFFFFFFU
+                           : s->fall_distance + p->x58;
+    s->peak_height = (s->peak_height + p->x5C > 0xFFFFFFFFU)
+                         ? 0xFFFFFFFFU
+                         : s->peak_height + p->x5C;
     if (arg0->match_kind == 2) {
-        s->unk38 = (s->unk38 + p->x60 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                     : s->unk38 + p->x60;
-        s->unk3C = (s->unk3C + p->x64 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                     : s->unk3C + p->x64;
-        s->unk40 = (s->unk40 + p->x68 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                     : s->unk40 + p->x68;
+        s->coins_collected = (s->coins_collected + p->x60 > 0xFFFFFFFFU)
+                                 ? 0xFFFFFFFFU
+                                 : s->coins_collected + p->x60;
+        s->coins_swiped = (s->coins_swiped + p->x64 > 0xFFFFFFFFU)
+                              ? 0xFFFFFFFFU
+                              : s->coins_swiped + p->x64;
+        s->coins_lost = (s->coins_lost + p->x68 > 0xFFFFFFFFU)
+                            ? 0xFFFFFFFFU
+                            : s->coins_lost + p->x68;
     }
 }
 
@@ -1221,7 +1211,7 @@ void fn_80162068(MatchEnd* match_end)
             }
             fd->fighter_kos[gm_CKindToSelKind(pdata_j->ckind)] = (u16) sum;
         }
-        fn_80161C90(match_end, i, &fd->sd_count);
+        fn_80161C90(match_end, i, &fd->stats);
     }
 }
 void fn_80162170(MatchEnd* arg0)
@@ -1270,7 +1260,7 @@ void fn_80162170(MatchEnd* arg0)
                 nt->play_time_by_fighter[gm_CKindToSelKind(p->ckind)] =
                     play_time;
             }
-            fn_80161C90(arg0, i, &nt->sd_count);
+            fn_80161C90(arg0, i, &nt->stats);
         }
     }
 }

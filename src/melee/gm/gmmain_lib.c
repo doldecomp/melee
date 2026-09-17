@@ -1016,27 +1016,27 @@ void gmMainLib_8015EEC8(void)
     memzero(&gmMainLib_GetCardData()->save_data.x1A68, 0xD8);
 }
 
-void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
+void gmMainLib_8015EF30(struct gm_stats* stats)
 {
-    arg0->x0 = 0;
-    arg0->x4 = 0;
-    arg0->x8 = 0;
-    arg0->xC = 0;
-    arg0->x10 = 0;
-    arg0->x18 = 0;
-    arg0->x1A = 0;
-    arg0->x1C = 0;
-    arg0->x1E = 0;
-    arg0->x20 = 0;
-    arg0->x24 = 0;
-    arg0->x14 = 0;
-    arg0->x28 = 0;
-    arg0->x2C = 0;
-    arg0->x30 = 0;
-    arg0->x34 = 0;
-    arg0->x3C = 0;
-    arg0->x40 = 0;
-    arg0->x38 = 0;
+    stats->sd_count = 0;
+    stats->attacks_hit = 0;
+    stats->attacks_total = 0;
+    stats->damage_dealt = 0;
+    stats->damage_taken = 0;
+    stats->peak_damage = 0;
+    stats->match_count = 0;
+    stats->victories = 0;
+    stats->losses = 0;
+    stats->play_time = 0;
+    stats->total_player_count = 0;
+    stats->damage_recovered = 0;
+    stats->walk_distance = 0;
+    stats->run_distance = 0;
+    stats->fall_distance = 0;
+    stats->peak_height = 0;
+    stats->coins_swiped = 0;
+    stats->coins_lost = 0;
+    stats->coins_collected = 0;
 }
 
 void InitializePersistentNameData(s32 arg0)
@@ -1052,7 +1052,7 @@ void InitializePersistentNameData(s32 arg0)
     for (i = 0; i < 120; i++) {
         data->vs_kos[i] = 0;
     }
-    gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
+    gmMainLib_8015EF30(&data->stats);
     for (i = 0; i < SELKIND_COUNT; i++) {
         data->play_time_by_fighter[i] = 0;
     }
@@ -1077,7 +1077,7 @@ static inline void ResetAllPersistentFighterData(void)
         for (; 0x19 > j; j++) {
             base[k].fighter_kos[j] = 0;
         }
-        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[k].sd_count);
+        gmMainLib_8015EF30(&base[k].stats);
     }
 }
 
@@ -1089,7 +1089,7 @@ static inline void ResetPersistentFighterData(s32 i)
     for (; 0x19 > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
-    gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
+    gmMainLib_8015EF30(&base[(u8) i].stats);
 }
 
 void gmMainLib_8015F150(void)
@@ -1118,7 +1118,7 @@ void gmMainLib_8015F260(void)
         for (j = 0; j < 120; j++) {
             data->vs_kos[j] = 0;
         }
-        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
+        gmMainLib_8015EF30(&data->stats);
         for (j = 0; j < 25; j++) {
             data->play_time_by_fighter[j] = 0;
         }
