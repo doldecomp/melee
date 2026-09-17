@@ -880,10 +880,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             PSMTXTranspose(parent_mtx, bone_mtx);
             PSMTXMultVec(bone_mtx, &rotation_axis, &local_axis);
             if (!approximatelyZeroVec3(local_axis)) {
-                union {
-                    Vec3 euler;
-                    Quaternion quat;
-                } rotation;
+                Quaternion rotation;
                 HSD_QuatLib_8037ECE0(&local_axis, &angle_quat, angle_diff);
                 euler_angles.x = jobj->rotate.x;
                 euler_angles.y = jobj->rotate.y;
@@ -891,8 +888,8 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                 EulerToQuat(&euler_angles, &euler_quat);
                 HSD_QuatLib_8037EC4C(&angle_quat, &euler_quat, &result_quat);
                 PSMTXQuat(bone_mtx, &result_quat);
-                HSD_QuatLib_8037EB28(bone_mtx, &rotation.euler);
-                HSD_JObjSetRotation(jobj, &rotation.quat);
+                HSD_QuatLib_8037EB28(bone_mtx, (Vec3*) &rotation);
+                HSD_JObjSetRotation(jobj, &rotation);
                 HSD_JObjClearFlagsAll(jobj, 0x20000U);
             }
         }
