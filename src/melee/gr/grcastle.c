@@ -165,14 +165,6 @@ struct grCastle_YakumonoParam {
     /* 0x140 */ f32 x140;
 };
 
-typedef struct grCastle_PlatSubObj {
-    /* 0x00 */ HSD_JObj* jobj;
-    /* 0x04 */ f32 current;
-    /* 0x08 */ s16 state;
-    /* 0x0A */ s16 counter;
-    /* 0x0C */ f32 wind;
-} grCastle_PlatSubObj;
-
 static struct grCastle_YakumonoParam* yakumono_param;
 static struct lb_80011A50_t* grCs_804D6974;
 
@@ -575,33 +567,33 @@ void grCastle_801CDC44(Ground_GObj* gobj)
     PAD_STACK(8);
 
     do {
-        switch (gp->u.castle8.plat[0].state) {
+        switch (gp->u.castle8.plat[i].state) {
         case 0:
-            if (gp->u.castle8.plat[0].wind > 0.0f) {
-                s16 cnt = gp->u.castle8.plat[0].timer;
-                gp->u.castle8.plat[0].timer = cnt + 1;
+            if (gp->u.castle8.plat[i].wind > 0.0f) {
+                s16 cnt = gp->u.castle8.plat[i].timer;
+                gp->u.castle8.plat[i].timer = cnt + 1;
                 if ((f32) cnt > yakumono_param->x38) {
-                    gp->u.castle8.plat[0].state = 2;
+                    gp->u.castle8.plat[i].state = 2;
                 }
             } else {
-                gp->u.castle8.plat[0].timer = 0;
-                gp->u.castle8.plat[0].state = 1;
+                gp->u.castle8.plat[i].timer = 0;
+                gp->u.castle8.plat[i].state = 1;
             }
             break;
         case 1:
-            if (gp->u.castle8.plat[0].wind > 0.0f) {
-                gp->u.castle8.plat[0].timer = 0;
-                gp->u.castle8.plat[0].state = 0;
+            if (gp->u.castle8.plat[i].wind > 0.0f) {
+                gp->u.castle8.plat[i].timer = 0;
+                gp->u.castle8.plat[i].state = 0;
             } else {
-                s16 cnt = gp->u.castle8.plat[0].timer;
-                gp->u.castle8.plat[0].timer = cnt + 1;
+                s16 cnt = gp->u.castle8.plat[i].timer;
+                gp->u.castle8.plat[i].timer = cnt + 1;
                 if ((f32) cnt > yakumono_param->x3C) {
-                    gp->u.castle8.plat[0].state = 3;
+                    gp->u.castle8.plat[i].state = 3;
                 }
             }
             break;
         case 2: {
-            f32 wind = gp->u.castle8.plat[0].wind;
+            f32 wind = gp->u.castle8.plat[i].wind;
             if (wind > 0.0f) {
                 f32 max_val;
                 f32 cur;
@@ -611,46 +603,45 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                     move_speed = yakumono_param->x28;
                 }
                 max_val = yakumono_param->x10;
-                cur = gp->u.castle8.plat[0].pos;
+                cur = gp->u.castle8.plat[i].pos;
                 if ((max_val - cur) < move_speed) {
-                    gp->u.castle8.plat[0].pos = max_val;
+                    gp->u.castle8.plat[i].pos = max_val;
                 } else {
-                    gp->u.castle8.plat[0].pos = cur + move_speed;
+                    gp->u.castle8.plat[i].pos = cur + move_speed;
                 }
-                HSD_JObjSetTranslateY(gp->u.castle8.plat[0].jobj,
-                                      gp->u.castle8.plat[0].pos);
+                HSD_JObjSetTranslateY(gp->u.castle8.plat[i].jobj,
+                                      gp->u.castle8.plat[i].pos);
             } else {
-                gp->u.castle8.plat[0].timer = 0;
-                gp->u.castle8.plat[0].state = 1;
+                gp->u.castle8.plat[i].timer = 0;
+                gp->u.castle8.plat[i].state = 1;
             }
             break;
         }
         case 3: {
-            f32 wind = gp->u.castle8.plat[0].wind;
+            f32 wind = gp->u.castle8.plat[i].wind;
             if (wind > 0.0f) {
-                gp->u.castle8.plat[0].timer = 0;
-                gp->u.castle8.plat[0].state = 0;
+                gp->u.castle8.plat[i].timer = 0;
+                gp->u.castle8.plat[i].state = 0;
             } else {
                 move_speed = wind * yakumono_param->x2C + yakumono_param->x30;
                 if (move_speed > yakumono_param->x34) {
                     move_speed = yakumono_param->x34;
                 }
-                if ((gp->u.castle8.plat[0].pos - yakumono_param->x14) <
+                if ((gp->u.castle8.plat[i].pos - yakumono_param->x14) <
                     move_speed)
                 {
-                    gp->u.castle8.plat[0].pos = yakumono_param->x14;
+                    gp->u.castle8.plat[i].pos = yakumono_param->x14;
                 } else {
-                    gp->u.castle8.plat[0].pos -= move_speed;
+                    gp->u.castle8.plat[i].pos -= move_speed;
                 }
-                HSD_JObjSetTranslateY(gp->u.castle8.plat[0].jobj,
-                                      gp->u.castle8.plat[0].pos);
+                HSD_JObjSetTranslateY(gp->u.castle8.plat[i].jobj,
+                                      gp->u.castle8.plat[i].pos);
             }
             break;
         }
         }
+        gp->u.castle8.plat[i].wind = 0.0f;
         i++;
-        gp->u.castle8.plat[0].wind = 0.0f;
-        gp = (Ground*) ((struct grCastle_Platform*) gp + 1);
     } while (i < 2);
     Ground_UpdateMapColl(gobj);
 }
