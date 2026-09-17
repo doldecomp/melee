@@ -674,18 +674,14 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     s32 range;
     s32 rand_result;
 
-    // Set bit 7 at offset 0xDE
     gp->u.castle9.xDE_b0 = true;
 
-    // Get random range from params
     range = yakumono_param->xA;
     if (range != 0) {
         rand_result = HSD_Randi(range);
     } else {
         rand_result = 0;
     }
-
-    // Add base value and set various shorts
     gp->u.castle9.xD4 = yakumono_param->x8 + rand_result;
     gp->u.castle9.xD8[2] = -1;
     gp->u.castle9.xD8[1] = -1;
@@ -916,6 +912,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     Ground* parent =
                         (Ground*) (parent_data =
                                        gp3->u.castle11.xD4->user_data);
+
                     s32 rand;
                     s32 range;
 
@@ -1170,21 +1167,9 @@ void grCastle_801CEF04(Ground_GObj* gobj)
     case 0:
         break;
     case 1: {
-        int hi;
-        s32 lo, range;
-
         gp->u.castle10.xC8 = 0;
-        hi = yakumono_param->x42;
-        lo = yakumono_param->x40;
-
-        if (hi > lo) {
-            range = hi - lo;
-            hi = lo + (range != 0 ? HSD_Randi(range) : 0);
-        } else if (hi < lo) {
-            range = lo - hi;
-            hi += (range != 0 ? HSD_Randi(range) : 0);
-        }
-        gp->u.castle10.xCC = hi;
+        gp->u.castle10.xCC =
+            rand_range(yakumono_param->x42, yakumono_param->x40);
         if (grCastle_801D0298(gobj, 1) != 0) {
             gp->u.castle10.xC4 = 2;
         }
@@ -1406,35 +1391,19 @@ void grCastle_801CF750(void* user_data, int joint_id, CollData* coll,
 void grCastle_801CF7B0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    s16 x0, x2;
 
     gp->u.castle9.xC4[0] = grCastle_801CD4D0(20);
     gp->u.castle9.xC4[1] = grCastle_801CD4D0(19);
     gp->u.castle9.xC4[2] = grCastle_801CD4D0(18);
     gp->u.castle9.xD0 = -1;
 
-    x2 = yakumono_param->x2;
-    x0 = yakumono_param->x0;
-    gp->u.castle9.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
-                        : x2 < x0
-                            ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
-                            : x2;
+    gp->u.castle9.xD2 = rand_range(yakumono_param->x2, yakumono_param->x0);
 }
 
 /// Randomize the satellite respawn timer from #yakumono_param.
 static inline void grCastle_ResetSatelliteTimer(Ground* gp)
 {
-    s32 base = yakumono_param->x2;
-    s32 range_end = yakumono_param->x0;
-
-    if (base > range_end) {
-        s32 diff = base - range_end;
-        base = range_end + (diff != 0 ? HSD_Randi(diff) : 0);
-    } else if (base < range_end) {
-        s32 diff = range_end - base;
-        base = base + (diff != 0 ? HSD_Randi(diff) : 0);
-    }
-    gp->u.castle9.xD2 = base;
+    gp->u.castle9.xD2 = rand_range(yakumono_param->x2, yakumono_param->x0);
 }
 
 /// Pick the next satellite slot by weighted random choice and attach it to a
@@ -1452,7 +1421,7 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
 
     total = wp[0] + wp[1];
     total += wp[2];
-    rand = total != 0 ? HSD_Randi(total) : 0;
+    rand = ZRANDI(total);
 
     for (p = wp, slot = 0; slot < 3; slot++, p++) {
         rand -= *p;
