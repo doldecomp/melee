@@ -412,9 +412,9 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
         HSD_JObjRemoveAnim(jobj);
 
-        anim_base = &hud->damage_matanims;
-        lb_8000C07C(jobj, 1, hud->damage_anims, *anim_base,
-                    hud->damage_shapeanims);
+        anim_base = &hud->damage_num_matanims;
+        lb_8000C07C(jobj, 1, hud->damage_num_anims, *anim_base,
+                    hud->damage_num_shapeanims);
         HSD_JObjReqAnimAll(jobj, 0.0F);
 
         digit_jobj = state->jobjs[Percent];
@@ -439,7 +439,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 
     {
-        HSD_MatAnimJoint*** anim_joints = &hud->damage_matanims;
+        HSD_MatAnimJoint*** anim_joints = &hud->damage_num_matanims;
         HSD_JObj* post_digit_jobj;
 
         post_digit_jobj = state->jobjs[Ones];
@@ -664,7 +664,7 @@ static inline HSD_JObj* ifStatus_GetDamageJObj(HSD_JObj* jobj, s32 i)
 
 static inline HSD_JObj* ifStatus_LoadDamageJObj(HudIndex* hud)
 {
-    return HSD_JObjLoadJoint(hud->damage_joint);
+    return HSD_JObjLoadJoint(hud->damage_num_joint);
 }
 
 HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
@@ -691,9 +691,9 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     }
     state->flags.animation_status_id = 0;
     HSD_JObjRemoveAnim(jobj);
-    anim_base = &hud->damage_matanims;
-    lb_8000C07C(jobj, 0, hud->damage_anims, *anim_base,
-                hud->damage_shapeanims);
+    anim_base = &hud->damage_num_matanims;
+    lb_8000C07C(jobj, 0, hud->damage_num_anims, *anim_base,
+                hud->damage_num_shapeanims);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     vec = ifAll_GetPlayerHUDPosition((u8) player_idx);
@@ -781,7 +781,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
         }
-        jobj = HSD_JObjLoadJoint(hud->mark_joint);
+        jobj = HSD_JObjLoadJoint(hud->damage_mark_joint);
         if (jobj == NULL) {
             HSD_ASSERTREPORT(0x30E, 0,
                              "Error : jobj dont't get (ifAddMark)\n");
@@ -794,8 +794,8 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
         jobj = state->next->hsd_obj;
     }
     tobj = jobj->child->u.dobj->mobj->tobj;
-    lb_8000C07C(jobj, 0, hud->mark_anims, hud->mark_matanims,
-                hud->mark_shapeanims);
+    lb_8000C07C(jobj, 0, hud->damage_mark_anims, hud->damage_mark_matanims,
+                hud->damage_mark_shapeanims);
     if (chara == CKind_MasterH || (u32) (chara - CKind_GKoops) <= 1) {
         chara = CKind_Boy;
     }
@@ -875,14 +875,14 @@ void ifStatus_802F66A4(void)
     arch = ifAll_GetArchive();
     lbArchive_LoadSections(*arch, (void**) &num, num_models_name,
                            (void**) &mrk, mrk_models_name, 0);
-    hud->damage_joint = (*num)->joint;
-    hud->damage_anims = (*num)->anims;
-    hud->damage_matanims = (*num)->matanims;
-    hud->damage_shapeanims = (*num)->shapeanims;
-    hud->mark_joint = (*mrk)->joint;
-    hud->mark_anims = (*mrk)->anims;
-    hud->mark_matanims = (*mrk)->matanims;
-    hud->mark_shapeanims = (*mrk)->shapeanims;
+    hud->damage_num_joint = (*num)->joint;
+    hud->damage_num_anims = (*num)->anims;
+    hud->damage_num_matanims = (*num)->matanims;
+    hud->damage_num_shapeanims = (*num)->shapeanims;
+    hud->damage_mark_joint = (*mrk)->joint;
+    hud->damage_mark_anims = (*mrk)->anims;
+    hud->damage_mark_matanims = (*mrk)->matanims;
+    hud->damage_mark_shapeanims = (*mrk)->shapeanims;
 #ifdef MUST_MATCH
     {
         s32 reset;
