@@ -17,7 +17,7 @@
 /* 15CC84 */ void* gmMainLib_GetTrophyCategoryFlags(void);
 /* 15CC90 */ s16* gmMainLib_GetTrophyCount(void);
 /* 15CC9C */ struct NameTagData* GetPersistentNameData(s32);
-/* 15CCE4 */ void* gmMainLib_8015CCE4(void);
+/* 15CCE4 */ struct gmm_x0_44_t* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ u32* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
 /* 15CD08 */ void* gmMainLib_GetVsPlayContestants(void);

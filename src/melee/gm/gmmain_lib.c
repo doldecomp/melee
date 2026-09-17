@@ -91,6 +91,21 @@ static void order_bss(void)
 }
 #endif
 
+static inline void bitset_set(u32* words, u32 bit)
+{
+    words[bit / 32] |= 1 << (bit % 32);
+}
+
+static inline void bitset_clear(u32* words, u32 bit)
+{
+    words[bit / 32] &= ~(1 << (bit % 32));
+}
+
+static inline u32 bitset_test(const u32* words, u32 bit)
+{
+    return words[bit / 32] & (1 << (bit % 32));
+}
+
 GameRules* gmMainLib_GetGameRules(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -139,7 +154,7 @@ struct NameTagData* GetPersistentNameData(s32 arg0)
     return &inner[arg0 % 19];
 }
 
-void* gmMainLib_8015CCE4(void)
+struct gmm_x0_44_t* gmMainLib_8015CCE4(void)
 {
     return &gmMainLib_804D3EE0->unk_44;
 }
@@ -614,57 +629,49 @@ s32 gmMainLib_8015D818(u32 arg0)
 
 void gmMainLib_8015D888(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    thing[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 void gmMainLib_8015D8B0(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    thing[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 s32 gmMainLib_8015D8D8(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    return thing[arg0 / 32] & (1 << (arg0 % 32));
+    return bitset_test(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 void gmMainLib_8015D8FC(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    thing[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 void gmMainLib_8015D924(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    thing[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 int gmMainLib_8015D94C(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    u32 flag = thing[arg0 / 32];
-    return flag & (1 << (arg0 % 32));
+    u32* words = gmMainLib_GetCardData()->save_data.x1B4C;
+    u32 word = words[arg0 / 32];
+    return word & (1 << (arg0 % 32));
 }
 
 u32* gmMainLib_8015D970(ssize_t idx)
 {
-    u32* base = &gmMainLib_804D3EE0->unk_6C[0];
-    return &base[idx];
+    struct gmm_x0_44_t* trophies = gmMainLib_8015CCE4();
+    return &trophies->times[idx];
 }
 
 /// https://decomp.me/scratch/CJy8X
 bool gmMainLib_8015D984(u32 arg0)
 {
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (gmMainLib_8015DA90(arg0) == 0) {
-        u32* temp_r31 = (u32*) gmMainLib_804D3EE0;
-        temp_r31 += arg0;
-        temp_r31 = (u32*) ((u8*) temp_r31 + 0x6C);
-        *temp_r31 = lbTime_GetTimeInSeconds();
+        *gmMainLib_8015D970(arg0) = lbTime_GetTimeInSeconds();
 
         gmMainLib_8015D9F4(arg0);
         gmMainLib_8015DA40(arg0);
@@ -676,45 +683,39 @@ bool gmMainLib_8015D984(u32 arg0)
 
 void gmMainLib_8015D9F4(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->unk_44;
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_8015CCE4()->flags, arg0);
 }
 
 s32 gmMainLib_8015DA1C(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->unk_44;
-    return (1 << (arg0 % 32)) & base[arg0 / 32];
+    return bitset_test(gmMainLib_8015CCE4()->flags, arg0);
 }
 
 void gmMainLib_8015DA40(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 void gmMainLib_8015DA68(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    base[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 int gmMainLib_8015DA90(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    u32* qwe = &base[arg0 / 32];
-    return *qwe & (1 << (arg0 % 32));
+    u32* words = gmMainLib_GetCardData()->save_data.x1B58;
+    u32 word = words[arg0 / 32];
+    return word & (1 << (arg0 % 32));
 }
 
 void gmMainLib_8015DAB4(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1C88, arg0);
 }
 
 bool gmMainLib_8015DADC(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
-    return (1 << (arg0 % 32)) & base[arg0 / 32];
+    return bitset_test(gmMainLib_GetCardData()->save_data.x1C88, arg0);
 }
 
 u8 gmMainLib_8015DB00(void)

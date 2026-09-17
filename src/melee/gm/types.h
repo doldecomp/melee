@@ -333,10 +333,9 @@ typedef struct {
     /* 0x02D5 */ char pad_2D5[3]; /* maybe part of x1B3C[4]? */
     /* 0x02D8 */ u32 x1B40[3];
     /* 0x02E4 */ u32 x1B4C[3];
-    /* 0x02F0 */ u32 x1B58[3];
-    /* 0x02FC */ u8 padding_x1B58[0x1C];
-    /* 0x0318 */ u32 x1B80[4];
-    /* 0x0328 */ u8 padding_x1B80[0xF8];
+    /* 0x02F0 */ u32
+        x1B58[(TY_TROPHY_COUNT + 31) / 32]; ///< one bit per trophy
+    /* 0x0318 */ u32 x1B80[66];
     /* 0x0420 */ u32 x1C88[3];
     /* 0x042C */ u8 padding_x1C88[0x1C];
     /* 0x0448 */ struct GamePrefs x1CB0;
@@ -416,6 +415,14 @@ struct gmm_x0_vsdata {
     struct EventData unk_530;
 };
 
+/// Per-trophy unlock state, indexed by trophy id.
+struct gmm_x0_44_t {
+    /* 0x0044 */ u32
+        flags[(TY_TROPHY_COUNT + 31) / 32];  ///< one bit per trophy
+    /* 0x006C */ u32 times[TY_TROPHY_COUNT]; ///< #lbTime_GetTimeInSeconds
+    /* 0x0500 */ char pad_500[0x1C];
+};
+
 #define GM_VSMODE_COUNT 15
 
 struct gmm_x0_vsmodes {
@@ -449,10 +456,7 @@ struct gmm_x0 {
     /* 0x0002 */ u8 unk_2;
     /* 0x0003 */ char pad_3[0x36]; /* maybe part of x1[0x38]? */
     /* 0x0039 */ u8 x39[0xB];
-    /* 0x0044 */ s32 unk_44;
-    /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
-    /* 0x006C */ u32 unk_6C[4];
-    /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
+    /* 0x0044 */ struct gmm_x0_44_t unk_44;
     /** @remarks `gmMainLib_8015CDC8` hands out a pointer to the start of this
      * block and its callers read on into `unk_530`, so the three slots and the
      * event data form one object. */
@@ -463,6 +467,7 @@ struct gmm_x0 {
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct GmCardData thing;
 };
+ASSERT_SIZE(struct gmm_x0_44_t, 0x51C - 0x44);
 ASSERT_SIZE(struct EventData, 0x588 - 0x530);
 ASSERT_SIZE(struct gmm_x0_vsdata, 0x588 - 0x51C);
 ASSERT_SIZE(struct gmm_x0_vsmodes, 0x1850 - 0x588);
