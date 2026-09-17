@@ -845,11 +845,10 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
 
 void grCastle_801CE578(Ground_GObj* gobj)
 {
-    Ground* new_var2;
+    Ground* gp3;
+    Ground* gp4;
+    void* parent_data;
     int new_var4;
-
-    void* new_var;
-    Ground* new_var3;
     Ground* gp = gobj->user_data;
     Vec3 pos;
     Vec3 jpos;
@@ -893,16 +892,15 @@ void grCastle_801CE578(Ground_GObj* gobj)
             Ground_801C5544(gp, 0);
         }
     } else {
-        new_var2 = gobj->user_data;
-        gp = new_var2;
+        gp3 = gobj->user_data;
         {
-            s16 timer = gp->u.castle11.xC8;
-            gp->u.castle11.xC8 = timer - 1;
+            s16 timer = gp3->u.castle11.xC8;
+            gp3->u.castle11.xC8 = timer - 1;
             if (timer < 0) {
-                if (gp->u.castle11.xD0 != NULL) {
-                    grMaterial_801C8CDC(gp->u.castle11.xD0);
+                if (gp3->u.castle11.xD0 != NULL) {
+                    grMaterial_801C8CDC(gp3->u.castle11.xD0);
                 }
-                gp->u.castle11.xD0 = NULL;
+                gp3->u.castle11.xD0 = NULL;
 
                 {
                     HSD_GObj* newobj = grCastle_801CD4D0(1);
@@ -915,12 +913,13 @@ void grCastle_801CE578(Ground_GObj* gobj)
                 }
 
                 {
-                    Ground* sat =
-                        (Ground*) (new_var = gp->u.castle11.xD4->user_data);
+                    Ground* parent =
+                        (Ground*) (parent_data =
+                                       gp3->u.castle11.xD4->user_data);
                     s32 rand;
                     s32 range;
 
-                    sat->u.castle9.xDE_b0 = true;
+                    parent->u.castle9.xDE_b0 = true;
 
                     range = yakumono_param->xE;
                     if (range != 0) {
@@ -928,10 +927,10 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     } else {
                         rand = 0;
                     }
-                    sat->u.castle9.xD4 = (s16) (yakumono_param->xC + rand);
+                    parent->u.castle9.xD4 = (s16) (yakumono_param->xC + rand);
                 }
 
-                gp = (new_var3 = gobj->user_data);
+                gp = (gp4 = gobj->user_data);
                 if (gp->u.castle11.xD8 != NULL) {
                     Camera_800290D4(gp->u.castle11.xD8);
                     gp->u.castle11.xD8 = NULL;
@@ -1154,7 +1153,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
 
     grCastle_801D0298(gobj, 0);
     Ground_UpdateMapColl(gobj);
-    (gobj)->render_cb = (GObj_RenderFunc) grCastle_801D0520;
+    gobj->render_cb = grCastle_801D0520;
 }
 
 bool grCastle_801CEEFC(Ground_GObj* gobj)
