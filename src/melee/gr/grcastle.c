@@ -695,7 +695,6 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     s16* ptr;
     s32 count = 0;
     s32 ctr;
-    void* user_data;
     s32 val = 0;
     Ground* gp;
     unsigned int picked;
@@ -705,9 +704,8 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
 
     count = (new_var = count);
     ptr = &arr[count];
-    user_data = HSD_GObjGetUserData(gobj);
+    gp = HSD_GObjGetUserData(gobj);
     for (ctr = 3; ctr != 0; ctr--) {
-        gp = (Ground*) user_data;
         for (i = 0; i < 3; i++) {
             if (val != gp->u.castle9.xD8[0] && val != gp->u.castle9.xD8[1] &&
                 val != gp->u.castle9.xD8[2])
@@ -1266,11 +1264,11 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 void grCastle_801CF308(Ground_GObj* gobj)
 {
     s32 var_r6 = 0;
-    Ground* user_data = (Ground*) gobj->user_data;
+    Ground* user_data = gobj->user_data;
     Ground* gp = (Ground*) gobj->user_data;
-    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+    HSD_JObj* jobj = gobj->hsd_obj;
     grCastle_BlinkTable tbl = grCs_803B7EC8;
-    UNUSED int _0;
+    Ground* parent;
     UNUSED int _1;
     Vec3 pos;
     Quaternion quat;
@@ -1320,7 +1318,8 @@ void grCastle_801CF308(Ground_GObj* gobj)
             grMaterial_801C8CDC(gp->u.castle7.xD8);
             gp->u.castle7.xD8 = NULL;
         }
-        ((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle10.xC4 = 1;
+        parent = gp->u.castle7.xD0->user_data;
+        parent->u.castle10.xC4 = 1;
         gp->u.castle7.xC4 = 5;
         grAnime_801C8138(gobj, gp->map_id, 0);
         Ground_801C5440(gp, 0, 0x53027U);
@@ -1335,7 +1334,8 @@ void grCastle_801CF308(Ground_GObj* gobj)
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         }
-        if (((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle10.xC4 == 0) {
+        parent = gp->u.castle7.xD0->user_data;
+        if (parent->u.castle10.xC4 == 0) {
             gp->u.castle7.xC4 = 0;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
@@ -1465,8 +1465,7 @@ void grCastle_801CF868(Ground_GObj* gobj)
          gp->u.castle9.xC4[2] != NULL) &&
         (gp->u.castle9.xD0 == -1 ||
          (gp->u.castle9.xC4[gp->u.castle9.xD0] != NULL &&
-          ((Ground*) gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data) !=
-              NULL &&
+          gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data != NULL &&
           ((Ground*) gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data)
                   ->u.castle7.xC4 == 0)))
     {
