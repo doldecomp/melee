@@ -454,9 +454,9 @@ void grCastle_801CD658(Ground_GObj* gobj)
 
     gobj->render_cb = fn_801D0924;
     Ground_801C10B8(gobj, grCastle_801CD610);
-    gp->u.castle9.xC4 = 0;
-    gp->u.castle9.xC8 = 0;
-    gp->u.castle9.xCC = 0;
+    gp->u.castle9.xC4[0] = NULL;
+    gp->u.castle9.xC4[1] = NULL;
+    gp->u.castle9.xC4[2] = NULL;
     gp->u.castle9.xDE_b0 = false;
     gp->x10_flags.b5 = 1;
 }
@@ -477,14 +477,14 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     lb_800115F4();
     grCastle_801D0BBC();
     for (i = 0; i < 12; i++) {
-        if (gp->u.castle3.x1C[i].data != NULL) {
+        if (gp->u.castle9.dynamics[i].data != NULL) {
             grCastle_801D0D84(
-                gp->u.castle3.x1C[i].data->desc.lb_unk0.jobj->parent);
+                gp->u.castle9.dynamics[i].data->desc.lb_unk0.jobj->parent);
         }
     }
     for (i = 0; i < 12; i++) {
-        if (gp->u.castle3.x1C[i].data != NULL) {
-            grLib_801C9B8C(&gp->u.castle3.x1C[i]);
+        if (gp->u.castle9.dynamics[i].data != NULL) {
+            grLib_801C9B8C(&gp->u.castle9.dynamics[i]);
             grCastle_801D0D24();
         }
     }
@@ -496,7 +496,7 @@ void grCastle_801CD960(Ground_GObj* gobj)
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        grLib_801C9B6C(&gp->u.castle3.x1C[i]);
+        grLib_801C9B6C(&gp->u.castle9.dynamics[i]);
     }
 }
 
@@ -694,9 +694,9 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
     // Add base value and set various shorts
     gp->u.castle9.xD4 = yakumono_param->x8 + rand_result;
-    gp->u.castle9.xDC = -1;
-    gp->u.castle9.xDA = -1;
-    gp->u.castle9.xD8 = -1;
+    gp->u.castle9.xD8[2] = -1;
+    gp->u.castle9.xD8[1] = -1;
+    gp->u.castle9.xD8[0] = -1;
     gp->u.castle9.xD6 = 0;
 }
 
@@ -721,8 +721,8 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     for (ctr = 3; ctr != 0; ctr--) {
         gp = (Ground*) new_var2;
         for (i = 0; i < 3; i++) {
-            if (val != gp->u.castle4.xD8 && val != gp->u.castle4.xDA &&
-                val != gp->u.castle4.xDC)
+            if (val != gp->u.castle9.xD8[0] && val != gp->u.castle9.xD8[1] &&
+                val != gp->u.castle9.xD8[2])
             {
                 new_var3 = ptr++;
                 *new_var3 = (s16) val;
@@ -739,16 +739,16 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     }
 
     picked = arr[idx];
-    (&gp->u.castle4.xD8)[gp->u.castle4.xD6] = picked;
+    gp->u.castle9.xD8[gp->u.castle9.xD6] = picked;
 
     {
-        s32 d6 = (s32) gp->u.castle4.xD6;
+        s32 d6 = (s32) gp->u.castle9.xD6;
         if (2 == d6) {
             d6 = 0;
         } else {
             d6 = d6 + 1;
         }
-        gp->u.castle4.xD6 = (s16) d6;
+        gp->u.castle9.xD6 = (s16) d6;
     }
 
     return (s32) picked;
@@ -769,8 +769,8 @@ void grCastle_801CE19C(Ground_GObj* gobj)
                 Ground* new_gp = new_gobj->user_data;
                 Ground_801C5440(gp, 0, 0x53021U);
                 Ground_801C5694(
-                    gp, 0, yakumono_param->entries[new_gp->u.castle5.xC6].x4);
-                new_gp->u.castle11.xD4 = (u32) gobj;
+                    gp, 0, yakumono_param->entries[new_gp->u.castle11.xC6].x4);
+                new_gp->u.castle11.xD4 = gobj;
             }
         }
     }
@@ -788,13 +788,13 @@ void grCastle_801CE260(Ground_GObj* gobj)
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
 
     gp->u.castle11.xC4.b0 = 0;
-    gp->u.icemt.x2 = gp->map_id - 8;
-    gp->u.arwing.xCC = 0;
-    gp->u.flatzone.xCA = yakumono_param->entries[gp->u.icemt.x2].x0;
+    gp->u.castle11.xC6 = gp->map_id - 8;
+    gp->u.castle11.xCC = NULL;
+    gp->u.castle11.xCA = yakumono_param->entries[gp->u.castle11.xC6].x0;
 
     gp2 = GET_GROUND(gobj);
-    *(u32*) &gp2->u.arwing.xD8 = (u32) Camera_80029044(2);
-    subject = (CmSubject*) *(u32*) &gp2->u.arwing.xD8;
+    gp2->u.castle11.xD8 = Camera_80029044(2);
+    subject = gp2->u.castle11.xD8;
     if (subject != NULL) {
         subject->target_ext.h.x = yakumono_param->x118;
         subject->target_ext.h.y = yakumono_param->x11C;
@@ -803,10 +803,10 @@ void grCastle_801CE260(Ground_GObj* gobj)
     }
 
     grMaterial_801C94D8(jobj);
-    gp->u.arwing.xD0 = (u32) grMaterial_801C8CFC(
+    gp->u.castle11.xD0 = grMaterial_801C8CFC(
         0, 3, gp, Ground_801C3FA4((HSD_GObj*) gobj, 0),
         (void (*)(Item_GObj*, Ground*)) fn_801CE3A0, NULL, NULL);
-    it_80275414((Item_GObj*) gp->u.arwing.xD0);
+    it_80275414(gp->u.castle11.xD0);
     Ground_801C5440(gp, 0, 0x53025U);
 }
 
@@ -828,12 +828,12 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
     HSD_JObj* jobj;
     Ground* gp = GET_GROUND(gobj);
 
-    if (gp->u.castle5.xCC != NULL) {
+    if (gp->u.castle11.xCC != NULL) {
         Quaternion rot;
         Vec3 pos;
         Vec3 offset;
 
-        jobj = HSD_GObjGetHSDObj(gp->u.castle5.xCC);
+        jobj = HSD_GObjGetHSDObj(gp->u.castle11.xCC);
         rot = grCs_803B7EB8;
 
         offset.z = 0.0f;
@@ -844,9 +844,9 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
 
         HSD_JObjSetTranslate(jobj, &pos);
 
-        rot.x = yakumono_param->entries[gp->u.castle5.xC6].rot.x;
-        rot.y = yakumono_param->entries[gp->u.castle5.xC6].rot.y;
-        rot.z = yakumono_param->entries[gp->u.castle5.xC6].rot.z;
+        rot.x = yakumono_param->entries[gp->u.castle11.xC6].rot.x;
+        rot.y = yakumono_param->entries[gp->u.castle11.xC6].rot.y;
+        rot.z = yakumono_param->entries[gp->u.castle11.xC6].rot.z;
 
         HSD_JObjSetRotation(jobj, &rot);
     }
@@ -869,7 +869,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
     } while (new_var4);
 
     {
-        CmSubject* cam = (CmSubject*) gp->u.castle11.xD8;
+        CmSubject* cam = gp->u.castle11.xD8;
         if (cam != NULL) {
             lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
             cam->pos = pos;
@@ -879,11 +879,11 @@ void grCastle_801CE578(Ground_GObj* gobj)
 
     {
         Ground* gp2 = (Ground*) gobj->user_data;
-        if (gp2->u.castle11.xCC == 0) {
+        if (gp2->u.castle11.xCC == NULL) {
             s16 timer = gp2->u.castle11.xCA;
             gp2->u.castle11.xCA = timer - 1;
             if (timer < 0) {
-                gp2->u.castle11.xCC = (u32) grCastle_801CD4D0(2);
+                gp2->u.castle11.xCC = grCastle_801CD4D0(2);
                 Ground_801C53EC(0x53026);
                 grCastle_801CE3AC_dontinline(gobj);
             }
@@ -896,8 +896,8 @@ void grCastle_801CE578(Ground_GObj* gobj)
             gp->u.castle11.xC8 = yakumono_param->x58;
             gp->u.castle11.xC4.b0 = 1;
             grMaterial_801C9604(gobj, yakumono_param->x114, 0);
-            if (gp->u.castle11.xCC != 0) {
-                Ground_801C4A08((HSD_GObj*) gp->u.castle11.xCC);
+            if (gp->u.castle11.xCC != NULL) {
+                Ground_801C4A08(gp->u.castle11.xCC);
             }
             Ground_801C5544(gp, 0);
         }
@@ -908,10 +908,10 @@ void grCastle_801CE578(Ground_GObj* gobj)
             s16 timer = gp->u.castle11.xC8;
             gp->u.castle11.xC8 = timer - 1;
             if (timer < 0) {
-                if (gp->u.castle11.xD0 != 0) {
-                    grMaterial_801C8CDC((HSD_GObj*) gp->u.castle11.xD0);
+                if (gp->u.castle11.xD0 != NULL) {
+                    grMaterial_801C8CDC(gp->u.castle11.xD0);
                 }
-                gp->u.castle11.xD0 = 0;
+                gp->u.castle11.xD0 = NULL;
 
                 {
                     HSD_GObj* newobj = grCastle_801CD4D0(1);
@@ -925,8 +925,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
 
                 {
                     Ground* sat =
-                        (Ground*) (new_var = ((HSD_GObj*) gp->u.castle11.xD4)
-                                                 ->user_data);
+                        (Ground*) (new_var = gp->u.castle11.xD4->user_data);
                     s32 rand;
                     s32 range;
 
@@ -942,9 +941,9 @@ void grCastle_801CE578(Ground_GObj* gobj)
                 }
 
                 gp = (new_var3 = (Ground*) gobj->user_data);
-                if (gp->u.castle11.xD8 != 0) {
-                    Camera_800290D4((CmSubject*) gp->u.castle11.xD8);
-                    gp->u.castle11.xD8 = 0;
+                if (gp->u.castle11.xD8 != NULL) {
+                    Camera_800290D4(gp->u.castle11.xD8);
+                    gp->u.castle11.xD8 = NULL;
                 }
                 Ground_801C4A08(gobj);
             }
@@ -998,18 +997,18 @@ void grCastle_801CE8E8(Ground_GObj* gobj)
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
 
     gp2 = GET_GROUND(gobj);
-    gp2->u.arwing.xC8 = (u32) Camera_80029044(2);
-    subject = (CmSubject*) gp2->u.arwing.xC8;
+    gp2->u.castle2.xC8 = Camera_80029044(2);
+    subject = gp2->u.castle2.xC8;
     if (subject != NULL) {
         subject->target_ext.h.x = yakumono_param->x134;
         subject->target_ext.h.y = yakumono_param->x138;
         subject->target_ext.v.x = yakumono_param->x13C;
         subject->target_ext.v.y = yakumono_param->x140;
     }
-    gp->u.arwing.xC4 = (u32) grMaterial_801C8CFC(
+    gp->u.castle2.xC4 = grMaterial_801C8CFC(
         0, 4, gp, Ground_801C3FA4((HSD_GObj*) gobj, 0),
         (void (*)(Item_GObj*, Ground*)) fn_801CE9DC, NULL, NULL);
-    it_80275414((Item_GObj*) gp->u.arwing.xC4);
+    it_80275414(gp->u.castle2.xC4);
     Ground_801C5440(gp, 0, 0x53024U);
 }
 
@@ -1025,7 +1024,7 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
     Vec3 pos;
     Ground* tmp;
     Ground* gp = GET_GROUND(gobj);
-    CmSubject* subject = (CmSubject*) gp->u.arwing.xC8;
+    CmSubject* subject = gp->u.castle2.xC8;
     PAD_STACK(8);
     if (subject != NULL) {
         lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
@@ -1033,17 +1032,17 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
         subject->bone_pos = pos;
     }
     if (grAnime_801C83D0(gobj, 0, 1)) {
-        HSD_GObj* mat = (HSD_GObj*) (tmp = gp)->u.arwing.xC4;
+        HSD_GObj* mat = (tmp = gp)->u.castle2.xC4;
         if (mat != NULL) {
             grMaterial_801C8CDC(mat);
         }
-        gp->u.arwing.xC4 = 0;
+        gp->u.castle2.xC4 = NULL;
         {
             Ground* gp2 = gobj->user_data;
-            CmSubject* subj2 = (CmSubject*) (tmp = gp2)->u.arwing.xC8;
+            CmSubject* subj2 = (tmp = gp2)->u.castle2.xC8;
             if (subj2 != NULL) {
                 Camera_800290D4(subj2);
-                gp2->u.arwing.xC8 = 0;
+                gp2->u.castle2.xC8 = NULL;
             }
         }
         Ground_801C4A08(gobj);
@@ -1057,7 +1056,7 @@ static inline void zero(Ground* gp, int i, f32 zero)
     gp->u.castle10.jobjs[i] = NULL;
     gp->u.castle10.effect_a[i] = NULL;
     gp->u.castle10.effect_b[i] = NULL;
-    gp->u.castle10.x10C[i] = 0;
+    gp->u.castle10.x10C[i] = NULL;
     gp->u.castle10.x120[i] = -1;
     gp->u.castle10.state[i] = 0;
     gp->u.castle10.idx[i] = 0;
@@ -1177,14 +1176,14 @@ void grCastle_801CEF04(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
 
-    switch (gp->u.castle6.xC4) {
+    switch (gp->u.castle10.xC4) {
     case 0:
         break;
     case 1: {
         int hi;
         s32 lo, range;
 
-        gp->u.castle6.xC8 = 0;
+        gp->u.castle10.xC8 = 0;
         hi = yakumono_param->x42;
         lo = yakumono_param->x40;
 
@@ -1195,24 +1194,24 @@ void grCastle_801CEF04(Ground_GObj* gobj)
             range = lo - hi;
             hi += (range != 0 ? HSD_Randi(range) : 0);
         }
-        gp->u.castle6.xCC = hi;
+        gp->u.castle10.xCC = hi;
         if (grCastle_801D0298(gobj, 1) != 0) {
-            gp->u.castle6.xC4 = 2;
+            gp->u.castle10.xC4 = 2;
         }
         grCastle_801D02B8(gobj);
         break;
     }
     case 2: {
-        s32 temp = gp->u.castle6.xCC;
-        gp->u.castle6.xCC = temp - 1;
+        s32 temp = gp->u.castle10.xCC;
+        gp->u.castle10.xCC = temp - 1;
         if (temp < 0) {
             s32 i;
-            gp->u.castle6.xC4 = 3;
-            gp->u.castle6.xCC = 0;
+            gp->u.castle10.xC4 = 3;
+            gp->u.castle10.xCC = 0;
             for (i = 0; i < 5; i++) {
-                if (gp->u.castle10.x10C[i] != 0) {
-                    grMaterial_801C8CDC((HSD_GObj*) gp->u.castle10.x10C[i]);
-                    gp->u.castle10.x10C[i] = 0;
+                if (gp->u.castle10.x10C[i] != NULL) {
+                    grMaterial_801C8CDC(gp->u.castle10.x10C[i]);
+                    gp->u.castle10.x10C[i] = NULL;
                 }
             }
         }
@@ -1220,33 +1219,33 @@ void grCastle_801CEF04(Ground_GObj* gobj)
         break;
     }
     case 3: {
-        s32 temp = gp->u.castle6.xCC;
-        gp->u.castle6.xCC = temp + 1;
+        s32 temp = gp->u.castle10.xCC;
+        gp->u.castle10.xCC = temp + 1;
         if (temp > yakumono_param->x44) {
-            gp->u.castle6.xC4 = 4;
+            gp->u.castle10.xC4 = 4;
         } else {
             s32 val;
-            if (gp->u.castle6.xC8 != 0) {
+            if (gp->u.castle10.xC8 != 0) {
                 val = 0;
             } else {
                 val = 1;
             }
-            gp->u.castle6.xC8 = (s16) val;
+            gp->u.castle10.xC8 = (s16) val;
         }
         grCastle_801D02B8(gobj);
         break;
     }
     case 4: {
         s32 val;
-        if (gp->u.castle6.xC8 != 0) {
+        if (gp->u.castle10.xC8 != 0) {
             val = 0;
         } else {
             val = 1;
         }
-        gp->u.castle6.xC8 = (s16) val;
+        gp->u.castle10.xC8 = (s16) val;
         if (grCastle_801D0298(gobj, 0) != 0) {
-            gp->u.castle6.xC8 = 0;
-            gp->u.castle6.xC4 = 0;
+            gp->u.castle10.xC8 = 0;
+            gp->u.castle10.xC4 = 0;
         }
         break;
     }
@@ -1264,7 +1263,7 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
 
     Ground_InitMapColl(jobj, gp->map_id);
     gp->u.castle7.xC4 = 0;
-    gp->u.castle7.xD8 = 0;
+    gp->u.castle7.xD8 = NULL;
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     scale = 1.5f * Ground_801C0498();
     HSD_JObjSetScaleX(jobj, scale);
@@ -1304,41 +1303,41 @@ void grCastle_801CF308(Ground_GObj* gobj)
     Quaternion quat;
     PAD_STACK(32);
 
-    switch (user_data->u.castle5.xC4) {
+    switch (user_data->u.castle7.xC4) {
     case 1:
-        gp->u.castle.xC8 = -1;
-        gp->u.castle11.xCA = 0;
+        gp->u.castle7.xC8 = -1;
+        gp->u.castle7.xCA = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         grAnime_801C86D4(gp->map_id, gobj, 0);
-        gp->u.castle5.xC4 = 2;
+        gp->u.castle7.xC4 = 2;
         /* fallthrough */
     case 2: {
-        s32 delay = gp->u.castle11.xCA;
+        s32 delay = gp->u.castle7.xCA;
         if (delay > 0) {
-            gp->u.castle11.xCA = delay - 1;
+            gp->u.castle7.xCA = delay - 1;
         } else {
             s8 val;
-            gp->u.castle.xC8 += 1;
+            gp->u.castle7.xC8 += 1;
             if (HSD_JObjGetFlags(jobj) & 0x10) {
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             } else {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
-            val = ((s8*) &tbl)[gp->u.castle.xC8];
+            val = ((s8*) &tbl)[gp->u.castle7.xC8];
             if (val != -1) {
-                gp->u.castle11.xCA = (s16) (2.0 * (f64) val);
+                gp->u.castle7.xCA = (s16) (2.0 * (f64) val);
             } else {
-                gp->u.castle5.xC4 = 3;
-                gp->u.castle11.xD8 = (u32) grMaterial_801C8CFC(
+                gp->u.castle7.xC4 = 3;
+                gp->u.castle7.xD8 = grMaterial_801C8CFC(
                     0, 1, gp, jobj, NULL,
                     (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
                         Event) fn_801CFAFC,
                     (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
                         Event) fn_801CFB68);
-                grMaterial_801C8DE0((Item_GObj*) gp->u.castle11.xD8, 0.0f,
-                                    -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 4.0f);
-                grMaterial_801C8E08((Item_GObj*) gp->u.castle11.xD8);
-                gp->u.castle8.plat[0].state = yakumono_param->x54;
+                grMaterial_801C8DE0(gp->u.castle7.xD8, 0.0f, -1.0f, 0.0f, 0.0f,
+                                    1.0f, 0.0f, 4.0f);
+                grMaterial_801C8E08(gp->u.castle7.xD8);
+                gp->u.castle7.xCC = yakumono_param->x54;
             }
         }
         var_r6 = 1;
@@ -1348,12 +1347,12 @@ void grCastle_801CF308(Ground_GObj* gobj)
         var_r6 = 1;
         break;
     case 4: {
-        if (gp->u.castle11.xD8 != 0) {
-            grMaterial_801C8CDC((HSD_GObj*) gp->u.castle11.xD8);
-            gp->u.castle11.xD8 = 0;
+        if (gp->u.castle7.xD8 != NULL) {
+            grMaterial_801C8CDC(gp->u.castle7.xD8);
+            gp->u.castle7.xD8 = NULL;
         }
-        ((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle5.xC4 = 1;
-        gp->u.castle5.xC4 = 5;
+        ((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle10.xC4 = 1;
+        gp->u.castle7.xC4 = 5;
         grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
         Ground_801C5440(gp, 0, 0x53027U);
         Camera_RequestQuake(QuakeKind_Small, NULL);
@@ -1361,14 +1360,14 @@ void grCastle_801CF308(Ground_GObj* gobj)
     }
     case 5: {
         if (grAnime_801C83D0((HSD_GObj*) gobj, 0, 7) != 0) {
-            s16 cnt = gp->u.castle8.plat[0].state;
-            gp->u.castle8.plat[0].state = cnt - 1;
+            s16 cnt = gp->u.castle7.xCC;
+            gp->u.castle7.xCC = cnt - 1;
             if (cnt < 0) {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         }
-        if (((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle5.xC4 == 0) {
-            gp->u.castle5.xC4 = 0;
+        if (((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle10.xC4 == 0) {
+            gp->u.castle7.xC4 = 0;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
         var_r6 = 1;
@@ -1377,10 +1376,10 @@ void grCastle_801CF308(Ground_GObj* gobj)
     }
 
     if (var_r6 != 0) {
-        lb_8000B1CC((HSD_JObj*) gp->u.castle11.xD4, NULL, &pos);
+        lb_8000B1CC(gp->u.castle7.xD4, NULL, &pos);
         HSD_JObjSetTranslate(jobj, &pos);
 
-        HSD_JObjGetRotation((HSD_JObj*) gp->u.castle11.xD4, &quat);
+        HSD_JObjGetRotation(gp->u.castle7.xD4, &quat);
         HSD_JObjSetRotation(jobj, &quat);
     }
 }
@@ -1419,14 +1418,14 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s16 x0, x2;
 
-    gp->u.castle2.xC4 = grCastle_801CD4D0(20);
-    gp->u.castle2.xC8 = grCastle_801CD4D0(19);
-    gp->u.castle2.xCC = grCastle_801CD4D0(18);
-    gp->u.castle2.xD0 = -1;
+    gp->u.castle9.xC4[0] = grCastle_801CD4D0(20);
+    gp->u.castle9.xC4[1] = grCastle_801CD4D0(19);
+    gp->u.castle9.xC4[2] = grCastle_801CD4D0(18);
+    gp->u.castle9.xD0 = -1;
 
     x2 = yakumono_param->x2;
     x0 = yakumono_param->x0;
-    gp->u.castle2.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
+    gp->u.castle9.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
                         : x2 < x0
                             ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
                             : x2;
@@ -1445,7 +1444,7 @@ static inline void grCastle_ResetSatelliteTimer(Ground* gp)
         s32 diff = range_end - base;
         base = base + (diff != 0 ? HSD_Randi(diff) : 0);
     }
-    gp->u.castle12.xD2 = base;
+    gp->u.castle9.xD2 = base;
 }
 
 /// Pick the next satellite slot by weighted random choice and attach it to a
@@ -1474,10 +1473,9 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
     if (slot == 3) {
         slot = 0;
     }
-    gp->u.castle12.xD0 = slot;
+    gp->u.castle9.xD0 = slot;
 
-    sat_gp = (Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-                 ->user_data;
+    sat_gp = gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data;
 
     {
         s32 idx;
@@ -1499,7 +1497,7 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
         }
         if (entity != NULL) {
             sat_gp->u.castle7.xD4 =
-                (u32) Ground_801C3FA4(entity, (s32) targets.e[idx].jobj_idx);
+                Ground_801C3FA4(entity, (s32) targets.e[idx].jobj_idx);
             sat_gp->u.castle7.xC4 = 1;
         }
     }
@@ -1510,25 +1508,23 @@ void grCastle_801CF868(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s32* wp;
 
-    if ((gp->u.castle12.xC4[0] != 0 || gp->u.castle12.xC4[1] != 0 ||
-         gp->u.castle12.xC4[2] != 0) &&
-        (gp->u.castle12.xD0 == -1 ||
-         (((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0]) != NULL &&
-          ((Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-               ->user_data) != NULL &&
-          *(s16*) &(
-               (Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-                   ->user_data)
-                  ->u.castle2.xC4 == 0)))
+    if ((gp->u.castle9.xC4[0] != NULL || gp->u.castle9.xC4[1] != NULL ||
+         gp->u.castle9.xC4[2] != NULL) &&
+        (gp->u.castle9.xD0 == -1 ||
+         (gp->u.castle9.xC4[gp->u.castle9.xD0] != NULL &&
+          ((Ground*) gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data) !=
+              NULL &&
+          ((Ground*) gp->u.castle9.xC4[gp->u.castle9.xD0]->user_data)
+                  ->u.castle7.xC4 == 0)))
     {
-        gp->u.castle12.xD2 = gp->u.castle12.xD2 - 1;
-        if (gp->u.castle12.xD2 < 0) {
+        gp->u.castle9.xD2 = gp->u.castle9.xD2 - 1;
+        if (gp->u.castle9.xD2 < 0) {
             grCastle_WeightTable weights;
             s16 cur_slot;
 
             grCastle_ResetSatelliteTimer(gp);
             weights = grCs_803B7EF0;
-            cur_slot = gp->u.castle12.xD0;
+            cur_slot = gp->u.castle9.xD0;
             if (cur_slot != -1) {
                 weights.w[cur_slot] /= yakumono_param->x6;
             }
@@ -1542,7 +1538,7 @@ void grCastle_801CF868(Ground_GObj* gobj)
 void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)
 {
     PAD_STACK(4);
-    *(s16*) &gp->u.castle2.xC4 = 4;
+    gp->u.castle7.xC4 = 4;
     if (ftLib_80086960(gobj)) {
         ftLib_80086A4C(gobj, (f32) yakumono_param->x4);
     }
@@ -1550,7 +1546,7 @@ void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)
 
 void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
 {
-    gp->u.pura.xC4 = 4;
+    gp->u.castle7.xC4 = 4;
     if (ftLib_80086960(gobj) != 0) {
         ftLib_80086A4C(gobj, (f32) yakumono_param->x4);
     }
@@ -1634,20 +1630,17 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                             {
                                 cb1 = grCs_803B7F28;
                                 cb2 = grCs_803B7F3C;
-                                gp->u.castle10.x10C[i] =
-                                    (u32) grMaterial_801C8CFC(
-                                        0, 2, gp, target, NULL,
-                                        (void (*)(Item_GObj*, Ground*, Vec3*,
-                                                  HSD_GObj*, f32))(
-                                            Event) cb1.callbacks[i],
-                                        (void (*)(Item_GObj*, Ground*,
-                                                  HSD_GObj*))(
-                                            Event) cb2.callbacks[i]);
-                                grMaterial_801C8DE0(
-                                    (Item_GObj*) gp->u.castle10.x10C[i], 0.0f,
-                                    0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 8.0f);
-                                grMaterial_801C8E08(
-                                    (Item_GObj*) gp->u.castle10.x10C[i]);
+                                gp->u.castle10.x10C[i] = grMaterial_801C8CFC(
+                                    0, 2, gp, target, NULL,
+                                    (void (*)(Item_GObj*, Ground*, Vec3*,
+                                              HSD_GObj*,
+                                              f32))(Event) cb1.callbacks[i],
+                                    (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
+                                        Event) cb2.callbacks[i]);
+                                grMaterial_801C8DE0(gp->u.castle10.x10C[i],
+                                                    0.0f, 0.0f, 0.0f, 0.0f,
+                                                    0.0f, 0.0f, 8.0f);
+                                grMaterial_801C8E08(gp->u.castle10.x10C[i]);
                             }
                         }
                         HSD_JObjSetScaleY(target, newScale);
@@ -1743,7 +1736,7 @@ void grCastle_801D02B8(Ground_GObj* gobj)
 void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->u.castle.xC8 == 0) {
+    if (gp->u.castle10.xC8 == 0) {
         grDisplay_801C5DB0(gobj, renderpass);
     }
 }
@@ -1834,8 +1827,8 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
         PAD_STACK(4);
 
         for (i = 0; i < 12; i++) {
-            if (gp->u.castle3.x1C[i].data != NULL) {
-                lb_800117F4(&gp->u.castle3.x1C[i], &color1, &color2, 999,
+            if (gp->u.castle9.dynamics[i].data != NULL) {
+                lb_800117F4(&gp->u.castle9.dynamics[i], &color1, &color2, 999,
                             renderpass);
             }
         }
