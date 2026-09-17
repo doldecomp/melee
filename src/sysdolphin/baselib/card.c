@@ -111,7 +111,7 @@ ASSERT_SIZE(CardActiveRequest, 0x10);
 
 /// Result of the request in progress: negative = CARD error, 1 = data
 /// verified so the queued writes are skipped, 2 = verify mismatch.
-/* 4D7988 */ static s32 curr_result;
+/* 4D7988 */ static volatile s32 curr_result;
 
 /* 4D798C */ static s32 hsd_804D798C;
 /* 4D7990 */ static s32 hsd_804D7990;
