@@ -35,7 +35,7 @@
 /* 1CE054 */ s32 grCastle_801CE054(Ground_GObj*);
 /* 1CE19C */ void grCastle_801CE19C(Ground_GObj*);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
-/* 1CE3A0 */ void fn_801CE3A0(void);
+/* 1CE3A0 */ void fn_801CE3A0(Item_GObj*, Ground*);
 /* 1CE3A4 */ bool grCastle_801CE3A4(Ground_GObj*);
 /* 1CE3AC */ void grCastle_801CE3AC(Ground_GObj* gobj);
 /* 1CE578 */ void grCastle_801CE578(Ground_GObj*);
@@ -45,7 +45,7 @@
 /* 1CE860 */ void grCastle_801CE860(Ground_GObj*);
 /* 1CE8E4 */ void grCastle_801CE8E4(Ground_GObj*);
 /* 1CE8E8 */ void grCastle_801CE8E8(Ground_GObj*);
-/* 1CE9DC */ void fn_801CE9DC(void);
+/* 1CE9DC */ void fn_801CE9DC(Item_GObj*, Ground*);
 /* 1CE9E0 */ bool grCastle_801CE9E0(Ground_GObj*);
 /* 1CE9E8 */ void grCastle_801CE9E8(Ground_GObj*);
 /* 1CEAC8 */ void grCastle_801CEAC8(Ground_GObj*);
@@ -59,7 +59,7 @@
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ void grCastle_801CF868(Ground_GObj*);
-/* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*);
+/* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1);
 /* 1D0298 */ bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1);
