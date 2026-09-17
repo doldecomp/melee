@@ -78,8 +78,8 @@ void mpIsland_8005A728(void)
 
     /* Process floor segments */
     prev = NULL;
-    if ((count = map->floor_count) != 0) {
-        line_idx = map->floor_start;
+    if ((count = map->ranges[MapLineGroup_Floor].count) != 0) {
+        line_idx = map->ranges[MapLineGroup_Floor].start;
         z_val = 0.0f;
         while (count != 0) {
             seg.p = HSD_MemAlloc(0x2C);
@@ -142,9 +142,9 @@ void mpIsland_8005A728(void)
     /* Process ceiling segments */
     prev = NULL;
     (void) seg.p;
-    count = map->ceiling_count;
+    count = map->ranges[MapLineGroup_Ceiling].count;
     if (count) {
-        line_idx = map->ceiling_start;
+        line_idx = map->ranges[MapLineGroup_Ceiling].start;
         z_val = 0.0f;
         while (count != 0) {
             seg.p = HSD_MemAlloc(0x2C);
@@ -274,9 +274,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     int i;
 
     temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    var_r31 = temp_r3->inner->lines[MapLineGroup_Floor].start;
+    var_r31 = temp_r3->inner->ranges[MapLineGroup_Floor].start;
     var_r30 = &mpGetGroundCollLine()[var_r31];
-    temp_r29 = temp_r3->inner->lines[MapLineGroup_Floor].count;
+    temp_r29 = temp_r3->inner->ranges[MapLineGroup_Floor].count;
 
     var_r28 = true;
     var_r27 = true;
@@ -476,9 +476,9 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     vtx = mpGetGroundCollVtx();
     z_val = 0.0F;
 
-    end_total = joints->inner->lines[MapLineGroup_Dynamic].start +
-                joints->inner->lines[MapLineGroup_Dynamic].count;
-    line_idx = joints->inner->lines[MapLineGroup_Dynamic].start;
+    end_total = joints->inner->ranges[MapLineGroup_Dynamic].start +
+                joints->inner->ranges[MapLineGroup_Dynamic].count;
+    line_idx = joints->inner->ranges[MapLineGroup_Dynamic].start;
 
     for (; line_idx < end_total;) {
         if (visited[line_idx] != 0 ||
