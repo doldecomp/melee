@@ -1204,7 +1204,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmprogressive.c"),
             Object(Matching, "melee/gm/gmapproach.c"),
             Object(Matching, "melee/gm/gm_1ADD.c"),
-            Object(Matching, "melee/gm/gm_1AED.c"),
+            Object(Matching, "melee/gm/gmscmemcard.c"),
             Object(Matching, "melee/gm/gm_1B03.c"),
             # Game modes
             Object(Matching, "melee/gm/gmtitlemode.c"),

@@ -47,7 +47,8 @@ void on21EC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ABS(fp->input.lstick[0].x) >=
             p_ftCommonData->dash_smash_stick_threshold &&
-        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
+        fp->active_sticky.lstick.x <
+            p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         fp->x2070.count_thrown_items = true;
         fp->u.lk.x4 = true;

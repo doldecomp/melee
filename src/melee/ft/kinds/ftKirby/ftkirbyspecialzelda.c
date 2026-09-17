@@ -128,7 +128,7 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
     volatile unsigned int pad;
     ftKb_DatAttrs* da;
     int new_var;
-    fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    fp = GET_FIGHTER(gobj);
     da = fp->dat_attrs;
     new_var = 0;
     if (fp->cmd_vars[new_var] == 1U) {

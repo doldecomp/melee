@@ -1486,7 +1486,7 @@ void fn_80176A6C(void)
 
 void fn_80176BCC(HSD_GObj* gobj)
 {
-    HSD_JObjAnimAll((HSD_JObj*) gobj->hsd_obj);
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
 static inline int fn_80176BF0_inline(u8 arg1)
@@ -1530,7 +1530,7 @@ HSD_JObj* fn_80176BF0(HSD_JObj* arg0, u8 arg1, int arg2)
 
 void fn_80176D18(HSD_GObj* gobj)
 {
-    HSD_JObjAnimAll((HSD_JObj*) gobj->hsd_obj);
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
 void fn_80176D3C(Vec3* positions)

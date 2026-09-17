@@ -22,13 +22,13 @@ struct loadData {
     u8 mode_id; ///< Copied to ::leaveData::mode_id to set next mode
 };
 
-struct leaveData {
+struct exitData {
     u32 x0;
     u8 mode_id;
 };
 
 static struct loadData load_data;
-static struct leaveData leave_data;
+static struct exitData leave_data;
 
 GameModeState gm_Mode_Boot_States[] = {
     {
@@ -61,7 +61,7 @@ void bootOnLoad(GameModeState* scene)
 
 void bootOnLeave(GameModeState* data)
 {
-    struct leaveData* scene_data = gm_GetGameModeStateExitData(data);
+    struct exitData* scene_data = gm_GetGameModeStateExitData(data);
 
     if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",

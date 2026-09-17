@@ -3,11 +3,11 @@
 
 #include <Runtime/platform.h>
 
-enum {
+typedef enum {
     LANG_JP,
     LANG_US,
     LANG_COUNT,
-};
+} LbLanguage;
 
 enum_t lbLang_GetLanguageSetting(void);
 enum_t lbLang_SetLanguageSetting(enum_t language);

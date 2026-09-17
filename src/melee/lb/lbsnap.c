@@ -191,7 +191,7 @@ int lbSnap_8001D5FC(int chan, int index)
     if (ret == 0) {
         lbSnap_FormatTime(chan, index, text);
         _p(slot)[chan].card_result = 8;
-        ret = lb_8001B99C(chan, text, 0);
+        ret = lbCardNew_DeleteSnap(chan, text, 0);
     }
     return ret;
 }

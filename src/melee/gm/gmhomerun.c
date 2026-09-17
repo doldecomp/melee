@@ -56,7 +56,7 @@ void gm_801B98E8(GameModeState* scene)
     if (gm_804D68F9 != 0) {
         lbCardNew_AllocWorkArea();
         lbCardGame_LoadArchive(0);
-        lbCardGame_UpdatePowerTime();
+        lbCardGame_SaveChanges();
     }
     gm_801B06B0(css, 0x10, vs->start.players[0].ckind, 1,
                 vs->start.players[0].color, vs->start.players[0].nametag, 0,

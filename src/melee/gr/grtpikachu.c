@@ -81,7 +81,7 @@ HSD_GObj* grTPikachu_80222F20(int id)
 
 void grTPikachu_80223008(Ground_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 

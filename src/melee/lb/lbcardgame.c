@@ -25,7 +25,7 @@ typedef enum {
     fileType_SaveData,
     fileType_NameTag,
     fileType_TrophyUnk,
-    fileType_None
+    fileType_3,
 } fileType;
 
 typedef enum {
@@ -37,7 +37,7 @@ typedef enum {
     /* +0  */ bool probe_status;
     /* +4  */ bool unk_status;
     /* +8  */ LbCardStatus card_status;
-    /* +C  */ bool xC;
+    /* +C  */ bool dirty;
     /* +10 */ statex10 x10;
     /* +14 */ bool failed;
     /* +18 */ bool enable;
@@ -62,7 +62,7 @@ static struct {
 };
 
 static LbCardEntry manifest[] = {
-    { 0, fileType_None, NULL },
+    { 0, fileType_3, NULL },
     { sizeof(GmSaveData), fileType_SaveData, NULL },
     { sizeof(struct NameTagDataBank), fileType_NameTag, NULL },
     { sizeof(struct NameTagDataBank), fileType_NameTag, NULL },
@@ -149,12 +149,12 @@ static LbCardStatus updateCardStatus(void)
         }
         break;
     case 3:
-        if (lbCardNew_ProbeEx(0) != 0) {
+        if (lbCardNew_ProbeEx(0) != LbCardResult_Ready) {
             _p(card_status) = LbCardStatus_4;
         }
         break;
     case 4:
-        if (unk_status != 0 && lbCardNew_ProbeEx(0) == 0) {
+        if (unk_status != 0 && lbCardNew_ProbeEx(0) == LbCardResult_Ready) {
             _p(card_status) = LbCardStatus_3;
         }
         break;
@@ -218,11 +218,11 @@ void lb_8001CC84(void)
     do {
         switch (_p(x10)) {
         case statex10_0:
-            if (!_p(xC)) {
+            if (!_p(dirty)) {
                 break;
             }
 
-            _p(xC) = false;
+            _p(dirty) = false;
             if (_p(card_status)) {
                 break;
             }
@@ -244,21 +244,21 @@ void lb_8001CC84(void)
             break;
         }
         }
-    } while (_p(x10) != statex10_1 && _p(xC));
+    } while (_p(x10) != statex10_1 && _p(dirty));
 }
 
 void lb_8001CDB4(void)
 {
-    while (_p(xC) || _p(x10) != statex10_0) {
+    while (_p(dirty) || _p(x10) != statex10_0) {
         lb_8001CC84();
     }
 }
 
-void lbCardGame_UpdatePowerTime(void)
+void lbCardGame_SaveChanges(void)
 {
     HSD_ASSERT(675, _p(enable));
     *gm_GetPowerTime() += gmMainLib_8015FC74();
-    _p(xC) = true;
+    _p(dirty) = true;
 }
 
 u8 lbCardGame_DecideGameMode(void)
@@ -327,7 +327,7 @@ void lbCardGame_Reset(void)
     _p(icon_data) = NULL;
     _p(scene_data) = NULL;
     _p(enable) = false;
-    _p(xC) = false;
+    _p(dirty) = false;
     _p(x10) = 0;
     _p(failed) = false;
 }

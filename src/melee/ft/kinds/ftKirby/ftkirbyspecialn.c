@@ -514,13 +514,13 @@ void fn_800F6638(HSD_GObj* gobj)
 
 void fn_800F66E8(HSD_GObj* gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNLoop, 0x0C4C5A9A,
                               fp->cur_anim_frame, 1.0f, 0.0f, 0L);
     Fighter_SetEffectHitlagCallbacks(fp);
-    fp = (Fighter*) HSD_GObjGetUserData(gobj);
+    fp = GET_FIGHTER(gobj);
     ftCommon_8007E2D0(fp, 0x10, fn_800F6318, fn_800F6280, ftCo_800BD1DC);
     fp->x2225_b1 = 1;
 }

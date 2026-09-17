@@ -22,7 +22,7 @@ static inline void lbCardGame_SetupArchive(void)
 {
     lbCardNew_AllocWorkArea();
     lbCardGame_LoadArchive(0);
-    lbCardGame_UpdatePowerTime();
+    lbCardGame_SaveChanges();
 }
 
 #endif

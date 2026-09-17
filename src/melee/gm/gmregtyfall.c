@@ -117,7 +117,7 @@ void fn_801A6664(HSD_GObj* arg0)
     HSD_SObj* temp_r3;
     HSD_SObj* temp_r3_2;
 
-    HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
+    HSD_JObjAnimAll(GET_JOBJ(arg0));
     if ((s32) gm_804D6758 != 0) {
         HSD_SObjLib_803A4740(gm_804D6754->hsd_obj);
         gm_804D6760.image = &gm_804808F8.x0[gm_804D675C][0];

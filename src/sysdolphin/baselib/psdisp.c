@@ -2019,7 +2019,7 @@ void psDispParticles(u32 target_link, u32 sw)
                                           alpha_compare_mode & 7, sp7A4);
                     }
 
-                    psSetupTev((u32*) pp);
+                    psSetupTev(pp);
                     setupChanCtrl(pp);
                     setupChanReg(pp);
                     setupTevReg(pp);
