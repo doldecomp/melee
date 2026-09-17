@@ -10,6 +10,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <melee/ft/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/types.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -833,7 +834,7 @@ typedef struct itUnk4_ItemVars {
     /*  +0 ip+DD4 */ u8 pad[0x18];
     /*  +18 ip+DEC */ u8 xDEC_b0 : 1;
     /*  +18 ip+DEC */ u8 xDEC_b1 : 1;
-    /*  +1C ip+DF0 */ Mtx xDF0;
+    /*  +1C ip+DF0 */ Fighter_x1614_t xDF0;
 } itUnk4_ItemVars;
 
 typedef struct itGamewatchchef_ItemVars {

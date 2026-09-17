@@ -197,8 +197,8 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     HSD_JObjSetupMatrix(jobj);
     fn_80020AEC(jobj, mtx);
     PSMTXTranspose(mtx, mtx);
-    PSMTXMultVec(mtx, (Vec*) axis, (Vec*) &localAxis);
-    PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
+    PSMTXMultVec(mtx, axis, &localAxis);
+    PSMTXRotAxisRad(rotMtx, &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
         HSD_JObjGetRotation(jobj, (Quaternion*) &rot);

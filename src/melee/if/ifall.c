@@ -211,7 +211,7 @@ void ifAll_802F390C(void)
     {
         HSD_CObjDesc* desc = sp14->cameras[0].desc;
         HSD_GObj* gobj = GObj_Create(0x13, 0x14, 0);
-        HSD_CObj* cobj = lb_80013B14((HSD_CameraDescPerspective*) desc);
+        HSD_CObj* cobj = lb_80013B14(&desc->perspective);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(gobj, fn_802F36B8, 8);
         gobj->gxlink_prios = 0xD00;

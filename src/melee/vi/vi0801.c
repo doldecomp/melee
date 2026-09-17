@@ -130,8 +130,7 @@ void vi0801_Scene_OnEnter(void* unused)
     lbArchive_LoadSymbols("Vi0801.dat", &un_804D6FB8, "visual0801Scene", NULL);
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) un_804D6FB8->cameras->desc);
+    cobj = lb_80013B14(&un_804D6FB8->cameras->desc->perspective);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, vi0801_8031ED70, 8);
     HSD_CObjAddAnim(cobj, un_804D6FB8->cameras->anims[0]);

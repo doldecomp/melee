@@ -243,7 +243,7 @@ struct CollData {
 
 struct HSD_AllocEntry {
     struct HSD_AllocEntry* next;
-    u32* addr;
+    void* addr;
     size_t size;
 };
 

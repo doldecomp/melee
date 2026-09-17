@@ -10,6 +10,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/pl/player.h>
+#include <melee/sc/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -20,7 +21,19 @@
 /// Orphaned data strings from original ROM
 static char lbl_803F9780[] = "ScInfStc_scene_models";
 
-static void* lbl_804A1340[13];
+/// The GObjs one player slot has spawned from ScInfStc_scene_models.
+struct ScInfStcSlot {
+    HSD_GObj* gobj;  ///< spawned when a KO is recorded
+    HSD_GObj* gobj2; ///< spawned by gobj's proc once it passes frame 12
+};
+
+/// ScInfStc_scene_models, plus the GObjs spawned from it per player slot.
+struct ScInfStcModels {
+    DynamicModelDesc** scene_models;
+    struct ScInfStcSlot slots[6];
+};
+
+static struct ScInfStcModels scinfstc_models;
 
 s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 {
@@ -128,16 +141,14 @@ found:
 void fn_802F75D4(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    void** base;
-    void** data;
+    struct ScInfStcModels* models;
     s32 i;
 
     if (lb_8000B09C(jobj) == 0) {
-        base = lbl_804A1340;
-        data = base;
-        for (i = 0; i < 6; data += 2, i++) {
-            if (data[1] == gobj) {
-                base[i * 2 + 1] = NULL;
+        models = &scinfstc_models;
+        for (i = 0; i < 6; i++) {
+            if (models->slots[i].gobj == gobj) {
+                models->slots[i].gobj = NULL;
                 break;
             }
         }
@@ -150,16 +161,14 @@ void fn_802F75D4(HSD_GObj* gobj)
 void fn_802F7670(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    void** base;
-    void** data;
+    struct ScInfStcModels* models;
     s32 i;
 
     if (lb_8000B09C(jobj) == 0) {
-        base = lbl_804A1340;
-        data = base;
-        for (i = 0; i < 6; data += 2, i++) {
-            if (data[2] == gobj) {
-                base[i * 2 + 2] = NULL;
+        models = &scinfstc_models;
+        for (i = 0; i < 6; i++) {
+            if (models->slots[i].gobj2 == gobj) {
+                models->slots[i].gobj2 = NULL;
                 break;
             }
         }
@@ -169,49 +178,23 @@ void fn_802F7670(HSD_GObj* gobj)
     }
 }
 
+/// Slot whose first GObj is @p gobj, or -1.
+static inline s32 GetSlot(HSD_GObj* gobj)
+{
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (scinfstc_models.slots[i].gobj == gobj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void fn_802F770C(HSD_GObj* gobj, int callback)
 {
     HudIndex* status = ifStatus_GetHUDInfo();
-    void** ptr = lbl_804A1340;
-    void** ptr2;
-    void** ptr3;
-    void** ptr4;
-    s32 slot;
-    void* temp;
-
-    if (ptr[1] == gobj) {
-        slot = 0;
-    } else {
-        if ((temp = (ptr += 2)[1]) == gobj) {
-            slot = 1;
-        } else {
-            ptr2 = ptr;
-            temp = ptr2[3];
-            ptr4 = ptr2 + 2;
-            if (temp == gobj) {
-                slot = 2;
-            } else {
-                temp = ptr4[3];
-                ptr = ptr4 + 2;
-                if (temp == gobj) {
-                    slot = 3;
-                } else {
-                    temp = ptr[3];
-                    ptr2 = ptr + 2;
-                    if (temp == gobj) {
-                        slot = 4;
-                    } else {
-                        temp = ptr2[3];
-                        if (temp == gobj) {
-                            slot = 5;
-                        } else {
-                            slot = -1;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    s32 slot = GetSlot(gobj);
 
     if (!status->players[slot].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, callback);
@@ -220,12 +203,12 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
 
 HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 {
-    void** base = lbl_804A1340;
+    struct ScInfStcModels* models = &scinfstc_models;
     HSD_JObj* jobj;
     Vec3* pos;
     HSD_JObj* j;
 
-    if (base[0] == NULL) {
+    if (models->scene_models == NULL) {
         return NULL;
     }
 
@@ -235,12 +218,12 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 
     gobj = GObj_Create(14, 15, 0);
     if (gobj != NULL) {
-        jobj = HSD_JObjLoadJoint(*(*(HSD_Joint***) base[0]));
+        jobj = HSD_JObjLoadJoint((*models->scene_models)->joint);
         if (jobj != NULL) {
             HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
             j = jobj;
-            gm_8016895C(j, *(DynamicModelDesc**) base[0], (u8) arg2);
+            gm_8016895C(j, *models->scene_models, (u8) arg2);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
 
@@ -258,70 +241,30 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 void fn_802F7994(HSD_GObj* gobj)
 {
     s32 slot;
-    void** entry;
+    HSD_GObj** gobjp;
     HSD_JObj* jobj;
-    void** ptr;
-    void** ptr2;
-    void** ptr3;
-    void** ptr4;
-    void* t0;
-    void* t1;
-    void* t2;
-    void* t3;
-    void* t4;
-    void* t5;
-    void** base = lbl_804A1340;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 idx;
     f32 frame;
-    HSD_GObj* result;
 
     PAD_STACK(8);
 
     jobj = gobj->hsd_obj;
     frame = lbGetJObjCurrFrame(jobj);
-
-    ptr = base;
-    if ((t0 = ptr[1]) == gobj) {
-        slot = 0;
-    } else {
-        if ((t1 = (ptr += 2)[1]) == gobj) {
-            slot = 1;
-        } else {
-            ptr2 = ptr + 2;
-            if ((t2 = ptr[3]) == gobj) {
-                slot = 2;
-            } else {
-                ptr3 = ptr2 + 2;
-                if ((t3 = ptr2[3]) == gobj) {
-                    slot = 3;
-                } else {
-                    ptr4 = ptr3 + 2;
-                    if ((t4 = ptr3[3]) == gobj) {
-                        slot = 4;
-                    } else {
-                        if ((t5 = ptr4[3]) == gobj) {
-                            slot = 5;
-                        } else {
-                            slot = -1;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    slot = GetSlot(gobj);
 
     if (slot >= 0) {
-        if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
-            idx = (u8) slot << 1;
-            entry = base + ((u8) slot << 1);
-            result = fn_802F77F8(*(entry += 2), (u8) slot, 1);
-            base[idx + 2] = result;
-            if (base[idx + 2] != NULL) {
-                HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
+        if (frame > 12.0f && models->slots[slot].gobj2 == NULL) {
+            idx = (u8) slot;
+            gobjp = &models->slots[(u8) slot].gobj - 1;
+            models->slots[idx].gobj2 =
+                fn_802F77F8(*(gobjp += 2), (u8) slot, 1);
+            if (models->slots[idx].gobj2 != NULL) {
+                HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7670, 0x11);
             }
         }
         if (lb_8000B09C(jobj) == 0) {
-            base[slot * 2 + 1] = NULL;
+            models->slots[slot].gobj = NULL;
             HSD_GObjFree(gobj);
         } else {
             HSD_JObjAnimAll(jobj);
@@ -329,138 +272,120 @@ void fn_802F7994(HSD_GObj* gobj)
     }
 }
 
+/// (Re)spawns the first GObj of @p slot with animation @p anim.
+/// @todo The spawn sites point one entry before the slot's GObj and
+/// pre-increment onto it; a direct pointer allocates differently.
+static inline void SpawnGObj(s32 slot, u16 anim, HSD_GObjEvent proc)
+{
+    struct ScInfStcModels* models = &scinfstc_models;
+    u8 idx = slot;
+    HSD_GObj** gobjp = &models->slots[idx].gobj - 1;
+
+    models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, anim);
+    if (models->slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(*gobjp, proc, 0x11);
+    }
+}
+
 void if_802F7AF8(s32 slot)
 {
-    s32 idx;
-    void** base1;
-    void** base = lbl_804A1340;
+    struct ScInfStcModels* models = &scinfstc_models;
+    struct ScInfStcSlot* slots;
     s32 slot2 = Player_80036428(slot);
+    s32 idx;
     HSD_GObj* result;
 
-    idx = (u8) slot << 1;
-    result = fn_802F77F8(base[idx + 1], (u8) slot, 1);
-    base1 = &base[1];
-    base1[idx] = result;
-    if (base1[idx] != NULL) {
-        HSD_GObj_SetupProc(base[idx + 1], (HSD_GObjEvent) fn_802F75D4, 0x11);
+    idx = (u8) slot;
+    result = fn_802F77F8(models->slots[idx].gobj, (u8) slot, 1);
+    slots = models->slots;
+    slots[idx].gobj = result;
+    if (slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(models->slots[idx].gobj,
+                           (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
-    idx = (u8) slot2 << 1;
-    result = fn_802F77F8(base[idx + 1], (u8) slot2, 2);
-    base1[idx] = result;
-    if (base1[idx] != NULL) {
-        HSD_GObj_SetupProc(base[idx + 1], (HSD_GObjEvent) fn_802F75D4, 0x11);
+    idx = (u8) slot2;
+    result = fn_802F77F8(models->slots[idx].gobj, (u8) slot2, 2);
+    slots[idx].gobj = result;
+    if (slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(models->slots[idx].gobj,
+                           (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
 void if_802F7BB4(s32 player_idx)
 {
-    void** base;
-    u8 idx;
-    s32 offset;
-    void** entry;
+    struct ScInfStcModels* models = &scinfstc_models;
+    u8 idx = player_idx;
+    HSD_GObj** gobjp = &models->slots[idx].gobj - 1;
 
-    base = lbl_804A1340;
-    idx = (u8) player_idx;
-    offset = idx << 1;
-    entry = base + (((((((offset & 0xFFFFFFFFu) & 0xFFFFFFFFu) & 0xFFFFFFFFu) &
-                       0xFFFFFFFFu) &
-                      0xFFFFFFFFu) &
-                     0xFFFFFFFFu) &
-                    0xFFFFFFFFu);
-    (base + offset)[1] = fn_802F77F8(*++entry, idx, 1);
-    if ((base + offset)[1] != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
-    }
-}
-
-static inline void if_802F7C30_slot(void** base, s32 slot, s32 idx, s32 flag)
-{
-    void** entry = base + idx;
-
-    base[idx + 1] = fn_802F77F8(*++entry, (u8) slot, flag);
-    if (base[idx + 1] != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+    models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 1);
+    if (models->slots[idx].gobj != NULL) {
+        HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
 void if_802F7C30(s32 slot)
 {
-    void** base = lbl_804A1340;
-    s32 idx;
-    void** entry;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 ret = gm_8016AEC8();
-    HSD_GObj* result;
+    u8 idx;
+    HSD_GObj** gobjp;
 
     if (ret == -2) {
-        idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 0);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        idx = slot;
+        gobjp = &models->slots[idx].gobj - 1;
+        models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
+        if (models->slots[idx].gobj != NULL) {
+            HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     } else if (ret == -1) {
-        idx = (u8) slot << 1;
-        if_802F7C30_slot(base, slot, idx, 1);
-    }
-}
-
-static inline void if_802F7D08_slot(void** base, s32 slot, s32 idx, s32 flag)
-{
-    void** entry = base + idx;
-
-    base[idx + 1] = fn_802F77F8(*++entry, (u8) slot, flag);
-    if (base[idx + 1] != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
     }
 }
 
 void if_802F7D08(s32 slot)
 {
-    void** base = lbl_804A1340;
-    s32 idx;
-    void** entry;
+    struct ScInfStcModels* models = &scinfstc_models;
     s32 ret = gm_8016AEC8();
-    HSD_GObj* result;
-    PAD_STACK(8);
+    u8 idx;
+    HSD_GObj** gobjp;
 
     if (ret == -2) {
-        idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 0);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
+        idx = slot;
+        gobjp = &models->slots[idx].gobj - 1;
+        models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
+        if (models->slots[idx].gobj != NULL) {
+            HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else if (ret == -1) {
-        idx = (u8) slot << 1;
-        if_802F7D08_slot(base, slot, idx, 1);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F7994);
     } else {
-        idx = (u8) slot << 1;
-        if_802F7C30_slot(base, slot, idx, 1);
+        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
     }
 }
 
 void if_802F7E24(void)
 {
-    memzero(lbl_804A1340, sizeof(lbl_804A1340));
-    lbArchive_LoadSections(*ifAll_GetArchive(), lbl_804A1340, lbl_803F9780, 0);
+    memzero(&scinfstc_models, sizeof(scinfstc_models));
+    lbArchive_LoadSections(*ifAll_GetArchive(),
+                           (void**) &scinfstc_models.scene_models,
+                           lbl_803F9780, 0);
 }
 
 void if_802F7E7C(void)
 {
     s32 i;
-    HSD_GObj** base = (HSD_GObj**) lbl_804A1340;
+    struct ScInfStcModels* models = &scinfstc_models;
 
     for (i = 0; i < 6; i++) {
-        if (base[i * 2 + 1] != NULL) {
-            HSD_GObjFree(base[i * 2 + 1]);
+        if (models->slots[i].gobj != NULL) {
+            HSD_GObjFree(models->slots[i].gobj);
         }
-        if (base[i * 2 + 2] != NULL) {
-            HSD_GObjFree(base[i * 2 + 2]);
+        if (models->slots[i].gobj2 != NULL) {
+            HSD_GObjFree(models->slots[i].gobj2);
         }
     }
 
-    memzero(base, sizeof(lbl_804A1340));
+    memzero(models, sizeof(scinfstc_models));
 }
