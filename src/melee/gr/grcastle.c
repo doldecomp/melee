@@ -1625,9 +1625,9 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                                     0, 2, gp, target, NULL,
                                     (void (*)(Item_GObj*, Ground*, Vec3*,
                                               HSD_GObj*,
-                                              f32)) cb1.callbacks[i],
-                                    (void (*)(Item_GObj*, Ground*,
-                                              HSD_GObj*)) cb2.callbacks[i]);
+                                              f32))(Event) cb1.callbacks[i],
+                                    (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
+                                        Event) cb2.callbacks[i]);
                                 grMaterial_801C8DE0(gp->u.castle10.x10C[i],
                                                     0.0f, 0.0f, 0.0f, 0.0f,
                                                     0.0f, 0.0f, 8.0f);
