@@ -702,30 +702,28 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
 s32 grCastle_801CE054(Ground_GObj* gobj)
 {
-    s16* new_var3;
     s16 arr[9];
+    s16* ptr;
     s32 count = 0;
     s32 ctr;
-    void* new_var2;
+    void* user_data;
     s32 val = 0;
     Ground* gp;
     unsigned int picked;
     s32 idx;
     s32 new_var;
-    s16* ptr;
     s32 i;
 
     count = (new_var = count);
     ptr = &arr[count];
-    new_var2 = HSD_GObjGetUserData(gobj);
+    user_data = HSD_GObjGetUserData(gobj);
     for (ctr = 3; ctr != 0; ctr--) {
-        gp = (Ground*) new_var2;
+        gp = (Ground*) user_data;
         for (i = 0; i < 3; i++) {
             if (val != gp->u.castle9.xD8[0] && val != gp->u.castle9.xD8[1] &&
                 val != gp->u.castle9.xD8[2])
             {
-                new_var3 = ptr++;
-                *new_var3 = (s16) val;
+                *ptr++ = (s16) val;
                 count++;
             }
             val++;
