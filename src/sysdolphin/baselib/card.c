@@ -5283,6 +5283,22 @@ void hsd_803B24E4(CardState* state, int chan, int sector_size, void* work_buf)
     state->sector_buf = work_buf;
 }
 
+static inline s32 openWithRetry(s32 chan, const char* filename,
+                               CardState* state)
+{
+    s32 i;
+    s32 result;
+
+    for (i = 0; i < 10; i++) {
+        result = CARDOpen(chan, (char*) filename, &state->file_info);
+        if (result != -1) {
+            break;
+        }
+    }
+
+    return result;
+}
+
 int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
 {
     s32 new_var;
@@ -5293,12 +5309,7 @@ int hsd_803B2550(CardState* state, const char* filename, CardCallback callback)
     s32 result;
     s32 file_no;
     new_var2 = chan;
-    for (retries = 0; retries < 10; retries++) {
-        result = CARDOpen(new_var2, (char*) filename, &state->file_info);
-        if (result != -1) {
-            break;
-        }
-    }
+    result = openWithRetry(new_var2, filename, state);
 
     if (result < 0) {
         return result;
