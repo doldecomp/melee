@@ -217,7 +217,7 @@ bool lbAudioAx_80023710(int arg0)
 
 bool lbAudioAx_80023730(void)
 {
-    return AXDriver_8038EA18();
+    return AXDriverCheck();
 }
 
 static int fn_80023750(int id, int vol, int pan, int track, int channel)
@@ -389,7 +389,7 @@ static bool fn_80023ED4(const char* path, int vol, int arg2)
     if (arg2 >= 9) {
         arg2 = 8;
     }
-    return AXDriver_8038E8EC(path, vol, arg2);
+    return HSD_AudioPStreamStartChParam(path, vol, arg2);
 }
 
 static inline const char* getHPSFile(int arg0)
@@ -887,10 +887,10 @@ void lbAudioAx_80024C84(void)
     lbl_804D38B4 = 1.0F;
     lbl_804D38B8 = 1.0F;
     lbl_804D38BC = 1.0F;
-    AXDriver_8038E844(5);
-    AXDriver_8038E844(6);
-    AXDriver_8038E844(8);
-    AXDriver_8038E844(7);
+    HSD_AudioPStreamResumeCh(5);
+    HSD_AudioPStreamResumeCh(6);
+    HSD_AudioPStreamResumeCh(8);
+    HSD_AudioPStreamResumeCh(7);
     lbl_804D38D8 = 1;
     lbl_804D38CC = 0x7F;
 }
@@ -942,45 +942,45 @@ void lbAudioAx_80024E84(bool arg0)
     if (arg0) {
         lbl_804D38E4 = 0.2F;
         lbl_804D38E8 = 0.2F;
-        AXDriver_8038E6C0(5);
-        AXDriver_8038E6C0(6);
-        AXDriver_8038E6C0(8);
-        AXDriver_8038E6C0(7);
+        HSD_AudioPStreamPauseCh(5);
+        HSD_AudioPStreamPauseCh(6);
+        HSD_AudioPStreamPauseCh(8);
+        HSD_AudioPStreamPauseCh(7);
     } else {
         lbl_804D38E4 = 1.0F;
         lbl_804D38E8 = 1.0F;
-        AXDriver_8038E844(5);
-        AXDriver_8038E844(6);
-        AXDriver_8038E844(8);
-        AXDriver_8038E844(7);
+        HSD_AudioPStreamResumeCh(5);
+        HSD_AudioPStreamResumeCh(6);
+        HSD_AudioPStreamResumeCh(8);
+        HSD_AudioPStreamResumeCh(7);
     }
 }
 
 void lbAudioAx_80024F08(void)
 {
     HSD_SynthStreamSetVolume(0.0F);
-    AXDriver_8038E6C0(2);
-    AXDriver_8038E6C0(3);
-    AXDriver_8038E6C0(4);
-    AXDriver_8038E6C0(5);
-    AXDriver_8038E6C0(6);
-    AXDriver_8038E6C0(7);
-    AXDriver_8038E6C0(8);
-    AXDriver_8038E6C0(9);
+    HSD_AudioPStreamPauseCh(2);
+    HSD_AudioPStreamPauseCh(3);
+    HSD_AudioPStreamPauseCh(4);
+    HSD_AudioPStreamPauseCh(5);
+    HSD_AudioPStreamPauseCh(6);
+    HSD_AudioPStreamPauseCh(7);
+    HSD_AudioPStreamPauseCh(8);
+    HSD_AudioPStreamPauseCh(9);
 }
 
 void lbAudioAx_80024F6C(void)
 {
     HSD_SynthStreamSetVolume(synth_volume);
-    AXDriver_8038E844(2);
-    AXDriver_8038E844(3);
-    AXDriver_8038E844(4);
-    AXDriver_8038E844(9);
+    HSD_AudioPStreamResumeCh(2);
+    HSD_AudioPStreamResumeCh(3);
+    HSD_AudioPStreamResumeCh(4);
+    HSD_AudioPStreamResumeCh(9);
     if (!lbl_804D640C) {
-        AXDriver_8038E844(5);
-        AXDriver_8038E844(6);
-        AXDriver_8038E844(8);
-        AXDriver_8038E844(7);
+        HSD_AudioPStreamResumeCh(5);
+        HSD_AudioPStreamResumeCh(6);
+        HSD_AudioPStreamResumeCh(8);
+        HSD_AudioPStreamResumeCh(7);
     }
 }
 

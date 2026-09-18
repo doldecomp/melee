@@ -75,12 +75,13 @@ struct HSD_SM {
                                             int sample_rate, int aram_size);
 /* 38E5D4 */ int AXDriver_8038E5D4(void);
 /* 38E5DC */ int AXDriver_8038E5DC(void);
-/* 38E6C0 */ bool AXDriver_8038E6C0(int channel);
-/* 38E844 */ bool AXDriver_8038E844(int channel);
-/* 38E8EC */ bool AXDriver_8038E8EC(const char* path, u8 volume, int track);
+/* 38E6C0 */ bool HSD_AudioPStreamPauseCh(int channel);
+/* 38E844 */ bool HSD_AudioPStreamResumeCh(int channel);
+/* 38E8EC */ bool HSD_AudioPStreamStartChParam(const char* path, u8 volume,
+                                               int track);
 /* 38E968 */ bool AXDriverStop(void);
 /* 38E9A8 */ bool AXDriverPause(void);
 /* 38E9E0 */ bool AXDriverResume(void);
-/* 38EA18 */ bool AXDriver_8038EA18(void);
+/* 38EA18 */ bool AXDriverCheck(void);
 
 #endif

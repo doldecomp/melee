@@ -1182,7 +1182,7 @@ int AXDriver_8038E5DC(void)
     return AXDriver_804D77D0;
 }
 
-static bool AXDriver_8038E5E4(int vid)
+static bool PStreamPauseCh(int vid)
 {
     int idx;
     bool enabled;
@@ -1207,7 +1207,7 @@ static bool AXDriver_8038E5E4(int vid)
     return true;
 }
 
-bool AXDriver_8038E6C0(int channel)
+bool HSD_AudioPStreamPauseCh(int channel)
 {
     bool enabled;
     HSD_SM* v;
@@ -1219,7 +1219,7 @@ bool AXDriver_8038E6C0(int channel)
     v = AXDriver_804D7794;
     while (v != NULL) {
         if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            AXDriver_8038E5E4(v->unk);
+            PStreamPauseCh(v->unk);
         }
         v = v->next;
     }
@@ -1228,7 +1228,7 @@ bool AXDriver_8038E6C0(int channel)
     return true;
 }
 
-static bool AXDriver_8038E768(int vid)
+static bool PStreamResumeCh(int vid)
 {
     int idx;
     bool enabled;
@@ -1253,7 +1253,7 @@ static bool AXDriver_8038E768(int vid)
     return true;
 }
 
-bool AXDriver_8038E844(int channel)
+bool HSD_AudioPStreamResumeCh(int channel)
 {
     bool enabled;
     HSD_SM* v;
@@ -1265,7 +1265,7 @@ bool AXDriver_8038E844(int channel)
     v = AXDriver_804D7794;
     while (v != NULL) {
         if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            AXDriver_8038E768(v->unk);
+            PStreamResumeCh(v->unk);
         }
         v = v->next;
     }
@@ -1274,7 +1274,7 @@ bool AXDriver_8038E844(int channel)
     return true;
 }
 
-bool AXDriver_8038E8EC(const char* path, u8 volume, int track)
+bool HSD_AudioPStreamStartChParam(const char* path, u8 volume, int track)
 {
     int entrynum = DVDConvertPathToEntrynum(path);
     if (AXDriver_804D6038 != -1) {
@@ -1313,7 +1313,7 @@ bool AXDriverResume(void)
     return true;
 }
 
-bool AXDriver_8038EA18(void)
+bool AXDriverCheck(void)
 {
     if (HSD_SynthSFXCheck(AXDriver_804D6038) == -1) {
         return false;
