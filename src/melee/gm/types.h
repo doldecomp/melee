@@ -19,6 +19,7 @@
 #include <melee/mn/types.h>
 
 #define GM_NAMETAG_BANK_COUNT 7
+#define GM_NAMETAG_BANK_SIZE 19
 
 /// @deprecated Replace with inline bitfields
 typedef union UnkFlagStruct {
@@ -203,7 +204,7 @@ struct FighterData {
 };
 
 struct NameTagData {
-    /* 0x000 */ u16 vs_kos[120];
+    /* 0x000 */ u16 vs_kos[GM_NAMETAG_COUNT];
     /* 0x0F0 */ struct gm_stats stats;
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
@@ -214,7 +215,7 @@ struct NameTagData {
 };
 
 struct NameTagDataBank {
-    struct NameTagData inner[19];
+    struct NameTagData inner[GM_NAMETAG_BANK_SIZE];
 };
 
 struct GameRules {
