@@ -138,6 +138,12 @@ struct GamePrefs* gmMainLib_GetGamePrefs(void)
     return &gmMainLib_GetCardData()->save_data.x1CB0;
 }
 
+static inline struct FighterData*
+GetPersistentFighterDataBase(struct GmCardData* data)
+{
+    return data->save_data.x1F2C;
+}
+
 struct FighterData* GetPersistentFighterData(SelectableCharacterKind selkind)
 {
     struct FighterData* base = gmMainLib_GetCardData()->save_data.x1F2C;
@@ -347,9 +353,8 @@ s32 gmMainLib_8015CFCC(u8 arg0)
 
 void gmMainLib_8015D00C(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
+    struct FighterData* base =
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
     base[arg0].x7A.b0 = true;
     gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
@@ -381,9 +386,8 @@ s32 gmMainLib_8015D0F4(u8 arg0)
 
 void gmMainLib_8015D134(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
+    struct FighterData* base =
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
     base[arg0].x7C.b4 = true;
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
@@ -420,9 +424,8 @@ s32 gmMainLib_8015D21C(u8 arg0)
 
 void gmMainLib_8015D25C(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
+    struct FighterData* base =
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
     base[arg0].x7C.b5 = true;
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
@@ -459,9 +462,8 @@ s32 gmMainLib_8015D344(u8 arg0)
 
 void gmMainLib_8015D384(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
+    struct FighterData* base =
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
     base[arg0].x7C.b6 = true;
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
@@ -508,11 +510,11 @@ void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
 
 bool gmMainLib_8015D508(void)
 {
-    struct GmCardData* base = gmMainLib_GetCardData();
+    struct GmCardData* card = gmMainLib_GetCardData();
     s32 i;
     for (i = 0; i < SELKIND_COUNT; ++i) {
-        struct FighterData* _x1F2C = base->save_data.x1F2C;
-        if (!_x1F2C[(u8) i].x7C.b0) {
+        struct FighterData* base = GetPersistentFighterDataBase(card);
+        if (!base[(u8) i].x7C.b0) {
             return false;
         }
     }
@@ -1055,12 +1057,6 @@ void InitializePersistentNameData(s32 arg0)
     data->x1A2 = 5;
 }
 
-static inline struct FighterData*
-GetPersistentFighterDataBase(struct GmCardData* data)
-{
-    return data->save_data.x1F2C;
-}
-
 static inline void ResetAllPersistentFighterData(void)
 {
     s32 i;
@@ -1069,7 +1065,7 @@ static inline void ResetAllPersistentFighterData(void)
         int j = 0;
         u8 k = i;
         struct FighterData* base =
-            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+            GetPersistentFighterDataBase(gmMainLib_GetCardData());
         for (; SELKIND_COUNT > j; j++) {
             base[k].fighter_kos[j] = 0;
         }
@@ -1081,7 +1077,7 @@ static inline void ResetPersistentFighterData(s32 i)
 {
     int j = 0;
     struct FighterData* base =
-        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
     for (; SELKIND_COUNT > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
