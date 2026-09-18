@@ -287,11 +287,12 @@ typedef struct THPVideoDecodeInfoView {
  * @param tileU  Pointer to the output tile for U component.
  * @param tileV  Pointer to the output tile for V component.
  * @param work   Pointer to the work area.
- * @return       Error code indicating the success or failure of the decoding
- * process.
+ * @return       The decode context to hand to ::THPDec_80331340 /
+ *               ::THPDec_803313D0, or NULL on failure; @p tileY receives the
+ *               status code.
  */
-s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
-                   void* workArea)
+void* THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
+                     void* workArea)
 {
     u8 done;
     THPVideoDecodeInfoView* info = tileU;
@@ -344,7 +345,7 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                 }
             } else {
                 *statusOut = 11;
-                return 0;
+                return NULL;
             }
         } else if (0xD8 <= status && status <= 0xDF) {
             if (status == 0xDD) {
@@ -363,7 +364,7 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                 info->x6C = info->file;
             } else if (status != 0xD8) {
                 *statusOut = 11;
-                return 0;
+                return NULL;
             }
         } else if (0xE0 <= status) {
             if (status == 0xE0) {
@@ -381,13 +382,13 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                 }
             } else {
                 *statusOut = 11;
-                return 0;
+                return NULL;
             }
         }
 
         if (done) {
             *statusOut = 0;
-            return (s32) info;
+            return info;
         }
     }
 
@@ -399,7 +400,7 @@ _err_bad_status:
     *statusOut = status;
 
 _err_exit:
-    return 0;
+    return NULL;
 }
 
 void THPDec_803300E0(u32* data)
@@ -959,9 +960,9 @@ static u8 __THPRestartDefinition(THPFileInfo* info)
 #pragma function_align 16
 #endif
 
-void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3)
+void THPDec_80331340(void* arg0, void* arg1, void* arg2, void* arg3)
 {
-    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    THPDecodeInfo* info = arg0;
     info->x8F0 = arg1;
     info->x8F4 = arg2;
     info->x8F8 = arg3;
@@ -984,10 +985,10 @@ void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3)
     }
 }
 
-void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3, u32 x)
+void THPDec_803313D0(void* arg0, void* arg1, void* arg2, void* arg3, u32 x)
 {
     u32 width = x;
-    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    THPDecodeInfo* info = arg0;
     info->x8F0 = arg1;
     info->x8F4 = arg2;
     info->x8F8 = arg3;
