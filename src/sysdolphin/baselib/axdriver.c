@@ -437,7 +437,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
     }
 }
 
-static void fn_8038CC1C(void)
+static void AXDriverCallback(void)
 {
     HSD_SM* v;
     HSD_SM* next;
@@ -486,7 +486,7 @@ static void fn_8038CC1C(void)
     }
 }
 
-static void fn_8038CEA4(s32 vID)
+static void AXDriverKillCallback(s32 vID)
 {
     HSD_SM* v;
     int idx = vID & 0x3F;
@@ -504,7 +504,7 @@ static void fn_8038CEA4(s32 vID)
     AXDriver_804D77C8--;
 }
 
-static void fn_8038CF48(s32 vID)
+static void AXDriverPauseCallback(s32 vID)
 {
     HSD_SM* v;
     int idx;
@@ -1155,9 +1155,9 @@ void AXDriver_8038E498(int voices, int priority, int sample_rate,
     }
 
     HSD_SynthInit(voices, priority, sample_rate, aram_size);
-    HSD_SynthSFXSetDriverMasterClockCallback(fn_8038CC1C);
-    HSD_SynthSFXSetDriverInactivatedCallback(fn_8038CEA4);
-    HSD_SynthSFXSetDriverPauseCallback(fn_8038CF48);
+    HSD_SynthSFXSetDriverMasterClockCallback(AXDriverCallback);
+    HSD_SynthSFXSetDriverInactivatedCallback(AXDriverKillCallback);
+    HSD_SynthSFXSetDriverPauseCallback(AXDriverPauseCallback);
 
     axfxallocsize = 0;
     AXDriver_804D77D4 = NULL;
@@ -1279,7 +1279,7 @@ bool AXDriver_8038E8EC(const char* path, u8 volume, int track)
     if (AXDriver_804D6038 != -1) {
         HSD_SynthSFXKeyOff(AXDriver_804D6038);
     }
-    AXDriver_804D6038 = HSD_Synth_8038B5AC(entrynum, -1, volume, track);
+    AXDriver_804D6038 = HSD_SynthPStreamStart(entrynum, -1, volume, track);
     AXDriver_804D77E8 = AXDriver_804D778C;
     return true;
 }

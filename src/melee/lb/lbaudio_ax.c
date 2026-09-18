@@ -1555,7 +1555,7 @@ static void fn_800267B0(void)
                 lbl_804338A4[j] == -1)
             {
                 int x = lbl_80433A64[j];
-                HSD_Synth_80388E08(x);
+                HSD_SynthSFXGroupDataRemove(x);
                 lbl_80433A64[j] = -1;
                 lbl_80433984[j] = -1;
                 lbl_804D6448 -= offsets_arr_803BC4E4[j][0];
