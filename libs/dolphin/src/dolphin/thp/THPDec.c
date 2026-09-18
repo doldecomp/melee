@@ -369,36 +369,18 @@ _err_exit:
 
 /**
  * Carves the sixteen ::THPFileInfo::mcuBuffer blocks, 128 bytes each, out of
- * the work area's scratch space.
- *
- * @remarks The walk advances eight words at a time over @p info, so the
- *          buffers and the scratch pointer are written by word index
- *          (`[4]`..`[11]` is `mcuBuffer`, `[577]` is `scratch`).
+ * the work area's scratch space, starting at the next 32-byte boundary.
  */
 void THPDec_803300E0(THPFileInfo* info)
 {
-    s32 val;
-    s32 offset;
-    u8 count;
-    u32* buffer;
+    u8* p;
+    u8 i;
 
-    buffer = (u32*) info;
-    count = 0;
-    val = (buffer[577] + 31) & 0xFFFFFFE0;
-    buffer[577] = (val + 2048);
-    offset = val;
-    while (count < 16) {
-        buffer[4] = offset;
-        buffer[5] = offset + 128;
-        buffer[6] = offset + 256;
-        buffer[7] = offset + 384;
-        offset += 1024;
-        buffer[8] = offset - 512;
-        buffer[9] = offset - 384;
-        buffer[10] = offset - 256;
-        buffer[11] = offset - 128;
-        buffer += 8;
-        count += 8;
+    p = (u8*) OSRoundUp32B(info->scratch);
+    info->scratch = p + 16 * 128;
+    for (i = 0; i < 16; i++) {
+        info->mcuBuffer[i] = (THPCoeff*) p;
+        p += 128;
     }
 }
 
