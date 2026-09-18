@@ -78,7 +78,7 @@ void gm_801B1B74(GameModeState* arg0)
     CSSData* css;
     PAD_STACK(8);
 
-    vs_data = &gmMainLib_804D3EE0->modes.unk_D10;
+    vs_data = &gmMainLib_804D3EE0->modes.table[VSMODE_TRAINING];
     css = gm_GetGameModeStateEnterData(arg0);
     if (gm_804D68C1 != 0) {
         lbCardNew_AllocWorkArea();
@@ -103,7 +103,7 @@ static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
 
 void gm_801B1C24(GameModeState* arg0)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.unk_D10;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[VSMODE_TRAINING];
     CSSData* css = gm_GetGameModeStateExitData(arg0);
     s32 i;
     struct GameCache* cache;
@@ -183,7 +183,7 @@ void gm_801B1EEC(GameModeState* arg0)
     SSSData* sss;
     s16 stkind;
 
-    vs_data = &gmMainLib_804D3EE0->modes.unk_D10;
+    vs_data = &gmMainLib_804D3EE0->modes.table[VSMODE_TRAINING];
     sss = gm_GetGameModeStateExitData(arg0);
     if (sss->start_game == 0) {
         gm_SetNextGameModeStateId(0);
@@ -205,7 +205,7 @@ void gm_801B1F70(GameModeState* arg0)
     StartMeleeData* data;
     int i;
 
-    vs = &gmMainLib_804D3EE0->modes.unk_D10;
+    vs = &gmMainLib_804D3EE0->modes.table[VSMODE_TRAINING];
     data = gm_GetGameModeStateEnterData(arg0);
     gm_SetupRulesDefaults(&data->rules);
 
@@ -260,7 +260,7 @@ void gm_801B2204(GameModeState* arg0)
 
 void gm_Mode_Training_OnInit(void)
 {
-    VsModeData* temp_r31 = &gmMainLib_804D3EE0->modes.unk_D10;
+    VsModeData* temp_r31 = &gmMainLib_804D3EE0->modes.table[VSMODE_TRAINING];
     int i;
 
     gm_InitVsMode(temp_r31);

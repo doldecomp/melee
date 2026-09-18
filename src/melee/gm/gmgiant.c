@@ -109,22 +109,24 @@ GameModeState gm_Mode_GiantVs_States[] = {
 
 void gm_801B8FB8(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.unk_F90, 4);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT],
+                       4);
 }
 
 void gm_801B8FE4(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.unk_F90);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT]);
 }
 
 void gm_801B900C(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.unk_F90);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT]);
 }
 
 void gm_801B9034(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.unk_F90, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT],
+                      0);
 }
 
 void fn_801B9060(PlayerInitData* arg0, PlayerInitData* unused)
@@ -137,7 +139,7 @@ void fn_801B9060(PlayerInitData* arg0, PlayerInitData* unused)
 
 void gm_801B9084(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_F90;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT];
     gmVsMelee_EnterVs(scene, data, NULL, fn_801B9060);
 }
 
@@ -148,7 +150,7 @@ void gm_801B90B8(GameModeState* scene)
 
 void gm_801B90E0(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_F90;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT];
     gmVsMelee_EnterSuddenDeath(scene, data, NULL, fn_801B9060);
 }
 
@@ -164,12 +166,13 @@ void gm_801B9134(GameModeState* scene)
 
 void gm_801B9154(GameModeState* scene)
 {
-    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->modes.unk_F90, 0);
+    gmVsMelee_ExitResults(scene,
+                          &gmMainLib_804D3EE0->modes.table[VSMODE_GIANT], 0);
 }
 
 void gm_Mode_GiantVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.unk_F90);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_GIANT]);
 }
 
 void gm_Mode_GiantVs_OnLoad(void)

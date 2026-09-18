@@ -110,22 +110,26 @@ GameModeState gm_Mode_CameraVs_States[] = {
 
 void gm_801B9F10(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera, 7);
+    gmVsMelee_EnterCss(
+        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA], 7);
 }
 
 void gm_801B9F3C(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera);
+    gmVsMelee_ExitCss(scene,
+                      &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA]);
 }
 
 void gm_801B9F64(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera);
+    gmVsMelee_EnterSss(scene,
+                       &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA]);
 }
 
 void gm_801B9F8C(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.vs_fixed_camera, 0);
+    gmVsMelee_ExitSss(
+        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA], 0);
 }
 
 void fn_801B9FB8(StartMeleeData* start, UNUSED StartMeleeData* vs)
@@ -135,7 +139,7 @@ void fn_801B9FB8(StartMeleeData* start, UNUSED StartMeleeData* vs)
 
 void gm_801B9FC8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA];
     gmVsMelee_EnterVs(scene, data, fn_801B9FB8, NULL);
 }
 
@@ -146,7 +150,7 @@ void gm_801B9FFC(GameModeState* scene)
 
 void gm_801BA024(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA];
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801B9FB8, NULL);
 }
 
@@ -162,13 +166,13 @@ void gm_801BA078(GameModeState* scene)
 
 void gm_801BA098(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.vs_fixed_camera;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA];
     gmVsMelee_ExitResults(scene, data, 0);
 }
 
 void gm_Mode_CameraVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_fixed_camera);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_FIXED_CAMERA]);
 }
 
 void gm_Mode_CameraVs_OnLoad(void)

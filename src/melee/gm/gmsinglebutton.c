@@ -114,25 +114,25 @@ GameModeState gm_Mode_SingleButtonVs_States[] = {
 
 void gm_801BA10C(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_EnterCss(scene, data, 8);
 }
 
 void gm_801BA138(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_ExitCss(scene, data);
 }
 
 void gm_801BA160(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_EnterSss(scene, data);
 }
 
 void gm_801BA188(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_ExitSss(scene, data, 0);
 }
 
@@ -143,7 +143,7 @@ void fn_801BA1B4(StartMeleeData* data, StartMeleeData* unused)
 
 void gm_801BA1C8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_EnterVs(scene, data, fn_801BA1B4, NULL);
 }
 
@@ -154,7 +154,7 @@ void gm_801BA1FC(GameModeState* scene)
 
 void gm_801BA224(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA1B4, NULL);
 }
 
@@ -170,13 +170,13 @@ void gm_801BA278(GameModeState* scene)
 
 void gm_801BA298(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_BD0;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON];
     gmVsMelee_ExitResults(scene, data, 0);
 }
 
 void gm_Mode_SingleButtonVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.unk_BD0);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_SINGLE_BUTTON]);
 }
 
 void gm_Mode_SingleButtonVs_OnLoad(void)

@@ -65,6 +65,26 @@ typedef enum GameModeKind {
     /* 2D */ GM_COUNT,
 } GameModeKind;
 
+/// Index into #gmm_x0_vsmodes::table.
+typedef enum VsModeKind {
+    /* 00 */ VSMODE_MELEE,
+    /* 01 */ VSMODE_SUPER_SUDDEN_DEATH,
+    /* 02 */ VSMODE_INVISIBLE,
+    /* 03 */ VSMODE_CAMERA,
+    /* 04 */ VSMODE_FIXED_CAMERA,
+    /* 05 */ VSMODE_SINGLE_BUTTON,
+    /* 06 */ VSMODE_TRAINING,
+    /* 07 */ VSMODE_TINY,
+    /* 08 */ VSMODE_GIANT,
+    /* 09 */ VSMODE_STAMINA,
+    /* 0A */ VSMODE_SLOMO,
+    /* 0B */ VSMODE_LIGHTNING,
+    /* 0C */ VSMODE_MULTIMAN, ///< 10/100-man, 3/15 min, endless, cruel
+    /* 0D */ VSMODE_UNK_D,    ///< unused?
+    /* 0E */ VSMODE_OPENING,  ///< opening movie?
+    VSMODE_COUNT,
+} VsModeKind;
+
 typedef enum GameSceneKind {
     /* +00 */ GS_TITLE,
     /* +01 */ GS_MENU,
