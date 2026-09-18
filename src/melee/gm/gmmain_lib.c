@@ -815,21 +815,21 @@ void gmMainLib_8015DBF4(s32 arg0)
                             (u8) arg0);
 
     gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_MULTIMAN], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_TRAINING], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_MELEE], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_SUPER_SUDDEN_DEATH],
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Multiman], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Training], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Melee], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_SuperSuddenDeath],
                              (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_INVISIBLE], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_CAMERA], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_FIXED_CAMERA], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_SINGLE_BUTTON], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_TINY], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_GIANT], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_STAMINA], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_SLOMO], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_LIGHTNING], (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->table[VSMODE_MULTIMAN], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Invisible], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Camera], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_FixedCamera], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_SingleButton], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Tiny], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Giant], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Stamina], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Slomo], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Lightning], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Multiman], (u8) arg0);
 
     gr = &gmMainLib_804D3EE0->x1850;
     gmMainLib_ClearNameTag(&gr->unk_x10, (u8) arg0);
@@ -853,18 +853,18 @@ void gmMainLib_8015EA80(void)
     PAD_STACK(16);
 
     gmMainLib_8015CDEC();
-    SetDefaultHandicaps(&modes->table[VSMODE_MELEE]);
-    SetDefaultHandicaps(&modes->table[VSMODE_SUPER_SUDDEN_DEATH]);
-    SetDefaultHandicaps(&modes->table[VSMODE_INVISIBLE]);
-    SetDefaultHandicaps(&modes->table[VSMODE_CAMERA]);
-    SetDefaultHandicaps(&modes->table[VSMODE_FIXED_CAMERA]);
-    SetDefaultHandicaps(&modes->table[VSMODE_SINGLE_BUTTON]);
-    SetDefaultHandicaps(&modes->table[VSMODE_TINY]);
-    SetDefaultHandicaps(&modes->table[VSMODE_GIANT]);
-    SetDefaultHandicaps(&modes->table[VSMODE_STAMINA]);
-    SetDefaultHandicaps(&modes->table[VSMODE_SLOMO]);
-    SetDefaultHandicaps(&modes->table[VSMODE_LIGHTNING]);
-    SetDefaultHandicaps(&modes->table[VSMODE_MULTIMAN]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Melee]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_SuperSuddenDeath]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Invisible]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Camera]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_FixedCamera]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_SingleButton]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Tiny]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Giant]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Stamina]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Slomo]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Lightning]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Multiman]);
 }
 
 int gmMainLib_8015ECB0(void)

@@ -111,25 +111,25 @@ GameModeState gm_Mode_SuperSuddenDeath_States[] = {
 void gm_801B8BB4(GameModeState* scene)
 {
     gmVsMelee_EnterCss(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH], 3);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath], 3);
 }
 
 void gm_801B8BE0(GameModeState* scene)
 {
     gmVsMelee_ExitCss(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH]);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath]);
 }
 
 void gm_801B8C08(GameModeState* scene)
 {
     gmVsMelee_EnterSss(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH]);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath]);
 }
 
 void gm_801B8C30(GameModeState* scene)
 {
     gmVsMelee_ExitSss(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH], 0);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath], 0);
 }
 
 void fn_801B8C5C(PlayerInitData* arg0, PlayerInitData* unused)
@@ -140,7 +140,7 @@ void fn_801B8C5C(PlayerInitData* arg0, PlayerInitData* unused)
 void gm_801B8C68(GameModeState* scene)
 {
     VsModeData* data =
-        &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH];
+        &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath];
     gmVsMelee_EnterVs(scene, data, NULL, fn_801B8C5C);
 }
 
@@ -152,7 +152,7 @@ void gm_801B8C9C(GameModeState* scene)
 void gm_801B8CC4(GameModeState* scene)
 {
     gmVsMelee_EnterSuddenDeath(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH],
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath],
         NULL, NULL);
 }
 
@@ -169,12 +169,12 @@ void gm_801B8D14(GameModeState* scene)
 void gm_801B8D34(GameModeState* scene)
 {
     gmVsMelee_ExitResults(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH], 0);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath], 0);
 }
 
 void gm_Mode_SuperSuddenDeath_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_SUPER_SUDDEN_DEATH]);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_SuperSuddenDeath]);
 }
 
 void gm_Mode_SuperSuddenDeath_OnLoad(void)

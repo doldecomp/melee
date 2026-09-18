@@ -413,7 +413,7 @@ struct gmm_x0_44_t {
 
 struct gmm_x0_vsmodes {
     /* 0x0588 */ s8 nametags[PAD_MAX_CONTROLLERS];
-    /* 0x0590 */ VsModeData table[VSMODE_COUNT]; ///< indexed by ::VsModeKind
+    /* 0x0590 */ VsModeData table[GmVsMode_Count]; ///< indexed by ::GmVsMode
 };
 
 struct gmm_x0 {

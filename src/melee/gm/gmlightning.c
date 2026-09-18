@@ -110,26 +110,26 @@ GameModeState gm_Mode_LightningVs_States[] = {
 
 void gm_801BA704(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene,
-                       &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING], 9);
+    gmVsMelee_EnterCss(
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning], 9);
 }
 
 void gm_801BA730(GameModeState* scene)
 {
     gmVsMelee_ExitCss(scene,
-                      &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING]);
+                      &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning]);
 }
 
 void gm_801BA758(GameModeState* scene)
 {
     gmVsMelee_EnterSss(scene,
-                       &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING]);
+                       &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning]);
 }
 
 void gm_801BA780(GameModeState* scene)
 {
     gmVsMelee_ExitSss(scene,
-                      &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING],
+                      &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning],
                       gmVsMode_State_Css);
 }
 
@@ -141,7 +141,7 @@ static void fn_801BA7AC(StartMeleeData* start, UNUSED StartMeleeData* vs)
 
 void gm_801BA7B8(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING];
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning];
     gmVsMelee_EnterVs(scene, data, fn_801BA7AC, NULL);
 }
 
@@ -152,7 +152,7 @@ void gm_801BA7EC(GameModeState* scene)
 
 void gm_801BA814(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING];
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning];
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA7AC, NULL);
 }
 
@@ -169,12 +169,12 @@ void gm_801BA868(GameModeState* scene)
 void gm_801BA888(GameModeState* scene)
 {
     gmVsMelee_ExitResults(
-        scene, &gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING], 0);
+        scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning], 0);
 }
 
 void gm_Mode_LightningVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_LIGHTNING]);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_Lightning]);
 }
 
 void gm_Mode_LightningVs_OnLoad(void)

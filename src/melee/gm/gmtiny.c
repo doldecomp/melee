@@ -109,23 +109,24 @@ GameModeState gm_Mode_TinyVs_States[] = {
 
 void gm_801B8DA8(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_TINY],
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny],
                        5);
 }
 
 void gm_801B8DD4(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_TINY]);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny]);
 }
 
 void gm_801B8DFC(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_TINY]);
+    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny]);
 }
 
 void gm_801B8E24(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_TINY], 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny],
+                      0);
 }
 
 void fn_801B8E50(PlayerInitData* arg0, PlayerInitData* unused)
@@ -138,7 +139,7 @@ void fn_801B8E50(PlayerInitData* arg0, PlayerInitData* unused)
 
 void gm_801B8E74(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_TINY];
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny];
     gmVsMelee_EnterVs(scene, data, NULL, fn_801B8E50);
 }
 
@@ -149,7 +150,7 @@ void gm_801B8EA8(GameModeState* scene)
 
 void gm_801B8ED0(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.table[VSMODE_TINY];
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny];
     gmVsMelee_EnterSuddenDeath(scene, data, NULL, fn_801B8E50);
 }
 
@@ -165,13 +166,13 @@ void gm_801B8F24(GameModeState* scene)
 
 void gm_801B8F44(GameModeState* scene)
 {
-    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->modes.table[VSMODE_TINY],
-                          0);
+    gmVsMelee_ExitResults(scene,
+                          &gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny], 0);
 }
 
 void gm_Mode_TinyVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[VSMODE_TINY]);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_Tiny]);
 }
 
 void gm_Mode_TinyVs_OnLoad(void)
