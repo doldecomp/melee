@@ -232,9 +232,11 @@ void hsd_80393844(void)
     BOOL irq;
     u8 err;
 
+#ifdef MUST_MATCH
     /* MWCC lays .bss globals out in first-use order: the response buffer
      * sits below the request buffer. */
     (void) hsd_804CF780;
+#endif
 
     for (;;) {
         irq = OSDisableInterrupts();
