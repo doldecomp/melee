@@ -3445,7 +3445,7 @@ u8 gm_801677F0(void)
 bool gm_RumbleEnabledForPlayer(int port, int nametag)
 {
     bool result = false;
-    if (nametag == GM_NAMETAG_NONE) {
+    if (nametag == GM_NAMETAG_COUNT) {
         if (GetRumbleSettingOfPort(port)) {
             result = true;
         }
@@ -3482,7 +3482,7 @@ void gm_SetupPlayerDefaults(struct PlayerInitData* player)
     player->handicap = 9;
     player->team = 0;
     player->rumble_enabled = false;
-    player->nametag = GM_NAMETAG_NONE;
+    player->nametag = GM_NAMETAG_COUNT;
     player->xC_b1 = true;
     player->cpu_kind = 4;
     player->cpu_level = 0;

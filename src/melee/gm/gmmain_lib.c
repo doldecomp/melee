@@ -284,7 +284,7 @@ void gmMainLib_8015CDEC(void)
 {
     ssize_t i;
     for (i = 0; i < Gm_Player_NumMax; i++) {
-        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_NONE);
+        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_COUNT);
         if (ptr != 0) {
             *ptr = 5;
         }
@@ -293,7 +293,7 @@ void gmMainLib_8015CDEC(void)
 
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
-    if (arg1 == GM_NAMETAG_NONE) {
+    if (arg1 == GM_NAMETAG_COUNT) {
         if (arg0 < PAD_MAX_CONTROLLERS) {
             return &gmMainLib_804D3EE0->modes.nametags[arg0];
         }
@@ -763,8 +763,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
     for (i = 0; i < 6; i++) {
         ptr = &vmd->start.players[i].nametag;
         if (vmd->start.players[i].nametag == tag) {
-            *ptr = GM_NAMETAG_NONE;
-        } else if (*ptr > tag && *ptr != GM_NAMETAG_NONE) {
+            *ptr = GM_NAMETAG_COUNT;
+        } else if (*ptr > tag && *ptr != GM_NAMETAG_COUNT) {
             *ptr -= 1;
         }
     }
@@ -773,8 +773,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
 static inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
-        *tag_ptr = GM_NAMETAG_NONE;
-    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_NONE) {
+        *tag_ptr = GM_NAMETAG_COUNT;
+    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_COUNT) {
         *tag_ptr = *tag_ptr - 1;
     }
 }
@@ -785,7 +785,7 @@ static inline void gmMainLib_ClearNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
         *tag_ptr = 0;
-    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_NONE) {
+    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_COUNT) {
         *tag_ptr = *tag_ptr - 1;
     }
 }
@@ -839,17 +839,22 @@ static inline void SetDefaultHandicaps(VsModeData* mode)
 void gmMainLib_8015EA80(void)
 {
     struct gmm_x0_vsmodes* modes = &gmMainLib_804D3EE0->modes;
-    s32 i;
 
-    PAD_STACK(0x90);
+    PAD_STACK(0xA0);
 
     gmMainLib_8015CDEC();
-    for (i = 0; i < 6; i++) {
-        SetDefaultHandicaps(&modes->table[i]);
-    }
-    for (i = 7; i < 13; i++) {
-        SetDefaultHandicaps(&modes->table[i]);
-    }
+    SetDefaultHandicaps(&modes->vs_melee);
+    SetDefaultHandicaps(&modes->unk_6D0);
+    SetDefaultHandicaps(&modes->vs_invisible);
+    SetDefaultHandicaps(&modes->vs_camera);
+    SetDefaultHandicaps(&modes->vs_fixed_camera);
+    SetDefaultHandicaps(&modes->unk_BD0);
+    SetDefaultHandicaps(&modes->unk_E50);
+    SetDefaultHandicaps(&modes->unk_F90);
+    SetDefaultHandicaps(&modes->vs_stamina);
+    SetDefaultHandicaps(&modes->unk_1210);
+    SetDefaultHandicaps(&modes->vs_lightning);
+    SetDefaultHandicaps(&modes->unk_1490);
 }
 
 int gmMainLib_8015ECB0(void)
