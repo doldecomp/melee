@@ -43,8 +43,6 @@ s32 hsd_804D78A8;
 
 static ParticleLogEntry hsd_804CEB40[0x100];
 s32 hsd_804CF740[16];
-MccPacketBuffer hsd_804CF780 ATTRIBUTE_ALIGN(32);
-MccPacketBuffer hsd_804CF7C0 ATTRIBUTE_ALIGN(32);
 
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
@@ -225,18 +223,16 @@ void hsd_80393840(MCCPacket* request, MCCPacket* response) {}
 
 void hsd_80393844(void)
 {
+    /// The response packet sent back to the host.
+    static MccPacketBuffer response ATTRIBUTE_ALIGN(32);
+    /// The request packet read from the host.
+    static MccPacketBuffer request ATTRIBUTE_ALIGN(32);
     ParticleLogEntry* base = hsd_804CEB40;
     s32 type;
     u32 flags;
     s32 value;
     BOOL irq;
     u8 err;
-
-#ifdef MUST_MATCH
-    /* MWCC lays .bss globals out in first-use order: the response buffer
-     * sits below the request buffer. */
-    (void) hsd_804CF780;
-#endif
 
     for (;;) {
         irq = OSDisableInterrupts();
@@ -267,21 +263,20 @@ void hsd_80393844(void)
                 hsd_804D78B0 = 0;
             }
         } else if ((value & 0xFFFFFF80) == 0x80) {
-            memset(&hsd_804CF7C0.packet, 0, sizeof(MCCPacket));
+            memset(&request.packet, 0, sizeof(MCCPacket));
             hsd_804D78A8 = value & 0x7F;
-            if (MCCRead(0xF, hsd_804D78A8 << 5, &hsd_804CF7C0.packet,
+            if (MCCRead(0xF, hsd_804D78A8 << 5, &request.packet,
                         sizeof(MCCPacket), 0) != 0 &&
-                !hsd_804CF7C0.packet.x4_b7)
+                !request.packet.x4_b7)
             {
                 u8 cmd;
-                memset(&hsd_804CF780.packet, 0, sizeof(MCCPacket));
-                hsd_804CF780.packet.x4_b7 = 1;
-                hsd_804CF780.packet.x0 = hsd_804CF7C0.packet.x0;
-                cmd = hsd_804CF7C0.packet.command;
-                if (hsd_804CF780.packet.command = cmd, cmd < 0x20U) {
+                memset(&response.packet, 0, sizeof(MCCPacket));
+                response.packet.x4_b7 = 1;
+                response.packet.x0 = request.packet.x0;
+                cmd = request.packet.command;
+                if (response.packet.command = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
-                        lbl_8040A93C[cmd](&hsd_804CF7C0.packet,
-                                          &hsd_804CF780.packet);
+                        lbl_8040A93C[cmd](&request.packet, &response.packet);
                     }
                 }
             }
