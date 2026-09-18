@@ -100,6 +100,8 @@ typedef bool (*Predicate)(void);
 #define SQ(x) ((x) * (x))
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+/// Add @p b to @p a, saturating at @p max.
+#define SAT_ADD(a, b, max) (((a) + (b) > (max)) ? (max) : (a) + (b))
 
 #ifdef __cplusplus
 #ifndef _Static_assert

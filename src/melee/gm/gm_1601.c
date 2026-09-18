@@ -1100,29 +1100,16 @@ void fn_80161C90(MatchEnd* arg0, int arg1, struct gm_stats* s)
     s32 flag;
     s32 i;
 
-    s->sd_count = (s->sd_count + p->self_destructs > 0xFFFF)
-                      ? 0xFFFF
-                      : s->sd_count + p->self_destructs;
-    s->attacks_hit = (s->attacks_hit + p->x38 > 0xFFFFFFFFU)
-                         ? 0xFFFFFFFFU
-                         : s->attacks_hit + p->x38;
-    s->attacks_total = (s->attacks_total + p->x3C > 0xFFFFFFFFU)
-                           ? 0xFFFFFFFFU
-                           : s->attacks_total + p->x3C;
-    s->damage_dealt = (s->damage_dealt + p->x40 > 0xFFFFFFFFU)
-                          ? 0xFFFFFFFFU
-                          : s->damage_dealt + p->x40;
-    s->damage_taken = (s->damage_taken + p->x44 > 0xFFFFFFFFU)
-                          ? 0xFFFFFFFFU
-                          : s->damage_taken + p->x44;
-    s->damage_recovered = (s->damage_recovered + p->x48 > 0xFFFFFFFFU)
-                              ? 0xFFFFFFFFU
-                              : s->damage_recovered + p->x48;
+    s->sd_count = SAT_ADD(s->sd_count, p->self_destructs, U16_MAX);
+    s->attacks_hit = SAT_ADD(s->attacks_hit, p->x38, U32_MAX);
+    s->attacks_total = SAT_ADD(s->attacks_total, p->x3C, U32_MAX);
+    s->damage_dealt = SAT_ADD(s->damage_dealt, p->x40, U32_MAX);
+    s->damage_taken = SAT_ADD(s->damage_taken, p->x44, U32_MAX);
+    s->damage_recovered = SAT_ADD(s->damage_recovered, p->x48, U32_MAX);
     if (s->peak_damage < p->x4C) {
         s->peak_damage = p->x4C;
     }
-    s->match_count =
-        (s->match_count + 1 > 0xFFFF) ? 0xFFFF : s->match_count + 1;
+    s->match_count = SAT_ADD(s->match_count, 1, U16_MAX);
     {
         if (arg1 == fn_80165548(arg0, fn_80165418(arg0), fn_801654A0(arg0))) {
             flag = 1;
@@ -1130,8 +1117,7 @@ void fn_80161C90(MatchEnd* arg0, int arg1, struct gm_stats* s)
             flag = 0;
         }
         if (flag != 0) {
-            s->victories =
-                (s->victories + 1 > 0xFFFF) ? 0xFFFF : s->victories + 1;
+            s->victories = SAT_ADD(s->victories, 1, U16_MAX);
         }
     }
     if (arg1 == fn_80161154(arg0)) {
@@ -1140,43 +1126,21 @@ void fn_80161C90(MatchEnd* arg0, int arg1, struct gm_stats* s)
         flag = 0;
     }
     if (flag != 0) {
-        s->losses = (s->losses + 1 > 0xFFFF) ? 0xFFFF : s->losses + 1;
+        s->losses = SAT_ADD(s->losses, 1, U16_MAX);
     }
-    s->play_time = (s->play_time + arg0->frame_count / 60 > 0xFFFFFFFFU)
-                       ? 0xFFFFFFFFU
-                       : s->play_time + arg0->frame_count / 60;
+    s->play_time = SAT_ADD(s->play_time, arg0->frame_count / 60, U32_MAX);
     count = fn_80161C90_count_players(arg0);
-    count = s->total_player_count + count;
-    if (count > 0xFFFF) {
-        count = 0xFFFF;
-    }
-    s->total_player_count = count;
-    s->walk_distance = (s->walk_distance + p->x50 > 0xFFFFFFFFU)
-                           ? 0xFFFFFFFFU
-                           : s->walk_distance + p->x50;
+    s->total_player_count = SAT_ADD(s->total_player_count, count, U16_MAX);
+    s->walk_distance = SAT_ADD(s->walk_distance, p->x50, U32_MAX);
     gmMainLib_8015EDBC()->x10 =
-        (p->x50 + gmMainLib_8015EDBC()->x10 > 0xFFFFFFFFU)
-            ? 0xFFFFFFFFU
-            : p->x50 + gmMainLib_8015EDBC()->x10;
-    s->run_distance = (s->run_distance + p->x54 > 0xFFFFFFFFU)
-                          ? 0xFFFFFFFFU
-                          : s->run_distance + p->x54;
-    s->fall_distance = (s->fall_distance + p->x58 > 0xFFFFFFFFU)
-                           ? 0xFFFFFFFFU
-                           : s->fall_distance + p->x58;
-    s->peak_height = (s->peak_height + p->x5C > 0xFFFFFFFFU)
-                         ? 0xFFFFFFFFU
-                         : s->peak_height + p->x5C;
+        SAT_ADD(p->x50, gmMainLib_8015EDBC()->x10, U32_MAX);
+    s->run_distance = SAT_ADD(s->run_distance, p->x54, U32_MAX);
+    s->fall_distance = SAT_ADD(s->fall_distance, p->x58, U32_MAX);
+    s->peak_height = SAT_ADD(s->peak_height, p->x5C, U32_MAX);
     if (arg0->match_kind == 2) {
-        s->coins_collected = (s->coins_collected + p->x60 > 0xFFFFFFFFU)
-                                 ? 0xFFFFFFFFU
-                                 : s->coins_collected + p->x60;
-        s->coins_swiped = (s->coins_swiped + p->x64 > 0xFFFFFFFFU)
-                              ? 0xFFFFFFFFU
-                              : s->coins_swiped + p->x64;
-        s->coins_lost = (s->coins_lost + p->x68 > 0xFFFFFFFFU)
-                            ? 0xFFFFFFFFU
-                            : s->coins_lost + p->x68;
+        s->coins_collected = SAT_ADD(s->coins_collected, p->x60, U32_MAX);
+        s->coins_swiped = SAT_ADD(s->coins_swiped, p->x64, U32_MAX);
+        s->coins_lost = SAT_ADD(s->coins_lost, p->x68, U32_MAX);
     }
 }
 
@@ -1380,7 +1344,7 @@ void gm_SetupHumanResultsScreen(u8 arg0, u8 arg1)
 
     if ((u8) (arg1 - 7) <= 1) {
         u32* p = gmMainLib_GetMatchResetCounter();
-        *p = (*p + 1 > U32_MAX) ? U32_MAX : *p + 1;
+        *p = SAT_ADD(*p, 1, U32_MAX);
         return;
     }
     if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
@@ -1397,7 +1361,7 @@ void gm_SetupHumanResultsScreen(u8 arg0, u8 arg1)
             counter = gmMainLib_GetCoinMatchTotal();
             {
                 struct gmm_retval_EDBC* q = gmMainLib_8015EDBC();
-                q->x4 = (q->x4 + 1 > U32_MAX) ? U32_MAX : q->x4 + 1;
+                q->x4 = SAT_ADD(q->x4, 1, U32_MAX);
             }
             break;
         case MatchKind_Bonus:
@@ -1405,18 +1369,18 @@ void gm_SetupHumanResultsScreen(u8 arg0, u8 arg1)
             break;
         }
     }
-    *counter = (*counter + 1 > U32_MAX) ? U32_MAX : *counter + 1;
+    *counter = SAT_ADD(*counter, 1, U32_MAX);
     {
         struct gmm_retval_ED98* a = gmMainLib_8015ED98();
-        a->x0 = (a->x0 + 1 > U32_MAX) ? U32_MAX : a->x0 + 1;
+        a->x0 = SAT_ADD(a->x0, 1, U32_MAX);
     }
     {
         struct gmm_retval_EDB0* b = gmMainLib_8015EDB0();
-        b->x0 = ((u32) b->x0 + 1 > U32_MAX) ? U32_MAX : (u32) b->x0 + 1;
+        b->x0 = SAT_ADD((u32) b->x0, 1, U32_MAX);
     }
     {
         struct gmm_retval_EDBC* c = gmMainLib_8015EDBC();
-        c->x0 = ((u32) c->x0 + 1 > U32_MAX) ? U32_MAX : (u32) c->x0 + 1;
+        c->x0 = SAT_ADD((u32) c->x0, 1, U32_MAX);
     }
 }
 
