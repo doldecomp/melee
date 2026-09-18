@@ -907,7 +907,7 @@ HSD_LObjInfo* HSD_LObjGetDefaultClass(void)
 
 HSD_LObj* HSD_LObjAlloc(void)
 {
-    HSD_LObj* new = hsdNew((HSD_ClassInfo*) HSD_LObjGetDefaultClass());
+    HSD_LObj* new = hsdNew(&HSD_LObjGetDefaultClass()->parent.parent);
     HSD_ASSERT(1478, new);
     return new;
 }
