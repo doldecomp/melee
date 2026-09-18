@@ -31,7 +31,4 @@ typedef struct MnEventData {
 /* 24E524 */ void mnEvent_8024E524(s32);
 /* 24E838 */ void mnEvent_8024E838(int, int);
 
-extern void* mnEvent_804A08F8[];
-extern void* mnEvent_804A0908[4];
-
 #endif
