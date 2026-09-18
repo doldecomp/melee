@@ -1144,8 +1144,8 @@ bool AXDriver_8038E37C(AXDriverAuxType type, void* param)
     return true;
 }
 
-void AXDriver_8038E498(int voices, int priority, int sample_rate,
-                       int aram_size)
+void HSD_AudioInitMultiPStream(int voices, int priority, int sample_rate,
+                               int aram_size)
 {
     int i;
 

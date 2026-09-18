@@ -69,8 +69,8 @@ struct HSD_SM {
 /* 38E30C */ bool AXDriver_8038E30C(s32 channel, s32 type, void* param,
                                     u8* heap, size_t heap_size);
 /* 38E37C */ bool AXDriver_8038E37C(AXDriverAuxType type, void* param);
-/* 38E498 */ void AXDriver_8038E498(int voices, int priority, int sample_rate,
-                                    int aram_size);
+/* 38E498 */ void HSD_AudioInitMultiPStream(int voices, int priority,
+                                            int sample_rate, int aram_size);
 /* 38E5D4 */ int AXDriver_8038E5D4(void);
 /* 38E5DC */ int AXDriver_8038E5DC(void);
 /* 38E6C0 */ bool AXDriver_8038E6C0(int channel);

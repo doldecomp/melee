@@ -2117,7 +2117,7 @@ void lbAudioAx_8002838C(void)
     lbl_804D6438 = lbl_804D643C + lbl_804D6440 + lbl_804D6444;
     lbl_804D3870 = lbl_804D6438;
 
-    AXDriver_8038E498(AX_MAX_VOICES, 0, 0x40, lbl_804D3870);
+    HSD_AudioInitMultiPStream(AX_MAX_VOICES, 0, 0x40, lbl_804D3870);
 
     {
         static u8 lbl_80433C64[53 * 1024];
