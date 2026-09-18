@@ -119,6 +119,11 @@ static inline u32 bitset_test_word(const u32* words, u32 bit)
     return word & bitset_mask(bit);
 }
 
+static inline s64 bitset64_mask(u32 bit)
+{
+    return 1LL << bit;
+}
+
 static inline s32 selkind_mask(u8 kind)
 {
     return 1 << kind;
@@ -324,12 +329,12 @@ s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 
 void gmMainLib_8015CEB4(s32 arg0)
 {
-    gmMainLib_GetCardData()->save_data.x1A68 |= (1LL << arg0);
+    gmMainLib_GetCardData()->save_data.x1A68 |= bitset64_mask(arg0);
 }
 
 bool gmMainLib_8015CEFC(int arg0)
 {
-    if (gmMainLib_804D3EE0->thing.save_data.x1A68 & (1LL << arg0)) {
+    if (gmMainLib_804D3EE0->thing.save_data.x1A68 & bitset64_mask(arg0)) {
         return true;
     } else {
         return false;
