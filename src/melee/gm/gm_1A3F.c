@@ -159,8 +159,9 @@ void gm_801A4014(GameMode* mode)
     GameModeState* state;
     struct stateMachine* sm;
     struct GameSceneInfo* info;
-    u32 dead; ///< @todo regswap hack
-    PAD_STACK(2 * 4);
+    u8 kind;
+    uintptr_t zero;
+    PAD_STACK(4);
 
     sm = &state_machine;
     state = findState(mode->states);
@@ -171,9 +172,15 @@ void gm_801A4014(GameMode* mode)
         state->on_enter(state);
     }
     info = &state->info;
+    kind = info->scene_kind;
+    /* The lookup's result has to reach `scene` through an instruction the
+     * copy propagator cannot delete, or `scene` loses its own register web and
+     * takes the one this function's state pointer needs. `| (zero = 0)` is the
+     * only spelling that survives that pass and still folds back to a plain
+     * move, and C has no bitwise operator on pointers, hence the round trip.
+     */
     scene =
-        (GameScene*) ((uintptr_t) gm_FindGameSceneHandler(info->scene_kind) |
-                      (dead = 0));
+        (GameScene*) ((uintptr_t) gm_FindGameSceneHandler(kind) | (zero = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
     if (scene->on_enter != NULL) {
