@@ -145,6 +145,16 @@ static inline MnEventData* mnEvent_GetData(void)
     return mnEvent_804D6C60->user_data;
 }
 
+static StaticModelDesc* getMainConEv(void)
+{
+    return &MenMainConEv;
+}
+
+static StaticModelDesc* getMainMarkEv(void)
+{
+    return &MenMainMarkEv;
+}
+
 static inline void mnEvent_CreateIconForSlot(s32 idx, HSD_GObj** slot,
                                              HSD_JObj** jobj_0A,
                                              HSD_JObj** jobj_0C, Vec3* pos)
@@ -155,10 +165,7 @@ static inline void mnEvent_CreateIconForSlot(s32 idx, HSD_GObj** slot,
     f32 spacing;
     StaticModelDesc* assets;
 
-#ifdef MUST_MATCH
-    (void) MenMainMarkEv;
-#endif
-    assets = &MenMainMarkEv;
+    assets = getMainMarkEv();
     tree = mnEvent_804D6C60->hsd_obj;
     lb_80011E24(tree, jobj_0A, 0xA, -1);
     lb_80011E24(tree, jobj_0C, 0xC, -1);
@@ -395,7 +402,7 @@ static inline void mnEvent_SetPageCursorY(MnEventData* cursor_data,
     HSD_JObjSetTranslateY(*jobj_0B, (f32) page * (y_b - y_a));
 }
 
-void fn_8024D864(HSD_GObj* gobj)
+void mnEvent_8024D864(HSD_GObj* gobj)
 {
     u8 page;
     MnEventData* data;
@@ -546,7 +553,7 @@ static inline MnEventData* GET_EVENTDATA(HSD_GObj* gobj)
     return gobj->user_data;
 }
 
-void fn_8024E1B4(HSD_GObj* gobj)
+void mnEvent_8024E1B4(HSD_GObj* gobj)
 {
     HSD_JObj* tree = gobj->hsd_obj;
     MnEventData* tmp;
@@ -578,7 +585,7 @@ void fn_8024E1B4(HSD_GObj* gobj)
     }
 }
 
-void fn_8024E2A0(HSD_GObj* gobj)
+void mnEvent_8024E2A0(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
@@ -590,7 +597,7 @@ void fn_8024E2A0(HSD_GObj* gobj)
 
     if (mn_804A04F0.cur_menu != 7) {
         HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
-        proc = HSD_GObj_SetupProc(gobj, fn_8024E1B4, 0);
+        proc = HSD_GObj_SetupProc(gobj, mnEvent_8024E1B4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(data->desc_text);
         HSD_SisLib_803A5CC4(data->name_text);
@@ -600,7 +607,7 @@ void fn_8024E2A0(HSD_GObj* gobj)
     }
 }
 
-void fn_8024E34C(HSD_GObj* gobj)
+void mnEvent_8024E34C(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
     HSD_JObj* tree = gobj->hsd_obj;
@@ -609,7 +616,7 @@ void fn_8024E34C(HSD_GObj* gobj)
 
     if (mn_804A04F0.cur_menu != 7) {
         HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
-        proc = HSD_GObj_SetupProc(gobj, fn_8024E1B4, 0);
+        proc = HSD_GObj_SetupProc(gobj, mnEvent_8024E1B4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(data->desc_text);
         HSD_SisLib_803A5CC4(data->name_text);
@@ -617,7 +624,7 @@ void fn_8024E34C(HSD_GObj* gobj)
         float frame = mn_8022EC18(tree, &mnEvent_803EF740, 0x80);
         if (frame == mnEvent_803EF740.end_frame) {
             HSD_GObjProc_RemoveProc(HSD_GObj_CurrentInvokedProc);
-            proc = HSD_GObj_SetupProc(gobj, fn_8024E2A0, 0);
+            proc = HSD_GObj_SetupProc(gobj, mnEvent_8024E2A0, 0);
             proc->flags_3 = HSD_GObj_804D783C;
         }
     }
@@ -670,7 +677,7 @@ void mnEvent_8024E524(s32 event_idx)
     f32 y_a;
     f32 y_b;
 
-    assets = &MenMainConEv;
+    assets = getMainConEv();
 
     gobj = GObj_Create(6, 7, 0x80);
     mnEvent_804D6C60 = gobj;
@@ -696,7 +703,7 @@ void mnEvent_8024E524(s32 event_idx)
     lb_80011E24(tree, &jobj_0B, 0xB, -1);
     mnEvent_SetPageY(jobj_0B, page, y_a, y_b);
 
-    proc = HSD_GObj_SetupProc(gobj, fn_8024E34C, 0);
+    proc = HSD_GObj_SetupProc(gobj, mnEvent_8024E34C, 0);
     proc->flags_3 = HSD_GObj_804D783C;
     mnEvent_RefreshRows(user_data->first_event);
 
@@ -724,16 +731,16 @@ void mnEvent_8024E838(int event_idx, bool first_time)
     archive = mn_804D6BB8;
 
     lbArchive_LoadSections(
-        archive, (void*) MenMainConEv.joint, "MenMainConEv_Top_joint",
-        MenMainConEv.animjoint, "MenMainConEv_Top_animjoint",
-        MenMainConEv.matanim_joint, "MenMainConEv_Top_matanim_joint",
-        MenMainConEv.shapeanim_joint, "MenMainConEv_Top_shapeanim_joint",
-        MenMainMarkEv.joint, "MenMainMarkEv_Top_joint", 0);
+        archive, (void*) &MenMainConEv.joint, "MenMainConEv_Top_joint",
+        &MenMainConEv.animjoint, "MenMainConEv_Top_animjoint",
+        &MenMainConEv.matanim_joint, "MenMainConEv_Top_matanim_joint",
+        &MenMainConEv.shapeanim_joint, "MenMainConEv_Top_shapeanim_joint",
+        &MenMainMarkEv.joint, "MenMainMarkEv_Top_joint", 0);
 
     if (first_time == false) {
         mnEvent_8024E524(event_idx);
     }
 
-    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_8024D864, 0);
+    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), mnEvent_8024D864, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }
