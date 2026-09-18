@@ -414,15 +414,8 @@ void mnEvent_8024D864(HSD_GObj* gobj)
 #endif
     HSD_JObj* up_jobj_0B;
     u64 inputs;
-    /// @remark Volatile is required for code matching but rejected by
-    /// clang-tidy.
-#ifdef MUST_MATCH
-    HSD_JObj* volatile up_jobj_0C;
-    HSD_JObj* volatile up_jobj_0A;
-#else
     HSD_JObj* up_jobj_0C;
     HSD_JObj* up_jobj_0A;
-#endif
 #ifdef MUST_MATCH
     f32 y_b;
 #endif
@@ -430,13 +423,7 @@ void mnEvent_8024D864(HSD_GObj* gobj)
     {
         HSD_JObj* down_jobj_0B;
         HSD_JObj* down_jobj_0C;
-        /// @remark Volatile is required for code matching but rejected by
-        /// clang-tidy.
-#ifdef MUST_MATCH
-        HSD_JObj* volatile down_jobj_0A;
-#else
         HSD_JObj* down_jobj_0A;
-#endif
 
         if (mn_804D6BC8.cooldown != 0) {
             mn_804D6BC8.cooldown -= 1;
