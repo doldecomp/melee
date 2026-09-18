@@ -15,6 +15,25 @@ typedef struct _MCCPacket {
 
 ASSERT_SIZE(MCCPacket, 0x20);
 
+/**
+ * A packet buffer: one MCC block plus 8 bytes the transfers never touch. The
+ * buffers are 32-byte aligned, like the MCC blocks they are copied to and
+ * from.
+ */
+typedef struct MccPacketBuffer {
+    /* 0x00 */ MCCPacket packet;
+    /* 0x20 */ u8 pad20[8];
+} MccPacketBuffer;
+
+ASSERT_SIZE(MccPacketBuffer, 0x28);
+
+/// Which MCC channels are open, indexed by channel.
+/* 4CF740 */ extern s32 hsd_804CF740[16];
+/// The response packet sent back to the host.
+/* 4CF780 */ extern MccPacketBuffer hsd_804CF780;
+/// The request packet read from the host.
+/* 4CF7C0 */ extern MccPacketBuffer hsd_804CF7C0;
+
 /* 3932D0 */ void fn_803932D0(s32, u32, s32);
 /* 393328 */ s32 hsd_80393328(void);
 /* 393440 */ void hsd_80393440(MCCPacket*, MCCPacket*);

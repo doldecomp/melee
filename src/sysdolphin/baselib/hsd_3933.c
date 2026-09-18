@@ -13,17 +13,6 @@ typedef struct {
     s32 x8;
 } ParticleLogEntry;
 
-/// Host-IO state: which MCC channels are open, and the two packet buffers.
-typedef struct HSD_MccState {
-    /* 0x00 */ s32 channel_open[16];
-    /* 0x40 */ MCCPacket response;
-    /* 0x60 */ u8 unk60[0x20];
-    /* 0x80 */ MCCPacket request;
-    /* 0xA0 */ s32 unkA0[2];
-} HSD_MccState;
-
-ASSERT_SIZE(HSD_MccState, 0xA8);
-
 /// Host-IO USB file transfer messages, kept in one table (retail data object
 /// at 0x8040A9D0, size 0x130): the code addresses individual messages as
 /// field offsets from the table base (e.g. +0x20/+0x90/+0xB8 in
@@ -53,7 +42,9 @@ s32 hsd_804D78AC;
 s32 hsd_804D78A8;
 
 static ParticleLogEntry hsd_804CEB40[0x100];
-HSD_MccState hsd_804CF740;
+s32 hsd_804CF740[16];
+MccPacketBuffer hsd_804CF780 ATTRIBUTE_ALIGN(32);
+MccPacketBuffer hsd_804CF7C0 ATTRIBUTE_ALIGN(32);
 
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
@@ -139,7 +130,7 @@ void hsd_80393440(MCCPacket* request, MCCPacket* response)
         }
         num_blocks = cmd & 0xF;
         for (channel = 2; channel < 16; channel++) {
-            if (hsd_804CF740.channel_open[channel] == 0) {
+            if (hsd_804CF740[channel] == 0) {
                 break;
             }
         }
@@ -174,7 +165,7 @@ void hsd_80393440(MCCPacket* request, MCCPacket* response)
             return;
         }
 
-        hsd_804CF740.channel_open[channel] = 1;
+        hsd_804CF740[channel] = 1;
         response->x6 = channel;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
@@ -191,7 +182,7 @@ void hsd_80393440(MCCPacket* request, MCCPacket* response)
 
     case 0x200:
         i = cmd & 0xF;
-        if (hsd_804CF740.channel_open[i] != 1) {
+        if (hsd_804CF740[i] != 1) {
             response->x6 = 0x8002;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
@@ -208,7 +199,7 @@ void hsd_80393440(MCCPacket* request, MCCPacket* response)
             OSReport("Error(0x%x) in MCCNotify.\n", err);
         }
         hsd_804D78AC = (hsd_804D78AC + 1) % 128;
-        hsd_804CF740.channel_open[i] = 0;
+        hsd_804CF740[i] = 0;
         MCCClose(i);
         return;
     }
@@ -241,6 +232,10 @@ void hsd_80393844(void)
     BOOL irq;
     u8 err;
 
+    /* MWCC lays .bss globals out in first-use order: the response buffer
+     * sits below the request buffer. */
+    (void) hsd_804CF780;
+
     for (;;) {
         irq = OSDisableInterrupts();
         if (hsd_804D78BC == 0) {
@@ -270,25 +265,21 @@ void hsd_80393844(void)
                 hsd_804D78B0 = 0;
             }
         } else if ((value & 0xFFFFFF80) == 0x80) {
-            /* `&base[0x10A].x8` and `&base[0x105].x4` are one past the log
-             * array: they are `hsd_804CF740.request` and `.response`. The
-             * payload addresses have to be respelled from `base` to keep the
-             * compiler from pooling them. */
-            memset((u8*) &base[0x10A].x8, 0, sizeof(MCCPacket));
+            memset(&hsd_804CF7C0.packet, 0, sizeof(MCCPacket));
             hsd_804D78A8 = value & 0x7F;
-            if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8,
+            if (MCCRead(0xF, hsd_804D78A8 << 5, &hsd_804CF7C0.packet,
                         sizeof(MCCPacket), 0) != 0 &&
-                !hsd_804CF740.request.x4_b7)
+                !hsd_804CF7C0.packet.x4_b7)
             {
                 u8 cmd;
-                memset((u8*) &base[0x105].x4, 0, sizeof(MCCPacket));
-                hsd_804CF740.response.x4_b7 = 1;
-                hsd_804CF740.response.x0 = hsd_804CF740.request.x0;
-                cmd = hsd_804CF740.request.command;
-                if (hsd_804CF740.response.command = cmd, cmd < 0x20U) {
+                memset(&hsd_804CF780.packet, 0, sizeof(MCCPacket));
+                hsd_804CF780.packet.x4_b7 = 1;
+                hsd_804CF780.packet.x0 = hsd_804CF7C0.packet.x0;
+                cmd = hsd_804CF7C0.packet.command;
+                if (hsd_804CF780.packet.command = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
-                        lbl_8040A93C[cmd]((MCCPacket*) &base[0x10A].x8,
-                                          (MCCPacket*) &base[0x105].x4);
+                        lbl_8040A93C[cmd](&hsd_804CF7C0.packet,
+                                          &hsd_804CF780.packet);
                     }
                 }
             }
