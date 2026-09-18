@@ -229,7 +229,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 HSD_SynthSFXSetVolumeFade(v->vID, v->x1A, 0);
                 break;
             case 0x8:
-                HSD_SynthSFXSetUserVol(v->vID, v->x1C);
+                HSD_SynthSFXSetPan(v->vID, v->x1C);
                 break;
             case 0x10:
                 break;
@@ -616,7 +616,7 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
     return v->unk;
 }
 
-bool AXDriver_8038D2B4(int vid, u8 pan)
+bool HSD_AudioSFXSetPan(int vid, u8 pan)
 {
     int idx;
     bool enabled;
@@ -633,7 +633,7 @@ bool AXDriver_8038D2B4(int vid, u8 pan)
     }
     enabled = OSDisableInterrupts();
     if (v->vID != -1) {
-        HSD_SynthSFXSetUserVol(v->vID, MIN(pan, 0xFF));
+        HSD_SynthSFXSetPan(v->vID, MIN(pan, 0xFF));
     } else {
         HSD_ASSERT(0x30B, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
         v->pan = pan;
@@ -643,7 +643,7 @@ bool AXDriver_8038D2B4(int vid, u8 pan)
     return true;
 }
 
-bool AXDriver_8038D3B8(s32 vid, u8 volume)
+bool HSD_AudioSFXSetVolumeEx(s32 vid, u8 volume)
 {
     HSD_SM* v;
     s32 idx;
@@ -671,7 +671,7 @@ bool AXDriver_8038D3B8(s32 vid, u8 volume)
     return true;
 }
 
-bool AXDriver_8038D4E4(s32 vid, s16 pitch)
+bool HSD_AudioSFXSetPitchFid(s32 vid, s16 pitch)
 {
     HSD_SM* v;
     s32 idx;
@@ -694,7 +694,7 @@ bool AXDriver_8038D4E4(s32 vid, s16 pitch)
     return true;
 }
 
-bool AXDriver_8038D5B4(s32 vid, s32 aux_bus, u8 send_level)
+bool HSD_AudioSFXSetMix(s32 vid, s32 aux_bus, u8 send_level)
 {
     HSD_SM* v;
     float right_vol;
@@ -750,7 +750,7 @@ bool AXDriver_8038D5B4(s32 vid, s32 aux_bus, u8 send_level)
     return true;
 }
 
-bool AXDriver_8038D914(s32 channel, s32 aux_bus, s8 send_level)
+bool HSD_AudioSFXSetMixGroup(s32 channel, s32 aux_bus, s8 send_level)
 {
     bool enabled;
     HSD_SM* v;
@@ -765,7 +765,7 @@ bool AXDriver_8038D914(s32 channel, s32 aux_bus, s8 send_level)
     v = AXDriver_804D7794;
     while (v != NULL) {
         if ((v->flags & SMSTATE_MASK) && v->itdflag == channel) {
-            AXDriver_8038D5B4(v->unk, aux_bus, (u8) send_level);
+            HSD_AudioSFXSetMix(v->unk, aux_bus, (u8) send_level);
         }
         v = v->next;
     }
@@ -774,7 +774,7 @@ bool AXDriver_8038D914(s32 channel, s32 aux_bus, s8 send_level)
     return true;
 }
 
-bool AXDriver_8038D9D8(int vid)
+bool HSD_AudioSFXCheck(int vid)
 {
     HSD_SM* v;
     int idx;
@@ -1082,8 +1082,8 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     return result;
 }
 
-bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
-                       size_t heap_size)
+bool HSD_AudioSFXSetupAux(s32 channel, s32 type, void* param, u8* heap,
+                          size_t heap_size)
 {
     if (channel < 0 || channel > 1) {
         return false;
@@ -1097,7 +1097,7 @@ bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
     return AXDriverSetupAux(channel, type, param);
 }
 
-bool AXDriver_8038E37C(AXDriverAuxType type, void* param)
+bool HSD_AudioSFXGetDefaultAuxParam(AXDriverAuxType type, void* param)
 {
     if (type < 0 || type > AXDRIVER_AUX_DELAY ||
         (type != AXDRIVER_AUX_OFF && param == NULL))

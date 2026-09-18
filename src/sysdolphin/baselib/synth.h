@@ -37,7 +37,7 @@ void HSD_SynthSFXKeyOff(int);
 /* 389AD0 */ void HSD_SynthSFXResume(int);
 /* 389B50 */ int HSD_SynthSFXCheck(int);
 /* 389BD8 */ void HSD_SynthSFXSetVolumeFade(int, u8, int);
-/* 389CC4 */ void HSD_SynthSFXSetUserVol(int, u8);
+/* 389CC4 */ void HSD_SynthSFXSetPan(int, u8);
 /* 389D24 */ void HSD_SynthSFXSetMix(int, float, float, float);
 /* 389D8C */ void HSD_SynthSFXUpdatePitch(struct HSD_SynthSFXNode*);
 /* 389E2C */ void HSD_SynthSFXSetPitchRatio(int, int, float);

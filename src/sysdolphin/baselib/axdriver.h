@@ -55,20 +55,22 @@ struct HSD_SM {
 /* 38C6C0 */ void AXDriver_8038C6C0(HSD_SM* v);
 /* 38CFF4 */ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track,
                                    int channel);
-/* 38D2B4 */ bool AXDriver_8038D2B4(int vid, u8 pan);
-/* 38D3B8 */ bool AXDriver_8038D3B8(s32 vid, u8 volume);
-/* 38D4E4 */ bool AXDriver_8038D4E4(s32 vid, s16 pitch);
-/* 38D5B4 */ bool AXDriver_8038D5B4(s32 vid, s32 aux_bus, u8 send_level);
-/* 38D914 */ bool AXDriver_8038D914(s32 channel, s32 aux_bus, s8 send_level);
-/* 38D9D8 */ bool AXDriver_8038D9D8(int vid);
+/* 38D2B4 */ bool HSD_AudioSFXSetPan(int vid, u8 pan);
+/* 38D3B8 */ bool HSD_AudioSFXSetVolumeEx(s32 vid, u8 volume);
+/* 38D4E4 */ bool HSD_AudioSFXSetPitchFid(s32 vid, s16 pitch);
+/* 38D5B4 */ bool HSD_AudioSFXSetMix(s32 vid, s32 aux_bus, u8 send_level);
+/* 38D914 */ bool HSD_AudioSFXSetMixGroup(s32 channel, s32 aux_bus,
+                                          s8 send_level);
+/* 38D9D8 */ bool HSD_AudioSFXCheck(int vid);
 /* 38DA70 */ void AXDriver_8038DA70(const char* path, void (*callback)(void));
 /* 38DCFC */ void AXDriver_8038DCFC(void);
 /* 38DD30 */ int AXDriverSetupAux(int channel, AXDriverAuxType type,
                                   void* param);
 /* 38E034 */ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param);
-/* 38E30C */ bool AXDriver_8038E30C(s32 channel, s32 type, void* param,
-                                    u8* heap, size_t heap_size);
-/* 38E37C */ bool AXDriver_8038E37C(AXDriverAuxType type, void* param);
+/* 38E30C */ bool HSD_AudioSFXSetupAux(s32 channel, s32 type, void* param,
+                                       u8* heap, size_t heap_size);
+/* 38E37C */ bool HSD_AudioSFXGetDefaultAuxParam(AXDriverAuxType type,
+                                                 void* param);
 /* 38E498 */ void HSD_AudioInitMultiPStream(int voices, int priority,
                                             int sample_rate, int aram_size);
 /* 38E5D4 */ int AXDriver_8038E5D4(void);

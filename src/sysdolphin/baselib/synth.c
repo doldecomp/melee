@@ -795,7 +795,7 @@ void HSD_SynthSFXSetVolumeFade(int sfx_id, u8 vol, int flag)
     }
 }
 
-void HSD_SynthSFXSetUserVol(int sfx_id, u8 vol)
+void HSD_SynthSFXSetPan(int sfx_id, u8 vol)
 {
     struct HSD_SynthSFXNode* node;
 
