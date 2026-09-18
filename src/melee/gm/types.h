@@ -141,7 +141,7 @@ struct GamePrefs {
 };
 
 /// Match statistics shared by #FighterData and #NameTagData.
-struct gm_stats {
+struct GmStats {
     /* 0x00 */ u16 sd_count;
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ u32 attacks_hit;
@@ -163,12 +163,12 @@ struct gm_stats {
     /* 0x3C */ s32 coins_swiped;
     /* 0x40 */ s32 coins_lost;
 };
-ASSERT_SIZE(struct gm_stats, 0x44);
+ASSERT_SIZE(struct GmStats, 0x44);
 
 struct FighterData {
     /* 0x00 */ u16 fighter_kos[SELKIND_COUNT];
     /* 0x32 */ u8 padding_0x32[2];
-    /* 0x34 */ struct gm_stats stats;
+    /* 0x34 */ struct GmStats stats;
     /* 0x78 */ s8 x78;
     /* 0x79 */ s8 x79;
     /* 0x7A */ UnkFlagStruct x7A;
@@ -205,7 +205,7 @@ struct FighterData {
 
 struct NameTagData {
     /* 0x000 */ u16 vs_kos[GM_NAMETAG_COUNT];
-    /* 0x0F0 */ struct gm_stats stats;
+    /* 0x0F0 */ struct GmStats stats;
     /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;

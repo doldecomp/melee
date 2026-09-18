@@ -1028,7 +1028,7 @@ void gmMainLib_8015EEC8(void)
             offsetof(GmSaveData, x1B40) - offsetof(GmSaveData, x1A68));
 }
 
-void gmMainLib_8015EF30(struct gm_stats* stats)
+void gmMainLib_8015EF30(struct GmStats* stats)
 {
     stats->sd_count = 0;
     stats->attacks_hit = 0;

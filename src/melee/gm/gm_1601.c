@@ -1093,7 +1093,7 @@ static inline u32 fn_80161C90_count_players(MatchEnd* match_end)
     return count;
 }
 
-void fn_80161C90(MatchEnd* arg0, int arg1, struct gm_stats* s)
+void fn_80161C90(MatchEnd* arg0, int arg1, struct GmStats* s)
 {
     MatchPlayerData* p = &arg0->player_standings[arg1];
     u32 count;
