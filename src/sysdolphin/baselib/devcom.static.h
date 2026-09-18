@@ -10,8 +10,8 @@ struct HSD_DevCom {
     struct HSD_DevCom* next;
     int dcReq;
     int file;
-    intptr_t src;
-    intptr_t dest;
+    uintptr_t src;
+    uintptr_t dest;
     size_t size;
     u16 type;
     u16 cancelflag;
