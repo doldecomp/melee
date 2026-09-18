@@ -1239,10 +1239,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
 #endif
 void gmMainLib_8015FA34(s32 arg0)
 {
-    GXRenderModeObj* var_r3;
     s32 i;
 
-    PAD_STACK(50);
+    PAD_STACK(56);
 
     for (i = 1; i < 9; i++) {
         if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
@@ -1304,11 +1303,11 @@ void gmMainLib_8015FBA4(void)
 
 int gmMainLib_8015FC74(void)
 {
-    int temp_r30;
+    int prev;
 
-    temp_r30 = gmMainLib_8046B0F0.x10;
+    prev = gmMainLib_8046B0F0.x10;
     gmMainLib_8046B0F0.x10 = lbTime_GetTimeInSeconds();
-    return gmMainLib_8046B0F0.x10 - temp_r30;
+    return gmMainLib_8046B0F0.x10 - prev;
 }
 
 void gmMainLib_8015FCC0(void)
