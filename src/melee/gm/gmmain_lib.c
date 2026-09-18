@@ -91,24 +91,42 @@ static void order_bss(void)
 }
 #endif
 
+static inline u32 bitset_mask(u32 bit)
+{
+    return 1 << (bit % 32);
+}
+
 static inline void bitset_set(u32* words, u32 bit)
 {
-    words[bit / 32] |= 1 << (bit % 32);
+    words[bit / 32] |= bitset_mask(bit);
 }
 
 static inline void bitset_clear(u32* words, u32 bit)
 {
-    words[bit / 32] &= ~(1 << (bit % 32));
+    words[bit / 32] &= ~bitset_mask(bit);
 }
 
 static inline u32 bitset_test(const u32* words, u32 bit)
 {
-    return words[bit / 32] & (1 << (bit % 32));
+    u32 mask = bitset_mask(bit);
+    return words[bit / 32] & mask;
+}
+
+/// Same as #bitset_test, but loads the word before forming the mask.
+static inline u32 bitset_test_word(const u32* words, u32 bit)
+{
+    u32 word = words[bit / 32];
+    return word & bitset_mask(bit);
+}
+
+static inline s32 selkind_mask(u8 kind)
+{
+    return 1 << kind;
 }
 
 static inline s32 selkind_bit(s32 word, u8 kind)
 {
-    return word & (1 << kind);
+    return word & selkind_mask(kind);
 }
 
 static inline struct NameTagData* GetNameTagSlot(struct NameTagDataBank* banks,
@@ -348,15 +366,13 @@ s8* gmMainLib_8015CFB4(u8 arg0)
 
 s32 gmMainLib_8015CFCC(u8 arg0)
 {
-    return (1 << arg0) & gmMainLib_8015ED98()->xC;
+    return selkind_mask(arg0) & gmMainLib_8015ED98()->xC;
 }
 
 void gmMainLib_8015D00C(u8 arg0)
 {
-    struct FighterData* base =
-        GetPersistentFighterDataBase(gmMainLib_GetCardData());
-    base[arg0].x7A.b0 = true;
-    gmMainLib_8015ED98()->xC |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7A.b0 = true;
+    gmMainLib_8015ED98()->xC |= selkind_mask(arg0);
 }
 
 s32* gmMainLib_8015D06C(u8 arg0)
@@ -386,10 +402,8 @@ s32 gmMainLib_8015D0F4(u8 arg0)
 
 void gmMainLib_8015D134(u8 arg0)
 {
-    struct FighterData* base =
-        GetPersistentFighterDataBase(gmMainLib_GetCardData());
-    base[arg0].x7C.b4 = true;
-    gmMainLib_8015ED98()->x10 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b4 = true;
+    gmMainLib_8015ED98()->x10 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D194(u8 arg0)
@@ -424,10 +438,8 @@ s32 gmMainLib_8015D21C(u8 arg0)
 
 void gmMainLib_8015D25C(u8 arg0)
 {
-    struct FighterData* base =
-        GetPersistentFighterDataBase(gmMainLib_GetCardData());
-    base[arg0].x7C.b5 = true;
-    gmMainLib_8015ED98()->x14 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b5 = true;
+    gmMainLib_8015ED98()->x14 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D2BC(u8 arg0)
@@ -462,10 +474,8 @@ s32 gmMainLib_8015D344(u8 arg0)
 
 void gmMainLib_8015D384(u8 arg0)
 {
-    struct FighterData* base =
-        GetPersistentFighterDataBase(gmMainLib_GetCardData());
-    base[arg0].x7C.b6 = true;
-    gmMainLib_8015ED98()->x18 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b6 = true;
+    gmMainLib_8015ED98()->x18 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D3E4(u8 arg0)
@@ -525,9 +535,7 @@ bool gmMainLib_8015D5DC(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = gmMainLib_8015EDB0()->x4;
-        s32 k = 1 << (u8) i;
-        if ((j & k) == 0) {
+        if (selkind_bit(gmMainLib_8015EDB0()->x4, i) == 0) {
             return false;
         }
     }
@@ -538,9 +546,7 @@ bool gmMainLib_8015D640(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = gmMainLib_8015EDBC()->x8;
-        s32 k = 1 << (u8) i;
-        if ((j & k) == 0) {
+        if (selkind_bit(gmMainLib_8015EDBC()->x8, i) == 0) {
             return false;
         }
     }
@@ -658,9 +664,7 @@ void gmMainLib_8015D924(u32 arg0)
 
 int gmMainLib_8015D94C(u32 arg0)
 {
-    u32* words = gmMainLib_GetCardData()->save_data.x1B4C;
-    u32 word = words[arg0 / 32];
-    return word & (1 << (arg0 % 32));
+    return bitset_test_word(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 u32* gmMainLib_8015D970(ssize_t idx)
@@ -706,9 +710,7 @@ void gmMainLib_8015DA68(u32 arg0)
 
 int gmMainLib_8015DA90(u32 arg0)
 {
-    u32* words = gmMainLib_GetCardData()->save_data.x1B58;
-    u32 word = words[arg0 / 32];
-    return word & (1 << (arg0 % 32));
+    return bitset_test_word(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 void gmMainLib_8015DAB4(u32 arg0)
