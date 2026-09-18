@@ -832,15 +832,17 @@ void gmMainLib_8015DBF4(s32 arg0)
 static inline void SetDefaultHandicaps(VsModeData* mode)
 {
     struct PlayerInitData* p = mode->start.players;
-    p[5].handicap = p[4].handicap = p[3].handicap = p[2].handicap =
-        p[1].handicap = p[0].handicap = 9;
+    s32 i;
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        p[i].handicap = 9;
+    }
 }
 
 void gmMainLib_8015EA80(void)
 {
     struct gmm_x0_vsmodes* modes = &gmMainLib_804D3EE0->modes;
 
-    PAD_STACK(0xA0);
+    PAD_STACK(16);
 
     gmMainLib_8015CDEC();
     SetDefaultHandicaps(&modes->vs_melee);
