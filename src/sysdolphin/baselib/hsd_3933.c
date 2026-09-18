@@ -13,6 +13,29 @@ typedef struct {
     s32 x8;
 } ParticleLogEntry;
 
+/// One 0x20-byte host-IO packet, as exchanged with the MCC server.
+typedef struct _MCCPacket {
+    /* 0x0 */ s32 x0;
+    /* 0x4 */ u8 x4_b7 : 1;
+    /* 0x4 */ u8 _x4_pad : 7;
+    /* 0x5 */ u8 command;
+    /* 0x6 */ u16 x6;
+    /* 0x8 */ u8 payload[0x18];
+} MCCPacket;
+
+ASSERT_SIZE(MCCPacket, 0x20);
+
+/// Host-IO state: which MCC channels are open, and the two packet buffers.
+typedef struct HSD_MccState {
+    /* 0x00 */ s32 channel_open[16];
+    /* 0x40 */ MCCPacket response;
+    /* 0x60 */ u8 unk60[0x20];
+    /* 0x80 */ MCCPacket request;
+    /* 0xA0 */ s32 unkA0[2];
+} HSD_MccState;
+
+ASSERT_SIZE(HSD_MccState, 0xA8);
+
 /// Host-IO USB file transfer messages, kept in one table (retail data object
 /// at 0x8040A9D0, size 0x130): the code addresses individual messages as
 /// field offsets from the table base (e.g. +0x20/+0x90/+0xB8 in
@@ -42,7 +65,7 @@ s32 hsd_804D78AC;
 s32 hsd_804D78A8;
 
 static ParticleLogEntry hsd_804CEB40[0x100];
-s32 hsd_804CF740[42];
+HSD_MccState hsd_804CF740;
 
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
@@ -115,7 +138,7 @@ void hsd_80393440(void* request, void* response)
     u8 err;
     ParticleLogEntry* base;
 
-    cmd = ((u16*) request)[3];
+    cmd = ((MCCPacket*) request)->x6;
     channel_mask = cmd & 0xFF00;
     base = hsd_804CEB40;
 
@@ -128,13 +151,13 @@ void hsd_80393440(void* request, void* response)
         }
         num_blocks = cmd & 0xF;
         for (channel = 2; channel < 16; channel++) {
-            if (((s32*) &base[0x100])[channel] == 0) {
+            if (hsd_804CF740.channel_open[channel] == 0) {
                 break;
             }
         }
 
         if (channel == 16) {
-            ((u16*) response)[3] = (u16) 0x8001;
+            ((MCCPacket*) response)->x6 = 0x8001;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -153,7 +176,7 @@ void hsd_80393440(void* request, void* response)
         }
 
         if (num_blocks > (s32) free_blocks) {
-            ((u16*) response)[3] = (u16) (free_blocks + 0x8010);
+            ((MCCPacket*) response)->x6 = free_blocks + 0x8010;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -163,8 +186,8 @@ void hsd_80393440(void* request, void* response)
             return;
         }
 
-        ((s32*) &base[0x100])[channel] = 1;
-        ((u16*) response)[3] = channel;
+        hsd_804CF740.channel_open[channel] = 1;
+        ((MCCPacket*) response)->x6 = channel;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
             err = MCCGetLastError();
@@ -180,8 +203,8 @@ void hsd_80393440(void* request, void* response)
 
     case 0x200:
         i = cmd & 0xF;
-        if (((s32*) &base[0x100])[i] != 1) {
-            ((u16*) response)[3] = (u16) 0x8002;
+        if (hsd_804CF740.channel_open[i] != 1) {
+            ((MCCPacket*) response)->x6 = 0x8002;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -190,14 +213,14 @@ void hsd_80393440(void* request, void* response)
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
         }
-        ((u16*) response)[3] = 0;
+        ((MCCPacket*) response)->x6 = 0;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
             err = MCCGetLastError();
             OSReport("Error(0x%x) in MCCNotify.\n", err);
         }
         hsd_804D78AC = (hsd_804D78AC + 1) % 128;
-        ((s32*) &base[0x100])[i] = 0;
+        hsd_804CF740.channel_open[i] = 0;
         MCCClose(i);
         return;
     }
@@ -220,13 +243,6 @@ void hsd_80393440(void* request, void* response)
     };
 
 void hsd_80393840(void) {}
-
-typedef struct _MCCPacket {
-    /* 0x0 */ s32 x0;
-    /* 0x4 */ u8 x4_b7 : 1;
-    /* 0x4 */ u8 _x4_pad : 7;
-    /* 0x5 */ u8 x5;
-} MCCPacket;
 
 void hsd_80393844(void)
 {
@@ -266,18 +282,22 @@ void hsd_80393844(void)
                 hsd_804D78B0 = 0;
             }
         } else if ((value & 0xFFFFFF80) == 0x80) {
-            memset((u8*) &base[0x10A].x8, 0, 0x20);
+            /* `&base[0x10A].x8` and `&base[0x105].x4` are one past the log
+             * array: they are `hsd_804CF740.request` and `.response`. The
+             * payload addresses have to be respelled from `base` to keep the
+             * compiler from pooling them. */
+            memset((u8*) &base[0x10A].x8, 0, sizeof(MCCPacket));
             hsd_804D78A8 = value & 0x7F;
-            if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8, 0x20,
-                        0) != 0 &&
-                !((MCCPacket*) &base[0x10A].x8)->x4_b7)
+            if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8,
+                        sizeof(MCCPacket), 0) != 0 &&
+                !hsd_804CF740.request.x4_b7)
             {
                 u8 cmd;
-                memset((u8*) &base[0x105].x4, 0, 0x20);
-                ((MCCPacket*) &base[0x105].x4)->x4_b7 = 1;
-                *(s32*) &base[0x105].x4 = *(&base[0x10A].x8);
-                cmd = ((u8*) &base[0x10A].x8)[5];
-                if (((u8*) &base[0x105].x4)[5] = cmd, cmd < 0x20U) {
+                memset((u8*) &base[0x105].x4, 0, sizeof(MCCPacket));
+                hsd_804CF740.response.x4_b7 = 1;
+                hsd_804CF740.response.x0 = hsd_804CF740.request.x0;
+                cmd = hsd_804CF740.request.command;
+                if (hsd_804CF740.response.command = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
                         lbl_8040A93C[cmd]((u8*) &base[0x10A].x8,
                                           (u8*) &base[0x105].x4);

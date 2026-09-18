@@ -26727,6 +26727,7 @@ hsd_804CE3F8 = .bss:0x804CE3F8; // type:object size:0x330 scope:local data:4byte
 ...bss.0 = .bss:0x804CE3F8; // type:label scope:local
 hsd_804CE728 = .bss:0x804CE728; // type:object size:0x418 scope:local
 hsd_804CEB40 = .bss:0x804CEB40; // type:object size:0xC00 scope:local
+...bss.0 = .bss:0x804CEB40; // type:label scope:local
 hsd_804CF740 = .bss:0x804CF740; // type:object size:0xA8 scope:local data:4byte
 hsd_804CF7E8 = .bss:0x804CF7E8; // type:object size:0x28 scope:local data:byte
 ...bss.0 = .bss:0x804CF7E8; // type:label scope:local
