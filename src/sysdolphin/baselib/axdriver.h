@@ -47,14 +47,14 @@ struct HSD_SM {
 /* 38BB34 */ void* AXDriverAlloc(size_t size);
 /* 38BB98 */ void AXDriverFree(void* ptr);
 /* 38BB9C */ void AXDriverUnlink(HSD_SM* v, HSD_SM** head);
-/* 38BC20 */ bool AXDriverKeyOff(int vid);
+/* 38BC20 */ bool HSD_AudioSFXKeyOff(int vid);
 /* 38BD6C */ void HSD_AudioSFXKeyOffAll(void);
 /* 38BE64 */ void HSD_AudioSFXKeyOffTrack(int track);
-/* 38BF6C */ void AXDriver_8038BF6C(HSD_SM* v);
-/* 38C678 */ u32 AXDriver_8038C678(u32 param_type, u32 param_value);
-/* 38C6C0 */ void AXDriver_8038C6C0(HSD_SM* v);
-/* 38CFF4 */ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track,
-                                   int channel);
+/* 38BF6C */ void AXDriverExec(HSD_SM* v);
+/* 38C678 */ u32 parseWait(u32 param_type, u32 param_value);
+/* 38C6C0 */ void AXDriverInterp(HSD_SM* v);
+/* 38CFF4 */ int HSD_AudioSFXStartParam(int sound_id, u8 volume, u8 pan,
+                                        int track, int channel);
 /* 38D2B4 */ bool HSD_AudioSFXSetPan(int vid, u8 pan);
 /* 38D3B8 */ bool HSD_AudioSFXSetVolumeEx(s32 vid, u8 volume);
 /* 38D4E4 */ bool HSD_AudioSFXSetPitchFid(s32 vid, s16 pitch);

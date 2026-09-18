@@ -198,7 +198,7 @@ int lbAudioAx_80023694(void)
 
 int lbAudioAx_800236B8(int voice)
 {
-    AXDriverKeyOff(voice);
+    HSD_AudioSFXKeyOff(voice);
     return -1;
 }
 
@@ -236,7 +236,7 @@ static int fn_80023750(int id, int vol, int pan, int track, int channel)
     if (pan > 0xFF) {
         pan = 0xFF;
     }
-    return AXDriver_8038CFF4(id, vol, pan, track, channel);
+    return HSD_AudioSFXStartParam(id, vol, pan, track, channel);
 }
 
 int lbAudioAx_800237A8(int id, int vol, int pan)
@@ -1486,7 +1486,7 @@ bool lbAudioAx_80026510(HSD_GObj* target)
 
             if (ud != NULL && ud->owner == target) {
                 if (ud->voice_id != -1) {
-                    AXDriverKeyOff(ud->voice_id);
+                    HSD_AudioSFXKeyOff(ud->voice_id);
                 }
                 if (cur != NULL) {
                     HSD_GObjFree(cur);
@@ -1513,7 +1513,7 @@ bool lbAudioAx_800265C4(HSD_GObj* target_obj, int voice)
         if (ud != NULL && ud->owner == target_obj && ud->voice_id != -1 &&
             ud->voice_id == voice)
         {
-            AXDriverKeyOff(ud->voice_id);
+            HSD_AudioSFXKeyOff(ud->voice_id);
             if (cur != NULL) {
                 HSD_GObjFree(cur);
             }

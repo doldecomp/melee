@@ -49,7 +49,7 @@ void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
     }
 }
 
-static inline void unk_inline(HSD_SM* v, HSD_SM** head)
+static void AXDriverLink(HSD_SM* v, HSD_SM** head)
 {
     if (v == NULL) {
         return;
@@ -65,7 +65,7 @@ static inline void unk_inline(HSD_SM* v, HSD_SM** head)
     *head = v;
 }
 
-static inline bool tmp(HSD_SM* v)
+static bool AXDriverKeyOff(HSD_SM* v)
 {
     int idx;
     u32 state;
@@ -88,7 +88,7 @@ static inline bool tmp(HSD_SM* v)
     return true;
 }
 
-bool AXDriverKeyOff(int vid)
+bool HSD_AudioSFXKeyOff(int vid)
 {
     bool result;
     int idx;
@@ -112,7 +112,7 @@ bool AXDriverKeyOff(int vid)
     if (v == NULL) {
         result = false;
     } else {
-        result = tmp(v);
+        result = AXDriverKeyOff(v);
     }
 
     OSRestoreInterrupts(enabled);
@@ -128,7 +128,7 @@ void HSD_AudioSFXKeyOffAll(void)
     while (v != NULL) {
         if (v->flags & SMSTATE_MASK) {
             if (v != NULL) {
-                tmp(v);
+                AXDriverKeyOff(v);
             }
         }
         v = v->next;
@@ -144,7 +144,7 @@ void HSD_AudioSFXKeyOffTrack(int track)
     while (v != NULL) {
         if ((v->flags & SMSTATE_MASK) && v->track == track) {
             if (v != NULL) {
-                tmp(v);
+                AXDriverKeyOff(v);
             }
         }
         v = v->next;
@@ -155,7 +155,7 @@ void HSD_AudioSFXKeyOffTrack(int track)
 #ifdef MUST_MATCH
 /// MSL sqrtf expansion (src/MSL/math_ppc.h) writing its result through a
 /// caller-provided slot, as in sqrtf_store in lbcollision.c and mplib.c.
-/// Evidence: retail AXDriver_8038BF6C keeps its eight sqrt results in
+/// Evidence: retail AXDriverExec keeps its eight sqrt results in
 /// adjacent 4-byte stack temps at frame offsets 0x10..0x2C (an 8-byte
 /// aligned base), one slot per call in source order, each accessed as a
 /// stfs/lfs pair. The volatile-qualified accesses through the slot pointer
@@ -176,7 +176,7 @@ static inline float sqrtf_store(float x, volatile float* y)
 #define sqrtf_store(x, y) sqrtf(x)
 #endif
 
-void AXDriver_8038BF6C(HSD_SM* v)
+void AXDriverExec(HSD_SM* v)
 {
     u32 flag;
     int i;
@@ -261,7 +261,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 return;
             case 0x200:
                 if (v != NULL) {
-                    tmp(v);
+                    AXDriverKeyOff(v);
                 }
                 return;
             }
@@ -271,7 +271,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
     }
 }
 
-u32 AXDriver_8038C678(u32 param_type, u32 param_value)
+u32 parseWait(u32 param_type, u32 param_value)
 {
     switch (param_type) {
     case 0:
@@ -309,7 +309,7 @@ u32 AXDriver_8038C678(u32 param_type, u32 param_value)
 #define MAX2(x, y) ((x) < (y) ? (y) : (x))
 #define CLAMP(min, val, max) MAX2(MIN2(val, max), min)
 
-void AXDriver_8038C6C0(HSD_SM* v)
+void AXDriverInterp(HSD_SM* v)
 {
     u32 cmd_type;
     u32 cmd_word;
@@ -321,9 +321,9 @@ void AXDriver_8038C6C0(HSD_SM* v)
         cmd_word = *v->cmd_stream;
         cmd_type = cmd_word >> 0x18U;
 
-        cmd_size = AXDriver_8038C678(cmd_type, cmd_word);
+        cmd_size = parseWait(cmd_type, cmd_word);
         if (cmd_size != 0) {
-            AXDriver_8038BF6C(v);
+            AXDriverExec(v);
         }
         v->x30 += cmd_size;
         switch (cmd_type) {
@@ -426,11 +426,11 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 15:
             v->flags |= 0x200;
-            AXDriver_8038BF6C(v);
+            AXDriverExec(v);
             return;
         case 14:
             v->flags |= 0x100;
-            AXDriver_8038BF6C(v);
+            AXDriverExec(v);
             return;
         }
         v->cmd_stream++;
@@ -463,12 +463,12 @@ static void AXDriverCallback(void)
         switch (v->flags & SMSTATE_MASK) {
         case SMSTATE_ACTIVE:
             if (v->x30 == AXDriver_804D778C) {
-                AXDriver_8038C6C0(v);
+                AXDriverInterp(v);
             }
             break;
         case 0:
             AXDriverUnlink(v, &AXDriver_804D7794);
-            unk_inline(v, &AXDriver_804D7790);
+            AXDriverLink(v, &AXDriver_804D7790);
             AXDriver_804D77D0--;
             break;
         case SMSTATE_SLEEP:
@@ -518,7 +518,7 @@ static void AXDriverPauseCallback(s32 vID)
     v->flags |= 0x20000000;
 }
 
-static inline HSD_SM* AXDriver_8038CFF4_inline(void)
+static HSD_SM* AXDriverAssignVVoice(void)
 {
     if (AXDriver_804D7790 == NULL) {
         return NULL;
@@ -536,7 +536,8 @@ static inline HSD_SM* AXDriver_8038CFF4_inline(void)
     }
 }
 
-int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
+int HSD_AudioSFXStartParam(int sound_id, u8 volume, u8 pan, int track,
+                           int channel)
 {
     HSD_SM* v;
     int sample_idx;
@@ -575,7 +576,7 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
         return -1;
     }
 
-    v = AXDriver_8038CFF4_inline();
+    v = AXDriverAssignVVoice();
 
     if (v == NULL) {
         return -1;
@@ -609,7 +610,7 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
 
     enabled = OSDisableInterrupts();
     v->flags = (v->flags & ~SMSTATE_MASK) | SMSTATE_ACTIVE;
-    unk_inline(v, &AXDriver_804D7794);
+    AXDriverLink(v, &AXDriver_804D7794);
     AXDriver_804D77D0++;
     OSRestoreInterrupts(enabled);
 
@@ -1151,7 +1152,7 @@ void HSD_AudioInitMultiPStream(int voices, int priority, int sample_rate,
 
     for (i = 0; i < 0x60; i++) {
         AXDriver_804C45A0[i].flags &= ~SMSTATE_MASK;
-        unk_inline(&AXDriver_804C45A0[i], &AXDriver_804D7790);
+        AXDriverLink(&AXDriver_804C45A0[i], &AXDriver_804D7790);
     }
 
     HSD_SynthInit(voices, priority, sample_rate, aram_size);
