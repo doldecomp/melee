@@ -451,9 +451,9 @@ int mnDiagram2_GetStatValue(u8 is_name_mode, u8 stat_type, u8 entity_idx)
 
     case VSSTAT_SD_COUNT:
         if (is_name_mode) {
-            val16 = GetPersistentNameData(idxVal)->sd_count;
+            val16 = GetPersistentNameData(idxVal)->stats.sd_count;
         } else {
-            val16 = GetPersistentFighterData(idxVal)->sd_count;
+            val16 = GetPersistentFighterData(idxVal)->stats.sd_count;
         }
         return val16;
 
@@ -462,59 +462,59 @@ int mnDiagram2_GetStatValue(u8 is_name_mode, u8 stat_type, u8 entity_idx)
 
     case VSSTAT_DAMAGE_DEALT:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->damage_dealt;
+            return GetPersistentNameData(idxVal)->stats.damage_dealt;
         }
-        return GetPersistentFighterData(idxVal)->damage_dealt;
+        return GetPersistentFighterData(idxVal)->stats.damage_dealt;
 
     case VSSTAT_DAMAGE_TAKEN:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->damage_taken;
+            return GetPersistentNameData(idxVal)->stats.damage_taken;
         }
-        return GetPersistentFighterData(idxVal)->damage_taken;
+        return GetPersistentFighterData(idxVal)->stats.damage_taken;
 
     case VSSTAT_DAMAGE_RECOVERED:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->damage_recovered;
+            return GetPersistentNameData(idxVal)->stats.damage_recovered;
         }
-        return GetPersistentFighterData(idxVal)->damage_recovered;
+        return GetPersistentFighterData(idxVal)->stats.damage_recovered;
 
     case VSSTAT_PEAK_DAMAGE:
         if (is_name_mode) {
-            val16 = GetPersistentNameData(idxVal)->peak_damage;
+            val16 = GetPersistentNameData(idxVal)->stats.peak_damage;
         } else {
-            val16 = GetPersistentFighterData(idxVal)->peak_damage;
+            val16 = GetPersistentFighterData(idxVal)->stats.peak_damage;
         }
         return val16;
 
     case VSSTAT_MATCH_COUNT:
         if (is_name_mode) {
-            val16 = GetPersistentNameData(idxVal)->match_count;
+            val16 = GetPersistentNameData(idxVal)->stats.match_count;
         } else {
-            val16 = GetPersistentFighterData(idxVal)->match_count;
+            val16 = GetPersistentFighterData(idxVal)->stats.match_count;
         }
         return val16;
 
     case VSSTAT_VICTORIES:
         if (is_name_mode) {
-            val16 = GetPersistentNameData(idxVal)->victories;
+            val16 = GetPersistentNameData(idxVal)->stats.victories;
         } else {
-            val16 = GetPersistentFighterData(idxVal)->victories;
+            val16 = GetPersistentFighterData(idxVal)->stats.victories;
         }
         return val16;
 
     case VSSTAT_LOSSES:
         if (is_name_mode) {
-            val16 = GetPersistentNameData(idxVal)->losses;
+            val16 = GetPersistentNameData(idxVal)->stats.losses;
         } else {
-            val16 = GetPersistentFighterData(idxVal)->losses;
+            val16 = GetPersistentFighterData(idxVal)->stats.losses;
         }
         return val16;
 
     case VSSTAT_PLAY_TIME:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->play_time;
+            return GetPersistentNameData(idxVal)->stats.play_time;
         }
-        return GetPersistentFighterData(idxVal)->play_time;
+        return GetPersistentFighterData(idxVal)->stats.play_time;
 
     case VSSTAT_PLAY_PERCENTAGE:
         return mnDiagram_GetPlayPercentage(is_name_mode, idxVal);
@@ -524,45 +524,45 @@ int mnDiagram2_GetStatValue(u8 is_name_mode, u8 stat_type, u8 entity_idx)
 
     case VSSTAT_WALK_DISTANCE:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->walk_distance;
+            return GetPersistentNameData(idxVal)->stats.walk_distance;
         }
-        return GetPersistentFighterData(idxVal)->walk_distance;
+        return GetPersistentFighterData(idxVal)->stats.walk_distance;
 
     case VSSTAT_RUN_DISTANCE:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->run_distance;
+            return GetPersistentNameData(idxVal)->stats.run_distance;
         }
-        return GetPersistentFighterData(idxVal)->run_distance;
+        return GetPersistentFighterData(idxVal)->stats.run_distance;
 
     case VSSTAT_FALL_DISTANCE:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->fall_distance;
+            return GetPersistentNameData(idxVal)->stats.fall_distance;
         }
-        return GetPersistentFighterData(idxVal)->fall_distance;
+        return GetPersistentFighterData(idxVal)->stats.fall_distance;
 
     case VSSTAT_PEAK_HEIGHT:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->peak_height;
+            return GetPersistentNameData(idxVal)->stats.peak_height;
         }
-        return GetPersistentFighterData(idxVal)->peak_height;
+        return GetPersistentFighterData(idxVal)->stats.peak_height;
 
     case VSSTAT_COINS_COLLECTED:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->coins_collected;
+            return GetPersistentNameData(idxVal)->stats.coins_collected;
         }
-        return GetPersistentFighterData(idxVal)->coins_collected;
+        return GetPersistentFighterData(idxVal)->stats.coins_collected;
 
     case VSSTAT_COINS_SWIPED:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->coins_swiped;
+            return GetPersistentNameData(idxVal)->stats.coins_swiped;
         }
-        return GetPersistentFighterData(idxVal)->coins_swiped;
+        return GetPersistentFighterData(idxVal)->stats.coins_swiped;
 
     case VSSTAT_COINS_LOST:
         if (is_name_mode) {
-            return GetPersistentNameData(idxVal)->coins_lost;
+            return GetPersistentNameData(idxVal)->stats.coins_lost;
         }
-        return GetPersistentFighterData(idxVal)->coins_lost;
+        return GetPersistentFighterData(idxVal)->stats.coins_lost;
 
     case VSSTAT_MOST_PLAYED:
         return mnDiagram_GetRankedFighterForName(

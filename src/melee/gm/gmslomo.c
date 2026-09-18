@@ -109,22 +109,25 @@ GameModeState gm_Mode_SlowMo_States[] = {
 
 void gm_801BA50C(GameModeState* scene)
 {
-    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.unk_1210, 0xA);
+    gmVsMelee_EnterCss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo],
+                       0xA);
 }
 
 void gm_801BA538(GameModeState* scene)
 {
-    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.unk_1210);
+    gmVsMelee_ExitCss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo]);
 }
 
 void gm_801BA560(GameModeState* scene)
 {
-    gmVsMelee_EnterSss(scene, &gmMainLib_804D3EE0->modes.unk_1210);
+    gmVsMelee_EnterSss(scene,
+                       &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo]);
 }
 
 void gm_801BA588(GameModeState* scene)
 {
-    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.unk_1210, 0);
+    gmVsMelee_ExitSss(scene, &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo],
+                      0);
 }
 
 /// Sets game speed to 1/2 for slowmo melee
@@ -135,7 +138,7 @@ void fn_801BA5B4(StartMeleeData* data, StartMeleeData* unused)
 
 void gm_801BA5C0(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_1210;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo];
     gmVsMelee_EnterVs(scene, data, fn_801BA5B4, NULL);
 }
 
@@ -146,7 +149,7 @@ void gm_801BA5F4(GameModeState* scene)
 
 void gm_801BA61C(GameModeState* scene)
 {
-    VsModeData* data = &gmMainLib_804D3EE0->modes.unk_1210;
+    VsModeData* data = &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo];
     gmVsMelee_EnterSuddenDeath(scene, data, fn_801BA5B4, NULL);
 }
 
@@ -162,12 +165,13 @@ void gm_801BA670(GameModeState* scene)
 
 void gm_801BA690(GameModeState* scene)
 {
-    gmVsMelee_ExitResults(scene, &gmMainLib_804D3EE0->modes.unk_1210, 0);
+    gmVsMelee_ExitResults(scene,
+                          &gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo], 0);
 }
 
 void gm_Mode_SlowMo_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.unk_1210);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_Slomo]);
 }
 
 void gm_Mode_SlowMo_OnLoad(void)

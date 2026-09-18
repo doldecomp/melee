@@ -225,8 +225,7 @@ static inline void un_80320A40_SetupCamera(void)
     HSD_CObj* cobj;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) un_804D7010->cameras->desc);
+    cobj = lb_80013B14(&un_804D7010->cameras->desc->perspective);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int))(Event) un_803208F0,
                         8);

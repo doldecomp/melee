@@ -1,4 +1,0 @@
-#ifndef SYSDOLPHIN_BASELIB_3B2E_H
-#define SYSDOLPHIN_BASELIB_3B2E_H
-
-#endif

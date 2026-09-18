@@ -89,7 +89,7 @@ void gm_ModeState_ApproachVs_OnEnter(GameModeState* state)
     { /// @todo Inline?
         u8 human_nametag = challenger->human_nametag;
         start->players[0].nametag = human_nametag;
-        start->players[1].nametag = GM_NAMETAG_NONE;
+        start->players[1].nametag = GM_NAMETAG_COUNT;
         start->players[1].cpu_kind = CpuKind_4;
         start->players[1].cpu_level =
             gm_DecideChallengerCpuLevel(challenger->cpu_ckind, human_nametag);

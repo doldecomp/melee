@@ -52,7 +52,7 @@ void lbBgFlash_Init(int arg0)
     HSD_ObjAllocInit(&bgflash_alloc_data, sizeof(BgFlashUserData), 4);
     gobj = GObj_Create(0xE, 0xE, 0);
     if (gobj != NULL) {
-        user_data = (BgFlashUserData*) HSD_ObjAlloc(&bgflash_alloc_data);
+        user_data = HSD_ObjAlloc(&bgflash_alloc_data);
         if (user_data != NULL) {
             GObj_InitUserData(gobj, 0xE, lbBgFlash_Free, user_data);
             flash_gobj = gobj;
@@ -71,7 +71,7 @@ void lbBgFlash_Init(int arg0)
 
 void lbBgFlash_Proc(HSD_GObj* gobj)
 {
-    BgFlashUserData* data = (BgFlashUserData*) gobj->user_data;
+    BgFlashUserData* data = gobj->user_data;
     int was_active = data->x4.x7C_color_enable;
     GXColor color;
     f32 scale;
@@ -100,19 +100,19 @@ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 void fn_80021C1C(void)
 {
     HSD_GObj* gobj = flash_gobj;
-    BgFlashUserData* user_data = (BgFlashUserData*) gobj->user_data;
+    BgFlashUserData* user_data = gobj->user_data;
     lb_80014498(&user_data->x4);
 }
 
 void lbBgFlash_80021C48(u32 arg0, u32 arg1)
 {
-    BgFlashUserData* data = (BgFlashUserData*) flash_gobj->user_data;
+    BgFlashUserData* data = flash_gobj->user_data;
     lb_800144C8(&data->x4, lbl_804D63DC, arg0, arg1);
 }
 
 void fn_80021C80(HSD_GObj* gobj)
 {
-    BgFlashUserData* user_data = (BgFlashUserData*) gobj->user_data;
+    BgFlashUserData* user_data = gobj->user_data;
 
     while (lb_80014258(gobj, &user_data->x4, fn_80021C18)) {
         lb_80014498(&user_data->x4);

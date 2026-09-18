@@ -192,7 +192,7 @@ void vi1101_Scene_OnEnter(void* arg)
     scene = gm_IsCKindUnlocked(CKind_Luigi) ? un_804D6FC0 : un_804D6FC4;
 
     camera_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14((HSD_CameraDescPerspective*) scene->cameras->desc);
+    cobj = lb_80013B14(&scene->cameras->desc->perspective);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(camera_gobj, fn_8031F56C, 5);
     HSD_CObjAddAnim(cobj, scene->cameras->anims[0]);

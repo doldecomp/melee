@@ -358,7 +358,7 @@ void lbShadow_8000F38C(s32 arg0)
             HSD_GObj* lgobj;
             for (lgobj = HSD_GObjGXLinkHead[4]; lgobj != NULL;) {
                 nextGx = lgobj->next_gx;
-                lobj = (HSD_LObj*) lgobj->hsd_obj;
+                lobj = lgobj->hsd_obj;
                 while (lobj != NULL) {
                     if (lobj->flags & 3) {
                         fallback = lobj;
@@ -465,7 +465,7 @@ void lbShadow_8000F38C(s32 arg0)
                         if (!fp2->invisible && !fp2->x221E_b5 &&
                             fp2->x5AC.xC[1] != NULL)
                         {
-                            HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+                            HSD_JObj* jobj = gobj->hsd_obj;
                             HSD_ShadowAddObject(fp2->x20A4.shadow, jobj);
                             lobj = (HSD_LObj*) 1;
                         }

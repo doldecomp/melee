@@ -80,17 +80,22 @@ struct CollVtx {
 }; /* size = 0x18 */
 ASSERT_SIZE(struct CollVtx, 0x18);
 
+enum MapLineGroup {
+    MapLineGroup_Floor,
+    MapLineGroup_Ceiling,
+    MapLineGroup_RightWall,
+    MapLineGroup_LeftWall,
+    MapLineGroup_Dynamic,
+    MapLineGroup_Count,
+};
+
+struct MapLineRange {
+    s16 start;
+    s16 count;
+};
+
 struct MapJoint {
-    /*  +0 */ s16 floor_start;
-    /*  +2 */ s16 floor_count;
-    /*  +4 */ s16 ceiling_start;
-    /*  +6 */ s16 ceiling_count;
-    /*  +8 */ s16 right_wall_start;
-    /*  +A */ s16 right_wall_count;
-    /*  +C */ s16 left_wall_start;
-    /*  +E */ s16 left_wall_count;
-    /* +10 */ s16 dynamic_start;
-    /* +12 */ s16 dynamic_count;
+    /*  +0 */ struct MapLineRange ranges[MapLineGroup_Count];
     /* +14 */ float left_bound;
     /* +18 */ float bottom_bound;
     /* +1C */ float right_bound;
@@ -121,16 +126,7 @@ struct MapCollData {
     /*  +4 */ int vert_count;
     /*  +8 */ MapLine* lines;
     /*  +C */ int line_count;
-    /* +10 */ s16 floor_start;
-    /* +12 */ s16 floor_count;
-    /* +14 */ s16 ceiling_start;
-    /* +16 */ s16 ceiling_count;
-    /* +18 */ s16 right_wall_start;
-    /* +1A */ s16 right_wall_count;
-    /* +1C */ s16 left_wall_start;
-    /* +1E */ s16 left_wall_count;
-    /* +20 */ s16 dynamic_start;
-    /* +22 */ s16 dynamic_count;
+    /* +10 */ struct MapLineRange ranges[MapLineGroup_Count];
     /* +24 */ MapJoint* joints;
     /* +28 */ int joint_count;
     /* +2C */ int x2C; /* inferred */

@@ -124,8 +124,7 @@ void vi1202_Scene_OnEnter(void* arg)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) un_804D7040->cameras->desc);
+    cobj = lb_80013B14(&un_804D7040->cameras->desc->perspective);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 0x8);
     cam_gobj->gxlink_prios = 0x8A9;

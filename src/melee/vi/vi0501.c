@@ -182,7 +182,7 @@ void vi0501_Scene_OnEnter(void* arg)
     HSD_JObj* jobj;
     ViCharaDesc* desc;
 
-    desc = (ViCharaDesc*) arg;
+    desc = arg;
     lbAudioAx_800236DC();
     efLib_Init();
     efAsync_LoadSync(0);
@@ -201,8 +201,7 @@ void vi0501_Scene_OnEnter(void* arg)
     HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
     camera_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) un_804D6F70->cameras->desc);
+    cobj = lb_80013B14(&un_804D6F70->cameras->desc->perspective);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(camera_gobj, vi_8031DC80, 5);
     HSD_CObjAddAnim(cobj, un_804D6F70->cameras->anims[0]);

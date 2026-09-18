@@ -23,15 +23,12 @@ typedef struct MnEventData {
 /* 24D4E0 */ void mnEvent_8024D4E0(HSD_JObj*, Vec3*);
 /* 24D5B0 */ void mnEvent_8024D5B0(HSD_GObj*, u8);
 /* 24D7E0 */ void mnEvent_8024D7E0(HSD_GObj*, s32);
-/* 24D864 */ void fn_8024D864(HSD_GObj*);
-/* 24E1B4 */ void fn_8024E1B4(HSD_GObj*);
-/* 24E2A0 */ void fn_8024E2A0(HSD_GObj*);
-/* 24E34C */ void fn_8024E34C(HSD_GObj*);
+/* 24D864 */ void mnEvent_8024D864(HSD_GObj*);
+/* 24E1B4 */ void mnEvent_8024E1B4(HSD_GObj*);
+/* 24E2A0 */ void mnEvent_8024E2A0(HSD_GObj*);
+/* 24E34C */ void mnEvent_8024E34C(HSD_GObj*);
 /* 24E420 */ void mnEvent_8024E420(MnEventData*, s32);
 /* 24E524 */ void mnEvent_8024E524(s32);
-/* 24E838 */ void mnEvent_8024E838(int, int);
-
-extern void* mnEvent_804A08F8[];
-extern void* mnEvent_804A0908[4];
+/* 24E838 */ void mnEvent_8024E838(int, bool);
 
 #endif

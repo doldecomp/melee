@@ -641,7 +641,7 @@ void gm_801B5ACC(GameModeState* arg0)
     data->rules.x1_0 = 1;
     data->rules.time_limit = (s32) gm_80473A18.x9C / GM_FPS;
     data->rules.x14 = (s32) gm_80473A18.x9C % GM_FPS;
-    data->rules.xD = GM_NAMETAG_NONE;
+    data->rules.xD = GM_NAMETAG_COUNT;
     data->players[0].damage = gm_80473A18.x74;
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
@@ -819,6 +819,6 @@ void gm_Mode_AllStar_OnInit(void)
     settings->color = 0;
     settings->stocks = 1;
     settings->cpu_level = 0;
-    settings->nametag = GM_NAMETAG_NONE;
+    settings->nametag = GM_NAMETAG_COUNT;
     settings->x5 = 0;
 }

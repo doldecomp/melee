@@ -378,19 +378,18 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
 
         switch (type) {
         case 2:
-            lbArchive_InitializeDAT((HSD_Archive*) entry->archive->addr,
+            lbArchive_InitializeDAT(entry->archive->addr,
                                     (u8*) entry->raw_data->addr, entry->size);
             break;
 
         case 3:
-            efAsync_OnLoad((HSD_Archive*) entry->archive->addr,
-                           (u8*) entry->raw_data->addr, entry->size,
-                           entry->effect_index);
+            efAsync_OnLoad(entry->archive->addr, (u8*) entry->raw_data->addr,
+                           entry->size, entry->effect_index);
             break;
 
         case 4:
-            grDatFiles_801C5FC0((HSD_Archive*) entry->archive->addr,
-                                entry->raw_data->addr, entry->size);
+            grDatFiles_801C5FC0(entry->archive->addr, entry->raw_data->addr,
+                                entry->size);
             break;
 
         default:
@@ -401,9 +400,9 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
         entry->load_state = 2;
     }
     if (entry->archive) {
-        return (HSD_Archive*) entry->archive->addr;
+        return entry->archive->addr;
     }
-    return (void*) entry->raw_data->addr;
+    return entry->raw_data->addr;
 }
 
 struct lbDvd_803B72C0_t {
