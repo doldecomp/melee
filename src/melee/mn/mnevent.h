@@ -29,6 +29,6 @@ typedef struct MnEventData {
 /* 24E34C */ void fn_8024E34C(HSD_GObj*);
 /* 24E420 */ void mnEvent_8024E420(MnEventData*, s32);
 /* 24E524 */ void mnEvent_8024E524(s32);
-/* 24E838 */ void mnEvent_8024E838(int, int);
+/* 24E838 */ void mnEvent_8024E838(int, bool);
 
 #endif

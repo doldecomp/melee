@@ -703,9 +703,10 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_ShowSelected(user_data, &jobj_09);
 }
 
-void mnEvent_8024E838(int event_idx, int first_time)
+void mnEvent_8024E838(int event_idx, bool first_time)
 {
     HSD_GObjProc* proc;
+    HSD_Archive* archive;
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -713,24 +714,23 @@ void mnEvent_8024E838(int event_idx, int first_time)
     mn_804A04F0.hovered_selection = 0;
     mnEvent_804D6C65 = event_idx;
 
-    if (first_time) {
+    if (first_time != false) {
         mnEvent_804D6C64 = 0x14;
     } else {
         mnEvent_804D6C64 = 0;
     }
 
     mnEvent_804D6C60 = NULL;
-    {
-        HSD_Archive* archive = mn_804D6BB8;
-        lbArchive_LoadSections(
-            archive, (void*) MenMainConEv.joint, "MenMainConEv_Top_joint",
-            MenMainConEv.animjoint, "MenMainConEv_Top_animjoint",
-            MenMainConEv.matanim_joint, "MenMainConEv_Top_matanim_joint",
-            MenMainConEv.shapeanim_joint, "MenMainConEv_Top_shapeanim_joint",
-            MenMainMarkEv.joint, "MenMainMarkEv_Top_joint", 0);
-    }
+    archive = mn_804D6BB8;
 
-    if (first_time == 0) {
+    lbArchive_LoadSections(
+        archive, (void*) MenMainConEv.joint, "MenMainConEv_Top_joint",
+        MenMainConEv.animjoint, "MenMainConEv_Top_animjoint",
+        MenMainConEv.matanim_joint, "MenMainConEv_Top_matanim_joint",
+        MenMainConEv.shapeanim_joint, "MenMainConEv_Top_shapeanim_joint",
+        MenMainMarkEv.joint, "MenMainMarkEv_Top_joint", 0);
+
+    if (first_time == false) {
         mnEvent_8024E524(event_idx);
     }
 
