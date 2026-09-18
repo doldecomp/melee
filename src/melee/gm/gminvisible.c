@@ -124,23 +124,26 @@ GameModeState gm_Mode_InvisibleVs_States[] = {
 
 void onEnterCss(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_invisible;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible];
     gmVsMelee_EnterCss(state, vs, VS_INVISIBLE);
 }
 
 void onExitCss(GameModeState* state)
 {
-    gmVsMelee_ExitCss(state, &gmMainLib_804D3EE0->modes.vs_invisible);
+    gmVsMelee_ExitCss(state,
+                      &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible]);
 }
 
 void onEnterSss(GameModeState* state)
 {
-    gmVsMelee_EnterSss(state, &gmMainLib_804D3EE0->modes.vs_invisible);
+    gmVsMelee_EnterSss(state,
+                       &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible]);
 }
 
 void onExitSss(GameModeState* state)
 {
-    gmVsMelee_ExitSss(state, &gmMainLib_804D3EE0->modes.vs_invisible,
+    gmVsMelee_ExitSss(state,
+                      &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible],
                       gmVsMode_State_Css);
 }
 
@@ -151,7 +154,7 @@ void initVsPlayer(PlayerInitData* start, UNUSED PlayerInitData* vs)
 
 void onEnterVs(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_invisible;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible];
     gmVsMelee_EnterVs(state, vs, NULL, initVsPlayer);
 }
 
@@ -163,7 +166,7 @@ void onExitVs(GameModeState* state)
 
 void onEnterSuddenDeath(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_invisible;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible];
     gmVsMelee_EnterSuddenDeath(state, vs, NULL, initVsPlayer);
 }
 
@@ -179,13 +182,13 @@ void onEnterResults(GameModeState* state)
 
 void onExitResults(GameModeState* state)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_invisible;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible];
     gmVsMelee_ExitResults(state, vs, gmVsMode_State_Css);
 }
 
 void gm_Mode_InvisibleVs_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_invisible);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_Invisible]);
 }
 
 void gm_Mode_InvisibleVs_OnLoad(void)

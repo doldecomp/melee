@@ -17,7 +17,7 @@
 /* 15CC84 */ void* gmMainLib_GetTrophyCategoryFlags(void);
 /* 15CC90 */ s16* gmMainLib_GetTrophyCount(void);
 /* 15CC9C */ struct NameTagData* GetPersistentNameData(s32);
-/* 15CCE4 */ void* gmMainLib_8015CCE4(void);
+/* 15CCE4 */ struct gmm_x0_44_t* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ u32* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
 /* 15CD08 */ void* gmMainLib_GetVsPlayContestants(void);
@@ -47,7 +47,6 @@
 /* 15CF70 */ void gmMainLib_8015CF70(s32, s32);
 /* 15CF84 */ void gmMainLib_8015CF84(void);
 /* 15CF94 */ bool gmMainLib_8015CF94(void);
-/* 15CFAC */ s32 func_8015CFAC(void);
 /* 15CFB4 */ s8* gmMainLib_8015CFB4(u8);
 /* 15CFCC */ s32 gmMainLib_8015CFCC(u8);
 /* 15D00C */ void gmMainLib_8015D00C(u8);
@@ -147,7 +146,7 @@
 /* 15EEA0 */ void gmMainLib_8015EEA0(void);
 /* 15EEB4 */ void gmMainLib_8015EEB4(void);
 /* 15EEC8 */ void gmMainLib_8015EEC8(void);
-/* 15EF30 */ void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0);
+/* 15EF30 */ void gmMainLib_8015EF30(struct GmStats*);
 /* 15EF84 */ void InitializePersistentNameData(s32);
 /* 15F150 */ void gmMainLib_8015F150(void);
 /* 15F260 */ void gmMainLib_8015F260(void);

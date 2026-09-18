@@ -117,7 +117,7 @@ void gm_801B254C(GameModeState* state)
     CSSData* temp_r30;
     struct GameCache* temp_r30_2;
 
-    temp_r31 = &gmMainLib_804D3EE0->modes.vs_camera;
+    temp_r31 = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     temp_r30 = gm_GetGameModeStateEnterData(state);
     temp_r3 = gmVsMelee_GetKOCounts();
 
@@ -139,7 +139,7 @@ void gm_801B25D4(GameModeState* state)
     CSSData* temp_r3;
     int i;
 
-    temp_r31 = &gmMainLib_804D3EE0->modes.vs_camera;
+    temp_r31 = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     temp_r3 = gm_GetGameModeStateExitData(state);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -162,7 +162,7 @@ void gm_801B26AC(GameModeState* state)
 {
     SSSData* sss;
     VsModeData* vs;
-    vs = &gmMainLib_804D3EE0->modes.vs_camera;
+    vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     sss = gm_GetGameModeStateEnterData(state);
     sss->vs = *vs;
     gm_80167FC4(sss);
@@ -173,7 +173,7 @@ void gm_801B2704(GameModeState* arg0)
     VsModeData* temp_r31;
     SSSData* var_r3;
 
-    temp_r31 = &gmMainLib_804D3EE0->modes.vs_camera;
+    temp_r31 = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     var_r3 = gm_GetGameModeStateExitData(arg0);
     if (var_r3->start_game != 0) {
         *temp_r31 = var_r3->vs;
@@ -192,7 +192,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
     StartMeleeData* start;
     int i;
 
-    vs = &gmMainLib_804D3EE0->modes.vs_camera;
+    vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     start = gm_GetGameModeStateEnterData(state);
     gm_80167BC8(vs);
 
@@ -234,7 +234,7 @@ void gm_PrepCameraModeVSScene(GameModeState* state)
 
 void gm_801B2AF8(GameModeState* arg0)
 {
-    VsModeData* vs = &gmMainLib_804D3EE0->modes.vs_camera;
+    VsModeData* vs = &gmMainLib_804D3EE0->modes.table[GmVsMode_Camera];
     u8* ko_counts = gmVsMelee_GetKOCounts();
     gm_80168638(&gmVsMelee_VsExitInfo.match_end);
     gm_80168710(&gmVsMelee_VsExitInfo.match_end, vs);
@@ -245,5 +245,5 @@ void gm_801B2AF8(GameModeState* arg0)
 
 void gm_Mode_Camera_OnInit(void)
 {
-    gm_InitVsMode(&gmMainLib_804D3EE0->modes.vs_camera);
+    gm_InitVsMode(&gmMainLib_804D3EE0->modes.table[GmVsMode_Camera]);
 }

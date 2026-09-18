@@ -170,22 +170,23 @@ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
     f32 tag_player_attacks;
 
     if (is_name_mode != 0) {
-        if (GetPersistentNameData(player_index)->attacks_total != 0) {
+        if (GetPersistentNameData(player_index)->stats.attacks_total != 0) {
             tag_player_attacks =
-                GetPersistentNameData(player_index)->attacks_total;
-            return (
-                100.0f *
-                (100.0f * (GetPersistentNameData(player_index)->attacks_hit /
-                           tag_player_attacks)));
+                GetPersistentNameData(player_index)->stats.attacks_total;
+            return (100.0f *
+                    (100.0f *
+                     (GetPersistentNameData(player_index)->stats.attacks_hit /
+                      tag_player_attacks)));
         }
         return 0;
     }
-    if (GetPersistentFighterData(player_index)->attacks_total != 0) {
-        player_attacks = GetPersistentFighterData(player_index)->attacks_total;
-        return (
-            100.0f *
-            (100.0f * (GetPersistentFighterData(player_index)->attacks_hit /
-                       player_attacks)));
+    if (GetPersistentFighterData(player_index)->stats.attacks_total != 0) {
+        player_attacks =
+            GetPersistentFighterData(player_index)->stats.attacks_total;
+        return (100.0f *
+                (100.0f *
+                 (GetPersistentFighterData(player_index)->stats.attacks_hit /
+                  player_attacks)));
     }
     return 0;
 }
@@ -199,25 +200,27 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     if (is_name_mode != 0) {
         total_play_time = 0.0f;
         for (i = 0; i < 0x78; i++) {
-            total_play_time += GetPersistentNameData(i)->play_time;
+            total_play_time += GetPersistentNameData(i)->stats.play_time;
         }
         if (total_play_time != zero) {
-            return (s32) (100.0f *
-                          (100.0f *
-                           (GetPersistentNameData(player_index)->play_time /
-                            total_play_time)));
+            return (
+                s32) (100.0f *
+                      (100.0f *
+                       (GetPersistentNameData(player_index)->stats.play_time /
+                        total_play_time)));
         }
         return 0;
     }
     total_play_time = 0.0f;
     for (i = 0; i < 0x19; i++) {
-        total_play_time += GetPersistentFighterData(i)->play_time;
+        total_play_time += GetPersistentFighterData(i)->stats.play_time;
     }
     if (total_play_time != zero) {
-        return (s32) (100.0f *
-                      (100.0f *
-                       (GetPersistentFighterData(player_index)->play_time /
-                        total_play_time)));
+        return (
+            s32) (100.0f *
+                  (100.0f *
+                   (GetPersistentFighterData(player_index)->stats.play_time /
+                    total_play_time)));
     }
     return 0;
 }
@@ -228,22 +231,23 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
     f32 temp_f31_2;
 
     if (is_name_mode != 0) {
-        if (GetPersistentNameData((s32) player_index)->match_count != 0) {
-            temp_f31_2 =
-                (f32) GetPersistentNameData((s32) player_index)->match_count;
+        if (GetPersistentNameData((s32) player_index)->stats.match_count != 0)
+        {
+            temp_f31_2 = (f32) GetPersistentNameData((s32) player_index)
+                             ->stats.match_count;
             return (s32) (100.0f *
                           ((f32) GetPersistentNameData((s32) player_index)
-                               ->total_player_count /
+                               ->stats.total_player_count /
                            temp_f31_2));
         }
         return 0;
     }
-    if (GetPersistentFighterData((s32) player_index)->match_count != 0) {
-        temp_f31 =
-            (f32) GetPersistentFighterData((s32) player_index)->match_count;
+    if (GetPersistentFighterData((s32) player_index)->stats.match_count != 0) {
+        temp_f31 = (f32) GetPersistentFighterData((s32) player_index)
+                       ->stats.match_count;
         return (s32) (100.0f *
                       ((f32) GetPersistentFighterData((s32) player_index)
-                           ->total_player_count /
+                           ->stats.total_player_count /
                        temp_f31));
     }
     return 0;
@@ -1816,12 +1820,12 @@ void mnDiagram_CreatePopupTexts(HSD_GObj* arg0, s32 selkind_or_nametag_slot_id,
         }
         if (use_nametag != 0) {
             sd_count = GetPersistentNameData((u8) selkind_or_nametag_slot_id)
-                           ->sd_count;
+                           ->stats.sd_count;
             mnDiagram_FormatPopupNumber(buf, sd_count);
         } else {
             sd_count =
                 GetPersistentFighterData((u8) selkind_or_nametag_slot_id)
-                    ->sd_count;
+                    ->stats.sd_count;
             mnDiagram_FormatPopupNumber(buf, sd_count);
         }
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);

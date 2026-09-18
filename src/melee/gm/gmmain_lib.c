@@ -91,6 +91,56 @@ static void order_bss(void)
 }
 #endif
 
+static inline u32 bitset_mask(u32 bit)
+{
+    return 1 << (bit % 32);
+}
+
+static inline void bitset_set(u32* words, u32 bit)
+{
+    words[bit / 32] |= bitset_mask(bit);
+}
+
+static inline void bitset_clear(u32* words, u32 bit)
+{
+    words[bit / 32] &= ~bitset_mask(bit);
+}
+
+static inline u32 bitset_test(const u32* words, u32 bit)
+{
+    u32 mask = bitset_mask(bit);
+    return words[bit / 32] & mask;
+}
+
+/// Same as #bitset_test, but loads the word before forming the mask.
+static inline u32 bitset_test_word(const u32* words, u32 bit)
+{
+    u32 word = words[bit / 32];
+    return word & bitset_mask(bit);
+}
+
+static inline s64 bitset64_mask(u32 bit)
+{
+    return 1LL << bit;
+}
+
+static inline s32 selkind_mask(u8 kind)
+{
+    return 1 << kind;
+}
+
+static inline s32 selkind_bit(s32 word, u8 kind)
+{
+    return word & selkind_mask(kind);
+}
+
+static inline struct NameTagData* GetNameTagSlot(struct NameTagDataBank* banks,
+                                                 s32 idx)
+{
+    return &banks[idx / GM_NAMETAG_BANK_SIZE]
+                .inner[idx % GM_NAMETAG_BANK_SIZE];
+}
+
 GameRules* gmMainLib_GetGameRules(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -109,6 +159,12 @@ struct NameTagDataBank* gmMainLib_GetNameTagDataBanks(void)
 struct GamePrefs* gmMainLib_GetGamePrefs(void)
 {
     return &gmMainLib_GetCardData()->save_data.x1CB0;
+}
+
+static inline struct FighterData*
+GetPersistentFighterDataBase(struct GmCardData* data)
+{
+    return data->save_data.x1F2C;
 }
 
 struct FighterData* GetPersistentFighterData(SelectableCharacterKind selkind)
@@ -134,12 +190,10 @@ s16* gmMainLib_GetTrophyCount(void)
 
 struct NameTagData* GetPersistentNameData(s32 arg0)
 {
-    struct NameTagDataBank* base = &gmMainLib_GetCardData()->nametag_banks[0];
-    struct NameTagData* inner = base[arg0 / 19].inner;
-    return &inner[arg0 % 19];
+    return GetNameTagSlot(gmMainLib_GetCardData()->nametag_banks, arg0);
 }
 
-void* gmMainLib_8015CCE4(void)
+struct gmm_x0_44_t* gmMainLib_8015CCE4(void)
 {
     return &gmMainLib_804D3EE0->unk_44;
 }
@@ -253,7 +307,7 @@ void gmMainLib_8015CDEC(void)
 {
     ssize_t i;
     for (i = 0; i < Gm_Player_NumMax; i++) {
-        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_NONE);
+        s8* ptr = gmMainLib_8015CE44(i, GM_NAMETAG_COUNT);
         if (ptr != 0) {
             *ptr = 5;
         }
@@ -262,27 +316,25 @@ void gmMainLib_8015CDEC(void)
 
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
-    if (arg1 == GM_NAMETAG_NONE) {
+    if (arg1 == GM_NAMETAG_COUNT) {
         if (arg0 < PAD_MAX_CONTROLLERS) {
             return &gmMainLib_804D3EE0->modes.nametags[arg0];
         }
         return 0;
     } else {
-        struct NameTagDataBank* base =
-            &gmMainLib_GetCardData()->nametag_banks[0];
-        struct NameTagData* inner = &base[arg1 / 19].inner[0];
-        return &inner[arg1 % 19].x1A2;
+        return &GetNameTagSlot(gmMainLib_GetCardData()->nametag_banks, arg1)
+                    ->x1A2;
     }
 }
 
 void gmMainLib_8015CEB4(s32 arg0)
 {
-    gmMainLib_GetCardData()->save_data.x1A68 |= (1LL << arg0);
+    gmMainLib_GetCardData()->save_data.x1A68 |= bitset64_mask(arg0);
 }
 
 bool gmMainLib_8015CEFC(int arg0)
 {
-    if (gmMainLib_804D3EE0->thing.save_data.x1A68 & (1LL << arg0)) {
+    if (gmMainLib_804D3EE0->thing.save_data.x1A68 & bitset64_mask(arg0)) {
         return true;
     } else {
         return false;
@@ -319,16 +371,13 @@ s8* gmMainLib_8015CFB4(u8 arg0)
 
 s32 gmMainLib_8015CFCC(u8 arg0)
 {
-    return (1 << arg0) & gmMainLib_8015ED98()->xC;
+    return selkind_mask(arg0) & gmMainLib_8015ED98()->xC;
 }
 
 void gmMainLib_8015D00C(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
-    base[arg0].x7A.b0 = true;
-    gmMainLib_8015ED98()->xC |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7A.b0 = true;
+    gmMainLib_8015ED98()->xC |= selkind_mask(arg0);
 }
 
 s32* gmMainLib_8015D06C(u8 arg0)
@@ -353,17 +402,13 @@ bool gmMainLib_8015D0D8(u8 arg0)
 
 s32 gmMainLib_8015D0F4(u8 arg0)
 {
-    s32 x10 = gmMainLib_8015ED98()->x10;
-    return x10 & (1 << arg0);
+    return selkind_bit(gmMainLib_8015ED98()->x10, arg0);
 }
 
 void gmMainLib_8015D134(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
-    base[arg0].x7C.b4 = true;
-    gmMainLib_8015ED98()->x10 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b4 = true;
+    gmMainLib_8015ED98()->x10 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D194(u8 arg0)
@@ -393,17 +438,13 @@ bool gmMainLib_8015D200(u8 arg0)
 
 s32 gmMainLib_8015D21C(u8 arg0)
 {
-    s32 x14 = gmMainLib_8015ED98()->x14;
-    return x14 & (1 << arg0);
+    return selkind_bit(gmMainLib_8015ED98()->x14, arg0);
 }
 
 void gmMainLib_8015D25C(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
-    base[arg0].x7C.b5 = true;
-    gmMainLib_8015ED98()->x14 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b5 = true;
+    gmMainLib_8015ED98()->x14 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D2BC(u8 arg0)
@@ -433,17 +474,13 @@ bool gmMainLib_8015D328(u8 arg0)
 
 s32 gmMainLib_8015D344(u8 arg0)
 {
-    s32 x18 = gmMainLib_8015ED98()->x18;
-    return x18 & (1 << arg0);
+    return selkind_bit(gmMainLib_8015ED98()->x18, arg0);
 }
 
 void gmMainLib_8015D384(u8 arg0)
 {
-    u8 _[12];
-
-    struct FighterData* base = &gmMainLib_804D3EE0->thing.save_data.x1F2C[0];
-    base[arg0].x7C.b6 = true;
-    gmMainLib_8015ED98()->x18 |= 1 << arg0;
+    GetPersistentFighterDataBase(gmMainLib_GetCardData())[arg0].x7C.b6 = true;
+    gmMainLib_8015ED98()->x18 |= selkind_mask(arg0);
 }
 
 u8* gmMainLib_8015D3E4(u8 arg0)
@@ -468,7 +505,7 @@ u32* gmMainLib_8015D438(u8 arg0)
 
 s32* gmMainLib_8015D450(u8 arg0)
 {
-    return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
+    return &gmMainLib_8015EDBC()->x4C[arg0];
 }
 
 bool gmMainLib_8015D48C(u8 arg0)
@@ -478,8 +515,7 @@ bool gmMainLib_8015D48C(u8 arg0)
 
 s32 gmMainLib_8015D4A8(u8 arg0)
 {
-    s32 x1C = gmMainLib_8015ED98()->x1C;
-    return x1C & (1 << arg0);
+    return selkind_bit(gmMainLib_8015ED98()->x1C, arg0);
 }
 
 void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
@@ -489,11 +525,11 @@ void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
 
 bool gmMainLib_8015D508(void)
 {
-    struct GmCardData* base = gmMainLib_GetCardData();
+    struct GmCardData* card = gmMainLib_GetCardData();
     s32 i;
-    for (i = 0; i < 25; ++i) {
-        struct FighterData* _x1F2C = base->save_data.x1F2C;
-        if (!_x1F2C[(u8) i].x7C.b0) {
+    for (i = 0; i < SELKIND_COUNT; ++i) {
+        struct FighterData* base = GetPersistentFighterDataBase(card);
+        if (!base[(u8) i].x7C.b0) {
             return false;
         }
     }
@@ -504,9 +540,7 @@ bool gmMainLib_8015D5DC(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = gmMainLib_8015EDB0()->x4;
-        s32 k = 1 << (u8) i;
-        if ((j & k) == 0) {
+        if (selkind_bit(gmMainLib_8015EDB0()->x4, i) == 0) {
             return false;
         }
     }
@@ -517,9 +551,7 @@ bool gmMainLib_8015D640(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = gmMainLib_8015EDBC()->x8;
-        s32 k = 1 << (u8) i;
-        if ((j & k) == 0) {
+        if (selkind_bit(gmMainLib_8015EDBC()->x8, i) == 0) {
             return false;
         }
     }
@@ -599,12 +631,10 @@ u32* gmMainLib_8015D804(s32 arg0)
 
 s32 gmMainLib_8015D818(u32 arg0)
 {
-    u8 _[40];
+    u8 _[32];
 
     if (gmMainLib_8015D94C(arg0) == 0) {
-        struct GmCardData* base = &gmMainLib_804D3EE0->thing;
-        u32* q = &base->save_data.x1B80[arg0];
-        *q = lbTime_GetTimeInSeconds();
+        *gmMainLib_8015D804(arg0) = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
         gmMainLib_8015D8FC(arg0);
         return 1;
@@ -614,57 +644,46 @@ s32 gmMainLib_8015D818(u32 arg0)
 
 void gmMainLib_8015D888(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    thing[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 void gmMainLib_8015D8B0(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    thing[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 s32 gmMainLib_8015D8D8(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B40[0];
-    return thing[arg0 / 32] & (1 << (arg0 % 32));
+    return bitset_test(gmMainLib_GetCardData()->save_data.x1B40, arg0);
 }
 
 void gmMainLib_8015D8FC(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    thing[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 void gmMainLib_8015D924(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    thing[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 int gmMainLib_8015D94C(u32 arg0)
 {
-    u32* thing = &gmMainLib_GetCardData()->save_data.x1B4C[0];
-    u32 flag = thing[arg0 / 32];
-    return flag & (1 << (arg0 % 32));
+    return bitset_test_word(gmMainLib_GetCardData()->save_data.x1B4C, arg0);
 }
 
 u32* gmMainLib_8015D970(ssize_t idx)
 {
-    u32* base = &gmMainLib_804D3EE0->unk_6C[0];
-    return &base[idx];
+    struct gmm_x0_44_t* trophies = gmMainLib_8015CCE4();
+    return &trophies->times[idx];
 }
 
-/// https://decomp.me/scratch/CJy8X
 bool gmMainLib_8015D984(u32 arg0)
 {
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (gmMainLib_8015DA90(arg0) == 0) {
-        u32* temp_r31 = (u32*) gmMainLib_804D3EE0;
-        temp_r31 += arg0;
-        temp_r31 = (u32*) ((u8*) temp_r31 + 0x6C);
-        *temp_r31 = lbTime_GetTimeInSeconds();
+        *gmMainLib_8015D970(arg0) = lbTime_GetTimeInSeconds();
 
         gmMainLib_8015D9F4(arg0);
         gmMainLib_8015DA40(arg0);
@@ -676,45 +695,37 @@ bool gmMainLib_8015D984(u32 arg0)
 
 void gmMainLib_8015D9F4(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->unk_44;
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_8015CCE4()->flags, arg0);
 }
 
 s32 gmMainLib_8015DA1C(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->unk_44;
-    return (1 << (arg0 % 32)) & base[arg0 / 32];
+    return bitset_test(gmMainLib_8015CCE4()->flags, arg0);
 }
 
 void gmMainLib_8015DA40(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 void gmMainLib_8015DA68(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    base[arg0 / 32] &= ~(1 << (arg0 % 32));
+    bitset_clear(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 int gmMainLib_8015DA90(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1B58[0];
-    u32* qwe = &base[arg0 / 32];
-    return *qwe & (1 << (arg0 % 32));
+    return bitset_test_word(gmMainLib_GetCardData()->save_data.x1B58, arg0);
 }
 
 void gmMainLib_8015DAB4(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
-    base[arg0 / 32] |= (1 << (arg0 % 32));
+    bitset_set(gmMainLib_GetCardData()->save_data.x1C88, arg0);
 }
 
 bool gmMainLib_8015DADC(u32 arg0)
 {
-    u32* base = &gmMainLib_GetCardData()->save_data.x1C88[0];
-    return (1 << (arg0 % 32)) & base[arg0 / 32];
+    return bitset_test(gmMainLib_GetCardData()->save_data.x1C88, arg0);
 }
 
 u8 gmMainLib_8015DB00(void)
@@ -759,8 +770,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
     for (i = 0; i < 6; i++) {
         ptr = &vmd->start.players[i].nametag;
         if (vmd->start.players[i].nametag == tag) {
-            *ptr = GM_NAMETAG_NONE;
-        } else if (*ptr > tag && *ptr != GM_NAMETAG_NONE) {
+            *ptr = GM_NAMETAG_COUNT;
+        } else if (*ptr > tag && *ptr != GM_NAMETAG_COUNT) {
             *ptr -= 1;
         }
     }
@@ -769,8 +780,8 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* vmd, u8 tag)
 static inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
-        *tag_ptr = GM_NAMETAG_NONE;
-    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_NONE) {
+        *tag_ptr = GM_NAMETAG_COUNT;
+    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_COUNT) {
         *tag_ptr = *tag_ptr - 1;
     }
 }
@@ -781,7 +792,7 @@ static inline void gmMainLib_ClearNameTag(u8* tag_ptr, u8 tag)
 {
     if (*tag_ptr == tag) {
         *tag_ptr = 0;
-    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_NONE) {
+    } else if (*tag_ptr > tag && *tag_ptr != GM_NAMETAG_COUNT) {
         *tag_ptr = *tag_ptr - 1;
     }
 }
@@ -804,20 +815,21 @@ void gmMainLib_8015DBF4(s32 arg0)
                             (u8) arg0);
 
     gmMainLib_AdjustNameTags(&gmHomeRun_VsModeData, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_D10, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_melee, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_6D0, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_invisible, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_camera, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_fixed_camera, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_BD0, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_E50, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_F90, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_stamina, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1210, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->vs_lightning, (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_1490, (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Multiman], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Training], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Melee], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_SuperSuddenDeath],
+                             (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Invisible], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Camera], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_FixedCamera], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_SingleButton], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Tiny], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Giant], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Stamina], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Slomo], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Lightning], (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->table[GmVsMode_Multiman], (u8) arg0);
 
     gr = &gmMainLib_804D3EE0->x1850;
     gmMainLib_ClearNameTag(&gr->unk_x10, (u8) arg0);
@@ -825,38 +837,34 @@ void gmMainLib_8015DBF4(s32 arg0)
     gmMainLib_ClearNameTag(&gr->x13, (u8) arg0);
 }
 
-static inline void
-SetPlayerHandicaps(struct PlayerInitData* p0, struct PlayerInitData* p1,
-                   struct PlayerInitData* p2, struct PlayerInitData* p3,
-                   struct PlayerInitData* p4, struct PlayerInitData* p5)
+static inline void SetDefaultHandicaps(VsModeData* mode)
 {
-    p5->handicap = p4->handicap = p3->handicap = p2->handicap = p1->handicap =
-        p0->handicap = 9;
+    struct PlayerInitData* p = mode->start.players;
+    s32 i;
+    for (i = 0; i < GM_MAX_PLAYERS; i++) {
+        p[i].handicap = 9;
+    }
 }
 
 void gmMainLib_8015EA80(void)
 {
-    struct gmMainLib_8015EA80_modes {
-        u8 pad[8];
-        VsModeData modes[13];
-    }* data =
-        (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->modes.nametags;
-    struct PlayerInitData* players;
-    s32 i;
+    struct gmm_x0_vsmodes* modes = &gmMainLib_804D3EE0->modes;
 
-    PAD_STACK(0x90);
+    PAD_STACK(16);
 
     gmMainLib_8015CDEC();
-    for (i = 0; i < 6; i++) {
-        players = data->modes[i].start.players;
-        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
-                           &players[4], &players[5]);
-    }
-    for (i = 7; i < 13; i++) {
-        players = data->modes[i].start.players;
-        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
-                           &players[4], &players[5]);
-    }
+    SetDefaultHandicaps(&modes->table[GmVsMode_Melee]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_SuperSuddenDeath]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Invisible]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Camera]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_FixedCamera]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_SingleButton]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Tiny]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Giant]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Stamina]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Slomo]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Lightning]);
+    SetDefaultHandicaps(&modes->table[GmVsMode_Multiman]);
 }
 
 int gmMainLib_8015ECB0(void)
@@ -957,7 +965,7 @@ void gmMainLib_8015EDE4(void)
 
 void gmMainLib_8015EDF8(void)
 {
-    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFB;
+    gmMainLib_GetCardData()->save_data.x186C &= ~4;
 }
 
 s32 gmMainLib_8015EE0C(void)
@@ -972,7 +980,7 @@ void gmMainLib_8015EE1C(void)
 
 void gmMainLib_8015EE30(void)
 {
-    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFE;
+    gmMainLib_GetCardData()->save_data.x186C &= ~1;
 }
 
 s32 gmMainLib_8015EE44(void)
@@ -987,7 +995,7 @@ void gmMainLib_8015EE54(void)
 
 void gmMainLib_8015EE68(void)
 {
-    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFFD;
+    gmMainLib_GetCardData()->save_data.x186C &= ~2;
     gmMainLib_GetGamePrefs()->stage_mask =
         gmMainLib_DefaultGamePrefs.stage_mask;
 }
@@ -1004,7 +1012,7 @@ void gmMainLib_8015EEA0(void)
 
 void gmMainLib_8015EEB4(void)
 {
-    gmMainLib_GetCardData()->save_data.x186C &= 0xFFFFFFF7;
+    gmMainLib_GetCardData()->save_data.x186C &= ~8;
 }
 
 void gmMainLib_8015EEC8(void)
@@ -1016,30 +1024,31 @@ void gmMainLib_8015EEC8(void)
         struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }
-    memzero(&gmMainLib_GetCardData()->save_data.x1A68, 0xD8);
+    memzero(&gmMainLib_GetCardData()->save_data.x1A68,
+            offsetof(GmSaveData, x1B40) - offsetof(GmSaveData, x1A68));
 }
 
-void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
+void gmMainLib_8015EF30(struct GmStats* stats)
 {
-    arg0->x0 = 0;
-    arg0->x4 = 0;
-    arg0->x8 = 0;
-    arg0->xC = 0;
-    arg0->x10 = 0;
-    arg0->x18 = 0;
-    arg0->x1A = 0;
-    arg0->x1C = 0;
-    arg0->x1E = 0;
-    arg0->x20 = 0;
-    arg0->x24 = 0;
-    arg0->x14 = 0;
-    arg0->x28 = 0;
-    arg0->x2C = 0;
-    arg0->x30 = 0;
-    arg0->x34 = 0;
-    arg0->x3C = 0;
-    arg0->x40 = 0;
-    arg0->x38 = 0;
+    stats->sd_count = 0;
+    stats->attacks_hit = 0;
+    stats->attacks_total = 0;
+    stats->damage_dealt = 0;
+    stats->damage_taken = 0;
+    stats->peak_damage = 0;
+    stats->match_count = 0;
+    stats->victories = 0;
+    stats->losses = 0;
+    stats->play_time = 0;
+    stats->total_player_count = 0;
+    stats->damage_recovered = 0;
+    stats->walk_distance = 0;
+    stats->run_distance = 0;
+    stats->fall_distance = 0;
+    stats->peak_height = 0;
+    stats->coins_swiped = 0;
+    stats->coins_lost = 0;
+    stats->coins_collected = 0;
 }
 
 void InitializePersistentNameData(s32 arg0)
@@ -1051,36 +1060,31 @@ void InitializePersistentNameData(s32 arg0)
     PAD_STACK(16);
 
     bank = gmMainLib_804D3EE0->thing.nametag_banks;
-    data = &bank[(u8) arg0 / 19].inner[(u8) arg0 % 19];
-    for (i = 0; i < 120; i++) {
+    data = &bank[(u8) arg0 / GM_NAMETAG_BANK_SIZE]
+                .inner[(u8) arg0 % GM_NAMETAG_BANK_SIZE];
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
         data->vs_kos[i] = 0;
     }
-    gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
+    gmMainLib_8015EF30(&data->stats);
     for (i = 0; i < SELKIND_COUNT; i++) {
         data->play_time_by_fighter[i] = 0;
     }
     data->x1A2 = 5;
 }
 
-static inline struct FighterData*
-GetPersistentFighterDataBase(struct GmCardData* data)
-{
-    return data->save_data.x1F2C;
-}
-
 static inline void ResetAllPersistentFighterData(void)
 {
     s32 i;
 
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         int j = 0;
         u8 k = i;
         struct FighterData* base =
-            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
-        for (; 0x19 > j; j++) {
+            GetPersistentFighterDataBase(gmMainLib_GetCardData());
+        for (; SELKIND_COUNT > j; j++) {
             base[k].fighter_kos[j] = 0;
         }
-        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[k].sd_count);
+        gmMainLib_8015EF30(&base[k].stats);
     }
 }
 
@@ -1088,18 +1092,18 @@ static inline void ResetPersistentFighterData(s32 i)
 {
     int j = 0;
     struct FighterData* base =
-        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
-    for (; 0x19 > j; j++) {
+        GetPersistentFighterDataBase(gmMainLib_GetCardData());
+    for (; SELKIND_COUNT > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
-    gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
+    gmMainLib_8015EF30(&base[(u8) i].stats);
 }
 
 void gmMainLib_8015F150(void)
 {
     s32 i;
 
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         ResetPersistentFighterData(i);
     }
 }
@@ -1110,22 +1114,8 @@ void gmMainLib_8015F260(void)
 
     PAD_STACK(16);
 
-    for (i = 0; i < 120; i++) {
-        struct NameTagData* data;
-        struct NameTagDataBank* bank;
-
-        int j;
-        bank = gmMainLib_804D3EE0->thing.nametag_banks;
-        data = &bank[(u8) i / 19].inner[(u8) i % 19];
-
-        for (j = 0; j < 120; j++) {
-            data->vs_kos[j] = 0;
-        }
-        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
-        for (j = 0; j < 25; j++) {
-            data->play_time_by_fighter[j] = 0;
-        }
-        data->x1A2 = 5;
+    for (i = 0; i < GM_NAMETAG_COUNT; i++) {
+        InitializePersistentNameData(i);
     }
 }
 
@@ -1146,7 +1136,7 @@ void gmMainLib_8015F4BC(void)
 
 u32 gmMainLib_8015F4E8(void)
 {
-    return GetRumbleSettingOfPort(5);
+    return gmMainLib_GetGamePrefs()->deflicker;
 }
 
 void gmMainLib_8015F4F4(u8 arg0)
@@ -1156,48 +1146,26 @@ void gmMainLib_8015F4F4(u8 arg0)
 
 void gmMainLib_8015F500(void)
 {
-    GXRenderModeObj* var_r0;
-    GXRenderModeObj* var_r3;
+    GXRenderModeObj* mode;
 
     if (gmMainLib_8046B0F0.progressive) {
-        if (gmMainLib_8015F4E8() != 0) {
-            var_r0 = &gmMainLib_803D4A80;
-        } else {
-            var_r0 = &GXNtsc480Prog;
-        }
-        var_r3 = var_r0;
+        mode = gmMainLib_8015F4E8() ? &gmMainLib_803D4A80 : &GXNtsc480Prog;
     } else {
-        if (gmMainLib_8015F4E8() != 0) {
-            var_r0 = &GXNtsc480IntDf;
-        } else {
-            var_r0 = &GXNtsc480Int;
-        }
-        var_r3 = var_r0;
+        mode = gmMainLib_8015F4E8() ? &GXNtsc480IntDf : &GXNtsc480Int;
     }
-    HSD_VISetConfigure(var_r3);
+    HSD_VISetConfigure(mode);
 }
 
-void gmMainLib_8015F588(bool arg0)
+void gmMainLib_8015F588(bool deflicker)
 {
-    GXRenderModeObj* var_r0;
-    GXRenderModeObj* var_r3;
+    GXRenderModeObj* mode;
 
     if (gmMainLib_8046B0F0.progressive) {
-        if (arg0) {
-            var_r0 = &gmMainLib_803D4A80;
-        } else {
-            var_r0 = &GXNtsc480Prog;
-        }
-        var_r3 = var_r0;
+        mode = deflicker ? &gmMainLib_803D4A80 : &GXNtsc480Prog;
     } else {
-        if (arg0) {
-            var_r0 = &GXNtsc480IntDf;
-        } else {
-            var_r0 = &GXNtsc480Int;
-        }
-        var_r3 = var_r0;
+        mode = deflicker ? &GXNtsc480IntDf : &GXNtsc480Int;
     }
-    HSD_VISetConfigure(var_r3);
+    HSD_VISetConfigure(mode);
 }
 
 static s8 gmMainLib_804D3EE4[] = { 0 };
@@ -1210,7 +1178,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
 
-        memzero(&gmMainLib_804D3EE0->thing.save_data.trophy_count, 0x25C);
+        memzero(&gmMainLib_804D3EE0->thing.save_data.trophy_count,
+                offsetof(GmSaveData, x1F2C) -
+                    offsetof(GmSaveData, trophy_count));
         Toy_80311960();
 
         if (arg1 == 0) {
@@ -1233,7 +1203,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             lbLang_SetSavedLanguage(lang);
         }
 
-        memzero(&gmMainLib_804D3EE0->thing, 0x448);
+        memzero(&gmMainLib_804D3EE0->thing, offsetof(GmSaveData, x1CB0));
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
@@ -1241,9 +1211,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
             gm_80164504(0x14U);
         }
     } else {
-        s32 bank_offset = (arg0 - 2) * 19;
+        s32 bank_offset = (arg0 - 2) * GM_NAMETAG_BANK_SIZE;
         s32 j;
-        for (j = 0; j < 19; j++) {
+        for (j = 0; j < GM_NAMETAG_BANK_SIZE; j++) {
             struct NameTagData* data;
             struct NameTagDataBank* bank;
             s32 idx;
@@ -1254,7 +1224,8 @@ void gmMainLib_8015F600(int arg0, int arg1)
             bank = gmMainLib_804D3EE0->thing.nametag_banks;
             {
                 struct NameTagData* tmp =
-                    &bank[(u8) idx / 19].inner[(u8) idx % 19];
+                    &bank[(u8) idx / GM_NAMETAG_BANK_SIZE]
+                         .inner[(u8) idx % GM_NAMETAG_BANK_SIZE];
                 data = tmp;
             }
             {
@@ -1283,10 +1254,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
 #endif
 void gmMainLib_8015FA34(s32 arg0)
 {
-    GXRenderModeObj* var_r3;
     s32 i;
 
-    PAD_STACK(50);
+    PAD_STACK(56);
 
     for (i = 1; i < 9; i++) {
         if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
@@ -1326,7 +1296,7 @@ void gmMainLib_8015FBA4(void)
 {
     int i;
 
-    memzero(gmMainLib_804D3EE0, 0x10A30);
+    memzero(gmMainLib_804D3EE0, sizeof(*gmMainLib_804D3EE0));
     if (DVDConvertPathToEntrynum("/usa.ini") != -1) {
         lbLang_SetLanguageSetting(1);
         lbLang_SetSavedLanguage(1);
@@ -1348,11 +1318,11 @@ void gmMainLib_8015FBA4(void)
 
 int gmMainLib_8015FC74(void)
 {
-    int temp_r30;
+    int prev;
 
-    temp_r30 = gmMainLib_8046B0F0.x10;
+    prev = gmMainLib_8046B0F0.x10;
     gmMainLib_8046B0F0.x10 = lbTime_GetTimeInSeconds();
-    return gmMainLib_8046B0F0.x10 - temp_r30;
+    return gmMainLib_8046B0F0.x10 - prev;
 }
 
 void gmMainLib_8015FCC0(void)

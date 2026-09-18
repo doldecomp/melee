@@ -1670,7 +1670,7 @@ void gm_Mode_Adventure_OnInit(void)
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
-    temp_r3->nametag = GM_NAMETAG_NONE;
+    temp_r3->nametag = GM_NAMETAG_COUNT;
     temp_r3->x5 = 0;
 }
 
