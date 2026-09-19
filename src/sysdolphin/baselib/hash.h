@@ -32,6 +32,6 @@ struct HSD_Hash {
 };
 
 HSD_HashEntry* HashSearchEntry(HSD_Hash*, int, void*, HSD_HashEntry**);
-HSD_HashClassInfo* HSD_HashSearch(HSD_Hash*, void*, int*);
+void* HSD_HashSearch(HSD_Hash*, void*, int*);
 
 #endif

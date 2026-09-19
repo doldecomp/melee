@@ -123,7 +123,7 @@ u8 fn_80392CD8(char* caller)
     return err;
 }
 
-s32 hsd_804CE728[0x106];
+s32 hsd_804CE728[256];
 
 void fn_80392E2C(s32 event_type)
 {
@@ -135,8 +135,6 @@ void fn_80392E2C(s32 event_type)
         hsd_804D7898 += 1;
     }
 }
-
-extern s32 hsd_804CF740[42];
 
 int hsd_804D78A0;
 extern s32 hsd_804D78A8;

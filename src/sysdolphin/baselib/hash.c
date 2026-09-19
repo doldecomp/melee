@@ -11,7 +11,7 @@ HSD_HashEntry* HashSearchEntry(HSD_Hash* hash, int idx, void* key,
     if (ptr != NULL) {
         HSD_HashEntry** entry;
         for (entry = &hash->table[idx]; *entry != NULL;
-             entry = &((*entry)->next))
+             entry = &(*entry)->next)
         {
             if (hash->parent.class_info->keycheck(hash, (*entry)->key, key) ==
                 0)
@@ -32,7 +32,7 @@ HSD_HashEntry* HashSearchEntry(HSD_Hash* hash, int idx, void* key,
     return NULL;
 }
 
-HSD_HashClassInfo* HSD_HashSearch(HSD_Hash* hash, void* key, int* success)
+void* HSD_HashSearch(HSD_Hash* hash, void* key, int* success)
 {
     HSD_HashEntry* entry;
     u32 idx;
@@ -44,7 +44,7 @@ HSD_HashClassInfo* HSD_HashSearch(HSD_Hash* hash, void* key, int* success)
         *success = !!entry;
     }
     if (entry != NULL) {
-        return (HSD_HashClassInfo*) entry->value;
+        return entry->value;
     }
     return NULL;
 }

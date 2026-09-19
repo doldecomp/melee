@@ -77,8 +77,8 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
             }
 
             if (ta->n_tluttbl) {
-                tobj->tluttbl = (HSD_Tlut**) HSD_MemAlloc(
-                    (s32) sizeof(HSD_Tlut*) * (ta->n_tluttbl + 1));
+                tobj->tluttbl = HSD_MemAlloc((s32) sizeof(HSD_Tlut*) *
+                                             (ta->n_tluttbl + 1));
                 for (i = 0; i < ta->n_tluttbl; i++) {
                     tobj->tluttbl[i] = HSD_TlutLoadDesc(ta->tluttbl[i]);
                 }
@@ -1497,7 +1497,7 @@ HSD_TObjInfo* HSD_TObjGetDefaultClass(void)
 
 HSD_TObj* HSD_TObjAlloc(void)
 {
-    HSD_TObj* new = hsdNew((HSD_ClassInfo*) HSD_TObjGetDefaultClass());
+    HSD_TObj* new = hsdNew(&HSD_TObjGetDefaultClass()->parent);
     HSD_ASSERT(2040, new);
     return new;
 }

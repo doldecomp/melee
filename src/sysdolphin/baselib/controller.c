@@ -57,15 +57,15 @@ void HSD_PadRenewRawStatus(bool err_check)
     int i;
     u32 mask;
     PadLibData* p = &HSD_PadLibData;
-    PADStatus* qwrite;
+    HSD_PadData* qwrite;
     PADStatus* qread;
-    PADStatus now[4];
+    HSD_PadData now;
 
     HSD_PadRumbleInterpret();
-    PADRead(now);
+    PADRead(now.stat);
     if (err_check) {
         for (i = 0; i < 4; i++) {
-            if (!now[i].err) {
+            if (!now.stat[i].err) {
                 break;
             }
         }
@@ -74,16 +74,16 @@ void HSD_PadRenewRawStatus(bool err_check)
         }
     }
 
-    qwrite = p->queue[p->qwrite].stat;
+    qwrite = &p->queue[p->qwrite];
     if (p->qcount == p->qnum) {
         switch (p->qtype) {
         case 0:
             HSD_PadRawQueueShift(p->qnum, &p->qread);
             qread = p->queue[p->qread].stat;
             if (p->qnum != 1) {
-                HSD_PadRawMerge(qwrite, qread, qread);
+                HSD_PadRawMerge(qwrite->stat, qread, qread);
             } else {
-                HSD_PadRawMerge(now, qread, now);
+                HSD_PadRawMerge(now.stat, qread, now.stat);
             }
             break;
         case 1:
@@ -96,18 +96,13 @@ void HSD_PadRenewRawStatus(bool err_check)
         p->qcount += 1;
     }
 
-    {
-        struct a {
-            PADStatus _[4];
-        };
-        *(struct a*) qwrite = *(struct a*) now;
-    }
+    *qwrite = now;
     HSD_PadRawQueueShift(p->qnum, &p->qwrite);
 
 skip:
     mask = 0;
     for (i = 0; i < 4; i++) {
-        if (now[i].err == -1) {
+        if (now.stat[i].err == -1) {
             mask |= pad_bit[i];
         }
     }
