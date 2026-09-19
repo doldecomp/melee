@@ -90,6 +90,34 @@ union SfxBankBlock {
 /// The loader steps past a bank header by one block, so the two must agree.
 ASSERT_SIZE(SfxBankBlock, sizeof(SfxBank));
 
+/// One voice's playback parameters, as a PStream header stores them.
+typedef struct PStreamVoice {
+    /* 0x00 */ AXPBADDR addr;
+    /* 0x10 */ AXPBADPCM adpcm;
+} PStreamVoice;
+
+ASSERT_SIZE(PStreamVoice, 0x38);
+
+/// The header at the start of a PStream, read before the first block.
+typedef struct PStreamHeader {
+    /* 0x00 */ u32 x0;
+    /* 0x04 */ u32 x4;
+    /* 0x08 */ u32 sample_rate;
+    /* 0x0C */ u32 voice_count;
+    /* 0x10 */ PStreamVoice voices[2];
+} PStreamHeader;
+
+ASSERT_SIZE(PStreamHeader, 0x80);
+
+/// Where a voice's AX blocks sit in the header, counted in whole words.
+enum {
+    PSTREAM_VOICE_WORDS = sizeof(PStreamVoice) / sizeof(u32),
+    PSTREAM_ADDR_WORD = offsetof(PStreamHeader, voices) / sizeof(u32),
+    PSTREAM_ADPCM_WORD =
+        (offsetof(PStreamHeader, voices) + offsetof(PStreamVoice, adpcm)) /
+        sizeof(u32),
+};
+
 /// Named after the assertion text pooled in this TU's `.data`.
 struct HSD_SynthSFXGroup {
     int arsize;
@@ -156,12 +184,36 @@ static int voicelist_1844[HSD_SYNTHSFXGROUP_MAX];
 
 static u8 lbl_804C4524[0x1C];
 
-static struct {
-    /* 00 */ s32 x0;
-    /* 04 */ s32 x4;
-    /* 08 */ s32 x8;
-    /* 0C */ char pad[0x14];
-} pstHakoHeader[3];
+/**
+ * One block of a playing PStream: where it sits in ARAM and the ADPCM loop
+ * state each voice resumes from. The loop blocks are 8 bytes apart, which is
+ * more than ::AXPBADPCMLOOP needs.
+ */
+typedef struct StreamBlockLoop {
+    /* 0x0 */ AXPBADPCMLOOP adpcm_loop;
+    /* 0x6 */ u16 pad6;
+} StreamBlockLoop;
+
+ASSERT_SIZE(StreamBlockLoop, 8);
+
+/// One block of a playing PStream, as the stream's header records it.
+typedef struct StreamBlockHeader {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ StreamBlockLoop loop[2];
+    /* 0x1C */ char pad1C[4];
+} StreamBlockHeader;
+
+ASSERT_SIZE(StreamBlockHeader, 0x20);
+
+/// Where a block's loop state sits in the header, counted in whole words.
+enum {
+    STREAM_BLOCK_LOOP_WORDS = sizeof(StreamBlockLoop) / sizeof(u32),
+    STREAM_BLOCK_LOOP_WORD = offsetof(StreamBlockHeader, loop) / sizeof(u32),
+};
+
+static StreamBlockHeader pstHakoHeader[3];
 
 /* 4D7720 */ static int HSD_Synth_804D7720;
 /* 4D7724 */ static int hsd_SynthSFXBankNum;

@@ -1230,7 +1230,10 @@ void HSD_SynthPStreamMasterClockCallback(void)
     if (node->flags & 8) {
         return;
     }
-    pos = (*(u32*) ((u8*) node->voice[0] + 0x1B2) - HSD_Synth_804D7780 * 2) >>
+    /* The address the voice is playing from is one aligned word, which AX
+     * stores as its two halves. */
+    pos = (*(u32*) &node->voice[0]->pb.addr.currentAddressHi -
+           HSD_Synth_804D7780 * 2) >>
           0x11;
     if (pos != HSD_Synth_804D7774) {
         HSD_Synth_804D7774 = pos;
@@ -1260,7 +1263,8 @@ void HSD_SynthPStreamMasterClockCallback(void)
                     node->voice[i],
                     (AXPBADPCMLOOP*) ((u32*) &pstHakoHeader
                                           [HSD_Synth_804D7770] +
-                                      (i * 2 + 3)));
+                                      (i * STREAM_BLOCK_LOOP_WORDS +
+                                       STREAM_BLOCK_LOOP_WORD)));
             }
         }
     }
@@ -1342,22 +1346,28 @@ void HSD_SynthPStreamFirstHakoHeaderCallback(int dcReq, uintptr_t args,
 void HSD_SynthPStreamHeaderCallback(int arg0, uintptr_t arg1, void* arg2,
                                     bool cancelflag)
 {
-    u32* entry = arg2;
+    PStreamHeader* entry = arg2;
     struct HSD_SynthSFXNode* node;
     int i;
 
     node = getNode(HSD_Synth_804D7760);
     if (node != NULL) {
-        node->voice_count = entry[3];
+        node->voice_count = entry->voice_count;
         if (node->voice_count == 2) {
             node->voice[1] = AXAcquireVoice(0x1D, dropcallback, 0);
             HSD_ASSERTMSG(0x5CF, node->voice[1], "entry->voice[1]");
         }
-        node->x14 = 0.00003125f * (f32) entry[2];
+        node->x14 = 0.00003125f * (f32) entry->sample_rate;
         for (i = 0; i < node->voice_count; i++) {
             HSD_Synth_80407FD8.ratio = (u32) (65536.0f * node->x14);
-            AXSetVoiceAddr(node->voice[i], (AXPBADDR*) &entry[i * 14 + 4]);
-            AXSetVoiceAdpcm(node->voice[i], (AXPBADPCM*) &entry[i * 14 + 8]);
+            AXSetVoiceAddr(
+                node->voice[i],
+                (AXPBADDR*) ((u32*) entry +
+                             (i * PSTREAM_VOICE_WORDS + PSTREAM_ADDR_WORD)));
+            AXSetVoiceAdpcm(
+                node->voice[i],
+                (AXPBADPCM*) ((u32*) entry +
+                              (i * PSTREAM_VOICE_WORDS + PSTREAM_ADPCM_WORD)));
         }
         HSD_Synth_804D7774 = (HSD_Synth_804D7774 + 2) % 3;
         HSD_Synth_804D776C = HSD_Synth_804D7770 = HSD_Synth_804D7768 =
