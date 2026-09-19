@@ -92,7 +92,7 @@ typedef struct THPDecComp {
 /* 01F294 */ static s32 fn_8001F294(void);
 /* 4333E0 */ static THPDecComp MoviePlayer;
 
-static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
+static void fn_8001E910(int arg0, uintptr_t arg1, void* arg2, bool cancelflag)
 {
     THPDecComp* streamPlayer = &MoviePlayer;
     s32 tick_diff;
@@ -137,7 +137,7 @@ static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
                 streamPlayer->file_entrynum, streamPlayer->curr_file_offset,
                 (uintptr_t) streamPlayer->frame_buffers[streamPlayer->unk_8C],
                 (streamPlayer->currPackedSize + 0x1F) & 0xFFFFFFE0, 0x21, 1,
-                fn_8001E910, NULL);
+                fn_8001E910, 0);
             streamPlayer->unk_74 += 1;
             if ((streamPlayer->unk_74 == streamPlayer->unk_40) &&
                 (streamPlayer->unk_68 != 0))
@@ -413,7 +413,7 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
                 streamPlayer->file_entrynum, streamPlayer->curr_file_offset,
                 (uintptr_t) streamPlayer->frame_buffers[streamPlayer->unk_8C],
                 ALIGN_32(streamPlayer->currPackedSize), 0x21, 1, fn_8001E910,
-                NULL);
+                0);
             streamPlayer->unk_74++;
             if ((streamPlayer->unk_74 == streamPlayer->unk_40) &&
                 (streamPlayer->unk_68 != 0))

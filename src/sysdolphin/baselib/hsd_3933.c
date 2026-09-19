@@ -13,18 +13,6 @@ typedef struct {
     s32 x8;
 } ParticleLogEntry;
 
-/// One 0x20-byte host-IO packet, as exchanged with the MCC server.
-typedef struct _MCCPacket {
-    /* 0x0 */ s32 x0;
-    /* 0x4 */ u8 x4_b7 : 1;
-    /* 0x4 */ u8 _x4_pad : 7;
-    /* 0x5 */ u8 command;
-    /* 0x6 */ u16 x6;
-    /* 0x8 */ u8 payload[0x18];
-} MCCPacket;
-
-ASSERT_SIZE(MCCPacket, 0x20);
-
 /// Host-IO state: which MCC channels are open, and the two packet buffers.
 typedef struct HSD_MccState {
     /* 0x00 */ s32 channel_open[16];
@@ -119,14 +107,14 @@ s32 hsd_80393328(void)
     return 1;
 }
 
-static void (*lbl_8040A93C[32])(void*, void*) = {
-    (void (*)(void*, void*)) hsd_80393440,
-    (void (*)(void*, void*)) hsd_80393840,
+static void (*lbl_8040A93C[32])(MCCPacket*, MCCPacket*) = {
+    hsd_80393440,
+    hsd_80393840,
 };
 
 extern int hsd_804D78A0;
 
-void hsd_80393440(void* request, void* response)
+void hsd_80393440(MCCPacket* request, MCCPacket* response)
 {
     u16 cmd;
     s32 channel_mask;
@@ -138,7 +126,7 @@ void hsd_80393440(void* request, void* response)
     u8 err;
     ParticleLogEntry* base;
 
-    cmd = ((MCCPacket*) request)->x6;
+    cmd = request->x6;
     channel_mask = cmd & 0xFF00;
     base = hsd_804CEB40;
 
@@ -157,7 +145,7 @@ void hsd_80393440(void* request, void* response)
         }
 
         if (channel == 16) {
-            ((MCCPacket*) response)->x6 = 0x8001;
+            response->x6 = 0x8001;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -176,7 +164,7 @@ void hsd_80393440(void* request, void* response)
         }
 
         if (num_blocks > (s32) free_blocks) {
-            ((MCCPacket*) response)->x6 = free_blocks + 0x8010;
+            response->x6 = free_blocks + 0x8010;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -187,7 +175,7 @@ void hsd_80393440(void* request, void* response)
         }
 
         hsd_804CF740.channel_open[channel] = 1;
-        ((MCCPacket*) response)->x6 = channel;
+        response->x6 = channel;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
             err = MCCGetLastError();
@@ -204,7 +192,7 @@ void hsd_80393440(void* request, void* response)
     case 0x200:
         i = cmd & 0xF;
         if (hsd_804CF740.channel_open[i] != 1) {
-            ((MCCPacket*) response)->x6 = 0x8002;
+            response->x6 = 0x8002;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
                 err = MCCGetLastError();
@@ -213,7 +201,7 @@ void hsd_80393440(void* request, void* response)
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
         }
-        ((MCCPacket*) response)->x6 = 0;
+        response->x6 = 0;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
             err = MCCGetLastError();
@@ -242,7 +230,7 @@ void hsd_80393440(void* request, void* response)
         "cannot use USB now.\n",
     };
 
-void hsd_80393840(void) {}
+void hsd_80393840(MCCPacket* request, MCCPacket* response) {}
 
 void hsd_80393844(void)
 {
@@ -299,8 +287,8 @@ void hsd_80393844(void)
                 cmd = hsd_804CF740.request.command;
                 if (hsd_804CF740.response.command = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
-                        lbl_8040A93C[cmd]((u8*) &base[0x10A].x8,
-                                          (u8*) &base[0x105].x4);
+                        lbl_8040A93C[cmd]((MCCPacket*) &base[0x10A].x8,
+                                          (MCCPacket*) &base[0x105].x4);
                     }
                 }
             }

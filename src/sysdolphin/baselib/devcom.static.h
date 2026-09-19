@@ -16,7 +16,7 @@ struct HSD_DevCom {
     u16 type;
     u16 cancelflag;
     HSD_DevComCallback callback;
-    void* args;
+    uintptr_t args;
 };
 
 #define DEVCOMDEST_SBUF 2
