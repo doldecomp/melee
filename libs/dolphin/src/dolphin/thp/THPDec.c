@@ -280,24 +280,24 @@ typedef struct THPVideoDecodeInfoView {
 } THPVideoDecodeInfoView;
 
 /**
- * Decodes a THP video file.
+ * Reads the headers of one compressed THP video frame into @p work.
  *
- * @param file   Pointer to the THP video file.
- * @param tileY  Pointer to the output tile for Y component.
- * @param tileU  Pointer to the output tile for U component.
- * @param tileV  Pointer to the output tile for V component.
- * @param work   Pointer to the work area.
- * @return       The decode context to hand to ::THPDec_80331340 /
- *               ::THPDec_803313D0, or NULL on failure; @p tileY receives the
- *               status code.
+ * @param header Frame dimensions.
+ * @param status_out Receives the status code: 0 on success, an error code
+ *                   otherwise.
+ * @param work   The decode work area, sized by ::THPDec_8032FD40.
+ * @param data   The compressed frame data.
+ * @param desc   The image descriptor built by ::THPDec_8032F8D4.
+ * @return       @p work, ready for ::THPDec_80331340 / ::THPDec_803313D0, or
+ *               NULL if the frame could not be read.
  */
-void* THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
-                     void* workArea)
+THPFileInfo* THPVideoDecode(void* hdr, void* status_out, THPFileInfo* work,
+                            void* data, THPDec_8032FD40_Data* desc)
 {
     u8 done;
-    THPVideoDecodeInfoView* info = tileU;
-    THPVideoDecodeHeader* header = file;
-    u8* statusOut = tileY;
+    THPVideoDecodeInfoView* info = (THPVideoDecodeInfoView*) work;
+    THPVideoDecodeHeader* header = hdr;
+    u8* statusOut = status_out;
     u8 status;
     s32 length;
     u32 i;
@@ -315,7 +315,7 @@ void* THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
     info->x8E8 = 0;
     info->x8EA = 0;
     info->x7D = 0;
-    info->x0C = tileV;
+    info->x0C = data;
     THPDec_803300E0((u32*) info);
     done = FALSE;
     info->file = info->x0C;
@@ -388,7 +388,7 @@ void* THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
 
         if (done) {
             *statusOut = 0;
-            return info;
+            return work;
         }
     }
 
@@ -960,9 +960,9 @@ static u8 __THPRestartDefinition(THPFileInfo* info)
 #pragma function_align 16
 #endif
 
-void THPDec_80331340(void* arg0, void* arg1, void* arg2, void* arg3)
+void THPDec_80331340(THPFileInfo* arg0, void* arg1, void* arg2, void* arg3)
 {
-    THPDecodeInfo* info = arg0;
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
     info->x8F0 = arg1;
     info->x8F4 = arg2;
     info->x8F8 = arg3;
@@ -985,10 +985,11 @@ void THPDec_80331340(void* arg0, void* arg1, void* arg2, void* arg3)
     }
 }
 
-void THPDec_803313D0(void* arg0, void* arg1, void* arg2, void* arg3, u32 x)
+void THPDec_803313D0(THPFileInfo* arg0, void* arg1, void* arg2, void* arg3,
+                     u32 x)
 {
     u32 width = x;
-    THPDecodeInfo* info = arg0;
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
     info->x8F0 = arg1;
     info->x8F4 = arg2;
     info->x8F8 = arg3;

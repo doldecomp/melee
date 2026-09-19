@@ -58,7 +58,7 @@ typedef struct THPDecComp {
     /* 0x8C */ u32 unk_8C;
     /* 0x90 */ u32 unk_90;
     /* 0x94 */ s32 unk_94;
-    /* 0x98 */ void* unk_98;
+    /* 0x98 */ THPFileInfo* unk_98;
     /* 0x9C */ THPDec_8032FD40_Data unk_9C;
     /* 0xA8 */ u16 unk_A8;
     /* 0xAA */ u16 unk_AA;
@@ -322,7 +322,7 @@ static void fn_8001ECF4(THPDecComp* data, void* buf)
     data->unk_58 = var_r29;
     DCInvalidateRange(var_r29, uv_size);
     var_r29 = var_r29 + uv_size;
-    data->unk_98 = var_r29;
+    data->unk_98 = (THPFileInfo*) var_r29;
 }
 
 static s32 fn_8001F13C(THPDecComp* streamPlayer);
