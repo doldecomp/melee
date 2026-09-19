@@ -7,7 +7,88 @@
 
 OSHeapHandle HSD_Synth_804D6018 = -1; // audio heap
 
-struct SfxLoadStreamNode;
+/**
+ * Where one voice's samples live in ARAM. AX reads the same bytes as its own
+ * ::AXPBADDR, which splits each address into two halves; the loader relocates
+ * them as whole addresses when it loads the bank.
+ */
+typedef struct SfxVoiceAram {
+    /* 0x00 */ u16 loop_flag;
+    /* 0x02 */ u16 format;
+    /* 0x04 */ u32 loop;
+    /* 0x08 */ u32 end;
+    /* 0x0C */ u32 current;
+} SfxVoiceAram;
+
+ASSERT_SIZE(SfxVoiceAram, 0x10);
+
+/**
+ * One voice of a sound, as a loaded SFX bank stores it: the AX playback
+ * parameters for a single AX voice.
+ */
+typedef struct SfxVoice {
+    /* 0x00 */ union {
+        AXPBADDR ax;
+        SfxVoiceAram aram;
+    } addr;
+    /* 0x10 */ AXPBADPCM adpcm;
+    /* 0x38 */ AXPBADPCMLOOP adpcm_loop;
+    /* 0x3E */ u8 pad3E[2];
+} SfxVoice;
+
+ASSERT_SIZE(SfxVoice, 0x40);
+
+/// ::sizeof(SfxVoice) as a shift, for the one place that walks the voices of
+/// a group as a byte offset.
+enum {
+    SFX_VOICE_SHIFT = 6
+};
+
+ASSERT_SIZE(SfxVoice, 1 << SFX_VOICE_SHIFT);
+
+/**
+ * One sound of a loaded SFX bank: its voices, preceded by the chain pointer
+ * that links it into ::hsd_SynthSFXDataHash under its sound id. The voices
+ * follow the header in memory, exactly as the bank file stores them.
+ */
+typedef struct SfxGroup {
+    /* 0x00 */ struct SfxGroup* next;
+    /* 0x04 */ s32 sfx_id;
+    /* 0x08 */ s32 voice_count;
+    /* 0x0C */ s32 sample_rate;
+    /* 0x10 */ SfxVoice voices[];
+} SfxGroup;
+
+ASSERT_SIZE(SfxGroup, 0x10);
+
+typedef union SfxBankBlock SfxBankBlock;
+
+/**
+ * One loaded SFX bank: where its samples live in ARAM and which sound ids it
+ * provides. The bank's ::SfxGroup list follows the header in memory.
+ */
+typedef struct SfxBank {
+    /* 0x00 */ SfxBankBlock* next;
+    /* 0x04 */ s32 entrynum;
+    /* 0x08 */ s32 first_sfx_id;
+    /* 0x0C */ s32 group_count;
+    /* 0x10 */ s32 aram_addr;
+    /* 0x14 */ s32 aram_size;
+} SfxBank;
+
+ASSERT_SIZE(SfxBank, 0x18);
+
+/**
+ * One record of a loaded SFX bank's memory block: the ::SfxBank header at the
+ * start of the block, or one of the packed ::SfxGroup records that follow it.
+ */
+union SfxBankBlock {
+    SfxBank bank;
+    SfxGroup group;
+};
+
+/// The loader steps past a bank header by one block, so the two must agree.
+ASSERT_SIZE(SfxBankBlock, sizeof(SfxBank));
 
 /// Named after the assertion text pooled in this TU's `.data`.
 struct HSD_SynthSFXGroup {
@@ -45,15 +126,20 @@ struct HSD_SynthSFXNode {
 };
 
 static AXVPB* voicelist[0x100 / 4];
-static void* hsd_SynthSFXDataHash[0x80 / 4];
+static SfxGroup* hsd_SynthSFXDataHash[0x80 / 4];
 static struct {
     /* 00 */ int entrynum;
     /* 04 */ int bankID;
     /* 08 */ void (*x8)(int, int);
     /* 0C */ int xC;
 } HSD_Synth_804C2A60[6];
+/**
+ * The start of the SFX bank file being loaded, read before the rest: the size
+ * of its group records, the size of its sample data, its group count, its
+ * first sound id, and the first four words of its first group record.
+ */
 static u32 hsd_SynthSFXLoadBuf[0x20 / 4];
-static AXVPB* HSD_Synth_804C2AE0[0x80 / 4];
+static SfxBankBlock* HSD_Synth_804C2AE0[0x80 / 4];
 static int hsd_SynthSFXBank[0x80 / 4];
 static int hsd_SynthSFXBankHead[0x84 / 4];
 static struct HSD_SynthSFXNode hsd_SynthSFXNodes[0x40];
@@ -81,7 +167,8 @@ static struct {
 /* 4D7724 */ static int hsd_SynthSFXBankNum;
 /* 4D7728 */ static u32 hsd_SynthSFXBankAREnd;
 /* 4D772C */ static volatile int HSD_Synth_804D772C;
-/* 4D7730 */ static struct SfxLoadStreamNode* HSD_Synth_804D7730;
+/// The bank load cursor: the record of the block being filled.
+/* 4D7730 */ static SfxBankBlock* HSD_Synth_804D7730;
 /* 4D7734 */ static u32* HSD_Synth_804D7734;
 /* 4D7738 */ static int HSD_Synth_804D7738;
 /* 4D773C */ static volatile int sfxGroupDataReaddressCounter;
