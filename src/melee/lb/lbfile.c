@@ -13,7 +13,8 @@
 
 static bool cancel;
 
-static void lbFile_8001615C(int dcreq, int args, void* buf, bool cancelflag)
+static void lbFile_8001615C(int dcreq, uintptr_t args, void* buf,
+                            bool cancelflag)
 {
     HSD_ASSERT(71, !cancelflag);
     cancel = true;
@@ -119,7 +120,7 @@ size_t lbFileGetSize(const char* basename)
 #define ROUND_UP_32(x) (((x) + 31) & ~31)
 
 void lbFile_800164A4(int file, uintptr_t dst, size_t* size, int pri,
-                     HSD_DevComCallback callback, void* args)
+                     HSD_DevComCallback callback, uintptr_t args)
 {
     int type;
     *size = lbFile_8001634C(file);
@@ -129,7 +130,7 @@ void lbFile_800164A4(int file, uintptr_t dst, size_t* size, int pri,
 }
 
 void lbFile_80016580(const char* basename, void* dst, size_t* size,
-                     HSD_DevComCallback callback, void* args)
+                     HSD_DevComCallback callback, uintptr_t args)
 {
     char* filename = lbFileGetFullName(basename);
     int entry_num = DVDConvertPathToEntrynum(filename);
@@ -144,7 +145,7 @@ void lbFile_80016580(const char* basename, void* dst, size_t* size,
 void lbFile_8001668C(const char* basename, void* dst, size_t* size)
 {
     cancel = false;
-    lbFile_80016580(basename, dst, size, lbFile_8001615C, NULL);
+    lbFile_80016580(basename, dst, size, lbFile_8001615C, 0);
     waitForDisc();
 }
 
@@ -153,7 +154,7 @@ static void lbFile_80016760_inline(int heap_id, const char* basename,
 {
     *size = lbFileGetSize(basename);
     *dst = lbHeap_80015BD0(heap_id, ROUND_UP_32(*size));
-    lbFile_80016580(basename, *dst, size, lbFile_8001615C, NULL);
+    lbFile_80016580(basename, *dst, size, lbFile_8001615C, 0);
     waitForDisc();
 }
 

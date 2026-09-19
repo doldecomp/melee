@@ -10,8 +10,8 @@ void HSD_DevComARAMWakeUp(void);
 void HSD_DevComDVDWakeUp(void);
 int HSD_DevComRequest(int file, uintptr_t src, uintptr_t dest, size_t size,
                       int type, int pri, HSD_DevComCallback callback,
-                      void* args);
+                      uintptr_t args);
 int HSD_DevComCancelEx(int dcReq, u32 flags, HSD_DevComCallback cb,
-                       void* args);
+                       uintptr_t args);
 
 #endif

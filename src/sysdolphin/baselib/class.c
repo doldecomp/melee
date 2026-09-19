@@ -87,8 +87,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 
             for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
             }
-            memory_list = (HSD_MemoryEntry**) HSD_MemAlloc(
-                new_nb * sizeof(*memory_list));
+            memory_list = HSD_MemAlloc(new_nb * sizeof(*memory_list));
             if (memory_list == NULL) {
                 return NULL;
             }
@@ -474,8 +473,7 @@ void hsdForgetClassLibrary(const char* library_name)
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (current_hash != NULL) {
-        return (HSD_ClassInfo*) HSD_HashSearch(current_hash,
-                                               (void*) class_name, 0);
+        return HSD_HashSearch(current_hash, (void*) class_name, 0);
     }
     return NULL;
 }

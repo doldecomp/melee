@@ -241,7 +241,7 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 
 HSD_AObj* HSD_AObjAlloc(void)
 {
-    HSD_AObj* new = (HSD_AObj*) HSD_ObjAlloc(HSD_AObjGetAllocData());
+    HSD_AObj* new = HSD_ObjAlloc(HSD_AObjGetAllocData());
     HSD_ASSERT(489, new);
 
     memset(new, 0, sizeof(HSD_AObj));
@@ -256,7 +256,7 @@ void HSD_AObjFree(HSD_AObj* aobj)
         return;
     }
 
-    HSD_ObjFree(HSD_AObjGetAllocData(), (HSD_ObjAllocLink*) aobj);
+    HSD_ObjFree(HSD_AObjGetAllocData(), aobj);
 }
 
 static void callbackForeachFunc(HSD_AObj* aobj, void* obj, HSD_Type type,

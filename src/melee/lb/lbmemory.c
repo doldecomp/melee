@@ -42,7 +42,7 @@ struct Allocator {
     u8 x6EC[0x6F0 - 0x6EC];
 };
 
-/* 015320 */ static void lbMemory_80015320(int, int, void*, bool);
+/* 015320 */ static void lbMemory_80015320(int, uintptr_t, void*, bool);
 
 struct Allocator lbMemory_804318B0;
 #define _p(x) (lbMemory_804318B0.x)
@@ -223,7 +223,7 @@ u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
     for (iter = h->xC_prev; iter != NULL; iter = iter->x0_next) {
         lo = iter->x4_lo;
         if (lo != *r7) {
-            lbMemory_80015320(0, (int) iter, NULL, false);
+            lbMemory_80015320(0, (uintptr_t) iter, NULL, false);
             return 1;
         }
         *r7 = (void*) ((u32) lo + (u32) iter->x8_hi);
@@ -248,7 +248,7 @@ static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
     OSSetAlarm(&p->alarm, OSMillisecondsToTicks(3), fn_80015184);
 }
 
-static void lbMemory_80015320(int arg0, int _handle, void* arg2,
+static void lbMemory_80015320(int arg0, uintptr_t _handle, void* arg2,
                               bool cancelflag)
 {
     void* null_or_old;
@@ -274,9 +274,9 @@ static void lbMemory_80015320(int arg0, int _handle, void* arg2,
             copy_src = null_or_old;
 
             if ((u32) handle->x4_lo < 0x80000000U) {
-                HSD_DevComRequest(0, (u32) copy_src, current,
-                                  OSRoundUp32B(handle->x8_hi), 0x1B, 1,
-                                  lbMemory_80015320, handle->x0_next);
+                HSD_DevComRequest(
+                    0, (u32) copy_src, current, OSRoundUp32B(handle->x8_hi),
+                    0x1B, 1, lbMemory_80015320, (uintptr_t) handle->x0_next);
                 return;
             } else {
                 start_ram_copy((u32) copy_src, current,
@@ -286,7 +286,7 @@ static void lbMemory_80015320(int arg0, int _handle, void* arg2,
         }
 
         *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, false);
+        lbMemory_80015320(0, (uintptr_t) handle->x0_next, null_or_old, false);
         return;
     }
 
