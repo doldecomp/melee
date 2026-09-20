@@ -133,6 +133,6 @@ void __SYNUpdateSrc(struct SYNVOICE* voice)
     if (ratio > 0x40000) {
         ratio = 0x40000;
     }
-    *(u32*) &voice->axvpb->pb.src.ratioHi = ratio;
+    voice->axvpb->pb.src.ratio.value = ratio;
     voice->axvpb->sync |= 0x80000;
 }

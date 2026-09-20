@@ -64,15 +64,28 @@ typedef struct _AXPBFIR {
     /* 0x04 */ u16 coefsLo;
 } AXPBFIR;
 
+/* AX parameter words have halfword alignment, including in the DSP block. */
+#pragma pack(push, 2)
+typedef union _AXPBWord {
+    u32 value;
+    struct {
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+        u16 lo;
+        u16 hi;
+#else
+        u16 hi;
+        u16 lo;
+#endif
+    } halves;
+} AXPBWord;
+#pragma pack(pop)
+
 typedef struct _AXPBADDR {
     /* 0x00 */ u16 loopFlag;
     /* 0x02 */ u16 format;
-    /* 0x04 */ u16 loopAddressHi;
-    /* 0x06 */ u16 loopAddressLo;
-    /* 0x08 */ u16 endAddressHi;
-    /* 0x0A */ u16 endAddressLo;
-    /* 0x0C */ u16 currentAddressHi;
-    /* 0x0E */ u16 currentAddressLo;
+    /* 0x04 */ AXPBWord loopAddress;
+    /* 0x08 */ AXPBWord endAddress;
+    /* 0x0C */ AXPBWord currentAddress;
 } AXPBADDR;
 
 typedef struct _AXPBADPCM {
@@ -84,8 +97,7 @@ typedef struct _AXPBADPCM {
 } AXPBADPCM;
 
 typedef struct _AXPBSRC {
-    /* 0x00 */ u16 ratioHi;
-    /* 0x02 */ u16 ratioLo;
+    /* 0x00 */ AXPBWord ratio;
     /* 0x04 */ u16 currentAddressFrac;
     /* 0x06 */ u16 last_samples[4];
 } AXPBSRC;

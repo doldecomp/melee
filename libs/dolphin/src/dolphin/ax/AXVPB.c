@@ -44,8 +44,10 @@ void __AXServiceVPB(AXVPB* pvpb)
     if (sync == 0) {
         ppbUser->state = ppbDsp->state;
         ppbUser->ve.currentVolume = ppbDsp->ve.currentVolume;
-        ppbUser->addr.currentAddressHi = ppbDsp->addr.currentAddressHi;
-        ppbUser->addr.currentAddressLo = ppbDsp->addr.currentAddressLo;
+        ppbUser->addr.currentAddress.halves.hi =
+            ppbDsp->addr.currentAddress.halves.hi;
+        ppbUser->addr.currentAddress.halves.lo =
+            ppbDsp->addr.currentAddress.halves.lo;
         return;
     }
     if (sync & AX_SYNC_FLAG_COPYALL) {
@@ -455,16 +457,14 @@ void __AXServiceVPB(AXVPB* pvpb)
             ppbDsp->addr.loopFlag = ppbUser->addr.loopFlag;
         }
         if (sync & AX_SYNC_FLAG_COPYLOOPADDR) {
-            *(u32*) &ppbDsp->addr.loopAddressHi =
-                *(u32*) &ppbUser->addr.loopAddressHi;
+            ppbDsp->addr.loopAddress.value = ppbUser->addr.loopAddress.value;
         }
         if (sync & AX_SYNC_FLAG_COPYENDADDR) {
-            *(u32*) &ppbDsp->addr.endAddressHi =
-                *(u32*) &ppbUser->addr.endAddressHi;
+            ppbDsp->addr.endAddress.value = ppbUser->addr.endAddress.value;
         }
         if (sync & AX_SYNC_FLAG_COPYCURADDR) {
-            *(u32*) &ppbDsp->addr.currentAddressHi =
-                *(u32*) &ppbUser->addr.currentAddressHi;
+            ppbDsp->addr.currentAddress.value =
+                ppbUser->addr.currentAddress.value;
         }
     } else if (sync & AX_SYNC_FLAG_COPYADDR) {
         // copy ADDR struct.
@@ -483,8 +483,10 @@ void __AXServiceVPB(AXVPB* pvpb)
         src += 1;
         *(dst) = *(src);
     } else {
-        ppbUser->addr.currentAddressHi = ppbDsp->addr.currentAddressHi;
-        ppbUser->addr.currentAddressLo = ppbDsp->addr.currentAddressLo;
+        ppbUser->addr.currentAddress.halves.hi =
+            ppbDsp->addr.currentAddress.halves.hi;
+        ppbUser->addr.currentAddress.halves.lo =
+            ppbDsp->addr.currentAddress.halves.lo;
     }
 
     if (sync & AX_SYNC_FLAG_COPYADPCM) {
@@ -526,8 +528,8 @@ void __AXServiceVPB(AXVPB* pvpb)
     }
 
     if (sync & AX_SYNC_FLAG_COPYRATIO) {
-        ppbDsp->src.ratioHi = ppbUser->src.ratioHi;
-        ppbDsp->src.ratioLo = ppbUser->src.ratioLo;
+        ppbDsp->src.ratio.halves.hi = ppbUser->src.ratio.halves.hi;
+        ppbDsp->src.ratio.halves.lo = ppbUser->src.ratio.halves.lo;
     } else if (sync & AX_SYNC_FLAG_COPYSRC) {
         // copy SRC struct.
         u16* src;
@@ -603,7 +605,7 @@ void __AXSyncPBs(u32 lessDspCycles)
                 __AXDepopVoice(&__AXPB[pvpb->index]);
             }
             if ((pvpb->pb.state == 1) || (pvpb->updateCounter != 0U)) {
-                cycles = __AXSrcCycles[pvpb->pb.src.ratioHi] +
+                cycles = __AXSrcCycles[pvpb->pb.src.ratio.halves.hi] +
                          __AXMixCycles[pvpb->pb.mixerCtrl] + 0x8C + cycles;
                 if (__AXMaxDspCycles > cycles) {
                     __AXServiceVPB(pvpb);
@@ -1040,11 +1042,11 @@ void AXSetVoiceAddr(AXVPB* p, AXPBADDR* addr)
     }
     switch (addr->format) {
     case 0:
-        ASSERTMSGLINE(0x4BA, (addr->loopAddressLo & 0xF) > 1,
+        ASSERTMSGLINE(0x4BA, (addr->loopAddress.halves.lo & 0xF) > 1,
                       "*** loop address on ADPCM frame header! ***\n");
-        ASSERTMSGLINE(0x4BF, (addr->endAddressLo & 0xF) > 1,
+        ASSERTMSGLINE(0x4BF, (addr->endAddress.halves.lo & 0xF) > 1,
                       "*** end address on ADPCM frame header! ***\n");
-        ASSERTMSGLINE(0x4C4, (addr->currentAddressLo & 0xF) > 1,
+        ASSERTMSGLINE(0x4C4, (addr->currentAddress.halves.lo & 0xF) > 1,
                       "*** current address on ADPCM frame header! ***\n");
         break;
     case 10:
@@ -1118,8 +1120,8 @@ void AXSetVoiceLoopAddr(AXVPB* p, u32 addr)
     int old;
 
     old = OSDisableInterrupts();
-    p->pb.addr.loopAddressHi = (addr >> 0x10U);
-    p->pb.addr.loopAddressLo = (addr);
+    p->pb.addr.loopAddress.halves.hi = (addr >> 0x10U);
+    p->pb.addr.loopAddress.halves.lo = (addr);
     p->sync |= AX_SYNC_FLAG_COPYLOOPADDR;
     OSRestoreInterrupts(old);
 }
@@ -1129,8 +1131,8 @@ void AXSetVoiceEndAddr(AXVPB* p, u32 addr)
     int old;
 
     old = OSDisableInterrupts();
-    p->pb.addr.endAddressHi = (addr >> 0x10U);
-    p->pb.addr.endAddressLo = (addr);
+    p->pb.addr.endAddress.halves.hi = (addr >> 0x10U);
+    p->pb.addr.endAddress.halves.lo = (addr);
     p->sync |= AX_SYNC_FLAG_COPYENDADDR;
     OSRestoreInterrupts(old);
 }
@@ -1140,8 +1142,8 @@ void AXSetVoiceCurrentAddr(AXVPB* p, u32 addr)
     int old;
 
     old = OSDisableInterrupts();
-    p->pb.addr.currentAddressHi = (addr >> 0x10U);
-    p->pb.addr.currentAddressLo = (addr);
+    p->pb.addr.currentAddress.halves.hi = (addr >> 0x10U);
+    p->pb.addr.currentAddress.halves.lo = (addr);
     p->sync |= AX_SYNC_FLAG_COPYCURADDR;
     OSRestoreInterrupts(old);
 }
@@ -1241,8 +1243,8 @@ void AXSetVoiceSrcRatio(AXVPB* p, float ratio)
     if (r > 0x40000) {
         r = 0x40000;
     }
-    p->pb.src.ratioHi = ((u32) r >> 0x10);
-    p->pb.src.ratioLo = ((u32) r);
+    p->pb.src.ratio.halves.hi = ((u32) r >> 0x10);
+    p->pb.src.ratio.halves.lo = ((u32) r);
     p->sync |= AX_SYNC_FLAG_COPYRATIO;
     OSRestoreInterrupts(old);
 }

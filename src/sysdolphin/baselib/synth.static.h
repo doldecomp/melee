@@ -8,29 +8,11 @@
 OSHeapHandle HSD_Synth_804D6018 = -1; // audio heap
 
 /**
- * Where one voice's samples live in ARAM. AX reads the same bytes as its own
- * ::AXPBADDR, which splits each address into two halves; the loader relocates
- * them as whole addresses when it loads the bank.
- */
-typedef struct SfxVoiceAram {
-    /* 0x00 */ u16 loop_flag;
-    /* 0x02 */ u16 format;
-    /* 0x04 */ u32 loop;
-    /* 0x08 */ u32 end;
-    /* 0x0C */ u32 current;
-} SfxVoiceAram;
-
-ASSERT_SIZE(SfxVoiceAram, 0x10);
-
-/**
  * One voice of a sound, as a loaded SFX bank stores it: the AX playback
  * parameters for a single AX voice.
  */
 typedef struct SfxVoice {
-    /* 0x00 */ union {
-        AXPBADDR ax;
-        SfxVoiceAram aram;
-    } addr;
+    /* 0x00 */ AXPBADDR addr;
     /* 0x10 */ AXPBADPCM adpcm;
     /* 0x38 */ AXPBADPCMLOOP adpcm_loop;
     /* 0x3E */ u8 pad3E[2];
