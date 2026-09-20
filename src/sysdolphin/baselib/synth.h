@@ -54,7 +54,8 @@ void HSD_SynthSFXKeyOff(int);
 /* 38AD74 */ void HSD_SynthPStreamHakoHeaderCallback(int, uintptr_t, void*,
                                                      bool);
 /* 38ADD0 */ void HSD_SynthPStreamMasterClockCallback(void);
-/* 38B120 */ void HSD_SynthPStreamFirstHakoDataCallback(void);
+/* 38B120 */ void HSD_SynthPStreamFirstHakoDataCallback(int, uintptr_t, void*,
+                                                        bool);
 /* 38B380 */ void HSD_SynthPStreamFirstHakoHeaderCallback(int, uintptr_t,
                                                           void*, bool);
 /* 38B3E0 */ void HSD_SynthPStreamHeaderCallback(int, uintptr_t, void*,

@@ -1271,14 +1271,13 @@ void HSD_SynthPStreamMasterClockCallback(void)
     HSD_SynthPStreamMasterClockCallback_inline(pos);
 }
 
-void HSD_SynthPStreamFirstHakoDataCallback(void)
+void HSD_SynthPStreamFirstHakoDataCallback(int result, uintptr_t args,
+                                           void* buf, bool cancelflag)
 {
     AXPBVE ve;
     int i;
     bool enabled;
     struct HSD_SynthSFXNode* node;
-
-    PAD_STACK(0x10);
 
     node = getNode(HSD_Synth_804D7760);
     if (node != NULL) {
@@ -1336,11 +1335,10 @@ void HSD_SynthPStreamFirstHakoDataCallback(void)
 void HSD_SynthPStreamFirstHakoHeaderCallback(int dcReq, uintptr_t args,
                                              void* buf, bool cancelflag)
 {
-    HSD_DevComRequest(
-        HSD_Synth_804D7764, 0xA0,
-        HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16),
-        pstHakoHeader[HSD_Synth_804D7768].x0, 0x23, 0,
-        (HSD_DevComCallback) HSD_SynthPStreamFirstHakoDataCallback, 0);
+    HSD_DevComRequest(HSD_Synth_804D7764, 0xA0,
+                      HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16),
+                      pstHakoHeader[HSD_Synth_804D7768].x0, 0x23, 0,
+                      HSD_SynthPStreamFirstHakoDataCallback, 0);
 }
 
 void HSD_SynthPStreamHeaderCallback(int arg0, uintptr_t arg1, void* arg2,
