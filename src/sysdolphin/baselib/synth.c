@@ -45,6 +45,15 @@ static inline s32 SfxGroupFileSize(s32 voice_count)
     return voice_count * (s32) sizeof(SfxVoice) + SFX_GROUP_FILE_HEADER_SIZE;
 }
 
+static inline void advanceLoadGroup(s32 voice_count)
+{
+    HSD_Synth_804D7730 =
+        (SfxBankBlock*) ((u8*) HSD_Synth_804D7730 +
+                         (u32) (voice_count * (s32) sizeof(SfxVoice) +
+                                (s32) sizeof(SfxGroup)) /
+                             sizeof(u32) * sizeof(u32));
+}
+
 static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
                                            void* addr, bool cancelflag)
 {
@@ -141,17 +150,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
             HSD_Synth_804D7730->group.next = *bucket;
             *bucket = &HSD_Synth_804D7730->group;
             HSD_Synth_804D7734 += (u32) nbytes >> 2;
-#ifdef MUST_MATCH
-            HSD_Synth_804D7730 =
-                (SfxBankBlock*) ((u32*) HSD_Synth_804D7730 +
-                                 (u32) (n * (s32) sizeof(SfxVoice) +
-                                        (s32) sizeof(SfxGroup)) /
-                                     sizeof(u32));
-#else
-            HSD_Synth_804D7730 =
-                (SfxBankBlock*) ((u8*) HSD_Synth_804D7730 + sizeof(SfxGroup) +
-                                 n * sizeof(SfxVoice));
-#endif
+            advanceLoadGroup(n);
         }
         if (HSD_Synth_804C2A60[0].x8 != NULL) {
             HSD_Synth_804C2A60[0].x8(HSD_Synth_804C2A60[0].entrynum,
@@ -1274,18 +1273,13 @@ void HSD_SynthPStreamMasterClockCallback(void)
                     node->voice[i],
                     (HSD_Synth_804D7780 + (HSD_Synth_804D7770 << 0x10)) * 2 +
                         i * pstHakoHeader[HSD_Synth_804D7770].x0 + 2);
-#ifdef MUST_MATCH
                 AXSetVoiceAdpcmLoop(
                     node->voice[i],
-                    (AXPBADPCMLOOP*) ((u32*) &pstHakoHeader
+                    (AXPBADPCMLOOP*) ((u8*) &pstHakoHeader
                                           [HSD_Synth_804D7770] +
                                       (i * STREAM_BLOCK_LOOP_WORDS +
-                                       STREAM_BLOCK_LOOP_WORD)));
-#else
-                AXSetVoiceAdpcmLoop(
-                    node->voice[i],
-                    &pstHakoHeader[HSD_Synth_804D7770].loop[i].adpcm_loop);
-#endif
+                                       STREAM_BLOCK_LOOP_WORD) *
+                                          sizeof(u32)));
             }
         }
     }
@@ -1379,19 +1373,16 @@ void HSD_SynthPStreamHeaderCallback(int arg0, uintptr_t arg1, void* arg2,
         node->x14 = 0.00003125f * (f32) entry->sample_rate;
         for (i = 0; i < node->voice_count; i++) {
             HSD_Synth_80407FD8.ratio.value = (u32) (65536.0f * node->x14);
-#ifdef MUST_MATCH
             AXSetVoiceAddr(
                 node->voice[i],
-                (AXPBADDR*) ((u32*) entry +
-                             (i * PSTREAM_VOICE_WORDS + PSTREAM_ADDR_WORD)));
+                (AXPBADDR*) ((u8*) entry +
+                             (i * PSTREAM_VOICE_WORDS + PSTREAM_ADDR_WORD) *
+                                 sizeof(u32)));
             AXSetVoiceAdpcm(
                 node->voice[i],
-                (AXPBADPCM*) ((u32*) entry +
-                              (i * PSTREAM_VOICE_WORDS + PSTREAM_ADPCM_WORD)));
-#else
-            AXSetVoiceAddr(node->voice[i], &entry->voices[i].addr);
-            AXSetVoiceAdpcm(node->voice[i], &entry->voices[i].adpcm);
-#endif
+                (AXPBADPCM*) ((u8*) entry +
+                              (i * PSTREAM_VOICE_WORDS + PSTREAM_ADPCM_WORD) *
+                                  sizeof(u32)));
         }
         HSD_Synth_804D7774 = (HSD_Synth_804D7774 + 2) % 3;
         HSD_Synth_804D776C = HSD_Synth_804D7770 = HSD_Synth_804D7768 =
