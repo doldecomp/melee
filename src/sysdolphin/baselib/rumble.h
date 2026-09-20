@@ -13,11 +13,15 @@ struct HSD_RumbleData {
     HSD_PadRumbleListData* listdatap;
 };
 
-/// Retail bitfield layout of one rumble command. Portable interpretation uses
-/// the numeric word in HSD_Rumble::def (opcode in bits 15..13).
+/// One rumble command: opcode in bits 15..13 of HSD_Rumble::def.
 struct RumbleCommand {
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    u16 frame : 13;
+    u16 op : 3;
+#else
     u16 op : 3;
     u16 frame : 13;
+#endif
 };
 
 union HSD_Rumble {
