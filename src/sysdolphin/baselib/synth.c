@@ -45,6 +45,30 @@ static inline s32 SfxGroupFileSize(s32 voice_count)
     return voice_count * (s32) sizeof(SfxVoice) + SFX_GROUP_FILE_HEADER_SIZE;
 }
 
+#ifndef MUST_MATCH
+static inline u32 getAxAddress(u16 high, u16 low)
+{
+    return ((u32) high << 16) | low;
+}
+
+static inline void addAxAddress(u16* high, u16* low, s32 delta)
+{
+    u32 address = getAxAddress(*high, *low) + delta;
+    *high = address >> 16;
+    *low = address;
+}
+
+static inline void relocateVoice(SfxVoice* voice, s32 delta, bool loop)
+{
+    AXPBADDR* addr = &voice->addr.ax;
+    if (loop) {
+        addAxAddress(&addr->loopAddressHi, &addr->loopAddressLo, delta);
+    }
+    addAxAddress(&addr->endAddressHi, &addr->endAddressLo, delta);
+    addAxAddress(&addr->currentAddressHi, &addr->currentAddressLo, delta);
+}
+#endif
+
 static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
                                            void* addr, bool cancelflag)
 {
@@ -66,6 +90,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
         alloc_size = hsd_SynthSFXLoadBuf[2] * SFX_GROUP_RUNTIME_OVERHEAD +
                      sizeof(SfxBank);
         total = OSRoundUp32B(alloc_size + header_size);
+#ifdef MUST_MATCH
         for (j = (data_bytes >> 2) - 1; j >= 0; j--) {
             ((u32*) HSD_Synth_804D7730)[j + ((total - data_bytes) >> 2)] =
                 ((u32*) HSD_Synth_804D7730)[j];
@@ -76,6 +101,13 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
                 hsd_SynthSFXLoadBuf[4U + i];
         }
         HSD_Synth_804D7734 = &((u32*) HSD_Synth_804D7730)[dnw / sizeof(u32)];
+#else
+        memmove((u8*) HSD_Synth_804D7730 + total - data_bytes,
+                HSD_Synth_804D7730, data_bytes);
+        dnw = total - header_size;
+        memcpy((u8*) HSD_Synth_804D7730 + dnw, &hsd_SynthSFXLoadBuf[4], 16);
+        HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + dnw);
+#endif
 
         bankID = HSD_Synth_804C2A60[0].bankID;
         pp = &HSD_Synth_804C2AE0[bankID];
@@ -111,6 +143,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
                     nbytes);
 #endif
             for (k = 0; k < n; k++) {
+#ifdef MUST_MATCH
                 /* The address of a voice is never NULL, so the else branch
                  * below is unreachable. */
                 if (&HSD_Synth_804D7730->group.voices[k] != NULL) {
@@ -124,6 +157,10 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
                     hsd_SynthSFXBank[bankID] * 2;
                 HSD_Synth_804D7730->group.voices[k].addr.aram.current +=
                     hsd_SynthSFXBank[bankID] * 2;
+#else
+                relocateVoice(&HSD_Synth_804D7730->group.voices[k],
+                              hsd_SynthSFXBank[bankID] * 2, true);
+#endif
             }
             id = base + i;
             HSD_Synth_804D7730->group.sfx_id = id;
@@ -132,11 +169,17 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
             HSD_Synth_804D7730->group.next = *bucket;
             *bucket = &HSD_Synth_804D7730->group;
             HSD_Synth_804D7734 += (u32) nbytes >> 2;
+#ifdef MUST_MATCH
             HSD_Synth_804D7730 =
                 (SfxBankBlock*) ((u32*) HSD_Synth_804D7730 +
                                  (u32) (n * (s32) sizeof(SfxVoice) +
                                         (s32) sizeof(SfxGroup)) /
                                      sizeof(u32));
+#else
+            HSD_Synth_804D7730 =
+                (SfxBankBlock*) ((u8*) HSD_Synth_804D7730 + sizeof(SfxGroup) +
+                                 n * sizeof(SfxVoice));
+#endif
         }
         if (HSD_Synth_804C2A60[0].x8 != NULL) {
             HSD_Synth_804C2A60[0].x8(HSD_Synth_804C2A60[0].entrynum,
@@ -395,16 +438,23 @@ void HSD_SynthSFXGroupDataReaddress(SfxBankBlock* block, s32 aram_addr)
     while (i < block->bank.group_count) {
         count = group->voice_count;
         for (j = 0; j < count; j++) {
+#ifdef MUST_MATCH
             if (group->voices[j].addr.aram.loop_flag != 0) {
                 group->voices[j].addr.aram.loop += delta;
             }
             group->voices[j].addr.aram.end += delta;
             group->voices[j].addr.aram.current += delta;
+#else
+            relocateVoice(&group->voices[j], delta,
+                          group->voices[j].addr.ax.loopFlag != 0);
+#endif
         }
-        /* The groups are packed, so the next one starts past this one's
-         * voices and then past its own header. */
+#ifdef MUST_MATCH
         group = (SfxGroup*) ((count << SFX_VOICE_SHIFT) + (uintptr_t) group);
         group += 1;
+#else
+        group = (SfxGroup*) ((u8*) (group + 1) + count * sizeof(SfxVoice));
+#endif
         i++;
     }
     block->bank.aram_addr = aram_addr;
@@ -519,13 +569,31 @@ void dropcallback(void* dropped)
 static AXPBMIX lbl_80407FB4 = { 0 };
 
 /**
- * The sample-rate converter setup handed to ::AXSetVoiceSrc. Its playback
- * ratio is one 16.16 value, which ::AXPBSRC stores as two halves.
+ * The playback ratio is a 16.16 value. getSrc converts it to AX's two
+ * halfwords; the matching build retains the original word overlay.
  */
+#ifdef MUST_MATCH
 static union {
     AXPBSRC ax;
     u32 ratio;
 } HSD_Synth_80407FD8 = { { 1, 0, 0, { 0, 0, 0, 0 } } };
+#else
+static struct {
+    u32 ratio;
+} HSD_Synth_80407FD8 = { 0x10000 };
+#endif
+
+static inline AXPBSRC* getSrc(void)
+{
+#ifdef MUST_MATCH
+    return &HSD_Synth_80407FD8.ax;
+#else
+    static AXPBSRC src = { 1, 0, 0, { 0, 0, 0, 0 } };
+    src.ratioHi = HSD_Synth_80407FD8.ratio >> 16;
+    src.ratioLo = HSD_Synth_80407FD8.ratio;
+    return &src;
+#endif
+}
 
 int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                        int itd_flag, float pitch1, float pitch2,
@@ -614,7 +682,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                 HSD_Synth_80407FD8.ratio =
                     (65536.0F *
                      (sfx_node->x18[1] * (sfx_node->x14 * sfx_node->x18[0])));
-                AXSetVoiceSrc(voices[voice_idx], &HSD_Synth_80407FD8.ax);
+                AXSetVoiceSrc(voices[voice_idx], getSrc());
                 AXSetVoiceAddr(voices[voice_idx],
                                &sfx_entry->voices[voice_idx].addr.ax);
                 AXSetVoiceAdpcm(voices[voice_idx],
@@ -1238,11 +1306,16 @@ void HSD_SynthPStreamMasterClockCallback(void)
     if (node->flags & 8) {
         return;
     }
-    /* The address the voice is playing from is one aligned word, which AX
-     * stores as its two halves. */
+#ifdef MUST_MATCH
     pos = (*(u32*) &node->voice[0]->pb.addr.currentAddressHi -
            HSD_Synth_804D7780 * 2) >>
           0x11;
+#else
+    pos = (getAxAddress(node->voice[0]->pb.addr.currentAddressHi,
+                        node->voice[0]->pb.addr.currentAddressLo) -
+           HSD_Synth_804D7780 * 2) >>
+          0x11;
+#endif
     if (pos != HSD_Synth_804D7774) {
         HSD_Synth_804D7774 = pos;
         for (i = 0; i < node->voice_count; i++) {
@@ -1267,12 +1340,18 @@ void HSD_SynthPStreamMasterClockCallback(void)
                     node->voice[i],
                     (HSD_Synth_804D7780 + (HSD_Synth_804D7770 << 0x10)) * 2 +
                         i * pstHakoHeader[HSD_Synth_804D7770].x0 + 2);
+#ifdef MUST_MATCH
                 AXSetVoiceAdpcmLoop(
                     node->voice[i],
                     (AXPBADPCMLOOP*) ((u32*) &pstHakoHeader
                                           [HSD_Synth_804D7770] +
                                       (i * STREAM_BLOCK_LOOP_WORDS +
                                        STREAM_BLOCK_LOOP_WORD)));
+#else
+                AXSetVoiceAdpcmLoop(
+                    node->voice[i],
+                    &pstHakoHeader[HSD_Synth_804D7770].loop[i].adpcm_loop);
+#endif
             }
         }
     }
@@ -1309,7 +1388,7 @@ void HSD_SynthPStreamFirstHakoDataCallback(int result, uintptr_t args,
                     (u32) (65536.0F *
                            (node->x14 * node->x18[0] * node->x18[1]));
             }
-            AXSetVoiceSrc(node->voice[i], &HSD_Synth_80407FD8.ax);
+            AXSetVoiceSrc(node->voice[i], getSrc());
             AXSetVoiceCurrentAddr(
                 node->voice[i],
                 (HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16)) * 2 +
@@ -1366,6 +1445,7 @@ void HSD_SynthPStreamHeaderCallback(int arg0, uintptr_t arg1, void* arg2,
         node->x14 = 0.00003125f * (f32) entry->sample_rate;
         for (i = 0; i < node->voice_count; i++) {
             HSD_Synth_80407FD8.ratio = (u32) (65536.0f * node->x14);
+#ifdef MUST_MATCH
             AXSetVoiceAddr(
                 node->voice[i],
                 (AXPBADDR*) ((u32*) entry +
@@ -1374,6 +1454,10 @@ void HSD_SynthPStreamHeaderCallback(int arg0, uintptr_t arg1, void* arg2,
                 node->voice[i],
                 (AXPBADPCM*) ((u32*) entry +
                               (i * PSTREAM_VOICE_WORDS + PSTREAM_ADPCM_WORD)));
+#else
+            AXSetVoiceAddr(node->voice[i], &entry->voices[i].addr);
+            AXSetVoiceAdpcm(node->voice[i], &entry->voices[i].adpcm);
+#endif
         }
         HSD_Synth_804D7774 = (HSD_Synth_804D7774 + 2) % 3;
         HSD_Synth_804D776C = HSD_Synth_804D7770 = HSD_Synth_804D7768 =

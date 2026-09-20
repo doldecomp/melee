@@ -13,7 +13,8 @@ struct HSD_RumbleData {
     HSD_PadRumbleListData* listdatap;
 };
 
-/// One command of a rumble script.
+/// Retail bitfield layout of one rumble command. Portable interpretation uses
+/// the numeric word in HSD_Rumble::def (opcode in bits 15..13).
 struct RumbleCommand {
     u16 op : 3;
     u16 frame : 13;
