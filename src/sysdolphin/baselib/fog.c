@@ -85,7 +85,7 @@ void HSD_FogSet(HSD_Fog* fog)
 
 HSD_Fog* HSD_FogAlloc(void)
 {
-    HSD_Fog* fog = hsdNew(&hsdFog.parent.parent);
+    HSD_Fog* fog = hsdNew(HSD_OBJECT_INFO(&hsdFog));
     HSD_ASSERT(0x8C, fog);
     return fog;
 }
