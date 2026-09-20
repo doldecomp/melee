@@ -32,14 +32,17 @@ void HSD_AudioFree(void* ptr)
 static int HSD_Synth_804D6028[2] = { 0 };
 static float HSD_Synth_804D6030 = 1.0f;
 
-/**
- * The size of a group's record in the bank file: all of ::SfxGroup but the
- * ::next and ::sfx_id that the loader puts in front of it.
- */
+/* File records contain two words before the voices. Runtime records also
+ * contain the hash link, sound id, and any host alignment padding. */
+enum {
+    SFX_GROUP_FILE_HEADER_SIZE =
+        offsetof(SfxGroup, voices) - offsetof(SfxGroup, voice_count),
+    SFX_GROUP_RUNTIME_OVERHEAD = sizeof(SfxGroup) - SFX_GROUP_FILE_HEADER_SIZE,
+};
+
 static inline s32 SfxGroupFileSize(s32 voice_count)
 {
-    return voice_count * (s32) sizeof(SfxVoice) +
-           (s32) (sizeof(SfxGroup) - offsetof(SfxGroup, voice_count));
+    return voice_count * (s32) sizeof(SfxVoice) + SFX_GROUP_FILE_HEADER_SIZE;
 }
 
 static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
@@ -60,7 +63,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
         s32 count;
         s32 base;
 
-        alloc_size = hsd_SynthSFXLoadBuf[2] * offsetof(SfxGroup, voice_count) +
+        alloc_size = hsd_SynthSFXLoadBuf[2] * SFX_GROUP_RUNTIME_OVERHEAD +
                      sizeof(SfxBank);
         total = OSRoundUp32B(alloc_size + header_size);
         for (j = (data_bytes >> 2) - 1; j >= 0; j--) {
@@ -100,8 +103,13 @@ static void HSD_SynthSFXSampleLoadCallback(int result, uintptr_t args,
             n = *HSD_Synth_804D7734;
             (void) n;
             nbytes = SfxGroupFileSize(n);
+#ifdef MUST_MATCH
             memcpy(&HSD_Synth_804D7730->group.voice_count, HSD_Synth_804D7734,
                    nbytes);
+#else
+            memmove(&HSD_Synth_804D7730->group.voice_count, HSD_Synth_804D7734,
+                    nbytes);
+#endif
             for (k = 0; k < n; k++) {
                 /* The address of a voice is never NULL, so the else branch
                  * below is unreachable. */
@@ -166,7 +174,7 @@ static void HSD_SynthSFXHeaderLoadCallback(int result, uintptr_t args,
                          "Can't load SFX file; bank(id=%d) buffer overflow.\n",
                          HSD_Synth_804C2A60[0].bankID);
 
-        alloc_size = hsd_SynthSFXLoadBuf[2] * offsetof(SfxGroup, voice_count) +
+        alloc_size = hsd_SynthSFXLoadBuf[2] * SFX_GROUP_RUNTIME_OVERHEAD +
                      sizeof(SfxBank);
         header_size = hsd_SynthSFXLoadBuf[0];
         HSD_Synth_804D7730 =
