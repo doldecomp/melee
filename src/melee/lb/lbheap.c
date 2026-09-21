@@ -11,13 +11,19 @@ struct lbHeap_HeapDesc {
     u32 size;
 };
 
+/// Placement of the heaps after the two reserved ones; @c LbHeapKind_Count
+/// means no heap.
 struct lbHeap_HeapDesc lbHeap_803BA380[5] = {
-    { 2, 1, 6, 0x800 },    { 3, 1, 2, 0x4F8800 }, { 4, 2, 6, 0x64B400 },
-    { 5, 4, 6, 0x96C800 }, { 6, 0, 0, 0 },
+    { LbHeapKind_Seq, 1, LbHeapKind_Count, 0x800 },
+    { LbHeapKind_Stay, 1, LbHeapKind_Seq, 0x4F8800 },
+    { LbHeapKind_AllM, 2, LbHeapKind_Count, 0x64B400 },
+    { LbHeapKind_AllA, 4, LbHeapKind_Count, 0x96C800 },
+    { LbHeapKind_Count, 0, 0, 0 },
 };
 
-static inline void resetHeap(struct Heap* heap)
+static inline void resetHeap(LbHeapKind kind)
 {
+    struct Heap* heap = &lbHeap_80431FA0.heap_array[kind];
     heap->id = -1;
     heap->handle = (Handle*) -1;
     heap->start = 0;
@@ -250,25 +256,23 @@ void lbHeap_80015F3C(void)
     struct Heap* curr_heap;
     struct Heap* prev_heap;
     struct lbHeap_HeapDesc* desc;
+    LbHeapKind kind;
 
     HSD_GetNextArena(&lbHeap_80431FA0.arena_lo, &lbHeap_80431FA0.arena_hi);
     lbMemory_800154BC(&lbHeap_80431FA0.aram_lo, &lbHeap_80431FA0.aram_hi);
 
-    resetHeap(&lbHeap_80431FA0.heap_array[0]);
-    resetHeap(&lbHeap_80431FA0.heap_array[1]);
-    resetHeap(&lbHeap_80431FA0.heap_array[2]);
-    resetHeap(&lbHeap_80431FA0.heap_array[3]);
-    resetHeap(&lbHeap_80431FA0.heap_array[4]);
-    resetHeap(&lbHeap_80431FA0.heap_array[5]);
+    for (kind = 0; kind < LbHeapKind_Count; kind++) {
+        resetHeap(kind);
+    }
 
     desc = lbHeap_803BA380;
-    while ((curr_idx = desc->idx) != 6) {
+    while ((curr_idx = desc->idx) != LbHeapKind_Count) {
         curr_heap = &lbHeap_80431FA0.heap_array[curr_idx];
 
         curr_heap->type = desc->type;
         curr_heap->size = desc->size;
         prev_idx = desc->prev_idx;
-        if (prev_idx == 6) {
+        if (prev_idx == LbHeapKind_Count) {
             switch (curr_heap->type) {
             case 3:
                 break;
