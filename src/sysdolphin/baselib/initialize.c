@@ -182,7 +182,7 @@ void HSD_OSInit(void)
     current_heap = OSCreateHeap((void*) new_arena_lo, (void*) new_arena_hi);
     OSSetCurrentHeap(current_heap);
     memReport.heap = new_arena_hi - new_arena_lo;
-    HSD_ObjSetHeap(new_arena_hi - new_arena_lo, 0);
+    HSD_ObjSetHeap(new_arena_hi - new_arena_lo, NULL);
     OSSetArenaLo((void*) new_arena_hi);
 }
 
@@ -231,7 +231,7 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
     OSSetCurrentHeap(current_heap);
     HSD_ObjSetHeap((uintptr_t) hsd_heap_next_arena_hi -
                        (uintptr_t) hsd_heap_next_arena_lo,
-                   0);
+                   NULL);
     return current_heap;
 }
 

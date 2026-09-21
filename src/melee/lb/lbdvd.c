@@ -289,8 +289,8 @@ void lbDvd_CachePreloadedFile(s32 index)
             preloadEntry->state = 2;
             preloadEntry->load_score = 9999;
             lbFile_800164A4(preloadEntry->entry_num,
-                            preloadEntry->raw_data->addr,
-                            &preloadEntry->size, 2, lbDvd_80017E64, index);
+                            preloadEntry->raw_data->addr, &preloadEntry->size,
+                            2, lbDvd_80017E64, index);
         }
     }
 }

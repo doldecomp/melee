@@ -5,7 +5,7 @@
 
 #include <melee/lb/forward.h>
 
-/// A block allocated from a heap: the address range [addr, addr + size).
+/// A RAM or ARAM allocation: the address range [addr, addr + size).
 struct HSD_AllocEntry {
     struct HSD_AllocEntry* next;
     uintptr_t addr;

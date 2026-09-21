@@ -10,10 +10,10 @@ static objheap obj_heap = { 0, 0, -1, -1 };
 
 static HSD_ObjAllocData* alloc_datas;
 
-void HSD_ObjSetHeap(u32 size, uintptr_t top)
+void HSD_ObjSetHeap(u32 size, void* ptr)
 {
-    obj_heap.curr = top;
-    obj_heap.top = top;
+    obj_heap.curr = (uintptr_t) ptr;
+    obj_heap.top = (uintptr_t) ptr;
     obj_heap.remain = size;
     obj_heap.size = size;
 }

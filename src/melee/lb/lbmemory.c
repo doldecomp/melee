@@ -12,7 +12,7 @@
 /// A main-RAM block move in progress, copied in slices from an alarm.
 struct LBMgr {
     OSAlarm alarm;
-    u8* src;
+    const u8* src;
     u8* dst;
     u32 size;
     u32 offset;
@@ -222,15 +222,15 @@ u32 lbMemory_8001529C(Handle* h, void (*cb)(u32), u32 arg)
     return 0;
 }
 
-static void start_ram_copy(uintptr_t src, uintptr_t dst, u32 size,
+static void start_ram_copy(const void* src, void* dst, u32 size,
                            HSD_AllocEntry* next)
 {
     struct LBMgr* p = &_p(mgr);
     int enabled = OSDisableInterrupts();
 
     HSD_ASSERT(0x14F, !p->size);
-    p->src = (u8*) src;
-    p->dst = (u8*) dst;
+    p->src = src;
+    p->dst = dst;
     p->size = size;
     p->offset = 0;
     p->cb_arg = (uintptr_t) next;
@@ -262,8 +262,8 @@ static void lbMemory_80015320(int arg0, uintptr_t arg1, void* arg2,
                                   0x1B, 1, lbMemory_80015320,
                                   (uintptr_t) block->next);
             } else {
-                start_ram_copy(src, current, OSRoundUp32B(block->size),
-                               block->next);
+                start_ram_copy((const void*) src, (void*) current,
+                               OSRoundUp32B(block->size), block->next);
             }
             return;
         }
