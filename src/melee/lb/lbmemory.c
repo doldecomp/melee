@@ -52,7 +52,12 @@ Handle* lbMemory_80014E24(uintptr_t arenaLo, uintptr_t arenaHi)
     HSD_ASSERT(0x7B, _p(free_heap));
 
     if (arenaLo < 0x80000000U && arenaHi < 0x80000000U) {
+#ifdef MUST_MATCH
+        // The retail assert string spells the u32 casts.
         HSD_ASSERT(0x80, (u32)arenaLo >= (u32)_p(a_arenaLo) && (u32)arenaHi <= (u32)_p(a_arenaHi));
+#else
+        HSD_ASSERT(0x80, arenaLo >= _p(a_arenaLo) && arenaHi <= _p(a_arenaHi));
+#endif
     }
 
     h = _p(free_heap);
