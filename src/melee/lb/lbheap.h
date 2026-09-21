@@ -14,7 +14,7 @@ typedef enum LbHeapStatus {
 /* 015900 */ void lbHeap_80015900(void);
 /* 015BB8 */ LbHeapStatus lbHeap_80015BB8(int);
 /* 015BD0 */ void* lbHeap_80015BD0(int heap_id, size_t size);
-/* 015CA8 */ void lbHeap_80015CA8(int, void*);
+/* 015CA8 */ void lbHeap_80015CA8(int, uintptr_t);
 /* 015D6C */ int lbHeap_80015D6C(u32 heap0, void (*cb)(u32), u32 heap1);
 /* 015DF8 */ void lbHeap_80015DF8(void);
 /* 015F3C */ void lbHeap_80015F3C(void);

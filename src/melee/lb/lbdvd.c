@@ -5,6 +5,7 @@
 #include "lbdvd.static.h"
 #include "lbfile.h"
 #include "lbheap.h"
+#include "lbmemory.h" // IWYU pragma: keep
 #include "types.h"
 #include <dolphin/dvd.h>
 #include <melee/db/db.h>
@@ -288,7 +289,7 @@ void lbDvd_CachePreloadedFile(s32 index)
             preloadEntry->state = 2;
             preloadEntry->load_score = 9999;
             lbFile_800164A4(preloadEntry->entry_num,
-                            (uintptr_t) preloadEntry->raw_data->addr,
+                            preloadEntry->raw_data->addr,
                             &preloadEntry->size, 2, lbDvd_80017E64, index);
         }
     }
@@ -377,18 +378,19 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
 
         switch (type) {
         case 2:
-            lbArchive_InitializeDAT(entry->archive->addr,
+            lbArchive_InitializeDAT((HSD_Archive*) entry->archive->addr,
                                     (u8*) entry->raw_data->addr, entry->size);
             break;
 
         case 3:
-            efAsync_OnLoad(entry->archive->addr, (u8*) entry->raw_data->addr,
-                           entry->size, entry->effect_index);
+            efAsync_OnLoad((HSD_Archive*) entry->archive->addr,
+                           (u8*) entry->raw_data->addr, entry->size,
+                           entry->effect_index);
             break;
 
         case 4:
-            grDatFiles_801C5FC0(entry->archive->addr, entry->raw_data->addr,
-                                entry->size);
+            grDatFiles_801C5FC0((HSD_Archive*) entry->archive->addr,
+                                (void*) entry->raw_data->addr, entry->size);
             break;
 
         default:
@@ -399,9 +401,9 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
         entry->load_state = 2;
     }
     if (entry->archive) {
-        return entry->archive->addr;
+        return (void*) entry->archive->addr;
     }
-    return entry->raw_data->addr;
+    return (void*) entry->raw_data->addr;
 }
 
 struct lbDvd_803B72C0_t {

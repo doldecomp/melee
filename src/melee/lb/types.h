@@ -241,12 +241,6 @@ struct CollData {
     /* fp+878 */ SurfaceData ceiling;
 };
 
-struct HSD_AllocEntry {
-    struct HSD_AllocEntry* next;
-    void* addr;
-    size_t size;
-};
-
 struct PreloadCacheSceneEntry {
     int char_id;
     u8 color;
