@@ -6,8 +6,8 @@
 #include <sysdolphin/baselib/debug.h>
 
 typedef struct _objheap {
-    u32 top;
-    u32 curr;
+    uintptr_t top;
+    uintptr_t curr;
     u32 size;
     u32 remain;
 } objheap;
