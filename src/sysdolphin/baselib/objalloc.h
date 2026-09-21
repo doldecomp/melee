@@ -69,7 +69,7 @@ static inline void HSD_ObjAllocDisableNumLimit(HSD_ObjAllocData* data)
     data->num_limit_flag = 0;
 }
 
-void HSD_ObjSetHeap(u32 size, void* ptr);
+void HSD_ObjSetHeap(u32 size, uintptr_t top);
 s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num);
 void* HSD_ObjAlloc(HSD_ObjAllocData* data);
 void HSD_ObjFree(HSD_ObjAllocData* data, void* obj);
