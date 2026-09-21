@@ -80,7 +80,7 @@ void lbHeap_80015900(void)
     s32 create_i;
     struct Heap* main_heap;
     s32 bounds_i;
-    s32 end;
+    uintptr_t end;
     struct Heap* bounds_heap;
     uintptr_t aram_lo;
     uintptr_t aram_hi;

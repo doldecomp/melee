@@ -27,8 +27,9 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     HSD_ASSERT(0xEE, data);
     pool_size = data->size * num;
     if (obj_heap.top != 0) {
+        uintptr_t align = data->align;
         pool_end = obj_heap.top + obj_heap.size;
-        pool_start = (obj_heap.curr + data->align) & ~data->align;
+        pool_start = (obj_heap.curr + align) & ~align;
         if (pool_start > pool_end) {
             return 0;
         }

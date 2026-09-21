@@ -174,7 +174,11 @@ void lbMemFreeToHeap(Handle* h, uintptr_t addr)
         link = &block->next;
         block = block->next;
     }
-    OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", addr);
+#ifdef MUST_MATCH
+    OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", (u32) addr);
+#else
+    OSReport("[LbMem] Error: lbMemFreeToHeap %p.\n", (void*) addr);
+#endif
     HSD_ASSERT(283, 0);
 }
 
