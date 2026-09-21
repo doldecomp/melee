@@ -9,6 +9,17 @@ typedef enum LbHeapStatus {
     /* 0x01 */ LbHeapStatus_Destroy,
 } LbHeapStatus;
 
+/// Heap slots, named by the report in #lbHeap_80015DF8.
+typedef enum LbHeapKind {
+    /* 0x00 */ LbHeapKind_Hsd,
+    /* 0x01 */ LbHeapKind_ARAM,
+    /* 0x02 */ LbHeapKind_Seq,
+    /* 0x03 */ LbHeapKind_Stay,
+    /* 0x04 */ LbHeapKind_AllM,
+    /* 0x05 */ LbHeapKind_AllA,
+    /* 0x06 */ LbHeapKind_Count,
+} LbHeapKind;
+
 /* 0158D0 */ void lbHeap_800158D0(int, int);
 /* 0158E8 */ int lbHeap_800158E8(int);
 /* 015900 */ void lbHeap_80015900(void);
