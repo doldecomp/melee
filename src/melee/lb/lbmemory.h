@@ -3,18 +3,26 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/lb/forward.h>
+
+struct HSD_AllocEntry {
+    struct HSD_AllocEntry* next;
+    void* addr; ///< ARAM addresses are opaque.
+    size_t size;
+};
+
+/// Heap spanning [lo, hi).
 typedef struct Handle {
-    struct Handle* x0_next;
-    void* x4_lo;
-    // Arena high bound for heap handles; allocation size for child handles.
-    void* x8_hi;
-    struct Handle* xC_prev;
+    struct Handle* next;
+    void* lo;
+    void* hi;
+    HSD_AllocEntry* blocks; ///< Sorted by address.
 } Handle;
 
 /* 014E24 */ Handle* lbMemory_80014E24(void* lo, void* hi);
 /* 014EEC */ void lbMemory_80014EEC(Handle*);
 /* 014F7C */ u32 lbMemory_80014F7C(Handle*);
-/* 014FC8 */ Handle* lbMemory_80014FC8(Handle*, size_t);
+/* 014FC8 */ HSD_AllocEntry* lbMemory_80014FC8(Handle*, size_t);
 /* 0150F0 */ void lbMemFreeToHeap(Handle*, void*);
 /* 01529C */ u32 lbMemory_8001529C(Handle*, void (*)(u32), u32);
 /* 0154BC */ void lbMemory_800154BC(uintptr_t*, uintptr_t*);

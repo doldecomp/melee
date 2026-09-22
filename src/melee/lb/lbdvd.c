@@ -5,6 +5,7 @@
 #include "lbdvd.static.h"
 #include "lbfile.h"
 #include "lbheap.h"
+#include "lbmemory.h" // IWYU pragma: keep
 #include "types.h"
 #include <dolphin/dvd.h>
 #include <melee/db/db.h>
@@ -378,11 +379,11 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
         switch (type) {
         case 2:
             lbArchive_InitializeDAT(entry->archive->addr,
-                                    (u8*) entry->raw_data->addr, entry->size);
+                                    entry->raw_data->addr, entry->size);
             break;
 
         case 3:
-            efAsync_OnLoad(entry->archive->addr, (u8*) entry->raw_data->addr,
+            efAsync_OnLoad(entry->archive->addr, entry->raw_data->addr,
                            entry->size, entry->effect_index);
             break;
 

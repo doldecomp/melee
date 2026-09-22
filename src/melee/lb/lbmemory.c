@@ -9,196 +9,193 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 
-struct MemEntry {
-    struct MemEntry* x0_next;
-    void* x4_lo;
-    void* x8_hi;
-};
-
 struct LBMgr {
-    OSAlarm alarm; // 0x00
-    u8* src;       // 0x28
-    u8* dst;       // 0x2C
-    u32 size;      // 0x30
-    u32 offset;    // 0x34
-    u32 cb_arg;    // 0x38
+    OSAlarm alarm;
+    const u8* src;
+    u8* dst;
+    u32 size;
+    u32 offset;
+    uintptr_t cb_arg;
     HSD_DevComCallback cb;
 };
 
 struct Allocator {
-    void* a_arenaLo;
-    void* a_arenaHi;
-    struct MemEntry x8_mem[0x83];
-    Handle* free_mem;
-    s32 x630_num_allocs;
-    s32 x634_max_num_allocs;
-    Handle x638_heap[6];
+    uintptr_t a_arenaLo;
+    uintptr_t a_arenaHi;
+    HSD_AllocEntry mem[0x83];
+    HSD_AllocEntry* free_mem;
+    s32 num_allocs;
+    s32 max_num_allocs;
+    Handle heap[6];
     Handle* free_heap;
-    Handle* x69C;
-    struct LBMgr x6A0_mgr;
-    u32 x6E0;
-    void* x6E4;
-    void (*x6E8)(u32);
-    u8 x6EC[0x6F0 - 0x6EC];
+    Handle* aram_heap;
+    struct LBMgr mgr;
+    u32 compact_arg;
+    uintptr_t compact_cursor;
+    void (*compact_cb)(u32);
 };
 
 /* 015320 */ static void lbMemory_80015320(int, uintptr_t, void*, bool);
 
 struct Allocator lbMemory_804318B0;
 #define _p(x) (lbMemory_804318B0.x)
-ASSERT_SIZE(struct MemEntry, 0xC);
+ASSERT_SIZE(HSD_AllocEntry, 0xC);
 ASSERT_SIZE(lbMemory_804318B0, 0x6F0);
-
-#define PUSH_HANDLE(list, handle)                                             \
-    do {                                                                      \
-        handle->x0_next = *list;                                              \
-        *list = handle;                                                       \
-    } while (0)
-#define POP_HANDLE(list, handle)                                              \
-    do {                                                                      \
-        handle = *list;                                                       \
-        *list = handle->x0_next;                                              \
-    } while (0)
 
 Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
 {
     Handle* h;
     HSD_ASSERT(0x7B, _p(free_heap));
 
-    if (((u32) arenaLo < 0x80000000U) && ((u32) arenaHi < 0x80000000U)) {
+    if ((uintptr_t) arenaLo < 0x80000000U && (uintptr_t) arenaHi < 0x80000000U)
+    {
+#ifdef MUST_MATCH
+        // The retail assert string spells the u32 casts.
         HSD_ASSERT(0x80, (u32)arenaLo >= (u32)_p(a_arenaLo) && (u32)arenaHi <= (u32)_p(a_arenaHi));
+#else
+        HSD_ASSERT(0x80, (uintptr_t) arenaLo >= _p(a_arenaLo) &&
+                            (uintptr_t) arenaHi <= _p(a_arenaHi));
+#endif
     }
 
-    POP_HANDLE(&_p(free_heap), h);
-    h->x0_next = NULL;
-    h->x4_lo = arenaLo;
-    h->x8_hi = arenaHi;
-    h->xC_prev = NULL;
+    h = _p(free_heap);
+    _p(free_heap) = h->next;
+    h->next = NULL;
+    h->lo = arenaLo;
+    h->hi = arenaHi;
+    h->blocks = NULL;
     return h;
 }
 
 void lbMemory_80014EEC(Handle* handle)
 {
-    Handle* iter;
-    Handle* tmp_next;
+    HSD_AllocEntry* block;
+    HSD_AllocEntry* next;
     HSD_ASSERT(149, handle);
-    for (iter = handle->xC_prev; iter != NULL;) {
-        tmp_next = iter->x0_next;
-        PUSH_HANDLE(&_p(free_mem), iter);
-        iter = tmp_next;
-        _p(x630_num_allocs) -= 1;
+    for (block = handle->blocks; block != NULL; block = next) {
+        next = block->next;
+        block->next = _p(free_mem);
+        _p(free_mem) = block;
+        _p(num_allocs) -= 1;
     }
-    PUSH_HANDLE(&_p(free_heap), handle);
+    handle->next = _p(free_heap);
+    _p(free_heap) = handle;
 }
 
 u32 lbMemory_80014F7C(Handle* h)
 {
-    u32 r0;
-    u32 r4 = (u32) h->x4_lo;
-    Handle* iter = (Handle*) &h->xC_prev;
+    uintptr_t start = (uintptr_t) h->lo;
+    HSD_AllocEntry** link = &h->blocks;
+    uintptr_t end;
     u32 sum = 0;
 
-loop:
-    iter = iter->x0_next;
-    r0 = (u32) ((iter != NULL) ? iter->x4_lo : h->x8_hi);
-    sum += r0 - r4;
-    if (iter != NULL) {
-        r4 = (u32) iter->x4_lo + (u32) iter->x8_hi;
-        goto loop;
+    for (;;) {
+        end = (uintptr_t) ((*link != NULL) ? (*link)->addr : h->hi);
+        sum += end - start;
+        if (*link == NULL) {
+            break;
+        }
+        start = (uintptr_t) (*link)->addr + (*link)->size;
+        link = &(*link)->next;
     }
     return sum;
 }
 
-Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
+HSD_AllocEntry* lbMemory_80014FC8(Handle* h, size_t size)
 {
-    void* lo;
-    Handle* memp_kouho;
-    void* end;
+    uintptr_t lo;
+    HSD_AllocEntry** memp_kouho;
+    uintptr_t end;
     u32 least_leftover;
     u32 leftover;
     u32 available_space;
-    void* start;
-    Handle* iter;
+    uintptr_t start;
+    HSD_AllocEntry** link;
 
     least_leftover = 0x40000000U;
     HSD_ASSERT(0xCC, _p(free_mem));
-    size = ((size + 0x1F) & 0xFFFFFFE0);
-    start = arg0->x4_lo;
-    iter = (Handle*) &arg0->xC_prev;
+    size = OSRoundUp32B(size);
+    start = (uintptr_t) h->lo;
+    link = &h->blocks;
     memp_kouho = NULL;
 
-    while (1) {
-        end = (iter->x0_next != NULL) ? iter->x0_next->x4_lo : arg0->x8_hi;
-        available_space = (u32) end - (u32) start;
+    for (;;) {
+        end = (uintptr_t) ((*link != NULL) ? (*link)->addr : h->hi);
+        available_space = end - start;
         if (available_space >= size) {
             leftover = available_space;
-            leftover = leftover - size;
+            leftover -= size;
             if (leftover <= least_leftover) {
                 least_leftover = leftover;
                 lo = start;
-                memp_kouho = iter;
+                memp_kouho = link;
             }
         }
-        if (iter->x0_next == NULL) {
+        if (*link == NULL) {
             break;
-        } else {
-            iter = iter->x0_next;
-            start = (void*) ((u32) iter->x4_lo + (u32) iter->x8_hi);
         }
+        start = (uintptr_t) (*link)->addr + (*link)->size;
+        link = &(*link)->next;
     }
     HSD_ASSERT(0xE9, memp_kouho);
     {
-        Handle* result;
-        POP_HANDLE(&_p(free_mem), result);
+        HSD_AllocEntry* result = _p(free_mem);
+        _p(free_mem) = result->next;
 
-        result->x8_hi = (void*) size;
-        result->x4_lo = lo;
-        result->x0_next = memp_kouho->x0_next;
-        memp_kouho->x0_next = result;
+        result->size = size;
+        result->addr = (void*) lo;
+        result->next = *memp_kouho;
+        *memp_kouho = result;
 
-        _p(x630_num_allocs) += 1;
-        if (_p(x630_num_allocs) > _p(x634_max_num_allocs)) {
-            _p(x634_max_num_allocs) = _p(x630_num_allocs);
+        _p(num_allocs) += 1;
+        if (_p(num_allocs) > _p(max_num_allocs)) {
+            _p(max_num_allocs) = _p(num_allocs);
         }
         return result;
     }
 }
-void lbMemFreeToHeap(Handle* h, void* arg1)
-{
-    Handle* handle = h->xC_prev;
-    Handle* r6 = (Handle*) &h->xC_prev;
 
-    while (handle != NULL) {
-        if (handle->x4_lo == arg1) {
-            r6->x0_next = handle->x0_next;
-            PUSH_HANDLE(&_p(free_mem), handle);
-            _p(x630_num_allocs) -= 1;
+void lbMemFreeToHeap(Handle* h, void* addr)
+{
+    HSD_AllocEntry* block = h->blocks;
+    HSD_AllocEntry** link = &h->blocks;
+
+    while (block != NULL) {
+        if (block->addr == addr) {
+            *link = block->next;
+            block->next = _p(free_mem);
+            _p(free_mem) = block;
+            _p(num_allocs) -= 1;
             return;
         }
-        r6 = handle;
-        handle = handle->x0_next;
+        link = &block->next;
+        block = block->next;
     }
-    OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", arg1);
+#ifdef MUST_MATCH
+    OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", (unsigned) addr);
+#else
+    OSReport("[LbMem] Error: lbMemFreeToHeap %p.\n", addr);
+#endif
     HSD_ASSERT(283, 0);
 }
 
 static void fn_80015184(OSAlarm* alarm, OSContext* context)
 {
     struct LBMgr* p;
-    u32 temp_r3_2;
-    u32 temp_r6;
-    u32 var_r30;
+    u32 remaining;
+    u32 offset;
+    u32 slice;
 
-    p = &_p(x6A0_mgr);
+    p = &_p(mgr);
     HSD_ASSERT(0x127, p->size);
-    temp_r6 = p->offset;
-    temp_r3_2 = p->size - temp_r6;
-    var_r30 = temp_r3_2;
-    if (temp_r3_2 > 0x19000U) {
-        var_r30 = 0x19000;
+    offset = p->offset;
+    remaining = p->size - offset;
+    slice = remaining;
+    if (remaining > 0x19000U) {
+        slice = 0x19000;
     }
-    memcpy(p->dst + temp_r6, p->src + temp_r6, var_r30);
-    p->offset = p->offset + var_r30;
+    memcpy(p->dst + offset, p->src + offset, slice);
+    p->offset = p->offset + slice;
     if (p->offset == p->size) {
         p->size = 0U;
         p->cb(0, p->cb_arg, 0, 0);
@@ -208,120 +205,92 @@ static void fn_80015184(OSAlarm* alarm, OSContext* context)
     OSSetAlarm(&p->alarm, OSMillisecondsToTicks(3), fn_80015184);
 }
 
-u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
+u32 lbMemory_8001529C(Handle* h, void (*cb)(u32), u32 arg)
 {
-    void* lo;
-    Handle* iter;
-    void** r7;
+    HSD_AllocEntry* block;
 
-    _p(x6E8) = arg1;
-    _p(x6E0) = arg2;
-    _p(x6E4) = h->x4_lo;
+    _p(compact_cb) = cb;
+    _p(compact_arg) = arg;
+    _p(compact_cursor) = (uintptr_t) h->lo;
 
-    r7 = &_p(x6E4);
-
-    for (iter = h->xC_prev; iter != NULL; iter = iter->x0_next) {
-        lo = iter->x4_lo;
-        if (lo != *r7) {
-            lbMemory_80015320(0, (uintptr_t) iter, NULL, false);
+    for (block = h->blocks; block != NULL; block = block->next) {
+        if ((uintptr_t) block->addr != _p(compact_cursor)) {
+            lbMemory_80015320(0, (uintptr_t) block, NULL, false);
             return 1;
         }
-        *r7 = (void*) ((u32) lo + (u32) iter->x8_hi);
+        _p(compact_cursor) = (uintptr_t) block->addr + block->size;
     }
     return 0;
 }
 
-static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
+static void start_ram_copy(const void* src, void* dst, u32 size,
+                           HSD_AllocEntry* next)
 {
-    struct LBMgr* p = &_p(x6A0_mgr);
+    struct LBMgr* p = &_p(mgr);
     int enabled = OSDisableInterrupts();
 
     HSD_ASSERT(0x14F, !p->size);
-    p->src = (u8*) old;
-    p->dst = (u8*) current;
+    p->src = src;
+    p->dst = dst;
     p->size = size;
     p->offset = 0;
-    p->cb_arg = (u32) next;
+    p->cb_arg = (uintptr_t) next;
     p->cb = lbMemory_80015320;
     OSRestoreInterrupts(enabled);
     OSCreateAlarm(&p->alarm);
     OSSetAlarm(&p->alarm, OSMillisecondsToTicks(3), fn_80015184);
 }
 
-static void lbMemory_80015320(int arg0, uintptr_t _handle, void* arg2,
+static void lbMemory_80015320(int arg0, uintptr_t arg1, void* arg2,
                               bool cancelflag)
 {
-    void* null_or_old;
-    Handle* handle = (Handle*) _handle;
-    void** currentp;
-    void* old;
-    u32 current;
-    void* copy_src;
-    void* loaded_old;
-
-    currentp = &_p(x6E4);
-    current = (u32) _p(x6E4);
-    null_or_old = NULL;
+    HSD_AllocEntry* block = (HSD_AllocEntry*) arg1;
+    void* current = (void*) _p(compact_cursor);
+    void* src;
 
     HSD_ASSERT(0x188, !cancelflag);
 
-    if (handle != null_or_old) {
-        loaded_old = handle->x4_lo;
-        if ((old = loaded_old) != (void*) current) {
-            null_or_old = old;
-            handle->x4_lo = (void*) current;
-            *currentp = (void*) ((u32) handle->x4_lo + (u32) handle->x8_hi);
-            copy_src = null_or_old;
+    if (block != NULL) {
+        if (block->addr != current) {
+            src = block->addr;
+            block->addr = current;
+            _p(compact_cursor) = (uintptr_t) block->addr + block->size;
 
-            if ((u32) handle->x4_lo < 0x80000000U) {
-                HSD_DevComRequest(
-                    0, (u32) copy_src, current, OSRoundUp32B(handle->x8_hi),
-                    0x1B, 1, lbMemory_80015320, (uintptr_t) handle->x0_next);
-                return;
+            if ((uintptr_t) block->addr < 0x80000000U) {
+                HSD_DevComRequest(0, (uintptr_t) src, (uintptr_t) current,
+                                  OSRoundUp32B(block->size), 0x1B, 1,
+                                  lbMemory_80015320, (uintptr_t) block->next);
             } else {
-                start_ram_copy((u32) copy_src, current,
-                               OSRoundUp32B(handle->x8_hi), handle->x0_next);
-                return;
+                start_ram_copy(src, current, OSRoundUp32B(block->size),
+                               block->next);
             }
+            return;
         }
 
-        *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (uintptr_t) handle->x0_next, null_or_old, false);
+        _p(compact_cursor) = (uintptr_t) block->addr + block->size;
+        lbMemory_80015320(0, (uintptr_t) block->next, NULL, false);
         return;
     }
 
-    _p(x6E8)(_p(x6E0));
+    _p(compact_cb)(_p(compact_arg));
 }
 
 void lbMemory_800154BC(uintptr_t* arenaLo, uintptr_t* arenaHi)
 {
-    *arenaLo = (uintptr_t) _p(a_arenaLo);
-    *arenaHi = (uintptr_t) _p(a_arenaHi);
+    *arenaLo = _p(a_arenaLo);
+    *arenaHi = _p(a_arenaHi);
 }
 
 Handle* lbMemory_800154D4(void* arenaLo, void* arenaHi)
 {
-    _p(x69C) = lbMemory_80014E24(arenaLo, arenaHi);
-    return _p(x69C);
+    _p(aram_heap) = lbMemory_80014E24(arenaLo, arenaHi);
+    return _p(aram_heap);
 }
 
 void lbMemory_800155A4(void)
 {
-    Handle* handle = _p(x69C);
-    Handle* iter;
-
-    Handle** r5;
-
-    HSD_ASSERT(149, handle);
-    r5 = &_p(free_mem);
-    for (iter = handle->xC_prev; iter != NULL;) {
-        Handle* tmp_next = iter->x0_next;
-        PUSH_HANDLE(r5, iter);
-        iter = tmp_next;
-        _p(x630_num_allocs) -= 1;
-    }
-    PUSH_HANDLE(&_p(free_heap), handle);
-    _p(x69C) = NULL;
+    lbMemory_80014EEC(_p(aram_heap));
+    _p(aram_heap) = NULL;
 }
 
 void lbMemory_8001564C(void)
@@ -329,29 +298,24 @@ void lbMemory_8001564C(void)
     u32 freed_size;
     int i;
 
-    _p(a_arenaLo) = (void*) ARAlloc(0x20);
+    _p(a_arenaLo) = ARAlloc(0x20);
     ARFree(&freed_size);
-    _p(a_arenaHi) =
-        (void*) ((ARGetSize() > 0x01000000U) ? 0x01000000U : ARGetSize());
+    _p(a_arenaHi) = (ARGetSize() > 0x01000000U) ? 0x01000000U : ARGetSize();
 
-    _p(free_mem) = (Handle*) &_p(x8_mem)[0];
-    for (i = 0; i < (int) ARRAY_SIZE(_p(x8_mem)) - 1; i++) {
-        _p(x8_mem)[i].x0_next = &_p(x8_mem)[i + 1];
+    _p(free_mem) = &_p(mem)[0];
+    for (i = 0; i < (int) ARRAY_SIZE(_p(mem)) - 1; i++) {
+        _p(mem)[i].next = &_p(mem)[i + 1];
     }
-    _p(x8_mem)[i].x0_next = NULL;
+    _p(mem)[i].next = NULL;
 
-    _p(x634_max_num_allocs) = 0;
-    _p(x630_num_allocs) = 0;
-    _p(free_heap) = &_p(x638_heap)[0];
-    for (i = 0; i < (int) ARRAY_SIZE(_p(x638_heap)) - 1; i++) {
-        _p(x638_heap)[i].x0_next = &_p(x638_heap)[i + 1];
+    _p(max_num_allocs) = 0;
+    _p(num_allocs) = 0;
+    _p(free_heap) = &_p(heap)[0];
+    for (i = 0; i < (int) ARRAY_SIZE(_p(heap)) - 1; i++) {
+        _p(heap)[i].next = &_p(heap)[i + 1];
     }
-    _p(x638_heap)[i].x0_next = NULL;
-    _p(x69C) = NULL;
-    {
-        void* hi = _p(a_arenaHi);
-        void* lo = _p(a_arenaLo);
-        lbMemory_800154D4(lo, hi);
-    }
-    _p(x6A0_mgr).size = 0;
+    _p(heap)[i].next = NULL;
+    _p(aram_heap) = NULL;
+    lbMemory_800154D4((void*) _p(a_arenaLo), (void*) _p(a_arenaHi));
+    _p(mgr).size = 0;
 }
