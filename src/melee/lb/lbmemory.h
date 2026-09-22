@@ -5,19 +5,18 @@
 
 #include <melee/lb/forward.h>
 
-/// A RAM or ARAM allocation: the address range [addr, addr + size).
 struct HSD_AllocEntry {
     struct HSD_AllocEntry* next;
-    void* addr;
+    void* addr; ///< ARAM addresses are opaque.
     size_t size;
 };
 
-/// A heap over the address range [lo, hi), in main RAM or in ARAM.
+/// Heap spanning [lo, hi).
 typedef struct Handle {
     struct Handle* next;
     void* lo;
     void* hi;
-    HSD_AllocEntry* blocks; ///< Allocated blocks in ascending address order.
+    HSD_AllocEntry* blocks; ///< Sorted by address.
 } Handle;
 
 /* 014E24 */ Handle* lbMemory_80014E24(void* lo, void* hi);

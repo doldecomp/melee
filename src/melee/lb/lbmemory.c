@@ -9,7 +9,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 
-/// A main-RAM block move in progress, copied in slices from an alarm.
 struct LBMgr {
     OSAlarm alarm;
     const u8* src;
@@ -31,12 +30,9 @@ struct Allocator {
     Handle* free_heap;
     Handle* aram_heap;
     struct LBMgr mgr;
-    /// @name Compaction state: blocks are moved down to @c compact_cursor.
-    /// @{
     u32 compact_arg;
     uintptr_t compact_cursor;
     void (*compact_cb)(u32);
-    /// @}
 };
 
 /* 015320 */ static void lbMemory_80015320(int, uintptr_t, void*, bool);
@@ -71,7 +67,6 @@ Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
     return h;
 }
 
-/// Returns every block of @p handle, then @p handle itself, to the free lists.
 void lbMemory_80014EEC(Handle* handle)
 {
     HSD_AllocEntry* block;
@@ -246,8 +241,6 @@ static void start_ram_copy(const void* src, void* dst, u32 size,
     OSSetAlarm(&p->alarm, OSMillisecondsToTicks(3), fn_80015184);
 }
 
-/// Moves @p block down to the compaction cursor, then continues with the next
-/// block from the copy's completion callback.
 static void lbMemory_80015320(int arg0, uintptr_t arg1, void* arg2,
                               bool cancelflag)
 {

@@ -11,8 +11,7 @@ struct lbHeap_HeapDesc {
     u32 size;
 };
 
-/// Placement of the heaps after the two reserved ones; @c LbHeapKind_Count
-/// means no heap.
+/// LbHeapKind_Count marks an absent predecessor or the table end.
 struct lbHeap_HeapDesc lbHeap_803BA380[5] = {
     { LbHeapKind_Seq, 1, LbHeapKind_Count, 0x800 },
     { LbHeapKind_Stay, 1, LbHeapKind_Seq, 0x4F8800 },
