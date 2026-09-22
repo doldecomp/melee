@@ -1826,10 +1826,9 @@ void Fighter_procInput(Fighter_GObj* gobj)
                 if (DbLevel < DbLKind_DebugRom &&
                     gm_IsCurrently1PMode_inline() == 0)
                 {
-                    SET_STICKS(
-                        fp->input.cstick[0].x, fp->input.cstick[0].y,
-                        HSD_PadGameStatus[fp->pad_port].nml_subStickX,
-                        HSD_PadGameStatus[fp->pad_port].nml_subStickY);
+                    SET_STICKS(fp->input.cstick[0].x, fp->input.cstick[0].y,
+                               HSD_PadGameStatus[fp->pad_port].nml_subStickX,
+                               HSD_PadGameStatus[fp->pad_port].nml_subStickY);
                 } else {
                     fp->input.cstick[0].x = 0;
                     fp->input.cstick[0].y = 0;
@@ -3079,9 +3078,10 @@ void Fighter_procPlayer(Fighter_GObj* gobj)
 
     if (!fp->is_sleeping) {
         Player_80032828(fp->player_idx, fp->is_sub_fighter, &fp->cur_pos);
-        Player_SetFacingDirectionConditional(fp->player_idx, fp->is_sub_fighter,
-                                             fp->facing_dir);
-        pl_8003FAA8(fp->player_idx, fp->is_sub_fighter, &fp->cur_pos, &fp->prev_pos);
+        Player_SetFacingDirectionConditional(
+            fp->player_idx, fp->is_sub_fighter, fp->facing_dir);
+        pl_8003FAA8(fp->player_idx, fp->is_sub_fighter, &fp->cur_pos,
+                    &fp->prev_pos);
     }
 }
 

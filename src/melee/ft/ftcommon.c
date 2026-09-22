@@ -1177,8 +1177,8 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
-    if (Player_8003544C(fp->player_idx, fp->is_sub_fighter) && !fp->is_sleeping &&
-        !fp->stamina_dead)
+    if (Player_8003544C(fp->player_idx, fp->is_sub_fighter) &&
+        !fp->is_sleeping && !fp->stamina_dead)
     {
         lb_80014574(fp->pad_port, arg1 + 2, arg1, arg2);
     }
@@ -1759,7 +1759,8 @@ void ftCommon_8008031C(HSD_GObj* gobj)
         (ABS(fp->input.lstick[0].y) >= p_ftCommonData->x7B8 &&
          fp->activity_timer.lstick.y < p_ftCommonData->x7C0))
     {
-        Player_UpdateJoystickCountByIndex((s32) fp->player_idx, fp->is_sub_fighter);
+        Player_UpdateJoystickCountByIndex((s32) fp->player_idx,
+                                          fp->is_sub_fighter);
         fp->activity_timer.lstick.y = 0xFE;
         fp->activity_timer.lstick.x = 0xFE;
     }
