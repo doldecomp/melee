@@ -43,7 +43,7 @@ static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 
 static void lbArq_80014AC4(ARQRequest* request)
 {
-    lbArqNode* node = (lbArqNode*) request->owner;
+    lbArqNode* node = request->owner;
     lbArqNode** prev;
     lbArqNode** tail;
     BOOL intr;
@@ -102,7 +102,7 @@ void lbArq_80014BD0(unsigned int source, void* dest, size_t length,
     BOOL intr;
     lbArqNode** free_head;
     lbArqNode* head;
-    u32 owner;
+    lbArqNode* owner;
     u32 aram;
 
     PAD_STACK(16);
@@ -124,7 +124,7 @@ void lbArq_80014BD0(unsigned int source, void* dest, size_t length,
     rp->next = NULL;
     rp->state = LB_ARQ_STATE_PENDING;
 
-    owner = (uintptr_t) rp;
+    owner = rp;
     aram = source;
     ARQPostRequest(&rp->arq, owner, ARQ_TYPE_ARAM_TO_MRAM, ARQ_PRIORITY_LOW,
                    aram, (uintptr_t) dest, length, lbArq_80014AC4);

@@ -9,7 +9,7 @@ typedef void (*ARQCallback)(struct ARQRequest*);
 
 struct ARQRequest {
     /* 0x00 */ struct ARQRequest* next;
-    /* 0x04 */ u32 owner;
+    /* 0x04 */ void* owner;
     /* 0x08 */ u32 type;
     /* 0x0C */ u32 priority;
     /* 0x10 */ u32 source;
@@ -52,11 +52,11 @@ u32 ARGetSize(void);
 // arq.c
 void ARQInit(void);
 void ARQReset(void);
-void ARQPostRequest(struct ARQRequest* request, u32 owner, u32 type,
+void ARQPostRequest(struct ARQRequest* request, void* owner, u32 type,
                     u32 priority, u32 source, u32 dest, u32 length,
                     ARQCallback callback);
 void ARQRemoveRequest(struct ARQRequest* request);
-void ARQRemoveOwnerRequest(u32 owner);
+void ARQRemoveOwnerRequest(void* owner);
 void ARQFlushQueue(void);
 void ARQSetChunkSize(u32 size);
 u32 ARQGetChunkSize(void);
