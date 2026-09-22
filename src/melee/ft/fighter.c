@@ -511,7 +511,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2229_b4 = true;
 }
 
-void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj)
+void Fighter_Spawn(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -898,22 +898,22 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 
     jobj = GET_JOBJ(gobj);
     lbShadow_8000ED54(&fp->x20A4, jobj);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006A1BC, 0);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006A360, 1);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006ABA0, 2);
-    HSD_GObj_SetupProc(gobj, &Fighter_Spaghetti_8006AD10, 3);
+    HSD_GObj_SetupProc(gobj, &Fighter_procHitlag, 0);
+    HSD_GObj_SetupProc(gobj, &Fighter_procAnim, 1);
+    HSD_GObj_SetupProc(gobj, &Fighter_procCpu, 2);
+    HSD_GObj_SetupProc(gobj, &Fighter_procInput, 3);
     HSD_GObj_SetupProc(gobj, &Fighter_procUpdate, 4);
     HSD_GObj_SetupProc(gobj, &Fighter_procMap, 6);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006C5F4, 7);
-    HSD_GObj_SetupProc(gobj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006C80C, 9);
-    HSD_GObj_SetupProc(gobj, &Fighter_UnkProcessGrab_8006CA5C, 0xC);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006CB94, 0xD);
-    HSD_GObj_SetupProc(gobj, &Fighter_ProcessHit_8006D1EC, 0xE);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006D9AC, 0x10);
-    HSD_GObj_SetupProc(gobj, &Fighter_UnkCallCameraCallback_8006D9EC, 0x12);
-    HSD_GObj_SetupProc(gobj, &Fighter_8006DA4C, 0x16);
-    Fighter_UnkProcessDeath_80068354(gobj);
+    HSD_GObj_SetupProc(gobj, &Fighter_procIK, 7);
+    HSD_GObj_SetupProc(gobj, &Fighter_procAccessory, 8);
+    HSD_GObj_SetupProc(gobj, &Fighter_procCollPos, 9);
+    HSD_GObj_SetupProc(gobj, &Fighter_procGrabColl, 12);
+    HSD_GObj_SetupProc(gobj, &Fighter_procAttackColl, 13);
+    HSD_GObj_SetupProc(gobj, &Fighter_procCollResolve, 14);
+    HSD_GObj_SetupProc(gobj, &Fighter_procDynamics, 16);
+    HSD_GObj_SetupProc(gobj, &Fighter_procCamera, 18);
+    HSD_GObj_SetupProc(gobj, &Fighter_procPlayer, 22);
+    Fighter_Spawn(gobj);
 
     if (fp->kind == Ft_Kind_MasterH) {
         ftMh_MS_341_8014FE10(gobj);
@@ -1394,7 +1394,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     }
 }
 
-void Fighter_8006A1BC(Fighter_GObj* gobj)
+void Fighter_procHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1445,7 +1445,7 @@ void Fighter_8006A1BC(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006A360(Fighter_GObj* gobj)
+void Fighter_procAnim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1704,7 +1704,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006ABA0(Fighter_GObj* gobj)
+void Fighter_procCpu(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_b3 && ftCo_IsCpuControlled(fp)) {
@@ -1759,7 +1759,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
         *stickY = y;                                                          \
     } while (0)
 
-static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
+static void Fighter_procInput_Inner1(Fighter* fp)
 {
     s32 temp0_loc_1;
     s32 temp0_loc_0;
@@ -1778,7 +1778,7 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
     }
 }
 
-void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
+void Fighter_procInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float tempf1;
@@ -1903,7 +1903,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 }
             }
 
-            Fighter_Spaghetti_8006AD10_Inner1(fp);
+            Fighter_procInput_Inner1(fp);
 
             // Fighter_ClampSpecificValue
             fp->active_duration.lstick.x++;
@@ -2520,7 +2520,7 @@ void Fighter_procMap(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006C5F4(Fighter_GObj* gobj)
+void Fighter_procIK(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_b3) {
@@ -2528,7 +2528,7 @@ void Fighter_8006C5F4(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj)
+void Fighter_procAccessory(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2554,7 +2554,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006C80C(Fighter_GObj* gobj)
+void Fighter_procCollPos(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2591,7 +2591,7 @@ void Fighter_8006C80C(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
+void Fighter_procGrabColl(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -2623,7 +2623,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006CB94(Fighter_GObj* gobj)
+void Fighter_procAttackColl(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float func_8007BBCC_float_output;
@@ -2808,7 +2808,7 @@ void Fighter_8006D10C(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
+void Fighter_procCollResolve(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool bool1 = 0;
@@ -3052,7 +3052,7 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006D9AC(Fighter_GObj* gobj)
+void Fighter_procDynamics(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -3063,7 +3063,7 @@ void Fighter_8006D9AC(Fighter_GObj* gobj)
     ftCo_8009E0A8(gobj);
 }
 
-void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj)
+void Fighter_procCamera(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -3075,7 +3075,7 @@ void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_8006DA4C(Fighter_GObj* gobj)
+void Fighter_procPlayer(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

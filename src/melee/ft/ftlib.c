@@ -786,7 +786,7 @@ void ftLib_80087140(HSD_GObj* gobj)
     if (!fp->x221F_b3) {
         ftCo_800D4F24(gobj, 1);
         ftCommon_8007ED2C(fp);
-        Fighter_UnkProcessDeath_80068354(gobj);
+        Fighter_Spawn(gobj);
         ftCommon_8007D92C(gobj);
     }
 }

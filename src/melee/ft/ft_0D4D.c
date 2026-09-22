@@ -106,7 +106,7 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     u8 _[4];
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_UnkProcessDeath_80068354(gobj);
+    Fighter_Spawn(gobj);
     fp->smash_attrs.x2135 = Player_80032F30(fp->player_id);
 
     if (fp->smash_attrs.x2135 == -1) {
