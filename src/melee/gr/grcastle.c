@@ -419,7 +419,7 @@ void grCastle_801CD658(Ground_GObj* gobj)
     grLib_801C96F8(0x7536, 0x1E, &pos);
 
     for (i = 0; 12 > i; i++) {
-        gp->u.castle9.dynamics[i].data = NULL;
+        gp->u.castle3.dynamics[i].data = NULL;
     }
 
     archive = grDatFiles_GetArchive();
@@ -441,18 +441,18 @@ void grCastle_801CD658(Ground_GObj* gobj)
                         if (jobj != NULL) {
                             if (entries_s.e[i].type == 3) {
                                 grLib_801C9B20(jobj, flag3,
-                                               &gp->u.castle9.dynamics[i]);
+                                               &gp->u.castle3.dynamics[i]);
                             } else if (entries_s.e[i].type == 4) {
                                 grLib_801C9B20(jobj, flag4,
-                                               &gp->u.castle9.dynamics[i]);
+                                               &gp->u.castle3.dynamics[i]);
                             } else if (entries_s.e[i].type == 6) {
                                 grLib_801C9B20(jobj, flag6,
-                                               &gp->u.castle9.dynamics[i]);
+                                               &gp->u.castle3.dynamics[i]);
                             } else {
-                                gp->u.castle9.dynamics[i].data = NULL;
+                                gp->u.castle3.dynamics[i].data = NULL;
                             }
                         } else {
-                            gp->u.castle9.dynamics[i].data = NULL;
+                            gp->u.castle3.dynamics[i].data = NULL;
                         }
                     }
                 }
@@ -462,10 +462,10 @@ void grCastle_801CD658(Ground_GObj* gobj)
 
     gobj->render_cb = fn_801D0924;
     Ground_801C10B8(gobj, grCastle_801CD610);
-    gp->u.castle9.xC4 = 0;
-    gp->u.castle9.xC8 = 0;
-    gp->u.castle9.xCC = 0;
-    gp->u.castle9.xDE_b0 = false;
+    gp->u.castle3.xC4[0] = NULL;
+    gp->u.castle3.xC4[1] = NULL;
+    gp->u.castle3.xC4[2] = NULL;
+    gp->u.castle3.xDE_b0 = false;
     gp->x10_flags.b5 = 1;
 }
 
@@ -485,14 +485,14 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     lb_800115F4();
     grCastle_801D0BBC();
     for (i = 0; i < 12; i++) {
-        if (gp->u.castle3.x1C[i].data != NULL) {
+        if (gp->u.castle3.dynamics[i].data != NULL) {
             grCastle_801D0D84(
-                gp->u.castle3.x1C[i].data->desc.lb_unk0.jobj->parent);
+                gp->u.castle3.dynamics[i].data->desc.lb_unk0.jobj->parent);
         }
     }
     for (i = 0; i < 12; i++) {
-        if (gp->u.castle3.x1C[i].data != NULL) {
-            grLib_801C9B8C(&gp->u.castle3.x1C[i]);
+        if (gp->u.castle3.dynamics[i].data != NULL) {
+            grLib_801C9B8C(&gp->u.castle3.dynamics[i]);
             grCastle_801D0D24();
         }
     }
@@ -504,7 +504,7 @@ void grCastle_801CD960(Ground_GObj* gobj)
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        grLib_801C9B6C(&gp->u.castle3.x1C[i]);
+        grLib_801C9B6C(&gp->u.castle3.dynamics[i]);
     }
 }
 
@@ -691,7 +691,7 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     s32 rand_result;
 
     // Set bit 7 at offset 0xDE
-    gp->u.castle9.xDE_b0 = true;
+    gp->u.castle3.xDE_b0 = true;
 
     // Get random range from params
     range = yakumono_param->xA;
@@ -702,11 +702,11 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     }
 
     // Add base value and set various shorts
-    gp->u.castle9.xD4 = yakumono_param->x8 + rand_result;
-    gp->u.castle9.xDC = -1;
-    gp->u.castle9.xDA = -1;
-    gp->u.castle9.xD8 = -1;
-    gp->u.castle9.xD6 = 0;
+    gp->u.castle3.xD4 = yakumono_param->x8 + rand_result;
+    gp->u.castle3.xDC = -1;
+    gp->u.castle3.xDA = -1;
+    gp->u.castle3.xD8 = -1;
+    gp->u.castle3.xD6 = 0;
 }
 
 s32 grCastle_801CE054(Ground_GObj* gobj)
@@ -730,8 +730,8 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     for (ctr = 3; ctr != 0; ctr--) {
         gp = (Ground*) new_var2;
         for (i = 0; i < 3; i++) {
-            if (val != gp->u.castle4.xD8 && val != gp->u.castle4.xDA &&
-                val != gp->u.castle4.xDC)
+            if (val != gp->u.castle3.xD8 && val != gp->u.castle3.xDA &&
+                val != gp->u.castle3.xDC)
             {
                 new_var3 = ptr++;
                 *new_var3 = (s16) val;
@@ -748,16 +748,16 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     }
 
     picked = arr[idx];
-    (&gp->u.castle4.xD8)[gp->u.castle4.xD6] = picked;
+    (&gp->u.castle3.xD8)[gp->u.castle3.xD6] = picked;
 
     {
-        s32 d6 = (s32) gp->u.castle4.xD6;
+        s32 d6 = (s32) gp->u.castle3.xD6;
         if (2 == d6) {
             d6 = 0;
         } else {
             d6 = d6 + 1;
         }
-        gp->u.castle4.xD6 = (s16) d6;
+        gp->u.castle3.xD6 = (s16) d6;
     }
 
     return (s32) picked;
@@ -767,13 +767,13 @@ void grCastle_801CE19C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(4);
-    if (gp->u.castle9.xDE_b0) {
-        s16 timer = gp->u.castle9.xD4;
-        gp->u.castle9.xD4 = timer - 1;
+    if (gp->u.castle3.xDE_b0) {
+        s16 timer = gp->u.castle3.xD4;
+        gp->u.castle3.xD4 = timer - 1;
         if (timer < 0) {
             HSD_GObj* new_gobj =
                 grCastle_801CD4D0(grCastle_801CE054(gobj) + 8);
-            gp->u.castle9.xDE_b0 = false;
+            gp->u.castle3.xDE_b0 = false;
             if (new_gobj != NULL) {
                 Ground* new_gp = new_gobj->user_data;
                 Ground_801C5440(gp, 0, 0x53021U);
@@ -939,7 +939,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     s32 rand;
                     s32 range;
 
-                    sat->u.castle9.xDE_b0 = true;
+                    sat->u.castle3.xDE_b0 = true;
 
                     range = yakumono_param->xE;
                     if (range != 0) {
@@ -947,7 +947,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     } else {
                         rand = 0;
                     }
-                    sat->u.castle9.xD4 = (s16) (yakumono_param->xC + rand);
+                    sat->u.castle3.xD4 = (s16) (yakumono_param->xC + rand);
                 }
 
                 gp = (new_var3 = (Ground*) gobj->user_data);
@@ -1428,14 +1428,14 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s16 x0, x2;
 
-    gp->u.castle2.xC4 = grCastle_801CD4D0(20);
-    gp->u.castle2.xC8 = grCastle_801CD4D0(19);
-    gp->u.castle2.xCC = grCastle_801CD4D0(18);
-    gp->u.castle2.xD0 = -1;
+    gp->u.castle3.xC4[0] = grCastle_801CD4D0(20);
+    gp->u.castle3.xC4[1] = grCastle_801CD4D0(19);
+    gp->u.castle3.xC4[2] = grCastle_801CD4D0(18);
+    gp->u.castle3.xD0 = -1;
 
     x2 = yakumono_param->x2;
     x0 = yakumono_param->x0;
-    gp->u.castle2.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
+    gp->u.castle3.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
                         : x2 < x0
                             ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
                             : x2;
@@ -1454,7 +1454,7 @@ static inline void grCastle_ResetSatelliteTimer(Ground* gp)
         s32 diff = range_end - base;
         base = base + (diff != 0 ? HSD_Randi(diff) : 0);
     }
-    gp->u.castle12.xD2 = base;
+    gp->u.castle3.xD2 = base;
 }
 
 /// Pick the next satellite slot by weighted random choice and attach it to a
@@ -1483,10 +1483,9 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
     if (slot == 3) {
         slot = 0;
     }
-    gp->u.castle12.xD0 = slot;
+    gp->u.castle3.xD0 = slot;
 
-    sat_gp = (Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-                 ->user_data;
+    sat_gp = (Ground*) gp->u.castle3.xC4[gp->u.castle3.xD0]->user_data;
 
     {
         s32 idx;
@@ -1519,25 +1518,23 @@ void grCastle_801CF868(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s32* wp;
 
-    if ((gp->u.castle12.xC4[0] != 0 || gp->u.castle12.xC4[1] != 0 ||
-         gp->u.castle12.xC4[2] != 0) &&
-        (gp->u.castle12.xD0 == -1 ||
-         (((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0]) != NULL &&
-          ((Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-               ->user_data) != NULL &&
-          *(s16*) &(
-               (Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
-                   ->user_data)
-                  ->u.castle2.xC4 == 0)))
+    if ((gp->u.castle3.xC4[0] != 0 || gp->u.castle3.xC4[1] != 0 ||
+         gp->u.castle3.xC4[2] != 0) &&
+        (gp->u.castle3.xD0 == -1 ||
+         ((gp->u.castle3.xC4[gp->u.castle3.xD0]) != NULL &&
+          ((Ground*) gp->u.castle3.xC4[gp->u.castle3.xD0]->user_data) !=
+              NULL &&
+          ((Ground*) gp->u.castle3.xC4[gp->u.castle3.xD0]->user_data)
+                  ->u.castle7.xC4 == 0)))
     {
-        gp->u.castle12.xD2 = gp->u.castle12.xD2 - 1;
-        if (gp->u.castle12.xD2 < 0) {
+        gp->u.castle3.xD2 = gp->u.castle3.xD2 - 1;
+        if (gp->u.castle3.xD2 < 0) {
             grCastle_WeightTable weights;
             s16 cur_slot;
 
             grCastle_ResetSatelliteTimer(gp);
             weights = grCs_803B7EF0;
-            cur_slot = gp->u.castle12.xD0;
+            cur_slot = gp->u.castle3.xD0;
             if (cur_slot != -1) {
                 weights.w[cur_slot] /= yakumono_param->x6;
             }
@@ -1551,7 +1548,7 @@ void grCastle_801CF868(Ground_GObj* gobj)
 void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)
 {
     PAD_STACK(4);
-    *(s16*) &gp->u.castle2.xC4 = 4;
+    gp->u.castle7.xC4 = 4;
     if (ftLib_80086960(gobj)) {
         ftLib_80086A4C(gobj, (f32) yakumono_param->x4);
     }
@@ -1843,8 +1840,8 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
         PAD_STACK(4);
 
         for (i = 0; i < 12; i++) {
-            if (gp->u.castle3.x1C[i].data != NULL) {
-                lb_800117F4(&gp->u.castle3.x1C[i], &color1, &color2, 999,
+            if (gp->u.castle3.dynamics[i].data != NULL) {
+                lb_800117F4(&gp->u.castle3.dynamics[i], &color1, &color2, 999,
                             renderpass);
             }
         }

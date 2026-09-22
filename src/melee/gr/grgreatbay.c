@@ -731,9 +731,9 @@ void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
 #endif
         temp_r0 == 3)
     {
-        gp->u.greatbay.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
-        gp->u.greatbay.xD8 += 1;
-        gp->u.greatbay.xE0 += coll_x50 / 100.0f;
+        gp->u.greatbay4.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
+        gp->u.greatbay4.xD8 += 1;
+        gp->u.greatbay4.xE0 += coll_x50 / 100.0f;
     }
 }
 
