@@ -216,13 +216,13 @@ static HSD_SList* loadEnvelopeDesc(HSD_EnvelopeDesc** edesc_p)
         while (edesc->joint) {
             *env_p = HSD_EnvelopeAlloc();
             (*env_p)->weight = edesc->weight;
-            env_p = &((*env_p)->next);
+            env_p = &(*env_p)->next;
             edesc++;
         }
 
         (*list_p) = HSD_SListAlloc();
         (*list_p)->data = envelope;
-        list_p = &((*list_p)->next);
+        list_p = &(*list_p)->next;
         edesc_p++;
     }
     return list;
@@ -266,8 +266,7 @@ static HSD_ShapeSet* loadShapeSetDesc(HSD_ShapeSetDesc* sdesc)
     shape_set->normal_desc = sdesc->normal_desc;
     shape_set->normal_idx_list = sdesc->normal_idx_list;
     if (shape_set->flags & SHAPESET_ADDITIVE) {
-        shape_set->blend.bp =
-            (f32*) HSD_MemAlloc(shape_set->nb_shape * sizeof(f32));
+        shape_set->blend.bp = HSD_MemAlloc(shape_set->nb_shape * sizeof(f32));
         for (i = 0; i < shape_set->nb_shape; i++) {
             shape_set->blend.bp[i] = 0.0f;
         }
@@ -359,7 +358,7 @@ void HSD_PObjSetDefaultClass(HSD_PObjInfo* info)
 
 HSD_PObj* HSD_PObjAlloc(void)
 {
-    HSD_PObj* pobj = hsdNew((HSD_ClassInfo*) (HSD_PObjGetDefaultClass()));
+    HSD_PObj* pobj = hsdNew(&HSD_PObjGetDefaultClass()->parent);
     HSD_ASSERT(703, pobj);
     return pobj;
 }

@@ -5,6 +5,7 @@
 #include "lbdvd.static.h"
 #include "lbfile.h"
 #include "lbheap.h"
+#include "lbmemory.h" // IWYU pragma: keep
 #include "types.h"
 #include <dolphin/dvd.h>
 #include <melee/db/db.h>
@@ -289,8 +290,7 @@ void lbDvd_CachePreloadedFile(s32 index)
             preloadEntry->load_score = 9999;
             lbFile_800164A4(preloadEntry->entry_num,
                             (uintptr_t) preloadEntry->raw_data->addr,
-                            &preloadEntry->size, 2, lbDvd_80017E64,
-                            (void*) index);
+                            &preloadEntry->size, 2, lbDvd_80017E64, index);
         }
     }
 }
@@ -332,7 +332,7 @@ void lbDvd_80017CC4(void)
     }
 }
 
-void lbDvd_80017E64(int key, int index, void* value, bool cancelflag)
+void lbDvd_80017E64(int key, uintptr_t index, void* value, bool cancelflag)
 {
     PreloadEntry* preloadEntry = &preloadCache.entries[index];
     if (cancelflag != 0) {
@@ -379,11 +379,11 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
         switch (type) {
         case 2:
             lbArchive_InitializeDAT(entry->archive->addr,
-                                    (u8*) entry->raw_data->addr, entry->size);
+                                    entry->raw_data->addr, entry->size);
             break;
 
         case 3:
-            efAsync_OnLoad(entry->archive->addr, (u8*) entry->raw_data->addr,
+            efAsync_OnLoad(entry->archive->addr, entry->raw_data->addr,
                            entry->size, entry->effect_index);
             break;
 

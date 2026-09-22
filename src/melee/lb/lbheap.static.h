@@ -22,7 +22,7 @@ struct lbHeap_HeapState {
     /* 0x04 */ void* arena_hi;    /* inferred */
     /* 0x08 */ uintptr_t aram_lo; /* inferred */
     /* 0x0C */ uintptr_t aram_hi; /* inferred */
-    /* 0x10 */ struct Heap heap_array[6];
+    /* 0x10 */ struct Heap heap_array[LbHeapKind_Count];
 }; /* size = 0xB8 */
 ASSERT_SIZE(struct lbHeap_HeapState, 0xB8);
 

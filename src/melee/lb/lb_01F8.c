@@ -83,7 +83,7 @@ void lbMthp8001FAA0(const char* filename, int width, int height)
     s32 uv_size;
     void* context;
     void* decode_buf;
-    s32 decoded;
+    THPFileInfo* decoded;
 
     lbl_804335B8.x6C = (u16) width;
     lbl_804335B8.x6E = (u16) height;
