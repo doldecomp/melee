@@ -605,7 +605,7 @@ static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
     }
 
     if (!fp->is_sleeping && !fp->stamina_dead) {
-        lb_80014574(fp->controller_index, val, arg1, arg2);
+        lb_80014574(fp->pad_port, val, arg1, arg2);
     }
 }
 
@@ -647,7 +647,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->slot, fp->is_sub_fighter)) {
-        HSD_PadRumbleRemoveId(fp->controller_index, 1);
+        HSD_PadRumbleRemoveId(fp->pad_port, 1);
     }
 }
 

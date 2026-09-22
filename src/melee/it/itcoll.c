@@ -815,7 +815,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
         switch (temp_r29->x0) {
         case 1:
             fighter = temp_r29->x4;
-            arg_item->xCB0_source_ply = (s32) fighter->slot;
+            arg_item->xCB0_source_ply = (s32) fighter->player_idx;
             arg_item->xCEC_fighterGObj = fighter->gobj;
             arg_item->xCF0_itemGObj = NULL;
             if (arg_item->pos.x > fighter->cur_pos.x) {
@@ -831,7 +831,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
             item_owner_gobj = item->owner;
             if ((item_owner_gobj != NULL) && ftLib_80086960(item_owner_gobj)) {
                 arg_item->xCB0_source_ply =
-                    (s32) ((Fighter*) item_owner_gobj->user_data)->slot;
+                    (s32) ((Fighter*) item_owner_gobj->user_data)->player_idx;
                 arg_item->xCEC_fighterGObj = NULL;
                 arg_item->xCF0_itemGObj = item_owner_gobj;
             } else {

@@ -41,9 +41,9 @@ void ftCo_800C7590(Fighter_GObj* gobj)
     cd = p_ftCommonData;
     {
         f32 tmp1 =
-            cd->x728 * (cd->x72C - (f32) (Player_80033BB8(fp->slot) + 1));
+            cd->x728 * (cd->x72C - (f32) (Player_80033BB8(fp->player_idx) + 1));
         f32 tmp2 =
-            (cd->x720 * (cd->x724 - Player_GetHandicap(fp->slot)) + cd->x71C);
+            (cd->x720 * (cd->x724 - Player_GetHandicap(fp->player_idx)) + cd->x71C);
         tmp2 += tmp1;
         ftCommon_InitGrab(fp, 1, fp->dmg.x1830_percent * cd->x730 + tmp2);
     }

@@ -765,7 +765,7 @@ int Player_GetControllerIndex(int slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    controller_index = player->controller_index;
+    controller_index = player->pad_port;
     return controller_index;
 }
 
@@ -774,7 +774,7 @@ void Player_SetControllerIndex(int slot, int controller_index)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->controller_index = controller_index;
+    player->pad_port = controller_index;
 }
 
 int Player_GetCpuLevel(int slot)
@@ -1916,7 +1916,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player->unk45 = 0;
     player->sub_color = 0;
     player->team = 0;
-    player->controller_index = 0;
+    player->pad_port = 0;
     player->cpu_level = 0;
 
     player->cpu_type = 4;

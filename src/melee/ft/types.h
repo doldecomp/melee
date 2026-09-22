@@ -572,7 +572,7 @@ struct ftCommonData {
     /* +6D0 */ float x6D0;
     /* +6D4 */ int x6D4;
     /* +6D8 */ int x6D8[1]; ///< @todo expand to actual size
-    /* +6DC */ GXColor x6DC_sub_colors[4];
+    /* +6DC */ GXColor sub_colors[4]; ///< Array of tint colors, see #gm_SetupSubColors and #Fighter_UnkInitLoad_80068914
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
     /* +6F4 */ int x6F4_unkDamage;
@@ -1304,7 +1304,7 @@ struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
     /*    fp+8 */ s32 x8_spawnNum;
-    /*    fp+C */ u8 slot; ///< Index into player_slots
+    /*    fp+C */ u8 player_idx; ///< Index into player_slots[Gm_Player_NumMax];
     /*   fp+10 */ FtMotionId motion_id;
     /*   fp+14 */ enum_t anim_id;
     /*   fp+18 */ s32 x18;
@@ -1398,7 +1398,7 @@ struct Fighter {
     } x5F4_arr[12];
     /*  fp+60C */ void* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
-    /*  fp+618 */ u8 controller_index; ///< The pad port for this fighter
+    /*  fp+618 */ u8 pad_port; ///< Physical controller port for this fighter
     /*  fp+619 */ u8 costume_id;
     /*  fp+61A */ u8 sub_color;
     /*  fp+61B */ u8 team;

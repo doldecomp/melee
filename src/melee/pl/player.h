@@ -50,7 +50,7 @@ typedef struct _StaticPlayer {
     /*0x46*/ s8 sub_color;        ///< Tint index, 0 to 4; see
                                   ///< #gm_SetupSubColors
     /*0x47*/ u8 team;             ///< ::TeamColor
-    /*0x48*/ u8 controller_index; ///< Physical controller pad port up to
+    /*0x48*/ u8 pad_port; ///< Physical controller port up to
                                   ///< ::PAD_MAX_CONTROLLERS
     /*0x49*/ u8 cpu_level;        ///< 1 to 9
     /*0x4A*/ u8 cpu_type;         ///< ::CpuKind
