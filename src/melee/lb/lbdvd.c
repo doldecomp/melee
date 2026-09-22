@@ -377,23 +377,23 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
     OSRestoreInterrupts(interrupt);
     lbDvd_800189EC(entry_num);
     if (entry->load_state == 1) {
-        PreloadEntry* loaded = &preloadCache.entries[i];
-        type = loaded->type;
+        PreloadEntry* entry = &preloadCache.entries[i];
+        type = entry->type;
 
         switch (type) {
         case 2:
-            lbArchive_InitializeDAT(loaded->archive->addr,
-                                    loaded->raw_data->addr, loaded->size);
+            lbArchive_InitializeDAT(entry->archive->addr,
+                                    entry->raw_data->addr, entry->size);
             break;
 
         case 3:
-            efAsync_OnLoad(loaded->archive->addr, loaded->raw_data->addr,
-                           loaded->size, loaded->effect_index);
+            efAsync_OnLoad(entry->archive->addr, entry->raw_data->addr,
+                           entry->size, entry->effect_index);
             break;
 
         case 4:
-            grDatFiles_801C5FC0(loaded->archive->addr, loaded->raw_data->addr,
-                                loaded->size);
+            grDatFiles_801C5FC0(entry->archive->addr, entry->raw_data->addr,
+                                entry->size);
             break;
 
         default:
@@ -401,7 +401,7 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
             break;
         }
 
-        loaded->load_state = 2;
+        entry->load_state = 2;
     }
     if (entry->archive) {
         return entry->archive->addr;
