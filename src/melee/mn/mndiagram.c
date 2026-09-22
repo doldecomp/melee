@@ -1026,17 +1026,14 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
             break;
         }
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1060,17 +1057,14 @@ static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
             break;
         }
         p2 = p;
-    loop:
-        (*index)++;
-        p2++;
-        p++;
-        if (*index >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            (*index)++;
+            p2++;
+            p++;
+            if (*index >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1132,17 +1126,14 @@ static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
             break;
         }
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
