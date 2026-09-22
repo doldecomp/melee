@@ -568,7 +568,7 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
     HSD_JObj* jobj;
 
     fp->x108_costume_joint = CostumeListsForeachCharacter[fp->kind]
-                                 .costume_list[fp->x619_costume_id]
+                                 .costume_list[fp->costume_id]
                                  .joint;
     ftPartsPObjSetDefaultClass();
     jobj = HSD_JObjLoadJoint(fp->x108_costume_joint);
@@ -696,8 +696,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
 
     fp->x34_scale.x = Player_GetModelScale(fp->player_id);
     fp->x61C = argdata->x5;
-    fp->x618_player_id = Player_GetPlayerId(fp->player_id);
-    fp->x61A_controller_index = Player_GetControllerIndex(fp->player_id);
+    fp->controller_index = Player_GetPlayerId(fp->player_id);
+    fp->sub_color = Player_GetControllerIndex(fp->player_id);
     fp->is_always_metal = Player_GetFlagsBit5(fp->player_id);
     fp->x2226_b3 = Player_GetFlagsBit6(fp->player_id);
     fp->x2226_b6 = Player_GetFlagsBit7(fp->player_id);
@@ -706,14 +706,14 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x2228_b3 = Player_GetMoreFlagsBit6(fp->player_id);
     fp->x2229_b1 = Player_GetFlagsAEBit0(fp->player_id);
 
-    if (fp->x61A_controller_index > 4) {
+    if (fp->sub_color > 4) {
         HSD_ASSERTREPORT(0x33C, 0, "fighter sub color num over!\n");
     }
 
-    if (fp->x61A_controller_index != 0) {
+    if (fp->sub_color != 0) {
         GXColor* color =
             &p_ftCommonData
-                 ->x6DC_colorsByPlayer[fp->x61A_controller_index - 1];
+                 ->x6DC_colorsByPlayer[fp->sub_color - 1];
         fp->x610_color_rgba[0].r = (color->r * color->a) / 255;
         fp->x610_color_rgba[0].g = (color->g * color->a) / 255;
         fp->x610_color_rgba[0].b = (color->b * color->a) / 255;
@@ -725,7 +725,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
         costume_id = 0;
     }
 
-    fp->x619_costume_id = costume_id;
+    fp->costume_id = costume_id;
     fp->team = Player_GetTeam(fp->player_id);
     fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->kind];
@@ -866,7 +866,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     ftData_8008572C(input->internal_id);
     Fighter_UnkInitLoad_80068914(gobj, input);
     efAsync_LoadSync(ftData_UnkBytePerCharacter[fp->kind]);
-    ftData_80085820(fp->kind, fp->x619_costume_id);
+    ftData_80085820(fp->kind, fp->costume_id);
 
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
 
@@ -1823,22 +1823,22 @@ void Fighter_procInput(Fighter_GObj* gobj)
 
             } else {
                 SET_STICKS(fp->input.lstick[0].x, fp->input.lstick[0].y,
-                           HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
-                           HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
+                           HSD_PadGameStatus[fp->controller_index].nml_stickX,
+                           HSD_PadGameStatus[fp->controller_index].nml_stickY);
                 if (DbLevel < DbLKind_DebugRom &&
                     gm_IsCurrently1PMode_inline() == 0)
                 {
                     SET_STICKS(
                         fp->input.cstick[0].x, fp->input.cstick[0].y,
-                        HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,
-                        HSD_PadGameStatus[fp->x618_player_id].nml_subStickY);
+                        HSD_PadGameStatus[fp->controller_index].nml_subStickX,
+                        HSD_PadGameStatus[fp->controller_index].nml_subStickY);
                 } else {
                     fp->input.cstick[0].x = 0;
                     fp->input.cstick[0].y = 0;
                 }
 
-                tempf1 = HSD_PadGameStatus[fp->x618_player_id].nml_analogR;
-                tempf0 = HSD_PadGameStatus[fp->x618_player_id].nml_analogL;
+                tempf1 = HSD_PadGameStatus[fp->controller_index].nml_analogR;
+                tempf0 = HSD_PadGameStatus[fp->controller_index].nml_analogL;
 
                 fp->input.triggers[0] = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
@@ -1877,7 +1877,7 @@ void Fighter_procInput(Fighter_GObj* gobj)
                 fp->input.held_buttons[0] = ftCo_GetCpuButtons(fp);
             } else {
                 fp->input.held_buttons[0] =
-                    HSD_PadGameStatus[fp->x618_player_id].button;
+                    HSD_PadGameStatus[fp->controller_index].button;
             }
 
             if (gm_8016B0FC()) {

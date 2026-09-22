@@ -1180,7 +1180,7 @@ void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
     if (Player_8003544C(fp->player_id, fp->is_sub_fighter) &&
         !fp->is_sleeping && !fp->stamina_dead)
     {
-        lb_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
+        lb_80014574(fp->controller_index, arg1 + 2, arg1, arg2);
     }
 }
 
@@ -1201,13 +1201,13 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
     if (Player_8003544C(fp->player_id, fp->is_sub_fighter)) {
-        HSD_PadRumbleRemoveId(fp->x618_player_id, arg1 + 2);
+        HSD_PadRumbleRemoveId(fp->controller_index, arg1 + 2);
     }
 }
 
 void ftCommon_8007ED2C(Fighter* fp)
 {
-    lb_800145C0(fp->x618_player_id);
+    lb_800145C0(fp->controller_index);
 }
 
 void ftCommon_8007ED50(Fighter* fp, s32 arg1)
@@ -1690,7 +1690,7 @@ bool ftCommon_80080144(Fighter* fp)
 {
     int kind = fp->kind;
     if ((kind == Ft_Kind_Popo || kind == Ft_Kind_Nana) &&
-        fp->x619_costume_id >= 2)
+        fp->costume_id >= 2)
     {
         return true;
     }
