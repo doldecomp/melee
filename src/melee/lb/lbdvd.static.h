@@ -28,10 +28,6 @@
       } },
 };
 /* 3BA68C */ static PreloadEntry lbDvd_803BA68C = { 0, 0, 0, 0, -1, 0, -1 };
-/* 3BA6A8 */ static char* lbDvd_803BA6A8;
 /* 432078 */ static PreloadCache preloadCache;
-/* 4D37D0 */ static char* lbDvd_804D37D0;
-/* 4D37D8 */ static char* lbDvd_804D37D8;
-/* 4D37E0 */ static char* lbDvd_804D37E0;
 
 #endif
