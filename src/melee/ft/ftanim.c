@@ -620,7 +620,7 @@ void ftAnim_8006F4C8(Fighter* fp, bool do_blending, FigaTree* tree)
         }
         if (i >= 0x8C) {
             HSD_ASSERTREPORT(767, 0, "atree data error! player %d\n",
-                             fp->slot);
+                             fp->player_idx);
         }
         if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
             HSD_JObj* jobj = get_part_joint(fp, i, do_blending);
@@ -1046,7 +1046,7 @@ void ftAnim_80070458(Fighter* fp, CostumeTObjList* tobj_list, u32 tobj_idx,
                      float frame)
 {
     if (tobj_idx >= tobj_list->n_costume_tobjs) {
-        HSD_ASSERTREPORT(1264, 0, "texture no exist! %d %d\n", fp->slot,
+        HSD_ASSERTREPORT(1264, 0, "texture no exist! %d %d\n", fp->player_idx,
                          tobj_idx);
     }
     tobjAnim(&tobj_list->costume_tobjs[tobj_idx], frame);

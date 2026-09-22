@@ -58,7 +58,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
             if (lb_80014638(&fp->dmg.x1930, &ip->xB54)) {
                 ip->xCD0 = ip->pos.x > fp->cur_pos.x ? -1.0f : +1.0f;
                 ip->xCFC = gobj;
-                ip->xCB0_source_ply = fp->slot;
+                ip->xCB0_source_ply = fp->player_idx;
                 fp->dmg.x1950 = true;
             }
         }

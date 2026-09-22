@@ -565,7 +565,7 @@ void gm_80182174(void)
         break;
     }
 
-    lbl_80473594.x10 = Player_GetControllerIndex(0);
+    lbl_80473594.x10 = Player_GetPadPort(0);
     lbl_80473594.x11 = Player_GetNametagSlotID(0);
     HSD_GObj_SetupProc(GObj_Create(0xFU, 0x11U, 0U),
                        (HSD_GObjEvent) fn_80181E18, 0x15U);

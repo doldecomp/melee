@@ -759,7 +759,7 @@ void Player_SetTeam(int slot, s8 team)
     player->team = team;
 }
 
-int Player_GetControllerIndex(int slot)
+int Player_GetPadPort(int slot)
 {
     u8 controller_index;
     StaticPlayer* player;
@@ -769,7 +769,7 @@ int Player_GetControllerIndex(int slot)
     return controller_index;
 }
 
-void Player_SetControllerIndex(int slot, int controller_index)
+void Player_SetPadPort(int slot, int controller_index)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

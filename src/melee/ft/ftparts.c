@@ -366,7 +366,7 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
         if (*dobj_index >= 124) {
             HSD_ASSERTREPORT(466, 0,
                              "fighter parts model dobj num over! player %d\n",
-                             fighter->slot);
+                             fighter->player_idx);
         }
         fighter->dobj_list.data[*dobj_index] = dobj;
         mobj = dobj != NULL ? dobj->mobj : NULL;
@@ -379,7 +379,7 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
     }
     if (dobj_count >= 128) {
         HSD_ASSERTREPORT(480, 0, "fighter dobj num over! player %d\n",
-                         fighter->slot);
+                         fighter->player_idx);
     }
     if (*dobj_index != 0) {
         bone->xD = *dobj_index - 1;
@@ -399,7 +399,7 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
 
     if (ftPartsTable[fp->kind]->parts_num > MAX_FT_PARTS) {
         HSD_ASSERTREPORT(503, 0, "fighter parts num over! player %d\n",
-                         fp->slot);
+                         fp->player_idx);
     }
 
     while (jobj != NULL) {
@@ -450,7 +450,7 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
 
     if (part != ftPartsTable[fp->kind]->parts_num) {
         HSD_ASSERTREPORT(546, 0, "fighter parts num not match! player %d\n",
-                         fp->slot);
+                         fp->player_idx);
     }
 }
 
@@ -493,7 +493,7 @@ void ftParts_8007462C(Fighter_GObj* gobj)
     }
     if (i != ftPartsTable[fp->kind]->parts_num) {
         HSD_ASSERTREPORT(593, 0, "fighter parts num not match! player %d\n",
-                         fp->slot);
+                         fp->player_idx);
     }
 }
 

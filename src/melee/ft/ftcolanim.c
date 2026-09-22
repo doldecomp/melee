@@ -51,12 +51,12 @@ void ftCo_800BFD9C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800BFD04(gobj);
     if (fp->x2222_b5) {
-        HSD_GObj* pl_gobj = Player_GetEntityAtIndex(fp->slot, 1);
+        HSD_GObj* pl_gobj = Player_GetEntityAtIndex(fp->player_idx, 1);
         if (pl_gobj != NULL) {
             ftCo_800D4F24(pl_gobj, 1);
         }
     }
-    gm_80167320(fp->slot, fp->is_sub_fighter);
+    gm_80167320(fp->player_idx, fp->is_sub_fighter);
 }
 
 void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}

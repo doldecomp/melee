@@ -2554,8 +2554,10 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     fp->u.kb.hat.x14.data = 0;
     fp->u.kb.x60 = 0;
     fp->u.kb.x64 = 0;
-    if (Player_GetFlagsBit1(fp->slot) && Player_GetUnk4D(fp->slot) != 4) {
-        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->slot), 0);
+    if (Player_GetFlagsBit1(fp->player_idx) &&
+        Player_GetUnk4D(fp->player_idx) != 4)
+    {
+        ftKb_SpecialN_800F1BAC(gobj, Player_GetUnk4D(fp->player_idx), 0);
     }
 }
 
@@ -2568,7 +2570,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     fp->can_multijump = true;
     fp->x2D0 = fp->dat_attrs;
-    fp->u.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->slot);
+    fp->u.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->player_idx);
     it_8026B3F8(item_list[0], It_Kind_Kirby_CBeam);
     it_8026B3F8(item_list[1], It_Kind_Kirby_Hammer);
     it_8026B3F8(item_list[2], It_Kind_Unk1);

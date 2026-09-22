@@ -42,7 +42,7 @@ void ftBossLib_8015BD24(s32 arg0, float* arg1, float arg2, s32 arg3, s32 arg4,
 void ftBossLib_ReportGObjSlotType(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Gm_PKind kind = Player_GetPlayerSlotType(fp->slot);
+    Gm_PKind kind = Player_GetPlayerSlotType(fp->player_idx);
     HSD_ASSERTREPORT(103,
                      kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
                          kind == Gm_PKind_Cpu,

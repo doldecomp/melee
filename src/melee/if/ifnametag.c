@@ -132,7 +132,7 @@
 float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
                   unsigned char arg3)
 {
-    u8 controller_index = Player_GetControllerIndex(slot);
+    u8 controller_index = Player_GetPadPort(slot);
     if (arg2) {
         if (!arg3) {
             return un_803F98B8[controller_index][arg1];
@@ -140,7 +140,7 @@ float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
         if ((gm_8016B258(controller_index) || gm_8016B0E8()) &&
             arg1 == Player_GetTeam(0))
         {
-            return un_803F991C[Player_GetControllerIndex(0)];
+            return un_803F991C[Player_GetPadPort(0)];
         }
         return un_803F98B8[4][arg1];
     }

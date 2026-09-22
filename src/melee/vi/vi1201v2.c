@@ -84,7 +84,7 @@ void un_80320508(CharacterKind char_kind, int costume)
     Player_80036E20(char_kind, un_804D7018, 3);
     Player_SetPlayerCharacter(0, char_kind);
     Player_SetCostumeId(0, costume);
-    Player_SetControllerIndex(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, 2);
     Player_SetFacingDirection(0, -1.0f);
     Player_80032768(0, &un_804002F8);
@@ -109,7 +109,7 @@ void un_803205F4(void)
     Player_80036E20(CKind_GKoops, un_804D701C, 8);
     Player_SetPlayerCharacter(1, CKind_GKoops);
     Player_SetCostumeId(1, 0);
-    Player_SetControllerIndex(1, 0);
+    Player_SetPadPort(1, 0);
     Player_SetSlottype(1, 2);
     Player_SetFacingDirection(1, -1.0f);
     Player_80032768(1, &un_80400304);

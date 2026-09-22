@@ -52,7 +52,7 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     Player_80036E20(CKind_Mario, un_804D6F38, 4);
     Player_SetPlayerCharacter(0, CKind_Mario);
     Player_SetCostumeId(0, mario_costume);
-    Player_SetControllerIndex(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
     Player_80032768(0, &initial_pos);
@@ -62,7 +62,7 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     Player_80036E20(CKind_Luigi, un_804D6F38, 4);
     Player_SetPlayerCharacter(1, CKind_Luigi);
     Player_SetCostumeId(1, luigi_costume);
-    Player_SetControllerIndex(1, 0);
+    Player_SetPadPort(1, 0);
     Player_SetSlottype(1, Gm_PKind_Demo);
     Player_SetFacingDirection(1, 1.0f);
     Player_80032768(1, &initial_pos);

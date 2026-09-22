@@ -69,7 +69,7 @@ void ftCo_800DEA28(Fighter_GObj* gobj)
         ftCo_800DEBD0(gobj);
         break;
     }
-    pl_80040120(fp->slot, fp->is_sub_fighter);
+    pl_80040120(fp->player_idx, fp->is_sub_fighter);
 }
 
 void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0, FtMotionId msid1)

@@ -87,7 +87,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     Player_80036E20(char_kind, un_804D6F78, 3);
     Player_SetPlayerCharacter(0, char_kind);
     Player_SetCostumeId(0, costume);
-    Player_SetControllerIndex(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
     Player_80032768(0, &initial_pos);
@@ -102,7 +102,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         Player_SetFlagsBit1(i);
         Player_SetPlayerCharacter(i, CKind_Kirby);
         Player_SetCostumeId(i, spawn_mode);
-        Player_SetControllerIndex(i, 0);
+        Player_SetPadPort(i, 0);
         Player_SetSlottype(i, Gm_PKind_Demo);
         Player_SetFacingDirection(i, 1.0f);
         Player_80032768(i, &initial_pos);

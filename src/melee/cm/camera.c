@@ -1394,7 +1394,7 @@ void Camera_8002B0E0(void)
 
     if ((gm_IsCurrently1PMode_inline() != 0) && (game_camera.x2C0 > 0.0f)) {
         {
-            s32 idx = Player_GetControllerIndex(0) & 0xFF;
+            s32 idx = Player_GetPadPort(0) & 0xFF;
             var_f1 = HSD_PadCopyStatus[idx].nml_subStickY;
         }
         var_f2 = var_f1;

@@ -42,7 +42,7 @@ void ftMh_Slam_Anim(HSD_GObj* gobj)
 void ftMh_Slam_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->slot) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_idx) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

@@ -30,7 +30,7 @@ void ftCh_BackCrush_Anim(HSD_GObj* gobj)
 void ftCh_BackCrush_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(ft->slot) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(ft->player_idx) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }

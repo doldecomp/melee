@@ -90,7 +90,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
         lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
         ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], (HitCapsule*) &hit);
     }
-    pl_8003EC30(fp->slot, fp->is_sub_fighter, arg3, f);
+    pl_8003EC30(fp->player_idx, fp->is_sub_fighter, arg3, f);
 }
 
 void ftCo_800C09B4(Fighter_GObj* gobj)
@@ -200,7 +200,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
 
                 ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], &hit);
             }
-            pl_8003EC30(fp->slot, fp->is_sub_fighter, 1, f);
+            pl_8003EC30(fp->player_idx, fp->is_sub_fighter, 1, f);
         }
     }
 }
@@ -245,10 +245,11 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
         fp, 0,
         (fp->dmg.x1830_percent * p_ftCommonData->x60C) +
             ((p_ftCommonData->x5FC *
-              (p_ftCommonData->x600 - Player_GetHandicap(fp->slot))) +
+              (p_ftCommonData->x600 - Player_GetHandicap(fp->player_idx))) +
              p_ftCommonData->x5F8 +
              (p_ftCommonData->x604 *
-              (p_ftCommonData->x608 - (Player_80033BB8(fp->slot) + 1)))));
+              (p_ftCommonData->x608 -
+               (Player_80033BB8(fp->player_idx) + 1)))));
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
     fp->x2220_b3 = true;

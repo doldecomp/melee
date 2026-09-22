@@ -48,7 +48,7 @@ void plStale_UpdateStaleMovesFromFighter(HSD_GObj* gobj, HSD_GObj* gobj_2)
 
         instance = ft->x206C_attack_instance;
         attack_id = ft->x2068_attackID;
-        smtp = Player_GetStaleMoveTableIndexPtr(ft->slot);
+        smtp = Player_GetStaleMoveTableIndexPtr(ft->player_idx);
         if (attack_id != 1) {
             for (i = 0; i < 10; i++) {
                 if (attack_id == smtp->StaleMoves[i].move_id &&
@@ -79,7 +79,8 @@ void plStale_UpdateStaleMovesFromItem(HSD_GObj* gobj, HSD_GObj* gobj_2)
     if (ftLib_80086960(owner) && owner != gobj_2) {
         instance = it->xD8C_attack_instance;
         attack_id = it->xD88_attackID;
-        smtp = Player_GetStaleMoveTableIndexPtr(GET_FIGHTER(owner)->slot);
+        smtp =
+            Player_GetStaleMoveTableIndexPtr(GET_FIGHTER(owner)->player_idx);
         if (attack_id != 1) {
             for (i = 0; i < 10; i++) {
                 if (attack_id == smtp->StaleMoves[i].move_id &&

@@ -29,7 +29,7 @@ void ftCo_800C61B0(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     jobj = GET_JOBJ(gobj);
 
-    fp->mv.co.entry.timer = Player_GetUnk4C(fp->slot);
+    fp->mv.co.entry.timer = Player_GetUnk4C(fp->player_idx);
 
     HSD_JObjGetScale(jobj, &fp->mv.co.entry.x8);
     fp->mv.co.entry.x14.x = fp->mv.co.entry.x8.x;
@@ -177,7 +177,7 @@ void ftCo_EntryStart_Phys(Fighter_GObj* gobj)
         temp_r31->cur_pos.y =
             temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x28;
     } else {
-        Fighter_GObj* gobj = Player_GetEntityAtIndex(temp_r31->slot, 0);
+        Fighter_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_idx, 0);
         temp_r31->cur_pos.y = GET_FIGHTER(gobj)->cur_pos.y;
     }
 }
@@ -189,7 +189,7 @@ void ftCo_EntryStart_Coll(Fighter_GObj* gobj)
     if (!fp->is_sub_fighter) {
         fp->mv.co.entry.x2C.bottom = -fp->mv.co.entry.x28;
     } else {
-        HSD_GObj* gobj = Player_GetEntityAtIndex(fp->slot, 0);
+        HSD_GObj* gobj = Player_GetEntityAtIndex(fp->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj);
         fp->mv.co.entry.x2C.bottom = -fp2->mv.co.entry.x28;
     }
@@ -211,7 +211,7 @@ void fn_800C69F4(Fighter_GObj* gobj)
 
     temp_r31 = GET_FIGHTER(gobj);
     if (!temp_r31->is_sub_fighter) {
-        temp_r3 = Player_GetEntityAtIndex((s32) temp_r31->slot, 1);
+        temp_r3 = Player_GetEntityAtIndex((s32) temp_r31->player_idx, 1);
         if (temp_r3 != NULL) {
             temp_r3_2 = GET_FIGHTER(temp_r3);
             if (!temp_r3_2->is_sleeping) {
@@ -228,7 +228,7 @@ void fn_800C69F4(Fighter_GObj* gobj)
         HSD_JObjSetTranslateWithMtxDirtyOutOfLine(temp_r31_2->x20A0_accessory,
                                                   &sp20);
     } else {
-        HSD_GObj* gobj = Player_GetEntityAtIndex(temp_r31->slot, 0);
+        HSD_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj);
         temp_r31->cur_pos.y = fp2->cur_pos.y;
         ;
@@ -254,7 +254,7 @@ void ftCo_800C6B6C(Fighter_GObj* gobj)
         temp_r31->cur_pos.y =
             temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x20;
     } else {
-        HSD_GObj* gobj2 = Player_GetEntityAtIndex(temp_r31->slot, 0);
+        HSD_GObj* gobj2 = Player_GetEntityAtIndex(temp_r31->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         temp_r31->cur_pos.y = fp2->cur_pos.y;
     }
@@ -269,7 +269,7 @@ void ftCo_EntryEnd_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     --fp->mv.co.entry.timer;
     if (fp->mv.co.entry.timer == 0) {
-        if (Player_GetFlagsBit4(fp->slot)) {
+        if (Player_GetFlagsBit4(fp->player_idx)) {
             ftColl_8007B760(gobj, p_ftCommonData->x6C8);
         }
         ftCommon_8007D92C(gobj);
@@ -297,7 +297,7 @@ void ftCo_EntryEnd_Phys(Fighter_GObj* gobj)
         fp->mv.co.entry.x28 = fp->mv.co.entry.x20 * temp_f31;
         fp->cur_pos.y = fp->mv.co.entry.x4 + fp->mv.co.entry.x28;
     } else {
-        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->slot, 0);
+        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         fp->cur_pos.y = fp2->cur_pos.y;
     }
@@ -310,7 +310,7 @@ void ftCo_EntryEnd_Coll(Fighter_GObj* gobj)
     if (!fp->is_sub_fighter) {
         fp->mv.co.entry.x2C.bottom = -fp->mv.co.entry.x28;
     } else {
-        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->slot, 0);
+        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         fp->mv.co.entry.x2C.bottom = -fp2->mv.co.entry.x28;
     }
@@ -331,7 +331,7 @@ void fn_800C6F34(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->is_sub_fighter) {
-        temp_r3 = Player_GetEntityAtIndex(fp->slot, 1);
+        temp_r3 = Player_GetEntityAtIndex(fp->player_idx, 1);
         if (temp_r3 != NULL) {
             temp_r3_2 = GET_FIGHTER(temp_r3);
             if (!temp_r3_2->is_sleeping) {
@@ -347,7 +347,7 @@ void fn_800C6F34(Fighter_GObj* gobj)
 
         HSD_JObjSetTranslateWithMtxDirtyOutOfLine(fp->x20A0_accessory, &sp20);
     } else {
-        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->slot, 0);
+        HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->player_idx, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         fp->cur_pos.y = fp2->cur_pos.y;
     }

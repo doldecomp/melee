@@ -680,8 +680,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
         }
 
         {
-            u64 buttons = gm_GetButtonsTriggered(Player_GetControllerIndex(0));
-            u64 repeat = gm_801A36C0(Player_GetControllerIndex(0));
+            u64 buttons = gm_GetButtonsTriggered(Player_GetPadPort(0));
+            u64 repeat = gm_801A36C0(Player_GetPadPort(0));
             if (((repeat | buttons) & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) |
                 ((repeat | buttons) & 0))
             {
@@ -699,8 +699,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
                     }
                 }
             } else {
-                buttons = gm_GetButtonsTriggered(Player_GetControllerIndex(0));
-                repeat = gm_801A36C0(Player_GetControllerIndex(0));
+                buttons = gm_GetButtonsTriggered(Player_GetPadPort(0));
+                repeat = gm_801A36C0(Player_GetPadPort(0));
                 if (((repeat | buttons) & (PAD_BUTTON_UP | PAD_STICK_UP)) |
                     ((repeat | buttons) & 0))
                 {
@@ -734,7 +734,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
-            (HSD_PadMasterStatus[(u8) Player_GetControllerIndex(i)].trigger &
+            (HSD_PadMasterStatus[(u8) Player_GetPadPort(i)].trigger &
              HSD_PAD_A))
         {
             data.state->xFC = data.state->x104;
@@ -746,7 +746,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
     if (data.state->x110 > 0x3EU) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
-                (HSD_PadMasterStatus[(u8) Player_GetControllerIndex(i)]
+                (HSD_PadMasterStatus[(u8) Player_GetPadPort(i)]
                      .trigger &
                  0x1000))
             {

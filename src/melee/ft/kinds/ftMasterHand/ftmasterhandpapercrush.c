@@ -20,7 +20,7 @@ void ftMh_RockCrushDown_Anim(HSD_GObj* gobj)
 void ftMh_RockCrushDown_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->slot) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_idx) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -50,7 +50,7 @@ void ftMh_PaperCrush_Anim(HSD_GObj* gobj)
 void ftMh_PaperCrush_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->slot) == 0) {
+    if (Player_GetPlayerSlotType(fp->player_idx) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

@@ -696,7 +696,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
 
     fp->x34_scale.x = Player_GetModelScale(fp->player_idx);
     fp->x61C = argdata->x5;
-    fp->pad_port = Player_GetControllerIndex(fp->player_idx);
+    fp->pad_port = Player_GetPadPort(fp->player_idx);
     fp->sub_color = Player_GetSubColor(fp->player_idx);
     fp->is_always_metal = Player_GetFlagsBit5(fp->player_idx);
     fp->x2226_b3 = Player_GetFlagsBit6(fp->player_idx);

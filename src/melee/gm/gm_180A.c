@@ -320,7 +320,7 @@ void fn_80181708(void)
     state->x0.b32 = 0;
     state->x0.b10 = 0;
     state->x0.xC = 0;
-    state->x0.x10 = (s8) Player_GetControllerIndex(0);
+    state->x0.x10 = (s8) Player_GetPadPort(0);
     lbl_804D65D4 = 0;
     lbl_804D65D8 = 0;
 

@@ -53,7 +53,7 @@ bool ftCo_800D3158(Fighter_GObj* gobj)
         (fp->ground_or_air == GA_Ground || fp->x2222_b3 ||
          fp->x8c_kb_vel.y > p_ftCommonData->x4F0))
     {
-        if (Player_GetMoreFlagsBit5(fp->slot)) {
+        if (Player_GetMoreFlagsBit5(fp->player_idx)) {
             ftCo_800D3E40(gobj);
         } else {
             int temp_r28 = HSD_Randi(100) + 1;
@@ -86,7 +86,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
         if (fp->x221B_b5) {
             Fighter* temp_r3_2 = GET_FIGHTER(fp->victim_gobj);
             if (!temp_r3_2->is_sub_fighter) {
-                temp_r3_2->x2180 = fp->slot;
+                temp_r3_2->x2180 = fp->player_idx;
             }
         } else if (!fp->is_sub_fighter) {
             pl_8004065C(ftLib_80086BE0(fp->victim_gobj),
@@ -110,8 +110,8 @@ void ftCo_800D331C(Fighter_GObj* gobj)
     if (fp->item_gobj != NULL) {
         Item_8026A8EC(fp->item_gobj);
         fp->item_gobj = NULL;
-        pl_8003EA08(fp->slot, fp->is_sub_fighter);
-        pl_8003EA74(fp->slot, fp->is_sub_fighter);
+        pl_8003EA08(fp->player_idx, fp->is_sub_fighter);
+        pl_8003EA74(fp->player_idx, fp->is_sub_fighter);
     }
     if (fp->x197C != NULL) {
         ftCommon_8007F8E8(gobj);
@@ -138,25 +138,26 @@ void ftCo_800D34E0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Player_SetFallsByIndex(
-        fp->slot, fp->is_sub_fighter,
-        Player_GetFallsByIndex(fp->slot, fp->is_sub_fighter) + 1);
-    plStale_ResetStaleMoveTableForPlayer(fp->slot);
-    if ((gm_8016B094() || gm_8016B0E8()) && Player_GetEntity(fp->slot) == gobj)
+        fp->player_idx, fp->is_sub_fighter,
+        Player_GetFallsByIndex(fp->player_idx, fp->is_sub_fighter) + 1);
+    plStale_ResetStaleMoveTableForPlayer(fp->player_idx);
+    if ((gm_8016B094() || gm_8016B0E8()) &&
+        Player_GetEntity(fp->player_idx) == gobj)
     {
-        Player_LoseStock(fp->slot);
+        Player_LoseStock(fp->player_idx);
     }
-    if (gm_8016B094() && Player_GetStocks(fp->slot) <= 0) {
-        Player_UpdateMatchFrameCount(fp->slot, fp->is_sub_fighter);
+    if (gm_8016B094() && Player_GetStocks(fp->player_idx) <= 0) {
+        Player_UpdateMatchFrameCount(fp->player_idx, fp->is_sub_fighter);
     }
     if (fp->dmg.x18c4_source_ply != 6) {
         Player_UpdateKOsBySlot(fp->dmg.x18c4_source_ply, fp->is_sub_fighter,
-                               fp->slot);
+                               fp->player_idx);
     } else {
-        Player_IncSelfDestructs(fp->slot, fp->is_sub_fighter);
+        Player_IncSelfDestructs(fp->player_idx, fp->is_sub_fighter);
     }
-    pl_8003D644(fp->slot, fp->is_sub_fighter, fp->mv.co.unk_800D34E0.x6C,
+    pl_8003D644(fp->player_idx, fp->is_sub_fighter, fp->mv.co.unk_800D34E0.x6C,
                 fp->mv.co.unk_800D34E0.x70);
-    Player_SetHPByIndex(fp->slot, fp->is_sub_fighter, 0);
+    Player_SetHPByIndex(fp->player_idx, fp->is_sub_fighter, 0);
 }
 
 void ftCo_800D35FC(Fighter* fp)
@@ -210,7 +211,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r28->x2219_b1 = 1;
     temp_r28->x221E_b1 = 1;
     temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->slot, temp_r27->is_sub_fighter);
+    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
 
     temp_r27_2 = gobj->user_data;
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
@@ -240,13 +241,13 @@ void ftCo_800D3680(Fighter_GObj* gobj)
         s32 var_r3;
         temp_r28_3 = gobj->user_data;
         {
-            int offset = Player_GetUnk45(temp_r28_3->slot) << 2;
+            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
             u8* base1 = Fighter_804D650C + offset;
             u8* base2 = Fighter_804D6508 + offset;
             color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
             color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
         }
-        if (gm_801693BC(temp_r28_3->slot)) {
+        if (gm_801693BC(temp_r28_3->player_idx)) {
             var_r3 = 0x42C;
         } else {
             var_r3 = 0x42B;
@@ -316,7 +317,7 @@ void ftCo_800D3950(Fighter_GObj* gobj)
     temp_r28->x2219_b1 = 1;
     temp_r28->x221E_b1 = 1;
     temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->slot, temp_r27->is_sub_fighter);
+    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
 
     temp_r27_2 = gobj->user_data;
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
@@ -346,13 +347,13 @@ void ftCo_800D3950(Fighter_GObj* gobj)
         s32 var_r3;
         temp_r28_3 = gobj->user_data;
         {
-            int offset = Player_GetUnk45(temp_r28_3->slot) << 2;
+            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
             u8* base1 = Fighter_804D650C + offset;
             u8* base2 = Fighter_804D6508 + offset;
             color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
             color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
         }
-        if (gm_801693BC(temp_r28_3->slot)) {
+        if (gm_801693BC(temp_r28_3->player_idx)) {
             var_r3 = 0x42C;
         } else {
             var_r3 = 0x42B;
@@ -415,7 +416,7 @@ void ftCo_800D3BC8(Fighter_GObj* gobj)
     temp_r28->x2219_b1 = 1;
     temp_r28->x221E_b1 = 1;
     temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->slot, temp_r27->is_sub_fighter);
+    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
 
     temp_r27_2 = gobj->user_data;
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
@@ -445,13 +446,13 @@ void ftCo_800D3BC8(Fighter_GObj* gobj)
         s32 var_r3;
         temp_r28_3 = gobj->user_data;
         {
-            int offset = Player_GetUnk45(temp_r28_3->slot) << 2;
+            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
             u8* base1 = Fighter_804D650C + offset;
             u8* base2 = Fighter_804D6508 + offset;
             color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
             color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
         }
-        if (gm_801693BC(temp_r28_3->slot)) {
+        if (gm_801693BC(temp_r28_3->player_idx)) {
             var_r3 = 0x42C;
         } else {
             var_r3 = 0x42B;
@@ -514,7 +515,7 @@ void ftCo_800D3E40(Fighter_GObj* gobj)
     temp_r28->x2219_b1 = 1;
     temp_r28->x221E_b1 = 1;
     temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->slot, temp_r27->is_sub_fighter);
+    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
 
     temp_r27_2 = gobj->user_data;
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
@@ -544,13 +545,13 @@ void ftCo_800D3E40(Fighter_GObj* gobj)
         s32 var_r3;
         temp_r28_3 = gobj->user_data;
         {
-            int offset = Player_GetUnk45(temp_r28_3->slot) << 2;
+            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
             u8* base1 = Fighter_804D650C + offset;
             u8* base2 = Fighter_804D6508 + offset;
             color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
             color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
         }
-        if (gm_801693BC(temp_r28_3->slot)) {
+        if (gm_801693BC(temp_r28_3->player_idx)) {
             var_r3 = 0x42C;
         } else {
             var_r3 = 0x42B;
@@ -605,7 +606,7 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
     ftCommon_8007EFC0(fp, true);
     new_var = fp;
     ft_800881D8(new_var, fp->ft_data->x4C_sfx->xC, 127, 64);
-    pl_8003DF44(fp->slot, fp->is_sub_fighter);
+    pl_8003DF44(fp->player_idx, fp->is_sub_fighter);
     fp->mv.co.unk_deadup.x68 = 0;
 }
 
@@ -629,7 +630,7 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
         new_var--;
 
         ft_800881D8(new_var, fp2->ft_data->x4C_sfx->xC, 127, 64);
-        pl_8003DF44(fp2->slot, fp2->is_sub_fighter);
+        pl_8003DF44(fp2->player_idx, fp2->is_sub_fighter);
     }
     ftCo_80090AC0(fp);
     ftCommon_8007EBAC(fp, 1, 0);
@@ -743,7 +744,7 @@ void ftCo_800D4580(Fighter_GObj* gobj, int arg1)
     ft_80088C5C(new_var);
     ftCommon_8007EFC0(fp, true);
     ftCo_800BFFD0(fp, 0x2B, 0);
-    pl_8003DF44(fp->slot, fp->is_sub_fighter);
+    pl_8003DF44(fp->player_idx, fp->is_sub_fighter);
 }
 
 void ftCo_800D4780(Fighter_GObj* gobj)

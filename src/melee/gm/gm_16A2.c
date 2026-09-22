@@ -815,7 +815,7 @@ void fn_8016A4C8(void)
                 }
                 Player_SetFacingDirection(spawn_slot, facing_dir);
                 Player_SetHUDDamage(spawn_slot, 0);
-                Player_SetControllerIndex(spawn_slot, spawn_slot);
+                Player_SetPadPort(spawn_slot, spawn_slot);
                 Player_SetFlagsBit0(spawn_slot, 0);
                 Player_SetNametagSlotID(spawn_slot, 0x78);
                 {

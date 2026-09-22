@@ -35,7 +35,7 @@ void ftCh_WalkLoop_Anim(HSD_GObj* gobj)
 void ftCh_WalkLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(ft->slot) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(ft->player_idx) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -69,7 +69,7 @@ void ftCh_WalkWait_Anim(HSD_GObj* gobj)
 void ftCh_WalkWait_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(ft->slot) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(ft->player_idx) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }
@@ -104,7 +104,7 @@ void ftCh_WalkShoot_Anim(HSD_GObj* gobj)
 void ftCh_WalkShoot_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(ft->slot) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(ft->player_idx) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }

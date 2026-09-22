@@ -146,7 +146,7 @@ HSD_GObjProc* fn_801873F0(void)
     Player_80036E20(lbl_804D6618.x0, lbl_804D6610, 1);
     Player_SetPlayerCharacter(0, lbl_804D6618.x0);
     Player_SetCostumeId(0, lbl_804D6618.x4);
-    Player_SetControllerIndex(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 0.0f);
     Player_SetModelScale(0, 1.0f);

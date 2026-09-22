@@ -546,7 +546,7 @@ s32 fn_801851C0(void)
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
         result = i + 1;
         Player_SetPlayerCharacter(result, (CharacterKind) lbl_8047368C.xF4[0]);
-        Player_SetControllerIndex(result, 0);
+        Player_SetPadPort(result, 0);
         Player_SetSlottype(result, Gm_PKind_Demo);
         Player_SetFacingDirection(result, 0.0f);
         Player_SetCostumeId(result, i);
@@ -896,7 +896,7 @@ s32 fn_80185E34(void)
             Player_SetPlayerCharacter(player_slot,
                                       (CharacterKind) lbl_8047368C.xF1[i]);
             Player_SetCostumeId(player_slot, (s32) lbl_8047368C.xF7[i]);
-            Player_SetControllerIndex(player_slot, 0);
+            Player_SetPadPort(player_slot, 0);
             Player_SetSlottype(player_slot, Gm_PKind_Demo);
             Player_SetFacingDirection(player_slot, 0.0f);
             Player_SetModelScale(player_slot, 1.0f);
@@ -922,7 +922,7 @@ void fn_80185F5C(s32 arg0)
             Player_SetPlayerCharacter(arg0,
                                       (CharacterKind) lbl_8047368C.xF4[i]);
             Player_SetCostumeId(arg0, (s32) lbl_8047368C.xFA[i]);
-            Player_SetControllerIndex(arg0, 0);
+            Player_SetPadPort(arg0, 0);
             Player_SetSlottype(arg0, Gm_PKind_Demo);
             Player_SetFacingDirection(arg0, 0.0f);
             Player_SetModelScale(arg0, 1.0f);
