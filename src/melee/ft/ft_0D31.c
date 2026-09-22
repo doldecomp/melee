@@ -169,7 +169,7 @@ void ftCo_800D35FC(Fighter* fp)
     cur_gobj = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
     while (cur_gobj != NULL) {
         Fighter* cur_fp = GET_FIGHTER(cur_gobj);
-        if (cur_fp != fp && !cur_fp->x221F_b3) {
+        if (cur_fp != fp && !cur_fp->is_sleeping) {
             ftCommon_8007EBAC(cur_fp, 6, p_ftCommonData->x4FC);
         }
         cur_gobj = cur_gobj->next;
@@ -799,7 +799,7 @@ void ftCo_800D481C(Fighter_GObj* gobj, s32 arg1)
             Fighter* other = GET_FIGHTER(cur);
             if (((!fp) && (!fp)) && (!fp)) {
             };
-            if (other != fp && !other->x221F_b3) {
+            if (other != fp && !other->is_sleeping) {
                 ftCommon_8007EBAC(other, 6, p_ftCommonData->x4FC);
             }
         }

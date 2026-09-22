@@ -71,7 +71,7 @@ void ft_8008A324(HSD_GObj* gobj)
 void ft_8008A348(Fighter_GObj* gobj, float anim_blend)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2224_b2) {
+    if (fp->stamina_dead) {
         ftCo_DownSpot_Enter(gobj);
         return;
     }

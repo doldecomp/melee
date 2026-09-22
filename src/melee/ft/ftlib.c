@@ -99,7 +99,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
         if (!ftLib_80086FD4(gobj, cur)) {
             // If not same player
             Fighter* cur_fp = GET_FIGHTER(cur);
-            if (cur_fp->x221F_b3) {
+            if (cur_fp->is_sleeping) {
                 continue;
             }
 
@@ -151,7 +151,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 
         cur_fp = cur->user_data;
         // skip if same team
-        if (cur_fp->x221F_b3 ||
+        if (cur_fp->is_sleeping ||
             (gm_8016B168() && fp != NULL && cur_fp->team == fp->team))
         {
             continue;
@@ -199,7 +199,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
         }
 
         cur_fp = cur->user_data;
-        if (cur_fp->x221F_b3 ||
+        if (cur_fp->is_sleeping ||
             (gm_8016B168() && fp != NULL && cur_fp->team == fp->team))
         {
             continue;
@@ -258,7 +258,7 @@ float ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
 
         {
             Fighter* cur_fp = cur->user_data;
-            if (cur_fp->x221F_b3 ||
+            if (cur_fp->is_sleeping ||
                 (gm_8016B168() && fp != NULL && cur_fp->team == fp->team))
             {
                 continue;
@@ -604,7 +604,7 @@ static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
         return;
     }
 
-    if (!fp->x221F_b3 && !fp->x2224_b2) {
+    if (!fp->is_sleeping && !fp->stamina_dead) {
         lb_80014574(fp->x618_player_id, val, arg1, arg2);
     }
 }
@@ -732,7 +732,7 @@ bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
 bool ftLib_8008701C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_b3;
+    return fp->is_sleeping;
 }
 
 void ftLib_8008702C(s32 arg0)
@@ -783,7 +783,7 @@ s32 ftLib_80087120(HSD_GObj* gobj)
 void ftLib_80087140(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_b3) {
+    if (!fp->is_sleeping) {
         ftCo_800D4F24(gobj, 1);
         ftCommon_8007ED2C(fp);
         Fighter_Spawn(gobj);

@@ -199,7 +199,7 @@ bool ftBossLib_8015C31C(void)
 bool ftBossLib_8015C358(void)
 {
     HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
+    if (gobj && GET_FIGHTER(gobj)->is_sleeping) {
         return true;
     }
 
@@ -209,7 +209,7 @@ bool ftBossLib_8015C358(void)
 bool ftBossLib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
+    if (gobj && GET_FIGHTER(gobj)->is_sleeping) {
         return true;
     }
 

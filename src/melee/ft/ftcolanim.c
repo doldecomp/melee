@@ -42,7 +42,7 @@ void ftCo_800BFD04(Fighter_GObj* gobj)
     fp->x221E_b2 = true;
     fp->x2219_b1 = true;
     fp->x890_cameraBox->state = CmSubjectState_Inactive;
-    fp->x221F_b3 = true;
+    fp->is_sleeping = true;
     fp->x221F_b1 = true;
 }
 
@@ -195,7 +195,7 @@ void ftCo_800C0200(Fighter* fp, int arg1)
         }
     } else {
         lb_80014498(&fp->x408);
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             ftCo_800BFFD0(fp, 0x7A, 0);
         }
         if (fp->dmg.x18F0 != 0) {
@@ -235,7 +235,7 @@ void ftCo_800C0408(Fighter_GObj* gobj)
     }
     while (lb_80014258(gobj, &fp->x408, ft_800BFF34)) {
         lb_80014498(&fp->x408);
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             ftCo_800BFFD0(fp, 0x7A, 0);
         }
         if (fp->dmg.x18F0 != 0) {

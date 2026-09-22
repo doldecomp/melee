@@ -119,7 +119,7 @@ bool ftCo_800C0A28(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     switch (arg2) {
     case BuryType_Unk2: {
         if (fp->bury_timer_2 != 0 || fp->motion_id == ftCo_MS_BarrelWait ||
-            fp->x1A6A & 0x20 || fp->x2224_b2)
+            fp->x1A6A & 0x20 || fp->stamina_dead)
         {
             return false;
         }

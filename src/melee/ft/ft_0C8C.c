@@ -26,7 +26,7 @@ bool ftCo_800C8C84(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2224_b2 && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
+    if (!fp->stamina_dead && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
         Player_GetRemainingHPByIndex(fp->player_id, fp->is_sub_fighter) == 0)
     {
         fn_800C8E74(gobj);
@@ -40,7 +40,7 @@ static inline void fn_800C8_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtSFX* ft_sfx = fp->ft_data->x4C_sfx;
-    fp->x2224_b2 = true;
+    fp->stamina_dead = true;
     Fighter_ResetInputData_80068854(gobj);
     ftCo_800BFFD0(fp, 0x7A, 0);
     fn_800C8E40(fp, ft_sfx);
@@ -55,7 +55,7 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
 
     RETURN_IF(!fp->x2224_b3);
 
-    if (!fp->x2224_b2) {
+    if (!fp->stamina_dead) {
         fn_800C8_inline(gobj);
     }
 

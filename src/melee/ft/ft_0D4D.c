@@ -84,7 +84,7 @@ static inline void ftCo_800D4F24_inline(Fighter_GObj* gobj)
 void ftCo_800D4F24(Fighter_GObj* gobj, int index)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221F_b3) {
+    if (fp->is_sleeping) {
         return;
     }
     if (index != 0) {
@@ -223,7 +223,7 @@ void fn_800D54A4(Fighter_GObj* gobj)
 
     if (other_gobj != NULL) {
         Fighter* other_fp = other_gobj->user_data;
-        if (!other_fp->x221F_b3) {
+        if (!other_fp->is_sleeping) {
             f32 other_y = other_fp->cur_pos.y;
             if (other_y > fp->cur_pos.y) {
                 fp->cur_pos.y = other_y;
@@ -293,7 +293,7 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
     if (!fp->is_sub_fighter) {
         HSD_GObj* companion = Player_GetEntityAtIndex(fp->player_id, 1);
         if (companion != NULL &&
-            !((Fighter*) companion->user_data)->x221F_b3 &&
+            !((Fighter*) companion->user_data)->is_sleeping &&
             ftLib_800873CC(companion) == 0)
         {
             var_r30 = 1;

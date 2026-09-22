@@ -929,7 +929,7 @@ bool ftCo_800A1C44(Fighter* fp)
     if (fp->x2168 != 0 && fp->x2338.x == 0) {
         return true;
     }
-    if (fp->x221F_b3) {
+    if (fp->is_sleeping) {
         return true;
     }
     return false;
@@ -2412,7 +2412,7 @@ static inline bool inlineD0_it(Fighter* fp, Item* it)
 static inline bool inlineD1(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->gobj;
-    if (fp->x221F_b3 || fp->x2224_b2 || ftCo_800A0F00(gobj) ||
+    if (fp->is_sleeping || fp->stamina_dead || ftCo_800A0F00(gobj) ||
         ftLib_8008732C(gobj))
     {
         return true;
@@ -2773,7 +2773,7 @@ Fighter* ftCo_800A589C(Fighter* fp)
             if (fp->gobj != cur) {
                 Fighter* cur_fp = GET_FIGHTER(cur);
                 if (fp->player_id == cur_fp->player_id) {
-                    if (cur_fp->x221F_b3) {
+                    if (cur_fp->is_sleeping) {
                         return NULL;
                     }
                     return cur_fp;

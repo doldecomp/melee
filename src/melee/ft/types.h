@@ -1781,7 +1781,7 @@ struct Fighter {
     /* fp+221F:0 */ u8 x221F_b0 : 1;
     /* fp+221F:1 */ u8 x221F_b1 : 1;
     /* fp+221F:2 */ u8 x221F_b2 : 1;
-    /* fp+221F:3 */ u8 x221F_b3 : 1;
+    /* fp+221F:3 */ u8 is_sleeping : 1;
     /* fp+221F:4 */ u8 is_sub_fighter : 1;
     /* fp+221F:5 */ u8 x221F_b5 : 1;
     /* fp+221F:6 */ u8 x221F_b6 : 1;
@@ -1823,7 +1823,7 @@ struct Fighter {
 
     /* fp+2224:0 */ u8 x2224_b0 : 1;
     /* fp+2224:1 */ u8 x2224_b1 : 1;
-    /* fp+2224:2 */ u8 x2224_b2 : 1;
+    /* fp+2224:2 */ u8 stamina_dead : 1;
     /* fp+2224:3 */ u8 x2224_b3 : 1;
     /* fp+2224:4 */ u8 x2224_b4 : 1;
     /* fp+2224:5 */ u8 x2224_b5 : 1;

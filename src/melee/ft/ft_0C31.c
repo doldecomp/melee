@@ -214,7 +214,7 @@ void fn_800C69F4(Fighter_GObj* gobj)
         temp_r3 = Player_GetEntityAtIndex((s32) temp_r31->player_id, 1);
         if (temp_r3 != NULL) {
             temp_r3_2 = GET_FIGHTER(temp_r3);
-            if (!temp_r3_2->x221F_b3) {
+            if (!temp_r3_2->is_sleeping) {
                 if (temp_r3_2->cur_pos.y > temp_r31->cur_pos.y) {
                     temp_r31->cur_pos.y = temp_r3_2->cur_pos.y;
                 }
@@ -334,7 +334,7 @@ void fn_800C6F34(Fighter_GObj* gobj)
         temp_r3 = Player_GetEntityAtIndex(fp->player_id, 1);
         if (temp_r3 != NULL) {
             temp_r3_2 = GET_FIGHTER(temp_r3);
-            if (!temp_r3_2->x221F_b3) {
+            if (!temp_r3_2->is_sleeping) {
                 if (temp_r3_2->cur_pos.y > fp->cur_pos.y) {
                     fp->cur_pos.y = temp_r3_2->cur_pos.y;
                 }

@@ -762,7 +762,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !ftLib_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
-            if (cur_ft->x221F_b3 || cur_ft->ground_or_air != GA_Ground ||
+            if (cur_ft->is_sleeping || cur_ft->ground_or_air != GA_Ground ||
                 cur_ft->victim_gobj != NULL || cur_ft->is_sub_fighter)
             {
                 continue;
@@ -826,7 +826,7 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     temp_r31 = &fp->x2C4;
     new_var = Player_GetEntity(fp->player_id);
     temp_r3 = new_var->user_data;
-    if (!temp_r3->x221F_b3 && temp_r3->ground_or_air == GA_Ground) {
+    if (!temp_r3->is_sleeping && temp_r3->ground_or_air == GA_Ground) {
         temp_r0 = fp->coll_data.floor.index;
         temp_r30 = (new_var2 = temp_r3->coll_data.floor.index);
         if (temp_r0 == temp_r30 || temp_r30 == mpLineGetNext(temp_r0) ||
@@ -1177,8 +1177,8 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
-    if (Player_8003544C(fp->player_id, fp->is_sub_fighter) && !fp->x221F_b3 &&
-        !fp->x2224_b2)
+    if (Player_8003544C(fp->player_id, fp->is_sub_fighter) && !fp->is_sleeping &&
+        !fp->stamina_dead)
     {
         lb_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
     }
@@ -1335,7 +1335,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->bury_timer_2 = src->bury_timer_2;
     dst->x2330 = src->x2330;
     dst->x2338 = src->x2338;
-    dst->x2224_b2 = src->x2224_b2;
+    dst->stamina_dead = src->stamina_dead;
     if (src->x221D_b6) {
         ftColl_8007B7FC(dst, src->x2004);
         ftCo_800C0358(src, dst, 0x6B);

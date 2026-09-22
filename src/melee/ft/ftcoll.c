@@ -1115,7 +1115,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
             mode = 0;
         }
         it_8026FAC4(item, hit, mode, fp, 0);
-        if (!fp->x2224_b2) {
+        if (!fp->stamina_dead) {
             switch (item->kind) {
             case It_Kind_Star:
                 hit->state = HitCapsule_Disabled;
@@ -1587,7 +1587,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                   victim_fp->x1988 == 0 && victim_fp->x198C == 0 &&
                   !victim_fp->x221D_b6 &&
                   !(victim_fp->x1A6A & this_fp->x1A68) &&
-                  !victim_fp->x2224_b2)))
+                  !victim_fp->stamina_dead)))
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = HitCapsuleGetPtr(this_fp, i);
@@ -2321,7 +2321,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 {
     if (fp->x2225_b7) {
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             return (s32) ftd->x6D8[0];
         }
         return ftd->x6D4;
@@ -2409,7 +2409,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
         /// @todo Expanded inline of #ftColl_GetDamageCount; re-inline when
         /// the call form matches.
         if (fp->x2225_b7) {
-            if (fp->x2224_b2) {
+            if (fp->stamina_dead) {
                 count = (s32) ftd->x6D8[0];
             } else {
                 count = (s32) ftd->x6D4;
@@ -2631,7 +2631,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 s32 count;
 
                 if (fp->x2225_b7) {
-                    if (fp->x2224_b2) {
+                    if (fp->stamina_dead) {
                         count = (s32) ftd->x6D8[0];
                     } else {
                         count = (s32) ftd->x6D4;
@@ -2732,7 +2732,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 s32 count;
 
                 if (fp->x2225_b7) {
-                    if (fp->x2224_b2) {
+                    if (fp->stamina_dead) {
                         count = (s32) ftd->x6D8[0];
                     } else {
                         count = (s32) ftd->x6D4;

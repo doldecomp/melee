@@ -929,7 +929,7 @@ void ftCo_Damage_Anim(Fighter_GObj* gobj)
     ftCo_8008F744(gobj);
     if (!ftAnim_IsFramesRemaining(gobj) && !fp->x221C_b6) {
         if (fp->ground_or_air == GA_Air) {
-            if (fp->x2224_b2) {
+            if (fp->stamina_dead) {
                 ftCo_80090780(gobj);
             } else if (!inlineC0(gobj)) {
                 ftCo_Fall_Enter(gobj);
@@ -1017,7 +1017,7 @@ void ftCo_Damage_Coll(Fighter_GObj* gobj)
     if (fp->ground_or_air == GA_Ground) {
         ft_800848DC(gobj, ftCo_8008FC94);
     } else if (ft_80081DD4(gobj)) {
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             ftCo_80097D40(gobj);
         } else {
             float mag = sqrtf(VEC2_SQ_LEN(fp->x8c_kb_vel));

@@ -301,7 +301,7 @@ void ftCo_80097F38(Fighter_GObj* gobj)
 void ftCo_DownWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!fp->x2224_b2) {
+    if (!fp->stamina_dead) {
         fp->mv.co.downwait.x0 -= 1;
     }
     if (fp->mv.co.downwait.x0 <= 0) {
