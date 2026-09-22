@@ -746,8 +746,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
     if (data.state->x110 > 0x3EU) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
-                (HSD_PadMasterStatus[(u8) Player_GetPadPort(i)]
-                     .trigger &
+                (HSD_PadMasterStatus[(u8) Player_GetPadPort(i)].trigger &
                  0x1000))
             {
                 data.state->xFC = data.state->x104;

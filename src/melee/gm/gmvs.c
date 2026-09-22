@@ -676,8 +676,7 @@ int gm_DefaultVSGetPauser(void)
                                 Gm_PKind_NA &&
                             Player_GetEntity(mpPlayerSlot) != NULL &&
                             Player_8003219C(mpPlayerSlot) == 0 &&
-                            mpPlayerId ==
-                                Player_GetPadPort(mpPlayerSlot))
+                            mpPlayerId == Player_GetPadPort(mpPlayerSlot))
                         {
                             return mpPlayerId;
                         }
@@ -1048,8 +1047,7 @@ void fn_8016C7F0(void)
     if (controller.state.match_result == OUTCOME_1P_GAME_OVER &&
         controller.start.x4_3)
     {
-        gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0),
-                    0xD, 0);
+        gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_RequestQuake(QuakeKind_Large, NULL);
     }
     if (gm_GetCurrentGameMode() == GM_TARGET_TEST ||
@@ -1077,8 +1075,8 @@ void fn_8016C7F0(void)
         if (var_r28 != 0) {
             controller.state.unk_10 = 0x9C41;
             controller.state.unk_14 = 0x145;
-            gm_80167858(Player_GetPadPort(0),
-                        Player_GetNametagSlotID(0), 0xD, 0x5A);
+            gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0), 0xD,
+                        0x5A);
         } else if (sp24 > 0) {
             controller.state.unk_14 = 0x149;
             controller.state.unk_18 = 0x28;
@@ -1087,8 +1085,8 @@ void fn_8016C7F0(void)
     if (gm_GetCurrentGameMode() == GM_EVENT &&
         controller.state.unk_10 == 0x9C41)
     {
-        gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0),
-                    0xD, 0x5A);
+        gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0), 0xD,
+                    0x5A);
     }
     switch (gm_GetCurrentGameMode()) {
     case GM_10MAN_VS:
@@ -1591,8 +1589,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetPadPort(arg0, arg1->slot - 1);
     }
     if (arg1->slot_type == Gm_PKind_Human &&
-        (HSD_PadCopyStatus[(u8) Player_GetPadPort(arg0)].button &
-         HSD_PAD_A) &&
+        (HSD_PadCopyStatus[(u8) Player_GetPadPort(arg0)].button & HSD_PAD_A) &&
         (Player_GetPlayerCharacter(arg0) == CKind_Zelda ||
          Player_GetPlayerCharacter(arg0) == CKind_Seak))
     {
@@ -1775,9 +1772,9 @@ static inline void getSpawnPoint(int i, Vec3* v)
 static inline void setPlayerUnk45(int i)
 {
     bool is_teams = controller.start.is_teams == true;
-    Player_SetUnk45(i, fn_80160840(gm_80160854(Player_GetPadPort(i),
-                                               Player_GetTeam(i), is_teams,
-                                               Player_GetPlayerSlotType(i))));
+    Player_SetUnk45(
+        i, fn_80160840(gm_80160854(Player_GetPadPort(i), Player_GetTeam(i),
+                                   is_teams, Player_GetPlayerSlotType(i))));
 }
 
 void fn_8016DEEC(void)
