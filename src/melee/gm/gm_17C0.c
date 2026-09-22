@@ -114,7 +114,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             temp_r3_2->start.disable_pausing = false;
             temp_r3_2->state.hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
-            ftLib_80086824();
+            ftLib_DisableAllInput();
             tmp->x8 = 1;
         } else if (ftBossLib_IsMasterHandEntry() == 0) {
             tmp->x0 = 2;
@@ -152,7 +152,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         temp_r3_4 = gmVs_GetSceneController();
         temp_r3_4->state.hud_enabled = 1;
         Stage_80225074(0);
-        ftLib_800868A4();
+        ftLib_EnableAllInput();
         ftBossLib_8015CC14();
         tmp->x0 = 3;
         break;
@@ -245,7 +245,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             lbAudioAx_80028B6C();
         }
         if (tmp->x8 <= temp_r28 && tmp->x8 % 30 == 0) {
-            gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 2,
+            gm_80167858(Player_GetPadPort(0), Player_GetNametagSlotID(0), 2,
                         0x1E);
             Camera_RequestQuake(QuakeKind_Medium, NULL);
         }

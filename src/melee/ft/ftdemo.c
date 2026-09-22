@@ -72,9 +72,9 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x28 = fp->ft_data->x18;
         efAsync_LoadSync(ftData_UnkBytePerCharacter[fp->kind]);
         if (!alloc_info->b0) {
-            ftData_80085820(fp->kind, fp->x619_costume_id);
+            ftData_80085820(fp->kind, fp->costume_id);
         } else {
-            ftData_800858E4(fp->kind, fp->x619_costume_id);
+            ftData_800858E4(fp->kind, fp->costume_id);
         }
         Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
         {
@@ -114,16 +114,16 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x890_cameraBox = Camera_80029020();
         lbShadow_8000ED54(&fp->x20A4, gobj->hsd_obj);
     }
-    HSD_GObj_SetupProc(gobj, Fighter_8006A360, 1);
+    HSD_GObj_SetupProc(gobj, Fighter_procAnim, 1);
     HSD_GObj_SetupProc(gobj, Fighter_procUpdate, 4);
     HSD_GObj_SetupProc(gobj, Fighter_procMap, 5);
-    HSD_GObj_SetupProc(gobj, Fighter_8006C80C, 9);
-    HSD_GObj_SetupProc(gobj, Fighter_8006D9AC, 16);
-    Fighter_UnkProcessDeath_80068354(gobj);
+    HSD_GObj_SetupProc(gobj, Fighter_procCollPos, 9);
+    HSD_GObj_SetupProc(gobj, Fighter_procDynamics, 16);
+    Fighter_Spawn(gobj);
     if (on_create_fighter[alloc_info->unk8] != NULL) {
         on_create_fighter[alloc_info->unk8](gobj);
     }
-    ftLib_800867E8(gobj);
+    ftLib_DisableInput(gobj);
     return gobj;
 }
 

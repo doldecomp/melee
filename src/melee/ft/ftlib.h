@@ -30,11 +30,11 @@
 /* 086794 */ HSD_GObj* ftLib_GetItem(HSD_GObj*);
 /* 0867A0 */ bool ftLib_800867A0(HSD_GObj*, HSD_GObj*);
 /* 0867CC */ HSD_GObj* ftLib_800867CC(HSD_GObj*);
-/* 0867D8 */ bool ftLib_800867D8(HSD_GObj*);
-/* 0867E8 */ void ftLib_800867E8(HSD_GObj*);
-/* 086824 */ void ftLib_80086824(void);
-/* 08688C */ void ftLib_8008688C(HSD_GObj*);
-/* 0868A4 */ void ftLib_800868A4(void);
+/* 0867D8 */ bool ftLib_IsInputDisabled(HSD_GObj*);
+/* 0867E8 */ void ftLib_DisableInput(HSD_GObj*);
+/* 086824 */ void ftLib_DisableAllInput(void);
+/* 08688C */ void ftLib_EnableInput(HSD_GObj*);
+/* 0868A4 */ void ftLib_EnableAllInput(void);
 /* 0868D4 */ bool ftLib_800868D4(HSD_GObj*, HSD_GObj*);
 
 /// @returns @c true if @p gobj is a #Fighter, otherwise @c false.

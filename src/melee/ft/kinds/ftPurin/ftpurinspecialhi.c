@@ -28,7 +28,7 @@ static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->accessory4_cb = &ftPr_Init_8013C94C;
 
-    if (gm_8016B1D8() && grStadium_801D4FF8(fp->player_id)) {
+    if (gm_8016B1D8() && grStadium_801D4FF8(fp->player_idx)) {
         fp->mv.pr.specialhi.x0 = true;
     } else {
         fp->mv.pr.specialhi.x0 = false;

@@ -81,7 +81,7 @@ void un_8031F9D8(CharacterKind char_index, int costume_id)
     Player_80036E20(char_index, un_804D6FE8, 0);
     Player_SetPlayerCharacter(0, char_index);
     Player_SetCostumeId(0, costume_id);
-    Player_SetPlayerId(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, 2);
     Player_SetFacingDirection(0, 0.0f);
     Player_80032768(0, &player_spawn);

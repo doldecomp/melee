@@ -218,7 +218,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     if (!fp->x2223_b3) {
         overlay = ftCo_800C0658(fp);
         chk1 = 0;
-        var_r5 = fp->x61A_controller_index;
+        var_r5 = fp->sub_color;
         if (fp->x2228_b0 && fp->x2224_b0) {
             if (fp->is_metal) {
                 var_r5 = 4;

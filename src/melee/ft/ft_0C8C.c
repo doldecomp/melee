@@ -26,8 +26,8 @@ bool ftCo_800C8C84(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2224_b2 && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
-        Player_GetRemainingHPByIndex(fp->player_id, fp->is_sub_fighter) == 0)
+    if (!fp->stamina_dead && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
+        Player_GetRemainingHPByIndex(fp->player_idx, fp->is_sub_fighter) == 0)
     {
         fn_800C8E74(gobj);
         return true;
@@ -40,13 +40,13 @@ static inline void fn_800C8_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtSFX* ft_sfx = fp->ft_data->x4C_sfx;
-    fp->x2224_b2 = true;
+    fp->stamina_dead = true;
     Fighter_ResetInputData_80068854(gobj);
     ftCo_800BFFD0(fp, 0x7A, 0);
     fn_800C8E40(fp, ft_sfx);
     fp->x2225_b6 = true;
     lbBgFlash_80021C48(0xEU, 0U);
-    gm_80167470(fp->player_id, fp->is_sub_fighter);
+    gm_80167470(fp->player_idx, fp->is_sub_fighter);
 }
 
 void ftCo_800C8D00(Fighter_GObj* gobj)
@@ -55,7 +55,7 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
 
     RETURN_IF(!fp->x2224_b3);
 
-    if (!fp->x2224_b2) {
+    if (!fp->stamina_dead) {
         fn_800C8_inline(gobj);
     }
 
@@ -104,7 +104,7 @@ void fn_800C8E74(Fighter_GObj* gobj)
         } else {
             ftCh_GrabUnk1_8015ADD0(gobj);
         }
-        gm_80167470(fp->player_id, fp->is_sub_fighter);
+        gm_80167470(fp->player_idx, fp->is_sub_fighter);
         return;
     }
 
@@ -137,7 +137,7 @@ void ftCo_800C8FC4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (Player_GetMoreFlagsBit0(fp->player_id)) {
+    if (Player_GetMoreFlagsBit0(fp->player_idx)) {
         fp->x2034 = p_ftCommonData->x7DC;
         fp->x2038 = p_ftCommonData->x7E0;
         fp->x2227_b3 = true;

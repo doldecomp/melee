@@ -929,7 +929,7 @@ bool ftCo_800A1C44(Fighter* fp)
     if (fp->x2168 != 0 && fp->x2338.x == 0) {
         return true;
     }
-    if (fp->x221F_b3) {
+    if (fp->is_sleeping) {
         return true;
     }
     return false;
@@ -1074,7 +1074,7 @@ bool ftCo_800A1F98(int x, float y)
 
 bool ftCo_IsCpuControlled(Fighter* fp)
 {
-    if (Player_8003248C(fp->player_id, fp->is_sub_fighter) != Gm_PKind_Cpu) {
+    if (Player_8003248C(fp->player_idx, fp->is_sub_fighter) != Gm_PKind_Cpu) {
         return false;
     }
     if (fp->cpu.kind == 5) {
@@ -1922,7 +1922,7 @@ bool ftCo_IsAlly(Fighter* fp0, Fighter* fp1)
     if (fp1 == NULL) {
         return false;
     }
-    if (fp0->player_id == fp1->player_id) {
+    if (fp0->player_idx == fp1->player_idx) {
         return true;
     }
     if (gm_8016B168()) {
@@ -2412,7 +2412,7 @@ static inline bool inlineD0_it(Fighter* fp, Item* it)
 static inline bool inlineD1(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->gobj;
-    if (fp->x221F_b3 || fp->x2224_b2 || ftCo_800A0F00(gobj) ||
+    if (fp->is_sleeping || fp->stamina_dead || ftCo_800A0F00(gobj) ||
         ftLib_8008732C(gobj))
     {
         return true;
@@ -2637,7 +2637,7 @@ Fighter* ftCo_800A5294(Fighter* fp, int player_id)
             if (fp->gobj != cur) {
                 cur_fp = GET_FIGHTER(cur);
                 if (!inlineD0(fp, cur_fp)) {
-                    if (!inlineD1(cur_fp) && cur_fp->player_id == player_id) {
+                    if (!inlineD1(cur_fp) && cur_fp->player_idx == player_id) {
                         return cur_fp;
                     }
                 }
@@ -2772,8 +2772,8 @@ Fighter* ftCo_800A589C(Fighter* fp)
         {
             if (fp->gobj != cur) {
                 Fighter* cur_fp = GET_FIGHTER(cur);
-                if (fp->player_id == cur_fp->player_id) {
-                    if (cur_fp->x221F_b3) {
+                if (fp->player_idx == cur_fp->player_idx) {
+                    if (cur_fp->is_sleeping) {
                         return NULL;
                     }
                     return cur_fp;
@@ -8626,7 +8626,7 @@ bool ftCo_800B395C(Fighter_GObj* gobj, int arg1)
 
     fp = GET_FIGHTER(gobj);
     temp_r30 = &fp->cpu;
-    if (Player_8003248C(fp->player_id, fp->is_sub_fighter) == Gm_PKind_Cpu) {
+    if (Player_8003248C(fp->player_idx, fp->is_sub_fighter) == Gm_PKind_Cpu) {
         switch (temp_r30->x18) {
         case 2:
         case 3:
