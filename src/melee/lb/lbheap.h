@@ -29,7 +29,7 @@ typedef enum LbHeapKind {
  */
 /* 015BD0 */ void* lbHeap_80015BD0(int heap_id, size_t size);
 /// Frees the allocation at the RAM or ARAM address, not its HSD_AllocEntry.
-/* 015CA8 */ void lbHeap_80015CA8(int, uintptr_t);
+/* 015CA8 */ void lbHeap_80015CA8(int, void*);
 /* 015D6C */ int lbHeap_80015D6C(u32 heap0, void (*cb)(u32), u32 heap1);
 /* 015DF8 */ void lbHeap_80015DF8(void);
 /* 015F3C */ void lbHeap_80015F3C(void);

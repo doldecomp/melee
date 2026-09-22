@@ -148,8 +148,8 @@ void lbArchive_80016EFC(HSD_Archive* archive)
 {
     HSD_ASSERT(0xFC, archive);
     HSD_ASSERT(0xFD, archive->flags & HSD_ARCHIVE_DONT_FREE);
-    lbHeap_80015CA8(0, (uintptr_t) (archive->data - 0x20));
-    lbHeap_80015CA8(0, (uintptr_t) archive);
+    lbHeap_80015CA8(0, archive->data - sizeof(archive->header));
+    lbHeap_80015CA8(0, archive);
 }
 
 bool lbArchive_80016F80(HSD_Archive** archive, const char* filename)

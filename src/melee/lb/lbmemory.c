@@ -46,17 +46,19 @@ struct Allocator lbMemory_804318B0;
 ASSERT_SIZE(HSD_AllocEntry, 0xC);
 ASSERT_SIZE(lbMemory_804318B0, 0x6F0);
 
-Handle* lbMemory_80014E24(uintptr_t arenaLo, uintptr_t arenaHi)
+Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
 {
     Handle* h;
     HSD_ASSERT(0x7B, _p(free_heap));
 
-    if (arenaLo < 0x80000000U && arenaHi < 0x80000000U) {
+    if ((uintptr_t) arenaLo < 0x80000000U && (uintptr_t) arenaHi < 0x80000000U)
+    {
 #ifdef MUST_MATCH
         // The retail assert string spells the u32 casts.
         HSD_ASSERT(0x80, (u32)arenaLo >= (u32)_p(a_arenaLo) && (u32)arenaHi <= (u32)_p(a_arenaHi));
 #else
-        HSD_ASSERT(0x80, arenaLo >= _p(a_arenaLo) && arenaHi <= _p(a_arenaHi));
+        HSD_ASSERT(0x80, (uintptr_t) arenaLo >= _p(a_arenaLo) &&
+                            (uintptr_t) arenaHi <= _p(a_arenaHi));
 #endif
     }
 
@@ -87,18 +89,18 @@ void lbMemory_80014EEC(Handle* handle)
 
 u32 lbMemory_80014F7C(Handle* h)
 {
-    uintptr_t start = h->lo;
+    uintptr_t start = (uintptr_t) h->lo;
     HSD_AllocEntry** link = &h->blocks;
     uintptr_t end;
     u32 sum = 0;
 
     for (;;) {
-        end = (*link != NULL) ? (*link)->addr : h->hi;
+        end = (uintptr_t) ((*link != NULL) ? (*link)->addr : h->hi);
         sum += end - start;
         if (*link == NULL) {
             break;
         }
-        start = (*link)->addr + (*link)->size;
+        start = (uintptr_t) (*link)->addr + (*link)->size;
         link = &(*link)->next;
     }
     return sum;
@@ -118,12 +120,12 @@ HSD_AllocEntry* lbMemory_80014FC8(Handle* h, size_t size)
     least_leftover = 0x40000000U;
     HSD_ASSERT(0xCC, _p(free_mem));
     size = OSRoundUp32B(size);
-    start = h->lo;
+    start = (uintptr_t) h->lo;
     link = &h->blocks;
     memp_kouho = NULL;
 
     for (;;) {
-        end = (*link != NULL) ? (*link)->addr : h->hi;
+        end = (uintptr_t) ((*link != NULL) ? (*link)->addr : h->hi);
         available_space = end - start;
         if (available_space >= size) {
             leftover = available_space;
@@ -137,7 +139,7 @@ HSD_AllocEntry* lbMemory_80014FC8(Handle* h, size_t size)
         if (*link == NULL) {
             break;
         }
-        start = (*link)->addr + (*link)->size;
+        start = (uintptr_t) (*link)->addr + (*link)->size;
         link = &(*link)->next;
     }
     HSD_ASSERT(0xE9, memp_kouho);
@@ -146,7 +148,7 @@ HSD_AllocEntry* lbMemory_80014FC8(Handle* h, size_t size)
         _p(free_mem) = result->next;
 
         result->size = size;
-        result->addr = lo;
+        result->addr = (void*) lo;
         result->next = *memp_kouho;
         *memp_kouho = result;
 
@@ -158,7 +160,7 @@ HSD_AllocEntry* lbMemory_80014FC8(Handle* h, size_t size)
     }
 }
 
-void lbMemFreeToHeap(Handle* h, uintptr_t addr)
+void lbMemFreeToHeap(Handle* h, void* addr)
 {
     HSD_AllocEntry* block = h->blocks;
     HSD_AllocEntry** link = &h->blocks;
@@ -177,7 +179,7 @@ void lbMemFreeToHeap(Handle* h, uintptr_t addr)
 #ifdef MUST_MATCH
     OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", (unsigned) addr);
 #else
-    OSReport("[LbMem] Error: lbMemFreeToHeap %p.\n", (void*) addr);
+    OSReport("[LbMem] Error: lbMemFreeToHeap %p.\n", addr);
 #endif
     HSD_ASSERT(283, 0);
 }
@@ -214,14 +216,14 @@ u32 lbMemory_8001529C(Handle* h, void (*cb)(u32), u32 arg)
 
     _p(compact_cb) = cb;
     _p(compact_arg) = arg;
-    _p(compact_cursor) = h->lo;
+    _p(compact_cursor) = (uintptr_t) h->lo;
 
     for (block = h->blocks; block != NULL; block = block->next) {
-        if (block->addr != _p(compact_cursor)) {
+        if ((uintptr_t) block->addr != _p(compact_cursor)) {
             lbMemory_80015320(0, (uintptr_t) block, NULL, false);
             return 1;
         }
-        _p(compact_cursor) = block->addr + block->size;
+        _p(compact_cursor) = (uintptr_t) block->addr + block->size;
     }
     return 0;
 }
@@ -250,8 +252,8 @@ static void lbMemory_80015320(int arg0, uintptr_t arg1, void* arg2,
                               bool cancelflag)
 {
     HSD_AllocEntry* block = (HSD_AllocEntry*) arg1;
-    uintptr_t current = _p(compact_cursor);
-    uintptr_t src;
+    void* current = (void*) _p(compact_cursor);
+    void* src;
 
     HSD_ASSERT(0x188, !cancelflag);
 
@@ -259,20 +261,20 @@ static void lbMemory_80015320(int arg0, uintptr_t arg1, void* arg2,
         if (block->addr != current) {
             src = block->addr;
             block->addr = current;
-            _p(compact_cursor) = block->addr + block->size;
+            _p(compact_cursor) = (uintptr_t) block->addr + block->size;
 
-            if (block->addr < 0x80000000U) {
-                HSD_DevComRequest(0, src, current, OSRoundUp32B(block->size),
-                                  0x1B, 1, lbMemory_80015320,
-                                  (uintptr_t) block->next);
+            if ((uintptr_t) block->addr < 0x80000000U) {
+                HSD_DevComRequest(0, (uintptr_t) src, (uintptr_t) current,
+                                  OSRoundUp32B(block->size), 0x1B, 1,
+                                  lbMemory_80015320, (uintptr_t) block->next);
             } else {
-                start_ram_copy((const void*) src, (void*) current,
-                               OSRoundUp32B(block->size), block->next);
+                start_ram_copy(src, current, OSRoundUp32B(block->size),
+                               block->next);
             }
             return;
         }
 
-        _p(compact_cursor) = block->addr + block->size;
+        _p(compact_cursor) = (uintptr_t) block->addr + block->size;
         lbMemory_80015320(0, (uintptr_t) block->next, NULL, false);
         return;
     }
@@ -286,7 +288,7 @@ void lbMemory_800154BC(uintptr_t* arenaLo, uintptr_t* arenaHi)
     *arenaHi = _p(a_arenaHi);
 }
 
-Handle* lbMemory_800154D4(uintptr_t arenaLo, uintptr_t arenaHi)
+Handle* lbMemory_800154D4(void* arenaLo, void* arenaHi)
 {
     _p(aram_heap) = lbMemory_80014E24(arenaLo, arenaHi);
     return _p(aram_heap);
@@ -321,6 +323,6 @@ void lbMemory_8001564C(void)
     }
     _p(heap)[i].next = NULL;
     _p(aram_heap) = NULL;
-    lbMemory_800154D4(_p(a_arenaLo), _p(a_arenaHi));
+    lbMemory_800154D4((void*) _p(a_arenaLo), (void*) _p(a_arenaHi));
     _p(mgr).size = 0;
 }

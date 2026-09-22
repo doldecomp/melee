@@ -72,7 +72,7 @@ void grAnime_801C65B0(UnkArchiveStruct* arg0)
         if (arg0->unk8 == 0) {
             lbArchive_80016EFC(arg0->unk0);
         } else if (arg0->unk8 == 1) {
-            lbHeap_80015CA8(0, (uintptr_t) arg0->unk0);
+            lbHeap_80015CA8(0, arg0->unk0);
         }
     }
     memzero(arg0, sizeof(*arg0));

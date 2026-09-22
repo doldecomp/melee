@@ -56,8 +56,8 @@ static inline void createHeap(LbHeapKind kind)
             heap->id = OSCreateHeap((void*) heap->start,
                                     (void*) (heap->start + heap->size));
         } else {
-            heap->handle =
-                lbMemory_80014E24(heap->start, heap->start + heap->size);
+            heap->handle = lbMemory_80014E24(
+                (void*) heap->start, (void*) (heap->start + heap->size));
         }
         heap->status = LbHeapStatus_Create;
     }
@@ -136,7 +136,7 @@ void lbHeap_80015900(void)
 
     lbMemory_800155A4();
 
-    aram_heap->handle = lbMemory_800154D4(aram_lo, aram_hi);
+    aram_heap->handle = lbMemory_800154D4((void*) aram_lo, (void*) aram_hi);
     aram_heap->start = aram_lo;
     aram_heap->size = aram_hi - aram_lo;
     aram_heap->status = LbHeapStatus_Create;
@@ -169,8 +169,7 @@ void* lbHeap_80015BD0(int heap_id, size_t size)
         } else {
             result = lbMemory_80014FC8(p->handle, size);
             if (p->type == 3) {
-                // The ARAM heap hands out the block's address, not the block.
-                result = (void*) ((HSD_AllocEntry*) result)->addr;
+                result = ((HSD_AllocEntry*) result)->addr;
             }
         }
     } else {
@@ -180,7 +179,7 @@ void* lbHeap_80015BD0(int heap_id, size_t size)
     return result;
 }
 
-void lbHeap_80015CA8(int arg0, uintptr_t addr)
+void lbHeap_80015CA8(int arg0, void* addr)
 {
     int enabled = OSDisableInterrupts();
     struct Heap* p = &lbHeap_80431FA0.heap_array[arg0];
@@ -189,7 +188,7 @@ void lbHeap_80015CA8(int arg0, uintptr_t addr)
     if (p->type == 0) {
         int cur_heap = HSD_GetHeap();
         HSD_SetHeap(p->id);
-        HSD_Free((void*) addr);
+        HSD_Free(addr);
         HSD_SetHeap(cur_heap);
     } else {
         lbMemFreeToHeap(p->handle, addr);
