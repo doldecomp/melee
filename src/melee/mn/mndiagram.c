@@ -231,24 +231,21 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
     f32 temp_f31_2;
 
     if (is_name_mode != 0) {
-        if (GetPersistentNameData((s32) player_index)->stats.match_count != 0)
-        {
-            temp_f31_2 = (f32) GetPersistentNameData((s32) player_index)
-                             ->stats.match_count;
-            return (s32) (100.0f *
-                          ((f32) GetPersistentNameData((s32) player_index)
-                               ->stats.total_player_count /
-                           temp_f31_2));
+        if (GetPersistentNameData(player_index)->stats.match_count != 0) {
+            temp_f31_2 =
+                (f32) GetPersistentNameData(player_index)->stats.match_count;
+            return (s32) (100.0f * ((f32) GetPersistentNameData(player_index)
+                                        ->stats.total_player_count /
+                                    temp_f31_2));
         }
         return 0;
     }
-    if (GetPersistentFighterData((s32) player_index)->stats.match_count != 0) {
-        temp_f31 = (f32) GetPersistentFighterData((s32) player_index)
-                       ->stats.match_count;
-        return (s32) (100.0f *
-                      ((f32) GetPersistentFighterData((s32) player_index)
-                           ->stats.total_player_count /
-                       temp_f31));
+    if (GetPersistentFighterData(player_index)->stats.match_count != 0) {
+        temp_f31 =
+            (f32) GetPersistentFighterData(player_index)->stats.match_count;
+        return (s32) (100.0f * ((f32) GetPersistentFighterData(player_index)
+                                    ->stats.total_player_count /
+                                temp_f31));
     }
     return 0;
 }
@@ -1216,12 +1213,12 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u32 input = mn_80229624(4);
     s32 count;
     s32 col;
-    s32 row;
+    int row;
     s32 new_var2;
-    s32 row3;
-    s32 row4;
-    s32 row5;
-    s32 row6;
+    int row3;
+    int row4;
+    int row5;
+    int row6;
     u8 col_result;
     u8 col_result2;
     u8 row_result2;
@@ -1229,10 +1226,10 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 col_result4;
     u8 row_result3;
     u8 row_result4;
-    s32 found;
+    int found;
     s32 cur;
-    s32 cursor_pos;
-    s32 count2;
+    int cursor_pos;
+    int count2;
     PAD_STACK(24);
     mn_804A04F0.buttons = input;
     count2 = 0;
@@ -1305,7 +1302,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         data->is_name_mode = (data->is_name_mode == 0) ? 1 : count2;
         if (data->is_name_mode != 0) {
             cur = GetNameCount();
-            if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= cur) {
+            if (((u8) mn_804A04F0.hovered_selection) >= cur) {
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((u8) (cur - 1));
@@ -1323,7 +1320,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         count = mnDiagram_CountUnlockedFightersForInput();
 
         new_var2 = count;
-        if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= new_var2) {
+        if (((u8) mn_804A04F0.hovered_selection) >= new_var2) {
             mn_804A04F0.hovered_selection =
                 (mn_804A04F0.hovered_selection & 0xFF00) |
                 ((u8) (new_var2 - 1));
@@ -2327,19 +2324,19 @@ static inline int mnDiagram_GetFighterPairKOs(u8 fighter, u8 opponent)
 void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                               u8 arg3)
 {
-    s32 name_col;
+    int name_col;
     u8 is_name_mode = arg3;
-    s32 unlocked_count;
-    s32 col_unlocked_count;
-    s32 bottom_unlocked_count;
-    s32 bottom_col;
-    s32 fighter_col;
-    s32 row;
-    s32 entry_count;
+    int unlocked_count;
+    int col_unlocked_count;
+    int bottom_unlocked_count;
+    int bottom_col;
+    int fighter_col;
+    int row;
+    int entry_count;
     s32 total_kos;
-    s32 row_name;
-    s32 col_name;
-    s32 row_fighter;
+    int row_name;
+    int col_name;
+    int row_fighter;
     u8 col_fighter;
     // Preserve the original gap before the saved registers.
     PAD_STACK(16);
