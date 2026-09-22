@@ -69,7 +69,7 @@ void un_8031F294(s32 arg0, s32 arg1)
     Player_80036E20(arg0, un_804D6FC8, 3);
     Player_SetPlayerCharacter(0, arg0);
     Player_SetCostumeId(0, arg1);
-    Player_SetPlayerId(0, 0);
+    Player_SetControllerIndex(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, un_804DE0D8);
     Player_80032768(0, un_80400200.spawns);
@@ -78,7 +78,7 @@ void un_8031F294(s32 arg0, s32 arg1)
     Player_80036E20(CKind_Mario, un_804D6FCC, 5);
     Player_SetPlayerCharacter(1, CKind_Mario);
     Player_SetCostumeId(1, 0);
-    Player_SetPlayerId(1, 0);
+    Player_SetControllerIndex(1, 0);
     Player_SetSlottype(1, Gm_PKind_Demo);
     Player_SetFacingDirection(1, un_804DE0DC);
     Player_80032768(1, un_80400200.spawns);
@@ -94,7 +94,7 @@ void un_8031F294(s32 arg0, s32 arg1)
         Player_80036E20(CKind_Luigi, un_804D6FCC, 5);
         Player_SetPlayerCharacter(2, CKind_Luigi);
         Player_SetCostumeId(2, 0);
-        Player_SetPlayerId(2, 0);
+        Player_SetControllerIndex(2, 0);
         Player_SetSlottype(2, Gm_PKind_Demo);
         Player_SetFacingDirection(2, un_804DE0DC);
         Player_80032768(2, un_80400200.spawns);

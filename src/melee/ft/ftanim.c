@@ -620,7 +620,7 @@ void ftAnim_8006F4C8(Fighter* fp, bool do_blending, FigaTree* tree)
         }
         if (i >= 0x8C) {
             HSD_ASSERTREPORT(767, 0, "atree data error! player %d\n",
-                             fp->player_id);
+                             fp->slot);
         }
         if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
             HSD_JObj* jobj = get_part_joint(fp, i, do_blending);
@@ -1007,8 +1007,7 @@ void ftAnim_80070200(Fighter* fp, ftData_x8_x8* r4, CostumeTObjList* r5,
     if (r5->n_costume_tobjs > ARRAY_SIZE(r5->costume_tobjs)) {
         HSD_ASSERTREPORT(1228, 0, "fighter tobj num over!\n");
     }
-    r5->x5D0 =
-        r4->xC[fp->x619_costume_id] ? r4->xC[fp->x619_costume_id] : r4->xC[0];
+    r5->x5D0 = r4->xC[fp->costume_id] ? r4->xC[fp->costume_id] : r4->xC[0];
 
     for (i = 0; i < r5->n_costume_tobjs; i++) {
         r5->costume_tobjs[i] = ftParts_80075240(r6, r5->x5D0[i]);
@@ -1024,11 +1023,10 @@ void ftAnim_80070308(Fighter_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_JObj* jobj = GET_JOBJ(fighter_gobj);
 
-    HSD_JObjAddAnimAll(jobj, NULL,
-                       CostumeListsForeachCharacter[fp->kind]
-                           .costume_list[fp->x619_costume_id]
-                           .x4,
-                       NULL);
+    HSD_JObjAddAnimAll(
+        jobj, NULL,
+        CostumeListsForeachCharacter[fp->kind].costume_list[fp->costume_id].x4,
+        NULL);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     ftAnim_80070200(fp, &fp->ft_data->x8->x8, &fp->tobj_list, &fp->dobj_list);
 }
@@ -1048,7 +1046,7 @@ void ftAnim_80070458(Fighter* fp, CostumeTObjList* tobj_list, u32 tobj_idx,
                      float frame)
 {
     if (tobj_idx >= tobj_list->n_costume_tobjs) {
-        HSD_ASSERTREPORT(1264, 0, "texture no exist! %d %d\n", fp->player_id,
+        HSD_ASSERTREPORT(1264, 0, "texture no exist! %d %d\n", fp->slot,
                          tobj_idx);
     }
     tobjAnim(&tobj_list->costume_tobjs[tobj_idx], frame);

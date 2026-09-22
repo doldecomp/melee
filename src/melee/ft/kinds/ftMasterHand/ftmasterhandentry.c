@@ -50,7 +50,7 @@ void ftMh_Entry_Anim(HSD_GObj* gobj)
 void ftMh_Entry_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!Player_GetPlayerSlotType(fp->player_id)) {
+    if (!Player_GetPlayerSlotType(fp->slot)) {
         ftBossLib_8015BD20(gobj);
     }
 }

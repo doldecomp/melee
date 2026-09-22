@@ -61,7 +61,7 @@ void ftMh_Poke2_Anim(HSD_GObj* arg0)
 void ftMh_Poke1_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->player_id) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(fp->slot) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }

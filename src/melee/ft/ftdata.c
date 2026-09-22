@@ -1840,7 +1840,7 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
 struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp, int msid)
 {
     if (fp->kind == Ft_Kind_Nana &&
-        Player_GetPlayerSlotType(fp->player_id) != Gm_PKind_Demo &&
+        Player_GetPlayerSlotType(fp->slot) != Gm_PKind_Demo &&
         fp->x24[msid].x14 == 0)
     {
         return (struct ftData_80085FD4_ret*) &gFtDataList[Ft_Kind_Popo]
@@ -1852,9 +1852,9 @@ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp, int msid)
 Fighter* ftData_80086060(Fighter* fp)
 {
     if (fp->kind == Ft_Kind_Nana &&
-        Player_GetPlayerSlotType(fp->player_id) != Gm_PKind_Demo)
+        Player_GetPlayerSlotType(fp->slot) != Gm_PKind_Demo)
     {
-        Fighter_GObj* gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+        Fighter_GObj* gobj = Player_GetEntityAtIndex(fp->slot, 0);
         if (gobj != NULL) {
             return GET_FIGHTER(gobj);
         }

@@ -499,7 +499,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
         Player_80036E20(kind, lbArchive_LoadArchive(gm_80160438(kind)), 0);
         Player_SetPlayerCharacter(arg2, kind);
         Player_SetCostumeId(arg2, arg1);
-        Player_SetPlayerId(arg2, arg2);
+        Player_SetControllerIndex(arg2, arg2);
         Player_SetSlottype(arg2, Gm_PKind_Demo);
 
         if (kind == CKind_GameWatch) {

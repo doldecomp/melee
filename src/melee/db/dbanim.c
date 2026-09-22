@@ -110,10 +110,10 @@ void fn_UpdateAnimationInfo(void)
                 DevText_Printf(text, "\n");
             }
             if (ft->motion_id < 0x155) {
-                DevText_Printf(text, "%d %s", ft->player_id,
+                DevText_Printf(text, "%d %s", ft->slot,
                                db_motionstate_names[ft->motion_id]);
             } else {
-                DevText_Printf(text, "%d %d", ft->player_id, ft->motion_id);
+                DevText_Printf(text, "%d %d", ft->slot, ft->motion_id);
             }
             DevText_SetCursorX(text, 23);
             if (ft->anim_id != -1) {

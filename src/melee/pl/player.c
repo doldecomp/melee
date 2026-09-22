@@ -723,22 +723,22 @@ void Player_SetCostumeId(int slot, int costume_id)
     player->costume_id = costume_id;
 }
 
-u8 Player_GetControllerIndex(int slot)
+u8 Player_GetSubColor(int slot)
 {
-    s8 controller_index;
+    s8 sub_color;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    controller_index = player->controller_index;
-    return controller_index;
+    sub_color = player->sub_color;
+    return sub_color;
 }
 
-void Player_SetControllerIndex(int slot, s8 controller_index)
+void Player_SetSubColor(int slot, s8 sub_color)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->controller_index = controller_index;
+    player->sub_color = sub_color;
 }
 
 int Player_GetTeam(int slot)
@@ -759,22 +759,22 @@ void Player_SetTeam(int slot, s8 team)
     player->team = team;
 }
 
-int Player_GetPlayerId(int slot)
+int Player_GetControllerIndex(int slot)
 {
-    u8 player_id;
+    u8 controller_index;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player_id = player->player_id;
-    return player_id;
+    controller_index = player->controller_index;
+    return controller_index;
 }
 
-void Player_SetPlayerId(int slot, int player_id)
+void Player_SetControllerIndex(int slot, int controller_index)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->player_id = player_id;
+    player->controller_index = controller_index;
 }
 
 int Player_GetCpuLevel(int slot)
@@ -1914,9 +1914,9 @@ void Player_InitOrResetPlayer(s32 slot)
     player->transformed[1] = 1;
 
     player->unk45 = 0;
-    player->controller_index = 0;
+    player->sub_color = 0;
     player->team = 0;
-    player->player_id = 0;
+    player->controller_index = 0;
     player->cpu_level = 0;
 
     player->cpu_type = 4;

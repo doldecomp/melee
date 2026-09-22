@@ -201,7 +201,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u8 _[4];
-    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
+    if (Player_GetPlayerSlotType(fp->slot) == 0) {
         ftMh_MS_341_80150894(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
             if (fp->motion_id == ftMh_MS_Wait1_0) {
@@ -357,7 +357,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 void ftMh_Wait1_0_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(fp->player_id) == 0) {
+    if (Player_GetPlayerSlotType(fp->slot) == 0) {
         ftBossLib_8015BD20(gobj);
     }
 }

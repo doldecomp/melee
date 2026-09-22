@@ -37,10 +37,10 @@ static void commonCall(Fighter* fp)
         fp, 0,
         (fp->dmg.x1830_percent * p_ftCommonData->released_inputs) +
             (p_ftCommonData->x65C *
-                 (p_ftCommonData->x660 - Player_GetHandicap(fp->player_id)) +
+                 (p_ftCommonData->x660 - Player_GetHandicap(fp->slot)) +
              p_ftCommonData->x658 +
              p_ftCommonData->x664 * (p_ftCommonData->pressed_inputs -
-                                     (Player_80033BB8(fp->player_id) + 1))));
+                                     (Player_80033BB8(fp->slot) + 1))));
 }
 
 void ftCo_800C4550(Fighter_GObj* gobj)

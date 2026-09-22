@@ -359,7 +359,7 @@ void ftPc_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     ftParts_80074A4C(gobj, 0, 0);
-    temp_r0 = fp->x619_costume_id;
+    temp_r0 = fp->costume_id;
 
     switch (temp_r0) {
     case 0:

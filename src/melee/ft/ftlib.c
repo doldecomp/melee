@@ -581,7 +581,7 @@ bool ftLib_80086BB4(HSD_GObj* gobj)
 u8 ftLib_80086BE0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->player_id;
+    return fp->slot;
 }
 
 void ftLib_80086BEC(HSD_GObj* gobj, Vec3* v)
@@ -600,12 +600,12 @@ static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!Player_8003544C(fp->player_id, fp->is_sub_fighter)) {
+    if (!Player_8003544C(fp->slot, fp->is_sub_fighter)) {
         return;
     }
 
     if (!fp->is_sleeping && !fp->stamina_dead) {
-        lb_80014574(fp->x618_player_id, val, arg1, arg2);
+        lb_80014574(fp->controller_index, val, arg1, arg2);
     }
 }
 
@@ -646,8 +646,8 @@ void ftLib_80086DC4(s32 arg0, s32 arg1)
 void ftLib_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (Player_8003544C(fp->player_id, fp->is_sub_fighter)) {
-        HSD_PadRumbleRemoveId(fp->x618_player_id, 1);
+    if (Player_8003544C(fp->slot, fp->is_sub_fighter)) {
+        HSD_PadRumbleRemoveId(fp->controller_index, 1);
     }
 }
 
@@ -667,9 +667,8 @@ bool ftLib_80086EC0(HSD_GObj* gobj)
 bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->invisible || fp->x221E_b2 ||
-        Player_GetMoreFlagsBit4(fp->player_id) || fp->is_sandbag ||
-        fp->x2229_b3 || fp->x2220_b7)
+    if (fp->invisible || fp->x221E_b2 || Player_GetMoreFlagsBit4(fp->slot) ||
+        fp->is_sandbag || fp->x2229_b3 || fp->x2220_b7)
     {
         return false;
     }
@@ -720,7 +719,7 @@ bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
         {
             Fighter* fp0 = GET_FIGHTER(gobj0);
             Fighter* fp1 = GET_FIGHTER(gobj1);
-            if (fp0->player_id == fp1->player_id) {
+            if (fp0->slot == fp1->slot) {
                 return true;
             }
         }
@@ -760,8 +759,8 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
 bool ftLib_800870BC(HSD_GObj* gobj, int* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x61A_controller_index) {
-        *val = p_ftCommonData->x6D8[fp->x61A_controller_index];
+    if (fp->sub_color) {
+        *val = p_ftCommonData->x6D8[fp->sub_color];
         return true;
     }
     return false;
@@ -955,7 +954,7 @@ s32 ftLib_800874BC(HSD_GObj* gobj)
 void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    pl_8003E4A4(fp->player_id, fp->is_sub_fighter, arg1, arg2);
+    pl_8003E4A4(fp->slot, fp->is_sub_fighter, arg1, arg2);
 }
 
 void ftLib_80087508(s8 ft_kind, u8 arg1)

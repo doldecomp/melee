@@ -33,7 +33,7 @@
 bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
 {
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
-    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
+    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->slot, 0);
     u8 _[12];
     Vec popo_vec;
     Vec nana_vec;
@@ -71,7 +71,7 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
 void fn_80123218(Fighter_GObj* nana_gobj)
 {
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
-    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
+    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->slot, 0);
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);
         Vec nana_vec;
@@ -94,7 +94,7 @@ void ftNn_Init_801232A4(Fighter_GObj* nana_gobj)
 {
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     ftCo_DatAttrs* attrs = getFtAttrs(nana_fp);
-    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
+    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->slot, 0);
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);
         nana_fp->facing_dir = popo_fp->facing_dir;
@@ -265,7 +265,7 @@ void ftNn_Init_801237F8(Fighter_GObj* nana_gobj)
 {
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     ftIceClimberAttributes* attrs = nana_fp->dat_attrs;
-    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
+    Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->slot, 0);
     PAD_STACK(0x10);
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);

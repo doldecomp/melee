@@ -738,7 +738,7 @@ static inline int roll_cpu_type(void)
     return cpu_type;
 }
 
-static inline s8 findMatchingController(int spawn_slot, int costume_id)
+static inline s8 hasDuplicateCostume(int spawn_slot, int costume_id)
 {
     s8 chr = Player_GetPlayerCharacter(spawn_slot);
     s32 matching_slot;
@@ -799,9 +799,9 @@ void fn_8016A4C8(void)
                 {
                     int costume_id = gp->x20[gm_80169384()];
                     Player_SetCostumeId(spawn_slot, costume_id);
-                    Player_SetControllerIndex(
+                    Player_SetSubColor(
                         spawn_slot,
-                        findMatchingController(spawn_slot, costume_id));
+                        hasDuplicateCostume(spawn_slot, costume_id));
                 }
                 {
                     u8 more_flags = gp->xF;
@@ -815,7 +815,7 @@ void fn_8016A4C8(void)
                 }
                 Player_SetFacingDirection(spawn_slot, facing_dir);
                 Player_SetHUDDamage(spawn_slot, 0);
-                Player_SetPlayerId(spawn_slot, spawn_slot);
+                Player_SetControllerIndex(spawn_slot, spawn_slot);
                 Player_SetFlagsBit0(spawn_slot, 0);
                 Player_SetNametagSlotID(spawn_slot, 0x78);
                 {

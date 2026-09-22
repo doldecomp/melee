@@ -56,7 +56,7 @@ void ftPp_SpecialS_80120E68(Fighter_GObj* gobj)
     u8 _pad[4];
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    Fighter_GObj* gobj2 = Player_GetEntityAtIndex(fp->player_id, 1);
+    Fighter_GObj* gobj2 = Player_GetEntityAtIndex(fp->slot, 1);
     volatile float y;
     PAD_STACK(8);
 
@@ -206,7 +206,7 @@ static inline bool checkNanaInRange(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    Fighter_GObj* nana_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
+    Fighter_GObj* nana_gobj = Player_GetEntityAtIndex(fp->slot, 1);
     if (nana_gobj != NULL) {
         Vec3* nana_pos = &GET_FIGHTER(nana_gobj)->cur_pos;
         f32 dx = SQ(fp->cur_pos.x - nana_pos->x);
@@ -305,7 +305,7 @@ void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
 
     {
         Fighter_GObj* nn_gobj =
-            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
         if (nn_gobj != NULL) {
             Fighter* nn_fp = GET_FIGHTER(nn_gobj);
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
@@ -334,7 +334,7 @@ void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
 
     {
         Fighter_GObj* nn_gobj =
-            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
         if (nn_gobj != NULL) {
             Fighter* nn_fp = GET_FIGHTER(nn_gobj);
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
@@ -410,7 +410,7 @@ void ftPp_SpecialHiThrow_0_Anim(Fighter_GObj* gobj)
             {
                 int found;
                 Fighter_GObj* nn_gobj =
-                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
                 if (nn_gobj != NULL && ftNn_Init_8012309C(nn_gobj) == 1) {
                     found = 1;
                 } else {
@@ -448,7 +448,7 @@ void ftPp_SpecialAirHiThrow_0_Anim(Fighter_GObj* gobj)
             {
                 int found;
                 Fighter_GObj* nn_gobj =
-                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
                 if (nn_gobj != NULL && ftNn_Init_8012309C(nn_gobj) == 1) {
                     found = 1;
                 } else {
@@ -485,7 +485,7 @@ void ftPp_SpecialHiThrow_0_Phys(Fighter_GObj* gobj)
 
     {
         Fighter_GObj* nn_gobj =
-            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
         if (nn_gobj != NULL) {
             Fighter* nn_fp = GET_FIGHTER(nn_gobj);
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
@@ -519,7 +519,7 @@ void ftPp_SpecialAirHiThrow_0_Phys(Fighter_GObj* gobj)
 
     {
         Fighter_GObj* nn_gobj =
-            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
         if (nn_gobj != NULL) {
             Fighter* nn_fp = GET_FIGHTER(nn_gobj);
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
@@ -785,7 +785,7 @@ void ftPp_SpecialHiThrow2_Phys(Fighter_GObj* gobj)
 
     {
         Fighter_GObj* nn_gobj =
-            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
         if (nn_gobj != NULL) {
             Fighter* nn_fp = GET_FIGHTER(nn_gobj);
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
@@ -803,7 +803,7 @@ static inline void ftPp_SpecialAirHiThrow2_Phys_inline(Fighter_GObj* gobj,
                                                        Vec3* sp)
 {
     Fighter_GObj* nn_gobj =
-        Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+        Player_GetEntityAtIndex(GET_FIGHTER(gobj)->slot, 1);
     if (nn_gobj != NULL) {
         Fighter* nn_fp = GET_FIGHTER(nn_gobj);
         if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&

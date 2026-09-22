@@ -1394,7 +1394,7 @@ void Camera_8002B0E0(void)
 
     if ((gm_IsCurrently1PMode_inline() != 0) && (game_camera.x2C0 > 0.0f)) {
         {
-            s32 idx = Player_GetPlayerId(0) & 0xFF;
+            s32 idx = Player_GetControllerIndex(0) & 0xFF;
             var_f1 = HSD_PadCopyStatus[idx].nml_subStickY;
         }
         var_f2 = var_f1;
@@ -3139,7 +3139,7 @@ void Camera_8002E948(bool (*cb)(Vec*))
     }
 
     game_camera.x341_b1_b2 = 3;
-    game_camera.x344.cb = (s32 (*)(Vec3*)) cb;
+    game_camera.x344.cb = (s32(*)(Vec3*)) cb;
 
     switch (game_camera.x341_b1_b2) {
     case 1: {

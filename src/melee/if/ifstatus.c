@@ -805,9 +805,9 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     vec = ifAll_GetPlayerHUDPosition(idx);
     HSD_JObjSetTranslate(jobj, vec);
     HSD_JObjAddTranslationX(jobj, 0.25f);
-    color =
-        gm_80160968(gm_80160854(Player_GetPlayerId(idx), Player_GetTeam(idx),
-                                gm_8016B168(), Player_GetPlayerSlotType(idx)));
+    color = gm_80160968(gm_80160854(Player_GetControllerIndex(idx),
+                                    Player_GetTeam(idx), gm_8016B168(),
+                                    Player_GetPlayerSlotType(idx)));
     mobj = HSD_JObjGetChild(jobj)->u.dobj->mobj;
     mobj->mat->diffuse.r = color.r;
     mobj->mat->diffuse.g = color.g;
