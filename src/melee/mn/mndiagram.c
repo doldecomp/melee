@@ -194,7 +194,7 @@ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 total_play_time;
-    s32 i;
+    int i;
     f32 zero = 0.0f;
 
     if (is_name_mode != 0) {
@@ -259,7 +259,7 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 int mnDiagram_GetNameTotalKOs(u8 field_index)
 {
     int total = 0;
-    s32 i;
+    int i;
     for (i = 0; i < 0x78; i++) {
         if (GetNameText(i & 0xFF)) {
             total += GetPersistentNameData(field_index)->vs_kos[(u8) i];
@@ -394,8 +394,8 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
 {
     int i;
     int digit_count;
-    s32 minutes;
-    s32 secs;
+    int minutes;
+    int secs;
 
     minutes = seconds / 60;
     secs = seconds % 60;
@@ -426,7 +426,7 @@ void mnDiagram_IntToStr(char* buf, u32 val)
 /// @return Previous name index with a valid name, or original if none found.
 u8 mnDiagram_GetPrevNameIndex(s32 idx)
 {
-    s32 original, i;
+    int original, i;
 
     original = i = idx;
 
@@ -441,7 +441,7 @@ u8 mnDiagram_GetPrevNameIndex(s32 idx)
 
 u8 mnDiagram_GetNextNameIndex(s32 idx)
 {
-    s32 original, i;
+    int original, i;
 
     original = i = idx;
 
@@ -461,7 +461,7 @@ u8 mnDiagram_GetNextNameIndex(s32 idx)
 u8 mnDiagram_GetPrevFighterIndex(s32 idx)
 {
     u8* ptr;
-    s32 original;
+    int original;
 
     ptr = mnDiagram_FighterDisplayOrder + idx;
     original = idx;
@@ -480,7 +480,7 @@ u8 mnDiagram_GetPrevFighterIndex(s32 idx)
 u8 mnDiagram_GetNextFighterIndex(s32 idx)
 {
     u8* ptr;
-    s32 original;
+    int original;
 
     ptr = mnDiagram_FighterDisplayOrder + idx;
     original = idx;
@@ -624,7 +624,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 {
     int i;
     int min_fighter;
-    s32 count;
+    int count;
 
     if (mnDiagram_AllPlayTimesZero(name_idx)) {
         return SELKIND_COUNT;
@@ -794,7 +794,7 @@ void mnDiagram_SortNamesByKOs(void)
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
-    s32 count;
+    int count;
     i = 0;
     count = 0;
     for (; i < SELKIND_COUNT; i++) {
@@ -946,7 +946,7 @@ static inline u8 mnDiagram_FindNextFighter(u8* sorted,
 
 static inline s32 mnDiagram_FindPrevName(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         if (found < 0) {
@@ -958,7 +958,7 @@ static inline s32 mnDiagram_FindPrevName(s32 cur)
 
 static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         if (found < 0) {
@@ -971,7 +971,7 @@ static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
 static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
 {
     u8* p = sorted + cur;
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         p--;
@@ -984,7 +984,7 @@ static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
 
 static inline int mnDiagram_FindNextName(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found++;
         if (found >= 0x78) {
@@ -1996,11 +1996,11 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* ptr2;
     u8* ptr;
-    s32 count;
-    s32 i;
+    int count;
+    int i;
     u8* sorted = mnDiagram_FighterDisplayOrder;
-    s32 result;
-    s32 name_count;
+    int result;
+    int name_count;
     HSD_JObj* jobj2;
     HSD_JObj* jobj3;
     PAD_STACK(8);
@@ -2190,7 +2190,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             mnDiagram_CreateCursor();
             if (data->is_name_mode != 0) {
                 u16 indices = data->name_cursor_pos;
-                s32 row_idx;
+                int row_idx;
                 u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
@@ -2205,7 +2205,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
                 }
             } else {
                 u16 indices = data->fighter_cursor_pos;
-                s32 row_idx;
+                int row_idx;
                 u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
@@ -2254,9 +2254,9 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
     HSD_JObj* jobj2;
     Diagram* data;
     StaticModelDesc* model;
-    s32 digit_count;
-    s32 digit;
-    s32 i;
+    int digit_count;
+    int digit;
+    int i;
     f32 x_spacing;
     f32 y_spacing;
     f32 base;
@@ -2440,7 +2440,7 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
     u8* sorted = mnDiagram_FighterDisplayOrder;
     HSD_Text* row_text;
     u8 name_byte;
-    s32 name_id;
+    int name_id;
     Vec2 pos;
 
     // Column headers
@@ -2712,10 +2712,10 @@ void mnDiagram_CreateCursor(void)
 void mnDiagram_CreateScreen(u8 arg0)
 {
     int col_idx;
-    s32 row_idx;
+    int row_idx;
     Diagram* d;
     int col_idx2;
-    s32 row_idx2;
+    int row_idx2;
     Diagram* d2;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
