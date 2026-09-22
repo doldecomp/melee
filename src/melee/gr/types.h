@@ -1493,55 +1493,29 @@ struct grBigBlueRoute_GroundVars2 {
     /* +14 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
 };
 
+/// Ground vars of the object at grCs_StageCallbacks slot 2.
 struct grCastle_GroundVars {
-    /*  +0 gp+C4 */ u32 xC4;
-    /*  +0 gp+C8 */ s16 xC8;
-    u8 pad[0xE0 - 0xCC];
-    /*  +0 gp+E0 */ HSD_Spline** xE0;
-};
-
-struct grCastle_GroundVars3 {
-    /* +00 gp+C4 */ u8 pad_0[0x1C];
-    /* +1C gp+E0 */ DynamicsDesc x1C[12];
-};
-
-struct grCastle_GroundVars4 {
-    /* +00 gp+C4 */ u8 pad_0[0x12];
-    /* +12 gp+D6 */ s16 xD6;
-    /* +14 gp+D8 */ s16 xD8;
-    /* +16 gp+DA */ s16 xDA;
-    /* +18 gp+DC */ s16 xDC;
-};
-
-struct grCastle_GroundVars2 {
-    /*  +0 gp+C4 */ HSD_GObj* xC4;
-    /*  +0 gp+C8 */ HSD_GObj* xC8;
-    /*  +0 gp+CC */ HSD_GObj* xCC;
-    /*  +0 gp+D0 */ s16 xD0;
-    /*  +0 gp+D2 */ s16 xD2;
-};
-
-struct grCastle_GroundVars5 {
-    /* +00 gp+C4 */ s16 xC4;
-    /* +02 gp+C6 */ s16 xC6;
-    /* +04 gp+C8 */ u8 pad_C8[4];
-    /* +08 gp+CC */ HSD_GObj* xCC;
-};
-
-struct grCastle_GroundVars6 {
-    /* +00 gp+C4 */ s16 xC4;
-    /* +02 gp+C6 */ s16 xC6;
+    /* +00 gp+C4 */ u32 xC4;
     /* +04 gp+C8 */ s16 xC8;
-    /* +06 gp+CA */ u8 pad_CA[2];
-    /* +08 gp+CC */ s32 xCC;
 };
 
+/// Ground vars of the object at grCs_StageCallbacks slot 1.
+struct grCastle_GroundVars2 {
+    /* +00 gp+C4 */ Item_GObj* xC4;
+    /* +04 gp+C8 */ CmSubject* xC8;
+};
+
+/// Ground vars of the objects at grCs_StageCallbacks slots 18..20.
 struct grCastle_GroundVars7 {
     /* +00 gp+C4 */ s16 xC4;
-    /* +02 gp+C6 */ u8 pad_xC6[0xA];
+    /* +02 gp+C6 */ u8 pad_xC6[2];
+    /* +04 gp+C8 */ s16 xC8;
+    /* +06 gp+CA */ s16 xCA;
+    /* +08 gp+CC */ s16 xCC;
+    /* +0A gp+CE */ u8 pad_xCE[2];
     /* +0C gp+D0 */ HSD_GObj* xD0;
-    /* +10 gp+D4 */ u32 xD4;
-    /* +14 gp+D8 */ s32 xD8;
+    /* +10 gp+D4 */ HSD_JObj* xD4;
+    /* +14 gp+D8 */ Item_GObj* xD8;
 };
 
 struct grCastle_Platform {
@@ -1556,30 +1530,31 @@ struct grCastle_GroundVars8 {
     /* +00 gp+C4 */ struct grCastle_Platform plat[2];
 };
 
+/// Ground vars of the object at grCs_StageCallbacks slot 3, which tracks the
+/// three slot-18..20 gobjs and the flag dynamics.
 struct grCastle_GroundVars9 {
-    /* +00   gp+C4 */ u32 xC4;
-    /* +04   gp+C8 */ u32 xC8;
-    /* +08   gp+CC */ u32 xCC;
-    /* +0C   gp+D0 */ u8 pad_xD0[4];
+    /* +00   gp+C4 */ HSD_GObj* xC4[3];
+    /* +0C   gp+D0 */ s16 xD0;
+    /* +0E   gp+D2 */ s16 xD2;
     /* +10   gp+D4 */ s16 xD4;
     /* +12   gp+D6 */ s16 xD6;
-    /* +14   gp+D8 */ s16 xD8;
-    /* +16   gp+DA */ s16 xDA;
-    /* +18   gp+DC */ s16 xDC;
+    /* +14   gp+D8 */ s16 xD8[3];
     /* +1A:0 gp+DE:0 */ u8 xDE_b0 : 1;
     /* +1B   gp+DF */ u8 pad_xDF[1];
     /* +1C   gp+E0 */ DynamicsDesc dynamics[12];
 };
 
+/// Ground vars of the objects at grCs_StageCallbacks slots 5, 7 and 17.
 struct grCastle_GroundVars10 {
     /* +00 gp+C4 */ s16 xC4;
     /* +02 gp+C6 */ u8 pad_C6[2];
     /* +04 gp+C8 */ s16 xC8;
-    /* +06 gp+CA */ u8 pad_CA[6];
+    /* +06 gp+CA */ u8 pad_CA[2];
+    /* +08 gp+CC */ s32 xCC;
     /* +0C gp+D0 */ HSD_JObj* jobjs[5];
     /* +20 gp+E4 */ HSD_JObj* effect_a[5];
     /* +34 gp+F8 */ HSD_JObj* effect_b[5];
-    /* +48 gp+10C */ u32 x10C[5];
+    /* +48 gp+10C */ Item_GObj* x10C[5];
     /* +5C gp+120 */ s32 x120[5];
     /* +70 gp+134 */ u8 state[5];
     /* +75 gp+139 */ u8 idx[5];
@@ -1587,6 +1562,7 @@ struct grCastle_GroundVars10 {
     /* +7C gp+140 */ f32 baseY[5];
 };
 
+/// Ground vars of the objects at grCs_StageCallbacks slots 8..16.
 struct grCastle_GroundVars11 {
     /* +00 gp+C4 */ struct {
         u8 b0 : 1;
@@ -1598,19 +1574,14 @@ struct grCastle_GroundVars11 {
         u8 b6 : 1;
         u8 b7 : 1;
     } xC4;
-    /* +01 gp+C5 */ u8 pad_01[3];
+    /* +01 gp+C5 */ u8 pad_01[1];
+    /* +02 gp+C6 */ s16 xC6;
     /* +04 gp+C8 */ s16 xC8;
     /* +06 gp+CA */ s16 xCA;
-    /* +08 gp+CC */ u32 xCC;
-    /* +0C gp+D0 */ u32 xD0;
-    /* +10 gp+D4 */ u32 xD4;
-    /* +14 gp+D8 */ u32 xD8;
-};
-
-struct grCastle_GroundVars12 {
-    /* +00 gp+C4 */ u32 xC4[3];
-    /* +0C gp+D0 */ s16 xD0;
-    /* +0E gp+D2 */ s16 xD2;
+    /* +08 gp+CC */ HSD_GObj* xCC;
+    /* +0C gp+D0 */ Item_GObj* xD0;
+    /* +10 gp+D4 */ HSD_GObj* xD4;
+    /* +14 gp+D8 */ CmSubject* xD8;
 };
 
 struct grPura_GroundVars {
@@ -1856,16 +1827,11 @@ struct Ground {
         struct grBigBlueRoute_GroundVars2 bigblueroute2;
         struct grCastle_GroundVars castle;
         struct grCastle_GroundVars2 castle2;
-        struct grCastle_GroundVars3 castle3;
-        struct grCastle_GroundVars4 castle4;
-        struct grCastle_GroundVars5 castle5;
-        struct grCastle_GroundVars6 castle6;
         struct grCastle_GroundVars7 castle7;
         struct grCastle_GroundVars8 castle8;
         struct grCastle_GroundVars9 castle9;
         struct grCastle_GroundVars10 castle10;
         struct grCastle_GroundVars11 castle11;
-        struct grCastle_GroundVars12 castle12;
         struct grCorneria_GroundVars corneria;
         struct grCorneria_GroundVars2 corneria2;
         struct grGreatBay_GroundVars greatbay;

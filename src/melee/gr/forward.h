@@ -19,7 +19,6 @@ typedef struct StageData StageData;
 typedef struct StageInfo StageInfo;
 typedef struct StageParam StageParam;
 typedef struct UnkArchiveStruct UnkArchiveStruct;
-typedef struct unkCastle unkCastle;
 typedef struct UnkStageDat UnkStageDat;
 typedef struct UnkStageDatInternal UnkStageDatInternal;
 
@@ -192,8 +191,8 @@ typedef enum Gr_Homerun_Parts {
     /* 0x40 */ Gr_Homerun_Parts_Max = 64,
 } Gr_Homerun_Parts;
 
-typedef void (*unkCastleCallback)(void*, struct unkCastle*);
-typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
+typedef void (*unkCastleCallback)(HSD_GObj*, Ground*);
+typedef void (*unkCastleCallback2)(HSD_GObj*, Ground*, Ground_GObj*);
 typedef int (*GrIceMtSegmentLookup)(Ground_GObj*);
 typedef DynamicsDesc* (*GrTouchLineCallback)(int index);
 typedef bool (*GrCheckShadowRenderCallback)(Vec3* fighter_pos, int,
