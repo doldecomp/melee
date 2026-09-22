@@ -497,7 +497,7 @@ void fn_8016B7F8(void)
     VsSceneController* tmp = gmVs_GetSceneController();
     PAD_STACK(4);
 
-    ftLib_800868A4();
+    ftLib_EnableAllInput();
     Stage_802252E4(tmp->start.stkind, NULL);
     grStadium_801D4040();
     if (!tmp->start.x1_3) {
@@ -2154,7 +2154,7 @@ void gm_Scene_Training_OnEnter(void* user_data)
     grStadium_801D410C();
     un_802FD404();
     tmp2 = &controller;
-    ftLib_800868A4();
+    ftLib_EnableAllInput();
     Stage_802252E4(tmp2->start.stkind, NULL);
     grStadium_801D4040();
     if (!controller.start.x1_3) {

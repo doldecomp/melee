@@ -273,7 +273,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 
                 fp->u.mh.x224C = tmp;
                 fp->u.mh.x2250 = tmp2;
-                if (fp->x221D_b4) {
+                if (fp->input_disabled) {
                     tmp2 = ftMh_MS_Wait1_0;
                 }
                 switch (tmp2) {

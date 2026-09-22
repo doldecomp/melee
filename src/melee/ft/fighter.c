@@ -761,8 +761,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x221F_b0 = 0;
     fp->x21EC = 0;
 
-    fp->x221D_b3 = 0;
-    fp->x221D_b4 = 0;
+    fp->has_prev_input = 0;
+    fp->input_disabled = 0;
 
     fp->is_sleeping = false;
 
@@ -930,7 +930,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
             HSD_ASSERTREPORT(1065, 0, "ellegal flag fp->no_normal_motion\n");
         }
     }
-    ftLib_800867E8(gobj);
+    ftLib_DisableInput(gobj);
     return gobj;
 }
 
@@ -1662,7 +1662,7 @@ void Fighter_procAnim(Fighter_GObj* gobj)
         }
 
         if (!fp->x2219_b5) {
-            if (fp->x209A > 1 && !fp->x221D_b4) {
+            if (fp->x209A > 1 && !fp->input_disabled) {
                 fp->x209A--;
             }
             if (fp->x2223_b0) {
@@ -1786,14 +1786,14 @@ void Fighter_procInput(Fighter_GObj* gobj)
 
     if (!fp->is_sleeping) {
         if (!fp->stamina_dead) {
-            if (!fp->x221D_b3) {
+            if (!fp->has_prev_input) {
                 SET_STICKS(fp->input.lstick[1].x, fp->input.lstick[1].y,
                            fp->input.lstick[2].x, fp->input.lstick[2].y);
                 SET_STICKS(fp->input.cstick[1].x, fp->input.cstick[1].y,
                            fp->input.cstick[2].x, fp->input.cstick[2].y);
                 fp->input.triggers[1] = fp->input.triggers[2];
                 fp->input.held_buttons[1] = fp->input.held_buttons[2];
-                fp->x221D_b3 = 1;
+                fp->has_prev_input = 1;
             } else {
                 SET_STICKS(fp->input.lstick[1].x, fp->input.lstick[1].y,
                            fp->input.lstick[0].x, fp->input.lstick[0].y);
@@ -2120,14 +2120,14 @@ void Fighter_procInput(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x221D_b4 || fp->stamina_dead || gm_GetDbPauseFlag(2)) {
+        if (fp->input_disabled || fp->stamina_dead || gm_GetDbPauseFlag(2)) {
             fp->input.lstick[2].x = fp->input.lstick[0].x;
             fp->input.lstick[2].y = fp->input.lstick[0].y;
             fp->input.cstick[2].x = fp->input.cstick[0].x;
             fp->input.cstick[2].y = fp->input.cstick[0].y;
             fp->input.triggers[2] = fp->input.triggers[0];
             fp->input.held_buttons[2] = fp->input.held_buttons[0];
-            fp->x221D_b3 = 0;
+            fp->has_prev_input = 0;
 
             Fighter_UnkInitLoad_80068914_Inner1(gobj);
         }

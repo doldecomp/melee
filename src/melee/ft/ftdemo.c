@@ -123,7 +123,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
     if (on_create_fighter[alloc_info->unk8] != NULL) {
         on_create_fighter[alloc_info->unk8](gobj);
     }
-    ftLib_800867E8(gobj);
+    ftLib_DisableInput(gobj);
     return gobj;
 }
 

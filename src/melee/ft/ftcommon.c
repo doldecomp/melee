@@ -1177,8 +1177,8 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
-    if (Player_8003544C(fp->player_id, fp->is_sub_fighter) && !fp->is_sleeping &&
-        !fp->stamina_dead)
+    if (Player_8003544C(fp->player_id, fp->is_sub_fighter) &&
+        !fp->is_sleeping && !fp->stamina_dead)
     {
         lb_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
     }

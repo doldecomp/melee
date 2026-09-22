@@ -1763,8 +1763,8 @@ struct Fighter {
     /* fp+221C:6 */ u16 x221C_b6 : 1;
     /* fp+221C:7 */ u16 x221C_u16_y : 3;
     /* fp+221D:2 */ u16 x221D_b2 : 1;
-    /* fp+221D:3 */ u16 x221D_b3 : 1;
-    /* fp+221D:4 */ u16 x221D_b4 : 1;
+    /* fp+221D:3 */ u16 has_prev_input : 1;
+    /* fp+221D:4 */ u16 input_disabled : 1;
     /* fp+221D:5 */ u16 x221D_b5 : 1;
     /* fp+221D:6 */ u16 x221D_b6 : 1;
     /* fp+221D:7 */ u16 x221D_b7 : 1;

@@ -111,7 +111,8 @@ void Player_80031790(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_800867E8(player->player_entity[player->transformed[i]]);
+                ftLib_DisableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -131,7 +132,8 @@ void Player_80031848(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_EnableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -143,7 +145,8 @@ static void func_8008688C_wrapper(StaticPlayer* player)
         s32 i;
         for (i = 0; i < 2; i++) {
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_EnableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }

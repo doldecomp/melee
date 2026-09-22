@@ -383,20 +383,20 @@ HSD_GObj* ftLib_800867CC(HSD_GObj* gobj)
     return fp->x1984_heldItemSpec;
 }
 
-bool ftLib_800867D8(HSD_GObj* gobj)
+bool ftLib_IsInputDisabled(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221D_b4;
+    return fp->input_disabled;
 }
 
-void ftLib_800867E8(HSD_GObj* gobj)
+void ftLib_DisableInput(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ResetInputData_80068854(gobj);
-    fp->x221D_b4 = true;
+    fp->input_disabled = true;
 }
 
-void ftLib_80086824(void)
+void ftLib_DisableAllInput(void)
 {
     u8 _[16];
 
@@ -404,23 +404,23 @@ void ftLib_80086824(void)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_800867E8(cur);
+        ftLib_DisableInput(cur);
     }
 }
 
-void ftLib_8008688C(HSD_GObj* gobj)
+void ftLib_EnableInput(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x221D_b4 = false;
+    fp->input_disabled = false;
 }
 
-void ftLib_800868A4(void)
+void ftLib_EnableAllInput(void)
 {
     HSD_GObj* cur;
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_8008688C(cur);
+        ftLib_EnableInput(cur);
     }
 }
 
