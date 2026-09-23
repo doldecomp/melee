@@ -34,7 +34,7 @@
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2224_b2) {
+    if (fp->stamina_dead) {
         ftCo_DownSpot_Enter(gobj);
     } else {
         ftCo_8008A7A8(gobj, fp->ft_data->x24);

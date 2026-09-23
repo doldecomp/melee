@@ -419,7 +419,7 @@ void ftPe_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 3, -1);
     ftParts_80074A4C(gobj, 4, 0);
 
-    switch (fp->x619_costume_id) {
+    switch (fp->costume_id) {
     case 1: {
         ftParts_80074A4C(gobj, 1, -1);
         ftParts_80074A4C(gobj, 5, 0);

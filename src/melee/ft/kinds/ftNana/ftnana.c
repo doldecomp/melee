@@ -390,7 +390,7 @@ bool ftNn_Init_8012300C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int ret;
-    if (!fp->x221F_b3 && !fp->x2219_b5) {
+    if (!fp->is_sleeping && !fp->x2219_b5) {
         switch (fp->x2070.x2071_b0_3) {
         case 1:
         case 3:
@@ -422,7 +422,7 @@ bool ftNn_Init_8012300C(Fighter_GObj* gobj)
 bool ftNn_Init_8012309C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_b3) {
+    if (!fp->is_sleeping) {
         if (fp->motion_id >= 362 && fp->motion_id <= 366) {
             return true;
         }

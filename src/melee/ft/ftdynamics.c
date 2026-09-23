@@ -309,9 +309,9 @@ void ftCo_8009DC54(Fighter* fp)
     ssize_t i;
     ssize_t idx;
     ftData* data = fp->ft_data;
-    if (fp->x619_costume_id == 2) {
+    if (fp->costume_id == 2) {
         idx = 0;
-    } else if (fp->x619_costume_id == 3) {
+    } else if (fp->costume_id == 3) {
         idx = 1;
     } else {
         return;

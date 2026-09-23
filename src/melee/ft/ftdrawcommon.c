@@ -380,7 +380,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!fp->x221F_b3 && ftLib_80086A8C(gobj)) {
+    if (!fp->is_sleeping && ftLib_80086A8C(gobj)) {
         switch (Camera_80031060()) {
         case 1:
             if (fp->x2220_b7) {

@@ -310,7 +310,7 @@ void ftCo_DamageIce_Anim(Fighter_GObj* gobj)
         jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
         HSD_JObjAddRotationX(jobj, rot_x);
     }
-    if (!fp->x2224_b2) {
+    if (!fp->stamina_dead) {
         fp->grab_timer -= p_ftCommonData->x794_damageice_unk;
     }
     ftCommon_GrabMash(fp, p_ftCommonData->x798_damageice_unk);

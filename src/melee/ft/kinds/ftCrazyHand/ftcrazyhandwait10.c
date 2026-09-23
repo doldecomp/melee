@@ -165,7 +165,7 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCh_Init_803D4878_t* data = &ftCh_Init_803D4878;
-    s32 slot_type = Player_GetPlayerSlotType(fp->player_id);
+    s32 slot_type = Player_GetPlayerSlotType(fp->player_idx);
     PAD_STACK(4);
 
     if (fp->cmd_vars[1] != 0) {
@@ -214,7 +214,7 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
 
                 fp->u.ch.x224C = tmp;
                 fp->u.ch.x2250 = tmp2;
-                if (fp->x221D_b4) {
+                if (fp->input_disabled) {
                     tmp2 = ftMh_MS_Wait1_0;
                 }
                 switch (tmp2) {
@@ -328,7 +328,7 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
 void ftCh_Wait1_0_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    if (Player_GetPlayerSlotType(ft->player_id) == Gm_PKind_Human) {
+    if (Player_GetPlayerSlotType(ft->player_idx) == Gm_PKind_Human) {
         ftBossLib_8015BD20(gobj);
     }
 }
