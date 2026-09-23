@@ -176,92 +176,96 @@ void ftCo_800D35FC(Fighter* fp)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void setDeadFlags(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x221D_b6) {
+        ft_800880D8(fp);
+        fp->x2004 = 0;
+    }
+    fp->x2219_b1 = true;
+    fp->x221E_b1 = true;
+    fp->x221E_b2 = true;
+}
+
+static inline void setDeadInvisible(Fighter* fp)
+{
+    fp->invisible = true;
+    fp->x221F_b1 = true;
+}
+
+static inline void playDeadSfx(Fighter* fp, FtSFX* sfx)
+{
+    ftCo_800D38B8(fp, sfx->x4);
+    ftCo_800D38B8(fp, sfx->x8);
+}
+
+static inline void processDeath(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtSFX* sfx = fp->ft_data->x4C_sfx;
+    setDeadInvisible(fp);
+    Camera_RequestQuake(QuakeKind_Large, &fp->cur_pos);
+    ftCo_800D35FC(fp);
+    ftCo_800D34E0(gobj);
+    ft_80088C5C(gobj);
+    playDeadSfx(fp, sfx);
+}
+
+static inline void enterDead(Fighter_GObj* gobj, FtMotionId msid)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_800D331C(gobj);
+    fp->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    setDeadFlags(gobj);
+    pl_8003DF44(fp->player_idx, fp->is_sub_fighter);
+    processDeath(gobj);
+}
+
+static inline void clampDeadPos(f32* v, f32 min, f32 max)
+{
+    if (*v > max) {
+        *v = max;
+    }
+    if (*v < min) {
+        *v = min;
+    }
+}
+
+static inline void spawnDeadEffect(Fighter_GObj* gobj, Vec3* pos, f32 angle)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    int offset = Player_GetUnk45(fp->player_idx) << 2;
+    u8* color1 = Fighter_804D650C + offset;
+    u8* color2 = Fighter_804D6508 + offset;
+    int rgb1 = (color1[0] << 16) | (color1[1] << 8) | color1[2];
+    int rgb2 = (color2[0] << 16) | (color2[1] << 8) | color2[2];
+    int kind;
+    if (gm_801693BC(fp->player_idx)) {
+        kind = 0x42C;
+    } else {
+        kind = 0x42B;
+    }
+    efSync_Spawn(kind, gobj, pos, &angle, &p_ftCommonData->x4F4, rgb1, rgb2);
+}
 
 void ftCo_800D3680(Fighter_GObj* gobj)
 {
-    Fighter_GObj* new_var;
-    Fighter* temp_r28;
-    Fighter* temp_r28_3;
-    Fighter* temp_r31;
-    FtSFX* temp_r28_2;
-    f32 temp_f1;
-    f32 temp_f31;
-    int color1;
-    int color2;
-    Vec3 sp2C;
-    s32 sp28;
-    Fighter* temp_r27_2;
-    Fighter* temp_r27;
-    f32 sp24;
-    u8 _[24];
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    f32 angle = -M_PI_2_F;
 
-    temp_r31 = (temp_r27 = gobj->user_data);
-    ftCo_800D331C(gobj);
-    temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
-    Fighter_ChangeMotionState(gobj, 1, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    temp_r28 = (new_var = gobj)->user_data;
-    if (temp_r28->x221D_b6) {
-        ft_800880D8(temp_r28);
-        temp_r28->x2004 = 0;
-    }
-    temp_r28->x2219_b1 = 1;
-    temp_r28->x221E_b1 = 1;
-    temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
-
-    temp_r27_2 = gobj->user_data;
-    temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
-    temp_r27_2->invisible = true;
-    temp_r27_2->x221F_b1 = 1;
-    Camera_RequestQuake(QuakeKind_Large, &temp_r27_2->cur_pos);
-    ftCo_800D35FC(temp_r27_2);
-    ftCo_800D34E0(gobj);
-    ft_80088C5C(gobj);
-    ftCo_800D38B8(temp_r27_2, (0, temp_r28_2->x4));
-    ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
-
-    ft_PlaySFX(temp_r31, 0x88, 0x7F, 0x40);
-    ft_8008805C(temp_r31, 0x88);
-    sp2C = temp_r31->cur_pos;
-    temp_f31 = Stage_GetBlastZoneTopOffset();
-    temp_f1 = Stage_GetBlastZoneBottomOffset();
-    if (sp2C.y > temp_f31) {
-        sp2C.y = temp_f31;
-    }
-    if (sp2C.y < temp_f1) {
-        sp2C.y = temp_f1;
-    }
-    sp24 = -1.5707964f;
-
-    {
-        s32 var_r3;
-        temp_r28_3 = gobj->user_data;
-        {
-            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
-            u8* base1 = Fighter_804D650C + offset;
-            u8* base2 = Fighter_804D6508 + offset;
-            color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
-            color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
-        }
-        if (gm_801693BC(temp_r28_3->player_idx)) {
-            var_r3 = 0x42C;
-        } else {
-            var_r3 = 0x42B;
-        }
-        efSync_Spawn(var_r3, gobj, &sp2C, &sp24, &p_ftCommonData->x4F4, color1,
-                     color2);
-    }
-    sp2C.x = Stage_GetBlastZoneLeftOffset();
-    ftCo_800D4E50(temp_r31, &sp2C, 1, 0.0F);
+    enterDead(gobj, ftCo_MS_DeadLeft);
+    ft_PlaySFX(fp, 0x88, 0x7F, 0x40);
+    ft_8008805C(fp, 0x88);
+    pos = fp->cur_pos;
+    clampDeadPos(&pos.y, Stage_GetBlastZoneBottomOffset(),
+                 Stage_GetBlastZoneTopOffset());
+    spawnDeadEffect(gobj, &pos, angle);
+    pos.x = Stage_GetBlastZoneLeftOffset();
+    ftCo_800D4E50(fp, &pos, 1, 0.0F);
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_800D38B8(Fighter* fp, int arg1)
 {
@@ -282,92 +286,22 @@ void ftCo_DeadLeft_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadLeft_Cam(Fighter_GObj* gobj) {}
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 void ftCo_800D3950(Fighter_GObj* gobj)
 {
-    Fighter_GObj* new_var;
-    Fighter* temp_r28;
-    Fighter* temp_r28_3;
-    Fighter* temp_r31;
-    FtSFX* temp_r28_2;
-    f32 temp_f1;
-    f32 temp_f31;
-    int color1;
-    int color2;
-    Vec3 sp2C;
-    s32 sp28;
-    Fighter* temp_r27_2;
-    Fighter* temp_r27;
-    f32 sp24;
-    u8 _[24];
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    f32 angle = M_PI_2_F;
 
-    temp_r31 = (temp_r27 = gobj->user_data);
-    ftCo_800D331C(gobj);
-    temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
-    Fighter_ChangeMotionState(gobj, 2, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    temp_r28 = (new_var = gobj)->user_data;
-    if (temp_r28->x221D_b6) {
-        ft_800880D8(temp_r28);
-        temp_r28->x2004 = 0;
-    }
-    temp_r28->x2219_b1 = 1;
-    temp_r28->x221E_b1 = 1;
-    temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
-
-    temp_r27_2 = gobj->user_data;
-    temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
-    temp_r27_2->invisible = true;
-    temp_r27_2->x221F_b1 = 1;
-    Camera_RequestQuake(QuakeKind_Large, &temp_r27_2->cur_pos);
-    ftCo_800D35FC(temp_r27_2);
-    ftCo_800D34E0(gobj);
-    ft_80088C5C(gobj);
-    ftCo_800D38B8(temp_r27_2, (0, temp_r28_2->x4));
-    ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
-
-    ft_PlaySFX(temp_r31, 0x89, 0x7F, 0x40);
-    ft_8008805C(temp_r31, 0x89);
-    sp2C = temp_r31->cur_pos;
-    temp_f31 = Stage_GetBlastZoneTopOffset();
-    temp_f1 = Stage_GetBlastZoneBottomOffset();
-    if (sp2C.y > temp_f31) {
-        sp2C.y = temp_f31;
-    }
-    if (sp2C.y < temp_f1) {
-        sp2C.y = temp_f1;
-    }
-    sp24 = 1.5707964f;
-
-    {
-        s32 var_r3;
-        temp_r28_3 = gobj->user_data;
-        {
-            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
-            u8* base1 = Fighter_804D650C + offset;
-            u8* base2 = Fighter_804D6508 + offset;
-            color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
-            color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
-        }
-        if (gm_801693BC(temp_r28_3->player_idx)) {
-            var_r3 = 0x42C;
-        } else {
-            var_r3 = 0x42B;
-        }
-        efSync_Spawn(var_r3, gobj, &sp2C, &sp24, &p_ftCommonData->x4F4, color1,
-                     color2);
-    }
-    sp2C.x = Stage_GetBlastZoneRightOffset();
-    ftCo_800D4E50(temp_r31, &sp2C, 1, 3.1415927f);
+    enterDead(gobj, ftCo_MS_DeadRight);
+    ft_PlaySFX(fp, 0x89, 0x7F, 0x40);
+    ft_8008805C(fp, 0x89);
+    pos = fp->cur_pos;
+    clampDeadPos(&pos.y, Stage_GetBlastZoneBottomOffset(),
+                 Stage_GetBlastZoneTopOffset());
+    spawnDeadEffect(gobj, &pos, angle);
+    pos.x = Stage_GetBlastZoneRightOffset();
+    ftCo_800D4E50(fp, &pos, 1, M_PI_F);
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_DeadRight_Anim(Fighter_GObj* gobj)
 {
@@ -380,93 +314,24 @@ void ftCo_DeadRight_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadRight_Cam(Fighter_GObj* gobj) {}
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 void ftCo_800D3BC8(Fighter_GObj* gobj)
 {
-    Fighter_GObj* new_var;
-    Fighter* temp_r28;
-    Fighter* temp_r28_3;
-    Fighter* temp_r31;
-    FtSFX* temp_r28_2;
-    f32 temp_f1;
-    f32 temp_f31;
-    int color1;
-    int color2;
-    Vec3 sp30;
-    s32 sp2C;
-    s32 sp28;
-    Fighter* temp_r27_2;
-    Fighter* temp_r27;
-    f32 sp24;
-    u8 _[24];
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    f32 angle = 0.0F;
 
-    temp_r31 = (temp_r27 = gobj->user_data);
-    ftCo_800D331C(gobj);
-    temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
-    Fighter_ChangeMotionState(gobj, 0, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    temp_r28 = (new_var = gobj)->user_data;
-    if (temp_r28->x221D_b6) {
-        ft_800880D8(temp_r28);
-        temp_r28->x2004 = 0;
-    }
-    temp_r28->x2219_b1 = 1;
-    temp_r28->x221E_b1 = 1;
-    temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
+    PAD_STACK(4);
 
-    temp_r27_2 = gobj->user_data;
-    temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
-    temp_r27_2->invisible = true;
-    temp_r27_2->x221F_b1 = 1;
-    Camera_RequestQuake(QuakeKind_Large, &temp_r27_2->cur_pos);
-    ftCo_800D35FC(temp_r27_2);
-    ftCo_800D34E0(gobj);
-    ft_80088C5C(gobj);
-    ftCo_800D38B8(temp_r27_2, (0, temp_r28_2->x4));
-    ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
-
-    ft_PlaySFX(temp_r31, 0x61, 0x7F, 0x40);
-    ft_8008805C(temp_r31, 0x61);
-    sp30 = temp_r31->cur_pos;
-    temp_f31 = Stage_GetBlastZoneRightOffset();
-    temp_f1 = Stage_GetBlastZoneLeftOffset();
-    if (sp30.x > temp_f31) {
-        sp30.x = temp_f31;
-    }
-    if (sp30.x < temp_f1) {
-        sp30.x = temp_f1;
-    }
-    sp24 = 0.0f;
-
-    {
-        s32 var_r3;
-        temp_r28_3 = gobj->user_data;
-        {
-            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
-            u8* base1 = Fighter_804D650C + offset;
-            u8* base2 = Fighter_804D6508 + offset;
-            color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
-            color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
-        }
-        if (gm_801693BC(temp_r28_3->player_idx)) {
-            var_r3 = 0x42C;
-        } else {
-            var_r3 = 0x42B;
-        }
-        efSync_Spawn(var_r3, gobj, &sp30, &sp24, &p_ftCommonData->x4F4, color1,
-                     color2);
-    }
-    sp30.y = Stage_GetBlastZoneBottomOffset();
-    ftCo_800D4E50(temp_r31, &sp30, 1, 1.5707964f);
+    enterDead(gobj, ftCo_MS_DeadDown);
+    ft_PlaySFX(fp, 0x61, 0x7F, 0x40);
+    ft_8008805C(fp, 0x61);
+    pos = fp->cur_pos;
+    clampDeadPos(&pos.x, Stage_GetBlastZoneLeftOffset(),
+                 Stage_GetBlastZoneRightOffset());
+    spawnDeadEffect(gobj, &pos, angle);
+    pos.y = Stage_GetBlastZoneBottomOffset();
+    ftCo_800D4E50(fp, &pos, 1, M_PI_2_F);
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_DeadDown_Anim(Fighter_GObj* gobj)
 {
@@ -479,93 +344,24 @@ void ftCo_DeadDown_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadDown_Cam(Fighter_GObj* gobj) {}
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 void ftCo_800D3E40(Fighter_GObj* gobj)
 {
-    Fighter_GObj* new_var;
-    Fighter* temp_r28;
-    Fighter* temp_r28_3;
-    Fighter* temp_r31;
-    FtSFX* temp_r28_2;
-    f32 temp_f1;
-    f32 temp_f31;
-    int color1;
-    int color2;
-    Vec3 sp30;
-    s32 sp2C;
-    s32 sp28;
-    Fighter* temp_r27_2;
-    Fighter* temp_r27;
-    f32 sp24;
-    u8 _[24];
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    f32 angle = M_PI_F;
 
-    temp_r31 = (temp_r27 = gobj->user_data);
-    ftCo_800D331C(gobj);
-    temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
-    Fighter_ChangeMotionState(gobj, 3, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    temp_r28 = (new_var = gobj)->user_data;
-    if (temp_r28->x221D_b6) {
-        ft_800880D8(temp_r28);
-        temp_r28->x2004 = 0;
-    }
-    temp_r28->x2219_b1 = 1;
-    temp_r28->x221E_b1 = 1;
-    temp_r28->x221E_b2 = 1;
-    pl_8003DF44(temp_r27->player_idx, temp_r27->is_sub_fighter);
+    PAD_STACK(4);
 
-    temp_r27_2 = gobj->user_data;
-    temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
-    temp_r27_2->invisible = true;
-    temp_r27_2->x221F_b1 = 1;
-    Camera_RequestQuake(QuakeKind_Large, &temp_r27_2->cur_pos);
-    ftCo_800D35FC(temp_r27_2);
-    ftCo_800D34E0(gobj);
-    ft_80088C5C(gobj);
-    ftCo_800D38B8(temp_r27_2, (0, temp_r28_2->x4));
-    ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
-
-    ft_PlaySFX(temp_r31, 0x61, 0x7F, 0x40);
-    ft_8008805C(temp_r31, 0x61);
-    sp30 = temp_r31->cur_pos;
-    temp_f31 = Stage_GetBlastZoneRightOffset();
-    temp_f1 = Stage_GetBlastZoneLeftOffset();
-    if (sp30.x > temp_f31) {
-        sp30.x = temp_f31;
-    }
-    if (sp30.x < temp_f1) {
-        sp30.x = temp_f1;
-    }
-    sp24 = 3.1415927f;
-
-    {
-        s32 var_r3;
-        temp_r28_3 = gobj->user_data;
-        {
-            int offset = Player_GetUnk45(temp_r28_3->player_idx) << 2;
-            u8* base1 = Fighter_804D650C + offset;
-            u8* base2 = Fighter_804D6508 + offset;
-            color1 = (base1[0] << 16) | (base1[1] << 8) | base1[2];
-            color2 = (base2[0] << 16) | (base2[1] << 8) | base2[2];
-        }
-        if (gm_801693BC(temp_r28_3->player_idx)) {
-            var_r3 = 0x42C;
-        } else {
-            var_r3 = 0x42B;
-        }
-        efSync_Spawn(var_r3, gobj, &sp30, &sp24, &p_ftCommonData->x4F4, color1,
-                     color2);
-    }
-    sp30.y = Stage_GetBlastZoneTopOffset();
-    ftCo_800D4E50(temp_r31, &sp30, 1, 4.712389f);
+    enterDead(gobj, ftCo_MS_DeadUp);
+    ft_PlaySFX(fp, 0x61, 0x7F, 0x40);
+    ft_8008805C(fp, 0x61);
+    pos = fp->cur_pos;
+    clampDeadPos(&pos.x, Stage_GetBlastZoneLeftOffset(),
+                 Stage_GetBlastZoneRightOffset());
+    spawnDeadEffect(gobj, &pos, angle);
+    pos.y = Stage_GetBlastZoneTopOffset();
+    ftCo_800D4E50(fp, &pos, 1, M_PI_F + M_PI_2_F);
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_DeadUp_Anim(Fighter_GObj* gobj)
 {
@@ -580,14 +376,7 @@ void ftCo_DeadUp_Cam(Fighter_GObj* gobj) {}
 
 static inline void ftCo_800D40B8_inline(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221D_b6) {
-        ft_800880D8(fp);
-        fp->x2004 = false;
-    }
-    fp->x2219_b1 = true;
-    fp->x221E_b1 = true;
-    fp->x221E_b2 = true;
+    setDeadFlags(gobj);
     ft_80088C5C(gobj);
 }
 
