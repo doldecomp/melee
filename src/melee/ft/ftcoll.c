@@ -205,10 +205,7 @@ float ftColl_800765F0(Fighter* fp, Fighter_GObj* victim, float arg2)
 static int getEnvDmg(float dmg)
 {
     if (dmg) {
-        if ((int) dmg) {
-            return dmg;
-        }
-        return 1;
+        return (int) dmg ? (int) dmg : 1;
     }
     return 0;
 }
@@ -291,13 +288,6 @@ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
     }
 }
 
-static inline void ftColl_80076808_dontinline(Fighter* fp, HitCapsule* hit,
-                                              int arg2, void* victim,
-                                              bool arg4)
-{
-    ftColl_80076808(fp, hit, arg2, victim, arg4);
-}
-
 void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
 {
     size_t i;
@@ -313,112 +303,11 @@ void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
     lbColl_80008440(dst);
 }
 
-/// @todo Probably the same function as #inlineA1
-static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1,
-                            Vec3* ef_pos, float dmg)
-{
-    int int_dmg;
-
-    /// @todo <tt>int_dmg = getEnvDmg(dmg);</tt>
-    if (dmg) {
-        if ((int) dmg) {
-            int_dmg = dmg;
-        } else {
-            int_dmg = 1;
-        }
-    } else {
-        int_dmg = 0;
-    }
-
-    {
-        /// @todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, true);</tt>
-        size_t i;
-        s8 j;
-        for (i = 0, j = 0; i < ARRAY_SIZE(fp1->x914); i++, j++) {
-            HitCapsule* cur = &fp1->x914[i];
-            if (cur->state != HitCapsule_Disabled && cur->x4 == hit1->x4 &&
-                lbColl_80008688(cur, 3, fp0))
-            {
-                ftColl_804D6560[j] = 0;
-            }
-        }
-    }
-
-    if (int_dmg > fp1->dmg.int_value) {
-        fp1->dmg.int_value = int_dmg;
-        if (hit1->x40_b1 == true && fp1->ground_or_air == GA_Ground) {
-            fp1->dmg.x191C =
-                int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-            {
-                float facing_dir;
-                if (fp1->cur_pos.x < fp0->cur_pos.x) {
-                    facing_dir = +1;
-                } else {
-                    facing_dir = -1;
-                }
-                fp1->dmg.facing_dir = facing_dir;
-            }
-        }
-    }
-
-    efSync_Spawn(1052, NULL, ef_pos);
-}
-
-static inline bool inlineA1(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
-                            HitCapsule* hit1, Vec3* ef_pos, float dmg)
-{
-    size_t i;
-    int int_dmg;
-
-    /// @todo <tt>int_dmg = getEnvDmg(dmg);</tt>
-    if (dmg) {
-        if ((int) dmg) {
-            int_dmg = dmg;
-        } else {
-            int_dmg = 1;
-        }
-    } else {
-        int_dmg = 0;
-    }
-
-    {
-        /// @todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, false);</tt>
-        for (i = 0; i < ARRAY_SIZE(fp0->x914); i++) {
-            HitCapsule* hit;
-            hit = &fp0->x914[i];
-            if (hit->state != HitCapsule_Disabled && hit->x4 == hit0->x4) {
-                lbColl_80008688(hit, 3, fp1);
-            }
-        }
-    }
-
-    if (int_dmg > fp0->dmg.int_value) {
-        fp0->dmg.int_value = int_dmg;
-        if (hit0->x40_b1 == true && fp0->ground_or_air == GA_Ground) {
-            fp0->dmg.x191C =
-                int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-            {
-                float facing_dir;
-                if (fp1->cur_pos.x > fp0->cur_pos.x) {
-                    facing_dir = +1;
-                } else {
-                    facing_dir = -1;
-                }
-                fp0->dmg.facing_dir = facing_dir;
-            }
-        }
-    }
-
-    efSync_Spawn(1052, NULL, ef_pos);
-    ftColl_800784B4(fp1, hit0, hit1);
-    return true;
-}
-
 bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
     Vec3 midpoint;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     midpoint.x = 0.5f * (hit0->hurt_coll_pos.x + hit1->hurt_coll_pos.x);
     midpoint.y = 0.5f * (hit0->hurt_coll_pos.y + hit1->hurt_coll_pos.y);
@@ -427,24 +316,56 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     {
         float dmg = hit1->damage;
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit0->damage) {
-            inlineA0(fp0, fp1, hit1, &midpoint, dmg);
+            int int_dmg = getEnvDmg(dmg);
+            ftColl_80076808(fp1, hit1, 3, fp0, true);
+            if (int_dmg > fp1->dmg.int_value) {
+                fp1->dmg.int_value = int_dmg;
+                if (hit1->x40_b1 == true && fp1->ground_or_air == GA_Ground) {
+                    fp1->dmg.x191C =
+                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
+                    {
+                        float facing_dir;
+                        if (fp1->cur_pos.x < fp0->cur_pos.x) {
+                            facing_dir = +1;
+                        } else {
+                            facing_dir = -1;
+                        }
+                        fp1->dmg.facing_dir = facing_dir;
+                    }
+                }
+            }
+            efSync_Spawn(1052, NULL, &midpoint);
         }
     }
 
     {
         float dmg = hit0->damage;
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit1->damage) {
-            return inlineA1(fp0, hit0, fp1, hit1, &midpoint, dmg);
+            int int_dmg = getEnvDmg(dmg);
+            ftColl_80076808(fp0, hit0, 3, fp1, false);
+            if (int_dmg > fp0->dmg.int_value) {
+                fp0->dmg.int_value = int_dmg;
+                if (hit0->x40_b1 == true && fp0->ground_or_air == GA_Ground) {
+                    fp0->dmg.x191C =
+                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
+                    {
+                        float facing_dir;
+                        if (fp1->cur_pos.x > fp0->cur_pos.x) {
+                            facing_dir = +1;
+                        } else {
+                            facing_dir = -1;
+                        }
+                        fp0->dmg.facing_dir = facing_dir;
+                    }
+                }
+            }
+            efSync_Spawn(1052, NULL, &midpoint);
+            ftColl_800784B4(fp1, hit0, hit1);
+            return true;
         }
     }
 
     return false;
-}
-
-static inline bool ftColl_8007699C_dontinline(Fighter* fp0, HitCapsule* hit0,
-                                              Fighter* fp1, HitCapsule* hit1)
-{
-    return ftColl_8007699C(fp0, hit0, fp1, hit1);
 }
 
 void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
@@ -973,117 +894,11 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
     efSync_Spawn(0x41C, NULL, &hurt->hurt_coll_pos);
 }
 
-static inline void inlineItemA0(Item* item, Fighter* fp, HitCapsule* hit,
-                                Vec3* ef_pos, float dmg)
-{
-    int int_dmg;
-
-    if (dmg) {
-        if ((int) dmg) {
-            int_dmg = dmg;
-        } else {
-            int_dmg = 1;
-        }
-    } else {
-        int_dmg = 0;
-    }
-
-    {
-        size_t i;
-        s8 j;
-        for (i = 0, j = 0; i < ARRAY_SIZE(fp->x914); i++, j++) {
-            HitCapsule* cur = &fp->x914[i];
-            if (cur->state != HitCapsule_Disabled && cur->x4 == hit->x4 &&
-                lbColl_80008688(cur, 3, item))
-            {
-                ftColl_804D6560[j] = 0;
-            }
-        }
-    }
-
-    if (int_dmg > fp->dmg.int_value) {
-        fp->dmg.int_value = int_dmg;
-        if (hit->x40_b1 == true && fp->ground_or_air == GA_Ground) {
-            fp->dmg.x191C =
-                int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-            {
-                float facing_dir;
-                if (fp->cur_pos.x < item->pos.x) {
-                    facing_dir = 1.0f;
-                } else {
-                    facing_dir = -1.0f;
-                }
-                fp->dmg.facing_dir = facing_dir;
-            }
-        }
-    }
-
-    efSync_Spawn(0x41C, NULL, ef_pos);
-}
-
-static inline void inlineItemA1(Item* item, HitCapsule* hit, Fighter* fp,
-                                Vec3* ef_pos, float dmg)
-{
-    int int_dmg;
-    int mode;
-
-    if (dmg) {
-        if ((int) dmg) {
-            int_dmg = dmg;
-        } else {
-            int_dmg = 1;
-        }
-    } else {
-        int_dmg = 0;
-    }
-
-    if (hit->x41_b5) {
-        mode = 4;
-    } else {
-        mode = 3;
-    }
-
-    it_8026FAC4(item, hit, mode, fp, 0);
-
-    if (int_dmg > item->xC48) {
-        float vel_x_mag;
-        float vel_x;
-        float dir;
-
-        item->xCF4_fighterGObjUnk = fp->gobj;
-        item->xC48 = int_dmg;
-
-        vel_x = item->x40_vel.x;
-        if (vel_x < 0.0f) {
-            vel_x_mag = -vel_x;
-        } else {
-            vel_x_mag = vel_x;
-        }
-
-        if (vel_x_mag < it_804D6D28->xD4) {
-            if (item->pos.x > fp->cur_pos.x) {
-                dir = -1.0f;
-            } else {
-                dir = 1.0f;
-            }
-        } else {
-            if (vel_x < 0.0f) {
-                dir = -1.0f;
-            } else {
-                dir = 1.0f;
-            }
-        }
-        item->xCB8_outDamageDirection = dir;
-    }
-
-    efSync_Spawn(0x41C, NULL, ef_pos);
-}
-
 void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
                      HitCapsule* hit2)
 {
     Vec3 midpoint;
-    PAD_STACK(24);
+    PAD_STACK(20);
 
     midpoint.x = (hit1->hurt_coll_pos.x + hit2->hurt_coll_pos.x) * 0.5f;
     midpoint.y = (hit1->hurt_coll_pos.y + hit2->hurt_coll_pos.y) * 0.5f;
@@ -1092,14 +907,65 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
     {
         float dmg = hit2->damage;
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit1->damage) {
-            inlineItemA0(item, fp, hit2, &midpoint, dmg);
+            int int_dmg = getEnvDmg(dmg);
+            ftColl_80076808(fp, hit2, 3, item, true);
+            if (int_dmg > fp->dmg.int_value) {
+                fp->dmg.int_value = int_dmg;
+                if (hit2->x40_b1 == true && fp->ground_or_air == GA_Ground) {
+                    fp->dmg.x191C =
+                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
+                    {
+                        float facing_dir;
+                        if (fp->cur_pos.x < item->pos.x) {
+                            facing_dir = 1.0f;
+                        } else {
+                            facing_dir = -1.0f;
+                        }
+                        fp->dmg.facing_dir = facing_dir;
+                    }
+                }
+            }
+            efSync_Spawn(0x41C, NULL, &midpoint);
         }
     }
 
     {
         float dmg = hit1->damage;
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit2->damage) {
-            inlineItemA1(item, hit1, fp, &midpoint, dmg);
+            int int_dmg = getEnvDmg(dmg);
+            int mode;
+
+            if (hit1->x41_b5) {
+                mode = 4;
+            } else {
+                mode = 3;
+            }
+
+            it_8026FAC4(item, hit1, mode, fp, 0);
+
+            if (int_dmg > item->xC48) {
+                float dir;
+
+                item->xCF4_fighterGObjUnk = fp->gobj;
+                item->xC48 = int_dmg;
+
+                if (ABS(item->x40_vel.x) < it_804D6D28->xD4) {
+                    if (item->pos.x > fp->cur_pos.x) {
+                        dir = -1.0f;
+                    } else {
+                        dir = 1.0f;
+                    }
+                } else {
+                    if (item->x40_vel.x < 0.0f) {
+                        dir = -1.0f;
+                    } else {
+                        dir = 1.0f;
+                    }
+                }
+                item->xCB8_outDamageDirection = dir;
+            }
+
+            efSync_Spawn(0x41C, NULL, &midpoint);
         }
     }
 }
@@ -1548,9 +1414,12 @@ static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
     return &fp->x914[i];
 }
 
-static inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
+static inline void grabFighter(Fighter* this_fp, HitCapsule* hit,
+                               Fighter* victim_fp)
 {
-    float grab_dist = victim_fp->cur_pos.x - this_fp->cur_pos.x;
+    float grab_dist;
+    ftColl_80076808(this_fp, hit, 0, victim_fp, false);
+    grab_dist = victim_fp->cur_pos.x - this_fp->cur_pos.x;
     if (grab_dist < 0) {
         grab_dist = -grab_dist;
     }
@@ -1614,10 +1483,8 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                         if (ft_80084CE4(this_fp, victim_fp) ==
                                             false)
                                         {
-                                            ftColl_80076808_dontinline(
-                                                this_fp, this_hit, 0,
-                                                victim_fp, 0);
-                                            ftGrabDist(this_fp, victim_fp);
+                                            grabFighter(this_fp, this_hit,
+                                                        victim_fp);
                                         }
                                         goto next_gobj;
                                     }
@@ -1772,7 +1639,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                               .y,
                                                           this_fp->x34_scale
                                                               .y) != false) &&
-                                                     (ftColl_8007699C_dontinline(
+                                                     (ftColl_8007699C(
                                                           victim_fp, hit0,
                                                           this_fp,
                                                           hit1) != false)))
@@ -1980,9 +1847,6 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void ftColl_8007925C(Fighter_GObj* gobj)
 { // clang-format off
     u32 i, j, n, m;
@@ -1998,7 +1862,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
     int var_r3;
     Vec3 coll_pos;
     float coll_dist;
-    PAD_STACK(24);
+    PAD_STACK(20);
 
     fp = gobj->user_data;
 
@@ -2114,20 +1978,10 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                             fp->x34_scale.y, fp->cur_pos.z))
                     {
                         int dmg_count;
-                        float dmg;
 
                         it_8026FAC4(item, hurt, 6, fp, 0);
 
-                        dmg = hurt->damage;
-                        if (dmg) {
-                            if ((int) dmg) {
-                                dmg_count = dmg;
-                            } else {
-                                dmg_count = 1;
-                            }
-                        } else {
-                            dmg_count = 0;
-                        }
+                        dmg_count = getEnvDmg(hurt->damage);
 
                         item->xC90_absorbGObj = fp->gobj;
 
@@ -2312,9 +2166,6 @@ void ftColl_8007925C(Fighter_GObj* gobj)
         }
     }
 } // clang-format on
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 /// Select the accumulated-damage count for knockback (shared by the
 /// ftColl_80079AB0 family).
@@ -2331,7 +2182,7 @@ static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 
 /// Shared knockback formula shell. @p inner is the per-branch scaling term.
 /// @remarks Must stay one nested expression; step assignments change the
-/// float register webs (see ftColl_80079C70).
+/// float register webs.
 #define KNOCKBACK(defense, attack, arg3, one, ftd, hit, w, inner)             \
     ((defense) *                                                              \
      ((attack) *                                                              \
@@ -2384,65 +2235,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
     float defense = Player_GetDefenseRatio(fp->player_idx);
     float attack = Player_GetAttackRatio(attacker->player_idx);
     float stage = gm_8016B248();
-    ftCommonData* ftd = p_ftCommonData;
-    u32 x28 = hit->x28;
-    float w = weight * ftd->xF4;
-    float result;
-    PAD_STACK(16);
-
-    if (x28 != 0) {
-        float decay = ftd->xF8;
-        float x118 = ftd->x118;
-        /// @todo Restore expanded inline.
-        result =
-            defense *
-            (attack *
-             (stage * ((0.01F * (float) hit->x24 *
-                        (ftd->x11C * ((decay - ((w * decay) / (1.0F + w))) *
-                                      ((x118 * ftd->x110) +
-                                       (ftd->x114 * (x118 * (float) x28)))) +
-                         ftd->x120)) +
-                       (float) hit->x2C)));
-    } else {
-        s32 count;
-
-        /// @todo Expanded inline of #ftColl_GetDamageCount; re-inline when
-        /// the call form matches.
-        if (fp->x2225_b7) {
-            if (fp->stamina_dead) {
-                count = (s32) ftd->x6D8[0];
-            } else {
-                count = (s32) ftd->x6D4;
-            }
-        } else {
-            count = (s32) fp->dmg.x1830_percent;
-        }
-
-        {
-            float decay = ftd->xF8;
-            /// @todo Restore expanded inline.
-            result =
-                defense *
-                (attack *
-                 (stage *
-                  ((0.01F * (float) hit->x24 *
-                    (ftd->x11C *
-                         ((decay - ((w * decay) / (1.0F + w))) *
-                          ((ftd->x110 *
-                            ((float) count + fp->dmg.x1838_percentTemp)) +
-                           (ftd->x114 *
-                            ((float) (u32) unk_count *
-                             ((float) count + fp->dmg.x1838_percentTemp))))) +
-                     ftd->x120)) +
-                   (float) hit->x2C)));
-        }
-    }
-
-    if (result >= ftd->x108) {
-        result = ftd->x108;
-    }
-
-    return result;
+    return ftColl_80079AB0(fp, hit, unk_count, stage, attack, defense, weight);
 }
 
 float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
@@ -3497,16 +3290,29 @@ float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
     return dmg;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void grabItem(Fighter* fp, HitCapsule* hit, Item* ip)
+{
+    float dist;
+    ftColl_80076808(fp, hit, 0, ip, false);
+    dist = ip->pos.x - fp->cur_pos.x;
+    if (dist < 0.0f) {
+        dist = -dist;
+    }
+    if (dist < fp->unk_grab_val) {
+        Item_GObj* item_gobj = ip->entity;
+        fp->x1A64 = item_gobj;
+        fp->target_item_gobj = item_gobj;
+        fp->x221B_b6 = true;
+        fp->unk_grab_val = dist;
+    }
+}
+
 void ftColl_8007BC90(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Item_GObj* cur;
-    int i;
-    HitCapsule* hit_tmp;
+    u32 i;
+    HitCapsule* hit;
     PAD_STACK(16);
 
     fp->target_item_gobj = 0;
@@ -3527,18 +3333,17 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
             continue;
         }
 
-        for (i = 0; (u32) i < 4; i++) {
-            HitCapsule* hit = &fp->x914[i];
-            hit_tmp = hit;
-            if (hit_tmp->state == HitCapsule_Disabled) {
+        for (i = 0; i < 4; i++) {
+            hit = HitCapsuleGetPtr(fp, i);
+            if (hit->state == HitCapsule_Disabled) {
                 continue;
             }
-            if (hit_tmp->element != HitElement_Catch) {
+            if (hit->element != HitElement_Catch) {
                 continue;
             }
 
-            if (!hit_tmp->x40_b2 || ip->ground_or_air != GA_Air) {
-                if (!hit_tmp->x40_b3) {
+            if (!hit->x40_b2 || ip->ground_or_air != GA_Air) {
+                if (!hit->x40_b3) {
                     continue;
                 }
                 if (ip->ground_or_air != GA_Ground) {
@@ -3546,32 +3351,17 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
                 }
             }
 
-            if (lbColl_8000ACFC(ip, hit_tmp)) {
+            if (lbColl_8000ACFC(ip, hit)) {
                 continue;
             }
 
             {
                 u32 j;
                 for (j = 0; j < ip->xAC8_hurtboxNum; j++) {
-                    if (lbColl_80007ECC(hit_tmp, &ip->xACC_itemHurtbox[j],
-                                        NULL, fp->x34_scale.y, ip->scl, 0.0f))
+                    if (lbColl_80007ECC(hit, &ip->xACC_itemHurtbox[j], NULL,
+                                        fp->x34_scale.y, ip->scl, 0.0f))
                     {
-                        float dist;
-                        HSD_GObj* ent;
-
-                        ftColl_80076808(fp, hit_tmp, 0, ip, 0);
-                        dist = ip->pos.x;
-                        dist = dist - fp->cur_pos.x;
-                        if (dist < 0.0f) {
-                            dist = -dist;
-                        }
-                        if (dist < fp->unk_grab_val) {
-                            ent = ip->entity;
-                            fp->x1A64 = ent;
-                            fp->target_item_gobj = ent;
-                            fp->x221B_b6 = true;
-                            fp->unk_grab_val = dist;
-                        }
+                        grabItem(fp, hit, ip);
                         goto next_item;
                     }
                 }
@@ -3580,9 +3370,6 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     next_item:;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 #ifdef MUST_MATCH
 #pragma push
