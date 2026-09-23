@@ -1,8 +1,12 @@
+#include "lbdvd.h"
+
+#include <melee/ft/forward.h>
+#include <melee/gm/forward.h>
+
 #include <string.h>
 
 #include "lb_0195.h"
 #include "lbarchive.h"
-#include "lbdvd.static.h"
 #include "lbfile.h"
 #include "lbheap.h"
 #include "lbmemory.h" // IWYU pragma: keep
@@ -15,6 +19,29 @@
 #include <melee/gr/stage.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/debug.h>
+
+/* 3BA638 */ static PreloadedGameModeState preload_cache_scene = {
+    {
+        0,
+    },
+    { GM_COUNT,
+      0,
+      0,
+      0,
+      0x148,
+      {
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+          { ChKind_None, 0, 1 },
+      } },
+};
+/* 3BA68C */ static PreloadEntry lbDvd_803BA68C = { 0, 0, 0, 0, -1, 0, -1 };
+/* 432078 */ static PreloadCache preloadCache;
 
 /* 0189EC */ static void lbDvd_800189EC(int);
 
