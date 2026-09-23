@@ -215,10 +215,6 @@ void gm_80181B64(int c_kind, int arg1, s32 arg2)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 int fn_80181BFC(int* arg0)
 {
     int i;
@@ -235,9 +231,6 @@ int fn_80181BFC(int* arg0)
     }
     return count;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline s32 fn_80181C80_CountPlayers(volatile s32* out)
 {
@@ -288,9 +281,9 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-static inline s32 fn_80181E18_ComputeRemaining100(const s32* x4, s32 count)
+static inline int countRemainingPlayers(void)
 {
-    return 0x64 - (count + *x4);
+    return fn_80181BFC(NULL);
 }
 
 void fn_80181E18(void)
@@ -303,8 +296,6 @@ void fn_80181E18(void)
     s32 entry_idx;
     s32 next;
     s32 temp;
-    s32 count;
-    s32 i;
     s32 mode = gm_GetCurrentGameMode();
 
     field = &data->x8;
@@ -347,7 +338,7 @@ void fn_80181E18(void)
             break;
         }
 
-        temp = entry_idx - fn_80181BFC(NULL);
+        temp = entry_idx - countRemainingPlayers();
         if (temp < 0) {
             temp = 0;
         }
@@ -358,21 +349,21 @@ void fn_80181E18(void)
 
         switch (mode) {
         case 0x21:
-            temp = entry_idx - fn_80181BFC(NULL);
+            temp = entry_idx - countRemainingPlayers();
             if (temp < 0) {
                 temp = 0;
             }
             ifStock_802FA2D0(0xA - (temp + *x4));
             break;
         case 0x22:
-            temp = entry_idx - fn_80181BFC(NULL);
+            temp = entry_idx - countRemainingPlayers();
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(fn_80181E18_ComputeRemaining100(x4, temp));
+            ifStock_802FA2D0(100 - (temp + *x4));
             break;
         default:
-            temp = entry_idx - fn_80181BFC(NULL);
+            temp = entry_idx - countRemainingPlayers();
             if (temp < 0) {
                 temp = 0;
             }
@@ -388,15 +379,7 @@ void fn_80181E18(void)
         }
 
         if (next == 0x3E7) {
-            count = 0;
-            for (i = 1; i < 6; i++) {
-                if (Player_GetFalls(i) == 0 &&
-                    Player_GetPlayerSlotType(i) != Gm_PKind_NA)
-                {
-                    count += 1;
-                }
-            }
-            if (count == 0) {
+            if (fn_80181BFC(NULL) == 0) {
                 data->record[0].x0 = 1;
                 gm_8016B33C(7);
                 gm_8016B328();
@@ -409,7 +392,7 @@ void fn_80181E18(void)
                 *x4 += 1;
             }
             fn_80181C80(data->x54[entry_idx].x0);
-            temp = entry_idx - fn_80181BFC(NULL);
+            temp = entry_idx - countRemainingPlayers();
             if (temp < 0) {
                 temp = 0;
             }

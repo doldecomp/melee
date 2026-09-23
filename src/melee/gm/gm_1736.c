@@ -87,65 +87,68 @@ void fn_80173834(u8 ckind, u8 major, bool arg2)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void updateAdventure(UnkAdventureData* data)
+{
+    fn_80173834(data->x0.x0.ckind, 4, true);
+    if (data->x0.xC.xD == 0 && data->x77 != 0) {
+        fn_80172C78(0x51);
+    }
+    if (data->x0.xC.xD == 0 && data->x0.x0.cpu_level >= 3) {
+        fn_80172C78(0x53);
+    }
+    if (data->x0.xC.x20 < 0x101D0) {
+        fn_80172C78(0xE3);
+    }
+}
+
+static inline void updateClassic(Unk1PData* data)
+{
+    fn_80173834(data->x0.ckind, 3, true);
+    if (data->xC.xD == 0 && data->x0.cpu_level >= 3) {
+        fn_80172C78(0x52);
+    }
+    if (data->xC.x20 < 0x4650) {
+        fn_80172C78(0x11A);
+    }
+}
+
+static inline void updateAllStar(Unk1PData* data)
+{
+    fn_80173834(data->x0.ckind, 5, true);
+    fn_80172C78(0xBE);
+    if (data->xC.xD == 0) {
+        fn_80172C78(0xCC);
+    }
+    if (data->x0.cpu_level >= 3) {
+        fn_80172C78(0x86);
+    }
+}
+
 void gm_8017390C(int arg0, int arg1)
 {
-    Unk1PData* temp_r3_2;
-    Unk1PData* temp_r3_3;
-    UnkAdventureData* temp_r3;
-
-    switch (arg0) { /* irregular */
-    case 0:
-        temp_r3 = gm_GetAdventureData();
-        if (temp_r3->x76 != 0) {
+    switch (arg0) {
+    case 0: {
+        UnkAdventureData* data = gm_GetAdventureData();
+        if (data->x76 != 0) {
             fn_80172C78(0xE7);
         }
         if (arg1 != 0) {
-            fn_80173834(temp_r3->x0.x0.ckind, 4, 1);
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x77 != 0) {
-                fn_80172C78(0x51);
-            }
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.x0.cpu_level >= 3) {
-                fn_80172C78(0x53);
-            }
-            if (temp_r3->x0.xC.x20 < 0x101D0) {
-                fn_80172C78(0xE3);
-            }
+            updateAdventure(data);
         }
         break;
+    }
     case 1:
         if (arg1 != 0) {
-            temp_r3_2 = fn_8017DEC8(1);
-            fn_80173834(temp_r3_2->x0.ckind, 3, 1);
-            if (temp_r3_2->xC.xD == 0 && temp_r3_2->x0.cpu_level >= 3) {
-                fn_80172C78(0x52);
-            }
-            if (temp_r3_2->xC.x20 < 0x4650) {
-                fn_80172C78(0x11A);
-            }
+            updateClassic(fn_8017DEC8(1));
         }
         break;
     case 2:
         if (arg1 != 0) {
-            temp_r3_3 = fn_8017DEC8(2);
-            fn_80173834(temp_r3_3->x0.ckind, 5, 1);
-            fn_80172C78(0xBE);
-            if (temp_r3_3->xC.xD == 0) {
-                fn_80172C78(0xCC);
-            }
-            if (temp_r3_3->x0.cpu_level >= 3) {
-                fn_80172C78(0x86);
-            }
+            updateAllStar(fn_8017DEC8(2));
         }
         break;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_80173AA4(void)
 {

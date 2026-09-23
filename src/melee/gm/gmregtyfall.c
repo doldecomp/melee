@@ -84,10 +84,6 @@ static void order_sdata2(void)
 }
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool gm_801A659C(int arg0)
 {
     switch (gm_GetCurrentGameMode()) {
@@ -108,9 +104,6 @@ void gm_801A6630(int arg0)
     *tmp = arg0;
     gm_801A4B60();
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_801A6664(HSD_GObj* arg0)
 {
@@ -436,9 +429,9 @@ static inline void gm_801A7070_SetupMain(u8 priority)
                 player_jobj);
 }
 
-static inline f32 getTrophyTranslateZ(s32 trophy)
+static inline s32 getCurrentTrophy(void)
 {
-    return Toy_803060BC(trophy, 2);
+    return gm_801A659C(gm_801BEFB0());
 }
 
 static inline void gm_801A7070_SetupTrophy(u8 priority)
@@ -457,13 +450,13 @@ static inline void gm_801A7070_SetupTrophy(u8 priority)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    trophy = gm_801A659C(gm_801BEFB0());
+    trophy = getCurrentTrophy();
     child = jobj == NULL ? NULL : jobj->child;
     val = -Toy_803060BC(trophy, 0);
     HSD_JObjSetTranslateXWithMtxDirty(child, val);
     val = -Toy_803060BC(trophy, 1);
     HSD_JObjSetTranslateYWithMtxDirty(child, val);
-    val = -getTrophyTranslateZ(trophy);
+    val = -Toy_803060BC(trophy, 2);
     HSD_JObjSetTranslateZWithMtxDirty(child, val);
 
     val = -(0.017453292f * Toy_803060BC(trophy, 5));
