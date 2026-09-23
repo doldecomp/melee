@@ -124,11 +124,6 @@
 /* 4D6D78 */ static HSD_Text* un_804D6D78;
 /* 4D6D7C */ static int un_804D6D7C;
 
-/// NameTag_Create and un_802FD28C will try to inline this otherwise
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
                   unsigned char arg3)
 {
@@ -149,9 +144,12 @@ float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
     }
     return 18.0; // CP Gray
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline float getNameTagFrame(int slot)
+{
+    return un_802FC9B4(slot, Player_GetTeam(slot), gm_8016B168(),
+                       Player_GetPlayerSlotType(slot));
+}
 
 static void NameTag_RenderCallback(HSD_GObj* gobj, int pass)
 {
@@ -279,8 +277,7 @@ void NameTag_Create(int slot)
                            un_804A1ED0.matanim_joint,
                            un_804A1ED0.shapeanim_joint);
         {
-            float f = un_802FC9B4(slot, Player_GetTeam(slot), gm_8016B168(),
-                                  Player_GetPlayerSlotType(slot));
+            float f = getNameTagFrame(slot);
             if (has_nametag(slot)) {
                 f = inlineA1(f);
                 un_804A1EF8[slot] = HSD_SisLib_803A6B98(
@@ -306,8 +303,7 @@ void un_802FD28C(int slot)
     float f;
     HSD_JObj* jobj = un_804A1EE0[slot]->hsd_obj;
     PAD_STACK(16);
-    f = un_802FC9B4(slot, Player_GetTeam(slot), gm_8016B168(),
-                    Player_GetPlayerSlotType(slot));
+    f = getNameTagFrame(slot);
     if (has_nametag(slot)) {
         f = inlineA1(f);
         HSD_SisLib_803A75E0(un_804D6D78, un_804A1EF8[slot]);

@@ -1264,10 +1264,30 @@ block_43:
     return 0;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline bool checkOnettY(float y)
+{
+    if (stage_info.grkind != Gr_Kind_Onett) {
+        return false;
+    }
+    if (y <= 5.0 && Ground_801C5794()) {
+        return true;
+    }
+    return false;
+}
+
+static inline bool checkZebesIsland(mp_UnkStruct0* island)
+{
+    float y = island->x14.y;
+    if (ftCo_800A1F98(0x5A, y)) {
+        return true;
+    }
+    y = island->x8.y;
+    if (ftCo_800A1F98(0x5A, y)) {
+        return true;
+    }
+    return false;
+}
+
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
     /// @todo Redundant cast and assignment improves match
@@ -1306,41 +1326,10 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
         switch (*stage) {
         case Gr_Kind_Story:
             return mpIsland_8005AC8C(island);
-        case Gr_Kind_Zebes: {
-            float y = island->x14.y;
-            if (ftCo_800A1F98(0x5A, y) != 0) {
-                return true;
-            }
-            y = island->x8.y;
-            if (ftCo_800A1F98(0x5A, y) != 0) {
-                return true;
-            }
-            return false;
-        }
+        case Gr_Kind_Zebes:
+            return checkZebesIsland(island);
         case Gr_Kind_Onett: {
-            bool ret;
-            bool ret2;
-            float y = island->x14.y;
-            if (*stage != Gr_Kind_Onett) {
-                ret = false;
-            } else if (y <= 5.0 && Ground_801C5794() != 0) {
-                ret = true;
-            } else {
-                ret = false;
-            }
-            if (ret) {
-                goto ret_true;
-            }
-            y = island->x8.y;
-            if (*stage != Gr_Kind_Onett) {
-                ret2 = false;
-            } else if (y <= 5.0 && Ground_801C5794() != 0) {
-                ret2 = true;
-            } else {
-                ret2 = false;
-            }
-            if (ret2) {
-            ret_true:
+            if (checkOnettY(island->x14.y) || checkOnettY(island->x8.y)) {
                 return true;
             }
             return false;
@@ -1350,9 +1339,6 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline bool ftCo_800A2718_dontinline(mp_UnkStruct0* arg0)
 {

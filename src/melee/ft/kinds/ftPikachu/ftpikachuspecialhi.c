@@ -260,8 +260,8 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     float half_pi = (float) M_PI_2;
-    float tempf = (fp->facing_dir * atan2f(fp->self_vel.x, fp->self_vel.y)) +
-                  (pika_attr->x78 - half_pi);
+    float angle = atan2f(fp->self_vel.x, fp->self_vel.y);
+    float tempf = (fp->facing_dir * angle) + (pika_attr->x78 - half_pi);
 
     ftPartSetRotX(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), tempf);
     scl.x = pika_attr->x7C_scale.x;
@@ -286,17 +286,10 @@ void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
     ftCommon_SetSelfMovementFromGroundedMovement(gobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftPk_SpecialAirHiStart1_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 {
@@ -399,10 +392,6 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -415,9 +404,6 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
