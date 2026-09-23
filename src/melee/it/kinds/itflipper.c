@@ -159,32 +159,28 @@ void itFlipper_AddSpinImpulse(Item_GObj* gobj, Vec3* pos, f32 vel)
     }
 }
 
-static inline f32 itFlipper_SpinSpeedFromFighter(Item_GObj* gobj,
-                                                 HSD_GObj* fighter, Vec3* pos,
-                                                 Vec3* vel)
+static inline f32 hitSpinSpeed(Item_GObj* gobj, HSD_GObj* fighter, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 speed;
+    Vec3 vel;
     ftLib_800866DC(fighter, pos);
-    ftLib_80086BEC(fighter, vel);
-    return attrs->x18_spinMultiplier *
-           sqrtf(vel->x * vel->x + vel->y * vel->y);
+    ftLib_80086BEC(fighter, &vel);
+    speed = attrs->x18_spinMultiplier * lbVector_Len_xy(&vel);
+    return speed;
 }
 
-static inline void itFlipper_SpinFromFighter_inline(Item_GObj* gobj, Vec3* vel,
-                                                    Vec3* pos, f32 speed)
+static inline f32 spinSpeed(Item_GObj* gobj, HSD_GObj* fighter, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
-    *pos = ip->pos;
-
-    if (ip->xCF4_fighterGObjUnk != NULL) {
-        HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
-        if (ftLib_80086960(fighter)) {
-            speed = itFlipper_SpinSpeedFromFighter(gobj, fighter, pos, vel);
-        }
-        ip->xCF4_fighterGObjUnk = NULL;
-    }
-    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 vel;
+    f32 speed;
+    ftLib_800866DC(fighter, pos);
+    ftLib_80086BEC(fighter, &vel);
+    speed = attrs->x18_spinMultiplier * sqrtf(vel.x * vel.x + vel.y * vel.y);
+    return speed;
 }
 
 void itFlipper_SpinFromFighter(Item_GObj* gobj)
@@ -193,41 +189,49 @@ void itFlipper_SpinFromFighter(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     f32 speed = 10.0f;
     Vec3 pos;
-    Vec3 vel;
-    PAD_STACK(4);
     pos = ip->pos;
 
     if (ip->xCF4_fighterGObjUnk != NULL) {
         HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
         if (ftLib_80086960(fighter)) {
-            speed = itFlipper_SpinSpeedFromFighter(gobj, fighter, &pos, &vel);
+            speed = spinSpeed(gobj, fighter, &pos);
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
     itFlipper_AddSpinImpulse(gobj, &pos, MTXDegToRad(speed));
 }
 
-static inline void itFlipper_Repel_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
-                                          Vec3* vec)
+static inline void spinFromFighterUnk(Item_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
-    vec->x = vec->y = vec->z = 0.0f;
+    f32 speed = 10.0f;
+    *pos = ip->pos;
 
-    if (kind == It_Kind_Flipper) {
-        vec->x = ip->pos.x - pos->x;
-        vec->y = ip->pos.y - pos->y;
-        lbVector_NormalizeXY(vec);
-        vec->x *= 0.2f;
-        vec->y *= 0.2f;
-        ip->x40_vel.x += vec->x;
-        ip->x40_vel.y += vec->y;
+    if (ip->xCF4_fighterGObjUnk != NULL) {
+        HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
+        if (ftLib_80086960(fighter)) {
+            speed = hitSpinSpeed(gobj, fighter, pos);
+        }
+        ip->xCF4_fighterGObjUnk = NULL;
     }
+    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
 }
 
 void itFlipper_Repel(Item_GObj* gobj, s32 kind, Vec3* pos)
 {
+    Item* ip = GET_ITEM(gobj);
     Vec3 vec;
-    itFlipper_Repel_inline(gobj, kind, pos, &vec);
+    vec.x = vec.y = vec.z = 0.0f;
+
+    if (kind == It_Kind_Flipper) {
+        vec.x = ip->pos.x - pos->x;
+        vec.y = ip->pos.y - pos->y;
+        lbVector_NormalizeXY(&vec);
+        vec.x *= 0.2f;
+        vec.y *= 0.2f;
+        ip->x40_vel.x += vec.x;
+        ip->x40_vel.y += vec.y;
+    }
 }
 
 void itFlipper_EnterResting(Item_GObj* gobj)
@@ -468,54 +472,39 @@ bool itFlipper_Spinning_Coll(Item_GObj* gobj)
     return false;
 }
 
+static inline void bounce(Item_GObj* gobj, Item* ip)
+{
+    if (ip->xDD4_itemVar.flipper.xDD4_flightTimer >= 6) {
+        itColl_BounceOffVictim(gobj);
+    } else {
+        ip->x40_vel.x = -1.0f * ip->x40_vel.x;
+        ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+    }
+}
+
+static inline void spin(Item_GObj* gobj, Item* ip, itFlipper_DatAttrs* attrs)
+{
+    ip->xDD4_itemVar.flipper.xDDC_hitboxTimer = attrs->x14_hitboxInterval;
+    itFlipper_SpinFromFighter(gobj);
+    it_80272560(gobj, 0);
+    it_80272560(gobj, 1);
+    it_802756D0(gobj);
+    if (!ip->xDD4_itemVar.flipper.xDE8_isStageFixed) {
+        itFlipper_Repel(gobj, ip->xC38, &ip->xCD4);
+    }
+}
+
 bool itFlipper_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     Vec3 pos;
     u8 _pad[8];
-    Vec3 pos2;
-    Vec3 vel;
-    PAD_STACK(8);
     if (!ip->xDD4_itemVar.flipper.xDD8_isSettled) {
-        if (ip->xDD4_itemVar.flipper.xDD4_flightTimer >= 6) {
-            itColl_BounceOffVictim(gobj);
-        } else {
-            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
-        }
+        bounce(gobj, ip);
     } else {
         ip->xDD4_itemVar.flipper.xDDC_hitboxTimer = attrs->x14_hitboxInterval;
-        itFlipper_SpinFromFighter_inline(gobj, &vel, &pos, 10.0f);
-        it_80272560(gobj, 0);
-        it_80272560(gobj, 1);
-        it_802756D0(gobj);
-        if (!ip->xDD4_itemVar.flipper.xDE8_isStageFixed) {
-            itFlipper_Repel_inline(gobj, ip->xC38, &ip->xCD4, &pos2);
-        }
-    }
-    return false;
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-bool itFlipper_Clanked(Item_GObj* gobj)
-{
-    Item* ip = gobj->user_data;
-    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
-    if (!ip->xDD4_itemVar.flipper.xDD8_isSettled) {
-        if (ip->xDD4_itemVar.flipper.xDD4_flightTimer >= 6) {
-            itColl_BounceOffVictim(gobj);
-        } else {
-            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
-        }
-    } else {
-        ip->xDD4_itemVar.flipper.xDDC_hitboxTimer = attrs->x14_hitboxInterval;
-        itFlipper_SpinFromFighter(gobj);
+        spinFromFighterUnk(gobj, &pos);
         it_80272560(gobj, 0);
         it_80272560(gobj, 1);
         it_802756D0(gobj);
@@ -523,36 +512,31 @@ bool itFlipper_Clanked(Item_GObj* gobj)
             itFlipper_Repel(gobj, ip->xC38, &ip->xCD4);
         }
     }
+    return false;
+}
+
+static inline void bounceOrSpin(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (!ip->xDD4_itemVar.flipper.xDD8_isSettled) {
+        bounce(gobj, ip);
+    } else {
+        spin(gobj, ip, attrs);
+    }
+}
+
+bool itFlipper_Clanked(Item_GObj* gobj)
+{
+    bounceOrSpin(gobj);
     return false;
 }
 
 bool itFlipper_HitShield(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
-    if (ip->xDD4_itemVar.flipper.xDD8_isSettled == 0) {
-        if (ip->xDD4_itemVar.flipper.xDD4_flightTimer >= 6) {
-            itColl_BounceOffVictim(gobj);
-        } else {
-            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
-        }
-    } else {
-        ip->xDD4_itemVar.flipper.xDDC_hitboxTimer = attrs->x14_hitboxInterval;
-        itFlipper_SpinFromFighter(gobj);
-        it_80272560(gobj, 0);
-        it_80272560(gobj, 1);
-        it_802756D0(gobj);
-        if (!ip->xDD4_itemVar.flipper.xDE8_isStageFixed) {
-            itFlipper_Repel(gobj, ip->xC38, &ip->xCD4);
-        }
-    }
+    bounceOrSpin(gobj);
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 bool itFlipper_Reflected(Item_GObj* gobj)
 {
@@ -564,16 +548,16 @@ bool itFlipper_ShieldBounced(Item_GObj* gobj)
     return itColl_BounceOffShield(gobj);
 }
 
-static inline void itFlipper_SpinFromFighterRecv(Item_GObj* gobj, Vec3* vel,
-                                                 Vec3* pos, f32 speed)
+static inline void spinFromFighter(Item_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
+    f32 speed = 10.0f;
     *pos = ip->pos;
 
     if (ip->xCEC_fighterGObj != NULL) {
         HSD_GObj* fighter = ip->xCEC_fighterGObj;
         if (ftLib_80086960(fighter)) {
-            speed = itFlipper_SpinSpeedFromFighter(gobj, fighter, pos, vel);
+            speed = hitSpinSpeed(gobj, fighter, pos);
         }
         ip->xCEC_fighterGObj = NULL;
     }
@@ -586,17 +570,14 @@ bool itFlipper_DmgReceived(Item_GObj* gobj)
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     Vec3 pos;
     u8 _pad[8];
-    Vec3 vec;
-    Vec3 vel;
-    PAD_STACK(8);
     if (ip->xDD4_itemVar.flipper.xDD8_isSettled != 0) {
         ip->xDD4_itemVar.flipper.xDDC_hitboxTimer = attrs->x14_hitboxInterval;
-        itFlipper_SpinFromFighterRecv(gobj, &vel, &pos, 10.0f);
+        spinFromFighter(gobj, &pos);
         it_80272560(gobj, 0);
         it_80272560(gobj, 1);
         it_802756D0(gobj);
         if (!ip->xDD4_itemVar.flipper.xDE8_isStageFixed) {
-            itFlipper_Repel_inline(gobj, ip->xCB4, &ip->xCE0, &vec);
+            itFlipper_Repel(gobj, ip->xCB4, &ip->xCE0);
         }
     }
     return false;
