@@ -492,18 +492,15 @@ static inline void itRshell_StopInit(Item_GObj* gobj)
     ip->xDD4_itemVar.rshell.xDE4 = 0.0f;
     ip->xDD4_itemVar.rshell.xDDC = attrs->x44;
     it_80275414(gobj);
-    itRshell_ClampVel(gobj);
-    it_80272980(gobj);
 }
 
-#ifdef MUST_MATCH
-#pragma inline_depth(8)
-#endif
 void it_8028DAE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->x40_vel.y = 0.0f;
     itRshell_StopInit(gobj);
+    itRshell_ClampVel(gobj);
+    it_80272980(gobj);
     if (ip->msid == 0 || ip->msid == 1 || ip->msid == 7) {
         Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     } else {
@@ -635,6 +632,8 @@ void it_8028E170(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itRshell_StopInit(gobj);
+    itRshell_ClampVel(gobj);
+    it_80272980(gobj);
     if (ip->msid == 0 || ip->msid == 1 || ip->msid == 7) {
         Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
     } else {
