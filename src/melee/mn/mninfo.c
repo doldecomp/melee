@@ -50,10 +50,6 @@ u32 gap_10_804D6C7C_sbss;
 HSD_GObj* mnInfo_804D6C78;
 extern GXColor mn_804D4B64;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 mnInfo_80251A08(s32 arg0)
 {
     switch (arg0) { /* irregular */
@@ -73,9 +69,11 @@ s32 mnInfo_80251A08(s32 arg0)
         return gmMainLib_8015D94C(arg0);
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline bool isUnlocked(s32 id)
+{
+    return mnInfo_80251A08(id) != 0;
+}
 
 s32 mnInfo_80251AA4(void)
 {
@@ -83,7 +81,7 @@ s32 mnInfo_80251AA4(void)
     s32 var_r30 = 0;
 
     for (i = 0; i < 0x42; i++) {
-        if (mnInfo_80251A08(i) != 0) {
+        if (isUnlocked(i)) {
             var_r30++;
         }
     }
@@ -130,8 +128,8 @@ void mnInfo_80251AFC(void)
     }
     for (i = 0; i < 0x42; i++) {
         for (j = i + 1; j < 0x42; j++) {
-            if (mnInfo_80251A08(mnInfo_804A0968[j]) != 0 &&
-                (mnInfo_80251A08(mnInfo_804A0968[i]) == 0 ||
+            if (!mnInfo_80251AFC_inline(j) &&
+                (mnInfo_80251AFC_inline(i) ||
                  *gmMainLib_8015D804(mnInfo_80251AFC_inline_3(
                      mnInfo_804A0968, i)) > mnInfo_80251AFC_inline_2(j)))
             {
@@ -339,7 +337,7 @@ void fn_80251FE4(void)
                 other = trophy = &mnInfo_804A0968[data->scroll_idx];
                 for (i = 0; i < 4; i++) {
                     (void) (other == trophy);
-                    if (mnInfo_80251A08(*trophy) != 0) {
+                    if (isUnlocked(*trophy)) {
                         u32 id = *trophy;
 
                         mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
@@ -518,10 +516,6 @@ void fn_80252548(HSD_GObj* gobj)
     fn_80252548_inline(data, gobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void mnInfo_80252720(MnInfoData* data)
 {
     data->scroll_idx = 0;
@@ -536,9 +530,12 @@ void mnInfo_80252720(MnInfoData* data)
     data->left_column[3] = NULL;
     data->right_column[3] = NULL;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline void initUserData(HSD_GObj* gobj, MnInfoData* data)
+{
+    mnInfo_80252720(data);
+    GObj_InitUserData(gobj, 0, HSD_Free, data);
+}
 
 s32 mnInfo_80252758(void)
 {
@@ -574,8 +571,7 @@ s32 mnInfo_80252758(void)
         OSReport(layout->assert_report);
         __assert(layout->assert_file, 0x267, layout->assert_expr);
     }
-    mnInfo_80252720(user_data);
-    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    initUserData(gobj, user_data);
 
     proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80252548, 0);
     proc->flags_3 = HSD_GObj_804D783C;

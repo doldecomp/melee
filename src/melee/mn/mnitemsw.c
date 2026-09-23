@@ -91,10 +91,6 @@ static inline struct MnItemSwTable* mnItemSw_GetTable(void)
     return (struct MnItemSwTable*) mnItemSw_803ED340;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 mnItemSw_80233A98(s32 arg0)
 {
     switch (arg0) {
@@ -113,9 +109,6 @@ s32 mnItemSw_80233A98(s32 arg0)
         return (s32) mnItemSw_AnimTable.items[arg0];
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
 {
@@ -328,9 +321,9 @@ HSD_JObj* mnItemSw_8023405C(MnItemSwData* data, u8 idx)
     return cur;
 }
 
-static inline s32 mnItemSw_GetItemAnim(s32 i)
+static inline s32 mnItemSw_GetItemAnim(const u8* order, s32 i)
 {
-    return mnItemSw_80233A98((s32) mnItemSw_803ED438[i]);
+    return mnItemSw_80233A98(order[i]);
 }
 
 static inline void mnItemSw_SetCursorPosition(MnItemSwData* data)
@@ -398,7 +391,7 @@ void mnItemSw_80234104(HSD_GObj* gobj)
         }
 
         lb_80011E24(jobj, &item_jobj, 3, -1);
-        item_anim = mnItemSw_GetItemAnim(i);
+        item_anim = mnItemSw_GetItemAnim(mnItemSw_803ED438, i);
         HSD_JObjReqAnimAll(item_jobj, (f32) item_anim);
         HSD_JObjAnimAll(item_jobj);
         HSD_JObjReqAnimAll(item_jobj, mnItemSw_AnimTable.x30[0]);
@@ -455,8 +448,6 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
     /* Separate argument copies preserve the original register lifetimes. */
     HSD_JObj* hidden_jobj;
     HSD_JObj* frame_jobj;
-    HSD_JObj* item_jobj;
-    HSD_JObj* animated_jobj;
     MnItemSwData* lookup_data;
     f32 column_x;
     HSD_JObj* sp44;
@@ -483,9 +474,8 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             anim_val = mn_8022F298((frame_jobj = sp44));
             lb_80011E24(jobj, &sp44, 3, -1);
             HSD_JObjReqAnimAll(
-                (item_jobj = sp44),
-                (f32) mnItemSw_80233A98((s32) tbl->item_order[old_cursor]));
-            HSD_JObjAnimAll((animated_jobj = sp44));
+                sp44, (f32) mnItemSw_GetItemAnim(tbl->item_order, old_cursor));
+            HSD_JObjAnimAll(sp44);
             HSD_JObjReqAnimAll(sp44, tbl->x30[0]);
             mn_8022F3D8(sp44, 1, TOBJ_MASK);
             HSD_JObjAnimAll(sp44);
@@ -505,7 +495,7 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             HSD_JObjAnimAll(sp44);
             lb_80011E24(jobj, &sp44, 3, -1);
             HSD_JObjReqAnimAll(
-                sp44, (f32) mnItemSw_80233A98((s32) tbl->item_order[cursor]));
+                sp44, (f32) mnItemSw_GetItemAnim(tbl->item_order, cursor));
             HSD_JObjAnimAll(sp44);
             HSD_JObjReqAnimAll(sp44, tbl->x30[0]);
             mn_8022F3D8(sp44, 1, TOBJ_MASK);
@@ -747,8 +737,8 @@ HSD_JObj* mnItemSw_80235020(u8 arg0, MnItemSwData* arg1)
                        MenMainCursorIs_Top.shapeanim_joint);
     lb_80011E24(jobj, &sp14, 3, -1);
     item_val = arg0;
-    HSD_JObjReqAnimAll(
-        sp14, (f32) mnItemSw_80233A98((s32) tbl->item_order[item_val]));
+    HSD_JObjReqAnimAll(sp14,
+                       (f32) mnItemSw_GetItemAnim(tbl->item_order, item_val));
     HSD_JObjAnimAll(sp14);
     if (arg0 == hovered) {
         HSD_JObjReqAnimAll(sp14, tbl->x30[1]);
