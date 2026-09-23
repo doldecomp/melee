@@ -38,18 +38,12 @@ static inline void releaseEntry(PreloadEntry* entry)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma dont_inline on
+#pragma auto_inline off
 #endif
 void lbDvd_800174E8(int index)
 {
     PreloadEntry* entry = &preloadCache.entries[index];
-    if (entry->archive != NULL) {
-        lbHeap_80015CA8(entry->heap, entry->archive->addr);
-    }
-    if (entry->raw_data != NULL) {
-        lbHeap_80015CA8(entry->heap, entry->raw_data->addr);
-    }
-    *entry = lbDvd_803BA68C;
+    releaseEntry(entry);
 }
 #ifdef MUST_MATCH
 #pragma pop
