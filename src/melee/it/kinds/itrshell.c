@@ -641,31 +641,11 @@ void it_8028E170(Item_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-    if (!(ip->xDD4_itemVar.rshell.xDD4 <= 0.0f)) {
-        ip->xDD4_itemVar.rshell.xDD4 -= 1.0f;
-        if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
-            if (!ip->xDCD_flag.b5) {
-                it_80275444(gobj);
-            }
-        } else {
-            ip->xDD4_itemVar.rshell.xDD8 -= 1.0f;
-        }
-        if (ip->msid == 5) {
-            it_8028CFE0(gobj);
-        }
-    }
+    itRshell_UnkMotion5_Anim(gobj);
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itRshell_UnkMotion6_Phys(Item_GObj* gobj)
 {

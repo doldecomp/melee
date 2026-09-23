@@ -322,19 +322,7 @@ void itGShell_Logic14_Thrown(Item_GObj* gobj)
 
 bool itGshell_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (ip->xDD4_itemVar.gshell.xDEC_b1) {
-        ip->xDD4_itemVar.gshell.xDE0 -= 1.0f;
-        if (ip->xDD4_itemVar.gshell.xDE0 <= 0.0f) {
-            ip->xDD4_itemVar.gshell.xDEC_b1 = 0;
-            ip->xDD4_itemVar.gshell.xDE0 = attrs->x28;
-            it_8027572C(gobj, 0);
-            if (ip->xDD4_itemVar.gshell.xDEC_b2) {
-                it_802756E0(gobj);
-            }
-        }
-    }
+    it_8028B988(gobj);
     return false;
 }
 
@@ -356,18 +344,10 @@ void itGShell_Logic14_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool itGshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
-    it_8028B988(gobj);
-    return false;
+    return itGshell_UnkMotion3_Anim(gobj);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itGshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -427,9 +407,9 @@ bool itGshell_UnkMotion6_Anim(Item_GObj* gobj)
     } else {
         ip->xDD4_itemVar.gshell.xDD8 -= 1.0f;
     }
-    it_8028B988(gobj); // inlined
+    it_8028B988(gobj);
     if (ip->msid == 6 || ip->msid == 5) {
-        it_8028B8D8(gobj); // inlined
+        it_8028B8D8(gobj);
     }
     if (ip->xDD4_itemVar.gshell.xDD4 <= 0.0f) {
         return true;
@@ -502,34 +482,11 @@ void it_8028C898(Item_GObj* gobj)
     ip->jumped_on = it_8028CF68;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool itGshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data; // GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.gshell.xDD8 <= 0.0f) {
-        if (!ip->xDCD_flag.b5) {
-            it_80275444(gobj);
-        }
-    } else {
-        ip->xDD4_itemVar.gshell.xDD8 -= 1.0f;
-    }
-    it_8028B988(gobj);
-    if (ip->msid == 6 || ip->msid == 5) {
-        it_8028B8D8(gobj);
-    }
-    if (ip->xDD4_itemVar.gshell.xDD4 <= 0.0f) {
-        ;
-    } else {
-        ip->xDD4_itemVar.gshell.xDD4 -= 1.0f;
-    }
+    itGshell_UnkMotion6_Anim(gobj);
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itGshell_UnkMotion8_Phys(Item_GObj* gobj)
 {
