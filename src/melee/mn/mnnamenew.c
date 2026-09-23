@@ -1435,10 +1435,6 @@ HSD_Text* mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2,
 
 static const Vec3 mnNameNew_803B8528 = { -0.5f, 0.7f, 0.0f };
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma inline_depth(2)
-#endif
 static inline void GlyphVariantCount(u16 count, s32* out)
 {
     count &= 0xFF;
@@ -1551,9 +1547,6 @@ HSD_GObj* mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, s32 arg2)
         return gobj;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 {

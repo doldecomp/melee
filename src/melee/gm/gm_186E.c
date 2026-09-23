@@ -135,10 +135,6 @@ void fn_80186F6C(HSD_GObj* arg0)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 HSD_GObjProc* fn_801873F0(void)
 {
     ftDemo_ObjAllocInit();
@@ -153,9 +149,6 @@ HSD_GObjProc* fn_801873F0(void)
     Player_80036F34(0, 6);
     return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_80187494(HSD_GObj* gobj, int arg1)
 {
@@ -193,10 +186,6 @@ void fn_801874FC(void)
 
 /// #fn_801874FC
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_80187714(void)
 {
     Camera_Init(6);
@@ -210,9 +199,6 @@ void fn_80187714(void)
     efLib_Init();
     efAsync_LoadSync(0);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_Scene_IntroAllstar_OnFrame(void)
 {

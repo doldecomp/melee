@@ -33,10 +33,6 @@ void gm_InitChallengerData(u8 human_ckind, u8 human_color, u8 human_slot,
     tmp->curr_mode = curr_mode;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
@@ -50,9 +46,6 @@ bool gm_80173754(u8 gameMode, u8 arg1)
     }
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 u8 gm_801737D8(void)
 {

@@ -19,9 +19,6 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/quatlib.h>
 
-#ifdef MUST_MATCH
-#pragma inline_depth(1)
-#endif
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
     HSD_JObj* cur;

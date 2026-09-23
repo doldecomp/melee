@@ -1123,10 +1123,6 @@ void fn_80198824(HSD_GObj* gobj)
 /// Initializes tournament mode match data.
 /// Initializes tournament mode match data structures.
 /// Type casts used to match target instruction patterns (stw/sth vs stb).
-#ifdef MUST_MATCH
-#pragma push
-#pragma auto_inline off
-#endif
 void fn_80198BA0(void)
 {
     TmData* td;
@@ -1173,9 +1169,6 @@ void fn_80198BA0(void)
         ptr++;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// Initializes tournament mode text displays.
 #ifdef MUST_MATCH

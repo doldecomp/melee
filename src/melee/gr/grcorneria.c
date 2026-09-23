@@ -555,10 +555,6 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 HSD_GObj* grCorneria_801DD534(int arg0)
 {
     HSD_GObj* gobj;
@@ -587,9 +583,6 @@ HSD_GObj* grCorneria_801DD534(int arg0)
 
     return gobj;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {

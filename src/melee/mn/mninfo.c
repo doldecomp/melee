@@ -77,10 +77,6 @@ s32 mnInfo_80251A08(s32 arg0)
 #pragma pop
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 mnInfo_80251AA4(void)
 {
     s32 i;
@@ -93,9 +89,6 @@ s32 mnInfo_80251AA4(void)
     }
     return var_r30;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline bool mnInfo_80251AFC_inline(s32 i)
 {
@@ -180,10 +173,6 @@ DATA char gap_07_803EFCE0_data[8] = "";
 #pragma pop
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 {
     char sp34[5];
@@ -230,9 +219,6 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     return HSD_SisLib_803A6B98(text, 0.0f, 40.0f, layout->time_format, sp30,
                                sp2C, sp28);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 #ifdef MUST_MATCH
 #pragma push

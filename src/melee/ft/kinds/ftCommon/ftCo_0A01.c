@@ -1354,17 +1354,10 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
 #pragma pop
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static inline bool ftCo_800A2718_dontinline(mp_UnkStruct0* arg0)
 {
     return ftCo_800A2718(arg0);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0);
 static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0)

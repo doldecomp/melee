@@ -167,10 +167,6 @@ static void mnGallery_80258BC4(struct mnGallery_804D6C88_userdata* data)
     data->unk0 = 1;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
 {
     if (data->unk0 != 0) {
@@ -187,9 +183,6 @@ static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static void mnGallery_80258DBC(HSD_GObj* gobj,
                                struct mnGallery_804D6C88_userdata* data)

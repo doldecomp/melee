@@ -18,10 +18,6 @@
 
 /* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -57,9 +53,6 @@ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
     }
     return true;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_800D1F6C(Fighter_GObj* gobj)
 {
