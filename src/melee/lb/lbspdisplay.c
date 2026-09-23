@@ -72,53 +72,17 @@ static inline bool checkJObjFlags(HSD_JObj* jobj)
     return jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? false : true;
 }
 
-#ifdef MUST_MATCH
-#pragma inline_depth(2)
-#endif
 void lb_80011C18(HSD_JObj* jobj, u32 flags)
 {
-    HSD_JObj* cur;
-    PAD_STACK(8);
-
-    cur = jobj->child;
-    if (cur != NULL) {
-        if (cur->child != NULL) {
-            lb_80011C18(cur->child, flags);
-        }
-        if (cur->next != NULL) {
-            lb_80011C18(cur->next, flags);
-        }
-        if (checkJObjFlags(cur)) {
-            if (cur->u.dobj != NULL) {
-                lb_80011B74(cur->u.dobj, flags);
-            }
-        }
+    if (jobj->child != NULL) {
+        lb_80011C18(jobj->child, flags);
     }
-
-    cur = jobj->next;
-    if (cur != NULL) {
-        if (cur->child != NULL) {
-            lb_80011C18(cur->child, flags);
-        }
-        if (cur->next != NULL) {
-            lb_80011C18(cur->next, flags);
-        }
-        if (checkJObjFlags(cur)) {
-            if (cur->u.dobj != NULL) {
-                lb_80011B74(cur->u.dobj, flags);
-            }
-        }
+    if (jobj->next != NULL) {
+        lb_80011C18(jobj->next, flags);
     }
-
     if (checkJObjFlags(jobj)) {
-        HSD_DObj* dobj = jobj->u.dobj;
-        if (dobj != NULL) {
-            HSD_DObj* next = dobj->next;
-            dobj = jobj->u.dobj;
-            if (next != NULL) {
-                lb_80011B74(next, flags);
-            }
-            dobj->mobj->rendermode |= flags;
+        if (jobj->u.dobj != NULL) {
+            lb_80011B74(jobj->u.dobj, flags);
         }
     }
 }
