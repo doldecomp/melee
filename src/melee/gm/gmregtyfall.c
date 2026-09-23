@@ -212,7 +212,7 @@ void gm_801A68D8(void)
     Player_80036CF0(0);
     Player_SetPlayerCharacter(0, gm_801BEFB0());
     Player_SetCostumeId(0, gm_801BEFD0());
-    Player_SetPlayerId(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0F);
     Player_80032768(0, &gm_803DB2C8);

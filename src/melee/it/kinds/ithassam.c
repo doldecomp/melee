@@ -153,7 +153,7 @@ Item_GObj* itHassam_802CDE1C(Vec3* vec, Item_GObj* gobj)
     {
         if (ftLib_80086FD4(gobj, cur_fgobj) == false) {
             cur_fp = GET_FIGHTER(cur_fgobj);
-            if ((cur_fp->x221F_b3 == false) &&
+            if ((cur_fp->is_sleeping == false) &&
                 ((gm_8016B168() == false) || (fp == NULL) ||
                  (cur_fp->team != fp->team)))
             {

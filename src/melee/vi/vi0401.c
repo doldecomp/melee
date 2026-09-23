@@ -62,7 +62,7 @@ void un_8031D030(CharacterKind char_kind, int costume)
     Player_80036E20(char_kind, un_804D6F54, 3);
     Player_SetPlayerCharacter(0, char_kind);
     Player_SetCostumeId(0, costume);
-    Player_SetPlayerId(0, 0);
+    Player_SetPadPort(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
 

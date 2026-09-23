@@ -28,7 +28,7 @@ bool ftCo_8009F0F0(Fighter_GObj* gobj)
          fp->motion_id == ftCo_MS_DownBoundD ||
          fp->motion_id == ftCo_MS_DownWaitD ||
          fp->motion_id == ftCo_MS_DownDamageD) &&
-        (fp->x2224_b2 || fp->dmg.x1838_percentTemp < p_ftCommonData->x428))
+        (fp->stamina_dead || fp->dmg.x1838_percentTemp < p_ftCommonData->x428))
     {
         ftCo_8009F184(gobj);
         return true;
@@ -48,12 +48,12 @@ void ftCo_8009F184(Fighter_GObj* gobj)
 void ftCo_DownDamage_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2224_b2) {
+    if (!fp->stamina_dead) {
         fp->mv.co.downdamage.x0 -= 1;
     }
     RETURN_IF(ftAnim_IsFramesRemaining(gobj));
     if (fp->ground_or_air == GA_Air) {
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             ftCo_80090780(gobj);
         } else {
             ftCo_Fall_Enter(gobj);

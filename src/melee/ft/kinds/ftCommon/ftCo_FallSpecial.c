@@ -31,7 +31,7 @@ static inline void inline0(Fighter_GObj* gobj, int arg1, int arg2,
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
-    if (fp->x2224_b2) {
+    if (fp->stamina_dead) {
         ftCo_80090780(gobj);
         return;
     }

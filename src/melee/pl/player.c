@@ -111,7 +111,8 @@ void Player_80031790(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_800867E8(player->player_entity[player->transformed[i]]);
+                ftLib_DisableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -131,7 +132,8 @@ void Player_80031848(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_EnableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -143,7 +145,8 @@ static void func_8008688C_wrapper(StaticPlayer* player)
         s32 i;
         for (i = 0; i < 2; i++) {
             if ((player->player_entity[player->transformed[i]])) {
-                ftLib_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_EnableInput(
+                    player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -720,22 +723,22 @@ void Player_SetCostumeId(int slot, int costume_id)
     player->costume_id = costume_id;
 }
 
-u8 Player_GetControllerIndex(int slot)
+u8 Player_GetSubColor(int slot)
 {
-    s8 controller_index;
+    s8 sub_color;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    controller_index = player->controller_index;
-    return controller_index;
+    sub_color = player->sub_color;
+    return sub_color;
 }
 
-void Player_SetControllerIndex(int slot, s8 controller_index)
+void Player_SetSubColor(int slot, s8 sub_color)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->controller_index = controller_index;
+    player->sub_color = sub_color;
 }
 
 int Player_GetTeam(int slot)
@@ -756,22 +759,22 @@ void Player_SetTeam(int slot, s8 team)
     player->team = team;
 }
 
-int Player_GetPlayerId(int slot)
+int Player_GetPadPort(int slot)
 {
-    u8 player_id;
+    u8 controller_index;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player_id = player->player_id;
-    return player_id;
+    controller_index = player->pad_port;
+    return controller_index;
 }
 
-void Player_SetPlayerId(int slot, int player_id)
+void Player_SetPadPort(int slot, int controller_index)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->player_id = player_id;
+    player->pad_port = controller_index;
 }
 
 int Player_GetCpuLevel(int slot)
@@ -1911,9 +1914,9 @@ void Player_InitOrResetPlayer(s32 slot)
     player->transformed[1] = 1;
 
     player->unk45 = 0;
-    player->controller_index = 0;
+    player->sub_color = 0;
     player->team = 0;
-    player->player_id = 0;
+    player->pad_port = 0;
     player->cpu_level = 0;
 
     player->cpu_type = 4;

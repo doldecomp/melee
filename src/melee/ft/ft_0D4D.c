@@ -56,11 +56,11 @@ void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj)
 void ftCo_800D4E50(Fighter* fp, Vec3* arg1, int arg2, float arg8)
 {
     if (gm_8016B0B4() && !fp->is_sub_fighter) {
-        int coins = Player_GetCoins(fp->player_id);
+        int coins = Player_GetCoins(fp->player_idx);
         int var_r31 = coins / 2;
-        Player_SetCoins(fp->player_id, coins - var_r31);
-        Player_SetUnk9C(fp->player_id,
-                        var_r31 + Player_GetUnk9C(fp->player_id));
+        Player_SetCoins(fp->player_idx, coins - var_r31);
+        Player_SetUnk9C(fp->player_idx,
+                        var_r31 + Player_GetUnk9C(fp->player_idx));
         if (var_r31 > p_ftCommonData->x5C8) {
             var_r31 = p_ftCommonData->x5C8;
         }
@@ -84,7 +84,7 @@ static inline void ftCo_800D4F24_inline(Fighter_GObj* gobj)
 void ftCo_800D4F24(Fighter_GObj* gobj, int index)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221F_b3) {
+    if (fp->is_sleeping) {
         return;
     }
     if (index != 0) {
@@ -106,18 +106,18 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     u8 _[4];
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_UnkProcessDeath_80068354(gobj);
-    fp->smash_attrs.x2135 = Player_80032F30(fp->player_id);
+    Fighter_Spawn(gobj);
+    fp->smash_attrs.x2135 = Player_80032F30(fp->player_idx);
 
     if (fp->smash_attrs.x2135 == -1) {
-        Player_GetSpawnPlatformPos(fp->player_id, &sp44);
+        Player_GetSpawnPlatformPos(fp->player_idx, &sp44);
         fp->mv.co.turn.facing_after =
             fp->facing_dir * ftCommon_800804EC(fp) + sp44.x;
         fp->mv.co.turn.x8 = sp44.y;
         fp->mv.co.walk.middle_anim_frame = 0.0f;
     } else {
         Stage_80224E38(&sp14, fp->smash_attrs.x2135);
-        Player_GetSomePos(fp->player_id, &sp20);
+        Player_GetSomePos(fp->player_idx, &sp20);
         fp->mv.co.turn.facing_after =
             fp->facing_dir * ftCommon_800804EC(fp) + (sp14.x + sp20.x);
         fp->mv.co.turn.x8 = sp14.y + sp20.y;
@@ -183,7 +183,7 @@ void ftCo_Rebirth_Phys(Fighter_GObj* gobj)
     if (!new_var->is_sub_fighter) {
         if (new_var->smash_attrs.x2135 != -1) {
             Stage_80224E38(&stage_pos, new_var->smash_attrs.x2135);
-            Player_GetSomePos(new_var->player_id, &player_pos);
+            Player_GetSomePos(new_var->player_idx, &player_pos);
             new_var->mv.co.common.x4.x =
                 stage_pos.x + player_pos.x +
                 new_var->facing_dir * ftCommon_800804EC(new_var);
@@ -199,7 +199,7 @@ void ftCo_Rebirth_Phys(Fighter_GObj* gobj)
                 (new_var->mv.co.common.x4.y - cur_pos.y) * inv;
         }
     } else {
-        HSD_GObj* other_gobj = Player_GetEntityAtIndex(new_var->player_id, 0);
+        HSD_GObj* other_gobj = Player_GetEntityAtIndex(new_var->player_idx, 0);
         Fighter* other_fp = other_gobj->user_data;
         new_var->self_vel.x = other_fp->self_vel.x;
         new_var->self_vel.y = other_fp->self_vel.y;
@@ -219,11 +219,11 @@ void fn_800D54A4(Fighter_GObj* gobj)
     Vec3 sp;
     u8 _[8];
     Fighter* fp = gobj->user_data;
-    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
+    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_idx, 1);
 
     if (other_gobj != NULL) {
         Fighter* other_fp = other_gobj->user_data;
-        if (!other_fp->x221F_b3) {
+        if (!other_fp->is_sleeping) {
             f32 other_y = other_fp->cur_pos.y;
             if (other_y > fp->cur_pos.y) {
                 fp->cur_pos.y = other_y;
@@ -242,7 +242,7 @@ void fn_800D55B4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter* new_var;
-    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_idx, 0);
     Fighter* other_fp = other_gobj->user_data;
     new_var = other_fp;
     if (new_var->cur_pos.y > fp->cur_pos.y) {
@@ -291,15 +291,15 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (!fp->is_sub_fighter) {
-        HSD_GObj* companion = Player_GetEntityAtIndex(fp->player_id, 1);
+        HSD_GObj* companion = Player_GetEntityAtIndex(fp->player_idx, 1);
         if (companion != NULL &&
-            !((Fighter*) companion->user_data)->x221F_b3 &&
+            !((Fighter*) companion->user_data)->is_sleeping &&
             ftLib_800873CC(companion) == 0)
         {
             var_r30 = 1;
         }
     } else {
-        if (ftLib_800873CC(Player_GetEntityAtIndex(fp->player_id, 0)) != 0) {
+        if (ftLib_800873CC(Player_GetEntityAtIndex(fp->player_idx, 0)) != 0) {
             return;
         }
         var_r30 = 1;
@@ -321,7 +321,7 @@ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
     }
 
     ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
-    pl_80040374(fp->player_id, fp->is_sub_fighter);
+    pl_80040374(fp->player_idx, fp->is_sub_fighter);
 }
 
 void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
@@ -337,7 +337,7 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
     if (!new_var->is_sub_fighter) {
         if (new_var->smash_attrs.x2135 != -1) {
             Stage_80224E38(&sp18, new_var->smash_attrs.x2135);
-            Player_GetSomePos(new_var->player_id, &sp24);
+            Player_GetSomePos(new_var->player_idx, &sp24);
             new_var->mv.co.common.x4.x =
                 new_var->facing_dir * ftCommon_800804EC(new_var) +
                 (sp18.x + sp24.x);
@@ -354,7 +354,7 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
         }
     } else {
         Fighter* other_fp =
-            Player_GetEntityAtIndex(new_var->player_id, 0)->user_data;
+            Player_GetEntityAtIndex(new_var->player_idx, 0)->user_data;
         new_var->self_vel.x = other_fp->self_vel.x;
         new_var->self_vel.y = other_fp->self_vel.y;
     }

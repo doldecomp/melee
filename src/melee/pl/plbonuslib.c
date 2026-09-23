@@ -961,7 +961,7 @@ void fn_8003F53C(int arg0, int arg1)
     Fighter_GObj* temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
     unsigned int temp_r3;
 
-    if ((arg1 != 1) && (ftLib_800867D8(temp_r30) == false)) {
+    if ((arg1 != 1) && (ftLib_IsInputDisabled(temp_r30) == false)) {
         if ((ft_800877F8(temp_r30, 0x100) == 0) &&
             (ft_800877F8(temp_r30, 0x200) == 0))
         {

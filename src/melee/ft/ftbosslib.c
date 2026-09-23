@@ -42,7 +42,7 @@ void ftBossLib_8015BD24(s32 arg0, float* arg1, float arg2, s32 arg3, s32 arg4,
 void ftBossLib_ReportGObjSlotType(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Gm_PKind kind = Player_GetPlayerSlotType(fp->player_id);
+    Gm_PKind kind = Player_GetPlayerSlotType(fp->player_idx);
     HSD_ASSERTREPORT(103,
                      kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
                          kind == Gm_PKind_Cpu,
@@ -199,7 +199,7 @@ bool ftBossLib_8015C31C(void)
 bool ftBossLib_8015C358(void)
 {
     HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_MasterH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
+    if (gobj && GET_FIGHTER(gobj)->is_sleeping) {
         return true;
     }
 
@@ -209,7 +209,7 @@ bool ftBossLib_8015C358(void)
 bool ftBossLib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftBossLib_GetFighterGObj(Ft_Kind_CrezyH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_b3) {
+    if (gobj && GET_FIGHTER(gobj)->is_sleeping) {
         return true;
     }
 

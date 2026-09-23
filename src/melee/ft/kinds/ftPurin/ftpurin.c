@@ -462,30 +462,29 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     HSD_Joint** joints = ft_8045A1E0;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftPr_Init_803D05B4[fp->x619_costume_id]) {
+    if (ftPr_Init_803D05B4[fp->costume_id]) {
         /// @todo clean up memory accesses - this looks similar to
         /// ftKb_SpecialN_800EFB4C
         UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
 
-        if (!joints[fp->x619_costume_id]) {
+        if (!joints[fp->costume_id]) {
             UnkCostumeStruct* costume_list =
                 CostumeListsForeachCharacter[fp->kind].costume_list;
-            joints[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
-                costume_list[fp->x619_costume_id].x14_archive,
-                ftPr_Init_803D05B4[fp->x619_costume_id]);
+            joints[fp->costume_id] = HSD_ArchiveGetPublicAddress(
+                costume_list[fp->costume_id].x14_archive,
+                ftPr_Init_803D05B4[fp->costume_id]);
         }
 
         fp->u.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
         ftPartsPObjSetDefaultClass();
-        fp->u.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->u.pr.x223C = HSD_JObjLoadJoint(joints[fp->costume_id]);
         fp->x2225_b2 = true;
         ftPartsPObjClearDefaultClass();
         ftParts_80075650(gobj, fp->u.pr.x223C, &fp->u.pr.x2240);
 
         ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->u.pr.x2248,
-                         fp->x619_costume_id, &fp->u.pr.x2240,
-                         &fp->u.pr.x2240);
+                         fp->costume_id, &fp->u.pr.x2240, &fp->u.pr.x2240);
         ftCo_8009DC54(fp);
         return;
     }

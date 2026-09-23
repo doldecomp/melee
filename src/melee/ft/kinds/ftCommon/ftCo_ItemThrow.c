@@ -549,7 +549,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                         fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;
                     vec2.y = interpolation;
                     vec2.z = 0;
-                    pl_8003E978(fp->player_id, fp->is_sub_fighter,
+                    pl_8003E978(fp->player_idx, fp->is_sub_fighter,
                                 fp->item_gobj);
                     {
                         FtMoveId msid = fp->motion_id;

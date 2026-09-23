@@ -20,7 +20,7 @@
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
-    plActionStats* attackCount = Player_GetActionStats(fp->player_id);
+    plActionStats* attackCount = Player_GetActionStats(fp->player_idx);
     if (pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0 &&
         grCorneria_801E2D14())
     {
@@ -57,7 +57,7 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);
-            pl_80040120(fp->player_id, fp->is_sub_fighter);
+            pl_80040120(fp->player_idx, fp->is_sub_fighter);
             return true;
         }
     }

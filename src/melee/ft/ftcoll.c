@@ -488,14 +488,14 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
             int tmp_dmg = int_dmg + hit0->x34;
             PAD_STACK(4);
             fp1->x19A0_shieldDamageTaken += tmp_dmg < 0 ? 0 : tmp_dmg;
-            fp1->x19BC_shieldDamageTaken3 = fp0->player_id;
+            fp1->x19BC_shieldDamageTaken3 = fp0->player_idx;
             fp1->x221F_b6 = fp0->is_sub_fighter;
             efSync_Spawn(1052, NULL, &hit0->hurt_coll_pos);
         } else {
             ftCo_80094138(fp1);
             ftCo_800BFFD0(fp1, 118, 0);
             ft_PlaySFX(fp1, 104, 0x7F, 0x40);
-            pl_8003E150(fp1->player_id, fp1->is_sub_fighter);
+            pl_8003E150(fp1->player_idx, fp1->is_sub_fighter);
             efSync_Spawn(27, NULL, &hit0->hurt_coll_pos);
         }
     }
@@ -947,7 +947,7 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
 
     if (ftLib_80086960(item->owner)) {
         Fighter* owner_fp = item->owner->user_data;
-        fp->x19BC_shieldDamageTaken3 = owner_fp->player_id;
+        fp->x19BC_shieldDamageTaken3 = owner_fp->player_idx;
         fp->x221F_b6 = owner_fp->is_sub_fighter;
     } else {
         fp->x19BC_shieldDamageTaken3 = 6;
@@ -1115,7 +1115,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
             mode = 0;
         }
         it_8026FAC4(item, hit, mode, fp, 0);
-        if (!fp->x2224_b2) {
+        if (!fp->stamina_dead) {
             switch (item->kind) {
             case It_Kind_Star:
                 hit->state = HitCapsule_Disabled;
@@ -1137,7 +1137,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
             default:
                 break;
             }
-            pl_8003E17C(fp->player_id, fp->is_sub_fighter, item->entity);
+            pl_8003E17C(fp->player_idx, fp->is_sub_fighter, item->entity);
         }
         return false;
     }
@@ -1343,7 +1343,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
 
 static inline int getUnkVal(Fighter* fp, int i)
 {
-    return i + fp->player_id * 2 + fp->is_sub_fighter;
+    return i + fp->player_idx * 2 + fp->is_sub_fighter;
 }
 
 void ftColl_80078384(Fighter* fp, FighterHurtCapsule* arg1, HitCapsule* arg2)
@@ -1426,7 +1426,7 @@ void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
 
     if (attacker != NULL) {
         victim->dmg.x18C0 = attacker == victim ? 0 : attacker->x8_spawnNum;
-        victim->dmg.x18c4_source_ply = attacker->player_id;
+        victim->dmg.x18c4_source_ply = attacker->player_idx;
         victim->dmg.x18C8 = -1;
         victim->x221F_b5 = attacker->is_sub_fighter;
     } else {
@@ -1477,7 +1477,7 @@ void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
     PAD_STACK(8);
 
     if (ip->kind == It_Kind_BombHei) {
-        pl_80041B08(fp->player_id, (UNK_T) (uintptr_t) fp->is_sub_fighter,
+        pl_80041B08(fp->player_idx, (UNK_T) (uintptr_t) fp->is_sub_fighter,
                     (u16) ip->x1C);
     }
 
@@ -1512,7 +1512,7 @@ void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
     ftColl_80076444(arg0, arg1);
     fp0 = arg0->user_data;
     fp1 = arg1->user_data;
-    pl_8003EB30(arg2, fp0->player_id, fp0->is_sub_fighter, fp1->player_id,
+    pl_8003EB30(arg2, fp0->player_idx, fp0->is_sub_fighter, fp1->player_idx,
                 fp1->is_sub_fighter, fp0->x2070.x2073);
 }
 #ifdef MUST_MATCH
@@ -1534,8 +1534,8 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
     if (ftLib_80086960(ip->owner)) {
         Fighter* owner_fp = ip->owner->user_data;
         Fighter* victim_fp = arg1->user_data;
-        pl_8003EB30(arg2, owner_fp->player_id, owner_fp->is_sub_fighter,
-                    victim_fp->player_id, victim_fp->is_sub_fighter,
+        pl_8003EB30(arg2, owner_fp->player_idx, owner_fp->is_sub_fighter,
+                    victim_fp->player_idx, victim_fp->is_sub_fighter,
                     ip->xD90.x2073);
     }
 }
@@ -1587,7 +1587,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                   victim_fp->x1988 == 0 && victim_fp->x198C == 0 &&
                   !victim_fp->x221D_b6 &&
                   !(victim_fp->x1A6A & this_fp->x1A68) &&
-                  !victim_fp->x2224_b2)))
+                  !victim_fp->stamina_dead)))
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = HitCapsuleGetPtr(this_fp, i);
@@ -1667,13 +1667,13 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                 victim_fp = victim_gobj->user_data;
                 flag1 = false;
                 if ((victim_fp->x1064_thrownHitbox.owner != NULL)) {
-                    if (this_fp->player_id != victim_fp->grabber_unk1) {
+                    if (this_fp->player_idx != victim_fp->grabber_unk1) {
                         flag1 = true;
                     } else {
                         continue;
                     }
                 }
-                if (flag1 || (this_fp->player_id != victim_fp->player_id)) {
+                if (flag1 || (this_fp->player_idx != victim_fp->player_idx)) {
                     if (!gm_8016B168() || gm_8016B0D4() ||
                         ((u8) victim_fp->x2225_b4) ||
                         this_fp->team !=
@@ -1921,7 +1921,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                                             hit0,
                                                                             (0x72 +
                                                                              (this_fp
-                                                                                  ->player_id *
+                                                                                  ->player_idx *
                                                                               2) +
                                                                              (u8) this_fp
                                                                                  ->is_sub_fighter));
@@ -1931,7 +1931,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                                             hit0,
                                                                             (0x7E +
                                                                              (this_fp
-                                                                                  ->player_id *
+                                                                                  ->player_idx *
                                                                               2) +
                                                                              (u8) this_fp
                                                                                  ->is_sub_fighter));
@@ -2298,11 +2298,11 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                             (u32) hurt->sfx_severity == 2)
                         {
                             fp->x215C = lbColl_80005BB0(hurt,
-                                (0x72 + (fp->player_id * 2) +
+                                (0x72 + (fp->player_idx * 2) +
                                  (u8) fp->is_sub_fighter));
                         } else {
                             fp->x2160 = lbColl_80005BB0(hurt,
-                                (0x7E + (fp->player_id * 2) +
+                                (0x7E + (fp->player_idx * 2) +
                                  (u8) fp->is_sub_fighter));
                         }
                         break;
@@ -2321,7 +2321,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 {
     if (fp->x2225_b7) {
-        if (fp->x2224_b2) {
+        if (fp->stamina_dead) {
             return (s32) ftd->x6D8[0];
         }
         return ftd->x6D4;
@@ -2381,8 +2381,8 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
                       int unk_count)
 {
     float weight = fp->co_attrs.weight;
-    float defense = Player_GetDefenseRatio(fp->player_id);
-    float attack = Player_GetAttackRatio(attacker->player_id);
+    float defense = Player_GetDefenseRatio(fp->player_idx);
+    float attack = Player_GetAttackRatio(attacker->player_idx);
     float stage = gm_8016B248();
     ftCommonData* ftd = p_ftCommonData;
     u32 x28 = hit->x28;
@@ -2409,7 +2409,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
         /// @todo Expanded inline of #ftColl_GetDamageCount; re-inline when
         /// the call form matches.
         if (fp->x2225_b7) {
-            if (fp->x2224_b2) {
+            if (fp->stamina_dead) {
                 count = (s32) ftd->x6D8[0];
             } else {
                 count = (s32) ftd->x6D4;
@@ -2553,10 +2553,10 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             unk_count = entry->size_of_xC;
             attacker_fp = (Fighter*) entry->gobj->user_data;
             hit = entry->hit0;
-            kb = ftColl_80079AB0(fp, hit, unk_count, gm_8016B248(),
-                                 Player_GetAttackRatio(attacker_fp->player_id),
-                                 Player_GetDefenseRatio(fp->player_id),
-                                 co->weight);
+            kb = ftColl_80079AB0(
+                fp, hit, unk_count, gm_8016B248(),
+                Player_GetAttackRatio(attacker_fp->player_idx),
+                Player_GetDefenseRatio(fp->player_idx), co->weight);
 
             if (arg4 != 0) {
                 u32 u_dmg = (u32) entry->x20;
@@ -2599,13 +2599,13 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
 
             if (ftLib_80086960(tail_owner_gobj)) {
                 Fighter* owner_fp = (Fighter*) tail_owner_gobj->user_data;
-                attack = Player_GetAttackRatio(owner_fp->player_id);
+                attack = Player_GetAttackRatio(owner_fp->player_idx);
             } else {
                 attack = 1.0F;
             }
 
             kb = co->weight;
-            defense = Player_GetDefenseRatio(fp->player_id);
+            defense = Player_GetDefenseRatio(fp->player_idx);
             stage = gm_8016B248();
             hit = entry->hit0;
             ftd = p_ftCommonData;
@@ -2631,7 +2631,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 s32 count;
 
                 if (fp->x2225_b7) {
-                    if (fp->x2224_b2) {
+                    if (fp->stamina_dead) {
                         count = (s32) ftd->x6D8[0];
                     } else {
                         count = (s32) ftd->x6D4;
@@ -2707,7 +2707,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                             (lbColl_80008D30_arg1*) entry->unk_anim0);
 
             weight = co->weight;
-            defense = Player_GetDefenseRatio(fp->player_id);
+            defense = Player_GetDefenseRatio(fp->player_idx);
             stage = gm_8016B248();
             w = weight;
             w *= (ftd = p_ftCommonData)->xF4;
@@ -2732,7 +2732,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 s32 count;
 
                 if (fp->x2225_b7) {
-                    if (fp->x2224_b2) {
+                    if (fp->stamina_dead) {
                         count = (s32) ftd->x6D8[0];
                     } else {
                         count = (s32) ftd->x6D4;
@@ -2893,7 +2893,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
 
         if (ip->kind == It_Kind_BombHei) {
             u32 b4 = victim_fp->is_sub_fighter;
-            int player_id = victim_fp->player_id;
+            int player_id = victim_fp->player_idx;
             pl_80041B08(player_id, (UNK_T) (uintptr_t) b4, (u16) ip->x1C);
         }
 
@@ -3351,7 +3351,7 @@ void ftColl_8007B8CC(Fighter* fp, Fighter_GObj* grabber_gobj)
     Fighter* grabber_fp = GET_FIGHTER(grabber_gobj);
     fp->x1064_thrownHitbox.owner = grabber_gobj;
     fp->x119C_teamUnk = grabber_fp->team;
-    fp->grabber_unk1 = grabber_fp->player_id;
+    fp->grabber_unk1 = grabber_fp->player_idx;
 }
 
 void ftColl_8007B8E8(Fighter_GObj* gobj)
@@ -3657,8 +3657,8 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
                 ftColl_80076444(s2, fighter_victim);
                 src_fp = s2->user_data;
                 victim_fp = fighter_victim->user_data;
-                pl_8003EB30(dmg_amount, src_fp->player_id,
-                            src_fp->is_sub_fighter, victim_fp->player_id,
+                pl_8003EB30(dmg_amount, src_fp->player_idx,
+                            src_fp->is_sub_fighter, victim_fp->player_idx,
                             victim_fp->is_sub_fighter, src_fp->x2070.x2073);
             }
             break;
@@ -3675,9 +3675,9 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
                     if (ftLib_80086960(tail_owner_gobj)) {
                         owner_fp = ip->owner->user_data;
                         victim_fp = item_victim->user_data;
-                        pl_8003EB30(dmg_amount, owner_fp->player_id,
+                        pl_8003EB30(dmg_amount, owner_fp->player_idx,
                                     owner_fp->is_sub_fighter,
-                                    victim_fp->player_id,
+                                    victim_fp->player_idx,
                                     victim_fp->is_sub_fighter, ip->xD90.x2073);
                     }
                 }

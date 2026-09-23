@@ -47,12 +47,13 @@ typedef struct _StaticPlayer {
                             ///< ::CostumeListsForeachCharacter and
                             ///< ::gm_GetNumCostumesForCKind
     /*0x45*/ u8 unk45;
-    /*0x46*/ s8 controller_index; ///< Physical controller port up to
-                                  ///< ::PAD_MAX_CONTROLLERS
-    /*0x47*/ u8 team;             ///< ::TeamColor
-    /*0x48*/ u8 player_id;        ///< Player "slot" up to ::GM_MAX_PLAYERS
-    /*0x49*/ u8 cpu_level;        ///< 1 to 9
-    /*0x4A*/ u8 cpu_type;         ///< ::CpuKind
+    /*0x46*/ s8 sub_color; ///< Tint index, 0 to 4; see
+                           ///< #gm_SetupSubColors
+    /*0x47*/ u8 team;      ///< ::TeamColor
+    /*0x48*/ u8 pad_port;  ///< Physical controller port up to
+                           ///< ::PAD_MAX_CONTROLLERS
+    /*0x49*/ u8 cpu_level; ///< 1 to 9
+    /*0x4A*/ u8 cpu_type;  ///< ::CpuKind
     /*0x4B*/ u8 handicap;
 
     /*0x4C*/ s8 unk4C;
@@ -191,12 +192,12 @@ void Player_SetFacingDirection(s32 slot, f32 direction);
 void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction);
 u32 Player_GetCostumeId(int slot);
 void Player_SetCostumeId(int slot, int costume_id);
-u8 Player_GetControllerIndex(int slot);
-void Player_SetControllerIndex(int slot, s8 controller_index);
+u8 Player_GetSubColor(int slot);
+void Player_SetSubColor(int slot, s8 sub_color);
 int Player_GetTeam(int slot);
 void Player_SetTeam(int slot, s8 unk_color);
-int Player_GetPlayerId(int slot);
-void Player_SetPlayerId(int slot, int player_id);
+int Player_GetPadPort(int slot);
+void Player_SetPadPort(int slot, int controller_index);
 int Player_GetCpuLevel(int slot);
 void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level);
 int Player_GetCpuType(int slot);
