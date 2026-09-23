@@ -7,13 +7,13 @@
 #include <stdbool.h>
 
 #include "forward.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ft_0D27.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
-#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 /* 0D2530 */ static void fn_800D2530(Fighter_GObj* gobj);
