@@ -10,10 +10,6 @@
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
 {
     const char* symbol;
@@ -34,9 +30,6 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline void vLoadSections(HSD_Archive* archive, void** symbol,
                                  va_list symbols)
