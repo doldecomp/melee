@@ -123,7 +123,7 @@ void ARQReset(void)
     __ARQ_init_flag = 0;
 }
 
-void ARQPostRequest(struct ARQRequest* request, u32 owner, u32 type,
+void ARQPostRequest(struct ARQRequest* request, uintptr_t owner, u32 type,
                     u32 priority, u32 source, u32 dest, u32 length,
                     ARQCallback callback)
 {
@@ -208,7 +208,7 @@ void ARQRemoveRequest(struct ARQRequest* request)
     OSRestoreInterrupts(level);
 }
 
-void ARQRemoveOwnerRequest(u32 owner)
+void ARQRemoveOwnerRequest(uintptr_t owner)
 {
     struct ARQRequest* thisRequest;
     int level;
