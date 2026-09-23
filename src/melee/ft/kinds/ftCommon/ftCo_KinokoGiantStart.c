@@ -14,6 +14,7 @@
 #include <melee/ft/ft_0D27.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 /* 0D17FC */ static void fn_800D17FC(Fighter_GObj* gobj);
@@ -115,10 +116,8 @@ void fn_800D17FC(Fighter_GObj* gobj)
 
 void ftCo_KinokoGiantStart_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D15D0(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D15D0);
 }
 
 void ftCo_KinokoGiantStart_Coll(Fighter_GObj* gobj)
@@ -149,10 +148,8 @@ void fn_800D19BC(Fighter_GObj* gobj)
 
 void ftCo_KinokoGiantStartAir_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D15D0(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D15D0);
 }
 
 void ftCo_KinokoGiantStartAir_Coll(Fighter_GObj* gobj)

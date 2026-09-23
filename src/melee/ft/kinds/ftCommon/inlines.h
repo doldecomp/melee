@@ -9,6 +9,7 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_0D27.h>
 #include <melee/ft/ftcmdscript.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
@@ -111,6 +112,13 @@ static inline void ftCo_Cliff_EnterState(Fighter_GObj* gobj, Fighter* fp,
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 32);
     fp->x221D_b7 = true;
+}
+
+static inline void ftCo_Kinoko_Anim(Fighter_GObj* gobj, HSD_GObjEvent cb)
+{
+    if (!fn_800D2A3C(gobj)) {
+        cb(gobj);
+    }
 }
 
 #endif

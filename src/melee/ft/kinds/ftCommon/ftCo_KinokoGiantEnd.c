@@ -11,6 +11,7 @@
 #include <melee/ft/ft_0D27.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/inlines.h>
+#include <melee/ft/kinds/ftCommon/inlines.h>
 #include <melee/ft/types.h>
 
 /* 0D1C40 */ static void fn_800D1C40(Fighter_GObj* gobj);
@@ -78,20 +79,11 @@ void fn_800D1C40(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1B04;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_KinokoGiantEnd_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D1B04(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D1B04);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_KinokoGiantEnd_Coll(Fighter_GObj* gobj)
 {
@@ -119,20 +111,11 @@ void fn_800D1DB0(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1B04;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_KinokoGiantEndAir_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D1B04(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D1B04);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_KinokoGiantEndAir_Coll(Fighter_GObj* gobj)
 {
