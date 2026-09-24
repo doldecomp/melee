@@ -1037,26 +1037,28 @@ void ftCo_8008FC94(Fighter_GObj* gobj)
     ftCommon_8007D5D4(gobj->user_data);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
                        ? sqrtf(VEC3_SQ_LEN(fp->x8c_kb_vel))
                        : ABS(fp->xF0_ground_kb_vel);
-    fp->mv.co.damage.x8 =
-        kb_vel < p_ftCommonData->x568   ? 0
-        : kb_vel < p_ftCommonData->x56C ? p_ftCommonData->x57C
-        : kb_vel < p_ftCommonData->x570 ? p_ftCommonData->x57C
-        : kb_vel < p_ftCommonData->x574 ? p_ftCommonData->x580
-        : kb_vel < p_ftCommonData->x578 ? p_ftCommonData->x584
-                                        : p_ftCommonData->x588;
+    int value;
+
+    if (kb_vel < p_ftCommonData->x568) {
+        value = 0;
+    } else if (kb_vel < p_ftCommonData->x56C) {
+        value = p_ftCommonData->x57C;
+    } else if (kb_vel < p_ftCommonData->x570) {
+        value = p_ftCommonData->x57C;
+    } else if (kb_vel < p_ftCommonData->x574) {
+        value = p_ftCommonData->x580;
+    } else if (kb_vel < p_ftCommonData->x578) {
+        value = p_ftCommonData->x584;
+    } else {
+        value = p_ftCommonData->x588;
+    }
+    fp->mv.co.damage.x8 = value;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline void inlineD0(Fighter_GObj* gobj)
 {
