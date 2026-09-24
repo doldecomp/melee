@@ -1841,22 +1841,22 @@ bool ftCo_800B8A9C(Fighter* fp)
         } else {
             switch (item->kind) {
             case It_Kind_Harisen:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[0];
+                weapon_reach = Fighter_804D64FC->x24[0];
                 break;
             case It_Kind_LipStick:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[1];
+                weapon_reach = Fighter_804D64FC->x24[1];
                 break;
             case It_Kind_StarRod:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[2];
+                weapon_reach = Fighter_804D64FC->x24[2];
                 break;
             case It_Kind_Sword:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[3];
+                weapon_reach = Fighter_804D64FC->x24[3];
                 break;
             case It_Kind_Bat:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[4];
+                weapon_reach = Fighter_804D64FC->x24[4];
                 break;
             case It_Kind_Parasol:
-                weapon_reach = ((float*) Fighter_804D64FC->x24)[5];
+                weapon_reach = Fighter_804D64FC->x24[5];
                 break;
             default:
                 weapon_reach = 0.0f;
