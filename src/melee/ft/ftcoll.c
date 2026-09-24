@@ -303,6 +303,30 @@ void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
     lbColl_80008440(dst);
 }
 
+static inline void updateClankDamage(Fighter* fp, HitCapsule* hit, int int_dmg,
+                                     Vec3* other_pos, bool compare_other_first)
+{
+    if (int_dmg > fp->dmg.int_value) {
+        fp->dmg.int_value = int_dmg;
+        if (hit->x40_b1 == true && fp->ground_or_air == GA_Ground) {
+            fp->dmg.x191C =
+                int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
+            {
+                float facing_dir;
+                // Preserve the original operand order for matching.
+                if (compare_other_first ? other_pos->x > fp->cur_pos.x
+                                        : fp->cur_pos.x < other_pos->x)
+                {
+                    facing_dir = +1;
+                } else {
+                    facing_dir = -1;
+                }
+                fp->dmg.facing_dir = facing_dir;
+            }
+        }
+    }
+}
+
 bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
@@ -318,22 +342,7 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit0->damage) {
             int int_dmg = getEnvDmg(dmg);
             ftColl_80076808(fp1, hit1, 3, fp0, true);
-            if (int_dmg > fp1->dmg.int_value) {
-                fp1->dmg.int_value = int_dmg;
-                if (hit1->x40_b1 == true && fp1->ground_or_air == GA_Ground) {
-                    fp1->dmg.x191C =
-                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-                    {
-                        float facing_dir;
-                        if (fp1->cur_pos.x < fp0->cur_pos.x) {
-                            facing_dir = +1;
-                        } else {
-                            facing_dir = -1;
-                        }
-                        fp1->dmg.facing_dir = facing_dir;
-                    }
-                }
-            }
+            updateClankDamage(fp1, hit1, int_dmg, &fp0->cur_pos, false);
             efSync_Spawn(1052, NULL, &midpoint);
         }
     }
@@ -343,22 +352,7 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit1->damage) {
             int int_dmg = getEnvDmg(dmg);
             ftColl_80076808(fp0, hit0, 3, fp1, false);
-            if (int_dmg > fp0->dmg.int_value) {
-                fp0->dmg.int_value = int_dmg;
-                if (hit0->x40_b1 == true && fp0->ground_or_air == GA_Ground) {
-                    fp0->dmg.x191C =
-                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-                    {
-                        float facing_dir;
-                        if (fp1->cur_pos.x > fp0->cur_pos.x) {
-                            facing_dir = +1;
-                        } else {
-                            facing_dir = -1;
-                        }
-                        fp0->dmg.facing_dir = facing_dir;
-                    }
-                }
-            }
+            updateClankDamage(fp0, hit0, int_dmg, &fp1->cur_pos, true);
             efSync_Spawn(1052, NULL, &midpoint);
             ftColl_800784B4(fp1, hit0, hit1);
             return true;
@@ -894,6 +888,45 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
     efSync_Spawn(0x41C, NULL, &hurt->hurt_coll_pos);
 }
 
+static inline void recordItemClank(Item* item, HitCapsule* hit, Fighter* fp,
+                                   Vec3* effect_pos, float dmg)
+{
+    int int_dmg = getEnvDmg(dmg);
+    int mode;
+
+    if (hit->x41_b5) {
+        mode = 4;
+    } else {
+        mode = 3;
+    }
+
+    it_8026FAC4(item, hit, mode, fp, 0);
+
+    if (int_dmg > item->xC48) {
+        float dir;
+
+        item->xCF4_fighterGObjUnk = fp->gobj;
+        item->xC48 = int_dmg;
+
+        if (ABS(item->x40_vel.x) < it_804D6D28->xD4) {
+            if (item->pos.x > fp->cur_pos.x) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        } else {
+            if (item->x40_vel.x < 0.0f) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        }
+        item->xCB8_outDamageDirection = dir;
+    }
+
+    efSync_Spawn(0x41C, NULL, effect_pos);
+}
+
 void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
                      HitCapsule* hit2)
 {
@@ -909,22 +942,7 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit1->damage) {
             int int_dmg = getEnvDmg(dmg);
             ftColl_80076808(fp, hit2, 3, item, true);
-            if (int_dmg > fp->dmg.int_value) {
-                fp->dmg.int_value = int_dmg;
-                if (hit2->x40_b1 == true && fp->ground_or_air == GA_Ground) {
-                    fp->dmg.x191C =
-                        int_dmg * p_ftCommonData->x3D0 + p_ftCommonData->x3D4;
-                    {
-                        float facing_dir;
-                        if (fp->cur_pos.x < item->pos.x) {
-                            facing_dir = 1.0f;
-                        } else {
-                            facing_dir = -1.0f;
-                        }
-                        fp->dmg.facing_dir = facing_dir;
-                    }
-                }
-            }
+            updateClankDamage(fp, hit2, int_dmg, &item->pos, false);
             efSync_Spawn(0x41C, NULL, &midpoint);
         }
     }
@@ -932,40 +950,7 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
     {
         float dmg = hit1->damage;
         if ((int) dmg - p_ftCommonData->x3CC < (int) hit2->damage) {
-            int int_dmg = getEnvDmg(dmg);
-            int mode;
-
-            if (hit1->x41_b5) {
-                mode = 4;
-            } else {
-                mode = 3;
-            }
-
-            it_8026FAC4(item, hit1, mode, fp, 0);
-
-            if (int_dmg > item->xC48) {
-                float dir;
-
-                item->xCF4_fighterGObjUnk = fp->gobj;
-                item->xC48 = int_dmg;
-
-                if (ABS(item->x40_vel.x) < it_804D6D28->xD4) {
-                    if (item->pos.x > fp->cur_pos.x) {
-                        dir = -1.0f;
-                    } else {
-                        dir = 1.0f;
-                    }
-                } else {
-                    if (item->x40_vel.x < 0.0f) {
-                        dir = -1.0f;
-                    } else {
-                        dir = 1.0f;
-                    }
-                }
-                item->xCB8_outDamageDirection = dir;
-            }
-
-            efSync_Spawn(0x41C, NULL, &midpoint);
+            recordItemClank(item, hit1, fp, &midpoint, dmg);
         }
     }
 }
@@ -1848,6 +1833,13 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     }
 }
 
+// The extra inline level keeps the clank handler out of line in MWCC.
+static inline void ftColl_80077970_dontinline(Item* item, HitCapsule* item_hit,
+                                              Fighter* fp, HitCapsule* hit)
+{
+    ftColl_80077970(item, item_hit, fp, hit);
+}
+
 void ftColl_8007925C(Fighter_GObj* gobj)
 { // clang-format off
     u32 i, j, n, m;
@@ -2045,7 +2037,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                         if (lbColl_80007AFC(hurt, temp_hit,
                                 item->scl, fp->x34_scale.y))
                         {
-                            ftColl_80077970(item, hurt, fp, temp_hit);
+                            ftColl_80077970_dontinline(item, hurt, fp, temp_hit);
                             flag = true;
                             break;
                         }
