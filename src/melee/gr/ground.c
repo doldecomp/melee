@@ -595,8 +595,8 @@ void Ground_801C0C2C(HSD_GObj* arg0)
 
     if (stage_info.unk8C.b6 || stage_info.unk8C.b7) {
         HSD_GObj* gobj = Ground_GetP1Fighter();
-        if (gobj != NULL && !ftLib_8008701C(gobj)) {
-            ftLib_80086644(gobj, &sp50);
+        if (gobj != NULL && !ftLib_IsSleeping(gobj)) {
+            ftLib_GetPos(gobj, &sp50);
             if (stage_info.unk8C.b6) {
                 int i;
                 bool result = pass_x_bounds = pass_y_min =

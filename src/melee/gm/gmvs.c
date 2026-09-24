@@ -996,7 +996,7 @@ int gm_GetMatchEndPlayerScore(int pl_slot)
 s32 gm_8016C6C0(HSD_GObj* arg0)
 {
     PAD_STACK(0x10);
-    return gm_8016C5C0(ftLib_80086BE0(arg0));
+    return gm_8016C5C0(ftLib_GetPlayerIndex(arg0));
 }
 
 int gm_8016C75C(HSD_GObj* player)
@@ -1009,7 +1009,7 @@ int gm_8016C75C(HSD_GObj* player)
         match_end->x0 = gm_801A4BA8();
         gm_80166378(match_end);
     }
-    return match_end->player_standings[ftLib_80086BE0(player)].x20;
+    return match_end->player_standings[ftLib_GetPlayerIndex(player)].x20;
 }
 
 void fn_8016C7D0(HSD_GObj* gobj)

@@ -818,8 +818,9 @@ void stageGObj10_GObjProc(Ground_GObj* arg0)
         if (gp->u.icemt10.x14_b4) {
             fighter_gobj = Ground_GetP1Fighter();
             if (fighter_gobj != NULL) {
-                ftLib_80086644(fighter_gobj, &sp24);
-                if (!gp->u.icemt10.x14_b1 && !ftLib_80086EC0(fighter_gobj) &&
+                ftLib_GetPos(fighter_gobj, &sp24);
+                if (!gp->u.icemt10.x14_b1 &&
+                    !ftLib_IsInHitstun(fighter_gobj) &&
                     sp24.y > yakumono_param->ft_max_y)
                 {
                     gp->u.icemt10.x14_b1 = true;

@@ -120,7 +120,7 @@ void it_802AFF08(Item_GObj* gobj, Fighter_GObj* owner)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_8026BD6C(gobj);
     it_80275158(gobj, attr->x0);
-    if (ftLib_800865CC(owner)) {
+    if (ftLib_GetGroundAir(owner)) {
         angle_factor = 2.3561945f;
     } else {
         angle_factor = 1.5707964f;

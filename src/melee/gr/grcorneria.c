@@ -2137,7 +2137,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         {
             HSD_GObj* fighter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
             while (fighter != NULL) {
-                ftLib_80086644(fighter, &fighter_pos);
+                ftLib_GetPos(fighter, &fighter_pos);
                 if (ABS(cannon_pos.y - fighter_pos.y) <= 10.0f) {
                     found = 1;
                     break;

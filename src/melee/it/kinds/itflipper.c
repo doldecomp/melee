@@ -165,8 +165,8 @@ static inline f32 spinSpeed(Item_GObj* gobj, HSD_GObj* fighter, Vec3* pos)
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     f32 speed;
     Vec3 vel;
-    ftLib_800866DC(fighter, pos);
-    ftLib_80086BEC(fighter, &vel);
+    ftLib_GetCameraBonePos(fighter, pos);
+    ftLib_GetPosDelta(fighter, &vel);
     speed = attrs->x18_spinMultiplier * lbVector_Len_xy(&vel);
     return speed;
 }
@@ -178,8 +178,8 @@ static inline f32 spinSpeedDirect(Item_GObj* gobj, HSD_GObj* fighter,
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     Vec3 vel;
     f32 speed;
-    ftLib_800866DC(fighter, pos);
-    ftLib_80086BEC(fighter, &vel);
+    ftLib_GetCameraBonePos(fighter, pos);
+    ftLib_GetPosDelta(fighter, &vel);
     speed = attrs->x18_spinMultiplier * sqrtf(vel.x * vel.x + vel.y * vel.y);
     return speed;
 }
@@ -194,7 +194,7 @@ void itFlipper_SpinFromFighter(Item_GObj* gobj)
 
     if (ip->xCF4_fighterGObjUnk != NULL) {
         HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
-        if (ftLib_80086960(fighter)) {
+        if (ftLib_IsFighter(fighter)) {
             speed = spinSpeedDirect(gobj, fighter, &pos);
         }
         ip->xCF4_fighterGObjUnk = NULL;
@@ -210,7 +210,7 @@ static inline void spinFromVictim(Item_GObj* gobj, Vec3* pos)
 
     if (ip->xCF4_fighterGObjUnk != NULL) {
         HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
-        if (ftLib_80086960(fighter)) {
+        if (ftLib_IsFighter(fighter)) {
             speed = spinSpeed(gobj, fighter, pos);
         }
         ip->xCF4_fighterGObjUnk = NULL;
@@ -299,7 +299,7 @@ void itFlipper_Thrown(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->owner != NULL) {
-        if (ftLib_80087284(ip->owner)) {
+        if (ftLib_IsSmashThrow(ip->owner)) {
             ip->xDD4_itemVar.flipper.xDD4_flightTimer =
                 attrs->x4_smashThrowDuration;
         } else {
@@ -557,7 +557,7 @@ static inline void spinFromAttacker(Item_GObj* gobj, Vec3* pos)
 
     if (ip->xCEC_fighterGObj != NULL) {
         HSD_GObj* fighter = ip->xCEC_fighterGObj;
-        if (ftLib_80086960(fighter)) {
+        if (ftLib_IsFighter(fighter)) {
             speed = spinSpeed(gobj, fighter, pos);
         }
         ip->xCEC_fighterGObj = NULL;

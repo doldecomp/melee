@@ -94,7 +94,7 @@ void fn_800C9290(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_GObj* owner = itGetOwner(fp->mv.co.barrel.x8);
-    if (ftLib_80086960(owner)) {
+    if (ftLib_IsFighter(owner)) {
         ftColl_8007B8CC(fp, owner);
     }
 }
@@ -110,7 +110,7 @@ void ftCo_800C92E4(Fighter_GObj* gobj, Vec3* arg1, Vec3* arg2,
         Vec3 sp_vec1;
         Vec3 sp_vec2;
         HSD_JObjGetTranslation(jobj, &sp_vec1);
-        ftLib_800866DC(gobj, &sp_vec2);
+        ftLib_GetCameraBonePos(gobj, &sp_vec2);
         fp->cur_pos.x = (arg1->x + sp_vec1.x) - sp_vec2.x;
         fp->cur_pos.y = (arg1->y + sp_vec1.y) - sp_vec2.y;
         fp->cur_pos.z = 0.0F;

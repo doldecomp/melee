@@ -65,7 +65,7 @@ void itGameWatchPanic_Logic78_PickedUp(Item_GObj* gobj)
     ip->xDB0_itcmd_var1 = 0;
     ip->xDAC_itcmd_var0 = 0;
     if (ip->owner != NULL) {
-        ip->ground_or_air = ftLib_800865CC(ip->owner);
+        ip->ground_or_air = ftLib_GetGroundAir(ip->owner);
         if (ip->ground_or_air == GA_Ground) {
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         } else {

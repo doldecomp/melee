@@ -111,7 +111,7 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->vel = zero_vel;
             link->pos = ip->pos;
             link->x2C_b0 = true;
-            it_802A24D0(link, 2.0f * ftLib_80086A0C(ip->owner));
+            it_802A24D0(link, 2.0f * ftLib_GetScale(ip->owner));
             {
                 itYoyoAttributes* attrs =
                     ip->xC4_article_data->x4_specialAttributes;
@@ -394,8 +394,8 @@ s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     {
         Vec3 dir;
         Vec3 dir2;
-        f32 min_len = attrs->x10_UNK1 * ftLib_80086A0C(ip->owner);
-        f32 max_len = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+        f32 min_len = attrs->x10_UNK1 * ftLib_GetScale(ip->owner);
+        f32 max_len = attrs->xC_SIZE * ftLib_GetScale(ip->owner);
         Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
         ItemLink* cur = link;
         ItemLink* next = cur->next;
@@ -478,8 +478,8 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     s32 count;
     f32 size;
 
-    ftLib_80086A0C(ip->owner);
-    size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+    ftLib_GetScale(ip->owner);
+    size = attrs->xC_SIZE * ftLib_GetScale(ip->owner);
     cur = link;
     next = link->next;
 
@@ -558,7 +558,7 @@ bool it_802BF800(ItemLink* item, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
     Vec3 dir;
     f32 len;
     f32 step;
-    f32 size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+    f32 size = attrs->xC_SIZE * ftLib_GetScale(ip->owner);
     ItemLink* prev = item->prev;
     ItemLink* cur = item;
     while (prev != NULL && !cur->x2C_b0) {
@@ -597,7 +597,7 @@ void it_802BF900(Item* ip)
     PAD_STACK(0xC);
 
     offset = it_803B86A4;
-    scl = ftLib_80086A0C(ip->owner);
+    scl = ftLib_GetScale(ip->owner);
 
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXIdentity(trans);
@@ -689,7 +689,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
         } else {
             scale = 1.0f;
         }
-        scale *= ftLib_80086A0C(ip->owner);
+        scale *= ftLib_GetScale(ip->owner);
         PSMTXCopy(jobj->mtx, m);
         m[0][0] *= scale;
         m[1][0] *= scale;

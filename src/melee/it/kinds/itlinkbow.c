@@ -55,7 +55,7 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
         item = GET_ITEM((HSD_GObj*) gobj);
         Item_ClearCmdVars(item);
         item->xDCC_flag.b3 = false;
-        item->xDD4_itemVar.linkbow.x0 = ftLib_800869D4(item->owner);
+        item->xDD4_itemVar.linkbow.x0 = ftLib_GetModelScale(item->owner);
         item->xDD4_itemVar.linkbow.x4 = owner_gobj;
         Item_8026AB54((HSD_GObj*) gobj, (HSD_GObj*) owner_gobj, arg3);
     }

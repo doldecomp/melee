@@ -1060,7 +1060,7 @@ static inline int soundGetPosition(HSD_GObj* gobj, Vec3* pos)
     {
         switch (GET_SOUND(gobj)->owner->classifier) {
         case HSD_GOBJ_CLASS_FIGHTER:
-            ftLib_80086644(GET_SOUND(gobj)->owner, pos);
+            ftLib_GetPos(GET_SOUND(gobj)->owner, pos);
             return 0;
         case HSD_GOBJ_CLASS_ITEM:
             it_8026B294(GET_SOUND(gobj)->owner, pos);

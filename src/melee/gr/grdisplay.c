@@ -47,8 +47,8 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
                 for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                      cur != NULL; cur = cur->next)
                 {
-                    LbShadow* shadow = ftLib_800872B0(cur);
-                    ftLib_80086644(cur, &fighter_pos);
+                    LbShadow* shadow = ftLib_GetShadow(cur);
+                    ftLib_GetPos(cur, &fighter_pos);
                     if (Camera_80030B24() || stage_info.on_check_shadow_render(
                                                  &fighter_pos, -1, jobj))
                     {
@@ -120,7 +120,7 @@ void grDisplay_801C5DB0(HSD_GObj* gobj, intptr_t code)
                 for (fighter = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER];
                      fighter != NULL; fighter = fighter->next)
                 {
-                    LbShadow* shadow = ftLib_800872B0(fighter);
+                    LbShadow* shadow = ftLib_GetShadow(fighter);
                     shadow->x0_b4 = 0;
                     lbShadow_8000EEE0(fighter);
                 }

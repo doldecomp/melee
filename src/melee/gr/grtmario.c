@@ -177,8 +177,8 @@ int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
     f32 unused = -120.0f;
 
     temp_f31 = unused * Ground_801C0498();
-    ftLib_80086644(gobj, &current);
-    ftLib_80086684(gobj, &previous);
+    ftLib_GetPos(gobj, &current);
+    ftLib_GetPrevPos(gobj, &previous);
     if ((current.y < temp_f31) && (previous.y > temp_f31)) {
         temp_f1 = ftLib_80086B80(gobj) / 10.0f;
         current.y = temp_f31;
