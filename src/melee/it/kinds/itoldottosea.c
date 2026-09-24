@@ -166,7 +166,7 @@ void it_802E27B4(Item_GObj* gobj)
         ip->xDD4_itemVar.oldottosea.x2C = 0;
     }
 
-    if ((u32) ip->xDD4_itemVar.oldottosea.x20 != 0) {
+    if (ip->xDD4_itemVar.oldottosea.x20 != NULL) {
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     } else {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -363,7 +363,7 @@ void it_802E2E30(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     itResetVelocity(ip);
     ip->xDD4_itemVar.oldottosea.x24 = 0;
-    if ((u32) ip->xDD4_itemVar.oldottosea.x20 != 0) {
+    if (ip->xDD4_itemVar.oldottosea.x20 != NULL) {
         Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
     } else {
         Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);

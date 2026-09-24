@@ -194,7 +194,7 @@ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 total_play_time;
-    s32 i;
+    int i;
     f32 zero = 0.0f;
 
     if (is_name_mode != 0) {
@@ -231,24 +231,21 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
     f32 temp_f31_2;
 
     if (is_name_mode != 0) {
-        if (GetPersistentNameData((s32) player_index)->stats.match_count != 0)
-        {
-            temp_f31_2 = (f32) GetPersistentNameData((s32) player_index)
-                             ->stats.match_count;
-            return (s32) (100.0f *
-                          ((f32) GetPersistentNameData((s32) player_index)
-                               ->stats.total_player_count /
-                           temp_f31_2));
+        if (GetPersistentNameData(player_index)->stats.match_count != 0) {
+            temp_f31_2 =
+                (f32) GetPersistentNameData(player_index)->stats.match_count;
+            return (s32) (100.0f * ((f32) GetPersistentNameData(player_index)
+                                        ->stats.total_player_count /
+                                    temp_f31_2));
         }
         return 0;
     }
-    if (GetPersistentFighterData((s32) player_index)->stats.match_count != 0) {
-        temp_f31 = (f32) GetPersistentFighterData((s32) player_index)
-                       ->stats.match_count;
-        return (s32) (100.0f *
-                      ((f32) GetPersistentFighterData((s32) player_index)
-                           ->stats.total_player_count /
-                       temp_f31));
+    if (GetPersistentFighterData(player_index)->stats.match_count != 0) {
+        temp_f31 =
+            (f32) GetPersistentFighterData(player_index)->stats.match_count;
+        return (s32) (100.0f * ((f32) GetPersistentFighterData(player_index)
+                                    ->stats.total_player_count /
+                                temp_f31));
     }
     return 0;
 }
@@ -259,7 +256,7 @@ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 int mnDiagram_GetNameTotalKOs(u8 field_index)
 {
     int total = 0;
-    s32 i;
+    int i;
     for (i = 0; i < 0x78; i++) {
         if (GetNameText(i & 0xFF)) {
             total += GetPersistentNameData(field_index)->vs_kos[(u8) i];
@@ -394,8 +391,8 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
 {
     int i;
     int digit_count;
-    s32 minutes;
-    s32 secs;
+    int minutes;
+    int secs;
 
     minutes = seconds / 60;
     secs = seconds % 60;
@@ -426,7 +423,7 @@ void mnDiagram_IntToStr(char* buf, u32 val)
 /// @return Previous name index with a valid name, or original if none found.
 u8 mnDiagram_GetPrevNameIndex(s32 idx)
 {
-    s32 original, i;
+    int original, i;
 
     original = i = idx;
 
@@ -441,7 +438,7 @@ u8 mnDiagram_GetPrevNameIndex(s32 idx)
 
 u8 mnDiagram_GetNextNameIndex(s32 idx)
 {
-    s32 original, i;
+    int original, i;
 
     original = i = idx;
 
@@ -461,7 +458,7 @@ u8 mnDiagram_GetNextNameIndex(s32 idx)
 u8 mnDiagram_GetPrevFighterIndex(s32 idx)
 {
     u8* ptr;
-    s32 original;
+    int original;
 
     ptr = mnDiagram_FighterDisplayOrder + idx;
     original = idx;
@@ -480,7 +477,7 @@ u8 mnDiagram_GetPrevFighterIndex(s32 idx)
 u8 mnDiagram_GetNextFighterIndex(s32 idx)
 {
     u8* ptr;
-    s32 original;
+    int original;
 
     ptr = mnDiagram_FighterDisplayOrder + idx;
     original = idx;
@@ -624,7 +621,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 {
     int i;
     int min_fighter;
-    s32 count;
+    int count;
 
     if (mnDiagram_AllPlayTimesZero(name_idx)) {
         return SELKIND_COUNT;
@@ -794,7 +791,7 @@ void mnDiagram_SortNamesByKOs(void)
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
-    s32 count;
+    int count;
     i = 0;
     count = 0;
     for (; i < SELKIND_COUNT; i++) {
@@ -946,7 +943,7 @@ static inline u8 mnDiagram_FindNextFighter(u8* sorted,
 
 static inline s32 mnDiagram_FindPrevName(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         if (found < 0) {
@@ -958,7 +955,7 @@ static inline s32 mnDiagram_FindPrevName(s32 cur)
 
 static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         if (found < 0) {
@@ -971,7 +968,7 @@ static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
 static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
 {
     u8* p = sorted + cur;
-    s32 found = cur;
+    int found = cur;
     do {
         found--;
         p--;
@@ -984,7 +981,7 @@ static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
 
 static inline int mnDiagram_FindNextName(s32 cur)
 {
-    s32 found = cur;
+    int found = cur;
     do {
         found++;
         if (found >= 0x78) {
@@ -1026,17 +1023,14 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
             break;
         }
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1060,17 +1054,14 @@ static inline u8 mnDiagram_GetVisibleFighterColumnForInput(u8* sorted,
             break;
         }
         p2 = p;
-    loop:
-        (*index)++;
-        p2++;
-        p++;
-        if (*index >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            (*index)++;
+            p2++;
+            p++;
+            if (*index >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1132,17 +1123,14 @@ static inline u8 mnDiagram_GetVisibleFighterFromPointer(const u8* sorted,
             break;
         }
         p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= 0x19) {
-            result = 0x19;
-            break;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
+        do {
+            idx++;
+            p2++;
+            p++;
+            if (idx >= 0x19) {
+                return 0x19;
+            }
+        } while (mn_IsFighterUnlocked(*p2) == 0);
         remaining--;
     }
     return result;
@@ -1225,12 +1213,12 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u32 input = mn_80229624(4);
     s32 count;
     s32 col;
-    s32 row;
+    int row;
     s32 new_var2;
-    s32 row3;
-    s32 row4;
-    s32 row5;
-    s32 row6;
+    int row3;
+    int row4;
+    int row5;
+    int row6;
     u8 col_result;
     u8 col_result2;
     u8 row_result2;
@@ -1238,10 +1226,10 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 col_result4;
     u8 row_result3;
     u8 row_result4;
-    s32 found;
+    int found;
     s32 cur;
-    s32 cursor_pos;
-    s32 count2;
+    int cursor_pos;
+    int count2;
     PAD_STACK(24);
     mn_804A04F0.buttons = input;
     count2 = 0;
@@ -1314,7 +1302,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         data->is_name_mode = (data->is_name_mode == 0) ? 1 : count2;
         if (data->is_name_mode != 0) {
             cur = GetNameCount();
-            if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= cur) {
+            if (((u8) mn_804A04F0.hovered_selection) >= cur) {
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((u8) (cur - 1));
@@ -1332,7 +1320,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         count = mnDiagram_CountUnlockedFightersForInput();
 
         new_var2 = count;
-        if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= new_var2) {
+        if (((u8) mn_804A04F0.hovered_selection) >= new_var2) {
             mn_804A04F0.hovered_selection =
                 (mn_804A04F0.hovered_selection & 0xFF00) |
                 ((u8) (new_var2 - 1));
@@ -2005,11 +1993,11 @@ void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* ptr2;
     u8* ptr;
-    s32 count;
-    s32 i;
+    int count;
+    int i;
     u8* sorted = mnDiagram_FighterDisplayOrder;
-    s32 result;
-    s32 name_count;
+    int result;
+    int name_count;
     HSD_JObj* jobj2;
     HSD_JObj* jobj3;
     PAD_STACK(8);
@@ -2199,7 +2187,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             mnDiagram_CreateCursor();
             if (data->is_name_mode != 0) {
                 u16 indices = data->name_cursor_pos;
-                s32 row_idx;
+                int row_idx;
                 u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
@@ -2214,7 +2202,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
                 }
             } else {
                 u16 indices = data->fighter_cursor_pos;
-                s32 row_idx;
+                int row_idx;
                 u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
@@ -2263,9 +2251,9 @@ void mnDiagram_DrawCellValue(HSD_GObj* arg0, u8 arg1, u8 arg2, int arg3)
     HSD_JObj* jobj2;
     Diagram* data;
     StaticModelDesc* model;
-    s32 digit_count;
-    s32 digit;
-    s32 i;
+    int digit_count;
+    int digit;
+    int i;
     f32 x_spacing;
     f32 y_spacing;
     f32 base;
@@ -2336,19 +2324,19 @@ static inline int mnDiagram_GetFighterPairKOs(u8 fighter, u8 opponent)
 void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                               u8 arg3)
 {
-    s32 name_col;
+    int name_col;
     u8 is_name_mode = arg3;
-    s32 unlocked_count;
-    s32 col_unlocked_count;
-    s32 bottom_unlocked_count;
-    s32 bottom_col;
-    s32 fighter_col;
-    s32 row;
-    s32 entry_count;
+    int unlocked_count;
+    int col_unlocked_count;
+    int bottom_unlocked_count;
+    int bottom_col;
+    int fighter_col;
+    int row;
+    int entry_count;
     s32 total_kos;
-    s32 row_name;
-    s32 col_name;
-    s32 row_fighter;
+    int row_name;
+    int col_name;
+    int row_fighter;
     u8 col_fighter;
     // Preserve the original gap before the saved registers.
     PAD_STACK(16);
@@ -2449,7 +2437,7 @@ void mnDiagram_DrawNameHeaders(HSD_GObj* arg0, s32 arg1, s32 arg2)
     u8* sorted = mnDiagram_FighterDisplayOrder;
     HSD_Text* row_text;
     u8 name_byte;
-    s32 name_id;
+    int name_id;
     Vec2 pos;
 
     // Column headers
@@ -2721,10 +2709,10 @@ void mnDiagram_CreateCursor(void)
 void mnDiagram_CreateScreen(u8 arg0)
 {
     int col_idx;
-    s32 row_idx;
+    int row_idx;
     Diagram* d;
     int col_idx2;
-    s32 row_idx2;
+    int row_idx2;
     Diagram* d2;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
