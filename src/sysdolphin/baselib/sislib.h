@@ -19,19 +19,17 @@
 
 struct SisBlock {
     SisBlock* next;
-    HSD_Text* data;
+    void* data;
     u32 size;
 };
 
-/// @todo this is the same as above, but just more generic...
-/// proper types will have to be sorted out later, as well as merging the two
-/// structs.
-typedef struct sisLib_803A7664_t {
-    void* x0;
-    void* x4;
-    u32 x8; ///< alloc size
-    u32 xC;
-} sisLib_803A7664_t;
+/// Growable encoded string owned by an #HSD_Text.
+typedef struct SisBuffer {
+    u8* end; ///< terminator of the encoded string
+    u8* data;
+    u32 size;
+    u32 count; ///< entries appended
+} SisBuffer;
 
 struct HSD_Text {
     // these get passed to the text initializer HSD_SisLib_803A5ACC
@@ -59,10 +57,10 @@ struct HSD_Text {
     HSD_Text* next;
     HSD_GObj* entity;
     void (*render_callback)(
-        void*);      ///< callback in the text renderer (HSD_SisLib_803A84BC)
+        void*);     ///< callback in the text renderer (HSD_SisLib_803A84BC)
     u8* sis_buffer; ///< SIS text buffer
     u8* x60;        ///< position in text buffer
-    SisBlock* alloc_data;
+    SisBuffer* alloc_data;
     char* string_buffer; ///< raw string buffer
     u16 x6C;             ///< string length?
     u16 x6E;             ///< alloc size?

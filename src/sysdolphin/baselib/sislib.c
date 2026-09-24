@@ -116,7 +116,7 @@ void* HSD_SisLib_Alloc(s32 size)
         SisBlock* next_free;
         int remaining_size;
 
-        data_ptr = (u8*) free_head->data;
+        data_ptr = free_head->data;
         next_free = free_cur->next;
         remaining_size = (free_cur->size - size) - (sizeof(SisBlock));
         if (remaining_size < 0) {
@@ -126,7 +126,7 @@ void* HSD_SisLib_Alloc(s32 size)
 
         free_head = (SisBlock*) (data_ptr + size);
         free_head->next = next_free;
-        free_head->data = (HSD_Text*) (free_head + 1);
+        free_head->data = free_head + 1;
         free_head->size = remaining_size;
         best->size = size;
     } else {
@@ -180,7 +180,7 @@ void HSD_SisLib_Free(void* ptr)
         }
         free_head = alloc_cur;
         alloc_cur->next = old_next;
-        free_head->data = (HSD_Text*) (free_head + 1);
+        free_head->data = free_head + 1;
         free_head->size = new_size;
         return;
     }
@@ -202,7 +202,7 @@ void HSD_SisLib_Free(void* ptr)
 void HSD_SisLib_803A5A2C(void* ptr)
 {
     HSD_Text* next_text;
-    SisBlock* alloc;
+    SisBuffer* alloc;
     HSD_Text* curr;
     HSD_Text* last;
 
@@ -425,7 +425,7 @@ void HSD_SisLib_803A5E70(void)
     free_head = HSD_SisLib_804D796C;
     used_head = NULL;
     free_head->next = NULL;
-    free_head->data = (HSD_Text*) (free_head + 1);
+    free_head->data = free_head + 1;
     free_head->size = HSD_SisLib_804D7968 - sizeof(SisBlock);
 }
 
@@ -464,7 +464,7 @@ void HSD_SisLib_803A6048(size_t size)
     used_head = NULL;
     HSD_SisLib_804D796C = free_head = HSD_MemAlloc(HSD_SisLib_804D7968);
     free_head->next = NULL;
-    free_head->data = (HSD_Text*) (free_head + 1);
+    free_head->data = free_head + 1;
     free_head->size = HSD_SisLib_804D7968 - sizeof(SisBlock);
     HSD_SisLib_804D7978 = NULL;
     HSD_SisLib_804D797C = NULL;
