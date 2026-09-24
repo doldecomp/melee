@@ -805,9 +805,7 @@ void ftLib_HandleMetalBoxCollision(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ft_PlaySFX(fp, 0x121, 0x7F, 0x40);
 }
 
-/// Unbounded: true for every motion state from #ftCo_MS_LightThrowF4 on.
-/// The flipper's thrown code uses it to pick its smash-throw duration.
-bool ftLib_80087284(HSD_GObj* gobj)
+bool ftLib_IsPerformingLightThrow(HSD_GObj* gobj)
 {
     if (ftLib_GetMotionId(gobj) >= ftCo_MS_LightThrowF4) {
         return true;
@@ -828,30 +826,30 @@ LbShadow* ftLib_GetShadow(HSD_GObj* gobj)
     return &fp->x20A4;
 }
 
-bool ftLib_CastsShadow(HSD_GObj* gobj)
+bool ftLib_IsFighterActiveAndPrimary(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return !fp->x221E_b1 && !fp->x2226_b4 && !fp->is_sub_fighter;
 }
 
-s32 ftLib_GetLastAttackerSlot(HSD_GObj* gobj)
+s32 ftLib_GetDamageSourcePlayer(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18c4_source_ply;
 }
 
-s32 ftLib_IsLastAttackerSubFighter(HSD_GObj* gobj)
+s32 ftLib_GetFighterUnknownBool5(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_b5;
 }
 
-s32 ftLib_IsSleeping_8008731C(HSD_GObj* gobj)
+s32 ftLib_IsFighterSleepingWrapper(HSD_GObj* gobj)
 {
     return ftLib_IsFighterSleeping(gobj);
 }
 
-bool ftLib_IsDead(HSD_GObj* gobj)
+bool ftLib_IsFighterDeadDown(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadDown && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -861,7 +859,7 @@ bool ftLib_IsDead(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_IsDeadUp(HSD_GObj* gobj)
+bool ftLib_IsFighterDeadUp(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUp && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -871,7 +869,7 @@ bool ftLib_IsDeadUp(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_IsDeadUpStar(HSD_GObj* gobj)
+bool ftLib_IsFighterDeadUpStar(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpStar && msid <= ftCo_MS_DeadUpStarIce) {
@@ -881,7 +879,7 @@ bool ftLib_IsDeadUpStar(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_IsDeadUpFall(HSD_GObj* gobj)
+bool ftLib_IsFighterDeadUpFall(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpFall && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
@@ -891,7 +889,7 @@ bool ftLib_IsDeadUpFall(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_IsRebirth(HSD_GObj* gobj)
+bool ftLib_IsFighterRebirthing(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Rebirth && msid <= ftCo_MS_RebirthWait) {
@@ -901,7 +899,7 @@ bool ftLib_IsRebirth(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_IsEntry(HSD_GObj* gobj)
+bool ftLib_IsFighterEntering(HSD_GObj* gobj)
 {
     FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Entry && msid <= ftCo_MS_EntryEnd) {
@@ -927,21 +925,19 @@ HSD_GObj* ftLib_FindBySpawnNum(u32 i)
     return NULL;
 }
 
-/// Knockback reweighted by the crowd config's angle multiplier
-/// (#un_803222EC); only the crowd sound code reads it.
-float ftLib_GetCrowdKnockback(HSD_GObj* gobj)
+float ftLib_GetKnockbackMagnitude(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18A4_knockbackMagnitude;
 }
 
-u32 ftLib_GetSpawnNum(HSD_GObj* gobj)
+u32 ftLib_GetFighterSpawnNum(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x8_spawnNum;
 }
 
-s32 ftLib_8008746C(HSD_GObj* gobj)
+s32 ftLib_GetFighterSfxId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -958,14 +954,14 @@ s32 ftLib_IsSubFighter(HSD_GObj* gobj)
     return fp->is_sub_fighter;
 }
 
-void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
+void ftLib_UpdatePlayerState(HSD_GObj* gobj, void* arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     pl_8003E4A4(fp->player_idx, fp->is_sub_fighter, arg1, arg2);
 }
 
-void ftLib_LoadFighterCostume(s8 ft_kind, u8 arg1)
-/// void ftLib_LoadFighterCostume(FighterKind ft_kind, u8 arg1)
+void ftLib_LoadFighterDataWithCostume(s8 ft_kind, u8 arg1)
+/// void ftLib_LoadFighterDataWithCostume(FighterKind ft_kind, u8 arg1)
 {
     ftData_8008572C(ft_kind);
     efAsync_LoadSync(ftData_UnkBytePerCharacter[ft_kind]);
