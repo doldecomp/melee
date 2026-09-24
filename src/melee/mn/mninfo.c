@@ -70,7 +70,7 @@ s32 mnInfo_80251A08(s32 arg0)
     }
 }
 
-static inline bool isUnlockEntryVisible(s32 id)
+static inline bool isUnlockVisible(s32 id)
 {
     return mnInfo_80251A08(id) != 0;
 }
@@ -81,7 +81,7 @@ s32 mnInfo_80251AA4(void)
     s32 var_r30 = 0;
 
     for (i = 0; i < 0x42; i++) {
-        if (isUnlockEntryVisible(i)) {
+        if (isUnlockVisible(i)) {
             var_r30++;
         }
     }
@@ -337,7 +337,7 @@ void fn_80251FE4(void)
                 other = trophy = &mnInfo_804A0968[data->scroll_idx];
                 for (i = 0; i < 4; i++) {
                     (void) (other == trophy);
-                    if (isUnlockEntryVisible(*trophy)) {
+                    if (isUnlockVisible(*trophy)) {
                         u32 id = *trophy;
 
                         mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
