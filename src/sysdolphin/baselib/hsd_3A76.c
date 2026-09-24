@@ -1,4 +1,5 @@
 #include <printf.h> // IWYU pragma: keep
+#include <string.h>
 
 #include "cobj.h"
 #include "gobj.h"
@@ -18,13 +19,20 @@ enum {
     SIS_SAVED_CURSOR_SIZE = sizeof(u8*)
 };
 
-/// SIS data and saved text state are unaligned big-endian byte streams.
-#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+/* The retail compiler uses the original loads for packed SIS operands. */
+#ifdef MWERKS_GEKKO
+#define SIS_GET_U16(p) (*(u16*) (p))
+#define SIS_GET_S16(p) (*(s16*) (p))
+#define SIS_GET_SAVED_CURSOR(p) (*(u8**) (p))
+#define SIS_GET_JUMP_TARGET(p) ((u8*) (uintptr_t) *(u32*) (p))
+#else
 #define SIS_GET_U16(p) ((u16) (((p)[0] << 8) | (p)[1]))
 #define SIS_GET_S16(p) ((s16) SIS_GET_U16(p))
-#define SIS_GET_PTR(p) sisGetPtr(p)
+#define SIS_GET_SAVED_CURSOR(p) sisGetSavedCursor(p)
+#define SIS_GET_JUMP_TARGET(p) sisGetJumpTarget(p)
 
-static inline u8* sisGetPtr(const u8* p)
+/// Runtime cursors are saved as pointer-sized big-endian values.
+static inline u8* sisGetSavedCursor(const u8* p)
 {
     uintptr_t value = 0;
     int i;
@@ -34,10 +42,15 @@ static inline u8* sisGetPtr(const u8* p)
     }
     return (u8*) value;
 }
-#else
-#define SIS_GET_U16(p) (*(u16*) (p))
-#define SIS_GET_S16(p) (*(s16*) (p))
-#define SIS_GET_PTR(p) (*(u8**) (p))
+
+/// Archive relocation writes native-endian addresses into four-byte slots.
+static inline u8* sisGetJumpTarget(const u8* p)
+{
+    u32 address;
+
+    memcpy(&address, p, sizeof(address));
+    return (u8*) (uintptr_t) address;
+}
 #endif
 
 void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
@@ -68,10 +81,10 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         }
         text->string_buffer[text->x6C++] =
             (u8) ((s32) (256.0F * text->x78.x) >> 8);
-        text->string_buffer[text->x6C++] = (u8) (256.0F * text->x78.x);
+        text->string_buffer[text->x6C++] = (u8) (s32) (256.0F * text->x78.x);
         text->string_buffer[text->x6C++] =
             (u8) ((s32) (256.0F * text->x78.y) >> 8);
-        text->string_buffer[text->x6C++] = (u8) (256.0F * text->x78.y);
+        text->string_buffer[text->x6C++] = (u8) (s32) (256.0F * text->x78.y);
         text->string_buffer[text->x6C++] = flags;
         return;
     }
@@ -129,10 +142,10 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         }
         text->string_buffer[text->x6C++] =
             (u8) ((s32) (256.0F * text->x80.x) >> 8);
-        text->string_buffer[text->x6C++] = (u8) (256.0F * text->x80.x);
+        text->string_buffer[text->x6C++] = (u8) (s32) (256.0F * text->x80.x);
         text->string_buffer[text->x6C++] =
             (u8) ((s32) (256.0F * text->x80.y) >> 8);
-        text->string_buffer[text->x6C++] = (u8) (256.0F * text->x80.y);
+        text->string_buffer[text->x6C++] = (u8) (s32) (256.0F * text->x80.y);
         text->string_buffer[text->x6C++] = flags;
         return;
     }
@@ -277,7 +290,7 @@ u8* HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 5:
             pos -= SIS_SAVED_CURSOR_SIZE;
             if (target_type == 5) {
-                result = SIS_GET_PTR(text->string_buffer + pos);
+                result = SIS_GET_SAVED_CURSOR(text->string_buffer + pos);
                 if (flag_hi == entry_flags) {
                     remove_size = SIS_SAVED_CURSOR_SIZE + 1;
                 }
@@ -349,7 +362,7 @@ void HSD_SisLib_803A8134(u8* cursor, HSD_Text* text, f32* out_width,
             HSD_SisLib_803A7684(text, cursor, 0x85U);
             /* fallthrough */
         case 8:
-            cursor = *(u8**) (cursor + 1) - 1;
+            cursor = SIS_GET_JUMP_TARGET(cursor + 1) - 1;
             continue;
         case 14:
             HSD_SisLib_803A7684(text, cursor, 0x83U);
@@ -740,7 +753,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
                             HSD_SisLib_803A7684(text, sis_cursor, 5U);
                             /* fallthrough */
                         case 8:
-                            sis_cursor = *(u8**) (sis_cursor + 1) - 1;
+                            sis_cursor = SIS_GET_JUMP_TARGET(sis_cursor + 1) - 1;
                             break;
                         case 10:
                             if ((text->alloc_data == NULL) || (saved_kerning == 0)) {
