@@ -41,8 +41,8 @@ void ft_800892D4(Fighter* arg0)
     union Struct2070 spC;
 
     spC.x2070_int = 0;
-    arg0->dmg.x18d4 = *(UnkPlBonusBits*) &spC;
-    arg0->x2070.x2070_int = *(s32*) &arg0->dmg.x18d4;
+    arg0->dmg.x18d4 = spC;
+    arg0->x2070.x2070_int = arg0->dmg.x18d4.x2070_int;
     *(s32*) &arg0->x2074.x2074_vec.x = 0;
     *(s32*) &arg0->x2074.x2074_vec.y = 0;
     *(f32*) &arg0->x2074.x207C.x = 0.0f;
@@ -203,7 +203,7 @@ union Struct2070* ft_80089884(Fighter_GObj* gobj)
     return &GET_FIGHTER(gobj)->x2070;
 }
 
-UnkPlBonusBits* ft_80089890(Fighter_GObj* gobj)
+union Struct2070* ft_80089890(Fighter_GObj* gobj)
 {
     return &GET_FIGHTER(gobj)->dmg.x18d4;
 }

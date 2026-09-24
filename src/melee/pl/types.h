@@ -76,7 +76,7 @@ struct plActionStats {
             u32 x500;
         };
     };
-    /* +504 */ u8 x504[StatsAttack_Count]; ///< related to UnkPlBonusBits
+    /* +504 */ u8 x504[StatsAttack_Count]; ///< related to union Struct2070
     /* +568 */ u32 x568;
     /* +56C */ u32 x56C;
     /* +570 */ u32 x570;
@@ -164,7 +164,7 @@ struct StaleMoveTable {
     /* +CB0 */ int xCB0;
     /* +CB4 */ int xCB4;
     /* +CB8 */ int xCB8;
-    /* +CBC */ UnkPlBonusBits xCBC;
+    /* +CBC */ union Struct2070 xCBC;
     /* +CC0 */ ft_800898B4_t xCC0;
     /* +CD4 */ u16 xCD4;
     /* +CD8 */ int xCD8;

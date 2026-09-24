@@ -1219,19 +1219,6 @@ struct Fighter_x59C_t {
 };
 ASSERT_SIZE(struct Fighter_x59C_t, 0x8000);
 
-struct UnkPlBonusBits {
-    u8 x0, x1;
-    u8 x2_b0 : 1;
-    u8 x2_b1 : 1;
-    u8 x2_b2 : 1;
-    u8 x2_b3 : 1;
-    u8 x2_b4 : 1;
-    u8 x2_b5 : 1;
-    u8 x2_b6 : 1;
-    u8 x2_b7 : 1;
-    u8 x3;
-};
-
 struct ft_800898B4_t {
     /*  +0  */ int x0;
     /*  +4  */ int x4;
@@ -1516,7 +1503,7 @@ struct Fighter {
         /* fp+18C8 */ int x18C8;
         /* fp+18CC */ int x18CC;
         /* fp+18D0 */ int x18D0;
-        /* fp+18D4 */ UnkPlBonusBits x18d4;
+        /* fp+18D4 */ union Struct2070 x18d4;
         /* fp+18D8 */ ft_800898B4_t x18d8;
         /// Last Move Instance This Player Was Hit by
         /* fp+18EC */ u16 x18ec_instancehitby;
