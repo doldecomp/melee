@@ -3922,7 +3922,6 @@ typedef union grBb_CarGround {
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma fp_contract on
 #pragma inline_depth(3)
 #endif
 static inline s32 grBigBlue_801EE398_sfx(void)
