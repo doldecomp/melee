@@ -180,11 +180,6 @@ void fn_802FCAC4(HSD_GObj* gobj, intptr_t pass)
     }
 }
 
-/// un_802FD4C8 will try to inline this otherwise
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void un_802FCBA0(void)
 {
     HSD_Archive** archive;
@@ -203,9 +198,6 @@ void un_802FCBA0(void)
         un_804A1ED0.shapeanim_joint = x[0]->shapeanims[0];
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline bool has_nametag(int slot)
 {
@@ -357,10 +349,21 @@ static inline HSD_GObj* un_802FD4C8_inline(int arg0)
     return GObj_Create(0xE, arg0, 0);
 }
 
+static inline void initSis(HSD_GObj* gobj)
+{
+    un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
+    // "Break the targets!" "Race to the finish!" etc strings
+    HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
+    un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
+    un_804D6D78->pos_z = -10.0;
+    un_804D6D78->default_alignment = 1;
+    un_802FCBA0();
+}
+
 void un_802FD4C8(void)
 {
     HSD_GObj* gobj;
-    HSD_CObj* new_var;
+    HSD_CObj* cobj;
     int i;
     PAD_STACK(0x10);
     for (i = 0; i < Gm_Player_NumMax; i++) {
@@ -370,17 +373,11 @@ void un_802FD4C8(void)
     un_804D6D6C = 0;
     memzero(un_804D6D70, i = sizeof(un_804D6D70));
     un_804D6D68 = (gobj = un_802FD4C8_inline(15));
-    new_var = lb_80013B14((HSD_CameraDescPerspective*) (&nametag_CObjDesc));
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, new_var);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) (&nametag_CObjDesc));
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
-    un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
-    // "Break the targets!" "Race to the finish!" etc strings
-    HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
-    un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
-    un_804D6D78->pos_z = -10.0;
-    un_804D6D78->default_alignment = 1;
-    un_802FCBA0();
+    initSis(gobj);
     for (i = 0; i < Gm_Player_NumMax; i++) {
         NameTag_Create(i);
     }
