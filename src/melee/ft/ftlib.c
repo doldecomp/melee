@@ -983,7 +983,7 @@ void ftLib_80087574(s8 ft_kind)
     ftData_800857E0(ft_kind);
 }
 
-void ftLib_80087610(u8 arg0)
+void ftLib_ApplySpecialNToAllUnlockedFighters(u8 arg0)
 {
     u8 i;
     for (i = 0; i <= SELKIND_COUNT; i++) {
@@ -996,12 +996,12 @@ void ftLib_80087610(u8 arg0)
     }
 }
 
-void ftLib_800876B4(HSD_GObj* gobj)
+void ftLib_CheckAnimFramesRemaining(HSD_GObj* gobj)
 {
     ftAnim_IsFramesRemaining(gobj);
 }
 
-bool ftLib_800876D4(HSD_GObj* gobj)
+bool ftLib_IsFighterInSmashState2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->smash_attrs.state == 2) {
@@ -1011,19 +1011,19 @@ bool ftLib_800876D4(HSD_GObj* gobj)
     }
 }
 
-s32 ftLib_800876F4(HSD_GObj* gobj)
+s32 ftLib_GetFighterDamageValue1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18CC;
 }
 
-s32 ftLib_80087700(HSD_GObj* gobj)
+s32 ftLib_GetFighterDamageValue2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18D0;
 }
 
-void ftLib_8008770C(HSD_GObj* gobj, void* dst)
+void ftLib_InitFighterData1(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A7F4(gobj, dst);
@@ -1032,7 +1032,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
     }
 }
 
-void ftLib_80087744(HSD_GObj* gobj, void* dst)
+void ftLib_InitFighterData2(HSD_GObj* gobj, void* dst)
 {
     if (ftLib_GetKind(gobj) == Ft_Kind_GameWatch) {
         ftGw_Init_8014A814(gobj, dst);
@@ -1041,7 +1041,7 @@ void ftLib_80087744(HSD_GObj* gobj, void* dst)
     }
 }
 
-float ftLib_8008777C(HSD_GObj* gobj)
+float ftLib_GetFighterFloorNormalAngle(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1053,7 +1053,7 @@ float ftLib_8008777C(HSD_GObj* gobj)
     }
 }
 
-bool ftLib_800877D4(HSD_GObj* gobj)
+bool ftLib_IsFighterNudging(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xF8_playerNudgeVel.x != 0) {
