@@ -3,7 +3,7 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-/* 25BC20 */ TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1);
+/* 25BC20 */ u8* mnCharSel_8025BC20(u8* dst, u32 value);
 /* 25BD30 */ void mnCharSel_8025BD30(void);
 /* 25C020 */ void mnCharSel_8025C020(int);
 /* 25D1C4 */ void mnCharSel_8025D1C4(int, int);

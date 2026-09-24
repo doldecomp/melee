@@ -7,7 +7,6 @@ struct un_804D6EE0_t;
 typedef struct DigitInit DigitInit;
 typedef struct PosArray PosArray;
 typedef struct PosArrayFull PosArrayFull;
-typedef struct SisFontData SisFontData;
 typedef struct Toy Toy;
 typedef struct Toy26B8 Toy26B8;
 typedef struct Toy6E68 Toy6E68;

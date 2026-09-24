@@ -69,7 +69,7 @@ static void order_data_0(void)
 /// Formats a number into a string buffer using digit glyphs from the font.
 char* _tyList_80312834(char* buf, u32 num)
 {
-    u8* lookup = ((SisFontData*) HSD_SisLib_804D1124[0])->digits;
+    u8* lookup = HSD_SisLib_804D1124[0][0x13A];
     u32 idx;
     u32 original = num;
 
@@ -163,7 +163,7 @@ void _tyList_80312904(void* arg0, s8 arg1)
     text->font_size.y = 0.029f;
     HSD_SisLib_803A6368(row->text1, 0x13B);
 
-    digits = ((u8**) ((char*) HSD_SisLib_804D1124[0] + 0x4B8))[row->x28];
+    digits = HSD_SisLib_804D1124[0][0x12E + row->x28];
     _tyList_80312834((char*) digits, Toy_803048C0(Toy_80308354(row->idx)));
 
     row->text2->default_alignment = 2;

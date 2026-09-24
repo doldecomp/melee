@@ -41,13 +41,13 @@ u8* HSD_SisLib_803A6478(u8* dst, u8* src)
 
 u8* HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
-    u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
+    u8** sis_table = HSD_SisLib_804D1124[font_idx];
     return HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
 }
 
 void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
-    u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
+    u8** sis_table = HSD_SisLib_804D1124[font_idx];
     u8* dst = sis_table[dst_idx];
     u8* src = sis_table[src_idx];
 
@@ -98,7 +98,7 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
         0; ///< @todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
-    text->sis_buffer = (SIS*) alloc->data;
+    text->sis_buffer = (u8*) alloc->data;
     return text;
 }
 
@@ -261,7 +261,7 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
             copy_idx += 1;
         }
         alloc->data = (HSD_Text*) new_buf;
-        text->sis_buffer = (SIS*) new_buf;
+        text->sis_buffer = new_buf;
         alloc->next = (SisBlock*) (new_buf + ((u8*) alloc->next -
                                               HSD_SisLib_BytePtr(old_buf)));
         HSD_SisLib_Free(old_buf);
@@ -369,7 +369,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 
     result = 0;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, &old_size);
     if (entry != NULL) {
         alloc = text->alloc_data;
         playhead = entry + 0xE;
@@ -402,7 +402,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                     copy_idx += 1;
                 }
                 alloc->data = (HSD_Text*) new_buf;
-                text->sis_buffer = (SIS*) new_buf;
+                text->sis_buffer = new_buf;
                 alloc->next =
                     (SisBlock*) (new_buf + ((u8*) alloc->next -
                                             HSD_SisLib_BytePtr(old_buf)));
@@ -437,7 +437,7 @@ void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
     s32 y;
     u8* entry;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         u8* p = entry + 1;
         x = (s16) new_x;
@@ -455,7 +455,7 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
     u8* color_ptr;
     void* unused_r31;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         color_ptr = entry + 5;
         color_ptr[1] = color_rgb->r;
@@ -467,7 +467,7 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
 void HSD_SisLib_803A7548(HSD_Text* text, int entry_idx, float scale_x,
                          float scale_y)
 {
-    u8* entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    u8* entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     u8* scale_ptr;
     if (entry != NULL) {
         scale_ptr = entry + 9;
@@ -486,7 +486,7 @@ void HSD_SisLib_803A75E0(HSD_Text* text, s32 entry_idx)
 
     if (HSD_SisLib_803A70A0(text, entry_idx, 0) != 0) {
         color = text->text_color;
-        entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+        entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
         if (entry != NULL) {
             p = entry + 5;
             p[1] = color.r;

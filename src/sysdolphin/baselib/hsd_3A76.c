@@ -5,7 +5,6 @@
 #include "gobj.h"
 #include "gobjobject.h"
 #include "sislib.h"
-#include "sislib.static.h"
 #include "sislib_font.h"
 #include "state.h"
 #include "tev.h"
@@ -271,12 +270,12 @@ done:
     return result;
 }
 
-void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
+void HSD_SisLib_803A8134(u8* cursor, HSD_Text* text, f32* out_width,
                          f32* out_height)
 {
-    SIS* sis;
-    TextGlyphTexture* glyph_tex;
-    u8* default_kerning = HSD_SisLib_8040CB00;
+    u8** sis;
+    u8* glyph_widths;
+    u8* default_widths = HSD_SisLib_8040CB00;
     f32 line_height;
     f32 saved_scale_x;
     f32 saved_scale_y;
@@ -288,9 +287,7 @@ void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
     s32 kern_width;
     s32 clear_idx;
     u32 pop_result;
-    TextKerning* kern_data_2;
     u8 opcode;
-    TextKerning* kern_data;
     saved_scale_x = text->x80.x;
     saved_scale_y = text->x80.y;
     saved_spacing = text->x78.x;
@@ -298,12 +295,12 @@ void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
     sis = HSD_SisLib_804D1124[text->font_idx];
     saved_x6C = text->x6C;
     if (sis != NULL) {
-        glyph_tex = sis->textures;
+        glyph_widths = sis[1];
     }
     *out_width = 0.0F;
     *out_height = 32.0F * text->x80.y;
 loop_3:
-    opcode = *(u8*) cursor;
+    opcode = *cursor;
     switch (opcode) {
     case 0:
         pop_result = HSD_SisLib_803A7F0C(text, 0x85);
@@ -318,30 +315,30 @@ loop_3:
     case 7:
         break;
     case 9:
-        HSD_SisLib_803A7684(text, (u8*) cursor, 0x85U);
+        HSD_SisLib_803A7684(text, cursor, 0x85U);
         /* fallthrough */
     case 8:
-        cursor = (u8*) *(s32*) ((u8*) cursor + 1) - 1;
+        cursor = (u8*) *(s32*) (cursor + 1) - 1;
         goto block_33;
     case 14:
-        HSD_SisLib_803A7684(text, (u8*) cursor, 0x83U);
-        text->x80.x = (f32) * (u16*) ((u8*) cursor + 1) / 256.0F;
-        scale_val = *(u16*) ((u8*) cursor + 3);
-        cursor = (u8*) cursor + 4;
+        HSD_SisLib_803A7684(text, cursor, 0x83U);
+        text->x80.x = (f32) * (u16*) (cursor + 1) / 256.0F;
+        scale_val = *(u16*) (cursor + 3);
+        cursor += 4;
         text->x80.y = (f32) scale_val / 256.0F;
         goto block_33;
     case 15:
         HSD_SisLib_803A7F0C(text, 0x83);
         goto block_33;
     case 6:
-        cursor = (u8*) cursor + 4;
+        cursor += 4;
         goto block_33;
     case 10:
         if ((text->alloc_data == NULL) || (kern_enabled == 0)) {
-            HSD_SisLib_803A7684(text, (u8*) cursor, 0x81U);
-            text->x78.x = (f32) * (s16*) ((u8*) cursor + 1) / 256.0F;
+            HSD_SisLib_803A7684(text, cursor, 0x81U);
+            text->x78.x = (f32) * (s16*) (cursor + 1) / 256.0F;
         }
-        cursor = (u8*) cursor + 4;
+        cursor += 4;
         goto block_33;
     case 11:
         if ((text->alloc_data == NULL) || (kern_enabled == 0)) {
@@ -349,10 +346,10 @@ loop_3:
         }
         goto block_33;
     case 12:
-        cursor = (u8*) cursor + 3;
+        cursor += 3;
         goto block_33;
     case 5:
-        cursor = (u8*) cursor + 2;
+        cursor += 2;
         goto block_33;
     case 22:
         kern_enabled = 1;
@@ -372,22 +369,15 @@ loop_3:
             if (kern_enabled != 0) {
                 glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
-                    kern_width =
-                        (s32) (default_kerning +
-                               (((glyph_code - 0x2000) * 2) & 0x1FFFE));
-                    kern_data = (TextKerning*) kern_width;
-                    kern_width = kern_data->right - 2;
-                    kern_data = (TextKerning*) (u32) kern_data->left;
-                    kern_width = (s32) kern_data + kern_width;
+                    u8* pair =
+                        &default_widths[((glyph_code - 0x2000) * 2) & 0x1FFFE];
+                    kern_width = pair[0] + pair[1] - 2;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
-                    kern_data_2 =
-                        (TextKerning*) &glyph_tex
-                            ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
-                    kern_width = kern_data_2->right - 2;
-                    kern_data_2 = (TextKerning*) (u32) kern_data_2->left;
-                    kern_width = (s32) kern_data_2 + kern_width;
+                    u8* pair =
+                        &glyph_widths[((glyph_code - 0x4000) * 2) & 0x1FFFE];
+                    kern_width = pair[0] + pair[1] - 2;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 }
@@ -395,13 +385,13 @@ loop_3:
             if (*out_height < (32.0F * text->x80.y)) {
                 *out_height = 32.0F * text->x80.y;
             }
-            cursor = (u8*) cursor + 1;
+            cursor += 1;
         }
         goto block_33;
     }
     goto block_done;
 block_33:
-    cursor = (u8*) cursor + 1;
+    cursor += 1;
     goto loop_3;
 block_done:
     *out_width -= text->x78.x;
@@ -447,8 +437,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     Mtx m;
     f32 line_width_out;
     f32 line_height_out;
-    TextKerning *kerning = NULL;
-    TextGlyphTexture *textures = NULL;
+    u8 *glyph_images = NULL;
+    u8 *glyph_widths = NULL;
 
     f32 min_x;
     f32 min_y;
@@ -471,7 +461,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u8 saved_kerning;
 
     u8 *data = M2C_BITWISE(u8*, HSD_SisLib_FontAtlas);
-    u8 *default_kerning = HSD_SisLib_8040CB00;
+    u8 *default_widths = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
         if (pass != 2U) {
@@ -482,12 +472,12 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
         text = (HSD_Text*) pass;
     }
     if (text->hidden == 0 && text->sis_buffer != NULL) {
-        u8 *sis_cursor = (u8 *)text->sis_buffer;
+        u8 *sis_cursor = text->sis_buffer;
         if (gobj != NULL) {
-            SIS *sis = HSD_SisLib_804D1124[text->font_idx];
+            u8 **sis = HSD_SisLib_804D1124[text->font_idx];
             if (sis != NULL) {
-                kerning = sis->kerning;
-                textures = sis->textures;
+                glyph_images = sis[0];
+                glyph_widths = sis[1];
             }
         }
         if (gobj != NULL) {
@@ -663,7 +653,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 2:
                             text->x98 = 0;
                             sis_cursor += 1;
-                            text->sis_buffer = (SIS *)sis_cursor;
+                            text->sis_buffer = sis_cursor;
                             goto restart;
                         case 3:
                             if (line_started == 0U) {
@@ -674,27 +664,27 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
-                                text->x98 = (u32) (text->x98 + 1);
-                                text->x94 = (u32) char_delay;
-                                text->x60 = (void *) (sis_cursor + 1);
+                                text->x98 += 1;
+                                text->x94 = char_delay;
+                                text->x60 = sis_cursor + 1;
                             }
                             break;
                         case 4:
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
-                                text->x98 = (u32) (text->x98 + 1);
+                                text->x98 += 1;
                                 text->x4B = 1U;
-                                text->x60 = (void *) (sis_cursor + 1);
+                                text->x60 = sis_cursor + 1;
                             }
                             break;
                         case 5:
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
-                                text->x98 = (u32) (text->x98 + 1);
+                                text->x98 += 1;
                                 text->x94 = *(u16*) (sis_cursor + 1);
-                                text->x60 = (void *) (sis_cursor + 3);
+                                text->x60 = sis_cursor + 3;
                             }
                             sis_cursor += 2;
                             break;
@@ -705,7 +695,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             break;
                         case 7:
                             line_started = 1U;
-                            HSD_SisLib_803A8134((void*) (sis_cursor + 5), text, &line_width_out, &line_height_out);
+                            HSD_SisLib_803A8134(sis_cursor + 5, text, &line_width_out, &line_height_out);
                             x_origin = (f32) *(s16*) (sis_cursor + 1);
                             if (( text->fitting == 1) && (text->box_size_x < line_width_out)) {
                                 text->x88 = (text->box_size_x / line_width_out);
@@ -808,9 +798,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
-                                text->x98 = (u32) (text->x98 + 1);
-                                text->x94 = (u32) line_delay;
-                                text->x60 = (void *) (sis_cursor + 1);
+                                text->x98 += 1;
+                                text->x94 = line_delay;
+                                text->x60 = sis_cursor + 1;
                             }
                             break;
                         default:
@@ -837,9 +827,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 scale_x = text->font_size.x;
                                 if ( text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_kerning[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
+                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_widths[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
                                     } else {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (textures->data[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
+                                        glyph_x = -((scale_x * (text->x80.x * (f32) (glyph_widths[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
                                     }
                                 }
                                 {
@@ -891,7 +881,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                         if (glyph_idx < 0x4000U) {
                                             GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         } else {
-                                            GXInitTexObj(&tex_obj, HSD_SisLib_BytePtr(kerning) + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                            GXInitTexObj(&tex_obj, glyph_images + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         }
                                         GXLoadTexObj(&tex_obj, GX_TEXMAP0);
                                         GXSetTevColor(GX_TEVREG0, *(&text->active_color));
@@ -915,21 +905,19 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ( text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
-                                            u8 *kern_pair = &default_kerning[(tex_offset * 2) & 0x1FFFE];
-                                            tex_offset = (clear_idx = kern_pair[1] - 2);
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
+                                            u8 *kern_pair = &default_widths[(tex_offset * 2) & 0x1FFFE];
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + kern_pair[1] - 2))) - text->current_width));
                                         } else {
-                                            u8 *kern_pair = &textures->data[(tex_offset * 2) & 0x1FFFE];
-                                            tex_offset = (clear_idx = kern_pair[1] - 2);
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
+                                            u8 *kern_pair = &glyph_widths[(tex_offset * 2) & 0x1FFFE];
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + kern_pair[1] - 2))) - text->current_width));
                                         }
                                     }
                                     if (skip_count != 0U) {
                                         skip_count -= 1;
                                     } else {
-                                        text->x98 = (u32) (text->x98 + 1);
-                                        text->x94 = (u32) line_delay;
-                                        text->x60 = (void *) (sis_cursor + 2);
+                                        text->x98 += 1;
+                                        text->x94 = line_delay;
+                                        text->x60 = sis_cursor + 2;
                                     }
                                     sis_cursor += 1;
                             }

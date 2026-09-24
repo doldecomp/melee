@@ -58,7 +58,7 @@ SisBlock* free_head;
 /// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
-SIS* HSD_SisLib_804D1124[5];
+u8** HSD_SisLib_804D1124[5];
 
 void* HSD_SisLib_Alloc(s32 size)
 {
@@ -555,7 +555,7 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
         OSPanic(__FILE__, 0x24A, "");
     }
     {
-        SIS* sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[font_idx],
+        u8** sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[font_idx],
                                                symbol_name);
         HSD_SisLib_804D1124[font_idx] = sis;
         if (sis == NULL) {
@@ -567,10 +567,10 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
 
 void HSD_SisLib_803A6368(HSD_Text* text, s32 sis_idx)
 {
-    SIS** sis_table;
+    u8** sis_table;
     s32 i;
 
-    sis_table = (SIS**) HSD_SisLib_804D1124[text->font_idx];
+    sis_table = HSD_SisLib_804D1124[text->font_idx];
     if (sis_table != NULL) {
         text->sis_buffer = sis_table[sis_idx];
     }

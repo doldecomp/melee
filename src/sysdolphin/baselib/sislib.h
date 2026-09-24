@@ -17,16 +17,6 @@
 #define HSD_SISLIB_FONT_GLYPHS                                                \
     (sizeof(HSD_SisLib_FontAtlas) / sizeof(TextGlyphTexture))
 
-struct TextKerning {
-    /*0x00*/ u8 left;
-    /*0x01*/ u8 right;
-};
-
-typedef struct SIS {
-    /*0x00*/ TextKerning* kerning;
-    /*0x04*/ TextGlyphTexture* textures;
-} SIS;
-
 struct SisBlock {
     SisBlock* next;
     HSD_Text* data;
@@ -70,8 +60,8 @@ struct HSD_Text {
     HSD_GObj* entity;
     void (*render_callback)(
         void*);      ///< callback in the text renderer (HSD_SisLib_803A84BC)
-    SIS* sis_buffer; ///< SIS text buffer
-    UNK_T x60;       ///< position in text buffer
+    u8* sis_buffer; ///< SIS text buffer
+    u8* x60;        ///< position in text buffer
     SisBlock* alloc_data;
     char* string_buffer; ///< raw string buffer
     u16 x6C;             ///< string length?
@@ -103,7 +93,11 @@ struct sislib_UnkAlloc3 {
     u8 xF;
 };
 
-extern SIS* HSD_SisLib_804D1124[5];
+/**
+ * Per-font SIS tables: [0] glyph images, [1] glyph widths, then the
+ * encoded strings.
+ */
+extern u8** HSD_SisLib_804D1124[5];
 extern u8 lbl_8040C8C0[0x240];
 extern u8 HSD_SisLib_8040C680[0x240];
 extern u8 HSD_SisLib_8040CB00[0x240];
@@ -120,7 +114,7 @@ void HSD_SisLib_803A947C(HSD_Archive*);
 HSD_Archive* HSD_SisLib_803A945C(char*);
 void HSD_SisLib_803A84BC(HSD_GObj*, int);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
-void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
+void HSD_SisLib_803A8134(u8*, HSD_Text*, f32*, f32*);
 void HSD_SisLib_803A7684(HSD_Text*, const u8*, u8);
 void HSD_SisLib_803A7664(HSD_Text*);
 void HSD_SisLib_803A75E0(HSD_Text*, s32);

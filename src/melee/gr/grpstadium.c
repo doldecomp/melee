@@ -1404,7 +1404,7 @@ bool grStadium_801D32D0(Ground_GObj* gobj)
 
 static const GXColor grPs_804DAF3C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-/// Half the size of a #TextGlyphTexture; the stage's I4 glyph scratch.
+/// Writable storage for SIS string 5, which the stage rebuilds.
 static u8 grPs_8049F040[0x100];
 
 void grStadium_801D3460(Ground_GObj* gobj)
@@ -1435,7 +1435,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     HSD_SisLib_803A7664(gp2->win_dynamic_p);
     temp_r29 = GET_GROUND(Ground_GetMapGObj(2));
 
-    HSD_SisLib_804D1124[1][2].textures = (TextGlyphTexture*) grPs_8049F040;
+    HSD_SisLib_804D1124[1][5] = grPs_8049F040;
 
     HSD_SisLib_803A6530(1, 5, 6);
     temp_r0 = temp_r29->u.stadium.xDE;

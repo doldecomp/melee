@@ -30,18 +30,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
 
-typedef struct _SisLibUnkStruct2 {
-    /*0x00*/ u8 x0_padding[0x8 - 0x0];
-    /*0x08*/ u8* x08_arr; // Unknown length as of right now
-} SisLibUnkStruct2;
-
-/// @todo #SIS
-typedef struct _SisLibUnkStruct {
-    /*0x00*/ u8 x0_padding[0xC - 0x0];
-    /*0x0C*/ SisLibUnkStruct2* x0C_ptr;
-    /*0x10*/ u8 x10_padding[0x14 - 0x10];
-} SisLibUnkStruct;
-
 static gmCameraUnkStruct gmCamera_VsCamUiState;
 
 f32 gmCamera_803DA630[12] = {
@@ -53,8 +41,7 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 {
     u32 masked_arg1;
     u32 cond_flag = 0;
-    u8* slus2_arr_ptr =
-        ((SisLibUnkStruct*) HSD_SisLib_804D1124)->x0C_ptr->x08_arr;
+    u8* slus2_arr_ptr = HSD_SisLib_804D1124[3][2];
 
     if (arg1 >= 0x2710U) {
         arg1 = 0x270F;
