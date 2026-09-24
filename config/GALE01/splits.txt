@@ -4697,11 +4697,18 @@ melee/if/if_2FF2.c:
 	.sdata2     start:0x804DDC28 end:0x804DDC30
 
 melee/if/soundtest.c:
-	.text       start:0x802FF7DC end:0x80301E44
-	.data       start:0x803F9EF0 end:0x803FDC20
-	.sdata      start:0x804D5850 end:0x804D5A00
-	.sbss       start:0x804D6DA8 end:0x804D6E18
-	.sdata2     start:0x804DDC30 end:0x804DDC58
+	.text       start:0x802FF7DC end:0x80300480
+	.data       start:0x803F9EF0 end:0x803FA758
+	.sdata      start:0x804D5850 end:0x804D58D0
+	.sbss       start:0x804D6DA8 end:0x804D6DC8
+	.sdata2     start:0x804DDC30 end:0x804DDC40
+
+melee/if/if_3004.c:
+	.text       start:0x80300480 end:0x80301E44
+	.data       start:0x803FA758 end:0x803FDC20
+	.sdata      start:0x804D58D0 end:0x804D5A00
+	.sbss       start:0x804D6DC8 end:0x804D6E18
+	.sdata2     start:0x804DDC40 end:0x804DDC58
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x80302834

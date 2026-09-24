@@ -33,46 +33,66 @@ struct UnkSoundTestData0 {
 };
 ASSERT_SIZE(struct UnkSoundTestData0, 0xC);
 
-struct UnkSoundTestData1 {
-    /* 0x00 */ s32 unk_0; /* inferred */
-    /* 0x04 */ s32 unk_4; /* inferred */
-    /* 0x08 */ u8 unk_8;  /* inferred */
-    /* 0x09 */ u8 unk_9;  /* inferred */
-    /* 0x0A */ u8 unk_A;  /* inferred */
-    /* 0x0B */ u8 unk_B;  /* inferred */
-    /* 0x0C */ u8 unk_C;  /* inferred */
-    /* 0x0D */ u8 unk_D;  /* inferred */
-    /* 0x0E */ u8 unk_E;  /* inferred */
-    /* 0x0F */ u8 unk_F;  /* inferred */
-    /* 0x10 */ u8 unk_10; /* inferred */
-    /* 0x11 */ u8 unk_11; /* inferred */
-    /* 0x12 */ u8 unk_12; /* inferred */
-    /* 0x13 */ u8 unk_13; /* inferred */
-    /* 0x14 */ u8 unk_14; /* inferred */
-    /* 0x15 */ u8 unk_15; /* inferred */
-    /* 0x16 */ u8 unk_16; /* inferred */
-    /* 0x17 */ u8 unk_17; /* inferred */
-    /* 0x18 */ u8 unk_18; /* inferred */
-    /* 0x19 */ u8 unk_19; /* inferred */
-    /* 0x1A */ u8 unk_1A; /* inferred */
-    /* 0x1B */ u8 unk_1B; /* inferred */
-    /* 0x1C */ u8 unk_1C; /* inferred */
-    /* 0x1D */ u8 unk_1D; /* inferred */
-    /* 0x1E */ u8 unk_1E; /* inferred */
-}; /* size = 0x20 */
-ASSERT_SIZE(struct UnkSoundTestData1, 0x20);
+struct un_803FA258_t {
+    /* 0x000 */ int x0;
+    /* 0x004 */ int x4[4];
+    /* 0x014 */ int x14[4];
+    /* 0x024 */ int x24[4];
+    /* 0x034 */ int x34;
+    /* 0x038 */ int x38[4];
+    /* 0x048 */ int x48[4];
+    /* 0x058 */ int x58[4];
+    /* 0x068 */ int x68[4];
+    /* 0x078 */ f32 x78[4];
+    /* 0x088 */ f32 x88[4];
+    /* 0x098 */ f32 x98[4];
+    /* 0x0A8 */ int xA8[4];
+    /* 0x0B8 */ int xB8[4];
+    /* 0x0C8 */ int xC8;
+    /* 0x0CC */ int xCC[4];
+    /* 0x0DC */ int xDC[4];
+    /* 0x0EC */ f32 xEC;
+    /* 0x0F0 */ u16 xF0;
+    /* 0x0F2 */ u8 _padF2[2];
+    /* 0x0F4 */ u8 xF4;
+    /* 0x0F5 */ u8 xF5;
+    /* 0x0F6 */ u8 xF6;
+    /* 0x0F7 */ u8 xF7;
+    /* 0x0F8 */ int xF8;
+    /* 0x0FC */ int xFC;
+    /* 0x100 */ int x100;
+    /* 0x104 */ int x104;
+    /* 0x108 */ int x108;
+    /* 0x10C */ int x10C;
+    /* 0x110 */ int x110;
+    /* 0x114 */ int x114;
+    /* 0x118 */ int x118;
+    /* 0x11C */ int x11C;
+    /* 0x120 */ int x120;
+    /* 0x124 */ int x124;
+    /* 0x128 */ int x128;
+    /* 0x12C */ int x12C;
+    /* 0x130 */ int x130;
+    /* 0x134 */ int x134;
+    /* 0x138 */ void* x138;
+    /* 0x13C */ int x13C;
+    /* 0x140 */ int x140;
+    /* 0x144 */ int x144[17];
+    /* 0x188 */ int x188;
+    /* 0x18C */ int x18C;
+};
 
 /* 2FF7DC */ void un_802FF7DC(void);
 /* 2FF884 */ bool un_802FF884(char*);
 /* 2FFCD0 */ void un_802FFCD0(int, void*);
 /* 2FFD94 */ void un_802FFD94(int a, void* b, soundtest_callback c);
+/* 2FFE0C */ bool fn_802FFE0C(enum soundtest_callback_arg0);
+/* 2FFE6C */ bool fn_802FFE6C(enum soundtest_callback_arg0);
+/* 2FFEA4 */ bool un_802FFEA4(enum soundtest_callback_arg0);
 /* 2FFEE0 */ void un_802FFEE0(struct UnkSoundTestData0*);
 /* 2FFF2C */ void un_802FFF2C(StartMeleeData*);
-/* 301BA8 */ void un_80301BA8(struct UnkSoundTestData1* out);
-/* 301C64 */ void un_80301C64(un_80301C64_t*);
 /* 3F9FA4 */ extern struct SoundTestMenuData un_803F9FA4;
 /* 3FA4E0 */ extern struct un_80304138_objalloc_t_x8 un_803FA4E0[11];
-/* 3FA790 */ extern struct un_80304138_objalloc_t_x8 un_803FA790[4];
-/* 3FC4CC */ extern struct un_80304138_objalloc_t_x8 un_803FC4CC[10];
+/* 4D5880 */ extern char* un_804D5880[2];
 
 #endif
