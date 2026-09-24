@@ -223,8 +223,8 @@ void HSD_SisLib_803A5A2C(void* ptr)
                 }
                 HSD_SisLib_Free(curr->alloc_data);
             }
-            if (curr->string_buffer != NULL) {
-                HSD_SisLib_Free(curr->string_buffer);
+            if (curr->state_stack != NULL) {
+                HSD_SisLib_Free(curr->state_stack);
             }
             HSD_SisLib_Free(curr);
             return;
@@ -296,7 +296,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
     text->font_size.y = 1.0F;
     text->font_size.x = 1.0F;
     text->alloc_data = NULL;
-    text->string_buffer = 0;
+    text->state_stack = 0;
     text->sis_buffer = 0;
     text->bg_color.a = 0;
     text->bg_color.b = 0;
@@ -315,8 +315,8 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
     text->default_alignment = 0;
     text->default_fitting = 0;
     text->default_kerning = 0;
-    text->x6E = 0;
-    text->x6C = 0;
+    text->state_stack_capacity = 0;
+    text->state_stack_used = 0;
     text->x4E = 0;
     text->hidden = 0;
     text->x4C = 0;
@@ -587,18 +587,18 @@ void HSD_SisLib_803A6368(HSD_Text* text, s32 sis_idx)
     text->alignment = text->default_alignment;
     text->kerning = text->default_kerning;
     text->fitting = text->default_fitting;
-    text->x6C = 0;
+    text->state_stack_used = 0;
     text->x98 = 0;
     text->x94 = 0;
     text->x4B = 0;
-    if (text->string_buffer != NULL) {
-        HSD_SisLib_Free(text->string_buffer);
+    if (text->state_stack != NULL) {
+        HSD_SisLib_Free(text->state_stack);
     }
-    text->string_buffer = HSD_SisLib_Alloc(0x10);
+    text->state_stack = HSD_SisLib_Alloc(0x10);
     i = 0;
-    text->x6E = 0x10;
-    while (i < text->x6E) {
-        text->string_buffer[i] = 0;
+    text->state_stack_capacity = 0x10;
+    while (i < text->state_stack_capacity) {
+        text->state_stack[i] = 0;
         i += 1;
     }
 }
