@@ -96,7 +96,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (!ftLib_80086FD4(gobj, cur)) {
+        if (!ftLib_IsSameFighter(gobj, cur)) {
             // If not same player
             Fighter* cur_fp = GET_FIGHTER(cur);
             if (cur_fp->is_sleeping) {
@@ -145,7 +145,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
          cur = cur->next)
     {
         // skip if same player
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSameFighter(gobj, cur)) {
             continue;
         }
 
@@ -194,7 +194,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSameFighter(gobj, cur)) {
             continue;
         }
 
@@ -252,7 +252,7 @@ float ftLib_GetCollectiveFacingDir(Vec3* v, HSD_GObj* gobj)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        if (ftLib_80086FD4(gobj, cur)) {
+        if (ftLib_IsSameFighter(gobj, cur)) {
             continue;
         }
 
@@ -614,7 +614,7 @@ void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)
     helper(gobj, arg1, arg2, 0);
 }
 
-void ftLib_80086C9C(s32 arg0, s32 arg1)
+void ftLib_ApplyRumbleToAllFighters(s32 arg0, s32 arg1)
 {
     u8 _[16];
 
@@ -626,12 +626,12 @@ void ftLib_80086C9C(s32 arg0, s32 arg1)
     }
 }
 
-void ftLib_80086D40(HSD_GObj* arg0, s32 arg1, s32 arg2)
+void ftLib_SetFighterRumble(HSD_GObj* arg0, s32 arg1, s32 arg2)
 {
     helper(arg0, arg1, arg2, 1);
 }
 
-void ftLib_80086DC4(s32 arg0, s32 arg1)
+void ftLib_SetRumbleToAllFighters(s32 arg0, s32 arg1)
 {
     u8 _[16];
 
@@ -639,11 +639,11 @@ void ftLib_80086DC4(s32 arg0, s32 arg1)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_80086D40(cur, arg0, arg1);
+        ftLib_SetFighterRumble(cur, arg0, arg1);
     }
 }
 
-void ftLib_80086E68(HSD_GObj* gobj)
+void ftLib_RemoveFighterRumble(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_8003544C(fp->player_idx, fp->is_sub_fighter)) {
@@ -652,19 +652,19 @@ void ftLib_80086E68(HSD_GObj* gobj)
 }
 
 /// Get fighter's team ID
-s32 ftLib_80086EB4(HSD_GObj* gobj)
+s32 ftLib_GetFighterTeam(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->team;
 }
 
-bool ftLib_80086EC0(HSD_GObj* gobj)
+bool ftLib_GetFighterUnknownBool1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221C_b6;
 }
 
-bool ftLib_80086ED0(HSD_GObj* gobj)
+bool ftLib_IsFighterVisibleAndActive(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible || fp->x221E_b2 ||
@@ -677,7 +677,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
     return true;
 }
 
-bool ftLib_80086F4C(HSD_GObj* gobj)
+bool ftLib_IsFighterInSpecificState(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_b2 && !fp->x221F_b1 && fp->x209A == 1) {
@@ -687,7 +687,7 @@ bool ftLib_80086F4C(HSD_GObj* gobj)
     return false;
 }
 
-float ftLib_80086F80(HSD_GObj* gobj)
+float ftLib_GetFighterNameTagHeight(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->invisible) {
@@ -697,7 +697,7 @@ float ftLib_80086F80(HSD_GObj* gobj)
     return fp->co_attrs.name_tag_height;
 }
 
-bool ftLib_80086FA8(HSD_GObj* gobj)
+bool ftLib_IsFighterPerformingSwordSwing(HSD_GObj* gobj)
 {
     switch (ftLib_GetMotionId(gobj)) {
     case ftCo_MS_SwordSwing1:
@@ -710,7 +710,7 @@ bool ftLib_80086FA8(HSD_GObj* gobj)
     return false;
 }
 
-bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
+bool ftLib_IsSameFighter(HSD_GObj* gobj0, HSD_GObj* gobj1)
 {
     if (gobj0 != NULL && gobj1 != NULL) {
         if (gobj0 == gobj1) {
@@ -729,23 +729,23 @@ bool ftLib_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
     return false;
 }
 
-bool ftLib_8008701C(HSD_GObj* gobj)
+bool ftLib_IsFighterSleeping(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->is_sleeping;
 }
 
-void ftLib_8008702C(s32 arg0)
+void ftLib_IncFtDataValue(s32 arg0)
 {
     ftData_80085560(arg0, 1);
 }
 
-void ftLib_80087050(s32 arg0)
+void ftLib_DecFtDataValue(s32 arg0)
 {
     ftData_80085560(arg0, -1);
 }
 
-bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
+bool ftLib_GetFighterDamageVelocity(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18B8 || fp->dmg.x18BC) {
@@ -757,7 +757,7 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
     return false;
 }
 
-bool ftLib_800870BC(HSD_GObj* gobj, GXColor* val)
+bool ftLib_GetFighterSubColor(HSD_GObj* gobj, GXColor* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->sub_color) {
@@ -767,20 +767,20 @@ bool ftLib_800870BC(HSD_GObj* gobj, GXColor* val)
     return false;
 }
 
-void ftLib_800870F0(HSD_GObj* gobj, s32 x)
+void ftLib_SetFighterDamagePercent(HSD_GObj* gobj, s32 x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1830_percent = x;
 }
 
-s32 ftLib_80087120(HSD_GObj* gobj)
+s32 ftLib_GetFighterDamagePercent(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 result = fp->dmg.x1830_percent;
     return result;
 }
 
-void ftLib_80087140(HSD_GObj* gobj)
+void ftLib_RespawnFighter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->is_sleeping) {
@@ -791,7 +791,7 @@ void ftLib_80087140(HSD_GObj* gobj)
     }
 }
 
-void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
+void ftLib_HandleMetalBoxCollision(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
@@ -844,7 +844,7 @@ s32 ftLib_8008730C(HSD_GObj* gobj)
 
 s32 ftLib_8008731C(HSD_GObj* gobj)
 {
-    return ftLib_8008701C(gobj);
+    return ftLib_IsFighterSleeping(gobj);
 }
 
 bool ftLib_8008732C(HSD_GObj* gobj)
