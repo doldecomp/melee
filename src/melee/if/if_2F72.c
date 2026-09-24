@@ -37,18 +37,17 @@ static struct ScInfStcModels scinfstc_models;
 
 s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     f32 frame = lbGetJObjCurrFrame(jobj);
-    s32 unused;
 
     HSD_JObjAnimAll(jobj);
 
     if (!entry->x12.x0) {
         if (frame >= (f32) entry->x10) {
-            if ((s32) entry->x20 >= 0) {
+            if (entry->x20 >= 0) {
                 lbAudioAx_800237A8(entry->x20, 127, 64);
                 entry->x12.x0 = 1;
-            } else if ((s32) entry->xC >= 0) {
+            } else if (entry->xC >= 0) {
                 lbAudioAx_800237A8(entry->xC, 127, 64);
                 entry->x12.x0 = 1;
             }
@@ -57,7 +56,7 @@ s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 
     if (!entry->x12.x1) {
         if (frame >= (f32) entry->x11) {
-            if ((s32) entry->x24 >= 0) {
+            if (entry->x24 >= 0) {
                 lbAudioAx_800237A8(entry->x24, 127, 64);
                 entry->x12.x1 = 1;
             }
@@ -67,25 +66,25 @@ s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
     return lb_8000B09C(jobj);
 }
 
+static inline Element_803F9628* FindEntry(Element_803F9628* entries,
+                                          HSD_GObj* gobj)
+{
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        if (entries[i].x0 == gobj) {
+            return &entries[i];
+        }
+    }
+    return NULL;
+}
+
 void if_802F73C4(HSD_GObj* gobj)
 {
     Element_803F9628* const entries = ifStatus_803F9628;
-    Element_803F9628* entry;
-    s32 i;
-    Element_803F9628* curr;
-    s32 idx;
+    Element_803F9628* entry = FindEntry(entries, gobj);
+    s32 idx = ((u8*) entry - (u8*) entries) / sizeof(*entry);
 
-    curr = entries;
-    for (i = 0; i < 8; curr++, i++) {
-        if (curr->x0 == gobj) {
-            entry = &entries[i];
-            goto found;
-        }
-    }
-    entry = NULL;
-
-found:
-    idx = ((u8*) entry - (u8*) entries) / sizeof(Element_803F9628);
     if (entry != NULL && !entry->x12.x2) {
         if (entry->x18 != NULL) {
             entry->x18(idx);
@@ -121,7 +120,7 @@ void if_802F74D0(HSD_GObj* gobj)
     entry = NULL;
 
 found:
-    idx = ((u8*) entry - (u8*) entries) / sizeof(Element_803F9628);
+    idx = ((u8*) entry - (u8*) entries) / sizeof(*entry);
     if (entry != NULL && !entry->x12.x2) {
         if (entry->x18 != NULL) {
             entry->x18(idx);
@@ -238,30 +237,29 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
     return gobj;
 }
 
+/// (Re)spawns the second GObj of @p slot.
+static inline void SpawnGObj2(s32 slot)
+{
+    struct ScInfStcModels* models = &scinfstc_models;
+    s32 idx = (u8) slot;
+    HSD_GObj** gobjp = &models->slots[(u8) slot].gobj - 1;
+
+    models->slots[idx].gobj2 = fn_802F77F8(*(gobjp += 2), (u8) slot, 1);
+    if (models->slots[idx].gobj2 != NULL) {
+        HSD_GObj_SetupProc(*gobjp, fn_802F7670, 0x11);
+    }
+}
+
 void fn_802F7994(HSD_GObj* gobj)
 {
-    s32 slot;
-    HSD_GObj** gobjp;
-    HSD_JObj* jobj;
     struct ScInfStcModels* models = &scinfstc_models;
-    s32 idx;
-    f32 frame;
-
-    PAD_STACK(8);
-
-    jobj = gobj->hsd_obj;
-    frame = lbGetJObjCurrFrame(jobj);
-    slot = GetSlot(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 frame = lbGetJObjCurrFrame(jobj);
+    s32 slot = GetSlot(gobj);
 
     if (slot >= 0) {
         if (frame > 12.0f && models->slots[slot].gobj2 == NULL) {
-            idx = (u8) slot;
-            gobjp = &models->slots[(u8) slot].gobj - 1;
-            models->slots[idx].gobj2 =
-                fn_802F77F8(*(gobjp += 2), (u8) slot, 1);
-            if (models->slots[idx].gobj2 != NULL) {
-                HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7670, 0x11);
-            }
+            SpawnGObj2(slot);
         }
         if (lb_8000B09C(jobj) == 0) {
             models->slots[slot].gobj = NULL;
@@ -300,16 +298,14 @@ void if_802F7AF8(s32 slot)
     slots = models->slots;
     slots[idx].gobj = result;
     if (slots[idx].gobj != NULL) {
-        HSD_GObj_SetupProc(models->slots[idx].gobj,
-                           (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(models->slots[idx].gobj, fn_802F75D4, 0x11);
     }
 
     idx = (u8) slot2;
     result = fn_802F77F8(models->slots[idx].gobj, (u8) slot2, 2);
     slots[idx].gobj = result;
     if (slots[idx].gobj != NULL) {
-        HSD_GObj_SetupProc(models->slots[idx].gobj,
-                           (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(models->slots[idx].gobj, fn_802F75D4, 0x11);
     }
 }
 
@@ -321,7 +317,7 @@ void if_802F7BB4(s32 player_idx)
 
     models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 1);
     if (models->slots[idx].gobj != NULL) {
-        HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(*gobjp, fn_802F75D4, 0x11);
     }
 }
 
@@ -337,10 +333,10 @@ void if_802F7C30(s32 slot)
         gobjp = &models->slots[idx].gobj - 1;
         models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
         if (models->slots[idx].gobj != NULL) {
-            HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F75D4, 0x11);
+            HSD_GObj_SetupProc(*gobjp, fn_802F75D4, 0x11);
         }
     } else if (ret == -1) {
-        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
+        SpawnGObj(slot, 1, fn_802F75D4);
     }
 }
 
@@ -356,20 +352,19 @@ void if_802F7D08(s32 slot)
         gobjp = &models->slots[idx].gobj - 1;
         models->slots[idx].gobj = fn_802F77F8(*++gobjp, idx, 0);
         if (models->slots[idx].gobj != NULL) {
-            HSD_GObj_SetupProc(*gobjp, (HSD_GObjEvent) fn_802F7994, 0x11);
+            HSD_GObj_SetupProc(*gobjp, fn_802F7994, 0x11);
         }
     } else if (ret == -1) {
-        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F7994);
+        SpawnGObj(slot, 1, fn_802F7994);
     } else {
-        SpawnGObj(slot, 1, (HSD_GObjEvent) fn_802F75D4);
+        SpawnGObj(slot, 1, fn_802F75D4);
     }
 }
 
 void if_802F7E24(void)
 {
     memzero(&scinfstc_models, sizeof(scinfstc_models));
-    lbArchive_LoadSections(*ifAll_GetArchive(),
-                           (void**) &scinfstc_models.scene_models,
+    lbArchive_LoadSections(*ifAll_GetArchive(), &scinfstc_models.scene_models,
                            lbl_803F9780, 0);
 }
 
