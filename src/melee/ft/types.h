@@ -572,11 +572,10 @@ struct ftCommonData {
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ int x6D4;
-    /* +6D8 */ int x6D8[1]; ///< @todo expand to actual size
+    /* +6D8 */ int x6D8;
     /* +6DC */ GXColor
-        sub_colors[4]; ///< Array of tint colors, see #gm_SetupSubColors and
+        sub_colors[5]; ///< Array of tint colors, see #gm_SetupSubColors and
                        ///< #Fighter_UnkInitLoad_80068914
-    /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
     /* +6F4 */ int x6F4_unkDamage;
     /* +6F8 */ int x6F8;

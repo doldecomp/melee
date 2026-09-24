@@ -2051,7 +2051,7 @@ static inline s32 ftColl_GetDamageCount(Fighter* fp, ftCommonData* ftd)
 {
     if (fp->x2225_b7) {
         if (fp->stamina_dead) {
-            return (s32) ftd->x6D8[0];
+            return ftd->x6D8;
         }
         return ftd->x6D4;
     }
