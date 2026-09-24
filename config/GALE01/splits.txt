@@ -239,8 +239,11 @@ melee/pl/pltrick.c:
 	.data       start:0x803BCE70 end:0x803BCF20
 	.sdata2     start:0x804D7F18 end:0x804D7F20
 
+melee/pl/pl_0386.c:
+	.text       start:0x800386D8 end:0x80038788
+
 melee/pl/plbonus.c:
-	.text       start:0x800386D8 end:0x8003D514
+	.text       start:0x80038788 end:0x8003D514
 	.data       start:0x803BCF20 end:0x803BD0B0
 	.sdata2     start:0x804D7F20 end:0x804D7F58
 
