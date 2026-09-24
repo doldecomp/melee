@@ -26,7 +26,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
-            old_buf = (u8*) text->string_buffer;
+            old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             count = old_x6E;
@@ -58,7 +58,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 4)) {
             new_x6E = old_x6E + 0x10;
-            old_buf = (u8*) text->string_buffer;
+            old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             count = old_x6E;
@@ -87,7 +87,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
-            old_buf = (u8*) text->string_buffer;
+            old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             count = old_x6E;
@@ -119,7 +119,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 2)) {
             new_x6E = old_x6E + 0x10;
-            old_buf = (u8*) text->string_buffer;
+            old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             count = old_x6E;
@@ -146,7 +146,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
-            old_buf = (u8*) text->string_buffer;
+            old_buf = text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             count = old_x6E;
