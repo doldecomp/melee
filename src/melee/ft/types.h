@@ -868,7 +868,7 @@ typedef struct Fighter_WaitAnimData {
     s32 x8;
     CmdUnion* xC;
     s32 x10_animCurrFlags;
-    u32 x14;
+    uintptr_t x14;
 } Fighter_WaitAnimData;
 
 struct ftData {
@@ -1383,8 +1383,8 @@ struct Fighter {
     /*  fp+598 */ FigaTree* x598;
     /*  fp+59C */ struct Fighter_x59C_t* x59C;
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
-    /*  fp+5A4 */ UNK_T x5A4;
-    /*  fp+5A8 */ UNK_T x5A8;
+    /*  fp+5A4 */ uintptr_t x5A4;
+    /*  fp+5A8 */ uintptr_t x5A8;
     /*  fp+5AC */ FtPartsVis x5AC;
     /*  fp+5CC */ CostumeTObjList tobj_list;
     /*  fp+5E8 */ FighterBone* parts;
@@ -1963,7 +1963,7 @@ struct ftData_80085FD4_ret {
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
-    /* +14 */ u32 x14;
+    /* +14 */ uintptr_t x14;
 };
 
 struct ArticleDynamicBones {
