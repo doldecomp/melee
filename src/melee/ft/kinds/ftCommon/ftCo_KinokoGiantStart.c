@@ -8,6 +8,7 @@
 
 #include "forward.h"
 #include "ftCo_KinokoSmallEnd.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>
@@ -115,10 +116,8 @@ void fn_800D17FC(Fighter_GObj* gobj)
 
 void ftCo_KinokoGiantStart_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D15D0(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D15D0);
 }
 
 void ftCo_KinokoGiantStart_Coll(Fighter_GObj* gobj)
@@ -149,10 +148,8 @@ void fn_800D19BC(Fighter_GObj* gobj)
 
 void ftCo_KinokoGiantStartAir_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D15D0(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D15D0);
 }
 
 void ftCo_KinokoGiantStartAir_Coll(Fighter_GObj* gobj)

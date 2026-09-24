@@ -270,13 +270,7 @@ read_huffman_code:
     }
     return 0U;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void hsd_803B5EA0(s32 component)
 {
     u8* base;

@@ -7,11 +7,6 @@
 #include "types.h"
 #include <melee/lb/lblanguage.h>
 
-/// @todo Figure out how to force the other functions not to inline this
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 s32 fn_8017AD04(s32 arg0, s32 arg1)
 {
     s32 temp_r0;
@@ -25,9 +20,25 @@ s32 fn_8017AD04(s32 arg0, s32 arg1)
     }
     return arg0;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline s32 clampKOs(s32 n)
+{
+    return fn_8017AD04(n, 999999);
+}
+
+static inline s32 getKOs(s32 slot, s32 killer, s32 victim)
+{
+    MatchEnd* me = fn_80174274();
+
+    if (killer == victim) {
+        return -1;
+    }
+    if (me->player_standings[slot].pkind != Gm_PKind_NA) {
+        s32 kos = me->player_standings[killer].kills[victim];
+        return clampKOs(kos);
+    }
+    return -1;
+}
 
 s32 fn_8017AD28(s32 arg0)
 {
@@ -81,62 +92,22 @@ s32 fn_8017AE0C(s32 arg0)
 
 s32 fn_8017AE70(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 0) {
-        return -1;
-    }
-    if (me->player_standings[0].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[arg0].kills[0], 999999);
-    }
-    return -1;
+    return getKOs(0, arg0, 0);
 }
 
 s32 fn_8017AED8(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 1) {
-        return -1;
-    }
-    if (me->player_standings[1].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[arg0].kills[1], 999999);
-    }
-    return -1;
+    return getKOs(1, arg0, 1);
 }
 
 s32 fn_8017AF40(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 2) {
-        return -1;
-    }
-    if (me->player_standings[2].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[arg0].kills[2], 999999);
-    }
-    return -1;
+    return getKOs(2, arg0, 2);
 }
 
 s32 fn_8017AFA8(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 3) {
-        return -1;
-    }
-    if (me->player_standings[3].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[arg0].kills[3], 999999);
-    }
-    return -1;
+    return getKOs(3, arg0, 3);
 }
 
 s32 fn_8017B010(s32 arg0)
@@ -152,62 +123,22 @@ s32 fn_8017B010(s32 arg0)
 
 s32 fn_8017B07C(s32 arg0)
 {
-    MatchEnd* me;
-    s32 var_r3;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 0) {
-        return -1;
-    } else if (me->player_standings[0].pkind != Gm_PKind_NA) {
-        var_r3 = fn_8017AD04(me->player_standings[0].kills[arg0], 999999);
-        return var_r3;
-    }
-    return -1;
+    return getKOs(0, 0, arg0);
 }
 
 s32 fn_8017B0E4(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 1) {
-        return -1;
-    }
-    if (me->player_standings[1].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[1].kills[arg0], 999999);
-    }
-    return -1;
+    return getKOs(1, 1, arg0);
 }
 
 s32 fn_8017B14C(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 2) {
-        return -1;
-    }
-    if (me->player_standings[2].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[2].kills[arg0], 999999);
-    }
-    return -1;
+    return getKOs(2, 2, arg0);
 }
 
 s32 fn_8017B1B4(s32 arg0)
 {
-    MatchEnd* me;
-    PAD_STACK(8);
-
-    me = fn_80174274();
-    if (arg0 == 3) {
-        return -1;
-    } else if (me->player_standings[3].pkind != Gm_PKind_NA) {
-        return fn_8017AD04(me->player_standings[3].kills[arg0], 999999);
-    }
-    return -1;
+    return getKOs(3, 3, arg0);
 }
 
 s32 fn_8017B21C(s32 arg0)

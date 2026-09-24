@@ -181,10 +181,6 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, s8* arg4)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
                  s8* buf)
 {
@@ -201,9 +197,6 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
         buf[i] = costume;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, s8* arg4)
 {
@@ -596,6 +589,17 @@ gm_8016A22C_header(struct lbl_8046B488_t* gp)
     return (struct gm_8016A22C_header*) gp;
 }
 
+static inline void setCostumes(struct gm_8016A22C_header* header, u8 costume,
+                               u8 new_character, u8 new_costume)
+{
+    int i;
+
+    for (i = 0; i < 3; i++) {
+        fn_801697FC(header->bytes[i], costume, new_character, new_costume,
+                    header->x20);
+    }
+}
+
 void gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
                  u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                  int flag2, int flag1, f32 f1, f32 f2)
@@ -658,13 +662,9 @@ void gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, u8 a5, int mode, int a7,
         }
         break;
 
-    case 1: {
-        u8 c = gp->xC;
-        for (i = 0; i < 3; i++) {
-            fn_801697FC(header->bytes[i], c, p87, p8b, header->x20);
-        }
+    case 1:
+        setCostumes(header, gp->xC, p87, p8b);
         break;
-    }
     }
 
     fn_80169A84(gp->xE, gp->x124, gp->x20);

@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #include "forward.h"
+#include "inlines.h"
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0892.h>
@@ -80,19 +81,10 @@ void fn_800D2530(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D23F4;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_KinokoSmallEnd_Anim(Fighter_GObj* gobj)
 {
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D23F4(gobj);
-    }
+    ftCo_Kinoko_Anim(gobj, ftCo_800D23F4);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_KinokoSmallEnd_Coll(Fighter_GObj* gobj)
 {
@@ -120,20 +112,11 @@ void fn_800D26A0(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D23F4;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftCo_KinokoSmallEndAir_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
-    if (!fn_800D2A3C(gobj)) {
-        ftCo_800D23F4(gobj);
-    }
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_Kinoko_Anim(gobj, ftCo_800D23F4);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftCo_KinokoSmallEndAir_Coll(Fighter_GObj* gobj)
 {

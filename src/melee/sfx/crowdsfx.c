@@ -118,24 +118,6 @@ void un_80321C28(void)
     data->x2C = -1;
 }
 
-static void un_80321C70_inline(void)
-{
-    CrowdSFX_UnkStruct* data;
-
-    data = crowdsfx_ptr;
-
-    if (data->x18 >= gCrowdConfig->max_gasp_count ||
-        data->x18 < gCrowdConfig->x24)
-    {
-        return;
-    }
-    data->x1C = 1;
-}
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void un_80321C70(void)
 {
     CrowdSFX_UnkStruct* data;
@@ -156,9 +138,6 @@ void un_80321CA4(s32 arg)
     un_80321CE8();
     data->x28 = lbAudioAx_8002411C(arg);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void un_80321CE8(void)
 {
@@ -167,16 +146,6 @@ void un_80321CE8(void)
         lbAudioAx_800236B8(data->x28);
     }
     data->x28 = -1;
-}
-
-static void un_80321CE8_caller(u32 arg0)
-{
-    CrowdSFX_UnkStruct* data = crowdsfx_ptr;
-    if (lbAudioAx_80023710(data->x28) != 0) {
-        lbAudioAx_800236B8(data->x28);
-    }
-    data->x28 = -1;
-    data->x28 = lbAudioAx_8002411C(arg0);
 }
 
 void un_80321D30(u32 arg0, f32 arg1)
@@ -195,22 +164,22 @@ void un_80321D30(u32 arg0, f32 arg1)
 
     switch (cat) {
     case 3: {
-        un_80321CE8_caller(0x140);
+        un_80321CA4(0x140);
         break;
     }
     case 2: {
-        un_80321CE8_caller(0x141);
+        un_80321CA4(0x141);
         break;
     }
     case 1: {
-        un_80321CE8_caller(0x142);
+        un_80321CA4(0x142);
         break;
     }
     }
 
     if (arg0 != 0) {
         if (data->xC == arg0) {
-            un_80321C70_inline();
+            un_80321C70();
         }
     }
 }
@@ -308,7 +277,7 @@ bool un_8032201C(u32 arg0, s32 cat)
 
     if (arg0 != 0) {
         if (data->xC == arg0) {
-            un_80321C70_inline();
+            un_80321C70();
         }
 
         gobj = ftLib_8008741C(arg0);
@@ -402,6 +371,10 @@ void un_80322314(void)
     data->x20 = 1;
 }
 
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
 void un_8032233C(u32 arg0, u32 arg1)
 {
     s32 cat;
@@ -452,6 +425,9 @@ void un_8032233C(u32 arg0, u32 arg1)
     data->x0 = arg0;
     data->x8 = kb_mag;
 }
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
 {

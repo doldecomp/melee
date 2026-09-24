@@ -1628,23 +1628,21 @@ void fn_8017280C(void)
     gmMainLib_8015EEB4();
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline s32 tryUnlock(int i, u16 mask)
+{
+    if (!gmMainLib_8015D94C(i) && fn_8017279C(i, mask) != 0) {
+        return gmMainLib_8015D818(i);
+    }
+    return 0;
+}
+
 int gm_80172898(u16 arg0)
 {
-    s32 var_r3;
     int i;
     int count = 0;
 
     for (i = 0; i < 0x42; i++) {
-        if (!gmMainLib_8015D94C(i) && fn_8017279C(i, arg0) != 0) {
-            var_r3 = gmMainLib_8015D818(i);
-        } else {
-            var_r3 = 0;
-        }
-        if (var_r3 != 0) {
+        if (tryUnlock(i, arg0) != 0) {
             count++;
         }
     }
@@ -1657,9 +1655,6 @@ int gm_80172898(u16 arg0)
     fn_8017280C();
     return count;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_8017297C(void)
 {
@@ -1765,10 +1760,6 @@ void gm_80172C44(u32 arg0)
     gmMainLib_8015D984(arg0);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool fn_80172C78(int arg0)
 {
     if (gmMainLib_8015D984(arg0) != 0) {
@@ -1777,9 +1768,6 @@ bool fn_80172C78(int arg0)
     }
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static const struct lbl_803B7AD0_t {
     u8 x0;

@@ -167,10 +167,6 @@ static void mnGallery_80258BC4(struct mnGallery_804D6C88_userdata* data)
     data->unk0 = 1;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
 {
     if (data->unk0 != 0) {
@@ -187,9 +183,6 @@ static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static void mnGallery_80258DBC(HSD_GObj* gobj,
                                struct mnGallery_804D6C88_userdata* data)
@@ -391,10 +384,6 @@ void mnGallery_802591BC(HSD_GObj* gobj)
     HSD_TObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj->tobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static void mnGallery_80259604(struct mnGallery_804D6C88_userdata* data)
 {
     data->unk0 = 0;
@@ -410,9 +399,13 @@ static void mnGallery_80259604(struct mnGallery_804D6C88_userdata* data)
     data->gobjs[0] = NULL;
     data->gobjs[1] = NULL;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline void initUserData(HSD_GObj* gobj,
+                                struct mnGallery_804D6C88_userdata* data)
+{
+    mnGallery_80259604(data);
+    GObj_InitUserData(gobj, 0, HSD_Free, data);
+}
 
 void mnGallery_8025963C(void)
 {
@@ -438,8 +431,7 @@ void mnGallery_8025963C(void)
     user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x214, user_data, "Can't get user_data.\n");
 
-    mnGallery_80259604(user_data);
-    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    initUserData(gobj, user_data);
     proc = HSD_GObj_SetupProc(gobj, fn_802590C4, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 

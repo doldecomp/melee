@@ -147,10 +147,6 @@ void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     s32 sum1 = arg1 + arg2;
@@ -167,9 +163,6 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// Check if box bounced off a surface nearly upright. If the bounce angle
 /// relative to vertical is below threshold, clear velocity vectors and
@@ -510,17 +503,10 @@ bool itBox_Logic1_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(16);
+    PAD_STACK(8);
     if (ip->xDD4_itemVar.box.opened == 0) {
         if (ip->xC9C >= attr->damage_threshold) {
-            efSync_Spawn(0x427, gobj, &ip->pos);
-            if (it_80286340(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
-                            attr->spawn_weight_2, attr->empty_weight))
-            {
-                it_80286BA0(gobj);
-            } else {
-                it_80286AA4(gobj);
-            }
+            itBox_TryOpen_inline(gobj);
         }
     }
     return false;

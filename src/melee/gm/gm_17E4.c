@@ -301,19 +301,21 @@ void gm_8017E7FC(u8 matchResult)
     }
 }
 
+static inline struct gm_803DE650_t* getCurrentStage(void)
+{
+    u8 scene = gm_GetCurrentSceneIndex();
+    return gm_8017E4C4(scene);
+}
+
 typedef struct {
     u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
 } u8_bits;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
     VsSceneController* gm = gmVs_GetSceneController();
-    struct gm_803DE650_t* stage = gm_8017E4C4(gm_GetCurrentSceneIndex());
+    struct gm_803DE650_t* stage = getCurrentStage();
     UnkAdventureData* adv = &lbl_80472C30;
     u8* flags = arg0->_x448;
     gmm_x0_528_t* main_data;
@@ -395,9 +397,4 @@ void fn_8017E8A4(int arg0_int)
     if (stage->x0 == 0x5C) {
         ((u8_bits*) &flags[1])->b3 = 1;
     }
-
-    PAD_STACK(8);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif

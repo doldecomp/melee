@@ -123,10 +123,6 @@ int HSD_Encrypt(u8* data, int len)
     return 0;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static int decryptByte(u32 prev, u32 cur)
 {
     u32 mod7;
@@ -179,10 +175,6 @@ static int decryptByte(u32 prev, u32 cur)
     cur ^= prev;
     return cur;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 int HSD_Decrypt(u8* data, int len)
 {

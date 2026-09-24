@@ -1133,9 +1133,6 @@ static inline bool isDuplicateCostume(int door)
     return false;
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 bool mnCharSel_8025DAA0(int door)
 {
     int num_doors;
@@ -1160,9 +1157,6 @@ bool mnCharSel_8025DAA0(int door)
     }
     return false;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 static inline void pickUniqueCostume(int door)
 {
@@ -2142,19 +2136,7 @@ s32 mnCharSel_8025FDEC(u8 door)
 
         icons[icon_idx].anim_timer = 0xC;
 
-        {
-            int door_idx = door;
-            if (mnCharSel_8025DAA0(door_idx)) {
-                s8 costume;
-                CSSDoor* selected_door = &mnCharSel_803F0DFC.doors[door_idx];
-                for (costume = 0;; costume++) {
-                    selected_door->costume = costume;
-                    if (!mnCharSel_8025DAA0(door_idx)) {
-                        break;
-                    }
-                }
-            }
-        }
+        pickUniqueCostume(door);
 
         if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
             int sel = mnCharSel_803F0DFC.doors[door].sel_icon;

@@ -11,14 +11,9 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/types.h>
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
-    /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.mh.x2258 == ftMh_MS_Wait1_0 || fp->u.mh.x2258 == ftMh_MS_Wait1_2)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, fp->cur_anim_frame,
@@ -32,7 +27,7 @@ void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 
 void ftMh_MS_389_80150D28(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_0 || fp->u.mh.x2258 == ftMh_MS_Wait2_1)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, fp->cur_anim_frame,
@@ -43,36 +38,15 @@ void ftMh_MS_389_80150D28(HSD_GObj* gobj)
     }
     fp->u.mh.x2258 = ftMh_MS_Wait2_1;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u8 _[16];
+    u8 _[8];
     if (fp->u.mh.x2258 == ftMh_MS_Wait2_0) {
-        if ((fp->u.mh.x2258 == ftMh_MS_Wait2_0) ||
-            (fp->u.mh.x2258 == ftMh_MS_Wait2_1))
-        {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0,
-                                      fp->cur_anim_frame, 1, 0, 0);
-        } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 1, 0, 0);
-            ftAnim_8006EBA4(gobj);
-        }
-        fp->u.mh.x2258 = ftMh_MS_Wait2_1;
+        ftMh_MS_389_80150D28(gobj);
     } else {
-        if (fp->u.mh.x2258 == ftMh_MS_Wait1_0 ||
-            fp->u.mh.x2258 == ftMh_MS_Wait1_2)
-        {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0,
-                                      fp->cur_anim_frame, 1, 0, 0);
-        } else {
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 1, 0, 0);
-            ftAnim_8006EBA4(gobj);
-        }
-        fp->u.mh.x2258 = ftMh_MS_Wait1_2;
+        ftMh_MS_389_80150C8C(gobj);
     }
     fp->mv.mh.unk0.x4 = cb;
     fp->mv.mh.unk0.xC = *pos;
@@ -110,23 +84,12 @@ void ftMh_MS_389_80151018(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
+    Vec3 pos;
+    u8 _[8];
     fp->mv.mh.unk0.x20 = 0;
-    {
-        Vec3 pos;
-        u8 _[8];
-        pos.x = da->x30_pos2.x;
-        pos.y = da->x30_pos2.y;
-        pos.z = 0;
-        fp->u.mh.x2258 = ftMh_MS_Wait2_1;
-        {
-            Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->u.mh.x2258 == ftMh_MS_Wait2_0) {
-                ftMh_MS_389_80150D28(gobj);
-            } else {
-                ftMh_MS_389_80150C8C(gobj);
-            }
-            fp->mv.mh.unk0.x4 = ftMh_MS_341_8014FFDC;
-            fp->mv.mh.unk0.xC = pos;
-        }
-    }
+    pos.x = da->x30_pos2.x;
+    pos.y = da->x30_pos2.y;
+    pos.z = 0;
+    fp->u.mh.x2258 = ftMh_MS_Wait2_1;
+    ftMh_MS_389_80150DC4(gobj, ftMh_MS_341_8014FFDC, &pos);
 }

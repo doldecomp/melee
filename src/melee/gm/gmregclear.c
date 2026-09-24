@@ -184,9 +184,6 @@ typedef struct fn_8017F14C_arg {
     /* 0x98 */ s32 x98;
 } fn_8017F14C_arg;
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 s32 fn_8017F14C(void* arg0)
 {
     fn_8017F14C_arg* p = arg0;
@@ -201,9 +198,6 @@ s32 fn_8017F14C(void* arg0)
     }
     return 0;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 s32 fn_8017F1B8(void)
 {
@@ -847,6 +841,13 @@ s32 fn_801803FC(void* arg0)
     PAD_STACK(4);
 }
 
+static inline void setScoreBonuses(struct lbl_80472D28_t* state,
+                                   MatchEnd* result)
+{
+    state->xD0 = fn_8017F09C();
+    state->xDC = fn_8017F14C(result);
+}
+
 static inline HSD_GObj* fn_80180630_CreateCameraGObj(void)
 {
     return GObj_Create(0xEU, 0xEU, 0U);
@@ -986,8 +987,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3, MatchEnd* arg4)
     }
 
     if (state->x118 == 0) {
-        state->xD0 = fn_8017F09C();
-        state->xDC = fn_8017F14C(arg4);
+        setScoreBonuses(state, arg4);
     }
 
     if (state->x117 != 0) {

@@ -657,10 +657,6 @@ void grCastle_801CDC44(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool grCastle_801CDF54(Vec3* vec)
 {
     HSD_GObj* gobj;
@@ -680,9 +676,6 @@ bool grCastle_801CDF54(Vec3* vec)
     }
     return false;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {
@@ -1562,6 +1555,18 @@ void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
     }
 }
 
+static inline bool isNearTarget(HSD_JObj* jobj, Vec3* pos, Vec3* target)
+{
+    if (grCastle_801CDF54(target) &&
+        (lb_8000B1CC(jobj, NULL, pos),
+         sqrtf__Ff((pos->x - target->x) * (pos->x - target->x) +
+                   (pos->y - target->y) * (pos->y - target->y)) < 40.0f))
+    {
+        return true;
+    }
+    return false;
+}
+
 s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
 {
     s32 i = 0;
@@ -1582,21 +1587,7 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
 
             if (arg1 != 0) {
                 if (HSD_JObjGetFlags(jobj) & 0x10) {
-                    s32 close;
-
-                    if (grCastle_801CDF54(&target_pos) != 0 &&
-                        (lb_8000B1CC(jobj, NULL, &pos),
-                         sqrtf__Ff(
-                             (pos.x - target_pos.x) * (pos.x - target_pos.x) +
-                             (pos.y - target_pos.y) * (pos.y - target_pos.y)) <
-                             40.0f))
-                    {
-                        close = 1;
-                    } else {
-                        close = 0;
-                    }
-
-                    if (close == 0) {
+                    if (!isNearTarget(jobj, &pos, &target_pos)) {
                         HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                         if (eff_a != NULL && eff_b != NULL) {
                             if (gm_8016AE80() != -1 && gm_8016B238() == 0) {

@@ -669,11 +669,6 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     return ret_val;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-
 void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
 {
     Item* it = item_gobj->user_data;
@@ -685,10 +680,6 @@ void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
         it_80275640(item_gobj, attr->x58);
     }
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 #ifdef MUST_MATCH
 #pragma push

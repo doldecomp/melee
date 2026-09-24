@@ -2945,10 +2945,6 @@ f32 grBigBlue_801EC58C(Vec3* pos, Vec3* normal_out, f32 half_height)
     return max_y;
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma fp_contract on
-#endif
 static inline void grBigBlue_801EC6C0_inline2(s32 range, s32* result)
 {
     s32 random = HSD_Randi(range);
@@ -3093,9 +3089,6 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
         }
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 static inline void grBigBlue_FindClosestCar(Ground* gp, s32* found_ten,
                                             s32* closest_lane)
@@ -3489,10 +3482,6 @@ typedef union grBigBlue_CarPhysics {
     } data;
 } grBigBlue_CarPhysics;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma fp_contract on
-#endif
 /// @todo The collision scratch vector sits four bytes low.
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
@@ -3750,9 +3739,6 @@ heading_converge:
     HSD_JObjSetTranslate(jobj, &gp->data.lanes[lane].pos);
     HSD_JObjSetRotationZ(jobj, f31_rot);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 {
@@ -4209,10 +4195,6 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 #pragma pop
 #endif
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma fp_contract on
-#endif
 bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 {
     s32 offset;
@@ -4407,9 +4389,6 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
     return 1;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void grBigBlue_801EF424(Ground_GObj* gobj)
 {

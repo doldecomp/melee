@@ -361,19 +361,7 @@ void itZGShell_Logic11_Thrown(Item_GObj* gobj)
 
 bool itZrshell_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    if (ip->xDD4_itemVar.zgshell.xE08_b0) {
-        ip->xDD4_itemVar.zgshell.xDFC -= 1.0f;
-        if (ip->xDD4_itemVar.zgshell.xDFC <= 0.0f) {
-            ip->xDD4_itemVar.zgshell.xE08_b0 = 0;
-            ip->xDD4_itemVar.zgshell.xDFC = attrs->x28;
-            it_8027572C(gobj, 0);
-            if (ip->xDD4_itemVar.zgshell.xE08_b1) {
-                it_802756E0(gobj);
-            }
-        }
-    }
+    it_802DDBE8(gobj);
     return false;
 }
 
@@ -395,18 +383,10 @@ void itZGShell_Logic11_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
-    it_802DDBE8(gobj);
-    return false;
+    return itZrshell_UnkMotion3_Anim(gobj);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
 {

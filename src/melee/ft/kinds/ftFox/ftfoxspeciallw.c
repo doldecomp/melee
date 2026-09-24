@@ -442,10 +442,19 @@ static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
+static inline void updateRelease(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
+        fp->mv.fx.SpecialLw.isRelease = true;
+    }
+
+    if (fp->mv.fx.SpecialLw.releaseLag > 0) {
+        fp->mv.fx.SpecialLw.releaseLag--;
+    }
+}
+
 /// Fox & Falco's Reflector Turn function
 static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 {
@@ -465,45 +474,15 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
                   -(MTXDegToRad(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES) -
                     ftPartGetRotZ(fp, 0)));
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
-
-/// Fox & Falco's Reflector Turn function
-static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    ftFox_DatAttrs* da = fp->dat_attrs;
-
-    fp->mv.fx.SpecialLw.turnFrames--;
-    if (fp->cmd_vars[0] == false &&
-        fp->mv.fx.SpecialLw.turnFrames <= da->x9C_FOX_REFLECTOR_TURN_FRAMES)
-    {
-        fp->cmd_vars[0] = true;
-        fp->facing_dir = -fp->facing_dir;
-    }
-
-    ftPartSetRotY(fp, 0,
-                  -(MTXDegToRad(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES) -
-                    ftPartGetRotZ(fp, 0)));
-}
 
 void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
 {
-    /// @todo Shared @c inline with #ftFx_SpecialAirLwTurn_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[16];
+    u8 _[8];
 
-    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.fx.SpecialLw.isRelease = true;
-    }
-
-    if (fp->mv.fx.SpecialLw.releaseLag > 0) {
-        fp->mv.fx.SpecialLw.releaseLag--;
-    }
-
-    ftFox_SpecialLw_Turn_Inline(gobj);
+    updateRelease(gobj);
+    ftFx_SpecialLw_Turn(gobj);
 
     if (fp->mv.fx.SpecialLw.turnFrames <= 0) {
         ftFx_SpecialLwHit_Check(gobj);
@@ -514,17 +493,10 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[20];
+    u8 _[16];
 
-    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.fx.SpecialLw.isRelease = true;
-    }
-
-    if (fp->mv.fx.SpecialLw.releaseLag > 0) {
-        fp->mv.fx.SpecialLw.releaseLag--;
-    }
-
-    ftFox_SpecialLw_Turn_Inline(gobj);
+    updateRelease(gobj);
+    ftFx_SpecialLw_Turn(gobj);
 
     if (fp->mv.fx.SpecialLw.turnFrames <= 0) {
         ftFx_SpecialLwHit_Check(gobj);
@@ -635,6 +607,20 @@ static inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
     ftFx_SpecialLw_Turn(gobj);
 }
 
+static inline void enterGroundTurn(HSD_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwTurn, Ft_MF_KeepGfx, 0, 1,
+                              0, NULL);
+    ftFox_SpecialLwTurn_SetVarAll(gobj);
+}
+
+static inline void enterAirTurn(HSD_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwTurn, Ft_MF_KeepGfx, 0,
+                              1, 0, NULL);
+    ftFox_SpecialLwTurn_SetVarAll(gobj);
+}
+
 /// 0x800E942C
 /// https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Motion
 /// State handler
@@ -644,27 +630,15 @@ bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 
     if (ftCo_800C97A8(gobj) != false) {
         if (fp->ground_or_air == GA_Ground) {
-            Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwTurn,
-                                      Ft_MF_KeepGfx, 0, 1, 0, NULL);
-            ftFox_SpecialLwTurn_SetVarAll(gobj);
+            enterGroundTurn(gobj);
         } else {
-            Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwTurn,
-                                      Ft_MF_KeepGfx, 0, 1, 0, NULL);
-            ftFox_SpecialLwTurn_SetVarAll(gobj);
+            enterAirTurn(gobj);
         }
         fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
 
         return true;
     }
     return false;
-}
-
-static inline void ftFox_SpecialLwHit_CreateReflectInline(HSD_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
-    ftColl_CreateReflectHit(gobj, &da->xB0_FOX_REFLECTOR_REFLECTION,
-                            ftFx_SpecialLwHit_Enter);
 }
 
 /// 0x800E9564
@@ -683,13 +657,9 @@ bool ftFx_SpecialLwHit_Check(HSD_GObj* gobj)
         return false;
     }
     if (fp->ground_or_air == GA_Ground) {
-        Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwLoop, Ft_MF_KeepGfx,
-                                  0, 1, 0, NULL);
-        ftFox_SpecialLwHit_CreateReflectInline(gobj);
+        ftFx_SpecialLwLoop_Enter(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwLoop,
-                                  Ft_MF_KeepGfx, 0, 1, 0, NULL);
-        ftFox_SpecialLwHit_CreateReflectInline(gobj);
+        ftFx_SpecialAirLwLoop_Enter(gobj);
     }
     return true;
 }
@@ -699,15 +669,7 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[4];
-
-    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.fx.SpecialLw.isRelease = true;
-    }
-
-    if (fp->mv.fx.SpecialLw.releaseLag > 0) {
-        fp->mv.fx.SpecialLw.releaseLag--;
-    }
+    updateRelease(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (ftFx_SpecialLwHit_Check(gobj)) {
@@ -717,32 +679,11 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 /// Fox & Falco's aerial Reflector Hit Animation callback
 void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-
-    u8 _[8];
-
-    if (!(fp->input.held_buttons[0] & HSD_PAD_B)) {
-        fp->mv.fx.SpecialLw.isRelease = true;
-    }
-
-    if (fp->mv.fx.SpecialLw.releaseLag > 0) {
-        fp->mv.fx.SpecialLw.releaseLag--;
-    }
-
-    if (!ftAnim_IsFramesRemaining(gobj) && ftFx_SpecialLwHit_Check(gobj)) {
-        ftCommon_8007DB24(gobj);
-        fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
-    }
+    ftFx_SpecialLwHit_Anim(gobj);
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 /// 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
 void ftFx_SpecialLwHit_IASA(HSD_GObj* gobj)

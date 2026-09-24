@@ -135,10 +135,6 @@ void fn_80186F6C(HSD_GObj* arg0)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 HSD_GObjProc* fn_801873F0(void)
 {
     ftDemo_ObjAllocInit();
@@ -153,9 +149,6 @@ HSD_GObjProc* fn_801873F0(void)
     Player_80036F34(0, 6);
     return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void fn_80187494(HSD_GObj* gobj, int arg1)
 {
@@ -193,10 +186,6 @@ void fn_801874FC(void)
 
 /// #fn_801874FC
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_80187714(void)
 {
     Camera_Init(6);
@@ -210,9 +199,6 @@ void fn_80187714(void)
     efLib_Init();
     efAsync_LoadSync(0);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void gm_Scene_IntroAllstar_OnFrame(void)
 {
@@ -223,48 +209,45 @@ void gm_Scene_IntroAllstar_OnFrame(void)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
-void gm_Scene_IntroAllstar_OnEnter(void* arg0_)
+static inline void setupScene(void)
 {
-    struct enterdata* arg0 = arg0_;
-    HSD_GObj* temp_r30;
-    HSD_GObj* temp_r30_2;
-    HSD_GObj* temp_r30_3;
+    HSD_GObj* gobj;
     HSD_LObj* lobj;
     HSD_CObj* cobj;
     HSD_Fog* fog;
+
+    fn_80187714();
+    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614,
+                                      "ScItrAllstar_scene_data", 0);
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc(lbl_804D6614->cameras[0].desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(gobj, fn_80187494, 8);
+    gobj->gxlink_prios = 0x801;
+
+    gobj = GObj_Create(0xB, 3, 0);
+    lobj = lb_80011AC4(lbl_804D6614->lights);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    fn_801874FC();
+
+    gobj = GObj_Create(0xE, 0xF, 0);
+    fog = HSD_FogLoadDesc(lbl_804D6614->fogs[0].desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
+    fn_801873F0();
+    lbAudioAx_80023F28(0x2D);
+}
+
+void gm_Scene_IntroAllstar_OnEnter(void* arg0_)
+{
+    struct enterdata* arg0 = arg0_;
     PAD_STACK(8);
 
     lbl_804736B0.x0 = 0;
     lbl_804736B0.x4 = 0;
 
     lbl_804D6618 = *arg0;
-    fn_80187714();
-    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614,
-                                      "ScItrAllstar_scene_data", 0);
-
-    temp_r30 = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(lbl_804D6614->cameras[0].desc);
-    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(temp_r30, fn_80187494, 8);
-    temp_r30->gxlink_prios = 0x801;
-
-    temp_r30_2 = GObj_Create(0xB, 3, 0);
-    lobj = lb_80011AC4(lbl_804D6614->lights);
-    HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_LightKind, lobj);
-    GObj_SetupGXLink(temp_r30_2, HSD_GObj_LObjCallback, 0, 0);
-    fn_801874FC();
-
-    temp_r30_3 = GObj_Create(0xE, 0xF, 0);
-    fog = HSD_FogLoadDesc(lbl_804D6614->fogs[0].desc);
-    HSD_GObjObject_80390A70(temp_r30_3, HSD_GObj_FogKind, fog);
-    GObj_SetupGXLink(temp_r30_3, HSD_GObj_FogCallback, 0xB, 0);
-    fn_801873F0();
-    lbAudioAx_80023F28(0x2D);
+    setupScene();
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif

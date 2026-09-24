@@ -2682,11 +2682,6 @@ void Toy_803083D8(HSD_JObj* jobj, s32 arg1)
     HSD_JObjAnim(jobj);
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma peephole on
-#endif
-
 void _Toy_803084A0(s32 arg0)
 {
     volatile GXColor color;
@@ -2794,10 +2789,6 @@ void _Toy_803084A0(s32 arg0)
     HSD_SisLib_803A6368(display->x14C, Toy_803063D4(id, 0x128, 0x37A));
     HSD_SisLib_803A6368(display->x150, Toy_803063D4(id, 0x24E, 0x380));
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 HSD_GObj* Toy_803087F4(void* arg0)
 {
@@ -3151,11 +3142,6 @@ f32 _Toy_80309338(Vec3* arg0, Vec3* arg1)
     }
     return var_f1;
 }
-
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline off
-#endif
 
 static inline void _Toy_ReadTrigger(u32* out)
 {
@@ -3873,10 +3859,6 @@ void _Toy_80309404(HSD_GObj* gobj)
     state->x48 = state->x40;
     state->x4C = state->x44;
 }
-
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 /// trophy/lighting debug viewer
 void _Toy_8030B530(HSD_GObj* arg0)
