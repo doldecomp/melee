@@ -2,7 +2,6 @@
 
 #include <Runtime/platform.h>
 
-#include <placeholder.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
@@ -34,13 +33,16 @@ static inline DevText* alloc_text(void)
     return NULL;
 }
 
+static inline void set_color(GXColor* dst, GXColor color)
+{
+    *dst = color;
+}
+
 DevText* DevText_Create(char id, int x, int y, int w, int h, void* buf)
 {
     static GXColor const cyan = { 0x60, 0xD0, 0xB0, 0x70 };
     DevText* text;
-    UNUSED u32 pad;
     GXColor bg = cyan;
-    PAD_STACK(0x14);
 
     if (find_by_id(id) != NULL) {
         return NULL;
@@ -62,11 +64,11 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, void* buf)
         text->cursor_y = 0;
         text->scale_x = 10.0f;
         text->scale_y = 16.0f;
-        text->bg_color = bg;
-        text->text_colors[0] = white;
-        text->text_colors[1] = red;
-        text->text_colors[2] = green;
-        text->text_colors[3] = blue;
+        set_color(&text->bg_color, bg);
+        set_color(&text->text_colors[0], white);
+        set_color(&text->text_colors[1], red);
+        set_color(&text->text_colors[2], green);
+        set_color(&text->text_colors[3], blue);
         text->id = (int) id;
         text->line_width = 10;
         text->flags = DEVTEXT_FLAG_SHOWCURSOR;
