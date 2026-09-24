@@ -429,11 +429,7 @@ typedef struct JpegEncodeTables {
     u8 pad_44E[2];
 } JpegEncodeTables;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma inline_depth(8)
-#endif
-static inline s32 hsd_803B3CD8_bit_length(s32 value)
+static inline s32 bitLength(s32 value)
 {
     s32 bit;
 
@@ -445,20 +441,7 @@ static inline s32 hsd_803B3CD8_bit_length(s32 value)
     return 0;
 }
 
-static inline s32 jpeg_run_bit_length(s32 value)
-{
-    s32 bit;
-
-    value++;
-    for (bit = 0x1F; bit >= 0; bit--) {
-        if (value & (1 << bit)) {
-            return bit + 1;
-        }
-    }
-    return 0;
-}
-
-static inline void hsd_803B3CD8_write_byte(u8 byte, JpegWork** work)
+static inline void writeByte(u8 byte)
 {
     u8* dst = hsd_804D79A0;
 
@@ -466,12 +449,11 @@ static inline void hsd_803B3CD8_write_byte(u8 byte, JpegWork** work)
         hsd_804D79A0 = dst + 1;
         *dst = byte;
     } else {
-        longjmp((*work)->buf, 1);
+        longjmp(hsd_804D2648.buf, 1);
     }
 }
 
-static inline void hsd_803B3CD8_write_bits(s32 value, s32 length,
-                                           JpegWork** work)
+static inline void writeBits(s32 value, s32 length)
 {
     s32 bit;
 
@@ -482,9 +464,9 @@ static inline void hsd_803B3CD8_write_bits(s32 value, s32 length,
             hsd_804D79B0[0] |= 1;
         }
         if (hsd_804D79AC == 8) {
-            hsd_803B3CD8_write_byte(hsd_804D79B0[0], work);
+            writeByte(hsd_804D79B0[0]);
             if (hsd_804D79B0[0] == 0xFF) {
-                hsd_803B3CD8_write_byte(0, work);
+                writeByte(0);
             }
             hsd_804D79AC = 0;
             hsd_804D79B0[0] = 0;
@@ -492,102 +474,66 @@ static inline void hsd_803B3CD8_write_bits(s32 value, s32 length,
     }
 }
 
-static inline void jpeg_write_run_payload(s32 run, s32 length, JpegWork** work)
+void hsd_803B3CD8(s32 component)
 {
-    s32 bit;
-
-    bit = length - 1;
-    run++;
-    for (; bit >= 0; bit--) {
-        hsd_804D79B0[0] <<= 1;
-        hsd_804D79AC += 1;
-        if (run & (1 << bit)) {
-            hsd_804D79B0[0] |= 1;
-        }
-        if (hsd_804D79AC == 8) {
-            hsd_803B3CD8_write_byte(hsd_804D79B0[0], work);
-            if (hsd_804D79B0[0] == 0xFF) {
-                hsd_803B3CD8_write_byte(0, work);
-            }
-            hsd_804D79AC = 0;
-            hsd_804D79B0[0] = 0;
-        }
-    }
-}
-
-static inline void jpeg_encode_component(s32 component, s32* ac_value_out,
-                                         s32* run_out, s32* value_out,
-                                         s32* index_out)
-{
-    JpegWork* work;
-    JpegEncodeTables* tables;
+    JpegWork* work = &hsd_804D2648;
+    JpegEncodeTables* tables = (JpegEncodeTables*) lbl_80430C40;
     u16* dc_code;
     u8* dc_length;
     u16* ac_code;
     u8* ac_length;
+    s32 value;
     s32 length;
+    s32 run;
+    s32 index;
+    s32 ac_value;
 
-    work = &hsd_804D2648;
-    tables = (JpegEncodeTables*) lbl_80430C40;
+    PAD_STACK(16);
+
     dc_code = component == 0 ? lbl_80431678 : lbl_8043169C;
     dc_length = component == 0 ? lbl_80431690 : lbl_804316B4;
     ac_code = component == 0 ? tables->ac_code_luma : tables->ac_code_chroma;
     ac_length =
         component == 0 ? tables->ac_length_luma : tables->ac_length_chroma;
 
-    (*value_out) = work->coef[0] - work->prev_dc[component];
-    (*run_out) = 0;
-    length = hsd_803B3CD8_bit_length(abs((*value_out)));
+    value = work->coef[0] - work->prev_dc[component];
+    run = 0;
+    length = bitLength(abs(value));
     work->prev_dc[component] = work->coef[0];
-    hsd_803B3CD8_write_bits(dc_code[length], dc_length[length], &work);
+    writeBits(dc_code[length], dc_length[length]);
     if (length != 0) {
-        if ((*value_out) < 0) {
-            (*value_out)--;
+        if (value < 0) {
+            value--;
         }
-        hsd_803B3CD8_write_bits((*value_out), length, &work);
+        writeBits(value, length);
     }
-    for ((*index_out) = 1; (*index_out) < 64; (*index_out)++) {
+    for (index = 1; index < 64; index++) {
         JpegWork* indexed;
         /* Apply the zigzag index before the coefficient array offset. */
         s32 coefficient =
-            (indexed = (JpegWork*) ((s32*) work + lbl_80431638[(*index_out)]))
+            (indexed = (JpegWork*) ((s32*) work + lbl_80431638[index]))
                 ->coef[0];
-        (*ac_value_out) = coefficient;
 
+        ac_value = coefficient;
         if (coefficient != 0) {
-            length = jpeg_run_bit_length((*run_out));
-            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length], &work);
-            jpeg_write_run_payload((*run_out), length, &work);
-            length = hsd_803B3CD8_bit_length(abs((*ac_value_out)));
-            hsd_803B3CD8_write_bits(ac_code[length], ac_length[length], &work);
-            if ((*ac_value_out) < 0) {
-                (*ac_value_out)--;
+            length = bitLength(run + 1);
+            writeBits(ac_code[length], ac_length[length]);
+            writeBits(run + 1, length);
+            length = bitLength(abs(ac_value));
+            writeBits(ac_code[length], ac_length[length]);
+            if (ac_value < 0) {
+                ac_value--;
             }
-            hsd_803B3CD8_write_bits((*ac_value_out), length, &work);
-            (*run_out) = 0;
+            writeBits(ac_value, length);
+            run = 0;
         } else {
-            (*run_out)++;
+            run++;
         }
     }
-    if ((*run_out) != 0) {
-        hsd_803B3CD8_write_bits(ac_code[0], ac_length[0], &work);
+    if (run != 0) {
+        writeBits(ac_code[0], ac_length[0]);
     }
 }
-
-#ifdef MUST_MATCH
-#pragma auto_inline off
-#endif
-void hsd_803B3CD8(s32 component)
-{
-    s32 value;
-    s32 run;
-    s32 index;
-    s32 ac_value;
-    jpeg_encode_component(component, &ac_value, &run, &value, &index);
-}
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void hsd_803B46D4(void)
 {
