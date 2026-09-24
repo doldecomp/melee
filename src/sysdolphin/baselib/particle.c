@@ -47,7 +47,7 @@ typedef struct {
 /* 4D78E8 */ u32 hsd_804D78E8 = 0;
 /* 4D78EC */ u32 hsd_804D78EC = 0;
 /* 4D78F0 */ HSD_CObj* psCamera = NULL;
-/* 4D78F4 */ u32 hsd_804D78F4 = 0;
+/* 4D78F4 */ HSD_SList* hsd_804D78F4 = NULL;
 static HSD_JObj* hsd_804D08E8[8];
 /* 4D0908 */ HSD_Particle* hsd_804D0908[16];
 /* 4D0948 */ u32* hsd_804D0948[65];
@@ -498,14 +498,14 @@ HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
     return pp;
 }
 
-void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, s32 cmdList,
-                  s32 life, s32 zero, s32 gen, f32 pos_x, f32 pos_y, f32 pos_z,
-                  f32 vel_x, f32 vel_y, f32 vel_z, f32 fric, f32 rate,
-                  f32 angle3)
+void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, u8* cmdList,
+                  s32 life, s32 zero, HSD_Generator* gen, f32 pos_x, f32 pos_y,
+                  f32 pos_z, f32 vel_x, f32 vel_y, f32 vel_z, f32 fric,
+                  f32 rate, f32 angle3)
 {
-    psGenerateParticle0(0, linkNo, bank, kind, texGroup, (u8*) cmdList, life,
-                        zero, pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric,
-                        rate, angle3, (HSD_Generator*) gen, 1);
+    psGenerateParticle0(0, linkNo, bank, kind, texGroup, cmdList, life, zero,
+                        pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric, rate,
+                        angle3, gen, 1);
 }
 
 void hsd_80398F8C(HSD_Particle* pp, f32 angle)
