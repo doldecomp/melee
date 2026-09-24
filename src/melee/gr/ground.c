@@ -1258,7 +1258,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 
     out = lightset;
     while (*out != NULL) {
-        HSD_LightDesc* desc = *(HSD_LightDesc**) *out;
+        HSD_LightDesc* desc = (*out)->desc;
         UnkStageDat* dat;
         u16* flags;
         if (*(flags = &desc->flags) & 3) {
@@ -1282,14 +1282,14 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
                     *flags &= ~4;
                 }
                 if (b7) {
-                    (*(HSD_LightDesc**) *out)->flags |= 8;
+                    (*out)->desc->flags |= 8;
                 } else {
-                    (*(HSD_LightDesc**) *out)->flags &= ~8;
+                    (*out)->desc->flags &= ~8;
                 }
                 if (b5) {
-                    (*(HSD_LightDesc**) *out)->flags |= 0x400;
+                    (*out)->desc->flags |= 0x400;
                 } else {
-                    (*(HSD_LightDesc**) *out)->flags &= ~0x400;
+                    (*out)->desc->flags &= ~0x400;
                 }
             }
         }
