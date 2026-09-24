@@ -1,7 +1,5 @@
 #include "ifstatus.h"
 
-#include <placeholder.h>
-
 #include "if_2F72.h"
 #include "ifall.h"
 #include "ifcoget.h"
@@ -113,6 +111,16 @@ void ifStatus_PercentOnDeathAnimationThink(IfDamageState* value, s32 arg1,
     }
 }
 
+static inline f32 ifStatus_ClampShakeMagnitude(f32 v)
+{
+    if (v < 0.1014f) {
+        v = 0.1014f;
+    } else if (v > 1.5207f) {
+        v = 1.5207f;
+    }
+    return v;
+}
+
 static inline f32 offset_rand(void)
 {
     return HSD_Randf() - 0.5f;
@@ -120,7 +128,6 @@ static inline f32 offset_rand(void)
 void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 {
     s32 i;
-    u8 new_var;
     f32 mag;
     f32 ox;
     f32 oy;
@@ -138,12 +145,8 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
             state->frames_of_shake_remaining = 0;
             return;
         }
-        mag = 0.1014f * ((f32) (new_var = state->damage_from_last_attack));
-        if (mag < 0.1014f) {
-            mag = 0.1014f;
-        } else if (mag > 1.5207f) {
-            mag = 1.5207f;
-        }
+        mag = ifStatus_ClampShakeMagnitude(0.1014f *
+                                           state->damage_from_last_attack);
         for (i = 0; i < 4; i++) {
             ox = mag * (2.0f * offset_rand());
             oy = mag * (2.0f * offset_rand());
@@ -164,7 +167,6 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
         }
         state->frames_of_shake_remaining -= 1;
     }
-    PAD_STACK(8);
 }
 
 static inline void ifStatus_InitDamageDigits(IfDamageState* state,
@@ -333,21 +335,16 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     hud = ifStatus_GetHUDInfo();
 
-    {
-        ptr = hud->players;
-        jobj = gobj->hsd_obj;
-        for (i = 0; i < 6; ptr++, i++) {
-            if (ptr->HUD_parent_entity == gobj) {
-                state = hud->players + i;
-                goto found_player;
-            }
+    jobj = gobj->hsd_obj;
+    for (i = 0, ptr = hud->players; i < 6; ptr++, i++) {
+        if (ptr->HUD_parent_entity == gobj) {
+            state = &hud->players[i];
+            goto found_player;
         }
-        state = NULL;
-    found_player:
-        (void) 0;
     }
+    state = NULL;
 
-    /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
+found_player:
     if (state->flags.explode_animation) {
         ifStatus_PercentOnDeathAnimationThink(state, i, ptr);
         return;
@@ -583,6 +580,12 @@ void ifStatus_802F5E50(HSD_GObj* gobj, intptr_t arg1)
     }
 }
 
+static inline void ifStatus_SetHUDPosition(HSD_JObj* jobj, u8 idx)
+{
+    Vec3* pos = ifAll_GetPlayerHUDPosition(idx);
+    HSD_JObjSetTranslate(jobj, pos);
+}
+
 static inline HSD_JObj* ifStatus_GetDamageJObj(HSD_JObj* jobj, s32 i)
 {
     HSD_JObj* node = jobj;
@@ -599,7 +602,6 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     HSD_GObj* gobj;
     HSD_MatAnimJoint*** anim_base;
     HSD_JObj* jobj;
-    Vec3* vec;
     s32 i;
     HudIndex* hud = ifStatus_GetHUDInfo();
 
@@ -621,8 +623,7 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
                 hud->damage_num_shapeanims);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
-    vec = ifAll_GetPlayerHUDPosition((u8) player_idx);
-    HSD_JObjSetTranslate(jobj, vec);
+    ifStatus_SetHUDPosition(jobj, player_idx);
     for (i = 0; i < 4; i++) {
         state->jobjs[i] = ifStatus_GetDamageJObj(jobj, i);
         state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
@@ -632,7 +633,6 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     ifStatus_802F5B48(state->HUD_parent_entity);
     state->old_damage = !state->damage_percent;
     ifStatus_802F4EDC(state->HUD_parent_entity);
-    PAD_STACK(8);
     return state->HUD_parent_entity;
 }
 
@@ -651,11 +651,6 @@ HSD_JObj* ifStatus_802F6194(HSD_JObj* node, s32 n)
     return cur;
 }
 
-static inline void ifStatus_CreateMarkGObj(HSD_GObj** gobj)
-{
-    *gobj = GObj_Create(0xE, 0xF, 0);
-}
-
 static inline void ifStatus_GetPlayerCharacter(s32 arg0, CharacterKind* chara)
 {
     u8 idx = arg0;
@@ -667,19 +662,17 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     CharacterKind chara;
     HSD_JObj* jobj;
     HSD_TObj* tobj;
-    Vec3* vec;
     HSD_MObj* mobj;
     HudIndex* hud = ifStatus_GetHUDInfo();
     GXColor color;
     u8 idx = player_idx;
-    PAD_STACK(0x10);
 
     ifStatus_GetPlayerCharacter(player_idx, &chara);
     if (state->next == NULL) {
         HSD_GObj* gobj;
 
         ifAll_GetArchive();
-        ifStatus_CreateMarkGObj(&gobj);
+        gobj = GObj_Create(0xE, 0xF, 0);
         if (gobj == NULL) {
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
@@ -693,7 +686,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
         GObj_SetupGXLink(gobj, ifStatus_802F5E50, 0xB, 0);
         state->next = gobj;
     } else {
-        jobj = state->next->hsd_obj;
+        jobj = HSD_GObjGetHSDObj(state->next);
     }
     tobj = jobj->child->u.dobj->mobj->tobj;
     lb_8000C07C(jobj, 0, hud->damage_mark_anims, hud->damage_mark_matanims,
@@ -704,8 +697,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_TObjReqAnimAll(tobj, 0.5f + gm_80168B34(chara, 0, 0));
     HSD_AObjSetRate(tobj->aobj, 0.1f);
     HSD_TObjAnim(tobj);
-    vec = ifAll_GetPlayerHUDPosition(idx);
-    HSD_JObjSetTranslate(jobj, vec);
+    ifStatus_SetHUDPosition(jobj, idx);
     HSD_JObjAddTranslationX(jobj, 0.25f);
     color =
         gm_80160968(gm_80160854(Player_GetPadPort(idx), Player_GetTeam(idx),
