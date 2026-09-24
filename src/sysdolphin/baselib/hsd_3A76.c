@@ -14,11 +14,6 @@
 #include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
-static inline f32 HSD_SisLib_GlyphWidth(HSD_Text* text, f32 scale_x)
-{
-    return 32.0F * text->x80.x * scale_x;
-}
-
 void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
 {
     switch (flags & 0x7F) {
@@ -473,6 +468,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     }
     if (text->hidden == 0 && text->sis_buffer != NULL) {
         u8 *sis_cursor = text->sis_buffer;
+        f32 scale_x;
         if (gobj != NULL) {
             u8 **sis = HSD_SisLib_804D1124[text->font_idx];
             if (sis != NULL) {
@@ -488,20 +484,13 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             }
             HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), (MtxPtr)&m);
         } else {
-            Mtx projection_m;
+            Mtx44 projection_m;
 
             GXSetZMode(0U, 0U, 0U);
             GXSetViewport(0.0F, 0.0F, 640.0F, 480.0F, 0.0F, 1.0F);
             GXSetScissor(0, 0, 0x280, 0x1E0);
-#ifdef MUST_MATCH
-            MTXOrtho((MtxPtr) ((u8*) &projection_m[0][0] - 0x14), 0.0F,
-                     -480.0F, 0.0F, 640.0F, 0.0F, 2.0F);
-            GXSetProjection((MtxPtr) ((u8*) &projection_m[2][3] - 0x40), 0);
-#else
-            MTXOrtho((MtxPtr)&projection_m, 0.0F, -480.0F, 0.0F, 640.0F,
-                     0.0F, 2.0F);
-            GXSetProjection((MtxPtr)&projection_m, 0);
-#endif
+            MTXOrtho(projection_m, 0.0F, -480.0F, 0.0F, 640.0F, 0.0F, 2.0F);
+            GXSetProjection(projection_m, 0);
             m[0][0] = 1.0F;
             m[0][1] = 0.0F;
             m[0][2] = 0.0F;
@@ -553,7 +542,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             max_y =
                 (text->box_size_y * text->font_size.y) + text->pos_y;
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
-            GXSetTevColor(GX_TEVREG0, *(&text->bg_color));
+            GXSetTevColor(GX_TEVREG0, text->bg_color);
             GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
             // @note: could be inlined
             {
@@ -587,8 +576,6 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             text->fitting = text->default_fitting;
         }
         {
-            f64 half_glyph = 16.0;
-
             u32 line_started;
 
         restart:
@@ -794,7 +781,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 sisFitLineToBox(text, measured_width);
                             }
                             text->current_width = (f32) (((f64) text->x88 * ((f64) text->x80.x *
-                                            (half_glyph + (f64) text->x78.x))) + (f64) text->current_width);
+                                            (16.0 + (f64) text->x78.x))) + (f64) text->current_width);
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
@@ -808,7 +795,6 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 u16 glyph_idx;
                                 s32 tex_offset;
                                 f32 glyph_x;
-                                f32 scale_x;
                                 if (line_started == 0U) {
                                     f32 measured_width;
 
@@ -836,8 +822,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 scale_y = text->font_size.y;
                                     f32 glyph_size = 32.0F * text->x80.y;
                                     f32 uv_top = 0.0F;
-                                    f32 glyph_w = HSD_SisLib_GlyphWidth(text, scale_x);
-                                    f32 quad_right = (text->x88 * glyph_w) + glyph_x;
+                                    f32 quad_right = (text->x88 * (32.0F * text->x80.x * scale_x)) + glyph_x;
                                     f32 glyph_y = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
@@ -858,12 +843,12 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                         }
                                         if (min_x > glyph_x) {
                                             f32 clip_left = min_x - glyph_x;
-                                            uv_left = clip_left / glyph_w;
+                                            uv_left = clip_left / (32.0F * text->x80.x * scale_x);
                                             glyph_x += clip_left;
                                         }
                                         if (max_x < quad_right) {
                                             f32 clip_right = quad_right - max_x;
-                                            uv_right = 1.0F - (clip_right / glyph_w);
+                                            uv_right = 1.0F - (clip_right / (32.0F * text->x80.x * scale_x));
                                             quad_right -= clip_right;
                                         }
                                         if (min_y > quad_top) {
@@ -884,7 +869,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                             GXInitTexObj(&tex_obj, glyph_images + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         }
                                         GXLoadTexObj(&tex_obj, GX_TEXMAP0);
-                                        GXSetTevColor(GX_TEVREG0, *(&text->active_color));
+                                        GXSetTevColor(GX_TEVREG0, text->active_color);
                                         GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
                                         {
                                             f32 glyph_depth = text->pos_z;
