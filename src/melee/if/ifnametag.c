@@ -151,6 +151,17 @@ static inline float getNameTagFrame(int slot)
                        Player_GetPlayerSlotType(slot));
 }
 
+static inline bool has_nametag(int slot)
+{
+    if (Player_GetPlayerSlotType(slot) != Gm_PKind_Human ||
+        Player_GetNametagSlotID(slot) == NAMETAG_DISABLED)
+    {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 static void NameTag_RenderCallback(HSD_GObj* gobj, intptr_t pass)
 {
     HSD_GObj_JObjCallback(gobj, pass);
@@ -161,15 +172,7 @@ void fn_802FCAC4(HSD_GObj* gobj, intptr_t pass)
     if (ifAll_IsHUDHidden() || un_804D6D6C) {
         int i;
         for (i = 0; i < Gm_Player_NumMax; i++) {
-            int do_it;
-            if (Player_GetPlayerSlotType(i) != Gm_PKind_Human ||
-                Player_GetNametagSlotID(i) == 0x78)
-            {
-                do_it = false;
-            } else {
-                do_it = true;
-            }
-            if (do_it) {
+            if (has_nametag(i)) {
                 HSD_SisLib_803A746C(un_804D6D78, un_804A1EF8[i], -5000.0f,
                                     0.0f);
             }
@@ -186,7 +189,7 @@ void un_802FCBA0(void)
     DynamicModelDesc** x;
 
     archive = ifAll_GetArchive();
-    lbArchive_LoadSections(*archive, (void**) &x, "ScInfPnm_scene_models", 0);
+    lbArchive_LoadSections(*archive, &x, "ScInfPnm_scene_models", 0);
     un_804A1ED0.joint = x[0]->joint;
     if (x[0]->anims) {
         un_804A1ED0.animjoint = x[0]->anims[0];
@@ -199,17 +202,6 @@ void un_802FCBA0(void)
     }
 }
 
-static inline bool has_nametag(int slot)
-{
-    if (Player_GetPlayerSlotType(slot) != Gm_PKind_Human ||
-        Player_GetNametagSlotID(slot) == NAMETAG_DISABLED)
-    {
-        return false;
-    } else {
-        return true;
-    }
-}
-
 void fn_802FCC44(HSD_GObj* gobj)
 {
     Vec3 vec;
@@ -219,7 +211,8 @@ void fn_802FCC44(HSD_GObj* gobj)
     PAD_STACK(8);
     if (Player_GetPlayerSlotType(*slot) != Gm_PKind_NA &&
         Player_GetPlayerState(*slot) && Player_GetStocks(*slot) &&
-        (un_804D6D70[*slot] || Player_GetNametagSlotID(*slot) != 'x' ||
+        (un_804D6D70[*slot] ||
+         Player_GetNametagSlotID(*slot) != NAMETAG_DISABLED ||
          Player_80036058(*slot) || gm_8016B258(*slot)))
     {
         HSD_JObjClearFlags(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
@@ -243,14 +236,22 @@ void fn_802FCC44(HSD_GObj* gobj)
     }
 }
 
-static inline float inlineA1(float var_f31)
+static inline float getNametagColorFrame(float frame)
 {
-    int q = var_f31;
+    int q = frame;
     if (q >= 16) {
         return 28.0f;
     } else {
         return (q % 4) + 20;
     }
+}
+
+static inline void createNameText(int slot)
+{
+    un_804A1EF8[slot] =
+        HSD_SisLib_803A6B98(un_804D6D78, -5000.0f, 0.0f,
+                            GetNameText(Player_GetNametagSlotID(slot)));
+    HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f, 0.55f);
 }
 
 void NameTag_Create(int slot)
@@ -271,12 +272,8 @@ void NameTag_Create(int slot)
         {
             float f = getNameTagFrame(slot);
             if (has_nametag(slot)) {
-                f = inlineA1(f);
-                un_804A1EF8[slot] = HSD_SisLib_803A6B98(
-                    un_804D6D78, -5000.0f, 0.0f,
-                    GetNameText(Player_GetNametagSlotID(slot)));
-                HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f,
-                                    0.55f);
+                f = getNametagColorFrame(f);
+                createNameText(slot);
             }
             HSD_JObjReqAnimAll(jobj, f);
         }
@@ -297,12 +294,9 @@ void un_802FD28C(int slot)
     PAD_STACK(16);
     f = getNameTagFrame(slot);
     if (has_nametag(slot)) {
-        f = inlineA1(f);
+        f = getNametagColorFrame(f);
         HSD_SisLib_803A75E0(un_804D6D78, un_804A1EF8[slot]);
-        un_804A1EF8[slot] =
-            HSD_SisLib_803A6B98(un_804D6D78, -5000.0f, 0.0f,
-                                GetNameText(Player_GetNametagSlotID(slot)));
-        HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f, 0.55f);
+        createNameText(slot);
     }
     HSD_JObjReqAnimAll(jobj, f);
     HSD_JObjAnimAll(jobj);
@@ -310,12 +304,10 @@ void un_802FD28C(int slot)
 
 void un_802FD404(void)
 {
-    un_804D6D70[0] = 1;
-    un_804D6D70[1] = 1;
-    un_804D6D70[2] = 1;
-    un_804D6D70[3] = 1;
-    un_804D6D70[4] = 1;
-    un_804D6D70[5] = 1;
+    int i;
+    for (i = 0; i < Gm_Player_NumMax; i++) {
+        un_804D6D70[i] = 1;
+    }
 }
 
 void un_802FD428(void)
