@@ -181,11 +181,6 @@ void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
     it->xDAA_byte |= db_ShowItemCollisionBubbles;
 }
 
-/// @todo avoid auto-inlining into fn_CheckItemAndPokemonMenu
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void fn_ToggleItemCollisionBubbles(void)
 {
     HSD_GObj* item_gobj;
@@ -203,9 +198,6 @@ void fn_ToggleItemCollisionBubbles(void)
         item_gobj = item_gobj->next;
     }
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
 {
@@ -418,6 +410,15 @@ void db_CheckAndSpawnItem(int player)
     }
 }
 
+static inline void checkToggleCollisionBubbles(int player)
+{
+    if (db_ButtonsDown(player) & HSD_PAD_R &&
+        db_ButtonsPressed(player) & HSD_PAD_DPADUP)
+    {
+        fn_ToggleItemCollisionBubbles();
+    }
+}
+
 void fn_CheckItemAndPokemonMenu(int player)
 {
     if (db_ItemAndPokemonMenu.DisplayStatus == 1 &&
@@ -435,10 +436,6 @@ void fn_CheckItemAndPokemonMenu(int player)
     if (gm_GetDbPauseFlag(1) == 0 && gm_GetDbPauseFlag(0) == 0) {
         db_CheckAndSpawnItem(player);
     }
-    if (db_ButtonsDown(player) & HSD_PAD_R &&
-        db_ButtonsPressed(player) & HSD_PAD_DPADUP)
-    {
-        fn_ToggleItemCollisionBubbles();
-    }
+    checkToggleCollisionBubbles(player);
     fn_80225A54(player);
 }
