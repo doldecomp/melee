@@ -2,7 +2,6 @@
 
 #include <melee/cm/forward.h>
 
-#include <placeholder.h>
 #include <stdio.h>
 
 #include "forward.h"
@@ -187,23 +186,36 @@ void fn_802FE470(HSD_GObj* gobj)
     }
 }
 
+static inline void setTextColor(HSD_Text* text, GXColor* color)
+{
+    text->text_color = *color;
+}
+
+static inline HSD_GObj* createCamera(void)
+{
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind & 0xFF,
+                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
+    gobj->gxlink_prios = 0xC00;
+    return gobj;
+}
+
+static inline HSD_GObj* createLight(void)
+{
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind & 0xFF,
+                            lb_80011AC4(un_804D6D9C->lights));
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 10, 0);
+    return gobj;
+}
+
 void un_802FE6A8(void)
 {
-    HSD_GObj* gobj_camera;
-    HSD_GObj* gobj_light;
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
-    gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_CameraKind & 0xFF,
-                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
-    GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
-    gobj_camera->gxlink_prios = 0xC00;
-    un_803F9D48.x18 = gobj_camera;
-    gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_LightKind & 0xFF,
-                            lb_80011AC4(un_804D6D9C->lights));
-    GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
-    un_803F9D48.x1C = gobj_light;
+    un_803F9D48.x18 = createCamera();
+    un_803F9D48.x1C = createLight();
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6D9C->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_JObjKind, jobj_ui);
@@ -216,7 +228,6 @@ void un_802FE6A8(void)
     un_803F9D48.x14 = gobj_ui;
     {
         GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
-        PAD_STACK(0x14);
 
         HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
         un_803F9D48.x20 =
@@ -226,7 +237,7 @@ void un_802FE6A8(void)
         un_803F9D48.x24 = HSD_SisLib_803A6754(2, 0);
         un_803F9D48.x24->default_alignment = 1;
         un_803F9D48.x24->default_kerning = 1;
-        un_803F9D48.x24->text_color = color;
+        setTextColor(un_803F9D48.x24, &color);
     }
 }
 
