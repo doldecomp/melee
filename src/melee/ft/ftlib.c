@@ -757,11 +757,11 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
     return false;
 }
 
-bool ftLib_800870BC(HSD_GObj* gobj, int* val)
+bool ftLib_800870BC(HSD_GObj* gobj, GXColor* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->sub_color) {
-        *val = p_ftCommonData->x6D8[fp->sub_color];
+        *val = p_ftCommonData->sub_colors[fp->sub_color - 1];
         return true;
     }
     return false;

@@ -2,6 +2,7 @@
 #define MELEE_FT_TYPES_H
 #include <Runtime/platform.h>
 
+#include <melee/ef/forward.h>
 #include <melee/ft/forward.h> // IWYU pragma: export
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -571,11 +572,10 @@ struct ftCommonData {
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ int x6D4;
-    /* +6D8 */ int x6D8[1]; ///< @todo expand to actual size
+    /* +6D8 */ int x6D8;
     /* +6DC */ GXColor
-        sub_colors[4]; ///< Array of tint colors, see #gm_SetupSubColors and
+        sub_colors[5]; ///< Array of tint colors, see #gm_SetupSubColors and
                        ///< #Fighter_UnkInitLoad_80068914
-    /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
     /* +6F4 */ int x6F4_unkDamage;
     /* +6F8 */ int x6F8;
@@ -867,7 +867,7 @@ typedef struct Fighter_WaitAnimData {
     s32 x8;
     CmdUnion* xC;
     s32 x10_animCurrFlags;
-    u32 x14;
+    uintptr_t x14;
 } Fighter_WaitAnimData;
 
 struct ftData {
@@ -1055,11 +1055,16 @@ struct Fighter_DemoStrings {
     /* fp+2070 */ int x2070_int;
 };
 
+struct Struct207C {
+    f32 x;
+    s32 y;
+};
+
 /// @todo See if this should likewise be instituted for item->xD94 thru
 /// xDA4_word/xDA8_short
 /* fp+2074 */ struct Struct2074 {
-    /* fp+2074 */ Vec2 x2074_vec;
-    /* fp+207C */ S32Vec2 x207C;
+    /* fp+2074 */ S32Vec2 x2074_vec;
+    /* fp+207C */ struct Struct207C x207C;
     /* fp+2084 */ union {
         u32 x2084;
         struct {
@@ -1140,7 +1145,7 @@ struct CpuFighter {
     /*  +44 */ Fighter* x44;
     /*  +48 */ UNK_T x48;
     /*  +4C */ Item* x4C;
-    /*  +50 */ u32 x50;
+    /*  +50 */ Item* x50;
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
@@ -1218,19 +1223,6 @@ struct Fighter_x59C_t {
     u8 x0[0x8000];
 };
 ASSERT_SIZE(struct Fighter_x59C_t, 0x8000);
-
-struct UnkPlBonusBits {
-    u8 x0, x1;
-    u8 x2_b0 : 1;
-    u8 x2_b1 : 1;
-    u8 x2_b2 : 1;
-    u8 x2_b3 : 1;
-    u8 x2_b4 : 1;
-    u8 x2_b5 : 1;
-    u8 x2_b6 : 1;
-    u8 x2_b7 : 1;
-    u8 x3;
-};
 
 struct ft_800898B4_t {
     /*  +0  */ int x0;
@@ -1390,8 +1382,8 @@ struct Fighter {
     /*  fp+598 */ FigaTree* x598;
     /*  fp+59C */ struct Fighter_x59C_t* x59C;
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
-    /*  fp+5A4 */ UNK_T x5A4;
-    /*  fp+5A8 */ UNK_T x5A8;
+    /*  fp+5A4 */ uintptr_t x5A4;
+    /*  fp+5A8 */ uintptr_t x5A8;
     /*  fp+5AC */ FtPartsVis x5AC;
     /*  fp+5CC */ CostumeTObjList tobj_list;
     /*  fp+5E8 */ FighterBone* parts;
@@ -1399,7 +1391,7 @@ struct Fighter {
     /*  fp+5F4 */ struct {
         /*  fp+5F4 */ s8 prev, idx;
     } x5F4_arr[12];
-    /*  fp+60C */ void* x60C;
+    /*  fp+60C */ EF_QueuedEffect* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
     /*  fp+618 */ u8 pad_port; ///< Physical controller port for this fighter
     /*  fp+619 */ u8 costume_id;
@@ -1516,7 +1508,7 @@ struct Fighter {
         /* fp+18C8 */ int x18C8;
         /* fp+18CC */ int x18CC;
         /* fp+18D0 */ int x18D0;
-        /* fp+18D4 */ UnkPlBonusBits x18d4;
+        /* fp+18D4 */ union Struct2070 x18d4;
         /* fp+18D8 */ ft_800898B4_t x18d8;
         /// Last Move Instance This Player Was Hit by
         /* fp+18EC */ u16 x18ec_instancehitby;
@@ -1970,7 +1962,7 @@ struct ftData_80085FD4_ret {
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
-    /* +14 */ u32 x14;
+    /* +14 */ uintptr_t x14;
 };
 
 struct ArticleDynamicBones {

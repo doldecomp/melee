@@ -6,6 +6,7 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 /* 0860C4 */ s32 ftLib_800860C4(void);
@@ -76,7 +77,7 @@
 /* 08702C */ void ftLib_8008702C(s32);
 /* 087050 */ void ftLib_80087050(s32);
 /* 087074 */ bool ftLib_80087074(HSD_GObj*, Vec3*);
-/* 0870BC */ bool ftLib_800870BC(HSD_GObj*, int*);
+/* 0870BC */ bool ftLib_800870BC(HSD_GObj*, GXColor*);
 /* 0870F0 */ void ftLib_800870F0(HSD_GObj*, s32);
 /* 087120 */ s32 ftLib_80087120(HSD_GObj*);
 /* 087140 */ void ftLib_80087140(HSD_GObj*);

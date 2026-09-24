@@ -679,7 +679,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDCD_flag.b3 = false;
     item_data->xDCD_flag.b4 = false;
     item_data->xDD0_flag.b7 = false;
-    item_data->xBC0 = 0;
+    item_data->xBC0 = NULL;
     item_data->xDD1_flag.b1 = false;
     item_data->xDCD_flag.b2 = false;
     item_data->xD6C = -1;
@@ -2013,7 +2013,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     }
 
     Item_8026B0B4(gobj);
-    efAsync_QueueClear((struct EF_QueuedEffect*) &ip->xBC0);
+    efAsync_QueueClear(&ip->xBC0);
     HSD_GObjFree(gobj);
 }
 

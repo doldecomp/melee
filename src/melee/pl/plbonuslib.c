@@ -120,7 +120,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
     pl_StaleMoveTableExt_t* temp_r3_2;
     pl_StaleMoveTableExt_t* temp_r3_3;
     pl_StaleMoveTableExt_t* temp_r3_4;
-    struct UnkPlBonusBits* temp_r30;
+    union Struct2070* temp_r30;
     int temp_r29;
     int temp_r28;
     int temp_r27;
@@ -250,28 +250,28 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             switch (temp_r28) {
             case 1:
             case 2:
-                if (temp_r30->x3 >= 1 && temp_r30->x3 <= 3) {
+                if (temp_r30->x2073 >= 1 && temp_r30->x2073 <= 3) {
                     pl_80038824(temp_r23, 0x6E);
                 }
-                if (temp_r30->x3 >= 0x40 && temp_r30->x3 <= 0x43) {
+                if (temp_r30->x2073 >= 0x40 && temp_r30->x2073 <= 0x43) {
                     pl_80038824(temp_r23, 0xC0);
                 }
-                if (temp_r30->x3 == 0x46) {
+                if (temp_r30->x2073 == 0x46) {
                     pl_80038824(temp_r23, 0xC1);
                 }
-                if (temp_r30->x3 == 0x5F) {
+                if (temp_r30->x2073 == 0x5F) {
                     pl_80038824(temp_r23, 0xAD);
                 }
-                if (temp_r30->x3 == 0x63) {
+                if (temp_r30->x2073 == 0x63) {
                     pl_80038824(temp_r23, 0x70);
                 }
-                if (temp_r30->x3 == 0x61) {
+                if (temp_r30->x2073 == 0x61) {
                     pl_80038824(temp_r23, 0xC6);
                 }
-                if (temp_r30->x2_b7) {
+                if (temp_r30->count_specials) {
                     pl_80038824(temp_r23, 0x6F);
                 }
-                if (temp_r28 == 2 && temp_r30->x2_b3) {
+                if (temp_r28 == 2 && temp_r30->count_x1A4) {
                     pl_80038824(temp_r23, 0x72);
                 }
                 if (temp_r31->x11_b0) {
@@ -319,7 +319,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
                     pl_80038824(temp_r23, 0x73);
                 }
                 if (temp_r28 == 2) {
-                    if (temp_r30->x3 == 0x62) {
+                    if (temp_r30->x2073 == 0x62) {
                         switch (temp_r29) {
                         case 0:
                         case 3:
@@ -1449,7 +1449,7 @@ void pl_8004065C(int arg0, int arg1)
 void pl_80040688(int arg0, int arg1, int arg2)
 {
     pl_StaleMoveTableExt_t* temp_r3;
-    UnkPlBonusBits* bits;
+    union Struct2070* bits;
     ft_800898B4_t* xCC0;
     u8 temp_r0_2;
     int temp_r0;
@@ -1466,7 +1466,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
         if (!unk_cond(arg1, temp_r0)) {
-            temp_r0_2 = bits->x3;
+            temp_r0_2 = bits->x2073;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
             }

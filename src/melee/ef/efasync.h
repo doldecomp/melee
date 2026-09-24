@@ -13,9 +13,9 @@
 /* 06737C */ void efAsync_LoadSync(int index);
 /* 06744C */ void efAsync_QueueProcessDeferred(HSD_GObj* gobj,
                                                EF_QueuedEffect* queued_effect);
-/* 067624 */ void efAsync_QueueFlush(HSD_GObj* gobj, void* arg_struct);
-/* 067688 */ void efAsync_QueueClear(void* arg_struct);
-/* 0676F0 */ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head,
+/* 067624 */ void efAsync_QueueFlush(HSD_GObj* gobj, EF_QueuedEffect** head);
+/* 067688 */ void efAsync_QueueClear(EF_QueuedEffect** head);
+/* 0676F0 */ void efAsync_Spawn(HSD_GObj* gobj, EF_QueuedEffect** queue_head,
                                 u32 spawn_kind, u32 gfx_id, HSD_JObj* jobj,
                                 ...);
 /* 0676F0 */ void efAsync_QueueInit(void);

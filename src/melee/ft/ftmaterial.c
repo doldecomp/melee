@@ -275,7 +275,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 chk1 = 1;
             } else {
                 chk1 = 1;
-                sp168 = ((GXColor*) &p_ftCommonData->x6D8)[var_r5];
+                sp168 = p_ftCommonData->sub_colors[var_r5 - 1];
             }
         } else if (overlay->x7C_color_enable) {
             chk1 = 1;

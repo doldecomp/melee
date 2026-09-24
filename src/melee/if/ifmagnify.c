@@ -50,7 +50,6 @@ static HSD_CameraDescFrustum ifMagnify_803F97E8 = {
 };
 
 static char ifMagnify_804D57E8[] = "lupe";
-static const int ifMagnify_804DDB60 = 0;
 
 ifMagnify ifMagnify_804A1DE0;
 
@@ -463,8 +462,7 @@ void ifMagnify_802FC3C0(s32 slot)
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     GObj_InitUserData(gobj, 0xE, (void (*)(void*)) ifMagnify_802FC3BC, player);
 
-    jobj = HSD_JObjLoadJoint(
-        (*(DynamicModelDesc**) ifMagnify_804A1DE0.model_desc)->joint);
+    jobj = HSD_JObjLoadJoint((*ifMagnify_804A1DE0.model_desc)->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, ifMagnify_802FB8C0, 0xB, 0);
 
@@ -548,44 +546,47 @@ void ifMagnify_802FC750(void)
     /// @todo Member accesses in the body fold into the condition's address.
     for (i = 0; i < 6; i++) {
         if (base->player[i].gobj != NULL) {
-            HSD_GObjFree(*(HSD_GObj**) ((u32) base +
+            HSD_GObjFree(*(HSD_GObj**) ((uintptr_t) base +
                                         i * (s32) sizeof(ifMagnifyPlayer) +
                                         (s32) offsetof(ifMagnify, player)));
-            *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
+            *(HSD_GObj**) ((uintptr_t) base +
+                           i * (s32) sizeof(ifMagnifyPlayer) +
                            (s32) offsetof(ifMagnify, player)) = NULL;
         }
     }
 }
 
+static const GXColor ifMagnify_804DDB60 = { 0 };
+
 void ifMagnify_802FC7C0(ifMagnify* magnify)
 {
-    volatile int default_val = *(volatile int*) &ifMagnify_804DDB60;
+    GXColor default_val = ifMagnify_804DDB60;
     GXColor* result;
 
     result = Ground_801C0604();
     if (result != NULL) {
-        magnify->x4 = *(int*) result;
+        magnify->x4 = *result;
     } else {
         magnify->x4 = default_val;
     }
 
     result = Ground_801C0618();
     if (result != NULL) {
-        magnify->x8 = *(int*) result;
+        magnify->x8 = *result;
     } else {
         magnify->x8 = default_val;
     }
 
     result = Ground_801C062C();
     if (result != NULL) {
-        magnify->xC = *(int*) result;
+        magnify->xC = *result;
     } else {
         magnify->xC = default_val;
     }
 
     result = Ground_801C0640();
     if (result != NULL) {
-        magnify->x10 = *(int*) result;
+        magnify->x10 = *result;
     } else {
         magnify->x10 = default_val;
     }

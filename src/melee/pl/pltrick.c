@@ -195,7 +195,7 @@ static void fn_80037F00(HSD_GObj** gp, Fighter* fp, ft_800898B4_t* ev,
     }
 
     if (gp != NULL) {
-        if (ft_80089914(*gp, fp->dmg.x18d4.x3) != 0 &&
+        if (ft_80089914(*gp, fp->dmg.x18d4.x2073) != 0 &&
             (fp->victim_gobj == NULL || *gp != fp->victim_gobj))
         {
             fp->dmg.x18d8.x11_b4 = 1;
@@ -261,10 +261,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
     if (attack_instance == 0 ||
         victim_fp->dmg.x18ec_instancehitby != attack_instance)
     {
-        *(s32*) &victim_fp->dmg.x18d4 = ev.x2070_int;
+        victim_fp->dmg.x18d4.x2070_int = ev.x2070_int;
         victim_fp->dmg.x18ec_instancehitby = attack_instance;
 
-        if (attacker_fp != NULL && victim_fp->dmg.x18d4.x3 != 0) {
+        if (attacker_fp != NULL && victim_fp->dmg.x18d4.x2073 != 0) {
             if (gm_8016B168() && gm_8016B0D4() &&
                 attacker_fp->team == victim_fp->team)
             {
@@ -278,7 +278,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 struct plAttackStats* temp;
 
                 acp = Player_GetActionStats(attacker_fp->player_idx);
-                ev_reload.x2070_int = *(s32*) &victim_fp->dmg.x18d4;
+                ev_reload.x2070_int = victim_fp->dmg.x18d4.x2070_int;
                 fp2 = GET_FIGHTER(attacker_gobj);
                 acp2 = Player_GetActionStats(
                     GET_FIGHTER(attacker_gobj)->player_idx);
@@ -335,7 +335,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
                 h_player = victim_fp->player_idx;
                 {
-                    s32 tmp_x18d4_x3 = victim_fp->dmg.x18d4.x3;
+                    s32 tmp_x18d4_x3 = victim_fp->dmg.x18d4.x2073;
                     x18d4_x3 = tmp_x18d4_x3;
                 }
                 HSD_ASSERT(0x7E, 0 <= h_player && h_player < 8);
@@ -356,11 +356,11 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 pl_800403FC(attacker_fp->player_idx,
                             attacker_fp->is_sub_fighter, victim_fp->player_idx,
                             victim_fp->is_sub_fighter,
-                            victim_fp->dmg.x18d4.x3);
+                            victim_fp->dmg.x18d4.x2073);
                 pl_80040FBC(attacker_fp->player_idx,
                             attacker_fp->is_sub_fighter, victim_fp->player_idx,
                             victim_fp->is_sub_fighter,
-                            victim_fp->dmg.x18d4.x3);
+                            victim_fp->dmg.x18d4.x2073);
             }
         }
     }

@@ -26,7 +26,7 @@ extern struct Fighter_804D64FC_t {
     void** x18;      ///< +18 weapon attack tables (per character)
     void** x1C;      ///< +1C edge guard tables (per character)
     float* x20;      ///< +20 distance thresholds (per character)
-    void* x24;       ///< +24 weapon reach bonus table
+    float* x24;      ///< +24 weapon reach bonus table
 }* Fighter_804D64FC;
 
 struct plAllocInfo;
