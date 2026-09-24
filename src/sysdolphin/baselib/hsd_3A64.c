@@ -206,11 +206,11 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
         for (lut_idx = 0; lut_idx < ARRAY_SIZE(HSD_SisLib_FontAtlas);
              lut_idx++)
         {
-            if ((sjis_hi == lbl_8040C8C0[lut_idx * 2]) &&
-                (sjis_lo == lbl_8040C8C0[lut_idx * 2 + 1]))
+            if ((sjis_hi == lbl_8040C8C0[lut_idx].lead) &&
+                (sjis_lo == lbl_8040C8C0[lut_idx].trail))
             {
-                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2];
-                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2 + 1];
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx].hi;
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx].lo;
                 break;
             }
         }

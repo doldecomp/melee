@@ -41,6 +41,7 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/sislib_font.h>
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };
@@ -316,35 +317,35 @@ static struct CSSDoorsData2 data2 = {
 
 u8* mnCharSel_8025BC20(u8* dst, u32 value)
 {
-    u8* digits;
+    SisGlyphCode* digits;
     u32 render_zeroes;
     render_zeroes = 0;
-    digits = HSD_SisLib_804D1124[0][0x52];
+    digits = (SisGlyphCode*) HSD_SisLib_804D1124[0][0x52];
     if (value >= 10000) {
         value = 9999;
     }
     if (value >= 1000) {
-        dst[0] = digits[value / 1000 * 2];
-        dst[1] = digits[value / 1000 * 2 + 1];
+        dst[0] = digits[value / 1000].hi;
+        dst[1] = digits[value / 1000].lo;
         dst += 2;
         value = value % 1000;
         render_zeroes = 1;
     }
     if ((value >= 100) || render_zeroes) {
-        dst[0] = digits[value / 100 * 2];
-        dst[1] = digits[value / 100 * 2 + 1];
+        dst[0] = digits[value / 100].hi;
+        dst[1] = digits[value / 100].lo;
         dst += 2;
         value = value % 100;
         render_zeroes++;
     }
     if ((value >= 10) || render_zeroes) {
-        dst[0] = digits[value / 10 * 2];
-        dst[1] = digits[value / 10 * 2 + 1];
+        dst[0] = digits[value / 10].hi;
+        dst[1] = digits[value / 10].lo;
         dst += 2;
         value = value % 10;
     }
-    dst[0] = digits[value * 2];
-    dst[1] = digits[value * 2 + 1];
+    dst[0] = digits[value].hi;
+    dst[1] = digits[value].lo;
     *(dst += 2) = 0;
     return dst;
 }

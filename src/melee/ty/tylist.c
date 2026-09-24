@@ -28,6 +28,7 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/sislib_font.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
@@ -69,30 +70,26 @@ static void order_data_0(void)
 /// Formats a number into a string buffer using digit glyphs from the font.
 u8* _tyList_80312834(u8* buf, u32 num)
 {
-    u8* lookup = HSD_SisLib_804D1124[0][0x13A];
-    u32 idx;
+    SisGlyphCode* digits = (SisGlyphCode*) HSD_SisLib_804D1124[0][0x13A];
     u32 original = num;
 
     if (num >= 100) {
-        idx = (num / 100) * 2;
-        *buf++ = lookup[idx];
-        *buf++ = lookup[idx + 1];
+        *buf++ = digits[num / 100].hi;
+        *buf++ = digits[num / 100].lo;
         num = num % 100;
     }
 
     if (num >= 10) {
-        idx = (num / 10) * 2;
-        *buf++ = lookup[idx];
-        *buf++ = lookup[idx + 1];
+        *buf++ = digits[num / 10].hi;
+        *buf++ = digits[num / 10].lo;
         num = num % 10;
     } else if (original >= 100) {
-        *buf++ = lookup[0];
-        *buf++ = lookup[1];
+        *buf++ = digits[0].hi;
+        *buf++ = digits[0].lo;
     }
 
-    idx = num * 2;
-    *buf++ = lookup[idx];
-    *buf++ = lookup[idx + 1];
+    *buf++ = digits[num].hi;
+    *buf++ = digits[num].lo;
     *buf = 0;
     return buf;
 }
