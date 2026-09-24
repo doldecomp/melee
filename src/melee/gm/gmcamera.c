@@ -29,18 +29,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-
-typedef struct _SisLibUnkStruct2 {
-    /*0x00*/ u8 x0_padding[0x8 - 0x0];
-    /*0x08*/ u8* x08_arr; // Unknown length as of right now
-} SisLibUnkStruct2;
-
-/// @todo #SIS
-typedef struct _SisLibUnkStruct {
-    /*0x00*/ u8 x0_padding[0xC - 0x0];
-    /*0x0C*/ SisLibUnkStruct2* x0C_ptr;
-    /*0x10*/ u8 x10_padding[0x14 - 0x10];
-} SisLibUnkStruct;
+#include <sysdolphin/baselib/sislib_font.h>
 
 static gmCameraUnkStruct gmCamera_VsCamUiState;
 
@@ -49,44 +38,39 @@ f32 gmCamera_803DA630[12] = {
     340.0f, 416.0f, 0.6f,  0.6f,   40.0f, 44.0f,
 };
 
-u8* gmCamera_801A2224(u8* arg0, u32 arg1)
+u8* gmCamera_801A2224(u8* dst, u32 value)
 {
-    u32 masked_arg1;
     u32 cond_flag = 0;
-    u8* slus2_arr_ptr =
-        ((SisLibUnkStruct*) HSD_SisLib_804D1124)->x0C_ptr->x08_arr;
+    SisGlyphCode* digits = (SisGlyphCode*) HSD_SisLib_804D1124[3][2];
 
-    if (arg1 >= 0x2710U) {
-        arg1 = 0x270F;
+    if (value >= 10000) {
+        value = 9999;
     }
 
-    if (arg1 >= 0x3E8U) {
-        masked_arg1 = (arg1 / 500) & 0x07FFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
-        arg1 %= 0x3E8;
-        cond_flag = 1U;
-        arg0 += 2;
+    if (value >= 1000) {
+        dst[0] = digits[value / 1000].hi;
+        dst[1] = digits[value / 1000].lo;
+        value %= 1000;
+        cond_flag = 1;
+        dst += 2;
     }
-    if ((arg1 >= 0x64U) || (cond_flag != 0)) {
-        masked_arg1 = (arg1 / 50) & 0x0FFFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
-        arg1 %= 0x64;
+    if ((value >= 100) || (cond_flag != 0)) {
+        dst[0] = digits[value / 100].hi;
+        dst[1] = digits[value / 100].lo;
+        value %= 100;
         cond_flag += 1;
-        arg0 += 2;
+        dst += 2;
     }
-    if ((arg1 >= 0xAU) || (cond_flag != 0)) {
-        masked_arg1 = (arg1 / 5) & 0x3FFFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
-        arg1 %= 0xA;
-        arg0 += 2;
+    if ((value >= 10) || (cond_flag != 0)) {
+        dst[0] = digits[value / 10].hi;
+        dst[1] = digits[value / 10].lo;
+        value %= 10;
+        dst += 2;
     }
-    *(arg0++) = slus2_arr_ptr[0 + arg1 * 2];
-    *(arg0++) = slus2_arr_ptr[1 + arg1 * 2];
-    *arg0 = 0;
-    return arg0;
+    *(dst++) = digits[value].hi;
+    *(dst++) = digits[value].lo;
+    *dst = 0;
+    return dst;
 }
 
 HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
@@ -230,30 +214,14 @@ gmCameraUnkFuncTable gmCamera_VsCamStateTable[9] = {
     { { 0, 0x1A14 }, NULL, gmCamera_801A2BB0 },
 };
 
-static inline void gmCamera_801A26C0_FreeTexts(gmCameraUnkStruct* unk)
+static inline void freeTexts(gmCameraUnkStruct* unk)
 {
     s32 i;
-    s32 zero;
 
     if (unk->x48[0] != NULL) {
-        i = 0;
-        zero = i;
-        for (; i < 3; i++) {
+        for (i = 0; i < 3; i++) {
             HSD_SisLib_803A5CC4(unk->x48[i]);
-            unk->x48[i] = (HSD_Text*) zero;
-        }
-    }
-}
-
-static inline void gmCamera_FreeTextsWithZero(HSD_Text* zero)
-{
-    s32 i;
-
-    if (gmCamera_VsCamUiState.x48[0] != NULL) {
-        i = 0;
-        for (; i < 3; i++) {
-            HSD_SisLib_803A5CC4(gmCamera_VsCamUiState.x48[i]);
-            gmCamera_VsCamUiState.x48[i] = zero;
+            unk->x48[i] = NULL;
         }
     }
 }
@@ -276,7 +244,7 @@ void gmCamera_801A26C0(void)
         hud->state.hud_enabled = 1;
         hud->state.unk_3 = 0;
     }
-    gmCamera_801A26C0_FreeTexts(&gmCamera_VsCamUiState);
+    freeTexts(&gmCamera_VsCamUiState);
 }
 
 void gmCamera_801A2798(void)
@@ -339,7 +307,7 @@ void gmCamera_801A292C(void)
     f32* tbl = gmCamera_803DA630;
     PAD_STACK(16);
 
-    gmCamera_FreeTextsWithZero(NULL);
+    freeTexts(&gmCamera_VsCamUiState);
 
     for (i = 0; i < 2; i++) {
         gmCamera_VsCamUiState.x24[i].x0 = lbSnap_8001D40C(i);

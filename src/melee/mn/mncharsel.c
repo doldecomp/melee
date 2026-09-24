@@ -41,6 +41,7 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/sislib_font.h>
 
 static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
 static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };
@@ -314,47 +315,47 @@ static struct CSSDoorsData2 data2 = {
     },
 };
 
-TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
+u8* mnCharSel_8025BC20(u8* dst, u32 value)
 {
-    TextKerning* kerning;
+    SisGlyphCode* digits;
     u32 render_zeroes;
     render_zeroes = 0;
-    kerning = HSD_SisLib_804D1124[0][41].kerning;
-    if (arg1 >= 10000) {
-        arg1 = 9999;
+    digits = (SisGlyphCode*) HSD_SisLib_804D1124[0][0x52];
+    if (value >= 10000) {
+        value = 9999;
     }
-    if (arg1 >= 1000) {
-        arg0->left = kerning[arg1 / 1000].left;
-        arg0->right = kerning[arg1 / 1000].right;
-        arg0 += 1;
-        arg1 = arg1 % 1000;
+    if (value >= 1000) {
+        dst[0] = digits[value / 1000].hi;
+        dst[1] = digits[value / 1000].lo;
+        dst += 2;
+        value = value % 1000;
         render_zeroes = 1;
     }
-    if ((arg1 >= 100) || render_zeroes) {
-        arg0->left = kerning[arg1 / 100].left;
-        arg0->right = kerning[arg1 / 100].right;
-        arg0 = arg0 + 1;
-        arg1 = arg1 % 100;
+    if ((value >= 100) || render_zeroes) {
+        dst[0] = digits[value / 100].hi;
+        dst[1] = digits[value / 100].lo;
+        dst += 2;
+        value = value % 100;
         render_zeroes++;
     }
-    if ((arg1 >= 10) || render_zeroes) {
-        arg0->left = kerning[arg1 / 10].left;
-        arg0->right = kerning[arg1 / 10].right;
-        arg0 = arg0 + 1;
-        arg1 = arg1 % 10;
+    if ((value >= 10) || render_zeroes) {
+        dst[0] = digits[value / 10].hi;
+        dst[1] = digits[value / 10].lo;
+        dst += 2;
+        value = value % 10;
     }
-    arg0->left = kerning[arg1].left;
-    arg0->right = kerning[arg1].right;
-    arg0[1].left = 0;
-    return ++arg0;
+    dst[0] = digits[value].hi;
+    dst[1] = digits[value].lo;
+    *(dst += 2) = 0;
+    return dst;
 }
 
 void mnCharSel_8025BD30(void)
 {
-    TextKerning* kerning;
+    u8* dst;
     u32 match_type;
 
-    kerning = HSD_SisLib_804D1124[0][37].kerning;
+    dst = HSD_SisLib_804D1124[0][0x4A];
 
     match_type = mnCharSel_804D6CB0->match_type;
 
@@ -368,9 +369,9 @@ void mnCharSel_8025BD30(void)
     }
     if (lbLang_IsSavedLanguageJP()) {
         if (gmMainLib_GetGameRules()->mode == 1) {
-            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->stock_count);
+            mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->stock_count);
         } else if (gmMainLib_GetGameRules()->time_limit != 0) {
-            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->time_limit);
+            mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
             HSD_SisLib_803A660C(0, 0x4A, 0x53);
         } else {
             HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -393,8 +394,7 @@ void mnCharSel_8025BD30(void)
         switch (gmMainLib_GetGameRules()->mode) {
         case Mode_Time:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -402,7 +402,7 @@ void mnCharSel_8025BD30(void)
             HSD_SisLib_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
-            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->stock_count);
+            mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->stock_count);
             if (gmMainLib_GetGameRules()->stock_count < 2U) {
                 HSD_SisLib_803A660C(0, 0x4A, 0x55);
             } else {
@@ -412,8 +412,7 @@ void mnCharSel_8025BD30(void)
             return;
         case Mode_Coin:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -422,8 +421,7 @@ void mnCharSel_8025BD30(void)
             return;
         case Mode_Bonus:
             if (gmMainLib_GetGameRules()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning,
-                                   gmMainLib_GetGameRules()->time_limit);
+                mnCharSel_8025BC20(dst, gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -874,12 +872,12 @@ void mnCharSel_8025D1C4(int port, int mode)
                 text->text_color.a = 0xA0;
             }
             {
-                TextKerning* tmp = (TextKerning*) HSD_SisLib_803A6478(
-                    sis_buf, &HSD_SisLib_804D1124[0][43].kerning->left);
+                u8* tmp =
+                    HSD_SisLib_803A6478(sis_buf, HSD_SisLib_804D1124[0][0x56]);
                 mnCharSel_8025BC20(tmp, star_count);
             }
             HSD_SisLib_803A6368(text, 0x56);
-            text->sis_buffer = (SIS*) sis_buf;
+            text->sis_buffer = sis_buf;
             HSD_JObjSetFlags(sp10 = HSD_JObjGetChild(sp10), JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(sp10), JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(HSD_JObjGetNext(sp10)),

@@ -11,37 +11,20 @@
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/sislib_font.h>
-
-/// How many glyphs the font atlas holds.
-#define HSD_SISLIB_FONT_GLYPHS                                                \
-    (sizeof(HSD_SisLib_FontAtlas) / sizeof(TextGlyphTexture))
-
-struct TextKerning {
-    /*0x00*/ u8 left;
-    /*0x01*/ u8 right;
-};
-
-typedef struct SIS {
-    /*0x00*/ TextKerning* kerning;
-    /*0x04*/ TextGlyphTexture* textures;
-} SIS;
 
 struct SisBlock {
     SisBlock* next;
-    HSD_Text* data;
+    void* data;
     u32 size;
 };
 
-/// @todo this is the same as above, but just more generic...
-/// proper types will have to be sorted out later, as well as merging the two
-/// structs.
-typedef struct sisLib_803A7664_t {
-    void* x0;
-    void* x4;
-    u32 x8; ///< alloc size
-    u32 xC;
-} sisLib_803A7664_t;
+/// Growable encoded string owned by an #HSD_Text.
+typedef struct SisBuffer {
+    u8* end; ///< terminator of the encoded string
+    u8* data;
+    u32 size;
+    u32 count; ///< entries appended
+} SisBuffer;
 
 struct HSD_Text {
     // these get passed to the text initializer HSD_SisLib_803A5ACC
@@ -69,13 +52,13 @@ struct HSD_Text {
     HSD_Text* next;
     HSD_GObj* entity;
     void (*render_callback)(
-        void*);      ///< callback in the text renderer (HSD_SisLib_803A84BC)
-    SIS* sis_buffer; ///< SIS text buffer
-    UNK_T x60;       ///< position in text buffer
-    SisBlock* alloc_data;
-    char* string_buffer; ///< raw string buffer
-    u16 x6C;             ///< string length?
-    u16 x6E;             ///< alloc size?
+        void*);     ///< callback in the text renderer (HSD_SisLib_803A84BC)
+    u8* sis_buffer; ///< SIS text buffer
+    u8* x60;        ///< position in text buffer
+    SisBuffer* alloc_data;
+    u8* state_stack; ///< saved text-state records
+    u16 state_stack_used;
+    u16 state_stack_capacity;
     f32 current_width;
     f32 current_height;
     Vec2 x78;
@@ -103,10 +86,11 @@ struct sislib_UnkAlloc3 {
     u8 xF;
 };
 
-extern SIS* HSD_SisLib_804D1124[5];
-extern u8 lbl_8040C8C0[0x240];
-extern u8 HSD_SisLib_8040C680[0x240];
-extern u8 HSD_SisLib_8040CB00[0x240];
+/**
+ * Per-font SIS tables of relocated archive pointers: [0] glyph images,
+ * [1] glyph widths, then the encoded strings.
+ */
+extern u8** HSD_SisLib_804D1124[5];
 
 extern SisBlock* free_head;
 extern SisBlock* used_head;
@@ -119,8 +103,8 @@ UNK_T func_804A70A0(UNK_T, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64,
 void HSD_SisLib_803A947C(HSD_Archive*);
 HSD_Archive* HSD_SisLib_803A945C(char*);
 void HSD_SisLib_803A84BC(HSD_GObj*, intptr_t);
-s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
-void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
+u8* HSD_SisLib_803A7F0C(HSD_Text*, s32);
+void HSD_SisLib_803A8134(u8*, HSD_Text*, f32*, f32*);
 void HSD_SisLib_803A7684(HSD_Text*, const u8*, u8);
 void HSD_SisLib_803A7664(HSD_Text*);
 void HSD_SisLib_803A75E0(HSD_Text*, s32);

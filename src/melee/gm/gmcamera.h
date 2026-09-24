@@ -37,7 +37,7 @@ typedef struct _gmCameraUnkFuncTable {
     /*0x08*/ void (*x8)(void);
 } gmCameraUnkFuncTable;
 
-/* 1A2224 */ u8* gmCamera_801A2224(u8* arg0, u32 arg1);
+/* 1A2224 */ u8* gmCamera_801A2224(u8* dst, u32 value);
 /* 1A2334 */ HSD_Text* gmCamera_801A2334(s32, f32, f32, f32, f32);
 /* 1A253C */ void gmCamera_801A253C(s32*, s32*);
 /* 1A25C8 */ void gmCamera_801A25C8(void);

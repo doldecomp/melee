@@ -5,12 +5,16 @@
 #include "cobj.h"
 #include "gobjobject.h"
 #include "sislib.h"
-#include "sislib.static.h"
 #include "sislib_font.h"
 #include "wobj.h"
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/types.h>
+
+static inline s32 sisBufferLength(SisBuffer* buffer)
+{
+    return buffer->end - buffer->data;
+}
 
 u8* HSD_SisLib_803A6478(u8* dst, u8* src)
 {
@@ -41,13 +45,13 @@ u8* HSD_SisLib_803A6478(u8* dst, u8* src)
 
 u8* HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
-    u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
+    u8** sis_table = HSD_SisLib_804D1124[font_idx];
     return HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
 }
 
 void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
-    u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
+    u8** sis_table = HSD_SisLib_804D1124[font_idx];
     u8* dst = sis_table[dst_idx];
     u8* src = sis_table[src_idx];
 
@@ -80,25 +84,22 @@ void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
 
 HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
 {
-    SisBlock* alloc;
+    SisBuffer* alloc;
     HSD_Text* text;
-    HSD_Text* buffer;
+    u8* buffer;
 
     text = HSD_SisLib_803A5ACC(font_idx, context_id, 0.0F, 0.0F, 0.0F, 640.0F,
                                480.0F);
-    alloc = HSD_SisLib_Alloc(0x10);
+    alloc = HSD_SisLib_Alloc(sizeof(SisBuffer));
     text->alloc_data = alloc;
     buffer = HSD_SisLib_Alloc(0x80);
     alloc->data = buffer;
-    alloc->next = (SisBlock*) buffer;
-    alloc->size = 0x80; ///< @todo This being a byte store means one of my
-                        ///< assumptions is wrong;
-    // maybe this is a different struct.
-    *(u8*) &alloc->next->next =
-        0; ///< @todo Do any other Data struct usages have a 0xC member?
-    *(&alloc->size + 1) = 0;
+    alloc->end = buffer;
+    alloc->size = 0x80;
+    *alloc->end = 0;
+    alloc->count = 0;
     HSD_SisLib_803A6368(text, 0);
-    text->sis_buffer = (SIS*) alloc->data;
+    text->sis_buffer = alloc->data;
     return text;
 }
 
@@ -205,11 +206,11 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
         for (lut_idx = 0; lut_idx < ARRAY_SIZE(HSD_SisLib_FontAtlas);
              lut_idx++)
         {
-            if ((sjis_hi == lbl_8040C8C0[lut_idx * 2]) &&
-                (sjis_lo == lbl_8040C8C0[lut_idx * 2 + 1]))
+            if ((sjis_hi == lbl_8040C8C0[lut_idx].lead) &&
+                (sjis_lo == lbl_8040C8C0[lut_idx].trail))
             {
-                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2];
-                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2 + 1];
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx].hi;
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx].lo;
                 break;
             }
         }
@@ -224,16 +225,14 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     u8 encoded[128];
     s32 x_coord;
     s32 y_coord;
-    HSD_Text* old_buf;
-    SisBlock* alloc;
+    u8* old_buf;
+    SisBuffer* alloc;
     s32 encoded_len;
     s32 copied_bytes;
     u8* new_buf;
-    u8* copy_src;
     s32 copy_idx;
     u32 required_size;
     u32 old_size;
-    u8** cur;
     va_list args;
 
     encoded_len = 0;
@@ -247,51 +246,47 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     }
 
     old_size = alloc->size;
-    required_size = ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 0x11;
+    required_size = (alloc->end - (old_buf = alloc->data)) + 0x11;
     required_size = encoded_len + required_size;
     if (old_size < required_size) {
         alloc->size =
             old_size + ((((required_size - old_size) >> 7U) + 1) << 7);
         new_buf = HSD_SisLib_Alloc((s32) alloc->size);
-        copy_src = (u8*) old_buf;
         copy_idx = 0;
-        while (copy_idx < (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
-        {
-            new_buf[copy_idx] = copy_src[copy_idx];
+        while (copy_idx < sisBufferLength(alloc) + 1) {
+            new_buf[copy_idx] = old_buf[copy_idx];
             copy_idx += 1;
         }
-        alloc->data = (HSD_Text*) new_buf;
-        text->sis_buffer = (SIS*) new_buf;
-        alloc->next = (SisBlock*) (new_buf + ((u8*) alloc->next -
-                                              HSD_SisLib_BytePtr(old_buf)));
+        alloc->data = new_buf;
+        text->sis_buffer = new_buf;
+        alloc->end = new_buf + (alloc->end - old_buf);
         HSD_SisLib_Free(old_buf);
     }
 
-    cur = (u8**) &alloc->next;
-    *(*cur)++ = 7;
+    *alloc->end++ = 7;
     copied_bytes = 0;
     x_coord = (s16) x;
-    *(*cur)++ = (u8) (x_coord >> 8);
-    *(*cur)++ = (u8) x_coord;
+    *alloc->end++ = (u8) (x_coord >> 8);
+    *alloc->end++ = (u8) x_coord;
     y_coord = (s16) y;
-    *(*cur)++ = (u8) (y_coord >> 8);
-    *(*cur)++ = (u8) y_coord;
-    *(*cur)++ = 0xC;
-    *(*cur)++ = text->text_color.r;
-    *(*cur)++ = text->text_color.g;
-    *(*cur)++ = text->text_color.b;
-    *(*cur)++ = 0xE;
-    *(*cur)++ = (u8) (s32) text->x34.x;
-    *(*cur)++ = (u8) (s32) (256.0F * text->x34.x);
-    *(*cur)++ = (u8) (s32) text->x34.y;
-    *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
+    *alloc->end++ = (u8) (y_coord >> 8);
+    *alloc->end++ = (u8) y_coord;
+    *alloc->end++ = 0xC;
+    *alloc->end++ = text->text_color.r;
+    *alloc->end++ = text->text_color.g;
+    *alloc->end++ = text->text_color.b;
+    *alloc->end++ = 0xE;
+    *alloc->end++ = (u8) (s32) text->x34.x;
+    *alloc->end++ = (u8) (s32) (256.0F * text->x34.x);
+    *alloc->end++ = (u8) (s32) text->x34.y;
+    *alloc->end++ = (u8) (s32) (256.0F * text->x34.y);
     for (; copied_bytes < encoded_len; copied_bytes++) {
-        *(*cur)++ = encoded[copied_bytes];
+        *alloc->end++ = encoded[copied_bytes];
     }
-    *(*cur)++ = 0xF;
-    *(*cur)++ = 0xD;
-    **cur = 0;
-    return ((sisLib_803A7664_t*) alloc)->xC++;
+    *alloc->end++ = 0xF;
+    *alloc->end++ = 0xD;
+    *alloc->end = 0;
+    return alloc->count++;
 }
 
 u8* fn_803A6FEC(u8* sis_data, s32 entry_idx, s32* out_size)
@@ -353,15 +348,14 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 {
     u8 buffer[128];
     u8 encoded[128];
-    HSD_Text* old_buf;
+    u8* old_buf;
     u8* playhead;
-    SisBlock* alloc;
+    SisBuffer* alloc;
     s32 new_size;
     s32 tail_len;
     s32 result;
     s32 old_size;
     u8* entry;
-    u8* copy_src;
     u8* new_buf;
     s32 copy_idx;
     va_list args;
@@ -369,7 +363,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 
     result = 0;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, &old_size);
     if (entry != NULL) {
         alloc = text->alloc_data;
         playhead = entry + 0xE;
@@ -385,42 +379,36 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             u32 required_size;
 
             result = new_size - old_size;
-            tail_len = (u8*) alloc->next - playhead;
+            tail_len = alloc->end - playhead;
             required_size =
-                new_size +
-                ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 1;
+                new_size + (alloc->end - (old_buf = alloc->data)) + 1;
             if (alloc->size < required_size) {
                 alloc->size +=
                     ((((required_size - alloc->size) >> 7U) + 1) << 7);
                 new_buf = HSD_SisLib_Alloc((s32) alloc->size);
-                copy_src = (u8*) old_buf;
                 copy_idx = 0;
-                while (copy_idx <
-                       (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
-                {
-                    new_buf[copy_idx] = copy_src[copy_idx];
+                while (copy_idx < sisBufferLength(alloc) + 1) {
+                    new_buf[copy_idx] = old_buf[copy_idx];
                     copy_idx += 1;
                 }
-                alloc->data = (HSD_Text*) new_buf;
-                text->sis_buffer = (SIS*) new_buf;
-                alloc->next =
-                    (SisBlock*) (new_buf + ((u8*) alloc->next -
-                                            HSD_SisLib_BytePtr(old_buf)));
+                alloc->data = new_buf;
+                text->sis_buffer = new_buf;
+                alloc->end = new_buf + (alloc->end - old_buf);
                 HSD_SisLib_Free(old_buf);
-                playhead = (u8*) alloc->next - tail_len;
+                playhead = alloc->end - tail_len;
             }
             for (i = tail_len; i > 0; i--) {
                 playhead[result + i] = playhead[i];
             }
-            alloc->next = (SisBlock*) ((u8*) alloc->next + result);
+            alloc->end += result;
         } else if (old_size > new_size) {
             s32 shrink_size = old_size - new_size;
-            s32 tail_len = (u8*) alloc->next - playhead;
+            s32 tail_len = alloc->end - playhead;
 
             for (i = 0; i < tail_len; i++) {
                 playhead[i] = playhead[shrink_size + i];
             }
-            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_size);
+            alloc->end -= shrink_size;
         }
         for (i = 0; i < new_size; i++) {
             *playhead++ = encoded[i];
@@ -437,7 +425,7 @@ void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
     s32 y;
     u8* entry;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         u8* p = entry + 1;
         x = (s16) new_x;
@@ -455,7 +443,7 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
     u8* color_ptr;
     void* unused_r31;
 
-    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         color_ptr = entry + 5;
         color_ptr[1] = color_rgb->r;
@@ -467,7 +455,7 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
 void HSD_SisLib_803A7548(HSD_Text* text, int entry_idx, float scale_x,
                          float scale_y)
 {
-    u8* entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+    u8* entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
     u8* scale_ptr;
     if (entry != NULL) {
         scale_ptr = entry + 9;
@@ -486,7 +474,7 @@ void HSD_SisLib_803A75E0(HSD_Text* text, s32 entry_idx)
 
     if (HSD_SisLib_803A70A0(text, entry_idx, 0) != 0) {
         color = text->text_color;
-        entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
+        entry = fn_803A6FEC(text->sis_buffer, entry_idx, NULL);
         if (entry != NULL) {
             p = entry + 5;
             p[1] = color.r;
@@ -498,10 +486,10 @@ void HSD_SisLib_803A75E0(HSD_Text* text, s32 entry_idx)
 
 void HSD_SisLib_803A7664(HSD_Text* text)
 {
-    sisLib_803A7664_t* data;
+    SisBuffer* data;
 
-    data = (sisLib_803A7664_t*) text->alloc_data;
-    data->x0 = data->x4;
-    *(u8*) data->x0 = 0;
-    data->xC = 0;
+    data = text->alloc_data;
+    data->end = data->data;
+    *data->end = 0;
+    data->count = 0;
 }

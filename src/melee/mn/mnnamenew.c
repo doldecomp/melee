@@ -318,7 +318,7 @@ void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
     text = arg0->desc_text;
     idx = mnNameNew_804D4F7C[selection - 0x32];
     if (text != NULL) {
-        if (text->sis_buffer == ((SIS**) HSD_SisLib_804D1124[0])[idx]) {
+        if (text->sis_buffer == HSD_SisLib_804D1124[0][idx]) {
             return;
         }
         HSD_SisLib_803A5CC4(arg0->desc_text);

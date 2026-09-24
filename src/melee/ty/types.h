@@ -516,11 +516,6 @@ struct TyListData {
     HSD_CObj* cobj;
 };
 
-struct SisFontData {
-    u8 pad[0x4E8];
-    u8* digits;
-};
-
 struct TyListWaitData {
     u8 pad[0x20];
     u32 x20;
