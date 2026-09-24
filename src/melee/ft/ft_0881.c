@@ -327,10 +327,6 @@ void ft_800890D0(Fighter* fp, u32 move_id)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 /**
  * Seems to handle move staling damage reduction
  * Each time the move exists in the stale move table, decreases the result
@@ -357,26 +353,26 @@ static f32 ft_80089118(StaleMoveTable* table, int move_id, int arg2)
     }
     return var_f1;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline f32 getStaleMul(Fighter* fp, int attack_id, int arg2)
+{
+    return ft_80089118(Player_GetStaleMoveTableIndexPtr(fp->player_idx),
+                       attack_id, arg2);
+}
 
 f32 ft_80089228(Fighter* fp, int attack_id, int arg2, f32 arg3)
 {
-    f32 temp_f1;
-    f32 var_f31;
-    StaleMoveTable* tmp;
+    f32 mul;
+    f32 result;
 
     if (DbLevel >= DbLKind_DebugRom) {
         return arg3;
     }
-    var_f31 = arg3;
-    tmp = Player_GetStaleMoveTableIndexPtr(fp->player_idx);
-    temp_f1 = ft_80089118(tmp, attack_id, arg2);
-    if (temp_f1 != 1.0F) {
-        var_f31 *= temp_f1;
+    result = arg3;
+    if ((mul = getStaleMul(fp, attack_id, arg2)) != 1.0F) {
+        result *= mul;
     }
-    return var_f31;
+    return result;
 }
 
 static inline void inlineC0(Fighter* fp, u32 move_id)
