@@ -511,7 +511,7 @@ void ftLib_SetFighterDamageValue(HSD_GObj* gobj, float val)
     fp->dmg.x1958 = val;
 }
 
-bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
+bool ftLib_GetFighterS32Vec2(HSD_GObj* gobj, S32Vec2* x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -522,7 +522,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
     return false;
 }
 
-bool ftLib_80086A8C(HSD_GObj* gobj)
+bool ftLib_UpdateFighterCameraBox(HSD_GObj* gobj)
 {
     HSD_GObj* camera_gobj;
 
@@ -549,42 +549,42 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
     return true;
 }
 
-bool ftLib_80086B64(HSD_GObj* gobj)
+bool ftLib_GetFighterCameraBoxActive(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_b0;
 }
 
-CmSubject* ftLib_80086B74(HSD_GObj* gobj)
+CmSubject* ftLib_GetFighterCameraBox(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x890_cameraBox;
 }
 
-float ftLib_80086B80(HSD_GObj* gobj)
+float ftLib_GetFighterCameraBoxZ(HSD_GObj* gobj)
 {
-    return ftLib_80086B74(gobj)->target_ext.v.z;
+    return ftLib_GetFighterCameraBox(gobj)->target_ext.v.z;
 }
 
-void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetFighterCameraBoxBonePos(HSD_GObj* gobj, Vec3* v)
 {
-    CmSubject* cam = ftLib_80086B74(gobj);
+    CmSubject* cam = ftLib_GetFighterCameraBox(gobj);
     *v = cam->bone_pos;
 }
 
-bool ftLib_80086BB4(HSD_GObj* gobj)
+bool ftLib_CheckFighterCameraBoxPos(HSD_GObj* gobj)
 {
-    CmSubject* cam = ftLib_80086B74(gobj);
+    CmSubject* cam = ftLib_GetFighterCameraBox(gobj);
     return Camera_80031154(&cam->pos);
 }
 
-u8 ftLib_80086BE0(HSD_GObj* gobj)
+u8 ftLib_GetFighterPlayerIdx(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->player_idx;
 }
 
-void ftLib_80086BEC(HSD_GObj* gobj, Vec3* v)
+void ftLib_GetFighterPosDelta(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *v = fp->pos_delta;
@@ -609,7 +609,7 @@ static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
     }
 }
 
-void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)
+void ftLib_SetFighterRumbleHelper(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     helper(gobj, arg1, arg2, 0);
 }
@@ -622,7 +622,7 @@ void ftLib_ApplyRumbleToAllFighters(s32 arg0, s32 arg1)
     for (cur = HSD_GObjPLinkHead[HSD_GOBJ_PLINK_FIGHTER]; cur != NULL;
          cur = cur->next)
     {
-        ftLib_80086C18(cur, arg0, arg1);
+        ftLib_SetFighterRumbleHelper(cur, arg0, arg1);
     }
 }
 
