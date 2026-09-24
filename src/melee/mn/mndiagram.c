@@ -350,20 +350,6 @@ int mnDiagram_GetFighterTotalFalls(u8 field_index)
     return mnDiagram_SumFighterFalls(field_index);
 }
 
-/// @brief Counts the number of unlocked fighters (inline-expanded form).
-/// @return Number of unlocked fighters.
-static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
-{
-    int i;
-    int count = 0;
-    for (i = 0; i < SELKIND_COUNT; i++) {
-        if (mn_IsFighterUnlocked(i)) {
-            count++;
-        }
-    }
-    return count;
-}
-
 void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int decimal_places)
 {
     int i;
@@ -784,26 +770,17 @@ void mnDiagram_SortNamesByKOs(void)
 
 /// @brief Counts the number of unlocked fighters.
 /// @return Number of unlocked fighters.
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
-    int count;
-    i = 0;
-    count = 0;
-    for (; i < SELKIND_COUNT; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
+    int count = 0;
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (mn_IsFighterUnlocked(i)) {
             count++;
         }
     }
     return count;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 {
@@ -1431,7 +1408,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
     } else {
         new_var = 0;
-        count2 = mnDiagram_CountUnlockedFightersForHeaders();
+        count2 = mnDiagram_CountUnlockedFighters();
 
         if (input & 1) {
             col = (u8) mn_804A04F0.hovered_selection;
@@ -2152,6 +2129,17 @@ void mnDiagram_UpdateScrollArrowVisibility(HSD_GObj* gobj, int count)
     }
 }
 
+static inline int getEntryCount(Diagram* data)
+{
+    return data->is_name_mode != 0 ? GetNameCount()
+                                   : mnDiagram_CountUnlockedFighters();
+}
+
+static inline int getFighterCount(void)
+{
+    return mnDiagram_CountUnlockedFighters();
+}
+
 void mnDiagram_OnFrame(HSD_GObj* gobj)
 {
     Diagram* data = GET_DIAGRAM(gobj);
@@ -2219,7 +2207,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             if (data->is_name_mode != 0) {
                 count = GetNameCount();
             } else {
-                count = mnDiagram_CountUnlockedFighters();
+                count = getFighterCount();
             }
             data2 = gobj->user_data;
             if (count <= 7) {
@@ -2354,8 +2342,7 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                                     col_start, bottom_col)));
                     }
                 } else {
-                    bottom_unlocked_count =
-                        mnDiagram_CountUnlockedFightersForHeaders();
+                    bottom_unlocked_count = mnDiagram_CountUnlockedFighters();
                     if (bottom_unlocked_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
@@ -2391,12 +2378,12 @@ void mnDiagram_DrawGridValues(HSD_GObj* arg0, s32 row_start, s32 col_start,
                 }
             }
         } else {
-            unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
+            unlocked_count = mnDiagram_CountUnlockedFighters();
             if (unlocked_count > row) {
                 for (fighter_col = 0; fighter_col <= 7; fighter_col += 1) {
                     if ((fighter_col == 7) ||
                         (col_unlocked_count =
-                             mnDiagram_CountUnlockedFightersForHeaders(),
+                             mnDiagram_CountUnlockedFighters(),
                          (col_unlocked_count > fighter_col)))
                     {
                         row_fighter = mnDiagram_GetVisibleFighterCursorFrom2(
@@ -2569,7 +2556,7 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
     for (i = 0; i < 7; i++) {
         sorted = mnDiagram_FighterDisplayOrder;
         joint_data = assets->FaceB;
-        unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
+        unlocked_count = mnDiagram_CountUnlockedFighters();
         if (unlocked_count > i) {
             HSD_JObj* child;
             col_remaining = i;
@@ -2610,7 +2597,7 @@ void mnDiagram_DrawFighterHeaders(HSD_GObj* arg0, int arg1, int arg2)
     joint_data = assets->FaceB;
     for (i = 0; i < 10; i++) {
         sorted = mnDiagram_FighterDisplayOrder;
-        unlocked_count = mnDiagram_CountUnlockedFightersForHeaders();
+        unlocked_count = mnDiagram_CountUnlockedFighters();
         if (unlocked_count > i) {
             HSD_JObj* row_child;
             row_remaining = i;
@@ -2723,9 +2710,7 @@ void mnDiagram_CreateScreen(u8 arg0)
     StaticModelDesc* model;
     int i;
     u16 indices;
-    u8 stack_obj[8];
 
-    (void) &stack_obj;
     model = &MenMainConB1_Top;
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram_ScreenGObj = gobj;
@@ -2771,28 +2756,9 @@ void mnDiagram_CreateScreen(u8 arg0)
 
         mnDiagram_CreateCursor();
 
-        if (user_data->is_name_mode != 0) {
-            count = GetNameCount();
-        } else {
-            count = mnDiagram_CountUnlockedFighters();
-        }
+        count = getEntryCount(user_data);
 
-        data2 = GET_DIAGRAM(gobj);
-        if (count <= 7) {
-            HSD_JObjSetFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
-            HSD_JObjSetFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
-        } else {
-            HSD_JObjClearFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
-            HSD_JObjClearFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
-        }
-
-        if (count <= 0xA) {
-            HSD_JObjSetFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
-            HSD_JObjSetFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
-        } else {
-            HSD_JObjClearFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
-            HSD_JObjClearFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
-        }
+        mnDiagram_UpdateScrollArrowVisibility(gobj, count);
 
         if (user_data->is_name_mode != 0) {
             indices = user_data->name_cursor_pos;
