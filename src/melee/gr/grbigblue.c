@@ -3920,33 +3920,9 @@ typedef union grBb_CarGround {
     u8 bytes[0x1D4];
 } grBb_CarGround;
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma inline_depth(3)
-#endif
 static inline s32 grBigBlue_801EE398_sfx(void)
 {
     return HSD_Randi(4);
-}
-
-static inline void grBigBlue_801EE398_select(Ground* gp, s32 count,
-                                             s32* output)
-{
-    s32 slot = 0;
-    s32 pick;
-    s32 random0;
-    s32 random1;
-
-    pick = random0 = random1 = ZRANDI(count);
-
-    for (; slot < 30; slot++) {
-        if (gp->u.bigblue.car.ranks[slot] == 0) {
-            if (--pick < 0) {
-                break;
-            }
-        }
-    }
-    *output = slot;
 }
 
 static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
@@ -4106,8 +4082,19 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
                 u32 sfx_id;
                 struct grBigBlue_CarLane* lanes;
                 struct grBigBlue_CarLane* car_d4;
+                s32 pick;
+                s32 random0;
+                s32 random1;
 
-                grBigBlue_801EE398_select(gp, count, &slot);
+                slot = 0;
+                pick = random0 = random1 = ZRANDI(count);
+                for (; slot < 30; slot++) {
+                    if (gp->u.bigblue.car.ranks[slot] == 0) {
+                        if (--pick < 0) {
+                            break;
+                        }
+                    }
+                }
 
                 lanes = gp->u.bigblue.car.lanes;
                 car_d4 = &gp->u.bigblue.car.lanes[arg1];
@@ -4159,7 +4146,6 @@ static inline void grBigBlue_801EE398_inline(Ground* gp, s32 arg1, s32 arg2,
 
                 *result = 1;
                 car_d4->state = state_value0;
-                (void) car_d4->state;
             }
         }
         break;
@@ -4190,9 +4176,6 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
     return result;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 {
