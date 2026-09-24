@@ -125,7 +125,7 @@ bool un_802FF88C(enum soundtest_callback_arg0 arg0)
 
 bool un_802FF934(enum soundtest_callback_arg0 arg0)
 {
-    lbAudioAx_80024C08(un_804D6DBC);
+    return lbAudioAx_80024C08(un_804D6DBC);
 }
 
 bool un_802FF958(enum soundtest_callback_arg0 arg0)
@@ -152,8 +152,7 @@ bool un_802FF9DC(enum soundtest_callback_arg0 arg0)
     s32 i;
     s32 total;
 
-    i = un_804D6DB4 = 0;
-    for (; i < un_804D6DB0; i++) {
+    for (i = un_804D6DB4 = 0; i < un_804D6DB0; i++) {
         un_804D6DB4 += un_804D6DA8->x18[i];
     }
     un_803F9FA4.entries[7].x14 = (f32) un_804D6DB4;
