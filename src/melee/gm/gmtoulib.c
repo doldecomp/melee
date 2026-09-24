@@ -1623,7 +1623,7 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     }
 }
 
-void fn_8018E46C(HSD_GObj* gobj, int unused)
+void fn_8018E46C(HSD_GObj* gobj, intptr_t unused)
 {
     BracketEntry* data;
     s32 temp;

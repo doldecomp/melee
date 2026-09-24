@@ -156,7 +156,7 @@ void fn_80187AB4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void fn_80187C9C(HSD_GObj* gobj, int arg1)
+void fn_80187C9C(HSD_GObj* gobj, intptr_t arg1)
 {
     GXSetZMode(0, GX_NEVER, 0);
     HSD_GObj_JObjCallback(gobj, arg1);

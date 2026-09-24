@@ -199,13 +199,13 @@ void HSD_GObj_80390FC0(void)
     }
 }
 
-void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused)
+void HSD_GObj_LObjCallback(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
+void HSD_GObj_JObjCallback(HSD_GObj* gobj, intptr_t arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     /// @todo don't inline #HSD_GObj_80390EB8
@@ -221,12 +221,12 @@ void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
 #pragma pop
 #endif
 
-void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused)
+void HSD_GObj_FogCallback(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void HSD_GObj_803910D8(HSD_GObj* gobj, int renderpass)
+void HSD_GObj_803910D8(HSD_GObj* gobj, intptr_t renderpass)
 {
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         HSD_GObj_80390ED0(gobj, 7);

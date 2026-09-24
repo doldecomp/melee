@@ -11,7 +11,7 @@
 /* 3020FC */ void DevText_Remove(DevText** ptext);
 /* 302164 */ void DevText_SetupCObj(void);
 /* 3022BC */ void DevText_Draw(DevText* text);
-/* 302608 */ void DevText_DrawAll(HSD_GObj* gobj, int pass);
+/* 302608 */ void DevText_DrawAll(HSD_GObj* gobj, intptr_t pass);
 /* 30265C */ void DevText_CreateCObj(int classifier, int p_link,
                                      int gobj_priority, int gx_link,
                                      u8 gx_priority);

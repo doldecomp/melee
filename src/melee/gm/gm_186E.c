@@ -150,7 +150,7 @@ HSD_GObjProc* fn_801873F0(void)
     return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
 }
 
-void fn_80187494(HSD_GObj* gobj, int arg1)
+void fn_80187494(HSD_GObj* gobj, intptr_t arg1)
 {
     int temp_ret = HSD_CObjSetCurrent(gobj->hsd_obj);
     PAD_STACK(4);

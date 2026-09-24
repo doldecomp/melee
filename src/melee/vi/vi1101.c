@@ -118,7 +118,7 @@ void fn_8031F548(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void fn_8031F56C(HSD_GObj* gobj, int unused)
+static void fn_8031F56C(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(8);
 

@@ -27,7 +27,7 @@ struct StatsList;
 /* 174A60 */ s32 fn_80174A60(struct StatsList*, s32);
 /* 174B4C */ void fn_80174B4C(struct ResultsData*, s32);
 /* 174FD0 */ void fn_80174FD0(HSD_JObj*, s32);
-/* 175038 */ void fn_80175038(HSD_GObj*, int);
+/* 175038 */ void fn_80175038(HSD_GObj*, intptr_t);
 /* 17507C */ GXColor fn_8017507C(s32);
 /* 175240 */ void fn_80175240(s32);
 /* 17556C */ void fn_8017556C(s32);

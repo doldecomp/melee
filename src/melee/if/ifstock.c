@@ -492,7 +492,7 @@ void fn_802F9410(HSD_GObj* gobj)
     }
 }
 
-void fn_802F94E0(HSD_GObj* gobj, int renderpass)
+void fn_802F94E0(HSD_GObj* gobj, intptr_t renderpass)
 {
     struct IfStockUserData* p = GET_IFSTOCK(gobj);
     struct HudIndex* x = ifStatus_GetHUDInfo();
@@ -501,7 +501,7 @@ void fn_802F94E0(HSD_GObj* gobj, int renderpass)
     }
 }
 
-void fn_802F9548(HSD_GObj* gobj, int renderpass)
+void fn_802F9548(HSD_GObj* gobj, intptr_t renderpass)
 {
     struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {
@@ -509,7 +509,7 @@ void fn_802F9548(HSD_GObj* gobj, int renderpass)
     }
 }
 
-void fn_802F9598(HSD_GObj* gobj, int renderpass)
+void fn_802F9598(HSD_GObj* gobj, intptr_t renderpass)
 {
     struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {
@@ -517,7 +517,7 @@ void fn_802F9598(HSD_GObj* gobj, int renderpass)
     }
 }
 
-void fn_802F95E8(HSD_GObj* gobj, int renderpass)
+void fn_802F95E8(HSD_GObj* gobj, intptr_t renderpass)
 {
     struct HudIndex* x = ifStatus_GetHUDInfo();
     if (gm_8016B184() && gm_8016A1F8() &&
@@ -530,7 +530,7 @@ void fn_802F95E8(HSD_GObj* gobj, int renderpass)
     }
 }
 
-void fn_802F9680(HSD_GObj* gobj, int renderpass)
+void fn_802F9680(HSD_GObj* gobj, intptr_t renderpass)
 {
     struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {

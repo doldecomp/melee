@@ -10,8 +10,8 @@
 /* 2F4B84 */ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina);
 /* 2F4EDC */ void ifStatus_802F4EDC(HSD_GObj* gobj);
 /* 2F5B48 */ void ifStatus_802F5B48(HSD_GObj* gobj);
-/* 2F5DE0 */ void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1);
-/* 2F5E50 */ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1);
+/* 2F5DE0 */ void ifStatus_802F5DE0(HSD_GObj* player, intptr_t arg1);
+/* 2F5E50 */ void ifStatus_802F5E50(HSD_GObj* gobj, intptr_t arg1);
 /* 2F5EC0 */ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx);
 /* 2F6194 */ HSD_JObj* ifStatus_802F6194(HSD_JObj*, s32);
 /* 2F61FC */ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx);

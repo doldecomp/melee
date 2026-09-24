@@ -73,7 +73,7 @@ bool it_8029FDBC(Item_GObj* gobj)
     return (GET_ITEM(gobj)->msid != 0) ? false : true;
 }
 
-void it_8029FDDC(Item_GObj* gobj, int arg1)
+void it_8029FDDC(Item_GObj* gobj, intptr_t arg1)
 {
     s32 i;
     Item* ip;

@@ -7,7 +7,7 @@
 
 /* 187910 */ void fn_80187910(HSD_GObj*);
 /* 187AB4 */ void fn_80187AB4(HSD_GObj*);
-/* 187C9C */ void fn_80187C9C(HSD_GObj*, int);
+/* 187C9C */ void fn_80187C9C(HSD_GObj*, intptr_t);
 /* 187CF4 */ void fn_80187CF4(HSD_GObj*);
 /* 187F48 */ void gm_Scene_IntroNormal_OnEnter(UNK_T);
 /* 188364 */ void gm_Scene_IntroNormal_OnLeave(UNK_T);

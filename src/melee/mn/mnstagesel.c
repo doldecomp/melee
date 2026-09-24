@@ -452,7 +452,7 @@ void fn_8025A91C(HSD_GObj* gobj)
     }
 }
 
-void fn_8025A974(HSD_GObj* gobj, int unused)
+void fn_8025A974(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_FogSet(gobj->hsd_obj);
 }

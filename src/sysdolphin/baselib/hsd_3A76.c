@@ -439,7 +439,7 @@ static void sisFitLineToBox(HSD_Text* text, f32 measured_width)
     }
 }
 
-void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
+void HSD_SisLib_803A84BC(HSD_GObj* gobj, intptr_t pass)
 {
     // clang-format off
     HSD_Text *text;

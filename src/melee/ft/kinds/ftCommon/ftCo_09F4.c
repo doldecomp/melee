@@ -18,7 +18,7 @@
 #include <sysdolphin/baselib/lobj.h>
 
 /* 09F480 */ static void ftCo_8009F480(Fighter_GObj* gobj);
-/* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, int code);
+/* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, intptr_t code);
 
 static HSD_LObj* lobj0;
 static HSD_LObj* lobj1;
@@ -52,7 +52,7 @@ void ftCo_8009F4A4(void)
     HSD_GObj_SetupProc(gobj, ftCo_8009F480, 1);
 }
 
-void ftCo_8009F54C(HSD_GObj* gobj, int code)
+void ftCo_8009F54C(HSD_GObj* gobj, intptr_t code)
 {
     HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());

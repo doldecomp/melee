@@ -116,7 +116,7 @@ void vi0502_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
+static void vi0502_GObj_OnRender(HSD_GObj* gobj, UNUSED intptr_t code)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
@@ -186,8 +186,7 @@ void vi0502_Scene_OnEnter(void* arg)
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj = lb_80013B14(&un_804D6F90->cameras->desc->perspective);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(camera_gobj,
-                        (void (*)(HSD_GObj*, int)) vi0502_GObj_OnRender, 5);
+    GObj_SetupGXLinkMax(camera_gobj, vi0502_GObj_OnRender, 5);
     HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);

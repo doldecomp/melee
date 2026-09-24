@@ -126,7 +126,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     lbAudioAx_80027648();
 }
 
-void vi_8031DC80(HSD_GObj* gobj, int unused)
+void vi_8031DC80(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);

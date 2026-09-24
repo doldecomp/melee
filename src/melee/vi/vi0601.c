@@ -33,7 +33,7 @@ void vi_8031E6EC(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0601_GObj_OnRender(HSD_GObj* gobj, UNUSED int code)
+static void vi0601_GObj_OnRender(HSD_GObj* gobj, UNUSED intptr_t code)
 {
     HSD_CObj* cobj;
     cobj = GET_COBJ(gobj);

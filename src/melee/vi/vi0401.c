@@ -87,7 +87,7 @@ static void vi0401_8031D18C(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-static void vi0401_8031D1B0(HSD_GObj* gobj, int unused)
+static void vi0401_8031D1B0(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(8);
     vi_RunCamera(gobj, (u8*) &erase_colors_vi0401, 0x281);

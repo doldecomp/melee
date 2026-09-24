@@ -1597,7 +1597,7 @@ void mn_8022BA1C(HSD_GObj* gp)
     HSD_CObjSetEyePosition(cobj, &sp24);
 }
 
-void fn_8022BCD4(HSD_GObj* gobj, int unused)
+void fn_8022BCD4(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_FogSet(gobj->hsd_obj);
 }
@@ -1627,7 +1627,7 @@ void mn_8022BD8C(void)
     mn_804D6BB0->gxlink_prios = 0x80;
 }
 
-void fn_8022BDB4(HSD_GObj* gobj, int unused)
+void fn_8022BDB4(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_Fog* fog = GET_FOG(mn_804D6BA8);
     if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {

@@ -92,7 +92,7 @@ void un_802FD9D8(unsigned char slot)
     }
 }
 
-void fn_802FDA4C(HSD_GObj* gobj, int pass)
+void fn_802FDA4C(HSD_GObj* gobj, intptr_t pass)
 {
     if (un_804D6D90 == 0) {
         HSD_GObj_JObjCallback(gobj, pass);

@@ -170,7 +170,7 @@ void lb_800192A8(void (*cb)(void))
             GXInvalidateVtxCache();
             GXInvalidateTexAll();
             HSD_StartRender(HSD_RP_SCREEN);
-            HSD_SisLib_803A84BC(NULL, (u32) lb_804D63D0);
+            HSD_SisLib_803A84BC(NULL, (intptr_t) lb_804D63D0);
             HSD_Init_803755A8();
             HSD_VICopyXFBAsync(HSD_RP_SCREEN);
             if (cb != NULL) {

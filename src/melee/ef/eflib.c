@@ -41,7 +41,7 @@ void HSD_MtxGetScale(Mtx, Vec3*);
 void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
 
 // forward declare for B4B8
-void efLib_render_callback(HSD_GObj*, int);
+void efLib_render_callback(HSD_GObj*, intptr_t);
 
 // Particle linkNo skip masks (bits 16+) for hsd_8039CEAC / hsd_8039EE24
 // Set bit = skip processing for that linkNo
@@ -610,7 +610,7 @@ EF_Effect* efLib_Create_Attach_Pos(u32 gfx_id, HSD_GObj* gobj, Vec3* position)
     return effect;
 }
 
-void efLib_render_callback(HSD_GObj* gobj, int code)
+void efLib_render_callback(HSD_GObj* gobj, intptr_t code)
 {
     u32 particles_code;
 

@@ -11,7 +11,7 @@
 /* 3205F4 */ void un_803205F4(void);
 /* 32074C */ void un_8032074C(HSD_GObj*);
 /* 3207C4 */ void un_803207C4(void);
-/* 3208F0 */ void un_803208F0(HSD_GObj*);
+/* 3208F0 */ void un_803208F0(HSD_GObj*, intptr_t);
 /* 320984 */ void un_80320984(HSD_GObj*);
 /* 320A1C */ void fn_80320A1C(HSD_GObj*);
 /* 320A40 */ void vi1201v2_Scene_OnEnter(void*);

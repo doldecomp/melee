@@ -54,7 +54,7 @@ void fn_802FD680(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
-void fn_802FD6CC(HSD_GObj* gobj, int pass)
+void fn_802FD6CC(HSD_GObj* gobj, intptr_t pass)
 {
     if (!un_804D6D8C && un_804D6D88) {
         HSD_GObj_JObjCallback(gobj, pass);

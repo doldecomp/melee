@@ -9,7 +9,7 @@
 #include <melee/it/kinds/types.h>
 #include <melee/it/types.h>
 
-/* 2F13B4 */ void it_802F13B4(HSD_GObj*, int);
+/* 2F13B4 */ void it_802F13B4(HSD_GObj*, intptr_t);
 /* 2F14E4 */ void itCoin_Logic116_Spawned(Item_GObj*);
 /* 2F1518 */ void itCoin_Logic116_Destroyed(Item_GObj*);
 /* 2F1888 */ void itCoin_Logic116_PickedUp(Item_GObj*);

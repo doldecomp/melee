@@ -52,9 +52,9 @@
 /* 1D2BEC */ HSD_GObj* grStadium_801D2BEC(void);
 /* 1D2D78 */ HSD_GObj* grStadium_801D2D78(void);
 /* 1D2E24 */ HSD_GObj* grStadium_801D2E24(void);
-/* 1D2ED0 */ void fn_801D2ED0(HSD_GObj*, int);
-/* 1D2FD0 */ void grStadium_801D2FD0(HSD_GObj*, int);
-/* 1D3084 */ void grStadium_801D3084(HSD_GObj*, int);
+/* 1D2ED0 */ void fn_801D2ED0(HSD_GObj*, intptr_t);
+/* 1D2FD0 */ void grStadium_801D2FD0(HSD_GObj*, intptr_t);
+/* 1D3084 */ void grStadium_801D3084(HSD_GObj*, intptr_t);
 /* 1D3138 */ HSD_TObj* grStadium_801D3138(Ground_GObj*, HSD_ImageDesc*,
                                           HSD_MObj**);
 /* 1D32D0 */ bool grStadium_801D32D0(Ground_GObj*);
@@ -76,7 +76,7 @@
 /* 1D435C */ void grStadium_801D435C(Ground_GObj*);
 /* 1D4548 */ void grStadium_801D4548(Ground_GObj*);
 /* 1D4FF8 */ bool grStadium_801D4FF8(int pl_slot);
-/* 1D5074 */ void fn_801D5074(Ground_GObj*, int);
+/* 1D5074 */ void fn_801D5074(Ground_GObj*, intptr_t);
 /* 1D50B8 */ DynamicsDesc* grStadium_OnTouchLine(enum_t);
 /* 1D50C0 */ bool grStadium_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 /* 1D511C */ void grStadium_801D511C(void);

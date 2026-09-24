@@ -146,7 +146,7 @@ bool ifAll_IsHUDHidden(void)
     return hidden;
 }
 
-static void fn_802F36B8(HSD_GObj* gobj, int unused)
+static void fn_802F36B8(HSD_GObj* gobj, intptr_t unused)
 {
     if (!ifAll_IsHUDHidden()) {
         if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {

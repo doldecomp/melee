@@ -1818,7 +1818,7 @@ void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
     grCastle_801D06CC_sub(arg1, gobj, 4);
 }
 
-void fn_801D0924(HSD_GObj* gobj, int renderpass)
+void fn_801D0924(HSD_GObj* gobj, intptr_t renderpass)
 {
     Ground* gp = gobj->user_data;
     int i;

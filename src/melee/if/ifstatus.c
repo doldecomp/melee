@@ -630,7 +630,7 @@ static inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
     return NULL;
 }
 
-void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
+void ifStatus_802F5DE0(HSD_GObj* player, intptr_t arg1)
 {
     if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
         HSD_GObj_JObjCallback(player, arg1);
@@ -648,7 +648,7 @@ static inline IfDamageState* getPlayerByNext(HSD_GObj* gobj)
     return NULL;
 }
 
-void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
+void ifStatus_802F5E50(HSD_GObj* gobj, intptr_t arg1)
 {
     IfDamageState* player = getPlayerByNext(gobj);
     if (!player->flags.hide_all_digits) {
@@ -681,8 +681,7 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = ifStatus_LoadDamageJObj(hud);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
-                         0xB, 0);
+        GObj_SetupGXLink(gobj, ifStatus_802F5DE0, 0xB, 0);
         HSD_GObj_SetupProc(gobj, ifStatus_802F5B48, 0x11);
         HSD_GObj_SetupProc(gobj, ifStatus_802F4EDC, 0x11);
         state->HUD_parent_entity = gobj;
@@ -787,8 +786,7 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
                              "Error : jobj dont't get (ifAddMark)\n");
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5E50,
-                         0xB, 0);
+        GObj_SetupGXLink(gobj, ifStatus_802F5E50, 0xB, 0);
         state->next = gobj;
     } else {
         jobj = state->next->hsd_obj;

@@ -7,8 +7,8 @@
 
 /* 08051C */ MtxPtr ftDrawCommon_8008051C(HSD_GObj*, MtxPtr);
 /* 0805C8 */ void ftDrawCommon_800805C8(HSD_GObj*, s32, bool);
-/* 080C28 */ void ftDrawCommon_80080C28(HSD_GObj*, int);
-/* 080E18 */ void ftDrawCommon_80080E18(HSD_GObj*, int);
+/* 080C28 */ void ftDrawCommon_80080C28(HSD_GObj*, intptr_t);
+/* 080E18 */ void ftDrawCommon_80080E18(HSD_GObj*, intptr_t);
 /* 081118 */ void ftDrawCommon_80081118(void);
 /* 081140 */ void ftDrawCommon_80081140(void);
 /* 081168 */ void ftDrawCommon_80081168(void);
