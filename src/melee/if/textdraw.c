@@ -56,7 +56,7 @@
 ASSERT_SIZE(struct DevText_Pool, 0x6B0);
 
 /// .sbss
-/* 4D6E38 */ DevText* devtext_poolhead[2];
+/* 4D6E38 */ DevText* devtext_poolhead;
 /* 4D6E34 */ int devtext_setup_render_priority;
 /* 4D6E30 */ int devtext_setup_gx_link;
 /* 4D6E2C */ int devtext_setup_priority;
@@ -65,8 +65,6 @@ ASSERT_SIZE(struct DevText_Pool, 0x6B0);
 /* 4D6E20 */ HSD_CObj* devtext_cobj;
 /* 4D6E1C */ HSD_GObj* devtext_gobj;
 /* 4D6E18 */ DevText* devtext_drawlist;
-
-#define devtext_poolhead devtext_poolhead[0]
 
 int DevText_StrLen(char* str)
 {
@@ -253,12 +251,15 @@ void DevText_Draw(DevText* text)
     }
 }
 
+static inline DevText* getDrawList(void)
+{
+    return devtext_drawlist;
+}
+
 void DevText_DrawAll(HSD_GObj* gobj, intptr_t pass)
 {
-    PAD_STACK(8);
-
     if ((unsigned int) pass == HSD_RP_BOTTOMHALF) {
-        DevText* text = devtext_drawlist;
+        DevText* text = getDrawList();
         HSD_FogSet(NULL);
         DevText_SetupCObj();
         while (text) {
