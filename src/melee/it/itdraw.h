@@ -11,6 +11,6 @@
 /* 26EBC8 */ void it_8026EBC8(HSD_GObj*, u16, u8*);
 /* 26EC54 */ void it_8026EC54(HSD_GObj*, u16, u8*);
 /* 26ECE0 */ u32 it_8026ECE0(Item_GObj*, u32);
-/* 26EECC */ void it_8026EECC(HSD_GObj*, int);
+/* 26EECC */ void it_8026EECC(HSD_GObj*, intptr_t);
 
 #endif

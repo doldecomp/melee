@@ -630,7 +630,7 @@ void grIzumi_801CCB18(HSD_GObj* gobj)
     }
 }
 
-void grIzumi_801CCB90(HSD_GObj* gobj, int renderpass)
+void grIzumi_801CCB90(HSD_GObj* gobj, intptr_t renderpass)
 {
     /// @remarks i guess PointSize is an inline? seems odd
     u8 _[8];
@@ -738,7 +738,7 @@ HSD_GObj* grIzumi_801CCD98(void)
     return gobj;
 }
 
-void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
+void grIzumi_801CCEA0(HSD_GObj* gobj, intptr_t renderpass)
 {
     Mtx mtx;
     Vec3 vec;
@@ -849,7 +849,7 @@ HSD_TObj* grIzumi_801CD090(HSD_GObj* gobj, HSD_ImageDesc* image)
     return NULL;
 }
 
-void grIzumi_801CD220(HSD_GObj* gobj, int renderpass)
+void grIzumi_801CD220(HSD_GObj* gobj, intptr_t renderpass)
 {
     Ground* gp = GET_GROUND(gobj);
     IzumiReflection* refl = HSD_GObjGetUserData(gp->u.izumi.xC8);

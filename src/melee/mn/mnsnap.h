@@ -10,10 +10,10 @@
 /* 253964 */ void mnSnap_80253964(void);
 /* 253AE4 */ void mnSnap_80253AE4(s32 mode);
 /* 253BE0 */ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count);
-/* 253DB4 */ void fn_80253DB4(HSD_GObj* gobj, s32 rendermode);
-/* 253DE8 */ void fn_80253DE8(HSD_GObj* gobj, s32 rendermode);
-/* 253E1C */ void fn_80253E1C(HSD_GObj* gobj, s32 rendermode);
-/* 253E5C */ void fn_80253E5C(HSD_GObj* gobj, s32 rendermode);
+/* 253DB4 */ void fn_80253DB4(HSD_GObj* gobj, intptr_t rendermode);
+/* 253DE8 */ void fn_80253DE8(HSD_GObj* gobj, intptr_t rendermode);
+/* 253E1C */ void fn_80253E1C(HSD_GObj* gobj, intptr_t rendermode);
+/* 253E5C */ void fn_80253E5C(HSD_GObj* gobj, intptr_t rendermode);
 /* 253E90 */ void mnSnap_80253E90(s32 idx);
 /* 253F60 */ void mnSnap_80253F60(void);
 /* 254014 */ void mnSnap_80254014(void);

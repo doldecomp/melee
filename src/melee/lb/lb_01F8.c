@@ -45,7 +45,7 @@ HSD_SObj* lbMthp8001F890(HSD_GObj* gobj)
     return lbl_804335B8.x90;
 }
 
-void lbMthp8001F928(HSD_GObj* gobj, int arg1)
+void lbMthp8001F928(HSD_GObj* gobj, intptr_t arg1)
 {
     u16* pWidth = &lbl_804335B8.x6C;
     u16* pHeight = &lbl_804335B8.x6E;

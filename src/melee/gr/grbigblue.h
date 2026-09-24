@@ -71,7 +71,7 @@
 /* 1EF424 */ void grBigBlue_801EF424(Ground_GObj*);
 /* 1EF7D8 */ void grBigBlue_801EF7D8(Vec3*);
 /* 1EF844 */ bool grBigBlue_801EF844(enum_t);
-/* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);
+/* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, intptr_t);
 /* 1EFC0C */ DynamicsDesc* grBigBlue_801EFC0C(enum_t);
 /* 1EFC14 */ bool grBigBlue_801EFC14(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E2D20 */ extern StageData grBb_StageData;

@@ -11,8 +11,8 @@
 /* 1AA774 */ bool gm_801AA774(s16);
 /* 1AA7C4 */ void gm_Scene_StaffRoll_OnFrame(void);
 /* 1AA7F8 */ void fn_801AA7F8(HSD_GObj*);
-/* 1AA854 */ void fn_801AA854(HSD_GObj*, int code);
-/* 1AAA28 */ void fn_801AAA28(HSD_GObj*, int code);
+/* 1AA854 */ void fn_801AA854(HSD_GObj*, intptr_t code);
+/* 1AAA28 */ void fn_801AAA28(HSD_GObj*, intptr_t code);
 /* 1AAABC */ void fn_801AAABC(HSD_GObj*);
 /* 1AAB18 */ void fn_801AAB18(HSD_GObj*);
 /* 1AAB74 */ void fn_801AAB74(HSD_GObj*);

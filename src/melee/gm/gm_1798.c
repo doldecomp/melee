@@ -218,27 +218,27 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     }
 }
 
-void fn_80179D3C(HSD_GObj* gobj, int arg1)
+void fn_80179D3C(HSD_GObj* gobj, intptr_t arg1)
 {
     fn_80179990(gobj, arg1, 0);
 }
 
-void fn_80179D60(HSD_GObj* gobj, int arg1)
+void fn_80179D60(HSD_GObj* gobj, intptr_t arg1)
 {
     fn_80179990(gobj, arg1, 1);
 }
 
-void fn_80179D84(HSD_GObj* gobj, int arg1)
+void fn_80179D84(HSD_GObj* gobj, intptr_t arg1)
 {
     fn_80179990(gobj, arg1, 2);
 }
 
-void fn_80179DA8(HSD_GObj* gobj, int arg1)
+void fn_80179DA8(HSD_GObj* gobj, intptr_t arg1)
 {
     fn_80179990(gobj, arg1, 3);
 }
 
-void fn_80179DCC(HSD_GObj* gobj, int arg1)
+void fn_80179DCC(HSD_GObj* gobj, intptr_t arg1)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(cobj)) {
@@ -249,7 +249,7 @@ void fn_80179DCC(HSD_GObj* gobj, int arg1)
     }
 }
 
-void fn_80179E34(HSD_GObj* gobj, int arg1)
+void fn_80179E34(HSD_GObj* gobj, intptr_t arg1)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(cobj)) {
@@ -260,7 +260,7 @@ void fn_80179E34(HSD_GObj* gobj, int arg1)
     }
 }
 
-void fn_80179E9C(HSD_GObj* gobj, int arg1)
+void fn_80179E9C(HSD_GObj* gobj, intptr_t arg1)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(cobj)) {
@@ -271,7 +271,7 @@ void fn_80179E9C(HSD_GObj* gobj, int arg1)
     }
 }
 
-void fn_80179F04(HSD_GObj* gobj, int arg1)
+void fn_80179F04(HSD_GObj* gobj, intptr_t arg1)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(cobj)) {

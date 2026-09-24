@@ -10,12 +10,12 @@
 /* 1A6844 */ void fn_801A6844(HSD_GObj*);
 /* 1A6868 */ void fn_801A6868(HSD_GObj*);
 /* 1A68D8 */ void gm_801A68D8(void);
-/* 1A6A48 */ void fn_801A6A48(HSD_GObj*, int);
-/* 1A6ACC */ void fn_801A6ACC(HSD_GObj*, int);
+/* 1A6A48 */ void fn_801A6A48(HSD_GObj*, intptr_t);
+/* 1A6ACC */ void fn_801A6ACC(HSD_GObj*, intptr_t);
 /* 1A6B6C */ void fn_801A6B6C(HSD_GObj*);
 /* 1A6C30 */ void fn_801A6C30(HSD_GObj*);
 /* 1A6C54 */ void gm_801A6C54(void);
-/* 1A6D78 */ void fn_801A6D78(HSD_GObj*, int);
+/* 1A6D78 */ void fn_801A6D78(HSD_GObj*, intptr_t);
 /* 1A6DC0 */ void gm_801A6DC0(void);
 /* 1A6EE4 */ void gm_801A6EE4(void);
 /* 1A7070 */ void gm_Scene_ToyFall_OnEnter(void* unused);

@@ -11,7 +11,7 @@
 /* 2F74D0 */ void if_802F74D0(HSD_GObj*);
 /* 2F75D4 */ void fn_802F75D4(HSD_GObj*);
 /* 2F7670 */ void fn_802F7670(HSD_GObj*);
-/* 2F770C */ void fn_802F770C(HSD_GObj* gobj, int callback);
+/* 2F770C */ void fn_802F770C(HSD_GObj* gobj, intptr_t callback);
 /* 2F77F8 */ HSD_GObj* fn_802F77F8(HSD_GObj*, u8, u16);
 /* 2F7994 */ void fn_802F7994(HSD_GObj*);
 /* 2F7AF8 */ void if_802F7AF8(s32);

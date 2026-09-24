@@ -9,7 +9,7 @@
 /* 31F9B4 */ void un_8031F9B4(HSD_GObj*);
 /* 31F9D8 */ void un_8031F9D8(CharacterKind, int);
 /* 31FAA8 */ void fn_8031FAA8(HSD_GObj* gobj);
-/* 31FB90 */ void fn_8031FB90(HSD_GObj*);
+/* 31FB90 */ void fn_8031FB90(HSD_GObj*, intptr_t);
 /* 31FC30 */ void fn_8031FC30(HSD_GObj*);
 /* 31FCBC */ void fn_8031FCBC(HSD_GObj*);
 /* 31FD18 */ void vi1201v1_Scene_OnEnter(void* arg);

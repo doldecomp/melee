@@ -226,7 +226,7 @@ void gm_801A68D8(void)
     Player_SetScale(0, mult * tmp);
 }
 
-void fn_801A6A48(HSD_GObj* gobj, int arg1)
+void fn_801A6A48(HSD_GObj* gobj, intptr_t arg1)
 {
     if (HSD_CObjSetCurrent(gobj->hsd_obj) != 0) {
         HSD_SObjLib_803A54EC(gobj, arg1);
@@ -244,7 +244,7 @@ static void order_data(void)
 }
 #endif
 
-void fn_801A6ACC(HSD_GObj* gobj, int unused)
+void fn_801A6ACC(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(0x18);
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
@@ -313,7 +313,7 @@ void gm_801A6C54(void)
     }
 }
 
-void fn_801A6D78(HSD_GObj* gobj, int unused)
+void fn_801A6D78(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(0x18);
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {

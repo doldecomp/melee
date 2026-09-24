@@ -2445,7 +2445,7 @@ HSD_Generator* grCorneria_801E2480(Vec3* vec, s32 arg1)
 }
 
 /// This triggers for both Corneria and Venom
-void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
+void smashTaunt_801E24AC(Ground_GObj* gobj, intptr_t renderpass)
 {
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);

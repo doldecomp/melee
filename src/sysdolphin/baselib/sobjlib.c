@@ -227,7 +227,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     return sobj;
 }
 
-void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
+void HSD_SObjLib_803A49E0(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_SObj* sobj;
 
@@ -540,7 +540,7 @@ static HSD_Chan lbl_8040C448 = {
     GX_AF_NONE,
 };
 
-void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
+void HSD_SObjLib_803A54EC(HSD_GObj* gobj, intptr_t unused)
 {
     Mtx viewmtx;
 

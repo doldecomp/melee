@@ -9,7 +9,7 @@
 #include <dolphin/mtx.h>
 #include <melee/it/kinds/types.h>
 
-/* 29CD18 */ void it_8029CD18(HSD_GObj*, int);
+/* 29CD18 */ void it_8029CD18(HSD_GObj*, intptr_t);
 /* 29CD78 */ HSD_JObj* it_8029CD78(Item_GObj*);
 /* 29CEB4 */ Item_GObj* it_8029CEB4(HSD_GObj*, Vec3*, ItemKind, f32);
 /* 29CF8C */ bool itFoxIllusion_Logic14_DmgDealt(Item_GObj*);

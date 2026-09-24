@@ -70,7 +70,7 @@ struct GrPuVtxMapEntry {
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 /* 2130C0 */ static DynamicsDesc* grPura_802130C0(enum_t);
 /* 2130C8 */ static bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
-/* 2130D0 */ static void fn_802130D0(HSD_GObj*, int);
+/* 2130D0 */ static void fn_802130D0(HSD_GObj*, intptr_t);
 /* 213128 */ static void grPura_80213128(HSD_DObj*);
 /* 213224 */ static void grPura_80213224(HSD_DObj*);
 /* 213250 */ static void grPura_80213250(HSD_JObj*);
@@ -674,7 +674,7 @@ void stageGObj2_OnInit(Ground_GObj* arg0)
     Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj = arg0->hsd_obj;
     PAD_STACK(8);
-    arg0->render_cb = (GObj_RenderFunc) fn_802130D0;
+    arg0->render_cb = fn_802130D0;
     HSD_MObjSetToonTextureImage(&grPu_803E7620);
     lb_80011C18(jobj, 0x1000);
     grPura_80213250(jobj);
@@ -882,7 +882,7 @@ bool grPura_802130C8(Vec3* a, int num, HSD_JObj* joint)
     return true;
 }
 
-void fn_802130D0(HSD_GObj* arg0, int arg1)
+void fn_802130D0(HSD_GObj* arg0, intptr_t arg1)
 {
     PAD_STACK(8);
     HSD_MObjSetToonTextureImage(&grPu_803E7620);

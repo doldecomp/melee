@@ -151,12 +151,12 @@ static inline float getNameTagFrame(int slot)
                        Player_GetPlayerSlotType(slot));
 }
 
-static void NameTag_RenderCallback(HSD_GObj* gobj, int pass)
+static void NameTag_RenderCallback(HSD_GObj* gobj, intptr_t pass)
 {
     HSD_GObj_JObjCallback(gobj, pass);
 }
 
-void fn_802FCAC4(HSD_GObj* gobj, int pass)
+void fn_802FCAC4(HSD_GObj* gobj, intptr_t pass)
 {
     if (ifAll_IsHUDHidden() || un_804D6D6C) {
         int i;

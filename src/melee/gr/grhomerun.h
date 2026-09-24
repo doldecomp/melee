@@ -60,7 +60,7 @@
 /* 21E500 */ HSD_GObj* grHomeRun_8021E500(int);
 /* 21EA30 */ void grHomeRun_8021EA30(const f32*);
 /* 21EAF8 */ void grHomeRun_8021EAF8(void);
-/* 21EB10 */ void fn_8021EB10(HSD_GObj* gobj, int code);
+/* 21EB10 */ void fn_8021EB10(HSD_GObj* gobj, intptr_t code);
 /* 21EC58 */ HSD_Text* grHomeRun_8021EC58(int);
 /* 21ED74 */ void grHomeRun_8021ED74(void);
 /* 21EDD4 */ void grHomeRun_8021EDD4(void);

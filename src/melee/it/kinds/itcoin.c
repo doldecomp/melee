@@ -60,7 +60,7 @@ ItemStateTable it_803F93C8[] = {
       itCoin_UnkMotion5_Coll },
 };
 
-void it_802F13B4(Item_GObj* gobj, int arg1)
+void it_802F13B4(Item_GObj* gobj, intptr_t arg1)
 {
     Item* ip = GET_ITEM(gobj);
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;

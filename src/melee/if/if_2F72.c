@@ -191,7 +191,7 @@ static inline s32 GetSlot(HSD_GObj* gobj)
     return -1;
 }
 
-void fn_802F770C(HSD_GObj* gobj, int callback)
+void fn_802F770C(HSD_GObj* gobj, intptr_t callback)
 {
     HudIndex* status = ifStatus_GetHUDInfo();
     s32 slot = GetSlot(gobj);

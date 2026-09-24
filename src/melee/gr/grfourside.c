@@ -762,7 +762,7 @@ int grFourside_801F3F10(void)
     return 0;
 }
 
-void fn_801F3F74(HSD_GObj* gobj, int renderpass)
+void fn_801F3F74(HSD_GObj* gobj, intptr_t renderpass)
 {
     Vec3 eye;
     Ground* gp;

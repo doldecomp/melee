@@ -68,7 +68,7 @@ Item_GObj* itSword_Spawn(Vec3* pos)
     }
 }
 
-void it_80284E10(HSD_GObj* gobj, int arg1)
+void it_80284E10(HSD_GObj* gobj, intptr_t arg1)
 {
     it_8026EECC(gobj, arg1);
 }

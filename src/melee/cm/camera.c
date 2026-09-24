@@ -48,7 +48,7 @@
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
                                          CameraTransformState* transform,
                                          f32 speed);
-/* 0301D0 */ static void fn_800301D0(HSD_GObj*, int);
+/* 0301D0 */ static void fn_800301D0(HSD_GObj*, intptr_t);
 
 /// The main camera used in game scenes.
 /* 452C68 */ static Camera game_camera;
@@ -3983,7 +3983,7 @@ static inline void render_gxlink_pass(HSD_GObj* gobj, int pass, int gxlink)
     HSD_GObj_80390ED0(gobj, gxlink);
 }
 
-static void fn_800301D0(HSD_GObj* gobj, int arg1)
+static void fn_800301D0(HSD_GObj* gobj, intptr_t arg1)
 {
     s64 prio8_a;
     s64 prio1_a;

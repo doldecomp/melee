@@ -7,7 +7,7 @@
 
 /* 2FC9B4 */ float un_802FC9B4(unsigned char slot, unsigned char arg1,
                                unsigned char arg2, unsigned char arg3);
-/* 2FCAC4 */ void fn_802FCAC4(HSD_GObj* gobj, int pass);
+/* 2FCAC4 */ void fn_802FCAC4(HSD_GObj* gobj, intptr_t pass);
 /* 2FCBA0 */ void un_802FCBA0(void);
 /* 2FCC44 */ void fn_802FCC44(HSD_GObj* gobj);
 /* 2FCF38 */ void NameTag_Create(int slot);

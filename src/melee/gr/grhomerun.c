@@ -848,7 +848,7 @@ void grHomeRun_8021EAF8(void)
 }
 
 /// Copies the main camera into a target camera
-void fn_8021EB10(HSD_GObj* target_cam_gobj, int code)
+void fn_8021EB10(HSD_GObj* target_cam_gobj, intptr_t code)
 {
     HSD_GObj* main_cam_gobj;
     HSD_CObj* main_cam_cobj;

@@ -1166,7 +1166,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
 
     grCastle_801D0298(gobj, 0);
     Ground_UpdateMapColl(gobj);
-    ((HSD_GObj*) gobj)->render_cb = (GObj_RenderFunc) grCastle_801D0520;
+    ((HSD_GObj*) gobj)->render_cb = grCastle_801D0520;
 }
 
 bool grCastle_801CEEFC(Ground_GObj* gobj)
@@ -1737,7 +1737,7 @@ void grCastle_801D02B8(Ground_GObj* gobj)
     }
 }
 
-void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
+void grCastle_801D0520(Ground_GObj* gobj, intptr_t renderpass)
 {
     Ground* gp = GET_GROUND(gobj);
     if (gp->u.castle.xC8 == 0) {
@@ -1818,7 +1818,7 @@ void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
     grCastle_801D06CC_sub(arg1, gobj, 4);
 }
 
-void fn_801D0924(HSD_GObj* gobj, int renderpass)
+void fn_801D0924(HSD_GObj* gobj, intptr_t renderpass)
 {
     Ground* gp = gobj->user_data;
     int i;

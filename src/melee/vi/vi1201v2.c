@@ -173,7 +173,7 @@ void un_803207C4(void)
     }
 }
 
-void un_803208F0(HSD_GObj* gobj)
+void un_803208F0(HSD_GObj* gobj, UNUSED intptr_t code)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
@@ -227,8 +227,7 @@ static inline void un_80320A40_SetupCamera(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = lb_80013B14(&un_804D7010->cameras->desc->perspective);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int))(Event) un_803208F0,
-                        8);
+    GObj_SetupGXLinkMax(gobj, un_803208F0, 8);
     HSD_CObjAddAnim(cobj, un_804D7010->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);

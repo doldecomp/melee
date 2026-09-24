@@ -1229,7 +1229,7 @@ HSD_GObj* grStadium_801D2E24(void)
     return gobj;
 }
 
-void fn_801D2ED0(HSD_GObj* gobj, int unused)
+void fn_801D2ED0(HSD_GObj* gobj, intptr_t unused)
 {
     ImageDescWrapper* wrapper;
     Ground* gp2;
@@ -1254,7 +1254,7 @@ void fn_801D2ED0(HSD_GObj* gobj, int unused)
     gp2->u.display.xF8_0 = true;
 }
 
-void grStadium_801D2FD0(Ground_GObj* gobj, int unused)
+void grStadium_801D2FD0(Ground_GObj* gobj, intptr_t unused)
 {
     HSD_GObj* vision_gobj;
     Ground* gp2;
@@ -1274,7 +1274,7 @@ void grStadium_801D2FD0(Ground_GObj* gobj, int unused)
     }
 }
 
-void grStadium_801D3084(HSD_GObj* gobj, int unused)
+void grStadium_801D3084(HSD_GObj* gobj, intptr_t unused)
 {
     void* new_var2; // Permuter slop
     ImageDescWrapper* wrapper = GET_WRAPPER(gobj);
@@ -2218,7 +2218,7 @@ bool grStadium_801D4FF8(int pl_slot)
     return false;
 }
 
-void fn_801D5074(Ground_GObj* gobj, int arg1)
+void fn_801D5074(Ground_GObj* gobj, intptr_t arg1)
 {
     grStadium_801D1EF8(gobj);
     grDisplay_801C5DB0(gobj, arg1);

@@ -603,7 +603,7 @@ HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
     return sobj;
 }
 
-void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
+void lbMthp_8001F67C(HSD_GObj* gobj, intptr_t arg1)
 {
     THPDecComp* streamPlayer = &MoviePlayer;
     PAD_STACK(8);

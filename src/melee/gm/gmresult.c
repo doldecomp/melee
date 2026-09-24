@@ -631,7 +631,7 @@ void fn_80174FD0(HSD_JObj* jobj, s32 arg1)
     HSD_TObjAnim(tobj);
 }
 
-void fn_80175038(HSD_GObj* gobj, int flag)
+void fn_80175038(HSD_GObj* gobj, intptr_t flag)
 {
     HSD_JObjDispAll(GET_JOBJ(gobj), NULL, HSD_GObj_80390EB8(flag), 0U);
 }

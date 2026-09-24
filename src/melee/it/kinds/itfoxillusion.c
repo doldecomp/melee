@@ -35,7 +35,7 @@ ItemStateTable it_803F6818[] = {
     },
 };
 
-void it_8029CD18(Item_GObj* item_gobj, int arg1)
+void it_8029CD18(Item_GObj* item_gobj, intptr_t arg1)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = item->xDD4_itemVar.foxillusion.xDDC;

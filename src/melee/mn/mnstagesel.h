@@ -13,7 +13,7 @@
 /* 25A310 */ void fn_8025A310(HSD_GObj*);
 /* 25A560 */ void fn_8025A560(HSD_GObj*);
 /* 25A91C */ void fn_8025A91C(HSD_GObj*);
-/* 25A974 */ void fn_8025A974(HSD_GObj*, int);
+/* 25A974 */ void fn_8025A974(HSD_GObj*, intptr_t);
 /* 25A998 */ void mnStageSel_Scene_OnEnter(UNK_T);
 /* 25B850 */ void mnStageSel_Scene_OnFrame(void);
 /* 25BB5C */ void mnStageSel_Scene_OnExit(UNK_T);

@@ -172,7 +172,7 @@ HSD_GObj* gmTitle_801A165C(void)
     return gobj;
 }
 
-static void gmTitle_801A1814(HSD_GObj* gobj, int unused)
+static void gmTitle_801A1814(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
@@ -190,7 +190,7 @@ void gmTitle_801A185C(void)
     gobj->gxlink_prios = 0x209;
 }
 
-static void gmTitle_801A18D4(HSD_GObj* gobj, int unused)
+static void gmTitle_801A18D4(HSD_GObj* gobj, intptr_t unused)
 {
     GXColor erase_color = fog_desc->color;
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {

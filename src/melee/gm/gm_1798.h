@@ -6,14 +6,14 @@
 
 /* 179854 */ void fn_80179854(void);
 /* 179990 */ void fn_80179990(HSD_GObj*, int, int);
-/* 179D3C */ void fn_80179D3C(HSD_GObj*, int);
-/* 179D60 */ void fn_80179D60(HSD_GObj*, int);
-/* 179D84 */ void fn_80179D84(HSD_GObj*, int);
-/* 179DA8 */ void fn_80179DA8(HSD_GObj*, int);
-/* 179DCC */ void fn_80179DCC(HSD_GObj*, int);
-/* 179E34 */ void fn_80179E34(HSD_GObj*, int);
-/* 179E9C */ void fn_80179E9C(HSD_GObj*, int);
-/* 179F04 */ void fn_80179F04(HSD_GObj*, int);
+/* 179D3C */ void fn_80179D3C(HSD_GObj*, intptr_t);
+/* 179D60 */ void fn_80179D60(HSD_GObj*, intptr_t);
+/* 179D84 */ void fn_80179D84(HSD_GObj*, intptr_t);
+/* 179DA8 */ void fn_80179DA8(HSD_GObj*, intptr_t);
+/* 179DCC */ void fn_80179DCC(HSD_GObj*, intptr_t);
+/* 179E34 */ void fn_80179E34(HSD_GObj*, intptr_t);
+/* 179E9C */ void fn_80179E9C(HSD_GObj*, intptr_t);
+/* 179F04 */ void fn_80179F04(HSD_GObj*, intptr_t);
 /* 179F6C */ void fn_80179F6C(int idx, HSD_GObj* value);
 /* 179F84 */ void fn_80179F84(HSD_JObj*);
 /* 17A004 */ void fn_8017A004(void);
