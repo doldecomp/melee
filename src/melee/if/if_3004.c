@@ -785,19 +785,25 @@ bool un_80300AB8(enum soundtest_callback_arg0 update_scene)
     return false;
 }
 
+static inline void startDebugMatch(int x8, int ckind)
+{
+    struct un_803FA258_t* data;
+
+    sfxForward();
+    data = &un_803FA258;
+    data->x8 = x8;
+    data->x10[0] = ckind;
+    data->x24[1] = 3;
+    data->x24[2] = 3;
+    data->x24[3] = 3;
+    gm_SetNextGameModeStateId(4);
+    gm_801A4B60();
+}
+
 bool un_80300AF4(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
-        struct un_803FA258_t* data;
-        sfxForward();
-        data = &un_803FA258;
-        data->x8 = 0x3F;
-        data->x10[0] = 0xE;
-        data->x24[1] = 3;
-        data->x24[2] = 3;
-        data->x24[3] = 3;
-        gm_SetNextGameModeStateId(4);
-        gm_801A4B60();
+        startDebugMatch(0x3F, 0xE);
     }
     return false;
 }
@@ -805,18 +811,7 @@ bool un_80300AF4(enum soundtest_callback_arg0 arg0)
 bool un_80300B58(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
-        struct un_803FA258_t* data;
-        sfxForward();
-        {
-            struct un_803FA258_t* data = &un_803FA258;
-            data->x8 = 0x3B;
-            data->x10[0] = 0x2;
-            data->x24[1] = 3;
-            data->x24[2] = 3;
-            data->x24[3] = 3;
-        }
-        gm_SetNextGameModeStateId(4);
-        gm_801A4B60();
+        startDebugMatch(0x3B, 0x2);
     }
     return false;
 }
@@ -871,9 +866,10 @@ bool un_80300C80(enum soundtest_callback_arg0 arg0)
 
 bool fn_80300CC8(enum soundtest_callback_arg0 arg0)
 {
-    u32* r29;
-    u32* r30;
-    u32* r31;
+    u32* time;
+    u32* stock;
+    u32* coin;
+    u32* bonus;
 
     switch (arg0) {
     case 0:
@@ -882,16 +878,14 @@ bool fn_80300CC8(enum soundtest_callback_arg0 arg0)
         break;
     case 6:
         sfxForward();
-        r29 = gmMainLib_GetTimeMatchTotal();
-        r30 = gmMainLib_GetStockMatchTotal();
-        r31 = gmMainLib_GetCoinMatchTotal();
-        {
-            u32* ptr = gmMainLib_GetBonusMatchTotal();
-            *r29 = un_804D6DE0;
-            *r30 = un_804D6DE4;
-            *r31 = un_804D6DE8;
-            *ptr = un_804D6DEC;
-        }
+        time = gmMainLib_GetTimeMatchTotal();
+        stock = gmMainLib_GetStockMatchTotal();
+        coin = gmMainLib_GetCoinMatchTotal();
+        bonus = gmMainLib_GetBonusMatchTotal();
+        *time = un_804D6DE0;
+        *stock = un_804D6DE4;
+        *coin = un_804D6DE8;
+        *bonus = un_804D6DEC;
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         break;
@@ -1046,8 +1040,8 @@ bool fn_8030110C(enum soundtest_callback_arg0 arg0)
         gm_801BEFC0(un_804D6DFC);
         {
             struct gmm_x0_528_t* ptr = gmMainLib_8015CDC8();
-            ptr->c_kind = (s8) un_804D6DF8;
-            ptr->color = (u8) un_804D6DFC;
+            ptr->c_kind = un_804D6DF8;
+            ptr->color = un_804D6DFC;
         }
         switch (un_804D6E00) {
         case 0:
@@ -1082,14 +1076,8 @@ bool fn_803011EC(enum soundtest_callback_arg0 arg0)
         sfxForward();
         gm_801BEFA4(un_804D6DF8);
         gm_801BEFC0(un_804D6DFC);
-        {
-            s8 c_kind = (s8) un_804D6DF8;
-            gm_GetAllStarData()->x0.x0.ckind = c_kind;
-        }
-        {
-            u8 color = (u8) un_804D6DFC;
-            gm_GetAllStarData()->x0.x0.color = color;
-        }
+        gm_GetAllStarData()->x0.x0.ckind = un_804D6DF8;
+        gm_GetAllStarData()->x0.x0.color = un_804D6DFC;
         gm_ChangeGameModeAfterCurrentScene(GM_CLASSIC_GOVER);
         gm_801A4B60();
         break;
@@ -1364,6 +1352,16 @@ bool un_8030191C(enum soundtest_callback_arg0 arg0)
     return 0;
 }
 
+static inline s32 waitCardTasks(void)
+{
+    s32 result;
+
+    do {
+        result = lbCardNew_CompleteNextTask();
+    } while (result == 0xB);
+    return result;
+}
+
 bool un_80301964(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
@@ -1373,12 +1371,7 @@ bool un_80301964(enum soundtest_callback_arg0 arg0)
     OSReport(un_803FD28C);
 
     if (lbSnap_8001E058(0, un_804D6E0C) == 0xB) {
-        s32 result;
-        do {
-            result = lbCardNew_CompleteNextTask();
-        } while (result == 0xB);
-
-        if (result == 0 && lbSnap_8001DE8C(un_804D6E04) != 0) {
+        if (waitCardTasks() == 0 && lbSnap_8001DE8C(un_804D6E04) != 0) {
             HSD_GObj* gobj;
             HSD_SObj* sobj;
 
@@ -1400,47 +1393,34 @@ bool un_80301964(enum soundtest_callback_arg0 arg0)
     return 0;
 }
 
+static inline void finishSnapTask(s32 result)
+{
+    if (result == 0xB) {
+        if (waitCardTasks() == 0) {
+            lbSnap_8001D40C(0);
+        }
+    }
+}
+
 bool un_80301A64(enum soundtest_callback_arg0 arg0)
 {
-    s32 result;
-
     if (arg0 != 1) {
         return 0;
     }
 
     OSReport(un_803FD29C);
-    result = lbSnap_8001D5FC(0, un_804D6E10);
-    if (result == 0xB) {
-        do {
-            result = lbCardNew_CompleteNextTask();
-        } while (result == 0xB);
-
-        if (result == 0) {
-            lbSnap_8001D40C(0);
-        }
-    }
+    finishSnapTask(lbSnap_8001D5FC(0, un_804D6E10));
     return 0;
 }
 
 bool un_80301AD4(enum soundtest_callback_arg0 arg0)
 {
-    s32 result;
-
     if (arg0 != 1) {
         return 0;
     }
 
     OSReport(un_803FD2AC);
-    result = lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10);
-    if (result == 0xB) {
-        do {
-            result = lbCardNew_CompleteNextTask();
-        } while (result == 0xB);
-
-        if (result == 0) {
-            lbSnap_8001D40C(0);
-        }
-    }
+    finishSnapTask(lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10));
     return 0;
 }
 
@@ -1768,10 +1748,8 @@ bool un_80301E08(enum soundtest_callback_arg0 update_scene)
     { 1, un_803006BC, un_803FB110, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 1, un_803006F0, un_803FB120, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 1, un_80300724, un_803FB130, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, NULL, un_803FB140, un_803FAF0C, &un_803FA258.x8, 0.0f, 86.0f,
-      0.0f },
-    { 2, NULL, un_803FB14C, un_804D58FC, &un_803FA258.xC, 0.0f, 2.0f,
-      0.0f },
+    { 2, NULL, un_803FB140, un_803FAF0C, &un_803FA258.x8, 0.0f, 86.0f, 0.0f },
+    { 2, NULL, un_803FB14C, un_804D58FC, &un_803FA258.xC, 0.0f, 2.0f, 0.0f },
     { 1, un_802FFEA4, un_803FB158, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
@@ -1873,8 +1851,8 @@ bool un_80301E08(enum soundtest_callback_arg0 update_scene)
       0.0f },
     { 2, NULL, un_803FB858, un_803FB818, &un_803FA258.x24[3], 0.0f, 4.0f,
       0.0f },
-    { 2, un_80300790, un_803FB864, un_803FB818, &un_803FA258.x24[4], 0.0f, 4.0f,
-      0.0f },
+    { 2, un_80300790, un_803FB864, un_803FB818, &un_803FA258.x24[4], 0.0f,
+      4.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FB950 */ char un_803FB950[] = "< Color >";
