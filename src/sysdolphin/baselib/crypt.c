@@ -53,10 +53,6 @@ static s32 keys[] = {
 };
 const u8 n_keys = ARRAY_SIZE(keys);
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 static int encryptByte(u8 prev, s32 cur)
 {
     u32 key = keys[prev % n_keys];
@@ -100,13 +96,14 @@ static int encryptByte(u8 prev, s32 cur)
     }
     return val;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
+
+static inline void encryptAt(u8* ptr)
+{
+    *ptr = encryptByte(ptr[-1], *ptr);
+}
 
 int HSD_Encrypt(u8* data, int len)
 {
-    u8* ptr;
     int i;
 
     if (data == NULL) {
@@ -116,8 +113,7 @@ int HSD_Encrypt(u8* data, int len)
     HSD_Checksum(data + 16, len - 16, data);
 
     for (i = 16; i < len; i++) {
-        ptr = data + i;
-        *ptr = encryptByte(ptr[-1], *ptr);
+        encryptAt(data + i);
     }
 
     return 0;
