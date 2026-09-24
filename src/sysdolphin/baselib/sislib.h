@@ -56,9 +56,9 @@ struct HSD_Text {
     u8* sis_buffer; ///< SIS text buffer
     u8* x60;        ///< position in text buffer
     SisBuffer* alloc_data;
-    u8* string_buffer; ///< raw string buffer
-    u16 x6C;           ///< string length?
-    u16 x6E;           ///< alloc size?
+    u8* string_buffer; ///< stack of saved text-state records
+    u16 x6C;           ///< bytes used in @c string_buffer
+    u16 x6E;           ///< capacity of @c string_buffer
     f32 current_width;
     f32 current_height;
     Vec2 x78;

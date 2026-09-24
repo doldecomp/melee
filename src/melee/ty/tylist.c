@@ -31,7 +31,7 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/wobj.h>
 
-/* 312834 */ static char* _tyList_80312834(char* buf, u32 num);
+/* 312834 */ static u8* _tyList_80312834(u8* buf, u32 num);
 /* 312904 */ static void _tyList_80312904(void*, s8);
 /* 312BAC */ static void _tyList_80312BAC(TyListState* state, s8 arg1);
 /* 312E88 */ static void _tyList_80312E88(struct TyListArg* arg, float delta);
@@ -67,7 +67,7 @@ static void order_data_0(void)
 #endif
 
 /// Formats a number into a string buffer using digit glyphs from the font.
-char* _tyList_80312834(char* buf, u32 num)
+u8* _tyList_80312834(u8* buf, u32 num)
 {
     u8* lookup = HSD_SisLib_804D1124[0][0x13A];
     u32 idx;
@@ -164,7 +164,7 @@ void _tyList_80312904(void* arg0, s8 arg1)
     HSD_SisLib_803A6368(row->text1, 0x13B);
 
     digits = HSD_SisLib_804D1124[0][0x12E + row->x28];
-    _tyList_80312834((char*) digits, Toy_803048C0(Toy_80308354(row->idx)));
+    _tyList_80312834(digits, Toy_803048C0(Toy_80308354(row->idx)));
 
     row->text2->default_alignment = 2;
     row->text2->default_kerning = 1;

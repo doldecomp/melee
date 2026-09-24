@@ -41,7 +41,7 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 {
     u32 masked_arg1;
     u32 cond_flag = 0;
-    u8* slus2_arr_ptr = HSD_SisLib_804D1124[3][2];
+    u8* digits = HSD_SisLib_804D1124[3][2];
 
     if (arg1 >= 0x2710U) {
         arg1 = 0x270F;
@@ -49,29 +49,29 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 
     if (arg1 >= 0x3E8U) {
         masked_arg1 = (arg1 / 500) & 0x07FFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
+        arg0[0] = digits[0 + masked_arg1];
+        arg0[1] = digits[1 + masked_arg1];
         arg1 %= 0x3E8;
         cond_flag = 1U;
         arg0 += 2;
     }
     if ((arg1 >= 0x64U) || (cond_flag != 0)) {
         masked_arg1 = (arg1 / 50) & 0x0FFFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
+        arg0[0] = digits[0 + masked_arg1];
+        arg0[1] = digits[1 + masked_arg1];
         arg1 %= 0x64;
         cond_flag += 1;
         arg0 += 2;
     }
     if ((arg1 >= 0xAU) || (cond_flag != 0)) {
         masked_arg1 = (arg1 / 5) & 0x3FFFFFFE;
-        arg0[0] = slus2_arr_ptr[0 + masked_arg1];
-        arg0[1] = slus2_arr_ptr[1 + masked_arg1];
+        arg0[0] = digits[0 + masked_arg1];
+        arg0[1] = digits[1 + masked_arg1];
         arg1 %= 0xA;
         arg0 += 2;
     }
-    *(arg0++) = slus2_arr_ptr[0 + arg1 * 2];
-    *(arg0++) = slus2_arr_ptr[1 + arg1 * 2];
+    *(arg0++) = digits[0 + arg1 * 2];
+    *(arg0++) = digits[1 + arg1 * 2];
     *arg0 = 0;
     return arg0;
 }
