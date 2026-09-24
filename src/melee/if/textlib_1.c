@@ -151,25 +151,25 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
         DevText_SetCursorXY(arg0->x4, cursor_x, cursor_y);
         switch (x8->x0) {
         case 2:
-            DevText_Print(arg0->x4, x8->xC[*(int*) x8->x10]);
+            DevText_Print(arg0->x4, x8->xC[*x8->x10.i]);
             break;
         case 3:
-            DevText_PrintInt(arg0->x4, *(int*) x8->x10);
+            DevText_PrintInt(arg0->x4, *x8->x10.i);
             break;
         case 4:
-            DevText_Printf(arg0->x4, "%d", *(int*) x8->x10);
+            DevText_Printf(arg0->x4, "%d", *x8->x10.i);
             break;
         case 5:
-            DevText_Printf(arg0->x4, "%02x", *(unsigned char*) x8->x10);
+            DevText_Printf(arg0->x4, "%02x", *x8->x10.b);
             break;
         case 6:
-            DevText_Printf(arg0->x4, "%04x", *(u16*) x8->x10);
+            DevText_Printf(arg0->x4, "%04x", *x8->x10.h);
             break;
         case 7:
-            DevText_Printf(arg0->x4, "%08x", *(int*) x8->x10);
+            DevText_Printf(arg0->x4, "%08x", *x8->x10.w);
             break;
         case 8:
-            DevText_Printf(arg0->x4, "%3.2f", *(float*) x8->x10);
+            DevText_Printf(arg0->x4, "%3.2f", *x8->x10.f);
             break;
         }
         x8++;
@@ -181,7 +181,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
     bool ret = false;
     switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q < arg0->x8[arg0->x0].x18 - 1.0f) {
             *q += 1;
             ret = true;
@@ -191,7 +191,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 3: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             ret = true;
             *q += arg0->x8[arg0->x0].x1C;
@@ -201,7 +201,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 5: {
-        unsigned char* q = arg0->x8[arg0->x0].x10;
+        u8* q = arg0->x8[arg0->x0].x10.b;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFF) <= 0xFF) {
             *q += idk;
@@ -214,7 +214,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        u16* q = arg0->x8[arg0->x0].x10;
+        u16* q = arg0->x8[arg0->x0].x10.h;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFF) <= 0xFFFF) {
             *q += idk;
@@ -228,7 +228,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        unsigned int* q = arg0->x8[arg0->x0].x10;
+        u32* q = arg0->x8[arg0->x0].x10.w;
         unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFFFFFF) <= 0xFFFFFFFF) {
             *q += idk;
@@ -241,7 +241,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 8: {
-        float* q = arg0->x8[arg0->x0].x10;
+        f32* q = arg0->x8[arg0->x0].x10.f;
         if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             *q += arg0->x8[arg0->x0].x1C;
             ret = true;
@@ -259,7 +259,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     bool ret = false;
     switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q > arg0->x8[arg0->x0].x14) {
             *q -= 1;
             ret = true;
@@ -269,7 +269,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 3: {
-        int* q = arg0->x8[arg0->x0].x10;
+        int* q = arg0->x8[arg0->x0].x10.i;
         if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
             ret = true;
             *q -= arg0->x8[arg0->x0].x1C;
@@ -279,7 +279,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 5: {
-        unsigned char* q = arg0->x8[arg0->x0].x10;
+        u8* q = arg0->x8[arg0->x0].x10.b;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFF) >= 0) {
             *q -= idk;
@@ -292,7 +292,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        u16* q = arg0->x8[arg0->x0].x10;
+        u16* q = arg0->x8[arg0->x0].x10.h;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFF) >= 0) {
             *q -= idk;
@@ -306,7 +306,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        unsigned int* q = arg0->x8[arg0->x0].x10;
+        u32* q = arg0->x8[arg0->x0].x10.w;
         unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFFFFFF) >= 0) {
             *q -= idk;
@@ -319,7 +319,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 8: {
-        float* q = arg0->x8[arg0->x0].x10;
+        f32* q = arg0->x8[arg0->x0].x10.f;
         if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
             *q -= arg0->x8[arg0->x0].x1C;
             ret = true;

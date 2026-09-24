@@ -198,7 +198,14 @@ struct un_80304138_objalloc_t_x8 {
     soundtest_callback x4;
     char* x8;
     char** xC;
-    void* x10;
+    union {
+        void* any;
+        int* i;
+        u8* b;
+        u16* h;
+        u32* w;
+        f32* f;
+    } x10;
     float x14;
     float x18;
     float x1C;
