@@ -481,4 +481,9 @@ typedef enum CpuKind {
     CpuKind_29,
 } CpuKind;
 
+/// Color animation ID; IDs from #FtColAnim_Spycloak index the spycloak list.
+typedef enum FtColAnim {
+    /* 0x7B */ FtColAnim_Spycloak = 0x7B,
+} FtColAnim;
+
 #endif
