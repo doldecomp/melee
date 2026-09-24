@@ -13,15 +13,6 @@
 #include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/debug.h>
 
-struct unk_series {
-    s16 values[26];
-};
-
-/// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
-/* 4DDC88 */ extern GXColor un_804DDC88;
-
 static inline DevText* find_by_id(char id)
 {
     DevText* text;
@@ -116,18 +107,8 @@ static inline int DevText_Clamp(int val, int max)
 
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
-    if (text->w <= x) {
-        x = text->w - 1;
-    } else if (x < 0) {
-        x = 0;
-    }
-    text->cursor_x = x;
-    if (text->h <= y) {
-        y = text->h - 1;
-    } else if (y < 0) {
-        y = 0;
-    }
-    text->cursor_y = y;
+    text->cursor_x = DevText_Clamp(x, text->w);
+    text->cursor_y = DevText_Clamp(y, text->h);
 }
 
 void DevText_SetCursorX(DevText* text, int x)
@@ -137,32 +118,32 @@ void DevText_SetCursorX(DevText* text, int x)
 
 void DevText_HideCursor(DevText* text)
 {
-    text->flags &= ~(1 << 4);
+    text->flags &= ~DEVTEXT_FLAG_SHOWCURSOR;
 }
 
 void DevText_80302AC0(DevText* text)
 {
-    text->flags |= (1 << 5);
+    text->flags |= DEVTEXT_FLAG_NOWRAP;
 }
 
 void DevText_ShowBackground(DevText* text)
 {
-    text->flags &= ~(1 << 6);
+    text->flags &= ~DEVTEXT_FLAG_HIDEBACKGROUND;
 }
 
 void DevText_HideBackground(DevText* text)
 {
-    text->flags |= (1 << 6);
+    text->flags |= DEVTEXT_FLAG_HIDEBACKGROUND;
 }
 
 void DevText_ShowText(DevText* text)
 {
-    text->flags &= ~(1 << 7);
+    text->flags &= ~DEVTEXT_FLAG_HIDETEXT;
 }
 
 void DevText_HideText(DevText* text)
 {
-    text->flags |= (1 << 7);
+    text->flags |= DEVTEXT_FLAG_HIDETEXT;
 }
 
 void DevText_SetScale(DevText* text, f32 x, f32 y)
