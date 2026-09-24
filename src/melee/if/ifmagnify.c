@@ -511,7 +511,7 @@ void ifMagnify_802FC618(void)
     HSD_ImageDesc* idesc;
     f32 half_height;
     f32 half_width;
-    int pad;
+    f32 scale = 0.1f;
     HSD_RectS16 viewport;
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
@@ -521,8 +521,8 @@ void ifMagnify_802FC618(void)
     gobj->gxlink_prios = 0x10;
 
     idesc = player0->idesc;
-    half_height = 0.1f * idesc->height;
-    half_width = 0.1f * idesc->width;
+    half_height = scale * idesc->height;
+    half_width = scale * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
