@@ -260,7 +260,6 @@ struct ifStock_804A1378 {
     HSD_JObj* jobj_b;
     HSD_JObj* jobj_c;
     HSD_JObj* jobj_d;
-    struct ifStock_804A1378_x204 x204[6];
 };
 
 struct ifStock_804A1774 {
@@ -277,15 +276,6 @@ struct ifStock_804A1ACC {
     signed char x83[133];
     HSD_GObj* x108;
     HSD_GObj* x10C[130];
-};
-
-struct IfStockData {
-    u8 x0[0xC];
-    struct IfStockStealAnim anim[2];
-};
-
-struct IfStockDataOffset {
-    u8 x0[0x204];
 };
 
 #endif
