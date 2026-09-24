@@ -276,7 +276,7 @@ static void gobj1_Proc(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-static void gobj0_RenderFunc(HSD_GObj* gobj, int arg1)
+static void gobj0_RenderFunc(HSD_GObj* gobj, intptr_t arg1)
 {
     if (_p(x10) == 1) {
         HSD_GObj_803910D8(gobj, arg1);

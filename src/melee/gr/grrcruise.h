@@ -51,7 +51,7 @@
 /* 201918 */ void grRCruise_80201918(Vec3*);
 /* 201988 */ bool grRCruise_80201988(s32);
 /* 201B60 */ void grRCruise_80201B60(HSD_JObj*, bool clear);
-/* 201BE0 */ void fn_80201BE0(HSD_GObj*, int);
+/* 201BE0 */ void fn_80201BE0(HSD_GObj*, intptr_t);
 /* 201C50 */ DynamicsDesc* grRCruise_80201C50(enum_t);
 /* 201C58 */ bool grRCruise_80201C58(Vec3*, int arg, HSD_JObj* jobj);
 /* 3E4ECC */ extern StageData grRc_StageData;

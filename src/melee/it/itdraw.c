@@ -213,7 +213,7 @@ static inline void it_8026EECC_inline_sw(HSD_GObj* gobj, s32 arg1, Vec3* pos)
     }
 }
 
-void it_8026EECC(HSD_GObj* gobj, int arg1)
+void it_8026EECC(HSD_GObj* gobj, intptr_t arg1)
 {
     Item* ip = GET_ITEM(gobj);
     Vec3 pos;

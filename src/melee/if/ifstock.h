@@ -12,11 +12,11 @@
 /* 2F8E08 */ void fn_802F8E08(HSD_GObj*);
 /* 2F916C */ void fn_802F916C(HSD_GObj*);
 /* 2F9410 */ void fn_802F9410(HSD_GObj*);
-/* 2F94E0 */ void fn_802F94E0(HSD_GObj*, int);
-/* 2F9548 */ void fn_802F9548(HSD_GObj*, int);
-/* 2F9598 */ void fn_802F9598(HSD_GObj*, int);
-/* 2F95E8 */ void fn_802F95E8(HSD_GObj*, int);
-/* 2F9680 */ void fn_802F9680(HSD_GObj*, int);
+/* 2F94E0 */ void fn_802F94E0(HSD_GObj*, intptr_t);
+/* 2F9548 */ void fn_802F9548(HSD_GObj*, intptr_t);
+/* 2F9598 */ void fn_802F9598(HSD_GObj*, intptr_t);
+/* 2F95E8 */ void fn_802F95E8(HSD_GObj*, intptr_t);
+/* 2F9680 */ void fn_802F9680(HSD_GObj*, intptr_t);
 /* 2F96D0 */ HSD_GObj* ifStock_802F96D0(int, int, float, float);
 /* 2F98E8 */ void ifStock_802F98E8(u8, u8);
 /* 2F9F48 */ HSD_GObj* ifStock_802F9F48(int);

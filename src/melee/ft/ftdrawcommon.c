@@ -261,7 +261,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
     ftCo_800C2600(gobj, arg1);
 }
 
-void ftDrawCommon_80080C28(HSD_GObj* gobj, int flag_index)
+void ftDrawCommon_80080C28(HSD_GObj* gobj, intptr_t flag_index)
 {
     Mtx sp70;
     Mtx sp18;
@@ -376,7 +376,7 @@ static inline void ftDrawCommon_80080E18_inline2(HSD_GObj* gobj, Fighter* old)
     HSD_JObjSetTranslate(jobj, pos);
 }
 
-void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
+void ftDrawCommon_80080E18(HSD_GObj* gobj, intptr_t arg1)
 {
     Fighter* fp = gobj->user_data;
 

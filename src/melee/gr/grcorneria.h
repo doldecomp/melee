@@ -79,7 +79,7 @@
 /* 1E2228 */ void grCorneria_801E2228(Ground_GObj*);
 /* 1E2454 */ HSD_Generator* grCorneria_801E2454(Vec3*, s32);
 /* 1E2480 */ HSD_Generator* grCorneria_801E2480(Vec3*, s32);
-/* 1E24AC */ void smashTaunt_801E24AC(Ground_GObj*, int);
+/* 1E24AC */ void smashTaunt_801E24AC(Ground_GObj*, intptr_t);
 /* 1E2550 */ void smashTaunt_801E2550(Ground_GObj*,
                                       struct grSmashTaunt_GroundVars*);
 /* 1E2598 */ s32 grCorneria_801E2598(u32, u32);

@@ -15,11 +15,11 @@ int lbMthp_8001F5F4(void);
 int lbMthp_8001F604(void);
 void lbMthp_8001F614(int arg0);
 HSD_SObj* lbMthp_8001F624(HSD_GObj*, int, int);
-void lbMthp_8001F67C(HSD_GObj*, int);
+void lbMthp_8001F67C(HSD_GObj*, intptr_t);
 void lbMthp_8001F800(void);
 void lbMthp_8001F87C(void);
 HSD_SObj* lbMthp8001F890(HSD_GObj*);
-void lbMthp8001F928(HSD_GObj*, int);
+void lbMthp8001F928(HSD_GObj*, intptr_t);
 void lbMthp8001FAA0(const char* filename, int, int);
 
 #endif

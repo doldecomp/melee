@@ -76,9 +76,9 @@ typedef HSD_SObj HSD_SObj_803A477C_t;
 /* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, HSD_SObjDesc*,
                                             GXTexWrapMode, GXTexWrapMode, u8,
                                             u8);
-/* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
+/* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, intptr_t);
 /* 3A4A68 */ void HSD_SObjLib_803A4A68(HSD_SObj*);
-/* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);
+/* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, intptr_t);
 /* 3A55DC */ void HSD_SObjLib_803A55DC(HSD_GObj*, u16, u16, int);
 
 #endif

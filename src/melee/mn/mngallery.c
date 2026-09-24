@@ -60,7 +60,7 @@ void mnGallery_80258940(void)
     rate_table = HSD_MemAlloc(heap_size);
 }
 
-void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
+void mnGallery_8025896C(HSD_GObj* gobj, intptr_t render_pass)
 {
     HSD_GObj* data = mnGallery_804D6C88;
     HSD_CObj* cobj = gobj->hsd_obj;

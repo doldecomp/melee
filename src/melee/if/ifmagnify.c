@@ -174,7 +174,7 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* player, Vec2* pos,
     return player;
 }
 
-void ifMagnify_802FB8C0(HSD_GObj* gobj, int code)
+void ifMagnify_802FB8C0(HSD_GObj* gobj, intptr_t code)
 {
     UNUSED u8 top_pad[8];
     S32Vec2 screen_pos;

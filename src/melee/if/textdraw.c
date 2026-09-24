@@ -260,7 +260,7 @@ void DevText_Draw(DevText* text)
     }
 }
 
-void DevText_DrawAll(HSD_GObj* gobj, int pass)
+void DevText_DrawAll(HSD_GObj* gobj, intptr_t pass)
 {
     PAD_STACK(8);
 

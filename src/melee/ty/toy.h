@@ -31,9 +31,9 @@
 /* 3062BC */ s16 Toy_803062BC(s32 trophyId);
 /* 3063D4 */ s32 Toy_803063D4(s32, s32, s32);
 /* 3067BC */ void Toy_803067BC(s32, s32);
-/* 3068E0 */ void Toy_803068E0(HSD_GObj* gobj, int);
-/* 306930 */ void Toy_80306930(HSD_GObj*, int);
-/* 306954 */ void Toy_80306954(HSD_GObj* gobj, int);
+/* 3068E0 */ void Toy_803068E0(HSD_GObj* gobj, intptr_t);
+/* 306930 */ void Toy_80306930(HSD_GObj*, intptr_t);
+/* 306954 */ void Toy_80306954(HSD_GObj* gobj, intptr_t);
 /* 306A48 */ void Toy_80306A48(HSD_JObj*, char*, char*, char*, HSD_Archive*,
                                s32);
 /* 306B18 */ HSD_GObjProc* Toy_80306B18(HSD_GObj* gobj, s32 anim_frame,

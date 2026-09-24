@@ -52,7 +52,7 @@ ItemStateTable it_803F6A28[5] = {
       itLinkarrow_UnkMotion4_Coll },
 };
 
-void it_802A7D8C(HSD_GObj* gobj, int arg1)
+void it_802A7D8C(HSD_GObj* gobj, intptr_t arg1)
 {
     Item* item;
 

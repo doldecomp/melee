@@ -35,7 +35,7 @@ s32 un_80400128[23][2] = { { 1, 2 }, { 1, 3 }, { 1, 4 },  { 1, 5 },  { 1, 6 },
                            { 0, 8 }, { 0, 9 }, { 0, 10 }, { 0, 11 }, { 2, 2 },
                            { 2, 3 }, { 2, 4 }, { 2, 5 } };
 
-static void vi0801_8031ED70(HSD_GObj* gobj, int unused)
+static void vi0801_8031ED70(HSD_GObj* gobj, intptr_t unused)
 {
     GXColor* colors;
 

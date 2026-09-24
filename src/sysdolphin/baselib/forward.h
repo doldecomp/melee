@@ -107,7 +107,7 @@ typedef u32 HSD_IDKey;
 typedef uintptr_t HSD_IDKey;
 #endif
 
-typedef void (*GObj_RenderFunc)(HSD_GObj* gobj, int code);
+typedef void (*GObj_RenderFunc)(HSD_GObj* gobj, intptr_t code);
 typedef void (*HSD_ObjUpdateFunc)(void* obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, uintptr_t, void*, bool cancelflag);
 typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);

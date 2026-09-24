@@ -30,7 +30,7 @@ void* cmSnap_80031618(void)
     return _p(unk1).image_ptr;
 }
 
-void cmSnap_80031640(HSD_GObj* arg0, int code)
+void cmSnap_80031640(HSD_GObj* arg0, intptr_t code)
 {
     switch (_p(status)) {
     case CmSnapStatus_Sleep:

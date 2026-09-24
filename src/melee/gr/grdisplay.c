@@ -69,7 +69,7 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
     }
 }
 
-void grDisplay_801C5DB0(HSD_GObj* gobj, int code)
+void grDisplay_801C5DB0(HSD_GObj* gobj, intptr_t code)
 {
     Ground* gp;
     HSD_GObj* camgobj;
@@ -141,7 +141,7 @@ void grDisplay_801C5DB0(HSD_GObj* gobj, int code)
     }
 }
 
-void grDisplay_801C5F60(HSD_GObj* gobj, int code)
+void grDisplay_801C5F60(HSD_GObj* gobj, intptr_t code)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     if (HSD_CObjSetCurrent(cobj)) {

@@ -11,7 +11,7 @@
 #include <melee/it/kinds/types.h>
 
 /* 284D54 */ Item_GObj* itSword_Spawn(Vec3* pos);
-/* 284E10 */ void it_80284E10(HSD_GObj*, int);
+/* 284E10 */ void it_80284E10(HSD_GObj*, intptr_t);
 /* 284FC4 */ void it_80284FC4(Item_GObj* gobj, int, float);
 /* 285024 */ void it_80285024(Item_GObj* gobj, int);
 /* 2852B8 */ void it_802852B8(Item_GObj* gobj, float*, float*);

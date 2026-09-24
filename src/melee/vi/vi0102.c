@@ -79,7 +79,7 @@ void vi0102_JObjCallback(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
+void vi0102_CameraCallback(HSD_GObj* gobj, intptr_t unused)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);

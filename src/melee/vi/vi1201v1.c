@@ -117,7 +117,7 @@ void fn_8031FAA8(HSD_GObj* gobj)
                  0x00808080);
     lbAudioAx_800237A8(0x61, 0x7F, 0x40);
 }
-void fn_8031FB90(HSD_GObj* gobj)
+void fn_8031FB90(HSD_GObj* gobj, UNUSED intptr_t code)
 {
     PAD_STACK(8);
     if (un_804D7000 != NULL) {
@@ -181,8 +181,7 @@ static inline void un_8031FD18_SetupCamera(void)
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj = lb_80013B14(&un_804D6FE0->cameras->desc->perspective);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(camera_gobj,
-                        (void (*)(HSD_GObj*, int))(Event) fn_8031FB90, 8);
+    GObj_SetupGXLinkMax(camera_gobj, fn_8031FB90, 8);
     HSD_CObjAddAnim(cobj, un_804D6FE0->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);

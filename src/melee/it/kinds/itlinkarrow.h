@@ -8,7 +8,7 @@
 
 #include <melee/it/kinds/types.h>
 
-/* 2A7D8C */ void it_802A7D8C(HSD_GObj*, int);
+/* 2A7D8C */ void it_802A7D8C(HSD_GObj*, intptr_t);
 /* 2A7E40 */ void it_802A7E40(Item_GObj*);
 /* 2A81C4 */ s32 itLinkArrow_802A81C4(Item_GObj*);
 /* 2A8330 */ void it_802A8330(HSD_GObj*);

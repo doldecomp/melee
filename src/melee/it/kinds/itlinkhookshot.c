@@ -98,7 +98,7 @@ void it_802A2474(void* arg0)
     HSD_ObjFree(&item_link_alloc_data, arg0);
 }
 
-void it_802A24A0(HSD_GObj* obj, int arg1)
+void it_802A24A0(HSD_GObj* obj, intptr_t arg1)
 {
     ItemLink* link;
     link = obj->user_data;

@@ -8,7 +8,7 @@
 #include "hsd_392A.h"
 #include "wobj.h"
 
-void fn_803982E4(HSD_GObj* gobj, int unused)
+void fn_803982E4(HSD_GObj* gobj, intptr_t unused)
 {
     HSD_CObjSetCurrent(gobj->hsd_obj);
     fn_80392934();

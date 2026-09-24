@@ -19,7 +19,7 @@
 /* 18D50C */ void fn_8018D50C(BracketEntry*, s32, s32, s32, s32, s32);
 /* 18DC18 */ void fn_8018DC18(BracketEntry*, s32, s32, s32, s32, s32);
 /* 18DF68 */ void fn_8018DF68(BracketEntry*, s32, s32, s32, s32, s32);
-/* 18E46C */ void fn_8018E46C(HSD_GObj*, int);
+/* 18E46C */ void fn_8018E46C(HSD_GObj*, intptr_t);
 /* 18E618 */ void fn_8018E618(int, float, int);
 /* 18E85C */ void fn_8018E85C(DynamicModelDesc*, s32);
 /* 18EC48 */ void fn_8018EC48(void);

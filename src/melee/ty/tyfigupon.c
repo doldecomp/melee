@@ -46,7 +46,7 @@
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);
-/* 314BE4 */ static void _tyFigupon_80314BE4(HSD_GObj* gobj, int unused);
+/* 314BE4 */ static void _tyFigupon_80314BE4(HSD_GObj* gobj, intptr_t unused);
 /* 314C5C */ static void _tyFigupon_80314C5C(HSD_GObj*);
 /* 3152BC */ static void _tyFigupon_803152BC(HSD_GObj*);
 /* 3153EC */ static void _tyFigupon_803153EC(s32, s32, s32, s32, s32);
@@ -194,7 +194,7 @@ s32 _tyFigupon_80314B54(void)
 #pragma pop
 #endif
 
-void _tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
+void _tyFigupon_80314BE4(HSD_GObj* gobj, intptr_t unused)
 {
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
         HSD_SetEraseColor(0x19, 0x19, 0x33, 0xFF);
